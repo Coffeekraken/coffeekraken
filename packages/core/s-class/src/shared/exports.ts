@@ -1,3 +1,3 @@
-import __SClass from './SClass';
+import SClass from './SClass';
 export * from './SClass';
-export default __SClass;
+export default SClass;

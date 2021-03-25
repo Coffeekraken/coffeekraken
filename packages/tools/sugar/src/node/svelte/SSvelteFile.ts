@@ -6,7 +6,7 @@ import __wait from '../../shared/time/wait';
 import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
 import __SFile, { ISFile } from '../fs/SFile';
-import __SInterface from '../interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 import __SScssFile from '../scss/SScssFile';
 import __STsFile from '../typescript/STsFile';
 import {

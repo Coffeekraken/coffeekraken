@@ -1,3 +1,3 @@
-// import SInterface from '@coffeekraken/sugar/node/interface/SInterface';
+// import SInterface from '@coffeekraken/s-interface';
 
 // console.log(SInterface);

@@ -6,6 +6,7 @@ import __color from '../../shared/color/color';
 import __hotkey from '../keyboard/hotkey';
 import __isChildProcess from '../../shared/is/childProcess';
 import __innerWidth from './utils/innerWidth';
+import __blessed from 'blessed';
 
 /**
  * @name                  SBlessedComponent

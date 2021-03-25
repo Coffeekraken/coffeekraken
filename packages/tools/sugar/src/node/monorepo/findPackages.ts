@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import _glob from 'glob';
-import _folderPath from '../fs/folderPath';
 
 /**
  * @name            findPackages
@@ -42,7 +41,8 @@ export default async function findPackages(
     })
     .filter((path) => path !== 'package.json');
   packagesPaths.forEach((path) => {
-    packagesObj[_folderPath(path)] = require(`${rootDir}/${path}`);
+    const folder = path.split('/').slice(0, -1).join('/');
+    packagesObj[folder] = require(`${rootDir}/${path}`);
   });
   return packagesObj;
 }

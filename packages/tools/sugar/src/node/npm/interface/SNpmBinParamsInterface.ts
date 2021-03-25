@@ -7,7 +7,7 @@
  * @todo      tests
  */
 
-import _SInterface from '../../interface/SInterface';
+import _SInterface from '@coffeekraken/s-interface';
 
 export default class SNpmBinParamsInterface extends _SInterface {
   static definition = {

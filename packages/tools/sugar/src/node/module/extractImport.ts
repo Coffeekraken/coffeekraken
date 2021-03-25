@@ -1,15 +1,9 @@
 import __isPath from '../../shared/is/path';
 import __fs from 'fs';
-import __path from 'path';
 import __deepMerge from '../../shared/object/deepMerge';
 import * as __acorn from 'acorn-loose';
 import { generate as __astring } from 'astring';
-import {
-  parse as __parse,
-  find as __find,
-  walk as __walk
-} from 'abstract-syntax-tree';
-import __toString from '../../shared/string/toString';
+import { find as __find } from 'abstract-syntax-tree';
 
 /**
  * @name            extractImport

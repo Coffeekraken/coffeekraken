@@ -2,7 +2,7 @@
 
 import __typescript from 'typescript';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import __SInterface from '@coffeekraken/sugar/node/interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 
 const _definition = {};
 __typescript.optionDeclarations.forEach((argObj) => {

@@ -1,5 +1,5 @@
 import __sugarConfig from '../../config/sugar';
-import __SInterface from '../../interface/_SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name            SNotificationSettingsInterface

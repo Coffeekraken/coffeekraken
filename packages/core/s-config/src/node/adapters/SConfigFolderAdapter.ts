@@ -1,13 +1,13 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __deepMerge from '../../../shared/object/deepMerge';
-import __writeFileSync from '../../fs/writeFileSync';
-import __diff from '../../../shared/object/diff';
-import __SConfigAdapter from '../../../shared/config/adapters/SConfigAdapter';
-import __packageRoot from '../../path/packageRoot';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __diff from '@coffeekraken/sugar/shared/object/diff';
+import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
+import __packageRoot from '@coffeekraken/sugar/shared/path/packageRoot';
 import __path from 'path';
-import __chokidar from 'chokidar';
+import * as __chokidar from 'chokidar';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -108,9 +108,9 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       .watch(watchPaths, {
         ignoreInitial: true
       })
-      .on('change', (p) => this.emit('update', p))
-      .on('unlink', (p) => this.emit('update', p))
-      .on('add', (p) => this.emit('update', p));
+      .on('change', (p) => this.update())
+      .on('unlink', (p) => this.update())
+      .on('add', (p) => this.update());
   }
 
   load() {

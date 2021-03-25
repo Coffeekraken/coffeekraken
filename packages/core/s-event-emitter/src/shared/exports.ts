@@ -1,3 +1,3 @@
-import __SEventEmitter from './SEventEmitter';
+import SEventEmitter from './SEventEmitter';
 export * from './SEventEmitter';
-export default __SEventEmitter;
+export default SEventEmitter;

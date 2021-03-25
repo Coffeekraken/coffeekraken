@@ -1,6 +1,4 @@
-// @shared
-
-import __SClass from '@coffeekraken/sugar/src/shared/class/SClass';
+import __SClass from '@coffeekraken/s-class';
 import __md5 from '@coffeekraken/sugar/src/shared/crypt/md5';
 import __isClass from '@coffeekraken/sugar/src/shared/is/class';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';

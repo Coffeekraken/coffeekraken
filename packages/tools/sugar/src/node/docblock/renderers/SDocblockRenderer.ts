@@ -1,5 +1,5 @@
 import __path from 'path';
-import __SClass from '../@coffeekraken/s-class';
+import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __handlebars from 'handlebars';

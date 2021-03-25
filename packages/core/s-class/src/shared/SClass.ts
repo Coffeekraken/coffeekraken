@@ -1,5 +1,5 @@
 import __getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
-import { ISInterface } from '@coffeekraken/sugar/shared/interface/_SInterface';
+import { ISInterface } from '@coffeekraken/s-interface';
 import __isPlain from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -64,7 +64,7 @@ export interface ISClass {
   metas: ISClassMetas;
 }
 
-class SClass implements ISClass {
+export default class SClass implements ISClass {
   /**
    * @name            _settings
    * @type            ISClassSettings
@@ -415,6 +415,3 @@ function setSettings(ctx: any, settings: any = {}) {
       ctx._settings.metas.color = __pickRandom(__availableColors());
   } else if (!ctx._settings.metas.color) ctx._settings.metas.color = 'yellow';
 }
-
-// const cls: ISClass = SClass;
-export default SClass;

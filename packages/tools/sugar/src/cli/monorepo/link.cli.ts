@@ -2,5 +2,10 @@
 import __linkPackages from '../../node/monorepo/linkPackages';
 
 export default (stringArgs = '') => {
-  __linkPackages();
+  let individual = false;
+  if (stringArgs.match(/\s?--individual\s?/) || stringArgs.match(/\s?-i\s?/))
+    individual = true;
+  __linkPackages({
+    individual
+  });
 };

@@ -1,0 +1,18 @@
+{
+  "cli": [
+    {
+      "stack": "js",
+      "description": "Javascript compiler",
+      "actions": {
+        "compile": {
+          "description": "Compile some javascript file(s) using esbuild AWESOME package",
+          "process": "./src/node/compile.cli.js"
+        },
+        "test": {
+          "description": "Compile some javascript file(s) using esbuild AWESOME package",
+          "command": "ls -la"
+        }
+      }
+    }
+  ]
+}

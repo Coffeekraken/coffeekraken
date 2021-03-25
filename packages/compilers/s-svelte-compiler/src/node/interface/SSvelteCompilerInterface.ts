@@ -1,5 +1,5 @@
 import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
-import __SInterface from '@coffeekraken/sugar/node/interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SSvelteCompilerParamsInterface

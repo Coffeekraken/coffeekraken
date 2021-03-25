@@ -216,7 +216,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
   toConsole(): string {
     // handle descriptor header
     const headerArray = [
-      `<underline><magenta>${this._descriptor.name}</magenta></underline>`,
+      `<underline><magenta>${this._descriptor.metas.name}</magenta></underline>`,
       '',
       `${__toString(this.value, {
         beautify: true

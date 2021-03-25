@@ -12,7 +12,7 @@ import __toString from '../../shared/string/toString';
 import __convert from '../../shared/time/convert';
 import __SDuration from '../../shared/time/SDuration';
 import __wait from '../../shared/time/wait';
-import { ISInterface, ISInterfaceCtor } from '../interface/SInterface';
+import { ISInterface, ISInterfaceCtor } from '@coffeekraken/s-interface';
 import __isChildProcess from '../is/childProcess';
 import { ISStdio } from '../stdio/SStdio';
 import __stdio from '../stdio/stdio';

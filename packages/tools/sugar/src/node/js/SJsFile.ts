@@ -8,10 +8,12 @@ import __wait from '../../shared/time/wait';
 import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
 import __getFilename from '../fs/filename';
 import __SFile from '../fs/SFile';
-import __SInterface from '../interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 import __onProcessExit from '../process/onProcessExit';
-import __SJsCompilerParamsInterface from './compile/interface/SJsCompilerParamsInterface';
-import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
+import __SJsCompiler, {
+  ISJsCompilerParams,
+  SJsCompilerInterface
+} from '@coffeekraken/s-js-compiler';
 
 /**
  * @name          SJsFileSettingsInterface
@@ -89,7 +91,7 @@ class SJsFile extends __SFile implements ISJsFile {
   static interfaces = {
     compilerParams: {
       apply: false,
-      class: __SJsCompilerParamsInterface
+      class: SJsCompilerInterface
     },
     settings: {
       apply: true,

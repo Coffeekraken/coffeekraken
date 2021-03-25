@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
-    "postinstall": "lerna bootstrap --hoist",
     "dev.js": "tsc -p .tsconfig/tsconfig.js.json --watch",
     "dev.node": "tsc -p .tsconfig/tsconfig.node.json --watch",
     "dev.shared": "tsc -p .tsconfig/tsconfig.shared.json --watch",
@@ -46,7 +45,7 @@
     "@coffeekraken/s-cache": "file:packages/tools/s-cache",
     "@coffeekraken/s-filtrable-input": "file:packages/webcomponents/s-filtrable-input",
     "@coffeekraken/s-iframe-webcomponent": "file:packages/webcomponents/s-iframe",
-    "@coffeekraken/s-promise": "file:packages/tools/s-promise",
+    "@coffeekraken/s-promise": "file:packages/core/s-promise",
     "@coffeekraken/sugar": "file:packages/tools/sugar",
     "@coffeekraken/sugar-ui": "file:packages/tools/sugar-ui",
     "dependency-check": "^4.1.0"

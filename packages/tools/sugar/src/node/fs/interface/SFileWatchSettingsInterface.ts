@@ -1,4 +1,4 @@
-import __SInterface from '../../interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          SFileWatchSettingsInterface

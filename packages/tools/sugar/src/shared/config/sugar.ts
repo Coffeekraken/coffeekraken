@@ -32,11 +32,10 @@ export default function sugar(dotPath) {
   if (__isNode()) {
     if (!sugarConfigInstance) {
       const __path = require('path'); // eslint-disable-line
-      const __SConfigFolderAdapter = require('../../node/config/adapters/SConfigFolderAdapter') // eslint-disable-line
-        .default;
+      const { SConfigFolderAdapter } = require('@coffeekraken/s-config'); // eslint-disable-line
       sugarConfigInstance = new __SConfig('sugar', {
         adapters: [
-          new __SConfigFolderAdapter({
+          new SConfigFolderAdapter({
             configAdapter: {
               name: 'sugar'
             },

@@ -10,7 +10,7 @@ import __parseTypeString, {
   IParseTypeStringResultObj
 } from './parseTypeString';
 import __STypeResult from './STypeResult';
-import __getAvailableInterfaceTypes from '../interface/getAvailableInterfaceTypes';
+import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SType
@@ -385,7 +385,7 @@ class SType implements ISType {
     // check that the passed type is registered
     if (this.constructor._registeredTypes[type.toLowerCase()] === undefined) {
       if (settings.interfaces === true) {
-        const availableInterfaceTypes = __getAvailableInterfaceTypes();
+        const availableInterfaceTypes = __SInterface.getAvailableTypes();
         if (availableInterfaceTypes[type] !== undefined) {
           const res = availableInterfaceTypes[type].apply(value, {});
           return res;

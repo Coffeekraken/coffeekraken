@@ -155,13 +155,15 @@ export default class SConfig {
       const adapterObj = this._adapters[adapterName];
       let timeout;
       if (!adapterObj.instance) return;
-      adapterObj.instance.on('update', () => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          // load the updated config
-          this.load();
-        }, this._settings.updateTimeout);
-      });
+      if (adapterObj.instance._settings.onUpdate) {
+        adapterObj.instance._settings.onUpdate = () => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            // load the updated config
+            this.load();
+          }, this._settings.updateTimeout);
+        };
+      }
     });
 
     // load the config from the default adapter if the setting "autoLoad" is true

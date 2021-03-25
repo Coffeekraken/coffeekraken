@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SClass, { ISClass } from '../@coffeekraken/s-class';
+import __SClass, { ISClass } from '@coffeekraken/s-class';
 import __isPath from '../../../shared/is/path';
 import __isClass from '../../../shared/is/class';
 import __isPlain from '../../../shared/is/plainObject';

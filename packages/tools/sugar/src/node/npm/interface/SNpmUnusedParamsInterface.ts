@@ -1,4 +1,4 @@
-import _SInterface from '../../interface/SInterface';
+import _SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name            SNpmUnusedParamsInterface

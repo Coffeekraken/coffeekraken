@@ -15,7 +15,7 @@ import __SDuration from '../../shared/time/SDuration';
 import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
 import __SFile, { ISFileCtorSettings } from '../fs/SFile';
-import __SInterface from '../interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerParamsInterface';
 import { ISScssCompilerParams } from './compile/SScssCompiler';
 import __findImportStatements from './utils/findImportStatements';

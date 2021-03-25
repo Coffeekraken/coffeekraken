@@ -26,4 +26,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     __exportStar(require("./SClass"), exports);
     exports.default = SClass_1.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBQUEsc0RBQWdDO0lBQ2hDLDJDQUF5QjtJQUN6QixrQkFBZSxnQkFBUSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBQUEsc0RBQThCO0lBQzlCLDJDQUF5QjtJQUN6QixrQkFBZSxnQkFBTSxDQUFDIn0=

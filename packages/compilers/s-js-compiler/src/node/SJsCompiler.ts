@@ -1,10 +1,12 @@
-import __fsPool from '../../fs/pool';
-import __SDuration from '../../../shared/time/SDuration';
-import __deepMerge from '../../../shared/object/deepMerge';
+import __fsPool from '@coffeekraken/sugar/node/fs/pool';
+import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
-import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
+import __SCompiler, {
+  ISCompiler
+} from '@coffeekraken/sugar/node/compiler/SCompiler';
 
-import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
+import __SJsCompilerInterface from './interface/SJsCompilerInterface';
 
 export interface ISJsCompilerParams {
   input: string | string[];
@@ -64,7 +66,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
   static interfaces = {
     params: {
       apply: false,
-      class: __SJsCompilerParamsInterface
+      class: __SJsCompilerInterface
     }
   };
 

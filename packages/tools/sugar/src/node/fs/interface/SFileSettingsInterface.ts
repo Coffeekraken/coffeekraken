@@ -1,4 +1,4 @@
-import __SInterface from '../../interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 import SFileReadSettingsInterface from './SFileReadSettingsInterface';
 import SFileWatchSettingsInterface from './SFileWatchSettingsInterface';
 import SFileWriteSettingsInterface from './SFileWriteSettingsInterface';

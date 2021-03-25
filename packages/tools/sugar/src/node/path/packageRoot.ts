@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __folderPath from '../fs/folderPath';
-import __isFolder from '../is/folder';
 import __isFile from '../is/file';
 import __findPkgJson from 'find-package-json';
 
@@ -27,7 +25,7 @@ import __findPkgJson from 'find-package-json';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function packageRoot(from = process.cwd(), highest = false) {
-  if (__isFile(from)) from = __folderPath(from);
+  if (__isFile(from)) from = from.split('/').slice(0,-1).join('/');
 
   const f = __findPkgJson(from);
   let file = f.next();

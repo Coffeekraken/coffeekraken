@@ -1,5 +1,5 @@
 import __inquirer from 'inquirer';
-import { ISEventEmitter } from '../@coffeekraken/s-event-emitter';
+import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __SNotification from '../../notification/SNotification';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __SStdio from '../SStdio';

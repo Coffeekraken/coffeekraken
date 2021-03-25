@@ -3,9 +3,9 @@
     "**/sugar/js/**": true,
     "**/sugar/node/**": true,
     "**/sugar/shared/**": true,
-    "**/*.js": {
-      "when": "$(basename).ts"
-    },
+    // "**/*.js": {
+    //   "when": "$(basename).ts"
+    // },
     "**/*.js.map": true
   },
   "editor.codeActionsOnSave": {

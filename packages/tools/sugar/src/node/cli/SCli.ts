@@ -3,7 +3,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __argsToObject from '../../shared/cli/argsToObject';
 import __deepMerge from '../../shared/object/deepMerge';
-import __SInterface from '../interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 import __buildCommandLine from './buildCommandLine';
 
 /**

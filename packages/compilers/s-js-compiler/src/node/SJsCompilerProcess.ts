@@ -1,8 +1,10 @@
-import SProcess, { ISProcessSettings } from '../../process/SProcess';
+import SProcess, {
+  ISProcessSettings
+} from '@coffeekraken/sugar/node/process/SProcess';
 import __SJsCompiler, { ISJsCompiler, ISJsCompilerParams } from './SJsCompiler';
-import __deepMerge from '../../../shared/object/deepMerge';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
+import { SJsCompilerInterface } from '@coffeekraken/s-js-compiler';
 
 /**
  * @name            SJsCompilerProcess
@@ -28,11 +30,11 @@ class SJsCompilerProcess extends SProcess {
   static interfaces = {
     initialParams: {
       apply: false,
-      class: __SJsCompilerParamsInterface
+      class: SJsCompilerInterface
     },
     params: {
       apply: false,
-      class: __SJsCompilerParamsInterface
+      class: SJsCompilerInterface
     }
   };
 

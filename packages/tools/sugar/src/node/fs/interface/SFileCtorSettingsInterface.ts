@@ -1,4 +1,4 @@
-import __SInterface from '../../interface/SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 // import SFileSettingsInterface from './SFileSettingsInterface';
 
 export default class SFileCtorSettingsInterface extends __SInterface {

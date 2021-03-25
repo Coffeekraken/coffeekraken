@@ -1,13 +1,11 @@
 // @ts-nocheck
 
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * @name                                SConfigAdapter
  * @namespace           s-config.shared.adapters
  * @type                                Class
- * @extends                   SEventEmitter
  * @status              beta
  *
  * Base class for SCache adapters
@@ -36,25 +34,22 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISConfigAdapterSettings {}
-export interface ISConfigAdapterCtorSettings {
-  configAdapter?: Partial<ISConfigAdapterSettings>;
+export interface ISConfigAdapterSettings {
+  name: string;
+  onUpdate: typeof Function;
 }
 
-export default class SConfigAdapter extends __SEventEmitter {
+export default class SConfigAdapter {
   /**
-   * @name        configAdapterSettings
-   * @type        ISConfigAdapterSettings
-   * @get
+   * @name        _settings
+   * @type          ISConfigAdapterSettings
    *
    * Access the config adapter settings
    *
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get configAdapterSettings(): ISConfigAdapterSettings {
-    return (<any>this._settings).configAdapter;
-  }
+  _settings: ISConfigAdapterSettings;
 
   /**
    * @name                              constructor
@@ -68,21 +63,28 @@ export default class SConfigAdapter extends __SEventEmitter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings: ISConfigAdapterCtorSettings) {
-    super(
-      __deepMerge(
-        {
-          configAdapter: {}
-        },
-        settings || {}
-      )
-    );
-
+  constructor(settings: Partial<ISConfigAdapterCtorSettings>) {
+    this._settings = __deepMerge(settings || {});
     if (settings.name && !/^[a-zA-Z0-9_\-:]+$/.test(settings.name)) {
       throw new Error(
         `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`
       );
     }
+  }
+
+  /**
+   * @name        update
+   * @type        Function
+   *
+   * Function that you have to call with the new config when it has been updated
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  update(): void {
+    // calling the "onUpdate" setting callback if exists
+    if (!this._settings.onUpdate) return;
+    this._settings.onUpdate();
   }
 
   /**
@@ -95,7 +97,7 @@ export default class SConfigAdapter extends __SEventEmitter {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get name() {
-    return this.configAdapterSettings.name;
+    return this._settings.name;
   }
   set name(value) {
     if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
@@ -103,6 +105,6 @@ export default class SConfigAdapter extends __SEventEmitter {
         `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`
       );
     }
-    this._settings.configAdapter.name = value;
+    this._settings.name = value;
   }
 }

@@ -3,7 +3,8 @@ import __isOfType from '@coffeekraken/sugar/shared/is/ofType';
 import __typeof from '@coffeekraken/sugar/shared/value/typeof';
 import __SDescriptorResult, {
   ISDescriptorResult,
-  ISDescriptorResultObj
+  ISDescriptorResultObj,
+  ISDescriptorResultRule
 } from './SDescriptorResult';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
@@ -70,20 +71,12 @@ export interface ISDescriptorRegisteredRule {
   id: string;
   name: string;
   settings: any;
-  processParams?: function;
+  processParams?: typeof Function;
   apply: ISDescriptorRuleApplyFn;
 }
 
 export interface ISDescriptorRules {
   [key: string]: ISDescriptorRule;
-}
-
-export interface ISDescroptorGenerateSettings {
-  name?: string;
-  id?: string;
-  rules: ISDescriptorRules;
-  type?: string;
-  settings?: ISDescriptorSettings;
 }
 
 export interface ISDescriptorRegisteredRules {}
@@ -97,10 +90,8 @@ export interface ISDescriptorCtor {
 }
 
 export interface ISDescriptor {
-  _settings: ISDescriptorSettings;
-  name: string;
-  id: string;
-  apply(instance: any, settings?: ISDescriptorSettings);
+  descriptorSettings: ISDescriptorSettings;
+  apply(instance: any, settings?: Partial<ISDescriptorSettings>);
 }
 // @ts-ignore
 class SDescriptor extends __SClass implements ISDescriptor {
@@ -114,7 +105,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _descriptorResult: ISDescriptorResult;
+  _descriptorResult?: ISDescriptorResult;
 
   /**
    * @name      _registeredRules
@@ -200,7 +191,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings?: ISDescriptorSettings) {
+  constructor(settings?: Partial<ISDescriptorSettings>) {
     // save the settings
     super(
       __deepMerge(
@@ -215,7 +206,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
             verbose: false
           }
         },
-        settings
+        settings || {}
       )
     );
   }
@@ -242,7 +233,9 @@ class SDescriptor extends __SClass implements ISDescriptor {
     settings?: Partial<ISDescriptorSettings>
   ): ISDescriptorResult {
     // handle settings
-    settings = __deepMerge(this.descriptorSettings, settings || {});
+    const set = <ISDescriptorSettings>(
+      __deepMerge(this.descriptorSettings, settings || {})
+    );
 
     // ensure we can apply the descriptor
     if (value === undefined || value === null) value = {};
@@ -256,22 +249,22 @@ class SDescriptor extends __SClass implements ISDescriptor {
     this._descriptorResult = new __SDescriptorResult(
       this,
       finalValuesObj,
-      Object.assign({}, settings)
+      Object.assign({}, set)
     );
 
-    const rules = settings.rules;
+    const rules = set.rules;
 
     // check the passed value type correspond to the descriptor type
-    if (!__isOfType(value, settings.type)) {
+    if (!__isOfType(value, set.type)) {
       throw `Sorry but this descriptor "<yellow>${
-        settings.name
+        this.metas.name
       }</yellow>" does not accept values of type "<cyan>${__typeof(
         value
-      )}</cyan>" but only "<green>${settings.type}</green>"...`;
+      )}</cyan>" but only "<green>${set.type}</green>"...`;
     }
 
     // check the type to validate correctly the value
-    if (Array.isArray(value) && !settings.arrayAsValue) {
+    if (Array.isArray(value) && !set.arrayAsValue) {
       // loop on each items
       throw new Error(
         `Sorry but the support for arrays like values has not been integrated for not...`
@@ -306,7 +299,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
         // complete
         if (
           valuesObjToProcess[propName] === undefined &&
-          settings.complete &&
+          set.complete &&
           ruleObj.default !== undefined
         ) {
           valuesObjToProcess[propName] = ruleObj.default;
@@ -332,7 +325,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
           valuesObjToProcess[propName],
           propName,
           ruleObj,
-          settings
+          set
         );
 
         if (validationResult !== undefined && validationResult !== null) {
@@ -346,7 +339,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
       );
     }
 
-    if (this._descriptorResult.hasIssues() && settings.throw) {
+    if (this._descriptorResult.hasIssues() && set.throw) {
       throw new Error(this._descriptorResult.toString());
     }
 
@@ -368,9 +361,9 @@ class SDescriptor extends __SClass implements ISDescriptor {
    */
   _validate(
     value: any,
-    propName?: string,
-    rulesObj?: any,
-    settings?: ISDescriptorSettings
+    propName: string,
+    rulesObj: any,
+    settings: ISDescriptorSettings
   ): ISDescriptorResult | true {
     if (rulesObj === undefined) return value;
 
@@ -386,13 +379,15 @@ class SDescriptor extends __SClass implements ISDescriptor {
       if (ruleName === 'default') return;
       const ruleValue = rulesObj[ruleName];
       // make sure we have this rule registered
-      if (this.constructor._registeredRules[ruleName] === undefined) {
+      if ((<any>this).constructor._registeredRules[ruleName] === undefined) {
         if (settings.throwOnMissingRule) {
           throw `Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
-              - ${Object.keys(this.constructor._registeredRules).join('\n- ')}`;
+              - ${Object.keys((<any>this).constructor._registeredRules).join(
+                '\n- '
+              )}`;
         }
       } else {
-        const ruleObj = this.constructor._registeredRules[ruleName];
+        const ruleObj = (<any>this).constructor._registeredRules[ruleName];
         const params =
           ruleObj.processParams !== undefined
             ? ruleObj.processParams(ruleValue)
@@ -450,10 +445,12 @@ class SDescriptor extends __SClass implements ISDescriptor {
 
     if (ruleResult === true) return value;
     else if (ruleResult instanceof Error) {
-      const obj = ruleResult === false ? {} : ruleResult;
-      obj.__error = ruleResult;
-      obj.__ruleObj = ruleObj;
-      obj.__propName = propName;
+      const obj: ISDescriptorResultRule = {
+        __error: ruleResult,
+        __ruleObj: ruleObj,
+        __propName: propName
+      };
+      // @ts-ignore
       this._descriptorResult.add(obj);
       return value;
     } else {

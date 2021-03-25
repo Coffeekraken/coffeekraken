@@ -1,6 +1,6 @@
 // @shared
 
-import __SInterface from '@coffeekraken/sugar/src/shared/interface/_SInterface';
+import __SInterface from '@coffeekraken/s-interface';
 import __isNode from '@coffeekraken/sugar/src/shared/is/node';
 
 /**

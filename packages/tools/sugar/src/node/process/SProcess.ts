@@ -2,8 +2,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
 import __stackTrace from 'stack-trace';
 import { ISClass as __ISClass } from '@coffeekraken/s-class';
-import __argsToObject from '../../shared/cli/argsToObject';
-import __buildCommandLine from '../../shared/cli/buildCommandLine';
+// import __buildCommandLine from '../../shared/cli/buildCommandLine';
 import __SError from '../../shared/error/SError';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { ILog } from '../../shared/log/log';
@@ -72,7 +71,7 @@ export interface ISProcessSettings {
   stdio: ISStdio;
   throw: boolean;
   runAsChild: boolean;
-  paramsInterface: ISInterface | ISInterfaceCtor;
+  interface: ISInterface | ISInterfaceCtor;
   processPath: string;
   notification: ISProcessNotificationSettings;
   env: Record<string, unknown>;
@@ -101,7 +100,6 @@ export interface ISProcess extends ISProcessInternal {
 class SProcess extends __SEventEmitter implements ISProcessInternal {
   static interfaces = {
     settings: {
-      apply: true,
       on: '_settings.process',
       class: __SProcessSettingsInterface
     }
@@ -172,7 +170,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @type      Object
    *
    * Store the parameters interface to apply on the params object and on the initialParams object.
-   * Can come from the static ```interfaces.params``` property or the ```settings.paramsInterface``` one.
+   * Can come from the static ```interfaces.params``` property or the ```settings.interface``` one.
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -269,9 +267,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     this.initialParams = Object.assign({}, initialParams);
 
     // get the definition from interface or settings
-    this.paramsInterface = this.getInterface('params');
-    if (this.processSettings.paramsInterface !== undefined)
-      this.paramsInterface = this.processSettings.paramsInterface;
+    this.paramsInterface =
+      (<any>this).constructor.interface ?? this.getInterface('params');
+    if (this.processSettings.interface !== undefined)
+      this.paramsInterface = this.processSettings.interface;
 
     // handle process exit
     __onProcessExit(async (state) => {
@@ -398,16 +397,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     await __wait(50);
 
-    const paramsObj: any = __argsToObject(paramsOrStringArgs, {
-      definition: {
-        ...(this.paramsInterface !== undefined
-          ? this.paramsInterface.definition
-          : {}),
-        processPath: {
-          type: 'String'
-        }
-      }
-    });
+    const paramsObj = this.paramsInterface.apply(paramsOrStringArgs).value;
 
     // check if asking for the help
     if (paramsObj.help === true && this.paramsInterface !== undefined) {

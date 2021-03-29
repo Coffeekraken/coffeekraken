@@ -78,14 +78,14 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           if (filesStack[path]) return;
           // make sure it's not exists already
           if (!filesStack[path]) {
-            if (set.SFile) filesStack[path] = __SFile.instanciate(path);
+            if (set.SFile) filesStack[path] = __SFile.new(path);
             else filesStack[path] = path;
           }
           emit('add', filesStack[path]);
         })
         .on('change', (path) => {
           if (!filesStack[path]) {
-            if (set.SFile) filesStack[path] = __SFile.instanciate(path);
+            if (set.SFile) filesStack[path] = __SFile.new(path);
             else filesStack[path] = path;
           }
           emit('update', filesStack[path]);
@@ -110,7 +110,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
             });
           });
           filesPaths.forEach((filePath) => {
-            if (set.SFile) finalFiles.push(__SFile.instanciate(filePath));
+            if (set.SFile) finalFiles.push(__SFile.new(filePath));
             else finalFiles.push(filePath);
             emit('file', finalFiles[finalFiles.length - 1]);
             // save file in file stack

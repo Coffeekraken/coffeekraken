@@ -1,0 +1,87 @@
+import __parseArgs from '../parseArgs';
+
+describe('sugar.shared.cli.parseArgs', () => {
+  it('Should parse a simple string correctly', () => {
+    const res = __parseArgs('--something cool -e true');
+    expect(res).toEqual({
+      something: 'cool',
+      e: true
+    });
+  });
+
+  it('Should parse a simple string with a none ending argument correctly', () => {
+    const res = __parseArgs('--something cool -e');
+    expect(res).toEqual({
+      something: 'cool',
+      e: true
+    });
+  });
+
+  it('Should parse a simple string with multiple none value arguments one after the other', () => {
+    const res = __parseArgs('--something cool -e --plop -i');
+    expect(res).toEqual({
+      something: 'cool',
+      e: true,
+      plop: true,
+      i: true
+    });
+  });
+
+  it('Should parse correctly an object value passed in the string using the valueQuote setting "', () => {
+    const res = __parseArgs(
+      `-o "{'hello': 'world', '__plop': true}" --something World`,
+      {
+        valueQuote: '"'
+      }
+    );
+    expect(res).toEqual({
+      o: {
+        hello: 'world',
+        __plop: true
+      },
+      something: 'World'
+    });
+  });
+
+  it("Should parse correctly an object value passed in the string using the valueQuote setting '", () => {
+    const res = __parseArgs(
+      `-o '{"hello": "world", "__plop": true}' --something World`,
+      {
+        valueQuote: "'"
+      }
+    );
+    expect(res).toEqual({
+      o: {
+        hello: 'world',
+        __plop: true
+      },
+      something: 'World'
+    });
+  });
+
+  it('Should parse correctly an object value passed in the string using the valueQuote setting `', () => {
+    const res = __parseArgs(
+      "-o `{'hello': 'world', '__plop': true}` --something World",
+      {
+        valueQuote: '`'
+      }
+    );
+    expect(res).toEqual({
+      o: {
+        hello: 'world',
+        __plop: true
+      },
+      something: 'World'
+    });
+  });
+
+  it('Should parse correctly an array value passed in the string correctly', () => {
+    const res = __parseArgs("-o `['plop', 'coco']` --something World", {
+      valueQuote: '`'
+    });
+    expect(res).toEqual({
+      o: ['plop', 'coco'],
+      something: 'World'
+    });
+  });
+});

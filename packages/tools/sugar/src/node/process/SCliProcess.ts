@@ -1,7 +1,6 @@
-import __SProcess, { ISProcess, ISProcessSettings } from './SProcess';
-import __buildCommandLine from '../../shared/cli/buildCommandLine';
-import __onProcessExit from './onProcessExit';
-import __spawn, { ISpawnSettings } from './spawn';
+import __SProcess, { ISProcess } from './SProcess';
+// import __buildCommandLine from '../../shared/cli/buildCommandLine';
+import __spawn from './spawn';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**
@@ -123,11 +122,13 @@ class SCliProcess extends __SProcess implements ISCliProcess {
     );
 
     // build the command line
-    const command = __buildCommandLine(this.command, params, {
-      definition:
-        cliProcessSettings.definition || this.paramsInterface?.definition || {},
-      alias: false
-    });
+    // @WIP
+    // const command = __buildCommandLine(this.command, params, {
+    //   definition:
+    //     cliProcessSettings.definition || this.paramsInterface?.definition || {},
+    //   alias: false
+    // });
+    const command = 'ls -la';
 
     // @ts-ignore
     const pro = __spawn(command, [], {

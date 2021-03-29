@@ -1,11 +1,9 @@
 {
   "exclude": [
     "/**/node_modules",
-    "/**/__tests__",
     "/**/__wip__",
-    "/**/__tests__.wip",
-    "/**/*.test.ts",
-    "/**/*.test.js"
+    "/**/__old__",
+    "/**/__tests__.wip"
   ],
   "compilerOptions": {
     "incremental": false,

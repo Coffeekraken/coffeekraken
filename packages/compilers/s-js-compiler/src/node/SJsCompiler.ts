@@ -2,9 +2,19 @@ import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
+import __SFile from '@coffeekraken/sugar/node/fs/SFile';
 import __SCompiler, {
   ISCompiler
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
+import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
+import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
+
+import * as __esbuild from 'esbuild';
+import __path from 'path';
+import __fs from 'fs';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
+// import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
+import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 
 import __SJsCompilerInterface from './interface/SJsCompilerInterface';
 
@@ -69,8 +79,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
       class: __SJsCompilerInterface
     }
   };
-
-  static _serveServer: any;
 
   /**
    * @name            _esbuildAcceptedSettings
@@ -175,85 +183,278 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
    * @since             2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _filesColor: Record<string, any> = {};
   _compile(
     params: ISJsCompilerParams,
     settings: Partial<ISJsCompilerSettings> = {}
   ) {
-    return new __SPromise(async ({ resolve, reject, pipe, emit, on }) => {
-      const compileSettings = __deepMerge(
-        this.jsCompilerSettings,
-        {},
-        settings
-      );
+    return new __SPromise(
+      async ({ resolve, reject, pipe, emit, on }) => {
+        const set = __deepMerge(this.jsCompilerSettings, {}, settings);
 
-      const input = Array.isArray(params.input) ? params.input : [params.input];
+        const input = Array.isArray(params.input)
+          ? params.input
+          : [params.input];
 
-      // prod
-      if (params.prod) {
-        params.minify = true;
-        params.stripComments = true;
-        params.map = false;
-      }
-
-      const duration = new __SDuration();
-
-      const pool = __fsPool(input, {
-        watch: params.watch
-      });
-
-      on('cancel', () => {
-        pool.cancel();
-      });
-
-      if (params.watch) {
         emit('log', {
-          value: `<blue>[watch]</blue> Watching for changes...`
+          value: 'Starting <yellow>JS</yellow> file(s) compilation...'
         });
-      }
-
-      pool.on(params.watch ? 'update' : 'files', async (files) => {
-        files = Array.isArray(files) ? files : [files];
-
-        const resultsObj = {};
-        const aggregateStrArray: string[] = [];
-
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          const compilePromise = file.compile(
-            {
-              ...params,
-              watch: false
-            },
-            settings
-          );
-
-          try {
-            pipe(compilePromise);
-            const compileRes = await compilePromise;
-            resultsObj[file.path] = compileRes;
-            aggregateStrArray.push(compileRes.js);
-            emit('file', compileRes);
-          } catch (e) {
-            console.log(e);
-            emit('warn', {
-              value: e.toString()
-            });
-          }
-        }
 
         if (params.watch) {
           emit('log', {
             value: `<blue>[watch]</blue> Watching for changes...`
           });
-        } else {
-          resolve({
-            files: resultsObj,
-            js: aggregateStrArray.join('\n'),
-            ...duration.end()
-          });
         }
-      });
-    });
+
+        // prod
+        if (params.prod) {
+          params.minify = true;
+        }
+
+        // let updatedFilesPool;
+        // if (params.outDir) {
+        //   updatedFilesPool = __fsPool(`${params.outDir}/**/*.js`, {
+        //     watch: true
+        //   }).on('update', (files) => {
+        //     console.log('files', files);
+        //   });
+        // }
+
+        const pool = __fsPool(input, {
+          watch: false
+        });
+
+        // handle cancel
+        on('finally', () => {
+          // updatedFilesPool?.cancel();
+          pool.cancel();
+        });
+
+        const updateTimestamps = {};
+
+        const interceptPlugin = {
+          name: 'interceptPlugin',
+          setup(build) {
+            // Load ".txt" files and return an array of words
+            build.onLoad({ filter: /\.js$/ }, async (args) => {
+              const mtime = __fs.statSync(args.path).mtimeMs;
+              const text = __fs.readFileSync(args.path, 'utf8');
+
+              if (
+                !updateTimestamps[args.path] ||
+                updateTimestamps[args.path] !== mtime
+              ) {
+                emit('log', {
+                  value: `<yellow>[update]</yellow> File "<cyan>${__path.relative(
+                    params.rootDir,
+                    args.path
+                  )}</cyan>"`
+                });
+              }
+              updateTimestamps[args.path] = mtime;
+
+              return {
+                contents: text,
+                loader: 'js'
+              };
+            });
+          }
+        };
+
+        pool.on('files', async (files) => {
+          const duration = new __SDuration();
+
+          files = Array.isArray(files) ? files : [files];
+
+          // for (let i = 0; i < files.length; i++) {
+          // const file = files[i];
+
+          const color =
+            this._filesColor[
+              files.length === 1
+                ? __getFilename(files[0].path)
+                : files.length + ' files'
+            ] ?? __pickRandom(__availableColors());
+          this._filesColor[
+            files.length === 1
+              ? __getFilename(files[0].path)
+              : files.length + ' files'
+          ] = color;
+
+          emit('log', {
+            value: `<${color}>[${
+              files.length === 1
+                ? __getFilename(files[0].path)
+                : files.length + ' files'
+            }]</${color}> Starting compilation`
+          });
+
+          // let outFile;
+          // if (params.save && params.outDir) {
+          //   const relSrcPath = __path.relative(params.inDir, file.path);
+          //   const outFilePath = __path.resolve(params.outDir, relSrcPath);
+          //   outFile = outFilePath;
+          // }
+
+          const esbuildParams: any = {
+            charset: 'utf8',
+            format: params.format,
+            logLevel: 'silent',
+            outdir: params.outDir,
+            outbase: params.inDir,
+            banner: params.banner,
+            // incremental: true,
+            ...__filter(params, (key, value) => {
+              if (Array.isArray(value) && !value.length) return false;
+              return SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
+            }),
+            entryPoints: files.map((f) => f.path),
+            bundle: params.bundle,
+            write: true,
+            watch: params.watch
+              ? {
+                  onRebuild(error, result) {
+                    if (error) {
+                      emit('error', {
+                        value: error
+                      });
+                      return;
+                    }
+
+                    // if (resultObj.outputFiles) {
+                    //   resultObj.outputFiles.forEach((fileObj) => {
+                    //     let filePath = fileObj.path;
+                    //     let content = fileObj.text;
+                    //     if (params.bundle && params.bundleSuffix) {
+                    //       if (filePath.match(/\.js\.map$/)) {
+                    //         filePath = filePath.replace(
+                    //           /\.js\.map$/,
+                    //           `${params.bundleSuffix}.js.map`
+                    //         );
+                    //       } else {
+                    //         filePath = filePath.replace(
+                    //           /\.js$/,
+                    //           `${params.bundleSuffix}.js`
+                    //         );
+                    //       }
+                    //       content = content.replace(
+                    //         `//# sourceMappingURL=${__getFilename(
+                    //           fileObj.path
+                    //         )}`,
+                    //         `//# sourceMappingURL=${__getFilename(filePath)}`
+                    //       );
+                    //     }
+                    //     console.log('WRINTING', filePath, content);
+                    //     __fs.writeFileSync(filePath, content);
+                    //     const file = __SFile.new(filePath);
+                    //     emit('log', {
+                    //       type: 'file',
+                    //       file,
+                    //       action: 'save'
+                    //     });
+                    //   });
+                    // }
+                    emit('log', {
+                      value: `<blue>[watch]</blue> Watching for changes...`
+                    });
+                  }
+                }
+              : false,
+            errorLimit: 100,
+            minify: params.minify,
+            sourcemap: params.map,
+            plugins: [
+              interceptPlugin
+              // __esbuildAggregateLibsPlugin({
+              //   outputDir: params.outputDir,
+              //   rootDir: params.rootDir
+              // })
+            ],
+            ...params.esbuild
+          };
+
+          let resultObj;
+          try {
+            resultObj = await __esbuild.build(esbuildParams);
+          } catch (e) {
+            // return reject(e);
+          }
+
+          // if (resultObj.outputFiles) {
+          //   resultObj.outputFiles.forEach((fileObj) => {
+          //     let filePath = fileObj.path;
+          //     let content = fileObj.text;
+          //     if (params.bundle && params.bundleSuffix) {
+          //       if (filePath.match(/\.js\.map$/)) {
+          //         filePath = filePath.replace(
+          //           /\.js\.map$/,
+          //           `${params.bundleSuffix}.js.map`
+          //         );
+          //       } else {
+          //         filePath = filePath.replace(
+          //           /\.js$/,
+          //           `${params.bundleSuffix}.js`
+          //         );
+          //       }
+          //       content = content.replace(
+          //         `//# sourceMappingURL=${__getFilename(fileObj.path)}`,
+          //         `//# sourceMappingURL=${__getFilename(filePath)}`
+          //       );
+          //     }
+          //     __fs.writeFileSync(filePath, content);
+          //     const file = __SFile.new(filePath);
+          //     emit('log', {
+          //       type: 'file',
+          //       file,
+          //       action: 'save'
+          //     });
+          //   });
+          // }
+
+          // if (outFile) {
+          //   const file = __SFile.new(outFile);
+          //   emit('log', {
+          //     type: 'file',
+          //     file,
+          //     action: 'save'
+          //   });
+          // }
+
+          // if (resultObj.warnings.length) {
+          //   resultObj.warnings.forEach((warningObj) => {
+          //     emit('warn', {
+          //       value: warningObj.text
+          //     });
+          //   });
+          // }
+
+          // compiledFiles.push({
+          //   path: outputPath,
+          //   js: result.js.code,
+          //   css: result.css.code,
+          //   warnings: result.warnings
+          // });
+          // }
+
+          if (params.watch) {
+            emit('log', {
+              value: `<blue>[watch]</blue> Watching for changes...`
+            });
+          } else {
+            resolve({
+              // files: compiledFiles,
+              files: {},
+              ...duration.end()
+            });
+          }
+        });
+      },
+      {
+        eventEmitter: {
+          bind: this
+        }
+      }
+    );
   }
 }
 

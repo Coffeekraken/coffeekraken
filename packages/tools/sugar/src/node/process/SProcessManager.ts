@@ -1,20 +1,11 @@
 // @ts-nocheck
 
-import __typeof from '../../shared/value/typeof';
-import __argsToObject from '../../shared/cli/argsToObject';
-import __isClass from '../../shared/is/class';
 import __isChildProcess from '../../shared/is/childProcess';
-import __packageRoot from '../path/packageRoot';
 import __SPromise from '@coffeekraken/s-promise';
-import __SProcessManagerInterface from './interface/SProcessManagerInterface';
 import __SError from '../../shared/error/SError';
 import __deepMerge from '../../shared/object/deepMerge';
 import __getExtendsStack from '../../shared/class/getExtendsStack';
 import __stdio from '../stdio/stdio';
-import __SProcess from './SProcess';
-import __SProcessPipe from './SProcessPipe';
-import __parseHtml from '../../shared/console/parseHtml';
-import __toString from '../../shared/string/toString';
 
 /**
  * @name            SProcessManager

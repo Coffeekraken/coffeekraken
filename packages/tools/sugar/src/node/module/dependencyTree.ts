@@ -127,7 +127,7 @@ export default function dependencyTree(
     const tree = {};
 
     // create an SFile instance
-    const file = __SFile.instanciate(filePath);
+    const file = __SFile.new(filePath);
 
     const imports = __extractImport(file.content);
 

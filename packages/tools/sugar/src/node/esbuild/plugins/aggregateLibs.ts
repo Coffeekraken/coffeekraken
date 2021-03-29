@@ -60,7 +60,7 @@ export default function esbuildAggregateLibsPlugin(
             dirs
           });
 
-          const file = __SFile.instanciate(path);
+          const file = __SFile.new(path);
 
           const moduleRootPath = __packageRoot(path);
           const moduleRelPath = __path.relative(moduleRootPath, path);

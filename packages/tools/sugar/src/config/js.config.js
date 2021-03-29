@@ -1,16 +1,12 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ipAddress_1 = __importDefault(require("../node/network/ipAddress"));
 exports.default = {
     compile: {
         /**
          * @name              input
          * @namespace         config.js.compile
          * @type              String
-         * @default           [config.storage.srcDir]/js/** / *.js
+         * @default           [config.js.compile.inDir]/** / *.js
          *
          * Specify the root folder (or file) to check for .js files to build.
          * Glob patterns can be used
@@ -18,9 +14,21 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        input: '[config.storage.srcDir]/js/**/*.js',
+        input: '[config.js.compile.inDir]/**/*.js',
         /**
-         * @name              outputDir
+         * @name              inDir
+         * @namespace         config.js.compile
+         * @type              String
+         * @default           [config.storage.srcDir]/js
+         *
+         * Specify the destination folder from where to search for js files to compile
+         *
+         * @since             2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        inDir: '[config.storage.srcDir]/js',
+        /**
+         * @name              outDir
          * @namespace         config.js.compile
          * @type              String
          * @default           [config.storage.distDir]/js
@@ -31,19 +39,19 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        outputDir: '[config.storage.distDir]/js',
+        outDir: '[config.storage.distDir]/js',
         /**
          * @name            rootDir
          * @namespace       config.js.compile
          * @type            String
-         * @default         [config.storage.srcDir]/js
+         * @default         [config.storage.rootDir]
          *
          * Specify the root directory from where the compiler will try to resolve modules
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        rootDir: '[config.storage.srcDir]/js',
+        rootDir: '[config.storage.rootDir]',
         /**
          * @name        format
          * @namespace     config.js.compile
@@ -70,6 +78,18 @@ exports.default = {
          */
         bundle: false,
         /**
+         * @name              bundleSuffix
+         * @namespace         config.js.compile
+         * @type              Boolean
+         * @default           .bundle
+         *
+         * Specify if you want as a file prefix when it has been bundled
+         *
+         * @since             2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        bundleSuffix: '.bundle',
+        /**
          * @name              map
          * @namespace         config.js.compile
          * @type              Boolean
@@ -94,18 +114,6 @@ exports.default = {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         prod: false,
-        /**
-         * @name              stripComments
-         * @namespace         config.js.compile
-         * @type              Boolean
-         * @default           true
-         *
-         * Specify if you want to stripComments the generated css or not
-         *
-         * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        stripComments: true,
         /**
          * @name              minify
          * @namespace         config.js.compile
@@ -155,42 +163,6 @@ exports.default = {
          */
         watch: false,
         /**
-         * @name          serve
-         * @namespace      config.js.compile
-         * @type        Boolean
-         * @default     false
-         *
-         * Specify if you want to start a server that serve the compiled files or not
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        serve: false,
-        /**
-         * @name          host
-         * @namespace      config.js.compile
-         * @type        String
-         * @default     ipAddress
-         *
-         * Specify the host you want in case of a local server
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        host: ipAddress_1.default(),
-        /**
-         * @name          port
-         * @namespace      config.js.compile
-         * @type        Integer
-         * @default     8888
-         *
-         * Specify the port you want in case of a local server
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        port: 8888,
-        /**
          * @name                esbuild
          * @namespace           config.js.compile
          * @type                Object
@@ -204,4 +176,4 @@ exports.default = {
         esbuild: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBRXBELGtCQUFlO0lBQ2IsT0FBTyxFQUFFO1FBQ1A7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsb0NBQW9DO1FBRTNDOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsU0FBUyxFQUFFLDZCQUE2QjtRQUV4Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLDRCQUE0QjtRQUVyQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxJQUFJO1FBRVQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUUsS0FBSztRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxhQUFhLEVBQUUsSUFBSTtRQUVuQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUNKLHVHQUF1RztRQUV6Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLG1CQUFXLEVBQUU7UUFFbkI7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxFQUFFO0tBQ1o7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUEsa0JBQWU7SUFDYixPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEtBQUssRUFBRSxtQ0FBbUM7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSw0QkFBNEI7UUFFbkM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxNQUFNLEVBQUUsNkJBQTZCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsMEJBQTBCO1FBRW5DOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLFNBQVM7UUFFdkI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxJQUFJO1FBRVQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUUsS0FBSztRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsS0FBSztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQ0osdUdBQXVHO1FBRXpHOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsRUFBRTtLQUNaO0NBQ0YsQ0FBQyJ9

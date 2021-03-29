@@ -272,7 +272,20 @@ function getInterfaceObj(ctx: any, name: string): any {
     for (let i = 0; i < keys.length; i++) {
       const interfacesObj = ctx._interfacesStack[keys[i]];
       if (interfacesObj[name] !== undefined) {
-        interfaceObj = interfacesObj[name];
+        if (__isPlain(interfacesObj[name])) {
+          interfaceObj = interfacesObj[name];
+        } else {
+          interfaceObj = {
+            apply: true,
+            on:
+              name === 'settings'
+                ? '_settings'
+                : name === 'this'
+                ? ctx
+                : undefined,
+            class: interfacesObj[name]
+          };
+        }
         break;
       }
     }
@@ -306,14 +319,36 @@ function applyInterfaces(ctx: any) {
 
     Object.keys(interfacesObj).forEach((name) => {
       const interfaceObj = interfacesObj[name];
-      const settings: Partial<ISClassInterfaceObj> = Object.assign(
-        {},
-        {
-          apply: false,
-          on: name === 'this' ? ctx : undefined,
-          ...interfaceObj
-        }
-      );
+      let settings: Partial<ISClassInterfaceObj>;
+      if (__isPlain(interfaceObj)) {
+        settings = Object.assign(
+          {},
+          {
+            apply: true,
+            on:
+              name === 'settings'
+                ? '_settings'
+                : name === 'this'
+                ? ctx
+                : undefined,
+            ...interfaceObj
+          }
+        );
+      } else {
+        settings = Object.assign(
+          {},
+          {
+            apply: true,
+            on:
+              name === 'settings'
+                ? '_settings'
+                : name === 'this'
+                ? ctx
+                : undefined,
+            class: interfaceObj
+          }
+        );
+      }
 
       if (settings.apply !== true) return;
 
@@ -379,9 +414,6 @@ function applyInterface(ctx: any, name: string, on: any = null) {
       __deepAssign(ctx, res.value);
       return ctx;
     } else {
-      // if (typeof interfaceObj.on !== 'string') {
-      //   _console.trace('COCO', interfaceObj.on);
-      // }
       res = interfaceObj.class.apply(onValue, {
         id: applyId,
         complete: true,

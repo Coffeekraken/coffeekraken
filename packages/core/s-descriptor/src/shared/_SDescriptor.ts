@@ -40,6 +40,10 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+export interface ISDescriptorCtorSettings {
+  descriptor?: Partial<ISDescriptorSettings>;
+}
+
 export interface ISDescriptorSettings {
   type: string;
   arrayAsValue: boolean;
@@ -191,7 +195,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings?: Partial<ISDescriptorSettings>) {
+  constructor(settings?: ISDescriptorCtorSettings) {
     // save the settings
     super(
       __deepMerge(
@@ -206,7 +210,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
             verbose: false
           }
         },
-        settings || {}
+        settings ?? {}
       )
     );
   }

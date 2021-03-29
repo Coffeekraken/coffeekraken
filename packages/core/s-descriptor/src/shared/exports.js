@@ -17,17 +17,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./_SDescriptor", "./SDescriptorResult", "./SDescriptorResult", "./_SDescriptor"], factory);
+        define(["require", "exports", "./SDescriptor", "./SDescriptorResult", "./SDescriptorResult", "./SDescriptor"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.SDescriptorResult = void 0;
-    const _SDescriptor_1 = __importDefault(require("./_SDescriptor"));
+    const SDescriptor_1 = __importDefault(require("./SDescriptor"));
     const SDescriptorResult_1 = __importDefault(require("./SDescriptorResult"));
     exports.SDescriptorResult = SDescriptorResult_1.default;
     __exportStar(require("./SDescriptorResult"), exports);
-    __exportStar(require("./_SDescriptor"), exports);
-    exports.default = _SDescriptor_1.default;
+    __exportStar(require("./SDescriptor"), exports);
+    exports.default = SDescriptor_1.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLGtFQUF5QztJQUN6Qyw0RUFBb0Q7SUFDM0MsNEJBREYsMkJBQWlCLENBQ0U7SUFDMUIsc0RBQW9DO0lBQ3BDLGlEQUErQjtJQUMvQixrQkFBZSxzQkFBVyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLGdFQUF3QztJQUN4Qyw0RUFBb0Q7SUFDM0MsNEJBREYsMkJBQWlCLENBQ0U7SUFDMUIsc0RBQW9DO0lBQ3BDLGdEQUE4QjtJQUM5QixrQkFBZSxxQkFBVyxDQUFDIn0=

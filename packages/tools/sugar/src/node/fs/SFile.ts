@@ -212,7 +212,7 @@ class SFile extends __SEventEmitter implements ISFile {
   sourcesFiles: Record<string, SFile> = {};
 
   /**
-   * @name        instanciate
+   * @name        new
    * @type      Function
    * @static
    *
@@ -227,7 +227,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static instanciate(path: string, settings?: ISFileCtorSettings): SFile {
+  static new(path: string, settings?: ISFileCtorSettings): SFile {
     const ext = __extension(path).toLowerCase();
     if (this._registeredClasses[ext]) {
       return new this._registeredClasses[ext](path, settings);
@@ -430,7 +430,7 @@ class SFile extends __SEventEmitter implements ISFile {
         const replaceReg = new RegExp(`\.${this.extension}$`);
         const potentialPath = this.path.replace(replaceReg, `.${ext}`);
         if (__fs.existsSync(potentialPath)) {
-          this.sourcesFiles[ext] = SFile.instanciate(potentialPath);
+          this.sourcesFiles[ext] = SFile.new(potentialPath);
         }
       });
     }

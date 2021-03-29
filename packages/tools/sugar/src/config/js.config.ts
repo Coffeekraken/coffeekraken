@@ -6,7 +6,7 @@ export default {
      * @name              input
      * @namespace         config.js.compile
      * @type              String
-     * @default           [config.storage.srcDir]/js/** / *.js
+     * @default           [config.js.compile.inDir]/** / *.js
      *
      * Specify the root folder (or file) to check for .js files to build.
      * Glob patterns can be used
@@ -14,10 +14,23 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.storage.srcDir]/js/**/*.js',
+    input: '[config.js.compile.inDir]/**/*.js',
 
     /**
-     * @name              outputDir
+     * @name              inDir
+     * @namespace         config.js.compile
+     * @type              String
+     * @default           [config.storage.srcDir]/js
+     *
+     * Specify the destination folder from where to search for js files to compile
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    inDir: '[config.storage.srcDir]/js',
+
+    /**
+     * @name              outDir
      * @namespace         config.js.compile
      * @type              String
      * @default           [config.storage.distDir]/js
@@ -28,20 +41,20 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: '[config.storage.distDir]/js',
+    outDir: '[config.storage.distDir]/js',
 
     /**
      * @name            rootDir
      * @namespace       config.js.compile
      * @type            String
-     * @default         [config.storage.srcDir]/js
+     * @default         [config.storage.rootDir]
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.srcDir]/js',
+    rootDir: '[config.storage.rootDir]',
 
     /**
      * @name        format
@@ -71,6 +84,19 @@ export default {
     bundle: false,
 
     /**
+     * @name              bundleSuffix
+     * @namespace         config.js.compile
+     * @type              Boolean
+     * @default           .bundle
+     *
+     * Specify if you want as a file prefix when it has been bundled
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    bundleSuffix: '.bundle',
+
+    /**
      * @name              map
      * @namespace         config.js.compile
      * @type              Boolean
@@ -96,19 +122,6 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     prod: false,
-
-    /**
-     * @name              stripComments
-     * @namespace         config.js.compile
-     * @type              Boolean
-     * @default           true
-     *
-     * Specify if you want to stripComments the generated css or not
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    stripComments: true,
 
     /**
      * @name              minify
@@ -162,45 +175,6 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch: false,
-
-    /**
-     * @name          serve
-     * @namespace      config.js.compile
-     * @type        Boolean
-     * @default     false
-     *
-     * Specify if you want to start a server that serve the compiled files or not
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    serve: false,
-
-    /**
-     * @name          host
-     * @namespace      config.js.compile
-     * @type        String
-     * @default     ipAddress
-     *
-     * Specify the host you want in case of a local server
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    host: __ipAddress(),
-
-    /**
-     * @name          port
-     * @namespace      config.js.compile
-     * @type        Integer
-     * @default     8888
-     *
-     * Specify the port you want in case of a local server
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    port: 8888,
 
     /**
      * @name                esbuild

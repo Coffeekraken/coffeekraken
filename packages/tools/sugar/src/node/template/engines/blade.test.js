@@ -36,7 +36,7 @@ const STemplate_1 = __importDefault(require("../STemplate"));
     });
     // const template = new __STemplate(
     //   `
-    //   <h1>{{ $hello }}</h1>
+    //   <h1>{{ $hello }}</h1>
     //   <p>{{ $world }}</p>
     // `,
     //   {

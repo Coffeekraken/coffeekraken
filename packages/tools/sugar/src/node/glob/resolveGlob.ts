@@ -63,7 +63,7 @@ function resolveGlob(globs, settings = {}) {
 
     // make sure it's a glob pattern
     if (!__isGlob(glob) || __fs.existsSync(glob)) {
-      const sFile = __SFile.instanciate(glob, {
+      const sFile = __SFile.new(glob, {
         file: {
           cwd
         }
@@ -119,7 +119,7 @@ function resolveGlob(globs, settings = {}) {
     }
 
     pathes.forEach((path) => {
-      const sFile = __SFile.instanciate(path, {
+      const sFile = __SFile.new(path, {
         file: {
           cwd
         }

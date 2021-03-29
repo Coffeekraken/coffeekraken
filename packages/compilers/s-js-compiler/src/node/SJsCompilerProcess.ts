@@ -28,14 +28,7 @@ export type ISJsCompilerProcessSettings = ISProcessSettings;
 // @ts-ignore
 class SJsCompilerProcess extends SProcess {
   static interfaces = {
-    initialParams: {
-      apply: false,
-      class: SJsCompilerInterface
-    },
-    params: {
-      apply: false,
-      class: SJsCompilerInterface
-    }
+    params: SJsCompilerInterface
   };
 
   /**
@@ -82,10 +75,6 @@ class SJsCompilerProcess extends SProcess {
       __deepMerge(
         {
           jsCompileProcess: {}
-        },
-        {
-          id: 'SJsCompilerProcess',
-          name: 'Js Compiler Process'
         },
         settings
       )

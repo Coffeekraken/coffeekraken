@@ -8,6 +8,7 @@ import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
 import __SInterfaceResult, { ISInterfaceResult } from './SInterfaceResult';
 import __SClass from '@coffeekraken/s-class';
+import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 
 /**
  * @name            SInterface
@@ -252,7 +253,7 @@ class SInterface extends __SClass implements ISInterface {
    * description of what's wrong will be thrown. You can change that behavior if you prefer having
    * true returned when all is ok, or a string describing the current issue by specify the "settings.throw" property to false.
    *
-   * @param       {Any}                instance              The instance to apply the interface on
+   * @param       {Any}                objectOrString              The object on which to apply the interface on, or a cli string to use as input
    * @param       {ISInterfaceSettings}               [settings={}]         An object of settings to configure your apply process
    * - throw (false) {Boolean}: Specify if you want that an error is throwned if the test does not pass
    * - return (String) {String}: Specify in which return you want the result back. Can be "String" of "Object".
@@ -262,14 +263,14 @@ class SInterface extends __SClass implements ISInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static apply(
-    instance: any,
+    objectOrString: any,
     settings?: Partial<ISInterfaceSettings>
   ): ISInterfaceResult {
     // instanciate a new SInterface
     const int = new this({
       interface: settings ?? {}
     });
-    return int.apply(instance);
+    return int.apply(objectOrString);
   }
 
   /**
@@ -353,7 +354,7 @@ class SInterface extends __SClass implements ISInterface {
    * description of what's wrong will be thrown. You can change that behavior if you prefer having
    * true returned when all is ok, or a string describing the current issue by specify the "settings.throw" property to false.
    *
-   * @param       {Any}                instance              The instance to apply the interface on
+   * @param       {Any}                objectOrString              The object on which to apply the interface on, or a cli like string to use as input
    * @param       {ISInterfaceSettings}               [settings={}]         An object of settings to configure your apply process
    * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
    *
@@ -361,21 +362,47 @@ class SInterface extends __SClass implements ISInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   apply(
-    instance: any,
+    objectOrString: any,
     settings?: Partial<ISInterfaceSettings>
   ): ISInterfaceResult {
     const set = <ISInterfaceSettings>(
       __deepMerge(this.interfaceSettings, settings ?? {})
     );
 
+    let objectOnWhichToApplyInterface = objectOrString;
+
+    if (typeof objectOrString === 'string') {
+      objectOnWhichToApplyInterface = __parseArgs(objectOrString);
+      // remplacing aliases
+      Object.keys(objectOnWhichToApplyInterface).forEach((argName) => {
+        for (let i = 0; i < Object.keys(this._definition).length; i++) {
+          const defArgName = Object.keys(this._definition)[i];
+          const obj = this._definition[defArgName];
+          if (!obj.alias) continue;
+          if (
+            obj.alias === argName &&
+            objectOnWhichToApplyInterface[defArgName] === undefined
+          ) {
+            objectOnWhichToApplyInterface[defArgName] =
+              objectOnWhichToApplyInterface[argName];
+            delete objectOnWhichToApplyInterface[argName];
+          }
+        }
+      });
+    }
+
     const descriptor = new __SDescriptor({
-      type: 'Object',
-      rules: this._definition,
-      throw: false,
-      ...(set.descriptor || {})
+      descriptor: {
+        type: 'Object',
+        rules: this._definition,
+        throw: false,
+        ...(set.descriptor ?? {})
+      }
     });
 
-    const descriptorResult: ISDescriptorResult = descriptor.apply(instance);
+    const descriptorResult: ISDescriptorResult = descriptor.apply(
+      objectOnWhichToApplyInterface
+    );
 
     // instanciate a new interface result object
     const interfaceResult: ISInterfaceResult = new __SInterfaceResult({

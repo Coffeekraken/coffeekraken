@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/js/search/proxy.js"],
+  "sourcesContent": ["import __request from '@coffeekraken/sugar/js/http/request';\nimport __SWebComponent from '@coffeekraken/sugar/js/webcomponent/SWebComponent';\n\n__SWebComponent.on('s-filtrable-input.ready', ({ target, value }) => {\n  target.on('input', (value) => {\n    __request({\n      url: `/search/${value}`,\n      method: 'get'\n    }).then((response) => {\n      // set the items in the search dropdown\n      const items = response.data.map((item) => {\n        return {\n          title: item.title,\n          description: item.description\n        };\n      });\n\n      target.prop('items', items);\n\n      console.log(items);\n\n      // do something...\n    });\n  });\n});\n"],
+  "mappings": "AAAA;AACA;AAEA,gBAAgB,GAAG,2BAA2B,CAAC,CAAE,QAAQ,WAAY;AACnE,SAAO,GAAG,SAAS,CAAC,WAAU;AAC5B,cAAU;AAAA,MACR,KAAK,WAAW;AAAA,MAChB,QAAQ;AAAA,OACP,KAAK,CAAC,aAAa;AAEpB,YAAM,QAAQ,SAAS,KAAK,IAAI,CAAC,SAAS;AACxC,eAAO;AAAA,UACL,OAAO,KAAK;AAAA,UACZ,aAAa,KAAK;AAAA;AAAA;AAItB,aAAO,KAAK,SAAS;AAErB,cAAQ,IAAI;AAAA;AAAA;AAAA;",
+  "names": []
+}

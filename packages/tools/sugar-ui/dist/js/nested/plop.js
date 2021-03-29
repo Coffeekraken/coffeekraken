@@ -1,15 +1,26 @@
-(function (factory) {
+var __commonJS = (callback, module) => () => {
+  if (!module) {
+    module = {exports: {}};
+    callback(module.exports, module);
+  }
+  return module.exports;
+};
+var require_plop = __commonJS((exports, module) => {
+  (function(factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+      var v = factory(require, exports);
+      if (v !== void 0)
+        module.exports = v;
+    } else if (typeof define === "function" && define.amd) {
+      define(["require", "exports"], factory);
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
+  })(function(require2, exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    function coco() { }
-    exports.default = coco;
+    Object.defineProperty(exports2, "__esModule", {value: true});
+    function coco() {
+    }
+    exports2.default = coco;
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGxvcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9qcy9uZXN0ZWQvcGxvcC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztJQUFBLFNBQXdCLElBQUksS0FBSSxDQUFDO0lBQWpDLHVCQUFpQyJ9
+export default require_plop();
+//# sourceMappingURL=plop.js.map

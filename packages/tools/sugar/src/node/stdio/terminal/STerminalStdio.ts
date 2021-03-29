@@ -145,17 +145,19 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
    */
   _log(logObj, component) {
     // handle empty logs
-    if (!logObj || !logObj.value) return;
+    if (!logObj) return;
     // render the component
     let renderedStr = component.render(logObj, this._settings);
     // handle metas if needed
     if (this.terminalStdioSettings.metas && logObj.metas?.emitter) {
       const idStr = `<bg${__upperFirst(
         logObj.metas.emitter.metas.color || 'yellow'
-      )}><black> ${logObj.metas.emitter.metas.id} </black></bg${__upperFirst(
+      )}> </bg${__upperFirst(logObj.metas.emitter.metas.color || 'yellow')}><${
         logObj.metas.emitter.metas.color || 'yellow'
-      )}>`;
-      renderedStr = `${idStr} ${renderedStr}`;
+      }> ${logObj.metas.emitter.metas.id} │ </${
+        logObj.metas.emitter.metas.color || 'yellow'
+      }>`;
+      renderedStr = `${idStr}${renderedStr}`;
     }
     // log the string
     console.log(__parseHtml(renderedStr));

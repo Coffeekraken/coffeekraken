@@ -31,10 +31,6 @@ export type ISSvelteCompilerProcessSettings = ISProcessSettings;
 // @ts-ignore
 class SSvelteCompilerProcess extends SProcess {
   static interfaces = {
-    initialParams: {
-      apply: false,
-      class: __SSvelteCompilerParamsInterface
-    },
     params: {
       apply: false,
       class: __SSvelteCompilerParamsInterface
@@ -85,10 +81,6 @@ class SSvelteCompilerProcess extends SProcess {
       __deepMerge(
         {
           svelteCompileProcess: {}
-        },
-        {
-          id: 'SSvelteCompilerProcess',
-          name: 'Svelte Compiler Process'
         },
         settings
       )

@@ -1,4 +1,5 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
+// @ts-nocheck
 
 import __childProcess from 'child_process';
 import __glob from 'glob-all';
@@ -47,6 +48,12 @@ const globalNodeModulesPath = __childProcess
 // get local node modules directory path
 const localNodeModulesPath = `${__packageRoot()}/node_modules`;
 
+// get local node modules directory path
+const topLocalNodeModulesPath = `${__packageRoot(
+  process.cwd(),
+  true
+)}/node_modules`;
+
 // build globs
 const globs: string[] = [];
 
@@ -55,6 +62,12 @@ if (localNodeModulesPath) {
   globs.push(`${localNodeModulesPath}/*/sugar.json`);
   globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
   globs.push(`${__packageRoot()}/sugar.json`);
+}
+// top local
+if (localNodeModulesPath !== topLocalNodeModulesPath) {
+  globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
+  globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
+  globs.push(`${__packageRoot(process.cwd(), true)}/sugar.json`);
 }
 // then global
 if (globalNodeModulesPath) {
@@ -139,6 +152,7 @@ if (!availableCli[`${stack}.${action}`]) {
       currentPackage = cliObj.packageJson.name;
     }
     logArray.push(
+      // @ts-ignore
       `<yellow>│</yellow> - '<yellow>sugar</yellow> <cyan>${stackAction}</cyan> ...': ${cliObj.description}`
     );
   });
@@ -152,8 +166,9 @@ if (!availableCli[`${stack}.${action}`]) {
 }
 
 const cliObj = availableCli[`${stack}.${action}`];
+// @ts-ignore
 if (cliObj.process) {
-  console.log(cliObj, args);
+  // @ts-ignore
   cliObj.process(args);
 }
 

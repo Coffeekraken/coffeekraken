@@ -20,17 +20,38 @@ import __SInterface from '@coffeekraken/s-interface';
 class SJsCompilerInterface extends __SInterface {
   static definition = {
     input: {
-      type: 'String|Array<String>',
+      type: 'Array<String>',
+      path: {
+        absolute: true,
+        glob: 'resolve'
+      },
       default: __sugarConfig('js.compile.input'),
       alias: 'i'
     },
-    outputDir: {
+    inDir: {
       type: 'String',
-      default: __sugarConfig('js.compile.outputDir'),
+      path: {
+        absolute: true,
+        exists: true
+      },
+      default: __sugarConfig('js.compile.inDir'),
+      alias: 'o'
+    },
+    outDir: {
+      type: 'String',
+      path: {
+        absolute: true,
+        exists: true
+      },
+      default: __sugarConfig('js.compile.outDir'),
       alias: 'o'
     },
     rootDir: {
       type: 'String',
+      path: {
+        absolute: true,
+        exists: true
+      },
       alias: 'r',
       default: __sugarConfig('js.compile.rootDir')
     },
@@ -45,10 +66,16 @@ class SJsCompilerInterface extends __SInterface {
       alias: 'b',
       default: __sugarConfig('js.compile.bundle')
     },
+    bundleSuffix: {
+      type: 'String',
+      default: __sugarConfig('js.compile.bundleSuffix')
+    },
     map: {
-      type: 'Boolean',
+      type: 'Boolean|String',
       alias: 'm',
-      description: 'Generate a sourcemap file',
+      values: [true, false, 'inline'],
+      description:
+        'Generate the sourcemap. If "true", generate a .map file alongside the dist one, if "inline", set the sourcemap inline',
       default: __sugarConfig('js.compile.map') || true,
       level: 1
     },
@@ -56,10 +83,6 @@ class SJsCompilerInterface extends __SInterface {
       type: 'Boolean',
       alias: 'p',
       default: __sugarConfig('js.compile.prod')
-    },
-    stripComments: {
-      type: 'Boolean',
-      default: __sugarConfig('js.compile.stripComments')
     },
     minify: {
       type: 'Boolean',
@@ -79,18 +102,6 @@ class SJsCompilerInterface extends __SInterface {
       type: 'Boolean',
       alias: 'w',
       default: __sugarConfig('js.compile.watch')
-    },
-    serve: {
-      type: 'Boolean',
-      default: __sugarConfig('js.compile.serve')
-    },
-    host: {
-      type: 'String',
-      default: __sugarConfig('js.compile.host')
-    },
-    port: {
-      type: 'Integer',
-      default: __sugarConfig('js.compile.port')
     },
     esbuild: {
       type: 'Object',

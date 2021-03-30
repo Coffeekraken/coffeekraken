@@ -2,7 +2,6 @@ import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
-import __SFile from '@coffeekraken/sugar/node/fs/SFile';
 import __SCompiler, {
   ISCompiler
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
@@ -20,9 +19,11 @@ import __SJsCompilerInterface from './interface/SJsCompilerInterface';
 
 export interface ISJsCompilerParams {
   input: string | string[];
-  outputDir: string;
+  outDir: string;
+  inDir: string;
   rootDir: string;
   bundle: boolean;
+  bundleSuffix: string;
   format: 'iife' | 'cjs' | 'esm';
   map: boolean;
   prod: boolean;
@@ -196,47 +197,31 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           ? params.input
           : [params.input];
 
+        let isFirstCompilation = true,
+          lastCompiledFilePath;
+
         emit('log', {
           value: 'Starting <yellow>JS</yellow> file(s) compilation...'
         });
-
-        if (params.watch) {
-          emit('log', {
-            value: `<blue>[watch]</blue> Watching for changes...`
-          });
-        }
 
         // prod
         if (params.prod) {
           params.minify = true;
         }
 
-        // let updatedFilesPool;
-        // if (params.outDir) {
-        //   updatedFilesPool = __fsPool(`${params.outDir}/**/*.js`, {
-        //     watch: true
-        //   }).on('update', (files) => {
-        //     console.log('files', files);
-        //   });
-        // }
-
         const pool = __fsPool(input, {
           watch: false
         });
-
-        // handle cancel
         on('finally', () => {
-          // updatedFilesPool?.cancel();
           pool.cancel();
         });
 
         const updateTimestamps = {};
-
         const interceptPlugin = {
           name: 'interceptPlugin',
           setup(build) {
             // Load ".txt" files and return an array of words
-            build.onLoad({ filter: /\.js$/ }, async (args) => {
+            build.onLoad({ filter: /\.(j|t)s$/ }, async (args) => {
               const mtime = __fs.statSync(args.path).mtimeMs;
               const text = __fs.readFileSync(args.path, 'utf8');
 
@@ -244,8 +229,12 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
                 !updateTimestamps[args.path] ||
                 updateTimestamps[args.path] !== mtime
               ) {
+                lastCompiledFilePath = args.path;
+
                 emit('log', {
-                  value: `<yellow>[update]</yellow> File "<cyan>${__path.relative(
+                  value: `<yellow>[${
+                    isFirstCompilation ? 'compile' : 'update'
+                  }]</yellow> File "<cyan>${__path.relative(
                     params.rootDir,
                     args.path
                   )}</cyan>"`
@@ -254,8 +243,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
               updateTimestamps[args.path] = mtime;
 
               return {
-                contents: text,
-                loader: 'js'
+                contents: text
               };
             });
           }
@@ -265,9 +253,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           const duration = new __SDuration();
 
           files = Array.isArray(files) ? files : [files];
-
-          // for (let i = 0; i < files.length; i++) {
-          // const file = files[i];
 
           const color =
             this._filesColor[
@@ -289,28 +274,24 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             }]</${color}> Starting compilation`
           });
 
-          // let outFile;
-          // if (params.save && params.outDir) {
-          //   const relSrcPath = __path.relative(params.inDir, file.path);
-          //   const outFilePath = __path.resolve(params.outDir, relSrcPath);
-          //   outFile = outFilePath;
-          // }
-
           const esbuildParams: any = {
             charset: 'utf8',
             format: params.format,
-            logLevel: 'silent',
+            logLevel: 'error',
             outdir: params.outDir,
             outbase: params.inDir,
             banner: params.banner,
-            // incremental: true,
-            ...__filter(params, (key, value) => {
-              if (Array.isArray(value) && !value.length) return false;
-              return SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
-            }),
+            incremental: true,
+            // ...__filter(params, (key, value) => {
+            //   if (Array.isArray(value) && !value.length) return false;
+            //   return SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
+            // }),
             entryPoints: files.map((f) => f.path),
             bundle: params.bundle,
             write: true,
+            errorLimit: 100,
+            minify: params.minify,
+            sourcemap: params.map,
             watch: params.watch
               ? {
                   onRebuild(error, result) {
@@ -321,48 +302,29 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
                       return;
                     }
 
-                    // if (resultObj.outputFiles) {
-                    //   resultObj.outputFiles.forEach((fileObj) => {
-                    //     let filePath = fileObj.path;
-                    //     let content = fileObj.text;
-                    //     if (params.bundle && params.bundleSuffix) {
-                    //       if (filePath.match(/\.js\.map$/)) {
-                    //         filePath = filePath.replace(
-                    //           /\.js\.map$/,
-                    //           `${params.bundleSuffix}.js.map`
-                    //         );
-                    //       } else {
-                    //         filePath = filePath.replace(
-                    //           /\.js$/,
-                    //           `${params.bundleSuffix}.js`
-                    //         );
-                    //       }
-                    //       content = content.replace(
-                    //         `//# sourceMappingURL=${__getFilename(
-                    //           fileObj.path
-                    //         )}`,
-                    //         `//# sourceMappingURL=${__getFilename(filePath)}`
-                    //       );
-                    //     }
-                    //     console.log('WRINTING', filePath, content);
-                    //     __fs.writeFileSync(filePath, content);
-                    //     const file = __SFile.new(filePath);
-                    //     emit('log', {
-                    //       type: 'file',
-                    //       file,
-                    //       action: 'save'
-                    //     });
-                    //   });
-                    // }
+                    isFirstCompilation = false;
+
+                    let logValue = `<green>[success]</green> <${color}>${
+                      files.length === 1
+                        ? __getFilename(files[0].path)
+                        : files.length + ' files'
+                    }</${color}> compiled`;
+                    if (!isFirstCompilation && lastCompiledFilePath) {
+                      logValue = `<green>[success]</green> File "<cyan>${__path.relative(
+                        params.rootDir,
+                        lastCompiledFilePath
+                      )}</cyan>" compiled`;
+                    }
+
+                    emit('log', {
+                      value: logValue
+                    });
                     emit('log', {
                       value: `<blue>[watch]</blue> Watching for changes...`
                     });
                   }
                 }
               : false,
-            errorLimit: 100,
-            minify: params.minify,
-            sourcemap: params.map,
             plugins: [
               interceptPlugin
               // __esbuildAggregateLibsPlugin({
@@ -377,8 +339,16 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           try {
             resultObj = await __esbuild.build(esbuildParams);
           } catch (e) {
-            // return reject(e);
+            return reject(e);
           }
+
+          emit('log', {
+            value: `<green>[success]</green> <${color}>${
+              files.length === 1
+                ? __getFilename(files[0].path)
+                : files.length + ' files'
+            }</${color}> compiled`
+          });
 
           // if (resultObj.outputFiles) {
           //   resultObj.outputFiles.forEach((fileObj) => {

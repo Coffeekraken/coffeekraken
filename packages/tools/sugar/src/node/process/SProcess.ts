@@ -416,33 +416,32 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     if (processSettings.runAsChild && !__isChildProcess()) {
       // build the command to run depending on the passed command in the constructor and the params
-      const commandToRun = __buildCommandLine(
-        `node --enable-source-maps ${__path.resolve(
-          __dirname,
-          '../../cli/sugar.cli.js'
-        )} process.runChild [arguments]`,
-        {
-          ...paramsObj,
-          processPath: this._processPath
-        },
-        {
-          definition: {
-            ...(this.paramsInterface !== undefined
-              ? this.paramsInterface.definition
-              : {}),
-            processPath: {
-              type: 'String',
-              required: true
-            }
-          },
-          alias: false
-        }
-      );
-
-      // run child process
-      this._processPromise = __spawn(commandToRun, [], {
-        ...(processSettings.spawnSettings || {})
-      });
+      // const commandToRun = __buildCommandLine(
+      //   `node --enable-source-maps ${__path.resolve(
+      //     __dirname,
+      //     '../../cli/sugar.cli.js'
+      //   )} process.runChild [arguments]`,
+      //   {
+      //     ...paramsObj,
+      //     processPath: this._processPath
+      //   },
+      //   {
+      //     definition: {
+      //       ...(this.paramsInterface !== undefined
+      //         ? this.paramsInterface.definition
+      //         : {}),
+      //       processPath: {
+      //         type: 'String',
+      //         required: true
+      //       }
+      //     },
+      //     alias: false
+      //   }
+      // );
+      // // run child process
+      // this._processPromise = __spawn(commandToRun, [], {
+      //   ...(processSettings.spawnSettings || {})
+      // });
     } else {
       // run the actual process using the "process" method
       this._processPromise = (<any>this).process(this._params, settings);

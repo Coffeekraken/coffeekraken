@@ -234,11 +234,11 @@ class SJsFile extends __SFile implements ISJsFile {
         }
 
         let savePath;
-        if (params.outputDir === undefined) {
+        if (params.outDir === undefined) {
           savePath = this.path.replace(/\.js$/, '.compiled.js');
         } else {
           savePath = __path.resolve(
-            params.outputDir,
+            params.outDir,
             this.path.replace(`${params.rootDir}/`, '')
           );
         }
@@ -259,7 +259,7 @@ class SJsFile extends __SFile implements ISJsFile {
           sourcemap: params.map,
           plugins: [
             __esbuildAggregateLibsPlugin({
-              outputDir: params.outputDir,
+              outputDir: params.outDir,
               rootDir: params.rootDir
             })
           ],

@@ -1,6 +1,6 @@
 export default {
   /**
-   * @name               tsconfigTemplatesDir
+   * @name               tsconfigStacksDir
    * @namespace         config.ts
    * @type              String
    * @default           [config.storage.sugarDir]/src/templates/tsconfig
@@ -10,14 +10,31 @@ export default {
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  tsconfigTemplatesDir: '[config.storage.sugarDir]/src/templates/tsconfig',
+  tsconfigStacksDir: '[config.storage.sugarDir]/src/templates/tsconfig',
+
+  /**
+   * @name                stacks
+   * @namespace         config.ts
+   * @type              Object<String>
+   * @default           { js: '[config.ts.tsconfigStacksDir]/tsconfig.js.js', node: '[config.ts.tsconfigStacksDir]/tsconfig.node.js', shared: '[config.ts.tsconfigStacksDir]/tsconfig.shared.js' }
+   *
+   * List all the stacks available. A stack is just a path to a valid tsconfig.json file
+   *
+   * @since       2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  stacks: {
+    js: '[config.ts.tsconfigStacksDir]/tsconfig.js.js',
+    node: '[config.ts.tsconfigStacksDir]/tsconfig.node.js',
+    shared: '[config.ts.tsconfigStacksDir]/tsconfig.shared.js'
+  },
 
   compile: {
     /**
      * @name              input
      * @namespace         config.ts.compile
      * @type              String
-     * @default           ['[config.ts.tsconfigTemplatesDir]/tsconfig.js.js','[config.ts.tsconfigTemplatesDir]/tsconfig.node.js','[config.ts.tsconfigTemplatesDir]/tsconfig.shared.js']
+     * @default           ['[config.ts.tsconfigStacksDir]/tsconfig.js.js','[config.ts.tsconfigStacksDir]/tsconfig.node.js','[config.ts.tsconfigStacksDir]/tsconfig.shared.js']
      *
      * Specify the root folder (or file) to check for .scss|sass files to build.
      * Glob patterns can be used
@@ -26,9 +43,9 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     input: [
-      '[config.ts.tsconfigTemplatesDir]/tsconfig.js.js',
-      '[config.ts.tsconfigTemplatesDir]/tsconfig.node.js',
-      '[config.ts.tsconfigTemplatesDir]/tsconfig.shared.js'
+      '[config.ts.stacks.js]',
+      '[config.ts.stacks.node]',
+      '[config.ts.stacks.shared]'
     ],
 
     /**

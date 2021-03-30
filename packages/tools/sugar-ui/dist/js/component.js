@@ -1,3 +1,4 @@
+/* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
 import {
   SvelteElement,
   add_location,

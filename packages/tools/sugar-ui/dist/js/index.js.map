@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["../../src/js/prettier.js", "../../src/js/coco.js", "../../src/js/index.ts"],
-  "sourcesContent": ["console.log('fffffffdddddfdddff');\n", "console.log('^wewef');\n", null],
-  "mappings": ";;AAAA,QAAQ,IAAI;;;ACAZ,QAAQ,IAAI;;;;ACIZ,QAAA,IAAA;",
+  "sources": ["../../src/js/index.ts"],
+  "sourcesContent": ["// import SInterface from '@coffeekraken/sugar/shared/interface/SInterface';\n\nconsole.log('f');\n// console.log(SInterface);\n// console.log(SInterface);\n"],
+  "mappings": ";AAEA,QAAQ,IAAI;",
   "names": []
 }

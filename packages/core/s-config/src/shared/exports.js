@@ -19,4 +19,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     // export * from './SConfig';
     exports.default = SConfig_1.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7O0lBQUEsd0RBQWtDO0lBQ2xDLCtFQUF5RDtJQUM1Qix5QkFEdEIsd0JBQWdCLENBQ29CO0lBQzNDLDZCQUE2QjtJQUM3QixrQkFBZSxpQkFBUyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7O0lBQUEsd0RBQWtDO0lBQ2xDLCtFQUF5RDtJQUM1Qix5QkFEdEIsd0JBQWdCLENBQ29CO0lBRTNDLDZCQUE2QjtJQUM3QixrQkFBZSxpQkFBUyxDQUFDIn0=

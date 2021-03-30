@@ -8,7 +8,7 @@ import __getFilename from '../fs/filename';
 import __SFile, { ISFile } from '../fs/SFile';
 import __SInterface from '@coffeekraken/s-interface';
 import __SScssFile from '../scss/SScssFile';
-import __STsFile from '../typescript/STsFile';
+import __STsFile from '../ts/STsFile';
 import {
   interface as __SSvelteCompilerParamsInterface,
   ISSvelteCompilerParams

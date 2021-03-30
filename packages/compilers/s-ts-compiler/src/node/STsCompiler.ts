@@ -178,13 +178,13 @@ class STsCompiler extends __SCompiler {
             } else if (
               __fs.existsSync(
                 `${__sugarConfig(
-                  'ts.tsconfigTemplatesDir'
+                  'ts.tsconfigStacksDir'
                 )}/tsconfig.${stackName}.js`
               )
             ) {
               input.push(
                 `${__sugarConfig(
-                  'ts.tsconfigTemplatesDir'
+                  'ts.tsconfigStacksDir'
                 )}/tsconfig.${stackName}.js`
               );
             } else {
@@ -207,14 +207,14 @@ class STsCompiler extends __SCompiler {
             configPath = `${__rootDir()}/tsconfig.${params.config}.js`;
           } else if (
             __fs.existsSync(
-              `${__sugarConfig('ts.tsconfigTemplatesDir')}/tsconfig.${
+              `${__sugarConfig('ts.tsconfigStacksDir')}/tsconfig.${
                 params.config
               }.js`
             )
           ) {
-            configPath = `${__sugarConfig(
-              'ts.tsconfigTemplatesDir'
-            )}/tsconfig.${params.config}.js`;
+            configPath = `${__sugarConfig('ts.tsconfigStacksDir')}/tsconfig.${
+              params.config
+            }.js`;
           }
           if (!configPath) {
             throw new Error(

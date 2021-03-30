@@ -14,7 +14,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.js.compile.inDir]/**/*.js',
+    input: '[config.js.compile.inDir]/**/*.{js,ts}',
 
     /**
      * @name              inDir
@@ -95,6 +95,20 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     bundleSuffix: '.bundle',
+
+    // /**
+    //  * @name          tsconfig
+    //  * @namespace     config.js.compile
+    //  * @type          String
+    //  * @default       shared
+    //  *
+    //  * Specify which tsconfig file you want to use when compiling ts files.
+    //  * Can be either a path to a valid tsconfig file, or a ts stack name like "node", "js" or "shared".
+    //  *
+    //  * @since       2.0.0
+    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // tsconfig: 'shared',
 
     /**
      * @name              map

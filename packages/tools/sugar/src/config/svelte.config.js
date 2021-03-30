@@ -129,7 +129,7 @@ exports.default = {
          * @name             tsconfig
          * @namespace       config.svelte.compile
          * @type            Object | String
-         * @default         [config.ts.tsconfigTemplatesDir]/tsconfig.svelte.js
+         * @default         [config.ts.tsconfigStacksDir]/tsconfig.svelte.js
          *
          * Specify a tsconfig file to use for compiler options, targets, etc...
          * The settings like outDir will not be used cause the result will be put directly inside
@@ -138,7 +138,7 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        tsconfig: '[config.ts.tsconfigTemplatesDir]/tsconfig.svelte.js',
+        tsconfig: '[config.ts.tsconfigStacksDir]/tsconfig.svelte.js',
         /**
          * @name                svelte
          * @namespace           config.svelte.compile
@@ -153,4 +153,4 @@ exports.default = {
         svelte: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFLDJDQUEyQztRQUVsRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLDRCQUE0QjtRQUVuQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsMEJBQTBCO1FBRW5DOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUNKLDBHQUEwRztRQUU1Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxRQUFRLEVBQUUscURBQXFEO1FBRS9EOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsRUFBRTtLQUNYO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFLDJDQUEyQztRQUVsRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLDRCQUE0QjtRQUVuQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsMEJBQTBCO1FBRW5DOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUNKLDBHQUEwRztRQUU1Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxRQUFRLEVBQUUsa0RBQWtEO1FBRTVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsRUFBRTtLQUNYO0NBQ0YsQ0FBQyJ9

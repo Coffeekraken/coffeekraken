@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["../../../src/js/search/index.js"],
   "sourcesContent": ["import __SSugarUi from './webcomponents/SSugarUiWebComponent';\n__SSugarUi.define();\n"],
-  "mappings": "AAAA;AACA,WAAW;",
+  "mappings": ";AAAA;AACA,WAAW;",
   "names": []
 }

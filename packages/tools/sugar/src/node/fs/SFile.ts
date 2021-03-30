@@ -10,6 +10,9 @@ import __ensureDirSync from './ensureDirSync';
 import __extension from './extension';
 import __getFilename from './filename';
 import __folderPath from './folderPath';
+import __uniqid from '../../shared/string/uniqid';
+import __onProcessExit from '../process/onProcessExit';
+import __minimatch from 'minimatch';
 
 /**
  * @name            SFile
@@ -67,6 +70,7 @@ export interface ISFileSettings {
   watch: boolean | Partial<ISFileWatchSettings>;
   writeSettings: ISFileWriteSettings;
   readSettings: ISFileReadSettings;
+  processors: Record<string, Function[]>;
 }
 
 export interface ISFileReadSettings {
@@ -119,6 +123,11 @@ export interface ISFileReadFn {
 
 export interface ISFileReadSyncFn {
   (settings?: ISFileReadSettings): string;
+}
+
+export interface ISFileCommit {
+  time: number;
+  data: any;
 }
 
 export interface ISFileWriteFn {
@@ -180,23 +189,23 @@ class SFile extends __SEventEmitter implements ISFile {
    * @static
    *
    * This method allows you to register an SFile(...) class with an extension
-   * to allows you to instanciate the best one using the ```instanciate``` static
+   * to allows you to instanciate the best one using the ```new``` static
    * method.
    *
-   * @param     {String|Array<String>}      extension     Extension(s) to register. Can be a string, a comma separated string or an array of strings
+   * @param     {String|Array<String>}      pattern     Pattern(s) to register. Can be a string, a comma separated string or an array of strings
    * @param     {SFile}                     cls           The class to associate to this/these extension(s)
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static registerClass(extension: string | string[], cls: any) {
-    let exts: string[] = [];
-    if (Array.isArray(extension)) exts = extension;
-    else if (typeof extension === 'string') {
-      exts = extension.split(',').map((l) => l.trim());
+  static registerClass(pattern: string | string[], cls: any) {
+    let patternsArray: string[] = [];
+    if (Array.isArray(pattern)) patternsArray = pattern;
+    else if (typeof pattern === 'string') {
+      patternsArray = pattern.split(',').map((l) => l.trim());
     }
-    exts.forEach((ext) => {
-      this._registeredClasses[ext.toLowerCase()] = cls;
+    patternsArray.forEach((pat) => {
+      this._registeredClasses[pat.toLowerCase()] = cls;
     });
   }
 
@@ -228,9 +237,13 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static new(path: string, settings?: ISFileCtorSettings): SFile {
-    const ext = __extension(path).toLowerCase();
-    if (this._registeredClasses[ext]) {
-      return new this._registeredClasses[ext](path, settings);
+    const fileName = __getFilename(path);
+    for (let i = 0; i < Object.keys(this._registeredClasses).length; i++) {
+      const pattern = Object.keys(this._registeredClasses)[i],
+        cls = this._registeredClasses[pattern];
+      if (__minimatch(fileName, pattern)) {
+        return new cls(path, settings);
+      }
     }
     return new SFile(path, settings);
   }
@@ -247,6 +260,20 @@ class SFile extends __SEventEmitter implements ISFile {
   _name: string;
   public get name(): string {
     return this._name;
+  }
+
+  /**
+   * @name        nameWithoutExt
+   * @type        String
+   *
+   * Store the file name without the extension
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _nameWithoutExt: string;
+  public get nameWithoutExt(): string {
+    return this._nameWithoutExt;
   }
 
   /**
@@ -390,6 +417,10 @@ class SFile extends __SEventEmitter implements ISFile {
               encoding: 'utf8',
               flag: undefined,
               cast: true
+            },
+            processors: {
+              content: [],
+              save: []
             }
           }
         },
@@ -413,6 +444,7 @@ class SFile extends __SEventEmitter implements ISFile {
     this.cwd = this.fileSettings.cwd;
     this._name = __getFilename(filepath);
     this.extension = __extension(this.path).toLowerCase();
+    this._nameWithoutExt = this.name.replace(`.${this.extension}`, '');
 
     // check if need to check for the file existence or not...
     if (this.fileSettings.checkExistence && !this.exists) {
@@ -481,10 +513,34 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _content?: string;
-  get content() {
+  get content(): any {
     if (this._content) return this._content;
     this._content = this.readSync();
+    for (let i = 0; i < this.fileSettings.processors.content.length; i++) {
+      this._content = this.fileSettings.processors.content[i](this._content);
+    }
     return this._content;
+  }
+  set content(value) {
+    this._commits.push({
+      time: Date.now(),
+      data: value
+    });
+    this._content = value;
+  }
+
+  /**
+   * @name        commits
+   * @type        Array<String>
+   *
+   * Store all the commits made before saving the file
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _commits: ISFileCommit[] = [];
+  get commits(): ISFileCommit[] {
+    return this._commits;
   }
 
   /**
@@ -622,6 +678,145 @@ class SFile extends __SEventEmitter implements ISFile {
   }
 
   /**
+   * @name      duplicate
+   * @type      Function
+   * @async
+   *
+   * This method allows you to make a copy of this file.
+   * If you don't specify a "to" path, the file will be diplicated
+   * into the temp directory
+   *
+   * @param     {String}      [to=undefined]      The path where you want to duplicate this file including the file name
+   * @return    {Promise}                      A promise that will be resolved once the file is fully duplicated and gives you access to a new SFile instance
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  duplicate(to?): Promise<SFile> {
+    return new Promise((resolve) => {
+      const newFile = this.duplicateSync(to);
+      resolve(newFile);
+    });
+  }
+
+  /**
+   * @name      duplicateSync
+   * @type      Function
+   *
+   * This method allows you to make a copy of this file.
+   * If you don't specify a "to" path, the file will be diplicated
+   * into the temp directory
+   *
+   * @param     {String}      [to=undefined]      The path where you want to duplicate this file including the file name
+   * @return    {SFile}                      A new SFile instance that represent your new file
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  duplicateSync(to?): SFile {
+    let destination = to;
+    if (!to) {
+      destination = __replacePathTokens(
+        `%tmpDir/files/${this.constructor.name}/${
+          this.nameWithoutExt
+        }.${__uniqid()}.${this.extension}`
+      );
+      __onProcessExit(() => {
+        try {
+          __fs.unlinkSync(destination);
+        } catch (e) {}
+      });
+    }
+    destination = __path.resolve(destination);
+
+    // make sure the destination does not exists already
+    if (__fs.existsSync(destination)) {
+      throw new Error(
+        `<red>[sugar.node.fs.SFile.duplicate]</red> Sorry but a file already exists at "<cyan>${destination}</cyan>"`
+      );
+    }
+
+    // ensure destination directory exists
+    __ensureDirSync(__folderPath(destination));
+
+    // copy the file
+    __fs.copyFileSync(this.path, destination);
+
+    // create a new instance for this new file
+    // @ts-ignore
+    const newFileInstance = new this.constructor(destination, this._settings);
+
+    // return this new instance
+    return newFileInstance;
+  }
+
+  /**
+   * @name       save
+   * @type      Function
+   * @async
+   *
+   * This method allows you to save the file with the content
+   * that you can set by setting the ```content``` property
+   *
+   * @return    {Promise}        A promise resolved once the file has been save
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  save(): Promise<SFile> {
+    return new Promise((resolve, reject) => {
+      const res = this.saveSync();
+      resolve(res);
+    });
+  }
+
+  /**
+   * @name       saveSync
+   * @type      Function
+   *
+   * This method allows you to save the file with the content
+   * that you can set by setting the ```content``` property
+   *
+   * @return    {Promise}        A promise resolved once the file has been save
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  saveSync(): SFile {
+    // check if some commits are waiting to be saved
+    if (!this.commits.length) return this;
+    // save the last commit
+    let toSave = this.content;
+    if (this.fileSettings.processors.save.length) {
+      for (let i = 0; i < this.fileSettings.processors.save.length; i++) {
+        toSave = this.fileSettings.processors.save[i](toSave);
+      }
+    }
+
+    if (typeof toSave !== 'string') {
+      try {
+        const res = JSON.stringify(toSave, null, 4);
+        toSave = res;
+      } catch (e) {
+        if (
+          typeof toSave !== 'string' &&
+          toSave.toString &&
+          typeof toSave.toString === 'function'
+        ) {
+          toSave = toSave.toString();
+        }
+      }
+    }
+
+    __fs.writeFileSync(this.path, toSave);
+    // reset content and commits
+    this._commits = [];
+    this._content = undefined;
+    // return instance
+    return this;
+  }
+
+  /**
    * @name      unlink
    * @type      Function
    * @async
@@ -723,11 +918,17 @@ class SFile extends __SEventEmitter implements ISFile {
       ...this.fileSettings.readSettings,
       ...settings
     };
-    const content: any = __fs.readFileSync(this.path, {
-      encoding: set.encoding,
-      flag: set.flag
-    });
-    if (this.extension === 'json' && set.cast) {
+    let content: any;
+    if ((this.extension === 'js' || this.extension === 'json') && set.cast) {
+      content = require(this.path);
+      return content;
+    } else {
+      content = __fs.readFileSync(this.path, {
+        encoding: set.encoding,
+        flag: set.flag
+      });
+    }
+    if (set.cast) {
       return JSON.parse(content.toString());
     }
     return content.toString();

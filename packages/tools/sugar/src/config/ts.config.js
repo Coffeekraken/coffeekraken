@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     /**
-     * @name               tsconfigTemplatesDir
+     * @name               tsconfigStacksDir
      * @namespace         config.ts
      * @type              String
      * @default           [config.storage.sugarDir]/src/templates/tsconfig
@@ -12,13 +12,29 @@ exports.default = {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    tsconfigTemplatesDir: '[config.storage.sugarDir]/src/templates/tsconfig',
+    tsconfigStacksDir: '[config.storage.sugarDir]/src/templates/tsconfig',
+    /**
+     * @name                stacks
+     * @namespace         config.ts
+     * @type              Object<String>
+     * @default           { js: '[config.ts.tsconfigStacksDir]/tsconfig.js.js', node: '[config.ts.tsconfigStacksDir]/tsconfig.node.js', shared: '[config.ts.tsconfigStacksDir]/tsconfig.shared.js' }
+     *
+     * List all the stacks available. A stack is just a path to a valid tsconfig.json file
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    stacks: {
+        js: '[config.ts.tsconfigStacksDir]/tsconfig.js.js',
+        node: '[config.ts.tsconfigStacksDir]/tsconfig.node.js',
+        shared: '[config.ts.tsconfigStacksDir]/tsconfig.shared.js'
+    },
     compile: {
         /**
          * @name              input
          * @namespace         config.ts.compile
          * @type              String
-         * @default           ['[config.ts.tsconfigTemplatesDir]/tsconfig.js.js','[config.ts.tsconfigTemplatesDir]/tsconfig.node.js','[config.ts.tsconfigTemplatesDir]/tsconfig.shared.js']
+         * @default           ['[config.ts.tsconfigStacksDir]/tsconfig.js.js','[config.ts.tsconfigStacksDir]/tsconfig.node.js','[config.ts.tsconfigStacksDir]/tsconfig.shared.js']
          *
          * Specify the root folder (or file) to check for .scss|sass files to build.
          * Glob patterns can be used
@@ -27,9 +43,9 @@ exports.default = {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         input: [
-            '[config.ts.tsconfigTemplatesDir]/tsconfig.js.js',
-            '[config.ts.tsconfigTemplatesDir]/tsconfig.node.js',
-            '[config.ts.tsconfigTemplatesDir]/tsconfig.shared.js'
+            '[config.ts.stacks.js]',
+            '[config.ts.stacks.node]',
+            '[config.ts.stacks.shared]'
         ],
         /**
          * @name              outDir
@@ -166,4 +182,4 @@ exports.default = {
         compilerOptions: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYjs7Ozs7Ozs7OztPQVVHO0lBQ0gsb0JBQW9CLEVBQUUsa0RBQWtEO0lBRXhFLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFO1lBQ0wsaURBQWlEO1lBQ2pELG1EQUFtRDtZQUNuRCxxREFBcUQ7U0FDdEQ7UUFFRDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRTtRQUV0Qjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxHQUFHLEVBQUUsUUFBUTtRQUViOzs7Ozs7Ozs7Ozs7Ozs7Ozs7V0FrQkc7UUFDSCxLQUFLLEVBQUUsU0FBUztRQUVoQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1dBcUJHO1FBQ0gsTUFBTSxFQUFFLFFBQVE7UUFFaEI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILE1BQU0sRUFDSiwwR0FBMEc7UUFFNUc7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7V0FVRztRQUNILGVBQWUsRUFBRSxFQUFFO0tBQ3BCO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYjs7Ozs7Ozs7OztPQVVHO0lBQ0gsaUJBQWlCLEVBQUUsa0RBQWtEO0lBRXJFOzs7Ozs7Ozs7O09BVUc7SUFDSCxNQUFNLEVBQUU7UUFDTixFQUFFLEVBQUUsOENBQThDO1FBQ2xELElBQUksRUFBRSxnREFBZ0Q7UUFDdEQsTUFBTSxFQUFFLGtEQUFrRDtLQUMzRDtJQUVELE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFO1lBQ0wsdUJBQXVCO1lBQ3ZCLHlCQUF5QjtZQUN6QiwyQkFBMkI7U0FDNUI7UUFFRDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRTtRQUV0Qjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxHQUFHLEVBQUUsUUFBUTtRQUViOzs7Ozs7Ozs7Ozs7Ozs7Ozs7V0FrQkc7UUFDSCxLQUFLLEVBQUUsU0FBUztRQUVoQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1dBcUJHO1FBQ0gsTUFBTSxFQUFFLFFBQVE7UUFFaEI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILE1BQU0sRUFDSiwwR0FBMEc7UUFFNUc7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7V0FVRztRQUNILGVBQWUsRUFBRSxFQUFFO0tBQ3BCO0NBQ0YsQ0FBQyJ9

@@ -18,8 +18,8 @@ export default () => {
     key
       .split(',')
       .map((l) => l.trim())
-      .forEach((ext) => {
-        __SFile.registerClass(ext, cls);
+      .forEach((pattern) => {
+        __SFile.registerClass(pattern, cls);
       });
   });
 };

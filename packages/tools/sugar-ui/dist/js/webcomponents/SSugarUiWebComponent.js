@@ -1,3 +1,4 @@
+/* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
 import __deepMerge from "@coffeekraken/sugar/js/object/deepMerge";
 import __SRequest from "@coffeekraken/sugar/js/http/SRequest";
 import __hotkey from "@coffeekraken/sugar/js/keyboard/hotkey";

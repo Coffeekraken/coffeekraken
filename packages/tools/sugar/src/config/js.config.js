@@ -14,7 +14,7 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        input: '[config.js.compile.inDir]/**/*.js',
+        input: '[config.js.compile.inDir]/**/*.{js,ts}',
         /**
          * @name              inDir
          * @namespace         config.js.compile
@@ -89,6 +89,19 @@ exports.default = {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         bundleSuffix: '.bundle',
+        // /**
+        //  * @name          tsconfig
+        //  * @namespace     config.js.compile
+        //  * @type          String
+        //  * @default       shared
+        //  *
+        //  * Specify which tsconfig file you want to use when compiling ts files.
+        //  * Can be either a path to a valid tsconfig file, or a ts stack name like "node", "js" or "shared".
+        //  *
+        //  * @since       2.0.0
+        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //  */
+        // tsconfig: 'shared',
         /**
          * @name              map
          * @namespace         config.js.compile
@@ -176,4 +189,4 @@ exports.default = {
         esbuild: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUEsa0JBQWU7SUFDYixPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEtBQUssRUFBRSxtQ0FBbUM7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSw0QkFBNEI7UUFFbkM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxNQUFNLEVBQUUsNkJBQTZCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsMEJBQTBCO1FBRW5DOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLFNBQVM7UUFFdkI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxJQUFJO1FBRVQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUUsS0FBSztRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsS0FBSztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQ0osdUdBQXVHO1FBRXpHOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsRUFBRTtLQUNaO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUEsa0JBQWU7SUFDYixPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEtBQUssRUFBRSx3Q0FBd0M7UUFFL0M7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSw0QkFBNEI7UUFFbkM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxNQUFNLEVBQUUsNkJBQTZCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsMEJBQTBCO1FBRW5DOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLFNBQVM7UUFFdkIsTUFBTTtRQUNOLDZCQUE2QjtRQUM3QixzQ0FBc0M7UUFDdEMsMkJBQTJCO1FBQzNCLDJCQUEyQjtRQUMzQixLQUFLO1FBQ0wsMEVBQTBFO1FBQzFFLHNHQUFzRztRQUN0RyxLQUFLO1FBQ0wsd0JBQXdCO1FBQ3hCLG9HQUFvRztRQUNwRyxNQUFNO1FBQ04sc0JBQXNCO1FBRXRCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUNKLHVHQUF1RztRQUV6Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLEVBQUU7S0FDWjtDQUNGLENBQUMifQ==

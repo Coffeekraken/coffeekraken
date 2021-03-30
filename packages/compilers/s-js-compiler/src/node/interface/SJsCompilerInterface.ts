@@ -70,6 +70,13 @@ class SJsCompilerInterface extends __SInterface {
       type: 'String',
       default: __sugarConfig('js.compile.bundleSuffix')
     },
+    // tsconfig: {
+    //   type: 'String',
+    //   description:
+    //     'Specify which tsconfig file you want to use when compiling ts files. Can be either a path to a valid tsconfig file, or a ts stack name like "node", "js" or "shared".',
+    //   alias: 't',
+    //   default: __sugarConfig('js.compile.tsconfig')
+    // },
     map: {
       type: 'Boolean|String',
       alias: 'm',

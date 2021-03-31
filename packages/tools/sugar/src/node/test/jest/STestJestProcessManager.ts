@@ -2,7 +2,6 @@
 
 import __extension from '../../fs/extension';
 import __fs from 'fs';
-import __SProcessManager from '../../process/SProcessManager';
 import __SPromise from '@coffeekraken/s-promise';
 import __SFsDeamon from '../../deamon/fs/SFsDeamon';
 import __buildCommandLine from '../../../shared/cli/buildCommandLine';

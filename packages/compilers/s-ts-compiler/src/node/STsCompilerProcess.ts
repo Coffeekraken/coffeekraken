@@ -1,8 +1,6 @@
 // @ts-nocheck
 
-import SProcess, {
-  ISProcessSettings
-} from '@coffeekraken/sugar/src/node/process/SProcess';
+import SProcess, { ISProcessSettings } from '@coffeekraken/s-process';
 import __STsCompiler, { ISTsCompilerParams } from './STsCompiler';
 
 import __STsCompilerInterface from './interface/STsCompilerInterface';

@@ -1,6 +1,4 @@
-import SProcess, {
-  ISProcessSettings
-} from '@coffeekraken/sugar/node/process/SProcess';
+import SProcess, { ISProcessSettings } from '@coffeekraken/s-process';
 import __SSvelteCompiler, {
   ISSvelteCompiler,
   ISSvelteCompilerParams

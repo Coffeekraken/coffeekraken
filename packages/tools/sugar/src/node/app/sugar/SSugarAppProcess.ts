@@ -2,7 +2,7 @@ import __deepMerge from '../../../shared/object/deepMerge';
 import __isClass from '../../../shared/is/class';
 import __SError from '../../../shared/error/SError';
 import __SPromise from '@coffeekraken/s-promise';
-import __SProcess from '../../process/SProcess';
+import __SProcess from '@coffeekraken/s-process';
 import __SSugarApp from './SSugarApp';
 import __SSugarAppInterface from './interface/SSugarAppInterface';
 import __sugarConfig from '../../../shared/config/sugar';

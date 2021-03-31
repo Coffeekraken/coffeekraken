@@ -1,10 +1,10 @@
 // @to-work
-import __isClass from '../../shared/is/class';
+import __isClass from '@coffeekraken/sugar/shared/is/class';
 import { ISProcess, ISProcessCtor, ISProcessSettings } from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-import __deepMerge from '../../shared/object/deepMerge';
-import __typeof from '../../shared/value/typeof';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __typeof from '@coffeekraken/sugar/shared/value/typeof';
 
 /**
  * @name            SProcessPipe
@@ -20,8 +20,7 @@ import __typeof from '../../shared/value/typeof';
  * @param         {ISProcessSettings}               [settings={}]               Some settings to configure your process pipe instance
  *
  * @example         js
- * import SProcessPipe from '@coffeekraken/sugar/node/process/SProcessPipe';
- * import SProcess from '@coffeekraken/sugar/node/process/SProcess';
+ * import SProcess, { SProcessPipe } from '@coffeekraken/s-process';
  * class MyProcess extends SProcess {
  *  constructor(settings = {}) {
  *      super(settings);

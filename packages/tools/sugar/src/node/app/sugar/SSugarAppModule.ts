@@ -13,7 +13,7 @@ import __deepMerge from '../../../shared/object/deepMerge';
 import __hotkey from '../../keyboard/hotkey';
 import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
 // import __SIpc from '../../ipc/SIpc';
-import __SProcessManager from '../../process/SProcess';
+import __SProcessManager from '@coffeekraken/s-process';
 import __blessed from 'blessed';
 import __stdio from '../../stdio/stdio';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';

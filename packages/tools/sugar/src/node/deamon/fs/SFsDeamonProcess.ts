@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SProcess from '../../process/SProcess';
+import __SProcess from '@coffeekraken/s-process';
 import __chokidar from 'chokidar';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../../../shared/object/deepMerge';

@@ -217,8 +217,8 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         });
 
         const updateTimestamps = {};
-        const interceptPlugin = {
-          name: 'interceptPlugin',
+        const logPlugin = {
+          name: 'logPlugin',
           setup(build) {
             // Load ".txt" files and return an array of words
             build.onLoad({ filter: /\.(j|t)s$/ }, async (args) => {
@@ -282,10 +282,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             outbase: params.inDir,
             banner: params.banner,
             incremental: true,
-            // ...__filter(params, (key, value) => {
-            //   if (Array.isArray(value) && !value.length) return false;
-            //   return SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
-            // }),
             entryPoints: files.map((f) => f.path),
             bundle: params.bundle,
             write: true,
@@ -325,14 +321,16 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
                   }
                 }
               : false,
+
+            ...params.esbuild,
             plugins: [
-              interceptPlugin
+              logPlugin,
+              ...(params.esbuild.plugins ?? [])
               // __esbuildAggregateLibsPlugin({
               //   outputDir: params.outputDir,
               //   rootDir: params.rootDir
               // })
-            ],
-            ...params.esbuild
+            ]
           };
 
           let resultObj;
@@ -350,62 +348,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             }</${color}> compiled`
           });
 
-          // if (resultObj.outputFiles) {
-          //   resultObj.outputFiles.forEach((fileObj) => {
-          //     let filePath = fileObj.path;
-          //     let content = fileObj.text;
-          //     if (params.bundle && params.bundleSuffix) {
-          //       if (filePath.match(/\.js\.map$/)) {
-          //         filePath = filePath.replace(
-          //           /\.js\.map$/,
-          //           `${params.bundleSuffix}.js.map`
-          //         );
-          //       } else {
-          //         filePath = filePath.replace(
-          //           /\.js$/,
-          //           `${params.bundleSuffix}.js`
-          //         );
-          //       }
-          //       content = content.replace(
-          //         `//# sourceMappingURL=${__getFilename(fileObj.path)}`,
-          //         `//# sourceMappingURL=${__getFilename(filePath)}`
-          //       );
-          //     }
-          //     __fs.writeFileSync(filePath, content);
-          //     const file = __SFile.new(filePath);
-          //     emit('log', {
-          //       type: 'file',
-          //       file,
-          //       action: 'save'
-          //     });
-          //   });
-          // }
-
-          // if (outFile) {
-          //   const file = __SFile.new(outFile);
-          //   emit('log', {
-          //     type: 'file',
-          //     file,
-          //     action: 'save'
-          //   });
-          // }
-
-          // if (resultObj.warnings.length) {
-          //   resultObj.warnings.forEach((warningObj) => {
-          //     emit('warn', {
-          //       value: warningObj.text
-          //     });
-          //   });
-          // }
-
-          // compiledFiles.push({
-          //   path: outputPath,
-          //   js: result.js.code,
-          //   css: result.css.code,
-          //   warnings: result.warnings
-          // });
-          // }
-
           if (params.watch) {
             emit('log', {
               value: `<blue>[watch]</blue> Watching for changes...`
@@ -413,7 +355,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           } else {
             resolve({
               // files: compiledFiles,
-              files: {},
+              ...resultObj,
               ...duration.end()
             });
           }

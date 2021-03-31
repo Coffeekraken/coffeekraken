@@ -1,7 +1,7 @@
 import __SProcess, { ISProcess } from './SProcess';
-// import __buildCommandLine from '../../shared/cli/buildCommandLine';
-import __spawn from './spawn';
-import __deepMerge from '../../shared/object/deepMerge';
+// import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
+import __spawn from '@coffeekraken/sugar/node/process/spawn';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name          SCliProcess

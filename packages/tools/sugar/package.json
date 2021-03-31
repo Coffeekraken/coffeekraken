@@ -26,6 +26,7 @@
     "@coffeekraken/s-event-emitter": "file:../../core/s-event-emitter",
     "@coffeekraken/s-interface": "file:../../core/s-interface",
     "@coffeekraken/s-js-compiler": "file:../../compilers/s-js-compiler",
+    "@coffeekraken/s-process": "file:../../core/s-process",
     "@coffeekraken/s-promise": "file:../../core/s-promise",
     "@coffeekraken/s-svelte-compiler": "file:../../compilers/s-svelte-compiler",
     "@coffeekraken/s-ts-compiler": "file:../../compilers/s-ts-compiler",

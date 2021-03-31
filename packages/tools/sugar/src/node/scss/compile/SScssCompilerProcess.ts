@@ -1,4 +1,4 @@
-import SProcess, { ISProcessSettings } from '../../process/SProcess';
+import SProcess, { ISProcessSettings } from '@coffeekraken/s-process';
 import __SScssCompiler, {
   ISScssCompiler,
   ISScssCompilerParams

@@ -22,6 +22,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isChildProcess() {
+  if (process.env.NODE_ENV === 'test') return false;
   return (
     process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
   );

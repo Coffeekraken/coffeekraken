@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import _SProcess from '../process/SProcess';
+import _SProcess from '@coffeekraken/s-process';
 import _SNpmBinParamsInterface from './interface/SNpmBinParamsInterfaceamsInterface';
 import _deepMerge from '../../shared/object/deepMerge';
 

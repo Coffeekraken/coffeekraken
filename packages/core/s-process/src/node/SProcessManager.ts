@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __isChildProcess from '../../shared/is/childProcess';
+import __isChildProcess from '@coffeekraken/sugar/shared/is/childProcess';
 import __SPromise from '@coffeekraken/s-promise';
-import __SError from '../../shared/error/SError';
-import __deepMerge from '../../shared/object/deepMerge';
-import __getExtendsStack from '../../shared/class/getExtendsStack';
-import __stdio from '../stdio/stdio';
+import __SError from '@coffeekraken/sugar/shared/error/SError';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
+import __stdio from '@coffeekraken/sugar/node/stdio/stdio';
 
 /**
  * @name            SProcessManager

@@ -7,6 +7,7 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
+    "@coffeekraken/s-process": "file:../../core/s-process",
     "@coffeekraken/s-promise": "file:../../core/s-promise",
     "@coffeekraken/sugar": "file:../../tools/sugar"
   }

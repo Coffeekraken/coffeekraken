@@ -6,7 +6,7 @@ import __buildCommandLine from '../../../shared/cli/buildCommandLine';
 import __STestJestInterface from './interface/STestJestInterface';
 import __folderPath from '../../fs/folderPath';
 import __getFilename from '../../fs/filename';
-import __SProcess from '../../process/SProcess';
+import __SProcess from '@coffeekraken/s-process';
 import __childProces from 'child_process';
 
 /**

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __frontendServer from './frontend';
-import __SProcess from '../../process/SProcess';
+import __SProcess from '@coffeekraken/s-process';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 
 /**

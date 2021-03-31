@@ -2,23 +2,25 @@ import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
 import __stackTrace from 'stack-trace';
 import { ISClass as __ISClass } from '@coffeekraken/s-class';
-// import __buildCommandLine from '../../shared/cli/buildCommandLine';
-import __SError from '../../shared/error/SError';
+import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
+import __SError from '@coffeekraken/sugar/shared/error/SError';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import { ILog } from '../../shared/log/log';
-import __deepMerge from '../../shared/object/deepMerge';
-import __toString from '../../shared/string/toString';
-import __convert from '../../shared/time/convert';
-import __SDuration from '../../shared/time/SDuration';
-import __wait from '../../shared/time/wait';
+import { ILog } from '@coffeekraken/sugar/shared/log/log';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __toString from '@coffeekraken/sugar/shared/string/toString';
+import __convert from '@coffeekraken/sugar/shared/time/convert';
+import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { ISInterface, ISInterfaceCtor } from '@coffeekraken/s-interface';
-import __isChildProcess from '../is/childProcess';
-import { ISStdio } from '../stdio/SStdio';
-import __stdio from '../stdio/stdio';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import { ISStdio } from '@coffeekraken/sugar/node/stdio/SStdio';
+import __stdio from '@coffeekraken/sugar/node/stdio/stdio';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
-import __onProcessExit from './onProcessExit';
-import __spawn, { ISpawnSettings } from './spawn';
-import __toJson from '../../shared/object/toJson';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __spawn, {
+  ISpawnSettings
+} from '@coffeekraken/sugar/node/process/spawn';
+import __toJson from '@coffeekraken/sugar/shared/object/toJson';
 
 /**
  * @name                SProcess
@@ -416,35 +418,23 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     if (processSettings.runAsChild && !__isChildProcess()) {
       // build the command to run depending on the passed command in the constructor and the params
-      // const commandToRun = __buildCommandLine(
-      //   `node --enable-source-maps ${__path.resolve(
-      //     __dirname,
-      //     '../../cli/sugar.cli.js'
-      //   )} process.runChild [arguments]`,
-      //   {
-      //     ...paramsObj,
-      //     processPath: this._processPath
-      //   },
-      //   {
-      //     definition: {
-      //       ...(this.paramsInterface !== undefined
-      //         ? this.paramsInterface.definition
-      //         : {}),
-      //       processPath: {
-      //         type: 'String',
-      //         required: true
-      //       }
-      //     },
-      //     alias: false
-      //   }
-      // );
+      const commandToRun = __buildCommandLine(
+        `node --enable-source-maps ${__path.resolve(
+          __dirname,
+          'runAsChild.cli.js'
+        )} [arguments]`,
+        {
+          ...paramsObj,
+          processPath: this._processPath
+        }
+      );
       // // run child process
-      // this._processPromise = __spawn(commandToRun, [], {
-      //   ...(processSettings.spawnSettings || {})
-      // });
+      this._processPromise = __spawn(commandToRun, [], {
+        ...(processSettings.spawnSettings || {})
+      });
     } else {
       // run the actual process using the "process" method
-      this._processPromise = (<any>this).process(this._params, settings);
+      this._processPromise = (<any>this).process(this._params, processSettings);
 
       if (
         __isChildProcess() &&

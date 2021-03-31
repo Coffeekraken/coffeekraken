@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __SInterface from '../../../shared/class/SInterface';
-import __SProcessManagerInterface from '../../process/SProcessManager';
+import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SCliInterface

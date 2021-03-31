@@ -23,6 +23,7 @@
  */
 function childProcess() {
   if (!global || !global.process) return false;
+  if (global.process.env?.NODE_ENV === 'test') return false;
   return (
     global.process.send !== undefined ||
     global.process.env.IS_CHILD_PROCESS ||

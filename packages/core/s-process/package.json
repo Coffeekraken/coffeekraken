@@ -1,0 +1,17 @@
+{
+  "name": "@coffeekraken/s-process",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/node/exports.js",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-class": "file:../s-class",
+    "@coffeekraken/s-event-emitter": "file:../s-event-emitter",
+    "@coffeekraken/s-interface": "file:../s-interface",
+    "@coffeekraken/s-promise": "file:../s-promise",
+    "@coffeekraken/sugar": "file:../../tools/sugar",
+    "stack-trace": "0.0.10"
+  }
+}

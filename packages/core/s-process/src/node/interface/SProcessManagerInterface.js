@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SInterface_1 = __importDefault(require("../../../shared/class/SInterface"));
+const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name                SProcessManagerInterface
  * @namespace           sugar.node.process.interface
@@ -17,7 +17,7 @@ const SInterface_1 = __importDefault(require("../../../shared/class/SInterface")
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SProcessManagerInterface extends SInterface_1.default {
+class SProcessManagerInterface extends s_interface_1.default {
 }
 exports.default = SProcessManagerInterface;
 // static extendsArray = ['SProcess', 'SPromise'];
@@ -33,4 +33,4 @@ SProcessManagerInterface.definition = {
 };
 SProcessManagerInterface.title = 'SProcess elements Interface';
 SProcessManagerInterface.description = 'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NNYW5hZ2VySW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1Byb2Nlc3NNYW5hZ2VySW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtGQUE0RDtBQUU1RDs7Ozs7Ozs7Ozs7R0FXRztBQUNILE1BQXFCLHdCQUF5QixTQUFRLG9CQUFZOztBQUFsRSwyQ0FnQkM7QUFmQyxrREFBa0Q7QUFDM0MsbUNBQVUsR0FBRztJQUNsQixHQUFHLEVBQUU7UUFDSCxJQUFJLEVBQUUsVUFBVTtRQUNoQixRQUFRLEVBQUUsSUFBSTtLQUNmO0lBQ0QsSUFBSSxFQUFFO1FBQ0osSUFBSSxFQUFFLFVBQVU7UUFDaEIsUUFBUSxFQUFFLElBQUk7S0FDZjtDQUNGLENBQUM7QUFFSyw4QkFBSyxHQUFHLDZCQUE2QixDQUFDO0FBQ3RDLG9DQUFXLEdBQ2hCLG9JQUFvSSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NNYW5hZ2VySW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1Byb2Nlc3NNYW5hZ2VySW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7R0FXRztBQUNILE1BQXFCLHdCQUF5QixTQUFRLHFCQUFZOztBQUFsRSwyQ0FnQkM7QUFmQyxrREFBa0Q7QUFDM0MsbUNBQVUsR0FBRztJQUNsQixHQUFHLEVBQUU7UUFDSCxJQUFJLEVBQUUsVUFBVTtRQUNoQixRQUFRLEVBQUUsSUFBSTtLQUNmO0lBQ0QsSUFBSSxFQUFFO1FBQ0osSUFBSSxFQUFFLFVBQVU7UUFDaEIsUUFBUSxFQUFFLElBQUk7S0FDZjtDQUNGLENBQUM7QUFFSyw4QkFBSyxHQUFHLDZCQUE2QixDQUFDO0FBQ3RDLG9DQUFXLEdBQ2hCLG9JQUFvSSxDQUFDIn0=

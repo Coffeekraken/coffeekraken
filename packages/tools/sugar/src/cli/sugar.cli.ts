@@ -190,7 +190,7 @@ if (cliObj.process) {
 //     return;
 //   }
 //   require('../node/index');
-//   const __SProcess = require('../node/process/SProcess').default; // eslint-disable-line
+//   const __SProcess = require('@coffeekraken/s-process').default; // eslint-disable-line
 
 //   // const pkg = require(`./${stack}/${action}.cli.js`);
 //   const cliApi = require(`./${stack}/${action}.cli.js`).default; // eslint-disable-line

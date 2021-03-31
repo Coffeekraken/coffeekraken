@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SBuildDocMapActionsStream from './SBuildDocMapActionsStream';
-import __SProcess from '../process/SProcess';
+import __SProcess from '@coffeekraken/s-process';
 import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __SDocMap from './SDocMap';
 import __SPromise from '@coffeekraken/s-promise';

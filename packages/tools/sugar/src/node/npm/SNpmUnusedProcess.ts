@@ -1,7 +1,7 @@
 import __SProcess, {
   ISProcessSettings,
   ISProcessCtorSettings
-} from '../process/SProcess';
+} from '@coffeekraken/s-process';
 import __SNpmUnusedParamsInterface from './interface/SNpmUnusedParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';

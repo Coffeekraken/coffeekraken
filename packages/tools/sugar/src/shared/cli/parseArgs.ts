@@ -54,7 +54,7 @@ export default function parseArgs(string, settings = {}) {
       throw: true,
       defaultObj: {},
       cast: true,
-      valueQuote: '`'
+      valueQuote: '"'
     },
     settings
   );
@@ -62,7 +62,8 @@ export default function parseArgs(string, settings = {}) {
   // process the passed string
   let reg = /(?:[^\s"]+|"[^"]*")+/gm;
   if (settings.valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
-  else if (settings.valueQuote === '`') reg = /(?:[^\s`]+|`[^`]*`)+/gm;
+  else if (settings.valueQuote === '`')
+    reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
   let stringArray = string.match(reg) || [];
   stringArray = stringArray.map((item) => {
     return __unquote(item);
@@ -87,6 +88,16 @@ export default function parseArgs(string, settings = {}) {
         argsObj[currentArgName] = true;
       }
     } else {
+      if (part && typeof part === 'string') {
+        part = part
+          .replace(/^\\\\\\`/, '')
+          .replace(/\\\\\\`$/, '')
+          .replace(/^'/, '')
+          .replace(/'$/, '')
+          .replace(/^"/, '')
+          .replace(/"$/, '');
+      }
+
       currentValue = __parse(part);
       if (currentArgName !== undefined) {
         argsObj[currentArgName] = __parse(currentValue);

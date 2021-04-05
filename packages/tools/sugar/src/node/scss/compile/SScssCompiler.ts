@@ -24,7 +24,7 @@ import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
 import __express from 'express';
 import __chokidar from 'chokidar';
-import __SDuration from '../../../shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __fsPool from '../../fs/pool';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';

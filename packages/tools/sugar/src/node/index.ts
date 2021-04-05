@@ -23,13 +23,13 @@ import __registerSFileClasses from './fs/registerSFileClasses';
 // init env
 __initEnv();
 
-// handle the errors
-__handleError();
+// // handle the errors
+// __handleError();
 
-// exit cleanup
-__onProcessExit(() => {
-  return __exitCleanup;
-});
+// // exit cleanup
+// __onProcessExit(() => {
+//   return __exitCleanup;
+// });
 
 // SFile classes
 __registerSFileClasses();

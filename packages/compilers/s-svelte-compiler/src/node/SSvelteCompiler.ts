@@ -2,7 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __SCompiler, {
   ISCompiler
 } from '@coffeekraken/sugar/node/compiler/SCompiler';

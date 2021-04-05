@@ -8,9 +8,11 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-class": "file:../s-class",
+    "@coffeekraken/s-duration": "file:../../tools/s-duration",
     "@coffeekraken/s-event-emitter": "file:../s-event-emitter",
     "@coffeekraken/s-interface": "file:../s-interface",
     "@coffeekraken/s-promise": "file:../s-promise",
+    "@coffeekraken/s-stdio": "file:../s-stdio",
     "@coffeekraken/sugar": "file:../../tools/sugar",
     "stack-trace": "0.0.10"
   }

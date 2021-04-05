@@ -3,7 +3,7 @@ import * as __esbuild from 'esbuild';
 import __path from 'path';
 import __deepMerge from '../../shared/object/deepMerge';
 import __filter from '../../shared/object/filter';
-import __SDuration from '../../shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __wait from '../../shared/time/wait';
 import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
 import __getFilename from '../fs/filename';

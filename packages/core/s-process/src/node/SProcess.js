@@ -15,15 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const stack_trace_1 = __importDefault(require("stack-trace"));
 const buildCommandLine_1 = __importDefault(require("@coffeekraken/sugar/shared/cli/buildCommandLine"));
-const SError_1 = __importDefault(require("@coffeekraken/sugar/shared/error/SError"));
 const s_event_emitter_1 = __importDefault(require("@coffeekraken/s-event-emitter"));
 const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
 const toString_1 = __importDefault(require("@coffeekraken/sugar/shared/string/toString"));
-const convert_1 = __importDefault(require("@coffeekraken/sugar/shared/time/convert"));
-const SDuration_1 = __importDefault(require("@coffeekraken/sugar/shared/time/SDuration"));
-const wait_1 = __importDefault(require("@coffeekraken/sugar/shared/time/wait"));
+const s_duration_1 = __importDefault(require("@coffeekraken/s-duration"));
 const childProcess_1 = __importDefault(require("@coffeekraken/sugar/node/is/childProcess"));
-const stdio_1 = __importDefault(require("@coffeekraken/sugar/node/stdio/stdio"));
+const s_stdio_1 = __importDefault(require("@coffeekraken/s-stdio"));
 const SProcessSettingsInterface_1 = __importDefault(require("./interface/SProcessSettingsInterface"));
 const onProcessExit_1 = __importDefault(require("@coffeekraken/sugar/node/process/onProcessExit"));
 const spawn_1 = __importDefault(require("@coffeekraken/sugar/node/process/spawn"));
@@ -39,11 +36,11 @@ class SProcess extends s_event_emitter_1.default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(initialParams, settings = {}) {
+    constructor(initialParams, settings) {
         var _a;
         super(deepMerge_1.default({
             process: {}
-        }, settings));
+        }, settings !== null && settings !== void 0 ? settings : {}));
         /**
          * @name      stdio
          * @type      SProcessOutput
@@ -75,8 +72,9 @@ class SProcess extends s_event_emitter_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.executionsStack = [];
+        this._restarted = 0;
         // save initial params
-        this.initialParams = Object.assign({}, initialParams);
+        this.initialParams = Object.assign({}, initialParams !== null && initialParams !== void 0 ? initialParams : {});
         // get the definition from interface or settings
         this.paramsInterface =
             (_a = this.constructor.interface) !== null && _a !== void 0 ? _a : this.getInterface('params');
@@ -94,7 +92,7 @@ class SProcess extends s_event_emitter_1.default {
             }
         }
         if (!this._processPath) {
-            throw new SError_1.default(`An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`);
+            throw new Error(`An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`);
         }
         // ready if not an asyncStart process
         if (this.processSettings.asyncStart === false) {
@@ -131,6 +129,20 @@ class SProcess extends s_event_emitter_1.default {
         });
     }
     /**
+     * @name        lastExecutionObj
+     * @type        ISProcessProcessObj
+     *
+     * Get the last execution object
+     *
+     * @since       2.0.0
+     *
+     */
+    get lastExecutionObj() {
+        if (!this.executionsStack.length)
+            return -1;
+        return (this.executionsStack[this.executionsStack.length - 1]);
+    }
+    /**
      * @name        process
      * @type        Function
      * @abstract
@@ -159,135 +171,143 @@ class SProcess extends s_event_emitter_1.default {
         this.state('ready');
     }
     run(paramsOrStringArgs = {}, settings = {}) {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-            const processSettings = (deepMerge_1.default(this.processSettings, settings));
-            if (this.currentExecutionObj !== undefined) {
-                if (processSettings.throw === true) {
-                    throw new Error(`Sorry but you can not execute multiple process of the "<yellow>${this.metas.name || this.metas.id || this.constructor.name}</yellow>" SProcess instance...`);
-                }
-                return;
+        var _a, _b, _c;
+        const processSettings = (deepMerge_1.default(this.processSettings, settings));
+        if (this.currentExecutionObj !== undefined) {
+            if (processSettings.throw === true) {
+                throw new Error(`Sorry but you can not execute multiple process of the "<yellow>${this.metas.name || this.metas.id || this.constructor.name}</yellow>" SProcess instance...`);
             }
-            if (!childProcess_1.default() && processSettings.stdio && !this.stdio) {
-                this.stdio = stdio_1.default(this, processSettings.stdio, {});
-            }
-            this._duration = new SDuration_1.default();
-            // init the currentExecution object
-            // @ts-ignore
-            this.currentExecutionObj = {
-                state: 'idle',
-                stdout: [],
-                stderr: []
+            return;
+        }
+        if (!childProcess_1.default() && processSettings.stdio && !this.stdio) {
+            this.stdio = s_stdio_1.default.new(this, processSettings.stdio, {});
+        }
+        this._duration = new s_duration_1.default();
+        // init the currentExecution object
+        // @ts-ignore
+        this.currentExecutionObj = {
+            state: 'idle',
+            stdout: [],
+            stderr: [],
+            settings: Object.assign({}, settings)
+        };
+        if (this.currentExecutionObj) {
+            this.currentExecutionObj.stdout.toString = () => {
+                if (!this.currentExecutionObj)
+                    return '';
+                return this.currentExecutionObj.stdout
+                    .map((item) => {
+                    return toString_1.default(item);
+                })
+                    .join('\n');
             };
-            if (this.currentExecutionObj) {
-                this.currentExecutionObj.stdout.toString = () => {
-                    if (!this.currentExecutionObj)
-                        return '';
-                    return this.currentExecutionObj.stdout
-                        .map((item) => {
-                        return toString_1.default(item);
-                    })
-                        .join('\n');
-                };
-                this.currentExecutionObj.stderr.toString = () => {
-                    if (!this.currentExecutionObj)
-                        return '';
-                    return this.currentExecutionObj.stderr
-                        .map((item) => {
-                        return toString_1.default(item);
-                    })
-                        .join('\n');
-                };
-            }
-            yield wait_1.default(50);
-            const paramsObj = this.paramsInterface.apply(paramsOrStringArgs).value;
-            // check if asking for the help
-            if (paramsObj.help === true && this.paramsInterface !== undefined) {
-                const helpString = this.paramsInterface.render();
-                this.emit('log', {
-                    value: helpString
-                });
-                return;
-            }
-            // save current process params
-            this._params = Object.assign({}, paramsObj);
-            // update state
-            this.state('running');
-            if (processSettings.runAsChild && !childProcess_1.default()) {
-                // build the command to run depending on the passed command in the constructor and the params
-                const commandToRun = buildCommandLine_1.default(`node --enable-source-maps ${path_1.default.resolve(__dirname, 'runAsChild.cli.js')} [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath }));
-                // // run child process
-                this._processPromise = spawn_1.default(commandToRun, [], Object.assign({}, (processSettings.spawnSettings || {})));
-            }
-            else {
-                // run the actual process using the "process" method
-                this._processPromise = this.process(this._params, processSettings);
-                if (childProcess_1.default() &&
-                    process.send &&
-                    typeof process.send === 'function') {
-                    this._processPromise &&
-                        this._processPromise.on('*', (value, metas) => {
-                            process.send !== undefined &&
-                                process.send(toJson_1.default({
-                                    value,
-                                    metas
-                                }));
-                        });
-                }
-            }
-            this.pipe(this._processPromise, {});
-            // listen for "data" and "log" events
-            this._processPromise &&
-                this._processPromise.on('log', (data, metas) => {
-                    if (this.currentExecutionObj) {
-                        this.currentExecutionObj.stdout.push(data);
-                    }
-                });
-            // listen for errors
-            this._processPromise &&
-                this._processPromise.on('error,reject', (data, metas) => {
-                    if (this.currentExecutionObj) {
-                        this.currentExecutionObj.stderr.push(data);
-                    }
-                    if (!this.processSettings.killOnError && metas.event === 'error')
-                        return;
-                    this.kill(data);
-                });
-            // updating state when needed
-            this._processPromise &&
-                this._processPromise.on([
-                    'resolve:1',
-                    'reject:1',
-                    'cancel:1',
-                    'close.error:1',
-                    'close.killed:1'
-                ].join(','), (data, metas) => {
-                    if (metas.event === 'resolve' || metas.event === 'close.success')
-                        this.state('success');
-                    else if (metas.event === 'reject' || metas.event === 'close.error')
-                        this.state('error');
-                    else if (metas.event === 'cancel' || metas.event === 'close.killed')
-                        this.state('killed');
-                    else
-                        this.state('idle');
-                });
-            this._processPromise &&
-                this._processPromise.on('finally', (value, metas) => {
-                    // @ts-ignore
-                    if (this.processSettings.exitAtEnd === true) {
-                        process.exit();
-                    }
-                });
-            // register some proxies
-            (_a = this._processPromise) === null || _a === void 0 ? void 0 : _a.registerProxy('resolve', (value) => {
-                if (value.spawn && value.value !== undefined)
-                    value = value.value;
-                return Object.assign({ value }, this.executionsStack.pop());
-                return value;
+            this.currentExecutionObj.stderr.toString = () => {
+                if (!this.currentExecutionObj)
+                    return '';
+                return this.currentExecutionObj.stderr
+                    .map((item) => {
+                    return toString_1.default(item);
+                })
+                    .join('\n');
+            };
+        }
+        const paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
+            baseObj: (_a = this.initialParams) !== null && _a !== void 0 ? _a : {}
+        }).value;
+        // check if asking for the help
+        if (paramsObj.help === true && this.paramsInterface !== undefined) {
+            const helpString = this.paramsInterface.render();
+            this.emit('log', {
+                value: helpString
             });
-            // return the process promise
-            return this._processPromise;
+            return;
+        }
+        // save current process params
+        this._params = Object.assign({}, paramsObj);
+        // add params in the current execution object
+        // @ts-ignore
+        this.currentExecutionObj.params = Object.assign({}, paramsObj);
+        // update state
+        this.state('running');
+        if (processSettings.runAsChild && !childProcess_1.default()) {
+            // build the command to run depending on the passed command in the constructor and the params
+            const commandToRun = buildCommandLine_1.default(`node --enable-source-maps ${path_1.default.resolve(__dirname, 'runAsChild.cli.js')} [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath, _settings: processSettings }));
+            // run child process
+            this._processPromise = spawn_1.default(commandToRun, [], Object.assign({}, (processSettings.spawnSettings || {})));
+        }
+        else {
+            // run the actual process using the "process" method
+            this._processPromise = this.process(this._params, processSettings);
+            if (childProcess_1.default() &&
+                process.send &&
+                typeof process.send === 'function') {
+                this._processPromise &&
+                    this._processPromise.on('*', (value, metas) => {
+                        process.send !== undefined &&
+                            process.send(toJson_1.default({
+                                value,
+                                metas
+                            }));
+                    });
+            }
+        }
+        this.pipe(this._processPromise, {});
+        if ((_b = this._processPromise) === null || _b === void 0 ? void 0 : _b.promiseSettings) {
+            this._processPromise.promiseSettings.emitErrorAsEvent = this.processSettings.emitErrorAsEvent;
+        }
+        // listen for "data" and "log" events
+        this._processPromise &&
+            this._processPromise.on('log', (data, metas) => {
+                if (this.currentExecutionObj) {
+                    this.currentExecutionObj.stdout.push(data);
+                }
+            });
+        // listen for errors
+        this._processPromise &&
+            this._processPromise.on('error,reject', (data, metas) => {
+                if (this.currentExecutionObj) {
+                    this.currentExecutionObj.stderr.push(data);
+                }
+                if (!this.processSettings.killOnError && metas.event === 'error')
+                    return;
+                // this.kill(data);
+            });
+        // updating state when needed
+        this._processPromise &&
+            this._processPromise.on([
+                'resolve:1',
+                'reject:1',
+                'cancel:1',
+                'error:1',
+                'close.error:1',
+                'close.killed:1'
+            ].join(','), (data, metas) => {
+                if (metas.event === 'resolve' || metas.event === 'close.success')
+                    this.state('success');
+                else if (metas.event === 'reject' ||
+                    metas.event === 'error' ||
+                    metas.event === 'close.error')
+                    this.state('error');
+                else if (metas.event === 'cancel' || metas.event === 'close.killed')
+                    this.state('killed');
+                else
+                    this.state('idle');
+            });
+        this._processPromise &&
+            this._processPromise.on('finally', (value, metas) => {
+                // @ts-ignore
+                if (this.processSettings.exitAtEnd === true) {
+                    process.exit();
+                }
+            });
+        // register some proxies
+        (_c = this._processPromise) === null || _c === void 0 ? void 0 : _c.registerProxy('resolve,reject', (value) => {
+            if (value.value !== undefined)
+                value = value.value;
+            return Object.assign({ value }, this.executionsStack[this.executionsStack.length - 1]);
         });
+        // return the process promise
+        return this._processPromise;
     }
     state(value) {
         if (!value)
@@ -361,7 +381,6 @@ class SProcess extends s_event_emitter_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _onStateChange(state) {
-        var _a;
         // update the current execution state
         if (!this.currentExecutionObj)
             return;
@@ -369,86 +388,6 @@ class SProcess extends s_event_emitter_1.default {
         // check if is the end of the process
         if (state === 'killed' || state === 'error' || state === 'success') {
             this.currentExecutionObj = Object.assign(Object.assign({}, this.currentExecutionObj), this._duration.end());
-        }
-        let data;
-        const strArray = [];
-        if (!childProcess_1.default() &&
-            this._settings // @todo      check why this is causing context problem after 2 or 3 kill run...
-        ) {
-            switch (state) {
-                case 'success':
-                    if (this.processSettings.decorators === true) {
-                        this.log({
-                            color: 'green',
-                            type: 'heading',
-                            value: `The <yellow>${this.metas.name || 'process'}</yellow> <cyan>${this.metas.id}</cyan> execution has finished <green>successfully</green> in <yellow>${convert_1.default((_a = this.currentExecutionObj) === null || _a === void 0 ? void 0 : _a.duration, convert_1.default.SECOND)}s</yellow>`
-                        });
-                    }
-                    // this.emit('notification', {
-                    //   type: 'success',
-                    //   title: `${this.metas.id} success`
-                    // });
-                    break;
-                case 'running':
-                    if (this.processSettings.decorators === true) {
-                        // log a start message
-                        this.log({
-                            type: 'heading',
-                            value: `Starting the <yellow>${this.metas.name || 'process'}</yellow> <cyan>${this.metas.id}</cyan> execution...`
-                        });
-                    }
-                    // this.emit('notification', {
-                    //   type: 'start',
-                    //   title: `${this.metas.id} starting`
-                    // });
-                    break;
-                case 'error':
-                    if (this.processSettings.decorators === true) {
-                        // @ts-ignore
-                        data = this.currentExecutionObj.stderr.toString();
-                        strArray.push(' ');
-                        strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-                        strArray.push(`<red>Something went wrong</red> during the <yellow>${this.metas.name || 'process'}</yellow> <cyan>${this.metas.id}</cyan> execution.`);
-                        if (this.currentExecutionObj &&
-                            this.currentExecutionObj.stderr.length) {
-                            strArray.push(`Here's some details:`);
-                            strArray.push(data);
-                        }
-                        strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-                        strArray.push(' ');
-                        this.log({
-                            value: strArray.join('\n')
-                        });
-                    }
-                    // this.emit('notification', {
-                    //   type: 'error',
-                    //   title: `${this.metas.id} error`
-                    // });
-                    break;
-                case 'killed':
-                    if (this.processSettings.decorators === true) {
-                        // @ts-ignore
-                        data = this.currentExecutionObj.stderr.toString();
-                        strArray.push(' ');
-                        strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-                        strArray.push(`The <yellow>${this.metas.name || 'process'}</yellow> <cyan>${this.metas.id}</cyan> execution has been <red>killed</red>.`);
-                        if (this.currentExecutionObj &&
-                            this.currentExecutionObj.stderr.length) {
-                            strArray.push(`Here's some details:`);
-                            strArray.push(data);
-                        }
-                        strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-                        strArray.push(' ');
-                        this.log({
-                            value: strArray.join('\n')
-                        });
-                    }
-                    // this.emit('notification', {
-                    //   type: 'error',
-                    //   title: `${this.metas.id} killed`
-                    // });
-                    break;
-            }
         }
         if (state === 'success' || state === 'killed' || state === 'error') {
             // push the currentExecutionObj into the execution stack
@@ -585,4 +524,4 @@ SProcess.interfaces = {
     }
 };
 exports.default = SProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTUHJvY2Vzcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztBQUNBLGdEQUEwQjtBQUMxQiw4REFBdUM7QUFFdkMsdUdBQWlGO0FBQ2pGLHFGQUErRDtBQUMvRCxvRkFBZ0Y7QUFFaEYsNEZBQXNFO0FBQ3RFLDBGQUFvRTtBQUNwRSxzRkFBZ0U7QUFDaEUsMEZBQW9FO0FBQ3BFLGdGQUEwRDtBQUUxRCw0RkFBd0U7QUFFeEUsaUZBQTJEO0FBQzNELHNHQUFnRjtBQUNoRixtR0FBNkU7QUFDN0UsbUZBRWdEO0FBQ2hELHNGQUFnRTtBQStFaEUsTUFBTSxRQUFTLFNBQVEseUJBQWU7SUErSXBDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQ0UsYUFBc0MsRUFDdEMsV0FBa0MsRUFBRTs7UUFFcEMsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxPQUFPLEVBQUUsRUFBRTtTQUNaLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQTdJSjs7Ozs7Ozs7V0FRRztRQUNILFVBQUssR0FBRyxTQUFTLENBQUM7UUFFbEI7Ozs7Ozs7O1dBUUc7UUFDSCxXQUFNLEdBQUcsTUFBTSxDQUFDO1FBRWhCOzs7Ozs7Ozs7V0FTRztRQUNILG9CQUFlLEdBQTBCLEVBQUUsQ0FBQztRQStHMUMsc0JBQXNCO1FBQ3RCLElBQUksQ0FBQyxhQUFhLEdBQUcsTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsYUFBYSxDQUFDLENBQUM7UUFFdEQsZ0RBQWdEO1FBQ2hELElBQUksQ0FBQyxlQUFlO1lBQ2xCLE1BQU0sSUFBSyxDQUFDLFdBQVcsQ0FBQyxTQUFTLG1DQUFJLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDbkUsSUFBSSxJQUFJLENBQUMsZUFBZSxDQUFDLFNBQVMsS0FBSyxTQUFTO1lBQzlDLElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLGVBQWUsQ0FBQyxT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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTUHJvY2Vzcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztBQUNBLGdEQUEwQjtBQUMxQiw4REFBdUM7QUFFdkMsdUdBQWlGO0FBQ2pGLG9GQUFnRjtBQUVoRiw0RkFBc0U7QUFDdEUsMEZBQW9FO0FBQ3BFLDBFQUFtRDtBQUVuRCw0RkFBd0U7QUFDeEUsb0VBQTBEO0FBQzFELHNHQUFnRjtBQUNoRixtR0FBNkU7QUFDN0UsbUZBRWdEO0FBQ2hELHNGQUFnRTtBQXlGaEUsTUFBTSxRQUFTLFNBQVEseUJBQWU7SUErSXBDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQ0UsYUFBdUMsRUFDdkMsUUFBZ0M7O1FBRWhDLEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsT0FBTyxFQUFFLEVBQUU7U0FDWixFQUNELFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDZixDQUNGLENBQUM7UUE3SUo7Ozs7Ozs7O1dBUUc7UUFDSCxVQUFLLEdBQUcsU0FBUyxDQUFDO1FBRWxCOzs7Ozs7OztXQVFHO1FBQ0gsV0FBTSxHQUFHLE1BQU0sQ0FBQztRQUVoQjs7Ozs7Ozs7O1dBU0c7UUFDSCxvQkFBZSxHQUEwQixFQUFFLENBQUM7UUFnTjVDLGVBQVUsR0FBRyxDQUFDLENBQUM7UUFqR2Isc0JBQXNCO1FBQ3RCLElBQUksQ0FBQyxhQUFhLEdBQUcsTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsYUFBYSxhQUFiLGFBQWEsY0FBYixhQUFhLEdBQUksRUFBRSxDQUFDLENBQUM7UUFFNUQsZ0RBQWdEO1FBQ2hELElBQUksQ0FBQyxlQUFlO1lBQ2xCLE1BQU0sSUFBSyxDQUFDLFdBQVcsQ0FBQyxTQUFTLG1DQUFJLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDbkUsSUFBSSxJQUFJLENBQUMsZUFBZSxDQUFDLFNBQVMsS0FBSyxTQUFTO1lBQzlD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

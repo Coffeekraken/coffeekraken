@@ -31,7 +31,7 @@ function plainObject(object) {
   if (Object.prototype.toString.call(object) !== '[object Object]')
     return false;
   if (object !== Object(object)) return false;
-  if (object.constructor !== Object) return false;
+  // if (object.constructor !== Object) return false;
   return true;
 }
 export default plainObject;

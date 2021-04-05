@@ -2,7 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __SScssCompiler from '../../../scss/compile/SScssCompiler';
-import __SDuration from '../../../../shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScssCompilerParamsInterface';
 import __SDocMap from '../../../docMap/SDocMap';
 import __page404 from '../../../template/pages/404';

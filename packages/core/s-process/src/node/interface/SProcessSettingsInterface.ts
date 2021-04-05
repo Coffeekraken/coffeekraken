@@ -24,6 +24,18 @@ class SProcessSettingsInterface extends __SInterface {
       type: 'Boolean',
       default: __sugarConfig('process.killOnError')
     },
+    emitErrorAsEvent: {
+      type: 'Boolean',
+      default: __sugarConfig('process.emitErrorAsEvent')
+    },
+    restart: {
+      type: 'Boolean|Number',
+      default: 3
+    },
+    restartOn: {
+      type: 'String|Array<String>',
+      default: 'error'
+    },
     stdio: {
       type: 'String|SStdio|Boolean',
       alias: 's',
@@ -47,8 +59,7 @@ class SProcessSettingsInterface extends __SInterface {
     runAsChild: {
       type: 'Boolean',
       alias: 'c',
-      // default: __sugarConfig('process.runAsChild'),
-      default: false
+      default: __sugarConfig('process.runAsChild')
     },
     definition: {
       type: 'Object',

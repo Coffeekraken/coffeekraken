@@ -48,6 +48,7 @@ export interface ISInterfaceCtorSettings {
 export interface ISInterfaceSettings {
   throw?: boolean;
   descriptor?: Partial<ISDescriptorSettings>;
+  baseObj?: any;
 }
 
 export interface ISInterfaceDefinitionProperty {
@@ -399,6 +400,14 @@ class SInterface extends __SClass implements ISInterface {
         ...(set.descriptor ?? {})
       }
     });
+
+    // handle base obj
+    if (set.baseObj) {
+      objectOnWhichToApplyInterface = __deepMerge(
+        set.baseObj,
+        objectOnWhichToApplyInterface
+      );
+    }
 
     const descriptorResult: ISDescriptorResult = descriptor.apply(
       objectOnWhichToApplyInterface

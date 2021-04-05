@@ -5,7 +5,7 @@ import __path from 'path';
 import __render from '../../../template/render';
 import __STemplate from '../../../template/STemplate';
 import __fs from 'fs';
-import __SDuration from '../../../../shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __SPromise, { reject } from '@coffeekraken/s-promise';
 
 /**

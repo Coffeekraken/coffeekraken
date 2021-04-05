@@ -3,6 +3,7 @@
 import __toString from '../string/toString';
 import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
+import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                  argsToString
@@ -37,7 +38,12 @@ import __parse from '../string/parse';
 // TODO: support required args
 
 function argsToString(args, settings = {}) {
-  settings = __deepMerge({}, settings);
+  settings = __deepMerge(
+    {
+      valueQuote: '"'
+    },
+    settings
+  );
 
   let string = '';
   Object.keys(args).forEach((key) => {
@@ -56,8 +62,23 @@ function argsToString(args, settings = {}) {
               : __toString(value);
           if (typeof __parse(valueStr) === 'string') valueStr = `"${valueStr}"`;
         }
+        if (settings.valueQuote === '"')
+          valueStr = valueStr.replace(/"/g, '\\"');
+        if (settings.valueQuote === "'")
+          valueStr = valueStr.replace(/'/g, "\\'");
+        if (settings.valueQuote === '`')
+          valueStr = valueStr.replace(/`/g, '\\`');
+
         string += ` --${key} ${valueStr}`;
       });
+    } else if (__isPlainObject(argValue)) {
+      let valueStr = JSON.stringify(argValue);
+
+      if (settings.valueQuote === '"') valueStr = valueStr.replace(/"/g, '\\"');
+      if (settings.valueQuote === "'") valueStr = valueStr.replace(/'/g, "\\'");
+      if (settings.valueQuote === '`') valueStr = valueStr.replace(/`/g, '\\`');
+
+      string += ` --${key} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
     } else {
       if (argValue === true) {
         str = '';
@@ -67,7 +88,12 @@ function argsToString(args, settings = {}) {
           typeof argValue.toString === 'function'
             ? argValue.toString()
             : __toString(argValue);
-        if (typeof __parse(str) === 'string') str = `"${str}"`;
+        if (typeof __parse(str) === 'string')
+          if (settings.valueQuote === '"') str = str.replace(/"/g, '\\"');
+        if (settings.valueQuote === "'") str = str.replace(/'/g, "\\'");
+        if (settings.valueQuote === '`') str = str.replace(/`/g, '\\`');
+
+        str = `${settings.valueQuote}${str}${settings.valueQuote}`;
       }
       string += ` --${key} ${str}`;
     }

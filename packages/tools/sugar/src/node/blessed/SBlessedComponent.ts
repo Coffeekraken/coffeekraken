@@ -1,12 +1,13 @@
 // @ts-nocheck
-
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../../shared/object/deepMerge';
 import __color from '../../shared/color/color';
 import __hotkey from '../keyboard/hotkey';
-import __isChildProcess from '../../shared/is/childProcess';
+import __isChildProcess from '../../node/is/childProcess';
 import __innerWidth from './utils/innerWidth';
 import __blessed from 'blessed';
+
+import IBlessed from '@types/blessed';
 
 /**
  * @name                  SBlessedComponent
@@ -40,8 +41,7 @@ export interface ISBlessedComponentCtor {
   new (settings?: ISBlessedComponentSettings);
 }
 
-export interface ISBlessedComponent
-  extends __blessedTypes.Widgets.BlessedElement {
+export interface ISBlessedComponent extends IBlessed.Widgets.BlessedElement {
   readonly realHeight: number;
   setFramerate(framerate: number): void;
   on(event: string, callback: Function): void;

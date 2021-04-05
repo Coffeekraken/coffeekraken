@@ -1,5 +1,5 @@
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __SCompiler, {

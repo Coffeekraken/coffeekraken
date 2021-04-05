@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SDocMap from '../../node/docMap/SDocMap';
-import __stdio from '../../node/stdio/stdio';
+import __SStdio from '@coffeekraken/s-stdio';
 import __SDocMapSettingsInterface from '../../node/docMap/interface/SDocMapSettingsInterface';
 import __argsToObject from '../../node/cli/argsToObject';
 
@@ -14,7 +14,7 @@ export default async (stringArgs = '') => {
   });
 
   const findPromise = docMap.find();
-  __stdio(findPromise, 'inherit');
+  __SStdio.new(findPromise, 'terminal');
   await findPromise;
   process.exit();
 };

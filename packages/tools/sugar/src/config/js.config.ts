@@ -1,5 +1,3 @@
-import __ipAddress from '../node/network/ipAddress';
-
 export default {
   compile: {
     /**

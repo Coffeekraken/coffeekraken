@@ -1,4 +1,5 @@
 // @ts-nocheck
+import __isTestEnv from '../../shared/is/testEnv';
 
 /**
  * @name                            childProcess
@@ -22,7 +23,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isChildProcess() {
-  if (process.env.NODE_ENV === 'test') return false;
+  if (__isTestEnv()) return false;
   return (
     process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
   );

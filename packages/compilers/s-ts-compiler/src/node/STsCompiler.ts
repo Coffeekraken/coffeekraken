@@ -8,7 +8,7 @@ import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
-import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';

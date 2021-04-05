@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SDocMap from '../../node/docMap/SDocMap';
-import __stdio from '../../node/stdio/stdio';
+import __SStdio from '@coffeekraken/s-stdio';
 import __SDocMapSettingsInterface from '../../node/docMap/interface/SDocMapSettingsInterface';
 import __argsToObject from '../../node/cli/argsToObject';
 
@@ -13,7 +13,7 @@ export default async (stringArgs = '') => {
     docMap: settings
   });
   const readPromise = docMap.read();
-  const stdio = __stdio(readPromise, 'inherit');
+  const stdio = __SStdio.new(readPromise, 'terminal');
   const res = await readPromise;
   const logStrArray: string[] = [];
   Object.keys(res).forEach((namespace) => {

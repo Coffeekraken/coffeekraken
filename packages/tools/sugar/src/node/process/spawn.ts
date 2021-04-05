@@ -5,7 +5,8 @@ import __deepMerge from '../../shared/object/deepMerge';
 import { spawn as __spawn, SpawnOptions } from 'child_process';
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import __onProcessExit from './onProcessExit';
-import __SDuration from '../../shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
+import __isTestEnv from '../../shared/is/testEnv';
 
 /**
  * @name            spawn
@@ -82,11 +83,12 @@ export default function spawn(
       ...settings,
       env: {
         ...process.env,
+        ...(settings.env || {}),
         CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
           ? process.env.CHILD_PROCESS_LEVEL + 1
           : 1,
-        IS_CHILD_PROCESS: true,
-        ...(settings.env || {})
+        NODE_ENV: __isTestEnv() ? 'development' : process.env.NODE_ENV,
+        IS_CHILD_PROCESS: true
       }
     });
 

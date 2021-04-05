@@ -3,24 +3,27 @@ import __path from 'path';
 import __stackTrace from 'stack-trace';
 import { ISClass as __ISClass } from '@coffeekraken/s-class';
 import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
-import __SError from '@coffeekraken/sugar/shared/error/SError';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { ILog } from '@coffeekraken/sugar/shared/log/log';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
-import __convert from '@coffeekraken/sugar/shared/time/convert';
-import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __SDuration from '@coffeekraken/s-duration';
 import { ISInterface, ISInterfaceCtor } from '@coffeekraken/s-interface';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
-import { ISStdio } from '@coffeekraken/sugar/node/stdio/SStdio';
-import __stdio from '@coffeekraken/sugar/node/stdio/stdio';
+import __SStdio, { ISStdio } from '@coffeekraken/s-stdio';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn, {
   ISpawnSettings
 } from '@coffeekraken/sugar/node/process/spawn';
 import __toJson from '@coffeekraken/sugar/shared/object/toJson';
+
+// process.on('uncaughtException', function (err) {
+//   console.log('CAUGHT__', err);
+// });
+// process.on('unhandledRejection', function (err) {
+//   console.log('CAUGHT', err);
+// });
 
 /**
  * @name                SProcess
@@ -65,11 +68,14 @@ export interface ISProcessProcessObj {
   state: string;
   stdout: any[];
   stderr: any[];
+  params: any;
+  settings: ISProcessSettings;
 }
 
 export interface ISProcessSettings {
   asyncStart: boolean;
   killOnError: boolean;
+  emitErrorAsEvent: boolean;
   stdio: ISStdio;
   throw: boolean;
   runAsChild: boolean;
@@ -90,7 +96,7 @@ export interface ISProcessInternal extends __ISClass {
   run(
     paramsOrStringArgs: Record<string, unknown> | string,
     settings: ISProcessSettings
-  ): Promise<any>;
+  ): any;
   kill(data: any): void;
   log(...logs: ILog[]): void;
   error(...errors: ILog[]): void;
@@ -253,20 +259,20 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams: Record<string, unknown>,
-    settings: ISProcessCtorSettings = {}
+    initialParams?: Record<string, unknown>,
+    settings?: ISProcessCtorSettings
   ) {
     super(
       __deepMerge(
         {
           process: {}
         },
-        settings
+        settings ?? {}
       )
     );
 
     // save initial params
-    this.initialParams = Object.assign({}, initialParams);
+    this.initialParams = Object.assign({}, initialParams ?? {});
 
     // get the definition from interface or settings
     this.paramsInterface =
@@ -287,7 +293,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       }
     }
     if (!this._processPath) {
-      throw new __SError(
+      throw new Error(
         `An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`
       );
     }
@@ -298,6 +304,22 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         this.ready();
       });
     }
+  }
+
+  /**
+   * @name        lastExecutionObj
+   * @type        ISProcessProcessObj
+   *
+   * Get the last execution object
+   *
+   * @since       2.0.0
+   *
+   */
+  get lastExecutionObj(): ISProcessProcessObj | -1 {
+    if (!this.executionsStack.length) return -1;
+    return <ISProcessProcessObj>(
+      this.executionsStack[this.executionsStack.length - 1]
+    );
   }
 
   /**
@@ -346,10 +368,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _duration: any;
-  async run(
-    paramsOrStringArgs = {},
-    settings: Partial<ISProcessSettings> = {}
-  ) {
+  _restarted = 0;
+  run(paramsOrStringArgs = {}, settings: Partial<ISProcessSettings> = {}) {
     const processSettings = <ISProcessSettings>(
       __deepMerge(this.processSettings, settings)
     );
@@ -366,7 +386,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
 
     if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
-      this.stdio = __stdio(this, processSettings.stdio, {});
+      this.stdio = __SStdio.new(this, processSettings.stdio, {});
     }
 
     this._duration = new __SDuration();
@@ -376,7 +396,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     this.currentExecutionObj = {
       state: 'idle',
       stdout: [],
-      stderr: []
+      stderr: [],
+      settings: Object.assign({}, settings)
     };
     if (this.currentExecutionObj) {
       this.currentExecutionObj.stdout.toString = () => {
@@ -397,9 +418,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       };
     }
 
-    await __wait(50);
-
-    const paramsObj = this.paramsInterface.apply(paramsOrStringArgs).value;
+    const paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
+      baseObj: this.initialParams ?? {}
+    }).value;
 
     // check if asking for the help
     if (paramsObj.help === true && this.paramsInterface !== undefined) {
@@ -413,6 +434,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     // save current process params
     this._params = Object.assign({}, paramsObj);
 
+    // add params in the current execution object
+    // @ts-ignore
+    this.currentExecutionObj.params = Object.assign({}, paramsObj);
+
     // update state
     this.state('running');
 
@@ -425,10 +450,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         )} [arguments]`,
         {
           ...paramsObj,
-          processPath: this._processPath
+          processPath: this._processPath,
+          _settings: processSettings
         }
       );
-      // // run child process
+
+      // run child process
       this._processPromise = __spawn(commandToRun, [], {
         ...(processSettings.spawnSettings || {})
       });
@@ -456,6 +483,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
 
+    if (this._processPromise?.promiseSettings) {
+      this._processPromise.promiseSettings.emitErrorAsEvent = this.processSettings.emitErrorAsEvent;
+    }
+
     // listen for "data" and "log" events
     this._processPromise &&
       this._processPromise.on('log', (data, metas) => {
@@ -471,7 +502,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         }
         if (!this.processSettings.killOnError && metas.event === 'error')
           return;
-        this.kill(data);
+        // this.kill(data);
       });
 
     // updating state when needed
@@ -481,13 +512,18 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           'resolve:1',
           'reject:1',
           'cancel:1',
+          'error:1',
           'close.error:1',
           'close.killed:1'
         ].join(','),
         (data, metas) => {
           if (metas.event === 'resolve' || metas.event === 'close.success')
             this.state('success');
-          else if (metas.event === 'reject' || metas.event === 'close.error')
+          else if (
+            metas.event === 'reject' ||
+            metas.event === 'error' ||
+            metas.event === 'close.error'
+          )
             this.state('error');
           else if (metas.event === 'cancel' || metas.event === 'close.killed')
             this.state('killed');
@@ -504,13 +540,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       });
 
     // register some proxies
-    this._processPromise?.registerProxy('resolve', (value) => {
-      if (value.spawn && value.value !== undefined) value = value.value;
+    this._processPromise?.registerProxy('resolve,reject', (value) => {
+      if (value.value !== undefined) value = value.value;
       return {
         value,
-        ...this.executionsStack.pop()
+        ...this.executionsStack[this.executionsStack.length - 1]
       };
-      return value;
     });
 
     // return the process promise
@@ -546,11 +581,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     // emit an event
     this.emit(`state.${value}`, undefined);
     this.emit('state', value);
-
     this._state = value;
-
     this._onStateChange(value);
-
     return this._state;
   }
 
@@ -615,117 +647,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         ...this.currentExecutionObj,
         ...this._duration.end()
       };
-    }
-
-    let data;
-    const strArray: string[] = [];
-    if (
-      !__isChildProcess() &&
-      this._settings // @todo      check why this is causing context problem after 2 or 3 kill run...
-    ) {
-      switch (state) {
-        case 'success':
-          if (this.processSettings.decorators === true) {
-            this.log({
-              color: 'green',
-              type: 'heading',
-              value: `The <yellow>${
-                this.metas.name || 'process'
-              }</yellow> <cyan>${
-                this.metas.id
-              }</cyan> execution has finished <green>successfully</green> in <yellow>${__convert(
-                this.currentExecutionObj?.duration,
-                __convert.SECOND
-              )}s</yellow>`
-            });
-          }
-          // this.emit('notification', {
-          //   type: 'success',
-          //   title: `${this.metas.id} success`
-          // });
-          break;
-        case 'running':
-          if (this.processSettings.decorators === true) {
-            // log a start message
-            this.log({
-              type: 'heading',
-              value: `Starting the <yellow>${
-                this.metas.name || 'process'
-              }</yellow> <cyan>${this.metas.id}</cyan> execution...`
-            });
-          }
-          // this.emit('notification', {
-          //   type: 'start',
-          //   title: `${this.metas.id} starting`
-          // });
-          break;
-        case 'error':
-          if (this.processSettings.decorators === true) {
-            // @ts-ignore
-            data = this.currentExecutionObj.stderr.toString();
-            strArray.push(' ');
-            strArray.push(
-              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
-            );
-            strArray.push(
-              `<red>Something went wrong</red> during the <yellow>${
-                this.metas.name || 'process'
-              }</yellow> <cyan>${this.metas.id}</cyan> execution.`
-            );
-            if (
-              this.currentExecutionObj &&
-              this.currentExecutionObj.stderr.length
-            ) {
-              strArray.push(`Here's some details:`);
-              strArray.push(data);
-            }
-            strArray.push(
-              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
-            );
-            strArray.push(' ');
-            this.log({
-              value: strArray.join('\n')
-            });
-          }
-          // this.emit('notification', {
-          //   type: 'error',
-          //   title: `${this.metas.id} error`
-          // });
-          break;
-        case 'killed':
-          if (this.processSettings.decorators === true) {
-            // @ts-ignore
-            data = this.currentExecutionObj.stderr.toString();
-            strArray.push(' ');
-            strArray.push(
-              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
-            );
-            strArray.push(
-              `The <yellow>${this.metas.name || 'process'}</yellow> <cyan>${
-                this.metas.id
-              }</cyan> execution has been <red>killed</red>.`
-            );
-            if (
-              this.currentExecutionObj &&
-              this.currentExecutionObj.stderr.length
-            ) {
-              strArray.push(`Here's some details:`);
-              strArray.push(data);
-            }
-            strArray.push(
-              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
-            );
-            strArray.push(' ');
-            this.log({
-              value: strArray.join('\n')
-            });
-          }
-          // this.emit('notification', {
-          //   type: 'error',
-          //   title: `${this.metas.id} killed`
-          // });
-          break;
-      }
     }
 
     if (state === 'success' || state === 'killed' || state === 'error') {

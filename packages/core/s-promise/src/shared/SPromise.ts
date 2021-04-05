@@ -66,6 +66,7 @@ export interface ISPromiseSettings {
   destroyTimeout: number;
   proxies: ISPromiseProxies;
   treatCancelAs: string;
+  emitErrorAsEvent: boolean;
   [key: string]: any;
 }
 
@@ -110,9 +111,6 @@ export interface ISPromise extends Promise, ISEventEmitter {
   on(event: string, callback: function): ISEventEmitter;
   catch(...args: any): ISPromise;
   finally(...args: any): ISPromise;
-  resolved(...args: any): ISPromise;
-  rejected(...args: any): ISPromise;
-  canceled(...args: any): ISPromise;
 }
 
 class SPromise
@@ -146,6 +144,20 @@ class SPromise
   on: function;
 
   /**
+   * @name          promiseSettings
+   * @type          ISPromiseSettings
+   * @get
+   *
+   * Access to the spromise settings
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  get promiseSettings(): ISPromiseSettings {
+    return (<any>this)._settings.promise;
+  }
+
+  /**
    * @name                  constructor
    * @type                  Function
    *
@@ -176,6 +188,7 @@ class SPromise
         {
           promise: {
             treatCancelAs: 'resolve',
+            emitErrorAsEvent: true,
             destroyTimeout: 5000,
             proxies: {
               resolve: [],
@@ -238,10 +251,17 @@ class SPromise
         if (func.slice(0, 1) === '_') return;
         api[func] = this[func].bind(this);
       });
-      setTimeout(() => {
-        executorFn(api);
-        // this.eventEmitter.start();
-      });
+      (async () => {
+        try {
+          await executorFn(api);
+        } catch (e) {
+          if (this.promiseSettings.emitErrorAsEvent) {
+            this.emit('error', e);
+          } else {
+            resolvers.reject(e);
+          }
+        }
+      })();
     }
   }
 
@@ -306,8 +326,14 @@ class SPromise
    * @since       2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  registerProxy(point: 'resolve' | 'reject', proxy: function): void {
-    this._settings.promise.proxies[point].push(proxy);
+  registerProxy(
+    point: 'resolve' | 'reject' | 'resolve,reject' | 'reject,resolve',
+    proxy: function
+  ): void {
+    const ar = point.split(',').map((l) => l.trim());
+    ar.forEach((a) => {
+      this._settings.promise.proxies[a].push(proxy);
+    });
   }
 
   /**
@@ -428,22 +454,20 @@ class SPromise
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _resolve(arg, stacksOrder = 'resolve,finally') {
+  async _resolve(arg, stacksOrder = 'resolve,finally') {
     if (this._promiseState === 'destroyed') return;
-    return new Promise(async (resolve, reject) => {
-      // update the status
-      this._promiseState = 'resolved';
-      // exec the wanted stacks
-      let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
-      // execute proxies
-      for (const proxyFn of this._settings.promise.proxies.resolve || []) {
-        stacksResult = await proxyFn(stacksResult);
-      }
-      // resolve the master promise
-      this._resolvers.resolve(stacksResult);
-      // return the stack result
-      resolve(stacksResult);
-    });
+    // update the status
+    this._promiseState = 'resolved';
+    // exec the wanted stacks
+    let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
+    // execute proxies
+    for (const proxyFn of this._settings.promise.proxies.resolve || []) {
+      stacksResult = await proxyFn(stacksResult);
+    }
+    // resolve the master promise
+    this._resolvers.resolve(stacksResult);
+    // return the stack result
+    return stacksResult;
   }
 
   then<R, E2 = E>(f: (r: T) => R): Promisish<R, E>;
@@ -474,27 +498,24 @@ class SPromise
    * This is the method that will be called by the promise executor passed reject function
    *
    * @param         {Mixed}         arg       The value that you want to return back from the promise
-   * @param       {Array|String}         [stacksOrder='catch,error,reject,finally']      This specify in which order have to be called the stacks
+   * @param       {Array|String}         [stacksOrder='catch,reject,finally']      This specify in which order have to be called the stacks
    * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _reject(arg, stacksOrder = `catch,reject,finally`) {
+  async _reject(arg, stacksOrder = `catch,reject,finally`) {
     if (this._promiseState === 'destroyed') return;
-    return new Promise(async (resolve, reject) => {
-      // update the status
-      this._promiseState = 'rejected';
-      // exec the wanted stacks
-      let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
-      // execute proxies
-      for (const proxyFn of this._settings.promise.proxies.reject || []) {
-        stacksResult = await proxyFn(stacksResult);
-      }
-      // resolve the master promise
-      this._resolvers.reject(stacksResult);
-      // return the stack result
-      resolve(stacksResult);
-    });
+    // update the status
+    this._promiseState = 'rejected';
+    // exec the wanted stacks
+    let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
+    // execute proxies
+    for (const proxyFn of this._settings.promise.proxies.reject || []) {
+      stacksResult = await proxyFn(stacksResult);
+    }
+    // resolve the master promise
+    this._resolvers.reject(stacksResult);
+    return stacksResult;
   }
 
   /**
@@ -602,84 +623,6 @@ class SPromise
    */
   finally(...args) {
     return this.on('finally', ...args);
-  }
-
-  /**
-   * @name                resolved
-   * @type                Function
-   *
-   * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
-   * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
-   * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
-   *
-   * @param           {Function}        callback        The callback function to register
-   * @return          {SPromise}                  The SPromise instance to maintain chainability
-   *
-   * @example         js
-   * new SPromise(({ resolve, reject, emit }) => {
-   *    // do something...
-   *    resolve('hello world');
-   * }).resolved(value => {
-   *    // do something with the value that is "hello world"
-   * });
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  resolved(...args) {
-    return this.on('resolve', ...args);
-  }
-
-  /**
-   * @name                rejected
-   * @type                Function
-   *
-   * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
-   * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
-   * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
-   *
-   * @param           {Function}        callback        The callback function to register
-   * @return          {SPromise}                  The SPromise instance to maintain chainability
-   *
-   * @example         js
-   * new SPromise(({ resolve, reject, emit }) => {
-   *    // do something...
-   *    resolve('hello world');
-   * }).rejected(value => {
-   *    // do something with the value that is "hello world"
-   * });
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  rejected(...args) {
-    return this.on('reject', ...args);
-  }
-
-  /**
-   * @name                canceled
-   * @type                Function
-   *
-   * This method allows the SPromise user to register a function that will be called once when the "revoke" function has been called
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
-   * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
-   * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
-   *
-   * @param           {Function}        callback        The callback function to register
-   * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
-   *
-   * @example         js
-   * new SPromise(({ resolve, reject, emit, cancel }) => {
-   *    // do something...
-   *    cancel('hello world');
-   * }).canceled(value => {
-   *    // do something with the value that is "hello world"
-   * });
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  canceled(...args) {
-    return this.on('cancel', ...args);
   }
 
   /**

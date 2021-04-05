@@ -2,7 +2,7 @@
 
 import __parseHtml from '../../shared/console/parseHtml';
 import __SError from '../../shared/error/SError';
-import __isChildProcess from '../../shared/is/childProcess';
+import __isChildProcess from '../../node/is/childProcess';
 import __toString from '../../shared/string/toString';
 
 /**

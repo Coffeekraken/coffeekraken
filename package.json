@@ -48,6 +48,7 @@
     "@coffeekraken/s-promise": "file:packages/core/s-promise",
     "@coffeekraken/sugar": "file:packages/tools/sugar",
     "@coffeekraken/sugar-ui": "file:packages/tools/sugar-ui",
+    "@types/blessed": "^0.1.17",
     "dependency-check": "^4.1.0"
   },
   "globalDependencies": {},

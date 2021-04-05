@@ -2,7 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __STsCompiler from '../../../typescript/compile/STsCompiler';
-import __SDuration from '../../../../shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __STsCompileInterface from '../../../typescript/compile/interface/STsCompileInterface';
 
 /**

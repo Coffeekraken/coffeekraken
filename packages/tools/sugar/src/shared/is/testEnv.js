@@ -1,45 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../core/env"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const env_1 = __importDefault(require("../core/env"));
-    /**
-     * @name          testEnv
-     * @namespace     sugar.js.is
-     * @type          Function
-     * @stable
-     *
-     * Check if the current environment is in a test process or not
-     *
-     * @return      {Boolean}         true if in environment environment, false if not
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example       js
-     * import isTest from '@coffeekraken/sugar/js/is/testEnv';
-     * isTest(); // => true
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    function isTestEnv() {
-        return (env_1.default('NODE_ENV') === 'test' ||
-            env_1.default('JEST_WORKER_ID') !== undefined ||
-            typeof global.it === 'function');
-    }
-    exports.default = isTestEnv;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVzdEVudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRlc3RFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsc0RBQWdDO0lBRWhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQW9CRztJQUNILFNBQVMsU0FBUztRQUNoQixPQUFPLENBQ0wsYUFBSyxDQUFDLFVBQVUsQ0FBQyxLQUFLLE1BQU07WUFDNUIsYUFBSyxDQUFDLGdCQUFnQixDQUFDLEtBQUssU0FBUztZQUNyQyxPQUFPLE1BQU0sQ0FBQyxFQUFFLEtBQUssVUFBVSxDQUNoQyxDQUFDO0lBQ0osQ0FBQztJQUNELGtCQUFlLFNBQVMsQ0FBQyJ9
+/**
+ * @name          testEnv
+ * @namespace     sugar.js.is
+ * @type          Function
+ * @stable
+ *
+ * Check if the current environment is in a test process or not
+ *
+ * @return      {Boolean}         true if in environment environment, false if not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example       js
+ * import isTest from '@coffeekraken/sugar/js/is/testEnv';
+ * isTest(); // => true
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function isTestEnv() {
+    var _a;
+    return ((_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.NODE_ENV) === 'test';
+}
+exports.default = isTestEnv;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVzdEVudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRlc3RFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxjQUFjO0FBQ2Q7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsU0FBUyxTQUFTOztJQUNoQixPQUFPLENBQUEsTUFBQSxPQUFPLGFBQVAsT0FBTyx1QkFBUCxPQUFPLENBQUUsR0FBRywwQ0FBRSxRQUFRLE1BQUssTUFBTSxDQUFDO0FBQzNDLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==

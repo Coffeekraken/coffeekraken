@@ -11,7 +11,7 @@ import {
 } from 'scss-parser';
 import __stripCssComments from '../../shared/css/stripCssComments';
 import __deepMerge from '../../shared/object/deepMerge';
-import __SDuration from '../../shared/time/SDuration';
+import __SDuration from '@coffeekraken/s-duration';
 import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
 import __SFile, { ISFileCtorSettings } from '../fs/SFile';

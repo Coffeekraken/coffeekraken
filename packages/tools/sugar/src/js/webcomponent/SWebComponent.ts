@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SError from '../../shared/error/SError';
 import __isClass from '../../shared/is/class';
 import __deepMerge from '../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
@@ -487,7 +486,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
     setProp(prop, value, media = null) {
       if (!media) return (this.props[prop] = value);
       if (!this._props[prop].responsive) {
-        throw new __SError(
+        throw new Error(
           `You try to set the responsive property "${prop}" for the media "${media}" but this property is not defined as "responsive"...`
         );
       }
@@ -512,7 +511,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
     getProp(prop, media = null) {
       if (!media) return this._props[prop].value;
       if (!this._props[prop].responsive) {
-        throw new __SError(
+        throw new Error(
           `You try to get the responsive property "${prop}" for the media "${media}" but this property is not defined as "responsive"...`
         );
       }
@@ -873,7 +872,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      */
     _mountDependencies() {
       return new Promise((resolve, reject) => {
-        let promises = [];
+        const promises = [];
 
         // check if we have a "mountWhen" setting specified
         if (this._settings.mountWhen) {
@@ -977,7 +976,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
 
         // add the base class if needed
         if (this.constructor.cssName) {
-          let baseCls = __uncamelize(this.constructor.cssName).replace(
+          const baseCls = __uncamelize(this.constructor.cssName).replace(
             '-web-component',
             ''
           );

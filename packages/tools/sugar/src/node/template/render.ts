@@ -8,7 +8,6 @@ import __getExt from '../fs/extension';
 import __deepMerge from '../../shared/object/deepMerge';
 import __toString from '../../shared/string/toString';
 import __SPromise from '@coffeekraken/s-promise';
-import __SError from '../../shared/error/SError';
 import __STemplate from './STemplate';
 import __unique from '../../shared/array/unique';
 

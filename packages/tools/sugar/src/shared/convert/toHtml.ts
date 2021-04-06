@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __htmlFromMarkdown from './html/htmlFromMarkdown';
 import __htmlFromDocblocks from './html/htmlFromDocblocks';
@@ -56,7 +55,7 @@ function toHtml(inputString, settings = {}) {
     else if (inputString.match(/(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g))
       settings.from = 'docblocks';
     else {
-      throw new __SError(
+      throw new Error(
         `Sorry but the passed inputString does not match any supported type which are: ${supportedFromTypes.join(
           ','
         )}`
@@ -68,7 +67,7 @@ function toHtml(inputString, settings = {}) {
   const converterFn = convertersByType[settings.from];
 
   if (!converterFn) {
-    throw new __SError(
+    throw new Error(
       `It seems that no converter exists for your inputString which is of type "<yellow>${settings.from}</yellow>"...`
     );
   }

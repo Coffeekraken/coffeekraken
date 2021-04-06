@@ -15,6 +15,23 @@ import __sugarConfig from '../../config/sugar';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function availableColors() {
-  return Object.keys(__sugarConfig('dev.colors'));
+export interface IAvailableColorsSettings {
+  excludeBasics: boolean;
+}
+export default function availableColors(
+  settings?: Partial<IAvailableColorsSettings>
+) {
+  settings = {
+    excludeBasics: false,
+    ...(settings ?? {})
+  };
+  let colors = Object.keys(__sugarConfig('dev.colors'));
+
+  if (settings.excludeBasics) {
+    colors = colors.filter((c) => {
+      return c !== 'white' && c !== 'black' && c !== 'grey' && c !== 'gray';
+    });
+  }
+
+  return colors;
 }

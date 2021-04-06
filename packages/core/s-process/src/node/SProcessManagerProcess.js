@@ -15,7 +15,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_event_emitter_1 = __importDefault(require("@coffeekraken/s-event-emitter"));
 const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
+const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 const wait_1 = __importDefault(require("@coffeekraken/sugar/shared/time/wait"));
+const plainObject_1 = __importDefault(require("@coffeekraken/sugar/shared/is/plainObject"));
 class SProcessManagerProcess extends s_event_emitter_1.default {
     /**
      * @name          constructor
@@ -30,12 +32,7 @@ class SProcessManagerProcess extends s_event_emitter_1.default {
         super(deepMerge_1.default({
             processManagerProcess: {
                 stdio: 'inherit',
-                restart: {
-                    on: 'error,reject',
-                    max: -1,
-                    delay: 0,
-                    processParams: undefined
-                }
+                restart: false
             }
         }, settings));
         /**
@@ -49,39 +46,25 @@ class SProcessManagerProcess extends s_event_emitter_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._restartsStack = [];
+        // default restart settings
+        const restartDefaultSettings = {
+            on: 'error,reject',
+            max: -1,
+            delay: 0,
+            before: undefined
+        };
+        if (this.processManagerProcessSettings.restart === true) {
+            this.processManagerProcessSettings.restart = restartDefaultSettings;
+        }
+        else if (plainObject_1.default(this.processManagerProcessSettings.restart)) {
+            this.processManagerProcessSettings.restart = Object.assign(Object.assign({}, restartDefaultSettings), this.processManagerProcessSettings.restart);
+        }
         processInstance.processSettings.emitErrorAsEvent = true;
         processInstance.processSettings.stdio = false;
         this.processInstance = processInstance;
-        processInstance.on(this.processManagerProcessSettings.restart.on, (value, metas) => __awaiter(this, void 0, void 0, function* () {
-            yield wait_1.default(0);
-            this.emit('log', {
-                value: `The process "<yellow>${processInstance.metas.id}</yellow>" has been stoped after a(n) <red>${processInstance.lastExecutionObj.state}</red> after <cyan>${processInstance.lastExecutionObj.formatedDuration}</cyan> of execution`
-            });
-            let newProcessArgs = Object.assign({}, processInstance.lastExecutionObj);
-            // tweak params if a function is passed through settings
-            if (this.processManagerProcessSettings.restart.before &&
-                typeof this.processManagerProcessSettings.restart.before ===
-                    'function') {
-                newProcessArgs = yield this.processManagerProcessSettings.restart.before(processInstance.lastExecutionObj);
-            }
-            // of the "before" callback returns a nullysh value, do not restart
-            if (!newProcessArgs) {
-                this.emit('log', {
-                    value: `Stop restarting the process "<yellow>${processInstance.metas.id}</yellow>"`
-                });
-                return;
-            }
-            if (this.processManagerProcessSettings.restart.delay)
-                this.emit(`log`, {
-                    value: `Waiting <cyan>${this.processManagerProcessSettings.restart.delay / 1000}s</cyan> before restart...`
-                });
-            yield wait_1.default(this.processManagerProcessSettings.restart.delay);
-            this.emit('log', {
-                value: `Restarting process "<yellow>${processInstance.metas.id}</yellow>"`
-            });
-            // restart process
-            this.run(newProcessArgs.params, newProcessArgs.settings);
-        }));
+        // handle restart
+        if (this.processManagerProcessSettings.restart)
+            this._handleRestart();
     }
     /**
      * @name          initialParams
@@ -108,27 +91,60 @@ class SProcessManagerProcess extends s_event_emitter_1.default {
     get processManagerProcessSettings() {
         return this._settings.processManagerProcess;
     }
-    /**
-     * @name      run
-     * @type      Function
-     * @async
-     *
-     * Proxy to the ```run``` method on the passed processInstance
-     *
-     * @param     {String|Record<string, any>}        [paramsOrStringArgs={}]     Either a cli string arguments like "--arg1 value1 --arg2 value2" that will be transformed to an object using the "params" interface, or directly an object representing your parameters
-     * @param     {Partial<ISProcessSettings>}        [settings={}]             Some process settings to override if needed
-     * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    run(paramsOrStringArgs = {}, settings = {}) {
+    _handleRestart() {
+        this.processInstance.on(this.processManagerProcessSettings.restart.on, (value, metas) => __awaiter(this, void 0, void 0, function* () {
+            yield wait_1.default(0);
+            this.emit('log', {
+                value: `The process "<yellow>${this.processInstance.metas.id}</yellow>" has been stoped after a(n) <red>${this.processInstance.lastExecutionObj.state}</red> after <cyan>${this.processInstance.lastExecutionObj.formatedDuration}</cyan> of execution`
+            });
+            let newProcessArgs = Object.assign({}, this.processInstance.lastExecutionObj.params);
+            // tweak params if a function is passed through settings
+            if (this.processManagerProcessSettings.restart.before &&
+                typeof this.processManagerProcessSettings.restart.before ===
+                    'function') {
+                newProcessArgs = yield this.processManagerProcessSettings.restart.before(this.processInstance.lastExecutionObj);
+            }
+            // of the "before" callback returns a nullysh value, do not restart
+            if (!newProcessArgs) {
+                this.emit('log', {
+                    value: `Stop restarting the process "<yellow>${this.processInstance.metas.id}</yellow>"`
+                });
+                // resolving the global run promise
+                if (this._restartingProcessResolve) {
+                    this._restartingProcessResolve(this.processInstance.executionsStack);
+                }
+                return;
+            }
+            if (this.processManagerProcessSettings.restart.delay)
+                this.emit(`log`, {
+                    value: `Waiting <cyan>${this.processManagerProcessSettings.restart.delay / 1000}s</cyan> before restart...`
+                });
+            yield wait_1.default(this.processManagerProcessSettings.restart.delay);
+            this.emit('log', {
+                value: `Restarting process "<yellow>${this.processInstance.metas.id}</yellow>"`
+            });
+            // restart process
+            this._run(newProcessArgs.params, newProcessArgs.settings);
+        }));
+    }
+    _run(paramsOrStringArgs = {}, settings = {}) {
         const promise = this.processInstance.run(paramsOrStringArgs, settings);
         this.pipe(promise, {
-        // overrideEmitter: true
+            overrideEmitter: true
         });
         return promise;
     }
+    run(paramsOrStringArgs = {}, settings = {}) {
+        return new s_promise_1.default(({ resolve }) => __awaiter(this, void 0, void 0, function* () {
+            this._restartingProcessResolve = resolve;
+            // run the process
+            const res = yield this._run(paramsOrStringArgs, settings);
+            // if restart is setted, do not resolve the promis
+            if (!this.processManagerProcessSettings.restart) {
+                resolve(res);
+            }
+        }));
+    }
 }
 exports.default = SProcessManagerProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NNYW5hZ2VyUHJvY2Vzcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNQcm9jZXNzTWFuYWdlclByb2Nlc3MudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBRWQsb0ZBQTREO0FBQzVELDRGQUFzRTtBQUd0RSxnRkFBMEQ7QUF5QzFELE1BQU0sc0JBQXVCLFNBQVEseUJBQWU7SUFtRGxEOzs7Ozs7OztPQVFHO0lBQ0gsWUFDRSxlQUFlLEVBQ2YsUUFBdUQ7UUFFdkQsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxxQkFBcUIsRUFBRTtnQkFDckIsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLE9BQU8sRUFBRTtvQkFDUCxFQUFFLEVBQUUsY0FBYztvQkFDbEIsR0FBRyxFQUFFLENBQUMsQ0FBQztvQkFDUCxLQUFLLEVBQUUsQ0FBQztvQkFDUixhQUFhLEVBQUUsU0FBUztpQkFDekI7YUFDRjtTQUNGLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQXhDSjs7Ozs7Ozs7O1dBU0c7UUFDSyxtQkFBYyxHQUF1QyxFQUFFLENBQUM7UUFnQzlELGVBQWUsQ0FBQyxlQUFlLENBQUMsZ0JBQWdCLEdBQUcsSUFBSSxDQUFDO1FBQ3hELGVBQWUsQ0FBQyxlQUFlLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztRQUU5QyxJQUFJLENBQUMsZUFBZSxHQUFHLGVBQWUsQ0FBQztRQUV2QyxlQUFlLENBQUMsRUFBRSxDQUNoQixJQUFJLENBQUMsNkJBQTZCLENBQUMsT0FBTyxDQUFDLEVBQUUsRUFDN0MsQ0FBTyxLQUFLLEVBQUUsS0FBSyxFQUFFLEVBQUU7WUFDckIsTUFBTSxjQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFFaEIsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUU7Z0JBQ2YsS0FBSyxFQUFFLHdCQUF3QixlQUFlLENBQUMsS0FBSyxDQUFDLEVBQUUsOENBQThDLGVBQWUsQ0FBQyxnQkFBZ0IsQ0FBQyxLQUFLLHNCQUFzQixlQUFlLENBQUMsZ0JBQWdCLENBQUMsZ0JBQWdCLHNCQUFzQjthQUN6TyxDQUFDLENBQUM7WUFFSCxJQUFJLGNBQWMsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUNoQyxFQUFFLEVBQ0YsZUFBZSxDQUFDLGdCQUFnQixDQUNqQyxDQUFDO1lBRUYsd0RBQXdEO1lBQ3hELElBQ0UsSUFBSSxDQUFDLDZCQUE2QixDQUFDLE9BQU8sQ0FBQyxNQUFNO2dCQUNqRCxPQUFPLElBQUksQ0FBQyw2QkFBNkIsQ0FBQyxPQUFPLENBQUMsTUFBTTtvQkFDdEQsVUFBVSxFQUNaO2dCQUNBLGNBQWMsR0FBRyxNQUFNLElBQUksQ0FBQyw2QkFBNkIsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUN0RSxlQUFlLENBQUMsZ0JBQWdCLENBQ2pDLENBQUM7YUFDSDtZQUVELG1FQUFtRTtZQUNuRSxJQUFJLENBQUMsY0FBYyxFQUFFO2dCQUNuQixJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRTtvQkFDZixLQUFLLEVBQUUsd0NBQXdDLGVBQWUsQ0FBQyxLQUFLLENBQUMsRUFBRSxZQUFZO2lCQUNwRixDQUFDLENBQUM7Z0JBQ0gsT0FBTzthQUNSO1lBRUQsSUFBSSxJQUFJLENBQUMsNkJBQTZCLENBQUMsT0FBTyxDQUFDLEtBQUs7Z0JBQ2xELElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFO29CQUNmLEtBQUssRUFBRSxpQkFDTCxJQUFJLENBQUMsNkJBQTZCLENBQUMsT0FBTyxDQUFDLEtBQUssR0FBRyxJQUNyRCw0QkFBNEI7aUJBQzdCLENBQUMsQ0FBQztZQUNMLE1BQU0sY0FBTSxDQUFDLElBQUksQ0FBQyw2QkFBNkIsQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7WUFFL0QsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUU7Z0JBQ2YsS0FBSyxFQUFFLCtCQUErQixlQUFlLENBQUMsS0FBSyxDQUFDLEVBQUUsWUFBWTthQUMzRSxDQUFDLENBQUM7WUFFSCxrQkFBa0I7WUFDbEIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUMsTUFBTSxFQUFFLGNBQWMsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUMzRCxDQUFDLENBQUEsQ0FDRixDQUFDO0lBQ0osQ0FBQztJQXRJRDs7Ozs7Ozs7T0FRRztJQUNILElBQUksYUFBYTtRQUNmLE9BQU8sTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUN6RCxDQUFDO0lBYUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsSUFBSSw2QkFBNkI7UUFDL0IsT0FBYSxJQUFLLENBQUMsU0FBUyxDQUFDLHFCQUFxQixDQUFDO0lBQ3JELENBQUM7SUFvR0Q7Ozs7Ozs7Ozs7Ozs7T0FhRztJQUNILEdBQUcsQ0FBQyxrQkFBa0IsR0FBRyxFQUFFLEVBQUUsV0FBdUMsRUFBRTtRQUNwRSxNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLEdBQUcsQ0FBQyxrQkFBa0IsRUFBRSxRQUFRLENBQUMsQ0FBQztRQUN2RSxJQUFJLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRTtRQUNqQix3QkFBd0I7U0FDekIsQ0FBQyxDQUFDO1FBQ0gsT0FBTyxPQUFPLENBQUM7SUFDakIsQ0FBQztDQUNGO0FBQ0Qsa0JBQWUsc0JBQXNCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NNYW5hZ2VyUHJvY2Vzcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNQcm9jZXNzTWFuYWdlclByb2Nlc3MudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBRWQsb0ZBQTREO0FBQzVELDRGQUFzRTtBQUV0RSx3RUFBaUQ7QUFDakQsZ0ZBQTBEO0FBRTFELDRGQUF3RTtBQXdDeEUsTUFBTSxzQkFBdUIsU0FBUSx5QkFBZTtJQW1EbEQ7Ozs7Ozs7O09BUUc7SUFDSCxZQUNFLGVBQWUsRUFDZixRQUF1RDtRQUV2RCxLQUFLLENBQ0gsbUJBQVcsQ0FDVDtZQUNFLHFCQUFxQixFQUFFO2dCQUNyQixLQUFLLEVBQUUsU0FBUztnQkFDaEIsT0FBTyxFQUFFLEtBQUs7YUFDZjtTQUNGLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQW5DSjs7Ozs7Ozs7O1dBU0c7UUFDSyxtQkFBYyxHQUF1QyxFQUFFLENBQUM7UUEyQjlELDJCQUEyQjtRQUMzQixNQUFNLHNCQUFzQixHQUFHO1lBQzdCLEVBQUUsRUFBRSxjQUFjO1lBQ2xCLEdBQUcsRUFBRSxDQUFDLENBQUM7WUFDUCxLQUFLLEVBQUUsQ0FBQztZQUNSLE1BQU0sRUFBRSxTQUFTO1NBQ2xCLENBQUM7UUFDRixJQUFJLElBQUksQ0FBQyw2QkFBNkIsQ0FBQyxPQUFPLEtBQUssSUFBSSxFQUFFO1lBQ3ZELElBQUksQ0FBQyw2QkFBNkIsQ0FBQyxPQUFPLEdBQUcsc0JBQXNCLENBQUM7U0FDckU7YUFBTSxJQUFJLHFCQUFlLENBQUMsSUFBSSxDQUFDLDZCQUE2QixDQUFDLE9BQU8sQ0FBQyxFQUFFO1lBQ3RFLElBQUksQ0FBQyw2QkFBNkIsQ0FBQyxPQUFPLG1DQUNyQyxzQkFBc0IsR0FDdEIsSUFBSSxDQUFDLDZCQUE2QixDQUFDLE9BQU8sQ0FDOUMsQ0FBQztTQUNIO1FBQ0QsZUFBZSxDQUFDLGVBQWUsQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENB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

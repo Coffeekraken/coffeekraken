@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SError from '../../error/SError';
 import __deepMerge from '../../object/deepMerge';
 import __SDocblock from '../../docblock/SDocblock';
 

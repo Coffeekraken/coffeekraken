@@ -13,24 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const sugar_1 = __importDefault(require("../../config/sugar"));
-    /**
-     * @name            availableColors
-     * @namespace       sugar.shared.dev.colors
-     * @type            Function
-     *
-     * Return the list of color names you can access using the ```colorValue``` function.
-     * These colors are specified in the config.terminal configuration file under the "colors" property.
-     *
-     * @example         js
-     * import availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
-     * availableColors(); => ['black','white','yellow','green',...]
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    function availableColors() {
-        return Object.keys(sugar_1.default('dev.colors'));
+    function availableColors(settings) {
+        settings = Object.assign({ excludeBasics: false }, (settings !== null && settings !== void 0 ? settings : {}));
+        let colors = Object.keys(sugar_1.default('dev.colors'));
+        if (settings.excludeBasics) {
+            colors = colors.filter((c) => {
+                return c !== 'white' && c !== 'black' && c !== 'grey' && c !== 'gray';
+            });
+        }
+        return colors;
     }
     exports.default = availableColors;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXZhaWxhYmxlQ29sb3JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXZhaWxhYmxlQ29sb3JzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0lBQUEsK0RBQStDO0lBRS9DOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0gsU0FBd0IsZUFBZTtRQUNyQyxPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsZUFBYSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7SUFDbEQsQ0FBQztJQUZELGtDQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXZhaWxhYmxlQ29sb3JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXZhaWxhYmxlQ29sb3JzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0lBQUEsK0RBQStDO0lBb0IvQyxTQUF3QixlQUFlLENBQ3JDLFFBQTRDO1FBRTVDLFFBQVEsbUJBQ04sYUFBYSxFQUFFLEtBQUssSUFDakIsQ0FBQyxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztRQUNGLElBQUksTUFBTSxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsZUFBYSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7UUFFdEQsSUFBSSxRQUFRLENBQUMsYUFBYSxFQUFFO1lBQzFCLE1BQU0sR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7Z0JBQzNCLE9BQU8sQ0FBQyxLQUFLLE9BQU8sSUFBSSxDQUFDLEtBQUssT0FBTyxJQUFJLENBQUMsS0FBSyxNQUFNLElBQUksQ0FBQyxLQUFLLE1BQU0sQ0FBQztZQUN4RSxDQUFDLENBQUMsQ0FBQztTQUNKO1FBRUQsT0FBTyxNQUFNLENBQUM7SUFDaEIsQ0FBQztJQWhCRCxrQ0FnQkMifQ==

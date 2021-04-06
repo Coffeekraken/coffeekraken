@@ -69,7 +69,7 @@ export interface ISProcessProcessObj {
   stdout: any[];
   stderr: any[];
   params: any;
-  settings: ISProcessSettings;
+  settings: Partial<ISProcessSettings>;
 }
 
 export interface ISProcessSettings {
@@ -470,13 +470,15 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       ) {
         this._processPromise &&
           this._processPromise.on('*', (value, metas) => {
+            if (value.value && value.value instanceof Error) {
+              value.value = __toString(value.value);
+            }
+            // console.log('EEE', value);
             process.send !== undefined &&
-              process.send(
-                __toJson({
-                  value,
-                  metas
-                })
-              );
+              process.send({
+                value,
+                metas
+              });
           });
       }
     }
@@ -513,6 +515,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           'reject:1',
           'cancel:1',
           'error:1',
+          'success:1',
+          'close.success:1',
           'close.error:1',
           'close.killed:1'
         ].join(','),

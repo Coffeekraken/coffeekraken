@@ -444,6 +444,10 @@ function setSettings(ctx: any, settings: any = {}) {
   if (!ctx._settings.metas?.id) ctx._settings.metas.id = ctx.constructor.name;
   if (!ctx.constructor.name.match(/^SConfig/)) {
     if (!ctx._settings.metas.color)
-      ctx._settings.metas.color = __pickRandom(__availableColors());
+      ctx._settings.metas.color = __pickRandom(
+        __availableColors({
+          excludeBasics: true
+        })
+      );
   } else if (!ctx._settings.metas.color) ctx._settings.metas.color = 'yellow';
 }

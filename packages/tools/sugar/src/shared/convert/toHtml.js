@@ -8,12 +8,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../error/SError", "../object/deepMerge", "./html/htmlFromMarkdown", "./html/htmlFromDocblocks"], factory);
+        define(["require", "exports", "../object/deepMerge", "./html/htmlFromMarkdown", "./html/htmlFromDocblocks"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const SError_1 = __importDefault(require("../error/SError"));
     const deepMerge_1 = __importDefault(require("../object/deepMerge"));
     const htmlFromMarkdown_1 = __importDefault(require("./html/htmlFromMarkdown"));
     const htmlFromDocblocks_1 = __importDefault(require("./html/htmlFromDocblocks"));
@@ -65,16 +64,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             else if (inputString.match(/(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g))
                 settings.from = 'docblocks';
             else {
-                throw new SError_1.default(`Sorry but the passed inputString does not match any supported type which are: ${supportedFromTypes.join(',')}`);
+                throw new Error(`Sorry but the passed inputString does not match any supported type which are: ${supportedFromTypes.join(',')}`);
             }
         }
         // convert the string from the correct type
         const converterFn = convertersByType[settings.from];
         if (!converterFn) {
-            throw new SError_1.default(`It seems that no converter exists for your inputString which is of type "<yellow>${settings.from}</yellow>"...`);
+            throw new Error(`It seems that no converter exists for your inputString which is of type "<yellow>${settings.from}</yellow>"...`);
         }
         return converterFn(inputString, settings);
     }
     exports.default = toHtml;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9IdG1sLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidG9IdG1sLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDZEQUF1QztJQUN2QyxvRUFBOEM7SUFDOUMsK0VBQXlEO0lBQ3pELGlGQUEyRDtJQUUzRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BOEJHO0lBQ0gsTUFBTSxrQkFBa0IsR0FBRyxDQUFDLFVBQVUsRUFBRSxXQUFXLENBQUMsQ0FBQztJQUNyRCxNQUFNLGdCQUFnQixHQUFHO1FBQ3ZCLFFBQVEsRUFBRSwwQkFBa0I7UUFDNUIsU0FBUyxFQUFFLDJCQUFtQjtLQUMvQixDQUFDO0lBQ0YsU0FBUyxNQUFNLENBQUMsV0FBVyxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQ3hDLFFBQVEsR0FBRyxtQkFBVyxDQUNwQjtZQUNFLElBQUksRUFBRSxJQUFJO1NBQ1gsRUFDRCxRQUFRLENBQ1QsQ0FBQztRQUVGLDRDQUE0QztRQUM1QyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksRUFBRTtZQUNsQix1QkFBdUI7WUFDdkIsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLGlCQUFpQixDQUFDO2dCQUFFLFFBQVEsQ0FBQyxJQUFJLEdBQUcsVUFBVSxDQUFDO2lCQUNoRSxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMscUNBQXFDLENBQUM7Z0JBQy9ELFFBQVEsQ0FBQyxJQUFJLEdBQUcsV0FBVyxDQUFDO2lCQUN6QjtnQkFDSCxNQUFNLElBQUksZ0JBQVEsQ0FDaEIsaUZBQWlGLGtCQUFrQixDQUFDLElBQUksQ0FDdEcsR0FBRyxDQUNKLEVBQUUsQ0FDSixDQUFDO2FBQ0g7U0FDRjtRQUVELDJDQUEyQztRQUMzQyxNQUFNLFdBQVcsR0FBRyxnQkFBZ0IsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFcEQsSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUNoQixNQUFNLElBQUksZ0JBQVEsQ0FDaEIsb0ZBQW9GLFFBQVEsQ0FBQyxJQUFJLGVBQWUsQ0FDakgsQ0FBQztTQUNIO1FBRUQsT0FBTyxXQUFXLENBQUMsV0FBVyxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQzVDLENBQUM7SUFDRCxrQkFBZSxNQUFNLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9IdG1sLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidG9IdG1sLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLG9FQUE4QztJQUM5QywrRUFBeUQ7SUFDekQsaUZBQTJEO0lBRTNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0E4Qkc7SUFDSCxNQUFNLGtCQUFrQixHQUFHLENBQUMsVUFBVSxFQUFFLFdBQVcsQ0FBQyxDQUFDO0lBQ3JELE1BQU0sZ0JBQWdCLEdBQUc7UUFDdkIsUUFBUSxFQUFFLDBCQUFrQjtRQUM1QixTQUFTLEVBQUUsMkJBQW1CO0tBQy9CLENBQUM7SUFDRixTQUFTLE1BQU0sQ0FBQyxXQUFXLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFDeEMsUUFBUSxHQUFHLG1CQUFXLENBQ3BCO1lBQ0UsSUFBSSxFQUFFLElBQUk7U0FDWCxFQUNELFFBQVEsQ0FDVCxDQUFDO1FBRUYsNENBQTRDO1FBQzVDLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFO1lBQ2xCLHVCQUF1QjtZQUN2QixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUM7Z0JBQUUsUUFBUSxDQUFDLElBQUksR0FBRyxVQUFVLENBQUM7aUJBQ2hFLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxxQ0FBcUMsQ0FBQztnQkFDL0QsUUFBUSxDQUFDLElBQUksR0FBRyxXQUFXLENBQUM7aUJBQ3pCO2dCQUNILE1BQU0sSUFBSSxLQUFLLENBQ2IsaUZBQWlGLGtCQUFrQixDQUFDLElBQUksQ0FDdEcsR0FBRyxDQUNKLEVBQUUsQ0FDSixDQUFDO2FBQ0g7U0FDRjtRQUVELDJDQUEyQztRQUMzQyxNQUFNLFdBQVcsR0FBRyxnQkFBZ0IsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFcEQsSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUNoQixNQUFNLElBQUksS0FBSyxDQUNiLG9GQUFvRixRQUFRLENBQUMsSUFBSSxlQUFlLENBQ2pILENBQUM7U0FDSDtRQUVELE9BQU8sV0FBVyxDQUFDLFdBQVcsRUFBRSxRQUFRLENBQUMsQ0FBQztJQUM1QyxDQUFDO0lBQ0Qsa0JBQWUsTUFBTSxDQUFDIn0=

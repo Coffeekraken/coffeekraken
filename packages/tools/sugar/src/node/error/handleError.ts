@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __parseHtml from '../../shared/console/parseHtml';
-import __SError from '../../shared/error/SError';
 import __isChildProcess from '../../node/is/childProcess';
 import __toString from '../../shared/string/toString';
 
@@ -52,10 +51,6 @@ function __handleMainProcessErrors(error) {
 
   if (error instanceof Buffer) {
     error = error.toString();
-  }
-
-  if (!(error instanceof __SError)) {
-    error = new __SError(error);
   }
 
   setTimeout(() => {

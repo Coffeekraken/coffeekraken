@@ -84,8 +84,6 @@ class SProcessManager extends __SEventEmitter {
       )
     );
 
-    console.log(this.processManagerSettings);
-
     if (this.processManagerSettings.stdio) {
       this._stdio = __SStdio.new(
         [],
@@ -124,9 +122,9 @@ class SProcessManager extends __SEventEmitter {
       processInstance,
       {
         metas: {
-          id
+          id: `${this.constructor.name}.${id}`
         },
-        processManagerProcess: settings
+        processManagerProcess: settings ?? {}
       }
     );
 
@@ -171,8 +169,8 @@ class SProcessManager extends __SEventEmitter {
     );
     this.pipe(promise, {
       prefixEvent: processId,
-      exclude: []
-      // overrideEmitter: true
+      exclude: [],
+      overrideEmitter: true
     });
     return promise;
   }

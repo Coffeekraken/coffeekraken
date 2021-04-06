@@ -6,10 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
 import __sugarConfig from '../../../shared/config/sugar';
 import __fs from 'fs';
 import __execPhp from 'exec-php';
-import __SError from '../../../shared/error/SError';
 import __folderPath from '../../fs/folderPath';
 import __getFilename from '../../fs/filename';
-import __copy from '../../clipboard/copy';
 import __childProcess from 'child_process';
 import __unique from '../../../shared/array/unique';
 

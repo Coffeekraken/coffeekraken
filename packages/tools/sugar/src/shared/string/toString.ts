@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __isNode from '../is/node';
 import __chalk from 'chalk';
 import __deepMap from '../object/deepMap';
 import __isMap from '../is/map';
@@ -50,6 +51,7 @@ function fn(value, settings = {}) {
     {
       beautify: true,
       highlight: true,
+      verbose: true,
       theme: {
         number: __chalk.yellow,
         default: __chalk.white,
@@ -74,15 +76,44 @@ function fn(value, settings = {}) {
   if (value === undefined) return 'undefined';
   // error
   if (value instanceof Error) {
-    if (typeof value.toString === 'function') {
-      return value.toString();
+    const errorStr = value.toString();
+    let stackStr = value.stack;
+    const messageStr = value.message;
+
+    if (settings.beautify) {
+      if (__isNode()) {
+        const __packageRoot = require('../../node/path/packageRoot').default; // eslint-disable-line
+        stackStr = stackStr.replace(errorStr, '').trim();
+        stackStr = stackStr
+          .split(`${__packageRoot(process.cwd(), true)}/`)
+          .join('');
+        stackStr = `${stackStr
+          .split('\n')
+          .map((l) => {
+            l.match(/[a-zA-Z-0-9\-_\./]+/gm).forEach((str) => {
+              if (str.match(/\//) && str.match(/\.ts$/))
+                l = l.replace(str, `<blue>${str}</blue>`);
+              else if (str.match(/\//))
+                l = l.replace(str, `<cyan>${str}</cyan>`);
+            });
+            l = l.trim().replace(/^at\s/, '<yellow>at</yellow> ');
+            l = l.replace('->', '<yellow>└-></yellow>');
+            l = l.replace(/:([0-9]{1,29}:[0-9]{1,29})/, `:<yellow>$1</yellow>`);
+            return `<yellow>│</yellow> ${l.trim()}`;
+          })
+          .join('\n')}`;
+      }
     }
-    return `${value.name}:
-
-      ${value.message}
-
-      ${value.stack}
-    `;
+    if (settings.verbose) {
+      return [
+        `<red>${value.constructor.name || 'Error'}</red>`,
+        '',
+        messageStr,
+        '',
+        stackStr
+      ].join('\n');
+    }
+    return errorStr;
   }
 
   // Map

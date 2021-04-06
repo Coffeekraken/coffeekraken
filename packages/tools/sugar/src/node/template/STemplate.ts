@@ -3,7 +3,6 @@ import __deepMerge from '../../shared/object/deepMerge';
 import __sugarConfig from '../../shared/config/sugar';
 import __path from 'path';
 import __fs from 'fs';
-import __SError from '../../shared/error/SError';
 import __glob from 'glob';
 import __STemplateEngine, { ISTemplateEngine } from './engines/STemplateEngine';
 import __SClass from '@coffeekraken/s-class';
@@ -202,7 +201,7 @@ class STemplate extends __SClass implements ISTemplate {
     if (!enginePath.match(/\.js$/)) enginePath += '.js';
     // make sure the engine path exists
     if (!__fs.existsSync(enginePath)) {
-      throw new __SError(
+      throw new Error(
         `Sorry but the engine "<yellow>${enginePath}</yellow>" that you want to register does not exists...`
       );
     }
@@ -243,7 +242,7 @@ class STemplate extends __SClass implements ISTemplate {
     if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
     // make sure the engine path exists
     if (!__fs.existsSync(handlerPath)) {
-      throw new __SError(
+      throw new Error(
         `Sorry but the data handler "<yellow>${handlerPath}</yellow>" that you want to register does not exists...`
       );
     }
@@ -387,7 +386,7 @@ class STemplate extends __SClass implements ISTemplate {
       // check if we can find the view path passed
       if (__path.isAbsolute(viewPathOrTemplateString)) {
         if (!__fs.existsSync(viewPathOrTemplateString)) {
-          throw new __SError(
+          throw new Error(
             `Sorry but the absolute path to the view "<cyan>${viewPathOrTemplateString}</cyan>" does not exist...`
           );
         }
@@ -409,7 +408,7 @@ class STemplate extends __SClass implements ISTemplate {
           }
         }
         if (!this._viewPath) {
-          throw new __SError(
+          throw new Error(
             `Sorry but the passed dot path "<cyan>${viewPathOrTemplateString}</cyan>" does not resolve to any existing views...`
           );
         }

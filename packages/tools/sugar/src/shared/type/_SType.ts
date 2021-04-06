@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SError from '../error/SError';
 import __map from '../iterable/map';
 import __getExtendsStack from '../class/getExtendsStack';
 import __typeOf from '../value/typeof';
@@ -509,9 +508,9 @@ class SType implements ISType {
       throw __parseHtml(stack.join('\n'));
     }
     if (settings.verbose === true) {
-      return new __SError(verboseObj);
+      return new Error(verboseObj);
     }
-    return new __SError(
+    return new Error(
       `Something goes wrong with the casting process but not details available sorry...`
     );
   }

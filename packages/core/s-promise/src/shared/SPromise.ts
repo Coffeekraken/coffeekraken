@@ -5,6 +5,7 @@ import __getMethods from '@coffeekraken/sugar/src/shared/class/getMethods';
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __treatAsValue, {
   ITreatAsValueProxy,
   ITreatAsValueSettings
@@ -252,6 +253,7 @@ class SPromise
         api[func] = this[func].bind(this);
       });
       (async () => {
+        await __wait(0);
         try {
           await executorFn(api);
         } catch (e) {

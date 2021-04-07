@@ -368,7 +368,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _duration: any;
-  _restarted = 0;
   run(paramsOrStringArgs = {}, settings: Partial<ISProcessSettings> = {}) {
     const processSettings = <ISProcessSettings>(
       __deepMerge(this.processSettings, settings)

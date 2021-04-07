@@ -1,0 +1,22 @@
+{
+  "config": {
+    "folders": [
+      {
+        "level": "app",
+        "path": "./src/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "frontstack",
+      "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
+      "actions": {
+        "start": {
+          "description": "Start the frontstack application into the current working directory",
+          "process": "./src/node/start/start.cli.js"
+        }
+      }
+    }
+  ]
+}

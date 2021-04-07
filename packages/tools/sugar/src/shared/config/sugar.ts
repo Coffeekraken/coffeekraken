@@ -1,6 +1,7 @@
 import __SConfig from '@coffeekraken/s-config';
 import __isNode from '../is/node';
 import __packageRoot from '../path/packageRoot';
+import __registerFolder from './registerFolder';
 
 /**
  * @name                  sugar
@@ -27,9 +28,29 @@ import __packageRoot from '../path/packageRoot';
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// @ts-ignore
+(global ?? window)._registeredConfigFolderPaths = [];
 let sugarConfigInstance;
+let _sugarJsons;
 export default function sugar(dotPath) {
   if (__isNode()) {
+    if (!_sugarJsons) {
+      const sugarJson = require('../../node/sugar/sugarJson').default;
+      const __path = require('path');
+      _sugarJsons = sugarJson('*');
+      Object.keys(_sugarJsons).forEach((packageName) => {
+        const jsonObj = _sugarJsons[packageName];
+        if (jsonObj.config && jsonObj.config.folders) {
+          jsonObj.config.folders.forEach((folderObj) => {
+            __registerFolder(
+              __path.resolve(jsonObj.metas.folderPath, folderObj.path),
+              folderObj.level
+            );
+          });
+        }
+      });
+    }
+
     if (!sugarConfigInstance) {
       const __path = require('path'); // eslint-disable-line
       const { SConfigFolderAdapter } = require('@coffeekraken/s-config'); // eslint-disable-line
@@ -42,11 +63,27 @@ export default function sugar(dotPath) {
             configFolderAdapter: {
               folderName: '.sugar',
               fileName: '[name].config.js',
-              defaultConfigPath: __path.resolve(__dirname, '../../config'),
-              appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
-              userConfigPath: `${__packageRoot(
-                process.cwd()
-              )}/.local/[foldername]`
+              defaultConfigPath: [
+                __path.resolve(__dirname, '../../config'),
+                // @ts-ignore
+                ...(global ?? window)._registeredConfigFolderPaths
+                  .filter((obj) => obj.level === 'default')
+                  .map((obj) => obj.path)
+              ],
+              appConfigPath: [
+                `${__packageRoot(process.cwd())}/[folderName]`,
+                // @ts-ignore
+                ...(global ?? window)._registeredConfigFolderPaths
+                  .filter((obj) => obj.level === 'app')
+                  .map((obj) => obj.path)
+              ],
+              userConfigPath: [
+                `${__packageRoot(process.cwd())}/.local/[folderName]`,
+                // @ts-ignore
+                ...(global ?? window)._registeredConfigFolderPaths
+                  .filter((obj) => obj.level === 'user')
+                  .map((obj) => obj.path)
+              ]
             }
           })
         ]

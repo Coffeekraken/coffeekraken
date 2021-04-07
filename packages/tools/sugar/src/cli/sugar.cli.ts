@@ -8,6 +8,7 @@ import __path from 'path';
 import __fs from 'fs';
 import __isPath from '../shared/is/path';
 import __parseHtml from '../shared/console/parseHtml';
+import __sugarJson from '../node/sugar/sugarJson';
 
 /**
  * @name            sugar.cli
@@ -39,138 +40,99 @@ if (!stack) {
   stack = 'app';
 }
 
-// get global node modules directory path
-const globalNodeModulesPath = __childProcess
-  .execSync(`npm root -g`)
-  .toString()
-  .trim();
+(async () => {
+  const sugarJsons = await __sugarJson('*');
 
-// get local node modules directory path
-const localNodeModulesPath = `${__packageRoot()}/node_modules`;
+  // // filter by packageJson
+  // const filteredFiles: string[] = [];
+  // files.forEach((path) => {
+  //   const packagePath = path.split('node_modules/').slice(-1);
+  //   if (filteredFiles.indexOf(packagePath) === -1) filteredFiles.push(path);
+  // });
 
-// get local node modules directory path
-const topLocalNodeModulesPath = `${__packageRoot(
-  process.cwd(),
-  true
-)}/node_modules`;
+  const availableCli: Record<string, string> = {};
 
-// build globs
-const globs: string[] = [];
-
-// local first
-if (localNodeModulesPath) {
-  globs.push(`${localNodeModulesPath}/*/sugar.json`);
-  globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
-  globs.push(`${__packageRoot()}/sugar.json`);
-}
-// top local
-if (localNodeModulesPath !== topLocalNodeModulesPath) {
-  globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
-  globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
-  globs.push(`${__packageRoot(process.cwd(), true)}/sugar.json`);
-}
-// then global
-if (globalNodeModulesPath) {
-  globs.push(`${globalNodeModulesPath}/*/sugar.json`);
-  globs.push(`${globalNodeModulesPath}/*/*/sugar.json`);
-}
-
-// search for "sugar.json" files
-const files = __glob.sync(globs, {});
-
-// filter by packageJson
-const filteredFiles: string[] = [];
-files.forEach((path) => {
-  const packagePath = path.split('node_modules/').slice(-1);
-  if (filteredFiles.indexOf(packagePath) === -1) filteredFiles.push(path);
-});
-
-const availableCli: Record<string, string> = {};
-
-// loop on each filtered files to build the availableCli stack
-filteredFiles.forEach((sugarFilePath) => {
-  const sugarJson = require(sugarFilePath);
-  const packageJson = require(sugarFilePath.replace(
-    '/sugar.json',
-    '/package.json'
-  ));
-  if (!sugarJson.cli) return;
-  sugarJson.cli.forEach((cliObj) => {
-    if (!cliObj.actions) {
-      throw new Error(
-        `The following sugar.json file "${sugarFilePath}" is missing the "cli.actions" object`
-      );
-    }
-    Object.keys(cliObj.actions).forEach((action) => {
-      const actionObj = cliObj.actions[action];
-
-      if (actionObj.process && __isPath(actionObj.process)) {
-        const cliPath = __path.resolve(
-          sugarFilePath.replace(/\/sugar\.json$/, ''),
-          actionObj.process
+  // loop on each filtered files to build the availableCli stack
+  Object.keys(sugarJsons).forEach((packageName) => {
+    const sugarJson = sugarJsons[packageName];
+    const packageJson = require(sugarJson.metas.path.replace(
+      '/sugar.json',
+      '/package.json'
+    ));
+    if (!sugarJson.cli) return;
+    sugarJson.cli.forEach((cliObj) => {
+      if (!cliObj.actions) {
+        throw new Error(
+          `The sugar.json file of the package "<yellow>${packageName}</yellow>"is missing the "cli.actions" object`
         );
-        if (!__fs.existsSync(cliPath))
-          throw new Error(
-            `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
-          );
-        availableCli[`${cliObj.stack}.${action}`] = {
-          ...actionObj,
-          packageJson,
-          process: require(cliPath).default // eslint-disable-line
-        };
-      } else if (actionObj.command) {
-        availableCli[`${cliObj.stack}.${action}`] = {
-          ...actionObj,
-          packageJson
-        };
       }
+      Object.keys(cliObj.actions).forEach((action) => {
+        const actionObj = cliObj.actions[action];
+
+        if (actionObj.process && __isPath(actionObj.process)) {
+          const cliPath = __path.resolve(
+            sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
+            actionObj.process
+          );
+          if (!__fs.existsSync(cliPath))
+            throw new Error(
+              `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
+            );
+          availableCli[`${cliObj.stack}.${action}`] = {
+            ...actionObj,
+            process: require(cliPath).default // eslint-disable-line
+          };
+        } else if (actionObj.command) {
+          availableCli[`${cliObj.stack}.${action}`] = {
+            ...actionObj
+          };
+        }
+      });
     });
   });
-});
 
-// check if the requested stack.action exists
-let currentPackage;
-if (!availableCli[`${stack}.${action}`]) {
-  const logArray: string[] = [];
-  logArray.push(' ');
-  logArray.push(`--------------------`);
-  logArray.push(`<yellow>Sugar CLI</yellow>`);
-  logArray.push(`--------------------`);
-  logArray.push(
-    `<red>Sorry</red> but the requested "<cyan>${stack}.${action}</cyan>" command does not exists...`
-  );
-  logArray.push(
-    `Here's the list of <green>available commands</green> in your context:`
-  );
-  Object.keys(availableCli).forEach((stackAction) => {
-    const cliObj = availableCli[stackAction];
-    if (currentPackage !== cliObj.packageJson.name) {
-      logArray.push(' ');
-      logArray.push(
-        `<yellow>│</yellow> <yellow>${cliObj.packageJson.name}</yellow> ${cliObj.packageJson.license} (<cyan>${cliObj.packageJson.version}</cyan>)`
-      );
-      currentPackage = cliObj.packageJson.name;
-    }
+  // check if the requested stack.action exists
+  let currentPackage;
+  if (!availableCli[`${stack}.${action}`]) {
+    const logArray: string[] = [];
+    logArray.push(' ');
+    logArray.push(`--------------------`);
+    logArray.push(`<yellow>Sugar CLI</yellow>`);
+    logArray.push(`--------------------`);
     logArray.push(
-      // @ts-ignore
-      `<yellow>│</yellow> - '<yellow>sugar</yellow> <cyan>${stackAction}</cyan> ...': ${cliObj.description}`
+      `<red>Sorry</red> but the requested "<cyan>${stack}.${action}</cyan>" command does not exists...`
     );
-  });
-  logArray.push(' ');
-  logArray.push(
-    `For more help on each of these commands, simply call them with the <cyan>--help</cyan> flag`
-  );
-  logArray.push(' ');
-  console.log(__parseHtml(logArray.join('\n')));
-  process.exit();
-}
+    logArray.push(
+      `Here's the list of <green>available commands</green> in your context:`
+    );
+    Object.keys(availableCli).forEach((stackAction) => {
+      const cliObj = availableCli[stackAction];
+      if (currentPackage !== packageName) {
+        logArray.push(' ');
+        logArray.push(`<yellow>│</yellow> <yellow>${packageName}</yellow>`);
+        currentPackage = packageName;
+      }
+      logArray.push(
+        // @ts-ignore
+        `<yellow>│</yellow> - '<yellow>sugar</yellow> <cyan>${stackAction}</cyan> ...': ${cliObj.description}`
+      );
+    });
+    logArray.push(' ');
+    logArray.push(
+      `For more help on each of these commands, simply call them with the <cyan>--help</cyan> flag`
+    );
+    logArray.push(' ');
+    console.log(__parseHtml(logArray.join('\n')));
+    process.exit();
+  }
 
-const cliObj = availableCli[`${stack}.${action}`];
-// @ts-ignore
-if (cliObj.process) {
+  const cliObj = availableCli[`${stack}.${action}`];
   // @ts-ignore
-  cliObj.process(args);
-}
+  if (cliObj.process) {
+    // @ts-ignore
+    cliObj.process(args);
+  }
+})();
 
 // // if no action, try to get the default one
 // if (!action) {

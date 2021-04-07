@@ -17,6 +17,10 @@ class MyInterface extends __SInterface {
     crash: {
       type: 'Boolean',
       default: false
+    },
+    crashTimeout: {
+      type: 'Number',
+      default: 100
     }
   };
 }
@@ -36,16 +40,14 @@ export default class MyProcess extends __SProcess {
       emit('log', {
         value: `Hello world ${__isChildProcess() ? 'from child process' : ''}`
       });
-      // setTimeout(async () => {
       // @ts-ignore
       if (params.crash) {
-        // await __wait(200);
+        await __wait(params.crashTimeout);
         throw new Error('COCO');
         // reject(params);
       } else {
         resolve(params);
       }
-      // }, 100);
     });
   }
 }

@@ -68,42 +68,87 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       '[name]',
       this.name
     );
-    if (this.configFolderAdapterSettings.defaultConfigPath)
-      this.configFolderAdapterSettings.defaultConfigPath = this.configFolderAdapterSettings.defaultConfigPath.replace(
-        '[folderName]',
-        this.configFolderAdapterSettings.folderName
+    if (this.configFolderAdapterSettings.defaultConfigPath) {
+      if (!Array.isArray(this.configFolderAdapterSettings.defaultConfigPath))
+        this.configFolderAdapterSettings.defaultConfigPath = [
+          this.configFolderAdapterSettings.defaultConfigPath
+        ];
+      this.configFolderAdapterSettings.defaultConfigPath = this.configFolderAdapterSettings.defaultConfigPath.map(
+        (path) => {
+          return path.replace(
+            '[folderName]',
+            this.configFolderAdapterSettings.folderName
+          );
+        }
       );
-    if (this.configFolderAdapterSettings.appConfigPath)
-      this.configFolderAdapterSettings.appConfigPath = this.configFolderAdapterSettings.appConfigPath.replace(
-        '[folderName]',
-        this.configFolderAdapterSettings.folderName
+    }
+    if (this.configFolderAdapterSettings.appConfigPath) {
+      if (!Array.isArray(this.configFolderAdapterSettings.appConfigPath))
+        this.configFolderAdapterSettings.appConfigPath = [
+          this.configFolderAdapterSettings.appConfigPath
+        ];
+      this.configFolderAdapterSettings.appConfigPath = this.configFolderAdapterSettings.appConfigPath.map(
+        (path) => {
+          return path.replace(
+            '[folderName]',
+            this.configFolderAdapterSettings.folderName
+          );
+        }
       );
-    if (this.configFolderAdapterSettings.userConfigPath)
-      this.configFolderAdapterSettings.userConfigPath = this.configFolderAdapterSettings.userConfigPath.replace(
-        '[folderName]',
-        this.configFolderAdapterSettings.folderName
+    }
+    if (this.configFolderAdapterSettings.userConfigPath) {
+      if (!Array.isArray(this.configFolderAdapterSettings.userConfigPath))
+        this.configFolderAdapterSettings.userConfigPath = [
+          this.configFolderAdapterSettings.userConfigPath
+        ];
+      this.configFolderAdapterSettings.userConfigPath = this.configFolderAdapterSettings.userConfigPath.map(
+        (path) => {
+          return path.replace(
+            '[folderName]',
+            this.configFolderAdapterSettings.folderName
+          );
+        }
       );
+    }
 
     // watch for changes
     const watchPaths: string[] = [];
-    if (
-      this.configFolderAdapterSettings.defaultConfigPath &&
-      __fs.existsSync(this.configFolderAdapterSettings.defaultConfigPath)
-    ) {
-      watchPaths.push(this.configFolderAdapterSettings.defaultConfigPath);
+    if (this.configFolderAdapterSettings.defaultConfigPath) {
+      this.configFolderAdapterSettings.defaultConfigPath = this.configFolderAdapterSettings.defaultConfigPath.filter(
+        (path) => {
+          if (__fs.existsSync(path)) {
+            watchPaths.push(path);
+            return true;
+          }
+          return false;
+        }
+      );
     }
-    if (
-      this.configFolderAdapterSettings.appConfigPath &&
-      __fs.existsSync(this.configFolderAdapterSettings.appConfigPath)
-    ) {
-      watchPaths.push(this.configFolderAdapterSettings.appConfigPath);
+    if (this.configFolderAdapterSettings.appConfigPath) {
+      this.configFolderAdapterSettings.appConfigPath = this.configFolderAdapterSettings.appConfigPath.filter(
+        (path) => {
+          if (__fs.existsSync(path)) {
+            watchPaths.push(path);
+            return true;
+          }
+          return false;
+        }
+      );
     }
-    if (
-      this.configFolderAdapterSettings.userConfigPath &&
-      __fs.existsSync(this.configFolderAdapterSettings.userConfigPath)
-    ) {
-      watchPaths.push(this.configFolderAdapterSettings.userConfigPath);
+    if (this.configFolderAdapterSettings.userConfigPath) {
+      this.configFolderAdapterSettings.userConfigPath = this.configFolderAdapterSettings.userConfigPath.filter(
+        (path) => {
+          if (__fs.existsSync(path)) {
+            watchPaths.push(path);
+            return true;
+          }
+          return false;
+        }
+      );
     }
+
+    console.log(this.configFolderAdapterSettings);
+
     __chokidar
       .watch(watchPaths, {
         ignoreInitial: true
@@ -113,129 +158,71 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       .on('add', (p) => this.update());
   }
 
+  _load(folderPaths, level) {
+    const configObj = {};
+
+    folderPaths.forEach((path) => {
+      __fs.readdirSync(path).forEach((file) => {
+        if (
+          !file.includes(
+            this.configFolderAdapterSettings.fileName.replace('[name]', '')
+          ) ||
+          configObj[file.replace('.config.js', '')] !== undefined
+        )
+          return;
+        const configData = require(`${path}/${file}`);
+        const configKey = file.replace('.config.js', '');
+
+        if (!configObj[configKey]) configObj[configKey] = {};
+
+        configObj[configKey] = __deepMerge(
+          configObj[configKey],
+          Object.keys(configData).length === 1 && configData.default
+            ? configData.default
+            : configData
+        );
+      });
+      process.env[`SConfigFolderAdapter-${level}`] = JSON.stringify(configObj);
+    });
+
+    return Object.assign({}, configObj);
+  }
+
   load() {
     this._defaultConfig = {};
     this._appConfig = {};
     this._userConfig = {};
 
-    if (
-      this.configFolderAdapterSettings.defaultConfigPath &&
-      __fs.existsSync(this.configFolderAdapterSettings.defaultConfigPath)
-    ) {
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`
-      ] = true;
-      __fs
-        .readdirSync(this.configFolderAdapterSettings.defaultConfigPath)
-        .forEach((file) => {
-          if (
-            !file.includes(
-              this.configFolderAdapterSettings.fileName.replace('[name]', '')
-            )
-          )
-            return;
-          if (this._defaultConfig[file.replace('.config.js', '')] !== undefined)
-            return;
-          const configData = require(`${this.configFolderAdapterSettings.defaultConfigPath}/${file}`);
-          this._defaultConfig[file.replace('.config.js', '')] =
-            Object.keys(configData).length === 1 && configData.default
-              ? configData.default
-              : configData;
-        });
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`
-      ] = JSON.stringify(this._defaultConfig);
-    } else if (
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`
-      ]
-    ) {
+    if (this.configFolderAdapterSettings.defaultConfigPath) {
+      this._defaultConfig = this._load(
+        this.configFolderAdapterSettings.defaultConfigPath,
+        'default'
+      );
+    } else if (process.env[`SConfigFolderAdapter-default`]) {
       this._defaultConfig = JSON.parse(
-        process.env[
-          `SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`
-        ]
+        process.env[`SConfigFolderAdapter-default`]
       );
     }
 
-    if (
-      this.configFolderAdapterSettings.defaultConfigPath !==
-        this.configFolderAdapterSettings.appConfigPath &&
-      this.configFolderAdapterSettings.appConfigPath &&
-      __fs.existsSync(this.configFolderAdapterSettings.appConfigPath)
-    ) {
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`
-      ] = true; // intermediate value
-      __fs
-        .readdirSync(this.configFolderAdapterSettings.appConfigPath)
-        .forEach((file) => {
-          if (
-            !file.includes(
-              this.configFolderAdapterSettings.fileName.replace('[name]', '')
-            )
-          )
-            return;
-          const configData = require(`${this.configFolderAdapterSettings.appConfigPath}/${file}`);
-          this._appConfig[file.replace('.config.js', '')] =
-            Object.keys(configData).length === 1 && configData.default
-              ? configData.default
-              : configData;
-        });
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`
-      ] = JSON.stringify(this._appConfig);
-    } else if (
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`
-      ]
-    ) {
-      this._appConfig = JSON.parse(
-        process.env[
-          `SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`
-        ]
+    if (this.configFolderAdapterSettings.appConfigPath) {
+      this._appConfig = this._load(
+        this.configFolderAdapterSettings.appConfigPath,
+        'app'
       );
+    } else if (process.env[`SConfigFolderAdapter-app`]) {
+      this._appConfig = JSON.parse(process.env[`SConfigFolderAdapter-app`]);
     }
 
-    if (
-      this.configFolderAdapterSettings.defaultConfigPath !==
-        this.configFolderAdapterSettings.userConfigPath &&
-      this.configFolderAdapterSettings.appConfigPath !==
-        this.configFolderAdapterSettings.userConfigPath &&
-      this.configFolderAdapterSettings.userConfigPath &&
-      __fs.existsSync(this.configFolderAdapterSettings.userConfigPath)
-    ) {
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`
-      ] = true; // intermediate value
-      __fs
-        .readdirSync(this.configFolderAdapterSettings.userConfigPath)
-        .forEach((file) => {
-          if (
-            !file.includes(
-              this.configFolderAdapterSettings.fileName.replace('[name]', '')
-            )
-          )
-            return;
-          const configData = require(`${this.configFolderAdapterSettings.userConfigPath}/${file}`);
-          this._userConfig[file.replace('.config.js', '')] =
-            Object.keys(configData).length === 1 && configData.default
-              ? configData.default
-              : configData;
-        });
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`
-      ] = JSON.stringify(this._userConfig);
-    } else if (
-      process.env[
-        `SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`
-      ]
-    ) {
-      this._userConfig = JSON.parse(
-        process.env[
-          `SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`
-        ]
+    if (this.configFolderAdapterSettings.userConfigPath) {
+      this._userConfig = this._load(
+        this.configFolderAdapterSettings.userConfigPath,
+        'user'
       );
+    } else if (process.env[`SConfigFolderAdapter-user`]) {
+      this._userConfig = JSON.parse(process.env[`SConfigFolderAdapter-user`]);
     }
+
+    console.log(this._appConfig);
 
     // mix the configs and save them in the instance
     const n = __deepMerge(

@@ -4,9 +4,9 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SProcess from './SProcess';
 import __SStdio from '@coffeekraken/s-stdio';
-import __SProcessManagerProcess, {
-  ISProcessManagerProcessSettings
-} from './SProcessManagerProcess';
+import __SProcessManagerProcessWrapper, {
+  ISProcessManagerProcessWrapperSettings
+} from './SProcessManagerProcessWrapper';
 
 /**
  * @name            SProcessManager
@@ -102,7 +102,7 @@ class SProcessManager extends __SEventEmitter {
    *
    * @param       {String}        id                    A uniquid for your process
    * @param       {SProcess}      processInstance       The actual process instance
-   * @param       {ISProcessManagerProcessSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
+   * @param       {ISProcessManagerProcessWrapperSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -110,7 +110,7 @@ class SProcessManager extends __SEventEmitter {
   attachProcess(
     id: string,
     processInstance: __SProcess,
-    settings?: Partial<ISProcessManagerProcessSettings>
+    settings?: Partial<ISProcessManagerProcessWrapperSettings>
   ): void {
     // avoid multiple same processes
     if (this._processesStack[id])
@@ -118,7 +118,7 @@ class SProcessManager extends __SEventEmitter {
         `<yellow>[${this.constructor.name}.attach]</yellow> Sorry but a process with the id "<magenta>${id}</magenta>" is already attached to this process manager`
       );
 
-    const processManagerProcess = new __SProcessManagerProcess(
+    const processManagerProcess = new __SProcessManagerProcessWrapper(
       processInstance,
       {
         metas: {
@@ -132,6 +132,25 @@ class SProcessManager extends __SEventEmitter {
     if (this._stdio) this._stdio.registerSource(processManagerProcess);
 
     this._processesStack[id] = processManagerProcess;
+  }
+
+  /**
+   * @name          detachProcess
+   * @type          Function
+   *
+   * Simple method to detach a process from the manager using his id.
+   *
+   * @param       {String}      id        The process id to detach
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  detachProcess(id: string): void {
+    if (!this._processesStack[id])
+      throw new Error(
+        `<yellow>[${this.constructor.name}.attach]</yellow> Sorry but a process with the id "<magenta>${id}</magenta>" has not being attached to this process manager`
+      );
+    this._processesStack[id].detach();
   }
 
   /**

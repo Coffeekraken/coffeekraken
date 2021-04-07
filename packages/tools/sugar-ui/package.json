@@ -11,6 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input",
+    "@coffeekraken/s-frontstack": "file:../../app/s-frontstack",
+    "@coffeekraken/s-promise": "file:../../core/s-promise",
     "@coffeekraken/sugar": "file:../sugar",
     "@snowpack/plugin-babel": "^2.1.4",
     "codemirror": "^5.58.2",

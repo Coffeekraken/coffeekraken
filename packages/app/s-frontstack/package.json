@@ -1,0 +1,14 @@
+{
+  "name": "@coffeekraken/s-frontstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/node/exports.js",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-class": "file:../../core/s-class",
+    "@coffeekraken/s-process": "file:../../core/s-process",
+    "@coffeekraken/sugar": "file:../../tools/sugar"
+  }
+}

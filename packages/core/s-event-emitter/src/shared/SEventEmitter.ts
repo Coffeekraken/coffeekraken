@@ -48,12 +48,14 @@ export interface ISEventEmitterPipeSettings {
 export interface ISEventEmitterOnSettings {
   processor: ISEventEmitterPipeSettingsProcessorFn;
   filter: ISEventEmitterPipeSettingsFilterFn;
+  id: string;
 }
 
 export interface ISEventEmitterCallbackSettings {
   callNumber?: number;
   filter?: ISEventEmitterPipeSettingsFilterFn;
   processor?: ISEventEmitterPipeSettingsProcessorFn;
+  id?: string;
 }
 
 export interface ISEventEmitterMetas {
@@ -303,6 +305,18 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    */
   _eventsStacks: any = {};
 
+  /**
+   * @name          _onStackById
+   * @type          Array
+   * @private
+   *
+   * Store all the registered "on" called with a specific "id" in the settings
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  _onStackById: any = {};
+
   // @ts-ignore
   _settings: ISEventEmitterConstructorSettings;
 
@@ -357,10 +371,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         settings || {}
       )
     );
-
-    // this.on('answer', (value) => {
-    //   console.log('ANSEER', value);
-    // });
   }
 
   /**
@@ -543,6 +553,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       callNumber: undefined,
       filter: undefined,
       processor: undefined,
+      id: undefined,
       ...settings
     };
 
@@ -551,6 +562,17 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     //     `Sorry but you can't call the "${stack}" method on this SEventEmitter cause it has been destroyed...`
     //   );
     // }
+
+    // save the passed "id" to be able to use it later to apply
+    // some actions like "off", etc... directly on this event registration
+    if (settings.id) {
+      if (!this._onStackById[settings.id]) this._onStackById[settings.id] = [];
+      this._onStackById[settings.id].push({
+        event,
+        callback,
+        settings
+      });
+    }
 
     // make sure the stack exist
     if (!this._eventsStacks[event]) {
@@ -745,7 +767,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         }
       }
 
-      // call the callback function
+      //  call the callback function
       const callbackResult = await item.callback(
         currentCallbackReturnedValue,
         metasObj
@@ -841,7 +863,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     const set = <ISEventEmitterOnSettings>__deepMerge(
       {
         filter: undefined,
-        processor: undefined
+        processor: undefined,
+        id: undefined
       },
       settings
     );
@@ -862,7 +885,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       this._registerCallbackInEventStack(name, callback, {
         callNumber,
         filter: set.filter,
-        processor: set.processor
+        processor: set.processor,
+        id: set.id
       });
     });
 
@@ -877,7 +901,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    * This method allows you to unsubscribe to an event by passing the event name an optionally the callback function.
    * If you don't pass the callback function, all the subscribed events the same as the passed one will be unsubscribed.
    *
-   * @param       {String}        event        The event name to unsubscribe to
+   * @param       {String}        event        The event name to unsubscribe to. It can be also an "on" method passed setting "id". In this case, it will unsubscribe all the created subscription(s) in this particular "on" call.
    * @param       {Function}    [callback=null]     The callback function you want to unsubscribe
    * @return      {SEventEmitter}                The SEventEmitter instance to maintain chainability
    *
@@ -886,7 +910,14 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    */
   off(event: string, callback?: ISEventEmitterCallbackFn): ISEventEmitter {
     if (!callback) {
-      delete this._eventsStacks[event];
+      if (this._eventsStacks[event]) {
+        delete this._eventsStacks[event];
+      } else if (this._onStackById[event]) {
+        this._onStackById[event].forEach((onStackByIdObj) => {
+          this.off(onStackByIdObj.event, onStackByIdObj.callback);
+        });
+        delete this._onStackById[event];
+      }
       return <any>this;
     }
 

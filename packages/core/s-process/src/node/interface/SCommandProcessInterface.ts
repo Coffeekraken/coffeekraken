@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
+import __SProcessInterface from './SProcessInterface';
 
 /**
  * @name                SProcessInterface
@@ -17,10 +18,11 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SProcessInterface extends __SInterface {
   // static extendsArray = ['SProcess', 'SPromise'];
   static definition = {
-    help: {
-      type: 'Boolean',
-      alias: 'h',
-      default: false
+    ...__SProcessInterface.definition,
+    command: {
+      type: 'String',
+      alias: 'c',
+      required: true
     }
   };
 }

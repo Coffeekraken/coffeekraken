@@ -359,6 +359,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       __deepMerge(
         {
           eventEmitter: {
+            emitter: undefined,
             asyncStart: false,
             defaultCallTime: {},
             bufferTimeout: 1000,

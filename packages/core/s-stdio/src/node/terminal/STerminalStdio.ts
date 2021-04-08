@@ -154,7 +154,9 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
       renderedStr = `${idStr}${renderedStr}`;
     }
     // log the string
-    console.log(__parseHtml(renderedStr));
+    try {
+      console.log(__parseHtml(renderedStr));
+    } catch (e) {}
   }
 }
 

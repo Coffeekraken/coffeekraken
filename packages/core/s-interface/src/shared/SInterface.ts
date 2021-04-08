@@ -63,14 +63,12 @@ export interface ISInterfaceDefinitionMap extends ISDescriptorRules {
 }
 
 export interface ISInterfaceCtor {
-  new (settings?: ISInterfaceSettings): ISInterface;
+  new (settings?: Partial<ISInterfaceSettings>): ISInterface;
   definition: ISInterfaceDefinitionMap;
-  settings: ISInterfaceSettings;
   defaults(): any;
 }
 export interface ISInterface {
   _definition: ISInterfaceDefinitionMap;
-  _settings: ISInterfaceSettings;
 }
 
 // @ts-ignore

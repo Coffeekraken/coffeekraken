@@ -147,8 +147,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       );
     }
 
-    console.log(this.configFolderAdapterSettings);
-
     __chokidar
       .watch(watchPaths, {
         ignoreInitial: true
@@ -221,8 +219,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     } else if (process.env[`SConfigFolderAdapter-user`]) {
       this._userConfig = JSON.parse(process.env[`SConfigFolderAdapter-user`]);
     }
-
-    console.log(this._appConfig);
 
     // mix the configs and save them in the instance
     const n = __deepMerge(

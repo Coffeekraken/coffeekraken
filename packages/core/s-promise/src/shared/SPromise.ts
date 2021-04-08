@@ -66,7 +66,7 @@ export interface ISPromiseProxies {
 export interface ISPromiseSettings {
   destroyTimeout: number;
   proxies: ISPromiseProxies;
-  preventThrow: boolean;
+  preventRejectOnThrow: boolean;
   treatCancelAs: string;
   [key: string]: any;
 }
@@ -190,7 +190,8 @@ class SPromise
           promise: {
             treatCancelAs: 'resolve',
             destroyTimeout: 5000,
-            preventThrow: true,
+            preventRejectOnThrow: true,
+            emitErrorEventOnThrow: true,
             proxies: {
               resolve: [],
               reject: []
@@ -205,7 +206,7 @@ class SPromise
         new Promise((rejectPromiseResolve, rejectPromiseReject) => {
           resolvers.reject = (...args) => {
             rejectPromiseReject(...args);
-            if (this.promiseSettings.preventThrow) {
+            if (this.promiseSettings.preventRejectOnThrow) {
               resolve(...args);
             } else {
               reject(...args);
@@ -216,14 +217,6 @@ class SPromise
         });
       }
     );
-
-    // super.catch((e) => {
-    //   console.log('E', e);
-    // });
-
-    // if (this.promiseSettings.preventThrow) {
-    //   super.catch((e) => {}); // eslint-disable-line
-    // }
 
     this.expose(
       new __SEventEmitter(
@@ -269,6 +262,9 @@ class SPromise
         try {
           await executorFn(api);
         } catch (e) {
+          if (this.promiseSettings.emitErrorEventOnThrow) {
+            this.emit('error', e);
+          }
           this.reject(e);
         }
       })();

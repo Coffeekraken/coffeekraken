@@ -46,7 +46,10 @@ export default class MyProcess extends __SProcess {
         throw new Error('COCO');
         // reject(params);
       } else {
-        resolve(params);
+        resolve({
+          ...params,
+          isChildProcess: __isChildProcess()
+        });
       }
     });
   }

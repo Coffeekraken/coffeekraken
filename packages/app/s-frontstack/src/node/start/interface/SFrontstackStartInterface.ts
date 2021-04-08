@@ -21,6 +21,7 @@ class SFrontstackStartInterface extends __SInterface {
   static definition = {
     receipe: {
       type: 'String',
+      alias: 'r',
       values: Object.keys(__sugarConfig('frontstack.receipes')),
       default: 'default'
     }

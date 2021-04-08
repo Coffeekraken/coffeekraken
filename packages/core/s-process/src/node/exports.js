@@ -13,15 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SProcessInterface = exports.SProcessManager = void 0;
+exports.SCommandProcess = exports.SProcessInterface = exports.SProcessManager = void 0;
 const SProcess_1 = __importDefault(require("./SProcess"));
 const SProcessManager_1 = __importDefault(require("./SProcessManager"));
 exports.SProcessManager = SProcessManager_1.default;
 // import SProcessPipe from './SProcessPipe';
 const SProcessInterface_1 = __importDefault(require("./interface/SProcessInterface"));
 exports.SProcessInterface = SProcessInterface_1.default;
+const SCommandProcess_1 = __importDefault(require("./SCommandProcess"));
+exports.SCommandProcess = SCommandProcess_1.default;
 __exportStar(require("./SProcessManager"), exports);
+__exportStar(require("./SCommandProcess"), exports);
 // export * from './SProcessPipe';
 __exportStar(require("./SProcess"), exports);
 exports.default = SProcess_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDBEQUFrQztBQUNsQyx3RUFBZ0Q7QUFRdkMsMEJBUkYseUJBQWUsQ0FRRTtBQVB4Qiw2Q0FBNkM7QUFDN0Msc0ZBQThEO0FBTXBDLDRCQU5uQiwyQkFBaUIsQ0FNbUI7QUFKM0Msb0RBQWtDO0FBQ2xDLGtDQUFrQztBQUNsQyw2Q0FBMkI7QUFHM0Isa0JBQWUsa0JBQVEsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDBEQUFrQztBQUNsQyx3RUFBZ0Q7QUFVdkMsMEJBVkYseUJBQWUsQ0FVRTtBQVR4Qiw2Q0FBNkM7QUFDN0Msc0ZBQThEO0FBUXBDLDRCQVJuQiwyQkFBaUIsQ0FRbUI7QUFQM0Msd0VBQWdEO0FBT0gsMEJBUHRDLHlCQUFlLENBT3NDO0FBTDVELG9EQUFrQztBQUNsQyxvREFBa0M7QUFDbEMsa0NBQWtDO0FBQ2xDLDZDQUEyQjtBQUczQixrQkFBZSxrQkFBUSxDQUFDIn0=

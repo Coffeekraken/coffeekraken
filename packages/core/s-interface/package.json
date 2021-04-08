@@ -2,7 +2,7 @@
   "name": "@coffeekraken/s-interface",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/shared/exports.js",
+  "main": "./src/node/exports.js",
   "exports": {
     "node": "./src/node/exports.js",
     "default": "./src/js/exports.js"

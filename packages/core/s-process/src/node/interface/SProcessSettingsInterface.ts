@@ -28,14 +28,6 @@ class SProcessSettingsInterface extends __SInterface {
       type: 'Boolean',
       default: __sugarConfig('process.emitErrorAsEvent')
     },
-    restart: {
-      type: 'Boolean|Number',
-      default: 3
-    },
-    restartOn: {
-      type: 'String|Array<String>',
-      default: 'error'
-    },
     stdio: {
       type: 'String|SStdio|Boolean',
       alias: 's',

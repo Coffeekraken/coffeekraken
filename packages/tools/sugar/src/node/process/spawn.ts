@@ -45,29 +45,33 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface ISpawnSettings extends SpawnOptions {
-  supportSPromise: boolean;
+  pipeEvents: boolean;
+  returnValueOnly: boolean;
   [key: string]: any;
 }
 
 export interface ISpawn {
-  (command: string, args: string[], settings: ISpawnSettings): ISPromise;
+  (
+    command: string,
+    args?: string[],
+    settings?: Partial<ISpawnSettings>
+  ): ISPromise;
 }
 
 export default function spawn(
   command: string,
-  args: string[] = [],
-  settings: ISpawnSettings = {}
+  args?: string[] = [],
+  settings?: Partial<ISpawnSettings>
 ): __SPromise {
   let childProcess;
-  let serverData,
-    isCancel = false;
 
   const promise = new __SPromise(async ({ resolve, reject, emit }) => {
     settings = __deepMerge(
       {
-        supportSPromise: true
+        pipeEvents: true,
+        returnValueOnly: false
       },
-      settings
+      settings ?? {}
     );
 
     const duration = new __SDuration();
@@ -97,7 +101,7 @@ export default function spawn(
     });
 
     // handle the process.send pattern
-    if (settings.supportSPromise) {
+    if (settings.pipeEvents) {
       childProcess.on('message', (dataObj) => {
         if (!dataObj.value || !dataObj.metas) return;
         if (dataObj.metas.event === 'resolve') {
@@ -141,7 +145,10 @@ export default function spawn(
       const resultObj = {
         code,
         signal,
-        value: resolveValue || rejectValue,
+        value:
+          resolveValue ||
+          rejectValue ||
+          `${stdout.toString()}\n${stderr.toString()}`,
         stdout,
         stderr,
         spawn: true,
@@ -154,24 +161,30 @@ export default function spawn(
       // handle resolve and reject
       if (resolveValue) {
         emit('close.success', resultObj);
+        if (settings.returnValueOnly) return resolve(resultObj.value);
         return resolve(resultObj);
       } else if (rejectValue) {
         emit('close.error', resultObj);
+        if (settings.returnValueOnly) return reject(resultObj.value);
         return reject(resultObj);
       }
 
       // handle other cases
       if (stderr.length) {
         emit('close.error', resultObj);
+        if (settings.returnValueOnly) return reject(resultObj.value);
         return reject(resultObj);
       } else if (!code && signal) {
         emit('close.killed', resultObj);
+        if (settings.returnValueOnly) return resolve(resultObj.value);
         return resolve(resultObj);
       } else if (code === 0 && !signal) {
         emit('close.success', resultObj);
+        if (settings.returnValueOnly) return resolve(resultObj.value);
         return resolve(resultObj);
       } else {
         emit('close.error', resultObj);
+        if (settings.returnValueOnly) return reject(resultObj.value);
         return reject(resultObj);
       }
     });

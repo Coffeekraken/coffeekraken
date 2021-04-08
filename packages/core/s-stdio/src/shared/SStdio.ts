@@ -285,9 +285,9 @@ class SStdio extends __SClass implements ISStdio {
               'warn',
               '*.warn',
               'error',
-              '*.error'
-              // 'reject',
-              // '*.reject',
+              '*.error',
+              'reject',
+              '*.reject'
               // 'resolve',
               // '*.resolve'
             ],

@@ -1,8 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __registerFolder from '@coffeekraken/sugar/shared/config/registerFolder';
 import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
-import __path from 'path';
 import __SFrontstackStartInterface from './start/interface/SFrontstackStartInterface';
 import __SPromise from '@coffeekraken/s-promise';
 
@@ -47,8 +45,6 @@ export default class SFrontstack extends __SClass {
         settings ?? {}
       )
     );
-
-    console.log(__sugarConfig('frontstack.frontstack'));
   }
 
   /**
@@ -61,17 +57,30 @@ export default class SFrontstack extends __SClass {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  start(
-    params: Partial<ISFrontstackStartParams>,
-    settings?: Partial<ISFrontstackSettings>
-  ) {
-    return new __SPromise(({ resolve, reject }) => {
-      const set = <ISFrontstackSettings>(
-        __deepMerge(this.frontstackSettings, settings ?? {})
-      );
-      params = __SFrontstackStartInterface.apply(params);
+  start(params: Partial<ISFrontstackStartParams>) {
+    return new __SPromise(
+      ({ resolve, reject }) => {
+        console.log(params);
 
-      console.log(set, params);
-    });
+        const availableReceipes = Object.keys(
+          __sugarConfig('frontstack.receipes')
+        );
+
+        if (availableReceipes.indexOf(params.receipe) === -1) {
+          throw new Error(
+            `<red>[SFrontstack.start]</red> Sorry but the requested receipe "<yellow>${
+              params.receipe
+            }</yellow>" does not exists. Here's the list of available receipe(s):\n${availableReceipes
+              .map((r) => `- <yellow>${r}</yellow>`)
+              .join('\n')}`
+          );
+        }
+      },
+      {
+        eventEmitter: {
+          bind: this
+        }
+      }
+    );
   }
 }

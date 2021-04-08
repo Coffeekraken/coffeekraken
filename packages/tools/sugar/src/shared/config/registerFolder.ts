@@ -17,7 +17,7 @@
  */
 export default function registerFolder(
   path: string,
-  level: 'default' | 'app' | 'user' = 'app'
+  level: 'default' | 'app' | 'user' = 'default'
 ): void {
   // @ts-ignore
   (global ?? window)._registeredConfigFolderPaths.push({

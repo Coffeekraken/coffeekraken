@@ -1,5 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
+import __fs from 'fs';
 import __stackTrace from 'stack-trace';
 import { ISClass as __ISClass } from '@coffeekraken/s-class';
 import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
@@ -7,16 +8,22 @@ import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { ILog } from '@coffeekraken/sugar/shared/log/log';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
-import __SDuration from '@coffeekraken/s-duration';
+import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
 import { ISInterface, ISInterfaceCtor } from '@coffeekraken/s-interface';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __SStdio, { ISStdio } from '@coffeekraken/s-stdio';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __isClass from '@coffeekraken/sugar/shared/is/class';
+import __extendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
 import __spawn, {
   ISpawnSettings
 } from '@coffeekraken/sugar/node/process/spawn';
-import __toJson from '@coffeekraken/sugar/shared/object/toJson';
+import {
+  ISCommandProcessCtorSettings,
+  ISCommandProcessParams
+} from './SCommandProcess';
 
 // process.on('uncaughtException', function (err) {
 //   console.log('CAUGHT__', err);
@@ -43,16 +50,6 @@ import __toJson from '@coffeekraken/sugar/shared/object/toJson';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISProcessObject {
-  state: string;
-  startTime: number;
-  endTime: number;
-  duration: number;
-  stdout: string[];
-  stderr: string[];
-  value: any;
-}
-
 export interface ISProcessNotificationSettings {
   enable: boolean;
 }
@@ -61,16 +58,16 @@ export interface ISProcessCtorSettings {
   process?: Partial<ISProcessSettings>;
 }
 
-export interface ISProcessProcessObj {
-  startTime: number;
-  endTime: number;
-  duration: number;
+export interface ISProcessProcessObj extends ISDurationObject {
   state: string;
   stdout: any[];
   stderr: any[];
+  value: any;
   params: any;
   settings: Partial<ISProcessSettings>;
 }
+
+export interface ISProcessResultObject extends ISProcessProcessObj {}
 
 export interface ISProcessSettings {
   asyncStart: boolean;
@@ -79,7 +76,7 @@ export interface ISProcessSettings {
   stdio: ISStdio;
   throw: boolean;
   runAsChild: boolean;
-  interface: ISInterface | ISInterfaceCtor;
+  interface: ISInterface;
   processPath: string;
   notification: ISProcessNotificationSettings;
   env: Record<string, unknown>;
@@ -87,6 +84,11 @@ export interface ISProcessSettings {
   decorators: boolean;
   spawnSettings: ISpawnSettings;
   exitAtEnd: boolean;
+}
+
+export interface ISProcessParams {
+  help: boolean;
+  [key: string]: any;
 }
 
 export interface ISProcessCtor {
@@ -209,20 +211,139 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    */
   _processPromise?: __SPromise;
 
-  /**
-   * @name      _processPath
-   * @type      String
-   * @private
-   *
-   * Store the process class path
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  private _processPath?: string;
-
   get processSettings(): ISProcessSettings {
     return (<any>this)._settings.process;
+  }
+
+  /**
+   * @name					from
+   * @type 					Function
+   * @static
+   *
+   * This static method allows you to pass arguments like:
+   * - file path: Will require it, check what's returned from and instanciate an SProcess depending on that
+   * - command string: Will instanciate a new SCommandProcess instance and returns it for you to run it
+   * - function: Will execute the function and instanciate the proper SPromise instance type depending on the returned value
+   * - SPromise instance: Will simply wrap the SPromise  instance inside an SProcess one and returns you this new SProcess instance
+   * - SProcess based class: This make not so much sens but at least you can rely on this method to instanciate event an SProcess based class
+   * Once you get the proper instance back, you can use it the same as an SProcess based class instance and use the ```run``` method to
+   * execute your process
+   *
+   * @param         {string|function|SPromise|SProcess}       what      The value with which you want to get an SProcess based instance back
+   * @param         {Partial<ISProcessCtorSettings>}      [settings={}]     Some settings to configure your new SProcess based class instance
+   * @return        {SProcess}              An SProcess based class instance that you can use to execute your process
+   *
+   * @since
+   * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static from(
+    what: string | Function | Promise<any> | __SPromise | SProcess,
+    settings?: Partial<ISProcessCtorSettings>
+  ): SProcess {
+    if (__isClass(what) && __extendsStack(what)['SProcess']) {
+      // @ts-ignore
+      return new what({}, settings);
+    }
+    if (what instanceof SProcess) {
+      return what;
+    }
+    if (what instanceof Promise) {
+      class SPromiseProcess extends SProcess {
+        constructor() {
+          super({}, settings);
+        }
+        process(): Promise<any> {
+          return <Promise<any>>what;
+        }
+      }
+      return new SPromiseProcess();
+    }
+    if (typeof what === 'function') {
+      class SFunctionProcess extends SProcess {
+        constructor() {
+          super(
+            {},
+            {
+              ...settings
+            }
+          );
+        }
+        process(
+          params: Partial<ISProcessParams>,
+          settings: Partial<ISProcessSettings>
+        ): Promise<any> {
+          // @ts-ignore
+          return <Promise<any>>what(params, settings ?? {});
+        }
+      }
+      return new SFunctionProcess();
+    }
+    if (typeof what === 'string') {
+      const potentialPath = __path.resolve(what);
+      let requireValue;
+
+      try {
+        requireValue = require(potentialPath).default; // eslint-disable-line
+      } catch (e) {} // eslint-disable-line
+
+      if (requireValue) {
+        // pass this value back to the from method
+        return this.from(
+          requireValue,
+          __deepMerge(
+            {
+              process: {
+                processPath: potentialPath
+              }
+            },
+            settings
+          )
+        );
+      } else {
+        const __SCommandProcess = require('./SCommandProcess').default; // eslint-disable-line
+        // considere the passed string as a command
+        const commandProcess = new __SCommandProcess(
+          {
+            command: what
+          },
+          settings
+        );
+        return commandProcess;
+      }
+    }
+    throw new Error(
+      [
+        `<red>[s-process.from] Sorry but the passed "<yellow>what</yellow>" argument must be either:`,
+        `- <green>command string like "ls -la"</green>`,
+        `- <green>a valid file path that exports one of these accepted types</green>`,
+        `- <green>a function that return a valid promise</green>`,
+        `- <green>a Promise or SPromise instance</green></red>`,
+        `- <green>An SProcess based class</green>`
+      ].join('\n')
+    );
+  }
+
+  /**
+   * @name					fromCommand
+   * @type 					Function
+   * @static
+   *
+   * Initialize an SCommandProcess instance on which you can call the standard "run" method
+   * and execute a command by passing inside the params object the ```command``` prop.
+   *
+   * @param         {Partial<ISCommandProcessParams>}     [initialParams={}]    Some initial params for your command process instance
+   * @param         {Partial<ISCommandProcessCtorSettings>}     [settings={}]     Some settings to instanciate your command process as you want
+   * @return       {SCommandProcess}               An instance of the SCommandProcess class
+   *
+   * @since 				2.0.0
+   * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static fromCommand(
+    initialParams: Partial<ISCommandProcessParams> = {},
+    settings?: Partial<ISCommandProcessCtorSettings>
+  ): SProcess {
+    const __SCommandProcess = require('./SCommandProcess').default; // eslint-disable-line
+    return new __SCommandProcess(initialParams, settings);
   }
 
   /**
@@ -241,7 +362,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static async run(
-    paramsOrStringArgs: string | Record<string, any> = {},
+    paramsOrStringArgs: string | Partial<ISProcessParams> = {},
     settings: Partial<ISProcessSettings> = {}
   ) {
     const instance = new this({});
@@ -259,7 +380,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams?: Record<string, unknown>,
+    initialParams?: Partial<ISProcessParams>,
     settings?: ISProcessCtorSettings
   ) {
     super(
@@ -275,24 +396,26 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     this.initialParams = Object.assign({}, initialParams ?? {});
 
     // get the definition from interface or settings
-    this.paramsInterface =
-      (<any>this).constructor.interface ?? this.getInterface('params');
-    if (this.processSettings.interface !== undefined)
-      this.paramsInterface = this.processSettings.interface;
+    this.paramsInterface = this.processSettings.interface;
+    if (!this.paramsInterface) {
+      this.paramsInterface =
+        (<any>this).constructor.interface ?? this.getInterface('params');
+    }
 
     // handle process exit
     __onProcessExit(async (state) => {
       this.state(state);
     });
 
-    this._processPath = this.processSettings.processPath;
-    for (const callSite of __stackTrace.get()) {
-      if (callSite.getFunctionName() === this.constructor.name) {
-        this._processPath = callSite.getFileName();
-        break;
+    if (!this.processSettings.processPath) {
+      for (const callSite of __stackTrace.get()) {
+        if (callSite.getFunctionName() === this.constructor.name) {
+          this.processSettings.processPath = callSite.getFileName();
+          break;
+        }
       }
     }
-    if (!this._processPath) {
+    if (!this.processSettings.processPath) {
       throw new Error(
         `An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`
       );
@@ -368,7 +491,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _duration: any;
-  run(paramsOrStringArgs = {}, settings: Partial<ISProcessSettings> = {}) {
+  run(
+    paramsOrStringArgs: string | Partial<ISProcessParams> = {},
+    settings: Partial<ISProcessSettings> = {}
+  ) {
     const processSettings = <ISProcessSettings>(
       __deepMerge(this.processSettings, settings)
     );
@@ -417,9 +543,18 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       };
     }
 
-    const paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
-      baseObj: this.initialParams ?? {}
-    }).value;
+    // @ts-ignore
+    let paramsObj: Partial<ISProcessParams> = __isPlainObject(
+      paramsOrStringArgs
+    )
+      ? paramsOrStringArgs
+      : {};
+
+    if (this.paramsInterface) {
+      paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
+        baseObj: this.initialParams ?? {}
+      }).value;
+    }
 
     // check if asking for the help
     if (paramsObj.help === true && this.paramsInterface !== undefined) {
@@ -443,13 +578,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     if (processSettings.runAsChild && !__isChildProcess()) {
       // build the command to run depending on the passed command in the constructor and the params
       const commandToRun = __buildCommandLine(
-        `node --enable-source-maps ${__path.resolve(
-          __dirname,
-          'runAsChild.cli.js'
-        )} [arguments]`,
+        `node ${__path.resolve(__dirname, 'runAsChild.cli.js')} [arguments]`,
         {
-          ...paramsObj,
-          processPath: this._processPath,
+          ...this._params,
           _settings: processSettings
         }
       );
@@ -482,11 +613,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       }
     }
 
+    // this._processPromise.on('*', (v, m) => {
+    //   console.log('DDD', m.event, v);
+    // });
     this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
-
-    if (this._processPromise?.promiseSettings) {
-      this._processPromise.promiseSettings.emitErrorAsEvent = this.processSettings.emitErrorAsEvent;
-    }
 
     // listen for "data" and "log" events
     this._processPromise &&
@@ -544,10 +674,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     // register some proxies
     this._processPromise?.registerProxy('resolve,reject', (value) => {
-      if (value.value !== undefined) value = value.value;
-      return {
-        value,
-        ...this.executionsStack[this.executionsStack.length - 1]
+      if (value && value.value !== undefined) value = value.value;
+      return <ISProcessResultObject>{
+        ...this.executionsStack[this.executionsStack.length - 1],
+        value
       };
     });
 

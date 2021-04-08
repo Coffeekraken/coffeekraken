@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
 const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
 const sugar_1 = __importDefault(require("@coffeekraken/sugar/shared/config/sugar"));
-const SFrontstackStartInterface_1 = __importDefault(require("./start/interface/SFrontstackStartInterface"));
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 class SFrontstack extends s_class_1.default {
     /**
@@ -36,7 +35,6 @@ class SFrontstack extends s_class_1.default {
         super(deepMerge_1.default({
             frontstack: {}
         }, settings !== null && settings !== void 0 ? settings : {}));
-        console.log(sugar_1.default('frontstack.frontstack'));
     }
     /**
      * @name        start
@@ -48,13 +46,21 @@ class SFrontstack extends s_class_1.default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    start(params, settings) {
+    start(params) {
         return new s_promise_1.default(({ resolve, reject }) => {
-            const set = (deepMerge_1.default(this.frontstackSettings, settings !== null && settings !== void 0 ? settings : {}));
-            params = SFrontstackStartInterface_1.default.apply(params);
-            console.log(set, params);
+            console.log(params);
+            const availableReceipes = Object.keys(sugar_1.default('frontstack.receipes'));
+            if (availableReceipes.indexOf(params.receipe) === -1) {
+                throw new Error(`<red>[SFrontstack.start]</red> Sorry but the requested receipe "<yellow>${params.receipe}</yellow>" does not exists. Here's the list of available receipe(s):\n${availableReceipes
+                    .map((r) => `- <yellow>${r}</yellow>`)
+                    .join('\n')}`);
+            }
+        }, {
+            eventEmitter: {
+                bind: this
+            }
         });
     }
 }
 exports.default = SFrontstack;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRnJvbnRzdGFjay50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLG9FQUE2QztBQUM3Qyw0RkFBc0U7QUFFdEUsb0ZBQW9FO0FBRXBFLDRHQUFzRjtBQUN0Rix3RUFBaUQ7QUFTakQsTUFBcUIsV0FBWSxTQUFRLGlCQUFRO0lBQy9DOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksa0JBQWtCO1FBQ3BCLE9BQWEsSUFBSyxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUM7SUFDMUMsQ0FBQztJQUVEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBbUM7UUFDN0MsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxVQUFVLEVBQUUsRUFBRTtTQUNmLEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNmLENBQ0YsQ0FBQztRQUVGLE9BQU8sQ0FBQyxHQUFHLENBQUMsZUFBYSxDQUFDLHVCQUF1QixDQUFDLENBQUMsQ0FBQztJQUN0RCxDQUFDO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsS0FBSyxDQUNILE1BQXdDLEVBQ3hDLFFBQXdDO1FBRXhDLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUUsRUFBRTtZQUM1QyxNQUFNLEdBQUcsR0FBeUIsQ0FDaEMsbUJBQVcsQ0FBQyxJQUFJLENBQUMsa0JBQWtCLEVBQUUsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3JELENBQUM7WUFDRixNQUFNLEdBQUcsbUNBQTJCLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBRW5ELE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBQzNCLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQztDQUNGO0FBN0RELDhCQTZEQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRnJvbnRzdGFjay50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLG9FQUE2QztBQUM3Qyw0RkFBc0U7QUFDdEUsb0ZBQW9FO0FBRXBFLHdFQUFpRDtBQVNqRCxNQUFxQixXQUFZLFNBQVEsaUJBQVE7SUFDL0M7Ozs7Ozs7OztPQVNHO0lBQ0gsSUFBSSxrQkFBa0I7UUFDcEIsT0FBYSxJQUFLLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQztJQUMxQyxDQUFDO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxRQUFtQztRQUM3QyxLQUFLLENBQ0gsbUJBQVcsQ0FDVDtZQUNFLFVBQVUsRUFBRSxFQUFFO1NBQ2YsRUFDRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2YsQ0FDRixDQUFDO0lBQ0osQ0FBQztJQUVEOzs7Ozs7Ozs7T0FTRztJQUNILEtBQUssQ0FBQyxNQUF3QztRQUM1QyxPQUFPLElBQUksbUJBQVUsQ0FDbkIsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO1lBQ3RCLE9BQU8sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLENBQUM7WUFFcEIsTUFBTSxpQkFBaUIsR0FBRyxNQUFNLENBQUMsSUFBSSxDQUNuQyxlQUFhLENBQUMscUJBQXFCLENBQUMsQ0FDckMsQ0FBQztZQUVGLElBQUksaUJBQWlCLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtnQkFDcEQsTUFBTSxJQUFJLEtBQUssQ0FDYiwyRUFDRSxNQUFNLENBQUMsT0FDVCx5RUFBeUUsaUJBQWlCO3FCQUN2RixHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLGFBQWEsQ0FBQyxXQUFXLENBQUM7cUJBQ3JDLElBQUksQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUNoQixDQUFDO2FBQ0g7UUFDSCxDQUFDLEVBQ0Q7WUFDRSxZQUFZLEVBQUU7Z0JBQ1osSUFBSSxFQUFFLElBQUk7YUFDWDtTQUNGLENBQ0YsQ0FBQztJQUNKLENBQUM7Q0FDRjtBQXhFRCw4QkF3RUMifQ==

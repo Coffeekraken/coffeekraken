@@ -3,6 +3,8 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SInterface from '@coffeekraken/s-interface';
 import __MyProcess from './MyProcess';
 
+jest.setTimeout(30000);
+
 describe('s-process', () => {
   it('Should start a simple process correctly', async (done) => {
     const pro = new __MyProcess(
@@ -94,6 +96,53 @@ describe('s-process', () => {
     expect(res.value.something).toBe('cool');
     expect(res.value.state).toBe('success');
     expect(res.value.isChildProcess).toBe(true);
+
+    done();
+  });
+
+  it('Should initiate correctly a promise based process', async (done) => {
+    const pro = __SProcess.from(
+      new Promise((resolve, reject) => {
+        resolve({
+          hello: 'world'
+        });
+      })
+    );
+    const res = await pro.run();
+
+    expect(res.state).toBe('success');
+    expect(res.value.hello).toBe('world');
+
+    done();
+  });
+
+  it('Should initiate correctly a Promise based process and reject it', async (done) => {
+    const pro = __SProcess.from(
+      new Promise((resolve, reject) => {
+        reject({
+          hello: 'world'
+        });
+      })
+    );
+    const res = await pro.run();
+
+    expect(res.state).toBe('error');
+    expect(res.error.hello).toBe('world');
+
+    done();
+  });
+
+  it('Should initiate correctly a Promise based process and throw an error from', async (done) => {
+    const promise = new Promise((resolve, reject) => {
+      throw new Error({
+        hello: 'world'
+      });
+    });
+
+    const pro = __SProcess.from(promise);
+    const res = await pro.run();
+
+    expect(res.state).toBe('error');
 
     done();
   });

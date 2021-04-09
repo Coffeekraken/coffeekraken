@@ -253,6 +253,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           super({}, settings);
         }
         process(): Promise<any> {
+          // @ts-ignore
+          what.catch((e) => {}); // eslint-disable-line
           return <Promise<any>>what;
         }
       }
@@ -313,12 +315,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
     throw new Error(
       [
-        `<red>[s-process.from] Sorry but the passed "<yellow>what</yellow>" argument must be either:`,
-        `- <green>command string like "ls -la"</green>`,
-        `- <green>a valid file path that exports one of these accepted types</green>`,
-        `- <green>a function that return a valid promise</green>`,
-        `- <green>a Promise or SPromise instance</green></red>`,
-        `- <green>An SProcess based class</green>`
+        `<red>[SProcess.from]</red> Sorry but the passed "<magenta>what</magenta>" argument must be either:`,
+        `- A <green>command string</green> like "<cyan>ls -la</cyan>"`,
+        `- A valid <green>file path</green> that exports <green>one of these accepted types</green>`,
+        `- A <yellow>function</yellow> that return a valid <green>Promise</green> instance or a valid <green>SPromise</green> instance`,
+        `- A <green>Promise</green> or <green>SPromise</green> instance`,
+        `- An <green>SProcess</green> based class`
       ].join('\n')
     );
   }
@@ -595,6 +597,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
       if (
         __isChildProcess() &&
+        this._processPromise &&
+        this._processPromise.on &&
+        typeof this._processPromise.on === 'function' &&
         process.send &&
         typeof process.send === 'function'
       ) {
@@ -603,7 +608,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             if (value.value && value.value instanceof Error) {
               value.value = __toString(value.value);
             }
-            // console.log('EEE', value);
             process.send !== undefined &&
               process.send({
                 value,
@@ -613,31 +617,29 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       }
     }
 
-    // this._processPromise.on('*', (v, m) => {
-    //   console.log('DDD', m.event, v);
-    // });
-    this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
+    // handle SPromise based processes
+    if (this._processPromise instanceof __SPromise) {
+      this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
 
-    // listen for "data" and "log" events
-    this._processPromise &&
-      this._processPromise.on('log', (data, metas) => {
-        if (this.currentExecutionObj) {
-          this.currentExecutionObj.stdout.push(data);
-        }
-      });
-    // listen for errors
-    this._processPromise &&
-      this._processPromise.on('error,reject', (data, metas) => {
-        if (this.currentExecutionObj) {
-          this.currentExecutionObj.stderr.push(data);
-        }
-        if (!this.processSettings.killOnError && metas.event === 'error')
-          return;
-        // this.kill(data);
-      });
+      // listen for "data" and "log" events
+      this._processPromise &&
+        this._processPromise.on('log', (data, metas) => {
+          if (this.currentExecutionObj) {
+            this.currentExecutionObj.stdout.push(data);
+          }
+        });
+      // listen for errors
+      this._processPromise &&
+        this._processPromise.on('error,reject', (data, metas) => {
+          if (this.currentExecutionObj) {
+            this.currentExecutionObj.stderr.push(data);
+          }
+          if (!this.processSettings.killOnError && metas.event === 'error')
+            return;
+          // this.kill(data);
+        });
 
-    // updating state when needed
-    this._processPromise &&
+      // updating state when needed
       this._processPromise.on(
         [
           'resolve:1',
@@ -664,25 +666,54 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         }
       );
 
-    this._processPromise &&
-      this._processPromise.on('finally', (value, metas) => {
-        // @ts-ignore
-        if (this.processSettings.exitAtEnd === true) {
-          process.exit();
-        }
+      this._processPromise &&
+        this._processPromise.on('finally', () => {
+          // @ts-ignore
+          if (this.processSettings.exitAtEnd === true) {
+            process.exit();
+          }
+        });
+
+      // register some proxies
+      this._processPromise?.registerProxy('resolve,reject', (value) => {
+        if (value && value.value !== undefined) value = value.value;
+        return <ISProcessResultObject>{
+          ...this.executionsStack[this.executionsStack.length - 1],
+          value
+        };
       });
 
-    // register some proxies
-    this._processPromise?.registerProxy('resolve,reject', (value) => {
-      if (value && value.value !== undefined) value = value.value;
-      return <ISProcessResultObject>{
-        ...this.executionsStack[this.executionsStack.length - 1],
-        value
-      };
-    });
+      // return the promise
+      return this._processPromise;
+    }
 
-    // return the process promise
-    return this._processPromise;
+    // handle simple Promise processes
+    if (this._processPromise instanceof Promise) {
+      // @ts-ignore
+      this._processPromise.catch((e) => {}); // eslint-disable-line
+      return new __SPromise(({ resolve }) => {
+        this._processPromise
+          .then((value) => {
+            this.state('success');
+            resolve(<ISProcessResultObject>{
+              ...this.executionsStack[this.executionsStack.length - 1],
+              value
+            });
+          })
+          .catch((error) => {
+            this.state('error');
+            resolve(<ISProcessResultObject>{
+              ...this.executionsStack[this.executionsStack.length - 1],
+              error
+            });
+          });
+      });
+    }
+
+    // returned process function value MUST be either an SPromise instance or a simple Promise one
+    throw new Error(
+      `<red>[${this.constructor.name}.run]</red> Sorry but the returned value of the "<yellow>process</yellow>" method MUST be either an <yellow>SPromise</yellow> instance or a simple <yellow>Promise</yellow> instance`
+    );
   }
 
   state(value?: string) {

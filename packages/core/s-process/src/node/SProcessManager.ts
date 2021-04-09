@@ -5,7 +5,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SProcess from './SProcess';
 import __SStdio from '@coffeekraken/s-stdio';
 import __SProcessManagerProcessWrapper, {
-  ISProcessManagerProcessWrapperSettings
+  ISProcessManagerAttachSettings
 } from './SProcessManagerProcessWrapper';
 
 /**
@@ -27,6 +27,9 @@ import __SProcessManagerProcessWrapper, {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface ISProcessManagerProcessSettings
+  extends ISProcessManagerAttachSettings {}
 
 export interface ISProcessManagerCtorSettings {
   processManager: Partial<ISProcessManagerSettings>;
@@ -102,7 +105,7 @@ class SProcessManager extends __SEventEmitter {
    *
    * @param       {String}        id                    A uniquid for your process
    * @param       {SProcess}      processInstance       The actual process instance
-   * @param       {ISProcessManagerProcessWrapperSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
+   * @param       {ISProcessManagerAttachSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -110,7 +113,7 @@ class SProcessManager extends __SEventEmitter {
   attachProcess(
     id: string,
     processInstance: __SProcess,
-    settings?: Partial<ISProcessManagerProcessWrapperSettings>
+    settings?: Partial<ISProcessManagerAttachSettings>
   ): void {
     // avoid multiple same processes
     if (this._processesStack[id])

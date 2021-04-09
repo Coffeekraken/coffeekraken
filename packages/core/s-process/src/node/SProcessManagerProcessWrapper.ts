@@ -44,7 +44,6 @@ export interface ISProcessManagerProcessWrapperCtorSettings {
 }
 
 export interface ISProcessManagerProcessWrapperSettings {
-  // stdio:
   restart:
     | Partial<ISProcessManagerProcessWrapperProcessRestartSettings>
     | boolean;

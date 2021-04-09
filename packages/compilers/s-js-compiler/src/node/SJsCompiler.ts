@@ -14,6 +14,7 @@ import __fs from 'fs';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 // import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 
 import __SJsCompilerInterface from './interface/SJsCompilerInterface';
 
@@ -203,6 +204,10 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         emit('log', {
           value: 'Starting <yellow>JS</yellow> file(s) compilation...'
         });
+
+        await __wait(1000);
+
+        return reject(true);
 
         // prod
         if (params.prod) {

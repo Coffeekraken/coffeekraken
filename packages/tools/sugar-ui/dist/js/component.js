@@ -61,7 +61,7 @@ function instance($$self, $$props, $$invalidate) {
       super({svelteComponent: {}});
     }
   }
-  console.log("DFF");
+  console.log("fff");
   new MyCoolComponent();
   const writable_props = [];
   Object.keys($$props).forEach((key) => {

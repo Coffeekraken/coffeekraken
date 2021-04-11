@@ -4,6 +4,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SProcess from './SProcess';
 import __SStdio from '@coffeekraken/s-stdio';
+import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __SProcessManagerProcessWrapper, {
   ISProcessManagerAttachSettings
 } from './SProcessManagerProcessWrapper';
@@ -121,11 +122,18 @@ class SProcessManager extends __SEventEmitter {
         `<yellow>[${this.constructor.name}.attach]</yellow> Sorry but a process with the id "<magenta>${id}</magenta>" is already attached to this process manager`
       );
 
+    const instanceId =
+      this.constructor.name === 'SProcessManager'
+        ? `SPM.${id}`
+        : `${this.constructor.name}.${id}`;
     const processManagerProcess = new __SProcessManagerProcessWrapper(
       processInstance,
       {
         metas: {
-          id: `${this.constructor.name}.${id}`
+          color: __getColorFor(instanceId, {
+            scope: this.constructor.name
+          }),
+          id: instanceId
         },
         processManagerProcess: settings ?? {}
       }

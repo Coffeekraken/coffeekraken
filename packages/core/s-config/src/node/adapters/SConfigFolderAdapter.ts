@@ -23,7 +23,7 @@ import * as __chokidar from 'chokidar';
  * - name (null) {String}: This specify the config name that you want to use.
  * - fileName ('[name].config.js') {String}: Specify the fileName to use for the file that will store the configs
  * - defaultConfigPath (null) {String}: This specify the path to the "default" config file.
- * - appConfigPath (${process.cwd()}/[fileName]) {String}: This specify the path to the "app" config file
+ * - repoConfigPath (${process.cwd()}/[fileName]) {String}: This specify the path to the "app" config file
  * - userConfigPath (${__localDir()}/[fileName]) {String}: This specify the path to the "user" config file
  * @return                  {Promise}                                        A promise that will be resolved once the data has been getted/saved...
  *
@@ -47,6 +47,10 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     return (<any>this)._settings.configFolderAdapter;
   }
 
+  _scopedSettings: any = {};
+  _scopedFoldersPaths: any = {};
+  _foldersPaths: string[] = [];
+
   constructor(settings: ISConfigFolderAdapterCtorSettings) {
     super(
       __deepMerge(
@@ -54,99 +58,68 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
           configFolderAdapter: {
             fileName: '[name].config.js',
             folderName: '.sugar',
-            defaultConfigPath: __path.resolve(__dirname, '../../config'),
-            appConfigPath: `${__packageRoot(process.cwd())}/[folderName]`,
-            userConfigPath: `${__packageRoot(
-              process.cwd()
-            )}/.local/[folderName]`
+            scopes: {
+              default: [__path.resolve(__dirname, '../../config')],
+              module: [],
+              extends: [],
+              repo: [`${__packageRoot(process.cwd(), true)}/[folderName]`],
+              package: [`${__packageRoot(process.cwd())}/[folderName]`],
+              user: [`${__packageRoot(process.cwd())}/.local/[folderName]`]
+            },
+            savingScope: 'user'
           }
         },
         settings || {}
       )
     );
+
+    // handle configs
     this.configFolderAdapterSettings.folderName = this.configFolderAdapterSettings.folderName.replace(
       '[name]',
       this.name
     );
-    if (this.configFolderAdapterSettings.defaultConfigPath) {
-      if (!Array.isArray(this.configFolderAdapterSettings.defaultConfigPath))
-        this.configFolderAdapterSettings.defaultConfigPath = [
-          this.configFolderAdapterSettings.defaultConfigPath
-        ];
-      this.configFolderAdapterSettings.defaultConfigPath = this.configFolderAdapterSettings.defaultConfigPath.map(
-        (path) => {
+
+    // handle each scopes
+    Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
+      let scopeFoldersPathArray = this.configFolderAdapterSettings.scopes[
+        scope
+      ];
+
+      if (scopeFoldersPathArray) {
+        if (!Array.isArray(scopeFoldersPathArray))
+          scopeFoldersPathArray = [scopeFoldersPathArray];
+        scopeFoldersPathArray = scopeFoldersPathArray.map((path) => {
           return path.replace(
             '[folderName]',
             this.configFolderAdapterSettings.folderName
           );
-        }
-      );
-    }
-    if (this.configFolderAdapterSettings.appConfigPath) {
-      if (!Array.isArray(this.configFolderAdapterSettings.appConfigPath))
-        this.configFolderAdapterSettings.appConfigPath = [
-          this.configFolderAdapterSettings.appConfigPath
-        ];
-      this.configFolderAdapterSettings.appConfigPath = this.configFolderAdapterSettings.appConfigPath.map(
-        (path) => {
-          return path.replace(
-            '[folderName]',
-            this.configFolderAdapterSettings.folderName
-          );
-        }
-      );
-    }
-    if (this.configFolderAdapterSettings.userConfigPath) {
-      if (!Array.isArray(this.configFolderAdapterSettings.userConfigPath))
-        this.configFolderAdapterSettings.userConfigPath = [
-          this.configFolderAdapterSettings.userConfigPath
-        ];
-      this.configFolderAdapterSettings.userConfigPath = this.configFolderAdapterSettings.userConfigPath.map(
-        (path) => {
-          return path.replace(
-            '[folderName]',
-            this.configFolderAdapterSettings.folderName
-          );
-        }
-      );
-    }
+        });
+      }
+
+      // append to the scoped folders path array
+      this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
+    });
+
+    const watchPaths: string[] = [];
+    Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
+      if (this._scopedFoldersPaths[scope]) {
+        this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[
+          scope
+        ].filter((path) => {
+          if (
+            __fs.existsSync(path) &&
+            this._foldersPaths.indexOf(path) === -1
+          ) {
+            watchPaths.push(path);
+            this._foldersPaths.push(path);
+            return true;
+          }
+          return false;
+        });
+      }
+    });
 
     // watch for changes
-    const watchPaths: string[] = [];
-    if (this.configFolderAdapterSettings.defaultConfigPath) {
-      this.configFolderAdapterSettings.defaultConfigPath = this.configFolderAdapterSettings.defaultConfigPath.filter(
-        (path) => {
-          if (__fs.existsSync(path)) {
-            watchPaths.push(path);
-            return true;
-          }
-          return false;
-        }
-      );
-    }
-    if (this.configFolderAdapterSettings.appConfigPath) {
-      this.configFolderAdapterSettings.appConfigPath = this.configFolderAdapterSettings.appConfigPath.filter(
-        (path) => {
-          if (__fs.existsSync(path)) {
-            watchPaths.push(path);
-            return true;
-          }
-          return false;
-        }
-      );
-    }
-    if (this.configFolderAdapterSettings.userConfigPath) {
-      this.configFolderAdapterSettings.userConfigPath = this.configFolderAdapterSettings.userConfigPath.filter(
-        (path) => {
-          if (__fs.existsSync(path)) {
-            watchPaths.push(path);
-            return true;
-          }
-          return false;
-        }
-      );
-    }
-
     __chokidar
       .watch(watchPaths, {
         ignoreInitial: true
@@ -156,7 +129,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       .on('add', (p) => this.update());
   }
 
-  _load(folderPaths, level) {
+  _load(folderPaths, scope) {
     const configObj = {};
 
     folderPaths.forEach((path) => {
@@ -180,81 +153,61 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             : configData
         );
       });
-      process.env[`SConfigFolderAdapter-${level}`] = JSON.stringify(configObj);
+      process.env[`SConfigFolderAdapter-${scope}`] = JSON.stringify(configObj);
     });
 
     return Object.assign({}, configObj);
   }
 
   load() {
-    this._defaultConfig = {};
-    this._appConfig = {};
-    this._userConfig = {};
+    Object.keys(this._scopedFoldersPaths).forEach((scope) => {
+      const scopedFoldersPaths = this._scopedFoldersPaths[scope];
+      if (scopedFoldersPaths) {
+        this._scopedSettings[scope] = this._load(scopedFoldersPaths, scope);
+      } else if (process.env[`SConfigFolderAdapter-${scope}`]) {
+        this._scopedSettings[scope] = JSON.parse(
+          process.env[`SConfigFolderAdapter-${scope}`]
+        );
+      }
+    });
 
-    if (this.configFolderAdapterSettings.defaultConfigPath) {
-      this._defaultConfig = this._load(
-        this.configFolderAdapterSettings.defaultConfigPath,
-        'default'
-      );
-    } else if (process.env[`SConfigFolderAdapter-default`]) {
-      this._defaultConfig = JSON.parse(
-        process.env[`SConfigFolderAdapter-default`]
-      );
-    }
+    let resultSettings: any = {};
+    Object.keys(this._scopedSettings).forEach((scope) => {
+      resultSettings = __deepMerge(resultSettings, this._scopedSettings[scope]);
+    });
 
-    if (this.configFolderAdapterSettings.appConfigPath) {
-      this._appConfig = this._load(
-        this.configFolderAdapterSettings.appConfigPath,
-        'app'
-      );
-    } else if (process.env[`SConfigFolderAdapter-app`]) {
-      this._appConfig = JSON.parse(process.env[`SConfigFolderAdapter-app`]);
-    }
-
-    if (this.configFolderAdapterSettings.userConfigPath) {
-      this._userConfig = this._load(
-        this.configFolderAdapterSettings.userConfigPath,
-        'user'
-      );
-    } else if (process.env[`SConfigFolderAdapter-user`]) {
-      this._userConfig = JSON.parse(process.env[`SConfigFolderAdapter-user`]);
-    }
-
-    // mix the configs and save them in the instance
-    const n = __deepMerge(
-      this._defaultConfig,
-      this._appConfig,
-      this._userConfig
-    );
-
-    return n;
+    return resultSettings;
   }
 
   save(newConfig = {}) {
-    if (!this.configFolderAdapterSettings.userConfigPath) {
-      throw new Error(
-        `You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`
-      );
-    }
+    throw new Error(
+      `<red>[${this.constructor.name}.save]</red> Sorry but the save feature has not been implemented yet...`
+    );
 
-    const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
+    // if (!this.configFolderAdapterSettings.userConfigPath) {
+    //   throw new Error(
+    //     `You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`
+    //   );
+    // }
 
-    Object.keys(baseConfig).forEach((name) => {
-      const configToSave = __diff(baseConfig[name], newConfig[name] || {});
+    // const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
 
-      const newConfigString = `
-      module.exports = ${JSON.stringify(configToSave)};
-    `;
+    // Object.keys(baseConfig).forEach((name) => {
+    //   const configToSave = __diff(baseConfig[name], newConfig[name] || {});
 
-      // write the new config file
-      __writeFileSync(
-        this.configFolderAdapterSettings.userConfigPath +
-          '/' +
-          this.configFolderAdapterSettings.fileName.replace('[name]', name),
-        newConfigString
-      );
-    });
+    //   const newConfigString = `
+    //   module.exports = ${JSON.stringify(configToSave)};
+    // `;
 
-    return true;
+    //   // write the new config file
+    //   __writeFileSync(
+    //     this.configFolderAdapterSettings.userConfigPath +
+    //       '/' +
+    //       this.configFolderAdapterSettings.fileName.replace('[name]', name),
+    //     newConfigString
+    //   );
+    // });
+
+    // return true;
   }
 }

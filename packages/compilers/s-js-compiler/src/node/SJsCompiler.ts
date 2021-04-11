@@ -5,7 +5,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SCompiler, {
   ISCompiler
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
-import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
+import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
 
 import * as __esbuild from 'esbuild';
@@ -156,11 +156,11 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams: Partial<ISJsCompilerParams>,
-    settings: ISJsCompilerCtorSettings
+    initialParams?: Partial<ISJsCompilerParams>,
+    settings?: ISJsCompilerCtorSettings
   ) {
     super(
-      initialParams,
+      initialParams ?? {},
       __deepMerge(
         {
           jsCompiler: {}
@@ -204,10 +204,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         emit('log', {
           value: 'Starting <yellow>JS</yellow> file(s) compilation...'
         });
-
-        await __wait(1000);
-
-        return reject(true);
 
         // prod
         if (params.prod) {

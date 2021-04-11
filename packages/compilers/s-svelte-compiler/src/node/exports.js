@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.interface = exports.process = void 0;
-const SSvelteCompilerProcess_1 = __importDefault(require("./SSvelteCompilerProcess"));
-exports.process = SSvelteCompilerProcess_1.default;
+exports.SSvelteCompilerInterface = void 0;
 const SSvelteCompilerInterface_1 = __importDefault(require("./interface/SSvelteCompilerInterface"));
-exports.interface = SSvelteCompilerInterface_1.default;
+exports.SSvelteCompilerInterface = SSvelteCompilerInterface_1.default;
+const SSvelteCompiler_1 = __importDefault(require("./SSvelteCompiler"));
 __exportStar(require("./SSvelteCompiler"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLHNGQUFnRTtBQUlsQyxrQkFKdkIsZ0NBQXdCLENBSU07QUFIckMsb0dBQThFO0FBSTlDLG9CQUp6QixrQ0FBMEIsQ0FJUTtBQUV6QyxvREFBa0MifQ==
+exports.default = SSvelteCompiler_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLG9HQUE0RTtBQUtuRSxtQ0FMRixrQ0FBd0IsQ0FLRTtBQUpqQyx3RUFBZ0Q7QUFFaEQsb0RBQWtDO0FBR2xDLGtCQUFlLHlCQUFlLENBQUMifQ==

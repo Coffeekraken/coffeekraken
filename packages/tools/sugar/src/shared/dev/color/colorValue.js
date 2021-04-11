@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * These colors are specified in the config.terminal configuration file under the "colors" property.
      *
      * @example         js
-     * import colorValue from '@coffeekraken/sugar/shared/dev/colors/colorValue';
+     * import colorValue from '@coffeekraken/sugar/shared/dev/color/colorValue';
      * colorValue('black'); => #000000
      *
      * @since       2.0.0

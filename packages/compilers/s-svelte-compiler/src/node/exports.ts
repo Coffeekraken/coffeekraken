@@ -1,8 +1,7 @@
-import __SSvelteCompilerProcess from './SSvelteCompilerProcess';
-import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
+import SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
+import SSvelteCompiler from './SSvelteCompiler';
 
-export {
-  __SSvelteCompilerProcess as process,
-  __SSvelteCompilerInterface as interface
-};
 export * from './SSvelteCompiler';
+
+export { SSvelteCompilerInterface };
+export default SSvelteCompiler;

@@ -22,7 +22,7 @@ import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __STsCompilerParamsInterface from './interface/STsCompilerInterface';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
-import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
+import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';

@@ -3,10 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SSvelteCompilerProcess_1 = __importDefault(require("./SSvelteCompilerProcess"));
-function compile(stringArgs = '') {
-    const pro = new SSvelteCompilerProcess_1.default({}, {});
+const s_process_1 = __importDefault(require("@coffeekraken/s-process"));
+const SSvelteCompiler_1 = __importDefault(require("./SSvelteCompiler"));
+const SSvelteCompilerInterface_1 = __importDefault(require("./interface/SSvelteCompilerInterface"));
+function start(stringArgs = '') {
+    const compiler = new SSvelteCompiler_1.default();
+    const pro = s_process_1.default.from(compiler.compile.bind(compiler), {
+        process: {
+            interface: SSvelteCompilerInterface_1.default
+        }
+    });
     pro.run(stringArgs);
 }
-exports.default = compile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tcGlsZS5jbGkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb21waWxlLmNsaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLHNGQUE4RDtBQUU5RCxTQUF3QixPQUFPLENBQUMsVUFBVSxHQUFHLEVBQUU7SUFDN0MsTUFBTSxHQUFHLEdBQUcsSUFBSSxnQ0FBc0IsQ0FBQyxFQUFFLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDL0MsR0FBRyxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQztBQUN0QixDQUFDO0FBSEQsMEJBR0MifQ==
+exports.default = start;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tcGlsZS5jbGkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb21waWxlLmNsaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLHdFQUFpRDtBQUNqRCx3RUFBa0Q7QUFDbEQsb0dBQThFO0FBRTlFLFNBQXdCLEtBQUssQ0FBQyxVQUFVLEdBQUcsRUFBRTtJQUMzQyxNQUFNLFFBQVEsR0FBRyxJQUFJLHlCQUFpQixFQUFFLENBQUM7SUFDekMsTUFBTSxHQUFHLEdBQUcsbUJBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLEVBQUU7UUFDM0QsT0FBTyxFQUFFO1lBQ1AsU0FBUyxFQUFFLGtDQUEwQjtTQUN0QztLQUNGLENBQUMsQ0FBQztJQUNILEdBQUcsQ0FBQyxHQUFHLENBQUMsVUFBVSxDQUFDLENBQUM7QUFDdEIsQ0FBQztBQVJELHdCQVFDIn0=

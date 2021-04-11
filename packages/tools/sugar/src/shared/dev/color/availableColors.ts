@@ -9,7 +9,7 @@ import __sugarConfig from '../../config/sugar';
  * These colors are specified in the config.terminal configuration file under the "colors" property.
  *
  * @example         js
- * import availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
+ * import availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
  * availableColors(); => ['black','white','yellow','green',...]
  *
  * @since       2.0.0

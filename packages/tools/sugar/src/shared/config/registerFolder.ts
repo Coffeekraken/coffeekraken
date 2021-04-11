@@ -17,11 +17,13 @@
  */
 export default function registerFolder(
   path: string,
-  level: 'default' | 'app' | 'user' = 'default'
+  scope?: 'default' | 'module' | 'extends' | 'repo' | 'package' | 'user',
+  packageName?: string
 ): void {
   // @ts-ignore
   (global ?? window)._registeredConfigFolderPaths.push({
     path,
-    level
+    scope: scope ?? 'default',
+    packageName
   });
 }

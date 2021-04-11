@@ -11,7 +11,7 @@
 			});
 		}
 	}
-	console.log('DFF')
+	console.log('fff')
 
 
 	new MyCoolComponent();

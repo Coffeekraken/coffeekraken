@@ -2,6 +2,8 @@ import __SConfig from '@coffeekraken/s-config';
 import __isNode from '../is/node';
 import __packageRoot from '../path/packageRoot';
 import __registerFolder from './registerFolder';
+import __fs from 'fs';
+import __sanitizeSugarJson from '../sugar/sanitizeSugarJson';
 
 /**
  * @name                  sugar
@@ -31,9 +33,21 @@ import __registerFolder from './registerFolder';
 // @ts-ignore
 (global ?? window)._registeredConfigFolderPaths = [];
 let sugarConfigInstance;
-let _sugarJsons;
+let _sugarJsons, _rootSugarJson;
 export default function sugar(dotPath) {
   if (__isNode()) {
+    let rootSugarJson;
+
+    if (!_rootSugarJson) {
+      const rootSugarJsonPath = `${__packageRoot()}/sugar.json`;
+      if (__fs.existsSync(rootSugarJsonPath)) {
+        rootSugarJson = __sanitizeSugarJson(require(rootSugarJsonPath));
+        if (rootSugarJson.extends && !Array.isArray(rootSugarJson.extends))
+          rootSugarJson.extends = [rootSugarJson.extends];
+      }
+    } else {
+      rootSugarJson = _rootSugarJson;
+    }
     if (!_sugarJsons) {
       const sugarJson = require('../../node/sugar/sugarJson').default;
       const __path = require('path');
@@ -44,7 +58,8 @@ export default function sugar(dotPath) {
           jsonObj.config.folders.forEach((folderObj) => {
             __registerFolder(
               __path.resolve(jsonObj.metas.folderPath, folderObj.path),
-              folderObj.level
+              folderObj.scope,
+              packageName
             );
           });
         }
@@ -63,27 +78,60 @@ export default function sugar(dotPath) {
             configFolderAdapter: {
               folderName: '.sugar',
               fileName: '[name].config.js',
-              defaultConfigPath: [
-                __path.resolve(__dirname, '../../config'),
-                // @ts-ignore
-                ...(global ?? window)._registeredConfigFolderPaths
-                  .filter((obj) => obj.level === 'default')
-                  .map((obj) => obj.path)
-              ],
-              appConfigPath: [
-                `${__packageRoot(process.cwd())}/[folderName]`,
-                // @ts-ignore
-                ...(global ?? window)._registeredConfigFolderPaths
-                  .filter((obj) => obj.level === 'app')
-                  .map((obj) => obj.path)
-              ],
-              userConfigPath: [
-                `${__packageRoot(process.cwd())}/.local/[folderName]`,
-                // @ts-ignore
-                ...(global ?? window)._registeredConfigFolderPaths
-                  .filter((obj) => obj.level === 'user')
-                  .map((obj) => obj.path)
-              ]
+              scopes: {
+                default: [
+                  __path.resolve(__dirname, '../../config'),
+                  // @ts-ignore
+                  ...(global ?? window)._registeredConfigFolderPaths
+                    .filter((obj) => obj.scope === 'default')
+                    .map((obj) => obj.path)
+                ],
+                module: [
+                  // @ts-ignore
+                  ...(global ?? window)._registeredConfigFolderPaths
+                    .filter((obj) => {
+                      if (obj.scope === 'module') return true;
+                      return false;
+                    })
+                    .map((obj) => obj.path)
+                ],
+                extends: [
+                  // @ts-ignore
+                  ...(global ?? window)._registeredConfigFolderPaths
+                    .filter((obj) => {
+                      if (
+                        rootSugarJson &&
+                        obj.scope === 'extends' &&
+                        rootSugarJson.extends.indexOf(obj.packageName) !== -1
+                      ) {
+                        return true;
+                      }
+                      return false;
+                    })
+                    .map((obj) => obj.path)
+                ],
+                repo: [
+                  `${__packageRoot(process.cwd(), true)}/[folderName]`,
+                  // @ts-ignore
+                  ...(global ?? window)._registeredConfigFolderPaths
+                    .filter((obj) => obj.scope === 'repo')
+                    .map((obj) => obj.path)
+                ],
+                package: [
+                  `${__packageRoot(process.cwd())}/[folderName]`,
+                  // @ts-ignore
+                  ...(global ?? window)._registeredConfigFolderPaths
+                    .filter((obj) => obj.scope === 'package')
+                    .map((obj) => obj.path)
+                ],
+                user: [
+                  `${__packageRoot(process.cwd())}/.local/[folderName]`,
+                  // @ts-ignore
+                  ...(global ?? window)._registeredConfigFolderPaths
+                    .filter((obj) => obj.scope === 'user')
+                    .map((obj) => obj.path)
+                ]
+              }
             }
           })
         ]

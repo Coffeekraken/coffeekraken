@@ -3,6 +3,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
 import __SFrontstackStartInterface from './start/interface/SFrontstackStartInterface';
 import __SPromise from '@coffeekraken/s-promise';
+import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __SProcess, {
   SProcessManager as __SProcessManager,
   ISProcessSettings,
@@ -89,7 +90,7 @@ export default class SFrontstack extends __SClass {
    */
   start(params: Partial<ISFrontstackStartParams>) {
     return new __SPromise(
-      ({ resolve, reject }) => {
+      ({ resolve, reject, emit }) => {
         const receipesObj = __sugarConfig('frontstack.receipes');
 
         const availableReceipes = Object.keys(receipesObj);
@@ -105,6 +106,13 @@ export default class SFrontstack extends __SClass {
               .join('\n')}`
           );
         }
+
+        emit('log', {
+          nude: true,
+          marginTop: 2,
+          marginBottom: 2,
+          value: __sugarBanner()
+        });
 
         // get the receipe object and treat it
         const receipeObj: Partial<ISFrontstackReceipe> =

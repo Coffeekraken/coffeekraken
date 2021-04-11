@@ -143,15 +143,23 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     // render the component
     let renderedStr = component.render(logObj, this._settings);
     // handle metas if needed
-    if (this.terminalStdioSettings.metas && logObj.metas?.emitter) {
-      const idStr = `<bg${__upperFirst(
-        logObj.metas.emitter.metas.color || 'yellow'
-      )}> </bg${__upperFirst(logObj.metas.emitter.metas.color || 'yellow')}><${
-        logObj.metas.emitter.metas.color || 'yellow'
-      }> ${logObj.metas.emitter.metas.id} │ </${
-        logObj.metas.emitter.metas.color || 'yellow'
-      }>`;
-      renderedStr = `${idStr}${renderedStr}`;
+    if (!logObj.nude) {
+      if (this.terminalStdioSettings.metas && logObj.metas?.emitter) {
+        const idStr = `<bg${__upperFirst(
+          logObj.metas.emitter.metas.color || 'yellow'
+        )}> </bg${__upperFirst(
+          logObj.metas.emitter.metas.color || 'yellow'
+        )}><${logObj.metas.emitter.metas.color || 'yellow'}> ${
+          logObj.metas.emitter.metas.id
+        } │ </${logObj.metas.emitter.metas.color || 'yellow'}>`;
+        renderedStr = `${idStr}${renderedStr}`;
+      }
+    }
+    if (logObj.marginTop && typeof logObj.marginTop === 'number') {
+      renderedStr = '\n'.repeat(logObj.marginTop) + renderedStr;
+    }
+    if (logObj.marginBottom && typeof logObj.marginBottom === 'number') {
+      renderedStr = renderedStr + '\n'.repeat(logObj.marginBottom);
     }
     // log the string
     try {

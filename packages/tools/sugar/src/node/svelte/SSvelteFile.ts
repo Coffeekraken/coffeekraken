@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SScssFile from '../scss/SScssFile';
 import __STsFile from '../ts/STsFile';
 import {
-  interface as __SSvelteCompilerParamsInterface,
+  SSvelteCompilerInterface,
   ISSvelteCompilerParams
 } from '@coffeekraken/s-svelte-compiler';
 
@@ -95,7 +95,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
   static interfaces = {
     compilerParams: {
       apply: false,
-      class: __SSvelteCompilerParamsInterface
+      class: SSvelteCompilerInterface
     },
     settings: {
       apply: true,

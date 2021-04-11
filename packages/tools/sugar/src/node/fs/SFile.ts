@@ -890,6 +890,7 @@ class SFile extends __SEventEmitter implements ISFile {
         (error, data) => {
           if (error) return reject(error);
           if (this.extension === 'json' && set.cast) {
+            console.log('RRR', data.toString());
             return resolve(JSON.parse(data.toString()));
           }
           resolve(data.toString());
@@ -929,7 +930,11 @@ class SFile extends __SEventEmitter implements ISFile {
       });
     }
     if (set.cast) {
-      return JSON.parse(content.toString());
+      try {
+        return JSON.parse(content.toString());
+      } catch (e) {
+        return content.toString();
+      }
     }
     return content.toString();
   }

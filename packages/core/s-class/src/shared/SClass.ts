@@ -4,7 +4,8 @@ import __isPlain from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
-import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
+import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
+import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
 import __toJson from '@coffeekraken/sugar/shared/object/toJson';
 
@@ -444,10 +445,8 @@ function setSettings(ctx: any, settings: any = {}) {
   if (!ctx._settings.metas?.id) ctx._settings.metas.id = ctx.constructor.name;
   if (!ctx.constructor.name.match(/^SConfig/)) {
     if (!ctx._settings.metas.color)
-      ctx._settings.metas.color = __pickRandom(
-        __availableColors({
-          excludeBasics: true
-        })
-      );
+      ctx._settings.metas.color = __getColorFor(ctx.constructor.name, {
+        scope: 'class'
+      });
   } else if (!ctx._settings.metas.color) ctx._settings.metas.color = 'yellow';
 }

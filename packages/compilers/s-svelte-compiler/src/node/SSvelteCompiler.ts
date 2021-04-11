@@ -15,7 +15,7 @@ import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __path from 'path';
 import __uglify from 'uglify-js';
 import __cleanCss from 'clean-css';
-import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
+import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 

@@ -2,7 +2,7 @@
   "config": {
     "folders": [
       {
-        "level": "default",
+        "scope": "default",
         "path": "./src/config"
       }
     ]

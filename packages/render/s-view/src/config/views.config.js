@@ -6,17 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 exports.default = {
     /**
-     * @name            rootDir
+     * @name            rootDirs
      * @namespace       config.views
-     * @type            String
-     * @default          [config.storage.srcDir]/views
+     * @type            string[]
+     * @default          ['[config.storage.srcDir]/views']
      *
-     * Specify the root views directory
+     * Specify the roots views directories
      *
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: `[config.storage.srcDir]/views`,
+    rootDirs: [`[config.storage.srcDir]/views`],
     /**
      * @name            cacheDir
      * @namespace       config.views
@@ -51,7 +51,7 @@ exports.default = {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        blade: path_1.default.resolve(__dirname, '../node/template/engines/SBladeTemplateEngine')
+        blade: path_1.default.resolve(__dirname, '../node/engines/blade/SBladeViewEngine')
     },
     /**
      * @name      dataHandlers
@@ -75,7 +75,7 @@ exports.default = {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        js: path_1.default.resolve(__dirname, '../node/template/dataHandlers/js.js')
+        js: path_1.default.resolve(__dirname, '../node/dataHandlers/js.js')
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlld3MuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidmlld3MuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0RBQTBCO0FBRTFCLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILE9BQU8sRUFBRSwrQkFBK0I7SUFFeEM7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxpQ0FBaUM7SUFFM0M7Ozs7Ozs7Ozs7T0FVRztJQUNILE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRSxjQUFNLENBQUMsT0FBTyxDQUNuQixTQUFTLEVBQ1QsK0NBQStDLENBQ2hEO0tBQ0Y7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsWUFBWSxFQUFFO1FBQ1o7Ozs7Ozs7OztXQVNHO1FBQ0gsRUFBRSxFQUFFLGNBQU0sQ0FBQyxPQUFPLENBQUMsU0FBUyxFQUFFLHFDQUFxQyxDQUFDO0tBQ3JFO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlld3MuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidmlld3MuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0RBQTBCO0FBRTFCLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxDQUFDLCtCQUErQixDQUFDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsaUNBQWlDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7O1dBU0c7UUFDSCxLQUFLLEVBQUUsY0FBTSxDQUFDLE9BQU8sQ0FBQyxTQUFTLEVBQUUsd0NBQXdDLENBQUM7S0FDM0U7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsWUFBWSxFQUFFO1FBQ1o7Ozs7Ozs7OztXQVNHO1FBQ0gsRUFBRSxFQUFFLGNBQU0sQ0FBQyxPQUFPLENBQUMsU0FBUyxFQUFFLDRCQUE0QixDQUFDO0tBQzVEO0NBQ0YsQ0FBQyJ9

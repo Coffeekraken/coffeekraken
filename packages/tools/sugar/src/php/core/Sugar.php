@@ -72,7 +72,7 @@ class Sugar {
 			} else if (is_file($path)) {
 				$info = pathinfo($path);
 				if ($info['extension'] != 'php') return;
-				echo $path."\n";
+				// echo $path."\n";
 				require_once $path;
 			}
 		}

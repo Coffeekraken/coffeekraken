@@ -32,6 +32,7 @@
     "@coffeekraken/s-stdio": "file:../../core/s-stdio",
     "@coffeekraken/s-svelte-compiler": "file:../../compilers/s-svelte-compiler",
     "@coffeekraken/s-ts-compiler": "file:../../compilers/s-ts-compiler",
+    "@coffeekraken/s-view": "file:../../render/s-view",
     "@types/blessed": "^0.1.17",
     "abstract-syntax-tree": "^2.17.2",
     "acorn-loose": "^8.0.2",

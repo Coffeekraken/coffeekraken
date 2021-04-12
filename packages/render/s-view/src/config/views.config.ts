@@ -2,17 +2,17 @@ import __path from 'path';
 
 export default {
   /**
-   * @name            rootDir
+   * @name            rootDirs
    * @namespace       config.views
-   * @type            String
-   * @default          [config.storage.srcDir]/views
+   * @type            string[]
+   * @default          ['[config.storage.srcDir]/views']
    *
-   * Specify the root views directory
+   * Specify the roots views directories
    *
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir: `[config.storage.srcDir]/views`,
+  rootDirs: [`[config.storage.srcDir]/views`],
 
   /**
    * @name            cacheDir
@@ -49,10 +49,7 @@ export default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    blade: __path.resolve(
-      __dirname,
-      '../node/template/engines/SBladeTemplateEngine'
-    )
+    blade: __path.resolve(__dirname, '../node/engines/blade/SBladeViewEngine')
   },
 
   /**
@@ -77,6 +74,6 @@ export default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    js: __path.resolve(__dirname, '../node/template/dataHandlers/js.js')
+    js: __path.resolve(__dirname, '../node/dataHandlers/js.js')
   }
 };

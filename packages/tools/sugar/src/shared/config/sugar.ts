@@ -22,6 +22,7 @@ import __sanitizeSugarJson from '../sugar/sanitizeSugarJson';
  * @todo      doc
  * @todo      tests
  * @todo      {Enhancement}       Find a way to specify the "userConfigPath" dynamically without having circular dependencies
+ * @todo      Add multi level extends support
  *
  * @example             js
  * import sugar from '@coffeekraken/sugar/shared/config/sugar';

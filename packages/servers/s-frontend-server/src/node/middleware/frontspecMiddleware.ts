@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __packageRoot from '../../../path/packageRoot';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
-import __sugarConfig from '../../../../shared/config/sugar';
-import __deepMerge from '../../../../shared/object/deepMerge';
-import __deepMap from '../../../../shared/object/deepMap';
+import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 
 /**
  * @name            frontspecMiddleware
@@ -57,7 +57,7 @@ function frontspecMiddleware(settings = {}) {
       frontspec
     };
 
-    next();
+    return next();
   };
 }
 export default frontspecMiddleware;

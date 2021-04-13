@@ -1,4 +1,4 @@
-import __SFile from './SFile';
+import __SFile from '@coffeekraken/s-file';
 import __sugarConfig from '../../shared/config/sugar';
 
 /**

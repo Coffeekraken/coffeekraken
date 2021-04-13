@@ -37,74 +37,51 @@ const classInstance_1 = __importDefault(require("../is/classInstance"));
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function deepMap(object, processor, settings = {}, _path = []) {
+function deepMap(objectOrArray, processor, settings = {}, _path = []) {
     settings = deepMerge_1.default({
-        deepFirst: false,
         classInstances: false,
         array: true,
         privateProps: false,
         cloneFirst: true
     }, settings);
-    if (settings.cloneFirst) {
-        object = Object.assign({}, object);
-    }
-    Object.keys(object).forEach((prop) => {
-        if (!settings.privateProps && prop.match(/^_/)) {
-            delete object[prop];
+    const isArray = Array.isArray(objectOrArray);
+    const newObject = isArray
+        ? []
+        : settings.cloneFirst
+            ? Object.assign({}, objectOrArray)
+            : objectOrArray;
+    Object.keys(objectOrArray).forEach((prop) => {
+        if (!settings.privateProps && prop.match(/^_/))
+            return;
+        if (plainObject_1.default(objectOrArray[prop]) ||
+            (classInstance_1.default(objectOrArray[prop]) && settings.classInstances) ||
+            (Array.isArray(objectOrArray[prop]) && settings.array)) {
+            const res = deepMap(objectOrArray[prop], processor, settings, [
+                ..._path,
+                prop
+            ]);
+            if (isArray) {
+                newObject.push(res);
+            }
+            else {
+                newObject[prop] = res;
+            }
             return;
         }
-        // const descriptor = Object.getOwnPropertyDescriptor(object, prop);
-        // if (
-        //   descriptor.get &&
-        //   typeof descriptor.get === 'function' &&
-        //   !descriptor.set
-        // ) {
-        //   return;
-        // }
-        if (!settings.deepFirst) {
-            if (plainObject_1.default(object[prop]) ||
-                (classInstance_1.default(object[prop]) && settings.classInstances) ||
-                (Array.isArray(object[prop]) && settings.array)) {
-                object[prop] = deepMap(object[prop], processor, settings, [
-                    ..._path,
-                    prop
-                ]);
-                // if (!settings.classInstances) return;
-            }
-            const res = processor({
-                object,
-                prop,
-                value: object[prop],
-                path: [..._path, prop].join('.')
-            });
-            if (res === -1)
-                delete object[prop];
-            else
-                object[prop] = res;
-        }
-        else {
-            const res = processor({
-                object,
-                prop,
-                value: object[prop],
-                path: [..._path, prop].join('.')
-            });
-            if (res === -1)
-                delete object[prop];
-            else
-                object[prop] = res;
-            if (plainObject_1.default(object[prop]) ||
-                (classInstance_1.default(object[prop]) && settings.classInstances) ||
-                (Array.isArray(object[prop]) && settings.array)) {
-                object[prop] = deepMap(object[prop], processor, settings, [
-                    ..._path,
-                    prop
-                ]);
-                // if (!settings.classInstances) return;
-            }
-        }
+        const res = processor({
+            objectOrArray,
+            prop,
+            value: objectOrArray[prop],
+            path: [..._path, prop].join('.')
+        });
+        if (res === -1)
+            return;
+        if (isArray)
+            newObject.push(res);
+        else
+            newObject[prop] = res;
     });
-    return object;
+    return newObject;
 }
 exports.default = deepMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVlcE1hcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZXBNYXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsb0VBQWdEO0FBQ2hELG9FQUE4QztBQUM5Qyx3RUFBb0Q7QUFFcEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBUyxPQUFPLENBQUMsTUFBTSxFQUFFLFNBQVMsRUFBRSxRQUFRLEdBQUcsRUFBRSxFQUFFLEtBQUssR0FBRyxFQUFFO0lBQzNELFFBQVEsR0FBRyxtQkFBVyxDQUNwQjtRQUNFLFNBQVMsRUFBRSxLQUFLO1FBQ2hCLGNBQWMsRUFBRSxLQUFLO1FBQ3JCLEtBQUssRUFBRSxJQUFJO1FBQ1gsWUFBWSxFQUFFLEtBQUs7UUFDbkIsVUFBVSxFQUFFLElBQUk7S0FDakIsRUFDRCxRQUFRLENBQ1QsQ0FBQztJQUVGLElBQUksUUFBUSxDQUFDLFVBQVUsRUFBRTtRQUN2QixNQUFNLEdBQUcsTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsTUFBTSxDQUFDLENBQUM7S0FDcEM7SUFFRCxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ25DLElBQUksQ0FBQyxRQUFRLENBQUMsWUFBWSxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDOUMsT0FBTyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDcEIsT0FBTztTQUNSO1FBRUQsb0VBQW9FO1FBQ3BFLE9BQU87UUFDUCxzQkFBc0I7UUFDdEIsNENBQTRDO1FBQzVDLG9CQUFvQjtRQUNwQixNQUFNO1FBQ04sWUFBWTtRQUNaLElBQUk7UUFFSixJQUFJLENBQUMsUUFBUSxDQUFDLFNBQVMsRUFBRTtZQUN2QixJQUNFLHFCQUFlLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUM3QixDQUFDLHVCQUFpQixDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLFFBQVEsQ0FBQyxjQUFjLENBQUM7Z0JBQzVELENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxRQUFRLENBQUMsS0FBSyxDQUFDLEVBQy9DO2dCQUNBLE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxPQUFPLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxFQUFFLFNBQVMsRUFBRSxRQUFRLEVBQUU7b0JBQ3hELEdBQUcsS0FBSztvQkFDUixJQUFJO2lCQUNMLENBQUMsQ0FBQztnQkFDSCx3Q0FBd0M7YUFDekM7WUFFRCxNQUFNLEdBQUcsR0FBRyxTQUFTLENBQUM7Z0JBQ3BCLE1BQU07Z0JBQ04sSUFBSTtnQkFDSixLQUFLLEVBQUUsTUFBTSxDQUFDLElBQUksQ0FBQztnQkFDbkIsSUFBSSxFQUFFLENBQUMsR0FBRyxLQUFLLEVBQUUsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQzthQUNqQyxDQUFDLENBQUM7WUFDSCxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUM7Z0JBQUUsT0FBTyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7O2dCQUMvQixNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsR0FBRyxDQUFDO1NBQ3pCO2FBQU07WUFDTCxNQUFNLEdBQUcsR0FBRyxTQUFTLENBQUM7Z0JBQ3BCLE1BQU07Z0JBQ04sSUFBSTtnQkFDSixLQUFLLEVBQUUsTUFBTSxDQUFDLElBQUksQ0FBQztnQkFDbkIsSUFBSSxFQUFFLENBQUMsR0FBRyxLQUFLLEVBQUUsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQzthQUNqQyxDQUFDLENBQUM7WUFDSCxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUM7Z0JBQUUsT0FBTyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7O2dCQUMvQixNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsR0FBRyxDQUFDO1lBQ3hCLElBQ0UscUJBQWUsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBQzdCLENBQUMsdUJBQWlCLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksUUFBUSxDQUFDLGNBQWMsQ0FBQztnQkFDNUQsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFDL0M7Z0JBQ0EsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHLE9BQU8sQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEVBQUUsU0FBUyxFQUFFLFFBQVEsRUFBRTtvQkFDeEQsR0FBRyxLQUFLO29CQUNSLElBQUk7aUJBQ0wsQ0FBQyxDQUFDO2dCQUNILHdDQUF3QzthQUN6QztTQUNGO0lBQ0gsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLE1BQU0sQ0FBQztBQUNoQixDQUFDO0FBQ0Qsa0JBQWUsT0FBTyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVlcE1hcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZXBNYXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsb0VBQWdEO0FBQ2hELG9FQUE4QztBQUM5Qyx3RUFBb0Q7QUFFcEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBUyxPQUFPLENBQUMsYUFBYSxFQUFFLFNBQVMsRUFBRSxRQUFRLEdBQUcsRUFBRSxFQUFFLEtBQUssR0FBRyxFQUFFO0lBQ2xFLFFBQVEsR0FBRyxtQkFBVyxDQUNwQjtRQUNFLGNBQWMsRUFBRSxLQUFLO1FBQ3JCLEtBQUssRUFBRSxJQUFJO1FBQ1gsWUFBWSxFQUFFLEtBQUs7UUFDbkIsVUFBVSxFQUFFLElBQUk7S0FDakIsRUFDRCxRQUFRLENBQ1QsQ0FBQztJQUVGLE1BQU0sT0FBTyxHQUFHLEtBQUssQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLENBQUM7SUFFN0MsTUFBTSxTQUFTLEdBQUcsT0FBTztRQUN2QixDQUFDLENBQUMsRUFBRTtRQUNKLENBQUMsQ0FBQyxRQUFRLENBQUMsVUFBVTtZQUNyQixDQUFDLENBQUMsTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsYUFBYSxDQUFDO1lBQ2xDLENBQUMsQ0FBQyxhQUFhLENBQUM7SUFFbEIsTUFBTSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUMxQyxJQUFJLENBQUMsUUFBUSxDQUFDLFlBQVksSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQztZQUFFLE9BQU87UUFFdkQsSUFDRSxxQkFBZSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNwQyxDQUFDLHVCQUFpQixDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLFFBQVEsQ0FBQyxjQUFjLENBQUM7WUFDbkUsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFDdEQ7WUFDQSxNQUFNLEdBQUcsR0FBRyxPQUFPLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxFQUFFLFNBQVMsRUFBRSxRQUFRLEVBQUU7Z0JBQzVELEdBQUcsS0FBSztnQkFDUixJQUFJO2FBQ0wsQ0FBQyxDQUFDO1lBRUgsSUFBSSxPQUFPLEVBQUU7Z0JBQ1gsU0FBUyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQzthQUNyQjtpQkFBTTtnQkFDTCxTQUFTLENBQUMsSUFBSSxDQUFDLEdBQUcsR0FBRyxDQUFDO2FBQ3ZCO1lBQ0QsT0FBTztTQUNSO1FBRUQsTUFBTSxHQUFHLEdBQUcsU0FBUyxDQUFDO1lBQ3BCLGFBQWE7WUFDYixJQUFJO1lBQ0osS0FBSyxFQUFFLGFBQWEsQ0FBQyxJQUFJLENBQUM7WUFDMUIsSUFBSSxFQUFFLENBQUMsR0FBRyxLQUFLLEVBQUUsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQztTQUNqQyxDQUFDLENBQUM7UUFDSCxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUM7WUFBRSxPQUFPO1FBQ3ZCLElBQUksT0FBTztZQUFFLFNBQVMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7O1lBQzVCLFNBQVMsQ0FBQyxJQUFJLENBQUMsR0FBRyxHQUFHLENBQUM7SUFDN0IsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLFNBQVMsQ0FBQztBQUNuQixDQUFDO0FBQ0Qsa0JBQWUsT0FBTyxDQUFDIn0=

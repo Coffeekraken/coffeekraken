@@ -34,10 +34,9 @@ import __isClassInstance from '../is/classInstance';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function deepMap(object, processor, settings = {}, _path = []) {
+function deepMap(objectOrArray, processor, settings = {}, _path = []) {
   settings = __deepMerge(
     {
-      deepFirst: false,
       classInstances: false,
       array: true,
       privateProps: false,
@@ -46,68 +45,45 @@ function deepMap(object, processor, settings = {}, _path = []) {
     settings
   );
 
-  if (settings.cloneFirst) {
-    object = Object.assign({}, object);
-  }
+  const isArray = Array.isArray(objectOrArray);
 
-  Object.keys(object).forEach((prop) => {
-    if (!settings.privateProps && prop.match(/^_/)) {
-      delete object[prop];
+  const newObject = isArray
+    ? []
+    : settings.cloneFirst
+    ? Object.assign({}, objectOrArray)
+    : objectOrArray;
+
+  Object.keys(objectOrArray).forEach((prop) => {
+    if (!settings.privateProps && prop.match(/^_/)) return;
+
+    if (
+      __isPlainObject(objectOrArray[prop]) ||
+      (__isClassInstance(objectOrArray[prop]) && settings.classInstances) ||
+      (Array.isArray(objectOrArray[prop]) && settings.array)
+    ) {
+      const res = deepMap(objectOrArray[prop], processor, settings, [
+        ..._path,
+        prop
+      ]);
+
+      if (isArray) {
+        newObject.push(res);
+      } else {
+        newObject[prop] = res;
+      }
       return;
     }
 
-    // const descriptor = Object.getOwnPropertyDescriptor(object, prop);
-    // if (
-    //   descriptor.get &&
-    //   typeof descriptor.get === 'function' &&
-    //   !descriptor.set
-    // ) {
-    //   return;
-    // }
-
-    if (!settings.deepFirst) {
-      if (
-        __isPlainObject(object[prop]) ||
-        (__isClassInstance(object[prop]) && settings.classInstances) ||
-        (Array.isArray(object[prop]) && settings.array)
-      ) {
-        object[prop] = deepMap(object[prop], processor, settings, [
-          ..._path,
-          prop
-        ]);
-        // if (!settings.classInstances) return;
-      }
-
-      const res = processor({
-        object,
-        prop,
-        value: object[prop],
-        path: [..._path, prop].join('.')
-      });
-      if (res === -1) delete object[prop];
-      else object[prop] = res;
-    } else {
-      const res = processor({
-        object,
-        prop,
-        value: object[prop],
-        path: [..._path, prop].join('.')
-      });
-      if (res === -1) delete object[prop];
-      else object[prop] = res;
-      if (
-        __isPlainObject(object[prop]) ||
-        (__isClassInstance(object[prop]) && settings.classInstances) ||
-        (Array.isArray(object[prop]) && settings.array)
-      ) {
-        object[prop] = deepMap(object[prop], processor, settings, [
-          ..._path,
-          prop
-        ]);
-        // if (!settings.classInstances) return;
-      }
-    }
+    const res = processor({
+      objectOrArray,
+      prop,
+      value: objectOrArray[prop],
+      path: [..._path, prop].join('.')
+    });
+    if (res === -1) return;
+    if (isArray) newObject.push(res);
+    else newObject[prop] = res;
   });
-  return object;
+  return newObject;
 }
 export default deepMap;

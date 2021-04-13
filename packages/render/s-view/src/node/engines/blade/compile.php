@@ -1,7 +1,7 @@
 <?php
 // require the vendors
-$nodeModulesVendorsPath = realpath(__DIR__.'/../../../../../sugar/vendor/autoload.php');
-$monorepoVendorsPath = realpath(__DIR__.'/../../../../../../tools/sugar/vendor/autoload.php');
+$nodeModulesVendorsPath = realpath(__DIR__.'/../../../../vendor/autoload.php');
+$monorepoVendorsPath = realpath(__DIR__.'/../../../../vendor/autoload.php');
 if ($nodeModulesVendorsPath) require_once($nodeModulesVendorsPath);
 else if ($monorepoVendorsPath) require_once($monorepoVendorsPath);
 use Jenssegers\Blade\Blade;
@@ -12,8 +12,6 @@ $nodeModulesSugarPath = realpath(__DIR__.'/../../../../../sugar/src/php/autoload
 $monorepoSugarPath = realpath(__DIR__.'/../../../../../../tools/sugar/src/php/autoload.php');
 if ($nodeModulesSugarPath) require_once($nodeModulesSugarPath);
 else if ($monorepoSugarPath) require_once($monorepoSugarPath);
-
-
 
 function compile($viewsFolders, $view, $data, $tmpPath) {
 

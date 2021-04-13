@@ -5,7 +5,7 @@
   "main": "./src/js/SCache.js",
   "exports": {
     "node": {
-      "./SFileCache": "./src/node/SFileCache",
+      "@coffeekraken/s-fileCache": "./src/node/SFileCache",
       "import": "./src/node/SCache.js",
       "require": "./src/node/SCache.js"
     }

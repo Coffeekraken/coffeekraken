@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __packageRoot from '../../../path/packageRoot';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
-import __standardizeJson from '../../../npm/utils/standardizeJson';
+import __standardizeJson from '@coffeekraken/sugar/shared/npm/utils/standardizeJson';
 
 /**
  * @name            packageJsonMiddleware
@@ -43,8 +43,7 @@ function packageJsonMiddleware(settings = {}) {
         packageJson: __standardizeJson(pkg)
       };
     }
-
-    next();
+    return next();
   };
 }
 export default packageJsonMiddleware;

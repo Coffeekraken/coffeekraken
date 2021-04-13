@@ -1,7 +1,7 @@
 import __deepMerge from '../../shared/object/deepMerge';
 import __chokidar from 'chokidar';
 import __expandGlob from '../../shared/glob/expandGlob';
-import __SFile from './SFile';
+import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __replacePathTokens from '../path/replacePathTokens';
 

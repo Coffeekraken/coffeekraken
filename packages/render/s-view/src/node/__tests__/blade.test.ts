@@ -10,20 +10,15 @@ describe('s-view.blade', () => {
 
     const res = await view.render({});
 
-    console.log(res);
+    expect(res.value).not.toBeUndefined();
+    expect(res.value.includes('<title>Smoth</title>')).toBe(true);
+    expect(res.view).not.toBeUndefined();
+    expect(res.startTime).not.toBeUndefined();
+    expect(res.endTime).not.toBeUndefined();
+    expect(res.duration).not.toBeUndefined();
+    expect(res.convertedDuration).not.toBeUndefined();
+    expect(res.formatedDuration).not.toBeUndefined();
 
-    // const result = await view.render(
-    //   'default',
-    //   {
-    //     title: 'Hello world',
-    //     settings: {}
-    //   },
-    //   {
-    //     rootDir: __dirname + '/views'
-    //   }
-    // );
-
-    // expect(result.length).toBe(256);
     done();
   });
 });

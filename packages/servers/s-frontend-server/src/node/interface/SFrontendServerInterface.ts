@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __sugarConfig from '../../../../shared/config/sugar';
+import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SFrontendServerInterface
- * @namespace           sugar.node.server.express.interface
+ * @namespace           s-frontend-server
  * @type                Class
  * @extends             SInterface
  * @status              wip
@@ -27,8 +27,7 @@ export default class SFrontendServerInterface extends __SInterface {
       alias: 'o',
       description: 'Server hostname',
       required: true,
-      // default: __sugarConfig('frontend.hostname') || '127.0.0.1',
-      level: 1
+      default: __sugarConfig('frontend.hostname') || '127.0.0.1'
     },
     port: {
       type: 'Number',

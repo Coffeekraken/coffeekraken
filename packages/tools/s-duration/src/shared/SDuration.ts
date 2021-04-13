@@ -37,6 +37,7 @@ export interface ISDurationObject {
   endTime: number;
   duration: number;
   formatedDuration: string;
+  convertedDuration: number;
 }
 
 export default class SDuration {

@@ -34,8 +34,6 @@ export default {
           __dirname + '/compile.php',
           // __path.resolve(__dirname, '../../../bin/php'),
           (error, php, outprint) => {
-            console.log(settings);
-
             if (error) {
               return reject(error + ' ---- ' + outprint);
             }

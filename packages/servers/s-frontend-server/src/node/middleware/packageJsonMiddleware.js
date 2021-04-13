@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const packageRoot_1 = __importDefault(require("../../../path/packageRoot"));
+const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
 const fs_1 = __importDefault(require("fs"));
-const standardizeJson_1 = __importDefault(require("../../../npm/utils/standardizeJson"));
+const standardizeJson_1 = __importDefault(require("@coffeekraken/sugar/shared/npm/utils/standardizeJson"));
 /**
  * @name            packageJsonMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -44,8 +44,8 @@ function packageJsonMiddleware(settings = {}) {
             pkg = require(packageJsonPath);
             res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { packageJson: standardizeJson_1.default(pkg) });
         }
-        next();
+        return next();
     };
 }
 exports.default = packageJsonMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZUpzb25NaWRkbGV3YXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFja2FnZUpzb25NaWRkbGV3YXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFzRDtBQUN0RCw0Q0FBc0I7QUFDdEIseUZBQW1FO0FBRW5FOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMscUJBQXFCLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDMUMsT0FBTyxVQUFVLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTtRQUM3QixNQUFNLGVBQWUsR0FBRyxHQUFHLHFCQUFhLEVBQUUsZUFBZSxDQUFDO1FBQzFELElBQUksR0FBRyxDQUFDO1FBQ1IsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDLEVBQUU7U0FDdEM7YUFBTTtZQUNMLEdBQUcsR0FBRyxPQUFPLENBQUMsZUFBZSxDQUFDLENBQUM7WUFDL0IsR0FBRyxDQUFDLFlBQVksbUNBQ1gsQ0FBQyxHQUFHLENBQUMsWUFBWSxJQUFJLEVBQUUsQ0FBQyxLQUMzQixXQUFXLEVBQUUseUJBQWlCLENBQUMsR0FBRyxDQUFDLEdBQ3BDLENBQUM7U0FDSDtRQUVELElBQUksRUFBRSxDQUFDO0lBQ1QsQ0FBQyxDQUFDO0FBQ0osQ0FBQztBQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZUpzb25NaWRkbGV3YXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFja2FnZUpzb25NaWRkbGV3YXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRGQUFzRTtBQUN0RSw0Q0FBc0I7QUFDdEIsMkdBQXFGO0FBRXJGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMscUJBQXFCLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDMUMsT0FBTyxVQUFVLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTtRQUM3QixNQUFNLGVBQWUsR0FBRyxHQUFHLHFCQUFhLEVBQUUsZUFBZSxDQUFDO1FBQzFELElBQUksR0FBRyxDQUFDO1FBQ1IsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDLEVBQUU7U0FDdEM7YUFBTTtZQUNMLEdBQUcsR0FBRyxPQUFPLENBQUMsZUFBZSxDQUFDLENBQUM7WUFDL0IsR0FBRyxDQUFDLFlBQVksbUNBQ1gsQ0FBQyxHQUFHLENBQUMsWUFBWSxJQUFJLEVBQUUsQ0FBQyxLQUMzQixXQUFXLEVBQUUseUJBQWlCLENBQUMsR0FBRyxDQUFDLEdBQ3BDLENBQUM7U0FDSDtRQUNELE9BQU8sSUFBSSxFQUFFLENBQUM7SUFDaEIsQ0FBQyxDQUFDO0FBQ0osQ0FBQztBQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=

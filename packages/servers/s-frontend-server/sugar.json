@@ -1,0 +1,22 @@
+{
+  "config": {
+    "folders": [
+      {
+        "scope": "default",
+        "path": "./src/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "frontendServer",
+      "description": "Frontend server API",
+      "actions": {
+        "start": {
+          "description": "Start a new frontend server process",
+          "process": "./src/node/start.cli.js"
+        }
+      }
+    }
+  ]
+}

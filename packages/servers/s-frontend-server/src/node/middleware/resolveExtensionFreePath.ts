@@ -1,9 +1,8 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __sugarConfig from '../../../../shared/config/sugar';
-import __deepMerge from '../../../../shared/object/deepMerge';
-import __extension from '../../../fs/extension';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
 
 /**
  * @name            resolveExtensionFreePath
@@ -34,10 +33,13 @@ import __extension from '../../../fs/extension';
 function resolveExtensionFreePath(settings = {}) {
   settings = __deepMerge(
     {
+      rootDir: undefined,
+      extensions: [],
       exclude: []
     },
     settings
   );
+
   return function (req, res, next) {
     if (settings.exclude.indexOf(req.path) !== -1) {
       return next();
@@ -45,7 +47,7 @@ function resolveExtensionFreePath(settings = {}) {
     const pathExtension = __extension(req.path).trim();
     if (pathExtension) return next();
 
-    const rootDir = __sugarConfig('frontend.rootDir');
+    const rootDir = settings.rootDir;
     const filePath =
       req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
 
@@ -61,7 +63,7 @@ function resolveExtensionFreePath(settings = {}) {
       }
     }
 
-    next();
+    return next();
   };
 }
 export default resolveExtensionFreePath;

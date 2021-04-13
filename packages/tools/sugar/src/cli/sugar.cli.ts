@@ -79,11 +79,13 @@ if (!stack) {
               `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
             );
           availableCli[`${cliObj.stack}.${action}`] = {
+            packageJson,
             ...actionObj,
             process: require(cliPath).default // eslint-disable-line
           };
         } else if (actionObj.command) {
           availableCli[`${cliObj.stack}.${action}`] = {
+            packageJson,
             ...actionObj
           };
         }
@@ -107,10 +109,14 @@ if (!stack) {
     );
     Object.keys(availableCli).forEach((stackAction) => {
       const cliObj = availableCli[stackAction];
-      if (currentPackage !== packageName) {
+      if (currentPackage !== cliObj.packageJson.name) {
         logArray.push(' ');
-        logArray.push(`<yellow>│</yellow> <yellow>${packageName}</yellow>`);
-        currentPackage = packageName;
+        logArray.push(
+          `<yellow>│</yellow> ${cliObj.packageJson.license ?? 'MIT'} <yellow>${
+            cliObj.packageJson.name
+          }</yellow> (<cyan>${cliObj.packageJson.version}</cyan>)`
+        );
+        currentPackage = cliObj.packageJson.name;
       }
       logArray.push(
         // @ts-ignore

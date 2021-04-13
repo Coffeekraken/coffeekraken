@@ -14,7 +14,7 @@ import __deepMerge from '../../shared/object/deepMerge';
 import __SDuration from '@coffeekraken/s-duration';
 import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
-import __SFile, { ISFileCtorSettings } from '../fs/SFile';
+import __SFile, { ISFileCtorSettings } from '@coffeekraken/s-file';
 import __SInterface from '@coffeekraken/s-interface';
 import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerParamsInterface';
 import { ISScssCompilerParams } from './compile/SScssCompiler';

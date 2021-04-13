@@ -42,7 +42,7 @@ exports.default = {
      */
     engines: {
         /**
-         * @name          blade
+         * @name          blade.php
          * @namespace     config.views.engines
          * @type          String
          *
@@ -51,7 +51,7 @@ exports.default = {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        blade: path_1.default.resolve(__dirname, '../node/engines/blade/SBladeViewEngine')
+        'blade.php': path_1.default.resolve(__dirname, '../node/engines/blade/bladeViewEngine')
     },
     /**
      * @name      dataHandlers
@@ -66,7 +66,7 @@ exports.default = {
      */
     dataHandlers: {
         /**
-         * @name          js
+         * @name          'js,json'
          * @namespace     config.views.dataHandlers
          * @type          String
          *
@@ -75,7 +75,7 @@ exports.default = {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        js: path_1.default.resolve(__dirname, '../node/dataHandlers/js.js')
+        'js,json': path_1.default.resolve(__dirname, '../node/dataHandlers/js.js')
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlld3MuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidmlld3MuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0RBQTBCO0FBRTFCLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxDQUFDLCtCQUErQixDQUFDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsaUNBQWlDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7O1dBU0c7UUFDSCxLQUFLLEVBQUUsY0FBTSxDQUFDLE9BQU8sQ0FBQyxTQUFTLEVBQUUsd0NBQXdDLENBQUM7S0FDM0U7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsWUFBWSxFQUFFO1FBQ1o7Ozs7Ozs7OztXQVNHO1FBQ0gsRUFBRSxFQUFFLGNBQU0sQ0FBQyxPQUFPLENBQUMsU0FBUyxFQUFFLDRCQUE0QixDQUFDO0tBQzVEO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlld3MuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidmlld3MuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0RBQTBCO0FBRTFCLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxDQUFDLCtCQUErQixDQUFDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsaUNBQWlDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7O1dBU0c7UUFDSCxXQUFXLEVBQUUsY0FBTSxDQUFDLE9BQU8sQ0FDekIsU0FBUyxFQUNULHVDQUF1QyxDQUN4QztLQUNGO0lBRUQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFlBQVksRUFBRTtRQUNaOzs7Ozs7Ozs7V0FTRztRQUNILFNBQVMsRUFBRSxjQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSw0QkFBNEIsQ0FBQztLQUNuRTtDQUNGLENBQUMifQ==

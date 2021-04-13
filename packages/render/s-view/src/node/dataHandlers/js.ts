@@ -24,16 +24,9 @@ import __SPromise from '@coffeekraken/s-promise';
 export default {
   name: 'JsDataHandler',
   extensions: ['js', 'json'],
-  handler: function (filePath) {
-    return new __SPromise(
-      async ({ resolve }) => {
-        resolve(await import(filePath));
-      },
-      {
-        metas: {
-          id: 'templateJsDataHandler'
-        }
-      }
-    );
+  handle(filePath) {
+    return new __SPromise(async ({ resolve }) => {
+      resolve(await import(filePath));
+    });
   }
 };

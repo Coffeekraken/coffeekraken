@@ -5,7 +5,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __wait from '../../shared/time/wait';
 import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
-import __SFile, { ISFile } from '../fs/SFile';
+import __SFile, { ISFile } from '@coffeekraken/s-file';
 import __SInterface from '@coffeekraken/s-interface';
 import __SScssFile from '../scss/SScssFile';
 import __STsFile from '../ts/STsFile';

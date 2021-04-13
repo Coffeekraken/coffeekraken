@@ -1,4 +1,4 @@
-import __SFile from '../fs/SFile';
+import __SFile from '@coffeekraken/s-file';
 import __deepMerge from '../../shared/object/deepMerge';
 import __sugarConfig from '../../shared/config/sugar';
 import __onProcessExit from '../process/onProcessExit';

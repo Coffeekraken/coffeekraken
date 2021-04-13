@@ -1,0 +1,15 @@
+{
+  "name": "@coffeekraken/s-file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/node/exports.js",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-class": "file:../s-class",
+    "@coffeekraken/s-descriptor": "file:../s-descriptor",
+    "@coffeekraken/sugar": "file:../../tools/sugar",
+    "minimatch": "^3.0.4"
+  }
+}

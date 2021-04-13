@@ -7,7 +7,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __wait from '../../shared/time/wait';
 import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
 import __getFilename from '../fs/filename';
-import __SFile from '../fs/SFile';
+import __SFile from '@coffeekraken/s-file';
 import __SInterface from '@coffeekraken/s-interface';
 import __onProcessExit from '../process/onProcessExit';
 import __SJsCompiler, {

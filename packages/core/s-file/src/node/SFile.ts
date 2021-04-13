@@ -1,17 +1,17 @@
 // import __SFileInterface from './interface/SFileInterface';
 import __fs from 'fs';
 import __path from 'path';
-import __md5 from '../../shared/crypt/md5';
-import __deepMerge from '../../shared/object/deepMerge';
-import __toString from '../../shared/string/toString';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __replacePathTokens from '../path/replacePathTokens';
-import __ensureDirSync from './ensureDirSync';
-import __extension from './extension';
-import __getFilename from './filename';
-import __folderPath from './folderPath';
-import __uniqid from '../../shared/string/uniqid';
-import __onProcessExit from '../process/onProcessExit';
+import __replacePathTokens from '@coffeekraken/sugar/node/path/replacePathTokens';
+import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
+import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __minimatch from 'minimatch';
 
 /**
@@ -45,7 +45,7 @@ import __minimatch from 'minimatch';
  * @todo      {Feature}       Add support for autocasting like yml, etc...
  *
  * @example           js
- * import SFile from '@coffeekraken/sugar/node/fs/SFile';
+ * import SFile from '@coffeekraken/s-file';
  * const file = new SFile('something/cool/sugar.json');
  * file.extension; // => json
  * file.exists; // => true

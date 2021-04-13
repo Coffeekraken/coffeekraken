@@ -4,9 +4,10 @@ import __SProcess from '@coffeekraken/s-process';
 import __chokidar from 'chokidar';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../../../shared/object/deepMerge';
-import __SFile from '../../fs/SFile';
+import __SFile from '@coffeekraken/s-file';
 import __packageRoot from '../../path/packageRoot';
 import __SFsDeamonInterface from './interface/SFsDeamonInterface';
+
 
 /**
  * @name                SFsDeamonProcess

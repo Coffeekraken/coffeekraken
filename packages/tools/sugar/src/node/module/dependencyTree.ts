@@ -7,7 +7,7 @@ import __packageRoot from '../path/packageRoot';
 import __md5 from '../../shared/crypt/md5';
 import __folderPath from '../fs/folderPath';
 import __path from 'path';
-import __SFile from '../fs/SFile';
+import __SFile from '@coffeekraken/s-file';
 import __extractImport from './extractImport';
 
 /**

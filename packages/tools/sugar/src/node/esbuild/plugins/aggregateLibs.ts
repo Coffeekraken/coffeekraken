@@ -3,7 +3,7 @@ import __resolve from '../../module/resolve';
 import __fs from 'fs';
 import __path from 'path';
 import __packageRoot from '../../path/packageRoot';
-import __SFile from '../../fs/SFile';
+import __SFile from '@coffeekraken/s-file';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __sugarConfig from '../../../shared/config/sugar';
 import __folderPath from '../../fs/folderPath';

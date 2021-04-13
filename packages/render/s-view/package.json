@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-duration": "file:../../tools/s-duration",
+    "@coffeekraken/s-file": "file:../../core/s-file",
     "@coffeekraken/s-process": "file:../../core/s-process",
     "@coffeekraken/s-promise": "file:../../core/s-promise",
     "@coffeekraken/sugar": "file:../../tools/sugar"

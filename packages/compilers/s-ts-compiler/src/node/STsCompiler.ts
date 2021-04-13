@@ -14,7 +14,7 @@ import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __SFile from '@coffeekraken/sugar/node/fs/SFile';
+import __SFile from '@coffeekraken/s-file';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
 import __sugarDir from '@coffeekraken/sugar/node/path/sugarDir';

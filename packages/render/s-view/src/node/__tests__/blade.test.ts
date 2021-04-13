@@ -8,9 +8,7 @@ describe('s-view.blade', () => {
       }
     });
 
-    const res = await view.render({
-      title: 'Hello world'
-    });
+    const res = await view.render({});
 
     console.log(res);
 

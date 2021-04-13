@@ -40,7 +40,7 @@ export default {
    */
   engines: {
     /**
-     * @name          blade
+     * @name          blade.php
      * @namespace     config.views.engines
      * @type          String
      *
@@ -49,7 +49,10 @@ export default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    blade: __path.resolve(__dirname, '../node/engines/blade/SBladeViewEngine')
+    'blade.php': __path.resolve(
+      __dirname,
+      '../node/engines/blade/bladeViewEngine'
+    )
   },
 
   /**
@@ -65,7 +68,7 @@ export default {
    */
   dataHandlers: {
     /**
-     * @name          js
+     * @name          'js,json'
      * @namespace     config.views.dataHandlers
      * @type          String
      *
@@ -74,6 +77,6 @@ export default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    js: __path.resolve(__dirname, '../node/dataHandlers/js.js')
+    'js,json': __path.resolve(__dirname, '../node/dataHandlers/js.js')
   }
 };

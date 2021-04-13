@@ -5,7 +5,7 @@ $monorepoVendorsPath = realpath(__DIR__.'/../../../../../../tools/sugar/vendor/a
 if ($nodeModulesVendorsPath) require_once($nodeModulesVendorsPath);
 else if ($monorepoVendorsPath) require_once($monorepoVendorsPath);
 use Jenssegers\Blade\Blade;
-use eftec\bladeone\BladeOne;
+// use eftec\bladeone\BladeOne;
 
 // require the sugar toolkit
 $nodeModulesSugarPath = realpath(__DIR__.'/../../../../../sugar/src/php/autoload.php');

@@ -15,7 +15,7 @@ import __SClass from '@coffeekraken/s-class';
 import __sugarConfig from '../../shared/config/sugar';
 import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __wait from '../../shared/time/wait';
-import __SFile from '../fs/SFile';
+import __SFile from '@coffeekraken/s-file';
 import __clone from '../../shared/object/clone';
 import __writeFileSync from '../fs/writeFileSync';
 import __SCache from '@coffeekraken/s-cache';

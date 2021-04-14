@@ -35,6 +35,7 @@ const ruleObj: ISDescriptorRule = {
     return {
       absolute: params.absolute ?? false,
       exists: params.exists ?? false,
+      create: params.create ?? false,
       rootDir: params.rootDir ?? (process && process.cwd ? process.cwd() : '/'),
       glob: params.glob ?? false,
       tokens: params.tokens ?? true,
@@ -120,9 +121,13 @@ const ruleObj: ISDescriptorRule = {
         );
       const __fs = require('fs'); // eslint-disable-line
       if (!__fs.existsSync(value))
-        return new Error(
-          `The passed path "<cyan>${value}</cyan>" does not exists and it should`
-        );
+        if (params.create) {
+          __fs.mkdirSync(value, { recursive: true });
+        } else {
+          return new Error(
+            `The passed path "<cyan>${value}</cyan>" does not exists and it should`
+          );
+        }
     }
 
     return value;

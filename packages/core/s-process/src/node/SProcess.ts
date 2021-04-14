@@ -688,10 +688,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
 
     // handle simple Promise processes
+    // @ts-ignore
     if (this._processPromise instanceof Promise) {
       // @ts-ignore
       this._processPromise.catch((e) => {}); // eslint-disable-line
       return new __SPromise(({ resolve }) => {
+        // @ts-ignore
         this._processPromise
           .then((value) => {
             this.state('success');

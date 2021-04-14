@@ -1,0 +1,14 @@
+{
+  "cli": [
+    {
+      "stack": "postcss",
+      "description": "PostCSS compiler",
+      "actions": {
+        "compile": {
+          "description": "Compile some css file(s) using PostCSS AWESOME package",
+          "process": "./src/node/compile.cli.js"
+        }
+      }
+    }
+  ]
+}

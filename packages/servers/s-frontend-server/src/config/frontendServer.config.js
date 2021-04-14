@@ -54,7 +54,7 @@ exports.default = {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     staticDirs: {
-        '/dist': `[config.storage.distDir]`
+        '/dist/*': `[config.storage.distDir]`
         // '/node_modules': '[config.storage.rootDir]/node_modules'
     },
     /**
@@ -69,6 +69,19 @@ exports.default = {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     viewsDir: `[config.storage.srcDir]/views`,
+    /**
+     * @name          logLevel
+     * @namespace     config.frontendServer
+     * @type          String
+     * @values        silent,error,warn,debug,info,verbose,silly
+     * @default       info
+     *
+     * Specify which log level you want for your server.
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    logLevel: 'info',
     middlewares: {
         resolveExtensionFreePath: {
             path: `${__dirname}/../node/middleware/resolveExtensionFreePath`,
@@ -111,31 +124,31 @@ exports.default = {
     },
     handlers: {
         /**
-         * @name            views
-         * @namespace       config.frontend.handlers
+         * @name            view
+         * @namespace       config.frontendServer.handlers
          * @type            Object
          *
-         * Store all the "views" configuration access like the slug, the title, etc...
+         * Store all the "view" configuration access like the route, the title, etc...
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        views: {
+        view: {
             /**
-             * @name          slug
-             * @namespace     config.frontend.handlers.views
+             * @name          route
+             * @namespace     config.frontendServer.handlers.view
              * @type          String
-             * @default       /views
+             * @default       /view
              *
-             * Specify the url slug to use for this "section"
+             * Specify the url route to use for this "section"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            slug: '/views',
+            route: '/view/*',
             /**
              * @name          title
-             * @namespace     config.frontent.pages.views
+             * @namespace     config.frontendServer.handlers.view
              * @type          String
              * @default       Views | [title]
              *
@@ -145,10 +158,10 @@ exports.default = {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            title: 'Views | [title]',
+            title: 'View | [title]',
             /**
              * @name            handler
-             * @namespace       config.frontend.handlers.views
+             * @namespace       config.frontendServer.handlers.view
              * @type            Function
              *
              * Specify the handler function that will take care of responding to this "section"
@@ -156,82 +169,82 @@ exports.default = {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            handler: `${__dirname}/../node/server/frontend/handlers/views`
-        },
-        /**
-         * @name            doc
-         * @namespace       config.frontend.handlers
-         * @type            Object
-         *
-         * Store all the "doc" configuration access like the slug, the title, etc...
-         *
-         * @since         2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        doc: {
-            /**
-             * @name          slug
-             * @namespace     config.frontend.handlers.views
-             * @type          String
-             * @default       /doc
-             *
-             * Specify the url slug to use for this "section"
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            slug: '/doc',
-            /**
-             * @name          title
-             * @namespace     config.frontent.pages.views
-             * @type          String
-             * @default       Views | [title]
-             *
-             * Specify the page title wanted. Accessible tokens:
-             * - [title]: Name of the view
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            title: 'Doc | [title]',
-            /**
-             * @name            handler
-             * @namespace       config.frontend.handlers.views
-             * @type            Function
-             *
-             * Specify the handler function that will take care of responding to this "section"
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            handler: `${__dirname}/../node/server/frontend/handlers/doc`
+            handler: `${__dirname}/../node/handlers/view`
         }
         // /**
-        //  * @name            docMap
-        //  * @namespace       config.frontend.handlers
+        //  * @name            doc
+        //  * @namespace       config.frontendServer.handlers
         //  * @type            Object
         //  *
-        //  * Store all the "docMap" configuration access like the slug, the title, etc...
+        //  * Store all the "doc" configuration access like the route, the title, etc...
+        //  *
+        //  * @since         2.0.0
+        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //  */
+        // doc: {
+        //   /**
+        //    * @name          route
+        //    * @namespace     config.frontendServer.handlers.views
+        //    * @type          String
+        //    * @default       /doc
+        //    *
+        //    * Specify the url route to use for this "section"
+        //    *
+        //    * @since         2.0.0
+        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //    */
+        //   route: '/doc',
+        //   /**
+        //    * @name          title
+        //    * @namespace     config.frontendServer.handlers.views
+        //    * @type          String
+        //    * @default       Views | [title]
+        //    *
+        //    * Specify the page title wanted. Accessible tokens:
+        //    * - [title]: Name of the view
+        //    *
+        //    * @since       2.0.0
+        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //    */
+        //   title: 'Doc | [title]',
+        //   /**
+        //    * @name            handler
+        //    * @namespace       config.frontendServer.handlers.views
+        //    * @type            Function
+        //    *
+        //    * Specify the handler function that will take care of responding to this "section"
+        //    *
+        //    * @since         2.0.0
+        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //    */
+        //   handler: `${__dirname}/../node/server/frontend/handlers/doc`
+        // }
+        // /**
+        //  * @name            docMap
+        //  * @namespace       config.frontendServer.handlers
+        //  * @type            Object
+        //  *
+        //  * Store all the "docMap" configuration access like the route, the title, etc...
         //  *
         //  * @since         2.0.0
         //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         //  */
         // docMap: {
         //   /**
-        //    * @name          slug
-        //    * @namespace     config.frontend.handlers.docMap
+        //    * @name          route
+        //    * @namespace     config.frontendServer.handlers.docMap
         //    * @type          String
         //    * @default       /docMap
         //    *
-        //    * Specify the url slug to use for this "section"
+        //    * Specify the url route to use for this "section"
         //    *
         //    * @since         2.0.0
         //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         //    */
-        //   slug: '/docMap',
+        //   route: '/docMap',
         //   /**
         //    * @name          title
-        //    * @namespace     config.frontent.pages.docMap
+        //    * @namespace     config.frontendServer.handlers.docMap
         //    * @type          String
         //    * @default       docMap | [title]
         //    *
@@ -244,7 +257,7 @@ exports.default = {
         //   title: 'docMap.json',
         //   /**
         //    * @name            handler
-        //    * @namespace       config.frontend.handlers.docMap
+        //    * @namespace       config.frontendServer.handlers.docMap
         //    * @type            Function
         //    *
         //    * Specify the handler function that will take care of responding to this "section"
@@ -256,7 +269,7 @@ exports.default = {
         // },
         // /**
         //  * @name            doc
-        //  * @namespace       config.frontend.handlers
+        //  * @namespace       config.frontendServer.handlers
         //  * @type            Object
         //  *
         //  * Store all the accessible pages of the frontend development website
@@ -266,20 +279,20 @@ exports.default = {
         //  */
         // doc: {
         //   /**
-        //    * @name            slug
-        //    * @namespace       config.frontend.handlers.doc
+        //    * @name            route
+        //    * @namespace       config.frontendServer.handlers.doc
         //    * @type            String
         //    * @default         /doc
         //    *
-        //    * Specify the url slug to use for this "section"
+        //    * Specify the url route to use for this "section"
         //    *
         //    * @since           2.0.0
         //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         //    */
-        //   slug: '/doc',
+        //   route: '/doc',
         //   /**
         //    * @name            title
-        //    * @namespace       config.frontend.handlers.doc
+        //    * @namespace       config.frontendServer.handlers.doc
         //    * @type            String
         //    * @default         Documentation | [title]
         //    *
@@ -291,7 +304,7 @@ exports.default = {
         //   title: 'Documentation | [title]',
         //   /**
         //    * @name            handler
-        //    * @namespace       config.frontend.handlers.doc
+        //    * @namespace       config.frontendServer.handlers.doc
         //    * @type            Function
         //    *
         //    * Specify the handler function that will take care of responding to this "section"
@@ -303,7 +316,7 @@ exports.default = {
         // },
         // /**
         //  * @name            search
-        //  * @namespace       config.frontend.handlers
+        //  * @namespace       config.frontendServer.handlers
         //  * @type            Object
         //  *
         //  * Store all the accessible pages of the frontend development website
@@ -313,8 +326,8 @@ exports.default = {
         //  */
         // search: {
         //   /**
-        //    * @name            slug
-        //    * @namespace       config.frontend.handlers.search
+        //    * @name            route
+        //    * @namespace       config.frontendServer.handlers.search
         //    * @type            String
         //    * @default         /search
         //    *
@@ -323,10 +336,10 @@ exports.default = {
         //    * @since           2.0.0
         //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         //    */
-        //   slug: '/search',
+        //   route: '/search',
         //   /**
         //    * @name            title
-        //    * @namespace       config.frontend.handlers.search
+        //    * @namespace       config.frontendServer.handlers.search
         //    * @type            String
         //    * @default         Search | [title]
         //    *
@@ -338,7 +351,7 @@ exports.default = {
         //   title: 'Search | [title]',
         //   /**
         //    * @name            handler
-        //    * @namespace       config.frontend.handlers.search
+        //    * @namespace       config.frontendServer.handlers.search
         //    * @type            Function
         //    *
         //    * Specify the handler function that will take care of responding to this "section"
@@ -349,7 +362,7 @@ exports.default = {
         //   handler: `${__dirname}/../node/server/frontend/handlers/search`,
         //   /**
         //    * @name        settings
-        //    * @namespace   config.frontend.handlers.search
+        //    * @namespace   config.frontendServer.handlers.search
         //    * @type        Object
         //    *
         //    * Specify the settings passes to the handle function.
@@ -373,4 +386,4 @@ exports.default = {
         // }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMkZBQXFFO0FBRXJFLGtCQUFlO0lBQ2IsTUFBTSxFQUFFLGlCQUFpQjtJQUV6Qjs7Ozs7Ozs7OztPQVVHO0lBQ0gsSUFBSSxFQUFFLElBQUk7SUFFVjs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG1CQUFXLEVBQUU7SUFFdkI7Ozs7Ozs7Ozs7T0FVRztJQUNILE9BQU8sRUFBRSwwQkFBMEI7SUFFbkM7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRTtRQUNWLE9BQU8sRUFBRSwwQkFBMEI7UUFDbkMsMkRBQTJEO0tBQzVEO0lBRUQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSwrQkFBK0I7SUFFekMsV0FBVyxFQUFFO1FBQ1gsd0JBQXdCLEVBQUU7WUFDeEIsSUFBSSxFQUFFLEdBQUcsU0FBUyw4Q0FBOEM7WUFDaEUsUUFBUSxFQUFFO2dCQUNSLE9BQU8sRUFBRSxDQUFDLFNBQVMsQ0FBQztnQkFDcEIsT0FBTyxFQUFFLGlDQUFpQztnQkFDMUMsVUFBVSxFQUFFO29CQUNWLElBQUk7b0JBQ0osS0FBSztvQkFDTCxNQUFNO29CQUNOLElBQUk7b0JBQ0osS0FBSztvQkFDTCxLQUFLO29CQUNMLEtBQUs7b0JBQ0wsS0FBSztvQkFDTCxNQUFNO29CQUNOLE1BQU07b0JBQ04sS0FBSztvQkFDTCxNQUFNO29CQUNOLEtBQUs7b0JBQ0wsS0FBSztvQkFDTCxLQUFLO29CQUNMLE1BQU07b0JBQ04sS0FBSztpQkFDTjthQUNGO1NBQ0Y7UUFDRCxTQUFTLEVBQUU7WUFDVCxJQUFJLEVBQUUsR0FBRyxTQUFTLHlDQUF5QztZQUMzRCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsR0FBRyxFQUFFO1lBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxtQ0FBbUM7WUFD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMkZBQXFFO0FBRXJFLGtCQUFlO0lBQ2IsTUFBTSxFQUFFLGlCQUFpQjtJQUV6Qjs7Ozs7Ozs7OztPQVVHO0lBQ0gsSUFBSSxFQUFFLElBQUk7SUFFVjs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG1CQUFXLEVBQUU7SUFFdkI7Ozs7Ozs7Ozs7T0FVRztJQUNILE9BQU8sRUFBRSwwQkFBMEI7SUFFbkM7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRTtRQUNWLFNBQVMsRUFBRSwwQkFBMEI7UUFDckMsMkRBQTJEO0tBQzVEO0lBRUQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSwrQkFBK0I7SUFFekM7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxRQUFRLEVBQUUsTUFBTTtJQUVoQixXQUFXLEVBQUU7UUFDWCx3QkFBd0IsRUFBRTtZQUN4QixJQUFJLEVBQUUsR0FBRyxTQUFTLDhDQUE4QztZQUNoRSxRQUFRLEVBQUU7Z0JBQ1IsT0FBTyxFQUFFLENBQUMsU0FBUyxDQUFDO2dCQUNwQixPQUFPLEVBQUUsaUNBQWlDO2dCQUMxQyxVQUFVLEVBQUU7b0JBQ1YsSUFBSTtvQkFDSixLQUFLO29CQUNMLE1BQU07b0JBQ04sSUFBSTtvQkFDSixLQUFLO29CQUNMLEtBQUs7b0JBQ0wsS0FBSztvQkFDTCxLQUFLO29CQUNMLE1BQU07b0JBQ04sTUFBTTtvQkFDTixLQUFLO29CQUNMLE1BQU07b0JBQ04sS0FBSztvQkFDTCxLQUFLO29CQUNMLEtBQUs7b0JBQ0wsTUFBTTtvQkFDTixLQUFLO2lCQUNOO2FBQ0Y7U0FDRjtRQUNELFNBQVMsRUFBRTtZQUNULElBQUksRUFBRSxHQUFHLFNBQVMseUNBQXlDO1lBQzNELFFBQVEsRUFBRSxFQUFFO1NBQ2I7UUFDRCxHQUFH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

@@ -103,11 +103,11 @@ class SSvelteCompiler extends __SCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams: Partial<ISSvelteCompilerParams>,
-    settings: ISSvelteCompilerCtorSettings
+    initialParams?: Partial<ISSvelteCompilerParams>,
+    settings?: ISSvelteCompilerCtorSettings
   ) {
     super(
-      initialParams,
+      initialParams ?? {},
       __deepMerge(
         {
           metas: {
@@ -115,7 +115,7 @@ class SSvelteCompiler extends __SCompiler {
           },
           svelteCompiler: {}
         },
-        settings || {}
+        settings ?? {}
       )
     );
   }

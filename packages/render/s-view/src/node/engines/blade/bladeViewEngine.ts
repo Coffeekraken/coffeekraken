@@ -2,6 +2,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __fs from 'fs';
 import __execPhp from 'exec-php';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __childProcess from 'child_process';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import { ISViewSettings } from '../../SView';
@@ -38,12 +39,19 @@ export default {
               return reject(error + ' ---- ' + outprint);
             }
 
-            const viewFilename = __getFilename(viewPath);
+            let viewDotPath = viewPath;
+            __unique([...settings.rootDirs]).forEach((path) => {
+              viewDotPath = viewDotPath.replace(`${path}/`, '');
+            });
+            viewDotPath = viewDotPath
+              .split('/')
+              .join('.')
+              .replace('.blade.php', '');
 
             // execute the php engine and get back the result
             php.compile(
               __unique([...settings.rootDirs]),
-              viewFilename.replace('.blade.php', '').split('/').join('.'),
+              viewDotPath,
               data,
               settings.cacheDir,
               async (error, result, output, printed) => {

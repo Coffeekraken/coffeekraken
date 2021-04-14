@@ -54,7 +54,7 @@ export default {
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   staticDirs: {
-    '/dist': `[config.storage.distDir]`
+    '/dist/*': `[config.storage.distDir]`
     // '/node_modules': '[config.storage.rootDir]/node_modules'
   },
 
@@ -70,6 +70,20 @@ export default {
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   viewsDir: `[config.storage.srcDir]/views`,
+
+  /**
+   * @name          logLevel
+   * @namespace     config.frontendServer
+   * @type          String
+   * @values        silent,error,warn,debug,info,verbose,silly
+   * @default       info
+   *
+   * Specify which log level you want for your server.
+   *
+   * @since             2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  logLevel: 'info',
 
   middlewares: {
     resolveExtensionFreePath: {
@@ -114,31 +128,31 @@ export default {
 
   handlers: {
     /**
-     * @name            views
-     * @namespace       config.frontend.handlers
+     * @name            view
+     * @namespace       config.frontendServer.handlers
      * @type            Object
      *
-     * Store all the "views" configuration access like the slug, the title, etc...
+     * Store all the "view" configuration access like the route, the title, etc...
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    views: {
+    view: {
       /**
-       * @name          slug
-       * @namespace     config.frontend.handlers.views
+       * @name          route
+       * @namespace     config.frontendServer.handlers.view
        * @type          String
-       * @default       /views
+       * @default       /view
        *
-       * Specify the url slug to use for this "section"
+       * Specify the url route to use for this "section"
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      slug: '/views',
+      route: '/view/*',
       /**
        * @name          title
-       * @namespace     config.frontent.pages.views
+       * @namespace     config.frontendServer.handlers.view
        * @type          String
        * @default       Views | [title]
        *
@@ -148,10 +162,10 @@ export default {
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      title: 'Views | [title]',
+      title: 'View | [title]',
       /**
        * @name            handler
-       * @namespace       config.frontend.handlers.views
+       * @namespace       config.frontendServer.handlers.view
        * @type            Function
        *
        * Specify the handler function that will take care of responding to this "section"
@@ -159,82 +173,82 @@ export default {
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: `${__dirname}/../node/server/frontend/handlers/views`
-    },
-    /**
-     * @name            doc
-     * @namespace       config.frontend.handlers
-     * @type            Object
-     *
-     * Store all the "doc" configuration access like the slug, the title, etc...
-     *
-     * @since         2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    doc: {
-      /**
-       * @name          slug
-       * @namespace     config.frontend.handlers.views
-       * @type          String
-       * @default       /doc
-       *
-       * Specify the url slug to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      slug: '/doc',
-      /**
-       * @name          title
-       * @namespace     config.frontent.pages.views
-       * @type          String
-       * @default       Views | [title]
-       *
-       * Specify the page title wanted. Accessible tokens:
-       * - [title]: Name of the view
-       *
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      title: 'Doc | [title]',
-      /**
-       * @name            handler
-       * @namespace       config.frontend.handlers.views
-       * @type            Function
-       *
-       * Specify the handler function that will take care of responding to this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      handler: `${__dirname}/../node/server/frontend/handlers/doc`
+      handler: `${__dirname}/../node/handlers/view`
     }
     // /**
-    //  * @name            docMap
-    //  * @namespace       config.frontend.handlers
+    //  * @name            doc
+    //  * @namespace       config.frontendServer.handlers
     //  * @type            Object
     //  *
-    //  * Store all the "docMap" configuration access like the slug, the title, etc...
+    //  * Store all the "doc" configuration access like the route, the title, etc...
+    //  *
+    //  * @since         2.0.0
+    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // doc: {
+    //   /**
+    //    * @name          route
+    //    * @namespace     config.frontendServer.handlers.views
+    //    * @type          String
+    //    * @default       /doc
+    //    *
+    //    * Specify the url route to use for this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   route: '/doc',
+    //   /**
+    //    * @name          title
+    //    * @namespace     config.frontendServer.handlers.views
+    //    * @type          String
+    //    * @default       Views | [title]
+    //    *
+    //    * Specify the page title wanted. Accessible tokens:
+    //    * - [title]: Name of the view
+    //    *
+    //    * @since       2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   title: 'Doc | [title]',
+    //   /**
+    //    * @name            handler
+    //    * @namespace       config.frontendServer.handlers.views
+    //    * @type            Function
+    //    *
+    //    * Specify the handler function that will take care of responding to this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   handler: `${__dirname}/../node/server/frontend/handlers/doc`
+    // }
+    // /**
+    //  * @name            docMap
+    //  * @namespace       config.frontendServer.handlers
+    //  * @type            Object
+    //  *
+    //  * Store all the "docMap" configuration access like the route, the title, etc...
     //  *
     //  * @since         2.0.0
     //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //  */
     // docMap: {
     //   /**
-    //    * @name          slug
-    //    * @namespace     config.frontend.handlers.docMap
+    //    * @name          route
+    //    * @namespace     config.frontendServer.handlers.docMap
     //    * @type          String
     //    * @default       /docMap
     //    *
-    //    * Specify the url slug to use for this "section"
+    //    * Specify the url route to use for this "section"
     //    *
     //    * @since         2.0.0
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
-    //   slug: '/docMap',
+    //   route: '/docMap',
     //   /**
     //    * @name          title
-    //    * @namespace     config.frontent.pages.docMap
+    //    * @namespace     config.frontendServer.handlers.docMap
     //    * @type          String
     //    * @default       docMap | [title]
     //    *
@@ -247,7 +261,7 @@ export default {
     //   title: 'docMap.json',
     //   /**
     //    * @name            handler
-    //    * @namespace       config.frontend.handlers.docMap
+    //    * @namespace       config.frontendServer.handlers.docMap
     //    * @type            Function
     //    *
     //    * Specify the handler function that will take care of responding to this "section"
@@ -259,7 +273,7 @@ export default {
     // },
     // /**
     //  * @name            doc
-    //  * @namespace       config.frontend.handlers
+    //  * @namespace       config.frontendServer.handlers
     //  * @type            Object
     //  *
     //  * Store all the accessible pages of the frontend development website
@@ -269,20 +283,20 @@ export default {
     //  */
     // doc: {
     //   /**
-    //    * @name            slug
-    //    * @namespace       config.frontend.handlers.doc
+    //    * @name            route
+    //    * @namespace       config.frontendServer.handlers.doc
     //    * @type            String
     //    * @default         /doc
     //    *
-    //    * Specify the url slug to use for this "section"
+    //    * Specify the url route to use for this "section"
     //    *
     //    * @since           2.0.0
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
-    //   slug: '/doc',
+    //   route: '/doc',
     //   /**
     //    * @name            title
-    //    * @namespace       config.frontend.handlers.doc
+    //    * @namespace       config.frontendServer.handlers.doc
     //    * @type            String
     //    * @default         Documentation | [title]
     //    *
@@ -294,7 +308,7 @@ export default {
     //   title: 'Documentation | [title]',
     //   /**
     //    * @name            handler
-    //    * @namespace       config.frontend.handlers.doc
+    //    * @namespace       config.frontendServer.handlers.doc
     //    * @type            Function
     //    *
     //    * Specify the handler function that will take care of responding to this "section"
@@ -306,7 +320,7 @@ export default {
     // },
     // /**
     //  * @name            search
-    //  * @namespace       config.frontend.handlers
+    //  * @namespace       config.frontendServer.handlers
     //  * @type            Object
     //  *
     //  * Store all the accessible pages of the frontend development website
@@ -316,8 +330,8 @@ export default {
     //  */
     // search: {
     //   /**
-    //    * @name            slug
-    //    * @namespace       config.frontend.handlers.search
+    //    * @name            route
+    //    * @namespace       config.frontendServer.handlers.search
     //    * @type            String
     //    * @default         /search
     //    *
@@ -326,10 +340,10 @@ export default {
     //    * @since           2.0.0
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
-    //   slug: '/search',
+    //   route: '/search',
     //   /**
     //    * @name            title
-    //    * @namespace       config.frontend.handlers.search
+    //    * @namespace       config.frontendServer.handlers.search
     //    * @type            String
     //    * @default         Search | [title]
     //    *
@@ -341,7 +355,7 @@ export default {
     //   title: 'Search | [title]',
     //   /**
     //    * @name            handler
-    //    * @namespace       config.frontend.handlers.search
+    //    * @namespace       config.frontendServer.handlers.search
     //    * @type            Function
     //    *
     //    * Specify the handler function that will take care of responding to this "section"
@@ -352,7 +366,7 @@ export default {
     //   handler: `${__dirname}/../node/server/frontend/handlers/search`,
     //   /**
     //    * @name        settings
-    //    * @namespace   config.frontend.handlers.search
+    //    * @namespace   config.frontendServer.handlers.search
     //    * @type        Object
     //    *
     //    * Specify the settings passes to the handle function.

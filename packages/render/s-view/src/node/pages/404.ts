@@ -1,4 +1,4 @@
-import __SView from '../SView';
+import __SView, { ISViewRenderResult } from '../SView';
 
 /**
  * @name           404
@@ -9,7 +9,7 @@ import __SView from '../SView';
  * This function simply take a data object and render a clean 404 page
  *
  * @param       {data:I404Data}         data          An object of data to render the 404 page
- * @retuen      {String|undefined}                                The rendered 404 page
+ * @retuen      {ISViewResult}                                The rendered 404 page
  *
  * @example         js
  * import page404 from '@coffeekraken/sugar/node/engines/pages/404';
@@ -27,15 +27,12 @@ export interface I404Data {
   body: string;
 }
 
-export default async function page404(
-  data: I404Data
-): Promise<string | undefined> {
+export default function page404(data: I404Data): Promise<ISViewRenderResult> {
   const engine = new __SView('pages.404', {
     view: {
       engine: 'blade'
     }
   });
-  const result = await engine.render(data);
-  if (result.value) return result.value;
-  return undefined;
+  const result = engine.render(data);
+  return result;
 }

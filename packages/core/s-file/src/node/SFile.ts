@@ -110,8 +110,19 @@ export interface ISFileWriteSettings {
   path: string;
 }
 
+export interface ISFileObject {
+  exists: string;
+  cwd: string;
+  path: string;
+  relPath: string;
+  name: string;
+  extension: string;
+  dirPath: string;
+  stats: any;
+  content: string;
+}
 export interface ISFileToObjectFn {
-  (): Object;
+  (): ISFileObject;
 }
 export interface ISFileUpdateFn {
   (): void;
@@ -554,8 +565,8 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  toObject() {
-    return {
+  toObject(): ISFileObject {
+    return <ISFileObject>{
       exists: this.exists,
       cwd: this.cwd,
       path: this.path,

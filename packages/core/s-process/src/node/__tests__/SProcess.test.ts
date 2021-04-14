@@ -134,6 +134,7 @@ describe('s-process', () => {
 
   it('Should initiate correctly a Promise based process and throw an error from', async (done) => {
     const promise = new Promise((resolve, reject) => {
+      // @ts-ignore
       throw new Error({
         hello: 'world'
       });

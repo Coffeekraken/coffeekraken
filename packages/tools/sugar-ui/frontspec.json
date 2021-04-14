@@ -2,13 +2,13 @@
   "assets": {
     "css": {
       "main": {
-        "path": "/dist/css/index.css"
+        "src": "/dist/css/index.css"
       }
     },
     "js": {
       "main": {
         "type": "module",
-        "path": "/dist/js/index.js"
+        "src": "/dist/js/index.js"
       }
     }
   }

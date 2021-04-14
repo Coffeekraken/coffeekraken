@@ -69,7 +69,7 @@ export default function parseArgs(string, settings = {}) {
     return __unquote(item);
   });
   const argsObj = {};
-  let currentArgName = -1;
+  let currentArgName = undefined;
   let currentValue;
   stringArray = stringArray.forEach((part, i) => {
     const isLast = i === stringArray.length - 1;
@@ -100,9 +100,11 @@ export default function parseArgs(string, settings = {}) {
 
       currentValue = __parse(part);
       if (currentArgName !== undefined) {
-        argsObj[currentArgName] = __parse(currentValue);
+        argsObj[currentArgName] = currentValue;
         currentValue = undefined;
         currentArgName = undefined;
+      } else {
+        argsObj[i] = currentValue;
       }
     }
   });

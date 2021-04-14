@@ -2,7 +2,7 @@
 
 @section('title', 'Documentation')
 
-@section('content')
+@section('body')
 
   <h1>{{ $title }}</h1>
 

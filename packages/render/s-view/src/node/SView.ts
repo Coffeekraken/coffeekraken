@@ -6,9 +6,8 @@ import __fs from 'fs';
 import __glob from 'glob';
 import __SClass from '@coffeekraken/s-class';
 import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __SFile from '@coffeekraken/s-file';
-
+import __SFile, { ISFileObject } from '@coffeekraken/s-file';
+import __page404 from './pages/404';
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 
 /**
@@ -58,11 +57,7 @@ export interface ISViewCtorSettings {
   view?: Partial<ISViewSettings>;
 }
 
-export interface ISViewViewMetas {
-  path: string;
-  relPath: string;
-  type: string;
-}
+export interface ISViewViewMetas extends ISFileObject {}
 
 export interface ISViewEngines {
   [key: string]: ISViewEngine;
@@ -101,6 +96,7 @@ class SView extends __SClass implements ISView {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   private _viewPath = '';
+  private _originalViewPath;
 
   /**
    * @name      _enginePath
@@ -423,6 +419,9 @@ class SView extends __SClass implements ISView {
         settings || {}
       )
     );
+
+    this._originalViewPath = viewPath;
+
     this.viewSettings.rootDirs = (<any>this.constructor).getRootDirs(
       this.viewSettings.rootDirs || []
     );
@@ -435,12 +434,12 @@ class SView extends __SClass implements ISView {
     if (viewPath.split(' ').length === 1 && viewPath.trim() === viewPath) {
       // check if we can find the view path passed
       if (__path.isAbsolute(viewPath)) {
-        if (!__fs.existsSync(viewPath)) {
-          throw new Error(
-            `Sorry but the absolute path to the view "<cyan>${viewPath}</cyan>" does not exist...`
-          );
+        if (__fs.existsSync(viewPath)) {
+          // throw new Error(
+          //   `Sorry but the absolute path to the view "<cyan>${viewPath}</cyan>" does not exist...`
+          // );
+          this._viewPath = viewPath;
         }
-        this._viewPath = viewPath;
       } else if (!viewPath.match(/\//gm)) {
         // doted path
         for (let i = 0; i < this.viewSettings.rootDirs.length; i++) {
@@ -456,49 +455,44 @@ class SView extends __SClass implements ISView {
             break;
           }
         }
-        // @ts-ignore
-        if (!this._viewPath) {
-          throw new Error(
-            `Sorry but the passed dot path "<cyan>${viewPath}</cyan>" does not resolve to any existing views...`
-          );
-        }
       }
     } else {
-      throw new Error(
-        `<red>[SView]</red> It seems that the passed viewPath "<yellow>${viewPath}</yellow>" argument is not a valid path`
-      );
+      // throw new Error(
+      //   `<red>[SView]</red> It seems that the passed viewPath "<yellow>${viewPath}</yellow>" argument is not a valid path`
+      // );
     }
 
     let viewExt;
 
     // try to get an engine for this view
-    for (let i = 0; i < Object.keys(SView.engines).length; i++) {
-      const engineExt = Object.keys(SView.engines)[i];
-      const reg = new RegExp(`${engineExt}$`);
-      if (reg.test(this._viewPath)) {
-        viewExt = engineExt;
-        this._enginePath = SView.engines[engineExt].path;
-        break;
+    if (this._viewPath) {
+      for (let i = 0; i < Object.keys(SView.engines).length; i++) {
+        const engineExt = Object.keys(SView.engines)[i];
+        const reg = new RegExp(`${engineExt}$`);
+        if (reg.test(this._viewPath)) {
+          viewExt = engineExt;
+          this._enginePath = SView.engines[engineExt].path;
+          break;
+        }
       }
-    }
-    // @ts-ignore
-    if (!this._enginePath) {
-      throw new Error(
-        `<red>[${this.constructor.name}.render]</red> It seems that no registered engines can handle your view`
-      );
     }
 
     // get the datahandler path
-    const viewPathWithoutExtension = this._viewPath.replace(`.${viewExt}`, '');
+    if (this._viewPath) {
+      const viewPathWithoutExtension = this._viewPath.replace(
+        `.${viewExt}`,
+        ''
+      );
 
-    // loop on each dataHandlers available
-    Object.keys(SView.dataHandlers).forEach((extension) => {
-      if (this._dataHandlerPath) return;
-      if (__fs.existsSync(`${viewPathWithoutExtension}.data.${extension}`)) {
-        this._dataFilePath = `${viewPathWithoutExtension}.data.${extension}`;
-        this._dataHandlerPath = SView.dataHandlers[extension].path;
-      }
-    });
+      // loop on each dataHandlers available
+      Object.keys(SView.dataHandlers).forEach((extension) => {
+        if (this._dataHandlerPath) return;
+        if (__fs.existsSync(`${viewPathWithoutExtension}.data.${extension}`)) {
+          this._dataFilePath = `${viewPathWithoutExtension}.data.${extension}`;
+          this._dataHandlerPath = SView.dataHandlers[extension].path;
+        }
+      });
+    }
   }
 
   /**
@@ -519,6 +513,21 @@ class SView extends __SClass implements ISView {
     data = {},
     settings?: Partial<ISViewSettings>
   ): Promise<ISViewRenderResult> {
+    // @ts-ignore
+    if (!this._viewPath) {
+      return __page404({
+        title: 'Passed view does not exists',
+        body: `Sorry but the passed dot path "<cyan>${this._originalViewPath}</cyan>" does not resolve to any existing views...`
+      });
+    }
+    // @ts-ignore
+    if (!this._enginePath) {
+      return __page404({
+        title: 'View not supported',
+        body: `<red>[${this.constructor.name}.render]</red> It seems that no registered engines can handle your view`
+      });
+    }
+
     return new __SPromise(async ({ resolve, reject }) => {
       const viewSettings = Object.assign(
         {},

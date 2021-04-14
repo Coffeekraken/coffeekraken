@@ -335,7 +335,9 @@ class SInterface extends __SClass implements ISInterface {
     super(
       __deepMerge(
         {
-          interface: {}
+          interface: {
+            throw: true
+          }
         },
         settings ?? {}
       )
@@ -372,6 +374,7 @@ class SInterface extends __SClass implements ISInterface {
 
     if (typeof objectOrString === 'string') {
       objectOnWhichToApplyInterface = __parseArgs(objectOrString);
+
       // remplacing aliases
       Object.keys(objectOnWhichToApplyInterface).forEach((argName) => {
         for (let i = 0; i < Object.keys(this._definition).length; i++) {
@@ -386,6 +389,17 @@ class SInterface extends __SClass implements ISInterface {
               objectOnWhichToApplyInterface[argName];
             delete objectOnWhichToApplyInterface[argName];
           }
+        }
+      });
+
+      Object.keys(objectOnWhichToApplyInterface).forEach((argName, i) => {
+        if (argName === `${i}`) {
+          const definitionKeys = Object.keys(this._definition);
+          if (definitionKeys[i]) {
+            objectOnWhichToApplyInterface[definitionKeys[i]] =
+              objectOnWhichToApplyInterface[argName];
+          }
+          delete objectOnWhichToApplyInterface[argName];
         }
       });
     }

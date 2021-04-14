@@ -7,8 +7,7 @@ import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __SProcess, {
   SProcessManager as __SProcessManager,
   ISProcessSettings,
-  ISProcessManagerAttachSettings,
-  ISProcess
+  ISProcessManagerProcessSettings
 } from '@coffeekraken/s-process';
 
 export interface ISFrontstackSettings {}
@@ -18,7 +17,7 @@ export interface ISFrontstackCtorSettings {
 
 export interface ISFrontstackReceipeSettings {
   process: Partial<ISProcessSettings>;
-  processManager: Partial<ISProcessManagerAttachSettings>;
+  processManager: Partial<ISProcessManagerProcessSettings>;
 }
 
 export interface ISFrontstackReceipeAction {
@@ -43,6 +42,10 @@ export interface ISFrontstackStartParams {
 }
 
 export default class SFrontstack extends __SClass {
+  static interfaces = {
+    startParams: __SFrontstackStartInterface
+  };
+
   /**
    * @name            frontstackSettings
    * @type            ISFrontstackSettings
@@ -93,14 +96,19 @@ export default class SFrontstack extends __SClass {
       ({ resolve, reject, emit }) => {
         const receipesObj = __sugarConfig('frontstack.receipes');
 
+        const finalParams: ISFrontstackStartParams = this.applyInterface(
+          'startParams',
+          params
+        );
+
         const availableReceipes = Object.keys(receipesObj);
 
-        if (availableReceipes.indexOf(params.receipe) === -1) {
+        if (availableReceipes.indexOf(finalParams.receipe) === -1) {
           throw new Error(
             `<red>[${
               this.constructor.name
             }.start]</red> Sorry but the requested receipe "<yellow>${
-              params.receipe
+              finalParams.receipe
             }</yellow>" does not exists. Here's the list of available receipe(s):\n${availableReceipes
               .map((r) => `- <yellow>${r}</yellow>`)
               .join('\n')}`
@@ -116,12 +124,27 @@ export default class SFrontstack extends __SClass {
 
         // get the receipe object and treat it
         const receipeObj: Partial<ISFrontstackReceipe> =
-          receipesObj[params.receipe];
+          // @ts-ignore
+          receipesObj[finalParams.receipe];
+
+        if (!receipeObj) {
+          throw new Error(
+            `<red>${
+              this.constructor.name
+            }.start</red> Sorry the the requested "<yellow>${
+              finalParams.receipe
+            }</yellow>" does not exists. Here's the available receipe(s): ${Object.keys(
+              receipesObj
+            )
+              .map((l) => `<green>${l}</green>`)
+              .join(',')}`
+          );
+        }
 
         // make sure this receipe has some actions
         if (!receipeObj.actions || !Object.keys(receipeObj.actions).length) {
           throw new Error(
-            `<red>${this.constructor.name}.start] Sorry but the requested "<yellow>${params.receipe}</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`
+            `<red>${this.constructor.name}.start] Sorry but the requested "<yellow>${finalParams.receipe}</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`
           );
         }
 
@@ -129,23 +152,26 @@ export default class SFrontstack extends __SClass {
         const processManager = new __SProcessManager();
 
         // loop on each actions for this receipe
-        Object.keys(receipeObj.actions).forEach((actionName) => {
-          const actionObj = receipeObj.actions[actionName];
-          const actionId = actionObj.id ?? actionName;
-          // create a process from the receipe object
-          const pro = __SProcess.from(actionObj.command ?? actionObj.process);
-          // add the process to the process manager
-          processManager.attachProcess(
-            actionId,
-            pro,
-            actionObj.settings?.processManager ?? {}
-          );
-          processManager.run(
-            actionId,
-            actionObj.params ?? {},
-            actionObj.settings?.process ?? {}
-          );
-        });
+        if (receipeObj.actions) {
+          Object.keys(receipeObj.actions).forEach((actionName) => {
+            // @ts-ignore
+            const actionObj = receipeObj.actions[actionName];
+            const actionId = actionObj.id ?? actionName;
+            // create a process from the receipe object
+            const pro = __SProcess.from(actionObj.command ?? actionObj.process);
+            // add the process to the process manager
+            processManager.attachProcess(
+              actionId,
+              pro,
+              actionObj.settings?.processManager ?? {}
+            );
+            processManager.run(
+              actionId,
+              actionObj.params ?? {},
+              actionObj.settings?.process ?? {}
+            );
+          });
+        }
       },
       {
         eventEmitter: {

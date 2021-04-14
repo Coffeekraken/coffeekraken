@@ -4,6 +4,8 @@ export default {
       title: 'Default',
       description: 'Default s-frontstack receipe ',
       actions: {
+        frontendServer: '[config.frontstack.actions.frontendServer]',
+        css: '[config.frontstack.actions.css]',
         js: '[config.frontstack.actions.js]',
         svelte: '[config.frontstack.actions.svelte]'
       }
@@ -13,6 +15,29 @@ export default {
   },
 
   actions: {
+    frontendServer: {
+      id: 'frontendServer',
+      title: 'Frontend server',
+      description:
+        'Frontend server using the @coffeekraken/s-frontend-server package',
+      process: 'sugar-dev frontendServer.start',
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
+    css: {
+      id: 'css',
+      title: 'PostCSS compile action',
+      description: 'Compile css using the amazing PostCSS package',
+      process: 'sugar-dev postcss.compile -w',
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
     js: {
       id: 'js',
       title: 'Javascript compile action',

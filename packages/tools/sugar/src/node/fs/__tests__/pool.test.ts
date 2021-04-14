@@ -1,6 +1,6 @@
 import __path from 'path';
 import __pool from '../pool';
-import __SFile from '../SFile';
+import __SFile from '@coffeekraken/s-file';
 import __removeSync from '../removeSync';
 
 describe('sugar.node.fs.pool', () => {

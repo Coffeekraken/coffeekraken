@@ -4,6 +4,6 @@
 @section('body')
 
   <h1>{!! $title !!}</h1>
-  <p>{!! $error !!}</p>
+  <p>{!! $body !!}</p>
 
 @endsection

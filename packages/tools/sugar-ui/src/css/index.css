@@ -8,7 +8,7 @@
   * Setup
   * Setup all the different parts/modules/libraries.
   */
-@import './01_setup/all'; // weifjoiwejfiewjfoijewi
+@import './01_setup/all';
 
 /**
   * Utils
@@ -68,7 +68,7 @@
   * This need the node-sass-glob-importer package installed :
   * https://www.npmjs.com/package/node-sass-glob-importer
   */
-// @import '../views/**/*.scss';
+@import-glob '../views/**/*.scss';
 
 /**
   * Trumps
@@ -77,4 +77,10 @@
   */
 @import './09_trumps/all';
 
-//  // DO NOT UPDATE OR ADD CONTENT TO THIS FILE...
+body {
+  background: red;
+}
+
+.theme-dark {
+  @sugar.theme dark;
+}

@@ -89,7 +89,7 @@ class SCompiler extends __SEventEmitter implements ISCompiler {
    * @since           2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  compile(params: any, settings: any = {}) {
+  compile(params: any = {}, settings: any = {}) {
     settings = __deepMerge((<any>this)._settings, settings);
 
     // @weird:ts-compilation-issue

@@ -1,5 +1,5 @@
-import SFile from '@coffeekraken/s-file';
+import SFile from './SFile';
 
-export * from '@coffeekraken/s-file';
+export * from './SFile';
 
 export default SFile;

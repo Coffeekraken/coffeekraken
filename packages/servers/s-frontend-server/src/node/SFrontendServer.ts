@@ -3,6 +3,9 @@ import __SPromise from '@coffeekraken/s-promise';
 import __sails from 'sails';
 import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
 import __fs from 'fs';
+import __path from 'path';
+import __SFrontendServerInterface from './interface/SFrontendServerInterface';
+import __mimeTypes from 'mime-types'; //eslint-disable-line
 
 /**
  * @name            SFrontendServer
@@ -28,6 +31,7 @@ export interface ISFrontendServerParams {
   hostname: string;
   rootDir: string;
   viewsDir: string;
+  logLevel: string;
 }
 
 export default class SFrontendServer extends __SClass {
@@ -73,22 +77,56 @@ export default class SFrontendServer extends __SClass {
    * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   start(params: Partial<ISFrontendServerParams>): Promise<any> {
+    const finalParams: ISFrontendServerParams = __SFrontendServerInterface.apply(
+      params
+    ).value;
+
     return new __SPromise(
       ({ resolve, reject, emit }) => {
         const sailsConfig = {
-          port: params.port ?? 8888,
-          explicitHost: params.hostname ?? '127.0.0.1',
+          port: finalParams.port ?? 8888,
+          explicitHost: finalParams.hostname ?? '127.0.0.1',
           http: {
             middleware: {
               order: []
             }
           },
+          routes: {},
           log: {
             level: 'error'
           }
         };
 
+        const logLevelInt = [
+          'silent',
+          'error',
+          'warn',
+          'debug',
+          'info',
+          'verbose',
+          'silly'
+        ].indexOf(finalParams.logLevel);
+
         const frontendServerConfig = __sugarConfig('frontendServer');
+
+        if (frontendServerConfig.staticDirs) {
+          Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
+            sailsConfig.routes[dir] = (req, res, next) => {
+              // @ts-ignore
+              const potentialFilePath = __path.join(
+                finalParams.rootDir,
+                req.url
+              );
+              if (__fs.existsSync(potentialFilePath)) {
+                const type = __mimeTypes.lookup(potentialFilePath);
+                res.setHeader('content-type', type);
+                __fs.createReadStream(potentialFilePath).pipe(res);
+              } else {
+                next();
+              }
+            };
+          });
+        }
 
         if (frontendServerConfig.middlewares) {
           Object.keys(frontendServerConfig.middlewares).forEach(
@@ -102,16 +140,42 @@ export default class SFrontendServer extends __SClass {
                 );
               }
 
-              const middlewareWrapperFn = require(middlewareObj.path).default;
+              const middlewareWrapperFn = require(middlewareObj.path).default; // eslint-disable-line
               const middleware = middlewareWrapperFn(
                 middlewareObj.settings ?? {}
               );
 
               // register the middleware inside the sails configuration
+              // @ts-ignore
               sailsConfig.http.middleware.order.push(middlewareName);
               sailsConfig.http.middleware[middlewareName] = middleware;
             }
           );
+        }
+
+        // logging requests
+        if (logLevelInt >= 4) {
+          sailsConfig.http.middleware['logMiddleware'] = function (
+            req,
+            res,
+            next
+          ) {
+            emit('log', {
+              value: `Request on "<cyan>${req.url}</cyan>"`
+            });
+            next();
+          };
+          // @ts-ignore
+          sailsConfig.http.middleware.order.push('logMiddleware');
+        }
+
+        if (frontendServerConfig.handlers) {
+          Object.keys(frontendServerConfig.handlers).forEach((handlerName) => {
+            const handlerObj = frontendServerConfig.handlers[handlerName];
+            sailsConfig.routes[
+              handlerObj.route
+            ] = require(handlerObj.handler).default; // eslint-disable-line
+          });
         }
 
         // start the sails server properly with configs
@@ -124,11 +188,15 @@ export default class SFrontendServer extends __SClass {
             value: `The frontend server has been started <green>successfully</green>`
           });
           emit('log', {
-            value: `You can access it on <yellow>http://${params.hostname}</yellow>:<cyan>${params.port}</cyan>`
+            value: `You can access it on <yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`
+          });
+          emit('log', {
+            value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`
+          });
+          emit('log', {
+            value: `Log level: <yellow>${finalParams.logLevel}</yellow>`
           });
         });
-
-        resolve(true);
       },
       {
         eventEmitter: {

@@ -27,28 +27,34 @@ export default class SFrontendServerInterface extends __SInterface {
       alias: 'o',
       description: 'Server hostname',
       required: true,
-      default: __sugarConfig('frontend.hostname') || '127.0.0.1'
+      default: __sugarConfig('frontendServer.hostname') || '127.0.0.1'
     },
     port: {
       type: 'Number',
       alias: 'p',
       description: 'Server port',
-      default: __sugarConfig('frontend.port') || 3000,
+      default: __sugarConfig('frontendServer.port') || 3000,
       level: 1
     },
     rootDir: {
       type: 'String',
       description: 'Server root directory',
       default:
-        __sugarConfig('frontend.rootDir') || __packageRoot(process.cwd()),
+        __sugarConfig('frontendServer.rootDir') || __packageRoot(process.cwd()),
       level: 1
     },
     viewsDir: {
       type: 'String',
       description: 'Server views directory',
       default:
-        __sugarConfig('frontend.viewsDir') ||
+        __sugarConfig('frontendServer.viewsDir') ||
         __packageRoot(process.cwd()) + '/views'
+    },
+    logLevel: {
+      type: 'String',
+      description: 'Specify the log level you want for your server',
+      values: ['silent', 'error', 'warn', 'debug', 'info', 'verbose', 'silly'],
+      default: __sugarConfig('frontendServer.logLevel') ?? 'info'
     }
   };
 }

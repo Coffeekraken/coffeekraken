@@ -4,7 +4,7 @@ export default {
    * @namespace         config.media
    * @type              String
    * @values            >,<,=,>=,<=
-   * @default           >=
+   * @default           =
    *
    * Specify the default action to apply if you don't specify one in your media
    * mixin call like ```@include Sugar.media('tablet') {...}```. If the defaultAction is set to ">=",
@@ -13,7 +13,20 @@ export default {
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  defaultAction: '>=',
+  defaultAction: '=',
+
+  /**
+   * @name              defaultQuery
+   * @namespace         config.media
+   * @type              String
+   * @default           screen
+   *
+   * Specify the default query to base all the generated ones upon
+   *
+   * @since       2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  defaultQuery: 'screen',
 
   queries: {
     /**

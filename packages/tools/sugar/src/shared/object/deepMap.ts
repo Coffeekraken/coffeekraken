@@ -75,7 +75,7 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
     }
 
     const res = processor({
-      objectOrArray,
+      object: objectOrArray,
       prop,
       value: objectOrArray[prop],
       path: [..._path, prop].join('.')

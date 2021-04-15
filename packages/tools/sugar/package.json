@@ -22,6 +22,7 @@
   "dependencies": {
     "@coffeekraken/s-cache": "file:../s-cache",
     "@coffeekraken/s-class": "file:../../core/s-class",
+    "@coffeekraken/s-color": "file:../s-color",
     "@coffeekraken/s-config": "file:../../core/s-config",
     "@coffeekraken/s-duration": "file:../s-duration",
     "@coffeekraken/s-event-emitter": "file:../../core/s-event-emitter",

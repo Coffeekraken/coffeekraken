@@ -73,6 +73,13 @@ export default class SConfig {
    */
   _settings = {};
 
+  static _registeredProxies: any = {};
+  static registerProxy(configId, scopePath, proxyFn) {
+    if (!this._registeredProxies[configId])
+      this._registeredProxies[configId] = {};
+    this._registeredProxies[configId][scopePath] = proxyFn;
+  }
+
   /**
    * @name                  constructor
    * @type                  Function
@@ -104,7 +111,7 @@ export default class SConfig {
     }
 
     // save the settings name
-    this._name = name;
+    this.id = name;
 
     // save the settings
     this._settings = {
@@ -128,16 +135,16 @@ export default class SConfig {
           `You have specified the adapter "${
             adapter.name || 'unknown'
           }" as adapter for your "${
-            this._name
+            this.id
           }" SConfig instance but this adapter does not extends the SConfigAdapter class...`
         );
       }
 
       // make sure we have a name for this adapter
       if (!adapter.name) {
-        adapter.name = this._name + ':' + adapter.constructor.name;
+        adapter.name = this.id + ':' + adapter.constructor.name;
       } else {
-        adapter.name = this._name + ':' + adapter.name;
+        adapter.name = this.id + ':' + adapter.name;
       }
 
       this._adapters[adapter.name] = {
@@ -203,7 +210,9 @@ export default class SConfig {
       return this._adapters[adapter].config;
     }
 
-    const config = this._adapters[adapter].instance.load();
+    let config = this._adapters[adapter].instance.load();
+
+    config = this._resolveInternalReferences(config, config);
 
     if (config instanceof Promise) {
       return new Promise((resolve) => {
@@ -250,7 +259,7 @@ export default class SConfig {
   save(adapters = Object.keys(this._adapters)) {
     if (!this._settings.allowSave) {
       throw new Error(
-        `You try to save the config on the "${this._name}" SConfig instance but this instance does not allow to save configs... Set the "settings.allowSave" property to allow this action...`
+        `You try to save the config on the "${this.id}" SConfig instance but this instance does not allow to save configs... Set the "settings.allowSave" property to allow this action...`
       );
     }
 
@@ -259,7 +268,7 @@ export default class SConfig {
 
       if (adapter && !this._adapters[adapter]) {
         throw new Error(
-          `You try to save the config on the "${this._name}" SConfig instance using the adapter "${adapter}" but this adapter does not exists...`
+          `You try to save the config on the "${this.id}" SConfig instance using the adapter "${adapter}" but this adapter does not exists...`
         );
       }
 
@@ -268,6 +277,66 @@ export default class SConfig {
 
     // all saved correctly
     return true;
+  }
+
+  _resolveInternalReferences(originalValue, config, path = []) {
+    if (__isPlainObject(originalValue)) {
+      Object.keys(originalValue).forEach((key) => {
+        try {
+          originalValue[key] = this._resolveInternalReferences(
+            originalValue[key],
+            config,
+            [...path, key]
+          );
+        } catch (e) {}
+      });
+    } else if (Array.isArray(originalValue)) {
+      originalValue = originalValue.map((v) => {
+        return this._resolveInternalReferences(v, config, path);
+      });
+    } else if (typeof originalValue === 'string') {
+      const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
+      const matches = originalValue.match(reg);
+
+      if (matches && matches.length) {
+        if (matches.length === 1 && originalValue === matches[0]) {
+          const resolvedValue = __get(
+            config,
+            matches[0].replace('[config.', '').replace(']', '')
+          );
+          originalValue = this._resolveInternalReferences(
+            resolvedValue,
+            config,
+            path
+          );
+        } else {
+          matches.forEach((match) => {
+            const resolvedValue = this._resolveInternalReferences(
+              match,
+              config,
+              path
+            );
+            originalValue = originalValue.replace(match, resolvedValue);
+          });
+          originalValue = this._resolveInternalReferences(
+            originalValue,
+            config,
+            path
+          );
+        }
+      }
+    }
+
+    // check proxy
+    if (this.constructor._registeredProxies[this.id][path[0]]) {
+      originalValue = this.constructor._registeredProxies[this.id][path[0]](
+        path.join('.'),
+        originalValue,
+        config
+      );
+    }
+
+    return originalValue;
   }
 
   /**
@@ -286,7 +355,12 @@ export default class SConfig {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get(path, adapter = this._settings.defaultAdapter, settings = {}) {
+  get(
+    path,
+    adapter = this._settings.defaultAdapter,
+    settings = {},
+    _level = 0
+  ) {
     settings = __deepMerge(this._settings, settings);
 
     if (adapter && !this._adapters[adapter]) {
@@ -299,89 +373,11 @@ export default class SConfig {
       this.load();
     }
 
-    let originalValue = __get(this._adapters[adapter].config, path);
-
-    if (__isPlainObject(originalValue)) {
-      originalValue = __deepMap(originalValue, ({ value }) => {
-        // check if we get some things to use as variable
-        const isArray = Array.isArray(value);
-        if (!isArray) value = [value];
-
-        value = value.map((v) => {
-          if (typeof v === 'string') {
-            const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-
-            const matches = v.match(reg);
-
-            if (matches && matches.length) {
-              if (matches.length === 1 && v === matches[0]) {
-                v = this.get(
-                  matches[0].replace('[config.', '').replace(']', ''),
-                  adapter
-                );
-                return v;
-              } else {
-                matches.forEach((match) => {
-                  v = v.replace(
-                    match,
-                    this.get(
-                      match.replace('[config.', '').replace(']', ''),
-                      adapter
-                    )
-                  );
-                });
-                return v;
-              }
-            }
-          }
-          return v;
-        });
-
-        if (!isArray) return value[0];
-        return value;
-      });
-    } else if (
-      typeof originalValue === 'string' ||
-      Array.isArray(originalValue)
-    ) {
-      const isArray = Array.isArray(originalValue);
-      let val = isArray ? originalValue : [originalValue];
-
-      val = val.map((v) => {
-        if (typeof v !== 'string') return v;
-        const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-        const matches = v.match(reg);
-        if (matches) {
-          if (matches.length === 1 && v === matches[0]) {
-            v = this.get(
-              matches[0].replace('[config.', '').replace(']', ''),
-              adapter
-            );
-            return v;
-          } else {
-            matches.forEach((match) => {
-              v = v.replace(
-                match,
-                this.get(
-                  match.replace('[config.', '').replace(']', ''),
-                  adapter
-                )
-              );
-            });
-            return v;
-          }
-        } else {
-          return v;
-        }
-      });
-
-      if (!isArray) originalValue = val[0];
-      else originalValue = val;
-    }
+    const originalValue = __get(this._adapters[adapter].config, path);
 
     if (settings.throwErrorOnUndefinedConfig && originalValue === undefined) {
       throw new Error(
-        `You try to get the config "${path}" on the "${this._name}" SConfig instance but this config does not exists...`
+        `You try to get the config "${path}" on the "${this.id}" SConfig instance but this config does not exists...`
       );
     }
 
@@ -408,7 +404,7 @@ export default class SConfig {
   set(path, value, adapters = Object.keys(this._adapters)) {
     if (!this._settings.allowSet) {
       throw new Error(
-        `You try to set a config value on the "${this._name}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`
+        `You try to set a config value on the "${this.id}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`
       );
     }
 
@@ -419,7 +415,7 @@ export default class SConfig {
         undefined
     ) {
       throw new Error(
-        `You try to set the config "${path}" on the "${this._name}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`
+        `You try to set the config "${path}" on the "${this.id}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`
       );
     }
 

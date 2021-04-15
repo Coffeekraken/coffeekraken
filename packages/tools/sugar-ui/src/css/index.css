@@ -79,7 +79,34 @@
 
 body {
   background: red;
+  color: sugar.color(primary);
+  something: rgba(sugar.color(secondary, 10), sugar.color(warning, 100));
 }
+
+@sugar.media tablet {
+  background: red;
+
+  .something {
+    color: blue;
+  }
+}
+@sugar.media tablet| {
+  background: red;
+
+  .something {
+    color: blue;
+  }
+}
+
+@sugar.media tablet| desktop {
+  background: red;
+
+  .something {
+    color: blue;
+  }
+}
+
+@sugar.theme (default);
 
 .theme-dark {
   @sugar.theme dark;

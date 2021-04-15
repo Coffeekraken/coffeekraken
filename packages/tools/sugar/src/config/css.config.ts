@@ -182,23 +182,12 @@ export default {
         import: 'postcss-import',
         settings: {}
       },
-      stylelint: {
-        import: 'stylelint',
-        settings: {
-          extends: 'stylelint-config-standard',
-          rules: {
-            'at-rule-no-unknown': [
-              true,
-              {
-                ignoreAtRules: ['extends', 'ignores']
-              }
-            ],
-            indentation: 'tab',
-            'number-leading-zero': null,
-            'unit-allowed-list': ['em', 'rem', 's']
-          }
-        }
-      },
+      // stylelint: {
+      //   import: 'stylelint',
+      //   settings: {
+      //     extends: 'stylelint-config-standard'
+      //   }
+      // },
       sugar: {
         import: '@coffeekraken/s-postcss-sugar-plugin',
         settings: {}

@@ -29,6 +29,12 @@ export default function (params = {}, atRule) {
   Object.keys(flattenedTheme).forEach((key) => {
     vars.push(`--s-${key.replace(/\./gm, '-')}: ${flattenedTheme[key]};`);
   });
+
+  if (atRule.parent.type === 'root') {
+    vars.unshift(':root {');
+    vars.push('}');
+  }
+
   const AST = __postCss.parse(vars.join('\n'));
 
   atRule.replaceWith(AST);

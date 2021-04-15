@@ -1,3 +1,39 @@
+import __SColor from '@coffeekraken/s-color';
+import __get from '@coffeekraken/sugar/shared/object/get';
+
+export function proxy(path, originalValue, config) {
+  if (path.match(/\.colors\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
+    if (path.split('.').pop() === 'default') {
+      return originalValue;
+    }
+    const defaultColor = __get(
+      config,
+      path.split('.').slice(0, -1).join('.') + '.default'
+    );
+    if (typeof originalValue === 'string') {
+      if (
+        originalValue.slice(0, 1) === '#' &&
+        (originalValue.length === 7 || originalValue.length === 4)
+      ) {
+        return originalValue;
+      } else if (originalValue.match(/^rgb\(.*,.*,.*\)$/)) {
+        return originalValue;
+      } else if (originalValue.match(/^rgba\(.*,.*,.*,.*\)$/)) {
+        return originalValue;
+      } else if (originalValue.match(/^hsl\(.*,.*,.*\)$/)) {
+        return originalValue;
+      } else if (originalValue.match(/^hsla\(.*,.*,.*,.*\)$/)) {
+        return originalValue;
+      } else {
+        const color = new __SColor(defaultColor);
+        color.apply(originalValue);
+        return color.toString();
+      }
+    }
+  }
+  return originalValue;
+}
+
 export default {
   default: {
     colors: {
@@ -27,19 +63,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       default: {
-        color: '#848e91',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#848e91',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -68,19 +102,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       title: {
-        color: '#2b3438',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#2b3438',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -109,19 +141,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       text: {
-        color: '#848e91',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#848e91',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -150,19 +180,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       link: {
-        color: 'primary',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '[config.theme.default.colors.primary.default]',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -191,19 +219,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       primary: {
-        color: '#f2bc2b',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#f2bc2b',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -232,19 +258,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       secondary: {
-        color: '#6d858f',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#6d858f',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -273,19 +297,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       success: {
-        color: '#5cb85c',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#5cb85c',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -314,19 +336,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       warning: {
-        color: '#f0ad4e',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#f0ad4e',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -355,19 +375,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       error: {
-        color: '#d9534f',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#d9534f',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -396,19 +414,17 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       info: {
-        color: '#2199e8',
-        modifiers: {
-          50: '-lighten 45%',
-          100: '-lighten 40%',
-          200: '-lighten 30%',
-          300: '-lighten 20%',
-          400: '-lighten 10%',
-          500: '-lighten 0%',
-          600: '-darken 10%',
-          700: '-darken 20%',
-          800: '-darken 30%',
-          900: '-darken 40%'
-        }
+        default: '#2199e8',
+        50: '-lighten 45%',
+        100: '-lighten 40%',
+        200: '-lighten 30%',
+        300: '-lighten 20%',
+        400: '-lighten 10%',
+        500: '-lighten 0%',
+        600: '-darken 10%',
+        700: '-darken 20%',
+        800: '-darken 30%',
+        900: '-darken 40%'
       },
 
       /**
@@ -437,27 +453,25 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       extension: {
-        color: 'primary',
-        modifiers: {
-          blade: '#ff2d20',
-          php: '#8892BF',
-          js: '#f7df1e',
-          node: '#68A063',
-          css: '#498FE1',
-          scss: '#CF649A',
-          sass: '#CF649A',
-          json: '#000000',
-          jpg: '#B2C0E1',
-          jpeg: '#B2C0E1',
-          pdf: '#E7786E',
-          doc: '#60D7FD',
-          psd: '#F9D659',
-          mp3: '#E98C61',
-          png: '#C29DFB',
-          aac: '#B1C5C9',
-          zip: '#9CC04E',
-          dmg: '#E36E4B'
-        }
+        default: '[config.theme.default.colors.primary.default]',
+        blade: '#ff2d20',
+        php: '#8892BF',
+        js: '#f7df1e',
+        node: '#68A063',
+        css: '#498FE1',
+        scss: '#CF649A',
+        sass: '#CF649A',
+        json: '#000000',
+        jpg: '#B2C0E1',
+        jpeg: '#B2C0E1',
+        pdf: '#E7786E',
+        doc: '#60D7FD',
+        psd: '#F9D659',
+        mp3: '#E98C61',
+        png: '#C29DFB',
+        aac: '#B1C5C9',
+        zip: '#9CC04E',
+        dmg: '#E36E4B'
       }
     }
   },
@@ -465,7 +479,7 @@ export default {
   dark: {
     colors: {
       primary: {
-        color: '#ffffff'
+        default: '#ffffff'
       }
     }
   }

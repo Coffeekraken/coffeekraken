@@ -35,6 +35,12 @@ import __sanitizeSugarJson from '../sugar/sanitizeSugarJson';
 (global ?? window)._registeredConfigFolderPaths = [];
 let sugarConfigInstance;
 let _sugarJsons, _rootSugarJson;
+
+// export function resolve(data) {
+//   if (typeof data !== 'string') return data;
+//   if ()
+// }
+
 export default function sugar(dotPath) {
   if (__isNode()) {
     let rootSugarJson;

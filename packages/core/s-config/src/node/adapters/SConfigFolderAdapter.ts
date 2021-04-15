@@ -4,10 +4,12 @@ import __fs from 'fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __diff from '@coffeekraken/sugar/shared/object/diff';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
 import __packageRoot from '@coffeekraken/sugar/shared/path/packageRoot';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
+import __SConfig from '../../shared/SConfig';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -143,15 +145,20 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
           return;
         const configData = require(`${path}/${file}`);
         const configKey = file.replace('.config.js', '');
-
         if (!configObj[configKey]) configObj[configKey] = {};
 
         configObj[configKey] = __deepMerge(
           configObj[configKey],
-          Object.keys(configData).length === 1 && configData.default
-            ? configData.default
-            : configData
+          configData.default ? configData.default : configData
         );
+
+        if (configData.proxy && typeof configData.proxy === 'function') {
+          __SConfig.registerProxy(
+            this.configAdapterSettings.name,
+            configKey,
+            configData.proxy
+          );
+        }
       });
       process.env[`SConfigFolderAdapter-${scope}`] = JSON.stringify(configObj);
     });

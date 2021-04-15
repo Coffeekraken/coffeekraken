@@ -59,15 +59,34 @@ export default function parseArgs(string, settings = {}) {
     settings
   );
 
-  // process the passed string
-  let reg = /(?:[^\s"]+|"[^"]*")+/gm;
-  if (settings.valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
-  else if (settings.valueQuote === '`')
-    reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
-  let stringArray = string.match(reg) || [];
-  stringArray = stringArray.map((item) => {
-    return __unquote(item);
-  });
+  string = string.trim();
+
+  let stringArray: string[] = [];
+
+  if (string.match(/^\(/) && string.match(/\)$/)) {
+    string = string.slice(1, -1);
+
+    // process the passed string
+    let reg = /(?:[^,"]+|"[^"]*")+/gm;
+    if (settings.valueQuote === "'") reg = /(?:[^,']+|'[^']*')+/gm;
+    else if (settings.valueQuote === '`')
+      reg = /(?:[^,\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
+    stringArray = string.match(reg) || [];
+    stringArray = stringArray.map((item) => {
+      return __unquote(item);
+    });
+  } else {
+    // process the passed string
+    let reg = /(?:[^\s"]+|"[^"]*")+/gm;
+    if (settings.valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
+    else if (settings.valueQuote === '`')
+      reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
+    stringArray = string.match(reg) || [];
+    stringArray = stringArray.map((item) => {
+      return __unquote(item);
+    });
+  }
+
   const argsObj = {};
   let currentArgName = undefined;
   let currentValue;

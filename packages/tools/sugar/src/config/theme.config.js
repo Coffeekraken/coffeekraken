@@ -1,5 +1,44 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.proxy = void 0;
+const s_color_1 = __importDefault(require("@coffeekraken/s-color"));
+const get_1 = __importDefault(require("@coffeekraken/sugar/shared/object/get"));
+function proxy(path, originalValue, config) {
+    if (path.match(/\.colors\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
+        if (path.split('.').pop() === 'default') {
+            return originalValue;
+        }
+        const defaultColor = get_1.default(config, path.split('.').slice(0, -1).join('.') + '.default');
+        if (typeof originalValue === 'string') {
+            if (originalValue.slice(0, 1) === '#' &&
+                (originalValue.length === 7 || originalValue.length === 4)) {
+                return originalValue;
+            }
+            else if (originalValue.match(/^rgb\(.*,.*,.*\)$/)) {
+                return originalValue;
+            }
+            else if (originalValue.match(/^rgba\(.*,.*,.*,.*\)$/)) {
+                return originalValue;
+            }
+            else if (originalValue.match(/^hsl\(.*,.*,.*\)$/)) {
+                return originalValue;
+            }
+            else if (originalValue.match(/^hsla\(.*,.*,.*,.*\)$/)) {
+                return originalValue;
+            }
+            else {
+                const color = new s_color_1.default(defaultColor);
+                color.apply(originalValue);
+                return color.toString();
+            }
+        }
+    }
+    return originalValue;
+}
+exports.proxy = proxy;
 exports.default = {
     default: {
         colors: {
@@ -29,19 +68,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             default: {
-                color: '#848e91',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#848e91',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                title
@@ -69,19 +106,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             title: {
-                color: '#2b3438',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#2b3438',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                text
@@ -109,19 +144,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             text: {
-                color: '#848e91',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#848e91',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                link
@@ -149,19 +182,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             link: {
-                color: 'primary',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '[config.theme.default.colors.primary.default]',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                primary
@@ -189,19 +220,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             primary: {
-                color: '#f2bc2b',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#f2bc2b',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                secondary
@@ -229,19 +258,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             secondary: {
-                color: '#6d858f',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#6d858f',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                success
@@ -269,19 +296,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             success: {
-                color: '#5cb85c',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#5cb85c',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                warning
@@ -309,19 +334,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             warning: {
-                color: '#f0ad4e',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#f0ad4e',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                error
@@ -349,19 +372,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             error: {
-                color: '#d9534f',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#d9534f',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                info
@@ -389,19 +410,17 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             info: {
-                color: '#2199e8',
-                modifiers: {
-                    50: '-lighten 45%',
-                    100: '-lighten 40%',
-                    200: '-lighten 30%',
-                    300: '-lighten 20%',
-                    400: '-lighten 10%',
-                    500: '-lighten 0%',
-                    600: '-darken 10%',
-                    700: '-darken 20%',
-                    800: '-darken 30%',
-                    900: '-darken 40%'
-                }
+                default: '#2199e8',
+                50: '-lighten 45%',
+                100: '-lighten 40%',
+                200: '-lighten 30%',
+                300: '-lighten 20%',
+                400: '-lighten 10%',
+                500: '-lighten 0%',
+                600: '-darken 10%',
+                700: '-darken 20%',
+                800: '-darken 30%',
+                900: '-darken 40%'
             },
             /**
              * @name                extension
@@ -429,36 +448,34 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             extension: {
-                color: 'primary',
-                modifiers: {
-                    blade: '#ff2d20',
-                    php: '#8892BF',
-                    js: '#f7df1e',
-                    node: '#68A063',
-                    css: '#498FE1',
-                    scss: '#CF649A',
-                    sass: '#CF649A',
-                    json: '#000000',
-                    jpg: '#B2C0E1',
-                    jpeg: '#B2C0E1',
-                    pdf: '#E7786E',
-                    doc: '#60D7FD',
-                    psd: '#F9D659',
-                    mp3: '#E98C61',
-                    png: '#C29DFB',
-                    aac: '#B1C5C9',
-                    zip: '#9CC04E',
-                    dmg: '#E36E4B'
-                }
+                default: '[config.theme.default.colors.primary.default]',
+                blade: '#ff2d20',
+                php: '#8892BF',
+                js: '#f7df1e',
+                node: '#68A063',
+                css: '#498FE1',
+                scss: '#CF649A',
+                sass: '#CF649A',
+                json: '#000000',
+                jpg: '#B2C0E1',
+                jpeg: '#B2C0E1',
+                pdf: '#E7786E',
+                doc: '#60D7FD',
+                psd: '#F9D659',
+                mp3: '#E98C61',
+                png: '#C29DFB',
+                aac: '#B1C5C9',
+                zip: '#9CC04E',
+                dmg: '#E36E4B'
             }
         }
     },
     dark: {
         colors: {
             primary: {
-                color: '#ffffff'
+                default: '#ffffff'
             }
         }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWUuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYixPQUFPLEVBQUU7UUFDUCxNQUFNLEVBQUU7WUFDTjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2VBd0JHO1lBQ0gsT0FBTyxFQUFFO2dCQUNQLEtBQUssRUFBRSxTQUFTO2dCQUNoQixTQUFTLEVBQUU7b0JBQ1QsRUFBRSxFQUFFLGNBQWM7b0JBQ2xCLEdBQUcsRUFBRSxjQUFjO29CQUNuQixHQUFHLEVBQUUsY0FBYztvQkFDbkIsR0FBRyxFQUFFLGNBQWM7b0JBQ25CLEdBQUcsRUFBRSxjQUFjO29CQUNuQixHQUFHLEVBQUUsYUFBYTtvQkFDbEIsR0FBRyxFQUFFLGFBQWE7b0JBQ2xCLEdBQUcsRUFBRSxhQUFhO29CQUNsQixHQUFHLEVBQUUsYUFBYTtvQkFDbEIsR0FBRyxFQUFFLGFBQWE7aUJBQ25CO2FBQ0Y7WUFFRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2VBd0JHO1lBQ0gsS0FBSyxFQUFFO2dCQUNMLEtBQUssRUFBRSxTQUFTO2dCQUNoQixTQUFTLEVBQUU7b0JBQ1QsRUFBRSxFQUFFLGNBQWM7b0JBQ2xCLEdBQUcsRUFBRSxjQUFjO29CQUNuQixHQUFHLEVBQUUsY0FBYztvQkFDbkIsR0FBRyxFQUFFLGNBQWM7b0JBQ25CLEdBQUcsRUFBRSxjQUFjO29CQUNuQixHQUFHLEVBQUUsYUFBYTtvQkFDbEIsR0FBRyxFQUFFLGFBQWE7b0JBQ2xCLEdBQUcsRUFBRSxhQUFhO29CQUNsQixHQUFHLEVBQUUsYUFBYTtvQkFDbEIsR0FBRyxFQUFFLGFBQWE7aUJBQ25CO2FBQ0Y7WUFFRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2VBd0JHO1lBQ0gsSUFBSSxFQUFFO2dCQUNKLEtBQUssRUFBRSxTQUFTO2dCQUNoQixTQUFTLEVBQUU7b0JBQ1QsRUFBRSxFQUFFLGNBQWM7b0JBQ2xC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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWUuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLG9FQUE2QztBQUM3QyxnRkFBMEQ7QUFFMUQsU0FBZ0IsS0FBSyxDQUFDLElBQUksRUFBRSxhQUFhLEVBQUUsTUFBTTtJQUMvQyxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsdUNBQXVDLENBQUMsRUFBRTtRQUN2RCxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFLEtBQUssU0FBUyxFQUFFO1lBQ3ZDLE9BQU8sYUFBYSxDQUFDO1NBQ3RCO1FBQ0QsTUFBTSxZQUFZLEdBQUcsYUFBSyxDQUN4QixNQUFNLEVBQ04sSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxHQUFHLFVBQVUsQ0FDcEQsQ0FBQztRQUNGLElBQUksT0FBTyxhQUFhLEtBQUssUUFBUSxFQUFFO1lBQ3JDLElBQ0UsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssR0FBRztnQkFDakMsQ0FBQyxhQUFhLENBQUMsTUFBTSxLQUFLLENBQUMsSUFBSSxhQUFhLENBQUMsTUFBTSxLQUFLLENBQUMsQ0FBQyxFQUMxRDtnQkFDQSxPQUFPLGFBQWEsQ0FBQzthQUN0QjtpQkFBTSxJQUFJLGFBQWEsQ0FBQyxLQUFLLENBQUMsbUJBQW1CLENBQUMsRUFBRTtnQkFDbkQsT0FBTyxhQUFhLENBQUM7YUFDdEI7aUJBQU0sSUFBSSxhQUFhLENBQUMsS0FBSyxDQUFDLHVCQUF1QixDQUFDLEVBQUU7Z0JBQ3ZELE9BQU8sYUFBYSxDQUFDO2FBQ3RCO2lCQUFNLElBQUksYUFBYSxDQUFDLEtBQUssQ0FBQyxtQkFBbUIsQ0FBQyxFQUFFO2dCQUNuRCxPQUFP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

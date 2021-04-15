@@ -51,6 +51,10 @@ export default class SConfigAdapter {
    */
   _settings: ISConfigAdapterSettings;
 
+  get configAdapterSettings(): ISConfigAdapterSettings {
+    return (<any>this)._settings.configAdapter;
+  }
+
   /**
    * @name                              constructor
    * @type                              Function

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __sugarConfig from '../../shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            localDir

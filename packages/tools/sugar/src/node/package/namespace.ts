@@ -3,7 +3,7 @@
 import __json from './json';
 import __deepMerge from '../../shared/object/deepMerge';
 import __getFilename from '../fs/filename';
-import __sugarConfig from '../../shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name          namespace

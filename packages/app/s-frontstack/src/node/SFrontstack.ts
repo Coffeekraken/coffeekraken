@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SFrontstackStartInterface from './start/interface/SFrontstackStartInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';

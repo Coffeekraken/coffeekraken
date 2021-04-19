@@ -1,4 +1,4 @@
-import __sugarConfig from '../../../shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 import __packageRoot from '../../path/packageRoot';
 

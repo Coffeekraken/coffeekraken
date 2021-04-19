@@ -1,7 +1,7 @@
 // @shared
 // @ts-nocheck
 
-import __getMethods from '@coffeekraken/sugar/src/shared/class/getMethods';
+import __getMethods from '@coffeekraken/sugar/shared/class/utils/getMethods';
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';

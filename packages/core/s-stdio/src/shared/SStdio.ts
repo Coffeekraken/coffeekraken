@@ -184,63 +184,10 @@ class SStdio extends __SClass implements ISStdio {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static new(sources, stdio: any = 'inherit', settings = {}) {
-    if (!Array.isArray(sources)) sources = [sources];
-
-    let stdioInstance: any;
-
-    if (__isClass(stdio)) {
-      stdioInstance = new stdio(sources, settings);
-    } else if (__isNode() && __isPath(stdio, true)) {
-      // if (!__isNode())
-      //   throw new Error(
-      //     `<yellow>[SStdio.new]</<yellow> Sorry but to use a path based stdio, you must be in a <magenta>node</magenta> context...`
-      //   );
-      // @ts-ignore
-      let Cls = require(stdio).default; // eslint-disable-line
-      Cls = Cls.default || Cls;
-      stdioInstance = new Cls(sources, settings);
-    } else if (typeof stdio === 'string') {
-      switch (stdio) {
-        case 'inherit':
-          if (__isNode()) {
-            const __STerminalStdio = require('../node/terminal/STerminalStdio')
-              .default; // eslint-disable-line
-            stdioInstance = new __STerminalStdio(sources, settings);
-          } else {
-            throw new Error(
-              `<red>[SStdio.new]</red> Sorry but the "<yellow>SConsoleStdio</yellow>" class is not yet implemented...`
-            );
-          }
-          break;
-        case 'terminal':
-          if (!__isNode())
-            throw new Error(
-              `<yellow>[SStdio.new]</<yellow> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`
-            );
-          const __STerminalStdio = require('../node/terminal/STerminalStdio')
-            .default; // eslint-disable-line
-          stdioInstance = new __STerminalStdio(sources, settings);
-          break;
-        case 'blessed':
-          if (!__isNode())
-            throw new Error(
-              `<yellow>[SStdio.new]</<yellow> Sorry but to use the "<yellow>SBlessedStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`
-            );
-          const __SBlessedStdio = require('../node/terminal/SBlessedStdio')
-            .default; // eslint-disable-line
-          stdioInstance = new __SBlessedStdio(sources, {
-            ...settings,
-            attach: true
-          });
-          break;
-        default:
-          break;
-      }
-    }
-
-    return stdioInstance;
-  }
+  // static new(sources, stdio: any = 'inherit', settings = {}) {
+  //   const n = require('./new').default;
+  //   return n(sources, stdio, settings);
+  // }
 
   /**
    * @name      stdioSettings

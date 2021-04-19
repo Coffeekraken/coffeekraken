@@ -7,8 +7,8 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "file:../../tools/sugar",
-    "@coffeekraken/s-class": "file:../s-class"
+    "@coffeekraken/sugar": "workspace:*/*",
+    "@coffeekraken/s-class": "workspace:*/*"
   },
   "devDependencies": {}
 }

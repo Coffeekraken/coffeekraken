@@ -1,8 +1,7 @@
-import __SProcess, {
-  ISProcessParams,
-  ISProcessCtorSettings,
-  ISProcessResultObject
-} from './SProcess';
+import {
+  ISCommandProcessCtorSettings,
+  ISCommandProcessParams
+} from './ISProcess';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCommandProcessInterface from './interface/SCommandProcessInterface';
 import __spawn, {
@@ -28,15 +27,6 @@ import __spawn, {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export interface ISCommandProcessSettings {
-  spawnSettings: Partial<ISpawnSettings>;
-}
-export interface ISCommandProcessCtorSettings extends ISProcessCtorSettings {
-  commandProcess: Partial<ISCommandProcessSettings>;
-}
-export interface ISCommandProcessParams extends ISProcessParams {
-  command: string;
-}
 
 // @ts-ignore
 export default class SCommandProcess extends __SProcess {

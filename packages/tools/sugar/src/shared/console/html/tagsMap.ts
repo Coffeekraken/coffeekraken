@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __parseHtml from '../parseHtml';
 import __chalk from 'chalk';
 __chalk.level = 3;
 
@@ -48,13 +47,13 @@ const tagsMap = {
     return __chalk.bold(content) + '\n';
   },
 
-  iWarn: (tag, content) => __parseHtml('<yellow>⚠</yellow>'),
-  iCheck: (tag, content) => __parseHtml(`<green>✓</green>`),
-  iSuccess: (tag, content) => __parseHtml(`<green>✓</green>`),
-  iError: (tag, content) => __parseHtml(`<red>✖</red>`),
-  iCross: (tag, content) => __parseHtml(`<red>✖</red>`),
-  iClose: (tag, content) => `✖`,
-  iStart: (tag, content) => __parseHtml(`<green>‣</green>`),
+  // iWarn: (tag, content) => __parseHtml('<yellow>⚠</yellow>'),
+  // iCheck: (tag, content) => __parseHtml(`<green>✓</green>`),
+  // iSuccess: (tag, content) => __parseHtml(`<green>✓</green>`),
+  // iError: (tag, content) => __parseHtml(`<red>✖</red>`),
+  // iCross: (tag, content) => __parseHtml(`<red>✖</red>`),
+  // iClose: (tag, content) => `✖`,
+  // iStart: (tag, content) => __parseHtml(`<green>‣</green>`),
 
   date: (tag, content) =>
     new Date().getDate().toString().padStart('0', 2) +

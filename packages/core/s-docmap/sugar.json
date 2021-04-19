@@ -1,0 +1,22 @@
+{
+  "cli": [
+    {
+      "stack": "docmap",
+      "description": "SDocMap CLI",
+      "actions": {
+        "generate": {
+          "description": "Generate the docmap.json file by searching for source files with a @namespace defined",
+          "process": "./src/node/generate.cli.js"
+        },
+        "find": {
+          "description": "Search for a docmap entry",
+          "process": "./src/node/find.cli.js"
+        },
+        "read": {
+          "description": "Get a special docmap entry",
+          "process": "./src/node/read.cli.js"
+        }
+      }
+    }
+  ]
+}

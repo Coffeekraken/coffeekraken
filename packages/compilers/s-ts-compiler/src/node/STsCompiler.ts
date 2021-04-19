@@ -10,7 +10,7 @@ import __SCompiler, {
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
 import __SDuration from '@coffeekraken/s-duration';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';

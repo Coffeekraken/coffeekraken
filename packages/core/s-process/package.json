@@ -7,13 +7,13 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "file:../s-class",
-    "@coffeekraken/s-duration": "file:../../tools/s-duration",
-    "@coffeekraken/s-event-emitter": "file:../s-event-emitter",
-    "@coffeekraken/s-interface": "file:../s-interface",
-    "@coffeekraken/s-promise": "file:../s-promise",
-    "@coffeekraken/s-stdio": "file:../s-stdio",
-    "@coffeekraken/sugar": "file:../../tools/sugar",
+    "@coffeekraken/s-class": "workspace:*/*",
+    "@coffeekraken/s-duration": "workspace:*/*",
+    "@coffeekraken/s-event-emitter": "workspace:*/*",
+    "@coffeekraken/s-interface": "workspace:*/*",
+    "@coffeekraken/s-promise": "workspace:*/*",
+    "@coffeekraken/s-stdio": "workspace:*/*",
+    "@coffeekraken/sugar": "workspace:*/*",
     "stack-trace": "0.0.10"
   }
 }

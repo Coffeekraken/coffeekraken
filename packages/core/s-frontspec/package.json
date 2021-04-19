@@ -1,0 +1,17 @@
+{
+  "name": "@coffeekraken/s-frontspec",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/node/exports.js",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-class": "workspace:*/*",
+    "@coffeekraken/s-process": "workspace:*/*",
+    "@coffeekraken/s-stdio": "workspace:*/*",
+    "@coffeekraken/s-sugar-config": "workspace:*/*",
+    "@coffeekraken/sugar": "workspace:*/*",
+    "glob": "^7.1.6"
+  }
+}

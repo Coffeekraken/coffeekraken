@@ -1,4 +1,4 @@
-import __getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
+import __getExtendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
 import { ISInterface } from '@coffeekraken/s-interface';
 import __isPlain from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';

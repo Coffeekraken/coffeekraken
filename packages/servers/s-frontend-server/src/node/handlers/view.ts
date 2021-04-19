@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __path from 'path';
-import __SView from '@coffeekraken/s-view';
+import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __fs from 'fs';
 import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
@@ -28,7 +28,7 @@ import __SPromise from '@coffeekraken/s-promise';
 export default async function view(req, res, settings = {}) {
   const viewPath = req.params[0].split('/').join('.');
 
-  const viewInstance = new __SView(viewPath);
+  const viewInstance = new __SViewRenderer(viewPath);
 
   const result = await viewInstance.render({
     ...(res.templateData ?? {})

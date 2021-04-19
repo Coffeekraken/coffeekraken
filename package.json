@@ -12,6 +12,10 @@
     "sugar.dev.shared": "sugar-dev ts.compile --stack shared --watch",
     "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
   },
+  "private": true,
+  "workspaces": [
+    "packages/*/*"
+  ],
   "pre-commit": [],
   "repository": {
     "type": "git",

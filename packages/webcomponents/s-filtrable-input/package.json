@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "file:../../tools/sugar",
+    "@coffeekraken/sugar": "workspace:*/*",
     "aggregation": "^1.2.6"
   }
 }

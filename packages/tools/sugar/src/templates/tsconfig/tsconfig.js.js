@@ -1,7 +1,7 @@
 /* eslint-disable */
 const __deepMerge = require('../../shared/object/deepMerge').default;
 const __tsconfig = require('./tsconfig');
-const __sugarConfig = require('../../shared/config/sugar').default;
+const __sugarConfig = require('@coffeekraken/s-sugar-config').default;
 const __packageRoot = require('../../node/path/packageRoot').default;
 
 let jsInput = __sugarConfig('js.compile.input');

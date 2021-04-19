@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __replaceTags from '../../shared/html/replaceTags';
-import __sugarConfig from '../../shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __upperFirst from '../../shared/string/upperFirst';
 import __chalk from 'chalk';
 import __tagsMap from '../../shared/console/html/tagsMap';

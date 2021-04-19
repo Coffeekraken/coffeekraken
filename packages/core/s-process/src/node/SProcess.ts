@@ -16,14 +16,19 @@ import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __extendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
+import __extendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
 import __spawn, {
   ISpawnSettings
 } from '@coffeekraken/sugar/node/process/spawn';
 import {
+  ISProcessSettings,
+  ISProcessCtorSettings,
+  ISProcessProcessObj,
+  ISProcessInternal,
+  ISProcessParams,
   ISCommandProcessCtorSettings,
   ISCommandProcessParams
-} from './SCommandProcess';
+} from './ISProcess';
 
 // process.on('uncaughtException', function (err) {
 //   console.log('CAUGHT__', err);
@@ -49,63 +54,6 @@ import {
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-export interface ISProcessNotificationSettings {
-  enable: boolean;
-}
-
-export interface ISProcessCtorSettings {
-  process?: Partial<ISProcessSettings>;
-}
-
-export interface ISProcessProcessObj extends ISDurationObject {
-  state: string;
-  stdout: any[];
-  stderr: any[];
-  value: any;
-  params: any;
-  settings: Partial<ISProcessSettings>;
-}
-
-export interface ISProcessResultObject extends ISProcessProcessObj {}
-
-export interface ISProcessSettings {
-  asyncStart: boolean;
-  killOnError: boolean;
-  emitErrorAsEvent: boolean;
-  stdio: ISStdio;
-  throw: boolean;
-  runAsChild: boolean;
-  interface: ISInterface;
-  processPath: string;
-  notification: ISProcessNotificationSettings;
-  env: Record<string, unknown>;
-  spawn: Record<string, unknown>;
-  decorators: boolean;
-  spawnSettings: ISpawnSettings;
-  exitAtEnd: boolean;
-}
-
-export interface ISProcessParams {
-  help: boolean;
-  [key: string]: any;
-}
-
-export interface ISProcessCtor {
-  new (params: Record<string, unknown>, settings: ISProcessSettings): ISProcess;
-}
-export interface ISProcessInternal extends __ISClass {
-  run(
-    paramsOrStringArgs: Record<string, unknown> | string,
-    settings: ISProcessSettings
-  ): any;
-  kill(data: any): void;
-  log(...logs: ILog[]): void;
-  error(...errors: ILog[]): void;
-}
-export interface ISProcess extends ISProcessInternal {
-  process(params: Record<string, unknown>, settings?: any);
-}
 
 class SProcess extends __SEventEmitter implements ISProcessInternal {
   static interfaces = {

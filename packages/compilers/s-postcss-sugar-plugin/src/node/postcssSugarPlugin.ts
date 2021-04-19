@@ -2,7 +2,7 @@
 import __fs from 'fs';
 import __SFile from '@coffeekraken/s-file';
 import __parseFunction from 'parse-function';
-import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 const plugin = (opts = {}) => {
   // list all mixins
@@ -32,7 +32,7 @@ const plugin = (opts = {}) => {
     postcssPlugin: 'sugar',
     AtRule: {
       ...mixinsAtRules
-    }
+    },
     Once(root) {
       root.walkDecls((decl) => {
         if (!decl.prop || !decl.value) return;

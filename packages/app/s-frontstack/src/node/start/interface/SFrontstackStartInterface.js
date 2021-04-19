@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const sugar_1 = __importDefault(require("@coffeekraken/sugar/shared/config/sugar"));
+const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name                SFrontstackStartInterface
@@ -27,9 +27,9 @@ SFrontstackStartInterface.definition = {
     receipe: {
         type: 'String',
         alias: 'r',
-        values: Object.keys(sugar_1.default('frontstack.receipes')),
+        values: Object.keys(s_sugar_config_1.default('frontstack.receipes')),
         default: 'default'
     }
 };
 exports.default = SFrontstackStartInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tTdGFydEludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHN0YWNrU3RhcnRJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxvRkFBb0U7QUFDcEUsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQU0seUJBQTBCLFNBQVEscUJBQVk7O0FBQzNDLG9DQUFVLEdBQUc7SUFDbEIsT0FBTyxFQUFFO1FBQ1AsSUFBSSxFQUFFLFFBQVE7UUFDZCxLQUFLLEVBQUUsR0FBRztRQUNWLE1BQU0sRUFBRSxNQUFNLENBQUMsSUFBSSxDQUFDLGVBQWEsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1FBQ3pELE9BQU8sRUFBRSxTQUFTO0tBQ25CO0NBQ0YsQ0FBQztBQUdKLGtCQUFlLHlCQUF5QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tTdGFydEludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHN0YWNrU3RhcnRJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxrRkFBeUQ7QUFDekQsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQU0seUJBQTBCLFNBQVEscUJBQVk7O0FBQzNDLG9DQUFVLEdBQUc7SUFDbEIsT0FBTyxFQUFFO1FBQ1AsSUFBSSxFQUFFLFFBQVE7UUFDZCxLQUFLLEVBQUUsR0FBRztRQUNWLE1BQU0sRUFBRSxNQUFNLENBQUMsSUFBSSxDQUFDLHdCQUFhLENBQUMscUJBQXFCLENBQUMsQ0FBQztRQUN6RCxPQUFPLEVBQUUsU0FBUztLQUNuQjtDQUNGLENBQUM7QUFHSixrQkFBZSx5QkFBeUIsQ0FBQyJ9

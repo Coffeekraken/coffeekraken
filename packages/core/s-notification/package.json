@@ -1,0 +1,19 @@
+{
+  "name": "@coffeekraken/s-notification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/shared/exports.js",
+  "exports": {
+    "node": "./src/node/exports.js",
+    "default": "./src/shared/exports.js"
+  },
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-class": "workspace:*/*",
+    "@coffeekraken/s-promise": "workspace:*/*",
+    "@coffeekraken/s-sugar-config": "workspace:*/*",
+    "@coffeekraken/sugar": "workspace:*/*"
+  }
+}

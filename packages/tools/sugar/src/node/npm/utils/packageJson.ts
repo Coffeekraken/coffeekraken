@@ -1,4 +1,4 @@
-import __sugarConfig from '../../../shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __path from 'path';
 import __fs from 'fs';

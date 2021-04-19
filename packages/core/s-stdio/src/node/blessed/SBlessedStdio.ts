@@ -32,8 +32,8 @@ import __SBlessedComponent, {
  * @todo      Listen for resizing and replace components correctly
  *
  * @example         js
- * import SStdio from '@coffeekraken/sugar/node/terminal/SStdio';
- * const myPanel = new SStdio(myProcess, {
+ * import { SBlessedStdio } from '@coffeekraken/s-stdio';
+ * const myPanel = new SBlessedStdio(myProcess, {
  *    screen: true
  * });
  *

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __parseHtml from '../../node/terminal/parseHtml';
+import __parseHtml from '../../shared/console/parseHtml';
 import __fkill from 'fkill';
 import psList from 'ps-list';
 import __SPromise from '../../node/promise/SPromise';
@@ -25,13 +25,10 @@ export default async (stringArgs = '') => {
   let processesObj;
   try {
     processesObj = await psList();
-  } catch(e) {
-  }
+  } catch (e) {}
 
   if (!processesObj) {
-    console.log(
-      __parseHtml('No processes to kill...')
-    );
+    console.log(__parseHtml('No processes to kill...'));
     process.exit();
   }
 

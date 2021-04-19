@@ -2,7 +2,6 @@
 
 const __packageRoot = require('../../../path/packageRoot');
 const __SPromise = require('../../../promise/SPromise');
-const __toHtml = require('../../../convert/toHtml');
 const __SDocMap = require('../../../doc/SDocMap');
 const __SDocblock = require('../../../docblock/SDocblock');
 const __SDocblockHtmlOutput = require('../../../docblock/outputs/SDocblockHtmlOutput');

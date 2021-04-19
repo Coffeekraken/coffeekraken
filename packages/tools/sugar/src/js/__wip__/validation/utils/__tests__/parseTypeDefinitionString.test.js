@@ -1,4 +1,0 @@
-"use strict";
-var __parseTypeDefinitionString = require('../parseTypeDefinitionString');
-require('./parseTypeDefinitionString')(__parseTypeDefinitionString);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VUeXBlRGVmaW5pdGlvblN0cmluZy50ZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VUeXBlRGVmaW5pdGlvblN0cmluZy50ZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxJQUFNLDJCQUEyQixHQUFHLE9BQU8sQ0FBQyw4QkFBOEIsQ0FBQyxDQUFDO0FBQzVFLE9BQU8sQ0FBQyw2QkFBNkIsQ0FBQyxDQUFDLDJCQUEyQixDQUFDLENBQUMifQ==

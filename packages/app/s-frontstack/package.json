@@ -7,9 +7,9 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "file:../../core/s-class",
-    "@coffeekraken/s-frontend-server": "file:../../servers/s-frontend-server",
-    "@coffeekraken/s-process": "file:../../core/s-process",
-    "@coffeekraken/sugar": "file:../../tools/sugar"
+    "@coffeekraken/s-class": "workspace:*/*",
+    "@coffeekraken/s-frontend-server": "workspace:*/*",
+    "@coffeekraken/s-process": "workspace:*/*",
+    "@coffeekraken/sugar": "workspace:*/*"
   }
 }

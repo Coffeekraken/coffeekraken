@@ -2,9 +2,7 @@ import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SDuration from '@coffeekraken/s-duration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
-import __SCompiler, {
-  ISCompiler
-} from '@coffeekraken/sugar/node/compiler/SCompiler';
+import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
 import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
 

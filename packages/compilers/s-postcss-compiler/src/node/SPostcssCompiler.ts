@@ -3,7 +3,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __postCss from 'postcss';
-import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SCompiler, {
   ISCompiler
 } from '@coffeekraken/sugar/node/compiler/SCompiler';

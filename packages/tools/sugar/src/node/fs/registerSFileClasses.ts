@@ -1,5 +1,5 @@
 import __SFile from '@coffeekraken/s-file';
-import __sugarConfig from '../../shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            registerSFileClasses

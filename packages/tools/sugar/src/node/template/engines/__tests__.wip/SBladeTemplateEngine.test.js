@@ -1,4 +1,0 @@
-"use strict";
-const __SBladeTemplateEngine = require('../SBladeTemplateEngine');
-require('./SBladeTemplateEngine')(__SBladeTemplateEngine);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0JsYWRlVGVtcGxhdGVFbmdpbmUudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNCbGFkZVRlbXBsYXRlRW5naW5lLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE1BQU0sc0JBQXNCLEdBQUcsT0FBTyxDQUFDLHlCQUF5QixDQUFDLENBQUM7QUFDbEUsT0FBTyxDQUFDLHdCQUF3QixDQUFDLENBQUMsc0JBQXNCLENBQUMsQ0FBQyJ9

@@ -10,8 +10,7 @@ import __glob from 'glob';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
 import __SDocblockRendererSettingsInterface from './interface/SDocblockRendererSettingsInterface';
-import { ISDocblock } from '@coffeekraken/sugar/shared/docblock/SDocblock';
-import { ISDocblockBlock } from '@coffeekraken/sugar/shared/docblock/SDocblockBlock';
+import { ISDocblock, ISDocblockBlock } from '@coffeekraken/s-docblock';
 
 /**
  * @name            SDocblockRenderer

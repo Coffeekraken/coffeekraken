@@ -56,7 +56,8 @@ export default function sugar(dotPath) {
       rootSugarJson = _rootSugarJson;
     }
     if (!_sugarJsons) {
-      const sugarJson = require('../../node/sugar/sugarJson').default;
+      const sugarJson = require('@coffeekraken/sugar/node/sugar/sugarJson')
+        .default;
       const __path = require('path');
       _sugarJsons = sugarJson('*');
       Object.keys(_sugarJsons).forEach((packageName) => {

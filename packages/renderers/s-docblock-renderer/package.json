@@ -1,15 +1,15 @@
 {
   "name": "@coffeekraken/s-docblock-renderer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "./src/node/exports.js",
   "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-interface": "workspace:*/*",
-    "@coffeekraken/s-promise": "workspace:*/*",
-    "@coffeekraken/sugar": "workspace:*/*",
+    "@coffeekraken/s-interface": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
     "glob": "^7.1.6",
     "handlebars": "^4.7.7"
   }

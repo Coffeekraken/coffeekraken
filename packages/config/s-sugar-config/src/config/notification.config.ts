@@ -1,5 +1,5 @@
-import __packageRoot from '../node/path/packageRoot';
-import __isNode from '../shared/is/node';
+import __packageRoot from '@coffeekraken/sugar/shared/path/packageRoot';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 export default {
   /**

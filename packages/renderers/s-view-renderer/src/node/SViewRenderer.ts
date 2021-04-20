@@ -46,44 +46,44 @@ import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export interface ISViewSettings {
+export interface ISViewRendererSettings {
   rootDirs: string[];
   cacheDir: string;
-  engine: string | ISViewEngine;
+  engine: string | ISViewRendererEngine;
   engineSettings?: any;
   defaultData?: any;
 }
 export interface ISViewCtorSettings {
-  view?: Partial<ISViewSettings>;
+  view?: Partial<ISViewRendererSettings>;
 }
 
 export interface ISViewViewMetas extends ISFileObject {}
 
-export interface ISViewEngines {
-  [key: string]: ISViewEngine;
+export interface ISViewRendererEngines {
+  [key: string]: ISViewRendererEngine;
 }
 
-export interface ISViewDataHandler {
+export interface ISViewRendererDataHandler {
   (filePath: string): ISPromise;
 }
-export interface ISViewDataHandlers {
-  [key: string]: ISViewDataHandler;
+export interface ISViewRendererDataHandlers {
+  [key: string]: ISViewRendererDataHandler;
 }
 
-export interface ISViewEngine {}
+export interface ISViewRendererEngine {}
 
-export interface ISViewRenderResult extends ISDurationObject {
+export interface ISViewRendererRenderResult extends ISDurationObject {
   view: ISViewViewMetas;
   value: string;
 }
 
-export interface ISView {
+export interface ISViewRenderer {
   _viewPath?: string;
   _viewString?: string;
 }
 
 // @ts-ignore
-class SView extends __SClass implements ISView {
+class SView extends __SClass implements ISViewRenderer {
   /**
    * @name      _viewPath
    * @type      String
@@ -381,7 +381,7 @@ class SView extends __SClass implements ISView {
 
   /**
    * @name      viewSettings
-   * @type      ISViewSettings
+   * @type      ISViewRendererSettings
    * @get
    *
    * Access the template settings
@@ -389,7 +389,7 @@ class SView extends __SClass implements ISView {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get viewSettings(): ISViewSettings {
+  get viewSettings(): ISViewRendererSettings {
     return (<any>this)._settings.view;
   }
 
@@ -511,8 +511,8 @@ class SView extends __SClass implements ISView {
    */
   render(
     data = {},
-    settings?: Partial<ISViewSettings>
-  ): Promise<ISViewRenderResult> {
+    settings?: Partial<ISViewRendererSettings>
+  ): Promise<ISViewRendererRenderResult> {
     // @ts-ignore
     // if (!this._viewPath) {
     //   return __page404({
@@ -531,7 +531,7 @@ class SView extends __SClass implements ISView {
     return new __SPromise(async ({ resolve, reject }) => {
       const viewSettings = Object.assign(
         {},
-        <ISViewSettings>__deepMerge(this.viewSettings, settings || {})
+        <ISViewRendererSettings>__deepMerge(this.viewSettings, settings || {})
       );
       data = __deepMerge(viewSettings.defaultData, data);
 
@@ -559,7 +559,7 @@ class SView extends __SClass implements ISView {
         const result = await renderPromise;
 
         if (renderPromise.isRejected()) {
-          const resObj: Partial<ISViewRenderResult> = {
+          const resObj: Partial<ISViewRendererRenderResult> = {
             view: SView.getViewMetas(this._viewPath),
             ...duration.end()
           };
@@ -567,7 +567,7 @@ class SView extends __SClass implements ISView {
         }
 
         // resolve the render process
-        const resObj: Partial<ISViewRenderResult> = {
+        const resObj: Partial<ISViewRendererRenderResult> = {
           // engine: this._engineInstance.engineMetas,
           view: SView.getViewMetas(this._viewPath),
           ...duration.end(),

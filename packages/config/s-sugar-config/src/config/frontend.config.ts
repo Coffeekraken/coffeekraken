@@ -1,4 +1,4 @@
-import __ipAddress from '../node/network/utils/ipAddress';
+import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 
 export default {
   assets: '[config.assets]',

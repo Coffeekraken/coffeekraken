@@ -1,16 +1,16 @@
 {
   "name": "@coffeekraken/s-docmap",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "./src/shared/exports.js",
   "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "workspace:*/*",
-    "@coffeekraken/s-process": "workspace:*/*",
-    "@coffeekraken/s-stdio": "workspace:*/*",
-    "@coffeekraken/s-sugar-config": "workspace:*/*",
-    "@coffeekraken/sugar": "workspace:*/*"
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-process": "^2.0.0",
+    "@coffeekraken/s-stdio": "^2.0.0",
+    "@coffeekraken/s-sugar-config": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0"
   }
 }

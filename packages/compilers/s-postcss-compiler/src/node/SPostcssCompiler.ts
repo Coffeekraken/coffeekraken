@@ -4,9 +4,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __postCss from 'postcss';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
-import __SCompiler, {
-  ISCompiler
-} from '@coffeekraken/sugar/node/compiler/SCompiler';
+import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
 
 import __path from 'path';
 import __fs from 'fs';
@@ -203,7 +201,7 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
               emit('log', {
                 type: 'file',
                 action: 'save',
-                file,
+                file: file.toObject(),
                 to: __path.relative(params.rootDir, outPath)
               });
             }
@@ -221,31 +219,6 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
               }
             }
           });
-
-          //   emit('log', {
-          //     value: `<${color}>[${
-          //       files.length === 1
-          //         ? __getFilename(files[0].path)
-          //         : files.length + ' files'
-          //     }]</${color}> Starting compilation`
-          //   });
-
-          //
-
-          // let resultObj;
-          // try {
-          //   // resultObj = await __esbuild.build(esbuildParams);
-          // } catch (e) {
-          //   return reject(e);
-          // }
-
-          //   emit('log', {
-          //     value: `<green>[success]</green> <${color}>${
-          //       files.length === 1
-          //         ? __getFilename(files[0].path)
-          //         : files.length + ' files'
-          //     }</${color}> compiled`
-          //   });
         });
 
         if (params.watch) {

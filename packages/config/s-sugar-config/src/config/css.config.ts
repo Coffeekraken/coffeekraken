@@ -215,6 +215,10 @@ export default {
         settings: {
           preset: 'default'
         }
+      },
+      sugarError: {
+        import: '@coffeekraken/s-postcss-sugar-error-plugin',
+        settings: {}
       }
     }
   }

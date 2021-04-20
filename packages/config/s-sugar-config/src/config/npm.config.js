@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const packageRoot_1 = __importDefault(require("../node/path/packageRoot"));
+const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/shared/path/packageRoot"));
 exports.default = {
     /**
      * @name            rootDir
@@ -18,4 +18,4 @@ exports.default = {
      */
     rootDir: `${packageRoot_1.default()}/node_modules`
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibnBtLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5wbS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSwyRUFBcUQ7QUFFckQsa0JBQWU7SUFDYjs7Ozs7Ozs7OztPQVVHO0lBQ0gsT0FBTyxFQUFFLEdBQUcscUJBQWEsRUFBRSxlQUFlO0NBQzNDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibnBtLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5wbS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSw4RkFBd0U7QUFFeEUsa0JBQWU7SUFDYjs7Ozs7Ozs7OztPQVVHO0lBQ0gsT0FBTyxFQUFFLEdBQUcscUJBQWEsRUFBRSxlQUFlO0NBQzNDLENBQUMifQ==

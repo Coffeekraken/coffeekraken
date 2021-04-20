@@ -54,23 +54,38 @@ export default function parseArgs(string, settings = {}) {
       throw: true,
       defaultObj: {},
       cast: true,
-      valueQuote: '"'
+      valueQuote: undefined
     },
     settings
   );
 
   string = string.trim();
 
+  let valueQuote = settings.valueQuote;
+  if (!valueQuote) {
+    for (let i = 0; i < string.length; i++) {
+      const char = string[i];
+      if (char === '"' || char === '`' || char === "'") {
+        valueQuote = char;
+        break;
+      }
+    }
+    if (!valueQuote) valueQuote = '"';
+  }
+
   let stringArray: string[] = [];
 
+  let isFunctionStyle = false;
+
   if (string.match(/^\(/) && string.match(/\)$/)) {
+    isFunctionStyle = true;
+
     string = string.slice(1, -1);
 
     // process the passed string
     let reg = /(?:[^,"]+|"[^"]*")+/gm;
-    if (settings.valueQuote === "'") reg = /(?:[^,']+|'[^']*')+/gm;
-    else if (settings.valueQuote === '`')
-      reg = /(?:[^,\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
+    if (valueQuote === "'") reg = /(?:[^,']+|'[^']*')+/gm;
+    else if (valueQuote === '`') reg = /(?:[^,\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
     stringArray = string.match(reg) || [];
     stringArray = stringArray.map((item) => {
       return __unquote(item);
@@ -78,9 +93,8 @@ export default function parseArgs(string, settings = {}) {
   } else {
     // process the passed string
     let reg = /(?:[^\s"]+|"[^"]*")+/gm;
-    if (settings.valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
-    else if (settings.valueQuote === '`')
-      reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
+    if (valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
+    else if (valueQuote === '`') reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
     stringArray = string.match(reg) || [];
     stringArray = stringArray.map((item) => {
       return __unquote(item);
@@ -93,7 +107,10 @@ export default function parseArgs(string, settings = {}) {
   stringArray = stringArray.forEach((part, i) => {
     const isLast = i === stringArray.length - 1;
 
-    if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
+    if (
+      !isFunctionStyle &&
+      (part.slice(0, 2) === '--' || part.slice(0, 1) === '-')
+    ) {
       if (
         currentValue === undefined &&
         currentArgName !== -1 &&

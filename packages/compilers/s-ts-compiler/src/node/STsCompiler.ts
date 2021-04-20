@@ -7,7 +7,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
-} from '@coffeekraken/sugar/node/compiler/SCompiler';
+} from '@coffeekraken/s-compiler';
 import __SDuration from '@coffeekraken/s-duration';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __sugarConfig from '@coffeekraken/s-sugar-config';

@@ -1,18 +1,19 @@
 {
   "name": "@coffeekraken/s-stdio",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "./src/node/exports.js",
   "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "workspace:*/*",
-    "@coffeekraken/s-duration": "workspace:*/*",
-    "@coffeekraken/s-event-emitter": "workspace:*/*",
-    "@coffeekraken/s-interface": "workspace:*/*",
-    "@coffeekraken/s-promise": "workspace:*/*",
-    "@coffeekraken/sugar": "workspace:*/*",
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-duration": "^2.0.0",
+    "@coffeekraken/s-event-emitter": "^2.0.0",
+    "@coffeekraken/s-interface": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-log": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
     "minimatch": "^3.0.4",
     "stack-trace": "0.0.10"
   }

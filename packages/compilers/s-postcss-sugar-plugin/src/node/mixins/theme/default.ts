@@ -15,16 +15,29 @@ class postcssSugarPluginThemeinInterface extends __SInterface {
   };
 }
 
+export interface IPostcssSugarPluginThemeParams {
+  name: string;
+}
+
 export { postcssSugarPluginThemeinInterface as interface };
 
-export default function (params = {}, atRule) {
+export default function (
+  params: Partial<IPostcssSugarPluginThemeParams> = {},
+  atRule
+) {
+  const finalParams: IPostcssSugarPluginThemeParams = {
+    name: '',
+    ...params
+  };
+
   const theme = __sugarConfig('theme');
-  if (!theme[params.name])
+  if (!theme[finalParams.name])
     throw new Error(
-      `Sorry but the requested theme "<yellow>${params.name}</yellow>" does not exists...`
+      `Sorry but the requested theme "<yellow>${finalParams.name}</yellow>" does not exists...`
     );
 
-  const flattenedTheme = __flatten(theme[params.name]);
+  // @ts-ignore
+  const flattenedTheme = __flatten(theme[finalParams.name]);
   const vars: string[] = [];
   Object.keys(flattenedTheme).forEach((key) => {
     vars.push(`--s-${key.replace(/\./gm, '-')}: ${flattenedTheme[key]};`);

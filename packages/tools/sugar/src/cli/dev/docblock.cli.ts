@@ -1,5 +1,5 @@
-import __SDocblock from '../../shared/docblock/SDocblock';
-import __SDocblockHtmlRenderer from '../../node/docblock/renderers/SDocblockHtmlRenderer';
+import __SDocblock from '@coffeekraken/s-docblock';
+import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
 import __fs from 'fs';
 
 export default async (stringArgs = '') => {
@@ -8,7 +8,7 @@ export default async (stringArgs = '') => {
     'utf8'
   );
   const blocks = new __SDocblock(content);
-  const renderer = new __SDocblockHtmlRenderer(blocks);
+  const renderer = new SDocblockHtmlRenderer(blocks);
 
   const res = await renderer.render();
 

@@ -77,8 +77,15 @@
   */
 @import './09_trumps/all';
 
+/* @sugar.init; */
+
+/* @sugar.color.docblock; */
+
+/* @sugar.color.classes; */
+
 body {
-  background: red;
+  content: sugar.color(#ff00ff, '--darken 40%');
+  background: sugar.color(primary, 900);
   color: sugar.color(primary);
   something: rgba(sugar.color(secondary, 10), sugar.color(warning, 100));
 }
@@ -109,5 +116,5 @@ body {
 @sugar.theme (default);
 
 .theme-dark {
-  @sugar.theme dark;
+  @sugar.theme (dark);
 }

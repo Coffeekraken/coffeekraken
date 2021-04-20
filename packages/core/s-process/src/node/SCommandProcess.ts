@@ -1,7 +1,10 @@
 import {
+  ISCommandProcessSettings,
   ISCommandProcessCtorSettings,
-  ISCommandProcessParams
+  ISCommandProcessParams,
+  ISProcessResultObject
 } from './ISProcess';
+import __SProcess from './SProcess';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCommandProcessInterface from './interface/SCommandProcessInterface';
 import __spawn, {

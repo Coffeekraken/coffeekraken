@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SType from '../type/SType';
+import __SType from '@coffeekraken/s-type';
 
 /**
  * @name              ofType

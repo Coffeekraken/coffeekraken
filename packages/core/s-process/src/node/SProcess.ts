@@ -5,7 +5,7 @@ import __stackTrace from 'stack-trace';
 import { ISClass as __ISClass } from '@coffeekraken/s-class';
 import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import { ILog } from '@coffeekraken/sugar/shared/log/log';
+import { ILog } from '@coffeekraken/s-log';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
@@ -26,6 +26,7 @@ import {
   ISProcessProcessObj,
   ISProcessInternal,
   ISProcessParams,
+  ISProcessResultObject,
   ISCommandProcessCtorSettings,
   ISCommandProcessParams
 } from './ISProcess';

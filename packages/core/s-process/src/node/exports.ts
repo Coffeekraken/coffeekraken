@@ -8,6 +8,7 @@ export * from './SProcessManager';
 export * from './SCommandProcess';
 // export * from './SProcessPipe';
 export * from './SProcess';
+export * from './ISProcess';
 
 export { SProcessManager, SProcessInterface, SCommandProcess };
 export default SProcess;

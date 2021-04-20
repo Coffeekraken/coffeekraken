@@ -1,6 +1,6 @@
 import { ISNotificationAdapter, ISNotificationObj } from '../SNotification';
-import __SBlessedNotification from '../../blessed/notification/SBlessedNotification';
-import __uniqid from '../../../shared/string/uniqid';
+import __SBlessedNotification from '@coffeekraken/sugar/node/blessed/notification/SBlessedNotification';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __SPromise from '@coffeekraken/s-promise';
 
 /**

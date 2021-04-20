@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/s-interface",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "./src/node/exports.js",
   "exports": {
@@ -11,8 +11,8 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "workspace:*/*",
-    "@coffeekraken/s-descriptor": "workspace:*/*",
-    "@coffeekraken/sugar": "workspace:*/*"
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-descriptor": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0"
   }
 }

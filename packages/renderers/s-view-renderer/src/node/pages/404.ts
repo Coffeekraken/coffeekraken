@@ -1,4 +1,4 @@
-import __SViewRenderer, { ISViewRenderResult } from '../SViewRenderer';
+import __SViewRenderer, { ISViewRendererRenderResult } from '../SViewRenderer';
 
 /**
  * @name           404
@@ -27,7 +27,9 @@ export interface I404Data {
   body: string;
 }
 
-export default function page404(data: I404Data): Promise<ISViewRenderResult> {
+export default function page404(
+  data: I404Data
+): Promise<ISViewRendererRenderResult> {
   const engine = new __SViewRenderer('pages.404', {
     view: {
       engine: 'blade'

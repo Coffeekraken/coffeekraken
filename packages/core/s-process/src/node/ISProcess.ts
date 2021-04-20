@@ -1,3 +1,10 @@
+import { ISClass } from '@coffeekraken/s-class';
+import { ILog } from '@coffeekraken/s-log';
+import { ISpawnSettings } from '@coffeekraken/sugar/node/process/spawn';
+import { ISInterface } from '@coffeekraken/s-interface';
+import { ISStdio } from '@coffeekraken/s-stdio';
+import { ISDurationObject } from '@coffeekraken/s-duration';
+
 export interface ISCommandProcessSettings {
   spawnSettings: Partial<ISpawnSettings>;
 }
@@ -52,7 +59,7 @@ export interface ISProcessParams {
 export interface ISProcessCtor {
   new (params: Record<string, unknown>, settings: ISProcessSettings): ISProcess;
 }
-export interface ISProcessInternal extends __ISClass {
+export interface ISProcessInternal extends ISClass {
   run(
     paramsOrStringArgs: Record<string, unknown> | string,
     settings: ISProcessSettings

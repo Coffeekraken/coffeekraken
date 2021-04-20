@@ -1082,29 +1082,5 @@ class SColor extends __SClass {
   }
 }
 
-// // inject sugar css colors into class
-// __domReady(() => {
-//   // get settings
-//   if (!__settings || !__settings.colors) return;
-
-//   // loop on each colors
-//   for (let colorName in __settings.colors) {
-//     const color = __settings.colors[colorName];
-//     if (!color) return;
-
-//     if (color.color) {
-//       SColor.colors[colorName] = color.color;
-//     }
-//     // modifiers
-//     if (color.modifiers) {
-//       // loop on modifiers
-//       for (let modifierName in color.modifiers) {
-//         const modifierColor = color.modifiers[modifierName];
-//         SColor.colors[`${colorName}--${modifierName}`] = modifierColor;
-//       }
-//     }
-//   }
-// });
-
 // export class
 export default SColor;

@@ -3,21 +3,37 @@ import __fs from 'fs';
 import __SFile from '@coffeekraken/s-file';
 import __parseFunction from 'parse-function';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __glob from 'glob';
 
+let _mixinsPaths;
 const plugin = (opts = {}) => {
   // list all mixins
-  const mixinsPath = __fs.readdirSync(`${__dirname}/mixins`);
+  // const mixinsPath = __fs.readdirSync(`${__dirname}/mixins`);
 
   const mixinsAtRules = {};
 
-  mixinsPath.forEach((path) => {
-    if (!path.match(/\.js$/)) return;
-    const fullPath = `${__dirname}/mixins/${path}`;
-    const mixin = require(fullPath);
+  if (!_mixinsPaths) {
+    _mixinsPaths = __glob.sync(`${__dirname}/mixins/**/*.js`);
+  }
+
+  _mixinsPaths.forEach((path) => {
+    const mixin = require(path);
     const mixinFn = mixin.default;
     const mixinInterface = mixin.interface;
-    const mixinFile = __SFile.new(fullPath);
-    mixinsAtRules[`sugar.${mixinFile.nameWithoutExt}`] = (atRule) => {
+    let mixinPath = `${path
+      .replace(`${__dirname}/mixins/`, '')
+      .split('/')
+      .join('.')
+      .replace(/\.js$/, '')}`;
+    // @ts-ignore
+    if (mixinPath.match(/\.default$/)) {
+      mixinPath = mixinPath.replace(/\.default$/, '');
+    }
+    const mixinFile = __SFile.new(path);
+
+    console.log('register', `sugar.${mixinPath}`);
+
+    mixinsAtRules[`sugar.${mixinPath}`] = (atRule) => {
       const intRes = mixinInterface.apply(atRule.params, {});
       if (intRes.hasIssues()) {
         throw new Error(intRes.toString());
@@ -42,17 +58,29 @@ const plugin = (opts = {}) => {
         );
         if (!calls || !calls.length) return;
         calls.forEach((sugarStatement) => {
-          const functionName = sugarStatement.match(/sugar\.([a-zA-Z0-9]+)/)[1];
+          const functionName = sugarStatement.match(
+            /sugar\.([a-zA-Z0-9\.]+)/
+          )[1];
           const paramsStatement = sugarStatement.replace(
-            /sugar\.[a-zA-Z0-9]+/,
+            /sugar\.[a-zA-Z0-9\.]+/,
             ''
           );
-          if (!__fs.existsSync(`${__dirname}/functions/${functionName}.js`)) {
+
+          let fnPath = `${__dirname}/functions/${functionName
+            .split('.')
+            .join('/')}.js`;
+          if (!__fs.existsSync(fnPath)) {
+            fnPath = `${__dirname}/functions/${functionName
+              .split('.')
+              .join('/')}/default.js`;
+          }
+
+          if (!__fs.existsSync(fnPath)) {
             throw new Error(
               `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${functionName}</yellow>" does not exists...`
             );
           }
-          const func = require(`${__dirname}/functions/${functionName}`);
+          const func = require(fnPath);
           const functionInterface = func.interface;
           const funcFn = func.default;
           const intRes = functionInterface.apply(paramsStatement, {});
@@ -61,8 +89,12 @@ const plugin = (opts = {}) => {
           }
           const params = intRes.value;
           delete params.help;
-          const result = funcFn(params);
-          decl.value = decl.value.replace(sugarStatement, result);
+          try {
+            const result = funcFn(params);
+            decl.value = decl.value.replace(sugarStatement, result);
+          } catch (e) {
+            console.error(e.message);
+          }
         });
       });
     }

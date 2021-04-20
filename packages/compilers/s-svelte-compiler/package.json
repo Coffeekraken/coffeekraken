@@ -1,18 +1,18 @@
 {
   "name": "@coffeekraken/s-svelte-compiler",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "./src/node/exports.js",
   "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-compiler": "workspace:*/*",
-    "@coffeekraken/s-duration": "workspace:*/*",
-    "@coffeekraken/s-process": "workspace:*/*",
-    "@coffeekraken/s-promise": "workspace:*/*",
-    "@coffeekraken/s-ts-compiler": "workspace:*/*",
-    "@coffeekraken/sugar": "workspace:*/*",
+    "@coffeekraken/s-compiler": "^2.0.0",
+    "@coffeekraken/s-duration": "^2.0.0",
+    "@coffeekraken/s-process": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-ts-compiler": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
     "clean-css": "^5.1.2",
     "uglify-js": "^3.13.2"
   }

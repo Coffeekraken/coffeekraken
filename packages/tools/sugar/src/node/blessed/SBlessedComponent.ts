@@ -1,7 +1,7 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../../shared/object/deepMerge';
-import __color from '../../shared/color/color';
+import __SColor from '@coffeekraken/s-color';
 import __hotkey from '../keyboard/hotkey';
 import __isChildProcess from '../../node/is/childProcess';
 import __innerWidth from './utils/innerWidth';
@@ -161,7 +161,7 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
         cursor: {
           artificial: true,
           shape: {
-            bg: __color('terminal.primary').toString(),
+            bg: new __SColor('terminal.primary').toString(),
             ch: '|'
             // ch: '█'
           },
@@ -317,25 +317,6 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
   isDestroyed() {
     return this._destroyed === true;
   }
-
-  /**
-   * @name          emit
-   * @type          Function
-   *
-   * emit some "events" through the SPromise instance
-   *
-   * @param       {String}      stack         The stack (name) of the event
-   * @param       {Any}         data          The data to pass along the event
-   * @return      {SPromise}                  The SPromise instance to maintain chainability
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // emit(stack, data) {
-  //   // super.emit(stack, data);
-  //   // this.emit(stack, data);
-  //   return this;
-  // }
 }
 
 if (!__isChildProcess()) {

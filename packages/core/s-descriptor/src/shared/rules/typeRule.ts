@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SType from '@coffeekraken/sugar/shared/type/SType';
+import __SType from '@coffeekraken/s-type';
 import { ISDescriptorResultObj } from '../SDescriptorResult';
 import { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
 

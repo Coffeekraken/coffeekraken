@@ -282,6 +282,18 @@ export default class SConfig {
   _resolveInternalReferences(originalValue, config, path = []) {
     if (__isPlainObject(originalValue)) {
       Object.keys(originalValue).forEach((key) => {
+        if (key === '...') {
+          originalValue = {
+            ...originalValue,
+            ...this._resolveInternalReferences(originalValue[key], config, [
+              ...path,
+              key
+            ])
+          };
+        }
+      });
+      delete originalValue['...'];
+      Object.keys(originalValue).forEach((key) => {
         try {
           originalValue[key] = this._resolveInternalReferences(
             originalValue[key],

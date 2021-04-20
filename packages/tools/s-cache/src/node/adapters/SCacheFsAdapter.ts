@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/sugar/src/shared/config/sugar';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __ensureDirSync from '@coffeekraken/sugar/src/node/fs/ensureDirSync';
 import __removeSync from '@coffeekraken/sugar/src/node/fs/removeSync';
 import __tmpDir from '@coffeekraken/sugar/src/node/path/tmpDir';

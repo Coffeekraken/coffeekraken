@@ -1,5 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __sugarConfig from '@coffeekraken/s-sugar/config';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SNotificationSettingsInterface from './interface/SNotificationSettingsInterface';

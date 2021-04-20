@@ -5,7 +5,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __glob from 'glob';
 import __fs from 'fs';
 import __path from 'path';
-import __SDocblock from '@coffeekraken/sugar/shared/docblock/SDocblock';
+import __SDocblock from '@coffeekraken/s-docblock';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';

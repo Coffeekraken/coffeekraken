@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
-import __isChildProcess from '../../is/childProcess';
-import __toString from '../../string/toString';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __isChildProcess from '@coffeekraken/sugar/shared/is/childProcess';
+import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __formatObject from 'fmt-obj';
 import __SLogAdapter from './SLogAdapter';
 

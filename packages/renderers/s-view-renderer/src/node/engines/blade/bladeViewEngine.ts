@@ -5,7 +5,7 @@ import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __childProcess from 'child_process';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
-import { ISViewSettings } from '../../SView';
+import { ISViewRendererSettings } from '../../SViewRenderer';
 
 /**
  * @name            bladeViewEngine
@@ -21,7 +21,7 @@ import { ISViewSettings } from '../../SView';
  */
 export default {
   settings: {},
-  render(viewPath: string, data: any = {}, settings: ISViewSettings) {
+  render(viewPath: string, data: any = {}, settings: ISViewRendererSettings) {
     return new __SPromise(
       ({ resolve, reject }) => {
         if (!__fs.existsSync(viewPath)) {

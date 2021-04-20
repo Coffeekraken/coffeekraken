@@ -1,5 +1,5 @@
 import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __isPath from '@coffeekraken/sugar/shared/is/path';
+import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 /**

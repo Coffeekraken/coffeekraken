@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/s-iframe-webcomponent",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Extended iframe features like auto-resize, etc...",
   "homepage": "https://coffeekraken.io",
   "main": "src/js/index.js",
@@ -14,6 +14,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "workspace:*/*"
+    "@coffeekraken/sugar": "^2.0.0"
   }
 }

@@ -24,9 +24,7 @@ import __packageJson from './utils/packageJson';
  */
 
 interface ISNpmUnusedProcessSettings extends ISProcessSettings {}
-interface ISNpmUnusedProcessCtorSettings extends ISProcessCtorSettings {
-  npmDependencies?: Partial<ISNpmUnusedProcessSettings>;
-}
+interface ISNpmUnusedProcessCtorSettings extends ISProcessCtorSettings {}
 interface ISNpmUnusedProcessParams {
   clean: boolean;
   skipMissing: boolean;
@@ -52,8 +50,11 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(initialParams = {}, settings?: ISNpmUnusedProcessCtorSettings) {
-    super(initialParams, settings);
+  constructor(
+    initialParams = {},
+    settings?: Partial<ISNpmUnusedProcessCtorSettings>
+  ) {
+    super(initialParams, settings ?? {});
   }
 
   /**

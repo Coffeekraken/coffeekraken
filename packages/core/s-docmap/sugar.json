@@ -4,9 +4,9 @@
       "stack": "docmap",
       "description": "SDocMap CLI",
       "actions": {
-        "generate": {
+        "build": {
           "description": "Generate the docmap.json file by searching for source files with a @namespace defined",
-          "process": "./src/node/generate.cli.js"
+          "process": "./src/node/build.cli.js"
         },
         "find": {
           "description": "Search for a docmap entry",

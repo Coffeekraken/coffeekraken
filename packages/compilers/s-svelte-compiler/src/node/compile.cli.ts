@@ -4,7 +4,7 @@ import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
 
 export default function start(stringArgs = '') {
   const compiler = new __SSvelteCompiler();
-  const pro = __SProcess.from(compiler.compile.bind(compiler), {
+  const pro = __SProcess.from(compiler._compile.bind(compiler), {
     process: {
       interface: __SSvelteCompilerInterface
     }

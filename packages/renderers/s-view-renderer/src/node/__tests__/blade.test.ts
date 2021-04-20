@@ -1,8 +1,8 @@
-import __SView from '../SView';
+import __SViewRenderer from '../SViewRenderer';
 
 describe('s-view.blade', () => {
   it('Should compile the passed blade view correctly', async (done) => {
-    const view = new __SView('default', {
+    const view = new __SViewRenderer('default', {
       view: {
         rootDirs: [`${__dirname}/views`]
       }

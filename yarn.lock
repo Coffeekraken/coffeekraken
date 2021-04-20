@@ -943,324 +943,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@coffeekraken/s-cache@file:packages/tools/s-cache":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-interface" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-cache-1.0.0-10d0f8af-0a8e-4887-838f-20c083bb0160-1618841508571/node_modules/core/s-interface"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-cache-1.0.0-10d0f8af-0a8e-4887-838f-20c083bb0160-1618841508571/node_modules/@coffeekraken/sugar"
-
-"@coffeekraken/s-class@file:packages/core/s-class":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-interface" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-class-1.0.0-db837c4f-5add-4dd6-a396-cdbd0abda222-1618841508547/node_modules/@coffeekraken/s-interface"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-class-1.0.0-db837c4f-5add-4dd6-a396-cdbd0abda222-1618841508547/node_modules/tools/sugar"
-
-"@coffeekraken/s-color@file:packages/tools/s-color":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-color-1.0.0-3a8a40a6-485f-4cc0-9656-2b5adb1619e9-1618841508572/node_modules/core/s-class"
-    "@coffeekraken/s-interface" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-color-1.0.0-3a8a40a6-485f-4cc0-9656-2b5adb1619e9-1618841508572/node_modules/core/s-interface"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-color-1.0.0-3a8a40a6-485f-4cc0-9656-2b5adb1619e9-1618841508572/node_modules/tools/sugar"
-
-"@coffeekraken/s-compiler@file:packages/compilers/s-compiler":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-event-emitter" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-compiler-1.0.0-20225ecc-e83f-419e-b630-491582d2c968-1618841508555/node_modules/core/s-event-emitter"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-compiler-1.0.0-20225ecc-e83f-419e-b630-491582d2c968-1618841508555/node_modules/tools/sugar"
-
-"@coffeekraken/s-config@file:packages/core/s-config":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-config-1.0.0-1b52d83f-b779-4d6e-a23e-9059f0fcbec2-1618841508562/node_modules/tools/sugar"
-
-"@coffeekraken/s-descriptor@file:packages/core/s-descriptor":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-descriptor-1.0.0-b43c18d9-ebf5-496f-95d4-d4e82102209f-1618841508564/node_modules/@coffeekraken/s-class"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-descriptor-1.0.0-b43c18d9-ebf5-496f-95d4-d4e82102209f-1618841508564/node_modules/tools/sugar"
-
-"@coffeekraken/s-duration@file:packages/tools/s-duration":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-duration-1.0.0-ab5fd634-76fe-4063-aac3-44cfabe007ec-1618841508556/node_modules/@coffeekraken/sugar"
-
-"@coffeekraken/s-event-emitter@file:packages/core/s-event-emitter":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-event-emitter-1.0.0-5ca51bed-b3d0-48e5-9191-303685a36e75-1618841508555/node_modules/@coffeekraken/s-class"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-event-emitter-1.0.0-5ca51bed-b3d0-48e5-9191-303685a36e75-1618841508555/node_modules/tools/sugar"
-
-"@coffeekraken/s-file@file:packages/core/s-file":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-file-1.0.0-6dfc8e24-74df-4a5c-a406-d76afa805b3a-1618841508559/node_modules/@coffeekraken/s-class"
-    "@coffeekraken/s-descriptor" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-file-1.0.0-6dfc8e24-74df-4a5c-a406-d76afa805b3a-1618841508559/node_modules/@coffeekraken/s-descriptor"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-file-1.0.0-6dfc8e24-74df-4a5c-a406-d76afa805b3a-1618841508559/node_modules/tools/sugar"
-    minimatch "^3.0.4"
-
-"@coffeekraken/s-filtrable-input@file:packages/webcomponents/s-filtrable-input":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-filtrable-input-1.0.0-ae596177-7f05-400f-be75-aa9adc9e54ef-1618841508566/node_modules/tools/sugar"
-    aggregation "^1.2.6"
-
-"@coffeekraken/s-frontend-server@file:packages/servers/s-frontend-server":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontend-server-1.0.0-96797db1-3731-43b3-bbdf-87ad828153e9-1618841508550/node_modules/core/s-class"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontend-server-1.0.0-96797db1-3731-43b3-bbdf-87ad828153e9-1618841508550/node_modules/tools/s-duration"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontend-server-1.0.0-96797db1-3731-43b3-bbdf-87ad828153e9-1618841508550/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontend-server-1.0.0-96797db1-3731-43b3-bbdf-87ad828153e9-1618841508550/node_modules/core/s-promise"
-    "@coffeekraken/s-view-renderer" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontend-server-1.0.0-96797db1-3731-43b3-bbdf-87ad828153e9-1618841508550/node_modules/renderers/s-view-renderer"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontend-server-1.0.0-96797db1-3731-43b3-bbdf-87ad828153e9-1618841508550/node_modules/tools/sugar"
-    express "^4.17.1"
-    file-type "^16.3.0"
-    mime-types "^2.1.30"
-    sails "^1.4.2"
-    serve-static "^1.14.1"
-
-"@coffeekraken/s-frontstack@file:packages/app/s-frontstack":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontstack-1.0.0-8c6bc4a4-966a-4835-a381-77f3a683147b-1618841508567/node_modules/core/s-class"
-    "@coffeekraken/s-frontend-server" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontstack-1.0.0-8c6bc4a4-966a-4835-a381-77f3a683147b-1618841508567/node_modules/servers/s-frontend-server"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontstack-1.0.0-8c6bc4a4-966a-4835-a381-77f3a683147b-1618841508567/node_modules/core/s-process"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-frontstack-1.0.0-8c6bc4a4-966a-4835-a381-77f3a683147b-1618841508567/node_modules/tools/sugar"
-
-"@coffeekraken/s-interface@file:packages/core/s-interface":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-interface-1.0.0-4e48759e-8b06-40f7-8afa-80c170238765-1618841508560/node_modules/@coffeekraken/s-class"
-    "@coffeekraken/s-descriptor" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-interface-1.0.0-4e48759e-8b06-40f7-8afa-80c170238765-1618841508560/node_modules/@coffeekraken/s-descriptor"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-interface-1.0.0-4e48759e-8b06-40f7-8afa-80c170238765-1618841508560/node_modules/tools/sugar"
-
-"@coffeekraken/s-js-compiler@file:packages/compilers/s-js-compiler":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-js-compiler-1.0.0-d0c821dc-4f43-4756-8bcf-52ea1066c987-1618841508572/node_modules/@coffeekraken/s-compiler"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-js-compiler-1.0.0-d0c821dc-4f43-4756-8bcf-52ea1066c987-1618841508572/node_modules/tools/s-duration"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-js-compiler-1.0.0-d0c821dc-4f43-4756-8bcf-52ea1066c987-1618841508572/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-js-compiler-1.0.0-d0c821dc-4f43-4756-8bcf-52ea1066c987-1618841508572/node_modules/core/s-promise"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-js-compiler-1.0.0-d0c821dc-4f43-4756-8bcf-52ea1066c987-1618841508572/node_modules/tools/sugar"
-
-"@coffeekraken/s-postcss-compiler@file:packages/compilers/s-postcss-compiler":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-compiler-1.0.0-08a6ff7e-2ad9-4a86-95e9-bc22f7338e7b-1618841508568/node_modules/@coffeekraken/s-compiler"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-compiler-1.0.0-08a6ff7e-2ad9-4a86-95e9-bc22f7338e7b-1618841508568/node_modules/tools/s-duration"
-    "@coffeekraken/s-postcss-sugar-plugin" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-compiler-1.0.0-08a6ff7e-2ad9-4a86-95e9-bc22f7338e7b-1618841508568/node_modules/@coffeekraken/s-postcss-sugar-plugin"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-compiler-1.0.0-08a6ff7e-2ad9-4a86-95e9-bc22f7338e7b-1618841508568/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-compiler-1.0.0-08a6ff7e-2ad9-4a86-95e9-bc22f7338e7b-1618841508568/node_modules/core/s-promise"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-compiler-1.0.0-08a6ff7e-2ad9-4a86-95e9-bc22f7338e7b-1618841508568/node_modules/tools/sugar"
-    autoprefixer "^10.2.5"
-    clean-css "^5.1.2"
-    cssnano "^5.0.1"
-    postcss "^8.2.10"
-    postcss-import "^14.0.1"
-    postcss-import-ext-glob "^2.0.1"
-    postcss-preset-env "^6.7.0"
-    postcss-reporter "^7.0.2"
-    precss "^4.0.0"
-    stylelint "^13.12.0"
-    stylelint-config-standard "^21.0.0"
-
-"@coffeekraken/s-postcss-sugar-plugin@file:packages/compilers/s-postcss-sugar-plugin":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-sugar-plugin-1.0.0-58964462-8c10-4604-ad7c-1eb329f4a04b-1618841508558/node_modules/tools/s-duration"
-    "@coffeekraken/s-file" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-sugar-plugin-1.0.0-58964462-8c10-4604-ad7c-1eb329f4a04b-1618841508558/node_modules/core/s-file"
-    "@coffeekraken/s-interface" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-sugar-plugin-1.0.0-58964462-8c10-4604-ad7c-1eb329f4a04b-1618841508558/node_modules/core/s-interface"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-sugar-plugin-1.0.0-58964462-8c10-4604-ad7c-1eb329f4a04b-1618841508558/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-sugar-plugin-1.0.0-58964462-8c10-4604-ad7c-1eb329f4a04b-1618841508558/node_modules/core/s-promise"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-postcss-sugar-plugin-1.0.0-58964462-8c10-4604-ad7c-1eb329f4a04b-1618841508558/node_modules/tools/sugar"
-    css-tree "^1.1.3"
-    parse-function "^5.6.10"
-    postcss "^8.2.10"
-
-"@coffeekraken/s-process@file:packages/core/s-process":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-process-1.0.0-85161206-6089-4689-94be-deef7c47adc1-1618841508553/node_modules/@coffeekraken/s-class"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-process-1.0.0-85161206-6089-4689-94be-deef7c47adc1-1618841508553/node_modules/tools/s-duration"
-    "@coffeekraken/s-event-emitter" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-process-1.0.0-85161206-6089-4689-94be-deef7c47adc1-1618841508553/node_modules/@coffeekraken/s-event-emitter"
-    "@coffeekraken/s-interface" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-process-1.0.0-85161206-6089-4689-94be-deef7c47adc1-1618841508553/node_modules/@coffeekraken/s-interface"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-process-1.0.0-85161206-6089-4689-94be-deef7c47adc1-1618841508553/node_modules/@coffeekraken/s-promise"
-    "@coffeekraken/s-stdio" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-process-1.0.0-85161206-6089-4689-94be-deef7c47adc1-1618841508553/node_modules/@coffeekraken/s-stdio"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-process-1.0.0-85161206-6089-4689-94be-deef7c47adc1-1618841508553/node_modules/tools/sugar"
-    stack-trace "0.0.10"
-
-"@coffeekraken/s-promise@file:packages/core/s-promise":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-promise-1.0.0-b94c36a3-981b-4492-b546-49b75d962d6d-1618841508557/node_modules/@coffeekraken/s-class"
-    "@coffeekraken/s-event-emitter" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-promise-1.0.0-b94c36a3-981b-4492-b546-49b75d962d6d-1618841508557/node_modules/@coffeekraken/s-event-emitter"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-promise-1.0.0-b94c36a3-981b-4492-b546-49b75d962d6d-1618841508557/node_modules/tools/sugar"
-
-"@coffeekraken/s-stdio@file:packages/core/s-stdio":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-stdio-1.0.0-45f27ffb-7b8c-412e-8a2c-4d557cf934ed-1618841508563/node_modules/@coffeekraken/s-class"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-stdio-1.0.0-45f27ffb-7b8c-412e-8a2c-4d557cf934ed-1618841508563/node_modules/tools/s-duration"
-    "@coffeekraken/s-event-emitter" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-stdio-1.0.0-45f27ffb-7b8c-412e-8a2c-4d557cf934ed-1618841508563/node_modules/@coffeekraken/s-event-emitter"
-    "@coffeekraken/s-interface" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-stdio-1.0.0-45f27ffb-7b8c-412e-8a2c-4d557cf934ed-1618841508563/node_modules/@coffeekraken/s-interface"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-stdio-1.0.0-45f27ffb-7b8c-412e-8a2c-4d557cf934ed-1618841508563/node_modules/@coffeekraken/s-promise"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-stdio-1.0.0-45f27ffb-7b8c-412e-8a2c-4d557cf934ed-1618841508563/node_modules/tools/sugar"
-    minimatch "^3.0.4"
-    stack-trace "0.0.10"
-
-"@coffeekraken/s-sugar-config@file:packages/config/s-sugar-config":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-config" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-sugar-config-1.0.0-7bc8c329-9e53-4250-b8a8-b0ff39fa1e5a-1618841508565/node_modules/core/s-config"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-sugar-config-1.0.0-7bc8c329-9e53-4250-b8a8-b0ff39fa1e5a-1618841508565/node_modules/tools/sugar"
-
-"@coffeekraken/s-svelte-compiler@file:packages/compilers/s-svelte-compiler":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-svelte-compiler-1.0.0-f9f7502d-689a-4559-8022-00b238877e51-1618841508573/node_modules/@coffeekraken/s-compiler"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-svelte-compiler-1.0.0-f9f7502d-689a-4559-8022-00b238877e51-1618841508573/node_modules/tools/s-duration"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-svelte-compiler-1.0.0-f9f7502d-689a-4559-8022-00b238877e51-1618841508573/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-svelte-compiler-1.0.0-f9f7502d-689a-4559-8022-00b238877e51-1618841508573/node_modules/core/s-promise"
-    "@coffeekraken/s-ts-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-svelte-compiler-1.0.0-f9f7502d-689a-4559-8022-00b238877e51-1618841508573/node_modules/@coffeekraken/s-ts-compiler"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-svelte-compiler-1.0.0-f9f7502d-689a-4559-8022-00b238877e51-1618841508573/node_modules/tools/sugar"
-    clean-css "^5.1.2"
-    uglify-js "^3.13.2"
-
-"@coffeekraken/s-ts-compiler@file:packages/compilers/s-ts-compiler":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-ts-compiler-1.0.0-aafc5d7d-8def-4e81-917c-1b8ebd3889b0-1618841508561/node_modules/@coffeekraken/s-compiler"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-ts-compiler-1.0.0-aafc5d7d-8def-4e81-917c-1b8ebd3889b0-1618841508561/node_modules/tools/s-duration"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-ts-compiler-1.0.0-aafc5d7d-8def-4e81-917c-1b8ebd3889b0-1618841508561/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-ts-compiler-1.0.0-aafc5d7d-8def-4e81-917c-1b8ebd3889b0-1618841508561/node_modules/core/s-promise"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-ts-compiler-1.0.0-aafc5d7d-8def-4e81-917c-1b8ebd3889b0-1618841508561/node_modules/tools/sugar"
-
-"@coffeekraken/s-view-renderer@file:packages/renderers/s-view-renderer":
-  version "1.0.0"
-  dependencies:
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-view-renderer-1.0.0-4a0fcfe0-8d5f-4420-8617-9f6c9b5d724e-1618841508565/node_modules/tools/s-duration"
-    "@coffeekraken/s-file" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-view-renderer-1.0.0-4a0fcfe0-8d5f-4420-8617-9f6c9b5d724e-1618841508565/node_modules/core/s-file"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-view-renderer-1.0.0-4a0fcfe0-8d5f-4420-8617-9f6c9b5d724e-1618841508565/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-view-renderer-1.0.0-4a0fcfe0-8d5f-4420-8617-9f6c9b5d724e-1618841508565/node_modules/core/s-promise"
-    "@coffeekraken/sugar" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-s-view-renderer-1.0.0-4a0fcfe0-8d5f-4420-8617-9f6c9b5d724e-1618841508565/node_modules/tools/sugar"
-
-"@coffeekraken/sugar@file:packages/tools/sugar":
-  version "2.0.0"
-  dependencies:
-    "@coffeekraken/s-cache" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/@coffeekraken/s-cache"
-    "@coffeekraken/s-class" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/core/s-class"
-    "@coffeekraken/s-color" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/@coffeekraken/s-color"
-    "@coffeekraken/s-config" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/core/s-config"
-    "@coffeekraken/s-duration" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/@coffeekraken/s-duration"
-    "@coffeekraken/s-event-emitter" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/core/s-event-emitter"
-    "@coffeekraken/s-interface" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/core/s-interface"
-    "@coffeekraken/s-js-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/compilers/s-js-compiler"
-    "@coffeekraken/s-process" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/core/s-process"
-    "@coffeekraken/s-promise" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/core/s-promise"
-    "@coffeekraken/s-stdio" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/core/s-stdio"
-    "@coffeekraken/s-sugar-config" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/config/s-sugar-config"
-    "@coffeekraken/s-svelte-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/compilers/s-svelte-compiler"
-    "@coffeekraken/s-ts-compiler" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/compilers/s-ts-compiler"
-    "@coffeekraken/s-view-renderer" "file:../../../../Library/Caches/Yarn/v6/npm-@coffeekraken-sugar-2.0.0-5123dad9-270c-400b-ad4a-afd36f07e018-1618841508584/node_modules/renderers/s-view-renderer"
-    "@types/blessed" "^0.1.17"
-    abstract-syntax-tree "^2.17.2"
-    acorn-loose "^8.0.2"
-    aggregation "^1.2.6"
-    app-root-path "^3.0.0"
-    astring "^1.7.0"
-    axios "^0.21.0"
-    blessed "^0.1.81"
-    chalk "^4.1.0"
-    chokidar "^3.5.1"
-    cli-cursor "^3.1.0"
-    cli-highlight "^2.1.9"
-    clipboardy "^2.3.0"
-    console-clear "^1.1.1"
-    copy-paste "^1.3.0"
-    copy-to "^2.0.1"
-    crypto-js "^4.0.0"
-    css "^3.0.0"
-    csso "^4.2.0"
-    custom-event "^1.0.1"
-    depcheck "^1.4.0"
-    dependency-tree "^8.0.0"
-    domready "^1.0.8"
-    download-file "^0.1.5"
-    downloads-folder "^3.0.1"
-    esbuild "^0.8.43"
-    exec-php "0.0.5"
-    express "^4.17.1"
-    fast-safe-stringify "^2.0.7"
-    fastdom "^1.0.9"
-    filesize "^6.1.0"
-    find-in-files "^0.5.0"
-    find-package-json "^1.2.0"
-    fkill "^7.0.1"
-    fmt-obj "^2.0.0"
-    form-serialize "^0.7.2"
-    fs-extra "^9.1.0"
-    func-to-classes "^1.0.0"
-    fuse.js "^6.4.3"
-    get-folder-size "^2.0.1"
-    glob "^7.1.6"
-    glob-all "^3.2.1"
-    glob-parent "^5.1.2"
-    handlebars "^4.7.6"
-    hotkeys-js "^3.8.1"
-    in-viewport "^3.6.0"
-    inline-style-prefixer "^6.0.0"
-    inquirer "^7.3.3"
-    inspirational-quotes "^1.0.8"
-    ip "^1.1.5"
-    is-class "0.0.9"
-    is-equal "^1.6.1"
-    is-glob "^4.0.1"
-    is-plain-object "^5.0.0"
-    is-valid-path "^0.1.1"
-    jest-useragent-mock "^0.1.1"
-    jsdom "^16.4.0"
-    json-cyclic "^1.0.2"
-    keypress "^0.2.1"
-    lit-html "^1.3.0"
-    lodash "^4.17.21"
-    lodash.clone "^4.5.0"
-    lodash.clonedeep "^4.5.0"
-    make-dir "^3.1.0"
-    marked "^1.2.7"
-    micromatch "^4.0.2"
-    minimatch "^3.0.4"
-    mobile-detect "^1.4.5"
-    neo-blessed "^0.2.0"
-    node-ipc "^9.1.3"
-    node-machine-id "^1.1.12"
-    node-notifier "^8.0.1"
-    object-encode "^1.0.2"
-    ora "^5.4.0"
-    param-case "^3.0.4"
-    parse-es6-imports "^1.0.1"
-    postcss-preset-env "^6.7.0"
-    prepend-file "^2.0.0"
-    pretty-format "^26.6.2"
-    promised-handlebars "^2.0.1"
-    ps-list "^7.2.0"
-    query-ast "^1.0.3"
-    resolve "^1.20.0"
-    sass "^1.30.0"
-    scss-parser "^1.0.4"
-    search-query-parser "^1.5.5"
-    sprintf-js "^1.1.2"
-    stack-trace "^0.0.10"
-    strip-ansi "^6.0.0"
-    strip-css-comments "^4.1.0"
-    striptags "^3.1.1"
-    temp-dir "^2.0.0"
-    terminal-kit "^1.44.0"
-    tmp "^0.2.1"
-    to-regex "^3.0.2"
-    typescript "^4.2.3"
-    uniqid "^5.2.0"
-    url-parse "^1.4.7"
-
 "@cronvel/get-pixels@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@cronvel/get-pixels/-/get-pixels-3.4.0.tgz#697cd691c16bbb8b29ed596da73fd6a7e9a2f34d"
@@ -3928,7 +3610,12 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001196, caniuse-lite@^1.0.30001208:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001196:
+  version "1.0.30001214"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001214.tgz#70f153c78223515c6d37a9fde6cd69250da9d872"
+  integrity sha512-O2/SCpuaU3eASWVaesQirZv1MSjUNOvmugaD8zNSJqw6Vv5SGwoOpA9LJs3pNPfM745nxqPvfZY3MQKY4AKHYg==
+
+caniuse-lite@^1.0.30001208:
   version "1.0.30001211"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001211.tgz#be40d528bb10272eba0037a88adc40054810f8e2"
   integrity sha512-v3GXWKofIkN3PkSidLI5d1oqeKNsam9nQkqieoMhP87nxOY0RPDC8X2+jcv8pjV4dRozPLSoMqNii9sDViOlIg==
@@ -4280,9 +3967,9 @@ code-point-at@^1.0.0:
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
 codemirror@^5.58.2:
-  version "5.60.0"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.60.0.tgz#00a8cfd287d5d8737ceb73987f04aee2fe5860da"
-  integrity sha512-AEL7LhFOlxPlCL8IdTcJDblJm8yrAGib7I+DErJPdZd4l6imx8IMgKK3RblVgBQqz3TZJR4oknQ03bz+uNjBYA==
+  version "5.61.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.61.0.tgz#318e5b034a707207948b92ffc2862195e8fdb08e"
+  integrity sha512-D3wYH90tYY1BsKlUe0oNj2JAhQ9TepkD51auk3N7q+4uz7A/cgJ5JsWHreT0PqieW1QhOuqxQ2reCXV1YXzecg==
 
 collect-v8-coverage@^1.0.0:
   version "1.0.1"
@@ -6542,9 +6229,9 @@ filesize@^3.6.0:
   integrity sha512-7KjR1vv6qnicaPMi1iiTcI85CyYwRO/PSFCu6SvqL8jN2Wjt/NIYQTFtFs7fSDCYOstUkEWIQGFUg5YZQfjlcg==
 
 filesize@^6.1.0:
-  version "6.2.5"
-  resolved "https://registry.yarnpkg.com/filesize/-/filesize-6.2.5.tgz#ee4de0e71ba03f1d6814a40085249343ccfc7ac3"
-  integrity sha512-JkM1y2+IpnEwp3pbXOUXR+9ytuZE07ZnWb/OR0H/WOSkjWASpmXgC0ZBIs4/SAYq9wHqExeQxcYNoJKf6s0RCg==
+  version "6.2.6"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-6.2.6.tgz#ab3b18aea4eb8db0f7fadba6d0b5ec5ec020305a"
+  integrity sha512-329LZkP3cIi17Eha17gaMEtgl1IJJG/zmv5NIjk6BECybiO+88D970mp2ke7U96DT0h3NT2wimXo/XrdL+7qbQ==
 
 filing-cabinet@^3.0.0:
   version "3.0.0"
@@ -11763,6 +11450,13 @@ postcss-extend-rule@^2.0.0:
     postcss "^6.0.22"
     postcss-nesting "^5.0.0"
 
+postcss-fail-on-warn@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-fail-on-warn/-/postcss-fail-on-warn-0.1.0.tgz#2ac582c12870dc5902334bb2dd3043baf68bae38"
+  integrity sha512-Mq79GMWIu5RT7JPlCCkSO5tmJsxVnjn7YGe8mSJwvkB2VjpUTiyT+wPVX85rLePb9/fbfOqer6fpJbvhbyS0cw==
+  dependencies:
+    postcss "^7.0.6"
+
 postcss-focus-visible@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/postcss-focus-visible/-/postcss-focus-visible-4.0.0.tgz#477d107113ade6024b14128317ade2bd1e17046e"
@@ -13810,9 +13504,9 @@ sass-lookup@^3.0.0:
     commander "^2.16.0"
 
 sass@^1.29.0, sass@^1.30.0:
-  version "1.32.10"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.10.tgz#d40da4e20031b450359ee1c7e69bc8cc89569241"
-  integrity sha512-Nx0pcWoonAkn7CRp0aE/hket1UP97GiR1IFw3kcjV3pnenhWgZEWUf0ZcfPOV2fK52fnOcK3JdC/YYZ9E47DTQ==
+  version "1.32.11"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.11.tgz#b236b3ea55c76602c2ef2bd0445f0db581baa218"
+  integrity sha512-O9tRcob/fegUVSIV1ihLLZcftIOh0AF1VpKgusUfLqnb2jQ0GLDwI5ivv1FYWivGv8eZ/AwntTyTzjcHu0c/qw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 
@@ -14360,9 +14054,9 @@ sprintf-js@~1.0.2:
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
 srcset@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/srcset/-/srcset-3.0.0.tgz#8afd8b971362dfc129ae9c1a99b3897301ce6441"
-  integrity sha512-D59vF08Qzu/C4GAOXVgMTLfgryt5fyWo93FZyhEWANo0PokFz/iWdDe13mX3O5TRf6l8vMTqckAfR4zPiaH0yQ==
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/srcset/-/srcset-3.0.1.tgz#3a09637782e71ded70126320e71b8eb92ce2ad6c"
+  integrity sha512-MM8wDGg5BQJEj94tDrZDrX9wrC439/Eoeg3sgmVLPMjHgrAFeXAKk3tmFlCbKw5k+yOEhPXRpPlRcisQmqWVSQ==
 
 sshpk@^1.7.0:
   version "1.16.1"

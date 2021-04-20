@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
 
 /**
@@ -35,7 +35,7 @@ export interface ISLogAdapterCtorSettings {
 }
 export interface ISLogAdapterSettings {}
 
-export default class SLogAdapter {
+export default class SLogAdapter extends __SClass {
   /**
    * @name          logAdapterSettings
    * @type          ISLogAdapterSettings

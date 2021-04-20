@@ -1,7 +1,7 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SDocblockRenderer from './SDocblockRenderer';
 
-import { ISDocblock } from '@coffeekraken/sugar/shared/docblock/SDocblock';
+import { ISDocblock } from '@coffeekraken/s-docblock';
 
 /**
  * @name            SDocblockHtmlRenderer

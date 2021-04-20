@@ -1,4 +1,4 @@
-import __md5 from '../../../../../shared/crypt/md5';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
 export default {
   id: 'gravatar',

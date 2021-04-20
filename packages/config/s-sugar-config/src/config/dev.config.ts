@@ -82,27 +82,27 @@ export default {
      * @name                primary
      * @namespace           config.terminal.colors
      * @type                Color
-     * @default             #343a43
+     * @default             #ffdc89
      *
      * Specify the "primary" terminal color value
      *
      * @since               2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    primary: '[config.terminal.colors.yellow]',
+    primary: '#ffdc89',
 
     /**
      * @name                secondary
      * @namespace           config.terminal.colors
      * @type                Color
-     * @default             #343a43
+     * @default             #65c1cd
      *
      * Specify the "secondary" terminal color value
      *
      * @since               2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    secondary: '[config.terminal.colors.cyan]',
+    secondary: '#65c1cd',
 
     /**
      * @name                grey
@@ -121,14 +121,14 @@ export default {
      * @name                gray
      * @namespace           config.terminal.colors
      * @type                Color
-     * @default             [config.terminal.colors.grey]
+     * @default             #e2e5e9
      *
      * Specify the "gray" terminal color value
      *
      * @since               2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    gray: '[config.terminal.colors.grey]',
+    gray: '#e2e5e9',
 
     /**
      * @name                black

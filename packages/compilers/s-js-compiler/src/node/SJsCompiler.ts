@@ -249,6 +249,13 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         };
 
         pool.on('files', async (files) => {
+          if (params.watch) {
+            emit('log', {
+              value: `<blue>[watch]</blue> Watching for changes...`
+            });
+            return;
+          }
+
           const duration = new __SDuration();
 
           files = Array.isArray(files) ? files : [files];

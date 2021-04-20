@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const packageRoot_1 = __importDefault(require("../node/path/packageRoot"));
+const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
 exports.default = {
     /**
      * @name           sFileClassesMap
@@ -26,4 +26,4 @@ exports.default = {
         '*.svelte': `${packageRoot_1.default(__dirname)}/src/node/svelte/SSvelteFile`
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMkVBQXFEO0FBRXJELGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsZUFBZSxFQUFFO1FBQ2YsWUFBWSxFQUFFLEdBQUcscUJBQWEsQ0FBQyxTQUFTLENBQUMsNEJBQTRCO1FBQ3JFLFlBQVksRUFBRSxHQUFHLHFCQUFhLENBQUMsU0FBUyxDQUFDLHNCQUFzQjtRQUMvRCxZQUFZLEVBQUUsR0FBRyxxQkFBYSxDQUFDLFNBQVMsQ0FBQyw4QkFBOEI7UUFDdkUsZUFBZSxFQUFFLEdBQUcscUJBQWEsQ0FBQyxTQUFTLENBQUMsMEJBQTBCO1FBQ3RFLFVBQVUsRUFBRSxHQUFHLHFCQUFhLENBQUMsU0FBUyxDQUFDLDhCQUE4QjtLQUN0RTtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEZBQXNFO0FBRXRFLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsZUFBZSxFQUFFO1FBQ2YsWUFBWSxFQUFFLEdBQUcscUJBQWEsQ0FBQyxTQUFTLENBQUMsNEJBQTRCO1FBQ3JFLFlBQVksRUFBRSxHQUFHLHFCQUFhLENBQUMsU0FBUyxDQUFDLHNCQUFzQjtRQUMvRCxZQUFZLEVBQUUsR0FBRyxxQkFBYSxDQUFDLFNBQVMsQ0FBQyw4QkFBOEI7UUFDdkUsZUFBZSxFQUFFLEdBQUcscUJBQWEsQ0FBQyxTQUFTLENBQUMsMEJBQTBCO1FBQ3RFLFVBQVUsRUFBRSxHQUFHLHFCQUFhLENBQUMsU0FBUyxDQUFDLDhCQUE4QjtLQUN0RTtDQUNGLENBQUMifQ==

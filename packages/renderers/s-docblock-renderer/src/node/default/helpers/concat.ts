@@ -1,5 +1,3 @@
-import __md5 from '../../../../../shared/crypt/md5';
-
 export default {
   id: 'concat',
   args: {},

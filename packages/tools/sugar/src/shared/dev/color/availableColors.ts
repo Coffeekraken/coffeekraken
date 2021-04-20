@@ -25,10 +25,23 @@ export default function availableColors(
     excludeBasics: false,
     ...(settings ?? {})
   };
-  let colors = Object.keys(__sugarConfig('dev.colors'));
 
+  const _colors = [
+    'yellow',
+    'cyan',
+    'green',
+    'magenta',
+    'red',
+    'blue',
+    'primary',
+    'secondary',
+    'grey',
+    'gray'
+  ];
+
+  let colors = _colors;
   if (settings.excludeBasics) {
-    colors = colors.filter((c) => {
+    colors = _colors.filter((c) => {
       return c !== 'white' && c !== 'black' && c !== 'grey' && c !== 'gray';
     });
   }

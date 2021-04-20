@@ -78,26 +78,26 @@ exports.default = {
          * @name                primary
          * @namespace           config.terminal.colors
          * @type                Color
-         * @default             #343a43
+         * @default             #ffdc89
          *
          * Specify the "primary" terminal color value
          *
          * @since               2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        primary: '[config.terminal.colors.yellow]',
+        primary: '#ffdc89',
         /**
          * @name                secondary
          * @namespace           config.terminal.colors
          * @type                Color
-         * @default             #343a43
+         * @default             #65c1cd
          *
          * Specify the "secondary" terminal color value
          *
          * @since               2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        secondary: '[config.terminal.colors.cyan]',
+        secondary: '#65c1cd',
         /**
          * @name                grey
          * @namespace           config.terminal.colors
@@ -114,14 +114,14 @@ exports.default = {
          * @name                gray
          * @namespace           config.terminal.colors
          * @type                Color
-         * @default             [config.terminal.colors.grey]
+         * @default             #e2e5e9
          *
          * Specify the "gray" terminal color value
          *
          * @since               2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        gray: '[config.terminal.colors.grey]',
+        gray: '#e2e5e9',
         /**
          * @name                black
          * @namespace           config.terminal.colors
@@ -148,4 +148,4 @@ exports.default = {
         white: '#e2e5e9'
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGV2LmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRldi5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE1BQU0sRUFBRTtRQUNOOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsU0FBUztRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLFNBQVM7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFNBQVM7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxTQUFTO1FBRWxCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsU0FBUztRQUVkOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsU0FBUztRQUVmOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsaUNBQWlDO1FBRTFDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxTQUFTLEVBQUUsK0JBQStCO1FBRTFDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsU0FBUztRQUVmOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsK0JBQStCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsU0FBUztRQUVoQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFNBQVM7S0FDakI7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGV2LmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRldi5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE1BQU0sRUFBRTtRQUNOOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsU0FBUztRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLFNBQVM7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFNBQVM7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxTQUFTO1FBRWxCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsU0FBUztRQUVkOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsU0FBUztRQUVmOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsU0FBUztRQUVsQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLFNBQVM7UUFFcEI7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxTQUFTO1FBRWY7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxTQUFTO1FBRWY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBRWhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsU0FBUztLQUNqQjtDQUNGLENBQUMifQ==

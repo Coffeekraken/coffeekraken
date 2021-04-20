@@ -3,12 +3,11 @@ import __minimatch from 'minimatch';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __SClass, { ISClass } from '@coffeekraken/s-class';
 import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __parseAndFormatLog from '@coffeekraken/sugar/shared/log/parseAndFormatLog';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 
-import { ILog } from '@coffeekraken/sugar/shared/log/log';
+import __SLog, { ILog } from '@coffeekraken/s-log';
 
 export interface ISStdioCtorSettings {
   stdio?: ISStdioSettings;
@@ -18,6 +17,7 @@ export interface ISStdioSettings {
   events: string[];
   filter: typeof Function;
   processor: typeof Function;
+  mapTypesToEvents: Record<string, string[]>;
 }
 
 export interface ISStdioCtor {
@@ -184,10 +184,10 @@ class SStdio extends __SClass implements ISStdio {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  // static new(sources, stdio: any = 'inherit', settings = {}) {
-  //   const n = require('./new').default;
-  //   return n(sources, stdio, settings);
-  // }
+  static new(sources, stdio: any = 'inherit', settings = {}) {
+    const n = require('./new').default;
+    return n(sources, stdio, settings);
+  }
 
   /**
    * @name      stdioSettings
@@ -344,26 +344,27 @@ class SStdio extends __SClass implements ISStdio {
       (data, metas) => {
         if (data === undefined || data === null) return;
 
-        // // handle the type depending on the passed stack
-        // const types = Object.keys(set.mapTypesToEvents);
-        // for (let i = 0; i < types.length; i++) {
-        //   const stacks = set.mapTypesToEvents[types[i]];
-        //   const stacksGlob =
-        //     Array.isArray(stacks) && stacks.length
-        //       ? `*(${stacks.join('|')})`
-        //       : stacks;
-        //   if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
-        //     if (typeof data !== 'object') {
-        //       data = {
-        //         type: types[i],
-        //         value: data
-        //       };
-        //     } else if (!data.type) {
-        //       data.type = types[i];
-        //     }
-        //     break;
-        //   }
-        // }
+        // handle the type depending on the passed stack
+        const types = Object.keys(set.mapTypesToEvents);
+        for (let i = 0; i < types.length; i++) {
+          const stacks = set.mapTypesToEvents[types[i]];
+          const stacksGlob =
+            Array.isArray(stacks) && stacks.length
+              ? `*(${stacks.join('|')})`
+              : stacks;
+          // @ts-ignore
+          if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
+            if (typeof data !== 'object') {
+              data = {
+                type: types[i],
+                value: data
+              };
+            } else if (!data.type) {
+              data.type = types[i];
+            }
+            break;
+          }
+        }
 
         // save metas into logObj
         data.metas = metas;
@@ -427,7 +428,7 @@ class SStdio extends __SClass implements ISStdio {
         // console.log(log.type);
       }
 
-      log = __parseAndFormatLog(log);
+      log = __SLog.parseAndFormatLog(log);
 
       // get the correct component to pass to the _log method
       const componentObj = (<any>this).constructor.registeredComponents[

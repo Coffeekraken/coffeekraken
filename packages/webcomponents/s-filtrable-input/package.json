@@ -1,7 +1,7 @@
 {
   "name": "@coffeekraken/s-filtrable-input",
   "type": "webcomponent",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Filtrable input",
   "homepage": "https://coffeekraken.io",
   "main": "src/js/index.js",
@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "workspace:*/*",
+    "@coffeekraken/sugar": "^2.0.0",
     "aggregation": "^1.2.6"
   }
 }

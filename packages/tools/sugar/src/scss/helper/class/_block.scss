@@ -1,6 +1,6 @@
 /**
  * @name              helper-block-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "block" related helper classes.
@@ -17,7 +17,7 @@
   @if class-match-namespace('sugar.helper.block.align.center') {
     /**
       * @name 		#{sel(block-center)}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.block.align.center
       * @type        class
       *

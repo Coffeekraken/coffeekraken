@@ -3,7 +3,7 @@ import __set from './set';
 
 /**
  * @name                toJson
- * @namespace           sugar.shared.object
+ * @namespace            shared.object
  * @type                Function
  *
  * Convert class instances to plain JSON object

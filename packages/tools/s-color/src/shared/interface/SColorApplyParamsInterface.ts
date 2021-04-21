@@ -76,6 +76,13 @@ class SColorApplyParamsInterface extends __SInterface {
       alias: 'l',
       description:
         'The amount of lightness (of the sky of the angels) to apply between 0-100'
+    },
+    invert: {
+      type: 'Boolean',
+      default: false,
+      alias: 'i',
+      description:
+        'Specify if you want to invert the color to keep a good contrast ratio with a background for example'
     }
   };
 }

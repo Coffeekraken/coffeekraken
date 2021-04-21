@@ -4,7 +4,7 @@ import __packageRoot from '../../path/packageRoot';
 
 /**
  * @name            ResolveSettingsInterface
- * @namespace       sugar.node.module.interface
+ * @namespace            node.module.interface
  * @type            Class
  * @extends         SInterface
  *

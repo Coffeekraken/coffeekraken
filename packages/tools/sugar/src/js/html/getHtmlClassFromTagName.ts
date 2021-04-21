@@ -5,7 +5,7 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
 
 /**
  * @name            getHtmlClassFromTagName
- * @namespace       sugar.js.html
+ * @namespace            js.html
  * @type            Function
  * @stable
  *

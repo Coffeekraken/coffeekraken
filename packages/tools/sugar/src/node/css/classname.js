@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 /**
  * @name            classname
- * @namespace       sugar.node.css
+ * @namespace            node.css
  * @type            Function
  * @status              beta
  *

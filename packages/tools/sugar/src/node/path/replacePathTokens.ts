@@ -7,7 +7,7 @@ import __distDir from './distDir';
 
 /**
  * @name            replacePathTokens
- * @namespace       sugar.node.path
+ * @namespace            node.path
  * @type            Function
  *
  * This function take as parameter either a path string, or an array of paths

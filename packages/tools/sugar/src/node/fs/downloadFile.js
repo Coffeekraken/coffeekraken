@@ -9,7 +9,7 @@ const path_1 = __importDefault(require("path"));
 const download_file_1 = __importDefault(require("download-file"));
 /**
  * @name              downloadFile
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type              Function
  * @stable
  *

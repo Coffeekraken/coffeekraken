@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const upperFirst_1 = __importDefault(require("../string/upperFirst"));
     /**
      * @name          typeof
-     * @namespace          sugar.js.value
+     * @namespace            js.value
      * @type          Function
      * @status              beta
      *

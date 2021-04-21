@@ -5,7 +5,7 @@ import __stripCssComments from 'strip-css-comments';
 
 /**
  * @name          stripCssComments
- * @namespace     sugar.js.css
+ * @namespace            js.css
  * @type          Function
  * @status              wip
  *

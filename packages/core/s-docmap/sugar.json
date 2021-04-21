@@ -1,12 +1,20 @@
 {
+  "config": {
+    "folders": [
+      {
+        "path": "./src/config",
+        "scope": "default"
+      }
+    ]
+  },
   "cli": [
     {
       "stack": "docmap",
       "description": "SDocMap CLI",
       "actions": {
-        "build": {
+        "generate": {
           "description": "Generate the docmap.json file by searching for source files with a @namespace defined",
-          "process": "./src/node/build.cli.js"
+          "process": "./src/node/generate.cli.js"
         },
         "find": {
           "description": "Search for a docmap entry",

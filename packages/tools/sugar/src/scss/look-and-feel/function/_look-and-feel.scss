@@ -2,7 +2,7 @@
 @use "sass:meta";
 /**
  * @name      look-and-feel
- * @namespace           sugar.scss.core.look-and-feel
+ * @namespace            scss.core.look-and-feel
  * @type    function
  *
  * Return a settings.look-and-feel stack value
@@ -24,7 +24,7 @@
   }
 
   // initial value
-  $value: setting("look-and-feel.#{$name}");
+  $value: setting('look-and-feel.#{$name}');
 
   // @if meta.type-of($value) != number {
   //   @error ('Your look-and-feel value "#{$name}" setted to "#{$value}" need to be a number in "em" or unitless');

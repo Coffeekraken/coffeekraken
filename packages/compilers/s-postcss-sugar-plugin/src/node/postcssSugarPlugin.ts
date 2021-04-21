@@ -29,10 +29,6 @@ const plugin = (opts = {}) => {
     if (mixinPath.match(/\.default$/)) {
       mixinPath = mixinPath.replace(/\.default$/, '');
     }
-    const mixinFile = __SFile.new(path);
-
-    console.log('register', `sugar.${mixinPath}`);
-
     mixinsAtRules[`sugar.${mixinPath}`] = (atRule) => {
       const intRes = mixinInterface.apply(atRule.params, {});
       if (intRes.hasIssues()) {
@@ -40,6 +36,7 @@ const plugin = (opts = {}) => {
       }
       const params = intRes.value;
       delete params.help;
+      console.log('MIN', params);
       return mixinFn(params, atRule);
     };
   });

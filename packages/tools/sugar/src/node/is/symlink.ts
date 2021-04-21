@@ -4,7 +4,7 @@ import __fs from 'fs';
 
 /**
  * @name            symlink
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type            Function
  * @stable
  *

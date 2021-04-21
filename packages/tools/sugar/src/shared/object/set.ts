@@ -5,7 +5,7 @@ import __unquote from '../string/unquote';
 
 /**
  * @name                                        set
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                                        Function
  * @stable
  *

@@ -5,7 +5,7 @@ import __autoCast from '../../shared/string/autoCast';
 
 /**
  * @name      styleString2Object
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

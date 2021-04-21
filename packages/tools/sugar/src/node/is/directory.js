@@ -8,7 +8,7 @@ const fs_1 = __importDefault(require("fs"));
 const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
 /**
  * @name            directory
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type            Function
  * @stable
  *

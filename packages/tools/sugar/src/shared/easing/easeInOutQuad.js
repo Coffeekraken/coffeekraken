@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name      easeInOutQuad
-     * @namespace           sugar.js.easing
+     * @namespace            js.easing
      * @type      Function
      * @stable
      *

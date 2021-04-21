@@ -2,7 +2,7 @@
 
 /**
  * @name              hsv2rgba
- * @namespace           sugar.js.color
+ * @namespace            js.color
  * @type              Function
  * @stable
  *

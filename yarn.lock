@@ -3788,7 +3788,7 @@ chownr@^2.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
 
-chroma-js@^2.1.0:
+chroma-js@^2.1.0, chroma-js@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.1.1.tgz#413c8fbcc4c0988dc7c77bb59c4de36573b8fe97"
   integrity sha512-gYc5/Dooshun2OikK7oY/hYnoEiZ0dxqRpXosEdYRYm505vU5mRsHFqIW062C9nMtr32DVErP6mlxuepo2kNkw==
@@ -11778,6 +11778,13 @@ postcss-nested@^4.1.0:
     postcss "^7.0.32"
     postcss-selector-parser "^6.0.2"
 
+postcss-nested@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/postcss-nested/-/postcss-nested-5.0.5.tgz#f0a107d33a9fab11d7637205f5321e27223e3603"
+  integrity sha512-GSRXYz5bccobpTzLQZXOnSOfKl6TwVr5CyAQJUPub4nuRJSOECK5AqurxVgmtxP48p0Kc/ndY/YyS1yqldX0Ew==
+  dependencies:
+    postcss-selector-parser "^6.0.4"
+
 postcss-nesting@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/postcss-nesting/-/postcss-nesting-5.0.0.tgz#973e3a7dc6426543affc0b0beb367c3b2a8d9923"
@@ -11785,7 +11792,7 @@ postcss-nesting@^5.0.0:
   dependencies:
     postcss "^6.0.21"
 
-postcss-nesting@^7.0.0:
+postcss-nesting@^7.0.0, postcss-nesting@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/postcss-nesting/-/postcss-nesting-7.0.1.tgz#b50ad7b7f0173e5b5e3880c3501344703e04c052"
   integrity sha512-FrorPb0H3nuVq0Sff7W2rnc3SmIcruVC6YwpcS+k687VxyxO33iE1amna7wHuRVzM8vfiYofXSBHNAZ3QhLvYg==

@@ -5,7 +5,7 @@ import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        ensureFileSync
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type          Function
  * @stable
  *

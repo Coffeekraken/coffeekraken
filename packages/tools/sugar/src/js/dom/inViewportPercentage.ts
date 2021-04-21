@@ -4,7 +4,7 @@ import __isVisible from './isVisible';
 
 /**
  * @name      inViewportPercentage
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

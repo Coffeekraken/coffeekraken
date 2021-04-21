@@ -4,7 +4,7 @@ import __globParent from 'glob-parent';
 
 /**
  * @name                extractNoneGlob
- * @namespace           sugar.js.glob
+ * @namespace            js.glob
  * @type                Function
  * @stable
  *

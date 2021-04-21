@@ -4,7 +4,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            cacheDir
- * @namespace               sugar.node.path
+ * @namespace            node.path
  * @type                            Function
  * @stable
  *

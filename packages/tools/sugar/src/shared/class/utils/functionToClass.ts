@@ -4,7 +4,7 @@ import __funcToClass from 'func-to-classes';
 
 /**
  * @name            functionToClass
- * @namespace       sugar.js.class.utils
+ * @namespace            js.class.utils
  * @type            Function
  * @stable
  *

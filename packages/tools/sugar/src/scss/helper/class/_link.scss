@@ -1,6 +1,6 @@
 /**
  * @name              helper-link-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "link" related helper classes.
@@ -17,7 +17,7 @@
   @if class-match-namespace('sugar.helper.link.stretched') {
     /**
     * @name 		#{sel(link-stretched
-   )} * @namespace           sugar.scss.helper.class
+   )} * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.link.stretched
     * @type        class
     *

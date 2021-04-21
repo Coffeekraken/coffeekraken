@@ -5,7 +5,7 @@ import __isNode from '../is/node';
 
 /**
  * @name                  packageRoot
- * @namespace             sugar.js.path
+ * @namespace            js.path
  * @type                  Function
  * @env                   development
  * @status              beta

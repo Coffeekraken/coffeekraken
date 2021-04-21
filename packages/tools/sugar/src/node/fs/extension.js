@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                    extension
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                    Function
  * @stable
  *

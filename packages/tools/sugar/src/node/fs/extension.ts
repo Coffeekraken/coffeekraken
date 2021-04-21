@@ -2,7 +2,7 @@
 
 /**
  * @name                    extension
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                    Function
  * @stable
  *

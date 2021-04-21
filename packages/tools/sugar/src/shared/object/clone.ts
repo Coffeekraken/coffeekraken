@@ -5,7 +5,7 @@ import __deepClone from 'lodash.clonedeep';
 
 /**
  * @name                clone
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                Function
  * @stable
  *

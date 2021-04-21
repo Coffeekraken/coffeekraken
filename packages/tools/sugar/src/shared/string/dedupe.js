@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const to_regex_1 = __importDefault(require("to-regex"));
     /**
      * @name        dedupe
-     * @namespace   sugar.js.string
+     * @namespace            js.string
      * @type        Function
      * @stable
      *

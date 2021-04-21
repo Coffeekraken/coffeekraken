@@ -6,13 +6,14 @@ import __glob from 'glob';
 import __SFile from '@coffeekraken/s-file';
 import __isGlob from '../../shared/is/glob';
 import __fs from 'fs';
+import __path from 'path';
 import __toRegex from 'to-regex';
 import __isDirectory from '../is/directory';
 import __expandGlob from '../../shared/glob/expandGlob';
 
 /**
  * @name            resolveGlob
- * @namespace       sugar.node.glob
+ * @namespace            node.glob
  * @type            Function
  * @status              beta
  *
@@ -45,7 +46,8 @@ function resolveGlob(globs, settings = {}) {
     {
       cwd: settings.cwd || process.cwd(),
       symlinks: true,
-      nodir: true
+      nodir: true,
+      contentRegExp: undefined
     },
     settings
   );
@@ -59,7 +61,7 @@ function resolveGlob(globs, settings = {}) {
 
     let cwd = settings.cwd,
       globPattern,
-      searchReg = settings.contentRegex;
+      searchReg = settings.contentRegExp;
 
     // make sure it's a glob pattern
     if (!__isGlob(glob) || __fs.existsSync(glob)) {
@@ -75,23 +77,12 @@ function resolveGlob(globs, settings = {}) {
     const splits = glob.split(':').map((split) => {
       return split.replace(`${cwd}/`, '').replace(cwd, '');
     });
-
+    if (splits[1]) {
+      searchReg = __toRegex(splits[1]);
+    }
     globPattern = splits[0];
 
-    splits.forEach((split) => {
-      if (split.substr(0, 1) === '/' && split.match(/.*\/[igmsuy]{0,6}]?/)) {
-        const regSplits = split.split('/').splice(1);
-        const regString = regSplits[0];
-        const flags = regSplits[regSplits.length - 1];
-        searchReg = __toRegex(regString, {
-          flags
-        });
-      } else if (__isGlob(split)) {
-        globPattern = split;
-      }
-    });
-
-    globPattern = `${cwd}/${globPattern}`;
+    globPattern = __path.resolve(cwd, globPattern);
     const finalPatterns = __expandGlob(globPattern);
 
     let pathes = [];

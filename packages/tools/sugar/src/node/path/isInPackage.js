@@ -8,7 +8,7 @@ const packageRoot_1 = __importDefault(require("./packageRoot"));
 const fs_1 = __importDefault(require("fs"));
 /**
  * @name                    isInPackage
- * @namespace           sugar.node.path
+ * @namespace            node.path
  * @type                    Function
  *
  * Return the path to either the first finded package root going up the folders, or the highest package root finded

@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const filesize_1 = __importDefault(require("filesize"));
 /**
  * @name                                    formatFileSize
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                                    Function
  * @stable
  *

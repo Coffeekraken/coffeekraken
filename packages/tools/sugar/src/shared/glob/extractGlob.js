@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const glob_parent_1 = __importDefault(require("glob-parent"));
     /**
      * @name                extractGlob
-     * @namespace           sugar.js.glob
+     * @namespace            js.glob
      * @type                Function
      * @stable
      *

@@ -9,7 +9,7 @@ import __SFile from '@coffeekraken/s-file';
 
 /**
  * @name            findUp
- * @namespace       sugar.node.fs
+ * @namespace            node.fs
  * @type            Function
  * @async
  *

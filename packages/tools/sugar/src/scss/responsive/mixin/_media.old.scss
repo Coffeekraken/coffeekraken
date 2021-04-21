@@ -2,38 +2,41 @@
 // Universal media mixin
 //
 $media-keywords: (
-  gecko: ".ua-gecko",
-  webkit: ".ua-webkit",
-  trident: "ua-trident",
-  blink: "ua-blink",
-  presto: "ua-presto",
-  chrome: ".ua-chrome",
-  safari: ".ua-safari",
-  firefox: ".ua-firefox",
-  opera: ".ua-opera",
-  ie: ".ua-ie",
-  mobile: ".ua-mobile",
-  tablet: ".ua-tablet",
-  desktop: ".ua-desktop",
-  iphone: ".ua-mobile-iphone",
-  ipad: ".ua-mobile-ipad",
-  ios: ".ua-ios",
-  osx: ".ua-mac_os_x",
-  windows: ".ua-windows",
-  linux: ".ua-linux",
-  android: ".ua-android",
-  webos: ".ua-webos",
-  blackberry: ".ua-blackberry"
+  gecko: '.ua-gecko',
+  webkit: '.ua-webkit',
+  trident: 'ua-trident',
+  blink: 'ua-blink',
+  presto: 'ua-presto',
+  chrome: '.ua-chrome',
+  safari: '.ua-safari',
+  firefox: '.ua-firefox',
+  opera: '.ua-opera',
+  ie: '.ua-ie',
+  mobile: '.ua-mobile',
+  tablet: '.ua-tablet',
+  desktop: '.ua-desktop',
+  iphone: '.ua-mobile-iphone',
+  ipad: '.ua-mobile-ipad',
+  ios: '.ua-ios',
+  osx: '.ua-mac_os_x',
+  windows: '.ua-windows',
+  linux: '.ua-linux',
+  android: '.ua-android',
+  webos: '.ua-webos',
+  blackberry: '.ua-blackberry'
 );
 @for $idx from 6 through 20 {
-  $media-keywords: map-merge($media-keywords, (
-    "ie#{$idx}": ".ua-ie-#{$idx}"
-  ));
+  $media-keywords: map-merge(
+    $media-keywords,
+    (
+      'ie#{$idx}': '.ua-ie-#{$idx}'
+    )
+  );
 }
 
 /**
  * @name      media
- * @namespace           sugar.scss.responsive
+ * @namespace            scss.responsive
  * @type      mixin
  *
  * Easy to use media query mixin that support cssua classes to target specific browsers
@@ -81,8 +84,8 @@ $media-keywords: (
   $system: null
 ) {
   $screen: test-argument(
-    "Sugar.media",
-    "screen",
+    'Sugar.media',
+    'screen',
     (
       screen,
       handheld,
@@ -97,65 +100,65 @@ $media-keywords: (
     ),
     $screen
   );
-  $min-width: test-argument("Sugar.media", "min-width", number, $min-width);
-  $max-width: test-argument("Sugar.media", "max-width", number, $max-width);
-  $min-height: test-argument("Sugar.media", "min-height", number, $min-height);
-  $max-height: test-argument("Sugar.media", "max-height", number, $max-height);
+  $min-width: test-argument('Sugar.media', 'min-width', number, $min-width);
+  $max-width: test-argument('Sugar.media', 'max-width', number, $max-width);
+  $min-height: test-argument('Sugar.media', 'min-height', number, $min-height);
+  $max-height: test-argument('Sugar.media', 'max-height', number, $max-height);
   $orientation: test-argument(
-    "Sugar.media",
-    "orientation",
+    'Sugar.media',
+    'orientation',
     (landscape, portrait),
     $orientation
   );
   $resolution: test-argument(
-    "Sugar.media",
-    "resolution",
-    "number|list-number|list",
+    'Sugar.media',
+    'resolution',
+    'number|list-number|list',
     $resolution
   );
   $engine: test-argument(
-    "Sugar.media",
-    "engine",
-    "string|list-string",
+    'Sugar.media',
+    'engine',
+    'string|list-string',
     $engine
   );
   $device: test-argument(
-    "Sugar.media",
-    "device",
-    "string|list-string",
+    'Sugar.media',
+    'device',
+    'string|list-string',
     $device
   );
   $browser: test-argument(
-    "Sugar.media",
-    "browser",
-    "string|list-string",
+    'Sugar.media',
+    'browser',
+    'string|list-string',
     $browser
   );
   $system: test-argument(
-    "Sugar.media",
-    "system",
-    "string|list-string",
+    'Sugar.media',
+    'system',
+    'string|list-string',
     $system
   );
 
-  $media: ("all");
+  $media: ('all');
   @if $screen {
     $media: list-append($media, $screen);
   }
   @if $orientation {
-    $media: list-append($media, "(orientation : #{$orientation})");
+    $media: list-append($media, '(orientation : #{$orientation})');
   }
   @if $min-width {
-    $media: list-append($media, "(min-width : #{$min-width})");
+    $media: list-append($media, '(min-width : #{$min-width})');
   }
   @if $max-width {
-    $media: list-append($media, "(max-width : #{$max-width})");
+    $media: list-append($media, '(max-width : #{$max-width})');
   }
   @if $min-height {
-    $media: list-append($media, "(min-height : #{$min-height})");
+    $media: list-append($media, '(min-height : #{$min-height})');
   }
   @if $max-height {
-    $media: list-append($media, "(max-height : #{$max-height})");
+    $media: list-append($media, '(max-height : #{$max-height})');
   }
 
   // resolution
@@ -163,13 +166,13 @@ $media-keywords: (
     $res: ();
     @each $r in $resolution {
       $r: '#{$r}';
-      $r: str-replace($r, "x");
+      $r: str-replace($r, 'x');
       $r: to-number($r);
       // check that the $r is now a proper integer
       @if is($r, integer) {
         $res: list-append(
           $res,
-          "(-webkit-min-device-pixel-ratio: #{$r}), (min-resolution: #{160 * $r}dpi)"
+          '(-webkit-min-device-pixel-ratio: #{$r}), (min-resolution: #{160 * $r}dpi)'
         );
       }
     }
@@ -179,11 +182,11 @@ $media-keywords: (
     // 		$res : append($res, map-get($media-keywords,$m));
     // 	}
     // }
-    $media: list-append($media, list-implode($res, ","));
+    $media: list-append($media, list-implode($res, ','));
   }
 
   // construct media querie
-  $med: list-implode($media, " and ");
+  $med: list-implode($media, ' and ');
 
   // construct refine
   $refine: ();
@@ -198,7 +201,7 @@ $media-keywords: (
   @if $browser {
     $browsers: (chrome, safari, opera, firefox, ie);
     @for $idx from 6 through 20 {
-      $browsers: list-append($browsers, "ie#{$idx}");
+      $browsers: list-append($browsers, 'ie#{$idx}');
     }
     @each $b in $browser {
       @if list-index($browsers, $b) {

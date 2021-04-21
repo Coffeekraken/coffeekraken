@@ -4,7 +4,7 @@ import _map from 'lodash/map';
 
 /**
  * @name      splitWords
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

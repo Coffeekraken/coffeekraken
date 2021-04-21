@@ -11,7 +11,7 @@ import __rgba2hsv from './rgba2hsv';
 
 /**
  * @name            parse
- * @namespace           sugar.js.color
+ * @namespace            js.color
  * @type            Function
  * @private
  * @stable

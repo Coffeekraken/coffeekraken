@@ -7,7 +7,7 @@ import scrollTo from './scrollTo';
 
 /**
  * @name        autoScrollAnchorLinks
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Function
  * @stable
  *

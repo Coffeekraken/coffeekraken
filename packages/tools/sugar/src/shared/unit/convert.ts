@@ -7,7 +7,7 @@ import __px2rem from './px2rem';
 
 /**
  * @name                  convert
- * @namespace           sugar.js.unit
+ * @namespace            js.unit
  * @type                  Function
  * @stable
  *

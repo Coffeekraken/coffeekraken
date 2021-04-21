@@ -1,6 +1,6 @@
 /**
  * @name            mediaQueryString
- * @namespace       sugar.scss.responsive.function
+ * @namespace            scss.responsive.function
  * @type            Function
  *
  * This function return the media query string depending on the query asked.
@@ -96,7 +96,7 @@
         $queryList: list-append($queryList, '(#{$key}: #{$value})');
       }
     }
-   
+
     // append the query list into the full queries list
     $fullQueriesList: list-append(
       $fullQueriesList,
@@ -105,5 +105,4 @@
   }
 
   @return #{list-implode($fullQueriesList, ',')};
-
 }

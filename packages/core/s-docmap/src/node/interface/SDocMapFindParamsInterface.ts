@@ -2,6 +2,7 @@
 
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
+import __SDocMapParamsInterface from './SDocMapParamsInterface';
 
 /**
  * @name                SDocMapSettingsInterface
@@ -17,44 +18,19 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 class SDocMapSettingsInterface extends __SInterface {
   static definition = {
-    cache: {
-      type: 'Boolean',
-      default: __sugarConfig('docMap.cache'),
-      level: 1
-    },
-    'build.globs': {
-      type: 'Array<String>',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __sugarConfig('docMap.build.globs'),
-      level: 1
-    },
-    'build.exclude': {
-      type: 'Object',
-      description:
-        'Specify some regexp used to exclude files from resulting docMap',
-      default: __sugarConfig('docMap.build.exclude'),
-      level: 1
-    },
-    'find.globs': {
+    ...__SDocMapParamsInterface.definition,
+    globs: {
       type: 'Array<String>',
       alias: 'i',
       description: 'docMap.json files glob pattern',
-      default: __sugarConfig('docMap.find.globs'),
+      default: __sugarConfig('docmap.find.globs'),
       level: 1
     },
-    'find.exclude': {
+    exclude: {
       type: 'Object',
       description:
         'Specify some regexp used to exclude files from searching docMaps',
-      default: __sugarConfig('docMap.find.exclude'),
-      level: 1
-    },
-    'save.path': {
-      type: 'String',
-      alias: 'p',
-      description: 'Output file path',
-      default: __sugarConfig('docMap.save.path'),
+      default: __sugarConfig('docmap.find.exclude'),
       level: 1
     }
   };

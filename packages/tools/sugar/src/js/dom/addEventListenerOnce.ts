@@ -5,7 +5,7 @@ import __addEventListener from './addEventListener';
 
 /**
  * @name        addEventListenerOnce
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

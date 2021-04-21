@@ -1,12 +1,11 @@
 @mixin classes-icons-icons() {
-
   @if class-match-namespace('sugar.component.icon') {
     $icons: setting('classes.generate.icons');
 
     @each $name in $icons {
       /**
       * @name 		#{sel(icon-#{$name})}
-      * @namespace       sugar.scss.core.class.icons
+      * @namespace            scss.core.class.icons
       * @type        class
       *
       * ```.icon-#{$name}``` icon class
@@ -17,13 +16,9 @@
       * @since       2.0.0
       * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{sel(icon-#{$name})
-    }
-
-      {
-      @include icon($name);
+      .#{sel(icon-#{$name}) } {
+        @include icon($name);
+      }
     }
   }
-}
-
 }

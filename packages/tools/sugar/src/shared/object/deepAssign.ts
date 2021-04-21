@@ -3,7 +3,7 @@ import __isPlainObject from '../is/plainObject';
 import __clone from './clone';
 /**
  * @name            deepAssign
- * @namespace       sugar.js.object
+ * @namespace            js.object
  * @type            Function
  *
  * This function take as first parameter the object you want to assign others to,

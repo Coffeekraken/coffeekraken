@@ -5,7 +5,7 @@ import __uniqid from '../string/uniqid';
 
 /**
  * @name                      watch
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                      Function
  * @status              wip
  *

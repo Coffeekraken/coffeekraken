@@ -2,7 +2,7 @@ import __typeOf from '../value/typeof';
 
 /**
  * @name            map
- * @namespace       sugar.js.iterable
+ * @namespace            js.iterable
  * @type            Function
  *
  * This function take an iterable value like an Array, an Object, a Map, a String, an Integer, a Set, etc... and

@@ -1,6 +1,6 @@
 /**
  * @name        var-define
- * @namespace     sugar.scss.core.var
+ * @namespace            scss.core.var
  * @type          Function
  *
  * This mixin simply take a variable name (or doted path) and generate the css code to define this variable
@@ -14,17 +14,13 @@
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
- @function var-define($name, $value) {
-
+@function var-define($name, $value) {
   $name: var-name($name);
 
   @if map-get($__generated-vars, $name) == null {
-
     // add the generated var name into the list
     $__generated-vars: map-set($__generated-vars, $name, $value) !global;
-
   }
 
   @return $name;
-
 }

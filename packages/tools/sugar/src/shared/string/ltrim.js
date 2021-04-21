@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        ltrim
-     * @namespace           sugar.js.string
+     * @namespace            js.string
      * @type      Function
      * @stable
      *

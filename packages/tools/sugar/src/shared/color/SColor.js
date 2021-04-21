@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const convert_1 = __importDefault(require("./convert"));
     /**
      * @name 		SColor
-     * @namespace           sugar.js.color
+     * @namespace            js.color
      * @type    Class
      * @status              beta
      *

@@ -3,7 +3,7 @@
 
 /**
  * @name    color-modifier
- * @namespace           sugar.scss.core.color
+ * @namespace            scss.core.color
  * @type      function
  *
  * Return the color in a modifier list
@@ -18,7 +18,7 @@
  */
 @function color-modifier($modifiers, $default: null) {
   // get the colors registered as list
-  $colors: map.keys(setting("colors"));
+  $colors: map.keys(setting('colors'));
   @each $modifier in $modifiers {
     @if is($modifier, color) {
       @return $modifier;

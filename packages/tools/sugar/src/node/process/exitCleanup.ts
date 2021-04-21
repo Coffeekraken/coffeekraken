@@ -7,7 +7,7 @@ import __minimatch from 'minimatch';
 
 /**
  * @name              exitCleanup
- * @namespace           sugar.node.process
+ * @namespace            node.process
  * @type              Function
  * @async
  * @status              wip

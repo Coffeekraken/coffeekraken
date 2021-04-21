@@ -4,7 +4,7 @@ import __blessed from 'blessed';
 
 /**
  * @name                innerWidth
- * @namespace           sugar.node.blessed.utils
+ * @namespace            node.blessed.utils
  * @type                Function
  *
  * This function simply returns you the actual inner width (width - left/right paddings)

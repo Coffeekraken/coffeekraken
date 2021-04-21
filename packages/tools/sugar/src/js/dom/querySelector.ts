@@ -6,7 +6,7 @@ import __closestNotVisible from './closestNotVisible';
 
 /**
  * @name      querySelector
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

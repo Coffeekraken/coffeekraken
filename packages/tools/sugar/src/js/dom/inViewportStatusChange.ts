@@ -7,7 +7,7 @@ import __whenOutOfViewport from './whenOutOfViewport';
 
 /**
  * @name      inViewportStatusChange
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

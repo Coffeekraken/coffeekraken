@@ -5,7 +5,7 @@ import __innerHtml from '../dom/innerHtml';
 
 /**
  * @name            syncDom
- * @namespace           sugar.js.socket
+ * @namespace            js.socket
  * @type            Function
  * @status        wip
  *
@@ -29,7 +29,7 @@ class SSocketDom {
   _settings = {
     /**
      * @name      settings.node
-     * @namespace           sugar.js.class
+     * @namespace            js.class
      * @type        HTMLElement
      *
      * The root node where the html contents will be injected if no node is passed with the event
@@ -57,7 +57,7 @@ class SSocketDom {
 
     /**
      * @name          settings.events
-     * @namespace           sugar.js.class
+     * @namespace            js.class
      * @type          Object
      *
      * Save the events scoped settings objects
@@ -176,7 +176,7 @@ class SSocketDom {
 
   /**
    * @name          emit
-   * @namespace           sugar.js.class
+   * @namespace            js.class
    * @type          Function
    *
    * Emit an event with an object containing some values to pass to the server
@@ -197,7 +197,7 @@ class SSocketDom {
 
   /**
    * @name          registerEvent
-   * @namespace           sugar.js.class
+   * @namespace            js.class
    * @type          Function
    *
    * Register a new event with an handler function that will handle the event content

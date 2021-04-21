@@ -3,7 +3,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            registerSFileClasses
- * @namespace       sugar.node.fs
+ * @namespace            node.fs
  * @type            Function
  *
  * This function is responsivle to register the SFile classes with their proper

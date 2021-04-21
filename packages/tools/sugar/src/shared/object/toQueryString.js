@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        toQueryString
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type      Function
      * @stable
      *

@@ -2,7 +2,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            availableColors
- * @namespace       sugar.shared.dev.colors
+ * @namespace            shared.dev.colors
  * @type            Function
  *
  * Return the list of color names you can access using the ```colorValue``` function.

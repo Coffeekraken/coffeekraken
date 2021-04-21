@@ -13,7 +13,7 @@
     const sprintf_js_1 = require("sprintf-js");
     /**
      * @name        sprintf
-     * @namespace           sugar.js.string
+     * @namespace            js.string
      * @type      Function
      * @stable
      *

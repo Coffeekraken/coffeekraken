@@ -1,6 +1,6 @@
 /**
  * @name        var-name
- * @namespace     sugar.scss.core.var
+ * @namespace            scss.core.var
  * @type          Function
  *
  * This function simply take a variable name (or doted path) and generate the sugar scope name for it
@@ -15,11 +15,9 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 @function var-name($name) {
-
   $name: str-replace($name, '--', '');
   $name: str_replace($name, 'sugar-', '');
   $name: str_replace($name, '.', '-');
   $name: '--sugar-#{$name}';
   @return $name;
-
 }

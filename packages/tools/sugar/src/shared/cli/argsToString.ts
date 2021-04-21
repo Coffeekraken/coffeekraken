@@ -7,7 +7,7 @@ import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                  argsToString
- * @namespace           sugar.js.cli
+ * @namespace            js.cli
  * @type                  Function
  * @status              beta
  *

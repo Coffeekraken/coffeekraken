@@ -10,7 +10,7 @@ import __packageRoot from '../path/packageRoot';
 
 /**
  * @name            linkPackages
- * @namespace       sugar.node.monorepo
+ * @namespace            node.monorepo
  * @type            Function
  * @async
  * @status              beta

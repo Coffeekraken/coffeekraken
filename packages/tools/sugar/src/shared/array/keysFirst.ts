@@ -4,7 +4,7 @@ import uniq from 'lodash/uniq';
 
 /**
  * @name        keysFirst
- * @namespace           sugar.js.array
+ * @namespace            js.array
  * @type      Function
  * @stable
  *

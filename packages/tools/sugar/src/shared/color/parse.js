@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const rgba2hsv_1 = __importDefault(require("./rgba2hsv"));
     /**
      * @name            parse
-     * @namespace           sugar.js.color
+     * @namespace            js.color
      * @type            Function
      * @private
      * @stable

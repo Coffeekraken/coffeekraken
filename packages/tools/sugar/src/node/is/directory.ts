@@ -5,7 +5,7 @@ import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name            directory
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type            Function
  * @stable
  *

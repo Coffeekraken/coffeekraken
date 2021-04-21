@@ -2,7 +2,7 @@
 
 /**
  * @name      easeOutQuad
- * @namespace           sugar.js.easing
+ * @namespace            js.easing
  * @type      Function
  * @stable
  *

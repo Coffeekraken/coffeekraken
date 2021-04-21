@@ -2,7 +2,7 @@
 @use 'sass:meta';
 /**
  * @name      map-get
- * @namespace           sugar.scss.core.map.function
+ * @namespace            scss.core.map.function
  * @type      function
  *
  * Get a value in the passed map using the passed key
@@ -27,7 +27,7 @@
   @each $part in $parts {
     $partNumber: to-number($part);
     @if $partNumber != false and map.has-key($value, $partNumber) {
-      $newValue: map.get($value, $partNumber)
+      $newValue: map.get($value, $partNumber);
     } @else {
       $newValue: map.get($value, $part);
     }

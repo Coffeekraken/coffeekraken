@@ -6,7 +6,7 @@ import __unique from '../array/unique';
 
 /**
  * @name                deepMerge
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                Function
  * @stable
  *

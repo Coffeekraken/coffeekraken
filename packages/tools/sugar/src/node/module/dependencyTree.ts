@@ -12,7 +12,7 @@ import __extractImport from './extractImport';
 
 /**
  * @name                dependencyTree
- * @namespace           sugar.node.module
+ * @namespace            node.module
  * @type                Function
  * @async
  *

@@ -2,7 +2,7 @@
 
 /**
  * @name 		                SEvent
- * @namespace           sugar.js.event
+ * @namespace            js.event
  * @type                    Class
  * @stable
  *

@@ -1,11 +1,10 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __SDocMap from '../../../docMap/SDocMap';
-import __page404 from '../../../template/pages/404';
-import __SDocblock from '../../../../shared/docblock/SDocblock';
-import __SDocblockHtmlRenderer from '../../../../shared/docblock/renderers/SDocblockHtmlRenderer';
-import __render from '../../../template/render';
+import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocblock from '@coffeekraken/s-docblock';
+import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
+import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
 
 /**
  * @name                doc
@@ -26,31 +25,37 @@ import __render from '../../../template/render';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+let _docmapJson;
 export default function doc(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
     const docMap = new __SDocMap();
     const namespace = req.path.replace('/doc/', '').trim();
-    const docMapJson = await docMap.read();
-    if (!docMapJson[namespace]) {
-      const html = await __page404({
+
+    if (!_docmapJson) {
+      _docmapJson = await docMap.read();
+    }
+
+    if (!_docmapJson[namespace]) {
+      const html = await page404({
         title: `Documentation "${namespace}" not found`,
         body: `The documentation "${namespace}" you requested does not exists...`
       });
       res.type('text/html');
       res.status(404);
-      res.send(html);
-      return reject(html);
+      res.send(html.value);
+      return reject(html.value);
     }
 
     // generate the docblocks
-    const docblock = new __SDocblock(docMapJson[namespace].path);
+    const docblock = new __SDocblock(_docmapJson[namespace].path);
 
     // render them into html
-    const htmlRenderer = new __SDocblockHtmlRenderer(docblock);
+    const htmlRenderer = new SDocblockHtmlRenderer(docblock);
     const html = await htmlRenderer.render();
 
     // render the proper template
-    const pageHtml = await __render('pages.doc', {
+    const docView = new __SViewRenderer('pages.doc');
+    const pageHtml = await docView.render({
       ...(res.templateData || {}),
       body: html
     });
@@ -58,7 +63,7 @@ export default function doc(req, res, settings = {}) {
     // _console.log(req);
     res.type('text/html');
     res.status(200);
-    res.send(pageHtml.content);
-    resolve(pageHtml.content);
+    res.send(pageHtml.value);
+    resolve(pageHtml.value);
   });
 }

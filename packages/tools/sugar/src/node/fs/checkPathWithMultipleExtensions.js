@@ -7,7 +7,7 @@ const extension_1 = __importDefault(require("./extension"));
 const fs_1 = __importDefault(require("fs"));
 /**
  * @name            checkPathWithMultipleExtensions
- * @namespace       sugar.node.fs
+ * @namespace            node.fs
  * @type            Function
  * @status          stable
  *

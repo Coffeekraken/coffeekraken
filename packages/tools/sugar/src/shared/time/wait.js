@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name            wait
-     * @namespace           sugar.js.time
+     * @namespace            js.time
      * @type            Function
      * @async
      * @stable

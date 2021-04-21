@@ -5,7 +5,7 @@ import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name            getColorFor
- * @namespace       sugar.shared.dev.color
+ * @namespace            shared.dev.color
  * @type            Function
  *
  * This function let you pass anything like an object, a string, etc... and get the same

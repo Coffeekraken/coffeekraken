@@ -1,6 +1,6 @@
 /**
  * @name            isTerminal
- * @namespace       sugar.js.is
+ * @namespace            js.is
  * @type            Function
  *
  * This function simply returns if the process runs inside a terminal or not

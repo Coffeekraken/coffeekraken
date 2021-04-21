@@ -4,7 +4,7 @@ import __toRegex from 'to-regex';
 
 /**
  * @name        dedupe
- * @namespace   sugar.js.string
+ * @namespace            js.string
  * @type        Function
  * @stable
  *

@@ -1,6 +1,6 @@
 /**
   * @name            button-classes
-  * @namespace       sugar.scss.component.button.class
+  * @namespace            scss.component.button.class
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some buttons.
@@ -37,7 +37,7 @@
     @if scope('bare') {
       /**
         * @name              .#{sel($name)}, .#{sel(#{tf-class()})} button
-        * @namespace         sugar.scss.component.button
+        * @namespace            scss.component.button
         * @type              Classname
         *
         * This class can be applied on any ```#{$name}``` component
@@ -56,7 +56,7 @@
       @each $size in $sizes {
         /**
           * @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} button.#{sel($size)}
-          * @namespace         sugar.scss.component.button.#{$size}
+          * @namespace            scss.component.button.#{$size}
           * @type              Classname
           *
           * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
@@ -81,7 +81,7 @@
     @if scope('style') {
       /**
         * @name              .#{sel($name)}, .#{sel(#{tf-class()})} button
-        * @namespace         sugar.scss.component.button
+        * @namespace            scss.component.button
         * @type              Classname
         *
         * This class can be applied on any ```#{$name}``` component
@@ -100,7 +100,7 @@
       @each $color in $colors {
         /**
           * @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} button.#{sel($color)}
-          * @namespace         sugar.scss.component.button.#{$color}
+          * @namespace            scss.component.button.#{$color}
           * @type              Classname
           *
           * This class can be applied on any ```#{$name}``` component to specify his color to ```#{$color}```

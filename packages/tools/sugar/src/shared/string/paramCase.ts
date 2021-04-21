@@ -4,7 +4,7 @@ import { paramCase } from 'param-case';
 
 /**
  * @name          paramCase
- * @namespace           sugar.js.string
+ * @namespace            js.string
  * @type          Function
  * @stable
  *

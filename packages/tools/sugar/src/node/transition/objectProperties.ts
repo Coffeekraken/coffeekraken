@@ -8,7 +8,7 @@ import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name              objectProperties
- * @namespace           sugar.node.transition
+ * @namespace            node.transition
  * @type              Function
  * @status              beta
  *

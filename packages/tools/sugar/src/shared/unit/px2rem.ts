@@ -2,7 +2,7 @@
 
 /**
  * @name                    px2rem
- * @namespace           sugar.js.unit
+ * @namespace            js.unit
  * @type                    Function
  * @stable
  *

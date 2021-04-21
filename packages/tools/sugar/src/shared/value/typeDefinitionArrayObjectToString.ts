@@ -2,7 +2,7 @@
 
 /**
  * @name          typeDefinitionArrayObjectToString
- * @namespace     sugar.js.value
+ * @namespace            js.value
  * @type          Function
  * @status              beta
  *

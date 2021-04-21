@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const set_1 = __importDefault(require("./set"));
     /**
      * @name                toJson
-     * @namespace           sugar.shared.object
+     * @namespace            shared.object
      * @type                Function
      *
      * Convert class instances to plain JSON object

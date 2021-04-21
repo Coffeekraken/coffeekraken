@@ -1,6 +1,6 @@
 /**
   * @name            paragraph-classes
-  * @namespace       sugar.scss.component.paragraph.class
+  * @namespace            scss.component.paragraph.class
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some paragraphs.
@@ -29,7 +29,7 @@
     @each $n in $names {
       /**
       * @name              .#{sel(#{$name}--#{$n})}, .#{sel(#{tf-class()})} #{sel('p.#{$n}', null)}
-      * @namespace         sugar.scss.component
+      * @namespace            scss.component
       * @type              Classname
       *
       * This class can be applied on any ```#{$name}``` component to specify his style

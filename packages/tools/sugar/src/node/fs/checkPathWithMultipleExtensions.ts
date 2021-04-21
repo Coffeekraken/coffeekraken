@@ -3,7 +3,7 @@ import __fs from 'fs';
 
 /**
  * @name            checkPathWithMultipleExtensions
- * @namespace       sugar.node.fs
+ * @namespace            node.fs
  * @type            Function
  * @status          stable
  *

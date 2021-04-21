@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const decycle_1 = __importDefault(require("./decycle"));
     /**
      * @name                              flatten
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type                              Function
      * @stable
      *

@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        isInteger
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type      Function
      * @stable
      *

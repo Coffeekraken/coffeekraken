@@ -4,7 +4,7 @@ import __isGlob from 'is-glob';
 
 /**
  * @name                                      isGlob
- * @namespace           sugar.js.is
+ * @namespace            js.is
  * @type                                      Function
  * @stable
  *

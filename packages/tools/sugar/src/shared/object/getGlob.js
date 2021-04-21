@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const deepize_1 = __importDefault(require("./deepize"));
     /**
      * @name                          getGlob
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type                          Function
      * @stable
      *

@@ -10,7 +10,7 @@ import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtens
 
 /**
  * @name            resolve
- * @namespace       sugar.node.module
+ * @namespace            node.module
  * @type            Function
  *
  * This function take as parameter a module path to resolve and returns back the

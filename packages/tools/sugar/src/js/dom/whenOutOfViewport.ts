@@ -8,7 +8,7 @@ import __closest from './closest';
 
 /**
  * @name      whenOutOfViewport
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

@@ -16,7 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const glob_1 = __importDefault(require("glob"));
 /**
  * @name            findPackages
- * @namespace       sugar.node.monorepo
+ * @namespace            node.monorepo
  * @type            Function
  * @async
  * @status              beta

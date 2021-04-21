@@ -4,7 +4,7 @@ import __parseAuthorString from './parseAuthorString';
 
 /**
  * @name            standardizeJson
- * @namespace       sugar.js.npm
+ * @namespace            js.npm
  * @type            Function
  * @status              beta
  *

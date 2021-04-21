@@ -4,7 +4,7 @@ import __uncamelize from '../../shared/string/uncamelize';
 
 /**
  * @name      styleObject2String
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

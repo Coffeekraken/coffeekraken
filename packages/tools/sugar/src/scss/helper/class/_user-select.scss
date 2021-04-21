@@ -1,6 +1,6 @@
 /**
  * @name              helper-user-select-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "user-select" related helper classes.
@@ -19,7 +19,7 @@
   @if class-match-namespace('sugar.helper.user-select.none') {
     /**
     * @name 		#{sel(user-select-none)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.user-select.none
     * @type         Classname
     *
@@ -41,7 +41,7 @@
   @if class-match-namespace('sugar.helper.user-select.all') {
     /**
     * @name 		#{sel(user-select-all)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.user-select.all
     * @type        Classname
     *
@@ -63,7 +63,7 @@
   @if class-match-namespace('sugar.helper.user-select.text') {
     /**
     * @name 		#{sel(user-select-text)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.user-select.text
     * @type        Classname
     *

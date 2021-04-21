@@ -4,7 +4,7 @@ import __extension from './extension';
 
 /**
  * @name                       filename
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                        Function
  * @stable
  *

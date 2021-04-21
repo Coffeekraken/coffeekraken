@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const json_cyclic_1 = require("json-cyclic");
     /**
      * @name            stringify
-     * @namespace       sugar.js.json
+     * @namespace            js.json
      * @type            Function
      * @status              beta
      *

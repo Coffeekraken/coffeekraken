@@ -4,7 +4,7 @@ namespace Sugar\ar;
 
 /**
  * @name            Sugar\ar\merge_deep
- * @namespace       sugar.php.array
+ * @namespace            php.array
  * @type            Function
  * 
  * This function take two arrays and merge them deeply by keeping distinct

@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const uniq_1 = __importDefault(require("lodash/uniq"));
     /**
      * @name        keysFirst
-     * @namespace           sugar.js.array
+     * @namespace            js.array
      * @type      Function
      * @stable
      *

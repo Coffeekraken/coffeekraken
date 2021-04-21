@@ -5,7 +5,7 @@ import __closestNotVisible from './closestNotVisible';
 
 /**
  * @name      whenVisible
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

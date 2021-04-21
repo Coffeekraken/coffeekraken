@@ -4,7 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name                SMediaQuery
- * @namespace           sugar.js.responsive
+ * @namespace            js.responsive
  * @type                Class
  * @extends             SPromise
  * @status              wip

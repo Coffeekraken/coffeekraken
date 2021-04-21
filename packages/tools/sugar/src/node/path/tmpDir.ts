@@ -6,7 +6,7 @@ import __fs from 'fs-extra';
 
 /**
  * @name                            tmpDir
- * @namespace           sugar.node.path
+ * @namespace            node.path
  * @type                            Function
  * @stable
  *

@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
 /**
  * @name        moveSync
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type          Function
  * @stable
  *

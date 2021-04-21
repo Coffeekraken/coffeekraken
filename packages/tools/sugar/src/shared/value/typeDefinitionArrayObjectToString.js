@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name          typeDefinitionArrayObjectToString
-     * @namespace     sugar.js.value
+     * @namespace            js.value
      * @type          Function
      * @status              beta
      *

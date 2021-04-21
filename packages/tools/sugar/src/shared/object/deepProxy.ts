@@ -8,7 +8,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                            deepProxy
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                            Function
  * @status              wip
  *

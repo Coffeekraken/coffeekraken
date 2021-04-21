@@ -3,7 +3,7 @@
 import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
 /**
  * @name        addAnimationClass
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

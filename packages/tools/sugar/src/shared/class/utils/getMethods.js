@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name              getMethods
-     * @namespace           sugar.js.class
+     * @namespace            js.class
      * @type              Function
      * @stable
      *

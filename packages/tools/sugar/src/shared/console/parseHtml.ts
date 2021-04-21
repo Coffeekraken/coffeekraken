@@ -6,7 +6,7 @@ import __replaceTags from '../html/replaceTags';
 
 /**
  * @name                                parseHtml
- * @namespace          sugar.js.console
+ * @namespace            js.console
  * @type                                Function
  *
  * Parse the simple html tags to format the console message

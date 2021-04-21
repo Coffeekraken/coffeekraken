@@ -12,7 +12,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const childProcess_1 = __importDefault(require("../is/childProcess"));
 /**
  * @name                hotkey
- * @namespace           sugar.node.keyboard
+ * @namespace            node.keyboard
  * @type                Function
  * @status              beta
  *

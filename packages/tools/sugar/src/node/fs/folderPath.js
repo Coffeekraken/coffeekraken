@@ -8,7 +8,7 @@ const isPath_1 = __importDefault(require("./isPath"));
 const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
 /**
  * @name                folderPath
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                Function
  * @stable
  *

@@ -5,7 +5,7 @@ import __get from './get';
 
 /**
  * @name                      resolveTokens
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                      Function
  * @status              wip
  *

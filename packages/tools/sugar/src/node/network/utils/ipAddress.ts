@@ -4,7 +4,7 @@ import __ip from 'ip';
 
 /**
  * @name              ipAddress
- * @namespace         sugar.node.network
+ * @namespace            node.network
  * @type              Function
  * @status              beta
  *

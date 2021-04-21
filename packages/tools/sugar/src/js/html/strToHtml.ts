@@ -2,7 +2,7 @@
 
 /**
  * @name        strToHtml
- * @namespace           sugar.js.html
+ * @namespace            js.html
  * @type      Function
  * @stable
  *

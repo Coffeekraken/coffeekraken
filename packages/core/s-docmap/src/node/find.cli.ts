@@ -1,20 +1,15 @@
 // @ts-nocheck
 
+import __SProcess from '@coffeekraken/s-process';
 import __SDocMap from './SDocMap';
-import __SStdio from '@coffeekraken/s-stdio';
-import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
+import __SDocMapFindParamsInterface from './interface/SDocMapFindParamsInterface';
 
-export default async (stringArgs = '') => {
-  console.log('TO INTEGRATE');
-  // const settings = __argsToObject(stringArgs, {
-  //   definition: __SDocMapSettingsInterface.definition
-  // });
-  // const docMap = new __SDocMap({
-  //   docMap: settings
-  // });
-
-  // const findPromise = docMap.find();
-  // __SStdio.new(findPromise, 'terminal');
-  // await findPromise;
-  // process.exit();
+export default (stringArgs = '') => {
+  const docmap = new __SDocMap();
+  const pro = __SProcess.from(docmap.find.bind(docmap), {
+    process: {
+      interface: __SDocMapFindParamsInterface
+    }
+  });
+  pro.run(stringArgs);
 };

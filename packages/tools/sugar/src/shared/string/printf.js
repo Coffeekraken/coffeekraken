@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const sprintf_js_1 = __importDefault(require("sprintf-js"));
     /**
      * @name        printf
-     * @namespace           sugar.js.string
+     * @namespace            js.string
      * @type      Function
      * @stable
      *

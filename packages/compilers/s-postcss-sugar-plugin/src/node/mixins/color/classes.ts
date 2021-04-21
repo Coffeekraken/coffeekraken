@@ -38,28 +38,65 @@ export default function (params = {}, atRule = null) {
       Object.keys(colorObj).forEach((modifier) => {
         const colorValue = colorObj[modifier];
 
+        let modifierStr = modifier;
+        let modifierInvertStr = modifier;
+        if (modifier.match(/^default/)) {
+          if (modifier.match(/\-i$/)) {
+            modifierStr = '--i';
+            modifierInvertStr = '';
+          } else {
+            modifierStr = ``;
+            modifierInvertStr = '--i';
+          }
+        } else {
+          if (modifier.match(/\-i$/)) {
+            modifierStr = `--${modifier}`;
+            modifierInvertStr = `--${modifier.replace(/\-i$/, '')}`;
+          } else {
+            modifierStr = `--${modifier}`;
+            modifierInvertStr = `--${modifier}-i`;
+          }
+        }
+
         cssArray.push(
           [
             `/**`,
-            ` * @name           ${colorName}${
-              modifier === 'default' ? '' : `--${modifier}`
-            }`,
+            ` * @name           c-${colorName}${modifierStr}`,
             ` * @namespace      sugar.color.classes`,
             ` * @type           CssClass`,
             ` *`,
-            ` * This class allows you to apply the "${colorName}${
-              modifier === 'default' ? '' : `--${modifier}`
-            }" color to an HTMLElement`,
+            ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
             ` *`,
             ` * @example        html`,
-            ` * <h1 class="c-${colorName}${
-              modifier === 'default' ? '' : `--${modifier}`
-            }">`,
+            ` * <h1 class="c-${colorName}${modifierStr}">`,
             ` *     Something cool`,
             ` * </h1>`,
             ` */`,
-            `.c-${colorName}${modifier !== 'default' ? `--${modifier}` : ''} {`,
+            `.c-${colorName}${modifierStr} {`,
             `   color: ${__colorFn({
+              name: colorName,
+              modifier
+            })}`,
+            `}`
+          ].join('\n')
+        );
+
+        cssArray.push(
+          [
+            `/**`,
+            ` * @name           bg-${colorName}${modifierStr}`,
+            ` * @namespace      sugar.color.classes`,
+            ` * @type           CssClass`,
+            ` *`,
+            ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
+            ` *`,
+            ` * @example        html`,
+            ` * <h1 class="bg-${colorName}${modifierStr} c-${colorName}${modifierInvertStr}">`,
+            ` *     Something cool`,
+            ` * </h1>`,
+            ` */`,
+            `.bg-${colorName}${modifierStr} {`,
+            `   background-color: ${__colorFn({
               name: colorName,
               modifier
             })}`,
@@ -69,6 +106,8 @@ export default function (params = {}, atRule = null) {
       });
     });
   });
+
+  console.log(cssArray.join('\n'));
 
   if (atRule) {
     const AST = __postCss.parse(cssArray.join('\n'));

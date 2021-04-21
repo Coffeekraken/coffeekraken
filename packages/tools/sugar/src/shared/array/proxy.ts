@@ -4,7 +4,7 @@ import __uniqid from '../string/uniqid';
 
 /**
  * @name                  proxy
- * @namespace           sugar.js.array
+ * @namespace            js.array
  * @type                  Function
  * @status              wip
  *

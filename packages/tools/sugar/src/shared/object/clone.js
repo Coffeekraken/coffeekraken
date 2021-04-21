@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const lodash_clonedeep_1 = __importDefault(require("lodash.clonedeep"));
     /**
      * @name                clone
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type                Function
      * @stable
      *

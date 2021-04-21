@@ -4,7 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name      detectInOutDirection
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @status              wip
  *

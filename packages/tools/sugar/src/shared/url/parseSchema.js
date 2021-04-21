@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const parse_1 = __importDefault(require("../string/parse"));
     /**
      * @name                                parseSchema
-     * @namespace           sugar.js.url
+     * @namespace            js.url
      * @type                                Function
      * @status              wip
      *

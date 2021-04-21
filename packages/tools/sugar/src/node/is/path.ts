@@ -4,7 +4,7 @@ import __isPath from '../fs/isPath';
 
 /**
  * @name                            path
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type                            Function
  * @stable
  *

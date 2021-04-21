@@ -2,7 +2,7 @@
 
 /**
  * @name        constrain
- * @namespace           sugar.js.number
+ * @namespace            js.number
  * @type      Function
  * @stable
  *

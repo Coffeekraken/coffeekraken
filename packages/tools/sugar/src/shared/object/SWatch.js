@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     /**
      * @name 		            SWatch
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type                Class
      * @status              wip
      *

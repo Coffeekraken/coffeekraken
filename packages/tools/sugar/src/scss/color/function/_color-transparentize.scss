@@ -1,6 +1,6 @@
 /**
  * @name    color-transparentize
- * @namespace           sugar.scss.core.color
+ * @namespace            scss.core.color
  * @type          Function
  *
  * Makes $color more transparent.
@@ -16,12 +16,7 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-transparentize($color, $amount) {
-  $color: test-argument(
-    'Sugar.color-transparentize',
-    'color',
-    color,
-    $color
-  );
+  $color: test-argument('Sugar.color-transparentize', 'color', color, $color);
   $amount: test-argument(
     'Sugar.color-transparentize',
     'amount',

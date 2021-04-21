@@ -4,7 +4,7 @@ import __isPlainObject from 'is-plain-object';
 
 /**
  * @name                      plainObject
- * @namespace           sugar.js.is
+ * @namespace            js.is
  * @type                      Function
  * @stable
  *

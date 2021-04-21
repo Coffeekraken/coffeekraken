@@ -9,7 +9,7 @@ const toString_1 = __importDefault(require("../../shared/string/toString"));
 const copy_paste_1 = __importDefault(require("copy-paste"));
 /**
  * @name            copy
- * @namespace       sugar.node.clipboard
+ * @namespace            node.clipboard
  * @type            Function
  * @stable
  *

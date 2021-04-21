@@ -5,7 +5,7 @@ import __formSerialize from 'form-serialize';
 
 /**
  * @name      sendForm
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @status        wip
  *

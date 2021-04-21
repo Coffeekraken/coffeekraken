@@ -1,6 +1,6 @@
 /**
  * @name              helper-transmation-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "transmation" related helper classes.
@@ -22,7 +22,7 @@
   @if class-match-namespace('sugar.helper.transition.no') {
     /**
     * @name 		#{sel(no-transition)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace       sugar.helper.transition.no
     * @type        Classname
     *
@@ -48,7 +48,7 @@
   @if class-match-namespace('sugar.helper.transition.clear') {
     /**
     * @name 		#{sel(clear-transition)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace       sugar.helper.transition.clear
     * @type        Classname
     *
@@ -77,7 +77,7 @@
   @if class-match-namespace('sugar.helper.animation.no') {
     /**
     * @name 		#{sel(no-animation)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace       sugar.helper.animation.no
     * @type        Classname
     *
@@ -103,7 +103,7 @@
   @if class-match-namespace('sugar.helper.animation.clear') {
     /**
     * @name 		#{sel(clear-animation)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace       sugar.helper.animation.clear
     * @type        Classname
     *
@@ -132,7 +132,7 @@
   @if class-match-namespace('sugar.helper.transmation.no') {
     /**
     * @name 		#{sel(no-transmation)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace       sugar.helper.transmation.no
     * @type        Classname
     *
@@ -159,7 +159,7 @@
   @if class-match-namespace('sugar.helper.transmation.clear') {
     /**
     * @name 		#{sel(clear-transmation)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace       sugar.helper.transmation.clear
     * @type        Classname
     *

@@ -4,7 +4,7 @@ import __clipboardy from 'clipboardy';
 
 /**
  * @name            paste
- * @namespace       sugar.node.clipboard
+ * @namespace            node.clipboard
  * @type            Function
  * @stable
  *

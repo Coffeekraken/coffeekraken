@@ -15,7 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
     /**
      * @name            colorValue
-     * @namespace       sugar.shared.dev.colors
+     * @namespace            shared.dev.colors
      * @type            Function
      *
      * Return the list of color names you can access using the ```getColor``` function.

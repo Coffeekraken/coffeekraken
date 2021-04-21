@@ -4,7 +4,7 @@ import __set from './set';
 
 /**
  * @name                      delete
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                      Function
  * @stable
  *

@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const extension_1 = __importDefault(require("./extension"));
 /**
  * @name                       filename
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                        Function
  * @stable
  *

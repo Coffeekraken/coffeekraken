@@ -2,7 +2,7 @@ import _SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name            SNpmUnusedParamsInterface
- * @namespace       sugar.node.npm.interface
+ * @namespace            node.npm.interface
  * @type            Class
  * @extends         SInterface
  * @status          beta

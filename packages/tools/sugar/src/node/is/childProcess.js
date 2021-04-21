@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const testEnv_1 = __importDefault(require("../../shared/is/testEnv"));
 /**
  * @name                            childProcess
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type                            Function
  * @status              beta
  *

@@ -2,7 +2,7 @@
 
 /**
  * @name            buildInNodeModules
- * @namespace       sugar.node.module
+ * @namespace            node.module
  * @type            Object
  * @stable
  *

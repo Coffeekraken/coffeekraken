@@ -1,6 +1,6 @@
 /**
  * @name              font-classes
- * @namespace         sugar.scss.font.class
+ * @namespace            scss.font.class
  * @type              Mixin
  *
  * This mixin generate all the "font" related classes.
@@ -19,7 +19,7 @@
       @if class-match-namespace('sugar.font.family.#{$name}') {
         /**
           * @name       	  #{sel(f-#{$name})}
-          * @namespace       sugar.scss.font.class
+          * @namespace            scss.font.class
           * @class-namespace           sugar.font.family.#{$name}
           * @type        Classname
           *
@@ -44,7 +44,7 @@
       @if class-match-namespace('sugar.font.size.#{$name}') {
         /**
           * @name       	  #{sel(f-#{$name})}
-          * @namespace       sugar.scss.font.class
+          * @namespace            scss.font.class
           * @class-namespace           sugar.font.size.#{$name}
           * @type        Classname
           *

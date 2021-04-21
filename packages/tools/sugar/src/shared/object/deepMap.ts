@@ -6,7 +6,7 @@ import __isClassInstance from '../is/classInstance';
 
 /**
  * @name            deepMap
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type            Function
  * @stable
  *

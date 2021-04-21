@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const parseAuthorString_1 = __importDefault(require("./parseAuthorString"));
     /**
      * @name            standardizeJson
-     * @namespace       sugar.js.npm
+     * @namespace            js.npm
      * @type            Function
      * @status              beta
      *

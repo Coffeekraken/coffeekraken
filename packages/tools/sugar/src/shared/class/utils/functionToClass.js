@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const func_to_classes_1 = __importDefault(require("func-to-classes"));
     /**
      * @name            functionToClass
-     * @namespace       sugar.js.class.utils
+     * @namespace            js.class.utils
      * @type            Function
      * @stable
      *

@@ -7,7 +7,7 @@ const s_file_1 = __importDefault(require("@coffeekraken/s-file"));
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 /**
  * @name            registerSFileClasses
- * @namespace       sugar.node.fs
+ * @namespace            node.fs
  * @type            Function
  *
  * This function is responsivle to register the SFile classes with their proper

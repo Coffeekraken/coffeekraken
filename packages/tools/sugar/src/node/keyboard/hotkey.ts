@@ -7,7 +7,7 @@ import __isChildProcess from '../is/childProcess';
 
 /**
  * @name                hotkey
- * @namespace           sugar.node.keyboard
+ * @namespace            node.keyboard
  * @type                Function
  * @status              beta
  *

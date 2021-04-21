@@ -3,7 +3,7 @@
 import linkLoaded from './linkLoaded';
 /**
  * @name      stylesheetsReady
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

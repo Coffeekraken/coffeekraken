@@ -4,7 +4,7 @@ import __filesize from 'filesize';
 
 /**
  * @name                                    formatFileSize
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                                    Function
  * @stable
  *

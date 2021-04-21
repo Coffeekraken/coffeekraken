@@ -4,7 +4,7 @@ import easeInOutQuad from '../../shared/easing/easeInOutQuad';
 import requestAnimationFrame from './requestAnimationFrame';
 /**
  * @name      scrollTo
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

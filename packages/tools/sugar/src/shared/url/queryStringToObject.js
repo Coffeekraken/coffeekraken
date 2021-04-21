@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const ltrim_1 = __importDefault(require("../string/ltrim"));
     /**
      * @name        queryStringToObject
-     * @namespace           sugar.js.url
+     * @namespace            js.url
      * @type      Function
      * @stable
      *

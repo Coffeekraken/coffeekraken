@@ -7,7 +7,7 @@ import { find as __find } from 'abstract-syntax-tree';
 
 /**
  * @name            extractImport
- * @namespace       sugar.node.module
+ * @namespace            node.module
  * @type            Function
  * @status          beta
  *

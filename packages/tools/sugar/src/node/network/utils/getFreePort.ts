@@ -4,7 +4,7 @@ import __isPortFree from './isPortFree';
 
 /**
  * @name            getFreePort
- * @namespace       sugar.node.http
+ * @namespace            node.http
  * @type            Function
  * @async
  * @status              beta

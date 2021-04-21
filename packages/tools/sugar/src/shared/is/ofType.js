@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const s_type_1 = __importDefault(require("@coffeekraken/s-type"));
     /**
      * @name              ofType
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type              Function
      * @status              beta
      *

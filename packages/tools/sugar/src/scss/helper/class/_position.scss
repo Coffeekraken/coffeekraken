@@ -1,6 +1,6 @@
 /**
  * @name              helper-position-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "position" related helper classes.
@@ -23,7 +23,7 @@
   @if class-match-namespace('sugar.helper.position.relative') {
     /**
     * @name 		#{sel(relative)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.position.relative
     * @type        Classname
     *
@@ -45,7 +45,7 @@
   @if class-match-namespace('sugar.helper.position.absolute') {
     /**
     * @name 		#{sel(absolute)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.position.absolute
     * @type        Classname
     *
@@ -67,7 +67,7 @@
   @if class-match-namespace('sugar.helper.position.fixed') {
     /**
     * @name 		#{sel(fixed)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.position.fixed
     * @type        Classname
     *
@@ -92,7 +92,7 @@
   @if class-match-namespace('sugar.helper.position.fixed.top') {
     /**
     * @name 		#{sel(fixed-top)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.position.fixed.top
     * @type        Classname
     *
@@ -117,7 +117,7 @@
   @if class-match-namespace('sugar.helper.position.fixed.bottom') {
     /**
     * @name 		#{sel(fixed-bottom)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.position.fixed.bottom
     * @type        Classname
     *
@@ -142,7 +142,7 @@
   @if class-match-namespace('sugar.helper.position.sticky') {
     /**
     * @name 		#{sel(sticky)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.position.sticky
     * @type        Classname
     *
@@ -166,7 +166,7 @@
   @if class-match-namespace('sugar.helper.position.sticky.top') {
     /**
     * @name 		#{sel(sticky-top)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.position.sticky.top
     * @type        Classname
     *

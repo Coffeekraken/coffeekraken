@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const countLine_1 = __importDefault(require("./countLine"));
     /**
      * @name                          splitEvery
-     * @namespace           sugar.js.string
+     * @namespace            js.string
      * @type                          Function
      * @stable
      *

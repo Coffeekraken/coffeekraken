@@ -21,7 +21,7 @@ import __canHaveChildren from '../dom/canHaveChildren';
 
 /**
  * @name              SLitHtmlWebComponent
- * @namespace           sugar.js.webcomponent
+ * @namespace            js.webcomponent
  * @type              Class
  * @extends           SWebComponent
  * @status              wip

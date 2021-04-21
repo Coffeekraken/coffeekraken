@@ -9,7 +9,7 @@ import __SBlessedComponent from '../SBlessedComponent';
 
 /**
  * @name                    SBlessedNotification
- * @namespace           sugar.node.blessed.notification
+ * @namespace            node.blessed.notification
  * @type                    Class
  * @status              wip
  *

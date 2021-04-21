@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const SWatch_1 = __importDefault(require("./SWatch"));
     /**
      * @name                      watch
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type                      Function
      * @status              wip
      *

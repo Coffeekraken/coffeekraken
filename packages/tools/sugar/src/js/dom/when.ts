@@ -2,7 +2,7 @@
 
 /**
  * @name                              when
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type                              Function
  * @stable
  *

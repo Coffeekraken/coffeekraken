@@ -4,7 +4,7 @@ import __sprintf from 'sprintf-js';
 
 /**
  * @name        printf
- * @namespace           sugar.js.string
+ * @namespace            js.string
  * @type      Function
  * @stable
  *

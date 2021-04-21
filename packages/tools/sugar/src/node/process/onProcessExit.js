@@ -16,7 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const terminal_kit_1 = __importDefault(require("terminal-kit"));
 /**
  * @name            onProcessExit
- * @namespace       sugar.node.process
+ * @namespace            node.process
  * @type            Function
  * @status              beta
  *

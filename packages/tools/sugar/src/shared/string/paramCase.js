@@ -13,7 +13,7 @@
     const param_case_1 = require("param-case");
     /**
      * @name          paramCase
-     * @namespace           sugar.js.string
+     * @namespace            js.string
      * @type          Function
      * @stable
      *

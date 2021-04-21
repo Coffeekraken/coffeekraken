@@ -5,7 +5,7 @@ import __dispatchEvent from '../dom/dispatchEvent';
 
 /**
  * @name 		handleInputAttributes
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Feature
  * @stable
  *

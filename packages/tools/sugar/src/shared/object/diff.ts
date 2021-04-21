@@ -5,7 +5,7 @@ import __isEqual from 'is-equal';
 
 /**
  * @name                      diff
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                      Function
  * @status              beta
  *

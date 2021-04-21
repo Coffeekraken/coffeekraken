@@ -5,7 +5,7 @@ import __packageRoot from './packageRoot';
 
 /**
  * @name            absolute
- * @namespace       sugar.js.path
+ * @namespace            js.path
  * @type            Function
  * @status              beta
  *

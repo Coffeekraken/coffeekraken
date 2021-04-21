@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name                            deepProxy
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type                            Function
      * @status              wip
      *

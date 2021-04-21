@@ -3,7 +3,7 @@
 @use 'sass:map';
 /**
  * @name      context
- * @namespace           sugar.scss.core.context.mixin
+ * @namespace            scss.core.context.mixin
  * @type      mixin
  *
  * Set a context to be used inside the mixin
@@ -39,12 +39,7 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin context($name, $settings: null) {
-  $name: test-argument(
-    'Sugar.context',
-    'name-or-map',
-    'string',
-    $name
-  );
+  $name: test-argument('Sugar.context', 'name-or-map', 'string', $name);
 
   // if the passes argument is a context map
   // register this context as new one

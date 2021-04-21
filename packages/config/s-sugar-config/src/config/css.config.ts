@@ -188,12 +188,16 @@ export default {
       //     extends: 'stylelint-config-standard'
       //   }
       // },
-      sugar: {
-        import: '@coffeekraken/s-postcss-sugar-plugin',
-        settings: {}
-      },
-      precss: {
-        import: 'precss',
+      // sugar: {
+      //   import: '@coffeekraken/s-postcss-sugar-plugin',
+      //   settings: {}
+      // },
+      // precss: {
+      //   import: 'precss',
+      //   settings: {}
+      // },
+      postcssNested: {
+        import: 'postcss-nested',
         settings: {}
       },
       presetEnv: {

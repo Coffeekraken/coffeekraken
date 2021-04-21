@@ -5,7 +5,7 @@ import __parseHtml from '../console/parseHtml';
 
 /**
  * @name          sugarBanner
- * @namespace     sugar.shared.ascii
+ * @namespace            shared.ascii
  * @type          Function
  * @stable
  *

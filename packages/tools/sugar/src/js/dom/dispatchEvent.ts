@@ -4,7 +4,7 @@ import __SEvent from '../event/SEvent';
 
 /**
  * @name      dispatchEvent
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

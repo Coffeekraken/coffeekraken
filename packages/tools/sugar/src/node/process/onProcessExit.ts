@@ -6,7 +6,7 @@ import __terminalKit from 'terminal-kit';
 
 /**
  * @name            onProcessExit
- * @namespace       sugar.node.process
+ * @namespace            node.process
  * @type            Function
  * @status              beta
  *

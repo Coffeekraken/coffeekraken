@@ -5,7 +5,7 @@ import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name 		imagesLoadedAttribute
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Feature
  * @stable
  *

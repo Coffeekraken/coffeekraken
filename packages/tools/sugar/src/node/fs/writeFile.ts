@@ -7,7 +7,7 @@ import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        writeFile
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type          Function
  * @async
  * @stable

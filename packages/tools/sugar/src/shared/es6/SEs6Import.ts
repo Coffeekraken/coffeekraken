@@ -5,7 +5,7 @@ import __parseEs6Imports from 'parse-es6-imports';
 
 /**
  * @name            SEs6Import
- * @namespace       sugar.js.es6
+ * @namespace            js.es6
  * @type            Class
  * @status              wip
  *

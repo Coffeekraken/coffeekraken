@@ -1,6 +1,6 @@
 /**
  * @name          mapToObject
- * @namespace     sugar.js.map
+ * @namespace            js.map
  * @type          Function
  *
  * This function simply take a Map object and convert it to a plain object

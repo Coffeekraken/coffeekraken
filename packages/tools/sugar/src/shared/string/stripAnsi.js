@@ -15,7 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const strip_ansi_1 = __importDefault(require("strip-ansi"));
     /**
      * @name            stripAnsi
-     * @namespace       sugar.js.string
+     * @namespace            js.string
      * @type            Function
      *
      * This function simply strip all the ansi characters in a string

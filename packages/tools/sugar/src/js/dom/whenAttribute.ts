@@ -5,7 +5,7 @@ import __observeAttribute from './observeAttributes';
 
 /**
  * @name      whenAttribute
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

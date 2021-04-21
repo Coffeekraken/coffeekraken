@@ -16,7 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const isPortFree_1 = __importDefault(require("./isPortFree"));
 /**
  * @name            getFreePort
- * @namespace       sugar.node.http
+ * @namespace            node.http
  * @type            Function
  * @async
  * @status              beta

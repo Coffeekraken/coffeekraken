@@ -9,7 +9,7 @@ const filesize_1 = __importDefault(require("filesize"));
 const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
 /**
  * @name                            folderSize
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                            Function
  * @async
  * @stable

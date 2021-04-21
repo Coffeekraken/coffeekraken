@@ -10,7 +10,7 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
 const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
 /**
  * @name        writeJsonSync
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type          Function
  * @stabée
  *

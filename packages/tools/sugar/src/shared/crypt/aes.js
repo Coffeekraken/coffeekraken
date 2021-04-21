@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const parse_1 = __importDefault(require("../string/parse"));
     /**
      * @name            aes
-     * @namespace           sugar.js.crypt
+     * @namespace            js.crypt
      * @type            Object
      * @status              wip
      *

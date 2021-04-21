@@ -1,3 +1,4 @@
+import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -5,6 +6,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __glob from 'glob';
 import __fs from 'fs';
 import __path from 'path';
+import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
@@ -13,12 +15,13 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __SGlob from '@coffeekraken/sugar/node/glob/SGlob';
 import __SClass from '@coffeekraken/s-class';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
-import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SFile from '@coffeekraken/s-file';
 import __clone from '@coffeekraken/sugar/shared/object/clone';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __SCache from '@coffeekraken/s-cache';
+import __SDocMapFindParamsInterface from './interface/SDocMapFindParamsInterface';
+import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
 
 /**
  * @name                SDocMap
@@ -50,44 +53,45 @@ import __SCache from '@coffeekraken/s-cache';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISDocMapExcludeSetting {
-  [key: string]: RegExp;
-}
-
-export interface ISDocMapBuildSettings {
+export interface ISDocMapGenerateParams {
+  watch: boolean;
   globs: string[];
-  exclude: ISDocMapExcludeSetting;
+  exclude: string[];
+  filters: Record<string, RegExp>;
+  fields: string[];
+  save: boolean;
+  outPath: string;
 }
-export interface ISDocMapFindSettings {
+export interface ISDocMapFindParams {
   globs: string[];
-  exclude: ISDocMapExcludeSetting;
+  exclude: string[];
 }
 
 export interface ISDocMapSaveSettings {
   path: string;
-  build: ISDocMapBuildSettings;
+  generate: ISDocMapGenerateParams;
 }
-export interface ISDocMapSettings {
+export interface ISDocMapParams {
   cache: boolean;
-  build: ISDocMapBuildSettings;
-  find: ISDocMapFindSettings;
+  generate: ISDocMapGenerateParams;
+  find: ISDocMapFindParams;
   save: ISDocMapSaveSettings;
 }
 export interface ISDocMapCtorSettings {
-  docMap?: Partial<ISDocMapSettings>;
+  docMap?: Partial<ISDocMapParams>;
 }
 
 export interface ISDocMapEntry {
-  __fullPath?: string;
-  name: string;
+  absPath?: string;
+  name?: string;
   namespace?: string;
   filename?: string;
   extension?: string;
   relPath?: string;
   directory?: string;
   relDirectory?: string;
-  type: string;
-  description: string;
+  type?: string;
+  description?: string;
   extends?: boolean;
   static?: boolean;
   since?: string;
@@ -102,13 +106,7 @@ export interface ISDocMap {
 }
 
 class SDocMap extends __SClass implements ISDocMap {
-  static interfaces = {
-    settings: {
-      apply: true,
-      on: '_settings.docMap',
-      class: __SDocMapSettingsInterface
-    }
-  };
+  static interfaces = {};
 
   /**
    * @name          _entries
@@ -135,7 +133,7 @@ class SDocMap extends __SClass implements ISDocMap {
   _cache: __SCache;
 
   /**
-   * @name        docMapSettings
+   * @name        docmapParams
    * @type        Object
    * @get
    *
@@ -144,8 +142,8 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get docMapSettings(): ISDocMapSettings {
-    return (<any>this)._settings.docMap;
+  get docmapParams(): ISDocMapParams {
+    return (<any>this)._settings.docmap;
   }
 
   /**
@@ -158,12 +156,11 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings: ISDocMapCtorSettings) {
+  constructor(settings?: Partial<ISDocMapCtorSettings>) {
     super(
       __deepMerge(
         {
-          id: 'SDocMap',
-          docMap: {}
+          docmap: {}
         },
         settings || {}
       )
@@ -202,65 +199,58 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  find(settings?: Partial<ISDocMapFindSettings>) {
-    const findSettings = <ISDocMapFindSettings>(
-      __deepMerge(this.docMapSettings.find, settings || {})
+  find(params?: Partial<ISDocMapFindParams>) {
+    const findParams = <ISDocMapFindParams>(
+      __deepMerge(__SDocMapFindParamsInterface.defaults(), params || {})
     );
 
-    return new __SPromise(
-      async ({ resolve, reject, emit }) => {
-        // build the glob pattern to use
-        const patterns: string[] = findSettings.globs || [];
+    return new __SPromise(async ({ resolve, reject, emit }) => {
+      // build the glob pattern to use
+      const patterns: string[] = findParams.globs || [];
 
-        if (this.docMapSettings.cache) {
-          const cachedValue = await this._cache.get('find-files');
-          if (cachedValue) {
-            return resolve(cachedValue);
-          }
+      if (this.docmapParams.cache) {
+        const cachedValue = await this._cache.get('find-files');
+        if (cachedValue) {
+          return resolve(cachedValue);
         }
-
-        let files: __SFile[] = [];
-        await __wait(1);
-
-        const searchStrArray: string[] = ['Searching docMaps using globs:'];
-        patterns.forEach((pat) => {
-          searchStrArray.push(`- <yellow>${pat}</yellow>`);
-        });
-        emit('log', {
-          value: searchStrArray.join('\n')
-        });
-
-        for (let i = 0; i < patterns.length; i++) {
-          const foundedFiles: __SFile[] = <any>(
-            await __SGlob.resolve(patterns[i])
-          );
-          files = [...files, ...foundedFiles];
-        }
-
-        const findedStrArray: string[] = [
-          `Found <yellow>${files.length}</yellow> docMap file(s):`
-        ];
-        files.forEach((file) => {
-          findedStrArray.push(`- <cyan>${file.relPath}</cyan>`);
-        });
-        emit('log', {
-          value: findedStrArray.join('\n')
-        });
-
-        // save in cache if asked
-        if (this.docMapSettings.cache) {
-          await this._cache.set(
-            'find-files',
-            files.map((file) => file.toObject())
-          );
-        }
-
-        resolve(files);
-      },
-      {
-        id: this.metas.id + '.find'
       }
-    );
+
+      let files: __SFile[] = [];
+      await __wait(1);
+
+      const searchStrArray: string[] = ['Searching docmaps using globs:'];
+      patterns.forEach((pat) => {
+        searchStrArray.push(`- <yellow>${pat}</yellow>`);
+      });
+      emit('log', {
+        value: searchStrArray.join('\n')
+      });
+
+      for (let i = 0; i < patterns.length; i++) {
+        const foundedFiles: __SFile[] = <any>await __SGlob.resolve(patterns[i]);
+        files = [...files, ...foundedFiles];
+      }
+
+      const findedStrArray: string[] = [
+        `Found <yellow>${files.length}</yellow> docmap file(s):`
+      ];
+      files.forEach((file) => {
+        findedStrArray.push(`- <cyan>${file.relPath}</cyan>`);
+      });
+      emit('log', {
+        value: findedStrArray.join('\n')
+      });
+
+      // save in cache if asked
+      if (this.docmapParams.cache) {
+        await this._cache.set(
+          'find-files',
+          files.map((file) => file.toObject())
+        );
+      }
+
+      resolve(files);
+    });
   }
 
   /**
@@ -280,43 +270,43 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(settings: Partial<ISDocMapFindSettings>) {
-    return new __SPromise(
-      async ({ resolve, pipe }) => {
-        const filesPromise = this.find(settings);
-        pipe(filesPromise);
-        const files = await filesPromise;
+  read(params: Partial<ISDocMapFindParams>) {
+    return new __SPromise(async ({ resolve, pipe, emit }) => {
+      const filesPromise = this.find(params);
+      pipe(filesPromise);
+      const files = await filesPromise;
 
-        let docMapJson = {};
+      let docMapJson = {};
 
-        // loop on all files
-        files.forEach((file) => {
-          const content = JSON.parse(__fs.readFileSync(file.path, 'utf8'));
+      // loop on all files
+      files.forEach((file) => {
+        const content = file.content;
 
-          Object.keys(content).forEach((docMapItemKey) => {
-            content[docMapItemKey].path = __path.resolve(
-              file.path.split('/').slice(0, -1).join('/'),
-              content[docMapItemKey].relPath
-            );
-          });
-
-          docMapJson = {
-            ...docMapJson,
-            ...content
-          };
+        Object.keys(content).forEach((docMapItemKey) => {
+          const itemObj = content[docMapItemKey];
+          itemObj.path = __path.resolve(
+            file.dirPath,
+            content[docMapItemKey].relPath
+          );
         });
 
-        // return the final docmap
-        resolve(docMapJson);
-      },
-      {
-        id: this.metas.id + '.read'
-      }
-    );
+        docMapJson = {
+          ...docMapJson,
+          ...content
+        };
+      });
+
+      emit('log', {
+        value: __toString(docMapJson)
+      });
+
+      // return the final docmap
+      resolve(docMapJson);
+    });
   }
 
   /**
-   * @name          build
+   * @name          generate
    * @type          Function
    *
    * This method allows you to specify one or more glob patterns to scan files for "@namespace" docblock tags
@@ -328,112 +318,92 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  build(settings: Partial<ISDocMapBuildSettings>) {
-    const buildSettings = <ISDocMapBuildSettings>(
-      __deepMerge(this.docMapSettings.build, settings)
+  generate(params: Partial<ISDocMapGenerateParams>) {
+    const generateParams = <ISDocMapGenerateParams>(
+      __deepMerge(__SDocMapGenerateParamsInterface.defaults(), params)
     );
-    return new __SPromise(
-      async ({ resolve, reject, emit }) => {
-        let globs: string[] = buildSettings.globs || [];
-        if (!Array.isArray(globs)) globs = [globs];
+    return new __SPromise(async ({ resolve, reject, emit }) => {
+      let globs: string[] = generateParams.globs || [];
+      if (!Array.isArray(globs)) globs = [globs];
 
-        emit('notification', {
-          message: `${this.metas.id} build started`
-        });
+      emit('notification', {
+        message: `${this.metas.id} generation started`
+      });
 
+      emit('log', {
+        value: `Searching files to use as docmap sources using globs:\n- <yellow>${globs.join(
+          '</yellow>\n- '
+        )}</yellow>`
+      });
+
+      const pool = __fsPool(globs, {
+        watch: generateParams.watch,
+        exclude: generateParams.exclude
+      });
+      pool.on('finally', () => {
+        pool.cancel();
+      });
+
+      pool.on(generateParams.watch ? 'update' : 'files', (files) => {
         emit('log', {
-          value: `Searching files to use as docMap sources using globs:\n- <yellow>${globs.join(
-            '</yellow>\n- '
-          )}</yellow>`
+          value: `<yellow>${
+            files.length
+          }</yellow> file(s) found using the glob "<cyan>${globs.join(
+            ','
+          )}</cyan>"`
         });
-
-        for (let i = 0; i < globs.length; i++) {
-          const glob = globs[i];
-
-          // scan for files
-          let files = __SGlob.resolve(glob, {});
-          files = files.filter((file) => {
-            if (!buildSettings.exclude || buildSettings.exclude === undefined)
-              return true;
-            return !file.path.match(buildSettings.exclude.path);
-          });
-
-          emit('log', {
-            value: `<yellow>${files.length}</yellow> file(s) found using the glob "<cyan>${glob}</cyan>"`
-          });
-
-          // loop on each files to check for docblocks
-          for (let j = 0; j < files.length; j++) {
-            const filepath = files[j].path;
-            const content = __fs.readFileSync(filepath, 'utf8');
-
-            if (!content) continue;
-
-            const docblocks = new __SDocblock(content).toObject();
-
-            if (!docblocks || !docblocks.length) continue;
-
-            let docblockObj: any = {};
-            const children: any = {};
-
-            docblocks.forEach((docblock) => {
-              for (
-                let i = 0;
-                // @todo    {Clean}   remove ts-ignore
+        // loop on each files to check for docblocks
+        for (let j = 0; j < files.length; j++) {
+          const filepath = files[j].path;
+          const content = __fs.readFileSync(filepath, 'utf8');
+          if (!content) continue;
+          const docblocks = new __SDocblock(content).toObject();
+          if (!docblocks || !docblocks.length) continue;
+          let docblockObj: any = {};
+          const children: any = {};
+          docblocks.forEach((docblock) => {
+            for (
+              let i = 0;
+              // @ts-ignore
+              i < Object.keys(generateParams.filters).length;
+              i++
+            ) {
+              const filterReg =
                 // @ts-ignore
-                i < Object.keys(buildSettings.exclude).length;
-                i++
-              ) {
-                const excludeReg =
-                  // @todo    {Clean}   remove ts-ignore
-                  // @ts-ignore
-                  buildSettings.exclude[Object.keys(buildSettings.exclude)[i]];
-                // @todo    {Clean}   remove ts-ignore
-                // @ts-ignore
-                const value = docblock[Object.keys(buildSettings.exclude)[i]];
-                if (value === undefined) continue;
-                if (value.match(excludeReg)) return;
-              }
+                generateParams.filters[Object.keys(generateParams.filters)[i]];
+              // @ts-ignore
+              const value = docblock[Object.keys(generateParams.filters)[i]];
+              if (value === undefined) continue;
+              if (value.match(filterReg)) return;
+            }
+            if (docblock.name && docblock.name.slice(0, 1) === '_') return;
+            if (docblock.private) return;
 
-              if (docblock.name && docblock.name.slice(0, 1) === '_') return;
-              if (docblock.private) return;
+            // const path = __path.relative(outputDir, filepath);
+            const filename = __getFilename(filepath);
 
-              // const path = __path.relative(outputDir, filepath);
-              const filename = __getFilename(filepath);
-              const docblockEntryObj: ISDocMapEntry = {
-                name: docblock.name,
-                type: docblock.type,
-                description: docblock.description
-              };
-              if (docblock.namespace)
-                docblockEntryObj.namespace = docblock.namespace;
-              if (docblock.extends) docblockEntryObj.extends = docblock.extends;
-              if (docblock.status) docblockEntryObj.status = docblock.status;
-              if (docblock.static) docblockEntryObj.static = true;
-              if (docblock.since) docblockEntryObj.since = docblock.since;
+            let docblockEntryObj: ISDocMapEntry = {};
 
-              if (docblock.namespace) {
-                docblockObj = {
-                  ...docblockEntryObj,
-                  __fullPath: filepath, // this property will be used in the save method to generate the correct pathes relative to this
-                  filename,
-                  extension: filename.split('.').slice(1)[0],
-                  path: __path.relative(__packageRoot(), filepath),
-                  directory: __path
-                    .relative(__packageRoot(), filepath)
-                    .replace(`/${__getFilename(filepath)}`, '')
-                  // relPath will be generated in the save method
-                  // relDirectory will be generated in the save method
-                };
-                this._entries[
-                  `${docblock.namespace}.${docblock.name}`
-                ] = docblockObj;
-              } else {
-                children[docblock.name] = docblockEntryObj;
-              }
+            generateParams.fields.forEach((field) => {
+              if (docblock[field] === undefined) return;
+              docblockEntryObj[field] = docblock[field];
             });
-            docblockObj.children = children;
-          }
+
+            if (docblock.namespace) {
+              docblockObj = {
+                ...docblockEntryObj,
+                filename,
+                extension: filename.split('.').slice(1)[0],
+                relPath: __path.relative(__packageRoot(), filepath)
+              };
+              this._entries[
+                `${docblock.namespace}.${docblock.name}`
+              ] = docblockObj;
+            } else if (docblock.name) {
+              children[docblock.name] = docblockEntryObj;
+            }
+          });
+          docblockObj.children = children;
         }
 
         emit('log', {
@@ -447,85 +417,22 @@ class SDocMap extends __SClass implements ISDocMap {
           message: `${this.metas.id} build success`
         });
 
-        resolve(this._entries);
-      },
-      {
-        id: this.metas.id + '.build'
-      }
-    );
-  }
-
-  /**
-   * @name              save
-   * @type              Function
-   *
-   * This method save the docMap.json file in the outputDir setted in the settings.
-   * You can specify an output path as parameter to use this instead of the instance level settings.
-   *
-   * @param         {String}            [output=null]           A full output file path where to save the file
-   * @return        {SPromise}                                  An SPromise instance resolved once the file has been saved
-   *
-   * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  save(
-    outputOrSettings: string | Partial<ISDocMapSaveSettings>,
-    settings?: Partial<ISDocMapSaveSettings>
-  ): __SPromise {
-    let output, saveSettings: ISDocMapSaveSettings;
-    if (typeof outputOrSettings === 'string') {
-      output = outputOrSettings;
-      saveSettings = this.docMapSettings.save;
-    } else {
-      saveSettings = <ISDocMapSaveSettings>(
-        __deepMerge(this.docMapSettings.save, outputOrSettings)
-      );
-      output = saveSettings.path;
-    }
-
-    const outputDir = output.replace(`/${__getFilename(output)}`, '');
-
-    return new __SPromise(
-      ({ resolve, emit, pipe, pipeFrom }) => {
-        const entries: ISDocMapEntries = __clone(this._entries, { deep: true });
-
-        emit('log', {
-          value: `Saving the docMap file to "<cyan>${output.replace(
-            `${__packageRoot()}/`,
-            ''
-          )}</cyan>"`
-        });
-
-        // add relPath and directory property depending on the output
-        Object.keys(entries).forEach((namespace) => {
-          const obj = entries[namespace];
-          // @ts-ignore
-          const relPath = __path.relative(outputDir, obj.__fullPath);
-          const relDirectory = relPath.replace(
-            `/${__getFilename(relPath)}`,
-            ''
+        if (generateParams.save) {
+          emit('log', {
+            value: `<yellow>[save]</yellow> File "<cyan>${generateParams.outPath.replace(
+              __rootDir() + '/',
+              ''
+            )}</cyan>"`
+          });
+          __fs.writeFileSync(
+            generateParams.outPath,
+            JSON.stringify(this._entries, null, 4)
           );
-          obj.relPath = relPath;
-          obj.relDirectory = relDirectory;
-          // @ts-ignore
-          delete obj.__fullPath;
-        });
+        }
 
-        __removeSync(output);
-        __writeFileSync(output, JSON.stringify(entries, null, 4));
-
-        emit('log', {
-          value: `<green>[save]</green> DocMap file "<yellow>${__getFilename(
-            output
-          )}</yellow>" <green>saved successfully</green> under "<cyan>${output}</cyan>"`
-        });
-
-        resolve(entries);
-      },
-      {
-        id: this.metas.id + '.save'
-      }
-    );
+        resolve(this._entries);
+      });
+    });
   }
 }
 

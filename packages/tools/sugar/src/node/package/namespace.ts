@@ -7,7 +7,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name          namespace
- * @namespace     sugar.node.package
+ * @namespace            node.package
  * @type          Function
  * @status              wip
  *

@@ -2,7 +2,7 @@
 
 /**
  * @name        isYyyymmddDate
- * @namespace           sugar.js.is
+ * @namespace            js.is
  * @type      Function
  * @stable
  *

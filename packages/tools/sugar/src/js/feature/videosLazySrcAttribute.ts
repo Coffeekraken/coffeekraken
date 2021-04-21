@@ -5,7 +5,7 @@ import querySelectorLive from '../dom/querySelectorLive';
 
 /**
  * @name 		videoLazySrcAttribute
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Feature
  * @stable
  *

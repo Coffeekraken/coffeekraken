@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name                        parseRgba
-     * @namespace           sugar.js.color
+     * @namespace            js.color
      * @type                        Function
      * @stable
      *

@@ -17,7 +17,7 @@ const dependencyTree_1 = __importDefault(require("./dependencyTree"));
 const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
 /**
  * @name                dependencyList
- * @namespace           sugar.node.module
+ * @namespace            node.module
  * @type                Function
  * @async
  *

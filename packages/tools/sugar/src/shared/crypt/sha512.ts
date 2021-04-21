@@ -8,7 +8,7 @@ const __encryptedMessages = {};
 
 /**
  * @name            sha512
- * @namespace           sugar.js.crypt
+ * @namespace            js.crypt
  * @type            Object
  * @status              wip
  *

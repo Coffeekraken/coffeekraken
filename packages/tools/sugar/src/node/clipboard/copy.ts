@@ -6,7 +6,7 @@ import __ncp from 'copy-paste';
 
 /**
  * @name            copy
- * @namespace       sugar.node.clipboard
+ * @namespace            node.clipboard
  * @type            Function
  * @stable
  *

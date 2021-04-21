@@ -1,6 +1,6 @@
 /**
  * @name    color-hue
- * @namespace           sugar.scss.core.color
+ * @namespace            scss.core.color
  * @type          Function
  *
  * Return the hue of the passed color
@@ -15,11 +15,6 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-hue($color) {
-  $color: test-argument(
-    'Sugar.color-hue',
-    'color',
-    color,
-    $color
-  );
+  $color: test-argument('Sugar.color-hue', 'color', color, $color);
   @return hue($color);
 }

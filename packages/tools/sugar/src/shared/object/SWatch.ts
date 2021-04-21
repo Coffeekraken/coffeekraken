@@ -13,7 +13,7 @@ import __clone from '../object/clone';
 
 /**
  * @name 		            SWatch
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                Class
  * @status              wip
  *

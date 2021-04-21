@@ -13,7 +13,7 @@
     // TODO tests
     /**
      * @name                            linux
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type                            Function
      * @stable
      *

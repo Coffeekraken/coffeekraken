@@ -1,6 +1,6 @@
 /**
   * @name            title-classes
-  * @namespace       sugar.scss.component.title
+  * @namespace            scss.component.title
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some titles.
@@ -19,12 +19,12 @@
   * @since       2.0.0
   * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
-  @mixin title-classes($count: 6, $scope: null, $name: 'h') {
-    @if class-match-namespace('sugar.component.title') {
-      @for $i from 1 through $count {
-        /**
+@mixin title-classes($count: 6, $scope: null, $name: 'h') {
+  @if class-match-namespace('sugar.component.title') {
+    @for $i from 1 through $count {
+      /**
       * @name              .#{sel(#{$name}#{$i})}, .#{sel(#{tf-class()})} h#{$i}
-      * @namespace         sugar.scss.component.title
+      * @namespace            scss.component.title
       * @type              Classname
       *
       * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$i}```
@@ -35,10 +35,10 @@
       * @since       2.0.0
       * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .#{sel(#{tf-class()})} h#{$i},
-        .#{sel(#{$name}#{$i})} {
-          @include title($level: $i, $scope: $scope);
-        }
+      .#{sel(#{tf-class()})} h#{$i},
+      .#{sel(#{$name}#{$i})} {
+        @include title($level: $i, $scope: $scope);
       }
     }
   }
+}

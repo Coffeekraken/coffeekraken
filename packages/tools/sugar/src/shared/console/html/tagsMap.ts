@@ -5,7 +5,7 @@ __chalk.level = 3;
 
 /**
  * @name        tagsMap
- * @namespace   sugar.js.console.html
+ * @namespace            js.console.html
  * @type        Object
  *
  * Store the tag->function map used in ```parseHtml``` function for example

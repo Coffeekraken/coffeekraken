@@ -28,7 +28,7 @@ function processNodeElm(elm) {
 
 /**
  * @name      toDomNodes
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

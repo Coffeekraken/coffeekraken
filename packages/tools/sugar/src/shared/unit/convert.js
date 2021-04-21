@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const px2rem_1 = __importDefault(require("./px2rem"));
     /**
      * @name                  convert
-     * @namespace           sugar.js.unit
+     * @namespace            js.unit
      * @type                  Function
      * @stable
      *

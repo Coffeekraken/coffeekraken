@@ -4,7 +4,7 @@ import SSvgFilter from './SSvgFilter';
 
 /**
  * @name 		        SGooeySvgFilter
- * @namespace           sugar.js.filter
+ * @namespace            js.filter
  * @type           Class
  * @extends       SSvgFilter
  * @stable

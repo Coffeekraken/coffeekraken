@@ -4,7 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name        emit
- * @namespace           sugar.js.event
+ * @namespace            js.event
  * @type          Function
  * @stable
  *

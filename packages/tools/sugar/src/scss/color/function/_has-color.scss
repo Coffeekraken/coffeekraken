@@ -1,6 +1,6 @@
 /**
  * @name      has-color
- * @namespace           sugar.scss.core.color
+ * @namespace            scss.core.color
  * @type    function
  *
  * Check if the provided color is a registered one or not
@@ -15,5 +15,5 @@
  */
 @function has-color($color) {
   // grab the color in config
-  @return setting("colors.#{$color}") != null;
+  @return setting('colors.#{$color}') != null;
 }

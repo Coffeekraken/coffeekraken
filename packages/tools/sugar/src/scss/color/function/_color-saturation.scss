@@ -1,6 +1,6 @@
 /**
  * @name    color-saturation
- * @namespace           sugar.scss.core.color
+ * @namespace            scss.core.color
  * @type          Function
  *
  * Return the saturation of the passed color
@@ -15,11 +15,6 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-saturation($color) {
-  $color: test-argument(
-    'Sugar.color-saturation',
-    'color',
-    color,
-    $color
-  );
+  $color: test-argument('Sugar.color-saturation', 'color', color, $color);
   @return saturation($color);
 }

@@ -5,7 +5,7 @@ import __set from './set';
 
 /**
  * @name                        ensureExists
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type                        Function
  * @stable
  *

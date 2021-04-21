@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const striptags_1 = __importDefault(require("striptags"));
     /**
      * @name        striptags
-     * @namespace           sugar.js.html
+     * @namespace            js.html
      * @type      Function
      * @stable
      *

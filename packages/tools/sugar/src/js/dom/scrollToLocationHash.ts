@@ -5,7 +5,7 @@ import __easeing from '../../shared/easing/easeInOutQuint';
 
 /**
  * @name      scrollToLocationHash
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

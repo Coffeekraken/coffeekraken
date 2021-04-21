@@ -2,7 +2,7 @@
 
 /**
  * @name      easeInOutCubic
- * @namespace           sugar.js.easing
+ * @namespace            js.easing
  * @type      Function
  * @stable
  *

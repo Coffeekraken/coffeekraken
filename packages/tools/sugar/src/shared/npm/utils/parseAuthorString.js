@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name            parseAuthorString
-     * @namespace       sugar.js.npm
+     * @namespace            js.npm
      * @type            Function
      * @stable
      *

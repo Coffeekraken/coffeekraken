@@ -5,7 +5,7 @@ import __fs from 'fs-extra';
 
 /**
  * @name        copy
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type          Function
  * @async
  * @stable

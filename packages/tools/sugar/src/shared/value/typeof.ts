@@ -12,7 +12,7 @@ interface ITypeofSettings {
 
 /**
  * @name          typeof
- * @namespace          sugar.js.value
+ * @namespace            js.value
  * @type          Function
  * @status              beta
  *

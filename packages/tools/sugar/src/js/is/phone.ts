@@ -3,7 +3,7 @@
 import MobileDetect from 'mobile-detect';
 /**
  * @name        isPhone
- * @namespace           sugar.js.is
+ * @namespace            js.is
  * @type      Function
  * @stable
  *

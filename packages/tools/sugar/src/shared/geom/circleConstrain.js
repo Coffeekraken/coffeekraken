@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const distanceBetween_1 = __importDefault(require("./distanceBetween"));
     /**
      * @name 		circleConstrain
-     * @namespace           sugar.js.geom.2d
+     * @namespace            js.geom.2d
      * @type      Function
      * @stable
      *

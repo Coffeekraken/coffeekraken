@@ -3,7 +3,7 @@
 import _get from 'lodash/get';
 /**
  * @name        propertyProxy
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type      Function
  * @status              beta
  *

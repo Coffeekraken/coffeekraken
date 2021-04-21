@@ -6,7 +6,7 @@ import __toString from '../../shared/string/toString';
 
 /**
  * @name      dataset
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @status              wip
  *

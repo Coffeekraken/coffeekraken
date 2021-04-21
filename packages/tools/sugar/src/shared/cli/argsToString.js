@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const plainObject_1 = __importDefault(require("../is/plainObject"));
     /**
      * @name                  argsToString
-     * @namespace           sugar.js.cli
+     * @namespace            js.cli
      * @type                  Function
      * @status              beta
      *

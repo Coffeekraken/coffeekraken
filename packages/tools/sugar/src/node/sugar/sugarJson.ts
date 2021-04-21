@@ -6,7 +6,7 @@ import __sanitizeSugarJson from '../../shared/sugar/sanitizeSugarJson';
 
 /**
  * @name            sugarJson
- * @namespace       sugar.node.sugar
+ * @namespace            node.sugar
  * @type            Function
  *
  * This function allows you to get back all the "sugar.json" that are at the root of

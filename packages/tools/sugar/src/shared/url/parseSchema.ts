@@ -4,7 +4,7 @@ import __parseString from '../string/parse';
 
 /**
  * @name                                parseSchema
- * @namespace           sugar.js.url
+ * @namespace            js.url
  * @type                                Function
  * @status              wip
  *

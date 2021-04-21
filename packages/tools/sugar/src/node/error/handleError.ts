@@ -6,7 +6,7 @@ import __toString from '../../shared/string/toString';
 
 /**
  * @name                    handleError
- * @namespace               sugar.node.error
+ * @namespace            node.error
  * @type                    Function
  * @status              wip
  *

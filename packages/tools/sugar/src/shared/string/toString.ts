@@ -20,7 +20,7 @@ import { decycle } from 'json-cyclic';
 
 /**
  * @name        toString
- * @namespace           sugar.js.string
+ * @namespace            js.string
  * @type      Function
  * @stable
  *

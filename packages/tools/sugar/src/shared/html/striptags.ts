@@ -4,7 +4,7 @@ import __striptags from 'striptags';
 
 /**
  * @name        striptags
- * @namespace           sugar.js.html
+ * @namespace            js.html
  * @type      Function
  * @stable
  *

@@ -92,6 +92,42 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
   }
 
   /**
+   * @name        postcss
+   * @type      Function
+   * @static
+   *
+   * This static method allows you to get a fully initialized postcss instance using the
+   * configs specified in the ```config.css.compile.plugins``` configuration
+   *
+   * @return        {PostCSS}       A fully configured postcss instance
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static postcss(params?: Partial<ISPostcssCompilerParams>): any {
+    params = <ISPostcssCompilerParams>(
+      __deepMerge(__SPostcssCompilerInterface.defaults(), params ?? {})
+    );
+
+    const cssCompileConfig = __sugarConfig('css.compile');
+
+    const postCssPlugins: any[] = [];
+    if (cssCompileConfig.plugins) {
+      Object.keys(cssCompileConfig.plugins).forEach((pluginName) => {
+        if (pluginName === 'cssnano' && !params.minify) return;
+        if (pluginName === 'postcssImport' && !params.bundle) return;
+        const pluginObj = cssCompileConfig.plugins[pluginName];
+        let required = require(pluginObj.import); // eslint-disable-line
+        required = required.default ?? required;
+
+        postCssPlugins.push(required(pluginObj.settings ?? {}));
+      });
+    }
+
+    return __postCss(postCssPlugins);
+  }
+
+  /**
    * @name            constructor
    * @type             Function
    * @constructor
@@ -182,7 +218,22 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
           files.forEach(async (file, i) => {
             const fileDuration = new __SDuration();
 
-            const res = await __postCss(postCssPlugins).process(file.content, {
+            let res = await __postCss([
+              require('@coffeekraken/s-postcss-sugar-plugin').default
+            ]).process(file.content, {
+              from: file.path
+            });
+
+            // console.log(
+            //   res.css
+            //     .split('\n')
+            //     .map((l, i) => {
+            //       return `${i} ${l}`;
+            //     })
+            //     .join('\n')
+            // );
+
+            res = await __postCss(postCssPlugins).process(res.css, {
               from: file.path
             });
 

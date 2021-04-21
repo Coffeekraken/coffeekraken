@@ -2,7 +2,7 @@
 
 /**
  * @name              getMethods
- * @namespace           sugar.js.class
+ * @namespace            js.class
  * @type              Function
  * @stable
  *

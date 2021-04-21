@@ -1,6 +1,6 @@
 /**
  * @name              helper-clearfix-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "clearfix" related helper classes.
@@ -21,7 +21,7 @@
   @if class-match-namespace('sugar.helper.clearfix') {
     /**
     * @name 		#{sel(clearfix)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clearfix
     * @type        class
     *
@@ -47,7 +47,7 @@
   @if class-match-namespace('sugar.helper.clearfix.float') {
     /**
     * @name 		#{sel(clearfix-float)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clearfix.float
     * @type        class
     *
@@ -73,7 +73,7 @@
   @if class-match-namespace('sugar.helper.clearfix.micro') {
     /**
     * @name 		#{sel(clearfix-micro)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clearfix.micro
     * @type        class
     *
@@ -99,7 +99,7 @@
   @if class-match-namespace('sugar.helper.clearfix.overflow') {
     /**
     * @name 		#{sel(clearfix-overflow)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clearfix.overflow
     * @type        class
     *
@@ -125,7 +125,7 @@
   @if class-match-namespace('sugar.helper.clearfix.facebook') {
     /**
     * @name 		#{sel(clearfix-facebook)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clearfix.facebook
     * @type        class
     *

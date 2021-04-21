@@ -3,6 +3,15 @@ import __get from '@coffeekraken/sugar/shared/object/get';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 export function proxy(path, originalValue, config) {
+  if (path.match(/\.colors\.[a-zA-Z0-9]+$/)) {
+    const newStack = originalValue;
+    Object.keys(originalValue).forEach((modName) => {
+      const color = new __SColor(newStack[modName]);
+      newStack[`${modName}-i`] = color.apply('-i').toString();
+    });
+    return newStack;
+  }
+
   if (path.match(/\.colors\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
     if (path.split('.').pop() === 'default') {
       return originalValue;

@@ -1,7 +1,7 @@
 // @ts-nocheck
 /**
  * @name          testEnv
- * @namespace     sugar.js.is
+ * @namespace            js.is
  * @type          Function
  * @stable
  *

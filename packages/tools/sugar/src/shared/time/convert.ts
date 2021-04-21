@@ -2,7 +2,7 @@
 
 /**
  * @name                                  convert
- * @namespace           sugar.js.time
+ * @namespace            js.time
  * @type                                  Function
  * @stable
  *

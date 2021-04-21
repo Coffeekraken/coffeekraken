@@ -1,6 +1,6 @@
 /**
  * @name      text-ellipsis
- * @namespace           sugar.scss.typography.mixin
+ * @namespace            scss.typography.mixin
  * @type      mixin
  *
  * Crop the text on 1 line if needed
@@ -15,12 +15,10 @@
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
- @mixin text-ellipsis(
-     $type: ellipsis
- ) {
-    text-overflow: $type;
+@mixin text-ellipsis($type: ellipsis) {
+  text-overflow: $type;
 
-    /* Required for text-overflow to do anything */
-    white-space: nowrap;
-    overflow: hidden;
- }
+  /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden;
+}

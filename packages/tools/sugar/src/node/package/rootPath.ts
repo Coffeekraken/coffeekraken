@@ -4,7 +4,7 @@ import __packageRoot from '../path/packageRoot';
 
 /**
  * @name          rootPath
- * @namespace     sugar.node.package
+ * @namespace            node.package
  * @type          Function
  * @status              beta
  *

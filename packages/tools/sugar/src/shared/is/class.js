@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const is_class_1 = __importDefault(require("is-class"));
     /**
      * @name                      class
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type                      Function
      * @stable
      *

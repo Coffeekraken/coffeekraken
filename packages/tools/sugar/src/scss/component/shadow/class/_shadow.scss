@@ -2,7 +2,7 @@
   @if class-match-namespace('sugar.component.shadow') {
     /**
     * @name 		#{sel(shadow)}
-    * @namespace           sugar.scss.shadow.class
+    * @namespace            scss.shadow.class
     * @class-namespace     sugar.component.shadow
     * @type        class
     *
@@ -25,7 +25,7 @@
   @if class-match-namespace('sugar.component.shadow.small') {
     /**
     * @name 		#{sel(shadow--small)}
-    * @namespace           sugar.scss.shadow.class
+    * @namespace            scss.shadow.class
     * @class-namespace     sugar.component.shadow.small
     * @type        class
     *
@@ -48,7 +48,7 @@
   @if class-match-namespace('sugar.component.shadow.big') {
     /**
     * @name 		#{sel(shadow--big)}
-    * @namespace           sugar.scss.shadow.class
+    * @namespace            scss.shadow.class
     * @class-namespace     sugar.component.shadow.big
     * @type        class
     *

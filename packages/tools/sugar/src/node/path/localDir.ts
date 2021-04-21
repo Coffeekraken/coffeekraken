@@ -3,7 +3,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            localDir
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                            Function
  * @stable
  *

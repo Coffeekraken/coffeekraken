@@ -3,7 +3,7 @@ import __isTestEnv from '../../shared/is/testEnv';
 
 /**
  * @name                            childProcess
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type                            Function
  * @status              beta
  *

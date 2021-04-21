@@ -4,7 +4,7 @@ import _glob from 'glob';
 
 /**
  * @name            findPackages
- * @namespace       sugar.node.monorepo
+ * @namespace            node.monorepo
  * @type            Function
  * @async
  * @status              beta

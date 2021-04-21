@@ -4,7 +4,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            classname
- * @namespace       sugar.node.css
+ * @namespace            node.css
  * @type            Function
  * @status              beta
  *

@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name                                splitEvery
-     * @namespace           sugar.js.array
+     * @namespace            js.array
      * @type                                Function
      * @status              beta
      *

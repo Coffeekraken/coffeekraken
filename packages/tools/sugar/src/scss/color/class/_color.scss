@@ -1,6 +1,6 @@
 /**
  * @name              color-classes
- * @namespace         sugar.scss.color.class
+ * @namespace            scss.color.class
  * @type              Mixin
  *
  * This mixin generate all the "color" related classes.
@@ -32,7 +32,7 @@
           $cls: unquote(selector('c-#{$name}'));
           /**
             * @name       	#{$cls}
-            * @namespace       sugar.scss.colo.class
+            * @namespace            scss.colo.class
             * @class-namespace           sugar.color.#{$name}
             * @type        Classname
             *
@@ -55,7 +55,7 @@
           $cls: unquote(selector('bg-#{$name}'));
           /**
             * @name       	#{$cls}
-            * @namespace       sugar.scss.color.class
+            * @namespace            scss.color.class
             * @class-namespace           sugar.color.#{$name}.bg
             * @type        Classname
             *
@@ -81,7 +81,7 @@
               $cls: unquote(selector('c-#{$name}--#{$mod-name}'));
               /**
                 * @name       	#{$cls}
-                * @namespace       sugar.scss.color.class
+                * @namespace            scss.color.class
                 * @class-namespace           sugar.color.#{$name}.#{$mod-name}
                 * @type        Classname
                 *
@@ -104,7 +104,7 @@
               $cls: unquote(selector('bg-#{$name}--#{$mod-name}'));
               /**
                 * @name       	#{$cls}
-                * @namespace       sugar.scss.color.class
+                * @namespace            scss.color.class
                 * @class-namespace           sugar.color.#{$name}.#{$mod-name}.bg
                 * @type        class
                 *

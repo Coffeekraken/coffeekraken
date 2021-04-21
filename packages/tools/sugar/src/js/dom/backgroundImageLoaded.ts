@@ -7,7 +7,7 @@ import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name        backgroundImageLoaded
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

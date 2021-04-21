@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name          rootPath
- * @namespace     sugar.node.package
+ * @namespace            node.package
  * @type          Function
  * @status              beta
  *

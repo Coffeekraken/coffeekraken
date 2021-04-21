@@ -12,7 +12,7 @@ import __typeof from '@coffeekraken/sugar/shared/value/typeof';
 
 /**
  * @name            SProcessPipe
- * @namespace       sugar.node.process
+ * @namespace            node.process
  * @type            Class
  *
  * This class allows you to handle easily some process pipes.

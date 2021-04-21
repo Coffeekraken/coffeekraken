@@ -6,7 +6,7 @@ import easeInOutQuint from '../../shared/easing/easeInOutQuint';
 
 /**
  * @name 		linksScrollHrefAttribute
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Feature
  * @stable
  *

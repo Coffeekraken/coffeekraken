@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const get_1 = __importDefault(require("lodash/get"));
     /**
      * @name        propertyProxy
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type      Function
      * @status              beta
      *

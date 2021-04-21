@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const clipboardy_1 = __importDefault(require("clipboardy"));
 /**
  * @name            paste
- * @namespace       sugar.node.clipboard
+ * @namespace            node.clipboard
  * @type            Function
  * @stable
  *

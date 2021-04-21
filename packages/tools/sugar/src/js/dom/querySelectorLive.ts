@@ -5,7 +5,7 @@ import matches from './matches';
 
 /**
  * @name      querySelectorLive
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

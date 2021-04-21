@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
 /**
  * @name            ResolveSettingsInterface
- * @namespace       sugar.node.module.interface
+ * @namespace            node.module.interface
  * @type            Class
  * @extends         SInterface
  *

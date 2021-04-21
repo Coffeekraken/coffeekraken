@@ -8,7 +8,7 @@ import __parse from '../string/parse';
 
 /**
  * @name                    env
- * @namespace           sugar.js.core
+ * @namespace            js.core
  * @type                    Function
  * @status              wip
  *

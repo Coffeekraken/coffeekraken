@@ -10,7 +10,7 @@ const filename_1 = __importDefault(require("../fs/filename"));
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 /**
  * @name          namespace
- * @namespace     sugar.node.package
+ * @namespace            node.package
  * @type          Function
  * @status              wip
  *

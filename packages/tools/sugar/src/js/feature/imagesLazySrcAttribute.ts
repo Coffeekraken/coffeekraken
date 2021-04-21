@@ -6,7 +6,7 @@ import deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name 		imagesLazySrcAttribute
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Feature
  * @stable
  *

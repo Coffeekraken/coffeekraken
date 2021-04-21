@@ -5,7 +5,7 @@ import __querySelectorLive from '../dom/querySelectorLive';
 
 /**
  * @name 		handleInputAttributes
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Feature
  * @stable
  *

@@ -4,7 +4,7 @@ import scriptLoaded from './scriptLoaded';
 
 /**
  * @name        appendScriptTag
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

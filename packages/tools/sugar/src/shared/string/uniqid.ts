@@ -3,7 +3,7 @@
 import __uniqid from 'uniqid';
 /**
  * @name          uniqid
- * @namespace           sugar.js.string
+ * @namespace            js.string
  * @type          Function
  * @stable
  *

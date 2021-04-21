@@ -2,12 +2,12 @@
 
 import __deepMerge from '../../shared/object/deepMerge';
 import __resolveGlob from './resolveGlob';
-import __extractGlob from './extractGlob';
-import __extractNoneGlob from './extractNoneGlob';
+import __extractGlob from '../../shared/glob/extractGlob';
+import __extractNoneGlob from '../../shared/glob/extractNoneGlob';
 
 /**
  * @name                SGlob
- * @namespace           sugar.node.glob
+ * @namespace            node.glob
  * @type                Class
  * @status              beta
  *

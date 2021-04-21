@@ -4,7 +4,7 @@ import __convert from '../../shared/unit/convert';
 
 /**
  * @name      getTranslateProperties
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

@@ -15,6 +15,11 @@ class postcssSugarPluginColorInterface extends __SInterface {
     modifier: {
       type: 'String',
       alias: 'm'
+    },
+    return: {
+      type: 'String',
+      values: ['var', 'value'],
+      default: 'var'
     }
   };
 }
@@ -23,16 +28,20 @@ export { postcssSugarPluginColorInterface as interface };
 export interface IPostcssSugarPluginColorParams {
   name: string;
   modifier: string;
+  return: 'var' | 'value';
 }
 
 export default function (params: Partial<IPostcssSugarPluginColorParams> = {}) {
   const finalParams: IPostcssSugarPluginColorParams = {
     name: '',
     modifier: '',
+    return: 'var',
     ...params
   };
 
   let isPlainColor = false;
+
+  console.log(finalParams);
 
   if (
     finalParams.name.match(/^#[a-zA-Z0-9]{3,6}$/) ||
@@ -51,31 +60,53 @@ export default function (params: Partial<IPostcssSugarPluginColorParams> = {}) {
   ) {
     isPlainColor = true;
 
-    console.log(finalParams);
-
     const color = new __SColor(finalParams.name);
     if (finalParams.modifier) {
-      console.log(finalParams);
       color.apply(finalParams.modifier);
     }
     return color.toString();
   } else {
-    const theme = __sugarConfig('theme');
-    if (!theme.default.colors[finalParams.name])
-      throw new Error(
-        `Sorry but the requested color "<yellow>${finalParams.name}</yellow>" does not exists...`
-      );
+    let theme = 'default';
+    let name = finalParams.name;
+    let modifier = '';
+    let invert = false;
 
-    let colorVar = `--s-colors-${finalParams.name}`;
-    if (finalParams.modifier) colorVar += `-${finalParams.modifier}`;
-    else colorVar += '-default';
-
-    let colorValue = theme.default.colors[finalParams.name].default;
-
-    if (finalParams.modifier) {
-      colorValue = theme.default.colors[finalParams.name][finalParams.modifier];
+    if (name.split('--').length >= 2) {
+      if (name.split('--').pop() === 'i') {
+        name = name.replace(/\-\-i$/, '');
+        invert = true;
+      }
+      modifier = name.split('--')[1];
+      name = name.split('--')[0];
     }
 
-    return `var(${colorVar}, ${colorValue})`;
+    if (name.split('.').length === 2) {
+      theme = name.split('.')[0];
+      name = name.split('.')[1];
+    }
+
+    console.log(name, modifier, invert);
+
+    const themeConfig = __sugarConfig(`theme`);
+
+    let modifierStr = modifier || 'default';
+    if (invert) modifierStr += '-i';
+
+    let colorValue = themeConfig[theme].colors[name][modifierStr];
+    if (!colorValue && theme !== 'default')
+      colorValue = themeConfig.default.colors[name][modifierStr];
+    if (!colorValue) {
+      throw new Error(
+        `Sorry but the requested color "<yellow>${name}-${modifierStr}</yellow>" does not exists...`
+      );
+    }
+
+    let colorVar = `--s-theme-${theme}-colors-${name}-${modifierStr}`;
+
+    if (finalParams.return === 'var') {
+      return `var(${colorVar}, ${colorValue})`;
+    } else {
+      return colorValue;
+    }
   }
 }

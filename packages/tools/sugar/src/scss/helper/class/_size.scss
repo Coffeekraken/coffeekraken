@@ -1,6 +1,6 @@
 /**
  * @name              helper-size-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "size" related helper classes.
@@ -31,7 +31,7 @@
   @if class-match-namespace('sugar.helper.size.abs.cover') {
     /**
     * @name 		#{sel(abs-cover)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover
     * @type        Classname
     *
@@ -52,7 +52,7 @@
   @if class-match-namespace('sugar.helper.size.abs.cover.top') {
     /**
     * @name 		#{sel(abs-cover--top)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover.top
     * @type        Classname
     *
@@ -74,7 +74,7 @@
   @if class-match-namespace('sugar.helper.size.abs.cover.middle') {
     /**
     * @name 		#{sel(abs-cover--middle)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover.middle
     * @type        Classname
     *
@@ -96,7 +96,7 @@
   @if class-match-namespace('sugar.helper.size.abs.cover.bottom') {
     /**
     * @name 		#{sel(abs-cover--bottom)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover.bottom
     * @type        Classname
     *
@@ -119,7 +119,7 @@
   @if class-match-namespace('sugar.helper.size.abs.cover.left') {
     /**
     * @name 		#{sel(abs-cover--left)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover.left
     * @type        Classname
     *
@@ -141,7 +141,7 @@
   @if class-match-namespace('sugar.helper.size.abs.cover.center') {
     /**
     * @name 		#{sel(abs-cover--center)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover.center
     * @type        Classname
     *
@@ -163,7 +163,7 @@
   @if class-match-namespace('sugar.helper.size.abs.cover.right') {
     /**
     * @name 		#{sel(abs-cover--right)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover.right
     * @type        Classname
     *
@@ -188,7 +188,7 @@
   @if class-match-namespace('sugar.helper.size.abs.contain') {
     /**
     * @name 		#{sel(abs-contain)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain
     * @type        Classname
     *
@@ -209,7 +209,7 @@
   @if class-match-namespace('sugar.helper.size.abs.contain.top') {
     /**
     * @name 		#{sel(abs-contain--top)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain.top
     * @type        Classname
     *
@@ -231,7 +231,7 @@
   @if class-match-namespace('sugar.helper.size.abs.contain.middle') {
     /**
     * @name 		#{sel(abs-contain--middle)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain.middle
     * @type        Classname
     *
@@ -253,7 +253,7 @@
   @if class-match-namespace('sugar.helper.size.abs.contain.bottom') {
     /**
     * @name 		#{sel(abs-contain--bottom)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain.bottom
     * @type        Classname
     *
@@ -276,7 +276,7 @@
   @if class-match-namespace('sugar.helper.size.abs.contain.left') {
     /**
     * @name 		#{sel(abs-contain--left)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain.left
     * @type        Classname
     *
@@ -298,7 +298,7 @@
   @if class-match-namespace('sugar.helper.size.abs.contain.center') {
     /**
     * @name 		#{sel(abs-contain--center)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain.center
     * @type        Classname
     *
@@ -320,7 +320,7 @@
   @if class-match-namespace('sugar.helper.size.abs.contain.right') {
     /**
     * @name 		#{sel(abs-contain--right)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain.right
     * @type        Classname
     *
@@ -345,7 +345,7 @@
   @if class-match-namespace('sugar.helper.size.abs.fit') {
     /**
     * @name 		#{sel(abs-fit)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.size.abs.fit
     * @type        Classname
     *

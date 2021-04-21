@@ -39,7 +39,7 @@ const availableEasingsArray_1 = __importDefault(require("../../shared/easing/ava
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 /**
  * @name              objectProperties
- * @namespace           sugar.node.transition
+ * @namespace            node.transition
  * @type              Function
  * @status              beta
  *

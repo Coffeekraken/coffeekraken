@@ -2,7 +2,7 @@
 
 /**
  * @name                                    methodExists
- * @namespace           sugar.js.class.utils
+ * @namespace            js.class.utils
  * @type                                    Function
  * @stable
  *

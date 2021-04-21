@@ -7,7 +7,7 @@ import forceRedraw from '../dom/forceRedraw';
 
 /**
  * @name 		SMotionblurSvgFilter
- * @namespace           sugar.js.filter
+ * @namespace            js.filter
  * @type      Class
  * @stable
  *

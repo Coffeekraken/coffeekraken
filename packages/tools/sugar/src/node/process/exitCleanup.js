@@ -18,7 +18,7 @@ const fkill_1 = __importDefault(require("fkill"));
 const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
 /**
  * @name              exitCleanup
- * @namespace           sugar.node.process
+ * @namespace            node.process
  * @type              Function
  * @async
  * @status              wip

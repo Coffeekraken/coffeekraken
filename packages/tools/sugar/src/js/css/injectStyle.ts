@@ -2,7 +2,7 @@
 
 /**
  * @name            injectStyle
- * @namespace           sugar.js.css
+ * @namespace            js.css
  * @type            Function
  * @status              wip
  *

@@ -12,7 +12,7 @@
     const json_cyclic_1 = require("json-cyclic");
     /**
      * @name          decycle
-     * @namespace     sugar.js.object
+     * @namespace            js.object
      * @type          Function
      *
      * This method simply remove the circular references in the passed object

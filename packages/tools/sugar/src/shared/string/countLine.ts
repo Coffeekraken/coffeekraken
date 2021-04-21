@@ -5,7 +5,7 @@ import __stripAnsi from 'strip-ansi';
 
 /**
  * @name                                  countLine
- * @namespace           sugar.js.string
+ * @namespace            js.string
  * @type                                  Function
  * @stable
  *

@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const set_1 = __importDefault(require("./set"));
     /**
      * @name                        ensureExists
-     * @namespace           sugar.js.object
+     * @namespace            js.object
      * @type                        Function
      * @stable
      *

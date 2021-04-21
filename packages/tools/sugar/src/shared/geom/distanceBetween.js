@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name 		distanceBetween
-     * @namespace           sugar.js.geom.2d
+     * @namespace            js.geom.2d
      * @type      Function
      * @stable
      *

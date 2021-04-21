@@ -11,7 +11,7 @@ import IBlessed from '@types/blessed';
 
 /**
  * @name                  SBlessedComponent
- * @namespace           sugar.node.blessed
+ * @namespace            node.blessed
  * @type                  Class
  * @status              wip
  *

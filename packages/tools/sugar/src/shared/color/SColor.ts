@@ -15,7 +15,7 @@ import __convert from './convert';
 
 /**
  * @name 		SColor
- * @namespace           sugar.js.color
+ * @namespace            js.color
  * @type    Class
  * @status              beta
  *

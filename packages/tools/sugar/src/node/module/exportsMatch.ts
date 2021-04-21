@@ -9,7 +9,7 @@ import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtens
 
 /**
  * @name        exportsMatch
- * @namespace   sugar.node.module
+ * @namespace            node.module
  * @type        Function
  *
  * This function take as parameter the content of the "exports" package.json field

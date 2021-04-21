@@ -2,7 +2,7 @@
 
 /**
  * @name        throttle
- * @namespace           sugar.js.function
+ * @namespace            js.function
  * @type      Function
  * @stable
  *

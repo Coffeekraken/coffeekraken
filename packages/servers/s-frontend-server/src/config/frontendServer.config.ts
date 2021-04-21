@@ -174,55 +174,56 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: `${__dirname}/../node/handlers/view`
+    },
+    /**
+     * @name            doc
+     * @namespace       config.frontendServer.handlers
+     * @type            Object
+     *
+     * Store all the "doc" configuration access like the route, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    doc: {
+      /**
+       * @name          route
+       * @namespace     config.frontendServer.handlers.doc
+       * @type          String
+       * @default       /doc/*
+       *
+       * Specify the url route to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      route: '/doc/*',
+      /**
+       * @name          title
+       * @namespace     config.frontendServer.handlers.doc
+       * @type          String
+       * @default       Views | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Doc | [title]',
+      /**
+       * @name            handler
+       * @namespace       config.frontendServer.handlers.doc
+       * @type            Function
+       * @default         ${__dirname}/../node/handlers/view
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../node/handlers/doc`
     }
-    // /**
-    //  * @name            doc
-    //  * @namespace       config.frontendServer.handlers
-    //  * @type            Object
-    //  *
-    //  * Store all the "doc" configuration access like the route, the title, etc...
-    //  *
-    //  * @since         2.0.0
-    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //  */
-    // doc: {
-    //   /**
-    //    * @name          route
-    //    * @namespace     config.frontendServer.handlers.views
-    //    * @type          String
-    //    * @default       /doc
-    //    *
-    //    * Specify the url route to use for this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   route: '/doc',
-    //   /**
-    //    * @name          title
-    //    * @namespace     config.frontendServer.handlers.views
-    //    * @type          String
-    //    * @default       Views | [title]
-    //    *
-    //    * Specify the page title wanted. Accessible tokens:
-    //    * - [title]: Name of the view
-    //    *
-    //    * @since       2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   title: 'Doc | [title]',
-    //   /**
-    //    * @name            handler
-    //    * @namespace       config.frontendServer.handlers.views
-    //    * @type            Function
-    //    *
-    //    * Specify the handler function that will take care of responding to this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   handler: `${__dirname}/../node/server/frontend/handlers/doc`
-    // }
     // /**
     //  * @name            docMap
     //  * @namespace       config.frontendServer.handlers

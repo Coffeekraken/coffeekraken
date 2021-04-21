@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name                    px2rem
-     * @namespace           sugar.js.unit
+     * @namespace            js.unit
      * @type                    Function
      * @stable
      *

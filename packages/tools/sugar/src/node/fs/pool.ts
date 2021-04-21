@@ -4,10 +4,12 @@ import __expandGlob from '../../shared/glob/expandGlob';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __replacePathTokens from '../path/replacePathTokens';
+import __matchGlob from '../glob/matchGlob';
+import __hotkey from '../keyboard/hotkey';
 
 /**
  * @name                pool
- * @namespace           sugar.ts.fs
+ * @namespace            ts.fs
  * @type                Function
  * @async
  *
@@ -40,6 +42,7 @@ export interface IPoolSettings {
   SFile: boolean;
   updateTimeout: number;
   cwd: string;
+  exclude: string[];
   watch: boolean;
   [key: string]: any;
 }
@@ -54,6 +57,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           updateTimeout: 500,
           cwd: process.cwd(),
           watch: false,
+          exclude: [],
           ignored: ['**/node_modules/**/*', '**/.git/**/*'],
           ignoreInitial: true
         },
@@ -67,15 +71,21 @@ function pool(input, settings?: Partial<IPoolSettings>) {
       input = __replacePathTokens(input);
 
       // expand glob
-      const expandedGlobs: string[] = __expandGlob(input);
+      const expandedGlobs: string[] = __expandGlob(input).map((l) => {
+        return l.split(':')[0];
+      });
 
       // using chokidar to watch files
       const watcher = __chokidar.watch(expandedGlobs, {
-        ...set
+        ...set,
+        ignored: [...set.ignored, ...(set.exclude ?? [])]
       });
       watcher
         .on('add', (path) => {
           if (filesStack[path]) return;
+
+          if (!__matchGlob(path, input)) return;
+
           // make sure it's not exists already
           if (!filesStack[path]) {
             if (set.SFile) filesStack[path] = __SFile.new(path);
@@ -84,6 +94,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           emit('add', filesStack[path]);
         })
         .on('change', (path) => {
+          if (!__matchGlob(path, input)) return;
           if (!filesStack[path]) {
             if (set.SFile) filesStack[path] = __SFile.new(path);
             else filesStack[path] = path;
@@ -91,6 +102,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           emit('update', filesStack[path]);
         })
         .on('unlink', (path) => {
+          if (!__matchGlob(path, input)) return;
           // @ts-ignore
           if (filesStack[path] && filesStack[path].path) {
             // @ts-ignore
@@ -109,24 +121,28 @@ function pool(input, settings?: Partial<IPoolSettings>) {
               filesPaths.push(`${path}/${fileName}`);
             });
           });
-          filesPaths.forEach((filePath) => {
-            if (set.SFile) finalFiles.push(__SFile.new(filePath));
-            else finalFiles.push(filePath);
-            emit('file', finalFiles[finalFiles.length - 1]);
-            // save file in file stack
-            filesStack[filePath] = finalFiles[finalFiles.length - 1];
-          });
+          filesPaths
+            .filter((filePath) => {
+              return __matchGlob(filePath, input);
+            })
+            .forEach((filePath) => {
+              if (set.SFile) finalFiles.push(__SFile.new(filePath));
+              else finalFiles.push(filePath);
+              emit('file', finalFiles[finalFiles.length - 1]);
+              // save file in file stack
+              filesStack[filePath] = finalFiles[finalFiles.length - 1];
+            });
           emit('files', finalFiles);
           if (!set.watch) {
             watcher.close();
             resolve(finalFiles);
           }
-        });
+        })
 
-      // handle cancel
-      on('cancel', () => {
-        watcher.close();
-      });
+        // handle cancel
+        .on('cancel', () => {
+          watcher.close();
+        });
     },
     {
       eventEmitter: {}

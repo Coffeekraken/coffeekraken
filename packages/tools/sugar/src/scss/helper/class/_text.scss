@@ -1,6 +1,6 @@
 /**
  * @name              helper-text-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "text" related helper classes.
@@ -41,7 +41,7 @@
       @if class-match-namespace('sugar.helper.text.#{$size}') {
         /**
           * @name       	#{sel(t-#{$size})}
-          * @namespace       sugar.scss.helper.class
+          * @namespace            scss.helper.class
           * @class-namespace           sugar.helper.text.#{$size}
           * @type        class
           *
@@ -63,7 +63,7 @@
       @if class-match-namespace('sugar.helper.text.rel.#{$size}') {
         /**
           * @name       	#{sel(t-#{$size}-rel)}
-          * @namespace       sugar.scss.helper.class
+          * @namespace            scss.helper.class
           * @class-namespace           sugar.helper.text.rel.#{$size}
           * @type        Classname
           *
@@ -87,7 +87,7 @@
   @if class-match-namespace('sugar.helper.text.hidden') {
     /**
     * @name 		#{sel(t-hidden)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.hidden
     * @type        Classname
     *
@@ -108,7 +108,7 @@
   @if class-match-namespace('sugar.helper.text.truncate') {
     /**
     * @name 		#{sel(t-truncate)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.truncate
     * @type        Classname
     *
@@ -129,7 +129,7 @@
   @if class-match-namespace('sugar.helper.text.align.left') {
     /**
     * @name 		#{sel(t-left)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.align.left
     * @type        Classname
     *
@@ -150,7 +150,7 @@
   @if class-match-namespace('sugar.helper.text.align.right') {
     /**
     * @name 		#{sel(t-right)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.align.right
     * @type        Classname
     *
@@ -171,7 +171,7 @@
   @if class-match-namespace('sugar.helper.text.align.center') {
     /**
     * @name 		#{sel(t-center)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.align.center
     * @type        Classname
     *
@@ -192,7 +192,7 @@
   @if class-match-namespace('sugar.helper.text.align.justify') {
     /**
     * @name 		#{sel(t-justify)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.align.justify
     * @type        Classname
     *
@@ -213,7 +213,7 @@
   @if class-match-namespace('sugar.helper.text.transform.lowercase') {
     /**
     * @name 		#{sel(t-lowercase)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.transform.lowercase
     * @type        Classname
     *
@@ -234,7 +234,7 @@
   @if class-match-namespace('sugar.helper.text.transform.uppercase') {
     /**
     * @name 		#{sel(t-uppercase)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.transform.uppercase
     * @type        Classname
     *
@@ -255,7 +255,7 @@
   @if class-match-namespace('sugar.helper.text.transform.capitalize') {
     /**
     * @name 		#{sel(t-capitalize)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.transform.capitalize
     * @type        Classname
     *
@@ -277,7 +277,7 @@
   @if class-match-namespace('sugar.helper.text.weight.bold') {
     /**
     * @name 		#{sel(t-bold)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.weight.bold
     * @type        Classname
     *
@@ -299,7 +299,7 @@
   @if class-match-namespace('sugar.helper.text.weight.bolder') {
     /**
     * @name 		#{sel(t-bolder)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.weight.bolder
     * @type        Classname
     *
@@ -321,7 +321,7 @@
   @if class-match-namespace('sugar.helper.text.weight.normal') {
     /**
     * @name 		#{sel(t-normal)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.weight.normal
     * @type        Classname
     *
@@ -343,7 +343,7 @@
   @if class-match-namespace('sugar.helper.text.weight.light') {
     /**
     * @name 		#{sel(t-light)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.weight.light
     * @type        Classname
     *
@@ -365,7 +365,7 @@
   @if class-match-namespace('sugar.helper.text.weight.lighter') {
     /**
     * @name 		#{sel(t-lighter)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.weight.lighter
     * @type        Classname
     *
@@ -387,7 +387,7 @@
   @if class-match-namespace('sugar.helper.text.style.italic') {
     /**
     * @name 		#{sel(t-italic)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.style.italic
     * @type        Classname
     *
@@ -411,7 +411,7 @@
     @if class-match-namespace('sugar.helper.text.font.#{$name}') {
       /**
       * @name 		#{sel(t-#{$name})}
-      * @namespace         sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.text.font.#{$name}
       * @type        Classname
       *
@@ -434,7 +434,7 @@
   @if class-match-namespace('sugar.helper.text.reset') {
     /**
     * @name 		#{sel(t-reset)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.reset
     * @type        Classname
     *
@@ -465,7 +465,7 @@
   @if class-match-namespace('sugar.helper.decoration.none') {
     /**
     * @name 		#{sel(t-decoration-none)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.decoration.none
     * @type        Classname
     *
@@ -487,7 +487,7 @@
   @if class-match-namespace('sugar.helper.text.decoration.underline') {
     /**
     * @name 		#{sel(t-underline)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.decoration.underline
     * @type        Classname
     *
@@ -509,7 +509,7 @@
   @if class-match-namespace('sugar.helper.text.decoration.line-through') {
     /**
     * @name 		#{sel(t-line-through)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.decoration.line-through
     * @type        Classname
     *
@@ -531,7 +531,7 @@
   @if class-match-namespace('sugar.helper.text.decoration.overline') {
     /**
     * @name 		#{sel(t-overline)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.text.decoration.overline
     * @type        Classname
     *

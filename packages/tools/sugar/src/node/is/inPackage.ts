@@ -4,7 +4,7 @@ import __isInPackage from '../path/isInPackage';
 
 /**
  * @name            inPackage
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type            Function
  * @stable
  *

@@ -2,7 +2,7 @@
 
 /**
  * @name                    em2px
- * @namespace           sugar.js.unit
+ * @namespace            js.unit
  * @type                    Function
  * @stable
  *

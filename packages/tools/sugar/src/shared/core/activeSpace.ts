@@ -6,7 +6,7 @@ import __isGlob from 'is-glob';
 
 /**
  * @name                    activeSpace
- * @namespace           sugar.js.core
+ * @namespace            js.core
  * @type                    Object
  * @status              wip
  *

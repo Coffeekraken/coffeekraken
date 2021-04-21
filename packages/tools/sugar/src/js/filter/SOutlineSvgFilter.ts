@@ -4,7 +4,7 @@ import SSvgFilter from './SSvgFilter';
 
 /**
  * @name 		        SOutlineSvgFilter
- * @namespace           sugar.js.filter
+ * @namespace            js.filter
  * @type            Class
  * @extends 	    	SSvgFilter
  * @stable

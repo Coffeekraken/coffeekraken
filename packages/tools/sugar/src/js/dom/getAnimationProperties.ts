@@ -5,7 +5,7 @@ import __convert from '../../shared/time/convert';
 
 /**
  * @name      getAnimationProperties
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

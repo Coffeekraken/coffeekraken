@@ -2,7 +2,7 @@
 
 /**
  * @name                                splitEvery
- * @namespace           sugar.js.array
+ * @namespace            js.array
  * @type                                Function
  * @status              beta
  *

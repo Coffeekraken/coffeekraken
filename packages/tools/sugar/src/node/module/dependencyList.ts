@@ -6,7 +6,7 @@ import __deepMap from '../../shared/object/deepMap';
 
 /**
  * @name                dependencyList
- * @namespace           sugar.node.module
+ * @namespace            node.module
  * @type                Function
  * @async
  *

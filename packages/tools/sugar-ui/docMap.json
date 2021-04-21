@@ -1,1 +1,27 @@
-{}
+{
+    "sugar-ui.js.webcomponents.SSugarUiWebComponent": {
+        "name": "SSugarUiWebComponent",
+        "type": "Webcomponent",
+        "description": "Represent the search based navigation in the sugar ui",
+        "namespace": "sugar-ui.js.webcomponents",
+        "since": "2.0.0",
+        "filename": "SSugarUiWebComponent.js",
+        "extension": "js",
+        "relPath": "src/js/webcomponents/SSugarUiWebComponent.js",
+        "children": {
+            "props": {
+                "name": "props",
+                "type": "Object",
+                "description": "Store all the properties definitions",
+                "static": true,
+                "since": "2.0.0"
+            },
+            "constructor": {
+                "name": "constructor",
+                "type": "Function",
+                "description": "Constructor",
+                "since": "2.0.0"
+            }
+        }
+    }
+}

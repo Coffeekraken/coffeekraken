@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const uniqid_1 = __importDefault(require("../string/uniqid"));
     /**
      * @name                  proxy
-     * @namespace           sugar.js.array
+     * @namespace            js.array
      * @type                  Function
      * @status              wip
      *

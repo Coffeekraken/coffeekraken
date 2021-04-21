@@ -10,7 +10,7 @@ function _decodeHtml(html) {
 
 /**
  * @name      splitLetters
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

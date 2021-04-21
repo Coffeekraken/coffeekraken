@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const md5_1 = __importDefault(require("../crypt/md5"));
     /**
      * @name            gravatarUrl
-     * @namespace           sugar.js.url
+     * @namespace            js.url
      * @type            Function
      * @stable
      *

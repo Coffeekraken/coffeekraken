@@ -4,7 +4,7 @@ import __getStyleProperty from './getStyleProperty';
 
 /**
  * @name      textWidth
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

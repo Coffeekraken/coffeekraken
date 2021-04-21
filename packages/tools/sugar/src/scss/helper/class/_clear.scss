@@ -1,6 +1,6 @@
 /**
  * @name              helper-clear-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "clear" related helper classes.
@@ -19,7 +19,7 @@
   @if class-match-namespace('sugar.helper.clear.left') {
     /**
     * @name 		#{sel(clear-left)}
-    * @namespace       sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clear.left
     * @type        class
     *
@@ -42,7 +42,7 @@
   @if class-match-namespace('sugar.helper.clear.right') {
     /**
     * @name 		#{sel(clear-right)}
-    * @namespace       sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clear.right
     * @type        class
     *
@@ -66,7 +66,7 @@
   @if class-match-namespace('sugar.helper.clear.both') {
     /**
     * @name 		#{sel(clear)}
-    * @namespace       sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.clear.both
     * @type        class
     *

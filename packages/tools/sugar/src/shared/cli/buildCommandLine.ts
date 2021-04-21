@@ -2,7 +2,7 @@ import __argsToString from './argsToString';
 
 /**
  * @name            buildCommandLine
- * @namespace           sugar.js.cli
+ * @namespace            js.cli
  * @type            Function
  * @status              beta
  *

@@ -2,7 +2,7 @@
 
 /**
  * @name        camelize
- * @namespace           sugar.js.string
+ * @namespace            js.string
  * @type      Function
  * @stable
  *

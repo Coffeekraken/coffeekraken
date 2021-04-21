@@ -1,6 +1,6 @@
 /**
  * @name        isClassInstance
- * @namespace    sugar.shared.is
+ * @namespace            shared.is
  * @type         Function
  *
  * Check if the passed item is an object class and not a plain object.

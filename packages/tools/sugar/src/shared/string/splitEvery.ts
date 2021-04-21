@@ -4,7 +4,7 @@ import __countLine from './countLine';
 
 /**
  * @name                          splitEvery
- * @namespace           sugar.js.string
+ * @namespace            js.string
  * @type                          Function
  * @stable
  *

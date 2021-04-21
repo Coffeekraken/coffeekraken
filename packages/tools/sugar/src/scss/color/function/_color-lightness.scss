@@ -1,6 +1,6 @@
 /**
  * @name      color-lightness
- * @namespace           sugar.scss.core.color
+ * @namespace            scss.core.color
  * @type          Function
  *
  * Return the lightness of the passed color
@@ -15,11 +15,6 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-lightness($color) {
-  $color: test-argument(
-    'Sugar.color-lightness',
-    'color',
-    color,
-    $color
-  );
+  $color: test-argument('Sugar.color-lightness', 'color', color, $color);
   @return lightness($color);
 }

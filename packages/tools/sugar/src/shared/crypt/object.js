@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const object_encode_1 = __importDefault(require("object-encode"));
     /**
      * @name            object
-     * @namespace           sugar.js.crypt
+     * @namespace            js.crypt
      * @type            Object
      * @status              wip
      *

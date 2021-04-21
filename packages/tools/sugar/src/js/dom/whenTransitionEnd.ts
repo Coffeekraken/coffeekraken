@@ -4,7 +4,7 @@ import __getTransitionProperties from './getTransitionProperties';
 
 /**
  * @name      whenTransitionEnd
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

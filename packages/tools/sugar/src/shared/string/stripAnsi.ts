@@ -2,7 +2,7 @@ import __stripAnsi from 'strip-ansi';
 
 /**
  * @name            stripAnsi
- * @namespace       sugar.js.string
+ * @namespace            js.string
  * @type            Function
  *
  * This function simply strip all the ansi characters in a string

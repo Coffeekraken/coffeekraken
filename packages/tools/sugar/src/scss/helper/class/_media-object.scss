@@ -1,6 +1,6 @@
 /**
  * @name              helper-media-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "media object" related helper classes.
@@ -20,7 +20,7 @@
   @if class-match-namespace('sugar.helper.media.object') {
     /**
     * @name 		#{sel(media-object)} #{sel(media-object--center)} #{sel(media-object__content)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.media.object
     * @type        class
     *

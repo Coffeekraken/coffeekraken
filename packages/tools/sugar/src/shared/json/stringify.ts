@@ -5,7 +5,7 @@ import { decycle } from 'json-cyclic';
 
 /**
  * @name            stringify
- * @namespace       sugar.js.json
+ * @namespace            js.json
  * @type            Function
  * @status              beta
  *

@@ -15,7 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const argsToString_1 = __importDefault(require("./argsToString"));
     /**
      * @name            buildCommandLine
-     * @namespace           sugar.js.cli
+     * @namespace            js.cli
      * @type            Function
      * @status              beta
      *

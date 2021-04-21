@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name            SNpmUnusedParamsInterface
- * @namespace       sugar.node.npm.interface
+ * @namespace            node.npm.interface
  * @type            Class
  * @extends         SInterface
  * @status          beta

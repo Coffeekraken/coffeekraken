@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const strip_css_comments_1 = __importDefault(require("strip-css-comments"));
     /**
      * @name          stripCssComments
-     * @namespace     sugar.js.css
+     * @namespace            js.css
      * @type          Function
      * @status              wip
      *

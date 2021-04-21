@@ -1,6 +1,6 @@
 /**
  * @name              helper-flex-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "flex" related helper classes.
@@ -37,7 +37,7 @@
   @if class-match-namespace('sugar.helper.flex') {
     /**
     * @name 		#{sel(flex)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex
     * @type        class
     *
@@ -61,7 +61,7 @@
   @if class-match-namespace('sugar.helper.flex-inline') {
     /**
     * @name 		#{sel(flex-inline)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex-inline
     * @type        class
     *
@@ -85,7 +85,7 @@
   @if class-match-namespace('sugar.helper.flex.justify.start') {
     /**
     * @name 		#{sel(flex-justify-start)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.justify.start
     * @type        class
     *
@@ -112,7 +112,7 @@
   @if class-match-namespace('sugar.helper.flex.justify.end') {
     /**
     * @name 		#{sel(flex-justify-end)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.justify.end
     * @type        class
     *
@@ -139,7 +139,7 @@
   @if class-match-namespace('sugar.helper.flex.justify.center') {
     /**
     * @name 		#{sel(flex-justify-center)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.justify.center
     * @type        class
     *
@@ -166,7 +166,7 @@
   @if class-match-namespace('sugar.helper.flex.justify.between') {
     /**
     * @name 		#{sel(flex-justify-between)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.justify.between
     * @type        class
     *
@@ -193,7 +193,7 @@
   @if class-match-namespace('sugar.helper.flex.justify.around') {
     /**
     * @name 		#{sel(flex-justify-around)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.justify.around
     * @type        class
     *
@@ -220,7 +220,7 @@
   @if class-match-namespace('sugar.helper.flex.align.start') {
     /**
     * @name 		#{sel(flex-align-start)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.start
     * @type        class
     *
@@ -247,7 +247,7 @@
   @if class-match-namespace('sugar.helper.flex.align.end') {
     /**
     * @name 		#{sel(flex-align-end)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.end
     * @type        class
     *
@@ -274,7 +274,7 @@
   @if class-match-namespace('sugar.helper.flex.align.center') {
     /**
     * @name 		#{sel(flex-align-center)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.center
     * @type        class
     *
@@ -301,7 +301,7 @@
   @if class-match-namespace('sugar.helper.flex.align.baseline') {
     /**
     * @name 		#{sel(flex-align-baseline)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.baseline
     * @type        class
     *
@@ -328,7 +328,7 @@
   @if class-match-namespace('sugar.helper.flex.align.stretch') {
     /**
     * @name 		#{sel(flex-align-stretch)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.stretch
     * @type        class
     *
@@ -355,7 +355,7 @@
   @if class-match-namespace('sugar.helper.flex.align.self.start') {
     /**
     * @name 		#{sel(flex-align-self-start)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.self.start
     * @type        class
     *
@@ -381,7 +381,7 @@
   @if class-match-namespace('sugar.helper.flex.align.self.end') {
     /**
     * @name 		#{sel(flex-align-self-end)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.self.end
     * @type        class
     *
@@ -407,7 +407,7 @@
   @if class-match-namespace('sugar.helper.flex.align.self.center') {
     /**
     * @name 		#{sel(flex-align-self-center)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.self.center
     * @type        class
     *
@@ -433,7 +433,7 @@
   @if class-match-namespace('sugar.helper.flex.align.self.baseline') {
     /**
     * @name 		#{sel(flex-align-self-baseline)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.self.baseline
     * @type        class
     *
@@ -459,7 +459,7 @@
   @if class-match-namespace('sugar.helper.flex.align.self.stretch') {
     /**
     * @name 		#{sel(flex-align-self-stretch)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.align.self.stretch
     * @type        class
     *
@@ -485,7 +485,7 @@
   @if class-match-namespace('sugar.helper.flex.wrap.no') {
     /**
     * @name 		#{sel(flex-nowrap)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.wrap.no
     * @type        class
     *
@@ -530,7 +530,7 @@
   @if class-match-namespace('sugar.helper.flex.wrap') {
     /**
     * @name 		#{sel(flex-wrap)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.wrap
     * @type        class
     *
@@ -575,7 +575,7 @@
   @if class-match-namespace('sugar.helper.flex.wrap.reverse') {
     /**
     * @name 		#{sel(flex-wrap-reverse)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.flex.wrap.reverse
     * @type        class
     *
@@ -622,7 +622,7 @@
     @for $i from 1 through $ordersCount {
       /**
       * @name 		#{sel(flex-order-#{i})}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.flex.order
       * @type        class
       *

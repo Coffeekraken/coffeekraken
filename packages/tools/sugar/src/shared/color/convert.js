@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const rgba2hex_1 = __importDefault(require("./rgba2hex"));
     /**
      * @name                  convert
-     * @namespace           sugar.js.color
+     * @namespace            js.color
      * @type                  Function
      * @stable
      *

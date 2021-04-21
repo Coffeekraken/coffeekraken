@@ -5,7 +5,7 @@ import __findPkgJson from 'find-package-json';
 
 /**
  * @name                    packageRoot
- * @namespace           sugar.node.path
+ * @namespace            node.path
  * @type                    Function
  *
  * Return the path to either the first finded package root going up the folders, or the highest package root finded
@@ -25,7 +25,7 @@ import __findPkgJson from 'find-package-json';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function packageRoot(from = process.cwd(), highest = false) {
-  if (__isFile(from)) from = from.split('/').slice(0,-1).join('/');
+  if (__isFile(from)) from = from.split('/').slice(0, -1).join('/');
 
   const f = __findPkgJson(from);
   let file = f.next();

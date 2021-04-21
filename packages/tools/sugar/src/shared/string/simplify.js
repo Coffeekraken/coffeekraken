@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name          simply
-     * @namespace     sugar.js.string
+     * @namespace            js.string
      * @type          Function
      * @stable
      *

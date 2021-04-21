@@ -19,7 +19,7 @@ const fs_1 = __importDefault(require("fs"));
 const s_file_1 = __importDefault(require("@coffeekraken/s-file"));
 /**
  * @name            findUp
- * @namespace       sugar.node.fs
+ * @namespace            node.fs
  * @type            Function
  * @async
  *

@@ -4,7 +4,7 @@ namespace Sugar\url;
 
 /**
  * @name            Sugar\url\is_url
- * @namespace       sugar.php.url
+ * @namespace            php.url
  * @type            Function
  * 
  * This function simply check if the passed string a an url or not

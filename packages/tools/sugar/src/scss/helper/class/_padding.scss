@@ -1,6 +1,6 @@
 /**
  * @name              helper-padding-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "padding" related helper classes.
@@ -36,7 +36,7 @@
         $cname: selector('pad');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.default
           * @type        Classname
           *
@@ -57,7 +57,7 @@
         $cname: selector('pad-b');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.bottom.default
           * @type        Classname
           *
@@ -78,7 +78,7 @@
         $cname: selector('pad-t');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.top.default
           * @type        Classname
           *
@@ -99,7 +99,7 @@
         $cname: selector('pad-l');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.left.default
           * @type        Classname
           *
@@ -120,7 +120,7 @@
         $cname: selector('pad-r');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.right.default
           * @type        Classname
           *
@@ -141,7 +141,7 @@
         $cname: selector('pad-x');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.x.default
           * @type        Classname
           *
@@ -163,7 +163,7 @@
         $cname: selector('pad-y');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.y.default
           * @type        Classname
           *
@@ -188,7 +188,7 @@
         $cname: sel('pad-#{$name}');
         /**
           * @name        #{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.#{$name}
           * @type        class
           *
@@ -217,7 +217,7 @@
         $cname: sel('pad-b-#{$name}');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.bottom.#{$name}
           * @type        Classname
           *
@@ -240,7 +240,7 @@
         $cname: sel('pad-t-#{$name}');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.top.#{$name}
           * @type        Classname
           *
@@ -263,7 +263,7 @@
         $cname: sel('pad-l-#{$name}');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.left.#{$name}
           * @type        Classname
           *
@@ -286,7 +286,7 @@
         $cname: sel('pad-r-#{$name}');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.right.#{$name}
           * @type        class
           *
@@ -309,7 +309,7 @@
         $cname: sel('pad-x-#{$name}');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.x.#{$name}
           * @type        Classname
           *
@@ -333,7 +333,7 @@
         $cname: sel('pad-y-#{$name}');
         /**
           * @name       	#{$cname}
-          * @namespace       sugar.scss.core.class
+          * @namespace            scss.core.class
           * @class-namespace           sugar.helper.padding.y.#{$name}
           * @type        Classname
           *
@@ -357,7 +357,7 @@
     @if class-match-namespace('sugar.helper.padding.no') {
       /**
       * @name       	#{sel(no-pad)}
-      * @namespace       sugar.scss.core.class
+      * @namespace            scss.core.class
       * @class-namespace           sugar.helper.padding.no
       * @type        Classname
       *
@@ -377,7 +377,7 @@
     @if class-match-namespace('sugar.helper.padding.no.top') {
       /**
       * @name       	#{sel(no-pad-t)}
-      * @namespace       sugar.scss.core.class
+      * @namespace            scss.core.class
       * @class-namespace           sugar.helper.padding.no.top
       * @type        Classname
       *
@@ -397,7 +397,7 @@
     @if class-match-namespace('sugar.helper.padding.no.right') {
       /**
         * @name       	#{sel(no-pad-r)}
-        * @namespace       sugar.scss.core.class
+        * @namespace            scss.core.class
         * @class-namespace           sugar.helper.padding.no.right
         * @type        Classname
         *
@@ -417,7 +417,7 @@
     @if class-match-namespace('sugar.helper.padding.no.bottom') {
       /**
         * @name       	#{sel(no-pad-b)}
-        * @namespace       sugar.scss.core.class
+        * @namespace            scss.core.class
         * @class-namespace           sugar.helper.padding.no.bottom
         * @type        class
         *
@@ -437,7 +437,7 @@
     @if class-match-namespace('sugar.helper.padding.no.left') {
       /**
         * @name       	#{sel(no-pad-l)}
-        * @namespace       sugar.scss.core.class
+        * @namespace            scss.core.class
         * @class-namespace           sugar.helper.padding.no.left
         * @type        class
         *
@@ -457,7 +457,7 @@
     @if class-match-namespace('sugar.helper.padding.no.x') {
       /**
         * @name       	#{sel(no-pad-x)}
-        * @namespace       sugar.scss.core.class
+        * @namespace            scss.core.class
         * @class-namespace           sugar.helper.padding.no.x
         * @type        class
         *
@@ -478,7 +478,7 @@
     @if class-match-namespace('sugar.helper.padding.no.y') {
       /**
         * @name       	#{sel(no-pad-y)}
-        * @namespace       sugar.scss.core.class
+        * @namespace            scss.core.class
         * @class-namespace           sugar.helper.padding.no.y
         * @type        class
         *

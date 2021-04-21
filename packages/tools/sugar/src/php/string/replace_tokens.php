@@ -4,7 +4,7 @@ namespace Sugar\string;
 
 /**
  * @name            replace_tokens
- * @namespace       sugar.php.string
+ * @namespace            php.string
  * @type            Function
  * 
  * This function take care of replacing some tokens like "%serverIp", "%clientIp", etc...

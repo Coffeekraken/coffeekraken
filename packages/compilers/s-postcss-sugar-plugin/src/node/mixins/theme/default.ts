@@ -40,7 +40,11 @@ export default function (
   const flattenedTheme = __flatten(theme[finalParams.name]);
   const vars: string[] = [];
   Object.keys(flattenedTheme).forEach((key) => {
-    vars.push(`--s-${key.replace(/\./gm, '-')}: ${flattenedTheme[key]};`);
+    vars.push(
+      `--s-theme-${finalParams.name}-${key.replace(/\./gm, '-')}: ${
+        flattenedTheme[key]
+      };`
+    );
   });
 
   if (atRule.parent.type === 'root') {

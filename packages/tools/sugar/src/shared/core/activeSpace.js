@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const is_glob_1 = __importDefault(require("is-glob"));
     /**
      * @name                    activeSpace
-     * @namespace           sugar.js.core
+     * @namespace            js.core
      * @type                    Object
      * @status              wip
      *

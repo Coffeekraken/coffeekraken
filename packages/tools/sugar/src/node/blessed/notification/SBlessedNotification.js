@@ -9,7 +9,7 @@ const parseHtml_1 = __importDefault(require("../../../shared/console/parseHtml")
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 /**
  * @name                    SBlessedNotification
- * @namespace           sugar.node.blessed.notification
+ * @namespace            node.blessed.notification
  * @type                    Class
  * @status              wip
  *

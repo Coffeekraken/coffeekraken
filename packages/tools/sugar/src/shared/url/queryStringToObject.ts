@@ -4,7 +4,7 @@ import ltrim from '../string/ltrim';
 
 /**
  * @name        queryStringToObject
- * @namespace           sugar.js.url
+ * @namespace            js.url
  * @type      Function
  * @stable
  *

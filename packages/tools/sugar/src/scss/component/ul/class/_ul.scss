@@ -1,6 +1,6 @@
 /**
   * @name            ul-classes
-  * @namespace       sugar.scss.component.ul.class
+  * @namespace            scss.component.ul.class
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some unordered lists.
@@ -41,7 +41,7 @@
       @each $size in $sizes {
         /**
       * @name              .#{sel(#{$name}--#{$size})}
-      * @namespace         sugar.scss.component.ul.size.#{$size}
+      * @namespace            scss.component.ul.size.#{$size}
       * @type              Classname
       *
       * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
@@ -74,7 +74,7 @@
       @each $color in $colors {
         /**
       * @name              .#{sel(#{$name}--#{$color})}
-      * @namespace         sugar.scss.component.ul.color.#{$color}
+      * @namespace            scss.component.ul.color.#{$color}
       * @type              Classname
       *
       * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$color}```

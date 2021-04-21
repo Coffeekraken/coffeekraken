@@ -4,7 +4,7 @@ import __SType from '@coffeekraken/s-type';
 
 /**
  * @name              ofType
- * @namespace           sugar.js.is
+ * @namespace            js.is
  * @type              Function
  * @status              beta
  *

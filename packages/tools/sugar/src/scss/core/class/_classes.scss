@@ -3,7 +3,7 @@
 @use 'sass:string';
 /**
  * @name    classes
- * @namespace           sugar.scss.core.class
+ * @namespace            scss.core.class
  * @type      mixin
  *
  * Print out all wanted registered classes like padding helpers, margin helpers, font helpers, etc...
@@ -18,17 +18,16 @@
  *
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
- @mixin classes($namespaces: setting('classes.generate.namespace')) {
-   $namespaces: test-argument(
-     'Sugar.classes',
-     'namespaces',
-     'string|list-string',
-     $namespaces
-     );
+@mixin classes($namespaces: setting('classes.generate.namespace')) {
+  $namespaces: test-argument(
+    'Sugar.classes',
+    'namespaces',
+    'string|list-string',
+    $namespaces
+  );
 
   // override the $__classNamespacesWanted global variable
   $__classNamespacesWanted: $namespaces !global;
 
   @include generate-classes();
-
 }

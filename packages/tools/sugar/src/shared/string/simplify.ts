@@ -4,7 +4,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          simply
- * @namespace     sugar.js.string
+ * @namespace            js.string
  * @type          Function
  * @stable
  *

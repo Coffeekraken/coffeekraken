@@ -4,7 +4,7 @@ namespace Sugar\path;
 
 /**
  * @name        Sugar\path\is_absolute
- * @namespace   sugar.php.path
+ * @namespace            php.path
  * @type        Function
  * 
  * This method simply check if the passed path is absolute or not

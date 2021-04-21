@@ -1,6 +1,6 @@
 /**
  * @name              helper-border-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "border" related helper classes.
@@ -60,7 +60,7 @@
       $cls: selector('border-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$size}
       * @type        class
       *
@@ -83,7 +83,7 @@
       $cls: selector('border-top-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$size}.top
       * @type        class
       *
@@ -106,7 +106,7 @@
       $cls: selector('border-right-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$size}.right
       * @type        class
       *
@@ -129,7 +129,7 @@
       $cls: selector('border-left-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$size}.left
       * @type        class
       *
@@ -152,7 +152,7 @@
       $cls: selector('border-bottom-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$size}.bottom
       * @type        class
       *
@@ -175,7 +175,7 @@
       $cls: selector('border-x-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$size}.x
       * @type        class
       *
@@ -199,7 +199,7 @@
       $cls: selector('border-y-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$size}.y
       * @type        class
       *
@@ -226,7 +226,7 @@
       $cls: selector('radius-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}
       * @type        class
       *
@@ -251,7 +251,7 @@
       $cls: selector('radius-top-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.top
       * @type        class
       *
@@ -277,7 +277,7 @@
       $cls: selector('radius-right-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.right
       * @type        class
       *
@@ -303,7 +303,7 @@
       $cls: selector('radius-left-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.left
       * @type        class
       *
@@ -329,7 +329,7 @@
       $cls: selector('radius-bottom-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.bottom
       * @type        class
       *
@@ -355,7 +355,7 @@
       $cls: selector('radius-top-left-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.top.left
       * @type        class
       *
@@ -380,7 +380,7 @@
       $cls: selector('radius-top-right-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.top.right
       * @type        class
       *
@@ -406,7 +406,7 @@
       $cls: selector('radius-bottom-left-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.bottom.left
       * @type        class
       *
@@ -434,7 +434,7 @@
       $cls: selector('radius-bottom-right-#{$size}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.radius.#{$size}.bottom.right
       * @type        class
       *
@@ -460,7 +460,7 @@
     $cls: selector('radius-circle');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.circle
     * @type        class
     *
@@ -485,7 +485,7 @@
     $cls: selector('radius-pill');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.pill
     * @type        class
     *
@@ -510,7 +510,7 @@
     $cls: selector('no-radius');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no
     * @type        class
     *
@@ -535,7 +535,7 @@
     $cls: selector('no-radius-top');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.top
     * @type        class
     *
@@ -561,7 +561,7 @@
     $cls: selector('no-radius-right');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.right
     * @type        class
     *
@@ -587,7 +587,7 @@
     $cls: selector('no-radius-left');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.left
     * @type        class
     *
@@ -613,7 +613,7 @@
     $cls: selector('no-radius-bottom');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.bottom
     * @type        class
     *
@@ -639,7 +639,7 @@
     $cls: selector('no-radius-top-left');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.top.left
     * @type        class
     *
@@ -664,7 +664,7 @@
     $cls: selector('no-radius-top-right');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.top.right
     * @type        class
     *
@@ -689,7 +689,7 @@
     $cls: selector('no-radius-bottom-left');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.bottom.left
     * @type        class
     *
@@ -714,7 +714,7 @@
     $cls: selector('no-radius-bottom-right');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.radius.no.bottom.right
     * @type        class
     *
@@ -741,7 +741,7 @@
       $cls: selector('border-#{$color}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$color}
       * @type        class
       *
@@ -766,7 +766,7 @@
       $cls: selector('border-top-#{$color}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$color}.top
       * @type        class
       *
@@ -791,7 +791,7 @@
       $cls: selector('border-right-#{$color}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$color}.right
       * @type        class
       *
@@ -816,7 +816,7 @@
       $cls: selector('border-left-#{$color}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$color}.left
       * @type        class
       *
@@ -841,7 +841,7 @@
       $cls: selector('border-bottom-#{$color}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$color}.bottom
       * @type        class
       *
@@ -866,7 +866,7 @@
       $cls: selector('border-x-#{$color}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$color}.x
       * @type        class
       *
@@ -892,7 +892,7 @@
       $cls: selector('border-y-#{$color}');
       /**
       * @name 		#{$cls}
-      * @namespace           sugar.scss.helper.class
+      * @namespace            scss.helper.class
       * @class-namespace     sugar.helper.border.#{$color}.y
       * @type        class
       *
@@ -919,7 +919,7 @@
     $cls: selector('no-border');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.no
     * @type        class
     *
@@ -944,7 +944,7 @@
     $cls: selector('no-border-top');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.no.top
     * @type        class
     *
@@ -969,7 +969,7 @@
     $cls: selector('no-border-right');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.no.right
     * @type        class
     *
@@ -994,7 +994,7 @@
     $cls: selector('no-border-left');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.no.left
     * @type        class
     *
@@ -1019,7 +1019,7 @@
     $cls: selector('no-border-bottom');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.no.bottom
     * @type        class
     *
@@ -1044,7 +1044,7 @@
     $cls: selector('no-border-x');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.no.x
     * @type        class
     *
@@ -1070,7 +1070,7 @@
     $cls: selector('no-border-y');
     /**
     * @name 		#{$cls}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.border.no.y
     * @type        class
     *

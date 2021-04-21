@@ -11,7 +11,7 @@ import __packageJson from './utils/packageJson';
 
 /**
  * @name            SNpmUnusedProcess
- * @namespace       sugar.node.npm
+ * @namespace            node.npm
  * @type            Class
  * @extends         SProcess
  *

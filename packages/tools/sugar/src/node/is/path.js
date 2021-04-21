@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const isPath_1 = __importDefault(require("../fs/isPath"));
 /**
  * @name                            path
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type                            Function
  * @stable
  *

@@ -4,7 +4,7 @@ import __encodeObject from 'object-encode';
 
 /**
  * @name            object
- * @namespace           sugar.js.crypt
+ * @namespace            js.crypt
  * @type            Object
  * @status              wip
  *

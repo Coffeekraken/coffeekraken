@@ -13,7 +13,7 @@ chalk_1.default.level = 3;
 // TODO tests
 /**
  * @name                                parseHtml
- * @namespace           sugar.node.terminal
+ * @namespace            node.terminal
  * @type                                Function
  * @status              wip
  *

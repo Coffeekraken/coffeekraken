@@ -4,7 +4,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          trimLines
- * @namespace     sugar.js.string
+ * @namespace            js.string
  * @type          Function
  * @stable
  *

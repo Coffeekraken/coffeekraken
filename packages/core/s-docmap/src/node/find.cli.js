@@ -1,26 +1,19 @@
 "use strict";
 // @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('TO INTEGRATE');
-    // const settings = __argsToObject(stringArgs, {
-    //   definition: __SDocMapSettingsInterface.definition
-    // });
-    // const docMap = new __SDocMap({
-    //   docMap: settings
-    // });
-    // const findPromise = docMap.find();
-    // __SStdio.new(findPromise, 'terminal');
-    // await findPromise;
-    // process.exit();
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmluZC5jbGkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaW5kLmNsaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7QUFNZCxrQkFBZSxDQUFPLFVBQVUsR0FBRyxFQUFFLEVBQUUsRUFBRTtJQUN2QyxPQUFPLENBQUMsR0FBRyxDQUFDLGNBQWMsQ0FBQyxDQUFDO0lBQzVCLGdEQUFnRDtJQUNoRCxzREFBc0Q7SUFDdEQsTUFBTTtJQUNOLGlDQUFpQztJQUNqQyxxQkFBcUI7SUFDckIsTUFBTTtJQUVOLHFDQUFxQztJQUNyQyx5Q0FBeUM7SUFDekMscUJBQXFCO0lBQ3JCLGtCQUFrQjtBQUNwQixDQUFDLENBQUEsQ0FBQyJ9
+const s_process_1 = __importDefault(require("@coffeekraken/s-process"));
+const SDocMap_1 = __importDefault(require("./SDocMap"));
+const SDocMapFindParamsInterface_1 = __importDefault(require("./interface/SDocMapFindParamsInterface"));
+exports.default = (stringArgs = '') => {
+    const docmap = new SDocMap_1.default();
+    const pro = s_process_1.default.from(docmap.find.bind(docmap), {
+        process: {
+            interface: SDocMapFindParamsInterface_1.default
+        }
+    });
+    pro.run(stringArgs);
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmluZC5jbGkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaW5kLmNsaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCx3RUFBaUQ7QUFDakQsd0RBQWtDO0FBQ2xDLHdHQUFrRjtBQUVsRixrQkFBZSxDQUFDLFVBQVUsR0FBRyxFQUFFLEVBQUUsRUFBRTtJQUNqQyxNQUFNLE1BQU0sR0FBRyxJQUFJLGlCQUFTLEVBQUUsQ0FBQztJQUMvQixNQUFNLEdBQUcsR0FBRyxtQkFBVSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwRCxPQUFPLEVBQUU7WUFDUCxTQUFTLEVBQUUsb0NBQTRCO1NBQ3hDO0tBQ0YsQ0FBQyxDQUFDO0lBQ0gsR0FBRyxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQztBQUN0QixDQUFDLENBQUMifQ==

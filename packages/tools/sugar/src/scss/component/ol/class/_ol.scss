@@ -1,6 +1,6 @@
 /**
   * @name            ol-classes
-  * @namespace       sugar.scss.component.ol.class
+  * @namespace            scss.component.ol.class
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some ordered lists.
@@ -39,7 +39,7 @@
       @each $size in $sizes {
         /**
       * @name              .#{sel(#{$name}--#{$size})}
-      * @namespace         sugar.scss.component
+      * @namespace            scss.component
       * @type              Classname
       *
       * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
@@ -67,7 +67,7 @@
       @each $color in $colors {
         /**
       * @name              .#{sel(#{$name}--#{$color})}
-      * @namespace         sugar.scss.component
+      * @namespace            scss.component
       * @type              Classname
       *
       * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$color}```

@@ -1,6 +1,6 @@
 /**
  * @name              helper-pointer-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "pointer" related helper classes.
@@ -18,7 +18,7 @@
   @if class-match-namespace('sugar.helper.pointer.events.none') {
     /**
     * @name 		#{sel(pointer-events-none)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.pointer.event.none
     * @type        Classname
     *
@@ -39,7 +39,7 @@
   @if class-match-namespace('sugar.helper.pointer.events.all') {
     /**
     * @name 		#{sel(pointer-events-all)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.pointer.event.all
     * @type        Classname
     *

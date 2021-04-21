@@ -6,7 +6,7 @@ import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name                            isPath
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                            Function
  * @stable
  *

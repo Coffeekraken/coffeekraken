@@ -1,6 +1,6 @@
 /**
  * @name            expandGlob
- * @namespace       sugar.js.glob
+ * @namespace            js.glob
  * @type            Function
  *
  * This function take some extended glob pattern(s) and expand them to standard supported

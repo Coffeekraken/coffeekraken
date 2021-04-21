@@ -1,7 +1,7 @@
 @use 'sass:string';
 /**
  * @name    str-slice
- * @namespace           sugar.scss.core.string.function
+ * @namespace            scss.core.string.function
  * @type      function
  *
  * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).

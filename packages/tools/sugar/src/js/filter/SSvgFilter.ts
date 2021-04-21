@@ -4,7 +4,7 @@ import uniqid from '../../shared/string/uniqid';
 
 /**
  * @name 		          SGooeySvgFilter
- * @namespace           sugar.js.filter
+ * @namespace            js.filter
  * @type             Class
  * @status          wip
  *

@@ -1,6 +1,6 @@
 /**
  * @name            sanitizeSugarJson
- * @namespace       sugar.node.sugar
+ * @namespace            node.sugar
  * @type            Function
  *
  * This function allows you to sanitize a sugarJson JSON to be sure you'll get

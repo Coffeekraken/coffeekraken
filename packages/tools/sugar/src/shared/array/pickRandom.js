@@ -11,7 +11,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name            pickRandom
-     * @namespace       sugar.shared.array
+     * @namespace            shared.array
      * @type            Function
      *
      * Pick a random item in the passed array

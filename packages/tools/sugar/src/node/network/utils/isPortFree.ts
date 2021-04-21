@@ -4,7 +4,7 @@ import server from 'http';
 
 /**
  * @name            isPortFree
- * @namespace       sugar.node.http
+ * @namespace            node.http
  * @type            Function
  * @async
  * @status              beta

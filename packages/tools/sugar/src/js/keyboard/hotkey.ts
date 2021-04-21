@@ -8,7 +8,7 @@ hotkeys.filter = function (event) {
 
 /**
  * @name 		hotkey
- * @namespace           sugar.js.keyboard
+ * @namespace            js.keyboard
  * @type      Function
  * @status              beta
  *
@@ -37,7 +37,7 @@ hotkeys.filter = function (event) {
  * @example    js
  * import hotkey from '@coffeekraken/sugar/js/keyboard/hotkey'
  * const promise = hotkey('ctrl+a');
- * promise.on('ctrl+a', (e) => {
+ * promise.on('press', (e) => {
  *    // do something...
  * });
  * promise.cancel();

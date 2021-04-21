@@ -8,7 +8,7 @@ const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens")
 const fs_extra_1 = __importDefault(require("fs-extra"));
 /**
  * @name        copy
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type          Function
  * @async
  * @stable

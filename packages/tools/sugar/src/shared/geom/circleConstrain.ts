@@ -4,7 +4,7 @@ import distanceBetween from './distanceBetween';
 
 /**
  * @name 		circleConstrain
- * @namespace           sugar.js.geom.2d
+ * @namespace            js.geom.2d
  * @type      Function
  * @stable
  *

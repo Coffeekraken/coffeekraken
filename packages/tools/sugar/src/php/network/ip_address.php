@@ -4,7 +4,7 @@ namespace Sugar\network;
 
 /**
  * @name            ip_address
- * @namespace       sugar.php.network
+ * @namespace            php.network
  * @type            Function
  * 
  * This function allows you to get either your "local" ip in the local network, either

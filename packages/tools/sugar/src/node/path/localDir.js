@@ -8,7 +8,7 @@ const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config")
 const fs_extra_1 = __importDefault(require("fs-extra"));
 /**
  * @name                            localDir
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type                            Function
  * @stable
  *

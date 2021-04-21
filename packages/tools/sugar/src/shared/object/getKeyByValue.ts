@@ -2,7 +2,7 @@
 
 /**
  * @name          getKeyByValue
- * @namespace           sugar.js.object
+ * @namespace            js.object
  * @type          Function
  * @stable
  *

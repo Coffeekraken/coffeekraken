@@ -6,7 +6,7 @@ import parse from '../string/parse';
 
 /**
  * @name            base64
- * @namespace           sugar.js.crypt
+ * @namespace            js.crypt
  * @type            Object
  * @status              wip
  *

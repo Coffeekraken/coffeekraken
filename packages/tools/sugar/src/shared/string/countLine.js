@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const strip_ansi_1 = __importDefault(require("strip-ansi"));
     /**
      * @name                                  countLine
-     * @namespace           sugar.js.string
+     * @namespace            js.string
      * @type                                  Function
      * @stable
      *

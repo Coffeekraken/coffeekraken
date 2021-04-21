@@ -2,7 +2,7 @@ import __fs from 'fs';
 
 /**
  * @name        existsSync
- * @namespace   sugar.node.fs
+ * @namespace            node.fs
  * @type        Function
  * @status      stable
  *

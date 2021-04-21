@@ -4,7 +4,7 @@ import __toString from '../string/toString';
 
 /**
  * @name                            replaceTags
- * @namespace           sugar.js.html
+ * @namespace            js.html
  * @type                            Function
  * @stable
  *

@@ -7,7 +7,7 @@ import __convert from '../../shared/time/convert';
 
 /**
  * @name            innerHtml
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type            Function
  * @stable
  *

@@ -2,7 +2,7 @@
 @use "sass:meta";
 /**
  * @name    interpolate
- * @namespace           sugar.scss.core.size.function
+ * @namespace            scss.core.size.function
  * @type    function
  *
  * Return the specified or calculated value of the given stack and size
@@ -36,7 +36,7 @@
 @function interpolate($value, $size) {
   $value: test-argument('Sugar.interpolate', 'value', number, $value);
   $size: test-argument('Sugar.interpolate', 'size', string, $size);
-  
+
   $sizes: setting('sizes');
 
   // get what we need to interpolate the value

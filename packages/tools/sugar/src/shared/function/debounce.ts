@@ -2,7 +2,7 @@
 
 /**
  * @name        debounce
- * @namespace           sugar.js.function
+ * @namespace            js.function
  * @type      Function
  * @stable
  *

@@ -5,7 +5,7 @@ import __fs from 'fs';
 
 /**
  * @name                packageJson
- * @namespace           sugar.node.npm.utils
+ * @namespace            node.npm.utils
  * @type                Function
  * @status              beta
  *

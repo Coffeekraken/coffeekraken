@@ -5,7 +5,7 @@ import __querySelectorLive from '../../dom/querySelectorLive';
 
 /**
  * @name 		dispatchEventAttribute
- * @namespace           sugar.js.feature
+ * @namespace            js.feature
  * @type      Feature
  *
  * Add the possibility to dispatch an event named as you want

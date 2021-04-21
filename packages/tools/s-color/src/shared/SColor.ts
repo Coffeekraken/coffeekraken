@@ -711,9 +711,14 @@ class SColor extends __SClass {
 
     Object.keys(params).forEach((action) => {
       const value = params[action];
+      if (!value) return;
       if (!colorInstance[action] || typeof colorInstance[action] !== 'function')
         return;
-      colorInstance[action](value);
+      if (action === 'invert') {
+        colorInstance.invert();
+      } else {
+        colorInstance[action](value);
+      }
     });
 
     return colorInstance;
@@ -975,6 +980,39 @@ class SColor extends __SClass {
       return n;
     }
     this.l += amount;
+    return this;
+  }
+
+  /**
+   * @name                invert
+   * @type                Function
+   *
+   * Calculate the best color value that will have the best contrast ratio
+   *
+   * @param       {Boolean}       [returnNewInstance=this.colorSettings.returnNewInstance]      Specify if you want a new SColor instance back or update the current one
+   * @return      {SColor}              The SColor instance that represent this new color
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  invert(returnNewInstance = this.colorSettings.returnNewInstance): SColor {
+    // if (returnNewInstance) {
+    //   const n = new SColor(this.toHex());
+    //   n.l += amount;
+    //   return n;
+    // }
+
+    let lightness = this.l + 50;
+    if (lightness > 100) lightness -= 100;
+
+    if (returnNewInstance) {
+      const n = new SColor(this.toHex());
+      n.l = lightness;
+      return n;
+    } else {
+      this.l = lightness;
+    }
+
     return this;
   }
 

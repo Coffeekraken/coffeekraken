@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 /**
  * @name        emit
- * @namespace           sugar.node.event
+ * @namespace            node.event
  * @type          Function
  * @status              beta
  *

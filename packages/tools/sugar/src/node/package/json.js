@@ -8,7 +8,7 @@ const rootPath_1 = __importDefault(require("./rootPath"));
 const fs_1 = __importDefault(require("fs"));
 /**
  * @name          json
- * @namespace     sugar.node.package
+ * @namespace            node.package
  * @type          Function
  * @status              beta
  *

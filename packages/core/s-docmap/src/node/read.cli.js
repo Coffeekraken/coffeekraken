@@ -1,33 +1,19 @@
 "use strict";
 // @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('TO INTEGRATE');
-    // const settings = __argsToObject(stringArgs, {
-    //   definition: __SDocMapSettingsInterface.definition
-    // });
-    // const docMap = new __SDocMap({
-    //   docMap: settings
-    // });
-    // const readPromise = docMap.read();
-    // const stdio = __SStdio.new(readPromise, 'terminal');
-    // const res = await readPromise;
-    // const logStrArray: string[] = [];
-    // Object.keys(res).forEach((namespace) => {
-    //   logStrArray.push(`- <green>${namespace}</green>`);
-    // });
-    // stdio.log({
-    //   value: logStrArray.join('\n')
-    // });
-    // process.exit();
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZC5jbGkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZWFkLmNsaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7QUFNZCxrQkFBZSxDQUFPLFVBQVUsR0FBRyxFQUFFLEVBQUUsRUFBRTtJQUN2QyxPQUFPLENBQUMsR0FBRyxDQUFDLGNBQWMsQ0FBQyxDQUFDO0lBQzVCLGdEQUFnRDtJQUNoRCxzREFBc0Q7SUFDdEQsTUFBTTtJQUNOLGlDQUFpQztJQUNqQyxxQkFBcUI7SUFDckIsTUFBTTtJQUNOLHFDQUFxQztJQUNyQyx1REFBdUQ7SUFDdkQsaUNBQWlDO0lBQ2pDLG9DQUFvQztJQUNwQyw0Q0FBNEM7SUFDNUMsdURBQXVEO0lBQ3ZELE1BQU07SUFDTixjQUFjO0lBQ2Qsa0NBQWtDO0lBQ2xDLE1BQU07SUFDTixrQkFBa0I7QUFDcEIsQ0FBQyxDQUFBLENBQUMifQ==
+const s_process_1 = __importDefault(require("@coffeekraken/s-process"));
+const SDocMap_1 = __importDefault(require("./SDocMap"));
+const SDocMapFindParamsInterface_1 = __importDefault(require("./interface/SDocMapFindParamsInterface"));
+exports.default = (stringArgs = '') => {
+    const docmap = new SDocMap_1.default();
+    const pro = s_process_1.default.from(docmap.read.bind(docmap), {
+        process: {
+            interface: SDocMapFindParamsInterface_1.default
+        }
+    });
+    pro.run(stringArgs);
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZC5jbGkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZWFkLmNsaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCx3RUFBaUQ7QUFDakQsd0RBQWtDO0FBQ2xDLHdHQUE4RTtBQUU5RSxrQkFBZSxDQUFDLFVBQVUsR0FBRyxFQUFFLEVBQUUsRUFBRTtJQUNqQyxNQUFNLE1BQU0sR0FBRyxJQUFJLGlCQUFTLEVBQUUsQ0FBQztJQUMvQixNQUFNLEdBQUcsR0FBRyxtQkFBVSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwRCxPQUFPLEVBQUU7WUFDUCxTQUFTLEVBQUUsb0NBQXdCO1NBQ3BDO0tBQ0YsQ0FBQyxDQUFDO0lBQ0gsR0FBRyxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQztBQUN0QixDQUFDLENBQUMifQ==

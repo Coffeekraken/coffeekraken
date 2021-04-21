@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const isInPackage_1 = __importDefault(require("../path/isInPackage"));
 /**
  * @name            inPackage
- * @namespace           sugar.node.is
+ * @namespace            node.is
  * @type            Function
  * @stable
  *

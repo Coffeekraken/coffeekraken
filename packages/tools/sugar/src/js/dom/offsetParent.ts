@@ -3,7 +3,7 @@
 import __offset from './offset';
 /**
  * @name      offsetParent
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

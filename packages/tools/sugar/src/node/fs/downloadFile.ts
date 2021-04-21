@@ -6,7 +6,7 @@ import __download from 'download-file';
 
 /**
  * @name              downloadFile
- * @namespace           sugar.node.fs
+ * @namespace            node.fs
  * @type              Function
  * @stable
  *

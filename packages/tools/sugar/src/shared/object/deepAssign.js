@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const clone_1 = __importDefault(require("./clone"));
     /**
      * @name            deepAssign
-     * @namespace       sugar.js.object
+     * @namespace            js.object
      * @type            Function
      *
      * This function take as first parameter the object you want to assign others to,

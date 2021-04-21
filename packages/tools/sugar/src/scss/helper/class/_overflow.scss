@@ -1,6 +1,6 @@
 /**
  * @name              helper-overflow-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "overflow" related helper classes.
@@ -18,7 +18,7 @@
   @if class-match-namespace('sugar.helper.overflow.hidden') {
     /**
     * @name 		#{sel(overflow-hidden)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.overflow.hidden
     * @type        Classname
     *
@@ -45,7 +45,7 @@
   @if class-match-namespace('sugar.helper.overflow.auto') {
     /**
     * @name 		#{sel(overflow-auto)}
-    * @namespace           sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.overflow.auto
     * @type        Classname
     *

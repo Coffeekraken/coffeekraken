@@ -1,6 +1,6 @@
 /**
  * @name              helper-ratio-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "ratio" related helper classes.
@@ -20,7 +20,7 @@
       $cname: selector('#{$name}');
       /**
         * @name       	#{$cname}
-        * @namespace       sugar.scss.helper.class
+        * @namespace            scss.helper.class
         * @class-namespace           sugar.helper.ratio.#{$name}
         * @type        Classname
         *

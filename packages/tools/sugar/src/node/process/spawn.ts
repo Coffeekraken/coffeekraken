@@ -10,7 +10,7 @@ import __isTestEnv from '../../shared/is/testEnv';
 
 /**
  * @name            spawn
- * @namespace       sugar.node.process
+ * @namespace            node.process
  * @type            Function
  * @async
  * @status              wip

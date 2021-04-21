@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ip_1 = __importDefault(require("ip"));
 /**
  * @name              ipAddress
- * @namespace         sugar.node.network
+ * @namespace            node.network
  * @type              Function
  * @status              beta
  *

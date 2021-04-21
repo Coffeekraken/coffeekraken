@@ -1,6 +1,6 @@
 /**
  * @name              helper-pull-classes
- * @namespace         sugar.scss.helper.class
+ * @namespace            scss.helper.class
  * @type              Mixin
  *
  * This mixin generate all the "pull" related helper classes.
@@ -19,7 +19,7 @@
   @if class-match-namespace('sugar.helper.pull.left') {
     /**
     * @name 		#{sel(pull-left)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.pull.left
     * @type        Classname
     *
@@ -40,7 +40,7 @@
   @if class-match-namespace('sugar.helper.pull.right') {
     /**
     * @name 		#{sel(pull-right)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.pull.right
     * @type        Classname
     *
@@ -62,7 +62,7 @@
   @if class-match-namespace('sugar.helper.pull.none') {
     /**
     * @name 		#{sel(pull-none)}
-    * @namespace         sugar.scss.helper.class
+    * @namespace            scss.helper.class
     * @class-namespace     sugar.helper.pull.none
     * @type        Classname
     *

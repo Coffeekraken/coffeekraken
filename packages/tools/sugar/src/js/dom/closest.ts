@@ -4,7 +4,7 @@ import __matches from './matches';
 
 /**
  * @name        closest
- * @namespace           sugar.js.dom
+ * @namespace            js.dom
  * @type      Function
  * @stable
  *

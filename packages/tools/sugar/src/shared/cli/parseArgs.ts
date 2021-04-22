@@ -124,17 +124,23 @@ export default function parseArgs(string, settings = {}) {
         argsObj[currentArgName] = true;
       }
     } else {
+      let value;
       if (part && typeof part === 'string') {
-        part = part
+        value = part
           .replace(/^\\\\\\`/, '')
           .replace(/\\\\\\`$/, '')
           .replace(/^'/, '')
           .replace(/'$/, '')
           .replace(/^"/, '')
           .replace(/"$/, '');
+        if (value.match(/^\$[a-zA-Z0-9-_]+\s?:.*/)) {
+          const parts = part.split(':');
+          currentArgName = parts[0].trim().replace(/^\$/, '');
+          value = parts.slice(1).join(':').trim();
+        }
       }
 
-      currentValue = __parse(part);
+      currentValue = __parse(value);
       if (currentArgName !== undefined) {
         argsObj[currentArgName] = currentValue;
         currentValue = undefined;

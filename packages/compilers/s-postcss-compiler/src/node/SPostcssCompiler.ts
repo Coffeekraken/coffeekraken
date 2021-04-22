@@ -5,6 +5,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __postCss from 'postcss';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
+import __cleanCss from 'clean-css';
 
 import __path from 'path';
 import __fs from 'fs';
@@ -22,6 +23,8 @@ export interface ISPostcssCompilerParams {
   map: boolean;
   prod: boolean;
   minify: boolean;
+  beautify: boolean;
+  optimize: boolean;
   banner: string;
   save: boolean;
   watch: boolean;
@@ -92,42 +95,6 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
   }
 
   /**
-   * @name        postcss
-   * @type      Function
-   * @static
-   *
-   * This static method allows you to get a fully initialized postcss instance using the
-   * configs specified in the ```config.css.compile.plugins``` configuration
-   *
-   * @return        {PostCSS}       A fully configured postcss instance
-   *
-   * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static postcss(params?: Partial<ISPostcssCompilerParams>): any {
-    params = <ISPostcssCompilerParams>(
-      __deepMerge(__SPostcssCompilerInterface.defaults(), params ?? {})
-    );
-
-    const cssCompileConfig = __sugarConfig('css.compile');
-
-    const postCssPlugins: any[] = [];
-    if (cssCompileConfig.plugins) {
-      Object.keys(cssCompileConfig.plugins).forEach((pluginName) => {
-        if (pluginName === 'cssnano' && !params.minify) return;
-        if (pluginName === 'postcssImport' && !params.bundle) return;
-        const pluginObj = cssCompileConfig.plugins[pluginName];
-        let required = require(pluginObj.import); // eslint-disable-line
-        required = required.default ?? required;
-
-        postCssPlugins.push(required(pluginObj.settings ?? {}));
-      });
-    }
-
-    return __postCss(postCssPlugins);
-  }
-
-  /**
    * @name            constructor
    * @type             Function
    * @constructor
@@ -188,6 +155,8 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
         // prod
         if (params.prod) {
           params.minify = true;
+          params.beautify = false;
+          params.optimize = true;
         }
 
         const pool = __fsPool(input, {
@@ -246,6 +215,18 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
             emit('log', {
               value: `<green>[success]</green> File "<cyan>${file.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${fileEnd.formatedDuration}</yellow>`
             });
+
+            if (params.beautify && res.css) {
+              res.css = new __cleanCss({
+                format: 'beautify',
+                level: 0
+              }).minify(res.css).styles;
+            }
+            if (params.optimize && res.css) {
+              res.css = new __cleanCss({
+                level: 2
+              }).minify(res.css).styles;
+            }
 
             if (params.save && res.css) {
               __fs.writeFileSync(outPath, res.css);

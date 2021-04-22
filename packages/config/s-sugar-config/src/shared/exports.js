@@ -17,17 +17,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./sugar", "./registerFolder", "./sugar", "./registerFolder"], factory);
+        define(["require", "exports", "./sugar", "./theme", "./registerFolder", "./sugar", "./registerFolder"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.registerFolder = void 0;
+    exports.themeConfig = exports.registerFolder = void 0;
     const sugar_1 = __importDefault(require("./sugar"));
+    const theme_1 = __importDefault(require("./theme"));
+    exports.themeConfig = theme_1.default;
     const registerFolder_1 = __importDefault(require("./registerFolder"));
     exports.registerFolder = registerFolder_1.default;
     __exportStar(require("./sugar"), exports);
     __exportStar(require("./registerFolder"), exports);
     exports.default = sugar_1.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLG9EQUE0QjtJQUM1QixzRUFBOEM7SUFLckMseUJBTEYsd0JBQWMsQ0FLRTtJQUh2QiwwQ0FBd0I7SUFDeEIsbURBQWlDO0lBR2pDLGtCQUFlLGVBQUssQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLG9EQUE0QjtJQUM1QixvREFBa0M7SUFNVCxzQkFObEIsZUFBVyxDQU1rQjtJQUxwQyxzRUFBOEM7SUFLckMseUJBTEYsd0JBQWMsQ0FLRTtJQUh2QiwwQ0FBd0I7SUFDeEIsbURBQWlDO0lBR2pDLGtCQUFlLGVBQUssQ0FBQyJ9

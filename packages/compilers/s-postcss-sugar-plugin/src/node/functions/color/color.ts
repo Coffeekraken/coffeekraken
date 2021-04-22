@@ -1,8 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
-import __flatten from '@coffeekraken/sugar/shared/object/flatten';
-import __postCss from 'postcss';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { themeConfig } from '@coffeekraken/s-sugar-config';
 import __SColor from '@coffeekraken/s-color';
 
 class postcssSugarPluginColorInterface extends __SInterface {
@@ -40,8 +37,6 @@ export default function (params: Partial<IPostcssSugarPluginColorParams> = {}) {
   };
 
   let isPlainColor = false;
-
-  console.log(finalParams);
 
   if (
     finalParams.name.match(/^#[a-zA-Z0-9]{3,6}$/) ||
@@ -85,23 +80,12 @@ export default function (params: Partial<IPostcssSugarPluginColorParams> = {}) {
       name = name.split('.')[1];
     }
 
-    console.log(name, modifier, invert);
-
-    const themeConfig = __sugarConfig(`theme`);
-
     let modifierStr = modifier || 'default';
     if (invert) modifierStr += '-i';
 
-    let colorValue = themeConfig[theme].colors[name][modifierStr];
-    if (!colorValue && theme !== 'default')
-      colorValue = themeConfig.default.colors[name][modifierStr];
-    if (!colorValue) {
-      throw new Error(
-        `Sorry but the requested color "<yellow>${name}-${modifierStr}</yellow>" does not exists...`
-      );
-    }
+    const colorValue = themeConfig(`color.${name}.${modifierStr}`, theme);
 
-    let colorVar = `--s-theme-${theme}-colors-${name}-${modifierStr}`;
+    let colorVar = `--s-theme-${theme}-color-${name}-${modifierStr}`;
 
     if (finalParams.return === 'var') {
       return `var(${colorVar}, ${colorValue})`;

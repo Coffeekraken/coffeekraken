@@ -121,6 +121,32 @@ export default {
     minify: false,
 
     /**
+     * @name              beautify
+     * @namespace         config.css.compile
+     * @type              Boolean
+     * @default           true
+     *
+     * Specify if you want to beautify the generated css or not
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    beautify: true,
+
+    /**
+     * @name              optimize
+     * @namespace         config.css.compile
+     * @type              Boolean
+     * @default           false
+     *
+     * Specify if you want to optimize the generated css or not
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    optimize: false,
+
+    /**
      * @name              banner
      * @namespace         config.css.compile
      * @type              String

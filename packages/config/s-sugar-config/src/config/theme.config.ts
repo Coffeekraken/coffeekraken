@@ -1,9 +1,28 @@
 import __SColor from '@coffeekraken/s-color';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+
+export function prepare(themeConfig, config) {
+  Object.keys(themeConfig).forEach((themeName) => {
+    const themeObj = themeConfig[themeName];
+    if (themeObj.extends && !themeConfig[themeObj.extends]) {
+      throw new Error(
+        `<red>[theme.config.js]</red> The theme "<yellow>${themeName}</yellow>" need to extends the theme "<yellow>${themeObj.extends}</yellow>" but this theme does not exists...`
+      );
+    } else if (themeObj.extends) {
+      themeConfig[themeName] = __deepMerge(
+        themeConfig[themeObj.extends],
+        themeConfig[themeName]
+      );
+      delete themeConfig[themeName].extends;
+    }
+  });
+  return themeConfig;
+}
 
 export function proxy(path, originalValue, config) {
-  if (path.match(/\.colors\.[a-zA-Z0-9]+$/)) {
+  if (path.match(/\.color\.[a-zA-Z0-9]+$/)) {
     const newStack = originalValue;
     Object.keys(originalValue).forEach((modName) => {
       const color = new __SColor(newStack[modName]);
@@ -12,7 +31,7 @@ export function proxy(path, originalValue, config) {
     return newStack;
   }
 
-  if (path.match(/\.colors\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
+  if (path.match(/\.color\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
     if (path.split('.').pop() === 'default') {
       return originalValue;
     }
@@ -46,7 +65,7 @@ export function proxy(path, originalValue, config) {
 
 export default {
   default: {
-    modifiers: {
+    modifier: {
       50: '-lighten 45%',
       100: '-lighten 40%',
       200: '-lighten 30%',
@@ -59,10 +78,10 @@ export default {
       900: '-darken 40%'
     },
 
-    colors: {
+    color: {
       /**
        * @name                default
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #848e91
        *
@@ -76,12 +95,12 @@ export default {
        */
       default: {
         default: '#848e91',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                title
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #2b3438
        *
@@ -95,12 +114,12 @@ export default {
        */
       title: {
         default: '#2b3438',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                text
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #848e91
        *
@@ -114,12 +133,12 @@ export default {
        */
       text: {
         default: '#848e91',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                link
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             primary
        *
@@ -133,12 +152,12 @@ export default {
        */
       link: {
         default: '#f2bc2b',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                primary
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #f2bc2b
        *
@@ -152,12 +171,12 @@ export default {
        */
       primary: {
         default: '#f2bc2b',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                secondary
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #2b3438
        *
@@ -171,12 +190,12 @@ export default {
        */
       secondary: {
         default: '#6d858f',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                success
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #5cb85c
        *
@@ -190,12 +209,12 @@ export default {
        */
       success: {
         default: '#5cb85c',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                warning
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #f0ad4e
        *
@@ -209,12 +228,12 @@ export default {
        */
       warning: {
         default: '#f0ad4e',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                error
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #d9534f
        *
@@ -228,12 +247,12 @@ export default {
        */
       error: {
         default: '#d9534f',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                info
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #2199e8
        *
@@ -247,12 +266,12 @@ export default {
        */
       info: {
         default: '#2199e8',
-        '...': '[config.theme.default.modifiers]'
+        '...': '[config.theme.default.modifier]'
       },
 
       /**
        * @name                extension
-       * @namespace           config.colors
+       * @namespace           config.color
        * @type                Color
        * @default             #2b3438
        *
@@ -265,7 +284,7 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       extension: {
-        default: '[config.theme.default.colors.primary.default]',
+        default: '[config.theme.default.color.primary.default]',
         blade: '#ff2d20',
         php: '#8892BF',
         js: '#f7df1e',
@@ -287,21 +306,21 @@ export default {
       }
     },
 
-    fonts: {
+    font: {
       /**
-       * @name            families
-       * @namespace       config.fonts
+       * @name            family
+       * @namespace       config.font
        * @type            Object
        *
-       * Store the font families that will be available in the project
+       * Store the font family that will be available in the project
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      families: {
+      family: {
         /**
          * @name            default
-         * @namespace       config.theme.default.fonts.families
+         * @namespace       config.theme.default.fonts.family
          * @type            Object
          *
          * Declare the <primary>default</primary> font face
@@ -318,7 +337,7 @@ export default {
 
         /**
          * @name            title
-         * @namespace       config.theme.default.fonts.families
+         * @namespace       config.theme.default.fonts.family
          * @type            Object
          *
          * Declare the <primary>title</primary> font face
@@ -335,7 +354,7 @@ export default {
 
         /**
          * @name            quote
-         * @namespace       config.theme.default.fonts.families
+         * @namespace       config.theme.default.fonts.family
          * @type            Object
          *
          * Declare the <primary>quote</primary> font face
@@ -353,7 +372,7 @@ export default {
 
         /**
          * @name            code
-         * @namespace       config.theme.default.fonts.families
+         * @namespace       config.theme.default.fonts.family
          * @type            Object
          *
          * Declare the <primary>code</primary> font face
@@ -371,19 +390,19 @@ export default {
       },
 
       /**
-       * @name            sizes
-       * @namespace       config.fonts
+       * @name            size
+       * @namespace       config.font
        * @type            Object
        *
-       * Store the font sizes that will be available in the project
+       * Store the font size that will be available in the project
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      sizes: {
+      size: {
         /**
          * @name          default
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       16px
          *
@@ -395,8 +414,21 @@ export default {
         default: '16px',
 
         /**
+         * @name          0
+         * @namespace     config.theme.default.font.size
+         * @type          String
+         * @default       0
+         *
+         * Declare the font size <primary>50</primary>
+         *
+         * @since         2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        0: 0,
+
+        /**
          * @name          50
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       2px
          *
@@ -409,7 +441,7 @@ export default {
 
         /**
          * @name          100
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       4px
          *
@@ -422,7 +454,7 @@ export default {
 
         /**
          * @name          200
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       8px
          *
@@ -435,7 +467,7 @@ export default {
 
         /**
          * @name          300
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       12px
          *
@@ -448,7 +480,7 @@ export default {
 
         /**
          * @name          400
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       16px
          *
@@ -461,7 +493,7 @@ export default {
 
         /**
          * @name          500
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       24px
          *
@@ -474,7 +506,7 @@ export default {
 
         /**
          * @name          600
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       32px
          *
@@ -487,7 +519,7 @@ export default {
 
         /**
          * @name          700
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       40px
          *
@@ -500,7 +532,7 @@ export default {
 
         /**
          * @name          800
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       48px
          *
@@ -513,7 +545,7 @@ export default {
 
         /**
          * @name          900
-         * @namespace     config.theme.default.fonts.sizes
+         * @namespace     config.theme.default.font.size
          * @type          String
          * @default       56px
          *
@@ -526,11 +558,11 @@ export default {
       }
     },
 
-    borders: {
-      sizes: {
+    border: {
+      size: {
         /**
          * @name              0
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           0
          *
@@ -543,7 +575,7 @@ export default {
 
         /**
          * @name              100
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           1px
          *
@@ -556,7 +588,7 @@ export default {
 
         /**
          * @name              200
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           2px
          *
@@ -569,7 +601,7 @@ export default {
 
         /**
          * @name              300
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           4px
          *
@@ -582,7 +614,7 @@ export default {
 
         /**
          * @name              400
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           6px
          *
@@ -595,7 +627,7 @@ export default {
 
         /**
          * @name              500
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           8px
          *
@@ -608,7 +640,7 @@ export default {
 
         /**
          * @name              600
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           12px
          *
@@ -621,7 +653,7 @@ export default {
 
         /**
          * @name              700
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           16px
          *
@@ -634,7 +666,7 @@ export default {
 
         /**
          * @name              800
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           20px
          *
@@ -647,7 +679,7 @@ export default {
 
         /**
          * @name              900
-         * @namespace         config.theme.borders.sizes
+         * @namespace         config.theme.border.size
          * @type              Number
          * @default           24px
          *
@@ -662,7 +694,7 @@ export default {
       radius: {
         /**
          * @name              default
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           10px
          *
@@ -675,7 +707,7 @@ export default {
 
         /**
          * @name              0
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           0px
          *
@@ -688,7 +720,7 @@ export default {
 
         /**
          * @name              100
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           2px
          *
@@ -701,7 +733,7 @@ export default {
 
         /**
          * @name              200
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           4px
          *
@@ -714,7 +746,7 @@ export default {
 
         /**
          * @name              300
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           6px
          *
@@ -727,7 +759,7 @@ export default {
 
         /**
          * @name              400
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           8px
          *
@@ -740,7 +772,7 @@ export default {
 
         /**
          * @name              500
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           10px
          *
@@ -753,7 +785,7 @@ export default {
 
         /**
          * @name              600
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           12px
          *
@@ -766,7 +798,7 @@ export default {
 
         /**
          * @name              700
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           14px
          *
@@ -779,7 +811,7 @@ export default {
 
         /**
          * @name              800
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           16px
          *
@@ -792,7 +824,7 @@ export default {
 
         /**
          * @name              900
-         * @namespace         config.theme.default.borders.radius
+         * @namespace         config.theme.default.border.radius
          * @type              Number
          * @default           18px
          *
@@ -805,14 +837,21 @@ export default {
       }
     },
 
-    spaces: {
+    ui: {
+      button: {
+        padding: '1em 2em',
+        borderRadius: '0.5em'
+      }
+    },
+
+    space: {
       /**
        * @name            default
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         1rem
        *
-       * Specify the <primary>default</primary> space used for paddings and margins
+       * Specify the <primary>default</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -821,11 +860,11 @@ export default {
 
       /**
        * @name            0
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         0.5rem
        *
-       * Specify the <primary>0</primary> space used for paddings and margins
+       * Specify the <primary>0</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -834,11 +873,11 @@ export default {
 
       /**
        * @name            100
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         0.2rem
        *
-       * Specify the <primary>100</primary> space used for paddings and margins
+       * Specify the <primary>100</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -847,11 +886,11 @@ export default {
 
       /**
        * @name            200
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         0.4rem
        *
-       * Specify the <primary>200</primary> space used for paddings and margins
+       * Specify the <primary>200</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -860,11 +899,11 @@ export default {
 
       /**
        * @name            300
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         0.3rem
        *
-       * Specify the <primary>300</primary> space used for paddings and margins
+       * Specify the <primary>300</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -873,11 +912,11 @@ export default {
 
       /**
        * @name            400
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         0.5rem
        *
-       * Specify the <primary>400</primary> space used for paddings and margins
+       * Specify the <primary>400</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -886,11 +925,11 @@ export default {
 
       /**
        * @name            500
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         1rem
        *
-       * Specify the <primary>500</primary> space used for paddings and margins
+       * Specify the <primary>500</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -899,11 +938,11 @@ export default {
 
       /**
        * @name            600
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         1.2rem
        *
-       * Specify the <primary>600</primary> space used for paddings and margins
+       * Specify the <primary>600</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -912,11 +951,11 @@ export default {
 
       /**
        * @name            700
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         1.4rem
        *
-       * Specify the <primary>700</primary> space used for paddings and margins
+       * Specify the <primary>700</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -925,11 +964,11 @@ export default {
 
       /**
        * @name            800
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         1.6rem
        *
-       * Specify the <primary>800</primary> space used for paddings and margins
+       * Specify the <primary>800</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -938,11 +977,11 @@ export default {
 
       /**
        * @name            900
-       * @namespace       config.theme.default.spaces
+       * @namespace       config.theme.default.space
        * @type            String
        * @default         1.8rem
        *
-       * Specify the <primary>900</primary> space used for paddings and margins
+       * Specify the <primary>900</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -950,294 +989,294 @@ export default {
       900: '1.8rem'
     },
 
-    margins: {
+    margin: {
       /**
        * @name            default
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.default]
+       * @default         [config.theme.default.space.default]
        *
-       * Specify the <primary>default</primary> space used for paddings and margins
+       * Specify the <primary>default</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      default: '[config.theme.default.spaces.default]',
+      default: '[config.theme.default.space.default]',
 
       /**
        * @name            0
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.0]
+       * @default         [config.theme.default.space.0]
        *
-       * Specify the <primary>0</primary> space used for paddings and margins
+       * Specify the <primary>0</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      0: '[config.theme.default.spaces.0]',
+      0: '[config.theme.default.space.0]',
 
       /**
        * @name            100
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.100]
+       * @default         [config.theme.default.space.100]
        *
-       * Specify the <primary>100</primary> space used for paddings and margins
+       * Specify the <primary>100</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      100: '[config.theme.default.spaces.100]',
+      100: '[config.theme.default.space.100]',
 
       /**
        * @name            200
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.200]
+       * @default         [config.theme.default.space.200]
        *
-       * Specify the <primary>200</primary> space used for paddings and margins
+       * Specify the <primary>200</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      200: '[config.theme.default.spaces.200]',
+      200: '[config.theme.default.space.200]',
 
       /**
        * @name            300
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.300]
+       * @default         [config.theme.default.space.300]
        *
-       * Specify the <primary>300</primary> space used for paddings and margins
+       * Specify the <primary>300</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      300: '[config.theme.default.spaces.300]',
+      300: '[config.theme.default.space.300]',
 
       /**
        * @name            400
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.400]
+       * @default         [config.theme.default.space.400]
        *
-       * Specify the <primary>400</primary> space used for paddings and margins
+       * Specify the <primary>400</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      400: '[config.theme.default.spaces.400]',
+      400: '[config.theme.default.space.400]',
 
       /**
        * @name            500
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.500]
+       * @default         [config.theme.default.space.500]
        *
-       * Specify the <primary>500</primary> space used for paddings and margins
+       * Specify the <primary>500</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      500: '[config.theme.default.spaces.500]',
+      500: '[config.theme.default.space.500]',
 
       /**
        * @name            600
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.600]
+       * @default         [config.theme.default.space.600]
        *
-       * Specify the <primary>600</primary> space used for paddings and margins
+       * Specify the <primary>600</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      600: '[config.theme.default.spaces.600]',
+      600: '[config.theme.default.space.600]',
 
       /**
        * @name            700
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.700]
+       * @default         [config.theme.default.space.700]
        *
-       * Specify the <primary>700</primary> space used for paddings and margins
+       * Specify the <primary>700</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      700: '[config.theme.default.spaces.700]',
+      700: '[config.theme.default.space.700]',
 
       /**
        * @name            800
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.800]
+       * @default         [config.theme.default.space.800]
        *
-       * Specify the <primary>800</primary> space used for paddings and margins
+       * Specify the <primary>800</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      800: '[config.theme.default.spaces.800]',
+      800: '[config.theme.default.space.800]',
 
       /**
        * @name            900
-       * @namespace       config.theme.default.margins
+       * @namespace       config.theme.default.margin
        * @type            String
-       * @default         [config.theme.default.spaces.900]
+       * @default         [config.theme.default.space.900]
        *
-       * Specify the <primary>900</primary> space used for paddings and margins
+       * Specify the <primary>900</primary> space used for padding and margin
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      900: '[config.theme.default.spaces.900]'
+      900: '[config.theme.default.space.900]'
     },
 
-    paddings: {
+    padding: {
       /**
        * @name            default
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.default]
+       * @default         [config.theme.default.space.default]
        *
-       * Specify the <primary>default</primary> space used for paddings and paddings
+       * Specify the <primary>default</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      default: '[config.theme.default.spaces.default]',
+      default: '[config.theme.default.space.default]',
 
       /**
        * @name            0
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.0]
+       * @default         [config.theme.default.space.0]
        *
-       * Specify the <primary>0</primary> space used for paddings and paddings
+       * Specify the <primary>0</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      0: '[config.theme.default.spaces.0]',
+      0: '[config.theme.default.space.0]',
 
       /**
        * @name            100
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.100]
+       * @default         [config.theme.default.space.100]
        *
-       * Specify the <primary>100</primary> space used for paddings and paddings
+       * Specify the <primary>100</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      100: '[config.theme.default.spaces.100]',
+      100: '[config.theme.default.space.100]',
 
       /**
        * @name            200
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.200]
+       * @default         [config.theme.default.space.200]
        *
-       * Specify the <primary>200</primary> space used for paddings and paddings
+       * Specify the <primary>200</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      200: '[config.theme.default.spaces.200]',
+      200: '[config.theme.default.space.200]',
 
       /**
        * @name            300
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.300]
+       * @default         [config.theme.default.space.300]
        *
-       * Specify the <primary>300</primary> space used for paddings and paddings
+       * Specify the <primary>300</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      300: '[config.theme.default.spaces.300]',
+      300: '[config.theme.default.space.300]',
 
       /**
        * @name            400
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.400]
+       * @default         [config.theme.default.space.400]
        *
-       * Specify the <primary>400</primary> space used for paddings and paddings
+       * Specify the <primary>400</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      400: '[config.theme.default.spaces.400]',
+      400: '[config.theme.default.space.400]',
 
       /**
        * @name            500
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.500]
+       * @default         [config.theme.default.space.500]
        *
-       * Specify the <primary>500</primary> space used for paddings and paddings
+       * Specify the <primary>500</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      500: '[config.theme.default.spaces.500]',
+      500: '[config.theme.default.space.500]',
 
       /**
        * @name            600
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.600]
+       * @default         [config.theme.default.space.600]
        *
-       * Specify the <primary>600</primary> space used for paddings and paddings
+       * Specify the <primary>600</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      600: '[config.theme.default.spaces.600]',
+      600: '[config.theme.default.space.600]',
 
       /**
        * @name            700
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.700]
+       * @default         [config.theme.default.space.700]
        *
-       * Specify the <primary>700</primary> space used for paddings and paddings
+       * Specify the <primary>700</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      700: '[config.theme.default.spaces.700]',
+      700: '[config.theme.default.space.700]',
 
       /**
        * @name            800
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.800]
+       * @default         [config.theme.default.space.800]
        *
-       * Specify the <primary>800</primary> space used for paddings and paddings
+       * Specify the <primary>800</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      800: '[config.theme.default.spaces.800]',
+      800: '[config.theme.default.space.800]',
 
       /**
        * @name            900
-       * @namespace       config.theme.default.paddings
+       * @namespace       config.theme.default.padding
        * @type            String
-       * @default         [config.theme.default.spaces.900]
+       * @default         [config.theme.default.space.900]
        *
-       * Specify the <primary>900</primary> space used for paddings and paddings
+       * Specify the <primary>900</primary> space used for padding and padding
        *
        * @since           1.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      900: '[config.theme.default.spaces.900]'
+      900: '[config.theme.default.space.900]'
     },
 
     media: {
@@ -1382,7 +1421,8 @@ export default {
   },
 
   dark: {
-    colors: {
+    extends: 'default',
+    color: {
       primary: {
         default: '#ffffff'
       }

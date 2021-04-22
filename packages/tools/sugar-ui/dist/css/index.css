@@ -2,39 +2,27 @@
  * Vendors
  * All external libraries needed in the project.
  */
-@import './00_vendors/all';
-
 /**
   * Setup
   * Setup all the different parts/modules/libraries.
   */
-@import './01_setup/all';
-
 /**
   * Utils
   * Import all the different utils functions, mixins, classes, etc...
   */
-@import './02_utils/all';
-
 /**
   * Generic
   * All the generic codebase for the project like typography, resets, etc...
   */
-@import './03_generic/all';
-
 /**
   * Templates
   * All the templates level specific styling.
   * Templates specific classes have to start with `.t-`.
   */
-@import './04_templates/all';
-
 /**
   * Pages
   * All the pages level specific styling.
   */
-@import './05_pages/all';
-
 /**
   * Organisms
   * All the organisms styling.
@@ -42,8 +30,6 @@
   * to be properly displayed.
   * All organisms specific classes have to start with `.o-`.
   */
-@import './06_organisms/all';
-
 /**
   * Molecules
   * All the molecules styling.
@@ -51,8 +37,6 @@
   * It normally contains only other atoms.
   * All molecules classes have to start with `.m-`.
   */
-@import './07_molecules/all';
-
 /**
   * Atoms
   * All the atoms styling.
@@ -60,193 +44,183 @@
   * it need to be usable everywhere we want without having to deal with pre-defined margins, etc...
   * All atoms specific classes have to start with `.a-`.
   */
-@import './08_atoms/all';
-
 /**
   * Views
   * Import all the views scss files
   * This need the node-sass-glob-importer package installed :
   * https://www.npmjs.com/package/node-sass-glob-importer
   */
-
 /**
   * Trumps
   * All the things that does not fit in any others directory. Try to keep this folder has small as possible.
   * If you have to many things in here, that mean that you probably need to refactor your codebase...
   */
-@import './09_trumps/all';
+/* @sugar.init;
 
-/* @sugar.init; */
-
-/* @sugar.color.docblock; */
-
-/* @sugar.color.classes; */
-
-body {
-  content: #330033;
-  background: var(--s-theme-default-colors-primary-default, #f2bc2b);
-  color: var(--s-theme-default-colors-primary-default, #f2bc2b);
-  something: rgba(var(--s-theme-default-colors-secondary-default, #6d858f), var(--s-theme-default-colors-warning-default, #f0ad4e));
-}
-
+@sugar.color.classes; */
+/* body {
+  content: sugar.color(#ff00ff, '--darken 40%');
+  background: sugar.color(primary, 900);
+  color: sugar.color(primary);
+  something: rgba(sugar.color(secondary, 100), sugar.color(warning, 100));
+} */
 /* button {
   @sugar.ui.button (primary, error);
 } */
-
 .s-btn {
-            background-color: var(--s-theme-default-colors-default-default, #848e91);
-color: var(--s-theme-default-colors-default-default-i, #0a0a0b);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-default-default, #848e91);
+  color: var(--s-theme-default-color-default-default-i, #0a0a0b);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn:hover {
-      background-color: var(--s-theme-default-colors-default-default-i, #0a0a0b);
-      color: var(--s-theme-default-colors-default-default, #848e91);
-    }
-
+  background-color: var(--s-theme-default-color-default-default-i, #0a0a0b);
+  color: var(--s-theme-default-color-default-default, #848e91)
+}
 .s-btn--title {
-            background-color: var(--s-theme-default-colors-title-default, #2b3438);
-color: var(--s-theme-default-colors-title-default-i, #a6b4ba);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-title-default, #2b3438);
+  color: var(--s-theme-default-color-title-default-i, #a6b4ba);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--title:hover {
-      background-color: var(--s-theme-default-colors-title-default-i, #a6b4ba);
-      color: var(--s-theme-default-colors-title-default, #2b3438);
-    }
-
+  background-color: var(--s-theme-default-color-title-default-i, #a6b4ba);
+  color: var(--s-theme-default-color-title-default, #2b3438)
+}
 .s-btn--text {
-            background-color: var(--s-theme-default-colors-text-default, #848e91);
-color: var(--s-theme-default-colors-text-default-i, #0a0a0b);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-text-default, #848e91);
+  color: var(--s-theme-default-color-text-default-i, #0a0a0b);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--text:hover {
-      background-color: var(--s-theme-default-colors-text-default-i, #0a0a0b);
-      color: var(--s-theme-default-colors-text-default, #848e91);
-    }
-
+  background-color: var(--s-theme-default-color-text-default-i, #0a0a0b);
+  color: var(--s-theme-default-color-text-default, #848e91)
+}
 .s-btn--link {
-            background-color: var(--s-theme-default-colors-link-default, #f2bc2b);
-color: var(--s-theme-default-colors-link-default-i, #181202);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-link-default, #f2bc2b);
+  color: var(--s-theme-default-color-link-default-i, #181202);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--link:hover {
-      background-color: var(--s-theme-default-colors-link-default-i, #181202);
-      color: var(--s-theme-default-colors-link-default, #f2bc2b);
-    }
-
+  background-color: var(--s-theme-default-color-link-default-i, #181202);
+  color: var(--s-theme-default-color-link-default, #f2bc2b)
+}
 .s-btn--primary {
-            background-color: var(--s-theme-default-colors-primary-default, #f2bc2b);
-color: var(--s-theme-default-colors-primary-default-i, #181202);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-primary-default, #f2bc2b);
+  color: var(--s-theme-default-color-primary-default-i, #181202);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--primary:hover {
-      background-color: var(--s-theme-default-colors-primary-default-i, #181202);
-      color: var(--s-theme-default-colors-primary-default, #f2bc2b);
-    }
-
+  background-color: var(--s-theme-default-color-primary-default-i, #181202);
+  color: var(--s-theme-default-color-primary-default, #f2bc2b)
+}
 .s-btn--secondary {
-            background-color: var(--s-theme-default-colors-secondary-default, #6d858f);
-color: var(--s-theme-default-colors-secondary-default-i, #fcfdfd);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-secondary-default, #6d858f);
+  color: var(--s-theme-default-color-secondary-default-i, #fcfdfd);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--secondary:hover {
-      background-color: var(--s-theme-default-colors-secondary-default-i, #fcfdfd);
-      color: var(--s-theme-default-colors-secondary-default, #6d858f);
-    }
-
+  background-color: var(--s-theme-default-color-secondary-default-i, #fcfdfd);
+  color: var(--s-theme-default-color-secondary-default, #6d858f)
+}
 .s-btn--success {
-            background-color: var(--s-theme-default-colors-success-default, #5cb85c);
-color: var(--s-theme-default-colors-success-default-i, #060e06);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-success-default, #5cb85c);
+  color: var(--s-theme-default-color-success-default-i, #060e06);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--success:hover {
-      background-color: var(--s-theme-default-colors-success-default-i, #060e06);
-      color: var(--s-theme-default-colors-success-default, #5cb85c);
-    }
-
+  background-color: var(--s-theme-default-color-success-default-i, #060e06);
+  color: var(--s-theme-default-color-success-default, #5cb85c)
+}
 .s-btn--warning {
-            background-color: var(--s-theme-default-colors-warning-default, #f0ad4e);
-color: var(--s-theme-default-colors-warning-default-i, #382305);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-warning-default, #f0ad4e);
+  color: var(--s-theme-default-color-warning-default-i, #382305);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--warning:hover {
-      background-color: var(--s-theme-default-colors-warning-default-i, #382305);
-      color: var(--s-theme-default-colors-warning-default, #f0ad4e);
-    }
-
+  background-color: var(--s-theme-default-color-warning-default-i, #382305);
+  color: var(--s-theme-default-color-warning-default, #f0ad4e)
+}
 .s-btn--error {
-            background-color: var(--s-theme-default-colors-error-default, #d9534f);
-color: var(--s-theme-default-colors-error-default-i, #210707);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-error-default, #d9534f);
+  color: var(--s-theme-default-color-error-default-i, #210707);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--error:hover {
-      background-color: var(--s-theme-default-colors-error-default-i, #210707);
-      color: var(--s-theme-default-colors-error-default, #d9534f);
-    }
-
+  background-color: var(--s-theme-default-color-error-default-i, #210707);
+  color: var(--s-theme-default-color-error-default, #d9534f)
+}
 .s-btn--info {
-            background-color: var(--s-theme-default-colors-info-default, #2199e8);
-color: var(--s-theme-default-colors-info-default-i, #ffffff);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-info-default, #2199e8);
+  color: var(--s-theme-default-color-info-default-i, #ffffff);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--info:hover {
-      background-color: var(--s-theme-default-colors-info-default-i, #ffffff);
-      color: var(--s-theme-default-colors-info-default, #2199e8);
-    }
-
+  background-color: var(--s-theme-default-color-info-default-i, #ffffff);
+  color: var(--s-theme-default-color-info-default, #2199e8)
+}
 .s-btn--extension {
-            background-color: var(--s-theme-default-colors-extension-default, #f2bc2b);
-color: var(--s-theme-default-colors-extension-default-i, #181202);
-        }
-
+  display: inline-block;
+  background-color: var(--s-theme-default-color-extension-default, #f2bc2b);
+  color: var(--s-theme-default-color-extension-default-i, #181202);
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.5em)
+}
 .s-btn--extension:hover {
-      background-color: var(--s-theme-default-colors-extension-default-i, #181202);
-      color: var(--s-theme-default-colors-extension-default, #f2bc2b);
-    }
-
+  background-color: var(--s-theme-default-color-extension-default-i, #181202);
+  color: var(--s-theme-default-color-extension-default, #f2bc2b)
+}
 .s-btn--0 {
-            padding: var(--s-theme-default-paddings-0, 0rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-0, 0)
+}
 .s-btn--100 {
-            padding: var(--s-theme-default-paddings-100, 0.2rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-100, 4px)
+}
 .s-btn--200 {
-            padding: var(--s-theme-default-paddings-200, 0.4rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-200, 8px)
+}
 .s-btn--300 {
-            padding: var(--s-theme-default-paddings-300, 0.6rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-300, 12px)
+}
 .s-btn--400 {
-            padding: var(--s-theme-default-paddings-400, 0.8rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-400, 16px)
+}
 .s-btn--500 {
-            padding: var(--s-theme-default-paddings-500, 1rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-500, 24px)
+}
 .s-btn--600 {
-            padding: var(--s-theme-default-paddings-600, 1.2rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-600, 32px)
+}
 .s-btn--700 {
-            padding: var(--s-theme-default-paddings-700, 1.4rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-700, 40px)
+}
 .s-btn--800 {
-            padding: var(--s-theme-default-paddings-800, 1.6rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-800, 48px)
+}
 .s-btn--900 {
-            padding: var(--s-theme-default-paddings-900, 1.8rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-900, 56px)
+}
 .s-btn {
-            padding: var(--s-theme-default-paddings-default, 1rem);
-        }
-
+  padding: var(--s-theme-ui-button-padding, 1em 2em);
+  font-size: var(--s-theme-default-font-size-default, 16px)
+}
 /* @sugar.media tablet {
   background: red;
 
@@ -269,9 +243,8 @@ color: var(--s-theme-default-colors-extension-default-i, #181202);
     color: blue;
   }
 } */
-
-/* @sugar.theme (default); */
-
+/* @sugar.theme (default);
+@sugar.theme (dark); */
 /* .theme-dark {
   @sugar.theme (dark);
 } */

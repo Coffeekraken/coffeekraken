@@ -1,11 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
-import __flatten from '@coffeekraken/sugar/shared/object/flatten';
-import __postCss from 'postcss';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SColor from '@coffeekraken/s-color';
-import __button from './default';
-import __SPostcssCompiler from '@coffeekraken/s-postcss-compiler';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
   static definition = {
@@ -29,50 +23,43 @@ export { postcssSugarPluginUiButtonClassesInterface as interface };
 
 export default function (
   params: Partial<IPostcssSugarPluginUiButtonClassesParams> = {},
-  atRule
+  atRule,
+  processNested
 ) {
   const themeConfig = __sugarConfig('theme');
 
   const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-    colors: Object.keys(themeConfig.default.colors),
-    sizes: Object.keys(themeConfig.default.paddings),
+    colors: Object.keys(themeConfig.default.color),
+    sizes: Object.keys(themeConfig.default.padding),
     ...params
   };
 
   const vars: string[] = [];
 
+  vars.push('@sugar.scope(bare color lnf) {');
   finalParams.colors.forEach((colorName) => {
-    const colors = __button({
-      color: colorName,
-      scope: 'color'
-    });
-    const cssStr = `
-      ${colorName === 'default' ? '.s-btn' : `.s-btn--${colorName}`} {
-            ${colors}
-        }
-      `;
-    vars.push(cssStr);
+    vars.push(
+      [
+        `${colorName === 'default' ? '.s-btn' : `.s-btn--${colorName}`} {`,
+        ` @sugar.ui.button(${colorName});`,
+        `}`
+      ].join('\n')
+    );
   });
+  vars.push('}');
 
+  vars.push('@sugar.scope(size) {');
   finalParams.sizes.forEach((sizeName) => {
-    const paddings = __button({
-      size: sizeName,
-      scope: 'size'
-    });
-    const cssStr = `
-        ${sizeName === 'default' ? '.s-btn' : `.s-btn--${sizeName}`} {
-            ${paddings}
-        }
-    `;
-    vars.push(cssStr);
+    vars.push(
+      [
+        `${sizeName === 'default' ? '.s-btn' : `.s-btn--${sizeName}`} {`,
+        ` @sugar.ui.button($size: ${sizeName});`,
+        `}`
+      ].join('\n')
+    );
   });
+  vars.push('}');
 
-  //   console.log(vars.join('\n'));
-
-  if (atRule) {
-    const AST = __postCss.parse(vars.join('\n'));
-    atRule.replaceWith(AST);
-  } else {
-    return vars.join('\n');
-  }
+  const AST = processNested(vars.join('\n'));
+  atRule.replaceWith(AST);
 }

@@ -31,9 +31,9 @@ export default function doc(req, res, settings = {}) {
     const docMap = new __SDocMap();
     const namespace = req.path.replace('/doc/', '').trim();
 
-    if (!_docmapJson) {
-      _docmapJson = await docMap.read();
-    }
+    const readPromise = docMap.read();
+    pipe(readPromise);
+    _docmapJson = await readPromise;
 
     if (!_docmapJson[namespace]) {
       const html = await page404({

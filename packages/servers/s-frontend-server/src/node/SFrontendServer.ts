@@ -6,6 +6,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 import __mimeTypes from 'mime-types'; //eslint-disable-line
+import __minimatch from 'minimatch';
 
 /**
  * @name            SFrontendServer
@@ -82,7 +83,7 @@ export default class SFrontendServer extends __SClass {
     ).value;
 
     return new __SPromise(
-      ({ resolve, reject, emit }) => {
+      ({ resolve, reject, emit, pipe }) => {
         const sailsConfig = {
           port: finalParams.port ?? 8888,
           explicitHost: finalParams.hostname ?? '127.0.0.1',
@@ -169,14 +170,26 @@ export default class SFrontendServer extends __SClass {
           sailsConfig.http.middleware.order.push('logMiddleware');
         }
 
-        if (frontendServerConfig.handlers) {
-          Object.keys(frontendServerConfig.handlers).forEach((handlerName) => {
-            const handlerObj = frontendServerConfig.handlers[handlerName];
-            sailsConfig.routes[
-              handlerObj.route
-            ] = require(handlerObj.handler).default; // eslint-disable-line
-          });
-        }
+        sailsConfig.routes['/*'] = (req, res) => {
+          if (frontendServerConfig.handlers) {
+            for (
+              let i = 0;
+              i < Object.keys(frontendServerConfig.handlers).length;
+              i++
+            ) {
+              const handlerName = Object.keys(frontendServerConfig.handlers)[i];
+              const handlerObj = frontendServerConfig.handlers[handlerName];
+              if (__minimatch(req.originalUrl, handlerObj.route)) {
+                const handlerFn = require(handlerObj.handler).default;
+                const handlerPromise = handlerFn(req, res);
+                pipe(handlerPromise);
+                break;
+              }
+            }
+          }
+        };
+
+        // console.log(this._sails);
 
         // start the sails server properly with configs
         this._sails.lift(sailsConfig, (error) => {

@@ -63,7 +63,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (params = {}, atRule) {
+export default function (params = {}, atRule, processNested) {
   const mediaConfig = __sugarConfig('media');
 
   return;
@@ -162,7 +162,7 @@ export default function (params = {}, atRule) {
     fullQueriesList.push(queryList.join(' and '));
   });
 
-  const AST = __postCss.parse(`@media ${fullQueriesList.join(',')} {}`);
+  const AST = processNested(`@media ${fullQueriesList.join(',')} {}`);
 
   // @ts-ignore
   AST.nodes[0].nodes = atRule.nodes;

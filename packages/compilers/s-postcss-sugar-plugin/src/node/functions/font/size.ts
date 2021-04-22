@@ -1,11 +1,11 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __sugarConfig, { themeConfig } from '@coffeekraken/s-sugar-config';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __postCss from 'postcss';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SColor from '@coffeekraken/s-color';
 
-class postcssSugarPluginSizePaddingInterface extends __SInterface {
+class postcssSugarPluginFontSizeInterface extends __SInterface {
   static definition = {
     name: {
       type: 'String',
@@ -19,17 +19,17 @@ class postcssSugarPluginSizePaddingInterface extends __SInterface {
     }
   };
 }
-export { postcssSugarPluginSizePaddingInterface as interface };
+export { postcssSugarPluginFontSizeInterface as interface };
 
-export interface IPostcssSugarPluginSizePaddingParams {
+export interface IPostcssSugarPluginFontSizeParams {
   name: string;
   return: 'var' | 'value';
 }
 
 export default function (
-  params: Partial<IPostcssSugarPluginSizePaddingParams> = {}
+  params: Partial<IPostcssSugarPluginFontSizeParams> = {}
 ) {
-  const finalParams: IPostcssSugarPluginSizePaddingParams = {
+  const finalParams: IPostcssSugarPluginFontSizeParams = {
     name: '',
     return: 'var',
     ...params
@@ -43,14 +43,10 @@ export default function (
     name = name.split('.')[1];
   }
 
-  const themeConfig = __sugarConfig('theme');
-
-  let size = themeConfig[theme || 'default'].paddings[name];
-
-  //   console.log('SIT', size);
+  let size = themeConfig(`font.size.${name}`, theme);
 
   if (finalParams.return === 'var') {
-    return `var(--s-theme-${theme}-paddings-${name}, ${size})`;
+    return `var(--s-theme-${theme}-font-size-${name}, ${size})`;
   } else {
     return size;
   }

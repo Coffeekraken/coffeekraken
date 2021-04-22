@@ -3,11 +3,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.proxy = void 0;
+exports.proxy = exports.prepare = void 0;
 const s_color_1 = __importDefault(require("@coffeekraken/s-color"));
 const get_1 = __importDefault(require("@coffeekraken/sugar/shared/object/get"));
+const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
+function prepare(themeConfig, config) {
+    Object.keys(themeConfig).forEach((themeName) => {
+        const themeObj = themeConfig[themeName];
+        if (themeObj.extends && !themeConfig[themeObj.extends]) {
+            throw new Error(`<red>[theme.config.js]</red> The theme "<yellow>${themeName}</yellow>" need to extends the theme "<yellow>${themeObj.extends}</yellow>" but this theme does not exists...`);
+        }
+        else if (themeObj.extends) {
+            themeConfig[themeName] = deepMerge_1.default(themeConfig[themeObj.extends], themeConfig[themeName]);
+            delete themeConfig[themeName].extends;
+        }
+    });
+    return themeConfig;
+}
+exports.prepare = prepare;
 function proxy(path, originalValue, config) {
-    if (path.match(/\.colors\.[a-zA-Z0-9]+$/)) {
+    if (path.match(/\.color\.[a-zA-Z0-9]+$/)) {
         const newStack = originalValue;
         Object.keys(originalValue).forEach((modName) => {
             const color = new s_color_1.default(newStack[modName]);
@@ -15,7 +30,7 @@ function proxy(path, originalValue, config) {
         });
         return newStack;
     }
-    if (path.match(/\.colors\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
+    if (path.match(/\.color\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
         if (path.split('.').pop() === 'default') {
             return originalValue;
         }
@@ -49,7 +64,7 @@ function proxy(path, originalValue, config) {
 exports.proxy = proxy;
 exports.default = {
     default: {
-        modifiers: {
+        modifier: {
             50: '-lighten 45%',
             100: '-lighten 40%',
             200: '-lighten 30%',
@@ -61,10 +76,10 @@ exports.default = {
             800: '-darken 30%',
             900: '-darken 40%'
         },
-        colors: {
+        color: {
             /**
              * @name                default
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #848e91
              *
@@ -78,11 +93,11 @@ exports.default = {
              */
             default: {
                 default: '#848e91',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                title
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #2b3438
              *
@@ -96,11 +111,11 @@ exports.default = {
              */
             title: {
                 default: '#2b3438',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                text
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #848e91
              *
@@ -114,11 +129,11 @@ exports.default = {
              */
             text: {
                 default: '#848e91',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                link
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             primary
              *
@@ -132,11 +147,11 @@ exports.default = {
              */
             link: {
                 default: '#f2bc2b',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                primary
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #f2bc2b
              *
@@ -150,11 +165,11 @@ exports.default = {
              */
             primary: {
                 default: '#f2bc2b',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                secondary
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #2b3438
              *
@@ -168,11 +183,11 @@ exports.default = {
              */
             secondary: {
                 default: '#6d858f',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                success
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #5cb85c
              *
@@ -186,11 +201,11 @@ exports.default = {
              */
             success: {
                 default: '#5cb85c',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                warning
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #f0ad4e
              *
@@ -204,11 +219,11 @@ exports.default = {
              */
             warning: {
                 default: '#f0ad4e',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                error
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #d9534f
              *
@@ -222,11 +237,11 @@ exports.default = {
              */
             error: {
                 default: '#d9534f',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                info
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #2199e8
              *
@@ -240,11 +255,11 @@ exports.default = {
              */
             info: {
                 default: '#2199e8',
-                '...': '[config.theme.default.modifiers]'
+                '...': '[config.theme.default.modifier]'
             },
             /**
              * @name                extension
-             * @namespace           config.colors
+             * @namespace           config.color
              * @type                Color
              * @default             #2b3438
              *
@@ -257,7 +272,7 @@ exports.default = {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             extension: {
-                default: '[config.theme.default.colors.primary.default]',
+                default: '[config.theme.default.color.primary.default]',
                 blade: '#ff2d20',
                 php: '#8892BF',
                 js: '#f7df1e',
@@ -278,21 +293,21 @@ exports.default = {
                 dmg: '#E36E4B'
             }
         },
-        fonts: {
+        font: {
             /**
-             * @name            families
-             * @namespace       config.fonts
+             * @name            family
+             * @namespace       config.font
              * @type            Object
              *
-             * Store the font families that will be available in the project
+             * Store the font family that will be available in the project
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            families: {
+            family: {
                 /**
                  * @name            default
-                 * @namespace       config.theme.default.fonts.families
+                 * @namespace       config.theme.default.fonts.family
                  * @type            Object
                  *
                  * Declare the <primary>default</primary> font face
@@ -307,7 +322,7 @@ exports.default = {
                 },
                 /**
                  * @name            title
-                 * @namespace       config.theme.default.fonts.families
+                 * @namespace       config.theme.default.fonts.family
                  * @type            Object
                  *
                  * Declare the <primary>title</primary> font face
@@ -322,7 +337,7 @@ exports.default = {
                 },
                 /**
                  * @name            quote
-                 * @namespace       config.theme.default.fonts.families
+                 * @namespace       config.theme.default.fonts.family
                  * @type            Object
                  *
                  * Declare the <primary>quote</primary> font face
@@ -339,7 +354,7 @@ exports.default = {
                 },
                 /**
                  * @name            code
-                 * @namespace       config.theme.default.fonts.families
+                 * @namespace       config.theme.default.fonts.family
                  * @type            Object
                  *
                  * Declare the <primary>code</primary> font face
@@ -356,19 +371,19 @@ exports.default = {
                 }
             },
             /**
-             * @name            sizes
-             * @namespace       config.fonts
+             * @name            size
+             * @namespace       config.font
              * @type            Object
              *
-             * Store the font sizes that will be available in the project
+             * Store the font size that will be available in the project
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            sizes: {
+            size: {
                 /**
                  * @name          default
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       16px
                  *
@@ -379,8 +394,20 @@ exports.default = {
                  */
                 default: '16px',
                 /**
+                 * @name          0
+                 * @namespace     config.theme.default.font.size
+                 * @type          String
+                 * @default       0
+                 *
+                 * Declare the font size <primary>50</primary>
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                0: 0,
+                /**
                  * @name          50
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       2px
                  *
@@ -392,7 +419,7 @@ exports.default = {
                 50: '4px',
                 /**
                  * @name          100
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       4px
                  *
@@ -404,7 +431,7 @@ exports.default = {
                 100: '4px',
                 /**
                  * @name          200
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       8px
                  *
@@ -416,7 +443,7 @@ exports.default = {
                 200: '8px',
                 /**
                  * @name          300
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       12px
                  *
@@ -428,7 +455,7 @@ exports.default = {
                 300: '12px',
                 /**
                  * @name          400
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       16px
                  *
@@ -440,7 +467,7 @@ exports.default = {
                 400: '16px',
                 /**
                  * @name          500
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       24px
                  *
@@ -452,7 +479,7 @@ exports.default = {
                 500: '24px',
                 /**
                  * @name          600
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       32px
                  *
@@ -464,7 +491,7 @@ exports.default = {
                 600: '32px',
                 /**
                  * @name          700
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       40px
                  *
@@ -476,7 +503,7 @@ exports.default = {
                 700: '40px',
                 /**
                  * @name          800
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       48px
                  *
@@ -488,7 +515,7 @@ exports.default = {
                 800: '48px',
                 /**
                  * @name          900
-                 * @namespace     config.theme.default.fonts.sizes
+                 * @namespace     config.theme.default.font.size
                  * @type          String
                  * @default       56px
                  *
@@ -500,11 +527,11 @@ exports.default = {
                 900: '56px'
             }
         },
-        borders: {
-            sizes: {
+        border: {
+            size: {
                 /**
                  * @name              0
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           0
                  *
@@ -516,7 +543,7 @@ exports.default = {
                 0: '0px',
                 /**
                  * @name              100
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           1px
                  *
@@ -528,7 +555,7 @@ exports.default = {
                 100: '1px',
                 /**
                  * @name              200
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           2px
                  *
@@ -540,7 +567,7 @@ exports.default = {
                 200: '2px',
                 /**
                  * @name              300
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           4px
                  *
@@ -552,7 +579,7 @@ exports.default = {
                 300: '4px',
                 /**
                  * @name              400
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           6px
                  *
@@ -564,7 +591,7 @@ exports.default = {
                 400: '6px',
                 /**
                  * @name              500
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           8px
                  *
@@ -576,7 +603,7 @@ exports.default = {
                 500: '8px',
                 /**
                  * @name              600
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           12px
                  *
@@ -588,7 +615,7 @@ exports.default = {
                 600: '12px',
                 /**
                  * @name              700
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           16px
                  *
@@ -600,7 +627,7 @@ exports.default = {
                 700: '16px',
                 /**
                  * @name              800
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           20px
                  *
@@ -612,7 +639,7 @@ exports.default = {
                 800: '20px',
                 /**
                  * @name              900
-                 * @namespace         config.theme.borders.sizes
+                 * @namespace         config.theme.border.size
                  * @type              Number
                  * @default           24px
                  *
@@ -626,7 +653,7 @@ exports.default = {
             radius: {
                 /**
                  * @name              default
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           10px
                  *
@@ -638,7 +665,7 @@ exports.default = {
                 default: '10px',
                 /**
                  * @name              0
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           0px
                  *
@@ -650,7 +677,7 @@ exports.default = {
                 0: '0px',
                 /**
                  * @name              100
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           2px
                  *
@@ -662,7 +689,7 @@ exports.default = {
                 100: '2px',
                 /**
                  * @name              200
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           4px
                  *
@@ -674,7 +701,7 @@ exports.default = {
                 200: '4px',
                 /**
                  * @name              300
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           6px
                  *
@@ -686,7 +713,7 @@ exports.default = {
                 300: '6px',
                 /**
                  * @name              400
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           8px
                  *
@@ -698,7 +725,7 @@ exports.default = {
                 400: '8px',
                 /**
                  * @name              500
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           10px
                  *
@@ -710,7 +737,7 @@ exports.default = {
                 500: '10px',
                 /**
                  * @name              600
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           12px
                  *
@@ -722,7 +749,7 @@ exports.default = {
                 600: '12px',
                 /**
                  * @name              700
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           14px
                  *
@@ -734,7 +761,7 @@ exports.default = {
                 700: '14px',
                 /**
                  * @name              800
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           16px
                  *
@@ -746,7 +773,7 @@ exports.default = {
                 800: '16px',
                 /**
                  * @name              900
-                 * @namespace         config.theme.default.borders.radius
+                 * @namespace         config.theme.default.border.radius
                  * @type              Number
                  * @default           18px
                  *
@@ -758,14 +785,20 @@ exports.default = {
                 900: '18px'
             }
         },
-        spaces: {
+        ui: {
+            button: {
+                padding: '1em 2em',
+                borderRadius: '0.5em'
+            }
+        },
+        space: {
             /**
              * @name            default
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         1rem
              *
-             * Specify the <primary>default</primary> space used for paddings and margins
+             * Specify the <primary>default</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -773,11 +806,11 @@ exports.default = {
             default: '1rem',
             /**
              * @name            0
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         0.5rem
              *
-             * Specify the <primary>0</primary> space used for paddings and margins
+             * Specify the <primary>0</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -785,11 +818,11 @@ exports.default = {
             0: '0rem',
             /**
              * @name            100
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         0.2rem
              *
-             * Specify the <primary>100</primary> space used for paddings and margins
+             * Specify the <primary>100</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -797,11 +830,11 @@ exports.default = {
             100: '0.2rem',
             /**
              * @name            200
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         0.4rem
              *
-             * Specify the <primary>200</primary> space used for paddings and margins
+             * Specify the <primary>200</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -809,11 +842,11 @@ exports.default = {
             200: '0.4rem',
             /**
              * @name            300
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         0.3rem
              *
-             * Specify the <primary>300</primary> space used for paddings and margins
+             * Specify the <primary>300</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -821,11 +854,11 @@ exports.default = {
             300: '0.6rem',
             /**
              * @name            400
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         0.5rem
              *
-             * Specify the <primary>400</primary> space used for paddings and margins
+             * Specify the <primary>400</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -833,11 +866,11 @@ exports.default = {
             400: '0.8rem',
             /**
              * @name            500
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         1rem
              *
-             * Specify the <primary>500</primary> space used for paddings and margins
+             * Specify the <primary>500</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -845,11 +878,11 @@ exports.default = {
             500: '1rem',
             /**
              * @name            600
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         1.2rem
              *
-             * Specify the <primary>600</primary> space used for paddings and margins
+             * Specify the <primary>600</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -857,11 +890,11 @@ exports.default = {
             600: '1.2rem',
             /**
              * @name            700
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         1.4rem
              *
-             * Specify the <primary>700</primary> space used for paddings and margins
+             * Specify the <primary>700</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -869,11 +902,11 @@ exports.default = {
             700: '1.4rem',
             /**
              * @name            800
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         1.6rem
              *
-             * Specify the <primary>800</primary> space used for paddings and margins
+             * Specify the <primary>800</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -881,284 +914,284 @@ exports.default = {
             800: '1.6rem',
             /**
              * @name            900
-             * @namespace       config.theme.default.spaces
+             * @namespace       config.theme.default.space
              * @type            String
              * @default         1.8rem
              *
-             * Specify the <primary>900</primary> space used for paddings and margins
+             * Specify the <primary>900</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             900: '1.8rem'
         },
-        margins: {
+        margin: {
             /**
              * @name            default
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.default]
+             * @default         [config.theme.default.space.default]
              *
-             * Specify the <primary>default</primary> space used for paddings and margins
+             * Specify the <primary>default</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            default: '[config.theme.default.spaces.default]',
+            default: '[config.theme.default.space.default]',
             /**
              * @name            0
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.0]
+             * @default         [config.theme.default.space.0]
              *
-             * Specify the <primary>0</primary> space used for paddings and margins
+             * Specify the <primary>0</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            0: '[config.theme.default.spaces.0]',
+            0: '[config.theme.default.space.0]',
             /**
              * @name            100
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.100]
+             * @default         [config.theme.default.space.100]
              *
-             * Specify the <primary>100</primary> space used for paddings and margins
+             * Specify the <primary>100</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            100: '[config.theme.default.spaces.100]',
+            100: '[config.theme.default.space.100]',
             /**
              * @name            200
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.200]
+             * @default         [config.theme.default.space.200]
              *
-             * Specify the <primary>200</primary> space used for paddings and margins
+             * Specify the <primary>200</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            200: '[config.theme.default.spaces.200]',
+            200: '[config.theme.default.space.200]',
             /**
              * @name            300
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.300]
+             * @default         [config.theme.default.space.300]
              *
-             * Specify the <primary>300</primary> space used for paddings and margins
+             * Specify the <primary>300</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            300: '[config.theme.default.spaces.300]',
+            300: '[config.theme.default.space.300]',
             /**
              * @name            400
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.400]
+             * @default         [config.theme.default.space.400]
              *
-             * Specify the <primary>400</primary> space used for paddings and margins
+             * Specify the <primary>400</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            400: '[config.theme.default.spaces.400]',
+            400: '[config.theme.default.space.400]',
             /**
              * @name            500
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.500]
+             * @default         [config.theme.default.space.500]
              *
-             * Specify the <primary>500</primary> space used for paddings and margins
+             * Specify the <primary>500</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            500: '[config.theme.default.spaces.500]',
+            500: '[config.theme.default.space.500]',
             /**
              * @name            600
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.600]
+             * @default         [config.theme.default.space.600]
              *
-             * Specify the <primary>600</primary> space used for paddings and margins
+             * Specify the <primary>600</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            600: '[config.theme.default.spaces.600]',
+            600: '[config.theme.default.space.600]',
             /**
              * @name            700
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.700]
+             * @default         [config.theme.default.space.700]
              *
-             * Specify the <primary>700</primary> space used for paddings and margins
+             * Specify the <primary>700</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            700: '[config.theme.default.spaces.700]',
+            700: '[config.theme.default.space.700]',
             /**
              * @name            800
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.800]
+             * @default         [config.theme.default.space.800]
              *
-             * Specify the <primary>800</primary> space used for paddings and margins
+             * Specify the <primary>800</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            800: '[config.theme.default.spaces.800]',
+            800: '[config.theme.default.space.800]',
             /**
              * @name            900
-             * @namespace       config.theme.default.margins
+             * @namespace       config.theme.default.margin
              * @type            String
-             * @default         [config.theme.default.spaces.900]
+             * @default         [config.theme.default.space.900]
              *
-             * Specify the <primary>900</primary> space used for paddings and margins
+             * Specify the <primary>900</primary> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            900: '[config.theme.default.spaces.900]'
+            900: '[config.theme.default.space.900]'
         },
-        paddings: {
+        padding: {
             /**
              * @name            default
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.default]
+             * @default         [config.theme.default.space.default]
              *
-             * Specify the <primary>default</primary> space used for paddings and paddings
+             * Specify the <primary>default</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            default: '[config.theme.default.spaces.default]',
+            default: '[config.theme.default.space.default]',
             /**
              * @name            0
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.0]
+             * @default         [config.theme.default.space.0]
              *
-             * Specify the <primary>0</primary> space used for paddings and paddings
+             * Specify the <primary>0</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            0: '[config.theme.default.spaces.0]',
+            0: '[config.theme.default.space.0]',
             /**
              * @name            100
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.100]
+             * @default         [config.theme.default.space.100]
              *
-             * Specify the <primary>100</primary> space used for paddings and paddings
+             * Specify the <primary>100</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            100: '[config.theme.default.spaces.100]',
+            100: '[config.theme.default.space.100]',
             /**
              * @name            200
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.200]
+             * @default         [config.theme.default.space.200]
              *
-             * Specify the <primary>200</primary> space used for paddings and paddings
+             * Specify the <primary>200</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            200: '[config.theme.default.spaces.200]',
+            200: '[config.theme.default.space.200]',
             /**
              * @name            300
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.300]
+             * @default         [config.theme.default.space.300]
              *
-             * Specify the <primary>300</primary> space used for paddings and paddings
+             * Specify the <primary>300</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            300: '[config.theme.default.spaces.300]',
+            300: '[config.theme.default.space.300]',
             /**
              * @name            400
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.400]
+             * @default         [config.theme.default.space.400]
              *
-             * Specify the <primary>400</primary> space used for paddings and paddings
+             * Specify the <primary>400</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            400: '[config.theme.default.spaces.400]',
+            400: '[config.theme.default.space.400]',
             /**
              * @name            500
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.500]
+             * @default         [config.theme.default.space.500]
              *
-             * Specify the <primary>500</primary> space used for paddings and paddings
+             * Specify the <primary>500</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            500: '[config.theme.default.spaces.500]',
+            500: '[config.theme.default.space.500]',
             /**
              * @name            600
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.600]
+             * @default         [config.theme.default.space.600]
              *
-             * Specify the <primary>600</primary> space used for paddings and paddings
+             * Specify the <primary>600</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            600: '[config.theme.default.spaces.600]',
+            600: '[config.theme.default.space.600]',
             /**
              * @name            700
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.700]
+             * @default         [config.theme.default.space.700]
              *
-             * Specify the <primary>700</primary> space used for paddings and paddings
+             * Specify the <primary>700</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            700: '[config.theme.default.spaces.700]',
+            700: '[config.theme.default.space.700]',
             /**
              * @name            800
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.800]
+             * @default         [config.theme.default.space.800]
              *
-             * Specify the <primary>800</primary> space used for paddings and paddings
+             * Specify the <primary>800</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            800: '[config.theme.default.spaces.800]',
+            800: '[config.theme.default.space.800]',
             /**
              * @name            900
-             * @namespace       config.theme.default.paddings
+             * @namespace       config.theme.default.padding
              * @type            String
-             * @default         [config.theme.default.spaces.900]
+             * @default         [config.theme.default.space.900]
              *
-             * Specify the <primary>900</primary> space used for paddings and paddings
+             * Specify the <primary>900</primary> space used for padding and padding
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            900: '[config.theme.default.spaces.900]'
+            900: '[config.theme.default.space.900]'
         },
         media: {
             /**
@@ -1278,11 +1311,12 @@ exports.default = {
         }
     },
     dark: {
-        colors: {
+        extends: 'default',
+        color: {
             primary: {
                 default: '#ffffff'
             }
         }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWUuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLG9FQUE2QztBQUM3QyxnRkFBMEQ7QUFHMUQsU0FBZ0IsS0FBSyxDQUFDLElBQUksRUFBRSxhQUFhLEVBQUUsTUFBTTtJQUMvQyxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMseUJBQXlCLENBQUMsRUFBRTtRQUN6QyxNQUFNLFFBQVEsR0FBRyxhQUFhLENBQUM7UUFDL0IsTUFBTSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtZQUM3QyxNQUFNLEtBQUssR0FBRyxJQUFJLGlCQUFRLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7WUFDOUMsUUFBUSxDQUFDLEdBQUcsT0FBTyxJQUFJLENBQUMsR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO1FBQzFELENBQUMsQ0FBQyxDQUFDO1FBQ0gsT0FBTyxRQUFRLENBQUM7S0FDakI7SUFFRCxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsdUNBQXVDLENBQUMsRUFBRTtRQUN2RCxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFLEtBQUssU0FBUyxFQUFFO1lBQ3ZDLE9BQU8sYUFBYSxDQUFDO1NBQ3RCO1FBQ0QsTUFBTSxZQUFZLEdBQUcsYUFBSyxDQUN4QixNQUFNLEVBQ04sSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxHQUFHLFVBQVUsQ0FDcEQsQ0FBQztRQUNGLElBQUksT0FBTyxhQUFhLEtBQUssUUFBUSxFQUFFO1lBQ3JDLElBQ0UsYUFBYSxDQUFDLEtB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWUuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLG9FQUE2QztBQUM3QyxnRkFBMEQ7QUFFMUQsNEZBQXNFO0FBRXRFLFNBQWdCLE9BQU8sQ0FBQyxXQUFXLEVBQUUsTUFBTTtJQUN6QyxNQUFNLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQzdDLE1BQU0sUUFBUSxHQUFHLFdBQVcsQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUN4QyxJQUFJLFFBQVEsQ0FBQyxPQUFPLElBQUksQ0FBQyxXQUFXLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxFQUFFO1lBQ3RELE1BQU0sSUFBSSxLQUFLLENBQ2IsbURBQW1ELFNBQVMsaURBQWlELFFBQVEsQ0FBQyxPQUFPLDhDQUE4QyxDQUM1SyxDQUFDO1NBQ0g7YUFBTSxJQUFJLFFBQVEsQ0FBQyxPQUFPLEVBQUU7WUFDM0IsV0FBVyxDQUFDLFNBQVMsQ0FBQyxHQUFHLG1CQUFXLENBQ2xDLFdBQVcsQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQzdCLFdBQVcsQ0FBQyxTQUFTLENBQUMsQ0FDdkIsQ0FBQztZQUNGLE9BQU8sV0FBVyxDQUFDLFNBQVMsQ0FBQyxDQUFDLE9BQU8sQ0FBQztTQUN2QztJQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxXQUFXLENBQUM7QUFDckIsQ0FBQztBQWhCRCwwQkFnQkM7QUFFRCxTQUFnQixLQUFLLENBQUMsSUFBSSxFQUFFLGFBQWEsRUFBRSxNQUFNO0lBQy9DLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyx3QkFBd0IsQ0FBQyxFQUFFO1FBQ3hDLE1BQU0sUUFBUSxHQUFHLGFBQWEsQ0FBQztRQUMvQixNQUFNLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8s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SztnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsS0FBSztnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTtnQkFFWDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTtnQkFFWDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTtnQkFFWDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTtnQkFFWDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTtnQkFFWDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTtnQkFFWDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTthQUNaO1NBQ0Y7UUFFRCxNQUFNLEVBQUU7WUFDTixJQUFJLEVBQUU7Z0JBQ0o7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsQ0FBQyxFQUFFLEtBQUs7Z0JBRVI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLEtBQUs7Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLEtBQUs7Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLEtBQUs7Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLEtBQUs7Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLEtBQUs7Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLE1BQU07Z0JBRVg7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLE1BQU07Z0JBRVg7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLE1BQU07Z0JBRVg7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLE1BQU07YUFDWjtZQUVELE1BQU0sRUFBRTtnQkFDTjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsTUFBTTtnQkFFZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxDQUFDLEVBQUUsS0FB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

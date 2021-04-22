@@ -84,4 +84,14 @@ describe('sugar.shared.cli.parseArgs', () => {
       something: 'World'
     });
   });
+
+  it('Should parse correctly a function style arguments with variable names specifies', () => {
+    const res = __parseArgs("($coco: true, $plop: 'hello world')", {
+      valueQuote: "'"
+    });
+    expect(res).toEqual({
+      coco: true,
+      plop: 'hello world'
+    });
+  });
 });

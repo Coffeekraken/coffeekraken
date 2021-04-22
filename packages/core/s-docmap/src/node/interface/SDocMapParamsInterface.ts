@@ -19,8 +19,7 @@ class SDocMapParamsInterface extends __SInterface {
   static definition = {
     cache: {
       type: 'Boolean',
-      default: __sugarConfig('docmap.cache'),
-      level: 1
+      default: __sugarConfig('docmap.cache')
     }
   };
 }

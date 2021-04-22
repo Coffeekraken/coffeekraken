@@ -63,6 +63,7 @@ export interface ISDocMapGenerateParams {
   outPath: string;
 }
 export interface ISDocMapFindParams {
+  cache: boolean;
   globs: string[];
   exclude: string[];
 }
@@ -71,15 +72,7 @@ export interface ISDocMapSaveSettings {
   path: string;
   generate: ISDocMapGenerateParams;
 }
-export interface ISDocMapParams {
-  cache: boolean;
-  generate: ISDocMapGenerateParams;
-  find: ISDocMapFindParams;
-  save: ISDocMapSaveSettings;
-}
-export interface ISDocMapCtorSettings {
-  docMap?: Partial<ISDocMapParams>;
-}
+export interface ISDocMapCtorSettings {}
 
 export interface ISDocMapEntry {
   absPath?: string;
@@ -133,20 +126,6 @@ class SDocMap extends __SClass implements ISDocMap {
   _cache: __SCache;
 
   /**
-   * @name        docmapParams
-   * @type        Object
-   * @get
-   *
-   * Access the docMap settings
-   *
-   * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get docmapParams(): ISDocMapParams {
-    return (<any>this)._settings.docmap;
-  }
-
-  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -160,14 +139,16 @@ class SDocMap extends __SClass implements ISDocMap {
     super(
       __deepMerge(
         {
-          docmap: {}
+          metas: {
+            id: 'SDocMap'
+          }
         },
         settings || {}
       )
     );
 
     // init the cache
-    this._cache = new __SCache('SDocMap');
+    this._cache = new __SCache(`SDocMap-${this.metas.id}`);
   }
 
   /**
@@ -208,9 +189,12 @@ class SDocMap extends __SClass implements ISDocMap {
       // build the glob pattern to use
       const patterns: string[] = findParams.globs || [];
 
-      if (this.docmapParams.cache) {
+      if (findParams.cache) {
         const cachedValue = await this._cache.get('find-files');
         if (cachedValue) {
+          emit('log', {
+            value: `<yellow>[${this.constructor.name}]</yellow> docmap.json file(s) getted from cache`
+          });
           return resolve(cachedValue);
         }
       }
@@ -242,7 +226,10 @@ class SDocMap extends __SClass implements ISDocMap {
       });
 
       // save in cache if asked
-      if (this.docmapParams.cache) {
+      if (findParams.cache) {
+        emit('log', {
+          value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
+        });
         await this._cache.set(
           'find-files',
           files.map((file) => file.toObject())
@@ -296,9 +283,9 @@ class SDocMap extends __SClass implements ISDocMap {
         };
       });
 
-      emit('log', {
-        value: __toString(docMapJson)
-      });
+      // emit('log', {
+      //   value: __toString(docMapJson)
+      // });
 
       // return the final docmap
       resolve(docMapJson);

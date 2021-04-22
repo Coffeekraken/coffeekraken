@@ -77,24 +77,24 @@
   */
 @import './09_trumps/all';
 
-/* @sugar.init; */
+/* @sugar.init;
 
-/* @sugar.color.docblock; */
+@sugar.color.classes; */
 
-/* @sugar.color.classes; */
-
-body {
+/* body {
   content: sugar.color(#ff00ff, '--darken 40%');
   background: sugar.color(primary, 900);
   color: sugar.color(primary);
   something: rgba(sugar.color(secondary, 100), sugar.color(warning, 100));
-}
+} */
 
 /* button {
   @sugar.ui.button (primary, error);
 } */
 
-@sugar.ui.button.classes;
+@sugar.scope (*) {
+  @sugar.ui.button.classes;
+}
 
 /* @sugar.media tablet {
   background: red;
@@ -119,7 +119,8 @@ body {
   }
 } */
 
-/* @sugar.theme (default); */
+/* @sugar.theme (default);
+@sugar.theme (dark); */
 
 /* .theme-dark {
   @sugar.theme (dark);

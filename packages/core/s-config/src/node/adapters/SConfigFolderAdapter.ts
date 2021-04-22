@@ -152,6 +152,13 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
           configData.default ? configData.default : configData
         );
 
+        if (configData.prepare && typeof configData.prepare === 'function') {
+          configObj[configKey] = configData.prepare(
+            configObj[configKey],
+            configObj
+          );
+        }
+
         if (configData.proxy && typeof configData.proxy === 'function') {
           __SConfig.registerProxy(
             this.configAdapterSettings.name,

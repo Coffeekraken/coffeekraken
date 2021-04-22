@@ -1,7 +1,5 @@
 import __sugarConfig from '@coffeekraken/s-sugar-config';
-import __postCss from 'postcss';
 import __SInterface from '@coffeekraken/s-interface';
-import __colorFn from '../../functions/color/default';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
   static definition = {};
@@ -25,16 +23,16 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (params = {}, atRule = null) {
+export default function (params = {}, atRule, processNested) {
   const themes = __sugarConfig('theme');
 
   const cssArray: string[] = [];
 
   Object.keys(themes).forEach((themeName) => {
     const themeObj = themes[themeName];
-    const colors = Object.keys(themeObj.colors);
+    const colors = Object.keys(themeObj.color);
     colors.forEach((colorName) => {
-      const colorObj = themeObj.colors[colorName];
+      const colorObj = themeObj.color[colorName];
       Object.keys(colorObj).forEach((modifier) => {
         const colorValue = colorObj[modifier];
 
@@ -73,10 +71,7 @@ export default function (params = {}, atRule = null) {
             ` * </h1>`,
             ` */`,
             `.c-${colorName}${modifierStr} {`,
-            `   color: ${__colorFn({
-              name: colorName,
-              modifier
-            })}`,
+            `   color: sugar.color(${colorName}${modifierStr});`,
             `}`
           ].join('\n')
         );
@@ -96,10 +91,7 @@ export default function (params = {}, atRule = null) {
             ` * </h1>`,
             ` */`,
             `.bg-${colorName}${modifierStr} {`,
-            `   background-color: ${__colorFn({
-              name: colorName,
-              modifier
-            })}`,
+            `   background-color: sugar.color(${colorName}${modifierStr})`,
             `}`
           ].join('\n')
         );
@@ -107,10 +99,8 @@ export default function (params = {}, atRule = null) {
     });
   });
 
-  console.log(cssArray.join('\n'));
-
   if (atRule) {
-    const AST = __postCss.parse(cssArray.join('\n'));
+    const AST = processNested(cssArray.join('\n'));
     atRule.replaceWith(AST);
   } else {
     return cssArray.join('\n');

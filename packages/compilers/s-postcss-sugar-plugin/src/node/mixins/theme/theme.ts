@@ -1,8 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
-import __postCss from 'postcss';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 class postcssSugarPluginThemeinInterface extends __SInterface {
   static definition = {
@@ -23,7 +21,8 @@ export { postcssSugarPluginThemeinInterface as interface };
 
 export default function (
   params: Partial<IPostcssSugarPluginThemeParams> = {},
-  atRule
+  atRule,
+  processNested
 ) {
   const finalParams: IPostcssSugarPluginThemeParams = {
     name: '',
@@ -40,11 +39,7 @@ export default function (
   const flattenedTheme = __flatten(theme[finalParams.name]);
   const vars: string[] = [];
   Object.keys(flattenedTheme).forEach((key) => {
-    vars.push(
-      `--s-theme-${finalParams.name}-${key.replace(/\./gm, '-')}: ${
-        flattenedTheme[key]
-      };`
-    );
+    vars.push(`--s-theme-${key.replace(/\./gm, '-')}: ${flattenedTheme[key]};`);
   });
 
   if (atRule.parent.type === 'root') {
@@ -52,7 +47,6 @@ export default function (
     vars.push('}');
   }
 
-  const AST = __postCss.parse(vars.join('\n'));
-
+  const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);
 }

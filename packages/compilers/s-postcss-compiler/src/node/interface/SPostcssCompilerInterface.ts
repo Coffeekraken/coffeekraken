@@ -83,6 +83,14 @@ class SPostcssCompilerInterface extends __SInterface {
       type: 'Boolean',
       default: __sugarConfig('css.compile.minify')
     },
+    beautify: {
+      type: 'Boolean',
+      default: __sugarConfig('css.compile.beautify')
+    },
+    optimize: {
+      type: 'Boolean',
+      default: __sugarConfig('css.compile.optimize')
+    },
     banner: {
       type: 'String',
       description:

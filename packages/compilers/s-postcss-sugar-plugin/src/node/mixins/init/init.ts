@@ -24,7 +24,16 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (params = {}, atRule, processNested) {
-  const cssArray = ['@sugar.color.docblocks;'];
+  const themeConfig = __sugarConfig('theme');
+
+  const cssArray = [
+    `@sugar.theme(${themeConfig.baseTheme});`,
+    '@sugar.color.docblocks;',
+    '@sugar.color.classes;',
+    '@sugar.size.classes;',
+    '@sugar.depth.classes;',
+    '@sugar.util.classes;'
+  ];
 
   const AST = processNested(cssArray.join('\n'));
   atRule.replaceWith(AST);

@@ -22,14 +22,15 @@ import __get from '@coffeekraken/sugar/shared/object/get';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function themeConfig(dotPath: string, theme = 'default'): any {
+export default function themeConfig(dotPath: string, theme?: string): any {
   // get theme
   const themeObj = __sugarConfig('theme');
-  if (!themeObj[theme]) theme = 'default';
-  const res = __get(themeObj[theme], dotPath);
+  let activeTheme = theme ?? themeObj.baseTheme;
+  if (!themeObj.themes[activeTheme]) activeTheme = 'default';
+  const res = __get(themeObj.themes[activeTheme], dotPath);
   if (res !== undefined) return res;
-  if (theme !== 'default') return themeConfig(dotPath, 'default');
+  if (activeTheme !== 'default') return themeConfig(dotPath, 'default');
   throw new Error(
-    `<red>[themeConfig]</red> Sorry but the requested value "<yellow>${dotPath}</yellow>" for the theme "<cyan>${theme}</cyan>" does not exists...`
+    `<red>[themeConfig]</red> Sorry but the requested value "<yellow>${dotPath}</yellow>" for the theme "<cyan>${activeTheme}</cyan>" does not exists...`
   );
 }

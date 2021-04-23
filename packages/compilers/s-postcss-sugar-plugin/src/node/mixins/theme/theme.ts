@@ -30,13 +30,13 @@ export default function (
   };
 
   const theme = __sugarConfig('theme');
-  if (!theme[finalParams.name])
+  if (!theme.themes[finalParams.name])
     throw new Error(
       `Sorry but the requested theme "<yellow>${finalParams.name}</yellow>" does not exists...`
     );
 
   // @ts-ignore
-  const flattenedTheme = __flatten(theme[finalParams.name]);
+  const flattenedTheme = __flatten(theme.themes[finalParams.name]);
   const vars: string[] = [];
   Object.keys(flattenedTheme).forEach((key) => {
     vars.push(`--s-theme-${key.replace(/\./gm, '-')}: ${flattenedTheme[key]};`);

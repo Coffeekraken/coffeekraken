@@ -77,9 +77,9 @@
   */
 @import './09_trumps/all';
 
-/* @sugar.init;
+@sugar.init;
 
-@sugar.color.classes; */
+@sugar.ui.button.classes;
 
 /* body {
   content: sugar.color(#ff00ff, '--darken 40%');
@@ -92,9 +92,9 @@
   @sugar.ui.button (primary, error);
 } */
 
-@sugar.scope (*) {
+/* @sugar.scope (*) {
   @sugar.ui.button.classes;
-}
+} */
 
 /* @sugar.media tablet {
   background: red;

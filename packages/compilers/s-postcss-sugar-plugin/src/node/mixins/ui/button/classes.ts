@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import { themeConfig } from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
   static definition = {
@@ -26,39 +26,60 @@ export default function (
   atRule,
   processNested
 ) {
-  const themeConfig = __sugarConfig('theme');
+  const colors = themeConfig('color'),
+    sizes = themeConfig('size');
 
   const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-    colors: Object.keys(themeConfig.default.color),
-    sizes: Object.keys(themeConfig.default.padding),
+    colors: Object.keys(colors),
+    sizes: Object.keys(sizes),
     ...params
   };
 
-  const vars: string[] = [];
+  const vars: string[] = [
+    `
+    @sugar.scope(bare lnf) {
+      .s-btn {
+        @sugar.ui.button()
+      }
+    }
+  `
+  ];
 
-  vars.push('@sugar.scope(bare color lnf) {');
-  finalParams.colors.forEach((colorName) => {
-    vars.push(
-      [
-        `${colorName === 'default' ? '.s-btn' : `.s-btn--${colorName}`} {`,
-        ` @sugar.ui.button(${colorName});`,
-        `}`
-      ].join('\n')
-    );
-  });
-  vars.push('}');
+  const styles = themeConfig('ui.button.styles');
 
-  vars.push('@sugar.scope(size) {');
-  finalParams.sizes.forEach((sizeName) => {
-    vars.push(
-      [
-        `${sizeName === 'default' ? '.s-btn' : `.s-btn--${sizeName}`} {`,
-        ` @sugar.ui.button($size: ${sizeName});`,
-        `}`
-      ].join('\n')
-    );
+  styles.forEach((style) => {
+    vars.push('@sugar.scope(color) {');
+    finalParams.colors.forEach((colorName) => {
+      const styleCls = style === 'default' ? '' : `.s-btn--${style}`;
+      const cls =
+        colorName === 'default'
+          ? `.s-btn${styleCls}`
+          : `.s-btn.s-btn--${colorName}${styleCls}`;
+
+      vars.push(`/**
+        * @name           ${cls}
+        * @namespace      sugar.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>${style}</yellow>" button with the "<yellow>${colorName}</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="${cls.replace(/\./gm, ' ').trim()}">I'm a cool button</a>
+      */`);
+      vars.push(
+        [
+          `${
+            colorName === 'default'
+              ? `.s-btn${styleCls}`
+              : `.s-btn.s-btn--${colorName}${styleCls}`
+          } {`,
+          ` @sugar.ui.button($color: ${colorName}, $style: ${style});`,
+          `}`
+        ].join('\n')
+      );
+    });
+    vars.push('}');
   });
-  vars.push('}');
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

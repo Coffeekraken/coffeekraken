@@ -35,18 +35,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function themeConfig(dotPath, theme = 'default') {
+    function themeConfig(dotPath, theme) {
         // get theme
         const themeObj = sugar_1.default('theme');
-        if (!themeObj[theme])
-            theme = 'default';
-        const res = get_1.default(themeObj[theme], dotPath);
+        let activeTheme = theme !== null && theme !== void 0 ? theme : themeObj.baseTheme;
+        if (!themeObj.themes[activeTheme])
+            activeTheme = 'default';
+        const res = get_1.default(themeObj.themes[activeTheme], dotPath);
         if (res !== undefined)
             return res;
-        if (theme !== 'default')
+        if (activeTheme !== 'default')
             return themeConfig(dotPath, 'default');
-        throw new Error(`<red>[themeConfig]</red> Sorry but the requested value "<yellow>${dotPath}</yellow>" for the theme "<cyan>${theme}</cyan>" does not exists...`);
+        throw new Error(`<red>[themeConfig]</red> Sorry but the requested value "<yellow>${dotPath}</yellow>" for the theme "<cyan>${activeTheme}</cyan>" does not exists...`);
     }
     exports.default = themeConfig;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztJQUFBLG9EQUFvQztJQUNwQyxnRkFBMEQ7SUFFMUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bb0JHO0lBQ0gsU0FBd0IsV0FBVyxDQUFDLE9BQWUsRUFBRSxLQUFLLEdBQUcsU0FBUztRQUNwRSxZQUFZO1FBQ1osTUFBTSxRQUFRLEdBQUcsZUFBYSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQ3hDLElBQUksQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDO1lBQUUsS0FBSyxHQUFHLFNBQVMsQ0FBQztRQUN4QyxNQUFNLEdBQUcsR0FBRyxhQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQzVDLElBQUksR0FBRyxLQUFLLFNBQVM7WUFBRSxPQUFPLEdBQUcsQ0FBQztRQUNsQyxJQUFJLEtBQUssS0FBSyxTQUFTO1lBQUUsT0FBTyxXQUFXLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQyxDQUFDO1FBQ2hFLE1BQU0sSUFBSSxLQUFLLENBQ2IsbUVBQW1FLE9BQU8sbUNBQW1DLEtBQUssNkJBQTZCLENBQ2hKLENBQUM7SUFDSixDQUFDO0lBVkQsOEJBVUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztJQUFBLG9EQUFvQztJQUNwQyxnRkFBMEQ7SUFFMUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bb0JHO0lBQ0gsU0FBd0IsV0FBVyxDQUFDLE9BQWUsRUFBRSxLQUFjO1FBQ2pFLFlBQVk7UUFDWixNQUFNLFFBQVEsR0FBRyxlQUFhLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDeEMsSUFBSSxXQUFXLEdBQUcsS0FBSyxhQUFMLEtBQUssY0FBTCxLQUFLLEdBQUksUUFBUSxDQUFDLFNBQVMsQ0FBQztRQUM5QyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUM7WUFBRSxXQUFXLEdBQUcsU0FBUyxDQUFDO1FBQzNELE1BQU0sR0FBRyxHQUFHLGFBQUssQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQyxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3pELElBQUksR0FBRyxLQUFLLFNBQVM7WUFBRSxPQUFPLEdBQUcsQ0FBQztRQUNsQyxJQUFJLFdBQVcsS0FBSyxTQUFTO1lBQUUsT0FBTyxXQUFXLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQyxDQUFDO1FBQ3RFLE1BQU0sSUFBSSxLQUFLLENBQ2IsbUVBQW1FLE9BQU8sbUNBQW1DLFdBQVcsNkJBQTZCLENBQ3RKLENBQUM7SUFDSixDQUFDO0lBWEQsOEJBV0MifQ==

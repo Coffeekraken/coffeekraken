@@ -996,14 +996,12 @@ class SColor extends __SClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   invert(returnNewInstance = this.colorSettings.returnNewInstance): SColor {
-    // if (returnNewInstance) {
-    //   const n = new SColor(this.toHex());
-    //   n.l += amount;
-    //   return n;
-    // }
-
-    let lightness = this.l + 50;
-    if (lightness > 100) lightness -= 100;
+    let lightness = this.l;
+    if (this.l >= 50) {
+      lightness -= 50;
+    } else {
+      lightness += 50;
+    }
 
     if (returnNewInstance) {
       const n = new SColor(this.toHex());

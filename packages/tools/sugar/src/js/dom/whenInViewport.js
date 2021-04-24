@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var in_viewport_1 = __importDefault(require("in-viewport"));
     /**
      * @name      whenInViewport
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

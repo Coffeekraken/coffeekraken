@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name      scrollLeft
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

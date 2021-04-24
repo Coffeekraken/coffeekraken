@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name            injectStyle
-     * @namespace           sugar.js.css
+     * @namespace            js.css
      * @type            Function
      * @status              wip
      *

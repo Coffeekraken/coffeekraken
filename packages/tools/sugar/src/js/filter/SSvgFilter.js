@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var uniqid_1 = __importDefault(require("../../shared/string/uniqid"));
     /**
      * @name 		          SGooeySvgFilter
-     * @namespace           sugar.js.filter
+     * @namespace            js.filter
      * @type             Class
      * @status          wip
      *

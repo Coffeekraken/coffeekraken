@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var SEvent_1 = __importDefault(require("../event/SEvent"));
     /**
      * @name      dispatchEvent
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

@@ -12,13 +12,13 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        isIe
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type      Function
      * @stable
      *
      * Detect if is ie (internet explorer)
      *
-     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
      * @return    {Boolean}    true if is ie, false if not
      *
      * @todo      interface

@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name      exitFullscreen
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

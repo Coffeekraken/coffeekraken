@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var scrollTo_1 = __importDefault(require("./scrollTo"));
     /**
      * @name        autoScrollAnchorLinks
-     * @namespace           sugar.js.feature
+     * @namespace            js.feature
      * @type      Function
      * @stable
      *

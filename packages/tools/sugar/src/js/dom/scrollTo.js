@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var requestAnimationFrame_1 = __importDefault(require("./requestAnimationFrame"));
     /**
      * @name      scrollTo
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

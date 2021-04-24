@@ -7,7 +7,8 @@ export default {
         frontendServer: '[config.frontstack.actions.frontendServer]',
         css: '[config.frontstack.actions.css]',
         js: '[config.frontstack.actions.js]',
-        svelte: '[config.frontstack.actions.svelte]'
+        svelte: '[config.frontstack.actions.svelte]',
+        docmap: '[config.frontstack.actions.docmap]'
       }
     },
 
@@ -54,6 +55,18 @@ export default {
       title: 'Svelte compile action',
       description: 'Allow to compile .svelte files easily',
       process: 'sugar-dev svelte.compile -w',
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
+    docmap: {
+      id: 'docmap',
+      title: 'Docmap generation action',
+      description:
+        'Allow to generate and maintain up to date the docmap.json file',
+      process: 'sugar-dev docmap.generate --watch',
       settings: {
         processManager: {
           restart: true

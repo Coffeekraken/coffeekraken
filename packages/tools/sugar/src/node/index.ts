@@ -1,12 +1,13 @@
 // @ts-nocheck
 
 import __sugarConfig from '@coffeekraken/s-sugar-config';
-import __SLog from '../shared/log/SLog';
+import __SLog from '@coffeekraken/s-log';
 import __handleError from './error/handleError';
 import __initEnv from './init/initEnv';
 import __onProcessExit from './process/onProcessExit';
 import __exitCleanup from './process/exitCleanup';
-import __registerSFileClasses from './fs/registerSFileClasses';
+import __hotkey from './keyboard/hotkey';
+// import __registerSFileClasses from './fs/registerSFileClasses';
 
 /**
  * @name                    index
@@ -26,13 +27,13 @@ __initEnv();
 // // handle the errors
 // __handleError();
 
-// // exit cleanup
-// __onProcessExit(() => {
-//   return __exitCleanup;
-// });
+// exit cleanup
+__onProcessExit(() => {
+  return __exitCleanup;
+});
 
 // SFile classes
-__registerSFileClasses();
+// __registerSFileClasses();
 
 // Logging
 new __SLog(__sugarConfig('log'));

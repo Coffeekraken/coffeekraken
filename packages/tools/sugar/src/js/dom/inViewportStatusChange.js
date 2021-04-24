@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var whenOutOfViewport_1 = __importDefault(require("./whenOutOfViewport"));
     /**
      * @name      inViewportStatusChange
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

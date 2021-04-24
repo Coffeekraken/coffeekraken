@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var getTransitionProperties_1 = __importDefault(require("./getTransitionProperties"));
     /**
      * @name      whenTransitionEnd
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

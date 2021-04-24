@@ -50,7 +50,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var __decryptedConfig, __decryptedMeta;
     /**
      * @name                                            SApp
-     * @namespace           sugar.js.class
+     * @namespace            js.class
      * @type                                            Class
      *
      * This class represent an application route class. This mean that you can create an application class that extend this one
@@ -115,7 +115,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         }
         /**
          * @name                            config
-         * @namespace           sugar.js.class.SApp
+         * @namespace            js.class.SApp
          * @type                            Function
          *
          * Get a configuration value from the backend using an ajax call
@@ -138,7 +138,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         };
         /**
          * @name                            meta
-         * @namespace           sugar.js.class.SApp
+         * @namespace            js.class.SApp
          * @type                            Function
          *
          * Usefull function that give you back an application meta taken depending on your passed dotted object path
@@ -167,7 +167,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * Log a message using the transports log system.
          *
          * @param           {String}              message                   The message to log
-         * @param           {String}              [type="info"]             The type of log. Can be "error", "warn", "info", "http", "verbose", "debug", "silly"
+         * @param           {String}              [type="info"]             The type of log. Can be "error", "warn", "info", "http", "verbose", "debug", "silly"
          * @param           {Array}               [transports=null]         The transports that you want to use for this log process. If null, use all the transports configured in the squid config for the type of log passed
          * @return          {Promise}                                       A promise resolved once the log process is finished
          *

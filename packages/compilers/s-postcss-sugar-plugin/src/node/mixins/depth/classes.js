@@ -17,7 +17,7 @@ function default_1(params = {}, atRule, processNested) {
     Object.keys(depthsObj).forEach((depthName) => {
         const depthCss = `/**
   * @name          .s-depth-${depthName}
-  * @namespace          sugar.depth
+  * @namespace          sugar.css.depth
   * @type               CssClass
   * 
   * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any HTMLElement

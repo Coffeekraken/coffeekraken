@@ -34,7 +34,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var forceRedraw_1 = __importDefault(require("../dom/forceRedraw"));
     /**
      * @name 		SMotionblurSvgFilter
-     * @namespace           sugar.js.filter
+     * @namespace            js.filter
      * @type      Class
      * @stable
      *

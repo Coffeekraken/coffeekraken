@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var SSvgFilter_1 = __importDefault(require("./SSvgFilter"));
     /**
      * @name 		SGradientSvgFilter
-     * @namespace           sugar.js.filter
+     * @namespace            js.filter
      * @type      Class
      * @extends 		SSvgFilter
      * @stable

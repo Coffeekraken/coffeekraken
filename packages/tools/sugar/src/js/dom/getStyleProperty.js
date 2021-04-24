@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var autoCast_1 = __importDefault(require("../../shared/string/autoCast"));
     /**
      * @name      getStyleProperty
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

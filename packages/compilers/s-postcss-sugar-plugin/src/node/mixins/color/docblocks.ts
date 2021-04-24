@@ -41,7 +41,7 @@ export default function (params = {}, atRule, processNested) {
             `/**`,
             ` * @name 		    ${colorName}`,
             ` * @modifier        ${modifier}`,
-            ` * @namespace       theme.${themeName}.colors`,
+            ` * @namespace       sugar.css.theme.${themeName}.colors`,
             ` * @type            color`,
             ` *`,
             ` * This is the "${colorName}${

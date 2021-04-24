@@ -30,7 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var convert_1 = __importDefault(require("../../shared/time/convert"));
     /**
      * @name            innerHtml
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type            Function
      * @stable
      *

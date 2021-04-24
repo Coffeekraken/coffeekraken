@@ -58,7 +58,7 @@ export default function (
 
       vars.push(`/**
         * @name           ${cls}
-        * @namespace      sugar.ui.button
+        * @namespace      sugar.css.ui.button
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>${style}</yellow>" button with the "<yellow>${colorName}</yellow>" color applied

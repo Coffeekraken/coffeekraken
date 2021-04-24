@@ -10,6 +10,8 @@ import __isPath from '../shared/is/path';
 import __parseHtml from '../shared/console/parseHtml';
 import __sugarJson from '../node/sugar/sugarJson';
 
+import '../node/index';
+
 /**
  * @name            sugar.cli
  * @namespace           cli

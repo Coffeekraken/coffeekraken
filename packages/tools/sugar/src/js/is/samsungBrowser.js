@@ -12,13 +12,13 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        isSamsumgBrowser
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type      Function
      * @stable
      *
      * Detect if is the samsung stock browser that is running the page
      *
-     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
      * @return      {Boolean}                                       true if is a samsung browser, false if not
      *
      * @todo      interface

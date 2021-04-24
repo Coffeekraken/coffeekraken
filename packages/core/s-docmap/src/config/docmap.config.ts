@@ -29,7 +29,7 @@ export default {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    globs: [`src/**{5}/*:/.*@namespace.*/gm`],
+    globs: [`src/**{5}/*:/.*@namespace.*/gm`, `dist/css/*:/.*@namespace.*/gm`],
 
     /**
      * @name        exclude
@@ -82,7 +82,8 @@ export default {
       'namespace',
       'status',
       'static',
-      'since'
+      'since',
+      'author'
     ],
 
     /**
@@ -102,14 +103,14 @@ export default {
      * @name      save
      * @namespace       config.docmap.generate
      * @type        Boolean
-     * @default     false
+     * @default     true
      *
      * Specify if you want to save the generated docmap.json file under the ```outPath``` path
      *
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    save: false,
+    save: true,
 
     /**
      * @name        outPath

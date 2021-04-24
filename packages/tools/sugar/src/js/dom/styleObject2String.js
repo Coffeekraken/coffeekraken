@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var uncamelize_1 = __importDefault(require("../../shared/string/uncamelize"));
     /**
      * @name      styleObject2String
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

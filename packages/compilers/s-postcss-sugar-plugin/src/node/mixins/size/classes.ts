@@ -34,7 +34,7 @@ export default function (params = {}, atRule, processNested) {
       [
         `/**`,
         ` * @name           s-size-${sizeName}`,
-        ` * @namespace      sugar.size.classes`,
+        ` * @namespace      sugar.css.size.classes`,
         ` * @type           CssClass`,
         ` *`,
         ` * This class allows you to apply the "${sizeName}" size to an HTMLElement`,

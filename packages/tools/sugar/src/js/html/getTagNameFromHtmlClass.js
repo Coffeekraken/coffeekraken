@@ -16,15 +16,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var htmlTagToHtmlClassMap_1 = __importDefault(require("./htmlTagToHtmlClassMap"));
     /**
      * @name            getHtmlhtmlClassFromHtmlClass
-     * @namespace       sugar.js.html
+     * @namespace            js.html
      * @type            Function
      * @stable
      *
      * This function simply return the tagname depending on the passed HTML class
      * like HTMLAnchorElement, HTMLLinkElement, etc...
      *
-     * @param       {HTMLElement}      htmlClass       The htmlClass to get the tag for
-     * @return      {String}               The tagname that correspond to the passed HTMLElement class
+     * @param       {HTMLElement}      htmlClass       The htmlClass to get the tag for
+     * @return      {String}               The tagname that correspond to the passed HTMLElement class
      *
      * @todo      interface
      * @todo      doc

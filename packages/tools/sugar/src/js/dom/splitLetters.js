@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     /**
      * @name      splitLetters
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

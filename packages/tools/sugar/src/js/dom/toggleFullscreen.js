@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var exitFullscreen_1 = __importDefault(require("./exitFullscreen"));
     /**
      * @name      toggleFullscreen
-     * @namespace     sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var addEventListener_1 = __importDefault(require("./addEventListener"));
     /**
      * @name        addEventListenerOnce
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

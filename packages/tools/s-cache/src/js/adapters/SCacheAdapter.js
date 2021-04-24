@@ -23,12 +23,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@coffeekraken/sugar/src/shared/class/SClass", "@coffeekraken/sugar/src/shared/object/deepMerge"], factory);
+        define(["require", "exports", "@coffeekraken/s-class", "@coffeekraken/sugar/src/shared/object/deepMerge"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var SClass_1 = __importDefault(require("@coffeekraken/sugar/src/shared/class/SClass"));
+    var s_class_1 = __importDefault(require("@coffeekraken/s-class"));
     var deepMerge_1 = __importDefault(require("@coffeekraken/sugar/src/shared/object/deepMerge"));
     var SCacheAdapter = /** @class */ (function (_super) {
         __extends(SCacheAdapter, _super);
@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Construct the SCacheAdapter instance with the settings passed in object format. See description bellow.
          *
-         * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
+         * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
@@ -52,7 +52,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this.cache = cache;
         };
         return SCacheAdapter;
-    }(SClass_1.default));
+    }(s_class_1.default));
     exports.default = SCacheAdapter;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsdUZBQW1FO0lBQ25FLDhGQUEwRTtJQTREMUU7UUFBb0QsaUNBQVE7UUFJMUQ7Ozs7Ozs7OztXQVNHO1FBQ0gsdUJBQVksUUFBYTtZQUFiLHlCQUFBLEVBQUEsYUFBYTttQkFDdkIsa0JBQ0UsbUJBQVcsQ0FDVDtnQkFDRSxZQUFZLEVBQUUsRUFBRTthQUNqQixFQUNELFFBQVEsQ0FDVCxDQUNGO1FBQ0gsQ0FBQztRQUVELGdDQUFRLEdBQVIsVUFBUyxLQUEwQjtZQUNqQyxJQUFJLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztRQUNyQixDQUFDO1FBcUZILG9CQUFDO0lBQUQsQ0FBQyxBQWhIRCxDQUFvRCxnQkFBUSxHQWdIM0QifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsa0VBQTZDO0lBQzdDLDhGQUEwRTtJQTJEMUU7UUFBb0QsaUNBQVE7UUFJMUQ7Ozs7Ozs7OztXQVNHO1FBQ0gsdUJBQVksUUFBYTtZQUFiLHlCQUFBLEVBQUEsYUFBYTttQkFDdkIsa0JBQ0UsbUJBQVcsQ0FDVDtnQkFDRSxZQUFZLEVBQUUsRUFBRTthQUNqQixFQUNELFFBQVEsQ0FDVCxDQUNGO1FBQ0gsQ0FBQztRQUVELGdDQUFRLEdBQVIsVUFBUyxLQUEwQjtZQUNqQyxJQUFJLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztRQUNyQixDQUFDO1FBcUZILG9CQUFDO0lBQUQsQ0FBQyxBQWhIRCxDQUFvRCxpQkFBUSxHQWdIM0QifQ==

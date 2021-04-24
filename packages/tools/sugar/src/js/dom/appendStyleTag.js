@@ -12,14 +12,14 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        appendStyleTag
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *
      * Append a style tag either to the head or the body
      *
      * @param    {String}    css    The style css to append
-     * @param       {HTMLElement}       [$parent=document.head]            The parent in which you want to append the style tag
+     * @param       {HTMLElement}       [$parent=document.head]            The parent in which you want to append the style tag
      *
      * @todo      interface
      * @todo      doc

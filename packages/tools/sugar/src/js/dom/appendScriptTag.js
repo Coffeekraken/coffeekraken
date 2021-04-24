@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var scriptLoaded_1 = __importDefault(require("./scriptLoaded"));
     /**
      * @name        appendScriptTag
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

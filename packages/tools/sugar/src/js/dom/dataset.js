@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var toString_1 = __importDefault(require("../../shared/string/toString"));
     /**
      * @name      dataset
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @status              wip
      *

@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var linkLoaded_1 = __importDefault(require("./linkLoaded"));
     /**
      * @name        appendStylesheetLink
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

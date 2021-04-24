@@ -17,14 +17,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
     /**
      * @name 		imagesLoadedAttribute
-     * @namespace           sugar.js.feature
+     * @namespace            js.feature
      * @type      Feature
      * @stable
      *
      * Add on every images the attribute "loaded" when it has been fully loaded. This is useful
      * for styling purposes and for others thinks as well.
      *
-     * @param     {Object}        [settings={}]       An object of settings to configure your feature
+     * @param     {Object}        [settings={}]       An object of settings to configure your feature
      *
      * @todo            interface
      * @todo            doc

@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var dispatchEvent_1 = __importDefault(require("../dom/dispatchEvent"));
     /**
      * @name 		handleInputAttributes
-     * @namespace           sugar.js.feature
+     * @namespace            js.feature
      * @type      Feature
      * @stable
      *
@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * - enter (onenter): Triggered when user tap ```enter``` on his keyboard from a **input*** or **textarea** element
      * - escape (onescape): Triggered when user tap ```escape``` on his keyboard from a **input*** or **textarea** element
      *
-     * @param       {Object}        [settings={}]         An object of settings to configure your feature
+     * @param       {Object}        [settings={}]         An object of settings to configure your feature
      *
      * @setting       {Boolean}       [enter=true]        Specify if you want to "enter" keyboard event
      * @setting       {Boolean}       [escape=true]        Specify if you want to "escape" keyboard event

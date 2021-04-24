@@ -12,7 +12,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name            HtmlTagToHtmlClassMap
-     * @namespace       sugar.js.html
+     * @namespace            js.html
      * @type            Object
      * @stable
      *

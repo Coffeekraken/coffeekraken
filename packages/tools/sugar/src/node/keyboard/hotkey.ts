@@ -62,7 +62,6 @@ export class HotkeySettingsInterface extends __SInterface {
 
 function _handleKeypress(ch, keyObj) {
   if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
-    // process.stdin.pause();
     // @ts-ignore
     process.emit('custom_exit', 'killed');
   }
@@ -71,13 +70,6 @@ function _handleKeypress(ch, keyObj) {
   Object.keys(hotkeyStack).forEach((id) => {
     const obj = hotkeyStack[id];
     if (!obj || !obj.key) return;
-    // // check if an activeSpace is specified
-    // if (obj.settings.disableWhenEditingForm) {
-    //   if (__activeSpace.is('**.form.*')) return;
-    // }
-    // if (obj.settings.activeSpace) {
-    //   if (!__activeSpace.is(obj.settings.activeSpace)) return;
-    // }
 
     obj.key
       .toString()
@@ -85,6 +77,8 @@ function _handleKeypress(ch, keyObj) {
       .map((m) => m.trim())
       .forEach((key) => {
         if (ch && ch.toString() === key) {
+          console.log('RE', key, keyObj);
+
           obj.promise.emit('press', {
             key,
             ctrl: keyObj ? keyObj.ctrl : false,
@@ -130,8 +124,8 @@ function hotkey(key, settings?: Partial<IHotkeySettings>) {
       isListenerAlreadyAdded = true;
       __keypress(process.stdin);
       process.stdin.on('keypress', _handleKeypress);
-      // process.stdin.setRawMode(true);
-      // process.stdin.resume();
+      process.stdin.setRawMode(true);
+      process.stdin.resume();
     }
 
     promise

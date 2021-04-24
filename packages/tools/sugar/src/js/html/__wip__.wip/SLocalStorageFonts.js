@@ -23,7 +23,7 @@ var __assign = (this && this.__assign) || function () {
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name 		SLocalStorageFonts
-     * @namespace           sugar.js.class
+     * @namespace            js.class
      * @type    Class
      *
      * This class allows to easily store and load custom fonts from the localStorage

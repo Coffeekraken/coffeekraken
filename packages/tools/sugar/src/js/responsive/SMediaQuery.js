@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     /**
      * @name                SMediaQuery
-     * @namespace           sugar.js.responsive
+     * @namespace            js.responsive
      * @type                Class
      * @extends             SPromise
      * @status              wip
@@ -39,8 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * This class expose some nice and easy methods to get the active media query defined in the config.media.queries configuration
      * stack, as well as register to some events list "match" or "unmatch".
      *
-     * @param           {String}            mediaName           The media name you want to track. Can be an array of names or simple "*" to track every media queries
-     * @param           {Object}            [settings={}]       An object of settings to configure your media query instance
+     * @param           {String}            mediaName           The media name you want to track. Can be an array of names or simple "*" to track every media queries
+     * @param           {Object}            [settings={}]       An object of settings to configure your media query instance
      *
      * @todo      interface
      * @todo      doc

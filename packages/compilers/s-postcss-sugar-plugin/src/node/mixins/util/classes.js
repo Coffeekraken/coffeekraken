@@ -13,7 +13,7 @@ function default_1(params = {}, atRule, processNested) {
     const finalParams = Object.assign({}, params);
     const pilled = `/**
   * @name          .s-pilled
-  * @namespace          sugar.util
+  * @namespace          sugar.css.util
   * @type               CssClass
   * 
   * This class allows you to apply a "<yellow>pill</yellow>" style to any HTMLElement

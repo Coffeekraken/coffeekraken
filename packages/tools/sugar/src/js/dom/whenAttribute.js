@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var observeAttributes_1 = __importDefault(require("./observeAttributes"));
     /**
      * @name      whenAttribute
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

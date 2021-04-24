@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     /**
      * @name      removeClassOnAnimationEnd
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

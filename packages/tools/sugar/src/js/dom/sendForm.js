@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var form_serialize_1 = __importDefault(require("form-serialize"));
     /**
      * @name      sendForm
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @status        wip
      *

@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     };
     /**
      * @name 		hotkey
-     * @namespace           sugar.js.keyboard
+     * @namespace            js.keyboard
      * @type      Function
      * @status              beta
      *
@@ -60,7 +60,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @example    js
      * import hotkey from '@coffeekraken/sugar/js/keyboard/hotkey'
      * const promise = hotkey('ctrl+a');
-     * promise.on('ctrl+a', (e) => {
+     * promise.on('press', (e) => {
      *    // do something...
      * });
      * promise.cancel();

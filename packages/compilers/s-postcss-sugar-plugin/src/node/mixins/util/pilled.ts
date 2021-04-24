@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __sugarConfig, { themeConfig } from '@coffeekraken/s-sugar-config';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
+import __themeVar from '../../utils/themeVar';
+import __isInScope from '../../utils/isInScope';
 
 class postcssSugarPluginUtilPilledInterface extends __SInterface {
   static definition = {};

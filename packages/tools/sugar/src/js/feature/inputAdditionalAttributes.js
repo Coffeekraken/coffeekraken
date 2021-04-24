@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var querySelectorLive_1 = __importDefault(require("../dom/querySelectorLive"));
     /**
      * @name 		handleInputAttributes
-     * @namespace           sugar.js.feature
+     * @namespace            js.feature
      * @type      Feature
      * @stable
      *
@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * - `empty`: When the input is has no value in it
      * - `dirty`: When the input has been touched
      *
-     * @param       {Object}        [settings={}]         An object of settings to configure your feature
+     * @param       {Object}        [settings={}]         An object of settings to configure your feature
      *
      * @setting       {Boolean}       [empty=true]        Specify if you want to "empty" attribute
      * @setting       {Boolean}       [dirty=true]        Specify if you want to "dirty" attribute

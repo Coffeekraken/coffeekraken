@@ -12,13 +12,13 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        isSafari
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type      Function
      * @stable
      *
      * Detect if is safari
      *
-     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
      * @return    {Boolean}    true if is safari, false if not
      *
      * @todo      interface

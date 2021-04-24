@@ -15,7 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name 		SBind
-     * @namespace           sugar.js.class
+     * @namespace            js.class
      * @type    Class
      *
      * This class allows to bind properties between objects, object to HTMLElement attribute and vice versa.

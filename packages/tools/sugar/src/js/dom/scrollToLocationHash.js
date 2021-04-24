@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
     /**
      * @name      scrollToLocationHash
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

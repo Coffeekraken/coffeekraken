@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     // TODO tests
     /**
      * @name      whenOutOfViewport
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

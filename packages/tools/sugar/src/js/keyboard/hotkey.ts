@@ -57,6 +57,7 @@ function hotkey(hotkey, settings = {}) {
         splitKey: '+',
         ...settings
       };
+
       // init the hotkey
       hotkeys(hotkey, settings, (e, h) => {
         // call the handler function

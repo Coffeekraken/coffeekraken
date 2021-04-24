@@ -60,6 +60,9 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           exclude: [],
           ignored: ['**/node_modules/**/*', '**/.git/**/*'],
           ignoreInitial: true
+          // usePolling: true,
+          // useFsEvents: true,
+          // persistent: true
         },
         settings || {}
       );

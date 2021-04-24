@@ -29,13 +29,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
     /**
      * @name 		linksScrollHrefAttribute
-     * @namespace           sugar.js.feature
+     * @namespace            js.feature
      * @type      Feature
      * @stable
      *
      * Add the ability to set links href attribute with "scroll:#target" in order to animate the scroll to this target element
      *
-     * @param       {Object}        [settings={}]         An object of settings to configure your feature
+     * @param       {Object}        [settings={}]         An object of settings to configure your feature
      *
      * @setting       {Number}       [duration=400]       Specify the scroll duration
      * @setting       {Function}      [easing=easeInOutQuint]     Specify the easing function to use

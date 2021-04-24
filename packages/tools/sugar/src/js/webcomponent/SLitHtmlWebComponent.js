@@ -52,7 +52,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var canHaveChildren_1 = __importDefault(require("../dom/canHaveChildren"));
     /**
      * @name              SLitHtmlWebComponent
-     * @namespace           sugar.js.webcomponent
+     * @namespace            js.webcomponent
      * @type              Class
      * @extends           SWebComponent
      * @status              wip

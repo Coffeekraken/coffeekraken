@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var querySelectorLive_1 = __importDefault(require("../dom/querySelectorLive"));
     /**
      * @name 		videoLazySrcAttribute
-     * @namespace           sugar.js.feature
+     * @namespace            js.feature
      * @type      Feature
      * @stable
      *
@@ -37,7 +37,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * @param       {Object}        [settings={}]         An object of settings to configure your feature
      *
-     * @setting       {Number}      [offset=50]         The offset before entering in the viewport to set the "src" attribute
+     * @setting       {Number}      [offset=50]         The offset before entering in the viewport to set the "src" attribute
      *
      * @todo            interface
      * @todo            doc

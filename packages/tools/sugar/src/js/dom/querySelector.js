@@ -29,7 +29,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var closestNotVisible_1 = __importDefault(require("./closestNotVisible"));
     /**
      * @name      querySelector
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

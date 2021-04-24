@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var innerHtml_1 = __importDefault(require("../dom/innerHtml"));
     /**
      * @name            syncDom
-     * @namespace           sugar.js.socket
+     * @namespace            js.socket
      * @type            Function
      * @status        wip
      *
@@ -60,7 +60,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this._settings = {
                 /**
                  * @name      settings.node
-                 * @namespace           sugar.js.class
+                 * @namespace            js.class
                  * @type        HTMLElement
                  *
                  * The root node where the html contents will be injected if no node is passed with the event
@@ -86,7 +86,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 action: 'replace',
                 /**
                  * @name          settings.events
-                 * @namespace           sugar.js.class
+                 * @namespace            js.class
                  * @type          Object
                  *
                  * Save the events scoped settings objects
@@ -160,7 +160,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         /**
          * Handle the 'body' event
          *
-         * @param         {String}          data        The data passed with the event
+         * @param         {String}          data        The data passed with the event
          * @param         {Object}          settings    Tge settubgs passed with the event
          *
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -171,7 +171,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         /**
          * Handle the 'content' event
          *
-         * @param         {String}          data        The data passed with the event
+         * @param         {String}          data        The data passed with the event
          * @param         {Object}          settings    Tge settubgs passed with the event
          *
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -184,7 +184,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         };
         /**
          * @name          emit
-         * @namespace           sugar.js.class
+         * @namespace            js.class
          * @type          Function
          *
          * Emit an event with an object containing some values to pass to the server
@@ -205,13 +205,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         };
         /**
          * @name          registerEvent
-         * @namespace           sugar.js.class
+         * @namespace            js.class
          * @type          Function
          *
          * Register a new event with an handler function that will handle the event content
          *
          * @param         {String}        event         The event name that you want to listen from the server
-         * @param          {Function}     handlerFn      The function that will handle the event content.
+         * @param          {Function}     handlerFn      The function that will handle the event content.
          * @return         {SSocketDom}                  The SSocketDom instance to maintain chainability
          *
          * @example     js

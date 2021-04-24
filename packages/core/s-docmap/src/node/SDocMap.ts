@@ -327,11 +327,10 @@ class SDocMap extends __SClass implements ISDocMap {
         watch: generateParams.watch,
         exclude: generateParams.exclude
       });
-      pool.on('finally', () => {
-        pool.cancel();
-      });
 
       pool.on(generateParams.watch ? 'update' : 'files', (files) => {
+        files = Array.isArray(files) ? files : [files];
+
         emit('log', {
           value: `<yellow>${
             files.length
@@ -417,8 +416,20 @@ class SDocMap extends __SClass implements ISDocMap {
           );
         }
 
+        if (generateParams.watch) {
+          emit('log', {
+            value: '<blue>[watch]</blue> Watching for changes...'
+          });
+        }
+
         resolve(this._entries);
       });
+
+      if (generateParams.watch) {
+        emit('log', {
+          value: '<blue>[watch]</blue> Watching for changes...'
+        });
+      }
     });
   }
 }

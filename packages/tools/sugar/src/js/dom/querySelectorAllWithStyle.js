@@ -27,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
     /**
      * @name      querySelectorAllWithStyle
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

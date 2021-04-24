@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     /**
      * @name      toDomNodes
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

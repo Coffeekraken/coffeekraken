@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var convert_1 = __importDefault(require("../../shared/unit/convert"));
     /**
      * @name      getTranslateProperties
-     * @namespace           sugar.js.dom
+     * @namespace            js.dom
      * @type      Function
      * @stable
      *

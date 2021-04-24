@@ -10,17 +10,17 @@ export interface IPostcssSugarPluginUtilClassesParams {}
 export { postcssSugarPluginUtilClassesInterface as interface };
 
 export default function (
-  params: Partial<IPostcssSugarPluginUiButttilesParams> = {},
+  params: Partial<IPostcssSugarPluginUtilClassesParams> = {},
   atRule,
   processNested
 ) {
-  const finalParams: IPostcssSugarPluginUiBtilassesParams = {
+  const finalParams: IPostcssSugarPluginUtilClassesParams = {
     ...params
   };
 
   const pilled = `/**
   * @name          .s-pilled
-  * @namespace          sugar.util
+  * @namespace          sugar.css.util
   * @type               CssClass
   * 
   * This class allows you to apply a "<yellow>pill</yellow>" style to any HTMLElement

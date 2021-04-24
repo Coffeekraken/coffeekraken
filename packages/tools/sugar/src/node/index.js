@@ -5,9 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-const SLog_1 = __importDefault(require("../shared/log/SLog"));
+const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
 const initEnv_1 = __importDefault(require("./init/initEnv"));
-const registerSFileClasses_1 = __importDefault(require("./fs/registerSFileClasses"));
+const onProcessExit_1 = __importDefault(require("./process/onProcessExit"));
+const exitCleanup_1 = __importDefault(require("./process/exitCleanup"));
+// import __registerSFileClasses from './fs/registerSFileClasses';
 /**
  * @name                    index
  * @namespace           node
@@ -23,12 +25,12 @@ const registerSFileClasses_1 = __importDefault(require("./fs/registerSFileClasse
 initEnv_1.default();
 // // handle the errors
 // __handleError();
-// // exit cleanup
-// __onProcessExit(() => {
-//   return __exitCleanup;
-// });
+// exit cleanup
+onProcessExit_1.default(() => {
+    return exitCleanup_1.default;
+});
 // SFile classes
-registerSFileClasses_1.default();
+// __registerSFileClasses();
 // Logging
-new SLog_1.default(s_sugar_config_1.default('log'));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCxrRkFBeUQ7QUFDekQsOERBQXdDO0FBRXhDLDZEQUF1QztBQUd2QyxxRkFBK0Q7QUFFL0Q7Ozs7Ozs7Ozs7R0FVRztBQUVILFdBQVc7QUFDWCxpQkFBUyxFQUFFLENBQUM7QUFFWix1QkFBdUI7QUFDdkIsbUJBQW1CO0FBRW5CLGtCQUFrQjtBQUNsQiwwQkFBMEI7QUFDMUIsMEJBQTBCO0FBQzFCLE1BQU07QUFFTixnQkFBZ0I7QUFDaEIsOEJBQXNCLEVBQUUsQ0FBQztBQUV6QixVQUFVO0FBQ1YsSUFBSSxjQUFNLENBQUMsd0JBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDIn0=
+new s_log_1.default(s_sugar_config_1.default('log'));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCxrRkFBeUQ7QUFDekQsZ0VBQXlDO0FBRXpDLDZEQUF1QztBQUN2Qyw0RUFBc0Q7QUFDdEQsd0VBQWtEO0FBRWxELGtFQUFrRTtBQUVsRTs7Ozs7Ozs7OztHQVVHO0FBRUgsV0FBVztBQUNYLGlCQUFTLEVBQUUsQ0FBQztBQUVaLHVCQUF1QjtBQUN2QixtQkFBbUI7QUFFbkIsZUFBZTtBQUNmLHVCQUFlLENBQUMsR0FBRyxFQUFFO0lBQ25CLE9BQU8scUJBQWEsQ0FBQztBQUN2QixDQUFDLENBQUMsQ0FBQztBQUVILGdCQUFnQjtBQUNoQiw0QkFBNEI7QUFFNUIsVUFBVTtBQUNWLElBQUksZUFBTSxDQUFDLHdCQUFhLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyJ9

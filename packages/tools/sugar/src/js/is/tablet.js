@@ -16,13 +16,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var mobile_detect_1 = __importDefault(require("mobile-detect"));
     /**
      * @name        isTablet
-     * @namespace           sugar.js.is
+     * @namespace            js.is
      * @type      Function
      * @stable
      *
      * Detect if is a tablet device
      *
-     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
      * @return    {Boolean}    true if is a tablet, false if not
      *
      * @todo      interface

@@ -32,7 +32,73 @@ export default function (
     @sugar.util.pilled;
 }`;
 
-  const vars: string[] = [pilled];
+  const centerAbs = `/**
+  * @name       .s-center-abs
+  * @namespace      sugar.css.util
+  * @type         CssClass
+  * 
+  * This class allows you to center any HTMLElement both vertically and horizontally using the
+  * well known absolute positionning method.
+  * Note that you must have the parent to have a position setted...
+  * 
+  * @example    html
+  * <div class="s-ratio-16-9 s-bg-primary">
+  *   <div class="s-center-abs">I'm centered</div>
+  * </div>
+  * 
+  * @since      2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+  .s-center-abs {
+    @sugar.util.center(abs, both);
+  }
+  `;
+
+  const centerAbsX = `/**
+  * @name       .s-center-abs-x
+  * @namespace      sugar.css.util
+  * @type         CssClass
+  * 
+  * This class allows you to center any HTMLElement horizontally using the
+  * well known absolute positionning method.
+  * Note that you must have the parent to have a position setted...
+  * 
+  * @example    html
+  * <div class="s-ratio-16-9 s-bg-primary">
+  *   <div class="s-center-abs-x">I'm horizontally centered</div>
+  * </div>
+  * 
+  * @since      2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+  .s-center-abs-x {
+    @sugar.util.center(abs, x);
+  }
+  `;
+
+  const centerAbsY = `/**
+  * @name       .s-center-abs-y
+  * @namespace      sugar.css.util
+  * @type         CssClass
+  * 
+  * This class allows you to center any HTMLElement vertically using the
+  * well known absolute positionning method.
+  * Note that you must have the parent to have a position setted...
+  * 
+  * @example    html
+  * <div class="s-ratio-16-9 s-bg-primary">
+  *   <div class="s-center-abs-y">I'm vertically centered</div>
+  * </div>
+  * 
+  * @since      2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+  .s-center-abs-y {
+    @sugar.util.center(abs, y);
+  }
+  `;
+
+  const vars: string[] = [pilled, centerAbs, centerAbsX, centerAbsY];
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

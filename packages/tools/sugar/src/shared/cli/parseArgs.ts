@@ -82,24 +82,77 @@ export default function parseArgs(string, settings = {}) {
 
     string = string.slice(1, -1);
 
-    // process the passed string
-    let reg = /(?:[^,"]+|"[^"]*")+/gm;
-    if (valueQuote === "'") reg = /(?:[^,']+|'[^']*')+/gm;
-    else if (valueQuote === '`') reg = /(?:[^,\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
-    stringArray = string.match(reg) || [];
-    stringArray = stringArray.map((item) => {
-      return __unquote(item);
-    });
+    let currentStr = '';
+    let isInParenthesis = false;
+    let isInQuotes = false;
+    for (let i = 0; i < string.length; i++) {
+      const char = string[i];
+      const previousChar = string[i - 1] || string[0];
+
+      // check if we are in quotes or not
+      if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
+        isInQuotes = true;
+      } else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
+        isInQuotes = false;
+      }
+
+      // check if we are in parenthesis
+      if (!isInQuotes && char === '(' && !isInParenthesis) {
+        isInParenthesis = true;
+      } else if (!isInQuotes && char === ')') {
+        isInParenthesis = false;
+      }
+
+      if (char === ',') {
+        if (isInQuotes || isInParenthesis) {
+          currentStr += char;
+        } else {
+          stringArray.push(currentStr.trim());
+          currentStr = '';
+        }
+      } else {
+        currentStr += char;
+      }
+    }
+    stringArray.push(currentStr.trim());
   } else {
-    // process the passed string
-    let reg = /(?:[^\s"]+|"[^"]*")+/gm;
-    if (valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
-    else if (valueQuote === '`') reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
-    stringArray = string.match(reg) || [];
-    stringArray = stringArray.map((item) => {
-      return __unquote(item);
-    });
+    // // process the passed string
+    // let reg = /(?:[^\s"]+|"[^"]*")+/gm;
+    // if (valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
+    // else if (valueQuote === '`') reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
+    // stringArray = string.match(reg) || [];
+    // stringArray = stringArray.map((item) => {
+    //   return __unquote(item);
+    // });
+
+    let currentStr = '';
+    let isInQuotes = false;
+    for (let i = 0; i < string.length; i++) {
+      const char = string[i];
+      const previousChar = string[i - 1] || string[0];
+
+      // check if we are in quotes or not
+      if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
+        isInQuotes = true;
+      } else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
+        isInQuotes = false;
+      }
+
+      if (char === ' ') {
+        if (isInQuotes) {
+          currentStr += char;
+        } else {
+          stringArray.push(currentStr.trim());
+          currentStr = '';
+        }
+      } else {
+        currentStr += char;
+      }
+    }
+    stringArray.push(currentStr.trim());
   }
+
+  stringArray = stringArray.map((item) => __unquote(item));
 
   const argsObj = {};
   let currentArgName = undefined;
@@ -139,8 +192,8 @@ export default function parseArgs(string, settings = {}) {
           value = parts.slice(1).join(':').trim();
         }
       }
-
       currentValue = __parse(value);
+
       if (currentArgName !== undefined) {
         argsObj[currentArgName] = currentValue;
         currentValue = undefined;

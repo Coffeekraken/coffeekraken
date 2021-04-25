@@ -56,6 +56,7 @@ export interface ISugarJsonFileConfig {
 }
 
 export interface ISugarJsonFile {
+  theme?: String;
   cli?: ISugarJsonFileCli;
   config?: ISugarJsonFileConfig;
 }

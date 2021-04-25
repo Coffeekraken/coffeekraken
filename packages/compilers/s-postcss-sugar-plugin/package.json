@@ -13,6 +13,7 @@
     "@coffeekraken/s-interface": "^2.0.0",
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-theme": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "chroma-js": "^2.1.1",
     "css-tree": "^1.1.3",

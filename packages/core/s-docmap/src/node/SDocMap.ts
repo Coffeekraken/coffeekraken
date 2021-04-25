@@ -22,6 +22,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __SCache from '@coffeekraken/s-cache';
 import __SDocMapFindParamsInterface from './interface/SDocMapFindParamsInterface';
 import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 
 /**
  * @name                SDocMap
@@ -149,6 +150,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
     // init the cache
     this._cache = new __SCache(`SDocMap-${this.metas.id}`);
+
+    __onProcessExit((...args) => {
+      console.log('EXITEDDDD', args);
+    });
   }
 
   /**
@@ -420,9 +425,9 @@ class SDocMap extends __SClass implements ISDocMap {
           emit('log', {
             value: '<blue>[watch]</blue> Watching for changes...'
           });
+        } else {
+          resolve(this._entries);
         }
-
-        resolve(this._entries);
       });
 
       if (generateParams.watch) {

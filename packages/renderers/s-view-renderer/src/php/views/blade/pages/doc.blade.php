@@ -41,5 +41,9 @@
 <a class="s-btn s-btn--info s-size-80 s-btn--text">wjfowjfio wj ofijw eiofjw ioefj</a>
 <a class="s-btn s-btn--info s-size-90 s-btn--text">wjfowjfio wj ofijw eiofjw ioefj</a>
 
+<div class="s-ratio-16-9 s-gradient-primary">
+  <div class="s-center-abs">Hello world</div>
+</div>
+
   {!! $body !!}
 @endsection

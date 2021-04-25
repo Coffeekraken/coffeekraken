@@ -29,7 +29,7 @@ export default function (
 
   const depthCss = themeConfig(`depth.${finalParams.depth}`);
 
-  const vars: string[] = [depthCss];
+  const vars: string[] = [`box-shadow: ${depthCss};`];
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

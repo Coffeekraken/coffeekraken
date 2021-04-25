@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add @coffeekraken/s-color
+  /usr/local/bin/node /usr/local/bin/yarn add @coffeekraken/s-theme
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@coffeekraken%2fs-color: Not found
+  Error: https://registry.yarnpkg.com/@coffeekraken%2fs-theme: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:315:20)
@@ -36,15 +36,21 @@ npm manifest:
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
     "license": "MIT",
     "dependencies": {
+      "@coffeekraken/s-color": "^2.0.0",
       "@coffeekraken/s-duration": "^2.0.0",
       "@coffeekraken/s-file": "^2.0.0",
       "@coffeekraken/s-interface": "^2.0.0",
       "@coffeekraken/s-process": "^2.0.0",
       "@coffeekraken/s-promise": "^2.0.0",
+      "@coffeekraken/s-theme": "^2.0.0",
       "@coffeekraken/sugar": "^2.0.0",
+      "chroma-js": "^2.1.1",
       "css-tree": "^1.1.3",
+      "glob": "^7.1.6",
       "parse-function": "^5.6.10",
-      "postcss": "^8.2.10"
+      "postcss": "^8.2.10",
+      "postcss-nested": "^5.0.5",
+      "postcss-nesting": "^7.0.1"
     }
   }
 
@@ -3842,7 +3848,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
     integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
   
-  chroma-js@^2.1.0:
+  chroma-js@^2.1.0, chroma-js@^2.1.1:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.1.1.tgz#413c8fbcc4c0988dc7c77bb59c4de36573b8fe97"
     integrity sha512-gYc5/Dooshun2OikK7oY/hYnoEiZ0dxqRpXosEdYRYm505vU5mRsHFqIW062C9nMtr32DVErP6mlxuepo2kNkw==
@@ -11832,6 +11838,13 @@ Lockfile:
       postcss "^7.0.32"
       postcss-selector-parser "^6.0.2"
   
+  postcss-nested@^5.0.5:
+    version "5.0.5"
+    resolved "https://registry.yarnpkg.com/postcss-nested/-/postcss-nested-5.0.5.tgz#f0a107d33a9fab11d7637205f5321e27223e3603"
+    integrity sha512-GSRXYz5bccobpTzLQZXOnSOfKl6TwVr5CyAQJUPub4nuRJSOECK5AqurxVgmtxP48p0Kc/ndY/YyS1yqldX0Ew==
+    dependencies:
+      postcss-selector-parser "^6.0.4"
+  
   postcss-nesting@^5.0.0:
     version "5.0.0"
     resolved "https://registry.yarnpkg.com/postcss-nesting/-/postcss-nesting-5.0.0.tgz#973e3a7dc6426543affc0b0beb367c3b2a8d9923"
@@ -11839,7 +11852,7 @@ Lockfile:
     dependencies:
       postcss "^6.0.21"
   
-  postcss-nesting@^7.0.0:
+  postcss-nesting@^7.0.0, postcss-nesting@^7.0.1:
     version "7.0.1"
     resolved "https://registry.yarnpkg.com/postcss-nesting/-/postcss-nesting-7.0.1.tgz#b50ad7b7f0173e5b5e3880c3501344703e04c052"
     integrity sha512-FrorPb0H3nuVq0Sff7W2rnc3SmIcruVC6YwpcS+k687VxyxO33iE1amna7wHuRVzM8vfiYofXSBHNAZ3QhLvYg==

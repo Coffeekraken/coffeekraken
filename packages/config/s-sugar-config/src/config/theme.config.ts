@@ -82,7 +82,101 @@ export default {
    */
   themes: {
     default: {
-      modifier: {
+      transition: {
+        slow: 'all 1s ease-in-out',
+        default: 'all .5s ease-in-out',
+        fast: 'all .2s ease-in-out'
+      },
+
+      ratio: {
+        '1-1': 1,
+        '16-9': 16 / 9,
+        '2-3': 2 / 3,
+        '4-3': 4 / 3,
+        '3-4': 3 / 4
+      },
+
+      depth: {
+        0: '0',
+        1: `0 0.1px 0.1px rgba(0, 0, 0, 0.017),
+              0 0.3px 0.3px rgba(0, 0, 0, 0.024),
+              0 0.5px 0.6px rgba(0, 0, 0, 0.03),
+              0 0.9px 1.1px rgba(0, 0, 0, 0.036),
+              0 1.7px 2.1px rgba(0, 0, 0, 0.043),
+              0 4px 5px rgba(0, 0, 0, 0.06)
+            `,
+        2: `0 0.4px 0.5px rgba(0, 0, 0, 0.017),
+              0 0.9px 1.1px rgba(0, 0, 0, 0.024),
+              0 1.8px 2.1px rgba(0, 0, 0, 0.03),
+              0 3.1px 3.8px rgba(0, 0, 0, 0.036),
+              0 5.8px 7.1px rgba(0, 0, 0, 0.043),
+              0 14px 17px rgba(0, 0, 0, 0.06)
+            `,
+        3: `0 0.6px 0.5px rgba(0, 0, 0, 0.017),
+              0 1.5px 1.1px rgba(0, 0, 0, 0.024),
+              0 2.8px 2.1px rgba(0, 0, 0, 0.03),
+              0 4.9px 3.8px rgba(0, 0, 0, 0.036),
+              0 9.2px 7.1px rgba(0, 0, 0, 0.043),
+              0 22px 17px rgba(0, 0, 0, 0.06)
+            `,
+        4: `0 0.9px 0.7px rgba(0, 0, 0, 0.017),
+              0 2.1px 1.7px rgba(0, 0, 0, 0.024),
+              0 4px 3.1px rgba(0, 0, 0, 0.03),
+              0 7.1px 5.6px rgba(0, 0, 0, 0.036),
+              0 13.4px 10.4px rgba(0, 0, 0, 0.043),
+              0 32px 25px rgba(0, 0, 0, 0.06)
+            `,
+        5: `0 1.3px 0.8px rgba(0, 0, 0, 0.017),
+              0 3.1px 2px rgba(0, 0, 0, 0.024),
+              0 5.9px 3.8px rgba(0, 0, 0, 0.03),
+              0 10.5px 6.7px rgba(0, 0, 0, 0.036),
+              0 19.6px 12.5px rgba(0, 0, 0, 0.043),
+              0 47px 30px rgba(0, 0, 0, 0.06)
+            `,
+        6: `0 1.8px 1.1px rgba(0, 0, 0, 0.017),
+              0 4.3px 2.7px rgba(0, 0, 0, 0.024),
+              0 8px 5.1px rgba(0, 0, 0, 0.03),
+              0 14.3px 9.2px rgba(0, 0, 0, 0.036),
+              0 26.7px 17.1px rgba(0, 0, 0, 0.043),
+              0 64px 41px rgba(0, 0, 0, 0.06)
+            `,
+        7: `0 2.4px 1.4px rgba(0, 0, 0, 0.017),
+              0 5.7px 3.3px rgba(0, 0, 0, 0.024),
+              0 10.6px 6.1px rgba(0, 0, 0, 0.03),
+              0 19px 10.9px rgba(0, 0, 0, 0.036),
+              0 35.5px 20.5px rgba(0, 0, 0, 0.043),
+              0 85px 49px rgba(0, 0, 0, 0.06)
+            `,
+        8: `0 3px 1.9px rgba(0, 0, 0, 0.017),
+              0 7.2px 4.6px rgba(0, 0, 0, 0.024),
+              0 13.6px 8.6px rgba(0, 0, 0, 0.03),
+              0 24.3px 15.4px rgba(0, 0, 0, 0.036),
+              0 45.5px 28.8px rgba(0, 0, 0, 0.043),
+              0 109px 69px rgba(0, 0, 0, 0.06)
+            `,
+        9: `0 4px 2.2px rgba(0, 0, 0, 0.017),
+              0 9.6px 5.4px rgba(0, 0, 0, 0.024),
+              0 18px 10.1px rgba(0, 0, 0, 0.03),
+              0 32.2px 18.1px rgba(0, 0, 0, 0.036),
+              0 60.2px 33.8px rgba(0, 0, 0, 0.043),
+              0 144px 81px rgba(0, 0, 0, 0.06)
+            `,
+        10: `0 5px 2.6px rgba(0, 0, 0, 0.017),
+              0 12px 6.3px rgba(0, 0, 0, 0.024),
+              0 22.7px 11.8px rgba(0, 0, 0, 0.03),
+              0 40.4px 21px rgba(0, 0, 0, 0.036),
+              0 75.6px 39.3px rgba(0, 0, 0, 0.043),
+              0 181px 94px rgba(0, 0, 0, 0.06)
+            `
+      },
+
+      gradient: {
+        defaultType: 'linear',
+        defaultAngle: 45,
+        defaultModifier: '70'
+      },
+
+      colorModifier: {
         5: '-lighten 45%',
         10: '-lighten 40%',
         20: '-lighten 30%',
@@ -93,96 +187,6 @@ export default {
         70: '-darken 20%',
         80: '-darken 30%',
         90: '-darken 40%'
-      },
-
-      transition: {
-        slow: 'all 1s ease-in-out',
-        default: 'all .5s ease-in-out',
-        fast: 'all .2s ease-in-out'
-      },
-
-      depth: {
-        0: 'box-shadow: 0',
-        1: `box-shadow:
-              0 0.1px 0.1px rgba(0, 0, 0, 0.017),
-              0 0.3px 0.3px rgba(0, 0, 0, 0.024),
-              0 0.5px 0.6px rgba(0, 0, 0, 0.03),
-              0 0.9px 1.1px rgba(0, 0, 0, 0.036),
-              0 1.7px 2.1px rgba(0, 0, 0, 0.043),
-              0 4px 5px rgba(0, 0, 0, 0.06)
-            ;`,
-        2: `box-shadow:
-              0 0.4px 0.5px rgba(0, 0, 0, 0.017),
-              0 0.9px 1.1px rgba(0, 0, 0, 0.024),
-              0 1.8px 2.1px rgba(0, 0, 0, 0.03),
-              0 3.1px 3.8px rgba(0, 0, 0, 0.036),
-              0 5.8px 7.1px rgba(0, 0, 0, 0.043),
-              0 14px 17px rgba(0, 0, 0, 0.06)
-            ;`,
-        3: `box-shadow:
-              0 0.6px 0.5px rgba(0, 0, 0, 0.017),
-              0 1.5px 1.1px rgba(0, 0, 0, 0.024),
-              0 2.8px 2.1px rgba(0, 0, 0, 0.03),
-              0 4.9px 3.8px rgba(0, 0, 0, 0.036),
-              0 9.2px 7.1px rgba(0, 0, 0, 0.043),
-              0 22px 17px rgba(0, 0, 0, 0.06)
-            ;`,
-        4: `box-shadow:
-              0 0.9px 0.7px rgba(0, 0, 0, 0.017),
-              0 2.1px 1.7px rgba(0, 0, 0, 0.024),
-              0 4px 3.1px rgba(0, 0, 0, 0.03),
-              0 7.1px 5.6px rgba(0, 0, 0, 0.036),
-              0 13.4px 10.4px rgba(0, 0, 0, 0.043),
-              0 32px 25px rgba(0, 0, 0, 0.06)
-            ;`,
-        5: `box-shadow:
-              0 1.3px 0.8px rgba(0, 0, 0, 0.017),
-              0 3.1px 2px rgba(0, 0, 0, 0.024),
-              0 5.9px 3.8px rgba(0, 0, 0, 0.03),
-              0 10.5px 6.7px rgba(0, 0, 0, 0.036),
-              0 19.6px 12.5px rgba(0, 0, 0, 0.043),
-              0 47px 30px rgba(0, 0, 0, 0.06)
-            ;`,
-        6: `box-shadow:
-              0 1.8px 1.1px rgba(0, 0, 0, 0.017),
-              0 4.3px 2.7px rgba(0, 0, 0, 0.024),
-              0 8px 5.1px rgba(0, 0, 0, 0.03),
-              0 14.3px 9.2px rgba(0, 0, 0, 0.036),
-              0 26.7px 17.1px rgba(0, 0, 0, 0.043),
-              0 64px 41px rgba(0, 0, 0, 0.06)
-            ;`,
-        7: `box-shadow:
-              0 2.4px 1.4px rgba(0, 0, 0, 0.017),
-              0 5.7px 3.3px rgba(0, 0, 0, 0.024),
-              0 10.6px 6.1px rgba(0, 0, 0, 0.03),
-              0 19px 10.9px rgba(0, 0, 0, 0.036),
-              0 35.5px 20.5px rgba(0, 0, 0, 0.043),
-              0 85px 49px rgba(0, 0, 0, 0.06)
-            ;`,
-        8: `box-shadow:
-              0 3px 1.9px rgba(0, 0, 0, 0.017),
-              0 7.2px 4.6px rgba(0, 0, 0, 0.024),
-              0 13.6px 8.6px rgba(0, 0, 0, 0.03),
-              0 24.3px 15.4px rgba(0, 0, 0, 0.036),
-              0 45.5px 28.8px rgba(0, 0, 0, 0.043),
-              0 109px 69px rgba(0, 0, 0, 0.06)
-            ;`,
-        9: `box-shadow:
-              0 4px 2.2px rgba(0, 0, 0, 0.017),
-              0 9.6px 5.4px rgba(0, 0, 0, 0.024),
-              0 18px 10.1px rgba(0, 0, 0, 0.03),
-              0 32.2px 18.1px rgba(0, 0, 0, 0.036),
-              0 60.2px 33.8px rgba(0, 0, 0, 0.043),
-              0 144px 81px rgba(0, 0, 0, 0.06)
-            ;`,
-        10: `box-shadow:
-              0 5px 2.6px rgba(0, 0, 0, 0.017),
-              0 12px 6.3px rgba(0, 0, 0, 0.024),
-              0 22.7px 11.8px rgba(0, 0, 0, 0.03),
-              0 40.4px 21px rgba(0, 0, 0, 0.036),
-              0 75.6px 39.3px rgba(0, 0, 0, 0.043),
-              0 181px 94px rgba(0, 0, 0, 0.06)
-            ;`
       },
 
       color: {
@@ -199,7 +203,7 @@ export default {
          */
         default: {
           default: '#848e91',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -215,7 +219,7 @@ export default {
          */
         title: {
           default: '#2b3438',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -231,7 +235,7 @@ export default {
          */
         text: {
           default: '#848e91',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -247,7 +251,7 @@ export default {
          */
         link: {
           default: '#f2bc2b',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -263,7 +267,7 @@ export default {
          */
         primary: {
           default: '#f2bc2b',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -279,7 +283,7 @@ export default {
          */
         secondary: {
           default: '#6d858f',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -295,7 +299,7 @@ export default {
          */
         surface: {
           default: '#6d858f',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -311,7 +315,7 @@ export default {
          */
         background: {
           default: '#6d858f',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -327,7 +331,7 @@ export default {
          */
         success: {
           default: '#5cb85c',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -343,7 +347,7 @@ export default {
          */
         warning: {
           default: '#f0ad4e',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -359,7 +363,7 @@ export default {
          */
         error: {
           default: '#d9534f',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**
@@ -375,7 +379,7 @@ export default {
          */
         info: {
           default: '#2199e8',
-          '...': '[config.theme.themes.default.modifier]'
+          '...': '[config.theme.themes.default.colorModifier]'
         },
 
         /**

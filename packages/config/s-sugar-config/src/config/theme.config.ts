@@ -88,6 +88,12 @@ export default {
         fast: 'all .2s ease-in-out'
       },
 
+      layout: {
+        container: {
+          'max-width': '1280px'
+        }
+      },
+
       ratio: {
         '1-1': 1,
         '16-9': 16 / 9,
@@ -598,9 +604,9 @@ export default {
            */
           default: {
             'font-family': 'Titillium Web',
-            'font-weight': 40,
+            'font-weight': 400,
             import:
-              'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@40&display=swap'
+              'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
           },
 
           /**
@@ -615,9 +621,9 @@ export default {
            */
           title: {
             'font-family': 'Titillium Web',
-            'font-weight': 70,
+            'font-weight': 400,
             import:
-              'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@70&display=swap'
+              'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
           },
 
           /**
@@ -711,27 +717,27 @@ export default {
            * @name          10
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       4px
+           * @default       8px
            *
            * Declare the font size <primary>10</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          10: '4px',
+          10: '8px',
 
           /**
            * @name          20
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       8px
+           * @default       10px
            *
            * Declare the font size <primary>20</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          20: '8px',
+          20: '10px',
 
           /**
            * @name          30
@@ -750,79 +756,92 @@ export default {
            * @name          40
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       16px
+           * @default       14px
            *
            * Declare the font size <primary>40</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          40: '16px',
+          40: '14px',
 
           /**
            * @name          50
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       24px
+           * @default       16px
            *
            * Declare the font size <primary>50</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          50: '24px',
+          50: '16px',
 
           /**
            * @name          60
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       32px
+           * @default       24px
            *
            * Declare the font size <primary>60</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          60: '32px',
+          60: '24px',
 
           /**
            * @name          70
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       40px
+           * @default       32px
            *
            * Declare the font size <primary>70</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          70: '40px',
+          70: '32px',
 
           /**
            * @name          80
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       48px
+           * @default       40px
            *
            * Declare the font size <primary>80</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          80: '48px',
+          80: '40px',
 
           /**
            * @name          90
            * @namespace     config.theme.themes.default.font.size
            * @type          String
-           * @default       56px
+           * @default      48px
            *
            * Declare the font size <primary>90</primary>
            *
            * @since         2.0.0
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          90: '56px'
+          90: '48px',
+
+          /**
+           * @name          10
+           * @namespace     config.theme.themes.default.font.size
+           * @type          String
+           * @default      56px
+           *
+           * Declare the font size <primary>100</primary>
+           *
+           * @since         2.0.0
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           */
+          100: '56px'
         }
       },
 
@@ -1105,6 +1124,83 @@ export default {
         }
       },
 
+      typo: {
+        h1: {
+          'font-family': 'title',
+          'font-size': 80,
+          color: 'primary',
+          'margin-bottom': 80
+        },
+        h2: {
+          'font-family': 'title',
+          'font-size': 70,
+          color: 'primary',
+          'margin-bottom': 70
+        },
+        h3: {
+          'font-family': 'title',
+          'font-size': 60,
+          color: 'text',
+          'margin-bottom': 60
+        },
+        h4: {
+          'font-family': 'title',
+          'font-size': 50,
+          color: 'text',
+          'margin-bottom': 50
+        },
+        h5: {
+          'font-family': 'title',
+          'font-size': 40,
+          color: 'text',
+          'margin-bottom': 50
+        },
+        h6: {
+          'font-family': 'title',
+          'font-size': 30,
+          color: 'text',
+          'margin-bottom': 50
+        },
+        p: {
+          'font-family': 'default',
+          'font-size': 50,
+          color: 'text',
+          'margin-bottom': 50
+        },
+        b: {
+          'font-weight': 'bold'
+        },
+        strong: {
+          'font-weight': 'bold'
+        },
+        i: {
+          'font-style': 'italic'
+        },
+        em: {
+          'font-style': 'italic'
+        },
+        small: {
+          'font-size': '0.5em'
+        },
+        mark: {
+          'background-color': 'sugar.color(primary--30)'
+        },
+        del: {
+          'text-decoration': 'line-through'
+        },
+        ins: {
+          'text-decoration': 'underline'
+        },
+        sub: {
+          'vertical-align': 'sub',
+          'font-size': '0.6em'
+        },
+        sup: {
+          'vertical-align': 'sup',
+          'font-size': '0.6em'
+        }
+      },
+
       ui: {
         button: {
           padding: '1em 2em',
@@ -1256,7 +1352,20 @@ export default {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        90: '1.8rem'
+        90: '1.8rem',
+
+        /**
+         * @name            100
+         * @namespace       config.theme.themes.default.space
+         * @type            String
+         * @default         2rem
+         *
+         * Specify the <primary>100</primary> space used for padding and margin
+         *
+         * @since           1.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        100: '2rem'
       },
 
       margin: {

@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "names": [],
+    "sources": [
+        "SHighlightJs.svelte"
+    ],
+    "sourcesContent": [
+        "\n\n<svelte:options tag=\"s-highlight-js\" />\n\n<script type=\"text/ts\">\n\n    import hljs from 'highlight.js';\n    import javascript from 'highlight.js/lib/languages/javascript';\n    hljs.registerLanguage('javascript', javascript);\n\n\timport __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';\n\n\tclass MyCoolComponent extends __SSvelteComponent {\n\t\tconstructor() {\n\t\t\tsuper({\n\t\t\t\tsvelteComponent: {}\n\t\t\t});\n\t\t}\n\t}\n\tconsole.log('fff')\n\n\n\tnew MyCoolComponent();\n\n</script>\n\n<style>\n\th1 {\n\t\tcolor: blue;\n\t\tbackground: red;\n\t}\n</style>\n\n<div>\n\t<h1>Hello worlc</h1>\n</div>"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;OAMW,IAAI,MAAM,cAAc;OACxB,UAAU,MAAM,uCAAuC;OAG1D,kBAAkB,MAAM,gDAAgD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAF5E,IAAI,CAAC,gBAAgB,CAAC,YAAY,EAAE,UAAU;;OAI3C,eAAe,SAAS,kBAAkB;EAC/C,WAAW;GACV,KAAK,GACJ,eAAe;;;;CAIlB,OAAO,CAAC,GAAG,CAAC,KAAK;KAGb,eAAe;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+}

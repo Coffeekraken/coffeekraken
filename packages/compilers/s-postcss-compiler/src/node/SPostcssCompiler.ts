@@ -175,7 +175,13 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
             let required = require(pluginObj.import); // eslint-disable-line
             required = required.default ?? required;
 
-            postCssPlugins.push(required(pluginObj.settings ?? {}));
+            postCssPlugins.push(
+              required(
+                {
+                  ...pluginObj.settings
+                } ?? {}
+              )
+            );
           });
         }
 

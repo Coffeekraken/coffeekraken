@@ -1,4 +1,4 @@
-import { themeConfig } from '@coffeekraken/s-sugar-config';
+import __theme from '../../utils/theme';
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
@@ -24,7 +24,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (params = {}, atRule, processNested) {
-  const colorsObj = themeConfig('color');
+  const colorsObj = __theme().config('color');
 
   const cssArray: string[] = [];
 

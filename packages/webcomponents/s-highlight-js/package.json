@@ -1,0 +1,16 @@
+{
+  "name": "@coffeekraken/s-highlight-js",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://coffeekraken.io",
+  "main": "src/js/exports.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^2.0.0",
+    "highlight.js": "^10.7.2"
+  }
+}

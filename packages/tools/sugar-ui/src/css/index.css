@@ -68,7 +68,7 @@
   * This need the node-sass-glob-importer package installed :
   * https://www.npmjs.com/package/node-sass-glob-importer
   */
-@import-glob '../views/**/*.scss';
+/** @import-glob '../views/ * * /*.scss'; */
 
 /**
   * Trumps
@@ -77,11 +77,18 @@
   */
 @import './09_trumps/all';
 
+@sugar.font.faces;
 @sugar.theme (default);
+@sugar.reset;
+@sugar.layout.classes;
+@sugar.font.classes;
+/* @sugar.space.classes; */
 
-@sugar.gradient.classes;
+/* @sugar.gradient.classes;
 @sugar.ratio.classes;
-@sugar.util.classes;
+@sugar.util.classes; */
+
+@sugar.typo.classes();
 
 /* @sugar.init;
 

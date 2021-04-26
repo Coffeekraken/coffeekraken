@@ -1,28 +1,20 @@
-import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __SCache from '@coffeekraken/s-cache';
+import __SClass from '@coffeekraken/s-class';
+import __SDocblock from '@coffeekraken/s-docblock';
+import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import __fsPool from '@coffeekraken/sugar/node/fs/pool';
+import __SGlob from '@coffeekraken/sugar/node/glob/SGlob';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __glob from 'glob';
+import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __path from 'path';
-import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __SDocblock from '@coffeekraken/s-docblock';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
-import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __SGlob from '@coffeekraken/sugar/node/glob/SGlob';
-import __SClass from '@coffeekraken/s-class';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __SFile from '@coffeekraken/s-file';
-import __clone from '@coffeekraken/sugar/shared/object/clone';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __SCache from '@coffeekraken/s-cache';
 import __SDocMapFindParamsInterface from './interface/SDocMapFindParamsInterface';
 import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 
 /**
  * @name                SDocMap
@@ -65,6 +57,7 @@ export interface ISDocMapGenerateParams {
 }
 export interface ISDocMapFindParams {
   cache: boolean;
+  clearCache: boolean;
   globs: string[];
   exclude: string[];
 }
@@ -149,11 +142,9 @@ class SDocMap extends __SClass implements ISDocMap {
     );
 
     // init the cache
-    this._cache = new __SCache(`SDocMap-${this.metas.id}`);
-
-    __onProcessExit((...args) => {
-      console.log('EXITEDDDD', args);
-    });
+    this._cache = new __SCache(
+      this.metas.id === 'SDocMap' ? this.metas.id : `SDocMap-${this.metas.id}`
+    );
   }
 
   /**
@@ -194,11 +185,26 @@ class SDocMap extends __SClass implements ISDocMap {
       // build the glob pattern to use
       const patterns: string[] = findParams.globs || [];
 
-      if (findParams.cache) {
+      if (findParams.clearCache) {
+        emit('log', {
+          value: '<yellow>[cache]</yellow> Clearing the cache...'
+        });
+        await this.clearCache();
+      }
+
+      if (findParams.cache && !findParams.clearCache) {
         const cachedValue = await this._cache.get('find-files');
         if (cachedValue) {
           emit('log', {
             value: `<yellow>[${this.constructor.name}]</yellow> docmap.json file(s) getted from cache`
+          });
+          cachedValue.forEach((fileObj) => {
+            emit('log', {
+              value: `- <cyan>${__path.relative(
+                process.cwd(),
+                fileObj.path
+              )}</cyan>`
+            });
           });
           return resolve(cachedValue);
         }

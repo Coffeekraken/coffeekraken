@@ -1,5 +1,5 @@
-import { themeConfig } from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
 
 class postcssSugarPluginSizeClassesMixinInterface extends __SInterface {
   static definition = {};
@@ -23,7 +23,7 @@ export { postcssSugarPluginSizeClassesMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (params = {}, atRule, processNested) {
-  const sizes = themeConfig('size');
+  const sizes = __theme().config('size');
 
   const cssArray: string[] = [];
 

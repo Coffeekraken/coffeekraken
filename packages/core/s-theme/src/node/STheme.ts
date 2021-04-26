@@ -102,7 +102,12 @@ export interface ISThemeLoopOnColorsColor {
   next: ISThemeLoopOnColorsColor;
 }
 
+export interface ISThemeLayout {
+  container: Record<string, any>;
+}
+
 export interface ISThemeConfig {
+  layout: ISThemeLayout;
   transition: Record<string | number, string>;
   ratio: Record<string, number>;
   depth: Record<string | number, string>;
@@ -114,14 +119,14 @@ export interface ISThemeConfig {
   media: ISThemeMedia;
 }
 
-export interface ISThemesConfig {
+export interface ISthemes {
   baseTheme: string;
   themes: Record<string, ISThemeConfig>;
 }
 
 export default class STheme extends __SClass {
   /**
-   * @name        themeName
+   * @name        name
    * @type        String
    *
    * Store the theme name that this instance represent
@@ -129,10 +134,10 @@ export default class STheme extends __SClass {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  themeName: String;
+  name: String;
 
   /**
-   * @name        themeConfig
+   * @name        _config
    * @type        String
    *
    * Store the current theme configuration
@@ -140,10 +145,10 @@ export default class STheme extends __SClass {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  themeConfig: any;
+  _config: any;
 
   /**
-   * @name        themesConfig
+   * @name        themes
    * @type        String
    *
    * Store the themes configuration
@@ -151,7 +156,61 @@ export default class STheme extends __SClass {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  themesConfig: any;
+  themes: any;
+
+  /**
+   * @name      baseTheme
+   * @type      String
+   * @static
+   *
+   * Store the base theme setted in the config.theme namespace
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static baseTheme: string = __sugarConfig('theme.baseTheme');
+
+  /**
+   * @name      themes
+   * @type      String
+   * @static
+   *
+   * Store the names of all the available themes
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static themes: string[] = Object.keys(__sugarConfig('theme.themes'));
+
+  /**
+   * @name        theme
+   * @type        Function
+   * @static
+   *
+   * This static method allows you to get quicky an STheme instance of the passed theme.
+   * It will also check if an instance already exists for this theme and return it if so...
+   *
+   * @param     {String}    theme       The name of theme you want an STheme instance back for
+   * @return    {STheme}              An instance of the STheme class representing the requested theme
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _instanciatedThemes: Record<string, STheme> = {};
+  static theme(theme: string): STheme {
+    if (this._instanciatedThemes[theme]) return this._instanciatedThemes[theme];
+    const themes = __sugarConfig('theme.themes');
+    if (!themes[theme])
+      throw new Error(
+        `<red>[${
+          this.name
+        }]</red> Sorry but the requested theme "<yellow>${theme}</yellow>" does not exists. Here's the available themes: <green>${Object.keys(
+          themes
+        ).join(',')}</green>`
+      );
+    this._instanciatedThemes[theme] = new STheme(theme);
+    return this._instanciatedThemes[theme];
+  }
 
   /**
    * @name        constructor
@@ -166,7 +225,7 @@ export default class STheme extends __SClass {
   constructor(theme?: string) {
     super({});
 
-    this.themesConfig = __sugarConfig('theme');
+    this.themes = __sugarConfig('theme.themes');
 
     if (!theme) {
       const sugarJson = __sugarJson();
@@ -174,20 +233,20 @@ export default class STheme extends __SClass {
       if (sugarJson.theme) theme = sugarJson.theme ?? 'default';
     }
 
-    if (theme && Object.keys(this.themesConfig.themes).indexOf(theme) === -1) {
+    if (theme && Object.keys(this.themes).indexOf(theme) === -1) {
       throw new Error(
         `<red>[${
           this.constructor.name
         }]</red> Sorry but the theme "${theme}" you've passed in constructor does not exists... Here's the list of actual available themes: ${Object.keys(
-          this.themesConfig.themes
+          this.themes.themes
         ).join(',')}`
       );
     } else if (theme) {
-      this.themeName = theme;
-      this.themeConfig = this.themesConfig.themes[theme];
+      this.name = theme;
+      this._config = this.themes[theme];
     } else {
-      this.themeName = 'default';
-      this.themeConfig = this.themesConfig.themes.default;
+      this.name = 'default';
+      this._config = this.themes.default;
     }
   }
 
@@ -205,10 +264,10 @@ export default class STheme extends __SClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   config(dotPath): any {
-    const value = __get(this.themeConfig, dotPath);
+    const value = __get(this._config, dotPath);
     if (value === undefined) {
       throw new Error(
-        `<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.themeName}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`
+        `<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.name}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`
       );
     }
     return value;

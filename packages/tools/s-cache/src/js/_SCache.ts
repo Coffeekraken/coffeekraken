@@ -64,6 +64,17 @@ class SCache extends __SClass implements ISCache {
   };
 
   /**
+   * @name        id
+   * @type      String
+   *
+   * Store the cache if passed in constructor
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  id: string;
+
+  /**
    * @name              registeredAdapters
    * @type              Record<string, ISCacheAdapter>
    * @static
@@ -147,7 +158,7 @@ class SCache extends __SClass implements ISCache {
       );
     }
 
-    this._settings.id = id;
+    this.id = id;
   }
 
   /**
@@ -174,11 +185,7 @@ class SCache extends __SClass implements ISCache {
     }
 
     // set the cache property of the adapter if not set already
-    this._adapter &&
-      this._adapter.setCache({
-        id: this.metas.id,
-        settings: Object.assign({}, this.cacheSettings)
-      });
+    this._adapter && this._adapter.setCache(this);
     // if (this._adapter && !this._adapter.cache) this._adapter.cache = this;
 
     return <ISCacheAdapter>this._adapter;

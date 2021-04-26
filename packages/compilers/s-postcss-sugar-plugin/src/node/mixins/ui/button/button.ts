@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig, { themeConfig } from '@coffeekraken/s-sugar-config';
 import __themeVar from '../../../utils/themeVar';
 import __isInScope from '../../../utils/isInScope';
+import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiButtonInterface extends __SInterface {
   static definition = {
@@ -45,7 +45,7 @@ export default function (
 
   const vars: string[] = [];
 
-  const defaultSize = themeConfig('size.default');
+  const defaultSize = __theme().config('size.default');
 
   if (__isInScope('bare')) {
     vars.push(`

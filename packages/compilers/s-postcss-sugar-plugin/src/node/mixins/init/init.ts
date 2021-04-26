@@ -28,6 +28,9 @@ export default function (params = {}, atRule, processNested) {
 
   const cssArray = [
     `@sugar.theme(${themeConfig.baseTheme});`,
+    '@sugar.reset;',
+    '@sugar.layout.classes',
+    '@sugar.font.classes',
     '@sugar.color.docblocks;',
     '@sugar.color.classes;',
     '@sugar.size.classes;',

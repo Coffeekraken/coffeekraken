@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { themeConfig } from '@coffeekraken/s-sugar-config';
 import __SColor from '@coffeekraken/s-color';
+import __theme from '../../utils/theme';
 
 class postcssSugarPluginColorInterface extends __SInterface {
   static definition = {
@@ -83,7 +83,7 @@ export default function (params: Partial<IPostcssSugarPluginColorParams> = {}) {
     let modifierStr = modifier || 'default';
     if (invert) modifierStr += '-i';
 
-    const colorValue = themeConfig(`color.${name}.${modifierStr}`, theme);
+    const colorValue = __theme().config(`color.${name}.${modifierStr}`);
 
     let colorVar = `--s-theme-${theme}-color-${name}-${modifierStr}`;
 

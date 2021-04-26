@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeInstance from '../../utils/themeInstance';
+import __theme from '../../utils/theme';
 
 class postcssSugarPluginRatioClassesInterface extends __SInterface {
   static definition = {};
@@ -17,10 +17,11 @@ export default function (
   processNested
 ) {
   const finalParams: IPostcssSugarPluginRatioClassesParams = {
+    ratio: 1,
     ...params
   };
 
-  const ratioObj = __themeInstance.config('ratio');
+  const ratioObj = __theme().config('ratio');
 
   const vars: string[] = [];
 

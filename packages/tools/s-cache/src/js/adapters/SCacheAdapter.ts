@@ -2,7 +2,7 @@
 
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
-import { ISCacheSetSettings } from '../SCache';
+import __SCache, { ISCacheSetSettings } from '../SCache';
 
 /**
  * @name                                SCacheAdapter
@@ -42,14 +42,9 @@ import { ISCacheSetSettings } from '../SCache';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISCacheAdapterCache {
-  id: string;
-  settings: any;
-}
-
 export interface ISCacheAdapter {
   id: string;
-  cache: ISCacheAdapterCache;
+  cache: __SCache;
   get(name: string): Promise<any>;
   set(name: string, value: any, settings?: ISCacheSetSettings): Promise<any>;
   delete(name: string): Promise<any>;
@@ -57,12 +52,12 @@ export interface ISCacheAdapter {
   keys(): Promise<string[]>;
   stringify?(value: any): string;
   parse?(value: string): any;
-  setCache(cache: ISCacheAdapterCache): void;
+  setCache(cache: __SCache): void;
 }
 
 export default abstract class SCacheAdapter extends __SClass {
   // @ts-ignore
-  cache: ISCacheAdapterCache;
+  cache: __SCache;
 
   /**
    * @name                              constructor
@@ -85,7 +80,7 @@ export default abstract class SCacheAdapter extends __SClass {
     );
   }
 
-  setCache(cache: ISCacheAdapterCache) {
+  setCache(cache: __SCache) {
     this.cache = cache;
   }
 

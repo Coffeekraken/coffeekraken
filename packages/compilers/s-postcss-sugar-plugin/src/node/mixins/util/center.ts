@@ -1,7 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig, { themeConfig } from '@coffeekraken/s-sugar-config';
-import __themeVar from '../../utils/themeVar';
-import __isInScope from '../../utils/isInScope';
 
 class postcssSugarPluginUtilCenterInterface extends __SInterface {
   static definition = {
@@ -33,6 +30,8 @@ export default function (
   processNested
 ) {
   const finalParams: IPostcssSugarPluginUtilCenterParams = {
+    method: 'abs',
+    direction: 'both',
     ...params
   };
 

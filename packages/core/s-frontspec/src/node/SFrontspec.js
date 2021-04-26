@@ -13,48 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const s_file_1 = __importDefault(require("@coffeekraken/s-file"));
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const SGlob_1 = __importDefault(require("@coffeekraken/sugar/node/glob/SGlob"));
 const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
-const json_1 = __importDefault(require("@coffeekraken/sugar/node/package/json"));
-const glob_1 = __importDefault(require("glob"));
+const wait_1 = __importDefault(require("@coffeekraken/sugar/shared/time/wait"));
 const path_1 = __importDefault(require("path"));
-const unique_1 = __importDefault(require("@coffeekraken/sugar/shared/array/unique"));
-const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-/**
- * @name                SFrontspec
- * @namespace           node
- * @type                Class
- * @extends             SPromise
- * @status              wip
- *
- * This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))
- * and save it inside a directory you choose.
- *
- * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
- *
- * @setting       {String}      [filename='frontspec.json']       Specify the filename you want
- * @setting       {String}      [outputDir=packageRoot()]         Specify the directory where you want to save your docMap.json file when using the ```save``` method
- * @setting       {Integer}     [dirDepth=3]                      Specify the maximum directories the scan will go down
- * @setting       {Boolean}     [cache=false]                     Specify if you want to take advantage of some cache or not
- * @setting       {Object}      [sources={}                       Specify some sources folders where the scan process will go search for frontspec.json files
- * @setting       {String}      [sources.[name].rootDir=__packageRoot()]     Specify the directory where to go search from
- * @setting       {Integer}     [sources.[name].dirDepth=3]                  Specify the maximum directories the scan will go down
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import SFrontspec from '@coffeekraken/s-frontspec';
- * const frontspec = new SFrontspec({
- *  outputDir: '/my/cool/directory'
- * });
- * const result = await frontspec.read();
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
+const SFrontspecFindParamsInterface_1 = __importDefault(require("./interface/SFrontspecFindParamsInterface"));
+const s_cache_1 = __importDefault(require("@coffeekraken/s-cache"));
+const toString_1 = __importDefault(require("@coffeekraken/sugar/shared/string/toString"));
 class SFrontspec extends s_promise_1.default {
     /**
      * @name            constructor
@@ -68,149 +35,174 @@ class SFrontspec extends s_promise_1.default {
      */
     constructor(settings = {}) {
         super(deepMerge_1.default({
-            id: 'SFrontspec',
-            search: s_sugar_config_1.default('build.frontspec.search'),
-            filename: s_sugar_config_1.default('build.frontspec.filename'),
-            outputDir: s_sugar_config_1.default('build.frontspec.outputDir'),
-            dirDepth: s_sugar_config_1.default('build.frontspec.dirDepth'),
-            cache: s_sugar_config_1.default('build.frontspec.cache'),
-            sources: s_sugar_config_1.default('build.frontspec.sources')
+            metas: {
+                id: 'SFrontspec'
+            }
         }, settings));
-        /**
-         * @name          _entries
-         * @type           Array<Object>
-         * @private
-         *
-         * This store the frontspec.json entries
-         *
-         * @since         2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this._entries = {};
+        // init the cache
+        this._cache = new s_cache_1.default(this.metas.id === 'SFrontspec'
+            ? this.metas.id
+            : `SFrontspec-${this.metas.id}`);
     }
     /**
-     * @name          search
+     * @name          clearCache
+     * @type          Function
+     * @async
+     *
+     * Clear the cached values
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    clearCache() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._cache.clear();
+        });
+    }
+    /**
+     * @name          find
      * @type          Function
      *
-     * This method allows you to search for frontspec.json files and get back the array of pathes where to
+     * This method allows you to find for frontspec.json files and get back the array of pathes where to
      * find the found files
      *
      * @todo      update documentation
      *
      * @param       {Object}        [settings={}]       A settings object to configure your reading process
      *
-     * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
+     * @return      {SPromise}                          An SPromise instance that will be resolved once the frontspec.json file(s) have been correctly read
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    search(settings = {}) {
-        return new s_promise_1.default(({ resolve, reject, emit }) => {
-            settings = deepMerge_1.default(this._settings, {}, settings);
-            // let filenamesArray = settings.filename;
-            // if (!Array.isArray(filenamesArray)) filenamesArray = [filenamesArray];
-            // generate the glob pattern to use
-            const patterns = [];
-            Object.keys(settings.sources).forEach((sourceName) => {
-                const sourceObj = deepMerge_1.default(settings, settings.sources[sourceName]);
-                const filenamesArray = !Array.isArray(sourceObj.search)
-                    ? [sourceObj.search]
-                    : sourceObj.search;
-                const patternObj = {
-                    rootDir: sourceObj.rootDir,
-                    patterns: []
-                };
-                for (let i = 0; i <= (sourceObj.dirDepth || settings.dirDepth); i++) {
-                    filenamesArray.forEach((filename) => {
-                        const p = `${'*/'.repeat(i)}${filename}`;
-                        patternObj.patterns.push(p);
-                    });
-                }
-                patterns.push(patternObj);
-            });
-            let files = [];
-            for (let i = 0; i < patterns.length; i++) {
-                const patternObj = patterns[i];
-                const foundFiles = glob_1.default
-                    .sync(`{${patternObj.patterns.join(',')}}`, {
-                    cwd: patternObj.rootDir,
-                    symlinks: true
-                })
-                    .map((filePath) => {
-                    return path_1.default.resolve(patternObj.rootDir, filePath);
+    find(params) {
+        const findParams = (deepMerge_1.default(SFrontspecFindParamsInterface_1.default.defaults(), params || {}));
+        return new s_promise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
+            // build the glob pattern to use
+            const patterns = findParams.globs || [];
+            if (findParams.clearCache) {
+                emit('log', {
+                    value: '<yellow>[cache]</yellow> Clearing the cache...'
                 });
-                files = [...files, ...foundFiles];
+                yield this.clearCache();
             }
-            files = unique_1.default(files);
+            if (findParams.cache && !findParams.clearCache) {
+                const cachedValue = yield this._cache.get('find-files');
+                if (cachedValue) {
+                    emit('log', {
+                        value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
+                    });
+                    cachedValue.forEach((fileObj) => {
+                        emit('log', {
+                            value: `- <cyan>${path_1.default.relative(process.cwd(), fileObj.path)}</cyan>`
+                        });
+                    });
+                    return resolve(cachedValue);
+                }
+            }
+            let files = [];
+            yield wait_1.default(1);
+            const searchStrArray = ['Searching frontspec using globs:'];
+            patterns.forEach((pat) => {
+                searchStrArray.push(`- <yellow>${pat}</yellow>`);
+            });
+            emit('log', {
+                value: searchStrArray.join('\n')
+            });
+            for (let i = 0; i < patterns.length; i++) {
+                const foundedFiles = yield SGlob_1.default.resolve(patterns[i]);
+                files = [...files, ...foundedFiles];
+            }
+            const findedStrArray = [
+                `Found <yellow>${files.length}</yellow> frontspec file(s):`
+            ];
+            files.forEach((file) => {
+                findedStrArray.push(`- <cyan>${file.relPath}</cyan>`);
+            });
+            emit('log', {
+                value: findedStrArray.join('\n')
+            });
+            // save in cache if asked
+            if (findParams.cache) {
+                emit('log', {
+                    value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
+                });
+                yield this._cache.set('find-files', files.map((file) => file.toObject()));
+            }
             resolve(files);
-        }, {
-            id: settings.id + '.find'
-        });
+        }));
     }
     /**
-     * @name					json
-     * @type 					Function
+     * @name          read
+     * @type          Function
      *
-     * Generate the frontspec JSON by searching for "childs" one as well as generating the "root" one
-     * stored at the root of your package.
+     * This static method allows you to search for frontspec.json files and read them to get
+     * back the content of them in one call. It can take advantage of the cache if
+     * the setting.cache property is setted to true
      *
-     * @param       {Object}        [settings={}]         A setting object to override the instance ones passed in the constructor
-     * @return      {SPromise}                            An SPromise instance that will be resolved with the frontspec JSON once jsond
+     * @todo      update documentation
+     * @todo      integrate the "cache" feature
      *
-     * @since 					2.0.0
+     * @param       {Object}        [settings={}]       A settings object to override the instance level ones
+     * @return      {SPromise}                          An SPromise instance that will be resolved once the frontspec.json file(s) have been correctly read
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    read(params) {
+        return new s_promise_1.default(({ resolve, pipe, emit }) => __awaiter(this, void 0, void 0, function* () {
+            const filesPromise = this.find(params);
+            pipe(filesPromise);
+            const files = yield filesPromise;
+            let jsons = {};
+            // loop on all files
+            files.forEach((file) => {
+                const content = file.content;
+                emit('log', {
+                    value: toString_1.default(content)
+                });
+                jsons[file.path] = content;
+            });
+            resolve(jsons);
+        }));
+    }
+    /**
+     * @name      assetsToServe
+     * @type      Function
+     * @async
+     *
+     * This method will returns all the files that need to be served using a web server
+     * that are defined in the frontspec.json files like some css, js etc...
+     *
+     * @since     2.0.0
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    json(settings = {}) {
-        settings = deepMerge_1.default(this._settings, {}, settings);
-        return new s_promise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                // initiating the frontspecJson object
-                const packageJson = json_1.default();
-                delete packageJson.dependencies;
-                delete packageJson.devDependencies;
-                delete packageJson.scripts;
-                let frontspecJson = {
-                    package: packageJson,
-                    children: {}
-                };
-                // search for files
-                const files = yield this.search(settings);
-                if (!files)
-                    resolve(frontspecJson);
-                const rootFilePath = `${packageRoot_1.default()}/${settings.filename}`;
-                if (files.indexOf(rootFilePath) !== -1) {
-                    frontspecJson = require(rootFilePath).default;
-                    frontspecJson.package = json_1.default();
-                    frontspecJson.children = {};
-                }
-                files.forEach((filePath) => {
-                    // checking if it's the root one
-                    if (filePath !== rootFilePath) {
-                        // build the relative path to the package
-                        const relPath = path_1.default.relative(packageRoot_1.default(), filePath);
-                        const outPath = path_1.default.relative(packageRoot_1.default(), `${this._settings.outputDir}/${this._settings.filename}`);
-                        // if the founded file is the same as the output one
-                        if (relPath === outPath)
-                            return;
-                        // reading the file
-                        const content = require(filePath).default;
-                        // relPath = relPath
-                        //   .replace(`/${settings.filename}`, '')
-                        //   .replace(settings.filename, '');
-                        // save the child frontspec
-                        frontspecJson.children[relPath] = content;
-                    }
+    assetsToServe() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const files = yield this.find();
+            const assetsToServe = [];
+            files.forEach((file) => {
+                const content = file.content;
+                if (!content.assets)
+                    return;
+                Object.keys(content.assets).forEach((type) => {
+                    const typeAssets = content.assets[type];
+                    Object.keys(typeAssets).forEach((assetId) => {
+                        var _a;
+                        const assetObj = typeAssets[assetId];
+                        const path = path_1.default.resolve(file.dirPath, (_a = assetObj.path) !== null && _a !== void 0 ? _a : assetObj.src);
+                        assetsToServe.push({
+                            type,
+                            id: assetId,
+                            path,
+                            file: s_file_1.default.new(path)
+                        });
+                    });
                 });
-                // resolve the frontspec Json
-                resolve(frontspecJson);
-            }
-            catch (e) {
-                reject(e.toString());
-            }
-        }), {
-            id: settings.id + '.json'
+            });
+            return assetsToServe;
         });
     }
 }
 exports.default = SFrontspec;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3BlYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHNwZWMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBRWQsd0VBQWlEO0FBQ2pELDRGQUFzRTtBQUN0RSw0RkFBc0U7QUFDdEUsaUZBQWtFO0FBQ2xFLGdEQUEwQjtBQUcxQixnREFBMEI7QUFDMUIscUZBQStEO0FBQy9ELGtGQUF5RDtBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUNHO0FBQ0gsTUFBcUIsVUFBVyxTQUFRLG1CQUFVO0lBYWhEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7UUFDdkIsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxFQUFFLEVBQUUsWUFBWTtZQUNoQixNQUFNLEVBQUUsd0JBQWEsQ0FBQyx3QkFBd0IsQ0FBQztZQUMvQyxRQUFRLEVBQUUsd0JBQWEsQ0FBQywwQkFBMEIsQ0FBQztZQUNuRCxTQUFTLEVBQUUsd0JBQWEsQ0FBQywyQkFBMkIsQ0FBQztZQUNyRCxRQUFRLEVBQUUsd0JBQWEsQ0FBQywwQkFBMEIsQ0FBQztZQUNuRCxLQUFLLEVBQUUsd0JBQWEsQ0FBQyx1QkFBdUIsQ0FBQztZQUM3QyxPQUFPLEVBQUUsd0JBQWEsQ0FBQyx5QkFBeUIsQ0FBQztTQUNsRCxFQUNELFFBQVEsQ0FDVCxDQUNGLENBQUM7UUFwQ0o7Ozs7Ozs7OztXQVNHO1FBQ0gsYUFBUSxHQUFHLEVBQUUsQ0FBQztJQTJCZCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0gsTUFBTSxDQUFDLFFBQVEsR0FBRyxFQUFFO1FBQ2xCLE9BQU8sSUFBSSxtQkFBVSxDQUNuQixDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQzVCLFFBQVEsR0FBRyxtQkFBVyxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1lBRXJELDBDQUEwQztZQUMxQyx5RUFBeUU7WUFFekUsbUNBQW1DO1lBQ25DLE1BQU0sUUFBUSxHQUFHLEVBQUUsQ0FBQztZQUVwQixNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFBRTtnQkFDbkQsTUFBTSxTQUFTLEdBQUcsbUJBQVcsQ0FBQyxRQUFRLEVBQUUsUUFBUSxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDO2dCQUN0RSxNQUFNLGNBQWMsR0FBRyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQztvQkFDckQsQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQztvQkFDcEIsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxNQUFNLENBQUM7Z0JBRXJCLE1BQU0sVUFBVSxHQUFHO29CQUNqQixPQUFPLEVBQUUsU0FBUyxDQUFDLE9BQU87b0JBQzFCLFFBQVEsRUFBRSxFQUFFO2lCQUNiLENBQUM7Z0JBRUYsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUU7b0JBQ25FLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTt3QkFDbEMsTUFBTSxDQUFDLEdBQUcsR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxHQUFHLFFBQVEsRUFBRSxDQUFDO3dCQUN6QyxVQUFVLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztvQkFDOUIsQ0FBQyxDQUFDLENBQUM7aUJBQ0o7Z0JBRUQsUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztZQUM1QixDQUFDLENBQUMsQ0FBQztZQUVILElBQUksS0FBSyxHQUFHLEVBQUUsQ0FBQztZQUVmLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxRQUFRLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO2dCQUN4QyxNQUFNLFVBQVUsR0FBRyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQy9CLE1BQU0sVUFBVSxHQUFHLGNBQU07cUJBQ3RCLElBQUksQ0FBQyxJQUFJLFVBQVUsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUU7b0JBQzFDLEdBQUcsRUFBRSxVQUFVLENBQUMsT0FBTztvQkFDdkIsUUFBUSxFQUFFLElBQUk7aUJBQ2YsQ0FBQztxQkFDRCxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtvQkFDaEIsT0FBTyxjQUFNLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxPQUFPLEVBQUUsUUFBUSxDQUFDLENBQUM7Z0JBQ3RELENBQUMsQ0FBQyxDQUFDO2dCQUNMLEtBQUssR0FBRyxDQUFDLEdBQUcsS0FBSyxFQUFFLEdBQUcsVUFBVSxDQUFDLENBQUM7YUFDbkM7WUFFRCxLQUFLLEdBQUcsZ0JBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUN4QixPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDakIsQ0FBQyxFQUNEO1lBQ0UsRUFBRSxFQUFFLFFBQVEsQ0FBQyxFQUFFLEdBQUcsT0FBTztTQUMxQixDQUNGLENBQUM7SUFDSixDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsSUFBSSxDQUFDLFFBQVEsR0FBRyxFQUFFO1FBQ2hCLFFBQVEsR0FBRyxtQkFBVyxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQ3JELE9BQU8sSUFBSSxtQkFBVSxDQUNuQixDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQ2xDLElBQUk7Z0JBQ0Ysc0NBQXNDO2dCQUN0QyxNQUFNLFdBQVcsR0FBRyxjQUFhLEVBQUUsQ0FBQztnQkFDcEMsT0FBTyxXQUFXLENBQUMsWUFBWSxDQUFDO2dCQUNoQyxPQUFPLFdBQVcsQ0FBQyxlQUFlLENBQUM7Z0JBQ25DLE9BQU8sV0FBVyxDQUFDLE9BQU8sQ0FBQztnQkFDM0IsSUFBSSxhQUFhLEdBQUc7b0JBQ2xCLE9BQU8sRUFBRSxXQUFXO29CQUNwQixRQUFRLEVBQUUsRUFBRTtpQkFDYixDQUFDO2dCQUNGLG1CQUFtQjtnQkFDbkIsTUFBTSxLQUFLLEdBQUcsTUFBTSxJQUFJLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQyxDQUFDO2dCQUMxQyxJQUFJLENBQUMsS0FBSztvQkFBRSxPQUFPLENBQUMsYUFBYSxDQUFDLENBQUM7Z0JBQ25DLE1BQU0sWUFBWSxHQUFHLEdBQUcscUJBQWEsRUFBRSxJQUFJLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztnQkFDL0QsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLFlBQVksQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO29CQUN0QyxhQUFhLEdBQUcsT0FBTyxDQUFDLFlBQVksQ0FBQyxDQUFDLE9BQU8sQ0FBQztvQkFDOUMsYUFBYSxDQUFDLE9BQU8sR0FBRyxjQUFhLEVBQUUsQ0FBQztvQkFDeEMsYUFBYSxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7aUJBQzdCO2dCQUVELEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtvQkFDekIsZ0NBQWdDO29CQUNoQyxJQUFJLFFBQVEsS0FBSyxZQUFZLEVBQUU7d0JBQzdCLHlDQUF5Qzt3QkFDekMsTUFBTSxPQUFPLEdBQUcsY0FBTSxDQUFDLFFBQVEsQ0FBQyxxQkFBYSxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUM7d0JBQzNELE1BQU0sT0FBTyxHQUFHLGNBQU0sQ0FBQyxRQUFRLENBQzdCLHFCQUFhLEVBQUUsRUFDZixHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLENBQ3pELENBQUM7d0JBRUYsb0RBQW9EO3dCQUNwRCxJQUFJLE9BQU8sS0FBSyxPQUFPOzRCQUFFLE9BQU87d0JBRWhDLG1CQUFtQjt3QkFDbkIsTUFBTSxPQUFPLEdBQUcsT0FBTyxDQUFDLFFBQVEsQ0FBQyxDQUFDLE9BQU8sQ0FBQzt3QkFFMUMsb0JBQW9CO3dCQUNwQiwwQ0FBMEM7d0JBQzFDLHFDQUFxQzt3QkFDckMsMkJBQTJCO3dCQUMzQixhQUFhLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxHQUFHLE9BQU8sQ0FBQztxQkFDM0M7Z0JBQ0gsQ0FBQyxDQUFDLENBQUM7Z0JBQ0gsNkJBQTZCO2dCQUM3QixPQUFPLENBQUMsYUFBYSxDQUFDLENBQUM7YUFDeEI7WUFBQyxPQUFPLENBQUMsRUFBRTtnQkFDVixNQUFNLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUM7YUFDdEI7UUFDSCxDQUFDLENBQUEsRUFDRDtZQUNFLEVBQUUsRUFBRSxRQUFRLENBQUMsRUFBRSxHQUFHLE9BQU87U0FDMUIsQ0FDRixDQUFDO0lBQ0osQ0FBQztDQUNGO0FBdkxELDZCQXVMQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3BlYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHNwZWMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBRWQsa0VBQTJDO0FBQzNDLHdFQUFpRDtBQUNqRCxnRkFBMEQ7QUFHMUQsNEZBQXNFO0FBQ3RFLGdGQUEwRDtBQUMxRCxnREFBMEI7QUFDMUIsOEdBQXdGO0FBQ3hGLG9FQUE2QztBQUM3QywwRkFBb0U7QUFnQ3BFLE1BQXFCLFVBQVcsU0FBUSxtQkFBVTtJQUNoRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFFBQVEsR0FBRyxFQUFFO1FBQ3ZCLEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsS0FBSyxFQUFFO2dCQUNMLEVBQUUsRUFBRSxZQUFZO2FBQ2pCO1NBQ0YsRUFDRCxRQUFRLENBQ1QsQ0FDRixDQUFDO1FBRUYsaUJBQWlCO1FBQ2pCLElBQUksQ0FBQyxNQUFNLEdBQUcsSUFBSSxpQkFBUSxDQUN4QixJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUUsS0FBSyxZQUFZO1lBQzVCLENBQUMsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUU7WUFDZixDQUFDLENBQUMsY0FBYyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUUsRUFBRSxDQUNsQyxDQUFDO0lBQ0osQ0FBQztJQUVEOzs7Ozs7Ozs7T0FTRztJQUNHLFVBQVU7O1lBQ2QsT0FBTyxNQUFNLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDbkMsQ0FBQztLQUFBO0lBRUQ7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0gsSUFBSSxDQUFDLE1BQXVDO1FBQzFDLE1BQU0sVUFBVSxHQUEwQixDQUN4QyxtQkFBVyxDQUFDLHVDQUErQixDQUFDLFFBQVEsRUFBRSxFQUFFLE1BQU0sSUFBSSxFQUFFLENBQUMsQ0FDdEUsQ0FBQztRQUVGLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUs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

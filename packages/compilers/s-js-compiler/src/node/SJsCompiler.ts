@@ -209,7 +209,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         }
 
         const pool = __fsPool(input, {
-          watch: false
+          watch: true
         });
         on('finally', () => {
           pool.cancel();
@@ -248,13 +248,14 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           }
         };
 
-        pool.on('files', async (files) => {
-          if (params.watch) {
-            emit('log', {
-              value: `<blue>[watch]</blue> Watching for changes...`
-            });
-            return;
-          }
+        if (params.watch) {
+          emit('log', {
+            value: `<blue>[watch]</blue> Watching for changes...`
+          });
+        }
+
+        pool.on('update', async (files) => {
+          pool.cancel();
 
           const duration = new __SDuration();
 
@@ -279,6 +280,8 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
                 : files.length + ' files'
             }]</${color}> Starting compilation`
           });
+
+          console.log();
 
           const esbuildParams: any = {
             charset: 'utf8',

@@ -5,6 +5,8 @@ import __fs from 'fs';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
+import __SFrontspec from '@coffeekraken/s-frontspec';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
 /**
  * @name            frontspecMiddleware
@@ -34,28 +36,58 @@ import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function frontspecMiddleware(settings = {}) {
-  return function (req, res, next) {
-    const defaultFrontSpec = __sugarConfig('frontspec') || {};
-    const frontspecPath = `${__packageRoot()}/frontspec.json`;
-    let frontspec = defaultFrontSpec;
-    if (__fs.existsSync(frontspecPath)) {
-      const frontspecFile = require(frontspecPath);
-      frontspec = __deepMerge(frontspec, frontspecFile);
+  return async function (req, res, next) {
+    const frontspec = new __SFrontspec();
+    const assetsToServe = await frontspec.assetsToServe();
+
+    if (!res.templateData) res.templateData = {};
+    if (!res.templateData.assets) res.templateData.assets = {};
+
+    for (let i = 0; i < assetsToServe.length; i++) {
+      const assetObj = assetsToServe[i];
+      if (!res.templateData.assets[assetObj.type])
+        res.templateData.assets[assetObj.type] = {};
+      const assetHash = __md5.encrypt(assetObj.path ?? assetObj.src);
+      let raw = '';
+      const src = `/frontspec/${assetHash}`;
+
+      if (req.path === src) {
+        var readStream = __fs.createReadStream(assetObj.path);
+        readStream.pipe(res);
+        return next();
+      }
+
+      switch (assetObj.type.toLowerCase()) {
+        case 'js':
+          raw = `<script ${[
+            assetObj.id ? `id="${assetObj.id}"` : '',
+            assetObj.defer ? 'defer' : '',
+            `src="${src}"`
+          ]
+            .join(' ')
+            .replace(/\s{2,9999}/gm, ' ')}></script>`;
+          break;
+        case 'css':
+          raw = `<link rel="stylesheet" ${[
+            assetObj.id ? `id="${assetObj.id}"` : '',
+            assetObj.defer ? 'defer' : '',
+            `href="${src}"`
+          ]
+            .join(' ')
+            .replace(/\s{2,9999}/gm, ' ')} />`;
+          break;
+      }
+
+      res.templateData.assets[assetObj.type][`${assetObj.id}-${assetHash}`] = {
+        id: assetObj.id,
+        type: assetObj.type,
+        hash: assetHash,
+        src,
+        raw
+      };
     }
 
-    frontspec = __deepMap(frontspec, ({ value }) => {
-      if (typeof value === 'string') {
-        return value
-          .replace(`${__packageRoot()}/`, '')
-          .replace(__packageRoot(), '');
-      }
-      return value;
-    });
-
-    res.templateData = {
-      ...(res.templateData || {}),
-      frontspec
-    };
+    // console.log(res.templateData.assets);
 
     return next();
   };

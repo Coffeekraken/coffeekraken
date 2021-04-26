@@ -1,0 +1,10 @@
+{
+  "assets": {
+    "js": {
+      "main": {
+        "defer": true,
+        "path": "./dist/js/index.js"
+      }
+    }
+  }
+}

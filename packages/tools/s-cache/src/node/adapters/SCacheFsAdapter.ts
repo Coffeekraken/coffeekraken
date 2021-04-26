@@ -125,8 +125,10 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    */
   async get(name) {
     // generate the item fs name
+
     if (name.slice(0, 1) === '/') name = name.slice(1);
     const fsName = `${this.cache.id}/${name}.json`;
+
     // check that the file exists
     if (!__fs.existsSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`))
       return null;

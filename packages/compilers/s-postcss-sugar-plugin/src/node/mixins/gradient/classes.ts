@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { themeConfig } from '@coffeekraken/s-sugar-config';
-import __themeInstance from '../../utils/themeInstance';
+import __theme from '../../utils/theme';
 
 class postcssSugarPluginGradientClassesInterface extends __SInterface {
   static definition = {
@@ -36,7 +35,7 @@ export default function (
     ...params
   };
 
-  const colorsObj = __themeInstance.config('color');
+  const colorsObj = __theme().config('color');
 
   const vars: string[] = [];
 
@@ -101,7 +100,7 @@ export default function (
   }
 
   let currentName;
-  __themeInstance.loopOnColors(({ name, modifier, value, previous, next }) => {
+  __theme().loopOnColors(({ name, modifier, value, previous, next }) => {
     if (currentName !== name) {
       // default gradients
       vars.push(`
@@ -126,11 +125,11 @@ export default function (
           .s-gradient-${name} {
               @sugar.gradient(
                   $start: ${name},
-                  $end: ${name}--${__themeInstance.config(
+                  $end: ${name}--${__theme().config(
         'gradient.defaultModifier'
       )},
-                  $type: ${__themeInstance.config('gradient.defaultType')},
-                  $angle: ${__themeInstance.config('gradient.defaultAngle')}
+                  $type: ${__theme().config('gradient.defaultType')},
+                  $angle: ${__theme().config('gradient.defaultAngle')}
               );
           }
       `);

@@ -30,24 +30,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * @example         js
      * import { themeConfig } from '@coffeekraken/s-sugar-config';
-     * themeConfig('paddings.100', 'something'); // => 1rem
+     * themeConfig('paddings.100'); // => 1rem
+     * themeConfig('dark:paddings.100'); // => 1.5rem
      *
      * @since       2.0.0
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function themeConfig(dotPath, theme) {
+    function themeConfig(dotPath) {
         // get theme
         const themeObj = sugar_1.default('theme');
-        let activeTheme = theme !== null && theme !== void 0 ? theme : themeObj.baseTheme;
-        if (!themeObj.themes[activeTheme])
-            activeTheme = 'default';
-        const res = get_1.default(themeObj.themes[activeTheme], dotPath);
+        let theme = dotPath.includes(':')
+            ? dotPath.split(':')[0]
+            : themeObj.baseTheme;
+        if (!themeObj.themes[theme])
+            theme = 'default';
+        const res = get_1.default(themeObj.themes[theme], dotPath);
         if (res !== undefined)
             return res;
-        if (activeTheme !== 'default')
-            return themeConfig(dotPath, 'default');
-        throw new Error(`<red>[themeConfig]</red> Sorry but the requested value "<yellow>${dotPath}</yellow>" for the theme "<cyan>${activeTheme}</cyan>" does not exists...`);
+        if (theme !== 'default')
+            return themeConfig('default:' + dotPath);
+        throw new Error(`<red>[themeConfig]</red> Sorry but the requested value "<yellow>${dotPath}</yellow>" for the theme "<cyan>${theme}</cyan>" does not exists...`);
     }
     exports.default = themeConfig;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztJQUFBLG9EQUFvQztJQUNwQyxnRkFBMEQ7SUFFMUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bb0JHO0lBQ0gsU0FBd0IsV0FBVyxDQUFDLE9BQWUsRUFBRSxLQUFjO1FBQ2pFLFlBQVk7UUFDWixNQUFNLFFBQVEsR0FBRyxlQUFhLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDeEMsSUFBSSxXQUFXLEdBQUcsS0FBSyxhQUFMLEtBQUssY0FBTCxLQUFLLEdBQUksUUFBUSxDQUFDLFNBQVMsQ0FBQztRQUM5QyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUM7WUFBRSxXQUFXLEdBQUcsU0FBUyxDQUFDO1FBQzNELE1BQU0sR0FBRyxHQUFHLGFBQUssQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQyxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3pELElBQUksR0FBRyxLQUFLLFNBQVM7WUFBRSxPQUFPLEdBQUcsQ0FBQztRQUNsQyxJQUFJLFdBQVcsS0FBSyxTQUFTO1lBQUUsT0FBTyxXQUFXLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQyxDQUFDO1FBQ3RFLE1BQU0sSUFBSSxLQUFLLENBQ2IsbUVBQW1FLE9BQU8sbUNBQW1DLFdBQVcsNkJBQTZCLENBQ3RKLENBQUM7SUFDSixDQUFDO0lBWEQsOEJBV0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztJQUFBLG9EQUFvQztJQUNwQyxnRkFBMEQ7SUFFMUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXFCRztJQUNILFNBQXdCLFdBQVcsQ0FBQyxPQUFlO1FBQ2pELFlBQVk7UUFDWixNQUFNLFFBQVEsR0FBRyxlQUFhLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDeEMsSUFBSSxLQUFLLEdBQUcsT0FBTyxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUM7WUFDL0IsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3ZCLENBQUMsQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDO1FBQ3ZCLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQztZQUFFLEtBQUssR0FBRyxTQUFTLENBQUM7UUFDL0MsTUFBTSxHQUFHLEdBQUcsYUFBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDbkQsSUFBSSxHQUFHLEtBQUssU0FBUztZQUFFLE9BQU8sR0FBRyxDQUFDO1FBQ2xDLElBQUksS0FBSyxLQUFLLFNBQVM7WUFBRSxPQUFPLFdBQVcsQ0FBQyxVQUFVLEdBQUcsT0FBTyxDQUFDLENBQUM7UUFDbEUsTUFBTSxJQUFJLEtBQUssQ0FDYixtRUFBbUUsT0FBTyxtQ0FBbUMsS0FBSyw2QkFBNkIsQ0FDaEosQ0FBQztJQUNKLENBQUM7SUFiRCw4QkFhQyJ9

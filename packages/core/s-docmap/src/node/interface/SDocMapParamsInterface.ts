@@ -20,6 +20,10 @@ class SDocMapParamsInterface extends __SInterface {
     cache: {
       type: 'Boolean',
       default: __sugarConfig('docmap.cache')
+    },
+    clearCache: {
+      type: 'Boolean',
+      default: false
     }
   };
 }

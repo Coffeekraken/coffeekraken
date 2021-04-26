@@ -17,9 +17,16 @@ const plugin = (...args) => {
   //   _mixinsPaths = __glob.sync(`${__dirname}/mixins/**/*.js`);
   // }
 
+  // const importsStack: string[] = [];
+
   const processNested = (css) => {
     if (typeof css === 'string') css = __postcss.parse(css);
     css.walkAtRules((atRule) => {
+      // if (atRule.name === 'import' && atRule.params.match(/^url\(.*\)/)) {
+      //   importsStack.push(`.import { content: "hello"; }`);
+      //   return;
+      // }
+
       if (atRule.name.match(/^sugar\.[a-zA-Z0-9\.]+/)) {
         let potentialMixinPath = `${__dirname}/mixins/${atRule.name
           .replace(/^sugar\./, '')
@@ -106,7 +113,8 @@ const plugin = (...args) => {
   return {
     postcssPlugin: 'sugar',
     Once(root) {
-      return processNested(root).toString();
+      const finalCss = processNested(root).toString();
+      return finalCss;
     }
   };
 };

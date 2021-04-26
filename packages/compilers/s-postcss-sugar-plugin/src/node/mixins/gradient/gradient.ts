@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig, { themeConfig } from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginGradientInterface extends __SInterface {
   static definition = {

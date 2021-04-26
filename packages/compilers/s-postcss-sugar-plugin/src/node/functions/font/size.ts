@@ -1,9 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig, { themeConfig } from '@coffeekraken/s-sugar-config';
-import __flatten from '@coffeekraken/sugar/shared/object/flatten';
-import __postCss from 'postcss';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SColor from '@coffeekraken/s-color';
+import __theme from '../../utils/theme';
 
 class postcssSugarPluginFontSizeInterface extends __SInterface {
   static definition = {
@@ -35,18 +31,16 @@ export default function (
     ...params
   };
 
-  let theme = 'default',
-    name = finalParams.name;
+  const name = finalParams.name;
 
-  if (name.split('.').length === 2) {
-    theme = name.split('.')[0];
-    name = name.split('.')[1];
+  if (`${parseFloat(name)}` !== `${name}`) {
+    return name;
   }
 
-  let size = themeConfig(`font.size.${name}`, theme);
+  let size = __theme().config(`font.size.${name}`);
 
   if (finalParams.return === 'var') {
-    return `var(--s-theme-${theme}-font-size-${name}, ${size})`;
+    return `var(--s-theme-font-size-${name}, ${size})`;
   } else {
     return size;
   }

@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { themeConfig } from '@coffeekraken/s-sugar-config';
+import __theme from '../../utils/theme';
 
 class postcssSugarPluginDepthClassesInterface extends __SInterface {
   static definition = {};
@@ -18,7 +18,7 @@ export default function (
     ...params
   };
 
-  const depthsObj = themeConfig('depth');
+  const depthsObj = __theme().config('depth');
 
   const vars: string[] = [];
 

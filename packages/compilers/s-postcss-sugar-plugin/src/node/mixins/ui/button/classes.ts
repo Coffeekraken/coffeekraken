@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { themeConfig } from '@coffeekraken/s-sugar-config';
+import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
   static definition = {
@@ -26,8 +26,8 @@ export default function (
   atRule,
   processNested
 ) {
-  const colors = themeConfig('color'),
-    sizes = themeConfig('size');
+  const colors = __theme().config('color'),
+    sizes = __theme().config('size');
 
   const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
     colors: Object.keys(colors),
@@ -45,7 +45,7 @@ export default function (
   `
   ];
 
-  const styles = themeConfig('ui.button.styles');
+  const styles = __theme().config('ui.button.styles');
 
   styles.forEach((style) => {
     vars.push('@sugar.scope(color) {');

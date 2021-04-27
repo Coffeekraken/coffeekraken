@@ -931,7 +931,7 @@ class SFile extends __SEventEmitter implements ISFile {
       ...settings
     };
     let content: any;
-    if ((this.extension === 'js' || this.extension === 'json') && set.cast) {
+    if (this.extension === 'json' && set.cast) {
       content = require(this.path);
       return content;
     } else {

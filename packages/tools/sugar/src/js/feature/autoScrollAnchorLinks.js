@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
-    var querySelectorLive_1 = __importDefault(require("./querySelectorLive"));
-    var url_parse_1 = __importDefault(require("url-parse"));
-    var scrollTo_1 = __importDefault(require("./scrollTo"));
+    const easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
+    const querySelectorLive_1 = __importDefault(require("./querySelectorLive"));
+    const url_parse_1 = __importDefault(require("url-parse"));
+    const scrollTo_1 = __importDefault(require("./scrollTo"));
     /**
      * @name        autoScrollAnchorLinks
      * @namespace            js.feature
@@ -41,17 +41,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function autoScrollAnchorLinks(duration, offset, easing, checkPathnames) {
-        if (duration === void 0) { duration = 500; }
-        if (offset === void 0) { offset = 0; }
-        if (easing === void 0) { easing = easeInOutQuint_1.default; }
-        if (checkPathnames === void 0) { checkPathnames = true; }
-        querySelectorLive_1.default('a:not([is])[href*="#"]', function ($link) {
+    function autoScrollAnchorLinks(duration = 500, offset = 0, easing = easeInOutQuint_1.default, checkPathnames = true) {
+        querySelectorLive_1.default('a:not([is])[href*="#"]', ($link) => {
             // listen for click
-            $link.addEventListener('click', function (e) {
+            $link.addEventListener('click', (e) => {
                 // get the hash
-                var linkUrl = url_parse_1.default($link.getAttribute('href'));
-                var currentUrl = url_parse_1.default();
+                const linkUrl = url_parse_1.default($link.getAttribute('href'));
+                const currentUrl = url_parse_1.default();
                 // chack that we have an hash
                 if (!linkUrl.hash || linkUrl.hash === '#')
                     return;
@@ -60,7 +56,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 if (checkPathnames && currentUrl.pathname !== linkUrl.pathname)
                     return;
                 // try to get the target from the hash
-                var $target = document.querySelector(linkUrl.hash);
+                const $target = document.querySelector(linkUrl.hash);
                 // if we don't have any target, let the link behave as he wants
                 if (!$target)
                     return;
@@ -75,4 +71,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = autoScrollAnchorLinks;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0b1Njcm9sbEFuY2hvckxpbmtzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXV0b1Njcm9sbEFuY2hvckxpbmtzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLHNGQUEwRDtJQUMxRCwwRUFBb0Q7SUFDcEQsd0RBQWlDO0lBQ2pDLHdEQUFrQztJQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F1Qkc7SUFDSCxTQUFTLHFCQUFxQixDQUM1QixRQUFjLEVBQ2QsTUFBVSxFQUNWLE1BQWlCLEVBQ2pCLGNBQXFCO1FBSHJCLHlCQUFBLEVBQUEsY0FBYztRQUNkLHVCQUFBLEVBQUEsVUFBVTtRQUNWLHVCQUFBLEVBQUEsU0FBUyx3QkFBUTtRQUNqQiwrQkFBQSxFQUFBLHFCQUFxQjtRQUVyQiwyQkFBaUIsQ0FBQyx3QkFBd0IsRUFBRSxVQUFDLEtBQUs7WUFDaEQsbUJBQW1CO1lBQ25CLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxPQUFPLEVBQUUsVUFBQyxDQUFDO2dCQUNoQyxlQUFlO2dCQUNmLElBQU0sT0FBTyxHQUFHLG1CQUFRLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO2dCQUNyRCxJQUFNLFVBQVUsR0FBRyxtQkFBUSxFQUFFLENBQUM7Z0JBRTlCLDZCQUE2QjtnQkFDN0IsSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLElBQUksT0FBTyxDQUFDLElBQUksS0FBSyxHQUFHO29CQUFFLE9BQU87Z0JBRWxELDBFQUEwRTtnQkFDMUUsc0RBQXNEO2dCQUN0RCxJQUFJLGNBQWMsSUFBSSxVQUFVLENBQUMsUUFBUSxLQUFLLE9BQU8sQ0FBQyxRQUFRO29CQUFFLE9BQU87Z0JBRXZFLHNDQUFzQztnQkFDdEMsSUFBTSxPQUFPLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBRXJELCtEQUErRDtnQkFDL0QsSUFBSSxDQUFDLE9BQU87b0JBQUUsT0FBTztnQkFFckIsNENBQTRDO2dCQUM1QyxDQUFDLENBQUMsY0FBYyxFQUFFLENBQUM7Z0JBRW5CLDRDQUE0QztnQkFDNUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxFQUFFLEVBQUUsSUFBSSxFQUFFLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFFMUMsb0RBQW9EO2dCQUNwRCxrQkFBUSxDQUFDLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxJQUFJLHdCQUFRLEVBQUUsTUFBTSxFQUFFLEtBQUssQ0FBQyxDQUFDO1lBQ2pFLENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDO0lBQ0Qsa0JBQWUscUJBQXFCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0b1Njcm9sbEFuY2hvckxpbmtzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXV0b1Njcm9sbEFuY2hvckxpbmtzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLHdGQUEwRDtJQUMxRCw0RUFBb0Q7SUFDcEQsMERBQWlDO0lBQ2pDLDBEQUFrQztJQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F1Qkc7SUFDSCxTQUFTLHFCQUFxQixDQUM1QixRQUFRLEdBQUcsR0FBRyxFQUNkLE1BQU0sR0FBRyxDQUFDLEVBQ1YsTUFBTSxHQUFHLHdCQUFRLEVBQ2pCLGNBQWMsR0FBRyxJQUFJO1FBRXJCLDJCQUFpQixDQUFDLHdCQUF3QixFQUFFLENBQUMsS0FBSyxFQUFFLEVBQUU7WUFDcEQsbUJBQW1CO1lBQ25CLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDcEMsZUFBZTtnQkFDZixNQUFNLE9BQU8sR0FBRyxtQkFBUSxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztnQkFDckQsTUFBTSxVQUFVLEdBQUcsbUJBQVEsRUFBRSxDQUFDO2dCQUU5Qiw2QkFBNkI7Z0JBQzdCLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxJQUFJLE9BQU8sQ0FBQyxJQUFJLEtBQUssR0FBRztvQkFBRSxPQUFPO2dCQUVsRCwwRUFBMEU7Z0JBQzFFLHNEQUFzRDtnQkFDdEQsSUFBSSxjQUFjLElBQUksVUFBVSxDQUFDLFFBQVEsS0FBSyxPQUFPLENBQUMsUUFBUTtvQkFBRSxPQUFPO2dCQUV2RSxzQ0FBc0M7Z0JBQ3RDLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUVyRCwrREFBK0Q7Z0JBQy9ELElBQUksQ0FBQyxPQUFPO29CQUFFLE9BQU87Z0JBRXJCLDRDQUE0QztnQkFDNUMsQ0FBQyxDQUFDLGNBQWMsRUFBRSxDQUFDO2dCQUVuQiw0Q0FBNEM7Z0JBQzVDLE9BQU8sQ0FBQyxTQUFTLENBQUMsRUFBRSxFQUFFLElBQUksRUFBRSxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBRTFDLG9EQUFvRDtnQkFDcEQsa0JBQVEsQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sSUFBSSx3QkFBUSxFQUFFLE1BQU0sRUFBRSxLQUFLLENBQUMsQ0FBQztZQUNqRSxDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQztJQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=

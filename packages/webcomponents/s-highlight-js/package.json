@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "",
   "homepage": "https://coffeekraken.io",
-  "main": "src/js/exports.js",
+  "main": "dist/js/exports.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

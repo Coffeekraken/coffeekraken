@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var camelize_1 = __importDefault(require("../../shared/string/camelize"));
-    var autoCast_1 = __importDefault(require("../../shared/string/autoCast"));
+    const camelize_1 = __importDefault(require("../../shared/string/camelize"));
+    const autoCast_1 = __importDefault(require("../../shared/string/autoCast"));
     /**
      * @name      styleString2Object
      * @namespace            js.dom
@@ -44,11 +44,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function styleString2Object(style) {
         if (!style || style === '')
             return {};
-        var obj = {};
-        var split = style.replace(/\s/g, '').split(';');
-        split.forEach(function (statement) {
+        const obj = {};
+        const split = style.replace(/\s/g, '').split(';');
+        split.forEach((statement) => {
             // split statement by key value pairs
-            var spl = statement.split(':'), key = camelize_1.default(spl[0]), value = spl[1];
+            const spl = statement.split(':'), key = camelize_1.default(spl[0]), value = spl[1];
             // add element into object
             obj[key] = autoCast_1.default(value);
         });
@@ -57,4 +57,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = styleString2Object;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVTdHJpbmcyT2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3R5bGVTdHJpbmcyT2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDBFQUFzRDtJQUN0RCwwRUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F5Qkc7SUFDSCxTQUFTLGtCQUFrQixDQUFDLEtBQUs7UUFDL0IsSUFBSSxDQUFDLEtBQUssSUFBSSxLQUFLLEtBQUssRUFBRTtZQUFFLE9BQU8sRUFBRSxDQUFDO1FBQ3RDLElBQU0sR0FBRyxHQUFHLEVBQUUsQ0FBQztRQUNmLElBQU0sS0FBSyxHQUFHLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUNsRCxLQUFLLENBQUMsT0FBTyxDQUFDLFVBQUMsU0FBUztZQUN0QixxQ0FBcUM7WUFDckMsSUFBTSxHQUFHLEdBQUcsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsRUFDOUIsR0FBRyxHQUFHLGtCQUFVLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQ3hCLEtBQUssR0FBRyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDakIsMEJBQTBCO1lBQzFCLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxrQkFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQy9CLENBQUMsQ0FBQyxDQUFDO1FBQ0gsMEJBQTBCO1FBQzFCLE9BQU8sR0FBRyxDQUFDO0lBQ2IsQ0FBQztJQUNELGtCQUFlLGtCQUFrQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVTdHJpbmcyT2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3R5bGVTdHJpbmcyT2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDRFQUFzRDtJQUN0RCw0RUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F5Qkc7SUFDSCxTQUFTLGtCQUFrQixDQUFDLEtBQUs7UUFDL0IsSUFBSSxDQUFDLEtBQUssSUFBSSxLQUFLLEtBQUssRUFBRTtZQUFFLE9BQU8sRUFBRSxDQUFDO1FBQ3RDLE1BQU0sR0FBRyxHQUFHLEVBQUUsQ0FBQztRQUNmLE1BQU0sS0FBSyxHQUFHLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUNsRCxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsU0FBUyxFQUFFLEVBQUU7WUFDMUIscUNBQXFDO1lBQ3JDLE1BQU0sR0FBRyxHQUFHLFNBQVMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLEVBQzlCLEdBQUcsR0FBRyxrQkFBVSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUN4QixLQUFLLEdBQUcsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ2pCLDBCQUEwQjtZQUMxQixHQUFHLENBQUMsR0FBRyxDQUFDLEdBQUcsa0JBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUMvQixDQUFDLENBQUMsQ0FBQztRQUNILDBCQUEwQjtRQUMxQixPQUFPLEdBQUcsQ0FBQztJQUNiLENBQUM7SUFDRCxrQkFBZSxrQkFBa0IsQ0FBQyJ9

@@ -1,0 +1,5 @@
+import SLog from './SLog';
+export * from './SLog';
+export * from './log';
+export default SLog;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2NvcmUvcy1sb2cvc3JjL3NoYXJlZC9leHBvcnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sSUFBSSxNQUFNLFFBQVEsQ0FBQztBQUUxQixjQUFjLFFBQVEsQ0FBQztBQUN2QixjQUFjLE9BQU8sQ0FBQztBQUV0QixlQUFlLElBQUksQ0FBQyJ9

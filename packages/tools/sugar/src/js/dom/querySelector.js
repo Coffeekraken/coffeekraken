@@ -1,15 +1,4 @@
 // @ts-nocheck
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var isVisible_1 = __importDefault(require("./isVisible"));
-    var isInViewport_1 = __importDefault(require("./isInViewport"));
-    var closestNotVisible_1 = __importDefault(require("./closestNotVisible"));
+    const isVisible_1 = __importDefault(require("./isVisible"));
+    const isInViewport_1 = __importDefault(require("./isInViewport"));
+    const closestNotVisible_1 = __importDefault(require("./closestNotVisible"));
     /**
      * @name      querySelector
      * @namespace            js.dom
@@ -78,18 +67,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @type 		{HTMLElement}
      * @default 	document.body
      */
-    function querySelector(selector, settings) {
-        if (settings === void 0) { settings = {}; }
+    function querySelector(selector, settings = {}) {
         // extend settings
-        settings = __assign({ visible: null, inViewport: null, rootNode: document.body }, settings);
+        settings = Object.assign({ visible: null, inViewport: null, rootNode: document.body }, settings);
         // grab the element into the dom
-        var elm = settings.rootNode.querySelector(selector);
+        const elm = settings.rootNode.querySelector(selector);
         // if no element, stop here
         if (!elm)
             return null;
         // state tracking
-        var isVisible = true;
-        var isInViewport = true;
+        const isVisible = true;
+        const isInViewport = true;
         // check settings
         if (settings.visible) {
             if (!isVisible_1.default(elm) || !closestNotVisible_1.default(elm))
@@ -104,4 +92,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = querySelector;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicXVlcnlTZWxlY3Rvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInF1ZXJ5U2VsZWN0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZCwwREFBc0M7SUFDdEMsZ0VBQTRDO0lBQzVDLDBFQUFzRDtJQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0E2Qkc7SUFFSDs7Ozs7O09BTUc7SUFFSDs7Ozs7O09BTUc7SUFFSDs7Ozs7O09BTUc7SUFFSCxTQUFTLGFBQWEsQ0FBQyxRQUFRLEVBQUUsUUFBYTtRQUFiLHlCQUFBLEVBQUEsYUFBYTtRQUM1QyxrQkFBa0I7UUFDbEIsUUFBUSxjQUNOLE9BQU8sRUFBRSxJQUFJLEVBQ2IsVUFBVSxFQUFFLElBQUksRUFDaEIsUUFBUSxFQUFFLFFBQVEsQ0FBQyxJQUFJLElBQ3BCLFFBQVEsQ0FDWixDQUFDO1FBRUYsZ0NBQWdDO1FBQ2hDLElBQU0sR0FBRyxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ3RELDJCQUEyQjtRQUMzQixJQUFJLENBQUMsR0FBRztZQUFFLE9BQU8sSUFBSSxDQUFDO1FBRXRCLGlCQUFpQjtRQUNqQixJQUFNLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFDdkIsSUFBTSxZQUFZLEdBQUcsSUFBSSxDQUFDO1FBRTFCLGlCQUFpQjtRQUNqQixJQUFJLFFBQVEsQ0FBQyxPQUFPLEVBQUU7WUFDcEIsSUFBSSxDQUFDLG1CQUFXLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQywyQkFBbUIsQ0FBQyxHQUFHLENBQUM7Z0JBQUUsT0FBTyxJQUFJLENBQUM7U0FDakU7UUFDRCxJQUFJLFFBQVEsQ0FBQyxVQUFVLEVBQUU7WUFDdkIsSUFBSSxDQUFDLHNCQUFjLENBQUMsR0FBRyxDQUFDO2dCQUFFLE9BQU8sSUFBSSxDQUFDO1NBQ3ZDO1FBRUQscUJBQXFCO1FBQ3JCLE9BQU8sR0FBRyxDQUFDO0lBQ2IsQ0FBQztJQUNELGtCQUFlLGFBQWEsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicXVlcnlTZWxlY3Rvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInF1ZXJ5U2VsZWN0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsNERBQXNDO0lBQ3RDLGtFQUE0QztJQUM1Qyw0RUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BNkJHO0lBRUg7Ozs7OztPQU1HO0lBRUg7Ozs7OztPQU1HO0lBRUg7Ozs7OztPQU1HO0lBRUgsU0FBUyxhQUFhLENBQUMsUUFBUSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQzVDLGtCQUFrQjtRQUNsQixRQUFRLG1CQUNOLE9BQU8sRUFBRSxJQUFJLEVBQ2IsVUFBVSxFQUFFLElBQUksRUFDaEIsUUFBUSxFQUFFLFFBQVEsQ0FBQyxJQUFJLElBQ3BCLFFBQVEsQ0FDWixDQUFDO1FBRUYsZ0NBQWdDO1FBQ2hDLE1BQU0sR0FBRyxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ3RELDJCQUEyQjtRQUMzQixJQUFJLENBQUMsR0FBRztZQUFFLE9BQU8sSUFBSSxDQUFDO1FBRXRCLGlCQUFpQjtRQUNqQixNQUFNLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFDdkIsTUFBTSxZQUFZLEdBQUcsSUFBSSxDQUFDO1FBRTFCLGlCQUFpQjtRQUNqQixJQUFJLFFBQVEsQ0FBQyxPQUFPLEVBQUU7WUFDcEIsSUFBSSxDQUFDLG1CQUFXLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQywyQkFBbUIsQ0FBQyxHQUFHLENBQUM7Z0JBQUUsT0FBTyxJQUFJLENBQUM7U0FDakU7UUFDRCxJQUFJLFFBQVEsQ0FBQyxVQUFVLEVBQUU7WUFDdkIsSUFBSSxDQUFDLHNCQUFjLENBQUMsR0FBRyxDQUFDO2dCQUFFLE9BQU8sSUFBSSxDQUFDO1NBQ3ZDO1FBRUQscUJBQXFCO1FBQ3JCLE9BQU8sR0FBRyxDQUFDO0lBQ2IsQ0FBQztJQUNELGtCQUFlLGFBQWEsQ0FBQyJ9

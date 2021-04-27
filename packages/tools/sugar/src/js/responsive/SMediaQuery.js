@@ -1,19 +1,4 @@
 // @ts-nocheck
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     /**
      * @name                SMediaQuery
      * @namespace            js.responsive
@@ -57,8 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since           2.0.0
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var SMediaQuery = /** @class */ (function (_super) {
-        __extends(SMediaQuery, _super);
+    class SMediaQuery extends s_promise_1.default {
         /**
          * @name                constructor
          * @type                Function
@@ -69,19 +53,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @since           2.0.0
          * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        function SMediaQuery(mediaName, settings) {
-            if (settings === void 0) { settings = {}; }
-            var _this = this;
+        constructor(mediaName, settings = {}) {
             if (!Array.isArray(mediaName))
                 mediaName = [mediaName];
-            var name = mediaName.join(' ');
-            _this = _super.call(this, settings, {
-                id: "SMediaQuery." + name.split(' ').join('-')
-            }) || this;
-            if (!_this.constructor._promisesStack[name])
-                _this.constructor._promisesStack[name] = [];
-            _this.constructor._promisesStack[name].push(_this);
-            return _this;
+            const name = mediaName.join(' ');
+            super(settings, {
+                id: `SMediaQuery.${name.split(' ').join('-')}`
+            });
+            if (!this.constructor._promisesStack[name])
+                this.constructor._promisesStack[name] = [];
+            this.constructor._promisesStack[name].push(this);
         }
         /**
          * @name              startListener
@@ -93,9 +74,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @since             2.0.0
          * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SMediaQuery.getActiveMedia = function () {
+        static getActiveMedia() {
             return this._activeMedia;
-        };
+        }
         /**
          * @name              startListener
          * @type              Function
@@ -106,19 +87,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @since             2.0.0
          * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SMediaQuery.startListener = function () {
-            var _this = this;
-            document.addEventListener('animationend', function (e) {
-                var mediaName = e.animationName.replace(/^mq-/, '');
-                var previousActiveMedia = _this._activeMedia;
+        static startListener() {
+            document.addEventListener('animationend', (e) => {
+                const mediaName = e.animationName.replace(/^mq-/, '');
+                const previousActiveMedia = this._activeMedia;
                 // keep track of the active media
-                _this._activeMedia = mediaName;
-                Object.keys(_this._promisesStack).forEach(function (name) {
-                    var nameArray = name.split(' ');
+                this._activeMedia = mediaName;
+                Object.keys(this._promisesStack).forEach((name) => {
+                    const nameArray = name.split(' ');
                     if (previousActiveMedia) {
                         if (nameArray.indexOf(previousActiveMedia) !== -1) {
-                            var promises = _this._promisesStack[name];
-                            promises.forEach(function (promise) {
+                            const promises = this._promisesStack[name];
+                            promises.forEach((promise) => {
                                 promise.emit('unmatch', {
                                     name: previousActiveMedia
                                 });
@@ -126,18 +106,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         }
                     }
                     if (nameArray.indexOf(mediaName) !== -1) {
-                        var promise = _this._promisesStack[name];
-                        var promises = _this._promisesStack[name];
-                        promises.forEach(function (promise) {
+                        const promise = this._promisesStack[name];
+                        const promises = this._promisesStack[name];
+                        promises.forEach((promise) => {
                             promise.emit('match', {
                                 name: mediaName
                             });
                         });
                     }
                 });
-                if (_this._promisesStack['*']) {
-                    var allPromises = _this._promisesStack['*'];
-                    allPromises.forEach(function (allPromise) {
+                if (this._promisesStack['*']) {
+                    const allPromises = this._promisesStack['*'];
+                    allPromises.forEach((allPromise) => {
                         if (previousActiveMedia) {
                             allPromise.emit('unmatch', {
                                 name: previousActiveMedia
@@ -149,33 +129,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     });
                 }
             });
-        };
-        /**
-         * @name                this._activeMedia
-         * @type                String
-         * @static
-         *
-         * Store the active media name
-         *
-         * @since           2.0.0
-         * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SMediaQuery._activeMedia = 'desktop';
-        /**
-         * @name                _promisesStack
-         * @type                Object
-         * @static
-         *
-         * Store all the promises for each media
-         *
-         * @since           2.0.0
-         * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SMediaQuery._promisesStack = {};
-        return SMediaQuery;
-    }(s_promise_1.default));
+        }
+    }
+    /**
+     * @name                this._activeMedia
+     * @type                String
+     * @static
+     *
+     * Store the active media name
+     *
+     * @since           2.0.0
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    SMediaQuery._activeMedia = 'desktop';
+    /**
+     * @name                _promisesStack
+     * @type                Object
+     * @static
+     *
+     * Store all the promises for each media
+     *
+     * @since           2.0.0
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    SMediaQuery._promisesStack = {};
     // start listener
     SMediaQuery.startListener();
     exports.default = SMediaQuery;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU01lZGlhUXVlcnkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTTWVkaWFRdWVyeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZCxzRUFBaUQ7SUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTJCRztJQUNIO1FBQTBCLCtCQUFVO1FBZ0dsQzs7Ozs7Ozs7O1dBU0c7UUFDSCxxQkFBWSxTQUFTLEVBQUUsUUFBYTtZQUFiLHlCQUFBLEVBQUEsYUFBYTtZQUFwQyxpQkFZQztZQVhDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQztnQkFBRSxTQUFTLEdBQUcsQ0FBQyxTQUFTLENBQUMsQ0FBQztZQUV2RCxJQUFNLElBQUksR0FBRyxTQUFTLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBRWpDLFFBQUEsa0JBQU0sUUFBUSxFQUFFO2dCQUNkLEVBQUUsRUFBRSxpQkFBZSxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUc7YUFDL0MsQ0FBQyxTQUFDO1lBRUgsSUFBSSxDQUFDLEtBQUksQ0FBQyxXQUFXLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQztnQkFDeEMsS0FBSSxDQUFDLFdBQVcsQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFDO1lBQzdDLEtBQUksQ0FBQyxXQUFXLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFJLENBQUMsQ0FBQzs7UUFDbkQsQ0FBQztRQTdGRDs7Ozs7Ozs7O1dBU0c7UUFDSSwwQkFBYyxHQUFyQjtZQUNFLE9BQU8sSUFBSSxDQUFDLFlBQVksQ0FBQztRQUMzQixDQUFDO1FBRUQ7Ozs7Ozs7OztXQVNHO1FBQ0kseUJBQWEsR0FBcEI7WUFBQSxpQkE2Q0M7WUE1Q0MsUUFBUSxDQUFDLGdCQUFnQixD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU01lZGlhUXVlcnkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTTWVkaWFRdWVyeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCx3RUFBaUQ7SUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTJCRztJQUNILE1BQU0sV0FBWSxTQUFRLG1CQUFVO1FBZ0dsQzs7Ozs7Ozs7O1dBU0c7UUFDSCxZQUFZLFNBQVMsRUFBRSxRQUFRLEdBQUcsRUFBRTtZQUNsQyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxTQUFTLENBQUM7Z0JBQUUsU0FBUyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7WUFFdkQsTUFBTSxJQUFJLEdBQUcsU0FBUyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUVqQyxLQUFLLENBQUMsUUFBUSxFQUFFO2dCQUNkLEVBQUUsRUFBRSxlQUFlLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFO2FBQy9DLENBQUMsQ0FBQztZQUVILElBQUksQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUM7Z0JBQ3hDLElBQUksQ0FBQyxXQUFXLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztZQUM3QyxJQUFJLENBQUMsV0FBVyxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbkQsQ0FBQztRQTdGRDs7Ozs7Ozs7O1dBU0c7UUFDSCxNQUFNLENBQUMsY0FBYztZQUNuQixPQUFPLElBQUksQ0FBQyxZQUFZLENBQUM7UUFDM0IsQ0FBQztRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILE1BQU0sQ0FBQyxhQUFhO1lBQ2xCLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxjQUFjLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFB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

@@ -75,6 +75,24 @@ describe('sugar.shared.cli.parseArgs', () => {
   //   });
   // });
 
+  it('Should parse correctly multiple same args into array', () => {
+    const res = __parseArgs('-s js -s shared', {});
+
+    expect(res).toEqual({
+      s: ['js', 'shared']
+    });
+  });
+
+  it('Should parse correctly a function style arguments with variable names specifies', () => {
+    const res = __parseArgs("($coco: true, $plop: 'hello world')", {
+      valueQuote: "'"
+    });
+    expect(res).toEqual({
+      coco: true,
+      plop: 'hello world'
+    });
+  });
+
   it('Should parse correctly an array value passed in the string correctly', () => {
     const res = __parseArgs("-o `['plop', 'coco']` --something World", {
       valueQuote: '`'

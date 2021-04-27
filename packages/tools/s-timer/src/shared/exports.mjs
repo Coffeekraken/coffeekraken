@@ -1,0 +1,4 @@
+import STimer from './STimer';
+export * from './STimer';
+export default STimer;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL3Rvb2xzL3MtdGltZXIvc3JjL3NoYXJlZC9leHBvcnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sTUFBTSxNQUFNLFVBQVUsQ0FBQztBQUU5QixjQUFjLFVBQVUsQ0FBQztBQUV6QixlQUFlLE1BQU0sQ0FBQyJ9

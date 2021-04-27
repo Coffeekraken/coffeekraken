@@ -1,0 +1,6 @@
+import __SConfig from './SConfig';
+import __SConfigAdapter from './adapters/SConfigAdapter';
+export { __SConfigAdapter as SConfigAdapter };
+// export * from './SConfig';
+export default __SConfig;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2NvcmUvcy1jb25maWcvc3JjL3NoYXJlZC9leHBvcnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLFdBQVcsQ0FBQztBQUNsQyxPQUFPLGdCQUFnQixNQUFNLDJCQUEyQixDQUFDO0FBQ3pELE9BQU8sRUFBRSxnQkFBZ0IsSUFBSSxjQUFjLEVBQUUsQ0FBQztBQUU5Qyw2QkFBNkI7QUFDN0IsZUFBZSxTQUFTLENBQUMifQ==

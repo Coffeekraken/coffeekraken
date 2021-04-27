@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    var custom_event_1 = __importDefault(require("custom-event"));
+    const custom_event_1 = __importDefault(require("custom-event"));
     exports.default = custom_event_1.default;
 });
 /**
@@ -82,4 +82,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0V2ZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0V2ZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0EyQkc7SUFDSCw4REFBdUM7SUFDdkMsa0JBQWUsc0JBQVcsQ0FBQzs7QUFFM0I7Ozs7Ozs7Ozs7R0FVRztBQUVIOzs7Ozs7OztHQVFHO0FBRUg7Ozs7Ozs7O0dBUUc7QUFFSDs7Ozs7Ozs7R0FRRyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0V2ZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0V2ZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0EyQkc7SUFDSCxnRUFBdUM7SUFDdkMsa0JBQWUsc0JBQVcsQ0FBQzs7QUFFM0I7Ozs7Ozs7Ozs7R0FVRztBQUVIOzs7Ozs7OztHQVFHO0FBRUg7Ozs7Ozs7O0dBUUc7QUFFSDs7Ozs7Ozs7R0FRRyJ9

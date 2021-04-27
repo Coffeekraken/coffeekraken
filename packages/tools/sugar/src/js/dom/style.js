@@ -1,15 +1,4 @@
 // @ts-nocheck
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var styleString2Object_1 = __importDefault(require("./styleString2Object"));
-    var styleObject2String_1 = __importDefault(require("./styleObject2String"));
+    const styleString2Object_1 = __importDefault(require("./styleString2Object"));
+    const styleObject2String_1 = __importDefault(require("./styleObject2String"));
     /**
      * @name      style
      * @namespace            js.dom
@@ -54,9 +43,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function style(elm, styleObj) {
         // convert style string to object
-        var styleAttr = elm.getAttribute('style');
+        const styleAttr = elm.getAttribute('style');
         if (styleAttr) {
-            styleObj = __assign(__assign({}, styleString2Object_1.default(styleAttr)), styleObj);
+            styleObj = Object.assign(Object.assign({}, styleString2Object_1.default(styleAttr)), styleObj);
         }
         // apply the style to the element
         // elm.setAttribute('style', __styleObject2String(current.styleObj));
@@ -66,4 +55,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = style;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdHlsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUdkLDRFQUF3RDtJQUN4RCw0RUFBd0Q7SUFFeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F5Qkc7SUFDSCxTQUFTLEtBQUssQ0FBQyxHQUFHLEVBQUUsUUFBUTtRQUMxQixpQ0FBaUM7UUFDakMsSUFBTSxTQUFTLEdBQUcsR0FBRyxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUU1QyxJQUFJLFNBQVMsRUFBRTtZQUNiLFFBQVEseUJBQ0gsNEJBQW9CLENBQUMsU0FBUyxDQUFDLEdBQy9CLFFBQVEsQ0FDWixDQUFDO1NBQ0g7UUFFRCxpQ0FBaUM7UUFDakMscUVBQXFFO1FBQ3JFLEdBQUcsQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLDRCQUFvQixDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBRW5ELG1CQUFtQjtRQUNuQixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUM7SUFDbkIsQ0FBQztJQUNELGtCQUFlLEtBQUssQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdHlsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFHZCw4RUFBd0Q7SUFDeEQsOEVBQXdEO0lBRXhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BeUJHO0lBQ0gsU0FBUyxLQUFLLENBQUMsR0FBRyxFQUFFLFFBQVE7UUFDMUIsaUNBQWlDO1FBQ2pDLE1BQU0sU0FBUyxHQUFHLEdBQUcsQ0FBQyxZQUFZLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFNUMsSUFBSSxTQUFTLEVBQUU7WUFDYixRQUFRLG1DQUNILDRCQUFvQixDQUFDLFNBQVMsQ0FBQyxHQUMvQixRQUFRLENBQ1osQ0FBQztTQUNIO1FBRUQsaUNBQWlDO1FBQ2pDLHFFQUFxRTtRQUNyRSxHQUFHLENBQUMsS0FBSyxDQUFDLE9BQU8sR0FBRyw0QkFBb0IsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUVuRCxtQkFBbUI7UUFDbkIsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDO0lBQ25CLENBQUM7SUFDRCxrQkFBZSxLQUFLLENBQUMifQ==

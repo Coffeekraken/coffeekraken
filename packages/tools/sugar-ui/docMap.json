@@ -284,6 +284,36 @@
         "extension": "css",
         "relPath": "dist/css/index.css"
     },
+    "sugar.css.typo..s-p-lead": {
+        "name": ".s-p-lead",
+        "type": "CssClass",
+        "description": "This class allows you to apply the \"<yellow>p-lead</yellow>\" typography style to any HTMLElement",
+        "namespace": "sugar.css.typo",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://olivierbossel.com"
+        },
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.typo..s-space-children .s-p-lead, .s-p-lead.s-space": {
+        "name": ".s-space-children .s-p-lead, .s-p-lead.s-space",
+        "type": "CssClass",
+        "description": "This class allows you to activate the space(s) on your \"<yellow>s-p-lead</yellow>\" HTMLElement",
+        "namespace": "sugar.css.typo",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://olivierbossel.com"
+        },
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
     "sugar.css.typo..s-p": {
         "name": ".s-p",
         "type": "CssClass",
@@ -460,6 +490,348 @@
             "email": "olivier.bossel@gmail.com",
             "url": "https://olivierbossel.com"
         },
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn": {
+        "name": ".s-btn",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>default</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--title": {
+        "name": ".s-btn.s-btn--title",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>title</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--text": {
+        "name": ".s-btn.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>default</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--link": {
+        "name": ".s-btn.s-btn--link",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>link</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--primary": {
+        "name": ".s-btn.s-btn--primary",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>primary</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--secondary": {
+        "name": ".s-btn.s-btn--secondary",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>secondary</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--surface": {
+        "name": ".s-btn.s-btn--surface",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>surface</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--background": {
+        "name": ".s-btn.s-btn--background",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>background</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--success": {
+        "name": ".s-btn.s-btn--success",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>success</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--warning": {
+        "name": ".s-btn.s-btn--warning",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>warning</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--error": {
+        "name": ".s-btn.s-btn--error",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>error</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--info": {
+        "name": ".s-btn.s-btn--info",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>info</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--extension": {
+        "name": ".s-btn.s-btn--extension",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>extension</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--outlined": {
+        "name": ".s-btn.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>default</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--title.s-btn--outlined": {
+        "name": ".s-btn.s-btn--title.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>title</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--text.s-btn--outlined": {
+        "name": ".s-btn.s-btn--text.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>text</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--link.s-btn--outlined": {
+        "name": ".s-btn.s-btn--link.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>link</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--primary.s-btn--outlined": {
+        "name": ".s-btn.s-btn--primary.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>primary</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--secondary.s-btn--outlined": {
+        "name": ".s-btn.s-btn--secondary.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>secondary</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--surface.s-btn--outlined": {
+        "name": ".s-btn.s-btn--surface.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>surface</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--background.s-btn--outlined": {
+        "name": ".s-btn.s-btn--background.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>background</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--success.s-btn--outlined": {
+        "name": ".s-btn.s-btn--success.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>success</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--warning.s-btn--outlined": {
+        "name": ".s-btn.s-btn--warning.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>warning</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--error.s-btn--outlined": {
+        "name": ".s-btn.s-btn--error.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>error</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--info.s-btn--outlined": {
+        "name": ".s-btn.s-btn--info.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>info</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--extension.s-btn--outlined": {
+        "name": ".s-btn.s-btn--extension.s-btn--outlined",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>extension</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--title.s-btn--text": {
+        "name": ".s-btn.s-btn--title.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>title</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--text.s-btn--text": {
+        "name": ".s-btn.s-btn--text.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>text</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--link.s-btn--text": {
+        "name": ".s-btn.s-btn--link.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>link</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--primary.s-btn--text": {
+        "name": ".s-btn.s-btn--primary.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>primary</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--secondary.s-btn--text": {
+        "name": ".s-btn.s-btn--secondary.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>secondary</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--surface.s-btn--text": {
+        "name": ".s-btn.s-btn--surface.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>surface</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--background.s-btn--text": {
+        "name": ".s-btn.s-btn--background.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>background</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--success.s-btn--text": {
+        "name": ".s-btn.s-btn--success.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>success</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--warning.s-btn--text": {
+        "name": ".s-btn.s-btn--warning.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>warning</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--error.s-btn--text": {
+        "name": ".s-btn.s-btn--error.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>error</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--info.s-btn--text": {
+        "name": ".s-btn.s-btn--info.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>info</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
+        "filename": "index.css",
+        "extension": "css",
+        "relPath": "dist/css/index.css"
+    },
+    "sugar.css.ui.button..s-btn.s-btn--extension.s-btn--text": {
+        "name": ".s-btn.s-btn--extension.s-btn--text",
+        "type": "CssClass",
+        "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>extension</yellow>\" color applied",
+        "namespace": "sugar.css.ui.button",
         "filename": "index.css",
         "extension": "css",
         "relPath": "dist/css/index.css",

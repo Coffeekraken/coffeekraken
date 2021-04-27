@@ -1,15 +1,4 @@
 // @ts-nocheck
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var hotkeys_common_1 = __importDefault(require("hotkeys-js/dist/hotkeys.common"));
-    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    const hotkeys_common_1 = __importDefault(require("hotkeys-js/dist/hotkeys.common"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     hotkeys_common_1.default.filter = function (event) {
         return true;
     };
@@ -68,14 +57,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function hotkey(hotkey, settings) {
-        if (settings === void 0) { settings = {}; }
-        return new s_promise_1.default(function (_a) {
-            var resolve = _a.resolve, reject = _a.reject, emit = _a.emit, cancel = _a.cancel;
+    function hotkey(hotkey, settings = {}) {
+        return new s_promise_1.default(({ resolve, reject, emit, cancel }) => {
             // merge default settings with passed ones:
-            settings = __assign({ element: null, keyup: false, keydown: true, once: false, splitKey: '+' }, settings);
+            settings = Object.assign({ element: null, keyup: false, keydown: true, once: false, splitKey: '+' }, settings);
             // init the hotkey
-            hotkeys_common_1.default(hotkey, settings, function (e, h) {
+            hotkeys_common_1.default(hotkey, settings, (e, h) => {
                 // call the handler function
                 emit('press', e);
                 // unsubscribe if once is truc
@@ -84,10 +71,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             });
         }, {
             id: 'hotkey'
-        }).on('finally', function () {
+        }).on('finally', () => {
             hotkeys_common_1.default.unbind(hotkey);
         });
     }
     exports.default = hotkey;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaG90a2V5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaG90a2V5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0ZBQXFEO0lBQ3JELHNFQUFpRDtJQUNqRCx3QkFBTyxDQUFDLE1BQU0sR0FBRyxVQUFVLEtBQUs7UUFDOUIsT0FBTyxJQUFJLENBQUM7SUFDZCxDQUFDLENBQUM7SUFFRjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FzQ0c7SUFDSCxTQUFTLE1BQU0sQ0FBQyxNQUFNLEVBQUUsUUFBYTtRQUFiLHlCQUFBLEVBQUEsYUFBYTtRQUNuQyxPQUFPLElBQUksbUJBQVUsQ0FDbkIsVUFBQyxFQUFpQztnQkFBL0IsT0FBTyxhQUFBLEVBQUUsTUFBTSxZQUFBLEVBQUUsSUFBSSxVQUFBLEVBQUUsTUFBTSxZQUFBO1lBQzlCLDJDQUEyQztZQUMzQyxRQUFRLGNBQ04sT0FBTyxFQUFFLElBQUksRUFDYixLQUFLLEVBQUUsS0FBSyxFQUNaLE9BQU8sRUFBRSxJQUFJLEVBQ2IsSUFBSSxFQUFFLEtBQUssRUFDWCxRQUFRLEVBQUUsR0FBRyxJQUNWLFFBQVEsQ0FDWixDQUFDO1lBRUYsa0JBQWtCO1lBQ2xCLHdCQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxVQUFDLENBQUMsRUFBRSxDQUFDO2dCQUM3Qiw0QkFBNEI7Z0JBQzVCLElBQUksQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLENBQUM7Z0JBQ2pCLDhCQUE4QjtnQkFDOUIsSUFBSSxRQUFRLENBQUMsSUFBSTtvQkFBRSxNQUFNLEVBQUUsQ0FBQztZQUM5QixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSxRQUFRO1NBQ2IsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7WUFDZCx3QkFBTyxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUN6QixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSxNQUFNLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaG90a2V5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaG90a2V5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLG9GQUFxRDtJQUNyRCx3RUFBaUQ7SUFDakQsd0JBQU8sQ0FBQyxNQUFNLEdBQUcsVUFBVSxLQUFLO1FBQzlCLE9BQU8sSUFBSSxDQUFDO0lBQ2QsQ0FBQyxDQUFDO0lBRUY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bc0NHO0lBQ0gsU0FBUyxNQUFNLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQ25DLE9BQU8sSUFBSSxtQkFBVSxDQUNuQixDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsTUFBTSxFQUFFLEVBQUUsRUFBRTtZQUNwQywyQ0FBMkM7WUFDM0MsUUFBUSxtQkFDTixPQUFPLEVBQUUsSUFBSSxFQUNiLEtBQUssRUFBRSxLQUFLLEVBQ1osT0FBTyxFQUFFLElBQUksRUFDYixJQUFJLEVBQUUsS0FBSyxFQUNYLFFBQVEsRUFBRSxHQUFHLElBQ1YsUUFBUSxDQUNaLENBQUM7WUFFRixrQkFBa0I7WUFDbEIsd0JBQU8sQ0FBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFO2dCQUNqQyw0QkFBNEI7Z0JBQzVCLElBQUksQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLENBQUM7Z0JBQ2pCLDhCQUE4QjtnQkFDOUIsSUFBSSxRQUFRLENBQUMsSUFBSTtvQkFBRSxNQUFNLEVBQUUsQ0FBQztZQUM5QixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSxRQUFRO1NBQ2IsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUUsR0FBRyxFQUFFO1lBQ25CLHdCQUFPLENBQUMsTUFBTSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ3pCLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQztJQUNELGtCQUFlLE1BQU0sQ0FBQyJ9

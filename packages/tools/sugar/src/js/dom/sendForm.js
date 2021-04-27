@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var SAjax_1 = __importDefault(require("../http/SAjax"));
-    var form_serialize_1 = __importDefault(require("form-serialize"));
+    const SAjax_1 = __importDefault(require("../http/SAjax"));
+    const form_serialize_1 = __importDefault(require("form-serialize"));
     /**
      * @name      sendForm
      * @namespace            js.dom
@@ -44,12 +44,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         // protect
         if (!form.tagName || form.tagName.toLowerCase() !== 'form') {
             console.error('passed arguments', form);
-            throw "The \"form\" parameter passed to the \"sendForm\" function is not a form";
+            throw `The "form" parameter passed to the "sendForm" function is not a form`;
         }
         // get the enctype
-        var enctype = form.getAttribute('enctype') || 'application/x-www-form-urlencoded';
+        const enctype = form.getAttribute('enctype') || 'application/x-www-form-urlencoded';
         // encode form datas
-        var data = null;
+        let data = null;
         if (enctype === 'application/x-www-form-urlencoded') {
             // serialize the form values
             data = form_serialize_1.default(form);
@@ -58,7 +58,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             data = new FormData(form);
         }
         // create ajax instance
-        var ajx = new SAjax_1.default({
+        const ajx = new SAjax_1.default({
             url: form.getAttribute('action'),
             method: form.getAttribute('method') || 'POST',
             data: data,
@@ -67,11 +67,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         // set the loading attribute on the form
         form.setAttribute('loading', true);
         // send and return the promise
-        var promise = ajx.send();
+        const promise = ajx.send();
         // listen for the end of loading
-        promise.then(function (success) {
+        promise.then((success) => {
             form.removeAttribute('loading');
-        }, function (error) {
+        }, (error) => {
             form.removeAttribute('loading');
         });
         // return the promise
@@ -79,4 +79,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = sendForm;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VuZEZvcm0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzZW5kRm9ybS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCx3REFBa0M7SUFDbEMsa0VBQTZDO0lBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F3Qkc7SUFDSCxTQUFTLFFBQVEsQ0FBQyxJQUFJO1FBQ3BCLFVBQVU7UUFDVixJQUFJLENBQUMsSUFBSSxDQUFDLE9BQU8sSUFBSSxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVcsRUFBRSxLQUFLLE1BQU0sRUFBRTtZQUMxRCxPQUFPLENBQUMsS0FBSyxDQUFDLGtCQUFrQixFQUFFLElBQUksQ0FBQyxDQUFDO1lBQ3hDLE1BQU0sMEVBQXNFLENBQUM7U0FDOUU7UUFFRCxrQkFBa0I7UUFDbEIsSUFBTSxPQUFPLEdBQ1gsSUFBSSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxtQ0FBbUMsQ0FBQztRQUV0RSxvQkFBb0I7UUFDcEIsSUFBSSxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ2hCLElBQUksT0FBTyxLQUFLLG1DQUFtQyxFQUFFO1lBQ25ELDRCQUE0QjtZQUM1QixJQUFJLEdBQUcsd0JBQWUsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUM5QjthQUFNO1lBQ0wsSUFBSSxHQUFHLElBQUksUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDO1NBQzNCO1FBRUQsdUJBQXVCO1FBQ3ZCLElBQU0sR0FBRyxHQUFHLElBQUksZUFBSyxDQUFDO1lBQ3BCLEdBQUcsRUFBRSxJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQztZQUNoQyxNQUFNLEVBQUUsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsSUFBSSxNQUFNO1lBQzdDLElBQUksRUFBRSxJQUFJO1lBQ1YsV0FBVyxFQUFFLE9BQU87U0FDckIsQ0FBQyxDQUFDO1FBRUgsd0NBQXdDO1FBQ3hDLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxDQUFDO1FBRW5DLDhCQUE4QjtRQUM5QixJQUFNLE9BQU8sR0FBRyxHQUFHLENBQUMsSUFBSSxFQUFFLENBQUM7UUFFM0IsZ0NBQWdDO1FBQ2hDLE9BQU8sQ0FBQyxJQUFJLENBQ1YsVUFBQyxPQUFPO1lBQ04sSUFBSSxDQUFDLGVBQWUsQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUNsQyxDQUFDLEVBQ0QsVUFBQyxLQUFLO1lBQ0osSUFBSSxDQUFDLGVBQWUsQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUNsQyxDQUFDLENBQ0YsQ0FBQztRQUVGLHFCQUFxQjtRQUNyQixPQUFPLE9BQU8sQ0FBQztJQUNqQixDQUFDO0lBQ0Qsa0JBQWUsUUFBUSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VuZEZvcm0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzZW5kRm9ybS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCwwREFBa0M7SUFDbEMsb0VBQTZDO0lBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F3Qkc7SUFDSCxTQUFTLFFBQVEsQ0FBQyxJQUFJO1FBQ3BCLFVBQVU7UUFDVixJQUFJLENBQUMsSUFBSSxDQUFDLE9BQU8sSUFBSSxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVcsRUFBRSxLQUFLLE1BQU0sRUFBRTtZQUMxRCxPQUFPLENBQUMsS0FBSyxDQUFDLGtCQUFrQixFQUFFLElBQUksQ0FBQyxDQUFDO1lBQ3hDLE1BQU0sc0VBQXNFLENBQUM7U0FDOUU7UUFFRCxrQkFBa0I7UUFDbEIsTUFBTSxPQUFPLEdBQ1gsSUFBSSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxtQ0FBbUMsQ0FBQztRQUV0RSxvQkFBb0I7UUFDcEIsSUFBSSxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ2hCLElBQUksT0FBTyxLQUFLLG1DQUFtQyxFQUFFO1lBQ25ELDRCQUE0QjtZQUM1QixJQUFJLEdBQUcsd0JBQWUsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUM5QjthQUFNO1lBQ0wsSUFBSSxHQUFHLElBQUksUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDO1NBQzNCO1FBRUQsdUJBQXVCO1FBQ3ZCLE1BQU0sR0FBRyxHQUFHLElBQUksZUFBSyxDQUFDO1lBQ3BCLEdBQUcsRUFBRSxJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQztZQUNoQyxNQUFNLEVBQUUsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsSUFBSSxNQUFNO1lBQzdDLElBQUksRUFBRSxJQUFJO1lBQ1YsV0FBVyxFQUFFLE9BQU87U0FDckIsQ0FBQyxDQUFDO1FBRUgsd0NBQXdDO1FBQ3hDLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxDQUFDO1FBRW5DLDhCQUE4QjtRQUM5QixNQUFNLE9BQU8sR0FBRyxHQUFHLENBQUMsSUFBSSxFQUFFLENBQUM7UUFFM0IsZ0NBQWdDO1FBQ2hDLE9BQU8sQ0FBQyxJQUFJLENBQ1YsQ0FBQyxPQUFPLEVBQUUsRUFBRTtZQUNWLElBQUksQ0FBQyxlQUFlLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDbEMsQ0FBQyxFQUNELENBQUMsS0FBSyxFQUFFLEVBQUU7WUFDUixJQUFJLENBQUMsZUFBZSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBQ2xDLENBQUMsQ0FDRixDQUFDO1FBRUYscUJBQXFCO1FBQ3JCLE9BQU8sT0FBTyxDQUFDO0lBQ2pCLENBQUM7SUFDRCxrQkFBZSxRQUFRLENBQUMifQ==

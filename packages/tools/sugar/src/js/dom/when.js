@@ -27,33 +27,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -108,58 +81,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
      * @since           1.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function when($node, state, settings) {
-        var _this = this;
-        if (settings === void 0) { settings = {}; }
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var importPromise, args, module;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        switch (state) {
-                            case 'attribute':
-                                importPromise = __syncRequire ? Promise.resolve().then(function () { return __importStar(require(
-                                /* webpackChunkName: "whenAttribute" */ /* webpackMode: "lazy" */ './whenAttribute')); }) : new Promise(function (resolve_1, reject_1) { require(['./whenAttribute'], resolve_1, reject_1); }).then(__importStar);
-                                args = [$node, settings.attribute, settings.checkFn];
-                                break;
-                            case 'inViewport':
-                                importPromise = __syncRequire ? Promise.resolve().then(function () { return __importStar(require(
-                                /* webpackChunkName: "whenInViewport" */ /* webpackMode: "lazy" */ './whenInViewport')); }) : new Promise(function (resolve_2, reject_2) { require(['./whenInViewport'], resolve_2, reject_2); }).then(__importStar);
-                                args = [$node, settings.offset];
-                                break;
-                            case 'outOfViewport':
-                                importPromise = __syncRequire ? Promise.resolve().then(function () { return __importStar(require(
-                                /* webpackChunkName: "whenOutOfViewport" */ /* webpackMode: "lazy" */ './whenOutOfViewport')); }) : new Promise(function (resolve_3, reject_3) { require(['./whenOutOfViewport'], resolve_3, reject_3); }).then(__importStar);
-                                args = [$node, settings.offset];
-                                break;
-                            case 'transitionEnd':
-                                importPromise = __syncRequire ? Promise.resolve().then(function () { return __importStar(require(
-                                /* webpackChunkName: "whenTransitionEnd" */ /* webpackMode: "lazy" */ './whenTransitionEnd')); }) : new Promise(function (resolve_4, reject_4) { require(['./whenTransitionEnd'], resolve_4, reject_4); }).then(__importStar);
-                                args = [$node, settings.callback];
-                                break;
-                            case 'visible':
-                                importPromise = __syncRequire ? Promise.resolve().then(function () { return __importStar(require(
-                                /* webpackChunkName: "whenVisible" */ /* webpackMode: "lazy" */ './whenVisible')); }) : new Promise(function (resolve_5, reject_5) { require(['./whenVisible'], resolve_5, reject_5); }).then(__importStar);
-                                args = [$node, settings.callback];
-                                break;
-                            default:
-                                resolve($node);
-                                return [2 /*return*/];
-                                break;
-                        }
-                        return [4 /*yield*/, importPromise];
-                    case 1:
-                        module = _a.sent();
-                        // call the when... function
-                        module.default.apply(null, args).then(function () {
-                            // resolve the promise
-                            resolve($node);
-                        });
-                        return [2 /*return*/];
-                }
+    function when($node, state, settings = {}) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            // check the state to detect
+            let importPromise, args;
+            switch (state) {
+                case 'attribute':
+                    importPromise = __syncRequire ? Promise.resolve().then(() => __importStar(require(
+                    /* webpackChunkName: "whenAttribute" */ /* webpackMode: "lazy" */ './whenAttribute'))) : new Promise((resolve_1, reject_1) => { require(['./whenAttribute'], resolve_1, reject_1); }).then(__importStar);
+                    args = [$node, settings.attribute, settings.checkFn];
+                    break;
+                case 'inViewport':
+                    importPromise = __syncRequire ? Promise.resolve().then(() => __importStar(require(
+                    /* webpackChunkName: "whenInViewport" */ /* webpackMode: "lazy" */ './whenInViewport'))) : new Promise((resolve_2, reject_2) => { require(['./whenInViewport'], resolve_2, reject_2); }).then(__importStar);
+                    args = [$node, settings.offset];
+                    break;
+                case 'outOfViewport':
+                    importPromise = __syncRequire ? Promise.resolve().then(() => __importStar(require(
+                    /* webpackChunkName: "whenOutOfViewport" */ /* webpackMode: "lazy" */ './whenOutOfViewport'))) : new Promise((resolve_3, reject_3) => { require(['./whenOutOfViewport'], resolve_3, reject_3); }).then(__importStar);
+                    args = [$node, settings.offset];
+                    break;
+                case 'transitionEnd':
+                    importPromise = __syncRequire ? Promise.resolve().then(() => __importStar(require(
+                    /* webpackChunkName: "whenTransitionEnd" */ /* webpackMode: "lazy" */ './whenTransitionEnd'))) : new Promise((resolve_4, reject_4) => { require(['./whenTransitionEnd'], resolve_4, reject_4); }).then(__importStar);
+                    args = [$node, settings.callback];
+                    break;
+                case 'visible':
+                    importPromise = __syncRequire ? Promise.resolve().then(() => __importStar(require(
+                    /* webpackChunkName: "whenVisible" */ /* webpackMode: "lazy" */ './whenVisible'))) : new Promise((resolve_5, reject_5) => { require(['./whenVisible'], resolve_5, reject_5); }).then(__importStar);
+                    args = [$node, settings.callback];
+                    break;
+                default:
+                    resolve($node);
+                    return;
+                    break;
+            }
+            // wait until the module is loaded
+            const module = yield importPromise;
+            // call the when... function
+            module.default.apply(null, args).then(() => {
+                // resolve the promise
+                resolve($node);
             });
-        }); });
+        }));
     }
     exports.default = when;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2hlbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIndoZW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F5Q0c7SUFDSCxTQUFTLElBQUksQ0FBQyxLQUFLLEVBQUUsS0FBSyxFQUFFLFFBQWE7UUFBekMsaUJBa0RDO1FBbEQyQix5QkFBQSxFQUFBLGFBQWE7UUFDdkMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxVQUFPLE9BQU8sRUFBRSxNQUFNOzs7Ozt3QkFHdkMsUUFBUSxLQUFLLEVBQUU7NEJBQ2IsS0FBSyxXQUFXO2dDQUNkLGFBQWE7Z0NBQ1gsdUNBQXVDLENBQUMseUJBQXlCLENBQUMsaUJBQWlCLDhIQUNwRixDQUFDO2dDQUNGLElBQUksR0FBRyxDQUFDLEtBQUssRUFBRSxRQUFRLENBQUMsU0FBUyxFQUFFLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQztnQ0FDckQsTUFBTTs0QkFDUixLQUFLLFlBQVk7Z0NBQ2YsYUFBYTtnQ0FDWCx3Q0FBd0MsQ0FBQyx5QkFBeUIsQ0FBQyxrQkFBa0IsK0hBQ3RGLENBQUM7Z0NBQ0YsSUFBSSxHQUFHLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQztnQ0FDaEMsTUFBTTs0QkFDUixLQUFLLGVBQWU7Z0NBQ2xCLGFBQWE7Z0NBQ1gsMkNBQTJDLENBQUMseUJBQXlCLENBQUMscUJBQXFCLGtJQUM1RixDQUFDO2dDQUNGLElBQUksR0FBRyxDQUFDLEtBQUssRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUM7Z0NBQ2hDLE1BQU07NEJBQ1IsS0FBSyxlQUFlO2dDQUNsQixhQUFhO2dDQUNYLDJDQUEyQyxDQUFDLHlCQUF5QixDQUFDLHFCQUFxQixrSUFDNUYsQ0FBQztnQ0FDRixJQUFJLEdBQUcsQ0FBQyxLQUFLLEVBQUUsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDO2dDQUNsQyxNQUFNOzRCQUNSLEtBQUssU0FBUztnQ0FDWixhQUFhO2dDQUNYLHFDQUFxQyxDQUFDLHlCQUF5QixDQUFDLGVBQWUsNEhBQ2hGLENBQUM7Z0NBQ0YsSUFBSSxHQUFHLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQztnQ0FDbEMsTUFBTTs0QkFDUjtnQ0FDRSxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7Z0NBQ2Ysc0JBQU87Z0NBQ1AsTUFBTTt5QkFDVDt3QkFHYyxxQkFBTSxhQUFhLEVBQUE7O3dCQUE1QixNQUFNLEdBQUcsU0FBbUI7d0JBRWxDLDRCQUE0Qjt3QkFDNUIsTUFBTSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQzs0QkFDcEMsc0JBQXNCOzRCQUN0QixPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7d0JBQ2pCLENBQUMsQ0FBQyxDQUFDOzs7O2FBQ0osQ0FBQyxDQUFDO0lBQ0wsQ0FBQztJQUNELGtCQUFlLElBQUksQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2hlbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIndoZW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F5Q0c7SUFDSCxTQUFTLElBQUksQ0FBQyxLQUFLLEVBQUUsS0FBSyxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQ3ZDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7WUFDM0MsNEJBQTRCO1lBQzVCLElBQUksYUFBYSxFQUFFLElBQUksQ0FBQztZQUN4QixRQUFRLEtBQUssRUFBRTtnQkFDYixLQUFLLFdBQVc7b0JBQ2QsYUFBYTtvQkFDWCx1Q0FBdUMsQ0FBQyx5QkFBeUIsQ0FBQyxpQkFBaUIscUhBQ3BGLENBQUM7b0JBQ0YsSUFBSSxHQUFHLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxTQUFTLEVBQUUsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDO29CQUNyRCxNQUFNO2dCQUNSLEtBQUssWUFBWTtvQkFDZixhQUFhO29CQUNYLHdDQUF3QyxDQUFDLHlCQUF5QixDQUFDLGtCQUFrQixzSEFDdEYsQ0FBQztvQkFDRixJQUFJLEdBQUcsQ0FBQyxLQUFLLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDO29CQUNoQyxNQUFNO2dCQUNSLEtBQUssZUFBZTtvQkFDbEIsYUFBYTtvQkFDWCwyQ0FBMkMsQ0FBQyx5QkFBeUIsQ0FBQyxxQkFBcUIseUhBQzVGLENBQUM7b0JBQ0YsSUFBSSxHQUFHLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQztvQkFDaEMsTUFBTTtnQkFDUixLQUFLLGVBQWU7b0JBQ2xCLGFBQWE7b0JBQ1gsMkNBQTJDLENBQUMseUJBQXlCLENBQUMscUJBQXFCLHlIQUM1RixDQUFDO29CQUNGLElBQUksR0FBRyxDQUFDLEtBQUssRUFBRSxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUM7b0JBQ2xDLE1BQU07Z0JBQ1IsS0FBSyxTQUFTO29CQUNaLGFBQWE7b0JBQ1gscUNBQXFDLENBQUMseUJBQXlCLENBQUMsZUFBZSxtSEFDaEYsQ0FBQztvQkFDRixJQUFJLEdBQUcsQ0FBQyxLQUFLLEVBQUUsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDO29CQUNsQyxNQUFNO2dCQUNSO29CQUNFLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQztvQkFDZixPQUFPO29CQUNQLE1BQU07YUFDVDtZQUVELGtDQUFrQztZQUNsQyxNQUFNLE1BQU0sR0FBRyxNQUFNLGFBQWEsQ0FBQztZQUVuQyw0QkFBNEI7WUFDNUIsTUFBTSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUU7Z0JBQ3pDLHNCQUFzQjtnQkFDdEIsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ2pCLENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSxJQUFJLENBQUMifQ==

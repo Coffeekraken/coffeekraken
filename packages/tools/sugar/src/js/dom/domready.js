@@ -42,11 +42,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since           1.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var domready_1 = __importDefault(require("domready"));
-    function domReady(cb) {
-        if (cb === void 0) { cb = null; }
-        return new Promise(function (resolve, reject) {
-            domready_1.default(function () {
+    const domready_1 = __importDefault(require("domready"));
+    function domReady(cb = null) {
+        return new Promise((resolve, reject) => {
+            domready_1.default(() => {
                 cb && cb();
                 resolve();
             });
@@ -54,4 +53,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = domReady;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9tcmVhZHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb21yZWFkeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTRCRztJQUNILHNEQUFrQztJQUNsQyxTQUFTLFFBQVEsQ0FBQyxFQUFTO1FBQVQsbUJBQUEsRUFBQSxTQUFTO1FBQ3pCLE9BQU8sSUFBSSxPQUFPLENBQUMsVUFBQyxPQUFPLEVBQUUsTUFBTTtZQUNqQyxrQkFBVSxDQUFDO2dCQUNULEVBQUUsSUFBSSxFQUFFLEVBQUUsQ0FBQztnQkFDWCxPQUFPLEVBQUUsQ0FBQztZQUNaLENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDO0lBQ0Qsa0JBQWUsUUFBUSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9tcmVhZHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb21yZWFkeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTRCRztJQUNILHdEQUFrQztJQUNsQyxTQUFTLFFBQVEsQ0FBQyxFQUFFLEdBQUcsSUFBSTtRQUN6QixPQUFPLElBQUksT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFO1lBQ3JDLGtCQUFVLENBQUMsR0FBRyxFQUFFO2dCQUNkLEVBQUUsSUFBSSxFQUFFLEVBQUUsQ0FBQztnQkFDWCxPQUFPLEVBQUUsQ0FBQztZQUNaLENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDO0lBQ0Qsa0JBQWUsUUFBUSxDQUFDIn0=

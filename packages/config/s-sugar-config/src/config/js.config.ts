@@ -12,7 +12,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.js.compile.inDir]/**/*.{js,ts}',
+    input: '[config.js.compile.inDir]/**/*.js',
 
     /**
      * @name              inDir

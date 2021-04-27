@@ -41,7 +41,8 @@ class SJsCompilerInterface extends __SInterface {
       type: 'String',
       path: {
         absolute: true,
-        exists: true
+        exists: true,
+        create: true
       },
       default: __sugarConfig('js.compile.outDir'),
       alias: 'o'

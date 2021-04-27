@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var scrollTo_1 = __importDefault(require("./scrollTo"));
-    var easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
+    const scrollTo_1 = __importDefault(require("./scrollTo"));
+    const easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
     /**
      * @name      scrollToLocationHash
      * @namespace            js.dom
@@ -39,17 +39,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       1.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
      */
-    function scrollToLocationHash(duration, offset, easing) {
-        if (duration === void 0) { duration = 500; }
-        if (offset === void 0) { offset = 0; }
-        if (easing === void 0) { easing = easeInOutQuint_1.default; }
+    function scrollToLocationHash(duration = 500, offset = 0, easing = easeInOutQuint_1.default) {
         // check if we have an hash in the url
-        var hash = document.location.hash;
+        const hash = document.location.hash;
         // if not, do nothing
         if (!hash)
             return;
         // try to get the hash target in the page
-        var targetElm = document.querySelector(hash);
+        const targetElm = document.querySelector(hash);
         // if no target found, do nothing
         if (!targetElm)
             return;
@@ -62,4 +59,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = scrollToLocationHash;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsVG9Mb2NhdGlvbkhhc2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3JvbGxUb0xvY2F0aW9uSGFzaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCx3REFBb0M7SUFDcEMsc0ZBQTJEO0lBRTNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXVCRztJQUNILFNBQVMsb0JBQW9CLENBQUMsUUFBYyxFQUFFLE1BQVUsRUFBRSxNQUFrQjtRQUE5Qyx5QkFBQSxFQUFBLGNBQWM7UUFBRSx1QkFBQSxFQUFBLFVBQVU7UUFBRSx1QkFBQSxFQUFBLFNBQVMsd0JBQVM7UUFDMUUsc0NBQXNDO1FBQ3RDLElBQU0sSUFBSSxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDO1FBRXBDLHFCQUFxQjtRQUNyQixJQUFJLENBQUMsSUFBSTtZQUFFLE9BQU87UUFFbEIseUNBQXlDO1FBQ3pDLElBQU0sU0FBUyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFL0MsaUNBQWlDO1FBQ2pDLElBQUksQ0FBQyxTQUFTO1lBQUUsT0FBTztRQUV2QixrRUFBa0U7UUFDbEUsSUFBSSxtQkFBbUIsSUFBSSxPQUFPLEVBQUU7WUFDbEMsT0FBTyxDQUFDLGlCQUFpQixHQUFHLFFBQVEsQ0FBQztTQUN0QztRQUVELG1CQUFtQjtRQUNuQixrQkFBVSxDQUFDLFNBQVMsRUFBRSxRQUFRLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxLQUFLLENBQUMsQ0FBQztJQUN6RCxDQUFDO0lBQ0Qsa0JBQWUsb0JBQW9CLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsVG9Mb2NhdGlvbkhhc2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3JvbGxUb0xvY2F0aW9uSGFzaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCwwREFBb0M7SUFDcEMsd0ZBQTJEO0lBRTNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXVCRztJQUNILFNBQVMsb0JBQW9CLENBQUMsUUFBUSxHQUFHLEdBQUcsRUFBRSxNQUFNLEdBQUcsQ0FBQyxFQUFFLE1BQU0sR0FBRyx3QkFBUztRQUMxRSxzQ0FBc0M7UUFDdEMsTUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFcEMscUJBQXFCO1FBQ3JCLElBQUksQ0FBQyxJQUFJO1lBQUUsT0FBTztRQUVsQix5Q0FBeUM7UUFDekMsTUFBTSxTQUFTLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUUvQyxpQ0FBaUM7UUFDakMsSUFBSSxDQUFDLFNBQVM7WUFBRSxPQUFPO1FBRXZCLGtFQUFrRTtRQUNsRSxJQUFJLG1CQUFtQixJQUFJLE9BQU8sRUFBRTtZQUNsQyxPQUFPLENBQUMsaUJBQWlCLEdBQUcsUUFBUSxDQUFDO1NBQ3RDO1FBRUQsbUJBQW1CO1FBQ25CLGtCQUFVLENBQUMsU0FBUyxFQUFFLFFBQVEsRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQ3pELENBQUM7SUFDRCxrQkFBZSxvQkFBb0IsQ0FBQyJ9

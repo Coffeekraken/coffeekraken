@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var uncamelize_1 = __importDefault(require("../../shared/string/uncamelize"));
+    const uncamelize_1 = __importDefault(require("../../shared/string/uncamelize"));
     /**
      * @name      styleObject2String
      * @namespace            js.dom
@@ -42,16 +42,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function styleObject2String(styleObj) {
         // process the style object
-        var propertiesArray = [];
-        for (var key in styleObj) {
-            var value = styleObj[key];
+        const propertiesArray = [];
+        for (const key in styleObj) {
+            const value = styleObj[key];
             // if the value is ''
             // mean that we need to get rid of
             if (value === undefined || value === '') {
                 delete styleObj[key];
             }
             else {
-                propertiesArray.push(uncamelize_1.default(key) + ":" + value + ";");
+                propertiesArray.push(`${uncamelize_1.default(key)}:${value};`);
             }
         }
         // return the css text
@@ -59,4 +59,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = styleObject2String;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVPYmplY3QyU3RyaW5nLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3R5bGVPYmplY3QyU3RyaW5nLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDhFQUEwRDtJQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXlCRztJQUNILFNBQVMsa0JBQWtCLENBQUMsUUFBUTtRQUNsQywyQkFBMkI7UUFDM0IsSUFBTSxlQUFlLEdBQUcsRUFBRSxDQUFDO1FBQzNCLEtBQUssSUFBTSxHQUFHLElBQUksUUFBUSxFQUFFO1lBQzFCLElBQU0sS0FBSyxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUM1QixxQkFBcUI7WUFDckIsa0NBQWtDO1lBQ2xDLElBQUksS0FBSyxLQUFLLFNBQVMsSUFBSSxLQUFLLEtBQUssRUFBRSxFQUFFO2dCQUN2QyxPQUFPLFFBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQzthQUN0QjtpQkFBTTtnQkFDTCxlQUFlLENBQUMsSUFBSSxDQUFJLG9CQUFZLENBQUMsR0FBRyxDQUFDLFNBQUksS0FBSyxNQUFHLENBQUMsQ0FBQzthQUN4RDtTQUNGO1FBQ0Qsc0JBQXNCO1FBQ3RCLE9BQU8sZUFBZSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUNuQyxDQUFDO0lBQ0Qsa0JBQWUsa0JBQWtCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVPYmplY3QyU3RyaW5nLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3R5bGVPYmplY3QyU3RyaW5nLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLGdGQUEwRDtJQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXlCRztJQUNILFNBQVMsa0JBQWtCLENBQUMsUUFBUTtRQUNsQywyQkFBMkI7UUFDM0IsTUFBTSxlQUFlLEdBQUcsRUFBRSxDQUFDO1FBQzNCLEtBQUssTUFBTSxHQUFHLElBQUksUUFBUSxFQUFFO1lBQzFCLE1BQU0sS0FBSyxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUM1QixxQkFBcUI7WUFDckIsa0NBQWtDO1lBQ2xDLElBQUksS0FBSyxLQUFLLFNBQVMsSUFBSSxLQUFLLEtBQUssRUFBRSxFQUFFO2dCQUN2QyxPQUFPLFFBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQzthQUN0QjtpQkFBTTtnQkFDTCxlQUFlLENBQUMsSUFBSSxDQUFDLEdBQUcsb0JBQVksQ0FBQyxHQUFHLENBQUMsSUFBSSxLQUFLLEdBQUcsQ0FBQyxDQUFDO2FBQ3hEO1NBQ0Y7UUFDRCxzQkFBc0I7UUFDdEIsT0FBTyxlQUFlLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ25DLENBQUM7SUFDRCxrQkFBZSxrQkFBa0IsQ0FBQyJ9

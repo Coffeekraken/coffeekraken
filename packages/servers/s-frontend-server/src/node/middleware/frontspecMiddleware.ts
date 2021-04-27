@@ -35,8 +35,25 @@ import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+require('events').EventEmitter.defaultMaxListeners = Infinity;
+const _requestedFiles: Record<string, any> = {};
 function frontspecMiddleware(settings = {}) {
   return async function (req, res, next) {
+    // handle already fetched files
+    if (_requestedFiles[req.path]) {
+      const assetObj = _requestedFiles[req.path];
+      // var readStream = __fs.createReadStream(assetObj.path);
+      // readStream.pipe(res);
+      let content = __fs.readFileSync(assetObj.path, 'utf8').toString();
+      content = content.replace(
+        /\/\/# sourceMappingURL=.*\.map/gm,
+        `// #sourceMappingUrl=${assetObj.src}.map`
+      );
+      console.log(`Request on "<cyan>${assetObj.src}</cyan>"`);
+      res.send(content);
+      return;
+    }
+
     const frontspec = new __SFrontspec();
     const assetsToServe = await frontspec.assetsToServe();
 
@@ -49,13 +66,7 @@ function frontspecMiddleware(settings = {}) {
         res.templateData.assets[assetObj.type] = {};
       const assetHash = __md5.encrypt(assetObj.path ?? assetObj.src);
       let raw = '';
-      const src = `/frontspec/${assetHash}`;
-
-      if (req.path === src) {
-        var readStream = __fs.createReadStream(assetObj.path);
-        readStream.pipe(res);
-        return next();
-      }
+      const src = `/frontspec/${assetHash}-${assetObj.file.name}`;
 
       switch (assetObj.type.toLowerCase()) {
         case 'js':
@@ -78,16 +89,27 @@ function frontspecMiddleware(settings = {}) {
           break;
       }
 
-      res.templateData.assets[assetObj.type][`${assetObj.id}-${assetHash}`] = {
+      if (__fs.existsSync(assetObj.path + '.map')) {
+        _requestedFiles[`${src}.map`] = {
+          id: assetObj.id + '.map',
+          type: assetObj.type + '.map',
+          hash: `${assetHash}.map`,
+          path: `${assetObj.path}.map`,
+          src: `${src}.map`
+        };
+      }
+
+      _requestedFiles[src] = {
         id: assetObj.id,
         type: assetObj.type,
         hash: assetHash,
+        path: assetObj.path,
         src,
         raw
       };
-    }
 
-    // console.log(res.templateData.assets);
+      res.templateData.assets[assetObj.type][assetHash] = _requestedFiles[src];
+    }
 
     return next();
   };

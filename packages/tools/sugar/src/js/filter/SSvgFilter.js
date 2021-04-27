@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var uniqid_1 = __importDefault(require("../../shared/string/uniqid"));
+    const uniqid_1 = __importDefault(require("../../shared/string/uniqid"));
     /**
      * @name 		          SGooeySvgFilter
      * @namespace            js.filter
@@ -44,7 +44,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since           1.0.0
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var SSvgFilter = /** @class */ (function () {
+    class SSvgFilter {
         /**
          * @name          constructor
          * @type          Function
@@ -55,7 +55,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        function SSvgFilter(filter_content) {
+        constructor(filter_content) {
             // save the reference of each elements
             this.elms = [];
             // save parameters
@@ -78,13 +78,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SSvgFilter.prototype.applyTo = function (elm) {
-            var _this = this;
-            ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach(function (vendor) {
-                elm.style[vendor + 'filter'] = 'url("#' + _this.id + '")';
+        applyTo(elm) {
+            ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {
+                elm.style[vendor + 'filter'] = 'url("#' + this.id + '")';
             });
             this.elms.push(elm);
-        };
+        }
         /**
          * @name          unapplyFrom
          * @type          Function
@@ -95,16 +94,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SSvgFilter.prototype.unapplyFrom = function (elm) {
-            ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach(function (vendor) {
+        unapplyFrom(elm) {
+            ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {
                 elm.style[vendor + 'filter'] = null;
                 delete elm.style[vendor + 'filter'];
             });
             // remove from stack
-            var idx = this.elms.indexOf(elm);
+            const idx = this.elms.indexOf(elm);
             if (idx)
                 this.elms.splice(idx, 1);
-        };
+        }
         /**
          * @name          _insertFilter
          * @type          Function
@@ -114,11 +113,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SSvgFilter.prototype._insertFilter = function () {
-            var svg = "\n\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n\t\t\t\t<defs>\n\t\t\t\t</defs>\n\t\t\t</svg>\n\t\t";
-            var div = document.createElement('div');
+        _insertFilter() {
+            const svg = `
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+				<defs>
+				</defs>
+			</svg>
+		`;
+            const div = document.createElement('div');
             div.innerHTML = svg;
-            var defs = div.querySelector('defs');
+            const defs = div.querySelector('defs');
             // add the filter to the svg
             this.filter_content =
                 '<filter id="' + this.id + '">' + this.filter_content + '</filter>';
@@ -126,7 +130,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this.filter = defs.querySelector('#' + this.id);
             this.svg = div.querySelector('svg');
             SSvgFilter.filtersContainer.appendChild(this.svg);
-        };
+        }
         /**
          * @name          destroy
          * @type          Function
@@ -135,15 +139,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SSvgFilter.prototype.destroy = function () {
-            var _this = this;
+        destroy() {
             // loop on each element savec in stack to remove the filter
-            this.elms.forEach(function (elm) {
-                _this.unapplyFrom(elm);
+            this.elms.forEach((elm) => {
+                this.unapplyFrom(elm);
             });
             // remove the filter from the html
             this.svg.parentNode.removeChild(this.svg);
-        };
+        }
         /**
          * @name          _injectFiltersContainer
          * @type          Function
@@ -154,8 +157,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SSvgFilter._injectFiltersContainer = function () {
-            var style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
+        static _injectFiltersContainer() {
+            const style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
             if (/Chrome/.test(navigator.userAgent) &&
                 /Google Inc/.test(navigator.vendor)) {
                 style.push('display:none;');
@@ -164,9 +167,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             SSvgFilter.filtersContainer.id = 's-svg-filters';
             SSvgFilter.filtersContainer.style = style.join(' ');
             document.body.appendChild(SSvgFilter.filtersContainer);
-        };
-        return SSvgFilter;
-    }());
+        }
+    }
     exports.default = SSvgFilter;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N2Z0ZpbHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNTdmdGaWx0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsc0VBQWdEO0lBRWhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTZCRztJQUNIO1FBQ0U7Ozs7Ozs7OztXQVNHO1FBQ0gsb0JBQVksY0FBYztZQUN4QixzQ0FBc0M7WUFDdEMsSUFBSSxDQUFDLElBQUksR0FBRyxFQUFFLENBQUM7WUFFZixrQkFBa0I7WUFDbEIsSUFBSSxDQUFDLGNBQWMsR0FBRyxjQUFjLENBQUM7WUFFckMsb0JBQW9CO1lBQ3BCLElBQUksQ0FBQyxFQUFFLEdBQUcsZUFBZSxHQUFHLGdCQUFNLEVBQUUsQ0FBQztZQUVyQyx3QkFBd0I7WUFDeEIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLGdCQUFnQixDQUFDO2dCQUNoRCxVQUFVLENBQUMsdUJBQXVCLEVBQUUsQ0FBQztZQUV2QyxvQkFBb0I7WUFDcEIsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDO1FBQ3ZCLENBQUM7UUFFRDs7Ozs7Ozs7O1dBU0c7UUFDSCw0QkFBTyxHQUFQLFVBQVEsR0FBRztZQUFYLGlCQUtDO1lBSkMsQ0FBQyxVQUFVLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUMsT0FBTyxDQUFDLFVBQUMsTUFBTTtnQkFDdEQsR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLEdBQUcsUUFBUSxDQUFDLEdBQUcsUUFBUSxHQUFHLEtBQUksQ0FBQyxFQUFFLEdBQUcsSUFBSSxDQUFDO1lBQzNELENBQUMsQ0FBQyxDQUFDO1lBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDdEIsQ0FBQztRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILGdDQUFXLEdBQVgsVUFBWSxHQUFHO1lB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N2Z0ZpbHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNTdmdGaWx0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsd0VBQWdEO0lBRWhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTZCRztJQUNILE1BQXFCLFVBQVU7UUFDN0I7Ozs7Ozs7OztXQVNHO1FBQ0gsWUFBWSxjQUFjO1lBQ3hCLHNDQUFzQztZQUN0QyxJQUFJLENBQUMsSUFBSSxHQUFHLEVBQUUsQ0FBQztZQUVmLGtCQUFrQjtZQUNsQixJQUFJLENBQUMsY0FBYyxHQUFHLGNBQWMsQ0FBQztZQUVyQyxvQkFBb0I7WUFDcEIsSUFBSSxDQUFDLEVBQUUsR0FBRyxlQUFlLEdBQUcsZ0JBQU0sRUFBRSxDQUFDO1lBRXJDLHdCQUF3QjtZQUN4QixJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsZ0JBQWdCLENBQUM7Z0JBQ2hELFVBQVUsQ0FBQyx1QkFBdUIsRUFBRSxDQUFDO1lBRXZDLG9CQUFvQjtZQUNwQixJQUFJLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDdkIsQ0FBQztRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILE9BQU8sQ0FBQyxHQUFHO1lBQ1QsQ0FBQyxVQUFVLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsTUFBTSxFQUFFLEVBQUU7Z0JBQzFELEdBQUcsQ0FBQyxLQUFLLENBQUMsTUFBTSxHQUFHLFFBQVEsQ0FBQyxHQUFHLFFBQVEsR0FBRyxJQUFJLENBQUMsRUFBRSxHQUFHLElBQUksQ0FBQztZQUMzRCxDQUFDLENBQUMsQ0FBQztZQUNILElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ3RCLENBQUM7UUFFRDs7Ozs7Ozs7O1dBU0c7UUFDSCxXQUFXLENBQUMsR0FBRztZQUNi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

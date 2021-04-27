@@ -1,15 +1,4 @@
 // @ts-nocheck
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var fastdom_1 = __importDefault(require("fastdom"));
-    var dispatchEvent_1 = __importDefault(require("../dom/dispatchEvent"));
+    const fastdom_1 = __importDefault(require("fastdom"));
+    const dispatchEvent_1 = __importDefault(require("../dom/dispatchEvent"));
     /**
      * @name 		handleInputAttributes
      * @namespace            js.feature
@@ -53,17 +42,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since         1.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function inputAdditionalEvents(settings) {
-        if (settings === void 0) { settings = {}; }
-        settings = __assign({ enter: true, escape: true }, settings);
+    function inputAdditionalEvents(settings = {}) {
+        settings = Object.assign({ enter: true, escape: true }, settings);
         function handleInputAttributes(e) {
-            var field = e.target ? e.target : e;
+            const field = e.target ? e.target : e;
             if (!field || !field.tagName)
                 return;
             switch (field.tagName) {
                 case 'INPUT':
                 case 'TEXTAREA':
-                    fastdom_1.default.mutate(function () {
+                    fastdom_1.default.mutate(() => {
                         if (e.keyCode) {
                             switch (e.keyCode) {
                                 case 13: // enter
@@ -89,4 +77,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = inputAdditionalEvents;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5wdXRBZGRpdGlvbmFsRXZlbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaW5wdXRBZGRpdGlvbmFsRXZlbnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsb0RBQThCO0lBQzlCLHVFQUFtRDtJQUVuRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0EwQkc7SUFDSCxTQUFTLHFCQUFxQixDQUFDLFFBQWE7UUFBYix5QkFBQSxFQUFBLGFBQWE7UUFDMUMsUUFBUSxjQUNOLEtBQUssRUFBRSxJQUFJLEVBQ1gsTUFBTSxFQUFFLElBQUksSUFDVCxRQUFRLENBQ1osQ0FBQztRQUVGLFNBQVMscUJBQXFCLENBQUMsQ0FBQztZQUM5QixJQUFNLEtBQUssR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDdEMsSUFBSSxDQUFDLEtBQUssSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPO2dCQUFFLE9BQU87WUFDckMsUUFBUSxLQUFLLENBQUMsT0FBTyxFQUFFO2dCQUNyQixLQUFLLE9BQU8sQ0FBQztnQkFDYixLQUFLLFVBQVU7b0JBQ2IsaUJBQU8sQ0FBQyxNQUFNLENBQUM7d0JBQ2IsSUFBSSxDQUFDLENBQUMsT0FBTyxFQUFFOzRCQUNiLFFBQVEsQ0FBQyxDQUFDLE9BQU8sRUFBRTtnQ0FDakIsS0FBSyxFQUFFLEVBQUUsUUFBUTtvQ0FDZixJQUFJLFFBQVEsQ0FBQyxLQUFLLElBQUksS0FBSyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsRUFBRTt3Q0FDbkQsSUFBSSxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQzt3Q0FDcEMsdUJBQWUsQ0FBQyxLQUFLLEVBQUUsT0FBTyxDQUFDLENBQUM7cUNBQ2pDO29DQUNELE1BQU07Z0NBQ1IsS0FBSyxFQUFFLEVBQUUsU0FBUztvQ0FDaEIsSUFBSSxRQUFRLENBQUMsTUFBTSxJQUFJLEtBQUssQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLEVBQUU7d0NBQ3JELElBQUksQ0FBQyxLQUFLLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7d0NBQ3JDLHVCQUFlLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxDQUFDO3FDQUNsQztvQ0FDRCxNQUFNOzZCQUNUO3lCQUNGO29CQUNILENBQUMsQ0FBQyxDQUFDO29CQUNILE1BQU07YUFDVDtRQUNILENBQUM7UUFFRCxRQUFRLENBQUMsZ0JBQWdCLENBQUMsUUFBUSxFQUFFLHFCQUFxQixDQUFDLENBQUM7UUFDM0QsUUFBUSxDQUFDLGdCQUFnQixDQUFDLE9BQU8sRUFBRSxxQkFBcUIsQ0FBQyxDQUFDO0lBQzVELENBQUM7SUFDRCxrQkFBZSxxQkFBcUIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5wdXRBZGRpdGlvbmFsRXZlbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaW5wdXRBZGRpdGlvbmFsRXZlbnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLHNEQUE4QjtJQUM5Qix5RUFBbUQ7SUFFbkQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BMEJHO0lBQ0gsU0FBUyxxQkFBcUIsQ0FBQyxRQUFRLEdBQUcsRUFBRTtRQUMxQyxRQUFRLG1CQUNOLEtBQUssRUFBRSxJQUFJLEVBQ1gsTUFBTSxFQUFFLElBQUksSUFDVCxRQUFRLENBQ1osQ0FBQztRQUVGLFNBQVMscUJBQXFCLENBQUMsQ0FBQztZQUM5QixNQUFNLEtBQUssR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDdEMsSUFBSSxDQUFDLEtBQUssSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPO2dCQUFFLE9BQU87WUFDckMsUUFBUSxLQUFLLENBQUMsT0FBTyxFQUFFO2dCQUNyQixLQUFLLE9BQU8sQ0FBQztnQkFDYixLQUFLLFVBQVU7b0JBQ2IsaUJBQU8sQ0FBQyxNQUFNLENBQUMsR0FBRyxFQUFFO3dCQUNsQixJQUFJLENBQUMsQ0FBQyxPQUFPLEVBQUU7NEJBQ2IsUUFBUSxDQUFDLENBQUMsT0FBTyxFQUFFO2dDQUNqQixLQUFLLEVBQUUsRUFBRSxRQUFRO29DQUNmLElBQUksUUFBUSxDQUFDLEtBQUssSUFBSSxLQUFLLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxFQUFFO3dDQUNuRCxJQUFJLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO3dDQUNwQyx1QkFBZSxDQUFDLEtBQUssRUFBRSxPQUFPLENBQUMsQ0FBQztxQ0FDakM7b0NBQ0QsTUFBTTtnQ0FDUixLQUFLLEVBQUUsRUFBRSxTQUFTO29DQUNoQixJQUFJLFFBQVEsQ0FBQyxNQUFNLElBQUksS0FBSyxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsRUFBRTt3Q0FDckQsSUFBSSxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQzt3Q0FDckMsdUJBQWUsQ0FBQyxLQUFLLEVBQUUsUUFBUSxDQUFDLENBQUM7cUNBQ2xDO29DQUNELE1BQU07NkJBQ1Q7eUJBQ0Y7b0JBQ0gsQ0FBQyxDQUFDLENBQUM7b0JBQ0gsTUFBTTthQUNUO1FBQ0gsQ0FBQztRQUVELFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLEVBQUUscUJBQXFCLENBQUMsQ0FBQztRQUMzRCxRQUFRLENBQUMsZ0JBQWdCLENBQUMsT0FBTyxFQUFFLHFCQUFxQixDQUFDLENBQUM7SUFDNUQsQ0FBQztJQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=

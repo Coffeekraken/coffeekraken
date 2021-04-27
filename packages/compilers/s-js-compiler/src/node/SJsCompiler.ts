@@ -221,25 +221,44 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           setup(build) {
             // Load ".txt" files and return an array of words
             build.onLoad({ filter: /\.(j|t)s$/ }, async (args) => {
+              if (
+                args.path.match(/\.ts(x)?$/) &&
+                __fs.existsSync(args.path.replace(/\.ts(x)?$/, '.js'))
+              ) {
+                console.log(
+                  __fs
+                    .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
+                    .toString()
+                );
+
+                return {
+                  contents: __fs
+                    .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
+                    .toString(),
+                  loader: 'js'
+                };
+                console.log('TSX', args.path);
+              }
+
+              // if (
+              //   !updateTimestamps[args.path] ||
+              //   updateTimestamps[args.path] !== mtime
+              // ) {
+              //   lastCompiledFilePath = args.path;
+
+              //   // emit('log', {
+              //   //   value: `<yellow>[${
+              //   //     isFirstCompilation ? 'compile' : 'update'
+              //   //   }]</yellow> File "<cyan>${__path.relative(
+              //   //     params.rootDir,
+              //   //     args.path
+              //   //   )}</cyan>"`
+              //   // });
+              // }
+              // updateTimestamps[args.path] = mtime;
+
               const mtime = __fs.statSync(args.path).mtimeMs;
               const text = __fs.readFileSync(args.path, 'utf8');
-
-              if (
-                !updateTimestamps[args.path] ||
-                updateTimestamps[args.path] !== mtime
-              ) {
-                lastCompiledFilePath = args.path;
-
-                emit('log', {
-                  value: `<yellow>[${
-                    isFirstCompilation ? 'compile' : 'update'
-                  }]</yellow> File "<cyan>${__path.relative(
-                    params.rootDir,
-                    args.path
-                  )}</cyan>"`
-                });
-              }
-              updateTimestamps[args.path] = mtime;
 
               return {
                 contents: text
@@ -254,12 +273,21 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           });
         }
 
-        pool.on('update', async (files) => {
+        pool.on('update,files', async (files) => {
           pool.cancel();
 
           const duration = new __SDuration();
 
           files = Array.isArray(files) ? files : [files];
+
+          files = files.filter((file) => {
+            if (
+              file.path.match(/\.js$/) &&
+              __fs.existsSync(file.path.replace(/\.js$/, '.ts'))
+            )
+              return false;
+            return true;
+          });
 
           const color =
             this._filesColor[
@@ -281,13 +309,17 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             }]</${color}> Starting compilation`
           });
 
-          console.log();
-
           const esbuildParams: any = {
             charset: 'utf8',
             format: params.format,
-            logLevel: 'error',
-            outdir: params.outDir,
+            logLevel: 'info',
+            outdir: params.bundle ? undefined : params.outDir,
+            outfile: params.bundle
+              ? __path.resolve(
+                  params.outDir,
+                  `${files[0].nameWithoutExt}${params.bundleSuffix}.js`
+                )
+              : __path.resolve(params.outDir, files[0].name),
             outbase: params.inDir,
             banner: params.banner,
             incremental: true,
@@ -341,6 +373,8 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
               // })
             ]
           };
+
+          console.log(esbuildParams);
 
           let resultObj;
           try {

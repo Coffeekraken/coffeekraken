@@ -1,15 +1,4 @@
 // @ts-nocheck
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -44,13 +33,12 @@ var __assign = (this && this.__assign) || function () {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    var SLocalStorageFonts = /** @class */ (function () {
+    class SLocalStorageFonts {
         /**
          * @constructor
          * @param 		{Object} 	settings 	The settings
          */
-        function SLocalStorageFonts(settings) {
-            if (settings === void 0) { settings = {}; }
+        constructor(settings = {}) {
             /**
              * Settings
              * @type 	{Object}
@@ -79,17 +67,16 @@ var __assign = (this && this.__assign) || function () {
                  */
                 debug: false
             };
-            this._settings = __assign(__assign({}, this._settings), settings);
+            this._settings = Object.assign(Object.assign({}, this._settings), settings);
             // init
             this._init();
         }
         /**
          * Init
          */
-        SLocalStorageFonts.prototype._init = function () {
-            var _this = this;
+        _init() {
             // check cachebuster
-            var cb = this._settings.json_path.split('#');
+            let cb = this._settings.json_path.split('#');
             if (cb.length == 2) {
                 this._settings.version = cb[1];
                 this._settings.json_path = cb[0];
@@ -116,31 +103,31 @@ var __assign = (this && this.__assign) || function () {
             }
             // if no cache, load the fonts file
             if (!this._cache) {
-                window.addEventListener('load', function (e) {
-                    var request = new XMLHttpRequest(), response = undefined;
-                    request.open('GET', _this._settings.json_path, true);
-                    request.onload = function () {
+                window.addEventListener('load', (e) => {
+                    let request = new XMLHttpRequest(), response = undefined;
+                    request.open('GET', this._settings.json_path, true);
+                    request.onload = () => {
                         if (request.status == 200) {
                             try {
                                 response = JSON.parse(request.responseText);
-                                var fontface_1 = '';
-                                response.fonts.forEach(function (font) {
-                                    fontface_1 += '@font-face{';
-                                    for (var prop in font) {
-                                        var value = font[prop];
+                                let fontface = '';
+                                response.fonts.forEach((font) => {
+                                    fontface += '@font-face{';
+                                    for (let prop in font) {
+                                        let value = font[prop];
                                         if (prop == 'font-family') {
                                             value = '"' + value + '"';
                                         }
-                                        fontface_1 += prop + ':' + value + ';';
+                                        fontface += prop + ':' + value + ';';
                                     }
-                                    fontface_1 += '}';
+                                    fontface += '}';
                                 });
                                 // insert fonts
-                                _this._insertFonts(fontface_1);
+                                this._insertFonts(fontface);
                                 // save fonts in localstorage
                                 window.localStorage.setItem('sugar-fonts', JSON.stringify({
-                                    version: _this._settings.version,
-                                    value: fontface_1
+                                    version: this._settings.version,
+                                    value: fontface
                                 }));
                             }
                             catch (e) { }
@@ -149,27 +136,26 @@ var __assign = (this && this.__assign) || function () {
                     request.send();
                 });
             }
-        };
+        }
         /**
          * Insert font
          */
-        SLocalStorageFonts.prototype._insertFonts = function (value) {
+        _insertFonts(value) {
             this._debug('inserting fonts');
-            var style = document.createElement('style');
+            let style = document.createElement('style');
             style.innerHTML = value;
             document.head.appendChild(style);
-        };
+        }
         /**
          * Debug
          */
-        SLocalStorageFonts.prototype._debug = function () {
+        _debug() {
             if (this._settings.debug) {
                 console.log('SUGAR-LOCALSTORAGEFONTS', arguments);
             }
-        };
-        return SLocalStorageFonts;
-    }());
+        }
+    }
     // export modules
     exports.default = SLocalStorageFonts;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0xvY2FsU3RvcmFnZUZvbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0xvY2FsU3RvcmFnZUZvbnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FzQkc7SUFDSDtRQWdDRTs7O1dBR0c7UUFDSCw0QkFBWSxRQUFhO1lBQWIseUJBQUEsRUFBQSxhQUFhO1lBbkN6Qjs7O2VBR0c7WUFDSCxjQUFTLEdBQUc7Z0JBQ1Y7Ozs7OzttQkFNRztnQkFDSCxPQUFPLEVBQUUsR0FBRztnQkFFWjs7Ozs7bUJBS0c7Z0JBQ0gsU0FBUyxFQUFFLG1CQUFtQjtnQkFFOUI7Ozs7O21CQUtHO2dCQUNILEtBQUssRUFBRSxLQUFLO2FBQ2IsQ0FBQztZQU9BLElBQUksQ0FBQyxTQUFTLHlCQUNULElBQUksQ0FBQyxTQUFTLEdBQ2QsUUFBUSxDQUNaLENBQUM7WUFDRixPQUFPO1lBQ1AsSUFBSSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ2YsQ0FBQztRQUVEOztXQUVHO1FBQ0gsa0NBQUssR0FBTDtZQUFBLGlCQWlFQztZQWhFQyxvQkFBb0I7WUFDcEIsSUFBSSxFQUFFLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQzdDLElBQUksRUFBRSxDQUFDLE1BQU0sSUFBSSxDQUFDLEVBQUU7Z0JBQ2xCLElBQUksQ0FBQyxTQUFTLENBQUMsT0FBTyxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDL0IsSUFBSSxDQUFDLFNBQVMsQ0FBQyxTQUFTLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO2FBQ2xDO1lBRUQsSUFBSTtnQkFDRixJQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQyxZQUFZLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxDQUFDO2dCQUN6RCxJQUFJLElBQUks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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0xvY2FsU3RvcmFnZUZvbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0xvY2FsU3RvcmFnZUZvbnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7OztJQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bc0JHO0lBQ0gsTUFBTSxrQkFBa0I7UUFnQ3RCOzs7V0FHRztRQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7WUFuQ3pCOzs7ZUFHRztZQUNILGNBQVMsR0FBRztnQkFDVjs7Ozs7O21CQU1HO2dCQUNILE9BQU8sRUFBRSxHQUFHO2dCQUVaOzs7OzttQkFLRztnQkFDSCxTQUFTLEVBQUUsbUJBQW1CO2dCQUU5Qjs7Ozs7bUJBS0c7Z0JBQ0gsS0FBSyxFQUFFLEtBQUs7YUFDYixDQUFDO1lBT0EsSUFBSSxDQUFDLFNBQVMsbUNBQ1QsSUFBSSxDQUFDLFNBQVMsR0FDZCxRQUFRLENBQ1osQ0FBQztZQUNGLE9BQU87WUFDUCxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDZixDQUFDO1FBRUQ7O1dBRUc7UUFDSCxLQUFLO1lBQ0gsb0JBQW9CO1lBQ3BCLElBQUksRUFBRSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUM3QyxJQUFJLEVBQUUsQ0FBQyxNQUFNLElBQUksQ0FBQyxFQUFFO2dCQUNsQixJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQy9CLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUNsQztZQUVELElBQUk7Z0JBQ0YsSUFBSSxDQUFDLE1BQU0sR0FBRyxNQUFNLENBQUMsWUFBWSxDQUFDLE9BQU8sQ0FBQyxhQUFhLENBQUMsQ0FBQztnQkFDekQsSUFBSSxJQUFJLENBQUMsTUFBTSxFQUFFO29CQUNmLElBQUksQ0FB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

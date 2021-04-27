@@ -1,0 +1,7 @@
+import SDescriptor from './SDescriptor';
+import SDescriptorResult from './SDescriptorResult';
+export { SDescriptorResult };
+export * from './SDescriptorResult';
+export * from './SDescriptor';
+export default SDescriptor;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2NvcmUvcy1kZXNjcmlwdG9yL3NyYy9zaGFyZWQvZXhwb3J0cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxlQUFlLENBQUM7QUFDeEMsT0FBTyxpQkFBaUIsTUFBTSxxQkFBcUIsQ0FBQztBQUNwRCxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsQ0FBQztBQUM3QixjQUFjLHFCQUFxQixDQUFDO0FBQ3BDLGNBQWMsZUFBZSxDQUFDO0FBQzlCLGVBQWUsV0FBVyxDQUFDIn0=

@@ -82,7 +82,7 @@
 @sugar.reset;
 @sugar.layout.classes;
 @sugar.font.classes;
-/* @sugar.space.classes; */
+/* @sugar.space.classes;
 
 /* @sugar.gradient.classes;
 @sugar.ratio.classes;
@@ -90,10 +90,9 @@
 
 @sugar.typo.classes();
 
-/* @sugar.init;
+/* @sugar.init; */
 
-
-@sugar.ui.button.classes; */
+@sugar.ui.button.classes;
 
 /* body {
   content: sugar.color(#ff00ff, '--darken 40%');

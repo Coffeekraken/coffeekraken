@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
+    const getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
     /**
      * @name      textWidth
      * @namespace            js.dom
@@ -42,15 +42,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function textWidth(source) {
         // create an element
-        var elm = document.createElement('span');
+        const elm = document.createElement('span');
         elm.style.whiteSpace = 'nowrap';
         elm.style.position = 'absolute';
         elm.style.visibility = 'hidden';
-        var text = source;
+        let text = source;
         // if the source if an html element
         if (source.tagName) {
             // set the text into the element
-            var tagName = source.tagName.toLowerCase();
+            const tagName = source.tagName.toLowerCase();
             switch (tagName) {
                 case 'input':
                 case 'textarea':
@@ -61,9 +61,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     break;
             }
             // get the font properties
-            var fs = getStyleProperty_1.default(source, 'font-size');
-            var ff = getStyleProperty_1.default(source, 'font-family');
-            var ls = getStyleProperty_1.default(source, 'letter-spacing');
+            const fs = getStyleProperty_1.default(source, 'font-size');
+            const ff = getStyleProperty_1.default(source, 'font-family');
+            const ls = getStyleProperty_1.default(source, 'letter-spacing');
             elm.style.fontSize = fs;
             elm.style.fontFamily = ff;
             elm.style.letterSpacing = ls;
@@ -75,7 +75,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         // append the element to the body
         document.body.appendChild(elm);
         // return the width of the element
-        var width = elm.offsetWidth;
+        const width = elm.offsetWidth;
         // remove the element from the dom
         document.body.removeChild(elm);
         // return the width
@@ -83,4 +83,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = textWidth;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV4dFdpZHRoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV4dFdpZHRoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLHdFQUFvRDtJQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXlCRztJQUNILFNBQVMsU0FBUyxDQUFDLE1BQU07UUFDdkIsb0JBQW9CO1FBQ3BCLElBQU0sR0FBRyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDM0MsR0FBRyxDQUFDLEtBQUssQ0FBQyxVQUFVLEdBQUcsUUFBUSxDQUFDO1FBQ2hDLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxHQUFHLFVBQVUsQ0FBQztRQUNoQyxHQUFHLENBQUMsS0FBSyxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDaEMsSUFBSSxJQUFJLEdBQUcsTUFBTSxDQUFDO1FBRWxCLG1DQUFtQztRQUNuQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLEVBQUU7WUFDbEIsZ0NBQWdDO1lBQ2hDLElBQU0sT0FBTyxHQUFHLE1BQU0sQ0FBQyxPQUFPLENBQUMsV0FBVyxFQUFFLENBQUM7WUFDN0MsUUFBUSxPQUFPLEVBQUU7Z0JBQ2YsS0FBSyxPQUFPLENBQUM7Z0JBQ2IsS0FBSyxVQUFVO29CQUNiLElBQUksR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDO29CQUNwQixNQUFNO2dCQUNSO29CQUNFLElBQUksR0FBRyxNQUFNLENBQUMsU0FBUyxDQUFDO29CQUN4QixNQUFNO2FBQ1Q7WUFFRCwwQkFBMEI7WUFDMUIsSUFBTSxFQUFFLEdBQUcsMEJBQWtCLENBQUMsTUFBTSxFQUFFLFdBQVcsQ0FBQyxDQUFDO1lBQ25ELElBQU0sRUFBRSxHQUFHLDBCQUFrQixDQUFDLE1BQU0sRUFBRSxhQUFhLENBQUMsQ0FBQztZQUNyRCxJQUFNLEVBQUUsR0FBRywwQkFBa0IsQ0FBQyxNQUFNLEVBQUUsZ0JBQWdCLENBQUMsQ0FBQztZQUN4RCxHQUFHLENBQUMsS0FBSyxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7WUFDeEIsR0FBRyxDQUFDLEtBQUssQ0FBQyxVQUFVLEdBQUcsRUFBRSxDQUFDO1lBQzFCLEdBQUcsQ0FBQyxLQUFLLENBQUMsYUFBYSxHQUFHLEVBQUUsQ0FBQztTQUM5QjtRQUVELG1CQUFtQjtRQUNuQixJQUFJLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDcEMsMEJBQTBCO1FBQzFCLEdBQUcsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLGlDQUFpQztRQUNqQyxRQUFRLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUMvQixrQ0FBa0M7UUFDbEMsSUFBTSxLQUFLLEdBQUcsR0FBRyxDQUFDLFdBQVcsQ0FBQztRQUM5QixrQ0FBa0M7UUFDbEMsUUFBUSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDL0IsbUJBQW1CO1FBQ25CLE9BQU8sS0FBSyxDQUFDO0lBQ2YsQ0FBQztJQUNELGtCQUFlLFNBQVMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV4dFdpZHRoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV4dFdpZHRoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDBFQUFvRDtJQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXlCRztJQUNILFNBQVMsU0FBUyxDQUFDLE1BQU07UUFDdkIsb0JBQW9CO1FBQ3BCLE1BQU0sR0FBRyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDM0MsR0FBRyxDQUFDLEtBQUssQ0FBQyxVQUFVLEdBQUcsUUFBUSxDQUFDO1FBQ2hDLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxHQUFHLFVBQVUsQ0FBQztRQUNoQyxHQUFHLENBQUMsS0FBSyxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDaEMsSUFBSSxJQUFJLEdBQUcsTUFBTSxDQUFDO1FBRWxCLG1DQUFtQztRQUNuQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLEVBQUU7WUFDbEIsZ0NBQWdDO1lBQ2hDLE1BQU0sT0FBTyxHQUFHLE1BQU0sQ0FBQyxPQUFPLENBQUMsV0FBVyxFQUFFLENBQUM7WUFDN0MsUUFBUSxPQUFPLEVBQUU7Z0JBQ2YsS0FBSyxPQUFPLENBQUM7Z0JBQ2IsS0FBSyxVQUFVO29CQUNiLElBQUksR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDO29CQUNwQixNQUFNO2dCQUNSO29CQUNFLElBQUksR0FBRyxNQUFNLENBQUMsU0FBUyxDQUFDO29CQUN4QixNQUFNO2FBQ1Q7WUFFRCwwQkFBMEI7WUFDMUIsTUFBTSxFQUFFLEdBQUcsMEJBQWtCLENBQUMsTUFBTSxFQUFFLFdBQVcsQ0FBQyxDQUFDO1lBQ25ELE1BQU0sRUFBRSxHQUFHLDBCQUFrQixDQUFDLE1BQU0sRUFBRSxhQUFhLENBQUMsQ0FBQztZQUNyRCxNQUFNLEVBQUUsR0FBRywwQkFBa0IsQ0FBQyxNQUFNLEVBQUUsZ0JBQWdCLENBQUMsQ0FBQztZQUN4RCxHQUFHLENBQUMsS0FBSyxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7WUFDeEIsR0FBRyxDQUFDLEtBQUssQ0FBQyxVQUFVLEdBQUcsRUFBRSxDQUFDO1lBQzFCLEdBQUcsQ0FBQyxLQUFLLENBQUMsYUFBYSxHQUFHLEVBQUUsQ0FBQztTQUM5QjtRQUVELG1CQUFtQjtRQUNuQixJQUFJLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDcEMsMEJBQTBCO1FBQzFCLEdBQUcsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLGlDQUFpQztRQUNqQyxRQUFRLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUMvQixrQ0FBa0M7UUFDbEMsTUFBTSxLQUFLLEdBQUcsR0FBRyxDQUFDLFdBQVcsQ0FBQztRQUM5QixrQ0FBa0M7UUFDbEMsUUFBUSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDL0IsbUJBQW1CO1FBQ25CLE9BQU8sS0FBSyxDQUFDO0lBQ2YsQ0FBQztJQUNELGtCQUFlLFNBQVMsQ0FBQyJ9

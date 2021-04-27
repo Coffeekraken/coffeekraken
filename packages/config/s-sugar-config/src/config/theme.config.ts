@@ -1161,6 +1161,12 @@ export default {
           color: 'text',
           'margin-bottom': 50
         },
+        'p-lead': {
+          'font-family': 'default',
+          'font-size': 70,
+          color: 'text',
+          'margin-bottom': 50
+        },
         p: {
           'font-family': 'default',
           'font-size': 50,

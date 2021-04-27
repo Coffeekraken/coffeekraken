@@ -37,7 +37,7 @@ export default function (
 
   const vars: string[] = [
     `
-    @sugar.scope(bare lnf) {
+    @sugar.scope(bare) {
       .s-btn {
         @sugar.ui.button()
       }
@@ -47,8 +47,9 @@ export default function (
 
   const styles = __theme().config('ui.button.styles');
 
+  vars.push('@sugar.scope(lnf) {');
+
   styles.forEach((style) => {
-    vars.push('@sugar.scope(color) {');
     finalParams.colors.forEach((colorName) => {
       const styleCls = style === 'default' ? '' : `.s-btn--${style}`;
       const cls =
@@ -78,8 +79,9 @@ export default function (
         ].join('\n')
       );
     });
-    vars.push('}');
   });
+
+  vars.push('}');
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

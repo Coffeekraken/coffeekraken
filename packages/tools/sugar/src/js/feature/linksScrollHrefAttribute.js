@@ -1,15 +1,4 @@
 // @ts-nocheck
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var querySelectorLive_1 = __importDefault(require("../dom/querySelectorLive"));
-    var scrollTo_1 = __importDefault(require("../dom/scrollTo"));
-    var easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
+    const querySelectorLive_1 = __importDefault(require("../dom/querySelectorLive"));
+    const scrollTo_1 = __importDefault(require("../dom/scrollTo"));
+    const easeInOutQuint_1 = __importDefault(require("../../shared/easing/easeInOutQuint"));
     /**
      * @name 		linksScrollHrefAttribute
      * @namespace            js.feature
@@ -54,13 +43,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since         1.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function linksScrollHrefAttribute(settings) {
-        if (settings === void 0) { settings = {}; }
-        settings = __assign({ duration: 400, easing: easeInOutQuint_1.default }, settings);
-        querySelectorLive_1.default('[href^="#"][scroll]', function ($scrollElm) {
-            $scrollElm.addEventListener('click', function (e) {
+    function linksScrollHrefAttribute(settings = {}) {
+        settings = Object.assign({ duration: 400, easing: easeInOutQuint_1.default }, settings);
+        querySelectorLive_1.default('[href^="#"][scroll]', ($scrollElm) => {
+            $scrollElm.addEventListener('click', (e) => {
                 e.preventDefault();
-                var $target = document.querySelector("" + $scrollElm.getAttribute('href'));
+                const $target = document.querySelector(`${$scrollElm.getAttribute('href')}`);
                 if (!$target)
                     return;
                 scrollTo_1.default($target, settings.duration, settings.easing);
@@ -69,4 +57,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = linksScrollHrefAttribute;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibGlua3NTY3JvbGxIcmVmQXR0cmlidXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibGlua3NTY3JvbGxIcmVmQXR0cmlidXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsK0VBQXlEO0lBQ3pELDZEQUF1QztJQUN2QyxzRkFBZ0U7SUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BMEJHO0lBQ0gsU0FBUyx3QkFBd0IsQ0FBQyxRQUFhO1FBQWIseUJBQUEsRUFBQSxhQUFhO1FBQzdDLFFBQVEsY0FDTixRQUFRLEVBQUUsR0FBRyxFQUNiLE1BQU0sRUFBRSx3QkFBYyxJQUNuQixRQUFRLENBQ1osQ0FBQztRQUNGLDJCQUFpQixDQUFDLHFCQUFxQixFQUFFLFVBQUMsVUFBVTtZQUNsRCxVQUFVLENBQUMsZ0JBQWdCLENBQUMsT0FBTyxFQUFFLFVBQUMsQ0FBQztnQkFDckMsQ0FBQyxDQUFDLGNBQWMsRUFBRSxDQUFDO2dCQUNuQixJQUFNLE9BQU8sR0FBRyxRQUFRLENBQUMsYUFBYSxDQUNwQyxLQUFHLFVBQVUsQ0FBQyxZQUFZLENBQUMsTUFBTSxDQUFHLENBQ3JDLENBQUM7Z0JBQ0YsSUFBSSxDQUFDLE9BQU87b0JBQUUsT0FBTztnQkFDckIsa0JBQVEsQ0FBQyxPQUFPLEVBQUUsUUFBUSxDQUFDLFFBQVEsRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUM7WUFDeEQsQ0FBQyxDQUFDLENBQUM7UUFDTCxDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSx3QkFBd0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibGlua3NTY3JvbGxIcmVmQXR0cmlidXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibGlua3NTY3JvbGxIcmVmQXR0cmlidXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLGlGQUF5RDtJQUN6RCwrREFBdUM7SUFDdkMsd0ZBQWdFO0lBRWhFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTBCRztJQUNILFNBQVMsd0JBQXdCLENBQUMsUUFBUSxHQUFHLEVBQUU7UUFDN0MsUUFBUSxtQkFDTixRQUFRLEVBQUUsR0FBRyxFQUNiLE1BQU0sRUFBRSx3QkFBYyxJQUNuQixRQUFRLENBQ1osQ0FBQztRQUNGLDJCQUFpQixDQUFDLHFCQUFxQixFQUFFLENBQUMsVUFBVSxFQUFFLEVBQUU7WUFDdEQsVUFBVSxDQUFDLGdCQUFnQixDQUFDLE9BQU8sRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUN6QyxDQUFDLENBQUMsY0FBYyxFQUFFLENBQUM7Z0JBQ25CLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQ3BDLEdBQUcsVUFBVSxDQUFDLFlBQVksQ0FBQyxNQUFNLENBQUMsRUFBRSxDQUNyQyxDQUFDO2dCQUNGLElBQUksQ0FBQyxPQUFPO29CQUFFLE9BQU87Z0JBQ3JCLGtCQUFRLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxRQUFRLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBQ3hELENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDO0lBQ0Qsa0JBQWUsd0JBQXdCLENBQUMifQ==

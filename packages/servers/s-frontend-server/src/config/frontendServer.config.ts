@@ -86,32 +86,32 @@ export default {
   logLevel: 'info',
 
   middlewares: {
-    resolveExtensionFreePath: {
-      path: `${__dirname}/../node/middleware/resolveExtensionFreePath`,
-      settings: {
-        exclude: ['/docMap'],
-        rootDir: '[config.frontendServer.rootDir]',
-        extensions: [
-          'js',
-          'jsx',
-          'json',
-          'ts',
-          'tsx',
-          'mjs',
-          'cjs',
-          'css',
-          'scss',
-          'sass',
-          'jpg',
-          'jpeg',
-          'png',
-          'gif',
-          'svg',
-          'html',
-          'htm'
-        ]
-      }
-    },
+    // resolveExtensionFreePath: {
+    //   path: `${__dirname}/../node/middleware/resolveExtensionFreePath`,
+    //   settings: {
+    //     exclude: ['/docMap'],
+    //     rootDir: '[config.frontendServer.rootDir]',
+    //     extensions: [
+    //       'js',
+    //       'jsx',
+    //       'json',
+    //       'ts',
+    //       'tsx',
+    //       'mjs',
+    //       'cjs',
+    //       'css',
+    //       'scss',
+    //       'sass',
+    //       'jpg',
+    //       'jpeg',
+    //       'png',
+    //       'gif',
+    //       'svg',
+    //       'html',
+    //       'htm'
+    //     ]
+    //   }
+    // },
     frontspec: {
       path: `${__dirname}/../node/middleware/frontspecMiddleware`,
       settings: {}

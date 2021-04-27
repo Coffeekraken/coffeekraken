@@ -13,10 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
-    var imageLoaded_1 = __importDefault(require("./imageLoaded"));
-    var unquote_1 = __importDefault(require("../../shared/string/unquote"));
-    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    const getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
+    const imageLoaded_1 = __importDefault(require("./imageLoaded"));
+    const unquote_1 = __importDefault(require("../../shared/string/unquote"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    console.log('ff');
     /**
      * @name        backgroundImageLoaded
      * @namespace            js.dom
@@ -42,29 +43,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function backgroundImageLoaded($elm) {
-        var isCancelled = false, $img;
-        var promise = new s_promise_1.default(function (_a) {
-            var resolve = _a.resolve, reject = _a.reject, emit = _a.emit;
+        let isCancelled = false, $img;
+        const promise = new s_promise_1.default(({ resolve, reject, emit }) => {
             // get the background-image property from computed style
-            var backgroundImage = getStyleProperty_1.default($elm, 'background-image');
-            var matches = backgroundImage.match(/.*url\((.*)\).*/);
+            const backgroundImage = getStyleProperty_1.default($elm, 'background-image');
+            const matches = backgroundImage.match(/.*url\((.*)\).*/);
             if (!matches || !matches[1]) {
                 reject('No background image url found...');
                 return;
             }
             // process url
-            var url = unquote_1.default(matches[1]);
+            const url = unquote_1.default(matches[1]);
             // make a new image with the image set
             $img = new Image();
             $img.src = url;
             // return the promise of image loaded
-            imageLoaded_1.default($img).then(function () {
+            imageLoaded_1.default($img).then(() => {
                 if (!isCancelled)
                     resolve($elm);
             });
         }, {
             id: 'backgroundImageLoaded'
-        }).on('finally', function () {
+        }).on('finally', () => {
             isCancelled = true;
         });
         promise.__$img = $img;
@@ -72,4 +72,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = backgroundImageLoaded;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFja2dyb3VuZEltYWdlTG9hZGVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmFja2dyb3VuZEltYWdlTG9hZGVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLHdFQUFvRDtJQUNwRCw4REFBMEM7SUFDMUMsd0VBQW9EO0lBQ3BELHNFQUFpRDtJQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F1Qkc7SUFDSCxTQUFTLHFCQUFxQixDQUFDLElBQUk7UUFDakMsSUFBSSxXQUFXLEdBQUcsS0FBSyxFQUNyQixJQUFJLENBQUM7UUFDUCxJQUFNLE9BQU8sR0FBRyxJQUFJLG1CQUFVLENBQzVCLFVBQUMsRUFBeUI7Z0JBQXZCLE9BQU8sYUFBQSxFQUFFLE1BQU0sWUFBQSxFQUFFLElBQUksVUFBQTtZQUN0Qix3REFBd0Q7WUFDeEQsSUFBTSxlQUFlLEdBQUcsMEJBQWtCLENBQUMsSUFBSSxFQUFFLGtCQUFrQixDQUFDLENBQUM7WUFDckUsSUFBTSxPQUFPLEdBQUcsZUFBZSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO1lBQ3pELElBQUksQ0FBQyxPQUFPLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7Z0JBQzNCLE1BQU0sQ0FBQyxrQ0FBa0MsQ0FBQyxDQUFDO2dCQUMzQyxPQUFPO2FBQ1I7WUFDRCxjQUFjO1lBQ2QsSUFBTSxHQUFHLEdBQUcsaUJBQVMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNsQyxzQ0FBc0M7WUFDdEMsSUFBSSxHQUFHLElBQUksS0FBSyxFQUFFLENBQUM7WUFDbkIsSUFBSSxDQUFDLEdBQUcsR0FBRyxHQUFHLENBQUM7WUFDZixxQ0FBcUM7WUFDckMscUJBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUM7Z0JBQ3ZCLElBQUksQ0FBQyxXQUFXO29CQUFFLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsQyxDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSx1QkFBdUI7U0FDNUIsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7WUFDZCxXQUFXLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsT0FBTyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUM7UUFDdEIsT0FBTyxPQUFPLENBQUM7SUFDakIsQ0FBQztJQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFja2dyb3VuZEltYWdlTG9hZGVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmFja2dyb3VuZEltYWdlTG9hZGVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDBFQUFvRDtJQUNwRCxnRUFBMEM7SUFDMUMsMEVBQW9EO0lBQ3BELHdFQUFpRDtJQUNqRCxPQUFPLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXVCRztJQUNILFNBQVMscUJBQXFCLENBQUMsSUFBSTtRQUNqQyxJQUFJLFdBQVcsR0FBRyxLQUFLLEVBQ3JCLElBQUksQ0FBQztRQUNQLE1BQU0sT0FBTyxHQUFHLElBQUksbUJBQVUsQ0FDNUIsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtZQUM1Qix3REFBd0Q7WUFDeEQsTUFBTSxlQUFlLEdBQUcsMEJBQWtCLENBQUMsSUFBSSxFQUFFLGtCQUFrQixDQUFDLENBQUM7WUFDckUsTUFBTSxPQUFPLEdBQUcsZUFBZSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO1lBQ3pELElBQUksQ0FBQyxPQUFPLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7Z0JBQzNCLE1BQU0sQ0FBQyxrQ0FBa0MsQ0FBQyxDQUFDO2dCQUMzQyxPQUFPO2FBQ1I7WUFDRCxjQUFjO1lBQ2QsTUFBTSxHQUFHLEdBQUcsaUJBQVMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNsQyxzQ0FBc0M7WUFDdEMsSUFBSSxHQUFHLElBQUksS0FBSyxFQUFFLENBQUM7WUFDbkIsSUFBSSxDQUFDLEdBQUcsR0FBRyxHQUFHLENBQUM7WUFDZixxQ0FBcUM7WUFDckMscUJBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFO2dCQUM1QixJQUFJLENBQUMsV0FBVztvQkFBRSxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDbEMsQ0FBQyxDQUFDLENBQUM7UUFDTCxDQUFDLEVBQ0Q7WUFDRSxFQUFFLEVBQUUsdUJBQXVCO1NBQzVCLENBQ0YsQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLEdBQUcsRUFBRTtZQUNuQixXQUFXLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsT0FBTyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUM7UUFDdEIsT0FBTyxPQUFPLENBQUM7SUFDakIsQ0FBQztJQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=

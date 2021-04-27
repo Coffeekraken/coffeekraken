@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var uncamelize_1 = __importDefault(require("../../shared/string/uncamelize"));
-    var autoCast_1 = __importDefault(require("../../shared/string/autoCast"));
-    var toString_1 = __importDefault(require("../../shared/string/toString"));
+    const uncamelize_1 = __importDefault(require("../../shared/string/uncamelize"));
+    const autoCast_1 = __importDefault(require("../../shared/string/autoCast"));
+    const toString_1 = __importDefault(require("../../shared/string/toString"));
     /**
      * @name      dataset
      * @namespace            js.dom
@@ -40,18 +40,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since         1.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function dataset($elm, key, value) {
-        if (value === void 0) { value = null; }
+    function dataset($elm, key, value = null) {
         if (!$elm.getAttribute)
             return;
         if (!value) {
-            var v = $elm.dataset[key] || $elm.getAttribute('data-' + uncamelize_1.default(key));
+            const v = $elm.dataset[key] || $elm.getAttribute('data-' + uncamelize_1.default(key));
             return autoCast_1.default(v);
         }
         else {
             // try to set the value
-            var dataset_1 = $elm.dataset;
-            if (dataset_1) {
+            const dataset = $elm.dataset;
+            if (dataset) {
                 $elm.dataset[key] = toString_1.default(value);
             }
             else {
@@ -65,4 +64,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = dataset;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0YXNldC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRhdGFzZXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsOEVBQTBEO0lBQzFELDBFQUFzRDtJQUN0RCwwRUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BdUJHO0lBQ0gsU0FBUyxPQUFPLENBQUMsSUFBSSxFQUFFLEdBQUcsRUFBRSxLQUFZO1FBQVosc0JBQUEsRUFBQSxZQUFZO1FBQ3RDLElBQUksQ0FBQyxJQUFJLENBQUMsWUFBWTtZQUFFLE9BQU87UUFDL0IsSUFBSSxDQUFDLEtBQUssRUFBRTtZQUNWLElBQU0sQ0FBQyxHQUNMLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLElBQUksSUFBSSxDQUFDLFlBQVksQ0FBQyxPQUFPLEdBQUcsb0JBQVksQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDO1lBQ3RFLE9BQU8sa0JBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUN0QjthQUFNO1lBQ0wsdUJBQXVCO1lBQ3ZCLElBQU0sU0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUM7WUFDN0IsSUFBSSxTQUFPLEVBQUU7Z0JBQ1gsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxrQkFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDO2FBQ3ZDO2lCQUFNO2dCQUNMLG9DQUFvQztnQkFDcEMsK0JBQStCO2dCQUMvQixJQUFJLENBQUMsWUFBWSxDQUFDLE9BQU8sR0FBRyxvQkFBWSxDQUFDLEdBQUcsQ0FBQyxFQUFFLGtCQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQzthQUNuRTtZQUNELHFCQUFxQjtZQUNyQixPQUFPLElBQUksQ0FBQztTQUNiO0lBQ0gsQ0FBQztJQUNELGtCQUFlLE9BQU8sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0YXNldC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRhdGFzZXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsZ0ZBQTBEO0lBQzFELDRFQUFzRDtJQUN0RCw0RUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BdUJHO0lBQ0gsU0FBUyxPQUFPLENBQUMsSUFBSSxFQUFFLEdBQUcsRUFBRSxLQUFLLEdBQUcsSUFBSTtRQUN0QyxJQUFJLENBQUMsSUFBSSxDQUFDLFlBQVk7WUFBRSxPQUFPO1FBQy9CLElBQUksQ0FBQyxLQUFLLEVBQUU7WUFDVixNQUFNLENBQUMsR0FDTCxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLElBQUksQ0FBQyxZQUFZLENBQUMsT0FBTyxHQUFHLG9CQUFZLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztZQUN0RSxPQUFPLGtCQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7U0FDdEI7YUFBTTtZQUNMLHVCQUF1QjtZQUN2QixNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDO1lBQzdCLElBQUksT0FBTyxFQUFFO2dCQUNYLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsa0JBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQzthQUN2QztpQkFBTTtnQkFDTCxvQ0FBb0M7Z0JBQ3BDLCtCQUErQjtnQkFDL0IsSUFBSSxDQUFDLFlBQVksQ0FBQyxPQUFPLEdBQUcsb0JBQVksQ0FBQyxHQUFHLENBQUMsRUFBRSxrQkFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7YUFDbkU7WUFDRCxxQkFBcUI7WUFDckIsT0FBTyxJQUFJLENBQUM7U0FDYjtJQUNILENBQUM7SUFDRCxrQkFBZSxPQUFPLENBQUMifQ==

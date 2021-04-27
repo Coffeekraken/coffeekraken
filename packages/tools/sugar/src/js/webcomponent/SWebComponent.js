@@ -1,30 +1,4 @@
 // @ts-nocheck
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -33,38 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -80,17 +22,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
-    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
-    var parse_1 = __importDefault(require("../../shared/string/parse"));
-    var toString_1 = __importDefault(require("../../shared/string/toString"));
-    var when_1 = __importDefault(require("../dom/when"));
-    var validateValue_1 = __importDefault(require("../validation/value/validateValue"));
-    var uniqid_1 = __importDefault(require("../../shared/string/uniqid"));
-    var uncamelize_1 = __importDefault(require("../../shared/string/uncamelize"));
-    var domready_1 = __importDefault(require("../dom/domready"));
-    var getTagNameFromHtmlClass_1 = __importDefault(require("../html/getTagNameFromHtmlClass"));
-    var SMediaQuery_1 = __importDefault(require("../responsive/SMediaQuery"));
+    const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    const parse_1 = __importDefault(require("../../shared/string/parse"));
+    const toString_1 = __importDefault(require("../../shared/string/toString"));
+    const when_1 = __importDefault(require("../dom/when"));
+    const validateValue_1 = __importDefault(require("../validation/value/validateValue"));
+    const uniqid_1 = __importDefault(require("../../shared/string/uniqid"));
+    const uncamelize_1 = __importDefault(require("../../shared/string/uncamelize"));
+    const domready_1 = __importDefault(require("../dom/domready"));
+    const getTagNameFromHtmlClass_1 = __importDefault(require("../html/getTagNameFromHtmlClass"));
+    const SMediaQuery_1 = __importDefault(require("../responsive/SMediaQuery"));
     /**
      * @name              SWebComponent
      * @namespace            js.webcomponent
@@ -140,19 +82,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var _sWebComponentPromise = new s_promise_1.default({
+    const _sWebComponentPromise = new s_promise_1.default({
         id: 'SWebComponentPromise'
     });
-    var _sWebComponentStack = {};
-    function SWebComponentGenerator(extendsSettings) {
+    const _sWebComponentStack = {};
+    function SWebComponentGenerator(extendsSettings = {}) {
         var _a;
-        if (extendsSettings === void 0) { extendsSettings = {}; }
         extendsSettings = deepMerge_1.default({
             extends: HTMLElement,
             name: null
         }, extendsSettings);
-        return _a = /** @class */ (function (_super) {
-                __extends(SWebComponent, _super);
+        return _a = class SWebComponent extends extendsSettings.extends {
                 /**
                  * @name          constructor
                  * @type          Function
@@ -162,13 +102,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                function SWebComponent(settings) {
-                    if (settings === void 0) { settings = {}; }
-                    var _this = 
+                constructor(settings = {}) {
                     // init base html element
-                    _super.call(this) || this;
-                    _this._settedAttributesStack = {};
-                    _this._isSWebComponent = true;
+                    super();
+                    this._settedAttributesStack = {};
+                    this._isSWebComponent = true;
                     /**
                      * @name          promise
                      * @type          SPromise
@@ -179,7 +117,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                      *
                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    _this.promise = null;
+                    this.promise = null;
                     /**
                      * @name          _props
                      * @type          Object
@@ -189,8 +127,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                      *
                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    _this._props = {};
-                    _this.props = {};
+                    this._props = {};
+                    this.props = {};
                     /**
                      * @name          _settings
                      * @type          Object
@@ -200,7 +138,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                      *
                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    _this._settings = {};
+                    this._settings = {};
                     /**
                      * @name          _metas
                      * @type          Object
@@ -218,7 +156,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                      * @since         2.0.0
                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    _this._metas = {};
+                    this._metas = {};
                     /**
                      * @name        _contexts
                      * @type        Array
@@ -229,86 +167,81 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                      * @since       2.0.0
                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    _this._contexts = [_this];
+                    this._contexts = [this];
                     // make sure the component has a componentName static prop
-                    if (!_this.constructor.componentName)
-                        throw "Your MUST define a static \"componentName\" camelcase property like \"SFiltrableInput\" for your component to work properly...";
+                    if (!this.constructor.componentName)
+                        throw `Your MUST define a static "componentName" camelcase property like "SFiltrableInput" for your component to work properly...`;
                     // get component metas
-                    _this._metas = _this.constructor.getComponentMetas(_this.constructor.componentName);
+                    this._metas = this.constructor.getComponentMetas(this.constructor.componentName);
                     // save the settings
-                    _this._settings = deepMerge_1.default({
-                        id: _this.getAttribute('id') || uniqid_1.default(),
+                    this._settings = deepMerge_1.default({
+                        id: this.getAttribute('id') || uniqid_1.default(),
                         props: {}
-                    }, _this._metas.settings || {}, settings);
+                    }, this._metas.settings || {}, settings);
                     // add the "this" into the contexts stack
-                    _this.registerContext(_this);
+                    this.registerContext(this);
                     // create the SPromise instance
-                    _this.promise = new s_promise_1.default({
-                        id: _this._settings.id
+                    this.promise = new s_promise_1.default({
+                        id: this._settings.id
                     });
                     // init props proxy
-                    _this._initPropsProxy();
-                    _this.on('ready', function (e) {
-                        if (e.target === _this)
+                    this._initPropsProxy();
+                    this.on('ready', (e) => {
+                        if (e.target === this)
                             return;
                         if (e.target._isSWebComponent) {
                             e.stopImmediatePropagation();
-                            e.target.registerContext(_this);
+                            e.target.registerContext(this);
                         }
                     });
-                    _this.on('mounted', function () {
+                    this.on('mounted', () => {
                         // dispatch a ready event
-                        if (!_this.lit) {
-                            _this.update();
+                        if (!this.lit) {
+                            this.update();
                             // the Lit HTML class dispatch the ready event after having rendering the template the first time
-                            _this.dispatch('ready', _this, {
+                            this.dispatch('ready', this, {
                                 bubbles: true
                             });
                         }
                     });
-                    domready_1.default(function () {
+                    domready_1.default(() => {
                         // get the inital content
                         // this._$initialContent =
                         // handle props
-                        _this._initDomProps();
-                        _this._mediaQuery = new SMediaQuery_1.default('*');
-                        _this._mediaQuery.on('match', function (media) {
-                            Object.keys(_this.constructor.props).forEach(function (prop) {
-                                if (!_this._props[prop].responsive ||
-                                    _this._props[prop].responsiveValues[media.name] !== undefined)
+                        this._initDomProps();
+                        this._mediaQuery = new SMediaQuery_1.default('*');
+                        this._mediaQuery.on('match', (media) => {
+                            Object.keys(this.constructor.props).forEach((prop) => {
+                                if (!this._props[prop].responsive ||
+                                    this._props[prop].responsiveValues[media.name] !== undefined)
                                     return;
-                                if (_this.hasAttribute(uncamelize_1.default(prop) + "-" + media.name)) {
-                                    var value = parse_1.default(_this.getAttribute(uncamelize_1.default(prop) + "-" + media.name));
-                                    _this.setProp(prop, value, media.name);
+                                if (this.hasAttribute(`${uncamelize_1.default(prop)}-${media.name}`)) {
+                                    const value = parse_1.default(this.getAttribute(`${uncamelize_1.default(prop)}-${media.name}`));
+                                    this.setProp(prop, value, media.name);
                                 }
                             });
                         });
                         // apply the $node class
-                        var currentClassName = _this.getAttribute('class') || '';
-                        _this.setAttribute('class', currentClassName + " " + _this.selector("node"));
+                        const currentClassName = this.getAttribute('class') || '';
+                        this.setAttribute('class', `${currentClassName} ${this.selector(`node`)}`);
                         // launch the mounting process
-                        _this._mount();
+                        this._mount();
                     });
-                    return _this;
                 }
-                Object.defineProperty(SWebComponent, "observedAttributes", {
-                    /**
-                     * @name        observedAttributes
-                     * @type        Function
-                     * @get
-                     * @static
-                     *
-                     * This medhod simply return the list of props that will be
-                     * observed by the customElements under the hood system.
-                     *
-                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    get: function () {
-                        return Object.keys(this.props).map(function (name) { return uncamelize_1.default(name); });
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
+                /**
+                 * @name        observedAttributes
+                 * @type        Function
+                 * @get
+                 * @static
+                 *
+                 * This medhod simply return the list of props that will be
+                 * observed by the customElements under the hood system.
+                 *
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                static get observedAttributes() {
+                    return Object.keys(this.props).map((name) => uncamelize_1.default(name));
+                }
                 /**
                  * @name					getComponentMetas
                  * @type 					Function
@@ -326,9 +259,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since 					2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.getComponentMetas = function (name) {
+                static getComponentMetas(name) {
                     return _sWebComponentStack[uncamelize_1.default(name)] || {};
-                };
+                }
                 /**
                  * @name					define
                  * @type 					Function
@@ -343,10 +276,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since 					2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.define = function (settings) {
-                    if (settings === void 0) { settings = {}; }
-                    var name = (settings.name || this.componentName || this.name).replace('WebComponent', '');
-                    var uncamelizedName = uncamelize_1.default(name);
+                static define(settings = {}) {
+                    const name = (settings.name || this.componentName || this.name).replace('WebComponent', '');
+                    const uncamelizedName = uncamelize_1.default(name);
                     // avoid multi define of the same component
                     if (customElements.get(uncamelizedName))
                         return;
@@ -354,13 +286,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     if (_sWebComponentStack[uncamelizedName])
                         return;
                     _sWebComponentStack[uncamelizedName] = {
-                        name: name,
+                        name,
                         dashName: uncamelizedName,
                         class: this,
                         extends: extendsSettings.extends,
-                        settings: settings
+                        settings
                     };
-                    var defineSettings = {};
+                    const defineSettings = {};
                     if (extendsSettings.extends !== HTMLElement)
                         defineSettings.extends = getTagNameFromHtmlClass_1.default(extendsSettings.extends);
                     if (window.customElements) {
@@ -381,43 +313,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         }
                     }
                     else {
-                        throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
+                        throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
                     }
-                };
-                Object.defineProperty(SWebComponent.prototype, "settings", {
-                    /**
-                     * @name          settings
-                     * @type          Function
-                     * @get
-                     *
-                     * Get the settings object
-                     *
-                     * @since         2.0.0
-                     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    get: function () {
-                        return this._settings;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(SWebComponent.prototype, "$root", {
-                    /**
-                     * @name          $root
-                     * @type          Function
-                     * @get
-                     *
-                     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
-                     *
-                     * @since         2.0.0
-                     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    get: function () {
-                        return this;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
+                }
+                /**
+                 * @name          settings
+                 * @type          Function
+                 * @get
+                 *
+                 * Get the settings object
+                 *
+                 * @since         2.0.0
+                 * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                get settings() {
+                    return this._settings;
+                }
+                /**
+                 * @name          $root
+                 * @type          Function
+                 * @get
+                 *
+                 * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
+                 *
+                 * @since         2.0.0
+                 * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                get $root() {
+                    return this;
+                }
                 /**
                  * @name        update
                  * @type        Function
@@ -427,12 +351,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.update = function () {
+                update() {
                     // refresh references
                     this._refreshIdReferences();
                     // physical props
                     this._handlePhysicalProps();
-                };
+                }
                 /**
                  * @name					$
                  * @type 					Function
@@ -445,15 +369,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since 					2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.$ = function (path) {
-                    var tries = [this.selector(path), path];
-                    for (var i = 0; i < tries.length; i++) {
-                        var $tryRes = this.$root.querySelector(tries[i]);
+                $(path) {
+                    const tries = [this.selector(path), path];
+                    for (let i = 0; i < tries.length; i++) {
+                        const $tryRes = this.$root.querySelector(tries[i]);
                         if ($tryRes)
                             return $tryRes;
                     }
                     return null;
-                };
+                }
                 /**
                  * @name					$$
                  * @type 					Function
@@ -466,15 +390,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since 					2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.$$ = function (path) {
-                    var tries = [this.selector(path), path];
-                    for (var i = 0; i < tries.length; i++) {
-                        var $tryRes = this.$root.querySelectorAll(tries[i]);
+                $$(path) {
+                    const tries = [this.selector(path), path];
+                    for (let i = 0; i < tries.length; i++) {
+                        const $tryRes = this.$root.querySelectorAll(tries[i]);
                         if ($tryRes)
                             return $tryRes;
                     }
                     return null;
-                };
+                }
                 /**
                  * @name          registerContext
                  * @type          Function
@@ -488,11 +412,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.registerContext = function (context) {
+                registerContext(context) {
                     if (this._contexts.indexOf(context) !== -1)
                         return;
                     this._contexts.push(context);
-                };
+                }
                 /**
                  * @name          setProp
                  * @type          Function
@@ -507,17 +431,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.setProp = function (prop, value, media) {
-                    if (media === void 0) { media = null; }
+                setProp(prop, value, media = null) {
                     if (!media)
                         return (this.props[prop] = value);
                     if (!this._props[prop].responsive) {
-                        throw new Error("You try to set the responsive property \"" + prop + "\" for the media \"" + media + "\" but this property is not defined as \"responsive\"...");
+                        throw new Error(`You try to set the responsive property "${prop}" for the media "${media}" but this property is not defined as "responsive"...`);
                     }
                     this._props[prop].responsiveValues[media] = value;
                     // trigger a "prop" event
                     this._emitPropsEvents(prop);
-                };
+                }
                 /**
                  * @name          getProp
                  * @type          Function
@@ -531,15 +454,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.getProp = function (prop, media) {
-                    if (media === void 0) { media = null; }
+                getProp(prop, media = null) {
                     if (!media)
                         return this._props[prop].value;
                     if (!this._props[prop].responsive) {
-                        throw new Error("You try to get the responsive property \"" + prop + "\" for the media \"" + media + "\" but this property is not defined as \"responsive\"...");
+                        throw new Error(`You try to get the responsive property "${prop}" for the media "${media}" but this property is not defined as "responsive"...`);
                     }
                     return this._props[prop].responsiveValues[media];
-                };
+                }
                 /**
                  * @name          setSettings
                  * @type          Function
@@ -553,15 +475,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since     2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.setSettings = function (settings, reactive) {
-                    if (settings === void 0) { settings = {}; }
-                    if (reactive === void 0) { reactive = true; }
+                setSettings(settings = {}, reactive = true) {
                     // set the new settings
                     this._settings = deepMerge_1.default(this._settings, settings);
                     // check if is reactive
                     if (reactive)
                         this.update();
-                };
+                }
                 /**
                  * @name          addClass
                  * @type          Function
@@ -577,23 +497,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.addClass = function (cls, $elm) {
-                    var _this = this;
-                    if ($elm === void 0) { $elm = this; }
+                addClass(cls, $elm = this) {
                     // split the cls
-                    var clsArray = cls.split(' ');
-                    clsArray.forEach(function (className) {
+                    const clsArray = cls.split(' ');
+                    clsArray.forEach((className) => {
                         // build the selector
-                        var selector = _this.selector(className);
+                        const selector = this.selector(className);
                         // split the selector
-                        selector.split(' ').forEach(function (sel) {
+                        selector.split(' ').forEach((sel) => {
                             // add the class to the element
                             $elm.classList.add(sel);
                         });
                     });
                     // maintain chainability
                     return this;
-                };
+                }
                 /**
                  * @name          removeClass
                  * @type          Function
@@ -609,75 +527,67 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.removeClass = function (cls, $elm) {
-                    var _this = this;
-                    if ($elm === void 0) { $elm = this; }
+                removeClass(cls, $elm = this) {
                     // split the cls
-                    var clsArray = cls.split(' ');
-                    clsArray.forEach(function (className) {
+                    const clsArray = cls.split(' ');
+                    clsArray.forEach((className) => {
                         // build the selector
-                        var selector = _this.selector(className);
+                        const selector = this.selector(className);
                         // split the selector
-                        selector.split(' ').forEach(function (sel) {
+                        selector.split(' ').forEach((sel) => {
                             // add the class to the element
                             $elm.classList.remove(sel);
                         });
                     });
                     // maintain chainability
                     return this;
-                };
-                Object.defineProperty(SWebComponent.prototype, "metas", {
-                    /**
-                     * @name          metas
-                     * @type          Object
-                     * @get
-                     *
-                     * This property store all the component metas informations like the name,
-                     * the type, what it is extending, etc...
-                     *
-                     * @since       2.0.0
-                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    get: function () {
-                        return __assign({ instance: this, $node: this }, this._metas);
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                SWebComponent.prototype._refreshIdReferences = function () {
-                    var _this = this;
-                    var $refs = this.$root.querySelectorAll('[id]');
-                    Array.from($refs).forEach(function ($item) {
-                        if (_this["$" + $item.id] === $item)
+                }
+                /**
+                 * @name          metas
+                 * @type          Object
+                 * @get
+                 *
+                 * This property store all the component metas informations like the name,
+                 * the type, what it is extending, etc...
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                get metas() {
+                    return Object.assign({ instance: this, $node: this }, this._metas);
+                }
+                _refreshIdReferences() {
+                    const $refs = this.$root.querySelectorAll('[id]');
+                    Array.from($refs).forEach(($item) => {
+                        if (this[`$${$item.id}`] === $item)
                             return;
-                        _this["$" + $item.id] = $item;
+                        this[`$${$item.id}`] = $item;
                     });
-                };
-                SWebComponent.prototype._initPropsProxy = function () {
-                    var _this = this;
-                    var _loop_1 = function (prop) {
-                        var originalProp;
-                        if (this_1[prop] !== undefined)
-                            originalProp = this_1[prop];
-                        Object.defineProperty(this_1._props, prop, {
+                }
+                _initPropsProxy() {
+                    for (const prop in this.constructor.props) {
+                        let originalProp;
+                        if (this[prop] !== undefined)
+                            originalProp = this[prop];
+                        Object.defineProperty(this._props, prop, {
                             enumerable: false,
                             writable: true,
                             configurable: false,
-                            value: __assign(__assign({}, this_1.constructor.props[prop]), { previousValue: undefined, value: undefined, responsiveValues: {} })
+                            value: Object.assign(Object.assign({}, this.constructor.props[prop]), { previousValue: undefined, value: undefined, responsiveValues: {} })
                         });
-                        Object.defineProperty(this_1.props, prop, {
+                        Object.defineProperty(this.props, prop, {
                             enumerable: true,
                             configurable: false,
-                            get: function () {
-                                var returnValue = _this._props[prop].value !== undefined
-                                    ? _this._props[prop].value
-                                    : _this._settings.props[prop] !== undefined
-                                        ? _this._settings.props[prop]
-                                        : _this.constructor.props[prop].default;
-                                if (_this._props[prop].responsive &&
-                                    _this._props[prop].responsiveValues) {
-                                    if (_this._props[prop].responsiveValues[SMediaQuery_1.default.getActiveMedia()] !== undefined) {
-                                        returnValue = _this._props[prop].responsiveValues[SMediaQuery_1.default.getActiveMedia()];
+                            get: () => {
+                                let returnValue = this._props[prop].value !== undefined
+                                    ? this._props[prop].value
+                                    : this._settings.props[prop] !== undefined
+                                        ? this._settings.props[prop]
+                                        : this.constructor.props[prop].default;
+                                if (this._props[prop].responsive &&
+                                    this._props[prop].responsiveValues) {
+                                    if (this._props[prop].responsiveValues[SMediaQuery_1.default.getActiveMedia()] !== undefined) {
+                                        returnValue = this._props[prop].responsiveValues[SMediaQuery_1.default.getActiveMedia()];
                                     }
                                 }
                                 // js expression or references
@@ -685,8 +595,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     if (typeof returnValue !== 'string') {
                                         return returnValue;
                                     }
-                                    for (var i = 0; i < _this._contexts.length; i++) {
-                                        var context = _this._contexts[i];
+                                    for (let i = 0; i < this._contexts.length; i++) {
+                                        const context = this._contexts[i];
                                         // check if is a reference in the current component
                                         if (context[returnValue] !== undefined)
                                             return context[returnValue];
@@ -694,30 +604,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                 }
                                 return returnValue;
                             },
-                            set: function (value) {
-                                _this._props[prop].previousValue = _this._props[prop].value;
-                                _this._props[prop].value = value;
+                            set: (value) => {
+                                this._props[prop].previousValue = this._props[prop].value;
+                                this._props[prop].value = value;
                                 if (originalProp) {
-                                    Object.getOwnPropertyDescriptor(_this.prototype, prop).set.call(_this, value);
+                                    Object.getOwnPropertyDescriptor(this.prototype, prop).set.call(this, value);
                                 }
                                 // trigger a "prop" event
-                                _this._emitPropsEvents(prop);
+                                this._emitPropsEvents(prop);
                             }
                         });
-                        this_1.promise.on("props." + prop + ".*", function (update) {
+                        this.promise.on(`props.${prop}.*`, (update) => {
                             // console.log('up', prop, update);
-                            _this.update();
+                            this.update();
                         });
-                    };
-                    var this_1 = this;
-                    for (var prop in this.constructor.props) {
-                        _loop_1(prop);
                     }
-                };
-                SWebComponent.prototype._initDomProps = function () {
+                }
+                _initDomProps() {
                     // handle props
-                    for (var prop in this.constructor.props) {
-                        var attr = this.getAttribute(uncamelize_1.default(prop));
+                    for (const prop in this.constructor.props) {
+                        let attr = this.getAttribute(uncamelize_1.default(prop));
                         if (!attr && this.hasAttribute(uncamelize_1.default(prop))) {
                             attr = true;
                         }
@@ -731,7 +637,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     ? this._settings.props[prop]
                                     : this.constructor.props[prop].default;
                     }
-                };
+                }
                 /**
                  * @name          _mount
                  * @type          Function
@@ -743,30 +649,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype._mount = function () {
-                    return __awaiter(this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    // dispatch mounting event
-                                    this.dispatch('mounting', this);
-                                    // wait until the component match the mountDependencies and mountWhen status
-                                    return [4 /*yield*/, this._mountDependencies()];
-                                case 1:
-                                    // wait until the component match the mountDependencies and mountWhen status
-                                    _a.sent();
-                                    // check props definition
-                                    this._checkPropsDefinition();
-                                    // update
-                                    this.update();
-                                    // dispatch mounted event
-                                    this._isMounted = true;
-                                    this.dispatch('mounted', this);
-                                    return [2 /*return*/];
-                            }
-                        });
+                _mount() {
+                    return __awaiter(this, void 0, void 0, function* () {
+                        // dispatch mounting event
+                        this.dispatch('mounting', this);
+                        // wait until the component match the mountDependencies and mountWhen status
+                        yield this._mountDependencies();
+                        // check props definition
+                        this._checkPropsDefinition();
+                        // update
+                        this.update();
+                        // dispatch mounted event
+                        this._isMounted = true;
+                        this.dispatch('mounted', this);
                     });
-                };
+                }
                 /**
                  * @name          on
                  * @type          Function
@@ -788,8 +685,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.on = function (event, callback) {
-                    this.addEventListener(event, function (e) {
+                on(event, callback) {
+                    this.addEventListener(event, (e) => {
                         // if (
                         //   e.detail &&
                         //   e.detail.settings &&
@@ -800,7 +697,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         callback(e);
                     });
                     // return this.promise.on(event, callback);
-                };
+                }
                 /**
                  * @name          off
                  * @type          Function
@@ -814,9 +711,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.off = function (event, callback) {
+                off(event, callback) {
                     // return this.promise.off(event, callback);
-                };
+                }
                 /**
                  * @name          dispatch
                  * @type          Function
@@ -831,9 +728,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.dispatch = function (name, value, settings) {
-                    if (settings === void 0) { settings = {}; }
-                    var event = new CustomEvent(name, __assign(__assign({}, settings), { detail: value }));
+                dispatch(name, value, settings = {}) {
+                    const event = new CustomEvent(name, Object.assign(Object.assign({}, settings), { detail: value }));
                     this.dispatchEvent(event);
                     // // dispatch event through the SPromise internal instance
                     // this.promise.emit(name, value || this);
@@ -860,7 +756,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     //     }
                     //   );
                     // });
-                };
+                }
                 /**
                  * @name          _mountDependencies
                  * @type          Function
@@ -881,27 +777,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype._mountDependencies = function () {
-                    var _this = this;
-                    return new Promise(function (resolve, reject) {
-                        var promises = [];
+                _mountDependencies() {
+                    return new Promise((resolve, reject) => {
+                        const promises = [];
                         // check if we have a "mountWhen" setting specified
-                        if (_this._settings.mountWhen) {
-                            promises.push(when_1.default(_this._settings.mountWhen));
+                        if (this._settings.mountWhen) {
+                            promises.push(when_1.default(this._settings.mountWhen));
                         }
                         // check if we have one/some "mountDependencies" setting specified
-                        if (_this._settings.mountDependencies) {
-                            var depsFns = __spreadArray([], _this._settings.mountDependencies);
-                            depsFns.forEach(function (fn) {
+                        if (this._settings.mountDependencies) {
+                            const depsFns = [...this._settings.mountDependencies];
+                            depsFns.forEach((fn) => {
                                 promises.push(fn());
                             });
                         }
                         // wait until all promises are resolved
-                        Promise.all(promises).then(function () {
+                        Promise.all(promises).then(() => {
                             resolve();
                         });
                     });
-                };
+                }
                 /**
                  * @name          connectedCallback
                  * @type          Function
@@ -910,13 +805,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.connectedCallback = function () {
-                    var _this = this;
+                connectedCallback() {
                     // dispatch "event"
-                    setTimeout(function () {
-                        _this.dispatch('attach', _this);
+                    setTimeout(() => {
+                        this.dispatch('attach', this);
                     });
-                };
+                }
                 /**
                  * @name          disconnectedCallback
                  * @type          Function
@@ -925,10 +819,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.disconnectedCallback = function () {
+                disconnectedCallback() {
                     // dispatch "event"
                     this.dispatch('detach', this);
-                };
+                }
                 /**
                  * @name            attributeChangedCallback
                  * @type            Function
@@ -941,16 +835,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.attributeChangedCallback = function (attrName, oldVal, newVal) {
+                attributeChangedCallback(attrName, oldVal, newVal) {
                     if (!this._isMounted)
                         return;
                     if (this._settedAttributesStack[attrName])
                         return;
                     // const previousValue = __parse(oldVal);
-                    var newValue = parse_1.default(newVal) || false;
+                    const newValue = parse_1.default(newVal) || false;
                     // set the value into the props
                     this[attrName] = newValue;
-                };
+                }
                 /**
                  * @name            selector
                  * @type            Function
@@ -964,51 +858,49 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype.selector = function (cls) {
-                    var _this = this;
-                    if (cls === void 0) { cls = ''; }
-                    var split = cls.split(' ');
-                    var finalSelectorArray = [];
-                    split.forEach(function (part) {
-                        var hasDot = part.match(/^\./), hasHash = part.match(/^\#/);
+                selector(cls = '') {
+                    const split = cls.split(' ');
+                    const finalSelectorArray = [];
+                    split.forEach((part) => {
+                        const hasDot = part.match(/^\./), hasHash = part.match(/^\#/);
                         part = part.replace('.', '').replace('#', '');
-                        var finalClsPart;
+                        let finalClsPart;
                         if (part.match(/^(--)/))
-                            finalClsPart = "" + _this.metas.dashName + part;
+                            finalClsPart = `${this.metas.dashName}${part}`;
                         else if (part !== '')
-                            finalClsPart = _this.metas.dashName + "__" + part;
+                            finalClsPart = `${this.metas.dashName}__${part}`;
                         else
-                            finalClsPart = _this.metas.dashName;
+                            finalClsPart = this.metas.dashName;
                         if (hasDot)
-                            finalClsPart = "." + finalClsPart;
+                            finalClsPart = `.${finalClsPart}`;
                         if (hasHash)
-                            finalClsPart = "#" + finalClsPart;
+                            finalClsPart = `#${finalClsPart}`;
                         // add the base class if needed
-                        if (_this.constructor.cssName) {
-                            var baseCls = uncamelize_1.default(_this.constructor.cssName).replace('-web-component', '');
+                        if (this.constructor.cssName) {
+                            const baseCls = uncamelize_1.default(this.constructor.cssName).replace('-web-component', '');
                             if (!finalClsPart.includes(baseCls)) {
-                                var finalBaseCls = '';
+                                let finalBaseCls = '';
                                 if (part.match(/^(--)/))
-                                    finalBaseCls = "" + baseCls + part;
+                                    finalBaseCls = `${baseCls}${part}`;
                                 else if (part !== '')
-                                    finalBaseCls = baseCls + "__" + part;
+                                    finalBaseCls = `${baseCls}__${part}`;
                                 else
                                     finalBaseCls = baseCls;
                                 if (hasDot) {
-                                    finalBaseCls = "." + finalBaseCls;
+                                    finalBaseCls = `.${finalBaseCls}`;
                                 }
                                 else if (hasHash) {
-                                    finalBaseCls = "#" + finalBaseCls;
+                                    finalBaseCls = `#${finalBaseCls}`;
                                 }
                                 else {
-                                    finalClsPart += " " + finalBaseCls;
+                                    finalClsPart += ` ${finalBaseCls}`;
                                 }
                             }
                         }
                         finalSelectorArray.push(finalClsPart);
                     });
                     return finalSelectorArray.join(' ');
-                };
+                }
                 /**
                  * @name        _emitPropsEvents
                  * @type        Function
@@ -1020,10 +912,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype._emitPropsEvents = function (prop) {
+                _emitPropsEvents(prop) {
                     // trigger a "prop" event
-                    var eventObj = {
-                        prop: prop,
+                    const eventObj = {
+                        prop,
                         action: this._props[prop].previousValue !== null
                             ? this._props[prop].value !== null
                                 ? 'set'
@@ -1033,8 +925,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         previousValue: this._props[prop].previousValue,
                         media: SMediaQuery_1.default.getActiveMedia()
                     };
-                    this.promise.emit("props." + prop + "." + eventObj.action, eventObj);
-                };
+                    this.promise.emit(`props.${prop}.${eventObj.action}`, eventObj);
+                }
                 /**
                  * @name        _handlePhysicalProps
                  * @type        Function
@@ -1045,41 +937,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype._handlePhysicalProps = function () {
-                    var _this = this;
-                    var props = [];
-                    for (var _i = 0; _i < arguments.length; _i++) {
-                        props[_i] = arguments[_i];
-                    }
+                _handlePhysicalProps(...props) {
                     if (!props || props.length === 0)
                         props = Object.keys(this._props);
                     // loop on each required props
-                    props.forEach(function (prop) {
-                        if (!_this._props[prop].physical)
+                    props.forEach((prop) => {
+                        if (!this._props[prop].physical)
                             return;
-                        var value = _this._props[prop].value;
+                        const value = this._props[prop].value;
                         // if the value is false, remove the attributee from the dom node
                         if (value === undefined || value === null || value === false) {
-                            _this.removeAttribute(prop);
+                            this.removeAttribute(prop);
                             return;
                         }
-                        if (!_this.getAttribute(prop)) {
+                        if (!this.getAttribute(prop)) {
                             // set the attribute with the value
-                            _this._settedAttributesStack[prop] = true;
-                            _this.setAttribute(prop, toString_1.default(value));
-                            delete _this._settedAttributesStack[prop];
+                            this._settedAttributesStack[prop] = true;
+                            this.setAttribute(prop, toString_1.default(value));
+                            delete this._settedAttributesStack[prop];
                         }
                         else {
-                            var currentAttributeValue = _this.getAttribute(prop);
-                            var currentValueStringified = toString_1.default(value);
+                            const currentAttributeValue = this.getAttribute(prop);
+                            const currentValueStringified = toString_1.default(value);
                             if (currentAttributeValue !== currentValueStringified) {
-                                _this._settedAttributesStack[prop] = true;
-                                _this.setAttribute(prop, currentValueStringified);
-                                delete _this._settedAttributesStack[prop];
+                                this._settedAttributesStack[prop] = true;
+                                this.setAttribute(prop, currentValueStringified);
+                                delete this._settedAttributesStack[prop];
                             }
                         }
                     });
-                };
+                }
                 /**
                  * @name        _checkPropsDefinition
                  * @type        Function
@@ -1092,25 +979,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype._checkPropsDefinition = function () {
-                    var _this = this;
-                    var props = [];
-                    for (var _i = 0; _i < arguments.length; _i++) {
-                        props[_i] = arguments[_i];
-                    }
+                _checkPropsDefinition(...props) {
                     if (!props || props.length === 0)
                         props = Object.keys(this.constructor.props);
-                    props.forEach(function (prop) {
-                        var propObj = _this._props[prop];
-                        var validationResult = validateValue_1.default(propObj.value, propObj, {
-                            name: _this.constructor.name + ".props." + prop,
+                    props.forEach((prop) => {
+                        const propObj = this._props[prop];
+                        const validationResult = validateValue_1.default(propObj.value, propObj, {
+                            name: `${this.constructor.name}.props.${prop}`,
                             throw: true
                         });
                         // if (validationResult !== true) throw new Error(validationResult);
                     });
-                };
-                return SWebComponent;
-            }(extendsSettings.extends)),
+                }
+            },
             _a.customEvents = {},
             /**
              * @name					componentName
@@ -1127,4 +1008,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = SWebComponentGenerator;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1dlYkNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNXZWJDb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUdkLDRFQUF3RDtJQUN4RCxzRUFBaUQ7SUFDakQsb0VBQWdEO0lBQ2hELDBFQUFzRDtJQUN0RCxxREFBaUM7SUFHakMsb0ZBQWdFO0lBRWhFLHNFQUFrRDtJQUtsRCw4RUFBMEQ7SUFFMUQsNkRBQXlDO0lBQ3pDLDRGQUF3RTtJQUV4RSwwRUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWdERztJQUVILElBQU0scUJBQXFCLEdBQUcsSUFBSSxtQkFBVSxDQUFDO1FBQzNDLEVBQUUsRUFBRSxzQkFBc0I7S0FDM0IsQ0FBQyxDQUFDO0lBQ0gsSUFBTSxtQkFBbUIsR0FBRyxFQUFFLENBQUM7SUFFL0IsU0FBUyxzQkFBc0IsQ0FBQyxlQUFvQjs7UUFBcEIsZ0NBQUEsRUFBQSxvQkFBb0I7UUFDbEQsZUFBZSxHQUFHLG1CQUFXLENBQzNCO1lBQ0UsT0FBTyxFQUFFLFdBQVc7WUFDcEIsSUFBSSxFQUFFLElBQUk7U0FDWCxFQUNELGVBQWUsQ0FDaEIsQ0FBQztRQUVGO2dCQUFtQyxpQ0FBdUI7Z0JBcUx4RDs7Ozs7Ozs7bUJBUUc7Z0JBQ0gsdUJBQVksUUFBYTtvQkFBYix5QkFBQSxFQUFBLGFBQWE7b0JBQXpCO29CQUNFLHlCQUF5QjtvQkFDekIsaUJBQU8sU0FxRlI7b0JBcFJELDRCQUFzQixHQUFHLEVBQUUsQ0FBQztvQkFDNUIsc0JBQWdCLEdBQUcsSUFBSSxDQUFDO29CQUV4Qjs7Ozs7Ozs7O3VCQVNHO29CQUNILGFBQU8sR0FBRyxJQUFJLENBQUM7b0JBRWY7Ozs7Ozs7O3VCQVFHO29CQUNILFlBQU0sR0FBRyxFQUFFLENBQUM7b0JBQ1osV0FBSyxHQUFHLEVBQUUsQ0FBQztvQkFFWDs7Ozs7Ozs7dUJBUUc7b0JBQ0gsZUFBUyxHQUFHLEVBQUUsQ0FBQztvQkFFZjs7Ozs7Ozs7Ozs7Ozs7Ozt1QkFnQkc7b0JBQ0gsWUFBTSxHQUFHLEVBQUUsQ0FBQztvQkFFWjs7Ozs7Ozs7O3VCQVNHO29CQUNILGVBQVMsR0FBRyxDQUFDLEtBQUksQ0FBQyxDQUFDO29CQThIakIsMERBQTBEO29CQUMxRCxJQUFJLENBQUMsS0FBSSxDQUFDLFdBQVcsQ0FBQyxhQUFhO3dCQUNqQyxNQUFNLGdJQUE0SCxDQUFDO29CQUNySSxzQkFBc0I7b0JBQ3RCLEtBQUksQ0FBQyxNQUFNLEdBQUcsS0FBSSxDQUFDLFdBQVcsQ0FBQyxpQkFBaUIsQ0FDOUMsS0FBSSxDQUFDLFdBQVcsQ0FBQyxhQUFhLENBQy9CLENBQUM7b0JBRUYsb0JBQW9CO29CQUNwQixLQUFJLENBQUMsU0FBUyxHQUFHLG1CQUFXLENBQzFCO3dCQUNFLEVBQUUsRUFBRSxLQUFJLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxJQUFJLGdCQUFRLEVBQUU7d0JBQ3pDLEtBQUssRUFBRSxFQUFFO3FCQUNWLEVBQ0QsS0FBSSxDQUFDLE1BQU0sQ0FBQyxRQUFRLElBQUksRUFBRSxFQUMxQixRQUFRLENBQ1QsQ0FBQztvQkFFRix5Q0FBeUM7b0JBQ3pDLEtBQUksQ0FBQyxlQUFlLENBQUMsS0FBSSxDQUFDLENBQUM7b0JBRTNCLCtCQUErQjtvQkFDL0IsS0FBSSxDQUFDLE9BQU8sR0FBRyxJQUFJLG1CQUFVLENBQUM7d0JBQzVCLEVBQUUsRUFBRSxLQUFJLENBQUMsU0FBUyxDQUFDLEVBQUU7cUJBQ3RCLENBQUMsQ0FBQztvQkFFSCxtQkFBbUI7b0JBQ25CLEtBQUksQ0FBQyxlQUFlLEVBQUUsQ0FBQztvQkFFdkIsS0FBSSxDQUFDLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBQyxDQUFDO3dCQUNqQixJQUFJLENBQUMsQ0FBQyxNQUFNLEtBQUssS0FBSTs0QkFBRSxPQUFPO3dCQUM5QixJQUFJLENBQUMsQ0FBQyxNQUFNLENBQUMsZ0JBQWdCLEVBQUU7NEJBQzdCLENBQUMsQ0FBQyx3QkFBd0IsRUFBRSxDQUFDOzRCQUM3QixDQUFDLENBQUMsTUFBTSxDQUFDLGVBQWUsQ0FBQyxLQUFJLENBQUMsQ0FBQzt5QkFDaEM7b0JBQ0gsQ0FBQyxDQUFDLENBQUM7b0JBRUgsS0FBSSxDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7d0JBQ2pCLHlCQUF5Qjt3QkFDekIsSUFBSSxDQUFDLEtBQUksQ0FBQyxHQUFHLEVBQUU7NEJBQ2IsS0FBSSxDQUFDLE1BQU0sRUFBRSxDQUFDOzRCQUNkLGlHQUFpRzs0QkFDakcsS0FBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPLEVBQUUsS0FBSSxFQUFFO2dDQUMzQixPQUFPLEVBQUUsSUFBSTs2QkFDZCxDQUFDLENBQUM7eUJBQ0o7b0JBQ0gsQ0FBQyxDQUFDLENBQUM7b0JBRUgsa0JBQVUsQ0FBQzt3QkFDVCx5QkFBeUI7d0JBQ3pCLDBCQUEwQjt3QkFFMUIsZUFBZTt3QkFDZixLQUFJLENBQUMsYUFBYSxFQUFFLENBQUM7d0JBRXJCLEtBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxxQkFBYSxDQUFDLEdBQUcsQ0FBQyxDQUFDO3dCQUMxQyxLQUFJLENBQUMsV0FBVyxDQUFDLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBQyxLQUFLOzRCQUNqQyxNQUFNLENBQUMsSUFBSSxDQUFDLEtBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUMsT0FBTyxDQUFDLFVBQUMsSUFBSTtnQ0FDL0MsSUFDRSxDQUFDLEtBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsVUFBVTtvQ0FDN0IsS0FBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxnQkFBZ0IsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssU0FBUztvQ0FFNUQsT0FBTztnQ0FFVCxJQUFJLEtBQUksQ0FBQyxZQUFZLENBQUksb0JBQVksQ0FBQyxJQUFJLENBQUMsU0FBSSxLQUFLLENBQUMsSUFBTSxDQUFDLEVBQUU7b0NBQzVELElBQU0sS0FBSyxHQUFHLGVBQU8sQ0FDbkIsS0FBSSxDQUFDLFlBQVksQ0FBSSxvQkFBWSxDQUFDLElBQUksQ0FBQyxTQUFJLEtBQUssQ0FBQyxJQUFNLENBQUMsQ0FDekQsQ0FBQztvQ0FDRixLQUFJLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxLQUFLLEVBQUUsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO2lDQUN2Qzs0QkFDSCxDQUFDLENBQUMsQ0FBQzt3QkFDTCxDQUFDLENBQUMsQ0FBQzt3QkFFSCx3QkFBd0I7d0JBQ3hCLElBQU0sZ0JBQWdCLEdBQUcsS0FBSSxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsSUFBSSxFQUFFLENBQUM7d0JBQzFELEtBQUksQ0FBQyxZQUFZLENBQ2YsT0FBTyxFQUNKLGdCQUFnQixTQUFJLEtBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFHLENBQy9DLENBQUM7d0JBRUYsOEJBQThCO3dCQUM5QixLQUFJLENBQUMsTUFBTSxFQUFFLENBQUM7b0JBQ2hCLENBQUMsQ0FBQyxDQUFDOztnQkFDTCxDQUFDO2dCQXBNRCxzQkFBVyxtQ0FBa0I7b0JBWDdCOzs7Ozs7Ozs7O3VCQVVHO3lCQUNIO3dCQUNFLE9BQU8sTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsR0FBRyxDQUFDLFVBQUMsSUFBSSxJQUFLLE9BQUEsb0JBQVksQ0FBQyxJQUFJLENBQUMsRUFBbEIsQ0FBa0IsQ0FBQyxDQUFDO29CQUNuRSxDQUFDOzs7bUJBQUE7Z0JBZ0JEOzs7Ozs7Ozs7Ozs7Ozs7O21CQWdCRztnQkFDSSwrQkFBaUIsR0FBeEIsVUFBeUIsSUFBSTtvQkFDM0IsT0FBTyxtQkFBbUIsQ0FBQyxvQkFBWSxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDO2dCQUN2RCxDQUFDO2dCQUVEOzs7Ozs7Ozs7Ozs7O21CQWFHO2dCQUNJLG9CQUFNLEdBQWIsVUFBYyxRQUFhO29CQUFiLHlCQUFBLEVBQUEsYUFBYTtvQkFDekIsSUFBTSxJQUFJLEdBQUcsQ0FBQyxRQUFRLENBQUMsSUFBSSxJQUFJLElBQUksQ0FBQyxhQUFhLElBQUksSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLE9BQU8sQ0FDckUsY0FBYyxFQUNkLEVBQUUsQ0FDSCxDQUFDO29CQUVGLElBQU0sZUFBZSxHQUFHLG9CQUFZLENBQUMsSUFBSSxDQUFDLENBQUM7b0JBRTNDLDJDQUEyQztvQkFDM0MsSUFBSSxjQUFjLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQzt3QkFBRSxPQUFPO29CQUVoRCxJQUFJLENBQUMsYUFBYSxHQUFHLElBQUksQ0FBQztvQkFFMUIsSUFBSSxtQkFBbUIsQ0FBQyxlQUFlLENBQUM7d0JBQUUsT0FBTztvQkFFakQsbUJBQW1CLENBQUMsZUFBZSxDQUFDLEdBQUc7d0JBQ3JDLElBQUksTUFBQTt3QkFDSixRQUFRLEVBQUUsZUFBZTt3QkFDekIsS0FBSyxFQUFFLElBQUk7d0JBQ1gsT0FBTyxFQUFFLGVBQWUsQ0FBQyxPQUFPO3dCQUNoQyxRQUFRLFVBQUE7cUJBQ1QsQ0FBQztvQkFFRixJQUFNLGNBQWMsR0FBRyxFQUFFLENBQUM7b0JBQzFCLElBQUksZUFBZSxDQUFDLE9BQU8sS0FBSyxXQUFXO3dCQUN6QyxjQUFjLENBQUMsT0FBTyxHQUFHLGlDQUF5QixDQUNoRCxlQUFlLENBQUMsT0FBTyxDQUN4QixDQUFDO29CQUVKLElBQUksTUFBTSxDQUFDLGNBQWMsRUFBRTt3QkFDekIsSUFBSTs0QkFDRixNQUFNLENBQUMsY0FBYyxDQUFDLE1BQU0sQ0FBQyxlQUFlLEVBQUUsSUFBSSxFQUFFLGNBQWMsQ0FBQyxDQUFDO3lCQUNyRTt3QkFBQyxPQUFPLENBQUMsRUFBRTs0QkFDViwyREFBMkQ7eUJBQzVEO3FCQUNGO3lCQUFNLElBQUksUUFBUSxDQUFDLGVBQWUsRUFBRTt3QkFDbkMsSUFBSTs0QkFDRixjQUFjLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUM7NEJBQzFDLFFBQVEsQ0FBQyxlQUFlLENBQUMsZUFBZSxFQUFFLGNBQWMsQ0FBQyxDQUFDO3lCQUMzRDt3QkFBQyxPQUFPLENBQUMsRUFBRTs0QkFDViwyREFBMkQ7eUJBQzVEO3FCQUNGO3lCQUFNO3dCQUNMLE1BQU0sOEhBQThILENBQUM7cUJBQ3RJO2dCQUNILENBQUM7Z0JBOEdELHNCQUFJLG1DQUFRO29CQVZaOzs7Ozs7Ozs7dUJBU0c7eUJBQ0g7d0JBQ0UsT0FBTyxJQUFJLENBQUMsU0FBUyxDQUFDO29CQUN4QixDQUFDOzs7bUJBQUE7Z0JBWUQsc0JBQUksZ0NBQUs7b0JBVlQ7Ozs7Ozs7Ozt1QkFTRzt5QkFDSDt3QkFDRSxPQUFPLElBQUksQ0FBQztvQkFDZCxDQUFDOzs7bUJBQUE7Z0JBRUQ7Ozs7Ozs7O21CQVFHO2dCQUNILDhCQUFNLEdBQU47b0JBQ0UscUJBQXFCO29CQUNyQixJQUFJLENBQUMsb0JBQW9CLEVBQUUsQ0FBQztvQkFDNUIsaUJBQWlCO29CQUNqQixJQUFJLENBQUMsb0JBQW9CLEVBQUUsQ0FBQztnQkFDOUIsQ0FBQztnQkFFRDs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gseUJBQUMsR0FBRCxVQUFFLElBQUk7b0JBQ0osSUFBTSxLQUFLLEdBQUcsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDO29CQUMxQyxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTt3QkFDckMsSUFBTSxPQUFPLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxhQUFhLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7d0JBQ25ELElBQUksT0FBTzs0QkFBRSxPQUFPLE9BQU8sQ0FBQztxQkFDN0I7b0JBQ0QsT0FBTyxJQUFJLENBQUM7Z0JBQ2QsQ0FBQztnQkFFRDs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsMEJBQUUsR0FBRixVQUFHLElBQUk7b0JBQ0wsSUFBTSxLQUFLLEdBQUcsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDO29CQUMxQyxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTt3QkFDckMsSUFBTSxPQUFPLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQzt3QkFDdEQsSUFBSSxPQUFPOzRCQUFFLE9BQU8sT0FBTyxDQUFDO3FCQUM3QjtvQkFDRCxPQUFPLElBQUksQ0FBQztnQkFDZCxDQUFDO2dCQUVEOzs7Ozs7Ozs7Ozs7bUJBWUc7Z0JBQ0gsdUNBQWUsR0FBZixVQUFnQixPQUFPO29CQUNyQixJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQzt3QkFBRSxPQUFPO29CQUNuRCxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztnQkFDL0IsQ0FBQztnQkFFRDs7Ozs7Ozs7Ozs7OzttQkFhRztnQkFDSCwrQkFBTyxHQUFQLFVBQVEsSUFBSSxFQUFFLEtBQUssRUFBRSxLQUFZO29CQUFaLHNCQUFBLEVBQUEsWUFBWTtvQkFDL0IsSUFBSSxDQUFDLEtBQUs7d0JBQUUsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsS0FBSyxDQUFDLENBQUM7b0JBQzlDLElBQUksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLFVBQVUsRUFBRTt3QkFDakMsTUFBTSxJQUFJLEtBQUssQ0FDYiw4Q0FBMkMsSUFBSSwyQkFBb0IsS0FBSyw2REFBdUQsQ0FDaEksQ0FBQztxQkFDSDtvQkFDRCxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLGdCQUFnQixDQUFDLEtBQUssQ0FBQyxHQUFHLEtBQUssQ0FBQztvQkFDbEQseUJBQXlCO29CQUN6QixJQUFJLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBQzlCLENBQUM7Z0JBRUQ7Ozs7Ozs7Ozs7OzttQkFZRztnQkFDSCwrQkFBTyxHQUFQLFVBQVEsSUFBSSxFQUFFLEtBQVk7b0JBQVosc0JBQUEsRUFBQSxZQUFZO29CQUN4QixJQUFJLENBQUMsS0FBSzt3QkFBRSxPQUFPLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsS0FBSyxDQUFDO29CQUMzQyxJQUFJLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxVQUFVLEVBQUU7d0JBQ2pDLE1BQU0sSUFBSSxLQUFLLENBQ2IsOENBQTJDLElBQUksMkJBQW9CLEtBQUssNkRBQXVELENBQ2hJLENBQUM7cUJBQ0g7b0JBQ0QsT0FBTyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLGdCQUFnQixDQUFDLEtBQUssQ0FBQyxDQUFDO2dCQUNuRCxDQUFDO2dCQUVEOzs7Ozs7Ozs7Ozs7bUJBWUc7Z0JBQ0gsbUNBQVcsR0FBWCxVQUFZLFFBQWEsRUFBRSxRQUFlO29CQUE5Qix5QkFBQSxFQUFBLGFBQWE7b0JBQUUseUJBQUEsRUFBQSxlQUFlO29CQUN4Qyx1QkFBdUI7b0JBQ3ZCLElBQUksQ0FBQyxTQUFTLEdBQUcsbUJBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFFLFFBQVEsQ0FBQyxDQUFDO29CQUN2RCx1QkFBdUI7b0JBQ3ZCLElBQUksUUFBUTt3QkFBRSxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUM7Z0JBQzlCLENBQUM7Z0JBRUQ7Ozs7Ozs7Ozs7Ozs7O21CQWNHO2dCQUNILGdDQUFRLEdBQVIsVUFBUyxHQUFHLEVBQUUsSUFBVztvQkFBekIsaUJBY0M7b0JBZGEscUJBQUEsRUFBQSxXQUFXO29CQUN2QixnQkFBZ0I7b0JBQ2hCLElBQU0sUUFBUSxHQUFHLEdBQUcsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7b0JBQ2hDLFFBQVEsQ0FBQyxPQUFPLENBQUMsVUFBQyxTQUFTO3dCQUN6QixxQkFBcUI7d0JBQ3JCLElBQU0sUUFBUSxHQUFHLEtBQUksQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLENBQUM7d0JBQzFDLHFCQUFxQjt3QkFDckIsUUFBUSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUMsVUFBQyxHQUFHOzRCQUM5QiwrQkFBK0I7NEJBQy9CLElBQUksQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO3dCQUMxQixDQUFDLENBQUMsQ0FBQztvQkFDTCxDQUFDLENBQUMsQ0FBQztvQkFDSCx3QkFBd0I7b0JBQ3hCLE9BQU8sSUFBSSxDQUFDO2dCQUNkLENBQUM7Z0JBRUQ7Ozs7Ozs7Ozs7Ozs7O21CQWNHO2dCQUNILG1DQUFXLEdBQVgsVUFBWSxHQUFHLEVBQUUsSUFBVztvQkFBNUIsaUJBY0M7b0JBZGdCLHFCQUFBLEVBQUEsV0FBVztvQkFDMUIsZ0JBQWdCO29CQUNoQixJQUFNLFFBQVEsR0FBRyxHQUFHLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO29CQUNoQyxRQUFRLENBQUMsT0FBTyxDQUFDLFVBQUMsU0FBUzt3QkFDekIscUJBQXFCO3dCQUNyQixJQUFNLFFBQVEsR0FBRyxLQUFJLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDO3dCQUMxQyxxQkFBcUI7d0JBQ3JCLFFBQVEsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsT0FBTyxDQUFDLFVBQUMsR0FBRzs0QkFDOUIsK0JBQStCOzRCQUMvQixJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQzt3QkFDN0IsQ0FBQyxDQUFDLENBQUM7b0JBQ0wsQ0FBQyxDQUFDLENBQUM7b0JBQ0gsd0JBQXdCO29CQUN4QixPQUFPLElBQUksQ0FBQztnQkFDZCxDQUFDO2dCQWFELHNCQUFJLGdDQUFLO29CQVhUOzs7Ozs7Ozs7O3VCQVVHO3lCQUNIO3dCQUNFLGtCQUNFLFFBQVEsRUFBRSxJQUFJLEVBQ2QsS0FBSyxFQUFFLElBQUksSUFDUixJQUFJLENBQUMsTUFBTSxFQUNkO29CQUNKLENBQUM7OzttQkFBQTtnQkFFRCw0Q0FBb0IsR0FBcEI7b0JBQUEsaUJBTUM7b0JBTEMsSUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxNQUFNLENBQUMsQ0FBQztvQkFDbEQsS0FBSyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxPQUFPLENBQUMsVUFBQyxLQUFLO3dCQUM5QixJQUFJLEtBQUksQ0FBQyxNQUFJLEtBQUssQ0FBQyxFQUFJLENBQUMsS0FBSyxLQUFLOzRCQUFFLE9BQU87d0JBQzNDLEtBQUksQ0FBQyxNQUFJLEtBQUssQ0FBQyxFQUFJLENBQUMsR0FBRyxLQUFLLENBQUM7b0JBQy9CLENBQUMsQ0FBQyxDQUFDO2dCQUNMLENBQUM7Z0JBRUQsdUNBQWUsR0FBZjtvQkFBQSxpQkF5RUM7NENBeEVZLElBQUk7d0JBQ2IsSUFBSSxZQUFZLENBQUM7d0JBQ2pCLElBQUksT0FBSyxJQUFJLENBQUMsS0FBSyxTQUFTOzRCQUFFLFlBQVksR0FBRyxPQUFLLElBQUksQ0FBQyxDQUFDO3dCQUN4RCxNQUFNLENBQUMsY0FBYyxDQUFDLE9BQUssTUFBTSxFQUFFLElBQUksRUFBRTs0QkFDdkMsVUFBVSxFQUFFLEtBQUs7NEJBQ2pCLFFBQVEsRUFBRSxJQUFJOzRCQUNkLFlBQVksRUFBRSxLQUFLOzRCQUNuQixLQUFLLHdCQUNBLE9BQUssV0FBVyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FDL0IsYUFBYSxFQUFFLFNBQVMsRUFDeEIsS0FBSyxFQUFFLFNBQVMsRUFDaEIsZ0JBQWdCLEVBQUUsRUFBRSxHQUNyQjt5QkFDRixDQUFDLENBQUM7d0JBQ0gsTUFBTSxDQUFDLGNBQWMsQ0FBQyxPQUFLLEtBQUssRUFBRSxJQUFJLEVBQUU7NEJBQ3RDLFVBQVUsRUFBRSxJQUFJOzRCQUNoQixZQUFZLEVBQUUsS0FBSzs0QkFDbkIsR0FBRyxFQUFFO2dDQUNILElBQUksV0FBVyxHQUNiLEtBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsS0FBSyxLQUFLLFNBQVM7b0NBQ25DLENBQUMsQ0FBQyxLQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLEtBQUs7b0NBQ3pCLENBQUMsQ0FBQyxLQUFJLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxTQUFTO3dDQUMxQyxDQUFDLENBQUMsS0FBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDO3dDQUM1QixDQUFDLENBQUMsS0FBSSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO2dDQUMzQyxJQUNFLEtBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsVUFBVTtvQ0FDNUIsS0FBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxnQkFBZ0IsRUFDbEM7b0NBQ0EsSUFDRSxLQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLGdCQUFnQixDQUNoQyxxQkFBYSxDQUFDLGNBQWMsRUFBRSxDQUMvQixLQUFLLFNBQVMsRUFDZjt3Q0FDQSxXQUFXLEdBQUcsS0FBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxnQkFBZ0IsQ0FDOUMscUJBQWEsQ0FBQyxjQUFjLEVBQUUsQ0FDL0IsQ0FBQztxQ0FDSDtpQ0FDRjtnQ0FFRCw4QkFBOEI7Z0NBQzlCLElBQUksSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssR0FBRyxFQUFFO29DQUM3QixJQUFJLE9BQU8sV0FBVyxLQUFLLFFBQVEsRUFBRTt3Q0FDbkMsT0FBTyxXQUFXLENBQUM7cUNBQ3BCO29DQUNELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxLQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTt3Q0FDOUMsSUFBTSxPQUFPLEdBQUcsS0FBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQzt3Q0FDbEMsbURBQW1EO3dDQUNuRCxJQUFJLE9BQU8sQ0FBQyxXQUFXLENBQUMsS0FBSyxTQUFTOzRDQUNwQyxPQUFPLE9BQU8sQ0FBQyxXQUFXLENBQUMsQ0FBQztxQ0FDL0I7aUNBQ0Y7Z0NBRUQsT0FBTyxXQUFXLENBQUM7NEJBQ3JCLENBQUM7NEJBQ0QsR0FBRyxFQUFFLFVBQUMsS0FBSztnQ0FDVCxLQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLGFBQWEsR0FBRyxLQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLEtBQUssQ0FBQztnQ0FDMUQsS0FBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDO2dDQUNoQyxJQUFJLFlBQVksRUFBRTtvQ0FDaEIsTUFBTSxDQUFDLHdCQUF3QixDQUFDLEtBQUksQ0FBQyxTQUFTLEVBQUUsSUFBSSxDQUFDLENBQUMsR0FBRyxDQUFDLElBQUksQ0FDNUQsS0FBSSxFQUNKLEtBQUssQ0FDTixDQUFDO2lDQUNIO2dDQUNELHlCQUF5QjtnQ0FDekIsS0FBSSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxDQUFDOzRCQUM5QixDQUFDO3lCQUNGLENBQUMsQ0FBQzt3QkFDSCxPQUFLLE9BQU8sQ0FBQyxFQUFFLENBQUMsV0FBUyxJQUFJLE9BQUksRUFBRSxVQUFDLE1BQU07NEJBQ3hDLG1DQUFtQzs0QkFDbkMsS0FBSSxDQUFDLE1BQU0sRUFBRSxDQUFDO3dCQUNoQixDQUFDLENBQUMsQ0FBQzs7O29CQXRFTCxLQUFLLElBQU0sSUFBSSxJQUFJLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSztnQ0FBOUIsSUFBSTtxQkF1RWQ7Z0JBQ0gsQ0FBQztnQkFFRCxxQ0FBYSxHQUFiO29CQUNFLGVBQWU7b0JBQ2YsS0FBSyxJQUFNLElBQUksSUFBSSxJQUFJLENBQUMsV0FBVyxDQUFDLEtBQUssRUFBRTt3QkFDekMsSUFBSSxJQUFJLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxvQkFBWSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ2pELElBQUksQ0FBQyxJQUFJLElBQUksSUFBSSxDQUFDLFlBQVksQ0FBQyxvQkFBWSxDQUFDLElBQUksQ0FBQyxDQUFDLEVBQUU7NEJBQ2xELElBQUksR0FBRyxJQUFJLENBQUM7eUJBQ2I7d0JBRUQsSUFBSSxDQUFDLElBQUk7NEJBQUUsU0FBUzt3QkFFcEIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxLQUFLLEdBQUcsSUFBSTs0QkFDNUIsQ0FBQyxDQUFDLGVBQU8sQ0FBQyxJQUFJLENBQUM7NEJBQ2YsQ0FBQyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsS0FBSyxLQUFLLFNBQVM7Z0NBQ3ZDLENBQUMsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLEtBQUs7Z0NBQ3pCLENBQUMsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxTQUFTO29DQUMxQyxDQUFDLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDO29DQUM1QixDQUFDLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO3FCQUMxQztnQkFDSCxDQUFDO2dCQUVEOzs7Ozs7Ozs7O21CQVVHO2dCQUNHLDhCQUFNLEdBQVo7Ozs7O29DQUNFLDBCQUEwQjtvQ0FDMUIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLENBQUM7b0NBRWhDLDRFQUE0RTtvQ0FDNUUscUJBQU0sSUFBSSxDQUFDLGtCQUFrQixFQUFFLEVBQUE7O29DQUQvQiw0RUFBNEU7b0NBQzVFLFNBQStCLENBQUM7b0NBRWhDLHlCQUF5QjtvQ0FDekIsSUFBSSxDQUFDLHFCQUFxQixFQUFFLENBQUM7b0NBRTdCLFNBQVM7b0NBQ1QsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDO29DQUVkLHlCQUF5QjtvQ0FDekIsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUM7b0NBQ3ZCLElBQUksQ0FBQyxRQUFRLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxDQUFDOzs7OztpQkFDaEM7Z0JBRUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O21CQW9CRztnQkFDSCwwQkFBRSxHQUFGLFVBQUcsS0FBSyxFQUFFLFFBQVE7b0JBQ2hCLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxLQUFLLEVBQUUsVUFBQyxDQUFDO3dCQUM3QixPQUFPO3dCQUNQLGdCQUFnQjt3QkFDaEIseUJBQXlCO3dCQUN6Qix3Q0FBd0M7d0JBQ3hDLE1BQU07d0JBQ04sbUNBQW1DO3dCQUNuQyxJQUFJO3dCQUNKLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQztvQkFDZCxDQUFDLENBQUMsQ0FBQztvQkFDSCwyQ0FBMkM7Z0JBQzdDLENBQUM7Z0JBRUQ7Ozs7Ozs7Ozs7OzttQkFZRztnQkFDSCwyQkFBRyxHQUFILFVBQUksS0FBSyxFQUFFLFFBQVE7b0JBQ2pCLDRDQUE0QztnQkFDOUMsQ0FBQztnQkFFRDs7Ozs7Ozs7Ozs7OzttQkFhRztnQkFDSCxnQ0FBUSxHQUFSLFVBQVMsSUFBSSxFQUFFLEtBQUssRUFBRSxRQUFhO29CQUFiLHlCQUFBLEVBQUEsYUFBYTtvQkFDakMsSUFBTSxLQUFLLEdBQUcsSUFBSSxXQUFXLENBQUMsSUFBSSx3QkFDN0IsUUFBUSxLQUNYLE1BQU0sRUFBRSxLQUFLLElBQ2IsQ0FBQztvQkFDSCxJQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDO29CQUMxQiwyREFBMkQ7b0JBQzNELDBDQUEwQztvQkFDMUMsOEJBQThCO29CQUM5QixpREFBaUQ7b0JBQ2pELGtCQUFrQjtvQkFDbEIsVUFBVTtvQkFDVixNQUFNO29CQUNOLHNFQUFzRTtvQkFDdEUsa0JBQWtCO29CQUNsQixVQUFVO29CQUNWLE1BQU07b0JBQ04scUJBQXFCO29CQUNyQiw2Q0FBNkM7b0JBQzdDLG1FQUFtRTtvQkFDbkUsb0JBQW9CO29CQUNwQixZQUFZO29CQUNaLFFBQVE7b0JBQ1IsZ0NBQWdDO29CQUNoQyw2REFBNkQ7b0JBQzdELFFBQVE7b0JBQ1Isc0JBQXNCO29CQUN0QixjQUFjO29CQUNkLFFBQVE7b0JBQ1IsT0FBTztvQkFDUCxNQUFNO2dCQUNSLENBQUM7Z0JBRUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7bUJBbUJHO2dCQUNILDBDQUFrQixHQUFsQjtvQkFBQSxpQkFzQkM7b0JBckJDLE9BQU8sSUFBSSxPQUFPLENBQUMsVUFBQyxPQUFPLEVBQUUsTUFBTTt3QkFDakMsSUFBTSxRQUFRLEdBQUcsRUFBRSxDQUFDO3dCQUVwQixtREFBbUQ7d0JBQ25ELElBQUksS0FBSSxDQUFDLFNBQVMsQ0FBQyxTQUFTLEVBQUU7NEJBQzVCLFFBQVEsQ0FBQyxJQUFJLENBQUMsY0FBTSxDQUFDLEtBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQzt5QkFDakQ7d0JBRUQsa0VBQWtFO3dCQUNsRSxJQUFJLEtBQUksQ0FBQyxTQUFTLENBQUMsaUJBQWlCLEVBQUU7NEJBQ3BDLElBQU0sT0FBTyxxQkFBTyxLQUFJLENBQUMsU0FBUyxDQUFDLGlCQUFpQixDQUFDLENBQUM7NEJBQ3RELE9BQU8sQ0FBQyxPQUFPLENBQUMsVUFBQyxFQUFFO2dDQUNqQixRQUFRLENBQUMsSUFBSSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUM7NEJBQ3RCLENBQUMsQ0FBQyxDQUFDO3lCQUNKO3dCQUVELHVDQUF1Qzt3QkFDdkMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUMsQ0FBQyxJQUFJLENBQUM7NEJBQ3pCLE9BQU8sRUFBRSxDQUFDO3dCQUNaLENBQUMsQ0FBQyxDQUFDO29CQUNMLENBQUMsQ0FBQyxDQUFDO2dCQUNMLENBQUM7Z0JBRUQ7Ozs7Ozs7bUJBT0c7Z0JBQ0gseUNBQWlCLEdBQWpCO29CQUFBLGlCQUtDO29CQUpDLG1CQUFtQjtvQkFDbkIsVUFBVSxDQUFDO3dCQUNULEtBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLEtBQUksQ0FBQyxDQUFDO29CQUNoQyxDQUFDLENBQUMsQ0FBQztnQkFDTCxDQUFDO2dCQUVEOzs7Ozs7O21CQU9HO2dCQUNILDRDQUFvQixHQUFwQjtvQkFDRSxtQkFBbUI7b0JBQ25CLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxDQUFDO2dCQUNoQyxDQUFDO2dCQUVEOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxnREFBd0IsR0FBeEIsVUFBeUIsUUFBUSxFQUFFLE1BQU0sRUFBRSxNQUFNO29CQUMvQyxJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVU7d0JBQUUsT0FBTztvQkFDN0IsSUFBSSxJQUFJLENBQUMsc0JBQXNCLENBQUMsUUFBUSxDQUFDO3dCQUFFLE9BQU87b0JBRWxELHlDQUF5QztvQkFDekMsSUFBTSxRQUFRLEdBQUcsZUFBTyxDQUFDLE1BQU0sQ0FBQyxJQUFJLEtBQUssQ0FBQztvQkFFMUMsK0JBQStCO29CQUMvQixJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsUUFBUSxDQUFDO2dCQUM1QixDQUFDO2dCQUVEOzs7Ozs7Ozs7Ozs7bUJBWUc7Z0JBQ0gsZ0NBQVEsR0FBUixVQUFTLEdBQVE7b0JBQWpCLGlCQXlDQztvQkF6Q1Esb0JBQUEsRUFBQSxRQUFRO29CQUNmLElBQU0sS0FBSyxHQUFHLEdBQUcsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7b0JBQzdCLElBQU0sa0JBQWtCLEdBQUcsRUFBRSxDQUFDO29CQUU5QixLQUFLLENBQUMsT0FBTyxDQUFDLFVBQUMsSUFBSTt3QkFDakIsSUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsRUFDOUIsT0FBTyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUM7d0JBQzlCLElBQUksR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxDQUFDO3dCQUU5QyxJQUFJLFlBQVksQ0FBQzt3QkFDakIsSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQzs0QkFBRSxZQUFZLEdBQUcsS0FBRyxLQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsR0FBRyxJQUFNLENBQUM7NkJBQ25FLElBQUksSUFBSSxLQUFLLEVBQUU7NEJBQUUsWUFBWSxHQUFNLEtBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxVQUFLLElBQU0sQ0FBQzs7NEJBQ2xFLFlBQVksR0FBRyxLQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQzt3QkFDeEMsSUFBSSxNQUFNOzRCQUFFLFlBQVksR0FBRyxNQUFJLFlBQWMsQ0FBQzt3QkFDOUMsSUFBSSxPQUFPOzRCQUFFLFlBQVksR0FBRyxNQUFJLFlBQWMsQ0FBQzt3QkFFL0MsK0JBQStCO3dCQUMvQixJQUFJLEtBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFOzRCQUM1QixJQUFNLE9BQU8sR0FBRyxvQkFBWSxDQUFDLEtBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxDQUM1RCxnQkFBZ0IsRUFDaEIsRUFBRSxDQUNILENBQUM7NEJBQ0YsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQUU7Z0NBQ25DLElBQUksWUFBWSxHQUFHLEVBQUUsQ0FBQztnQ0FDdEIsSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQztvQ0FBRSxZQUFZLEdBQUcsS0FBRyxPQUFPLEdBQUcsSUFBTSxDQUFDO3FDQUN2RCxJQUFJLElBQUksS0FBSyxFQUFFO29DQUFFLFlBQVksR0FBTSxPQUFPLFVBQUssSUFBTSxDQUFDOztvQ0FDdEQsWUFBWSxHQUFHLE9BQU8sQ0FBQztnQ0FDNUIsSUFBSSxNQUFNLEVBQUU7b0NBQ1YsWUFBWSxHQUFHLE1BQUksWUFBYyxDQUFDO2lDQUNuQztxQ0FBTSxJQUFJLE9BQU8sRUFBRTtvQ0FDbEIsWUFBWSxHQUFHLE1BQUksWUFBYyxDQUFDO2lDQUNuQztxQ0FBTTtvQ0FDTCxZQUFZLElBQUksTUFBSSxZQUFjLENBQUM7aUNBQ3BDOzZCQUNGO3lCQUNGO3dCQUVELGtCQUFrQixDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQztvQkFDeEMsQ0FBQyxDQUFDLENBQUM7b0JBRUgsT0FBTyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7Z0JBQ3RDLENBQUM7Z0JBRUQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsd0NBQWdCLEdBQWhCLFVBQWlCLElBQUk7b0JBQ25CLHlCQUF5QjtvQkFDekIsSUFBTSxRQUFRLEdBQUc7d0JBQ2YsSUFBSSxNQUFBO3dCQUNKLE1BQU0sRUFDSixJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLGFBQWEsS0FBSyxJQUFJOzRCQUN0QyxDQUFDLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxLQUFLLEtBQUssSUFBSTtnQ0FDaEMsQ0FBQyxDQUFDLEtBQUs7Z0NBQ1AsQ0FBQyxDQUFDLFFBQVE7NEJBQ1osQ0FBQyxDQUFDLEtBQUs7d0JBQ1gsS0FBSyxFQUFFLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsS0FBSzt3QkFDOUIsYUFBYSxFQUFFLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsYUFBYTt3QkFDOUMsS0FBSyxFQUFFLHFCQUFhLENBQUMsY0FBYyxFQUFFO3FCQUN0QyxDQUFDO29CQUVGLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFdBQVMsSUFBSSxTQUFJLFFBQVEsQ0FBQyxNQUFRLEVBQUUsUUFBUSxDQUFDLENBQUM7Z0JBQ2xFLENBQUM7Z0JBRUQ7Ozs7Ozs7OzttQkFTRztnQkFDSCw0Q0FBb0IsR0FBcEI7b0JBQUEsaUJBOEJDO29CQTlCb0IsZUFBUTt5QkFBUixVQUFRLEVBQVIscUJBQVEsRUFBUixJQUFRO3dCQUFSLDBCQUFROztvQkFDM0IsSUFBSSxDQUFDLEtBQUssSUFBSSxLQUFLLENBQUMsTUFBTSxLQUFLLENBQUM7d0JBQUUsS0FBSyxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO29CQUVuRSw4QkFBOEI7b0JBQzlCLEtBQUssQ0FBQyxPQUFPLENBQUMsVUFBQyxJQUFJO3dCQUNqQixJQUFJLENBQUMsS0FBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxRQUFROzRCQUFFLE9BQU87d0JBRXhDLElBQU0sS0FBSyxHQUFHLEtBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsS0FBSyxDQUFDO3dCQUV0QyxpRUFBaUU7d0JBQ2pFLElBQUksS0FBSyxLQUFLLFNBQVMsSUFBSSxLQUFLLEtBQUssSUFBSSxJQUFJLEtBQUssS0FBSyxLQUFLLEVBQUU7NEJBQzVELEtBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLENBQUM7NEJBQzNCLE9BQU87eUJBQ1I7d0JBRUQsSUFBSSxDQUFDLEtBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxDQUFDLEVBQUU7NEJBQzVCLG1DQUFtQzs0QkFDbkMsS0FBSSxDQUFDLHNCQUFzQixDQUFDLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQzs0QkFDekMsS0FBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsa0JBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDOzRCQUMzQyxPQUFPLEtBQUksQ0FBQyxzQkFBc0IsQ0FBQyxJQUFJLENBQUMsQ0FBQzt5QkFDMUM7NkJBQU07NEJBQ0wsSUFBTSxxQkFBcUIsR0FBRyxLQUFJLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxDQUFDOzRCQUN0RCxJQUFNLHVCQUF1QixHQUFHLGtCQUFVLENBQUMsS0FBSyxDQUFDLENBQUM7NEJBQ2xELElBQUkscUJBQXFCLEtBQUssdUJBQXVCLEVBQUU7Z0NBQ3JELEtBQUksQ0FBQyxzQkFBc0IsQ0FBQyxJQUFJLENBQUMsR0FBRyxJQUFJLENBQUM7Z0NBQ3pDLEtBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLHVCQUF1QixDQUFDLENBQUM7Z0NBQ2pELE9BQU8sS0FBSSxDQUFDLHNCQUFzQixDQUFDLElBQUksQ0FBQyxDQUFDOzZCQUMxQzt5QkFDRjtvQkFDSCxDQUFDLENBQUMsQ0FBQztnQkFDTCxDQUFDO2dCQUVEOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCw2Q0FBcUIsR0FBckI7b0JBQUEsaUJBV0M7b0JBWHFCLGVBQVE7eUJBQVIsVUFBUSxFQUFSLHFCQUFRLEVBQVIsSUFBUTt3QkFBUiwwQkFBUTs7b0JBQzVCLElBQUksQ0FBQyxLQUFLLElBQUksS0FBSyxDQUFDLE1BQU0sS0FBSyxDQUFDO3dCQUM5QixLQUFLLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDO29CQUM5QyxLQUFLLENBQUMsT0FBTyxDQUFDLFVBQUMsSUFBSTt3QkFDakIsSUFBTSxPQUFPLEdBQUcsS0FBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQzt3QkFDbEMsSUFBTSxnQkFBZ0IsR0FBRyx1QkFBZSxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQUUsT0FBTyxFQUFFOzRCQUMvRCxJQUFJLEVBQUssS0FBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLGVBQVUsSUFBTTs0QkFDOUMsS0FBSyxFQUFFLElBQUk7eUJBQ1osQ0FBQyxDQUFDO3dCQUNILG9FQUFvRTtvQkFDdEUsQ0FBQyxDQUFDLENBQUM7Z0JBQ0wsQ0FBQztnQkFDSCxvQkFBQztZQUFELENBQUMsQUFsL0JNLENBQTRCLGVBQWUsQ0FBQyxPQUFPO1lBcUZqRCxlQUFZLEdBQUcsRUFBRztZQUV6Qjs7Ozs7Ozs7O2VBU0c7WUFDSSxnQkFBYSxHQUFHLFNBQVU7ZUFpNUJqQztJQUNKLENBQUM7SUFFRCxrQkFBZSxzQkFBc0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1dlYkNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNXZWJDb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBR2QsOEVBQXdEO0lBQ3hELHdFQUFpRDtJQUNqRCxzRUFBZ0Q7SUFDaEQsNEVBQXNEO0lBQ3RELHVEQUFpQztJQUdqQyxzRkFBZ0U7SUFFaEUsd0VBQWtEO0lBS2xELGdGQUEwRDtJQUUxRCwrREFBeUM7SUFDekMsOEZBQXdFO0lBRXhFLDRFQUFzRDtJQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BZ0RHO0lBRUgsTUFBTSxxQkFBcUIsR0FBRyxJQUFJLG1CQUFVLENBQUM7UUFDM0MsRUFBRSxFQUFFLHNCQUFzQjtLQUMzQixDQUFDLENBQUM7SUFDSCxNQUFNLG1CQUFtQixHQUFHLEVBQUUsQ0FBQztJQUUvQixTQUFTLHNCQUFzQixDQUFDLGVBQWUsR0FBRyxFQUFFOztRQUNsRCxlQUFlLEdBQUcsbUJBQVcsQ0FDM0I7WUFDRSxPQUFPLEVBQUUsV0FBVztZQUNwQixJQUFJLEVBQUUsSUFBSTtTQUNYLEVBQ0QsZUFBZSxDQUNoQixDQUFDO1FBRUYsWUFBTyxNQUFNLGFBQWMsU0FBUSxlQUFlLENBQUMsT0FBTztnQkFxTHhEOzs7Ozs7OzttQkFRRztnQkFDSCxZQUFZLFFBQVEsR0FBRyxFQUFFO29CQUN2Qix5QkFBeUI7b0JBQ3pCLEtBQUssRUFBRSxDQUFDO29CQS9MViwyQkFBc0IsR0FBRyxFQUFFLENBQUM7b0JBQzVCLHFCQUFnQixHQUFHLElBQUksQ0FBQztvQkFFeEI7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxZQUFPLEdBQUcsSUFBSSxDQUFDO29CQUVmOzs7Ozs7Ozt1QkFRRztvQkFDSCxXQUFNLEdBQUcsRUFBRSxDQUFDO29CQUNaLFVBQUssR0FBRyxFQUFFLENBQUM7b0JBRVg7Ozs7Ozs7O3VC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

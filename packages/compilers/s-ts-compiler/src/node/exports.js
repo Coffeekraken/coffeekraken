@@ -13,12 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.interface = exports.process = void 0;
-const STsCompilerProcess_1 = __importDefault(require("./STsCompilerProcess"));
-exports.process = STsCompilerProcess_1.default;
+exports.STsCompilerInterface = void 0;
 const STsCompilerInterface_1 = __importDefault(require("./interface/STsCompilerInterface"));
-exports.interface = STsCompilerInterface_1.default;
+exports.STsCompilerInterface = STsCompilerInterface_1.default;
 const STsCompiler_1 = __importDefault(require("./STsCompiler"));
+__exportStar(require("./interface/STsCompilerInterface"), exports);
 __exportStar(require("./STsCompiler"), exports);
 exports.default = STsCompiler_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDhFQUF3RDtBQUl2QixrQkFKMUIsNEJBQW9CLENBSWE7QUFIeEMsNEZBQXNFO0FBR0Ysb0JBSDdELDhCQUFzQixDQUdnRDtBQUY3RSxnRUFBMEM7QUFHMUMsZ0RBQThCO0FBQzlCLGtCQUFlLHFCQUFhLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDRGQUFvRTtBQU0zRCwrQkFORiw4QkFBb0IsQ0FNRTtBQUw3QixnRUFBMEM7QUFFMUMsbUVBQWlEO0FBQ2pELGdEQUE4QjtBQUc5QixrQkFBZSxxQkFBYSxDQUFDIn0=

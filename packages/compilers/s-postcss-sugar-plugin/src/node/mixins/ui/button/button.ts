@@ -47,62 +47,64 @@ export default function (
 
   const defaultSize = __theme().config('size.default');
 
-  if (__isInScope('bare')) {
-    vars.push(`
-      display: inline-block;
-      cursor: pointer;
-      padding: ${__themeVar('ui.button.padding')};
+  // bare
+  vars.push(`
+      @sugar.scope.bare {
+        display: inline-block;
+        cursor: pointer;
+        padding: ${__themeVar('ui.button.padding')};
+      }
     `);
-  }
 
-  if (__isInScope('lnf')) {
-    vars.push(`border-radius: ${__themeVar('ui.button.borderRadius')};`);
-    vars.push(`transition: ${__themeVar('ui.button.transition')};`);
-  }
+  // lnf
+  vars.push(`
+      @sugar.scope.lnf {
+  `);
 
-  if (__isInScope('color')) {
-    switch (finalParams.style) {
-      case 'outlined':
-        vars.push('background-color: transparent;');
-        vars.push(`border-color: sugar.color(${finalParams.color});`);
-        vars.push(`color: sugar.color(${finalParams.color});`);
-        vars.push(`border-style: solid;`);
-        vars.push(`border-width: ${1 / parseInt(defaultSize)}em;`);
-        vars.push(`
-        &:hover {
-          background-color: sugar.color(${
-            finalParams.textColor
-              ? finalParams.textColor
-              : `${finalParams.color}--10`
-          });
-        }
+  vars.push(`
+      border-radius: ${__themeVar('ui.button.borderRadius')};
+      transition: ${__themeVar('ui.button.transition')};
+  `);
+
+  switch (finalParams.style) {
+    case 'outlined':
+      vars.push(`
+          background-color: transparent;
+          border-color: sugar.color(${finalParams.color});
+          color: sugar.color(${finalParams.color});
+          border-style: solid;
+          border-width: ${1 / parseInt(defaultSize)}em;
+          &:hover {
+            background-color: sugar.color(${
+              finalParams.textColor
+                ? finalParams.textColor
+                : `${finalParams.color}--10`
+            });
+          }
+        `);
+      break;
+    case 'text':
+      vars.push(`
+          background-color: transparent;
+          color: sugar.color(${finalParams.color});
+          &:hover {
+            background-color: sugar.color(${
+              finalParams.textColor
+                ? finalParams.textColor
+                : `${finalParams.color}--10`
+            });
+          }
       `);
-        break;
-      case 'text':
-        vars.push('background-color: transparent;');
-        vars.push(`color: sugar.color(${finalParams.color});`);
-        vars.push(`
-        &:hover {
-          background-color: sugar.color(${
-            finalParams.textColor
-              ? finalParams.textColor
-              : `${finalParams.color}--10`
-          });
-        }
-      `);
-        break;
-      case 'default':
-      default:
-        vars.push(`background-color: sugar.color(${finalParams.color});`);
-        vars.push(
-          `color: sugar.color(${
-            finalParams.textColor
-              ? finalParams.textColor
-              : `${finalParams.color}--i`
-          });`
-        );
-
-        vars.push(`
+      break;
+    case 'default':
+    default:
+      vars.push(`
+        background-color: sugar.color(${finalParams.color});
+        color: sugar.color(${
+          finalParams.textColor
+            ? finalParams.textColor
+            : `${finalParams.color}--i`
+        });
         &:hover {
           background-color: sugar.color(${
             finalParams.textColor
@@ -112,9 +114,9 @@ export default function (
           color: sugar.color(${finalParams.color});
         }
       `);
-        break;
-    }
+      break;
   }
+  vars.push('}');
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

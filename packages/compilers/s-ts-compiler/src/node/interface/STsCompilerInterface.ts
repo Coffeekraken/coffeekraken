@@ -62,7 +62,7 @@ class STsCompilerInterface extends __SInterface {
       default: __sugarConfig('ts.compile.map')
     },
     stack: {
-      type: 'String',
+      type: 'Array<String>',
       alias: 's',
       default: __sugarConfig('ts.compile.stack')
     },

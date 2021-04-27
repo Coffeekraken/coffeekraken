@@ -1,19 +1,4 @@
 // @shared
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,10 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var s_class_1 = __importDefault(require("@coffeekraken/s-class"));
-    var deepMerge_1 = __importDefault(require("@coffeekraken/sugar/src/shared/object/deepMerge"));
-    var SCacheAdapter = /** @class */ (function (_super) {
-        __extends(SCacheAdapter, _super);
+    const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
+    const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/src/shared/object/deepMerge"));
+    class SCacheAdapter extends s_class_1.default {
         /**
          * @name                              constructor
          * @type                              Function
@@ -42,17 +26,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        function SCacheAdapter(settings) {
-            if (settings === void 0) { settings = {}; }
-            return _super.call(this, deepMerge_1.default({
+        constructor(settings = {}) {
+            super(deepMerge_1.default({
                 cacheAdapter: {}
-            }, settings)) || this;
+            }, settings));
         }
-        SCacheAdapter.prototype.setCache = function (cache) {
+        setCache(cache) {
             this.cache = cache;
-        };
-        return SCacheAdapter;
-    }(s_class_1.default));
+        }
+    }
     exports.default = SCacheAdapter;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsa0VBQTZDO0lBQzdDLDhGQUEwRTtJQTJEMUU7UUFBb0QsaUNBQVE7UUFJMUQ7Ozs7Ozs7OztXQVNHO1FBQ0gsdUJBQVksUUFBYTtZQUFiLHlCQUFBLEVBQUEsYUFBYTttQkFDdkIsa0JBQ0UsbUJBQVcsQ0FDVDtnQkFDRSxZQUFZLEVBQUUsRUFBRTthQUNqQixFQUNELFFBQVEsQ0FDVCxDQUNGO1FBQ0gsQ0FBQztRQUVELGdDQUFRLEdBQVIsVUFBUyxLQUEwQjtZQUNqQyxJQUFJLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztRQUNyQixDQUFDO1FBcUZILG9CQUFDO0lBQUQsQ0FBQyxBQWhIRCxDQUFvRCxpQkFBUSxHQWdIM0QifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsb0VBQTZDO0lBQzdDLGdHQUEwRTtJQXNEMUUsTUFBOEIsYUFBYyxTQUFRLGlCQUFRO1FBSTFEOzs7Ozs7Ozs7V0FTRztRQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7WUFDdkIsS0FBSyxDQUNILG1CQUFXLENBQ1Q7Z0JBQ0UsWUFBWSxFQUFFLEVBQUU7YUFDakIsRUFDRCxRQUFRLENBQ1QsQ0FDRixDQUFDO1FBQ0osQ0FBQztRQUVELFFBQVEsQ0FBQyxLQUFlO1lBQ3RCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDO1FBQ3JCLENBQUM7S0FxRkY7SUFoSEQsZ0NBZ0hDIn0=

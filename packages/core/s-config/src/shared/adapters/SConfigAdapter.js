@@ -1,65 +1,75 @@
-"use strict";
 // @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
-class SConfigAdapter {
-    /**
-     * @name                              constructor
-     * @type                              Function
-     *
-     * Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.
-     *
-     * @param         {Object}          [settings={}]             An object to configure the SConfigAdapter instance. This is specific to each adapters.settings.settings...
-     * - name (null) {String}: Specify a simple name for this adapter instance. This name will be used to save the configs, etc...
-     * - ...others: All the settings you need for your specific adapter
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    constructor(settings) {
-        this._settings = deepMerge_1.default(settings || {});
-        if (settings.name && !/^[a-zA-Z0-9_\-:]+$/.test(settings.name)) {
-            throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "@coffeekraken/sugar/shared/object/deepMerge"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
+    class SConfigAdapter {
+        /**
+         * @name                              constructor
+         * @type                              Function
+         *
+         * Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.
+         *
+         * @param         {Object}          [settings={}]             An object to configure the SConfigAdapter instance. This is specific to each adapters.settings.settings...
+         * - name (null) {String}: Specify a simple name for this adapter instance. This name will be used to save the configs, etc...
+         * - ...others: All the settings you need for your specific adapter
+         *
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        constructor(settings) {
+            this._settings = deepMerge_1.default(settings || {});
+            if (settings.name && !/^[a-zA-Z0-9_\-:]+$/.test(settings.name)) {
+                throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
+            }
+        }
+        get configAdapterSettings() {
+            return this._settings.configAdapter;
+        }
+        /**
+         * @name        update
+         * @type        Function
+         *
+         * Function that you have to call with the new config when it has been updated
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        update() {
+            // calling the "onUpdate" setting callback if exists
+            if (!this._settings.onUpdate)
+                return;
+            this._settings.onUpdate();
+        }
+        /**
+         * @name                  name
+         * @type                  String
+         * @get
+         *
+         * Access the adapter setted name
+         *
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        get name() {
+            return this._settings.name;
+        }
+        set name(value) {
+            if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
+                throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
+            }
+            this._settings.name = value;
         }
     }
-    get configAdapterSettings() {
-        return this._settings.configAdapter;
-    }
-    /**
-     * @name        update
-     * @type        Function
-     *
-     * Function that you have to call with the new config when it has been updated
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    update() {
-        // calling the "onUpdate" setting callback if exists
-        if (!this._settings.onUpdate)
-            return;
-        this._settings.onUpdate();
-    }
-    /**
-     * @name                  name
-     * @type                  String
-     * @get
-     *
-     * Access the adapter setted name
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    get name() {
-        return this._settings.name;
-    }
-    set name(value) {
-        if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
-            throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
-        }
-        this._settings.name = value;
-    }
-}
-exports.default = SConfigAdapter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZ0FkYXB0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29uZmlnQWRhcHRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCw0RkFBc0U7QUF1Q3RFLE1BQXFCLGNBQWM7SUFnQmpDOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsWUFBWSxRQUE4QztRQUN4RCxJQUFJLENBQUMsU0FBUyxHQUFHLG1CQUFXLENBQUMsUUFBUSxJQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQzdDLElBQUksUUFBUSxDQUFDLElBQUksSUFBSSxDQUFDLG9CQUFvQixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDOUQsTUFBTSxJQUFJLEtBQUssQ0FDYix3RkFBd0YsQ0FDekYsQ0FBQztTQUNIO0lBQ0gsQ0FBQztJQXZCRCxJQUFJLHFCQUFxQjtRQUN2QixPQUFhLElBQUssQ0FBQyxTQUFTLENBQUMsYUFBYSxDQUFDO0lBQzdDLENBQUM7SUF1QkQ7Ozs7Ozs7O09BUUc7SUFDSCxNQUFNO1FBQ0osb0RBQW9EO1FBQ3BELElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVE7WUFBRSxPQUFPO1FBQ3JDLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDNUIsQ0FBQztJQUVEOzs7Ozs7OztPQVFHO0lBQ0gsSUFBSSxJQUFJO1FBQ04sT0FBTyxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQztJQUM3QixDQUFDO0lBQ0QsSUFBSSxJQUFJLENBQUMsS0FBSztRQUNaLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUU7WUFDckMsTUFBTSxJQUFJLEtBQUssQ0FDYix3RkFBd0YsQ0FDekYsQ0FBQztTQUNIO1FBQ0QsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDO0lBQzlCLENBQUM7Q0FDRjtBQXhFRCxpQ0F3RUMifQ==
+    exports.default = SConfigAdapter;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZ0FkYXB0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29uZmlnQWRhcHRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCw0RkFBc0U7SUF1Q3RFLE1BQXFCLGNBQWM7UUFnQmpDOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsWUFBWSxRQUE4QztZQUN4RCxJQUFJLENBQUMsU0FBUyxHQUFHLG1CQUFXLENBQUMsUUFBUSxJQUFJLEVBQUUsQ0FBQyxDQUFDO1lBQzdDLElBQUksUUFBUSxDQUFDLElBQUksSUFBSSxDQUFDLG9CQUFvQixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLEVBQUU7Z0JBQzlELE1BQU0sSUFBSSxLQUFLLENBQ2Isd0ZBQXdGLENBQ3pGLENBQUM7YUFDSDtRQUNILENBQUM7UUF2QkQsSUFBSSxxQkFBcUI7WUFDdkIsT0FBYSxJQUFLLENBQUMsU0FBUyxDQUFDLGFBQWEsQ0FBQztRQUM3QyxDQUFDO1FBdUJEOzs7Ozs7OztXQVFHO1FBQ0gsTUFBTTtZQUNKLG9EQUFvRDtZQUNwRCxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRO2dCQUFFLE9BQU87WUFDckMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztRQUM1QixDQUFDO1FBRUQ7Ozs7Ozs7O1dBUUc7UUFDSCxJQUFJLElBQUk7WUFDTixPQUFPLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDO1FBQzdCLENBQUM7UUFDRCxJQUFJLElBQUksQ0FBQyxLQUFLO1lBQ1osSUFBSSxDQUFDLG9CQUFvQixDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsRUFBRTtnQkFDckMsTUFBTSxJQUFJLEtBQUssQ0FDYix3RkFBd0YsQ0FDekYsQ0FBQzthQUNIO1lBQ0QsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDO1FBQzlCLENBQUM7S0FDRjtJQXhFRCxpQ0F3RUMifQ==

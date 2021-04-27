@@ -22,10 +22,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var SInterface_1 = __importDefault(require("../shared/SInterface"));
+    const SInterface_1 = __importDefault(require("../shared/SInterface"));
     // register renderers
     // SInterface.registerRenderer(__SInterfaceTerminalRenderer);
     __exportStar(require("../shared/SInterface"), exports);
     exports.default = SInterface_1.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBQUEsb0VBQThDO0lBRTlDLHFCQUFxQjtJQUNyQiw2REFBNkQ7SUFFN0QsdURBQXFDO0lBQ3JDLGtCQUFlLG9CQUFVLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBQUEsc0VBQThDO0lBRTlDLHFCQUFxQjtJQUNyQiw2REFBNkQ7SUFFN0QsdURBQXFDO0lBQ3JDLGtCQUFlLG9CQUFVLENBQUMifQ==

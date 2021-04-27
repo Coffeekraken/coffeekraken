@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
-    var addEventListener_1 = __importDefault(require("./addEventListener"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    const addEventListener_1 = __importDefault(require("./addEventListener"));
     /**
      * @name        addEventListenerOnce
      * @namespace            js.dom
@@ -45,29 +45,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since     1.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function addEventListenerOnce($elm, eventNames, callback, useCapture) {
-        var _this = this;
-        if (callback === void 0) { callback = null; }
-        if (useCapture === void 0) { useCapture = false; }
+    function addEventListenerOnce($elm, eventNames, callback = null, useCapture = false) {
         if (!Array.isArray(eventNames))
             eventNames = [eventNames];
-        var globalPromise = new s_promise_1.default({
+        const globalPromise = new s_promise_1.default({
             id: 'addEventListenerOnce'
         });
-        var eventsStack = {};
-        globalPromise.on('finally', function () {
-            eventNames.forEach(function (eventName) {
+        const eventsStack = {};
+        globalPromise.on('finally', () => {
+            eventNames.forEach((eventName) => {
                 eventsStack[eventName].promise.cancel();
             });
         });
-        eventNames.forEach(function (eventName) {
-            var promise = addEventListener_1.default($elm, eventName, null, useCapture);
+        eventNames.forEach((eventName) => {
+            const promise = addEventListener_1.default($elm, eventName, null, useCapture);
             eventsStack[eventName] = {
-                promise: promise
+                promise
             };
-            promise.on(eventNames, function (event) {
+            promise.on(eventNames, (event) => {
                 if (callback && typeof callback === 'function') {
-                    callback.apply(_this, [event]);
+                    callback.apply(this, [event]);
                 }
                 globalPromise.emit(eventName, event);
                 promise.cancel();
@@ -77,4 +74,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = addEventListenerOnce;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWRkRXZlbnRMaXN0ZW5lck9uY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhZGRFdmVudExpc3RlbmVyT25jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCxzRUFBaUQ7SUFDakQsd0VBQW9EO0lBRXBEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTZCRztJQUNILFNBQVMsb0JBQW9CLENBQzNCLElBQUksRUFDSixVQUFVLEVBQ1YsUUFBZSxFQUNmLFVBQWtCO1FBSnBCLGlCQXFDQztRQWxDQyx5QkFBQSxFQUFBLGVBQWU7UUFDZiwyQkFBQSxFQUFBLGtCQUFrQjtRQUVsQixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUM7WUFBRSxVQUFVLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUUxRCxJQUFNLGFBQWEsR0FBRyxJQUFJLG1CQUFVLENBQUM7WUFDbkMsRUFBRSxFQUFFLHNCQUFzQjtTQUMzQixDQUFDLENBQUM7UUFFSCxJQUFNLFdBQVcsR0FBRyxFQUFFLENBQUM7UUFFdkIsYUFBYSxDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7WUFDMUIsVUFBVSxDQUFDLE9BQU8sQ0FBQyxVQUFDLFNBQVM7Z0JBQzNCLFdBQVcsQ0FBQyxTQUFTLENBQUMsQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLENBQUM7WUFDMUMsQ0FBQyxDQUFDLENBQUM7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUVILFVBQVUsQ0FBQyxPQUFPLENBQUMsVUFBQyxTQUFTO1lBQzNCLElBQU0sT0FBTyxHQUFHLDBCQUFrQixDQUFDLElBQUksRUFBRSxTQUFTLEVBQUUsSUFBSSxFQUFFLFVBQVUsQ0FBQyxDQUFDO1lBRXRFLFdBQVcsQ0FBQyxTQUFTLENBQUMsR0FBRztnQkFDdkIsT0FBTyxTQUFBO2FBQ1IsQ0FBQztZQUVGLE9BQU8sQ0FBQyxFQUFFLENBQUMsVUFBVSxFQUFFLFVBQUMsS0FBSztnQkFDM0IsSUFBSSxRQUFRLElBQUksT0FBTyxRQUFRLEtBQUssVUFBVSxFQUFFO29CQUM5QyxRQUFRLENBQUMsS0FBSyxDQUFDLEtBQUksRUFBRSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7aUJBQy9CO2dCQUNELGFBQWEsQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFFLEtBQUssQ0FBQyxDQUFDO2dCQUNyQyxPQUFPLENBQUMsTUFBTSxFQUFFLENBQUM7WUFDbkIsQ0FBQyxDQUFDLENBQUM7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUVILE9BQU8sYUFBYSxDQUFDO0lBQ3ZCLENBQUM7SUFDRCxrQkFBZSxvQkFBb0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWRkRXZlbnRMaXN0ZW5lck9uY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhZGRFdmVudExpc3RlbmVyT25jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCx3RUFBaUQ7SUFDakQsMEVBQW9EO0lBRXBEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTZCRztJQUNILFNBQVMsb0JBQW9CLENBQzNCLElBQUksRUFDSixVQUFVLEVBQ1YsUUFBUSxHQUFHLElBQUksRUFDZixVQUFVLEdBQUcsS0FBSztRQUVsQixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUM7WUFBRSxVQUFVLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUUxRCxNQUFNLGFBQWEsR0FBRyxJQUFJLG1CQUFVLENBQUM7WUFDbkMsRUFBRSxFQUFFLHNCQUFzQjtTQUMzQixDQUFDLENBQUM7UUFFSCxNQUFNLFdBQVcsR0FBRyxFQUFFLENBQUM7UUFFdkIsYUFBYSxDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUUsR0FBRyxFQUFFO1lBQy9CLFVBQVUsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtnQkFDL0IsV0FBVyxDQUFDLFNBQVMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsQ0FBQztZQUMxQyxDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsQ0FBQyxDQUFDO1FBRUgsVUFBVSxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1lBQy9CLE1BQU0sT0FBTyxHQUFHLDBCQUFrQixDQUFDLElBQUksRUFBRSxTQUFTLEVBQUUsSUFBSSxFQUFFLFVBQVUsQ0FBQyxDQUFDO1lBRXRFLFdBQVcsQ0FBQyxTQUFTLENBQUMsR0FBRztnQkFDdkIsT0FBTzthQUNSLENBQUM7WUFFRixPQUFPLENBQUMsRUFBRSxDQUFDLFVBQVUsRUFBRSxDQUFDLEtBQUssRUFBRSxFQUFFO2dCQUMvQixJQUFJLFFBQVEsSUFBSSxPQUFPLFFBQVEsS0FBSyxVQUFVLEVBQUU7b0JBQzlDLFFBQVEsQ0FBQyxLQUFLLENBQUMsSUFBSSxFQUFFLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztpQkFDL0I7Z0JBQ0QsYUFBYSxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsS0FBSyxDQUFDLENBQUM7Z0JBQ3JDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsQ0FBQztZQUNuQixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsQ0FBQyxDQUFDO1FBRUgsT0FBTyxhQUFhLENBQUM7SUFDdkIsQ0FBQztJQUNELGtCQUFlLG9CQUFvQixDQUFDIn0=

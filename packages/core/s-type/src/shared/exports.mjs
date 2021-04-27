@@ -1,0 +1,8 @@
+import SType from './SType';
+import STypeResult from './STypeResult';
+import parseTypeString from './utils/parseTypeString';
+export * from './SType';
+export * from './STypeResult';
+export { STypeResult, parseTypeString };
+export default SType;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2NvcmUvcy10eXBlL3NyYy9zaGFyZWQvZXhwb3J0cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEtBQUssTUFBTSxTQUFTLENBQUM7QUFDNUIsT0FBTyxXQUFXLE1BQU0sZUFBZSxDQUFDO0FBQ3hDLE9BQU8sZUFBZSxNQUFNLHlCQUF5QixDQUFDO0FBRXRELGNBQWMsU0FBUyxDQUFDO0FBQ3hCLGNBQWMsZUFBZSxDQUFDO0FBRTlCLE9BQU8sRUFBRSxXQUFXLEVBQUUsZUFBZSxFQUFFLENBQUM7QUFDeEMsZUFBZSxLQUFLLENBQUMifQ==

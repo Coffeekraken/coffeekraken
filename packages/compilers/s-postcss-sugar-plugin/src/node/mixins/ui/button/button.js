@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const themeVar_1 = __importDefault(require("../../../utils/themeVar"));
-const isInScope_1 = __importDefault(require("../../../utils/isInScope"));
 const theme_1 = __importDefault(require("../../../utils/theme"));
 class postcssSugarPluginUiButtonInterface extends s_interface_1.default {
 }
@@ -32,63 +31,67 @@ function default_1(params = {}, atRule, processNested) {
     const finalParams = Object.assign({ color: 'default', textColor: '', style: 'default' }, params);
     const vars = [];
     const defaultSize = theme_1.default().config('size.default');
-    if (isInScope_1.default('bare')) {
-        vars.push(`
-      display: inline-block;
-      cursor: pointer;
-      padding: ${themeVar_1.default('ui.button.padding')};
+    // bare
+    vars.push(`
+      @sugar.scope.bare {
+        display: inline-block;
+        cursor: pointer;
+        padding: ${themeVar_1.default('ui.button.padding')};
+      }
     `);
-    }
-    if (isInScope_1.default('lnf')) {
-        vars.push(`border-radius: ${themeVar_1.default('ui.button.borderRadius')};`);
-        vars.push(`transition: ${themeVar_1.default('ui.button.transition')};`);
-    }
-    if (isInScope_1.default('color')) {
-        switch (finalParams.style) {
-            case 'outlined':
-                vars.push('background-color: transparent;');
-                vars.push(`border-color: sugar.color(${finalParams.color});`);
-                vars.push(`color: sugar.color(${finalParams.color});`);
-                vars.push(`border-style: solid;`);
-                vars.push(`border-width: ${1 / parseInt(defaultSize)}em;`);
-                vars.push(`
-        &:hover {
-          background-color: sugar.color(${finalParams.textColor
-                    ? finalParams.textColor
-                    : `${finalParams.color}--10`});
-        }
+    // lnf
+    vars.push(`
+      @sugar.scope.lnf {
+  `);
+    vars.push(`
+      border-radius: ${themeVar_1.default('ui.button.borderRadius')};
+      transition: ${themeVar_1.default('ui.button.transition')};
+  `);
+    switch (finalParams.style) {
+        case 'outlined':
+            vars.push(`
+          background-color: transparent;
+          border-color: sugar.color(${finalParams.color});
+          color: sugar.color(${finalParams.color});
+          border-style: solid;
+          border-width: ${1 / parseInt(defaultSize)}em;
+          &:hover {
+            background-color: sugar.color(${finalParams.textColor
+                ? finalParams.textColor
+                : `${finalParams.color}--10`});
+          }
+        `);
+            break;
+        case 'text':
+            vars.push(`
+          background-color: transparent;
+          color: sugar.color(${finalParams.color});
+          &:hover {
+            background-color: sugar.color(${finalParams.textColor
+                ? finalParams.textColor
+                : `${finalParams.color}--10`});
+          }
       `);
-                break;
-            case 'text':
-                vars.push('background-color: transparent;');
-                vars.push(`color: sugar.color(${finalParams.color});`);
-                vars.push(`
+            break;
+        case 'default':
+        default:
+            vars.push(`
+        background-color: sugar.color(${finalParams.color});
+        color: sugar.color(${finalParams.textColor
+                ? finalParams.textColor
+                : `${finalParams.color}--i`});
         &:hover {
           background-color: sugar.color(${finalParams.textColor
-                    ? finalParams.textColor
-                    : `${finalParams.color}--10`});
-        }
-      `);
-                break;
-            case 'default':
-            default:
-                vars.push(`background-color: sugar.color(${finalParams.color});`);
-                vars.push(`color: sugar.color(${finalParams.textColor
-                    ? finalParams.textColor
-                    : `${finalParams.color}--i`});`);
-                vars.push(`
-        &:hover {
-          background-color: sugar.color(${finalParams.textColor
-                    ? finalParams.textColor
-                    : `${finalParams.color}--i`});
+                ? finalParams.textColor
+                : `${finalParams.color}--i`});
           color: sugar.color(${finalParams.color});
         }
       `);
-                break;
-        }
+            break;
     }
+    vars.push('}');
     const AST = processNested(vars.join('\n'));
     atRule.replaceWith(AST);
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnV0dG9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYnV0dG9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCx1RUFBaUQ7QUFDakQseUVBQW1EO0FBQ25ELGlFQUEyQztBQUUzQyxNQUFNLG1DQUFvQyxTQUFRLHFCQUFZOztBQTBCZCx3REFBUztBQXpCaEQsOENBQVUsR0FBRztJQUNsQixLQUFLLEVBQUU7UUFDTCxJQUFJLEVBQUUsUUFBUTtRQUNkLFFBQVEsRUFBRSxJQUFJO1FBQ2QsT0FBTyxFQUFFLFNBQVM7UUFDbEIsS0FBSyxFQUFFLEdBQUc7S0FDWDtJQUNELFNBQVMsRUFBRTtRQUNULElBQUksRUFBRSxRQUFRO1FBQ2QsS0FBSyxFQUFFLEdBQUc7S0FDWDtJQUNELEtBQUssRUFBRTtRQUNMLElBQUksRUFBRSxRQUFRO1FBQ2QsTUFBTSxFQUFFLENBQUMsU0FBUyxFQUFFLFVBQVUsRUFBRSxNQUFNLENBQUM7UUFDdkMsT0FBTyxFQUFFLFNBQVM7S0FDbkI7Q0FDRixDQUFDO0FBV0osbUJBQ0UsU0FBcUQsRUFBRSxFQUN2RCxNQUFNLEVBQ04sYUFBYTtJQUViLE1BQU0sV0FBVyxtQkFDZixLQUFLLEVBQUUsU0FBUyxFQUNoQixTQUFTLEVBQUUsRUFBRSxFQUNiLEtBQUssRUFBRSxTQUFTLElBQ2IsTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsTUFBTSxXQUFXLEdBQUcsZUFBTyxFQUFFLENBQUMsTUFBTSxDQUFDLGNBQWMsQ0FBQyxDQUFDO0lBRXJELElBQUksbUJBQVcsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUN2QixJQUFJLENBQUMsSUFBSSxDQUFDOzs7aUJBR0csa0JBQVUsQ0FBQyxtQkFBbUIsQ0FBQztLQUMzQyxDQUFDLENBQUM7S0FDSjtJQUVELElBQUksbUJBQVcsQ0FBQyxLQUFLLENBQUMsRUFBRTtRQUN0QixJQUFJLENBQUMsSUFBSSxDQUFDLGtCQUFrQixrQkFBVSxDQUFDLHdCQUF3QixDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ3JFLElBQUksQ0FBQyxJQUFJLENBQUMsZUFBZSxrQkFBVSxDQUFDLHNCQUFzQixDQUFDLEdBQUcsQ0FBQyxDQUFDO0tBQ2pFO0lBRUQsSUFBSSxtQkFBVyxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ3hCLFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN6QixLQUFLLFVBQVU7Z0JBQ2IsSUFBSSxDQUFDLElBQUksQ0FBQyxnQ0FBZ0MsQ0FBQyxDQUFDO2dCQUM1QyxJQUFJLENBQUMsSUFBSSxDQUFDLDZCQUE2QixXQUFXLENBQUMsS0FBSyxJQUFJLENBQUMsQ0FBQztnQkFDOUQsSUFBSSxDQUFDLElBQUksQ0FBQyxzQkFBc0IsV0FBVyxDQUFDLEtBQUssSUFBSSxDQUFDLENBQUM7Z0JBQ3ZELElBQUksQ0FBQyxJQUFJLENBQUMsc0JBQXNCLENBQUMsQ0FBQztnQkFDbEMsSUFBSSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUM7Z0JBQzNELElBQUksQ0FBQyxJQUFJLENBQUM7OzBDQUdOLFdBQVcsQ0FBQyxTQUFTO29CQUNuQixDQUFDLENBQUMsV0FBVyxDQUFDLFNBQVM7b0JBQ3ZCLENBQUMsQ0FBQyxHQUFHLFdBQVcsQ0FBQyxLQUFLLE1BQzFCOztPQUVILENBQUMsQ0FBQztnQkFDRCxNQUFNO1lBQ1IsS0FBSyxNQUFNO2dCQUNULElBQUksQ0FBQyxJQUFJLENBQUMsZ0NBQWdDLENBQUMsQ0FBQztnQkFDNUMsSUFBSSxDQUFDLElBQUksQ0FBQyxzQkFBc0IsV0FBVyxDQUFDLEtBQUssSUFBSSxDQUFDLENBQUM7Z0JBQ3ZELElBQUksQ0FBQyxJQUFJLENBQUM7OzBDQUdOLFdBQVcsQ0FBQyxTQUFTO29CQUNuQixDQUFDLENBQUMsV0FBVyxDQUFDLFNBQVM7b0JBQ3ZCLENBQUMsQ0FBQyxHQUFHLFdBQVcsQ0FBQyxLQUFLLE1BQzFCOztPQUVILENBQUMsQ0FBQztnQkFDRCxNQUFNO1lBQ1IsS0FBSyxTQUFTLENBQUM7WUFDZjtnQkFDRSxJQUFJLENBQUMsSUFBSSxDQUFDLGlDQUFpQyxXQUFXLENBQUMsS0FBSyxJQUFJLENBQUMsQ0FBQztnQkFDbEUsSUFBSSxDQUFDLElBQUksQ0FDUCxzQkFDRSxXQUFXLENBQUMsU0FBUztvQkFDbkIsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxTQUFTO29CQUN2QixDQUFDLENBQUMsR0FBRyxXQUFXLENBQUMsS0FBSyxLQUMxQixJQUFJLENBQ0wsQ0FBQztnQkFFRixJQUFJLENBQUMsSUFBSSxDQUFDOzswQ0FHTixXQUFXLENBQUMsU0FBUztvQkFDbkIsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxTQUFTO29CQUN2QixDQUFDLENBQUMsR0FBRyxXQUFXLENBQUMsS0FBSyxLQUMxQjsrQkFDcUIsV0FBVyxDQUFDLEtBQUs7O09BRXpDLENBQUMsQ0FBQztnQkFDRCxNQUFNO1NBQ1Q7S0FDRjtJQUVELE1BQU0sR0FBRyxHQUFHLGFBQWEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDM0MsTUFBTSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUMxQixDQUFDO0FBdkZELDRCQXVGQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnV0dG9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYnV0dG9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCx1RUFBaUQ7QUFFakQsaUVBQTJDO0FBRTNDLE1BQU0sbUNBQW9DLFNBQVEscUJBQVk7O0FBMEJkLHdEQUFTO0FBekJoRCw4Q0FBVSxHQUFHO0lBQ2xCLEtBQUssRUFBRTtRQUNMLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7UUFDZCxPQUFPLEVBQUUsU0FBUztRQUNsQixLQUFLLEVBQUUsR0FBRztLQUNYO0lBQ0QsU0FBUyxFQUFFO1FBQ1QsSUFBSSxFQUFFLFFBQVE7UUFDZCxLQUFLLEVBQUUsR0FBRztLQUNYO0lBQ0QsS0FBSyxFQUFFO1FBQ0wsSUFBSSxFQUFFLFFBQVE7UUFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsVUFBVSxFQUFFLE1BQU0sQ0FBQztRQUN2QyxPQUFPLEVBQUUsU0FBUztLQUNuQjtDQUNGLENBQUM7QUFXSixtQkFDRSxTQUFxRCxFQUFFLEVBQ3ZELE1BQU0sRUFDTixhQUFhO0lBRWIsTUFBTSxXQUFXLG1CQUNmLEtBQUssRUFBRSxTQUFTLEVBQ2hCLFNBQVMsRUFBRSxFQUFFLEVBQ2IsS0FBSyxFQUFFLFNBQVMsSUFDYixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixNQUFNLFdBQVcsR0FBRyxlQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsY0FBYyxDQUFDLENBQUM7SUFFckQsT0FBTztJQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7bUJBSU8sa0JBQVUsQ0FBQyxtQkFBbUIsQ0FBQzs7S0FFN0MsQ0FBQyxDQUFDO0lBRUwsTUFBTTtJQUNOLElBQUksQ0FBQyxJQUFJLENBQUM7O0dBRVQsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzt1QkFDVyxrQkFBVSxDQUFDLHdCQUF3QixDQUFDO29CQUN2QyxrQkFBVSxDQUFDLHNCQUFzQixDQUFDO0dBQ25ELENBQUMsQ0FBQztJQUVILFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtRQUN6QixLQUFLLFVBQVU7WUFDYixJQUFJLENBQUMsSUFBSSxDQUFDOztzQ0FFc0IsV0FBVyxDQUFDLEtBQUs7K0JBQ3hCLFdBQVcsQ0FBQyxLQUFLOzswQkFFdEIsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxXQUFXLENBQUM7OzRDQUdyQyxXQUFXLENBQUMsU0FBUztnQkFDbkIsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxTQUFTO2dCQUN2QixDQUFDLENBQUMsR0FBRyxXQUFXLENBQUMsS0FBSyxNQUMxQjs7U0FFSCxDQUFDLENBQUM7WUFDTCxNQUFNO1FBQ1IsS0FBSyxNQUFNO1lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7K0JBRWUsV0FBVyxDQUFDLEtBQUs7OzRDQUdsQyxXQUFXLENBQUMsU0FBUztnQkFDbkIsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxTQUFTO2dCQUN2QixDQUFDLENBQUMsR0FBRyxXQUFXLENBQUMsS0FBSyxNQUMxQjs7T0FFTCxDQUFDLENBQUM7WUFDSCxNQUFNO1FBQ1IsS0FBSyxTQUFTLENBQUM7UUFDZjtZQUNFLElBQUksQ0FBQyxJQUFJLENBQUM7d0NBQ3dCLFdBQVcsQ0FBQyxLQUFLOzZCQUUvQyxXQUFXLENBQUMsU0FBUztnQkFDbkIsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxTQUFTO2dCQUN2QixDQUFDLENBQUMsR0FBRyxXQUFXLENBQUMsS0FBSyxLQUMxQjs7MENBR0ksV0FBVyxDQUFDLFNBQVM7Z0JBQ25CLENBQUMsQ0FBQyxXQUFXLENBQUMsU0FBUztnQkFDdkIsQ0FBQyxDQUFDLEdBQUcsV0FBVyxDQUFDLEtBQUssS0FDMUI7K0JBQ3FCLFdBQVcsQ0FBQyxLQUFLOztPQUV6QyxDQUFDLENBQUM7WUFDSCxNQUFNO0tBQ1Q7SUFDRCxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRWYsTUFBTSxHQUFHLEdBQUcsYUFBYSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUMzQyxNQUFNLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzFCLENBQUM7QUF6RkQsNEJBeUZDIn0=

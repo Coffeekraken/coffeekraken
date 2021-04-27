@@ -116,15 +116,6 @@ export default function parseArgs(string, settings = {}) {
     }
     stringArray.push(currentStr.trim());
   } else {
-    // // process the passed string
-    // let reg = /(?:[^\s"]+|"[^"]*")+/gm;
-    // if (valueQuote === "'") reg = /(?:[^\s']+|'[^']*')+/gm;
-    // else if (valueQuote === '`') reg = /(?:[^\s\\\\`]+|\\\\`[^\\\\`]*\\\\`)+/gm;
-    // stringArray = string.match(reg) || [];
-    // stringArray = stringArray.map((item) => {
-    //   return __unquote(item);
-    // });
-
     let currentStr = '';
     let isInQuotes = false;
     for (let i = 0; i < string.length; i++) {
@@ -195,7 +186,14 @@ export default function parseArgs(string, settings = {}) {
       currentValue = __parse(value);
 
       if (currentArgName !== undefined) {
-        argsObj[currentArgName] = currentValue;
+        if (argsObj[currentArgName] !== undefined) {
+          if (!Array.isArray(argsObj[currentArgName])) {
+            argsObj[currentArgName] = [argsObj[currentArgName]];
+          }
+          argsObj[currentArgName].push(currentValue);
+        } else {
+          argsObj[currentArgName] = currentValue;
+        }
         currentValue = undefined;
         currentArgName = undefined;
       } else {

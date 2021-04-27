@@ -20,7 +20,12 @@
  */
 export default function isInScope(scope: string): boolean {
   // @ts-ignore
-  if (!global._postcssSugarPluginScopeMixinScopesStack) return true;
+
+  if (
+    !global._postcssSugarPluginScopeMixinScopesStack ||
+    !global._postcssSugarPluginScopeMixinScopesStack.length
+  )
+    return true;
 
   // @ts-ignore
   const currentScopes = global._postcssSugarPluginScopeMixinScopesStack.slice(

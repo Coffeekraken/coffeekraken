@@ -553,6 +553,10 @@
   --s-theme-typo-h6-font-size: 30;
   --s-theme-typo-h6-color: text;
   --s-theme-typo-h6-margin-bottom: 50;
+  --s-theme-typo-p-lead-font-family: default;
+  --s-theme-typo-p-lead-font-size: 70;
+  --s-theme-typo-p-lead-color: text;
+  --s-theme-typo-p-lead-margin-bottom: 50;
   --s-theme-typo-p-font-family: default;
   --s-theme-typo-p-font-size: 50;
   --s-theme-typo-p-color: text;
@@ -1100,7 +1104,8 @@ template {
   font-weight: var(--s-theme-font-family-code-font-weight, normal);
   font-style: var(--s-theme-font-family-code-font-style, normal)
 }
-/* @sugar.space.classes; */
+/* @sugar.space.classes;
+
 /* @sugar.gradient.classes;
 @sugar.ratio.classes;
 @sugar.util.classes; */
@@ -1303,6 +1308,39 @@ template {
   margin-bottom: var(--s-theme-space-50, 1rem)
 }
 /**
+    * @name            .s-p-lead
+    * @namespace        sugar.css.typo
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>p-lead</yellow>" typography style to any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-p-lead">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.s-p-lead {
+  font-family: var(--s-theme-font-family-default-font-family, Titillium Web);
+  font-weight: var(--s-theme-font-family-default-font-weight, 400);
+  font-size: var(--s-theme-font-size-70, 32px);
+  color: var(--s-theme-default-color-text-default, #848e91)
+}
+/**
+          * @name         .s-space-children .s-p-lead, .s-p-lead.s-space
+          * @namespace    sugar.css.typo
+          * @type         CssClass
+          * 
+          * This class allows you to activate the space(s) on your "<yellow>s-p-lead</yellow>" HTMLElement
+          * 
+          * @since    2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+.s-space-children .s-p-lead,
+.s-p-lead.s-space {
+  margin-bottom: var(--s-theme-space-50, 1rem)
+}
+/**
     * @name            .s-p
     * @namespace        sugar.css.typo
     * @type             CssClass
@@ -1497,10 +1535,805 @@ template {
   vertical-align: sup;
   font-size: 0.6em
 }
-/* @sugar.init;
-
-
-@sugar.ui.button.classes; */
+/* @sugar.init; */
+.s-btn:not(.s-nude-children .s-btn):not(.s-no-bare-children .s-btn):not(.s-nude):not(.s-no-bare) {
+  display: inline-block;
+  cursor: pointer;
+  padding: var(--s-theme-ui-button-padding, 1em 2em)
+}
+/**
+        * @name           .s-btn
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>default</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn">I'm a cool button</a>
+      */
+.s-btn:not(.s-nude-children .s-btn):not(.s-no-lnf-children .s-btn):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-default-default, #848e91);
+  color: var(--s-theme-default-color-default-default-i, #0a0a0b)
+}
+.s-btn:not(.s-nude-children .s-btn):not(.s-no-lnf-children .s-btn):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-default-default-i, #0a0a0b);
+  color: var(--s-theme-default-color-default-default, #848e91)
+}
+/**
+        * @name           .s-btn.s-btn--title
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>title</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--title">I'm a cool button</a>
+      */
+.s-btn.s-btn--title:not(.s-nude-children .s-btn.s-btn--title):not(.s-no-lnf-children .s-btn.s-btn--title):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-title-default, #2b3438);
+  color: var(--s-theme-default-color-title-default-i, #a6b4ba)
+}
+.s-btn.s-btn--title:not(.s-nude-children .s-btn.s-btn--title):not(.s-no-lnf-children .s-btn.s-btn--title):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-title-default-i, #a6b4ba);
+  color: var(--s-theme-default-color-title-default, #2b3438)
+}
+/**
+        * @name           .s-btn.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>text</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--text:not(.s-nude-children .s-btn.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-text-default, #848e91);
+  color: var(--s-theme-default-color-text-default-i, #0a0a0b)
+}
+.s-btn.s-btn--text:not(.s-nude-children .s-btn.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-text-default-i, #0a0a0b);
+  color: var(--s-theme-default-color-text-default, #848e91)
+}
+/**
+        * @name           .s-btn.s-btn--link
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>link</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--link">I'm a cool button</a>
+      */
+.s-btn.s-btn--link:not(.s-nude-children .s-btn.s-btn--link):not(.s-no-lnf-children .s-btn.s-btn--link):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-link-default, #f2bc2b);
+  color: var(--s-theme-default-color-link-default-i, #181202)
+}
+.s-btn.s-btn--link:not(.s-nude-children .s-btn.s-btn--link):not(.s-no-lnf-children .s-btn.s-btn--link):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-link-default-i, #181202);
+  color: var(--s-theme-default-color-link-default, #f2bc2b)
+}
+/**
+        * @name           .s-btn.s-btn--primary
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>primary</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--primary">I'm a cool button</a>
+      */
+.s-btn.s-btn--primary:not(.s-nude-children .s-btn.s-btn--primary):not(.s-no-lnf-children .s-btn.s-btn--primary):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-primary-default, #f2bc2b);
+  color: var(--s-theme-default-color-primary-default-i, #181202)
+}
+.s-btn.s-btn--primary:not(.s-nude-children .s-btn.s-btn--primary):not(.s-no-lnf-children .s-btn.s-btn--primary):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-primary-default-i, #181202);
+  color: var(--s-theme-default-color-primary-default, #f2bc2b)
+}
+/**
+        * @name           .s-btn.s-btn--secondary
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>secondary</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--secondary">I'm a cool button</a>
+      */
+.s-btn.s-btn--secondary:not(.s-nude-children .s-btn.s-btn--secondary):not(.s-no-lnf-children .s-btn.s-btn--secondary):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-secondary-default, #6d858f);
+  color: var(--s-theme-default-color-secondary-default-i, #fcfdfd)
+}
+.s-btn.s-btn--secondary:not(.s-nude-children .s-btn.s-btn--secondary):not(.s-no-lnf-children .s-btn.s-btn--secondary):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-secondary-default-i, #fcfdfd);
+  color: var(--s-theme-default-color-secondary-default, #6d858f)
+}
+/**
+        * @name           .s-btn.s-btn--surface
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>surface</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--surface">I'm a cool button</a>
+      */
+.s-btn.s-btn--surface:not(.s-nude-children .s-btn.s-btn--surface):not(.s-no-lnf-children .s-btn.s-btn--surface):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-surface-default, #6d858f);
+  color: var(--s-theme-default-color-surface-default-i, #fcfdfd)
+}
+.s-btn.s-btn--surface:not(.s-nude-children .s-btn.s-btn--surface):not(.s-no-lnf-children .s-btn.s-btn--surface):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-surface-default-i, #fcfdfd);
+  color: var(--s-theme-default-color-surface-default, #6d858f)
+}
+/**
+        * @name           .s-btn.s-btn--background
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>background</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--background">I'm a cool button</a>
+      */
+.s-btn.s-btn--background:not(.s-nude-children .s-btn.s-btn--background):not(.s-no-lnf-children .s-btn.s-btn--background):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-background-default, #6d858f);
+  color: var(--s-theme-default-color-background-default-i, #fcfdfd)
+}
+.s-btn.s-btn--background:not(.s-nude-children .s-btn.s-btn--background):not(.s-no-lnf-children .s-btn.s-btn--background):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-background-default-i, #fcfdfd);
+  color: var(--s-theme-default-color-background-default, #6d858f)
+}
+/**
+        * @name           .s-btn.s-btn--success
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>success</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--success">I'm a cool button</a>
+      */
+.s-btn.s-btn--success:not(.s-nude-children .s-btn.s-btn--success):not(.s-no-lnf-children .s-btn.s-btn--success):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-success-default, #5cb85c);
+  color: var(--s-theme-default-color-success-default-i, #060e06)
+}
+.s-btn.s-btn--success:not(.s-nude-children .s-btn.s-btn--success):not(.s-no-lnf-children .s-btn.s-btn--success):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-success-default-i, #060e06);
+  color: var(--s-theme-default-color-success-default, #5cb85c)
+}
+/**
+        * @name           .s-btn.s-btn--warning
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>warning</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--warning">I'm a cool button</a>
+      */
+.s-btn.s-btn--warning:not(.s-nude-children .s-btn.s-btn--warning):not(.s-no-lnf-children .s-btn.s-btn--warning):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-warning-default, #f0ad4e);
+  color: var(--s-theme-default-color-warning-default-i, #382305)
+}
+.s-btn.s-btn--warning:not(.s-nude-children .s-btn.s-btn--warning):not(.s-no-lnf-children .s-btn.s-btn--warning):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-warning-default-i, #382305);
+  color: var(--s-theme-default-color-warning-default, #f0ad4e)
+}
+/**
+        * @name           .s-btn.s-btn--error
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>error</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--error">I'm a cool button</a>
+      */
+.s-btn.s-btn--error:not(.s-nude-children .s-btn.s-btn--error):not(.s-no-lnf-children .s-btn.s-btn--error):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-error-default, #d9534f);
+  color: var(--s-theme-default-color-error-default-i, #210707)
+}
+.s-btn.s-btn--error:not(.s-nude-children .s-btn.s-btn--error):not(.s-no-lnf-children .s-btn.s-btn--error):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-error-default-i, #210707);
+  color: var(--s-theme-default-color-error-default, #d9534f)
+}
+/**
+        * @name           .s-btn.s-btn--info
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>info</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--info">I'm a cool button</a>
+      */
+.s-btn.s-btn--info:not(.s-nude-children .s-btn.s-btn--info):not(.s-no-lnf-children .s-btn.s-btn--info):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-info-default, #2199e8);
+  color: var(--s-theme-default-color-info-default-i, #ffffff)
+}
+.s-btn.s-btn--info:not(.s-nude-children .s-btn.s-btn--info):not(.s-no-lnf-children .s-btn.s-btn--info):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-info-default-i, #ffffff);
+  color: var(--s-theme-default-color-info-default, #2199e8)
+}
+/**
+        * @name           .s-btn.s-btn--extension
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" button with the "<yellow>extension</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--extension">I'm a cool button</a>
+      */
+.s-btn.s-btn--extension:not(.s-nude-children .s-btn.s-btn--extension):not(.s-no-lnf-children .s-btn.s-btn--extension):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: var(--s-theme-default-color-extension-default, #f2bc2b);
+  color: var(--s-theme-default-color-extension-default-i, #181202)
+}
+.s-btn.s-btn--extension:not(.s-nude-children .s-btn.s-btn--extension):not(.s-no-lnf-children .s-btn.s-btn--extension):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-extension-default-i, #181202);
+  color: var(--s-theme-default-color-extension-default, #f2bc2b)
+}
+/**
+        * @name           .s-btn.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>default</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-default-default, #848e91);
+  color: var(--s-theme-default-color-default-default, #848e91);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-default-10, #eff0f0)
+}
+/**
+        * @name           .s-btn.s-btn--title.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>title</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--title s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--title.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--title.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--title.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-title-default, #2b3438);
+  color: var(--s-theme-default-color-title-default, #2b3438);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--title.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--title.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--title.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-title-10, #899ca4)
+}
+/**
+        * @name           .s-btn.s-btn--text.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>text</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--text s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--text.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--text.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--text.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-text-default, #848e91);
+  color: var(--s-theme-default-color-text-default, #848e91);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--text.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--text.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--text.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-text-10, #eff0f0)
+}
+/**
+        * @name           .s-btn.s-btn--link.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>link</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--link s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--link.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--link.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--link.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-link-default, #f2bc2b);
+  color: var(--s-theme-default-color-link-default, #f2bc2b);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--link.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--link.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--link.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-link-10, #fdf7e7)
+}
+/**
+        * @name           .s-btn.s-btn--primary.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>primary</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--primary s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--primary.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--primary.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--primary.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-primary-default, #f2bc2b);
+  color: var(--s-theme-default-color-primary-default, #f2bc2b);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--primary.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--primary.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--primary.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-primary-10, #fdf7e7)
+}
+/**
+        * @name           .s-btn.s-btn--secondary.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>secondary</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--secondary s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--secondary.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--secondary.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--secondary.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-secondary-default, #6d858f);
+  color: var(--s-theme-default-color-secondary-default, #6d858f);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--secondary.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--secondary.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--secondary.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-secondary-10, #dfe5e7)
+}
+/**
+        * @name           .s-btn.s-btn--surface.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>surface</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--surface s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--surface.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--surface.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--surface.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-surface-default, #6d858f);
+  color: var(--s-theme-default-color-surface-default, #6d858f);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--surface.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--surface.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--surface.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-surface-10, #dfe5e7)
+}
+/**
+        * @name           .s-btn.s-btn--background.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>background</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--background s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--background.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--background.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--background.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-background-default, #6d858f);
+  color: var(--s-theme-default-color-background-default, #6d858f);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--background.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--background.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--background.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-background-10, #dfe5e7)
+}
+/**
+        * @name           .s-btn.s-btn--success.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>success</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--success s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--success.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--success.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--success.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-success-default, #5cb85c);
+  color: var(--s-theme-default-color-success-default, #5cb85c);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--success.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--success.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--success.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-success-10, #eaf6ea)
+}
+/**
+        * @name           .s-btn.s-btn--warning.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>warning</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--warning s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--warning.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--warning.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--warning.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-warning-default, #f0ad4e);
+  color: var(--s-theme-default-color-warning-default, #f0ad4e);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--warning.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--warning.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--warning.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-warning-10, #ffffff)
+}
+/**
+        * @name           .s-btn.s-btn--error.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>error</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--error s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--error.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--error.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--error.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-error-default, #d9534f);
+  color: var(--s-theme-default-color-error-default, #d9534f);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--error.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--error.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--error.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-error-10, #fdf7f7)
+}
+/**
+        * @name           .s-btn.s-btn--info.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>info</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--info s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--info.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--info.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--info.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-info-default, #2199e8);
+  color: var(--s-theme-default-color-info-default, #2199e8);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--info.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--info.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--info.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-info-10, #d5ecfb)
+}
+/**
+        * @name           .s-btn.s-btn--extension.s-btn--outlined
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>outlined</yellow>" button with the "<yellow>extension</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--extension s-btn--outlined">I'm a cool button</a>
+      */
+.s-btn.s-btn--extension.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--extension.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--extension.s-btn--outlined):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-default-color-extension-default, #f2bc2b);
+  color: var(--s-theme-default-color-extension-default, #f2bc2b);
+  border-style: solid;
+  border-width: 0.0625em
+}
+.s-btn.s-btn--extension.s-btn--outlined:not(.s-nude-children .s-btn.s-btn--extension.s-btn--outlined):not(.s-no-lnf-children .s-btn.s-btn--extension.s-btn--outlined):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: sugar.color(extension--10)
+}
+/**
+        * @name           .s-btn.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>default</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--text:not(.s-nude-children .s-btn.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-default-default, #848e91)
+}
+.s-btn.s-btn--text:not(.s-nude-children .s-btn.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-default-10, #eff0f0)
+}
+/**
+        * @name           .s-btn.s-btn--title.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>title</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--title s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--title.s-btn--text:not(.s-nude-children .s-btn.s-btn--title.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--title.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-title-default, #2b3438)
+}
+.s-btn.s-btn--title.s-btn--text:not(.s-nude-children .s-btn.s-btn--title.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--title.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-title-10, #899ca4)
+}
+/**
+        * @name           .s-btn.s-btn--text.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>text</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--text s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--text.s-btn--text:not(.s-nude-children .s-btn.s-btn--text.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--text.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-text-default, #848e91)
+}
+.s-btn.s-btn--text.s-btn--text:not(.s-nude-children .s-btn.s-btn--text.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--text.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-text-10, #eff0f0)
+}
+/**
+        * @name           .s-btn.s-btn--link.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>link</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--link s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--link.s-btn--text:not(.s-nude-children .s-btn.s-btn--link.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--link.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-link-default, #f2bc2b)
+}
+.s-btn.s-btn--link.s-btn--text:not(.s-nude-children .s-btn.s-btn--link.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--link.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-link-10, #fdf7e7)
+}
+/**
+        * @name           .s-btn.s-btn--primary.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>primary</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--primary s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--primary.s-btn--text:not(.s-nude-children .s-btn.s-btn--primary.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--primary.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-primary-default, #f2bc2b)
+}
+.s-btn.s-btn--primary.s-btn--text:not(.s-nude-children .s-btn.s-btn--primary.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--primary.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-primary-10, #fdf7e7)
+}
+/**
+        * @name           .s-btn.s-btn--secondary.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>secondary</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--secondary s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--secondary.s-btn--text:not(.s-nude-children .s-btn.s-btn--secondary.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--secondary.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-secondary-default, #6d858f)
+}
+.s-btn.s-btn--secondary.s-btn--text:not(.s-nude-children .s-btn.s-btn--secondary.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--secondary.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-secondary-10, #dfe5e7)
+}
+/**
+        * @name           .s-btn.s-btn--surface.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>surface</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--surface s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--surface.s-btn--text:not(.s-nude-children .s-btn.s-btn--surface.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--surface.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-surface-default, #6d858f)
+}
+.s-btn.s-btn--surface.s-btn--text:not(.s-nude-children .s-btn.s-btn--surface.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--surface.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-surface-10, #dfe5e7)
+}
+/**
+        * @name           .s-btn.s-btn--background.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>background</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--background s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--background.s-btn--text:not(.s-nude-children .s-btn.s-btn--background.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--background.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-background-default, #6d858f)
+}
+.s-btn.s-btn--background.s-btn--text:not(.s-nude-children .s-btn.s-btn--background.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--background.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-background-10, #dfe5e7)
+}
+/**
+        * @name           .s-btn.s-btn--success.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>success</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--success s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--success.s-btn--text:not(.s-nude-children .s-btn.s-btn--success.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--success.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-success-default, #5cb85c)
+}
+.s-btn.s-btn--success.s-btn--text:not(.s-nude-children .s-btn.s-btn--success.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--success.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-success-10, #eaf6ea)
+}
+/**
+        * @name           .s-btn.s-btn--warning.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>warning</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--warning s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--warning.s-btn--text:not(.s-nude-children .s-btn.s-btn--warning.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--warning.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-warning-default, #f0ad4e)
+}
+.s-btn.s-btn--warning.s-btn--text:not(.s-nude-children .s-btn.s-btn--warning.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--warning.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-warning-10, #ffffff)
+}
+/**
+        * @name           .s-btn.s-btn--error.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>error</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--error s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--error.s-btn--text:not(.s-nude-children .s-btn.s-btn--error.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--error.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-error-default, #d9534f)
+}
+.s-btn.s-btn--error.s-btn--text:not(.s-nude-children .s-btn.s-btn--error.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--error.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-error-10, #fdf7f7)
+}
+/**
+        * @name           .s-btn.s-btn--info.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>info</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--info s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--info.s-btn--text:not(.s-nude-children .s-btn.s-btn--info.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--info.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-info-default, #2199e8)
+}
+.s-btn.s-btn--info.s-btn--text:not(.s-nude-children .s-btn.s-btn--info.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--info.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: var(--s-theme-default-color-info-10, #d5ecfb)
+}
+/**
+        * @name           .s-btn.s-btn--extension.s-btn--text
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>text</yellow>" button with the "<yellow>extension</yellow>" color applied
+        * 
+        * @example        html
+        * <a class="s-btn s-btn--extension s-btn--text">I'm a cool button</a>
+      */
+.s-btn.s-btn--extension.s-btn--text:not(.s-nude-children .s-btn.s-btn--extension.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--extension.s-btn--text):not(.s-nude):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-button-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-button-transition, all .2s ease-in-out);
+  background-color: transparent;
+  color: var(--s-theme-default-color-extension-default, #f2bc2b)
+}
+.s-btn.s-btn--extension.s-btn--text:not(.s-nude-children .s-btn.s-btn--extension.s-btn--text):not(.s-no-lnf-children .s-btn.s-btn--extension.s-btn--text):not(.s-nude):not(.s-no-lnf):hover {
+  background-color: sugar.color(extension--10)
+}
 /* body {
   content: sugar.color(#ff00ff, '--darken 40%');
   background: sugar.color(primary, 900);

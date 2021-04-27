@@ -1,0 +1,4 @@
+import SPromise from './SPromise';
+export * from './SPromise';
+export default SPromise;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2NvcmUvcy1wcm9taXNlL3NyYy9zaGFyZWQvZXhwb3J0cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxZQUFZLENBQUM7QUFDbEMsY0FBYyxZQUFZLENBQUM7QUFDM0IsZUFBZSxRQUFRLENBQUMifQ==

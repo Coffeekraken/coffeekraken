@@ -23,13 +23,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.SConfigLsAdapter = exports.SConfigAdapter = void 0;
-    var SConfigAdapter_1 = __importDefault(require("../shared/adapters/SConfigAdapter"));
+    const SConfigAdapter_1 = __importDefault(require("../shared/adapters/SConfigAdapter"));
     exports.SConfigAdapter = SConfigAdapter_1.default;
-    var SConfigLsAdapter_1 = __importDefault(require("./adapters/SConfigLsAdapter"));
+    const SConfigLsAdapter_1 = __importDefault(require("./adapters/SConfigLsAdapter"));
     exports.SConfigLsAdapter = SConfigLsAdapter_1.default;
-    var SConfig_1 = __importDefault(require("../shared/SConfig"));
+    const SConfig_1 = __importDefault(require("../shared/SConfig"));
     __exportStar(require("../shared/adapters/SConfigAdapter"), exports);
     __exportStar(require("./adapters/SConfigLsAdapter"), exports);
     exports.default = SConfig_1.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLHFGQUErRDtJQU90RCx5QkFQRix3QkFBYyxDQU9FO0lBTnZCLGlGQUEyRDtJQU1sQywyQkFObEIsMEJBQWdCLENBTWtCO0lBTHpDLDhEQUF3QztJQUV4QyxvRUFBa0Q7SUFDbEQsOERBQTRDO0lBRzVDLGtCQUFlLGlCQUFPLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLHVGQUErRDtJQU90RCx5QkFQRix3QkFBYyxDQU9FO0lBTnZCLG1GQUEyRDtJQU1sQywyQkFObEIsMEJBQWdCLENBTWtCO0lBTHpDLGdFQUF3QztJQUV4QyxvRUFBa0Q7SUFDbEQsOERBQTRDO0lBRzVDLGtCQUFlLGlCQUFPLENBQUMifQ==

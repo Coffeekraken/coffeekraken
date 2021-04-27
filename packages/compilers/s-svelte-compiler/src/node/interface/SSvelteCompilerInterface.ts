@@ -40,7 +40,8 @@ class SSvelteCompilerParamsInterface extends __SInterface {
       type: 'String',
       path: {
         absolute: true,
-        exists: true
+        exists: true,
+        create: true
       },
       default: __sugarConfig('svelte.compile.outDir'),
       alias: 'o'

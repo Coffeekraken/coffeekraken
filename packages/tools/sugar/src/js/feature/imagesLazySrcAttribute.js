@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var whenInViewport_1 = __importDefault(require("../dom/whenInViewport"));
-    var querySelectorLive_1 = __importDefault(require("../dom/querySelectorLive"));
-    var deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
+    const whenInViewport_1 = __importDefault(require("../dom/whenInViewport"));
+    const querySelectorLive_1 = __importDefault(require("../dom/querySelectorLive"));
+    const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
     /**
      * @name 		imagesLazySrcAttribute
      * @namespace            js.feature
@@ -43,17 +43,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function imagesLazySrcAttribute(settings) {
-        if (settings === void 0) { settings = {}; }
+    function imagesLazySrcAttribute(settings = {}) {
         settings = deepMerge_1.default({
             offset: 50
         }, settings);
-        querySelectorLive_1.default('img[lazy-src]:not([is])', function ($imgElm) {
-            whenInViewport_1.default($imgElm, settings.offset).then(function () {
+        querySelectorLive_1.default('img[lazy-src]:not([is])', ($imgElm) => {
+            whenInViewport_1.default($imgElm, settings.offset).then(() => {
                 $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
             });
         });
     }
     exports.default = imagesLazySrcAttribute;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW1hZ2VzTGF6eVNyY0F0dHJpYnV0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImltYWdlc0xhenlTcmNBdHRyaWJ1dGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQseUVBQW1EO0lBQ25ELCtFQUF5RDtJQUN6RCw0RUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BMEJHO0lBQ0gsU0FBUyxzQkFBc0IsQ0FBQyxRQUFhO1FBQWIseUJBQUEsRUFBQSxhQUFhO1FBQzNDLFFBQVEsR0FBRyxtQkFBUyxDQUNsQjtZQUNFLE1BQU0sRUFBRSxFQUFFO1NBQ1gsRUFDRCxRQUFRLENBQ1QsQ0FBQztRQUNGLDJCQUFpQixDQUFDLHlCQUF5QixFQUFFLFVBQUMsT0FBTztZQUNuRCx3QkFBYyxDQUFDLE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUMsSUFBSSxDQUFDO2dCQUM1QyxPQUFPLENBQUMsWUFBWSxDQUFDLEtBQUssRUFBRSxPQUFPLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFDaEUsQ0FBQyxDQUFDLENBQUM7UUFDTCxDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSxzQkFBc0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW1hZ2VzTGF6eVNyY0F0dHJpYnV0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImltYWdlc0xhenlTcmNBdHRyaWJ1dGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsMkVBQW1EO0lBQ25ELGlGQUF5RDtJQUN6RCw4RUFBc0Q7SUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BMEJHO0lBQ0gsU0FBUyxzQkFBc0IsQ0FBQyxRQUFRLEdBQUcsRUFBRTtRQUMzQyxRQUFRLEdBQUcsbUJBQVMsQ0FDbEI7WUFDRSxNQUFNLEVBQUUsRUFBRTtTQUNYLEVBQ0QsUUFBUSxDQUNULENBQUM7UUFDRiwyQkFBaUIsQ0FBQyx5QkFBeUIsRUFBRSxDQUFDLE9BQU8sRUFBRSxFQUFFO1lBQ3ZELHdCQUFjLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFO2dCQUNqRCxPQUFPLENBQUMsWUFBWSxDQUFDLEtBQUssRUFBRSxPQUFPLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFDaEUsQ0FBQyxDQUFDLENBQUM7UUFDTCxDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSxzQkFBc0IsQ0FBQyJ9

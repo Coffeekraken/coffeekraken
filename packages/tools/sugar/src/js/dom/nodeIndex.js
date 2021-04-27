@@ -37,7 +37,7 @@
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function nodeIndex(node) {
-        var index = 0;
+        let index = 0;
         while ((node = node.previousElementSibling)) {
             index++;
         }

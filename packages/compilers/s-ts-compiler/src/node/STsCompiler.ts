@@ -1,32 +1,31 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-import __fs from 'fs';
-import __path from 'path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
 } from '@coffeekraken/s-compiler';
 import __SDuration from '@coffeekraken/s-duration';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __SFile from '@coffeekraken/s-file';
+import __SPromise from '@coffeekraken/s-promise';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __SFile from '@coffeekraken/s-file';
+import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
 import __sugarDir from '@coffeekraken/sugar/node/path/sugarDir';
 import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
-import __STsCompilerParamsInterface from './interface/STsCompilerInterface';
-import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
-import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
-import tsconfig = require('@coffeekraken/sugar/templates/tsconfig/tsconfig');
+import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import __fs from 'fs';
+import __path from 'path';
+import __STsCompilerParamsInterface from './interface/STsCompilerInterface';
 
 export interface ISTsCompilerCtorSettings {
   tsCompiler: Partial<ISTsCompilerSettings>;
@@ -121,9 +120,6 @@ class STsCompiler extends __SCompiler {
       initialParams || {},
       __deepMerge(
         {
-          metas: {
-            color: 'blue'
-          },
           tsCompiler: {}
         },
         settings || {}
@@ -249,7 +245,8 @@ class STsCompiler extends __SCompiler {
         // loop on inputs
         input.forEach(async (inputPath, i) => {
           let tsconfigJson = {},
-            inputPathToDisplay;
+            inputPathToDisplay,
+            inputPathHash = __md5.encrypt(inputPath);
 
           const isTsConfigInput = inputPath.match(
             /.*\/tsconfig(\..*)?\.js(on)?$/
@@ -264,11 +261,10 @@ class STsCompiler extends __SCompiler {
             inputPathToDisplay = __getFilename(inputPath);
             tsconfigJson = config;
           } else if (isTsConfigInput) {
-            inputPathToDisplay = inputPath
-              .replace(`${__sugarDir()}/src/templates/tsconfig/`, 'sugar:')
-              .replace(`${__packageRoot()}/`, '')
-              .replace('tsconfig.', '')
-              .replace(/\.js(on)?$/, '');
+            inputPathToDisplay = __getFilename(inputPath).replace(
+              /\.js(on)?$/,
+              ''
+            );
 
             if (inputPath.match(/\.js$/)) {
               tsconfigJson = require(inputPath);
@@ -381,9 +377,9 @@ class STsCompiler extends __SCompiler {
           }
 
           // save or not
-          if (!params.save) {
-            tsconfigJson.compilerOptions.outDir = `${__tmpDir()}/STsCompiler/${Date.now()}`;
-          }
+          // if (!params.save) {
+          tsconfigJson.compilerOptions.outDir = `${__tmpDir()}/STsCompiler/${Date.now()}-${inputPathHash}`;
+          // }
 
           const tmpConfigPath = `${__tmpDir()}/STsCompiler/${__getFilename(
             inputPath
@@ -409,9 +405,13 @@ class STsCompiler extends __SCompiler {
 
           // spawn new process
           try {
-            const pro = __spawn(`tsc ${commandLineArray.join(' ')}`, [], {
-              cwd: params.rootDir || process.cwd()
-            });
+            const pro = __spawn(
+              `tsc ${commandLineArray.join(' ')} --listEmittedFiles`,
+              [],
+              {
+                cwd: params.rootDir || process.cwd()
+              }
+            );
 
             pipeFrom(pro, {
               processor: (value, metas) => {
@@ -440,6 +440,20 @@ class STsCompiler extends __SCompiler {
                 return [value, metas];
               },
               filter: (value, metas) => {
+                if (
+                  value &&
+                  value.value &&
+                  typeof value.value === 'string' &&
+                  value.value.match(/TSFILE:\s.*/)
+                ) {
+                  if (params.watch) {
+                    const files = value.value
+                      .split('TSFILE:')
+                      .map((f) => f.trim());
+                    console.log(files);
+                  }
+                  return false;
+                }
                 if (!metas.event.match(/^close/)) return true;
                 if (
                   value.stdout &&
@@ -458,29 +472,45 @@ class STsCompiler extends __SCompiler {
 
             pro.on('close', async (value) => {
               if (value.code === 0) {
+                if (value && value.value && typeof value.value === 'string') {
+                  const filesCount = value.value.match(/TSFILE:\s/gm).length;
+                  pro.emit('log', {
+                    value: `<yellow>${filesCount}</yellow> File${
+                      filesCount > 1 ? 's' : ''
+                    } compiled`
+                  });
+                }
+
+                // save or not
+                const files = (
+                  await __resolveGlob(
+                    `${tsconfigJson.compilerOptions.outDir}/**/*.js`
+                  )
+                ).map((file) => {
+                  return {
+                    path: __path.relative(
+                      tsconfigJson.compilerOptions.outDir,
+                      file.path
+                    ),
+                    content: file.content
+                  };
+                });
+
+                pro.emit('log', {
+                  value: `Moving compiled files to final destination`
+                });
+
+                for (let i = 0; i < files.length; i++) {
+                  const file = files[i];
+                  await this._handleCompiledFile(file, tsconfigJson);
+                }
+
                 pro.emit('log', {
                   value: `Compilation <green>successfull</green> in <yellow>${value.formatedDuration}</yellow>`
                 });
 
-                // save or not
-                if (!params.save) {
-                  const files = (
-                    await __resolveGlob(
-                      `${tsconfigJson.compilerOptions.outDir}/**/*.js`
-                    )
-                  ).map((file) => {
-                    return {
-                      path: __path.relative(
-                        tsconfigJson.compilerOptions.outDir,
-                        file.path
-                      ),
-                      content: file.content
-                    };
-                  });
-
-                  // set files in result obj
-                  resultObj.files = files;
-                }
+                // set files in result obj
+                resultObj.files = files;
 
                 // resolve the promise
                 resolve({
@@ -497,9 +527,7 @@ class STsCompiler extends __SCompiler {
               }
 
               // delete the temp directory if needed
-              if (!params.save) {
-                __removeSync(tsconfigJson.compilerOptions.outDir);
-              }
+              __removeSync(tsconfigJson.compilerOptions.outDir);
 
               // delete the config file
               __removeSync(tmpConfigPath);
@@ -509,6 +537,12 @@ class STsCompiler extends __SCompiler {
               value: `Starting compilation process`
             });
           } catch (e) {
+            // delete the temp directory if needed
+            __removeSync(tsconfigJson.compilerOptions.outDir);
+
+            // delete the config file
+            __removeSync(tmpConfigPath);
+
             reject({
               ...resultObj,
               error: e,
@@ -524,6 +558,28 @@ class STsCompiler extends __SCompiler {
         metas: this.metas
       }
     );
+  }
+
+  async _handleCompiledFile(file, tsconfig) {
+    const inPath = __path.resolve(tsconfig.compilerOptions.outDir, file.path);
+    let outPath = __path.resolve(tsconfig.compilerOptions.rootDir, file.path);
+
+    if (tsconfig.sTsCompiler && tsconfig.sTsCompiler.outExt) {
+      outPath = outPath.replace(
+        /\.[a-zA-Z0-9]+$/,
+        `.${tsconfig.sTsCompiler.outExt}`
+      );
+    }
+
+    if (outPath.match(/\.ts(x)?$/) && __fs.existsSync(outPath)) {
+      console.log(
+        `<yellow>[warning]</yellow> The output destination of the compiled file "<cyan>${outPath}</cyan>" is the same as the source file and override it... This file is not saved then.`
+      );
+    } else {
+      __fs.renameSync(inPath, outPath);
+    }
+
+    return true;
   }
 
   /**

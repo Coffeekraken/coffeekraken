@@ -1,0 +1,22 @@
+{
+  "config": {
+    "folders": [
+      {
+        "scope": "default",
+        "path": "./src/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "ts",
+      "description": "Typescript compiler",
+      "actions": {
+        "compile": {
+          "description": "Compile some typescript file(s) using typescript AWESOME package",
+          "process": "./src/node/compile.cli.js"
+        }
+      }
+    }
+  ]
+}

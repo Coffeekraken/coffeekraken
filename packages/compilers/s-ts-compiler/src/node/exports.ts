@@ -1,7 +1,8 @@
-import __STsCompilerProcess from './STsCompilerProcess';
-import __STsCompilerInterface from './interface/STsCompilerInterface';
+import STsCompilerInterface from './interface/STsCompilerInterface';
 import __STsCompiler from './STsCompiler';
 
-export { __STsCompilerProcess as process, __STsCompilerInterface as interface };
+export * from './interface/STsCompilerInterface';
 export * from './STsCompiler';
+
+export { STsCompilerInterface };
 export default __STsCompiler;

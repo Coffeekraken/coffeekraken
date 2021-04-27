@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var linkLoaded_1 = __importDefault(require("./linkLoaded"));
+    const linkLoaded_1 = __importDefault(require("./linkLoaded"));
     /**
      * @name      stylesheetsReady
      * @namespace            js.dom
@@ -42,15 +42,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since         1.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function stylesheetsReady(links, cb) {
-        if (cb === void 0) { cb = null; }
-        var neededStylesheetsStack = links;
-        var neededStylesheetsCount = links.length;
-        var loadedStylesheedsCount = 0;
-        var loadedStylesheetsCallbacks = [];
-        var loadedStylesheedsProcess = false;
-        var stylesheetsDependenciesStatus = false;
-        return new Promise(function (resolve, reject) {
+    function stylesheetsReady(links, cb = null) {
+        const neededStylesheetsStack = links;
+        const neededStylesheetsCount = links.length;
+        let loadedStylesheedsCount = 0;
+        const loadedStylesheetsCallbacks = [];
+        let loadedStylesheedsProcess = false;
+        let stylesheetsDependenciesStatus = false;
+        return new Promise((resolve, reject) => {
             if (stylesheetsDependenciesStatus) {
                 cb !== null && cb();
                 resolve();
@@ -67,7 +66,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             // add the callback into the loaded stylesheets stack
             // add the the callback stack
-            loadedStylesheetsCallbacks.push(function () {
+            loadedStylesheetsCallbacks.push(() => {
                 cb !== null && cb();
                 resolve();
             });
@@ -77,9 +76,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 // update the status
                 loadedStylesheedsProcess = true;
                 if (neededStylesheetsStack.length) {
-                    [].forEach.call(neededStylesheetsStack, function (link) {
+                    [].forEach.call(neededStylesheetsStack, (link) => {
                         // check loaded
-                        linkLoaded_1.default(link).then(function (link) {
+                        linkLoaded_1.default(link).then((link) => {
                             // update the loaded stylesheet count
                             loadedStylesheedsCount++;
                             // check if all stylesheets has been loaded
@@ -87,12 +86,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                 // update the stylesheetsDependenciesStatus
                                 stylesheetsDependenciesStatus = true;
                                 // loop on all the loadedStylesheetsCallbacks
-                                loadedStylesheetsCallbacks.forEach(function (callback) {
+                                loadedStylesheetsCallbacks.forEach((callback) => {
                                     // apply the callback
                                     callback();
                                 });
                             }
-                        }, function (error) {
+                        }, (error) => {
                             // something goes wrong...
                             console.error('The following link as not been loaded properly...', error);
                         });
@@ -103,4 +102,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = stylesheetsReady;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzaGVldHNSZWFkeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0eWxlc2hlZXRzUmVhZHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsNERBQXNDO0lBQ3RDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0EyQkc7SUFDSCxTQUFTLGdCQUFnQixDQUFDLEtBQUssRUFBRSxFQUFTO1FBQVQsbUJBQUEsRUFBQSxTQUFTO1FBQ3hDLElBQU0sc0JBQXNCLEdBQUcsS0FBSyxDQUFDO1FBQ3JDLElBQU0sc0JBQXNCLEdBQUcsS0FBSyxDQUFDLE1BQU0sQ0FBQztRQUM1QyxJQUFJLHNCQUFzQixHQUFHLENBQUMsQ0FBQztRQUMvQixJQUFNLDBCQUEwQixHQUFHLEVBQUUsQ0FBQztRQUN0QyxJQUFJLHdCQUF3QixHQUFHLEtBQUssQ0FBQztRQUNyQyxJQUFJLDZCQUE2QixHQUFHLEtBQUssQ0FBQztRQUUxQyxPQUFPLElBQUksT0FBTyxDQUFDLFVBQUMsT0FBTyxFQUFFLE1BQU07WUFDakMsSUFBSSw2QkFBNkIsRUFBRTtnQkFDakMsRUFBRSxLQUFLLElBQUksSUFBSSxFQUFFLEVBQUUsQ0FBQztnQkFDcEIsT0FBTyxFQUFFLENBQUM7Z0JBQ1YsT0FBTzthQUNSO1lBRUQsdUNBQXVDO1lBQ3ZDLElBQUksQ0FBQyxzQkFBc0IsRUFBRTtnQkFDM0IsMkNBQTJDO2dCQUMzQyw2QkFBNkIsR0FBRyxJQUFJLENBQUM7Z0JBQ3JDLG9DQUFvQztnQkFDcEMsRUFBRSxLQUFLLElBQUksSUFBSSxFQUFFLEVBQUUsQ0FBQztnQkFDcEIsT0FBTyxFQUFFLENBQUM7Z0JBQ1YsT0FBTzthQUNSO1lBRUQscURBQXFEO1lBQ3JELDZCQUE2QjtZQUM3QiwwQkFBMEIsQ0FBQyxJQUFJLENBQUM7Z0JBQzlCLEVBQUUsS0FBSyxJQUFJLElBQUksRUFBRSxFQUFFLENBQUM7Z0JBQ3BCLE9BQU8sRUFBRSxDQUFDO1lBQ1osQ0FBQyxDQUFDLENBQUM7WUFFSCxvREFBb0Q7WUFDcEQsY0FBYztZQUNkLElBQUksQ0FBQyx3QkFBd0IsRUFBRTtnQkFDN0Isb0JBQW9CO2dCQUNwQix3QkFBd0IsR0FBRyxJQUFJLENBQUM7Z0JBRWhDLElBQUksc0JBQXNCLENBQUMsTUFBTSxFQUFFO29CQUNqQyxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxzQkFBc0IsRUFBRSxVQUFDLElBQUk7d0JBQzNDLGVBQWU7d0JBQ2Ysb0JBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQ25CLFVBQUMsSUFBSTs0QkFDSCxxQ0FBcUM7NEJBQ3JDLHNCQUFzQixFQUFFLENBQUM7NEJBQ3pCLDJDQUEyQzs0QkFDM0MsSUFBSSxzQkFBc0IsSUFBSSxzQkFBc0IsRUFBRTtnQ0FDcEQsMkNBQTJDO2dDQUMzQyw2QkFBNkIsR0FBRyxJQUFJLENBQUM7Z0NBQ3JDLDZDQUE2QztnQ0FDN0MsMEJBQTBCLENBQUMsT0FBTyxDQUFDLFVBQUMsUUFBUTtvQ0FDMUMscUJBQXFCO29DQUNyQixRQUFRLEVBQUUsQ0FBQztnQ0FDYixDQUFDLENBQUMsQ0FBQzs2QkFDSjt3QkFDSCxDQUFDLEVBQ0QsVUFBQyxLQUFLOzRCQUNKLDBCQUEwQjs0QkFDMUIsT0FBTyxDQUFDLEtBQUssQ0FDWCxtREFBbUQsRUFDbkQsS0FBSyxDQUNOLENBQUM7d0JBQ0osQ0FBQyxDQUNGLENBQUM7b0JBQ0osQ0FBQyxDQUFDLENBQUM7aUJBQ0o7YUFDRjtRQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQztJQUNELGtCQUFlLGdCQUFnQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzaGVldHNSZWFkeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0eWxlc2hlZXRzUmVhZHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsOERBQXNDO0lBQ3RDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0EyQkc7SUFDSCxTQUFTLGdCQUFnQixDQUFDLEtBQUssRUFBRSxFQUFFLEdBQUcsSUFBSTtRQUN4QyxNQUFNLHNCQUFzQixHQUFHLEtBQUssQ0FBQztRQUNyQyxNQUFNLHNCQUFzQixHQUFHLEtBQUssQ0FBQyxNQUFNLENBQUM7UUFDNUMsSUFBSSxzQkFBc0IsR0FBRyxDQUFDLENBQUM7UUFDL0IsTUFBTSwwQkFBMEIsR0FBRyxFQUFFLENBQUM7UUFDdEMsSUFBSSx3QkFBd0IsR0FBRyxLQUFLLENBQUM7UUFDckMsSUFBSSw2QkFBNkIsR0FBRyxLQUFLLENBQUM7UUFFMUMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtZQUNyQyxJQUFJLDZCQUE2QixFQUFFO2dCQUNqQyxFQUFFLEtBQUssSUFBSSxJQUFJLEVBQUUsRUFBRSxDQUFDO2dCQUNwQixPQUFPLEVBQUUsQ0FBQztnQkFDVixPQUFPO2FBQ1I7WUFFRCx1Q0FBdUM7WUFDdkMsSUFBSSxDQUFDLHNCQUFzQixFQUFFO2dCQUMzQiwyQ0FBMkM7Z0JBQzNDLDZCQUE2QixHQUFHLElBQUksQ0FBQztnQkFDckMsb0NBQW9DO2dCQUNwQyxFQUFFLEtBQUssSUFBSSxJQUFJLEVBQUUsRUFBRSxDQUFDO2dCQUNwQixPQUFPLEVBQUUsQ0FBQztnQkFDVixPQUFPO2FBQ1I7WUFFRCxxREFBcUQ7WUFDckQsNkJBQTZCO1lBQzdCLDBCQUEwQixDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUU7Z0JBQ25DLEVBQUUsS0FBSyxJQUFJLElBQUksRUFBRSxFQUFFLENBQUM7Z0JBQ3BCLE9BQU8sRUFBRSxDQUFDO1lBQ1osQ0FBQyxDQUFDLENBQUM7WUFFSCxvREFBb0Q7WUFDcEQsY0FBYztZQUNkLElBQUksQ0FBQyx3QkFBd0IsRUFBRTtnQkFDN0Isb0JBQW9CO2dCQUNwQix3QkFBd0IsR0FBRyxJQUFJLENBQUM7Z0JBRWhDLElBQUksc0JBQXNCLENBQUMsTUFBTSxFQUFFO29CQUNqQyxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxzQkFBc0IsRUFBRSxDQUFDLElBQUksRUFBRSxFQUFFO3dCQUMvQyxlQUFlO3dCQUNmLG9CQUFVLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUNuQixDQUFDLElBQUksRUFBRSxFQUFFOzRCQUNQLHFDQUFxQzs0QkFDckMsc0JBQXNCLEVBQUUsQ0FBQzs0QkFDekIsMkNBQTJDOzRCQUMzQyxJQUFJLHNCQUFzQixJQUFJLHNCQUFzQixFQUFFO2dDQUNwRCwyQ0FBMkM7Z0NBQzNDLDZCQUE2QixHQUFHLElBQUksQ0FBQztnQ0FDckMsNkNBQTZDO2dDQUM3QywwQkFBMEIsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtvQ0FDOUMscUJBQXFCO29DQUNyQixRQUFRLEVBQUUsQ0FBQztnQ0FDYixDQUFDLENBQUMsQ0FBQzs2QkFDSjt3QkFDSCxDQUFDLEVBQ0QsQ0FBQyxLQUFLLEVBQUUsRUFBRTs0QkFDUiwwQkFBMEI7NEJBQzFCLE9BQU8sQ0FBQyxLQUFLLENBQ1gsbURBQW1ELEVBQ25ELEtBQUssQ0FDTixDQUFDO3dCQUNKLENBQUMsQ0FDRixDQUFDO29CQUNKLENBQUMsQ0FBQyxDQUFDO2lCQUNKO2FBQ0Y7UUFDSCxDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSxnQkFBZ0IsQ0FBQyJ9

@@ -23,13 +23,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.parseTypeString = exports.STypeResult = void 0;
-    var SType_1 = __importDefault(require("../shared/SType"));
-    var STypeResult_1 = __importDefault(require("../shared/STypeResult"));
+    const SType_1 = __importDefault(require("../shared/SType"));
+    const STypeResult_1 = __importDefault(require("../shared/STypeResult"));
     exports.STypeResult = STypeResult_1.default;
-    var parseTypeString_1 = __importDefault(require("../shared/utils/parseTypeString"));
+    const parseTypeString_1 = __importDefault(require("../shared/utils/parseTypeString"));
     exports.parseTypeString = parseTypeString_1.default;
     __exportStar(require("../shared/SType"), exports);
     __exportStar(require("../shared/STypeResult"), exports);
     exports.default = SType_1.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLDBEQUFvQztJQUNwQyxzRUFBZ0Q7SUFNdkMsc0JBTkYscUJBQVcsQ0FNRTtJQUxwQixvRkFBOEQ7SUFLeEMsMEJBTGYseUJBQWUsQ0FLZTtJQUhyQyxrREFBZ0M7SUFDaEMsd0RBQXNDO0lBR3RDLGtCQUFlLGVBQUssQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLDREQUFvQztJQUNwQyx3RUFBZ0Q7SUFNdkMsc0JBTkYscUJBQVcsQ0FNRTtJQUxwQixzRkFBOEQ7SUFLeEMsMEJBTGYseUJBQWUsQ0FLZTtJQUhyQyxrREFBZ0M7SUFDaEMsd0RBQXNDO0lBR3RDLGtCQUFlLGVBQUssQ0FBQyJ9

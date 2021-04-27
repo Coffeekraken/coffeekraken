@@ -1,23 +1,4 @@
 // @ts-nocheck
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -32,24 +13,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var SWebComponent_1 = __importDefault(require("./SWebComponent"));
-    var lit_html_1 = require("lit-html");
-    var throttle_1 = __importDefault(require("../../shared/function/throttle"));
-    var insertAfter_1 = __importDefault(require("../dom/insertAfter"));
-    var deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
-    var async_replace_js_1 = require("lit-html/directives/async-replace.js");
-    var async_append_js_1 = require("lit-html/directives/async-append.js");
-    var cache_js_1 = require("lit-html/directives/cache.js");
-    var class_map_js_1 = require("lit-html/directives/class-map.js");
-    var if_defined_1 = require("lit-html/directives/if-defined");
-    var guard_1 = require("lit-html/directives/guard");
-    var repeat_1 = require("lit-html/directives/repeat");
-    var style_map_js_1 = require("lit-html/directives/style-map.js");
-    var template_content_1 = require("lit-html/directives/template-content");
-    var unsafe_html_js_1 = require("lit-html/directives/unsafe-html.js");
-    var unsafe_svg_1 = require("lit-html/directives/unsafe-svg");
-    var until_js_1 = require("lit-html/directives/until.js");
-    var canHaveChildren_1 = __importDefault(require("../dom/canHaveChildren"));
+    const SWebComponent_1 = __importDefault(require("./SWebComponent"));
+    const lit_html_1 = require("lit-html");
+    const throttle_1 = __importDefault(require("../../shared/function/throttle"));
+    const insertAfter_1 = __importDefault(require("../dom/insertAfter"));
+    const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
+    const async_replace_js_1 = require("lit-html/directives/async-replace.js");
+    const async_append_js_1 = require("lit-html/directives/async-append.js");
+    const cache_js_1 = require("lit-html/directives/cache.js");
+    const class_map_js_1 = require("lit-html/directives/class-map.js");
+    const if_defined_1 = require("lit-html/directives/if-defined");
+    const guard_1 = require("lit-html/directives/guard");
+    const repeat_1 = require("lit-html/directives/repeat");
+    const style_map_js_1 = require("lit-html/directives/style-map.js");
+    const template_content_1 = require("lit-html/directives/template-content");
+    const unsafe_html_js_1 = require("lit-html/directives/unsafe-html.js");
+    const unsafe_svg_1 = require("lit-html/directives/unsafe-svg");
+    const until_js_1 = require("lit-html/directives/until.js");
+    const canHaveChildren_1 = __importDefault(require("../dom/canHaveChildren"));
     /**
      * @name              SLitHtmlWebComponent
      * @namespace            js.webcomponent
@@ -84,11 +65,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @see       https://lit-html.polymer-project.org/
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function SLitHtmlWebComponentGenerator(extendSettings) {
+    function SLitHtmlWebComponentGenerator(extendSettings = {}) {
         var _a;
-        if (extendSettings === void 0) { extendSettings = {}; }
-        return _a = /** @class */ (function (_super) {
-                __extends(SLitHtmlWebComponent, _super);
+        return _a = class SLitHtmlWebComponent extends SWebComponent_1.default(extendSettings) {
                 /**
                  * @name        constructor
                  * @type        Function
@@ -98,9 +77,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                function SLitHtmlWebComponent(settings) {
-                    if (settings === void 0) { settings = {}; }
-                    var _this = _super.call(this, deepMerge_1.default({}, settings)) || this;
+                constructor(settings = {}) {
+                    super(deepMerge_1.default({}, settings));
                     /**
                      * @name        lit
                      * @type        Object
@@ -110,7 +88,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                      * @see       https://lit-html.polymer-project.org/guide/template-reference
                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    _this.lit = {
+                    this.lit = {
                         html: lit_html_1.html,
                         render: lit_html_1.render,
                         asyncReplace: async_replace_js_1.asyncReplace,
@@ -126,50 +104,45 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         unsafeSVG: unsafe_svg_1.unsafeSVG,
                         until: until_js_1.until
                     };
-                    _this.render = throttle_1.default(function () {
-                        _this._render();
+                    this.render = throttle_1.default(() => {
+                        this._render();
                     }, 50);
                     // wait until mounted to render the component first time
-                    _this.on('mounted', function (e) {
+                    this.on('mounted', (e) => {
                         // insert the container in the document
-                        if (canHaveChildren_1.default(_this)) {
-                            _this.$container = _this;
-                            _this.addClass('', _this);
+                        if (canHaveChildren_1.default(this)) {
+                            this.$container = this;
+                            this.addClass('', this);
                         }
                         else {
-                            _this.$container = document.createElement('div');
-                            _this.addClass('', _this.$container);
-                            insertAfter_1.default(_this.$container, _this);
+                            this.$container = document.createElement('div');
+                            this.addClass('', this.$container);
+                            insertAfter_1.default(this.$container, this);
                         }
-                        _this.update();
+                        this.update();
                         // dispatch a ready event
-                        _this.dispatch('ready', _this, {
+                        this.dispatch('ready', this, {
                             bubbles: true
                         });
                         // listen for media query change to update the view
-                        _this._mediaQuery.on('match', function (media) {
-                            _this.render();
+                        this._mediaQuery.on('match', (media) => {
+                            this.render();
                         });
                     });
-                    return _this;
                 }
-                Object.defineProperty(SLitHtmlWebComponent.prototype, "$root", {
-                    /**
-                     * @name          $root
-                     * @type          Function
-                     * @get
-                     *
-                     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
-                     *
-                     * @since         2.0.0
-                     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    get: function () {
-                        return this.$container || this;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
+                /**
+                 * @name          $root
+                 * @type          Function
+                 * @get
+                 *
+                 * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
+                 *
+                 * @since         2.0.0
+                 * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                get $root() {
+                    return this.$container || this;
+                }
                 /**
                  * @name          update
                  * @type          Function
@@ -181,12 +154,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SLitHtmlWebComponent.prototype.update = function () {
+                update() {
                     // render
                     this._render();
                     // update parent
-                    _super.prototype.update.call(this);
-                };
+                    super.update();
+                }
                 /**
                  * @name          render
                  * @type          Function
@@ -195,15 +168,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SLitHtmlWebComponent.prototype._render = function () {
+                _render() {
                     if (!this.$container)
                         return;
-                    var tplFn = this.constructor.template.bind(this);
-                    var tpl = tplFn(this.props, this._settings, this.lit);
+                    const tplFn = this.constructor.template.bind(this);
+                    const tpl = tplFn(this.props, this._settings, this.lit);
                     lit_html_1.render(tpl, this.$container);
-                };
-                return SLitHtmlWebComponent;
-            }(SWebComponent_1.default(extendSettings))),
+                }
+            },
             /**
              * @name        template
              * @type        Function
@@ -216,10 +188,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              *
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            _a.template = function (props, settings, lit) { return lit.html(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      <p>\n        You need to specify a static template property for your component...\n      </p>\n    "], ["\n      <p>\n        You need to specify a static template property for your component...\n      </p>\n    "]))); },
+            _a.template = (props, settings, lit) => lit.html `
+      <p>
+        You need to specify a static template property for your component...
+      </p>
+    `,
             _a;
     }
     exports.default = SLitHtmlWebComponentGenerator;
-    var templateObject_1;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0xpdEh0bWxXZWJDb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTTGl0SHRtbFdlYkNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0VBQThDO0lBQzlDLHFDQUF3QztJQUN4Qyw0RUFBd0Q7SUFDeEQsbUVBQStDO0lBQy9DLDRFQUF3RDtJQUN4RCx5RUFBb0U7SUFDcEUsdUVBQWtFO0lBQ2xFLHlEQUFxRDtJQUNyRCxpRUFBNEQ7SUFDNUQsNkRBQTJEO0lBQzNELG1EQUFrRDtJQUNsRCxxREFBb0Q7SUFDcEQsaUVBQTREO0lBQzVELHlFQUF1RTtJQUN2RSxxRUFBZ0U7SUFDaEUsNkRBQTJEO0lBQzNELHlEQUFxRDtJQUNyRCwyRUFBdUQ7SUFFdkQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWlDRztJQUNILFNBQVMsNkJBQTZCLENBQUMsY0FBbUI7O1FBQW5CLCtCQUFBLEVBQUEsbUJBQW1CO1FBQ3hEO2dCQUEwQyx3Q0FBK0I7Z0JBNkN2RTs7Ozs7Ozs7bUJBUUc7Z0JBQ0gsOEJBQVksUUFBYTtvQkFBYix5QkFBQSxFQUFBLGFBQWE7b0JBQXpCLFlBQ0Usa0JBQU0sbUJBQVcsQ0FBQyxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUMsU0FzQmpDO29CQTFERDs7Ozs7Ozs7dUJBUUc7b0JBQ0gsU0FBRyxHQUFHO3dCQUNKLElBQUksaUJBQUE7d0JBQ0osTUFBTSxtQkFBQTt3QkFDTixZQUFZLGlDQUFBO3dCQUNaLFdBQVcsK0JBQUE7d0JBQ1gsS0FBSyxrQkFBQTt3QkFDTCxRQUFRLHlCQUFBO3dCQUNSLFNBQVMsd0JBQUE7d0JBQ1QsS0FBSyxlQUFBO3dCQUNMLE1BQU0saUJBQUE7d0JBQ04sUUFBUSx5QkFBQTt3QkFDUixlQUFlLG9DQUFBO3dCQUNmLFVBQVUsNkJBQUE7d0JBQ1YsU0FBUyx3QkFBQTt3QkFDVCxL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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0xpdEh0bWxXZWJDb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTTGl0SHRtbFdlYkNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCxvRUFBOEM7SUFDOUMsdUNBQXdDO0lBQ3hDLDhFQUF3RDtJQUN4RCxxRUFBK0M7SUFDL0MsOEVBQXdEO0lBQ3hELDJFQUFvRTtJQUNwRSx5RUFBa0U7SUFDbEUsMkRBQXFEO0lBQ3JELG1FQUE0RDtJQUM1RCwrREFBMkQ7SUFDM0QscURBQWtEO0lBQ2xELHVEQUFvRDtJQUNwRCxtRUFBNEQ7SUFDNUQsMkVBQXVFO0lBQ3ZFLHVFQUFnRTtJQUNoRSwrREFBMkQ7SUFDM0QsMkRBQXFEO0lBQ3JELDZFQUF1RDtJQUV2RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BaUNHO0lBQ0gsU0FBUyw2QkFBNkIsQ0FBQyxjQUFjLEdBQUcsRUFBRTs7UUFDeEQsWUFBTyxNQUFNLG9CQUFxQixTQUFRLHVCQUFlLENBQUMsY0FBYyxDQUFDO2dCQTZDdkU7Ozs7Ozs7O21CQVFHO2dCQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7b0JBQ3ZCLEtBQUssQ0FBQyxtQkFBVyxDQUFDLEVBQUUsRUFBRSxRQUFRLENBQUMsQ0FBQyxDQUFDO29CQXBDbkM7Ozs7Ozs7O3VCQVFHO29CQUNILFFBQUcsR0FBRzt3QkFDSixJQUFJLEVBQUosZUFBSTt3QkFDSixNQUFNLEVBQU4saUJBQU07d0JBQ04sWUFBWSxFQUFaLCtCQUFZO3dCQUNaLFdBQVcsRUFBWCw2QkFBVzt3QkFDWCxLQUFLLEVBQUwsZ0JBQUs7d0JBQ0wsUUFBUSxFQUFSLHVCQUFRO3dCQUNSLFNBQVMsRUFBVCxzQkFBUzt3QkFDVCxLQUFLLEVBQUwsYUFBSzt3QkFDTCxNQUFNLEVBQU4sZUFBTTt3QkFDTixRQUFRLEVBQVIsdUJBQVE7d0JBQ1IsZUFBZSxFQUFmLGtDQUFlO3dCQUNmLFVBQVUsRUFBViwyQkFBVTt3QkFDVixTQUFTLEVBQVQsc0JBQVM7d0JBQ1QsS0FBSyxFQUFMLGdCQUFLO3FCQUNOLENBQUM7b0JBa0ZGLFdBQU0sR0FBRyxrQkFBVSxDQUFDLEdBQUcsRUFBRTt3QkFDdkIsSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFDO29CQUNqQixDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUM7b0JBdkVMLHdEQUF3RDtvQkFDeEQsSUFBSSxDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTt3QkFDdkIsdUNBQXVDO3dCQUN2QyxJQUFJLHlCQUFpQixDQUFDLElBQUksQ0FBQyxFQUFFOzRCQUMzQixJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQzs0QkFDdkIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxFQUFFLEVBQUUsSUFBSSxDQUFDLENBQUM7eUJBQ3pCOzZCQUFNOzRCQUNMLElBQUksQ0FBQyxVQUFVLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQzs0QkFDaEQsSUFBSSxDQUFDLFFBQVEsQ0FBQyxFQUFFLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDOzRCQUNuQyxxQkFBYSxDQUFDLElBQUksQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLENBQUM7eUJBQ3RDO3dCQUNELElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQzt3QkFDZCx5QkFBeUI7d0JBQ3pCLElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxFQUFFLElBQUksRUFBRTs0QkFDM0IsT0FBTyxFQUFFLElBQUk7eUJBQ2QsQ0FBQyxDQUFDO3dCQUNILG1EQUFtRDt3QkFDbkQsSUFBSSxDQUFDLFdBQVcsQ0FBQyxFQUFFLENBQUMsT0FBTyxFQUFFLENBQUMsS0FBSyxFQUFFLEVBQUU7NEJBQ3JDLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQzt3QkFDaEIsQ0FBQyxDQUFDLENBQUM7b0JBQ0wsQ0FBQyxDQUFDLENBQUM7Z0JBQ0wsQ0FBQztnQkFFRDs7Ozs7Ozs7O21CQVNHO2dCQUNILElBQUksS0FBSztvQkFDUCxPQUFPLElBQUksQ0FBQyxVQUFVLElBQUksSUFBSSxDQUFDO2dCQUNqQyxDQUFDO2dCQUVEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILE1BQU07b0JBQ0osU0FBUztvQkFDVCxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUM7b0JBQ2YsZ0JBQWdCO29CQUNoQixLQUFLLENBQUMsTUFBTSxFQUFFLENBQUM7Z0JBQ2pCLENBQUM7Z0JBRUQ7Ozs7Ozs7bUJBT0c7Z0JBQ0gsT0FBTztvQkFDTCxJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVU7d0JBQUUsT0FBTztvQkFDN0IsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO29CQUNuRCxNQUFNLEdBQUcsR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztvQkFDeEQsaUJBQU0sQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO2dCQUMvQixDQUFDO2FBSUY7WUEvSEM7Ozs7Ozs7Ozs7O2VBV0c7WUFDSSxXQUFRLEdBQUcsQ0FBQyxLQUFLLEVBQUUsUUFBUSxFQUFFLEdBQUcsRUFBRSxFQUFFLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQTs7OztLQUlsRDtlQStHRjtJQUNKLENBQUM7SUFFRCxrQkFBZSw2QkFBNkIsQ0FBQyJ9

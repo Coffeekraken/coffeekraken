@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["../../../../webcomponents/s-highlight-js/src/js/exports.ts", "../../src/js/index.ts"],
-  "sourcesContent": [null, "import SHighlightJs from '@coffeekraken/s-highlight-js';\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,QAAA,iBAAA,gBAAA,SAAA;AAEA,kBAAA,SAAA,mBAAA;AAEA,aAAA,UAAe,eAAA;;;;;ACJf,4BAAyB;",
+  "sources": ["../../src/js/index.ts"],
+  "sourcesContent": [null],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;AAAA,UAAA,mBAAA,gBAAA,SAAA;AACA,YAAQ,IAAI,QAAQ,iBAAA;;;",
   "names": []
 }

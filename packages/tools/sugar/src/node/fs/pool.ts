@@ -6,6 +6,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __replacePathTokens from '../path/replacePathTokens';
 import __matchGlob from '../glob/matchGlob';
 import __hotkey from '../keyboard/hotkey';
+import __path from 'path';
 
 /**
  * @name                pool
@@ -15,8 +16,8 @@ import __hotkey from '../keyboard/hotkey';
  *
  * This function simply take as parameter a glob (or array of globs) pattern(s)
  * and return an SPromise instance through which you can subscribe to events like:
- * - file: Emitted for each file founded (or added)
- * - files: Emitted with a list of founded (or added) files
+ * - file: Emitted for each file founded, added or updated
+ * - files: Emitted with a list of founded files
  * - update: Emitted when a file has been updated
  * - unlink: Emitted when a file has been deleted
  * - add: Emitted when a file has been added
@@ -75,7 +76,10 @@ function pool(input, settings?: Partial<IPoolSettings>) {
 
       // expand glob
       const expandedGlobs: string[] = __expandGlob(input).map((l) => {
-        return l.split(':')[0];
+        return l
+          .split(':')[0]
+          .replace(set.cwd + '/', '')
+          .replace(set.cwd, '');
       });
 
       // using chokidar to watch files
@@ -87,25 +91,42 @@ function pool(input, settings?: Partial<IPoolSettings>) {
         .on('add', (path) => {
           if (filesStack[path]) return;
 
-          if (!__matchGlob(path, input)) return;
+          if (
+            !__matchGlob(path, input, {
+              cwd: set.cwd
+            })
+          )
+            return;
 
           // make sure it's not exists already
           if (!filesStack[path]) {
-            if (set.SFile) filesStack[path] = __SFile.new(path);
+            if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
             else filesStack[path] = path;
           }
           emit('add', filesStack[path]);
+          emit('file', filesStack[path]);
         })
         .on('change', (path) => {
-          if (!__matchGlob(path, input)) return;
+          if (
+            !__matchGlob(path, input, {
+              cwd: set.cwd
+            })
+          )
+            return;
           if (!filesStack[path]) {
-            if (set.SFile) filesStack[path] = __SFile.new(path);
+            if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
             else filesStack[path] = path;
           }
           emit('update', filesStack[path]);
+          emit('file', filesStack[path]);
         })
         .on('unlink', (path) => {
-          if (!__matchGlob(path, input)) return;
+          if (
+            !__matchGlob(path, input, {
+              cwd: set.cwd
+            })
+          )
+            return;
           // @ts-ignore
           if (filesStack[path] && filesStack[path].path) {
             // @ts-ignore
@@ -126,10 +147,13 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           });
           filesPaths
             .filter((filePath) => {
-              return __matchGlob(filePath, input);
+              return __matchGlob(filePath, input, {
+                cwd: set.cwd
+              });
             })
             .forEach((filePath) => {
-              if (set.SFile) finalFiles.push(__SFile.new(filePath));
+              if (set.SFile)
+                finalFiles.push(__SFile.new(`${set.cwd}/${filePath}`));
               else finalFiles.push(filePath);
               emit('file', finalFiles[finalFiles.length - 1]);
               // save file in file stack

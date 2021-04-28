@@ -1,208 +1,198 @@
+"use strict";
 // @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepMerge", "../string/parse", "../string/unquote"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-    const parse_1 = __importDefault(require("../string/parse"));
-    const unquote_1 = __importDefault(require("../string/unquote"));
-    /**
-     * @name                        parseArgs
-     * @namespace            js.cli
-     * @type                        Function
-     *
-     * Parse a string to find the provided arguments into the list and return a corresponding object.
-     *
-     * @param             {String}                    string                      The string to parse
-     * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
-     * @return            {Object}                                                The object of funded arguments and their values
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example         js
-     * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
-     * parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {
-     *    param1: { type: 'String', alias: 'p' },
-     *    world: { type: 'Array', alias: 'w', validator: value => {
-     *      return Array.isArray(value);
-     *    }},
-     *    bool: { type: 'Boolean', alias: 'b', default: false, required: true },
-     *    'hello.world': { type: 'String' },
-     *    help: { type: 'String', alias: 'h' },
-     *    id: { type: 'String', alias: 'i', regexp: /^#([\S]+)$/ }
-     * }, {
-     *    treatDotsAsObject: true,
-     *    handleOrphanOptions: true
-     * });
-     * {
-     *    param1: 'hello',
-     *    world: [10, 'yop', 'hello world'],
-     *    bool: true,
-     *    hello: {
-     *      world: 'Nelson'
-     *    },
-     *    help: 'coco yep',
-     *    id: '#blop'
-     * }
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    function parseArgs(string, settings = {}) {
-        settings = deepMerge_1.default({
-            throw: true,
-            defaultObj: {},
-            cast: true,
-            valueQuote: undefined
-        }, settings);
-        string = string.trim();
-        let valueQuote = settings.valueQuote;
-        if (!valueQuote) {
-            for (let i = 0; i < string.length; i++) {
-                const char = string[i];
-                if (char === '"' || char === '`' || char === "'") {
-                    valueQuote = char;
-                    break;
-                }
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const parse_1 = __importDefault(require("../string/parse"));
+const unquote_1 = __importDefault(require("../string/unquote"));
+/**
+ * @name                        parseArgs
+ * @namespace            js.cli
+ * @type                        Function
+ *
+ * Parse a string to find the provided arguments into the list and return a corresponding object.
+ *
+ * @param             {String}                    string                      The string to parse
+ * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
+ * @return            {Object}                                                The object of funded arguments and their values
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example         js
+ * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
+ * parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {
+ *    param1: { type: 'String', alias: 'p' },
+ *    world: { type: 'Array', alias: 'w', validator: value => {
+ *      return Array.isArray(value);
+ *    }},
+ *    bool: { type: 'Boolean', alias: 'b', default: false, required: true },
+ *    'hello.world': { type: 'String' },
+ *    help: { type: 'String', alias: 'h' },
+ *    id: { type: 'String', alias: 'i', regexp: /^#([\S]+)$/ }
+ * }, {
+ *    treatDotsAsObject: true,
+ *    handleOrphanOptions: true
+ * });
+ * {
+ *    param1: 'hello',
+ *    world: [10, 'yop', 'hello world'],
+ *    bool: true,
+ *    hello: {
+ *      world: 'Nelson'
+ *    },
+ *    help: 'coco yep',
+ *    id: '#blop'
+ * }
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function parseArgs(string, settings = {}) {
+    settings = deepMerge_1.default({
+        throw: true,
+        defaultObj: {},
+        cast: true,
+        valueQuote: undefined
+    }, settings);
+    string = string.trim();
+    let valueQuote = settings.valueQuote;
+    if (!valueQuote) {
+        for (let i = 0; i < string.length; i++) {
+            const char = string[i];
+            if (char === '"' || char === '`' || char === "'") {
+                valueQuote = char;
+                break;
             }
-            if (!valueQuote)
-                valueQuote = '"';
         }
-        let stringArray = [];
-        let isFunctionStyle = false;
-        if (string.match(/^\(/) && string.match(/\)$/)) {
-            isFunctionStyle = true;
-            string = string.slice(1, -1);
-            let currentStr = '';
-            let isInParenthesis = false;
-            let isInQuotes = false;
-            for (let i = 0; i < string.length; i++) {
-                const char = string[i];
-                const previousChar = string[i - 1] || string[0];
-                // check if we are in quotes or not
-                if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
-                    isInQuotes = true;
-                }
-                else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
-                    isInQuotes = false;
-                }
-                // check if we are in parenthesis
-                if (!isInQuotes && char === '(' && !isInParenthesis) {
-                    isInParenthesis = true;
-                }
-                else if (!isInQuotes && char === ')') {
-                    isInParenthesis = false;
-                }
-                if (char === ',') {
-                    if (isInQuotes || isInParenthesis) {
-                        currentStr += char;
-                    }
-                    else {
-                        stringArray.push(currentStr.trim());
-                        currentStr = '';
-                    }
-                }
-                else {
+        if (!valueQuote)
+            valueQuote = '"';
+    }
+    let stringArray = [];
+    let isFunctionStyle = false;
+    if (string.match(/^\(/) && string.match(/\)$/)) {
+        isFunctionStyle = true;
+        string = string.slice(1, -1);
+        let currentStr = '';
+        let isInParenthesis = false;
+        let isInQuotes = false;
+        for (let i = 0; i < string.length; i++) {
+            const char = string[i];
+            const previousChar = string[i - 1] || string[0];
+            // check if we are in quotes or not
+            if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
+                isInQuotes = true;
+            }
+            else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
+                isInQuotes = false;
+            }
+            // check if we are in parenthesis
+            if (!isInQuotes && char === '(' && !isInParenthesis) {
+                isInParenthesis = true;
+            }
+            else if (!isInQuotes && char === ')') {
+                isInParenthesis = false;
+            }
+            if (char === ',') {
+                if (isInQuotes || isInParenthesis) {
                     currentStr += char;
                 }
-            }
-            stringArray.push(currentStr.trim());
-        }
-        else {
-            let currentStr = '';
-            let isInQuotes = false;
-            for (let i = 0; i < string.length; i++) {
-                const char = string[i];
-                const previousChar = string[i - 1] || string[0];
-                // check if we are in quotes or not
-                if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
-                    isInQuotes = true;
-                }
-                else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
-                    isInQuotes = false;
-                }
-                if (char === ' ') {
-                    if (isInQuotes) {
-                        currentStr += char;
-                    }
-                    else {
-                        stringArray.push(currentStr.trim());
-                        currentStr = '';
-                    }
-                }
                 else {
-                    currentStr += char;
-                }
-            }
-            stringArray.push(currentStr.trim());
-        }
-        stringArray = stringArray.map((item) => unquote_1.default(item));
-        const argsObj = {};
-        let currentArgName = undefined;
-        let currentValue;
-        stringArray = stringArray.forEach((part, i) => {
-            const isLast = i === stringArray.length - 1;
-            if (!isFunctionStyle &&
-                (part.slice(0, 2) === '--' || part.slice(0, 1) === '-')) {
-                if (currentValue === undefined &&
-                    currentArgName !== -1 &&
-                    currentArgName) {
-                    argsObj[currentArgName] = true;
-                }
-                currentArgName = part.replace(/^[-]{1,2}/, '');
-                if (isLast) {
-                    argsObj[currentArgName] = true;
+                    stringArray.push(currentStr.trim());
+                    currentStr = '';
                 }
             }
             else {
-                let value;
-                if (part && typeof part === 'string') {
-                    value = part
-                        .replace(/^\\\\\\`/, '')
-                        .replace(/\\\\\\`$/, '')
-                        .replace(/^'/, '')
-                        .replace(/'$/, '')
-                        .replace(/^"/, '')
-                        .replace(/"$/, '');
-                    if (value.match(/^\$[a-zA-Z0-9-_]+\s?:.*/)) {
-                        const parts = part.split(':');
-                        currentArgName = parts[0].trim().replace(/^\$/, '');
-                        value = parts.slice(1).join(':').trim();
-                    }
-                }
-                currentValue = parse_1.default(value);
-                if (currentArgName !== undefined) {
-                    if (argsObj[currentArgName] !== undefined) {
-                        if (!Array.isArray(argsObj[currentArgName])) {
-                            argsObj[currentArgName] = [argsObj[currentArgName]];
-                        }
-                        argsObj[currentArgName].push(currentValue);
-                    }
-                    else {
-                        argsObj[currentArgName] = currentValue;
-                    }
-                    currentValue = undefined;
-                    currentArgName = undefined;
+                currentStr += char;
+            }
+        }
+        stringArray.push(currentStr.trim());
+    }
+    else {
+        let currentStr = '';
+        let isInQuotes = false;
+        for (let i = 0; i < string.length; i++) {
+            const char = string[i];
+            const previousChar = string[i - 1] || string[0];
+            // check if we are in quotes or not
+            if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
+                isInQuotes = true;
+            }
+            else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
+                isInQuotes = false;
+            }
+            if (char === ' ') {
+                if (isInQuotes) {
+                    currentStr += char;
                 }
                 else {
-                    argsObj[i] = currentValue;
+                    stringArray.push(currentStr.trim());
+                    currentStr = '';
                 }
             }
-        });
-        return argsObj;
+            else {
+                currentStr += char;
+            }
+        }
+        stringArray.push(currentStr.trim());
     }
-    exports.default = parseArgs;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VBcmdzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VBcmdzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLG9FQUE4QztJQUM5Qyw0REFBc0M7SUFDdEMsZ0VBQTBDO0lBRTFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BMkNHO0lBQ0gsU0FBd0IsU0FBUyxDQUFDLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtRQUNyRCxRQUFRLEdBQUcsbUJBQVcsQ0FDcEI7WUFDRSxLQUFLLEVBQUUsSUFBSTtZQUNYLFVBQVUsRUFBRSxFQUFFO1lBQ2QsSUFBSSxFQUFFLElBQUk7WUFDVixVQUFVLEVBQUUsU0FBUztTQUN0QixFQUNELFFBQVEsQ0FDVCxDQUFDO1FBRUYsTUFBTSxHQUFHLE1BQU0sQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUV2QixJQUFJLFVBQVUsR0FBRyxRQUFRLENBQUMsVUFBVSxDQUFDO1FBQ3JDLElBQUksQ0FBQyxVQUFVLEVBQUU7WUFDZixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtnQkFDdEMsTUFBTSxJQUFJLEdBQUcsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUN2QixJQUFJLElBQUksS0FBSyxHQUFHLElBQUksSUFBSSxLQUFLLEdBQUcsSUFBSSxJQUFJLEtBQUssR0FBRyxFQUFFO29CQUNoRCxVQUFVLEdBQUcsSUFBSSxDQUFDO29CQUNsQixNQUFNO2lCQUNQO2FBQ0Y7WUFDRCxJQUFJLENBQUMsVUFBVTtnQkFBRSxVQUFVLEdBQUcsR0FBRyxDQUFDO1NBQ25DO1FBRUQsSUFBSSxXQUFXLEdBQWEsRUFBRSxDQUFDO1FBRS9CLElBQUksZUFBZSxHQUFHLEtBQUssQ0FBQztRQUU1QixJQUFJLE1BQU0sQ0FBQyxLQUFLLENBQUMsS0FB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
+    stringArray = stringArray.map((item) => unquote_1.default(item));
+    const argsObj = {};
+    let currentArgName = undefined;
+    let currentValue;
+    stringArray = stringArray.forEach((part, i) => {
+        const isLast = i === stringArray.length - 1;
+        if (!isFunctionStyle &&
+            (part.slice(0, 2) === '--' || part.slice(0, 1) === '-')) {
+            if (currentValue === undefined &&
+                currentArgName !== -1 &&
+                currentArgName) {
+                argsObj[currentArgName] = true;
+            }
+            currentArgName = part.replace(/^[-]{1,2}/, '');
+            if (isLast) {
+                argsObj[currentArgName] = true;
+            }
+        }
+        else {
+            let value;
+            if (part && typeof part === 'string') {
+                value = part
+                    .replace(/^\\\\\\`/, '')
+                    .replace(/\\\\\\`$/, '')
+                    .replace(/^'/, '')
+                    .replace(/'$/, '')
+                    .replace(/^"/, '')
+                    .replace(/"$/, '');
+                if (value.match(/^\$[a-zA-Z0-9-_]+\s?:.*/)) {
+                    const parts = part.split(':');
+                    currentArgName = parts[0].trim().replace(/^\$/, '');
+                    value = parts.slice(1).join(':').trim();
+                }
+            }
+            currentValue = parse_1.default(value);
+            if (currentArgName !== undefined) {
+                if (argsObj[currentArgName] !== undefined) {
+                    if (!Array.isArray(argsObj[currentArgName])) {
+                        argsObj[currentArgName] = [argsObj[currentArgName]];
+                    }
+                    argsObj[currentArgName].push(currentValue);
+                }
+                else {
+                    argsObj[currentArgName] = currentValue;
+                }
+                currentValue = undefined;
+                currentArgName = undefined;
+            }
+            else {
+                argsObj[i] = currentValue;
+            }
+        }
+    });
+    return argsObj;
+}
+exports.default = parseArgs;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VBcmdzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VBcmdzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE4QztBQUM5Qyw0REFBc0M7QUFDdEMsZ0VBQTBDO0FBRTFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkNHO0FBQ0gsU0FBd0IsU0FBUyxDQUFDLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUNyRCxRQUFRLEdBQUcsbUJBQVcsQ0FDcEI7UUFDRSxLQUFLLEVBQUUsSUFBSTtRQUNYLFVBQVUsRUFBRSxFQUFFO1FBQ2QsSUFBSSxFQUFFLElBQUk7UUFDVixVQUFVLEVBQUUsU0FBUztLQUN0QixFQUNELFFBQVEsQ0FDVCxDQUFDO0lBRUYsTUFBTSxHQUFHLE1BQU0sQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUV2QixJQUFJLFVBQVUsR0FBRyxRQUFRLENBQUMsVUFBVSxDQUFDO0lBQ3JDLElBQUksQ0FBQyxVQUFVLEVBQUU7UUFDZixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUN0QyxNQUFNLElBQUksR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDdkIsSUFBSSxJQUFJLEtBQUssR0FBRyxJQUFJLElBQUksS0FBSyxHQUFHLElBQUksSUFBSSxLQUFLLEdBQUcsRUFBRTtnQkFDaEQsVUFBVSxHQUFHLElBQUksQ0FBQztnQkFDbEIsTUFBTTthQUNQO1NBQ0Y7UUFDRCxJQUFJLENBQUMsVUFBVTtZQUFFLFVBQVUsR0FBRyxHQUFHLENBQUM7S0FDbkM7SUFFRCxJQUFJLFdBQVcsR0FBYSxFQUFFLENBQUM7SUFFL0IsSUFBSSxlQUFlLEdBQUcsS0FBSyxDQUFDO0lBRTVCLElBQUksTUFBTSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsSUFBSSxN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

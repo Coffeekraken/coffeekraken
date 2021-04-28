@@ -6,6 +6,7 @@ import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
+import __childProcess from 'child_process';
 
 import __SLog, { ILog } from '@coffeekraken/s-log';
 
@@ -94,6 +95,18 @@ class SStdio extends __SClass implements ISStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static registeredComponents: ISStdioRegisteredComponents = {};
+
+  /**
+   * @name      _lastLogObj
+   * @type      ILog
+   * @private
+   *
+   * Store the last log object logged
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _lastLogObj?: ILog;
 
   /**
    * @name      _logsBuffer
@@ -406,6 +419,21 @@ class SStdio extends __SClass implements ISStdio {
         continue;
       }
 
+      if (this._lastLogObj && this._lastLogObj.temp) {
+        // @ts-ignore
+        if (!this.clearLast || typeof this.clearLast !== 'function')
+          throw new Error(
+            `You try to clear the last log but it does not implements the "<cyan>clearLast</cyan>" method`
+          );
+        (async () => {
+          // @ts-ignore
+          if (!this.clearLast) return;
+          // @ts-ignore
+          await this.clearLast();
+          this._logBuffer();
+        })();
+      }
+
       if (log.clear === true) {
         this._isClearing = true;
         // console.log('CLEAR', log.type);
@@ -451,6 +479,9 @@ class SStdio extends __SClass implements ISStdio {
 
       // @ts-ignore
       this._log(log, componentObj.component);
+
+      // save the last log object
+      this._lastLogObj = log;
     }
   }
 

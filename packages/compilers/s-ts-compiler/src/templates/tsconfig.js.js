@@ -7,8 +7,8 @@ const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot')
   .default;
 
 let jsInput = __sugarConfig('js.compile.input');
-if (!Array.isArray(jsInput))
-  jsInput = [jsInput].map((l) => l.replace(/\.js$/, '.ts'));
+if (!Array.isArray(jsInput)) jsInput = [jsInput];
+jsInput = jsInput.map((l) => l.replace(/\.js$/, '.ts'));
 
 module.exports = __deepMerge(__tsconfig, {
   _include: [`${__packageRoot()}/packages/*/*/src/js/**/*.ts`, ...jsInput],

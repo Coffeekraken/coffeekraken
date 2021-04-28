@@ -9976,6 +9976,13 @@ module-lookup-amd@^7.0.0:
     requirejs "^2.3.5"
     requirejs-config-file "^4.0.0"
 
+move-file@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/move-file/-/move-file-2.0.0.tgz#83ffa309b5d7f69d518b28e1333e2ffadf331e3e"
+  integrity sha512-cdkdhNCgbP5dvS4tlGxZbD+nloio9GIimP57EjqFhwLcMjnU+XJKAZzlmg/TN/AK1LuNAdTSvm3CPPP4Xkv0iQ==
+  dependencies:
+    path-exists "^4.0.0"
+
 mri@1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/mri/-/mri-1.1.6.tgz#49952e1044db21dbf90f6cd92bc9c9a777d415a6"
@@ -14266,6 +14273,11 @@ string-kit@^0.11.9:
   resolved "https://registry.yarnpkg.com/string-kit/-/string-kit-0.11.10.tgz#1716b896a5077b2e3e856e409307d4f2e8999adc"
   integrity sha512-ATVmIpMrqxPFNiNQTnmEeXzt3743O6DubJWh2MiAQV1ifKd4PcCjBcybCdb0ENnPO1T6asORK9nOpygn1BATag==
 
+string-kit@^0.12.0:
+  version "0.12.5"
+  resolved "https://registry.yarnpkg.com/string-kit/-/string-kit-0.12.5.tgz#e7f646e7740e54b7ecae6cf67b73bb616aa16652"
+  integrity sha512-aB7yK0RgOx3SElEfQ6lZu2xS5hWr4ToJispiy+djJ4yh3f2zaTMCm44ZrHZnN1RiQQCLfpa5Btz2bishyBm8IQ==
+
 string-length@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-4.0.2.tgz#a8a8dc7bd5c1a82b9b3c8b87e125f66871b6e57a"
@@ -14814,6 +14826,20 @@ terminal-kit@^1.44.0:
     string-kit "^0.11.9"
     tree-kit "^0.6.2"
 
+terminal-kit@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/terminal-kit/-/terminal-kit-2.0.7.tgz#7076707fb9ae31b4cdb1ec0f4e21d9feb027c718"
+  integrity sha512-+MpGlu/QsL8Vc8+rHm1JkNuVskaJMUNfzqxqsOhmsS3hG4lnYu3g1zNpXMX7GNkcj2RTyxuggeYXwTxVv28DoA==
+  dependencies:
+    "@cronvel/get-pixels" "^3.4.0"
+    chroma-js "^2.1.0"
+    lazyness "^1.2.0"
+    ndarray "^1.0.19"
+    nextgen-events "^1.3.4"
+    seventh "^0.7.40"
+    string-kit "^0.12.0"
+    tree-kit "^0.7.0"
+
 terminal-link@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/terminal-link/-/terminal-link-2.1.1.tgz#14a64a27ab3c0df933ea546fba55f2d078edc994"
@@ -15061,6 +15087,11 @@ tree-kit@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/tree-kit/-/tree-kit-0.6.2.tgz#3608b7b4fb913a608192cb5abf6154e3921f3592"
   integrity sha512-95UzJA0EMbFfu5sGUUOoXixQMUGkwu82nGM4lmqLyQl+R4H3FK+lS0nT8TZJ5x7JhSHy+saVn7/AOqh6d+tmOg==
+
+tree-kit@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/tree-kit/-/tree-kit-0.7.0.tgz#f677b10f79d9b4442ba20e0d87c8a12ecabe5fbb"
+  integrity sha512-MAqFo2oJJ39zmxq3xETx0nMAgZw2z6pnJPjIAehEcrDaeePDhBBTshAlyhCDtezMDTIu1Av+vGE501xN3Sh8VA==
 
 trim-newlines@^1.0.0:
   version "1.0.0"

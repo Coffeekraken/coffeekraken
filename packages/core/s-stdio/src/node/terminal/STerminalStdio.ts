@@ -5,6 +5,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SStdio from '../../shared/SStdio';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import { terminal as __terminalKit } from 'terminal-kit';
 
 /**
  * @name            STerminalStdio
@@ -120,6 +121,11 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     this.display();
   }
 
+  clearLast() {
+    __terminalKit.previousLine();
+    __terminalKit.eraseLine();
+  }
+
   clear() {
     process.stdout.write('\x1Bc');
   }
@@ -140,6 +146,9 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
   _log(logObj, component) {
     // handle empty logs
     if (!logObj) return;
+
+    // __terminalKit.saveCursor();
+
     // render the component
     let renderedStr = component.render(logObj, this._settings);
     // handle metas if needed

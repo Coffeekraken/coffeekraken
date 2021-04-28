@@ -7,6 +7,7 @@ import __replacePathTokens from '../path/replacePathTokens';
 import __matchGlob from '../glob/matchGlob';
 import __hotkey from '../keyboard/hotkey';
 import __path from 'path';
+import __fs from 'fs';
 
 /**
  * @name                pool
@@ -16,6 +17,7 @@ import __path from 'path';
  *
  * This function simply take as parameter a glob (or array of globs) pattern(s)
  * and return an SPromise instance through which you can subscribe to events like:
+ * - ready: Emitted once the pool is ready
  * - file: Emitted for each file founded, added or updated
  * - files: Emitted with a list of founded files
  * - update: Emitted when a file has been updated
@@ -85,34 +87,55 @@ function pool(input, settings?: Partial<IPoolSettings>) {
       // using chokidar to watch files
       const watcher = __chokidar.watch(expandedGlobs, {
         ...set,
+        // persistent: true,
+        // interval: 1,
+        // binaryInterval: 1,
+        // awaitWriteFinish: true,
+        // usePolling: true,
         ignored: [...set.ignored, ...(set.exclude ?? [])]
       });
+
       watcher
         .on('add', (path) => {
-          if (filesStack[path]) return;
+          // if (event !== 'created') return;
 
-          if (
-            !__matchGlob(path, input, {
-              cwd: set.cwd
-            })
-          )
+          // console.log(path);
+
+          if (filesStack[path] || !__fs.existsSync(`${set.cwd}/${path}`))
             return;
+
+          // if (
+          //   !__matchGlob(path, input, {
+          //     cwd: set.cwd
+          //   })
+          // )
+          //   return;
+
+          // console.log(path);
+          // iii++;
+          // console.log(iii);
 
           // make sure it's not exists already
           if (!filesStack[path]) {
+            // console.log('NEW', path);
             if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
             else filesStack[path] = path;
           }
           emit('add', filesStack[path]);
           emit('file', filesStack[path]);
+
+          // iii++;
+          // console.log('RAW', event, iii);
         })
         .on('change', (path) => {
-          if (
-            !__matchGlob(path, input, {
-              cwd: set.cwd
-            })
-          )
-            return;
+          if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
+
+          // if (
+          //   !__matchGlob(path, input, {
+          //     cwd: set.cwd
+          //   })
+          // )
+          //   return;
           if (!filesStack[path]) {
             if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
             else filesStack[path] = path;
@@ -121,12 +144,12 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           emit('file', filesStack[path]);
         })
         .on('unlink', (path) => {
-          if (
-            !__matchGlob(path, input, {
-              cwd: set.cwd
-            })
-          )
-            return;
+          // if (
+          //   !__matchGlob(path, input, {
+          //     cwd: set.cwd
+          //   })
+          // )
+          //   return;
           // @ts-ignore
           if (filesStack[path] && filesStack[path].path) {
             // @ts-ignore
@@ -136,6 +159,11 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           }
           delete filesStack[path];
         })
+        // .on('raw', (event, path, details) => {
+        //   // console.log('EEE', event, path);
+        //   if (event !== 'created') return;
+
+        // })
         .on('ready', () => {
           const files = watcher.getWatched();
           const filesPaths: string[] = [];
@@ -159,6 +187,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
               // save file in file stack
               filesStack[filePath] = finalFiles[finalFiles.length - 1];
             });
+          emit('ready', finalFiles);
           emit('files', finalFiles);
           if (!set.watch) {
             watcher.close();

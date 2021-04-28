@@ -1,5 +1,12 @@
 {
   "config": {
+    "local": {
+      "js": {
+        "compile": {
+          "bundle": true
+        }
+      }
+    },
     "folders": [
       {
         "scope": "default",

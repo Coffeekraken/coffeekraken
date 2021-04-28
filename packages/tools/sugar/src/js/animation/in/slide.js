@@ -1,79 +1,64 @@
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../../shared/string/uniqid", "../../../shared/string/parseArgs", "../../dom/querySelectorLive"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const uniqid_1 = __importDefault(require("../../../shared/string/uniqid"));
-    const parseArgs_1 = __importDefault(require("../../../shared/string/parseArgs"));
-    const querySelectorLive_1 = __importDefault(require("../../dom/querySelectorLive"));
-    /**
-     * @todo        documentation
-     */
-    exports.default = (() => {
-        querySelectorLive_1.default('[slide-in]', ($item) => {
-            // generate a unique id for this node
-            const uniqClass = `slide-in-${uniqid_1.default()}`;
-            $item.classList.add(uniqClass);
-            // parse the slide-in value
-            const slideInValue = $item.getAttribute('slide-in');
-            const args = parseArgs_1.default(slideInValue, {
-                x: 'Number -x --x "0"',
-                y: 'Number -y --y "0"',
-                duration: 'Number -d --duration "500"',
-                delay: 'Number --delay "0"',
-                when: 'String -w --when "inViewport"'
-            });
-            // generate the animation css
-            const css = `
+import __uniqid from '../../../shared/string/uniqid';
+import __parseArgs from '../../../shared/string/parseArgs';
+import __querySelectorLive from '../../dom/querySelectorLive';
+/**
+ * @todo        documentation
+ */
+export default (() => {
+    __querySelectorLive('[slide-in]', ($item) => {
+        // generate a unique id for this node
+        const uniqClass = `slide-in-${__uniqid()}`;
+        $item.classList.add(uniqClass);
+        // parse the slide-in value
+        const slideInValue = $item.getAttribute('slide-in');
+        const args = __parseArgs(slideInValue, {
+            x: 'Number -x --x "0"',
+            y: 'Number -y --y "0"',
+            duration: 'Number -d --duration "500"',
+            delay: 'Number --delay "0"',
+            when: 'String -w --when "inViewport"'
+        });
+        // generate the animation css
+        const css = `
       [slide-in].${uniqClass} {
         opacity: 0;
         transform: translate(${args.x.value || 0}px, ${args.y.value || 0}px);
 
       }
     `;
-            const cssIn = `
+        const cssIn = `
       [slide-in].${uniqClass}.in {
         transition: all ${args.duration.value / 1000 || '0.5'}s;
         opacity: 1;
         transform: translate(0, 0);
       }
     `;
-            // append the css into the section
-            document.head.innerHTML += `
+        // append the css into the section
+        document.head.innerHTML += `
       <style id="${uniqClass}">
         ${css}
       </style>
     `;
-            setTimeout(() => {
-                document.head.innerHTML += `
+        setTimeout(() => {
+            document.head.innerHTML += `
         <style id="${uniqClass}-in">
           ${cssIn}
         </style>
       `;
-            }, 100);
-            // add the "in" class
-            setTimeout(() => {
-                $item.classList.add('in');
-            }, args.delay.value);
-            setTimeout(() => {
-                const $style = document.querySelector(`style#${uniqClass}`);
-                if ($style)
-                    $style.parentNode.removeChild($style);
-                const $styleIn = document.querySelector(`style#${uniqClass}-in`);
-                if ($styleIn)
-                    $styleIn.parentNode.removeChild($styleIn);
-            }, args.delay.value + args.duration.value);
-        });
-    })();
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2xpZGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy90b29scy9zdWdhci9zcmMvanMvYW5pbWF0aW9uL2luL3NsaWRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDJFQUFxRDtJQUNyRCxpRkFBMkQ7SUFDM0Qsb0ZBQThEO0lBRTlEOztPQUVHO0lBRUgsa0JBQWUsQ0FBQyxHQUFHLEVBQUU7UUFDbkIsMkJBQW1CLENBQUMsWUFBWSxFQUFFLENBQUMsS0FBSyxFQUFFLEVBQUU7WUFDMUMscUNBQXFDO1lBQ3JDLE1BQU0sU0FBUyxHQUFHLFlBQVksZ0JBQVEsRUFBRSxFQUFFLENBQUM7WUFDM0MsS0FBSyxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7WUFFL0IsMkJBQTJCO1lBQzNCLE1BQU0sWUFBWSxHQUFHLEtBQUssQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDcEQsTUFBTSxJQUFJLEdBQUcsbUJBQVcsQ0FBQyxZQUFZLEVBQUU7Z0JBQ3JDLENBQUMsRUFBRSxtQkFBbUI7Z0JBQ3RCLENBQUMsRUFBRSxtQkFBbUI7Z0JBQ3RCLFFBQVEsRUFBRSw0QkFBNEI7Z0JBQ3RDLEtBQUssRUFBRSxvQkFBb0I7Z0JBQzNCLElBQUksRUFBRSwrQkFBK0I7YUFDdEMsQ0FBQyxDQUFDO1lBRUgsNkJBQTZCO1lBQzdCLE1BQU0sR0FBRyxHQUFHO21CQUNHLFNBQVM7OytCQUVHLElBQUksQ0FBQyxDQUFDLENBQUMsS0FBSyxJQUFJLENBQUMsT0FBTyxJQUFJLENBQUMsQ0FBQyxDQUFDLEtBQUssSUFBSSxDQUFDOzs7S0FHbkUsQ0FBQztZQUNGLE1BQU0sS0FBSyxHQUFHO21CQUNDLFNBQVM7MEJBQ0YsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLEdBQUcsSUFBSSxJQUFJLEtBQUs7Ozs7S0FJeEQsQ0FBQztZQUVGLGtDQUFrQztZQUNsQyxRQUFRLENBQUMsSUFBSSxDQUFDLFNBQVMsSUFBSTttQkFDWixTQUFTO1VBQ2xCLEdBQUc7O0tBRVIsQ0FBQztZQUNGLFVBQVUsQ0FBQyxHQUFHLEVBQUU7Z0JBQ2QsUUFBUSxDQUFDLElBQUksQ0FBQyxTQUFTLElBQUk7cUJBQ1osU0FBUztZQUNsQixLQUFLOztPQUVWLENBQUM7WUFDSixDQUFDLEVBQUUsR0FBRyxDQUFDLENBQUM7WUFFUixxQkFBcUI7WUFDckIsVUFBVSxDQUFDLEdBQUcsRUFBRTtnQkFDZCxLQUFLLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUM1QixDQUFDLEVBQUUsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUVyQixVQUFVLENBQUMsR0FBRyxFQUFFO2dCQUNkLE1BQU0sTUFBTSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsU0FBUyxTQUFTLEVBQUUsQ0FBQyxDQUFDO2dCQUM1RCxJQUFJLE1BQU07b0JBQUUsTUFBTSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBQ2xELE1BQU0sUUFBUSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsU0FBUyxTQUFTLEtBQUssQ0FBQyxDQUFDO2dCQUNqRSxJQUFJLFFBQVE7b0JBQUUsUUFBUSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsUUFBUSxDQUFDLENBQUM7WUFDMUQsQ0FBQyxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDN0MsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsRUFBRSxDQUFDIn0=
+        }, 100);
+        // add the "in" class
+        setTimeout(() => {
+            $item.classList.add('in');
+        }, args.delay.value);
+        setTimeout(() => {
+            const $style = document.querySelector(`style#${uniqClass}`);
+            if ($style)
+                $style.parentNode.removeChild($style);
+            const $styleIn = document.querySelector(`style#${uniqClass}-in`);
+            if ($styleIn)
+                $styleIn.parentNode.removeChild($styleIn);
+        }, args.delay.value + args.duration.value);
+    });
+})();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2xpZGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzbGlkZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxRQUFRLE1BQU0sK0JBQStCLENBQUM7QUFDckQsT0FBTyxXQUFXLE1BQU0sa0NBQWtDLENBQUM7QUFDM0QsT0FBTyxtQkFBbUIsTUFBTSw2QkFBNkIsQ0FBQztBQUU5RDs7R0FFRztBQUVILGVBQWUsQ0FBQyxHQUFHLEVBQUU7SUFDbkIsbUJBQW1CLENBQUMsWUFBWSxFQUFFLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDMUMscUNBQXFDO1FBQ3JDLE1BQU0sU0FBUyxHQUFHLFlBQVksUUFBUSxFQUFFLEVBQUUsQ0FBQztRQUMzQyxLQUFLLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUUvQiwyQkFBMkI7UUFDM0IsTUFBTSxZQUFZLEdBQUcsS0FBSyxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUNwRCxNQUFNLElBQUksR0FBRyxXQUFXLENBQUMsWUFBWSxFQUFFO1lBQ3JDLENBQUMsRUFBRSxtQkFBbUI7WUFDdEIsQ0FBQyxFQUFFLG1CQUFtQjtZQUN0QixRQUFRLEVBQUUsNEJBQTRCO1lBQ3RDLEtBQUssRUFBRSxvQkFBb0I7WUFDM0IsSUFBSSxFQUFFLCtCQUErQjtTQUN0QyxDQUFDLENBQUM7UUFFSCw2QkFBNkI7UUFDN0IsTUFBTSxHQUFHLEdBQUc7bUJBQ0csU0FBUzs7K0JBRUcsSUFBSSxDQUFDLENBQUMsQ0FBQyxLQUFLLElBQUksQ0FBQyxPQUFPLElBQUksQ0FBQyxDQUFDLENBQUMsS0FBSyxJQUFJLENBQUM7OztLQUduRSxDQUFDO1FBQ0YsTUFBTSxLQUFLLEdBQUc7bUJBQ0MsU0FBUzswQkFDRixJQUFJLENBQUMsUUFBUSxDQUFDLEtBQUssR0FBRyxJQUFJLElBQUksS0FBSzs7OztLQUl4RCxDQUFDO1FBRUYsa0NBQWtDO1FBQ2xDLFFBQVEsQ0FBQyxJQUFJLENBQUMsU0FBUyxJQUFJO21CQUNaLFNBQVM7VUFDbEIsR0FBRzs7S0FFUixDQUFDO1FBQ0YsVUFBVSxDQUFDLEdBQUcsRUFBRTtZQUNkLFFBQVEsQ0FBQyxJQUFJLENBQUMsU0FBUyxJQUFJO3FCQUNaLFNBQVM7WUFDbEIsS0FBSzs7T0FFVixDQUFDO1FBQ0osQ0FBQyxFQUFFLEdBQUcsQ0FBQyxDQUFDO1FBRVIscUJBQXFCO1FBQ3JCLFVBQVUsQ0FBQyxHQUFHLEVBQUU7WUFDZCxLQUFLLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUM1QixDQUFDLEVBQUUsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUVyQixVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ2QsTUFBTSxNQUFNLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxTQUFTLFNBQVMsRUFBRSxDQUFDLENBQUM7WUFDNUQsSUFBSSxNQUFNO2dCQUFFLE1BQU0sQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBQ2xELE1BQU0sUUFBUSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsU0FBUyxTQUFTLEtBQUssQ0FBQyxDQUFDO1lBQ2pFLElBQUksUUFBUTtnQkFBRSxRQUFRLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUMxRCxDQUFDLEVBQUUsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUM3QyxDQUFDLENBQUMsQ0FBQztBQUNMLENBQUMsQ0FBQyxFQUFFLENBQUMifQ==

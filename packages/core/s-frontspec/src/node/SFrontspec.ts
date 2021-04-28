@@ -119,23 +119,20 @@ export default class SFrontspec extends __SPromise {
         await this.clearCache();
       }
 
-      if (findParams.cache && !findParams.clearCache) {
-        const cachedValue = await this._cache.get('find-files');
-        if (cachedValue) {
-          emit('log', {
-            value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
-          });
-          cachedValue.forEach((fileObj) => {
-            emit('log', {
-              value: `- <cyan>${__path.relative(
-                process.cwd(),
-                fileObj.path
-              )}</cyan>`
-            });
-          });
-          return resolve(cachedValue);
-        }
-      }
+      // if (findParams.cache && !findParams.clearCache) {
+      //   const cachedValue = await this._cache.get('find-files');
+      //   if (cachedValue) {
+      //     emit('log', {
+      //       value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
+      //     });
+      //     cachedValue.forEach((path) => {
+      //       emit('log', {
+      //         value: `- <cyan>${__path.relative(process.cwd(), path)}</cyan>`
+      //       });
+      //     });
+      //     return resolve(cachedValue);
+      //   }
+      // }
 
       let files: __SFile[] = [];
       await __wait(1);
@@ -164,17 +161,17 @@ export default class SFrontspec extends __SPromise {
       });
 
       // save in cache if asked
-      if (findParams.cache) {
-        emit('log', {
-          value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
-        });
-        await this._cache.set(
-          'find-files',
-          files.map((file) => file.toObject())
-        );
-      }
+      // if (findParams.cache) {
+      //   emit('log', {
+      //     value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
+      //   });
+      //   await this._cache.set(
+      //     'find-files',
+      //     files.map((file) => file.path)
+      //   );
+      // }
 
-      resolve(files);
+      resolve(files.map((f) => f.path));
     });
   }
 
@@ -199,12 +196,15 @@ export default class SFrontspec extends __SPromise {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
       const filesPromise = this.find(params);
       pipe(filesPromise);
-      const files = await filesPromise;
+      const filesPaths = await filesPromise;
 
       let jsons = {};
 
+      console.log('FIFIF', filesPaths);
+
       // loop on all files
-      files.forEach((file) => {
+      filesPaths.forEach((filePath) => {
+        const file = __SFile.new(filePath);
         const content = file.content;
 
         emit('log', {
@@ -230,11 +230,12 @@ export default class SFrontspec extends __SPromise {
    * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async assetsToServe(): Promise<ISFrontspecAssetToServe[]> {
-    const files = await this.find();
+    const filesPaths = await this.find();
 
     const assetsToServe: ISFrontspecAssetToServe[] = [];
 
-    files.forEach((file) => {
+    filesPaths.forEach((filePath) => {
+      const file = __SFile.new(filePath);
       const content = file.content;
       if (!content.assets) return;
       Object.keys(content.assets).forEach((type) => {
@@ -257,76 +258,4 @@ export default class SFrontspec extends __SPromise {
 
     return assetsToServe;
   }
-
-  // /**
-  //  * @name					json
-  //  * @type 					Function
-  //  *
-  //  * Generate the frontspec JSON by finding for "childs" one as well as generating the "root" one
-  //  * stored at the root of your package.
-  //  *
-  //  * @param       {Object}        [settings={}]         A setting object to override the instance ones passed in the constructor
-  //  * @return      {SPromise}                            An SPromise instance that will be resolved with the frontspec JSON once jsond
-  //  *
-  //  * @since 					2.0.0
-  //  * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //  */
-  // json(settings = {}) {
-  //   settings = __deepMerge(this._settings, {}, settings);
-  //   return new __SPromise(
-  //     async ({ resolve, reject, emit }) => {
-  //       try {
-  //         // initiating the frontspecJson object
-  //         const packageJson = __packageJson();
-  //         delete packageJson.dependencies;
-  //         delete packageJson.devDependencies;
-  //         delete packageJson.scripts;
-  //         let frontspecJson = {
-  //           package: packageJson,
-  //           children: {}
-  //         };
-  //         // find for files
-  //         const files = await this.find(settings);
-  //         if (!files) resolve(frontspecJson);
-  //         const rootFilePath = `${__packageRoot()}/${settings.filename}`;
-  //         if (files.indexOf(rootFilePath) !== -1) {
-  //           frontspecJson = require(rootFilePath).default;
-  //           frontspecJson.package = __packageJson();
-  //           frontspecJson.children = {};
-  //         }
-
-  //         files.forEach((filePath) => {
-  //           // checking if it's the root one
-  //           if (filePath !== rootFilePath) {
-  //             // build the relative path to the package
-  //             const relPath = __path.relative(__packageRoot(), filePath);
-  //             const outPath = __path.relative(
-  //               __packageRoot(),
-  //               `${this._settings.outputDir}/${this._settings.filename}`
-  //             );
-
-  //             // if the founded file is the same as the output one
-  //             if (relPath === outPath) return;
-
-  //             // reading the file
-  //             const content = require(filePath).default;
-
-  //             // relPath = relPath
-  //             //   .replace(`/${settings.filename}`, '')
-  //             //   .replace(settings.filename, '');
-  //             // save the child frontspec
-  //             frontspecJson.children[relPath] = content;
-  //           }
-  //         });
-  //         // resolve the frontspec Json
-  //         resolve(frontspecJson);
-  //       } catch (e) {
-  //         reject(e.toString());
-  //       }
-  //     },
-  //     {
-  //       id: settings.id + '.json'
-  //     }
-  //   );
-  // }
 }

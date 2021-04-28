@@ -222,6 +222,7 @@ class SSvelteCompiler extends __SCompiler {
 
                   const res = await compiler.compile({
                     input: [tmpTsFilePath],
+                    rootDir: `${__tmpDir()}/SSvelteCompiler`,
                     config: 'js',
                     save: false
                   });

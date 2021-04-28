@@ -14,9 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const _SCache_1 = __importDefault(require("./_SCache"));
-const SCacheFsAdapter_1 = __importDefault(require("./adapters/SCacheFsAdapter"));
-// @ts-ignore
-_SCache_1.default.registerAdapter(SCacheFsAdapter_1.default);
+// import __SCacheFsAdapter from './adapters/SCacheFsAdapter';
+// // @ts-ignore
+// console.log('REG', __SCacheFsAdapter);
+// __SCache.registerAdapter(__SCacheFsAdapter);
 __exportStar(require("./_SCache"), exports);
 exports.default = _SCache_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NhY2hlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLHdEQUFpQztBQUNqQyxpRkFBMkQ7QUFFM0QsYUFBYTtBQUNiLGlCQUFRLENBQUMsZUFBZSxDQUFDLHlCQUFpQixDQUFDLENBQUM7QUFFNUMsNENBQTBCO0FBQzFCLGtCQUFlLGlCQUFRLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NhY2hlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLHdEQUFpQztBQUNqQyw4REFBOEQ7QUFFOUQsZ0JBQWdCO0FBRWhCLHlDQUF5QztBQUV6QywrQ0FBK0M7QUFFL0MsNENBQTBCO0FBQzFCLGtCQUFlLGlCQUFRLENBQUMifQ==

@@ -1,80 +1,65 @@
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./getStyleProperty", "../../shared/time/convert"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
-    const convert_1 = __importDefault(require("../../shared/time/convert"));
-    /**
-     * @name      getAnimationProperties
-     * @namespace            js.dom
-     * @type      Function
-     * @stable
-     *
-     * Get the css animation properties from an HTMLElement in an object format
-     *
-     * @param 		{HTMLElement} 					elm  		The element to get the properties from
-     * @return 		{Object} 									The animation properties
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example  	js
-     * import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
-     * const props = getAnimationProperties(myCoolHTMLElement);
-     * // output format
-     * // {
-     * // 	name : ['animation1'],
-     * // 	duration : [200],
-     * // 	delay : [0],
-     * // 	timingFunction : ['linear'],
-     * // 	iterationCount : [1],
-     * // 	direction : ['forward'],
-     * // 	totalDuration : 200
-     * // }
-     *
-     * @since         1.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    function getAnimationProperties(elm) {
-        // get the animation properties
-        const name = getStyleProperty_1.default(elm, 'animation-name') || '';
-        const duration = getStyleProperty_1.default(elm, 'animation-duration') || '0s';
-        const timingFunction = getStyleProperty_1.default(elm, 'animation-timing-function') || 'linear';
-        const delay = getStyleProperty_1.default(elm, 'animation-delay') || '0s';
-        const iterationCount = getStyleProperty_1.default(elm, 'animation-iteration-count') || 1;
-        const direction = getStyleProperty_1.default(elm, 'animation-direction') || 'normal';
-        // return the animation object
-        const props = {
-            name: name.split(','),
-            duration: duration.split(',').map((value) => convert_1.default(value, 'ms')),
-            delay: `${delay}`.split(',').map((value) => convert_1.default(value, 'ms')),
-            timingFunction: timingFunction.split(','),
-            iterationCount: `${iterationCount}`.split(','),
-            direction: direction.split(',')
-        };
-        let totalDuration = 0;
-        const i = 0;
-        const delays = [0].concat(props.delay);
-        [0].concat(props.duration).forEach((val) => {
-            if (val + delays[i] > totalDuration) {
-                totalDuration = val + delays[i];
-            }
-        });
-        props.totalDuration = totalDuration;
-        return props;
-    }
-    exports.default = getAnimationProperties;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0QW5pbWF0aW9uUHJvcGVydGllcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL3Rvb2xzL3N1Z2FyL3NyYy9qcy9kb20vZ2V0QW5pbWF0aW9uUHJvcGVydGllcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCwwRUFBb0Q7SUFDcEQsd0VBQWtEO0lBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BK0JHO0lBQ0gsU0FBUyxzQkFBc0IsQ0FBQyxHQUFHO1FBQ2pDLCtCQUErQjtRQUMvQixNQUFNLElBQUksR0FBRywwQkFBa0IsQ0FBQyxHQUFHLEVBQUUsZ0JBQWdCLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDN0QsTUFBTSxRQUFRLEdBQUcsMEJBQWtCLENBQUMsR0FBRyxFQUFFLG9CQUFvQixDQUFDLElBQUksSUFBSSxDQUFDO1FBQ3ZFLE1BQU0sY0FBYyxHQUNsQiwwQkFBa0IsQ0FBQyxHQUFHLEVBQUUsMkJBQTJCLENBQUMsSUFBSSxRQUFRLENBQUM7UUFDbkUsTUFBTSxLQUFLLEdBQUcsMEJBQWtCLENBQUMsR0FBRyxFQUFFLGlCQUFpQixDQUFDLElBQUksSUFBSSxDQUFDO1FBQ2pFLE1BQU0sY0FBYyxHQUNsQiwwQkFBa0IsQ0FBQyxHQUFHLEVBQUUsMkJBQTJCLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDNUQsTUFBTSxTQUFTLEdBQUcsMEJBQWtCLENBQUMsR0FBRyxFQUFFLHFCQUFxQixDQUFDLElBQUksUUFBUSxDQUFDO1FBRTdFLDhCQUE4QjtRQUM5QixNQUFNLEtBQUssR0FBRztZQUNaLElBQUksRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQztZQUNyQixRQUFRLEVBQUUsUUFBUSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLGlCQUFTLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxDQUFDO1lBQ3BFLEtBQUssRUFBRSxHQUFHLEtBQUssRUFBRSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLGlCQUFTLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxDQUFDO1lBQ25FLGNBQWMsRUFBRSxjQUFjLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQztZQUN6QyxjQUFjLEVBQUUsR0FBRyxjQUFjLEVBQUUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDO1lBQzlDLFNBQVMsRUFBRSxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQztTQUNoQyxDQUFDO1FBQ0YsSUFBSSxhQUFhLEdBQUcsQ0FBQyxDQUFDO1FBQ3RCLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUNaLE1BQU0sTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUN2QyxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7WUFDekMsSUFBSSxHQUFHLEdBQUcsTUFBTSxDQUFDLENBQUMsQ0FBQyxHQUFHLGFBQWEsRUFBRTtnQkFDbkMsYUFBYSxHQUFHLEdBQUcsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDakM7UUFDSCxDQUFDLENBQUMsQ0FBQztRQUNILEtBQUssQ0FBQyxhQUFhLEdBQUcsYUFBYSxDQUFDO1FBQ3BDLE9BQU8sS0FBSyxDQUFDO0lBQ2YsQ0FBQztJQUNELGtCQUFlLHNCQUFzQixDQUFDIn0=
+import __getStyleProperty from './getStyleProperty';
+import __convert from '../../shared/time/convert';
+/**
+ * @name      getAnimationProperties
+ * @namespace            js.dom
+ * @type      Function
+ * @stable
+ *
+ * Get the css animation properties from an HTMLElement in an object format
+ *
+ * @param 		{HTMLElement} 					elm  		The element to get the properties from
+ * @return 		{Object} 									The animation properties
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example  	js
+ * import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
+ * const props = getAnimationProperties(myCoolHTMLElement);
+ * // output format
+ * // {
+ * // 	name : ['animation1'],
+ * // 	duration : [200],
+ * // 	delay : [0],
+ * // 	timingFunction : ['linear'],
+ * // 	iterationCount : [1],
+ * // 	direction : ['forward'],
+ * // 	totalDuration : 200
+ * // }
+ *
+ * @since         1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function getAnimationProperties(elm) {
+    // get the animation properties
+    const name = __getStyleProperty(elm, 'animation-name') || '';
+    const duration = __getStyleProperty(elm, 'animation-duration') || '0s';
+    const timingFunction = __getStyleProperty(elm, 'animation-timing-function') || 'linear';
+    const delay = __getStyleProperty(elm, 'animation-delay') || '0s';
+    const iterationCount = __getStyleProperty(elm, 'animation-iteration-count') || 1;
+    const direction = __getStyleProperty(elm, 'animation-direction') || 'normal';
+    // return the animation object
+    const props = {
+        name: name.split(','),
+        duration: duration.split(',').map((value) => __convert(value, 'ms')),
+        delay: `${delay}`.split(',').map((value) => __convert(value, 'ms')),
+        timingFunction: timingFunction.split(','),
+        iterationCount: `${iterationCount}`.split(','),
+        direction: direction.split(',')
+    };
+    let totalDuration = 0;
+    const i = 0;
+    const delays = [0].concat(props.delay);
+    [0].concat(props.duration).forEach((val) => {
+        if (val + delays[i] > totalDuration) {
+            totalDuration = val + delays[i];
+        }
+    });
+    props.totalDuration = totalDuration;
+    return props;
+}
+export default getAnimationProperties;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0QW5pbWF0aW9uUHJvcGVydGllcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldEFuaW1hdGlvblByb3BlcnRpZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFDcEQsT0FBTyxTQUFTLE1BQU0sMkJBQTJCLENBQUM7QUFFbEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0ErQkc7QUFDSCxTQUFTLHNCQUFzQixDQUFDLEdBQUc7SUFDakMsK0JBQStCO0lBQy9CLE1BQU0sSUFBSSxHQUFHLGtCQUFrQixDQUFDLEdBQUcsRUFBRSxnQkFBZ0IsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUM3RCxNQUFNLFFBQVEsR0FBRyxrQkFBa0IsQ0FBQyxHQUFHLEVBQUUsb0JBQW9CLENBQUMsSUFBSSxJQUFJLENBQUM7SUFDdkUsTUFBTSxjQUFjLEdBQ2xCLGtCQUFrQixDQUFDLEdBQUcsRUFBRSwyQkFBMkIsQ0FBQyxJQUFJLFFBQVEsQ0FBQztJQUNuRSxNQUFNLEtBQUssR0FBRyxrQkFBa0IsQ0FBQyxHQUFHLEVBQUUsaUJBQWlCLENBQUMsSUFBSSxJQUFJLENBQUM7SUFDakUsTUFBTSxjQUFjLEdBQ2xCLGtCQUFrQixDQUFDLEdBQUcsRUFBRSwyQkFBMkIsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM1RCxNQUFNLFNBQVMsR0FBRyxrQkFBa0IsQ0FBQyxHQUFHLEVBQUUscUJBQXFCLENBQUMsSUFBSSxRQUFRLENBQUM7SUFFN0UsOEJBQThCO0lBQzlCLE1BQU0sS0FBSyxHQUFHO1FBQ1osSUFBSSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDO1FBQ3JCLFFBQVEsRUFBRSxRQUFRLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsU0FBUyxDQUFDLEtBQUssRUFBRSxJQUFJLENBQUMsQ0FBQztRQUNwRSxLQUFLLEVBQUUsR0FBRyxLQUFLLEVBQUUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxTQUFTLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQ25FLGNBQWMsRUFBRSxjQUFjLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQztRQUN6QyxjQUFjLEVBQUUsR0FBRyxjQUFjLEVBQUUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDO1FBQzlDLFNBQVMsRUFBRSxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQztLQUNoQyxDQUFDO0lBQ0YsSUFBSSxhQUFhLEdBQUcsQ0FBQyxDQUFDO0lBQ3RCLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUNaLE1BQU0sTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN2QyxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7UUFDekMsSUFBSSxHQUFHLEdBQUcsTUFBTSxDQUFDLENBQUMsQ0FBQyxHQUFHLGFBQWEsRUFBRTtZQUNuQyxhQUFhLEdBQUcsR0FBRyxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUNqQztJQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0gsS0FBSyxDQUFDLGFBQWEsR0FBRyxhQUFhLENBQUM7SUFDcEMsT0FBTyxLQUFLLENBQUM7QUFDZixDQUFDO0FBQ0QsZUFBZSxzQkFBc0IsQ0FBQyJ9

@@ -1,6 +1,0 @@
-import SInterface from './SInterface';
-import SInterfaceResult from './SInterfaceResult';
-export * from './SInterface';
-export { SInterfaceResult };
-export default SInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2NvcmUvcy1pbnRlcmZhY2Uvc3JjL3NoYXJlZC9leHBvcnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLGNBQWMsQ0FBQztBQUN0QyxPQUFPLGdCQUFnQixNQUFNLG9CQUFvQixDQUFDO0FBRWxELGNBQWMsY0FBYyxDQUFDO0FBRTdCLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxDQUFDO0FBQzVCLGVBQWUsVUFBVSxDQUFDIn0=

@@ -1,48 +1,33 @@
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "mobile-detect"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const mobile_detect_1 = __importDefault(require("mobile-detect"));
-    /**
-     * @name        isPhone
-     * @namespace            js.is
-     * @type      Function
-     * @stable
-     *
-     * Detect if is a phone device
-     *
-     * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
-     * @return    {Boolean}    true if is a phone, false if not
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example 	js
-     * import isPhone from '@coffeekraken/sugar/js/is/phone'
-     * if (isPhone()) {
-     *   // do something cool...
-     * }
-     *
-     * @see       https://www.npmjs.com/package/mobile-detect
-     * @since       1.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    function isPhone(ua = navigator.userAgent) {
-        const md = new mobile_detect_1.default(ua);
-        return md.phone() !== null;
-    }
-    exports.default = isPhone;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGhvbmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy90b29scy9zdWdhci9zcmMvanMvaXMvcGhvbmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0VBQXlDO0lBQ3pDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F3Qkc7SUFDSCxTQUFTLE9BQU8sQ0FBQyxFQUFFLEdBQUcsU0FBUyxDQUFDLFNBQVM7UUFDdkMsTUFBTSxFQUFFLEdBQUcsSUFBSSx1QkFBWSxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ2hDLE9BQU8sRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLElBQUksQ0FBQztJQUM3QixDQUFDO0lBQ0Qsa0JBQWUsT0FBTyxDQUFDIn0=
+import MobileDetect from 'mobile-detect';
+/**
+ * @name        isPhone
+ * @namespace            js.is
+ * @type      Function
+ * @stable
+ *
+ * Detect if is a phone device
+ *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * @return    {Boolean}    true if is a phone, false if not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example 	js
+ * import isPhone from '@coffeekraken/sugar/js/is/phone'
+ * if (isPhone()) {
+ *   // do something cool...
+ * }
+ *
+ * @see       https://www.npmjs.com/package/mobile-detect
+ * @since       1.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function isPhone(ua = navigator.userAgent) {
+    const md = new MobileDetect(ua);
+    return md.phone() !== null;
+}
+export default isPhone;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGhvbmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwaG9uZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sZUFBZSxDQUFDO0FBQ3pDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLE9BQU8sQ0FBQyxFQUFFLEdBQUcsU0FBUyxDQUFDLFNBQVM7SUFDdkMsTUFBTSxFQUFFLEdBQUcsSUFBSSxZQUFZLENBQUMsRUFBRSxDQUFDLENBQUM7SUFDaEMsT0FBTyxFQUFFLENBQUMsS0FBSyxFQUFFLEtBQUssSUFBSSxDQUFDO0FBQzdCLENBQUM7QUFDRCxlQUFlLE9BQU8sQ0FBQyJ9

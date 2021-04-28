@@ -1,4 +1,0 @@
-import __SDuration from './SDuration';
-export * from './SDuration';
-export default __SDuration;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL3Rvb2xzL3MtZHVyYXRpb24vc3JjL3NoYXJlZC9leHBvcnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUV0QyxjQUFjLGFBQWEsQ0FBQztBQUM1QixlQUFlLFdBQVcsQ0FBQyJ9

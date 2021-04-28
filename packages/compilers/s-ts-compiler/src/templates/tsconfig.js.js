@@ -14,7 +14,7 @@ module.exports = __deepMerge(__tsconfig, {
   _include: [`${__packageRoot()}/packages/*/*/src/js/**/*.ts`, ...jsInput],
   compilerOptions: {
     target: 'es6',
-    module: 'umd',
+    module: 'esnext',
     moduleResolution: 'node'
   }
 });

@@ -8,19 +8,19 @@
     import javascript from 'highlight.js/lib/languages/javascript';
     hljs.registerLanguage('javascript', javascript);
 
-	import __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';
+	// import __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';
 
-	class MyCoolComponent extends __SSvelteComponent {
-		constructor() {
-			super({
-				svelteComponent: {}
-			});
-		}
-	}
-	console.log('fff')
+	// class MyCoolComponent extends __SSvelteComponent {
+	// 	constructor() {
+	// 		super({
+	// 			svelteComponent: {}
+	// 		});
+	// 	}
+	// }
+	// console.log('fff')
 
 
-	new MyCoolComponent();
+	// new MyCoolComponent();
 
 </script>
 

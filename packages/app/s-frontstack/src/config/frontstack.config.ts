@@ -7,6 +7,7 @@ export default {
         frontendServer: '[config.frontstack.actions.frontendServer]',
         css: '[config.frontstack.actions.css]',
         js: '[config.frontstack.actions.js]',
+        ts: '[config.frontstack.actions.ts]',
         svelte: '[config.frontstack.actions.svelte]',
         docmap: '[config.frontstack.actions.docmap]'
       }
@@ -42,8 +43,19 @@ export default {
     js: {
       id: 'js',
       title: 'Javascript compile action',
-      description: 'Allow to compile .js and .ts files easily',
+      description: 'Allow to compile .js files easily',
       process: 'sugar-dev js.compile -w',
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
+    ts: {
+      id: 'ts',
+      title: 'Typescript compile action',
+      description: 'Allow to compile .ts files easily',
+      process: 'sugar-dev ts.compile -w',
       settings: {
         processManager: {
           restart: true

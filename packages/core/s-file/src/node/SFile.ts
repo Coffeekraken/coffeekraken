@@ -924,7 +924,9 @@ class SFile extends __SEventEmitter implements ISFile {
    */
   readSync(settings: Partial<ISFileReadSettings> = {}): string {
     if (this.exists === false) {
-      throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
+      throw new Error(
+        `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`
+      );
     }
     const set: ISFileReadSettings = {
       ...this.fileSettings.readSettings,

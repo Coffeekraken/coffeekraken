@@ -1,368 +1,352 @@
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@coffeekraken/sugar/shared/class/utils/getExtendsStack", "@coffeekraken/sugar/shared/is/plainObject", "@coffeekraken/sugar/shared/object/deepAssign", "@coffeekraken/sugar/shared/object/deepMerge", "@coffeekraken/sugar/shared/object/get", "@coffeekraken/sugar/shared/dev/color/getColorFor", "@coffeekraken/sugar/shared/object/toJson"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const getExtendsStack_1 = __importDefault(require("@coffeekraken/sugar/shared/class/utils/getExtendsStack"));
-    const plainObject_1 = __importDefault(require("@coffeekraken/sugar/shared/is/plainObject"));
-    const deepAssign_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepAssign"));
-    const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
-    const get_1 = __importDefault(require("@coffeekraken/sugar/shared/object/get"));
-    const getColorFor_1 = __importDefault(require("@coffeekraken/sugar/shared/dev/color/getColorFor"));
-    const toJson_1 = __importDefault(require("@coffeekraken/sugar/shared/object/toJson"));
-    class SClass {
+import __getExtendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
+import __isPlain from '@coffeekraken/sugar/shared/is/plainObject';
+import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __get from '@coffeekraken/sugar/shared/object/get';
+import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
+import __toJson from '@coffeekraken/sugar/shared/object/toJson';
+export default class SClass {
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since           2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(settings = {}) {
         /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
+         * @name            _settings
+         * @type            ISClassSettings
+         * @private
          *
-         * Constructor
+         * Store the class settings
          *
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        constructor(settings = {}) {
-            /**
-             * @name            _settings
-             * @type            ISClassSettings
-             * @private
-             *
-             * Store the class settings
-             *
-             * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._settings = {};
-            /**
-             * @name            _interfacesStack
-             * @type            Object
-             * @private
-             *
-             * Store the interfaces objects by class
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._interfacesStack = {};
-            generateInterfacesStack(this);
-            // set settings
-            setSettings(this, settings);
-            // interface
-            applyInterfaces(this);
-            // define metas enumarable
-            this.metas = getMetas(this);
-            Object.defineProperty(this, 'metas', {
-                enumerable: true,
-                value: getMetas(this)
-            });
-        }
-        // public get metas(): ISClassMetas {
-        //   let name = `<yellow>${this._settings.metas?.name || ''}</yellow>`;
-        //   if (this._settings.metas?.id) {
-        //     name += ` <cyan>${this._settings.metas.id}</cyan>`;
-        //   }
-        //   const metasObj = {
-        //     id: this._settings.metas?.id ?? this.constructor.name,
-        //     name: this._settings.metas?.name ?? this.constructor.name,
-        //     formattedName: name,
-        //     color: this._settings.metas?.color ?? 'yellow'
-        //   };
-        //   return metasObj;
-        // }
+        this._settings = {};
         /**
-         * @name      formattedName
-         * @type      String
-         * @get
+         * @name            _interfacesStack
+         * @type            Object
+         * @private
          *
-         * Access the process name and (not the same as a node process name)
+         * Store the interfaces objects by class
          *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        get formattedName() {
-            var _a, _b, _c;
-            let name = `<yellow>${((_a = this.metas) === null || _a === void 0 ? void 0 : _a.name) || ''}</yellow>`;
-            if ((_b = this.metas) === null || _b === void 0 ? void 0 : _b.id) {
-                name += ` <cyan>${(_c = this.metas) === null || _c === void 0 ? void 0 : _c.id}</cyan>`;
-            }
-            return name;
-        }
-        static extends(Cls) {
-            class SClass extends Cls {
-                constructor(settings, ...args) {
-                    super(...args);
-                    // public get metas(): ISClassMetas {
-                    // }
-                    this._settings = {};
-                    this._interfacesStack = {};
-                    generateInterfacesStack(this);
-                    // set settings
-                    setSettings(this, settings);
-                    // interface
-                    applyInterfaces(this);
-                    // define metas enumarable
-                    // @weird: Check why metas is not enumarable by default
-                    this.metas = getMetas(this);
-                    Object.defineProperty(this, 'metas', {
-                        enumerable: true,
-                        value: getMetas(this)
-                    });
-                }
-                get formattedName() {
-                    let name = `<yellow>${this.name || ''}</yellow>`;
-                    if (this.id) {
-                        name += ` <cyan>${this.id}</cyan>`;
-                    }
-                    return name;
-                }
-                expose(instance, settings) {
-                    return expose(this, instance, settings);
-                }
-                applyInterface(name, on) {
-                    return applyInterface(this, name, on);
-                }
-                getInterface(name) {
-                    return getInterface(this, name);
-                }
-                toPlainObject() {
-                    return toPlainObject(this);
-                }
-            }
-            return SClass;
-        }
-        expose(instance, settings) {
-            return expose(this, instance, settings);
-        }
-        applyInterface(name, on) {
-            return applyInterface(this, name, on);
-        }
-        getInterface(name) {
-            return getInterface(this, name);
-        }
-        toPlainObject() {
-            return toPlainObject(this);
-        }
-    }
-    exports.default = SClass;
-    function getMetas(ctx) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
-        let name = `<yellow>${((_a = ctx._settings.metas) === null || _a === void 0 ? void 0 : _a.name) || ''}</yellow>`;
-        if ((_b = ctx._settings.metas) === null || _b === void 0 ? void 0 : _b.id) {
-            name += ` <cyan>${ctx._settings.metas.id}</cyan>`;
-        }
-        const metasObj = {
-            id: (_d = (_c = ctx._settings.metas) === null || _c === void 0 ? void 0 : _c.id) !== null && _d !== void 0 ? _d : ctx.constructor.name,
-            name: (_f = (_e = ctx._settings.metas) === null || _e === void 0 ? void 0 : _e.name) !== null && _f !== void 0 ? _f : ctx.constructor.name,
-            formattedName: name,
-            color: (_h = (_g = ctx._settings.metas) === null || _g === void 0 ? void 0 : _g.color) !== null && _h !== void 0 ? _h : 'yellow'
-        };
-        return metasObj;
-    }
-    function generateInterfacesStack(ctx) {
-        // get all the interfaces to apply
-        const extendsStack = getExtendsStack_1.default(ctx, {
-            includeBaseClass: true
-        });
-        Object.keys(extendsStack).forEach((className) => {
-            const cls = extendsStack[className];
-            if (cls.interfaces) {
-                ctx._interfacesStack[className] = cls.interfaces;
-            }
+        this._interfacesStack = {};
+        generateInterfacesStack(this);
+        // set settings
+        setSettings(this, settings);
+        // interface
+        applyInterfaces(this);
+        // define metas enumarable
+        this.metas = getMetas(this);
+        Object.defineProperty(this, 'metas', {
+            enumerable: true,
+            value: getMetas(this)
         });
     }
-    function expose(ctx, instance, settings) {
-        settings = deepMerge_1.default({
-            as: undefined,
-            props: []
-        }, settings);
-        if (settings.as && typeof settings.as === 'string') {
-            ctx[settings.as] = instance;
+    // public get metas(): ISClassMetas {
+    //   let name = `<yellow>${this._settings.metas?.name || ''}</yellow>`;
+    //   if (this._settings.metas?.id) {
+    //     name += ` <cyan>${this._settings.metas.id}</cyan>`;
+    //   }
+    //   const metasObj = {
+    //     id: this._settings.metas?.id ?? this.constructor.name,
+    //     name: this._settings.metas?.name ?? this.constructor.name,
+    //     formattedName: name,
+    //     color: this._settings.metas?.color ?? 'yellow'
+    //   };
+    //   return metasObj;
+    // }
+    /**
+     * @name      formattedName
+     * @type      String
+     * @get
+     *
+     * Access the process name and (not the same as a node process name)
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get formattedName() {
+        var _a, _b, _c;
+        let name = `<yellow>${((_a = this.metas) === null || _a === void 0 ? void 0 : _a.name) || ''}</yellow>`;
+        if ((_b = this.metas) === null || _b === void 0 ? void 0 : _b.id) {
+            name += ` <cyan>${(_c = this.metas) === null || _c === void 0 ? void 0 : _c.id}</cyan>`;
         }
-        if (settings.props) {
-            settings.props.forEach((prop) => {
-                ctx[prop] = instance[prop].bind(instance);
-            });
-        }
+        return name;
     }
-    function getInterfaceObj(ctx, name) {
-        let interfaceObj = get_1.default(ctx._interfacesStack, name);
-        if (!interfaceObj) {
-            const keys = Object.keys(ctx._interfacesStack);
-            for (let i = 0; i < keys.length; i++) {
-                const interfacesObj = ctx._interfacesStack[keys[i]];
-                if (interfacesObj[name] !== undefined) {
-                    if (plainObject_1.default(interfacesObj[name])) {
-                        interfaceObj = interfacesObj[name];
-                    }
-                    else {
-                        interfaceObj = {
-                            apply: true,
-                            on: name === 'settings'
-                                ? '_settings'
-                                : name === 'this'
-                                    ? ctx
-                                    : undefined,
-                            class: interfacesObj[name]
-                        };
-                    }
-                    break;
+    static extends(Cls) {
+        class SClass extends Cls {
+            constructor(settings, ...args) {
+                super(...args);
+                // public get metas(): ISClassMetas {
+                // }
+                this._settings = {};
+                this._interfacesStack = {};
+                generateInterfacesStack(this);
+                // set settings
+                setSettings(this, settings);
+                // interface
+                applyInterfaces(this);
+                // define metas enumarable
+                // @weird: Check why metas is not enumarable by default
+                this.metas = getMetas(this);
+                Object.defineProperty(this, 'metas', {
+                    enumerable: true,
+                    value: getMetas(this)
+                });
+            }
+            get formattedName() {
+                let name = `<yellow>${this.name || ''}</yellow>`;
+                if (this.id) {
+                    name += ` <cyan>${this.id}</cyan>`;
                 }
+                return name;
+            }
+            expose(instance, settings) {
+                return expose(this, instance, settings);
+            }
+            applyInterface(name, on) {
+                return applyInterface(this, name, on);
+            }
+            getInterface(name) {
+                return getInterface(this, name);
+            }
+            toPlainObject() {
+                return toPlainObject(this);
             }
         }
-        if (name === 'settings' && interfaceObj.on === undefined) {
-            if (ctx.settings !== undefined)
-                interfaceObj.on = 'settings';
-            else if (ctx._settings !== undefined)
-                interfaceObj.on = '_settings';
+        return SClass;
+    }
+    expose(instance, settings) {
+        return expose(this, instance, settings);
+    }
+    applyInterface(name, on) {
+        return applyInterface(this, name, on);
+    }
+    getInterface(name) {
+        return getInterface(this, name);
+    }
+    toPlainObject() {
+        return toPlainObject(this);
+    }
+}
+function getMetas(ctx) {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    let name = `<yellow>${((_a = ctx._settings.metas) === null || _a === void 0 ? void 0 : _a.name) || ''}</yellow>`;
+    if ((_b = ctx._settings.metas) === null || _b === void 0 ? void 0 : _b.id) {
+        name += ` <cyan>${ctx._settings.metas.id}</cyan>`;
+    }
+    const metasObj = {
+        id: (_d = (_c = ctx._settings.metas) === null || _c === void 0 ? void 0 : _c.id) !== null && _d !== void 0 ? _d : ctx.constructor.name,
+        name: (_f = (_e = ctx._settings.metas) === null || _e === void 0 ? void 0 : _e.name) !== null && _f !== void 0 ? _f : ctx.constructor.name,
+        formattedName: name,
+        color: (_h = (_g = ctx._settings.metas) === null || _g === void 0 ? void 0 : _g.color) !== null && _h !== void 0 ? _h : 'yellow'
+    };
+    return metasObj;
+}
+function generateInterfacesStack(ctx) {
+    // get all the interfaces to apply
+    const extendsStack = __getExtendsStack(ctx, {
+        includeBaseClass: true
+    });
+    Object.keys(extendsStack).forEach((className) => {
+        const cls = extendsStack[className];
+        if (cls.interfaces) {
+            ctx._interfacesStack[className] = cls.interfaces;
         }
-        return interfaceObj;
+    });
+}
+function expose(ctx, instance, settings) {
+    settings = __deepMerge({
+        as: undefined,
+        props: []
+    }, settings);
+    if (settings.as && typeof settings.as === 'string') {
+        ctx[settings.as] = instance;
     }
-    function toPlainObject(ctx) {
-        return toJson_1.default(ctx);
+    if (settings.props) {
+        settings.props.forEach((prop) => {
+            ctx[prop] = instance[prop].bind(instance);
+        });
     }
-    function getInterface(ctx, name) {
-        const interfaceObj = getInterfaceObj(ctx, name);
-        if (plainObject_1.default(interfaceObj))
-            return interfaceObj.class;
-        return interfaceObj;
-    }
-    function applyInterfaces(ctx) {
+}
+function getInterfaceObj(ctx, name) {
+    let interfaceObj = __get(ctx._interfacesStack, name);
+    if (!interfaceObj) {
         const keys = Object.keys(ctx._interfacesStack);
-        for (let i = keys.length - 1; i >= 0; i--) {
+        for (let i = 0; i < keys.length; i++) {
             const interfacesObj = ctx._interfacesStack[keys[i]];
-            const className = keys[i];
-            Object.keys(interfacesObj).forEach((name) => {
-                const interfaceObj = interfacesObj[name];
-                let settings;
-                if (plainObject_1.default(interfaceObj)) {
-                    settings = Object.assign({}, Object.assign({ apply: true, on: name === 'settings'
-                            ? '_settings'
-                            : name === 'this'
-                                ? ctx
-                                : undefined }, interfaceObj));
+            if (interfacesObj[name] !== undefined) {
+                if (__isPlain(interfacesObj[name])) {
+                    interfaceObj = interfacesObj[name];
                 }
                 else {
-                    settings = Object.assign({}, {
+                    interfaceObj = {
                         apply: true,
                         on: name === 'settings'
                             ? '_settings'
                             : name === 'this'
                                 ? ctx
                                 : undefined,
-                        class: interfaceObj
-                    });
+                        class: interfacesObj[name]
+                    };
                 }
-                if (settings.apply !== true)
-                    return;
-                if (settings.on) {
-                    if (typeof settings.on === 'string' &&
-                        get_1.default(ctx, settings.on) !== undefined) {
-                        applyInterface(ctx, `${className}.${name}`, settings.on);
-                    }
-                    else if (typeof settings.on === 'object') {
-                        applyInterface(ctx, `${className}.${name}`, settings.on);
-                    }
-                    else if (ctx[name] !== undefined) {
-                        applyInterface(ctx, `${className}.${name}`);
-                    }
-                }
-            });
+                break;
+            }
         }
     }
-    function applyInterface(ctx, name, on = null) {
-        const interfaceObj = getInterfaceObj(ctx, `${name}`);
-        if (!interfaceObj) {
-            throw new Error(`You try to apply the interface named "<yellow>${name}</yellow>" on the context "<cyan>${ctx.name}</cyan>" but it does not exists...`);
-        }
-        if (on !== undefined)
-            interfaceObj.on = on;
-        if (!interfaceObj) {
-            throw `Sorry the the asked interface "<yellow>${name}</yellow>" does not exists on the class "<cyan>${ctx.constructor.name}</cyan>"`;
-        }
-        if (name.includes('.')) {
-            name = name.split('.').slice(1).join('.');
-        }
-        // apply the interface if exists
-        if (plainObject_1.default(interfaceObj)) {
-            let onValue;
-            if (interfaceObj.on && typeof interfaceObj.on === 'string') {
-                onValue = get_1.default(ctx, interfaceObj.on);
-            }
-            else if (interfaceObj.on && typeof interfaceObj.on === 'object') {
-                onValue = interfaceObj.on;
-            }
-            else {
-                onValue = get_1.default(ctx, name);
-            }
-            let applyId = ctx.constructor.name;
-            if (ctx.id)
-                applyId += `(${ctx.id})`;
-            if (name)
-                applyId += `.${name}`;
-            if (interfaceObj.on && interfaceObj.on.constructor)
-                applyId += `.${interfaceObj.on.constructor.name}`;
-            if (interfaceObj.on && interfaceObj.on.id)
-                applyId += `(${interfaceObj.on.id})`;
-            let res;
-            if (name === 'this') {
-                res = interfaceObj.class.apply(onValue || {}, {
-                    id: applyId,
-                    complete: true,
-                    throw: true
-                });
-                deepAssign_1.default(ctx, res.value);
-                return ctx;
+    if (name === 'settings' && interfaceObj.on === undefined) {
+        if (ctx.settings !== undefined)
+            interfaceObj.on = 'settings';
+        else if (ctx._settings !== undefined)
+            interfaceObj.on = '_settings';
+    }
+    return interfaceObj;
+}
+function toPlainObject(ctx) {
+    return __toJson(ctx);
+}
+function getInterface(ctx, name) {
+    const interfaceObj = getInterfaceObj(ctx, name);
+    if (__isPlain(interfaceObj))
+        return interfaceObj.class;
+    return interfaceObj;
+}
+function applyInterfaces(ctx) {
+    const keys = Object.keys(ctx._interfacesStack);
+    for (let i = keys.length - 1; i >= 0; i--) {
+        const interfacesObj = ctx._interfacesStack[keys[i]];
+        const className = keys[i];
+        Object.keys(interfacesObj).forEach((name) => {
+            const interfaceObj = interfacesObj[name];
+            let settings;
+            if (__isPlain(interfaceObj)) {
+                settings = Object.assign({}, Object.assign({ apply: true, on: name === 'settings'
+                        ? '_settings'
+                        : name === 'this'
+                            ? ctx
+                            : undefined }, interfaceObj));
             }
             else {
-                res = interfaceObj.class.apply(onValue, {
-                    id: applyId,
-                    complete: true,
-                    throw: true
+                settings = Object.assign({}, {
+                    apply: true,
+                    on: name === 'settings'
+                        ? '_settings'
+                        : name === 'this'
+                            ? ctx
+                            : undefined,
+                    class: interfaceObj
                 });
-                if (interfaceObj.on && typeof interfaceObj.on === 'object') {
-                    const returnValue = deepAssign_1.default(interfaceObj.on, res.value);
-                    return returnValue;
+            }
+            if (settings.apply !== true)
+                return;
+            if (settings.on) {
+                if (typeof settings.on === 'string' &&
+                    __get(ctx, settings.on) !== undefined) {
+                    applyInterface(ctx, `${className}.${name}`, settings.on);
                 }
-                else if (interfaceObj.on && typeof interfaceObj.on === 'string') {
-                    return deepAssign_1.default(get_1.default(ctx, interfaceObj.on), res.value);
+                else if (typeof settings.on === 'object') {
+                    applyInterface(ctx, `${className}.${name}`, settings.on);
                 }
                 else if (ctx[name] !== undefined) {
-                    return ctx[name];
+                    applyInterface(ctx, `${className}.${name}`);
                 }
-                else if (!res.hasIssues()) {
-                    return res.value;
-                    // throw `You try to apply the interface "<yellow>${interfaceObj.class.name}</yellow>" on a data "<cyan>${interfaceObj.on}</cyan>" that seems to be inexistant`;
-                }
+            }
+        });
+    }
+}
+function applyInterface(ctx, name, on = null) {
+    const interfaceObj = getInterfaceObj(ctx, `${name}`);
+    if (!interfaceObj) {
+        throw new Error(`You try to apply the interface named "<yellow>${name}</yellow>" on the context "<cyan>${ctx.name}</cyan>" but it does not exists...`);
+    }
+    if (on !== undefined)
+        interfaceObj.on = on;
+    if (!interfaceObj) {
+        throw `Sorry the the asked interface "<yellow>${name}</yellow>" does not exists on the class "<cyan>${ctx.constructor.name}</cyan>"`;
+    }
+    if (name.includes('.')) {
+        name = name.split('.').slice(1).join('.');
+    }
+    // apply the interface if exists
+    if (__isPlain(interfaceObj)) {
+        let onValue;
+        if (interfaceObj.on && typeof interfaceObj.on === 'string') {
+            onValue = __get(ctx, interfaceObj.on);
+        }
+        else if (interfaceObj.on && typeof interfaceObj.on === 'object') {
+            onValue = interfaceObj.on;
+        }
+        else {
+            onValue = __get(ctx, name);
+        }
+        let applyId = ctx.constructor.name;
+        if (ctx.id)
+            applyId += `(${ctx.id})`;
+        if (name)
+            applyId += `.${name}`;
+        if (interfaceObj.on && interfaceObj.on.constructor)
+            applyId += `.${interfaceObj.on.constructor.name}`;
+        if (interfaceObj.on && interfaceObj.on.id)
+            applyId += `(${interfaceObj.on.id})`;
+        let res;
+        if (name === 'this') {
+            res = interfaceObj.class.apply(onValue || {}, {
+                id: applyId,
+                complete: true,
+                throw: true
+            });
+            __deepAssign(ctx, res.value);
+            return ctx;
+        }
+        else {
+            res = interfaceObj.class.apply(onValue, {
+                id: applyId,
+                complete: true,
+                throw: true
+            });
+            if (interfaceObj.on && typeof interfaceObj.on === 'object') {
+                const returnValue = __deepAssign(interfaceObj.on, res.value);
+                return returnValue;
+            }
+            else if (interfaceObj.on && typeof interfaceObj.on === 'string') {
+                return __deepAssign(__get(ctx, interfaceObj.on), res.value);
+            }
+            else if (ctx[name] !== undefined) {
+                return ctx[name];
+            }
+            else if (!res.hasIssues()) {
+                return res.value;
+                // throw `You try to apply the interface "<yellow>${interfaceObj.class.name}</yellow>" on a data "<cyan>${interfaceObj.on}</cyan>" that seems to be inexistant`;
             }
         }
     }
-    function setSettings(ctx, settings = {}) {
-        var _a;
-        // saving the settings
-        ctx._settings = settings;
-        // make sure a "metas" property is available
-        if (!ctx._settings.metas)
-            ctx._settings.metas = {};
-        // make sure we have an id
-        if (!((_a = ctx._settings.metas) === null || _a === void 0 ? void 0 : _a.id))
-            ctx._settings.metas.id = ctx.constructor.name;
-        if (!ctx.constructor.name.match(/^SConfig/)) {
-            if (!ctx._settings.metas.color)
-                ctx._settings.metas.color = getColorFor_1.default(ctx.constructor.name, {
-                    scope: 'class'
-                });
-        }
-        else if (!ctx._settings.metas.color)
-            ctx._settings.metas.color = 'yellow';
+}
+function setSettings(ctx, settings = {}) {
+    var _a;
+    // saving the settings
+    ctx._settings = settings;
+    // make sure a "metas" property is available
+    if (!ctx._settings.metas)
+        ctx._settings.metas = {};
+    // make sure we have an id
+    if (!((_a = ctx._settings.metas) === null || _a === void 0 ? void 0 : _a.id))
+        ctx._settings.metas.id = ctx.constructor.name;
+    if (!ctx.constructor.name.match(/^SConfig/)) {
+        if (!ctx._settings.metas.color)
+            ctx._settings.metas.color = __getColorFor(ctx.constructor.name, {
+                scope: 'class'
+            });
     }
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsYXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NsYXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0lBQUEsNkdBQXVGO0lBRXZGLDRGQUFrRTtJQUNsRSw4RkFBd0U7SUFDeEUsNEZBQXNFO0lBQ3RFLGdGQUEwRDtJQUUxRCxtR0FBNkU7SUFFN0Usc0ZBQWdFO0lBMERoRSxNQUFxQixNQUFNO1FBbUh6Qjs7Ozs7Ozs7O1dBU0c7UUFDSCxZQUFZLFdBQTRCLEVBQUU7WUE1SDFDOzs7Ozs7Ozs7ZUFTRztZQUNILGNBQVMsR0FBb0IsRUFBRSxDQUFDO1lBRWhDOzs7Ozs7Ozs7ZUFTRztZQUNJLHFCQUFnQixHQUFRLEVBQUUsQ0FBQztZQXVHaEMsdUJBQXVCLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDOUIsZUFBZTtZQUNmLFdBQVcsQ0FBQyxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7WUFDNUIsWUFBWTtZQUNaLGVBQWUsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUN0QiwwQkFBMEI7WUFDMUIsSUFBSSxDQUFDLEtBQUssR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDNUIsTUFBTSxDQUFDLGNBQWMsQ0FBQyxJQUFJLEVBQUUsT0FBTyxFQUFFO2dCQUNuQyxVQUFVLEVBQUUsSUFBSTtnQkFDaEIsS0FBSyxFQUFFLFFBQVEsQ0FBQyxJQUFJLENBQUM7YUFDdEIsQ0FBQyxDQUFDO1FBQ0wsQ0FBQztRQXJHRCxxQ0FBcUM7UUFDckMsdUVBQXVFO1FBQ3ZFLG9DQUFvQztRQUNwQywwREFBMEQ7UUFDMUQsTUFBTTtRQUVOLHVCQUF1QjtRQUN2Qiw2REFBNkQ7UUFDN0QsaUVBQWlFO1FBQ2pFLDJCQUEyQjtRQUMzQixxREFBcUQ7UUFDckQsT0FBTztRQUVQLHFCQUFxQjtRQUNyQixJQUFJO1FBRUo7Ozs7Ozs7OztXQVNHO1FBQ0gsSUFBSSxhQUFhOztZQUNmLElBQUksSUFBSSxHQUFHLFdBQVcsT0FBQSxJQUFJLENBQUMsS0FBSywwQ0FBRSxJQUFJLEtBQUksRUFBRSxXQUFXLENBQUM7WUFDeEQsVUFBSSxJQUFJLENBQUMsS0FBSywwQ0FBRSxFQUFFLEVBQUU7Z0JBQ2xCLElBQUksSUFBSSxVQUFVLE1BQUEsSUFBSSxDQUFDLEtBQUssMENBQUUsRUFBRSxTQUFTLENBQUM7YUFDM0M7WUFDRCxPQUFPLElBQUksQ0FBQztRQUNkLENBQUM7UUFFRCxNQUFNLENBQUMsT0FBTyxDQUFDLEdBQVE7WUFDckIsTUFBTSxNQUFPLFNBQVEsR0FBRztnQkFhdEIsWUFBWSxRQUFhLEVBQUUsR0FBRyxJQUFJO29CQUNoQyxLQUFLLENBQUMsR0FBRyxJQUFJLENBQUMsQ0FBQztvQkFiakIscUNBQXFDO29CQUVyQyxJQUFJO29CQUNNLGNBQVMsR0FBb0IsRUFBRSxDQUFDO29CQUNoQyxxQkFBZ0IsR0FBUSxFQUFFLENBQUM7b0JBVW5DLHVCQUF1QixDQUFDLElBQUksQ0FBQyxDQUFDO29CQUM5QixlQUFlO29CQUNmLFdBQVcsQ0FBQyxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7b0JBQzVCLFlBQVk7b0JBQ1osZUFBZSxDQUFDLElBQUksQ0FBQyxDQUFDO29CQUN0QiwwQkFBMEI7b0JBQzFCLHVEQUF1RDtvQkFDdkQsSUFBSSxDQUFDLEtBQUssR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUM7b0JBQzVCLE1BQU0sQ0FBQyxjQUFjLENBQUMsSUFBSSxFQUFFLE9BQU8sRUFBRTt3QkFDbkMsVUFBVSxFQUFFLElBQUk7d0JBQ2hCLEtBQUssRUFBRSxRQUFRLENBQUMsSUFBSSxDQUFDO3FCQUN0QixDQUFDLENBQUM7Z0JBQ0wsQ0FBQztnQkFyQkQsSUFBSSxhQUFhO29CQUNmLElBQUksSUFBSSxHQUFHLFdBQVcsSUFBSSxDQUFDLElBQUksSUFBSSxFQUFFLFdBQVcsQ0FBQztvQkFDakQsSUFBSSxJQUFJLENBQUMsRUFBRSxFQUFFO3dCQUNYLElBQUksSUFBSSxVQUFVLElBQUksQ0FBQyxFQUFFLFNBQVMsQ0FBQztxQkFDcEM7b0JBQ0QsT0FBTyxJQUFJLENBQUM7Z0JBQ2QsQ0FBQztnQkFnQkQsTUFBTSxDQUFDLFFBQWEsRUFBRSxRQUErQjtvQkFDbkQsT0FBTyxNQUFNLENBQUMsSUFBSSxFQUFFLFFBQVEsRUFBRSxRQUFRLENBQUMsQ0FBQztnQkFDMUMsQ0FBQztnQkFDRCxjQUFjLENBQUMsSUFBWSxFQUFFLEVBQVE7b0JBQ25DLE9BQU8sY0FBYyxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxDQUFDLENBQUM7Z0JBQ3hDLENBQUM7Z0JBQ0QsWUFBWSxDQUFDLElBQVk7b0JBQ3ZCLE9BQU8sWUFBWSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsQ0FBQztnQkFDbEMsQ0FBQztnQkFDRCxhQUFhO29CQUNYLE9BQU8sYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUM3QixDQUFDO2FBQ0Y7WUFDRCxPQUFPLE1BQU0sQ0FBQztRQUNoQixDQUFDO1FBeUJELE1BQU0sQ0FBQyxRQUFhLEVBQUUsUUFBK0I7WUFDbkQsT0FBTyxNQUFNLENBQUMsSUFBSSxFQUFFLFFBQVEsRUFBRSxRQUFRLENBQUMsQ0FBQztRQUMxQyxDQUFDO1FBQ0QsY0FBYyxDQUFDLElBQVksRUFBRSxFQUFRO1lBQ25DLE9BQU8sY0FBYyxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxDQUFDLENBQUM7UUFDeEMsQ0FBQztRQUNELFlBQVksQ0FBQyxJQUFZO1lBQ3ZCLE9BQU8sWUFBWSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsQ0FBQztRQUNsQyxDQUFDO1FBQ0QsYUFBYTtZQUNYLE9BQU8sYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzdCLENBQUM7S0FDRjtJQXRKRCx5QkFzSkM7SUFFRCxTQUFTLFFBQVEsQ0FBQyxHQUFROztRQUN4QixJQUFJLElBQUksR0FBRyxXQUFXLE9BQUEsR0FBRyxDQUFDLFNBQVMsQ0FBQyxLQUFLLDBDQUFFLElBQUksS0FBSSxFQUFFLFdBQVcsQ0FBQztRQUNqRSxVQUFJLEdBQUcsQ0FBQyxTQUFTLENBQUMsS0FBSywwQ0FBRSxFQUFFLEVBQUU7WUFDM0IsSUFBSSxJQUFJLFVBQVUsR0FBRyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsRUFBRSxTQUFTLENBQUM7U0FDbkQ7UUFDRCxNQUFNLFFBQVEsR0FBRztZQUNmLEVBQUUsY0FBRSxHQUFHLENBQUMsU0FBUyxDQUFDLEtBQUssMENBQUUsRUFBRSxtQ0FBSSxHQUFHLENBQUMsV0FBVyxDQUFDLElBQUk7WUFDbkQsSUFBSSxjQUFFLEdBQUcsQ0FBQyxTQUFTLENBQUMsS0FBSywwQ0FBRSxJQUFJLG1DQUFJLEdBQUcsQ0FBQyxXQUFXLENBQUMsSUFBSTtZQUN2RCxhQUFhLEVBQUUsSUFBSTtZQUNuQixLQUFLLGNBQUUsR0FBRyxDQUFDLFNBQVMsQ0FBQyxLQUFLLDBDQUFFLEtBQUssbUNBQUksUUFBUTtTQUM5QyxDQUFDO1FBRUYsT0FBTyxRQUFRLENBQUM7SUFDbEIsQ0FBQztJQUVELFNBQVMsdUJBQXVCLENBQUMsR0FBUTtRQUN2QyxrQ0FBa0M7UUFDbEMsTUFBTSxZQUFZLEdBQUcseUJBQWlCLENBQUMsR0FBRyxFQUFFO1lBQzFDLGdCQUFnQixFQUFFLElBQUk7U0FDdkIsQ0FBQyxDQUFDO1FBQ0gsTUFBTSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtZQUM5QyxNQUFNLEdBQUcsR0FBRyxZQUFZLENBQUMsU0FBUyxDQUFDLENBQUM7WUFDcEMsSUFBSSxHQUFHLENBQUMsVUFBVSxFQUFFO2dCQUNsQixHQUFHLENBQUMsZ0JBQWdCLENBQUMsU0FBUyxDQUFDLEdBQUcsR0FBRyxDQUFDLFVBQVUsQ0FBQzthQUNsRDtRQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQztJQUVELFNBQVMsTUFBTSxDQUFDLEdBQVEsRUFBRSxRQUFhLEVBQUUsUUFBK0I7UUFDdEUsUUFBUSxHQUFHLG1CQUFXLENBQ3BCO1lBQ0UsRUFBRSxFQUFFLFNBQVM7WUFDYixLQUFLLEVBQUUsRUFBRTtTQUNWLEVBQ0QsUUFBUSxDQUNULENBQUM7UUFFRixJQUFJLFFBQVEsQ0FBQyxFQUFFLElBQUksT0FBTyxRQUFRLENBQUMsRUFBRSxLQUFLLFFBQVEsRUFBRTtZQUNsRCxHQUFHLENBQUMsUUFBUSxDQUFDLEVBQUUsQ0FBQyxHQUFHLFFBQVEsQ0FBQztTQUM3QjtRQUVELElBQUksUUFBUSxDQUFDLEtBQUssRUFBRTtZQUNsQixRQUFRLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO2dCQUM5QixHQUFHLENBQUMsSUFBSSxDQUFDLEdBQUcsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQztZQUM1QyxDQUFDLENBQUMsQ0FBQztTQUNKO0lBQ0gsQ0FBQztJQUVELFNBQVMsZUFBZSxDQUFDLEdBQVEsRUFBRSxJQUFZO1FBQzdDLElBQUksWUFBWSxHQUFHLGFBQUssQ0FBQyxHQUFHLENBQUMsZ0JBQWdCLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFFckQsSUFBSSxDQUFDLFlBQVksRUFBRTtZQUNqQixNQUFNLElBQUksR0FBYSxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1lBQ3pELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO2dCQUNwQyxNQUFNLGFBQWEsR0FBRyxHQUFHLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQ3BELElBQUksYUFBYSxDQUFDLElBQUksQ0FBQyxLQUFLLFNBQVMsRUFBRTtvQkFDckMsSUFBSSxxQkFBUyxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxFQUFFO3dCQUNsQyxZQUFZLEdBQUcsYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDO3FCQUNwQzt5QkFBTTt3QkFDTCxZQUFZLEdBQUc7NEJBQ2IsS0FBSyxFQUFFLElBQUk7NEJBQ1gsRUFBRSxFQUNBLElBQUksS0FBSyxVQUFVO2dDQUNqQixDQUFDLENBQUMsV0FBVztnQ0FDYixDQUFDLENBQUMsSUFBSSxLQUFLLE1BQU07b0NBQ2pCLENBQUMsQ0FBQyxHQUFHO29DQUNMLENBQUMsQ0FBQyxTQUFTOzRCQUNmLEtBQUssRUFBRSxhQUFhLENBQUMsSUFBSSxDQUFDO3lCQUMzQixDQUFDO3FCQUNIO29CQUNELE1BQU07aUJBQ1A7YUFDRjtTQUNGO1FBRUQsSUFBSSxJQUFJLEtBQUssVUFBVSxJQUFJLFlBQVksQ0FBQyxFQUFFLEtBQUssU0FBUyxFQUFFO1lBQ3hELElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxTQUFTO2dCQUFFLFlBQVksQ0FBQyxFQUFFLEdBQUcsVUFBVSxDQUFDO2lCQUN4RCxJQUFJLEdBQUcsQ0FBQyxTQUFTLEtBQUssU0FBUztnQkFBRSxZQUFZLENBQUMsRUFBRSxHQUFHLFdBQVcsQ0FBQztTQUNyRTtRQUVELE9BQU8sWUFBWSxDQUFDO0lBQ3RCLENBQUM7SUFFRCxTQUFTLGFBQWEsQ0FBQyxHQUFRO1FBQzdCLE9BQU8sZ0JBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUN2QixDQUFDO0lBRUQsU0FBUyxZQUFZLENBQUMsR0FBUSxFQUFFLElBQVk7UUFDMUMsTUFBTSxZQUFZLEdBQUcsZUFBZSxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsQ0FBQztRQUVoRCxJQUFJLHFCQUFTLENBQUMsWUFBWSxDQUFDO1lBQUUsT0FBTyxZQUFZLENBQUMsS0FBSyxDQUFDO1FBQ3ZELE9BQU8sWUFBWSxDQUFDO0lBQ3RCLENBQUM7SUFFRCxTQUFTLGVBQWUsQ0FBQyxHQUFRO1FBQy9CLE1BQU0sSUFBSSxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLGdCQUFnQixDQUFDLENBQUM7UUFFL0MsS0FBSyxJQUFJLENBQUMsR0FBRyxJQUFJLENBQUMsTUFBTSxHQUFHLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQ3pDLE1BQU0sYUFBYSxHQUFHLEdBQUcsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNwRCxNQUFNLFNBQVMsR0FBRyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFFMUIsTUFBTSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtnQkFDMUMsTUFBTSxZQUFZLEdBQUcsYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUN6QyxJQUFJLFFBQXNDLENBQUM7Z0JBQzNDLElBQUkscUJBQVMsQ0FBQyxZQUFZLENBQUMsRUFBRTtvQkFDM0IsUUFBUSxHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQ3RCLEVBQUUsa0JBRUEsS0FBSyxFQUFFLElBQUksRUFDWCxFQUFFLEVBQ0EsSUFBSSxLQUFLLFVBQVU7NEJBQ2pCLENBQUMsQ0FBQyxXQUFXOzRCQUNiLENBQUMsQ0FBQyxJQUFJLEtBQUssTUFBTTtnQ0FDakIsQ0FBQyxDQUFDLEdBQUc7Z0NBQ0wsQ0FBQyxDQUFDLFNBQVMsSUFDWixZQUFZLEVBRWxCLENBQUM7aUJBQ0g7cUJBQU07b0JBQ0wsUUFBUSxHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQ3RCLEVBQUUsRUFDRjt3QkFDRSxLQUFLLEVBQUUsSUFBSTt3QkFDWCxFQUFFLEVBQ0EsSUFBSSxLQUFLLFVBQVU7NEJBQ2pCLENBQUMsQ0FBQyxXQUFXOzRCQUNiLENBQUMsQ0FBQyxJQUFJLEtBQUssTUFBTTtnQ0FDakIsQ0FBQyxDQUFDLEdBQUc7Z0NBQ0wsQ0FBQyxDQUFDLFNBQVM7d0JBQ2YsS0FBSyxFQUFFLFlBQVk7cUJBQ3BCLENBQ0YsQ0FBQztpQkFDSDtnQkFFRCxJQUFJLFFBQVEsQ0FBQyxLQUFLLEtBQUssSUFBSTtvQkFBRSxPQUFPO2dCQUVwQyxJQUFJLFFBQVEsQ0FBQyxFQUFFLEVBQUU7b0JBQ2YsSUFDRSxPQUFPLFFBQVEsQ0FBQyxFQUFFLEtBQUssUUFBUTt3QkFDL0IsYUFBSyxDQUFDLEdBQUcsRUFBRSxRQUFRLENBQUMsRUFBRSxDQUFDLEtBQUssU0FBUyxFQUNyQzt3QkFDQSxjQUFjLENBQUMsR0FBRyxFQUFFLEdBQUcsU0FBUyxJQUFJLElBQUksRUFBRSxFQUFFLFFBQVEsQ0FBQyxFQUFFLENBQUMsQ0FBQztxQkFDMUQ7eUJBQU0sSUFBSSxPQUFPLFFBQVEsQ0FBQyxFQUFFLEtBQUssUUFBUSxFQUFFO3dCQUMxQyxjQUFjLENBQUMsR0FBRyxFQUFFLEdBQUcsU0FBUyxJQUFJLElBQUksRUFBRSxFQUFFLFFBQVEsQ0FBQyxFQUFFLENBQUMsQ0FBQztxQkFDMUQ7eUJBQU0sSUFBSSxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUssU0FBUyxFQUFFO3dCQUNsQyxjQUFjLENBQUMsR0FBRyxFQUFFLEdBQUcsU0FBUyxJQUFJLElBQUksRUFBRSxDQUFDLENBQUM7cUJBQzdDO2lCQUNGO1lBQ0gsQ0FBQyxDQUFDLENBQUM7U0FDSjtJQUNILENBQUM7SUFFRCxTQUFTLGNBQWMsQ0FBQyxHQUFRLEVBQUUsSUFBWSxFQUFFLEtBQVUsSUFBSTtRQUM1RCxNQUFNLFlBQVksR0FBRyxlQUFlLENBQUMsR0FBRyxFQUFFLEdBQUcsSUFBSSxFQUFFLENBQUMsQ0FBQztRQUNyRCxJQUFJLENBQUMsWUFBWSxFQUFFO1lBQ2pCLE1BQU0sSUFBSSxLQUFLLENBQ2IsaURBQWlELElBQUksb0NBQW9DLEdBQUcsQ0FBQyxJQUFJLG9DQUFvQyxDQUN0SSxDQUFDO1NBQ0g7UUFDRCxJQUFJLEVBQUUsS0FBSyxTQUFTO1lBQUUsWUFBWSxDQUFDLEVBQUUsR0FBRyxFQUFFLENBQUM7UUFFM0MsSUFBSSxDQUFDLFlBQVksRUFBRTtZQUNqQixNQUFNLDBDQUEwQyxJQUFJLGtEQUFrRCxHQUFHLENBQUMsV0FBVyxDQUFDLElBQUksVUFBVSxDQUFDO1NBQ3RJO1FBRUQsSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxFQUFFO1lBQ3RCLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7U0FDM0M7UUFFRCxnQ0FBZ0M7UUFDaEMsSUFBSSxxQkFBUyxDQUFDLFlBQVksQ0FBQyxFQUFFO1lBQzNCLElBQUksT0FBTyxDQUFDO1lBQ1osSUFBSSxZQUFZLENBQUMsRUFBRSxJQUFJLE9BQU8sWUFBWSxDQUFDLEVBQUUsS0FBSyxRQUFRLEVBQUU7Z0JBQzFELE9BQU8sR0FBRyxhQUFLLENBQUMsR0FBRyxFQUFFLFlBQVksQ0FBQyxFQUFFLENBQUMsQ0FBQzthQUN2QztpQkFBTSxJQUFJLFlBQVksQ0FBQyxFQUFFLElBQUksT0FBTyxZQUFZLENBQUMsRUFBRSxLQUFLLFFBQVEsRUFBRTtnQkFDakUsT0FBTyxHQUFHLFlBQVksQ0FBQyxFQUFFLENBQUM7YUFDM0I7aUJBQU07Z0JBQ0wsT0FBTyxHQUFHLGFBQUssQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLENBQUM7YUFDNUI7WUFFRCxJQUFJLE9BQU8sR0FBRyxHQUFHLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQztZQUNuQyxJQUFJLEdBQUcsQ0FBQyxFQUFFO2dCQUFFLE9BQU8sSUFBSSxJQUFJLEdBQUcsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNyQyxJQUFJLElBQUk7Z0JBQUUsT0FBTyxJQUFJLElBQUksSUFBSSxFQUFFLENBQUM7WUFDaEMsSUFBSSxZQUFZLENBQUMsRUFBRSxJQUFJLFlBQVksQ0FBQyxFQUFFLENBQUMsV0FBVztnQkFDaEQsT0FBTyxJQUFJLElBQUksWUFBWSxDQUFDLEVBQUUsQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFLENBQUM7WUFDcEQsSUFBSSxZQUFZLENBQUMsRUFBRSxJQUFJLFlBQVksQ0FBQyxFQUFFLENBQUMsRUFBRTtnQkFDdkMsT0FBTyxJQUFJLElBQUksWUFBWSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUV2QyxJQUFJLEdBQUcsQ0FBQztZQUNSLElBQUksSUFBSSxLQUFLLE1BQU0sRUFBRTtnQkFDbkIsR0FBRyxHQUFHLFlBQVksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLE9BQU8sSUFBSSxFQUFFLEVBQUU7b0JBQzVDLEVBQUUsRUFBRSxPQUFPO29CQUNYLFFBQVEsRUFBRSxJQUFJO29CQUNkLEtBQUssRUFBRSxJQUFJO2lCQUNaLENBQUMsQ0FBQztnQkFDSCxvQkFBWSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUM7Z0JBQzdCLE9BQU8sR0FBRyxDQUFDO2FBQ1o7aUJBQU07Z0JBQ0wsR0FBRyxHQUFHLFlBQVksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLE9BQU8sRUFBRTtvQkFDdEMsRUFBRSxFQUFFLE9BQU87b0JBQ1gsUUFBUSxFQUFFLElBQUk7b0JBQ2QsS0FBSyxFQUFFLElBQUk7aUJBQ1osQ0FBQyxDQUFDO2dCQUVILElBQUksWUFBWSxDQUFDLEVBQUUsSUFBSSxPQUFPLFlBQVksQ0FBQyxFQUFFLEtBQUssUUFBUSxFQUFFO29CQUMxRCxNQUFNLFdBQVcsR0FBRyxvQkFBWSxDQUFDLFlBQVksQ0FBQyxFQUFFLEVBQUUsR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFDO29CQUM3RCxPQUFPLFdBQVcsQ0FBQztpQkFDcEI7cUJBQU0sSUFBSSxZQUFZLENBQUMsRUFBRSxJQUFJLE9BQU8sWUFBWSxDQUFDLEVBQUUsS0FBSyxRQUFRLEVBQUU7b0JBQ2pFLE9BQU8sb0JBQVksQ0FBQyxhQUFLLENBQUMsR0FBRyxFQUFFLFlBQVksQ0FBQyxFQUFFLENBQUMsRUFBRSxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUM7aUJBQzdEO3FCQUFNLElBQUksR0FBRyxDQUFDLElBQUksQ0FBQyxLQUFLLFNBQVMsRUFBRTtvQkFDbEMsT0FBTyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7aUJBQ2xCO3FCQUFNLElBQUksQ0FBQyxHQUFHLENBQUMsU0FBUyxFQUFFLEVBQUU7b0JBQzNCLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQztvQkFDakIsZ0tBQWdLO2lCQUNqSzthQUNGO1NBQ0Y7SUFDSCxDQUFDO0lBRUQsU0FBUyxXQUFXLENBQUMsR0FBUSxFQUFFLFdBQWdCLEVBQUU7O1FBQy9DLHNCQUFzQjtRQUN0QixHQUFHLENBQUMsU0FBUyxHQUFHLFFBQVEsQ0FBQztRQUN6Qiw0Q0FBNEM7UUFDNUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsS0FBSztZQUFFLEdBQUcsQ0FBQyxTQUFTLENBQUMsS0FBSyxHQUFHLEVBQUUsQ0FBQztRQUNuRCwwQkFBMEI7UUFDMUIsSUFBSSxRQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsS0FBSywwQ0FBRSxFQUFFLENBQUE7WUFBRSxHQUFHLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxFQUFFLEdBQUcsR0FBRyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUM7UUFDNUUsSUFBSSxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsRUFBRTtZQUMzQyxJQUFJLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsS0FBSztnQkFDNUIsR0FBRyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsS0FBSyxHQUFHLHFCQUFhLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQyxJQUFJLEVBQUU7b0JBQzlELEtBQUssRUFBRSxPQUFPO2lCQUNmLENBQUMsQ0FBQztTQUNOO2FBQU0sSUFBSSxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLEtBQUs7WUFBRSxHQUFHLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxLQUFLLEdBQUcsUUFBUSxDQUFDO0lBQzlFLENBQUMifQ==
+    else if (!ctx._settings.metas.color)
+        ctx._settings.metas.color = 'yellow';
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsYXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NsYXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8saUJBQWlCLE1BQU0sd0RBQXdELENBQUM7QUFFdkYsT0FBTyxTQUFTLE1BQU0sMkNBQTJDLENBQUM7QUFDbEUsT0FBTyxZQUFZLE1BQU0sOENBQThDLENBQUM7QUFDeEUsT0FBTyxXQUFXLE1BQU0sNkNBQTZDLENBQUM7QUFDdEUsT0FBTyxLQUFLLE1BQU0sdUNBQXVDLENBQUM7QUFFMUQsT0FBTyxhQUFhLE1BQU0sa0RBQWtELENBQUM7QUFFN0UsT0FBTyxRQUFRLE1BQU0sMENBQTBDLENBQUM7QUEwRGhFLE1BQU0sQ0FBQyxPQUFPLE9BQU8sTUFBTTtJQW1IekI7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxXQUE0QixFQUFFO1FBNUgxQzs7Ozs7Ozs7O1dBU0c7UUFDSCxjQUFTLEdBQW9CLEVBQUUsQ0FBQztRQUVoQzs7Ozs7Ozs7O1dBU0c7UUFDSSxxQkFBZ0IsR0FBUSxFQUFFLENBQUM7UUF1R2hDLHVCQUF1QixDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzlCLGVBQWU7UUFDZixXQUFXLENBQUMsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQzVCLFlBQVk7UUFDWixlQUFlLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDdEIsMEJBQTBCO1FBQzFCLElBQUksQ0FBQyxLQUFLLEdBQUcsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzVCLE1BQU0sQ0FBQyxjQUFjLENBQUMsSUFBSSxFQUFFLE9BQU8sRUFBRTtZQUNuQyxVQUFVLEVBQUUsSUFBSTtZQUNoQixLQUFLLEVBQUUsUUFBUSxDQUFDLElBQUksQ0FBQztTQUN0QixDQUFDLENBQUM7SUFDTCxDQUFDO0lBckdELHFDQUFxQztJQUNyQyx1RUFBdUU7SUFDdkUsb0NBQW9DO0lBQ3BDLDBEQUEwRDtJQUMxRCxNQUFNO0lBRU4sdUJBQXVCO0lBQ3ZCLDZEQUE2RDtJ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

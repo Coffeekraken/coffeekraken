@@ -1,53 +1,38 @@
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+import requestFullscreen from './requestFullscreen';
+import exitFullscreen from './exitFullscreen';
+/**
+ * @name      toggleFullscreen
+ * @namespace            js.dom
+ * @type      Function
+ * @stable
+ *
+ * Toggle the fullscreen mode
+ *
+ * @param    {HTMLElement}    elm    The element on which to request the fullscreen
+ * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been des/activated.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example   js
+ * import toggleFullscreen from '@coffeekraken/sugar/js/dom/toggleFullscreen'
+ * toggleFullscreen(myDomElm)
+ *
+ * @since       1.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function toggleFullscreen(elm) {
+    const fullscreenElm = document.fullscreenElement ||
+        document.mozFullScreenElement ||
+        document.webkitFullscreenElement;
+    if (!fullscreenElm || fullscreenElm !== elm) {
+        return requestFullscreen(elm);
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./requestFullscreen", "./exitFullscreen"], factory);
+    else {
+        return exitFullscreen();
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const requestFullscreen_1 = __importDefault(require("./requestFullscreen"));
-    const exitFullscreen_1 = __importDefault(require("./exitFullscreen"));
-    /**
-     * @name      toggleFullscreen
-     * @namespace            js.dom
-     * @type      Function
-     * @stable
-     *
-     * Toggle the fullscreen mode
-     *
-     * @param    {HTMLElement}    elm    The element on which to request the fullscreen
-     * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been des/activated.
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example   js
-     * import toggleFullscreen from '@coffeekraken/sugar/js/dom/toggleFullscreen'
-     * toggleFullscreen(myDomElm)
-     *
-     * @since       1.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    function toggleFullscreen(elm) {
-        const fullscreenElm = document.fullscreenElement ||
-            document.mozFullScreenElement ||
-            document.webkitFullscreenElement;
-        if (!fullscreenElm || fullscreenElm !== elm) {
-            return requestFullscreen_1.default(elm);
-        }
-        else {
-            return exitFullscreen_1.default();
-        }
-    }
-    exports.default = toggleFullscreen;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9nZ2xlRnVsbHNjcmVlbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL3Rvb2xzL3N1Z2FyL3NyYy9qcy9kb20vdG9nZ2xlRnVsbHNjcmVlbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCw0RUFBb0Q7SUFDcEQsc0VBQThDO0lBRTlDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FxQkc7SUFDSCxTQUFTLGdCQUFnQixDQUFDLEdBQUc7UUFDM0IsTUFBTSxhQUFhLEdBQ2pCLFFBQVEsQ0FBQyxpQkFBaUI7WUFDMUIsUUFBUSxDQUFDLG9CQUFvQjtZQUM3QixRQUFRLENBQUMsdUJBQXVCLENBQUM7UUFDbkMsSUFBSSxDQUFDLGFBQWEsSUFBSSxhQUFhLEtBQUssR0FBRyxFQUFFO1lBQzNDLE9BQU8sMkJBQWlCLENBQUMsR0FBRyxDQUFDLENBQUM7U0FDL0I7YUFBTTtZQUNMLE9BQU8sd0JBQWMsRUFBRSxDQUFDO1NBQ3pCO0lBQ0gsQ0FBQztJQUNELGtCQUFlLGdCQUFnQixDQUFDIn0=
+}
+export default toggleFullscreen;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9nZ2xlRnVsbHNjcmVlbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvZ2dsZUZ1bGxzY3JlZW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8saUJBQWlCLE1BQU0scUJBQXFCLENBQUM7QUFDcEQsT0FBTyxjQUFjLE1BQU0sa0JBQWtCLENBQUM7QUFFOUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQVMsZ0JBQWdCLENBQUMsR0FBRztJQUMzQixNQUFNLGFBQWEsR0FDakIsUUFBUSxDQUFDLGlCQUFpQjtRQUMxQixRQUFRLENBQUMsb0JBQW9CO1FBQzdCLFFBQVEsQ0FBQyx1QkFBdUIsQ0FBQztJQUNuQyxJQUFJLENBQUMsYUFBYSxJQUFJLGFBQWEsS0FBSyxHQUFHLEVBQUU7UUFDM0MsT0FBTyxpQkFBaUIsQ0FBQyxHQUFHLENBQUMsQ0FBQztLQUMvQjtTQUFNO1FBQ0wsT0FBTyxjQUFjLEVBQUUsQ0FBQztLQUN6QjtBQUNILENBQUM7QUFDRCxlQUFlLGdCQUFnQixDQUFDIn0=

@@ -43,7 +43,7 @@ export interface ISLogConsoleSettings {
   logMethods: Record<string, function>;
 }
 
-export = class SLogConsoleAdapter extends __SLogAdapter {
+export default class SLogConsoleAdapter extends __SLogAdapter {
   /**
    * @name          constructor
    * @type          Function
@@ -136,4 +136,4 @@ export = class SLogConsoleAdapter extends __SLogAdapter {
       resolve();
     });
   }
-};
+}

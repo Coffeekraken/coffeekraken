@@ -1,3 +1,4 @@
+"use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -11,22 +12,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./_SCache", "./adapters/SCacheLsAdapter", "./_SCache"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const _SCache_1 = __importDefault(require("./_SCache"));
-    const SCacheLsAdapter_1 = __importDefault(require("./adapters/SCacheLsAdapter"));
-    // @ts-ignore
-    _SCache_1.default.registerAdapter(SCacheLsAdapter_1.default);
-    __exportStar(require("./_SCache"), exports);
-    exports.default = _SCache_1.default;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvdG9vbHMvcy1jYWNoZS9zcmMvanMvU0NhY2hlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLHdEQUFpQztJQUNqQyxpRkFBMkQ7SUFFM0QsYUFBYTtJQUNiLGlCQUFRLENBQUMsZUFBZSxDQUFDLHlCQUFpQixDQUFDLENBQUM7SUFFNUMsNENBQTBCO0lBQzFCLGtCQUFlLGlCQUFRLENBQUMifQ==
+Object.defineProperty(exports, "__esModule", { value: true });
+const _SCache_1 = __importDefault(require("./_SCache"));
+// import __SCacheLsAdapter from './adapters/SCacheLsAdapter';
+// // @ts-ignore
+// __SCache.registerAdapter(__SCacheLsAdapter);
+__exportStar(require("./_SCache"), exports);
+exports.default = _SCache_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NhY2hlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLHdEQUFpQztBQUNqQyw4REFBOEQ7QUFFOUQsZ0JBQWdCO0FBQ2hCLCtDQUErQztBQUUvQyw0Q0FBMEI7QUFDMUIsa0JBQWUsaUJBQVEsQ0FBQyJ9

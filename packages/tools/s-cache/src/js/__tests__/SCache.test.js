@@ -7,48 +7,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../SCache"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const SCache_1 = __importDefault(require("../SCache"));
-    const cache = new SCache_1.default('sugar-js-cache-SCache', {
-        adapter: 'ls'
-    });
-    test('sugar.js.cache.SCache: Set an item in the cache', (done) => {
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            yield cache.set('myCoolItem', {
-                hello: 'world'
-            });
-            done();
-        }))();
-    });
-    test('sugar.js.cache.SCache: Get an item in the cache', (done) => {
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            const item = yield cache.get('myCoolItem');
-            expect(item).toEqual({
-                hello: 'world'
-            });
-            done();
-        }))();
-    });
-    test('sugar.js.cache.SCache: Delete an item in the cache', (done) => {
-        (() => __awaiter(void 0, void 0, void 0, function* () {
-            yield cache.delete('myCoolItem');
-            const item = yield cache.get('myCoolItem');
-            expect(item).toBe(null);
-            done();
-        }))();
-    });
+import SCache from '../SCache';
+const cache = new SCache('sugar-js-cache-SCache', {
+    adapter: 'ls'
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ2FjaGUudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUFBLHVEQUErQjtJQUUvQixNQUFNLEtBQUssR0FBRyxJQUFJLGdCQUFNLENBQUMsdUJBQXVCLEVBQUU7UUFDaEQsT0FBTyxFQUFFLElBQUk7S0FDZCxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsaURBQWlELEVBQUUsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUMvRCxDQUFDLEdBQVMsRUFBRTtZQUNWLE1BQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxZQUFZLEVBQUU7Z0JBQzVCLEtBQUssRUFBRSxPQUFPO2FBQ2YsQ0FBQyxDQUFDO1lBQ0gsSUFBSSxFQUFFLENBQUM7UUFDVCxDQUFDLENBQUEsQ0FBQyxFQUFFLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxpREFBaUQsRUFBRSxDQUFDLElBQUksRUFBRSxFQUFFO1FBQy9ELENBQUMsR0FBUyxFQUFFO1lBQ1YsTUFBTSxJQUFJLEdBQUcsTUFBTSxLQUFLLENBQUMsR0FBRyxDQUFDLFlBQVksQ0FBQyxDQUFDO1lBQzNDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxPQUFPLENBQUM7Z0JBQ25CLEtBQUssRUFBRSxPQUFPO2FBQ2YsQ0FBQyxDQUFDO1lBQ0gsSUFBSSxFQUFFLENBQUM7UUFDVCxDQUFDLENBQUEsQ0FBQyxFQUFFLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxvREFBb0QsRUFBRSxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ2xFLENBQUMsR0FBUyxFQUFFO1lBQ1YsTUFBTSxLQUFLLENBQUMsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDO1lBQ2pDLE1BQU0sSUFBSSxHQUFHLE1BQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxZQUFZLENBQUMsQ0FBQztZQUMzQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ3hCLElBQUksRUFBRSxDQUFDO1FBQ1QsQ0FBQyxDQUFBLENBQUMsRUFBRSxDQUFDO0lBQ1AsQ0FBQyxDQUFDLENBQUMifQ==
+test('sugar.js.cache.SCache: Set an item in the cache', (done) => {
+    (() => __awaiter(void 0, void 0, void 0, function* () {
+        yield cache.set('myCoolItem', {
+            hello: 'world'
+        });
+        done();
+    }))();
+});
+test('sugar.js.cache.SCache: Get an item in the cache', (done) => {
+    (() => __awaiter(void 0, void 0, void 0, function* () {
+        const item = yield cache.get('myCoolItem');
+        expect(item).toEqual({
+            hello: 'world'
+        });
+        done();
+    }))();
+});
+test('sugar.js.cache.SCache: Delete an item in the cache', (done) => {
+    (() => __awaiter(void 0, void 0, void 0, function* () {
+        yield cache.delete('myCoolItem');
+        const item = yield cache.get('myCoolItem');
+        expect(item).toBe(null);
+        done();
+    }))();
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ2FjaGUudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLE1BQU0sTUFBTSxXQUFXLENBQUM7QUFFL0IsTUFBTSxLQUFLLEdBQUcsSUFBSSxNQUFNLENBQUMsdUJBQXVCLEVBQUU7SUFDaEQsT0FBTyxFQUFFLElBQUk7Q0FDZCxDQUFDLENBQUM7QUFFSCxJQUFJLENBQUMsaURBQWlELEVBQUUsQ0FBQyxJQUFJLEVBQUUsRUFBRTtJQUMvRCxDQUFDLEdBQVMsRUFBRTtRQUNWLE1BQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxZQUFZLEVBQUU7WUFDNUIsS0FBSyxFQUFFLE9BQU87U0FDZixDQUFDLENBQUM7UUFDSCxJQUFJLEVBQUUsQ0FBQztJQUNULENBQUMsQ0FBQSxDQUFDLEVBQUUsQ0FBQztBQUNQLENBQUMsQ0FBQyxDQUFDO0FBRUgsSUFBSSxDQUFDLGlEQUFpRCxFQUFFLENBQUMsSUFBSSxFQUFFLEVBQUU7SUFDL0QsQ0FBQyxHQUFTLEVBQUU7UUFDVixNQUFNLElBQUksR0FBRyxNQUFNLEtBQUssQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLENBQUM7UUFDM0MsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLE9BQU8sQ0FBQztZQUNuQixLQUFLLEVBQUUsT0FBTztTQUNmLENBQUMsQ0FBQztRQUNILElBQUksRUFBRSxDQUFDO0lBQ1QsQ0FBQyxDQUFBLENBQUMsRUFBRSxDQUFDO0FBQ1AsQ0FBQyxDQUFDLENBQUM7QUFFSCxJQUFJLENBQUMsb0RBQW9ELEVBQUUsQ0FBQyxJQUFJLEVBQUUsRUFBRTtJQUNsRSxDQUFDLEdBQVMsRUFBRTtRQUNWLE1BQU0sS0FBSyxDQUFDLE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUNqQyxNQUFNLElBQUksR0FBRyxNQUFNLEtBQUssQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLENBQUM7UUFDM0MsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN4QixJQUFJLEVBQUUsQ0FBQztJQUNULENBQUMsQ0FBQSxDQUFDLEVBQUUsQ0FBQztBQUNQLENBQUMsQ0FBQyxDQUFDIn0=

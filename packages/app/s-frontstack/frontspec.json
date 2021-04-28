@@ -3,7 +3,7 @@
     "js": {
       "main": {
         "defer": true,
-        "path": "./dist/js/index.js"
+        "path": "./dist/js/index.bundle.js"
       }
     }
   }

@@ -32,7 +32,7 @@ exports.default = {
         js: '[config.ts.tsconfigStacksDir]/tsconfig.js.js',
         node: '[config.ts.tsconfigStacksDir]/tsconfig.node.js',
         shared: '[config.ts.tsconfigStacksDir]/tsconfig.shared.js',
-        'shared-mjs': '[config.ts.tsconfigStacksDir]/tsconfig.shared-mjs.js'
+        'shared-cjs': '[config.ts.tsconfigStacksDir]/tsconfig.shared-cjs.js'
     },
     compile: {
         /**
@@ -51,7 +51,7 @@ exports.default = {
             '[config.ts.stacks.js]',
             '[config.ts.stacks.node]',
             '[config.ts.stacks.shared]',
-            '[config.ts.stacks.shared-mjs]'
+            '[config.ts.stacks.shared-cjs]'
         ],
         /**
          * @name              outDir

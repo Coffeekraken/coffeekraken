@@ -13,7 +13,7 @@ module.exports = __deepMerge(__tsconfig, {
   ],
   compilerOptions: {
     target: 'es6',
-    module: 'umd',
+    module: 'esnext',
     moduleResolution: 'node'
   }
 });

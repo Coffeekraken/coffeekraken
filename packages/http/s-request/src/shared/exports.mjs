@@ -1,8 +1,0 @@
-import SRequest from './SRequest';
-import SRequestConfig from './SRequestConfig';
-import request from './request';
-export * from './SRequest';
-export * from './SRequestConfig';
-export { SRequestConfig, request };
-export default SRequest;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2h0dHAvcy1yZXF1ZXN0L3NyYy9zaGFyZWQvZXhwb3J0cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxZQUFZLENBQUM7QUFDbEMsT0FBTyxjQUFjLE1BQU0sa0JBQWtCLENBQUM7QUFDOUMsT0FBTyxPQUFPLE1BQU0sV0FBVyxDQUFDO0FBRWhDLGNBQWMsWUFBWSxDQUFDO0FBQzNCLGNBQWMsa0JBQWtCLENBQUM7QUFFakMsT0FBTyxFQUFFLGNBQWMsRUFBRSxPQUFPLEVBQUUsQ0FBQztBQUNuQyxlQUFlLFFBQVEsQ0FBQyJ9

@@ -1,6 +1,9 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
 // @ts-nocheck
 
+require = require('esm')(module /*, options*/);
+// module.exports = require('./main.js');
+
 import __childProcess from 'child_process';
 import __glob from 'glob-all';
 import __packageRoot from '../node/path/packageRoot';

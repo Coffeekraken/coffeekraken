@@ -220,25 +220,25 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           name: 'logPlugin',
           setup(build) {
             // Load ".txt" files and return an array of words
-            build.onLoad({ filter: /\.(j|t)s$/ }, async (args) => {
-              if (
-                args.path.match(/\.ts(x)?$/) &&
-                __fs.existsSync(args.path.replace(/\.ts(x)?$/, '.js'))
-              ) {
-                console.log(
-                  __fs
-                    .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
-                    .toString()
-                );
+            build.onLoad({ filter: /\.js$/ }, async (args) => {
+              // if (
+              //   args.path.match(/\.ts(x)?$/) &&
+              //   __fs.existsSync(args.path.replace(/\.ts(x)?$/, '.js'))
+              // ) {
+              //   console.log(
+              //     __fs
+              //       .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
+              //       .toString()
+              //   );
 
-                return {
-                  contents: __fs
-                    .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
-                    .toString(),
-                  loader: 'js'
-                };
-                console.log('TSX', args.path);
-              }
+              //   return {
+              //     contents: __fs
+              //       .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
+              //       .toString(),
+              //     loader: 'js'
+              //   };
+              //   console.log('TSX', args.path);
+              // }
 
               // if (
               //   !updateTimestamps[args.path] ||
@@ -273,21 +273,27 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           });
         }
 
-        pool.on('update,files', async (files) => {
+        pool.on('update,files', async (files, m) => {
           pool.cancel();
+
+          if (params.bundle && files.length > 1) {
+            throw new Error(
+              `<red>[${this.constructor.name}]</red> When using the <yellow>--bundle</yellow> option, you MUST specify <cyan>1 input</cyan> only...`
+            );
+          }
 
           const duration = new __SDuration();
 
           files = Array.isArray(files) ? files : [files];
 
-          files = files.filter((file) => {
-            if (
-              file.path.match(/\.js$/) &&
-              __fs.existsSync(file.path.replace(/\.js$/, '.ts'))
-            )
-              return false;
-            return true;
-          });
+          // files = files.filter((file) => {
+          //   if (
+          //     file.path.match(/\.js$/) &&
+          //     __fs.existsSync(file.path.replace(/\.js$/, '.ts'))
+          //   )
+          //     return false;
+          //   return true;
+          // });
 
           const color =
             this._filesColor[
@@ -319,7 +325,8 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
                   params.outDir,
                   `${files[0].nameWithoutExt}${params.bundleSuffix}.js`
                 )
-              : __path.resolve(params.outDir, files[0].name),
+              : undefined,
+            // platform: 'node',
             outbase: params.inDir,
             banner: params.banner,
             incremental: true,
@@ -374,12 +381,11 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             ]
           };
 
-          console.log(esbuildParams);
-
           let resultObj;
           try {
             resultObj = await __esbuild.build(esbuildParams);
           } catch (e) {
+            console.log(e);
             return reject(e);
           }
 

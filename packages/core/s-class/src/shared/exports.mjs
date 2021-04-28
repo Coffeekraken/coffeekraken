@@ -1,4 +1,0 @@
-import SClass from './SClass';
-export * from './SClass';
-export default SClass;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2NvcmUvcy1jbGFzcy9zcmMvc2hhcmVkL2V4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxNQUFNLE1BQU0sVUFBVSxDQUFDO0FBQzlCLGNBQWMsVUFBVSxDQUFDO0FBQ3pCLGVBQWUsTUFBTSxDQUFDIn0=

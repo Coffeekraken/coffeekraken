@@ -5,7 +5,9 @@ import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/src/shared/string/toString';
 import __convert from '@coffeekraken/sugar/src/shared/time/convert';
 import { ISCacheAdapter } from './adapters/SCacheAdapter';
+import __SCacheLsAdapter from '../js/adapters/SCacheLsAdapter';
 import __SCacheSettingsInterface from './interface/SCacheSettingsInterface';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 /**
  * @name                                SCache
@@ -114,6 +116,8 @@ class SCache extends __SClass implements ISCache {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static registerAdapter(adapter: ISCacheAdapter, id?: string): void {
+    if (this.registeredAdapters[id || adapter.id]) return;
+    console.log('register', adapter, this.registeredAdapters);
     this.registeredAdapters[id || adapter.id] = adapter;
   }
 
@@ -144,6 +148,14 @@ class SCache extends __SClass implements ISCache {
         settings
       )
     );
+
+    if (__isNode()) {
+      this.constructor.registerAdapter(
+        require('../node/adapters/SCacheFsAdapter').default
+      );
+    } else {
+      this.constructor.registerAdapter(__SCacheLsAdapter);
+    }
 
     // make sure we have a name
     if (!id) {

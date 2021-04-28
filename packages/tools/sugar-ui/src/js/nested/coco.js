@@ -1,4 +1,4 @@
 "use strict";
 // import SInterface from '@coffeekraken/s-interface';
 // console.log(SInterface);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29jby5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL3Rvb2xzL3N1Z2FyLXVpL3NyYy9qcy9uZXN0ZWQvY29jby50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsc0RBQXNEO0FBRXRELDJCQUEyQiJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29jby5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvY28udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLHNEQUFzRDtBQUV0RCwyQkFBMkIifQ==

@@ -5,6 +5,7 @@ import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
 } from '@coffeekraken/s-compiler';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
@@ -28,7 +29,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __STsCompilerParamsInterface from './interface/STsCompilerInterface';
 import __moveFile from 'move-file';
-import tsconfig from '../templates/tsconfig';
+import __childProcess from 'child_process';
 
 export interface ISTsCompilerCtorSettings {
   tsCompiler: Partial<ISTsCompilerSettings>;
@@ -380,10 +381,7 @@ class STsCompiler extends __SCompiler {
             tsconfigJson.compilerOptions.inlineSourceMap = true;
           }
 
-          // save or not
-          // if (!params.save) {
           tsconfigJson.compilerOptions.outDir = `${__tmpDir()}/STsCompiler/${Date.now()}-${inputPathHash}`;
-          // }
 
           const tmpConfigPath = `${__tmpDir()}/STsCompiler/${__getFilename(
             inputPath
@@ -407,23 +405,16 @@ class STsCompiler extends __SCompiler {
             params
           };
 
-          // spawn new process
-          try {
-            const pro = __spawn(`tsc ${commandLineArray.join(' ')}`, [], {
-              cwd: params.rootDir || process.cwd()
-            });
+          const compiledFilesPaths: string[] = [];
 
-            // listen outDir
-            const pool = __fsPool(
-              `${tsconfigJson.compilerOptions.outDir}/**/*`,
+          try {
+            const pro = __spawn(
+              `tsc ${commandLineArray.join(' ')} --listEmittedFiles`,
+              [],
               {
-                watch: true,
-                cwd: tsconfigJson.compilerOptions.outDir
+                cwd: params.rootDir || process.cwd()
               }
             );
-            pool.on('file', (file) => {
-              this._handleCompiledFile(file, tsconfigJson, pro.emit);
-            });
 
             pipeFrom(pro, {
               processor: (value, metas) => {
@@ -452,26 +443,27 @@ class STsCompiler extends __SCompiler {
                 return [value, metas];
               },
               filter: (value, metas) => {
-                // if (
-                //   value &&
-                //   value.value &&
-                //   typeof value.value === 'string' &&
-                //   value.value.match(/TSFILE:\s.*/)
-                // ) {
-                //   if (params.watch) {
-                //     const filesPaths = value.value
-                //       .split('TSFILE:')
-                //       .map((f) => f.trim());
-                //     filesPaths.forEach((filePath) => {
-                //       this._handleCompiledFile(
-                //         filePath,
-                //         tsconfigJson,
-                //         pro.emit
-                //       );
-                //     });
-                //   }
-                //   return false;
-                // }
+                if (
+                  value &&
+                  value.value &&
+                  typeof value.value === 'string' &&
+                  value.value.match(/TSFILE:\s.*/)
+                ) {
+                  const filesPaths = value.value
+                    .split('TSFILE:')
+                    .map((f) => f.trim());
+                  filesPaths.forEach((filePath) => {
+                    const outPath = this._handleCompiledFile(
+                      filePath,
+                      tsconfigJson,
+                      pro.emit
+                    );
+                    if (outPath && compiledFilesPaths.indexOf(outPath) === -1) {
+                      compiledFilesPaths.push(outPath);
+                    }
+                  });
+                  return false;
+                }
                 if (!metas.event.match(/^close/)) return true;
                 if (
                   value.stdout &&
@@ -490,50 +482,28 @@ class STsCompiler extends __SCompiler {
 
             pro.on('close', async (value) => {
               if (value.code === 0) {
-                // if (value && value.value && typeof value.value === 'string') {
-                //   const filesCount = value.value.match(/TSFILE:\s/gm).length;
-                //   pro.emit('log', {
-                //     value: `<yellow>${filesCount}</yellow> File${
-                //       filesCount > 1 ? 's' : ''
-                //     } compiled`
-                //   });
-                // }
+                resultObj.files = [];
 
-                // if (!params.watch) {
-                //   // save or not
-                //   const files = await __resolveGlob(
-                //     `${tsconfigJson.compilerOptions.outDir}/**/*.js`
-                //   );
-                //   // .map((file) => {
-                //   //   return {
-                //   //     path: __path.relative(
-                //   //       tsconfigJson.compilerOptions.outDir,
-                //   //       file.path
-                //   //     ),
-                //   //     content: file.content
-                //   //   };
-                //   // });
+                compiledFilesPaths.forEach((file) => {
+                  if (!file || !file.trim()) return;
+                  resultObj.files.push(__SFile.new(file).toObject());
 
-                //   pro.emit('log', {
-                //     value: `Moving compiled files to final destination`
-                //   });
+                  if (!params.save) {
+                    try {
+                      __fs.unlinkSync(file);
+                    } catch (e) {}
+                  }
+                });
 
-                //   for (let i = 0; i < files.length; i++) {
-                //     const file = files[i];
-                //     await this._handleCompiledFile(
-                //       file,
-                //       tsconfigJson,
-                //       pro.emit
-                //     );
-                //   }
+                pro.emit('log', {
+                  value: `<yellow>${compiledFilesPaths.length}</yellow> File${
+                    compiledFilesPaths.length > 1 ? 's' : ''
+                  } compiled`
+                });
 
                 pro.emit('log', {
                   value: `Compilation <green>successfull</green> in <yellow>${value.formatedDuration}</yellow>`
                 });
-
-                //   // set files in result obj
-                //   resultObj.files = files;
-                // }
 
                 // resolve the promise
                 resolve({
@@ -549,7 +519,7 @@ class STsCompiler extends __SCompiler {
                 });
               }
 
-              pool.cancel();
+              // pool.cancel();
 
               // delete the temp directory if needed
               __removeSync(tsconfigJson.compilerOptions.outDir);
@@ -562,7 +532,7 @@ class STsCompiler extends __SCompiler {
               value: `Starting compilation process`
             });
           } catch (e) {
-            pool.cancel();
+            // pool.cancel();
 
             // delete the temp directory if needed
             __removeSync(tsconfigJson.compilerOptions.outDir);
@@ -576,6 +546,7 @@ class STsCompiler extends __SCompiler {
               ...duration.end()
             });
           }
+          // });
         });
       },
       {
@@ -587,7 +558,7 @@ class STsCompiler extends __SCompiler {
     );
   }
 
-  async _handleCompiledFile(file, tsconfig, emit) {
+  _handleCompiledFile(file, tsconfig, emit) {
     if (!file) return;
     if (typeof file === 'string') {
       file = new __SFile(file, {
@@ -610,34 +581,48 @@ class STsCompiler extends __SCompiler {
       );
     }
 
-    emit('log', {
-      temp: true,
-      value: `<yellow>[compile]</yellow> Compiling file "<cyan>${__path.relative(
-        tsconfig.compilerOptions.outDir,
-        file.path
-      )}</cyan>"`
-    });
+    // console.log(__path.relative(tsconfig.compilerOptions.outDir, file.path));
+
+    if (emit) {
+      // emit('log', {
+      //   // temp: true,
+      //   value: `<yellow>[compile]</yellow> Compiling file "<cyan>${__path.relative(
+      //     tsconfig.compilerOptions.outDir,
+      //     file.path
+      //   )}</cyan>"`
+      // });
+    }
 
     if (outPath.match(/\.ts(x)?$/) && __fs.existsSync(outPath)) {
-      emit('log', {
-        value: `<yellow>[warning]</yellow> The output destination of the compiled file "<cyan>${outPath}</cyan>" is the same as the source file and override it... This file is not saved then.`
-      });
+      if (emit) {
+        emit('log', {
+          value: `<yellow>[warning]</yellow> The output destination of the compiled file "<cyan>${outPath}</cyan>" is the same as the source file and override it... This file is not saved then.`
+        });
+      }
     } else {
       try {
         try {
           __fs.unlinkSync(outPath);
         } catch (e) {}
         __fs.renameSync(inPath, outPath);
+        if (outPath.match(/\.cli\.js$/) && emit) {
+          emit('log', {
+            temp: true,
+            value: `<yellow>[compile]</yellow> Adding execution permission to file "<cyan>${__path.relative(
+              tsconfig.compilerOptions.outDir,
+              file.path
+            )}</cyan>"`
+          });
+          __childProcess.execSync(`chmod +x ${outPath}`);
+        }
       } catch (e) {
-        console.log(e.message);
-        console.log('ERRO', inPath, outPath);
         delete this._currentlyHandledFiles[relPath];
       }
     }
 
     delete this._currentlyHandledFiles[relPath];
 
-    return true;
+    return outPath;
   }
 
   /**

@@ -5,7 +5,7 @@
         "SHighlightJs.svelte"
     ],
     "sourcesContent": [
-        "\n\n<svelte:options tag=\"s-highlight-js\" />\n\n<script type=\"text/ts\">import hljs from 'highlight.js';\nimport javascript from 'highlight.js/lib/languages/javascript';\nhljs.registerLanguage('javascript', javascript);\n// import __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';\n// class MyCoolComponent extends __SSvelteComponent {\n// \tconstructor() {\n// \t\tsuper({\n// \t\t\tsvelteComponent: {}\n// \t\t});\n// \t}\n// }\n// console.log('fff')\n// new MyCoolComponent();\n</script>\n\n<style>\n\th1 {\n\t\tcolor: blue;\n\t\tbackground: red;\n\t}\n</style>\n\n<div>\n\t<h1>Hello worlc</h1>\n</div>"
+        "\n\n<svelte:options tag=\"s-highlight-js\" />\n\n<script type=\"text/javascript\">\n\n    import hljs from 'highlight.js';\n    import javascript from 'highlight.js/lib/languages/javascript';\n    hljs.registerLanguage('javascript', javascript);\n\n\timport __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';\n\n\tclass MyCoolComponent extends __SSvelteComponent {\n\t\tconstructor() {\n\t\t\tsuper({\n\t\t\t\tsvelteComponent: {}\n\t\t\t});\n\t\t}\n\t}\n\tconsole.log('Plfffffp')\n\n\n\tnew MyCoolComponent();\n\n</script>\n\n<style>\n\th1 {\n\t\tcolor: blue;\n\t\tbackground: red;\n\t}\n</style>\n\n<div>\n\t<h1>Hello worlc</h1>\n</div>"
     ],
-    "mappings": ";;;;;;;;;;;;;;;;OAI8B,IAAI,MAAM,cAAc;OAC/C,UAAU,MAAM,uCAAuC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAC9D,IAAI,CAAC,gBAAgB,CAAC,YAAY,EAAE,UAAU;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+    "mappings": ";;;;;;;;;;;;;;;;;;OAMW,IAAI,MAAM,cAAc;OACxB,UAAU,MAAM,uCAAuC;OAG1D,kBAAkB,MAAM,gDAAgD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAF5E,IAAI,CAAC,gBAAgB,CAAC,YAAY,EAAE,UAAU;;OAI3C,eAAe,SAAS,kBAAkB;EAC/C,WAAW;GACV,KAAK,GACJ,eAAe;;;;CAIlB,OAAO,CAAC,GAAG,CAAC,UAAU;KAGlB,eAAe;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
 }

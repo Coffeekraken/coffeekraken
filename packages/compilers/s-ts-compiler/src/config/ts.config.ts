@@ -48,8 +48,8 @@ export default {
     input: [
       '[config.ts.stacks.js]',
       '[config.ts.stacks.node]',
-      '[config.ts.stacks.shared]',
-      '[config.ts.stacks.shared-cjs]'
+      '[config.ts.stacks.shared]'
+      // '[config.ts.stacks.shared-cjs]'
     ],
 
     /**

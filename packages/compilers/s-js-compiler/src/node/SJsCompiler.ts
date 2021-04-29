@@ -5,6 +5,8 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
 import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
+import __dependencyTree from 'dependency-tree';
+import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 
 import * as __esbuild from 'esbuild';
 import __path from 'path';
@@ -221,42 +223,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           setup(build) {
             // Load ".txt" files and return an array of words
             build.onLoad({ filter: /\.js$/ }, async (args) => {
-              // if (
-              //   args.path.match(/\.ts(x)?$/) &&
-              //   __fs.existsSync(args.path.replace(/\.ts(x)?$/, '.js'))
-              // ) {
-              //   console.log(
-              //     __fs
-              //       .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
-              //       .toString()
-              //   );
-
-              //   return {
-              //     contents: __fs
-              //       .readFileSync(args.path.replace(/\.ts(x)?$/, '.js'), 'utf8')
-              //       .toString(),
-              //     loader: 'js'
-              //   };
-              //   console.log('TSX', args.path);
-              // }
-
-              // if (
-              //   !updateTimestamps[args.path] ||
-              //   updateTimestamps[args.path] !== mtime
-              // ) {
-              //   lastCompiledFilePath = args.path;
-
-              //   // emit('log', {
-              //   //   value: `<yellow>[${
-              //   //     isFirstCompilation ? 'compile' : 'update'
-              //   //   }]</yellow> File "<cyan>${__path.relative(
-              //   //     params.rootDir,
-              //   //     args.path
-              //   //   )}</cyan>"`
-              //   // });
-              // }
-              // updateTimestamps[args.path] = mtime;
-
               const mtime = __fs.statSync(args.path).mtimeMs;
               const text = __fs.readFileSync(args.path, 'utf8');
 
@@ -273,8 +239,10 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           });
         }
 
-        pool.on('update,files', async (files, m) => {
+        pool.on(params.watch ? 'update' : 'files', async (files, m) => {
           pool.cancel();
+
+          console.log('DD', m.event, files.path ?? files.map((f) => f.path));
 
           if (params.bundle && files.length > 1) {
             throw new Error(
@@ -285,15 +253,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           const duration = new __SDuration();
 
           files = Array.isArray(files) ? files : [files];
-
-          // files = files.filter((file) => {
-          //   if (
-          //     file.path.match(/\.js$/) &&
-          //     __fs.existsSync(file.path.replace(/\.js$/, '.ts'))
-          //   )
-          //     return false;
-          //   return true;
-          // });
 
           const color =
             this._filesColor[
@@ -336,39 +295,40 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             errorLimit: 100,
             minify: params.minify,
             sourcemap: params.map,
-            watch: params.watch
-              ? {
-                  onRebuild(error, result) {
-                    if (error) {
-                      emit('error', {
-                        value: error
-                      });
-                      return;
-                    }
+            // watch: params.watch
+            //   ? {
+            //       onRebuild(error, result) {
+            //         if (error) {
+            //           emit('error', {
+            //             value: error
+            //           });
+            //           return;
+            //         }
 
-                    isFirstCompilation = false;
+            //         isFirstCompilation = false;
 
-                    let logValue = `<green>[success]</green> <${color}>${
-                      files.length === 1
-                        ? __getFilename(files[0].path)
-                        : files.length + ' files'
-                    }</${color}> compiled`;
-                    if (!isFirstCompilation && lastCompiledFilePath) {
-                      logValue = `<green>[success]</green> File "<cyan>${__path.relative(
-                        params.rootDir,
-                        lastCompiledFilePath
-                      )}</cyan>" compiled`;
-                    }
+            //         let logValue = `<green>[success]</green> <${color}>${
+            //           files.length === 1
+            //             ? __getFilename(files[0].path)
+            //             : files.length + ' files'
+            //         }</${color}> compiled`;
+            //         if (!isFirstCompilation && lastCompiledFilePath) {
+            //           logValue = `<green>[success]</green> File "<cyan>${__path.relative(
+            //             params.rootDir,
+            //             lastCompiledFilePath
+            //           )}</cyan>" compiled`;
+            //         }
 
-                    emit('log', {
-                      value: logValue
-                    });
-                    emit('log', {
-                      value: `<blue>[watch]</blue> Watching for changes...`
-                    });
-                  }
-                }
-              : false,
+            //         emit('log', {
+            //           value: logValue
+            //         });
+            //         emit('log', {
+            //           value: `<blue>[watch]</blue> Watching for changes...`
+            //         });
+            //       }
+            //     }
+            //   : false,
+            watch: false,
 
             ...params.esbuild,
             plugins: [

@@ -80,30 +80,30 @@ function fn(value, settings = {}) {
     let stackStr = value.stack;
     const messageStr = value.message;
 
-    if (settings.beautify) {
-      if (__isNode()) {
-        const __packageRoot = require('../../node/path/packageRoot').default; // eslint-disable-line
-        stackStr = stackStr.replace(errorStr, '').trim();
-        stackStr = stackStr
-          .split(`${__packageRoot(process.cwd(), true)}/`)
-          .join('');
-        stackStr = `${stackStr
-          .split('\n')
-          .map((l) => {
-            l.match(/[a-zA-Z-0-9\-_\./]+/gm).forEach((str) => {
-              if (str.match(/\//) && str.match(/\.ts$/))
-                l = l.replace(str, `<blue>${str}</blue>`);
-              else if (str.match(/\//))
-                l = l.replace(str, `<cyan>${str}</cyan>`);
-            });
-            l = l.trim().replace(/^at\s/, '<yellow>at</yellow> ');
-            l = l.replace('->', '<yellow>└-></yellow>');
-            l = l.replace(/:([0-9]{1,29}:[0-9]{1,29})/, `:<yellow>$1</yellow>`);
-            return `<yellow>│</yellow> ${l.trim()}`;
-          })
-          .join('\n')}`;
-      }
-    }
+    // if (settings.beautify) {
+    //   if (__isNode()) {
+    //     const __packageRoot = require('../path/packageRoot').default; // eslint-disable-line
+    //     stackStr = stackStr.replace(errorStr, '').trim();
+    //     stackStr = stackStr
+    //       .split(`${__packageRoot(process.cwd(), true)}/`)
+    //       .join('');
+    //     stackStr = `${stackStr
+    //       .split('\n')
+    //       .map((l) => {
+    //         l.match(/[a-zA-Z-0-9\-_\./]+/gm).forEach((str) => {
+    //           if (str.match(/\//) && str.match(/\.ts$/))
+    //             l = l.replace(str, `<blue>${str}</blue>`);
+    //           else if (str.match(/\//))
+    //             l = l.replace(str, `<cyan>${str}</cyan>`);
+    //         });
+    //         l = l.trim().replace(/^at\s/, '<yellow>at</yellow> ');
+    //         l = l.replace('->', '<yellow>└-></yellow>');
+    //         l = l.replace(/:([0-9]{1,29}:[0-9]{1,29})/, `:<yellow>$1</yellow>`);
+    //         return `<yellow>│</yellow> ${l.trim()}`;
+    //       })
+    //       .join('\n')}`;
+    //   }
+    // }
     if (settings.verbose) {
       return [
         `<red>${value.constructor.name || 'Error'}</red>`,

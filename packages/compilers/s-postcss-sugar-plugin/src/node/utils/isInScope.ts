@@ -22,7 +22,9 @@ export default function isInScope(scope: string): boolean {
   // @ts-ignore
 
   if (
+    // @ts-ignore
     !global._postcssSugarPluginScopeMixinScopesStack ||
+    // @ts-ignore
     !global._postcssSugarPluginScopeMixinScopesStack.length
   )
     return true;

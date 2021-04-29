@@ -26,9 +26,6 @@ const ruleObj: ISDescriptorRule = {
   name: 'Type',
   id: 'type',
   settings: {},
-  message: (resultObj: any): string => {
-    return `This value has to be of type "<yellow>${resultObj.expected.type}</yellow>". Received "<red>${resultObj.received.type}</red>"`;
-  },
   processParams: (params: any) => {
     if (!params?.type && typeof params !== 'string') {
       throw new Error(
@@ -37,8 +34,7 @@ const ruleObj: ISDescriptorRule = {
     }
     return {
       type: params.type ?? params,
-      cast: params.cast ?? true,
-      plop: params.plop
+      cast: params.cast ?? true
     };
   },
   apply: (
@@ -56,7 +52,12 @@ const ruleObj: ISDescriptorRule = {
       value = type.cast(value);
     }
     if (!type.is(value)) {
-      return new Error('Something false');
+      console.log(value);
+      return new Error(
+        `The value must be of type "<yellow>${
+          params.type
+        }</yellow>" but you've passed a value of type "<cyan>${typeof value}</cyan>"`
+      );
     }
     return value;
   }

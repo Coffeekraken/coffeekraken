@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["../../src/js/exports.ts"],
-  "sourcesContent": ["import SHighlightJs from './SHighlightJs';\n\nexport * from './SHighlightJs';\n\nexport default SHighlightJs;\n"],
-  "mappings": ";AAAA;AAEA;AAEA,IAAO,kBAAQ;",
+  "sources": ["../../../../../../src/js/exports.ts"],
+  "sourcesContent": [null],
+  "mappings": ";AAAA;AAEA;AAEA,IAAA,kBAAe;",
   "names": []
 }

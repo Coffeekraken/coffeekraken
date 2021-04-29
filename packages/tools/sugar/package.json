@@ -55,7 +55,7 @@
     "csso": "^4.2.0",
     "custom-event": "^1.0.1",
     "depcheck": "^1.4.0",
-    "dependency-tree": "^8.0.0",
+    "dependency-tree": "^8.1.0",
     "domready": "^1.0.8",
     "download-file": "^0.1.5",
     "downloads-folder": "^3.0.1",

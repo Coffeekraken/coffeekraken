@@ -51,6 +51,7 @@ export interface ISCacheSettings {
   deleteOnExpire: boolean;
   adapter: string;
   parse: Function;
+  clearOnExit: boolean;
   stringify: Function;
 }
 
@@ -117,7 +118,6 @@ class SCache extends __SClass implements ISCache {
    */
   static registerAdapter(adapter: ISCacheAdapter, id?: string): void {
     if (this.registeredAdapters[id || adapter.id]) return;
-    console.log('register', adapter, this.registeredAdapters);
     this.registeredAdapters[id || adapter.id] = adapter;
   }
 
@@ -143,17 +143,39 @@ class SCache extends __SClass implements ISCache {
     super(
       __deepMerge(
         {
-          cache: {}
+          cache: {
+            clearOnExit: false
+          }
         },
         settings
       )
     );
 
+    this.id = id;
+
     if (__isNode()) {
+      // @ts-ignore
       this.constructor.registerAdapter(
         require('../node/adapters/SCacheFsAdapter').default
       );
+
+      // check if we need to clear the cache on exit
+      if (this.cacheSettings.clearOnExit) {
+        const __onProcessExit = require('@coffeekraken/sugar/node/process/onProcessExit')
+          .default;
+        const __parseHtml = require('@coffeekraken/sugar/node/terminal/parseHtml')
+          .default;
+        __onProcessExit(async () => {
+          console.log(
+            __parseHtml(
+              `<yellow>[${this.constructor.name}.${this.id}]</yellow> Clearing the cache`
+            )
+          );
+          await this.clear();
+        });
+      }
     } else {
+      // @ts-ignore
       this.constructor.registerAdapter(__SCacheLsAdapter);
     }
 
@@ -169,8 +191,6 @@ class SCache extends __SClass implements ISCache {
         `The name of an SCache instance can contain only letters like <green>[a-zA-Z0-9_-.]</green> but you've passed "<red>${name}</red>"...`
       );
     }
-
-    this.id = id;
   }
 
   /**

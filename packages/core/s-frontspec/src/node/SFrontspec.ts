@@ -11,6 +11,7 @@ import __path from 'path';
 import __SFrontspecFindParamsInterface from './interface/SFrontspecFindParamsInterface';
 import __SCache from '@coffeekraken/s-cache';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
+import __fs from 'fs';
 
 /**
  * @name                SFrontspec
@@ -43,6 +44,8 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
 export interface ISFrontspecAssetToServe {}
 
 export default class SFrontspec extends __SPromise {
+  static _cachesStack = {};
+
   /**
    * @name            constructor
    * @type            Function
@@ -66,11 +69,20 @@ export default class SFrontspec extends __SPromise {
     );
 
     // init the cache
-    this._cache = new __SCache(
+    const cacheId =
       this.metas.id === 'SFrontspec'
         ? this.metas.id
-        : `SFrontspec-${this.metas.id}`
-    );
+        : `SFrontspec-${this.metas.id}`;
+    if (this.constructor._cachesStack[cacheId]) {
+      this._cache = this.constructor._cachesStack[cacheId];
+    } else {
+      this._cache = new __SCache(cacheId, {
+        cache: {
+          clearOnExit: true
+        }
+      });
+      this.constructor._cachesStack[cacheId] = this._cache;
+    }
   }
 
   /**
@@ -119,20 +131,20 @@ export default class SFrontspec extends __SPromise {
         await this.clearCache();
       }
 
-      // if (findParams.cache && !findParams.clearCache) {
-      //   const cachedValue = await this._cache.get('find-files');
-      //   if (cachedValue) {
-      //     emit('log', {
-      //       value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
-      //     });
-      //     cachedValue.forEach((path) => {
-      //       emit('log', {
-      //         value: `- <cyan>${__path.relative(process.cwd(), path)}</cyan>`
-      //       });
-      //     });
-      //     return resolve(cachedValue);
-      //   }
-      // }
+      if (findParams.cache && !findParams.clearCache) {
+        const cachedValue = await this._cache.get('find-files');
+        if (cachedValue) {
+          emit('log', {
+            value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
+          });
+          cachedValue.forEach((path) => {
+            emit('log', {
+              value: `- <cyan>${__path.relative(process.cwd(), path)}</cyan>`
+            });
+          });
+          return resolve(cachedValue);
+        }
+      }
 
       let files: __SFile[] = [];
       await __wait(1);
@@ -161,17 +173,17 @@ export default class SFrontspec extends __SPromise {
       });
 
       // save in cache if asked
-      // if (findParams.cache) {
-      //   emit('log', {
-      //     value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
-      //   });
-      //   await this._cache.set(
-      //     'find-files',
-      //     files.map((file) => file.path)
-      //   );
-      // }
+      if (findParams.cache) {
+        emit('log', {
+          value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
+        });
+        await this._cache.set(
+          'find-files',
+          files.map((file) => file.path)
+        );
+      }
 
-      resolve(files.map((f) => f.path));
+      resolve(files.map((f) => f.path).filter((f) => __fs.existsSync(f)));
     });
   }
 
@@ -199,8 +211,6 @@ export default class SFrontspec extends __SPromise {
       const filesPaths = await filesPromise;
 
       let jsons = {};
-
-      console.log('FIFIF', filesPaths);
 
       // loop on all files
       filesPaths.forEach((filePath) => {

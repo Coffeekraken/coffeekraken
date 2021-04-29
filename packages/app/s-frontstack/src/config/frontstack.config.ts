@@ -1,4 +1,8 @@
 export default {
+  receipe: 'default',
+
+  exclude: [],
+
   receipes: {
     default: {
       title: 'Default',
@@ -10,6 +14,17 @@ export default {
         ts: '[config.frontstack.actions.ts]',
         svelte: '[config.frontstack.actions.svelte]',
         docmap: '[config.frontstack.actions.docmap]'
+      }
+    },
+    svelteComponent: {
+      title: 'Svelte webcomponent',
+      description: 'Svelte webcomponent receipe ',
+      actions: {
+        // frontendServer: '[config.frontstack.actions.frontendServer]',
+        js: '[config.frontstack.actions.js]',
+        ts: '[config.frontstack.actions.ts]',
+        svelte: '[config.frontstack.actions.svelte]'
+        // docmap: '[config.frontstack.actions.docmap]'
       }
     },
 

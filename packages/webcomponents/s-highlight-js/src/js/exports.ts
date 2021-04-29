@@ -1,5 +1,5 @@
-// import SHighlightJs from './SHighlightJs';
+import SHighlightJs from './SHighlightJs';
 
-// export * from './SHighlightJs';
+export * from './SHighlightJs';
 
-// export default SHighlightJs;
+export default SHighlightJs;

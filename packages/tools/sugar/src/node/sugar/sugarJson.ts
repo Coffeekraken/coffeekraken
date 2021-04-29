@@ -1,4 +1,4 @@
-import __packageRoot from '../../shared/path/packageRoot';
+import __packageRoot from '../path/packageRoot';
 import __glob from 'glob-all';
 import __childProcess from 'child_process';
 import __md5 from '../../shared/crypt/md5';

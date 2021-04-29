@@ -23,7 +23,13 @@ class SFrontstackStartInterface extends __SInterface {
       type: 'String',
       alias: 'r',
       values: Object.keys(__sugarConfig('frontstack.receipes')),
-      default: 'default'
+      default: __sugarConfig('frontstack.receipe')
+    },
+    exclude: {
+      type: 'Array<String>',
+      alias: 'e',
+      values: Object.keys(__sugarConfig('frontstack.actions')),
+      default: __sugarConfig('frontstack.exclude')
     }
   };
 }

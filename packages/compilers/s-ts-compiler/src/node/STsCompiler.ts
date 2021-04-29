@@ -30,6 +30,7 @@ import __path from 'path';
 import __STsCompilerParamsInterface from './interface/STsCompilerInterface';
 import __moveFile from 'move-file';
 import __childProcess from 'child_process';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 
 export interface ISTsCompilerCtorSettings {
   tsCompiler: Partial<ISTsCompilerSettings>;
@@ -405,7 +406,7 @@ class STsCompiler extends __SCompiler {
             params
           };
 
-          const compiledFilesPaths: string[] = [];
+          const compiledFilesByPath: Record<string, any> = {};
 
           try {
             const pro = __spawn(
@@ -443,6 +444,8 @@ class STsCompiler extends __SCompiler {
                 return [value, metas];
               },
               filter: (value, metas) => {
+                console.log('CCC', metas.event, value);
+
                 if (
                   value &&
                   value.value &&
@@ -453,13 +456,14 @@ class STsCompiler extends __SCompiler {
                     .split('TSFILE:')
                     .map((f) => f.trim());
                   filesPaths.forEach((filePath) => {
-                    const outPath = this._handleCompiledFile(
+                    const outFile = this._handleCompiledFile(
                       filePath,
                       tsconfigJson,
+                      params,
                       pro.emit
                     );
-                    if (outPath && compiledFilesPaths.indexOf(outPath) === -1) {
-                      compiledFilesPaths.push(outPath);
+                    if (outFile && !compiledFilesByPath[filePath]) {
+                      compiledFilesByPath[filePath] = outFile;
                     }
                   });
                   return false;
@@ -484,20 +488,15 @@ class STsCompiler extends __SCompiler {
               if (value.code === 0) {
                 resultObj.files = [];
 
-                compiledFilesPaths.forEach((file) => {
-                  if (!file || !file.trim()) return;
-                  resultObj.files.push(__SFile.new(file).toObject());
-
-                  if (!params.save) {
-                    try {
-                      __fs.unlinkSync(file);
-                    } catch (e) {}
-                  }
+                Object.keys(compiledFilesByPath).forEach((filePath) => {
+                  if (!filePath) return;
+                  const file = compiledFilesByPath[filePath];
+                  resultObj.files.push(file);
                 });
 
                 pro.emit('log', {
-                  value: `<yellow>${compiledFilesPaths.length}</yellow> File${
-                    compiledFilesPaths.length > 1 ? 's' : ''
+                  value: `<yellow>${resultObj.files.length}</yellow> File${
+                    resultObj.files.length > 1 ? 's' : ''
                   } compiled`
                 });
 
@@ -521,11 +520,13 @@ class STsCompiler extends __SCompiler {
 
               // pool.cancel();
 
-              // delete the temp directory if needed
-              __removeSync(tsconfigJson.compilerOptions.outDir);
+              __onProcessExit(() => {
+                // delete the temp directory if needed
+                __removeSync(tsconfigJson.compilerOptions.outDir);
 
-              // delete the config file
-              __removeSync(tmpConfigPath);
+                // delete the config file
+                __removeSync(tmpConfigPath);
+              });
             });
 
             pro.emit('log', {
@@ -558,7 +559,7 @@ class STsCompiler extends __SCompiler {
     );
   }
 
-  _handleCompiledFile(file, tsconfig, emit) {
+  _handleCompiledFile(file, tsconfig, params, emit) {
     if (!file) return;
     if (typeof file === 'string') {
       file = new __SFile(file, {
@@ -567,9 +568,6 @@ class STsCompiler extends __SCompiler {
     }
 
     const relPath = __path.relative(tsconfig.compilerOptions.outDir, file.path);
-
-    if (this._currentlyHandledFiles[relPath]) return;
-    this._currentlyHandledFiles[relPath] = true;
 
     const inPath = __path.resolve(tsconfig.compilerOptions.outDir, relPath);
     let outPath = __path.resolve(tsconfig.compilerOptions.rootDir, relPath);
@@ -581,17 +579,17 @@ class STsCompiler extends __SCompiler {
       );
     }
 
-    // console.log(__path.relative(tsconfig.compilerOptions.outDir, file.path));
-
     if (emit) {
-      // emit('log', {
-      //   // temp: true,
-      //   value: `<yellow>[compile]</yellow> Compiling file "<cyan>${__path.relative(
-      //     tsconfig.compilerOptions.outDir,
-      //     file.path
-      //   )}</cyan>"`
-      // });
+      emit('log', {
+        // temp: true,
+        value: `<yellow>[compile]</yellow> Compiling file "<cyan>${__path.relative(
+          tsconfig.compilerOptions.outDir,
+          file.path
+        )}</cyan>"`
+      });
     }
+
+    let finalFile;
 
     if (outPath.match(/\.ts(x)?$/) && __fs.existsSync(outPath)) {
       if (emit) {
@@ -599,30 +597,31 @@ class STsCompiler extends __SCompiler {
           value: `<yellow>[warning]</yellow> The output destination of the compiled file "<cyan>${outPath}</cyan>" is the same as the source file and override it... This file is not saved then.`
         });
       }
+      return;
     } else {
       try {
-        try {
-          __fs.unlinkSync(outPath);
-        } catch (e) {}
-        __fs.renameSync(inPath, outPath);
-        if (outPath.match(/\.cli\.js$/) && emit) {
-          emit('log', {
-            temp: true,
-            value: `<yellow>[compile]</yellow> Adding execution permission to file "<cyan>${__path.relative(
-              tsconfig.compilerOptions.outDir,
-              file.path
-            )}</cyan>"`
-          });
-          __childProcess.execSync(`chmod +x ${outPath}`);
+        if (params.save) {
+          __fs.renameSync(inPath, outPath);
+          if (outPath.match(/\.cli\.js$/) && emit) {
+            emit('log', {
+              temp: true,
+              value: `<yellow>[compile]</yellow> Adding execution permission to file "<cyan>${__path.relative(
+                tsconfig.compilerOptions.outDir,
+                file.path
+              )}</cyan>"`
+            });
+            __childProcess.execSync(`chmod +x ${outPath}`);
+          }
+          finalFile = __SFile.new(outPath);
+        } else {
+          finalFile = __SFile.new(inPath);
         }
       } catch (e) {
-        delete this._currentlyHandledFiles[relPath];
+        return;
       }
     }
 
-    delete this._currentlyHandledFiles[relPath];
-
-    return outPath;
+    return finalFile.toObject();
   }
 
   /**

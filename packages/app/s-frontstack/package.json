@@ -3,7 +3,9 @@
   "version": "2.0.0",
   "description": "",
   "main": "./src/node/exports.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "sugar-dev frontstack.start"
+  },
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {

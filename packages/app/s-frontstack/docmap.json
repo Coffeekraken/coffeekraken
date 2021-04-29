@@ -1,0 +1,19 @@
+{
+    "s-frontstack.SFrontstackStartInterface": {
+        "name": "SFrontstackStartInterface",
+        "type": "Class",
+        "description": "This class represent the interface that describe parameters of the SFrontstackStartProcess",
+        "namespace": "s-frontstack",
+        "status": "wip",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://olivierbossel.com"
+        },
+        "filename": "SFrontstackStartInterface.js",
+        "extension": "js",
+        "relPath": "src/node/start/interface/SFrontstackStartInterface.js",
+        "children": {}
+    }
+}

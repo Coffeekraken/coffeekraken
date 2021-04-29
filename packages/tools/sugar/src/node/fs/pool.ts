@@ -8,6 +8,7 @@ import __matchGlob from '../glob/matchGlob';
 import __hotkey from '../keyboard/hotkey';
 import __path from 'path';
 import __fs from 'fs';
+// import __dependencyList from './dependencyList';
 
 /**
  * @name                pool
@@ -62,7 +63,8 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           watch: false,
           exclude: [],
           ignored: ['**/node_modules/**/*', '**/.git/**/*'],
-          ignoreInitial: true
+          ignoreInitial: true,
+          watchDependencies: true
           // usePolling: true,
           // useFsEvents: true,
           // persistent: true
@@ -87,55 +89,23 @@ function pool(input, settings?: Partial<IPoolSettings>) {
       // using chokidar to watch files
       const watcher = __chokidar.watch(expandedGlobs, {
         ...set,
-        // persistent: true,
-        // interval: 1,
-        // binaryInterval: 1,
-        // awaitWriteFinish: true,
-        // usePolling: true,
         ignored: [...set.ignored, ...(set.exclude ?? [])]
       });
 
       watcher
         .on('add', (path) => {
-          // if (event !== 'created') return;
-
-          // console.log(path);
-
           if (filesStack[path] || !__fs.existsSync(`${set.cwd}/${path}`))
             return;
-
-          // if (
-          //   !__matchGlob(path, input, {
-          //     cwd: set.cwd
-          //   })
-          // )
-          //   return;
-
-          // console.log(path);
-          // iii++;
-          // console.log(iii);
-
           // make sure it's not exists already
           if (!filesStack[path]) {
-            // console.log('NEW', path);
             if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
             else filesStack[path] = path;
           }
           emit('add', filesStack[path]);
           emit('file', filesStack[path]);
-
-          // iii++;
-          // console.log('RAW', event, iii);
         })
         .on('change', (path) => {
           if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
-
-          // if (
-          //   !__matchGlob(path, input, {
-          //     cwd: set.cwd
-          //   })
-          // )
-          //   return;
           if (!filesStack[path]) {
             if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
             else filesStack[path] = path;
@@ -144,12 +114,6 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           emit('file', filesStack[path]);
         })
         .on('unlink', (path) => {
-          // if (
-          //   !__matchGlob(path, input, {
-          //     cwd: set.cwd
-          //   })
-          // )
-          //   return;
           // @ts-ignore
           if (filesStack[path] && filesStack[path].path) {
             // @ts-ignore
@@ -159,11 +123,6 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           }
           delete filesStack[path];
         })
-        // .on('raw', (event, path, details) => {
-        //   // console.log('EEE', event, path);
-        //   if (event !== 'created') return;
-
-        // })
         .on('ready', () => {
           const files = watcher.getWatched();
           const filesPaths: string[] = [];
@@ -187,6 +146,22 @@ function pool(input, settings?: Partial<IPoolSettings>) {
               // save file in file stack
               filesStack[filePath] = finalFiles[finalFiles.length - 1];
             });
+
+          // filesPaths.forEach(async (filePath) => {
+          //   // watch dependencies
+          //   if (set.watchDependencies) {
+          //     console.log('watch ', filePath);
+          //     const depListPromise = __dependencyList(filePath, {
+          //       watch: true,
+          //       exclude: ['**/node_modules/**']
+          //     });
+          //     depListPromise.on('update', ({ path, list }) => {
+          //       console.log('UP', path, list);
+          //     });
+          //     // console.log(await depListPromise);
+          //   }
+          // });
+
           emit('ready', finalFiles);
           emit('files', finalFiles);
           if (!set.watch) {

@@ -1,19 +1,5 @@
 /* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
-import {
-  SvelteElement,
-  add_location,
-  append_dev,
-  attribute_to_object,
-  detach_dev,
-  dispatch_dev,
-  element,
-  globals,
-  init,
-  insert_dev,
-  noop,
-  safe_not_equal,
-  validate_slots
-} from "svelte/internal";
+import {SvelteElement, add_location, append_dev, attribute_to_object, detach_dev, dispatch_dev, element, globals, init, insert_dev, noop, safe_not_equal, validate_slots} from "svelte/internal";
 const {console: console_1} = globals;
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -28,8 +14,8 @@ function create_fragment(ctx) {
       h1 = element("h1");
       h1.textContent = "Hello worlc";
       this.c = noop;
-      add_location(h1, file, 34, 1, 555);
-      add_location(div, file, 33, 0, 548);
+      add_location(h1, file, 34, 1, 568);
+      add_location(div, file, 33, 0, 561);
     },
     l: function claim(nodes) {
       throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -64,7 +50,7 @@ function instance($$self, $$props, $$invalidate) {
       super({svelteComponent: {}});
     }
   }
-  console.log("fff");
+  console.log("Plfffffp");
   new MyCoolComponent();
   const writable_props = [];
   Object.keys($$props).forEach((key) => {

@@ -122,8 +122,8 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
   }
 
   clearLast() {
-    __terminalKit.previousLine();
-    __terminalKit.eraseLine();
+    // __terminalKit.previousLine();
+    // __terminalKit.eraseLine();
   }
 
   clear() {

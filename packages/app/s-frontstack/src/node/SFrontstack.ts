@@ -39,6 +39,7 @@ export interface ISFrontstackReceipe {
 
 export interface ISFrontstackStartParams {
   receipe: string;
+  exclude: string[];
 }
 
 export default class SFrontstack extends __SClass {
@@ -94,7 +95,8 @@ export default class SFrontstack extends __SClass {
   start(params: Partial<ISFrontstackStartParams>) {
     return new __SPromise(
       ({ resolve, reject, emit }) => {
-        const receipesObj = __sugarConfig('frontstack.receipes');
+        const frontstackConfig = __sugarConfig('frontstack');
+        const receipesObj = frontstackConfig['receipes'];
 
         const finalParams: ISFrontstackStartParams = this.applyInterface(
           'startParams',
@@ -116,10 +118,15 @@ export default class SFrontstack extends __SClass {
         }
 
         emit('log', {
+          clear: true,
           nude: true,
           marginTop: 2,
           marginBottom: 2,
           value: __sugarBanner()
+        });
+
+        emit('log', {
+          value: `Starting frontstack process using "<yellow>${finalParams.receipe}</yellow>" receipe`
         });
 
         // get the receipe object and treat it
@@ -150,10 +157,19 @@ export default class SFrontstack extends __SClass {
 
         // instanciate the process manager
         const processManager = new __SProcessManager();
-
         // loop on each actions for this receipe
         if (receipeObj.actions) {
           Object.keys(receipeObj.actions).forEach((actionName) => {
+            if (
+              finalParams.exclude &&
+              finalParams.exclude.indexOf(actionName) !== -1
+            ) {
+              emit('log', {
+                value: `Excluding the action "<yellow>${actionName}</yellow>"`
+              });
+              return;
+            }
+
             // @ts-ignore
             const actionObj = receipeObj.actions[actionName];
             const actionId = actionObj.id ?? actionName;

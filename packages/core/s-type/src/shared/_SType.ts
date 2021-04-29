@@ -297,6 +297,8 @@ class SType implements ISType {
         const loopOn =
           typeOf === 'Object' ? Object.keys(value) : Array.from(value.keys());
 
+        if (!loopOn.length) return true;
+
         // loop on all the keys found
         for (let k = 0; k < loopOn.length; k++) {
           for (let j = 0; j < typeObj.of.length; j++) {
@@ -305,6 +307,7 @@ class SType implements ISType {
             const v: any = typeOf === 'Map' ? value.get(idx) : value[idx];
             // validate the value if needed
             const ofRes = this._isType(v, type, settings);
+
             if (ofRes !== true) {
               issues[typeObj.type] = {
                 expected: {

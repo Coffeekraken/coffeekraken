@@ -5,6 +5,7 @@
   "homepage": "https://coffeekraken.io",
   "main": "dist/js/exports.js",
   "scripts": {
+    "dev": "sugar-dev frontstack.start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

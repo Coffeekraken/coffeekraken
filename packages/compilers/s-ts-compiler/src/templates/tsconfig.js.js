@@ -11,7 +11,7 @@ if (!Array.isArray(jsInput)) jsInput = [jsInput];
 jsInput = jsInput.map((l) => l.replace(/\.js$/, '.ts'));
 
 module.exports = __deepMerge(__tsconfig, {
-  _include: [`${__packageRoot()}/packages/*/*/src/js/**/*.ts`, ...jsInput],
+  include: [`${__packageRoot()}/packages/*/*/src/js/**/*.ts`, ...jsInput],
   compilerOptions: {
     target: 'es6',
     module: 'esnext',

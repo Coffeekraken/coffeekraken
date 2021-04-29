@@ -2,7 +2,7 @@
 
 <svelte:options tag="s-highlight-js" />
 
-<script type="text/javascript">
+<script type="text/ts">
 
     import hljs from 'highlight.js';
     import javascript from 'highlight.js/lib/languages/javascript';

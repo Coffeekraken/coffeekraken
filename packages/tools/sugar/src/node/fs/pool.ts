@@ -163,7 +163,9 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           // });
 
           emit('ready', finalFiles);
-          emit('files', finalFiles);
+          if (finalFiles.length) {
+            emit('files', finalFiles);
+          }
           if (!set.watch) {
             watcher.close();
             resolve(finalFiles);

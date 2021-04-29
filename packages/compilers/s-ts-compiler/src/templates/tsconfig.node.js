@@ -7,7 +7,7 @@ const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot')
   .default;
 
 module.exports = __deepMerge(__tsconfig, {
-  _include: [
+  include: [
     `${__packageRoot()}/packages/*/*/src/cli/**/*.ts`,
     `${__packageRoot()}/packages/*/*/src/node/**/*.ts`,
     `${__packageRoot()}/packages/*/*/src/config/**/*.ts`,

@@ -237,13 +237,6 @@ class STsCompiler extends __SCompiler {
 
         const colors = __availableColors();
 
-        let areAllTsconfigInput = true;
-        for (let i = 0; i < input.length; i++) {
-          if (!input[i].match(/tsconfig\.[a-zA-Z0-9]+\.js(on)?$/)) {
-            areAllTsconfigInput = false;
-          }
-        }
-
         // clear
         if (params.clear && params.outDir) {
           emit('log', {
@@ -256,139 +249,309 @@ class STsCompiler extends __SCompiler {
           __removeSync(outDirPath);
         }
 
-        const poolStacks = {};
+        // loop on inputs
+        input.forEach(async (inputPath, i) => {
+          let tsconfigJson = {},
+            inputPathToDisplay,
+            inputPathHash = __md5.encrypt(inputPath);
 
-        if (!areAllTsconfigInput) {
-          let tsconfig = {};
+          const isTsConfigInput = inputPath.match(
+            /.*\/tsconfig(\..*)?\.js(on)?$/
+          );
 
-          // search for config
-          const potentialRootPath = `${__packageRoot()}/tsconfig.json`;
-          if (__fs.existsSync(potentialRootPath)) {
-            tsconfig = require(potentialRootPath);
+          if (!isTsConfigInput && inputPath.match(/\.tsx?$/)) {
+            if (!config) {
+              throw new Error(
+                `Sorry but to compile the passed "<cyan>${inputPath}</cyan>" input, you MUST specify a valid config to use like "js", "node", "shared", or a full tsconfig file path`
+              );
+            }
+            inputPathToDisplay = __getFilename(inputPath);
+            tsconfigJson = config;
+          } else if (isTsConfigInput) {
+            inputPathToDisplay = __getFilename(inputPath).replace(
+              /\.js(on)?$/,
+              ''
+            );
+
+            if (inputPath.match(/\.js$/)) {
+              tsconfigJson = require(inputPath);
+            } else {
+              const jsonFile = new __SFile(inputPath);
+              tsconfigJson = jsonFile.content;
+            }
           } else {
-            tsconfig = require(`${__dirname}/../templates/tsconfig.js`);
+            throw new Error(
+              'Sorry but the input "<yellow>${input}</yellow> seems to be invalid...'
+            );
           }
 
-          poolStacks.default = {
-            ...tsconfig,
-            include: [...(tsconfig.include ?? []), ...input]
-          };
-        } else {
-          input.forEach((tsConfigPath) => {
-            const configJson = require(tsConfigPath);
-            const stackNameMatch = tsConfigPath.match(
-              /tsconfig\.([a-zA-Z0-9]+)\.js(on)?$/
+          // extends
+          if (tsconfigJson.extends) {
+            const extendsPath = __path.resolve(
+              __folderPath(inputPath),
+              tsconfigJson.extends
             );
-            const stackName = stackNameMatch ? stackNameMatch[1] : 'default';
-            poolStacks[stackName] = configJson;
-          });
-        }
+            let extendsJson = {};
+            // reading the file
+            if (extendsPath.match(/\.json$/)) {
+              const extendsFile = new __SFile(extendsPath);
+              extendsJson = extendsFile.content;
+            } else if (extendsPath.match(/\.js$/)) {
+              extendsJson = require(extendsPath);
+            } else {
+              emit('warn', {
+                value: `<bg${__upperFirst(this.metas.color)}><black> ${
+                  this.metas.id
+                } </black></bg${__upperFirst(
+                  this.metas.color
+                )}> THe tsconfig file "<cyan>${inputPath}</cyan>" extends property "<yellow>${
+                  tsconfigJson.extends
+                }</yellow>" seems to be incorrect...`
+              });
+            }
+            delete tsconfigJson.extends;
+            // extends the config
+            tsconfigJson = __deepMerge(extendsJson, tsconfigJson);
+          }
 
-        Object.keys(poolStacks).forEach((stackName) => {
-          const tsconfig = poolStacks[stackName];
-          const pool = __fsPool(tsconfig.include, {
-            watch: true
-          });
+          // include (only for non tsconfig input)
+          if (!isTsConfigInput) {
+            tsconfigJson.include = [inputPath];
+          } else {
+            if (!tsconfigJson.include && tsconfigJson._include) {
+              tsconfigJson.include = tsconfigJson._include;
+            }
+          }
+          delete tsconfigJson._include;
+
+          // make sure includes are absolute
+          if (tsconfigJson.include) {
+            tsconfigJson.include = tsconfigJson.include.map((path) => {
+              if (__path.isAbsolute(path)) return path;
+              if (isTsConfigInput) {
+                return __path.resolve(__folderPath(inputPath), path);
+              } else {
+                return __path.resolve(path);
+              }
+            });
+          }
+
+          // exclude
+          if (!tsconfigJson.exclude && tsconfigJson._exclude) {
+            tsconfigJson.exclude = tsconfigJson._exclude;
+          }
+          delete tsconfigJson._exclude;
+
+          // rootDir
+          if (params.rootDir) {
+            if (!__path.isAbsolute(params.rootDir)) {
+              throw new Error(
+                `Sorry but the parameter "<yellow>rootDir</yellow>" MUST be an absolute path. You've passed "<cyan>${params.rootDir}</cyan>"`
+              );
+            }
+            tsconfigJson.compilerOptions.rootDir = params.rootDir;
+          }
+
+          // outDir
+          if (params.outDir) {
+            tsconfigJson.compilerOptions.outDir = __path.resolve(
+              params.rootDir || process.cwd(),
+              params.outDir
+            );
+            delete tsconfigJson.compilerOptions.rootDir;
+          }
+
+          // compilerOptions
+          if (!tsconfigJson.compilerOptions) tsconfigJson.compilerOptions = {};
+
+          if (params.compilerOptions) {
+            tsconfigJson.compilerOptions = __deepMerge(
+              tsconfigJson.compilerOptions || {},
+              params.compilerOptions
+            );
+          }
 
           // map
           if (params.map === false) {
-            delete tsconfig.compilerOptions.sourceMap;
-            delete tsconfig.compilerOptions.inlineSourceMap;
+            delete tsconfigJson.compilerOptions.sourceMap;
+            delete tsconfigJson.compilerOptions.inlineSourceMap;
           } else if (params.map === true) {
-            tsconfig.compilerOptions.sourceMap = true;
-            delete tsconfig.compilerOptions.inlineSourceMap;
+            tsconfigJson.compilerOptions.sourceMap = true;
+            delete tsconfigJson.compilerOptions.inlineSourceMap;
           } else if (params.map === 'inline') {
-            delete tsconfig.compilerOptions.sourceMap;
-            tsconfig.compilerOptions.inlineSourceMap = true;
+            delete tsconfigJson.compilerOptions.sourceMap;
+            tsconfigJson.compilerOptions.inlineSourceMap = true;
           }
 
-          pool.on(params.watch ? 'update' : 'files', async (files, m) => {
-            if (!Array.isArray(files)) files = [files];
+          tsconfigJson.compilerOptions.outDir = `${__tmpDir()}/STsCompiler/${Date.now()}-${inputPathHash}`;
 
-            const duration = new __SDuration();
-            const resultFiles = [];
+          const tmpConfigPath = `${__tmpDir()}/STsCompiler/${__getFilename(
+            inputPath
+          )}.${__md5.encrypt(inputPath)}.json`;
 
-            files.forEach((file) => {
-              emit('log', {
-                value: `<yellow>[compile]</yellow> File "<cyan>${file.relPath}</cyan>"`
-              });
+          // writing the tsconfig file
+          __ensureDirSync(__folderPath(tmpConfigPath));
+          __fs.writeFileSync(
+            tmpConfigPath,
+            JSON.stringify(tsconfigJson, null, 4)
+          );
 
-              let result = __typescript.transpileModule(file.content, tsconfig);
+          // // build command line
+          // const commandLineArray: string[] = [];
+          // commandLineArray.push(`-p ${tmpConfigPath}`);
+          // if (params.watch) commandLineArray.push('--watch');
 
-              if (!params.watch) {
-                resultFiles.push({
-                  path: file.path,
-                  relPath: file.relPath,
-                  js: result.outputText,
-                  map: result.sourceMapText
-                });
-              }
+          // setup resultObj
+          const resultObj = {
+            tsconfig: tsconfigJson,
+            params
+          };
 
-              if (params.save) {
-                let outPath;
-                if (params.outDir) {
-                  outPath = __path.resolve(
-                    `${params.outDir}`,
-                    __path.relative(params.inDir, file.path)
-                  );
-                } else {
-                  outPath = file.path.replace(/\.ts(x)?$/, '.js');
-                }
+          const compiledFilesByPath: Record<string, any> = {};
 
-                emit('log', {
-                  value: `<green>[save]</green> File "<cyan>${
-                    file.relPath
-                  }</cyan>" under "<magenta>${__path.relative(
-                    __packageRoot(),
-                    outPath
-                  )}</magenta>"`
-                });
-                __fs.writeFileSync(outPath, result.outputText);
+          let result = __typescript.transpileModule(source, tsconfigJson);
 
-                if (result.sourceMapText) {
-                  emit('log', {
-                    value: `<green>[save]</green> Map "<cyan>${
-                      file.relPath
-                    }</cyan>" under "<magenta>${__path.relative(
-                      __packageRoot(),
-                      outPath
-                    )}.map</magenta>"`
-                  });
-                  __fs.writeFileSync(`${outPath}.map`, result.sourceMapText);
-                }
-              }
+          try {
+            // const pro = __spawn(
+            //   `tsc ${commandLineArray.join(' ')} --listEmittedFiles`,
+            //   [],
+            //   {
+            //     cwd: params.rootDir || process.cwd()
+            //   }
+            // );
+
+            // pipeFrom(pro, {
+            //   processor: (value, metas) => {
+            //     let txtValue;
+            //     if (value.value && typeof value.value === 'string')
+            //       txtValue = value.value;
+            //     else if (typeof value === 'string') txtValue = value;
+
+            //     if (txtValue) {
+            //       txtValue = txtValue.replace(
+            //         /[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\s[AP]M\s-\s/,
+            //         ''
+            //       );
+            //     }
+
+            //     if (
+            //       txtValue &&
+            //       txtValue.match(/No inputs were found in config file/g)
+            //     ) {
+            //       if (value.value) value.value = `No file found...`;
+            //       else value = 'No file found...';
+            //     } else if (txtValue) {
+            //       if (value.value) value.value = txtValue;
+            //       else value = txtValue;
+            //     }
+            //     return [value, metas];
+            //   },
+            //   filter: (value, metas) => {
+            //     console.log('CCC', metas.event, value);
+
+            //     if (
+            //       value &&
+            //       value.value &&
+            //       typeof value.value === 'string' &&
+            //       value.value.match(/TSFILE:\s.*/)
+            //     ) {
+            //       const filesPaths = value.value
+            //         .split('TSFILE:')
+            //         .map((f) => f.trim());
+            //       filesPaths.forEach((filePath) => {
+            //         const outFile = this._handleCompiledFile(
+            //           filePath,
+            //           tsconfigJson,
+            //           params,
+            //           pro.emit
+            //         );
+            //         if (outFile && !compiledFilesByPath[filePath]) {
+            //           compiledFilesByPath[filePath] = outFile;
+            //         }
+            //       });
+            //       return false;
+            //     }
+            //     if (!metas.event.match(/^close/)) return true;
+            //     if (
+            //       value.stdout &&
+            //       value.stdout
+            //         .join(' ')
+            //         .match(/No inputs were found in config file/g)
+            //     )
+            //       return false;
+            //     return true;
+            //   },
+            //   stripAnsi: true,
+            //   prefixValue: `<${
+            //     colors[i] || 'yellow'
+            //   }>[${inputPathToDisplay}]</${colors[i] || 'yellow'}> `
+            // });
+
+            // pro.on('close', async (value) => {
+            //   if (value.code === 0) {
+            //     resultObj.files = [];
+
+            //     Object.keys(compiledFilesByPath).forEach((filePath) => {
+            //       if (!filePath) return;
+            //       const file = compiledFilesByPath[filePath];
+            //       resultObj.files.push(file);
+            //     });
+
+            //     pro.emit('log', {
+            //       value: `<yellow>${resultObj.files.length}</yellow> File${
+            //         resultObj.files.length > 1 ? 's' : ''
+            //       } compiled`
+            //     });
+
+            //     pro.emit('log', {
+            //       value: `Compilation <green>successfull</green> in <yellow>${value.formatedDuration}</yellow>`
+            //     });
+
+            //     // resolve the promise
+            //     resolve({
+            //       ...resultObj,
+            //       ...duration.end()
+            //     });
+            //   } else {
+            //     // reject the promise
+            //     reject({
+            //       ...resultObj,
+            //       error: value.stderr.join('\n'),
+            //       ...duration.end()
+            //     });
+            //   }
+
+            //   // pool.cancel();
+
+            //   __onProcessExit(() => {
+            //     // delete the temp directory if needed
+            //     __removeSync(tsconfigJson.compilerOptions.outDir);
+
+            //     // delete the config file
+            //     __removeSync(tmpConfigPath);
+            //   });
+            // });
+
+            pro.emit('log', {
+              value: `Starting compilation process`
             });
+          } catch (e) {
+            // pool.cancel();
 
-            if (!params.watch) {
-              emit('log', {
-                value: `<yellow>${files.length}</yellow> File${
-                  files.length > 1 ? 's' : ''
-                } compiled`
-              });
+            // delete the temp directory if needed
+            __removeSync(tsconfigJson.compilerOptions.outDir);
 
-              emit('log', {
-                value: `Compilation <green>successfull</green> in <yellow>${
-                  duration.end().formatedDuration
-                }</yellow>`
-              });
+            // delete the config file
+            __removeSync(tmpConfigPath);
 
-              resolve({
-                files: resultFiles,
-                ...duration.end()
-              });
-            }
-          });
+            reject({
+              ...resultObj,
+              error: e,
+              ...duration.end()
+            });
+          }
+          // });
         });
-
-        emit('log', {
-          value: 'Starting <cyan>TS</cyan> file(s) compilation process...'
-        });
-
-        if (params.watch) {
-          emit('log', {
-            value: `<blue>[watch]</blue> Watching for changes...`
-          });
-        }
       },
       {
         eventEmitter: {

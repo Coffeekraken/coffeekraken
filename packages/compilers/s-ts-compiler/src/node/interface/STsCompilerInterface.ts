@@ -31,11 +31,21 @@ class STsCompilerInterface extends __SInterface {
       alias: 'i',
       default: __sugarConfig('ts.compile.input')
     },
-    outDir: {
+    inDir: {
       type: 'String',
       path: {
         absolute: true,
         exists: true
+      },
+      alias: 'o',
+      default: __sugarConfig('ts.compile.inDir')
+    },
+    outDir: {
+      type: 'String',
+      path: {
+        absolute: true,
+        exists: true,
+        create: true
       },
       alias: 'o',
       default: __sugarConfig('ts.compile.outDir')

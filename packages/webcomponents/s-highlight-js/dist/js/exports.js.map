@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "sources": ["../../../../../../src/js/exports.ts"],
+  "sources": ["../../src/js/module.ts"],
   "sourcesContent": [null],
   "mappings": ";AAAA;AAEA;AAEA,IAAA,kBAAe;",
   "names": []

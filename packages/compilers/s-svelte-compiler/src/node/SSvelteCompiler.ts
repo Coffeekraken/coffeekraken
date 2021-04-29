@@ -147,7 +147,7 @@ class SSvelteCompiler extends __SCompiler {
           : [params.input];
 
         emit('log', {
-          value: 'Starting <red>Svelte</red> file(s) compilation...'
+          value: 'Starting <red>Svelte</red> file(s) compilation process...'
         });
 
         if (params.watch) {
@@ -237,7 +237,7 @@ class SSvelteCompiler extends __SCompiler {
                   __removeSync(tmpTsFilePath);
 
                   return {
-                    code: res.files[0].content
+                    code: res.files[0].js
                   };
                 }
               },

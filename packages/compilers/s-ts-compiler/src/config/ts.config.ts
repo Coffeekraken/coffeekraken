@@ -53,6 +53,19 @@ export default {
     ],
 
     /**
+     * @name              inDir
+     * @namespace         config.js.compile
+     * @type              String
+     * @default           [config.storage.srcDir]/js
+     *
+     * Specify the destination folder from where to search for js files to compile
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    inDir: '[config.storage.srcDir]/js',
+
+    /**
      * @name              outDir
      * @namespace         config.ts.compile
      * @type              String

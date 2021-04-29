@@ -202,7 +202,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           lastCompiledFilePath;
 
         emit('log', {
-          value: 'Starting <yellow>JS</yellow> file(s) compilation...'
+          value: 'Starting <yellow>JS</yellow> file(s) compilation process...'
         });
 
         // prod

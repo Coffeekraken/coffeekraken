@@ -209,7 +209,6 @@ export default class SFrontspec extends __SPromise {
       const filesPromise = this.find(params);
       pipe(filesPromise);
       const filesPaths = await filesPromise;
-
       let jsons = {};
 
       // loop on all files

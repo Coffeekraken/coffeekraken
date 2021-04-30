@@ -1,5 +1,5 @@
-import SHighlightJs from './SHighlightJs';
+import index from './index';
 
-export * from './SHighlightJs';
+export * from './index';
 
-export default SHighlightJs;
+export default index;

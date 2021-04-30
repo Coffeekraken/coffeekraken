@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "names": [],
+    "sources": [
+        "index.svelte"
+    ],
+    "sourcesContent": [
+        "\n\n<svelte:options tag=\"s-highlight-js\" />\n\n<script type=\"text/ts\">import hljs from 'highlight.js';\nimport javascript from 'highlight.js/lib/languages/javascript';\nhljs.registerLanguage('javascript', javascript);\nimport __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';\nclass MyCoolComponent extends __SSvelteComponent {\n    constructor() {\n        super({\n            svelteComponent: {}\n        });\n    }\n}\nconsole.log('fff');\nnew MyCoolComponent();\n</script>\n\n<style>\n\th1 {\n\t\tcolor: blue;\n\t\tbackground: magenta;\n\t}\n</style>\n\n<div>\n\t<h1>Hello worlc</h1>\n</div>"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;OAI8B,IAAI,MAAM,cAAc;OAC/C,UAAU,MAAM,uCAAuC;OAEvD,kBAAkB,MAAM,gDAAgD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAD/E,IAAI,CAAC,gBAAgB,CAAC,YAAY,EAAE,UAAU;;OAExC,eAAe,SAAS,kBAAkB;EAC5C,WAAW;GACP,KAAK,GACD,eAAe;;;;CAI3B,OAAO,CAAC,GAAG,CAAC,KAAK;KACb,eAAe;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+}

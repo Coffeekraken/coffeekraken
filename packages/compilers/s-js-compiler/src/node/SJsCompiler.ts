@@ -7,6 +7,8 @@ import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableCol
 import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
 import __dependencyTree from 'dependency-tree';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __isGlob from '@coffeekraken/sugar/shared/is/glob';
+import __SFile from '@coffeekraken/s-file';
 
 import * as __esbuild from 'esbuild';
 import __path from 'path';
@@ -15,6 +17,8 @@ import __filter from '@coffeekraken/sugar/shared/object/filter';
 // import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __dependencyList from '@coffeekraken/sugar/node/fs/dependencyList';
+import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 
 import __SJsCompilerInterface from './interface/SJsCompilerInterface';
 
@@ -198,9 +202,6 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           ? params.input
           : [params.input];
 
-        let isFirstCompilation = true,
-          lastCompiledFilePath;
-
         emit('log', {
           value: 'Starting <yellow>JS</yellow> file(s) compilation process...'
         });
@@ -210,165 +211,86 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           params.minify = true;
         }
 
-        const pool = __fsPool(input, {
-          watch: true
-        });
-        on('finally', () => {
-          pool.cancel();
-        });
+        if (params.bundle) {
+          emit('log', {
+            value: `<cyan>[bundle]</cyan> Bundling application`
+          });
 
-        const updateTimestamps = {};
-        const logPlugin = {
-          name: 'logPlugin',
-          setup(build) {
-            // Load ".txt" files and return an array of words
-            build.onLoad({ filter: /\.js$/ }, async (args) => {
-              const mtime = __fs.statSync(args.path).mtimeMs;
-              const text = __fs.readFileSync(args.path, 'utf8');
-
-              return {
-                contents: text
-              };
-            });
+          if (input && input.length > 1) {
+            throw new Error(
+              `<red>[${this.constructor.name}]</red> When using the <yellow>--bundle</yellow> option, you MUST specify <cyan>1 input</cyan> only...`
+            );
           }
-        };
+          if (!__fs.existsSync(input[0])) {
+            throw new Error(
+              `<red>[${this.constructor.name}]</red> The file you want to bundle "<cyan>${input[0]}</cyan>" does not exists...`
+            );
+          }
+
+          const fileToCompile = __SFile.new(input[0]);
+
+          if (params.watch) {
+            const dependencyListPromise = __dependencyList(input[0], {
+              exclude: ['**/node_modules/**'],
+              watch: true,
+              ignoreInitial: true
+            });
+            dependencyListPromise.on('update', async ({ list, path }) => {
+              emit('log', {
+                value: `<yellow>[dependency]</yellow> Dependency updated`
+              });
+              const res = await this._compileInternal(
+                [fileToCompile],
+                params,
+                emit
+              );
+              if (res instanceof Error) throw res;
+
+              emit('log', {
+                value: `<blue>[watch]</blue> Watching for changes...`
+              });
+            });
+          } else {
+            const color = __getColorFor(input[0]);
+
+            const res = await this._compileInternal(
+              [fileToCompile],
+              params,
+              emit
+            );
+            if (res instanceof Error) throw res;
+          }
+        } else {
+          const pool = __fsPool(input, {
+            watch: params.watch
+          });
+          on('finally', () => {
+            pool.cancel();
+          });
+
+          pool.on(params.watch ? 'update' : 'files', async (files, m) => {
+            pool.cancel();
+
+            files = Array.isArray(files) ? files : [files];
+
+            const res = await this._compileInternal(files, params, emit);
+            if (res instanceof Error) throw res;
+
+            if (params.watch) {
+              emit('log', {
+                value: `<blue>[watch]</blue> Watching for changes...`
+              });
+            } else {
+              resolve(res);
+            }
+          });
+        }
 
         if (params.watch) {
           emit('log', {
             value: `<blue>[watch]</blue> Watching for changes...`
           });
         }
-
-        pool.on(params.watch ? 'update' : 'files', async (files, m) => {
-          pool.cancel();
-
-          console.log('DD', m.event, files.path ?? files.map((f) => f.path));
-
-          if (params.bundle && files.length > 1) {
-            throw new Error(
-              `<red>[${this.constructor.name}]</red> When using the <yellow>--bundle</yellow> option, you MUST specify <cyan>1 input</cyan> only...`
-            );
-          }
-
-          const duration = new __SDuration();
-
-          files = Array.isArray(files) ? files : [files];
-
-          const color =
-            this._filesColor[
-              files.length === 1
-                ? __getFilename(files[0].path)
-                : files.length + ' files'
-            ] ?? __pickRandom(__availableColors());
-          this._filesColor[
-            files.length === 1
-              ? __getFilename(files[0].path)
-              : files.length + ' files'
-          ] = color;
-
-          emit('log', {
-            value: `<${color}>[${
-              files.length === 1
-                ? __getFilename(files[0].path)
-                : files.length + ' files'
-            }]</${color}> Starting compilation`
-          });
-
-          const esbuildParams: any = {
-            charset: 'utf8',
-            format: params.format,
-            logLevel: 'info',
-            outdir: params.bundle ? undefined : params.outDir,
-            outfile: params.bundle
-              ? __path.resolve(
-                  params.outDir,
-                  `${files[0].nameWithoutExt}${params.bundleSuffix}.js`
-                )
-              : undefined,
-            // platform: 'node',
-            outbase: params.inDir,
-            banner: params.banner,
-            incremental: true,
-            entryPoints: files.map((f) => f.path),
-            bundle: params.bundle,
-            write: true,
-            errorLimit: 100,
-            minify: params.minify,
-            sourcemap: params.map,
-            // watch: params.watch
-            //   ? {
-            //       onRebuild(error, result) {
-            //         if (error) {
-            //           emit('error', {
-            //             value: error
-            //           });
-            //           return;
-            //         }
-
-            //         isFirstCompilation = false;
-
-            //         let logValue = `<green>[success]</green> <${color}>${
-            //           files.length === 1
-            //             ? __getFilename(files[0].path)
-            //             : files.length + ' files'
-            //         }</${color}> compiled`;
-            //         if (!isFirstCompilation && lastCompiledFilePath) {
-            //           logValue = `<green>[success]</green> File "<cyan>${__path.relative(
-            //             params.rootDir,
-            //             lastCompiledFilePath
-            //           )}</cyan>" compiled`;
-            //         }
-
-            //         emit('log', {
-            //           value: logValue
-            //         });
-            //         emit('log', {
-            //           value: `<blue>[watch]</blue> Watching for changes...`
-            //         });
-            //       }
-            //     }
-            //   : false,
-            watch: false,
-
-            ...params.esbuild,
-            plugins: [
-              logPlugin,
-              ...(params.esbuild.plugins ?? [])
-              // __esbuildAggregateLibsPlugin({
-              //   outputDir: params.outputDir,
-              //   rootDir: params.rootDir
-              // })
-            ]
-          };
-
-          let resultObj;
-          try {
-            resultObj = await __esbuild.build(esbuildParams);
-          } catch (e) {
-            console.log(e);
-            return reject(e);
-          }
-
-          emit('log', {
-            value: `<green>[success]</green> <${color}>${
-              files.length === 1
-                ? __getFilename(files[0].path)
-                : files.length + ' files'
-            }</${color}> compiled`
-          });
-
-          if (params.watch) {
-            emit('log', {
-              value: `<blue>[watch]</blue> Watching for changes...`
-            });
-          } else {
-            resolve({
-              // files: compiledFiles,
-              ...resultObj,
-              ...duration.end()
-            });
-          }
-        });
       },
       {
         eventEmitter: {
@@ -376,6 +298,95 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         }
       }
     );
+  }
+
+  async _compileInternal(files, params, emit) {
+    emit('log', {
+      value: `<yellow>[compile]</yellow> Start compiling <yellow>${
+        files.length
+      }</yellow> file${files.length > 1 ? 's' : ''}`
+    });
+
+    const duration = new __SDuration();
+
+    const logPlugin = {
+      name: 'logPlugin',
+      setup(build) {
+        // Load ".txt" files and return an array of words
+        build.onLoad({ filter: /\.js$/ }, async (args) => {
+          const mtime = __fs.statSync(args.path).mtimeMs;
+          const text = __fs.readFileSync(args.path, 'utf8');
+
+          return {
+            contents: text
+          };
+        });
+      }
+    };
+
+    const esbuildParams: any = {
+      charset: 'utf8',
+      format: params.format,
+      logLevel: 'info',
+      outdir: params.bundle ? undefined : params.outDir,
+      outfile: params.bundle
+        ? __path.resolve(
+            params.outDir,
+            `${files[0].nameWithoutExt}${params.bundleSuffix}.js`
+          )
+        : undefined,
+      // platform: 'node',
+      outbase: params.inDir,
+      banner: params.banner,
+      incremental: true,
+      entryPoints: files.map((f) => f.path),
+      bundle: params.bundle,
+      write: true,
+      errorLimit: 100,
+      minify: params.minify,
+      sourcemap: params.map,
+      watch: false,
+      ...params.esbuild,
+      plugins: [
+        logPlugin,
+        ...(params.esbuild.plugins ?? [])
+        // __esbuildAggregateLibsPlugin({
+        //   outputDir: params.outputDir,
+        //   rootDir: params.rootDir
+        // })
+      ]
+    };
+
+    let resultObj;
+    try {
+      resultObj = await __esbuild.build(esbuildParams);
+    } catch (e) {
+      return e;
+    }
+
+    if (files.length === 1) {
+      emit('log', {
+        value: `<green>[save]</green> File "<cyan>${
+          files[0].relPath
+        }</cyan>" saved under "<magenta>${__path.relative(
+          params.rootDir,
+          `${params.outDir}/${files[0].path.replace(params.inDir, '')}`
+        )}</magenta>"`
+      });
+    }
+
+    emit('log', {
+      value: `<green>[success]</green> <yellow>${files.length}</yellow> file${
+        files.length > 1 ? 's' : ''
+      } compiled <green>successfully</green> in <yellow>${
+        duration.end().formatedDuration
+      }</yellow>`
+    });
+
+    return {
+      ...resultObj,
+      ...duration.end()
+    };
   }
 }
 

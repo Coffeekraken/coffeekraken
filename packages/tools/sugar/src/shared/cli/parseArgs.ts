@@ -162,11 +162,10 @@ export default function parseArgs(string, settings = {}) {
       ) {
         argsObj[currentArgName] = true;
       }
+
       currentArgName = part.replace(/^[-]{1,2}/, '');
 
-      if (isLast) {
-        argsObj[currentArgName] = true;
-      }
+      argsObj[currentArgName] = true;
     } else {
       let value;
       if (part && typeof part === 'string') {
@@ -186,7 +185,10 @@ export default function parseArgs(string, settings = {}) {
       currentValue = __parse(value);
 
       if (currentArgName !== undefined) {
-        if (argsObj[currentArgName] !== undefined) {
+        if (
+          argsObj[currentArgName] !== undefined &&
+          argsObj[currentArgName] !== true
+        ) {
           if (!Array.isArray(argsObj[currentArgName])) {
             argsObj[currentArgName] = [argsObj[currentArgName]];
           }

@@ -1,3 +1,5 @@
+import __sugarConfig from '@coffeekraken/s-sugar-config';
+
 export default {
   receipe: 'default',
 
@@ -20,8 +22,9 @@ export default {
       title: 'Svelte webcomponent',
       description: 'Svelte webcomponent receipe ',
       actions: {
-        // frontendServer: '[config.frontstack.actions.frontendServer]',
+        frontendServer: '[config.frontstack.actions.frontendServer]',
         js: '[config.frontstack.actions.js]',
+        jsBundle: '[config.frontstack.actions.jsBundle]',
         ts: '[config.frontstack.actions.ts]',
         svelte: '[config.frontstack.actions.svelte]'
         // docmap: '[config.frontstack.actions.docmap]'
@@ -37,7 +40,7 @@ export default {
       title: 'Frontend server',
       description:
         'Frontend server using the @coffeekraken/s-frontend-server package',
-      process: 'sugar-dev frontendServer.start',
+      process: 'sugard frontendServer.start',
       settings: {
         processManager: {
           restart: true
@@ -48,7 +51,7 @@ export default {
       id: 'css',
       title: 'PostCSS compile action',
       description: 'Compile css using the amazing PostCSS package',
-      process: 'sugar-dev postcss.compile -w',
+      process: 'sugard postcss.compile -w',
       settings: {
         processManager: {
           restart: true
@@ -59,7 +62,21 @@ export default {
       id: 'js',
       title: 'Javascript compile action',
       description: 'Allow to compile .js files easily',
-      process: 'sugar-dev js.compile -w',
+      process: 'sugard js.compile  -w',
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
+    jsBundle: {
+      id: 'jsBundle',
+      title: 'Javascript bundle action',
+      description: 'Allow to compile .js files easily into a bundle file',
+      process: `sugard js.compile ${__sugarConfig('storage.srcDir').replace(
+        __sugarConfig('storage.rootDir') + '/',
+        ''
+      )}/js/index.js -b -w`,
       settings: {
         processManager: {
           restart: true
@@ -70,7 +87,7 @@ export default {
       id: 'ts',
       title: 'Typescript compile action',
       description: 'Allow to compile .ts files easily',
-      process: 'sugar-dev ts.compile -w',
+      process: 'sugard ts.compile -w',
       settings: {
         processManager: {
           restart: true
@@ -81,7 +98,7 @@ export default {
       id: 'svelte',
       title: 'Svelte compile action',
       description: 'Allow to compile .svelte files easily',
-      process: 'sugar-dev svelte.compile -w',
+      process: 'sugard svelte.compile -w',
       settings: {
         processManager: {
           restart: true
@@ -93,7 +110,7 @@ export default {
       title: 'Docmap generation action',
       description:
         'Allow to generate and maintain up to date the docmap.json file',
-      process: 'sugar-dev docmap.generate --watch',
+      process: 'sugard docmap.generate --watch',
       settings: {
         processManager: {
           restart: true

@@ -116,6 +116,10 @@ export default {
       path: `${__dirname}/../node/middleware/frontspecMiddleware`,
       settings: {}
     },
+    defaultAssets: {
+      path: `${__dirname}/../node/middleware/defaultAssetsMiddleware`,
+      settings: {}
+    },
     env: {
       path: `${__dirname}/../node/middleware/envMiddleware`,
       settings: {}
@@ -127,6 +131,55 @@ export default {
   },
 
   handlers: {
+    /**
+     * @name            index
+     * @namespace       config.frontendServer.handlers
+     * @type            Object
+     *
+     * Store all the "index" configuration access like the route, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    index: {
+      /**
+       * @name          route
+       * @namespace     config.frontendServer.handlers.index
+       * @type          String
+       * @default       /
+       *
+       * Specify the url route to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      route: '/',
+      /**
+       * @name          title
+       * @namespace     config.frontendServer.handlers.index
+       * @type          String
+       * @default       indexs | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the index
+       *
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Welcome | [title]',
+      /**
+       * @name            handler
+       * @namespace       config.frontendServer.handlers.index
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../node/handlers/index`
+    },
+
     /**
      * @name            view
      * @namespace       config.frontendServer.handlers

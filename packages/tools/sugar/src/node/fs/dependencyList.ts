@@ -1,8 +1,8 @@
 import __dependencyTree from 'dependency-tree';
 import __chokidar from 'chokidar';
-import __SPromise from '@coffeekraken/s-promise';
+import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import __fs from 'fs';
-import __folderPath from '../folderPath';
+import __folderPath from './folderPath';
 import __minimatch from 'minimatch';
 
 /**
@@ -38,18 +38,23 @@ import __minimatch from 'minimatch';
 export interface IDependencyListSettings {
   watch: boolean;
   exclude: string[];
+  includeItself: boolean;
+  ignoreInitial: boolean;
 }
 export interface IDependencyListResult {
   list: string[];
   path?: string;
 }
+
 export default function dependencyList(
   filePath: string,
   settings?: Partial<IDependencyListSettings>
-): Promise<IDependencyListResult> {
+): any {
   return new __SPromise(({ resolve, reject, emit }) => {
     const set: IDependencyListSettings = {
       watch: false,
+      includeItself: false,
+      ignoreInitial: false,
       exclude: [],
       ...settings
     };
@@ -68,7 +73,11 @@ export default function dependencyList(
             return true;
           }
         })
-        .map((p) => __fs.realpathSync(p));
+        .map((p) => __fs.realpathSync(p))
+        .filter((path) => {
+          if (path === filePath && !set.includeItself) return false;
+          return true;
+        });
       return list;
     }
 
@@ -86,15 +95,20 @@ export default function dependencyList(
           });
         });
         emit('update', {
+          path: filePath,
           list: getList()
         });
       });
 
-      emit('update', {
-        list: getList()
-      });
+      if (!set.ignoreInitial) {
+        emit('update', {
+          path: filePath,
+          list: getList()
+        });
+      }
     } else {
       resolve({
+        path: filePath,
         list: getList()
       });
     }

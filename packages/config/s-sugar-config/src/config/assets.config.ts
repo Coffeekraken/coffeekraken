@@ -1,16 +1,19 @@
+import __sugarConfig from '@coffeekraken/s-sugar-config';
+
 export default {
   css: {
     main: {
-      path: '/src/css/index.scss'
+      id: 'main',
+      defer: true,
+      path: `${__sugarConfig('storage.distDir')}/css/index.css`
     }
-    // js: {
-    //   path: '/temp/js.css'
-    // }
   },
   js: {
     main: {
-      path: '/src/js/index.js',
-      type: 'module'
+      type: 'module',
+      id: 'main',
+      defer: true,
+      path: `${__sugarConfig('storage.distDir')}/js/index.bundle.js`
     }
   }
 };

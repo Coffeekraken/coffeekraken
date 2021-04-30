@@ -5,7 +5,9 @@ import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
 } from '@coffeekraken/s-compiler';
-import __typescript from 'typescript';
+import __typescript, {
+  collapseTextChangeRangesAcrossMultipleVersions
+} from 'typescript';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
@@ -158,9 +160,15 @@ class STsCompiler extends __SCompiler {
         settings = __deepMerge(this.tsCompilerSettings, {}, settings || {});
 
         let input = Array.isArray(params.input) ? params.input : [params.input];
-        let config;
+        let tsconfigFromConfigParam = {};
 
         const duration = new __SDuration();
+
+        if (params.config && params.stack) {
+          throw new Error(
+            `<red>[${this.constructor.name}]</red> Sorry but you cannot use both "<yellow>config</yellow>" and "<yellow>stack</yellow>" parameters together. <yellow>stack</yellow> is to compile some preset input with preset settings, <yellow>config</yellow> is to simply specify which config you want to use to compile some custom input(s)`
+          );
+        }
 
         let stacks: any = undefined;
         if (params.stack) {
@@ -225,15 +233,16 @@ class STsCompiler extends __SCompiler {
             );
           } else {
             if (configPath.match(/\.js$/)) {
-              config = require(configPath);
+              tsconfigFromConfigParam = require(configPath);
             } else {
               const jsonFile = new __SFile(configPath);
-              config = jsonFile.content;
+              tsconfigFromConfigParam = jsonFile.content;
             }
           }
         } else if (__isPlainObject(params.config)) {
-          config = params.config;
+          tsconfigFromConfigParam = params.config;
         }
+        delete tsconfigFromConfigParam.include;
 
         const colors = __availableColors();
 
@@ -269,10 +278,13 @@ class STsCompiler extends __SCompiler {
             tsconfig = require(`${__dirname}/../templates/tsconfig.js`);
           }
 
-          poolStacks.default = {
-            ...tsconfig,
-            include: [...(tsconfig.include ?? []), ...input]
-          };
+          poolStacks.default = __deepMerge(
+            {
+              ...tsconfig,
+              include: [...(tsconfig.include ?? []), ...input]
+            },
+            tsconfigFromConfigParam
+          );
         } else {
           input.forEach((tsConfigPath) => {
             const configJson = require(tsConfigPath);

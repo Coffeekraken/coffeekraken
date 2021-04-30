@@ -64,7 +64,7 @@ function resolveGlob(globs, settings = {}) {
       searchReg = settings.contentRegExp;
 
     // make sure it's a glob pattern
-    if (!__isGlob(glob) || __fs.existsSync(glob)) {
+    if (__fs.existsSync(glob)) {
       const sFile = __SFile.new(glob, {
         file: {
           cwd

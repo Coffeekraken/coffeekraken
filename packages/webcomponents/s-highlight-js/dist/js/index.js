@@ -1,10 +1,24 @@
 /* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
-import {SvelteElement, add_location, append_dev, attribute_to_object, detach_dev, dispatch_dev, element, globals, init, insert_dev, noop, safe_not_equal, validate_slots} from "svelte/internal";
+import {
+  SvelteElement,
+  add_location,
+  append_dev,
+  attribute_to_object,
+  detach_dev,
+  dispatch_dev,
+  element,
+  globals,
+  init,
+  insert_dev,
+  noop,
+  safe_not_equal,
+  validate_slots
+} from "svelte/internal";
 const {console: console_1} = globals;
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
 import __SSvelteComponent from "@coffeekraken/sugar/js/svelte/SSvelteComponent";
-const file = "SHighlightJs.svelte";
+const file = "index.svelte";
 function create_fragment(ctx) {
   let div;
   let h1;
@@ -14,8 +28,8 @@ function create_fragment(ctx) {
       h1 = element("h1");
       h1.textContent = "Hello worlc";
       this.c = noop;
-      add_location(h1, file, 34, 1, 568);
-      add_location(div, file, 33, 0, 561);
+      add_location(h1, file, 27, 1, 558);
+      add_location(div, file, 26, 0, 551);
     },
     l: function claim(nodes) {
       throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -50,7 +64,7 @@ function instance($$self, $$props, $$invalidate) {
       super({svelteComponent: {}});
     }
   }
-  console.log("Plfffffp");
+  console.log("fff");
   new MyCoolComponent();
   const writable_props = [];
   Object.keys($$props).forEach((key) => {
@@ -65,10 +79,10 @@ function instance($$self, $$props, $$invalidate) {
   });
   return [];
 }
-class SHighlightJs extends SvelteElement {
+class Index extends SvelteElement {
   constructor(options) {
     super();
-    this.shadowRoot.innerHTML = `<style>h1{color:blue;background:red}</style>`;
+    this.shadowRoot.innerHTML = `<style>h1{color:blue;background:magenta}</style>`;
     init(this, {
       target: this.shadowRoot,
       props: attribute_to_object(this.attributes),
@@ -81,9 +95,9 @@ class SHighlightJs extends SvelteElement {
     }
   }
 }
-customElements.define("s-highlight-js", SHighlightJs);
-var SHighlightJs_default = SHighlightJs;
+customElements.define("s-highlight-js", Index);
+var js_default = Index;
 export {
-  SHighlightJs_default as default
+  js_default as default
 };
-//# sourceMappingURL=SHighlightJs.js.map
+//# sourceMappingURL=index.js.map

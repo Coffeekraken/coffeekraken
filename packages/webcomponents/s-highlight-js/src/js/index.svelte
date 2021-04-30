@@ -17,7 +17,7 @@
 			});
 		}
 	}
-	console.log('Plfffffp')
+	console.log('fff')
 
 
 	new MyCoolComponent();
@@ -27,7 +27,7 @@
 <style>
 	h1 {
 		color: blue;
-		background: red;
+		background: magenta;
 	}
 </style>
 

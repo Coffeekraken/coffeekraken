@@ -1,0 +1,17 @@
+{
+  "name": "@coffeekraken/s-svelte-component",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://coffeekraken.io",
+  "main": "src/js/exports.js",
+  "scripts": {
+    "dev": "sugard frontstack.start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/s-class": "^2.0.0"
+  }
+}

@@ -17,7 +17,7 @@ import {
 const {console: console_1} = globals;
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
-import __SSvelteComponent from "@coffeekraken/sugar/js/svelte/SSvelteComponent";
+import __SSvelteComponent from "@coffeekraken/s-svelte-component";
 const file = "index.svelte";
 function create_fragment(ctx) {
   let div;
@@ -28,8 +28,8 @@ function create_fragment(ctx) {
       h1 = element("h1");
       h1.textContent = "Hello worlc";
       this.c = noop;
-      add_location(h1, file, 27, 1, 558);
-      add_location(div, file, 26, 0, 551);
+      add_location(h1, file, 25, 1, 588);
+      add_location(div, file, 24, 0, 581);
     },
     l: function claim(nodes) {
       throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -82,7 +82,8 @@ function instance($$self, $$props, $$invalidate) {
 class Index extends SvelteElement {
   constructor(options) {
     super();
-    this.shadowRoot.innerHTML = `<style>h1{color:blue;background:magenta}</style>`;
+    this.shadowRoot.innerHTML = `<style>h1{color:var(--s-theme-default-color-primary-default, #f2bc2b);background:magenta
+}</style>`;
     init(this, {
       target: this.shadowRoot,
       props: attribute_to_object(this.attributes),

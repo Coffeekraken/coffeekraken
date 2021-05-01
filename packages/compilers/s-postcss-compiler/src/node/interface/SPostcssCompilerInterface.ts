@@ -32,7 +32,8 @@ class SPostcssCompilerInterface extends __SInterface {
       type: 'String',
       path: {
         absolute: true,
-        exists: true
+        exists: true,
+        create: true
       },
       default: __sugarConfig('css.compile.inDir'),
       alias: 'o'

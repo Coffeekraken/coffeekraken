@@ -1,7 +1,15 @@
 import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __fs from 'fs';
+
+let receipe = 'default';
+if (__fs.existsSync(`${__packageRoot()}/sugar.json`)) {
+  const sugarJson = require(`${__packageRoot()}/sugar.json`);
+  if (sugarJson.receipe) receipe = sugarJson.receipe;
+}
 
 export default {
-  receipe: 'default',
+  receipe,
 
   exclude: [],
 
@@ -23,10 +31,19 @@ export default {
       description: 'Svelte webcomponent receipe ',
       actions: {
         frontendServer: '[config.frontstack.actions.frontendServer]',
-        js: '[config.frontstack.actions.js]',
+        // js: '[config.frontstack.actions.js]',
         jsBundle: '[config.frontstack.actions.jsBundle]',
         ts: '[config.frontstack.actions.ts]',
         svelte: '[config.frontstack.actions.svelte]'
+        // docmap: '[config.frontstack.actions.docmap]'
+      }
+    },
+    jsLib: {
+      title: 'Javascript library',
+      description: 'Javascript browser destinated library',
+      actions: {
+        // js: '[config.frontstack.actions.js]',
+        ts: '[config.frontstack.actions.ts]'
         // docmap: '[config.frontstack.actions.docmap]'
       }
     },
@@ -62,7 +79,7 @@ export default {
       id: 'js',
       title: 'Javascript compile action',
       description: 'Allow to compile .js files easily',
-      process: 'sugard js.compile  -w',
+      process: 'sugard js.compile -w',
       settings: {
         processManager: {
           restart: true

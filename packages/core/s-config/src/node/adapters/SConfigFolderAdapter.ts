@@ -37,11 +37,24 @@ import __SConfig from '../../shared/SConfig';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+export interface ISConfigFolderAdapterScopesSettings {
+  default: string[];
+  module: string[];
+  extends: string[];
+  repo: string[];
+  package: string[];
+  user: string[];
+}
+
 export interface ISConfigFolderAdapterSettings {
+  fileName: string;
   folderName: string;
+  scopes: ISConfigFolderAdapterScopesSettings;
+  savingScope: string;
 }
 export interface ISConfigFolderAdapterCtorSettings {
-  configFolderAdapter?: Partial<ISConfigFolderAdapterCtorSettings>;
+  configFolderAdapter?: Partial<ISConfigFolderAdapterSettings>;
+  configAdapter?: any;
 }
 
 export default class SConfigFolderAdapter extends __SConfigAdapter {
@@ -53,7 +66,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
   _scopedFoldersPaths: any = {};
   _foldersPaths: string[] = [];
 
-  constructor(settings: ISConfigFolderAdapterCtorSettings) {
+  constructor(settings: Partial<ISConfigFolderAdapterCtorSettings>) {
     super(
       __deepMerge(
         {

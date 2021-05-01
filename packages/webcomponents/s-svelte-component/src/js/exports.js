@@ -1,0 +1,4 @@
+import SSvelteComponent from './SSvelteComponent';
+export * from './SSvelteComponent';
+export default SSvelteComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxnQkFBZ0IsTUFBTSxvQkFBb0IsQ0FBQztBQUVsRCxjQUFjLG9CQUFvQixDQUFDO0FBRW5DLGVBQWUsZ0JBQWdCLENBQUMifQ==

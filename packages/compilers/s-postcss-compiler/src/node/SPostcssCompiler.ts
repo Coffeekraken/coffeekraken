@@ -6,6 +6,10 @@ import __postCss from 'postcss';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
 import __cleanCss from 'clean-css';
+import __isGlob from '@coffeekraken/sugar/shared/is/glob';
+import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 
 import __path from 'path';
 import __fs from 'fs';
@@ -144,9 +148,7 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
 
         const cssCompileConfig = __sugarConfig('css.compile');
 
-        const input = Array.isArray(params.input)
-          ? params.input
-          : [params.input];
+        let input = Array.isArray(params.input) ? params.input : [params.input];
 
         emit('log', {
           value: 'Starting <yellow>CSS</yellow> file(s) compilation...'
@@ -190,8 +192,16 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
 
           files = Array.isArray(files) ? files : [files];
 
+          let resObject = {
+            files: <any[]>[]
+          };
+
           files.forEach(async (file, i) => {
             const fileDuration = new __SDuration();
+
+            emit('log', {
+              value: `<yellow>[compile]</yellow> Start compiling "<cyan>${file.relPath}</cyan>" file`
+            });
 
             let res = await __postCss([
               require('@coffeekraken/s-postcss-sugar-plugin').default
@@ -199,23 +209,9 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
               from: file.path
             });
 
-            // console.log(
-            //   res.css
-            //     .split('\n')
-            //     .map((l, i) => {
-            //       return `${i} ${l}`;
-            //     })
-            //     .join('\n')
-            // );
-
             res = await __postCss(postCssPlugins).process(res.css, {
               from: file.path
             });
-
-            const outPath = __path.resolve(
-              params.outDir,
-              __path.relative(params.inDir, file.path)
-            );
 
             const fileEnd = fileDuration.end();
             emit('log', {
@@ -234,26 +230,46 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
               }).minify(res.css).styles;
             }
 
+            if (res.css) {
+              resObject.files.push(<any>{
+                css: res.css,
+                map: res.map,
+                ...fileDuration.end()
+              });
+            }
+
             if (params.save && res.css) {
+              const outPath = __path.resolve(
+                params.outDir,
+                __path.relative(params.inDir, file.path)
+              );
+
               __fs.writeFileSync(outPath, res.css);
               emit('log', {
-                type: 'file',
-                action: 'save',
-                file: file.toObject(),
-                to: __path.relative(params.rootDir, outPath)
+                value: `<green>[save]</green> File "<cyan>${
+                  file.relPath
+                }</cyan>" saved under "<magenta>${__path.relative(
+                  params.rootDir,
+                  outPath
+                )}</magenta>"`
               });
             }
 
             if (i >= files.length - 1) {
               const end = duration.end();
+              resObject = {
+                ...resObject,
+                ...end
+              };
+              emit('log', {
+                value: `<green>[success]</green> Compilation finished <green>successfully</green> in <yellow>${end.formatedDuration}</yellow>`
+              });
               if (params.watch) {
                 emit('log', {
                   value: `<blue>[watch]</blue> Watching for changes...`
                 });
               } else {
-                emit('log', {
-                  value: `<green>[success]</green> Compilation finished <green>successfully</green> in <yellow>${end.formatedDuration}</yellow>`
-                });
+                resolve(resObject);
               }
             }
           });

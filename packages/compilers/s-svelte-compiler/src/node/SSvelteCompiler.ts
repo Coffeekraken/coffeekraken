@@ -7,6 +7,7 @@ import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
 import __STsCompiler from '@coffeekraken/s-ts-compiler';
+import __SPostcssCompiler from '@coffeekraken/s-postcss-compiler';
 import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
@@ -195,15 +196,31 @@ class SSvelteCompiler extends __SCompiler {
               file.content,
               {
                 style: async (input) => {
+                  // write a temp file to compile
+                  const tmpCssFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.css`;
+                  __writeFileSync(`${tmpCssFilePath}`, input.content);
+
+                  const compiler = new __SPostcssCompiler();
+
+                  const res = await compiler.compile({
+                    input: [tmpCssFilePath],
+                    save: false
+                  });
+
+                  if (!res || !res.files || !res.files.length) {
+                    return {
+                      code: input.content
+                    };
+                  }
+
+                  // remove temp file
+                  __removeSync(tmpCssFilePath);
+
                   return {
-                    code: input.content
+                    code: res.files[0].css
                   };
                 },
                 script: async (input) => {
-                  // return {
-                  //   code: input.content
-                  // };
-
                   if (
                     !input.attributes ||
                     !input.attributes.type ||

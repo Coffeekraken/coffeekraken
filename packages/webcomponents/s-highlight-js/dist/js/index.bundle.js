@@ -44225,16 +44225,19 @@ function setSettings(ctx, settings = {}) {
 // ../../core/s-class/src/shared/exports.js
 var exports_default = SClass_default;
 
-// ../../../node_modules/@coffeekraken/sugar/src/js/svelte/SSvelteComponent.ts
+// ../s-svelte-component/src/js/SSvelteComponent.ts
 var SSVelteComponent = class extends exports_default {
   constructor(settings) {
-    super(deepMerge_default2({
+    super(deepMerge_default({
       svelteComponent: {}
     }, settings || {}));
-    console.log("Hello");
+    console.log("SSS");
   }
 };
 var SSvelteComponent_default = SSVelteComponent;
+
+// ../s-svelte-component/src/js/exports.js
+var exports_default2 = SSvelteComponent_default;
 
 // src/js/index.js
 var {console: console_1} = globals;
@@ -44248,8 +44251,8 @@ function create_fragment(ctx) {
       h1 = element("h1");
       h1.textContent = "Hello worlc";
       this.c = noop;
-      add_location(h1, file, 27, 1, 558);
-      add_location(div, file, 26, 0, 551);
+      add_location(h1, file, 25, 1, 588);
+      add_location(div, file, 24, 0, 581);
     },
     l: function claim(nodes) {
       throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -44279,7 +44282,7 @@ function instance($$self, $$props, $$invalidate) {
   let {$$slots: slots = {}, $$scope} = $$props;
   validate_slots("s-highlight-js", slots, []);
   import_highlight.default.registerLanguage("javascript", import_javascript.default);
-  class MyCoolComponent extends SSvelteComponent_default {
+  class MyCoolComponent extends exports_default2 {
     constructor() {
       super({svelteComponent: {}});
     }
@@ -44294,7 +44297,7 @@ function instance($$self, $$props, $$invalidate) {
   $$self.$capture_state = () => ({
     hljs: import_highlight.default,
     javascript: import_javascript.default,
-    __SSvelteComponent: SSvelteComponent_default,
+    __SSvelteComponent: exports_default2,
     MyCoolComponent
   });
   return [];
@@ -44302,7 +44305,8 @@ function instance($$self, $$props, $$invalidate) {
 var Index = class extends SvelteElement {
   constructor(options) {
     super();
-    this.shadowRoot.innerHTML = `<style>h1{color:blue;background:magenta}</style>`;
+    this.shadowRoot.innerHTML = `<style>h1{color:var(--s-theme-default-color-primary-default, #f2bc2b);background:magenta
+}</style>`;
     init(this, {
       target: this.shadowRoot,
       props: attribute_to_object(this.attributes),

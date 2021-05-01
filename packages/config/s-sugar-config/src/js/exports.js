@@ -1,0 +1,4 @@
+import sugar from './sugar';
+export * from './sugar';
+export default sugar;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxLQUFLLE1BQU0sU0FBUyxDQUFDO0FBRTVCLGNBQWMsU0FBUyxDQUFDO0FBRXhCLGVBQWUsS0FBSyxDQUFDIn0=

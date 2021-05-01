@@ -7,7 +7,7 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -19,4 +19,4 @@ const SFrontstackStartInterface_1 = __importDefault(require("./start/interface/S
 exports.SFrontstackStartInterface = SFrontstackStartInterface_1.default;
 __exportStar(require("./SFrontstack"), exports);
 exports.default = SFrontstack_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxnRUFBd0M7QUFDeEMsNEdBQW9GO0FBSTNFLG9DQUpGLG1DQUF5QixDQUlFO0FBRmxDLGdEQUE4QjtBQUc5QixrQkFBZSxxQkFBVyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLGdFQUF3QztBQUN4Qyw0R0FBb0Y7QUFJM0Usb0NBSkYsbUNBQXlCLENBSUU7QUFGbEMsZ0RBQThCO0FBRzlCLGtCQUFlLHFCQUFXLENBQUMifQ==

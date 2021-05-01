@@ -8,11 +8,15 @@
     import javascript from 'highlight.js/lib/languages/javascript';
     hljs.registerLanguage('javascript', javascript);
 
-	import __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';
+	import __SSvelteComponent from '@coffeekraken/s-svelte-component';
+	import __SHighlightJsComponentInterface from './interface/SHighlightJsComponentInterface';
 
 	class MyCoolComponent extends __SSvelteComponent {
+
+		static interface = __SHighlightJsComponentInterface;
+
 		constructor() {
-			super({
+			super({w
 				svelteComponent: {}
 			});
 		}
@@ -26,7 +30,7 @@
 
 <style>
 	h1 {
-		color: blue;
+		color: sugar.color(primary);
 		background: magenta;
 	}
 </style>

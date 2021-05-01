@@ -18,7 +18,6 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
         settings || {}
       )
     );
-    console.log('Hello');
   }
 }
 

@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "",
   "homepage": "https://coffeekraken.io",
-  "main": "dist/js/exports.js",
+  "main": "src/js/exports.js",
   "scripts": {
     "dev": "sugard frontstack.start",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@coffeekraken/s-svelte-component": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "highlight.js": "^10.7.2"
   }

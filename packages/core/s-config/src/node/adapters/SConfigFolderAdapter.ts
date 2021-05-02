@@ -6,7 +6,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __diff from '@coffeekraken/sugar/shared/object/diff';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
-import __packageRoot from '@coffeekraken/sugar/shared/path/packageRoot';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
 import __SConfig from '../../shared/SConfig';

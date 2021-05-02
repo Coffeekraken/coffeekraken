@@ -1,0 +1,4 @@
+import __SInterface from '@coffeekraken/s-interface/browser';
+export default class SHighlightJsComponentInterface extends __SInterface {
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLG1DQUFtQyxDQUFDO0FBRTdELE1BQU0sQ0FBQyxPQUFPLE9BQU8sOEJBQStCLFNBQVEsWUFBWTtDQU92RSJ9

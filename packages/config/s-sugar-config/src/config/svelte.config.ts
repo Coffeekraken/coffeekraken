@@ -31,7 +31,7 @@ export default {
      * @name              outDir
      * @namespace         config.svelte.compile
      * @type              String
-     * @default           undefined
+     * @default           '[config.storage.distDir]/js'
      *
      * Specify the destination folder where to put the compiled files in.
      * If undefined, the files will be saved alongside the source one.
@@ -39,7 +39,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outDir: undefined,
+    outDir: '[config.storage.distDir]/js',
 
     /**
      * @name            rootDir

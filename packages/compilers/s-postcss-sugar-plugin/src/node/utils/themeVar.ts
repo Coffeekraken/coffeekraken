@@ -1,4 +1,4 @@
-import { themeConfig } from '@coffeekraken/s-sugar-config';
+import __theme from './theme';
 
 /**
  * @name        themeVar
@@ -19,7 +19,7 @@ import { themeConfig } from '@coffeekraken/s-sugar-config';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function themeVar(dotPath: string): string {
-  return `var(--s-theme-${dotPath.replace(/\./gm, '-')}, ${themeConfig(
+  return `var(--s-theme-${dotPath.replace(/\./gm, '-')}, ${__theme().config(
     dotPath
   )})`;
 }

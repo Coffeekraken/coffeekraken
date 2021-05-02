@@ -44,6 +44,7 @@ export default function exportsMatch(
   const set: IExportsMatchSettings = {
     method: 'import',
     target: __isNode() ? 'node' : 'default',
+    // @ts-ignore
     extensions: __sugarConfig('module.resolve.extensions'),
     ...(settings || {})
   };

@@ -1,6 +1,6 @@
 import __SConfig from '@coffeekraken/s-config';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __packageRoot from '@coffeekraken/sugar/shared/path/packageRoot';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __registerFolder from './registerFolder';
 import __sanitizeSugarJson from '@coffeekraken/sugar/shared/sugar/sanitizeSugarJson';
 import __fs from 'fs';
@@ -39,7 +39,7 @@ import sugarJson from '@coffeekraken/sugar/node/sugar/sugarJson';
 let sugarConfigInstance;
 let _sugarJsons, _rootSugarJson;
 
-export default function sugar(dotPath) {
+export default function sugar(dotPath: string): any {
   let rootSugarJson;
 
   if (!_rootSugarJson) {

@@ -1,7 +1,7 @@
-import SInterface from './SInterface';
+import SInterfaceGenerator from './SInterfaceGenerator';
 import SInterfaceResult from './SInterfaceResult';
 
-export * from './SInterface';
+export * from './SInterfaceGenerator';
 
 export { SInterfaceResult };
-export default SInterface;
+export default SInterfaceGenerator;

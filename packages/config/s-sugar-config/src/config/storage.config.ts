@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/shared/path/packageRoot';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export default {
   /**

@@ -151,11 +151,11 @@ class SSvelteCompiler extends __SCompiler {
           value: 'Starting <red>Svelte</red> file(s) compilation process...'
         });
 
-        if (params.watch) {
-          emit('log', {
-            value: `<blue>[watch]</blue> Watching for changes...`
-          });
-        }
+        // if (params.watch) {
+        //   emit('log', {
+        //     value: `<blue>[watch]</blue> Watching for changes...`
+        //   });
+        // }
 
         // prod
         if (params.prod) {
@@ -171,7 +171,7 @@ class SSvelteCompiler extends __SCompiler {
           pool.cancel();
         });
 
-        pool.on(params.watch ? 'update' : 'files', async (files) => {
+        pool.on('files,update', async (files) => {
           const compiledFiles = [];
 
           const duration = new __SDuration();

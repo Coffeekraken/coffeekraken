@@ -2,14 +2,7 @@
   "name": "@coffeekraken/s-cache",
   "version": "2.0.0",
   "description": "",
-  "main": "./src/js/SCache.js",
-  "exports": {
-    "node": {
-      "@coffeekraken/s-fileCache": "./src/node/SFileCache",
-      "import": "./src/node/SCache.js",
-      "require": "./src/node/SCache.js"
-    }
-  },
+  "main": "./src/node/SCache.js",
   "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",

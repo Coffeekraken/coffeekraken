@@ -13,10 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SInterface_1 = __importDefault(require("../shared/SInterface"));
+const SInterfaceGenerator_1 = __importDefault(require("../shared/SInterfaceGenerator"));
 const SInterfaceTerminalRenderer_1 = __importDefault(require("./renderers/SInterfaceTerminalRenderer"));
+const s_descriptor_1 = __importDefault(require("@coffeekraken/s-descriptor"));
+const SInterface = SInterfaceGenerator_1.default({
+    __SDescriptor: s_descriptor_1.default
+});
 // register renderers
-SInterface_1.default.registerRenderer(SInterfaceTerminalRenderer_1.default);
-__exportStar(require("../shared/SInterface"), exports);
-exports.default = SInterface_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0VBQThDO0FBQzlDLHdHQUFnRjtBQUVoRixxQkFBcUI7QUFDckIsb0JBQVUsQ0FBQyxnQkFBZ0IsQ0FBQyxvQ0FBMEIsQ0FBQyxDQUFDO0FBRXhELHVEQUFxQztBQUNyQyxrQkFBZSxvQkFBVSxDQUFDIn0=
+SInterface.registerRenderer(SInterfaceTerminalRenderer_1.default);
+__exportStar(require("../shared/SInterfaceGenerator"), exports);
+exports.default = SInterface;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0ZBQWdFO0FBQ2hFLHdHQUFnRjtBQUNoRiw4RUFBdUQ7QUFFdkQsTUFBTSxVQUFVLEdBQUcsNkJBQW1CLENBQUM7SUFDckMsYUFBYSxFQUFiLHNCQUFhO0NBQ2QsQ0FBQyxDQUFDO0FBRUgscUJBQXFCO0FBQ3JCLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBQyxvQ0FBMEIsQ0FBQyxDQUFDO0FBRXhELGdFQUE4QztBQUM5QyxrQkFBZSxVQUFVLENBQUMifQ==

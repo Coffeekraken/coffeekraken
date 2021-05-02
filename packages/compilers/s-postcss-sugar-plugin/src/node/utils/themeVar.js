@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_sugar_config_1 = require("@coffeekraken/s-sugar-config");
+const theme_1 = __importDefault(require("./theme"));
 /**
  * @name        themeVar
  * @namespace   node.utils
@@ -20,7 +23,7 @@ const s_sugar_config_1 = require("@coffeekraken/s-sugar-config");
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function themeVar(dotPath) {
-    return `var(--s-theme-${dotPath.replace(/\./gm, '-')}, ${s_sugar_config_1.themeConfig(dotPath)})`;
+    return `var(--s-theme-${dotPath.replace(/\./gm, '-')}, ${theme_1.default().config(dotPath)})`;
 }
 exports.default = themeVar;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVWYXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZVZhci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlFQUEyRDtBQUUzRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxTQUF3QixRQUFRLENBQUMsT0FBZTtJQUM5QyxPQUFPLGlCQUFpQixPQUFPLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxHQUFHLENBQUMsS0FBSyw0QkFBVyxDQUNsRSxPQUFPLENBQ1IsR0FBRyxDQUFDO0FBQ1AsQ0FBQztBQUpELDJCQUlDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVWYXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZVZhci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLG9EQUE4QjtBQUU5Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxTQUF3QixRQUFRLENBQUMsT0FBZTtJQUM5QyxPQUFPLGlCQUFpQixPQUFPLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxHQUFHLENBQUMsS0FBSyxlQUFPLEVBQUUsQ0FBQyxNQUFNLENBQ3ZFLE9BQU8sQ0FDUixHQUFHLENBQUM7QUFDUCxDQUFDO0FBSkQsMkJBSUMifQ==

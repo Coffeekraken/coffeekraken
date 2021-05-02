@@ -90,7 +90,7 @@ export default {
       id: 'jsBundle',
       title: 'Javascript bundle action',
       description: 'Allow to compile .js files easily into a bundle file',
-      process: `sugard js.compile ${__sugarConfig('storage.srcDir').replace(
+      process: `sugard js.compile ${__sugarConfig('storage.distDir').replace(
         __sugarConfig('storage.rootDir') + '/',
         ''
       )}/js/index.js -b -w`,

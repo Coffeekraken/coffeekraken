@@ -1,9 +1,9 @@
-import __SInterface, { ISInterfaceDefinitionProperty } from '../SInterface';
+import { ISInterfaceDefinitionProperty } from '../SInterfaceGenerator';
 
 export interface ISInterfaceRendererRenderPropertyObj {
   value: any;
   property: ISInterfaceDefinitionProperty;
-  interfaceClass: __SInterface;
+  interfaceClass: any;
 }
 
 export interface ISInterfaceRendererSettings {

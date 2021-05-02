@@ -63,7 +63,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           watch: false,
           exclude: [],
           ignored: ['**/node_modules/**/*', '**/.git/**/*'],
-          ignoreInitial: true,
+          ignoreInitial: false,
           watchDependencies: true
           // usePolling: true,
           // useFsEvents: true,
@@ -125,6 +125,9 @@ function pool(input, settings?: Partial<IPoolSettings>) {
         })
         .on('ready', () => {
           const files = watcher.getWatched();
+
+          console.log(files);
+
           const filesPaths: string[] = [];
           const finalFiles: (__SFile | string)[] = [];
           Object.keys(files).forEach((path) => {
@@ -163,7 +166,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           // });
 
           emit('ready', finalFiles);
-          if (finalFiles.length) {
+          if (finalFiles.length && !set.ignoreInitial) {
             emit('files', finalFiles);
           }
           if (!set.watch) {

@@ -12,6 +12,7 @@
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
-    "dependency-tree": "^8.1.0"
+    "dependency-tree": "^8.1.0",
+    "rollup": "^2.46.0"
   }
 }

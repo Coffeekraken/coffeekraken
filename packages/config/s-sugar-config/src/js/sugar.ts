@@ -1,3 +1,3 @@
-export default function sugar(dotPath) {
+export default function sugar(dotPath: string): any {
   return 'something';
 }

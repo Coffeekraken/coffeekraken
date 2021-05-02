@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SCompiler, {
   ISCompiler,
@@ -339,10 +340,12 @@ class STsCompiler extends __SCompiler {
               if (params.save) {
                 let outPath;
                 if (params.outDir) {
-                  outPath = __path.resolve(
-                    `${params.outDir}`,
-                    __path.relative(params.inDir, file.path)
-                  );
+                  outPath = __path
+                    .resolve(
+                      `${params.outDir}`,
+                      __path.relative(params.inDir, file.path)
+                    )
+                    .replace(/\.ts(x)?$/, '.js');
                 } else {
                   outPath = file.path.replace(/\.ts(x)?$/, '.js');
                 }
@@ -355,7 +358,7 @@ class STsCompiler extends __SCompiler {
                     outPath
                   )}</magenta>"`
                 });
-                __fs.writeFileSync(outPath, result.outputText);
+                __writeFileSync(outPath, result.outputText);
 
                 if (result.sourceMapText) {
                   emit('log', {
@@ -366,7 +369,7 @@ class STsCompiler extends __SCompiler {
                       outPath
                     )}.map</magenta>"`
                   });
-                  __fs.writeFileSync(`${outPath}.map`, result.sourceMapText);
+                  __writeFileSync(`${outPath}.map`, result.sourceMapText);
                 }
               }
             });

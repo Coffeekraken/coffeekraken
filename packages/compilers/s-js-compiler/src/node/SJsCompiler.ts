@@ -10,7 +10,6 @@ import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import __SFile from '@coffeekraken/s-file';
 
-import * as __esbuild from 'esbuild';
 import __path from 'path';
 import __fs from 'fs';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
@@ -19,6 +18,9 @@ import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __dependencyList from '@coffeekraken/sugar/node/fs/dependencyList';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
+
+import * as __esbuild from 'esbuild';
+import __rollup from 'rollup';
 
 import __SJsCompilerInterface from './interface/SJsCompilerInterface';
 
@@ -324,6 +326,23 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
       }
     };
 
+    const rollupInputParams: any = {
+      input: files.map((f) => f.path)
+    };
+
+    const rollupOutputParams: any = {
+      dir: params.bundle ? undefined : params.outDir,
+      file: params.bundle
+        ? __path.resolve(
+            params.outDir,
+            `${files[0].nameWithoutExt}${params.bundleSuffix}.js`
+          )
+        : undefined,
+      format: params.format,
+      banner: params.banner,
+      sourcemap: params.map
+    };
+
     const esbuildParams: any = {
       charset: 'utf8',
       format: params.format,
@@ -359,8 +378,15 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
 
     let resultObj;
     try {
+      // console.log(rollupInputParams, rollupOutputParams);
+
       resultObj = await __esbuild.build(esbuildParams);
+      // const rollupPromise = await __rollup.rollup(rollupInputParams);
+      // const { output } = await rollupPromise.generate(rollupOutputParams);
+      // console.log(output);
+      // return;
     } catch (e) {
+      console.log('EERER', e);
       return e;
     }
 

@@ -1,10 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import {
-  ISDescriptor,
+import ISDescriptor, {
   ISDescriptorSettings,
   ISDescriptorRule
-} from './ISDescriptor';
+} from './SDescriptor';
 
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
@@ -38,6 +37,33 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface ISDescriptorResultObj {}
+
+export interface ISDescriptorResultRule {
+  __error: Error;
+  __ruleObj: ISDescriptorRule;
+  [key: string]: any;
+}
+
+export interface ISDescriptorResultCtor {
+  new (
+    descriptor: ISDescriptor,
+    value: any,
+    descriptorSettings: ISDescriptorSettings
+  ): ISDescriptorResult;
+}
+
+export interface ISDescriptorResult {
+  _issues: any;
+  _descriptor: ISDescriptor;
+  _descriptorSettings: ISDescriptorSettings;
+  _originalValue: any;
+  value: any;
+  hasIssues(): boolean;
+  add(ruleResult: ISDescriptorResultRule): void;
+  toConsole(): string;
+}
 
 class SDescriptorResult extends __SClass implements ISDescriptorResult {
   /**

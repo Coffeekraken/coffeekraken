@@ -354,7 +354,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             `${files[0].nameWithoutExt}${params.bundleSuffix}.js`
           )
         : undefined,
-      // platform: 'node',
+      platform: params.platform,
       outbase: params.inDir,
       banner: params.banner,
       incremental: true,

@@ -1,27 +1,15 @@
 import __SClass from '@coffeekraken/s-class';
 import __isOfType from '@coffeekraken/sugar/shared/is/ofType';
 import __typeof from '@coffeekraken/sugar/shared/value/typeof';
-import __SDescriptorResult from './SDescriptorResult';
+import __SDescriptorResult, {
+  ISDescriptorResult,
+  ISDescriptorResultObj,
+  ISDescriptorResultRule
+} from './SDescriptorResult';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-
-import {
-  ISDescriptorCtorSettings,
-  ISDescriptorSettings,
-  ISDescriptorDescription,
-  ISDescriptorRuleApplyFn,
-  ISDescriptorRule,
-  ISDescriptorRegisteredRule,
-  ISDescriptorRules,
-  ISDescriptorRegisteredRules,
-  ISDescriptionValidationResult,
-  ISDescriptorCtor,
-  ISDescriptor,
-  ISDescriptorResult,
-  ISDescriptorResultRule
-} from './ISDescriptor';
 
 /**
  * @name                SDescriptor
@@ -52,6 +40,63 @@ import {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+export interface ISDescriptorCtorSettings {
+  descriptor?: Partial<ISDescriptorSettings>;
+}
+
+export interface ISDescriptorSettings {
+  type: string;
+  arrayAsValue: boolean;
+  throwOnMissingRule: boolean;
+  throw: boolean;
+  complete: boolean;
+  rules: ISDescriptorRules;
+  verbose: boolean;
+}
+
+export interface ISDescriptorDescription {
+  [key: string]: ISDescriptorDescription;
+}
+
+export interface ISDescriptorRuleApplyFn {
+  (
+    value: any,
+    params: any,
+    ruleSettings: any,
+    settings: ISDescriptorSettings
+  ): ISDescriptorResultObj;
+}
+
+export interface ISDescriptorRule {
+  [key: string]: any;
+}
+
+export interface ISDescriptorRegisteredRule {
+  id: string;
+  name: string;
+  settings: any;
+  processParams?: typeof Function;
+  apply: ISDescriptorRuleApplyFn;
+}
+
+export interface ISDescriptorRules {
+  [key: string]: ISDescriptorRule;
+}
+
+export interface ISDescriptorRegisteredRules {}
+
+export interface ISDescriptionValidationResult {}
+export interface ISDescriptorCtor {
+  rules: ISDescriptorRules;
+  type: string;
+  new (settings?: ISDescriptorSettings): ISDescriptor;
+  registerRule(rule: ISDescriptorRule): void;
+}
+
+export interface ISDescriptor {
+  descriptorSettings: ISDescriptorSettings;
+  apply(instance: any, settings?: Partial<ISDescriptorSettings>);
+}
 // @ts-ignore
 class SDescriptor extends __SClass implements ISDescriptor {
   /**

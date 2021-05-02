@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
@@ -147,8 +148,12 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
   _load(folderPaths, scope) {
     const configObj = {};
 
+    folderPaths = __unique(folderPaths);
+
     folderPaths.forEach((path) => {
       __fs.readdirSync(path).forEach((file) => {
+        if (!file.match(/\.js(on)?$/)) return;
+
         if (
           !file.includes(
             this.configFolderAdapterSettings.fileName.replace('[name]', '')

@@ -69,6 +69,20 @@ export default {
     format: 'esm',
 
     /**
+     * @name        platform
+     * @namespace     config.js.compile
+     * @type          String
+     * @values        node, browser
+     * @default       browser
+     *
+     * Specify the platform you want for your js files
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    platform: 'browser',
+
+    /**
      * @name              bundle
      * @namespace         config.js.compile
      * @type              Boolean

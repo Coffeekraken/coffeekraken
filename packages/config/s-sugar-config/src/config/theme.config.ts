@@ -1,6 +1,5 @@
 import __SColor from '@coffeekraken/s-color';
 import __get from '@coffeekraken/sugar/shared/object/get';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 export function prepare(themeConfig, config) {

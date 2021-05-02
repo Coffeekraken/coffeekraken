@@ -137,6 +137,7 @@ export default function sugar(dotPath: string): any {
       ]
     });
   }
+
   // get the config
   return sugarConfigInstance.get(dotPath, undefined, {
     throwErrorOnUndefinedConfig: false

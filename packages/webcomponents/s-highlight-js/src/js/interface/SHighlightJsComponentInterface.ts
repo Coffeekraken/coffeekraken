@@ -1,10 +1,11 @@
-import __SInterface from '@coffeekraken/s-interface/browser';
+import __SInterface from '@coffeekraken/s-interface';
 
 export default class SHighlightJsComponentInterface extends __SInterface {
-  static definition: {
+  static definition = {
     theme: {
-      type: 'String';
-      default: 'default';
-    };
+      type: 'String',
+      values: ['default', 'hello'],
+      default: 'default'
+    }
   };
 }

@@ -62,6 +62,12 @@ class SJsCompilerInterface extends __SInterface {
       values: ['iife', 'cjs', 'esm'],
       default: __sugarConfig('js.compile.format')
     },
+    platform: {
+      type: 'String',
+      alias: 'p',
+      values: ['node', 'browser'],
+      default: __sugarConfig('js.compile.platform')
+    },
     bundle: {
       type: 'Boolean',
       alias: 'b',

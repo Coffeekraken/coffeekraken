@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "",
   "main": "./src/node/exports.js",
+  "browser": "./src/shared/exports.js",
   "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",

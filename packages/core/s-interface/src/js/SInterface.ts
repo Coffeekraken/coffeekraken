@@ -1,9 +1,6 @@
-import SInterfaceGenerator from '../shared/SInterfaceGenerator';
-import __SDescriptor from '@coffeekraken/s-descriptor/browser';
+import SInterface from '../shared/SInterface';
 
-const SInterface = SInterfaceGenerator({
-  __SDescriptor
-});
+// register renderers
 
-// export * from '../shared/SInterfaceGenerator';
-export default {};
+export * from '../shared/SInterface';
+export default SInterface;

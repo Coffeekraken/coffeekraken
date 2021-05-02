@@ -1,9 +1,8 @@
 import SDescriptor from '../shared/SDescriptor';
-// import SDescriptorResult from '../shared/SDescriptorResult';
+import SDescriptorResult from '../shared/SDescriptorResult';
 
-// export * from '../shared/ISDescriptor';
-// export * from '../shared/SDescriptorResult';
+export * from '../shared/SDescriptorResult';
 export * from '../shared/SDescriptor';
 
-// export { SDescriptorResult };
+export { SDescriptorResult };
 export default SDescriptor;

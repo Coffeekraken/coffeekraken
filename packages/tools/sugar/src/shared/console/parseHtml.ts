@@ -21,10 +21,10 @@ import __replaceTags from '../html/replaceTags';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function parseHtml(message) {
-  // if (__isTerminal()) {
-  //   const fn = require(`${__dirname}/../../node/terminal/parseHtml`).default;
-  //   return fn(message);
-  // }
+  if (__isTerminal()) {
+    const fn = require(`${__dirname}/../../node/terminal/parseHtml`).default;
+    return fn(message);
+  }
 
   let isArray = false;
   if (Array.isArray(message)) {

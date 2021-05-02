@@ -224,7 +224,8 @@ export default class SLog extends __SClass implements ISLog {
     // check if need to override the native console methods
     const _this = this; // eslint-disable-line
     const newConsole = (function (oldCons) {
-      (global || window)._console = Object.assign({}, oldCons);
+      if (process) global._console = Object.assign({}, oldCons);
+      else window._console = Object.assign({}, oldCons);
       return {
         log: function (...args) {
           _this.log(...args);

@@ -144,35 +144,3 @@ if (!stack) {
     cliObj.process(args);
   }
 })();
-
-// // if no action, try to get the default one
-// if (!action) {
-//   const config = require(`./${stack}/config.json`); // eslint-disable-line
-//   if (!config.default) {
-//     throw new Error(
-//       `Sorry but you have to specify an action to make on the module "${stack}}"...`
-//     );
-//   } else {
-//     action = config.default;
-//   }
-// }
-
-// (async () => {
-//   if (stack === 'monorepo' && action === 'link') {
-//     require('./monorepo/link.cli.js').default(args); // eslint-disable-line
-//     return;
-//   }
-//   require('../node/index');
-//   const __SProcess = require('@coffeekraken/s-process').default; // eslint-disable-line
-
-//   // const pkg = require(`./${stack}/${action}.cli.js`);
-//   const cliApi = require(`./${stack}/${action}.cli.js`).default; // eslint-disable-line
-
-//   // SProcess classes
-//   if (cliApi.prototype && cliApi.prototype instanceof __SProcess) {
-//     const processInstance = new cliApi({});
-//     return await processInstance.run(args);
-//   } else if (typeof cliApi === 'function') {
-//     return await cliApi(args);
-//   }
-// })();

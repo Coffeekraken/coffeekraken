@@ -507,8 +507,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       }).value;
     }
 
-    console.log('DD', paramsObj);
-
     // check if asking for the help
     if (paramsObj.help === true && this.paramsInterface !== undefined) {
       const helpString = this.paramsInterface.render();

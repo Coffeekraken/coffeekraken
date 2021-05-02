@@ -9,7 +9,7 @@ export interface ISSvelteComponentSettings {}
 export interface ISSvelteComponent {}
 
 class SSVelteComponent extends __SClass implements ISSvelteComponent {
-  constructor(settings?: Partial<ISSvelteComponentCtorSettings>) {
+  constructor(params: any, settings?: Partial<ISSvelteComponentCtorSettings>) {
     super(
       __deepMerge(
         {
@@ -18,6 +18,18 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
         settings || {}
       )
     );
+    // @ts-ignore
+    if (this.constructor.interface) {
+      // @ts-ignore
+      const paramsInterfaceResult = this.constructor.interface.apply(
+        params ?? {}
+      );
+      if (paramsInterfaceResult.hasIssues()) {
+        throw new Error(paramsInterfaceResult.toString());
+      } else {
+        // this.props = paramsInterfaceResult.value;
+      }
+    }
   }
 }
 

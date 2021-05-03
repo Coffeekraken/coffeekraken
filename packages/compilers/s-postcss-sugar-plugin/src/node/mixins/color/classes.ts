@@ -34,23 +34,23 @@ export default function (params = {}, atRule, processNested) {
     Object.keys(colorObj).forEach((modifier) => {
       let modifierStr = modifier;
       let modifierInvertStr = modifier;
-      if (modifier.match(/^default/)) {
-        if (modifier.match(/\-i$/)) {
-          modifierStr = '--i';
-          modifierInvertStr = '';
-        } else {
-          modifierStr = ``;
-          modifierInvertStr = '--i';
-        }
-      } else {
-        if (modifier.match(/\-i$/)) {
-          modifierStr = `--${modifier}`;
-          modifierInvertStr = `--${modifier.replace(/\-i$/, '')}`;
-        } else {
-          modifierStr = `--${modifier}`;
-          modifierInvertStr = `--${modifier}-i`;
-        }
-      }
+      // if (modifier.match(/^default/)) {
+      //   if (modifier.match(/\-i$/)) {
+      //     modifierStr = '--i';
+      //     modifierInvertStr = '';
+      //   } else {
+      //     modifierStr = ``;
+      //     modifierInvertStr = '--i';
+      //   }
+      // } else {
+      //   if (modifier.match(/\-i$/)) {
+      //     modifierStr = `--${modifier}`;
+      //     modifierInvertStr = `--${modifier.replace(/\-i$/, '')}`;
+      //   } else {
+      //     modifierStr = `--${modifier}`;
+      //     modifierInvertStr = `--${modifier}-i`;
+      //   }
+      // }
 
       cssArray.push(
         [

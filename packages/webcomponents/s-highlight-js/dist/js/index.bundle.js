@@ -25,8 +25,4141 @@ var __toModule = (module2) => {
   return __exportStar(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? {get: () => module2.default, enumerable: true} : {value: module2, enumerable: true})), module2);
 };
 
-// ../../../node_modules/highlight.js/lib/core.js
+// ../../../node_modules/prismjs/prism.js
+var require_prism = __commonJS((exports2, module2) => {
+  var _self = typeof window !== "undefined" ? window : typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope ? self : {};
+  /**
+   * Prism: Lightweight, robust, elegant syntax highlighting
+   *
+   * @license MIT <https://opensource.org/licenses/MIT>
+   * @author Lea Verou <https://lea.verou.me>
+   * @namespace
+   * @public
+   */
+  var Prism2 = function(_self2) {
+    var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+    var uniqueId = 0;
+    var _ = {
+      manual: _self2.Prism && _self2.Prism.manual,
+      disableWorkerMessageHandler: _self2.Prism && _self2.Prism.disableWorkerMessageHandler,
+      util: {
+        encode: function encode(tokens) {
+          if (tokens instanceof Token) {
+            return new Token(tokens.type, encode(tokens.content), tokens.alias);
+          } else if (Array.isArray(tokens)) {
+            return tokens.map(encode);
+          } else {
+            return tokens.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\u00a0/g, " ");
+          }
+        },
+        type: function(o) {
+          return Object.prototype.toString.call(o).slice(8, -1);
+        },
+        objId: function(obj) {
+          if (!obj["__id"]) {
+            Object.defineProperty(obj, "__id", {value: ++uniqueId});
+          }
+          return obj["__id"];
+        },
+        clone: function deepClone(o, visited) {
+          visited = visited || {};
+          var clone3, id;
+          switch (_.util.type(o)) {
+            case "Object":
+              id = _.util.objId(o);
+              if (visited[id]) {
+                return visited[id];
+              }
+              clone3 = {};
+              visited[id] = clone3;
+              for (var key in o) {
+                if (o.hasOwnProperty(key)) {
+                  clone3[key] = deepClone(o[key], visited);
+                }
+              }
+              return clone3;
+            case "Array":
+              id = _.util.objId(o);
+              if (visited[id]) {
+                return visited[id];
+              }
+              clone3 = [];
+              visited[id] = clone3;
+              o.forEach(function(v, i) {
+                clone3[i] = deepClone(v, visited);
+              });
+              return clone3;
+            default:
+              return o;
+          }
+        },
+        getLanguage: function(element2) {
+          while (element2 && !lang.test(element2.className)) {
+            element2 = element2.parentElement;
+          }
+          if (element2) {
+            return (element2.className.match(lang) || [, "none"])[1].toLowerCase();
+          }
+          return "none";
+        },
+        currentScript: function() {
+          if (typeof document === "undefined") {
+            return null;
+          }
+          if ("currentScript" in document && 1 < 2) {
+            return document.currentScript;
+          }
+          try {
+            throw new Error();
+          } catch (err) {
+            var src = (/at [^(\r\n]*\((.*):.+:.+\)$/i.exec(err.stack) || [])[1];
+            if (src) {
+              var scripts = document.getElementsByTagName("script");
+              for (var i in scripts) {
+                if (scripts[i].src == src) {
+                  return scripts[i];
+                }
+              }
+            }
+            return null;
+          }
+        },
+        isActive: function(element2, className, defaultActivation) {
+          var no = "no-" + className;
+          while (element2) {
+            var classList = element2.classList;
+            if (classList.contains(className)) {
+              return true;
+            }
+            if (classList.contains(no)) {
+              return false;
+            }
+            element2 = element2.parentElement;
+          }
+          return !!defaultActivation;
+        }
+      },
+      languages: {
+        extend: function(id, redef) {
+          var lang2 = _.util.clone(_.languages[id]);
+          for (var key in redef) {
+            lang2[key] = redef[key];
+          }
+          return lang2;
+        },
+        insertBefore: function(inside, before, insert2, root) {
+          root = root || _.languages;
+          var grammar = root[inside];
+          var ret = {};
+          for (var token in grammar) {
+            if (grammar.hasOwnProperty(token)) {
+              if (token == before) {
+                for (var newToken in insert2) {
+                  if (insert2.hasOwnProperty(newToken)) {
+                    ret[newToken] = insert2[newToken];
+                  }
+                }
+              }
+              if (!insert2.hasOwnProperty(token)) {
+                ret[token] = grammar[token];
+              }
+            }
+          }
+          var old = root[inside];
+          root[inside] = ret;
+          _.languages.DFS(_.languages, function(key, value) {
+            if (value === old && key != inside) {
+              this[key] = ret;
+            }
+          });
+          return ret;
+        },
+        DFS: function DFS(o, callback, type, visited) {
+          visited = visited || {};
+          var objId = _.util.objId;
+          for (var i in o) {
+            if (o.hasOwnProperty(i)) {
+              callback.call(o, i, o[i], type || i);
+              var property = o[i], propertyType = _.util.type(property);
+              if (propertyType === "Object" && !visited[objId(property)]) {
+                visited[objId(property)] = true;
+                DFS(property, callback, null, visited);
+              } else if (propertyType === "Array" && !visited[objId(property)]) {
+                visited[objId(property)] = true;
+                DFS(property, callback, i, visited);
+              }
+            }
+          }
+        }
+      },
+      plugins: {},
+      highlightAll: function(async, callback) {
+        _.highlightAllUnder(document, async, callback);
+      },
+      highlightAllUnder: function(container, async, callback) {
+        var env = {
+          callback,
+          container,
+          selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
+        };
+        _.hooks.run("before-highlightall", env);
+        env.elements = Array.prototype.slice.apply(env.container.querySelectorAll(env.selector));
+        _.hooks.run("before-all-elements-highlight", env);
+        for (var i = 0, element2; element2 = env.elements[i++]; ) {
+          _.highlightElement(element2, async === true, env.callback);
+        }
+      },
+      highlightElement: function(element2, async, callback) {
+        var language = _.util.getLanguage(element2);
+        var grammar = _.languages[language];
+        element2.className = element2.className.replace(lang, "").replace(/\s+/g, " ") + " language-" + language;
+        var parent = element2.parentElement;
+        if (parent && parent.nodeName.toLowerCase() === "pre") {
+          parent.className = parent.className.replace(lang, "").replace(/\s+/g, " ") + " language-" + language;
+        }
+        var code = element2.textContent;
+        var env = {
+          element: element2,
+          language,
+          grammar,
+          code
+        };
+        function insertHighlightedCode(highlightedCode) {
+          env.highlightedCode = highlightedCode;
+          _.hooks.run("before-insert", env);
+          env.element.innerHTML = env.highlightedCode;
+          _.hooks.run("after-highlight", env);
+          _.hooks.run("complete", env);
+          callback && callback.call(env.element);
+        }
+        _.hooks.run("before-sanity-check", env);
+        if (!env.code) {
+          _.hooks.run("complete", env);
+          callback && callback.call(env.element);
+          return;
+        }
+        _.hooks.run("before-highlight", env);
+        if (!env.grammar) {
+          insertHighlightedCode(_.util.encode(env.code));
+          return;
+        }
+        if (async && _self2.Worker) {
+          var worker = new Worker(_.filename);
+          worker.onmessage = function(evt) {
+            insertHighlightedCode(evt.data);
+          };
+          worker.postMessage(JSON.stringify({
+            language: env.language,
+            code: env.code,
+            immediateClose: true
+          }));
+        } else {
+          insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
+        }
+      },
+      highlight: function(text, grammar, language) {
+        var env = {
+          code: text,
+          grammar,
+          language
+        };
+        _.hooks.run("before-tokenize", env);
+        env.tokens = _.tokenize(env.code, env.grammar);
+        _.hooks.run("after-tokenize", env);
+        return Token.stringify(_.util.encode(env.tokens), env.language);
+      },
+      tokenize: function(text, grammar) {
+        var rest = grammar.rest;
+        if (rest) {
+          for (var token in rest) {
+            grammar[token] = rest[token];
+          }
+          delete grammar.rest;
+        }
+        var tokenList = new LinkedList();
+        addAfter(tokenList, tokenList.head, text);
+        matchGrammar(text, tokenList, grammar, tokenList.head, 0);
+        return toArray(tokenList);
+      },
+      hooks: {
+        all: {},
+        add: function(name, callback) {
+          var hooks = _.hooks.all;
+          hooks[name] = hooks[name] || [];
+          hooks[name].push(callback);
+        },
+        run: function(name, env) {
+          var callbacks = _.hooks.all[name];
+          if (!callbacks || !callbacks.length) {
+            return;
+          }
+          for (var i = 0, callback; callback = callbacks[i++]; ) {
+            callback(env);
+          }
+        }
+      },
+      Token
+    };
+    _self2.Prism = _;
+    function Token(type, content, alias, matchedStr) {
+      this.type = type;
+      this.content = content;
+      this.alias = alias;
+      this.length = (matchedStr || "").length | 0;
+    }
+    Token.stringify = function stringify(o, language) {
+      if (typeof o == "string") {
+        return o;
+      }
+      if (Array.isArray(o)) {
+        var s = "";
+        o.forEach(function(e) {
+          s += stringify(e, language);
+        });
+        return s;
+      }
+      var env = {
+        type: o.type,
+        content: stringify(o.content, language),
+        tag: "span",
+        classes: ["token", o.type],
+        attributes: {},
+        language
+      };
+      var aliases = o.alias;
+      if (aliases) {
+        if (Array.isArray(aliases)) {
+          Array.prototype.push.apply(env.classes, aliases);
+        } else {
+          env.classes.push(aliases);
+        }
+      }
+      _.hooks.run("wrap", env);
+      var attributes = "";
+      for (var name in env.attributes) {
+        attributes += " " + name + '="' + (env.attributes[name] || "").replace(/"/g, "&quot;") + '"';
+      }
+      return "<" + env.tag + ' class="' + env.classes.join(" ") + '"' + attributes + ">" + env.content + "</" + env.tag + ">";
+    };
+    function matchPattern(pattern, pos, text, lookbehind) {
+      pattern.lastIndex = pos;
+      var match = pattern.exec(text);
+      if (match && lookbehind && match[1]) {
+        var lookbehindLength = match[1].length;
+        match.index += lookbehindLength;
+        match[0] = match[0].slice(lookbehindLength);
+      }
+      return match;
+    }
+    function matchGrammar(text, tokenList, grammar, startNode, startPos, rematch) {
+      for (var token in grammar) {
+        if (!grammar.hasOwnProperty(token) || !grammar[token]) {
+          continue;
+        }
+        var patterns = grammar[token];
+        patterns = Array.isArray(patterns) ? patterns : [patterns];
+        for (var j = 0; j < patterns.length; ++j) {
+          if (rematch && rematch.cause == token + "," + j) {
+            return;
+          }
+          var patternObj = patterns[j], inside = patternObj.inside, lookbehind = !!patternObj.lookbehind, greedy = !!patternObj.greedy, alias = patternObj.alias;
+          if (greedy && !patternObj.pattern.global) {
+            var flags = patternObj.pattern.toString().match(/[imsuy]*$/)[0];
+            patternObj.pattern = RegExp(patternObj.pattern.source, flags + "g");
+          }
+          var pattern = patternObj.pattern || patternObj;
+          for (var currentNode = startNode.next, pos = startPos; currentNode !== tokenList.tail; pos += currentNode.value.length, currentNode = currentNode.next) {
+            if (rematch && pos >= rematch.reach) {
+              break;
+            }
+            var str = currentNode.value;
+            if (tokenList.length > text.length) {
+              return;
+            }
+            if (str instanceof Token) {
+              continue;
+            }
+            var removeCount = 1;
+            var match;
+            if (greedy) {
+              match = matchPattern(pattern, pos, text, lookbehind);
+              if (!match) {
+                break;
+              }
+              var from = match.index;
+              var to = match.index + match[0].length;
+              var p = pos;
+              p += currentNode.value.length;
+              while (from >= p) {
+                currentNode = currentNode.next;
+                p += currentNode.value.length;
+              }
+              p -= currentNode.value.length;
+              pos = p;
+              if (currentNode.value instanceof Token) {
+                continue;
+              }
+              for (var k = currentNode; k !== tokenList.tail && (p < to || typeof k.value === "string"); k = k.next) {
+                removeCount++;
+                p += k.value.length;
+              }
+              removeCount--;
+              str = text.slice(pos, p);
+              match.index -= pos;
+            } else {
+              match = matchPattern(pattern, 0, str, lookbehind);
+              if (!match) {
+                continue;
+              }
+            }
+            var from = match.index, matchStr = match[0], before = str.slice(0, from), after = str.slice(from + matchStr.length);
+            var reach = pos + str.length;
+            if (rematch && reach > rematch.reach) {
+              rematch.reach = reach;
+            }
+            var removeFrom = currentNode.prev;
+            if (before) {
+              removeFrom = addAfter(tokenList, removeFrom, before);
+              pos += before.length;
+            }
+            removeRange(tokenList, removeFrom, removeCount);
+            var wrapped = new Token(token, inside ? _.tokenize(matchStr, inside) : matchStr, alias, matchStr);
+            currentNode = addAfter(tokenList, removeFrom, wrapped);
+            if (after) {
+              addAfter(tokenList, currentNode, after);
+            }
+            if (removeCount > 1) {
+              matchGrammar(text, tokenList, grammar, currentNode.prev, pos, {
+                cause: token + "," + j,
+                reach
+              });
+            }
+          }
+        }
+      }
+    }
+    function LinkedList() {
+      var head = {value: null, prev: null, next: null};
+      var tail = {value: null, prev: head, next: null};
+      head.next = tail;
+      this.head = head;
+      this.tail = tail;
+      this.length = 0;
+    }
+    function addAfter(list, node, value) {
+      var next = node.next;
+      var newNode = {value, prev: node, next};
+      node.next = newNode;
+      next.prev = newNode;
+      list.length++;
+      return newNode;
+    }
+    function removeRange(list, node, count) {
+      var next = node.next;
+      for (var i = 0; i < count && next !== list.tail; i++) {
+        next = next.next;
+      }
+      node.next = next;
+      next.prev = node;
+      list.length -= i;
+    }
+    function toArray(list) {
+      var array = [];
+      var node = list.head.next;
+      while (node !== list.tail) {
+        array.push(node.value);
+        node = node.next;
+      }
+      return array;
+    }
+    if (!_self2.document) {
+      if (!_self2.addEventListener) {
+        return _;
+      }
+      if (!_.disableWorkerMessageHandler) {
+        _self2.addEventListener("message", function(evt) {
+          var message = JSON.parse(evt.data), lang2 = message.language, code = message.code, immediateClose = message.immediateClose;
+          _self2.postMessage(_.highlight(code, _.languages[lang2], lang2));
+          if (immediateClose) {
+            _self2.close();
+          }
+        }, false);
+      }
+      return _;
+    }
+    var script = _.util.currentScript();
+    if (script) {
+      _.filename = script.src;
+      if (script.hasAttribute("data-manual")) {
+        _.manual = true;
+      }
+    }
+    function highlightAutomaticallyCallback() {
+      if (!_.manual) {
+        _.highlightAll();
+      }
+    }
+    if (!_.manual) {
+      var readyState = document.readyState;
+      if (readyState === "loading" || readyState === "interactive" && script && script.defer) {
+        document.addEventListener("DOMContentLoaded", highlightAutomaticallyCallback);
+      } else {
+        if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(highlightAutomaticallyCallback);
+        } else {
+          window.setTimeout(highlightAutomaticallyCallback, 16);
+        }
+      }
+    }
+    return _;
+  }(_self);
+  if (typeof module2 !== "undefined" && module2.exports) {
+    module2.exports = Prism2;
+  }
+  if (typeof global !== "undefined") {
+    global.Prism = Prism2;
+  }
+  Prism2.languages.markup = {
+    comment: /<!--[\s\S]*?-->/,
+    prolog: /<\?[\s\S]+?\?>/,
+    doctype: {
+      pattern: /<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:[^<"'\]]|"[^"]*"|'[^']*'|<(?!!--)|<!--(?:[^-]|-(?!->))*-->)*\]\s*)?>/i,
+      greedy: true,
+      inside: {
+        "internal-subset": {
+          pattern: /(\[)[\s\S]+(?=\]>$)/,
+          lookbehind: true,
+          greedy: true,
+          inside: null
+        },
+        string: {
+          pattern: /"[^"]*"|'[^']*'/,
+          greedy: true
+        },
+        punctuation: /^<!|>$|[[\]]/,
+        "doctype-tag": /^DOCTYPE/,
+        name: /[^\s<>'"]+/
+      }
+    },
+    cdata: /<!\[CDATA\[[\s\S]*?]]>/i,
+    tag: {
+      pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/,
+      greedy: true,
+      inside: {
+        tag: {
+          pattern: /^<\/?[^\s>\/]+/,
+          inside: {
+            punctuation: /^<\/?/,
+            namespace: /^[^\s>\/:]+:/
+          }
+        },
+        "attr-value": {
+          pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,
+          inside: {
+            punctuation: [
+              {
+                pattern: /^=/,
+                alias: "attr-equals"
+              },
+              /"|'/
+            ]
+          }
+        },
+        punctuation: /\/?>/,
+        "attr-name": {
+          pattern: /[^\s>\/]+/,
+          inside: {
+            namespace: /^[^\s>\/:]+:/
+          }
+        }
+      }
+    },
+    entity: [
+      {
+        pattern: /&[\da-z]{1,8};/i,
+        alias: "named-entity"
+      },
+      /&#x?[\da-f]{1,8};/i
+    ]
+  };
+  Prism2.languages.markup["tag"].inside["attr-value"].inside["entity"] = Prism2.languages.markup["entity"];
+  Prism2.languages.markup["doctype"].inside["internal-subset"].inside = Prism2.languages.markup;
+  Prism2.hooks.add("wrap", function(env) {
+    if (env.type === "entity") {
+      env.attributes["title"] = env.content.replace(/&amp;/, "&");
+    }
+  });
+  Object.defineProperty(Prism2.languages.markup.tag, "addInlined", {
+    value: function addInlined2(tagName, lang) {
+      var includedCdataInside = {};
+      includedCdataInside["language-" + lang] = {
+        pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
+        lookbehind: true,
+        inside: Prism2.languages[lang]
+      };
+      includedCdataInside["cdata"] = /^<!\[CDATA\[|\]\]>$/i;
+      var inside = {
+        "included-cdata": {
+          pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
+          inside: includedCdataInside
+        }
+      };
+      inside["language-" + lang] = {
+        pattern: /[\s\S]+/,
+        inside: Prism2.languages[lang]
+      };
+      var def = {};
+      def[tagName] = {
+        pattern: RegExp(/(<__[^>]*>)(?:<!\[CDATA\[(?:[^\]]|\](?!\]>))*\]\]>|(?!<!\[CDATA\[)[\s\S])*?(?=<\/__>)/.source.replace(/__/g, function() {
+          return tagName;
+        }), "i"),
+        lookbehind: true,
+        greedy: true,
+        inside
+      };
+      Prism2.languages.insertBefore("markup", "cdata", def);
+    }
+  });
+  Prism2.languages.html = Prism2.languages.markup;
+  Prism2.languages.mathml = Prism2.languages.markup;
+  Prism2.languages.svg = Prism2.languages.markup;
+  Prism2.languages.xml = Prism2.languages.extend("markup", {});
+  Prism2.languages.ssml = Prism2.languages.xml;
+  Prism2.languages.atom = Prism2.languages.xml;
+  Prism2.languages.rss = Prism2.languages.xml;
+  (function(Prism3) {
+    var string = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;
+    Prism3.languages.css = {
+      comment: /\/\*[\s\S]*?\*\//,
+      atrule: {
+        pattern: /@[\w-](?:[^;{\s]|\s+(?![\s{]))*(?:;|(?=\s*\{))/,
+        inside: {
+          rule: /^@[\w-]+/,
+          "selector-function-argument": {
+            pattern: /(\bselector\s*\(\s*(?![\s)]))(?:[^()\s]|\s+(?![\s)])|\((?:[^()]|\([^()]*\))*\))+(?=\s*\))/,
+            lookbehind: true,
+            alias: "selector"
+          },
+          keyword: {
+            pattern: /(^|[^\w-])(?:and|not|only|or)(?![\w-])/,
+            lookbehind: true
+          }
+        }
+      },
+      url: {
+        pattern: RegExp("\\burl\\((?:" + string.source + "|" + /(?:[^\\\r\n()"']|\\[\s\S])*/.source + ")\\)", "i"),
+        greedy: true,
+        inside: {
+          function: /^url/i,
+          punctuation: /^\(|\)$/,
+          string: {
+            pattern: RegExp("^" + string.source + "$"),
+            alias: "url"
+          }
+        }
+      },
+      selector: RegExp(`[^{}\\s](?:[^{};"'\\s]|\\s+(?![\\s{])|` + string.source + ")*(?=\\s*\\{)"),
+      string: {
+        pattern: string,
+        greedy: true
+      },
+      property: /(?!\s)[-_a-z\xA0-\uFFFF](?:(?!\s)[-\w\xA0-\uFFFF])*(?=\s*:)/i,
+      important: /!important\b/i,
+      function: /[-a-z0-9]+(?=\()/i,
+      punctuation: /[(){};:,]/
+    };
+    Prism3.languages.css["atrule"].inside.rest = Prism3.languages.css;
+    var markup = Prism3.languages.markup;
+    if (markup) {
+      markup.tag.addInlined("style", "css");
+      Prism3.languages.insertBefore("inside", "attr-value", {
+        "style-attr": {
+          pattern: /(^|["'\s])style\s*=\s*(?:"[^"]*"|'[^']*')/i,
+          lookbehind: true,
+          inside: {
+            "attr-value": {
+              pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,
+              inside: {
+                style: {
+                  pattern: /(["'])[\s\S]+(?=["']$)/,
+                  lookbehind: true,
+                  alias: "language-css",
+                  inside: Prism3.languages.css
+                },
+                punctuation: [
+                  {
+                    pattern: /^=/,
+                    alias: "attr-equals"
+                  },
+                  /"|'/
+                ]
+              }
+            },
+            "attr-name": /^style/i
+          }
+        }
+      }, markup.tag);
+    }
+  })(Prism2);
+  Prism2.languages.clike = {
+    comment: [
+      {
+        pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
+        lookbehind: true,
+        greedy: true
+      },
+      {
+        pattern: /(^|[^\\:])\/\/.*/,
+        lookbehind: true,
+        greedy: true
+      }
+    ],
+    string: {
+      pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+      greedy: true
+    },
+    "class-name": {
+      pattern: /(\b(?:class|interface|extends|implements|trait|instanceof|new)\s+|\bcatch\s+\()[\w.\\]+/i,
+      lookbehind: true,
+      inside: {
+        punctuation: /[.\\]/
+      }
+    },
+    keyword: /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+    boolean: /\b(?:true|false)\b/,
+    function: /\w+(?=\()/,
+    number: /\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i,
+    operator: /[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,
+    punctuation: /[{}[\];(),.:]/
+  };
+  Prism2.languages.javascript = Prism2.languages.extend("clike", {
+    "class-name": [
+      Prism2.languages.clike["class-name"],
+      {
+        pattern: /(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:prototype|constructor))/,
+        lookbehind: true
+      }
+    ],
+    keyword: [
+      {
+        pattern: /((?:^|})\s*)(?:catch|finally)\b/,
+        lookbehind: true
+      },
+      {
+        pattern: /(^|[^.]|\.\.\.\s*)\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|(?:get|set)(?=\s*[\[$\w\xA0-\uFFFF])|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+        lookbehind: true
+      }
+    ],
+    function: /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+    number: /\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,
+    operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/
+  });
+  Prism2.languages.javascript["class-name"][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/;
+  Prism2.languages.insertBefore("javascript", "keyword", {
+    regex: {
+      pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,
+      lookbehind: true,
+      greedy: true,
+      inside: {
+        "regex-source": {
+          pattern: /^(\/)[\s\S]+(?=\/[a-z]*$)/,
+          lookbehind: true,
+          alias: "language-regex",
+          inside: Prism2.languages.regex
+        },
+        "regex-flags": /[a-z]+$/,
+        "regex-delimiter": /^\/|\/$/
+      }
+    },
+    "function-variable": {
+      pattern: /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)\s*=>))/,
+      alias: "function"
+    },
+    parameter: [
+      {
+        pattern: /(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,
+        lookbehind: true,
+        inside: Prism2.languages.javascript
+      },
+      {
+        pattern: /(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,
+        inside: Prism2.languages.javascript
+      },
+      {
+        pattern: /(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,
+        lookbehind: true,
+        inside: Prism2.languages.javascript
+      },
+      {
+        pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,
+        lookbehind: true,
+        inside: Prism2.languages.javascript
+      }
+    ],
+    constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/
+  });
+  Prism2.languages.insertBefore("javascript", "string", {
+    "template-string": {
+      pattern: /`(?:\\[\s\S]|\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}|(?!\${)[^\\`])*`/,
+      greedy: true,
+      inside: {
+        "template-punctuation": {
+          pattern: /^`|`$/,
+          alias: "string"
+        },
+        interpolation: {
+          pattern: /((?:^|[^\\])(?:\\{2})*)\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}/,
+          lookbehind: true,
+          inside: {
+            "interpolation-punctuation": {
+              pattern: /^\${|}$/,
+              alias: "punctuation"
+            },
+            rest: Prism2.languages.javascript
+          }
+        },
+        string: /[\s\S]+/
+      }
+    }
+  });
+  if (Prism2.languages.markup) {
+    Prism2.languages.markup.tag.addInlined("script", "javascript");
+  }
+  Prism2.languages.js = Prism2.languages.javascript;
+  (function() {
+    if (typeof self === "undefined" || !self.Prism || !self.document) {
+      return;
+    }
+    if (!Element.prototype.matches) {
+      Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+    var Prism3 = window.Prism;
+    var LOADING_MESSAGE = "Loading…";
+    var FAILURE_MESSAGE = function(status, message) {
+      return "✖ Error " + status + " while fetching file: " + message;
+    };
+    var FAILURE_EMPTY_MESSAGE = "✖ Error: File does not exist or is empty";
+    var EXTENSIONS = {
+      js: "javascript",
+      py: "python",
+      rb: "ruby",
+      ps1: "powershell",
+      psm1: "powershell",
+      sh: "bash",
+      bat: "batch",
+      h: "c",
+      tex: "latex"
+    };
+    var STATUS_ATTR = "data-src-status";
+    var STATUS_LOADING = "loading";
+    var STATUS_LOADED = "loaded";
+    var STATUS_FAILED = "failed";
+    var SELECTOR = "pre[data-src]:not([" + STATUS_ATTR + '="' + STATUS_LOADED + '"]):not([' + STATUS_ATTR + '="' + STATUS_LOADING + '"])';
+    var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+    function setLanguageClass(element2, language) {
+      var className = element2.className;
+      className = className.replace(lang, " ") + " language-" + language;
+      element2.className = className.replace(/\s+/g, " ").trim();
+    }
+    Prism3.hooks.add("before-highlightall", function(env) {
+      env.selector += ", " + SELECTOR;
+    });
+    Prism3.hooks.add("before-sanity-check", function(env) {
+      var pre = env.element;
+      if (pre.matches(SELECTOR)) {
+        env.code = "";
+        pre.setAttribute(STATUS_ATTR, STATUS_LOADING);
+        var code = pre.appendChild(document.createElement("CODE"));
+        code.textContent = LOADING_MESSAGE;
+        var src = pre.getAttribute("data-src");
+        var language = env.language;
+        if (language === "none") {
+          var extension = (/\.(\w+)$/.exec(src) || [, "none"])[1];
+          language = EXTENSIONS[extension] || extension;
+        }
+        setLanguageClass(code, language);
+        setLanguageClass(pre, language);
+        var autoloader = Prism3.plugins.autoloader;
+        if (autoloader) {
+          autoloader.loadLanguages(language);
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", src, true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) {
+            if (xhr.status < 400 && xhr.responseText) {
+              pre.setAttribute(STATUS_ATTR, STATUS_LOADED);
+              code.textContent = xhr.responseText;
+              Prism3.highlightElement(code);
+            } else {
+              pre.setAttribute(STATUS_ATTR, STATUS_FAILED);
+              if (xhr.status >= 400) {
+                code.textContent = FAILURE_MESSAGE(xhr.status, xhr.statusText);
+              } else {
+                code.textContent = FAILURE_EMPTY_MESSAGE;
+              }
+            }
+          }
+        };
+        xhr.send(null);
+      }
+    });
+    Prism3.plugins.fileHighlight = {
+      highlight: function highlight(container) {
+        var elements = (container || document).querySelectorAll(SELECTOR);
+        for (var i = 0, element2; element2 = elements[i++]; ) {
+          Prism3.highlightElement(element2);
+        }
+      }
+    };
+    var logged = false;
+    Prism3.fileHighlight = function() {
+      if (!logged) {
+        console.warn("Prism.fileHighlight is deprecated. Use `Prism.plugins.fileHighlight.highlight` instead.");
+        logged = true;
+      }
+      Prism3.plugins.fileHighlight.highlight.apply(this, arguments);
+    };
+  })();
+});
+
+// ../../../node_modules/is-class/is-class.js
+var require_is_class = __commonJS((exports2, module2) => {
+  (function(root) {
+    const toString = Function.prototype.toString;
+    function fnBody(fn6) {
+      return toString.call(fn6).replace(/^[^{]*{\s*/, "").replace(/\s*}[^}]*$/, "");
+    }
+    function isClass(fn6) {
+      if (typeof fn6 !== "function") {
+        return false;
+      }
+      if (/^class[\s{]/.test(toString.call(fn6))) {
+        return true;
+      }
+      const body = fnBody(fn6);
+      return /classCallCheck\(/.test(body) || /TypeError\("Cannot call a class as a function"\)/.test(body);
+    }
+    if (typeof exports2 !== "undefined") {
+      if (typeof module2 !== "undefined" && module2.exports) {
+        exports2 = module2.exports = isClass;
+      }
+      exports2.isClass = isClass;
+    } else if (typeof define === "function" && define.amd) {
+      define([], function() {
+        return isClass;
+      });
+    } else {
+      root.isClass = isClass;
+    }
+  })(exports2);
+});
+
+// ../../../node_modules/lodash.clone/index.js
+var require_lodash = __commonJS((exports2, module2) => {
+  var LARGE_ARRAY_SIZE = 200;
+  var HASH_UNDEFINED = "__lodash_hash_undefined__";
+  var MAX_SAFE_INTEGER = 9007199254740991;
+  var argsTag = "[object Arguments]";
+  var arrayTag = "[object Array]";
+  var boolTag = "[object Boolean]";
+  var dateTag = "[object Date]";
+  var errorTag = "[object Error]";
+  var funcTag = "[object Function]";
+  var genTag = "[object GeneratorFunction]";
+  var mapTag = "[object Map]";
+  var numberTag = "[object Number]";
+  var objectTag = "[object Object]";
+  var promiseTag = "[object Promise]";
+  var regexpTag = "[object RegExp]";
+  var setTag = "[object Set]";
+  var stringTag = "[object String]";
+  var symbolTag = "[object Symbol]";
+  var weakMapTag = "[object WeakMap]";
+  var arrayBufferTag = "[object ArrayBuffer]";
+  var dataViewTag = "[object DataView]";
+  var float32Tag = "[object Float32Array]";
+  var float64Tag = "[object Float64Array]";
+  var int8Tag = "[object Int8Array]";
+  var int16Tag = "[object Int16Array]";
+  var int32Tag = "[object Int32Array]";
+  var uint8Tag = "[object Uint8Array]";
+  var uint8ClampedTag = "[object Uint8ClampedArray]";
+  var uint16Tag = "[object Uint16Array]";
+  var uint32Tag = "[object Uint32Array]";
+  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+  var reFlags = /\w*$/;
+  var reIsHostCtor = /^\[object .+?Constructor\]$/;
+  var reIsUint = /^(?:0|[1-9]\d*)$/;
+  var cloneableTags = {};
+  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
+  var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+  var root = freeGlobal || freeSelf || Function("return this")();
+  var freeExports = typeof exports2 == "object" && exports2 && !exports2.nodeType && exports2;
+  var freeModule = freeExports && typeof module2 == "object" && module2 && !module2.nodeType && module2;
+  var moduleExports = freeModule && freeModule.exports === freeExports;
+  function addMapEntry(map, pair) {
+    map.set(pair[0], pair[1]);
+    return map;
+  }
+  function addSetEntry(set, value) {
+    set.add(value);
+    return set;
+  }
+  function arrayEach(array, iteratee) {
+    var index = -1, length = array ? array.length : 0;
+    while (++index < length) {
+      if (iteratee(array[index], index, array) === false) {
+        break;
+      }
+    }
+    return array;
+  }
+  function arrayPush(array, values) {
+    var index = -1, length = values.length, offset = array.length;
+    while (++index < length) {
+      array[offset + index] = values[index];
+    }
+    return array;
+  }
+  function arrayReduce(array, iteratee, accumulator, initAccum) {
+    var index = -1, length = array ? array.length : 0;
+    if (initAccum && length) {
+      accumulator = array[++index];
+    }
+    while (++index < length) {
+      accumulator = iteratee(accumulator, array[index], index, array);
+    }
+    return accumulator;
+  }
+  function baseTimes(n, iteratee) {
+    var index = -1, result = Array(n);
+    while (++index < n) {
+      result[index] = iteratee(index);
+    }
+    return result;
+  }
+  function getValue(object, key) {
+    return object == null ? void 0 : object[key];
+  }
+  function isHostObject(value) {
+    var result = false;
+    if (value != null && typeof value.toString != "function") {
+      try {
+        result = !!(value + "");
+      } catch (e) {
+      }
+    }
+    return result;
+  }
+  function mapToArray(map) {
+    var index = -1, result = Array(map.size);
+    map.forEach(function(value, key) {
+      result[++index] = [key, value];
+    });
+    return result;
+  }
+  function overArg(func, transform) {
+    return function(arg) {
+      return func(transform(arg));
+    };
+  }
+  function setToArray(set) {
+    var index = -1, result = Array(set.size);
+    set.forEach(function(value) {
+      result[++index] = value;
+    });
+    return result;
+  }
+  var arrayProto = Array.prototype;
+  var funcProto = Function.prototype;
+  var objectProto = Object.prototype;
+  var coreJsData = root["__core-js_shared__"];
+  var maskSrcKey = function() {
+    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
+    return uid ? "Symbol(src)_1." + uid : "";
+  }();
+  var funcToString = funcProto.toString;
+  var hasOwnProperty = objectProto.hasOwnProperty;
+  var objectToString = objectProto.toString;
+  var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+  var Buffer2 = moduleExports ? root.Buffer : void 0;
+  var Symbol2 = root.Symbol;
+  var Uint8Array2 = root.Uint8Array;
+  var getPrototype = overArg(Object.getPrototypeOf, Object);
+  var objectCreate = Object.create;
+  var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+  var splice = arrayProto.splice;
+  var nativeGetSymbols = Object.getOwnPropertySymbols;
+  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
+  var nativeKeys = overArg(Object.keys, Object);
+  var DataView = getNative(root, "DataView");
+  var Map2 = getNative(root, "Map");
+  var Promise2 = getNative(root, "Promise");
+  var Set2 = getNative(root, "Set");
+  var WeakMap2 = getNative(root, "WeakMap");
+  var nativeCreate = getNative(Object, "create");
+  var dataViewCtorString = toSource(DataView);
+  var mapCtorString = toSource(Map2);
+  var promiseCtorString = toSource(Promise2);
+  var setCtorString = toSource(Set2);
+  var weakMapCtorString = toSource(WeakMap2);
+  var symbolProto = Symbol2 ? Symbol2.prototype : void 0;
+  var symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+  function Hash(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function hashClear() {
+    this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  }
+  function hashDelete(key) {
+    return this.has(key) && delete this.__data__[key];
+  }
+  function hashGet(key) {
+    var data = this.__data__;
+    if (nativeCreate) {
+      var result = data[key];
+      return result === HASH_UNDEFINED ? void 0 : result;
+    }
+    return hasOwnProperty.call(data, key) ? data[key] : void 0;
+  }
+  function hashHas(key) {
+    var data = this.__data__;
+    return nativeCreate ? data[key] !== void 0 : hasOwnProperty.call(data, key);
+  }
+  function hashSet(key, value) {
+    var data = this.__data__;
+    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
+    return this;
+  }
+  Hash.prototype.clear = hashClear;
+  Hash.prototype["delete"] = hashDelete;
+  Hash.prototype.get = hashGet;
+  Hash.prototype.has = hashHas;
+  Hash.prototype.set = hashSet;
+  function ListCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function listCacheClear() {
+    this.__data__ = [];
+  }
+  function listCacheDelete(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      return false;
+    }
+    var lastIndex = data.length - 1;
+    if (index == lastIndex) {
+      data.pop();
+    } else {
+      splice.call(data, index, 1);
+    }
+    return true;
+  }
+  function listCacheGet(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    return index < 0 ? void 0 : data[index][1];
+  }
+  function listCacheHas(key) {
+    return assocIndexOf(this.__data__, key) > -1;
+  }
+  function listCacheSet(key, value) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      data.push([key, value]);
+    } else {
+      data[index][1] = value;
+    }
+    return this;
+  }
+  ListCache.prototype.clear = listCacheClear;
+  ListCache.prototype["delete"] = listCacheDelete;
+  ListCache.prototype.get = listCacheGet;
+  ListCache.prototype.has = listCacheHas;
+  ListCache.prototype.set = listCacheSet;
+  function MapCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function mapCacheClear() {
+    this.__data__ = {
+      hash: new Hash(),
+      map: new (Map2 || ListCache)(),
+      string: new Hash()
+    };
+  }
+  function mapCacheDelete(key) {
+    return getMapData(this, key)["delete"](key);
+  }
+  function mapCacheGet(key) {
+    return getMapData(this, key).get(key);
+  }
+  function mapCacheHas(key) {
+    return getMapData(this, key).has(key);
+  }
+  function mapCacheSet(key, value) {
+    getMapData(this, key).set(key, value);
+    return this;
+  }
+  MapCache.prototype.clear = mapCacheClear;
+  MapCache.prototype["delete"] = mapCacheDelete;
+  MapCache.prototype.get = mapCacheGet;
+  MapCache.prototype.has = mapCacheHas;
+  MapCache.prototype.set = mapCacheSet;
+  function Stack(entries) {
+    this.__data__ = new ListCache(entries);
+  }
+  function stackClear() {
+    this.__data__ = new ListCache();
+  }
+  function stackDelete(key) {
+    return this.__data__["delete"](key);
+  }
+  function stackGet(key) {
+    return this.__data__.get(key);
+  }
+  function stackHas(key) {
+    return this.__data__.has(key);
+  }
+  function stackSet(key, value) {
+    var cache = this.__data__;
+    if (cache instanceof ListCache) {
+      var pairs = cache.__data__;
+      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+        pairs.push([key, value]);
+        return this;
+      }
+      cache = this.__data__ = new MapCache(pairs);
+    }
+    cache.set(key, value);
+    return this;
+  }
+  Stack.prototype.clear = stackClear;
+  Stack.prototype["delete"] = stackDelete;
+  Stack.prototype.get = stackGet;
+  Stack.prototype.has = stackHas;
+  Stack.prototype.set = stackSet;
+  function arrayLikeKeys(value, inherited) {
+    var result = isArray3(value) || isArguments(value) ? baseTimes(value.length, String) : [];
+    var length = result.length, skipIndexes = !!length;
+    for (var key in value) {
+      if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
+        result.push(key);
+      }
+    }
+    return result;
+  }
+  function assignValue(object, key, value) {
+    var objValue = object[key];
+    if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
+      object[key] = value;
+    }
+  }
+  function assocIndexOf(array, key) {
+    var length = array.length;
+    while (length--) {
+      if (eq(array[length][0], key)) {
+        return length;
+      }
+    }
+    return -1;
+  }
+  function baseAssign(object, source) {
+    return object && copyObject(source, keys(source), object);
+  }
+  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
+    var result;
+    if (customizer) {
+      result = object ? customizer(value, key, object, stack) : customizer(value);
+    }
+    if (result !== void 0) {
+      return result;
+    }
+    if (!isObject4(value)) {
+      return value;
+    }
+    var isArr = isArray3(value);
+    if (isArr) {
+      result = initCloneArray(value);
+      if (!isDeep) {
+        return copyArray(value, result);
+      }
+    } else {
+      var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
+      if (isBuffer(value)) {
+        return cloneBuffer(value, isDeep);
+      }
+      if (tag == objectTag || tag == argsTag || isFunc && !object) {
+        if (isHostObject(value)) {
+          return object ? value : {};
+        }
+        result = initCloneObject(isFunc ? {} : value);
+        if (!isDeep) {
+          return copySymbols(value, baseAssign(result, value));
+        }
+      } else {
+        if (!cloneableTags[tag]) {
+          return object ? value : {};
+        }
+        result = initCloneByTag(value, tag, baseClone, isDeep);
+      }
+    }
+    stack || (stack = new Stack());
+    var stacked = stack.get(value);
+    if (stacked) {
+      return stacked;
+    }
+    stack.set(value, result);
+    if (!isArr) {
+      var props = isFull ? getAllKeys(value) : keys(value);
+    }
+    arrayEach(props || value, function(subValue, key2) {
+      if (props) {
+        key2 = subValue;
+        subValue = value[key2];
+      }
+      assignValue(result, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
+    });
+    return result;
+  }
+  function baseCreate(proto) {
+    return isObject4(proto) ? objectCreate(proto) : {};
+  }
+  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+    var result = keysFunc(object);
+    return isArray3(object) ? result : arrayPush(result, symbolsFunc(object));
+  }
+  function baseGetTag(value) {
+    return objectToString.call(value);
+  }
+  function baseIsNative(value) {
+    if (!isObject4(value) || isMasked(value)) {
+      return false;
+    }
+    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
+    return pattern.test(toSource(value));
+  }
+  function baseKeys(object) {
+    if (!isPrototype(object)) {
+      return nativeKeys(object);
+    }
+    var result = [];
+    for (var key in Object(object)) {
+      if (hasOwnProperty.call(object, key) && key != "constructor") {
+        result.push(key);
+      }
+    }
+    return result;
+  }
+  function cloneBuffer(buffer, isDeep) {
+    if (isDeep) {
+      return buffer.slice();
+    }
+    var result = new buffer.constructor(buffer.length);
+    buffer.copy(result);
+    return result;
+  }
+  function cloneArrayBuffer(arrayBuffer) {
+    var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
+    new Uint8Array2(result).set(new Uint8Array2(arrayBuffer));
+    return result;
+  }
+  function cloneDataView(dataView, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+  }
+  function cloneMap(map, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(mapToArray(map), true) : mapToArray(map);
+    return arrayReduce(array, addMapEntry, new map.constructor());
+  }
+  function cloneRegExp(regexp) {
+    var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+    result.lastIndex = regexp.lastIndex;
+    return result;
+  }
+  function cloneSet(set, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
+    return arrayReduce(array, addSetEntry, new set.constructor());
+  }
+  function cloneSymbol(symbol) {
+    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
+  }
+  function cloneTypedArray(typedArray, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+  }
+  function copyArray(source, array) {
+    var index = -1, length = source.length;
+    array || (array = Array(length));
+    while (++index < length) {
+      array[index] = source[index];
+    }
+    return array;
+  }
+  function copyObject(source, props, object, customizer) {
+    object || (object = {});
+    var index = -1, length = props.length;
+    while (++index < length) {
+      var key = props[index];
+      var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
+      assignValue(object, key, newValue === void 0 ? source[key] : newValue);
+    }
+    return object;
+  }
+  function copySymbols(source, object) {
+    return copyObject(source, getSymbols(source), object);
+  }
+  function getAllKeys(object) {
+    return baseGetAllKeys(object, keys, getSymbols);
+  }
+  function getMapData(map, key) {
+    var data = map.__data__;
+    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
+  }
+  function getNative(object, key) {
+    var value = getValue(object, key);
+    return baseIsNative(value) ? value : void 0;
+  }
+  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+  var getTag = baseGetTag;
+  if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
+    getTag = function(value) {
+      var result = objectToString.call(value), Ctor = result == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
+      if (ctorString) {
+        switch (ctorString) {
+          case dataViewCtorString:
+            return dataViewTag;
+          case mapCtorString:
+            return mapTag;
+          case promiseCtorString:
+            return promiseTag;
+          case setCtorString:
+            return setTag;
+          case weakMapCtorString:
+            return weakMapTag;
+        }
+      }
+      return result;
+    };
+  }
+  function initCloneArray(array) {
+    var length = array.length, result = array.constructor(length);
+    if (length && typeof array[0] == "string" && hasOwnProperty.call(array, "index")) {
+      result.index = array.index;
+      result.input = array.input;
+    }
+    return result;
+  }
+  function initCloneObject(object) {
+    return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
+  }
+  function initCloneByTag(object, tag, cloneFunc, isDeep) {
+    var Ctor = object.constructor;
+    switch (tag) {
+      case arrayBufferTag:
+        return cloneArrayBuffer(object);
+      case boolTag:
+      case dateTag:
+        return new Ctor(+object);
+      case dataViewTag:
+        return cloneDataView(object, isDeep);
+      case float32Tag:
+      case float64Tag:
+      case int8Tag:
+      case int16Tag:
+      case int32Tag:
+      case uint8Tag:
+      case uint8ClampedTag:
+      case uint16Tag:
+      case uint32Tag:
+        return cloneTypedArray(object, isDeep);
+      case mapTag:
+        return cloneMap(object, isDeep, cloneFunc);
+      case numberTag:
+      case stringTag:
+        return new Ctor(object);
+      case regexpTag:
+        return cloneRegExp(object);
+      case setTag:
+        return cloneSet(object, isDeep, cloneFunc);
+      case symbolTag:
+        return cloneSymbol(object);
+    }
+  }
+  function isIndex(value, length) {
+    length = length == null ? MAX_SAFE_INTEGER : length;
+    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+  }
+  function isKeyable(value) {
+    var type = typeof value;
+    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+  }
+  function isMasked(func) {
+    return !!maskSrcKey && maskSrcKey in func;
+  }
+  function isPrototype(value) {
+    var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto;
+    return value === proto;
+  }
+  function toSource(func) {
+    if (func != null) {
+      try {
+        return funcToString.call(func);
+      } catch (e) {
+      }
+      try {
+        return func + "";
+      } catch (e) {
+      }
+    }
+    return "";
+  }
+  function clone3(value) {
+    return baseClone(value, false, true);
+  }
+  function eq(value, other) {
+    return value === other || value !== value && other !== other;
+  }
+  function isArguments(value) {
+    return isArrayLikeObject(value) && hasOwnProperty.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
+  }
+  var isArray3 = Array.isArray;
+  function isArrayLike(value) {
+    return value != null && isLength(value.length) && !isFunction2(value);
+  }
+  function isArrayLikeObject(value) {
+    return isObjectLike(value) && isArrayLike(value);
+  }
+  var isBuffer = nativeIsBuffer || stubFalse;
+  function isFunction2(value) {
+    var tag = isObject4(value) ? objectToString.call(value) : "";
+    return tag == funcTag || tag == genTag;
+  }
+  function isLength(value) {
+    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  }
+  function isObject4(value) {
+    var type = typeof value;
+    return !!value && (type == "object" || type == "function");
+  }
+  function isObjectLike(value) {
+    return !!value && typeof value == "object";
+  }
+  function keys(object) {
+    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+  }
+  function stubArray() {
+    return [];
+  }
+  function stubFalse() {
+    return false;
+  }
+  module2.exports = clone3;
+});
+
+// ../../../node_modules/lodash.clonedeep/index.js
+var require_lodash2 = __commonJS((exports2, module2) => {
+  var LARGE_ARRAY_SIZE = 200;
+  var HASH_UNDEFINED = "__lodash_hash_undefined__";
+  var MAX_SAFE_INTEGER = 9007199254740991;
+  var argsTag = "[object Arguments]";
+  var arrayTag = "[object Array]";
+  var boolTag = "[object Boolean]";
+  var dateTag = "[object Date]";
+  var errorTag = "[object Error]";
+  var funcTag = "[object Function]";
+  var genTag = "[object GeneratorFunction]";
+  var mapTag = "[object Map]";
+  var numberTag = "[object Number]";
+  var objectTag = "[object Object]";
+  var promiseTag = "[object Promise]";
+  var regexpTag = "[object RegExp]";
+  var setTag = "[object Set]";
+  var stringTag = "[object String]";
+  var symbolTag = "[object Symbol]";
+  var weakMapTag = "[object WeakMap]";
+  var arrayBufferTag = "[object ArrayBuffer]";
+  var dataViewTag = "[object DataView]";
+  var float32Tag = "[object Float32Array]";
+  var float64Tag = "[object Float64Array]";
+  var int8Tag = "[object Int8Array]";
+  var int16Tag = "[object Int16Array]";
+  var int32Tag = "[object Int32Array]";
+  var uint8Tag = "[object Uint8Array]";
+  var uint8ClampedTag = "[object Uint8ClampedArray]";
+  var uint16Tag = "[object Uint16Array]";
+  var uint32Tag = "[object Uint32Array]";
+  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+  var reFlags = /\w*$/;
+  var reIsHostCtor = /^\[object .+?Constructor\]$/;
+  var reIsUint = /^(?:0|[1-9]\d*)$/;
+  var cloneableTags = {};
+  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
+  var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+  var root = freeGlobal || freeSelf || Function("return this")();
+  var freeExports = typeof exports2 == "object" && exports2 && !exports2.nodeType && exports2;
+  var freeModule = freeExports && typeof module2 == "object" && module2 && !module2.nodeType && module2;
+  var moduleExports = freeModule && freeModule.exports === freeExports;
+  function addMapEntry(map, pair) {
+    map.set(pair[0], pair[1]);
+    return map;
+  }
+  function addSetEntry(set, value) {
+    set.add(value);
+    return set;
+  }
+  function arrayEach(array, iteratee) {
+    var index = -1, length = array ? array.length : 0;
+    while (++index < length) {
+      if (iteratee(array[index], index, array) === false) {
+        break;
+      }
+    }
+    return array;
+  }
+  function arrayPush(array, values) {
+    var index = -1, length = values.length, offset = array.length;
+    while (++index < length) {
+      array[offset + index] = values[index];
+    }
+    return array;
+  }
+  function arrayReduce(array, iteratee, accumulator, initAccum) {
+    var index = -1, length = array ? array.length : 0;
+    if (initAccum && length) {
+      accumulator = array[++index];
+    }
+    while (++index < length) {
+      accumulator = iteratee(accumulator, array[index], index, array);
+    }
+    return accumulator;
+  }
+  function baseTimes(n, iteratee) {
+    var index = -1, result = Array(n);
+    while (++index < n) {
+      result[index] = iteratee(index);
+    }
+    return result;
+  }
+  function getValue(object, key) {
+    return object == null ? void 0 : object[key];
+  }
+  function isHostObject(value) {
+    var result = false;
+    if (value != null && typeof value.toString != "function") {
+      try {
+        result = !!(value + "");
+      } catch (e) {
+      }
+    }
+    return result;
+  }
+  function mapToArray(map) {
+    var index = -1, result = Array(map.size);
+    map.forEach(function(value, key) {
+      result[++index] = [key, value];
+    });
+    return result;
+  }
+  function overArg(func, transform) {
+    return function(arg) {
+      return func(transform(arg));
+    };
+  }
+  function setToArray(set) {
+    var index = -1, result = Array(set.size);
+    set.forEach(function(value) {
+      result[++index] = value;
+    });
+    return result;
+  }
+  var arrayProto = Array.prototype;
+  var funcProto = Function.prototype;
+  var objectProto = Object.prototype;
+  var coreJsData = root["__core-js_shared__"];
+  var maskSrcKey = function() {
+    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
+    return uid ? "Symbol(src)_1." + uid : "";
+  }();
+  var funcToString = funcProto.toString;
+  var hasOwnProperty = objectProto.hasOwnProperty;
+  var objectToString = objectProto.toString;
+  var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+  var Buffer2 = moduleExports ? root.Buffer : void 0;
+  var Symbol2 = root.Symbol;
+  var Uint8Array2 = root.Uint8Array;
+  var getPrototype = overArg(Object.getPrototypeOf, Object);
+  var objectCreate = Object.create;
+  var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+  var splice = arrayProto.splice;
+  var nativeGetSymbols = Object.getOwnPropertySymbols;
+  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
+  var nativeKeys = overArg(Object.keys, Object);
+  var DataView = getNative(root, "DataView");
+  var Map2 = getNative(root, "Map");
+  var Promise2 = getNative(root, "Promise");
+  var Set2 = getNative(root, "Set");
+  var WeakMap2 = getNative(root, "WeakMap");
+  var nativeCreate = getNative(Object, "create");
+  var dataViewCtorString = toSource(DataView);
+  var mapCtorString = toSource(Map2);
+  var promiseCtorString = toSource(Promise2);
+  var setCtorString = toSource(Set2);
+  var weakMapCtorString = toSource(WeakMap2);
+  var symbolProto = Symbol2 ? Symbol2.prototype : void 0;
+  var symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+  function Hash(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function hashClear() {
+    this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  }
+  function hashDelete(key) {
+    return this.has(key) && delete this.__data__[key];
+  }
+  function hashGet(key) {
+    var data = this.__data__;
+    if (nativeCreate) {
+      var result = data[key];
+      return result === HASH_UNDEFINED ? void 0 : result;
+    }
+    return hasOwnProperty.call(data, key) ? data[key] : void 0;
+  }
+  function hashHas(key) {
+    var data = this.__data__;
+    return nativeCreate ? data[key] !== void 0 : hasOwnProperty.call(data, key);
+  }
+  function hashSet(key, value) {
+    var data = this.__data__;
+    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
+    return this;
+  }
+  Hash.prototype.clear = hashClear;
+  Hash.prototype["delete"] = hashDelete;
+  Hash.prototype.get = hashGet;
+  Hash.prototype.has = hashHas;
+  Hash.prototype.set = hashSet;
+  function ListCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function listCacheClear() {
+    this.__data__ = [];
+  }
+  function listCacheDelete(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      return false;
+    }
+    var lastIndex = data.length - 1;
+    if (index == lastIndex) {
+      data.pop();
+    } else {
+      splice.call(data, index, 1);
+    }
+    return true;
+  }
+  function listCacheGet(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    return index < 0 ? void 0 : data[index][1];
+  }
+  function listCacheHas(key) {
+    return assocIndexOf(this.__data__, key) > -1;
+  }
+  function listCacheSet(key, value) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      data.push([key, value]);
+    } else {
+      data[index][1] = value;
+    }
+    return this;
+  }
+  ListCache.prototype.clear = listCacheClear;
+  ListCache.prototype["delete"] = listCacheDelete;
+  ListCache.prototype.get = listCacheGet;
+  ListCache.prototype.has = listCacheHas;
+  ListCache.prototype.set = listCacheSet;
+  function MapCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function mapCacheClear() {
+    this.__data__ = {
+      hash: new Hash(),
+      map: new (Map2 || ListCache)(),
+      string: new Hash()
+    };
+  }
+  function mapCacheDelete(key) {
+    return getMapData(this, key)["delete"](key);
+  }
+  function mapCacheGet(key) {
+    return getMapData(this, key).get(key);
+  }
+  function mapCacheHas(key) {
+    return getMapData(this, key).has(key);
+  }
+  function mapCacheSet(key, value) {
+    getMapData(this, key).set(key, value);
+    return this;
+  }
+  MapCache.prototype.clear = mapCacheClear;
+  MapCache.prototype["delete"] = mapCacheDelete;
+  MapCache.prototype.get = mapCacheGet;
+  MapCache.prototype.has = mapCacheHas;
+  MapCache.prototype.set = mapCacheSet;
+  function Stack(entries) {
+    this.__data__ = new ListCache(entries);
+  }
+  function stackClear() {
+    this.__data__ = new ListCache();
+  }
+  function stackDelete(key) {
+    return this.__data__["delete"](key);
+  }
+  function stackGet(key) {
+    return this.__data__.get(key);
+  }
+  function stackHas(key) {
+    return this.__data__.has(key);
+  }
+  function stackSet(key, value) {
+    var cache = this.__data__;
+    if (cache instanceof ListCache) {
+      var pairs = cache.__data__;
+      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+        pairs.push([key, value]);
+        return this;
+      }
+      cache = this.__data__ = new MapCache(pairs);
+    }
+    cache.set(key, value);
+    return this;
+  }
+  Stack.prototype.clear = stackClear;
+  Stack.prototype["delete"] = stackDelete;
+  Stack.prototype.get = stackGet;
+  Stack.prototype.has = stackHas;
+  Stack.prototype.set = stackSet;
+  function arrayLikeKeys(value, inherited) {
+    var result = isArray3(value) || isArguments(value) ? baseTimes(value.length, String) : [];
+    var length = result.length, skipIndexes = !!length;
+    for (var key in value) {
+      if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
+        result.push(key);
+      }
+    }
+    return result;
+  }
+  function assignValue(object, key, value) {
+    var objValue = object[key];
+    if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
+      object[key] = value;
+    }
+  }
+  function assocIndexOf(array, key) {
+    var length = array.length;
+    while (length--) {
+      if (eq(array[length][0], key)) {
+        return length;
+      }
+    }
+    return -1;
+  }
+  function baseAssign(object, source) {
+    return object && copyObject(source, keys(source), object);
+  }
+  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
+    var result;
+    if (customizer) {
+      result = object ? customizer(value, key, object, stack) : customizer(value);
+    }
+    if (result !== void 0) {
+      return result;
+    }
+    if (!isObject4(value)) {
+      return value;
+    }
+    var isArr = isArray3(value);
+    if (isArr) {
+      result = initCloneArray(value);
+      if (!isDeep) {
+        return copyArray(value, result);
+      }
+    } else {
+      var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
+      if (isBuffer(value)) {
+        return cloneBuffer(value, isDeep);
+      }
+      if (tag == objectTag || tag == argsTag || isFunc && !object) {
+        if (isHostObject(value)) {
+          return object ? value : {};
+        }
+        result = initCloneObject(isFunc ? {} : value);
+        if (!isDeep) {
+          return copySymbols(value, baseAssign(result, value));
+        }
+      } else {
+        if (!cloneableTags[tag]) {
+          return object ? value : {};
+        }
+        result = initCloneByTag(value, tag, baseClone, isDeep);
+      }
+    }
+    stack || (stack = new Stack());
+    var stacked = stack.get(value);
+    if (stacked) {
+      return stacked;
+    }
+    stack.set(value, result);
+    if (!isArr) {
+      var props = isFull ? getAllKeys(value) : keys(value);
+    }
+    arrayEach(props || value, function(subValue, key2) {
+      if (props) {
+        key2 = subValue;
+        subValue = value[key2];
+      }
+      assignValue(result, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
+    });
+    return result;
+  }
+  function baseCreate(proto) {
+    return isObject4(proto) ? objectCreate(proto) : {};
+  }
+  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+    var result = keysFunc(object);
+    return isArray3(object) ? result : arrayPush(result, symbolsFunc(object));
+  }
+  function baseGetTag(value) {
+    return objectToString.call(value);
+  }
+  function baseIsNative(value) {
+    if (!isObject4(value) || isMasked(value)) {
+      return false;
+    }
+    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
+    return pattern.test(toSource(value));
+  }
+  function baseKeys(object) {
+    if (!isPrototype(object)) {
+      return nativeKeys(object);
+    }
+    var result = [];
+    for (var key in Object(object)) {
+      if (hasOwnProperty.call(object, key) && key != "constructor") {
+        result.push(key);
+      }
+    }
+    return result;
+  }
+  function cloneBuffer(buffer, isDeep) {
+    if (isDeep) {
+      return buffer.slice();
+    }
+    var result = new buffer.constructor(buffer.length);
+    buffer.copy(result);
+    return result;
+  }
+  function cloneArrayBuffer(arrayBuffer) {
+    var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
+    new Uint8Array2(result).set(new Uint8Array2(arrayBuffer));
+    return result;
+  }
+  function cloneDataView(dataView, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+  }
+  function cloneMap(map, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(mapToArray(map), true) : mapToArray(map);
+    return arrayReduce(array, addMapEntry, new map.constructor());
+  }
+  function cloneRegExp(regexp) {
+    var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+    result.lastIndex = regexp.lastIndex;
+    return result;
+  }
+  function cloneSet(set, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
+    return arrayReduce(array, addSetEntry, new set.constructor());
+  }
+  function cloneSymbol(symbol) {
+    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
+  }
+  function cloneTypedArray(typedArray, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+  }
+  function copyArray(source, array) {
+    var index = -1, length = source.length;
+    array || (array = Array(length));
+    while (++index < length) {
+      array[index] = source[index];
+    }
+    return array;
+  }
+  function copyObject(source, props, object, customizer) {
+    object || (object = {});
+    var index = -1, length = props.length;
+    while (++index < length) {
+      var key = props[index];
+      var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
+      assignValue(object, key, newValue === void 0 ? source[key] : newValue);
+    }
+    return object;
+  }
+  function copySymbols(source, object) {
+    return copyObject(source, getSymbols(source), object);
+  }
+  function getAllKeys(object) {
+    return baseGetAllKeys(object, keys, getSymbols);
+  }
+  function getMapData(map, key) {
+    var data = map.__data__;
+    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
+  }
+  function getNative(object, key) {
+    var value = getValue(object, key);
+    return baseIsNative(value) ? value : void 0;
+  }
+  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+  var getTag = baseGetTag;
+  if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
+    getTag = function(value) {
+      var result = objectToString.call(value), Ctor = result == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
+      if (ctorString) {
+        switch (ctorString) {
+          case dataViewCtorString:
+            return dataViewTag;
+          case mapCtorString:
+            return mapTag;
+          case promiseCtorString:
+            return promiseTag;
+          case setCtorString:
+            return setTag;
+          case weakMapCtorString:
+            return weakMapTag;
+        }
+      }
+      return result;
+    };
+  }
+  function initCloneArray(array) {
+    var length = array.length, result = array.constructor(length);
+    if (length && typeof array[0] == "string" && hasOwnProperty.call(array, "index")) {
+      result.index = array.index;
+      result.input = array.input;
+    }
+    return result;
+  }
+  function initCloneObject(object) {
+    return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
+  }
+  function initCloneByTag(object, tag, cloneFunc, isDeep) {
+    var Ctor = object.constructor;
+    switch (tag) {
+      case arrayBufferTag:
+        return cloneArrayBuffer(object);
+      case boolTag:
+      case dateTag:
+        return new Ctor(+object);
+      case dataViewTag:
+        return cloneDataView(object, isDeep);
+      case float32Tag:
+      case float64Tag:
+      case int8Tag:
+      case int16Tag:
+      case int32Tag:
+      case uint8Tag:
+      case uint8ClampedTag:
+      case uint16Tag:
+      case uint32Tag:
+        return cloneTypedArray(object, isDeep);
+      case mapTag:
+        return cloneMap(object, isDeep, cloneFunc);
+      case numberTag:
+      case stringTag:
+        return new Ctor(object);
+      case regexpTag:
+        return cloneRegExp(object);
+      case setTag:
+        return cloneSet(object, isDeep, cloneFunc);
+      case symbolTag:
+        return cloneSymbol(object);
+    }
+  }
+  function isIndex(value, length) {
+    length = length == null ? MAX_SAFE_INTEGER : length;
+    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+  }
+  function isKeyable(value) {
+    var type = typeof value;
+    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+  }
+  function isMasked(func) {
+    return !!maskSrcKey && maskSrcKey in func;
+  }
+  function isPrototype(value) {
+    var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto;
+    return value === proto;
+  }
+  function toSource(func) {
+    if (func != null) {
+      try {
+        return funcToString.call(func);
+      } catch (e) {
+      }
+      try {
+        return func + "";
+      } catch (e) {
+      }
+    }
+    return "";
+  }
+  function cloneDeep(value) {
+    return baseClone(value, true, true);
+  }
+  function eq(value, other) {
+    return value === other || value !== value && other !== other;
+  }
+  function isArguments(value) {
+    return isArrayLikeObject(value) && hasOwnProperty.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
+  }
+  var isArray3 = Array.isArray;
+  function isArrayLike(value) {
+    return value != null && isLength(value.length) && !isFunction2(value);
+  }
+  function isArrayLikeObject(value) {
+    return isObjectLike(value) && isArrayLike(value);
+  }
+  var isBuffer = nativeIsBuffer || stubFalse;
+  function isFunction2(value) {
+    var tag = isObject4(value) ? objectToString.call(value) : "";
+    return tag == funcTag || tag == genTag;
+  }
+  function isLength(value) {
+    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  }
+  function isObject4(value) {
+    var type = typeof value;
+    return !!value && (type == "object" || type == "function");
+  }
+  function isObjectLike(value) {
+    return !!value && typeof value == "object";
+  }
+  function keys(object) {
+    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+  }
+  function stubArray() {
+    return [];
+  }
+  function stubFalse() {
+    return false;
+  }
+  module2.exports = cloneDeep;
+});
+
+// ../../../node_modules/copy-to/index.js
+var require_copy_to = __commonJS((exports2, module2) => {
+  /*!
+   * copy-to - index.js
+   * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
+   * MIT Licensed
+   */
+  "use strict";
+  var slice = Array.prototype.slice;
+  module2.exports = Copy;
+  function Copy(src, withAccess) {
+    if (!(this instanceof Copy))
+      return new Copy(src, withAccess);
+    this.src = src;
+    this._withAccess = withAccess;
+  }
+  Copy.prototype.withAccess = function(w) {
+    this._withAccess = w !== false;
+    return this;
+  };
+  Copy.prototype.pick = function(keys) {
+    if (!Array.isArray(keys)) {
+      keys = slice.call(arguments);
+    }
+    if (keys.length) {
+      this.keys = keys;
+    }
+    return this;
+  };
+  Copy.prototype.to = function(to) {
+    to = to || {};
+    if (!this.src)
+      return to;
+    var keys = this.keys || Object.keys(this.src);
+    if (!this._withAccess) {
+      for (var i = 0; i < keys.length; i++) {
+        key = keys[i];
+        if (to[key] !== void 0)
+          continue;
+        to[key] = this.src[key];
+      }
+      return to;
+    }
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      if (!notDefined(to, key))
+        continue;
+      var getter = this.src.__lookupGetter__(key);
+      var setter = this.src.__lookupSetter__(key);
+      if (getter)
+        to.__defineGetter__(key, getter);
+      if (setter)
+        to.__defineSetter__(key, setter);
+      if (!getter && !setter) {
+        to[key] = this.src[key];
+      }
+    }
+    return to;
+  };
+  Copy.prototype.toCover = function(to) {
+    var keys = this.keys || Object.keys(this.src);
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      delete to[key];
+      var getter = this.src.__lookupGetter__(key);
+      var setter = this.src.__lookupSetter__(key);
+      if (getter)
+        to.__defineGetter__(key, getter);
+      if (setter)
+        to.__defineSetter__(key, setter);
+      if (!getter && !setter) {
+        to[key] = this.src[key];
+      }
+    }
+  };
+  Copy.prototype.override = Copy.prototype.toCover;
+  Copy.prototype.and = function(obj) {
+    var src = {};
+    this.to(src);
+    this.src = obj;
+    this.to(src);
+    this.src = src;
+    return this;
+  };
+  function notDefined(obj, key) {
+    return obj[key] === void 0 && obj.__lookupGetter__(key) === void 0 && obj.__lookupSetter__(key) === void 0;
+  }
+});
+
+// ../../../node_modules/crypto-js/core.js
 var require_core = __commonJS((exports2, module2) => {
+  (function(root, factory) {
+    if (typeof exports2 === "object") {
+      module2.exports = exports2 = factory();
+    } else if (typeof define === "function" && define.amd) {
+      define([], factory);
+    } else {
+      root.CryptoJS = factory();
+    }
+  })(exports2, function() {
+    var CryptoJS = CryptoJS || function(Math2, undefined2) {
+      var crypto;
+      if (typeof window !== "undefined" && window.crypto) {
+        crypto = window.crypto;
+      }
+      if (!crypto && typeof window !== "undefined" && window.msCrypto) {
+        crypto = window.msCrypto;
+      }
+      if (!crypto && typeof global !== "undefined" && global.crypto) {
+        crypto = global.crypto;
+      }
+      if (!crypto && true) {
+        try {
+          crypto = require("crypto");
+        } catch (err) {
+        }
+      }
+      var cryptoSecureRandomInt = function() {
+        if (crypto) {
+          if (typeof crypto.getRandomValues === "function") {
+            try {
+              return crypto.getRandomValues(new Uint32Array(1))[0];
+            } catch (err) {
+            }
+          }
+          if (typeof crypto.randomBytes === "function") {
+            try {
+              return crypto.randomBytes(4).readInt32LE();
+            } catch (err) {
+            }
+          }
+        }
+        throw new Error("Native crypto module could not be used to get secure random number.");
+      };
+      var create = Object.create || function() {
+        function F() {
+        }
+        return function(obj) {
+          var subtype;
+          F.prototype = obj;
+          subtype = new F();
+          F.prototype = null;
+          return subtype;
+        };
+      }();
+      var C = {};
+      var C_lib = C.lib = {};
+      var Base = C_lib.Base = function() {
+        return {
+          extend: function(overrides) {
+            var subtype = create(this);
+            if (overrides) {
+              subtype.mixIn(overrides);
+            }
+            if (!subtype.hasOwnProperty("init") || this.init === subtype.init) {
+              subtype.init = function() {
+                subtype.$super.init.apply(this, arguments);
+              };
+            }
+            subtype.init.prototype = subtype;
+            subtype.$super = this;
+            return subtype;
+          },
+          create: function() {
+            var instance2 = this.extend();
+            instance2.init.apply(instance2, arguments);
+            return instance2;
+          },
+          init: function() {
+          },
+          mixIn: function(properties) {
+            for (var propertyName in properties) {
+              if (properties.hasOwnProperty(propertyName)) {
+                this[propertyName] = properties[propertyName];
+              }
+            }
+            if (properties.hasOwnProperty("toString")) {
+              this.toString = properties.toString;
+            }
+          },
+          clone: function() {
+            return this.init.prototype.extend(this);
+          }
+        };
+      }();
+      var WordArray = C_lib.WordArray = Base.extend({
+        init: function(words, sigBytes) {
+          words = this.words = words || [];
+          if (sigBytes != undefined2) {
+            this.sigBytes = sigBytes;
+          } else {
+            this.sigBytes = words.length * 4;
+          }
+        },
+        toString: function(encoder) {
+          return (encoder || Hex).stringify(this);
+        },
+        concat: function(wordArray) {
+          var thisWords = this.words;
+          var thatWords = wordArray.words;
+          var thisSigBytes = this.sigBytes;
+          var thatSigBytes = wordArray.sigBytes;
+          this.clamp();
+          if (thisSigBytes % 4) {
+            for (var i = 0; i < thatSigBytes; i++) {
+              var thatByte = thatWords[i >>> 2] >>> 24 - i % 4 * 8 & 255;
+              thisWords[thisSigBytes + i >>> 2] |= thatByte << 24 - (thisSigBytes + i) % 4 * 8;
+            }
+          } else {
+            for (var i = 0; i < thatSigBytes; i += 4) {
+              thisWords[thisSigBytes + i >>> 2] = thatWords[i >>> 2];
+            }
+          }
+          this.sigBytes += thatSigBytes;
+          return this;
+        },
+        clamp: function() {
+          var words = this.words;
+          var sigBytes = this.sigBytes;
+          words[sigBytes >>> 2] &= 4294967295 << 32 - sigBytes % 4 * 8;
+          words.length = Math2.ceil(sigBytes / 4);
+        },
+        clone: function() {
+          var clone3 = Base.clone.call(this);
+          clone3.words = this.words.slice(0);
+          return clone3;
+        },
+        random: function(nBytes) {
+          var words = [];
+          for (var i = 0; i < nBytes; i += 4) {
+            words.push(cryptoSecureRandomInt());
+          }
+          return new WordArray.init(words, nBytes);
+        }
+      });
+      var C_enc = C.enc = {};
+      var Hex = C_enc.Hex = {
+        stringify: function(wordArray) {
+          var words = wordArray.words;
+          var sigBytes = wordArray.sigBytes;
+          var hexChars = [];
+          for (var i = 0; i < sigBytes; i++) {
+            var bite = words[i >>> 2] >>> 24 - i % 4 * 8 & 255;
+            hexChars.push((bite >>> 4).toString(16));
+            hexChars.push((bite & 15).toString(16));
+          }
+          return hexChars.join("");
+        },
+        parse: function(hexStr) {
+          var hexStrLength = hexStr.length;
+          var words = [];
+          for (var i = 0; i < hexStrLength; i += 2) {
+            words[i >>> 3] |= parseInt(hexStr.substr(i, 2), 16) << 24 - i % 8 * 4;
+          }
+          return new WordArray.init(words, hexStrLength / 2);
+        }
+      };
+      var Latin1 = C_enc.Latin1 = {
+        stringify: function(wordArray) {
+          var words = wordArray.words;
+          var sigBytes = wordArray.sigBytes;
+          var latin1Chars = [];
+          for (var i = 0; i < sigBytes; i++) {
+            var bite = words[i >>> 2] >>> 24 - i % 4 * 8 & 255;
+            latin1Chars.push(String.fromCharCode(bite));
+          }
+          return latin1Chars.join("");
+        },
+        parse: function(latin1Str) {
+          var latin1StrLength = latin1Str.length;
+          var words = [];
+          for (var i = 0; i < latin1StrLength; i++) {
+            words[i >>> 2] |= (latin1Str.charCodeAt(i) & 255) << 24 - i % 4 * 8;
+          }
+          return new WordArray.init(words, latin1StrLength);
+        }
+      };
+      var Utf8 = C_enc.Utf8 = {
+        stringify: function(wordArray) {
+          try {
+            return decodeURIComponent(escape(Latin1.stringify(wordArray)));
+          } catch (e) {
+            throw new Error("Malformed UTF-8 data");
+          }
+        },
+        parse: function(utf8Str) {
+          return Latin1.parse(unescape(encodeURIComponent(utf8Str)));
+        }
+      };
+      var BufferedBlockAlgorithm = C_lib.BufferedBlockAlgorithm = Base.extend({
+        reset: function() {
+          this._data = new WordArray.init();
+          this._nDataBytes = 0;
+        },
+        _append: function(data) {
+          if (typeof data == "string") {
+            data = Utf8.parse(data);
+          }
+          this._data.concat(data);
+          this._nDataBytes += data.sigBytes;
+        },
+        _process: function(doFlush) {
+          var processedWords;
+          var data = this._data;
+          var dataWords = data.words;
+          var dataSigBytes = data.sigBytes;
+          var blockSize = this.blockSize;
+          var blockSizeBytes = blockSize * 4;
+          var nBlocksReady = dataSigBytes / blockSizeBytes;
+          if (doFlush) {
+            nBlocksReady = Math2.ceil(nBlocksReady);
+          } else {
+            nBlocksReady = Math2.max((nBlocksReady | 0) - this._minBufferSize, 0);
+          }
+          var nWordsReady = nBlocksReady * blockSize;
+          var nBytesReady = Math2.min(nWordsReady * 4, dataSigBytes);
+          if (nWordsReady) {
+            for (var offset = 0; offset < nWordsReady; offset += blockSize) {
+              this._doProcessBlock(dataWords, offset);
+            }
+            processedWords = dataWords.splice(0, nWordsReady);
+            data.sigBytes -= nBytesReady;
+          }
+          return new WordArray.init(processedWords, nBytesReady);
+        },
+        clone: function() {
+          var clone3 = Base.clone.call(this);
+          clone3._data = this._data.clone();
+          return clone3;
+        },
+        _minBufferSize: 0
+      });
+      var Hasher = C_lib.Hasher = BufferedBlockAlgorithm.extend({
+        cfg: Base.extend(),
+        init: function(cfg) {
+          this.cfg = this.cfg.extend(cfg);
+          this.reset();
+        },
+        reset: function() {
+          BufferedBlockAlgorithm.reset.call(this);
+          this._doReset();
+        },
+        update: function(messageUpdate) {
+          this._append(messageUpdate);
+          this._process();
+          return this;
+        },
+        finalize: function(messageUpdate) {
+          if (messageUpdate) {
+            this._append(messageUpdate);
+          }
+          var hash = this._doFinalize();
+          return hash;
+        },
+        blockSize: 512 / 32,
+        _createHelper: function(hasher) {
+          return function(message, cfg) {
+            return new hasher.init(cfg).finalize(message);
+          };
+        },
+        _createHmacHelper: function(hasher) {
+          return function(message, key) {
+            return new C_algo.HMAC.init(hasher, key).finalize(message);
+          };
+        }
+      });
+      var C_algo = C.algo = {};
+      return C;
+    }(Math);
+    return CryptoJS;
+  });
+});
+
+// ../../../node_modules/crypto-js/md5.js
+var require_md5 = __commonJS((exports2, module2) => {
+  (function(root, factory) {
+    if (typeof exports2 === "object") {
+      module2.exports = exports2 = factory(require_core());
+    } else if (typeof define === "function" && define.amd) {
+      define(["./core"], factory);
+    } else {
+      factory(root.CryptoJS);
+    }
+  })(exports2, function(CryptoJS) {
+    (function(Math2) {
+      var C = CryptoJS;
+      var C_lib = C.lib;
+      var WordArray = C_lib.WordArray;
+      var Hasher = C_lib.Hasher;
+      var C_algo = C.algo;
+      var T = [];
+      (function() {
+        for (var i = 0; i < 64; i++) {
+          T[i] = Math2.abs(Math2.sin(i + 1)) * 4294967296 | 0;
+        }
+      })();
+      var MD5 = C_algo.MD5 = Hasher.extend({
+        _doReset: function() {
+          this._hash = new WordArray.init([
+            1732584193,
+            4023233417,
+            2562383102,
+            271733878
+          ]);
+        },
+        _doProcessBlock: function(M, offset) {
+          for (var i = 0; i < 16; i++) {
+            var offset_i = offset + i;
+            var M_offset_i = M[offset_i];
+            M[offset_i] = (M_offset_i << 8 | M_offset_i >>> 24) & 16711935 | (M_offset_i << 24 | M_offset_i >>> 8) & 4278255360;
+          }
+          var H = this._hash.words;
+          var M_offset_0 = M[offset + 0];
+          var M_offset_1 = M[offset + 1];
+          var M_offset_2 = M[offset + 2];
+          var M_offset_3 = M[offset + 3];
+          var M_offset_4 = M[offset + 4];
+          var M_offset_5 = M[offset + 5];
+          var M_offset_6 = M[offset + 6];
+          var M_offset_7 = M[offset + 7];
+          var M_offset_8 = M[offset + 8];
+          var M_offset_9 = M[offset + 9];
+          var M_offset_10 = M[offset + 10];
+          var M_offset_11 = M[offset + 11];
+          var M_offset_12 = M[offset + 12];
+          var M_offset_13 = M[offset + 13];
+          var M_offset_14 = M[offset + 14];
+          var M_offset_15 = M[offset + 15];
+          var a = H[0];
+          var b = H[1];
+          var c = H[2];
+          var d = H[3];
+          a = FF(a, b, c, d, M_offset_0, 7, T[0]);
+          d = FF(d, a, b, c, M_offset_1, 12, T[1]);
+          c = FF(c, d, a, b, M_offset_2, 17, T[2]);
+          b = FF(b, c, d, a, M_offset_3, 22, T[3]);
+          a = FF(a, b, c, d, M_offset_4, 7, T[4]);
+          d = FF(d, a, b, c, M_offset_5, 12, T[5]);
+          c = FF(c, d, a, b, M_offset_6, 17, T[6]);
+          b = FF(b, c, d, a, M_offset_7, 22, T[7]);
+          a = FF(a, b, c, d, M_offset_8, 7, T[8]);
+          d = FF(d, a, b, c, M_offset_9, 12, T[9]);
+          c = FF(c, d, a, b, M_offset_10, 17, T[10]);
+          b = FF(b, c, d, a, M_offset_11, 22, T[11]);
+          a = FF(a, b, c, d, M_offset_12, 7, T[12]);
+          d = FF(d, a, b, c, M_offset_13, 12, T[13]);
+          c = FF(c, d, a, b, M_offset_14, 17, T[14]);
+          b = FF(b, c, d, a, M_offset_15, 22, T[15]);
+          a = GG(a, b, c, d, M_offset_1, 5, T[16]);
+          d = GG(d, a, b, c, M_offset_6, 9, T[17]);
+          c = GG(c, d, a, b, M_offset_11, 14, T[18]);
+          b = GG(b, c, d, a, M_offset_0, 20, T[19]);
+          a = GG(a, b, c, d, M_offset_5, 5, T[20]);
+          d = GG(d, a, b, c, M_offset_10, 9, T[21]);
+          c = GG(c, d, a, b, M_offset_15, 14, T[22]);
+          b = GG(b, c, d, a, M_offset_4, 20, T[23]);
+          a = GG(a, b, c, d, M_offset_9, 5, T[24]);
+          d = GG(d, a, b, c, M_offset_14, 9, T[25]);
+          c = GG(c, d, a, b, M_offset_3, 14, T[26]);
+          b = GG(b, c, d, a, M_offset_8, 20, T[27]);
+          a = GG(a, b, c, d, M_offset_13, 5, T[28]);
+          d = GG(d, a, b, c, M_offset_2, 9, T[29]);
+          c = GG(c, d, a, b, M_offset_7, 14, T[30]);
+          b = GG(b, c, d, a, M_offset_12, 20, T[31]);
+          a = HH(a, b, c, d, M_offset_5, 4, T[32]);
+          d = HH(d, a, b, c, M_offset_8, 11, T[33]);
+          c = HH(c, d, a, b, M_offset_11, 16, T[34]);
+          b = HH(b, c, d, a, M_offset_14, 23, T[35]);
+          a = HH(a, b, c, d, M_offset_1, 4, T[36]);
+          d = HH(d, a, b, c, M_offset_4, 11, T[37]);
+          c = HH(c, d, a, b, M_offset_7, 16, T[38]);
+          b = HH(b, c, d, a, M_offset_10, 23, T[39]);
+          a = HH(a, b, c, d, M_offset_13, 4, T[40]);
+          d = HH(d, a, b, c, M_offset_0, 11, T[41]);
+          c = HH(c, d, a, b, M_offset_3, 16, T[42]);
+          b = HH(b, c, d, a, M_offset_6, 23, T[43]);
+          a = HH(a, b, c, d, M_offset_9, 4, T[44]);
+          d = HH(d, a, b, c, M_offset_12, 11, T[45]);
+          c = HH(c, d, a, b, M_offset_15, 16, T[46]);
+          b = HH(b, c, d, a, M_offset_2, 23, T[47]);
+          a = II(a, b, c, d, M_offset_0, 6, T[48]);
+          d = II(d, a, b, c, M_offset_7, 10, T[49]);
+          c = II(c, d, a, b, M_offset_14, 15, T[50]);
+          b = II(b, c, d, a, M_offset_5, 21, T[51]);
+          a = II(a, b, c, d, M_offset_12, 6, T[52]);
+          d = II(d, a, b, c, M_offset_3, 10, T[53]);
+          c = II(c, d, a, b, M_offset_10, 15, T[54]);
+          b = II(b, c, d, a, M_offset_1, 21, T[55]);
+          a = II(a, b, c, d, M_offset_8, 6, T[56]);
+          d = II(d, a, b, c, M_offset_15, 10, T[57]);
+          c = II(c, d, a, b, M_offset_6, 15, T[58]);
+          b = II(b, c, d, a, M_offset_13, 21, T[59]);
+          a = II(a, b, c, d, M_offset_4, 6, T[60]);
+          d = II(d, a, b, c, M_offset_11, 10, T[61]);
+          c = II(c, d, a, b, M_offset_2, 15, T[62]);
+          b = II(b, c, d, a, M_offset_9, 21, T[63]);
+          H[0] = H[0] + a | 0;
+          H[1] = H[1] + b | 0;
+          H[2] = H[2] + c | 0;
+          H[3] = H[3] + d | 0;
+        },
+        _doFinalize: function() {
+          var data = this._data;
+          var dataWords = data.words;
+          var nBitsTotal = this._nDataBytes * 8;
+          var nBitsLeft = data.sigBytes * 8;
+          dataWords[nBitsLeft >>> 5] |= 128 << 24 - nBitsLeft % 32;
+          var nBitsTotalH = Math2.floor(nBitsTotal / 4294967296);
+          var nBitsTotalL = nBitsTotal;
+          dataWords[(nBitsLeft + 64 >>> 9 << 4) + 15] = (nBitsTotalH << 8 | nBitsTotalH >>> 24) & 16711935 | (nBitsTotalH << 24 | nBitsTotalH >>> 8) & 4278255360;
+          dataWords[(nBitsLeft + 64 >>> 9 << 4) + 14] = (nBitsTotalL << 8 | nBitsTotalL >>> 24) & 16711935 | (nBitsTotalL << 24 | nBitsTotalL >>> 8) & 4278255360;
+          data.sigBytes = (dataWords.length + 1) * 4;
+          this._process();
+          var hash = this._hash;
+          var H = hash.words;
+          for (var i = 0; i < 4; i++) {
+            var H_i = H[i];
+            H[i] = (H_i << 8 | H_i >>> 24) & 16711935 | (H_i << 24 | H_i >>> 8) & 4278255360;
+          }
+          return hash;
+        },
+        clone: function() {
+          var clone3 = Hasher.clone.call(this);
+          clone3._hash = this._hash.clone();
+          return clone3;
+        }
+      });
+      function FF(a, b, c, d, x, s, t) {
+        var n = a + (b & c | ~b & d) + x + t;
+        return (n << s | n >>> 32 - s) + b;
+      }
+      function GG(a, b, c, d, x, s, t) {
+        var n = a + (b & d | c & ~d) + x + t;
+        return (n << s | n >>> 32 - s) + b;
+      }
+      function HH(a, b, c, d, x, s, t) {
+        var n = a + (b ^ c ^ d) + x + t;
+        return (n << s | n >>> 32 - s) + b;
+      }
+      function II(a, b, c, d, x, s, t) {
+        var n = a + (c ^ (b | ~d)) + x + t;
+        return (n << s | n >>> 32 - s) + b;
+      }
+      C.MD5 = Hasher._createHelper(MD5);
+      C.HmacMD5 = Hasher._createHmacHelper(MD5);
+    })(Math);
+    return CryptoJS.MD5;
+  });
+});
+
+// ../../../node_modules/color-name/index.js
+var require_color_name = __commonJS((exports2, module2) => {
+  "use strict";
+  module2.exports = {
+    aliceblue: [240, 248, 255],
+    antiquewhite: [250, 235, 215],
+    aqua: [0, 255, 255],
+    aquamarine: [127, 255, 212],
+    azure: [240, 255, 255],
+    beige: [245, 245, 220],
+    bisque: [255, 228, 196],
+    black: [0, 0, 0],
+    blanchedalmond: [255, 235, 205],
+    blue: [0, 0, 255],
+    blueviolet: [138, 43, 226],
+    brown: [165, 42, 42],
+    burlywood: [222, 184, 135],
+    cadetblue: [95, 158, 160],
+    chartreuse: [127, 255, 0],
+    chocolate: [210, 105, 30],
+    coral: [255, 127, 80],
+    cornflowerblue: [100, 149, 237],
+    cornsilk: [255, 248, 220],
+    crimson: [220, 20, 60],
+    cyan: [0, 255, 255],
+    darkblue: [0, 0, 139],
+    darkcyan: [0, 139, 139],
+    darkgoldenrod: [184, 134, 11],
+    darkgray: [169, 169, 169],
+    darkgreen: [0, 100, 0],
+    darkgrey: [169, 169, 169],
+    darkkhaki: [189, 183, 107],
+    darkmagenta: [139, 0, 139],
+    darkolivegreen: [85, 107, 47],
+    darkorange: [255, 140, 0],
+    darkorchid: [153, 50, 204],
+    darkred: [139, 0, 0],
+    darksalmon: [233, 150, 122],
+    darkseagreen: [143, 188, 143],
+    darkslateblue: [72, 61, 139],
+    darkslategray: [47, 79, 79],
+    darkslategrey: [47, 79, 79],
+    darkturquoise: [0, 206, 209],
+    darkviolet: [148, 0, 211],
+    deeppink: [255, 20, 147],
+    deepskyblue: [0, 191, 255],
+    dimgray: [105, 105, 105],
+    dimgrey: [105, 105, 105],
+    dodgerblue: [30, 144, 255],
+    firebrick: [178, 34, 34],
+    floralwhite: [255, 250, 240],
+    forestgreen: [34, 139, 34],
+    fuchsia: [255, 0, 255],
+    gainsboro: [220, 220, 220],
+    ghostwhite: [248, 248, 255],
+    gold: [255, 215, 0],
+    goldenrod: [218, 165, 32],
+    gray: [128, 128, 128],
+    green: [0, 128, 0],
+    greenyellow: [173, 255, 47],
+    grey: [128, 128, 128],
+    honeydew: [240, 255, 240],
+    hotpink: [255, 105, 180],
+    indianred: [205, 92, 92],
+    indigo: [75, 0, 130],
+    ivory: [255, 255, 240],
+    khaki: [240, 230, 140],
+    lavender: [230, 230, 250],
+    lavenderblush: [255, 240, 245],
+    lawngreen: [124, 252, 0],
+    lemonchiffon: [255, 250, 205],
+    lightblue: [173, 216, 230],
+    lightcoral: [240, 128, 128],
+    lightcyan: [224, 255, 255],
+    lightgoldenrodyellow: [250, 250, 210],
+    lightgray: [211, 211, 211],
+    lightgreen: [144, 238, 144],
+    lightgrey: [211, 211, 211],
+    lightpink: [255, 182, 193],
+    lightsalmon: [255, 160, 122],
+    lightseagreen: [32, 178, 170],
+    lightskyblue: [135, 206, 250],
+    lightslategray: [119, 136, 153],
+    lightslategrey: [119, 136, 153],
+    lightsteelblue: [176, 196, 222],
+    lightyellow: [255, 255, 224],
+    lime: [0, 255, 0],
+    limegreen: [50, 205, 50],
+    linen: [250, 240, 230],
+    magenta: [255, 0, 255],
+    maroon: [128, 0, 0],
+    mediumaquamarine: [102, 205, 170],
+    mediumblue: [0, 0, 205],
+    mediumorchid: [186, 85, 211],
+    mediumpurple: [147, 112, 219],
+    mediumseagreen: [60, 179, 113],
+    mediumslateblue: [123, 104, 238],
+    mediumspringgreen: [0, 250, 154],
+    mediumturquoise: [72, 209, 204],
+    mediumvioletred: [199, 21, 133],
+    midnightblue: [25, 25, 112],
+    mintcream: [245, 255, 250],
+    mistyrose: [255, 228, 225],
+    moccasin: [255, 228, 181],
+    navajowhite: [255, 222, 173],
+    navy: [0, 0, 128],
+    oldlace: [253, 245, 230],
+    olive: [128, 128, 0],
+    olivedrab: [107, 142, 35],
+    orange: [255, 165, 0],
+    orangered: [255, 69, 0],
+    orchid: [218, 112, 214],
+    palegoldenrod: [238, 232, 170],
+    palegreen: [152, 251, 152],
+    paleturquoise: [175, 238, 238],
+    palevioletred: [219, 112, 147],
+    papayawhip: [255, 239, 213],
+    peachpuff: [255, 218, 185],
+    peru: [205, 133, 63],
+    pink: [255, 192, 203],
+    plum: [221, 160, 221],
+    powderblue: [176, 224, 230],
+    purple: [128, 0, 128],
+    rebeccapurple: [102, 51, 153],
+    red: [255, 0, 0],
+    rosybrown: [188, 143, 143],
+    royalblue: [65, 105, 225],
+    saddlebrown: [139, 69, 19],
+    salmon: [250, 128, 114],
+    sandybrown: [244, 164, 96],
+    seagreen: [46, 139, 87],
+    seashell: [255, 245, 238],
+    sienna: [160, 82, 45],
+    silver: [192, 192, 192],
+    skyblue: [135, 206, 235],
+    slateblue: [106, 90, 205],
+    slategray: [112, 128, 144],
+    slategrey: [112, 128, 144],
+    snow: [255, 250, 250],
+    springgreen: [0, 255, 127],
+    steelblue: [70, 130, 180],
+    tan: [210, 180, 140],
+    teal: [0, 128, 128],
+    thistle: [216, 191, 216],
+    tomato: [255, 99, 71],
+    turquoise: [64, 224, 208],
+    violet: [238, 130, 238],
+    wheat: [245, 222, 179],
+    white: [255, 255, 255],
+    whitesmoke: [245, 245, 245],
+    yellow: [255, 255, 0],
+    yellowgreen: [154, 205, 50]
+  };
+});
+
+// ../../../node_modules/ansi-styles/node_modules/color-convert/conversions.js
+var require_conversions = __commonJS((exports2, module2) => {
+  var cssKeywords = require_color_name();
+  var reverseKeywords = {};
+  for (const key of Object.keys(cssKeywords)) {
+    reverseKeywords[cssKeywords[key]] = key;
+  }
+  var convert = {
+    rgb: {channels: 3, labels: "rgb"},
+    hsl: {channels: 3, labels: "hsl"},
+    hsv: {channels: 3, labels: "hsv"},
+    hwb: {channels: 3, labels: "hwb"},
+    cmyk: {channels: 4, labels: "cmyk"},
+    xyz: {channels: 3, labels: "xyz"},
+    lab: {channels: 3, labels: "lab"},
+    lch: {channels: 3, labels: "lch"},
+    hex: {channels: 1, labels: ["hex"]},
+    keyword: {channels: 1, labels: ["keyword"]},
+    ansi16: {channels: 1, labels: ["ansi16"]},
+    ansi256: {channels: 1, labels: ["ansi256"]},
+    hcg: {channels: 3, labels: ["h", "c", "g"]},
+    apple: {channels: 3, labels: ["r16", "g16", "b16"]},
+    gray: {channels: 1, labels: ["gray"]}
+  };
+  module2.exports = convert;
+  for (const model of Object.keys(convert)) {
+    if (!("channels" in convert[model])) {
+      throw new Error("missing channels property: " + model);
+    }
+    if (!("labels" in convert[model])) {
+      throw new Error("missing channel labels property: " + model);
+    }
+    if (convert[model].labels.length !== convert[model].channels) {
+      throw new Error("channel and label counts mismatch: " + model);
+    }
+    const {channels, labels} = convert[model];
+    delete convert[model].channels;
+    delete convert[model].labels;
+    Object.defineProperty(convert[model], "channels", {value: channels});
+    Object.defineProperty(convert[model], "labels", {value: labels});
+  }
+  convert.rgb.hsl = function(rgb) {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const min = Math.min(r, g, b);
+    const max = Math.max(r, g, b);
+    const delta = max - min;
+    let h;
+    let s;
+    if (max === min) {
+      h = 0;
+    } else if (r === max) {
+      h = (g - b) / delta;
+    } else if (g === max) {
+      h = 2 + (b - r) / delta;
+    } else if (b === max) {
+      h = 4 + (r - g) / delta;
+    }
+    h = Math.min(h * 60, 360);
+    if (h < 0) {
+      h += 360;
+    }
+    const l = (min + max) / 2;
+    if (max === min) {
+      s = 0;
+    } else if (l <= 0.5) {
+      s = delta / (max + min);
+    } else {
+      s = delta / (2 - max - min);
+    }
+    return [h, s * 100, l * 100];
+  };
+  convert.rgb.hsv = function(rgb) {
+    let rdif;
+    let gdif;
+    let bdif;
+    let h;
+    let s;
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const v = Math.max(r, g, b);
+    const diff = v - Math.min(r, g, b);
+    const diffc = function(c) {
+      return (v - c) / 6 / diff + 1 / 2;
+    };
+    if (diff === 0) {
+      h = 0;
+      s = 0;
+    } else {
+      s = diff / v;
+      rdif = diffc(r);
+      gdif = diffc(g);
+      bdif = diffc(b);
+      if (r === v) {
+        h = bdif - gdif;
+      } else if (g === v) {
+        h = 1 / 3 + rdif - bdif;
+      } else if (b === v) {
+        h = 2 / 3 + gdif - rdif;
+      }
+      if (h < 0) {
+        h += 1;
+      } else if (h > 1) {
+        h -= 1;
+      }
+    }
+    return [
+      h * 360,
+      s * 100,
+      v * 100
+    ];
+  };
+  convert.rgb.hwb = function(rgb) {
+    const r = rgb[0];
+    const g = rgb[1];
+    let b = rgb[2];
+    const h = convert.rgb.hsl(rgb)[0];
+    const w = 1 / 255 * Math.min(r, Math.min(g, b));
+    b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
+    return [h, w * 100, b * 100];
+  };
+  convert.rgb.cmyk = function(rgb) {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const k = Math.min(1 - r, 1 - g, 1 - b);
+    const c = (1 - r - k) / (1 - k) || 0;
+    const m = (1 - g - k) / (1 - k) || 0;
+    const y = (1 - b - k) / (1 - k) || 0;
+    return [c * 100, m * 100, y * 100, k * 100];
+  };
+  function comparativeDistance(x, y) {
+    return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
+  }
+  convert.rgb.keyword = function(rgb) {
+    const reversed = reverseKeywords[rgb];
+    if (reversed) {
+      return reversed;
+    }
+    let currentClosestDistance = Infinity;
+    let currentClosestKeyword;
+    for (const keyword of Object.keys(cssKeywords)) {
+      const value = cssKeywords[keyword];
+      const distance = comparativeDistance(rgb, value);
+      if (distance < currentClosestDistance) {
+        currentClosestDistance = distance;
+        currentClosestKeyword = keyword;
+      }
+    }
+    return currentClosestKeyword;
+  };
+  convert.keyword.rgb = function(keyword) {
+    return cssKeywords[keyword];
+  };
+  convert.rgb.xyz = function(rgb) {
+    let r = rgb[0] / 255;
+    let g = rgb[1] / 255;
+    let b = rgb[2] / 255;
+    r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
+    g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
+    b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
+    const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
+    const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
+    const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
+    return [x * 100, y * 100, z * 100];
+  };
+  convert.rgb.lab = function(rgb) {
+    const xyz = convert.rgb.xyz(rgb);
+    let x = xyz[0];
+    let y = xyz[1];
+    let z = xyz[2];
+    x /= 95.047;
+    y /= 100;
+    z /= 108.883;
+    x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+    y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+    z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+    const l = 116 * y - 16;
+    const a = 500 * (x - y);
+    const b = 200 * (y - z);
+    return [l, a, b];
+  };
+  convert.hsl.rgb = function(hsl) {
+    const h = hsl[0] / 360;
+    const s = hsl[1] / 100;
+    const l = hsl[2] / 100;
+    let t2;
+    let t3;
+    let val;
+    if (s === 0) {
+      val = l * 255;
+      return [val, val, val];
+    }
+    if (l < 0.5) {
+      t2 = l * (1 + s);
+    } else {
+      t2 = l + s - l * s;
+    }
+    const t1 = 2 * l - t2;
+    const rgb = [0, 0, 0];
+    for (let i = 0; i < 3; i++) {
+      t3 = h + 1 / 3 * -(i - 1);
+      if (t3 < 0) {
+        t3++;
+      }
+      if (t3 > 1) {
+        t3--;
+      }
+      if (6 * t3 < 1) {
+        val = t1 + (t2 - t1) * 6 * t3;
+      } else if (2 * t3 < 1) {
+        val = t2;
+      } else if (3 * t3 < 2) {
+        val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
+      } else {
+        val = t1;
+      }
+      rgb[i] = val * 255;
+    }
+    return rgb;
+  };
+  convert.hsl.hsv = function(hsl) {
+    const h = hsl[0];
+    let s = hsl[1] / 100;
+    let l = hsl[2] / 100;
+    let smin = s;
+    const lmin = Math.max(l, 0.01);
+    l *= 2;
+    s *= l <= 1 ? l : 2 - l;
+    smin *= lmin <= 1 ? lmin : 2 - lmin;
+    const v = (l + s) / 2;
+    const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
+    return [h, sv * 100, v * 100];
+  };
+  convert.hsv.rgb = function(hsv) {
+    const h = hsv[0] / 60;
+    const s = hsv[1] / 100;
+    let v = hsv[2] / 100;
+    const hi = Math.floor(h) % 6;
+    const f = h - Math.floor(h);
+    const p = 255 * v * (1 - s);
+    const q = 255 * v * (1 - s * f);
+    const t = 255 * v * (1 - s * (1 - f));
+    v *= 255;
+    switch (hi) {
+      case 0:
+        return [v, t, p];
+      case 1:
+        return [q, v, p];
+      case 2:
+        return [p, v, t];
+      case 3:
+        return [p, q, v];
+      case 4:
+        return [t, p, v];
+      case 5:
+        return [v, p, q];
+    }
+  };
+  convert.hsv.hsl = function(hsv) {
+    const h = hsv[0];
+    const s = hsv[1] / 100;
+    const v = hsv[2] / 100;
+    const vmin = Math.max(v, 0.01);
+    let sl;
+    let l;
+    l = (2 - s) * v;
+    const lmin = (2 - s) * vmin;
+    sl = s * vmin;
+    sl /= lmin <= 1 ? lmin : 2 - lmin;
+    sl = sl || 0;
+    l /= 2;
+    return [h, sl * 100, l * 100];
+  };
+  convert.hwb.rgb = function(hwb) {
+    const h = hwb[0] / 360;
+    let wh = hwb[1] / 100;
+    let bl = hwb[2] / 100;
+    const ratio = wh + bl;
+    let f;
+    if (ratio > 1) {
+      wh /= ratio;
+      bl /= ratio;
+    }
+    const i = Math.floor(6 * h);
+    const v = 1 - bl;
+    f = 6 * h - i;
+    if ((i & 1) !== 0) {
+      f = 1 - f;
+    }
+    const n = wh + f * (v - wh);
+    let r;
+    let g;
+    let b;
+    switch (i) {
+      default:
+      case 6:
+      case 0:
+        r = v;
+        g = n;
+        b = wh;
+        break;
+      case 1:
+        r = n;
+        g = v;
+        b = wh;
+        break;
+      case 2:
+        r = wh;
+        g = v;
+        b = n;
+        break;
+      case 3:
+        r = wh;
+        g = n;
+        b = v;
+        break;
+      case 4:
+        r = n;
+        g = wh;
+        b = v;
+        break;
+      case 5:
+        r = v;
+        g = wh;
+        b = n;
+        break;
+    }
+    return [r * 255, g * 255, b * 255];
+  };
+  convert.cmyk.rgb = function(cmyk) {
+    const c = cmyk[0] / 100;
+    const m = cmyk[1] / 100;
+    const y = cmyk[2] / 100;
+    const k = cmyk[3] / 100;
+    const r = 1 - Math.min(1, c * (1 - k) + k);
+    const g = 1 - Math.min(1, m * (1 - k) + k);
+    const b = 1 - Math.min(1, y * (1 - k) + k);
+    return [r * 255, g * 255, b * 255];
+  };
+  convert.xyz.rgb = function(xyz) {
+    const x = xyz[0] / 100;
+    const y = xyz[1] / 100;
+    const z = xyz[2] / 100;
+    let r;
+    let g;
+    let b;
+    r = x * 3.2406 + y * -1.5372 + z * -0.4986;
+    g = x * -0.9689 + y * 1.8758 + z * 0.0415;
+    b = x * 0.0557 + y * -0.204 + z * 1.057;
+    r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
+    g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
+    b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
+    r = Math.min(Math.max(0, r), 1);
+    g = Math.min(Math.max(0, g), 1);
+    b = Math.min(Math.max(0, b), 1);
+    return [r * 255, g * 255, b * 255];
+  };
+  convert.xyz.lab = function(xyz) {
+    let x = xyz[0];
+    let y = xyz[1];
+    let z = xyz[2];
+    x /= 95.047;
+    y /= 100;
+    z /= 108.883;
+    x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+    y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+    z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+    const l = 116 * y - 16;
+    const a = 500 * (x - y);
+    const b = 200 * (y - z);
+    return [l, a, b];
+  };
+  convert.lab.xyz = function(lab) {
+    const l = lab[0];
+    const a = lab[1];
+    const b = lab[2];
+    let x;
+    let y;
+    let z;
+    y = (l + 16) / 116;
+    x = a / 500 + y;
+    z = y - b / 200;
+    const y2 = y ** 3;
+    const x2 = x ** 3;
+    const z2 = z ** 3;
+    y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
+    x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
+    z = z2 > 8856e-6 ? z2 : (z - 16 / 116) / 7.787;
+    x *= 95.047;
+    y *= 100;
+    z *= 108.883;
+    return [x, y, z];
+  };
+  convert.lab.lch = function(lab) {
+    const l = lab[0];
+    const a = lab[1];
+    const b = lab[2];
+    let h;
+    const hr = Math.atan2(b, a);
+    h = hr * 360 / 2 / Math.PI;
+    if (h < 0) {
+      h += 360;
+    }
+    const c = Math.sqrt(a * a + b * b);
+    return [l, c, h];
+  };
+  convert.lch.lab = function(lch) {
+    const l = lch[0];
+    const c = lch[1];
+    const h = lch[2];
+    const hr = h / 360 * 2 * Math.PI;
+    const a = c * Math.cos(hr);
+    const b = c * Math.sin(hr);
+    return [l, a, b];
+  };
+  convert.rgb.ansi16 = function(args, saturation = null) {
+    const [r, g, b] = args;
+    let value = saturation === null ? convert.rgb.hsv(args)[2] : saturation;
+    value = Math.round(value / 50);
+    if (value === 0) {
+      return 30;
+    }
+    let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
+    if (value === 2) {
+      ansi += 60;
+    }
+    return ansi;
+  };
+  convert.hsv.ansi16 = function(args) {
+    return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
+  };
+  convert.rgb.ansi256 = function(args) {
+    const r = args[0];
+    const g = args[1];
+    const b = args[2];
+    if (r === g && g === b) {
+      if (r < 8) {
+        return 16;
+      }
+      if (r > 248) {
+        return 231;
+      }
+      return Math.round((r - 8) / 247 * 24) + 232;
+    }
+    const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
+    return ansi;
+  };
+  convert.ansi16.rgb = function(args) {
+    let color = args % 10;
+    if (color === 0 || color === 7) {
+      if (args > 50) {
+        color += 3.5;
+      }
+      color = color / 10.5 * 255;
+      return [color, color, color];
+    }
+    const mult = (~~(args > 50) + 1) * 0.5;
+    const r = (color & 1) * mult * 255;
+    const g = (color >> 1 & 1) * mult * 255;
+    const b = (color >> 2 & 1) * mult * 255;
+    return [r, g, b];
+  };
+  convert.ansi256.rgb = function(args) {
+    if (args >= 232) {
+      const c = (args - 232) * 10 + 8;
+      return [c, c, c];
+    }
+    args -= 16;
+    let rem;
+    const r = Math.floor(args / 36) / 5 * 255;
+    const g = Math.floor((rem = args % 36) / 6) / 5 * 255;
+    const b = rem % 6 / 5 * 255;
+    return [r, g, b];
+  };
+  convert.rgb.hex = function(args) {
+    const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
+    const string = integer.toString(16).toUpperCase();
+    return "000000".substring(string.length) + string;
+  };
+  convert.hex.rgb = function(args) {
+    const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+    if (!match) {
+      return [0, 0, 0];
+    }
+    let colorString = match[0];
+    if (match[0].length === 3) {
+      colorString = colorString.split("").map((char) => {
+        return char + char;
+      }).join("");
+    }
+    const integer = parseInt(colorString, 16);
+    const r = integer >> 16 & 255;
+    const g = integer >> 8 & 255;
+    const b = integer & 255;
+    return [r, g, b];
+  };
+  convert.rgb.hcg = function(rgb) {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const max = Math.max(Math.max(r, g), b);
+    const min = Math.min(Math.min(r, g), b);
+    const chroma = max - min;
+    let grayscale;
+    let hue;
+    if (chroma < 1) {
+      grayscale = min / (1 - chroma);
+    } else {
+      grayscale = 0;
+    }
+    if (chroma <= 0) {
+      hue = 0;
+    } else if (max === r) {
+      hue = (g - b) / chroma % 6;
+    } else if (max === g) {
+      hue = 2 + (b - r) / chroma;
+    } else {
+      hue = 4 + (r - g) / chroma;
+    }
+    hue /= 6;
+    hue %= 1;
+    return [hue * 360, chroma * 100, grayscale * 100];
+  };
+  convert.hsl.hcg = function(hsl) {
+    const s = hsl[1] / 100;
+    const l = hsl[2] / 100;
+    const c = l < 0.5 ? 2 * s * l : 2 * s * (1 - l);
+    let f = 0;
+    if (c < 1) {
+      f = (l - 0.5 * c) / (1 - c);
+    }
+    return [hsl[0], c * 100, f * 100];
+  };
+  convert.hsv.hcg = function(hsv) {
+    const s = hsv[1] / 100;
+    const v = hsv[2] / 100;
+    const c = s * v;
+    let f = 0;
+    if (c < 1) {
+      f = (v - c) / (1 - c);
+    }
+    return [hsv[0], c * 100, f * 100];
+  };
+  convert.hcg.rgb = function(hcg) {
+    const h = hcg[0] / 360;
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    if (c === 0) {
+      return [g * 255, g * 255, g * 255];
+    }
+    const pure = [0, 0, 0];
+    const hi = h % 1 * 6;
+    const v = hi % 1;
+    const w = 1 - v;
+    let mg = 0;
+    switch (Math.floor(hi)) {
+      case 0:
+        pure[0] = 1;
+        pure[1] = v;
+        pure[2] = 0;
+        break;
+      case 1:
+        pure[0] = w;
+        pure[1] = 1;
+        pure[2] = 0;
+        break;
+      case 2:
+        pure[0] = 0;
+        pure[1] = 1;
+        pure[2] = v;
+        break;
+      case 3:
+        pure[0] = 0;
+        pure[1] = w;
+        pure[2] = 1;
+        break;
+      case 4:
+        pure[0] = v;
+        pure[1] = 0;
+        pure[2] = 1;
+        break;
+      default:
+        pure[0] = 1;
+        pure[1] = 0;
+        pure[2] = w;
+    }
+    mg = (1 - c) * g;
+    return [
+      (c * pure[0] + mg) * 255,
+      (c * pure[1] + mg) * 255,
+      (c * pure[2] + mg) * 255
+    ];
+  };
+  convert.hcg.hsv = function(hcg) {
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    const v = c + g * (1 - c);
+    let f = 0;
+    if (v > 0) {
+      f = c / v;
+    }
+    return [hcg[0], f * 100, v * 100];
+  };
+  convert.hcg.hsl = function(hcg) {
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    const l = g * (1 - c) + 0.5 * c;
+    let s = 0;
+    if (l > 0 && l < 0.5) {
+      s = c / (2 * l);
+    } else if (l >= 0.5 && l < 1) {
+      s = c / (2 * (1 - l));
+    }
+    return [hcg[0], s * 100, l * 100];
+  };
+  convert.hcg.hwb = function(hcg) {
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    const v = c + g * (1 - c);
+    return [hcg[0], (v - c) * 100, (1 - v) * 100];
+  };
+  convert.hwb.hcg = function(hwb) {
+    const w = hwb[1] / 100;
+    const b = hwb[2] / 100;
+    const v = 1 - b;
+    const c = v - w;
+    let g = 0;
+    if (c < 1) {
+      g = (v - c) / (1 - c);
+    }
+    return [hwb[0], c * 100, g * 100];
+  };
+  convert.apple.rgb = function(apple) {
+    return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
+  };
+  convert.rgb.apple = function(rgb) {
+    return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
+  };
+  convert.gray.rgb = function(args) {
+    return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
+  };
+  convert.gray.hsl = function(args) {
+    return [0, 0, args[0]];
+  };
+  convert.gray.hsv = convert.gray.hsl;
+  convert.gray.hwb = function(gray) {
+    return [0, 100, gray[0]];
+  };
+  convert.gray.cmyk = function(gray) {
+    return [0, 0, 0, gray[0]];
+  };
+  convert.gray.lab = function(gray) {
+    return [gray[0], 0, 0];
+  };
+  convert.gray.hex = function(gray) {
+    const val = Math.round(gray[0] / 100 * 255) & 255;
+    const integer = (val << 16) + (val << 8) + val;
+    const string = integer.toString(16).toUpperCase();
+    return "000000".substring(string.length) + string;
+  };
+  convert.rgb.gray = function(rgb) {
+    const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
+    return [val / 255 * 100];
+  };
+});
+
+// ../../../node_modules/ansi-styles/node_modules/color-convert/route.js
+var require_route = __commonJS((exports2, module2) => {
+  var conversions = require_conversions();
+  function buildGraph() {
+    const graph = {};
+    const models = Object.keys(conversions);
+    for (let len = models.length, i = 0; i < len; i++) {
+      graph[models[i]] = {
+        distance: -1,
+        parent: null
+      };
+    }
+    return graph;
+  }
+  function deriveBFS(fromModel) {
+    const graph = buildGraph();
+    const queue = [fromModel];
+    graph[fromModel].distance = 0;
+    while (queue.length) {
+      const current = queue.pop();
+      const adjacents = Object.keys(conversions[current]);
+      for (let len = adjacents.length, i = 0; i < len; i++) {
+        const adjacent = adjacents[i];
+        const node = graph[adjacent];
+        if (node.distance === -1) {
+          node.distance = graph[current].distance + 1;
+          node.parent = current;
+          queue.unshift(adjacent);
+        }
+      }
+    }
+    return graph;
+  }
+  function link(from, to) {
+    return function(args) {
+      return to(from(args));
+    };
+  }
+  function wrapConversion(toModel, graph) {
+    const path = [graph[toModel].parent, toModel];
+    let fn6 = conversions[graph[toModel].parent][toModel];
+    let cur = graph[toModel].parent;
+    while (graph[cur].parent) {
+      path.unshift(graph[cur].parent);
+      fn6 = link(conversions[graph[cur].parent][cur], fn6);
+      cur = graph[cur].parent;
+    }
+    fn6.conversion = path;
+    return fn6;
+  }
+  module2.exports = function(fromModel) {
+    const graph = deriveBFS(fromModel);
+    const conversion = {};
+    const models = Object.keys(graph);
+    for (let len = models.length, i = 0; i < len; i++) {
+      const toModel = models[i];
+      const node = graph[toModel];
+      if (node.parent === null) {
+        continue;
+      }
+      conversion[toModel] = wrapConversion(toModel, graph);
+    }
+    return conversion;
+  };
+});
+
+// ../../../node_modules/ansi-styles/node_modules/color-convert/index.js
+var require_color_convert = __commonJS((exports2, module2) => {
+  var conversions = require_conversions();
+  var route = require_route();
+  var convert = {};
+  var models = Object.keys(conversions);
+  function wrapRaw(fn6) {
+    const wrappedFn = function(...args) {
+      const arg0 = args[0];
+      if (arg0 === void 0 || arg0 === null) {
+        return arg0;
+      }
+      if (arg0.length > 1) {
+        args = arg0;
+      }
+      return fn6(args);
+    };
+    if ("conversion" in fn6) {
+      wrappedFn.conversion = fn6.conversion;
+    }
+    return wrappedFn;
+  }
+  function wrapRounded(fn6) {
+    const wrappedFn = function(...args) {
+      const arg0 = args[0];
+      if (arg0 === void 0 || arg0 === null) {
+        return arg0;
+      }
+      if (arg0.length > 1) {
+        args = arg0;
+      }
+      const result = fn6(args);
+      if (typeof result === "object") {
+        for (let len = result.length, i = 0; i < len; i++) {
+          result[i] = Math.round(result[i]);
+        }
+      }
+      return result;
+    };
+    if ("conversion" in fn6) {
+      wrappedFn.conversion = fn6.conversion;
+    }
+    return wrappedFn;
+  }
+  models.forEach((fromModel) => {
+    convert[fromModel] = {};
+    Object.defineProperty(convert[fromModel], "channels", {value: conversions[fromModel].channels});
+    Object.defineProperty(convert[fromModel], "labels", {value: conversions[fromModel].labels});
+    const routes = route(fromModel);
+    const routeModels = Object.keys(routes);
+    routeModels.forEach((toModel) => {
+      const fn6 = routes[toModel];
+      convert[fromModel][toModel] = wrapRounded(fn6);
+      convert[fromModel][toModel].raw = wrapRaw(fn6);
+    });
+  });
+  module2.exports = convert;
+});
+
+// ../../../node_modules/ansi-styles/index.js
+var require_ansi_styles = __commonJS((exports2, module2) => {
+  "use strict";
+  var wrapAnsi16 = (fn6, offset) => (...args) => {
+    const code = fn6(...args);
+    return `[${code + offset}m`;
+  };
+  var wrapAnsi256 = (fn6, offset) => (...args) => {
+    const code = fn6(...args);
+    return `[${38 + offset};5;${code}m`;
+  };
+  var wrapAnsi16m = (fn6, offset) => (...args) => {
+    const rgb = fn6(...args);
+    return `[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
+  };
+  var ansi2ansi = (n) => n;
+  var rgb2rgb = (r, g, b) => [r, g, b];
+  var setLazyProperty = (object, property, get3) => {
+    Object.defineProperty(object, property, {
+      get: () => {
+        const value = get3();
+        Object.defineProperty(object, property, {
+          value,
+          enumerable: true,
+          configurable: true
+        });
+        return value;
+      },
+      enumerable: true,
+      configurable: true
+    });
+  };
+  var colorConvert;
+  var makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
+    if (colorConvert === void 0) {
+      colorConvert = require_color_convert();
+    }
+    const offset = isBackground ? 10 : 0;
+    const styles = {};
+    for (const [sourceSpace, suite] of Object.entries(colorConvert)) {
+      const name = sourceSpace === "ansi16" ? "ansi" : sourceSpace;
+      if (sourceSpace === targetSpace) {
+        styles[name] = wrap(identity, offset);
+      } else if (typeof suite === "object") {
+        styles[name] = wrap(suite[targetSpace], offset);
+      }
+    }
+    return styles;
+  };
+  function assembleStyles() {
+    const codes = new Map();
+    const styles = {
+      modifier: {
+        reset: [0, 0],
+        bold: [1, 22],
+        dim: [2, 22],
+        italic: [3, 23],
+        underline: [4, 24],
+        inverse: [7, 27],
+        hidden: [8, 28],
+        strikethrough: [9, 29]
+      },
+      color: {
+        black: [30, 39],
+        red: [31, 39],
+        green: [32, 39],
+        yellow: [33, 39],
+        blue: [34, 39],
+        magenta: [35, 39],
+        cyan: [36, 39],
+        white: [37, 39],
+        blackBright: [90, 39],
+        redBright: [91, 39],
+        greenBright: [92, 39],
+        yellowBright: [93, 39],
+        blueBright: [94, 39],
+        magentaBright: [95, 39],
+        cyanBright: [96, 39],
+        whiteBright: [97, 39]
+      },
+      bgColor: {
+        bgBlack: [40, 49],
+        bgRed: [41, 49],
+        bgGreen: [42, 49],
+        bgYellow: [43, 49],
+        bgBlue: [44, 49],
+        bgMagenta: [45, 49],
+        bgCyan: [46, 49],
+        bgWhite: [47, 49],
+        bgBlackBright: [100, 49],
+        bgRedBright: [101, 49],
+        bgGreenBright: [102, 49],
+        bgYellowBright: [103, 49],
+        bgBlueBright: [104, 49],
+        bgMagentaBright: [105, 49],
+        bgCyanBright: [106, 49],
+        bgWhiteBright: [107, 49]
+      }
+    };
+    styles.color.gray = styles.color.blackBright;
+    styles.bgColor.bgGray = styles.bgColor.bgBlackBright;
+    styles.color.grey = styles.color.blackBright;
+    styles.bgColor.bgGrey = styles.bgColor.bgBlackBright;
+    for (const [groupName, group] of Object.entries(styles)) {
+      for (const [styleName, style] of Object.entries(group)) {
+        styles[styleName] = {
+          open: `[${style[0]}m`,
+          close: `[${style[1]}m`
+        };
+        group[styleName] = styles[styleName];
+        codes.set(style[0], style[1]);
+      }
+      Object.defineProperty(styles, groupName, {
+        value: group,
+        enumerable: false
+      });
+    }
+    Object.defineProperty(styles, "codes", {
+      value: codes,
+      enumerable: false
+    });
+    styles.color.close = "[39m";
+    styles.bgColor.close = "[49m";
+    setLazyProperty(styles.color, "ansi", () => makeDynamicStyles(wrapAnsi16, "ansi16", ansi2ansi, false));
+    setLazyProperty(styles.color, "ansi256", () => makeDynamicStyles(wrapAnsi256, "ansi256", ansi2ansi, false));
+    setLazyProperty(styles.color, "ansi16m", () => makeDynamicStyles(wrapAnsi16m, "rgb", rgb2rgb, false));
+    setLazyProperty(styles.bgColor, "ansi", () => makeDynamicStyles(wrapAnsi16, "ansi16", ansi2ansi, true));
+    setLazyProperty(styles.bgColor, "ansi256", () => makeDynamicStyles(wrapAnsi256, "ansi256", ansi2ansi, true));
+    setLazyProperty(styles.bgColor, "ansi16m", () => makeDynamicStyles(wrapAnsi16m, "rgb", rgb2rgb, true));
+    return styles;
+  }
+  Object.defineProperty(module2, "exports", {
+    enumerable: true,
+    get: assembleStyles
+  });
+});
+
+// ../../../node_modules/supports-color/browser.js
+var require_browser = __commonJS((exports2, module2) => {
+  "use strict";
+  module2.exports = {
+    stdout: false,
+    stderr: false
+  };
+});
+
+// ../../../node_modules/chalk/source/util.js
+var require_util = __commonJS((exports2, module2) => {
+  "use strict";
+  var stringReplaceAll = (string, substring, replacer) => {
+    let index = string.indexOf(substring);
+    if (index === -1) {
+      return string;
+    }
+    const substringLength = substring.length;
+    let endIndex = 0;
+    let returnValue = "";
+    do {
+      returnValue += string.substr(endIndex, index - endIndex) + substring + replacer;
+      endIndex = index + substringLength;
+      index = string.indexOf(substring, endIndex);
+    } while (index !== -1);
+    returnValue += string.substr(endIndex);
+    return returnValue;
+  };
+  var stringEncaseCRLFWithFirstIndex = (string, prefix, postfix, index) => {
+    let endIndex = 0;
+    let returnValue = "";
+    do {
+      const gotCR = string[index - 1] === "\r";
+      returnValue += string.substr(endIndex, (gotCR ? index - 1 : index) - endIndex) + prefix + (gotCR ? "\r\n" : "\n") + postfix;
+      endIndex = index + 1;
+      index = string.indexOf("\n", endIndex);
+    } while (index !== -1);
+    returnValue += string.substr(endIndex);
+    return returnValue;
+  };
+  module2.exports = {
+    stringReplaceAll,
+    stringEncaseCRLFWithFirstIndex
+  };
+});
+
+// ../../../node_modules/chalk/source/templates.js
+var require_templates = __commonJS((exports2, module2) => {
+  "use strict";
+  var TEMPLATE_REGEX = /(?:\\(u(?:[a-f\d]{4}|\{[a-f\d]{1,6}\})|x[a-f\d]{2}|.))|(?:\{(~)?(\w+(?:\([^)]*\))?(?:\.\w+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(\})|((?:.|[\r\n\f])+?)/gi;
+  var STYLE_REGEX = /(?:^|\.)(\w+)(?:\(([^)]*)\))?/g;
+  var STRING_REGEX = /^(['"])((?:\\.|(?!\1)[^\\])*)\1$/;
+  var ESCAPE_REGEX = /\\(u(?:[a-f\d]{4}|{[a-f\d]{1,6}})|x[a-f\d]{2}|.)|([^\\])/gi;
+  var ESCAPES = new Map([
+    ["n", "\n"],
+    ["r", "\r"],
+    ["t", "	"],
+    ["b", "\b"],
+    ["f", "\f"],
+    ["v", "\v"],
+    ["0", "\0"],
+    ["\\", "\\"],
+    ["e", ""],
+    ["a", "\x07"]
+  ]);
+  function unescape2(c) {
+    const u = c[0] === "u";
+    const bracket = c[1] === "{";
+    if (u && !bracket && c.length === 5 || c[0] === "x" && c.length === 3) {
+      return String.fromCharCode(parseInt(c.slice(1), 16));
+    }
+    if (u && bracket) {
+      return String.fromCodePoint(parseInt(c.slice(2, -1), 16));
+    }
+    return ESCAPES.get(c) || c;
+  }
+  function parseArguments(name, arguments_) {
+    const results = [];
+    const chunks = arguments_.trim().split(/\s*,\s*/g);
+    let matches;
+    for (const chunk of chunks) {
+      const number = Number(chunk);
+      if (!Number.isNaN(number)) {
+        results.push(number);
+      } else if (matches = chunk.match(STRING_REGEX)) {
+        results.push(matches[2].replace(ESCAPE_REGEX, (m, escape2, character) => escape2 ? unescape2(escape2) : character));
+      } else {
+        throw new Error(`Invalid Chalk template style argument: ${chunk} (in style '${name}')`);
+      }
+    }
+    return results;
+  }
+  function parseStyle(style) {
+    STYLE_REGEX.lastIndex = 0;
+    const results = [];
+    let matches;
+    while ((matches = STYLE_REGEX.exec(style)) !== null) {
+      const name = matches[1];
+      if (matches[2]) {
+        const args = parseArguments(name, matches[2]);
+        results.push([name].concat(args));
+      } else {
+        results.push([name]);
+      }
+    }
+    return results;
+  }
+  function buildStyle(chalk, styles) {
+    const enabled = {};
+    for (const layer of styles) {
+      for (const style of layer.styles) {
+        enabled[style[0]] = layer.inverse ? null : style.slice(1);
+      }
+    }
+    let current = chalk;
+    for (const [styleName, styles2] of Object.entries(enabled)) {
+      if (!Array.isArray(styles2)) {
+        continue;
+      }
+      if (!(styleName in current)) {
+        throw new Error(`Unknown Chalk style: ${styleName}`);
+      }
+      current = styles2.length > 0 ? current[styleName](...styles2) : current[styleName];
+    }
+    return current;
+  }
+  module2.exports = (chalk, temporary) => {
+    const styles = [];
+    const chunks = [];
+    let chunk = [];
+    temporary.replace(TEMPLATE_REGEX, (m, escapeCharacter, inverse, style, close, character) => {
+      if (escapeCharacter) {
+        chunk.push(unescape2(escapeCharacter));
+      } else if (style) {
+        const string = chunk.join("");
+        chunk = [];
+        chunks.push(styles.length === 0 ? string : buildStyle(chalk, styles)(string));
+        styles.push({inverse, styles: parseStyle(style)});
+      } else if (close) {
+        if (styles.length === 0) {
+          throw new Error("Found extraneous } in Chalk template literal");
+        }
+        chunks.push(buildStyle(chalk, styles)(chunk.join("")));
+        chunk = [];
+        styles.pop();
+      } else {
+        chunk.push(character);
+      }
+    });
+    chunks.push(chunk.join(""));
+    if (styles.length > 0) {
+      const errMessage = `Chalk template literal is missing ${styles.length} closing bracket${styles.length === 1 ? "" : "s"} (\`}\`)`;
+      throw new Error(errMessage);
+    }
+    return chunks.join("");
+  };
+});
+
+// ../../../node_modules/chalk/source/index.js
+var require_source = __commonJS((exports2, module2) => {
+  "use strict";
+  var ansiStyles = require_ansi_styles();
+  var {stdout: stdoutColor, stderr: stderrColor} = require_browser();
+  var {
+    stringReplaceAll,
+    stringEncaseCRLFWithFirstIndex
+  } = require_util();
+  var {isArray: isArray3} = Array;
+  var levelMapping = [
+    "ansi",
+    "ansi",
+    "ansi256",
+    "ansi16m"
+  ];
+  var styles = Object.create(null);
+  var applyOptions = (object, options = {}) => {
+    if (options.level && !(Number.isInteger(options.level) && options.level >= 0 && options.level <= 3)) {
+      throw new Error("The `level` option should be an integer from 0 to 3");
+    }
+    const colorLevel = stdoutColor ? stdoutColor.level : 0;
+    object.level = options.level === void 0 ? colorLevel : options.level;
+  };
+  var ChalkClass = class {
+    constructor(options) {
+      return chalkFactory(options);
+    }
+  };
+  var chalkFactory = (options) => {
+    const chalk2 = {};
+    applyOptions(chalk2, options);
+    chalk2.template = (...arguments_) => chalkTag(chalk2.template, ...arguments_);
+    Object.setPrototypeOf(chalk2, Chalk.prototype);
+    Object.setPrototypeOf(chalk2.template, chalk2);
+    chalk2.template.constructor = () => {
+      throw new Error("`chalk.constructor()` is deprecated. Use `new chalk.Instance()` instead.");
+    };
+    chalk2.template.Instance = ChalkClass;
+    return chalk2.template;
+  };
+  function Chalk(options) {
+    return chalkFactory(options);
+  }
+  for (const [styleName, style] of Object.entries(ansiStyles)) {
+    styles[styleName] = {
+      get() {
+        const builder = createBuilder(this, createStyler(style.open, style.close, this._styler), this._isEmpty);
+        Object.defineProperty(this, styleName, {value: builder});
+        return builder;
+      }
+    };
+  }
+  styles.visible = {
+    get() {
+      const builder = createBuilder(this, this._styler, true);
+      Object.defineProperty(this, "visible", {value: builder});
+      return builder;
+    }
+  };
+  var usedModels = ["rgb", "hex", "keyword", "hsl", "hsv", "hwb", "ansi", "ansi256"];
+  for (const model of usedModels) {
+    styles[model] = {
+      get() {
+        const {level} = this;
+        return function(...arguments_) {
+          const styler = createStyler(ansiStyles.color[levelMapping[level]][model](...arguments_), ansiStyles.color.close, this._styler);
+          return createBuilder(this, styler, this._isEmpty);
+        };
+      }
+    };
+  }
+  for (const model of usedModels) {
+    const bgModel = "bg" + model[0].toUpperCase() + model.slice(1);
+    styles[bgModel] = {
+      get() {
+        const {level} = this;
+        return function(...arguments_) {
+          const styler = createStyler(ansiStyles.bgColor[levelMapping[level]][model](...arguments_), ansiStyles.bgColor.close, this._styler);
+          return createBuilder(this, styler, this._isEmpty);
+        };
+      }
+    };
+  }
+  var proto = Object.defineProperties(() => {
+  }, {
+    ...styles,
+    level: {
+      enumerable: true,
+      get() {
+        return this._generator.level;
+      },
+      set(level) {
+        this._generator.level = level;
+      }
+    }
+  });
+  var createStyler = (open, close, parent) => {
+    let openAll;
+    let closeAll;
+    if (parent === void 0) {
+      openAll = open;
+      closeAll = close;
+    } else {
+      openAll = parent.openAll + open;
+      closeAll = close + parent.closeAll;
+    }
+    return {
+      open,
+      close,
+      openAll,
+      closeAll,
+      parent
+    };
+  };
+  var createBuilder = (self2, _styler, _isEmpty) => {
+    const builder = (...arguments_) => {
+      if (isArray3(arguments_[0]) && isArray3(arguments_[0].raw)) {
+        return applyStyle(builder, chalkTag(builder, ...arguments_));
+      }
+      return applyStyle(builder, arguments_.length === 1 ? "" + arguments_[0] : arguments_.join(" "));
+    };
+    Object.setPrototypeOf(builder, proto);
+    builder._generator = self2;
+    builder._styler = _styler;
+    builder._isEmpty = _isEmpty;
+    return builder;
+  };
+  var applyStyle = (self2, string) => {
+    if (self2.level <= 0 || !string) {
+      return self2._isEmpty ? "" : string;
+    }
+    let styler = self2._styler;
+    if (styler === void 0) {
+      return string;
+    }
+    const {openAll, closeAll} = styler;
+    if (string.indexOf("") !== -1) {
+      while (styler !== void 0) {
+        string = stringReplaceAll(string, styler.close, styler.open);
+        styler = styler.parent;
+      }
+    }
+    const lfIndex = string.indexOf("\n");
+    if (lfIndex !== -1) {
+      string = stringEncaseCRLFWithFirstIndex(string, closeAll, openAll, lfIndex);
+    }
+    return openAll + string + closeAll;
+  };
+  var template;
+  var chalkTag = (chalk2, ...strings) => {
+    const [firstString] = strings;
+    if (!isArray3(firstString) || !isArray3(firstString.raw)) {
+      return strings.join(" ");
+    }
+    const arguments_ = strings.slice(1);
+    const parts = [firstString.raw[0]];
+    for (let i = 1; i < firstString.length; i++) {
+      parts.push(String(arguments_[i - 1]).replace(/[{}\\]/g, "\\$&"), String(firstString.raw[i]));
+    }
+    if (template === void 0) {
+      template = require_templates();
+    }
+    return template(chalk2, parts.join(""));
+  };
+  Object.defineProperties(Chalk.prototype, styles);
+  var chalk = Chalk();
+  chalk.supportsColor = stdoutColor;
+  chalk.stderr = Chalk({level: stderrColor ? stderrColor.level : 0});
+  chalk.stderr.supportsColor = stderrColor;
+  module2.exports = chalk;
+});
+
+// ../../../node_modules/highlight.js/lib/core.js
+var require_core2 = __commonJS((exports2, module2) => {
   function deepFreeze(obj) {
     if (obj instanceof Map) {
       obj.clear = obj.delete = obj.set = function() {
@@ -678,7 +4811,7 @@ var require_core = __commonJS((exports2, module2) => {
   function hasValueOrEmptyAttribute(value) {
     return Boolean(value || value === "");
   }
-  function BuildVuePlugin(hljs2) {
+  function BuildVuePlugin(hljs) {
     const Component = {
       props: ["language", "code", "autodetect"],
       data: function() {
@@ -694,17 +4827,17 @@ var require_core = __commonJS((exports2, module2) => {
           return "hljs " + this.detectedLanguage;
         },
         highlighted() {
-          if (!this.autoDetect && !hljs2.getLanguage(this.language)) {
+          if (!this.autoDetect && !hljs.getLanguage(this.language)) {
             console.warn(`The language "${this.language}" you specified could not be found.`);
             this.unknownLanguage = true;
             return escapeHTML(this.code);
           }
           let result = {};
           if (this.autoDetect) {
-            result = hljs2.highlightAuto(this.code);
+            result = hljs.highlightAuto(this.code);
             this.detectedLanguage = result.language;
           } else {
-            result = hljs2.highlight(this.language, this.code, this.ignoreIllegals);
+            result = hljs.highlight(this.language, this.code, this.ignoreIllegals);
             this.detectedLanguage = this.language;
           }
           return result.value;
@@ -785,8 +4918,8 @@ var require_core = __commonJS((exports2, module2) => {
       return highlighted[0].event === "start" ? original : highlighted;
     }
     function open(node) {
-      function attributeString(attr) {
-        return " " + attr.nodeName + '="' + escapeHTML(attr.value) + '"';
+      function attributeString(attr2) {
+        return " " + attr2.nodeName + '="' + escapeHTML(attr2.value) + '"';
       }
       result += "<" + tag(node) + [].map.call(node.attributes, attributeString).join("") + ">";
     }
@@ -834,7 +4967,7 @@ var require_core = __commonJS((exports2, module2) => {
   var escape$1 = escapeHTML;
   var inherit$1 = inherit;
   var NO_MATCH = Symbol("nomatch");
-  var HLJS = function(hljs2) {
+  var HLJS = function(hljs) {
     const languages = Object.create(null);
     const aliases = Object.create(null);
     const plugins = [];
@@ -1316,7 +5449,7 @@ var require_core = __commonJS((exports2, module2) => {
     function registerLanguage(languageName, languageDefinition) {
       let lang = null;
       try {
-        lang = languageDefinition(hljs2);
+        lang = languageDefinition(hljs);
       } catch (error$1) {
         error("Language definition for '{}' could not be registered.".replace("{}", languageName));
         if (!SAFE_MODE) {
@@ -1329,7 +5462,7 @@ var require_core = __commonJS((exports2, module2) => {
       if (!lang.name)
         lang.name = languageName;
       languages[languageName] = lang;
-      lang.rawDefinition = languageDefinition.bind(null, hljs2);
+      lang.rawDefinition = languageDefinition.bind(null, hljs);
       if (lang.aliases) {
         registerAliases(lang.aliases, {languageName});
       }
@@ -1405,7 +5538,7 @@ var require_core = __commonJS((exports2, module2) => {
       deprecated("10.7.0", "Please use highlightElement now.");
       return highlightElement(el);
     }
-    Object.assign(hljs2, {
+    Object.assign(hljs, {
       highlight: highlight2,
       highlightAuto,
       highlightAll,
@@ -1424,25 +5557,25 @@ var require_core = __commonJS((exports2, module2) => {
       autoDetection,
       inherit: inherit$1,
       addPlugin,
-      vuePlugin: BuildVuePlugin(hljs2).VuePlugin
+      vuePlugin: BuildVuePlugin(hljs).VuePlugin
     });
-    hljs2.debugMode = function() {
+    hljs.debugMode = function() {
       SAFE_MODE = false;
     };
-    hljs2.safeMode = function() {
+    hljs.safeMode = function() {
       SAFE_MODE = true;
     };
-    hljs2.versionString = version;
+    hljs.versionString = version;
     for (const key in MODES) {
       if (typeof MODES[key] === "object") {
         deepFreezeEs6(MODES[key]);
       }
     }
-    Object.assign(hljs2, MODES);
-    hljs2.addPlugin(brPlugin);
-    hljs2.addPlugin(mergeHTMLPlugin);
-    hljs2.addPlugin(tabReplacePlugin);
-    return hljs2;
+    Object.assign(hljs, MODES);
+    hljs.addPlugin(brPlugin);
+    hljs.addPlugin(mergeHTMLPlugin);
+    hljs.addPlugin(tabReplacePlugin);
+    return hljs;
   };
   var highlight = HLJS({});
   module2.exports = highlight;
@@ -1450,7 +5583,7 @@ var require_core = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/1c.js
 var require_c = __commonJS((exports2, module2) => {
-  function _1c(hljs2) {
+  function _1c(hljs) {
     var UNDERSCORE_IDENT_RE = "[A-Za-zА-Яа-яёЁ_][A-Za-zА-Яа-яёЁ_0-9]+";
     var v7_keywords = "далее ";
     var v8_keywords = "возврат вызватьисключение выполнить для если и из или иначе иначеесли исключение каждого конецесли конецпопытки конеццикла не новый перейти перем по пока попытка прервать продолжить тогда цикл экспорт ";
@@ -1490,7 +5623,7 @@ var require_c = __commonJS((exports2, module2) => {
     var v8_universal_collection = "comsafearray деревозначений массив соответствие списокзначений структура таблицазначений фиксированнаяструктура фиксированноесоответствие фиксированныймассив ";
     var TYPE = v8_shared_object + v8_universal_collection;
     var LITERAL = "null истина ложь неопределено";
-    var NUMBERS = hljs2.inherit(hljs2.NUMBER_MODE);
+    var NUMBERS = hljs.inherit(hljs.NUMBER_MODE);
     var STRINGS = {
       className: "string",
       begin: '"|\\|',
@@ -1509,7 +5642,7 @@ var require_c = __commonJS((exports2, module2) => {
         }
       ]
     };
-    var COMMENTS = hljs2.inherit(hljs2.C_LINE_COMMENT_MODE);
+    var COMMENTS = hljs.inherit(hljs.C_LINE_COMMENT_MODE);
     var META = {
       className: "meta",
       begin: "#|&",
@@ -1560,7 +5693,7 @@ var require_c = __commonJS((exports2, module2) => {
             COMMENTS
           ]
         },
-        hljs2.inherit(hljs2.TITLE_MODE, {begin: UNDERSCORE_IDENT_RE})
+        hljs.inherit(hljs.TITLE_MODE, {begin: UNDERSCORE_IDENT_RE})
       ]
     };
     return {
@@ -1601,7 +5734,7 @@ var require_abnf = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function abnf(hljs2) {
+  function abnf(hljs) {
     const regexes = {
       ruleDeclaration: /^[a-zA-Z][a-zA-Z0-9-]*/,
       unexpectedChars: /[!@#$^&',?+~`|:]/
@@ -1624,7 +5757,7 @@ var require_abnf = __commonJS((exports2, module2) => {
       "VCHAR",
       "WSP"
     ];
-    const commentMode = hljs2.COMMENT(/;/, /$/);
+    const commentMode = hljs.COMMENT(/;/, /$/);
     const terminalBinaryMode = {
       className: "symbol",
       begin: /%b[0-1]+(-[0-1]+|(\.[0-1]+)+){0,1}/
@@ -1656,8 +5789,8 @@ var require_abnf = __commonJS((exports2, module2) => {
         terminalDecimalMode,
         terminalHexadecimalMode,
         caseSensitivityIndicatorMode,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.NUMBER_MODE
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE
       ]
     };
   }
@@ -1766,7 +5899,7 @@ var require_actionscript = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function actionscript(hljs2) {
+  function actionscript(hljs) {
     const IDENT_RE = /[a-zA-Z_$][a-zA-Z0-9_$]*/;
     const IDENT_FUNC_RETURN_TYPE_RE = /([*]|[a-zA-Z_$][a-zA-Z0-9_$]*)/;
     const AS3_REST_ARG_MODE = {
@@ -1783,16 +5916,16 @@ var require_actionscript = __commonJS((exports2, module2) => {
         literal: "true false null undefined"
       },
       contains: [
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "class",
           beginKeywords: "package",
           end: /\{/,
-          contains: [hljs2.TITLE_MODE]
+          contains: [hljs.TITLE_MODE]
         },
         {
           className: "class",
@@ -1801,7 +5934,7 @@ var require_actionscript = __commonJS((exports2, module2) => {
           excludeEnd: true,
           contains: [
             {beginKeywords: "extends implements"},
-            hljs2.TITLE_MODE
+            hljs.TITLE_MODE
           ]
         },
         {
@@ -1817,23 +5950,23 @@ var require_actionscript = __commonJS((exports2, module2) => {
           excludeEnd: true,
           illegal: /\S/,
           contains: [
-            hljs2.TITLE_MODE,
+            hljs.TITLE_MODE,
             {
               className: "params",
               begin: /\(/,
               end: /\)/,
               contains: [
-                hljs2.APOS_STRING_MODE,
-                hljs2.QUOTE_STRING_MODE,
-                hljs2.C_LINE_COMMENT_MODE,
-                hljs2.C_BLOCK_COMMENT_MODE,
+                hljs.APOS_STRING_MODE,
+                hljs.QUOTE_STRING_MODE,
+                hljs.C_LINE_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
                 AS3_REST_ARG_MODE
               ]
             },
             {begin: concat(/:\s*/, IDENT_FUNC_RETURN_TYPE_RE)}
           ]
         },
-        hljs2.METHOD_GUARD
+        hljs.METHOD_GUARD
       ],
       illegal: /#/
     };
@@ -1843,7 +5976,7 @@ var require_actionscript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/ada.js
 var require_ada = __commonJS((exports2, module2) => {
-  function ada(hljs2) {
+  function ada(hljs) {
     const INTEGER_RE = "\\d(_|\\d)*";
     const EXPONENT_RE = "[eE][-+]?" + INTEGER_RE;
     const DECIMAL_LITERAL_RE = INTEGER_RE + "(\\." + INTEGER_RE + ")?(" + EXPONENT_RE + ")?";
@@ -1852,7 +5985,7 @@ var require_ada = __commonJS((exports2, module2) => {
     const NUMBER_RE = "\\b(" + BASED_LITERAL_RE + "|" + DECIMAL_LITERAL_RE + ")";
     const ID_REGEX = "[A-Za-z](_?[A-Za-z0-9.])*";
     const BAD_CHARS = `[]\\{\\}%#'"`;
-    const COMMENTS = hljs2.COMMENT("--", "$");
+    const COMMENTS = hljs.COMMENT("--", "$");
     const VAR_DECLS = {
       begin: "\\s+:\\s+",
       end: "\\s*(:=|;|\\)|=>|$)",
@@ -1959,7 +6092,7 @@ var require_ada = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/angelscript.js
 var require_angelscript = __commonJS((exports2, module2) => {
-  function angelscript(hljs2) {
+  function angelscript(hljs) {
     var builtInTypeMode = {
       className: "built_in",
       begin: "\\b(void|bool|int|int8|int16|int32|int64|uint|uint8|uint16|uint32|uint64|string|ref|array|double|float|auto|dictionary)"
@@ -1987,7 +6120,7 @@ var require_angelscript = __commonJS((exports2, module2) => {
           begin: "'",
           end: "'",
           illegal: "\\n",
-          contains: [hljs2.BACKSLASH_ESCAPE],
+          contains: [hljs.BACKSLASH_ESCAPE],
           relevance: 0
         },
         {
@@ -2000,11 +6133,11 @@ var require_angelscript = __commonJS((exports2, module2) => {
           begin: '"',
           end: '"',
           illegal: "\\n",
-          contains: [hljs2.BACKSLASH_ESCAPE],
+          contains: [hljs.BACKSLASH_ESCAPE],
           relevance: 0
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "string",
           begin: "^\\s*\\[",
@@ -2062,7 +6195,7 @@ var require_angelscript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/apache.js
 var require_apache = __commonJS((exports2, module2) => {
-  function apache(hljs2) {
+  function apache(hljs) {
     const NUMBER_REF = {
       className: "number",
       begin: /[$%]\d+/
@@ -2084,7 +6217,7 @@ var require_apache = __commonJS((exports2, module2) => {
       aliases: ["apacheconf"],
       case_insensitive: true,
       contains: [
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           className: "section",
           begin: /<\/?/,
@@ -2092,7 +6225,7 @@ var require_apache = __commonJS((exports2, module2) => {
           contains: [
             IP_ADDRESS,
             PORT_NUMBER,
-            hljs2.inherit(hljs2.QUOTE_STRING_MODE, {relevance: 0})
+            hljs.inherit(hljs.QUOTE_STRING_MODE, {relevance: 0})
           ]
         },
         {
@@ -2123,7 +6256,7 @@ var require_apache = __commonJS((exports2, module2) => {
               },
               IP_ADDRESS,
               NUMBER,
-              hljs2.QUOTE_STRING_MODE
+              hljs.QUOTE_STRING_MODE
             ]
           }
         }
@@ -2151,8 +6284,8 @@ var require_applescript = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function applescript(hljs2) {
-    const STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+  function applescript(hljs) {
+    const STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {
       illegal: null
     });
     const PARAMS = {
@@ -2161,12 +6294,12 @@ var require_applescript = __commonJS((exports2, module2) => {
       end: /\)/,
       contains: [
         "self",
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         STRING
       ]
     };
-    const COMMENT_MODE_1 = hljs2.COMMENT(/--/, /$/);
-    const COMMENT_MODE_2 = hljs2.COMMENT(/\(\*/, /\*\)/, {
+    const COMMENT_MODE_1 = hljs.COMMENT(/--/, /$/);
+    const COMMENT_MODE_2 = hljs.COMMENT(/\(\*/, /\*\)/, {
       contains: [
         "self",
         COMMENT_MODE_1
@@ -2175,7 +6308,7 @@ var require_applescript = __commonJS((exports2, module2) => {
     const COMMENTS = [
       COMMENT_MODE_1,
       COMMENT_MODE_2,
-      hljs2.HASH_COMMENT_MODE
+      hljs.HASH_COMMENT_MODE
     ];
     const KEYWORD_PATTERNS = [
       /apart from/,
@@ -2227,7 +6360,7 @@ var require_applescript = __commonJS((exports2, module2) => {
       },
       contains: [
         STRING,
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "built_in",
           begin: concat(/\b/, either(...BUILT_IN_PATTERNS), /\b/)
@@ -2248,7 +6381,7 @@ var require_applescript = __commonJS((exports2, module2) => {
           beginKeywords: "on",
           illegal: /[${=;\n]/,
           contains: [
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             PARAMS
           ]
         },
@@ -2262,7 +6395,7 @@ var require_applescript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/arcade.js
 var require_arcade = __commonJS((exports2, module2) => {
-  function arcade(hljs2) {
+  function arcade(hljs) {
     const IDENT_RE = "[A-Za-z_][0-9A-Za-z_]*";
     const KEYWORDS = {
       keyword: "if for while var new function do return void else break",
@@ -2283,7 +6416,7 @@ var require_arcade = __commonJS((exports2, module2) => {
           begin: "\\b(0[oO][0-7]+)"
         },
         {
-          begin: hljs2.C_NUMBER_RE
+          begin: hljs.C_NUMBER_RE
         }
       ],
       relevance: 0
@@ -2300,30 +6433,30 @@ var require_arcade = __commonJS((exports2, module2) => {
       begin: "`",
       end: "`",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST
       ]
     };
     SUBST.contains = [
-      hljs2.APOS_STRING_MODE,
-      hljs2.QUOTE_STRING_MODE,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       TEMPLATE_STRING,
       NUMBER,
-      hljs2.REGEXP_MODE
+      hljs.REGEXP_MODE
     ];
     const PARAMS_CONTAINS = SUBST.contains.concat([
-      hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.C_LINE_COMMENT_MODE
+      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.C_LINE_COMMENT_MODE
     ]);
     return {
       name: "ArcGIS Arcade",
       keywords: KEYWORDS,
       contains: [
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         TEMPLATE_STRING,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         SYMBOL,
         NUMBER,
         {
@@ -2341,12 +6474,12 @@ var require_arcade = __commonJS((exports2, module2) => {
           }]
         },
         {
-          begin: "(" + hljs2.RE_STARTERS_RE + "|\\b(return)\\b)\\s*",
+          begin: "(" + hljs.RE_STARTERS_RE + "|\\b(return)\\b)\\s*",
           keywords: "return",
           contains: [
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
-            hljs2.REGEXP_MODE,
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
+            hljs.REGEXP_MODE,
             {
               className: "function",
               begin: "(\\(.*?\\)|" + IDENT_RE + ")\\s*=>",
@@ -2381,7 +6514,7 @@ var require_arcade = __commonJS((exports2, module2) => {
           end: /\{/,
           excludeEnd: true,
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               begin: IDENT_RE
             }),
             {
@@ -2424,8 +6557,8 @@ var require_arduino = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function cPlusPlus(hljs2) {
-    const C_LINE_COMMENT_MODE = hljs2.COMMENT("//", "$", {
+  function cPlusPlus(hljs) {
+    const C_LINE_COMMENT_MODE = hljs.COMMENT("//", "$", {
       contains: [
         {
           begin: /\\\n/
@@ -2448,14 +6581,14 @@ var require_arduino = __commonJS((exports2, module2) => {
           begin: '(u8?|U|L)?"',
           end: '"',
           illegal: "\\n",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: "(u8?|U|L)?'(" + CHARACTER_ESCAPES + "|.)",
           end: "'",
           illegal: "."
         },
-        hljs2.END_SAME_AS_BEGIN({
+        hljs.END_SAME_AS_BEGIN({
           begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\(/,
           end: /\)([^()\\ ]{0,16})"/
         })
@@ -2488,7 +6621,7 @@ var require_arduino = __commonJS((exports2, module2) => {
           begin: /\\\n/,
           relevance: 0
         },
-        hljs2.inherit(STRINGS, {
+        hljs.inherit(STRINGS, {
           className: "meta-string"
         }),
         {
@@ -2496,15 +6629,15 @@ var require_arduino = __commonJS((exports2, module2) => {
           begin: /<.*?>/
         },
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
     const TITLE_MODE = {
       className: "title",
-      begin: optional(NAMESPACE_RE) + hljs2.IDENT_RE,
+      begin: optional(NAMESPACE_RE) + hljs.IDENT_RE,
       relevance: 0
     };
-    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs2.IDENT_RE + "\\s*\\(";
+    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + "\\s*\\(";
     const COMMON_CPP_HINTS = [
       "asin",
       "atan2",
@@ -2630,14 +6763,14 @@ var require_arduino = __commonJS((exports2, module2) => {
       className: "function.dispatch",
       relevance: 0,
       keywords: CPP_KEYWORDS,
-      begin: concat(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs2.IDENT_RE, lookahead(/\s*\(/))
+      begin: concat(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs.IDENT_RE, lookahead(/\s*\(/))
     };
     const EXPRESSION_CONTAINS = [
       FUNCTION_DISPATCH,
       PREPROCESSOR,
       CPP_PRIMITIVE_TYPES,
       C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
       NUMBERS,
       STRINGS
     ];
@@ -2708,7 +6841,7 @@ var require_arduino = __commonJS((exports2, module2) => {
           relevance: 0,
           contains: [
             C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
             STRINGS,
             NUMBERS,
             CPP_PRIMITIVE_TYPES,
@@ -2720,7 +6853,7 @@ var require_arduino = __commonJS((exports2, module2) => {
               contains: [
                 "self",
                 C_LINE_COMMENT_MODE,
-                hljs2.C_BLOCK_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
                 STRINGS,
                 NUMBERS,
                 CPP_PRIMITIVE_TYPES
@@ -2730,7 +6863,7 @@ var require_arduino = __commonJS((exports2, module2) => {
         },
         CPP_PRIMITIVE_TYPES,
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         PREPROCESSOR
       ]
     };
@@ -2762,7 +6895,7 @@ var require_arduino = __commonJS((exports2, module2) => {
           ]
         },
         {
-          begin: hljs2.IDENT_RE + "::",
+          begin: hljs.IDENT_RE + "::",
           keywords: CPP_KEYWORDS
         },
         {
@@ -2773,7 +6906,7 @@ var require_arduino = __commonJS((exports2, module2) => {
             {
               beginKeywords: "final class struct"
             },
-            hljs2.TITLE_MODE
+            hljs.TITLE_MODE
           ]
         }
       ]),
@@ -2784,14 +6917,14 @@ var require_arduino = __commonJS((exports2, module2) => {
       }
     };
   }
-  function arduino(hljs2) {
+  function arduino(hljs) {
     const ARDUINO_KW = {
       keyword: "boolean byte word String",
       built_in: "KeyboardController MouseController SoftwareSerial EthernetServer EthernetClient LiquidCrystal RobotControl GSMVoiceCall EthernetUDP EsploraTFT HttpClient RobotMotor WiFiClient GSMScanner FileSystem Scheduler GSMServer YunClient YunServer IPAddress GSMClient GSMModem Keyboard Ethernet Console GSMBand Esplora Stepper Process WiFiUDP GSM_SMS Mailbox USBHost Firmata PImage Client Server GSMPIN FileIO Bridge Serial EEPROM Stream Mouse Audio Servo File Task GPRS WiFi Wire TFT GSM SPI SD ",
       _: "setup loop runShellCommandAsynchronously analogWriteResolution retrieveCallingNumber printFirmwareVersion analogReadResolution sendDigitalPortPair noListenOnLocalhost readJoystickButton setFirmwareVersion readJoystickSwitch scrollDisplayRight getVoiceCallStatus scrollDisplayLeft writeMicroseconds delayMicroseconds beginTransmission getSignalStrength runAsynchronously getAsynchronously listenOnLocalhost getCurrentCarrier readAccelerometer messageAvailable sendDigitalPorts lineFollowConfig countryNameWrite runShellCommand readStringUntil rewindDirectory readTemperature setClockDivider readLightSensor endTransmission analogReference detachInterrupt countryNameRead attachInterrupt encryptionType readBytesUntil robotNameWrite readMicrophone robotNameRead cityNameWrite userNameWrite readJoystickY readJoystickX mouseReleased openNextFile scanNetworks noInterrupts digitalWrite beginSpeaker mousePressed isActionDone mouseDragged displayLogos noAutoscroll addParameter remoteNumber getModifiers keyboardRead userNameRead waitContinue processInput parseCommand printVersion readNetworks writeMessage blinkVersion cityNameRead readMessage setDataMode parsePacket isListening setBitOrder beginPacket isDirectory motorsWrite drawCompass digitalRead clearScreen serialEvent rightToLeft setTextSize leftToRight requestFrom keyReleased compassRead analogWrite interrupts WiFiServer disconnect playMelody parseFloat autoscroll getPINUsed setPINUsed setTimeout sendAnalog readSlider analogRead beginWrite createChar motorsStop keyPressed tempoWrite readButton subnetMask debugPrint macAddress writeGreen randomSeed attachGPRS readString sendString remotePort releaseAll mouseMoved background getXChange getYChange answerCall getResult voiceCall endPacket constrain getSocket writeJSON getButton available connected findUntil readBytes exitValue readGreen writeBlue startLoop IPAddress isPressed sendSysex pauseMode gatewayIP setCursor getOemKey tuneWrite noDisplay loadImage switchPIN onRequest onReceive changePIN playFile noBuffer parseInt overflow checkPIN knobRead beginTFT bitClear updateIR bitWrite position writeRGB highByte writeRed setSpeed readBlue noStroke remoteIP transfer shutdown hangCall beginSMS endWrite attached maintain noCursor checkReg checkPUK shiftOut isValid shiftIn pulseIn connect println localIP pinMode getIMEI display noBlink process getBand running beginSD drawBMP lowByte setBand release bitRead prepare pointTo readRed setMode noFill remove listen stroke detach attach noTone exists buffer height bitSet circle config cursor random IRread setDNS endSMS getKey micros millis begin print write ready flush width isPIN blink clear press mkdir rmdir close point yield image BSSID click delay read text move peek beep rect line open seek fill size turn stop home find step tone sqrt RSSI SSID end bit tan cos sin pow map abs max min get run put",
       literal: "DIGITAL_MESSAGE FIRMATA_STRING ANALOG_MESSAGE REPORT_DIGITAL REPORT_ANALOG INPUT_PULLUP SET_PIN_MODE INTERNAL2V56 SYSTEM_RESET LED_BUILTIN INTERNAL1V1 SYSEX_START INTERNAL EXTERNAL DEFAULT OUTPUT INPUT HIGH LOW"
     };
-    const ARDUINO = cPlusPlus(hljs2);
+    const ARDUINO = cPlusPlus(hljs);
     const kws = ARDUINO.keywords;
     kws.keyword += " " + ARDUINO_KW.keyword;
     kws.literal += " " + ARDUINO_KW.literal;
@@ -2807,18 +6940,18 @@ var require_arduino = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/armasm.js
 var require_armasm = __commonJS((exports2, module2) => {
-  function armasm(hljs2) {
+  function armasm(hljs) {
     const COMMENT = {
       variants: [
-        hljs2.COMMENT("^[ \\t]*(?=#)", "$", {
+        hljs.COMMENT("^[ \\t]*(?=#)", "$", {
           relevance: 0,
           excludeBegin: true
         }),
-        hljs2.COMMENT("[;@]", "$", {
+        hljs.COMMENT("[;@]", "$", {
           relevance: 0
         }),
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
     return {
@@ -2826,7 +6959,7 @@ var require_armasm = __commonJS((exports2, module2) => {
       case_insensitive: true,
       aliases: ["arm"],
       keywords: {
-        $pattern: "\\.?" + hljs2.IDENT_RE,
+        $pattern: "\\.?" + hljs.IDENT_RE,
         meta: ".2byte .4byte .align .ascii .asciz .balign .byte .code .data .else .end .endif .endm .endr .equ .err .exitm .extern .global .hword .if .ifdef .ifndef .include .irp .long .macro .rept .req .section .set .skip .space .text .word .arm .thumb .code16 .code32 .force_thumb .thumb_func .ltorg ALIAS ALIGN ARM AREA ASSERT ATTR CN CODE CODE16 CODE32 COMMON CP DATA DCB DCD DCDU DCDO DCFD DCFDU DCI DCQ DCQU DCW DCWU DN ELIF ELSE END ENDFUNC ENDIF ENDP ENTRY EQU EXPORT EXPORTAS EXTERN FIELD FILL FUNCTION GBLA GBLL GBLS GET GLOBAL IF IMPORT INCBIN INCLUDE INFO KEEP LCLA LCLL LCLS LTORG MACRO MAP MEND MEXIT NOFP OPT PRESERVE8 PROC QN READONLY RELOC REQUIRE REQUIRE8 RLIST FN ROUT SETA SETL SETS SN SPACE SUBT THUMB THUMBX TTL WHILE WEND ",
         built_in: "r0 r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15 pc lr sp ip sl sb fp a1 a2 a3 a4 v1 v2 v3 v4 v5 v6 v7 v8 f0 f1 f2 f3 f4 f5 f6 f7 p0 p1 p2 p3 p4 p5 p6 p7 p8 p9 p10 p11 p12 p13 p14 p15 c0 c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 q14 q15 cpsr_c cpsr_x cpsr_s cpsr_f cpsr_cx cpsr_cxs cpsr_xs cpsr_xsf cpsr_sf cpsr_cxsf spsr_c spsr_x spsr_s spsr_f spsr_cx spsr_cxs spsr_xs spsr_xsf spsr_sf spsr_cxsf s0 s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17 d18 d19 d20 d21 d22 d23 d24 d25 d26 d27 d28 d29 d30 d31 {PC} {VAR} {TRUE} {FALSE} {OPT} {CONFIG} {ENDIAN} {CODESIZE} {CPU} {FPU} {ARCHITECTURE} {PCSTOREOFFSET} {ARMASM_VERSION} {INTER} {ROPI} {RWPI} {SWST} {NOSWST} . @"
       },
@@ -2836,7 +6969,7 @@ var require_armasm = __commonJS((exports2, module2) => {
           begin: "\\b(adc|(qd?|sh?|u[qh]?)?add(8|16)?|usada?8|(q|sh?|u[qh]?)?(as|sa)x|and|adrl?|sbc|rs[bc]|asr|b[lx]?|blx|bxj|cbn?z|tb[bh]|bic|bfc|bfi|[su]bfx|bkpt|cdp2?|clz|clrex|cmp|cmn|cpsi[ed]|cps|setend|dbg|dmb|dsb|eor|isb|it[te]{0,3}|lsl|lsr|ror|rrx|ldm(([id][ab])|f[ds])?|ldr((s|ex)?[bhd])?|movt?|mvn|mra|mar|mul|[us]mull|smul[bwt][bt]|smu[as]d|smmul|smmla|mla|umlaal|smlal?([wbt][bt]|d)|mls|smlsl?[ds]|smc|svc|sev|mia([bt]{2}|ph)?|mrr?c2?|mcrr2?|mrs|msr|orr|orn|pkh(tb|bt)|rbit|rev(16|sh)?|sel|[su]sat(16)?|nop|pop|push|rfe([id][ab])?|stm([id][ab])?|str(ex)?[bhd]?|(qd?)?sub|(sh?|q|u[qh]?)?sub(8|16)|[su]xt(a?h|a?b(16)?)|srs([id][ab])?|swpb?|swi|smi|tst|teq|wfe|wfi|yield)(eq|ne|cs|cc|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al|hs|lo)?[sptrx]?(?=\\s)"
         },
         COMMENT,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: "'",
@@ -2912,7 +7045,7 @@ var require_xml = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function xml(hljs2) {
+  function xml(hljs) {
     const TAG_NAME_RE = concat(/[A-Z_]/, optional(/[A-Z0-9_.-]*:/), /[A-Z0-9_.-]*/);
     const XML_IDENT_RE = /[A-Za-z0-9._:-]+/;
     const XML_ENTITIES = {
@@ -2929,14 +7062,14 @@ var require_xml = __commonJS((exports2, module2) => {
         }
       ]
     };
-    const XML_META_PAR_KEYWORDS = hljs2.inherit(XML_META_KEYWORDS, {
+    const XML_META_PAR_KEYWORDS = hljs.inherit(XML_META_KEYWORDS, {
       begin: /\(/,
       end: /\)/
     });
-    const APOS_META_STRING_MODE = hljs2.inherit(hljs2.APOS_STRING_MODE, {
+    const APOS_META_STRING_MODE = hljs.inherit(hljs.APOS_STRING_MODE, {
       className: "meta-string"
     });
-    const QUOTE_META_STRING_MODE = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+    const QUOTE_META_STRING_MODE = hljs.inherit(hljs.QUOTE_STRING_MODE, {
       className: "meta-string"
     });
     const TAG_INTERNALS = {
@@ -3021,7 +7154,7 @@ var require_xml = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.COMMENT(/<!--/, /-->/, {
+        hljs.COMMENT(/<!--/, /-->/, {
           relevance: 10
         }),
         {
@@ -3123,7 +7256,7 @@ var require_asciidoc = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function asciidoc(hljs2) {
+  function asciidoc(hljs) {
     const HORIZONTAL_RULE = {
       begin: "^'{3,}[ \\t]*$",
       relevance: 10
@@ -3206,10 +7339,10 @@ var require_asciidoc = __commonJS((exports2, module2) => {
       name: "AsciiDoc",
       aliases: ["adoc"],
       contains: [
-        hljs2.COMMENT("^/{4,}\\n", "\\n/{4,}$", {
+        hljs.COMMENT("^/{4,}\\n", "\\n/{4,}$", {
           relevance: 10
         }),
-        hljs2.COMMENT("^//", "$", {
+        hljs.COMMENT("^//", "$", {
           relevance: 0
         }),
         {
@@ -3345,7 +7478,7 @@ var require_aspectj = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function aspectj(hljs2) {
+  function aspectj(hljs) {
     const KEYWORDS = "false synchronized int abstract float private char boolean static null if const for true while long throw strictfp finally protected import native final return void enum else extends implements break transient new catch instanceof byte super volatile case assert short package default double public try this switch continue throws privileged aspectOf adviceexecution proceed cflowbelow cflow initialization preinitialization staticinitialization withincode target within execution getWithinTypeName handler thisJoinPoint thisJoinPointStaticPart thisEnclosingJoinPointStaticPart declare parents warning error soft precedence thisAspectInstance";
     const SHORTKEYS = "get set args call";
     return {
@@ -3353,7 +7486,7 @@ var require_aspectj = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       illegal: /<\/|#/,
       contains: [
-        hljs2.COMMENT(/\/\*\*/, /\*\//, {
+        hljs.COMMENT(/\/\*\*/, /\*\//, {
           relevance: 0,
           contains: [
             {
@@ -3366,10 +7499,10 @@ var require_aspectj = __commonJS((exports2, module2) => {
             }
           ]
         }),
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "class",
           beginKeywords: "aspect",
@@ -3380,7 +7513,7 @@ var require_aspectj = __commonJS((exports2, module2) => {
             {
               beginKeywords: "extends implements pertypewithin perthis pertarget percflowbelow percflow issingleton"
             },
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             {
               begin: /\([^\)]*/,
               end: /[)]+/,
@@ -3401,7 +7534,7 @@ var require_aspectj = __commonJS((exports2, module2) => {
             {
               beginKeywords: "extends implements"
             },
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         {
@@ -3411,9 +7544,9 @@ var require_aspectj = __commonJS((exports2, module2) => {
           illegal: /["\[\]]/,
           contains: [
             {
-              begin: concat(hljs2.UNDERSCORE_IDENT_RE, /\s*\(/),
+              begin: concat(hljs.UNDERSCORE_IDENT_RE, /\s*\(/),
               returnBegin: true,
-              contains: [hljs2.UNDERSCORE_TITLE_MODE]
+              contains: [hljs.UNDERSCORE_TITLE_MODE]
             }
           ]
         },
@@ -3427,11 +7560,11 @@ var require_aspectj = __commonJS((exports2, module2) => {
           illegal: /["\[\]]/,
           contains: [
             {
-              begin: concat(hljs2.UNDERSCORE_IDENT_RE, /\s*\(/),
+              begin: concat(hljs.UNDERSCORE_IDENT_RE, /\s*\(/),
               keywords: KEYWORDS + " " + SHORTKEYS,
               relevance: 0
             },
-            hljs2.QUOTE_STRING_MODE
+            hljs.QUOTE_STRING_MODE
           ]
         },
         {
@@ -3447,10 +7580,10 @@ var require_aspectj = __commonJS((exports2, module2) => {
           excludeEnd: true,
           contains: [
             {
-              begin: concat(hljs2.UNDERSCORE_IDENT_RE, /\s*\(/),
+              begin: concat(hljs.UNDERSCORE_IDENT_RE, /\s*\(/),
               returnBegin: true,
               relevance: 0,
-              contains: [hljs2.UNDERSCORE_TITLE_MODE]
+              contains: [hljs.UNDERSCORE_TITLE_MODE]
             },
             {
               className: "params",
@@ -3459,17 +7592,17 @@ var require_aspectj = __commonJS((exports2, module2) => {
               relevance: 0,
               keywords: KEYWORDS,
               contains: [
-                hljs2.APOS_STRING_MODE,
-                hljs2.QUOTE_STRING_MODE,
-                hljs2.C_NUMBER_MODE,
-                hljs2.C_BLOCK_COMMENT_MODE
+                hljs.APOS_STRING_MODE,
+                hljs.QUOTE_STRING_MODE,
+                hljs.C_NUMBER_MODE,
+                hljs.C_BLOCK_COMMENT_MODE
               ]
             },
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: /@[A-Za-z]+/
@@ -3482,7 +7615,7 @@ var require_aspectj = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/autohotkey.js
 var require_autohotkey = __commonJS((exports2, module2) => {
-  function autohotkey(hljs2) {
+  function autohotkey(hljs) {
     const BACKTICK_ESCAPE = {
       begin: "`[\\s\\S]"
     };
@@ -3497,16 +7630,16 @@ var require_autohotkey = __commonJS((exports2, module2) => {
       },
       contains: [
         BACKTICK_ESCAPE,
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           contains: [BACKTICK_ESCAPE]
         }),
-        hljs2.COMMENT(";", "$", {
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "number",
-          begin: hljs2.NUMBER_RE,
+          begin: hljs.NUMBER_RE,
           relevance: 0
         },
         {
@@ -3550,7 +7683,7 @@ var require_autohotkey = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/autoit.js
 var require_autoit = __commonJS((exports2, module2) => {
-  function autoit(hljs2) {
+  function autoit(hljs) {
     const KEYWORDS = "ByRef Case Const ContinueCase ContinueLoop Dim Do Else ElseIf EndFunc EndIf EndSelect EndSwitch EndWith Enum Exit ExitLoop For Func Global If In Local Next ReDim Return Select Static Step Switch Then To Until Volatile WEnd While With";
     const DIRECTIVES = [
       "EndRegion",
@@ -3572,11 +7705,11 @@ var require_autoit = __commonJS((exports2, module2) => {
     const BUILT_IN = "Abs ACos AdlibRegister AdlibUnRegister Asc AscW ASin Assign ATan AutoItSetOption AutoItWinGetTitle AutoItWinSetTitle Beep Binary BinaryLen BinaryMid BinaryToString BitAND BitNOT BitOR BitRotate BitShift BitXOR BlockInput Break Call CDTray Ceiling Chr ChrW ClipGet ClipPut ConsoleRead ConsoleWrite ConsoleWriteError ControlClick ControlCommand ControlDisable ControlEnable ControlFocus ControlGetFocus ControlGetHandle ControlGetPos ControlGetText ControlHide ControlListView ControlMove ControlSend ControlSetText ControlShow ControlTreeView Cos Dec DirCopy DirCreate DirGetSize DirMove DirRemove DllCall DllCallAddress DllCallbackFree DllCallbackGetPtr DllCallbackRegister DllClose DllOpen DllStructCreate DllStructGetData DllStructGetPtr DllStructGetSize DllStructSetData DriveGetDrive DriveGetFileSystem DriveGetLabel DriveGetSerial DriveGetType DriveMapAdd DriveMapDel DriveMapGet DriveSetLabel DriveSpaceFree DriveSpaceTotal DriveStatus EnvGet EnvSet EnvUpdate Eval Execute Exp FileChangeDir FileClose FileCopy FileCreateNTFSLink FileCreateShortcut FileDelete FileExists FileFindFirstFile FileFindNextFile FileFlush FileGetAttrib FileGetEncoding FileGetLongName FileGetPos FileGetShortcut FileGetShortName FileGetSize FileGetTime FileGetVersion FileInstall FileMove FileOpen FileOpenDialog FileRead FileReadLine FileReadToArray FileRecycle FileRecycleEmpty FileSaveDialog FileSelectFolder FileSetAttrib FileSetEnd FileSetPos FileSetTime FileWrite FileWriteLine Floor FtpSetProxy FuncName GUICreate GUICtrlCreateAvi GUICtrlCreateButton GUICtrlCreateCheckbox GUICtrlCreateCombo GUICtrlCreateContextMenu GUICtrlCreateDate GUICtrlCreateDummy GUICtrlCreateEdit GUICtrlCreateGraphic GUICtrlCreateGroup GUICtrlCreateIcon GUICtrlCreateInput GUICtrlCreateLabel GUICtrlCreateList GUICtrlCreateListView GUICtrlCreateListViewItem GUICtrlCreateMenu GUICtrlCreateMenuItem GUICtrlCreateMonthCal GUICtrlCreateObj GUICtrlCreatePic GUICtrlCreateProgress GUICtrlCreateRadio GUICtrlCreateSlider GUICtrlCreateTab GUICtrlCreateTabItem GUICtrlCreateTreeView GUICtrlCreateTreeViewItem GUICtrlCreateUpdown GUICtrlDelete GUICtrlGetHandle GUICtrlGetState GUICtrlRead GUICtrlRecvMsg GUICtrlRegisterListViewSort GUICtrlSendMsg GUICtrlSendToDummy GUICtrlSetBkColor GUICtrlSetColor GUICtrlSetCursor GUICtrlSetData GUICtrlSetDefBkColor GUICtrlSetDefColor GUICtrlSetFont GUICtrlSetGraphic GUICtrlSetImage GUICtrlSetLimit GUICtrlSetOnEvent GUICtrlSetPos GUICtrlSetResizing GUICtrlSetState GUICtrlSetStyle GUICtrlSetTip GUIDelete GUIGetCursorInfo GUIGetMsg GUIGetStyle GUIRegisterMsg GUISetAccelerators GUISetBkColor GUISetCoord GUISetCursor GUISetFont GUISetHelp GUISetIcon GUISetOnEvent GUISetState GUISetStyle GUIStartGroup GUISwitch Hex HotKeySet HttpSetProxy HttpSetUserAgent HWnd InetClose InetGet InetGetInfo InetGetSize InetRead IniDelete IniRead IniReadSection IniReadSectionNames IniRenameSection IniWrite IniWriteSection InputBox Int IsAdmin IsArray IsBinary IsBool IsDeclared IsDllStruct IsFloat IsFunc IsHWnd IsInt IsKeyword IsNumber IsObj IsPtr IsString Log MemGetStats Mod MouseClick MouseClickDrag MouseDown MouseGetCursor MouseGetPos MouseMove MouseUp MouseWheel MsgBox Number ObjCreate ObjCreateInterface ObjEvent ObjGet ObjName OnAutoItExitRegister OnAutoItExitUnRegister Ping PixelChecksum PixelGetColor PixelSearch ProcessClose ProcessExists ProcessGetStats ProcessList ProcessSetPriority ProcessWait ProcessWaitClose ProgressOff ProgressOn ProgressSet Ptr Random RegDelete RegEnumKey RegEnumVal RegRead RegWrite Round Run RunAs RunAsWait RunWait Send SendKeepActive SetError SetExtended ShellExecute ShellExecuteWait Shutdown Sin Sleep SoundPlay SoundSetWaveVolume SplashImageOn SplashOff SplashTextOn Sqrt SRandom StatusbarGetText StderrRead StdinWrite StdioClose StdoutRead String StringAddCR StringCompare StringFormat StringFromASCIIArray StringInStr StringIsAlNum StringIsAlpha StringIsASCII StringIsDigit StringIsFloat StringIsInt StringIsLower StringIsSpace StringIsUpper StringIsXDigit StringLeft StringLen StringLower StringMid StringRegExp StringRegExpReplace StringReplace StringReverse StringRight StringSplit StringStripCR StringStripWS StringToASCIIArray StringToBinary StringTrimLeft StringTrimRight StringUpper Tan TCPAccept TCPCloseSocket TCPConnect TCPListen TCPNameToIP TCPRecv TCPSend TCPShutdown, UDPShutdown TCPStartup, UDPStartup TimerDiff TimerInit ToolTip TrayCreateItem TrayCreateMenu TrayGetMsg TrayItemDelete TrayItemGetHandle TrayItemGetState TrayItemGetText TrayItemSetOnEvent TrayItemSetState TrayItemSetText TraySetClick TraySetIcon TraySetOnEvent TraySetPauseIcon TraySetState TraySetToolTip TrayTip UBound UDPBind UDPCloseSocket UDPOpen UDPRecv UDPSend VarGetType WinActivate WinActive WinClose WinExists WinFlash WinGetCaretPos WinGetClassList WinGetClientSize WinGetHandle WinGetPos WinGetProcess WinGetState WinGetText WinGetTitle WinKill WinList WinMenuSelectItem WinMinimizeAll WinMinimizeAllUndo WinMove WinSetOnTop WinSetState WinSetTitle WinSetTrans WinWait WinWaitActive WinWaitClose WinWaitNotActive";
     const COMMENT = {
       variants: [
-        hljs2.COMMENT(";", "$", {
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
-        hljs2.COMMENT("#cs", "#ce"),
-        hljs2.COMMENT("#comments-start", "#comments-end")
+        hljs.COMMENT("#cs", "#ce"),
+        hljs.COMMENT("#comments-start", "#comments-end")
       ]
     };
     const VARIABLE = {
@@ -3605,8 +7738,8 @@ var require_autoit = __commonJS((exports2, module2) => {
     };
     const NUMBER = {
       variants: [
-        hljs2.BINARY_NUMBER_MODE,
-        hljs2.C_NUMBER_MODE
+        hljs.BINARY_NUMBER_MODE,
+        hljs.C_NUMBER_MODE
       ]
     };
     const PREPROCESSOR = {
@@ -3670,7 +7803,7 @@ var require_autoit = __commonJS((exports2, module2) => {
       end: "$",
       illegal: "\\$|\\[|%",
       contains: [
-        hljs2.UNDERSCORE_TITLE_MODE,
+        hljs.UNDERSCORE_TITLE_MODE,
         {
           className: "params",
           begin: "\\(",
@@ -3708,28 +7841,28 @@ var require_autoit = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/avrasm.js
 var require_avrasm = __commonJS((exports2, module2) => {
-  function avrasm(hljs2) {
+  function avrasm(hljs) {
     return {
       name: "AVR Assembly",
       case_insensitive: true,
       keywords: {
-        $pattern: "\\.?" + hljs2.IDENT_RE,
+        $pattern: "\\.?" + hljs.IDENT_RE,
         keyword: "adc add adiw and andi asr bclr bld brbc brbs brcc brcs break breq brge brhc brhs brid brie brlo brlt brmi brne brpl brsh brtc brts brvc brvs bset bst call cbi cbr clc clh cli cln clr cls clt clv clz com cp cpc cpi cpse dec eicall eijmp elpm eor fmul fmuls fmulsu icall ijmp in inc jmp ld ldd ldi lds lpm lsl lsr mov movw mul muls mulsu neg nop or ori out pop push rcall ret reti rjmp rol ror sbc sbr sbrc sbrs sec seh sbi sbci sbic sbis sbiw sei sen ser ses set sev sez sleep spm st std sts sub subi swap tst wdr",
         built_in: "r0 r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15 r16 r17 r18 r19 r20 r21 r22 r23 r24 r25 r26 r27 r28 r29 r30 r31 x|0 xh xl y|0 yh yl z|0 zh zl ucsr1c udr1 ucsr1a ucsr1b ubrr1l ubrr1h ucsr0c ubrr0h tccr3c tccr3a tccr3b tcnt3h tcnt3l ocr3ah ocr3al ocr3bh ocr3bl ocr3ch ocr3cl icr3h icr3l etimsk etifr tccr1c ocr1ch ocr1cl twcr twdr twar twsr twbr osccal xmcra xmcrb eicra spmcsr spmcr portg ddrg ping portf ddrf sreg sph spl xdiv rampz eicrb eimsk gimsk gicr eifr gifr timsk tifr mcucr mcucsr tccr0 tcnt0 ocr0 assr tccr1a tccr1b tcnt1h tcnt1l ocr1ah ocr1al ocr1bh ocr1bl icr1h icr1l tccr2 tcnt2 ocr2 ocdr wdtcr sfior eearh eearl eedr eecr porta ddra pina portb ddrb pinb portc ddrc pinc portd ddrd pind spdr spsr spcr udr0 ucsr0a ucsr0b ubrr0l acsr admux adcsr adch adcl porte ddre pine pinf",
         meta: ".byte .cseg .db .def .device .dseg .dw .endmacro .equ .eseg .exit .include .list .listmac .macro .nolist .org .set"
       },
       contains: [
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.COMMENT(";", "$", {
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
-        hljs2.C_NUMBER_MODE,
-        hljs2.BINARY_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.BINARY_NUMBER_MODE,
         {
           className: "number",
           begin: "\\b(\\$[a-zA-Z0-9]+|0o[0-7]+)"
         },
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: "'",
@@ -3757,7 +7890,7 @@ var require_avrasm = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/awk.js
 var require_awk = __commonJS((exports2, module2) => {
-  function awk(hljs2) {
+  function awk(hljs) {
     const VARIABLE = {
       className: "variable",
       variants: [
@@ -3772,7 +7905,7 @@ var require_awk = __commonJS((exports2, module2) => {
     const KEYWORDS = "BEGIN END if else while do for in break continue delete next nextfile function func exit|10";
     const STRING = {
       className: "string",
-      contains: [hljs2.BACKSLASH_ESCAPE],
+      contains: [hljs.BACKSLASH_ESCAPE],
       variants: [
         {
           begin: /(u|b)?r?'''/,
@@ -3802,8 +7935,8 @@ var require_awk = __commonJS((exports2, module2) => {
           begin: /(b|br)"/,
           end: /"/
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE
       ]
     };
     return {
@@ -3814,9 +7947,9 @@ var require_awk = __commonJS((exports2, module2) => {
       contains: [
         VARIABLE,
         STRING,
-        hljs2.REGEXP_MODE,
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.NUMBER_MODE
+        hljs.REGEXP_MODE,
+        hljs.HASH_COMMENT_MODE,
+        hljs.NUMBER_MODE
       ]
     };
   }
@@ -3825,7 +7958,7 @@ var require_awk = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/axapta.js
 var require_axapta = __commonJS((exports2, module2) => {
-  function axapta(hljs2) {
+  function axapta(hljs) {
     const BUILT_IN_KEYWORDS = [
       "anytype",
       "boolean",
@@ -3963,11 +8096,11 @@ var require_axapta = __commonJS((exports2, module2) => {
       aliases: ["x++"],
       keywords: KEYWORDS,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: "#",
@@ -3983,7 +8116,7 @@ var require_axapta = __commonJS((exports2, module2) => {
             {
               beginKeywords: "extends implements"
             },
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         }
       ]
@@ -4005,7 +8138,7 @@ var require_bash = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function bash(hljs2) {
+  function bash(hljs) {
     const VAR = {};
     const BRACED_VAR = {
       begin: /\$\{/,
@@ -4029,13 +8162,13 @@ var require_bash = __commonJS((exports2, module2) => {
       className: "subst",
       begin: /\$\(/,
       end: /\)/,
-      contains: [hljs2.BACKSLASH_ESCAPE]
+      contains: [hljs.BACKSLASH_ESCAPE]
     };
     const HERE_DOC = {
       begin: /<<-?\s*(?=\w+)/,
       starts: {
         contains: [
-          hljs2.END_SAME_AS_BEGIN({
+          hljs.END_SAME_AS_BEGIN({
             begin: /(\w+)/,
             end: /(\w+)/,
             className: "string"
@@ -4048,7 +8181,7 @@ var require_bash = __commonJS((exports2, module2) => {
       begin: /"/,
       end: /"/,
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         VAR,
         SUBST
       ]
@@ -4068,7 +8201,7 @@ var require_bash = __commonJS((exports2, module2) => {
       end: /\)\)/,
       contains: [
         {begin: /\d+#[0-9a-f]+/, className: "number"},
-        hljs2.NUMBER_MODE,
+        hljs.NUMBER_MODE,
         VAR
       ]
     };
@@ -4083,7 +8216,7 @@ var require_bash = __commonJS((exports2, module2) => {
       "dash",
       "scsh"
     ];
-    const KNOWN_SHEBANG = hljs2.SHEBANG({
+    const KNOWN_SHEBANG = hljs.SHEBANG({
       binary: `(${SH_LIKE_SHELLS.join("|")})`,
       relevance: 10
     });
@@ -4091,7 +8224,7 @@ var require_bash = __commonJS((exports2, module2) => {
       className: "function",
       begin: /\w[\w\d_]*\s*\(\s*\)\s*\{/,
       returnBegin: true,
-      contains: [hljs2.inherit(hljs2.TITLE_MODE, {begin: /\w[\w\d_]*/})],
+      contains: [hljs.inherit(hljs.TITLE_MODE, {begin: /\w[\w\d_]*/})],
       relevance: 0
     };
     return {
@@ -4105,10 +8238,10 @@ var require_bash = __commonJS((exports2, module2) => {
       },
       contains: [
         KNOWN_SHEBANG,
-        hljs2.SHEBANG(),
+        hljs.SHEBANG(),
         FUNCTION,
         ARITHMETIC,
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         HERE_DOC,
         QUOTE_STRING,
         ESCAPED_QUOTE,
@@ -4122,7 +8255,7 @@ var require_bash = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/basic.js
 var require_basic = __commonJS((exports2, module2) => {
-  function basic(hljs2) {
+  function basic(hljs) {
     return {
       name: "BASIC",
       case_insensitive: true,
@@ -4132,11 +8265,11 @@ var require_basic = __commonJS((exports2, module2) => {
         keyword: "ABS ASC AND ATN AUTO|0 BEEP BLOAD|10 BSAVE|10 CALL CALLS CDBL CHAIN CHDIR CHR$|10 CINT CIRCLE CLEAR CLOSE CLS COLOR COM COMMON CONT COS CSNG CSRLIN CVD CVI CVS DATA DATE$ DEFDBL DEFINT DEFSNG DEFSTR DEF|0 SEG USR DELETE DIM DRAW EDIT END ENVIRON ENVIRON$ EOF EQV ERASE ERDEV ERDEV$ ERL ERR ERROR EXP FIELD FILES FIX FOR|0 FRE GET GOSUB|10 GOTO HEX$ IF THEN ELSE|0 INKEY$ INP INPUT INPUT# INPUT$ INSTR IMP INT IOCTL IOCTL$ KEY ON OFF LIST KILL LEFT$ LEN LET LINE LLIST LOAD LOC LOCATE LOF LOG LPRINT USING LSET MERGE MID$ MKDIR MKD$ MKI$ MKS$ MOD NAME NEW NEXT NOISE NOT OCT$ ON OR PEN PLAY STRIG OPEN OPTION BASE OUT PAINT PALETTE PCOPY PEEK PMAP POINT POKE POS PRINT PRINT] PSET PRESET PUT RANDOMIZE READ REM RENUM RESET|0 RESTORE RESUME RETURN|0 RIGHT$ RMDIR RND RSET RUN SAVE SCREEN SGN SHELL SIN SOUND SPACE$ SPC SQR STEP STICK STOP STR$ STRING$ SWAP SYSTEM TAB TAN TIME$ TIMER TROFF TRON TO USR VAL VARPTR VARPTR$ VIEW WAIT WHILE WEND WIDTH WINDOW WRITE XOR"
       },
       contains: [
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.COMMENT("REM", "$", {
+        hljs.QUOTE_STRING_MODE,
+        hljs.COMMENT("REM", "$", {
           relevance: 10
         }),
-        hljs2.COMMENT("'", "$", {
+        hljs.COMMENT("'", "$", {
           relevance: 0
         }),
         {
@@ -4165,7 +8298,7 @@ var require_basic = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/bnf.js
 var require_bnf = __commonJS((exports2, module2) => {
-  function bnf(hljs2) {
+  function bnf(hljs) {
     return {
       name: "Backus–Naur Form",
       contains: [
@@ -4182,10 +8315,10 @@ var require_bnf = __commonJS((exports2, module2) => {
               begin: /</,
               end: />/
             },
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
-            hljs2.APOS_STRING_MODE,
-            hljs2.QUOTE_STRING_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
+            hljs.APOS_STRING_MODE,
+            hljs.QUOTE_STRING_MODE
           ]
         }
       ]
@@ -4196,7 +8329,7 @@ var require_bnf = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/brainfuck.js
 var require_brainfuck = __commonJS((exports2, module2) => {
-  function brainfuck(hljs2) {
+  function brainfuck(hljs) {
     const LITERAL = {
       className: "literal",
       begin: /[+-]/,
@@ -4206,7 +8339,7 @@ var require_brainfuck = __commonJS((exports2, module2) => {
       name: "Brainfuck",
       aliases: ["bf"],
       contains: [
-        hljs2.COMMENT("[^\\[\\]\\.,\\+\\-<> \r\n]", "[\\[\\]\\.,\\+\\-<> \r\n]", {
+        hljs.COMMENT("[^\\[\\]\\.,\\+\\-<> \r\n]", "[\\[\\]\\.,\\+\\-<> \r\n]", {
           returnEnd: true,
           relevance: 0
         }),
@@ -4250,8 +8383,8 @@ var require_c_like = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function cPlusPlus(hljs2) {
-    const C_LINE_COMMENT_MODE = hljs2.COMMENT("//", "$", {
+  function cPlusPlus(hljs) {
+    const C_LINE_COMMENT_MODE = hljs.COMMENT("//", "$", {
       contains: [
         {
           begin: /\\\n/
@@ -4274,14 +8407,14 @@ var require_c_like = __commonJS((exports2, module2) => {
           begin: '(u8?|U|L)?"',
           end: '"',
           illegal: "\\n",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: "(u8?|U|L)?'(" + CHARACTER_ESCAPES + "|.)",
           end: "'",
           illegal: "."
         },
-        hljs2.END_SAME_AS_BEGIN({
+        hljs.END_SAME_AS_BEGIN({
           begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\(/,
           end: /\)([^()\\ ]{0,16})"/
         })
@@ -4314,7 +8447,7 @@ var require_c_like = __commonJS((exports2, module2) => {
           begin: /\\\n/,
           relevance: 0
         },
-        hljs2.inherit(STRINGS, {
+        hljs.inherit(STRINGS, {
           className: "meta-string"
         }),
         {
@@ -4322,15 +8455,15 @@ var require_c_like = __commonJS((exports2, module2) => {
           begin: /<.*?>/
         },
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
     const TITLE_MODE = {
       className: "title",
-      begin: optional(NAMESPACE_RE) + hljs2.IDENT_RE,
+      begin: optional(NAMESPACE_RE) + hljs.IDENT_RE,
       relevance: 0
     };
-    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs2.IDENT_RE + "\\s*\\(";
+    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + "\\s*\\(";
     const COMMON_CPP_HINTS = [
       "asin",
       "atan2",
@@ -4456,14 +8589,14 @@ var require_c_like = __commonJS((exports2, module2) => {
       className: "function.dispatch",
       relevance: 0,
       keywords: CPP_KEYWORDS,
-      begin: concat(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs2.IDENT_RE, lookahead(/\s*\(/))
+      begin: concat(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs.IDENT_RE, lookahead(/\s*\(/))
     };
     const EXPRESSION_CONTAINS = [
       FUNCTION_DISPATCH,
       PREPROCESSOR,
       CPP_PRIMITIVE_TYPES,
       C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
       NUMBERS,
       STRINGS
     ];
@@ -4534,7 +8667,7 @@ var require_c_like = __commonJS((exports2, module2) => {
           relevance: 0,
           contains: [
             C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
             STRINGS,
             NUMBERS,
             CPP_PRIMITIVE_TYPES,
@@ -4546,7 +8679,7 @@ var require_c_like = __commonJS((exports2, module2) => {
               contains: [
                 "self",
                 C_LINE_COMMENT_MODE,
-                hljs2.C_BLOCK_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
                 STRINGS,
                 NUMBERS,
                 CPP_PRIMITIVE_TYPES
@@ -4556,7 +8689,7 @@ var require_c_like = __commonJS((exports2, module2) => {
         },
         CPP_PRIMITIVE_TYPES,
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         PREPROCESSOR
       ]
     };
@@ -4588,7 +8721,7 @@ var require_c_like = __commonJS((exports2, module2) => {
           ]
         },
         {
-          begin: hljs2.IDENT_RE + "::",
+          begin: hljs.IDENT_RE + "::",
           keywords: CPP_KEYWORDS
         },
         {
@@ -4599,7 +8732,7 @@ var require_c_like = __commonJS((exports2, module2) => {
             {
               beginKeywords: "final class struct"
             },
-            hljs2.TITLE_MODE
+            hljs.TITLE_MODE
           ]
         }
       ]),
@@ -4610,8 +8743,8 @@ var require_c_like = __commonJS((exports2, module2) => {
       }
     };
   }
-  function cLike(hljs2) {
-    const lang = cPlusPlus(hljs2);
+  function cLike(hljs) {
+    const lang = cPlusPlus(hljs);
     const C_ALIASES = [
       "c",
       "h"
@@ -4627,9 +8760,9 @@ var require_c_like = __commonJS((exports2, module2) => {
     ];
     lang.disableAutodetect = true;
     lang.aliases = [];
-    if (!hljs2.getLanguage("c"))
+    if (!hljs.getLanguage("c"))
       lang.aliases.push(...C_ALIASES);
-    if (!hljs2.getLanguage("cpp"))
+    if (!hljs.getLanguage("cpp"))
       lang.aliases.push(...CPP_ALIASES);
     return lang;
   }
@@ -4652,8 +8785,8 @@ var require_c2 = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function c(hljs2) {
-    const C_LINE_COMMENT_MODE = hljs2.COMMENT("//", "$", {
+  function c(hljs) {
+    const C_LINE_COMMENT_MODE = hljs.COMMENT("//", "$", {
       contains: [
         {
           begin: /\\\n/
@@ -4676,14 +8809,14 @@ var require_c2 = __commonJS((exports2, module2) => {
           begin: '(u8?|U|L)?"',
           end: '"',
           illegal: "\\n",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: "(u8?|U|L)?'(" + CHARACTER_ESCAPES + "|.)",
           end: "'",
           illegal: "."
         },
-        hljs2.END_SAME_AS_BEGIN({
+        hljs.END_SAME_AS_BEGIN({
           begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\(/,
           end: /\)([^()\\ ]{0,16})"/
         })
@@ -4716,7 +8849,7 @@ var require_c2 = __commonJS((exports2, module2) => {
           begin: /\\\n/,
           relevance: 0
         },
-        hljs2.inherit(STRINGS, {
+        hljs.inherit(STRINGS, {
           className: "meta-string"
         }),
         {
@@ -4724,15 +8857,15 @@ var require_c2 = __commonJS((exports2, module2) => {
           begin: /<.*?>/
         },
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
     const TITLE_MODE = {
       className: "title",
-      begin: optional(NAMESPACE_RE) + hljs2.IDENT_RE,
+      begin: optional(NAMESPACE_RE) + hljs.IDENT_RE,
       relevance: 0
     };
-    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs2.IDENT_RE + "\\s*\\(";
+    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + "\\s*\\(";
     const CPP_KEYWORDS = {
       keyword: "int float while private char char8_t char16_t char32_t catch import module export virtual operator sizeof dynamic_cast|10 typedef const_cast|10 const for static_cast|10 union namespace unsigned long volatile static protected bool template mutable if public friend do goto auto void enum else break extern using asm case typeid wchar_t short reinterpret_cast|10 default double register explicit signed typename try this switch continue inline delete alignas alignof constexpr consteval constinit decltype concept co_await co_return co_yield requires noexcept static_assert thread_local restrict final override atomic_bool atomic_char atomic_schar atomic_uchar atomic_short atomic_ushort atomic_int atomic_uint atomic_long atomic_ulong atomic_llong atomic_ullong new throw return and and_eq bitand bitor compl not not_eq or or_eq xor xor_eq",
       built_in: "std string wstring cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream auto_ptr deque list queue stack vector map set pair bitset multiset multimap unordered_set unordered_map unordered_multiset unordered_multimap priority_queue make_pair array shared_ptr abort terminate abs acos asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp fscanf future isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan vfprintf vprintf vsprintf endl initializer_list unique_ptr _Bool complex _Complex imaginary _Imaginary",
@@ -4742,7 +8875,7 @@ var require_c2 = __commonJS((exports2, module2) => {
       PREPROCESSOR,
       CPP_PRIMITIVE_TYPES,
       C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
       NUMBERS,
       STRINGS
     ];
@@ -4801,7 +8934,7 @@ var require_c2 = __commonJS((exports2, module2) => {
           relevance: 0,
           contains: [
             C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
             STRINGS,
             NUMBERS,
             CPP_PRIMITIVE_TYPES,
@@ -4813,7 +8946,7 @@ var require_c2 = __commonJS((exports2, module2) => {
               contains: [
                 "self",
                 C_LINE_COMMENT_MODE,
-                hljs2.C_BLOCK_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
                 STRINGS,
                 NUMBERS,
                 CPP_PRIMITIVE_TYPES
@@ -4823,7 +8956,7 @@ var require_c2 = __commonJS((exports2, module2) => {
         },
         CPP_PRIMITIVE_TYPES,
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         PREPROCESSOR
       ]
     };
@@ -4847,7 +8980,7 @@ var require_c2 = __commonJS((exports2, module2) => {
           ]
         },
         {
-          begin: hljs2.IDENT_RE + "::",
+          begin: hljs.IDENT_RE + "::",
           keywords: CPP_KEYWORDS
         },
         {
@@ -4858,7 +8991,7 @@ var require_c2 = __commonJS((exports2, module2) => {
             {
               beginKeywords: "final class struct"
             },
-            hljs2.TITLE_MODE
+            hljs.TITLE_MODE
           ]
         }
       ]),
@@ -4874,15 +9007,15 @@ var require_c2 = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/cal.js
 var require_cal = __commonJS((exports2, module2) => {
-  function cal(hljs2) {
+  function cal(hljs) {
     const KEYWORDS = "div mod in and or not xor asserterror begin case do downto else end exit for if of repeat then to until while with var";
     const LITERALS = "false true";
     const COMMENT_MODES = [
-      hljs2.C_LINE_COMMENT_MODE,
-      hljs2.COMMENT(/\{/, /\}/, {
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.COMMENT(/\{/, /\}/, {
         relevance: 0
       }),
-      hljs2.COMMENT(/\(\*/, /\*\)/, {
+      hljs.COMMENT(/\(\*/, /\*\)/, {
         relevance: 10
       })
     ];
@@ -4914,7 +9047,7 @@ var require_cal = __commonJS((exports2, module2) => {
       end: /[:;]/,
       keywords: "procedure|10",
       contains: [
-        hljs2.TITLE_MODE,
+        hljs.TITLE_MODE,
         {
           className: "params",
           begin: /\(/,
@@ -4932,7 +9065,7 @@ var require_cal = __commonJS((exports2, module2) => {
       begin: "OBJECT (Table|Form|Report|Dataport|Codeunit|XMLport|MenuSuite|Page|Query) (\\d+) ([^\\r\\n]+)",
       returnBegin: true,
       contains: [
-        hljs2.TITLE_MODE,
+        hljs.TITLE_MODE,
         PROCEDURE
       ]
     };
@@ -4949,7 +9082,7 @@ var require_cal = __commonJS((exports2, module2) => {
         CHAR_STRING,
         DATE,
         DBL_QUOTED_VARIABLE,
-        hljs2.NUMBER_MODE,
+        hljs.NUMBER_MODE,
         OBJECT,
         PROCEDURE
       ]
@@ -4960,7 +9093,7 @@ var require_cal = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/capnproto.js
 var require_capnproto = __commonJS((exports2, module2) => {
-  function capnproto(hljs2) {
+  function capnproto(hljs) {
     return {
       name: "Cap’n Proto",
       aliases: ["capnp"],
@@ -4970,9 +9103,9 @@ var require_capnproto = __commonJS((exports2, module2) => {
         literal: "true false"
       },
       contains: [
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.NUMBER_MODE,
-        hljs2.HASH_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           className: "meta",
           begin: /@0x[\w\d]{16};/,
@@ -4987,7 +9120,7 @@ var require_capnproto = __commonJS((exports2, module2) => {
           beginKeywords: "struct enum",
           end: /\{/,
           illegal: /\n/,
-          contains: [hljs2.inherit(hljs2.TITLE_MODE, {
+          contains: [hljs.inherit(hljs.TITLE_MODE, {
             starts: {
               endsWithParent: true,
               excludeEnd: true
@@ -4999,7 +9132,7 @@ var require_capnproto = __commonJS((exports2, module2) => {
           beginKeywords: "interface",
           end: /\{/,
           illegal: /\n/,
-          contains: [hljs2.inherit(hljs2.TITLE_MODE, {
+          contains: [hljs.inherit(hljs.TITLE_MODE, {
             starts: {
               endsWithParent: true,
               excludeEnd: true
@@ -5014,7 +9147,7 @@ var require_capnproto = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/ceylon.js
 var require_ceylon = __commonJS((exports2, module2) => {
-  function ceylon(hljs2) {
+  function ceylon(hljs) {
     const KEYWORDS = "assembly module package import alias class interface object given value assign void function new of extends satisfies abstracts in out return break continue throw assert dynamic if else switch case for while try catch finally then let this outer super is exists nonempty";
     const DECLARATION_MODIFIERS = "shared abstract formal default actual variable late native deprecated final sealed annotation suppressWarnings small";
     const DOCUMENTATION = "doc by license see throws tagged";
@@ -5060,8 +9193,8 @@ var require_ceylon = __commonJS((exports2, module2) => {
       },
       illegal: "\\$[^01]|#[^0-9a-fA-F]",
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.COMMENT("/\\*", "\\*/", {
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.COMMENT("/\\*", "\\*/", {
           contains: ["self"]
         }),
         {
@@ -5076,7 +9209,7 @@ var require_ceylon = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/clean.js
 var require_clean = __commonJS((exports2, module2) => {
-  function clean(hljs2) {
+  function clean(hljs) {
     return {
       name: "Clean",
       aliases: [
@@ -5089,11 +9222,11 @@ var require_clean = __commonJS((exports2, module2) => {
         literal: "True False"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         {
           begin: "->|<-[|:]?|#!?|>>=|\\{\\||\\|\\}|:==|=:|<>"
         }
@@ -5105,7 +9238,7 @@ var require_clean = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/clojure.js
 var require_clojure = __commonJS((exports2, module2) => {
-  function clojure(hljs2) {
+  function clojure(hljs) {
     const SYMBOLSTART = "a-zA-Z_\\-!.?+*=<>&#'";
     const SYMBOL_RE = "[" + SYMBOLSTART + "][" + SYMBOLSTART + "0-9/;:]*";
     const globals2 = "def defonce defprotocol defstruct defmulti defmethod defn- defn defmacro deftype defrecord";
@@ -5123,10 +9256,10 @@ var require_clojure = __commonJS((exports2, module2) => {
       begin: SIMPLE_NUMBER_RE,
       relevance: 0
     };
-    const STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+    const STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {
       illegal: null
     });
-    const COMMENT = hljs2.COMMENT(";", "$", {
+    const COMMENT = hljs.COMMENT(";", "$", {
       relevance: 0
     });
     const LITERAL = {
@@ -5141,7 +9274,7 @@ var require_clojure = __commonJS((exports2, module2) => {
       className: "comment",
       begin: "\\^" + SYMBOL_RE
     };
-    const HINT_COL = hljs2.COMMENT("\\^\\{", "\\}");
+    const HINT_COL = hljs.COMMENT("\\^\\{", "\\}");
     const KEY = {
       className: "symbol",
       begin: "[:]{1,2}" + SYMBOL_RE
@@ -5188,7 +9321,7 @@ var require_clojure = __commonJS((exports2, module2) => {
       ].concat(DEFAULT_CONTAINS)
     };
     LIST.contains = [
-      hljs2.COMMENT("comment", ""),
+      hljs.COMMENT("comment", ""),
       GLOBAL,
       NAME,
       BODY
@@ -5218,7 +9351,7 @@ var require_clojure = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/clojure-repl.js
 var require_clojure_repl = __commonJS((exports2, module2) => {
-  function clojureRepl(hljs2) {
+  function clojureRepl(hljs) {
     return {
       name: "Clojure REPL",
       contains: [
@@ -5238,7 +9371,7 @@ var require_clojure_repl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/cmake.js
 var require_cmake = __commonJS((exports2, module2) => {
-  function cmake(hljs2) {
+  function cmake(hljs) {
     return {
       name: "CMake",
       aliases: ["cmake.in"],
@@ -5252,9 +9385,9 @@ var require_cmake = __commonJS((exports2, module2) => {
           begin: /\$\{/,
           end: /\}/
         },
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.NUMBER_MODE
+        hljs.HASH_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE
       ]
     };
   }
@@ -5387,7 +9520,7 @@ var require_coffeescript = __commonJS((exports2, module2) => {
     "global"
   ];
   var BUILT_INS = [].concat(BUILT_IN_GLOBALS, BUILT_IN_VARIABLES, TYPES, ERROR_TYPES);
-  function coffeescript(hljs2) {
+  function coffeescript(hljs) {
     const COFFEE_BUILT_INS = [
       "npm",
       "print"
@@ -5432,8 +9565,8 @@ var require_coffeescript = __commonJS((exports2, module2) => {
       keywords: KEYWORDS$1
     };
     const EXPRESSIONS = [
-      hljs2.BINARY_NUMBER_MODE,
-      hljs2.inherit(hljs2.C_NUMBER_MODE, {
+      hljs.BINARY_NUMBER_MODE,
+      hljs.inherit(hljs.C_NUMBER_MODE, {
         starts: {
           end: "(\\s*/)?",
           relevance: 0
@@ -5445,18 +9578,18 @@ var require_coffeescript = __commonJS((exports2, module2) => {
           {
             begin: /'''/,
             end: /'''/,
-            contains: [hljs2.BACKSLASH_ESCAPE]
+            contains: [hljs.BACKSLASH_ESCAPE]
           },
           {
             begin: /'/,
             end: /'/,
-            contains: [hljs2.BACKSLASH_ESCAPE]
+            contains: [hljs.BACKSLASH_ESCAPE]
           },
           {
             begin: /"""/,
             end: /"""/,
             contains: [
-              hljs2.BACKSLASH_ESCAPE,
+              hljs.BACKSLASH_ESCAPE,
               SUBST
             ]
           },
@@ -5464,7 +9597,7 @@ var require_coffeescript = __commonJS((exports2, module2) => {
             begin: /"/,
             end: /"/,
             contains: [
-              hljs2.BACKSLASH_ESCAPE,
+              hljs.BACKSLASH_ESCAPE,
               SUBST
             ]
           }
@@ -5478,7 +9611,7 @@ var require_coffeescript = __commonJS((exports2, module2) => {
             end: "///",
             contains: [
               SUBST,
-              hljs2.HASH_COMMENT_MODE
+              hljs.HASH_COMMENT_MODE
             ]
           },
           {
@@ -5510,7 +9643,7 @@ var require_coffeescript = __commonJS((exports2, module2) => {
       }
     ];
     SUBST.contains = EXPRESSIONS;
-    const TITLE = hljs2.inherit(hljs2.TITLE_MODE, {
+    const TITLE = hljs.inherit(hljs.TITLE_MODE, {
       begin: JS_IDENT_RE
     });
     const POSSIBLE_PARAMS_RE = "(\\(.*\\)\\s*)?\\B[-=]>";
@@ -5535,8 +9668,8 @@ var require_coffeescript = __commonJS((exports2, module2) => {
       keywords: KEYWORDS$1,
       illegal: /\/\*/,
       contains: EXPRESSIONS.concat([
-        hljs2.COMMENT("###", "###"),
-        hljs2.HASH_COMMENT_MODE,
+        hljs.COMMENT("###", "###"),
+        hljs.HASH_COMMENT_MODE,
         {
           className: "function",
           begin: "^\\s*" + JS_IDENT_RE + "\\s*=\\s*" + POSSIBLE_PARAMS_RE,
@@ -5588,7 +9721,7 @@ var require_coffeescript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/coq.js
 var require_coq = __commonJS((exports2, module2) => {
-  function coq(hljs2) {
+  function coq(hljs) {
     return {
       name: "Coq",
       keywords: {
@@ -5596,9 +9729,9 @@ var require_coq = __commonJS((exports2, module2) => {
         built_in: "abstract absurd admit after apply as assert assumption at auto autorewrite autounfold before bottom btauto by case case_eq cbn cbv change classical_left classical_right clear clearbody cofix compare compute congruence constr_eq constructor contradict contradiction cut cutrewrite cycle decide decompose dependent destruct destruction dintuition discriminate discrR do double dtauto eapply eassumption eauto ecase econstructor edestruct ediscriminate eelim eexact eexists einduction einjection eleft elim elimtype enough equality erewrite eright esimplify_eq esplit evar exact exactly_once exfalso exists f_equal fail field field_simplify field_simplify_eq first firstorder fix fold fourier functional generalize generalizing gfail give_up has_evar hnf idtac in induction injection instantiate intro intro_pattern intros intuition inversion inversion_clear is_evar is_var lapply lazy left lia lra move native_compute nia nsatz omega once pattern pose progress proof psatz quote record red refine reflexivity remember rename repeat replace revert revgoals rewrite rewrite_strat right ring ring_simplify rtauto set setoid_reflexivity setoid_replace setoid_rewrite setoid_symmetry setoid_transitivity shelve shelve_unifiable simpl simple simplify_eq solve specialize split split_Rabs split_Rmult stepl stepr subst sum swap symmetry tactic tauto time timeout top transitivity trivial try tryif unfold unify until using vm_compute with"
       },
       contains: [
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.COMMENT("\\(\\*", "\\*\\)"),
-        hljs2.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.COMMENT("\\(\\*", "\\*\\)"),
+        hljs.C_NUMBER_MODE,
         {
           className: "type",
           excludeBegin: true,
@@ -5616,7 +9749,7 @@ var require_coq = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/cos.js
 var require_cos = __commonJS((exports2, module2) => {
-  function cos(hljs2) {
+  function cos(hljs) {
     const STRINGS = {
       className: "string",
       variants: [{
@@ -5644,8 +9777,8 @@ var require_cos = __commonJS((exports2, module2) => {
       contains: [
         NUMBERS,
         STRINGS,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "comment",
           begin: /;/,
@@ -5716,8 +9849,8 @@ var require_cpp = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function cpp(hljs2) {
-    const C_LINE_COMMENT_MODE = hljs2.COMMENT("//", "$", {
+  function cpp(hljs) {
+    const C_LINE_COMMENT_MODE = hljs.COMMENT("//", "$", {
       contains: [
         {
           begin: /\\\n/
@@ -5740,14 +9873,14 @@ var require_cpp = __commonJS((exports2, module2) => {
           begin: '(u8?|U|L)?"',
           end: '"',
           illegal: "\\n",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: "(u8?|U|L)?'(" + CHARACTER_ESCAPES + "|.)",
           end: "'",
           illegal: "."
         },
-        hljs2.END_SAME_AS_BEGIN({
+        hljs.END_SAME_AS_BEGIN({
           begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\(/,
           end: /\)([^()\\ ]{0,16})"/
         })
@@ -5780,7 +9913,7 @@ var require_cpp = __commonJS((exports2, module2) => {
           begin: /\\\n/,
           relevance: 0
         },
-        hljs2.inherit(STRINGS, {
+        hljs.inherit(STRINGS, {
           className: "meta-string"
         }),
         {
@@ -5788,15 +9921,15 @@ var require_cpp = __commonJS((exports2, module2) => {
           begin: /<.*?>/
         },
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
     const TITLE_MODE = {
       className: "title",
-      begin: optional(NAMESPACE_RE) + hljs2.IDENT_RE,
+      begin: optional(NAMESPACE_RE) + hljs.IDENT_RE,
       relevance: 0
     };
-    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs2.IDENT_RE + "\\s*\\(";
+    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + "\\s*\\(";
     const COMMON_CPP_HINTS = [
       "asin",
       "atan2",
@@ -5922,14 +10055,14 @@ var require_cpp = __commonJS((exports2, module2) => {
       className: "function.dispatch",
       relevance: 0,
       keywords: CPP_KEYWORDS,
-      begin: concat(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs2.IDENT_RE, lookahead(/\s*\(/))
+      begin: concat(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs.IDENT_RE, lookahead(/\s*\(/))
     };
     const EXPRESSION_CONTAINS = [
       FUNCTION_DISPATCH,
       PREPROCESSOR,
       CPP_PRIMITIVE_TYPES,
       C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
       NUMBERS,
       STRINGS
     ];
@@ -6000,7 +10133,7 @@ var require_cpp = __commonJS((exports2, module2) => {
           relevance: 0,
           contains: [
             C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
             STRINGS,
             NUMBERS,
             CPP_PRIMITIVE_TYPES,
@@ -6012,7 +10145,7 @@ var require_cpp = __commonJS((exports2, module2) => {
               contains: [
                 "self",
                 C_LINE_COMMENT_MODE,
-                hljs2.C_BLOCK_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
                 STRINGS,
                 NUMBERS,
                 CPP_PRIMITIVE_TYPES
@@ -6022,7 +10155,7 @@ var require_cpp = __commonJS((exports2, module2) => {
         },
         CPP_PRIMITIVE_TYPES,
         C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         PREPROCESSOR
       ]
     };
@@ -6054,7 +10187,7 @@ var require_cpp = __commonJS((exports2, module2) => {
           ]
         },
         {
-          begin: hljs2.IDENT_RE + "::",
+          begin: hljs.IDENT_RE + "::",
           keywords: CPP_KEYWORDS
         },
         {
@@ -6065,7 +10198,7 @@ var require_cpp = __commonJS((exports2, module2) => {
             {
               beginKeywords: "final class struct"
             },
-            hljs2.TITLE_MODE
+            hljs.TITLE_MODE
           ]
         }
       ]),
@@ -6081,7 +10214,7 @@ var require_cpp = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/crmsh.js
 var require_crmsh = __commonJS((exports2, module2) => {
-  function crmsh(hljs2) {
+  function crmsh(hljs) {
     const RESOURCES = "primitive rsc_template";
     const COMMANDS = "group clone ms master location colocation order fencing_topology rsc_ticket acl_target acl_group user role tag xml";
     const PROPERTY_SETS = "property rsc_defaults op_defaults";
@@ -6101,7 +10234,7 @@ var require_crmsh = __commonJS((exports2, module2) => {
         literal: LITERALS
       },
       contains: [
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           beginKeywords: "node",
           starts: {
@@ -6137,7 +10270,7 @@ var require_crmsh = __commonJS((exports2, module2) => {
             end: "\\s*([\\w_-]+:)?"
           }
         },
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "meta",
           begin: "(ocf|systemd|service|lsb):[\\w_:-]+",
@@ -6172,7 +10305,7 @@ var require_crmsh = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/crystal.js
 var require_crystal = __commonJS((exports2, module2) => {
-  function crystal(hljs2) {
+  function crystal(hljs) {
     const INT_SUFFIX = "(_?[ui](8|16|32|64|128))?";
     const FLOAT_SUFFIX = "(_?f(32|64))?";
     const CRYSTAL_IDENT_RE = "[a-zA-Z_]\\w*[!?=]?";
@@ -6216,7 +10349,7 @@ var require_crystal = __commonJS((exports2, module2) => {
     const STRING = {
       className: "string",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST
       ],
       variants: [
@@ -6298,13 +10431,13 @@ var require_crystal = __commonJS((exports2, module2) => {
       relevance: 0
     };
     const REGEXP = {
-      begin: "(?!%\\})(" + hljs2.RE_STARTERS_RE + "|\\n|\\b(case|if|select|unless|until|when|while)\\b)\\s*",
+      begin: "(?!%\\})(" + hljs.RE_STARTERS_RE + "|\\n|\\b(case|if|select|unless|until|when|while)\\b)\\s*",
       keywords: "case if select unless until when while",
       contains: [
         {
           className: "regexp",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             SUBST
           ],
           variants: [
@@ -6324,7 +10457,7 @@ var require_crystal = __commonJS((exports2, module2) => {
     const REGEXP2 = {
       className: "regexp",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST
       ],
       variants: [
@@ -6360,7 +10493,7 @@ var require_crystal = __commonJS((exports2, module2) => {
       begin: "@\\[",
       end: "\\]",
       contains: [
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           className: "meta-string"
         })
       ]
@@ -6372,15 +10505,15 @@ var require_crystal = __commonJS((exports2, module2) => {
       REGEXP2,
       REGEXP,
       ATTRIBUTE,
-      hljs2.HASH_COMMENT_MODE,
+      hljs.HASH_COMMENT_MODE,
       {
         className: "class",
         beginKeywords: "class module struct",
         end: "$|;",
         illegal: /=/,
         contains: [
-          hljs2.HASH_COMMENT_MODE,
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.HASH_COMMENT_MODE,
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: CRYSTAL_PATH_RE
           }),
           {
@@ -6394,8 +10527,8 @@ var require_crystal = __commonJS((exports2, module2) => {
         end: "$|;",
         illegal: /=/,
         contains: [
-          hljs2.HASH_COMMENT_MODE,
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.HASH_COMMENT_MODE,
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: CRYSTAL_PATH_RE
           })
         ]
@@ -6405,8 +10538,8 @@ var require_crystal = __commonJS((exports2, module2) => {
         end: "$|;",
         illegal: /=/,
         contains: [
-          hljs2.HASH_COMMENT_MODE,
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.HASH_COMMENT_MODE,
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: CRYSTAL_PATH_RE
           })
         ],
@@ -6417,7 +10550,7 @@ var require_crystal = __commonJS((exports2, module2) => {
         beginKeywords: "def",
         end: /\B\b/,
         contains: [
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: CRYSTAL_METHOD_RE,
             endsParent: true
           })
@@ -6428,7 +10561,7 @@ var require_crystal = __commonJS((exports2, module2) => {
         beginKeywords: "fun macro",
         end: /\B\b/,
         contains: [
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: CRYSTAL_METHOD_RE,
             endsParent: true
           })
@@ -6437,7 +10570,7 @@ var require_crystal = __commonJS((exports2, module2) => {
       },
       {
         className: "symbol",
-        begin: hljs2.UNDERSCORE_IDENT_RE + "(!|\\?)?:",
+        begin: hljs.UNDERSCORE_IDENT_RE + "(!|\\?)?:",
         relevance: 0
       },
       {
@@ -6487,7 +10620,7 @@ var require_crystal = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/csharp.js
 var require_csharp = __commonJS((exports2, module2) => {
-  function csharp(hljs2) {
+  function csharp(hljs) {
     const BUILT_IN_KEYWORDS = [
       "bool",
       "byte",
@@ -6631,7 +10764,7 @@ var require_csharp = __commonJS((exports2, module2) => {
       built_in: BUILT_IN_KEYWORDS,
       literal: LITERAL_KEYWORDS
     };
-    const TITLE_MODE = hljs2.inherit(hljs2.TITLE_MODE, {
+    const TITLE_MODE = hljs.inherit(hljs.TITLE_MODE, {
       begin: "[a-zA-Z](\\.?\\w)*"
     });
     const NUMBERS = {
@@ -6659,7 +10792,7 @@ var require_csharp = __commonJS((exports2, module2) => {
         }
       ]
     };
-    const VERBATIM_STRING_NO_LF = hljs2.inherit(VERBATIM_STRING, {
+    const VERBATIM_STRING_NO_LF = hljs.inherit(VERBATIM_STRING, {
       illegal: /\n/
     });
     const SUBST = {
@@ -6668,7 +10801,7 @@ var require_csharp = __commonJS((exports2, module2) => {
       end: /\}/,
       keywords: KEYWORDS
     };
-    const SUBST_NO_LF = hljs2.inherit(SUBST, {
+    const SUBST_NO_LF = hljs.inherit(SUBST, {
       illegal: /\n/
     });
     const INTERPOLATED_STRING = {
@@ -6683,7 +10816,7 @@ var require_csharp = __commonJS((exports2, module2) => {
         {
           begin: /\}\}/
         },
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST_NO_LF
       ]
     };
@@ -6704,7 +10837,7 @@ var require_csharp = __commonJS((exports2, module2) => {
         SUBST
       ]
     };
-    const INTERPOLATED_VERBATIM_STRING_NO_LF = hljs2.inherit(INTERPOLATED_VERBATIM_STRING, {
+    const INTERPOLATED_VERBATIM_STRING_NO_LF = hljs.inherit(INTERPOLATED_VERBATIM_STRING, {
       illegal: /\n/,
       contains: [
         {
@@ -6723,19 +10856,19 @@ var require_csharp = __commonJS((exports2, module2) => {
       INTERPOLATED_VERBATIM_STRING,
       INTERPOLATED_STRING,
       VERBATIM_STRING,
-      hljs2.APOS_STRING_MODE,
-      hljs2.QUOTE_STRING_MODE,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       NUMBERS,
-      hljs2.C_BLOCK_COMMENT_MODE
+      hljs.C_BLOCK_COMMENT_MODE
     ];
     SUBST_NO_LF.contains = [
       INTERPOLATED_VERBATIM_STRING_NO_LF,
       INTERPOLATED_STRING,
       VERBATIM_STRING_NO_LF,
-      hljs2.APOS_STRING_MODE,
-      hljs2.QUOTE_STRING_MODE,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       NUMBERS,
-      hljs2.inherit(hljs2.C_BLOCK_COMMENT_MODE, {
+      hljs.inherit(hljs.C_BLOCK_COMMENT_MODE, {
         illegal: /\n/
       })
     ];
@@ -6744,8 +10877,8 @@ var require_csharp = __commonJS((exports2, module2) => {
         INTERPOLATED_VERBATIM_STRING,
         INTERPOLATED_STRING,
         VERBATIM_STRING,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE
       ]
     };
     const GENERIC_MODIFIER = {
@@ -6758,9 +10891,9 @@ var require_csharp = __commonJS((exports2, module2) => {
         TITLE_MODE
       ]
     };
-    const TYPE_IDENT_RE = hljs2.IDENT_RE + "(<" + hljs2.IDENT_RE + "(\\s*,\\s*" + hljs2.IDENT_RE + ")*>)?(\\[\\])?";
+    const TYPE_IDENT_RE = hljs.IDENT_RE + "(<" + hljs.IDENT_RE + "(\\s*,\\s*" + hljs.IDENT_RE + ")*>)?(\\[\\])?";
     const AT_IDENTIFIER = {
-      begin: "@" + hljs2.IDENT_RE,
+      begin: "@" + hljs.IDENT_RE,
       relevance: 0
     };
     return {
@@ -6772,7 +10905,7 @@ var require_csharp = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       illegal: /::/,
       contains: [
-        hljs2.COMMENT("///", "$", {
+        hljs.COMMENT("///", "$", {
           returnBegin: true,
           contains: [
             {
@@ -6793,8 +10926,8 @@ var require_csharp = __commonJS((exports2, module2) => {
             }
           ]
         }),
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "meta",
           begin: "#",
@@ -6816,8 +10949,8 @@ var require_csharp = __commonJS((exports2, module2) => {
             },
             TITLE_MODE,
             GENERIC_MODIFIER,
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         {
@@ -6827,8 +10960,8 @@ var require_csharp = __commonJS((exports2, module2) => {
           illegal: /[^\s:]/,
           contains: [
             TITLE_MODE,
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         {
@@ -6839,8 +10972,8 @@ var require_csharp = __commonJS((exports2, module2) => {
           contains: [
             TITLE_MODE,
             GENERIC_MODIFIER,
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         {
@@ -6863,7 +10996,7 @@ var require_csharp = __commonJS((exports2, module2) => {
         },
         {
           className: "function",
-          begin: "(" + TYPE_IDENT_RE + "\\s+)+" + hljs2.IDENT_RE + "\\s*(<.+>\\s*)?\\(",
+          begin: "(" + TYPE_IDENT_RE + "\\s+)+" + hljs.IDENT_RE + "\\s*(<.+>\\s*)?\\(",
           returnBegin: true,
           end: /\s*[{;=]/,
           excludeEnd: true,
@@ -6874,10 +11007,10 @@ var require_csharp = __commonJS((exports2, module2) => {
               relevance: 0
             },
             {
-              begin: hljs2.IDENT_RE + "\\s*(<.+>\\s*)?\\(",
+              begin: hljs.IDENT_RE + "\\s*(<.+>\\s*)?\\(",
               returnBegin: true,
               contains: [
-                hljs2.TITLE_MODE,
+                hljs.TITLE_MODE,
                 GENERIC_MODIFIER
               ],
               relevance: 0
@@ -6893,11 +11026,11 @@ var require_csharp = __commonJS((exports2, module2) => {
               contains: [
                 STRING,
                 NUMBERS,
-                hljs2.C_BLOCK_COMMENT_MODE
+                hljs.C_BLOCK_COMMENT_MODE
               ]
             },
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         AT_IDENTIFIER
@@ -6909,7 +11042,7 @@ var require_csharp = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/csp.js
 var require_csp = __commonJS((exports2, module2) => {
-  function csp(hljs2) {
+  function csp(hljs) {
     return {
       name: "CSP",
       case_insensitive: false,
@@ -6937,7 +11070,7 @@ var require_csp = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/css.js
 var require_css = __commonJS((exports2, module2) => {
-  var MODES = (hljs2) => {
+  var MODES = (hljs) => {
     return {
       IMPORTANT: {
         className: "meta",
@@ -6953,8 +11086,8 @@ var require_css = __commonJS((exports2, module2) => {
         end: /\]/,
         illegal: "$",
         contains: [
-          hljs2.APOS_STRING_MODE,
-          hljs2.QUOTE_STRING_MODE
+          hljs.APOS_STRING_MODE,
+          hljs.QUOTE_STRING_MODE
         ]
       }
     };
@@ -7368,8 +11501,8 @@ var require_css = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function css(hljs2) {
-    const modes = MODES(hljs2);
+  function css(hljs) {
+    const modes = MODES(hljs);
     const FUNCTION_DISPATCH = {
       className: "built_in",
       begin: /[\w-]+(?=\()/
@@ -7381,8 +11514,8 @@ var require_css = __commonJS((exports2, module2) => {
     const AT_PROPERTY_RE = /@-?\w[\w]*(-\w+)*/;
     const IDENT_RE = "[a-zA-Z-][a-zA-Z0-9_-]*";
     const STRINGS = [
-      hljs2.APOS_STRING_MODE,
-      hljs2.QUOTE_STRING_MODE
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE
     ];
     return {
       name: "CSS",
@@ -7395,9 +11528,9 @@ var require_css = __commonJS((exports2, module2) => {
         keyframePosition: "selector-tag"
       },
       contains: [
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         VENDOR_PREFIX,
-        hljs2.CSS_NUMBER_MODE,
+        hljs.CSS_NUMBER_MODE,
         {
           className: "selector-id",
           begin: /#[A-Za-z0-9_-]+/,
@@ -7430,7 +11563,7 @@ var require_css = __commonJS((exports2, module2) => {
           contains: [
             modes.HEXCOLOR,
             modes.IMPORTANT,
-            hljs2.CSS_NUMBER_MODE,
+            hljs.CSS_NUMBER_MODE,
             ...STRINGS,
             {
               begin: /(url|data-uri)\(/,
@@ -7477,7 +11610,7 @@ var require_css = __commonJS((exports2, module2) => {
                   className: "attribute"
                 },
                 ...STRINGS,
-                hljs2.CSS_NUMBER_MODE
+                hljs.CSS_NUMBER_MODE
               ]
             }
           ]
@@ -7494,9 +11627,9 @@ var require_css = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/d.js
 var require_d = __commonJS((exports2, module2) => {
-  function d(hljs2) {
+  function d(hljs) {
     const D_KEYWORDS = {
-      $pattern: hljs2.UNDERSCORE_IDENT_RE,
+      $pattern: hljs.UNDERSCORE_IDENT_RE,
       keyword: "abstract alias align asm assert auto body break byte case cast catch class const continue debug default delete deprecated do else enum export extern final finally for foreach foreach_reverse|10 goto if immutable import in inout int interface invariant is lazy macro mixin module new nothrow out override package pragma private protected public pure ref return scope shared static struct super switch synchronized template this throw try typedef typeid typeof union unittest version void volatile while with __FILE__ __LINE__ __gshared|10 __thread __traits __DATE__ __EOF__ __TIME__ __TIMESTAMP__ __VENDOR__ __VERSION__",
       built_in: "bool cdouble cent cfloat char creal dchar delegate double dstring float function idouble ifloat ireal long real short string ubyte ucent uint ulong ushort wchar wstring",
       literal: "false null true"
@@ -7575,7 +11708,7 @@ var require_d = __commonJS((exports2, module2) => {
       className: "keyword",
       begin: "@[a-zA-Z_][a-zA-Z_\\d]*"
     };
-    const D_NESTING_COMMENT_MODE = hljs2.COMMENT("\\/\\+", "\\+\\/", {
+    const D_NESTING_COMMENT_MODE = hljs.COMMENT("\\/\\+", "\\+\\/", {
       contains: ["self"],
       relevance: 10
     });
@@ -7583,8 +11716,8 @@ var require_d = __commonJS((exports2, module2) => {
       name: "D",
       keywords: D_KEYWORDS,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         D_NESTING_COMMENT_MODE,
         D_HEX_STRING_MODE,
         D_STRING_MODE,
@@ -7616,7 +11749,7 @@ var require_markdown = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function markdown(hljs2) {
+  function markdown(hljs) {
     const INLINE_HTML = {
       begin: /<\/?[A-Za-z_]/,
       end: ">",
@@ -7829,7 +11962,7 @@ var require_markdown = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/dart.js
 var require_dart = __commonJS((exports2, module2) => {
-  function dart(hljs2) {
+  function dart(hljs) {
     const SUBST = {
       className: "subst",
       variants: [{
@@ -7869,7 +12002,7 @@ var require_dart = __commonJS((exports2, module2) => {
           begin: "'''",
           end: "'''",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             SUBST,
             BRACED_SUBST
           ]
@@ -7878,7 +12011,7 @@ var require_dart = __commonJS((exports2, module2) => {
           begin: '"""',
           end: '"""',
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             SUBST,
             BRACED_SUBST
           ]
@@ -7888,7 +12021,7 @@ var require_dart = __commonJS((exports2, module2) => {
           end: "'",
           illegal: "\\n",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             SUBST,
             BRACED_SUBST
           ]
@@ -7898,7 +12031,7 @@ var require_dart = __commonJS((exports2, module2) => {
           end: '"',
           illegal: "\\n",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             SUBST,
             BRACED_SUBST
           ]
@@ -7906,7 +12039,7 @@ var require_dart = __commonJS((exports2, module2) => {
       ]
     };
     BRACED_SUBST.contains = [
-      hljs2.C_NUMBER_MODE,
+      hljs.C_NUMBER_MODE,
       STRING
     ];
     const BUILT_IN_TYPES = [
@@ -7957,11 +12090,11 @@ var require_dart = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       contains: [
         STRING,
-        hljs2.COMMENT(/\/\*\*(?!\/)/, /\*\//, {
+        hljs.COMMENT(/\/\*\*(?!\/)/, /\*\//, {
           subLanguage: "markdown",
           relevance: 0
         }),
-        hljs2.COMMENT(/\/{3,} ?/, /$/, {
+        hljs.COMMENT(/\/{3,} ?/, /$/, {
           contains: [{
             subLanguage: "markdown",
             begin: ".",
@@ -7969,8 +12102,8 @@ var require_dart = __commonJS((exports2, module2) => {
             relevance: 0
           }]
         }),
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "class",
           beginKeywords: "class interface",
@@ -7980,10 +12113,10 @@ var require_dart = __commonJS((exports2, module2) => {
             {
               beginKeywords: "extends implements"
             },
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: "@[A-Za-z]+"
@@ -7999,14 +12132,14 @@ var require_dart = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/delphi.js
 var require_delphi = __commonJS((exports2, module2) => {
-  function delphi(hljs2) {
+  function delphi(hljs) {
     const KEYWORDS = "exports register file shl array record property for mod while set ally label uses raise not stored class safecall var interface or private static exit index inherited to else stdcall override shr asm far resourcestring finalization packed virtual out and protected library do xorwrite goto near function end div overload object unit begin string on inline repeat until destructor write message program with read initialization except default nil if case cdecl in downto threadvar of try pascal const external constructor type public then implementation finally published procedure absolute reintroduce operator as is abstract alias assembler bitpacked break continue cppdecl cvar enumerator experimental platform deprecated unimplemented dynamic export far16 forward generic helper implements interrupt iochecks local name nodefault noreturn nostackframe oldfpccall otherwise saveregisters softfloat specialize strict unaligned varargs ";
     const COMMENT_MODES = [
-      hljs2.C_LINE_COMMENT_MODE,
-      hljs2.COMMENT(/\{/, /\}/, {
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.COMMENT(/\{/, /\}/, {
         relevance: 0
       }),
-      hljs2.COMMENT(/\(\*/, /\*\)/, {
+      hljs.COMMENT(/\(\*/, /\*\)/, {
         relevance: 10
       })
     ];
@@ -8051,9 +12184,9 @@ var require_delphi = __commonJS((exports2, module2) => {
       begin: /(#\d+)+/
     };
     const CLASS = {
-      begin: hljs2.IDENT_RE + "\\s*=\\s*class\\s*\\(",
+      begin: hljs.IDENT_RE + "\\s*=\\s*class\\s*\\(",
       returnBegin: true,
-      contains: [hljs2.TITLE_MODE]
+      contains: [hljs.TITLE_MODE]
     };
     const FUNCTION = {
       className: "function",
@@ -8061,7 +12194,7 @@ var require_delphi = __commonJS((exports2, module2) => {
       end: /[:;]/,
       keywords: "function constructor|10 destructor|10 procedure|10",
       contains: [
-        hljs2.TITLE_MODE,
+        hljs.TITLE_MODE,
         {
           className: "params",
           begin: /\(/,
@@ -8094,7 +12227,7 @@ var require_delphi = __commonJS((exports2, module2) => {
       contains: [
         STRING,
         CHAR_STRING,
-        hljs2.NUMBER_MODE,
+        hljs.NUMBER_MODE,
         NUMBER,
         CLASS,
         FUNCTION,
@@ -8107,7 +12240,7 @@ var require_delphi = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/diff.js
 var require_diff = __commonJS((exports2, module2) => {
-  function diff(hljs2) {
+  function diff(hljs) {
     return {
       name: "Diff",
       aliases: ["patch"],
@@ -8186,15 +12319,15 @@ var require_diff = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/django.js
 var require_django = __commonJS((exports2, module2) => {
-  function django(hljs2) {
+  function django(hljs) {
     const FILTER = {
       begin: /\|[A-Za-z]+:?/,
       keywords: {
         name: "truncatewords removetags linebreaksbr yesno get_digit timesince random striptags filesizeformat escape linebreaks length_is ljust rjust cut urlize fix_ampersands title floatformat capfirst pprint divisibleby add make_list unordered_list urlencode timeuntil urlizetrunc wordcount stringformat linenumbers slice date dictsort dictsortreversed default_if_none pluralize lower join center default truncatewords_html upper length phone2numeric wordwrap time addslashes slugify first escapejs force_escape iriencode last safe safeseq truncatechars localize unlocalize localtime utc timezone"
       },
       contains: [
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE
       ]
     };
     return {
@@ -8203,8 +12336,8 @@ var require_django = __commonJS((exports2, module2) => {
       case_insensitive: true,
       subLanguage: "xml",
       contains: [
-        hljs2.COMMENT(/\{%\s*comment\s*%\}/, /\{%\s*endcomment\s*%\}/),
-        hljs2.COMMENT(/\{#/, /#\}/),
+        hljs.COMMENT(/\{%\s*comment\s*%\}/, /\{%\s*endcomment\s*%\}/),
+        hljs.COMMENT(/\{#/, /#\}/),
         {
           className: "template-tag",
           begin: /\{%/,
@@ -8237,7 +12370,7 @@ var require_django = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/dns.js
 var require_dns = __commonJS((exports2, module2) => {
-  function dns(hljs2) {
+  function dns(hljs) {
     return {
       name: "DNS Zone",
       aliases: [
@@ -8248,7 +12381,7 @@ var require_dns = __commonJS((exports2, module2) => {
         keyword: "IN A AAAA AFSDB APL CAA CDNSKEY CDS CERT CNAME DHCID DLV DNAME DNSKEY DS HIP IPSECKEY KEY KX LOC MX NAPTR NS NSEC NSEC3 NSEC3PARAM PTR RRSIG RP SIG SOA SRV SSHFP TA TKEY TLSA TSIG TXT"
       },
       contains: [
-        hljs2.COMMENT(";", "$", {
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
         {
@@ -8263,7 +12396,7 @@ var require_dns = __commonJS((exports2, module2) => {
           className: "number",
           begin: "((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]).){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\b"
         },
-        hljs2.inherit(hljs2.NUMBER_MODE, {
+        hljs.inherit(hljs.NUMBER_MODE, {
           begin: /\b\d+[dhwm]?/
         })
       ]
@@ -8274,17 +12407,17 @@ var require_dns = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/dockerfile.js
 var require_dockerfile = __commonJS((exports2, module2) => {
-  function dockerfile(hljs2) {
+  function dockerfile(hljs) {
     return {
       name: "Dockerfile",
       aliases: ["docker"],
       case_insensitive: true,
       keywords: "from maintainer expose env arg user onbuild stopsignal",
       contains: [
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.NUMBER_MODE,
+        hljs.HASH_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE,
         {
           beginKeywords: "run cmd entrypoint volume add copy workdir label healthcheck shell",
           starts: {
@@ -8301,8 +12434,8 @@ var require_dockerfile = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/dos.js
 var require_dos = __commonJS((exports2, module2) => {
-  function dos(hljs2) {
-    const COMMENT = hljs2.COMMENT(/^\s*@?rem\b/, /$/, {
+  function dos(hljs) {
+    const COMMENT = hljs.COMMENT(/^\s*@?rem\b/, /$/, {
       relevance: 10
     });
     const LABEL = {
@@ -8332,7 +12465,7 @@ var require_dos = __commonJS((exports2, module2) => {
           begin: LABEL.begin,
           end: "goto:eof",
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               begin: "([_a-zA-Z]\\w*\\.)*([_a-zA-Z]\\w*:)?[_a-zA-Z]\\w*"
             }),
             COMMENT
@@ -8352,7 +12485,7 @@ var require_dos = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/dsconfig.js
 var require_dsconfig = __commonJS((exports2, module2) => {
-  function dsconfig(hljs2) {
+  function dsconfig(hljs) {
     const QUOTED_PROPERTY = {
       className: "string",
       begin: /"/,
@@ -8403,7 +12536,7 @@ var require_dsconfig = __commonJS((exports2, module2) => {
         APOS_PROPERTY,
         UNQUOTED_PROPERTY,
         VALUELESS_PROPERTY,
-        hljs2.HASH_COMMENT_MODE
+        hljs.HASH_COMMENT_MODE
       ]
     };
   }
@@ -8412,17 +12545,17 @@ var require_dsconfig = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/dts.js
 var require_dts = __commonJS((exports2, module2) => {
-  function dts(hljs2) {
+  function dts(hljs) {
     const STRINGS = {
       className: "string",
       variants: [
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           begin: '((u8?|U)|L)?"'
         }),
         {
           begin: '(u8?|U)?R"',
           end: '"',
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: "'\\\\?.",
@@ -8438,7 +12571,7 @@ var require_dts = __commonJS((exports2, module2) => {
           begin: "\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"
         },
         {
-          begin: hljs2.C_NUMBER_RE
+          begin: hljs.C_NUMBER_RE
         }
       ],
       relevance: 0
@@ -8462,7 +12595,7 @@ var require_dts = __commonJS((exports2, module2) => {
             "meta-keyword": "include"
           },
           contains: [
-            hljs2.inherit(STRINGS, {
+            hljs.inherit(STRINGS, {
               className: "meta-string"
             }),
             {
@@ -8474,8 +12607,8 @@ var require_dts = __commonJS((exports2, module2) => {
           ]
         },
         STRINGS,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
     const DTS_REFERENCE = {
@@ -8517,8 +12650,8 @@ var require_dts = __commonJS((exports2, module2) => {
         DTS_LABEL,
         DTS_NODE,
         DTS_CELL_PROPERTY,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         NUMBERS,
         STRINGS
       ]
@@ -8533,13 +12666,13 @@ var require_dts = __commonJS((exports2, module2) => {
         DTS_LABEL,
         DTS_NODE,
         DTS_CELL_PROPERTY,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         NUMBERS,
         STRINGS,
         PREPROCESSOR,
         {
-          begin: hljs2.IDENT_RE + "::",
+          begin: hljs.IDENT_RE + "::",
           keywords: ""
         }
       ]
@@ -8550,7 +12683,7 @@ var require_dts = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/dust.js
 var require_dust = __commonJS((exports2, module2) => {
-  function dust(hljs2) {
+  function dust(hljs) {
     const EXPRESSION_KEYWORDS = "if eq ne lt lte gt gte select default math sep";
     return {
       name: "Dust",
@@ -8569,7 +12702,7 @@ var require_dust = __commonJS((exports2, module2) => {
             starts: {
               endsWithParent: true,
               relevance: 0,
-              contains: [hljs2.QUOTE_STRING_MODE]
+              contains: [hljs.QUOTE_STRING_MODE]
             }
           }]
         },
@@ -8588,8 +12721,8 @@ var require_dust = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/ebnf.js
 var require_ebnf = __commonJS((exports2, module2) => {
-  function ebnf(hljs2) {
-    const commentMode = hljs2.COMMENT(/\(\*/, /\*\)/);
+  function ebnf(hljs) {
+    const commentMode = hljs.COMMENT(/\(\*/, /\*\)/);
     const nonTerminalMode = {
       className: "attribute",
       begin: /^[ ]*[a-zA-Z]+([\s_-]+[a-zA-Z]+)*/
@@ -8607,8 +12740,8 @@ var require_ebnf = __commonJS((exports2, module2) => {
         {
           className: "string",
           variants: [
-            hljs2.APOS_STRING_MODE,
-            hljs2.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
+            hljs.QUOTE_STRING_MODE,
             {
               begin: "`",
               end: "`"
@@ -8632,7 +12765,7 @@ var require_ebnf = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/elixir.js
 var require_elixir = __commonJS((exports2, module2) => {
-  function elixir(hljs2) {
+  function elixir(hljs) {
     const ELIXIR_IDENT_RE = "[a-zA-Z_][a-zA-Z0-9_.]*(!|\\?)?";
     const ELIXIR_METHOD_RE = "[a-zA-Z_]\\w*[!?=]?|[-+~]@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?";
     const ELIXIR_KEYWORDS = {
@@ -8660,7 +12793,7 @@ var require_elixir = __commonJS((exports2, module2) => {
           contains: [
             {
               contains: [
-                hljs2.BACKSLASH_ESCAPE,
+                hljs.BACKSLASH_ESCAPE,
                 SUBST
               ],
               variants: [
@@ -8743,7 +12876,7 @@ var require_elixir = __commonJS((exports2, module2) => {
     const STRING = {
       className: "string",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST
       ],
       variants: [
@@ -8790,13 +12923,13 @@ var require_elixir = __commonJS((exports2, module2) => {
       beginKeywords: "def defp defmacro",
       end: /\B\b/,
       contains: [
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           begin: ELIXIR_IDENT_RE,
           endsParent: true
         })
       ]
     };
-    const CLASS = hljs2.inherit(FUNCTION, {
+    const CLASS = hljs.inherit(FUNCTION, {
       className: "class",
       beginKeywords: "defimpl defmodule defprotocol defrecord",
       end: /\bdo\b|$|;/
@@ -8805,7 +12938,7 @@ var require_elixir = __commonJS((exports2, module2) => {
       STRING,
       UPCASE_SIGIL,
       LOWERCASE_SIGIL,
-      hljs2.HASH_COMMENT_MODE,
+      hljs.HASH_COMMENT_MODE,
       CLASS,
       FUNCTION,
       {
@@ -8836,9 +12969,9 @@ var require_elixir = __commonJS((exports2, module2) => {
         begin: "->"
       },
       {
-        begin: "(" + hljs2.RE_STARTERS_RE + ")\\s*",
+        begin: "(" + hljs.RE_STARTERS_RE + ")\\s*",
         contains: [
-          hljs2.HASH_COMMENT_MODE,
+          hljs.HASH_COMMENT_MODE,
           {
             begin: /\/: (?=\d+\s*[,\]])/,
             relevance: 0,
@@ -8848,7 +12981,7 @@ var require_elixir = __commonJS((exports2, module2) => {
             className: "regexp",
             illegal: "\\n",
             contains: [
-              hljs2.BACKSLASH_ESCAPE,
+              hljs.BACKSLASH_ESCAPE,
               SUBST
             ],
             variants: [
@@ -8878,11 +13011,11 @@ var require_elixir = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/elm.js
 var require_elm = __commonJS((exports2, module2) => {
-  function elm(hljs2) {
+  function elm(hljs) {
     const COMMENT = {
       variants: [
-        hljs2.COMMENT("--", "$"),
-        hljs2.COMMENT(/\{-/, /-\}/, {
+        hljs.COMMENT("--", "$"),
+        hljs.COMMENT(/\{-/, /-\}/, {
           contains: ["self"]
         })
       ]
@@ -8954,7 +13087,7 @@ var require_elm = __commonJS((exports2, module2) => {
           beginKeywords: "infix infixl infixr",
           end: "$",
           contains: [
-            hljs2.C_NUMBER_MODE,
+            hljs.C_NUMBER_MODE,
             COMMENT
           ]
         },
@@ -8965,10 +13098,10 @@ var require_elm = __commonJS((exports2, module2) => {
           contains: [COMMENT]
         },
         CHARACTER,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         CONSTRUCTOR,
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           begin: "^[_a-z][\\w']*"
         }),
         COMMENT,
@@ -8998,7 +13131,7 @@ var require_ruby = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function ruby(hljs2) {
+  function ruby(hljs) {
     const RUBY_METHOD_RE = "([a-zA-Z_]\\w*[!?=]?|[-+~]@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?)";
     const RUBY_KEYWORDS = {
       keyword: "and then defined module in return redo if BEGIN retry end for self when next until do begin unless END rescue else break undef not super class case require yield alias while ensure elsif or include attr_reader attr_writer attr_accessor __FILE__",
@@ -9014,14 +13147,14 @@ var require_ruby = __commonJS((exports2, module2) => {
       end: ">"
     };
     const COMMENT_MODES = [
-      hljs2.COMMENT("#", "$", {
+      hljs.COMMENT("#", "$", {
         contains: [YARDOCTAG]
       }),
-      hljs2.COMMENT("^=begin", "^=end", {
+      hljs.COMMENT("^=begin", "^=end", {
         contains: [YARDOCTAG],
         relevance: 10
       }),
-      hljs2.COMMENT("^__END__", "\\n$")
+      hljs.COMMENT("^__END__", "\\n$")
     ];
     const SUBST = {
       className: "subst",
@@ -9032,7 +13165,7 @@ var require_ruby = __commonJS((exports2, module2) => {
     const STRING = {
       className: "string",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST
       ],
       variants: [
@@ -9105,11 +13238,11 @@ var require_ruby = __commonJS((exports2, module2) => {
             {
               begin: /<<[-~]?'?/
             },
-            hljs2.END_SAME_AS_BEGIN({
+            hljs.END_SAME_AS_BEGIN({
               begin: /(\w+)/,
               end: /(\w+)/,
               contains: [
-                hljs2.BACKSLASH_ESCAPE,
+                hljs.BACKSLASH_ESCAPE,
                 SUBST
               ]
             })
@@ -9158,14 +13291,14 @@ var require_ruby = __commonJS((exports2, module2) => {
         end: "$|;",
         illegal: /=/,
         contains: [
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: "[A-Za-z_]\\w*(::\\w+)*(\\?|!)?"
           }),
           {
             begin: "<\\s*",
             contains: [
               {
-                begin: "(" + hljs2.IDENT_RE + "::)?" + hljs2.IDENT_RE,
+                begin: "(" + hljs.IDENT_RE + "::)?" + hljs.IDENT_RE,
                 relevance: 0
               }
             ]
@@ -9179,18 +13312,18 @@ var require_ruby = __commonJS((exports2, module2) => {
         keywords: "def",
         end: "$|;",
         contains: [
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: RUBY_METHOD_RE
           }),
           PARAMS
         ].concat(COMMENT_MODES)
       },
       {
-        begin: hljs2.IDENT_RE + "::"
+        begin: hljs.IDENT_RE + "::"
       },
       {
         className: "symbol",
-        begin: hljs2.UNDERSCORE_IDENT_RE + "(!|\\?)?:",
+        begin: hljs.UNDERSCORE_IDENT_RE + "(!|\\?)?:",
         relevance: 0
       },
       {
@@ -9217,13 +13350,13 @@ var require_ruby = __commonJS((exports2, module2) => {
         keywords: RUBY_KEYWORDS
       },
       {
-        begin: "(" + hljs2.RE_STARTERS_RE + "|unless)\\s*",
+        begin: "(" + hljs.RE_STARTERS_RE + "|unless)\\s*",
         keywords: "unless",
         contains: [
           {
             className: "regexp",
             contains: [
-              hljs2.BACKSLASH_ESCAPE,
+              hljs.BACKSLASH_ESCAPE,
               SUBST
             ],
             illegal: /\n/,
@@ -9289,7 +13422,7 @@ var require_ruby = __commonJS((exports2, module2) => {
       keywords: RUBY_KEYWORDS,
       illegal: /\/\*/,
       contains: [
-        hljs2.SHEBANG({
+        hljs.SHEBANG({
           binary: "ruby"
         })
       ].concat(IRB_DEFAULT).concat(COMMENT_MODES).concat(RUBY_DEFAULT_CONTAINS)
@@ -9300,12 +13433,12 @@ var require_ruby = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/erb.js
 var require_erb = __commonJS((exports2, module2) => {
-  function erb(hljs2) {
+  function erb(hljs) {
     return {
       name: "ERB",
       subLanguage: "xml",
       contains: [
-        hljs2.COMMENT("<%#", "%>"),
+        hljs.COMMENT("<%#", "%>"),
         {
           begin: "<%[%=-]?",
           end: "[%-]?%>",
@@ -9332,7 +13465,7 @@ var require_erlang_repl = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function erlangRepl(hljs2) {
+  function erlangRepl(hljs) {
     return {
       name: "Erlang REPL",
       keywords: {
@@ -9345,14 +13478,14 @@ var require_erlang_repl = __commonJS((exports2, module2) => {
           begin: "^[0-9]+> ",
           relevance: 10
         },
-        hljs2.COMMENT("%", "$"),
+        hljs.COMMENT("%", "$"),
         {
           className: "number",
           begin: "\\b(\\d+(_\\d+)*#[a-fA-F0-9]+(_[a-fA-F0-9]+)*|\\d+(_\\d+)*(\\.\\d+(_\\d+)*)?([eE][-+]?\\d+)?)",
           relevance: 0
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           begin: concat(/\?(::)?/, /([A-Z]\w*)/, /((::)[A-Z]\w*)*/)
         },
@@ -9381,14 +13514,14 @@ var require_erlang_repl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/erlang.js
 var require_erlang = __commonJS((exports2, module2) => {
-  function erlang(hljs2) {
+  function erlang(hljs) {
     const BASIC_ATOM_RE = "[a-z'][a-zA-Z0-9_']*";
     const FUNCTION_NAME_RE = "(" + BASIC_ATOM_RE + ":" + BASIC_ATOM_RE + "|" + BASIC_ATOM_RE + ")";
     const ERLANG_RESERVED = {
       keyword: "after and andalso|10 band begin bnot bor bsl bzr bxor case catch cond div end fun if let not of orelse|10 query receive rem try when xor",
       literal: "false true"
     };
-    const COMMENT = hljs2.COMMENT("%", "$");
+    const COMMENT = hljs.COMMENT("%", "$");
     const NUMBER = {
       className: "number",
       begin: "\\b(\\d+(_\\d+)*#[a-fA-F0-9]+(_[a-fA-F0-9]+)*|\\d+(_\\d+)*(\\.\\d+(_\\d+)*)?([eE][-+]?\\d+)?)",
@@ -9430,12 +13563,12 @@ var require_erlang = __commonJS((exports2, module2) => {
       relevance: 0
     };
     const RECORD_ACCESS = {
-      begin: "#" + hljs2.UNDERSCORE_IDENT_RE,
+      begin: "#" + hljs.UNDERSCORE_IDENT_RE,
       relevance: 0,
       returnBegin: true,
       contains: [
         {
-          begin: "#" + hljs2.UNDERSCORE_IDENT_RE,
+          begin: "#" + hljs.UNDERSCORE_IDENT_RE,
           relevance: 0
         },
         {
@@ -9453,12 +13586,12 @@ var require_erlang = __commonJS((exports2, module2) => {
     BLOCK_STATEMENTS.contains = [
       COMMENT,
       NAMED_FUN,
-      hljs2.inherit(hljs2.APOS_STRING_MODE, {
+      hljs.inherit(hljs.APOS_STRING_MODE, {
         className: ""
       }),
       BLOCK_STATEMENTS,
       FUNCTION_CALL,
-      hljs2.QUOTE_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       NUMBER,
       TUPLE,
       VAR1,
@@ -9470,7 +13603,7 @@ var require_erlang = __commonJS((exports2, module2) => {
       NAMED_FUN,
       BLOCK_STATEMENTS,
       FUNCTION_CALL,
-      hljs2.QUOTE_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       NUMBER,
       TUPLE,
       VAR1,
@@ -9523,7 +13656,7 @@ var require_erlang = __commonJS((exports2, module2) => {
           illegal: "\\(|#|//|/\\*|\\\\|:|;",
           contains: [
             PARAMS,
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               begin: BASIC_ATOM_RE
             })
           ],
@@ -9541,13 +13674,13 @@ var require_erlang = __commonJS((exports2, module2) => {
           excludeEnd: true,
           returnBegin: true,
           keywords: {
-            $pattern: "-" + hljs2.IDENT_RE,
+            $pattern: "-" + hljs.IDENT_RE,
             keyword: DIRECTIVES.map((x) => `${x}|1.5`).join(" ")
           },
           contains: [PARAMS]
         },
         NUMBER,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         RECORD_ACCESS,
         VAR1,
         VAR2,
@@ -9563,7 +13696,7 @@ var require_erlang = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/excel.js
 var require_excel = __commonJS((exports2, module2) => {
-  function excel(hljs2) {
+  function excel(hljs) {
     return {
       name: "Excel formulae",
       aliases: [
@@ -9595,14 +13728,14 @@ var require_excel = __commonJS((exports2, module2) => {
           begin: /[A-Z]{0,2}\d*:[A-Z]{0,2}\d*/,
           relevance: 0
         },
-        hljs2.BACKSLASH_ESCAPE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.BACKSLASH_ESCAPE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "number",
-          begin: hljs2.NUMBER_RE + "(%)?",
+          begin: hljs.NUMBER_RE + "(%)?",
           relevance: 0
         },
-        hljs2.COMMENT(/\bN\(/, /\)/, {
+        hljs.COMMENT(/\bN\(/, /\)/, {
           excludeBegin: true,
           excludeEnd: true,
           illegal: /\n/
@@ -9615,7 +13748,7 @@ var require_excel = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/fix.js
 var require_fix = __commonJS((exports2, module2) => {
-  function fix(hljs2) {
+  function fix(hljs) {
     return {
       name: "FIX",
       contains: [{
@@ -9649,7 +13782,7 @@ var require_fix = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/flix.js
 var require_flix = __commonJS((exports2, module2) => {
-  function flix(hljs2) {
+  function flix(hljs) {
     const CHAR = {
       className: "string",
       begin: /'(.|\\[xXuU][a-zA-Z0-9]+)'/
@@ -9680,12 +13813,12 @@ var require_flix = __commonJS((exports2, module2) => {
         keyword: "case class def else enum if impl import in lat rel index let match namespace switch type yield with"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         CHAR,
         STRING,
         METHOD,
-        hljs2.C_NUMBER_MODE
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -9705,7 +13838,7 @@ var require_fortran = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function fortran(hljs2) {
+  function fortran(hljs) {
     const PARAMS = {
       className: "params",
       begin: "\\(",
@@ -9713,13 +13846,13 @@ var require_fortran = __commonJS((exports2, module2) => {
     };
     const COMMENT = {
       variants: [
-        hljs2.COMMENT("!", "$", {
+        hljs.COMMENT("!", "$", {
           relevance: 0
         }),
-        hljs2.COMMENT("^C[ ]", "$", {
+        hljs.COMMENT("^C[ ]", "$", {
           relevance: 0
         }),
-        hljs2.COMMENT("^C$", "$", {
+        hljs.COMMENT("^C$", "$", {
           relevance: 0
         })
       ]
@@ -9746,7 +13879,7 @@ var require_fortran = __commonJS((exports2, module2) => {
       beginKeywords: "subroutine function program",
       illegal: "[${=\\n]",
       contains: [
-        hljs2.UNDERSCORE_TITLE_MODE,
+        hljs.UNDERSCORE_TITLE_MODE,
         PARAMS
       ]
     };
@@ -9754,8 +13887,8 @@ var require_fortran = __commonJS((exports2, module2) => {
       className: "string",
       relevance: 0,
       variants: [
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE
       ]
     };
     const KEYWORDS = {
@@ -9789,12 +13922,12 @@ var require_fortran = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/fsharp.js
 var require_fsharp = __commonJS((exports2, module2) => {
-  function fsharp(hljs2) {
+  function fsharp(hljs) {
     const TYPEPARAM = {
       begin: "<",
       end: ">",
       contains: [
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           begin: /'[a-zA-Z0-9_]+/
         })
       ]
@@ -9824,7 +13957,7 @@ var require_fsharp = __commonJS((exports2, module2) => {
           begin: '"""',
           end: '"""'
         },
-        hljs2.COMMENT("\\(\\*(\\s)", "\\*\\)", {
+        hljs.COMMENT("\\(\\*(\\s)", "\\*\\)", {
           contains: ["self"]
         }),
         {
@@ -9833,7 +13966,7 @@ var require_fsharp = __commonJS((exports2, module2) => {
           end: "\\(|=|$",
           excludeEnd: true,
           contains: [
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             TYPEPARAM
           ]
         },
@@ -9846,13 +13979,13 @@ var require_fsharp = __commonJS((exports2, module2) => {
         {
           className: "symbol",
           begin: "\\B('[A-Za-z])\\b",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           illegal: null
         }),
-        hljs2.C_NUMBER_MODE
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -9875,7 +14008,7 @@ var require_gams = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function gams(hljs2) {
+  function gams(hljs) {
     const KEYWORDS = {
       keyword: "abort acronym acronyms alias all and assign binary card diag display else eq file files for free ge gt if integer le loop lt maximizing minimizing model models ne negative no not option options or ord positive prod put putpage puttl repeat sameas semicont semiint smax smin solve sos1 sos2 sum system table then until using while xor yes",
       literal: "eps inf na",
@@ -9912,7 +14045,7 @@ var require_gams = __commonJS((exports2, module2) => {
         }
       ],
       illegal: "\\n",
-      contains: [hljs2.BACKSLASH_ESCAPE]
+      contains: [hljs.BACKSLASH_ESCAPE]
     };
     const ASSIGNMENT = {
       begin: "/",
@@ -9920,11 +14053,11 @@ var require_gams = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       contains: [
         QSTR,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.C_NUMBER_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.C_NUMBER_MODE
       ]
     };
     const COMMENT_WORD = /[a-z0-9&#*=?@\\><:,()$[\]_.{}!+%^-]+/;
@@ -9949,7 +14082,7 @@ var require_gams = __commonJS((exports2, module2) => {
       case_insensitive: true,
       keywords: KEYWORDS,
       contains: [
-        hljs2.COMMENT(/^\$ontext/, /^\$offtext/),
+        hljs.COMMENT(/^\$ontext/, /^\$offtext/),
         {
           className: "meta",
           begin: "^\\$[a-z0-9]+",
@@ -9962,20 +14095,20 @@ var require_gams = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.COMMENT("^\\*", "$"),
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
+        hljs.COMMENT("^\\*", "$"),
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
         {
           beginKeywords: "set sets parameter parameters variable variables scalar scalars equation equations",
           end: ";",
           contains: [
-            hljs2.COMMENT("^\\*", "$"),
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.APOS_STRING_MODE,
+            hljs.COMMENT("^\\*", "$"),
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
             ASSIGNMENT,
             DESCTEXT
           ]
@@ -9990,12 +14123,12 @@ var require_gams = __commonJS((exports2, module2) => {
               end: "$",
               contains: [DESCTEXT]
             },
-            hljs2.COMMENT("^\\*", "$"),
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.APOS_STRING_MODE,
-            hljs2.C_NUMBER_MODE
+            hljs.COMMENT("^\\*", "$"),
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
+            hljs.C_NUMBER_MODE
           ]
         },
         {
@@ -10011,7 +14144,7 @@ var require_gams = __commonJS((exports2, module2) => {
             SYMBOLS
           ]
         },
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         SYMBOLS
       ]
     };
@@ -10021,13 +14154,13 @@ var require_gams = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/gauss.js
 var require_gauss = __commonJS((exports2, module2) => {
-  function gauss(hljs2) {
+  function gauss(hljs) {
     const KEYWORDS = {
       keyword: "bool break call callexe checkinterrupt clear clearg closeall cls comlog compile continue create debug declare delete disable dlibrary dllcall do dos ed edit else elseif enable end endfor endif endp endo errorlog errorlogat expr external fn for format goto gosub graph if keyword let lib library line load loadarray loadexe loadf loadk loadm loadp loads loadx local locate loopnextindex lprint lpwidth lshow matrix msym ndpclex new open output outwidth plot plotsym pop prcsn print printdos proc push retp return rndcon rndmod rndmult rndseed run save saveall screen scroll setarray show sparse stop string struct system trace trap threadfor threadendfor threadbegin threadjoin threadstat threadend until use while winprint ne ge le gt lt and xor or not eq eqv",
       built_in: "abs acf aconcat aeye amax amean AmericanBinomCall AmericanBinomCall_Greeks AmericanBinomCall_ImpVol AmericanBinomPut AmericanBinomPut_Greeks AmericanBinomPut_ImpVol AmericanBSCall AmericanBSCall_Greeks AmericanBSCall_ImpVol AmericanBSPut AmericanBSPut_Greeks AmericanBSPut_ImpVol amin amult annotationGetDefaults annotationSetBkd annotationSetFont annotationSetLineColor annotationSetLineStyle annotationSetLineThickness annualTradingDays arccos arcsin areshape arrayalloc arrayindex arrayinit arraytomat asciiload asclabel astd astds asum atan atan2 atranspose axmargin balance band bandchol bandcholsol bandltsol bandrv bandsolpd bar base10 begwind besselj bessely beta box boxcox cdfBeta cdfBetaInv cdfBinomial cdfBinomialInv cdfBvn cdfBvn2 cdfBvn2e cdfCauchy cdfCauchyInv cdfChic cdfChii cdfChinc cdfChincInv cdfExp cdfExpInv cdfFc cdfFnc cdfFncInv cdfGam cdfGenPareto cdfHyperGeo cdfLaplace cdfLaplaceInv cdfLogistic cdfLogisticInv cdfmControlCreate cdfMvn cdfMvn2e cdfMvnce cdfMvne cdfMvt2e cdfMvtce cdfMvte cdfN cdfN2 cdfNc cdfNegBinomial cdfNegBinomialInv cdfNi cdfPoisson cdfPoissonInv cdfRayleigh cdfRayleighInv cdfTc cdfTci cdfTnc cdfTvn cdfWeibull cdfWeibullInv cdir ceil ChangeDir chdir chiBarSquare chol choldn cholsol cholup chrs close code cols colsf combinate combinated complex con cond conj cons ConScore contour conv convertsatostr convertstrtosa corrm corrms corrvc corrx corrxs cos cosh counts countwts crossprd crout croutp csrcol csrlin csvReadM csvReadSA cumprodc cumsumc curve cvtos datacreate datacreatecomplex datalist dataload dataloop dataopen datasave date datestr datestring datestrymd dayinyr dayofweek dbAddDatabase dbClose dbCommit dbCreateQuery dbExecQuery dbGetConnectOptions dbGetDatabaseName dbGetDriverName dbGetDrivers dbGetHostName dbGetLastErrorNum dbGetLastErrorText dbGetNumericalPrecPolicy dbGetPassword dbGetPort dbGetTableHeaders dbGetTables dbGetUserName dbHasFeature dbIsDriverAvailable dbIsOpen dbIsOpenError dbOpen dbQueryBindValue dbQueryClear dbQueryCols dbQueryExecPrepared dbQueryFetchAllM dbQueryFetchAllSA dbQueryFetchOneM dbQueryFetchOneSA dbQueryFinish dbQueryGetBoundValue dbQueryGetBoundValues dbQueryGetField dbQueryGetLastErrorNum dbQueryGetLastErrorText dbQueryGetLastInsertID dbQueryGetLastQuery dbQueryGetPosition dbQueryIsActive dbQueryIsForwardOnly dbQueryIsNull dbQueryIsSelect dbQueryIsValid dbQueryPrepare dbQueryRows dbQuerySeek dbQuerySeekFirst dbQuerySeekLast dbQuerySeekNext dbQuerySeekPrevious dbQuerySetForwardOnly dbRemoveDatabase dbRollback dbSetConnectOptions dbSetDatabaseName dbSetHostName dbSetNumericalPrecPolicy dbSetPort dbSetUserName dbTransaction DeleteFile delif delrows denseToSp denseToSpRE denToZero design det detl dfft dffti diag diagrv digamma doswin DOSWinCloseall DOSWinOpen dotfeq dotfeqmt dotfge dotfgemt dotfgt dotfgtmt dotfle dotflemt dotflt dotfltmt dotfne dotfnemt draw drop dsCreate dstat dstatmt dstatmtControlCreate dtdate dtday dttime dttodtv dttostr dttoutc dtvnormal dtvtodt dtvtoutc dummy dummybr dummydn eig eigh eighv eigv elapsedTradingDays endwind envget eof eqSolve eqSolvemt eqSolvemtControlCreate eqSolvemtOutCreate eqSolveset erf erfc erfccplx erfcplx error etdays ethsec etstr EuropeanBinomCall EuropeanBinomCall_Greeks EuropeanBinomCall_ImpVol EuropeanBinomPut EuropeanBinomPut_Greeks EuropeanBinomPut_ImpVol EuropeanBSCall EuropeanBSCall_Greeks EuropeanBSCall_ImpVol EuropeanBSPut EuropeanBSPut_Greeks EuropeanBSPut_ImpVol exctsmpl exec execbg exp extern eye fcheckerr fclearerr feq feqmt fflush fft ffti fftm fftmi fftn fge fgemt fgets fgetsa fgetsat fgetst fgt fgtmt fileinfo filesa fle flemt floor flt fltmt fmod fne fnemt fonts fopen formatcv formatnv fputs fputst fseek fstrerror ftell ftocv ftos ftostrC gamma gammacplx gammaii gausset gdaAppend gdaCreate gdaDStat gdaDStatMat gdaGetIndex gdaGetName gdaGetNames gdaGetOrders gdaGetType gdaGetTypes gdaGetVarInfo gdaIsCplx gdaLoad gdaPack gdaRead gdaReadByIndex gdaReadSome gdaReadSparse gdaReadStruct gdaReportVarInfo gdaSave gdaUpdate gdaUpdateAndPack gdaVars gdaWrite gdaWrite32 gdaWriteSome getarray getdims getf getGAUSShome getmatrix getmatrix4D getname getnamef getNextTradingDay getNextWeekDay getnr getorders getpath getPreviousTradingDay getPreviousWeekDay getRow getscalar3D getscalar4D getTrRow getwind glm gradcplx gradMT gradMTm gradMTT gradMTTm gradp graphprt graphset hasimag header headermt hess hessMT hessMTg hessMTgw hessMTm hessMTmw hessMTT hessMTTg hessMTTgw hessMTTm hessMTw hessp hist histf histp hsec imag indcv indexcat indices indices2 indicesf indicesfn indnv indsav integrate1d integrateControlCreate intgrat2 intgrat3 inthp1 inthp2 inthp3 inthp4 inthpControlCreate intquad1 intquad2 intquad3 intrleav intrleavsa intrsect intsimp inv invpd invswp iscplx iscplxf isden isinfnanmiss ismiss key keyav keyw lag lag1 lagn lapEighb lapEighi lapEighvb lapEighvi lapgEig lapgEigh lapgEighv lapgEigv lapgSchur lapgSvdcst lapgSvds lapgSvdst lapSvdcusv lapSvds lapSvdusv ldlp ldlsol linSolve listwise ln lncdfbvn lncdfbvn2 lncdfmvn lncdfn lncdfn2 lncdfnc lnfact lngammacplx lnpdfmvn lnpdfmvt lnpdfn lnpdft loadd loadstruct loadwind loess loessmt loessmtControlCreate log loglog logx logy lower lowmat lowmat1 ltrisol lu lusol machEpsilon make makevars makewind margin matalloc matinit mattoarray maxbytes maxc maxindc maxv maxvec mbesselei mbesselei0 mbesselei1 mbesseli mbesseli0 mbesseli1 meanc median mergeby mergevar minc minindc minv miss missex missrv moment momentd movingave movingaveExpwgt movingaveWgt nextindex nextn nextnevn nextwind ntos null null1 numCombinations ols olsmt olsmtControlCreate olsqr olsqr2 olsqrmt ones optn optnevn orth outtyp pacf packedToSp packr parse pause pdfCauchy pdfChi pdfExp pdfGenPareto pdfHyperGeo pdfLaplace pdfLogistic pdfn pdfPoisson pdfRayleigh pdfWeibull pi pinv pinvmt plotAddArrow plotAddBar plotAddBox plotAddHist plotAddHistF plotAddHistP plotAddPolar plotAddScatter plotAddShape plotAddTextbox plotAddTS plotAddXY plotArea plotBar plotBox plotClearLayout plotContour plotCustomLayout plotGetDefaults plotHist plotHistF plotHistP plotLayout plotLogLog plotLogX plotLogY plotOpenWindow plotPolar plotSave plotScatter plotSetAxesPen plotSetBar plotSetBarFill plotSetBarStacked plotSetBkdColor plotSetFill plotSetGrid plotSetLegend plotSetLineColor plotSetLineStyle plotSetLineSymbol plotSetLineThickness plotSetNewWindow plotSetTitle plotSetWhichYAxis plotSetXAxisShow plotSetXLabel plotSetXRange plotSetXTicInterval plotSetXTicLabel plotSetYAxisShow plotSetYLabel plotSetYRange plotSetZAxisShow plotSetZLabel plotSurface plotTS plotXY polar polychar polyeval polygamma polyint polymake polymat polymroot polymult polyroot pqgwin previousindex princomp printfm printfmt prodc psi putarray putf putvals pvCreate pvGetIndex pvGetParNames pvGetParVector pvLength pvList pvPack pvPacki pvPackm pvPackmi pvPacks pvPacksi pvPacksm pvPacksmi pvPutParVector pvTest pvUnpack QNewton QNewtonmt QNewtonmtControlCreate QNewtonmtOutCreate QNewtonSet QProg QProgmt QProgmtInCreate qqr qqre qqrep qr qre qrep qrsol qrtsol qtyr qtyre qtyrep quantile quantiled qyr qyre qyrep qz rank rankindx readr real reclassify reclassifyCuts recode recserar recsercp recserrc rerun rescale reshape rets rev rfft rffti rfftip rfftn rfftnp rfftp rndBernoulli rndBeta rndBinomial rndCauchy rndChiSquare rndCon rndCreateState rndExp rndGamma rndGeo rndGumbel rndHyperGeo rndi rndKMbeta rndKMgam rndKMi rndKMn rndKMnb rndKMp rndKMu rndKMvm rndLaplace rndLCbeta rndLCgam rndLCi rndLCn rndLCnb rndLCp rndLCu rndLCvm rndLogNorm rndMTu rndMVn rndMVt rndn rndnb rndNegBinomial rndp rndPoisson rndRayleigh rndStateSkip rndu rndvm rndWeibull rndWishart rotater round rows rowsf rref sampleData satostrC saved saveStruct savewind scale scale3d scalerr scalinfnanmiss scalmiss schtoc schur searchsourcepath seekr select selif seqa seqm setdif setdifsa setvars setvwrmode setwind shell shiftr sin singleindex sinh sleep solpd sortc sortcc sortd sorthc sorthcc sortind sortindc sortmc sortr sortrc spBiconjGradSol spChol spConjGradSol spCreate spDenseSubmat spDiagRvMat spEigv spEye spLDL spline spLU spNumNZE spOnes spreadSheetReadM spreadSheetReadSA spreadSheetWrite spScale spSubmat spToDense spTrTDense spTScalar spZeros sqpSolve sqpSolveMT sqpSolveMTControlCreate sqpSolveMTlagrangeCreate sqpSolveMToutCreate sqpSolveSet sqrt statements stdc stdsc stocv stof strcombine strindx strlen strput strrindx strsect strsplit strsplitPad strtodt strtof strtofcplx strtriml strtrimr strtrunc strtruncl strtruncpad strtruncr submat subscat substute subvec sumc sumr surface svd svd1 svd2 svdcusv svds svdusv sysstate tab tan tanh tempname time timedt timestr timeutc title tkf2eps tkf2ps tocart todaydt toeplitz token topolar trapchk trigamma trimr trunc type typecv typef union unionsa uniqindx uniqindxsa unique uniquesa upmat upmat1 upper utctodt utctodtv utrisol vals varCovMS varCovXS varget vargetl varmall varmares varput varputl vartypef vcm vcms vcx vcxs vec vech vecr vector vget view viewxyz vlist vnamecv volume vput vread vtypecv wait waitc walkindex where window writer xlabel xlsGetSheetCount xlsGetSheetSize xlsGetSheetTypes xlsMakeRange xlsReadM xlsReadSA xlsWrite xlsWriteM xlsWriteSA xpnd xtics xy xyz ylabel ytics zeros zeta zlabel ztics cdfEmpirical dot h5create h5open h5read h5readAttribute h5write h5writeAttribute ldl plotAddErrorBar plotAddSurface plotCDFEmpirical plotSetColormap plotSetContourLabels plotSetLegendFont plotSetTextInterpreter plotSetXTicCount plotSetYTicCount plotSetZLevels powerm strjoin sylvester strtrim",
       literal: "DB_AFTER_LAST_ROW DB_ALL_TABLES DB_BATCH_OPERATIONS DB_BEFORE_FIRST_ROW DB_BLOB DB_EVENT_NOTIFICATIONS DB_FINISH_QUERY DB_HIGH_PRECISION DB_LAST_INSERT_ID DB_LOW_PRECISION_DOUBLE DB_LOW_PRECISION_INT32 DB_LOW_PRECISION_INT64 DB_LOW_PRECISION_NUMBERS DB_MULTIPLE_RESULT_SETS DB_NAMED_PLACEHOLDERS DB_POSITIONAL_PLACEHOLDERS DB_PREPARED_QUERIES DB_QUERY_SIZE DB_SIMPLE_LOCKING DB_SYSTEM_TABLES DB_TABLES DB_TRANSACTIONS DB_UNICODE DB_VIEWS __STDIN __STDOUT __STDERR __FILE_DIR"
     };
-    const AT_COMMENT_MODE = hljs2.COMMENT("@", "@");
+    const AT_COMMENT_MODE = hljs.COMMENT("@", "@");
     const PREPROCESSOR = {
       className: "meta",
       begin: "#",
@@ -10055,8 +14188,8 @@ var require_gauss = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         AT_COMMENT_MODE
       ]
     };
@@ -10067,7 +14200,7 @@ var require_gauss = __commonJS((exports2, module2) => {
       contains: [
         {
           className: "type",
-          begin: hljs2.UNDERSCORE_IDENT_RE,
+          begin: hljs.UNDERSCORE_IDENT_RE,
           relevance: 0
         }
       ]
@@ -10086,8 +14219,8 @@ var require_gauss = __commonJS((exports2, module2) => {
             className: "literal",
             begin: /\.\.\./
           },
-          hljs2.C_NUMBER_MODE,
-          hljs2.C_BLOCK_COMMENT_MODE,
+          hljs.C_NUMBER_MODE,
+          hljs.C_BLOCK_COMMENT_MODE,
           AT_COMMENT_MODE,
           STRUCT_TYPE
         ]
@@ -10095,11 +14228,11 @@ var require_gauss = __commonJS((exports2, module2) => {
     ];
     const FUNCTION_DEF = {
       className: "title",
-      begin: hljs2.UNDERSCORE_IDENT_RE,
+      begin: hljs.UNDERSCORE_IDENT_RE,
       relevance: 0
     };
     const DEFINITION = function(beginKeywords, end, inherits) {
-      const mode = hljs2.inherit({
+      const mode = hljs.inherit({
         className: "function",
         beginKeywords,
         end,
@@ -10107,8 +14240,8 @@ var require_gauss = __commonJS((exports2, module2) => {
         contains: [].concat(PARSE_PARAMS)
       }, inherits || {});
       mode.contains.push(FUNCTION_DEF);
-      mode.contains.push(hljs2.C_NUMBER_MODE);
-      mode.contains.push(hljs2.C_BLOCK_COMMENT_MODE);
+      mode.contains.push(hljs.C_NUMBER_MODE);
+      mode.contains.push(hljs.C_BLOCK_COMMENT_MODE);
       mode.contains.push(AT_COMMENT_MODE);
       return mode;
     };
@@ -10120,11 +14253,11 @@ var require_gauss = __commonJS((exports2, module2) => {
       className: "string",
       begin: '"',
       end: '"',
-      contains: [hljs2.BACKSLASH_ESCAPE],
+      contains: [hljs.BACKSLASH_ESCAPE],
       relevance: 0
     };
     const FUNCTION_REF = {
-      begin: hljs2.UNDERSCORE_IDENT_RE + "\\s*\\(",
+      begin: hljs.UNDERSCORE_IDENT_RE + "\\s*\\(",
       returnBegin: true,
       keywords: KEYWORDS,
       relevance: 0,
@@ -10135,7 +14268,7 @@ var require_gauss = __commonJS((exports2, module2) => {
         BUILT_IN_REF,
         {
           className: "built_in",
-          begin: hljs2.UNDERSCORE_IDENT_RE,
+          begin: hljs.UNDERSCORE_IDENT_RE,
           relevance: 0
         }
       ]
@@ -10149,8 +14282,8 @@ var require_gauss = __commonJS((exports2, module2) => {
         literal: KEYWORDS.literal
       },
       contains: [
-        hljs2.C_NUMBER_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         AT_COMMENT_MODE,
         BUILT_IN_REF,
         FUNCTION_REF,
@@ -10166,9 +14299,9 @@ var require_gauss = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       illegal: /(\{[%#]|[%#]\}| <- )/,
       contains: [
-        hljs2.C_NUMBER_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         AT_COMMENT_MODE,
         STRING_REF,
         PREPROCESSOR,
@@ -10183,7 +14316,7 @@ var require_gauss = __commonJS((exports2, module2) => {
           end: /;/,
           relevance: 0,
           contains: [
-            hljs2.C_BLOCK_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
             AT_COMMENT_MODE,
             FUNCTION_REF_PARAMS
           ]
@@ -10191,10 +14324,10 @@ var require_gauss = __commonJS((exports2, module2) => {
         {
           variants: [
             {
-              begin: hljs2.UNDERSCORE_IDENT_RE + "\\." + hljs2.UNDERSCORE_IDENT_RE
+              begin: hljs.UNDERSCORE_IDENT_RE + "\\." + hljs.UNDERSCORE_IDENT_RE
             },
             {
-              begin: hljs2.UNDERSCORE_IDENT_RE + "\\s*="
+              begin: hljs.UNDERSCORE_IDENT_RE + "\\s*="
             }
           ],
           relevance: 0
@@ -10209,7 +14342,7 @@ var require_gauss = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/gcode.js
 var require_gcode = __commonJS((exports2, module2) => {
-  function gcode(hljs2) {
+  function gcode(hljs) {
     const GCODE_IDENT_RE = "[A-Z_][A-Z0-9_.]*";
     const GCODE_CLOSE_RE = "%";
     const GCODE_KEYWORDS = {
@@ -10220,18 +14353,18 @@ var require_gcode = __commonJS((exports2, module2) => {
       className: "meta",
       begin: "([O])([0-9]+)"
     };
-    const NUMBER = hljs2.inherit(hljs2.C_NUMBER_MODE, {
-      begin: "([-+]?((\\.\\d+)|(\\d+)(\\.\\d*)?))|" + hljs2.C_NUMBER_RE
+    const NUMBER = hljs.inherit(hljs.C_NUMBER_MODE, {
+      begin: "([-+]?((\\.\\d+)|(\\d+)(\\.\\d*)?))|" + hljs.C_NUMBER_RE
     });
     const GCODE_CODE = [
-      hljs2.C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.COMMENT(/\(/, /\)/),
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.COMMENT(/\(/, /\)/),
       NUMBER,
-      hljs2.inherit(hljs2.APOS_STRING_MODE, {
+      hljs.inherit(hljs.APOS_STRING_MODE, {
         illegal: null
       }),
-      hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+      hljs.inherit(hljs.QUOTE_STRING_MODE, {
         illegal: null
       }),
       {
@@ -10289,7 +14422,7 @@ var require_gcode = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/gherkin.js
 var require_gherkin = __commonJS((exports2, module2) => {
-  function gherkin(hljs2) {
+  function gherkin(hljs) {
     return {
       name: "Gherkin",
       aliases: ["feature"],
@@ -10319,13 +14452,13 @@ var require_gherkin = __commonJS((exports2, module2) => {
           begin: "<",
           end: ">"
         },
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           className: "string",
           begin: '"""',
           end: '"""'
         },
-        hljs2.QUOTE_STRING_MODE
+        hljs.QUOTE_STRING_MODE
       ]
     };
   }
@@ -10334,7 +14467,7 @@ var require_gherkin = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/glsl.js
 var require_glsl = __commonJS((exports2, module2) => {
-  function glsl(hljs2) {
+  function glsl(hljs) {
     return {
       name: "GLSL",
       keywords: {
@@ -10345,9 +14478,9 @@ var require_glsl = __commonJS((exports2, module2) => {
       },
       illegal: '"',
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: "#",
@@ -10361,7 +14494,7 @@ var require_glsl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/gml.js
 var require_gml = __commonJS((exports2, module2) => {
-  function gml(hljs2) {
+  function gml(hljs) {
     const GML_KEYWORDS = {
       keyword: "begin end if then else while do for break continue with until repeat exit and or xor not return mod div switch case default var globalvar enum function constructor delete #macro #region #endregion",
       built_in: "is_real is_string is_array is_undefined is_int32 is_int64 is_ptr is_vec3 is_vec4 is_matrix is_bool is_method is_struct is_infinity is_nan is_numeric typeof variable_global_exists variable_global_get variable_global_set variable_instance_exists variable_instance_get variable_instance_set variable_instance_get_names variable_struct_exists variable_struct_get variable_struct_get_names variable_struct_names_count variable_struct_remove variable_struct_set array_delete array_insert array_length array_length_1d array_length_2d array_height_2d array_equals array_create array_copy array_pop array_push array_resize array_sort random random_range irandom irandom_range random_set_seed random_get_seed randomize randomise choose abs round floor ceil sign frac sqrt sqr exp ln log2 log10 sin cos tan arcsin arccos arctan arctan2 dsin dcos dtan darcsin darccos darctan darctan2 degtorad radtodeg power logn min max mean median clamp lerp dot_product dot_product_3d dot_product_normalised dot_product_3d_normalised dot_product_normalized dot_product_3d_normalized math_set_epsilon math_get_epsilon angle_difference point_distance_3d point_distance point_direction lengthdir_x lengthdir_y real string int64 ptr string_format chr ansi_char ord string_length string_byte_length string_pos string_copy string_char_at string_ord_at string_byte_at string_set_byte_at string_delete string_insert string_lower string_upper string_repeat string_letters string_digits string_lettersdigits string_replace string_replace_all string_count string_hash_to_newline clipboard_has_text clipboard_set_text clipboard_get_text date_current_datetime date_create_datetime date_valid_datetime date_inc_year date_inc_month date_inc_week date_inc_day date_inc_hour date_inc_minute date_inc_second date_get_year date_get_month date_get_week date_get_day date_get_hour date_get_minute date_get_second date_get_weekday date_get_day_of_year date_get_hour_of_year date_get_minute_of_year date_get_second_of_year date_year_span date_month_span date_week_span date_day_span date_hour_span date_minute_span date_second_span date_compare_datetime date_compare_date date_compare_time date_date_of date_time_of date_datetime_string date_date_string date_time_string date_days_in_month date_days_in_year date_leap_year date_is_today date_set_timezone date_get_timezone game_set_speed game_get_speed motion_set motion_add place_free place_empty place_meeting place_snapped move_random move_snap move_towards_point move_contact_solid move_contact_all move_outside_solid move_outside_all move_bounce_solid move_bounce_all move_wrap distance_to_point distance_to_object position_empty position_meeting path_start path_end mp_linear_step mp_potential_step mp_linear_step_object mp_potential_step_object mp_potential_settings mp_linear_path mp_potential_path mp_linear_path_object mp_potential_path_object mp_grid_create mp_grid_destroy mp_grid_clear_all mp_grid_clear_cell mp_grid_clear_rectangle mp_grid_add_cell mp_grid_get_cell mp_grid_add_rectangle mp_grid_add_instances mp_grid_path mp_grid_draw mp_grid_to_ds_grid collision_point collision_rectangle collision_circle collision_ellipse collision_line collision_point_list collision_rectangle_list collision_circle_list collision_ellipse_list collision_line_list instance_position_list instance_place_list point_in_rectangle point_in_triangle point_in_circle rectangle_in_rectangle rectangle_in_triangle rectangle_in_circle instance_find instance_exists instance_number instance_position instance_nearest instance_furthest instance_place instance_create_depth instance_create_layer instance_copy instance_change instance_destroy position_destroy position_change instance_id_get instance_deactivate_all instance_deactivate_object instance_deactivate_region instance_activate_all instance_activate_object instance_activate_region room_goto room_goto_previous room_goto_next room_previous room_next room_restart game_end game_restart game_load game_save game_save_buffer game_load_buffer event_perform event_user event_perform_object event_inherited show_debug_message show_debug_overlay debug_event debug_get_callstack alarm_get alarm_set font_texture_page_size keyboard_set_map keyboard_get_map keyboard_unset_map keyboard_check keyboard_check_pressed keyboard_check_released keyboard_check_direct keyboard_get_numlock keyboard_set_numlock keyboard_key_press keyboard_key_release keyboard_clear io_clear mouse_check_button mouse_check_button_pressed mouse_check_button_released mouse_wheel_up mouse_wheel_down mouse_clear draw_self draw_sprite draw_sprite_pos draw_sprite_ext draw_sprite_stretched draw_sprite_stretched_ext draw_sprite_tiled draw_sprite_tiled_ext draw_sprite_part draw_sprite_part_ext draw_sprite_general draw_clear draw_clear_alpha draw_point draw_line draw_line_width draw_rectangle draw_roundrect draw_roundrect_ext draw_triangle draw_circle draw_ellipse draw_set_circle_precision draw_arrow draw_button draw_path draw_healthbar draw_getpixel draw_getpixel_ext draw_set_colour draw_set_color draw_set_alpha draw_get_colour draw_get_color draw_get_alpha merge_colour make_colour_rgb make_colour_hsv colour_get_red colour_get_green colour_get_blue colour_get_hue colour_get_saturation colour_get_value merge_color make_color_rgb make_color_hsv color_get_red color_get_green color_get_blue color_get_hue color_get_saturation color_get_value merge_color screen_save screen_save_part draw_set_font draw_set_halign draw_set_valign draw_text draw_text_ext string_width string_height string_width_ext string_height_ext draw_text_transformed draw_text_ext_transformed draw_text_colour draw_text_ext_colour draw_text_transformed_colour draw_text_ext_transformed_colour draw_text_color draw_text_ext_color draw_text_transformed_color draw_text_ext_transformed_color draw_point_colour draw_line_colour draw_line_width_colour draw_rectangle_colour draw_roundrect_colour draw_roundrect_colour_ext draw_triangle_colour draw_circle_colour draw_ellipse_colour draw_point_color draw_line_color draw_line_width_color draw_rectangle_color draw_roundrect_color draw_roundrect_color_ext draw_triangle_color draw_circle_color draw_ellipse_color draw_primitive_begin draw_vertex draw_vertex_colour draw_vertex_color draw_primitive_end sprite_get_uvs font_get_uvs sprite_get_texture font_get_texture texture_get_width texture_get_height texture_get_uvs draw_primitive_begin_texture draw_vertex_texture draw_vertex_texture_colour draw_vertex_texture_color texture_global_scale surface_create surface_create_ext surface_resize surface_free surface_exists surface_get_width surface_get_height surface_get_texture surface_set_target surface_set_target_ext surface_reset_target surface_depth_disable surface_get_depth_disable draw_surface draw_surface_stretched draw_surface_tiled draw_surface_part draw_surface_ext draw_surface_stretched_ext draw_surface_tiled_ext draw_surface_part_ext draw_surface_general surface_getpixel surface_getpixel_ext surface_save surface_save_part surface_copy surface_copy_part application_surface_draw_enable application_get_position application_surface_enable application_surface_is_enabled display_get_width display_get_height display_get_orientation display_get_gui_width display_get_gui_height display_reset display_mouse_get_x display_mouse_get_y display_mouse_set display_set_ui_visibility window_set_fullscreen window_get_fullscreen window_set_caption window_set_min_width window_set_max_width window_set_min_height window_set_max_height window_get_visible_rects window_get_caption window_set_cursor window_get_cursor window_set_colour window_get_colour window_set_color window_get_color window_set_position window_set_size window_set_rectangle window_center window_get_x window_get_y window_get_width window_get_height window_mouse_get_x window_mouse_get_y window_mouse_set window_view_mouse_get_x window_view_mouse_get_y window_views_mouse_get_x window_views_mouse_get_y audio_listener_position audio_listener_velocity audio_listener_orientation audio_emitter_position audio_emitter_create audio_emitter_free audio_emitter_exists audio_emitter_pitch audio_emitter_velocity audio_emitter_falloff audio_emitter_gain audio_play_sound audio_play_sound_on audio_play_sound_at audio_stop_sound audio_resume_music audio_music_is_playing audio_resume_sound audio_pause_sound audio_pause_music audio_channel_num audio_sound_length audio_get_type audio_falloff_set_model audio_play_music audio_stop_music audio_master_gain audio_music_gain audio_sound_gain audio_sound_pitch audio_stop_all audio_resume_all audio_pause_all audio_is_playing audio_is_paused audio_exists audio_sound_set_track_position audio_sound_get_track_position audio_emitter_get_gain audio_emitter_get_pitch audio_emitter_get_x audio_emitter_get_y audio_emitter_get_z audio_emitter_get_vx audio_emitter_get_vy audio_emitter_get_vz audio_listener_set_position audio_listener_set_velocity audio_listener_set_orientation audio_listener_get_data audio_set_master_gain audio_get_master_gain audio_sound_get_gain audio_sound_get_pitch audio_get_name audio_sound_set_track_position audio_sound_get_track_position audio_create_stream audio_destroy_stream audio_create_sync_group audio_destroy_sync_group audio_play_in_sync_group audio_start_sync_group audio_stop_sync_group audio_pause_sync_group audio_resume_sync_group audio_sync_group_get_track_pos audio_sync_group_debug audio_sync_group_is_playing audio_debug audio_group_load audio_group_unload audio_group_is_loaded audio_group_load_progress audio_group_name audio_group_stop_all audio_group_set_gain audio_create_buffer_sound audio_free_buffer_sound audio_create_play_queue audio_free_play_queue audio_queue_sound audio_get_recorder_count audio_get_recorder_info audio_start_recording audio_stop_recording audio_sound_get_listener_mask audio_emitter_get_listener_mask audio_get_listener_mask audio_sound_set_listener_mask audio_emitter_set_listener_mask audio_set_listener_mask audio_get_listener_count audio_get_listener_info audio_system show_message show_message_async clickable_add clickable_add_ext clickable_change clickable_change_ext clickable_delete clickable_exists clickable_set_style show_question show_question_async get_integer get_string get_integer_async get_string_async get_login_async get_open_filename get_save_filename get_open_filename_ext get_save_filename_ext show_error highscore_clear highscore_add highscore_value highscore_name draw_highscore sprite_exists sprite_get_name sprite_get_number sprite_get_width sprite_get_height sprite_get_xoffset sprite_get_yoffset sprite_get_bbox_left sprite_get_bbox_right sprite_get_bbox_top sprite_get_bbox_bottom sprite_save sprite_save_strip sprite_set_cache_size sprite_set_cache_size_ext sprite_get_tpe sprite_prefetch sprite_prefetch_multi sprite_flush sprite_flush_multi sprite_set_speed sprite_get_speed_type sprite_get_speed font_exists font_get_name font_get_fontname font_get_bold font_get_italic font_get_first font_get_last font_get_size font_set_cache_size path_exists path_get_name path_get_length path_get_time path_get_kind path_get_closed path_get_precision path_get_number path_get_point_x path_get_point_y path_get_point_speed path_get_x path_get_y path_get_speed script_exists script_get_name timeline_add timeline_delete timeline_clear timeline_exists timeline_get_name timeline_moment_clear timeline_moment_add_script timeline_size timeline_max_moment object_exists object_get_name object_get_sprite object_get_solid object_get_visible object_get_persistent object_get_mask object_get_parent object_get_physics object_is_ancestor room_exists room_get_name sprite_set_offset sprite_duplicate sprite_assign sprite_merge sprite_add sprite_replace sprite_create_from_surface sprite_add_from_surface sprite_delete sprite_set_alpha_from_sprite sprite_collision_mask font_add_enable_aa font_add_get_enable_aa font_add font_add_sprite font_add_sprite_ext font_replace font_replace_sprite font_replace_sprite_ext font_delete path_set_kind path_set_closed path_set_precision path_add path_assign path_duplicate path_append path_delete path_add_point path_insert_point path_change_point path_delete_point path_clear_points path_reverse path_mirror path_flip path_rotate path_rescale path_shift script_execute object_set_sprite object_set_solid object_set_visible object_set_persistent object_set_mask room_set_width room_set_height room_set_persistent room_set_background_colour room_set_background_color room_set_view room_set_viewport room_get_viewport room_set_view_enabled room_add room_duplicate room_assign room_instance_add room_instance_clear room_get_camera room_set_camera asset_get_index asset_get_type file_text_open_from_string file_text_open_read file_text_open_write file_text_open_append file_text_close file_text_write_string file_text_write_real file_text_writeln file_text_read_string file_text_read_real file_text_readln file_text_eof file_text_eoln file_exists file_delete file_rename file_copy directory_exists directory_create directory_destroy file_find_first file_find_next file_find_close file_attributes filename_name filename_path filename_dir filename_drive filename_ext filename_change_ext file_bin_open file_bin_rewrite file_bin_close file_bin_position file_bin_size file_bin_seek file_bin_write_byte file_bin_read_byte parameter_count parameter_string environment_get_variable ini_open_from_string ini_open ini_close ini_read_string ini_read_real ini_write_string ini_write_real ini_key_exists ini_section_exists ini_key_delete ini_section_delete ds_set_precision ds_exists ds_stack_create ds_stack_destroy ds_stack_clear ds_stack_copy ds_stack_size ds_stack_empty ds_stack_push ds_stack_pop ds_stack_top ds_stack_write ds_stack_read ds_queue_create ds_queue_destroy ds_queue_clear ds_queue_copy ds_queue_size ds_queue_empty ds_queue_enqueue ds_queue_dequeue ds_queue_head ds_queue_tail ds_queue_write ds_queue_read ds_list_create ds_list_destroy ds_list_clear ds_list_copy ds_list_size ds_list_empty ds_list_add ds_list_insert ds_list_replace ds_list_delete ds_list_find_index ds_list_find_value ds_list_mark_as_list ds_list_mark_as_map ds_list_sort ds_list_shuffle ds_list_write ds_list_read ds_list_set ds_map_create ds_map_destroy ds_map_clear ds_map_copy ds_map_size ds_map_empty ds_map_add ds_map_add_list ds_map_add_map ds_map_replace ds_map_replace_map ds_map_replace_list ds_map_delete ds_map_exists ds_map_find_value ds_map_find_previous ds_map_find_next ds_map_find_first ds_map_find_last ds_map_write ds_map_read ds_map_secure_save ds_map_secure_load ds_map_secure_load_buffer ds_map_secure_save_buffer ds_map_set ds_priority_create ds_priority_destroy ds_priority_clear ds_priority_copy ds_priority_size ds_priority_empty ds_priority_add ds_priority_change_priority ds_priority_find_priority ds_priority_delete_value ds_priority_delete_min ds_priority_find_min ds_priority_delete_max ds_priority_find_max ds_priority_write ds_priority_read ds_grid_create ds_grid_destroy ds_grid_copy ds_grid_resize ds_grid_width ds_grid_height ds_grid_clear ds_grid_set ds_grid_add ds_grid_multiply ds_grid_set_region ds_grid_add_region ds_grid_multiply_region ds_grid_set_disk ds_grid_add_disk ds_grid_multiply_disk ds_grid_set_grid_region ds_grid_add_grid_region ds_grid_multiply_grid_region ds_grid_get ds_grid_get_sum ds_grid_get_max ds_grid_get_min ds_grid_get_mean ds_grid_get_disk_sum ds_grid_get_disk_min ds_grid_get_disk_max ds_grid_get_disk_mean ds_grid_value_exists ds_grid_value_x ds_grid_value_y ds_grid_value_disk_exists ds_grid_value_disk_x ds_grid_value_disk_y ds_grid_shuffle ds_grid_write ds_grid_read ds_grid_sort ds_grid_set ds_grid_get effect_create_below effect_create_above effect_clear part_type_create part_type_destroy part_type_exists part_type_clear part_type_shape part_type_sprite part_type_size part_type_scale part_type_orientation part_type_life part_type_step part_type_death part_type_speed part_type_direction part_type_gravity part_type_colour1 part_type_colour2 part_type_colour3 part_type_colour_mix part_type_colour_rgb part_type_colour_hsv part_type_color1 part_type_color2 part_type_color3 part_type_color_mix part_type_color_rgb part_type_color_hsv part_type_alpha1 part_type_alpha2 part_type_alpha3 part_type_blend part_system_create part_system_create_layer part_system_destroy part_system_exists part_system_clear part_system_draw_order part_system_depth part_system_position part_system_automatic_update part_system_automatic_draw part_system_update part_system_drawit part_system_get_layer part_system_layer part_particles_create part_particles_create_colour part_particles_create_color part_particles_clear part_particles_count part_emitter_create part_emitter_destroy part_emitter_destroy_all part_emitter_exists part_emitter_clear part_emitter_region part_emitter_burst part_emitter_stream external_call external_define external_free window_handle window_device matrix_get matrix_set matrix_build_identity matrix_build matrix_build_lookat matrix_build_projection_ortho matrix_build_projection_perspective matrix_build_projection_perspective_fov matrix_multiply matrix_transform_vertex matrix_stack_push matrix_stack_pop matrix_stack_multiply matrix_stack_set matrix_stack_clear matrix_stack_top matrix_stack_is_empty browser_input_capture os_get_config os_get_info os_get_language os_get_region os_lock_orientation display_get_dpi_x display_get_dpi_y display_set_gui_size display_set_gui_maximise display_set_gui_maximize device_mouse_dbclick_enable display_set_timing_method display_get_timing_method display_set_sleep_margin display_get_sleep_margin virtual_key_add virtual_key_hide virtual_key_delete virtual_key_show draw_enable_drawevent draw_enable_swf_aa draw_set_swf_aa_level draw_get_swf_aa_level draw_texture_flush draw_flush gpu_set_blendenable gpu_set_ztestenable gpu_set_zfunc gpu_set_zwriteenable gpu_set_lightingenable gpu_set_fog gpu_set_cullmode gpu_set_blendmode gpu_set_blendmode_ext gpu_set_blendmode_ext_sepalpha gpu_set_colorwriteenable gpu_set_colourwriteenable gpu_set_alphatestenable gpu_set_alphatestref gpu_set_alphatestfunc gpu_set_texfilter gpu_set_texfilter_ext gpu_set_texrepeat gpu_set_texrepeat_ext gpu_set_tex_filter gpu_set_tex_filter_ext gpu_set_tex_repeat gpu_set_tex_repeat_ext gpu_set_tex_mip_filter gpu_set_tex_mip_filter_ext gpu_set_tex_mip_bias gpu_set_tex_mip_bias_ext gpu_set_tex_min_mip gpu_set_tex_min_mip_ext gpu_set_tex_max_mip gpu_set_tex_max_mip_ext gpu_set_tex_max_aniso gpu_set_tex_max_aniso_ext gpu_set_tex_mip_enable gpu_set_tex_mip_enable_ext gpu_get_blendenable gpu_get_ztestenable gpu_get_zfunc gpu_get_zwriteenable gpu_get_lightingenable gpu_get_fog gpu_get_cullmode gpu_get_blendmode gpu_get_blendmode_ext gpu_get_blendmode_ext_sepalpha gpu_get_blendmode_src gpu_get_blendmode_dest gpu_get_blendmode_srcalpha gpu_get_blendmode_destalpha gpu_get_colorwriteenable gpu_get_colourwriteenable gpu_get_alphatestenable gpu_get_alphatestref gpu_get_alphatestfunc gpu_get_texfilter gpu_get_texfilter_ext gpu_get_texrepeat gpu_get_texrepeat_ext gpu_get_tex_filter gpu_get_tex_filter_ext gpu_get_tex_repeat gpu_get_tex_repeat_ext gpu_get_tex_mip_filter gpu_get_tex_mip_filter_ext gpu_get_tex_mip_bias gpu_get_tex_mip_bias_ext gpu_get_tex_min_mip gpu_get_tex_min_mip_ext gpu_get_tex_max_mip gpu_get_tex_max_mip_ext gpu_get_tex_max_aniso gpu_get_tex_max_aniso_ext gpu_get_tex_mip_enable gpu_get_tex_mip_enable_ext gpu_push_state gpu_pop_state gpu_get_state gpu_set_state draw_light_define_ambient draw_light_define_direction draw_light_define_point draw_light_enable draw_set_lighting draw_light_get_ambient draw_light_get draw_get_lighting shop_leave_rating url_get_domain url_open url_open_ext url_open_full get_timer achievement_login achievement_logout achievement_post achievement_increment achievement_post_score achievement_available achievement_show_achievements achievement_show_leaderboards achievement_load_friends achievement_load_leaderboard achievement_send_challenge achievement_load_progress achievement_reset achievement_login_status achievement_get_pic achievement_show_challenge_notifications achievement_get_challenges achievement_event achievement_show achievement_get_info cloud_file_save cloud_string_save cloud_synchronise ads_enable ads_disable ads_setup ads_engagement_launch ads_engagement_available ads_engagement_active ads_event ads_event_preload ads_set_reward_callback ads_get_display_height ads_get_display_width ads_move ads_interstitial_available ads_interstitial_display device_get_tilt_x device_get_tilt_y device_get_tilt_z device_is_keypad_open device_mouse_check_button device_mouse_check_button_pressed device_mouse_check_button_released device_mouse_x device_mouse_y device_mouse_raw_x device_mouse_raw_y device_mouse_x_to_gui device_mouse_y_to_gui iap_activate iap_status iap_enumerate_products iap_restore_all iap_acquire iap_consume iap_product_details iap_purchase_details facebook_init facebook_login facebook_status facebook_graph_request facebook_dialog facebook_logout facebook_launch_offerwall facebook_post_message facebook_send_invite facebook_user_id facebook_accesstoken facebook_check_permission facebook_request_read_permissions facebook_request_publish_permissions gamepad_is_supported gamepad_get_device_count gamepad_is_connected gamepad_get_description gamepad_get_button_threshold gamepad_set_button_threshold gamepad_get_axis_deadzone gamepad_set_axis_deadzone gamepad_button_count gamepad_button_check gamepad_button_check_pressed gamepad_button_check_released gamepad_button_value gamepad_axis_count gamepad_axis_value gamepad_set_vibration gamepad_set_colour gamepad_set_color os_is_paused window_has_focus code_is_compiled http_get http_get_file http_post_string http_request json_encode json_decode zip_unzip load_csv base64_encode base64_decode md5_string_unicode md5_string_utf8 md5_file os_is_network_connected sha1_string_unicode sha1_string_utf8 sha1_file os_powersave_enable analytics_event analytics_event_ext win8_livetile_tile_notification win8_livetile_tile_clear win8_livetile_badge_notification win8_livetile_badge_clear win8_livetile_queue_enable win8_secondarytile_pin win8_secondarytile_badge_notification win8_secondarytile_delete win8_livetile_notification_begin win8_livetile_notification_secondary_begin win8_livetile_notification_expiry win8_livetile_notification_tag win8_livetile_notification_text_add win8_livetile_notification_image_add win8_livetile_notification_end win8_appbar_enable win8_appbar_add_element win8_appbar_remove_element win8_settingscharm_add_entry win8_settingscharm_add_html_entry win8_settingscharm_add_xaml_entry win8_settingscharm_set_xaml_property win8_settingscharm_get_xaml_property win8_settingscharm_remove_entry win8_share_image win8_share_screenshot win8_share_file win8_share_url win8_share_text win8_search_enable win8_search_disable win8_search_add_suggestions win8_device_touchscreen_available win8_license_initialize_sandbox win8_license_trial_version winphone_license_trial_version winphone_tile_title winphone_tile_count winphone_tile_back_title winphone_tile_back_content winphone_tile_back_content_wide winphone_tile_front_image winphone_tile_front_image_small winphone_tile_front_image_wide winphone_tile_back_image winphone_tile_back_image_wide winphone_tile_background_colour winphone_tile_background_color winphone_tile_icon_image winphone_tile_small_icon_image winphone_tile_wide_content winphone_tile_cycle_images winphone_tile_small_background_image physics_world_create physics_world_gravity physics_world_update_speed physics_world_update_iterations physics_world_draw_debug physics_pause_enable physics_fixture_create physics_fixture_set_kinematic physics_fixture_set_density physics_fixture_set_awake physics_fixture_set_restitution physics_fixture_set_friction physics_fixture_set_collision_group physics_fixture_set_sensor physics_fixture_set_linear_damping physics_fixture_set_angular_damping physics_fixture_set_circle_shape physics_fixture_set_box_shape physics_fixture_set_edge_shape physics_fixture_set_polygon_shape physics_fixture_set_chain_shape physics_fixture_add_point physics_fixture_bind physics_fixture_bind_ext physics_fixture_delete physics_apply_force physics_apply_impulse physics_apply_angular_impulse physics_apply_local_force physics_apply_local_impulse physics_apply_torque physics_mass_properties physics_draw_debug physics_test_overlap physics_remove_fixture physics_set_friction physics_set_density physics_set_restitution physics_get_friction physics_get_density physics_get_restitution physics_joint_distance_create physics_joint_rope_create physics_joint_revolute_create physics_joint_prismatic_create physics_joint_pulley_create physics_joint_wheel_create physics_joint_weld_create physics_joint_friction_create physics_joint_gear_create physics_joint_enable_motor physics_joint_get_value physics_joint_set_value physics_joint_delete physics_particle_create physics_particle_delete physics_particle_delete_region_circle physics_particle_delete_region_box physics_particle_delete_region_poly physics_particle_set_flags physics_particle_set_category_flags physics_particle_draw physics_particle_draw_ext physics_particle_count physics_particle_get_data physics_particle_get_data_particle physics_particle_group_begin physics_particle_group_circle physics_particle_group_box physics_particle_group_polygon physics_particle_group_add_point physics_particle_group_end physics_particle_group_join physics_particle_group_delete physics_particle_group_count physics_particle_group_get_data physics_particle_group_get_mass physics_particle_group_get_inertia physics_particle_group_get_centre_x physics_particle_group_get_centre_y physics_particle_group_get_vel_x physics_particle_group_get_vel_y physics_particle_group_get_ang_vel physics_particle_group_get_x physics_particle_group_get_y physics_particle_group_get_angle physics_particle_set_group_flags physics_particle_get_group_flags physics_particle_get_max_count physics_particle_get_radius physics_particle_get_density physics_particle_get_damping physics_particle_get_gravity_scale physics_particle_set_max_count physics_particle_set_radius physics_particle_set_density physics_particle_set_damping physics_particle_set_gravity_scale network_create_socket network_create_socket_ext network_create_server network_create_server_raw network_connect network_connect_raw network_send_packet network_send_raw network_send_broadcast network_send_udp network_send_udp_raw network_set_timeout network_set_config network_resolve network_destroy buffer_create buffer_write buffer_read buffer_seek buffer_get_surface buffer_set_surface buffer_delete buffer_exists buffer_get_type buffer_get_alignment buffer_poke buffer_peek buffer_save buffer_save_ext buffer_load buffer_load_ext buffer_load_partial buffer_copy buffer_fill buffer_get_size buffer_tell buffer_resize buffer_md5 buffer_sha1 buffer_base64_encode buffer_base64_decode buffer_base64_decode_ext buffer_sizeof buffer_get_address buffer_create_from_vertex_buffer buffer_create_from_vertex_buffer_ext buffer_copy_from_vertex_buffer buffer_async_group_begin buffer_async_group_option buffer_async_group_end buffer_load_async buffer_save_async gml_release_mode gml_pragma steam_activate_overlay steam_is_overlay_enabled steam_is_overlay_activated steam_get_persona_name steam_initialised steam_is_cloud_enabled_for_app steam_is_cloud_enabled_for_account steam_file_persisted steam_get_quota_total steam_get_quota_free steam_file_write steam_file_write_file steam_file_read steam_file_delete steam_file_exists steam_file_size steam_file_share steam_is_screenshot_requested steam_send_screenshot steam_is_user_logged_on steam_get_user_steam_id steam_user_owns_dlc steam_user_installed_dlc steam_set_achievement steam_get_achievement steam_clear_achievement steam_set_stat_int steam_set_stat_float steam_set_stat_avg_rate steam_get_stat_int steam_get_stat_float steam_get_stat_avg_rate steam_reset_all_stats steam_reset_all_stats_achievements steam_stats_ready steam_create_leaderboard steam_upload_score steam_upload_score_ext steam_download_scores_around_user steam_download_scores steam_download_friends_scores steam_upload_score_buffer steam_upload_score_buffer_ext steam_current_game_language steam_available_languages steam_activate_overlay_browser steam_activate_overlay_user steam_activate_overlay_store steam_get_user_persona_name steam_get_app_id steam_get_user_account_id steam_ugc_download steam_ugc_create_item steam_ugc_start_item_update steam_ugc_set_item_title steam_ugc_set_item_description steam_ugc_set_item_visibility steam_ugc_set_item_tags steam_ugc_set_item_content steam_ugc_set_item_preview steam_ugc_submit_item_update steam_ugc_get_item_update_progress steam_ugc_subscribe_item steam_ugc_unsubscribe_item steam_ugc_num_subscribed_items steam_ugc_get_subscribed_items steam_ugc_get_item_install_info steam_ugc_get_item_update_info steam_ugc_request_item_details steam_ugc_create_query_user steam_ugc_create_query_user_ex steam_ugc_create_query_all steam_ugc_create_query_all_ex steam_ugc_query_set_cloud_filename_filter steam_ugc_query_set_match_any_tag steam_ugc_query_set_search_text steam_ugc_query_set_ranked_by_trend_days steam_ugc_query_add_required_tag steam_ugc_query_add_excluded_tag steam_ugc_query_set_return_long_description steam_ugc_query_set_return_total_only steam_ugc_query_set_allow_cached_response steam_ugc_send_query shader_set shader_get_name shader_reset shader_current shader_is_compiled shader_get_sampler_index shader_get_uniform shader_set_uniform_i shader_set_uniform_i_array shader_set_uniform_f shader_set_uniform_f_array shader_set_uniform_matrix shader_set_uniform_matrix_array shader_enable_corner_id texture_set_stage texture_get_texel_width texture_get_texel_height shaders_are_supported vertex_format_begin vertex_format_end vertex_format_delete vertex_format_add_position vertex_format_add_position_3d vertex_format_add_colour vertex_format_add_color vertex_format_add_normal vertex_format_add_texcoord vertex_format_add_textcoord vertex_format_add_custom vertex_create_buffer vertex_create_buffer_ext vertex_delete_buffer vertex_begin vertex_end vertex_position vertex_position_3d vertex_colour vertex_color vertex_argb vertex_texcoord vertex_normal vertex_float1 vertex_float2 vertex_float3 vertex_float4 vertex_ubyte4 vertex_submit vertex_freeze vertex_get_number vertex_get_buffer_size vertex_create_buffer_from_buffer vertex_create_buffer_from_buffer_ext push_local_notification push_get_first_local_notification push_get_next_local_notification push_cancel_local_notification skeleton_animation_set skeleton_animation_get skeleton_animation_mix skeleton_animation_set_ext skeleton_animation_get_ext skeleton_animation_get_duration skeleton_animation_get_frames skeleton_animation_clear skeleton_skin_set skeleton_skin_get skeleton_attachment_set skeleton_attachment_get skeleton_attachment_create skeleton_collision_draw_set skeleton_bone_data_get skeleton_bone_data_set skeleton_bone_state_get skeleton_bone_state_set skeleton_get_minmax skeleton_get_num_bounds skeleton_get_bounds skeleton_animation_get_frame skeleton_animation_set_frame draw_skeleton draw_skeleton_time draw_skeleton_instance draw_skeleton_collision skeleton_animation_list skeleton_skin_list skeleton_slot_data layer_get_id layer_get_id_at_depth layer_get_depth layer_create layer_destroy layer_destroy_instances layer_add_instance layer_has_instance layer_set_visible layer_get_visible layer_exists layer_x layer_y layer_get_x layer_get_y layer_hspeed layer_vspeed layer_get_hspeed layer_get_vspeed layer_script_begin layer_script_end layer_shader layer_get_script_begin layer_get_script_end layer_get_shader layer_set_target_room layer_get_target_room layer_reset_target_room layer_get_all layer_get_all_elements layer_get_name layer_depth layer_get_element_layer layer_get_element_type layer_element_move layer_force_draw_depth layer_is_draw_depth_forced layer_get_forced_depth layer_background_get_id layer_background_exists layer_background_create layer_background_destroy layer_background_visible layer_background_change layer_background_sprite layer_background_htiled layer_background_vtiled layer_background_stretch layer_background_yscale layer_background_xscale layer_background_blend layer_background_alpha layer_background_index layer_background_speed layer_background_get_visible layer_background_get_sprite layer_background_get_htiled layer_background_get_vtiled layer_background_get_stretch layer_background_get_yscale layer_background_get_xscale layer_background_get_blend layer_background_get_alpha layer_background_get_index layer_background_get_speed layer_sprite_get_id layer_sprite_exists layer_sprite_create layer_sprite_destroy layer_sprite_change layer_sprite_index layer_sprite_speed layer_sprite_xscale layer_sprite_yscale layer_sprite_angle layer_sprite_blend layer_sprite_alpha layer_sprite_x layer_sprite_y layer_sprite_get_sprite layer_sprite_get_index layer_sprite_get_speed layer_sprite_get_xscale layer_sprite_get_yscale layer_sprite_get_angle layer_sprite_get_blend layer_sprite_get_alpha layer_sprite_get_x layer_sprite_get_y layer_tilemap_get_id layer_tilemap_exists layer_tilemap_create layer_tilemap_destroy tilemap_tileset tilemap_x tilemap_y tilemap_set tilemap_set_at_pixel tilemap_get_tileset tilemap_get_tile_width tilemap_get_tile_height tilemap_get_width tilemap_get_height tilemap_get_x tilemap_get_y tilemap_get tilemap_get_at_pixel tilemap_get_cell_x_at_pixel tilemap_get_cell_y_at_pixel tilemap_clear draw_tilemap draw_tile tilemap_set_global_mask tilemap_get_global_mask tilemap_set_mask tilemap_get_mask tilemap_get_frame tile_set_empty tile_set_index tile_set_flip tile_set_mirror tile_set_rotate tile_get_empty tile_get_index tile_get_flip tile_get_mirror tile_get_rotate layer_tile_exists layer_tile_create layer_tile_destroy layer_tile_change layer_tile_xscale layer_tile_yscale layer_tile_blend layer_tile_alpha layer_tile_x layer_tile_y layer_tile_region layer_tile_visible layer_tile_get_sprite layer_tile_get_xscale layer_tile_get_yscale layer_tile_get_blend layer_tile_get_alpha layer_tile_get_x layer_tile_get_y layer_tile_get_region layer_tile_get_visible layer_instance_get_instance instance_activate_layer instance_deactivate_layer camera_create camera_create_view camera_destroy camera_apply camera_get_active camera_get_default camera_set_default camera_set_view_mat camera_set_proj_mat camera_set_update_script camera_set_begin_script camera_set_end_script camera_set_view_pos camera_set_view_size camera_set_view_speed camera_set_view_border camera_set_view_angle camera_set_view_target camera_get_view_mat camera_get_proj_mat camera_get_update_script camera_get_begin_script camera_get_end_script camera_get_view_x camera_get_view_y camera_get_view_width camera_get_view_height camera_get_view_speed_x camera_get_view_speed_y camera_get_view_border_x camera_get_view_border_y camera_get_view_angle camera_get_view_target view_get_camera view_get_visible view_get_xport view_get_yport view_get_wport view_get_hport view_get_surface_id view_set_camera view_set_visible view_set_xport view_set_yport view_set_wport view_set_hport view_set_surface_id gesture_drag_time gesture_drag_distance gesture_flick_speed gesture_double_tap_time gesture_double_tap_distance gesture_pinch_distance gesture_pinch_angle_towards gesture_pinch_angle_away gesture_rotate_time gesture_rotate_angle gesture_tap_count gesture_get_drag_time gesture_get_drag_distance gesture_get_flick_speed gesture_get_double_tap_time gesture_get_double_tap_distance gesture_get_pinch_distance gesture_get_pinch_angle_towards gesture_get_pinch_angle_away gesture_get_rotate_time gesture_get_rotate_angle gesture_get_tap_count keyboard_virtual_show keyboard_virtual_hide keyboard_virtual_status keyboard_virtual_height",
@@ -10373,11 +14506,11 @@ var require_gml = __commonJS((exports2, module2) => {
       case_insensitive: false,
       keywords: GML_KEYWORDS,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -10386,7 +14519,7 @@ var require_gml = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/go.js
 var require_go = __commonJS((exports2, module2) => {
-  function go(hljs2) {
+  function go(hljs) {
     const GO_KEYWORDS = {
       keyword: "break default func interface select case map struct chan else goto package switch const fallthrough if range type continue for import return var go defer bool byte complex64 complex128 float32 float64 int8 int16 int32 int64 string uint8 uint16 uint32 uint64 int uint uintptr rune",
       literal: "true false iota nil",
@@ -10398,13 +14531,13 @@ var require_go = __commonJS((exports2, module2) => {
       keywords: GO_KEYWORDS,
       illegal: "</",
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "string",
           variants: [
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.APOS_STRING_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
             {
               begin: "`",
               end: "`"
@@ -10415,10 +14548,10 @@ var require_go = __commonJS((exports2, module2) => {
           className: "number",
           variants: [
             {
-              begin: hljs2.C_NUMBER_RE + "[i]",
+              begin: hljs.C_NUMBER_RE + "[i]",
               relevance: 1
             },
-            hljs2.C_NUMBER_MODE
+            hljs.C_NUMBER_MODE
           ]
         },
         {
@@ -10430,7 +14563,7 @@ var require_go = __commonJS((exports2, module2) => {
           end: "\\s*(\\{|$)",
           excludeEnd: true,
           contains: [
-            hljs2.TITLE_MODE,
+            hljs.TITLE_MODE,
             {
               className: "params",
               begin: /\(/,
@@ -10448,7 +14581,7 @@ var require_go = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/golo.js
 var require_golo = __commonJS((exports2, module2) => {
-  function golo(hljs2) {
+  function golo(hljs) {
     return {
       name: "Golo",
       keywords: {
@@ -10456,9 +14589,9 @@ var require_golo = __commonJS((exports2, module2) => {
         literal: "true false null"
       },
       contains: [
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.HASH_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: "@[A-Za-z]+"
@@ -10471,7 +14604,7 @@ var require_golo = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/gradle.js
 var require_gradle = __commonJS((exports2, module2) => {
-  function gradle(hljs2) {
+  function gradle(hljs) {
     return {
       name: "Gradle",
       case_insensitive: true,
@@ -10479,12 +14612,12 @@ var require_gradle = __commonJS((exports2, module2) => {
         keyword: "task project allprojects subprojects artifacts buildscript configurations dependencies repositories sourceSets description delete from into include exclude source classpath destinationDir includes options sourceCompatibility targetCompatibility group flatDir doLast doFirst flatten todir fromdir ant def abstract break case catch continue default do else extends final finally for if implements instanceof native new private protected public return static switch synchronized throw throws transient try volatile while strictfp package import false null super this true antlrtask checkstyle codenarc copy boolean byte char class double float int interface long short void compile runTime file fileTree abs any append asList asWritable call collect compareTo count div dump each eachByte eachFile eachLine every find findAll flatten getAt getErr getIn getOut getText grep immutable inject inspect intersect invokeMethods isCase join leftShift minus multiply newInputStream newOutputStream newPrintWriter newReader newWriter next plus pop power previous print println push putAt read readBytes readLines reverse reverseEach round size sort splitEachLine step subMap times toInteger toList tokenize upto waitForOrKill withPrintWriter withReader withStream withWriter withWriterAppend write writeLine"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.NUMBER_MODE,
-        hljs2.REGEXP_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE,
+        hljs.REGEXP_MODE
       ]
     };
   }
@@ -10511,12 +14644,12 @@ var require_groovy = __commonJS((exports2, module2) => {
     obj.variants = variants2;
     return obj;
   }
-  function groovy(hljs2) {
+  function groovy(hljs) {
     const IDENT_RE = "[A-Za-z0-9_$]+";
     const COMMENT = variants([
-      hljs2.C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.COMMENT("/\\*\\*", "\\*/", {
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.COMMENT("/\\*\\*", "\\*/", {
         relevance: 0,
         contains: [
           {
@@ -10533,11 +14666,11 @@ var require_groovy = __commonJS((exports2, module2) => {
     const REGEXP = {
       className: "regexp",
       begin: /~?\/[^\/\n]+\//,
-      contains: [hljs2.BACKSLASH_ESCAPE]
+      contains: [hljs.BACKSLASH_ESCAPE]
     };
     const NUMBER = variants([
-      hljs2.BINARY_NUMBER_MODE,
-      hljs2.C_NUMBER_MODE
+      hljs.BINARY_NUMBER_MODE,
+      hljs.C_NUMBER_MODE
     ]);
     const STRING = variants([
       {
@@ -10553,8 +14686,8 @@ var require_groovy = __commonJS((exports2, module2) => {
         end: "/\\$",
         relevance: 10
       },
-      hljs2.APOS_STRING_MODE,
-      hljs2.QUOTE_STRING_MODE
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE
     ], {
       className: "string"
     });
@@ -10566,7 +14699,7 @@ var require_groovy = __commonJS((exports2, module2) => {
         keyword: "byte short char int long boolean float double void def as in assert trait abstract static volatile transient public private protected synchronized final class interface enum if else for while switch case break default continue throw throws try catch finally implements extends new import package return instanceof"
       },
       contains: [
-        hljs2.SHEBANG({
+        hljs.SHEBANG({
           binary: "groovy",
           relevance: 10
         }),
@@ -10583,7 +14716,7 @@ var require_groovy = __commonJS((exports2, module2) => {
             {
               beginKeywords: "extends implements"
             },
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         {
@@ -10624,7 +14757,7 @@ var require_groovy = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/haml.js
 var require_haml = __commonJS((exports2, module2) => {
-  function haml(hljs2) {
+  function haml(hljs) {
     return {
       name: "HAML",
       case_insensitive: true,
@@ -10634,7 +14767,7 @@ var require_haml = __commonJS((exports2, module2) => {
           begin: "^!!!( (5|1\\.1|Strict|Frameset|Basic|Mobile|RDFa|XML\\b.*))?$",
           relevance: 10
         },
-        hljs2.COMMENT("^\\s*(!=#|=#|-#|/).*$", false, {
+        hljs.COMMENT("^\\s*(!=#|=#|-#|/).*$", false, {
           relevance: 0
         }),
         {
@@ -10674,8 +14807,8 @@ var require_haml = __commonJS((exports2, module2) => {
                       className: "attr",
                       begin: ":\\w+"
                     },
-                    hljs2.APOS_STRING_MODE,
-                    hljs2.QUOTE_STRING_MODE,
+                    hljs.APOS_STRING_MODE,
+                    hljs.QUOTE_STRING_MODE,
                     {
                       begin: "\\w+",
                       relevance: 0
@@ -10700,8 +14833,8 @@ var require_haml = __commonJS((exports2, module2) => {
                       begin: "\\w+",
                       relevance: 0
                     },
-                    hljs2.APOS_STRING_MODE,
-                    hljs2.QUOTE_STRING_MODE,
+                    hljs.APOS_STRING_MODE,
+                    hljs.QUOTE_STRING_MODE,
                     {
                       begin: "\\w+",
                       relevance: 0
@@ -10751,7 +14884,7 @@ var require_handlebars = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function handlebars(hljs2) {
+  function handlebars(hljs) {
     const BUILT_INS = {
       "builtin-name": [
         "action",
@@ -10805,7 +14938,7 @@ var require_handlebars = __commonJS((exports2, module2) => {
       begin: IDENTIFIER_REGEX,
       lexemes: /[\w.\/]+/
     };
-    const HELPER_PARAMETER = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const HELPER_PARAMETER = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       keywords: LITERALS
     });
     const SUB_EXPRESSION = {
@@ -10821,9 +14954,9 @@ var require_handlebars = __commonJS((exports2, module2) => {
         end: /=/,
         starts: {
           contains: [
-            hljs2.NUMBER_MODE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.APOS_STRING_MODE,
+            hljs.NUMBER_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
             HELPER_PARAMETER,
             SUB_EXPRESSION
           ]
@@ -10844,9 +14977,9 @@ var require_handlebars = __commonJS((exports2, module2) => {
     };
     const HELPER_PARAMETERS = {
       contains: [
-        hljs2.NUMBER_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
+        hljs.NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
         BLOCK_PARAMS,
         HASH,
         HELPER_PARAMETER,
@@ -10854,29 +14987,29 @@ var require_handlebars = __commonJS((exports2, module2) => {
       ],
       returnEnd: true
     };
-    const SUB_EXPRESSION_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const SUB_EXPRESSION_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       className: "name",
       keywords: BUILT_INS,
-      starts: hljs2.inherit(HELPER_PARAMETERS, {
+      starts: hljs.inherit(HELPER_PARAMETERS, {
         end: /\)/
       })
     });
     SUB_EXPRESSION.contains = [SUB_EXPRESSION_CONTENTS];
-    const OPENING_BLOCK_MUSTACHE_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const OPENING_BLOCK_MUSTACHE_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       keywords: BUILT_INS,
       className: "name",
-      starts: hljs2.inherit(HELPER_PARAMETERS, {
+      starts: hljs.inherit(HELPER_PARAMETERS, {
         end: /\}\}/
       })
     });
-    const CLOSING_BLOCK_MUSTACHE_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const CLOSING_BLOCK_MUSTACHE_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       keywords: BUILT_INS,
       className: "name"
     });
-    const BASIC_MUSTACHE_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const BASIC_MUSTACHE_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       className: "name",
       keywords: BUILT_INS,
-      starts: hljs2.inherit(HELPER_PARAMETERS, {
+      starts: hljs.inherit(HELPER_PARAMETERS, {
         end: /\}\}/
       })
     });
@@ -10901,8 +15034,8 @@ var require_handlebars = __commonJS((exports2, module2) => {
       contains: [
         ESCAPE_MUSTACHE_WITH_PRECEEDING_BACKSLASH,
         PREVENT_ESCAPE_WITH_ANOTHER_PRECEEDING_BACKSLASH,
-        hljs2.COMMENT(/\{\{!--/, /--\}\}/),
-        hljs2.COMMENT(/\{\{!/, /\}\}/),
+        hljs.COMMENT(/\{\{!--/, /--\}\}/),
+        hljs.COMMENT(/\{\{!/, /\}\}/),
         {
           className: "template-tag",
           begin: /\{\{\{\{(?!\/)/,
@@ -10964,11 +15097,11 @@ var require_handlebars = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/haskell.js
 var require_haskell = __commonJS((exports2, module2) => {
-  function haskell(hljs2) {
+  function haskell(hljs) {
     const COMMENT = {
       variants: [
-        hljs2.COMMENT("--", "$"),
-        hljs2.COMMENT(/\{-/, /-\}/, {
+        hljs.COMMENT("--", "$"),
+        hljs.COMMENT(/\{-/, /-\}/, {
           contains: ["self"]
         })
       ]
@@ -10999,7 +15132,7 @@ var require_haskell = __commonJS((exports2, module2) => {
           className: "type",
           begin: "\\b[A-Z][\\w]*(\\((\\.\\.|,|\\w+)\\))?"
         },
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           begin: "[_a-z][\\w']*"
         }),
         COMMENT
@@ -11072,7 +15205,7 @@ var require_haskell = __commonJS((exports2, module2) => {
           beginKeywords: "infix infixl infixr",
           end: "$",
           contains: [
-            hljs2.C_NUMBER_MODE,
+            hljs.C_NUMBER_MODE,
             COMMENT
           ]
         },
@@ -11082,7 +15215,7 @@ var require_haskell = __commonJS((exports2, module2) => {
           keywords: "foreign import export ccall stdcall cplusplus jvm dotnet safe unsafe",
           contains: [
             CONSTRUCTOR,
-            hljs2.QUOTE_STRING_MODE,
+            hljs.QUOTE_STRING_MODE,
             COMMENT
           ]
         },
@@ -11093,10 +15226,10 @@ var require_haskell = __commonJS((exports2, module2) => {
         },
         PRAGMA,
         PREPROCESSOR,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         CONSTRUCTOR,
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           begin: "^[_a-z][\\w']*"
         }),
         COMMENT,
@@ -11111,7 +15244,7 @@ var require_haskell = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/haxe.js
 var require_haxe = __commonJS((exports2, module2) => {
-  function haxe(hljs2) {
+  function haxe(hljs) {
     const HAXE_BASIC_TYPES = "Int Float String Bool Dynamic Void Array ";
     return {
       name: "Haxe",
@@ -11127,7 +15260,7 @@ var require_haxe = __commonJS((exports2, module2) => {
           begin: "'",
           end: "'",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             {
               className: "subst",
               begin: "\\$\\{",
@@ -11140,10 +15273,10 @@ var require_haxe = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: "@:",
@@ -11183,7 +15316,7 @@ var require_haxe = __commonJS((exports2, module2) => {
           className: "class",
           beginKeywords: "enum",
           end: "\\{",
-          contains: [hljs2.TITLE_MODE]
+          contains: [hljs.TITLE_MODE]
         },
         {
           className: "class",
@@ -11211,7 +15344,7 @@ var require_haxe = __commonJS((exports2, module2) => {
               excludeBegin: true,
               excludeEnd: true
             },
-            hljs2.TITLE_MODE
+            hljs.TITLE_MODE
           ],
           keywords: {
             keyword: "abstract from to"
@@ -11231,12 +15364,12 @@ var require_haxe = __commonJS((exports2, module2) => {
               contains: [
                 {
                   className: "type",
-                  begin: hljs2.IDENT_RE,
+                  begin: hljs.IDENT_RE,
                   relevance: 0
                 }
               ]
             },
-            hljs2.TITLE_MODE
+            hljs.TITLE_MODE
           ]
         },
         {
@@ -11245,7 +15378,7 @@ var require_haxe = __commonJS((exports2, module2) => {
           end: "\\(",
           excludeEnd: true,
           illegal: "\\S",
-          contains: [hljs2.TITLE_MODE]
+          contains: [hljs.TITLE_MODE]
         }
       ],
       illegal: /<\//
@@ -11256,7 +15389,7 @@ var require_haxe = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/hsp.js
 var require_hsp = __commonJS((exports2, module2) => {
-  function hsp(hljs2) {
+  function hsp(hljs) {
     return {
       name: "HSP",
       case_insensitive: true,
@@ -11265,17 +15398,17 @@ var require_hsp = __commonJS((exports2, module2) => {
         keyword: "goto gosub return break repeat loop continue wait await dim sdim foreach dimtype dup dupptr end stop newmod delmod mref run exgoto on mcall assert logmes newlab resume yield onexit onerror onkey onclick oncmd exist delete mkdir chdir dirlist bload bsave bcopy memfile if else poke wpoke lpoke getstr chdpm memexpand memcpy memset notesel noteadd notedel noteload notesave randomize noteunsel noteget split strrep setease button chgdisp exec dialog mmload mmplay mmstop mci pset pget syscolor mes print title pos circle cls font sysfont objsize picload color palcolor palette redraw width gsel gcopy gzoom gmode bmpsave hsvcolor getkey listbox chkbox combox input mesbox buffer screen bgscr mouse objsel groll line clrobj boxf objprm objmode stick grect grotate gsquare gradf objimage objskip objenable celload celdiv celput newcom querycom delcom cnvstow comres axobj winobj sendmsg comevent comevarg sarrayconv callfunc cnvwtos comevdisp libptr system hspstat hspver stat cnt err strsize looplev sublev iparam wparam lparam refstr refdval int rnd strlen length length2 length3 length4 vartype gettime peek wpeek lpeek varptr varuse noteinfo instr abs limit getease str strmid strf getpath strtrim sin cos tan atan sqrt double absf expf logf limitf powf geteasef mousex mousey mousew hwnd hinstance hdc ginfo objinfo dirinfo sysinfo thismod __hspver__ __hsp30__ __date__ __time__ __line__ __file__ _debug __hspdef__ and or xor not screen_normal screen_palette screen_hide screen_fixedsize screen_tool screen_frame gmode_gdi gmode_mem gmode_rgb0 gmode_alpha gmode_rgb0alpha gmode_add gmode_sub gmode_pixela ginfo_mx ginfo_my ginfo_act ginfo_sel ginfo_wx1 ginfo_wy1 ginfo_wx2 ginfo_wy2 ginfo_vx ginfo_vy ginfo_sizex ginfo_sizey ginfo_winx ginfo_winy ginfo_mesx ginfo_mesy ginfo_r ginfo_g ginfo_b ginfo_paluse ginfo_dispx ginfo_dispy ginfo_cx ginfo_cy ginfo_intid ginfo_newid ginfo_sx ginfo_sy objinfo_mode objinfo_bmscr objinfo_hwnd notemax notesize dir_cur dir_exe dir_win dir_sys dir_cmdline dir_desktop dir_mydoc dir_tv font_normal font_bold font_italic font_underline font_strikeout font_antialias objmode_normal objmode_guifont objmode_usefont gsquare_grad msgothic msmincho do until while wend for next _break _continue switch case default swbreak swend ddim ldim alloc m_pi rad2deg deg2rad ease_linear ease_quad_in ease_quad_out ease_quad_inout ease_cubic_in ease_cubic_out ease_cubic_inout ease_quartic_in ease_quartic_out ease_quartic_inout ease_bounce_in ease_bounce_out ease_bounce_inout ease_shake_in ease_shake_out ease_shake_inout ease_loop"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
         {
           className: "string",
           begin: /\{"/,
           end: /"\}/,
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
-        hljs2.COMMENT(";", "$", {
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
         {
@@ -11286,21 +15419,21 @@ var require_hsp = __commonJS((exports2, module2) => {
             "meta-keyword": "addion cfunc cmd cmpopt comfunc const defcfunc deffunc define else endif enum epack func global if ifdef ifndef include modcfunc modfunc modinit modterm module pack packopt regcmd runtime undef usecom uselib"
           },
           contains: [
-            hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+            hljs.inherit(hljs.QUOTE_STRING_MODE, {
               className: "meta-string"
             }),
-            hljs2.NUMBER_MODE,
-            hljs2.C_NUMBER_MODE,
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.NUMBER_MODE,
+            hljs.C_NUMBER_MODE,
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         {
           className: "symbol",
           begin: "^\\*(\\w+|@)"
         },
-        hljs2.NUMBER_MODE,
-        hljs2.C_NUMBER_MODE
+        hljs.NUMBER_MODE,
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -11330,7 +15463,7 @@ var require_htmlbars = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function handlebars(hljs2) {
+  function handlebars(hljs) {
     const BUILT_INS = {
       "builtin-name": [
         "action",
@@ -11384,7 +15517,7 @@ var require_htmlbars = __commonJS((exports2, module2) => {
       begin: IDENTIFIER_REGEX,
       lexemes: /[\w.\/]+/
     };
-    const HELPER_PARAMETER = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const HELPER_PARAMETER = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       keywords: LITERALS
     });
     const SUB_EXPRESSION = {
@@ -11400,9 +15533,9 @@ var require_htmlbars = __commonJS((exports2, module2) => {
         end: /=/,
         starts: {
           contains: [
-            hljs2.NUMBER_MODE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.APOS_STRING_MODE,
+            hljs.NUMBER_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
             HELPER_PARAMETER,
             SUB_EXPRESSION
           ]
@@ -11423,9 +15556,9 @@ var require_htmlbars = __commonJS((exports2, module2) => {
     };
     const HELPER_PARAMETERS = {
       contains: [
-        hljs2.NUMBER_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
+        hljs.NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
         BLOCK_PARAMS,
         HASH,
         HELPER_PARAMETER,
@@ -11433,29 +15566,29 @@ var require_htmlbars = __commonJS((exports2, module2) => {
       ],
       returnEnd: true
     };
-    const SUB_EXPRESSION_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const SUB_EXPRESSION_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       className: "name",
       keywords: BUILT_INS,
-      starts: hljs2.inherit(HELPER_PARAMETERS, {
+      starts: hljs.inherit(HELPER_PARAMETERS, {
         end: /\)/
       })
     });
     SUB_EXPRESSION.contains = [SUB_EXPRESSION_CONTENTS];
-    const OPENING_BLOCK_MUSTACHE_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const OPENING_BLOCK_MUSTACHE_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       keywords: BUILT_INS,
       className: "name",
-      starts: hljs2.inherit(HELPER_PARAMETERS, {
+      starts: hljs.inherit(HELPER_PARAMETERS, {
         end: /\}\}/
       })
     });
-    const CLOSING_BLOCK_MUSTACHE_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const CLOSING_BLOCK_MUSTACHE_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       keywords: BUILT_INS,
       className: "name"
     });
-    const BASIC_MUSTACHE_CONTENTS = hljs2.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
+    const BASIC_MUSTACHE_CONTENTS = hljs.inherit(HELPER_NAME_OR_PATH_EXPRESSION, {
       className: "name",
       keywords: BUILT_INS,
-      starts: hljs2.inherit(HELPER_PARAMETERS, {
+      starts: hljs.inherit(HELPER_PARAMETERS, {
         end: /\}\}/
       })
     });
@@ -11480,8 +15613,8 @@ var require_htmlbars = __commonJS((exports2, module2) => {
       contains: [
         ESCAPE_MUSTACHE_WITH_PRECEEDING_BACKSLASH,
         PREVENT_ESCAPE_WITH_ANOTHER_PRECEEDING_BACKSLASH,
-        hljs2.COMMENT(/\{\{!--/, /--\}\}/),
-        hljs2.COMMENT(/\{\{!/, /\}\}/),
+        hljs.COMMENT(/\{\{!--/, /--\}\}/),
+        hljs.COMMENT(/\{\{!/, /\}\}/),
         {
           className: "template-tag",
           begin: /\{\{\{\{(?!\/)/,
@@ -11538,10 +15671,10 @@ var require_htmlbars = __commonJS((exports2, module2) => {
       ]
     };
   }
-  function htmlbars(hljs2) {
-    const definition = handlebars(hljs2);
+  function htmlbars(hljs) {
+    const definition = handlebars(hljs);
     definition.name = "HTMLbars";
-    if (hljs2.getLanguage("handlebars")) {
+    if (hljs.getLanguage("handlebars")) {
       definition.disableAutodetect = true;
     }
     return definition;
@@ -11562,7 +15695,7 @@ var require_http = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function http(hljs2) {
+  function http(hljs) {
     const VERSION = "HTTP/(2|1\\.[01])";
     const HEADER_NAME = /[A-Za-z][A-Za-z0-9-]*/;
     const HEADER = {
@@ -11639,7 +15772,7 @@ var require_http = __commonJS((exports2, module2) => {
             contains: HEADERS_AND_BODY
           }
         },
-        hljs2.inherit(HEADER, {
+        hljs.inherit(HEADER, {
           relevance: 0
         })
       ]
@@ -11650,7 +15783,7 @@ var require_http = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/hy.js
 var require_hy = __commonJS((exports2, module2) => {
-  function hy(hljs2) {
+  function hy(hljs) {
     var SYMBOLSTART = "a-zA-Z_\\-!.?+*=<>&#'";
     var SYMBOL_RE = "[" + SYMBOLSTART + "][" + SYMBOLSTART + "0-9/;:]*";
     var keywords = {
@@ -11667,8 +15800,8 @@ var require_hy = __commonJS((exports2, module2) => {
       begin: SIMPLE_NUMBER_RE,
       relevance: 0
     };
-    var STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {illegal: null});
-    var COMMENT = hljs2.COMMENT(";", "$", {
+    var STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null});
+    var COMMENT = hljs.COMMENT(";", "$", {
       relevance: 0
     });
     var LITERAL = {
@@ -11683,7 +15816,7 @@ var require_hy = __commonJS((exports2, module2) => {
       className: "comment",
       begin: "\\^" + SYMBOL_RE
     };
-    var HINT_COL = hljs2.COMMENT("\\^\\{", "\\}");
+    var HINT_COL = hljs.COMMENT("\\^\\{", "\\}");
     var KEY = {
       className: "symbol",
       begin: "[:]{1,2}" + SYMBOL_RE
@@ -11704,14 +15837,14 @@ var require_hy = __commonJS((exports2, module2) => {
       starts: BODY
     };
     var DEFAULT_CONTAINS = [LIST, STRING, HINT, HINT_COL, COMMENT, KEY, COLLECTION, NUMBER, LITERAL, SYMBOL];
-    LIST.contains = [hljs2.COMMENT("comment", ""), NAME, BODY];
+    LIST.contains = [hljs.COMMENT("comment", ""), NAME, BODY];
     BODY.contains = DEFAULT_CONTAINS;
     COLLECTION.contains = DEFAULT_CONTAINS;
     return {
       name: "Hy",
       aliases: ["hylang"],
       illegal: /\S/,
-      contains: [hljs2.SHEBANG(), LIST, STRING, HINT, HINT_COL, COMMENT, KEY, COLLECTION, NUMBER, LITERAL]
+      contains: [hljs.SHEBANG(), LIST, STRING, HINT, HINT_COL, COMMENT, KEY, COLLECTION, NUMBER, LITERAL]
     };
   }
   module2.exports = hy;
@@ -11719,7 +15852,7 @@ var require_hy = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/inform7.js
 var require_inform7 = __commonJS((exports2, module2) => {
-  function inform7(hljs2) {
+  function inform7(hljs) {
     const START_BRACKET = "\\[";
     const END_BRACKET = "\\]";
     return {
@@ -11790,7 +15923,7 @@ var require_ini = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function ini(hljs2) {
+  function ini(hljs) {
     const NUMBERS = {
       className: "number",
       relevance: 0,
@@ -11799,11 +15932,11 @@ var require_ini = __commonJS((exports2, module2) => {
           begin: /([+-]+)?[\d]+_[\d_]+/
         },
         {
-          begin: hljs2.NUMBER_RE
+          begin: hljs.NUMBER_RE
         }
       ]
     };
-    const COMMENTS = hljs2.COMMENT();
+    const COMMENTS = hljs.COMMENT();
     COMMENTS.variants = [
       {
         begin: /;/,
@@ -11831,7 +15964,7 @@ var require_ini = __commonJS((exports2, module2) => {
     };
     const STRINGS = {
       className: "string",
-      contains: [hljs2.BACKSLASH_ESCAPE],
+      contains: [hljs.BACKSLASH_ESCAPE],
       variants: [
         {
           begin: "'''",
@@ -11917,7 +16050,7 @@ var require_irpf90 = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function irpf90(hljs2) {
+  function irpf90(hljs) {
     const PARAMS = {
       className: "params",
       begin: "\\(",
@@ -11951,11 +16084,11 @@ var require_irpf90 = __commonJS((exports2, module2) => {
       keywords: F_KEYWORDS,
       illegal: /\/\*/,
       contains: [
-        hljs2.inherit(hljs2.APOS_STRING_MODE, {
+        hljs.inherit(hljs.APOS_STRING_MODE, {
           className: "string",
           relevance: 0
         }),
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           className: "string",
           relevance: 0
         }),
@@ -11964,14 +16097,14 @@ var require_irpf90 = __commonJS((exports2, module2) => {
           beginKeywords: "subroutine function program",
           illegal: "[${=\\n]",
           contains: [
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             PARAMS
           ]
         },
-        hljs2.COMMENT("!", "$", {
+        hljs.COMMENT("!", "$", {
           relevance: 0
         }),
-        hljs2.COMMENT("begin_doc", "end_doc", {
+        hljs.COMMENT("begin_doc", "end_doc", {
           relevance: 10
         }),
         NUMBER
@@ -11983,7 +16116,7 @@ var require_irpf90 = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/isbl.js
 var require_isbl = __commonJS((exports2, module2) => {
-  function isbl(hljs2) {
+  function isbl(hljs) {
     const UNDERSCORE_IDENT_RE = "[A-Za-zА-Яа-яёЁ_!][A-Za-zА-Яа-яёЁ_0-9]*";
     const FUNCTION_NAME_IDENT_RE = "[A-Za-zА-Яа-яёЁ_][A-Za-zА-Яа-яёЁ_0-9]*";
     const KEYWORD = "and и else иначе endexcept endfinally endforeach конецвсе endif конецесли endwhile конецпока except exitfor finally foreach все if если in в not не or или try while пока ";
@@ -12121,7 +16254,7 @@ var require_isbl = __commonJS((exports2, module2) => {
     const LITERAL = "null true false nil ";
     const NUMBERS = {
       className: "number",
-      begin: hljs2.NUMBER_RE,
+      begin: hljs.NUMBER_RE,
       relevance: 0
     };
     const STRINGS = {
@@ -12148,7 +16281,7 @@ var require_isbl = __commonJS((exports2, module2) => {
       end: "$",
       relevance: 0,
       contains: [
-        hljs2.PHRASAL_WORDS_MODE,
+        hljs.PHRASAL_WORDS_MODE,
         DOCTAGS
       ]
     };
@@ -12158,7 +16291,7 @@ var require_isbl = __commonJS((exports2, module2) => {
       end: "\\*/",
       relevance: 0,
       contains: [
-        hljs2.PHRASAL_WORDS_MODE,
+        hljs.PHRASAL_WORDS_MODE,
         DOCTAGS
       ]
     };
@@ -12176,7 +16309,7 @@ var require_isbl = __commonJS((exports2, module2) => {
       literal: LITERAL
     };
     const METHODS = {
-      begin: "\\.\\s*" + hljs2.UNDERSCORE_IDENT_RE,
+      begin: "\\.\\s*" + hljs.UNDERSCORE_IDENT_RE,
       keywords: KEYWORDS,
       relevance: 0
     };
@@ -12263,7 +16396,7 @@ var require_java = __commonJS((exports2, module2) => {
     ],
     relevance: 0
   };
-  function java(hljs2) {
+  function java(hljs) {
     var JAVA_IDENT_RE = "[À-ʸa-zA-Z_$][À-ʸa-zA-Z_$0-9]*";
     var GENERIC_IDENT_RE = JAVA_IDENT_RE + "(<" + JAVA_IDENT_RE + "(\\s*,\\s*" + JAVA_IDENT_RE + ")*>)?";
     var KEYWORDS = "false synchronized int abstract float private char boolean var static null if const for true while long strictfp finally protected import native final void enum else break transient catch instanceof byte super volatile case assert short package default double public try this switch continue throws protected public private module requires exports do";
@@ -12285,7 +16418,7 @@ var require_java = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       illegal: /<\/|#/,
       contains: [
-        hljs2.COMMENT("/\\*\\*", "\\*/", {
+        hljs.COMMENT("/\\*\\*", "\\*/", {
           relevance: 0,
           contains: [
             {
@@ -12303,10 +16436,10 @@ var require_java = __commonJS((exports2, module2) => {
           keywords: "import",
           relevance: 2
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "class",
           beginKeywords: "class interface enum",
@@ -12317,7 +16450,7 @@ var require_java = __commonJS((exports2, module2) => {
           illegal: /[:"\[\]]/,
           contains: [
             {beginKeywords: "extends implements"},
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         {
@@ -12326,7 +16459,7 @@ var require_java = __commonJS((exports2, module2) => {
         },
         {
           className: "class",
-          begin: "record\\s+" + hljs2.UNDERSCORE_IDENT_RE + "\\s*\\(",
+          begin: "record\\s+" + hljs.UNDERSCORE_IDENT_RE + "\\s*\\(",
           returnBegin: true,
           excludeEnd: true,
           end: /[{;=]/,
@@ -12334,10 +16467,10 @@ var require_java = __commonJS((exports2, module2) => {
           contains: [
             {beginKeywords: "record"},
             {
-              begin: hljs2.UNDERSCORE_IDENT_RE + "\\s*\\(",
+              begin: hljs.UNDERSCORE_IDENT_RE + "\\s*\\(",
               returnBegin: true,
               relevance: 0,
-              contains: [hljs2.UNDERSCORE_TITLE_MODE]
+              contains: [hljs.UNDERSCORE_TITLE_MODE]
             },
             {
               className: "params",
@@ -12346,26 +16479,26 @@ var require_java = __commonJS((exports2, module2) => {
               keywords: KEYWORDS,
               relevance: 0,
               contains: [
-                hljs2.C_BLOCK_COMMENT_MODE
+                hljs.C_BLOCK_COMMENT_MODE
               ]
             },
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         {
           className: "function",
-          begin: "(" + GENERIC_IDENT_RE + "\\s+)+" + hljs2.UNDERSCORE_IDENT_RE + "\\s*\\(",
+          begin: "(" + GENERIC_IDENT_RE + "\\s+)+" + hljs.UNDERSCORE_IDENT_RE + "\\s*\\(",
           returnBegin: true,
           end: /[{;=]/,
           excludeEnd: true,
           keywords: KEYWORDS,
           contains: [
             {
-              begin: hljs2.UNDERSCORE_IDENT_RE + "\\s*\\(",
+              begin: hljs.UNDERSCORE_IDENT_RE + "\\s*\\(",
               returnBegin: true,
               relevance: 0,
-              contains: [hljs2.UNDERSCORE_TITLE_MODE]
+              contains: [hljs.UNDERSCORE_TITLE_MODE]
             },
             {
               className: "params",
@@ -12375,14 +16508,14 @@ var require_java = __commonJS((exports2, module2) => {
               relevance: 0,
               contains: [
                 ANNOTATION,
-                hljs2.APOS_STRING_MODE,
-                hljs2.QUOTE_STRING_MODE,
+                hljs.APOS_STRING_MODE,
+                hljs.QUOTE_STRING_MODE,
                 NUMBER,
-                hljs2.C_BLOCK_COMMENT_MODE
+                hljs.C_BLOCK_COMMENT_MODE
               ]
             },
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         NUMBER,
@@ -12534,7 +16667,7 @@ var require_javascript = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function javascript2(hljs2) {
+  function javascript(hljs) {
     const hasClosingTag = (match, {after}) => {
       const tag = "</" + match[0].slice(1);
       const pos = match.input.indexOf(tag, after);
@@ -12598,7 +16731,7 @@ var require_javascript = __commonJS((exports2, module2) => {
         end: "`",
         returnEnd: false,
         contains: [
-          hljs2.BACKSLASH_ESCAPE,
+          hljs.BACKSLASH_ESCAPE,
           SUBST
         ],
         subLanguage: "xml"
@@ -12611,7 +16744,7 @@ var require_javascript = __commonJS((exports2, module2) => {
         end: "`",
         returnEnd: false,
         contains: [
-          hljs2.BACKSLASH_ESCAPE,
+          hljs.BACKSLASH_ESCAPE,
           SUBST
         ],
         subLanguage: "css"
@@ -12622,11 +16755,11 @@ var require_javascript = __commonJS((exports2, module2) => {
       begin: "`",
       end: "`",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST
       ]
     };
-    const JSDOC_COMMENT = hljs2.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
+    const JSDOC_COMMENT = hljs.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
       relevance: 0,
       contains: [
         {
@@ -12657,18 +16790,18 @@ var require_javascript = __commonJS((exports2, module2) => {
       className: "comment",
       variants: [
         JSDOC_COMMENT,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.C_LINE_COMMENT_MODE
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE
       ]
     };
     const SUBST_INTERNALS = [
-      hljs2.APOS_STRING_MODE,
-      hljs2.QUOTE_STRING_MODE,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       HTML_TEMPLATE,
       CSS_TEMPLATE,
       TEMPLATE_STRING,
       NUMBER,
-      hljs2.REGEXP_MODE
+      hljs.REGEXP_MODE
     ];
     SUBST.contains = SUBST_INTERNALS.concat({
       begin: /\{/,
@@ -12703,7 +16836,7 @@ var require_javascript = __commonJS((exports2, module2) => {
       exports: {PARAMS_CONTAINS},
       illegal: /#(?![$_A-z])/,
       contains: [
-        hljs2.SHEBANG({
+        hljs.SHEBANG({
           label: "shebang",
           binary: "node",
           relevance: 5
@@ -12714,8 +16847,8 @@ var require_javascript = __commonJS((exports2, module2) => {
           relevance: 10,
           begin: /^\s*['"]use (strict|asm)['"]/
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         HTML_TEMPLATE,
         CSS_TEMPLATE,
         TEMPLATE_STRING,
@@ -12733,14 +16866,14 @@ var require_javascript = __commonJS((exports2, module2) => {
           ]
         },
         {
-          begin: "(" + hljs2.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
+          begin: "(" + hljs.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
           keywords: "return throw case",
           contains: [
             COMMENT,
-            hljs2.REGEXP_MODE,
+            hljs.REGEXP_MODE,
             {
               className: "function",
-              begin: "(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|" + hljs2.UNDERSCORE_IDENT_RE + ")\\s*=>",
+              begin: "(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|" + hljs.UNDERSCORE_IDENT_RE + ")\\s*=>",
               returnBegin: true,
               end: "\\s*=>",
               contains: [
@@ -12748,7 +16881,7 @@ var require_javascript = __commonJS((exports2, module2) => {
                   className: "params",
                   variants: [
                     {
-                      begin: hljs2.UNDERSCORE_IDENT_RE,
+                      begin: hljs.UNDERSCORE_IDENT_RE,
                       relevance: 0
                     },
                     {
@@ -12808,7 +16941,7 @@ var require_javascript = __commonJS((exports2, module2) => {
           keywords: KEYWORDS$1,
           contains: [
             "self",
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1}),
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1}),
             PARAMS
           ],
           illegal: /%/
@@ -12818,11 +16951,11 @@ var require_javascript = __commonJS((exports2, module2) => {
         },
         {
           className: "function",
-          begin: hljs2.UNDERSCORE_IDENT_RE + "\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
+          begin: hljs.UNDERSCORE_IDENT_RE + "\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
           returnBegin: true,
           contains: [
             PARAMS,
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1})
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1})
           ]
         },
         {
@@ -12840,7 +16973,7 @@ var require_javascript = __commonJS((exports2, module2) => {
           illegal: /[:"[\]]/,
           contains: [
             {beginKeywords: "extends"},
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         {
@@ -12848,7 +16981,7 @@ var require_javascript = __commonJS((exports2, module2) => {
           end: /[{;]/,
           excludeEnd: true,
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1}),
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1}),
             "self",
             PARAMS
           ]
@@ -12858,7 +16991,7 @@ var require_javascript = __commonJS((exports2, module2) => {
           end: /\{/,
           keywords: "get set",
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1}),
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1}),
             {begin: /\(\)/},
             PARAMS
           ]
@@ -12869,12 +17002,12 @@ var require_javascript = __commonJS((exports2, module2) => {
       ]
     };
   }
-  module2.exports = javascript2;
+  module2.exports = javascript;
 });
 
 // ../../../node_modules/highlight.js/lib/languages/jboss-cli.js
 var require_jboss_cli = __commonJS((exports2, module2) => {
-  function jbossCli(hljs2) {
+  function jbossCli(hljs) {
     const PARAM = {
       begin: /[\w-]+ *=/,
       returnBegin: true,
@@ -12915,8 +17048,8 @@ var require_jboss_cli = __commonJS((exports2, module2) => {
         literal: "true false"
       },
       contains: [
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.HASH_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
         COMMAND_PARAMS,
         OPERATION,
         PATH,
@@ -12929,17 +17062,17 @@ var require_jboss_cli = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/json.js
 var require_json = __commonJS((exports2, module2) => {
-  function json(hljs2) {
+  function json(hljs) {
     const LITERALS = {
       literal: "true false null"
     };
     const ALLOWED_COMMENTS = [
-      hljs2.C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE
     ];
     const TYPES = [
-      hljs2.QUOTE_STRING_MODE,
-      hljs2.C_NUMBER_MODE
+      hljs.QUOTE_STRING_MODE,
+      hljs.C_NUMBER_MODE
     ];
     const VALUE_CONTAINER = {
       end: ",",
@@ -12956,10 +17089,10 @@ var require_json = __commonJS((exports2, module2) => {
           className: "attr",
           begin: /"/,
           end: /"/,
-          contains: [hljs2.BACKSLASH_ESCAPE],
+          contains: [hljs.BACKSLASH_ESCAPE],
           illegal: "\\n"
         },
-        hljs2.inherit(VALUE_CONTAINER, {
+        hljs.inherit(VALUE_CONTAINER, {
           begin: /:/
         })
       ].concat(ALLOWED_COMMENTS),
@@ -12968,7 +17101,7 @@ var require_json = __commonJS((exports2, module2) => {
     const ARRAY = {
       begin: "\\[",
       end: "\\]",
-      contains: [hljs2.inherit(VALUE_CONTAINER)],
+      contains: [hljs.inherit(VALUE_CONTAINER)],
       illegal: "\\S"
     };
     TYPES.push(OBJECT, ARRAY);
@@ -12987,7 +17120,7 @@ var require_json = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/julia.js
 var require_julia = __commonJS((exports2, module2) => {
-  function julia(hljs2) {
+  function julia(hljs) {
     var VARIABLE_NAME_RE = "[A-Za-z_\\u00A1-\\uFFFF][A-Za-z_0-9\\u00A1-\\uFFFF]*";
     var KEYWORD_LIST = [
       "baremodule",
@@ -13283,7 +17416,7 @@ var require_julia = __commonJS((exports2, module2) => {
     };
     var STRING = {
       className: "string",
-      contains: [hljs2.BACKSLASH_ESCAPE, INTERPOLATION, INTERPOLATED_VARIABLE],
+      contains: [hljs.BACKSLASH_ESCAPE, INTERPOLATION, INTERPOLATED_VARIABLE],
       variants: [
         {begin: /\w*"""/, end: /"""\w*/, relevance: 10},
         {begin: /\w*"/, end: /"\w*/}
@@ -13291,7 +17424,7 @@ var require_julia = __commonJS((exports2, module2) => {
     };
     var COMMAND = {
       className: "string",
-      contains: [hljs2.BACKSLASH_ESCAPE, INTERPOLATION, INTERPOLATED_VARIABLE],
+      contains: [hljs.BACKSLASH_ESCAPE, INTERPOLATION, INTERPOLATED_VARIABLE],
       begin: "`",
       end: "`"
     };
@@ -13314,7 +17447,7 @@ var require_julia = __commonJS((exports2, module2) => {
       COMMAND,
       MACROCALL,
       COMMENT,
-      hljs2.HASH_COMMENT_MODE,
+      hljs.HASH_COMMENT_MODE,
       {
         className: "keyword",
         begin: "\\b(((abstract|primitive)\\s+)type|(mutable\\s+)?struct)\\b"
@@ -13329,7 +17462,7 @@ var require_julia = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/julia-repl.js
 var require_julia_repl = __commonJS((exports2, module2) => {
-  function juliaRepl(hljs2) {
+  function juliaRepl(hljs) {
     return {
       name: "Julia REPL",
       contains: [
@@ -13369,7 +17502,7 @@ var require_kotlin = __commonJS((exports2, module2) => {
     ],
     relevance: 0
   };
-  function kotlin(hljs2) {
+  function kotlin(hljs) {
     const KEYWORDS = {
       keyword: "abstract as val var vararg get set class object open private protected public noinline crossinline dynamic final enum if else do while for when throw try catch finally import package is in fun override companion reified inline lateinit init interface annotation data sealed internal infix operator out by constructor super tailrec where const inner suspend typealias external expect actual",
       built_in: "Byte Short Char Int Long Boolean Float Double Void Unit Nothing",
@@ -13389,17 +17522,17 @@ var require_kotlin = __commonJS((exports2, module2) => {
     };
     const LABEL = {
       className: "symbol",
-      begin: hljs2.UNDERSCORE_IDENT_RE + "@"
+      begin: hljs.UNDERSCORE_IDENT_RE + "@"
     };
     const SUBST = {
       className: "subst",
       begin: /\$\{/,
       end: /\}/,
-      contains: [hljs2.C_NUMBER_MODE]
+      contains: [hljs.C_NUMBER_MODE]
     };
     const VARIABLE = {
       className: "variable",
-      begin: "\\$" + hljs2.UNDERSCORE_IDENT_RE
+      begin: "\\$" + hljs.UNDERSCORE_IDENT_RE
     };
     const STRING = {
       className: "string",
@@ -13416,14 +17549,14 @@ var require_kotlin = __commonJS((exports2, module2) => {
           begin: "'",
           end: "'",
           illegal: /\n/,
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: '"',
           end: '"',
           illegal: /\n/,
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             VARIABLE,
             SUBST
           ]
@@ -13433,17 +17566,17 @@ var require_kotlin = __commonJS((exports2, module2) => {
     SUBST.contains.push(STRING);
     const ANNOTATION_USE_SITE = {
       className: "meta",
-      begin: "@(?:file|property|field|get|set|receiver|param|setparam|delegate)\\s*:(?:\\s*" + hljs2.UNDERSCORE_IDENT_RE + ")?"
+      begin: "@(?:file|property|field|get|set|receiver|param|setparam|delegate)\\s*:(?:\\s*" + hljs.UNDERSCORE_IDENT_RE + ")?"
     };
     const ANNOTATION = {
       className: "meta",
-      begin: "@" + hljs2.UNDERSCORE_IDENT_RE,
+      begin: "@" + hljs.UNDERSCORE_IDENT_RE,
       contains: [
         {
           begin: /\(/,
           end: /\)/,
           contains: [
-            hljs2.inherit(STRING, {
+            hljs.inherit(STRING, {
               className: "meta-string"
             })
           ]
@@ -13451,14 +17584,14 @@ var require_kotlin = __commonJS((exports2, module2) => {
       ]
     };
     const KOTLIN_NUMBER_MODE = NUMERIC;
-    const KOTLIN_NESTED_COMMENT = hljs2.COMMENT("/\\*", "\\*/", {
-      contains: [hljs2.C_BLOCK_COMMENT_MODE]
+    const KOTLIN_NESTED_COMMENT = hljs.COMMENT("/\\*", "\\*/", {
+      contains: [hljs.C_BLOCK_COMMENT_MODE]
     });
     const KOTLIN_PAREN_TYPE = {
       variants: [
         {
           className: "type",
-          begin: hljs2.UNDERSCORE_IDENT_RE
+          begin: hljs.UNDERSCORE_IDENT_RE
         },
         {
           begin: /\(/,
@@ -13475,7 +17608,7 @@ var require_kotlin = __commonJS((exports2, module2) => {
       aliases: ["kt", "kts"],
       keywords: KEYWORDS,
       contains: [
-        hljs2.COMMENT("/\\*\\*", "\\*/", {
+        hljs.COMMENT("/\\*\\*", "\\*/", {
           relevance: 0,
           contains: [
             {
@@ -13484,7 +17617,7 @@ var require_kotlin = __commonJS((exports2, module2) => {
             }
           ]
         }),
-        hljs2.C_LINE_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
         KOTLIN_NESTED_COMMENT,
         KEYWORDS_WITH_LABEL,
         LABEL,
@@ -13500,10 +17633,10 @@ var require_kotlin = __commonJS((exports2, module2) => {
           relevance: 5,
           contains: [
             {
-              begin: hljs2.UNDERSCORE_IDENT_RE + "\\s*\\(",
+              begin: hljs.UNDERSCORE_IDENT_RE + "\\s*\\(",
               returnBegin: true,
               relevance: 0,
-              contains: [hljs2.UNDERSCORE_TITLE_MODE]
+              contains: [hljs.UNDERSCORE_TITLE_MODE]
             },
             {
               className: "type",
@@ -13526,17 +17659,17 @@ var require_kotlin = __commonJS((exports2, module2) => {
                   endsWithParent: true,
                   contains: [
                     KOTLIN_PAREN_TYPE,
-                    hljs2.C_LINE_COMMENT_MODE,
+                    hljs.C_LINE_COMMENT_MODE,
                     KOTLIN_NESTED_COMMENT
                   ],
                   relevance: 0
                 },
-                hljs2.C_LINE_COMMENT_MODE,
+                hljs.C_LINE_COMMENT_MODE,
                 KOTLIN_NESTED_COMMENT,
                 ANNOTATION_USE_SITE,
                 ANNOTATION,
                 STRING,
-                hljs2.C_NUMBER_MODE
+                hljs.C_NUMBER_MODE
               ]
             },
             KOTLIN_NESTED_COMMENT
@@ -13552,7 +17685,7 @@ var require_kotlin = __commonJS((exports2, module2) => {
             {
               beginKeywords: "public protected internal private constructor"
             },
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             {
               className: "type",
               begin: /</,
@@ -13588,7 +17721,7 @@ var require_kotlin = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/lasso.js
 var require_lasso = __commonJS((exports2, module2) => {
-  function lasso(hljs2) {
+  function lasso(hljs) {
     const LASSO_IDENT_RE = "[a-zA-Z_][\\w.]*";
     const LASSO_ANGLE_RE = "<\\?(lasso(script)?|=)";
     const LASSO_CLOSE_RE = "\\]|\\?>";
@@ -13598,7 +17731,7 @@ var require_lasso = __commonJS((exports2, module2) => {
       built_in: "array date decimal duration integer map pair string tag xml null boolean bytes keyword list locale queue set stack staticarray local var variable global data self inherited currentcapture givenblock",
       keyword: "cache database_names database_schemanames database_tablenames define_tag define_type email_batch encode_set html_comment handle handle_error header if inline iterate ljax_target link link_currentaction link_currentgroup link_currentrecord link_detail link_firstgroup link_firstrecord link_lastgroup link_lastrecord link_nextgroup link_nextrecord link_prevgroup link_prevrecord log loop namespace_using output_none portal private protect records referer referrer repeating resultset rows search_args search_arguments select sort_args sort_arguments thread_atomic value_list while abort case else fail_if fail_ifnot fail if_empty if_false if_null if_true loop_abort loop_continue loop_count params params_up return return_value run_children soap_definetag soap_lastrequest soap_lastresponse tag_name ascending average by define descending do equals frozen group handle_failure import in into join let match max min on order parent protected provide public require returnhome skip split_thread sum take thread to trait type where with yield yieldhome"
     };
-    const HTML_COMMENT = hljs2.COMMENT("<!--", "-->", {
+    const HTML_COMMENT = hljs.COMMENT("<!--", "-->", {
       relevance: 0
     });
     const LASSO_NOPROCESS = {
@@ -13619,15 +17752,15 @@ var require_lasso = __commonJS((exports2, module2) => {
       begin: "'" + LASSO_IDENT_RE + "'"
     };
     const LASSO_CODE = [
-      hljs2.C_LINE_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.inherit(hljs2.C_NUMBER_MODE, {
-        begin: hljs2.C_NUMBER_RE + "|(-?infinity|NaN)\\b"
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.inherit(hljs.C_NUMBER_MODE, {
+        begin: hljs.C_NUMBER_RE + "|(-?infinity|NaN)\\b"
       }),
-      hljs2.inherit(hljs2.APOS_STRING_MODE, {
+      hljs.inherit(hljs.APOS_STRING_MODE, {
         illegal: null
       }),
-      hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+      hljs.inherit(hljs.QUOTE_STRING_MODE, {
         illegal: null
       }),
       {
@@ -13676,7 +17809,7 @@ var require_lasso = __commonJS((exports2, module2) => {
         returnEnd: true,
         end: "\\(|=>",
         contains: [
-          hljs2.inherit(hljs2.TITLE_MODE, {
+          hljs.inherit(hljs.TITLE_MODE, {
             begin: LASSO_IDENT_RE + "(=(?!>))?|[-+*/%](?!>)"
           })
         ]
@@ -13756,7 +17889,7 @@ var require_latex = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function latex(hljs2) {
+  function latex(hljs) {
     const KNOWN_CONTROL_WORDS = either(...[
       "(?:NeedsTeXFormat|RequirePackage|GetIdInfo)",
       "Provides(?:Expl)?(?:Package|Class|File)",
@@ -13845,7 +17978,7 @@ var require_latex = __commonJS((exports2, module2) => {
       end: "$",
       relevance: 10
     };
-    const COMMENT = hljs2.COMMENT("%", "$", {
+    const COMMENT = hljs.COMMENT("%", "$", {
       relevance: 0
     });
     const EVERYTHING_BUT_VERBATIM = [
@@ -13862,7 +17995,7 @@ var require_latex = __commonJS((exports2, module2) => {
       relevance: 0,
       contains: ["self", ...EVERYTHING_BUT_VERBATIM]
     };
-    const ARGUMENT_BRACES = hljs2.inherit(BRACE_GROUP_NO_VERBATIM, {
+    const ARGUMENT_BRACES = hljs.inherit(BRACE_GROUP_NO_VERBATIM, {
       relevance: 0,
       endsParent: true,
       contains: [BRACE_GROUP_NO_VERBATIM, ...EVERYTHING_BUT_VERBATIM]
@@ -13900,14 +18033,14 @@ var require_latex = __commonJS((exports2, module2) => {
       };
     };
     const BEGIN_ENV = function(envname, starts_mode) {
-      return hljs2.inherit({
+      return hljs.inherit({
         begin: "\\\\begin(?=[ 	]*(\\r?\\n[ 	]*)?\\{" + envname + "\\})",
         keywords: {$pattern: /\\[a-zA-Z]+/, keyword: "\\begin"},
         relevance: 0
       }, ARGUMENT_AND_THEN(ARGUMENT_M, starts_mode));
     };
     const VERBATIM_DELIMITED_EQUAL = (innerName = "string") => {
-      return hljs2.END_SAME_AS_BEGIN({
+      return hljs.END_SAME_AS_BEGIN({
         className: innerName,
         begin: /(.|\r?\n)/,
         end: /(.|\r?\n)/,
@@ -13974,7 +18107,7 @@ var require_latex = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/ldif.js
 var require_ldif = __commonJS((exports2, module2) => {
-  function ldif(hljs2) {
+  function ldif(hljs) {
     return {
       name: "LDIF",
       contains: [
@@ -14004,7 +18137,7 @@ var require_ldif = __commonJS((exports2, module2) => {
           begin: "^-",
           end: "$"
         },
-        hljs2.HASH_COMMENT_MODE
+        hljs.HASH_COMMENT_MODE
       ]
     };
   }
@@ -14013,7 +18146,7 @@ var require_ldif = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/leaf.js
 var require_leaf = __commonJS((exports2, module2) => {
-  function leaf(hljs2) {
+  function leaf(hljs) {
     return {
       name: "Leaf",
       contains: [
@@ -14059,7 +18192,7 @@ var require_leaf = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/less.js
 var require_less = __commonJS((exports2, module2) => {
-  var MODES = (hljs2) => {
+  var MODES = (hljs) => {
     return {
       IMPORTANT: {
         className: "meta",
@@ -14075,8 +18208,8 @@ var require_less = __commonJS((exports2, module2) => {
         end: /\]/,
         illegal: "$",
         contains: [
-          hljs2.APOS_STRING_MODE,
-          hljs2.QUOTE_STRING_MODE
+          hljs.APOS_STRING_MODE,
+          hljs.QUOTE_STRING_MODE
         ]
       }
     };
@@ -14477,8 +18610,8 @@ var require_less = __commonJS((exports2, module2) => {
     "z-index"
   ].reverse();
   var PSEUDO_SELECTORS = PSEUDO_CLASSES.concat(PSEUDO_ELEMENTS);
-  function less(hljs2) {
-    const modes = MODES(hljs2);
+  function less(hljs) {
+    const modes = MODES(hljs);
     const PSEUDO_SELECTORS$1 = PSEUDO_SELECTORS;
     const AT_MODIFIERS = "and or not only";
     const IDENT_RE = "[\\w-]+";
@@ -14510,7 +18643,7 @@ var require_less = __commonJS((exports2, module2) => {
       keywords: AT_KEYWORDS,
       relevance: 0
     };
-    VALUE_MODES.push(hljs2.C_LINE_COMMENT_MODE, hljs2.C_BLOCK_COMMENT_MODE, STRING_MODE("'"), STRING_MODE('"'), hljs2.CSS_NUMBER_MODE, {
+    VALUE_MODES.push(hljs.C_LINE_COMMENT_MODE, hljs.C_BLOCK_COMMENT_MODE, STRING_MODE("'"), STRING_MODE('"'), hljs.CSS_NUMBER_MODE, {
       begin: "(url|data-uri)\\(",
       starts: {
         className: "string",
@@ -14604,8 +18737,8 @@ var require_less = __commonJS((exports2, module2) => {
       illegal: `[<='$"]`,
       relevance: 0,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         MIXIN_GUARD_MODE,
         IDENT_MODE("keyword", "all\\b"),
         IDENT_MODE("variable", "@\\{" + IDENT_RE + "\\}"),
@@ -14641,7 +18774,7 @@ var require_less = __commonJS((exports2, module2) => {
       returnBegin: true,
       contains: [SELECTOR_MODE]
     };
-    RULES.push(hljs2.C_LINE_COMMENT_MODE, hljs2.C_BLOCK_COMMENT_MODE, AT_RULE_MODE, VAR_RULE_MODE, PSEUDO_SELECTOR_MODE, RULE_MODE, SELECTOR_MODE);
+    RULES.push(hljs.C_LINE_COMMENT_MODE, hljs.C_BLOCK_COMMENT_MODE, AT_RULE_MODE, VAR_RULE_MODE, PSEUDO_SELECTOR_MODE, RULE_MODE, SELECTOR_MODE);
     return {
       name: "Less",
       case_insensitive: true,
@@ -14654,7 +18787,7 @@ var require_less = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/lisp.js
 var require_lisp = __commonJS((exports2, module2) => {
-  function lisp(hljs2) {
+  function lisp(hljs) {
     var LISP_IDENT_RE = "[a-zA-Z_\\-+\\*\\/<=>&#][a-zA-Z0-9_\\-+*\\/<=>&#!]*";
     var MEC_RE = "\\|[^]*?\\|";
     var LISP_SIMPLE_NUMBER_RE = "(-|\\+)?\\d+(\\.\\d+|\\/\\d+)?((d|e|f|l|s|D|E|F|L|S)(\\+|-)?\\d+)?";
@@ -14672,8 +18805,8 @@ var require_lisp = __commonJS((exports2, module2) => {
         {begin: "#(c|C)\\(" + LISP_SIMPLE_NUMBER_RE + " +" + LISP_SIMPLE_NUMBER_RE, end: "\\)"}
       ]
     };
-    var STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {illegal: null});
-    var COMMENT = hljs2.COMMENT(";", "$", {
+    var STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null});
+    var COMMENT = hljs.COMMENT(";", "$", {
       relevance: 0
     });
     var VARIABLE = {
@@ -14746,7 +18879,7 @@ var require_lisp = __commonJS((exports2, module2) => {
       illegal: /\S/,
       contains: [
         NUMBER,
-        hljs2.SHEBANG(),
+        hljs.SHEBANG(),
         LITERAL,
         STRING,
         COMMENT,
@@ -14762,7 +18895,7 @@ var require_lisp = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/livecodeserver.js
 var require_livecodeserver = __commonJS((exports2, module2) => {
-  function livecodeserver(hljs2) {
+  function livecodeserver(hljs) {
     const VARIABLE = {
       className: "variable",
       variants: [
@@ -14776,12 +18909,12 @@ var require_livecodeserver = __commonJS((exports2, module2) => {
       relevance: 0
     };
     const COMMENT_MODES = [
-      hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.HASH_COMMENT_MODE,
-      hljs2.COMMENT("--", "$"),
-      hljs2.COMMENT("[^:]//", "$")
+      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.HASH_COMMENT_MODE,
+      hljs.COMMENT("--", "$"),
+      hljs.COMMENT("[^:]//", "$")
     ];
-    const TITLE1 = hljs2.inherit(hljs2.TITLE_MODE, {
+    const TITLE1 = hljs.inherit(hljs.TITLE_MODE, {
       variants: [
         {
           begin: "\\b_*rig[A-Z][A-Za-z0-9_\\-]*"
@@ -14791,7 +18924,7 @@ var require_livecodeserver = __commonJS((exports2, module2) => {
         }
       ]
     });
-    const TITLE2 = hljs2.inherit(hljs2.TITLE_MODE, {
+    const TITLE2 = hljs.inherit(hljs.TITLE_MODE, {
       begin: "\\b([A-Za-z0-9_\\-]+)\\b"
     });
     return {
@@ -14815,10 +18948,10 @@ var require_livecodeserver = __commonJS((exports2, module2) => {
           contains: [
             VARIABLE,
             TITLE2,
-            hljs2.APOS_STRING_MODE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.BINARY_NUMBER_MODE,
-            hljs2.C_NUMBER_MODE,
+            hljs.APOS_STRING_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.BINARY_NUMBER_MODE,
+            hljs.C_NUMBER_MODE,
             TITLE1
           ]
         },
@@ -14839,10 +18972,10 @@ var require_livecodeserver = __commonJS((exports2, module2) => {
           contains: [
             VARIABLE,
             TITLE2,
-            hljs2.APOS_STRING_MODE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.BINARY_NUMBER_MODE,
-            hljs2.C_NUMBER_MODE,
+            hljs.APOS_STRING_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.BINARY_NUMBER_MODE,
+            hljs.C_NUMBER_MODE,
             TITLE1
           ]
         },
@@ -14861,10 +18994,10 @@ var require_livecodeserver = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.BINARY_NUMBER_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.BINARY_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         TITLE1
       ].concat(COMMENT_MODES),
       illegal: ";$|^\\[|^=|&|\\{"
@@ -14999,7 +19132,7 @@ var require_livescript = __commonJS((exports2, module2) => {
     "global"
   ];
   var BUILT_INS = [].concat(BUILT_IN_GLOBALS, BUILT_IN_VARIABLES, TYPES, ERROR_TYPES);
-  function livescript(hljs2) {
+  function livescript(hljs) {
     const LIVESCRIPT_BUILT_INS = [
       "npm",
       "print"
@@ -15050,7 +19183,7 @@ var require_livescript = __commonJS((exports2, module2) => {
       built_in: BUILT_INS.concat(LIVESCRIPT_BUILT_INS)
     };
     const JS_IDENT_RE = "[A-Za-z$_](?:-[0-9A-Za-z$_]|[0-9A-Za-z$_])*";
-    const TITLE = hljs2.inherit(hljs2.TITLE_MODE, {
+    const TITLE = hljs.inherit(hljs.TITLE_MODE, {
       begin: JS_IDENT_RE
     });
     const SUBST = {
@@ -15066,7 +19199,7 @@ var require_livescript = __commonJS((exports2, module2) => {
       keywords: KEYWORDS$1
     };
     const EXPRESSIONS = [
-      hljs2.BINARY_NUMBER_MODE,
+      hljs.BINARY_NUMBER_MODE,
       {
         className: "number",
         begin: "(\\b0[xX][a-fA-F0-9_]+)|(\\b\\d(\\d|_\\d)*(\\.(\\d(\\d|_\\d)*)?)?(_*[eE]([-+]\\d(_\\d|\\d)*)?)?[_a-z]*)",
@@ -15082,18 +19215,18 @@ var require_livescript = __commonJS((exports2, module2) => {
           {
             begin: /'''/,
             end: /'''/,
-            contains: [hljs2.BACKSLASH_ESCAPE]
+            contains: [hljs.BACKSLASH_ESCAPE]
           },
           {
             begin: /'/,
             end: /'/,
-            contains: [hljs2.BACKSLASH_ESCAPE]
+            contains: [hljs.BACKSLASH_ESCAPE]
           },
           {
             begin: /"""/,
             end: /"""/,
             contains: [
-              hljs2.BACKSLASH_ESCAPE,
+              hljs.BACKSLASH_ESCAPE,
               SUBST,
               SUBST_SIMPLE
             ]
@@ -15102,7 +19235,7 @@ var require_livescript = __commonJS((exports2, module2) => {
             begin: /"/,
             end: /"/,
             contains: [
-              hljs2.BACKSLASH_ESCAPE,
+              hljs.BACKSLASH_ESCAPE,
               SUBST,
               SUBST_SIMPLE
             ]
@@ -15122,7 +19255,7 @@ var require_livescript = __commonJS((exports2, module2) => {
             end: "//[gim]*",
             contains: [
               SUBST,
-              hljs2.HASH_COMMENT_MODE
+              hljs.HASH_COMMENT_MODE
             ]
           },
           {
@@ -15164,8 +19297,8 @@ var require_livescript = __commonJS((exports2, module2) => {
       keywords: KEYWORDS$1,
       illegal: /\/\*/,
       contains: EXPRESSIONS.concat([
-        hljs2.COMMENT("\\/\\*", "\\*\\/"),
-        hljs2.HASH_COMMENT_MODE,
+        hljs.COMMENT("\\/\\*", "\\*\\/"),
+        hljs.HASH_COMMENT_MODE,
         SYMBOLS,
         {
           className: "function",
@@ -15230,7 +19363,7 @@ var require_llvm = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function llvm(hljs2) {
+  function llvm(hljs) {
     const IDENT_RE = /([-a-zA-Z$._][\w$.-]*)/;
     const TYPE = {
       className: "type",
@@ -15284,9 +19417,9 @@ var require_llvm = __commonJS((exports2, module2) => {
       keywords: "begin end true false declare define global constant private linker_private internal available_externally linkonce linkonce_odr weak weak_odr appending dllimport dllexport common default hidden protected extern_weak external thread_local zeroinitializer undef null to tail target triple datalayout volatile nuw nsw nnan ninf nsz arcp fast exact inbounds align addrspace section alias module asm sideeffect gc dbg linker_private_weak attributes blockaddress initialexec localdynamic localexec prefix unnamed_addr ccc fastcc coldcc x86_stdcallcc x86_fastcallcc arm_apcscc arm_aapcscc arm_aapcs_vfpcc ptx_device ptx_kernel intel_ocl_bicc msp430_intrcc spir_func spir_kernel x86_64_sysvcc x86_64_win64cc x86_thiscallcc cc c signext zeroext inreg sret nounwind noreturn noalias nocapture byval nest readnone readonly inlinehint noinline alwaysinline optsize ssp sspreq noredzone noimplicitfloat naked builtin cold nobuiltin noduplicate nonlazybind optnone returns_twice sanitize_address sanitize_memory sanitize_thread sspstrong uwtable returned type opaque eq ne slt sgt sle sge ult ugt ule uge oeq one olt ogt ole oge ord uno ueq une x acq_rel acquire alignstack atomic catch cleanup filter inteldialect max min monotonic nand personality release seq_cst singlethread umax umin unordered xchg add fadd sub fsub mul fmul udiv sdiv fdiv urem srem frem shl lshr ashr and or xor icmp fcmp phi call trunc zext sext fptrunc fpext uitofp sitofp fptoui fptosi inttoptr ptrtoint bitcast addrspacecast select va_arg ret br switch invoke unwind unreachable indirectbr landingpad resume malloc alloca free load store getelementptr extractelement insertelement shufflevector getresult extractvalue insertvalue atomicrmw cmpxchg fence argmemonly double",
       contains: [
         TYPE,
-        hljs2.COMMENT(/;\s*$/, null, {relevance: 0}),
-        hljs2.COMMENT(/;/, /$/),
-        hljs2.QUOTE_STRING_MODE,
+        hljs.COMMENT(/;\s*$/, null, {relevance: 0}),
+        hljs.COMMENT(/;/, /$/),
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           variants: [
@@ -15307,7 +19440,7 @@ var require_llvm = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/lsl.js
 var require_lsl = __commonJS((exports2, module2) => {
-  function lsl(hljs2) {
+  function lsl(hljs) {
     var LSL_STRING_ESCAPE_CHARS = {
       className: "subst",
       begin: /\\[tn"\\]/
@@ -15323,7 +19456,7 @@ var require_lsl = __commonJS((exports2, module2) => {
     var LSL_NUMBERS = {
       className: "number",
       relevance: 0,
-      begin: hljs2.C_NUMBER_RE
+      begin: hljs.C_NUMBER_RE
     };
     var LSL_CONSTANTS = {
       className: "literal",
@@ -15360,8 +19493,8 @@ var require_lsl = __commonJS((exports2, module2) => {
         {
           className: "comment",
           variants: [
-            hljs2.COMMENT("//", "$"),
-            hljs2.COMMENT("/\\*", "\\*/")
+            hljs.COMMENT("//", "$"),
+            hljs.COMMENT("/\\*", "\\*/")
           ],
           relevance: 0
         },
@@ -15391,7 +19524,7 @@ var require_lsl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/lua.js
 var require_lua = __commonJS((exports2, module2) => {
-  function lua(hljs2) {
+  function lua(hljs) {
     const OPENING_LONG_BRACKET = "\\[=*\\[";
     const CLOSING_LONG_BRACKET = "\\]=*\\]";
     const LONG_BRACKETS = {
@@ -15400,8 +19533,8 @@ var require_lua = __commonJS((exports2, module2) => {
       contains: ["self"]
     };
     const COMMENTS = [
-      hljs2.COMMENT("--(?!" + OPENING_LONG_BRACKET + ")", "$"),
-      hljs2.COMMENT("--" + OPENING_LONG_BRACKET, CLOSING_LONG_BRACKET, {
+      hljs.COMMENT("--(?!" + OPENING_LONG_BRACKET + ")", "$"),
+      hljs.COMMENT("--" + OPENING_LONG_BRACKET, CLOSING_LONG_BRACKET, {
         contains: [LONG_BRACKETS],
         relevance: 10
       })
@@ -15409,7 +19542,7 @@ var require_lua = __commonJS((exports2, module2) => {
     return {
       name: "Lua",
       keywords: {
-        $pattern: hljs2.UNDERSCORE_IDENT_RE,
+        $pattern: hljs.UNDERSCORE_IDENT_RE,
         literal: "true false nil",
         keyword: "and break do else elseif end for goto if in local not or repeat return then until while",
         built_in: "_G _ENV _VERSION __index __newindex __mode __call __metatable __tostring __len __gc __add __sub __mul __div __mod __pow __concat __unm __eq __lt __le assert collectgarbage dofile error getfenv getmetatable ipairs load loadfile loadstring module next pairs pcall print rawequal rawget rawset require select setfenv setmetatable tonumber tostring type unpack xpcall arg self coroutine resume yield status wrap create running debug getupvalue debug sethook getmetatable gethook setmetatable setlocal traceback setfenv getinfo setupvalue getlocal getregistry getfenv io lines write close flush open output type read stderr stdin input stdout popen tmpfile math log max acos huge ldexp pi cos tanh pow deg tan cosh sinh random randomseed frexp ceil floor rad abs sqrt modf asin min mod fmod log10 atan2 exp sin atan os exit setlocale date getenv difftime remove time clock tmpname rename execute package preload loadlib loaded loaders cpath config path seeall string sub upper len gfind rep find match char dump gmatch reverse byte format gsub lower table setn insert getn foreachi maxn foreach concat sort remove"
@@ -15420,7 +19553,7 @@ var require_lua = __commonJS((exports2, module2) => {
           beginKeywords: "function",
           end: "\\)",
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               begin: "([_a-zA-Z]\\w*\\.)*([_a-zA-Z]\\w*:)?[_a-zA-Z]\\w*"
             }),
             {
@@ -15431,9 +19564,9 @@ var require_lua = __commonJS((exports2, module2) => {
             }
           ].concat(COMMENTS)
         },
-        hljs2.C_NUMBER_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: OPENING_LONG_BRACKET,
@@ -15449,13 +19582,13 @@ var require_lua = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/makefile.js
 var require_makefile = __commonJS((exports2, module2) => {
-  function makefile(hljs2) {
+  function makefile(hljs) {
     const VARIABLE = {
       className: "variable",
       variants: [
         {
-          begin: "\\$\\(" + hljs2.UNDERSCORE_IDENT_RE + "\\)",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          begin: "\\$\\(" + hljs.UNDERSCORE_IDENT_RE + "\\)",
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: /\$[@%<?\^\+\*]/
@@ -15467,7 +19600,7 @@ var require_makefile = __commonJS((exports2, module2) => {
       begin: /"/,
       end: /"/,
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         VARIABLE
       ]
     };
@@ -15481,7 +19614,7 @@ var require_makefile = __commonJS((exports2, module2) => {
       contains: [VARIABLE]
     };
     const ASSIGNMENT = {
-      begin: "^" + hljs2.UNDERSCORE_IDENT_RE + "\\s*(?=[:+?]?=)"
+      begin: "^" + hljs.UNDERSCORE_IDENT_RE + "\\s*(?=[:+?]?=)"
     };
     const META = {
       className: "meta",
@@ -15510,7 +19643,7 @@ var require_makefile = __commonJS((exports2, module2) => {
         keyword: "define endef undefine ifdef ifndef ifeq ifneq else endif include -include sinclude override export unexport private vpath"
       },
       contains: [
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         VARIABLE,
         QUOTE_STRING,
         FUNC,
@@ -22169,7 +26302,7 @@ var require_mathematica = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function mathematica(hljs2) {
+  function mathematica(hljs) {
     const BASE_RE = /([2-9]|[1-2]\d|[3][0-5])\^\^/;
     const BASE_DIGITS_RE = /(\w*\.\w+|\w+\.\w*|\w+)/;
     const NUMBER_RE = /(\d*\.\d+|\d+\.\d*|\d+)/;
@@ -22248,7 +26381,7 @@ var require_mathematica = __commonJS((exports2, module2) => {
         "message-name": "string"
       },
       contains: [
-        hljs2.COMMENT(/\(\*/, /\*\)/, {
+        hljs.COMMENT(/\(\*/, /\*\)/, {
           contains: ["self"]
         }),
         PATTERNS,
@@ -22256,7 +26389,7 @@ var require_mathematica = __commonJS((exports2, module2) => {
         MESSAGES,
         SYMBOLS,
         NAMED_CHARACTER,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         NUMBERS,
         OPERATORS,
         BRACES
@@ -22268,7 +26401,7 @@ var require_mathematica = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/matlab.js
 var require_matlab = __commonJS((exports2, module2) => {
-  function matlab(hljs2) {
+  function matlab(hljs) {
     var TRANSPOSE_RE = "('|\\.')+";
     var TRANSPOSE = {
       relevance: 0,
@@ -22289,7 +26422,7 @@ var require_matlab = __commonJS((exports2, module2) => {
           beginKeywords: "function",
           end: "$",
           contains: [
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             {
               className: "params",
               variants: [
@@ -22311,7 +26444,7 @@ var require_matlab = __commonJS((exports2, module2) => {
         },
         {
           className: "number",
-          begin: hljs2.C_NUMBER_RE,
+          begin: hljs.C_NUMBER_RE,
           relevance: 0,
           starts: TRANSPOSE
         },
@@ -22320,7 +26453,7 @@ var require_matlab = __commonJS((exports2, module2) => {
           begin: "'",
           end: "'",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             {begin: "''"}
           ]
         },
@@ -22334,13 +26467,13 @@ var require_matlab = __commonJS((exports2, module2) => {
           begin: '"',
           end: '"',
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             {begin: '""'}
           ],
           starts: TRANSPOSE
         },
-        hljs2.COMMENT("^\\s*%\\{\\s*$", "^\\s*%\\}\\s*$"),
-        hljs2.COMMENT("%", "$")
+        hljs.COMMENT("^\\s*%\\{\\s*$", "^\\s*%\\}\\s*$"),
+        hljs.COMMENT("%", "$")
       ]
     };
   }
@@ -22349,7 +26482,7 @@ var require_matlab = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/maxima.js
 var require_maxima = __commonJS((exports2, module2) => {
-  function maxima(hljs2) {
+  function maxima(hljs) {
     const KEYWORDS = "if then else elseif for thru do while unless step in and or not";
     const LITERALS = "true false unknown inf minf ind und %e %i %pi %phi %gamma";
     const BUILTIN_FUNCTIONS = " abasep abs absint absolute_real_time acos acosh acot acoth acsc acsch activate addcol add_edge add_edges addmatrices addrow add_vertex add_vertices adjacency_matrix adjoin adjoint af agd airy airy_ai airy_bi airy_dai airy_dbi algsys alg_type alias allroots alphacharp alphanumericp amortization %and annuity_fv annuity_pv antid antidiff AntiDifference append appendfile apply apply1 apply2 applyb1 apropos args arit_amortization arithmetic arithsum array arrayapply arrayinfo arraymake arraysetapply ascii asec asech asin asinh askinteger asksign assoc assoc_legendre_p assoc_legendre_q assume assume_external_byte_order asympa at atan atan2 atanh atensimp atom atvalue augcoefmatrix augmented_lagrangian_method av average_degree backtrace bars barsplot barsplot_description base64 base64_decode bashindices batch batchload bc2 bdvac belln benefit_cost bern bernpoly bernstein_approx bernstein_expand bernstein_poly bessel bessel_i bessel_j bessel_k bessel_simplify bessel_y beta beta_incomplete beta_incomplete_generalized beta_incomplete_regularized bezout bfallroots bffac bf_find_root bf_fmin_cobyla bfhzeta bfloat bfloatp bfpsi bfpsi0 bfzeta biconnected_components bimetric binomial bipartition block blockmatrixp bode_gain bode_phase bothcoef box boxplot boxplot_description break bug_report build_info|10 buildq build_sample burn cabs canform canten cardinality carg cartan cartesian_product catch cauchy_matrix cbffac cdf_bernoulli cdf_beta cdf_binomial cdf_cauchy cdf_chi2 cdf_continuous_uniform cdf_discrete_uniform cdf_exp cdf_f cdf_gamma cdf_general_finite_discrete cdf_geometric cdf_gumbel cdf_hypergeometric cdf_laplace cdf_logistic cdf_lognormal cdf_negative_binomial cdf_noncentral_chi2 cdf_noncentral_student_t cdf_normal cdf_pareto cdf_poisson cdf_rank_sum cdf_rayleigh cdf_signed_rank cdf_student_t cdf_weibull cdisplay ceiling central_moment cequal cequalignore cf cfdisrep cfexpand cgeodesic cgreaterp cgreaterpignore changename changevar chaosgame charat charfun charfun2 charlist charp charpoly chdir chebyshev_t chebyshev_u checkdiv check_overlaps chinese cholesky christof chromatic_index chromatic_number cint circulant_graph clear_edge_weight clear_rules clear_vertex_label clebsch_gordan clebsch_graph clessp clesspignore close closefile cmetric coeff coefmatrix cograd col collapse collectterms columnop columnspace columnswap columnvector combination combine comp2pui compare compfile compile compile_file complement_graph complete_bipartite_graph complete_graph complex_number_p components compose_functions concan concat conjugate conmetderiv connected_components connect_vertices cons constant constantp constituent constvalue cont2part content continuous_freq contortion contour_plot contract contract_edge contragrad contrib_ode convert coord copy copy_file copy_graph copylist copymatrix cor cos cosh cot coth cov cov1 covdiff covect covers crc24sum create_graph create_list csc csch csetup cspline ctaylor ct_coordsys ctransform ctranspose cube_graph cuboctahedron_graph cunlisp cv cycle_digraph cycle_graph cylindrical days360 dblint deactivate declare declare_constvalue declare_dimensions declare_fundamental_dimensions declare_fundamental_units declare_qty declare_translated declare_unit_conversion declare_units declare_weights decsym defcon define define_alt_display define_variable defint defmatch defrule defstruct deftaylor degree_sequence del delete deleten delta demo demoivre denom depends derivdegree derivlist describe desolve determinant dfloat dgauss_a dgauss_b dgeev dgemm dgeqrf dgesv dgesvd diag diagmatrix diag_matrix diagmatrixp diameter diff digitcharp dimacs_export dimacs_import dimension dimensionless dimensions dimensions_as_list direct directory discrete_freq disjoin disjointp disolate disp dispcon dispform dispfun dispJordan display disprule dispterms distrib divide divisors divsum dkummer_m dkummer_u dlange dodecahedron_graph dotproduct dotsimp dpart draw draw2d draw3d drawdf draw_file draw_graph dscalar echelon edge_coloring edge_connectivity edges eigens_by_jacobi eigenvalues eigenvectors eighth einstein eivals eivects elapsed_real_time elapsed_run_time ele2comp ele2polynome ele2pui elem elementp elevation_grid elim elim_allbut eliminate eliminate_using ellipse elliptic_e elliptic_ec elliptic_eu elliptic_f elliptic_kc elliptic_pi ematrix empty_graph emptyp endcons entermatrix entertensor entier equal equalp equiv_classes erf erfc erf_generalized erfi errcatch error errormsg errors euler ev eval_string evenp every evolution evolution2d evundiff example exp expand expandwrt expandwrt_factored expint expintegral_chi expintegral_ci expintegral_e expintegral_e1 expintegral_ei expintegral_e_simplify expintegral_li expintegral_shi expintegral_si explicit explose exponentialize express expt exsec extdiff extract_linear_equations extremal_subset ezgcd %f f90 facsum factcomb factor factorfacsum factorial factorout factorsum facts fast_central_elements fast_linsolve fasttimes featurep fernfale fft fib fibtophi fifth filename_merge file_search file_type fillarray findde find_root find_root_abs find_root_error find_root_rel first fix flatten flength float floatnump floor flower_snark flush flush1deriv flushd flushnd flush_output fmin_cobyla forget fortran fourcos fourexpand fourier fourier_elim fourint fourintcos fourintsin foursimp foursin fourth fposition frame_bracket freeof freshline fresnel_c fresnel_s from_adjacency_matrix frucht_graph full_listify fullmap fullmapl fullratsimp fullratsubst fullsetify funcsolve fundamental_dimensions fundamental_units fundef funmake funp fv g0 g1 gamma gamma_greek gamma_incomplete gamma_incomplete_generalized gamma_incomplete_regularized gauss gauss_a gauss_b gaussprob gcd gcdex gcdivide gcfac gcfactor gd generalized_lambert_w genfact gen_laguerre genmatrix gensym geo_amortization geo_annuity_fv geo_annuity_pv geomap geometric geometric_mean geosum get getcurrentdirectory get_edge_weight getenv get_lu_factors get_output_stream_string get_pixel get_plot_option get_tex_environment get_tex_environment_default get_vertex_label gfactor gfactorsum ggf girth global_variances gn gnuplot_close gnuplot_replot gnuplot_reset gnuplot_restart gnuplot_start go Gosper GosperSum gr2d gr3d gradef gramschmidt graph6_decode graph6_encode graph6_export graph6_import graph_center graph_charpoly graph_eigenvalues graph_flow graph_order graph_periphery graph_product graph_size graph_union great_rhombicosidodecahedron_graph great_rhombicuboctahedron_graph grid_graph grind grobner_basis grotzch_graph hamilton_cycle hamilton_path hankel hankel_1 hankel_2 harmonic harmonic_mean hav heawood_graph hermite hessian hgfred hilbertmap hilbert_matrix hipow histogram histogram_description hodge horner hypergeometric i0 i1 %ibes ic1 ic2 ic_convert ichr1 ichr2 icosahedron_graph icosidodecahedron_graph icurvature ident identfor identity idiff idim idummy ieqn %if ifactors iframes ifs igcdex igeodesic_coords ilt image imagpart imetric implicit implicit_derivative implicit_plot indexed_tensor indices induced_subgraph inferencep inference_result infix info_display init_atensor init_ctensor in_neighbors innerproduct inpart inprod inrt integerp integer_partitions integrate intersect intersection intervalp intopois intosum invariant1 invariant2 inverse_fft inverse_jacobi_cd inverse_jacobi_cn inverse_jacobi_cs inverse_jacobi_dc inverse_jacobi_dn inverse_jacobi_ds inverse_jacobi_nc inverse_jacobi_nd inverse_jacobi_ns inverse_jacobi_sc inverse_jacobi_sd inverse_jacobi_sn invert invert_by_adjoint invert_by_lu inv_mod irr is is_biconnected is_bipartite is_connected is_digraph is_edge_in_graph is_graph is_graph_or_digraph ishow is_isomorphic isolate isomorphism is_planar isqrt isreal_p is_sconnected is_tree is_vertex_in_graph items_inference %j j0 j1 jacobi jacobian jacobi_cd jacobi_cn jacobi_cs jacobi_dc jacobi_dn jacobi_ds jacobi_nc jacobi_nd jacobi_ns jacobi_p jacobi_sc jacobi_sd jacobi_sn JF jn join jordan julia julia_set julia_sin %k kdels kdelta kill killcontext kostka kron_delta kronecker_product kummer_m kummer_u kurtosis kurtosis_bernoulli kurtosis_beta kurtosis_binomial kurtosis_chi2 kurtosis_continuous_uniform kurtosis_discrete_uniform kurtosis_exp kurtosis_f kurtosis_gamma kurtosis_general_finite_discrete kurtosis_geometric kurtosis_gumbel kurtosis_hypergeometric kurtosis_laplace kurtosis_logistic kurtosis_lognormal kurtosis_negative_binomial kurtosis_noncentral_chi2 kurtosis_noncentral_student_t kurtosis_normal kurtosis_pareto kurtosis_poisson kurtosis_rayleigh kurtosis_student_t kurtosis_weibull label labels lagrange laguerre lambda lambert_w laplace laplacian_matrix last lbfgs lc2kdt lcharp lc_l lcm lc_u ldefint ldisp ldisplay legendre_p legendre_q leinstein length let letrules letsimp levi_civita lfreeof lgtreillis lhs li liediff limit Lindstedt linear linearinterpol linear_program linear_regression line_graph linsolve listarray list_correlations listify list_matrix_entries list_nc_monomials listoftens listofvars listp lmax lmin load loadfile local locate_matrix_entry log logcontract log_gamma lopow lorentz_gauge lowercasep lpart lratsubst lreduce lriemann lsquares_estimates lsquares_estimates_approximate lsquares_estimates_exact lsquares_mse lsquares_residual_mse lsquares_residuals lsum ltreillis lu_backsub lucas lu_factor %m macroexpand macroexpand1 make_array makebox makefact makegamma make_graph make_level_picture makelist makeOrders make_poly_continent make_poly_country make_polygon make_random_state make_rgb_picture makeset make_string_input_stream make_string_output_stream make_transform mandelbrot mandelbrot_set map mapatom maplist matchdeclare matchfix mat_cond mat_fullunblocker mat_function mathml_display mat_norm matrix matrixmap matrixp matrix_size mattrace mat_trace mat_unblocker max max_clique max_degree max_flow maximize_lp max_independent_set max_matching maybe md5sum mean mean_bernoulli mean_beta mean_binomial mean_chi2 mean_continuous_uniform mean_deviation mean_discrete_uniform mean_exp mean_f mean_gamma mean_general_finite_discrete mean_geometric mean_gumbel mean_hypergeometric mean_laplace mean_logistic mean_lognormal mean_negative_binomial mean_noncentral_chi2 mean_noncentral_student_t mean_normal mean_pareto mean_poisson mean_rayleigh mean_student_t mean_weibull median median_deviation member mesh metricexpandall mgf1_sha1 min min_degree min_edge_cut minfactorial minimalPoly minimize_lp minimum_spanning_tree minor minpack_lsquares minpack_solve min_vertex_cover min_vertex_cut mkdir mnewton mod mode_declare mode_identity ModeMatrix moebius mon2schur mono monomial_dimensions multibernstein_poly multi_display_for_texinfo multi_elem multinomial multinomial_coeff multi_orbit multiplot_mode multi_pui multsym multthru mycielski_graph nary natural_unit nc_degree ncexpt ncharpoly negative_picture neighbors new newcontext newdet new_graph newline newton new_variable next_prime nicedummies niceindices ninth nofix nonarray noncentral_moment nonmetricity nonnegintegerp nonscalarp nonzeroandfreeof notequal nounify nptetrad npv nroots nterms ntermst nthroot nullity nullspace num numbered_boundaries numberp number_to_octets num_distinct_partitions numerval numfactor num_partitions nusum nzeta nzetai nzetar octets_to_number octets_to_oid odd_girth oddp ode2 ode_check odelin oid_to_octets op opena opena_binary openr openr_binary openw openw_binary operatorp opsubst optimize %or orbit orbits ordergreat ordergreatp orderless orderlessp orthogonal_complement orthopoly_recur orthopoly_weight outermap out_neighbors outofpois pade parabolic_cylinder_d parametric parametric_surface parg parGosper parse_string parse_timedate part part2cont partfrac partition partition_set partpol path_digraph path_graph pathname_directory pathname_name pathname_type pdf_bernoulli pdf_beta pdf_binomial pdf_cauchy pdf_chi2 pdf_continuous_uniform pdf_discrete_uniform pdf_exp pdf_f pdf_gamma pdf_general_finite_discrete pdf_geometric pdf_gumbel pdf_hypergeometric pdf_laplace pdf_logistic pdf_lognormal pdf_negative_binomial pdf_noncentral_chi2 pdf_noncentral_student_t pdf_normal pdf_pareto pdf_poisson pdf_rank_sum pdf_rayleigh pdf_signed_rank pdf_student_t pdf_weibull pearson_skewness permanent permut permutation permutations petersen_graph petrov pickapart picture_equalp picturep piechart piechart_description planar_embedding playback plog plot2d plot3d plotdf ploteq plsquares pochhammer points poisdiff poisexpt poisint poismap poisplus poissimp poissubst poistimes poistrim polar polarform polartorect polar_to_xy poly_add poly_buchberger poly_buchberger_criterion poly_colon_ideal poly_content polydecomp poly_depends_p poly_elimination_ideal poly_exact_divide poly_expand poly_expt poly_gcd polygon poly_grobner poly_grobner_equal poly_grobner_member poly_grobner_subsetp poly_ideal_intersection poly_ideal_polysaturation poly_ideal_polysaturation1 poly_ideal_saturation poly_ideal_saturation1 poly_lcm poly_minimization polymod poly_multiply polynome2ele polynomialp poly_normal_form poly_normalize poly_normalize_list poly_polysaturation_extension poly_primitive_part poly_pseudo_divide poly_reduced_grobner poly_reduction poly_saturation_extension poly_s_polynomial poly_subtract polytocompanion pop postfix potential power_mod powerseries powerset prefix prev_prime primep primes principal_components print printf printfile print_graph printpois printprops prodrac product properties propvars psi psubst ptriangularize pui pui2comp pui2ele pui2polynome pui_direct puireduc push put pv qput qrange qty quad_control quad_qag quad_qagi quad_qagp quad_qags quad_qawc quad_qawf quad_qawo quad_qaws quadrilateral quantile quantile_bernoulli quantile_beta quantile_binomial quantile_cauchy quantile_chi2 quantile_continuous_uniform quantile_discrete_uniform quantile_exp quantile_f quantile_gamma quantile_general_finite_discrete quantile_geometric quantile_gumbel quantile_hypergeometric quantile_laplace quantile_logistic quantile_lognormal quantile_negative_binomial quantile_noncentral_chi2 quantile_noncentral_student_t quantile_normal quantile_pareto quantile_poisson quantile_rayleigh quantile_student_t quantile_weibull quartile_skewness quit qunit quotient racah_v racah_w radcan radius random random_bernoulli random_beta random_binomial random_bipartite_graph random_cauchy random_chi2 random_continuous_uniform random_digraph random_discrete_uniform random_exp random_f random_gamma random_general_finite_discrete random_geometric random_graph random_graph1 random_gumbel random_hypergeometric random_laplace random_logistic random_lognormal random_negative_binomial random_network random_noncentral_chi2 random_noncentral_student_t random_normal random_pareto random_permutation random_poisson random_rayleigh random_regular_graph random_student_t random_tournament random_tree random_weibull range rank rat ratcoef ratdenom ratdiff ratdisrep ratexpand ratinterpol rational rationalize ratnumer ratnump ratp ratsimp ratsubst ratvars ratweight read read_array read_binary_array read_binary_list read_binary_matrix readbyte readchar read_hashed_array readline read_list read_matrix read_nested_list readonly read_xpm real_imagpart_to_conjugate realpart realroots rearray rectangle rectform rectform_log_if_constant recttopolar rediff reduce_consts reduce_order region region_boundaries region_boundaries_plus rem remainder remarray rembox remcomps remcon remcoord remfun remfunction remlet remove remove_constvalue remove_dimensions remove_edge remove_fundamental_dimensions remove_fundamental_units remove_plot_option remove_vertex rempart remrule remsym remvalue rename rename_file reset reset_displays residue resolvante resolvante_alternee1 resolvante_bipartite resolvante_diedrale resolvante_klein resolvante_klein3 resolvante_produit_sym resolvante_unitaire resolvante_vierer rest resultant return reveal reverse revert revert2 rgb2level rhs ricci riemann rinvariant risch rk rmdir rncombine romberg room rootscontract round row rowop rowswap rreduce run_testsuite %s save saving scalarp scaled_bessel_i scaled_bessel_i0 scaled_bessel_i1 scalefactors scanmap scatterplot scatterplot_description scene schur2comp sconcat scopy scsimp scurvature sdowncase sec sech second sequal sequalignore set_alt_display setdifference set_draw_defaults set_edge_weight setelmx setequalp setify setp set_partitions set_plot_option set_prompt set_random_state set_tex_environment set_tex_environment_default setunits setup_autoload set_up_dot_simplifications set_vertex_label seventh sexplode sf sha1sum sha256sum shortest_path shortest_weighted_path show showcomps showratvars sierpinskiale sierpinskimap sign signum similaritytransform simp_inequality simplify_sum simplode simpmetderiv simtran sin sinh sinsert sinvertcase sixth skewness skewness_bernoulli skewness_beta skewness_binomial skewness_chi2 skewness_continuous_uniform skewness_discrete_uniform skewness_exp skewness_f skewness_gamma skewness_general_finite_discrete skewness_geometric skewness_gumbel skewness_hypergeometric skewness_laplace skewness_logistic skewness_lognormal skewness_negative_binomial skewness_noncentral_chi2 skewness_noncentral_student_t skewness_normal skewness_pareto skewness_poisson skewness_rayleigh skewness_student_t skewness_weibull slength smake small_rhombicosidodecahedron_graph small_rhombicuboctahedron_graph smax smin smismatch snowmap snub_cube_graph snub_dodecahedron_graph solve solve_rec solve_rec_rat some somrac sort sparse6_decode sparse6_encode sparse6_export sparse6_import specint spherical spherical_bessel_j spherical_bessel_y spherical_hankel1 spherical_hankel2 spherical_harmonic spherical_to_xyz splice split sposition sprint sqfr sqrt sqrtdenest sremove sremovefirst sreverse ssearch ssort sstatus ssubst ssubstfirst staircase standardize standardize_inverse_trig starplot starplot_description status std std1 std_bernoulli std_beta std_binomial std_chi2 std_continuous_uniform std_discrete_uniform std_exp std_f std_gamma std_general_finite_discrete std_geometric std_gumbel std_hypergeometric std_laplace std_logistic std_lognormal std_negative_binomial std_noncentral_chi2 std_noncentral_student_t std_normal std_pareto std_poisson std_rayleigh std_student_t std_weibull stemplot stirling stirling1 stirling2 strim striml strimr string stringout stringp strong_components struve_h struve_l sublis sublist sublist_indices submatrix subsample subset subsetp subst substinpart subst_parallel substpart substring subvar subvarp sum sumcontract summand_to_rec supcase supcontext symbolp symmdifference symmetricp system take_channel take_inference tan tanh taylor taylorinfo taylorp taylor_simplifier taytorat tcl_output tcontract tellrat tellsimp tellsimpafter tentex tenth test_mean test_means_difference test_normality test_proportion test_proportions_difference test_rank_sum test_sign test_signed_rank test_variance test_variance_ratio tex tex1 tex_display texput %th third throw time timedate timer timer_info tldefint tlimit todd_coxeter toeplitz tokens to_lisp topological_sort to_poly to_poly_solve totaldisrep totalfourier totient tpartpol trace tracematrix trace_options transform_sample translate translate_file transpose treefale tree_reduce treillis treinat triangle triangularize trigexpand trigrat trigreduce trigsimp trunc truncate truncated_cube_graph truncated_dodecahedron_graph truncated_icosahedron_graph truncated_tetrahedron_graph tr_warnings_get tube tutte_graph ueivects uforget ultraspherical underlying_graph undiff union unique uniteigenvectors unitp units unit_step unitvector unorder unsum untellrat untimer untrace uppercasep uricci uriemann uvect vandermonde_matrix var var1 var_bernoulli var_beta var_binomial var_chi2 var_continuous_uniform var_discrete_uniform var_exp var_f var_gamma var_general_finite_discrete var_geometric var_gumbel var_hypergeometric var_laplace var_logistic var_lognormal var_negative_binomial var_noncentral_chi2 var_noncentral_student_t var_normal var_pareto var_poisson var_rayleigh var_student_t var_weibull vector vectorpotential vectorsimp verbify vers vertex_coloring vertex_connectivity vertex_degree vertex_distance vertex_eccentricity vertex_in_degree vertex_out_degree vertices vertices_to_cycle vertices_to_path %w weyl wheel_graph wiener_index wigner_3j wigner_6j wigner_9j with_stdout write_binary_data writebyte write_data writefile wronskian xreduce xthru %y Zeilberger zeroequiv zerofor zeromatrix zeromatrixp zeta zgeev zheev zlange zn_add_table zn_carmichael_lambda zn_characteristic_factors zn_determinant zn_factor_generators zn_invert_by_lu zn_log zn_mult_table absboxchar activecontexts adapt_depth additive adim aform algebraic algepsilon algexact aliases allbut all_dotsimp_denoms allocation allsym alphabetic animation antisymmetric arrays askexp assume_pos assume_pos_pred assumescalar asymbol atomgrad atrig1 axes axis_3d axis_bottom axis_left axis_right axis_top azimuth background background_color backsubst berlefact bernstein_explicit besselexpand beta_args_sum_to_integer beta_expand bftorat bftrunc bindtest border boundaries_array box boxchar breakup %c capping cauchysum cbrange cbtics center cflength cframe_flag cnonmet_flag color color_bar color_bar_tics colorbox columns commutative complex cone context contexts contour contour_levels cosnpiflag ctaypov ctaypt ctayswitch ctayvar ct_coords ctorsion_flag ctrgsimp cube current_let_rule_package cylinder data_file_name debugmode decreasing default_let_rule_package delay dependencies derivabbrev derivsubst detout diagmetric diff dim dimensions dispflag display2d|10 display_format_internal distribute_over doallmxops domain domxexpt domxmxops domxnctimes dontfactor doscmxops doscmxplus dot0nscsimp dot0simp dot1simp dotassoc dotconstrules dotdistrib dotexptsimp dotident dotscrules draw_graph_program draw_realpart edge_color edge_coloring edge_partition edge_type edge_width %edispflag elevation %emode endphi endtheta engineering_format_floats enhanced3d %enumer epsilon_lp erfflag erf_representation errormsg error_size error_syms error_type %e_to_numlog eval even evenfun evflag evfun ev_point expandwrt_denom expintexpand expintrep expon expop exptdispflag exptisolate exptsubst facexpand facsum_combine factlim factorflag factorial_expand factors_only fb feature features file_name file_output_append file_search_demo file_search_lisp file_search_maxima|10 file_search_tests file_search_usage file_type_lisp file_type_maxima|10 fill_color fill_density filled_func fixed_vertices flipflag float2bf font font_size fortindent fortspaces fpprec fpprintprec functions gamma_expand gammalim gdet genindex gensumnum GGFCFMAX GGFINFINITY globalsolve gnuplot_command gnuplot_curve_styles gnuplot_curve_titles gnuplot_default_term_command gnuplot_dumb_term_command gnuplot_file_args gnuplot_file_name gnuplot_out_file gnuplot_pdf_term_command gnuplot_pm3d gnuplot_png_term_command gnuplot_postamble gnuplot_preamble gnuplot_ps_term_command gnuplot_svg_term_command gnuplot_term gnuplot_view_args Gosper_in_Zeilberger gradefs grid grid2d grind halfangles head_angle head_both head_length head_type height hypergeometric_representation %iargs ibase icc1 icc2 icounter idummyx ieqnprint ifb ifc1 ifc2 ifg ifgi ifr iframe_bracket_form ifri igeowedge_flag ikt1 ikt2 imaginary inchar increasing infeval infinity inflag infolists inm inmc1 inmc2 intanalysis integer integervalued integrate_use_rootsof integration_constant integration_constant_counter interpolate_color intfaclim ip_grid ip_grid_in irrational isolate_wrt_times iterations itr julia_parameter %k1 %k2 keepfloat key key_pos kinvariant kt label label_alignment label_orientation labels lassociative lbfgs_ncorrections lbfgs_nfeval_max leftjust legend letrat let_rule_packages lfg lg lhospitallim limsubst linear linear_solver linechar linel|10 linenum line_type linewidth line_width linsolve_params linsolvewarn lispdisp listarith listconstvars listdummyvars lmxchar load_pathname loadprint logabs logarc logcb logconcoeffp logexpand lognegint logsimp logx logx_secondary logy logy_secondary logz lriem m1pbranch macroexpansion macros mainvar manual_demo maperror mapprint matrix_element_add matrix_element_mult matrix_element_transpose maxapplydepth maxapplyheight maxima_tempdir|10 maxima_userdir|10 maxnegex MAX_ORD maxposex maxpsifracdenom maxpsifracnum maxpsinegint maxpsiposint maxtayorder mesh_lines_color method mod_big_prime mode_check_errorp mode_checkp mode_check_warnp mod_test mod_threshold modular_linear_solver modulus multiplicative multiplicities myoptions nary negdistrib negsumdispflag newline newtonepsilon newtonmaxiter nextlayerfactor niceindicespref nm nmc noeval nolabels nonegative_lp noninteger nonscalar noun noundisp nouns np npi nticks ntrig numer numer_pbranch obase odd oddfun opacity opproperties opsubst optimprefix optionset orientation origin orthopoly_returns_intervals outative outchar packagefile palette partswitch pdf_file pfeformat phiresolution %piargs piece pivot_count_sx pivot_max_sx plot_format plot_options plot_realpart png_file pochhammer_max_index points pointsize point_size points_joined point_type poislim poisson poly_coefficient_ring poly_elimination_order polyfactor poly_grobner_algorithm poly_grobner_debug poly_monomial_order poly_primary_elimination_order poly_return_term_list poly_secondary_elimination_order poly_top_reduction_only posfun position powerdisp pred prederror primep_number_of_tests product_use_gamma program programmode promote_float_to_bigfloat prompt proportional_axes props psexpand ps_file radexpand radius radsubstflag rassociative ratalgdenom ratchristof ratdenomdivide rateinstein ratepsilon ratfac rational ratmx ratprint ratriemann ratsimpexpons ratvarswitch ratweights ratweyl ratwtlvl real realonly redraw refcheck resolution restart resultant ric riem rmxchar %rnum_list rombergabs rombergit rombergmin rombergtol rootsconmode rootsepsilon run_viewer same_xy same_xyz savedef savefactors scalar scalarmatrixp scale scale_lp setcheck setcheckbreak setval show_edge_color show_edges show_edge_type show_edge_width show_id show_label showtime show_vertex_color show_vertex_size show_vertex_type show_vertices show_weight simp simplified_output simplify_products simpproduct simpsum sinnpiflag solvedecomposes solveexplicit solvefactors solvenullwarn solveradcan solvetrigwarn space sparse sphere spring_embedding_depth sqrtdispflag stardisp startphi starttheta stats_numer stringdisp structures style sublis_apply_lambda subnumsimp sumexpand sumsplitfact surface surface_hide svg_file symmetric tab taylordepth taylor_logexpand taylor_order_coefficients taylor_truncate_polynomials tensorkill terminal testsuite_files thetaresolution timer_devalue title tlimswitch tr track transcompile transform transform_xy translate_fast_arrays transparent transrun tr_array_as_ref tr_bound_function_applyp tr_file_tty_messagesp tr_float_can_branch_complex tr_function_call_default trigexpandplus trigexpandtimes triginverses trigsign trivial_solutions tr_numer tr_optimize_max_loop tr_semicompile tr_state_vars tr_warn_bad_function_calls tr_warn_fexpr tr_warn_meval tr_warn_mode tr_warn_undeclared tr_warn_undefined_variable tstep ttyoff tube_extremes ufg ug %unitexpand unit_vectors uric uriem use_fast_arrays user_preamble usersetunits values vect_cross verbose vertex_color vertex_coloring vertex_partition vertex_size vertex_type view warnings weyl width windowname windowtitle wired_surface wireframe xaxis xaxis_color xaxis_secondary xaxis_type xaxis_width xlabel xlabel_secondary xlength xrange xrange_secondary xtics xtics_axis xtics_rotate xtics_rotate_secondary xtics_secondary xtics_secondary_axis xu_grid x_voxel xy_file xyplane xy_scale yaxis yaxis_color yaxis_secondary yaxis_type yaxis_width ylabel ylabel_secondary ylength yrange yrange_secondary ytics ytics_axis ytics_rotate ytics_rotate_secondary ytics_secondary ytics_secondary_axis yv_grid y_voxel yx_ratio zaxis zaxis_color zaxis_type zaxis_width zeroa zerob zerobern zeta%pi zlabel zlabel_rotate zlength zmin zn_primroot_limit zn_primroot_pretest";
@@ -22370,7 +26503,7 @@ var require_maxima = __commonJS((exports2, module2) => {
           end: "\\*/",
           contains: ["self"]
         },
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "number",
           relevance: 0,
@@ -22399,26 +26532,26 @@ var require_maxima = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/mel.js
 var require_mel = __commonJS((exports2, module2) => {
-  function mel(hljs2) {
+  function mel(hljs) {
     return {
       name: "MEL",
       keywords: "int float string vector matrix if else switch case default while do for in break continue global proc return about abs addAttr addAttributeEditorNodeHelp addDynamic addNewShelfTab addPP addPanelCategory addPrefixToName advanceToNextDrivenKey affectedNet affects aimConstraint air alias aliasAttr align alignCtx alignCurve alignSurface allViewFit ambientLight angle angleBetween animCone animCurveEditor animDisplay animView annotate appendStringArray applicationName applyAttrPreset applyTake arcLenDimContext arcLengthDimension arclen arrayMapper art3dPaintCtx artAttrCtx artAttrPaintVertexCtx artAttrSkinPaintCtx artAttrTool artBuildPaintMenu artFluidAttrCtx artPuttyCtx artSelectCtx artSetPaintCtx artUserPaintCtx assignCommand assignInputDevice assignViewportFactories attachCurve attachDeviceAttr attachSurface attrColorSliderGrp attrCompatibility attrControlGrp attrEnumOptionMenu attrEnumOptionMenuGrp attrFieldGrp attrFieldSliderGrp attrNavigationControlGrp attrPresetEditWin attributeExists attributeInfo attributeMenu attributeQuery autoKeyframe autoPlace bakeClip bakeFluidShading bakePartialHistory bakeResults bakeSimulation basename basenameEx batchRender bessel bevel bevelPlus binMembership bindSkin blend2 blendShape blendShapeEditor blendShapePanel blendTwoAttr blindDataType boneLattice boundary boxDollyCtx boxZoomCtx bufferCurve buildBookmarkMenu buildKeyframeMenu button buttonManip CBG cacheFile cacheFileCombine cacheFileMerge cacheFileTrack camera cameraView canCreateManip canvas capitalizeString catch catchQuiet ceil changeSubdivComponentDisplayLevel changeSubdivRegion channelBox character characterMap characterOutlineEditor characterize chdir checkBox checkBoxGrp checkDefaultRenderGlobals choice circle circularFillet clamp clear clearCache clip clipEditor clipEditorCurrentTimeCtx clipSchedule clipSchedulerOutliner clipTrimBefore closeCurve closeSurface cluster cmdFileOutput cmdScrollFieldExecuter cmdScrollFieldReporter cmdShell coarsenSubdivSelectionList collision color colorAtPoint colorEditor colorIndex colorIndexSliderGrp colorSliderButtonGrp colorSliderGrp columnLayout commandEcho commandLine commandPort compactHairSystem componentEditor compositingInterop computePolysetVolume condition cone confirmDialog connectAttr connectControl connectDynamic connectJoint connectionInfo constrain constrainValue constructionHistory container containsMultibyte contextInfo control convertFromOldLayers convertIffToPsd convertLightmap convertSolidTx convertTessellation convertUnit copyArray copyFlexor copyKey copySkinWeights cos cpButton cpCache cpClothSet cpCollision cpConstraint cpConvClothToMesh cpForces cpGetSolverAttr cpPanel cpProperty cpRigidCollisionFilter cpSeam cpSetEdit cpSetSolverAttr cpSolver cpSolverTypes cpTool cpUpdateClothUVs createDisplayLayer createDrawCtx createEditor createLayeredPsdFile createMotionField createNewShelf createNode createRenderLayer createSubdivRegion cross crossProduct ctxAbort ctxCompletion ctxEditMode ctxTraverse currentCtx currentTime currentTimeCtx currentUnit curve curveAddPtCtx curveCVCtx curveEPCtx curveEditorCtx curveIntersect curveMoveEPCtx curveOnSurface curveSketchCtx cutKey cycleCheck cylinder dagPose date defaultLightListCheckBox defaultNavigation defineDataServer defineVirtualDevice deformer deg_to_rad delete deleteAttr deleteShadingGroupsAndMaterials deleteShelfTab deleteUI deleteUnusedBrushes delrandstr detachCurve detachDeviceAttr detachSurface deviceEditor devicePanel dgInfo dgdirty dgeval dgtimer dimWhen directKeyCtx directionalLight dirmap dirname disable disconnectAttr disconnectJoint diskCache displacementToPoly displayAffected displayColor displayCull displayLevelOfDetail displayPref displayRGBColor displaySmoothness displayStats displayString displaySurface distanceDimContext distanceDimension doBlur dolly dollyCtx dopeSheetEditor dot dotProduct doubleProfileBirailSurface drag dragAttrContext draggerContext dropoffLocator duplicate duplicateCurve duplicateSurface dynCache dynControl dynExport dynExpression dynGlobals dynPaintEditor dynParticleCtx dynPref dynRelEdPanel dynRelEditor dynamicLoad editAttrLimits editDisplayLayerGlobals editDisplayLayerMembers editRenderLayerAdjustment editRenderLayerGlobals editRenderLayerMembers editor editorTemplate effector emit emitter enableDevice encodeString endString endsWith env equivalent equivalentTol erf error eval evalDeferred evalEcho event exactWorldBoundingBox exclusiveLightCheckBox exec executeForEachObject exists exp expression expressionEditorListen extendCurve extendSurface extrude fcheck fclose feof fflush fgetline fgetword file fileBrowserDialog fileDialog fileExtension fileInfo filetest filletCurve filter filterCurve filterExpand filterStudioImport findAllIntersections findAnimCurves findKeyframe findMenuItem findRelatedSkinCluster finder firstParentOf fitBspline flexor floatEq floatField floatFieldGrp floatScrollBar floatSlider floatSlider2 floatSliderButtonGrp floatSliderGrp floor flow fluidCacheInfo fluidEmitter fluidVoxelInfo flushUndo fmod fontDialog fopen formLayout format fprint frameLayout fread freeFormFillet frewind fromNativePath fwrite gamma gauss geometryConstraint getApplicationVersionAsFloat getAttr getClassification getDefaultBrush getFileList getFluidAttr getInputDeviceRange getMayaPanelTypes getModifiers getPanel getParticleAttr getPluginResource getenv getpid glRender glRenderEditor globalStitch gmatch goal gotoBindPose grabColor gradientControl gradientControlNoAttr graphDollyCtx graphSelectContext graphTrackCtx gravity grid gridLayout group groupObjectsByName HfAddAttractorToAS HfAssignAS HfBuildEqualMap HfBuildFurFiles HfBuildFurImages HfCancelAFR HfConnectASToHF HfCreateAttractor HfDeleteAS HfEditAS HfPerformCreateAS HfRemoveAttractorFromAS HfSelectAttached HfSelectAttractors HfUnAssignAS hardenPointCurve hardware hardwareRenderPanel headsUpDisplay headsUpMessage help helpLine hermite hide hilite hitTest hotBox hotkey hotkeyCheck hsv_to_rgb hudButton hudSlider hudSliderButton hwReflectionMap hwRender hwRenderLoad hyperGraph hyperPanel hyperShade hypot iconTextButton iconTextCheckBox iconTextRadioButton iconTextRadioCollection iconTextScrollList iconTextStaticLabel ikHandle ikHandleCtx ikHandleDisplayScale ikSolver ikSplineHandleCtx ikSystem ikSystemInfo ikfkDisplayMethod illustratorCurves image imfPlugins inheritTransform insertJoint insertJointCtx insertKeyCtx insertKnotCurve insertKnotSurface instance instanceable instancer intField intFieldGrp intScrollBar intSlider intSliderGrp interToUI internalVar intersect iprEngine isAnimCurve isConnected isDirty isParentOf isSameObject isTrue isValidObjectName isValidString isValidUiName isolateSelect itemFilter itemFilterAttr itemFilterRender itemFilterType joint jointCluster jointCtx jointDisplayScale jointLattice keyTangent keyframe keyframeOutliner keyframeRegionCurrentTimeCtx keyframeRegionDirectKeyCtx keyframeRegionDollyCtx keyframeRegionInsertKeyCtx keyframeRegionMoveKeyCtx keyframeRegionScaleKeyCtx keyframeRegionSelectKeyCtx keyframeRegionSetKeyCtx keyframeRegionTrackCtx keyframeStats lassoContext lattice latticeDeformKeyCtx launch launchImageEditor layerButton layeredShaderPort layeredTexturePort layout layoutDialog lightList lightListEditor lightListPanel lightlink lineIntersection linearPrecision linstep listAnimatable listAttr listCameras listConnections listDeviceAttachments listHistory listInputDeviceAxes listInputDeviceButtons listInputDevices listMenuAnnotation listNodeTypes listPanelCategories listRelatives listSets listTransforms listUnselected listerEditor loadFluid loadNewShelf loadPlugin loadPluginLanguageResources loadPrefObjects localizedPanelLabel lockNode loft log longNameOf lookThru ls lsThroughFilter lsType lsUI Mayatomr mag makeIdentity makeLive makePaintable makeRoll makeSingleSurface makeTubeOn makebot manipMoveContext manipMoveLimitsCtx manipOptions manipRotateContext manipRotateLimitsCtx manipScaleContext manipScaleLimitsCtx marker match max memory menu menuBarLayout menuEditor menuItem menuItemToShelf menuSet menuSetPref messageLine min minimizeApp mirrorJoint modelCurrentTimeCtx modelEditor modelPanel mouse movIn movOut move moveIKtoFK moveKeyCtx moveVertexAlongDirection multiProfileBirailSurface mute nParticle nameCommand nameField namespace namespaceInfo newPanelItems newton nodeCast nodeIconButton nodeOutliner nodePreset nodeType noise nonLinear normalConstraint normalize nurbsBoolean nurbsCopyUVSet nurbsCube nurbsEditUV nurbsPlane nurbsSelect nurbsSquare nurbsToPoly nurbsToPolygonsPref nurbsToSubdiv nurbsToSubdivPref nurbsUVSet nurbsViewDirectionVector objExists objectCenter objectLayer objectType objectTypeUI obsoleteProc oceanNurbsPreviewPlane offsetCurve offsetCurveOnSurface offsetSurface openGLExtension openMayaPref optionMenu optionMenuGrp optionVar orbit orbitCtx orientConstraint outlinerEditor outlinerPanel overrideModifier paintEffectsDisplay pairBlend palettePort paneLayout panel panelConfiguration panelHistory paramDimContext paramDimension paramLocator parent parentConstraint particle particleExists particleInstancer particleRenderInfo partition pasteKey pathAnimation pause pclose percent performanceOptions pfxstrokes pickWalk picture pixelMove planarSrf plane play playbackOptions playblast plugAttr plugNode pluginInfo pluginResourceUtil pointConstraint pointCurveConstraint pointLight pointMatrixMult pointOnCurve pointOnSurface pointPosition poleVectorConstraint polyAppend polyAppendFacetCtx polyAppendVertex polyAutoProjection polyAverageNormal polyAverageVertex polyBevel polyBlendColor polyBlindData polyBoolOp polyBridgeEdge polyCacheMonitor polyCheck polyChipOff polyClipboard polyCloseBorder polyCollapseEdge polyCollapseFacet polyColorBlindData polyColorDel polyColorPerVertex polyColorSet polyCompare polyCone polyCopyUV polyCrease polyCreaseCtx polyCreateFacet polyCreateFacetCtx polyCube polyCut polyCutCtx polyCylinder polyCylindricalProjection polyDelEdge polyDelFacet polyDelVertex polyDuplicateAndConnect polyDuplicateEdge polyEditUV polyEditUVShell polyEvaluate polyExtrudeEdge polyExtrudeFacet polyExtrudeVertex polyFlipEdge polyFlipUV polyForceUV polyGeoSampler polyHelix polyInfo polyInstallAction polyLayoutUV polyListComponentConversion polyMapCut polyMapDel polyMapSew polyMapSewMove polyMergeEdge polyMergeEdgeCtx polyMergeFacet polyMergeFacetCtx polyMergeUV polyMergeVertex polyMirrorFace polyMoveEdge polyMoveFacet polyMoveFacetUV polyMoveUV polyMoveVertex polyNormal polyNormalPerVertex polyNormalizeUV polyOptUvs polyOptions polyOutput polyPipe polyPlanarProjection polyPlane polyPlatonicSolid polyPoke polyPrimitive polyPrism polyProjection polyPyramid polyQuad polyQueryBlindData polyReduce polySelect polySelectConstraint polySelectConstraintMonitor polySelectCtx polySelectEditCtx polySeparate polySetToFaceNormal polySewEdge polyShortestPathCtx polySmooth polySoftEdge polySphere polySphericalProjection polySplit polySplitCtx polySplitEdge polySplitRing polySplitVertex polyStraightenUVBorder polySubdivideEdge polySubdivideFacet polyToSubdiv polyTorus polyTransfer polyTriangulate polyUVSet polyUnite polyWedgeFace popen popupMenu pose pow preloadRefEd print progressBar progressWindow projFileViewer projectCurve projectTangent projectionContext projectionManip promptDialog propModCtx propMove psdChannelOutliner psdEditTextureFile psdExport psdTextureFile putenv pwd python querySubdiv quit rad_to_deg radial radioButton radioButtonGrp radioCollection radioMenuItemCollection rampColorPort rand randomizeFollicles randstate rangeControl readTake rebuildCurve rebuildSurface recordAttr recordDevice redo reference referenceEdit referenceQuery refineSubdivSelectionList refresh refreshAE registerPluginResource rehash reloadImage removeJoint removeMultiInstance removePanelCategory rename renameAttr renameSelectionList renameUI render renderGlobalsNode renderInfo renderLayerButton renderLayerParent renderLayerPostProcess renderLayerUnparent renderManip renderPartition renderQualityNode renderSettings renderThumbnailUpdate renderWindowEditor renderWindowSelectContext renderer reorder reorderDeformers requires reroot resampleFluid resetAE resetPfxToPolyCamera resetTool resolutionNode retarget reverseCurve reverseSurface revolve rgb_to_hsv rigidBody rigidSolver roll rollCtx rootOf rot rotate rotationInterpolation roundConstantRadius rowColumnLayout rowLayout runTimeCommand runup sampleImage saveAllShelves saveAttrPreset saveFluid saveImage saveInitialState saveMenu savePrefObjects savePrefs saveShelf saveToolSettings scale scaleBrushBrightness scaleComponents scaleConstraint scaleKey scaleKeyCtx sceneEditor sceneUIReplacement scmh scriptCtx scriptEditorInfo scriptJob scriptNode scriptTable scriptToShelf scriptedPanel scriptedPanelType scrollField scrollLayout sculpt searchPathArray seed selLoadSettings select selectContext selectCurveCV selectKey selectKeyCtx selectKeyframeRegionCtx selectMode selectPref selectPriority selectType selectedNodes selectionConnection separator setAttr setAttrEnumResource setAttrMapping setAttrNiceNameResource setConstraintRestPosition setDefaultShadingGroup setDrivenKeyframe setDynamic setEditCtx setEditor setFluidAttr setFocus setInfinity setInputDeviceMapping setKeyCtx setKeyPath setKeyframe setKeyframeBlendshapeTargetWts setMenuMode setNodeNiceNameResource setNodeTypeFlag setParent setParticleAttr setPfxToPolyCamera setPluginResource setProject setStampDensity setStartupMessage setState setToolTo setUITemplate setXformManip sets shadingConnection shadingGeometryRelCtx shadingLightRelCtx shadingNetworkCompare shadingNode shapeCompare shelfButton shelfLayout shelfTabLayout shellField shortNameOf showHelp showHidden showManipCtx showSelectionInTitle showShadingGroupAttrEditor showWindow sign simplify sin singleProfileBirailSurface size sizeBytes skinCluster skinPercent smoothCurve smoothTangentSurface smoothstep snap2to2 snapKey snapMode snapTogetherCtx snapshot soft softMod softModCtx sort sound soundControl source spaceLocator sphere sphrand spotLight spotLightPreviewPort spreadSheetEditor spring sqrt squareSurface srtContext stackTrace startString startsWith stitchAndExplodeShell stitchSurface stitchSurfacePoints strcmp stringArrayCatenate stringArrayContains stringArrayCount stringArrayInsertAtIndex stringArrayIntersector stringArrayRemove stringArrayRemoveAtIndex stringArrayRemoveDuplicates stringArrayRemoveExact stringArrayToString stringToStringArray strip stripPrefixFromName stroke subdAutoProjection subdCleanTopology subdCollapse subdDuplicateAndConnect subdEditUV subdListComponentConversion subdMapCut subdMapSewMove subdMatchTopology subdMirror subdToBlind subdToPoly subdTransferUVsToCache subdiv subdivCrease subdivDisplaySmoothness substitute substituteAllString substituteGeometry substring surface surfaceSampler surfaceShaderList swatchDisplayPort switchTable symbolButton symbolCheckBox sysFile system tabLayout tan tangentConstraint texLatticeDeformContext texManipContext texMoveContext texMoveUVShellContext texRotateContext texScaleContext texSelectContext texSelectShortestPathCtx texSmudgeUVContext texWinToolCtx text textCurves textField textFieldButtonGrp textFieldGrp textManip textScrollList textToShelf textureDisplacePlane textureHairColor texturePlacementContext textureWindow threadCount threePointArcCtx timeControl timePort timerX toNativePath toggle toggleAxis toggleWindowVisibility tokenize tokenizeList tolerance tolower toolButton toolCollection toolDropped toolHasOptions toolPropertyWindow torus toupper trace track trackCtx transferAttributes transformCompare transformLimits translator trim trunc truncateFluidCache truncateHairCache tumble tumbleCtx turbulence twoPointArcCtx uiRes uiTemplate unassignInputDevice undo undoInfo ungroup uniform unit unloadPlugin untangleUV untitledFileName untrim upAxis updateAE userCtx uvLink uvSnapshot validateShelfName vectorize view2dToolCtx viewCamera viewClipPlane viewFit viewHeadOn viewLookAt viewManip viewPlace viewSet visor volumeAxis vortex waitCursor warning webBrowser webBrowserPrefs whatIs window windowPref wire wireContext workspace wrinkle wrinkleContext writeTake xbmLangPathList xform",
       illegal: "</",
       contains: [
-        hljs2.C_NUMBER_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: "`",
           end: "`",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: /[$%@](\^\w\b|#\w+|[^\s\w{]|\{\w+\}|\w+)/
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
   }
@@ -22427,21 +26560,21 @@ var require_mel = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/mercury.js
 var require_mercury = __commonJS((exports2, module2) => {
-  function mercury(hljs2) {
+  function mercury(hljs) {
     const KEYWORDS = {
       keyword: "module use_module import_module include_module end_module initialise mutable initialize finalize finalise interface implementation pred mode func type inst solver any_pred any_func is semidet det nondet multi erroneous failure cc_nondet cc_multi typeclass instance where pragma promise external trace atomic or_else require_complete_switch require_det require_semidet require_multi require_nondet require_cc_multi require_cc_nondet require_erroneous require_failure",
       meta: "inline no_inline type_spec source_file fact_table obsolete memo loop_check minimal_model terminates does_not_terminate check_termination promise_equivalent_clauses foreign_proc foreign_decl foreign_code foreign_type foreign_import_module foreign_export_enum foreign_export foreign_enum may_call_mercury will_not_call_mercury thread_safe not_thread_safe maybe_thread_safe promise_pure promise_semipure tabled_for_io local untrailed trailed attach_to_io_state can_pass_as_mercury_type stable will_not_throw_exception may_modify_trail will_not_modify_trail may_duplicate may_not_duplicate affects_liveness does_not_affect_liveness doesnt_affect_liveness no_sharing unknown_sharing sharing",
       built_in: "some all not if then else true fail false try catch catch_any semidet_true semidet_false semidet_fail impure_true impure semipure"
     };
-    const COMMENT = hljs2.COMMENT("%", "$");
+    const COMMENT = hljs.COMMENT("%", "$");
     const NUMCODE = {
       className: "number",
       begin: "0'.\\|0[box][0-9a-fA-F]*"
     };
-    const ATOM = hljs2.inherit(hljs2.APOS_STRING_MODE, {
+    const ATOM = hljs.inherit(hljs.APOS_STRING_MODE, {
       relevance: 0
     });
-    const STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+    const STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {
       relevance: 0
     });
     const STRING_FMT = {
@@ -22496,9 +26629,9 @@ var require_mercury = __commonJS((exports2, module2) => {
         IMPLICATION,
         HEAD_BODY_CONJUNCTION,
         COMMENT,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         NUMCODE,
-        hljs2.NUMBER_MODE,
+        hljs.NUMBER_MODE,
         ATOM,
         STRING,
         {
@@ -22515,13 +26648,13 @@ var require_mercury = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/mipsasm.js
 var require_mipsasm = __commonJS((exports2, module2) => {
-  function mipsasm(hljs2) {
+  function mipsasm(hljs) {
     return {
       name: "MIPS Assembly",
       case_insensitive: true,
       aliases: ["mips"],
       keywords: {
-        $pattern: "\\.?" + hljs2.IDENT_RE,
+        $pattern: "\\.?" + hljs.IDENT_RE,
         meta: ".2byte .4byte .align .ascii .asciz .balign .byte .code .data .else .end .endif .endm .endr .equ .err .exitm .extern .global .hword .if .ifdef .ifndef .include .irp .long .macro .rept .req .section .set .skip .space .text .word .ltorg ",
         built_in: "$0 $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12 $13 $14 $15 $16 $17 $18 $19 $20 $21 $22 $23 $24 $25 $26 $27 $28 $29 $30 $31 zero at v0 v1 a0 a1 a2 a3 a4 a5 a6 a7 t0 t1 t2 t3 t4 t5 t6 t7 t8 t9 s0 s1 s2 s3 s4 s5 s6 s7 s8 k0 k1 gp sp fp ra $f0 $f1 $f2 $f2 $f4 $f5 $f6 $f7 $f8 $f9 $f10 $f11 $f12 $f13 $f14 $f15 $f16 $f17 $f18 $f19 $f20 $f21 $f22 $f23 $f24 $f25 $f26 $f27 $f28 $f29 $f30 $f31 Context Random EntryLo0 EntryLo1 Context PageMask Wired EntryHi HWREna BadVAddr Count Compare SR IntCtl SRSCtl SRSMap Cause EPC PRId EBase Config Config1 Config2 Config3 LLAddr Debug DEPC DESAVE CacheErr ECC ErrorEPC TagLo DataLo TagHi DataHi WatchLo WatchHi PerfCtl PerfCnt "
       },
@@ -22531,9 +26664,9 @@ var require_mipsasm = __commonJS((exports2, module2) => {
           begin: "\\b(addi?u?|andi?|b(al)?|beql?|bgez(al)?l?|bgtzl?|blezl?|bltz(al)?l?|bnel?|cl[oz]|divu?|ext|ins|j(al)?|jalr(\\.hb)?|jr(\\.hb)?|lbu?|lhu?|ll|lui|lw[lr]?|maddu?|mfhi|mflo|movn|movz|move|msubu?|mthi|mtlo|mul|multu?|nop|nor|ori?|rotrv?|sb|sc|se[bh]|sh|sllv?|slti?u?|srav?|srlv?|subu?|sw[lr]?|xori?|wsbh|abs\\.[sd]|add\\.[sd]|alnv.ps|bc1[ft]l?|c\\.(s?f|un|u?eq|[ou]lt|[ou]le|ngle?|seq|l[et]|ng[et])\\.[sd]|(ceil|floor|round|trunc)\\.[lw]\\.[sd]|cfc1|cvt\\.d\\.[lsw]|cvt\\.l\\.[dsw]|cvt\\.ps\\.s|cvt\\.s\\.[dlw]|cvt\\.s\\.p[lu]|cvt\\.w\\.[dls]|div\\.[ds]|ldx?c1|luxc1|lwx?c1|madd\\.[sd]|mfc1|mov[fntz]?\\.[ds]|msub\\.[sd]|mth?c1|mul\\.[ds]|neg\\.[ds]|nmadd\\.[ds]|nmsub\\.[ds]|p[lu][lu]\\.ps|recip\\.fmt|r?sqrt\\.[ds]|sdx?c1|sub\\.[ds]|suxc1|swx?c1|break|cache|d?eret|[de]i|ehb|mfc0|mtc0|pause|prefx?|rdhwr|rdpgpr|sdbbp|ssnop|synci?|syscall|teqi?|tgei?u?|tlb(p|r|w[ir])|tlti?u?|tnei?|wait|wrpgpr)",
           end: "\\s"
         },
-        hljs2.COMMENT("[;#](?!\\s*$)", "$"),
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.COMMENT("[;#](?!\\s*$)", "$"),
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: "'",
@@ -22583,12 +26716,12 @@ var require_mipsasm = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/mizar.js
 var require_mizar = __commonJS((exports2, module2) => {
-  function mizar(hljs2) {
+  function mizar(hljs) {
     return {
       name: "Mizar",
       keywords: "environ vocabularies notations constructors definitions registrations theorems schemes requirements begin end definition registration cluster existence pred func defpred deffunc theorem proof let take assume then thus hence ex for st holds consider reconsider such that and in provided of as from be being by means equals implies iff redefine define now not or attr is mode suppose per cases set thesis contradiction scheme reserve struct correctness compatibility coherence symmetry assymetry reflexivity irreflexivity connectedness uniqueness commutativity idempotence involutiveness projectivity",
       contains: [
-        hljs2.COMMENT("::", "$")
+        hljs.COMMENT("::", "$")
       ]
     };
   }
@@ -22612,7 +26745,7 @@ var require_perl = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function perl(hljs2) {
+  function perl(hljs) {
     const KEYWORDS = [
       "abs",
       "accept",
@@ -22875,7 +27008,7 @@ var require_perl = __commonJS((exports2, module2) => {
       ]
     };
     const STRING_CONTAINS = [
-      hljs2.BACKSLASH_ESCAPE,
+      hljs.BACKSLASH_ESCAPE,
       SUBST,
       VAR
     ];
@@ -22897,8 +27030,8 @@ var require_perl = __commonJS((exports2, module2) => {
     };
     const PERL_DEFAULT_CONTAINS = [
       VAR,
-      hljs2.HASH_COMMENT_MODE,
-      hljs2.COMMENT(/^=\w/, /=cut/, {
+      hljs.HASH_COMMENT_MODE,
+      hljs.COMMENT(/^=\w/, /=cut/, {
         endsWithParent: true
       }),
       METHOD,
@@ -22939,7 +27072,7 @@ var require_perl = __commonJS((exports2, module2) => {
           {
             begin: "'",
             end: "'",
-            contains: [hljs2.BACKSLASH_ESCAPE]
+            contains: [hljs.BACKSLASH_ESCAPE]
           },
           {
             begin: '"',
@@ -22948,7 +27081,7 @@ var require_perl = __commonJS((exports2, module2) => {
           {
             begin: "`",
             end: "`",
-            contains: [hljs2.BACKSLASH_ESCAPE]
+            contains: [hljs.BACKSLASH_ESCAPE]
           },
           {
             begin: /\{\w+\}/,
@@ -22966,11 +27099,11 @@ var require_perl = __commonJS((exports2, module2) => {
         relevance: 0
       },
       {
-        begin: "(\\/\\/|" + hljs2.RE_STARTERS_RE + "|\\b(split|return|print|reverse|grep)\\b)\\s*",
+        begin: "(\\/\\/|" + hljs.RE_STARTERS_RE + "|\\b(split|return|print|reverse|grep)\\b)\\s*",
         keywords: "split return print reverse grep",
         relevance: 0,
         contains: [
-          hljs2.HASH_COMMENT_MODE,
+          hljs.HASH_COMMENT_MODE,
           {
             className: "regexp",
             variants: [
@@ -23003,7 +27136,7 @@ var require_perl = __commonJS((exports2, module2) => {
         end: "(\\s*\\(.*?\\))?[;{]",
         excludeEnd: true,
         relevance: 5,
-        contains: [hljs2.TITLE_MODE]
+        contains: [hljs.TITLE_MODE]
       },
       {
         begin: "-\\w\\b",
@@ -23039,7 +27172,7 @@ var require_perl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/mojolicious.js
 var require_mojolicious = __commonJS((exports2, module2) => {
-  function mojolicious(hljs2) {
+  function mojolicious(hljs) {
     return {
       name: "Mojolicious",
       subLanguage: "xml",
@@ -23068,7 +27201,7 @@ var require_mojolicious = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/monkey.js
 var require_monkey = __commonJS((exports2, module2) => {
-  function monkey(hljs2) {
+  function monkey(hljs) {
     const NUMBER = {
       className: "number",
       relevance: 0,
@@ -23076,7 +27209,7 @@ var require_monkey = __commonJS((exports2, module2) => {
         {
           begin: "[$][a-fA-F0-9]+"
         },
-        hljs2.NUMBER_MODE
+        hljs.NUMBER_MODE
       ]
     };
     return {
@@ -23089,8 +27222,8 @@ var require_monkey = __commonJS((exports2, module2) => {
       },
       illegal: /\/\*/,
       contains: [
-        hljs2.COMMENT("#rem", "#end"),
-        hljs2.COMMENT("'", "$", {
+        hljs.COMMENT("#rem", "#end"),
+        hljs.COMMENT("'", "$", {
           relevance: 0
         }),
         {
@@ -23098,7 +27231,7 @@ var require_monkey = __commonJS((exports2, module2) => {
           beginKeywords: "function method",
           end: "[(=:]|$",
           illegal: /\n/,
-          contains: [hljs2.UNDERSCORE_TITLE_MODE]
+          contains: [hljs.UNDERSCORE_TITLE_MODE]
         },
         {
           className: "class",
@@ -23108,7 +27241,7 @@ var require_monkey = __commonJS((exports2, module2) => {
             {
               beginKeywords: "extends implements"
             },
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         {
@@ -23130,9 +27263,9 @@ var require_monkey = __commonJS((exports2, module2) => {
         {
           beginKeywords: "alias",
           end: "=",
-          contains: [hljs2.UNDERSCORE_TITLE_MODE]
+          contains: [hljs.UNDERSCORE_TITLE_MODE]
         },
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         NUMBER
       ]
     };
@@ -23142,7 +27275,7 @@ var require_monkey = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/moonscript.js
 var require_moonscript = __commonJS((exports2, module2) => {
-  function moonscript(hljs2) {
+  function moonscript(hljs) {
     const KEYWORDS = {
       keyword: "if then not for in while do return else elseif break continue switch and or unless when class extends super local import export from using",
       literal: "true false nil",
@@ -23156,7 +27289,7 @@ var require_moonscript = __commonJS((exports2, module2) => {
       keywords: KEYWORDS
     };
     const EXPRESSIONS = [
-      hljs2.inherit(hljs2.C_NUMBER_MODE, {
+      hljs.inherit(hljs.C_NUMBER_MODE, {
         starts: {
           end: "(\\s*/)?",
           relevance: 0
@@ -23168,13 +27301,13 @@ var require_moonscript = __commonJS((exports2, module2) => {
           {
             begin: /'/,
             end: /'/,
-            contains: [hljs2.BACKSLASH_ESCAPE]
+            contains: [hljs.BACKSLASH_ESCAPE]
           },
           {
             begin: /"/,
             end: /"/,
             contains: [
-              hljs2.BACKSLASH_ESCAPE,
+              hljs.BACKSLASH_ESCAPE,
               SUBST
             ]
           }
@@ -23182,17 +27315,17 @@ var require_moonscript = __commonJS((exports2, module2) => {
       },
       {
         className: "built_in",
-        begin: "@__" + hljs2.IDENT_RE
+        begin: "@__" + hljs.IDENT_RE
       },
       {
-        begin: "@" + hljs2.IDENT_RE
+        begin: "@" + hljs.IDENT_RE
       },
       {
-        begin: hljs2.IDENT_RE + "\\\\" + hljs2.IDENT_RE
+        begin: hljs.IDENT_RE + "\\\\" + hljs.IDENT_RE
       }
     ];
     SUBST.contains = EXPRESSIONS;
-    const TITLE = hljs2.inherit(hljs2.TITLE_MODE, {
+    const TITLE = hljs.inherit(hljs.TITLE_MODE, {
       begin: JS_IDENT_RE
     });
     const POSSIBLE_PARAMS_RE = "(\\(.*\\)\\s*)?\\B[-=]>";
@@ -23215,7 +27348,7 @@ var require_moonscript = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       illegal: /\/\*/,
       contains: EXPRESSIONS.concat([
-        hljs2.COMMENT("--", "$"),
+        hljs.COMMENT("--", "$"),
         {
           className: "function",
           begin: "^\\s*" + JS_IDENT_RE + "\\s*=\\s*" + POSSIBLE_PARAMS_RE,
@@ -23270,7 +27403,7 @@ var require_moonscript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/n1ql.js
 var require_n1ql = __commonJS((exports2, module2) => {
-  function n1ql(hljs2) {
+  function n1ql(hljs) {
     return {
       name: "N1QL",
       case_insensitive: true,
@@ -23289,26 +27422,26 @@ var require_n1ql = __commonJS((exports2, module2) => {
               className: "string",
               begin: "'",
               end: "'",
-              contains: [hljs2.BACKSLASH_ESCAPE]
+              contains: [hljs.BACKSLASH_ESCAPE]
             },
             {
               className: "string",
               begin: '"',
               end: '"',
-              contains: [hljs2.BACKSLASH_ESCAPE]
+              contains: [hljs.BACKSLASH_ESCAPE]
             },
             {
               className: "symbol",
               begin: "`",
               end: "`",
-              contains: [hljs2.BACKSLASH_ESCAPE],
+              contains: [hljs.BACKSLASH_ESCAPE],
               relevance: 2
             },
-            hljs2.C_NUMBER_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_NUMBER_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
   }
@@ -23317,7 +27450,7 @@ var require_n1ql = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/nginx.js
 var require_nginx = __commonJS((exports2, module2) => {
-  function nginx(hljs2) {
+  function nginx(hljs) {
     const VAR = {
       className: "variable",
       variants: [
@@ -23329,7 +27462,7 @@ var require_nginx = __commonJS((exports2, module2) => {
           end: /\}/
         },
         {
-          begin: /[$@]/ + hljs2.UNDERSCORE_IDENT_RE
+          begin: /[$@]/ + hljs.UNDERSCORE_IDENT_RE
         }
       ]
     };
@@ -23342,11 +27475,11 @@ var require_nginx = __commonJS((exports2, module2) => {
       relevance: 0,
       illegal: "=>",
       contains: [
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           className: "string",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             VAR
           ],
           variants: [
@@ -23370,7 +27503,7 @@ var require_nginx = __commonJS((exports2, module2) => {
         {
           className: "regexp",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             VAR
           ],
           variants: [
@@ -23408,27 +27541,27 @@ var require_nginx = __commonJS((exports2, module2) => {
       name: "Nginx config",
       aliases: ["nginxconf"],
       contains: [
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
-          begin: hljs2.UNDERSCORE_IDENT_RE + "\\s+\\{",
+          begin: hljs.UNDERSCORE_IDENT_RE + "\\s+\\{",
           returnBegin: true,
           end: /\{/,
           contains: [
             {
               className: "section",
-              begin: hljs2.UNDERSCORE_IDENT_RE
+              begin: hljs.UNDERSCORE_IDENT_RE
             }
           ],
           relevance: 0
         },
         {
-          begin: hljs2.UNDERSCORE_IDENT_RE + "\\s",
+          begin: hljs.UNDERSCORE_IDENT_RE + "\\s",
           end: ";|\\{",
           returnBegin: true,
           contains: [
             {
               className: "attribute",
-              begin: hljs2.UNDERSCORE_IDENT_RE,
+              begin: hljs.UNDERSCORE_IDENT_RE,
               starts: DEFAULT
             }
           ],
@@ -23443,7 +27576,7 @@ var require_nginx = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/nim.js
 var require_nim = __commonJS((exports2, module2) => {
-  function nim(hljs2) {
+  function nim(hljs) {
     return {
       name: "Nim",
       keywords: {
@@ -23473,7 +27606,7 @@ var require_nim = __commonJS((exports2, module2) => {
           begin: /([a-zA-Z]\w*)?"""/,
           end: /"""/
         },
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "type",
           begin: /\b[A-Z]\w+\b/,
@@ -23497,7 +27630,7 @@ var require_nim = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.HASH_COMMENT_MODE
+        hljs.HASH_COMMENT_MODE
       ]
     };
   }
@@ -23506,7 +27639,7 @@ var require_nim = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/nix.js
 var require_nix = __commonJS((exports2, module2) => {
-  function nix(hljs2) {
+  function nix(hljs) {
     const NIX_KEYWORDS = {
       keyword: "rec with let in inherit assert if else then",
       literal: "true false or and null",
@@ -23544,9 +27677,9 @@ var require_nix = __commonJS((exports2, module2) => {
       ]
     };
     const EXPRESSIONS = [
-      hljs2.NUMBER_MODE,
-      hljs2.HASH_COMMENT_MODE,
-      hljs2.C_BLOCK_COMMENT_MODE,
+      hljs.NUMBER_MODE,
+      hljs.HASH_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
       STRING,
       ATTRS
     ];
@@ -23563,7 +27696,7 @@ var require_nix = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/node-repl.js
 var require_node_repl = __commonJS((exports2, module2) => {
-  function nodeRepl(hljs2) {
+  function nodeRepl(hljs) {
     return {
       name: "Node REPL",
       contains: [
@@ -23593,7 +27726,7 @@ var require_node_repl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/nsis.js
 var require_nsis = __commonJS((exports2, module2) => {
-  function nsis(hljs2) {
+  function nsis(hljs) {
     const CONSTANTS = {
       className: "variable",
       begin: /\$(ADMINTOOLS|APPDATA|CDBURN_AREA|CMDLINE|COMMONFILES32|COMMONFILES64|COMMONFILES|COOKIES|DESKTOP|DOCUMENTS|EXEDIR|EXEFILE|EXEPATH|FAVORITES|FONTS|HISTORY|HWNDPARENT|INSTDIR|INTERNET_CACHE|LANGUAGE|LOCALAPPDATA|MUSIC|NETHOOD|OUTDIR|PICTURES|PLUGINSDIR|PRINTHOOD|PROFILE|PROGRAMFILES32|PROGRAMFILES64|PROGRAMFILES|QUICKLAUNCH|RECENT|RESOURCES_LOCALIZED|RESOURCES|SENDTO|SMPROGRAMS|SMSTARTUP|STARTMENU|SYSDIR|TEMP|TEMPLATES|VIDEOS|WINDIR)/
@@ -23660,9 +27793,9 @@ var require_nsis = __commonJS((exports2, module2) => {
         literal: "admin all auto both bottom bzip2 colored components current custom directory false force hide highest ifdiff ifnewer instfiles lastused leave left license listonly lzma nevershow none normal notset off on open print right show silent silentlog smooth textonly top true try un.components un.custom un.directory un.instfiles un.license uninstConfirm user Win10 Win7 Win8 WinVista zlib"
       },
       contains: [
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.COMMENT(";", "$", {
+        hljs.HASH_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
         {
@@ -23677,7 +27810,7 @@ var require_nsis = __commonJS((exports2, module2) => {
         LANGUAGES,
         PARAMETERS,
         PLUGINS,
-        hljs2.NUMBER_MODE
+        hljs.NUMBER_MODE
       ]
     };
   }
@@ -23686,7 +27819,7 @@ var require_nsis = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/objectivec.js
 var require_objectivec = __commonJS((exports2, module2) => {
-  function objectivec(hljs2) {
+  function objectivec(hljs) {
     const API_CLASS = {
       className: "built_in",
       begin: "\\b(AV|CA|CF|CG|CI|CL|CM|CN|CT|MK|MP|MTK|MTL|NS|SCN|SK|UI|WK|XC)\\w+"
@@ -23715,11 +27848,11 @@ var require_objectivec = __commonJS((exports2, module2) => {
       illegal: "</",
       contains: [
         API_CLASS,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.C_NUMBER_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
         {
           className: "string",
           variants: [
@@ -23727,7 +27860,7 @@ var require_objectivec = __commonJS((exports2, module2) => {
               begin: '@"',
               end: '"',
               illegal: "\\n",
-              contains: [hljs2.BACKSLASH_ESCAPE]
+              contains: [hljs.BACKSLASH_ESCAPE]
             }
           ]
         },
@@ -23743,7 +27876,7 @@ var require_objectivec = __commonJS((exports2, module2) => {
               begin: /\\\n/,
               relevance: 0
             },
-            hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+            hljs.inherit(hljs.QUOTE_STRING_MODE, {
               className: "meta-string"
             }),
             {
@@ -23752,8 +27885,8 @@ var require_objectivec = __commonJS((exports2, module2) => {
               end: /$/,
               illegal: "\\n"
             },
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
           ]
         },
         {
@@ -23762,10 +27895,10 @@ var require_objectivec = __commonJS((exports2, module2) => {
           end: /(\{|$)/,
           excludeEnd: true,
           keywords: CLASS_KEYWORDS,
-          contains: [hljs2.UNDERSCORE_TITLE_MODE]
+          contains: [hljs.UNDERSCORE_TITLE_MODE]
         },
         {
-          begin: "\\." + hljs2.UNDERSCORE_IDENT_RE,
+          begin: "\\." + hljs.UNDERSCORE_IDENT_RE,
           relevance: 0
         }
       ]
@@ -23776,7 +27909,7 @@ var require_objectivec = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/ocaml.js
 var require_ocaml = __commonJS((exports2, module2) => {
-  function ocaml(hljs2) {
+  function ocaml(hljs) {
     return {
       name: "OCaml",
       aliases: ["ml"],
@@ -23793,7 +27926,7 @@ var require_ocaml = __commonJS((exports2, module2) => {
           begin: "\\[(\\|\\|)?\\]|\\(\\)",
           relevance: 0
         },
-        hljs2.COMMENT("\\(\\*", "\\*\\)", {
+        hljs.COMMENT("\\(\\*", "\\*\\)", {
           contains: ["self"]
         }),
         {
@@ -23813,8 +27946,8 @@ var require_ocaml = __commonJS((exports2, module2) => {
           begin: "[a-z_]\\w*'[\\w']*",
           relevance: 0
         },
-        hljs2.inherit(hljs2.APOS_STRING_MODE, {className: "string", relevance: 0}),
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {illegal: null}),
+        hljs.inherit(hljs.APOS_STRING_MODE, {className: "string", relevance: 0}),
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null}),
         {
           className: "number",
           begin: "\\b(0[xX][a-fA-F0-9_]+[Lln]?|0[oO][0-7_]+[Lln]?|0[bB][01_]+[Lln]?|[0-9][0-9_]*([Lln]|(\\.[0-9_]*)?([eE][-+]?[0-9_]+)?)?)",
@@ -23831,7 +27964,7 @@ var require_ocaml = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/openscad.js
 var require_openscad = __commonJS((exports2, module2) => {
-  function openscad(hljs2) {
+  function openscad(hljs) {
     const SPECIAL_VARS = {
       className: "keyword",
       begin: "\\$(f[asn]|t|vp[rtd]|children)"
@@ -23845,7 +27978,7 @@ var require_openscad = __commonJS((exports2, module2) => {
       begin: "\\b\\d+(\\.\\d+)?(e-?\\d+)?",
       relevance: 0
     };
-    const STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+    const STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {
       illegal: null
     });
     const PREPRO = {
@@ -23878,7 +28011,7 @@ var require_openscad = __commonJS((exports2, module2) => {
       end: /=|\{/,
       contains: [
         PARAMS,
-        hljs2.UNDERSCORE_TITLE_MODE
+        hljs.UNDERSCORE_TITLE_MODE
       ]
     };
     return {
@@ -23890,8 +28023,8 @@ var require_openscad = __commonJS((exports2, module2) => {
         built_in: "circle square polygon text sphere cube cylinder polyhedron translate rotate scale resize mirror multmatrix color offset hull minkowski union difference intersection abs sign sin cos tan acos asin atan atan2 floor round ceil ln log pow sqrt exp rands min max concat lookup str chr search version version_num norm cross parent_module echo import import_dxf dxf_linear_extrude linear_extrude rotate_extrude surface projection render children dxf_cross dxf_dim let assign"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         NUMBERS,
         PREPRO,
         STRING,
@@ -23906,15 +28039,15 @@ var require_openscad = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/oxygene.js
 var require_oxygene = __commonJS((exports2, module2) => {
-  function oxygene(hljs2) {
+  function oxygene(hljs) {
     const OXYGENE_KEYWORDS = {
       $pattern: /\.?\w+/,
       keyword: "abstract add and array as asc aspect assembly async begin break block by case class concat const copy constructor continue create default delegate desc distinct div do downto dynamic each else empty end ensure enum equals event except exit extension external false final finalize finalizer finally flags for forward from function future global group has if implementation implements implies in index inherited inline interface into invariants is iterator join locked locking loop matching method mod module namespace nested new nil not notify nullable of old on operator or order out override parallel params partial pinned private procedure property protected public queryable raise read readonly record reintroduce remove repeat require result reverse sealed select self sequence set shl shr skip static step soft take then to true try tuple type union unit unsafe until uses using var virtual raises volatile where while with write xor yield await mapped deprecated stdcall cdecl pascal register safecall overload library platform reference packed strict published autoreleasepool selector strong weak unretained"
     };
-    const CURLY_COMMENT = hljs2.COMMENT(/\{/, /\}/, {
+    const CURLY_COMMENT = hljs.COMMENT(/\{/, /\}/, {
       relevance: 0
     });
-    const PAREN_COMMENT = hljs2.COMMENT("\\(\\*", "\\*\\)", {
+    const PAREN_COMMENT = hljs.COMMENT("\\(\\*", "\\*\\)", {
       relevance: 10
     });
     const STRING = {
@@ -23937,7 +28070,7 @@ var require_oxygene = __commonJS((exports2, module2) => {
       end: "[:;]",
       keywords: "function constructor|10 destructor|10 procedure|10 method|10",
       contains: [
-        hljs2.TITLE_MODE,
+        hljs.TITLE_MODE,
         {
           className: "params",
           begin: "\\(",
@@ -23960,10 +28093,10 @@ var require_oxygene = __commonJS((exports2, module2) => {
       contains: [
         CURLY_COMMENT,
         PAREN_COMMENT,
-        hljs2.C_LINE_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
         STRING,
         CHAR_STRING,
-        hljs2.NUMBER_MODE,
+        hljs.NUMBER_MODE,
         FUNCTION,
         {
           className: "class",
@@ -23975,7 +28108,7 @@ var require_oxygene = __commonJS((exports2, module2) => {
             CHAR_STRING,
             CURLY_COMMENT,
             PAREN_COMMENT,
-            hljs2.C_LINE_COMMENT_MODE,
+            hljs.C_LINE_COMMENT_MODE,
             FUNCTION
           ]
         }
@@ -23987,8 +28120,8 @@ var require_oxygene = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/parser3.js
 var require_parser3 = __commonJS((exports2, module2) => {
-  function parser3(hljs2) {
-    const CURLY_SUBCOMMENT = hljs2.COMMENT(/\{/, /\}/, {
+  function parser3(hljs) {
+    const CURLY_SUBCOMMENT = hljs.COMMENT(/\{/, /\}/, {
       contains: ["self"]
     });
     return {
@@ -23996,8 +28129,8 @@ var require_parser3 = __commonJS((exports2, module2) => {
       subLanguage: "xml",
       relevance: 0,
       contains: [
-        hljs2.COMMENT("^#", "$"),
-        hljs2.COMMENT(/\^rem\{/, /\}/, {
+        hljs.COMMENT("^#", "$"),
+        hljs.COMMENT(/\^rem\{/, /\}/, {
           relevance: 10,
           contains: [CURLY_SUBCOMMENT]
         }),
@@ -24022,7 +28155,7 @@ var require_parser3 = __commonJS((exports2, module2) => {
           className: "number",
           begin: "\\^#[0-9a-fA-F]+"
         },
-        hljs2.C_NUMBER_MODE
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -24031,7 +28164,7 @@ var require_parser3 = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/pf.js
 var require_pf = __commonJS((exports2, module2) => {
-  function pf(hljs2) {
+  function pf(hljs) {
     const MACRO = {
       className: "variable",
       begin: /\$[\w\d#@][\w\d_]*/
@@ -24051,9 +28184,9 @@ var require_pf = __commonJS((exports2, module2) => {
         literal: "all any no-route self urpf-failed egress|5 unknown"
       },
       contains: [
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.NUMBER_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.HASH_COMMENT_MODE,
+        hljs.NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
         MACRO,
         TABLE
       ]
@@ -24064,8 +28197,8 @@ var require_pf = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/pgsql.js
 var require_pgsql = __commonJS((exports2, module2) => {
-  function pgsql(hljs2) {
-    const COMMENT_MODE = hljs2.COMMENT("--", "$");
+  function pgsql(hljs) {
+    const COMMENT_MODE = hljs.COMMENT("--", "$");
     const UNQUOTED_IDENT = "[a-zA-Z_][a-zA-Z_0-9$]*";
     const DOLLAR_STRING = "\\$([a-zA-Z_]?|[a-zA-Z_][a-zA-Z_0-9]*)\\$";
     const LABEL = "<<\\s*" + UNQUOTED_IDENT + "\\s*>>";
@@ -24266,7 +28399,7 @@ var require_pgsql = __commonJS((exports2, module2) => {
         },
         {
           beginKeywords: "CACHE INCREMENT MAXVALUE MINVALUE",
-          end: hljs2.C_NUMBER_RE,
+          end: hljs.C_NUMBER_RE,
           returnEnd: true,
           keywords: "BY CACHE INCREMENT MAXVALUE MINVALUE"
         },
@@ -24323,7 +28456,7 @@ var require_pgsql = __commonJS((exports2, module2) => {
           ],
           relevance: 10
         },
-        hljs2.END_SAME_AS_BEGIN({
+        hljs.END_SAME_AS_BEGIN({
           begin: DOLLAR_STRING,
           end: DOLLAR_STRING,
           contains: [
@@ -24356,8 +28489,8 @@ var require_pgsql = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.C_NUMBER_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         COMMENT_MODE,
         {
           className: "meta",
@@ -24388,7 +28521,7 @@ var require_pgsql = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/php.js
 var require_php = __commonJS((exports2, module2) => {
-  function php(hljs2) {
+  function php(hljs) {
     const VARIABLE = {
       className: "variable",
       begin: `\\$+[a-zA-Z_-ÿ][a-zA-Z0-9_-ÿ]*(?![A-Za-z0-9])(?![$])`
@@ -24408,27 +28541,27 @@ var require_php = __commonJS((exports2, module2) => {
         {begin: /\{\$/, end: /\}/}
       ]
     };
-    const SINGLE_QUOTED = hljs2.inherit(hljs2.APOS_STRING_MODE, {
+    const SINGLE_QUOTED = hljs.inherit(hljs.APOS_STRING_MODE, {
       illegal: null
     });
-    const DOUBLE_QUOTED = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+    const DOUBLE_QUOTED = hljs.inherit(hljs.QUOTE_STRING_MODE, {
       illegal: null,
-      contains: hljs2.QUOTE_STRING_MODE.contains.concat(SUBST)
+      contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
     });
-    const HEREDOC = hljs2.END_SAME_AS_BEGIN({
+    const HEREDOC = hljs.END_SAME_AS_BEGIN({
       begin: /<<<[ \t]*(\w+)\n/,
       end: /[ \t]*(\w+)\b/,
-      contains: hljs2.QUOTE_STRING_MODE.contains.concat(SUBST)
+      contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
     });
     const STRING = {
       className: "string",
-      contains: [hljs2.BACKSLASH_ESCAPE, PREPROCESSOR],
+      contains: [hljs.BACKSLASH_ESCAPE, PREPROCESSOR],
       variants: [
-        hljs2.inherit(SINGLE_QUOTED, {
+        hljs.inherit(SINGLE_QUOTED, {
           begin: "b'",
           end: "'"
         }),
-        hljs2.inherit(DOUBLE_QUOTED, {
+        hljs.inherit(DOUBLE_QUOTED, {
           begin: 'b"',
           end: '"'
         }),
@@ -24457,9 +28590,9 @@ var require_php = __commonJS((exports2, module2) => {
       case_insensitive: true,
       keywords: KEYWORDS,
       contains: [
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.COMMENT("//", "$", {contains: [PREPROCESSOR]}),
-        hljs2.COMMENT("/\\*", "\\*/", {
+        hljs.HASH_COMMENT_MODE,
+        hljs.COMMENT("//", "$", {contains: [PREPROCESSOR]}),
+        hljs.COMMENT("/\\*", "\\*/", {
           contains: [
             {
               className: "doctag",
@@ -24467,7 +28600,7 @@ var require_php = __commonJS((exports2, module2) => {
             }
           ]
         }),
-        hljs2.COMMENT("__halt_compiler.+?;", false, {
+        hljs.COMMENT("__halt_compiler.+?;", false, {
           endsWithParent: true,
           keywords: "__halt_compiler"
         }),
@@ -24491,7 +28624,7 @@ var require_php = __commonJS((exports2, module2) => {
             {
               beginKeywords: "use"
             },
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             {
               begin: "=>",
               endsParent: true
@@ -24506,7 +28639,7 @@ var require_php = __commonJS((exports2, module2) => {
               contains: [
                 "self",
                 VARIABLE,
-                hljs2.C_BLOCK_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
                 STRING,
                 NUMBER
               ]
@@ -24524,7 +28657,7 @@ var require_php = __commonJS((exports2, module2) => {
           excludeEnd: true,
           contains: [
             {beginKeywords: "extends implements"},
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         {
@@ -24532,13 +28665,13 @@ var require_php = __commonJS((exports2, module2) => {
           relevance: 0,
           end: ";",
           illegal: /[.']/,
-          contains: [hljs2.UNDERSCORE_TITLE_MODE]
+          contains: [hljs.UNDERSCORE_TITLE_MODE]
         },
         {
           beginKeywords: "use",
           relevance: 0,
           end: ";",
-          contains: [hljs2.UNDERSCORE_TITLE_MODE]
+          contains: [hljs.UNDERSCORE_TITLE_MODE]
         },
         STRING,
         NUMBER
@@ -24550,7 +28683,7 @@ var require_php = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/php-template.js
 var require_php_template = __commonJS((exports2, module2) => {
-  function phpTemplate(hljs2) {
+  function phpTemplate(hljs) {
     return {
       name: "PHP template",
       subLanguage: "xml",
@@ -24575,13 +28708,13 @@ var require_php_template = __commonJS((exports2, module2) => {
               end: "'",
               skip: true
             },
-            hljs2.inherit(hljs2.APOS_STRING_MODE, {
+            hljs.inherit(hljs.APOS_STRING_MODE, {
               illegal: null,
               className: null,
               contains: null,
               skip: true
             }),
-            hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+            hljs.inherit(hljs.QUOTE_STRING_MODE, {
               illegal: null,
               className: null,
               contains: null,
@@ -24597,7 +28730,7 @@ var require_php_template = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/plaintext.js
 var require_plaintext = __commonJS((exports2, module2) => {
-  function plaintext(hljs2) {
+  function plaintext(hljs) {
     return {
       name: "Plain text",
       aliases: [
@@ -24612,7 +28745,7 @@ var require_plaintext = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/pony.js
 var require_pony = __commonJS((exports2, module2) => {
-  function pony(hljs2) {
+  function pony(hljs) {
     const KEYWORDS = {
       keyword: "actor addressof and as be break class compile_error compile_intrinsic consume continue delegate digestof do else elseif embed end error for fun if ifdef in interface is isnt lambda let match new not object or primitive recover repeat return struct then trait try type until use var where while with xor",
       meta: "iso val tag trn box ref",
@@ -24628,13 +28761,13 @@ var require_pony = __commonJS((exports2, module2) => {
       className: "string",
       begin: '"',
       end: '"',
-      contains: [hljs2.BACKSLASH_ESCAPE]
+      contains: [hljs.BACKSLASH_ESCAPE]
     };
     const SINGLE_QUOTE_CHAR_MODE = {
       className: "string",
       begin: "'",
       end: "'",
-      contains: [hljs2.BACKSLASH_ESCAPE],
+      contains: [hljs.BACKSLASH_ESCAPE],
       relevance: 0
     };
     const TYPE_NAME = {
@@ -24643,7 +28776,7 @@ var require_pony = __commonJS((exports2, module2) => {
       relevance: 0
     };
     const PRIMED_NAME = {
-      begin: hljs2.IDENT_RE + "'",
+      begin: hljs.IDENT_RE + "'",
       relevance: 0
     };
     const NUMBER_MODE = {
@@ -24661,8 +28794,8 @@ var require_pony = __commonJS((exports2, module2) => {
         SINGLE_QUOTE_CHAR_MODE,
         PRIMED_NAME,
         NUMBER_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
   }
@@ -24671,7 +28804,7 @@ var require_pony = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/powershell.js
 var require_powershell = __commonJS((exports2, module2) => {
-  function powershell(hljs2) {
+  function powershell(hljs) {
     const TYPES = [
       "string",
       "char",
@@ -24765,7 +28898,7 @@ var require_powershell = __commonJS((exports2, module2) => {
         }
       ]
     };
-    const PS_COMMENT = hljs2.inherit(hljs2.COMMENT(null, null), {
+    const PS_COMMENT = hljs.inherit(hljs.COMMENT(null, null), {
       variants: [
         {
           begin: /#/,
@@ -24792,7 +28925,7 @@ var require_powershell = __commonJS((exports2, module2) => {
       end: /\s*[{]/,
       excludeEnd: true,
       relevance: 0,
-      contains: [hljs2.TITLE_MODE]
+      contains: [hljs.TITLE_MODE]
     };
     const PS_FUNCTION = {
       className: "function",
@@ -24865,7 +28998,7 @@ var require_powershell = __commonJS((exports2, module2) => {
           endsParent: true,
           relevance: 0
         },
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           endsParent: true
         })
       ]
@@ -24874,7 +29007,7 @@ var require_powershell = __commonJS((exports2, module2) => {
       PS_METHODS,
       PS_COMMENT,
       BACKTICK_ESCAPE,
-      hljs2.NUMBER_MODE,
+      hljs.NUMBER_MODE,
       QUOTE_STRING,
       APOS_STRING,
       CMDLETS,
@@ -24915,7 +29048,7 @@ var require_powershell = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/processing.js
 var require_processing = __commonJS((exports2, module2) => {
-  function processing(hljs2) {
+  function processing(hljs) {
     return {
       name: "Processing",
       keywords: {
@@ -24925,11 +29058,11 @@ var require_processing = __commonJS((exports2, module2) => {
         built_in: "displayHeight displayWidth mouseY mouseX mousePressed pmouseX pmouseY key keyCode pixels focused frameCount frameRate height width size createGraphics beginDraw createShape loadShape PShape arc ellipse line point quad rect triangle bezier bezierDetail bezierPoint bezierTangent curve curveDetail curvePoint curveTangent curveTightness shape shapeMode beginContour beginShape bezierVertex curveVertex endContour endShape quadraticVertex vertex ellipseMode noSmooth rectMode smooth strokeCap strokeJoin strokeWeight mouseClicked mouseDragged mouseMoved mousePressed mouseReleased mouseWheel keyPressed keyPressedkeyReleased keyTyped print println save saveFrame day hour millis minute month second year background clear colorMode fill noFill noStroke stroke alpha blue brightness color green hue lerpColor red saturation modelX modelY modelZ screenX screenY screenZ ambient emissive shininess specular add createImage beginCamera camera endCamera frustum ortho perspective printCamera printProjection cursor frameRate noCursor exit loop noLoop popStyle pushStyle redraw binary boolean byte char float hex int str unbinary unhex join match matchAll nf nfc nfp nfs split splitTokens trim append arrayCopy concat expand reverse shorten sort splice subset box sphere sphereDetail createInput createReader loadBytes loadJSONArray loadJSONObject loadStrings loadTable loadXML open parseXML saveTable selectFolder selectInput beginRaw beginRecord createOutput createWriter endRaw endRecord PrintWritersaveBytes saveJSONArray saveJSONObject saveStream saveStrings saveXML selectOutput popMatrix printMatrix pushMatrix resetMatrix rotate rotateX rotateY rotateZ scale shearX shearY translate ambientLight directionalLight lightFalloff lights lightSpecular noLights normal pointLight spotLight image imageMode loadImage noTint requestImage tint texture textureMode textureWrap blend copy filter get loadPixels set updatePixels blendMode loadShader PShaderresetShader shader createFont loadFont text textFont textAlign textLeading textMode textSize textWidth textAscent textDescent abs ceil constrain dist exp floor lerp log mag map max min norm pow round sq sqrt acos asin atan atan2 cos degrees radians sin tan noise noiseDetail noiseSeed random randomGaussian randomSeed"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -24938,11 +29071,11 @@ var require_processing = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/profile.js
 var require_profile = __commonJS((exports2, module2) => {
-  function profile(hljs2) {
+  function profile(hljs) {
     return {
       name: "Python profiler",
       contains: [
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         {
           begin: "[a-zA-Z_][\\da-zA-Z_]+\\.[\\da-zA-Z_]{1,3}",
           end: ":",
@@ -24957,11 +29090,11 @@ var require_profile = __commonJS((exports2, module2) => {
         {
           begin: "function calls",
           end: "$",
-          contains: [hljs2.C_NUMBER_MODE],
+          contains: [hljs.C_NUMBER_MODE],
           relevance: 10
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: "\\(",
@@ -24978,7 +29111,7 @@ var require_profile = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/prolog.js
 var require_prolog = __commonJS((exports2, module2) => {
-  function prolog(hljs2) {
+  function prolog(hljs) {
     const ATOM = {
       begin: /[a-z][A-Za-z0-9_]*/,
       relevance: 0
@@ -25008,13 +29141,13 @@ var require_prolog = __commonJS((exports2, module2) => {
       className: "comment",
       begin: /%/,
       end: /$/,
-      contains: [hljs2.PHRASAL_WORDS_MODE]
+      contains: [hljs.PHRASAL_WORDS_MODE]
     };
     const BACKTICK_STRING = {
       className: "string",
       begin: /`/,
       end: /`/,
-      contains: [hljs2.BACKSLASH_ESCAPE]
+      contains: [hljs.BACKSLASH_ESCAPE]
     };
     const CHAR_CODE = {
       className: "string",
@@ -25034,13 +29167,13 @@ var require_prolog = __commonJS((exports2, module2) => {
       PRED_OP,
       LIST,
       LINE_COMMENT,
-      hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.QUOTE_STRING_MODE,
-      hljs2.APOS_STRING_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.QUOTE_STRING_MODE,
+      hljs.APOS_STRING_MODE,
       BACKTICK_STRING,
       CHAR_CODE,
       SPACE_CODE,
-      hljs2.C_NUMBER_MODE
+      hljs.C_NUMBER_MODE
     ];
     PARENTED.contains = inner;
     LIST.contains = inner;
@@ -25058,7 +29191,7 @@ var require_prolog = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/properties.js
 var require_properties = __commonJS((exports2, module2) => {
-  function properties(hljs2) {
+  function properties(hljs) {
     var WS0 = "[ \\t\\f]*";
     var WS1 = "[ \\t\\f]+";
     var EQUAL_DELIM = WS0 + "[:=]" + WS0;
@@ -25084,7 +29217,7 @@ var require_properties = __commonJS((exports2, module2) => {
       case_insensitive: true,
       illegal: /\S/,
       contains: [
-        hljs2.COMMENT("^\\s*[!#]", "$"),
+        hljs.COMMENT("^\\s*[!#]", "$"),
         {
           returnBegin: true,
           variants: [
@@ -25128,7 +29261,7 @@ var require_properties = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/protobuf.js
 var require_protobuf = __commonJS((exports2, module2) => {
-  function protobuf(hljs2) {
+  function protobuf(hljs) {
     return {
       name: "Protocol Buffers",
       keywords: {
@@ -25137,17 +29270,17 @@ var require_protobuf = __commonJS((exports2, module2) => {
         literal: "true false"
       },
       contains: [
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.NUMBER_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "class",
           beginKeywords: "message enum service",
           end: /\{/,
           illegal: /\n/,
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               starts: {endsWithParent: true, excludeEnd: true}
             })
           ]
@@ -25170,15 +29303,15 @@ var require_protobuf = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/puppet.js
 var require_puppet = __commonJS((exports2, module2) => {
-  function puppet(hljs2) {
+  function puppet(hljs) {
     const PUPPET_KEYWORDS = {
       keyword: "and case default else elsif false if in import enherits node or true undef unless main settings $string ",
       literal: "alias audit before loglevel noop require subscribe tag owner ensure group mode name|0 changes context force incl lens load_path onlyif provider returns root show_diff type_check en_address ip_address realname command environment hour monute month monthday special target weekday creates cwd ogoutput refresh refreshonly tries try_sleep umask backup checksum content ctime force ignore links mtime purge recurse recurselimit replace selinux_ignore_defaults selrange selrole seltype seluser source souirce_permissions sourceselect validate_cmd validate_replacement allowdupe attribute_membership auth_membership forcelocal gid ia_load_module members system host_aliases ip allowed_trunk_vlans description device_url duplex encapsulation etherchannel native_vlan speed principals allow_root auth_class auth_type authenticate_user k_of_n mechanisms rule session_owner shared options device fstype enable hasrestart directory present absent link atboot blockdevice device dump pass remounts poller_tag use message withpath adminfile allow_virtual allowcdrom category configfiles flavor install_options instance package_settings platform responsefile status uninstall_options vendor unless_system_user unless_uid binary control flags hasstatus manifest pattern restart running start stop allowdupe auths expiry gid groups home iterations key_membership keys managehome membership password password_max_age password_min_age profile_membership profiles project purge_ssh_keys role_membership roles salt shell uid baseurl cost descr enabled enablegroups exclude failovermethod gpgcheck gpgkey http_caching include includepkgs keepalive metadata_expire metalink mirrorlist priority protect proxy proxy_password proxy_username repo_gpgcheck s3_enabled skip_if_unavailable sslcacert sslclientcert sslclientkey sslverify mounted",
       built_in: "architecture augeasversion blockdevices boardmanufacturer boardproductname boardserialnumber cfkey dhcp_servers domain ec2_ ec2_userdata facterversion filesystems ldom fqdn gid hardwareisa hardwaremodel hostname id|0 interfaces ipaddress ipaddress_ ipaddress6 ipaddress6_ iphostnumber is_virtual kernel kernelmajversion kernelrelease kernelversion kernelrelease kernelversion lsbdistcodename lsbdistdescription lsbdistid lsbdistrelease lsbmajdistrelease lsbminordistrelease lsbrelease macaddress macaddress_ macosx_buildversion macosx_productname macosx_productversion macosx_productverson_major macosx_productversion_minor manufacturer memoryfree memorysize netmask metmask_ network_ operatingsystem operatingsystemmajrelease operatingsystemrelease osfamily partitions path physicalprocessorcount processor processorcount productname ps puppetversion rubysitedir rubyversion selinux selinux_config_mode selinux_config_policy selinux_current_mode selinux_current_mode selinux_enforced selinux_policyversion serialnumber sp_ sshdsakey sshecdsakey sshrsakey swapencrypted swapfree swapsize timezone type uniqueid uptime uptime_days uptime_hours uptime_seconds uuid virtual vlans xendomains zfs_version zonenae zones zpool_version"
     };
-    const COMMENT = hljs2.COMMENT("#", "$");
+    const COMMENT = hljs.COMMENT("#", "$");
     const IDENT_RE = "([A-Za-z_]|::)(\\w|::)*";
-    const TITLE = hljs2.inherit(hljs2.TITLE_MODE, {
+    const TITLE = hljs.inherit(hljs.TITLE_MODE, {
       begin: IDENT_RE
     });
     const VARIABLE = {
@@ -25188,7 +29321,7 @@ var require_puppet = __commonJS((exports2, module2) => {
     const STRING = {
       className: "string",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         VARIABLE
       ],
       variants: [
@@ -25224,19 +29357,19 @@ var require_puppet = __commonJS((exports2, module2) => {
           contains: [
             {
               className: "section",
-              begin: hljs2.IDENT_RE,
+              begin: hljs.IDENT_RE,
               endsParent: true
             }
           ]
         },
         {
-          begin: hljs2.IDENT_RE + "\\s+\\{",
+          begin: hljs.IDENT_RE + "\\s+\\{",
           returnBegin: true,
           end: /\S/,
           contains: [
             {
               className: "keyword",
-              begin: hljs2.IDENT_RE
+              begin: hljs.IDENT_RE
             },
             {
               begin: /\{/,
@@ -25253,7 +29386,7 @@ var require_puppet = __commonJS((exports2, module2) => {
                   contains: [
                     {
                       className: "attr",
-                      begin: hljs2.IDENT_RE
+                      begin: hljs.IDENT_RE
                     }
                   ]
                 },
@@ -25276,7 +29409,7 @@ var require_puppet = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/purebasic.js
 var require_purebasic = __commonJS((exports2, module2) => {
-  function purebasic(hljs2) {
+  function purebasic(hljs) {
     const STRINGS = {
       className: "string",
       begin: '(~)?"',
@@ -25295,7 +29428,7 @@ var require_purebasic = __commonJS((exports2, module2) => {
       ],
       keywords: "Align And Array As Break CallDebugger Case CompilerCase CompilerDefault CompilerElse CompilerElseIf CompilerEndIf CompilerEndSelect CompilerError CompilerIf CompilerSelect CompilerWarning Continue Data DataSection Debug DebugLevel Declare DeclareC DeclareCDLL DeclareDLL DeclareModule Default Define Dim DisableASM DisableDebugger DisableExplicit Else ElseIf EnableASM EnableDebugger EnableExplicit End EndDataSection EndDeclareModule EndEnumeration EndIf EndImport EndInterface EndMacro EndModule EndProcedure EndSelect EndStructure EndStructureUnion EndWith Enumeration EnumerationBinary Extends FakeReturn For ForEach ForEver Global Gosub Goto If Import ImportC IncludeBinary IncludeFile IncludePath Interface List Macro MacroExpandedCount Map Module NewList NewMap Next Not Or Procedure ProcedureC ProcedureCDLL ProcedureDLL ProcedureReturn Protected Prototype PrototypeC ReDim Read Repeat Restore Return Runtime Select Shared Static Step Structure StructureUnion Swap Threaded To UndefineMacro Until Until  UnuseModule UseModule Wend While With XIncludeFile XOr",
       contains: [
-        hljs2.COMMENT(";", "$", {
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
         {
@@ -25314,7 +29447,7 @@ var require_purebasic = __commonJS((exports2, module2) => {
               className: "type",
               begin: "\\.\\w*"
             },
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         STRINGS,
@@ -25341,7 +29474,7 @@ var require_python = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function python(hljs2) {
+  function python(hljs) {
     const RESERVED_WORDS = [
       "and",
       "as",
@@ -25494,13 +29627,13 @@ var require_python = __commonJS((exports2, module2) => {
     };
     const STRING = {
       className: "string",
-      contains: [hljs2.BACKSLASH_ESCAPE],
+      contains: [hljs.BACKSLASH_ESCAPE],
       variants: [
         {
           begin: /([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?'''/,
           end: /'''/,
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             PROMPT
           ],
           relevance: 10
@@ -25509,7 +29642,7 @@ var require_python = __commonJS((exports2, module2) => {
           begin: /([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/,
           end: /"""/,
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             PROMPT
           ],
           relevance: 10
@@ -25518,7 +29651,7 @@ var require_python = __commonJS((exports2, module2) => {
           begin: /([fF][rR]|[rR][fF]|[fF])'''/,
           end: /'''/,
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             PROMPT,
             LITERAL_BRACKET,
             SUBST
@@ -25528,7 +29661,7 @@ var require_python = __commonJS((exports2, module2) => {
           begin: /([fF][rR]|[rR][fF]|[fF])"""/,
           end: /"""/,
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             PROMPT,
             LITERAL_BRACKET,
             SUBST
@@ -25556,7 +29689,7 @@ var require_python = __commonJS((exports2, module2) => {
           begin: /([fF][rR]|[rR][fF]|[fF])'/,
           end: /'/,
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             LITERAL_BRACKET,
             SUBST
           ]
@@ -25565,13 +29698,13 @@ var require_python = __commonJS((exports2, module2) => {
           begin: /([fF][rR]|[rR][fF]|[fF])"/,
           end: /"/,
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             LITERAL_BRACKET,
             SUBST
           ]
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE
       ]
     };
     const digitpart = "[0-9](_?[0-9])*";
@@ -25638,7 +29771,7 @@ var require_python = __commonJS((exports2, module2) => {
             PROMPT,
             NUMBER,
             STRING,
-            hljs2.HASH_COMMENT_MODE
+            hljs.HASH_COMMENT_MODE
           ]
         }
       ]
@@ -25669,7 +29802,7 @@ var require_python = __commonJS((exports2, module2) => {
         },
         STRING,
         COMMENT_TYPE,
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           variants: [
             {
@@ -25684,7 +29817,7 @@ var require_python = __commonJS((exports2, module2) => {
           end: /:/,
           illegal: /[${=;\n,]/,
           contains: [
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             PARAMS,
             {
               begin: /->/,
@@ -25711,7 +29844,7 @@ var require_python = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/python-repl.js
 var require_python_repl = __commonJS((exports2, module2) => {
-  function pythonRepl(hljs2) {
+  function pythonRepl(hljs) {
     return {
       aliases: ["pycon"],
       contains: [
@@ -25741,7 +29874,7 @@ var require_python_repl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/q.js
 var require_q = __commonJS((exports2, module2) => {
-  function q(hljs2) {
+  function q(hljs) {
     const KEYWORDS = {
       $pattern: /(`?)[A-Za-z0-9_]+\b/,
       keyword: "do while select delete by update from",
@@ -25757,9 +29890,9 @@ var require_q = __commonJS((exports2, module2) => {
       ],
       keywords: KEYWORDS,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -25779,7 +29912,7 @@ var require_qml = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function qml(hljs2) {
+  function qml(hljs) {
     const KEYWORDS = {
       keyword: "in of on if for while finally var new function do return void else break catch instanceof with throw case default try this switch continue typeof delete let yield const export super debugger as async await import",
       literal: "true false null undefined NaN Infinity",
@@ -25833,7 +29966,7 @@ var require_qml = __commonJS((exports2, module2) => {
       returnBegin: true,
       relevance: 0,
       contains: [
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           begin: QML_IDENT_RE
         })
       ]
@@ -25848,14 +29981,14 @@ var require_qml = __commonJS((exports2, module2) => {
           className: "meta",
           begin: /^\s*['"]use (strict|asm)['"]/
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: "`",
           end: "`",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             {
               className: "subst",
               begin: "\\$\\{",
@@ -25863,8 +29996,8 @@ var require_qml = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "number",
           variants: [
@@ -25875,18 +30008,18 @@ var require_qml = __commonJS((exports2, module2) => {
               begin: "\\b(0[oO][0-7]+)"
             },
             {
-              begin: hljs2.C_NUMBER_RE
+              begin: hljs.C_NUMBER_RE
             }
           ],
           relevance: 0
         },
         {
-          begin: "(" + hljs2.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
+          begin: "(" + hljs.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
           keywords: "return throw case",
           contains: [
-            hljs2.C_LINE_COMMENT_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
-            hljs2.REGEXP_MODE,
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
+            hljs.REGEXP_MODE,
             {
               begin: /</,
               end: />\s*[);\]]/,
@@ -25904,7 +30037,7 @@ var require_qml = __commonJS((exports2, module2) => {
           end: /\{/,
           excludeEnd: true,
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               begin: /[A-Za-z$_][0-9A-Za-z$_]*/
             }),
             {
@@ -25914,15 +30047,15 @@ var require_qml = __commonJS((exports2, module2) => {
               excludeBegin: true,
               excludeEnd: true,
               contains: [
-                hljs2.C_LINE_COMMENT_MODE,
-                hljs2.C_BLOCK_COMMENT_MODE
+                hljs.C_LINE_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE
               ]
             }
           ],
           illegal: /\[|%/
         },
         {
-          begin: "\\." + hljs2.IDENT_RE,
+          begin: "\\." + hljs.IDENT_RE,
           relevance: 0
         },
         ID_ID,
@@ -25951,7 +30084,7 @@ var require_r = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function r(hljs2) {
+  function r(hljs) {
     const IDENT_RE = /(?:(?:[a-zA-Z]|\.[._a-zA-Z])[._a-zA-Z0-9]*)|\.(?!\d)/;
     const SIMPLE_IDENT = /[a-zA-Z][a-zA-Z_0-9]*/;
     return {
@@ -25985,7 +30118,7 @@ var require_r = __commonJS((exports2, module2) => {
         }
       ],
       contains: [
-        hljs2.COMMENT(/#'/, /$/, {
+        hljs.COMMENT(/#'/, /$/, {
           contains: [
             {
               className: "doctag",
@@ -26030,17 +30163,17 @@ var require_r = __commonJS((exports2, module2) => {
             }
           ]
         }),
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           className: "string",
-          contains: [hljs2.BACKSLASH_ESCAPE],
+          contains: [hljs.BACKSLASH_ESCAPE],
           variants: [
-            hljs2.END_SAME_AS_BEGIN({begin: /[rR]"(-*)\(/, end: /\)(-*)"/}),
-            hljs2.END_SAME_AS_BEGIN({begin: /[rR]"(-*)\{/, end: /\}(-*)"/}),
-            hljs2.END_SAME_AS_BEGIN({begin: /[rR]"(-*)\[/, end: /\](-*)"/}),
-            hljs2.END_SAME_AS_BEGIN({begin: /[rR]'(-*)\(/, end: /\)(-*)'/}),
-            hljs2.END_SAME_AS_BEGIN({begin: /[rR]'(-*)\{/, end: /\}(-*)'/}),
-            hljs2.END_SAME_AS_BEGIN({begin: /[rR]'(-*)\[/, end: /\](-*)'/}),
+            hljs.END_SAME_AS_BEGIN({begin: /[rR]"(-*)\(/, end: /\)(-*)"/}),
+            hljs.END_SAME_AS_BEGIN({begin: /[rR]"(-*)\{/, end: /\}(-*)"/}),
+            hljs.END_SAME_AS_BEGIN({begin: /[rR]"(-*)\[/, end: /\](-*)"/}),
+            hljs.END_SAME_AS_BEGIN({begin: /[rR]'(-*)\(/, end: /\)(-*)'/}),
+            hljs.END_SAME_AS_BEGIN({begin: /[rR]'(-*)\{/, end: /\}(-*)'/}),
+            hljs.END_SAME_AS_BEGIN({begin: /[rR]'(-*)\[/, end: /\](-*)'/}),
             {begin: '"', end: '"', relevance: 0},
             {begin: "'", end: "'", relevance: 0}
           ]
@@ -26083,7 +30216,7 @@ var require_r = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/reasonml.js
 var require_reasonml = __commonJS((exports2, module2) => {
-  function reasonml(hljs2) {
+  function reasonml(hljs) {
     function orReValues(ops) {
       return ops.map(function(op) {
         return op.split("").map(function(char) {
@@ -26141,7 +30274,7 @@ var require_reasonml = __commonJS((exports2, module2) => {
       NUMBER_MODE
     ];
     const MODULE_ACCESS_CONTENTS = [
-      hljs2.QUOTE_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       OPERATOR_MODE,
       {
         className: "module",
@@ -26242,7 +30375,7 @@ var require_reasonml = __commonJS((exports2, module2) => {
       illegal: "\\n",
       keywords: KEYWORDS,
       contains: [
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         OPERATOR_MODE,
         {
           className: "params",
@@ -26302,7 +30435,7 @@ var require_reasonml = __commonJS((exports2, module2) => {
       keywords: KEYWORDS,
       illegal: "(:-|:=|\\$\\{|\\+=)",
       contains: [
-        hljs2.COMMENT("/\\*", "\\*/", {
+        hljs.COMMENT("/\\*", "\\*/", {
           illegal: "^(#,\\/\\/)"
         }),
         {
@@ -26311,7 +30444,7 @@ var require_reasonml = __commonJS((exports2, module2) => {
           illegal: "\\n",
           relevance: 0
         },
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "literal",
           begin: "\\(\\)",
@@ -26339,7 +30472,7 @@ var require_reasonml = __commonJS((exports2, module2) => {
           relevance: 0
         },
         NUMBER_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
         PATTERN_MATCH_BLOCK_MODE,
         FUNCTION_BLOCK_MODE,
         {
@@ -26371,16 +30504,16 @@ var require_reasonml = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/rib.js
 var require_rib = __commonJS((exports2, module2) => {
-  function rib(hljs2) {
+  function rib(hljs) {
     return {
       name: "RenderMan RIB",
       keywords: "ArchiveRecord AreaLightSource Atmosphere Attribute AttributeBegin AttributeEnd Basis Begin Blobby Bound Clipping ClippingPlane Color ColorSamples ConcatTransform Cone CoordinateSystem CoordSysTransform CropWindow Curves Cylinder DepthOfField Detail DetailRange Disk Displacement Display End ErrorHandler Exposure Exterior Format FrameAspectRatio FrameBegin FrameEnd GeneralPolygon GeometricApproximation Geometry Hider Hyperboloid Identity Illuminate Imager Interior LightSource MakeCubeFaceEnvironment MakeLatLongEnvironment MakeShadow MakeTexture Matte MotionBegin MotionEnd NuPatch ObjectBegin ObjectEnd ObjectInstance Opacity Option Orientation Paraboloid Patch PatchMesh Perspective PixelFilter PixelSamples PixelVariance Points PointsGeneralPolygons PointsPolygons Polygon Procedural Projection Quantize ReadArchive RelativeDetail ReverseOrientation Rotate Scale ScreenWindow ShadingInterpolation ShadingRate Shutter Sides Skew SolidBegin SolidEnd Sphere SubdivisionMesh Surface TextureCoordinates Torus Transform TransformBegin TransformEnd TransformPoints Translate TrimCurve WorldBegin WorldEnd",
       illegal: "</",
       contains: [
-        hljs2.HASH_COMMENT_MODE,
-        hljs2.C_NUMBER_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE
+        hljs.HASH_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE
       ]
     };
   }
@@ -26389,7 +30522,7 @@ var require_rib = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/roboconf.js
 var require_roboconf = __commonJS((exports2, module2) => {
-  function roboconf(hljs2) {
+  function roboconf(hljs) {
     const IDENTIFIER = "[a-zA-Z-_][^\\n{]+\\{";
     const PROPERTY = {
       className: "attribute",
@@ -26426,7 +30559,7 @@ var require_roboconf = __commonJS((exports2, module2) => {
           keywords: "facet",
           contains: [
             PROPERTY,
-            hljs2.HASH_COMMENT_MODE
+            hljs.HASH_COMMENT_MODE
           ]
         },
         {
@@ -26437,7 +30570,7 @@ var require_roboconf = __commonJS((exports2, module2) => {
           contains: [
             "self",
             PROPERTY,
-            hljs2.HASH_COMMENT_MODE
+            hljs.HASH_COMMENT_MODE
           ]
         },
         {
@@ -26445,10 +30578,10 @@ var require_roboconf = __commonJS((exports2, module2) => {
           end: /\}/,
           contains: [
             PROPERTY,
-            hljs2.HASH_COMMENT_MODE
+            hljs.HASH_COMMENT_MODE
           ]
         },
-        hljs2.HASH_COMMENT_MODE
+        hljs.HASH_COMMENT_MODE
       ]
     };
   }
@@ -26457,7 +30590,7 @@ var require_roboconf = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/routeros.js
 var require_routeros = __commonJS((exports2, module2) => {
-  function routeros(hljs2) {
+  function routeros(hljs) {
     const STATEMENTS = "foreach do while for if from to step else on-error and or not in";
     const GLOBAL_COMMANDS = "global local beep delay put len typeof pick log time set find environment terminal error execute parse resolve toarray tobool toid toip toip6 tonum tostr totime";
     const COMMON_COMMANDS = "add remove enable disable set get print export edit find run debug error info warning";
@@ -26479,13 +30612,13 @@ var require_routeros = __commonJS((exports2, module2) => {
       begin: /"/,
       end: /"/,
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         VAR,
         {
           className: "variable",
           begin: /\$\(/,
           end: /\)/,
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         }
       ]
     };
@@ -26523,7 +30656,7 @@ var require_routeros = __commonJS((exports2, module2) => {
           ],
           illegal: /./
         },
-        hljs2.COMMENT("^#", "$"),
+        hljs.COMMENT("^#", "$"),
         QUOTE_STRING,
         APOS_STRING,
         VAR,
@@ -26589,7 +30722,7 @@ var require_routeros = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/rsl.js
 var require_rsl = __commonJS((exports2, module2) => {
-  function rsl(hljs2) {
+  function rsl(hljs) {
     return {
       name: "RenderMan RSL",
       keywords: {
@@ -26598,11 +30731,11 @@ var require_rsl = __commonJS((exports2, module2) => {
       },
       illegal: "</",
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: "#",
@@ -26625,7 +30758,7 @@ var require_rsl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/ruleslanguage.js
 var require_ruleslanguage = __commonJS((exports2, module2) => {
-  function ruleslanguage(hljs2) {
+  function ruleslanguage(hljs) {
     return {
       name: "Oracle Rules Language",
       keywords: {
@@ -26633,11 +30766,11 @@ var require_ruleslanguage = __commonJS((exports2, module2) => {
         built_in: "IDENTIFIER OPTIONS XML_ELEMENT XML_OP XML_ELEMENT_OF DOMDOCCREATE DOMDOCLOADFILE DOMDOCLOADXML DOMDOCSAVEFILE DOMDOCGETROOT DOMDOCADDPI DOMNODEGETNAME DOMNODEGETTYPE DOMNODEGETVALUE DOMNODEGETCHILDCT DOMNODEGETFIRSTCHILD DOMNODEGETSIBLING DOMNODECREATECHILDELEMENT DOMNODESETATTRIBUTE DOMNODEGETCHILDELEMENTCT DOMNODEGETFIRSTCHILDELEMENT DOMNODEGETSIBLINGELEMENT DOMNODEGETATTRIBUTECT DOMNODEGETATTRIBUTEI DOMNODEGETATTRIBUTEBYNAME DOMNODEGETBYNAME"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "literal",
           variants: [
@@ -26658,7 +30791,7 @@ var require_ruleslanguage = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/rust.js
 var require_rust = __commonJS((exports2, module2) => {
-  function rust(hljs2) {
+  function rust(hljs) {
     const NUM_SUFFIX = "([ui](8|16|32|64|128|size)|f(32|64))?";
     const KEYWORDS = "abstract as async await become box break const continue crate do dyn else enum extern false final fn for if impl in let loop macro match mod move mut override priv pub ref return self Self static struct super trait true try type typeof unsafe unsized use virtual where while yield";
     const BUILTINS = "drop i8 i16 i32 i64 i128 isize u8 u16 u32 u64 u128 usize f32 f64 str char bool Box Option Result String Vec Copy Send Sized Sync Drop Fn FnMut FnOnce ToOwned Clone Debug PartialEq PartialOrd Eq Ord AsRef AsMut Into From Default Iterator Extend IntoIterator DoubleEndedIterator ExactSizeIterator SliceConcatExt ToString assert! assert_eq! bitflags! bytes! cfg! col! concat! concat_idents! debug_assert! debug_assert_eq! env! panic! file! format! format_args! include_bin! include_str! line! local_data_key! module_path! option_env! print! println! select! stringify! try! unimplemented! unreachable! vec! write! writeln! macro_rules! assert_ne! debug_assert_ne!";
@@ -26666,18 +30799,18 @@ var require_rust = __commonJS((exports2, module2) => {
       name: "Rust",
       aliases: ["rs"],
       keywords: {
-        $pattern: hljs2.IDENT_RE + "!?",
+        $pattern: hljs.IDENT_RE + "!?",
         keyword: KEYWORDS,
         literal: "true false Some None Ok Err",
         built_in: BUILTINS
       },
       illegal: "</",
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.COMMENT("/\\*", "\\*/", {
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.COMMENT("/\\*", "\\*/", {
           contains: ["self"]
         }),
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           begin: /b?"/,
           illegal: null
         }),
@@ -26719,7 +30852,7 @@ var require_rust = __commonJS((exports2, module2) => {
           beginKeywords: "fn",
           end: "(\\(|<)",
           excludeEnd: true,
-          contains: [hljs2.UNDERSCORE_TITLE_MODE]
+          contains: [hljs.UNDERSCORE_TITLE_MODE]
         },
         {
           className: "meta",
@@ -26738,7 +30871,7 @@ var require_rust = __commonJS((exports2, module2) => {
           beginKeywords: "type",
           end: ";",
           contains: [
-            hljs2.inherit(hljs2.UNDERSCORE_TITLE_MODE, {
+            hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {
               endsParent: true
             })
           ],
@@ -26749,14 +30882,14 @@ var require_rust = __commonJS((exports2, module2) => {
           beginKeywords: "trait enum struct union",
           end: /\{/,
           contains: [
-            hljs2.inherit(hljs2.UNDERSCORE_TITLE_MODE, {
+            hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {
               endsParent: true
             })
           ],
           illegal: "[\\w\\d]"
         },
         {
-          begin: hljs2.IDENT_RE + "::",
+          begin: hljs.IDENT_RE + "::",
           keywords: {
             built_in: BUILTINS
           }
@@ -26772,7 +30905,7 @@ var require_rust = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/sas.js
 var require_sas = __commonJS((exports2, module2) => {
-  function sas(hljs2) {
+  function sas(hljs) {
     const SAS_KEYWORDS = "do if then else end until while abort array attrib by call cards cards4 catname continue datalines datalines4 delete delim delimiter display dm drop endsas error file filename footnote format goto in infile informat input keep label leave length libname link list lostcard merge missing modify options output out page put redirect remove rename replace retain return select set skip startsas stop title update waitsas where window x systask add and alter as cascade check create delete describe distinct drop foreign from group having index insert into in key like message modify msgtype not null on or order primary references reset restrict select set table unique update validate view where";
     const SAS_FUN = "abs|addr|airy|arcos|arsin|atan|attrc|attrn|band|betainv|blshift|bnot|bor|brshift|bxor|byte|cdf|ceil|cexist|cinv|close|cnonct|collate|compbl|compound|compress|cos|cosh|css|curobs|cv|daccdb|daccdbsl|daccsl|daccsyd|dacctab|dairy|date|datejul|datepart|datetime|day|dclose|depdb|depdbsl|depdbsl|depsl|depsl|depsyd|depsyd|deptab|deptab|dequote|dhms|dif|digamma|dim|dinfo|dnum|dopen|doptname|doptnum|dread|dropnote|dsname|erf|erfc|exist|exp|fappend|fclose|fcol|fdelete|fetch|fetchobs|fexist|fget|fileexist|filename|fileref|finfo|finv|fipname|fipnamel|fipstate|floor|fnonct|fnote|fopen|foptname|foptnum|fpoint|fpos|fput|fread|frewind|frlen|fsep|fuzz|fwrite|gaminv|gamma|getoption|getvarc|getvarn|hbound|hms|hosthelp|hour|ibessel|index|indexc|indexw|input|inputc|inputn|int|intck|intnx|intrr|irr|jbessel|juldate|kurtosis|lag|lbound|left|length|lgamma|libname|libref|log|log10|log2|logpdf|logpmf|logsdf|lowcase|max|mdy|mean|min|minute|mod|month|mopen|mort|n|netpv|nmiss|normal|note|npv|open|ordinal|pathname|pdf|peek|peekc|pmf|point|poisson|poke|probbeta|probbnml|probchi|probf|probgam|probhypr|probit|probnegb|probnorm|probt|put|putc|putn|qtr|quote|ranbin|rancau|ranexp|rangam|range|rank|rannor|ranpoi|rantbl|rantri|ranuni|repeat|resolve|reverse|rewind|right|round|saving|scan|sdf|second|sign|sin|sinh|skewness|soundex|spedis|sqrt|std|stderr|stfips|stname|stnamel|substr|sum|symget|sysget|sysmsg|sysprod|sysrc|system|tan|tanh|time|timepart|tinv|tnonct|today|translate|tranwrd|trigamma|trim|trimn|trunc|uniform|upcase|uss|var|varfmt|varinfmt|varlabel|varlen|varname|varnum|varray|varrayx|vartype|verify|vformat|vformatd|vformatdx|vformatn|vformatnx|vformatw|vformatwx|vformatx|vinarray|vinarrayx|vinformat|vinformatd|vinformatdx|vinformatn|vinformatnx|vinformatw|vinformatwx|vinformatx|vlabel|vlabelx|vlength|vlengthx|vname|vnamex|vtype|vtypex|weekday|year|yyq|zipfips|zipname|zipnamel|zipstate";
     const SAS_MACRO_FUN = "bquote|nrbquote|cmpres|qcmpres|compstor|datatyp|display|do|else|end|eval|global|goto|if|index|input|keydef|label|left|length|let|local|lowcase|macro|mend|nrbquote|nrquote|nrstr|put|qcmpres|qleft|qlowcase|qscan|qsubstr|qsysfunc|qtrim|quote|qupcase|scan|str|substr|superq|syscall|sysevalf|sysexec|sysfunc|sysget|syslput|sysprod|sysrc|sysrput|then|to|trim|unquote|until|upcase|verify|while|window";
@@ -26812,12 +30945,12 @@ var require_sas = __commonJS((exports2, module2) => {
         {
           className: "string",
           variants: [
-            hljs2.APOS_STRING_MODE,
-            hljs2.QUOTE_STRING_MODE
+            hljs.APOS_STRING_MODE,
+            hljs.QUOTE_STRING_MODE
           ]
         },
-        hljs2.COMMENT("\\*", ";"),
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.COMMENT("\\*", ";"),
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
   }
@@ -26826,7 +30959,7 @@ var require_sas = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/scala.js
 var require_scala = __commonJS((exports2, module2) => {
-  function scala(hljs2) {
+  function scala(hljs) {
     const ANNOTATION = {
       className: "meta",
       begin: "@[A-Za-z]+"
@@ -26854,14 +30987,14 @@ var require_scala = __commonJS((exports2, module2) => {
           begin: '"',
           end: '"',
           illegal: "\\n",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: '[a-z]+"',
           end: '"',
           illegal: "\\n",
           contains: [
-            hljs2.BACKSLASH_ESCAPE,
+            hljs.BACKSLASH_ESCAPE,
             SUBST
           ]
         },
@@ -26894,8 +31027,8 @@ var require_scala = __commonJS((exports2, module2) => {
       end: /[:={\[\n;]/,
       excludeEnd: true,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           beginKeywords: "extends with",
           relevance: 10
@@ -26934,14 +31067,14 @@ var require_scala = __commonJS((exports2, module2) => {
         keyword: "type yield lazy override def with val var sealed abstract private trait object if forSome for while throw finally protected extends import final return else break new catch super class case package default try this match continue throws implicit"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         STRING,
         SYMBOL,
         TYPE,
         METHOD,
         CLASS,
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         ANNOTATION
       ]
     };
@@ -26951,7 +31084,7 @@ var require_scala = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/scheme.js
 var require_scheme = __commonJS((exports2, module2) => {
-  function scheme(hljs2) {
+  function scheme(hljs) {
     const SCHEME_IDENT_RE = "[^\\(\\)\\[\\]\\{\\}\",'`;#|\\\\\\s]+";
     const SCHEME_SIMPLE_NUMBER_RE = "(-|\\+)?\\d+([./]\\d+)?";
     const SCHEME_COMPLEX_NUMBER_RE = SCHEME_SIMPLE_NUMBER_RE + "[+\\-]" + SCHEME_SIMPLE_NUMBER_RE + "i";
@@ -26985,12 +31118,12 @@ var require_scheme = __commonJS((exports2, module2) => {
         }
       ]
     };
-    const STRING = hljs2.QUOTE_STRING_MODE;
+    const STRING = hljs.QUOTE_STRING_MODE;
     const COMMENT_MODES = [
-      hljs2.COMMENT(";", "$", {
+      hljs.COMMENT(";", "$", {
         relevance: 0
       }),
-      hljs2.COMMENT("#\\|", "\\|#")
+      hljs.COMMENT("#\\|", "\\|#")
     ];
     const IDENT = {
       begin: SCHEME_IDENT_RE,
@@ -27086,7 +31219,7 @@ var require_scheme = __commonJS((exports2, module2) => {
       name: "Scheme",
       illegal: /\S/,
       contains: [
-        hljs2.SHEBANG(),
+        hljs.SHEBANG(),
         NUMBER,
         STRING,
         QUOTED_IDENT,
@@ -27100,15 +31233,15 @@ var require_scheme = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/scilab.js
 var require_scilab = __commonJS((exports2, module2) => {
-  function scilab(hljs2) {
+  function scilab(hljs) {
     const COMMON_CONTAINS = [
-      hljs2.C_NUMBER_MODE,
+      hljs.C_NUMBER_MODE,
       {
         className: "string",
         begin: `'|"`,
         end: `'|"`,
         contains: [
-          hljs2.BACKSLASH_ESCAPE,
+          hljs.BACKSLASH_ESCAPE,
           {
             begin: "''"
           }
@@ -27131,7 +31264,7 @@ var require_scilab = __commonJS((exports2, module2) => {
           beginKeywords: "function",
           end: "$",
           contains: [
-            hljs2.UNDERSCORE_TITLE_MODE,
+            hljs.UNDERSCORE_TITLE_MODE,
             {
               className: "params",
               begin: "\\(",
@@ -27149,7 +31282,7 @@ var require_scilab = __commonJS((exports2, module2) => {
           relevance: 0,
           contains: COMMON_CONTAINS
         },
-        hljs2.COMMENT("//", "$")
+        hljs.COMMENT("//", "$")
       ].concat(COMMON_CONTAINS)
     };
   }
@@ -27158,7 +31291,7 @@ var require_scilab = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/scss.js
 var require_scss = __commonJS((exports2, module2) => {
-  var MODES = (hljs2) => {
+  var MODES = (hljs) => {
     return {
       IMPORTANT: {
         className: "meta",
@@ -27174,8 +31307,8 @@ var require_scss = __commonJS((exports2, module2) => {
         end: /\]/,
         illegal: "$",
         contains: [
-          hljs2.APOS_STRING_MODE,
-          hljs2.QUOTE_STRING_MODE
+          hljs.APOS_STRING_MODE,
+          hljs.QUOTE_STRING_MODE
         ]
       }
     };
@@ -27575,8 +31708,8 @@ var require_scss = __commonJS((exports2, module2) => {
     "word-wrap",
     "z-index"
   ].reverse();
-  function scss(hljs2) {
-    const modes = MODES(hljs2);
+  function scss(hljs) {
+    const modes = MODES(hljs);
     const PSEUDO_ELEMENTS$1 = PSEUDO_ELEMENTS;
     const PSEUDO_CLASSES$1 = PSEUDO_CLASSES;
     const AT_IDENTIFIER = "@[a-z-]+";
@@ -27591,8 +31724,8 @@ var require_scss = __commonJS((exports2, module2) => {
       case_insensitive: true,
       illegal: "[=/|']",
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "selector-id",
           begin: "#[A-Za-z0-9_-]+",
@@ -27621,7 +31754,7 @@ var require_scss = __commonJS((exports2, module2) => {
         {
           begin: /\(/,
           end: /\)/,
-          contains: [hljs2.CSS_NUMBER_MODE]
+          contains: [hljs.CSS_NUMBER_MODE]
         },
         {
           className: "attribute",
@@ -27636,9 +31769,9 @@ var require_scss = __commonJS((exports2, module2) => {
           contains: [
             VARIABLE,
             modes.HEXCOLOR,
-            hljs2.CSS_NUMBER_MODE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.APOS_STRING_MODE,
+            hljs.CSS_NUMBER_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
             modes.IMPORTANT
           ]
         },
@@ -27666,10 +31799,10 @@ var require_scss = __commonJS((exports2, module2) => {
               className: "attribute"
             },
             VARIABLE,
-            hljs2.QUOTE_STRING_MODE,
-            hljs2.APOS_STRING_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
             modes.HEXCOLOR,
-            hljs2.CSS_NUMBER_MODE
+            hljs.CSS_NUMBER_MODE
           ]
         }
       ]
@@ -27680,7 +31813,7 @@ var require_scss = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/shell.js
 var require_shell = __commonJS((exports2, module2) => {
-  function shell(hljs2) {
+  function shell(hljs) {
     return {
       name: "Shell Session",
       aliases: ["console"],
@@ -27701,7 +31834,7 @@ var require_shell = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/smali.js
 var require_smali = __commonJS((exports2, module2) => {
-  function smali(hljs2) {
+  function smali(hljs) {
     const smali_instr_low_prio = [
       "add",
       "and",
@@ -27774,7 +31907,7 @@ var require_smali = __commonJS((exports2, module2) => {
           end: '"',
           relevance: 0
         },
-        hljs2.COMMENT("#", "$", {
+        hljs.COMMENT("#", "$", {
           relevance: 0
         }),
         {
@@ -27828,7 +31961,7 @@ var require_smali = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/smalltalk.js
 var require_smalltalk = __commonJS((exports2, module2) => {
-  function smalltalk(hljs2) {
+  function smalltalk(hljs) {
     const VAR_IDENT_RE = "[a-z][a-zA-Z0-9_]*";
     const CHAR = {
       className: "string",
@@ -27836,15 +31969,15 @@ var require_smalltalk = __commonJS((exports2, module2) => {
     };
     const SYMBOL = {
       className: "symbol",
-      begin: "#" + hljs2.UNDERSCORE_IDENT_RE
+      begin: "#" + hljs.UNDERSCORE_IDENT_RE
     };
     return {
       name: "Smalltalk",
       aliases: ["st"],
       keywords: "self super nil true false thisContext",
       contains: [
-        hljs2.COMMENT('"', '"'),
-        hljs2.APOS_STRING_MODE,
+        hljs.COMMENT('"', '"'),
+        hljs.APOS_STRING_MODE,
         {
           className: "type",
           begin: "\\b[A-Z][A-Za-z0-9_]*",
@@ -27854,7 +31987,7 @@ var require_smalltalk = __commonJS((exports2, module2) => {
           begin: VAR_IDENT_RE + ":",
           relevance: 0
         },
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         SYMBOL,
         CHAR,
         {
@@ -27870,9 +32003,9 @@ var require_smalltalk = __commonJS((exports2, module2) => {
           begin: "#\\(",
           end: "\\)",
           contains: [
-            hljs2.APOS_STRING_MODE,
+            hljs.APOS_STRING_MODE,
             CHAR,
-            hljs2.C_NUMBER_MODE,
+            hljs.C_NUMBER_MODE,
             SYMBOL
           ]
         }
@@ -27884,7 +32017,7 @@ var require_smalltalk = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/sml.js
 var require_sml = __commonJS((exports2, module2) => {
-  function sml(hljs2) {
+  function sml(hljs) {
     return {
       name: "SML (Standard ML)",
       aliases: ["ml"],
@@ -27901,7 +32034,7 @@ var require_sml = __commonJS((exports2, module2) => {
           begin: /\[(\|\|)?\]|\(\)/,
           relevance: 0
         },
-        hljs2.COMMENT("\\(\\*", "\\*\\)", {
+        hljs.COMMENT("\\(\\*", "\\*\\)", {
           contains: ["self"]
         }),
         {
@@ -27920,11 +32053,11 @@ var require_sml = __commonJS((exports2, module2) => {
         {
           begin: "[a-z_]\\w*'[\\w']*"
         },
-        hljs2.inherit(hljs2.APOS_STRING_MODE, {
+        hljs.inherit(hljs.APOS_STRING_MODE, {
           className: "string",
           relevance: 0
         }),
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           illegal: null
         }),
         {
@@ -27943,7 +32076,7 @@ var require_sml = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/sqf.js
 var require_sqf = __commonJS((exports2, module2) => {
-  function sqf(hljs2) {
+  function sqf(hljs) {
     const VARIABLE = {
       className: "variable",
       begin: /\b_+[a-zA-Z]\w*/
@@ -27985,7 +32118,7 @@ var require_sqf = __commonJS((exports2, module2) => {
           begin: /\\\n/,
           relevance: 0
         },
-        hljs2.inherit(STRINGS, {
+        hljs.inherit(STRINGS, {
           className: "meta-string"
         }),
         {
@@ -27994,8 +32127,8 @@ var require_sqf = __commonJS((exports2, module2) => {
           end: /$/,
           illegal: "\\n"
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
     return {
@@ -28007,9 +32140,9 @@ var require_sqf = __commonJS((exports2, module2) => {
         literal: "blufor civilian configNull controlNull displayNull east endl false grpNull independent lineBreak locationNull nil objNull opfor pi resistance scriptNull sideAmbientLife sideEmpty sideLogic sideUnknown taskNull teamMemberNull true west"
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.NUMBER_MODE,
         VARIABLE,
         FUNCTION,
         STRINGS,
@@ -28023,8 +32156,8 @@ var require_sqf = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/sql_more.js
 var require_sql_more = __commonJS((exports2, module2) => {
-  function sql_more(hljs2) {
-    var COMMENT_MODE = hljs2.COMMENT("--", "$");
+  function sql_more(hljs) {
+    var COMMENT_MODE = hljs.COMMENT("--", "$");
     return {
       name: "SQL (more)",
       aliases: ["mysql", "oracle"],
@@ -28060,15 +32193,15 @@ var require_sql_more = __commonJS((exports2, module2) => {
               begin: "`",
               end: "`"
             },
-            hljs2.C_NUMBER_MODE,
-            hljs2.C_BLOCK_COMMENT_MODE,
+            hljs.C_NUMBER_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
             COMMENT_MODE,
-            hljs2.HASH_COMMENT_MODE
+            hljs.HASH_COMMENT_MODE
           ]
         },
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         COMMENT_MODE,
-        hljs2.HASH_COMMENT_MODE
+        hljs.HASH_COMMENT_MODE
       ]
     };
   }
@@ -28092,8 +32225,8 @@ var require_sql = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function sql(hljs2) {
-    const COMMENT_MODE = hljs2.COMMENT("--", "$");
+  function sql(hljs) {
+    const COMMENT_MODE = hljs.COMMENT("--", "$");
     const STRING = {
       className: "string",
       variants: [
@@ -28712,8 +32845,8 @@ var require_sql = __commonJS((exports2, module2) => {
         VARIABLE,
         STRING,
         QUOTED_IDENTIFIER,
-        hljs2.C_NUMBER_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         COMMENT_MODE,
         OPERATOR
       ]
@@ -28724,7 +32857,7 @@ var require_sql = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/stan.js
 var require_stan = __commonJS((exports2, module2) => {
-  function stan(hljs2) {
+  function stan(hljs) {
     const BLOCKS = [
       "functions",
       "model",
@@ -29188,20 +33321,20 @@ var require_stan = __commonJS((exports2, module2) => {
       name: "Stan",
       aliases: ["stanfuncs"],
       keywords: {
-        $pattern: hljs2.IDENT_RE,
+        $pattern: hljs.IDENT_RE,
         title: BLOCKS,
         keyword: STATEMENTS.concat(VAR_TYPES).concat(SPECIAL_FUNCTIONS),
         built_in: FUNCTIONS
       },
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.COMMENT(/#/, /$/, {
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.COMMENT(/#/, /$/, {
           relevance: 0,
           keywords: {
             "meta-keyword": "include"
           }
         }),
-        hljs2.COMMENT(/\/\*/, /\*\//, {
+        hljs.COMMENT(/\/\*/, /\*\//, {
           relevance: 0,
           contains: [
             {
@@ -29224,7 +33357,7 @@ var require_stan = __commonJS((exports2, module2) => {
           relevance: 10
         },
         {
-          begin: "~\\s*(" + hljs2.IDENT_RE + ")\\s*\\(",
+          begin: "~\\s*(" + hljs.IDENT_RE + ")\\s*\\(",
           keywords: DISTRIBUTIONS
         },
         {
@@ -29253,7 +33386,7 @@ var require_stan = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/stata.js
 var require_stata = __commonJS((exports2, module2) => {
-  function stata(hljs2) {
+  function stata(hljs) {
     return {
       name: "Stata",
       aliases: [
@@ -29290,9 +33423,9 @@ var require_stata = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.COMMENT("^[ 	]*\\*.*$", false),
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE
+        hljs.COMMENT("^[ 	]*\\*.*$", false),
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE
       ]
     };
   }
@@ -29301,7 +33434,7 @@ var require_stata = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/step21.js
 var require_step21 = __commonJS((exports2, module2) => {
-  function step21(hljs2) {
+  function step21(hljs) {
     const STEP21_IDENT_RE = "[A-Z_][A-Z0-9_.]*";
     const STEP21_KEYWORDS = {
       $pattern: STEP21_IDENT_RE,
@@ -29329,14 +33462,14 @@ var require_step21 = __commonJS((exports2, module2) => {
       contains: [
         STEP21_START,
         STEP21_CLOSE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.COMMENT("/\\*\\*!", "\\*/"),
-        hljs2.C_NUMBER_MODE,
-        hljs2.inherit(hljs2.APOS_STRING_MODE, {
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.COMMENT("/\\*\\*!", "\\*/"),
+        hljs.C_NUMBER_MODE,
+        hljs.inherit(hljs.APOS_STRING_MODE, {
           illegal: null
         }),
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           illegal: null
         }),
         {
@@ -29362,7 +33495,7 @@ var require_step21 = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/stylus.js
 var require_stylus = __commonJS((exports2, module2) => {
-  var MODES = (hljs2) => {
+  var MODES = (hljs) => {
     return {
       IMPORTANT: {
         className: "meta",
@@ -29378,8 +33511,8 @@ var require_stylus = __commonJS((exports2, module2) => {
         end: /\]/,
         illegal: "$",
         contains: [
-          hljs2.APOS_STRING_MODE,
-          hljs2.QUOTE_STRING_MODE
+          hljs.APOS_STRING_MODE,
+          hljs.QUOTE_STRING_MODE
         ]
       }
     };
@@ -29779,12 +33912,12 @@ var require_stylus = __commonJS((exports2, module2) => {
     "word-wrap",
     "z-index"
   ].reverse();
-  function stylus(hljs2) {
-    const modes = MODES(hljs2);
+  function stylus(hljs) {
+    const modes = MODES(hljs);
     const AT_MODIFIERS = "and or not only";
     const VARIABLE = {
       className: "variable",
-      begin: "\\$" + hljs2.IDENT_RE
+      begin: "\\$" + hljs.IDENT_RE
     };
     const AT_KEYWORDS = [
       "charset",
@@ -29823,10 +33956,10 @@ var require_stylus = __commonJS((exports2, module2) => {
       keywords: "if else for in",
       illegal: "(" + ILLEGAL.join("|") + ")",
       contains: [
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.APOS_STRING_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         modes.HEXCOLOR,
         {
           begin: "\\.[a-zA-Z][a-zA-Z0-9_-]*" + LOOKAHEAD_TAG_END,
@@ -29859,7 +33992,7 @@ var require_stylus = __commonJS((exports2, module2) => {
               keyword: AT_MODIFIERS,
               attribute: MEDIA_FEATURES.join(" ")
             },
-            contains: [hljs2.CSS_NUMBER_MODE]
+            contains: [hljs.CSS_NUMBER_MODE]
           }
         },
         {
@@ -29867,7 +34000,7 @@ var require_stylus = __commonJS((exports2, module2) => {
           begin: "@((-(o|moz|ms|webkit)-)?(" + AT_KEYWORDS.join("|") + "))\\b"
         },
         VARIABLE,
-        hljs2.CSS_NUMBER_MODE,
+        hljs.CSS_NUMBER_MODE,
         {
           className: "function",
           begin: "^[a-zA-Z][a-zA-Z0-9_-]*\\(.*\\)",
@@ -29885,9 +34018,9 @@ var require_stylus = __commonJS((exports2, module2) => {
               contains: [
                 modes.HEXCOLOR,
                 VARIABLE,
-                hljs2.APOS_STRING_MODE,
-                hljs2.CSS_NUMBER_MODE,
-                hljs2.QUOTE_STRING_MODE
+                hljs.APOS_STRING_MODE,
+                hljs.CSS_NUMBER_MODE,
+                hljs.QUOTE_STRING_MODE
               ]
             }
           ]
@@ -29900,10 +34033,10 @@ var require_stylus = __commonJS((exports2, module2) => {
             contains: [
               modes.HEXCOLOR,
               VARIABLE,
-              hljs2.APOS_STRING_MODE,
-              hljs2.QUOTE_STRING_MODE,
-              hljs2.CSS_NUMBER_MODE,
-              hljs2.C_BLOCK_COMMENT_MODE,
+              hljs.APOS_STRING_MODE,
+              hljs.QUOTE_STRING_MODE,
+              hljs.CSS_NUMBER_MODE,
+              hljs.C_BLOCK_COMMENT_MODE,
               modes.IMPORTANT
             ],
             illegal: /\./,
@@ -29918,7 +34051,7 @@ var require_stylus = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/subunit.js
 var require_subunit = __commonJS((exports2, module2) => {
-  function subunit(hljs2) {
+  function subunit(hljs) {
     const DETAILS = {
       className: "string",
       begin: "\\[\n(multipart)?",
@@ -30203,16 +34336,16 @@ var require_swift = __commonJS((exports2, module2) => {
     "tvOSApplicationExtension",
     "swift"
   ];
-  function swift(hljs2) {
+  function swift(hljs) {
     const WHITESPACE = {
       match: /\s+/,
       relevance: 0
     };
-    const BLOCK_COMMENT = hljs2.COMMENT("/\\*", "\\*/", {
+    const BLOCK_COMMENT = hljs.COMMENT("/\\*", "\\*/", {
       contains: ["self"]
     });
     const COMMENTS = [
-      hljs2.C_LINE_COMMENT_MODE,
+      hljs.C_LINE_COMMENT_MODE,
       BLOCK_COMMENT
     ];
     const DOT_KEYWORD = {
@@ -30542,7 +34675,7 @@ var require_swift = __commonJS((exports2, module2) => {
     };
     const OPERATOR_DECLARATION = {
       beginKeywords: "operator",
-      end: hljs2.MATCH_NOTHING_RE,
+      end: hljs.MATCH_NOTHING_RE,
       contains: [
         {
           className: "title",
@@ -30554,7 +34687,7 @@ var require_swift = __commonJS((exports2, module2) => {
     };
     const PRECEDENCEGROUP = {
       beginKeywords: "precedencegroup",
-      end: hljs2.MATCH_NOTHING_RE,
+      end: hljs.MATCH_NOTHING_RE,
       contains: [
         {
           className: "title",
@@ -30611,7 +34744,7 @@ var require_swift = __commonJS((exports2, module2) => {
           excludeEnd: true,
           keywords: KEYWORDS,
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               begin: /[A-Za-z$_][\u00C0-\u02B80-9A-Za-z$_]*/
             }),
             ...KEYWORD_MODES
@@ -30642,7 +34775,7 @@ var require_swift = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/taggerscript.js
 var require_taggerscript = __commonJS((exports2, module2) => {
-  function taggerscript(hljs2) {
+  function taggerscript(hljs) {
     const COMMENT = {
       className: "comment",
       begin: /\$noop\(/,
@@ -30689,7 +34822,7 @@ var require_taggerscript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/yaml.js
 var require_yaml = __commonJS((exports2, module2) => {
-  function yaml(hljs2) {
+  function yaml(hljs) {
     var LITERALS = "true false yes no null";
     var URI_CHARACTERS = "[\\w#;/?:@&=+$,.~*'()[\\]]+";
     var KEY = {
@@ -30716,11 +34849,11 @@ var require_yaml = __commonJS((exports2, module2) => {
         {begin: /\S+/}
       ],
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         TEMPLATE_VARIABLES
       ]
     };
-    var CONTAINER_STRING = hljs2.inherit(STRING, {
+    var CONTAINER_STRING = hljs.inherit(STRING, {
       variants: [
         {begin: /'/, end: /'/},
         {begin: /"/, end: /"/},
@@ -30793,18 +34926,18 @@ var require_yaml = __commonJS((exports2, module2) => {
       },
       {
         className: "meta",
-        begin: "&" + hljs2.UNDERSCORE_IDENT_RE + "$"
+        begin: "&" + hljs.UNDERSCORE_IDENT_RE + "$"
       },
       {
         className: "meta",
-        begin: "\\*" + hljs2.UNDERSCORE_IDENT_RE + "$"
+        begin: "\\*" + hljs.UNDERSCORE_IDENT_RE + "$"
       },
       {
         className: "bullet",
         begin: "-(?=[ ]|$)",
         relevance: 0
       },
-      hljs2.HASH_COMMENT_MODE,
+      hljs.HASH_COMMENT_MODE,
       {
         beginKeywords: LITERALS,
         keywords: {literal: LITERALS}
@@ -30812,7 +34945,7 @@ var require_yaml = __commonJS((exports2, module2) => {
       TIMESTAMP,
       {
         className: "number",
-        begin: hljs2.C_NUMBER_RE + "\\b",
+        begin: hljs.C_NUMBER_RE + "\\b",
         relevance: 0
       },
       OBJECT,
@@ -30835,12 +34968,12 @@ var require_yaml = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/tap.js
 var require_tap = __commonJS((exports2, module2) => {
-  function tap(hljs2) {
+  function tap(hljs) {
     return {
       name: "Test Anything Protocol",
       case_insensitive: true,
       contains: [
-        hljs2.HASH_COMMENT_MODE,
+        hljs.HASH_COMMENT_MODE,
         {
           className: "meta",
           variants: [
@@ -30895,19 +35028,19 @@ var require_tcl = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function tcl(hljs2) {
+  function tcl(hljs) {
     const TCL_IDENT = /[a-zA-Z_][a-zA-Z0-9_]*/;
     const NUMBER = {
       className: "number",
-      variants: [hljs2.BINARY_NUMBER_MODE, hljs2.C_NUMBER_MODE]
+      variants: [hljs.BINARY_NUMBER_MODE, hljs.C_NUMBER_MODE]
     };
     return {
       name: "Tcl",
       aliases: ["tk"],
       keywords: "after append apply array auto_execok auto_import auto_load auto_mkindex auto_mkindex_old auto_qualify auto_reset bgerror binary break catch cd chan clock close concat continue dde dict encoding eof error eval exec exit expr fblocked fconfigure fcopy file fileevent filename flush for foreach format gets glob global history http if incr info interp join lappend|10 lassign|10 lindex|10 linsert|10 list llength|10 load lrange|10 lrepeat|10 lreplace|10 lreverse|10 lsearch|10 lset|10 lsort|10 mathfunc mathop memory msgcat namespace open package parray pid pkg::create pkg_mkIndex platform platform::shell proc puts pwd read refchan regexp registry regsub|10 rename return safe scan seek set socket source split string subst switch tcl_endOfWord tcl_findLibrary tcl_startOfNextWord tcl_startOfPreviousWord tcl_wordBreakAfter tcl_wordBreakBefore tcltest tclvars tell time tm trace unknown unload unset update uplevel upvar variable vwait while",
       contains: [
-        hljs2.COMMENT(";[ \\t]*#", "$"),
-        hljs2.COMMENT("^[ \\t]*#", "$"),
+        hljs.COMMENT(";[ \\t]*#", "$"),
+        hljs.COMMENT("^[ \\t]*#", "$"),
         {
           beginKeywords: "proc",
           end: "[\\{]",
@@ -30939,9 +35072,9 @@ var require_tcl = __commonJS((exports2, module2) => {
         },
         {
           className: "string",
-          contains: [hljs2.BACKSLASH_ESCAPE],
+          contains: [hljs.BACKSLASH_ESCAPE],
           variants: [
-            hljs2.inherit(hljs2.QUOTE_STRING_MODE, {illegal: null})
+            hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null})
           ]
         },
         NUMBER
@@ -30953,7 +35086,7 @@ var require_tcl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/thrift.js
 var require_thrift = __commonJS((exports2, module2) => {
-  function thrift(hljs2) {
+  function thrift(hljs) {
     const BUILT_IN_TYPES = "bool byte i16 i32 i64 double string binary";
     return {
       name: "Thrift",
@@ -30963,17 +35096,17 @@ var require_thrift = __commonJS((exports2, module2) => {
         literal: "true false"
       },
       contains: [
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.NUMBER_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "class",
           beginKeywords: "struct enum service exception",
           end: /\{/,
           illegal: /\n/,
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {
+            hljs.inherit(hljs.TITLE_MODE, {
               starts: {
                 endsWithParent: true,
                 excludeEnd: true
@@ -30995,7 +35128,7 @@ var require_thrift = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/tp.js
 var require_tp = __commonJS((exports2, module2) => {
-  function tp(hljs2) {
+  function tp(hljs) {
     const TPID = {
       className: "number",
       begin: "[1-9][0-9]*",
@@ -31022,7 +35155,7 @@ var require_tp = __commonJS((exports2, module2) => {
       contains: [
         "self",
         TPID,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         TPLABEL
       ]
     };
@@ -31052,16 +35185,16 @@ var require_tp = __commonJS((exports2, module2) => {
           begin: "\\d+(sec|msec|mm/sec|cm/min|inch/min|deg/sec|mm|in|cm)?\\b",
           relevance: 0
         },
-        hljs2.COMMENT("//", "[;$]"),
-        hljs2.COMMENT("!", "[;$]"),
-        hljs2.COMMENT("--eg:", "$"),
-        hljs2.QUOTE_STRING_MODE,
+        hljs.COMMENT("//", "[;$]"),
+        hljs.COMMENT("!", "[;$]"),
+        hljs.COMMENT("--eg:", "$"),
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           begin: "'",
           end: "'"
         },
-        hljs2.C_NUMBER_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "variable",
           begin: "\\$[A-Za-z0-9_]+"
@@ -31074,7 +35207,7 @@ var require_tp = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/twig.js
 var require_twig = __commonJS((exports2, module2) => {
-  function twig(hljs2) {
+  function twig(hljs) {
     var PARAMS = {
       className: "params",
       begin: "\\(",
@@ -31106,7 +35239,7 @@ var require_twig = __commonJS((exports2, module2) => {
       case_insensitive: true,
       subLanguage: "xml",
       contains: [
-        hljs2.COMMENT(/\{#/, /#\}/),
+        hljs.COMMENT(/\{#/, /#\}/),
         {
           className: "template-tag",
           begin: /\{%/,
@@ -31277,7 +35410,7 @@ var require_typescript = __commonJS((exports2, module2) => {
     const joined = args.map((x) => source(x)).join("");
     return joined;
   }
-  function javascript2(hljs2) {
+  function javascript(hljs) {
     const hasClosingTag = (match, {after}) => {
       const tag = "</" + match[0].slice(1);
       const pos = match.input.indexOf(tag, after);
@@ -31341,7 +35474,7 @@ var require_typescript = __commonJS((exports2, module2) => {
         end: "`",
         returnEnd: false,
         contains: [
-          hljs2.BACKSLASH_ESCAPE,
+          hljs.BACKSLASH_ESCAPE,
           SUBST
         ],
         subLanguage: "xml"
@@ -31354,7 +35487,7 @@ var require_typescript = __commonJS((exports2, module2) => {
         end: "`",
         returnEnd: false,
         contains: [
-          hljs2.BACKSLASH_ESCAPE,
+          hljs.BACKSLASH_ESCAPE,
           SUBST
         ],
         subLanguage: "css"
@@ -31365,11 +35498,11 @@ var require_typescript = __commonJS((exports2, module2) => {
       begin: "`",
       end: "`",
       contains: [
-        hljs2.BACKSLASH_ESCAPE,
+        hljs.BACKSLASH_ESCAPE,
         SUBST
       ]
     };
-    const JSDOC_COMMENT = hljs2.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
+    const JSDOC_COMMENT = hljs.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
       relevance: 0,
       contains: [
         {
@@ -31400,18 +35533,18 @@ var require_typescript = __commonJS((exports2, module2) => {
       className: "comment",
       variants: [
         JSDOC_COMMENT,
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.C_LINE_COMMENT_MODE
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE
       ]
     };
     const SUBST_INTERNALS = [
-      hljs2.APOS_STRING_MODE,
-      hljs2.QUOTE_STRING_MODE,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
       HTML_TEMPLATE,
       CSS_TEMPLATE,
       TEMPLATE_STRING,
       NUMBER,
-      hljs2.REGEXP_MODE
+      hljs.REGEXP_MODE
     ];
     SUBST.contains = SUBST_INTERNALS.concat({
       begin: /\{/,
@@ -31446,7 +35579,7 @@ var require_typescript = __commonJS((exports2, module2) => {
       exports: {PARAMS_CONTAINS},
       illegal: /#(?![$_A-z])/,
       contains: [
-        hljs2.SHEBANG({
+        hljs.SHEBANG({
           label: "shebang",
           binary: "node",
           relevance: 5
@@ -31457,8 +35590,8 @@ var require_typescript = __commonJS((exports2, module2) => {
           relevance: 10,
           begin: /^\s*['"]use (strict|asm)['"]/
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         HTML_TEMPLATE,
         CSS_TEMPLATE,
         TEMPLATE_STRING,
@@ -31476,14 +35609,14 @@ var require_typescript = __commonJS((exports2, module2) => {
           ]
         },
         {
-          begin: "(" + hljs2.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
+          begin: "(" + hljs.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
           keywords: "return throw case",
           contains: [
             COMMENT,
-            hljs2.REGEXP_MODE,
+            hljs.REGEXP_MODE,
             {
               className: "function",
-              begin: "(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|" + hljs2.UNDERSCORE_IDENT_RE + ")\\s*=>",
+              begin: "(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|" + hljs.UNDERSCORE_IDENT_RE + ")\\s*=>",
               returnBegin: true,
               end: "\\s*=>",
               contains: [
@@ -31491,7 +35624,7 @@ var require_typescript = __commonJS((exports2, module2) => {
                   className: "params",
                   variants: [
                     {
-                      begin: hljs2.UNDERSCORE_IDENT_RE,
+                      begin: hljs.UNDERSCORE_IDENT_RE,
                       relevance: 0
                     },
                     {
@@ -31551,7 +35684,7 @@ var require_typescript = __commonJS((exports2, module2) => {
           keywords: KEYWORDS$1,
           contains: [
             "self",
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1}),
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1}),
             PARAMS
           ],
           illegal: /%/
@@ -31561,11 +35694,11 @@ var require_typescript = __commonJS((exports2, module2) => {
         },
         {
           className: "function",
-          begin: hljs2.UNDERSCORE_IDENT_RE + "\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
+          begin: hljs.UNDERSCORE_IDENT_RE + "\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
           returnBegin: true,
           contains: [
             PARAMS,
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1})
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1})
           ]
         },
         {
@@ -31583,7 +35716,7 @@ var require_typescript = __commonJS((exports2, module2) => {
           illegal: /[:"[\]]/,
           contains: [
             {beginKeywords: "extends"},
-            hljs2.UNDERSCORE_TITLE_MODE
+            hljs.UNDERSCORE_TITLE_MODE
           ]
         },
         {
@@ -31591,7 +35724,7 @@ var require_typescript = __commonJS((exports2, module2) => {
           end: /[{;]/,
           excludeEnd: true,
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1}),
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1}),
             "self",
             PARAMS
           ]
@@ -31601,7 +35734,7 @@ var require_typescript = __commonJS((exports2, module2) => {
           end: /\{/,
           keywords: "get set",
           contains: [
-            hljs2.inherit(hljs2.TITLE_MODE, {begin: IDENT_RE$1}),
+            hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$1}),
             {begin: /\(\)/},
             PARAMS
           ]
@@ -31612,7 +35745,7 @@ var require_typescript = __commonJS((exports2, module2) => {
       ]
     };
   }
-  function typescript(hljs2) {
+  function typescript(hljs) {
     const IDENT_RE$1 = IDENT_RE;
     const NAMESPACE = {
       beginKeywords: "namespace",
@@ -31670,7 +35803,7 @@ var require_typescript = __commonJS((exports2, module2) => {
       }
       mode.contains.splice(indx, 1, replacement);
     };
-    const tsLanguage = javascript2(hljs2);
+    const tsLanguage = javascript(hljs);
     Object.assign(tsLanguage.keywords, KEYWORDS$1);
     tsLanguage.exports.PARAMS_CONTAINS.push(DECORATOR);
     tsLanguage.contains = tsLanguage.contains.concat([
@@ -31678,7 +35811,7 @@ var require_typescript = __commonJS((exports2, module2) => {
       NAMESPACE,
       INTERFACE
     ]);
-    swapMode(tsLanguage, "shebang", hljs2.SHEBANG());
+    swapMode(tsLanguage, "shebang", hljs.SHEBANG());
     swapMode(tsLanguage, "use_strict", USE_STRICT);
     const functionDeclaration = tsLanguage.contains.find((m) => m.className === "function");
     functionDeclaration.relevance = 0;
@@ -31693,7 +35826,7 @@ var require_typescript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/vala.js
 var require_vala = __commonJS((exports2, module2) => {
-  function vala(hljs2) {
+  function vala(hljs) {
     return {
       name: "Vala",
       keywords: {
@@ -31708,19 +35841,19 @@ var require_vala = __commonJS((exports2, module2) => {
           end: /\{/,
           excludeEnd: true,
           illegal: "[^,:\\n\\s\\.]",
-          contains: [hljs2.UNDERSCORE_TITLE_MODE]
+          contains: [hljs.UNDERSCORE_TITLE_MODE]
         },
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         {
           className: "string",
           begin: '"""',
           end: '"""',
           relevance: 5
         },
-        hljs2.APOS_STRING_MODE,
-        hljs2.QUOTE_STRING_MODE,
-        hljs2.C_NUMBER_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_NUMBER_MODE,
         {
           className: "meta",
           begin: "^#",
@@ -31750,7 +35883,7 @@ var require_vbnet = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function vbnet(hljs2) {
+  function vbnet(hljs) {
     const CHARACTER = {
       className: "string",
       begin: /"(""|[^/n])"C\b/
@@ -31812,7 +35945,7 @@ var require_vbnet = __commonJS((exports2, module2) => {
       className: "label",
       begin: /^\w+:/
     };
-    const DOC_COMMENT = hljs2.COMMENT(/'''/, /$/, {
+    const DOC_COMMENT = hljs.COMMENT(/'''/, /$/, {
       contains: [
         {
           className: "doctag",
@@ -31821,7 +35954,7 @@ var require_vbnet = __commonJS((exports2, module2) => {
         }
       ]
     });
-    const COMMENT = hljs2.COMMENT(null, /$/, {
+    const COMMENT = hljs.COMMENT(null, /$/, {
       variants: [
         {
           begin: /'/
@@ -31886,7 +36019,7 @@ var require_vbscript = __commonJS((exports2, module2) => {
     const joined = "(" + args.map((x) => source(x)).join("|") + ")";
     return joined;
   }
-  function vbscript(hljs2) {
+  function vbscript(hljs) {
     const BUILT_IN_FUNCTIONS = "lcase month vartype instrrev ubound setlocale getobject rgb getref string weekdayname rnd dateadd monthname now day minute isarray cbool round formatcurrency conversions csng timevalue second year space abs clng timeserial fixs len asc isempty maths dateserial atn timer isobject filter weekday datevalue ccur isdate instr datediff formatdatetime replace isnull right sgn array snumeric log cdbl hex chr lbound msgbox ucase getlocale cos cdate cbyte rtrim join hour oct typename trim strcomp int createobject loadpicture tan formatnumber mid split  cint sin datepart ltrim sqr time derived eval date formatpercent exp inputbox left ascw chrw regexp cstr err".split(" ");
     const BUILT_IN_OBJECTS = [
       "server",
@@ -31916,11 +36049,11 @@ var require_vbscript = __commonJS((exports2, module2) => {
       illegal: "//",
       contains: [
         BUILT_IN_CALL,
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {contains: [{begin: '""'}]}),
-        hljs2.COMMENT(/'/, /$/, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {contains: [{begin: '""'}]}),
+        hljs.COMMENT(/'/, /$/, {
           relevance: 0
         }),
-        hljs2.C_NUMBER_MODE
+        hljs.C_NUMBER_MODE
       ]
     };
   }
@@ -31929,7 +36062,7 @@ var require_vbscript = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/vbscript-html.js
 var require_vbscript_html = __commonJS((exports2, module2) => {
-  function vbscriptHtml(hljs2) {
+  function vbscriptHtml(hljs) {
     return {
       name: "VBScript in HTML",
       subLanguage: "xml",
@@ -31947,7 +36080,7 @@ var require_vbscript_html = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/verilog.js
 var require_verilog = __commonJS((exports2, module2) => {
-  function verilog(hljs2) {
+  function verilog(hljs) {
     const SV_KEYWORDS = {
       $pattern: /[\w\$]+/,
       keyword: "accept_on alias always always_comb always_ff always_latch and assert assign assume automatic before begin bind bins binsof bit break buf|0 bufif0 bufif1 byte case casex casez cell chandle checker class clocking cmos config const constraint context continue cover covergroup coverpoint cross deassign default defparam design disable dist do edge else end endcase endchecker endclass endclocking endconfig endfunction endgenerate endgroup endinterface endmodule endpackage endprimitive endprogram endproperty endspecify endsequence endtable endtask enum event eventually expect export extends extern final first_match for force foreach forever fork forkjoin function generate|5 genvar global highz0 highz1 if iff ifnone ignore_bins illegal_bins implements implies import incdir include initial inout input inside instance int integer interconnect interface intersect join join_any join_none large let liblist library local localparam logic longint macromodule matches medium modport module nand negedge nettype new nexttime nmos nor noshowcancelled not notif0 notif1 or output package packed parameter pmos posedge primitive priority program property protected pull0 pull1 pulldown pullup pulsestyle_ondetect pulsestyle_onevent pure rand randc randcase randsequence rcmos real realtime ref reg reject_on release repeat restrict return rnmos rpmos rtran rtranif0 rtranif1 s_always s_eventually s_nexttime s_until s_until_with scalared sequence shortint shortreal showcancelled signed small soft solve specify specparam static string strong strong0 strong1 struct super supply0 supply1 sync_accept_on sync_reject_on table tagged task this throughout time timeprecision timeunit tran tranif0 tranif1 tri tri0 tri1 triand trior trireg type typedef union unique unique0 unsigned until until_with untyped use uwire var vectored virtual void wait wait_order wand weak weak0 weak1 while wildcard wire with within wor xnor xor",
@@ -31964,12 +36097,12 @@ var require_verilog = __commonJS((exports2, module2) => {
       case_insensitive: false,
       keywords: SV_KEYWORDS,
       contains: [
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.QUOTE_STRING_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "number",
-          contains: [hljs2.BACKSLASH_ESCAPE],
+          contains: [hljs.BACKSLASH_ESCAPE],
           variants: [
             {
               begin: "\\b((\\d+'(b|h|o|d|B|H|O|D))[0-9xzXZa-fA-F_]+)"
@@ -32012,7 +36145,7 @@ var require_verilog = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/vhdl.js
 var require_vhdl = __commonJS((exports2, module2) => {
-  function vhdl(hljs2) {
+  function vhdl(hljs) {
     const INTEGER_RE = "\\d(_|\\d)*";
     const EXPONENT_RE = "[eE][-+]?" + INTEGER_RE;
     const DECIMAL_LITERAL_RE = INTEGER_RE + "(\\." + INTEGER_RE + ")?(" + EXPONENT_RE + ")?";
@@ -32029,9 +36162,9 @@ var require_vhdl = __commonJS((exports2, module2) => {
       },
       illegal: /\{/,
       contains: [
-        hljs2.C_BLOCK_COMMENT_MODE,
-        hljs2.COMMENT("--", "$"),
-        hljs2.QUOTE_STRING_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.COMMENT("--", "$"),
+        hljs.QUOTE_STRING_MODE,
         {
           className: "number",
           begin: NUMBER_RE,
@@ -32040,12 +36173,12 @@ var require_vhdl = __commonJS((exports2, module2) => {
         {
           className: "string",
           begin: "'(U|X|0|1|Z|W|L|H|-)'",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           className: "symbol",
           begin: "'[A-Za-z](_?[A-Za-z0-9])*",
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         }
       ]
     };
@@ -32055,7 +36188,7 @@ var require_vhdl = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/vim.js
 var require_vim = __commonJS((exports2, module2) => {
-  function vim(hljs2) {
+  function vim(hljs) {
     return {
       name: "Vim Script",
       keywords: {
@@ -32065,7 +36198,7 @@ var require_vim = __commonJS((exports2, module2) => {
       },
       illegal: /;/,
       contains: [
-        hljs2.NUMBER_MODE,
+        hljs.NUMBER_MODE,
         {
           className: "string",
           begin: "'",
@@ -32076,7 +36209,7 @@ var require_vim = __commonJS((exports2, module2) => {
           className: "string",
           begin: /"(\\"|\n\\|[^"\n])*"/
         },
-        hljs2.COMMENT('"', "$"),
+        hljs.COMMENT('"', "$"),
         {
           className: "variable",
           begin: /[bwtglsav]:[\w\d_]*/
@@ -32087,7 +36220,7 @@ var require_vim = __commonJS((exports2, module2) => {
           end: "$",
           relevance: 0,
           contains: [
-            hljs2.TITLE_MODE,
+            hljs.TITLE_MODE,
             {
               className: "params",
               begin: "\\(",
@@ -32107,18 +36240,18 @@ var require_vim = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/x86asm.js
 var require_x86asm = __commonJS((exports2, module2) => {
-  function x86asm(hljs2) {
+  function x86asm(hljs) {
     return {
       name: "Intel x86 Assembly",
       case_insensitive: true,
       keywords: {
-        $pattern: "[.%]?" + hljs2.IDENT_RE,
+        $pattern: "[.%]?" + hljs.IDENT_RE,
         keyword: "lock rep repe repz repne repnz xaquire xrelease bnd nobnd aaa aad aam aas adc add and arpl bb0_reset bb1_reset bound bsf bsr bswap bt btc btr bts call cbw cdq cdqe clc cld cli clts cmc cmp cmpsb cmpsd cmpsq cmpsw cmpxchg cmpxchg486 cmpxchg8b cmpxchg16b cpuid cpu_read cpu_write cqo cwd cwde daa das dec div dmint emms enter equ f2xm1 fabs fadd faddp fbld fbstp fchs fclex fcmovb fcmovbe fcmove fcmovnb fcmovnbe fcmovne fcmovnu fcmovu fcom fcomi fcomip fcomp fcompp fcos fdecstp fdisi fdiv fdivp fdivr fdivrp femms feni ffree ffreep fiadd ficom ficomp fidiv fidivr fild fimul fincstp finit fist fistp fisttp fisub fisubr fld fld1 fldcw fldenv fldl2e fldl2t fldlg2 fldln2 fldpi fldz fmul fmulp fnclex fndisi fneni fninit fnop fnsave fnstcw fnstenv fnstsw fpatan fprem fprem1 fptan frndint frstor fsave fscale fsetpm fsin fsincos fsqrt fst fstcw fstenv fstp fstsw fsub fsubp fsubr fsubrp ftst fucom fucomi fucomip fucomp fucompp fxam fxch fxtract fyl2x fyl2xp1 hlt ibts icebp idiv imul in inc incbin insb insd insw int int01 int1 int03 int3 into invd invpcid invlpg invlpga iret iretd iretq iretw jcxz jecxz jrcxz jmp jmpe lahf lar lds lea leave les lfence lfs lgdt lgs lidt lldt lmsw loadall loadall286 lodsb lodsd lodsq lodsw loop loope loopne loopnz loopz lsl lss ltr mfence monitor mov movd movq movsb movsd movsq movsw movsx movsxd movzx mul mwait neg nop not or out outsb outsd outsw packssdw packsswb packuswb paddb paddd paddsb paddsiw paddsw paddusb paddusw paddw pand pandn pause paveb pavgusb pcmpeqb pcmpeqd pcmpeqw pcmpgtb pcmpgtd pcmpgtw pdistib pf2id pfacc pfadd pfcmpeq pfcmpge pfcmpgt pfmax pfmin pfmul pfrcp pfrcpit1 pfrcpit2 pfrsqit1 pfrsqrt pfsub pfsubr pi2fd pmachriw pmaddwd pmagw pmulhriw pmulhrwa pmulhrwc pmulhw pmullw pmvgezb pmvlzb pmvnzb pmvzb pop popa popad popaw popf popfd popfq popfw por prefetch prefetchw pslld psllq psllw psrad psraw psrld psrlq psrlw psubb psubd psubsb psubsiw psubsw psubusb psubusw psubw punpckhbw punpckhdq punpckhwd punpcklbw punpckldq punpcklwd push pusha pushad pushaw pushf pushfd pushfq pushfw pxor rcl rcr rdshr rdmsr rdpmc rdtsc rdtscp ret retf retn rol ror rdm rsdc rsldt rsm rsts sahf sal salc sar sbb scasb scasd scasq scasw sfence sgdt shl shld shr shrd sidt sldt skinit smi smint smintold smsw stc std sti stosb stosd stosq stosw str sub svdc svldt svts swapgs syscall sysenter sysexit sysret test ud0 ud1 ud2b ud2 ud2a umov verr verw fwait wbinvd wrshr wrmsr xadd xbts xchg xlatb xlat xor cmove cmovz cmovne cmovnz cmova cmovnbe cmovae cmovnb cmovb cmovnae cmovbe cmovna cmovg cmovnle cmovge cmovnl cmovl cmovnge cmovle cmovng cmovc cmovnc cmovo cmovno cmovs cmovns cmovp cmovpe cmovnp cmovpo je jz jne jnz ja jnbe jae jnb jb jnae jbe jna jg jnle jge jnl jl jnge jle jng jc jnc jo jno js jns jpo jnp jpe jp sete setz setne setnz seta setnbe setae setnb setnc setb setnae setcset setbe setna setg setnle setge setnl setl setnge setle setng sets setns seto setno setpe setp setpo setnp addps addss andnps andps cmpeqps cmpeqss cmpleps cmpless cmpltps cmpltss cmpneqps cmpneqss cmpnleps cmpnless cmpnltps cmpnltss cmpordps cmpordss cmpunordps cmpunordss cmpps cmpss comiss cvtpi2ps cvtps2pi cvtsi2ss cvtss2si cvttps2pi cvttss2si divps divss ldmxcsr maxps maxss minps minss movaps movhps movlhps movlps movhlps movmskps movntps movss movups mulps mulss orps rcpps rcpss rsqrtps rsqrtss shufps sqrtps sqrtss stmxcsr subps subss ucomiss unpckhps unpcklps xorps fxrstor fxrstor64 fxsave fxsave64 xgetbv xsetbv xsave xsave64 xsaveopt xsaveopt64 xrstor xrstor64 prefetchnta prefetcht0 prefetcht1 prefetcht2 maskmovq movntq pavgb pavgw pextrw pinsrw pmaxsw pmaxub pminsw pminub pmovmskb pmulhuw psadbw pshufw pf2iw pfnacc pfpnacc pi2fw pswapd maskmovdqu clflush movntdq movnti movntpd movdqa movdqu movdq2q movq2dq paddq pmuludq pshufd pshufhw pshuflw pslldq psrldq psubq punpckhqdq punpcklqdq addpd addsd andnpd andpd cmpeqpd cmpeqsd cmplepd cmplesd cmpltpd cmpltsd cmpneqpd cmpneqsd cmpnlepd cmpnlesd cmpnltpd cmpnltsd cmpordpd cmpordsd cmpunordpd cmpunordsd cmppd comisd cvtdq2pd cvtdq2ps cvtpd2dq cvtpd2pi cvtpd2ps cvtpi2pd cvtps2dq cvtps2pd cvtsd2si cvtsd2ss cvtsi2sd cvtss2sd cvttpd2pi cvttpd2dq cvttps2dq cvttsd2si divpd divsd maxpd maxsd minpd minsd movapd movhpd movlpd movmskpd movupd mulpd mulsd orpd shufpd sqrtpd sqrtsd subpd subsd ucomisd unpckhpd unpcklpd xorpd addsubpd addsubps haddpd haddps hsubpd hsubps lddqu movddup movshdup movsldup clgi stgi vmcall vmclear vmfunc vmlaunch vmload vmmcall vmptrld vmptrst vmread vmresume vmrun vmsave vmwrite vmxoff vmxon invept invvpid pabsb pabsw pabsd palignr phaddw phaddd phaddsw phsubw phsubd phsubsw pmaddubsw pmulhrsw pshufb psignb psignw psignd extrq insertq movntsd movntss lzcnt blendpd blendps blendvpd blendvps dppd dpps extractps insertps movntdqa mpsadbw packusdw pblendvb pblendw pcmpeqq pextrb pextrd pextrq phminposuw pinsrb pinsrd pinsrq pmaxsb pmaxsd pmaxud pmaxuw pminsb pminsd pminud pminuw pmovsxbw pmovsxbd pmovsxbq pmovsxwd pmovsxwq pmovsxdq pmovzxbw pmovzxbd pmovzxbq pmovzxwd pmovzxwq pmovzxdq pmuldq pmulld ptest roundpd roundps roundsd roundss crc32 pcmpestri pcmpestrm pcmpistri pcmpistrm pcmpgtq popcnt getsec pfrcpv pfrsqrtv movbe aesenc aesenclast aesdec aesdeclast aesimc aeskeygenassist vaesenc vaesenclast vaesdec vaesdeclast vaesimc vaeskeygenassist vaddpd vaddps vaddsd vaddss vaddsubpd vaddsubps vandpd vandps vandnpd vandnps vblendpd vblendps vblendvpd vblendvps vbroadcastss vbroadcastsd vbroadcastf128 vcmpeq_ospd vcmpeqpd vcmplt_ospd vcmpltpd vcmple_ospd vcmplepd vcmpunord_qpd vcmpunordpd vcmpneq_uqpd vcmpneqpd vcmpnlt_uspd vcmpnltpd vcmpnle_uspd vcmpnlepd vcmpord_qpd vcmpordpd vcmpeq_uqpd vcmpnge_uspd vcmpngepd vcmpngt_uspd vcmpngtpd vcmpfalse_oqpd vcmpfalsepd vcmpneq_oqpd vcmpge_ospd vcmpgepd vcmpgt_ospd vcmpgtpd vcmptrue_uqpd vcmptruepd vcmplt_oqpd vcmple_oqpd vcmpunord_spd vcmpneq_uspd vcmpnlt_uqpd vcmpnle_uqpd vcmpord_spd vcmpeq_uspd vcmpnge_uqpd vcmpngt_uqpd vcmpfalse_ospd vcmpneq_ospd vcmpge_oqpd vcmpgt_oqpd vcmptrue_uspd vcmppd vcmpeq_osps vcmpeqps vcmplt_osps vcmpltps vcmple_osps vcmpleps vcmpunord_qps vcmpunordps vcmpneq_uqps vcmpneqps vcmpnlt_usps vcmpnltps vcmpnle_usps vcmpnleps vcmpord_qps vcmpordps vcmpeq_uqps vcmpnge_usps vcmpngeps vcmpngt_usps vcmpngtps vcmpfalse_oqps vcmpfalseps vcmpneq_oqps vcmpge_osps vcmpgeps vcmpgt_osps vcmpgtps vcmptrue_uqps vcmptrueps vcmplt_oqps vcmple_oqps vcmpunord_sps vcmpneq_usps vcmpnlt_uqps vcmpnle_uqps vcmpord_sps vcmpeq_usps vcmpnge_uqps vcmpngt_uqps vcmpfalse_osps vcmpneq_osps vcmpge_oqps vcmpgt_oqps vcmptrue_usps vcmpps vcmpeq_ossd vcmpeqsd vcmplt_ossd vcmpltsd vcmple_ossd vcmplesd vcmpunord_qsd vcmpunordsd vcmpneq_uqsd vcmpneqsd vcmpnlt_ussd vcmpnltsd vcmpnle_ussd vcmpnlesd vcmpord_qsd vcmpordsd vcmpeq_uqsd vcmpnge_ussd vcmpngesd vcmpngt_ussd vcmpngtsd vcmpfalse_oqsd vcmpfalsesd vcmpneq_oqsd vcmpge_ossd vcmpgesd vcmpgt_ossd vcmpgtsd vcmptrue_uqsd vcmptruesd vcmplt_oqsd vcmple_oqsd vcmpunord_ssd vcmpneq_ussd vcmpnlt_uqsd vcmpnle_uqsd vcmpord_ssd vcmpeq_ussd vcmpnge_uqsd vcmpngt_uqsd vcmpfalse_ossd vcmpneq_ossd vcmpge_oqsd vcmpgt_oqsd vcmptrue_ussd vcmpsd vcmpeq_osss vcmpeqss vcmplt_osss vcmpltss vcmple_osss vcmpless vcmpunord_qss vcmpunordss vcmpneq_uqss vcmpneqss vcmpnlt_usss vcmpnltss vcmpnle_usss vcmpnless vcmpord_qss vcmpordss vcmpeq_uqss vcmpnge_usss vcmpngess vcmpngt_usss vcmpngtss vcmpfalse_oqss vcmpfalsess vcmpneq_oqss vcmpge_osss vcmpgess vcmpgt_osss vcmpgtss vcmptrue_uqss vcmptruess vcmplt_oqss vcmple_oqss vcmpunord_sss vcmpneq_usss vcmpnlt_uqss vcmpnle_uqss vcmpord_sss vcmpeq_usss vcmpnge_uqss vcmpngt_uqss vcmpfalse_osss vcmpneq_osss vcmpge_oqss vcmpgt_oqss vcmptrue_usss vcmpss vcomisd vcomiss vcvtdq2pd vcvtdq2ps vcvtpd2dq vcvtpd2ps vcvtps2dq vcvtps2pd vcvtsd2si vcvtsd2ss vcvtsi2sd vcvtsi2ss vcvtss2sd vcvtss2si vcvttpd2dq vcvttps2dq vcvttsd2si vcvttss2si vdivpd vdivps vdivsd vdivss vdppd vdpps vextractf128 vextractps vhaddpd vhaddps vhsubpd vhsubps vinsertf128 vinsertps vlddqu vldqqu vldmxcsr vmaskmovdqu vmaskmovps vmaskmovpd vmaxpd vmaxps vmaxsd vmaxss vminpd vminps vminsd vminss vmovapd vmovaps vmovd vmovq vmovddup vmovdqa vmovqqa vmovdqu vmovqqu vmovhlps vmovhpd vmovhps vmovlhps vmovlpd vmovlps vmovmskpd vmovmskps vmovntdq vmovntqq vmovntdqa vmovntpd vmovntps vmovsd vmovshdup vmovsldup vmovss vmovupd vmovups vmpsadbw vmulpd vmulps vmulsd vmulss vorpd vorps vpabsb vpabsw vpabsd vpacksswb vpackssdw vpackuswb vpackusdw vpaddb vpaddw vpaddd vpaddq vpaddsb vpaddsw vpaddusb vpaddusw vpalignr vpand vpandn vpavgb vpavgw vpblendvb vpblendw vpcmpestri vpcmpestrm vpcmpistri vpcmpistrm vpcmpeqb vpcmpeqw vpcmpeqd vpcmpeqq vpcmpgtb vpcmpgtw vpcmpgtd vpcmpgtq vpermilpd vpermilps vperm2f128 vpextrb vpextrw vpextrd vpextrq vphaddw vphaddd vphaddsw vphminposuw vphsubw vphsubd vphsubsw vpinsrb vpinsrw vpinsrd vpinsrq vpmaddwd vpmaddubsw vpmaxsb vpmaxsw vpmaxsd vpmaxub vpmaxuw vpmaxud vpminsb vpminsw vpminsd vpminub vpminuw vpminud vpmovmskb vpmovsxbw vpmovsxbd vpmovsxbq vpmovsxwd vpmovsxwq vpmovsxdq vpmovzxbw vpmovzxbd vpmovzxbq vpmovzxwd vpmovzxwq vpmovzxdq vpmulhuw vpmulhrsw vpmulhw vpmullw vpmulld vpmuludq vpmuldq vpor vpsadbw vpshufb vpshufd vpshufhw vpshuflw vpsignb vpsignw vpsignd vpslldq vpsrldq vpsllw vpslld vpsllq vpsraw vpsrad vpsrlw vpsrld vpsrlq vptest vpsubb vpsubw vpsubd vpsubq vpsubsb vpsubsw vpsubusb vpsubusw vpunpckhbw vpunpckhwd vpunpckhdq vpunpckhqdq vpunpcklbw vpunpcklwd vpunpckldq vpunpcklqdq vpxor vrcpps vrcpss vrsqrtps vrsqrtss vroundpd vroundps vroundsd vroundss vshufpd vshufps vsqrtpd vsqrtps vsqrtsd vsqrtss vstmxcsr vsubpd vsubps vsubsd vsubss vtestps vtestpd vucomisd vucomiss vunpckhpd vunpckhps vunpcklpd vunpcklps vxorpd vxorps vzeroall vzeroupper pclmullqlqdq pclmulhqlqdq pclmullqhqdq pclmulhqhqdq pclmulqdq vpclmullqlqdq vpclmulhqlqdq vpclmullqhqdq vpclmulhqhqdq vpclmulqdq vfmadd132ps vfmadd132pd vfmadd312ps vfmadd312pd vfmadd213ps vfmadd213pd vfmadd123ps vfmadd123pd vfmadd231ps vfmadd231pd vfmadd321ps vfmadd321pd vfmaddsub132ps vfmaddsub132pd vfmaddsub312ps vfmaddsub312pd vfmaddsub213ps vfmaddsub213pd vfmaddsub123ps vfmaddsub123pd vfmaddsub231ps vfmaddsub231pd vfmaddsub321ps vfmaddsub321pd vfmsub132ps vfmsub132pd vfmsub312ps vfmsub312pd vfmsub213ps vfmsub213pd vfmsub123ps vfmsub123pd vfmsub231ps vfmsub231pd vfmsub321ps vfmsub321pd vfmsubadd132ps vfmsubadd132pd vfmsubadd312ps vfmsubadd312pd vfmsubadd213ps vfmsubadd213pd vfmsubadd123ps vfmsubadd123pd vfmsubadd231ps vfmsubadd231pd vfmsubadd321ps vfmsubadd321pd vfnmadd132ps vfnmadd132pd vfnmadd312ps vfnmadd312pd vfnmadd213ps vfnmadd213pd vfnmadd123ps vfnmadd123pd vfnmadd231ps vfnmadd231pd vfnmadd321ps vfnmadd321pd vfnmsub132ps vfnmsub132pd vfnmsub312ps vfnmsub312pd vfnmsub213ps vfnmsub213pd vfnmsub123ps vfnmsub123pd vfnmsub231ps vfnmsub231pd vfnmsub321ps vfnmsub321pd vfmadd132ss vfmadd132sd vfmadd312ss vfmadd312sd vfmadd213ss vfmadd213sd vfmadd123ss vfmadd123sd vfmadd231ss vfmadd231sd vfmadd321ss vfmadd321sd vfmsub132ss vfmsub132sd vfmsub312ss vfmsub312sd vfmsub213ss vfmsub213sd vfmsub123ss vfmsub123sd vfmsub231ss vfmsub231sd vfmsub321ss vfmsub321sd vfnmadd132ss vfnmadd132sd vfnmadd312ss vfnmadd312sd vfnmadd213ss vfnmadd213sd vfnmadd123ss vfnmadd123sd vfnmadd231ss vfnmadd231sd vfnmadd321ss vfnmadd321sd vfnmsub132ss vfnmsub132sd vfnmsub312ss vfnmsub312sd vfnmsub213ss vfnmsub213sd vfnmsub123ss vfnmsub123sd vfnmsub231ss vfnmsub231sd vfnmsub321ss vfnmsub321sd rdfsbase rdgsbase rdrand wrfsbase wrgsbase vcvtph2ps vcvtps2ph adcx adox rdseed clac stac xstore xcryptecb xcryptcbc xcryptctr xcryptcfb xcryptofb montmul xsha1 xsha256 llwpcb slwpcb lwpval lwpins vfmaddpd vfmaddps vfmaddsd vfmaddss vfmaddsubpd vfmaddsubps vfmsubaddpd vfmsubaddps vfmsubpd vfmsubps vfmsubsd vfmsubss vfnmaddpd vfnmaddps vfnmaddsd vfnmaddss vfnmsubpd vfnmsubps vfnmsubsd vfnmsubss vfrczpd vfrczps vfrczsd vfrczss vpcmov vpcomb vpcomd vpcomq vpcomub vpcomud vpcomuq vpcomuw vpcomw vphaddbd vphaddbq vphaddbw vphadddq vphaddubd vphaddubq vphaddubw vphaddudq vphadduwd vphadduwq vphaddwd vphaddwq vphsubbw vphsubdq vphsubwd vpmacsdd vpmacsdqh vpmacsdql vpmacssdd vpmacssdqh vpmacssdql vpmacsswd vpmacssww vpmacswd vpmacsww vpmadcsswd vpmadcswd vpperm vprotb vprotd vprotq vprotw vpshab vpshad vpshaq vpshaw vpshlb vpshld vpshlq vpshlw vbroadcasti128 vpblendd vpbroadcastb vpbroadcastw vpbroadcastd vpbroadcastq vpermd vpermpd vpermps vpermq vperm2i128 vextracti128 vinserti128 vpmaskmovd vpmaskmovq vpsllvd vpsllvq vpsravd vpsrlvd vpsrlvq vgatherdpd vgatherqpd vgatherdps vgatherqps vpgatherdd vpgatherqd vpgatherdq vpgatherqq xabort xbegin xend xtest andn bextr blci blcic blsi blsic blcfill blsfill blcmsk blsmsk blsr blcs bzhi mulx pdep pext rorx sarx shlx shrx tzcnt tzmsk t1mskc valignd valignq vblendmpd vblendmps vbroadcastf32x4 vbroadcastf64x4 vbroadcasti32x4 vbroadcasti64x4 vcompresspd vcompressps vcvtpd2udq vcvtps2udq vcvtsd2usi vcvtss2usi vcvttpd2udq vcvttps2udq vcvttsd2usi vcvttss2usi vcvtudq2pd vcvtudq2ps vcvtusi2sd vcvtusi2ss vexpandpd vexpandps vextractf32x4 vextractf64x4 vextracti32x4 vextracti64x4 vfixupimmpd vfixupimmps vfixupimmsd vfixupimmss vgetexppd vgetexpps vgetexpsd vgetexpss vgetmantpd vgetmantps vgetmantsd vgetmantss vinsertf32x4 vinsertf64x4 vinserti32x4 vinserti64x4 vmovdqa32 vmovdqa64 vmovdqu32 vmovdqu64 vpabsq vpandd vpandnd vpandnq vpandq vpblendmd vpblendmq vpcmpltd vpcmpled vpcmpneqd vpcmpnltd vpcmpnled vpcmpd vpcmpltq vpcmpleq vpcmpneqq vpcmpnltq vpcmpnleq vpcmpq vpcmpequd vpcmpltud vpcmpleud vpcmpnequd vpcmpnltud vpcmpnleud vpcmpud vpcmpequq vpcmpltuq vpcmpleuq vpcmpnequq vpcmpnltuq vpcmpnleuq vpcmpuq vpcompressd vpcompressq vpermi2d vpermi2pd vpermi2ps vpermi2q vpermt2d vpermt2pd vpermt2ps vpermt2q vpexpandd vpexpandq vpmaxsq vpmaxuq vpminsq vpminuq vpmovdb vpmovdw vpmovqb vpmovqd vpmovqw vpmovsdb vpmovsdw vpmovsqb vpmovsqd vpmovsqw vpmovusdb vpmovusdw vpmovusqb vpmovusqd vpmovusqw vpord vporq vprold vprolq vprolvd vprolvq vprord vprorq vprorvd vprorvq vpscatterdd vpscatterdq vpscatterqd vpscatterqq vpsraq vpsravq vpternlogd vpternlogq vptestmd vptestmq vptestnmd vptestnmq vpxord vpxorq vrcp14pd vrcp14ps vrcp14sd vrcp14ss vrndscalepd vrndscaleps vrndscalesd vrndscaless vrsqrt14pd vrsqrt14ps vrsqrt14sd vrsqrt14ss vscalefpd vscalefps vscalefsd vscalefss vscatterdpd vscatterdps vscatterqpd vscatterqps vshuff32x4 vshuff64x2 vshufi32x4 vshufi64x2 kandnw kandw kmovw knotw kortestw korw kshiftlw kshiftrw kunpckbw kxnorw kxorw vpbroadcastmb2q vpbroadcastmw2d vpconflictd vpconflictq vplzcntd vplzcntq vexp2pd vexp2ps vrcp28pd vrcp28ps vrcp28sd vrcp28ss vrsqrt28pd vrsqrt28ps vrsqrt28sd vrsqrt28ss vgatherpf0dpd vgatherpf0dps vgatherpf0qpd vgatherpf0qps vgatherpf1dpd vgatherpf1dps vgatherpf1qpd vgatherpf1qps vscatterpf0dpd vscatterpf0dps vscatterpf0qpd vscatterpf0qps vscatterpf1dpd vscatterpf1dps vscatterpf1qpd vscatterpf1qps prefetchwt1 bndmk bndcl bndcu bndcn bndmov bndldx bndstx sha1rnds4 sha1nexte sha1msg1 sha1msg2 sha256rnds2 sha256msg1 sha256msg2 hint_nop0 hint_nop1 hint_nop2 hint_nop3 hint_nop4 hint_nop5 hint_nop6 hint_nop7 hint_nop8 hint_nop9 hint_nop10 hint_nop11 hint_nop12 hint_nop13 hint_nop14 hint_nop15 hint_nop16 hint_nop17 hint_nop18 hint_nop19 hint_nop20 hint_nop21 hint_nop22 hint_nop23 hint_nop24 hint_nop25 hint_nop26 hint_nop27 hint_nop28 hint_nop29 hint_nop30 hint_nop31 hint_nop32 hint_nop33 hint_nop34 hint_nop35 hint_nop36 hint_nop37 hint_nop38 hint_nop39 hint_nop40 hint_nop41 hint_nop42 hint_nop43 hint_nop44 hint_nop45 hint_nop46 hint_nop47 hint_nop48 hint_nop49 hint_nop50 hint_nop51 hint_nop52 hint_nop53 hint_nop54 hint_nop55 hint_nop56 hint_nop57 hint_nop58 hint_nop59 hint_nop60 hint_nop61 hint_nop62 hint_nop63",
         built_in: "ip eip rip al ah bl bh cl ch dl dh sil dil bpl spl r8b r9b r10b r11b r12b r13b r14b r15b ax bx cx dx si di bp sp r8w r9w r10w r11w r12w r13w r14w r15w eax ebx ecx edx esi edi ebp esp eip r8d r9d r10d r11d r12d r13d r14d r15d rax rbx rcx rdx rsi rdi rbp rsp r8 r9 r10 r11 r12 r13 r14 r15 cs ds es fs gs ss st st0 st1 st2 st3 st4 st5 st6 st7 mm0 mm1 mm2 mm3 mm4 mm5 mm6 mm7 xmm0  xmm1  xmm2  xmm3  xmm4  xmm5  xmm6  xmm7  xmm8  xmm9 xmm10  xmm11 xmm12 xmm13 xmm14 xmm15 xmm16 xmm17 xmm18 xmm19 xmm20 xmm21 xmm22 xmm23 xmm24 xmm25 xmm26 xmm27 xmm28 xmm29 xmm30 xmm31 ymm0  ymm1  ymm2  ymm3  ymm4  ymm5  ymm6  ymm7  ymm8  ymm9 ymm10  ymm11 ymm12 ymm13 ymm14 ymm15 ymm16 ymm17 ymm18 ymm19 ymm20 ymm21 ymm22 ymm23 ymm24 ymm25 ymm26 ymm27 ymm28 ymm29 ymm30 ymm31 zmm0  zmm1  zmm2  zmm3  zmm4  zmm5  zmm6  zmm7  zmm8  zmm9 zmm10  zmm11 zmm12 zmm13 zmm14 zmm15 zmm16 zmm17 zmm18 zmm19 zmm20 zmm21 zmm22 zmm23 zmm24 zmm25 zmm26 zmm27 zmm28 zmm29 zmm30 zmm31 k0 k1 k2 k3 k4 k5 k6 k7 bnd0 bnd1 bnd2 bnd3 cr0 cr1 cr2 cr3 cr4 cr8 dr0 dr1 dr2 dr3 dr8 tr3 tr4 tr5 tr6 tr7 r0 r1 r2 r3 r4 r5 r6 r7 r0b r1b r2b r3b r4b r5b r6b r7b r0w r1w r2w r3w r4w r5w r6w r7w r0d r1d r2d r3d r4d r5d r6d r7d r0h r1h r2h r3h r0l r1l r2l r3l r4l r5l r6l r7l r8l r9l r10l r11l r12l r13l r14l r15l db dw dd dq dt ddq do dy dz resb resw resd resq rest resdq reso resy resz incbin equ times byte word dword qword nosplit rel abs seg wrt strict near far a32 ptr",
         meta: "%define %xdefine %+ %undef %defstr %deftok %assign %strcat %strlen %substr %rotate %elif %else %endif %if %ifmacro %ifctx %ifidn %ifidni %ifid %ifnum %ifstr %iftoken %ifempty %ifenv %error %warning %fatal %rep %endrep %include %push %pop %repl %pathsearch %depend %use %arg %stacksize %local %line %comment %endcomment .nolist __FILE__ __LINE__ __SECT__  __BITS__ __OUTPUT_FORMAT__ __DATE__ __TIME__ __DATE_NUM__ __TIME_NUM__ __UTC_DATE__ __UTC_TIME__ __UTC_DATE_NUM__ __UTC_TIME_NUM__  __PASS__ struc endstruc istruc at iend align alignb sectalign daz nodaz up down zero default option assume public bits use16 use32 use64 default section segment absolute extern global common cpu float __utf16__ __utf16le__ __utf16be__ __utf32__ __utf32le__ __utf32be__ __float8__ __float16__ __float32__ __float64__ __float80m__ __float80e__ __float128l__ __float128h__ __Infinity__ __QNaN__ __SNaN__ Inf NaN QNaN SNaN float8 float16 float32 float64 float80m float80e float128l float128h __FLOAT_DAZ__ __FLOAT_ROUND__ __FLOAT__"
       },
       contains: [
-        hljs2.COMMENT(";", "$", {
+        hljs.COMMENT(";", "$", {
           relevance: 0
         }),
         {
@@ -32140,7 +36273,7 @@ var require_x86asm = __commonJS((exports2, module2) => {
             }
           ]
         },
-        hljs2.QUOTE_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
         {
           className: "string",
           variants: [
@@ -32189,7 +36322,7 @@ var require_x86asm = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/xl.js
 var require_xl = __commonJS((exports2, module2) => {
-  function xl(hljs2) {
+  function xl(hljs) {
     const BUILTIN_MODULES = "ObjectLoader Animate MovieCredits Slides Filters Shading Materials LensFlare Mapping VLCAudioVideo StereoDecoder PointCloud NetworkAccess RemoteControl RegExp ChromaKey Snowfall NodeJS Speech Charts";
     const XL_KEYWORDS = {
       $pattern: /[a-zA-Z][a-zA-Z0-9_?]*/,
@@ -32230,7 +36363,7 @@ var require_xl = __commonJS((exports2, module2) => {
       returnBegin: true,
       end: /->/,
       contains: [
-        hljs2.inherit(hljs2.TITLE_MODE, {
+        hljs.inherit(hljs.TITLE_MODE, {
           starts: {
             endsWithParent: true,
             keywords: XL_KEYWORDS
@@ -32243,15 +36376,15 @@ var require_xl = __commonJS((exports2, module2) => {
       aliases: ["tao"],
       keywords: XL_KEYWORDS,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.C_BLOCK_COMMENT_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
         DOUBLE_QUOTE_TEXT,
         SINGLE_QUOTE_TEXT,
         LONG_TEXT,
         FUNCTION_DEFINITION,
         IMPORT,
         BASED_NUMBER,
-        hljs2.NUMBER_MODE
+        hljs.NUMBER_MODE
       ]
     };
   }
@@ -32414,24 +36547,24 @@ var require_xquery = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/languages/zephir.js
 var require_zephir = __commonJS((exports2, module2) => {
-  function zephir(hljs2) {
+  function zephir(hljs) {
     const STRING = {
       className: "string",
-      contains: [hljs2.BACKSLASH_ESCAPE],
+      contains: [hljs.BACKSLASH_ESCAPE],
       variants: [
-        hljs2.inherit(hljs2.APOS_STRING_MODE, {
+        hljs.inherit(hljs.APOS_STRING_MODE, {
           illegal: null
         }),
-        hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
+        hljs.inherit(hljs.QUOTE_STRING_MODE, {
           illegal: null
         })
       ]
     };
-    const TITLE_MODE = hljs2.UNDERSCORE_TITLE_MODE;
+    const TITLE_MODE = hljs.UNDERSCORE_TITLE_MODE;
     const NUMBER = {
       variants: [
-        hljs2.BINARY_NUMBER_MODE,
-        hljs2.C_NUMBER_MODE
+        hljs.BINARY_NUMBER_MODE,
+        hljs.C_NUMBER_MODE
       ]
     };
     const KEYWORDS = "namespace class interface use extends function return abstract final public protected private static deprecated throw try catch Exception echo empty isset instanceof unset let var new const self require if else elseif switch case default do while loop for continue break likely unlikely __LINE__ __FILE__ __DIR__ __FUNCTION__ __CLASS__ __TRAIT__ __METHOD__ __NAMESPACE__ array boolean float double integer object resource string char long unsigned bool int uint ulong uchar true false null undefined";
@@ -32440,8 +36573,8 @@ var require_zephir = __commonJS((exports2, module2) => {
       aliases: ["zep"],
       keywords: KEYWORDS,
       contains: [
-        hljs2.C_LINE_COMMENT_MODE,
-        hljs2.COMMENT(/\/\*/, /\*\//, {
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.COMMENT(/\/\*/, /\*\//, {
           contains: [
             {
               className: "doctag",
@@ -32453,7 +36586,7 @@ var require_zephir = __commonJS((exports2, module2) => {
           className: "string",
           begin: /<<<['"]?\w+['"]?$/,
           end: /^\w+;/,
-          contains: [hljs2.BACKSLASH_ESCAPE]
+          contains: [hljs.BACKSLASH_ESCAPE]
         },
         {
           begin: /(::|->)+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/
@@ -32473,7 +36606,7 @@ var require_zephir = __commonJS((exports2, module2) => {
               keywords: KEYWORDS,
               contains: [
                 "self",
-                hljs2.C_BLOCK_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
                 STRING,
                 NUMBER
               ]
@@ -32517,3434 +36650,199 @@ var require_zephir = __commonJS((exports2, module2) => {
 
 // ../../../node_modules/highlight.js/lib/index.js
 var require_lib = __commonJS((exports2, module2) => {
-  var hljs2 = require_core();
-  hljs2.registerLanguage("1c", require_c());
-  hljs2.registerLanguage("abnf", require_abnf());
-  hljs2.registerLanguage("accesslog", require_accesslog());
-  hljs2.registerLanguage("actionscript", require_actionscript());
-  hljs2.registerLanguage("ada", require_ada());
-  hljs2.registerLanguage("angelscript", require_angelscript());
-  hljs2.registerLanguage("apache", require_apache());
-  hljs2.registerLanguage("applescript", require_applescript());
-  hljs2.registerLanguage("arcade", require_arcade());
-  hljs2.registerLanguage("arduino", require_arduino());
-  hljs2.registerLanguage("armasm", require_armasm());
-  hljs2.registerLanguage("xml", require_xml());
-  hljs2.registerLanguage("asciidoc", require_asciidoc());
-  hljs2.registerLanguage("aspectj", require_aspectj());
-  hljs2.registerLanguage("autohotkey", require_autohotkey());
-  hljs2.registerLanguage("autoit", require_autoit());
-  hljs2.registerLanguage("avrasm", require_avrasm());
-  hljs2.registerLanguage("awk", require_awk());
-  hljs2.registerLanguage("axapta", require_axapta());
-  hljs2.registerLanguage("bash", require_bash());
-  hljs2.registerLanguage("basic", require_basic());
-  hljs2.registerLanguage("bnf", require_bnf());
-  hljs2.registerLanguage("brainfuck", require_brainfuck());
-  hljs2.registerLanguage("c-like", require_c_like());
-  hljs2.registerLanguage("c", require_c2());
-  hljs2.registerLanguage("cal", require_cal());
-  hljs2.registerLanguage("capnproto", require_capnproto());
-  hljs2.registerLanguage("ceylon", require_ceylon());
-  hljs2.registerLanguage("clean", require_clean());
-  hljs2.registerLanguage("clojure", require_clojure());
-  hljs2.registerLanguage("clojure-repl", require_clojure_repl());
-  hljs2.registerLanguage("cmake", require_cmake());
-  hljs2.registerLanguage("coffeescript", require_coffeescript());
-  hljs2.registerLanguage("coq", require_coq());
-  hljs2.registerLanguage("cos", require_cos());
-  hljs2.registerLanguage("cpp", require_cpp());
-  hljs2.registerLanguage("crmsh", require_crmsh());
-  hljs2.registerLanguage("crystal", require_crystal());
-  hljs2.registerLanguage("csharp", require_csharp());
-  hljs2.registerLanguage("csp", require_csp());
-  hljs2.registerLanguage("css", require_css());
-  hljs2.registerLanguage("d", require_d());
-  hljs2.registerLanguage("markdown", require_markdown());
-  hljs2.registerLanguage("dart", require_dart());
-  hljs2.registerLanguage("delphi", require_delphi());
-  hljs2.registerLanguage("diff", require_diff());
-  hljs2.registerLanguage("django", require_django());
-  hljs2.registerLanguage("dns", require_dns());
-  hljs2.registerLanguage("dockerfile", require_dockerfile());
-  hljs2.registerLanguage("dos", require_dos());
-  hljs2.registerLanguage("dsconfig", require_dsconfig());
-  hljs2.registerLanguage("dts", require_dts());
-  hljs2.registerLanguage("dust", require_dust());
-  hljs2.registerLanguage("ebnf", require_ebnf());
-  hljs2.registerLanguage("elixir", require_elixir());
-  hljs2.registerLanguage("elm", require_elm());
-  hljs2.registerLanguage("ruby", require_ruby());
-  hljs2.registerLanguage("erb", require_erb());
-  hljs2.registerLanguage("erlang-repl", require_erlang_repl());
-  hljs2.registerLanguage("erlang", require_erlang());
-  hljs2.registerLanguage("excel", require_excel());
-  hljs2.registerLanguage("fix", require_fix());
-  hljs2.registerLanguage("flix", require_flix());
-  hljs2.registerLanguage("fortran", require_fortran());
-  hljs2.registerLanguage("fsharp", require_fsharp());
-  hljs2.registerLanguage("gams", require_gams());
-  hljs2.registerLanguage("gauss", require_gauss());
-  hljs2.registerLanguage("gcode", require_gcode());
-  hljs2.registerLanguage("gherkin", require_gherkin());
-  hljs2.registerLanguage("glsl", require_glsl());
-  hljs2.registerLanguage("gml", require_gml());
-  hljs2.registerLanguage("go", require_go());
-  hljs2.registerLanguage("golo", require_golo());
-  hljs2.registerLanguage("gradle", require_gradle());
-  hljs2.registerLanguage("groovy", require_groovy());
-  hljs2.registerLanguage("haml", require_haml());
-  hljs2.registerLanguage("handlebars", require_handlebars());
-  hljs2.registerLanguage("haskell", require_haskell());
-  hljs2.registerLanguage("haxe", require_haxe());
-  hljs2.registerLanguage("hsp", require_hsp());
-  hljs2.registerLanguage("htmlbars", require_htmlbars());
-  hljs2.registerLanguage("http", require_http());
-  hljs2.registerLanguage("hy", require_hy());
-  hljs2.registerLanguage("inform7", require_inform7());
-  hljs2.registerLanguage("ini", require_ini());
-  hljs2.registerLanguage("irpf90", require_irpf90());
-  hljs2.registerLanguage("isbl", require_isbl());
-  hljs2.registerLanguage("java", require_java());
-  hljs2.registerLanguage("javascript", require_javascript());
-  hljs2.registerLanguage("jboss-cli", require_jboss_cli());
-  hljs2.registerLanguage("json", require_json());
-  hljs2.registerLanguage("julia", require_julia());
-  hljs2.registerLanguage("julia-repl", require_julia_repl());
-  hljs2.registerLanguage("kotlin", require_kotlin());
-  hljs2.registerLanguage("lasso", require_lasso());
-  hljs2.registerLanguage("latex", require_latex());
-  hljs2.registerLanguage("ldif", require_ldif());
-  hljs2.registerLanguage("leaf", require_leaf());
-  hljs2.registerLanguage("less", require_less());
-  hljs2.registerLanguage("lisp", require_lisp());
-  hljs2.registerLanguage("livecodeserver", require_livecodeserver());
-  hljs2.registerLanguage("livescript", require_livescript());
-  hljs2.registerLanguage("llvm", require_llvm());
-  hljs2.registerLanguage("lsl", require_lsl());
-  hljs2.registerLanguage("lua", require_lua());
-  hljs2.registerLanguage("makefile", require_makefile());
-  hljs2.registerLanguage("mathematica", require_mathematica());
-  hljs2.registerLanguage("matlab", require_matlab());
-  hljs2.registerLanguage("maxima", require_maxima());
-  hljs2.registerLanguage("mel", require_mel());
-  hljs2.registerLanguage("mercury", require_mercury());
-  hljs2.registerLanguage("mipsasm", require_mipsasm());
-  hljs2.registerLanguage("mizar", require_mizar());
-  hljs2.registerLanguage("perl", require_perl());
-  hljs2.registerLanguage("mojolicious", require_mojolicious());
-  hljs2.registerLanguage("monkey", require_monkey());
-  hljs2.registerLanguage("moonscript", require_moonscript());
-  hljs2.registerLanguage("n1ql", require_n1ql());
-  hljs2.registerLanguage("nginx", require_nginx());
-  hljs2.registerLanguage("nim", require_nim());
-  hljs2.registerLanguage("nix", require_nix());
-  hljs2.registerLanguage("node-repl", require_node_repl());
-  hljs2.registerLanguage("nsis", require_nsis());
-  hljs2.registerLanguage("objectivec", require_objectivec());
-  hljs2.registerLanguage("ocaml", require_ocaml());
-  hljs2.registerLanguage("openscad", require_openscad());
-  hljs2.registerLanguage("oxygene", require_oxygene());
-  hljs2.registerLanguage("parser3", require_parser3());
-  hljs2.registerLanguage("pf", require_pf());
-  hljs2.registerLanguage("pgsql", require_pgsql());
-  hljs2.registerLanguage("php", require_php());
-  hljs2.registerLanguage("php-template", require_php_template());
-  hljs2.registerLanguage("plaintext", require_plaintext());
-  hljs2.registerLanguage("pony", require_pony());
-  hljs2.registerLanguage("powershell", require_powershell());
-  hljs2.registerLanguage("processing", require_processing());
-  hljs2.registerLanguage("profile", require_profile());
-  hljs2.registerLanguage("prolog", require_prolog());
-  hljs2.registerLanguage("properties", require_properties());
-  hljs2.registerLanguage("protobuf", require_protobuf());
-  hljs2.registerLanguage("puppet", require_puppet());
-  hljs2.registerLanguage("purebasic", require_purebasic());
-  hljs2.registerLanguage("python", require_python());
-  hljs2.registerLanguage("python-repl", require_python_repl());
-  hljs2.registerLanguage("q", require_q());
-  hljs2.registerLanguage("qml", require_qml());
-  hljs2.registerLanguage("r", require_r());
-  hljs2.registerLanguage("reasonml", require_reasonml());
-  hljs2.registerLanguage("rib", require_rib());
-  hljs2.registerLanguage("roboconf", require_roboconf());
-  hljs2.registerLanguage("routeros", require_routeros());
-  hljs2.registerLanguage("rsl", require_rsl());
-  hljs2.registerLanguage("ruleslanguage", require_ruleslanguage());
-  hljs2.registerLanguage("rust", require_rust());
-  hljs2.registerLanguage("sas", require_sas());
-  hljs2.registerLanguage("scala", require_scala());
-  hljs2.registerLanguage("scheme", require_scheme());
-  hljs2.registerLanguage("scilab", require_scilab());
-  hljs2.registerLanguage("scss", require_scss());
-  hljs2.registerLanguage("shell", require_shell());
-  hljs2.registerLanguage("smali", require_smali());
-  hljs2.registerLanguage("smalltalk", require_smalltalk());
-  hljs2.registerLanguage("sml", require_sml());
-  hljs2.registerLanguage("sqf", require_sqf());
-  hljs2.registerLanguage("sql_more", require_sql_more());
-  hljs2.registerLanguage("sql", require_sql());
-  hljs2.registerLanguage("stan", require_stan());
-  hljs2.registerLanguage("stata", require_stata());
-  hljs2.registerLanguage("step21", require_step21());
-  hljs2.registerLanguage("stylus", require_stylus());
-  hljs2.registerLanguage("subunit", require_subunit());
-  hljs2.registerLanguage("swift", require_swift());
-  hljs2.registerLanguage("taggerscript", require_taggerscript());
-  hljs2.registerLanguage("yaml", require_yaml());
-  hljs2.registerLanguage("tap", require_tap());
-  hljs2.registerLanguage("tcl", require_tcl());
-  hljs2.registerLanguage("thrift", require_thrift());
-  hljs2.registerLanguage("tp", require_tp());
-  hljs2.registerLanguage("twig", require_twig());
-  hljs2.registerLanguage("typescript", require_typescript());
-  hljs2.registerLanguage("vala", require_vala());
-  hljs2.registerLanguage("vbnet", require_vbnet());
-  hljs2.registerLanguage("vbscript", require_vbscript());
-  hljs2.registerLanguage("vbscript-html", require_vbscript_html());
-  hljs2.registerLanguage("verilog", require_verilog());
-  hljs2.registerLanguage("vhdl", require_vhdl());
-  hljs2.registerLanguage("vim", require_vim());
-  hljs2.registerLanguage("x86asm", require_x86asm());
-  hljs2.registerLanguage("xl", require_xl());
-  hljs2.registerLanguage("xquery", require_xquery());
-  hljs2.registerLanguage("zephir", require_zephir());
-  module2.exports = hljs2;
-});
-
-// ../../../node_modules/is-class/is-class.js
-var require_is_class = __commonJS((exports2, module2) => {
-  (function(root) {
-    const toString = Function.prototype.toString;
-    function fnBody(fn6) {
-      return toString.call(fn6).replace(/^[^{]*{\s*/, "").replace(/\s*}[^}]*$/, "");
-    }
-    function isClass(fn6) {
-      if (typeof fn6 !== "function") {
-        return false;
-      }
-      if (/^class[\s{]/.test(toString.call(fn6))) {
-        return true;
-      }
-      const body = fnBody(fn6);
-      return /classCallCheck\(/.test(body) || /TypeError\("Cannot call a class as a function"\)/.test(body);
-    }
-    if (typeof exports2 !== "undefined") {
-      if (typeof module2 !== "undefined" && module2.exports) {
-        exports2 = module2.exports = isClass;
-      }
-      exports2.isClass = isClass;
-    } else if (typeof define === "function" && define.amd) {
-      define([], function() {
-        return isClass;
-      });
-    } else {
-      root.isClass = isClass;
-    }
-  })(exports2);
-});
-
-// ../../../node_modules/lodash.clone/index.js
-var require_lodash = __commonJS((exports2, module2) => {
-  var LARGE_ARRAY_SIZE = 200;
-  var HASH_UNDEFINED = "__lodash_hash_undefined__";
-  var MAX_SAFE_INTEGER = 9007199254740991;
-  var argsTag = "[object Arguments]";
-  var arrayTag = "[object Array]";
-  var boolTag = "[object Boolean]";
-  var dateTag = "[object Date]";
-  var errorTag = "[object Error]";
-  var funcTag = "[object Function]";
-  var genTag = "[object GeneratorFunction]";
-  var mapTag = "[object Map]";
-  var numberTag = "[object Number]";
-  var objectTag = "[object Object]";
-  var promiseTag = "[object Promise]";
-  var regexpTag = "[object RegExp]";
-  var setTag = "[object Set]";
-  var stringTag = "[object String]";
-  var symbolTag = "[object Symbol]";
-  var weakMapTag = "[object WeakMap]";
-  var arrayBufferTag = "[object ArrayBuffer]";
-  var dataViewTag = "[object DataView]";
-  var float32Tag = "[object Float32Array]";
-  var float64Tag = "[object Float64Array]";
-  var int8Tag = "[object Int8Array]";
-  var int16Tag = "[object Int16Array]";
-  var int32Tag = "[object Int32Array]";
-  var uint8Tag = "[object Uint8Array]";
-  var uint8ClampedTag = "[object Uint8ClampedArray]";
-  var uint16Tag = "[object Uint16Array]";
-  var uint32Tag = "[object Uint32Array]";
-  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-  var reFlags = /\w*$/;
-  var reIsHostCtor = /^\[object .+?Constructor\]$/;
-  var reIsUint = /^(?:0|[1-9]\d*)$/;
-  var cloneableTags = {};
-  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-  var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-  var root = freeGlobal || freeSelf || Function("return this")();
-  var freeExports = typeof exports2 == "object" && exports2 && !exports2.nodeType && exports2;
-  var freeModule = freeExports && typeof module2 == "object" && module2 && !module2.nodeType && module2;
-  var moduleExports = freeModule && freeModule.exports === freeExports;
-  function addMapEntry(map, pair) {
-    map.set(pair[0], pair[1]);
-    return map;
-  }
-  function addSetEntry(set, value) {
-    set.add(value);
-    return set;
-  }
-  function arrayEach(array, iteratee) {
-    var index = -1, length = array ? array.length : 0;
-    while (++index < length) {
-      if (iteratee(array[index], index, array) === false) {
-        break;
-      }
-    }
-    return array;
-  }
-  function arrayPush(array, values) {
-    var index = -1, length = values.length, offset = array.length;
-    while (++index < length) {
-      array[offset + index] = values[index];
-    }
-    return array;
-  }
-  function arrayReduce(array, iteratee, accumulator, initAccum) {
-    var index = -1, length = array ? array.length : 0;
-    if (initAccum && length) {
-      accumulator = array[++index];
-    }
-    while (++index < length) {
-      accumulator = iteratee(accumulator, array[index], index, array);
-    }
-    return accumulator;
-  }
-  function baseTimes(n, iteratee) {
-    var index = -1, result = Array(n);
-    while (++index < n) {
-      result[index] = iteratee(index);
-    }
-    return result;
-  }
-  function getValue(object, key) {
-    return object == null ? void 0 : object[key];
-  }
-  function isHostObject(value) {
-    var result = false;
-    if (value != null && typeof value.toString != "function") {
-      try {
-        result = !!(value + "");
-      } catch (e) {
-      }
-    }
-    return result;
-  }
-  function mapToArray(map) {
-    var index = -1, result = Array(map.size);
-    map.forEach(function(value, key) {
-      result[++index] = [key, value];
-    });
-    return result;
-  }
-  function overArg(func, transform) {
-    return function(arg) {
-      return func(transform(arg));
-    };
-  }
-  function setToArray(set) {
-    var index = -1, result = Array(set.size);
-    set.forEach(function(value) {
-      result[++index] = value;
-    });
-    return result;
-  }
-  var arrayProto = Array.prototype;
-  var funcProto = Function.prototype;
-  var objectProto = Object.prototype;
-  var coreJsData = root["__core-js_shared__"];
-  var maskSrcKey = function() {
-    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
-    return uid ? "Symbol(src)_1." + uid : "";
-  }();
-  var funcToString = funcProto.toString;
-  var hasOwnProperty = objectProto.hasOwnProperty;
-  var objectToString = objectProto.toString;
-  var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-  var Buffer2 = moduleExports ? root.Buffer : void 0;
-  var Symbol2 = root.Symbol;
-  var Uint8Array2 = root.Uint8Array;
-  var getPrototype = overArg(Object.getPrototypeOf, Object);
-  var objectCreate = Object.create;
-  var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-  var splice = arrayProto.splice;
-  var nativeGetSymbols = Object.getOwnPropertySymbols;
-  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
-  var nativeKeys = overArg(Object.keys, Object);
-  var DataView = getNative(root, "DataView");
-  var Map2 = getNative(root, "Map");
-  var Promise2 = getNative(root, "Promise");
-  var Set2 = getNative(root, "Set");
-  var WeakMap2 = getNative(root, "WeakMap");
-  var nativeCreate = getNative(Object, "create");
-  var dataViewCtorString = toSource(DataView);
-  var mapCtorString = toSource(Map2);
-  var promiseCtorString = toSource(Promise2);
-  var setCtorString = toSource(Set2);
-  var weakMapCtorString = toSource(WeakMap2);
-  var symbolProto = Symbol2 ? Symbol2.prototype : void 0;
-  var symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
-  function Hash(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function hashClear() {
-    this.__data__ = nativeCreate ? nativeCreate(null) : {};
-  }
-  function hashDelete(key) {
-    return this.has(key) && delete this.__data__[key];
-  }
-  function hashGet(key) {
-    var data = this.__data__;
-    if (nativeCreate) {
-      var result = data[key];
-      return result === HASH_UNDEFINED ? void 0 : result;
-    }
-    return hasOwnProperty.call(data, key) ? data[key] : void 0;
-  }
-  function hashHas(key) {
-    var data = this.__data__;
-    return nativeCreate ? data[key] !== void 0 : hasOwnProperty.call(data, key);
-  }
-  function hashSet(key, value) {
-    var data = this.__data__;
-    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
-    return this;
-  }
-  Hash.prototype.clear = hashClear;
-  Hash.prototype["delete"] = hashDelete;
-  Hash.prototype.get = hashGet;
-  Hash.prototype.has = hashHas;
-  Hash.prototype.set = hashSet;
-  function ListCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function listCacheClear() {
-    this.__data__ = [];
-  }
-  function listCacheDelete(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      return false;
-    }
-    var lastIndex = data.length - 1;
-    if (index == lastIndex) {
-      data.pop();
-    } else {
-      splice.call(data, index, 1);
-    }
-    return true;
-  }
-  function listCacheGet(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    return index < 0 ? void 0 : data[index][1];
-  }
-  function listCacheHas(key) {
-    return assocIndexOf(this.__data__, key) > -1;
-  }
-  function listCacheSet(key, value) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      data.push([key, value]);
-    } else {
-      data[index][1] = value;
-    }
-    return this;
-  }
-  ListCache.prototype.clear = listCacheClear;
-  ListCache.prototype["delete"] = listCacheDelete;
-  ListCache.prototype.get = listCacheGet;
-  ListCache.prototype.has = listCacheHas;
-  ListCache.prototype.set = listCacheSet;
-  function MapCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function mapCacheClear() {
-    this.__data__ = {
-      hash: new Hash(),
-      map: new (Map2 || ListCache)(),
-      string: new Hash()
-    };
-  }
-  function mapCacheDelete(key) {
-    return getMapData(this, key)["delete"](key);
-  }
-  function mapCacheGet(key) {
-    return getMapData(this, key).get(key);
-  }
-  function mapCacheHas(key) {
-    return getMapData(this, key).has(key);
-  }
-  function mapCacheSet(key, value) {
-    getMapData(this, key).set(key, value);
-    return this;
-  }
-  MapCache.prototype.clear = mapCacheClear;
-  MapCache.prototype["delete"] = mapCacheDelete;
-  MapCache.prototype.get = mapCacheGet;
-  MapCache.prototype.has = mapCacheHas;
-  MapCache.prototype.set = mapCacheSet;
-  function Stack(entries) {
-    this.__data__ = new ListCache(entries);
-  }
-  function stackClear() {
-    this.__data__ = new ListCache();
-  }
-  function stackDelete(key) {
-    return this.__data__["delete"](key);
-  }
-  function stackGet(key) {
-    return this.__data__.get(key);
-  }
-  function stackHas(key) {
-    return this.__data__.has(key);
-  }
-  function stackSet(key, value) {
-    var cache = this.__data__;
-    if (cache instanceof ListCache) {
-      var pairs = cache.__data__;
-      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
-        pairs.push([key, value]);
-        return this;
-      }
-      cache = this.__data__ = new MapCache(pairs);
-    }
-    cache.set(key, value);
-    return this;
-  }
-  Stack.prototype.clear = stackClear;
-  Stack.prototype["delete"] = stackDelete;
-  Stack.prototype.get = stackGet;
-  Stack.prototype.has = stackHas;
-  Stack.prototype.set = stackSet;
-  function arrayLikeKeys(value, inherited) {
-    var result = isArray3(value) || isArguments(value) ? baseTimes(value.length, String) : [];
-    var length = result.length, skipIndexes = !!length;
-    for (var key in value) {
-      if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
-        result.push(key);
-      }
-    }
-    return result;
-  }
-  function assignValue(object, key, value) {
-    var objValue = object[key];
-    if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
-      object[key] = value;
-    }
-  }
-  function assocIndexOf(array, key) {
-    var length = array.length;
-    while (length--) {
-      if (eq(array[length][0], key)) {
-        return length;
-      }
-    }
-    return -1;
-  }
-  function baseAssign(object, source) {
-    return object && copyObject(source, keys(source), object);
-  }
-  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
-    var result;
-    if (customizer) {
-      result = object ? customizer(value, key, object, stack) : customizer(value);
-    }
-    if (result !== void 0) {
-      return result;
-    }
-    if (!isObject4(value)) {
-      return value;
-    }
-    var isArr = isArray3(value);
-    if (isArr) {
-      result = initCloneArray(value);
-      if (!isDeep) {
-        return copyArray(value, result);
-      }
-    } else {
-      var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
-      if (isBuffer(value)) {
-        return cloneBuffer(value, isDeep);
-      }
-      if (tag == objectTag || tag == argsTag || isFunc && !object) {
-        if (isHostObject(value)) {
-          return object ? value : {};
-        }
-        result = initCloneObject(isFunc ? {} : value);
-        if (!isDeep) {
-          return copySymbols(value, baseAssign(result, value));
-        }
-      } else {
-        if (!cloneableTags[tag]) {
-          return object ? value : {};
-        }
-        result = initCloneByTag(value, tag, baseClone, isDeep);
-      }
-    }
-    stack || (stack = new Stack());
-    var stacked = stack.get(value);
-    if (stacked) {
-      return stacked;
-    }
-    stack.set(value, result);
-    if (!isArr) {
-      var props = isFull ? getAllKeys(value) : keys(value);
-    }
-    arrayEach(props || value, function(subValue, key2) {
-      if (props) {
-        key2 = subValue;
-        subValue = value[key2];
-      }
-      assignValue(result, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
-    });
-    return result;
-  }
-  function baseCreate(proto) {
-    return isObject4(proto) ? objectCreate(proto) : {};
-  }
-  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-    var result = keysFunc(object);
-    return isArray3(object) ? result : arrayPush(result, symbolsFunc(object));
-  }
-  function baseGetTag(value) {
-    return objectToString.call(value);
-  }
-  function baseIsNative(value) {
-    if (!isObject4(value) || isMasked(value)) {
-      return false;
-    }
-    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
-    return pattern.test(toSource(value));
-  }
-  function baseKeys(object) {
-    if (!isPrototype(object)) {
-      return nativeKeys(object);
-    }
-    var result = [];
-    for (var key in Object(object)) {
-      if (hasOwnProperty.call(object, key) && key != "constructor") {
-        result.push(key);
-      }
-    }
-    return result;
-  }
-  function cloneBuffer(buffer, isDeep) {
-    if (isDeep) {
-      return buffer.slice();
-    }
-    var result = new buffer.constructor(buffer.length);
-    buffer.copy(result);
-    return result;
-  }
-  function cloneArrayBuffer(arrayBuffer) {
-    var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-    new Uint8Array2(result).set(new Uint8Array2(arrayBuffer));
-    return result;
-  }
-  function cloneDataView(dataView, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-  }
-  function cloneMap(map, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(mapToArray(map), true) : mapToArray(map);
-    return arrayReduce(array, addMapEntry, new map.constructor());
-  }
-  function cloneRegExp(regexp) {
-    var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-    result.lastIndex = regexp.lastIndex;
-    return result;
-  }
-  function cloneSet(set, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
-    return arrayReduce(array, addSetEntry, new set.constructor());
-  }
-  function cloneSymbol(symbol) {
-    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-  }
-  function cloneTypedArray(typedArray, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-  }
-  function copyArray(source, array) {
-    var index = -1, length = source.length;
-    array || (array = Array(length));
-    while (++index < length) {
-      array[index] = source[index];
-    }
-    return array;
-  }
-  function copyObject(source, props, object, customizer) {
-    object || (object = {});
-    var index = -1, length = props.length;
-    while (++index < length) {
-      var key = props[index];
-      var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
-      assignValue(object, key, newValue === void 0 ? source[key] : newValue);
-    }
-    return object;
-  }
-  function copySymbols(source, object) {
-    return copyObject(source, getSymbols(source), object);
-  }
-  function getAllKeys(object) {
-    return baseGetAllKeys(object, keys, getSymbols);
-  }
-  function getMapData(map, key) {
-    var data = map.__data__;
-    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
-  }
-  function getNative(object, key) {
-    var value = getValue(object, key);
-    return baseIsNative(value) ? value : void 0;
-  }
-  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
-  var getTag = baseGetTag;
-  if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
-    getTag = function(value) {
-      var result = objectToString.call(value), Ctor = result == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
-      if (ctorString) {
-        switch (ctorString) {
-          case dataViewCtorString:
-            return dataViewTag;
-          case mapCtorString:
-            return mapTag;
-          case promiseCtorString:
-            return promiseTag;
-          case setCtorString:
-            return setTag;
-          case weakMapCtorString:
-            return weakMapTag;
-        }
-      }
-      return result;
-    };
-  }
-  function initCloneArray(array) {
-    var length = array.length, result = array.constructor(length);
-    if (length && typeof array[0] == "string" && hasOwnProperty.call(array, "index")) {
-      result.index = array.index;
-      result.input = array.input;
-    }
-    return result;
-  }
-  function initCloneObject(object) {
-    return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
-  }
-  function initCloneByTag(object, tag, cloneFunc, isDeep) {
-    var Ctor = object.constructor;
-    switch (tag) {
-      case arrayBufferTag:
-        return cloneArrayBuffer(object);
-      case boolTag:
-      case dateTag:
-        return new Ctor(+object);
-      case dataViewTag:
-        return cloneDataView(object, isDeep);
-      case float32Tag:
-      case float64Tag:
-      case int8Tag:
-      case int16Tag:
-      case int32Tag:
-      case uint8Tag:
-      case uint8ClampedTag:
-      case uint16Tag:
-      case uint32Tag:
-        return cloneTypedArray(object, isDeep);
-      case mapTag:
-        return cloneMap(object, isDeep, cloneFunc);
-      case numberTag:
-      case stringTag:
-        return new Ctor(object);
-      case regexpTag:
-        return cloneRegExp(object);
-      case setTag:
-        return cloneSet(object, isDeep, cloneFunc);
-      case symbolTag:
-        return cloneSymbol(object);
-    }
-  }
-  function isIndex(value, length) {
-    length = length == null ? MAX_SAFE_INTEGER : length;
-    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
-  }
-  function isKeyable(value) {
-    var type = typeof value;
-    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-  }
-  function isMasked(func) {
-    return !!maskSrcKey && maskSrcKey in func;
-  }
-  function isPrototype(value) {
-    var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto;
-    return value === proto;
-  }
-  function toSource(func) {
-    if (func != null) {
-      try {
-        return funcToString.call(func);
-      } catch (e) {
-      }
-      try {
-        return func + "";
-      } catch (e) {
-      }
-    }
-    return "";
-  }
-  function clone3(value) {
-    return baseClone(value, false, true);
-  }
-  function eq(value, other) {
-    return value === other || value !== value && other !== other;
-  }
-  function isArguments(value) {
-    return isArrayLikeObject(value) && hasOwnProperty.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
-  }
-  var isArray3 = Array.isArray;
-  function isArrayLike(value) {
-    return value != null && isLength(value.length) && !isFunction2(value);
-  }
-  function isArrayLikeObject(value) {
-    return isObjectLike(value) && isArrayLike(value);
-  }
-  var isBuffer = nativeIsBuffer || stubFalse;
-  function isFunction2(value) {
-    var tag = isObject4(value) ? objectToString.call(value) : "";
-    return tag == funcTag || tag == genTag;
-  }
-  function isLength(value) {
-    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-  }
-  function isObject4(value) {
-    var type = typeof value;
-    return !!value && (type == "object" || type == "function");
-  }
-  function isObjectLike(value) {
-    return !!value && typeof value == "object";
-  }
-  function keys(object) {
-    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-  }
-  function stubArray() {
-    return [];
-  }
-  function stubFalse() {
-    return false;
-  }
-  module2.exports = clone3;
-});
-
-// ../../../node_modules/lodash.clonedeep/index.js
-var require_lodash2 = __commonJS((exports2, module2) => {
-  var LARGE_ARRAY_SIZE = 200;
-  var HASH_UNDEFINED = "__lodash_hash_undefined__";
-  var MAX_SAFE_INTEGER = 9007199254740991;
-  var argsTag = "[object Arguments]";
-  var arrayTag = "[object Array]";
-  var boolTag = "[object Boolean]";
-  var dateTag = "[object Date]";
-  var errorTag = "[object Error]";
-  var funcTag = "[object Function]";
-  var genTag = "[object GeneratorFunction]";
-  var mapTag = "[object Map]";
-  var numberTag = "[object Number]";
-  var objectTag = "[object Object]";
-  var promiseTag = "[object Promise]";
-  var regexpTag = "[object RegExp]";
-  var setTag = "[object Set]";
-  var stringTag = "[object String]";
-  var symbolTag = "[object Symbol]";
-  var weakMapTag = "[object WeakMap]";
-  var arrayBufferTag = "[object ArrayBuffer]";
-  var dataViewTag = "[object DataView]";
-  var float32Tag = "[object Float32Array]";
-  var float64Tag = "[object Float64Array]";
-  var int8Tag = "[object Int8Array]";
-  var int16Tag = "[object Int16Array]";
-  var int32Tag = "[object Int32Array]";
-  var uint8Tag = "[object Uint8Array]";
-  var uint8ClampedTag = "[object Uint8ClampedArray]";
-  var uint16Tag = "[object Uint16Array]";
-  var uint32Tag = "[object Uint32Array]";
-  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-  var reFlags = /\w*$/;
-  var reIsHostCtor = /^\[object .+?Constructor\]$/;
-  var reIsUint = /^(?:0|[1-9]\d*)$/;
-  var cloneableTags = {};
-  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-  var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-  var root = freeGlobal || freeSelf || Function("return this")();
-  var freeExports = typeof exports2 == "object" && exports2 && !exports2.nodeType && exports2;
-  var freeModule = freeExports && typeof module2 == "object" && module2 && !module2.nodeType && module2;
-  var moduleExports = freeModule && freeModule.exports === freeExports;
-  function addMapEntry(map, pair) {
-    map.set(pair[0], pair[1]);
-    return map;
-  }
-  function addSetEntry(set, value) {
-    set.add(value);
-    return set;
-  }
-  function arrayEach(array, iteratee) {
-    var index = -1, length = array ? array.length : 0;
-    while (++index < length) {
-      if (iteratee(array[index], index, array) === false) {
-        break;
-      }
-    }
-    return array;
-  }
-  function arrayPush(array, values) {
-    var index = -1, length = values.length, offset = array.length;
-    while (++index < length) {
-      array[offset + index] = values[index];
-    }
-    return array;
-  }
-  function arrayReduce(array, iteratee, accumulator, initAccum) {
-    var index = -1, length = array ? array.length : 0;
-    if (initAccum && length) {
-      accumulator = array[++index];
-    }
-    while (++index < length) {
-      accumulator = iteratee(accumulator, array[index], index, array);
-    }
-    return accumulator;
-  }
-  function baseTimes(n, iteratee) {
-    var index = -1, result = Array(n);
-    while (++index < n) {
-      result[index] = iteratee(index);
-    }
-    return result;
-  }
-  function getValue(object, key) {
-    return object == null ? void 0 : object[key];
-  }
-  function isHostObject(value) {
-    var result = false;
-    if (value != null && typeof value.toString != "function") {
-      try {
-        result = !!(value + "");
-      } catch (e) {
-      }
-    }
-    return result;
-  }
-  function mapToArray(map) {
-    var index = -1, result = Array(map.size);
-    map.forEach(function(value, key) {
-      result[++index] = [key, value];
-    });
-    return result;
-  }
-  function overArg(func, transform) {
-    return function(arg) {
-      return func(transform(arg));
-    };
-  }
-  function setToArray(set) {
-    var index = -1, result = Array(set.size);
-    set.forEach(function(value) {
-      result[++index] = value;
-    });
-    return result;
-  }
-  var arrayProto = Array.prototype;
-  var funcProto = Function.prototype;
-  var objectProto = Object.prototype;
-  var coreJsData = root["__core-js_shared__"];
-  var maskSrcKey = function() {
-    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
-    return uid ? "Symbol(src)_1." + uid : "";
-  }();
-  var funcToString = funcProto.toString;
-  var hasOwnProperty = objectProto.hasOwnProperty;
-  var objectToString = objectProto.toString;
-  var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-  var Buffer2 = moduleExports ? root.Buffer : void 0;
-  var Symbol2 = root.Symbol;
-  var Uint8Array2 = root.Uint8Array;
-  var getPrototype = overArg(Object.getPrototypeOf, Object);
-  var objectCreate = Object.create;
-  var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-  var splice = arrayProto.splice;
-  var nativeGetSymbols = Object.getOwnPropertySymbols;
-  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
-  var nativeKeys = overArg(Object.keys, Object);
-  var DataView = getNative(root, "DataView");
-  var Map2 = getNative(root, "Map");
-  var Promise2 = getNative(root, "Promise");
-  var Set2 = getNative(root, "Set");
-  var WeakMap2 = getNative(root, "WeakMap");
-  var nativeCreate = getNative(Object, "create");
-  var dataViewCtorString = toSource(DataView);
-  var mapCtorString = toSource(Map2);
-  var promiseCtorString = toSource(Promise2);
-  var setCtorString = toSource(Set2);
-  var weakMapCtorString = toSource(WeakMap2);
-  var symbolProto = Symbol2 ? Symbol2.prototype : void 0;
-  var symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
-  function Hash(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function hashClear() {
-    this.__data__ = nativeCreate ? nativeCreate(null) : {};
-  }
-  function hashDelete(key) {
-    return this.has(key) && delete this.__data__[key];
-  }
-  function hashGet(key) {
-    var data = this.__data__;
-    if (nativeCreate) {
-      var result = data[key];
-      return result === HASH_UNDEFINED ? void 0 : result;
-    }
-    return hasOwnProperty.call(data, key) ? data[key] : void 0;
-  }
-  function hashHas(key) {
-    var data = this.__data__;
-    return nativeCreate ? data[key] !== void 0 : hasOwnProperty.call(data, key);
-  }
-  function hashSet(key, value) {
-    var data = this.__data__;
-    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
-    return this;
-  }
-  Hash.prototype.clear = hashClear;
-  Hash.prototype["delete"] = hashDelete;
-  Hash.prototype.get = hashGet;
-  Hash.prototype.has = hashHas;
-  Hash.prototype.set = hashSet;
-  function ListCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function listCacheClear() {
-    this.__data__ = [];
-  }
-  function listCacheDelete(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      return false;
-    }
-    var lastIndex = data.length - 1;
-    if (index == lastIndex) {
-      data.pop();
-    } else {
-      splice.call(data, index, 1);
-    }
-    return true;
-  }
-  function listCacheGet(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    return index < 0 ? void 0 : data[index][1];
-  }
-  function listCacheHas(key) {
-    return assocIndexOf(this.__data__, key) > -1;
-  }
-  function listCacheSet(key, value) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      data.push([key, value]);
-    } else {
-      data[index][1] = value;
-    }
-    return this;
-  }
-  ListCache.prototype.clear = listCacheClear;
-  ListCache.prototype["delete"] = listCacheDelete;
-  ListCache.prototype.get = listCacheGet;
-  ListCache.prototype.has = listCacheHas;
-  ListCache.prototype.set = listCacheSet;
-  function MapCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function mapCacheClear() {
-    this.__data__ = {
-      hash: new Hash(),
-      map: new (Map2 || ListCache)(),
-      string: new Hash()
-    };
-  }
-  function mapCacheDelete(key) {
-    return getMapData(this, key)["delete"](key);
-  }
-  function mapCacheGet(key) {
-    return getMapData(this, key).get(key);
-  }
-  function mapCacheHas(key) {
-    return getMapData(this, key).has(key);
-  }
-  function mapCacheSet(key, value) {
-    getMapData(this, key).set(key, value);
-    return this;
-  }
-  MapCache.prototype.clear = mapCacheClear;
-  MapCache.prototype["delete"] = mapCacheDelete;
-  MapCache.prototype.get = mapCacheGet;
-  MapCache.prototype.has = mapCacheHas;
-  MapCache.prototype.set = mapCacheSet;
-  function Stack(entries) {
-    this.__data__ = new ListCache(entries);
-  }
-  function stackClear() {
-    this.__data__ = new ListCache();
-  }
-  function stackDelete(key) {
-    return this.__data__["delete"](key);
-  }
-  function stackGet(key) {
-    return this.__data__.get(key);
-  }
-  function stackHas(key) {
-    return this.__data__.has(key);
-  }
-  function stackSet(key, value) {
-    var cache = this.__data__;
-    if (cache instanceof ListCache) {
-      var pairs = cache.__data__;
-      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
-        pairs.push([key, value]);
-        return this;
-      }
-      cache = this.__data__ = new MapCache(pairs);
-    }
-    cache.set(key, value);
-    return this;
-  }
-  Stack.prototype.clear = stackClear;
-  Stack.prototype["delete"] = stackDelete;
-  Stack.prototype.get = stackGet;
-  Stack.prototype.has = stackHas;
-  Stack.prototype.set = stackSet;
-  function arrayLikeKeys(value, inherited) {
-    var result = isArray3(value) || isArguments(value) ? baseTimes(value.length, String) : [];
-    var length = result.length, skipIndexes = !!length;
-    for (var key in value) {
-      if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
-        result.push(key);
-      }
-    }
-    return result;
-  }
-  function assignValue(object, key, value) {
-    var objValue = object[key];
-    if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
-      object[key] = value;
-    }
-  }
-  function assocIndexOf(array, key) {
-    var length = array.length;
-    while (length--) {
-      if (eq(array[length][0], key)) {
-        return length;
-      }
-    }
-    return -1;
-  }
-  function baseAssign(object, source) {
-    return object && copyObject(source, keys(source), object);
-  }
-  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
-    var result;
-    if (customizer) {
-      result = object ? customizer(value, key, object, stack) : customizer(value);
-    }
-    if (result !== void 0) {
-      return result;
-    }
-    if (!isObject4(value)) {
-      return value;
-    }
-    var isArr = isArray3(value);
-    if (isArr) {
-      result = initCloneArray(value);
-      if (!isDeep) {
-        return copyArray(value, result);
-      }
-    } else {
-      var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
-      if (isBuffer(value)) {
-        return cloneBuffer(value, isDeep);
-      }
-      if (tag == objectTag || tag == argsTag || isFunc && !object) {
-        if (isHostObject(value)) {
-          return object ? value : {};
-        }
-        result = initCloneObject(isFunc ? {} : value);
-        if (!isDeep) {
-          return copySymbols(value, baseAssign(result, value));
-        }
-      } else {
-        if (!cloneableTags[tag]) {
-          return object ? value : {};
-        }
-        result = initCloneByTag(value, tag, baseClone, isDeep);
-      }
-    }
-    stack || (stack = new Stack());
-    var stacked = stack.get(value);
-    if (stacked) {
-      return stacked;
-    }
-    stack.set(value, result);
-    if (!isArr) {
-      var props = isFull ? getAllKeys(value) : keys(value);
-    }
-    arrayEach(props || value, function(subValue, key2) {
-      if (props) {
-        key2 = subValue;
-        subValue = value[key2];
-      }
-      assignValue(result, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
-    });
-    return result;
-  }
-  function baseCreate(proto) {
-    return isObject4(proto) ? objectCreate(proto) : {};
-  }
-  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-    var result = keysFunc(object);
-    return isArray3(object) ? result : arrayPush(result, symbolsFunc(object));
-  }
-  function baseGetTag(value) {
-    return objectToString.call(value);
-  }
-  function baseIsNative(value) {
-    if (!isObject4(value) || isMasked(value)) {
-      return false;
-    }
-    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
-    return pattern.test(toSource(value));
-  }
-  function baseKeys(object) {
-    if (!isPrototype(object)) {
-      return nativeKeys(object);
-    }
-    var result = [];
-    for (var key in Object(object)) {
-      if (hasOwnProperty.call(object, key) && key != "constructor") {
-        result.push(key);
-      }
-    }
-    return result;
-  }
-  function cloneBuffer(buffer, isDeep) {
-    if (isDeep) {
-      return buffer.slice();
-    }
-    var result = new buffer.constructor(buffer.length);
-    buffer.copy(result);
-    return result;
-  }
-  function cloneArrayBuffer(arrayBuffer) {
-    var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-    new Uint8Array2(result).set(new Uint8Array2(arrayBuffer));
-    return result;
-  }
-  function cloneDataView(dataView, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-  }
-  function cloneMap(map, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(mapToArray(map), true) : mapToArray(map);
-    return arrayReduce(array, addMapEntry, new map.constructor());
-  }
-  function cloneRegExp(regexp) {
-    var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-    result.lastIndex = regexp.lastIndex;
-    return result;
-  }
-  function cloneSet(set, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
-    return arrayReduce(array, addSetEntry, new set.constructor());
-  }
-  function cloneSymbol(symbol) {
-    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-  }
-  function cloneTypedArray(typedArray, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-  }
-  function copyArray(source, array) {
-    var index = -1, length = source.length;
-    array || (array = Array(length));
-    while (++index < length) {
-      array[index] = source[index];
-    }
-    return array;
-  }
-  function copyObject(source, props, object, customizer) {
-    object || (object = {});
-    var index = -1, length = props.length;
-    while (++index < length) {
-      var key = props[index];
-      var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
-      assignValue(object, key, newValue === void 0 ? source[key] : newValue);
-    }
-    return object;
-  }
-  function copySymbols(source, object) {
-    return copyObject(source, getSymbols(source), object);
-  }
-  function getAllKeys(object) {
-    return baseGetAllKeys(object, keys, getSymbols);
-  }
-  function getMapData(map, key) {
-    var data = map.__data__;
-    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
-  }
-  function getNative(object, key) {
-    var value = getValue(object, key);
-    return baseIsNative(value) ? value : void 0;
-  }
-  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
-  var getTag = baseGetTag;
-  if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
-    getTag = function(value) {
-      var result = objectToString.call(value), Ctor = result == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
-      if (ctorString) {
-        switch (ctorString) {
-          case dataViewCtorString:
-            return dataViewTag;
-          case mapCtorString:
-            return mapTag;
-          case promiseCtorString:
-            return promiseTag;
-          case setCtorString:
-            return setTag;
-          case weakMapCtorString:
-            return weakMapTag;
-        }
-      }
-      return result;
-    };
-  }
-  function initCloneArray(array) {
-    var length = array.length, result = array.constructor(length);
-    if (length && typeof array[0] == "string" && hasOwnProperty.call(array, "index")) {
-      result.index = array.index;
-      result.input = array.input;
-    }
-    return result;
-  }
-  function initCloneObject(object) {
-    return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
-  }
-  function initCloneByTag(object, tag, cloneFunc, isDeep) {
-    var Ctor = object.constructor;
-    switch (tag) {
-      case arrayBufferTag:
-        return cloneArrayBuffer(object);
-      case boolTag:
-      case dateTag:
-        return new Ctor(+object);
-      case dataViewTag:
-        return cloneDataView(object, isDeep);
-      case float32Tag:
-      case float64Tag:
-      case int8Tag:
-      case int16Tag:
-      case int32Tag:
-      case uint8Tag:
-      case uint8ClampedTag:
-      case uint16Tag:
-      case uint32Tag:
-        return cloneTypedArray(object, isDeep);
-      case mapTag:
-        return cloneMap(object, isDeep, cloneFunc);
-      case numberTag:
-      case stringTag:
-        return new Ctor(object);
-      case regexpTag:
-        return cloneRegExp(object);
-      case setTag:
-        return cloneSet(object, isDeep, cloneFunc);
-      case symbolTag:
-        return cloneSymbol(object);
-    }
-  }
-  function isIndex(value, length) {
-    length = length == null ? MAX_SAFE_INTEGER : length;
-    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
-  }
-  function isKeyable(value) {
-    var type = typeof value;
-    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-  }
-  function isMasked(func) {
-    return !!maskSrcKey && maskSrcKey in func;
-  }
-  function isPrototype(value) {
-    var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto;
-    return value === proto;
-  }
-  function toSource(func) {
-    if (func != null) {
-      try {
-        return funcToString.call(func);
-      } catch (e) {
-      }
-      try {
-        return func + "";
-      } catch (e) {
-      }
-    }
-    return "";
-  }
-  function cloneDeep(value) {
-    return baseClone(value, true, true);
-  }
-  function eq(value, other) {
-    return value === other || value !== value && other !== other;
-  }
-  function isArguments(value) {
-    return isArrayLikeObject(value) && hasOwnProperty.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
-  }
-  var isArray3 = Array.isArray;
-  function isArrayLike(value) {
-    return value != null && isLength(value.length) && !isFunction2(value);
-  }
-  function isArrayLikeObject(value) {
-    return isObjectLike(value) && isArrayLike(value);
-  }
-  var isBuffer = nativeIsBuffer || stubFalse;
-  function isFunction2(value) {
-    var tag = isObject4(value) ? objectToString.call(value) : "";
-    return tag == funcTag || tag == genTag;
-  }
-  function isLength(value) {
-    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-  }
-  function isObject4(value) {
-    var type = typeof value;
-    return !!value && (type == "object" || type == "function");
-  }
-  function isObjectLike(value) {
-    return !!value && typeof value == "object";
-  }
-  function keys(object) {
-    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-  }
-  function stubArray() {
-    return [];
-  }
-  function stubFalse() {
-    return false;
-  }
-  module2.exports = cloneDeep;
-});
-
-// ../../../node_modules/copy-to/index.js
-var require_copy_to = __commonJS((exports2, module2) => {
-  /*!
-   * copy-to - index.js
-   * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
-   * MIT Licensed
-   */
-  "use strict";
-  var slice = Array.prototype.slice;
-  module2.exports = Copy;
-  function Copy(src, withAccess) {
-    if (!(this instanceof Copy))
-      return new Copy(src, withAccess);
-    this.src = src;
-    this._withAccess = withAccess;
-  }
-  Copy.prototype.withAccess = function(w) {
-    this._withAccess = w !== false;
-    return this;
-  };
-  Copy.prototype.pick = function(keys) {
-    if (!Array.isArray(keys)) {
-      keys = slice.call(arguments);
-    }
-    if (keys.length) {
-      this.keys = keys;
-    }
-    return this;
-  };
-  Copy.prototype.to = function(to) {
-    to = to || {};
-    if (!this.src)
-      return to;
-    var keys = this.keys || Object.keys(this.src);
-    if (!this._withAccess) {
-      for (var i = 0; i < keys.length; i++) {
-        key = keys[i];
-        if (to[key] !== void 0)
-          continue;
-        to[key] = this.src[key];
-      }
-      return to;
-    }
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      if (!notDefined(to, key))
-        continue;
-      var getter = this.src.__lookupGetter__(key);
-      var setter = this.src.__lookupSetter__(key);
-      if (getter)
-        to.__defineGetter__(key, getter);
-      if (setter)
-        to.__defineSetter__(key, setter);
-      if (!getter && !setter) {
-        to[key] = this.src[key];
-      }
-    }
-    return to;
-  };
-  Copy.prototype.toCover = function(to) {
-    var keys = this.keys || Object.keys(this.src);
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      delete to[key];
-      var getter = this.src.__lookupGetter__(key);
-      var setter = this.src.__lookupSetter__(key);
-      if (getter)
-        to.__defineGetter__(key, getter);
-      if (setter)
-        to.__defineSetter__(key, setter);
-      if (!getter && !setter) {
-        to[key] = this.src[key];
-      }
-    }
-  };
-  Copy.prototype.override = Copy.prototype.toCover;
-  Copy.prototype.and = function(obj) {
-    var src = {};
-    this.to(src);
-    this.src = obj;
-    this.to(src);
-    this.src = src;
-    return this;
-  };
-  function notDefined(obj, key) {
-    return obj[key] === void 0 && obj.__lookupGetter__(key) === void 0 && obj.__lookupSetter__(key) === void 0;
-  }
-});
-
-// ../../../node_modules/crypto-js/core.js
-var require_core2 = __commonJS((exports2, module2) => {
-  (function(root, factory) {
-    if (typeof exports2 === "object") {
-      module2.exports = exports2 = factory();
-    } else if (typeof define === "function" && define.amd) {
-      define([], factory);
-    } else {
-      root.CryptoJS = factory();
-    }
-  })(exports2, function() {
-    var CryptoJS = CryptoJS || function(Math2, undefined2) {
-      var crypto;
-      if (typeof window !== "undefined" && window.crypto) {
-        crypto = window.crypto;
-      }
-      if (!crypto && typeof window !== "undefined" && window.msCrypto) {
-        crypto = window.msCrypto;
-      }
-      if (!crypto && typeof global !== "undefined" && global.crypto) {
-        crypto = global.crypto;
-      }
-      if (!crypto && true) {
-        try {
-          crypto = require("crypto");
-        } catch (err) {
-        }
-      }
-      var cryptoSecureRandomInt = function() {
-        if (crypto) {
-          if (typeof crypto.getRandomValues === "function") {
-            try {
-              return crypto.getRandomValues(new Uint32Array(1))[0];
-            } catch (err) {
-            }
-          }
-          if (typeof crypto.randomBytes === "function") {
-            try {
-              return crypto.randomBytes(4).readInt32LE();
-            } catch (err) {
-            }
-          }
-        }
-        throw new Error("Native crypto module could not be used to get secure random number.");
-      };
-      var create = Object.create || function() {
-        function F() {
-        }
-        return function(obj) {
-          var subtype;
-          F.prototype = obj;
-          subtype = new F();
-          F.prototype = null;
-          return subtype;
-        };
-      }();
-      var C = {};
-      var C_lib = C.lib = {};
-      var Base = C_lib.Base = function() {
-        return {
-          extend: function(overrides) {
-            var subtype = create(this);
-            if (overrides) {
-              subtype.mixIn(overrides);
-            }
-            if (!subtype.hasOwnProperty("init") || this.init === subtype.init) {
-              subtype.init = function() {
-                subtype.$super.init.apply(this, arguments);
-              };
-            }
-            subtype.init.prototype = subtype;
-            subtype.$super = this;
-            return subtype;
-          },
-          create: function() {
-            var instance2 = this.extend();
-            instance2.init.apply(instance2, arguments);
-            return instance2;
-          },
-          init: function() {
-          },
-          mixIn: function(properties) {
-            for (var propertyName in properties) {
-              if (properties.hasOwnProperty(propertyName)) {
-                this[propertyName] = properties[propertyName];
-              }
-            }
-            if (properties.hasOwnProperty("toString")) {
-              this.toString = properties.toString;
-            }
-          },
-          clone: function() {
-            return this.init.prototype.extend(this);
-          }
-        };
-      }();
-      var WordArray = C_lib.WordArray = Base.extend({
-        init: function(words, sigBytes) {
-          words = this.words = words || [];
-          if (sigBytes != undefined2) {
-            this.sigBytes = sigBytes;
-          } else {
-            this.sigBytes = words.length * 4;
-          }
-        },
-        toString: function(encoder) {
-          return (encoder || Hex).stringify(this);
-        },
-        concat: function(wordArray) {
-          var thisWords = this.words;
-          var thatWords = wordArray.words;
-          var thisSigBytes = this.sigBytes;
-          var thatSigBytes = wordArray.sigBytes;
-          this.clamp();
-          if (thisSigBytes % 4) {
-            for (var i = 0; i < thatSigBytes; i++) {
-              var thatByte = thatWords[i >>> 2] >>> 24 - i % 4 * 8 & 255;
-              thisWords[thisSigBytes + i >>> 2] |= thatByte << 24 - (thisSigBytes + i) % 4 * 8;
-            }
-          } else {
-            for (var i = 0; i < thatSigBytes; i += 4) {
-              thisWords[thisSigBytes + i >>> 2] = thatWords[i >>> 2];
-            }
-          }
-          this.sigBytes += thatSigBytes;
-          return this;
-        },
-        clamp: function() {
-          var words = this.words;
-          var sigBytes = this.sigBytes;
-          words[sigBytes >>> 2] &= 4294967295 << 32 - sigBytes % 4 * 8;
-          words.length = Math2.ceil(sigBytes / 4);
-        },
-        clone: function() {
-          var clone3 = Base.clone.call(this);
-          clone3.words = this.words.slice(0);
-          return clone3;
-        },
-        random: function(nBytes) {
-          var words = [];
-          for (var i = 0; i < nBytes; i += 4) {
-            words.push(cryptoSecureRandomInt());
-          }
-          return new WordArray.init(words, nBytes);
-        }
-      });
-      var C_enc = C.enc = {};
-      var Hex = C_enc.Hex = {
-        stringify: function(wordArray) {
-          var words = wordArray.words;
-          var sigBytes = wordArray.sigBytes;
-          var hexChars = [];
-          for (var i = 0; i < sigBytes; i++) {
-            var bite = words[i >>> 2] >>> 24 - i % 4 * 8 & 255;
-            hexChars.push((bite >>> 4).toString(16));
-            hexChars.push((bite & 15).toString(16));
-          }
-          return hexChars.join("");
-        },
-        parse: function(hexStr) {
-          var hexStrLength = hexStr.length;
-          var words = [];
-          for (var i = 0; i < hexStrLength; i += 2) {
-            words[i >>> 3] |= parseInt(hexStr.substr(i, 2), 16) << 24 - i % 8 * 4;
-          }
-          return new WordArray.init(words, hexStrLength / 2);
-        }
-      };
-      var Latin1 = C_enc.Latin1 = {
-        stringify: function(wordArray) {
-          var words = wordArray.words;
-          var sigBytes = wordArray.sigBytes;
-          var latin1Chars = [];
-          for (var i = 0; i < sigBytes; i++) {
-            var bite = words[i >>> 2] >>> 24 - i % 4 * 8 & 255;
-            latin1Chars.push(String.fromCharCode(bite));
-          }
-          return latin1Chars.join("");
-        },
-        parse: function(latin1Str) {
-          var latin1StrLength = latin1Str.length;
-          var words = [];
-          for (var i = 0; i < latin1StrLength; i++) {
-            words[i >>> 2] |= (latin1Str.charCodeAt(i) & 255) << 24 - i % 4 * 8;
-          }
-          return new WordArray.init(words, latin1StrLength);
-        }
-      };
-      var Utf8 = C_enc.Utf8 = {
-        stringify: function(wordArray) {
-          try {
-            return decodeURIComponent(escape(Latin1.stringify(wordArray)));
-          } catch (e) {
-            throw new Error("Malformed UTF-8 data");
-          }
-        },
-        parse: function(utf8Str) {
-          return Latin1.parse(unescape(encodeURIComponent(utf8Str)));
-        }
-      };
-      var BufferedBlockAlgorithm = C_lib.BufferedBlockAlgorithm = Base.extend({
-        reset: function() {
-          this._data = new WordArray.init();
-          this._nDataBytes = 0;
-        },
-        _append: function(data) {
-          if (typeof data == "string") {
-            data = Utf8.parse(data);
-          }
-          this._data.concat(data);
-          this._nDataBytes += data.sigBytes;
-        },
-        _process: function(doFlush) {
-          var processedWords;
-          var data = this._data;
-          var dataWords = data.words;
-          var dataSigBytes = data.sigBytes;
-          var blockSize = this.blockSize;
-          var blockSizeBytes = blockSize * 4;
-          var nBlocksReady = dataSigBytes / blockSizeBytes;
-          if (doFlush) {
-            nBlocksReady = Math2.ceil(nBlocksReady);
-          } else {
-            nBlocksReady = Math2.max((nBlocksReady | 0) - this._minBufferSize, 0);
-          }
-          var nWordsReady = nBlocksReady * blockSize;
-          var nBytesReady = Math2.min(nWordsReady * 4, dataSigBytes);
-          if (nWordsReady) {
-            for (var offset = 0; offset < nWordsReady; offset += blockSize) {
-              this._doProcessBlock(dataWords, offset);
-            }
-            processedWords = dataWords.splice(0, nWordsReady);
-            data.sigBytes -= nBytesReady;
-          }
-          return new WordArray.init(processedWords, nBytesReady);
-        },
-        clone: function() {
-          var clone3 = Base.clone.call(this);
-          clone3._data = this._data.clone();
-          return clone3;
-        },
-        _minBufferSize: 0
-      });
-      var Hasher = C_lib.Hasher = BufferedBlockAlgorithm.extend({
-        cfg: Base.extend(),
-        init: function(cfg) {
-          this.cfg = this.cfg.extend(cfg);
-          this.reset();
-        },
-        reset: function() {
-          BufferedBlockAlgorithm.reset.call(this);
-          this._doReset();
-        },
-        update: function(messageUpdate) {
-          this._append(messageUpdate);
-          this._process();
-          return this;
-        },
-        finalize: function(messageUpdate) {
-          if (messageUpdate) {
-            this._append(messageUpdate);
-          }
-          var hash = this._doFinalize();
-          return hash;
-        },
-        blockSize: 512 / 32,
-        _createHelper: function(hasher) {
-          return function(message, cfg) {
-            return new hasher.init(cfg).finalize(message);
-          };
-        },
-        _createHmacHelper: function(hasher) {
-          return function(message, key) {
-            return new C_algo.HMAC.init(hasher, key).finalize(message);
-          };
-        }
-      });
-      var C_algo = C.algo = {};
-      return C;
-    }(Math);
-    return CryptoJS;
-  });
-});
-
-// ../../../node_modules/crypto-js/md5.js
-var require_md5 = __commonJS((exports2, module2) => {
-  (function(root, factory) {
-    if (typeof exports2 === "object") {
-      module2.exports = exports2 = factory(require_core2());
-    } else if (typeof define === "function" && define.amd) {
-      define(["./core"], factory);
-    } else {
-      factory(root.CryptoJS);
-    }
-  })(exports2, function(CryptoJS) {
-    (function(Math2) {
-      var C = CryptoJS;
-      var C_lib = C.lib;
-      var WordArray = C_lib.WordArray;
-      var Hasher = C_lib.Hasher;
-      var C_algo = C.algo;
-      var T = [];
-      (function() {
-        for (var i = 0; i < 64; i++) {
-          T[i] = Math2.abs(Math2.sin(i + 1)) * 4294967296 | 0;
-        }
-      })();
-      var MD5 = C_algo.MD5 = Hasher.extend({
-        _doReset: function() {
-          this._hash = new WordArray.init([
-            1732584193,
-            4023233417,
-            2562383102,
-            271733878
-          ]);
-        },
-        _doProcessBlock: function(M, offset) {
-          for (var i = 0; i < 16; i++) {
-            var offset_i = offset + i;
-            var M_offset_i = M[offset_i];
-            M[offset_i] = (M_offset_i << 8 | M_offset_i >>> 24) & 16711935 | (M_offset_i << 24 | M_offset_i >>> 8) & 4278255360;
-          }
-          var H = this._hash.words;
-          var M_offset_0 = M[offset + 0];
-          var M_offset_1 = M[offset + 1];
-          var M_offset_2 = M[offset + 2];
-          var M_offset_3 = M[offset + 3];
-          var M_offset_4 = M[offset + 4];
-          var M_offset_5 = M[offset + 5];
-          var M_offset_6 = M[offset + 6];
-          var M_offset_7 = M[offset + 7];
-          var M_offset_8 = M[offset + 8];
-          var M_offset_9 = M[offset + 9];
-          var M_offset_10 = M[offset + 10];
-          var M_offset_11 = M[offset + 11];
-          var M_offset_12 = M[offset + 12];
-          var M_offset_13 = M[offset + 13];
-          var M_offset_14 = M[offset + 14];
-          var M_offset_15 = M[offset + 15];
-          var a = H[0];
-          var b = H[1];
-          var c = H[2];
-          var d = H[3];
-          a = FF(a, b, c, d, M_offset_0, 7, T[0]);
-          d = FF(d, a, b, c, M_offset_1, 12, T[1]);
-          c = FF(c, d, a, b, M_offset_2, 17, T[2]);
-          b = FF(b, c, d, a, M_offset_3, 22, T[3]);
-          a = FF(a, b, c, d, M_offset_4, 7, T[4]);
-          d = FF(d, a, b, c, M_offset_5, 12, T[5]);
-          c = FF(c, d, a, b, M_offset_6, 17, T[6]);
-          b = FF(b, c, d, a, M_offset_7, 22, T[7]);
-          a = FF(a, b, c, d, M_offset_8, 7, T[8]);
-          d = FF(d, a, b, c, M_offset_9, 12, T[9]);
-          c = FF(c, d, a, b, M_offset_10, 17, T[10]);
-          b = FF(b, c, d, a, M_offset_11, 22, T[11]);
-          a = FF(a, b, c, d, M_offset_12, 7, T[12]);
-          d = FF(d, a, b, c, M_offset_13, 12, T[13]);
-          c = FF(c, d, a, b, M_offset_14, 17, T[14]);
-          b = FF(b, c, d, a, M_offset_15, 22, T[15]);
-          a = GG(a, b, c, d, M_offset_1, 5, T[16]);
-          d = GG(d, a, b, c, M_offset_6, 9, T[17]);
-          c = GG(c, d, a, b, M_offset_11, 14, T[18]);
-          b = GG(b, c, d, a, M_offset_0, 20, T[19]);
-          a = GG(a, b, c, d, M_offset_5, 5, T[20]);
-          d = GG(d, a, b, c, M_offset_10, 9, T[21]);
-          c = GG(c, d, a, b, M_offset_15, 14, T[22]);
-          b = GG(b, c, d, a, M_offset_4, 20, T[23]);
-          a = GG(a, b, c, d, M_offset_9, 5, T[24]);
-          d = GG(d, a, b, c, M_offset_14, 9, T[25]);
-          c = GG(c, d, a, b, M_offset_3, 14, T[26]);
-          b = GG(b, c, d, a, M_offset_8, 20, T[27]);
-          a = GG(a, b, c, d, M_offset_13, 5, T[28]);
-          d = GG(d, a, b, c, M_offset_2, 9, T[29]);
-          c = GG(c, d, a, b, M_offset_7, 14, T[30]);
-          b = GG(b, c, d, a, M_offset_12, 20, T[31]);
-          a = HH(a, b, c, d, M_offset_5, 4, T[32]);
-          d = HH(d, a, b, c, M_offset_8, 11, T[33]);
-          c = HH(c, d, a, b, M_offset_11, 16, T[34]);
-          b = HH(b, c, d, a, M_offset_14, 23, T[35]);
-          a = HH(a, b, c, d, M_offset_1, 4, T[36]);
-          d = HH(d, a, b, c, M_offset_4, 11, T[37]);
-          c = HH(c, d, a, b, M_offset_7, 16, T[38]);
-          b = HH(b, c, d, a, M_offset_10, 23, T[39]);
-          a = HH(a, b, c, d, M_offset_13, 4, T[40]);
-          d = HH(d, a, b, c, M_offset_0, 11, T[41]);
-          c = HH(c, d, a, b, M_offset_3, 16, T[42]);
-          b = HH(b, c, d, a, M_offset_6, 23, T[43]);
-          a = HH(a, b, c, d, M_offset_9, 4, T[44]);
-          d = HH(d, a, b, c, M_offset_12, 11, T[45]);
-          c = HH(c, d, a, b, M_offset_15, 16, T[46]);
-          b = HH(b, c, d, a, M_offset_2, 23, T[47]);
-          a = II(a, b, c, d, M_offset_0, 6, T[48]);
-          d = II(d, a, b, c, M_offset_7, 10, T[49]);
-          c = II(c, d, a, b, M_offset_14, 15, T[50]);
-          b = II(b, c, d, a, M_offset_5, 21, T[51]);
-          a = II(a, b, c, d, M_offset_12, 6, T[52]);
-          d = II(d, a, b, c, M_offset_3, 10, T[53]);
-          c = II(c, d, a, b, M_offset_10, 15, T[54]);
-          b = II(b, c, d, a, M_offset_1, 21, T[55]);
-          a = II(a, b, c, d, M_offset_8, 6, T[56]);
-          d = II(d, a, b, c, M_offset_15, 10, T[57]);
-          c = II(c, d, a, b, M_offset_6, 15, T[58]);
-          b = II(b, c, d, a, M_offset_13, 21, T[59]);
-          a = II(a, b, c, d, M_offset_4, 6, T[60]);
-          d = II(d, a, b, c, M_offset_11, 10, T[61]);
-          c = II(c, d, a, b, M_offset_2, 15, T[62]);
-          b = II(b, c, d, a, M_offset_9, 21, T[63]);
-          H[0] = H[0] + a | 0;
-          H[1] = H[1] + b | 0;
-          H[2] = H[2] + c | 0;
-          H[3] = H[3] + d | 0;
-        },
-        _doFinalize: function() {
-          var data = this._data;
-          var dataWords = data.words;
-          var nBitsTotal = this._nDataBytes * 8;
-          var nBitsLeft = data.sigBytes * 8;
-          dataWords[nBitsLeft >>> 5] |= 128 << 24 - nBitsLeft % 32;
-          var nBitsTotalH = Math2.floor(nBitsTotal / 4294967296);
-          var nBitsTotalL = nBitsTotal;
-          dataWords[(nBitsLeft + 64 >>> 9 << 4) + 15] = (nBitsTotalH << 8 | nBitsTotalH >>> 24) & 16711935 | (nBitsTotalH << 24 | nBitsTotalH >>> 8) & 4278255360;
-          dataWords[(nBitsLeft + 64 >>> 9 << 4) + 14] = (nBitsTotalL << 8 | nBitsTotalL >>> 24) & 16711935 | (nBitsTotalL << 24 | nBitsTotalL >>> 8) & 4278255360;
-          data.sigBytes = (dataWords.length + 1) * 4;
-          this._process();
-          var hash = this._hash;
-          var H = hash.words;
-          for (var i = 0; i < 4; i++) {
-            var H_i = H[i];
-            H[i] = (H_i << 8 | H_i >>> 24) & 16711935 | (H_i << 24 | H_i >>> 8) & 4278255360;
-          }
-          return hash;
-        },
-        clone: function() {
-          var clone3 = Hasher.clone.call(this);
-          clone3._hash = this._hash.clone();
-          return clone3;
-        }
-      });
-      function FF(a, b, c, d, x, s, t) {
-        var n = a + (b & c | ~b & d) + x + t;
-        return (n << s | n >>> 32 - s) + b;
-      }
-      function GG(a, b, c, d, x, s, t) {
-        var n = a + (b & d | c & ~d) + x + t;
-        return (n << s | n >>> 32 - s) + b;
-      }
-      function HH(a, b, c, d, x, s, t) {
-        var n = a + (b ^ c ^ d) + x + t;
-        return (n << s | n >>> 32 - s) + b;
-      }
-      function II(a, b, c, d, x, s, t) {
-        var n = a + (c ^ (b | ~d)) + x + t;
-        return (n << s | n >>> 32 - s) + b;
-      }
-      C.MD5 = Hasher._createHelper(MD5);
-      C.HmacMD5 = Hasher._createHmacHelper(MD5);
-    })(Math);
-    return CryptoJS.MD5;
-  });
-});
-
-// ../../../node_modules/color-name/index.js
-var require_color_name = __commonJS((exports2, module2) => {
-  "use strict";
-  module2.exports = {
-    aliceblue: [240, 248, 255],
-    antiquewhite: [250, 235, 215],
-    aqua: [0, 255, 255],
-    aquamarine: [127, 255, 212],
-    azure: [240, 255, 255],
-    beige: [245, 245, 220],
-    bisque: [255, 228, 196],
-    black: [0, 0, 0],
-    blanchedalmond: [255, 235, 205],
-    blue: [0, 0, 255],
-    blueviolet: [138, 43, 226],
-    brown: [165, 42, 42],
-    burlywood: [222, 184, 135],
-    cadetblue: [95, 158, 160],
-    chartreuse: [127, 255, 0],
-    chocolate: [210, 105, 30],
-    coral: [255, 127, 80],
-    cornflowerblue: [100, 149, 237],
-    cornsilk: [255, 248, 220],
-    crimson: [220, 20, 60],
-    cyan: [0, 255, 255],
-    darkblue: [0, 0, 139],
-    darkcyan: [0, 139, 139],
-    darkgoldenrod: [184, 134, 11],
-    darkgray: [169, 169, 169],
-    darkgreen: [0, 100, 0],
-    darkgrey: [169, 169, 169],
-    darkkhaki: [189, 183, 107],
-    darkmagenta: [139, 0, 139],
-    darkolivegreen: [85, 107, 47],
-    darkorange: [255, 140, 0],
-    darkorchid: [153, 50, 204],
-    darkred: [139, 0, 0],
-    darksalmon: [233, 150, 122],
-    darkseagreen: [143, 188, 143],
-    darkslateblue: [72, 61, 139],
-    darkslategray: [47, 79, 79],
-    darkslategrey: [47, 79, 79],
-    darkturquoise: [0, 206, 209],
-    darkviolet: [148, 0, 211],
-    deeppink: [255, 20, 147],
-    deepskyblue: [0, 191, 255],
-    dimgray: [105, 105, 105],
-    dimgrey: [105, 105, 105],
-    dodgerblue: [30, 144, 255],
-    firebrick: [178, 34, 34],
-    floralwhite: [255, 250, 240],
-    forestgreen: [34, 139, 34],
-    fuchsia: [255, 0, 255],
-    gainsboro: [220, 220, 220],
-    ghostwhite: [248, 248, 255],
-    gold: [255, 215, 0],
-    goldenrod: [218, 165, 32],
-    gray: [128, 128, 128],
-    green: [0, 128, 0],
-    greenyellow: [173, 255, 47],
-    grey: [128, 128, 128],
-    honeydew: [240, 255, 240],
-    hotpink: [255, 105, 180],
-    indianred: [205, 92, 92],
-    indigo: [75, 0, 130],
-    ivory: [255, 255, 240],
-    khaki: [240, 230, 140],
-    lavender: [230, 230, 250],
-    lavenderblush: [255, 240, 245],
-    lawngreen: [124, 252, 0],
-    lemonchiffon: [255, 250, 205],
-    lightblue: [173, 216, 230],
-    lightcoral: [240, 128, 128],
-    lightcyan: [224, 255, 255],
-    lightgoldenrodyellow: [250, 250, 210],
-    lightgray: [211, 211, 211],
-    lightgreen: [144, 238, 144],
-    lightgrey: [211, 211, 211],
-    lightpink: [255, 182, 193],
-    lightsalmon: [255, 160, 122],
-    lightseagreen: [32, 178, 170],
-    lightskyblue: [135, 206, 250],
-    lightslategray: [119, 136, 153],
-    lightslategrey: [119, 136, 153],
-    lightsteelblue: [176, 196, 222],
-    lightyellow: [255, 255, 224],
-    lime: [0, 255, 0],
-    limegreen: [50, 205, 50],
-    linen: [250, 240, 230],
-    magenta: [255, 0, 255],
-    maroon: [128, 0, 0],
-    mediumaquamarine: [102, 205, 170],
-    mediumblue: [0, 0, 205],
-    mediumorchid: [186, 85, 211],
-    mediumpurple: [147, 112, 219],
-    mediumseagreen: [60, 179, 113],
-    mediumslateblue: [123, 104, 238],
-    mediumspringgreen: [0, 250, 154],
-    mediumturquoise: [72, 209, 204],
-    mediumvioletred: [199, 21, 133],
-    midnightblue: [25, 25, 112],
-    mintcream: [245, 255, 250],
-    mistyrose: [255, 228, 225],
-    moccasin: [255, 228, 181],
-    navajowhite: [255, 222, 173],
-    navy: [0, 0, 128],
-    oldlace: [253, 245, 230],
-    olive: [128, 128, 0],
-    olivedrab: [107, 142, 35],
-    orange: [255, 165, 0],
-    orangered: [255, 69, 0],
-    orchid: [218, 112, 214],
-    palegoldenrod: [238, 232, 170],
-    palegreen: [152, 251, 152],
-    paleturquoise: [175, 238, 238],
-    palevioletred: [219, 112, 147],
-    papayawhip: [255, 239, 213],
-    peachpuff: [255, 218, 185],
-    peru: [205, 133, 63],
-    pink: [255, 192, 203],
-    plum: [221, 160, 221],
-    powderblue: [176, 224, 230],
-    purple: [128, 0, 128],
-    rebeccapurple: [102, 51, 153],
-    red: [255, 0, 0],
-    rosybrown: [188, 143, 143],
-    royalblue: [65, 105, 225],
-    saddlebrown: [139, 69, 19],
-    salmon: [250, 128, 114],
-    sandybrown: [244, 164, 96],
-    seagreen: [46, 139, 87],
-    seashell: [255, 245, 238],
-    sienna: [160, 82, 45],
-    silver: [192, 192, 192],
-    skyblue: [135, 206, 235],
-    slateblue: [106, 90, 205],
-    slategray: [112, 128, 144],
-    slategrey: [112, 128, 144],
-    snow: [255, 250, 250],
-    springgreen: [0, 255, 127],
-    steelblue: [70, 130, 180],
-    tan: [210, 180, 140],
-    teal: [0, 128, 128],
-    thistle: [216, 191, 216],
-    tomato: [255, 99, 71],
-    turquoise: [64, 224, 208],
-    violet: [238, 130, 238],
-    wheat: [245, 222, 179],
-    white: [255, 255, 255],
-    whitesmoke: [245, 245, 245],
-    yellow: [255, 255, 0],
-    yellowgreen: [154, 205, 50]
-  };
-});
-
-// ../../../node_modules/ansi-styles/node_modules/color-convert/conversions.js
-var require_conversions = __commonJS((exports2, module2) => {
-  var cssKeywords = require_color_name();
-  var reverseKeywords = {};
-  for (const key of Object.keys(cssKeywords)) {
-    reverseKeywords[cssKeywords[key]] = key;
-  }
-  var convert = {
-    rgb: {channels: 3, labels: "rgb"},
-    hsl: {channels: 3, labels: "hsl"},
-    hsv: {channels: 3, labels: "hsv"},
-    hwb: {channels: 3, labels: "hwb"},
-    cmyk: {channels: 4, labels: "cmyk"},
-    xyz: {channels: 3, labels: "xyz"},
-    lab: {channels: 3, labels: "lab"},
-    lch: {channels: 3, labels: "lch"},
-    hex: {channels: 1, labels: ["hex"]},
-    keyword: {channels: 1, labels: ["keyword"]},
-    ansi16: {channels: 1, labels: ["ansi16"]},
-    ansi256: {channels: 1, labels: ["ansi256"]},
-    hcg: {channels: 3, labels: ["h", "c", "g"]},
-    apple: {channels: 3, labels: ["r16", "g16", "b16"]},
-    gray: {channels: 1, labels: ["gray"]}
-  };
-  module2.exports = convert;
-  for (const model of Object.keys(convert)) {
-    if (!("channels" in convert[model])) {
-      throw new Error("missing channels property: " + model);
-    }
-    if (!("labels" in convert[model])) {
-      throw new Error("missing channel labels property: " + model);
-    }
-    if (convert[model].labels.length !== convert[model].channels) {
-      throw new Error("channel and label counts mismatch: " + model);
-    }
-    const {channels, labels} = convert[model];
-    delete convert[model].channels;
-    delete convert[model].labels;
-    Object.defineProperty(convert[model], "channels", {value: channels});
-    Object.defineProperty(convert[model], "labels", {value: labels});
-  }
-  convert.rgb.hsl = function(rgb) {
-    const r = rgb[0] / 255;
-    const g = rgb[1] / 255;
-    const b = rgb[2] / 255;
-    const min = Math.min(r, g, b);
-    const max = Math.max(r, g, b);
-    const delta = max - min;
-    let h;
-    let s;
-    if (max === min) {
-      h = 0;
-    } else if (r === max) {
-      h = (g - b) / delta;
-    } else if (g === max) {
-      h = 2 + (b - r) / delta;
-    } else if (b === max) {
-      h = 4 + (r - g) / delta;
-    }
-    h = Math.min(h * 60, 360);
-    if (h < 0) {
-      h += 360;
-    }
-    const l = (min + max) / 2;
-    if (max === min) {
-      s = 0;
-    } else if (l <= 0.5) {
-      s = delta / (max + min);
-    } else {
-      s = delta / (2 - max - min);
-    }
-    return [h, s * 100, l * 100];
-  };
-  convert.rgb.hsv = function(rgb) {
-    let rdif;
-    let gdif;
-    let bdif;
-    let h;
-    let s;
-    const r = rgb[0] / 255;
-    const g = rgb[1] / 255;
-    const b = rgb[2] / 255;
-    const v = Math.max(r, g, b);
-    const diff = v - Math.min(r, g, b);
-    const diffc = function(c) {
-      return (v - c) / 6 / diff + 1 / 2;
-    };
-    if (diff === 0) {
-      h = 0;
-      s = 0;
-    } else {
-      s = diff / v;
-      rdif = diffc(r);
-      gdif = diffc(g);
-      bdif = diffc(b);
-      if (r === v) {
-        h = bdif - gdif;
-      } else if (g === v) {
-        h = 1 / 3 + rdif - bdif;
-      } else if (b === v) {
-        h = 2 / 3 + gdif - rdif;
-      }
-      if (h < 0) {
-        h += 1;
-      } else if (h > 1) {
-        h -= 1;
-      }
-    }
-    return [
-      h * 360,
-      s * 100,
-      v * 100
-    ];
-  };
-  convert.rgb.hwb = function(rgb) {
-    const r = rgb[0];
-    const g = rgb[1];
-    let b = rgb[2];
-    const h = convert.rgb.hsl(rgb)[0];
-    const w = 1 / 255 * Math.min(r, Math.min(g, b));
-    b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
-    return [h, w * 100, b * 100];
-  };
-  convert.rgb.cmyk = function(rgb) {
-    const r = rgb[0] / 255;
-    const g = rgb[1] / 255;
-    const b = rgb[2] / 255;
-    const k = Math.min(1 - r, 1 - g, 1 - b);
-    const c = (1 - r - k) / (1 - k) || 0;
-    const m = (1 - g - k) / (1 - k) || 0;
-    const y = (1 - b - k) / (1 - k) || 0;
-    return [c * 100, m * 100, y * 100, k * 100];
-  };
-  function comparativeDistance(x, y) {
-    return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
-  }
-  convert.rgb.keyword = function(rgb) {
-    const reversed = reverseKeywords[rgb];
-    if (reversed) {
-      return reversed;
-    }
-    let currentClosestDistance = Infinity;
-    let currentClosestKeyword;
-    for (const keyword of Object.keys(cssKeywords)) {
-      const value = cssKeywords[keyword];
-      const distance = comparativeDistance(rgb, value);
-      if (distance < currentClosestDistance) {
-        currentClosestDistance = distance;
-        currentClosestKeyword = keyword;
-      }
-    }
-    return currentClosestKeyword;
-  };
-  convert.keyword.rgb = function(keyword) {
-    return cssKeywords[keyword];
-  };
-  convert.rgb.xyz = function(rgb) {
-    let r = rgb[0] / 255;
-    let g = rgb[1] / 255;
-    let b = rgb[2] / 255;
-    r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
-    g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
-    b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
-    const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
-    const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
-    const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
-    return [x * 100, y * 100, z * 100];
-  };
-  convert.rgb.lab = function(rgb) {
-    const xyz = convert.rgb.xyz(rgb);
-    let x = xyz[0];
-    let y = xyz[1];
-    let z = xyz[2];
-    x /= 95.047;
-    y /= 100;
-    z /= 108.883;
-    x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
-    y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
-    z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
-    const l = 116 * y - 16;
-    const a = 500 * (x - y);
-    const b = 200 * (y - z);
-    return [l, a, b];
-  };
-  convert.hsl.rgb = function(hsl) {
-    const h = hsl[0] / 360;
-    const s = hsl[1] / 100;
-    const l = hsl[2] / 100;
-    let t2;
-    let t3;
-    let val;
-    if (s === 0) {
-      val = l * 255;
-      return [val, val, val];
-    }
-    if (l < 0.5) {
-      t2 = l * (1 + s);
-    } else {
-      t2 = l + s - l * s;
-    }
-    const t1 = 2 * l - t2;
-    const rgb = [0, 0, 0];
-    for (let i = 0; i < 3; i++) {
-      t3 = h + 1 / 3 * -(i - 1);
-      if (t3 < 0) {
-        t3++;
-      }
-      if (t3 > 1) {
-        t3--;
-      }
-      if (6 * t3 < 1) {
-        val = t1 + (t2 - t1) * 6 * t3;
-      } else if (2 * t3 < 1) {
-        val = t2;
-      } else if (3 * t3 < 2) {
-        val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
-      } else {
-        val = t1;
-      }
-      rgb[i] = val * 255;
-    }
-    return rgb;
-  };
-  convert.hsl.hsv = function(hsl) {
-    const h = hsl[0];
-    let s = hsl[1] / 100;
-    let l = hsl[2] / 100;
-    let smin = s;
-    const lmin = Math.max(l, 0.01);
-    l *= 2;
-    s *= l <= 1 ? l : 2 - l;
-    smin *= lmin <= 1 ? lmin : 2 - lmin;
-    const v = (l + s) / 2;
-    const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
-    return [h, sv * 100, v * 100];
-  };
-  convert.hsv.rgb = function(hsv) {
-    const h = hsv[0] / 60;
-    const s = hsv[1] / 100;
-    let v = hsv[2] / 100;
-    const hi = Math.floor(h) % 6;
-    const f = h - Math.floor(h);
-    const p = 255 * v * (1 - s);
-    const q = 255 * v * (1 - s * f);
-    const t = 255 * v * (1 - s * (1 - f));
-    v *= 255;
-    switch (hi) {
-      case 0:
-        return [v, t, p];
-      case 1:
-        return [q, v, p];
-      case 2:
-        return [p, v, t];
-      case 3:
-        return [p, q, v];
-      case 4:
-        return [t, p, v];
-      case 5:
-        return [v, p, q];
-    }
-  };
-  convert.hsv.hsl = function(hsv) {
-    const h = hsv[0];
-    const s = hsv[1] / 100;
-    const v = hsv[2] / 100;
-    const vmin = Math.max(v, 0.01);
-    let sl;
-    let l;
-    l = (2 - s) * v;
-    const lmin = (2 - s) * vmin;
-    sl = s * vmin;
-    sl /= lmin <= 1 ? lmin : 2 - lmin;
-    sl = sl || 0;
-    l /= 2;
-    return [h, sl * 100, l * 100];
-  };
-  convert.hwb.rgb = function(hwb) {
-    const h = hwb[0] / 360;
-    let wh = hwb[1] / 100;
-    let bl = hwb[2] / 100;
-    const ratio = wh + bl;
-    let f;
-    if (ratio > 1) {
-      wh /= ratio;
-      bl /= ratio;
-    }
-    const i = Math.floor(6 * h);
-    const v = 1 - bl;
-    f = 6 * h - i;
-    if ((i & 1) !== 0) {
-      f = 1 - f;
-    }
-    const n = wh + f * (v - wh);
-    let r;
-    let g;
-    let b;
-    switch (i) {
-      default:
-      case 6:
-      case 0:
-        r = v;
-        g = n;
-        b = wh;
-        break;
-      case 1:
-        r = n;
-        g = v;
-        b = wh;
-        break;
-      case 2:
-        r = wh;
-        g = v;
-        b = n;
-        break;
-      case 3:
-        r = wh;
-        g = n;
-        b = v;
-        break;
-      case 4:
-        r = n;
-        g = wh;
-        b = v;
-        break;
-      case 5:
-        r = v;
-        g = wh;
-        b = n;
-        break;
-    }
-    return [r * 255, g * 255, b * 255];
-  };
-  convert.cmyk.rgb = function(cmyk) {
-    const c = cmyk[0] / 100;
-    const m = cmyk[1] / 100;
-    const y = cmyk[2] / 100;
-    const k = cmyk[3] / 100;
-    const r = 1 - Math.min(1, c * (1 - k) + k);
-    const g = 1 - Math.min(1, m * (1 - k) + k);
-    const b = 1 - Math.min(1, y * (1 - k) + k);
-    return [r * 255, g * 255, b * 255];
-  };
-  convert.xyz.rgb = function(xyz) {
-    const x = xyz[0] / 100;
-    const y = xyz[1] / 100;
-    const z = xyz[2] / 100;
-    let r;
-    let g;
-    let b;
-    r = x * 3.2406 + y * -1.5372 + z * -0.4986;
-    g = x * -0.9689 + y * 1.8758 + z * 0.0415;
-    b = x * 0.0557 + y * -0.204 + z * 1.057;
-    r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
-    g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
-    b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
-    r = Math.min(Math.max(0, r), 1);
-    g = Math.min(Math.max(0, g), 1);
-    b = Math.min(Math.max(0, b), 1);
-    return [r * 255, g * 255, b * 255];
-  };
-  convert.xyz.lab = function(xyz) {
-    let x = xyz[0];
-    let y = xyz[1];
-    let z = xyz[2];
-    x /= 95.047;
-    y /= 100;
-    z /= 108.883;
-    x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
-    y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
-    z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
-    const l = 116 * y - 16;
-    const a = 500 * (x - y);
-    const b = 200 * (y - z);
-    return [l, a, b];
-  };
-  convert.lab.xyz = function(lab) {
-    const l = lab[0];
-    const a = lab[1];
-    const b = lab[2];
-    let x;
-    let y;
-    let z;
-    y = (l + 16) / 116;
-    x = a / 500 + y;
-    z = y - b / 200;
-    const y2 = y ** 3;
-    const x2 = x ** 3;
-    const z2 = z ** 3;
-    y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
-    x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
-    z = z2 > 8856e-6 ? z2 : (z - 16 / 116) / 7.787;
-    x *= 95.047;
-    y *= 100;
-    z *= 108.883;
-    return [x, y, z];
-  };
-  convert.lab.lch = function(lab) {
-    const l = lab[0];
-    const a = lab[1];
-    const b = lab[2];
-    let h;
-    const hr = Math.atan2(b, a);
-    h = hr * 360 / 2 / Math.PI;
-    if (h < 0) {
-      h += 360;
-    }
-    const c = Math.sqrt(a * a + b * b);
-    return [l, c, h];
-  };
-  convert.lch.lab = function(lch) {
-    const l = lch[0];
-    const c = lch[1];
-    const h = lch[2];
-    const hr = h / 360 * 2 * Math.PI;
-    const a = c * Math.cos(hr);
-    const b = c * Math.sin(hr);
-    return [l, a, b];
-  };
-  convert.rgb.ansi16 = function(args, saturation = null) {
-    const [r, g, b] = args;
-    let value = saturation === null ? convert.rgb.hsv(args)[2] : saturation;
-    value = Math.round(value / 50);
-    if (value === 0) {
-      return 30;
-    }
-    let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
-    if (value === 2) {
-      ansi += 60;
-    }
-    return ansi;
-  };
-  convert.hsv.ansi16 = function(args) {
-    return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
-  };
-  convert.rgb.ansi256 = function(args) {
-    const r = args[0];
-    const g = args[1];
-    const b = args[2];
-    if (r === g && g === b) {
-      if (r < 8) {
-        return 16;
-      }
-      if (r > 248) {
-        return 231;
-      }
-      return Math.round((r - 8) / 247 * 24) + 232;
-    }
-    const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
-    return ansi;
-  };
-  convert.ansi16.rgb = function(args) {
-    let color = args % 10;
-    if (color === 0 || color === 7) {
-      if (args > 50) {
-        color += 3.5;
-      }
-      color = color / 10.5 * 255;
-      return [color, color, color];
-    }
-    const mult = (~~(args > 50) + 1) * 0.5;
-    const r = (color & 1) * mult * 255;
-    const g = (color >> 1 & 1) * mult * 255;
-    const b = (color >> 2 & 1) * mult * 255;
-    return [r, g, b];
-  };
-  convert.ansi256.rgb = function(args) {
-    if (args >= 232) {
-      const c = (args - 232) * 10 + 8;
-      return [c, c, c];
-    }
-    args -= 16;
-    let rem;
-    const r = Math.floor(args / 36) / 5 * 255;
-    const g = Math.floor((rem = args % 36) / 6) / 5 * 255;
-    const b = rem % 6 / 5 * 255;
-    return [r, g, b];
-  };
-  convert.rgb.hex = function(args) {
-    const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
-    const string = integer.toString(16).toUpperCase();
-    return "000000".substring(string.length) + string;
-  };
-  convert.hex.rgb = function(args) {
-    const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
-    if (!match) {
-      return [0, 0, 0];
-    }
-    let colorString = match[0];
-    if (match[0].length === 3) {
-      colorString = colorString.split("").map((char) => {
-        return char + char;
-      }).join("");
-    }
-    const integer = parseInt(colorString, 16);
-    const r = integer >> 16 & 255;
-    const g = integer >> 8 & 255;
-    const b = integer & 255;
-    return [r, g, b];
-  };
-  convert.rgb.hcg = function(rgb) {
-    const r = rgb[0] / 255;
-    const g = rgb[1] / 255;
-    const b = rgb[2] / 255;
-    const max = Math.max(Math.max(r, g), b);
-    const min = Math.min(Math.min(r, g), b);
-    const chroma = max - min;
-    let grayscale;
-    let hue;
-    if (chroma < 1) {
-      grayscale = min / (1 - chroma);
-    } else {
-      grayscale = 0;
-    }
-    if (chroma <= 0) {
-      hue = 0;
-    } else if (max === r) {
-      hue = (g - b) / chroma % 6;
-    } else if (max === g) {
-      hue = 2 + (b - r) / chroma;
-    } else {
-      hue = 4 + (r - g) / chroma;
-    }
-    hue /= 6;
-    hue %= 1;
-    return [hue * 360, chroma * 100, grayscale * 100];
-  };
-  convert.hsl.hcg = function(hsl) {
-    const s = hsl[1] / 100;
-    const l = hsl[2] / 100;
-    const c = l < 0.5 ? 2 * s * l : 2 * s * (1 - l);
-    let f = 0;
-    if (c < 1) {
-      f = (l - 0.5 * c) / (1 - c);
-    }
-    return [hsl[0], c * 100, f * 100];
-  };
-  convert.hsv.hcg = function(hsv) {
-    const s = hsv[1] / 100;
-    const v = hsv[2] / 100;
-    const c = s * v;
-    let f = 0;
-    if (c < 1) {
-      f = (v - c) / (1 - c);
-    }
-    return [hsv[0], c * 100, f * 100];
-  };
-  convert.hcg.rgb = function(hcg) {
-    const h = hcg[0] / 360;
-    const c = hcg[1] / 100;
-    const g = hcg[2] / 100;
-    if (c === 0) {
-      return [g * 255, g * 255, g * 255];
-    }
-    const pure = [0, 0, 0];
-    const hi = h % 1 * 6;
-    const v = hi % 1;
-    const w = 1 - v;
-    let mg = 0;
-    switch (Math.floor(hi)) {
-      case 0:
-        pure[0] = 1;
-        pure[1] = v;
-        pure[2] = 0;
-        break;
-      case 1:
-        pure[0] = w;
-        pure[1] = 1;
-        pure[2] = 0;
-        break;
-      case 2:
-        pure[0] = 0;
-        pure[1] = 1;
-        pure[2] = v;
-        break;
-      case 3:
-        pure[0] = 0;
-        pure[1] = w;
-        pure[2] = 1;
-        break;
-      case 4:
-        pure[0] = v;
-        pure[1] = 0;
-        pure[2] = 1;
-        break;
-      default:
-        pure[0] = 1;
-        pure[1] = 0;
-        pure[2] = w;
-    }
-    mg = (1 - c) * g;
-    return [
-      (c * pure[0] + mg) * 255,
-      (c * pure[1] + mg) * 255,
-      (c * pure[2] + mg) * 255
-    ];
-  };
-  convert.hcg.hsv = function(hcg) {
-    const c = hcg[1] / 100;
-    const g = hcg[2] / 100;
-    const v = c + g * (1 - c);
-    let f = 0;
-    if (v > 0) {
-      f = c / v;
-    }
-    return [hcg[0], f * 100, v * 100];
-  };
-  convert.hcg.hsl = function(hcg) {
-    const c = hcg[1] / 100;
-    const g = hcg[2] / 100;
-    const l = g * (1 - c) + 0.5 * c;
-    let s = 0;
-    if (l > 0 && l < 0.5) {
-      s = c / (2 * l);
-    } else if (l >= 0.5 && l < 1) {
-      s = c / (2 * (1 - l));
-    }
-    return [hcg[0], s * 100, l * 100];
-  };
-  convert.hcg.hwb = function(hcg) {
-    const c = hcg[1] / 100;
-    const g = hcg[2] / 100;
-    const v = c + g * (1 - c);
-    return [hcg[0], (v - c) * 100, (1 - v) * 100];
-  };
-  convert.hwb.hcg = function(hwb) {
-    const w = hwb[1] / 100;
-    const b = hwb[2] / 100;
-    const v = 1 - b;
-    const c = v - w;
-    let g = 0;
-    if (c < 1) {
-      g = (v - c) / (1 - c);
-    }
-    return [hwb[0], c * 100, g * 100];
-  };
-  convert.apple.rgb = function(apple) {
-    return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
-  };
-  convert.rgb.apple = function(rgb) {
-    return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
-  };
-  convert.gray.rgb = function(args) {
-    return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
-  };
-  convert.gray.hsl = function(args) {
-    return [0, 0, args[0]];
-  };
-  convert.gray.hsv = convert.gray.hsl;
-  convert.gray.hwb = function(gray) {
-    return [0, 100, gray[0]];
-  };
-  convert.gray.cmyk = function(gray) {
-    return [0, 0, 0, gray[0]];
-  };
-  convert.gray.lab = function(gray) {
-    return [gray[0], 0, 0];
-  };
-  convert.gray.hex = function(gray) {
-    const val = Math.round(gray[0] / 100 * 255) & 255;
-    const integer = (val << 16) + (val << 8) + val;
-    const string = integer.toString(16).toUpperCase();
-    return "000000".substring(string.length) + string;
-  };
-  convert.rgb.gray = function(rgb) {
-    const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
-    return [val / 255 * 100];
-  };
-});
-
-// ../../../node_modules/ansi-styles/node_modules/color-convert/route.js
-var require_route = __commonJS((exports2, module2) => {
-  var conversions = require_conversions();
-  function buildGraph() {
-    const graph = {};
-    const models = Object.keys(conversions);
-    for (let len = models.length, i = 0; i < len; i++) {
-      graph[models[i]] = {
-        distance: -1,
-        parent: null
-      };
-    }
-    return graph;
-  }
-  function deriveBFS(fromModel) {
-    const graph = buildGraph();
-    const queue = [fromModel];
-    graph[fromModel].distance = 0;
-    while (queue.length) {
-      const current = queue.pop();
-      const adjacents = Object.keys(conversions[current]);
-      for (let len = adjacents.length, i = 0; i < len; i++) {
-        const adjacent = adjacents[i];
-        const node = graph[adjacent];
-        if (node.distance === -1) {
-          node.distance = graph[current].distance + 1;
-          node.parent = current;
-          queue.unshift(adjacent);
-        }
-      }
-    }
-    return graph;
-  }
-  function link(from, to) {
-    return function(args) {
-      return to(from(args));
-    };
-  }
-  function wrapConversion(toModel, graph) {
-    const path = [graph[toModel].parent, toModel];
-    let fn6 = conversions[graph[toModel].parent][toModel];
-    let cur = graph[toModel].parent;
-    while (graph[cur].parent) {
-      path.unshift(graph[cur].parent);
-      fn6 = link(conversions[graph[cur].parent][cur], fn6);
-      cur = graph[cur].parent;
-    }
-    fn6.conversion = path;
-    return fn6;
-  }
-  module2.exports = function(fromModel) {
-    const graph = deriveBFS(fromModel);
-    const conversion = {};
-    const models = Object.keys(graph);
-    for (let len = models.length, i = 0; i < len; i++) {
-      const toModel = models[i];
-      const node = graph[toModel];
-      if (node.parent === null) {
-        continue;
-      }
-      conversion[toModel] = wrapConversion(toModel, graph);
-    }
-    return conversion;
-  };
-});
-
-// ../../../node_modules/ansi-styles/node_modules/color-convert/index.js
-var require_color_convert = __commonJS((exports2, module2) => {
-  var conversions = require_conversions();
-  var route = require_route();
-  var convert = {};
-  var models = Object.keys(conversions);
-  function wrapRaw(fn6) {
-    const wrappedFn = function(...args) {
-      const arg0 = args[0];
-      if (arg0 === void 0 || arg0 === null) {
-        return arg0;
-      }
-      if (arg0.length > 1) {
-        args = arg0;
-      }
-      return fn6(args);
-    };
-    if ("conversion" in fn6) {
-      wrappedFn.conversion = fn6.conversion;
-    }
-    return wrappedFn;
-  }
-  function wrapRounded(fn6) {
-    const wrappedFn = function(...args) {
-      const arg0 = args[0];
-      if (arg0 === void 0 || arg0 === null) {
-        return arg0;
-      }
-      if (arg0.length > 1) {
-        args = arg0;
-      }
-      const result = fn6(args);
-      if (typeof result === "object") {
-        for (let len = result.length, i = 0; i < len; i++) {
-          result[i] = Math.round(result[i]);
-        }
-      }
-      return result;
-    };
-    if ("conversion" in fn6) {
-      wrappedFn.conversion = fn6.conversion;
-    }
-    return wrappedFn;
-  }
-  models.forEach((fromModel) => {
-    convert[fromModel] = {};
-    Object.defineProperty(convert[fromModel], "channels", {value: conversions[fromModel].channels});
-    Object.defineProperty(convert[fromModel], "labels", {value: conversions[fromModel].labels});
-    const routes = route(fromModel);
-    const routeModels = Object.keys(routes);
-    routeModels.forEach((toModel) => {
-      const fn6 = routes[toModel];
-      convert[fromModel][toModel] = wrapRounded(fn6);
-      convert[fromModel][toModel].raw = wrapRaw(fn6);
-    });
-  });
-  module2.exports = convert;
-});
-
-// ../../../node_modules/ansi-styles/index.js
-var require_ansi_styles = __commonJS((exports2, module2) => {
-  "use strict";
-  var wrapAnsi16 = (fn6, offset) => (...args) => {
-    const code = fn6(...args);
-    return `[${code + offset}m`;
-  };
-  var wrapAnsi256 = (fn6, offset) => (...args) => {
-    const code = fn6(...args);
-    return `[${38 + offset};5;${code}m`;
-  };
-  var wrapAnsi16m = (fn6, offset) => (...args) => {
-    const rgb = fn6(...args);
-    return `[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
-  };
-  var ansi2ansi = (n) => n;
-  var rgb2rgb = (r, g, b) => [r, g, b];
-  var setLazyProperty = (object, property, get3) => {
-    Object.defineProperty(object, property, {
-      get: () => {
-        const value = get3();
-        Object.defineProperty(object, property, {
-          value,
-          enumerable: true,
-          configurable: true
-        });
-        return value;
-      },
-      enumerable: true,
-      configurable: true
-    });
-  };
-  var colorConvert;
-  var makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
-    if (colorConvert === void 0) {
-      colorConvert = require_color_convert();
-    }
-    const offset = isBackground ? 10 : 0;
-    const styles = {};
-    for (const [sourceSpace, suite] of Object.entries(colorConvert)) {
-      const name = sourceSpace === "ansi16" ? "ansi" : sourceSpace;
-      if (sourceSpace === targetSpace) {
-        styles[name] = wrap(identity, offset);
-      } else if (typeof suite === "object") {
-        styles[name] = wrap(suite[targetSpace], offset);
-      }
-    }
-    return styles;
-  };
-  function assembleStyles() {
-    const codes = new Map();
-    const styles = {
-      modifier: {
-        reset: [0, 0],
-        bold: [1, 22],
-        dim: [2, 22],
-        italic: [3, 23],
-        underline: [4, 24],
-        inverse: [7, 27],
-        hidden: [8, 28],
-        strikethrough: [9, 29]
-      },
-      color: {
-        black: [30, 39],
-        red: [31, 39],
-        green: [32, 39],
-        yellow: [33, 39],
-        blue: [34, 39],
-        magenta: [35, 39],
-        cyan: [36, 39],
-        white: [37, 39],
-        blackBright: [90, 39],
-        redBright: [91, 39],
-        greenBright: [92, 39],
-        yellowBright: [93, 39],
-        blueBright: [94, 39],
-        magentaBright: [95, 39],
-        cyanBright: [96, 39],
-        whiteBright: [97, 39]
-      },
-      bgColor: {
-        bgBlack: [40, 49],
-        bgRed: [41, 49],
-        bgGreen: [42, 49],
-        bgYellow: [43, 49],
-        bgBlue: [44, 49],
-        bgMagenta: [45, 49],
-        bgCyan: [46, 49],
-        bgWhite: [47, 49],
-        bgBlackBright: [100, 49],
-        bgRedBright: [101, 49],
-        bgGreenBright: [102, 49],
-        bgYellowBright: [103, 49],
-        bgBlueBright: [104, 49],
-        bgMagentaBright: [105, 49],
-        bgCyanBright: [106, 49],
-        bgWhiteBright: [107, 49]
-      }
-    };
-    styles.color.gray = styles.color.blackBright;
-    styles.bgColor.bgGray = styles.bgColor.bgBlackBright;
-    styles.color.grey = styles.color.blackBright;
-    styles.bgColor.bgGrey = styles.bgColor.bgBlackBright;
-    for (const [groupName, group] of Object.entries(styles)) {
-      for (const [styleName, style] of Object.entries(group)) {
-        styles[styleName] = {
-          open: `[${style[0]}m`,
-          close: `[${style[1]}m`
-        };
-        group[styleName] = styles[styleName];
-        codes.set(style[0], style[1]);
-      }
-      Object.defineProperty(styles, groupName, {
-        value: group,
-        enumerable: false
-      });
-    }
-    Object.defineProperty(styles, "codes", {
-      value: codes,
-      enumerable: false
-    });
-    styles.color.close = "[39m";
-    styles.bgColor.close = "[49m";
-    setLazyProperty(styles.color, "ansi", () => makeDynamicStyles(wrapAnsi16, "ansi16", ansi2ansi, false));
-    setLazyProperty(styles.color, "ansi256", () => makeDynamicStyles(wrapAnsi256, "ansi256", ansi2ansi, false));
-    setLazyProperty(styles.color, "ansi16m", () => makeDynamicStyles(wrapAnsi16m, "rgb", rgb2rgb, false));
-    setLazyProperty(styles.bgColor, "ansi", () => makeDynamicStyles(wrapAnsi16, "ansi16", ansi2ansi, true));
-    setLazyProperty(styles.bgColor, "ansi256", () => makeDynamicStyles(wrapAnsi256, "ansi256", ansi2ansi, true));
-    setLazyProperty(styles.bgColor, "ansi16m", () => makeDynamicStyles(wrapAnsi16m, "rgb", rgb2rgb, true));
-    return styles;
-  }
-  Object.defineProperty(module2, "exports", {
-    enumerable: true,
-    get: assembleStyles
-  });
-});
-
-// ../../../node_modules/supports-color/browser.js
-var require_browser = __commonJS((exports2, module2) => {
-  "use strict";
-  module2.exports = {
-    stdout: false,
-    stderr: false
-  };
-});
-
-// ../../../node_modules/chalk/source/util.js
-var require_util = __commonJS((exports2, module2) => {
-  "use strict";
-  var stringReplaceAll = (string, substring, replacer) => {
-    let index = string.indexOf(substring);
-    if (index === -1) {
-      return string;
-    }
-    const substringLength = substring.length;
-    let endIndex = 0;
-    let returnValue = "";
-    do {
-      returnValue += string.substr(endIndex, index - endIndex) + substring + replacer;
-      endIndex = index + substringLength;
-      index = string.indexOf(substring, endIndex);
-    } while (index !== -1);
-    returnValue += string.substr(endIndex);
-    return returnValue;
-  };
-  var stringEncaseCRLFWithFirstIndex = (string, prefix, postfix, index) => {
-    let endIndex = 0;
-    let returnValue = "";
-    do {
-      const gotCR = string[index - 1] === "\r";
-      returnValue += string.substr(endIndex, (gotCR ? index - 1 : index) - endIndex) + prefix + (gotCR ? "\r\n" : "\n") + postfix;
-      endIndex = index + 1;
-      index = string.indexOf("\n", endIndex);
-    } while (index !== -1);
-    returnValue += string.substr(endIndex);
-    return returnValue;
-  };
-  module2.exports = {
-    stringReplaceAll,
-    stringEncaseCRLFWithFirstIndex
-  };
-});
-
-// ../../../node_modules/chalk/source/templates.js
-var require_templates = __commonJS((exports2, module2) => {
-  "use strict";
-  var TEMPLATE_REGEX = /(?:\\(u(?:[a-f\d]{4}|\{[a-f\d]{1,6}\})|x[a-f\d]{2}|.))|(?:\{(~)?(\w+(?:\([^)]*\))?(?:\.\w+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(\})|((?:.|[\r\n\f])+?)/gi;
-  var STYLE_REGEX = /(?:^|\.)(\w+)(?:\(([^)]*)\))?/g;
-  var STRING_REGEX = /^(['"])((?:\\.|(?!\1)[^\\])*)\1$/;
-  var ESCAPE_REGEX = /\\(u(?:[a-f\d]{4}|{[a-f\d]{1,6}})|x[a-f\d]{2}|.)|([^\\])/gi;
-  var ESCAPES = new Map([
-    ["n", "\n"],
-    ["r", "\r"],
-    ["t", "	"],
-    ["b", "\b"],
-    ["f", "\f"],
-    ["v", "\v"],
-    ["0", "\0"],
-    ["\\", "\\"],
-    ["e", ""],
-    ["a", "\x07"]
-  ]);
-  function unescape2(c) {
-    const u = c[0] === "u";
-    const bracket = c[1] === "{";
-    if (u && !bracket && c.length === 5 || c[0] === "x" && c.length === 3) {
-      return String.fromCharCode(parseInt(c.slice(1), 16));
-    }
-    if (u && bracket) {
-      return String.fromCodePoint(parseInt(c.slice(2, -1), 16));
-    }
-    return ESCAPES.get(c) || c;
-  }
-  function parseArguments(name, arguments_) {
-    const results = [];
-    const chunks = arguments_.trim().split(/\s*,\s*/g);
-    let matches;
-    for (const chunk of chunks) {
-      const number = Number(chunk);
-      if (!Number.isNaN(number)) {
-        results.push(number);
-      } else if (matches = chunk.match(STRING_REGEX)) {
-        results.push(matches[2].replace(ESCAPE_REGEX, (m, escape2, character) => escape2 ? unescape2(escape2) : character));
-      } else {
-        throw new Error(`Invalid Chalk template style argument: ${chunk} (in style '${name}')`);
-      }
-    }
-    return results;
-  }
-  function parseStyle(style) {
-    STYLE_REGEX.lastIndex = 0;
-    const results = [];
-    let matches;
-    while ((matches = STYLE_REGEX.exec(style)) !== null) {
-      const name = matches[1];
-      if (matches[2]) {
-        const args = parseArguments(name, matches[2]);
-        results.push([name].concat(args));
-      } else {
-        results.push([name]);
-      }
-    }
-    return results;
-  }
-  function buildStyle(chalk, styles) {
-    const enabled = {};
-    for (const layer of styles) {
-      for (const style of layer.styles) {
-        enabled[style[0]] = layer.inverse ? null : style.slice(1);
-      }
-    }
-    let current = chalk;
-    for (const [styleName, styles2] of Object.entries(enabled)) {
-      if (!Array.isArray(styles2)) {
-        continue;
-      }
-      if (!(styleName in current)) {
-        throw new Error(`Unknown Chalk style: ${styleName}`);
-      }
-      current = styles2.length > 0 ? current[styleName](...styles2) : current[styleName];
-    }
-    return current;
-  }
-  module2.exports = (chalk, temporary) => {
-    const styles = [];
-    const chunks = [];
-    let chunk = [];
-    temporary.replace(TEMPLATE_REGEX, (m, escapeCharacter, inverse, style, close, character) => {
-      if (escapeCharacter) {
-        chunk.push(unescape2(escapeCharacter));
-      } else if (style) {
-        const string = chunk.join("");
-        chunk = [];
-        chunks.push(styles.length === 0 ? string : buildStyle(chalk, styles)(string));
-        styles.push({inverse, styles: parseStyle(style)});
-      } else if (close) {
-        if (styles.length === 0) {
-          throw new Error("Found extraneous } in Chalk template literal");
-        }
-        chunks.push(buildStyle(chalk, styles)(chunk.join("")));
-        chunk = [];
-        styles.pop();
-      } else {
-        chunk.push(character);
-      }
-    });
-    chunks.push(chunk.join(""));
-    if (styles.length > 0) {
-      const errMessage = `Chalk template literal is missing ${styles.length} closing bracket${styles.length === 1 ? "" : "s"} (\`}\`)`;
-      throw new Error(errMessage);
-    }
-    return chunks.join("");
-  };
-});
-
-// ../../../node_modules/chalk/source/index.js
-var require_source = __commonJS((exports2, module2) => {
-  "use strict";
-  var ansiStyles = require_ansi_styles();
-  var {stdout: stdoutColor, stderr: stderrColor} = require_browser();
-  var {
-    stringReplaceAll,
-    stringEncaseCRLFWithFirstIndex
-  } = require_util();
-  var {isArray: isArray3} = Array;
-  var levelMapping = [
-    "ansi",
-    "ansi",
-    "ansi256",
-    "ansi16m"
-  ];
-  var styles = Object.create(null);
-  var applyOptions = (object, options = {}) => {
-    if (options.level && !(Number.isInteger(options.level) && options.level >= 0 && options.level <= 3)) {
-      throw new Error("The `level` option should be an integer from 0 to 3");
-    }
-    const colorLevel = stdoutColor ? stdoutColor.level : 0;
-    object.level = options.level === void 0 ? colorLevel : options.level;
-  };
-  var ChalkClass = class {
-    constructor(options) {
-      return chalkFactory(options);
-    }
-  };
-  var chalkFactory = (options) => {
-    const chalk2 = {};
-    applyOptions(chalk2, options);
-    chalk2.template = (...arguments_) => chalkTag(chalk2.template, ...arguments_);
-    Object.setPrototypeOf(chalk2, Chalk.prototype);
-    Object.setPrototypeOf(chalk2.template, chalk2);
-    chalk2.template.constructor = () => {
-      throw new Error("`chalk.constructor()` is deprecated. Use `new chalk.Instance()` instead.");
-    };
-    chalk2.template.Instance = ChalkClass;
-    return chalk2.template;
-  };
-  function Chalk(options) {
-    return chalkFactory(options);
-  }
-  for (const [styleName, style] of Object.entries(ansiStyles)) {
-    styles[styleName] = {
-      get() {
-        const builder = createBuilder(this, createStyler(style.open, style.close, this._styler), this._isEmpty);
-        Object.defineProperty(this, styleName, {value: builder});
-        return builder;
-      }
-    };
-  }
-  styles.visible = {
-    get() {
-      const builder = createBuilder(this, this._styler, true);
-      Object.defineProperty(this, "visible", {value: builder});
-      return builder;
-    }
-  };
-  var usedModels = ["rgb", "hex", "keyword", "hsl", "hsv", "hwb", "ansi", "ansi256"];
-  for (const model of usedModels) {
-    styles[model] = {
-      get() {
-        const {level} = this;
-        return function(...arguments_) {
-          const styler = createStyler(ansiStyles.color[levelMapping[level]][model](...arguments_), ansiStyles.color.close, this._styler);
-          return createBuilder(this, styler, this._isEmpty);
-        };
-      }
-    };
-  }
-  for (const model of usedModels) {
-    const bgModel = "bg" + model[0].toUpperCase() + model.slice(1);
-    styles[bgModel] = {
-      get() {
-        const {level} = this;
-        return function(...arguments_) {
-          const styler = createStyler(ansiStyles.bgColor[levelMapping[level]][model](...arguments_), ansiStyles.bgColor.close, this._styler);
-          return createBuilder(this, styler, this._isEmpty);
-        };
-      }
-    };
-  }
-  var proto = Object.defineProperties(() => {
-  }, {
-    ...styles,
-    level: {
-      enumerable: true,
-      get() {
-        return this._generator.level;
-      },
-      set(level) {
-        this._generator.level = level;
-      }
-    }
-  });
-  var createStyler = (open, close, parent) => {
-    let openAll;
-    let closeAll;
-    if (parent === void 0) {
-      openAll = open;
-      closeAll = close;
-    } else {
-      openAll = parent.openAll + open;
-      closeAll = close + parent.closeAll;
-    }
-    return {
-      open,
-      close,
-      openAll,
-      closeAll,
-      parent
-    };
-  };
-  var createBuilder = (self2, _styler, _isEmpty) => {
-    const builder = (...arguments_) => {
-      if (isArray3(arguments_[0]) && isArray3(arguments_[0].raw)) {
-        return applyStyle(builder, chalkTag(builder, ...arguments_));
-      }
-      return applyStyle(builder, arguments_.length === 1 ? "" + arguments_[0] : arguments_.join(" "));
-    };
-    Object.setPrototypeOf(builder, proto);
-    builder._generator = self2;
-    builder._styler = _styler;
-    builder._isEmpty = _isEmpty;
-    return builder;
-  };
-  var applyStyle = (self2, string) => {
-    if (self2.level <= 0 || !string) {
-      return self2._isEmpty ? "" : string;
-    }
-    let styler = self2._styler;
-    if (styler === void 0) {
-      return string;
-    }
-    const {openAll, closeAll} = styler;
-    if (string.indexOf("") !== -1) {
-      while (styler !== void 0) {
-        string = stringReplaceAll(string, styler.close, styler.open);
-        styler = styler.parent;
-      }
-    }
-    const lfIndex = string.indexOf("\n");
-    if (lfIndex !== -1) {
-      string = stringEncaseCRLFWithFirstIndex(string, closeAll, openAll, lfIndex);
-    }
-    return openAll + string + closeAll;
-  };
-  var template;
-  var chalkTag = (chalk2, ...strings) => {
-    const [firstString] = strings;
-    if (!isArray3(firstString) || !isArray3(firstString.raw)) {
-      return strings.join(" ");
-    }
-    const arguments_ = strings.slice(1);
-    const parts = [firstString.raw[0]];
-    for (let i = 1; i < firstString.length; i++) {
-      parts.push(String(arguments_[i - 1]).replace(/[{}\\]/g, "\\$&"), String(firstString.raw[i]));
-    }
-    if (template === void 0) {
-      template = require_templates();
-    }
-    return template(chalk2, parts.join(""));
-  };
-  Object.defineProperties(Chalk.prototype, styles);
-  var chalk = Chalk();
-  chalk.supportsColor = stdoutColor;
-  chalk.stderr = Chalk({level: stderrColor ? stderrColor.level : 0});
-  chalk.stderr.supportsColor = stderrColor;
-  module2.exports = chalk;
+  var hljs = require_core2();
+  hljs.registerLanguage("1c", require_c());
+  hljs.registerLanguage("abnf", require_abnf());
+  hljs.registerLanguage("accesslog", require_accesslog());
+  hljs.registerLanguage("actionscript", require_actionscript());
+  hljs.registerLanguage("ada", require_ada());
+  hljs.registerLanguage("angelscript", require_angelscript());
+  hljs.registerLanguage("apache", require_apache());
+  hljs.registerLanguage("applescript", require_applescript());
+  hljs.registerLanguage("arcade", require_arcade());
+  hljs.registerLanguage("arduino", require_arduino());
+  hljs.registerLanguage("armasm", require_armasm());
+  hljs.registerLanguage("xml", require_xml());
+  hljs.registerLanguage("asciidoc", require_asciidoc());
+  hljs.registerLanguage("aspectj", require_aspectj());
+  hljs.registerLanguage("autohotkey", require_autohotkey());
+  hljs.registerLanguage("autoit", require_autoit());
+  hljs.registerLanguage("avrasm", require_avrasm());
+  hljs.registerLanguage("awk", require_awk());
+  hljs.registerLanguage("axapta", require_axapta());
+  hljs.registerLanguage("bash", require_bash());
+  hljs.registerLanguage("basic", require_basic());
+  hljs.registerLanguage("bnf", require_bnf());
+  hljs.registerLanguage("brainfuck", require_brainfuck());
+  hljs.registerLanguage("c-like", require_c_like());
+  hljs.registerLanguage("c", require_c2());
+  hljs.registerLanguage("cal", require_cal());
+  hljs.registerLanguage("capnproto", require_capnproto());
+  hljs.registerLanguage("ceylon", require_ceylon());
+  hljs.registerLanguage("clean", require_clean());
+  hljs.registerLanguage("clojure", require_clojure());
+  hljs.registerLanguage("clojure-repl", require_clojure_repl());
+  hljs.registerLanguage("cmake", require_cmake());
+  hljs.registerLanguage("coffeescript", require_coffeescript());
+  hljs.registerLanguage("coq", require_coq());
+  hljs.registerLanguage("cos", require_cos());
+  hljs.registerLanguage("cpp", require_cpp());
+  hljs.registerLanguage("crmsh", require_crmsh());
+  hljs.registerLanguage("crystal", require_crystal());
+  hljs.registerLanguage("csharp", require_csharp());
+  hljs.registerLanguage("csp", require_csp());
+  hljs.registerLanguage("css", require_css());
+  hljs.registerLanguage("d", require_d());
+  hljs.registerLanguage("markdown", require_markdown());
+  hljs.registerLanguage("dart", require_dart());
+  hljs.registerLanguage("delphi", require_delphi());
+  hljs.registerLanguage("diff", require_diff());
+  hljs.registerLanguage("django", require_django());
+  hljs.registerLanguage("dns", require_dns());
+  hljs.registerLanguage("dockerfile", require_dockerfile());
+  hljs.registerLanguage("dos", require_dos());
+  hljs.registerLanguage("dsconfig", require_dsconfig());
+  hljs.registerLanguage("dts", require_dts());
+  hljs.registerLanguage("dust", require_dust());
+  hljs.registerLanguage("ebnf", require_ebnf());
+  hljs.registerLanguage("elixir", require_elixir());
+  hljs.registerLanguage("elm", require_elm());
+  hljs.registerLanguage("ruby", require_ruby());
+  hljs.registerLanguage("erb", require_erb());
+  hljs.registerLanguage("erlang-repl", require_erlang_repl());
+  hljs.registerLanguage("erlang", require_erlang());
+  hljs.registerLanguage("excel", require_excel());
+  hljs.registerLanguage("fix", require_fix());
+  hljs.registerLanguage("flix", require_flix());
+  hljs.registerLanguage("fortran", require_fortran());
+  hljs.registerLanguage("fsharp", require_fsharp());
+  hljs.registerLanguage("gams", require_gams());
+  hljs.registerLanguage("gauss", require_gauss());
+  hljs.registerLanguage("gcode", require_gcode());
+  hljs.registerLanguage("gherkin", require_gherkin());
+  hljs.registerLanguage("glsl", require_glsl());
+  hljs.registerLanguage("gml", require_gml());
+  hljs.registerLanguage("go", require_go());
+  hljs.registerLanguage("golo", require_golo());
+  hljs.registerLanguage("gradle", require_gradle());
+  hljs.registerLanguage("groovy", require_groovy());
+  hljs.registerLanguage("haml", require_haml());
+  hljs.registerLanguage("handlebars", require_handlebars());
+  hljs.registerLanguage("haskell", require_haskell());
+  hljs.registerLanguage("haxe", require_haxe());
+  hljs.registerLanguage("hsp", require_hsp());
+  hljs.registerLanguage("htmlbars", require_htmlbars());
+  hljs.registerLanguage("http", require_http());
+  hljs.registerLanguage("hy", require_hy());
+  hljs.registerLanguage("inform7", require_inform7());
+  hljs.registerLanguage("ini", require_ini());
+  hljs.registerLanguage("irpf90", require_irpf90());
+  hljs.registerLanguage("isbl", require_isbl());
+  hljs.registerLanguage("java", require_java());
+  hljs.registerLanguage("javascript", require_javascript());
+  hljs.registerLanguage("jboss-cli", require_jboss_cli());
+  hljs.registerLanguage("json", require_json());
+  hljs.registerLanguage("julia", require_julia());
+  hljs.registerLanguage("julia-repl", require_julia_repl());
+  hljs.registerLanguage("kotlin", require_kotlin());
+  hljs.registerLanguage("lasso", require_lasso());
+  hljs.registerLanguage("latex", require_latex());
+  hljs.registerLanguage("ldif", require_ldif());
+  hljs.registerLanguage("leaf", require_leaf());
+  hljs.registerLanguage("less", require_less());
+  hljs.registerLanguage("lisp", require_lisp());
+  hljs.registerLanguage("livecodeserver", require_livecodeserver());
+  hljs.registerLanguage("livescript", require_livescript());
+  hljs.registerLanguage("llvm", require_llvm());
+  hljs.registerLanguage("lsl", require_lsl());
+  hljs.registerLanguage("lua", require_lua());
+  hljs.registerLanguage("makefile", require_makefile());
+  hljs.registerLanguage("mathematica", require_mathematica());
+  hljs.registerLanguage("matlab", require_matlab());
+  hljs.registerLanguage("maxima", require_maxima());
+  hljs.registerLanguage("mel", require_mel());
+  hljs.registerLanguage("mercury", require_mercury());
+  hljs.registerLanguage("mipsasm", require_mipsasm());
+  hljs.registerLanguage("mizar", require_mizar());
+  hljs.registerLanguage("perl", require_perl());
+  hljs.registerLanguage("mojolicious", require_mojolicious());
+  hljs.registerLanguage("monkey", require_monkey());
+  hljs.registerLanguage("moonscript", require_moonscript());
+  hljs.registerLanguage("n1ql", require_n1ql());
+  hljs.registerLanguage("nginx", require_nginx());
+  hljs.registerLanguage("nim", require_nim());
+  hljs.registerLanguage("nix", require_nix());
+  hljs.registerLanguage("node-repl", require_node_repl());
+  hljs.registerLanguage("nsis", require_nsis());
+  hljs.registerLanguage("objectivec", require_objectivec());
+  hljs.registerLanguage("ocaml", require_ocaml());
+  hljs.registerLanguage("openscad", require_openscad());
+  hljs.registerLanguage("oxygene", require_oxygene());
+  hljs.registerLanguage("parser3", require_parser3());
+  hljs.registerLanguage("pf", require_pf());
+  hljs.registerLanguage("pgsql", require_pgsql());
+  hljs.registerLanguage("php", require_php());
+  hljs.registerLanguage("php-template", require_php_template());
+  hljs.registerLanguage("plaintext", require_plaintext());
+  hljs.registerLanguage("pony", require_pony());
+  hljs.registerLanguage("powershell", require_powershell());
+  hljs.registerLanguage("processing", require_processing());
+  hljs.registerLanguage("profile", require_profile());
+  hljs.registerLanguage("prolog", require_prolog());
+  hljs.registerLanguage("properties", require_properties());
+  hljs.registerLanguage("protobuf", require_protobuf());
+  hljs.registerLanguage("puppet", require_puppet());
+  hljs.registerLanguage("purebasic", require_purebasic());
+  hljs.registerLanguage("python", require_python());
+  hljs.registerLanguage("python-repl", require_python_repl());
+  hljs.registerLanguage("q", require_q());
+  hljs.registerLanguage("qml", require_qml());
+  hljs.registerLanguage("r", require_r());
+  hljs.registerLanguage("reasonml", require_reasonml());
+  hljs.registerLanguage("rib", require_rib());
+  hljs.registerLanguage("roboconf", require_roboconf());
+  hljs.registerLanguage("routeros", require_routeros());
+  hljs.registerLanguage("rsl", require_rsl());
+  hljs.registerLanguage("ruleslanguage", require_ruleslanguage());
+  hljs.registerLanguage("rust", require_rust());
+  hljs.registerLanguage("sas", require_sas());
+  hljs.registerLanguage("scala", require_scala());
+  hljs.registerLanguage("scheme", require_scheme());
+  hljs.registerLanguage("scilab", require_scilab());
+  hljs.registerLanguage("scss", require_scss());
+  hljs.registerLanguage("shell", require_shell());
+  hljs.registerLanguage("smali", require_smali());
+  hljs.registerLanguage("smalltalk", require_smalltalk());
+  hljs.registerLanguage("sml", require_sml());
+  hljs.registerLanguage("sqf", require_sqf());
+  hljs.registerLanguage("sql_more", require_sql_more());
+  hljs.registerLanguage("sql", require_sql());
+  hljs.registerLanguage("stan", require_stan());
+  hljs.registerLanguage("stata", require_stata());
+  hljs.registerLanguage("step21", require_step21());
+  hljs.registerLanguage("stylus", require_stylus());
+  hljs.registerLanguage("subunit", require_subunit());
+  hljs.registerLanguage("swift", require_swift());
+  hljs.registerLanguage("taggerscript", require_taggerscript());
+  hljs.registerLanguage("yaml", require_yaml());
+  hljs.registerLanguage("tap", require_tap());
+  hljs.registerLanguage("tcl", require_tcl());
+  hljs.registerLanguage("thrift", require_thrift());
+  hljs.registerLanguage("tp", require_tp());
+  hljs.registerLanguage("twig", require_twig());
+  hljs.registerLanguage("typescript", require_typescript());
+  hljs.registerLanguage("vala", require_vala());
+  hljs.registerLanguage("vbnet", require_vbnet());
+  hljs.registerLanguage("vbscript", require_vbscript());
+  hljs.registerLanguage("vbscript-html", require_vbscript_html());
+  hljs.registerLanguage("verilog", require_verilog());
+  hljs.registerLanguage("vhdl", require_vhdl());
+  hljs.registerLanguage("vim", require_vim());
+  hljs.registerLanguage("x86asm", require_x86asm());
+  hljs.registerLanguage("xl", require_xl());
+  hljs.registerLanguage("xquery", require_xquery());
+  hljs.registerLanguage("zephir", require_zephir());
+  module2.exports = hljs;
 });
 
 // ../../../node_modules/cli-highlight/node_modules/parse5/lib/common/unicode.js
@@ -42053,22 +42951,22 @@ var require_serializer = __commonJS((exports2, module2) => {
     _serializeAttributes(node) {
       const attrs = this.treeAdapter.getAttrList(node);
       for (let i = 0, attrsLength = attrs.length; i < attrsLength; i++) {
-        const attr = attrs[i];
-        const value = Serializer.escapeString(attr.value, true);
+        const attr2 = attrs[i];
+        const value = Serializer.escapeString(attr2.value, true);
         this.html += " ";
-        if (!attr.namespace) {
-          this.html += attr.name;
-        } else if (attr.namespace === NS.XML) {
-          this.html += "xml:" + attr.name;
-        } else if (attr.namespace === NS.XMLNS) {
-          if (attr.name !== "xmlns") {
+        if (!attr2.namespace) {
+          this.html += attr2.name;
+        } else if (attr2.namespace === NS.XML) {
+          this.html += "xml:" + attr2.name;
+        } else if (attr2.namespace === NS.XMLNS) {
+          if (attr2.name !== "xmlns") {
             this.html += "xmlns:";
           }
-          this.html += attr.name;
-        } else if (attr.namespace === NS.XLINK) {
-          this.html += "xlink:" + attr.name;
+          this.html += attr2.name;
+        } else if (attr2.namespace === NS.XLINK) {
+          this.html += "xlink:" + attr2.name;
         } else {
-          this.html += attr.prefix + ":" + attr.name;
+          this.html += attr2.prefix + ":" + attr2.name;
         }
         this.html += '="' + value + '"';
       }
@@ -42924,7 +43822,7 @@ var require_dist = __commonJS((exports2) => {
   };
   Object.defineProperty(exports2, "__esModule", {value: true});
   exports2.supportsLanguage = exports2.listLanguages = exports2.highlight = void 0;
-  var hljs2 = __importStar(require_lib());
+  var hljs = __importStar(require_lib());
   var parse5 = __importStar(require_lib2());
   var parse5_htmlparser2_tree_adapter_1 = __importDefault(require_lib3());
   var theme_1 = require_theme();
@@ -42973,19 +43871,19 @@ var require_dist = __commonJS((exports2) => {
     }
     var html;
     if (options.language) {
-      html = hljs2.highlight(code, {language: options.language, ignoreIllegals: options.ignoreIllegals}).value;
+      html = hljs.highlight(code, {language: options.language, ignoreIllegals: options.ignoreIllegals}).value;
     } else {
-      html = hljs2.highlightAuto(code, options.languageSubset).value;
+      html = hljs.highlightAuto(code, options.languageSubset).value;
     }
     return colorize(html, options.theme);
   }
   exports2.highlight = highlight;
   function listLanguages() {
-    return hljs2.listLanguages();
+    return hljs.listLanguages();
   }
   exports2.listLanguages = listLanguages;
   function supportsLanguage(name) {
-    return !!hljs2.getLanguage(name);
+    return !!hljs.getLanguage(name);
   }
   exports2.supportsLanguage = supportsLanguage;
   exports2.default = highlight;
@@ -43088,6 +43986,11 @@ var require_is_glob = __commonJS((exports2, module2) => {
 // ../../../node_modules/svelte/internal/index.mjs
 function noop() {
 }
+function assign(tar, src) {
+  for (const k in src)
+    tar[k] = src[k];
+  return tar;
+}
 function add_location(element2, file2, line, column, char) {
   element2.__svelte_meta = {
     loc: {file: file2, line, column, char}
@@ -43111,6 +44014,13 @@ function safe_not_equal(a, b) {
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
 }
+function exclude_internal_props(props) {
+  const result = {};
+  for (const k in props)
+    if (k[0] !== "$")
+      result[k] = props[k];
+  return result;
+}
 var tasks = new Set();
 function append(target, node) {
   target.appendChild(node);
@@ -43123,6 +44033,12 @@ function detach(node) {
 }
 function element(name) {
   return document.createElement(name);
+}
+function attr(node, attribute, value) {
+  if (value == null)
+    node.removeAttribute(attribute);
+  else if (node.getAttribute(attribute) !== value)
+    node.setAttribute(attribute, value);
 }
 function children(element2) {
   return Array.from(element2.childNodes);
@@ -43149,8 +44065,26 @@ function get_current_component() {
     throw new Error("Function called outside component initialization");
   return current_component;
 }
+function beforeUpdate(fn6) {
+  get_current_component().$$.before_update.push(fn6);
+}
 function onMount(fn6) {
   get_current_component().$$.on_mount.push(fn6);
+}
+function afterUpdate(fn6) {
+  get_current_component().$$.after_update.push(fn6);
+}
+function onDestroy(fn6) {
+  get_current_component().$$.on_destroy.push(fn6);
+}
+function setContext(key, context) {
+  get_current_component().$$.context.set(key, context);
+}
+function getContext(key) {
+  return get_current_component().$$.context.get(key);
+}
+function hasContext(key) {
+  return get_current_component().$$.context.has(key);
 }
 var dirty_components = [];
 var binding_callbacks = [];
@@ -43163,6 +44097,10 @@ function schedule_update() {
     update_scheduled = true;
     resolved_promise.then(flush);
   }
+}
+function tick() {
+  schedule_update();
+  return resolved_promise;
 }
 function add_render_callback(fn6) {
   render_callbacks.push(fn6);
@@ -43340,8 +44278,8 @@ if (typeof HTMLElement === "function") {
         this.appendChild(this.$$.slotted[key]);
       }
     }
-    attributeChangedCallback(attr, _oldValue, newValue) {
-      this[attr] = newValue;
+    attributeChangedCallback(attr2, _oldValue, newValue) {
+      this[attr2] = newValue;
     }
     disconnectedCallback() {
       run_all(this.$$.on_disconnect);
@@ -43383,6 +44321,13 @@ function detach_dev(node) {
   dispatch_dev("SvelteDOMRemove", {node});
   detach(node);
 }
+function attr_dev(node, attribute, value) {
+  attr(node, attribute, value);
+  if (value == null)
+    dispatch_dev("SvelteDOMRemoveAttribute", {node, attribute});
+  else
+    dispatch_dev("SvelteDOMSetAttribute", {node, attribute, value});
+}
 function validate_slots(name, slot, keys) {
   for (const slot_key of Object.keys(slot)) {
     if (!~keys.indexOf(slot_key)) {
@@ -43392,8 +44337,469 @@ function validate_slots(name, slot, keys) {
 }
 
 // dist/js/index.js
-var import_highlight = __toModule(require_lib());
-var import_javascript = __toModule(require_javascript());
+var import_prismjs = __toModule(require_prism());
+
+// ../../../node_modules/prismjs/components/prism-javascript.js
+Prism.languages.javascript = Prism.languages.extend("clike", {
+  "class-name": [
+    Prism.languages.clike["class-name"],
+    {
+      pattern: /(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:prototype|constructor))/,
+      lookbehind: true
+    }
+  ],
+  keyword: [
+    {
+      pattern: /((?:^|})\s*)(?:catch|finally)\b/,
+      lookbehind: true
+    },
+    {
+      pattern: /(^|[^.]|\.\.\.\s*)\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|(?:get|set)(?=\s*[\[$\w\xA0-\uFFFF])|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+      lookbehind: true
+    }
+  ],
+  function: /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+  number: /\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,
+  operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/
+});
+Prism.languages.javascript["class-name"][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/;
+Prism.languages.insertBefore("javascript", "keyword", {
+  regex: {
+    pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,
+    lookbehind: true,
+    greedy: true,
+    inside: {
+      "regex-source": {
+        pattern: /^(\/)[\s\S]+(?=\/[a-z]*$)/,
+        lookbehind: true,
+        alias: "language-regex",
+        inside: Prism.languages.regex
+      },
+      "regex-flags": /[a-z]+$/,
+      "regex-delimiter": /^\/|\/$/
+    }
+  },
+  "function-variable": {
+    pattern: /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)\s*=>))/,
+    alias: "function"
+  },
+  parameter: [
+    {
+      pattern: /(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,
+      lookbehind: true,
+      inside: Prism.languages.javascript
+    },
+    {
+      pattern: /(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,
+      inside: Prism.languages.javascript
+    },
+    {
+      pattern: /(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,
+      lookbehind: true,
+      inside: Prism.languages.javascript
+    },
+    {
+      pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,
+      lookbehind: true,
+      inside: Prism.languages.javascript
+    }
+  ],
+  constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/
+});
+Prism.languages.insertBefore("javascript", "string", {
+  "template-string": {
+    pattern: /`(?:\\[\s\S]|\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}|(?!\${)[^\\`])*`/,
+    greedy: true,
+    inside: {
+      "template-punctuation": {
+        pattern: /^`|`$/,
+        alias: "string"
+      },
+      interpolation: {
+        pattern: /((?:^|[^\\])(?:\\{2})*)\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}/,
+        lookbehind: true,
+        inside: {
+          "interpolation-punctuation": {
+            pattern: /^\${|}$/,
+            alias: "punctuation"
+          },
+          rest: Prism.languages.javascript
+        }
+      },
+      string: /[\s\S]+/
+    }
+  }
+});
+if (Prism.languages.markup) {
+  Prism.languages.markup.tag.addInlined("script", "javascript");
+}
+Prism.languages.js = Prism.languages.javascript;
+
+// ../../../node_modules/prismjs/components/prism-css.js
+(function(Prism2) {
+  var string = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;
+  Prism2.languages.css = {
+    comment: /\/\*[\s\S]*?\*\//,
+    atrule: {
+      pattern: /@[\w-](?:[^;{\s]|\s+(?![\s{]))*(?:;|(?=\s*\{))/,
+      inside: {
+        rule: /^@[\w-]+/,
+        "selector-function-argument": {
+          pattern: /(\bselector\s*\(\s*(?![\s)]))(?:[^()\s]|\s+(?![\s)])|\((?:[^()]|\([^()]*\))*\))+(?=\s*\))/,
+          lookbehind: true,
+          alias: "selector"
+        },
+        keyword: {
+          pattern: /(^|[^\w-])(?:and|not|only|or)(?![\w-])/,
+          lookbehind: true
+        }
+      }
+    },
+    url: {
+      pattern: RegExp("\\burl\\((?:" + string.source + "|" + /(?:[^\\\r\n()"']|\\[\s\S])*/.source + ")\\)", "i"),
+      greedy: true,
+      inside: {
+        function: /^url/i,
+        punctuation: /^\(|\)$/,
+        string: {
+          pattern: RegExp("^" + string.source + "$"),
+          alias: "url"
+        }
+      }
+    },
+    selector: RegExp(`[^{}\\s](?:[^{};"'\\s]|\\s+(?![\\s{])|` + string.source + ")*(?=\\s*\\{)"),
+    string: {
+      pattern: string,
+      greedy: true
+    },
+    property: /(?!\s)[-_a-z\xA0-\uFFFF](?:(?!\s)[-\w\xA0-\uFFFF])*(?=\s*:)/i,
+    important: /!important\b/i,
+    function: /[-a-z0-9]+(?=\()/i,
+    punctuation: /[(){};:,]/
+  };
+  Prism2.languages.css["atrule"].inside.rest = Prism2.languages.css;
+  var markup = Prism2.languages.markup;
+  if (markup) {
+    markup.tag.addInlined("style", "css");
+    Prism2.languages.insertBefore("inside", "attr-value", {
+      "style-attr": {
+        pattern: /(^|["'\s])style\s*=\s*(?:"[^"]*"|'[^']*')/i,
+        lookbehind: true,
+        inside: {
+          "attr-value": {
+            pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,
+            inside: {
+              style: {
+                pattern: /(["'])[\s\S]+(?=["']$)/,
+                lookbehind: true,
+                alias: "language-css",
+                inside: Prism2.languages.css
+              },
+              punctuation: [
+                {
+                  pattern: /^=/,
+                  alias: "attr-equals"
+                },
+                /"|'/
+              ]
+            }
+          },
+          "attr-name": /^style/i
+        }
+      }
+    }, markup.tag);
+  }
+})(Prism);
+
+// ../../../node_modules/prismjs/components/prism-markup.js
+Prism.languages.markup = {
+  comment: /<!--[\s\S]*?-->/,
+  prolog: /<\?[\s\S]+?\?>/,
+  doctype: {
+    pattern: /<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:[^<"'\]]|"[^"]*"|'[^']*'|<(?!!--)|<!--(?:[^-]|-(?!->))*-->)*\]\s*)?>/i,
+    greedy: true,
+    inside: {
+      "internal-subset": {
+        pattern: /(\[)[\s\S]+(?=\]>$)/,
+        lookbehind: true,
+        greedy: true,
+        inside: null
+      },
+      string: {
+        pattern: /"[^"]*"|'[^']*'/,
+        greedy: true
+      },
+      punctuation: /^<!|>$|[[\]]/,
+      "doctype-tag": /^DOCTYPE/,
+      name: /[^\s<>'"]+/
+    }
+  },
+  cdata: /<!\[CDATA\[[\s\S]*?]]>/i,
+  tag: {
+    pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/,
+    greedy: true,
+    inside: {
+      tag: {
+        pattern: /^<\/?[^\s>\/]+/,
+        inside: {
+          punctuation: /^<\/?/,
+          namespace: /^[^\s>\/:]+:/
+        }
+      },
+      "attr-value": {
+        pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,
+        inside: {
+          punctuation: [
+            {
+              pattern: /^=/,
+              alias: "attr-equals"
+            },
+            /"|'/
+          ]
+        }
+      },
+      punctuation: /\/?>/,
+      "attr-name": {
+        pattern: /[^\s>\/]+/,
+        inside: {
+          namespace: /^[^\s>\/:]+:/
+        }
+      }
+    }
+  },
+  entity: [
+    {
+      pattern: /&[\da-z]{1,8};/i,
+      alias: "named-entity"
+    },
+    /&#x?[\da-f]{1,8};/i
+  ]
+};
+Prism.languages.markup["tag"].inside["attr-value"].inside["entity"] = Prism.languages.markup["entity"];
+Prism.languages.markup["doctype"].inside["internal-subset"].inside = Prism.languages.markup;
+Prism.hooks.add("wrap", function(env) {
+  if (env.type === "entity") {
+    env.attributes["title"] = env.content.replace(/&amp;/, "&");
+  }
+});
+Object.defineProperty(Prism.languages.markup.tag, "addInlined", {
+  value: function addInlined(tagName, lang) {
+    var includedCdataInside = {};
+    includedCdataInside["language-" + lang] = {
+      pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
+      lookbehind: true,
+      inside: Prism.languages[lang]
+    };
+    includedCdataInside["cdata"] = /^<!\[CDATA\[|\]\]>$/i;
+    var inside = {
+      "included-cdata": {
+        pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
+        inside: includedCdataInside
+      }
+    };
+    inside["language-" + lang] = {
+      pattern: /[\s\S]+/,
+      inside: Prism.languages[lang]
+    };
+    var def = {};
+    def[tagName] = {
+      pattern: RegExp(/(<__[^>]*>)(?:<!\[CDATA\[(?:[^\]]|\](?!\]>))*\]\]>|(?!<!\[CDATA\[)[\s\S])*?(?=<\/__>)/.source.replace(/__/g, function() {
+        return tagName;
+      }), "i"),
+      lookbehind: true,
+      greedy: true,
+      inside
+    };
+    Prism.languages.insertBefore("markup", "cdata", def);
+  }
+});
+Prism.languages.html = Prism.languages.markup;
+Prism.languages.mathml = Prism.languages.markup;
+Prism.languages.svg = Prism.languages.markup;
+Prism.languages.xml = Prism.languages.extend("markup", {});
+Prism.languages.ssml = Prism.languages.xml;
+Prism.languages.atom = Prism.languages.xml;
+Prism.languages.rss = Prism.languages.xml;
+
+// ../../../node_modules/prismjs/components/prism-bash.js
+(function(Prism2) {
+  var envVars = "\\b(?:BASH|BASHOPTS|BASH_ALIASES|BASH_ARGC|BASH_ARGV|BASH_CMDS|BASH_COMPLETION_COMPAT_DIR|BASH_LINENO|BASH_REMATCH|BASH_SOURCE|BASH_VERSINFO|BASH_VERSION|COLORTERM|COLUMNS|COMP_WORDBREAKS|DBUS_SESSION_BUS_ADDRESS|DEFAULTS_PATH|DESKTOP_SESSION|DIRSTACK|DISPLAY|EUID|GDMSESSION|GDM_LANG|GNOME_KEYRING_CONTROL|GNOME_KEYRING_PID|GPG_AGENT_INFO|GROUPS|HISTCONTROL|HISTFILE|HISTFILESIZE|HISTSIZE|HOME|HOSTNAME|HOSTTYPE|IFS|INSTANCE|JOB|LANG|LANGUAGE|LC_ADDRESS|LC_ALL|LC_IDENTIFICATION|LC_MEASUREMENT|LC_MONETARY|LC_NAME|LC_NUMERIC|LC_PAPER|LC_TELEPHONE|LC_TIME|LESSCLOSE|LESSOPEN|LINES|LOGNAME|LS_COLORS|MACHTYPE|MAILCHECK|MANDATORY_PATH|NO_AT_BRIDGE|OLDPWD|OPTERR|OPTIND|ORBIT_SOCKETDIR|OSTYPE|PAPERSIZE|PATH|PIPESTATUS|PPID|PS1|PS2|PS3|PS4|PWD|RANDOM|REPLY|SECONDS|SELINUX_INIT|SESSION|SESSIONTYPE|SESSION_MANAGER|SHELL|SHELLOPTS|SHLVL|SSH_AUTH_SOCK|TERM|UID|UPSTART_EVENTS|UPSTART_INSTANCE|UPSTART_JOB|UPSTART_SESSION|USER|WINDOWID|XAUTHORITY|XDG_CONFIG_DIRS|XDG_CURRENT_DESKTOP|XDG_DATA_DIRS|XDG_GREETER_DATA_DIR|XDG_MENU_PREFIX|XDG_RUNTIME_DIR|XDG_SEAT|XDG_SEAT_PATH|XDG_SESSION_DESKTOP|XDG_SESSION_ID|XDG_SESSION_PATH|XDG_SESSION_TYPE|XDG_VTNR|XMODIFIERS)\\b";
+  var commandAfterHeredoc = {
+    pattern: /(^(["']?)\w+\2)[ \t]+\S.*/,
+    lookbehind: true,
+    alias: "punctuation",
+    inside: null
+  };
+  var insideString = {
+    bash: commandAfterHeredoc,
+    environment: {
+      pattern: RegExp("\\$" + envVars),
+      alias: "constant"
+    },
+    variable: [
+      {
+        pattern: /\$?\(\([\s\S]+?\)\)/,
+        greedy: true,
+        inside: {
+          variable: [
+            {
+              pattern: /(^\$\(\([\s\S]+)\)\)/,
+              lookbehind: true
+            },
+            /^\$\(\(/
+          ],
+          number: /\b0x[\dA-Fa-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:[Ee]-?\d+)?/,
+          operator: /--?|-=|\+\+?|\+=|!=?|~|\*\*?|\*=|\/=?|%=?|<<=?|>>=?|<=?|>=?|==?|&&?|&=|\^=?|\|\|?|\|=|\?|:/,
+          punctuation: /\(\(?|\)\)?|,|;/
+        }
+      },
+      {
+        pattern: /\$\((?:\([^)]+\)|[^()])+\)|`[^`]+`/,
+        greedy: true,
+        inside: {
+          variable: /^\$\(|^`|\)$|`$/
+        }
+      },
+      {
+        pattern: /\$\{[^}]+\}/,
+        greedy: true,
+        inside: {
+          operator: /:[-=?+]?|[!\/]|##?|%%?|\^\^?|,,?/,
+          punctuation: /[\[\]]/,
+          environment: {
+            pattern: RegExp("(\\{)" + envVars),
+            lookbehind: true,
+            alias: "constant"
+          }
+        }
+      },
+      /\$(?:\w+|[#?*!@$])/
+    ],
+    entity: /\\(?:[abceEfnrtv\\"]|O?[0-7]{1,3}|x[0-9a-fA-F]{1,2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/
+  };
+  Prism2.languages.bash = {
+    shebang: {
+      pattern: /^#!\s*\/.*/,
+      alias: "important"
+    },
+    comment: {
+      pattern: /(^|[^"{\\$])#.*/,
+      lookbehind: true
+    },
+    "function-name": [
+      {
+        pattern: /(\bfunction\s+)\w+(?=(?:\s*\(?:\s*\))?\s*\{)/,
+        lookbehind: true,
+        alias: "function"
+      },
+      {
+        pattern: /\b\w+(?=\s*\(\s*\)\s*\{)/,
+        alias: "function"
+      }
+    ],
+    "for-or-select": {
+      pattern: /(\b(?:for|select)\s+)\w+(?=\s+in\s)/,
+      alias: "variable",
+      lookbehind: true
+    },
+    "assign-left": {
+      pattern: /(^|[\s;|&]|[<>]\()\w+(?=\+?=)/,
+      inside: {
+        environment: {
+          pattern: RegExp("(^|[\\s;|&]|[<>]\\()" + envVars),
+          lookbehind: true,
+          alias: "constant"
+        }
+      },
+      alias: "variable",
+      lookbehind: true
+    },
+    string: [
+      {
+        pattern: /((?:^|[^<])<<-?\s*)(\w+?)\s[\s\S]*?(?:\r?\n|\r)\2/,
+        lookbehind: true,
+        greedy: true,
+        inside: insideString
+      },
+      {
+        pattern: /((?:^|[^<])<<-?\s*)(["'])(\w+)\2\s[\s\S]*?(?:\r?\n|\r)\3/,
+        lookbehind: true,
+        greedy: true,
+        inside: {
+          bash: commandAfterHeredoc
+        }
+      },
+      {
+        pattern: /(^|[^\\](?:\\\\)*)(["'])(?:\\[\s\S]|\$\([^)]+\)|\$(?!\()|`[^`]+`|(?!\2)[^\\`$])*\2/,
+        lookbehind: true,
+        greedy: true,
+        inside: insideString
+      }
+    ],
+    environment: {
+      pattern: RegExp("\\$?" + envVars),
+      alias: "constant"
+    },
+    variable: insideString.variable,
+    function: {
+      pattern: /(^|[\s;|&]|[<>]\()(?:add|apropos|apt|aptitude|apt-cache|apt-get|aspell|automysqlbackup|awk|basename|bash|bc|bconsole|bg|bzip2|cal|cat|cfdisk|chgrp|chkconfig|chmod|chown|chroot|cksum|clear|cmp|column|comm|composer|cp|cron|crontab|csplit|curl|cut|date|dc|dd|ddrescue|debootstrap|df|diff|diff3|dig|dir|dircolors|dirname|dirs|dmesg|du|egrep|eject|env|ethtool|expand|expect|expr|fdformat|fdisk|fg|fgrep|file|find|fmt|fold|format|free|fsck|ftp|fuser|gawk|git|gparted|grep|groupadd|groupdel|groupmod|groups|grub-mkconfig|gzip|halt|head|hg|history|host|hostname|htop|iconv|id|ifconfig|ifdown|ifup|import|install|ip|jobs|join|kill|killall|less|link|ln|locate|logname|logrotate|look|lpc|lpr|lprint|lprintd|lprintq|lprm|ls|lsof|lynx|make|man|mc|mdadm|mkconfig|mkdir|mke2fs|mkfifo|mkfs|mkisofs|mknod|mkswap|mmv|more|most|mount|mtools|mtr|mutt|mv|nano|nc|netstat|nice|nl|nohup|notify-send|npm|nslookup|op|open|parted|passwd|paste|pathchk|ping|pkill|pnpm|popd|pr|printcap|printenv|ps|pushd|pv|quota|quotacheck|quotactl|ram|rar|rcp|reboot|remsync|rename|renice|rev|rm|rmdir|rpm|rsync|scp|screen|sdiff|sed|sendmail|seq|service|sftp|sh|shellcheck|shuf|shutdown|sleep|slocate|sort|split|ssh|stat|strace|su|sudo|sum|suspend|swapon|sync|tac|tail|tar|tee|time|timeout|top|touch|tr|traceroute|tsort|tty|umount|uname|unexpand|uniq|units|unrar|unshar|unzip|update-grub|uptime|useradd|userdel|usermod|users|uudecode|uuencode|v|vdir|vi|vim|virsh|vmstat|wait|watch|wc|wget|whereis|which|who|whoami|write|xargs|xdg-open|yarn|yes|zenity|zip|zsh|zypper)(?=$|[)\s;|&])/,
+      lookbehind: true
+    },
+    keyword: {
+      pattern: /(^|[\s;|&]|[<>]\()(?:if|then|else|elif|fi|for|while|in|case|esac|function|select|do|done|until)(?=$|[)\s;|&])/,
+      lookbehind: true
+    },
+    builtin: {
+      pattern: /(^|[\s;|&]|[<>]\()(?:\.|:|break|cd|continue|eval|exec|exit|export|getopts|hash|pwd|readonly|return|shift|test|times|trap|umask|unset|alias|bind|builtin|caller|command|declare|echo|enable|help|let|local|logout|mapfile|printf|read|readarray|source|type|typeset|ulimit|unalias|set|shopt)(?=$|[)\s;|&])/,
+      lookbehind: true,
+      alias: "class-name"
+    },
+    boolean: {
+      pattern: /(^|[\s;|&]|[<>]\()(?:true|false)(?=$|[)\s;|&])/,
+      lookbehind: true
+    },
+    "file-descriptor": {
+      pattern: /\B&\d\b/,
+      alias: "important"
+    },
+    operator: {
+      pattern: /\d?<>|>\||\+=|==?|!=?|=~|<<[<-]?|[&\d]?>>|\d?[<>]&?|&[>&]?|\|[&|]?|<=?|>=?/,
+      inside: {
+        "file-descriptor": {
+          pattern: /^\d/,
+          alias: "important"
+        }
+      }
+    },
+    punctuation: /\$?\(\(?|\)\)?|\.\.|[{}[\];\\]/,
+    number: {
+      pattern: /(^|\s)(?:[1-9]\d*|0)(?:[.,]\d+)?\b/,
+      lookbehind: true
+    }
+  };
+  commandAfterHeredoc.inside = Prism2.languages.bash;
+  var toBeCopied = [
+    "comment",
+    "function-name",
+    "for-or-select",
+    "assign-left",
+    "string",
+    "environment",
+    "function",
+    "keyword",
+    "builtin",
+    "boolean",
+    "file-descriptor",
+    "operator",
+    "punctuation",
+    "number"
+  ];
+  var inside = insideString.variable[1].inside;
+  for (var i = 0; i < toBeCopied.length; i++) {
+    inside[toBeCopied[i]] = Prism2.languages.bash[toBeCopied[i]];
+  }
+  Prism2.languages.shell = Prism2.languages.bash;
+})(Prism);
 
 // ../../tools/sugar/src/shared/is/class.ts
 var import_is_class = __toModule(require_is_class());
@@ -44297,19 +45703,111 @@ function setSettings(ctx, settings = {}) {
 // ../../core/s-class/src/shared/exports.js
 var exports_default = SClass_default;
 
+// ../../../node_modules/svelte/store/index.mjs
+var subscriber_queue = [];
+function writable(value, start = noop) {
+  let stop;
+  const subscribers = [];
+  function set(new_value) {
+    if (safe_not_equal(value, new_value)) {
+      value = new_value;
+      if (stop) {
+        const run_queue = !subscriber_queue.length;
+        for (let i = 0; i < subscribers.length; i += 1) {
+          const s = subscribers[i];
+          s[1]();
+          subscriber_queue.push(s, value);
+        }
+        if (run_queue) {
+          for (let i = 0; i < subscriber_queue.length; i += 2) {
+            subscriber_queue[i][0](subscriber_queue[i + 1]);
+          }
+          subscriber_queue.length = 0;
+        }
+      }
+    }
+  }
+  function update2(fn6) {
+    set(fn6(value));
+  }
+  function subscribe2(run2, invalidate = noop) {
+    const subscriber = [run2, invalidate];
+    subscribers.push(subscriber);
+    if (subscribers.length === 1) {
+      stop = start(set) || noop;
+    }
+    run2(value);
+    return () => {
+      const index = subscribers.indexOf(subscriber);
+      if (index !== -1) {
+        subscribers.splice(index, 1);
+      }
+      if (subscribers.length === 0) {
+        stop();
+        stop = null;
+      }
+    };
+  }
+  return {set, update: update2, subscribe: subscribe2};
+}
+
 // ../s-svelte-component/src/js/SSvelteComponent.ts
 var SSVelteComponent = class extends exports_default {
   constructor(params, settings) {
     super(deepMerge_default({
       svelteComponent: {}
     }, settings || {}));
+    this.props = {};
     if (this.constructor.interface) {
       const paramsInterfaceResult = this.constructor.interface.apply(params ?? {});
       if (paramsInterfaceResult.hasIssues()) {
         throw new Error(paramsInterfaceResult.toString());
       } else {
+        Object.keys(paramsInterfaceResult.value).forEach((propName) => {
+          let value = paramsInterfaceResult.value[propName];
+          const proxy = writable(paramsInterfaceResult.value[propName], () => {
+            return () => {
+            };
+          });
+          proxy.subscribe((v) => {
+            value = v;
+          });
+          Object.defineProperty(this.props, propName, {
+            enumerable: true,
+            get() {
+              return value;
+            },
+            set(v) {
+              proxy.set(v);
+            }
+          });
+        });
       }
     }
+  }
+  onMount(callback) {
+    onMount(callback);
+  }
+  beforeUpdate(callback) {
+    beforeUpdate(callback);
+  }
+  afterUpdate(callback) {
+    afterUpdate(callback);
+  }
+  onDestroy(callback) {
+    onDestroy(callback);
+  }
+  tick(callback) {
+    tick(callback);
+  }
+  getContext(callback) {
+    getContext(callback);
+  }
+  hasContext(callback) {
+    hasContext(callback);
+  }
+  setContext(callback) {
+    setContext(callback);
   }
 };
 var SSvelteComponent_default = SSVelteComponent;
@@ -46152,8 +47650,11 @@ var SHighlightJsComponentInterface_default = SHighlightJsComponentInterface;
 SHighlightJsComponentInterface.definition = {
   theme: {
     type: "String",
-    values: ["default", "hello"],
-    default: "default"
+    default: "https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css"
+  },
+  language: {
+    type: "String",
+    default: "javascript"
   }
 };
 
@@ -46162,16 +47663,15 @@ var file = "index.svelte";
 function create_fragment(ctx) {
   let pre;
   let code;
-  let slot;
+  let pre_class_value;
   const block = {
     c: function create() {
       pre = element("pre");
       code = element("code");
-      slot = element("slot");
       this.c = noop;
-      add_location(slot, file, 35, 2, 943);
-      add_location(code, file, 34, 1, 934);
-      add_location(pre, file, 33, 0, 904);
+      add_location(code, file, 38, 1, 1262);
+      attr_dev(pre, "class", pre_class_value = "language-" + ctx[1]);
+      add_location(pre, file, 37, 0, 1227);
     },
     l: function claim(nodes) {
       throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -46179,8 +47679,7 @@ function create_fragment(ctx) {
     m: function mount(target, anchor) {
       insert_dev(target, pre, anchor);
       append_dev(pre, code);
-      append_dev(code, slot);
-      ctx[2](pre);
+      ctx[2](code);
     },
     p: noop,
     i: noop,
@@ -46203,69 +47702,68 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
   let {$$slots: slots = {}, $$scope} = $$props;
   validate_slots("s-highlight-js", slots, []);
-  import_highlight.default.registerLanguage("javascript", import_javascript.default);
   class MyCoolComponent extends exports_default2 {
-    constructor() {
-      super({svelteComponent: {}});
+    constructor(params) {
+      super(params, {svelteComponent: {}});
     }
   }
   MyCoolComponent.interface = SHighlightJsComponentInterface_default;
-  let {theme} = $$props;
-  let preElement;
-  onMount(() => {
-    const component = new MyCoolComponent({theme});
-    import_highlight.default.highlightElement(preElement);
+  const component = new MyCoolComponent($$props);
+  let {theme, language} = component.props;
+  let codeElement;
+  const text = document.querySelector("s-highlight-js").innerHTML;
+  component.onMount(() => {
+    const themeImport = `@import url('${theme}');`;
+    const $style = document.createElement("style");
+    $style.type = "text/css";
+    $style.appendChild(document.createTextNode(themeImport));
+    const result = import_prismjs.default.highlight(text.trim(), import_prismjs.default.languages.javascript, "javascript");
+    $$invalidate(0, codeElement.innerHTML = result, codeElement);
+    codeElement.appendChild($style);
   });
-  const writable_props = ["theme"];
-  Object.keys($$props).forEach((key) => {
-    if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$")
-      console.warn(`<s-highlight-js> was created with unknown prop '${key}'`);
-  });
-  function pre_binding($$value) {
+  function code_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
-      preElement = $$value;
-      $$invalidate(0, preElement);
+      codeElement = $$value;
+      $$invalidate(0, codeElement);
     });
   }
-  $$self.$$set = ($$props2) => {
-    if ("theme" in $$props2)
-      $$invalidate(1, theme = $$props2.theme);
+  $$self.$$set = ($$new_props) => {
+    $$invalidate(7, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
   };
   $$self.$capture_state = () => ({
-    onMount,
-    hljs: import_highlight.default,
-    javascript: import_javascript.default,
+    prism: import_prismjs.default,
     __SSvelteComponent: exports_default2,
     __SHighlightJsComponentInterface: SHighlightJsComponentInterface_default,
     MyCoolComponent,
+    component,
     theme,
-    preElement
+    language,
+    codeElement,
+    text
   });
-  $$self.$inject_state = ($$props2) => {
-    if ("theme" in $$props2)
-      $$invalidate(1, theme = $$props2.theme);
-    if ("preElement" in $$props2)
-      $$invalidate(0, preElement = $$props2.preElement);
+  $$self.$inject_state = ($$new_props) => {
+    $$invalidate(7, $$props = assign(assign({}, $$props), $$new_props));
+    if ("theme" in $$props)
+      theme = $$new_props.theme;
+    if ("language" in $$props)
+      $$invalidate(1, language = $$new_props.language);
+    if ("codeElement" in $$props)
+      $$invalidate(0, codeElement = $$new_props.codeElement);
   };
   if ($$props && "$$inject" in $$props) {
     $$self.$inject_state($$props.$$inject);
   }
-  return [preElement, theme, pre_binding];
+  $$props = exclude_internal_props($$props);
+  return [codeElement, language, code_binding];
 }
 var Index = class extends SvelteElement {
   constructor(options) {
     super();
-    this.shadowRoot.innerHTML = `<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css);pre{}</style>`;
     init(this, {
       target: this.shadowRoot,
       props: attribute_to_object(this.attributes),
       customElement: true
-    }, instance, create_fragment, safe_not_equal, {theme: 1});
-    const {ctx} = this.$$;
-    const props = this.attributes;
-    if (ctx[1] === void 0 && !("theme" in props)) {
-      console.warn("<s-highlight-js> was created without expected prop 'theme'");
-    }
+    }, instance, create_fragment, safe_not_equal, {});
     if (options) {
       if (options.target) {
         insert_dev(options.target, this, options.anchor);
@@ -46275,16 +47773,6 @@ var Index = class extends SvelteElement {
         flush();
       }
     }
-  }
-  static get observedAttributes() {
-    return ["theme"];
-  }
-  get theme() {
-    return this.$$.ctx[1];
-  }
-  set theme(theme) {
-    this.$set({theme});
-    flush();
   }
 };
 customElements.define("s-highlight-js", Index);

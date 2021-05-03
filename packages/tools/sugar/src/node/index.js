@@ -6,6 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
+const handleError_1 = __importDefault(require("./error/handleError"));
 const initEnv_1 = __importDefault(require("./init/initEnv"));
 const onProcessExit_1 = __importDefault(require("./process/onProcessExit"));
 const exitCleanup_1 = __importDefault(require("./process/exitCleanup"));
@@ -23,8 +24,8 @@ const exitCleanup_1 = __importDefault(require("./process/exitCleanup"));
  */
 // init env
 initEnv_1.default();
-// // // handle the errors
-// // __handleError();
+// handle the errors
+handleError_1.default();
 // exit cleanup
 onProcessExit_1.default(() => {
     return exitCleanup_1.default;
@@ -33,4 +34,4 @@ onProcessExit_1.default(() => {
 // __registerSFileClasses();
 // Logging
 new s_log_1.default(s_sugar_config_1.default('log'));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCxrRkFBeUQ7QUFDekQsZ0VBQXlDO0FBRXpDLDZEQUF1QztBQUN2Qyw0RUFBc0Q7QUFDdEQsd0VBQWtEO0FBRWxELGtFQUFrRTtBQUVsRTs7Ozs7Ozs7OztHQVVHO0FBRUgsV0FBVztBQUNYLGlCQUFTLEVBQUUsQ0FBQztBQUVaLDBCQUEwQjtBQUMxQixzQkFBc0I7QUFFdEIsZUFBZTtBQUNmLHVCQUFlLENBQUMsR0FBRyxFQUFFO0lBQ25CLE9BQU8scUJBQWEsQ0FBQztBQUN2QixDQUFDLENBQUMsQ0FBQztBQUVILGdCQUFnQjtBQUNoQiw0QkFBNEI7QUFFNUIsVUFBVTtBQUNWLElBQUksZUFBTSxDQUFDLHdCQUFhLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCxrRkFBeUQ7QUFDekQsZ0VBQXlDO0FBQ3pDLHNFQUFnRDtBQUNoRCw2REFBdUM7QUFDdkMsNEVBQXNEO0FBQ3RELHdFQUFrRDtBQUVsRCxrRUFBa0U7QUFFbEU7Ozs7Ozs7Ozs7R0FVRztBQUVILFdBQVc7QUFDWCxpQkFBUyxFQUFFLENBQUM7QUFFWixvQkFBb0I7QUFDcEIscUJBQWEsRUFBRSxDQUFDO0FBRWhCLGVBQWU7QUFDZix1QkFBZSxDQUFDLEdBQUcsRUFBRTtJQUNuQixPQUFPLHFCQUFhLENBQUM7QUFDdkIsQ0FBQyxDQUFDLENBQUM7QUFFSCxnQkFBZ0I7QUFDaEIsNEJBQTRCO0FBRTVCLFVBQVU7QUFDVixJQUFJLGVBQU0sQ0FBQyx3QkFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMifQ==

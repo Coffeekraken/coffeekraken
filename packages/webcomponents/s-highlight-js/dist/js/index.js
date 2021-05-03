@@ -3,11 +3,14 @@ import {
 	SvelteElement,
 	add_location,
 	append_dev,
+	assign,
+	attr_dev,
 	attribute_to_object,
 	binding_callbacks,
 	detach_dev,
 	dispatch_dev,
 	element,
+	exclude_internal_props,
 	flush,
 	init,
 	insert_dev,
@@ -16,9 +19,11 @@ import {
 	validate_slots
 } from "svelte/internal";
 
-import { onMount } from "svelte";
-import hljs from "highlight.js";
-import javascript from "highlight.js/lib/languages/javascript";
+import prism from "prismjs";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-css";
+import "prismjs/components/prism-markup";
+import "prismjs/components/prism-bash";
 import __SSvelteComponent from "@coffeekraken/s-svelte-component";
 import __SHighlightJsComponentInterface from "./interface/SHighlightJsComponentInterface";
 const file = "index.svelte";
@@ -26,17 +31,16 @@ const file = "index.svelte";
 function create_fragment(ctx) {
 	let pre;
 	let code;
-	let slot;
+	let pre_class_value;
 
 	const block = {
 		c: function create() {
 			pre = element("pre");
 			code = element("code");
-			slot = element("slot");
 			this.c = noop;
-			add_location(slot, file, 35, 2, 943);
-			add_location(code, file, 34, 1, 934);
-			add_location(pre, file, 33, 0, 904);
+			add_location(code, file, 38, 1, 1262);
+			attr_dev(pre, "class", pre_class_value = "language-" + /*language*/ ctx[1]);
+			add_location(pre, file, 37, 0, 1227);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -44,15 +48,14 @@ function create_fragment(ctx) {
 		m: function mount(target, anchor) {
 			insert_dev(target, pre, anchor);
 			append_dev(pre, code);
-			append_dev(code, slot);
-			/*pre_binding*/ ctx[2](pre);
+			/*code_binding*/ ctx[2](code);
 		},
 		p: noop,
 		i: noop,
 		o: noop,
 		d: function destroy(detaching) {
 			if (detaching) detach_dev(pre);
-			/*pre_binding*/ ctx[2](null);
+			/*code_binding*/ ctx[2](null);
 		}
 	};
 
@@ -70,67 +73,70 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
 	let { $$slots: slots = {}, $$scope } = $$props;
 	validate_slots("s-highlight-js", slots, []);
-	hljs.registerLanguage("javascript", javascript);
 
 	class MyCoolComponent extends __SSvelteComponent {
-		constructor() {
-			super({ svelteComponent: {} });
+		constructor(params) {
+			super(params, { svelteComponent: {} });
 		}
 	}
 
 	MyCoolComponent.interface = __SHighlightJsComponentInterface;
-	let { theme } = $$props;
-	let preElement;
+	const component = new MyCoolComponent($$props);
+	let { theme, language } = component.props;
+	let codeElement;
+	const text = document.querySelector("s-highlight-js").innerHTML;
 
-	onMount(() => {
-		const component = new MyCoolComponent({ theme });
-		hljs.highlightElement(preElement);
+	component.onMount(() => {
+		const themeImport = `@import url('${theme}');`;
+		const $style = document.createElement("style");
+		$style.type = "text/css";
+		$style.appendChild(document.createTextNode(themeImport));
+		const result = prism.highlight(text.trim(), prism.languages.javascript, "javascript");
+		$$invalidate(0, codeElement.innerHTML = result, codeElement);
+		codeElement.appendChild($style);
 	});
 
-	const writable_props = ["theme"];
-
-	Object.keys($$props).forEach(key => {
-		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<s-highlight-js> was created with unknown prop '${key}'`);
-	});
-
-	function pre_binding($$value) {
+	function code_binding($$value) {
 		binding_callbacks[$$value ? "unshift" : "push"](() => {
-			preElement = $$value;
-			$$invalidate(0, preElement);
+			codeElement = $$value;
+			$$invalidate(0, codeElement);
 		});
 	}
 
-	$$self.$$set = $$props => {
-		if ("theme" in $$props) $$invalidate(1, theme = $$props.theme);
+	$$self.$$set = $$new_props => {
+		$$invalidate(7, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
 	};
 
 	$$self.$capture_state = () => ({
-		onMount,
-		hljs,
-		javascript,
+		prism,
 		__SSvelteComponent,
 		__SHighlightJsComponentInterface,
 		MyCoolComponent,
+		component,
 		theme,
-		preElement
+		language,
+		codeElement,
+		text
 	});
 
-	$$self.$inject_state = $$props => {
-		if ("theme" in $$props) $$invalidate(1, theme = $$props.theme);
-		if ("preElement" in $$props) $$invalidate(0, preElement = $$props.preElement);
+	$$self.$inject_state = $$new_props => {
+		$$invalidate(7, $$props = assign(assign({}, $$props), $$new_props));
+		if ("theme" in $$props) theme = $$new_props.theme;
+		if ("language" in $$props) $$invalidate(1, language = $$new_props.language);
+		if ("codeElement" in $$props) $$invalidate(0, codeElement = $$new_props.codeElement);
 	};
 
 	if ($$props && "$$inject" in $$props) {
 		$$self.$inject_state($$props.$$inject);
 	}
 
-	return [preElement, theme, pre_binding];
+	$$props = exclude_internal_props($$props);
+	return [codeElement, language, code_binding];
 }
 
 class Index extends SvelteElement {
 	constructor(options) {
 		super();
-		this.shadowRoot.innerHTML = `<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css);pre{}</style>`;
 
 		init(
 			this,
@@ -142,15 +148,8 @@ class Index extends SvelteElement {
 			instance,
 			create_fragment,
 			safe_not_equal,
-			{ theme: 1 }
+			{}
 		);
-
-		const { ctx } = this.$$;
-		const props = this.attributes;
-
-		if (/*theme*/ ctx[1] === undefined && !("theme" in props)) {
-			console.warn("<s-highlight-js> was created without expected prop 'theme'");
-		}
 
 		if (options) {
 			if (options.target) {
@@ -162,19 +161,6 @@ class Index extends SvelteElement {
 				flush();
 			}
 		}
-	}
-
-	static get observedAttributes() {
-		return ["theme"];
-	}
-
-	get theme() {
-		return this.$$.ctx[1];
-	}
-
-	set theme(theme) {
-		this.$set({ theme });
-		flush();
 	}
 }
 

@@ -11,7 +11,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-interface": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
-    "@coffeekraken/s-class": "^2.0.0"
+    "mustache": "^4.2.0"
   }
 }

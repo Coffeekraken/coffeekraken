@@ -24,8 +24,8 @@ import __hotkey from './keyboard/hotkey';
 // init env
 __initEnv();
 
-// // // handle the errors
-// // __handleError();
+// handle the errors
+__handleError();
 
 // exit cleanup
 __onProcessExit(() => {

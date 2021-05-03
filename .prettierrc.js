@@ -3,5 +3,10 @@ module.exports = {
   trailingComma: 'all',
   singleQuote: true,
   printWidth: 120,
-  tabWidth: 4
+  tabWidth: 4,
+  svelteSortOrder: 'options-styles-scripts-markup',
+  svelteStrictMode: true,
+  svelteBracketNewLine: true,
+  svelteAllowShorthand: true,
+  svelteIndentScriptAndStyle: true
 };

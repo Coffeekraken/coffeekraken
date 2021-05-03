@@ -4,51 +4,50 @@
 
 <script type="text/ts">
 
-	import { onMount } from 'svelte';
-    import hljs from 'highlight.js';
-    import javascript from 'highlight.js/lib/languages/javascript';
-    hljs.registerLanguage('javascript', javascript);
+	import prism from 'prismjs';
+	import 'prismjs/components/prism-javascript';
+	import 'prismjs/components/prism-css';
+	import 'prismjs/components/prism-markup';
+	import 'prismjs/components/prism-bash';
 
 	import __SSvelteComponent from '@coffeekraken/s-svelte-component';
 	import __SHighlightJsComponentInterface from './interface/SHighlightJsComponentInterface';
 
 	class MyCoolComponent extends __SSvelteComponent {
-
 		static interface = __SHighlightJsComponentInterface;
-
-		constructor() {
-			super({
+		constructor(params) {
+			super(params, {
 				svelteComponent: {}
 			});
 		}
 	}
 
-	export let theme;
+	const component = new MyCoolComponent($$props);
+	let {
+		theme,
+		language
+	} = component.props;
+
 	
-	let preElement;
-	
-	onMount(() => {
-		const component = new MyCoolComponent({
-			theme
-		});
-		hljs.highlightElement(preElement);
+	let codeElement;
+	const text = document.querySelector('s-highlight-js').innerHTML;
+
+	component.onMount(() => {
+		const themeImport = `@import url('${theme}');`;
+		const $style = document.createElement('style');
+		$style.type = 'text/css'
+		$style.appendChild(document.createTextNode(themeImport));
+			
+		const result = prism.highlight(text.trim(), prism.languages.javascript, 'javascript');
+		codeElement.innerHTML = result;
+		codeElement.appendChild($style);
 	});
-
-	
-
 
 </script>
 
 <style>
-
-	@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css);
-
-	pre {
-	}
 </style>
 
-<pre bind:this={preElement}>
-	<code>
-		<slot></slot>
-	</code>
+<pre class="language-{language}">
+	<code bind:this={codeElement}></code>
 </pre>

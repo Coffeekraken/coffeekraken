@@ -479,7 +479,6 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       const newItems = this._originalItems.filter((item) => {
         for (const idx in this._settings.filter.properties) {
           const prop = this._settings.filter.properties[idx];
-          console.log(prop, item);
           if (!item[prop] || typeof item[prop] !== 'string') continue;
           const reg = new RegExp(filterString, 'gi');
           if (item[prop].match(reg)) return true;

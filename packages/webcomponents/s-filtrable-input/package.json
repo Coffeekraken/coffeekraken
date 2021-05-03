@@ -1,17 +1,19 @@
 {
   "name": "@coffeekraken/s-filtrable-input",
-  "type": "webcomponent",
   "version": "2.0.0",
-  "description": "Filtrable input",
+  "description": "",
   "homepage": "https://coffeekraken.io",
-  "main": "src/js/index.js",
+  "main": "dist/js/index.js",
   "scripts": {
+    "dev": "sugard frontstack.start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@coffeekraken/s-svelte-component": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
-    "aggregation": "^1.2.6"
+    "highlight.js": "^10.7.2",
+    "prismjs": "^1.23.0"
   }
 }

@@ -200,10 +200,10 @@ export default {
     postcss: {},
 
     plugins: {
-      // postcssImportExtGlob: {
-      //   import: 'postcss-import-ext-glob',
-      //   settings: {}
-      // },
+      postcssImportExtGlob: {
+        import: 'postcss-import-ext-glob',
+        settings: {}
+      },
       // postcssImport: {
       //   import: 'postcss-import',
       //   settings: {
@@ -223,42 +223,38 @@ export default {
       //     extends: 'stylelint-config-standard'
       //   }
       // },
-      // sugar: {
-      //   import: '@coffeekraken/s-postcss-sugar-plugin',
-      //   settings: {}
-      // },
-      // precss: {
-      //   import: 'precss',
-      //   settings: {}
-      // },
+      precss: {
+        import: 'precss',
+        settings: {}
+      },
       postcssNested: {
         import: 'postcss-nested',
         settings: {}
-      }
+      },
       // presetEnv: {
       //   import: 'postcss-preset-env',
       //   settings: {}
       // },
-      // autoprefixer: {
-      //   import: 'autoprefixer',
-      //   settings: {}
-      // },
+      autoprefixer: {
+        import: 'autoprefixer',
+        settings: {}
+      },
       // postcssReporter: {
       //   import: 'postcss-reporter',
       //   settings: {
       //     clearReportedMessages: true
       //   }
       // },
-      // cssnano: {
-      //   import: 'cssnano',
-      //   settings: {
-      //     preset: 'default'
-      //   }
-      // }
-      // sugarError: {
-      //   import: '@coffeekraken/s-postcss-sugar-error-plugin',
-      //   settings: {}
-      // }
+      cssnano: {
+        import: 'cssnano',
+        settings: {
+          preset: 'default'
+        }
+      },
+      sugarError: {
+        import: '@coffeekraken/s-postcss-sugar-error-plugin',
+        settings: {}
+      }
     }
   }
 };

@@ -4,8 +4,12 @@ export default class SHighlightJsComponentInterface extends __SInterface {
   static definition = {
     theme: {
       type: 'String',
-      values: ['default', 'hello'],
-      default: 'default'
+      default:
+        'https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css'
+    },
+    language: {
+      type: 'String',
+      default: 'javascript'
     }
   };
 }

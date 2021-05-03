@@ -426,7 +426,7 @@ class SType implements ISType {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com>
    */
-  cast(value: any, settings: ISTypeSettings): any {
+  cast(value: any, params: any, settings: ISTypeSettings): any {
     settings = __deepMerge(this._settings, settings);
     // store exceptions coming from descriptors
     const verboseObj = {
@@ -455,7 +455,7 @@ class SType implements ISType {
       // try to cast the value
       let castedValue: any;
       // try {
-      castedValue = descriptorObj.cast(value);
+      castedValue = descriptorObj.cast(value, params);
       if (castedValue instanceof Error) {
         // add the issue in the verboseObj
         verboseObj.issues[typeId] = castedValue.toString();
@@ -480,7 +480,7 @@ class SType implements ISType {
       } else if (typeObj.of !== undefined) {
         const sTypeInstance = new SType(typeObj.of.join('|'));
         castedValue = __map(castedValue, ({ value }) => {
-          return sTypeInstance.cast(value, settings);
+          return sTypeInstance.cast(value, params, settings);
         });
       }
 

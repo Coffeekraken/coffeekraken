@@ -143,6 +143,8 @@ class SSvelteCompiler extends __SCompiler {
       async ({ resolve, reject, pipe, emit, on }) => {
         settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
 
+        let result;
+
         const input = Array.isArray(params.input)
           ? params.input
           : [params.input];
@@ -166,7 +168,6 @@ class SSvelteCompiler extends __SCompiler {
           watch: params.watch
         });
 
-        // handle cancel
         on('finally', () => {
           pool.cancel();
         });
@@ -192,92 +193,106 @@ class SSvelteCompiler extends __SCompiler {
             });
 
             // preprocess
-            const preprocessResult = await __svelte.preprocess(
-              file.content,
-              {
-                style: async (input) => {
-                  // write a temp file to compile
-                  const tmpCssFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.css`;
-                  __writeFileSync(`${tmpCssFilePath}`, input.content);
+            try {
+              const preprocessResult = await __svelte.preprocess(
+                file.content,
+                {
+                  style: async (input) => {
+                    // write a temp file to compile
+                    const tmpCssFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.css`;
+                    __writeFileSync(`${tmpCssFilePath}`, input.content);
 
-                  const compiler = new __SPostcssCompiler();
+                    const compiler = new __SPostcssCompiler();
 
-                  const res = await compiler.compile({
-                    input: [tmpCssFilePath],
-                    save: false
-                  });
+                    const res = await compiler.compile({
+                      input: [tmpCssFilePath],
+                      save: false
+                    });
 
-                  if (!res || !res.files || !res.files.length) {
+                    if (!res || !res.files || !res.files.length) {
+                      return {
+                        code: input.content
+                      };
+                    }
+
+                    // remove temp file
+                    __removeSync(tmpCssFilePath);
+
                     return {
-                      code: input.content
+                      code: res.files[0].css
+                    };
+                  },
+                  script: async (input) => {
+                    if (
+                      !input.attributes ||
+                      !input.attributes.type ||
+                      input.attributes.type !== 'text/ts'
+                    ) {
+                      return {
+                        code: input.content
+                      };
+                    }
+
+                    // write a temp file to compile
+                    const tmpTsFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.ts`;
+                    __writeFileSync(`${tmpTsFilePath}`, input.content);
+
+                    const compiler = new __STsCompiler();
+
+                    const res = await compiler.compile({
+                      input: [tmpTsFilePath],
+                      rootDir: `${__tmpDir()}/SSvelteCompiler`,
+                      config: 'js',
+                      save: false
+                    });
+
+                    if (!res || !res.files || !res.files.length) {
+                      return {
+                        code: input.content
+                      };
+                    }
+
+                    // remove temp file
+                    __removeSync(tmpTsFilePath);
+
+                    return {
+                      code: res.files[0].js
                     };
                   }
-
-                  // remove temp file
-                  __removeSync(tmpCssFilePath);
-
-                  return {
-                    code: res.files[0].css
-                  };
                 },
-                script: async (input) => {
-                  if (
-                    !input.attributes ||
-                    !input.attributes.type ||
-                    input.attributes.type !== 'text/ts'
-                  ) {
-                    return {
-                      code: input.content
-                    };
-                  }
+                {}
+              );
 
-                  // write a temp file to compile
-                  const tmpTsFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.ts`;
-                  __writeFileSync(`${tmpTsFilePath}`, input.content);
-
-                  const compiler = new __STsCompiler();
-
-                  const res = await compiler.compile({
-                    input: [tmpTsFilePath],
-                    rootDir: `${__tmpDir()}/SSvelteCompiler`,
-                    config: 'js',
-                    save: false
-                  });
-
-                  if (!res || !res.files || !res.files.length) {
-                    return {
-                      code: input.content
-                    };
-                  }
-
-                  // remove temp file
-                  __removeSync(tmpTsFilePath);
-
-                  return {
-                    code: res.files[0].js
-                  };
-                }
-              },
-              {}
-            );
-
-            // render svelte
-            const result = __svelte.compile(preprocessResult.code, {
-              filename: file.name,
-              dev: !params.prod,
-              customElement: true,
-              preserveComments: !params.stripComments,
-              preserveWhitespace: !params.prod,
-              outputFilename: file.name,
-              cssOutputFilename: file.name,
-              ...(params.svelte || {})
-            });
-
-            result.warnings.forEach((warning) => {
-              emit('warn', {
-                value: warning.toString()
+              // render svelte
+              result = __svelte.compile(preprocessResult.code, {
+                filename: file.name,
+                dev: !params.prod,
+                customElement: true,
+                preserveComments: !params.stripComments,
+                preserveWhitespace: !params.prod,
+                outputFilename: file.name,
+                cssOutputFilename: file.name,
+                ...(params.svelte || {})
               });
-            });
+            } catch (e) {
+              emit('error', {
+                value: [
+                  e.message,
+                  `<yellow>${e.filename}</yellow>`,
+                  e.frame
+                ].join('\n')
+              });
+            }
+
+            if (result && result.warnings) {
+              result.warnings.forEach((warning) => {
+                emit('warn', {
+                  value: warning.toString()
+                });
+              });
+            }
+
+            if (!result) return;
 
             let outputPath = file.path;
             if (params.outDir) {

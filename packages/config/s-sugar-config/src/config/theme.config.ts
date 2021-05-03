@@ -21,14 +21,14 @@ export function prepare(themeConfig, config) {
 }
 
 export function proxy(path, originalValue, config) {
-  if (path.match(/\.color\.[a-zA-Z0-9]+$/)) {
-    const newStack = originalValue;
-    Object.keys(originalValue).forEach((modName) => {
-      const color = new __SColor(newStack[modName]);
-      newStack[`${modName}-i`] = color.apply('-i').toString();
-    });
-    return newStack;
-  }
+  // if (path.match(/\.color\.[a-zA-Z0-9]+$/)) {
+  //   const newStack = originalValue;
+  //   Object.keys(originalValue).forEach((modName) => {
+  //     const color = new __SColor(newStack[modName]);
+  //     newStack[`${modName}-i`] = color.apply('-i').toString();
+  //   });
+  //   return newStack;
+  // }
 
   if (path.match(/\.color\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
     if (path.split('.').pop() === 'default') {
@@ -184,14 +184,23 @@ export default {
       colorModifier: {
         5: '-lighten 45%',
         10: '-lighten 40%',
+        15: '-lighten 35%',
         20: '-lighten 30%',
+        25: '-lighten 25%',
         30: '-lighten 20%',
+        35: '-lighten 15%',
         40: '-lighten 10%',
+        45: '-lighten 5%',
         50: '-lighten 0%',
+        55: '-darken 5%',
         60: '-darken 10%',
+        65: '-darken 15%',
         70: '-darken 20%',
+        75: '-darken 25%',
         80: '-darken 30%',
-        90: '-darken 40%'
+        85: '-darken 35%',
+        90: '-darken 40%',
+        95: '-darken 45%'
       },
 
       color: {
@@ -295,7 +304,7 @@ export default {
          * @name                surface
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #2b3438
+         * @default             #ffffff
          *
          * Specify the <surface>surface</surface> color value and modifiers.
          *
@@ -303,7 +312,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         surface: {
-          default: '#6d858f',
+          default: '#ffffff',
           '...': '[config.theme.themes.default.colorModifier]'
         },
 
@@ -311,7 +320,7 @@ export default {
          * @name                background
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #2b3438
+         * @default             #FAFAFA
          *
          * Specify the <background>background</background> color value and modifiers.
          *
@@ -319,7 +328,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         background: {
-          default: '#6d858f',
+          default: '#FAFAFA',
           '...': '[config.theme.themes.default.colorModifier]'
         },
 

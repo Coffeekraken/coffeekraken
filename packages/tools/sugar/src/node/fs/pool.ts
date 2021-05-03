@@ -105,6 +105,8 @@ function pool(input, settings?: Partial<IPoolSettings>) {
           emit('file', filesStack[path]);
         })
         .on('change', (path) => {
+          console.log('change', path);
+
           if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
           if (!filesStack[path]) {
             if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
@@ -125,8 +127,6 @@ function pool(input, settings?: Partial<IPoolSettings>) {
         })
         .on('ready', () => {
           const files = watcher.getWatched();
-
-          console.log(files);
 
           const filesPaths: string[] = [];
           const finalFiles: (__SFile | string)[] = [];

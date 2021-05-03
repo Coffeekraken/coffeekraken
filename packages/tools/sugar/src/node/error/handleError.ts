@@ -35,6 +35,16 @@ function handleError() {
     process.on('uncaughtException', __handleMainProcessErrors);
     process.on('unhandledRejection', __handleMainProcessErrors);
   }
+
+  // process.on('uncaughtException', (err) => {
+  //   console.log(`Uncaught Exception: ${err.message}`);
+  //   process.exit(1);
+  // });
+
+  // process.on('unhandledRejection', (err, promise) => {
+  //   console.log('Unhandled rejection at ', promise, `reason: ${err.message}`);
+  //   process.exit(1);
+  // });
 }
 
 function __handleChildProcessErrors(error) {

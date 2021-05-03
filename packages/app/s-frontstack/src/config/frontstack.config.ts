@@ -32,6 +32,7 @@ export default {
       actions: {
         frontendServer: '[config.frontstack.actions.frontendServer]',
         // js: '[config.frontstack.actions.js]',
+        css: '[config.frontstack.actions.css]',
         jsBundle: '[config.frontstack.actions.jsBundle]',
         ts: '[config.frontstack.actions.ts]',
         svelte: '[config.frontstack.actions.svelte]'

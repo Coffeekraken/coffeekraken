@@ -32,7 +32,9 @@ const ruleObj: ISDescriptorRule = {
         `<yellow>[sugar.shared.type.descriptors.typeRule]</yellow> Sorry but to use the <magenta>type</magenta> descriptor rule you need to specify a type string either directly under the "type" property, or in an object under the "type.type" property...`
       );
     }
+
     return {
+      ...(typeof params !== 'string' ? params : {}),
       type: params.type ?? params,
       cast: params.cast ?? true
     };
@@ -49,10 +51,9 @@ const ruleObj: ISDescriptorRule = {
       }
     });
     if (params.cast && !type.is(value)) {
-      value = type.cast(value);
+      value = type.cast(value, params);
     }
     if (!type.is(value)) {
-      console.log(value);
       return new Error(
         `The value must be of type "<yellow>${
           params.type

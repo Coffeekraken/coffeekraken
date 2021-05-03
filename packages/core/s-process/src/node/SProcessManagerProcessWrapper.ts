@@ -139,6 +139,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
   _currentProcessPromise = null;
   _handleRestartFor(processPromise) {
     if (this._isDetached) return;
+
     this._currentProcessPromise = processPromise;
     processPromise.on(
       'reject',
@@ -148,7 +149,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         await __wait(0);
 
         this.emit('log', {
-          value: `The process "<yellow>${this.processInstance.metas.id}</yellow>" has been stoped after a(n) <red>${this.processInstance.lastExecutionObj.state}</red> after <cyan>${this.processInstance.lastExecutionObj.formatedDuration}</cyan> of execution`
+          value: `The process "<yellow>${this.metas.id}</yellow>" has been stoped after a(n) <red>${this.processInstance.lastExecutionObj.state}</red> after <cyan>${this.processInstance.lastExecutionObj.formatedDuration}</cyan> of execution`
         });
 
         // maxEvery
@@ -159,7 +160,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             Date.now()
           ) {
             this.emit('log', {
-              value: `The process "<yellow>${this.processInstance.metas.id}</yellow>" will not being restarted cause it has crashed before the <cyan>maxEvery</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxEvery}ms</magenta>`
+              value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has crashed before the <cyan>maxEvery</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxEvery}ms</magenta>`
             });
             // resolving the global run promise
             if (this._restartingProcessResolve && !this._isDetached) {
@@ -178,7 +179,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             this.processManagerProcessSettings.restart.maxTimes
           ) {
             this.emit('log', {
-              value: `The process "<yellow>${this.processInstance.metas.id}</yellow>" will not being restarted cause it has reached the <cyan>maxTimes</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxTimes}</magenta>`
+              value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has reached the <cyan>maxTimes</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxTimes}</magenta>`
             });
             // resolving the global run promise
             if (this._restartingProcessResolve && !this._isDetached) {
@@ -209,7 +210,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         // of the "before" callback returns a nullysh value, do not restart
         if (!newProcessArgs) {
           this.emit('log', {
-            value: `Stop restarting the process "<yellow>${this.processInstance.metas.id}</yellow>"`
+            value: `Stop restarting the process "<yellow>${this.metas.id}</yellow>"`
           });
 
           // resolving the global run promise
@@ -231,7 +232,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         await __wait(this.processManagerProcessSettings.restart.delay);
 
         this.emit('log', {
-          value: `Restarting process "<yellow>${this.processInstance.metas.id}</yellow>"`
+          value: `Restarting process "<yellow>${this.metas.id}</yellow>"`
         });
 
         // restart process
@@ -289,7 +290,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
   run(paramsOrStringArgs = {}, settings: Partial<ISProcessSettings> = {}) {
     if (this._isDetached) {
       throw new Error(
-        `Sorry but you cannot run this "<yellow>${this.processInstance.metas.id}</yellow>" process cause it has been detached from the process manager`
+        `Sorry but you cannot run this "<yellow>${this.metas.id}</yellow>" process cause it has been detached from the process manager`
       );
     }
     return new __SPromise(async ({ resolve }) => {

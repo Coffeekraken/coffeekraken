@@ -30,7 +30,16 @@ const descriptor: ISTypeDescriptor = {
     // _console.log('CHeck', value, Array.isArray(value));
     return Array.isArray(value);
   },
-  cast: (value: any) => {
+  cast: (value: any, params: any = {}) => {
+    console.log('P', value, params);
+    if (value === 'title,body') {
+      console.log('PA', params);
+    }
+
+    if (params.commaSplit && typeof value === 'string') {
+      value = value.split(',').map((i) => i.trim());
+    }
+
     if (Array.isArray(value)) return value;
     return [value];
   }

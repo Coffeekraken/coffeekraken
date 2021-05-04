@@ -447,6 +447,13 @@ class SDescriptor extends __SClass implements ISDescriptor {
       name: `${settings.name}.${propName}`
     });
 
+    if (
+      params &&
+      params.type &&
+      params.type.toLowerCase() === 'boolean' &&
+      ruleResult === true
+    )
+      return true;
     if (ruleResult === true) return value;
     else if (ruleResult instanceof Error) {
       const obj: ISDescriptorResultRule = {

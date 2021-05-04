@@ -31,11 +31,6 @@ const descriptor: ISTypeDescriptor = {
     return Array.isArray(value);
   },
   cast: (value: any, params: any = {}) => {
-    console.log('P', value, params);
-    if (value === 'title,body') {
-      console.log('PA', params);
-    }
-
     if (params.commaSplit && typeof value === 'string') {
       value = value.split(',').map((i) => i.trim());
     }

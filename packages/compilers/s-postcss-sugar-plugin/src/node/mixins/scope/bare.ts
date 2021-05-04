@@ -42,9 +42,11 @@ export default function (
 
   const vars: string[] = [];
 
-  vars.push(
-    `&:not(.s-nude-children &):not(.s-no-bare-children &):not(.s-nude):not(.s-no-bare) {`
-  );
+  if (atRule.parent && atRule.parent.type === 'root') {
+    vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
+  } else {
+    vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
+  }
   vars.push(
     processNested(
       atRule.nodes

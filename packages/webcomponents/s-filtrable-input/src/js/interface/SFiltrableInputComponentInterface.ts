@@ -18,6 +18,10 @@ export default class SHighlightJsComponentInterface extends __SInterface {
         commaSplit: true
       },
       default: []
+    },
+    maxItems: {
+      type: 'Number',
+      default: 25
     }
   };
 }

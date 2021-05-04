@@ -44883,6 +44883,24 @@ var exports_default = SClass_default;
 // ../s-svelte-component/src/js/SSvelteComponent.ts
 var import_mustache = __toModule(require_mustache());
 
+// ../../../node_modules/@coffeekraken/sugar/src/js/css/stylesheetToString.ts
+function stylesheetToString(stylesheet) {
+  let stack = [];
+  if (!(stylesheet instanceof StyleSheetList)) {
+    if (!Array.isArray(stylesheet))
+      stack.push(stylesheet);
+  } else {
+    Object.keys(stylesheet).forEach((k) => {
+      stack.push(stylesheet[k]);
+    });
+  }
+  let str = ``;
+  stack.forEach((style) => {
+    str += style.cssRules ? Array.from(style.cssRules).map((rule) => rule.cssText ?? "").join("\n") : "";
+  });
+  return str;
+}
+
 // ../../../node_modules/svelte/store/index.mjs
 var subscriber_queue = [];
 function writable(value, start = noop) {
@@ -44931,6 +44949,18 @@ function writable(value, start = noop) {
   return {set, update: update2, subscribe: subscribe2};
 }
 
+// ../../../node_modules/@coffeekraken/sugar/src/shared/string/camelize.ts
+function camelize(text2) {
+  let res = "";
+  const reg = /(?:^|[_-\s])(\w)/g;
+  res = text2.replace(reg, function(_, c) {
+    return c ? c.toUpperCase() : "";
+  });
+  res = res.substr(0, 1).toLowerCase() + res.slice(1);
+  return res.trim();
+}
+var camelize_default = camelize;
+
 // ../s-svelte-component/src/js/SSvelteComponent.ts
 var SSVelteComponent = class extends exports_default {
   constructor(params, settings) {
@@ -44940,12 +44970,42 @@ var SSVelteComponent = class extends exports_default {
       }
     }, settings || {}));
     this.props = {};
+    this._styleStr = "";
+    this._currentComponent = get_current_component();
     import_mustache.default.escape = function(text2) {
       return text2;
     };
     const interfaceClass = this.svelteComponentSettings.interface ?? this.constructor.interface;
+    const processedParams = {};
+    Object.keys(params).forEach((propName) => {
+      processedParams[camelize_default(propName)] = params[propName];
+    });
     if (interfaceClass) {
-      const paramsInterfaceResult = interfaceClass.apply(params ?? {});
+      interfaceClass.definition = {
+        ...interfaceClass.definition,
+        noLnf: {
+          type: {
+            type: "Boolean",
+            nullishAsTrue: true
+          },
+          default: false
+        },
+        noBare: {
+          type: {
+            type: "Boolean",
+            nullishAsTrue: true
+          },
+          default: false
+        },
+        noStyle: {
+          type: {
+            type: "Boolean",
+            nullishAsTrue: true
+          },
+          default: false
+        }
+      };
+      const paramsInterfaceResult = interfaceClass.apply(processedParams ?? {});
       if (paramsInterfaceResult.hasIssues()) {
         throw new Error(paramsInterfaceResult.toString());
       } else {
@@ -44970,9 +45030,64 @@ var SSVelteComponent = class extends exports_default {
         });
       }
     }
+    this.onMount(() => {
+      if (this.props.noLnf) {
+        this.rootElm.classList.add("s-no-lnf");
+      }
+      if (this.props.noBare) {
+        this.rootElm.classList.add("s-no-bare");
+      }
+      if (!this.props.noStyle) {
+        this._applyStyles();
+      }
+    });
   }
   get svelteComponentSettings() {
     return this._settings.svelteComponent;
+  }
+  get styleStr() {
+    if (!this._styleStr)
+      this._styleStr = stylesheetToString(document.styleSheets);
+    return this._styleStr;
+  }
+  get rootElm() {
+    for (let i = 0; i < this._currentComponent.shadowRoot.children.length; i++) {
+      const elm = this._currentComponent.shadowRoot.children[i];
+      if (elm.tagName !== "STYLE")
+        return elm;
+    }
+    return this._currentComponent;
+  }
+  get styleElm() {
+    for (let i = 0; i < this._currentComponent.shadowRoot.children.length; i++) {
+      const elm = this._currentComponent.shadowRoot.children[i];
+      if (elm.tagName === "STYLE")
+        return elm;
+    }
+    return void 0;
+  }
+  _applyStyles() {
+    const matches = this.styleElm.innerHTML.match(/[\.#]?[a-zA-Z0-9-_:>+*\s]+\{(.*\n?)content:"(s-style-[a-zA-Z0-9-_]+)"(.*\n?)\}/gm);
+    if (matches) {
+      let newStyleStr = this.styleElm.innerHTML;
+      newStyleStr = newStyleStr.replace(/content:\?"s-style-[a-zA-Z0-9-_]+"/, "");
+      matches.forEach((match) => {
+        const selector = match.split("{")[0];
+        const styleName = match.match(/content:"(.*)"/)[1];
+        const reg = new RegExp(`.${styleName}.*{[^}]+}`, "gm");
+        const styleCssMatches = this.styleStr.match(reg);
+        if (styleCssMatches) {
+          styleCssMatches.forEach((styleMatch) => {
+            const newStyle = styleMatch.replace(`.${styleName}`, selector);
+            newStyleStr += newStyle;
+          });
+        }
+      });
+      this.styleElm.innerHTML = newStyleStr;
+      const styleElm = document.createElement("style");
+      styleElm.innerHTML = this.styleStr.replace(/--[a-zA-Z0-9-_]+:[^;]+;/gm, "");
+      this._currentComponent.shadowRoot.prepend(styleElm);
+    }
   }
   compileMustache(template, data) {
     return import_mustache.default.render(template, data);
@@ -45869,10 +45984,6 @@ var descriptor4 = {
     return Array.isArray(value);
   },
   cast: (value, params = {}) => {
-    console.log("P", value, params);
-    if (value === "title,body") {
-      console.log("PA", params);
-    }
     if (params.commaSplit && typeof value === "string") {
       value = value.split(",").map((i) => i.trim());
     }
@@ -45922,7 +46033,10 @@ var descriptor7 = {
   name: "Boolean",
   id: "boolean",
   is: (value) => typeof value === "boolean",
-  cast: (value) => {
+  cast: (value, params = {}) => {
+    if (value !== false && params && params.nullishAsTrue && !value) {
+      return true;
+    }
     if (typeof value === "boolean")
       return value;
     if (value === null || value === void 0)
@@ -46406,6 +46520,8 @@ var SDescriptor = class extends exports_default {
       propName,
       name: `${settings.name}.${propName}`
     });
+    if (params && params.type && params.type.toLowerCase() === "boolean" && ruleResult === true)
+      return true;
     if (ruleResult === true)
       return value;
     else if (ruleResult instanceof Error) {
@@ -46866,6 +46982,10 @@ SHighlightJsComponentInterface.definition = {
       commaSplit: true
     },
     default: []
+  },
+  maxItems: {
+    type: "Number",
+    default: 25
   }
 };
 
@@ -46873,8 +46993,8 @@ SHighlightJsComponentInterface.definition = {
 var file = "index.svelte";
 function get_each_context(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[11] = list[i];
-  child_ctx[13] = i;
+  child_ctx[12] = list[i];
+  child_ctx[14] = i;
   return child_ctx;
 }
 function create_else_block(ctx) {
@@ -46929,7 +47049,7 @@ function create_else_block(ctx) {
     block,
     id: create_else_block.name,
     type: "else",
-    source: "(95:4) {:else}",
+    source: "(105:4) {:else}",
     ctx
   });
   return block;
@@ -46942,7 +47062,7 @@ function create_if_block(ctx) {
     c: function create() {
       li = element("li");
       attr_dev(li, "class", li_class_value = ctx[4].className("__list-item __list-no-item"));
-      add_location(li, file, 91, 6, 4657);
+      add_location(li, file, 101, 6, 3320);
     },
     m: function mount(target, anchor) {
       insert_dev(target, li, anchor);
@@ -46962,7 +47082,7 @@ function create_if_block(ctx) {
     block,
     id: create_if_block.name,
     type: "if",
-    source: "(91:4) {#if !filteredItems.length}",
+    source: "(101:4) {#if !filteredItems.length}",
     ctx
   });
   return block;
@@ -46970,7 +47090,7 @@ function create_if_block(ctx) {
 function create_each_block(ctx) {
   let li;
   let html_tag;
-  let raw_value = ctx[4].compileMustache(ctx[1], ctx[11]) + "";
+  let raw_value = ctx[4].compileMustache(ctx[1], ctx[12]) + "";
   let t;
   let li_class_value;
   const block = {
@@ -46978,9 +47098,9 @@ function create_each_block(ctx) {
       li = element("li");
       t = text("\n        ");
       html_tag = new HtmlTag(t);
-      set_style(li, "z-index", 99999 - ctx[13]);
+      set_style(li, "z-index", 999999999 - ctx[14]);
       attr_dev(li, "class", li_class_value = ctx[4].className("__list-item"));
-      add_location(li, file, 96, 8, 4855);
+      add_location(li, file, 106, 8, 3518);
     },
     m: function mount(target, anchor) {
       insert_dev(target, li, anchor);
@@ -46988,7 +47108,7 @@ function create_each_block(ctx) {
       append_dev(li, t);
     },
     p: function update2(ctx2, dirty) {
-      if (dirty & 10 && raw_value !== (raw_value = ctx2[4].compileMustache(ctx2[1], ctx2[11]) + ""))
+      if (dirty & 10 && raw_value !== (raw_value = ctx2[4].compileMustache(ctx2[1], ctx2[12]) + ""))
         html_tag.p(raw_value);
     },
     d: function destroy(detaching) {
@@ -47000,7 +47120,7 @@ function create_each_block(ctx) {
     block,
     id: create_each_block.name,
     type: "each",
-    source: "(96:6) {#each filteredItems as item, idx}",
+    source: "(106:6) {#each filteredItems as item, idx}",
     ctx
   });
   return block;
@@ -47032,11 +47152,11 @@ function create_fragment(ctx) {
       this.c = noop;
       attr_dev(input, "class", input_class_value = ctx[4].className("__input"));
       attr_dev(input, "type", "text");
-      add_location(input, file, 83, 2, 4461);
+      add_location(input, file, 93, 2, 3124);
       attr_dev(ul, "class", ul_class_value = ctx[4].className("__list"));
-      add_location(ul, file, 89, 2, 4576);
+      add_location(ul, file, 99, 2, 3239);
       attr_dev(div, "class", div_class_value = ctx[4].className());
-      add_location(div, file, 82, 0, 4423);
+      add_location(div, file, 92, 0, 3086);
     },
     l: function claim(nodes) {
       throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -47105,25 +47225,33 @@ function instance($$self, $$props, $$invalidate) {
       interface: SFiltrableInputComponentInterface_default
     }
   });
-  let {value, template, noItemTemplate, filtrable} = component.props;
+  let {value, template, noItemTemplate, filtrable, maxItems} = component.props;
   const items = [
     {
       title: "Hello",
-      body: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+      body: `Lorem Ipsum is simply dummy text of the printing`
     },
     {
       title: "Coco",
-      body: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+      body: `Lorem Ipsum is simply dummy text of the printing`
     },
     {
       title: "Plopfopof",
-      body: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+      body: `Lorem Ipsum is simply dummy text of the printing`
     }
   ];
-  console.log("DDD", filtrable);
+  for (let i = 0; i < 1e3; i++) {
+    items.push({
+      title: "Coco " + i,
+      body: `Lorem Ipsum is simply dummy text of the printing`
+    });
+  }
   let filteredItems = items;
   function filterItems() {
+    let matchedItemsCount = 0;
     $$invalidate(3, filteredItems = items.map((item) => clone_default2(item)).filter((item) => {
+      if (matchedItemsCount >= maxItems)
+        return false;
       let matchFilter = false;
       for (let i = 0; i < Object.keys(item).length; i++) {
         const propName = Object.keys(item)[i], propValue = item[propName];
@@ -47132,9 +47260,9 @@ function instance($$self, $$props, $$invalidate) {
         if (filtrable.indexOf(propName) !== -1) {
           const reg = new RegExp(value, "gi");
           if (propValue.match(reg)) {
+            matchedItemsCount++;
             matchFilter = true;
             if (value && value !== "") {
-              console.log("val", value);
               const reg2 = new RegExp(value, "gi");
               const finalString = propValue.replace(reg2, (str) => {
                 return `<span class="${component.className("__list-item-highlight")}">${str}</span>`;
@@ -47162,13 +47290,14 @@ function instance($$self, $$props, $$invalidate) {
     }
   });
   component.onMount(() => {
+    filterItems();
   });
   function input_input_handler() {
     value = this.value;
     $$invalidate(0, value);
   }
   $$self.$$set = ($$new_props) => {
-    $$invalidate(10, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+    $$invalidate(11, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
   };
   $$self.$capture_state = () => ({
     __SSvelteComponent: exports_default2,
@@ -47180,12 +47309,13 @@ function instance($$self, $$props, $$invalidate) {
     template,
     noItemTemplate,
     filtrable,
+    maxItems,
     items,
     filteredItems,
     filterItems
   });
   $$self.$inject_state = ($$new_props) => {
-    $$invalidate(10, $$props = assign(assign({}, $$props), $$new_props));
+    $$invalidate(11, $$props = assign(assign({}, $$props), $$new_props));
     if ("value" in $$props)
       $$invalidate(0, value = $$new_props.value);
     if ("template" in $$props)
@@ -47194,6 +47324,8 @@ function instance($$self, $$props, $$invalidate) {
       $$invalidate(2, noItemTemplate = $$new_props.noItemTemplate);
     if ("filtrable" in $$props)
       filtrable = $$new_props.filtrable;
+    if ("maxItems" in $$props)
+      maxItems = $$new_props.maxItems;
     if ("filteredItems" in $$props)
       $$invalidate(3, filteredItems = $$new_props.filteredItems);
   };
@@ -47214,13 +47346,13 @@ function instance($$self, $$props, $$invalidate) {
 var Index = class extends SvelteElement {
   constructor(options) {
     super();
-    this.shadowRoot.innerHTML = `<style>.s-filtrable-input{display:inline-block;position:relative
-}.s-filtrable-input__list{position:absolute;top:100%;left:0;overflow-x:hidden;overflow-y:auto;opacity:0;max-width:calc(100vw - 100px);pointer-events:none;width:50vw;padding:var(--s-theme-space-40, 0.8rem);box-shadow:0 1.3px 0.8px rgba(0, 0, 0, 0.017),0 3.1px 2px rgba(0, 0, 0, 0.024),0 5.9px 3.8px rgba(0, 0, 0, 0.03),0 10.5px 6.7px rgba(0, 0, 0, 0.036),0 19.6px 12.5px rgba(0, 0, 0, 0.043),0 47px 30px rgba(0, 0, 0, 0.06)
-}.s-filtrable-input__input:focus+.s-filtrable-input__list,.s-filtrable-input__list:focus{opacity:1;pointer-events:all
-}.s-filtrable-input__list-item{cursor:pointer;background-color:var(--s-theme-color-surface-50, #ffffff);padding:var(--s-theme-space-50, 1rem);position:relative;transition:all 0.2s ease-in-out
-}.s-filtrable-input__list-item:hover{background-color:var(--s-theme-color-surface-55, #f2f2f2);box-shadow:0 0.4px 0.5px rgba(0, 0, 0, 0.017),0 0.9px 1.1px rgba(0, 0, 0, 0.024),0 1.8px 2.1px rgba(0, 0, 0, 0.03),0 3.1px 3.8px rgba(0, 0, 0, 0.036),0 5.8px 7.1px rgba(0, 0, 0, 0.043),0 14px 17px rgba(0, 0, 0, 0.06)
-}.s-filtrable-input__list-item *{pointer-events:none
-}.s-filtrable-input__list-item-highlight{background-color:var(--s-theme-color-primary-default, #f2bc2b)
+    this.shadowRoot.innerHTML = `<style>.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare){display:inline-block;position:relative
+}.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list{position:absolute;top:100%;left:0;overflow-x:hidden;overflow-y:auto;opacity:0;max-width:calc(100vw - 100px);pointer-events:none
+}.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__input:focus+.s-filtrable-input__list,.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list:focus{opacity:1;pointer-events:all
+}.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list-item{cursor:pointer;position:relative
+}.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list-item *{pointer-events:none
+}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf){}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list{content:"s-style-list"
+}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list-item-highlight{background-color:var(--s-theme-color-primary-default, #f2bc2b)
 }</style>`;
     init(this, {
       target: this.shadowRoot,

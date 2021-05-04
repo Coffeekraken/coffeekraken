@@ -20,6 +20,15 @@ const plugin = (...args) => {
   // const importsStack: string[] = [];
 
   const processNested = (css) => {
+    if (Array.isArray(css)) {
+      css = css
+        .map((node) => {
+          if (node.type === 'decl') return node.toString() + ';';
+          return node.toString();
+        })
+        .join('\n');
+    }
+
     if (typeof css === 'string') css = __postcss.parse(css);
     css.walkAtRules((atRule) => {
       // if (atRule.name === 'import' && atRule.params.match(/^url\(.*\)/)) {

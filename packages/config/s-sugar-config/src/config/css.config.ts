@@ -231,20 +231,20 @@ export default {
         import: 'postcss-nested',
         settings: {}
       },
-      // presetEnv: {
-      //   import: 'postcss-preset-env',
-      //   settings: {}
-      // },
+      presetEnv: {
+        import: 'postcss-preset-env',
+        settings: {}
+      },
       autoprefixer: {
         import: 'autoprefixer',
         settings: {}
       },
-      // postcssReporter: {
-      //   import: 'postcss-reporter',
-      //   settings: {
-      //     clearReportedMessages: true
-      //   }
-      // },
+      postcssReporter: {
+        import: 'postcss-reporter',
+        settings: {
+          clearReportedMessages: true
+        }
+      },
       cssnano: {
         import: 'cssnano',
         settings: {

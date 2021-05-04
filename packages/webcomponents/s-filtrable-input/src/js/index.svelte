@@ -20,29 +20,44 @@
       interface: __SFiltrableInputComponentInterface
     }
   });
-  let { value, template, noItemTemplate, filtrable } = component.props;
+  let {
+    value,
+    template,
+    noItemTemplate,
+    filtrable,
+    maxItems
+  } = component.props;
 
   const items = [
     {
       title: 'Hello',
-      body: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+      body: `Lorem Ipsum is simply dummy text of the printing`
     },
     {
       title: 'Coco',
-      body: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+      body: `Lorem Ipsum is simply dummy text of the printing`
     },
     {
       title: 'Plopfopof',
-      body: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+      body: `Lorem Ipsum is simply dummy text of the printing`
     }
   ];
+  for (let i = 0; i < 1000; i++) {
+    items.push({
+      title: 'Coco ' + i,
+      body: `Lorem Ipsum is simply dummy text of the printing`
+    });
+  }
 
   let filteredItems = items;
 
   function filterItems() {
+    let matchedItemsCount = 0;
     filteredItems = items
       .map((item) => __clone(item))
       .filter((item) => {
+        if (matchedItemsCount >= maxItems) return false;
+
         let matchFilter = false;
         for (let i = 0; i < Object.keys(item).length; i++) {
           const propName = Object.keys(item)[i],
@@ -54,9 +69,9 @@
           if (filtrable.indexOf(propName) !== -1) {
             const reg = new RegExp(value, 'gi');
             if (propValue.match(reg)) {
+              matchedItemsCount++;
               matchFilter = true;
               if (value && value !== '') {
-                console.log('val', value);
                 const reg = new RegExp(value, 'gi');
                 const finalString = propValue.replace(reg, (str) => {
                   return `<span class="${component.className(
@@ -91,7 +106,9 @@
     }
   });
 
-  component.onMount(() => {});
+  component.onMount(() => {
+    filterItems();
+  });
 </script>
 
 <div class={component.className()}>
@@ -109,7 +126,7 @@
     {:else}
       {#each filteredItems as item, idx}
         <li
-          style="z-index: {99999 - idx}"
+          style="z-index: {999999999 - idx}"
           class={component.className('__list-item')}
         >
           {@html component.compileMustache(template, item)}
@@ -121,55 +138,69 @@
 
 <style>
   .s-filtrable-input {
-    display: inline-block;
-    position: relative;
-  }
+    @sugar.scope.bare {
+      display: inline-block;
+      position: relative;
 
-  .s-filtrable-input__list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    opacity: 0;
-    max-width: calc(100vw - 100px);
-    pointer-events: none;
-    /* min-width: 100%; */
-    width: 50vw;
+      .s-filtrable-input__list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        opacity: 0;
+        max-width: calc(100vw - 100px);
+        pointer-events: none;
+      }
 
-    padding: sugar.space(40);
-    @sugar.depth (5);
+      .s-filtrable-input__input:focus + .s-filtrable-input__list,
+      .s-filtrable-input__list:focus {
+        opacity: 1;
+        pointer-events: all;
+      }
 
-    .s-filtrable-input__input:focus + &,
-    &:focus {
-      opacity: 1;
-      pointer-events: all;
+      /* .s-filtrable-input--ontop & {
+			bottom: 100%;
+			top: initial;
+			} */
+
+      .s-filtrable-input__list-item {
+        cursor: pointer;
+        position: relative;
+
+        * {
+          pointer-events: none;
+        }
+      }
     }
   }
 
-  /* .s-filtrable-input--ontop & {
-      bottom: 100%;
-      top: initial;
-    } */
+  .s-filtrable-input {
+    @sugar.scope.lnf {
+      .s-filtrable-input__list {
+        /* width: 50vw;*/
+        @sugar.style.apply (list);
+      }
 
-  .s-filtrable-input__list-item {
-    cursor: pointer;
-    background-color: sugar.color(surface, 50);
-    padding: sugar.space(50);
-    position: relative;
-    transition: all 0.2s ease-in-out;
+      /* .s-filtrable-input--ontop & {
+		bottom: 100%;
+		top: initial;
+		} */
 
-    &:hover {
-      background-color: sugar.color(surface, 55);
-      @sugar.depth (2);
+      /* .s-filtrable-input__list-item {
+        background-color: sugar.color(surface, 50);
+        padding: sugar.space(50);
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background-color: sugar.color(surface, 55);
+          @sugar.depth (2);
+        }
+      } */
+
+      .s-filtrable-input__list-item-highlight {
+        background-color: sugar.color(primary);
+      }
     }
-
-    * {
-      pointer-events: none;
-    }
-  }
-
-  .s-filtrable-input__list-item-highlight {
-    background-color: sugar.color(primary);
   }
 </style>

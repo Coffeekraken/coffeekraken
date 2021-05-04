@@ -25,7 +25,11 @@ const descriptor: ISTypeDescriptor = {
   name: 'Boolean',
   id: 'boolean',
   is: (value: any) => typeof value === 'boolean',
-  cast: (value: any) => {
+  cast: (value: any, params: any = {}) => {
+    if (value !== false && params && params.nullishAsTrue && !value) {
+      return true;
+    }
+
     if (typeof value === 'boolean') return value;
     if (value === null || value === undefined) return false;
     if (typeof value === 'number') {

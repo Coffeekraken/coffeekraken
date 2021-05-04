@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
+import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
 
 class postcssSugarPluginFontSizeInterface extends __SInterface {
   static definition = {
@@ -33,9 +34,7 @@ export default function (
 
   const name = finalParams.name;
 
-  if (`${parseFloat(name)}` !== `${name}`) {
-    return name;
-  }
+  if (__isValidUnitValue(name)) return name;
 
   let size = __theme().config(`font.size.${name}`);
 

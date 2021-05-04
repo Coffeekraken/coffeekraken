@@ -27,6 +27,8 @@ export default function (
     ...params
   };
 
+  console.log(finalParams);
+
   const depthCss = __theme().config(`depth.${finalParams.depth}`);
 
   const vars: string[] = [`box-shadow: ${depthCss};`];

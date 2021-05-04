@@ -40,9 +40,7 @@ export default function (
 
   const vars: string[] = [];
 
-  vars.push(
-    `&:not(.s-nude-children &):not(.s-no-lnf-children &):not(.s-nude):not(.s-no-lnf) {`
-  );
+  vars.push(`&:not(.s-no-lnf &):not(.s-no-lnf) {`);
   vars.push(
     processNested(
       atRule.nodes

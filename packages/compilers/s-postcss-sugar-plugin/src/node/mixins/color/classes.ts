@@ -32,25 +32,13 @@ export default function (params = {}, atRule, processNested) {
   colors.forEach((colorName) => {
     const colorObj = colorsObj[colorName];
     Object.keys(colorObj).forEach((modifier) => {
-      let modifierStr = modifier;
-      let modifierInvertStr = modifier;
-      // if (modifier.match(/^default/)) {
-      //   if (modifier.match(/\-i$/)) {
-      //     modifierStr = '--i';
-      //     modifierInvertStr = '';
-      //   } else {
-      //     modifierStr = ``;
-      //     modifierInvertStr = '--i';
-      //   }
-      // } else {
-      //   if (modifier.match(/\-i$/)) {
-      //     modifierStr = `--${modifier}`;
-      //     modifierInvertStr = `--${modifier.replace(/\-i$/, '')}`;
-      //   } else {
-      //     modifierStr = `--${modifier}`;
-      //     modifierInvertStr = `--${modifier}-i`;
-      //   }
-      // }
+      let modifierStr = '';
+      if (modifier.match(/^default/)) {
+        modifierStr = `--${modifier}`;
+        modifier = '';
+      } else {
+        modifierStr = modifier;
+      }
 
       cssArray.push(
         [
@@ -67,7 +55,7 @@ export default function (params = {}, atRule, processNested) {
           ` * </h1>`,
           ` */`,
           `.s-c-${colorName}${modifierStr} {`,
-          `   color: sugar.color(${colorName}${modifierStr});`,
+          `   color: sugar.color(${colorName},${modifier});`,
           `}`
         ].join('\n')
       );
@@ -82,12 +70,12 @@ export default function (params = {}, atRule, processNested) {
           ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
           ` *`,
           ` * @example        html`,
-          ` * <h1 class="s-bg-${colorName}${modifierStr} c-${colorName}${modifierInvertStr}">`,
+          ` * <h1 class="s-bg-${colorName}${modifierStr}">`,
           ` *     Something cool`,
           ` * </h1>`,
           ` */`,
           `.s-bg-${colorName}${modifierStr} {`,
-          `   background-color: sugar.color(${colorName}${modifierStr})`,
+          `   background-color: sugar.color(${colorName},${modifier})`,
           `}`
         ].join('\n')
       );

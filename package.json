@@ -6,7 +6,7 @@
     "dev": "concurrently -n js,node,shared \"npm run dev.js\" \"npm run dev.node\" \"npm run dev.shared\"",
     "dev.js": "tsc -p .tsconfig/tsconfig.js.json --watch",
     "dev.node": "tsc -p .tsconfig/tsconfig.node.json --watch",
-    "dev.shared": "tsc -p .tsconfig/tsconfig.shared.json",
+    "dev.shared": "tsc -p .tsconfig/tsconfig.shared.json --watch",
     "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
   },
   "private": true,

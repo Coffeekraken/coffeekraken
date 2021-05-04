@@ -63,19 +63,8 @@ export default function (params: Partial<IPostcssSugarPluginColorParams> = {}) {
   } else {
     let name = finalParams.name;
     let modifier = finalParams.modifier;
-    // let invert = false;
-
-    // if (name.split('--').length >= 2) {
-    //   if (name.split('--').pop() === 'i') {
-    //     name = name.replace(/\-\-i$/, '');
-    //     invert = true;
-    //   }
-    //   modifier = name.split('--')[1];
-    //   name = name.split('--')[0];
-    // }
 
     let modifierStr = modifier || 'default';
-    // if (invert) modifierStr += '-i';
 
     const colorValue = __theme().config(`color.${name}.${modifierStr}`);
 

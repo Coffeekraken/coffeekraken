@@ -1197,7 +1197,7 @@ export default {
           'font-size': '0.5em'
         },
         mark: {
-          'background-color': 'sugar.color(primary--30)'
+          'background-color': 'sugar.color(primary, 30)'
         },
         del: {
           'text-decoration': 'line-through'

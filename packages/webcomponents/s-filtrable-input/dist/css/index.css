@@ -9,16 +9,16 @@
   --s-theme-ratio-4-3: 1.3333333333333333;
   --s-theme-ratio-3-4: 0.75;
   --s-theme-depth-0: 0;
-  --s-theme-depth-1: 0 0.1px 0.1px rgba(0, 0, 0, 0.017),0 0.3px 0.3px rgba(0, 0, 0, 0.024),0 0.5px 0.6px rgba(0, 0, 0, 0.03),0 0.9px 1.1px rgba(0, 0, 0, 0.036),0 1.7px 2.1px rgba(0, 0, 0, 0.043),0 4px 5px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-2: 0 0.4px 0.5px rgba(0, 0, 0, 0.017),0 0.9px 1.1px rgba(0, 0, 0, 0.024),0 1.8px 2.1px rgba(0, 0, 0, 0.03),0 3.1px 3.8px rgba(0, 0, 0, 0.036),0 5.8px 7.1px rgba(0, 0, 0, 0.043),0 14px 17px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-3: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-4: 0 0.9px 0.7px rgba(0, 0, 0, 0.017),0 2.1px 1.7px rgba(0, 0, 0, 0.024),0 4px 3.1px rgba(0, 0, 0, 0.03),0 7.1px 5.6px rgba(0, 0, 0, 0.036),0 13.4px 10.4px rgba(0, 0, 0, 0.043),0 32px 25px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-5: 0 1.3px 0.8px rgba(0, 0, 0, 0.017),0 3.1px 2px rgba(0, 0, 0, 0.024),0 5.9px 3.8px rgba(0, 0, 0, 0.03),0 10.5px 6.7px rgba(0, 0, 0, 0.036),0 19.6px 12.5px rgba(0, 0, 0, 0.043),0 47px 30px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-6: 0 1.8px 1.1px rgba(0, 0, 0, 0.017),0 4.3px 2.7px rgba(0, 0, 0, 0.024),0 8px 5.1px rgba(0, 0, 0, 0.03),0 14.3px 9.2px rgba(0, 0, 0, 0.036),0 26.7px 17.1px rgba(0, 0, 0, 0.043),0 64px 41px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-7: 0 2.4px 1.4px rgba(0, 0, 0, 0.017),0 5.7px 3.3px rgba(0, 0, 0, 0.024),0 10.6px 6.1px rgba(0, 0, 0, 0.03),0 19px 10.9px rgba(0, 0, 0, 0.036),0 35.5px 20.5px rgba(0, 0, 0, 0.043),0 85px 49px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-8: 0 3px 1.9px rgba(0, 0, 0, 0.017),0 7.2px 4.6px rgba(0, 0, 0, 0.024),0 13.6px 8.6px rgba(0, 0, 0, 0.03),0 24.3px 15.4px rgba(0, 0, 0, 0.036),0 45.5px 28.8px rgba(0, 0, 0, 0.043),0 109px 69px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-9: 0 4px 2.2px rgba(0, 0, 0, 0.017),0 9.6px 5.4px rgba(0, 0, 0, 0.024),0 18px 10.1px rgba(0, 0, 0, 0.03),0 32.2px 18.1px rgba(0, 0, 0, 0.036),0 60.2px 33.8px rgba(0, 0, 0, 0.043),0 144px 81px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-10: 0 5px 2.6px rgba(0, 0, 0, 0.017),0 12px 6.3px rgba(0, 0, 0, 0.024),0 22.7px 11.8px rgba(0, 0, 0, 0.03),0 40.4px 21px rgba(0, 0, 0, 0.036),0 75.6px 39.3px rgba(0, 0, 0, 0.043),0 181px 94px rgba(0, 0, 0, 0.06);
+  --s-theme-depth-10: 0 0.1px 0.1px rgba(0, 0, 0, 0.02),0 0.1px 0.1px rgba(0, 0, 0, 0.028),0 0.3px 0.3px rgba(0, 0, 0, 0.035),0 0.4px 0.4px rgba(0, 0, 0, 0.042),0 0.8px 0.8px rgba(0, 0, 0, 0.05),0 2px 2px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-20: 0 0.1px 0.1px rgba(0, 0, 0, 0.02),0 0.3px 0.3px rgba(0, 0, 0, 0.028),0 0.5px 0.6px rgba(0, 0, 0, 0.035),0 0.9px 1.1px rgba(0, 0, 0, 0.042),0 1.7px 2.1px rgba(0, 0, 0, 0.05),0 4px 5px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-30: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06);
+  --s-theme-depth-40: 0 0.2px 0.2px rgba(0, 0, 0, 0.02),0 0.4px 0.5px rgba(0, 0, 0, 0.028),0 0.8px 0.9px rgba(0, 0, 0, 0.035),0 1.3px 1.6px rgba(0, 0, 0, 0.042),0 2.5px 2.9px rgba(0, 0, 0, 0.05),0 6px 7px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-50: 0 0.3px 0.3px rgba(0, 0, 0, 0.02),0 0.7px 0.7px rgba(0, 0, 0, 0.028),0 1.3px 1.3px rgba(0, 0, 0, 0.035),0 2.2px 2.2px rgba(0, 0, 0, 0.042),0 4.2px 4.2px rgba(0, 0, 0, 0.05),0 10px 10px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-60: 0 0.3px 0.3px rgba(0, 0, 0, 0.02),0 0.8px 0.8px rgba(0, 0, 0, 0.028),0 1.5px 1.5px rgba(0, 0, 0, 0.035),0 2.7px 2.7px rgba(0, 0, 0, 0.042),0 5px 5px rgba(0, 0, 0, 0.05),0 12px 12px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-70: 0 0.4px 0.4px rgba(0, 0, 0, 0.02),0 0.9px 0.9px rgba(0, 0, 0, 0.028),0 1.8px 1.8px rgba(0, 0, 0, 0.035),0 3.1px 3.1px rgba(0, 0, 0, 0.042),0 5.8px 5.8px rgba(0, 0, 0, 0.05),0 14px 14px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-80: 0 0.4px 0.4px rgba(0, 0, 0, 0.02),0 1.1px 1.1px rgba(0, 0, 0, 0.028),0 2px 2px rgba(0, 0, 0, 0.035),0 3.6px 3.6px rgba(0, 0, 0, 0.042),0 6.7px 6.7px rgba(0, 0, 0, 0.05),0 16px 16px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-90: 0 0.5px 0.5px rgba(0, 0, 0, 0.02),0 1.3px 1.3px rgba(0, 0, 0, 0.028),0 2.4px 2.4px rgba(0, 0, 0, 0.035),0 4.2px 4.2px rgba(0, 0, 0, 0.042),0 7.9px 7.9px rgba(0, 0, 0, 0.05),0 19px 19px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-100: 0 0.6px 0.6px rgba(0, 0, 0, 0.02),0 1.5px 1.5px rgba(0, 0, 0, 0.028),0 2.8px 2.8px rgba(0, 0, 0, 0.035),0 4.9px 4.9px rgba(0, 0, 0, 0.042),0 9.2px 9.2px rgba(0, 0, 0, 0.05),0 22px 22px rgba(0, 0, 0, 0.07);
   --s-theme-gradient-defaultType: linear;
   --s-theme-gradient-defaultAngle: 45;
   --s-theme-gradient-defaultModifier: 70;
@@ -61,6 +61,26 @@
   --s-theme-color-default-90: #222525;
   --s-theme-color-default-95: #161818;
   --s-theme-color-default-default: #848e91;
+  --s-theme-color-ui-5: #ffffff;
+  --s-theme-color-ui-10: #ffffff;
+  --s-theme-color-ui-15: #ffffff;
+  --s-theme-color-ui-20: #ffffff;
+  --s-theme-color-ui-25: #fcfcfc;
+  --s-theme-color-ui-30: #f0f0f0;
+  --s-theme-color-ui-35: #e3e3e3;
+  --s-theme-color-ui-40: #d6d6d6;
+  --s-theme-color-ui-45: #c9c9c9;
+  --s-theme-color-ui-50: #bdbdbd;
+  --s-theme-color-ui-55: #b0b0b0;
+  --s-theme-color-ui-60: #a3a3a3;
+  --s-theme-color-ui-65: #969696;
+  --s-theme-color-ui-70: #8a8a8a;
+  --s-theme-color-ui-75: #7d7d7d;
+  --s-theme-color-ui-80: #707070;
+  --s-theme-color-ui-85: #636363;
+  --s-theme-color-ui-90: #575757;
+  --s-theme-color-ui-95: #4a4a4a;
+  --s-theme-color-ui-default: #BDBDBD;
   --s-theme-color-title-5: #97a8af;
   --s-theme-color-title-10: #899ca4;
   --s-theme-color-title-15: #7a9099;
@@ -410,6 +430,11 @@
   --s-theme-ui-button-borderRadius: 0.2em;
   --s-theme-ui-button-transition: all .2s ease-in-out;
   --s-theme-ui-button-styles: default,outlined,text;
+  --s-theme-ui-form-padding: 0.5em 0.8em;
+  --s-theme-ui-form-borderRadius: 0.2em;
+  --s-theme-ui-form-transition: all .2s ease-in-out;
+  --s-theme-ui-form-styles: default:default;
+  --s-theme-ui-form-colors: ui:default;
   --s-theme-space-0: 0rem;
   --s-theme-space-10: 0.2rem;
   --s-theme-space-20: 0.4rem;
@@ -464,16 +489,16 @@
   --s-theme-ratio-4-3: 1.3333333333333333;
   --s-theme-ratio-3-4: 0.75;
   --s-theme-depth-0: 0;
-  --s-theme-depth-1: 0 0.1px 0.1px rgba(0, 0, 0, 0.017),0 0.3px 0.3px rgba(0, 0, 0, 0.024),0 0.5px 0.6px rgba(0, 0, 0, 0.03),0 0.9px 1.1px rgba(0, 0, 0, 0.036),0 1.7px 2.1px rgba(0, 0, 0, 0.043),0 4px 5px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-2: 0 0.4px 0.5px rgba(0, 0, 0, 0.017),0 0.9px 1.1px rgba(0, 0, 0, 0.024),0 1.8px 2.1px rgba(0, 0, 0, 0.03),0 3.1px 3.8px rgba(0, 0, 0, 0.036),0 5.8px 7.1px rgba(0, 0, 0, 0.043),0 14px 17px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-3: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-4: 0 0.9px 0.7px rgba(0, 0, 0, 0.017),0 2.1px 1.7px rgba(0, 0, 0, 0.024),0 4px 3.1px rgba(0, 0, 0, 0.03),0 7.1px 5.6px rgba(0, 0, 0, 0.036),0 13.4px 10.4px rgba(0, 0, 0, 0.043),0 32px 25px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-5: 0 1.3px 0.8px rgba(0, 0, 0, 0.017),0 3.1px 2px rgba(0, 0, 0, 0.024),0 5.9px 3.8px rgba(0, 0, 0, 0.03),0 10.5px 6.7px rgba(0, 0, 0, 0.036),0 19.6px 12.5px rgba(0, 0, 0, 0.043),0 47px 30px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-6: 0 1.8px 1.1px rgba(0, 0, 0, 0.017),0 4.3px 2.7px rgba(0, 0, 0, 0.024),0 8px 5.1px rgba(0, 0, 0, 0.03),0 14.3px 9.2px rgba(0, 0, 0, 0.036),0 26.7px 17.1px rgba(0, 0, 0, 0.043),0 64px 41px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-7: 0 2.4px 1.4px rgba(0, 0, 0, 0.017),0 5.7px 3.3px rgba(0, 0, 0, 0.024),0 10.6px 6.1px rgba(0, 0, 0, 0.03),0 19px 10.9px rgba(0, 0, 0, 0.036),0 35.5px 20.5px rgba(0, 0, 0, 0.043),0 85px 49px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-8: 0 3px 1.9px rgba(0, 0, 0, 0.017),0 7.2px 4.6px rgba(0, 0, 0, 0.024),0 13.6px 8.6px rgba(0, 0, 0, 0.03),0 24.3px 15.4px rgba(0, 0, 0, 0.036),0 45.5px 28.8px rgba(0, 0, 0, 0.043),0 109px 69px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-9: 0 4px 2.2px rgba(0, 0, 0, 0.017),0 9.6px 5.4px rgba(0, 0, 0, 0.024),0 18px 10.1px rgba(0, 0, 0, 0.03),0 32.2px 18.1px rgba(0, 0, 0, 0.036),0 60.2px 33.8px rgba(0, 0, 0, 0.043),0 144px 81px rgba(0, 0, 0, 0.06);
-  --s-theme-depth-10: 0 5px 2.6px rgba(0, 0, 0, 0.017),0 12px 6.3px rgba(0, 0, 0, 0.024),0 22.7px 11.8px rgba(0, 0, 0, 0.03),0 40.4px 21px rgba(0, 0, 0, 0.036),0 75.6px 39.3px rgba(0, 0, 0, 0.043),0 181px 94px rgba(0, 0, 0, 0.06);
+  --s-theme-depth-10: 0 0.1px 0.1px rgba(0, 0, 0, 0.02),0 0.1px 0.1px rgba(0, 0, 0, 0.028),0 0.3px 0.3px rgba(0, 0, 0, 0.035),0 0.4px 0.4px rgba(0, 0, 0, 0.042),0 0.8px 0.8px rgba(0, 0, 0, 0.05),0 2px 2px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-20: 0 0.1px 0.1px rgba(0, 0, 0, 0.02),0 0.3px 0.3px rgba(0, 0, 0, 0.028),0 0.5px 0.6px rgba(0, 0, 0, 0.035),0 0.9px 1.1px rgba(0, 0, 0, 0.042),0 1.7px 2.1px rgba(0, 0, 0, 0.05),0 4px 5px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-30: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06);
+  --s-theme-depth-40: 0 0.2px 0.2px rgba(0, 0, 0, 0.02),0 0.4px 0.5px rgba(0, 0, 0, 0.028),0 0.8px 0.9px rgba(0, 0, 0, 0.035),0 1.3px 1.6px rgba(0, 0, 0, 0.042),0 2.5px 2.9px rgba(0, 0, 0, 0.05),0 6px 7px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-50: 0 0.3px 0.3px rgba(0, 0, 0, 0.02),0 0.7px 0.7px rgba(0, 0, 0, 0.028),0 1.3px 1.3px rgba(0, 0, 0, 0.035),0 2.2px 2.2px rgba(0, 0, 0, 0.042),0 4.2px 4.2px rgba(0, 0, 0, 0.05),0 10px 10px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-60: 0 0.3px 0.3px rgba(0, 0, 0, 0.02),0 0.8px 0.8px rgba(0, 0, 0, 0.028),0 1.5px 1.5px rgba(0, 0, 0, 0.035),0 2.7px 2.7px rgba(0, 0, 0, 0.042),0 5px 5px rgba(0, 0, 0, 0.05),0 12px 12px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-70: 0 0.4px 0.4px rgba(0, 0, 0, 0.02),0 0.9px 0.9px rgba(0, 0, 0, 0.028),0 1.8px 1.8px rgba(0, 0, 0, 0.035),0 3.1px 3.1px rgba(0, 0, 0, 0.042),0 5.8px 5.8px rgba(0, 0, 0, 0.05),0 14px 14px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-80: 0 0.4px 0.4px rgba(0, 0, 0, 0.02),0 1.1px 1.1px rgba(0, 0, 0, 0.028),0 2px 2px rgba(0, 0, 0, 0.035),0 3.6px 3.6px rgba(0, 0, 0, 0.042),0 6.7px 6.7px rgba(0, 0, 0, 0.05),0 16px 16px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-90: 0 0.5px 0.5px rgba(0, 0, 0, 0.02),0 1.3px 1.3px rgba(0, 0, 0, 0.028),0 2.4px 2.4px rgba(0, 0, 0, 0.035),0 4.2px 4.2px rgba(0, 0, 0, 0.042),0 7.9px 7.9px rgba(0, 0, 0, 0.05),0 19px 19px rgba(0, 0, 0, 0.07);
+  --s-theme-depth-100: 0 0.6px 0.6px rgba(0, 0, 0, 0.02),0 1.5px 1.5px rgba(0, 0, 0, 0.028),0 2.8px 2.8px rgba(0, 0, 0, 0.035),0 4.9px 4.9px rgba(0, 0, 0, 0.042),0 9.2px 9.2px rgba(0, 0, 0, 0.05),0 22px 22px rgba(0, 0, 0, 0.07);
   --s-theme-gradient-defaultType: linear;
   --s-theme-gradient-defaultAngle: 45;
   --s-theme-gradient-defaultModifier: 70;
@@ -516,6 +541,26 @@
   --s-theme-color-default-90: #222525;
   --s-theme-color-default-95: #161818;
   --s-theme-color-default-default: #848e91;
+  --s-theme-color-ui-5: #ffffff;
+  --s-theme-color-ui-10: #ffffff;
+  --s-theme-color-ui-15: #ffffff;
+  --s-theme-color-ui-20: #ffffff;
+  --s-theme-color-ui-25: #fcfcfc;
+  --s-theme-color-ui-30: #f0f0f0;
+  --s-theme-color-ui-35: #e3e3e3;
+  --s-theme-color-ui-40: #d6d6d6;
+  --s-theme-color-ui-45: #c9c9c9;
+  --s-theme-color-ui-50: #bdbdbd;
+  --s-theme-color-ui-55: #b0b0b0;
+  --s-theme-color-ui-60: #a3a3a3;
+  --s-theme-color-ui-65: #969696;
+  --s-theme-color-ui-70: #8a8a8a;
+  --s-theme-color-ui-75: #7d7d7d;
+  --s-theme-color-ui-80: #707070;
+  --s-theme-color-ui-85: #636363;
+  --s-theme-color-ui-90: #575757;
+  --s-theme-color-ui-95: #4a4a4a;
+  --s-theme-color-ui-default: #BDBDBD;
   --s-theme-color-title-5: #97a8af;
   --s-theme-color-title-10: #899ca4;
   --s-theme-color-title-15: #7a9099;
@@ -865,6 +910,11 @@
   --s-theme-ui-button-borderRadius: 0.2em;
   --s-theme-ui-button-transition: all .2s ease-in-out;
   --s-theme-ui-button-styles: default,outlined,text;
+  --s-theme-ui-form-padding: 0.5em 0.8em;
+  --s-theme-ui-form-borderRadius: 0.2em;
+  --s-theme-ui-form-transition: all .2s ease-in-out;
+  --s-theme-ui-form-styles: default:default;
+  --s-theme-ui-form-colors: ui:default;
   --s-theme-space-0: 0rem;
   --s-theme-space-10: 0.2rem;
   --s-theme-space-20: 0.4rem;
@@ -1597,6 +1647,206 @@ html {
  * This is the "default" registered color
  *
  * @color 		#848e91
+ */
+/**
+ * @name 		    ui
+ * @modifier        5
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-5" registered color
+ *
+ * @color 		#ffffff
+ */
+/**
+ * @name 		    ui
+ * @modifier        10
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-10" registered color
+ *
+ * @color 		#ffffff
+ */
+/**
+ * @name 		    ui
+ * @modifier        15
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-15" registered color
+ *
+ * @color 		#ffffff
+ */
+/**
+ * @name 		    ui
+ * @modifier        20
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-20" registered color
+ *
+ * @color 		#ffffff
+ */
+/**
+ * @name 		    ui
+ * @modifier        25
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-25" registered color
+ *
+ * @color 		#fcfcfc
+ */
+/**
+ * @name 		    ui
+ * @modifier        30
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-30" registered color
+ *
+ * @color 		#f0f0f0
+ */
+/**
+ * @name 		    ui
+ * @modifier        35
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-35" registered color
+ *
+ * @color 		#e3e3e3
+ */
+/**
+ * @name 		    ui
+ * @modifier        40
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-40" registered color
+ *
+ * @color 		#d6d6d6
+ */
+/**
+ * @name 		    ui
+ * @modifier        45
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-45" registered color
+ *
+ * @color 		#c9c9c9
+ */
+/**
+ * @name 		    ui
+ * @modifier        50
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-50" registered color
+ *
+ * @color 		#bdbdbd
+ */
+/**
+ * @name 		    ui
+ * @modifier        55
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-55" registered color
+ *
+ * @color 		#b0b0b0
+ */
+/**
+ * @name 		    ui
+ * @modifier        60
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-60" registered color
+ *
+ * @color 		#a3a3a3
+ */
+/**
+ * @name 		    ui
+ * @modifier        65
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-65" registered color
+ *
+ * @color 		#969696
+ */
+/**
+ * @name 		    ui
+ * @modifier        70
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-70" registered color
+ *
+ * @color 		#8a8a8a
+ */
+/**
+ * @name 		    ui
+ * @modifier        75
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-75" registered color
+ *
+ * @color 		#7d7d7d
+ */
+/**
+ * @name 		    ui
+ * @modifier        80
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-80" registered color
+ *
+ * @color 		#707070
+ */
+/**
+ * @name 		    ui
+ * @modifier        85
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-85" registered color
+ *
+ * @color 		#636363
+ */
+/**
+ * @name 		    ui
+ * @modifier        90
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-90" registered color
+ *
+ * @color 		#575757
+ */
+/**
+ * @name 		    ui
+ * @modifier        95
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui-95" registered color
+ *
+ * @color 		#4a4a4a
+ */
+/**
+ * @name 		    ui
+ * @modifier        default
+ * @namespace       sugar.css.theme.default.colors
+ * @type            color
+ *
+ * This is the "ui" registered color
+ *
+ * @color 		#BDBDBD
  */
 /**
  * @name 		    title
@@ -4587,6 +4837,606 @@ html {
  */
 .s-bg-default--default {
   background-color: var(--s-theme-color-default-default, #848e91)
+}
+/**
+ * @name           s-c-ui5
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui5" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui5">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui5 {
+  color: var(--s-theme-color-ui-5, #ffffff)
+}
+/**
+ * @name           s-bg-ui5
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui5" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui5">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui5 {
+  background-color: var(--s-theme-color-ui-5, #ffffff)
+}
+/**
+ * @name           s-c-ui10
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui10" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui10">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui10 {
+  color: var(--s-theme-color-ui-10, #ffffff)
+}
+/**
+ * @name           s-bg-ui10
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui10" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui10">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui10 {
+  background-color: var(--s-theme-color-ui-10, #ffffff)
+}
+/**
+ * @name           s-c-ui15
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui15" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui15">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui15 {
+  color: var(--s-theme-color-ui-15, #ffffff)
+}
+/**
+ * @name           s-bg-ui15
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui15" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui15">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui15 {
+  background-color: var(--s-theme-color-ui-15, #ffffff)
+}
+/**
+ * @name           s-c-ui20
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui20" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui20">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui20 {
+  color: var(--s-theme-color-ui-20, #ffffff)
+}
+/**
+ * @name           s-bg-ui20
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui20" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui20">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui20 {
+  background-color: var(--s-theme-color-ui-20, #ffffff)
+}
+/**
+ * @name           s-c-ui25
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui25" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui25">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui25 {
+  color: var(--s-theme-color-ui-25, #fcfcfc)
+}
+/**
+ * @name           s-bg-ui25
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui25" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui25">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui25 {
+  background-color: var(--s-theme-color-ui-25, #fcfcfc)
+}
+/**
+ * @name           s-c-ui30
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui30" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui30">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui30 {
+  color: var(--s-theme-color-ui-30, #f0f0f0)
+}
+/**
+ * @name           s-bg-ui30
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui30" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui30">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui30 {
+  background-color: var(--s-theme-color-ui-30, #f0f0f0)
+}
+/**
+ * @name           s-c-ui35
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui35" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui35">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui35 {
+  color: var(--s-theme-color-ui-35, #e3e3e3)
+}
+/**
+ * @name           s-bg-ui35
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui35" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui35">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui35 {
+  background-color: var(--s-theme-color-ui-35, #e3e3e3)
+}
+/**
+ * @name           s-c-ui40
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui40" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui40">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui40 {
+  color: var(--s-theme-color-ui-40, #d6d6d6)
+}
+/**
+ * @name           s-bg-ui40
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui40" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui40">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui40 {
+  background-color: var(--s-theme-color-ui-40, #d6d6d6)
+}
+/**
+ * @name           s-c-ui45
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui45" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui45">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui45 {
+  color: var(--s-theme-color-ui-45, #c9c9c9)
+}
+/**
+ * @name           s-bg-ui45
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui45" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui45">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui45 {
+  background-color: var(--s-theme-color-ui-45, #c9c9c9)
+}
+/**
+ * @name           s-c-ui50
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui50" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui50">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui50 {
+  color: var(--s-theme-color-ui-50, #bdbdbd)
+}
+/**
+ * @name           s-bg-ui50
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui50" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui50">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui50 {
+  background-color: var(--s-theme-color-ui-50, #bdbdbd)
+}
+/**
+ * @name           s-c-ui55
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui55" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui55">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui55 {
+  color: var(--s-theme-color-ui-55, #b0b0b0)
+}
+/**
+ * @name           s-bg-ui55
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui55" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui55">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui55 {
+  background-color: var(--s-theme-color-ui-55, #b0b0b0)
+}
+/**
+ * @name           s-c-ui60
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui60" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui60">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui60 {
+  color: var(--s-theme-color-ui-60, #a3a3a3)
+}
+/**
+ * @name           s-bg-ui60
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui60" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui60">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui60 {
+  background-color: var(--s-theme-color-ui-60, #a3a3a3)
+}
+/**
+ * @name           s-c-ui65
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui65" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui65">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui65 {
+  color: var(--s-theme-color-ui-65, #969696)
+}
+/**
+ * @name           s-bg-ui65
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui65" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui65">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui65 {
+  background-color: var(--s-theme-color-ui-65, #969696)
+}
+/**
+ * @name           s-c-ui70
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui70" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui70">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui70 {
+  color: var(--s-theme-color-ui-70, #8a8a8a)
+}
+/**
+ * @name           s-bg-ui70
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui70" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui70">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui70 {
+  background-color: var(--s-theme-color-ui-70, #8a8a8a)
+}
+/**
+ * @name           s-c-ui75
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui75" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui75">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui75 {
+  color: var(--s-theme-color-ui-75, #7d7d7d)
+}
+/**
+ * @name           s-bg-ui75
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui75" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui75">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui75 {
+  background-color: var(--s-theme-color-ui-75, #7d7d7d)
+}
+/**
+ * @name           s-c-ui80
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui80" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui80">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui80 {
+  color: var(--s-theme-color-ui-80, #707070)
+}
+/**
+ * @name           s-bg-ui80
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui80" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui80">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui80 {
+  background-color: var(--s-theme-color-ui-80, #707070)
+}
+/**
+ * @name           s-c-ui85
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui85" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui85">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui85 {
+  color: var(--s-theme-color-ui-85, #636363)
+}
+/**
+ * @name           s-bg-ui85
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui85" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui85">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui85 {
+  background-color: var(--s-theme-color-ui-85, #636363)
+}
+/**
+ * @name           s-c-ui90
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui90" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui90">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui90 {
+  color: var(--s-theme-color-ui-90, #575757)
+}
+/**
+ * @name           s-bg-ui90
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui90" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui90">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui90 {
+  background-color: var(--s-theme-color-ui-90, #575757)
+}
+/**
+ * @name           s-c-ui95
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui95" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui95">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui95 {
+  color: var(--s-theme-color-ui-95, #4a4a4a)
+}
+/**
+ * @name           s-bg-ui95
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui95" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui95">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui95 {
+  background-color: var(--s-theme-color-ui-95, #4a4a4a)
+}
+/**
+ * @name           s-c-ui--default
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui--default" color to an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-c-ui--default">
+ *     Something cool
+ * </h1>
+ */
+.s-c-ui--default {
+  color: var(--s-theme-color-ui-default, #BDBDBD)
+}
+/**
+ * @name           s-bg-ui--default
+ * @namespace      sugar.css.color.classes
+ * @type           CssClass
+ *
+ * This class allows you to apply the "ui--default" color to the background of an HTMLElement
+ *
+ * @example        html
+ * <h1 class="s-bg-ui--default">
+ *     Something cool
+ * </h1>
+ */
+.s-bg-ui--default {
+  background-color: var(--s-theme-color-ui-default, #BDBDBD)
 }
 /**
  * @name           s-c-title5
@@ -11952,123 +12802,6 @@ html {
   box-shadow: 0
 }
 /**
-  * @name          .s-depth-1
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>1</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-1">I'm a cool depth button</a>
-  */
-.s-depth-1 {
-  box-shadow: 0 0.1px 0.1px rgba(0, 0, 0, 0.017),0 0.3px 0.3px rgba(0, 0, 0, 0.024),0 0.5px 0.6px rgba(0, 0, 0, 0.03),0 0.9px 1.1px rgba(0, 0, 0, 0.036),0 1.7px 2.1px rgba(0, 0, 0, 0.043),0 4px 5px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-2
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>2</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-2">I'm a cool depth button</a>
-  */
-.s-depth-2 {
-  box-shadow: 0 0.4px 0.5px rgba(0, 0, 0, 0.017),0 0.9px 1.1px rgba(0, 0, 0, 0.024),0 1.8px 2.1px rgba(0, 0, 0, 0.03),0 3.1px 3.8px rgba(0, 0, 0, 0.036),0 5.8px 7.1px rgba(0, 0, 0, 0.043),0 14px 17px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-3
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>3</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-3">I'm a cool depth button</a>
-  */
-.s-depth-3 {
-  box-shadow: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-4
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>4</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-4">I'm a cool depth button</a>
-  */
-.s-depth-4 {
-  box-shadow: 0 0.9px 0.7px rgba(0, 0, 0, 0.017),0 2.1px 1.7px rgba(0, 0, 0, 0.024),0 4px 3.1px rgba(0, 0, 0, 0.03),0 7.1px 5.6px rgba(0, 0, 0, 0.036),0 13.4px 10.4px rgba(0, 0, 0, 0.043),0 32px 25px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-5
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>5</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-5">I'm a cool depth button</a>
-  */
-.s-depth-5 {
-  box-shadow: 0 1.3px 0.8px rgba(0, 0, 0, 0.017),0 3.1px 2px rgba(0, 0, 0, 0.024),0 5.9px 3.8px rgba(0, 0, 0, 0.03),0 10.5px 6.7px rgba(0, 0, 0, 0.036),0 19.6px 12.5px rgba(0, 0, 0, 0.043),0 47px 30px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-6
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>6</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-6">I'm a cool depth button</a>
-  */
-.s-depth-6 {
-  box-shadow: 0 1.8px 1.1px rgba(0, 0, 0, 0.017),0 4.3px 2.7px rgba(0, 0, 0, 0.024),0 8px 5.1px rgba(0, 0, 0, 0.03),0 14.3px 9.2px rgba(0, 0, 0, 0.036),0 26.7px 17.1px rgba(0, 0, 0, 0.043),0 64px 41px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-7
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>7</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-7">I'm a cool depth button</a>
-  */
-.s-depth-7 {
-  box-shadow: 0 2.4px 1.4px rgba(0, 0, 0, 0.017),0 5.7px 3.3px rgba(0, 0, 0, 0.024),0 10.6px 6.1px rgba(0, 0, 0, 0.03),0 19px 10.9px rgba(0, 0, 0, 0.036),0 35.5px 20.5px rgba(0, 0, 0, 0.043),0 85px 49px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-8
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>8</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-8">I'm a cool depth button</a>
-  */
-.s-depth-8 {
-  box-shadow: 0 3px 1.9px rgba(0, 0, 0, 0.017),0 7.2px 4.6px rgba(0, 0, 0, 0.024),0 13.6px 8.6px rgba(0, 0, 0, 0.03),0 24.3px 15.4px rgba(0, 0, 0, 0.036),0 45.5px 28.8px rgba(0, 0, 0, 0.043),0 109px 69px rgba(0, 0, 0, 0.06)
-}
-/**
-  * @name          .s-depth-9
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * 
-  * This class allows you to apply a "<yellow>9</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth-9">I'm a cool depth button</a>
-  */
-.s-depth-9 {
-  box-shadow: 0 4px 2.2px rgba(0, 0, 0, 0.017),0 9.6px 5.4px rgba(0, 0, 0, 0.024),0 18px 10.1px rgba(0, 0, 0, 0.03),0 32.2px 18.1px rgba(0, 0, 0, 0.036),0 60.2px 33.8px rgba(0, 0, 0, 0.043),0 144px 81px rgba(0, 0, 0, 0.06)
-}
-/**
   * @name          .s-depth-10
   * @namespace          sugar.css.depth
   * @type               CssClass
@@ -12079,7 +12812,124 @@ html {
   * <a class="s-btn s-btn--primary s-depth-10">I'm a cool depth button</a>
   */
 .s-depth-10 {
-  box-shadow: 0 5px 2.6px rgba(0, 0, 0, 0.017),0 12px 6.3px rgba(0, 0, 0, 0.024),0 22.7px 11.8px rgba(0, 0, 0, 0.03),0 40.4px 21px rgba(0, 0, 0, 0.036),0 75.6px 39.3px rgba(0, 0, 0, 0.043),0 181px 94px rgba(0, 0, 0, 0.06)
+  box-shadow: 0 0.1px 0.1px rgba(0, 0, 0, 0.02),0 0.1px 0.1px rgba(0, 0, 0, 0.028),0 0.3px 0.3px rgba(0, 0, 0, 0.035),0 0.4px 0.4px rgba(0, 0, 0, 0.042),0 0.8px 0.8px rgba(0, 0, 0, 0.05),0 2px 2px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-20
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>20</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-20">I'm a cool depth button</a>
+  */
+.s-depth-20 {
+  box-shadow: 0 0.1px 0.1px rgba(0, 0, 0, 0.02),0 0.3px 0.3px rgba(0, 0, 0, 0.028),0 0.5px 0.6px rgba(0, 0, 0, 0.035),0 0.9px 1.1px rgba(0, 0, 0, 0.042),0 1.7px 2.1px rgba(0, 0, 0, 0.05),0 4px 5px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-30
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>30</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-30">I'm a cool depth button</a>
+  */
+.s-depth-30 {
+  box-shadow: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
+}
+/**
+  * @name          .s-depth-40
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>40</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-40">I'm a cool depth button</a>
+  */
+.s-depth-40 {
+  box-shadow: 0 0.2px 0.2px rgba(0, 0, 0, 0.02),0 0.4px 0.5px rgba(0, 0, 0, 0.028),0 0.8px 0.9px rgba(0, 0, 0, 0.035),0 1.3px 1.6px rgba(0, 0, 0, 0.042),0 2.5px 2.9px rgba(0, 0, 0, 0.05),0 6px 7px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-50
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>50</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-50">I'm a cool depth button</a>
+  */
+.s-depth-50 {
+  box-shadow: 0 0.3px 0.3px rgba(0, 0, 0, 0.02),0 0.7px 0.7px rgba(0, 0, 0, 0.028),0 1.3px 1.3px rgba(0, 0, 0, 0.035),0 2.2px 2.2px rgba(0, 0, 0, 0.042),0 4.2px 4.2px rgba(0, 0, 0, 0.05),0 10px 10px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-60
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>60</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-60">I'm a cool depth button</a>
+  */
+.s-depth-60 {
+  box-shadow: 0 0.3px 0.3px rgba(0, 0, 0, 0.02),0 0.8px 0.8px rgba(0, 0, 0, 0.028),0 1.5px 1.5px rgba(0, 0, 0, 0.035),0 2.7px 2.7px rgba(0, 0, 0, 0.042),0 5px 5px rgba(0, 0, 0, 0.05),0 12px 12px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-70
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>70</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-70">I'm a cool depth button</a>
+  */
+.s-depth-70 {
+  box-shadow: 0 0.4px 0.4px rgba(0, 0, 0, 0.02),0 0.9px 0.9px rgba(0, 0, 0, 0.028),0 1.8px 1.8px rgba(0, 0, 0, 0.035),0 3.1px 3.1px rgba(0, 0, 0, 0.042),0 5.8px 5.8px rgba(0, 0, 0, 0.05),0 14px 14px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-80
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>80</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-80">I'm a cool depth button</a>
+  */
+.s-depth-80 {
+  box-shadow: 0 0.4px 0.4px rgba(0, 0, 0, 0.02),0 1.1px 1.1px rgba(0, 0, 0, 0.028),0 2px 2px rgba(0, 0, 0, 0.035),0 3.6px 3.6px rgba(0, 0, 0, 0.042),0 6.7px 6.7px rgba(0, 0, 0, 0.05),0 16px 16px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-90
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>90</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-90">I'm a cool depth button</a>
+  */
+.s-depth-90 {
+  box-shadow: 0 0.5px 0.5px rgba(0, 0, 0, 0.02),0 1.3px 1.3px rgba(0, 0, 0, 0.028),0 2.4px 2.4px rgba(0, 0, 0, 0.035),0 4.2px 4.2px rgba(0, 0, 0, 0.042),0 7.9px 7.9px rgba(0, 0, 0, 0.05),0 19px 19px rgba(0, 0, 0, 0.07)
+}
+/**
+  * @name          .s-depth-100
+  * @namespace          sugar.css.depth
+  * @type               CssClass
+  * 
+  * This class allows you to apply a "<yellow>100</yellow>" depth style to any HTMLElement
+  * 
+  * @example        html
+  * <a class="s-btn s-btn--primary s-depth-100">I'm a cool depth button</a>
+  */
+.s-depth-100 {
+  box-shadow: 0 0.6px 0.6px rgba(0, 0, 0, 0.02),0 1.5px 1.5px rgba(0, 0, 0, 0.028),0 2.8px 2.8px rgba(0, 0, 0, 0.035),0 4.9px 4.9px rgba(0, 0, 0, 0.042),0 9.2px 9.2px rgba(0, 0, 0, 0.05),0 22px 22px rgba(0, 0, 0, 0.07)
 }
 /**
   * @name          .s-pilled
@@ -12161,29 +13011,39 @@ html {
   top: 50%;
   transform: translateY(-50%)
 }
-.s-style-list {
-  background-color: var(--s-theme-color-surface-default, #ffffff);
-  padding: var(--s-theme-space-20, 0.4rem);
-  min-width: 500px;
-  border-radius: 5px
+.s-form:not(.s-no-bare .s-form):not(.no-bare) {
+  display: inline-block;
+  padding: var(--s-theme-ui-form-padding, 0.5em 0.8em)
 }
-.s-style-list > li,
-.s-style-list > dt {
-  border-radius: 5px;
-  padding: var(--s-theme-space-40, 0.8rem)
+/**
+        * @name           .s-form-input
+        * @namespace      sugar.css.ui.form
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>default</yellow>" form input with the "<yellow>ui</yellow>" color applied
+        * 
+        * @example        html
+        * <input class="s-form-input" placeholder="Hello world" />
+      */
+.s-form-input:not(.s-no-lnf .s-form-input):not(.s-no-lnf) {
+  border-radius: var(--s-theme-ui-form-borderRadius, 0.2em);
+  transition: var(--s-theme-ui-form-transition, all .2s ease-in-out);
+  background-color: transparent;
+  border-color: var(--s-theme-color-ui-default, #BDBDBD);
+  color: var(--s-theme-color-text-30, #b9bfc0);
+  border-style: solid;
+  border-width: 0.0625em;
+  padding: var(--s-theme-ui-form-padding, 0.5em 0.8em)
 }
-.s-style-list > li:hover,
-.s-style-list > dt:hover {
-  background-color: var(--s-theme-color-primary-20, #fae7b7)
-}
-.s-style-list {
-  box-shadow: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
+.s-form-input:not(.s-no-lnf .s-form-input):not(.s-no-lnf):hover {
+  border-color: var(--s-theme-color-ui-50, #bdbdbd)
 }
 .coco {
   background-color: var(--s-theme-color-surface-default, #ffffff);
   padding: var(--s-theme-space-20, 0.4rem);
   min-width: 500px;
-  border-radius: 5px
+  border-radius: 5px;
+  box-shadow: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
 }
 .coco > li,
 .coco > dt {
@@ -12194,6 +13054,19 @@ html {
 .coco > dt:hover {
   background-color: var(--s-theme-color-primary-20, #fae7b7)
 }
-.coco {
+.s-style-list {
+  background-color: var(--s-theme-color-surface-default, #ffffff);
+  padding: var(--s-theme-space-20, 0.4rem);
+  min-width: 500px;
+  border-radius: 5px;
   box-shadow: 0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
+}
+.s-style-list > li,
+.s-style-list > dt {
+  border-radius: 5px;
+  padding: var(--s-theme-space-40, 0.8rem)
+}
+.s-style-list > li:hover,
+.s-style-list > dt:hover {
+  background-color: var(--s-theme-color-primary-20, #fae7b7)
 }

@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme, { themeDefinition } from '../../utils/theme';
 
-class postcssSugarPluginStyleMixinInterface extends __SInterface {
+class postcssSugarPluginStyleDefineMixinInterface extends __SInterface {
   static definition = {
     name: {
       type: 'String',
@@ -9,9 +9,9 @@ class postcssSugarPluginStyleMixinInterface extends __SInterface {
     }
   };
 }
-export { postcssSugarPluginStyleMixinInterface as interface };
+export { postcssSugarPluginStyleDefineMixinInterface as interface };
 
-export interface postcssSugarPluginStyleMixinParams {
+export interface postcssSugarPluginStyleDefineMixinParams {
   name: string;
 }
 
@@ -39,12 +39,16 @@ if (!global._definedStyles) {
   // @ts-ignore
   global._definedStyles = {};
 }
-export default function (
-  params: Partial<postcssSugarPluginStyleMixinParams>,
+export default function ({
+  params,
   atRule,
   processNested
-) {
-  const finalParams = <postcssSugarPluginStyleMixinParams>{
+}: {
+  params: Partial<postcssSugarPluginStyleDefineMixinParams>;
+  atRule: any;
+  processNested: Function;
+}) {
+  const finalParams = <postcssSugarPluginStyleDefineMixinParams>{
     ...(params ?? {})
   };
 
@@ -59,15 +63,18 @@ export default function (
     );
   }
 
+  const styleCss = atRule.nodes
+    .map((node) => {
+      if (node.type === 'decl') return node.toString() + ';';
+      return node.toString();
+    })
+    .join('\n');
+
   // @ts-ignore
-  global._definedStyles[finalParams.name] = atRule;
+  global._definedStyles[finalParams.name] = processNested(
+    [`.s-style-${finalParams.name} {`, styleCss, `}`].join('\n')
+  );
 
-  const vars: string[] = [
-    `.s-style-${finalParams.name} {`,
-    processNested(atRule.nodes),
-    `}`
-  ];
-
-  const AST = processNested(vars.join('\n'));
+  const AST = processNested([].join('\n'));
   atRule.replaceWith(AST);
 }

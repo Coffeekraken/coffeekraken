@@ -28,6 +28,8 @@
     maxItems
   } = component.props;
 
+  let input;
+
   const items = [
     {
       title: 'Hello',
@@ -88,6 +90,9 @@
   }
 
   component.beforeUpdate(() => {
+    if (!inputStr) {
+    }
+
     if (!template) {
       const templateElm = document.querySelector(
         's-filtrable-input template#item'
@@ -106,18 +111,19 @@
     }
   });
 
+  let inputStr;
+  inputStr = component.rootElm.querySelector('input').outerHTML);
+  if (inputStr.includes('class="')) {
+	  inputStr = inputStr.replace('class="', `class="${component.className('__input')} `);
+  }
+
   component.onMount(() => {
     filterItems();
   });
 </script>
 
 <div class={component.className()}>
-  <input
-    class={component.className('__input')}
-    type="text"
-    bind:value
-    on:keyup={filterItems}
-  />
+  {@html inputStr}
   <ul class={component.className('__list')}>
     {#if !filteredItems.length}
       <li class={component.className('__list-item __list-no-item')}>

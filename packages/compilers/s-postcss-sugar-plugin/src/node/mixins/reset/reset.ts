@@ -8,11 +8,15 @@ export interface IPostcssSugarPluginResetParams {}
 
 export { postcssSugarPluginResetInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginResetParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginResetParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginResetParams = {
     ...params
   };

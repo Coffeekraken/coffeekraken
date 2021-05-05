@@ -28,7 +28,11 @@ export interface IPostcssSugarPluginColorParams {
   return: 'var' | 'value';
 }
 
-export default function (params: Partial<IPostcssSugarPluginColorParams> = {}) {
+export default function ({
+  params
+}: {
+  params: Partial<IPostcssSugarPluginColorParams>;
+}) {
   const finalParams: IPostcssSugarPluginColorParams = {
     name: '',
     modifier: '',

@@ -22,7 +22,15 @@ export { postcssSugarPluginSizeClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (params = {}, atRule, processNested) {
+export default function ({
+  params,
+  atRule,
+  processNested
+}: {
+  params: any;
+  atRule: any;
+  processNested: Function;
+}) {
   const sizes = __theme().config('size');
 
   const cssArray: string[] = [];

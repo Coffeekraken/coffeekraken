@@ -23,9 +23,11 @@ export interface IPostcssSugarPluginFontSizeParams {
   return: 'var' | 'value';
 }
 
-export default function (
-  params: Partial<IPostcssSugarPluginFontSizeParams> = {}
-) {
+export default function ({
+  params
+}: {
+  params: Partial<IPostcssSugarPluginFontSizeParams>;
+}) {
   const finalParams: IPostcssSugarPluginFontSizeParams = {
     name: '',
     return: 'var',

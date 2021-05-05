@@ -9,11 +9,15 @@ export interface IPostcssSugarPluginFontInitParams {}
 
 export { postcssSugarPluginFontInitInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginFontInitParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginFontInitParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginFontInitParams = {
     ...params
   };

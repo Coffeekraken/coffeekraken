@@ -10,11 +10,15 @@ export interface IPostcssSugarPluginTypoClassesParams {}
 
 export { postcssSugarPluginTypoClassesInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginTypoClassesParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginTypoClassesParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginTypoClassesParams = {
     ...params
   };

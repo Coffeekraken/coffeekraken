@@ -18,11 +18,15 @@ export interface IPostcssSugarPluginFontFamilyParams {
 
 export { postcssSugarPluginFontFamilyInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginFontFamilyParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginFontFamilyParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginFontFamilyParams = {
     font: 'default',
     ...params

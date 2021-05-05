@@ -38,7 +38,10 @@ export interface ISPostcssCompilerParams {
 export interface ISPostcssCompilerCtorSettings {
   postcssCompiler?: Partial<ISPostcssCompilerSettings>;
 }
-export interface ISPostcssCompilerSettings {}
+export interface ISPostcssCompilerSettings {
+  env: any;
+  pluginsSettings: Record<string, any>;
+}
 
 export interface ISPostcssCompilerCtor {
   new (
@@ -116,7 +119,10 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
       initialParams ?? {},
       __deepMerge(
         {
-          postcssCompiler: {}
+          postcssCompiler: {
+            env: {},
+            pluginsSettings: {}
+          }
         },
         settings || {}
       )
@@ -180,7 +186,10 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
             postCssPlugins.push(
               required(
                 {
-                  ...pluginObj.settings
+                  ...pluginObj.settings,
+                  ...(this.postcssCompilerSettings.pluginsSettings[
+                    pluginName
+                  ] ?? {})
                 } ?? {}
               )
             );
@@ -204,7 +213,10 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
             });
 
             let res = await __postCss([
-              require('@coffeekraken/s-postcss-sugar-plugin').default
+              require('@coffeekraken/s-postcss-sugar-plugin').default({
+                target: 'global',
+                ...(this.postcssCompilerSettings.pluginsSettings.sugar ?? {})
+              })
             ]).process(file.content, {
               from: file.path
             });

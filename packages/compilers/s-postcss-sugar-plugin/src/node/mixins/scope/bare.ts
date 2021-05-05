@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
 import __isInScope from '../../utils/isInScope';
 
 class postcssSugarPluginScopeBareMixinInterface extends __SInterface {
@@ -27,11 +28,15 @@ export interface postcssSugarPluginScopeBareMixinParams {}
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (
-  params: Partial<postcssSugarPluginScopeBareMixinParams>,
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginColorParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams = <postcssSugarPluginScopeBareMixinParams>{
     ...(params ?? {})
   };

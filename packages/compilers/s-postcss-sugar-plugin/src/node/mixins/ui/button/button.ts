@@ -30,12 +30,15 @@ export interface IPostcssSugarPluginUiButtonParams {
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
-
-export default function (
-  params: Partial<IPostcssSugarPluginUiButtonParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginUiButtonParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginUiButtonParams = {
     color: 'default',
     textColor: '',

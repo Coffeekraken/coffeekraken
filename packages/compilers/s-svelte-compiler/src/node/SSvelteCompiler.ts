@@ -202,7 +202,16 @@ class SSvelteCompiler extends __SCompiler {
                     const tmpCssFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.css`;
                     __writeFileSync(`${tmpCssFilePath}`, input.content);
 
-                    const compiler = new __SPostcssCompiler();
+                    const compiler = new __SPostcssCompiler(
+                      {},
+                      {
+                        postcssCompiler: {
+                          env: {
+                            target: 'component'
+                          }
+                        }
+                      }
+                    );
 
                     const res = await compiler.compile({
                       input: [tmpCssFilePath],

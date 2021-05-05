@@ -5,19 +5,16 @@ import __parseFunction from 'parse-function';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __glob from 'glob';
 import __postcss from 'postcss';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 let _mixinsPaths;
-const plugin = (...args) => {
-  // list all mixins
-  // const mixinsPath = __fs.readdirSync(`${__dirname}/mixins`);
-
-  // const mixinsAtRules = {};
-
-  // if (!_mixinsPaths) {
-  //   _mixinsPaths = __glob.sync(`${__dirname}/mixins/**/*.js`);
-  // }
-
-  // const importsStack: string[] = [];
+const plugin = (settings: any = {}) => {
+  settings = __deepMerge(
+    {
+      target: 'global'
+    },
+    settings
+  );
 
   const processNested = (css) => {
     if (Array.isArray(css)) {
@@ -30,12 +27,19 @@ const plugin = (...args) => {
     }
 
     if (typeof css === 'string') css = __postcss.parse(css);
-    css.walkAtRules((atRule) => {
-      // if (atRule.name === 'import' && atRule.params.match(/^url\(.*\)/)) {
-      //   importsStack.push(`.import { content: "hello"; }`);
-      //   return;
-      // }
 
+    css.walkAtRules((atRule) => {
+      const string = atRule.toString();
+      if (string.match(/\);?[.*\n][&>+:]\s?[a-zA-Z0-9-_>+:]+/gm)) {
+        const parts = string.split(/\)[.*\n]+/gm);
+        if (parts.length >= 2) {
+          const AST = processNested(parts[0] + ');' + parts[1]);
+          atRule.replaceWith(AST);
+        }
+      }
+    });
+
+    css.walkAtRules((atRule) => {
       if (atRule.name.match(/^sugar\.[a-zA-Z0-9\.]+/)) {
         let potentialMixinPath = `${__dirname}/mixins/${atRule.name
           .replace(/^sugar\./, '')
@@ -57,13 +61,22 @@ const plugin = (...args) => {
         const mixin = require(potentialMixinPath);
         const mixinFn = mixin.default;
         const mixinInterface = mixin.interface;
-        const intRes = mixinInterface.apply(atRule.params, {});
+
+        let sanitizedParams = atRule.params;
+        sanitizedParams = sanitizedParams.split('\n&')[0];
+
+        const intRes = mixinInterface.apply(sanitizedParams, {});
         if (intRes.hasIssues()) {
           throw new Error(intRes.toString());
         }
         const params = intRes.value;
         delete params.help;
-        return mixinFn(params, atRule, processNested);
+        return mixinFn({
+          params,
+          atRule,
+          processNested,
+          settings
+        });
       }
     });
 
@@ -108,7 +121,10 @@ const plugin = (...args) => {
         const params = intRes.value;
         delete params.help;
         try {
-          const result = funcFn(params);
+          const result = funcFn({
+            params,
+            settings
+          });
           decl.value = decl.value.replace(sugarStatement, result);
         } catch (e) {
           console.error(e.message);
@@ -119,11 +135,30 @@ const plugin = (...args) => {
     return css;
   };
 
+  // load all the styles
+
+  const stylesPaths = __glob.sync(`${__dirname}/**/*.style.css`);
+  const stylesCss: string[] = [];
+  stylesPaths.forEach((path) => {
+    stylesCss.push(__fs.readFileSync(path, 'utf8').toString());
+  });
+
   return {
     postcssPlugin: 'sugar',
     Once(root) {
-      const finalCss = processNested(root).toString();
-      return finalCss;
+      root.nodes.unshift(__postcss.parse(stylesCss));
+      const finalAst = processNested(root);
+
+      // if target is a component, do not output styles
+      if (settings.target && settings.target === 'global') {
+        // @ts-ignore
+        Object.keys(global._definedStyles).forEach((styleName) => {
+          // @ts-ignore
+          finalAst.nodes.push(global._definedStyles[styleName]);
+        });
+      }
+
+      return finalAst.toString();
     }
   };
 };

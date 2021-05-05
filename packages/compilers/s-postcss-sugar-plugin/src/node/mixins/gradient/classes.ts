@@ -24,11 +24,15 @@ export interface IPostcssSugarPluginGradientClassesParams {
 
 export { postcssSugarPluginGradientClassesInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginGradientClassesParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginGradientClassesParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginGradientClassesParams = {
     types: ['linear', 'radial'],
     angles: [0, 45, 90, 135, 180, 225, 270],

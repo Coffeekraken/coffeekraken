@@ -9,11 +9,15 @@ export interface IPostcssSugarPluginPaddingClassesParams {}
 
 export { postcssSugarPluginPaddingClassesInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginPaddingClassesParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginPaddingClassesParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginPaddingClassesParams = {
     ...params
   };

@@ -227,10 +227,10 @@ export default {
         import: 'precss',
         settings: {}
       },
-      postcssNested: {
-        import: 'postcss-nested',
-        settings: {}
-      },
+      // postcssNested: {
+      //   import: 'postcss-nested',
+      //   settings: {}
+      // },
       presetEnv: {
         import: 'postcss-preset-env',
         settings: {}

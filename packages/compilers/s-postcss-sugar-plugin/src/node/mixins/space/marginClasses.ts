@@ -10,11 +10,15 @@ export interface IPostcssSugarPluginMarginClassesParams {}
 
 export { postcssSugarPluginMarginClassesInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginMarginClassesParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginMarginClassesParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginMarginClassesParams = {
     ...params
   };

@@ -3,6 +3,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __postCss from 'postcss';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
 
 class postcssSugarPluginScopeMixinInterface extends __SInterface {
   static definition = {
@@ -38,11 +39,15 @@ export interface postcssSugarPluginScopeMixinParams {
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (
-  params: Partial<postcssSugarPluginScopeMixinParams>,
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginColorParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams = <postcssSugarPluginScopeMixinParams>{
     scopes: '',
     ...(params ?? {})

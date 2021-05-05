@@ -1,0 +1,18 @@
+@sugar.style.define (list) {
+  background-color: sugar.color(surface);
+  padding: sugar.space(20);
+  min-width: 500px;
+  border-radius: 5px;
+  @sugar.depth (30);
+
+  & > li,
+  & > dt {
+    border-radius: 5px;
+    padding: sugar.space(40);
+  }
+
+  & > li:hover,
+  & > dt:hover {
+    background-color: sugar.color(primary, 20);
+  }
+}

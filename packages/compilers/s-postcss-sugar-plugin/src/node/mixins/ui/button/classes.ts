@@ -21,11 +21,15 @@ export interface IPostcssSugarPluginUiButtonClassesParams {
 
 export { postcssSugarPluginUiButtonClassesInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginUiButtonClassesParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const colors = __theme().config('color'),
     sizes = __theme().config('size');
 

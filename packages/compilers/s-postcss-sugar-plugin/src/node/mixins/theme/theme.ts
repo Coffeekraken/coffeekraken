@@ -13,12 +13,15 @@ export interface IPostcssSugarPluginThemeParams {
 }
 
 export { postcssSugarPluginThemeinInterface as interface };
-
-export default function (
-  params: Partial<IPostcssSugarPluginThemeParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginThemeParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginThemeParams = {
     theme: '',
     ...params

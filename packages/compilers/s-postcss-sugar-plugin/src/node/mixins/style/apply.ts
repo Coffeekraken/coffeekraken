@@ -39,35 +39,33 @@ if (!global._definedStyles) {
   // @ts-ignore
   global._definedStyles = {};
 }
-export default function (
-  params: Partial<postcssSugarPluginStyleApplyMixinParams>,
+// @ts-ignore
+if (!global._printedStyles) {
+  // @ts-ignore
+  global._printedStyles = [];
+}
+export default function ({
+  params,
   atRule,
-  processNested
-) {
+  processNested,
+  settings
+}: {
+  params: Partial<postcssSugarPluginStyleApplyMixinParams>;
+  atRule: any;
+  processNested: Function;
+  settings: any;
+}) {
   const finalParams = <postcssSugarPluginStyleApplyMixinParams>{
     ...(params ?? {})
   };
 
-  if (!finalParams.name) {
-    throw new Error(
-      `<red>[postcss.sugar.style.apply]</red> Sorry but to apply a style you MUST specify a name for it`
-    );
-  }
-  // @ts-ignore
-  //   if (!global._definedStyles[finalParams.name]) {
-  //     throw new Error(
-  //       `<red>[postcss.sugar.style.apply]</red> Sorry but the requested style "<yellow>${
-  //         finalParams.name
-  //       }</yellow>" has not been defined. Here's the list of available style: <green>${Object.keys(
-  //         // @ts-ignore
-  //         global._definedStyles
-  //       ).join(',')}</green>`
-  //     );
-  //   }
-
   const vars: string[] = [];
-  // @ts-ignore
-  if (!global._definedStyles[finalParams.name]) {
+
+  if (
+    // @ts-ignore
+    !global._definedStyles[finalParams.name] ||
+    settings.target !== 'global'
+  ) {
     vars.push(`content: "s-style-${finalParams.name}"`);
   } else {
     vars.push(`@extend .s-style-${finalParams.name}`);

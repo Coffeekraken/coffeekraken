@@ -16,11 +16,15 @@ export interface IPostcssSugarPluginRatioParams {
 
 export { postcssSugarPluginRatioInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginRatioParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginRatioParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginRatioParams = {
     ratio: 1,
     ...params

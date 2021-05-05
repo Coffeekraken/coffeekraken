@@ -24,11 +24,15 @@ export interface IPostcssSugarPluginUtilCenterParams {
 
 export { postcssSugarPluginUtilCenterInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginUtilCenterParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginUtilCenterParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginUtilCenterParams = {
     method: 'abs',
     direction: 'both',

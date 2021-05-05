@@ -8,11 +8,15 @@ export interface IPostcssSugarPluginUtilPilledParams {}
 
 export { postcssSugarPluginUtilPilledInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginUtilPilledParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginUtilPilledParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginUtilPilledParams = {
     ...params
   };

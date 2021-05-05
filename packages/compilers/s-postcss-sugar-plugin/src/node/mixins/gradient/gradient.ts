@@ -33,11 +33,15 @@ export interface IPostcssSugarPluginGradientParams {
 
 export { postcssSugarPluginGradientInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginGradientParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginGradientParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginGradientParams = {
     start: 'primary--50',
     end: 'primary--70',

@@ -18,11 +18,15 @@ export interface IPostcssSugarPluginTypoHParams {
 
 export { postcssSugarPluginTypoHInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginTypoHParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginTypoHParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginTypoHParams = {
     level: 1,
     ...params

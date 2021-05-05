@@ -8,11 +8,15 @@ export interface IPostcssSugarPluginLayoutClassesParams {}
 
 export { postcssSugarPluginLayoutClassesInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginLayoutClassesParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginLayoutClassesParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginLayoutClassesParams = {
     ...params
   };

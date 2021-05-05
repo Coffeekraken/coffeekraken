@@ -17,17 +17,20 @@ export interface IPostcssSugarPluginDepthParams {
 
 export { postcssSugarPluginDepthInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginDepthParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginDepthParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginDepthParams = {
     depth: 1,
     ...params
   };
-
-  console.log(finalParams);
+  // console.log(atRule.toString());
 
   const depthCss = __theme().config(`depth.${finalParams.depth}`);
 

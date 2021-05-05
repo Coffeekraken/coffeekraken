@@ -32,11 +32,15 @@ export interface postcssSugarPluginThemeScopeMixinParams {
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (
-  params: Partial<postcssSugarPluginThemeScopeMixinParams>,
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<postcssSugarPluginThemeScopeMixinParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams = <postcssSugarPluginThemeScopeMixinParams>{
     space: 'default',
     ...(params ?? {})

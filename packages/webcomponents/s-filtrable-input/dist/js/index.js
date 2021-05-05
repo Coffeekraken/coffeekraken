@@ -16,11 +16,8 @@ import {
 	flush,
 	init,
 	insert_dev,
-	listen_dev,
 	noop,
-	run_all,
 	safe_not_equal,
-	set_input_value,
 	set_style,
 	text,
 	validate_each_argument,
@@ -34,15 +31,15 @@ const file = "index.svelte";
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[12] = list[i];
-	child_ctx[14] = i;
+	child_ctx[13] = list[i];
+	child_ctx[15] = i;
 	return child_ctx;
 }
 
-// (105:4) {:else}
+// (109:4) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
-	let each_value = /*filteredItems*/ ctx[3];
+	let each_value = /*filteredItems*/ ctx[2];
 	validate_each_argument(each_value);
 	let each_blocks = [];
 
@@ -66,8 +63,8 @@ function create_else_block(ctx) {
 			insert_dev(target, each_1_anchor, anchor);
 		},
 		p: function update(ctx, dirty) {
-			if (dirty & /*component, template, filteredItems*/ 26) {
-				each_value = /*filteredItems*/ ctx[3];
+			if (dirty & /*component, template, filteredItems*/ 21) {
+				each_value = /*filteredItems*/ ctx[2];
 				validate_each_argument(each_value);
 				let i;
 
@@ -100,31 +97,31 @@ function create_else_block(ctx) {
 		block,
 		id: create_else_block.name,
 		type: "else",
-		source: "(105:4) {:else}",
+		source: "(109:4) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (101:4) {#if !filteredItems.length}
+// (105:4) {#if !filteredItems.length}
 function create_if_block(ctx) {
 	let li;
-	let raw_value = /*component*/ ctx[4].compileMustache(/*noItemTemplate*/ ctx[2], {}) + "";
+	let raw_value = /*component*/ ctx[4].compileMustache(/*noItemTemplate*/ ctx[1], {}) + "";
 	let li_class_value;
 
 	const block = {
 		c: function create() {
 			li = element("li");
 			attr_dev(li, "class", li_class_value = /*component*/ ctx[4].className("__list-item __list-no-item"));
-			add_location(li, file, 101, 6, 3320);
+			add_location(li, file, 105, 6, 3468);
 		},
 		m: function mount(target, anchor) {
 			insert_dev(target, li, anchor);
 			li.innerHTML = raw_value;
 		},
 		p: function update(ctx, dirty) {
-			if (dirty & /*noItemTemplate*/ 4 && raw_value !== (raw_value = /*component*/ ctx[4].compileMustache(/*noItemTemplate*/ ctx[2], {}) + "")) li.innerHTML = raw_value;;
+			if (dirty & /*noItemTemplate*/ 2 && raw_value !== (raw_value = /*component*/ ctx[4].compileMustache(/*noItemTemplate*/ ctx[1], {}) + "")) li.innerHTML = raw_value;;
 		},
 		d: function destroy(detaching) {
 			if (detaching) detach_dev(li);
@@ -135,18 +132,18 @@ function create_if_block(ctx) {
 		block,
 		id: create_if_block.name,
 		type: "if",
-		source: "(101:4) {#if !filteredItems.length}",
+		source: "(105:4) {#if !filteredItems.length}",
 		ctx
 	});
 
 	return block;
 }
 
-// (106:6) {#each filteredItems as item, idx}
+// (110:6) {#each filteredItems as item, idx}
 function create_each_block(ctx) {
 	let li;
 	let html_tag;
-	let raw_value = /*component*/ ctx[4].compileMustache(/*template*/ ctx[1], /*item*/ ctx[12]) + "";
+	let raw_value = /*component*/ ctx[4].compileMustache(/*template*/ ctx[0], /*item*/ ctx[13]) + "";
 	let t;
 	let li_class_value;
 
@@ -155,9 +152,9 @@ function create_each_block(ctx) {
 			li = element("li");
 			t = text("\n        ");
 			html_tag = new HtmlTag(t);
-			set_style(li, "z-index", 999999999 - /*idx*/ ctx[14]);
+			set_style(li, "z-index", 999999999 - /*idx*/ ctx[15]);
 			attr_dev(li, "class", li_class_value = /*component*/ ctx[4].className("__list-item"));
-			add_location(li, file, 106, 8, 3518);
+			add_location(li, file, 110, 8, 3666);
 		},
 		m: function mount(target, anchor) {
 			insert_dev(target, li, anchor);
@@ -165,7 +162,7 @@ function create_each_block(ctx) {
 			append_dev(li, t);
 		},
 		p: function update(ctx, dirty) {
-			if (dirty & /*template, filteredItems*/ 10 && raw_value !== (raw_value = /*component*/ ctx[4].compileMustache(/*template*/ ctx[1], /*item*/ ctx[12]) + "")) html_tag.p(raw_value);
+			if (dirty & /*template, filteredItems*/ 5 && raw_value !== (raw_value = /*component*/ ctx[4].compileMustache(/*template*/ ctx[0], /*item*/ ctx[13]) + "")) html_tag.p(raw_value);
 		},
 		d: function destroy(detaching) {
 			if (detaching) detach_dev(li);
@@ -176,7 +173,7 @@ function create_each_block(ctx) {
 		block,
 		id: create_each_block.name,
 		type: "each",
-		source: "(106:6) {#each filteredItems as item, idx}",
+		source: "(110:6) {#each filteredItems as item, idx}",
 		ctx
 	});
 
@@ -185,17 +182,14 @@ function create_each_block(ctx) {
 
 function create_fragment(ctx) {
 	let div;
-	let input;
-	let input_class_value;
+	let html_tag;
 	let t;
 	let ul;
 	let ul_class_value;
 	let div_class_value;
-	let mounted;
-	let dispose;
 
 	function select_block_type(ctx, dirty) {
-		if (!/*filteredItems*/ ctx[3].length) return create_if_block;
+		if (!/*filteredItems*/ ctx[2].length) return create_if_block;
 		return create_else_block;
 	}
 
@@ -205,43 +199,28 @@ function create_fragment(ctx) {
 	const block = {
 		c: function create() {
 			div = element("div");
-			input = element("input");
 			t = text("\n  ");
 			ul = element("ul");
 			if_block.c();
 			this.c = noop;
-			attr_dev(input, "class", input_class_value = /*component*/ ctx[4].className("__input"));
-			attr_dev(input, "type", "text");
-			add_location(input, file, 93, 2, 3124);
+			html_tag = new HtmlTag(t);
 			attr_dev(ul, "class", ul_class_value = /*component*/ ctx[4].className("__list"));
-			add_location(ul, file, 99, 2, 3239);
+			add_location(ul, file, 103, 2, 3387);
 			attr_dev(div, "class", div_class_value = /*component*/ ctx[4].className());
-			add_location(div, file, 92, 0, 3086);
+			add_location(div, file, 101, 0, 3330);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
 		},
 		m: function mount(target, anchor) {
 			insert_dev(target, div, anchor);
-			append_dev(div, input);
-			set_input_value(input, /*value*/ ctx[0]);
+			html_tag.m(/*inputStr*/ ctx[3], div);
 			append_dev(div, t);
 			append_dev(div, ul);
 			if_block.m(ul, null);
-
-			if (!mounted) {
-				dispose = [
-					listen_dev(input, "input", /*input_input_handler*/ ctx[6]),
-					listen_dev(input, "keyup", /*filterItems*/ ctx[5], false, false, false)
-				];
-
-				mounted = true;
-			}
 		},
 		p: function update(ctx, [dirty]) {
-			if (dirty & /*value*/ 1 && input.value !== /*value*/ ctx[0]) {
-				set_input_value(input, /*value*/ ctx[0]);
-			}
+			if (dirty & /*inputStr*/ 8) html_tag.p(/*inputStr*/ ctx[3]);
 
 			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block) {
 				if_block.p(ctx, dirty);
@@ -260,8 +239,6 @@ function create_fragment(ctx) {
 		d: function destroy(detaching) {
 			if (detaching) detach_dev(div);
 			if_block.d();
-			mounted = false;
-			run_all(dispose);
 		}
 	};
 
@@ -297,6 +274,7 @@ function instance($$self, $$props, $$invalidate) {
 		});
 
 	let { value, template, noItemTemplate, filtrable, maxItems } = component.props;
+	let input;
 
 	const items = [
 		{
@@ -325,7 +303,7 @@ function instance($$self, $$props, $$invalidate) {
 	function filterItems() {
 		let matchedItemsCount = 0;
 
-		$$invalidate(3, filteredItems = items.map(item => __clone(item)).filter(item => {
+		$$invalidate(2, filteredItems = items.map(item => __clone(item)).filter(item => {
 			if (matchedItemsCount >= maxItems) return false;
 			let matchFilter = false;
 
@@ -361,11 +339,15 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	component.beforeUpdate(() => {
+		if (!inputStr) {
+			
+		}
+
 		if (!template) {
 			const templateElm = document.querySelector("s-filtrable-input template#item");
 
 			if (templateElm) {
-				$$invalidate(1, template = templateElm.innerHTML);
+				$$invalidate(0, template = templateElm.innerHTML);
 			}
 		}
 
@@ -373,22 +355,25 @@ function instance($$self, $$props, $$invalidate) {
 			const templateElm = document.querySelector("s-filtrable-input template#no-item");
 
 			if (templateElm) {
-				$$invalidate(2, noItemTemplate = templateElm.innerHTML);
+				$$invalidate(1, noItemTemplate = templateElm.innerHTML);
 			}
 		}
 	});
+
+	let inputStr;
+	inputStr = component.rootElm.querySelector("input").outerHTML;
+	
+
+	if (inputStr.includes("class=\"")) {
+		inputStr = inputStr.replace("class=\"", `class="${component.className("__input")} `);
+	}
 
 	component.onMount(() => {
 		filterItems();
 	});
 
-	function input_input_handler() {
-		value = this.value;
-		$$invalidate(0, value);
-	}
-
 	$$self.$$set = $$new_props => {
-		$$invalidate(11, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+		$$invalidate(12, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
 	};
 
 	$$self.$capture_state = () => ({
@@ -402,19 +387,23 @@ function instance($$self, $$props, $$invalidate) {
 		noItemTemplate,
 		filtrable,
 		maxItems,
+		input,
 		items,
 		filteredItems,
-		filterItems
+		filterItems,
+		inputStr
 	});
 
 	$$self.$inject_state = $$new_props => {
-		$$invalidate(11, $$props = assign(assign({}, $$props), $$new_props));
-		if ("value" in $$props) $$invalidate(0, value = $$new_props.value);
-		if ("template" in $$props) $$invalidate(1, template = $$new_props.template);
-		if ("noItemTemplate" in $$props) $$invalidate(2, noItemTemplate = $$new_props.noItemTemplate);
+		$$invalidate(12, $$props = assign(assign({}, $$props), $$new_props));
+		if ("value" in $$props) value = $$new_props.value;
+		if ("template" in $$props) $$invalidate(0, template = $$new_props.template);
+		if ("noItemTemplate" in $$props) $$invalidate(1, noItemTemplate = $$new_props.noItemTemplate);
 		if ("filtrable" in $$props) filtrable = $$new_props.filtrable;
 		if ("maxItems" in $$props) maxItems = $$new_props.maxItems;
-		if ("filteredItems" in $$props) $$invalidate(3, filteredItems = $$new_props.filteredItems);
+		if ("input" in $$props) input = $$new_props.input;
+		if ("filteredItems" in $$props) $$invalidate(2, filteredItems = $$new_props.filteredItems);
+		if ("inputStr" in $$props) $$invalidate(3, inputStr = $$new_props.inputStr);
 	};
 
 	if ($$props && "$$inject" in $$props) {
@@ -422,16 +411,7 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	$$props = exclude_internal_props($$props);
-
-	return [
-		value,
-		template,
-		noItemTemplate,
-		filteredItems,
-		component,
-		filterItems,
-		input_input_handler
-	];
+	return [template, noItemTemplate, filteredItems, inputStr, component];
 }
 
 class Index extends SvelteElement {
@@ -443,8 +423,13 @@ class Index extends SvelteElement {
 }.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__input:focus+.s-filtrable-input__list,.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list:focus{opacity:1;pointer-events:all
 }.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list-item{cursor:pointer;position:relative
 }.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list-item *{pointer-events:none
-}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf){}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list{content:"s-style-list"
+}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf){}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list{background-color:var(--s-theme-color-surface-default, #ffffff);padding:var(--s-theme-space-20, 0.4rem);min-width:500px;border-radius:5px;box-shadow:0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
+}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list>li{border-radius:5px;padding:var(--s-theme-space-40, 0.8rem)
+}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list>li:hover{background-color:var(--s-theme-color-primary-20, #fae7b7)
 }.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list-item-highlight{background-color:var(--s-theme-color-primary-default, #f2bc2b)
+}.s-style-list{background-color:var(--s-theme-color-surface-default, #ffffff);padding:var(--s-theme-space-20, 0.4rem);min-width:500px;border-radius:5px;box-shadow:0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
+}.s-style-list>li{border-radius:5px;padding:var(--s-theme-space-40, 0.8rem)
+}.s-style-list>li:hover{background-color:var(--s-theme-color-primary-20, #fae7b7)
 }</style>`;
 
 		init(

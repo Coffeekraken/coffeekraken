@@ -17,11 +17,15 @@ export interface IPostcssSugarPluginFontFamilyParams {
 
 export { postcssSugarPluginFontSizeInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginFontFamilyParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginFontFamilyParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginFontFamilyParams = {
     size: 50,
     ...params

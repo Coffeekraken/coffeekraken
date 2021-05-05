@@ -10,11 +10,15 @@ export interface IPostcssSugarPluginSpaceAutoClassesParams {}
 
 export { postcssSugarPluginSpaceAutoClassesInterface as interface };
 
-export default function (
-  params: Partial<IPostcssSugarPluginSpaceAutoClassesParams> = {},
+export default function ({
+  params,
   atRule,
   processNested
-) {
+}: {
+  params: Partial<IPostcssSugarPluginSpaceAutoClassesParams>;
+  atRule: any;
+  processNested: Function;
+}) {
   const finalParams: IPostcssSugarPluginSpaceAutoClassesParams = {
     ...params
   };

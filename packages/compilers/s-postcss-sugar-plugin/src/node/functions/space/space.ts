@@ -23,9 +23,11 @@ export interface IPostcssSugarPluginSpaceFunctionParams {
   return: 'var' | 'value';
 }
 
-export default function (
-  params: Partial<IPostcssSugarPluginSpaceFunctionParams> = {}
-) {
+export default function ({
+  params
+}: {
+  params: Partial<IPostcssSugarPluginSpaceFunctionParams>;
+}) {
   const finalParams: IPostcssSugarPluginSpaceFunctionParams = {
     space: '',
     return: 'var',

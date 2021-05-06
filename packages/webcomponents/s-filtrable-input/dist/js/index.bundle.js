@@ -47316,13 +47316,8 @@ var Index = class extends SvelteElement {
 }.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__input:focus+.s-filtrable-input__list,.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list:focus{opacity:1;pointer-events:all
 }.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list-item{cursor:pointer;position:relative
 }.s-filtrable-input:not(.s-no-bare .s-filtrable-input):not(.no-bare) .s-filtrable-input__list-item *{pointer-events:none
-}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf){}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list{background-color:var(--s-theme-color-surface-default, #ffffff);padding:var(--s-theme-space-20, 0.4rem);min-width:500px;border-radius:5px;box-shadow:0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
-}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list>li{border-radius:5px;padding:var(--s-theme-space-40, 0.8rem)
-}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list>li:hover{background-color:var(--s-theme-color-primary-20, #fae7b7)
+}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf){}.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list{content:"s-style-list"
 }.s-filtrable-input:not(.s-no-lnf .s-filtrable-input):not(.s-no-lnf) .s-filtrable-input__list-item-highlight{background-color:var(--s-theme-color-primary-default, #f2bc2b)
-}.s-style-list{background-color:var(--s-theme-color-surface-default, #ffffff);padding:var(--s-theme-space-20, 0.4rem);min-width:500px;border-radius:5px;box-shadow:0 0.6px 0.5px rgba(0, 0, 0, 0.017),0 1.5px 1.1px rgba(0, 0, 0, 0.024),0 2.8px 2.1px rgba(0, 0, 0, 0.03),0 4.9px 3.8px rgba(0, 0, 0, 0.036),0 9.2px 7.1px rgba(0, 0, 0, 0.043),0 22px 17px rgba(0, 0, 0, 0.06)
-}.s-style-list>li{border-radius:5px;padding:var(--s-theme-space-40, 0.8rem)
-}.s-style-list>li:hover{background-color:var(--s-theme-color-primary-20, #fae7b7)
 }</style>`;
     init(this, {
       target: this.shadowRoot,

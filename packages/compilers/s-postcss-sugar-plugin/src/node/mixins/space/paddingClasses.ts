@@ -30,7 +30,7 @@ export default function ({
     // paddings
     const clsPadding = `s-pad-${spaceName}`;
     vars.push(`/**
-    * @name            .${clsPadding}
+    * @name            ${clsPadding}
     * @namespace        sugar.css.space
     * @type             CssClass
     * 

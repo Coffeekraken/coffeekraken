@@ -78,7 +78,7 @@ export default class SFrontspec extends __SPromise {
     } else {
       this._cache = new __SCache(cacheId, {
         cache: {
-          clearOnExit: true
+          clearOnExit: false
         }
       });
       this.constructor._cachesStack[cacheId] = this._cache;
@@ -238,8 +238,10 @@ export default class SFrontspec extends __SPromise {
    * @since     2.0.0
    * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async assetsToServe(): Promise<ISFrontspecAssetToServe[]> {
-    const filesPaths = await this.find();
+  async assetsToServe(
+    params: Partial<ISFrontspecFindParams>
+  ): Promise<ISFrontspecAssetToServe[]> {
+    const filesPaths = await this.find(params);
 
     const assetsToServe: ISFrontspecAssetToServe[] = [];
 

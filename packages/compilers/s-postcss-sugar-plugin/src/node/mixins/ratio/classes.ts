@@ -32,7 +32,7 @@ export default function ({
   Object.keys(ratioObj).forEach((ratioName) => {
     const ratioValue = ratioObj[ratioName];
     const ratioCss = `/**
-  * @name          .s-ratio-${ratioName.replace('/', '-')}
+  * @name          s-ratio-${ratioName.replace('/', '-')}
   * @namespace          sugar.css.ratio
   * @type               CssClass
   * 

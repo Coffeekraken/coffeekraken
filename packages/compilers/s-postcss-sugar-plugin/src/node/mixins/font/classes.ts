@@ -27,7 +27,7 @@ export default function ({
   const fontsFamiliesObj = __theme().config('font.family');
   Object.keys(fontsFamiliesObj).forEach((fontName) => {
     vars.push(`/**
-  * @name          .s-font-${fontName}
+  * @name          s-font-${fontName}
   * @namespace          sugar.css.font
   * @type               CssClass
   * 

@@ -44,7 +44,7 @@ export default function ({ params, atRule, processNested }) {
         [
           `/**`,
           ` * @name           s-c-${colorName}${modifierStr}`,
-          ` * @namespace      sugar.css.color.classes`,
+          ` * @namespace      sugar.css.color.classes.${colorName}.${modifier}`,
           ` * @type           CssClass`,
           ` *`,
           ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
@@ -64,7 +64,7 @@ export default function ({ params, atRule, processNested }) {
         [
           `/**`,
           ` * @name           s-bg-${colorName}${modifierStr}`,
-          ` * @namespace      sugar.css.color.classes`,
+          ` * @namespace      sugar.css.color.classes.bg.${colorName}.${modifier}`,
           ` * @type           CssClass`,
           ` *`,
           ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,

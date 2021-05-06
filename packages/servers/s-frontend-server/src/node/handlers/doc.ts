@@ -35,7 +35,46 @@ export default function doc(req, res, settings = {}) {
     pipe(readPromise);
     _docmapJson = await readPromise;
 
-    if (!_docmapJson[namespace]) {
+    const pathes = {};
+    Object.keys(_docmapJson).forEach((docmapNamespace) => {
+      console.log(docmapNamespace, namespace);
+      if (docmapNamespace.startsWith(namespace)) {
+        if (!pathes[_docmapJson[docmapNamespace].path]) {
+          pathes[_docmapJson[docmapNamespace].path] = [];
+        }
+        pathes[_docmapJson[docmapNamespace].path].push(
+          _docmapJson[docmapNamespace]
+        );
+      }
+    });
+
+    console.log(Object.keys(pathes));
+
+    const docsHtml: string[] = [];
+    Object.keys(pathes).forEach((path) => {
+      console.log(
+        'NAMES',
+        pathes[path].map((docmapObj) => docmapObj.namespace)
+      );
+
+      // generate the docblocks
+      const docblock = new __SDocblock(path, {
+        docblock: {
+          filterByTag: {
+            namespace: pathes[path].map((docmapObj) => docmapObj.namespace)
+          }
+        }
+      });
+      // // render them into html
+      // const htmlRenderer = new SDocblockHtmlRenderer(docblock);
+      // const html = await htmlRenderer.render();
+      // console.log(_docmapJson[docmapNamespace].path);
+      docsHtml.push();
+    });
+
+    return;
+
+    if (!docsHtml.length) {
       const html = await page404({
         title: `Documentation "${namespace}" not found`,
         body: `The documentation "${namespace}" you requested does not exists...`
@@ -46,18 +85,11 @@ export default function doc(req, res, settings = {}) {
       return reject(html.value);
     }
 
-    // generate the docblocks
-    const docblock = new __SDocblock(_docmapJson[namespace].path);
-
-    // render them into html
-    const htmlRenderer = new SDocblockHtmlRenderer(docblock);
-    const html = await htmlRenderer.render();
-
     // render the proper template
     const docView = new __SViewRenderer('pages.doc');
     const pageHtml = await docView.render({
       ...(res.templateData || {}),
-      body: html
+      body: docsHtml.join('\n')
     });
 
     // _console.log(req);

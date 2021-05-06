@@ -512,6 +512,11 @@ template {
 [hidden] {
   display: none;
 }
+
+* {
+  box-sizing: border-box;
+}
+
   `
   ];
 

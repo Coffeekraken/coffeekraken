@@ -24,7 +24,7 @@ export default function ({
   const vars: string[] = [];
 
   vars.push(`/**
-  * @name          .s-container
+  * @name          s-container
   * @namespace          sugar.css.layout
   * @type               CssClass
   * 

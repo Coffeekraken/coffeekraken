@@ -35,8 +35,8 @@ export default {
         css: '[config.frontstack.actions.css]',
         jsBundle: '[config.frontstack.actions.jsBundle]',
         ts: '[config.frontstack.actions.ts]',
-        svelte: '[config.frontstack.actions.svelte]'
-        // docmap: '[config.frontstack.actions.docmap]'
+        svelte: '[config.frontstack.actions.svelte]',
+        docmap: '[config.frontstack.actions.docmap]'
       }
     },
     jsLib: {

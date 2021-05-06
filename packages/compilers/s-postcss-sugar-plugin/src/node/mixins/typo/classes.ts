@@ -36,7 +36,7 @@ export default function ({
     });
 
     vars.push(`/**
-    * @name            .${cls}
+    * @name            ${cls}
     * @namespace        sugar.css.typo
     * @type             CssClass
     * 

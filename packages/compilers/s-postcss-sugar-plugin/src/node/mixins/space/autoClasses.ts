@@ -31,7 +31,7 @@ export default function ({
     // margins
     const clsMargin = `s-space-auto-${spaceName}`;
     vars.push(`/**
-    * @name            .${clsMargin}
+    * @name            ${clsMargin}
     * @namespace        sugar.css.space
     * @type             CssClass
     * 

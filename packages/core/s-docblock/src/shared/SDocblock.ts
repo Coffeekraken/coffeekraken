@@ -39,6 +39,7 @@ export interface ISDocblockSortFnSetting {
 }
 export interface ISDocblockSettings {
   filepath?: string;
+  filterByTag: Record<string, any>;
   sortFunction?: ISDocblockSortFnSetting;
 }
 export interface ISDocblockCtorSettings {
@@ -103,6 +104,7 @@ class SDocblock extends __SClass implements ISDocblock {
       __deepMerge(
         {
           docblock: {
+            filterByTag: undefined,
             sortFunction: (a, b) => {
               let res = 0;
 
@@ -198,6 +200,7 @@ class SDocblock extends __SClass implements ISDocblock {
   parse(string = this._source): any[] {
     // extract each docblocks
     const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
+
     // extracting blocks
     // @ts-ignore
     let blocksArrayStr: string[] = string.match(reg);
@@ -217,6 +220,60 @@ class SDocblock extends __SClass implements ISDocblock {
             const line = lines[i];
             if (line.trim().slice(0, 2) === '//') return false;
           }
+
+          if (this.docblockSettings.filterByTag) {
+            let isBlockMatchFilter = true;
+            for (
+              let i = 0;
+              i < Object.keys(this.docblockSettings.filterByTag).length;
+              i++
+            ) {
+              const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
+              const tagFilter = this.docblockSettings.filterByTag[tagName];
+              const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
+              const tagValue = blockStr.match(tagValueReg);
+              const tagFilterArray = Array.isArray(tagFilter)
+                ? tagFilter
+                : [tagFilter];
+              let isMatchOrCondition = false;
+              if (tagValue && tagValue[1]) {
+                const tagValueValue = tagValue[1].trim();
+                for (let j = 0; j < tagFilterArray.length; j++) {
+                  const tagFilterFilter = tagFilterArray[j];
+                  // console.log(
+                  //   'tag',
+                  //   tagName,
+                  //   tagValueValue,
+                  //   typeof tagFilterFilter
+                  // );
+                  if (typeof tagFilterFilter === 'string') {
+                    if (tagValueValue === tagFilterFilter) {
+                      isMatchOrCondition = true;
+                      break;
+                    }
+                  } else if (tagFilterFilter instanceof RegExp) {
+                    if (tagValueValue.trim().match(tagFilterFilter)) {
+                      isMatchOrCondition = true;
+                      break;
+                    }
+                  } else if (typeof tagFilterFilter === 'function') {
+                    if (tagFilterFilter(tagValueValue.trim())) {
+                      isMatchOrCondition = true;
+                      break;
+                    }
+                  } else {
+                    throw new Error(
+                      `<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`
+                    );
+                  }
+                }
+              }
+              if (!isMatchOrCondition) isBlockMatchFilter = false;
+            }
+            if (isBlockMatchFilter) return true;
+            return false;
+          }
+
           return true;
         })
         .map((block) => {
@@ -225,6 +282,8 @@ class SDocblock extends __SClass implements ISDocblock {
           });
         });
     }
+
+    console.log(blocks.length);
 
     if (blocks && blocks.length) {
       this._blocks = blocks;

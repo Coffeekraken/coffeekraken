@@ -13,7 +13,7 @@ function default_1({ params, atRule, processNested }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
     vars.push(`/**
-  * @name          .s-container
+  * @name          s-container
   * @namespace          sugar.css.layout
   * @type               CssClass
   * 

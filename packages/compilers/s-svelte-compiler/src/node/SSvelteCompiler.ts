@@ -206,8 +206,10 @@ class SSvelteCompiler extends __SCompiler {
                       {},
                       {
                         postcssCompiler: {
-                          env: {
-                            target: 'component'
+                          pluginsSettings: {
+                            sugar: {
+                              target: 'component'
+                            }
                           }
                         }
                       }

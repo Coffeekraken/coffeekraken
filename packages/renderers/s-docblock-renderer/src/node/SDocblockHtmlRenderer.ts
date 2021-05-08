@@ -3,6 +3,21 @@ import __SDocblockRenderer from './SDocblockRenderer';
 
 import { ISDocblock } from '@coffeekraken/s-docblock';
 
+import classnameHelper from './html/helpers/classname';
+import gravatarHelper from './html/helpers/gravatar';
+import sectionHelper from './html/helpers/section';
+
+import headingPartial from './html/partials/heading';
+import sharingsPartial from './html/partials/sharings';
+
+import authorTag from './html/tags/author';
+import descriptionTag from './html/tags/description';
+import exampleTag from './html/tags/example';
+import nameTag from './html/tags/name';
+import namespaceTag from './html/tags/namespace';
+import paramTag from './html/tags/param';
+import sinceTag from './html/tags/since';
+
 /**
  * @name            SDocblockHtmlRenderer
  * @namespace       node
@@ -95,9 +110,7 @@ class SDocblockHtmlRenderer
       docblockInstance,
       __deepMerge(
         {
-          docblockRenderer: {
-            rootDir: `${__dirname}/html`
-          },
+          docblockRenderer: {},
           docblockHtmlRenderer: {}
         },
         settings || {}
@@ -105,5 +118,20 @@ class SDocblockHtmlRenderer
     );
   }
 }
+
+SDocblockHtmlRenderer.registerHelper(classnameHelper);
+SDocblockHtmlRenderer.registerHelper(gravatarHelper);
+SDocblockHtmlRenderer.registerHelper(sectionHelper);
+
+SDocblockHtmlRenderer.registerPartial(headingPartial);
+SDocblockHtmlRenderer.registerPartial(sharingsPartial);
+
+SDocblockHtmlRenderer.registerTag(authorTag);
+SDocblockHtmlRenderer.registerTag(descriptionTag);
+SDocblockHtmlRenderer.registerTag(exampleTag);
+SDocblockHtmlRenderer.registerTag(nameTag);
+SDocblockHtmlRenderer.registerTag(namespaceTag);
+SDocblockHtmlRenderer.registerTag(paramTag);
+SDocblockHtmlRenderer.registerTag(sinceTag);
 
 export default SDocblockHtmlRenderer;

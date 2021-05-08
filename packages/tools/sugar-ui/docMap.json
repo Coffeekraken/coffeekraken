@@ -1,1 +1,849 @@
-{}
+{
+    "extends": [
+        "@coffeekraken/sugar-ui",
+        "@coffeekraken/s-filtrable-input",
+        "@coffeekraken/s-frontstack",
+        "@coffeekraken/sugar-ui",
+        "@coffeekraken/sugar"
+    ],
+    "map": {
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font.default": {
+            "name": "default",
+            "type": "CssFontFace",
+            "description": "This declare the @font-face for the \"<yellow>default</yellow> font family\"",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font.title": {
+            "name": "title",
+            "type": "CssFontFace",
+            "description": "This declare the @font-face for the \"<yellow>title</yellow> font family\"",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font.quote": {
+            "name": "quote",
+            "type": "CssFontFace",
+            "description": "This declare the @font-face for the \"<yellow>quote</yellow> font family\"",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font.code": {
+            "name": "code",
+            "type": "CssFontFace",
+            "description": "This declare the @font-face for the \"<yellow>code</yellow> font family\"",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.layout..s-container": {
+            "name": ".s-container",
+            "type": "CssClass",
+            "description": "This class allows you to apply the container styling to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.layout",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font..s-font-default": {
+            "name": ".s-font-default",
+            "type": "CssClass",
+            "description": "This class allows you to apply the font \"<yellow>default</yellow>\" to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font..s-font-title": {
+            "name": ".s-font-title",
+            "type": "CssClass",
+            "description": "This class allows you to apply the font \"<yellow>title</yellow>\" to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font..s-font-quote": {
+            "name": ".s-font-quote",
+            "type": "CssClass",
+            "description": "This class allows you to apply the font \"<yellow>quote</yellow>\" to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.font..s-font-code": {
+            "name": ".s-font-code",
+            "type": "CssClass",
+            "description": "This class allows you to apply the font \"<yellow>code</yellow>\" to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.font",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-h1": {
+            "name": ".s-h1",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>h1</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-h1, .s-h1.s-space": {
+            "name": ".s-space-children .s-h1, .s-h1.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-h1</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-h2": {
+            "name": ".s-h2",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>h2</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-h2, .s-h2.s-space": {
+            "name": ".s-space-children .s-h2, .s-h2.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-h2</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-h3": {
+            "name": ".s-h3",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>h3</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-h3, .s-h3.s-space": {
+            "name": ".s-space-children .s-h3, .s-h3.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-h3</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-h4": {
+            "name": ".s-h4",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>h4</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-h4, .s-h4.s-space": {
+            "name": ".s-space-children .s-h4, .s-h4.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-h4</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-h5": {
+            "name": ".s-h5",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>h5</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-h5, .s-h5.s-space": {
+            "name": ".s-space-children .s-h5, .s-h5.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-h5</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-h6": {
+            "name": ".s-h6",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>h6</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-h6, .s-h6.s-space": {
+            "name": ".s-space-children .s-h6, .s-h6.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-h6</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-p-lead": {
+            "name": ".s-p-lead",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>p-lead</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-p-lead, .s-p-lead.s-space": {
+            "name": ".s-space-children .s-p-lead, .s-p-lead.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-p-lead</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-p": {
+            "name": ".s-p",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>p</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-space-children .s-p, .s-p.s-space": {
+            "name": ".s-space-children .s-p, .s-p.s-space",
+            "type": "CssClass",
+            "description": "This class allows you to activate the space(s) on your \"<yellow>s-p</yellow>\" HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-b": {
+            "name": ".s-b",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>b</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-strong": {
+            "name": ".s-strong",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>strong</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-i": {
+            "name": ".s-i",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>i</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-em": {
+            "name": ".s-em",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>em</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-small": {
+            "name": ".s-small",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>small</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-mark": {
+            "name": ".s-mark",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>mark</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-del": {
+            "name": ".s-del",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>del</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-ins": {
+            "name": ".s-ins",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>ins</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-sub": {
+            "name": ".s-sub",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>sub</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.typo..s-sup": {
+            "name": ".s-sup",
+            "type": "CssClass",
+            "description": "This class allows you to apply the \"<yellow>sup</yellow>\" typography style to any HTMLElement",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.typo",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn": {
+            "name": ".s-btn",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>default</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--title": {
+            "name": ".s-btn.s-btn--title",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>title</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--text": {
+            "name": ".s-btn.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>default</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--link": {
+            "name": ".s-btn.s-btn--link",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>link</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--primary": {
+            "name": ".s-btn.s-btn--primary",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>primary</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--secondary": {
+            "name": ".s-btn.s-btn--secondary",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>secondary</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--surface": {
+            "name": ".s-btn.s-btn--surface",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>surface</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--background": {
+            "name": ".s-btn.s-btn--background",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>background</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--success": {
+            "name": ".s-btn.s-btn--success",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>success</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--warning": {
+            "name": ".s-btn.s-btn--warning",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>warning</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--error": {
+            "name": ".s-btn.s-btn--error",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>error</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--info": {
+            "name": ".s-btn.s-btn--info",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>info</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--extension": {
+            "name": ".s-btn.s-btn--extension",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>default</yellow>\" button with the \"<yellow>extension</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--outlined": {
+            "name": ".s-btn.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>default</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--title.s-btn--outlined": {
+            "name": ".s-btn.s-btn--title.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>title</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--text.s-btn--outlined": {
+            "name": ".s-btn.s-btn--text.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>text</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--link.s-btn--outlined": {
+            "name": ".s-btn.s-btn--link.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>link</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--primary.s-btn--outlined": {
+            "name": ".s-btn.s-btn--primary.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>primary</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--secondary.s-btn--outlined": {
+            "name": ".s-btn.s-btn--secondary.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>secondary</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--surface.s-btn--outlined": {
+            "name": ".s-btn.s-btn--surface.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>surface</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--background.s-btn--outlined": {
+            "name": ".s-btn.s-btn--background.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>background</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--success.s-btn--outlined": {
+            "name": ".s-btn.s-btn--success.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>success</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--warning.s-btn--outlined": {
+            "name": ".s-btn.s-btn--warning.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>warning</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--error.s-btn--outlined": {
+            "name": ".s-btn.s-btn--error.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>error</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--info.s-btn--outlined": {
+            "name": ".s-btn.s-btn--info.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>info</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--extension.s-btn--outlined": {
+            "name": ".s-btn.s-btn--extension.s-btn--outlined",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>outlined</yellow>\" button with the \"<yellow>extension</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--title.s-btn--text": {
+            "name": ".s-btn.s-btn--title.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>title</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--text.s-btn--text": {
+            "name": ".s-btn.s-btn--text.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>text</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--link.s-btn--text": {
+            "name": ".s-btn.s-btn--link.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>link</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--primary.s-btn--text": {
+            "name": ".s-btn.s-btn--primary.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>primary</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--secondary.s-btn--text": {
+            "name": ".s-btn.s-btn--secondary.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>secondary</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--surface.s-btn--text": {
+            "name": ".s-btn.s-btn--surface.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>surface</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--background.s-btn--text": {
+            "name": ".s-btn.s-btn--background.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>background</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--success.s-btn--text": {
+            "name": ".s-btn.s-btn--success.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>success</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--warning.s-btn--text": {
+            "name": ".s-btn.s-btn--warning.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>warning</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--error.s-btn--text": {
+            "name": ".s-btn.s-btn--error.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>error</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--info.s-btn--text": {
+            "name": ".s-btn.s-btn--info.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>info</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css"
+        },
+        "@coffeekraken.sugar-ui.@coffeekraken.sugar-ui.sugar.css.ui.button..s-btn.s-btn--extension.s-btn--text": {
+            "name": ".s-btn.s-btn--extension.s-btn--text",
+            "type": "CssClass",
+            "description": "This class represent a(n) \"<yellow>text</yellow>\" button with the \"<yellow>extension</yellow>\" color applied",
+            "namespace": "@coffeekraken.sugar-ui.sugar.css.ui.button",
+            "filename": "index.css",
+            "extension": "css",
+            "relPath": "dist/css/index.css",
+            "children": {}
+        }
+    }
+}

@@ -3,7 +3,7 @@ export default {
   args: {
     classes: ''
   },
-  helper: function classname({ classes, settings }) {
+  process: function classname({ classes, settings }) {
     if (
       !settings.scope ||
       typeof settings.scope !== 'string' ||

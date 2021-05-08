@@ -59,8 +59,8 @@ type ISPromiseStateType =
   | 'destroyed';
 
 export interface ISPromiseProxies {
-  resolve: function[];
-  reject: function[];
+  resolve: any[];
+  reject: any[];
 }
 
 export interface ISPromiseSettings {
@@ -87,8 +87,8 @@ export interface ISPromiseCancelFn {
 }
 
 export interface ISPromiseResolvers {
-  reject: Function;
-  resolve: Function;
+  reject: any;
+  resolve: any;
 }
 
 export interface ISPromiseCtor extends Promise {
@@ -109,7 +109,7 @@ export interface ISPromise extends Promise, ISEventEmitter {
   resolve: ISPromiseResolveFn;
   reject: ISPromiseRejectFn;
   cancel: ISPromiseCancelFn;
-  on(event: string, callback: function): ISEventEmitter;
+  on(event: string, callback: any): ISEventEmitter;
   catch(...args: any): ISPromise;
   finally(...args: any): ISPromise;
 }
@@ -142,7 +142,7 @@ class SPromise
   private _promiseState: ISPromiseStateType = 'pending';
   private _resolvers: ISPromiseResolvers;
 
-  on: function;
+  on: any;
 
   /**
    * @name          promiseSettings
@@ -334,7 +334,7 @@ class SPromise
    */
   registerProxy(
     point: 'resolve' | 'reject' | 'resolve,reject' | 'reject,resolve',
-    proxy: function
+    proxy: any
   ): void {
     const ar = point.split(',').map((l) => l.trim());
     ar.forEach((a) => {

@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "",
   "homepage": "https://coffeekraken.io",
-  "main": "dist/js/exports.js",
+  "main": "dist/js/index.js",
   "scripts": {
     "dev": "sugard frontstack.start",
     "test": "echo \"Error: no test specified\" && exit 1"

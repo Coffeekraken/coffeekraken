@@ -35,7 +35,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 const s_docmap_1 = __importDefault(require("@coffeekraken/s-docmap"));
 const s_docblock_1 = __importDefault(require("@coffeekraken/s-docblock"));
+const s_docblock_renderer_1 = require("@coffeekraken/s-docblock-renderer");
 const s_view_renderer_1 = __importStar(require("@coffeekraken/s-view-renderer"));
+const minimatch_1 = __importDefault(require("minimatch"));
 /**
  * @name                doc
  * @namespace           sugar.node.server.frontend.handlers
@@ -59,39 +61,36 @@ let _docmapJson;
 function doc(req, res, settings = {}) {
     return new s_promise_1.default(({ resolve, reject, pipe }) => __awaiter(this, void 0, void 0, function* () {
         const docMap = new s_docmap_1.default();
-        const namespace = req.path.replace('/doc/', '').trim();
+        const requestedNamespace = req.path.replace('/doc/', '').trim();
         const readPromise = docMap.read();
         pipe(readPromise);
         _docmapJson = yield readPromise;
-        const pathes = {};
-        Object.keys(_docmapJson).forEach((docmapNamespace) => {
-            console.log(docmapNamespace, namespace);
-            if (docmapNamespace.startsWith(namespace)) {
-                if (!pathes[_docmapJson[docmapNamespace].path]) {
-                    pathes[_docmapJson[docmapNamespace].path] = [];
-                }
-                pathes[_docmapJson[docmapNamespace].path].push(_docmapJson[docmapNamespace]);
+        const filteredDocmapObj = {};
+        Object.keys(_docmapJson).forEach((namespace) => {
+            if (namespace === requestedNamespace ||
+                minimatch_1.default(namespace, `${requestedNamespace}.**`)) {
+                filteredDocmapObj[namespace] = _docmapJson[namespace];
             }
         });
-        console.log(Object.keys(pathes));
         const docsHtml = [];
-        Object.keys(pathes).forEach((path) => {
-            console.log('NAMES', pathes[path].map((docmapObj) => docmapObj.namespace));
+        for (let i = 0; i < Object.keys(filteredDocmapObj).length; i++) {
+            const docmapObj = filteredDocmapObj[Object.keys(filteredDocmapObj)[i]];
             // generate the docblocks
-            const docblock = new s_docblock_1.default(path, {
-                docblock: {
-                    filterByTag: {
-                        namespace: pathes[path].map((docmapObj) => docmapObj.namespace)
-                    }
-                }
-            });
-            // // render them into html
-            // const htmlRenderer = new SDocblockHtmlRenderer(docblock);
-            // const html = await htmlRenderer.render();
-            // console.log(_docmapJson[docmapNamespace].path);
-            docsHtml.push();
-        });
-        return;
+            const docblock = new s_docblock_1.default(docmapObj.path, {});
+            if (i < 1) {
+                // render them into html
+                const htmlRenderer = new s_docblock_renderer_1.SDocblockHtmlRenderer(docblock);
+                const html = yield htmlRenderer.render();
+                docsHtml.push(html);
+            }
+            else {
+                docsHtml.push(`
+          <s-docblock-to-html>
+            ${docblock.toString()}
+          </s-docblock-to-html>
+        `);
+            }
+        }
         if (!docsHtml.length) {
             const html = yield s_view_renderer_1.page404({
                 title: `Documentation "${namespace}" not found`,
@@ -105,7 +104,6 @@ function doc(req, res, settings = {}) {
         // render the proper template
         const docView = new s_view_renderer_1.default('pages.doc');
         const pageHtml = yield docView.render(Object.assign(Object.assign({}, (res.templateData || {})), { body: docsHtml.join('\n') }));
-        // _console.log(req);
         res.type('text/html');
         res.status(200);
         res.send(pageHtml.value);
@@ -113,4 +111,4 @@ function doc(req, res, settings = {}) {
     }));
 }
 exports.default = doc;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZG9jLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFFZCx3RUFBaUQ7QUFDakQsc0VBQStDO0FBQy9DLDBFQUFtRDtBQUVuRCxpRkFBeUU7QUFFekU7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILElBQUksV0FBVyxDQUFDO0FBQ2hCLFNBQXdCLEdBQUcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ2pELE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDeEQsTUFBTSxNQUFNLEdBQUcsSUFBSSxrQkFBUyxFQUFFLENBQUM7UUFDL0IsTUFBTSxTQUFTLEdBQUcsR0FBRyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxFQUFFLEVBQUUsQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDO1FBRXZELE1BQU0sV0FBVyxHQUFHLE1BQU0sQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUNsQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUM7UUFDbEIsV0FBVyxHQUFHLE1BQU0sV0FBVyxDQUFDO1FBRWhDLE1BQU0sTUFBTSxHQUFHLEVBQUUsQ0FBQztRQUNsQixNQUFNLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLGVBQWUsRUFBRSxFQUFFO1lBQ25ELE9BQU8sQ0FBQyxHQUFHLENBQUMsZUFBZSxFQUFFLFNBQVMsQ0FBQyxDQUFDO1lBQ3hDLElBQUksZUFBZSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsRUFBRTtnQkFDekMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUMsZUFBZSxDQUFDLENBQUMsSUFBSSxDQUFDLEVBQUU7b0JBQzlDLE1BQU0sQ0FBQyxXQUFXLENBQUMs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZG9jLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFFZCx3RUFBaUQ7QUFDakQsc0VBQStDO0FBQy9DLDBFQUFtRDtBQUNuRCwyRUFBMEU7QUFDMUUsaUZBQXlFO0FBRXpFLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsSUFBSSxXQUFXLENBQUM7QUFDaEIsU0FBd0IsR0FBRyxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDakQsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUN4RCxNQUFNLE1BQU0sR0FBRyxJQUFJLGtCQUFTLEVBQUUsQ0FBQztRQUMvQixNQUFNLGtCQUFrQixHQUFHLEdBQUcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sRUFBRSxFQUFFLENBQUMsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUVoRSxNQUFNLFdBQVcsR0FBRyxNQUFNLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDbEMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ2xCLFdBQVcsR0FBRyxNQUFNLFdBQVcsQ0FBQztRQUVoQyxNQUFNLGlCQUFpQixHQUFHLEVBQUUsQ0FBQztRQUM3QixNQUFNLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1lBQzdDLElBQ0UsU0FBUyxLQUFLLGtCQUFrQjtnQkFDaEMsbUJBQVcsQ0FBQyxTQUFTLEVBQUUsR0FBRyxrQkFBa0IsS0FBSyxDQUFDLEVBQ2xEO2dCQUNBLGlCQUFpQixDQUFDLFNBQVMsQ0FBQyxHQUFHLFdBQVcsQ0FBQyxTQUFTLENBQUMsQ0FBQzthQUN2RDtRQUNILENBQUMsQ0FBQyxDQUFDO1FBRUgsTUFBTSxRQUFRLEdBQWEsRUFBRSxDQUFDO1FBQzlCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzlELE1BQU0sU0FBUyxHQUFHLGlCQUFpQixDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3ZFLHlCQUF5QjtZQUN6QixNQUFNLFFBQVEsR0FBRyxJQUFJLG9CQUFXLENBQUMsU0FBUyxDQUFDLElBQUksRUFBRSxFQUFFLENBQUMsQ0FBQztZQUVyRCxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUU7Z0JBQ1Qsd0JBQXdCO2dCQUN4QixNQUFNLFlBQVksR0FBRyxJQUFJLDJDQUFxQixDQUFDLFFBQVEsQ0FBQyxDQUFDO2dCQUN6RCxNQUFNLElBQUksR0FBRyxNQUFNLFlBQVksQ0FBQyxNQUFNLEVBQUUsQ0FBQztnQkFDekMsUUFBUSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQzthQUNyQjtpQkFBTTtnQkFDTCxRQUFRLENBQUMsSUFBSSxDQUFDOztjQUVSLFFBQVEsQ0FBQyxRQUFRLEVBQUU7O1NBRXhCLENBQUMsQ0FBQzthQUNKO1NBQ0Y7UUFFRCxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sRUFBRTtZQUNwQixNQUFNLElBQUksR0FBRyxNQUFNLHlCQUFPLENBQUM7Z0JBQ3pCLEtBQUssRUFBRSxrQkFBa0IsU0FBUyxhQUFhO2dCQUMvQyxJQUFJLEVBQUUsc0JBQXNCLFNBQVMsb0NBQW9DO2FBQzFFLENBQUMsQ0FBQztZQUNILEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUM7WUFDdEIsR0FBRyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUNoQixHQUFHLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUNyQixPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDM0I7UUFFRCw2QkFBNkI7UUFDN0IsTUFBTSxPQUFPLEdBQUcsSUFBSSx5QkFBZSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ2pELE1BQU0sUUFBUSxHQUFHLE1BQU0sT0FBTyxDQUFDLE1BQU0saUNBQ2hDLENBQUMsR0FBRyxDQUFDLFlBQVksSUFBSSxFQUFFLENBQUMsS0FDM0IsSUFBSSxFQUFFLFFBQVEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQ3pCLENBQUM7UUFFSCxHQUFHLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ3RCLEdBQUcsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDaEIsR0FBRyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDekIsT0FBTyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUMxQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ0wsQ0FBQztBQTlERCxzQkE4REMifQ==

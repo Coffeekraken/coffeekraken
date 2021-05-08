@@ -1,0 +1,10 @@
+export default {
+  id: 'since',
+  template: `
+  {{#if since}}
+<h3 class="{{ classname 'h3' }}">
+  <span class="{{ classname 'db-since' }}">Since: {{since}}</span>
+</h3>
+{{/if}}
+  `
+};

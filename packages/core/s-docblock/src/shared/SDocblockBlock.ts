@@ -11,9 +11,6 @@ import __exampleTag from './tags/example';
 import __paramTag from './tags/param';
 import __snippetTag from './tags/snippet';
 
-import __fs from 'fs';
-import __path from 'path';
-
 /**
  * @name          SDocblockBlock
  * @namespace           shared
@@ -154,7 +151,17 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
       )
     );
 
-    this._source = source.trim();
+    this._source = source
+      .trim()
+      .replace(/\s\*\s/gm, '\n * ')
+      .split(/\n/gm)
+      .map((l) => l.trim())
+      .filter((l) => l !== '')
+      .join('\n')
+      .replace(/\*\s\*/gm, '*')
+      .replace(/^\/\*\*/, '/**\n*')
+      .replace(/\*\/$/, '\n*/');
+
     // parse the docblock string
     this._blockObj = this.parse();
   }

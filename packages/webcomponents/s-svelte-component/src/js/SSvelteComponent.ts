@@ -86,6 +86,10 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
     return this._currentComponent;
   }
 
+  get $elm(): HTMLElement {
+    return this._currentComponent;
+  }
+
   /**
    * @name      styleElm
    * @type      HTMLElement
@@ -96,7 +100,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get styleElm(): HTMLElement {
+  get styleElm(): HTMLElement | undefined {
     for (
       let i = 0;
       i < this._currentComponent.shadowRoot.children.length;
@@ -129,6 +133,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
 
     // @ts-ignore
     const interfaceClass =
+      // @ts-ignore
       this.svelteComponentSettings.interface ?? this.constructor.interface;
 
     const processedParams = {};
@@ -139,7 +144,9 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
     // @ts-ignore
     if (interfaceClass) {
       // add default props
+      // @ts-ignore
       interfaceClass.definition = {
+        // @ts-ignore
         ...interfaceClass.definition,
         noLnf: {
           type: {
@@ -217,6 +224,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    *
    */
   _applyStyles(): void {
+    if (!this.styleElm) return;
     const matches = this.styleElm.innerHTML.match(
       /[\.#]?[a-zA-Z0-9-_:>+*\s]+\{(.*\n?)content:"(s-style-[a-zA-Z0-9-_]+)"(.*\n?)\}/gm
     );
@@ -227,7 +235,9 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
         ''
       );
       matches.forEach((match) => {
+        // @ts-ignore
         const selector = match.split('{')[0];
+        // @ts-ignore
         const styleName = match.match(/content:"(.*)"/)[1];
         const reg = new RegExp(`\.${styleName}.*\{[^\}]+\}`, 'gm');
         const styleCssMatches = this.styleStr.match(reg);
@@ -267,24 +277,24 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
       .join(' ');
   }
 
-  onMount(callback: Function): void {
+  onMount(callback: any): void {
     __onMount(callback);
   }
 
-  beforeUpdate(callback: Function): void {
+  beforeUpdate(callback: any): void {
     __beforeUpdate(callback);
   }
 
-  afterUpdate(callback: Function): void {
+  afterUpdate(callback: any): void {
     __afterUpdate(callback);
   }
 
-  onDestroy(callback: Function): void {
+  onDestroy(callback: any): void {
     __onDestroy(callback);
   }
 
-  tick(callback: Function): void {
-    __tick(callback);
+  tick(): void {
+    __tick();
   }
 
   getContext(callback: Function): void {
@@ -295,8 +305,8 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
     __hasContext(callback);
   }
 
-  setContext(callback: Function): void {
-    __setContext(callback);
+  setContext(key: any, context: any): void {
+    __setContext(key, context);
   }
 }
 

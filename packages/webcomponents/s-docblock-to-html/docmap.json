@@ -1,0 +1,11 @@
+{
+    "extends": [
+        "@coffeekraken/s-docblock-to-html",
+        "@coffeekraken/s-docblock-to-html",
+        "@coffeekraken/s-filtrable-input",
+        "@coffeekraken/s-frontstack",
+        "@coffeekraken/sugar-ui",
+        "@coffeekraken/sugar"
+    ],
+    "map": {}
+}

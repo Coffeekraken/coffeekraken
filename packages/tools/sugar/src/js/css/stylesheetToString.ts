@@ -18,7 +18,7 @@
  */
 export default function stylesheetToString(
   // @ts-ignore
-  stylesheet: StyleSheet | StyleSheet[]
+  stylesheet: StyleSheet | StyleSheetList
 ): string {
   let stack: any[] = [];
 

@@ -4,7 +4,6 @@ import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/shared/is/path';
-import __fs from 'fs';
 
 /**
  * @name                  Dockblock
@@ -134,19 +133,19 @@ class SDocblock extends __SClass implements ISDocblock {
     );
 
     // check if the source is path
-    if (__isPath(source)) {
-      if (!__isNode())
-        throw new Error(
-          `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`
-        );
-      if (!__fs.existsSync(source))
-        throw new Error(
-          `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`
-        );
-      this._source = __fs.readFileSync(source, 'utf8');
-    } else {
-      this._source = source;
-    }
+    // if (__isPath(source)) {
+    //   if (!__isNode())
+    //     throw new Error(
+    //       `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`
+    //     );
+    //   if (!e.existsSync(source))
+    //     throw new Error(
+    //       `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`
+    //     );
+    //   this._source = __fs.readFileSync(source, 'utf8');
+    // } else {
+    this._source = source;
+    // }
 
     // parsing the source
     this._blocks = this.parse();
@@ -183,6 +182,25 @@ class SDocblock extends __SClass implements ISDocblock {
     if (!this._blocks) this.parse();
     return this._blocks;
   }
+
+  // /**
+  //  * @name        getBlockByName
+  //  * @type        Function
+  //  *
+  //  * Get a block by it's name
+  //  *
+  //  * @param       {String}        name      The name you want to get block for
+  //  * @return      SDocblockBlock            The getted block
+  //  *
+  //  * @since     2.0.0
+  //  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //  */
+  // getBlockByName(name: string): __SDocblockBlock {
+  //   // for (let i = 0; this._blocks.length; i++) {
+  //   //   const block = this._blocks[i];
+  //   //   console.log(block);
+  //   // }
+  // }
 
   /**
    * @name          parse
@@ -240,12 +258,6 @@ class SDocblock extends __SClass implements ISDocblock {
                 const tagValueValue = tagValue[1].trim();
                 for (let j = 0; j < tagFilterArray.length; j++) {
                   const tagFilterFilter = tagFilterArray[j];
-                  // console.log(
-                  //   'tag',
-                  //   tagName,
-                  //   tagValueValue,
-                  //   typeof tagFilterFilter
-                  // );
                   if (typeof tagFilterFilter === 'string') {
                     if (tagValueValue === tagFilterFilter) {
                       isMatchOrCondition = true;
@@ -283,8 +295,6 @@ class SDocblock extends __SClass implements ISDocblock {
         });
     }
 
-    console.log(blocks.length);
-
     if (blocks && blocks.length) {
       this._blocks = blocks;
     }
@@ -309,6 +319,23 @@ class SDocblock extends __SClass implements ISDocblock {
     return this.blocks.map((block) => {
       return block.toObject();
     });
+  }
+
+  /**
+   * @name        toString
+   * @type        Function
+   *
+   * This method allows you to get the string version of the docblock(s)
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  toString() {
+    return this.blocks
+      .map((block) => {
+        return block.toString();
+      })
+      .join('\n');
   }
 }
 

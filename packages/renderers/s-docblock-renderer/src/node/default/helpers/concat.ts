@@ -1,7 +1,7 @@
 export default {
   id: 'concat',
   args: {},
-  helper: function concat({ settings }) {
+  process: function concat({ settings }) {
     var result = '';
 
     for (var i in arguments) {

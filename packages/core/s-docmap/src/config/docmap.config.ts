@@ -139,8 +139,8 @@ export default {
      */
     globs: __unique([
       'docmap.json',
-      `node_modules/**{4}/docmap.json`,
-      `${__packageRoot(process.cwd(), true)}/node_modules/**{4}/docmap.json`
+      `node_modules/**{2}/docmap.json`,
+      `${__packageRoot(process.cwd(), true)}/node_modules/**{2}/docmap.json`
     ]),
 
     /**

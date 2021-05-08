@@ -5,7 +5,7 @@ import __consoleClear from 'console-clear';
 import __terminalKit from 'terminal-kit';
 
 /**
- * @name            onProcessExit
+ * @name            onProcessExit222
  * @namespace            node.process
  * @type            Function
  * @status              beta

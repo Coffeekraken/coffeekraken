@@ -15,6 +15,10 @@ import __fs from 'fs';
 import __path from 'path';
 import __SDocMapFindParamsInterface from './interface/SDocMapFindParamsInterface';
 import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
+import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __resolve from '@coffeekraken/sugar/node/module/resolve';
+
+import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
 
 /**
  * @name                SDocMap
@@ -54,12 +58,17 @@ export interface ISDocMapGenerateParams {
   fields: string[];
   save: boolean;
   outPath: string;
+  find: Partial<ISDocMapFindParams>;
 }
 export interface ISDocMapFindParams {
   cache: boolean;
   clearCache: boolean;
   globs: string[];
   exclude: string[];
+}
+
+export interface ISDocMapReadParams {
+  path: string;
 }
 
 export interface ISDocMapSaveSettings {
@@ -192,23 +201,23 @@ class SDocMap extends __SClass implements ISDocMap {
         await this.clearCache();
       }
 
-      if (findParams.cache && !findParams.clearCache) {
-        const cachedValue = await this._cache.get('find-files');
-        if (cachedValue) {
-          emit('log', {
-            value: `<yellow>[${this.constructor.name}]</yellow> docmap.json file(s) getted from cache`
-          });
-          cachedValue.forEach((fileObj) => {
-            emit('log', {
-              value: `- <cyan>${__path.relative(
-                process.cwd(),
-                fileObj.path
-              )}</cyan>`
-            });
-          });
-          return resolve(cachedValue);
-        }
-      }
+      // if (findParams.cache && !findParams.clearCache) {
+      //   const cachedValue = await this._cache.get('find-files');
+      //   if (cachedValue) {
+      //     emit('log', {
+      //       value: `<yellow>[${this.constructor.name}]</yellow> docmap.json file(s) getted from cache`
+      //     });
+      //     cachedValue.forEach((fileObj) => {
+      //       emit('log', {
+      //         value: `- <cyan>${__path.relative(
+      //           process.cwd(),
+      //           fileObj.path
+      //         )}</cyan>`
+      //       });
+      //     });
+      //     return resolve(cachedValue);
+      //   }
+      // }
 
       let files: __SFile[] = [];
       await __wait(1);
@@ -226,6 +235,11 @@ class SDocMap extends __SClass implements ISDocMap {
         files = [...files, ...foundedFiles];
       }
 
+      files = files.filter((file) => {
+        if (!__fs.existsSync(`${file.dirPath}/package.json`)) return false;
+        return true;
+      });
+
       const findedStrArray: string[] = [
         `Found <yellow>${files.length}</yellow> docmap file(s):`
       ];
@@ -237,15 +251,15 @@ class SDocMap extends __SClass implements ISDocMap {
       });
 
       // save in cache if asked
-      if (findParams.cache) {
-        emit('log', {
-          value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
-        });
-        await this._cache.set(
-          'find-files',
-          files.map((file) => file.toObject())
-        );
-      }
+      // if (findParams.cache) {
+      //   emit('log', {
+      //     value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
+      //   });
+      //   await this._cache.set(
+      //     'find-files',
+      //     files.map((file) => file.toObject())
+      //   );
+      // }
 
       resolve(files);
     });
@@ -268,38 +282,66 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(params: Partial<ISDocMapFindParams>) {
+  read(params: Partial<ISDocMapReadParams>) {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
-      const filesPromise = this.find(params);
-      pipe(filesPromise);
-      const files = await filesPromise;
+      const set = <ISDocMapReadParams>__deepMerge(
+        {
+          path: `${__packageRoot()}/docmap.json`
+        },
+        params ?? {}
+      );
 
-      let docMapJson = {};
+      if (!__fs.existsSync(set.path)) {
+        throw new Error(
+          `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${set.path}</cyan>" does not exists...`
+        );
+      }
 
-      // loop on all files
-      files.forEach((file) => {
-        const content = file.content;
+      const rootPath = set.path.replace(/\/docmap\.json/, '');
 
-        Object.keys(content).forEach((docMapItemKey) => {
-          const itemObj = content[docMapItemKey];
-          itemObj.path = __path.resolve(
-            file.dirPath,
-            content[docMapItemKey].relPath
-          );
+      let finalDocmapJson = {};
+      const extendedPackages: string[] = [];
+      function loadJson(path) {
+        let docMapJson;
+        let docmapJsonPath = path.match(/docmap\.json$/)
+          ? path
+          : `${path}/docmap.json`;
+        try {
+          docMapJson = require(docmapJsonPath);
+        } catch (e) {}
+
+        const rootModulePath = require
+          .resolve(docmapJsonPath)
+          .replace(/\/docmap\.json/, '');
+
+        Object.keys(docMapJson.map).forEach((namespace) => {
+          const docmapObj = docMapJson.map[namespace];
+          const absPath = __path.resolve(rootModulePath, docmapObj.relPath);
+          const relPath = __path.relative(rootPath, absPath);
+          docMapJson.map[namespace].relPath = relPath;
+          docMapJson.map[namespace].path = absPath;
         });
 
-        docMapJson = {
-          ...docMapJson,
-          ...content
+        // add the map
+        finalDocmapJson = {
+          ...finalDocmapJson,
+          ...(docMapJson.map ?? {})
         };
-      });
+        // loop on extends
+        if (docMapJson.extends) {
+          docMapJson.extends.forEach((path) => {
+            if (extendedPackages.indexOf(path) === -1) {
+              extendedPackages.push(path);
+              loadJson(path);
+            }
+          });
+        }
+      }
 
-      // emit('log', {
-      //   value: __toString(docMapJson)
-      // });
+      loadJson(set.path);
 
       // return the final docmap
-      resolve(docMapJson);
+      resolve(finalDocmapJson);
     });
   }
 
@@ -320,7 +362,7 @@ class SDocMap extends __SClass implements ISDocMap {
     const generateParams = <ISDocMapGenerateParams>(
       __deepMerge(__SDocMapGenerateParamsInterface.defaults(), params)
     );
-    return new __SPromise(async ({ resolve, reject, emit }) => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
       let globs: string[] = generateParams.globs || [];
       if (!Array.isArray(globs)) globs = [globs];
 
@@ -334,10 +376,29 @@ class SDocMap extends __SClass implements ISDocMap {
         )}</yellow>`
       });
 
+      // getting package infos
+      const packageJson = __packageJson();
+
+      // searching for actual docmaps
+      const currentDocmapsPromise = this.find(params.find);
+      pipe(currentDocmapsPromise);
+      const currentDocmapsFiles = await currentDocmapsPromise;
+
+      const extendsArray: string[] = [];
+      currentDocmapsFiles.forEach((file) => {
+        const packageJson = require(`${file.dirPath}/package.json`);
+        extendsArray.push(packageJson.name);
+      });
+
       const pool = __fsPool(globs, {
         watch: generateParams.watch,
         exclude: generateParams.exclude
       });
+
+      const docmapJson = {
+        extends: extendsArray,
+        map: {}
+      };
 
       pool.on(generateParams.watch ? 'update' : 'files', (files) => {
         files = Array.isArray(files) ? files : [files];
@@ -355,6 +416,11 @@ class SDocMap extends __SClass implements ISDocMap {
           const content = __fs.readFileSync(filepath, 'utf8');
           if (!content) continue;
           const docblocks = new __SDocblock(content).toObject();
+
+          // const db = new __SDocblock(content);
+          // const renderer = new SDocblockHtmlRenderer(db);
+          // const str = renderer.render();
+
           if (!docblocks || !docblocks.length) continue;
           let docblockObj: any = {};
           const children: any = {};
@@ -383,6 +449,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
             generateParams.fields.forEach((field) => {
               if (docblock[field] === undefined) return;
+              if (field === 'namespace')
+                docblock[field] = `${packageJson.name.replace('/', '.')}.${
+                  docblock[field]
+                }`;
               docblockEntryObj[field] = docblock[field];
             });
 
@@ -414,6 +484,9 @@ class SDocMap extends __SClass implements ISDocMap {
           message: `${this.metas.id} build success`
         });
 
+        // save entries inside the json map property
+        docmapJson.map = this._entries;
+
         if (generateParams.save) {
           emit('log', {
             value: `<yellow>[save]</yellow> File "<cyan>${generateParams.outPath.replace(
@@ -423,7 +496,7 @@ class SDocMap extends __SClass implements ISDocMap {
           });
           __fs.writeFileSync(
             generateParams.outPath,
-            JSON.stringify(this._entries, null, 4)
+            JSON.stringify(docmapJson, null, 4)
           );
         }
 

@@ -1,19 +1,28 @@
 {
-    "s-frontstack.SFrontstackStartInterface": {
-        "name": "SFrontstackStartInterface",
-        "type": "Class",
-        "description": "This class represent the interface that describe parameters of the SFrontstackStartProcess",
-        "namespace": "s-frontstack",
-        "status": "wip",
-        "since": "2.0.0",
-        "author": {
-            "name": "Olivier Bossel",
-            "email": "olivier.bossel@gmail.com",
-            "url": "https://olivierbossel.com"
-        },
-        "filename": "SFrontstackStartInterface.js",
-        "extension": "js",
-        "relPath": "src/node/start/interface/SFrontstackStartInterface.js",
-        "children": {}
+    "extends": [
+        "@coffeekraken/s-frontstack",
+        "@coffeekraken/s-filtrable-input",
+        "@coffeekraken/s-frontstack",
+        "@coffeekraken/sugar-ui",
+        "@coffeekraken/sugar"
+    ],
+    "map": {
+        "@coffeekraken.s-frontstack.@coffeekraken.s-frontstack.s-frontstack.SFrontstackStartInterface": {
+            "name": "SFrontstackStartInterface",
+            "type": "Class",
+            "description": "This class represent the interface that describe parameters of the SFrontstackStartProcess",
+            "namespace": "@coffeekraken.s-frontstack.s-frontstack",
+            "status": "wip",
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://olivierbossel.com"
+            },
+            "filename": "SFrontstackStartInterface.ts",
+            "extension": "ts",
+            "relPath": "src/node/start/interface/SFrontstackStartInterface.ts",
+            "children": {}
+        }
     }
 }

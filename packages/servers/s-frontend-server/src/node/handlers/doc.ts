@@ -5,6 +5,8 @@ import __SDocMap from '@coffeekraken/s-docmap';
 import __SDocblock from '@coffeekraken/s-docblock';
 import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
 import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __minimatch from 'minimatch';
 
 /**
  * @name                doc
@@ -29,50 +31,41 @@ let _docmapJson;
 export default function doc(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
     const docMap = new __SDocMap();
-    const namespace = req.path.replace('/doc/', '').trim();
+    const requestedNamespace = req.path.replace('/doc/', '').trim();
 
     const readPromise = docMap.read();
     pipe(readPromise);
     _docmapJson = await readPromise;
 
-    const pathes = {};
-    Object.keys(_docmapJson).forEach((docmapNamespace) => {
-      console.log(docmapNamespace, namespace);
-      if (docmapNamespace.startsWith(namespace)) {
-        if (!pathes[_docmapJson[docmapNamespace].path]) {
-          pathes[_docmapJson[docmapNamespace].path] = [];
-        }
-        pathes[_docmapJson[docmapNamespace].path].push(
-          _docmapJson[docmapNamespace]
-        );
+    const filteredDocmapObj = {};
+    Object.keys(_docmapJson).forEach((namespace) => {
+      if (
+        namespace === requestedNamespace ||
+        __minimatch(namespace, `${requestedNamespace}.**`)
+      ) {
+        filteredDocmapObj[namespace] = _docmapJson[namespace];
       }
     });
 
-    console.log(Object.keys(pathes));
-
     const docsHtml: string[] = [];
-    Object.keys(pathes).forEach((path) => {
-      console.log(
-        'NAMES',
-        pathes[path].map((docmapObj) => docmapObj.namespace)
-      );
-
+    for (let i = 0; i < Object.keys(filteredDocmapObj).length; i++) {
+      const docmapObj = filteredDocmapObj[Object.keys(filteredDocmapObj)[i]];
       // generate the docblocks
-      const docblock = new __SDocblock(path, {
-        docblock: {
-          filterByTag: {
-            namespace: pathes[path].map((docmapObj) => docmapObj.namespace)
-          }
-        }
-      });
-      // // render them into html
-      // const htmlRenderer = new SDocblockHtmlRenderer(docblock);
-      // const html = await htmlRenderer.render();
-      // console.log(_docmapJson[docmapNamespace].path);
-      docsHtml.push();
-    });
+      const docblock = new __SDocblock(docmapObj.path, {});
 
-    return;
+      if (i < 1) {
+        // render them into html
+        const htmlRenderer = new SDocblockHtmlRenderer(docblock);
+        const html = await htmlRenderer.render();
+        docsHtml.push(html);
+      } else {
+        docsHtml.push(`
+          <s-docblock-to-html>
+            ${docblock.toString()}
+          </s-docblock-to-html>
+        `);
+      }
+    }
 
     if (!docsHtml.length) {
       const html = await page404({
@@ -92,7 +85,6 @@ export default function doc(req, res, settings = {}) {
       body: docsHtml.join('\n')
     });
 
-    // _console.log(req);
     res.type('text/html');
     res.status(200);
     res.send(pageHtml.value);

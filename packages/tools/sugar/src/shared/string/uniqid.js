@@ -1,5 +1,7 @@
+"use strict";
 // @ts-nocheck
-import __uniqid from 'uniqid';
+Object.defineProperty(exports, "__esModule", { value: true });
+const uuid_1 = require("uuid");
 /**
  * @name          uniqid
  * @namespace            js.string
@@ -16,14 +18,14 @@ import __uniqid from 'uniqid';
  *
  * @example       js
  * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
- * console.log(uniqid()); // => 4n5pxq24
+ * console.log(uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
  *
- * @see       https://www.npmjs.com/package/uniqid
+ * @see       https://www.npmjs.com/package/uuid
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function uniqid() {
-    return __uniqid();
+    return uuid_1.v4();
 }
-export default uniqid;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxRQUFRLENBQUM7QUFDOUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQVMsTUFBTTtJQUNiLE9BQU8sUUFBUSxFQUFFLENBQUM7QUFDcEIsQ0FBQztBQUNELGVBQWUsTUFBTSxDQUFDIn0=
+exports.default = uniqid;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLCtCQUFzQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxNQUFNO0lBQ2IsT0FBTyxTQUFRLEVBQUUsQ0FBQztBQUNwQixDQUFDO0FBQ0Qsa0JBQWUsTUFBTSxDQUFDIn0=

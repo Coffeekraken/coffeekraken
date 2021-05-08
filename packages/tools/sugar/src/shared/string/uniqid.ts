@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __uniqid from 'uniqid';
+import { v4 as __uuidv4 } from 'uuid';
 /**
  * @name          uniqid
  * @namespace            js.string
@@ -17,13 +17,13 @@ import __uniqid from 'uniqid';
  *
  * @example       js
  * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
- * console.log(uniqid()); // => 4n5pxq24
+ * console.log(uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
  *
- * @see       https://www.npmjs.com/package/uniqid
+ * @see       https://www.npmjs.com/package/uuid
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function uniqid() {
-  return __uniqid();
+  return __uuidv4();
 }
 export default uniqid;

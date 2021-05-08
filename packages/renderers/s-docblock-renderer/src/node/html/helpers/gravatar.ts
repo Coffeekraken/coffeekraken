@@ -5,7 +5,7 @@ export default {
   args: {
     email: ''
   },
-  helper: function gravatar({ email, settings }) {
+  process: function gravatar({ email, settings }) {
     const hash = __md5.encrypt(email);
     return `https://www.gravatar.com/avatar/${hash}`;
   }

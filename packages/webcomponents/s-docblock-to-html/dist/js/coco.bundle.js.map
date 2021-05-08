@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/js/coco.js"],
+  "sourcesContent": ["console.log('picote');\n"],
+  "mappings": ";;AAAA,QAAQ,IAAI;",
+  "names": []
+}

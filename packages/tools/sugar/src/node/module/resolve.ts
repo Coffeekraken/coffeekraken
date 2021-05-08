@@ -120,6 +120,7 @@ export default function resolve(
             parts[0],
             'package.json'
           ));
+
           requestedModuleName = requestedModulePackageJson.name;
           requestedModuleDirPath = __path.resolve(dirPath, parts[0]);
           requestedInternalModulePath = parts.slice(1).join('/');

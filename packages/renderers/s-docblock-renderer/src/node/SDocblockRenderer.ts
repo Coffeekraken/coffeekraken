@@ -1,16 +1,35 @@
+try {
+  if (!global) {
+    global = {};
+    global.Symbol = Symbol;
+  }
+} catch (e) {}
+
 import __path from 'path';
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
-import __handlebars from 'handlebars';
+import __handlebars from 'handlebars/dist/handlebars';
 import __promisedHandlebars from 'promised-handlebars';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __fs from 'fs';
 import __glob from 'glob';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
 import __SDocblockRendererSettingsInterface from './interface/SDocblockRendererSettingsInterface';
-import { ISDocblock, ISDocblockBlock } from '@coffeekraken/s-docblock';
+import SDocblock, {
+  ISDocblock,
+  ISDocblockBlock
+} from '@coffeekraken/s-docblock';
+
+import classBlock from './default/blocks/class';
+import defaultBlock from './default/blocks/default';
+import functionBlock from './default/blocks/function';
+
+import concatHelper from './default/helpers/concat';
+
+import classLayout from './default/layouts/class';
+import defaultLayout from './default/layouts/default';
+import functionLayout from './default/layouts/function';
 
 /**
  * @name            SDocblockRenderer
@@ -42,10 +61,7 @@ import { ISDocblock, ISDocblockBlock } from '@coffeekraken/s-docblock';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISDocblockRendererSettings {
-  scope: string;
-  rootDir: string;
-}
+export interface ISDocblockRendererSettings {}
 export interface ISDocblockRendererCtorSettings {
   docblockRenderer?: Partial<ISDocblockRendererSettings>;
 }
@@ -66,6 +82,32 @@ export interface ISDocblockRendererTemplateObj {
   path: string;
   content: string;
   stats: any;
+}
+
+export interface ISDocblockRendererHelper {
+  id: string;
+  args: Record<string, any>;
+  process: Function;
+}
+
+export interface ISDocblockRendererLayout {
+  id: string;
+  template: string;
+}
+
+export interface ISDocblockRendererPartial {
+  id: string;
+  template: string;
+}
+
+export interface ISDocblockRendererBlock {
+  id: string;
+  template: string;
+}
+
+export interface ISDocblockRendererTag {
+  id: string;
+  template: string;
 }
 
 export interface ISDocblockRenderer {
@@ -99,28 +141,69 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
   _handlebars: any;
 
   /**
-   * @name        _partialsTemplateObj
-   * @type        ISDocblockRendererPartialsTemplateObj
-   * @private
-   *
-   * Store the partials template objects
-   *
-   * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _partialsTemplateObj: ISDocblockRendererPartialsTemplateObj = {};
-
-  /**
-   * @name        _registeredTemplates
+   * @name        _registeredLayouts
    * @type        Record<string, string>
    * @private
+   * @static
    *
-   * Store the registered templates, blocks and partials
+   * Store the registered layouts
    *
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _registeredTemplates: Record<string, string> = {};
+  static _registeredLayouts: Record<string, ISDocblockRendererLayout> = {};
+
+  /**
+   * @name        _registeredPartials
+   * @type        Record<string, string>
+   * @private
+   * @static
+   *
+   * Store the registered partials
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _registeredPartials: Record<string, ISDocblockRendererPartial> = {};
+
+  /**
+   * @name        _registeredHelpers
+   * @type        Record<string, string>
+   * @private
+   * @static
+   *
+   * Store the registered helpers
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _registeredHelpers: Record<string, ISDocblockRendererHelper> = {};
+
+  /**
+   * @name        _registeredTags
+   * @type        Record<string, string>
+   * @private
+   * @static
+   *
+   * Store the registered tags
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _registeredTags: Record<string, ISDocblockRendererPartial> = {};
+
+  /**
+   * @name        _registeredBlocks
+   * @type        Record<string, string>
+   * @private
+   * @static
+   *
+   * Store the registered blocks
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _registeredBlocks: Record<string, ISDocblockRendererBlock> = {};
 
   /**
    * @name        docblockRendererSettings
@@ -174,84 +257,91 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
       )
     );
 
+    // @ts-ignore
+    if (window && !window.global) window.global = {};
+
     // save the docblock instance
     this._docblockInstance = docblockInstance;
-    // init the handlebars helpers
+
     this._registerHandlerbarsHelpers();
-    // register helpers
-    this._registerHelpers();
-    // register templates
-    this._registerTemplates();
   }
 
   /**
-   * @name      _registerTemplates
+   * @name      registerHelper
    * @type      Function
-   * @private
+   * @static
    *
-   * This method scan the directories "layouts", "blocks" and "partials" of the renderer directory
-   * and register them automatically
+   * Register an helper
    *
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _registerTemplates() {
-    const scanDir = (rootDir, directory) => {
-      const layoutsPathes = __glob.sync(`${rootDir}/${directory}/**/*.hbs`);
-      layoutsPathes.forEach((path) => {
-        const name = __path
-          .relative(rootDir, path)
-          .replace('.hbs', '')
-          .split('/')
-          .join('.');
-        this.registerTemplate(name, path);
-      });
-    };
-
-    // const layouts = __glob.sync(`${__dirname}/layouts/**/*.js`);
-    // layouts.forEach((layoutPath) => {
-    //   const helperObj = require(filePath);
-    //   if (!helperObj.id || !helperObj.helper) return;
-    //   this._handlebars.registerHelper(helperObj.id, (...args) => {
-    //     helperObj.helper(...args);
-    //   });
-    // });
-    scanDir(`${__dirname}/default`, 'layouts');
-    scanDir(`${__dirname}/default`, 'blocks');
-    scanDir(`${__dirname}/default`, 'partials');
-    scanDir(`${__dirname}/default`, 'tags');
-    if (this.docblockRendererSettings.rootDir) {
-      scanDir(this.docblockRendererSettings.rootDir, 'layouts');
-      scanDir(this.docblockRendererSettings.rootDir, 'blocks');
-      scanDir(this.docblockRendererSettings.rootDir, 'partials');
-      scanDir(this.docblockRendererSettings.rootDir, 'tags');
-    }
+  static registerHelper(helperObj: ISDocblockRendererHelper): void {
+    this._registeredHelpers[helperObj.id] = helperObj;
   }
 
   /**
    * @name        registerLayout
    * @type        Function
+   * @static
    *
    * Allows you to register a new layout for this particular renderer instance
    *
-   * @param     {String}      name        The name of this template
-   * @param     {String}    path          The path to the template file
+   * @todo      doc
    *
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  registerTemplate(name: string, path: string): void {
-    if (!__fs.existsSync(path)) {
-      throw new Error(
-        `You try to register the template named "<yellow>${name}</yellow>" with the path "<cyan>${path}</cyan>" but it seems that this template is either inexistant, or invalid...`
-      );
-    }
-    if (name.match(/^partials\./)) {
-      name = name.replace(/^partials\./, '');
-      this._handlebars.registerPartial(name, __fs.readFileSync(path, 'utf8'));
-    } else {
-      this._registeredTemplates[name] = path;
-    }
+  static registerLayout(layoutObj: ISDocblockRendererLayout): void {
+    this._registeredLayouts[layoutObj.id] = layoutObj;
+  }
+
+  /**
+   * @name        registerPartial
+   * @type        Function
+   * @static
+   *
+   * Allows you to register a new layout for this particular renderer instance
+   *
+   * @todo      doc
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static registerPartial(partialObj: ISDocblockRendererPartial): void {
+    this._registeredPartials[partialObj.id] = partialObj;
+  }
+
+  /**
+   * @name        registerTag
+   * @type        Function
+   * @static
+   *
+   * Allows you to register a new layout for this particular renderer instance
+   *
+   * @todo      doc
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static registerTag(tagObj: ISDocblockRendererTag): void {
+    this._registeredTags[tagObj.id] = tagObj;
+  }
+
+  /**
+   * @name        registerBlock
+   * @type        Function
+   * @static
+   *
+   * Allows you to register a new layout for this particular renderer instance
+   *
+   * @todo      doc
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static registerBlock(blockObj: ISDocblockRendererBlock): void {
+    this._registeredBlocks[blockObj.id] = blockObj;
   }
 
   /**
@@ -265,48 +355,37 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _registerHelpers() {
-    const files = __glob.sync(`${__dirname}/helpers/**/*.js`);
-    files.forEach((filePath) => {
-      const helperObj = require(filePath);
-      if (!helperObj.id || !helperObj.helper) return;
+    // @ts-ignore
+    Object.keys(this.constructor._registeredHelpers).forEach((helperId) => {
+      // @ts-ignore
+      const helperObj = this.constructor._registeredHelpers[helperId];
+
       this._handlebars.registerHelper(helperObj.id, (...args) => {
-        helperObj.helper(...args);
+        const api = {
+          settings: this.docblockRendererSettings,
+          renderer: this,
+          hbs: this._handlebars,
+          render: (string, data = {}) => {
+            const tpl = this._handlebars.compile(string);
+            return tpl(data);
+          }
+        };
+        if (!helperObj.args) {
+          throw new Error(
+            `You try to make use of the "<yellow>${helperObj.id}</yellow>" SDocblockRenderer helper but it does not have the required "<cyan>args</cyan>" property.`
+          );
+        }
+        Object.keys(helperObj.args).forEach((key, i) => {
+          const value = args[i];
+          if (value !== undefined) {
+            api[key] = value;
+          } else {
+            api[key] = helperObj[key];
+          }
+        });
+        return helperObj.process(api);
       });
     });
-    if (this.docblockRendererSettings.rootDir) {
-      const rendererFiles = __glob.sync(
-        `${this.docblockRendererSettings.rootDir}/helpers/**/*.js`
-      );
-      rendererFiles.forEach((filePath) => {
-        const helperObj = require(filePath).default;
-        if (!helperObj.id || !helperObj.helper) return;
-        this._handlebars.registerHelper(helperObj.id, (...args) => {
-          const api = {
-            settings: this.docblockRendererSettings,
-            renderer: this,
-            hbs: this._handlebars,
-            render: (string, data = {}) => {
-              const tpl = this._handlebars.compile(string);
-              return tpl(data);
-            }
-          };
-          if (!helperObj.args) {
-            throw new Error(
-              `You try to make use of the "<yellow>${helperObj.id}</yellow>" SDocblockRenderer helper but it does not have the required "<cyan>args</cyan>" property.`
-            );
-          }
-          Object.keys(helperObj.args).forEach((key, i) => {
-            const value = args[i];
-            if (value !== undefined) {
-              api[key] = value;
-            } else {
-              api[key] = helperObj[key];
-            }
-          });
-          return helperObj.helper(api);
-        });
-      });
-    }
   }
 
   /**
@@ -321,7 +400,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    */
   _registerHandlerbarsHelpers() {
     this._handlebars = __promisedHandlebars(__handlebars, {
-      promise: Promise
+      Promise: Promise
     });
 
     let currentBlock;
@@ -336,8 +415,10 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
           return '';
 
         // filter blocks
-        const blocks = this._docblockInstance.blocks.filter((block) => {
+        const blocks = this._docblockInstance.blocks.filter((block, i) => {
           const blockObj = block.toObject();
+
+          if (i > 0) return false;
 
           if (type !== '...') {
             if (!blockObj.type) return false;
@@ -358,7 +439,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
           const blockObj = blocks[i].toObject();
           currentBlock = blocks[i];
           const result = await this.renderBlock(blocks[i]);
-          renderedBlocks.push(result);
+          renderedBlocks.push(<string>result);
         }
 
         resolve(renderedBlocks.join('\n\n'));
@@ -369,6 +450,18 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
       if (!currentBlock) return '';
       return await this.renderTag(currentBlock, tagName);
     });
+
+    // @ts-ignore
+    Object.keys(this.constructor._registeredPartials).forEach((partialId) => {
+      // @ts-ignore
+      const partialObj = this.constructor._registeredPartials[partialId];
+      this._handlebars.registerPartial(
+        partialObj.id,
+        partialObj.template.trim()
+      );
+    });
+
+    this._registerHelpers();
   }
 
   /**
@@ -387,27 +480,29 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async renderBlock(blockObj, settings = {}) {
-    if (blockObj.toObject && typeof blockObj.toObject === 'function')
-      blockObj = blockObj.toObject();
-    const type =
-      typeof blockObj.type === 'string'
-        ? blockObj.type.toLowerCase()
-        : 'default';
+    return new Promise((resolve, reject) => {
+      if (blockObj.toObject && typeof blockObj.toObject === 'function')
+        blockObj = blockObj.toObject();
+      const type =
+        typeof blockObj.type === 'string'
+          ? blockObj.type.toLowerCase()
+          : 'default';
 
-    const template =
-      this._registeredTemplates[`blocks.${type}`] ||
-      this._registeredTemplates['blocks.default'];
-    let compiledTemplateFn;
+      const template =
+        // @ts-ignore
+        this.constructor._registeredBlocks[type] ||
+        // @ts-ignore
+        this.constructor._registeredBlocks.default;
+      let compiledTemplateFn;
 
-    // get template object
-    const templateObj: any = await this.getTemplateObj(template);
+      compiledTemplateFn = this._handlebars.compile(template.template, {
+        noEscape: true
+      });
+      const renderedTemplate = compiledTemplateFn(blockObj);
 
-    compiledTemplateFn = this._handlebars.compile(templateObj.content, {
-      noEscape: true
+      // return the rendered template
+      resolve(renderedTemplate);
     });
-    const renderedTemplate = await compiledTemplateFn(blockObj);
-    // return the rendered template
-    return renderedTemplate;
   }
 
   /**
@@ -426,66 +521,28 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async renderTag(blockObj, tagName = 'default', settings = {}) {
-    if (blockObj.toObject && typeof blockObj.toObject === 'function')
-      blockObj = blockObj.toObject();
+    return new Promise((resolve, reject) => {
+      if (blockObj.toObject && typeof blockObj.toObject === 'function')
+        blockObj = blockObj.toObject();
 
-    const template =
-      this._registeredTemplates[`tags.${tagName}`] ||
-      this._registeredTemplates['tags.default'];
-    let compiledTemplateFn;
+      const template =
+        // @ts-ignore
+        this.constructor._registeredTags[tagName] ||
+        // @ts-ignore
+        this.constructor._registeredTags.default;
+      let compiledTemplateFn;
 
-    // get template object
-    const templateObj: any = await this.getTemplateObj(template);
+      compiledTemplateFn = this._handlebars.compile(template.template.trim(), {
+        noEscape: true
+      });
 
-    compiledTemplateFn = this._handlebars.compile(templateObj.content, {
-      noEscape: true
+      let renderedTemplate = '';
+      renderedTemplate = compiledTemplateFn({
+        [tagName]: blockObj[tagName]
+      });
+      // return the rendered template
+      resolve(renderedTemplate);
     });
-
-    const renderedTemplate = await compiledTemplateFn({
-      [tagName]: blockObj[tagName]
-    });
-    // return the rendered template
-    return renderedTemplate;
-  }
-
-  /**
-   * @name          getTemplateObj
-   * @type          Function
-   * @async
-   *
-   * This method take the layout url setted in the settings object and
-   * resolve it to get back a full layout object with the path and the stats if we are in node context
-   *
-   * @param         {String}        layoutPath        The template path to get
-   * @return      {ISDocblockRendererTemplateObj}                          The template object with the path and the stats if we are in node context
-   *
-   * @since       2.0.0
-   * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-   */
-  async getTemplateObj(
-    layoutPath: string
-  ): Promise<ISDocblockRendererTemplateObj> {
-    let stats;
-
-    if (__fs.existsSync(layoutPath)) {
-    } else if (
-      __fs.existsSync(`${__packageRoot()}/node_modules/${layoutPath}`)
-    ) {
-      layoutPath = `${__packageRoot()}/node_modules/${layoutPath}`;
-    } else {
-      throw new Error(
-        `Sorry but the passed template url "<yellow>${layoutPath}</yellow>" does not exists...`
-      );
-    }
-    stats = __fs.statSync(layoutPath);
-
-    const content = __fs.readFileSync(layoutPath, 'utf8');
-    const templateObj: ISDocblockRendererTemplateObj = {
-      path: layoutPath,
-      content,
-      stats
-    };
-    return templateObj;
   }
 
   /**
@@ -502,9 +559,6 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   render() {
-    // init the partials
-    // this.registerPartials();
-
     return new __SPromise(
       async ({ resolve, reject }) => {
         // get the block in object format
@@ -517,20 +571,21 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
             ? firstBlock.type.toLowerCase()
             : 'default';
         const layout =
-          this._registeredTemplates[`layouts.${type}`] ||
-          this._registerTemplates['layouts.default'];
+          // @ts-ignore
+          this.constructor._registeredLayouts[type] ||
+          // @ts-ignore
+          this.constructor._registeredLayouts.default;
 
-        const layoutObj = await this.getTemplateObj(layout);
-
-        if (!layoutObj || !layoutObj.content) {
+        if (!layout.template) {
           return reject();
         }
 
         // render the template
-        const compiledTemplateFn = this._handlebars.compile(layoutObj.content, {
+        const compiledTemplateFn = this._handlebars.compile(layout.template, {
           noEscape: true
         });
-        const renderedLayout = await compiledTemplateFn();
+        const renderedLayout = compiledTemplateFn();
+
         // resolve the rendering process with the rendered stack
         resolve(renderedLayout);
       },
@@ -540,5 +595,15 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
     );
   }
 }
+
+SDocblockRenderer.registerBlock(classBlock);
+SDocblockRenderer.registerBlock(defaultBlock);
+SDocblockRenderer.registerBlock(functionBlock);
+
+SDocblockRenderer.registerHelper(concatHelper);
+
+SDocblockRenderer.registerLayout(classLayout);
+SDocblockRenderer.registerLayout(defaultLayout);
+SDocblockRenderer.registerLayout(functionLayout);
 
 export default SDocblockRenderer;

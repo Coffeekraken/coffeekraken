@@ -135,8 +135,8 @@ exports.default = {
          */
         globs: unique_1.default([
             'docmap.json',
-            `node_modules/**{4}/docmap.json`,
-            `${packageRoot_1.default(process.cwd(), true)}/node_modules/**{4}/docmap.json`
+            `node_modules/**{2}/docmap.json`,
+            `${packageRoot_1.default(process.cwd(), true)}/node_modules/**{2}/docmap.json`
         ]),
         /**
          * @name        exclude

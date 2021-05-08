@@ -1,5 +1,5 @@
-import __path from 'path';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+// import __path from 'path';
+// import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -16,13 +16,13 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 export default class SDocblockRendererSettingsInterface extends __SInterface {
   static definition = {
-    scope: {
-      type: 'String',
-      default: __sugarConfig('docblock.scope')
-    },
-    rootDir: {
-      type: 'String',
-      default: `${__path.resolve(__dirname, '..')}`
-    }
+    // scope: {
+    //   type: 'String',
+    //   default: __sugarConfig('docblock.scope')
+    // },
+    // rootDir: {
+    //   type: 'String',
+    //   default: `${__path.resolve(__dirname, '..')}`
+    // }
   };
 }

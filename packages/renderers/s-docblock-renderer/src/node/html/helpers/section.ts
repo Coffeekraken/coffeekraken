@@ -4,7 +4,7 @@ export default {
     title: null,
     description: null
   },
-  helper: function classname({ title, description, settings, render }) {
+  process: function classname({ title, description, settings, render }) {
     const lines = [];
     if (title) {
       // @ts-ignore

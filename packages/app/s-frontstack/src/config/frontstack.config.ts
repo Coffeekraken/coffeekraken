@@ -31,12 +31,13 @@ export default {
       description: 'Svelte webcomponent receipe ',
       actions: {
         frontendServer: '[config.frontstack.actions.frontendServer]',
+        vite: '[config.frontstack.actions.vite]'
         // js: '[config.frontstack.actions.js]',
-        css: '[config.frontstack.actions.css]',
-        jsBundle: '[config.frontstack.actions.jsBundle]',
-        ts: '[config.frontstack.actions.ts]',
-        svelte: '[config.frontstack.actions.svelte]',
-        docmap: '[config.frontstack.actions.docmap]'
+        // css: '[config.frontstack.actions.css]',
+        // jsBundle: '[config.frontstack.actions.jsBundle]',
+        // ts: '[config.frontstack.actions.ts]',
+        // svelte: '[config.frontstack.actions.svelte]',
+        // docmap: '[config.frontstack.actions.docmap]'
       }
     },
     jsLib: {
@@ -106,6 +107,17 @@ export default {
       title: 'Typescript compile action',
       description: 'Allow to compile .ts files easily',
       process: 'sugard ts.compile -w',
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
+    vite: {
+      id: 'vite',
+      title: 'Vite development stack',
+      description: 'Allow to compile files easily',
+      process: 'sugard frontstack.vite',
       settings: {
         processManager: {
           restart: true

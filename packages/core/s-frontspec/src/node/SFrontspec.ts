@@ -7,11 +7,15 @@ import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __SFrontspecFindParamsInterface from './interface/SFrontspecFindParamsInterface';
 import __SCache from '@coffeekraken/s-cache';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __fs from 'fs';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
+import __set from '@coffeekraken/sugar/shared/object/set';
 
 /**
  * @name                SFrontspec
@@ -131,8 +135,10 @@ export default class SFrontspec extends __SPromise {
         await this.clearCache();
       }
 
+      const cacheId = `find-files-${__md5.encrypt(process.cwd())}`;
+
       if (findParams.cache && !findParams.clearCache) {
-        const cachedValue = await this._cache.get('find-files');
+        const cachedValue = await this._cache.get(cacheId);
         if (cachedValue) {
           emit('log', {
             value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
@@ -178,7 +184,7 @@ export default class SFrontspec extends __SPromise {
           value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
         });
         await this._cache.set(
-          'find-files',
+          cacheId,
           files.map((file) => file.path)
         );
       }
@@ -204,11 +210,16 @@ export default class SFrontspec extends __SPromise {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(params: Partial<ISFrontspecFindParams>) {
+  read(params: Partial<ISFrontspecFindParams> = {}) {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
+      const readParams = <ISFrontspecFindParams>(
+        __deepMerge(__SFrontspecFindParamsInterface.defaults(), params || {})
+      );
+
       const filesPromise = this.find(params);
       pipe(filesPromise);
       const filesPaths = await filesPromise;
+
       let jsons = {};
 
       // loop on all files
@@ -216,11 +227,48 @@ export default class SFrontspec extends __SPromise {
         const file = __SFile.new(filePath);
         const content = file.content;
 
-        emit('log', {
-          value: __toString(content)
+        // process the content (env, etc...)
+        const newContent = {};
+        __deepMap(content, ({ object, prop, value, path }) => {
+          let finalPath;
+
+          if (readParams.env && prop.includes(`${readParams.env}:`)) {
+            finalPath = `${path
+              .split('.')
+              .slice(0, -1)
+              .join('.')}.${prop.replace(`${readParams.env}:`, '')}`;
+          } else if (readParams.env && !object[`${readParams.env}:${prop}`]) {
+            finalPath = path;
+          } else if (!readParams.env && prop.split(':').length === 1) {
+            finalPath = path;
+          }
+
+          if (finalPath) {
+            if (typeof value === 'string') {
+              value = value.replace(
+                /\[config\.[a-zA-Z-_\.]+\]/gm,
+                (...args) => {
+                  const configPath = args[0]
+                    .replace(/^\[config\./, '')
+                    .replace(/\]$/, '');
+
+                  const configValue = __sugarConfig(configPath);
+                  return configValue;
+                }
+              );
+            }
+
+            __set(newContent, finalPath, value);
+          }
+
+          return value;
         });
 
-        jsons[file.path] = content;
+        emit('log', {
+          value: __toString(newContent)
+        });
+
+        jsons[file.path] = newContent;
       });
 
       resolve(jsons);
@@ -239,30 +287,41 @@ export default class SFrontspec extends __SPromise {
    * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async assetsToServe(
-    params: Partial<ISFrontspecFindParams>
+    params: Partial<ISFrontspecFindParams> = {}
   ): Promise<ISFrontspecAssetToServe[]> {
-    const filesPaths = await this.find(params);
+    const filesPaths = await this.read(params);
 
     const assetsToServe: ISFrontspecAssetToServe[] = [];
 
-    filesPaths.forEach((filePath) => {
-      const file = __SFile.new(filePath);
-      const content = file.content;
-      if (!content.assets) return;
-      Object.keys(content.assets).forEach((type) => {
-        const typeAssets = content.assets[type];
+    Object.keys(filesPaths).forEach((path) => {
+      const frontspecJson = filesPaths[path];
+      if (!frontspecJson.assets) return;
+      Object.keys(frontspecJson.assets).forEach((type) => {
+        const typeAssets = frontspecJson.assets[type];
         Object.keys(typeAssets).forEach((assetId) => {
           const assetObj = typeAssets[assetId];
-          const path = __path.resolve(
-            file.dirPath,
+          let url = assetObj.path ?? assetObj.src;
+
+          const filePath = __path.resolve(
+            path.replace(/\/frontspec.json$/, ''),
             assetObj.path ?? assetObj.src
           );
-          assetsToServe.push({
+
+          const fileObj = {
             type,
             id: assetId,
-            path,
-            file: __SFile.new(path)
-          });
+            args: {
+              ...assetObj
+            }
+          };
+
+          if (__fs.existsSync(filePath)) {
+            fileObj.file = __SFile.new(filePath);
+          } else {
+            fileObj.url = url;
+          }
+
+          assetsToServe.push(fileObj);
         });
       });
     });

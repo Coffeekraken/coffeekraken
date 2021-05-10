@@ -1,0 +1,12 @@
+{
+  "assets": {
+    "js": {
+      "main": {
+        "defer": true,
+        "type": "module",
+        "src": "./dist/js/index.js",
+        "development:src": "[config.vite.server.hostname]/src/js/index.ts"
+      }
+    }
+  }
+}

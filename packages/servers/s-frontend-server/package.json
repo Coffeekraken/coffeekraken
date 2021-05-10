@@ -18,6 +18,7 @@
     "@coffeekraken/sugar": "^2.0.0",
     "express": "^4.17.1",
     "file-type": "^16.3.0",
+    "http-proxy-middleware": "^2.0.0",
     "mime-types": "^2.1.30",
     "minimatch": "^3.0.4",
     "sails": "^1.4.2",

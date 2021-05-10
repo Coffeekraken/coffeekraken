@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name            sanitizeSugarJson
  * @namespace            node.sugar
@@ -21,7 +19,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since       2.0.0
  * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function sanitizeSugarJson(sugarJson) {
+export default function sanitizeSugarJson(sugarJson) {
     // break reference
     sugarJson = Object.assign({}, sugarJson);
     // extends
@@ -31,5 +29,4 @@ function sanitizeSugarJson(sugarJson) {
         sugarJson.extends = [sugarJson.extends];
     return sugarJson;
 }
-exports.default = sanitizeSugarJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2FuaXRpemVTdWdhckpzb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW5pdGl6ZVN1Z2FySnNvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQXdCLGlCQUFpQixDQUFDLFNBQWM7SUFDdEQsa0JBQWtCO0lBQ2xCLFNBQVMsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxTQUFTLENBQUMsQ0FBQztJQUV6QyxVQUFVO0lBQ1YsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPO1FBQUUsU0FBUyxDQUFDLE9BQU8sR0FBRyxFQUFFLENBQUM7U0FDMUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQztRQUN4QyxTQUFTLENBQUMsT0FBTyxHQUFHLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRTFDLE9BQU8sU0FBUyxDQUFDO0FBQ25CLENBQUM7QUFWRCxvQ0FVQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2FuaXRpemVTdWdhckpzb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW5pdGl6ZVN1Z2FySnNvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGlCQUFpQixDQUFDLFNBQWM7SUFDdEQsa0JBQWtCO0lBQ2xCLFNBQVMsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxTQUFTLENBQUMsQ0FBQztJQUV6QyxVQUFVO0lBQ1YsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPO1FBQUUsU0FBUyxDQUFDLE9BQU8sR0FBRyxFQUFFLENBQUM7U0FDMUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQztRQUN4QyxTQUFTLENBQUMsT0FBTyxHQUFHLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRTFDLE9BQU8sU0FBUyxDQUFDO0FBQ25CLENBQUMifQ==

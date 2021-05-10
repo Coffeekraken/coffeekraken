@@ -64,16 +64,29 @@ function frontspecMiddleware(settings = {}) {
       const assetObj = assetsToServe[i];
       if (!res.templateData.assets[assetObj.type])
         res.templateData.assets[assetObj.type] = {};
-      const assetHash = __md5.encrypt(assetObj.path ?? assetObj.src);
+      const assetHash = __md5.encrypt(
+        assetObj.src ?? assetObj.url ?? assetObj.file?.path
+      );
       let raw = '';
-      const src = `/frontspec/${assetHash}-${assetObj.file.name}`;
+
+      let url;
+      if (assetObj.file) {
+        url = `/frontspec/${assetHash}-${assetObj.file.name}`;
+      } else if (assetObj.url) url = assetObj.url;
 
       switch (assetObj.type.toLowerCase()) {
         case 'js':
           raw = `<script ${[
             assetObj.id ? `id="${assetObj.id}"` : '',
-            assetObj.defer ? 'defer' : '',
-            `src="${src}"`
+            Object.keys(assetObj.args)
+              .map((argName) => {
+                return `${argName}${
+                  assetObj.args[argName] === true
+                    ? ''
+                    : `="${assetObj.args[argName]}"`
+                }`;
+              })
+              .join(' ')
           ]
             .join(' ')
             .replace(/\s{2,9999}/gm, ' ')}></script>`;
@@ -81,34 +94,50 @@ function frontspecMiddleware(settings = {}) {
         case 'css':
           raw = `<link rel="stylesheet" ${[
             assetObj.id ? `id="${assetObj.id}"` : '',
-            assetObj.defer ? 'defer' : '',
-            `href="${src}"`
+            Object.keys(assetObj.args)
+              .map((argName) => {
+                return `${argName}${
+                  assetObj.args[argName] === true
+                    ? ''
+                    : `="${assetObj.args[argName]}"`
+                }`;
+              })
+              .join(' ')
           ]
             .join(' ')
             .replace(/\s{2,9999}/gm, ' ')} />`;
           break;
       }
 
-      if (__fs.existsSync(assetObj.path + '.map')) {
-        _requestedFiles[`${src}.map`] = {
-          id: assetObj.id + '.map',
-          type: assetObj.type + '.map',
-          hash: `${assetHash}.map`,
-          path: `${assetObj.path}.map`,
-          src: `${src}.map`
+      if (assetObj.file) {
+        if (__fs.existsSync(assetObj.file.path + '.map')) {
+          _requestedFiles[`${url}.map`] = {
+            id: assetObj.id + '.map',
+            type: assetObj.type + '.map',
+            hash: `${assetHash}.map`,
+            path: `${assetObj.file.path}.map`,
+            src: `${url}.map`
+          };
+        }
+        _requestedFiles[url] = {
+          id: assetObj.id,
+          type: assetObj.type,
+          hash: assetHash,
+          path: assetObj.file.path,
+          url,
+          raw
+        };
+      } else if (assetObj.url) {
+        _requestedFiles[url] = {
+          id: assetObj.id,
+          type: assetObj.type,
+          hash: assetHash,
+          url,
+          raw
         };
       }
 
-      _requestedFiles[src] = {
-        id: assetObj.id,
-        type: assetObj.type,
-        hash: assetHash,
-        path: assetObj.path,
-        src,
-        raw
-      };
-
-      res.templateData.assets[assetObj.type][assetHash] = _requestedFiles[src];
+      res.templateData.assets[assetObj.type][assetHash] = _requestedFiles[url];
     }
 
     return next();

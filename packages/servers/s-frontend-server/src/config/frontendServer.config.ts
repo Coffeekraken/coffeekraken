@@ -7,14 +7,14 @@ export default {
    * @name              port
    * @namespace         config.frontendServer
    * @type              Number
-   * @default           8080
+   * @default           8888
    *
    * Specify the port to use for the frontend server
    *
    * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  port: 8080,
+  port: 8888,
 
   /**
    * @name              hostname
@@ -85,6 +85,16 @@ export default {
    */
   logLevel: 'info',
 
+  proxy: {
+    src: {
+      route: '/src',
+      settings: {
+        target: '[config.vite.server.hostname]',
+        changeOrigin: true
+      }
+    }
+  },
+
   middlewares: {
     // resolveExtensionFreePath: {
     //   path: `${__dirname}/../node/middleware/resolveExtensionFreePath`,
@@ -116,10 +126,10 @@ export default {
       path: `${__dirname}/../node/middleware/frontspecMiddleware`,
       settings: {}
     },
-    defaultAssets: {
-      path: `${__dirname}/../node/middleware/defaultAssetsMiddleware`,
-      settings: {}
-    },
+    // defaultAssets: {
+    //   path: `${__dirname}/../node/middleware/defaultAssetsMiddleware`,
+    //   settings: {}
+    // },
     env: {
       path: `${__dirname}/../node/middleware/envMiddleware`,
       settings: {}

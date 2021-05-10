@@ -1,7 +1,5 @@
-"use strict";
 // @ts-nocheck
-Object.defineProperty(exports, "__esModule", { value: true });
-const uuid_1 = require("uuid");
+import { v4 as __uuidv4 } from 'uuid';
 /**
  * @name          uniqid
  * @namespace            js.string
@@ -25,7 +23,7 @@ const uuid_1 = require("uuid");
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function uniqid() {
-    return uuid_1.v4();
+    return __uuidv4();
 }
-exports.default = uniqid;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLCtCQUFzQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxNQUFNO0lBQ2IsT0FBTyxTQUFRLEVBQUUsQ0FBQztBQUNwQixDQUFDO0FBQ0Qsa0JBQWUsTUFBTSxDQUFDIn0=
+export default uniqid;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsRUFBRSxJQUFJLFFBQVEsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxNQUFNO0lBQ2IsT0FBTyxRQUFRLEVBQUUsQ0FBQztBQUNwQixDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==

@@ -4,9 +4,12 @@ import __sails from 'sails';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __path from 'path';
+import __express from 'express';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 import __mimeTypes from 'mime-types'; //eslint-disable-line
 import __minimatch from 'minimatch';
+
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 /**
  * @name            SFrontendServer
@@ -84,19 +87,7 @@ export default class SFrontendServer extends __SClass {
 
     return new __SPromise(
       ({ resolve, reject, emit, pipe }) => {
-        const sailsConfig = {
-          port: finalParams.port ?? 8888,
-          explicitHost: finalParams.hostname ?? '127.0.0.1',
-          http: {
-            middleware: {
-              order: []
-            }
-          },
-          routes: {},
-          log: {
-            level: 'error'
-          }
-        };
+        const express = __express();
 
         const logLevelInt = [
           'silent',
@@ -110,22 +101,34 @@ export default class SFrontendServer extends __SClass {
 
         const frontendServerConfig = __sugarConfig('frontendServer');
 
-        if (frontendServerConfig.staticDirs) {
-          Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
-            sailsConfig.routes[dir] = (req, res, next) => {
-              // @ts-ignore
-              const potentialFilePath = __path.join(
-                finalParams.rootDir,
-                req.url
-              );
-              if (__fs.existsSync(potentialFilePath)) {
-                const type = __mimeTypes.lookup(potentialFilePath);
-                res.setHeader('content-type', type);
-                __fs.createReadStream(potentialFilePath).pipe(res);
-              } else {
-                next();
-              }
-            };
+        // if (frontendServerConfig.staticDirs) {
+        //   Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
+        //     sailsConfig.routes[dir] = (req, res, next) => {
+        //       // @ts-ignore
+        //       const potentialFilePath = __path.join(
+        //         finalParams.rootDir,
+        //         req.url
+        //       );
+        //       if (__fs.existsSync(potentialFilePath)) {
+        //         const type = __mimeTypes.lookup(potentialFilePath);
+        //         res.setHeader('content-type', type);
+        //         __fs.createReadStream(potentialFilePath).pipe(res);
+        //       } else {
+        //         next();
+        //       }
+        //     };
+        //   });
+        // }
+
+        if (frontendServerConfig.proxy) {
+          Object.keys(frontendServerConfig.proxy).forEach((proxyId) => {
+            const proxyObj = frontendServerConfig.proxy[proxyId];
+
+            // register the middleware inside the sails configuration
+            // @ts-ignore
+            express.use(
+              createProxyMiddleware(proxyObj.route, proxyObj.settings ?? {})
+            );
           });
         }
 
@@ -148,54 +151,28 @@ export default class SFrontendServer extends __SClass {
 
               // register the middleware inside the sails configuration
               // @ts-ignore
-              sailsConfig.http.middleware.order.push(middlewareName);
-              sailsConfig.http.middleware[middlewareName] = middleware;
+              express.use(middleware);
             }
           );
         }
 
         // logging requests
         if (logLevelInt >= 4) {
-          sailsConfig.http.middleware['logMiddleware'] = function (
-            req,
-            res,
-            next
-          ) {
+          express.use(function (req, res, next) {
             emit('log', {
               value: `Request on "<cyan>${req.url}</cyan>"`
             });
             next();
-          };
-          // @ts-ignore
-          sailsConfig.http.middleware.order.push('logMiddleware');
+          });
         }
 
-        sailsConfig.routes['/*'] = (req, res) => {
-          if (frontendServerConfig.handlers) {
-            for (
-              let i = 0;
-              i < Object.keys(frontendServerConfig.handlers).length;
-              i++
-            ) {
-              const handlerName = Object.keys(frontendServerConfig.handlers)[i];
-              const handlerObj = frontendServerConfig.handlers[handlerName];
-              if (__minimatch(req.originalUrl, handlerObj.route)) {
-                const handlerFn = require(handlerObj.handler).default;
-                const handlerPromise = handlerFn(req, res);
-                pipe(handlerPromise);
-                break;
-              }
-            }
-          }
-        };
+        Object.keys(frontendServerConfig.handlers).forEach((handlerId) => {
+          const handlerObj = frontendServerConfig.handlers[handlerId];
+          const handlerFn = require(handlerObj.handler).default;
+          express.get(handlerObj.route, handlerFn);
+        });
 
-        // console.log(this._sails);
-
-        // start the sails server properly with configs
-        this._sails.lift(sailsConfig, (error) => {
-          // handle error
-          if (error) throw new Error(error);
-
+        express.listen(frontendServerConfig.port, () => {
           // server started successfully
           emit('log', {
             value: `The frontend server has been started <green>successfully</green>`

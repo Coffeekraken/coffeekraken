@@ -21,6 +21,10 @@ class SFrontspecParamsInterface extends __SInterface {
       type: 'Boolean',
       default: __sugarConfig('frontspec.cache')
     },
+    env: {
+      type: 'String',
+      default: __sugarConfig('env.env')
+    },
     clearCache: {
       type: 'Boolean',
       default: false

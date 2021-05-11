@@ -7,6 +7,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __childProcess from 'child_process';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 import __SLog, { ILog } from '@coffeekraken/s-log';
 
@@ -18,6 +19,7 @@ export interface ISStdioSettings {
   events: string[];
   filter: typeof Function;
   processor: typeof Function;
+  types: string[];
   mapTypesToEvents: Record<string, string[]>;
 }
 
@@ -263,6 +265,7 @@ class SStdio extends __SClass implements ISStdio {
               ],
               warning: ['warn', '*.warn']
             },
+            types: __sugarConfig('log.types'),
             metas: {
               time: false
             }
@@ -409,6 +412,13 @@ class SStdio extends __SClass implements ISStdio {
   log(...logObj: ILog[]) {
     for (let i = 0; i < logObj.length; i++) {
       let log: ILog = logObj[i];
+
+      // filter by type
+      if (
+        log.type &&
+        this.stdioSettings.types.indexOf(log.type.toLowerCase()) === -1
+      )
+        continue;
 
       // if (this._isCleared && logObj.clear) delete logObj.clear;
       // this._isCleared = false;

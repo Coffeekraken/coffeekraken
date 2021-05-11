@@ -1,10 +1,3 @@
-try {
-  if (!global) {
-    global = {};
-    global.Symbol = Symbol;
-  }
-} catch (e) {}
-
 import __path from 'path';
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';

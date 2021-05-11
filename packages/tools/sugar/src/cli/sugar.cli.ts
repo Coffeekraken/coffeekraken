@@ -12,6 +12,7 @@ import __fs from 'fs';
 import __isPath from '../shared/is/path';
 import __parseHtml from '../shared/console/parseHtml';
 import __sugarJson from '../node/sugar/sugarJson';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 
 import '../node/index';
 
@@ -46,7 +47,8 @@ if (!stack) {
 }
 
 (async () => {
-  const sugarJsons = await __sugarJson('*');
+  const sugarJsonInstance = new __SSugarJson();
+  const sugarJsons = sugarJsonInstance.read();
 
   // // filter by packageJson
   // const filteredFiles: string[] = [];
@@ -86,7 +88,7 @@ if (!stack) {
           availableCli[`${cliObj.stack}.${action}`] = {
             packageJson,
             ...actionObj,
-            process: require(cliPath).default // eslint-disable-line
+            processPath: cliPath
           };
         } else if (actionObj.command) {
           availableCli[`${cliObj.stack}.${action}`] = {
@@ -139,8 +141,9 @@ if (!stack) {
 
   const cliObj = availableCli[`${stack}.${action}`];
   // @ts-ignore
-  if (cliObj.process) {
+  if (cliObj.processPath) {
+    const processFn = require(cliObj.processPath).default;
     // @ts-ignore
-    cliObj.process(args);
+    processFn(args);
   }
 })();

@@ -2,8 +2,8 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SFrontstackViteInterface
- * @namespace           s-frontstack
+ * @name                SViteStartInterface
+ * @namespace           s-vite
  * @type                Class
  * @extends             SInterface
  * @status              wip
@@ -17,8 +17,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SFrontstackViteInterface extends __SInterface {
+class SViteStartInterface extends __SInterface {
   static definition = {};
 }
 
-export default SFrontstackViteInterface;
+export default SViteStartInterface;

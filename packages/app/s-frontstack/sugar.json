@@ -22,10 +22,6 @@
         "start": {
           "description": "Start the frontstack application into the current working directory",
           "process": "./src/node/start/start.cli.js"
-        },
-        "vite": {
-          "description": "Start the vite development stack",
-          "process": "./src/node/vite/vite.cli.js"
         }
       }
     }

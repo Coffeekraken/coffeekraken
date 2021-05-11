@@ -1,0 +1,14 @@
+{
+  "cli": [
+    {
+      "stack": "json",
+      "description": "Sugar.json processes like update, etc...",
+      "actions": {
+        "updateCache": {
+          "description": "Update the sugar.json files pathes cache",
+          "process": "./src/node/updateCache/updateCache.cli.js"
+        }
+      }
+    }
+  ]
+}

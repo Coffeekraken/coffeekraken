@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
-import __sugarJson from '@coffeekraken/sugar/node/sugar/sugarJson';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __get from '@coffeekraken/sugar/shared/object/get';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 
 /**
  * @name            STheme
@@ -228,7 +228,8 @@ export default class STheme extends __SClass {
     this.themes = __sugarConfig('theme.themes');
 
     if (!theme) {
-      const sugarJson = __sugarJson();
+      const sugarJsonInstance = new __SSugarJson();
+      const sugarJson = sugarJsonInstance.read();
       // @ts-ignore
       if (sugarJson.theme) theme = sugarJson.theme ?? 'default';
     }

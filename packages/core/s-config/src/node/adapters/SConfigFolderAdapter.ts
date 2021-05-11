@@ -192,16 +192,20 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
   }
 
   load() {
-    Object.keys(this._scopedFoldersPaths).forEach((scope) => {
-      const scopedFoldersPaths = this._scopedFoldersPaths[scope];
-      if (scopedFoldersPaths) {
-        this._scopedSettings[scope] = this._load(scopedFoldersPaths, scope);
-      } else if (process.env[`SConfigFolderAdapter-${scope}`]) {
-        this._scopedSettings[scope] = JSON.parse(
-          process.env[`SConfigFolderAdapter-${scope}`]
-        );
-      }
-    });
+    try {
+      Object.keys(this._scopedFoldersPaths).forEach((scope) => {
+        const scopedFoldersPaths = this._scopedFoldersPaths[scope];
+        if (scopedFoldersPaths) {
+          this._scopedSettings[scope] = this._load(scopedFoldersPaths, scope);
+        } else if (process.env[`SConfigFolderAdapter-${scope}`]) {
+          this._scopedSettings[scope] = JSON.parse(
+            process.env[`SConfigFolderAdapter-${scope}`]
+          );
+        }
+      });
+    } catch (e) {
+      console.log('EEEE', e);
+    }
 
     let resultSettings: any = {};
     Object.keys(this._scopedSettings).forEach((scope) => {

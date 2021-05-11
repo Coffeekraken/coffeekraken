@@ -192,6 +192,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
           // @ts-ignore
           if (processInstance) {
             emit('log', {
+              group: `s-process-pipe-${this.metas.id}`,
               type: 'heading',
               value: processInstance.metas.formattedName
             });

@@ -9,7 +9,6 @@ import __SProcess, {
   ISProcessSettings,
   ISProcessManagerProcessSettings
 } from '@coffeekraken/s-process';
-import { createServer as __viteServer } from 'vite';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
@@ -83,17 +82,6 @@ export default class SFrontstack extends __SClass {
         settings ?? {}
       )
     );
-  }
-
-  vite(params: any) {
-    return new __SPromise(async ({ resolve, reject, emit }) => {
-      const fs = new __SFrontspec();
-      const server = await __viteServer({
-        configFile: false,
-        ...__sugarConfig('vite')
-      });
-      await server.listen();
-    });
   }
 
   /**
@@ -179,6 +167,7 @@ export default class SFrontstack extends __SClass {
               finalParams.exclude.indexOf(actionName) !== -1
             ) {
               emit('log', {
+                type: 'verbose',
                 value: `Excluding the action "<yellow>${actionName}</yellow>"`
               });
               return;

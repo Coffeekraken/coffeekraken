@@ -130,6 +130,7 @@ export default class SFrontspec extends __SPromise {
 
       if (findParams.clearCache) {
         emit('log', {
+          group: `s-frontspec-${this.metas.id}`,
           value: '<yellow>[cache]</yellow> Clearing the cache...'
         });
         await this.clearCache();
@@ -141,10 +142,12 @@ export default class SFrontspec extends __SPromise {
         const cachedValue = await this._cache.get(cacheId);
         if (cachedValue) {
           emit('log', {
+            group: `s-frontspec-${this.metas.id}`,
             value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
           });
           cachedValue.forEach((path) => {
             emit('log', {
+              group: `s-frontspec-${this.metas.id}`,
               value: `- <cyan>${__path.relative(process.cwd(), path)}</cyan>`
             });
           });
@@ -160,6 +163,7 @@ export default class SFrontspec extends __SPromise {
         searchStrArray.push(`- <yellow>${pat}</yellow>`);
       });
       emit('log', {
+        group: `s-frontspec-${this.metas.id}`,
         value: searchStrArray.join('\n')
       });
 
@@ -175,12 +179,14 @@ export default class SFrontspec extends __SPromise {
         findedStrArray.push(`- <cyan>${file.relPath}</cyan>`);
       });
       emit('log', {
+        group: `s-frontspec-${this.metas.id}`,
         value: findedStrArray.join('\n')
       });
 
       // save in cache if asked
       if (findParams.cache) {
         emit('log', {
+          group: `s-frontspec-${this.metas.id}`,
           value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
         });
         await this._cache.set(
@@ -265,6 +271,7 @@ export default class SFrontspec extends __SPromise {
         });
 
         emit('log', {
+          group: `s-frontspec-${this.metas.id}`,
           value: __toString(newContent)
         });
 

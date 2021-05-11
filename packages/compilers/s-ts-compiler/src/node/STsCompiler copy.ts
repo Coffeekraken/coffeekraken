@@ -240,6 +240,7 @@ class STsCompiler extends __SCompiler {
         // clear
         if (params.clear && params.outDir) {
           emit('log', {
+            group: 's-ts-compiler',
             value: `Clearing the outDir "<yellow>${params.outDir}</yellow>" before compilation`
           });
           const outDirPath = __path.resolve(
@@ -533,6 +534,7 @@ class STsCompiler extends __SCompiler {
             // });
 
             pro.emit('log', {
+              group: 's-ts-compiler',
               value: `Starting compilation process`
             });
           } catch (e) {
@@ -584,6 +586,7 @@ class STsCompiler extends __SCompiler {
 
     if (emit) {
       emit('log', {
+        group: 's-ts-compiler',
         // temp: true,
         value: `<yellow>[compile]</yellow> Compiling file "<cyan>${__path.relative(
           tsconfig.compilerOptions.outDir,
@@ -597,6 +600,7 @@ class STsCompiler extends __SCompiler {
     if (outPath.match(/\.ts(x)?$/) && __fs.existsSync(outPath)) {
       if (emit) {
         emit('log', {
+          group: 's-ts-compiler',
           value: `<yellow>[warning]</yellow> The output destination of the compiled file "<cyan>${outPath}</cyan>" is the same as the source file and override it... This file is not saved then.`
         });
       }
@@ -607,6 +611,7 @@ class STsCompiler extends __SCompiler {
           __fs.renameSync(inPath, outPath);
           if (outPath.match(/\.cli\.js$/) && emit) {
             emit('log', {
+              group: 's-ts-compiler',
               temp: true,
               value: `<yellow>[compile]</yellow> Adding execution permission to file "<cyan>${__path.relative(
                 tsconfig.compilerOptions.outDir,

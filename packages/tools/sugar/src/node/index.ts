@@ -36,4 +36,4 @@ __onProcessExit(() => {
 // __registerSFileClasses();
 
 // Logging
-new __SLog(__sugarConfig('log'));
+// new __SLog(__sugarConfig('log'));

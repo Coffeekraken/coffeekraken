@@ -6,7 +6,7 @@ import __sanitizeSugarJson from '@coffeekraken/sugar/shared/sugar/sanitizeSugarJ
 import __fs from 'fs';
 import __path from 'path';
 import { SConfigFolderAdapter } from '@coffeekraken/s-config';
-import sugarJson from '@coffeekraken/sugar/node/sugar/sugarJson';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 
 /**
  * @name                  sugar
@@ -42,10 +42,12 @@ let _sugarJsons, _rootSugarJson;
 export default function sugar(dotPath: string): any {
   let rootSugarJson;
 
+  const sugarJson = new __SSugarJson();
+
   if (!_rootSugarJson) {
     const rootSugarJsonPath = `${__packageRoot()}/sugar.json`;
     if (__fs.existsSync(rootSugarJsonPath)) {
-      rootSugarJson = __sanitizeSugarJson(require(rootSugarJsonPath));
+      rootSugarJson = sugarJson.sanitizeJson(require(rootSugarJsonPath));
       if (rootSugarJson.extends && !Array.isArray(rootSugarJson.extends))
         rootSugarJson.extends = [rootSugarJson.extends];
     }
@@ -53,7 +55,7 @@ export default function sugar(dotPath: string): any {
     rootSugarJson = _rootSugarJson;
   }
   if (!_sugarJsons) {
-    _sugarJsons = sugarJson('*');
+    _sugarJsons = sugarJson.read();
     Object.keys(_sugarJsons).forEach((packageName) => {
       const jsonObj = _sugarJsons[packageName];
       if (jsonObj.config && jsonObj.config.folders) {

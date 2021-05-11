@@ -6,6 +6,7 @@ import __SLogConsoleAdapter from './adapters/SLogConsoleAdapter';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __env from '@coffeekraken/sugar/shared/core/env';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __SClass from '@coffeekraken/s-class';
@@ -14,7 +15,7 @@ import __SClass from '@coffeekraken/s-class';
  * @name                    SLog
  * @namespace           shared
  * @type                    Class
- * @extends           __SClass
+ * @extends           SClass
  * @status              beta
  *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
@@ -65,6 +66,7 @@ export interface ISLogAdaptersByEnvironmentSettingObj {
 }
 
 export interface ISLogSettings {
+  types: String[];
   adapters: ISLogAdaptersSettingObj;
   adaptersByLevel: ISLogAdaptersByLevelSettingObj;
   adaptersByEnvironment: ISLogAdaptersByEnvironmentSettingObj;
@@ -173,6 +175,7 @@ export default class SLog extends __SClass implements ISLog {
       __deepMerge(
         {
           log: {
+            types: __sugarConfig('log.types'),
             adapters: {
               console: new __SLogConsoleAdapter()
             },

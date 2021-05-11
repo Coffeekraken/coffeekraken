@@ -149,6 +149,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         await __wait(0);
 
         this.emit('log', {
+          group: `s-process-manager-process-wrapper-${this.metas.id}`,
           value: `The process "<yellow>${this.metas.id}</yellow>" has been stoped after a(n) <red>${this.processInstance.lastExecutionObj.state}</red> after <cyan>${this.processInstance.lastExecutionObj.formatedDuration}</cyan> of execution`
         });
 
@@ -160,6 +161,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             Date.now()
           ) {
             this.emit('log', {
+              group: `s-process-manager-process-wrapper-${this.metas.id}`,
               value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has crashed before the <cyan>maxEvery</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxEvery}ms</magenta>`
             });
             // resolving the global run promise
@@ -179,6 +181,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             this.processManagerProcessSettings.restart.maxTimes
           ) {
             this.emit('log', {
+              group: `s-process-manager-process-wrapper-${this.metas.id}`,
               value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has reached the <cyan>maxTimes</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxTimes}</magenta>`
             });
             // resolving the global run promise
@@ -210,6 +213,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         // of the "before" callback returns a nullysh value, do not restart
         if (!newProcessArgs) {
           this.emit('log', {
+            group: `s-process-manager-process-wrapper-${this.metas.id}`,
             value: `Stop restarting the process "<yellow>${this.metas.id}</yellow>"`
           });
 
@@ -225,6 +229,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
 
         if (this.processManagerProcessSettings.restart.delay)
           this.emit(`log`, {
+            group: `s-process-manager-process-wrapper-${this.metas.id}`,
             value: `Waiting <cyan>${
               this.processManagerProcessSettings.restart.delay / 1000
             }s</cyan> before restart...`
@@ -232,6 +237,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         await __wait(this.processManagerProcessSettings.restart.delay);
 
         this.emit('log', {
+          group: `s-process-manager-process-wrapper-${this.metas.id}`,
           value: `Restarting process "<yellow>${this.metas.id}</yellow>"`
         });
 

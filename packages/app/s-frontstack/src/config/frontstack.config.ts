@@ -117,7 +117,7 @@ export default {
       id: 'vite',
       title: 'Vite development stack',
       description: 'Allow to compile files easily',
-      process: 'sugard frontstack.vite',
+      process: 'sugard vite.start',
       settings: {
         processManager: {
           restart: true

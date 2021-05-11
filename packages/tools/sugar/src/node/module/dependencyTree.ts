@@ -94,6 +94,7 @@ export default function dependencyTree(
     // check cache
     if (set.cache) {
       emit('log', {
+        group: `s-dependency-tree`,
         value: `<yellow>[cache]</yellow> Checking cache for file "<cyan>${logPath}</cyan>"...`
       });
 
@@ -103,6 +104,7 @@ export default function dependencyTree(
         // check integrity
         if (cachedValue.integrity === integrity) {
           emit('log', {
+            group: `s-dependency-tree`,
             value: `<green>[cache]</green> Cache validated for file "<cyan>${logPath}</cyan>"`
           });
 
@@ -113,6 +115,7 @@ export default function dependencyTree(
     }
 
     emit('log', {
+      group: `s-dependency-tree`,
       value: `<yellow>[generate]</yellow> Generating dependency tree for file "<cyan>${logPath}</cyan>"...`
     });
 
@@ -132,12 +135,14 @@ export default function dependencyTree(
     const imports = __extractImport(file.content);
 
     emit('log', {
+      group: `s-dependency-tree`,
       value: `<green>[generated]</green> Dependency tree generated <green>successfully</green> for file "<cyan>${logPath}</cyan>"`
     });
 
     // caching tee if needed
     if (set.cache) {
       emit('log', {
+        group: `s-dependency-tree`,
         value: `<yellow>[cache]</yellow> Caching dependency tree for file "<cyan>${logPath}</cyan>"...`
       });
 

@@ -1,3 +1,4 @@
+// @ts-ignore
 if (global && !global.window) global.window = {};
 
 export default {

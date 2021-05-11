@@ -257,6 +257,7 @@ class STsCompiler extends __SCompiler {
         // clear
         if (params.clear && params.outDir) {
           emit('log', {
+            group: 's-ts-compiler',
             value: `Clearing the outDir "<yellow>${params.outDir}</yellow>" before compilation`
           });
           const outDirPath = __path.resolve(
@@ -323,6 +324,7 @@ class STsCompiler extends __SCompiler {
 
             files.forEach((file) => {
               emit('log', {
+                group: 's-ts-compiler',
                 value: `<yellow>[compile]</yellow> File "<cyan>${file.relPath}</cyan>"`
               });
 
@@ -351,6 +353,7 @@ class STsCompiler extends __SCompiler {
                 }
 
                 emit('log', {
+                  group: 's-ts-compiler',
                   value: `<green>[save]</green> File "<cyan>${
                     file.relPath
                   }</cyan>" under "<magenta>${__path.relative(
@@ -362,6 +365,7 @@ class STsCompiler extends __SCompiler {
 
                 if (result.sourceMapText) {
                   emit('log', {
+                    group: 's-ts-compiler',
                     value: `<green>[save]</green> Map "<cyan>${
                       file.relPath
                     }</cyan>" under "<magenta>${__path.relative(
@@ -376,12 +380,14 @@ class STsCompiler extends __SCompiler {
 
             if (!params.watch) {
               emit('log', {
+                group: 's-ts-compiler',
                 value: `<yellow>${files.length}</yellow> File${
                   files.length > 1 ? 's' : ''
                 } compiled`
               });
 
               emit('log', {
+                group: 's-ts-compiler',
                 value: `Compilation <green>successfull</green> in <yellow>${
                   duration.end().formatedDuration
                 }</yellow>`
@@ -396,11 +402,13 @@ class STsCompiler extends __SCompiler {
         });
 
         emit('log', {
+          group: 's-ts-compiler',
           value: 'Starting <cyan>TS</cyan> file(s) compilation process...'
         });
 
         if (params.watch) {
           emit('log', {
+            group: 's-ts-compiler',
             value: `<blue>[watch]</blue> Watching for changes...`
           });
         }
@@ -436,6 +444,7 @@ class STsCompiler extends __SCompiler {
 
     if (emit) {
       emit('log', {
+        group: 's-ts-compiler',
         // temp: true,
         value: `<yellow>[compile]</yellow> Compiling file "<cyan>${__path.relative(
           tsconfig.compilerOptions.outDir,
@@ -449,6 +458,7 @@ class STsCompiler extends __SCompiler {
     if (outPath.match(/\.ts(x)?$/) && __fs.existsSync(outPath)) {
       if (emit) {
         emit('log', {
+          group: 's-ts-compiler',
           value: `<yellow>[warning]</yellow> The output destination of the compiled file "<cyan>${outPath}</cyan>" is the same as the source file and override it... This file is not saved then.`
         });
       }
@@ -459,6 +469,7 @@ class STsCompiler extends __SCompiler {
           __fs.renameSync(inPath, outPath);
           if (outPath.match(/\.cli\.js$/) && emit) {
             emit('log', {
+              group: 's-ts-compiler',
               temp: true,
               value: `<yellow>[compile]</yellow> Adding execution permission to file "<cyan>${__path.relative(
                 tsconfig.compilerOptions.outDir,

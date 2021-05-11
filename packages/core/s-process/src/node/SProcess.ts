@@ -511,6 +511,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     if (paramsObj.help === true && this.paramsInterface !== undefined) {
       const helpString = this.paramsInterface.render();
       this.emit('log', {
+        group: `s-process-${this.metas.id}`,
         value: helpString
       });
       return;

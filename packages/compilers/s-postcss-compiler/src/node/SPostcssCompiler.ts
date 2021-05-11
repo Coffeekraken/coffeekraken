@@ -157,6 +157,7 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
         let input = Array.isArray(params.input) ? params.input : [params.input];
 
         emit('log', {
+          group: 's-postcss-compiler',
           value: 'Starting <yellow>CSS</yellow> file(s) compilation...'
         });
 
@@ -209,6 +210,8 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
             const fileDuration = new __SDuration();
 
             emit('log', {
+              group: 's-postcss-compiler',
+              type: 'verbose',
               value: `<yellow>[compile]</yellow> Start compiling "<cyan>${file.relPath}</cyan>" file`
             });
 
@@ -227,6 +230,7 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
 
             const fileEnd = fileDuration.end();
             emit('log', {
+              group: 's-postcss-compiler',
               value: `<green>[success]</green> File "<cyan>${file.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${fileEnd.formatedDuration}</yellow>`
             });
 
@@ -258,6 +262,7 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
 
               __fs.writeFileSync(outPath, res.css);
               emit('log', {
+                group: 's-postcss-compiler',
                 value: `<green>[save]</green> File "<cyan>${
                   file.relPath
                 }</cyan>" saved under "<magenta>${__path.relative(
@@ -274,10 +279,12 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
                 ...end
               };
               emit('log', {
+                group: 's-postcss-compiler',
                 value: `<green>[success]</green> Compilation finished <green>successfully</green> in <yellow>${end.formatedDuration}</yellow>`
               });
               if (params.watch) {
                 emit('log', {
+                  group: 's-postcss-compiler',
                   value: `<blue>[watch]</blue> Watching for changes...`
                 });
               } else {
@@ -289,6 +296,7 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
 
         if (params.watch) {
           emit('log', {
+            group: 's-postcss-compiler',
             value: `<blue>[watch]</blue> Watching for changes...`
           });
         }

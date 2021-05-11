@@ -196,6 +196,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
       if (findParams.clearCache) {
         emit('log', {
+          group: `s-docmap-${this.metas.id}`,
           value: '<yellow>[cache]</yellow> Clearing the cache...'
         });
         await this.clearCache();
@@ -227,6 +228,7 @@ class SDocMap extends __SClass implements ISDocMap {
         searchStrArray.push(`- <yellow>${pat}</yellow>`);
       });
       emit('log', {
+        group: `s-docmap-${this.metas.id}`,
         value: searchStrArray.join('\n')
       });
 
@@ -247,6 +249,7 @@ class SDocMap extends __SClass implements ISDocMap {
         findedStrArray.push(`- <cyan>${file.relPath}</cyan>`);
       });
       emit('log', {
+        group: `s-docmap-${this.metas.id}`,
         value: findedStrArray.join('\n')
       });
 
@@ -371,6 +374,7 @@ class SDocMap extends __SClass implements ISDocMap {
       });
 
       emit('log', {
+        group: `s-docmap-${this.metas.id}`,
         value: `Searching files to use as docmap sources using globs:\n- <yellow>${globs.join(
           '</yellow>\n- '
         )}</yellow>`
@@ -404,6 +408,7 @@ class SDocMap extends __SClass implements ISDocMap {
         files = Array.isArray(files) ? files : [files];
 
         emit('log', {
+          group: `s-docmap-${this.metas.id}`,
           value: `<yellow>${
             files.length
           }</yellow> file(s) found using the glob "<cyan>${globs.join(
@@ -474,6 +479,7 @@ class SDocMap extends __SClass implements ISDocMap {
         }
 
         emit('log', {
+          group: `s-docmap-${this.metas.id}`,
           value: `<green>${
             Object.keys(this._entries).length
           }</green> entries gathered for this docMap`
@@ -489,6 +495,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
         if (generateParams.save) {
           emit('log', {
+            group: `s-docmap-${this.metas.id}`,
             value: `<yellow>[save]</yellow> File "<cyan>${generateParams.outPath.replace(
               __rootDir() + '/',
               ''
@@ -502,6 +509,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
         if (generateParams.watch) {
           emit('log', {
+            group: `s-docmap-${this.metas.id}`,
             value: '<blue>[watch]</blue> Watching for changes...'
           });
         } else {
@@ -511,6 +519,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
       if (generateParams.watch) {
         emit('log', {
+          group: `s-docmap-${this.metas.id}`,
           value: '<blue>[watch]</blue> Watching for changes...'
         });
       }

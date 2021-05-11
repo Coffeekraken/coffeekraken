@@ -203,6 +203,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
           : [params.input];
 
         emit('log', {
+          group: 's-js-compiler',
           value: 'Starting <yellow>JS</yellow> file(s) compilation process...'
         });
 
@@ -213,6 +214,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
 
         if (params.bundle) {
           emit('log', {
+            group: 's-js-compiler',
             value: `<cyan>[bundle]</cyan> Bundling application`
           });
 
@@ -237,6 +239,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             });
             dependencyListPromise.on('update', async ({ list, path }) => {
               emit('log', {
+                group: 's-js-compiler',
                 value: `<yellow>[dependency]</yellow> Dependency updated`
               });
               const res = await this._compileInternal(
@@ -247,6 +250,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
               if (res instanceof Error) throw res;
 
               emit('log', {
+                group: 's-js-compiler',
                 value: `<blue>[watch]</blue> Watching for changes...`
               });
             });
@@ -278,6 +282,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
 
             if (params.watch) {
               emit('log', {
+                group: 's-js-compiler',
                 value: `<blue>[watch]</blue> Watching for changes...`
               });
             } else {
@@ -288,6 +293,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
 
         if (params.watch) {
           emit('log', {
+            group: 's-js-compiler',
             value: `<blue>[watch]</blue> Watching for changes...`
           });
         }
@@ -302,6 +308,8 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
 
   async _compileInternal(files, params, emit) {
     emit('log', {
+      group: 's-js-compiler',
+      type: 'verbose',
       value: `<yellow>[compile]</yellow> Start compiling <yellow>${
         files.length
       }</yellow> file${files.length > 1 ? 's' : ''}`
@@ -366,6 +374,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
 
     if (files.length === 1) {
       emit('log', {
+        group: 's-js-compiler',
         value: `<green>[save]</green> File "<cyan>${
           files[0].relPath
         }</cyan>" saved under "<magenta>${__path.relative(
@@ -376,6 +385,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
     }
 
     emit('log', {
+      group: 's-js-compiler',
       value: `<green>[success]</green> <yellow>${files.length}</yellow> file${
         files.length > 1 ? 's' : ''
       } compiled <green>successfully</green> in <yellow>${

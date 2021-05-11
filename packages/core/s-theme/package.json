@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-sugar-json": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0"
   }
 }

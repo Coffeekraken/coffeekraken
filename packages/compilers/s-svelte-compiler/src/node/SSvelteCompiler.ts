@@ -150,6 +150,7 @@ class SSvelteCompiler extends __SCompiler {
           : [params.input];
 
         emit('log', {
+          group: 's-svelte-compiler',
           value: 'Starting <red>Svelte</red> file(s) compilation process...'
         });
 
@@ -187,6 +188,7 @@ class SSvelteCompiler extends __SCompiler {
             this._filesColor[file.path] = color;
 
             emit('log', {
+              group: 's-svelte-compiler',
               value: `<${color}>[${__getFilename(
                 file.path
               )}]</${color}> Starting compilation`
@@ -287,6 +289,7 @@ class SSvelteCompiler extends __SCompiler {
               });
             } catch (e) {
               emit('error', {
+                group: 's-svelte-compiler',
                 value: [
                   e.message,
                   `<yellow>${e.filename}</yellow>`,
@@ -313,6 +316,7 @@ class SSvelteCompiler extends __SCompiler {
             outputPath = outputPath.replace(/\.svelte$/, '.js');
 
             emit('log', {
+              group: 's-svelte-compiler',
               value: `<${color}>[${__getFilename(
                 file.path
               )}]</${color}> Compilation <green>successfull</green>`
@@ -325,6 +329,7 @@ class SSvelteCompiler extends __SCompiler {
                   result.js.code = __uglify.minify(result.js.code).code;
                 }
                 emit('log', {
+                  group: 's-svelte-compiler',
                   value: `<${color}>[${__getFilename(
                     file.path
                   )}]</${color}> Saving <cyan>js</cyan> file under "<cyan>${__path.relative(
@@ -335,6 +340,7 @@ class SSvelteCompiler extends __SCompiler {
                 __writeFileSync(outputPath, result.js.code);
                 if (params.map && result.js.map) {
                   emit('log', {
+                    group: 's-svelte-compiler',
                     value: `<${color}>[${__getFilename(
                       file.path
                     )}]</${color}> Saving <yellow>map</yellow> file under "<cyan>${__path.relative(
@@ -353,6 +359,7 @@ class SSvelteCompiler extends __SCompiler {
                   result.css.code = new __cleanCss({}).minify(result.css.code);
                 }
                 emit('log', {
+                  group: 's-svelte-compiler',
                   value: `<${color}>[${__getFilename(
                     file.path
                   )}]</${color}> Saving <yellow>css</yellow> file under "<cyan>${__path.relative(
@@ -366,6 +373,7 @@ class SSvelteCompiler extends __SCompiler {
                 );
                 if (params.map && result.css.map) {
                   emit('log', {
+                    group: 's-svelte-compiler',
                     value: `<${color}>[${__getFilename(
                       file.path
                     )}]</${color}> Saving <yellow>map</yellow> file under "<cyan>${__path.relative(
@@ -391,6 +399,7 @@ class SSvelteCompiler extends __SCompiler {
 
           if (params.watch) {
             emit('log', {
+              group: 's-svelte-compiler',
               value: `<blue>[watch]</blue> Watching for changes...`
             });
           } else {

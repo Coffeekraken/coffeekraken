@@ -47,7 +47,7 @@
     "imagemin-svgo": "^7.0.0",
     "imagemin-webp": "^5.1.0",
     "nunjucks": "^3.2.0",
-    "postcss": "^7.0.26",
+    "postcss": "^8.2.10",
     "postcss-preset-env": "^6.7.0",
     "precss": "^4.0.0",
     "rucksack-css": "^1.0.2",

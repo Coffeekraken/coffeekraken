@@ -1,17 +1,11 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.interface = void 0;
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const theme_1 = require("../../utils/theme");
-class postcssSugarPluginThemeScopeMixinInterface extends s_interface_1.default {
+import __SInterface from '@coffeekraken/s-interface';
+import { themeDefinition } from '../../utils/theme';
+class postcssSugarPluginThemeScopeMixinInterface extends __SInterface {
 }
-exports.interface = postcssSugarPluginThemeScopeMixinInterface;
 postcssSugarPluginThemeScopeMixinInterface.definition = {
-    theme: theme_1.themeDefinition
+    theme: themeDefinition
 };
+export { postcssSugarPluginThemeScopeMixinInterface as interface };
 /**
  * @name           scope
  * @namespace      mixins.theme
@@ -31,7 +25,7 @@ postcssSugarPluginThemeScopeMixinInterface.definition = {
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function default_1({ params, atRule, processNested }) {
+export default function ({ params, atRule, processNested }) {
     const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
     // @ts-ignore
     if (!global._postcssSugarPluginThemeScopeMixinTheme) {
@@ -47,5 +41,4 @@ function default_1({ params, atRule, processNested }) {
         // @ts-ignore
         global._postcssSugarPluginThemeScopeMixinTheme.slice(0, -1);
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NvcGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY29wZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQSw0RUFBcUQ7QUFDckQsNkNBQTZEO0FBRTdELE1BQU0sMENBQTJDLFNBQVEscUJBQVk7O0FBS2QsK0RBQVM7QUFKdkQscURBQVUsR0FBRztJQUNsQixLQUFLLEVBQUUsdUJBQWU7Q0FDdkIsQ0FBQztBQVFKOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxtQkFBeUIsRUFDdkIsTUFBTSxFQUNOLE1BQU0sRUFDTixhQUFhLEVBS2Q7SUFDQyxNQUFNLFdBQVcsR0FBRyxrQkFDZixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNsQixDQUFDO0lBRUYsYUFBYTtJQUNiLElBQUksQ0FBQyxNQUFNLENBQUMsdUNBQXVDLEVBQUU7UUFDbkQsYUFBYTtRQUNiLE1BQU0sQ0FBQyx1Q0FBdUMsR0FBRyxFQUFFLENBQUM7S0FDckQ7SUFFRCxhQUFhO0lBQ2IsTUFBTSxDQUFDLHVDQUF1QyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUM7SUFFdkUsTUFBTSxHQUFHLEdBQUcsYUFBYSxDQUN2QixNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUN2RCxDQUFDO0lBQ0YsTUFBTSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUV4QixhQUFhO0lBQ2IsTUFBTSxDQUFDLHVDQUF1QztRQUM1QyxhQUFhO1FBQ2IsTUFBTSxDQUFDLHVDQUF1QyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUNoRSxDQUFDO0FBL0JELDRCQStCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NvcGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY29wZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFnQixFQUFFLGVBQWUsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBRTdELE1BQU0sMENBQTJDLFNBQVEsWUFBWTs7QUFDNUQscURBQVUsR0FBRztJQUNsQixLQUFLLEVBQUUsZUFBZTtDQUN2QixDQUFDO0FBRUosT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBTW5FOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sYUFBYSxFQUtkO0lBQ0MsTUFBTSxXQUFXLEdBQUcsa0JBQ2YsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDbEIsQ0FBQztJQUVGLGFBQWE7SUFDYixJQUFJLENBQUMsTUFBTSxDQUFDLHVDQUF1QyxFQUFFO1FBQ25ELGFBQWE7UUFDYixNQUFNLENBQUMsdUNBQXVDLEdBQUcsRUFBRSxDQUFDO0tBQ3JEO0lBRUQsYUFBYTtJQUNiLE1BQU0sQ0FBQyx1Q0FBdUMsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRXZFLE1BQU0sR0FBRyxHQUFHLGFBQWEsQ0FDdkIsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRSxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FDdkQsQ0FBQztJQUNGLE1BQU0sQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFeEIsYUFBYTtJQUNiLE1BQU0sQ0FBQyx1Q0FBdUM7UUFDNUMsYUFBYTtRQUNiLE1BQU0sQ0FBQyx1Q0FBdUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDaEUsQ0FBQyJ9

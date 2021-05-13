@@ -1,12 +1,7 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const SFrontspecParamsInterface_1 = __importDefault(require("./SFrontspecParamsInterface"));
+import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SInterface from '@coffeekraken/s-interface';
+import __SFrontspecParamsInterface from './SFrontspecParamsInterface';
 /**
  * @name                SFrontspecFindParamsInterface
  * @namespace           node.interface
@@ -19,19 +14,19 @@ const SFrontspecParamsInterface_1 = __importDefault(require("./SFrontspecParamsI
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SFrontspecFindParamsInterface extends s_interface_1.default {
+class SFrontspecFindParamsInterface extends __SInterface {
 }
-SFrontspecFindParamsInterface.definition = Object.assign(Object.assign({}, SFrontspecParamsInterface_1.default.definition), { globs: {
+SFrontspecFindParamsInterface.definition = Object.assign(Object.assign({}, __SFrontspecParamsInterface.definition), { globs: {
         type: 'Array<String>',
         alias: 'i',
         description: 'frontspec.json files glob pattern',
-        default: s_sugar_config_1.default('frontspec.find.globs'),
+        default: __sugarConfig('frontspec.find.globs'),
         level: 1
     }, exclude: {
         type: 'Object',
         description: 'Specify some regexp used to exclude files from searching frontspecs',
-        default: s_sugar_config_1.default('frontspec.find.exclude'),
+        default: __sugarConfig('frontspec.find.exclude'),
         level: 1
     } });
-exports.default = SFrontspecFindParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3BlY0ZpbmRQYXJhbXNJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRnJvbnRzcGVjRmluZFBhcmFtc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCxrRkFBeUQ7QUFDekQsNEVBQXFEO0FBQ3JELDRGQUFzRTtBQUV0RTs7Ozs7Ozs7Ozs7R0FXRztBQUNILE1BQU0sNkJBQThCLFNBQVEscUJBQVk7O0FBQy9DLHdDQUFVLG1DQUNaLG1DQUEyQixDQUFDLFVBQVUsS0FDekMsS0FBSyxFQUFFO1FBQ0wsSUFBSSxFQUFFLGVBQWU7UUFDckIsS0FBSyxFQUFFLEdBQUc7UUFDVixXQUFXLEVBQUUsbUNBQW1DO1FBQ2hELE9BQU8sRUFBRSx3QkFBYSxDQUFDLHNCQUFzQixDQUFDO1FBQzlDLEtBQUssRUFBRSxDQUFDO0tBQ1QsRUFDRCxPQUFPLEVBQUU7UUFDUCxJQUFJLEVBQUUsUUFBUTtRQUNkLFdBQVcsRUFDVCxxRUFBcUU7UUFDdkUsT0FBTyxFQUFFLHdCQUFhLENBQUMsd0JBQXdCLENBQUM7UUFDaEQsS0FBSyxFQUFFLENBQUM7S0FDVCxJQUNEO0FBRUosa0JBQWUsNkJBQTZCLENBQUMifQ==
+export default SFrontspecFindParamsInterface;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3BlY0ZpbmRQYXJhbXNJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRnJvbnRzcGVjRmluZFBhcmFtc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTywyQkFBMkIsTUFBTSw2QkFBNkIsQ0FBQztBQUV0RTs7Ozs7Ozs7Ozs7R0FXRztBQUNILE1BQU0sNkJBQThCLFNBQVEsWUFBWTs7QUFDL0Msd0NBQVUsbUNBQ1osMkJBQTJCLENBQUMsVUFBVSxLQUN6QyxLQUFLLEVBQUU7UUFDTCxJQUFJLEVBQUUsZUFBZTtRQUNyQixLQUFLLEVBQUUsR0FBRztRQUNWLFdBQVcsRUFBRSxtQ0FBbUM7UUFDaEQsT0FBTyxFQUFFLGFBQWEsQ0FBQyxzQkFBc0IsQ0FBQztRQUM5QyxLQUFLLEVBQUUsQ0FBQztLQUNULEVBQ0QsT0FBTyxFQUFFO1FBQ1AsSUFBSSxFQUFFLFFBQVE7UUFDZCxXQUFXLEVBQ1QscUVBQXFFO1FBQ3ZFLE9BQU8sRUFBRSxhQUFhLENBQUMsd0JBQXdCLENBQUM7UUFDaEQsS0FBSyxFQUFFLENBQUM7S0FDVCxJQUNEO0FBRUosZUFBZSw2QkFBNkIsQ0FBQyJ9

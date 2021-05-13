@@ -1,10 +1,11 @@
 <svelte:options tag="s-docblock-to-html" />
 
-<script type="text/ts">
+<script lang="ts">
   import __SSvelteComponent from '@coffeekraken/s-svelte-component';
   import __SDocblockToHtmlComponentInterface from './interface/SDocblockToHtmlComponentInterface';
   import __SDocblock from '@coffeekraken/s-docblock';
   import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
+  import '@coffeekraken/s-highlight-js';
 
   class MyCoolComponent extends __SSvelteComponent {
     static interface = __SDocblockToHtmlComponentInterface;
@@ -23,19 +24,22 @@
   });
   let {} = component.props;
 
+  let container;
+
   component.beforeUpdate(() => {});
   component.onMount(async () => {
-    console.log('MOU');
-
     const docblock = new __SDocblock(component.$elm.innerHTML);
     const docblockHtmlRenderer = new SDocblockHtmlRenderer(docblock);
     const html = await docblockHtmlRenderer.render();
-
-    console.log('HTML', html);
+    container.innerHTML = html;
   });
 </script>
 
-<div class={component.className()} />
+<div class={component.className('__container')} bind:this={container} />
 
+<!-- <div class={component.className()} /> -->
 <style>
+  div {
+    color: red;
+  }
 </style>

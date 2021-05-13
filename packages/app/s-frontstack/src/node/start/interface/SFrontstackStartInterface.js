@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
+import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SFrontstackStartInterface
  * @namespace           s-frontstack
@@ -21,21 +16,21 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SFrontstackStartInterface extends s_interface_1.default {
+class SFrontstackStartInterface extends __SInterface {
 }
 SFrontstackStartInterface.definition = {
     receipe: {
         type: 'String',
         alias: 'r',
-        values: Object.keys(s_sugar_config_1.default('frontstack.receipes')),
-        default: s_sugar_config_1.default('frontstack.receipe')
+        values: Object.keys(__sugarConfig('frontstack.receipes')),
+        default: __sugarConfig('frontstack.receipe')
     },
     exclude: {
         type: 'Array<String>',
         alias: 'e',
-        values: Object.keys(s_sugar_config_1.default('frontstack.actions')),
-        default: s_sugar_config_1.default('frontstack.exclude')
+        values: Object.keys(__sugarConfig('frontstack.actions')),
+        default: __sugarConfig('frontstack.exclude')
     }
 };
-exports.default = SFrontstackStartInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tTdGFydEludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHN0YWNrU3RhcnRJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxrRkFBeUQ7QUFDekQsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQU0seUJBQTBCLFNBQVEscUJBQVk7O0FBQzNDLG9DQUFVLEdBQUc7SUFDbEIsT0FBTyxFQUFFO1FBQ1AsSUFBSSxFQUFFLFFBQVE7UUFDZCxLQUFLLEVBQUUsR0FBRztRQUNWLE1BQU0sRUFBRSxNQUFNLENBQUMsSUFBSSxDQUFDLHdCQUFhLENBQUMscUJBQXFCLENBQUMsQ0FBQztRQUN6RCxPQUFPLEVBQUUsd0JBQWEsQ0FBQyxvQkFBb0IsQ0FBQztLQUM3QztJQUNELE9BQU8sRUFBRTtRQUNQLElBQUksRUFBRSxlQUFlO1FBQ3JCLEtBQUssRUFBRSxHQUFHO1FBQ1YsTUFBTSxFQUFFLE1BQU0sQ0FBQyxJQUFJLENBQUMsd0JBQWEsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO1FBQ3hELE9BQU8sRUFBRSx3QkFBYSxDQUFDLG9CQUFvQixDQUFDO0tBQzdDO0NBQ0YsQ0FBQztBQUdKLGtCQUFlLHlCQUF5QixDQUFDIn0=
+export default SFrontstackStartInterface;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tTdGFydEludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHN0YWNrU3RhcnRJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsTUFBTSx5QkFBMEIsU0FBUSxZQUFZOztBQUMzQyxvQ0FBVSxHQUFHO0lBQ2xCLE9BQU8sRUFBRTtRQUNQLElBQUksRUFBRSxRQUFRO1FBQ2QsS0FBSyxFQUFFLEdBQUc7UUFDVixNQUFNLEVBQUUsTUFBTSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMscUJBQXFCLENBQUMsQ0FBQztRQUN6RCxPQUFPLEVBQUUsYUFBYSxDQUFDLG9CQUFvQixDQUFDO0tBQzdDO0lBQ0QsT0FBTyxFQUFFO1FBQ1AsSUFBSSxFQUFFLGVBQWU7UUFDckIsS0FBSyxFQUFFLEdBQUc7UUFDVixNQUFNLEVBQUUsTUFBTSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsb0JBQW9CLENBQUMsQ0FBQztRQUN4RCxPQUFPLEVBQUUsYUFBYSxDQUFDLG9CQUFvQixDQUFDO0tBQzdDO0NBQ0YsQ0FBQztBQUdKLGVBQWUseUJBQXlCLENBQUMifQ==

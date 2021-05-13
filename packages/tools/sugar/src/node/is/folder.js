@@ -1,11 +1,6 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = __importDefault(require("fs"));
-const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
+import __fs from 'fs';
+import __deepMerge from '../../shared/object/deepMerge';
 /**
  * @name            folder
  * @namespace            node.is
@@ -29,20 +24,20 @@ const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isfolder(path, settings = {}) {
-    settings = deepMerge_1.default({
+    settings = __deepMerge({
         symlink: true
     }, settings);
-    let isMatching = fs_1.default.existsSync(path);
+    let isMatching = __fs.existsSync(path);
     if (!isMatching)
         return false;
-    if (settings.symlink && fs_1.default.lstatSync(path).isSymbolicLink()) {
-        const realPath = fs_1.default.realpathSync(path);
-        isMatching = isMatching && fs_1.default.lstatSync(realPath).isDirectory();
+    if (settings.symlink && __fs.lstatSync(path).isSymbolicLink()) {
+        const realPath = __fs.realpathSync(path);
+        isMatching = isMatching && __fs.lstatSync(realPath).isDirectory();
     }
     else {
-        isMatching = isMatching && fs_1.default.lstatSync(path).isDirectory();
+        isMatching = isMatching && __fs.lstatSync(path).isDirectory();
     }
     return isMatching;
 }
-exports.default = isfolder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9sZGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZm9sZGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRDQUFzQjtBQUN0Qiw4RUFBd0Q7QUFFeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQVMsUUFBUSxDQUFDLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUNuQyxRQUFRLEdBQUcsbUJBQVcsQ0FDcEI7UUFDRSxPQUFPLEVBQUUsSUFBSTtLQUNkLEVBQ0QsUUFBUSxDQUNULENBQUM7SUFFRixJQUFJLFVBQVUsR0FBRyxZQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3ZDLElBQUksQ0FBQyxVQUFVO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDOUIsSUFBSSxRQUFRLENBQUMsT0FBTyxJQUFJLFlBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUMsY0FBYyxFQUFFLEVBQUU7UUFDN0QsTUFBTSxRQUFRLEdBQUcsWUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN6QyxVQUFVLEdBQUcsVUFBVSxJQUFJLFlBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsV0FBVyxFQUFFLENBQUM7S0FDbkU7U0FBTTtRQUNMLFVBQVUsR0FBRyxVQUFVLElBQUksWUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxXQUFXLEVBQUUsQ0FBQztLQUMvRDtJQUNELE9BQU8sVUFBVSxDQUFDO0FBQ3BCLENBQUM7QUFDRCxrQkFBZSxRQUFRLENBQUMifQ==
+export default isfolder;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9sZGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZm9sZGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxXQUFXLE1BQU0sK0JBQStCLENBQUM7QUFFeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQVMsUUFBUSxDQUFDLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUNuQyxRQUFRLEdBQUcsV0FBVyxDQUNwQjtRQUNFLE9BQU8sRUFBRSxJQUFJO0tBQ2QsRUFDRCxRQUFRLENBQ1QsQ0FBQztJQUVGLElBQUksVUFBVSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdkMsSUFBSSxDQUFDLFVBQVU7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUM5QixJQUFJLFFBQVEsQ0FBQyxPQUFPLElBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxjQUFjLEVBQUUsRUFBRTtRQUM3RCxNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ3pDLFVBQVUsR0FBRyxVQUFVLElBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxXQUFXLEVBQUUsQ0FBQztLQUNuRTtTQUFNO1FBQ0wsVUFBVSxHQUFHLFVBQVUsSUFBSSxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDLFdBQVcsRUFBRSxDQUFDO0tBQy9EO0lBQ0QsT0FBTyxVQUFVLENBQUM7QUFDcEIsQ0FBQztBQUNELGVBQWUsUUFBUSxDQUFDIn0=

@@ -1,18 +1,12 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.interface = void 0;
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const theme_1 = __importDefault(require("../../utils/theme"));
-class postcssSugarPluginDepthClassesInterface extends s_interface_1.default {
+import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
+class postcssSugarPluginDepthClassesInterface extends __SInterface {
 }
-exports.interface = postcssSugarPluginDepthClassesInterface;
 postcssSugarPluginDepthClassesInterface.definition = {};
-function default_1({ params, atRule, processNested }) {
+export { postcssSugarPluginDepthClassesInterface as interface };
+export default function ({ params, atRule, processNested }) {
     const finalParams = Object.assign({}, params);
-    const depthsObj = theme_1.default().config('depth');
+    const depthsObj = __theme().config('depth');
     const vars = [];
     Object.keys(depthsObj).forEach((depthName) => {
         const depthCss = `/**
@@ -33,5 +27,4 @@ function default_1({ params, atRule, processNested }) {
     const AST = processNested(vars.join('\n'));
     atRule.replaceWith(AST);
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUEsNEVBQXFEO0FBQ3JELDhEQUF3QztBQUV4QyxNQUFNLHVDQUF3QyxTQUFRLHFCQUFZOztBQU1kLDREQUFTO0FBTHBELGtEQUFVLEdBQUcsRUFBRSxDQUFDO0FBT3pCLG1CQUF5QixFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFLZDtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sU0FBUyxHQUFHLGVBQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUU1QyxNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUMzQyxNQUFNLFFBQVEsR0FBRzs2QkFDUSxTQUFTOzs7O2dEQUlVLFNBQVM7Ozs2Q0FHWixTQUFTOztXQUUzQyxTQUFTO21CQUNELFNBQVM7RUFDMUIsQ0FBQztRQUNDLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDdEIsQ0FBQyxDQUFDLENBQUM7SUFFSCxNQUFNLEdBQUcsR0FBRyxhQUFhLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBQzNDLE1BQU0sQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDMUIsQ0FBQztBQXBDRCw0QkFvQ0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZOztBQUN6RCxrREFBVSxHQUFHLEVBQUUsQ0FBQztBQUt6QixPQUFPLEVBQUUsdUNBQXVDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFaEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFLZDtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sU0FBUyxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUU1QyxNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUMzQyxNQUFNLFFBQVEsR0FBRzs2QkFDUSxTQUFTOzs7O2dEQUlVLFNBQVM7Ozs2Q0FHWixTQUFTOztXQUUzQyxTQUFTO21CQUNELFNBQVM7RUFDMUIsQ0FBQztRQUNDLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDdEIsQ0FBQyxDQUFDLENBQUM7SUFFSCxNQUFNLEdBQUcsR0FBRyxhQUFhLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBQzNDLE1BQU0sQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDMUIsQ0FBQyJ9

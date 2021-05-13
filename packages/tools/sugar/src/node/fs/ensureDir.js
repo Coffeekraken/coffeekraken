@@ -1,11 +1,6 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs_extra_1 = __importDefault(require("fs-extra"));
-const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
+import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 /**
  * @name        ensureDir
  * @namespace            node.fs
@@ -34,8 +29,8 @@ const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens")
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ensureDir(dir) {
-    dir = replacePathTokens_1.default(dir);
-    return fs_extra_1.default.ensureDir(dir);
+    dir = __replacePathTokens(dir);
+    return __fs.ensureDir(dir);
 }
-exports.default = ensureDir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRGlyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW5zdXJlRGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUM1QixrRkFBNEQ7QUFFNUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsR0FBRztJQUNwQixHQUFHLEdBQUcsMkJBQW1CLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDL0IsT0FBTyxrQkFBSSxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBQ0Qsa0JBQWUsU0FBUyxDQUFDIn0=
+export default ensureDir;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRGlyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW5zdXJlRGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLElBQUksTUFBTSxVQUFVLENBQUM7QUFDNUIsT0FBTyxtQkFBbUIsTUFBTSwyQkFBMkIsQ0FBQztBQUU1RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxHQUFHO0lBQ3BCLEdBQUcsR0FBRyxtQkFBbUIsQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUMvQixPQUFPLElBQUksQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDN0IsQ0FBQztBQUNELGVBQWUsU0FBUyxDQUFDIn0=

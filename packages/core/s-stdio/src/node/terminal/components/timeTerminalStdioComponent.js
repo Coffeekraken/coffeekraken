@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const parseHtml_1 = __importDefault(require("@coffeekraken/sugar/shared/console/parseHtml"));
-const upperFirst_1 = __importDefault(require("@coffeekraken/sugar/shared/string/upperFirst"));
+import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 /**
  * @name        timeTerminalStdioComponent
  * @namespace   sugar.node.stdio.terminal.components
@@ -15,13 +10,13 @@ const upperFirst_1 = __importDefault(require("@coffeekraken/sugar/shared/string/
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-exports.default = {
+export default {
     id: 'time',
     render(logObj, settings = {}) {
         const value = logObj.value || '';
         const color = logObj.color || 'yellow';
-        const logStr = parseHtml_1.default(`<bgBlack> <${color}>◷</${color}> </bgBlack><bg${upperFirst_1.default(color)}> <black>${new Date().toLocaleTimeString('en-US')} </black></bg${upperFirst_1.default(color)}> ${value}\n`);
+        const logStr = __parseHtml(`<bgBlack> <${color}>◷</${color}> </bgBlack><bg${__upperFirst(color)}> <black>${new Date().toLocaleTimeString('en-US')} </black></bg${__upperFirst(color)}> ${value}\n`);
         return logStr;
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGltZVRlcm1pbmFsU3RkaW9Db21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aW1lVGVybWluYWxTdGRpb0NvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLDZGQUF1RTtBQUN2RSw4RkFBd0U7QUFFeEU7Ozs7Ozs7OztHQVNHO0FBQ0gsa0JBQWU7SUFDYixFQUFFLEVBQUUsTUFBTTtJQUNWLE1BQU0sQ0FBQyxNQUFNLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFDMUIsTUFBTSxLQUFLLEdBQUcsTUFBTSxDQUFDLEtBQUssSUFBSSxFQUFFLENBQUM7UUFDakMsTUFBTSxLQUFLLEdBQUcsTUFBTSxDQUFDLEtBQUssSUFBSSxRQUFRLENBQUM7UUFFdkMsTUFBTSxNQUFNLEdBQUcsbUJBQVcsQ0FDeEIsY0FBYyxLQUFLLE9BQU8sS0FBSyxrQkFBa0Isb0JBQVksQ0FDM0QsS0FBSyxDQUNOLFlBQVksSUFBSSxJQUFJLEVBQUUsQ0FBQyxrQkFBa0IsQ0FDeEMsT0FBTyxDQUNSLGdCQUFnQixvQkFBWSxDQUFDLEtBQUssQ0FBQyxLQUFLLEtBQUssSUFBSSxDQUNuRCxDQUFDO1FBRUYsT0FBTyxNQUFNLENBQUM7SUFDaEIsQ0FBQztDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGltZVRlcm1pbmFsU3RkaW9Db21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aW1lVGVybWluYWxTdGRpb0NvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSw4Q0FBOEMsQ0FBQztBQUN2RSxPQUFPLFlBQVksTUFBTSw4Q0FBOEMsQ0FBQztBQUV4RTs7Ozs7Ozs7O0dBU0c7QUFDSCxlQUFlO0lBQ2IsRUFBRSxFQUFFLE1BQU07SUFDVixNQUFNLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQzFCLE1BQU0sS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLElBQUksRUFBRSxDQUFDO1FBQ2pDLE1BQU0sS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLElBQUksUUFBUSxDQUFDO1FBRXZDLE1BQU0sTUFBTSxHQUFHLFdBQVcsQ0FDeEIsY0FBYyxLQUFLLE9BQU8sS0FBSyxrQkFBa0IsWUFBWSxDQUMzRCxLQUFLLENBQ04sWUFBWSxJQUFJLElBQUksRUFBRSxDQUFDLGtCQUFrQixDQUN4QyxPQUFPLENBQ1IsZ0JBQWdCLFlBQVksQ0FBQyxLQUFLLENBQUMsS0FBSyxLQUFLLElBQUksQ0FDbkQsQ0FBQztRQUVGLE9BQU8sTUFBTSxDQUFDO0lBQ2hCLENBQUM7Q0FDRixDQUFDIn0=

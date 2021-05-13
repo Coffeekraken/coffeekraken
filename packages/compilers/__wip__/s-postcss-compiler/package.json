@@ -1,0 +1,23 @@
+{
+  "name": "@coffeekraken/s-postcss-compiler",
+  "version": "2.0.0",
+  "description": "",
+  "main": "./src/node/exports.js",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-compiler": "^2.0.0",
+    "@coffeekraken/s-duration": "^2.0.0",
+    "@coffeekraken/s-postcss-sugar-error-plugin": "^2.0.0",
+    "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
+    "@coffeekraken/s-process": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
+    "clean-css": "^5.1.2",
+    "precss": "^4.0.0"
+  },
+  "peerDependencies": {
+    "postcss": "^8.2.10"
+  }
+}

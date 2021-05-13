@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const extension_1 = __importDefault(require("./extension"));
-const fs_1 = __importDefault(require("fs"));
+import __extension from './extension';
+import __fs from 'fs';
 /**
  * @name            checkPathWithMultipleExtensions
  * @namespace            node.fs
@@ -28,19 +23,18 @@ const fs_1 = __importDefault(require("fs"));
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function checkPathWithMultipleExtensions(path, exts) {
-    const extension = extension_1.default(path) || '';
-    if (fs_1.default.existsSync(path)) {
+export default function checkPathWithMultipleExtensions(path, exts) {
+    const extension = __extension(path) || '';
+    if (__fs.existsSync(path)) {
         return path;
     }
     const pathWithoutExt = path.replace(`.${extension}`, '');
     for (let i = 0; i < exts.length; i++) {
         const ext = exts[i];
-        if (fs_1.default.existsSync(`${pathWithoutExt}.${ext}`)) {
+        if (__fs.existsSync(`${pathWithoutExt}.${ext}`)) {
             return `${pathWithoutExt}.${ext}`;
         }
     }
     return undefined;
 }
-exports.default = checkPathWithMultipleExtensions;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hlY2tQYXRoV2l0aE11bHRpcGxlRXh0ZW5zaW9ucy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNoZWNrUGF0aFdpdGhNdWx0aXBsZUV4dGVuc2lvbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSw0REFBc0M7QUFDdEMsNENBQXNCO0FBRXRCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsK0JBQStCLENBQ3JELElBQVksRUFDWixJQUFjO0lBRWQsTUFBTSxTQUFTLEdBQUcsbUJBQVcsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7SUFFMUMsSUFBSSxZQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxFQUFFO1FBQ3pCLE9BQU8sSUFBSSxDQUFDO0tBQ2I7SUFFRCxNQUFNLGNBQWMsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksU0FBUyxFQUFFLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDekQsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7UUFDcEMsTUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3BCLElBQUksWUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLGNBQWMsSUFBSSxHQUFHLEVBQUUsQ0FBQyxFQUFFO1lBQy9DLE9BQU8sR0FBRyxjQUFjLElBQUksR0FBRyxFQUFFLENBQUM7U0FDbkM7S0FDRjtJQUNELE9BQU8sU0FBUyxDQUFDO0FBQ25CLENBQUM7QUFsQkQsa0RBa0JDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hlY2tQYXRoV2l0aE11bHRpcGxlRXh0ZW5zaW9ucy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNoZWNrUGF0aFdpdGhNdWx0aXBsZUV4dGVuc2lvbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxXQUFXLE1BQU0sYUFBYSxDQUFDO0FBQ3RDLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUV0Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsK0JBQStCLENBQ3JELElBQVksRUFDWixJQUFjO0lBRWQsTUFBTSxTQUFTLEdBQUcsV0FBVyxDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUUxQyxJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLEVBQUU7UUFDekIsT0FBTyxJQUFJLENBQUM7S0FDYjtJQUVELE1BQU0sY0FBYyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxTQUFTLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUN6RCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUNwQyxNQUFNLEdBQUcsR0FBRyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDcEIsSUFBSSxJQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsY0FBYyxJQUFJLEdBQUcsRUFBRSxDQUFDLEVBQUU7WUFDL0MsT0FBTyxHQUFHLGNBQWMsSUFBSSxHQUFHLEVBQUUsQ0FBQztTQUNuQztLQUNGO0lBQ0QsT0FBTyxTQUFTLENBQUM7QUFDbkIsQ0FBQyJ9

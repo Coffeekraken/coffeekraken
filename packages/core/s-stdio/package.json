@@ -15,6 +15,7 @@
     "@coffeekraken/s-log": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
+    "inquirer": "^8.0.0",
     "minimatch": "^3.0.4",
     "stack-trace": "0.0.10",
     "terminal-kit": "^2.0.7"

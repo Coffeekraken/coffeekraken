@@ -4,17 +4,16 @@
 require = require('esm')(module, {});
 // module.exports = require('./main.js');
 
-import __childProcess from 'child_process';
-import __glob from 'glob-all';
-import __packageRoot from '../node/path/packageRoot';
-import __path from 'path';
-import __fs from 'fs';
-import __isPath from '../shared/is/path';
-import __parseHtml from '../shared/console/parseHtml';
-import __sugarJson from '../node/sugar/sugarJson';
-import __SSugarJson from '@coffeekraken/s-sugar-json';
+const __childProcess = require('child_process');
+const __glob = require('glob-all');
+const __packageRoot = require('../node/path/packageRoot');
+const __path = require('path');
+const __fs = require('fs');
+const __isPath = require('../shared/is/path').default;
+const __parseHtml = require('../shared/console/parseHtml').default;
+const __SSugarJson = require('@coffeekraken/s-sugar-json').default;
 
-import '../node/index';
+require('../node/index');
 
 /**
  * @name            sugar.cli

@@ -35,7 +35,9 @@ function sugarBanner(settings: ISugarBannerSettings = {}): string {
     {
       version: '',
       borders: true,
-      marginLeft: 2
+      marginLeft: 2,
+      paddingTop: 0,
+      paddingBottom: 0
     },
     settings
   );
@@ -60,13 +62,29 @@ function sugarBanner(settings: ISugarBannerSettings = {}): string {
     `<yellow>${settings.borders ? '█' : ''}</yellow><white>${' '.repeat(
       settings.marginLeft
     )}             </white><yellow>|___/</yellow>`
-  ]
-    .map((line) => {
-      return line;
-    })
-    .join('\n');
+  ].map((line) => {
+    return line;
+  });
+  if (settings.paddingTop) {
+    for (let i = 0; i < settings.paddingTop; i++) {
+      value.unshift(
+        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
+          settings.marginLeft
+        )}</yellow>`
+      );
+    }
+  }
+  if (settings.paddingBottom) {
+    for (let i = 0; i < settings.paddingBottom; i++) {
+      value.push(
+        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
+          settings.marginLeft
+        )}</yellow>`
+      );
+    }
+  }
 
-  return value;
+  return value.join('\n');
 }
 
 export default sugarBanner;

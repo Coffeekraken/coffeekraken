@@ -1,15 +1,9 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.interface = void 0;
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const theme_1 = __importDefault(require("../../utils/theme"));
-class postcssSugarPluginSizeClassesMixinInterface extends s_interface_1.default {
+import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
+class postcssSugarPluginSizeClassesMixinInterface extends __SInterface {
 }
-exports.interface = postcssSugarPluginSizeClassesMixinInterface;
 postcssSugarPluginSizeClassesMixinInterface.definition = {};
+export { postcssSugarPluginSizeClassesMixinInterface as interface };
 /**
  * @name           classes
  * @namespace      mixins.size
@@ -26,8 +20,8 @@ postcssSugarPluginSizeClassesMixinInterface.definition = {};
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function default_1({ params, atRule, processNested }) {
-    const sizes = theme_1.default().config('size');
+export default function ({ params, atRule, processNested }) {
+    const sizes = __theme().config('size');
     const cssArray = [];
     Object.keys(sizes).forEach((sizeName) => {
         const size = sizes[sizeName];
@@ -52,5 +46,4 @@ function default_1({ params, atRule, processNested }) {
     const AST = processNested(cssArray.join('\n'));
     atRule.replaceWith(AST);
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUEsNEVBQXFEO0FBQ3JELDhEQUF3QztBQUV4QyxNQUFNLDJDQUE0QyxTQUFRLHFCQUFZOztBQUdkLGdFQUFTO0FBRnhELHNEQUFVLEdBQUcsRUFBRSxDQUFDO0FBSXpCOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILG1CQUF5QixFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFLZDtJQUNDLE1BQU0sS0FBSyxHQUFHLGVBQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQztJQUV2QyxNQUFNLFFBQVEsR0FBYSxFQUFFLENBQUM7SUFFOUIsTUFBTSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUN0QyxNQUFNLElBQUksR0FBRyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7UUFFN0IsUUFBUSxDQUFDLElBQUksQ0FDWDtZQUNFLEtBQUs7WUFDTCw2QkFBNkIsUUFBUSxFQUFFO1lBQ3ZDLDJDQUEyQztZQUMzQyw2QkFBNkI7WUFDN0IsSUFBSTtZQUNKLDBDQUEwQyxRQUFRLDBCQUEwQjtZQUM1RSxJQUFJO1lBQ0oseUJBQXlCO1lBQ3pCLHdCQUF3QixRQUFRLElBQUk7WUFDcEMsdUJBQXVCO1lBQ3ZCLFVBQVU7WUFDVixLQUFLO1lBQ0wsV0FBVyxRQUFRLElBQUk7WUFDdkIsaUJBQWlCLElBQUksR0FBRztZQUN4QixHQUFHO1NBQ0osQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQ2IsQ0FBQztJQUNKLENBQUMsQ0FBQyxDQUFDO0lBRUgsTUFBTSxHQUFHLEdBQUcsYUFBYSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUMvQyxNQUFNLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzFCLENBQUM7QUF2Q0QsNEJBdUNDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSwyQ0FBNEMsU0FBUSxZQUFZOztBQUM3RCxzREFBVSxHQUFHLEVBQUUsQ0FBQztBQUV6QixPQUFPLEVBQUUsMkNBQTJDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFcEU7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFLZDtJQUNDLE1BQU0sS0FBSyxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQztJQUV2QyxNQUFNLFFBQVEsR0FBYSxFQUFFLENBQUM7SUFFOUIsTUFBTSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUN0QyxNQUFNLElBQUksR0FBRyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7UUFFN0IsUUFBUSxDQUFDLElBQUksQ0FDWDtZQUNFLEtBQUs7WUFDTCw2QkFBNkIsUUFBUSxFQUFFO1lBQ3ZDLDJDQUEyQztZQUMzQyw2QkFBNkI7WUFDN0IsSUFBSTtZQUNKLDBDQUEwQyxRQUFRLDBCQUEwQjtZQUM1RSxJQUFJO1lBQ0oseUJBQXlCO1lBQ3pCLHdCQUF3QixRQUFRLElBQUk7WUFDcEMsdUJBQXVCO1lBQ3ZCLFVBQVU7WUFDVixLQUFLO1lBQ0wsV0FBVyxRQUFRLElBQUk7WUFDdkIsaUJBQWlCLElBQUksR0FBRztZQUN4QixHQUFHO1NBQ0osQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQ2IsQ0FBQztJQUNKLENBQUMsQ0FBQyxDQUFDO0lBRUgsTUFBTSxHQUFHLEdBQUcsYUFBYSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUMvQyxNQUFNLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzFCLENBQUMifQ==

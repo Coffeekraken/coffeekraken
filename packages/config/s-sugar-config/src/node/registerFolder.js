@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name            registerFolder
  * @namespace       shared
@@ -17,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function registerFolder(path, scope, packageName) {
+export default function registerFolder(path, scope, packageName) {
     // @ts-ignore
     (global !== null && global !== void 0 ? global : window)._registeredConfigFolderPaths.push({
         path,
@@ -25,5 +23,4 @@ function registerFolder(path, scope, packageName) {
         packageName
     });
 }
-exports.default = registerFolder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnaXN0ZXJGb2xkZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZWdpc3RlckZvbGRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsU0FBd0IsY0FBYyxDQUNwQyxJQUFZLEVBQ1osS0FBc0UsRUFDdEUsV0FBb0I7SUFFcEIsYUFBYTtJQUNiLENBQUMsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksTUFBTSxDQUFDLENBQUMsNEJBQTRCLENBQUMsSUFBSSxDQUFDO1FBQ25ELElBQUk7UUFDSixLQUFLLEVBQUUsS0FBSyxhQUFMLEtBQUssY0FBTCxLQUFLLEdBQUksU0FBUztRQUN6QixXQUFXO0tBQ1osQ0FBQyxDQUFDO0FBQ0wsQ0FBQztBQVhELGlDQVdDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnaXN0ZXJGb2xkZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZWdpc3RlckZvbGRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsY0FBYyxDQUNwQyxJQUFZLEVBQ1osS0FBc0UsRUFDdEUsV0FBb0I7SUFFcEIsYUFBYTtJQUNiLENBQUMsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksTUFBTSxDQUFDLENBQUMsNEJBQTRCLENBQUMsSUFBSSxDQUFDO1FBQ25ELElBQUk7UUFDSixLQUFLLEVBQUUsS0FBSyxhQUFMLEtBQUssY0FBTCxLQUFLLEdBQUksU0FBUztRQUN6QixXQUFXO0tBQ1osQ0FBQyxDQUFDO0FBQ0wsQ0FBQyJ9

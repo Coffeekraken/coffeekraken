@@ -1,11 +1,6 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const SProcessInterface_1 = __importDefault(require("./SProcessInterface"));
+import __SInterface from '@coffeekraken/s-interface';
+import __SProcessInterface from './SProcessInterface';
 /**
  * @name                SProcessInterface
  * @namespace           sugar.node.process.interface
@@ -18,13 +13,12 @@ const SProcessInterface_1 = __importDefault(require("./SProcessInterface"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SProcessInterface extends s_interface_1.default {
+export default class SProcessInterface extends __SInterface {
 }
-exports.default = SProcessInterface;
 // static extendsArray = ['SProcess', 'SPromise'];
-SProcessInterface.definition = Object.assign(Object.assign({}, SProcessInterface_1.default.definition), { command: {
+SProcessInterface.definition = Object.assign(Object.assign({}, __SProcessInterface.definition), { command: {
         type: 'String',
         alias: 'c',
         required: true
     } });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbW1hbmRQcm9jZXNzSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvbW1hbmRQcm9jZXNzSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFxRDtBQUNyRCw0RUFBc0Q7QUFFdEQ7Ozs7Ozs7Ozs7O0dBV0c7QUFDSCxNQUFxQixpQkFBa0IsU0FBUSxxQkFBWTs7QUFBM0Qsb0NBVUM7QUFUQyxrREFBa0Q7QUFDM0MsNEJBQVUsbUNBQ1osMkJBQW1CLENBQUMsVUFBVSxLQUNqQyxPQUFPLEVBQUU7UUFDUCxJQUFJLEVBQUUsUUFBUTtRQUNkLEtBQUssRUFBRSxHQUFHO1FBQ1YsUUFBUSxFQUFFLElBQUk7S0FDZixJQUNEIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbW1hbmRQcm9jZXNzSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvbW1hbmRQcm9jZXNzSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLG1CQUFtQixNQUFNLHFCQUFxQixDQUFDO0FBRXREOzs7Ozs7Ozs7OztHQVdHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sT0FBTyxpQkFBa0IsU0FBUSxZQUFZOztBQUN6RCxrREFBa0Q7QUFDM0MsNEJBQVUsbUNBQ1osbUJBQW1CLENBQUMsVUFBVSxLQUNqQyxPQUFPLEVBQUU7UUFDUCxJQUFJLEVBQUUsUUFBUTtRQUNkLEtBQUssRUFBRSxHQUFHO1FBQ1YsUUFBUSxFQUFFLElBQUk7S0FDZixJQUNEIn0=

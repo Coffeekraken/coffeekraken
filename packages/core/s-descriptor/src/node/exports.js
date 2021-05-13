@@ -1,25 +1,9 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SDescriptorResult = void 0;
-const SDescriptor_1 = __importDefault(require("../shared/SDescriptor"));
-const SDescriptorResult_1 = __importDefault(require("../shared/SDescriptorResult"));
-exports.SDescriptorResult = SDescriptorResult_1.default;
-const pathRule_1 = __importDefault(require("./rules/pathRule"));
-SDescriptor_1.default.registerRule(pathRule_1.default);
-__exportStar(require("../shared/SDescriptorResult"), exports);
-__exportStar(require("../shared/SDescriptor"), exports);
-exports.default = SDescriptor_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLHdFQUFnRDtBQUNoRCxvRkFBNEQ7QUFRbkQsNEJBUkYsMkJBQWlCLENBUUU7QUFOMUIsZ0VBQXdDO0FBQ3hDLHFCQUFXLENBQUMsWUFBWSxDQUFDLGtCQUFRLENBQUMsQ0FBQztBQUVuQyw4REFBNEM7QUFDNUMsd0RBQXNDO0FBR3RDLGtCQUFlLHFCQUFXLENBQUMifQ==
+import SDescriptor from '../shared/SDescriptor';
+import SDescriptorResult from '../shared/SDescriptorResult';
+import pathRule from './rules/pathRule';
+SDescriptor.registerRule(pathRule);
+export * from '../shared/SDescriptorResult';
+export * from '../shared/SDescriptor';
+export { SDescriptorResult };
+export default SDescriptor;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxXQUFXLE1BQU0sdUJBQXVCLENBQUM7QUFDaEQsT0FBTyxpQkFBaUIsTUFBTSw2QkFBNkIsQ0FBQztBQUU1RCxPQUFPLFFBQVEsTUFBTSxrQkFBa0IsQ0FBQztBQUN4QyxXQUFXLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBRW5DLGNBQWMsNkJBQTZCLENBQUM7QUFDNUMsY0FBYyx1QkFBdUIsQ0FBQztBQUV0QyxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsQ0FBQztBQUM3QixlQUFlLFdBQVcsQ0FBQyJ9

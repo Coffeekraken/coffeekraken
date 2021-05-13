@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,14 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/src/shared/object/deepMerge"));
-const fs_1 = __importDefault(require("fs"));
-const SCache_1 = __importDefault(require("./SCache"));
-class SFileCache extends SCache_1.default {
+import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
+import __fs from 'fs';
+import __SCache from './SCache';
+class SFileCache extends __SCache {
     /**
      * @name            constructor
      * @type            Function
@@ -27,7 +22,7 @@ class SFileCache extends SCache_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(name, settings) {
-        super(name, deepMerge_1.default({}, settings || {}));
+        super(name, __deepMerge({}, settings || {}));
     }
     /**
      * @name                            get
@@ -56,7 +51,7 @@ class SFileCache extends SCache_1.default {
             if (!metas)
                 return null;
             // get the file stats
-            const stats = fs_1.default.statSync(path);
+            const stats = __fs.statSync(path);
             if (stats.mtimeMs > metas.updated) {
                 return null;
             }
@@ -92,16 +87,16 @@ class SFileCache extends SCache_1.default {
         });
         return __awaiter(this, void 0, void 0, function* () {
             // check that the file actually exists
-            if (!fs_1.default.existsSync(path))
+            if (!__fs.existsSync(path))
                 return false;
             // read the file
             let content = value;
             if (!content)
-                content = fs_1.default.readFileSync(path, 'utf8');
+                content = __fs.readFileSync(path, 'utf8');
             // set the file in cache
             return _super.set.call(this, path, content, settings);
         });
     }
 }
-exports.default = SFileCache;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ZpbGVDYWNoZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGaWxlQ2FjaGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7QUFBQSxnR0FBMEU7QUFDMUUsNENBQXNCO0FBQ3RCLHNEQUF3RDtBQWlDeEQsTUFBTSxVQUFXLFNBQVEsZ0JBQVE7SUFDL0I7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxJQUFJLEVBQUUsUUFBa0M7UUFDbEQsS0FBSyxDQUFDLElBQUksRUFBRSxtQkFBVyxDQUFDLEVBQUUsRUFBRSxRQUFRLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztJQUMvQyxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0csR0FBRyxDQUFDLElBQUksRUFBRSxRQUF1Qzs7Ozs7WUFDckQsUUFBUSxtQkFDTixTQUFTLEVBQUUsSUFBSSxJQUNaLENBQUMsUUFBUSxJQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO1lBRUYsb0NBQW9DO1lBQ3BDLE1BQU0sS0FBSyxHQUFHLE1BQU0sT0FBTSxHQUFHLFlBQUMsSUFBSSxrQ0FDN0IsUUFBUSxLQUNYLFNBQVMsRUFBRSxLQUFLLElBQ2hCLENBQUM7WUFDSCxJQUFJLENBQUMsS0FBSztnQkFBRSxPQUFPLElBQUksQ0FBQztZQUN4QixxQkFBcUI7WUFDckIsTUFBTSxLQUFLLEdBQUcsWUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsQyxJQUFJLEtBQUssQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDLE9BQU8sRUFBRTtnQkFDakMsT0FBTyxJQUFJLENBQUM7YUFDYjtZQUNELG1CQUFtQjtZQUNuQixPQUFPLFFBQVEsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQztRQUNsRCxDQUFDO0tBQUE7SUFFRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BcUJHO0lBQ0csR0FBRyxDQUNQLElBQVksRUFDWixRQUFhLElBQUksRUFDakIsUUFBdUM7Ozs7O1lBRXZDLHNDQUFzQztZQUN0QyxJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUM7Z0JBQUUsT0FBTyxLQUFLLENBQUM7WUFFekMsZ0JBQWdCO1lBQ2hCLElBQUksT0FBTyxHQUFRLEtBQUssQ0FBQztZQUN6QixJQUFJLENBQUMsT0FBTztnQkFBRSxPQUFPLEdBQUcsWUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUM7WUFFeEQsd0JBQXdCO1lBQ3hCLE9BQU8sT0FBTSxHQUFHLFlBQUMsSUFBSSxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUU7UUFDNUMsQ0FBQztLQUFBO0NBQ0Y7QUFFRCxrQkFBZSxVQUFVLENBQUMifQ==
+export default SFileCache;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ZpbGVDYWNoZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGaWxlQ2FjaGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxXQUFXLE1BQU0saURBQWlELENBQUM7QUFDMUUsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sUUFBZ0MsTUFBTSxVQUFVLENBQUM7QUFpQ3hELE1BQU0sVUFBVyxTQUFRLFFBQVE7SUFDL0I7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxJQUFJLEVBQUUsUUFBa0M7UUFDbEQsS0FBSyxDQUFDLElBQUksRUFBRSxXQUFXLENBQUMsRUFBRSxFQUFFLFFBQVEsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO0lBQy9DLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7Ozs7O09BZUc7SUFDRyxHQUFHLENBQUMsSUFBSSxFQUFFLFFBQXVDOzs7OztZQUNyRCxRQUFRLG1CQUNOLFNBQVMsRUFBRSxJQUFJLElBQ1osQ0FBQyxRQUFRLElBQUksRUFBRSxDQUFDLENBQ3BCLENBQUM7WUFFRixvQ0FBb0M7WUFDcEMsTUFBTSxLQUFLLEdBQUcsTUFBTSxPQUFNLEdBQUcsWUFBQyxJQUFJLGtDQUM3QixRQUFRLEtBQ1gsU0FBUyxFQUFFLEtBQUssSUFDaEIsQ0FBQztZQUNILElBQUksQ0FBQyxLQUFLO2dCQUFFLE9BQU8sSUFBSSxDQUFDO1lBQ3hCLHFCQUFxQjtZQUNyQixNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2xDLElBQUksS0FBSyxDQUFDLE9BQU8sR0FBRyxLQUFLLENBQUMsT0FBTyxFQUFFO2dCQUNqQyxPQUFPLElBQUksQ0FBQzthQUNiO1lBQ0QsbUJBQW1CO1lBQ25CLE9BQU8sUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDO1FBQ2xELENBQUM7S0FBQTtJQUVEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FxQkc7SUFDRyxHQUFHLENBQ1AsSUFBWSxFQUNaLFFBQWEsSUFBSSxFQUNqQixRQUF1Qzs7Ozs7WUFFdkMsc0NBQXNDO1lBQ3RDLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQztnQkFBRSxPQUFPLEtBQUssQ0FBQztZQUV6QyxnQkFBZ0I7WUFDaEIsSUFBSSxPQUFPLEdBQVEsS0FBSyxDQUFDO1lBQ3pCLElBQUksQ0FBQyxPQUFPO2dCQUFFLE9BQU8sR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQztZQUV4RCx3QkFBd0I7WUFDeEIsT0FBTyxPQUFNLEdBQUcsWUFBQyxJQUFJLEVBQUUsT0FBTyxFQUFFLFFBQVEsRUFBRTtRQUM1QyxDQUFDO0tBQUE7Q0FDRjtBQUVELGVBQWUsVUFBVSxDQUFDIn0=

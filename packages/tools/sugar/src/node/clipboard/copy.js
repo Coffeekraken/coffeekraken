@@ -1,12 +1,7 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const clipboardy_1 = __importDefault(require("clipboardy"));
-const toString_1 = __importDefault(require("../../shared/string/toString"));
-const copy_paste_1 = __importDefault(require("copy-paste"));
+import __clipboardy from 'clipboardy';
+import __toString from '../../shared/string/toString';
+import __ncp from 'copy-paste';
 /**
  * @name            copy
  * @namespace            node.clipboard
@@ -31,13 +26,13 @@ const copy_paste_1 = __importDefault(require("copy-paste"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function copy(text) {
-    text = toString_1.default(text);
+    text = __toString(text);
     try {
-        clipboardy_1.default.writeSync(text);
+        __clipboardy.writeSync(text);
     }
     catch (e) {
-        copy_paste_1.default.copy(text);
+        __ncp.copy(text);
     }
 }
-exports.default = copy;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29weS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvcHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsNERBQXNDO0FBQ3RDLDRFQUFzRDtBQUN0RCw0REFBK0I7QUFFL0I7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLElBQUksQ0FBQyxJQUFJO0lBQ2hCLElBQUksR0FBRyxrQkFBVSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3hCLElBQUk7UUFDRixvQkFBWSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztLQUM5QjtJQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ1Ysb0JBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDbEI7QUFDSCxDQUFDO0FBQ0Qsa0JBQWUsSUFBSSxDQUFDIn0=
+export default copy;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29weS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvcHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLFlBQVksQ0FBQztBQUN0QyxPQUFPLFVBQVUsTUFBTSw4QkFBOEIsQ0FBQztBQUN0RCxPQUFPLEtBQUssTUFBTSxZQUFZLENBQUM7QUFFL0I7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLElBQUksQ0FBQyxJQUFJO0lBQ2hCLElBQUksR0FBRyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDeEIsSUFBSTtRQUNGLFlBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDOUI7SUFBQyxPQUFPLENBQUMsRUFBRTtRQUNWLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDbEI7QUFDSCxDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==

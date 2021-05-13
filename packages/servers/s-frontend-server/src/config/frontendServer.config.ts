@@ -92,6 +92,13 @@ export default {
         target: '[config.vite.server.hostname]',
         changeOrigin: true
       }
+    },
+    vitePing: {
+      route: '/__vite_ping',
+      settings: {
+        target: '[config.vite.server.hostname]',
+        changeOrigin: true
+      }
     }
   },
 

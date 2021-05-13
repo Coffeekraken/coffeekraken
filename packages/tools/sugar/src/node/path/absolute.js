@@ -1,32 +1,27 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const glob_1 = __importDefault(require("../../shared/is/glob"));
-const path_1 = __importDefault(require("../../shared/is/path"));
-const path_2 = __importDefault(require("path"));
-const packageRoot_1 = __importDefault(require("./packageRoot"));
-function absolute(path, from = packageRoot_1.default(), settings = {}) {
+import __isGlob from '../../shared/is/glob';
+import __isPath from '../../shared/is/path';
+import __path from 'path';
+import __packageRoot from './packageRoot';
+function absolute(path, from = __packageRoot(), settings = {}) {
     settings = Object.assign({ glob: true }, settings);
     const isArray = Array.isArray(path);
     if (!isArray)
         path = [path];
     path = path.map((p) => {
-        if (path_2.default.isAbsolute(p))
+        if (__path.isAbsolute(p))
             return p;
-        if (glob_1.default(p)) {
+        if (__isGlob(p)) {
             if (settings.glob)
-                return path_2.default.resolve(from, p);
+                return __path.resolve(from, p);
             return p;
         }
-        else if (path_1.default(p))
-            return path_2.default.resolve(from, p);
+        else if (__isPath(p))
+            return __path.resolve(from, p);
         return p;
     });
     if (isArray)
         return path;
     return path[0];
 }
-exports.default = absolute;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWJzb2x1dGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhYnNvbHV0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLGdFQUE0QztBQUM1QyxnRUFBNEM7QUFDNUMsZ0RBQTBCO0FBQzFCLGdFQUEwQztBQWtDMUMsU0FBUyxRQUFRLENBQ2YsSUFBSSxFQUNKLElBQUksR0FBRyxxQkFBYSxFQUFFLEVBQ3RCLFdBQThCLEVBQUU7SUFFaEMsUUFBUSxtQkFDTixJQUFJLEVBQUUsSUFBSSxJQUNQLFFBQVEsQ0FDWixDQUFDO0lBQ0YsTUFBTSxPQUFPLEdBQUcsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNwQyxJQUFJLENBQUMsT0FBTztRQUFFLElBQUksR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBRTVCLElBQUksR0FBRyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7UUFDcEIsSUFBSSxjQUFNLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQztZQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ25DLElBQUksY0FBUSxDQUFDLENBQUMsQ0FBQyxFQUFFO1lBQ2YsSUFBSSxRQUFRLENBQUMsSUFBSTtnQkFBRSxPQUFPLGNBQU0sQ0FBQyxPQUFPLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBQ2xELE9BQU8sQ0FBQyxDQUFDO1NBQ1Y7YUFBTSxJQUFJLGNBQVEsQ0FBQyxDQUFDLENBQUM7WUFBRSxPQUFPLGNBQU0sQ0FBQyxPQUFPLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQ3ZELE9BQU8sQ0FBQyxDQUFDO0lBQ1gsQ0FBQyxDQUFDLENBQUM7SUFDSCxJQUFJLE9BQU87UUFBRSxPQUFPLElBQUksQ0FBQztJQUN6QixPQUFPLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUNqQixDQUFDO0FBRUQsa0JBQWUsUUFBUSxDQUFDIn0=
+export default absolute;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWJzb2x1dGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhYnNvbHV0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxzQkFBc0IsQ0FBQztBQUM1QyxPQUFPLFFBQVEsTUFBTSxzQkFBc0IsQ0FBQztBQUM1QyxPQUFPLE1BQU0sTUFBTSxNQUFNLENBQUM7QUFDMUIsT0FBTyxhQUFhLE1BQU0sZUFBZSxDQUFDO0FBa0MxQyxTQUFTLFFBQVEsQ0FDZixJQUFJLEVBQ0osSUFBSSxHQUFHLGFBQWEsRUFBRSxFQUN0QixXQUE4QixFQUFFO0lBRWhDLFFBQVEsbUJBQ04sSUFBSSxFQUFFLElBQUksSUFDUCxRQUFRLENBQ1osQ0FBQztJQUNGLE1BQU0sT0FBTyxHQUFHLEtBQUssQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDcEMsSUFBSSxDQUFDLE9BQU87UUFBRSxJQUFJLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUU1QixJQUFJLEdBQUcsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1FBQ3BCLElBQUksTUFBTSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFBRSxPQUFPLENBQUMsQ0FBQztRQUNuQyxJQUFJLFFBQVEsQ0FBQyxDQUFDLENBQUMsRUFBRTtZQUNmLElBQUksUUFBUSxDQUFDLElBQUk7Z0JBQUUsT0FBTyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNsRCxPQUFPLENBQUMsQ0FBQztTQUNWO2FBQU0sSUFBSSxRQUFRLENBQUMsQ0FBQyxDQUFDO1lBQUUsT0FBTyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztRQUN2RCxPQUFPLENBQUMsQ0FBQztJQUNYLENBQUMsQ0FBQyxDQUFDO0lBQ0gsSUFBSSxPQUFPO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDekIsT0FBTyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDakIsQ0FBQztBQUVELGVBQWUsUUFBUSxDQUFDIn0=

@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,42 +7,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
-const s_cache_1 = __importDefault(require("@coffeekraken/s-cache"));
-const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
-const fs_1 = __importDefault(require("fs"));
-const packageRoot_1 = __importDefault(require("../path/packageRoot"));
-const md5_1 = __importDefault(require("../../shared/crypt/md5"));
-const path_1 = __importDefault(require("path"));
-const s_file_1 = __importDefault(require("@coffeekraken/s-file"));
-const extractImport_1 = __importDefault(require("./extractImport"));
-function dependencyTree(filePath, settings) {
-    return new s_promise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
+import __SPromise from '@coffeekraken/s-promise';
+import __SCache from '@coffeekraken/s-cache';
+import __deepMerge from '../../shared/object/deepMerge';
+import __fs from 'fs';
+import __packageRoot from '../path/packageRoot';
+import __md5 from '../../shared/crypt/md5';
+import __path from 'path';
+import __SFile from '@coffeekraken/s-file';
+import __extractImport from './extractImport';
+export default function dependencyTree(filePath, settings) {
+    return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
         // settings
-        const set = deepMerge_1.default({
+        const set = __deepMerge({
             deep: false,
             cache: false
         }, settings || {});
-        const logPath = path_1.default.relative(packageRoot_1.default(), filePath);
+        const logPath = __path.relative(__packageRoot(), filePath);
         // check filename existence
-        if (!fs_1.default.existsSync(filePath)) {
+        if (!__fs.existsSync(filePath)) {
             throw new Error(`dependencyTree: Sorry but the filePath passed "<cyan>${filePath}</cyan>" seems to not exists...`);
         }
         // integrity parts
-        let packageJsonMtimeMs = -1, fileMtimeMs = fs_1.default.statSync(filePath).mtimeMs;
+        let packageJsonMtimeMs = -1, fileMtimeMs = __fs.statSync(filePath).mtimeMs;
         // package.json mtimeMs
-        const packageJsonPath = `${packageRoot_1.default()}/package.json`;
-        if (fs_1.default.existsSync(packageJsonPath)) {
-            packageJsonMtimeMs = fs_1.default.statSync(packageJsonPath).mtimeMs;
+        const packageJsonPath = `${__packageRoot()}/package.json`;
+        if (__fs.existsSync(packageJsonPath)) {
+            packageJsonMtimeMs = __fs.statSync(packageJsonPath).mtimeMs;
         }
         // init cache
-        const cache = new s_cache_1.default('dependency-tree');
+        const cache = new __SCache('dependency-tree');
         // integrity
-        const integrity = md5_1.default.encrypt({
+        const integrity = __md5.encrypt({
             packageJsonMtimeMs,
             fileMtimeMs
         });
@@ -80,8 +75,8 @@ function dependencyTree(filePath, settings) {
         // tree
         const tree = {};
         // create an SFile instance
-        const file = s_file_1.default.new(filePath);
-        const imports = extractImport_1.default(file.content);
+        const file = __SFile.new(filePath);
+        const imports = __extractImport(file.content);
         emit('log', {
             group: `s-dependency-tree`,
             value: `<green>[generated]</green> Dependency tree generated <green>successfully</green> for file "<cyan>${logPath}</cyan>"`
@@ -101,5 +96,4 @@ function dependencyTree(filePath, settings) {
         resolve(tree);
     }));
 }
-exports.default = dependencyTree;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVwZW5kZW5jeVRyZWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkZXBlbmRlbmN5VHJlZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztBQUFBLHdFQUFpRDtBQUNqRCxvRUFBNkM7QUFFN0MsOEVBQXdEO0FBQ3hELDRDQUFzQjtBQUN0QixzRUFBZ0Q7QUFDaEQsaUVBQTJDO0FBRTNDLGdEQUEwQjtBQUMxQixrRUFBMkM7QUFDM0Msb0VBQThDO0FBeUM5QyxTQUF3QixjQUFjLENBQ3BDLFFBQWdCLEVBQ2hCLFFBQW1EO0lBRW5ELE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDeEQsV0FBVztRQUNYLE1BQU0sR0FBRyxHQUFvQyxtQkFBVyxDQUN0RDtZQUNFLElBQUksRUFBRSxLQUFLO1lBQ1gsS0FBSyxFQUFFLEtBQUs7U0FDYixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FBQztRQUVGLE1BQU0sT0FBTyxHQUFHLGNBQU0sQ0FBQyxRQUFRLENBQUMscUJBQWEsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBRTNELDJCQUEyQjtRQUMzQixJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQUMsRUFBRTtZQUM5QixNQUFNLElBQUksS0FBSyxDQUNiLHdEQUF3RCxRQUFRLGlDQUFpQyxDQUNsRyxDQUFDO1NBQ0g7UUFFRCxrQkFBa0I7UUFDbEIsSUFBSSxrQkFBa0IsR0FBRyxDQUFDLENBQUMsRUFDekIsV0FBVyxHQUFHLFlBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUMsT0FBTyxDQUFDO1FBRWhELHVCQUF1QjtRQUN2QixNQUFNLGVBQWUsR0FBRyxHQUFHLHFCQUFhLEVBQUUsZUFBZSxDQUFDO1FBQzFELElBQUksWUFBSSxDQUFDLFVBQVUsQ0FBQyxlQUFlLENBQUMsRUFBRTtZQUNwQyxrQkFBa0IsR0FBRyxZQUFJLENBQUMsUUFBUSxDQUFDLGVBQWUsQ0FBQyxDQUFDLE9BQU8sQ0FBQztTQUM3RDtRQUVELGFBQWE7UUFDYixNQUFNLEtBQUssR0FBRyxJQUFJLGlCQUFRLENBQUMsaUJBQWlCLENBQUMsQ0FBQztRQUU5QyxZQUFZO1FBQ1osTUFBTSxTQUFTLEdBQUcsYUFBSyxDQUFDLE9BQU8sQ0FBQztZQUM5QixrQkFBa0I7WUFDbEIsV0FBVztTQUNaLENBQUMsQ0FBQztRQUVILGNBQWM7UUFDZCxJQUFJLEdBQUcsQ0FBQyxLQUFLLEVBQUU7WUFDYixJQUFJLENBQUMsS0FBSyxFQUFFO2dCQUNWLEtBQUssRUFBRSxtQkFBbUI7Z0JBQzFCLEtBQUssRUFBRSwyREFBMkQsT0FBTyxhQUFhO2FBQ3ZGLENBQUMsQ0FBQztZQUVILFdBQVc7WUFDWCxNQUFNLFdBQVcsR0FBRyxNQUFNLEtBQUssQ0FBQyxHQUFHLENBQUMsUUFBUSxDQUFDLENBQUM7WUFDOUMsSUFBSSxXQUFXLEVBQUU7Z0JBQ2Ysa0JBQWtCO2dCQUNsQixJQUFJLFdBQVcsQ0FBQyxTQUFTLEtBQUssU0FBUyxFQUFFO29CQUN2QyxJQUFJLENBQUMsS0FBSyxFQUFFO3dCQUNWLEtBQUssRUFBRSxtQkFBbUI7d0JBQzFCLEtBQUssRUFBRSwwREFBMEQsT0FBTyxVQUFVO3FCQUNuRixDQUFDLENBQUM7b0JBRUgsZ0NBQWdDO29CQUNoQyxPQUFPLE9BQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7aUJBQ2xDO2FBQ0Y7U0FDRjtRQUVELElBQUksQ0FBQyxLQUFLLEVBQUU7WUFDVixLQUFLLEVBQUUsbUJBQW1CO1lBQzFCLEtBQUssRUFBRSwwRUFBMEUsT0FBTyxhQUFhO1NBQ3RHLENBQUMsQ0FBQztRQUVILHNDQUFzQztRQUN0QyxrQ0FBa0M7UUFDbEMsWUFBWTtRQUNaLHdCQUF3QjtRQUN4QixzQ0FBc0M7UUFDdEMsTUFBTTtRQUVOLE9BQU87UUFDUCxNQUFNLElBQUksR0FBRyxFQUFFLENBQUM7UUFFaEIsMkJBQTJCO1FBQzNCLE1BQU0sSUFBSSxHQUFHLGdCQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBRW5DLE1BQU0sT0FBTyxHQUFHLHVCQUFlLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBRTlDLElBQUksQ0FBQyxLQUFLLEVBQUU7WUFDVixLQUFLLEVBQUUsbUJBQW1CO1lBQzFCLEtBQUssRUFBRSxvR0FBb0csT0FBTyxVQUFVO1NBQzdILENBQUMsQ0FBQztRQUVILHdCQUF3QjtRQUN4QixJQUFJLEdBQUcsQ0FBQyxLQUFLLEVBQUU7WUFDYixJQUFJLENBQUMsS0FBSyxFQUFFO2dCQUNWLEtBQUssRUFBRSxtQkFBbUI7Z0JBQzFCLEtBQUssRUFBRSxvRUFBb0UsT0FBTyxhQUFhO2FBQ2hHLENBQUMsQ0FBQztZQUVILE1BQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEVBQUU7Z0JBQ3hCLElBQUk7Z0JBQ0osU0FBUzthQUNWLENBQUMsQ0FBQztTQUNKO1FBRUQscUJBQXFCO1FBQ3JCLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNoQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ0wsQ0FBQztBQTFHRCxpQ0EwR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVwZW5kZW5jeVRyZWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkZXBlbmRlbmN5VHJlZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUNqRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3QyxPQUFPLFdBQVcsTUFBTSwrQkFBK0IsQ0FBQztBQUN4RCxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxhQUFhLE1BQU0scUJBQXFCLENBQUM7QUFDaEQsT0FBTyxLQUFLLE1BQU0sd0JBQXdCLENBQUM7QUFFM0MsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBQzFCLE9BQU8sT0FBTyxNQUFNLHNCQUFzQixDQUFDO0FBQzNDLE9BQU8sZUFBZSxNQUFNLGlCQUFpQixDQUFDO0FBeUM5QyxNQUFNLENBQUMsT0FBTyxVQUFVLGNBQWMsQ0FDcEMsUUFBZ0IsRUFDaEIsUUFBbUQ7SUFFbkQsT0FBTyxJQUFJLFVBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQ3hELFdBQVc7UUFDWCxNQUFNLEdBQUcsR0FBb0MsV0FBVyxDQUN0RDtZQUNFLElBQUksRUFBRSxLQUFLO1lBQ1gsS0FBSyxFQUFFLEtBQUs7U0FDYixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FBQztRQUVGLE1BQU0sT0FBTyxHQUFHLE1BQU0sQ0FBQyxRQUFRLENBQUMsYUFBYSxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFFM0QsMkJBQTJCO1FBQzNCLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxFQUFFO1lBQzlCLE1BQU0sSUFBSSxLQUFLLENBQ2Isd0RBQXdELFFBQVEsaUNBQWlDLENBQ2xHLENBQUM7U0FDSDtRQUVELGtCQUFrQjtRQUNsQixJQUFJLGtCQUFrQixHQUFHLENBQUMsQ0FB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

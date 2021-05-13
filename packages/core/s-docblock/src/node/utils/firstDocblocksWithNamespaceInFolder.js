@@ -1,4 +1,3 @@
-"use strict";
 // @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -9,18 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
-const find_in_files_1 = __importDefault(require("find-in-files"));
-const minimatch_1 = __importDefault(require("minimatch"));
-const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
-const filename_1 = __importDefault(require("@coffeekraken/sugar/node/fs/filename"));
-const extension_1 = __importDefault(require("@coffeekraken/sugar/node/fs/extension"));
-const SDocblock_1 = __importDefault(require("../../shared/SDocblock"));
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __findInFiles from 'find-in-files';
+import __minimatch from 'minimatch';
+import __fs from 'fs';
+import __path from 'path';
+import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
+import __SDocblock from '../../shared/SDocblock';
 /**
  * @name                  firstDocblockWithNamespaceInFolder
  * @namespace           sugar.node.docblock
@@ -47,31 +42,30 @@ const SDocblock_1 = __importDefault(require("../../shared/SDocblock"));
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function firstDocblockWithNamespaceInFolder(directory, settings = {}) {
+export default function firstDocblockWithNamespaceInFolder(directory, settings = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        settings = deepMerge_1.default({
+        settings = __deepMerge({
             exclude: '**/+(__tests__|__wip__)/**'
         }, settings);
-        if (!fs_1.default.existsSync(directory))
+        if (!__fs.existsSync(directory))
             return {};
-        const founded = yield find_in_files_1.default.find(`@namespace`, directory);
+        const founded = yield __findInFiles.find(`@namespace`, directory);
         const namespaceObj = {};
         Object.keys(founded).forEach((path) => {
-            const relativePath = path_1.default.relative(directory, path);
-            if (minimatch_1.default(relativePath, settings.exclude))
+            const relativePath = __path.relative(directory, path);
+            if (__minimatch(relativePath, settings.exclude))
                 return;
-            const content = fs_1.default.readFileSync(path, 'utf8');
-            const docblocks = new SDocblock_1.default(content);
+            const content = __fs.readFileSync(path, 'utf8');
+            const docblocks = new __SDocblock(content);
             const docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
             if (!docblock)
                 return;
             delete docblock.object.raw;
             const name = docblock.object.name ||
-                filename_1.default(path).replace(`.${extension_1.default(path)}`, '');
+                __getFilename(path).replace(`.${__extension(path)}`, '');
             namespaceObj[docblock.object.namespace + '.' + name] = Object.assign(Object.assign({}, docblock.object), { path: relativePath });
         });
         return namespaceObj;
     });
 }
-exports.default = firstDocblockWithNamespaceInFolder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlyc3REb2NibG9ja3NXaXRoTmFtZXNwYWNlSW5Gb2xkZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaXJzdERvY2Jsb2Nrc1dpdGhOYW1lc3BhY2VJbkZvbGRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7QUFFZCw0RkFBc0U7QUFDdEUsa0VBQTBDO0FBQzFDLDBEQUFvQztBQUNwQyw0Q0FBc0I7QUFDdEIsZ0RBQTBCO0FBQzFCLG9GQUFpRTtBQUNqRSxzRkFBZ0U7QUFDaEUsdUVBQWlEO0FBRWpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBOEIsa0NBQWtDLENBQzlELFNBQVMsRUFDVCxRQUFRLEdBQUcsRUFBRTs7UUFFYixRQUFRLEdBQUcsbUJBQVcsQ0FDcEI7WUFDRSxPQUFPLEVBQUUsNEJBQTRCO1NBQ3RDLEVBQ0QsUUFBUSxDQUNULENBQUM7UUFFRixJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUM7WUFBRSxPQUFPLEVBQUUsQ0FBQztRQUUzQyxNQUFNLE9BQU8sR0FBRyxNQUFNLHVCQUFhLENBQUMsSUFBSSxDQUFDLFlBQVksRUFBRSxTQUFTLENBQUMsQ0FBQztRQUVsRSxNQUFNLFlBQVksR0FBRyxFQUFFLENBQUM7UUFFeEIsTUFBTSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUNwQyxNQUFNLFlBQVksR0FBRyxjQUFNLENBQUMsUUFBUSxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsQ0FBQztZQUN0RCxJQUFJLG1CQUFXLENBQUMsWUFBWSxFQUFFLFFBQVEsQ0FBQyxPQUFPLENBQUM7Z0JBQUUsT0FBTztZQUV4RCxNQUFNLE9BQU8sR0FBRyxZQUFJLENBQUMsWUFBWSxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQztZQUVoRCxNQUFNLFNBQVMsR0FBRyxJQUFJLG1CQUFXLENBQUMsT0FBTyxDQUFDLENBQUM7WUFDM0MsTUFBTSxRQUFRLEdBQUcsU0FBUyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDO1lBRWxFLElBQUksQ0FBQyxRQUFRO2dCQUFFLE9BQU87WUFDdEIsT0FBTyxRQUFRLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQztZQUUzQixNQUFNLElBQUksR0FDUixRQUFRLENBQUMsTUFBTSxDQUFDLElBQUk7Z0JBQ3BCLGtCQUFhLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDLElBQUksbUJBQVcsQ0FBQyxJQUFJLENBQUMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDO1lBRTNELFlBQVksQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLFNBQVMsR0FBRyxHQUFHLEdBQUcsSUFBSSxDQUFDLG1DQUMvQyxRQUFRLENBQUMsTUFBTSxLQUNsQixJQUFJLEVBQUUsWUFBWSxHQUNuQixDQUFDO1FBQ0osQ0FBQyxDQUFDLENBQUM7UUFFSCxPQUFPLFlBQVksQ0FBQztJQUN0QixDQUFDO0NBQUE7QUF4Q0QscURBd0NDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlyc3REb2NibG9ja3NXaXRoTmFtZXNwYWNlSW5Gb2xkZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaXJzdERvY2Jsb2Nrc1dpdGhOYW1lc3BhY2VJbkZvbGRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7O0FBRWQsT0FBTyxXQUFXLE1BQU0sNkNBQTZDLENBQUM7QUFDdEUsT0FBTyxhQUFhLE1BQU0sZUFBZSxDQUFDO0FBQzFDLE9BQU8sV0FBVyxNQUFNLFdBQVcsQ0FBQztBQUNwQyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBQzFCLE9BQU8sYUFBYSxNQUFNLHNDQUFzQyxDQUFDO0FBQ2pFLE9BQU8sV0FBVyxNQUFNLHVDQUF1QyxDQUFDO0FBQ2hFLE9BQU8sV0FBVyxNQUFNLHdCQUF3QixDQUFDO0FBRWpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBZ0Isa0NBQWtDLENBQzlELFNBQVMsRUFDVCxRQUFRLEdBQUcsRUFBRTs7UUFFYixRQUFRLEdBQUcsV0FBVyxDQUNwQjtZQUNFLE9BQU8sRUFBRSw0QkFBNEI7U0FDdEMsRUFDRCxRQUFRLENBQ1QsQ0FBQztRQUVGLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQztZQUFFLE9BQU8sRUFBRSxDQUFDO1FBRTNDLE1BQU0sT0FBTyxHQUFHLE1BQU0sYUFBYSxDQUFDLElBQUksQ0FBQyxZQUFZLEVBQUUsU0FBUyxDQUFDLENBQUM7UUFFbEUsTUFBTSxZQUFZLEdBQUcsRUFBRSxDQUFDO1FBRXhCLE1BQU0sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7WUFDcEMsTUFBTSxZQUFZLEdBQUcsTUFBTSxDQUFDLFFBQVEsQ0FBQyxTQUFTLEVBQUUsSUFBSSxDQUFDLENBQUM7WUFDdEQsSUFBSSxXQUFXLENBQUMsWUFBWSxFQUFFLFFBQVEsQ0FBQyxPQUFPLENBQUM7Z0JBQUUsT0FBTztZQUV4RCxNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQztZQUVoRCxNQUFNLFNBQVMsR0FBRyxJQUFJLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUMzQyxNQUFNLFFBQVEsR0FBRyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUM7WUFFbEUsSUFBSSxDQUFDLFFBQVE7Z0JBQUUsT0FBTztZQUN0QixPQUFPLFFBQVEsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDO1lBRTNCLE1BQU0sSUFBSSxHQUNSLFFBQVEsQ0FBQyxNQUFNLENBQUMsSUFBSTtnQkFDcEIsYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDLE9BQU8sQ0FBQyxJQUFJLFdBQVcsQ0FBQyxJQUFJLENBQUMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDO1lBRTNELFlBQVksQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLFNBQVMsR0FBRyxHQUFHLEdBQUcsSUFBSSxDQUFDLG1DQUMvQyxRQUFRLENBQUMsTUFBTSxLQUNsQixJQUFJLEVBQUUsWUFBWSxHQUNuQixDQUFDO1FBQ0osQ0FBQyxDQUFDLENBQUM7UUFFSCxPQUFPLFlBQVksQ0FBQztJQUN0QixDQUFDO0NBQUEifQ==

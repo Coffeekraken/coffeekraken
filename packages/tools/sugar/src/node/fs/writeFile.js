@@ -1,13 +1,8 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const folderPath_1 = __importDefault(require("./folderPath"));
-const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
-const fs_extra_1 = __importDefault(require("fs-extra"));
-const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
+import __folderPath from './folderPath';
+import __ensureDirSync from './ensureDirSync';
+import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 /**
  * @name        writeFile
  * @namespace            node.fs
@@ -38,10 +33,10 @@ const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens")
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function writeFile(path, data, options = {}) {
-    path = replacePathTokens_1.default(path);
-    const folderPath = folderPath_1.default(path);
-    ensureDirSync_1.default(folderPath);
-    return fs_extra_1.default.outputFile(path, data, options);
+    path = __replacePathTokens(path);
+    const folderPath = __folderPath(path);
+    __ensureDirSync(folderPath);
+    return __fs.outputFile(path, data, options);
 }
-exports.default = writeFile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JpdGVGaWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsid3JpdGVGaWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF3QztBQUN4QyxvRUFBOEM7QUFDOUMsd0RBQTRCO0FBQzVCLGtGQUE0RDtBQUU1RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQVMsU0FBUyxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsT0FBTyxHQUFHLEVBQUU7SUFDekMsSUFBSSxHQUFHLDJCQUFtQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2pDLE1BQU0sVUFBVSxHQUFHLG9CQUFZLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEMsdUJBQWUsQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUM1QixPQUFPLGtCQUFJLENBQUMsVUFBVSxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsT0FBTyxDQUFDLENBQUM7QUFDOUMsQ0FBQztBQUNELGtCQUFlLFNBQVMsQ0FBQyJ9
+export default writeFile;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JpdGVGaWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsid3JpdGVGaWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxjQUFjLENBQUM7QUFDeEMsT0FBTyxlQUFlLE1BQU0saUJBQWlCLENBQUM7QUFDOUMsT0FBTyxJQUFJLE1BQU0sVUFBVSxDQUFDO0FBQzVCLE9BQU8sbUJBQW1CLE1BQU0sMkJBQTJCLENBQUM7QUFFNUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3pDLElBQUksR0FBRyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNqQyxNQUFNLFVBQVUsR0FBRyxZQUFZLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEMsZUFBZSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQzVCLE9BQU8sSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQzlDLENBQUM7QUFDRCxlQUFlLFNBQVMsQ0FBQyJ9

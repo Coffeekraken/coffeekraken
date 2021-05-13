@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,17 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-const ensureDirSync_1 = __importDefault(require("@coffeekraken/sugar/src/node/fs/ensureDirSync"));
-const removeSync_1 = __importDefault(require("@coffeekraken/sugar/src/node/fs/removeSync"));
-const tmpDir_1 = __importDefault(require("@coffeekraken/sugar/src/node/path/tmpDir"));
-const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/src/shared/object/deepMerge"));
-const fs_1 = __importDefault(require("fs"));
-const SCacheAdapter_1 = __importDefault(require("./SCacheAdapter"));
+import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __ensureDirSync from '@coffeekraken/sugar/src/node/fs/ensureDirSync';
+import __removeSync from '@coffeekraken/sugar/src/node/fs/removeSync';
+import __tmpDir from '@coffeekraken/sugar/src/node/path/tmpDir';
+import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
+import __fs from 'fs';
+import __SCacheAdapter from './SCacheAdapter';
 /**
  * @name                                SCacheFsAdapter
  * @namespace           sugar.node.fs.cacheAdapters
@@ -42,7 +37,7 @@ const SCacheAdapter_1 = __importDefault(require("./SCacheAdapter"));
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SCacheFsAdapter extends SCacheAdapter_1.default {
+export default class SCacheFsAdapter extends __SCacheAdapter {
     /**
      * @name                              constructor
      * @type                              Function
@@ -55,9 +50,9 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(deepMerge_1.default({
+        super(__deepMerge({
             fsCacheAdapter: {
-                rootDir: s_sugar_config_1.default('storage.cacheDir') || `${tmpDir_1.default()}/SCache`
+                rootDir: __sugarConfig('storage.cacheDir') || `${__tmpDir()}/SCache`
             }
         }, settings));
     }
@@ -97,12 +92,12 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
             // generate the item fs name
             const fsName = `${this.cache.id}/${name}.json`.replace(/\/\//gm, '/');
             // ensure we have the folder
-            ensureDirSync_1.default(`${this.fsCacheAdapterSettings.rootDir}/${fsName
+            __ensureDirSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName
                 .split('/')
                 .slice(0, -1)
                 .join('/')}`);
             // write the json file
-            fs_1.default.writeFileSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`, value);
+            __fs.writeFileSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`, value);
             // write has been done correctly
             return true;
         });
@@ -128,10 +123,10 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
                 name = name.slice(1);
             const fsName = `${this.cache.id}/${name}.json`;
             // check that the file exists
-            if (!fs_1.default.existsSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`))
+            if (!__fs.existsSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`))
                 return null;
             // read the json file
-            return fs_1.default.readFileSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`, 'utf8');
+            return __fs.readFileSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`, 'utf8');
         });
     }
     /**
@@ -153,7 +148,7 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
             // generate the item fs name
             const fsName = `${this.cache.id}/${name}.json`;
             // read the json file
-            return fs_1.default.unlinkSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`);
+            return __fs.unlinkSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`);
         });
     }
     /**
@@ -172,7 +167,7 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
     clear() {
         return __awaiter(this, void 0, void 0, function* () {
             // read the json file
-            return removeSync_1.default(`${this.fsCacheAdapterSettings.rootDir}/${this.cache.id}`);
+            return __removeSync(`${this.fsCacheAdapterSettings.rootDir}/${this.cache.id}`);
         });
     }
     /**
@@ -196,6 +191,5 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
         });
     }
 }
-exports.default = SCacheFsAdapter;
 SCacheFsAdapter.id = 'fs';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlRnNBZGFwdGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NhY2hlRnNBZGFwdGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQXlEO0FBQ3pELGtHQUE0RTtBQUM1RSw0RkFBc0U7QUFDdEUsc0ZBQWdFO0FBQ2hFLGdHQUEwRTtBQUMxRSw0Q0FBc0I7QUFDdEIsb0VBQThDO0FBRTlDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsTUFBcUIsZUFBZ0IsU0FBUSx1QkFBZTtJQWlCMUQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7UUFDdkIsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxjQUFjLEVBQUU7Z0JBQ2QsT0FBTyxFQUFFLHdCQUFhLENBQUMsa0JBQWtCLENBQUMsSUFBSSxHQUFHLGdCQUFRLEVBQUUsU0FBUzthQUNyRTtTQUNGLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztJQUNKLENBQUM7SUFwQ0Q7Ozs7Ozs7OztPQVNHO0lBQ0gsSUFBSSxzQkFBc0I7UUFDeEIsT0FBYSxJQUFLLENBQUMsU0FBUyxDQUFDLGNBQWMsQ0FBQztJQUM5QyxDQUFDO0lBMEJEOzs7Ozs7Ozs7Ozs7Ozs7OztPQWlCRztJQUNHLEdBQUcsQ0FBQyxJQUFJLEVBQUUsS0FBSzs7WUFDbkIsNEJBQTRCO1lBQzVCLE1BQU0sTUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFLElBQUksSUFBSSxPQUFPLENBQUMsT0FBTyxDQUFDLFFBQVEsRUFBRSxHQUFHLENBQUMsQ0FBQztZQUV0RSw0QkFBNEI7WUFDNUIsdUJBQWUsQ0FDYixHQUFHLElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxPQUFPLElBQUksTUFBTTtpQkFDN0MsS0FBSyxDQUFDLEdBQUcsQ0FBQztpQkFDVixLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO2lCQUNaLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUNmLENBQUM7WUFFRixzQkFBc0I7WUFDdEIsWUFBSSxDQUFDLGFBQWEsQ0FDaEIsR0FBRyxJQUFJLENBQUMsc0JBQXNCLENBQUMsT0FBTyxJQUFJLE1BQU0sRUFBRSxFQUNsRCxLQUFLLENBQ04sQ0FBQztZQUNGLGdDQUFnQztZQUNoQyxPQUFPLElBQUksQ0FBQztRQUNkLENBQUM7S0FBQTtJQUVEOzs7Ozs7Ozs7Ozs7O09BYUc7SUFDRyxHQUFHLENBQUMsSUFBSTs7WUFDWiw0QkFBNEI7WUFFNUIsSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsS0FBSyxHQUFHO2dCQUFFLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ25ELE1BQU0sTUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFLElBQUksSUFBSSxPQUFPLENBQUM7WUFFL0MsNkJBQTZCO1lBQzdCLElBQUksQ0FBQyxZQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsSUFBSSxDQUFDLHNCQUFzQixDQUFDLE9BQU8sSUFBSSxNQUFNLEVBQUUsQ0FBQztnQkFDdEUsT0FBTyxJQUFJLENBQUM7WUFDZCxxQkFBcUI7WUFDckIsT0FBTyxZQUFJLENBQUMsWUFBWSxDQUN0QixHQUFHLElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxPQUFPLElBQUksTUFBTSxFQUFFLEVBQ2xELE1BQU0sQ0FDUCxDQUFDO1FBQ0osQ0FBQztLQUFBO0lBRUQ7Ozs7Ozs7Ozs7Ozs7T0FhRztJQUNHLE1BQU0sQ0FBQyxJQUFJOztZQUNmLDRCQUE0QjtZQUM1QixNQUFNLE1BQU0sR0FBRyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsRUFBRSxJQUFJLElBQUksT0FBTyxDQUFDO1lBQy9DLHFCQUFxQjtZQUNyQixPQUFPLFlBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxJQUFJLENBQUMsc0JBQXNCLENBQUMsT0FBTyxJQUFJLE1BQU0sRUFBRSxDQUFDLENBQUM7UUFDN0UsQ0FBQztLQUFBO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0csS0FBSzs7WUFDVCxxQkFBcUI7WUFDckIsT0FBTyxvQkFBWSxDQUNqQixHQUFHLElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxPQUFPLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFLEVBQUUsQ0FDMUQsQ0FBQztRQUNKLENBQUM7S0FBQTtJQUVEOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0csSUFBSTs7WUFDUixPQUFPLEVBQUUsQ0FBQztRQUNaLENBQUM7S0FBQTs7QUF4S0gsa0NBeUtDO0FBeEtRLGtCQUFFLEdBQUcsSUFBSSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlRnNBZGFwdGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NhY2hlRnNBZGFwdGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sYUFBYSxNQUFNLDhCQUE4QixDQUFDO0FBQ3pELE9BQU8sZUFBZSxNQUFNLCtDQUErQyxDQUFDO0FBQzVFLE9BQU8sWUFBWSxNQUFNLDRDQUE0QyxDQUFDO0FBQ3RFLE9BQU8sUUFBUSxNQUFNLDBDQUEwQyxDQUFDO0FBQ2hFLE9BQU8sV0FBVyxNQUFNLGlEQUFpRCxDQUFDO0FBQzFFLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUN0QixPQUFPLGVBQWUsTUFBTSxpQkFBaUIsQ0FBQztBQUU5Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLE9BQU8sZUFBZ0IsU0FBUSxlQUFlO0lBaUIxRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsWUFBWSxRQUFRLEdBQUcsRUFBRTtRQUN2QixLQUFLLENBQ0gsV0FBVyxDQUNUO1lBQ0UsY0FBYyxFQUFFO2dCQUNkLE9BQU8sRUFBRSxhQUFhLENBQUMsa0JBQWtCLENBQUMsSUFBSSxHQUFHLFFBQVEsRUFBRSxTQUFTO2FBQ3JFO1NBQ0YsRUFDRCxRQUFRLENBQ1QsQ0FDRixDQUFDO0lBQ0osQ0FBQztJQXBDRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLHNCQUFzQjtRQUN4QixPQUFhLElBQUssQ0FBQyxTQUFTLENBQUMsY0FBYyxDQUFDO0lBQzlDLENBQUM7SUEwQkQ7Ozs7Ozs7Ozs7Ozs7Ozs7O09BaUJHO0lBQ0csR0FBRyxDQUFDLElBQUksRUFBRSxLQUFLOztZQUNuQiw0QkFBNEI7WUFDNUIsTUFBTSxNQUFNLEdBQUcsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUUsSUFBSSxJQUFJLE9BQU8sQ0FBQyxPQUFPLENBQUMsUUFBUSxFQUFFLEdBQUcsQ0FBQyxDQUFDO1lBRXRFLDRCQUE0QjtZQUM1QixlQUFlLENBQ2IsR0FBRyxJQUFJLENBQUMsc0JBQXNCLENBQUMsT0FBTyxJQUFJLE1BQU07aUJBQzdDLEtBQUssQ0FBQyxHQUFHLENBQUM7aUJBQ1YsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztpQkFDWixJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FDZixDQUFDO1lBRUYsc0JBQXNCO1lBQ3RCLElBQUksQ0FBQyxhQUFhLENBQ2hCLEdBQUcsSUFBSSxDQUFDLHNCQUFzQixDQUFDLE9BQU8sSUFBSSxNQUFNLEVBQUUsRUFDbEQsS0FBSyxDQUNOLENBQUM7WUFDRixnQ0FBZ0M7WUFDaEMsT0FBTyxJQUFJLENBQUM7UUFDZCxDQUFDO0tBQUE7SUFFRDs7Ozs7Ozs7Ozs7OztPQWFHO0lBQ0csR0FBRyxDQUFDLElBQUk7O1lBQ1osNEJBQTRCO1lBRTVCLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssR0FBRztnQkFBRSxJQUFJLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNuRCxNQUFNLE1BQU0sR0FBRyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsRUFBRSxJQUFJLElBQUksT0FBTyxDQUFDO1lBRS9DLDZCQUE2QjtZQUM3QixJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxPQUFPLElBQUksTUFBTSxFQUFFLENBQUM7Z0JBQ3RFLE9BQU8sSUFBSSxDQUFDO1lBQ2QscUJBQXFCO1lBQ3JCLE9BQU8sSUFBSSxDQUFDLFlBQVksQ0FDdEIsR0FBRyxJQUFJLENBQUMsc0JBQXNCLENBQUMsT0FBTyxJQUFJLE1BQU0sRUFBRSxFQUNsRCxNQUFNLENBQ1AsQ0FBQztRQUNKLENBQUM7S0FBQTtJQUVEOzs7Ozs7Ozs7Ozs7O09BYUc7SUFDRyxNQUFNLENBQUMsSUFBSTs7WUFDZiw0QkFBNEI7WUFDNUIsTUFBTSxNQUFNLEdBQUcsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUUsSUFBSSxJQUFJLE9BQU8sQ0FBQztZQUMvQyxxQkFBcUI7WUFDckIsT0FBTyxJQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsSUFBSSxDQUFDLHNCQUFzQixDQUFDLE9BQU8sSUFBSSxNQUFNLEVBQUUsQ0FBQyxDQUFDO1FBQzdFLENBQUM7S0FBQTtJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNHLEtBQUs7O1lBQ1QscUJBQXFCO1lBQ3JCLE9BQU8sWUFBWSxDQUNqQixHQUFHLElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxPQUFPLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFLEVBQUUsQ0FDMUQsQ0FBQztRQUNKLENBQUM7S0FBQTtJQUVEOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0csSUFBSTs7WUFDUixPQUFPLEVBQUUsQ0FBQztRQUNaLENBQUM7S0FBQTs7QUF2S00sa0JBQUUsR0FBRyxJQUFJLENBQUMifQ==

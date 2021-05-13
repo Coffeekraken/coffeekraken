@@ -1,12 +1,7 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
-const fs_1 = __importDefault(require("fs"));
-const standardizeJson_1 = __importDefault(require("@coffeekraken/sugar/shared/npm/utils/standardizeJson"));
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __fs from 'fs';
+import __standardizeJson from '@coffeekraken/sugar/shared/npm/utils/standardizeJson';
 /**
  * @name            packageJsonMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -36,16 +31,16 @@ const standardizeJson_1 = __importDefault(require("@coffeekraken/sugar/shared/np
  */
 function packageJsonMiddleware(settings = {}) {
     return function (req, res, next) {
-        const packageJsonPath = `${packageRoot_1.default()}/package.json`;
+        const packageJsonPath = `${__packageRoot()}/package.json`;
         let pkg;
-        if (!fs_1.default.existsSync(packageJsonPath)) {
+        if (!__fs.existsSync(packageJsonPath)) {
         }
         else {
             pkg = require(packageJsonPath);
-            res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { packageJson: standardizeJson_1.default(pkg) });
+            res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { packageJson: __standardizeJson(pkg) });
         }
         return next();
     };
 }
-exports.default = packageJsonMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZUpzb25NaWRkbGV3YXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFja2FnZUpzb25NaWRkbGV3YXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRGQUFzRTtBQUN0RSw0Q0FBc0I7QUFDdEIsMkdBQXFGO0FBRXJGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMscUJBQXFCLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDMUMsT0FBTyxVQUFVLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTtRQUM3QixNQUFNLGVBQWUsR0FBRyxHQUFHLHFCQUFhLEVBQUUsZUFBZSxDQUFDO1FBQzFELElBQUksR0FBRyxDQUFDO1FBQ1IsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDLEVBQUU7U0FDdEM7YUFBTTtZQUNMLEdBQUcsR0FBRyxPQUFPLENBQUMsZUFBZSxDQUFDLENBQUM7WUFDL0IsR0FBRyxDQUFDLFlBQVksbUNBQ1gsQ0FBQyxHQUFHLENBQUMsWUFBWSxJQUFJLEVBQUUsQ0FBQyxLQUMzQixXQUFXLEVBQUUseUJBQWlCLENBQUMsR0FBRyxDQUFDLEdBQ3BDLENBQUM7U0FDSDtRQUNELE9BQU8sSUFBSSxFQUFFLENBQUM7SUFDaEIsQ0FBQyxDQUFDO0FBQ0osQ0FBQztBQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=
+export default packageJsonMiddleware;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZUpzb25NaWRkbGV3YXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFja2FnZUpzb25NaWRkbGV3YXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSwyQ0FBMkMsQ0FBQztBQUN0RSxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxpQkFBaUIsTUFBTSxzREFBc0QsQ0FBQztBQUVyRjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUFTLHFCQUFxQixDQUFDLFFBQVEsR0FBRyxFQUFFO0lBQzFDLE9BQU8sVUFBVSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUk7UUFDN0IsTUFBTSxlQUFlLEdBQUcsR0FBRyxhQUFhLEVBQUUsZUFBZSxDQUFDO1FBQzFELElBQUksR0FBRyxDQUFDO1FBQ1IsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDLEVBQUU7U0FDdEM7YUFBTTtZQUNMLEdBQUcsR0FBRyxPQUFPLENBQUMsZUFBZSxDQUFDLENBQUM7WUFDL0IsR0FBRyxDQUFDLFlBQVksbUNBQ1gsQ0FBQyxHQUFHLENBQUMsWUFBWSxJQUFJLEVBQUUsQ0FBQyxLQUMzQixXQUFXLEVBQUUsaUJBQWlCLENBQUMsR0FBRyxDQUFDLEdBQ3BDLENBQUM7U0FDSDtRQUNELE9BQU8sSUFBSSxFQUFFLENBQUM7SUFDaEIsQ0FBQyxDQUFDO0FBQ0osQ0FBQztBQUNELGVBQWUscUJBQXFCLENBQUMifQ==

@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
-exports.default = {
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+export default {
     /**
      * @name            rootDir
      * @namespace       sugar.config.npm
@@ -16,6 +11,6 @@ exports.default = {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: `${packageRoot_1.default()}/node_modules`
+    rootDir: `${__packageRoot()}/node_modules`
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibnBtLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5wbS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSw0RkFBc0U7QUFFdEUsa0JBQWU7SUFDYjs7Ozs7Ozs7OztPQVVHO0lBQ0gsT0FBTyxFQUFFLEdBQUcscUJBQWEsRUFBRSxlQUFlO0NBQzNDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibnBtLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5wbS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFFdEUsZUFBZTtJQUNiOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUUsR0FBRyxhQUFhLEVBQUUsZUFBZTtDQUMzQyxDQUFDIn0=

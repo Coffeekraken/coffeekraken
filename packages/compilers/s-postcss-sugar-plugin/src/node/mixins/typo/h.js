@@ -1,15 +1,8 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.interface = void 0;
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const theme_1 = __importDefault(require("../../utils/theme"));
-const jsObjectToCssProperties_1 = __importDefault(require("../../utils/jsObjectToCssProperties"));
-class postcssSugarPluginTypoHInterface extends s_interface_1.default {
+import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
+import __jsObjectToCssProperties from '../../utils/jsObjectToCssProperties';
+class postcssSugarPluginTypoHInterface extends __SInterface {
 }
-exports.interface = postcssSugarPluginTypoHInterface;
 postcssSugarPluginTypoHInterface.definition = {
     level: {
         type: 'Number',
@@ -17,14 +10,14 @@ postcssSugarPluginTypoHInterface.definition = {
         alias: 'l'
     }
 };
-function default_1({ params, atRule, processNested }) {
+export { postcssSugarPluginTypoHInterface as interface };
+export default function ({ params, atRule, processNested }) {
     const finalParams = Object.assign({ level: 1 }, params);
-    const typoConfigObj = theme_1.default().config(`typo.h${finalParams.level}`);
+    const typoConfigObj = __theme().config(`typo.h${finalParams.level}`);
     if (!typoConfigObj)
         throw new Error(`<red>[postcssSugarPlugin.mixins.typo.h]</red> Sorry but the "<yellow>h${finalParams.level}</yellow>" title does not exists...`);
-    const css = jsObjectToCssProperties_1.default(typoConfigObj);
+    const css = __jsObjectToCssProperties(typoConfigObj);
     const AST = processNested(css);
     atRule.replaceWith(AST);
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUEsNEVBQXFEO0FBQ3JELDhEQUF3QztBQUN4QyxrR0FBNEU7QUFFNUUsTUFBTSxnQ0FBaUMsU0FBUSxxQkFBWTs7QUFjZCxxREFBUztBQWI3QywyQ0FBVSxHQUFHO0lBQ2xCLEtBQUssRUFBRTtRQUNMLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7UUFDZCxLQUFLLEVBQUUsR0FBRztLQUNYO0NBQ0YsQ0FBQztBQVNKLG1CQUF5QixFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFLZDtJQUNDLE1BQU0sV0FBVyxtQkFDZixLQUFLLEVBQUUsQ0FBQyxJQUNMLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxhQUFhLEdBQUcsZUFBTyxFQUFFLENBQUMsTUFBTSxDQUFDLFNBQVMsV0FBVyxDQUFDLEtBQUssRUFBRSxDQUFDLENBQUM7SUFFckUsSUFBSSxDQUFDLGFBQWE7UUFDaEIsTUFBTSxJQUFJLEtBQUssQ0FDYix5RUFBeUUsV0FBVyxDQUFDLEtBQUsscUNBQXFDLENBQ2hJLENBQUM7SUFFSixNQUFNLEdBQUcsR0FBRyxpQ0FBeUIsQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUVyRCxNQUFNLEdBQUcsR0FBRyxhQUFhLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDL0IsTUFBTSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUMxQixDQUFDO0FBekJELDRCQXlCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyx5QkFBeUIsTUFBTSxxQ0FBcUMsQ0FBQztBQUU1RSxNQUFNLGdDQUFpQyxTQUFRLFlBQVk7O0FBQ2xELDJDQUFVLEdBQUc7SUFDbEIsS0FBSyxFQUFFO1FBQ0wsSUFBSSxFQUFFLFFBQVE7UUFDZCxRQUFRLEVBQUUsSUFBSTtRQUNkLEtBQUssRUFBRSxHQUFHO0tBQ1g7Q0FDRixDQUFDO0FBT0osT0FBTyxFQUFFLGdDQUFnQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXpELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDdkIsTUFBTSxFQUNOLE1BQU0sRUFDTixhQUFhLEVBS2Q7SUFDQyxNQUFNLFdBQVcsbUJBQ2YsS0FBSyxFQUFFLENBQUMsSUFDTCxNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sYUFBYSxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxTQUFTLFdBQVcsQ0FBQyxLQUFLLEVBQUUsQ0FBQyxDQUFDO0lBRXJFLElBQUksQ0FBQyxhQUFhO1FBQ2hCLE1BQU0sSUFBSSxLQUFLLENBQ2IseUVBQXlFLFdBQVcsQ0FBQyxLQUFLLHFDQUFxQyxDQUNoSSxDQUFDO0lBRUosTUFBTSxHQUFHLEdBQUcseUJBQXlCLENBQUMsYUFBYSxDQUFDLENBQUM7SUFFckQsTUFBTSxHQUFHLEdBQUcsYUFBYSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQy9CLE1BQU0sQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDMUIsQ0FBQyJ9

@@ -1,10 +1,5 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("../../../../shared/object/deepMerge"));
+import __deepMerge from '../../../../shared/object/deepMerge';
 /**
  * @name                error
  * @namespace           sugar.node.server.frontend.pages
@@ -38,7 +33,7 @@ const deepMerge_1 = __importDefault(require("../../../../shared/object/deepMerge
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function error(data = {}) {
-    data = deepMerge_1.default({
+    data = __deepMerge({
         title: 'Error',
         intro: 'Somethings wrong happend',
         body: null,
@@ -50,7 +45,7 @@ function error(data = {}) {
             }
         ]
     }, data);
-    const settings = deepMerge_1.default(__sugarConfig('frontend'), args);
+    const settings = __deepMerge(__sugarConfig('frontend'), args);
     const server = __express();
     const promise = new __SPromise({
         id: 'frontendServerError'
@@ -63,5 +58,5 @@ function error(data = {}) {
         packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
     };
 }
-exports.default = error;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXJyb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlcnJvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCxvRkFBOEQ7QUFFOUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0ErQkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxJQUFJLEdBQUcsRUFBRTtJQUN0QixJQUFJLEdBQUcsbUJBQVcsQ0FDaEI7UUFDRSxLQUFLLEVBQUUsT0FBTztRQUNkLEtBQUssRUFBRSwwQkFBMEI7UUFDakMsSUFBSSxFQUFFLElBQUk7UUFDVixJQUFJLEVBQUU7WUFDSjtnQkFDRSxJQUFJLEVBQUUsU0FBUztnQkFDZixJQUFJLEVBQUUsMkJBQTJCO2dCQUNqQyxNQUFNLEVBQUUsT0FBTzthQUNoQjtTQUNGO0tBQ0YsRUFDRCxJQUFJLENBQ0wsQ0FBQztJQUVGLE1BQU0sUUFBUSxHQUFHLG1CQUFXLENBQUMsYUFBYSxDQUFDLFVBQVUsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQzlELE1BQU0sTUFBTSxHQUFHLFNBQVMsRUFBRSxDQUFDO0lBRTNCLE1BQU0sT0FBTyxHQUFHLElBQUksVUFBVSxDQUFDO1FBQzdCLEVBQUUsRUFBRSxxQkFBcUI7S0FDMUIsQ0FBQyxDQUFDO0lBRUgsZ0VBQWdFO0lBQ2hFLE1BQU0sWUFBWSxHQUFHO1FBQ25CLFNBQVMsRUFBRSxJQUFJLENBQUMsU0FBUyxDQUFDLFNBQVMsQ0FBQztRQUNwQyxHQUFHLEVBQUUsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLElBQUksYUFBYTtRQUMxQyxRQUFRLEVBQUUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUM7UUFDbEMsV0FBVyxFQUFFLGlCQUFpQixDQUFDLE9BQU8sQ0FBQyxhQUFhLEVBQUUsR0FBRyxlQUFlLENBQUMsQ0FBQztLQUMzRSxDQUFDO0FBQ0osQ0FBQztBQUNELGtCQUFlLEtBQUssQ0FBQyJ9
+export default error;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXJyb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlcnJvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxXQUFXLE1BQU0scUNBQXFDLENBQUM7QUFFOUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0ErQkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxJQUFJLEdBQUcsRUFBRTtJQUN0QixJQUFJLEdBQUcsV0FBVyxDQUNoQjtRQUNFLEtBQUssRUFBRSxPQUFPO1FBQ2QsS0FBSyxFQUFFLDBCQUEwQjtRQUNqQyxJQUFJLEVBQUUsSUFBSTtRQUNWLElBQUksRUFBRTtZQUNKO2dCQUNFLElBQUksRUFBRSxTQUFTO2dCQUNmLElBQUksRUFBRSwyQkFBMkI7Z0JBQ2pDLE1BQU0sRUFBRSxPQUFPO2FBQ2hCO1NBQ0Y7S0FDRixFQUNELElBQUksQ0FDTCxDQUFDO0lBRUYsTUFBTSxRQUFRLEdBQUcsV0FBVyxDQUFDLGFBQWEsQ0FBQyxVQUFVLENBQUMsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUM5RCxNQUFNLE1BQU0sR0FBRyxTQUFTLEVBQUUsQ0FBQztJQUUzQixNQUFNLE9BQU8sR0FBRyxJQUFJLFVBQVUsQ0FBQztRQUM3QixFQUFFLEVBQUUscUJBQXFCO0tBQzFCLENBQUMsQ0FBQztJQUVILGdFQUFnRTtJQUNoRSxNQUFNLFlBQVksR0FBRztRQUNuQixTQUFTLEVBQUUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxTQUFTLENBQUM7UUFDcEMsR0FBRyxFQUFFLE9BQU8sQ0FBQyxHQUFHLENBQUMsUUFBUSxJQUFJLGFBQWE7UUFDMUMsUUFBUSxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDO1FBQ2xDLFdBQVcsRUFBRSxpQkFBaUIsQ0FBQyxPQUFPLENBQUMsYUFBYSxFQUFFLEdBQUcsZUFBZSxDQUFDLENBQUM7S0FDM0UsQ0FBQztBQUNKLENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9

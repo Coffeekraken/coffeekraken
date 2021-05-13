@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                type
  * @namespace           sugar.js.interface.renderers.terminal
@@ -13,8 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function default_1({ value, interfaceClass }) {
+export default function ({ value, interfaceClass }) {
     return `<cyan>${value}</cyan>`;
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInR5cGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7QUFDSCxtQkFBeUIsRUFBRSxLQUFLLEVBQUUsY0FBYyxFQUFFO0lBQ2hELE9BQU8sU0FBUyxLQUFLLFNBQVMsQ0FBQztBQUNqQyxDQUFDO0FBRkQsNEJBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInR5cGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7Ozs7Ozs7OztHQVlHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUFFLEtBQUssRUFBRSxjQUFjLEVBQUU7SUFDaEQsT0FBTyxTQUFTLEtBQUssU0FBUyxDQUFDO0FBQ2pDLENBQUMifQ==

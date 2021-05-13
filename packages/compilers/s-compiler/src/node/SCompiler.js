@@ -1,11 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
-const s_event_emitter_1 = __importDefault(require("@coffeekraken/s-event-emitter"));
-class SCompiler extends s_event_emitter_1.default {
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
+class SCompiler extends __SEventEmitter {
     /**
      * @name        constructor
      * @type        Function
@@ -17,7 +12,7 @@ class SCompiler extends s_event_emitter_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(initialParams, settings) {
-        super(deepMerge_1.default({
+        super(__deepMerge({
             compiler: {}
         }, settings || {}));
         this.initialParams = Object.assign({}, initialParams);
@@ -36,7 +31,7 @@ class SCompiler extends s_event_emitter_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     compile(params = {}, settings = {}) {
-        settings = deepMerge_1.default(this._settings, settings);
+        settings = __deepMerge(this._settings, settings);
         // @weird:ts-compilation-issue
         params = this.applyInterface('params', params);
         // @ts-ignore
@@ -46,5 +41,5 @@ class SCompiler extends s_event_emitter_1.default {
         return promise;
     }
 }
-exports.default = SCompiler;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbXBpbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvbXBpbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEZBQXNFO0FBQ3RFLG9GQUE0RDtBQTJDNUQsTUFBTSxTQUFVLFNBQVEseUJBQWU7SUFZckM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxhQUFrQixFQUFFLFFBQWdDO1FBQzlELEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsUUFBUSxFQUFFLEVBQUU7U0FDYixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FDRixDQUFDO1FBQ0YsSUFBSSxDQUFDLGFBQWEsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxhQUFhLENBQUMsQ0FBQztJQUN4RCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsT0FBTyxDQUFDLFNBQWMsRUFBRSxFQUFFLFdBQWdCLEVBQUU7UUFDMUMsUUFBUSxHQUFHLG1CQUFXLENBQU8sSUFBSyxDQUFDLFNBQVMsRUFBRSxRQUFRLENBQUMsQ0FBQztRQUV4RCw4QkFBOEI7UUFDOUIsTUFBTSxHQUFTLElBQUssQ0FBQyxjQUFjLENBQUMsUUFBUSxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBRXRELGFBQWE7UUFDYixNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sRUFBRSxRQUFRLENBQUMsQ0FBQztRQUNoRCw4QkFBOEI7UUFDeEIsSUFBSyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUMxQixPQUFPLE9BQU8sQ0FBQztJQUNqQixDQUFDO0NBQ0Y7QUFFRCxrQkFBZSxTQUFTLENBQUMifQ==
+export default SCompiler;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbXBpbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvbXBpbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLE9BQU8sZUFBZSxNQUFNLCtCQUErQixDQUFDO0FBMkM1RCxNQUFNLFNBQVUsU0FBUSxlQUFlO0lBWXJDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksYUFBa0IsRUFBRSxRQUFnQztRQUM5RCxLQUFLLENBQ0gsV0FBVyxDQUNUO1lBQ0UsUUFBUSxFQUFFLEVBQUU7U0FDYixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FDRixDQUFDO1FBQ0YsSUFBSSxDQUFDLGFBQWEsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxhQUFhLENBQUMsQ0FBQztJQUN4RCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsT0FBTyxDQUFDLFNBQWMsRUFBRSxFQUFFLFdBQWdCLEVBQUU7UUFDMUMsUUFBUSxHQUFHLFdBQVcsQ0FBTyxJQUFLLENBQUMsU0FBUyxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBRXhELDhCQUE4QjtRQUM5QixNQUFNLEdBQVMsSUFBSyxDQUFDLGNBQWMsQ0FBQyxRQUFRLEVBQUUsTUFBTSxDQUFDLENBQUM7UUFFdEQsYUFBYTtRQUNiLE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQ2hELDhCQUE4QjtRQUN4QixJQUFLLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQzFCLE9BQU8sT0FBTyxDQUFDO0lBQ2pCLENBQUM7Q0FDRjtBQUVELGVBQWUsU0FBUyxDQUFDIn0=

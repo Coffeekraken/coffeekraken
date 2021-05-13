@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+export default {
     id: 'since',
     template: `
   {{#if since}}
@@ -10,4 +8,4 @@ exports.default = {
 {{/if}}
   `
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2luY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzaW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGtCQUFlO0lBQ2IsRUFBRSxFQUFFLE9BQU87SUFDWCxRQUFRLEVBQUU7Ozs7OztHQU1UO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2luY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzaW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxlQUFlO0lBQ2IsRUFBRSxFQUFFLE9BQU87SUFDWCxRQUFRLEVBQUU7Ozs7OztHQU1UO0NBQ0YsQ0FBQyJ9

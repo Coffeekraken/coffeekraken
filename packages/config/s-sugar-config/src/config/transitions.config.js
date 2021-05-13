@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                    transitions
  * @namespace               config.scss
@@ -21,9 +19,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since             1.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-exports.default = {
+export default {
     fast: 'all 0.1s ease-in-out 0s',
     default: 'all 0.2s ease-in-out 0s',
     slow: 'all 0.5s ease-in-out 0s'
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJhbnNpdGlvbnMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHJhbnNpdGlvbnMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsa0JBQWU7SUFDYixJQUFJLEVBQUUseUJBQXlCO0lBQy9CLE9BQU8sRUFBRSx5QkFBeUI7SUFDbEMsSUFBSSxFQUFFLHlCQUF5QjtDQUNoQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJhbnNpdGlvbnMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHJhbnNpdGlvbnMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILGVBQWU7SUFDYixJQUFJLEVBQUUseUJBQXlCO0lBQy9CLE9BQU8sRUFBRSx5QkFBeUI7SUFDbEMsSUFBSSxFQUFFLHlCQUF5QjtDQUNoQyxDQUFDIn0=

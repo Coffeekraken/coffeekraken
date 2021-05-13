@@ -14,6 +14,7 @@
     "@coffeekraken/s-docblock": "^2.0.0",
     "@coffeekraken/s-docblock-renderer": "^2.0.0",
     "@coffeekraken/s-svelte-component": "^2.0.0",
+    "@coffeekraken/s-highlight-js": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "highlight.js": "^10.7.2",
     "prismjs": "^1.23.0"

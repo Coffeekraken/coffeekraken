@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Svelte + TS + Vite App</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        if (typeof global === 'object') return;
+        Object.defineProperty(Object.prototype, '__magic__', {
+          get: function () {
+            return this;
+          },
+          configurable: true // This makes it possible to `delete` the getter later.
+        });
+        __magic__.global = __magic__; // lolwat
+        delete Object.prototype.__magic__;
+      })();
+    </script>
+    <script type="module" defer src="/src/js/index.ts"></script>
+    <s-docblock-to-html>
+      /** * @name SDocblockRenderer * @namespace node * @type Class * @extents
+      SClass * @status wip * * This class represent an SDocblock output like
+      "markdown", "html", etc... * * @param {SDocblock} docblockInstance The
+      docblock instance you want to output using this class * @param {Object}
+      [settings={}] Some settings to configure your output class: * - ... * *
+      @todo interface * @todo doc * @todo Javascript support * * @example js *
+      import SDocblock from '@coffeekraken/sugar/js/docblock/SDocblock'; *
+      import SDocblockRenderer from
+      '@coffeekraken/sugar/js/docblock/SDocblockRenderer'; * class
+      MyCoolRenderer extends SDocblockRenderer { * constructor(docblockInstance,
+      settings = {}) { * super(docblockInstance, settings); * } * } * * @since
+      2.0.0 * @author Olivier Bossel olivier.bossel@gmail.com
+      (https://olivierbossel.com) */
+    </s-docblock-to-html>
+  </body>
+</html>

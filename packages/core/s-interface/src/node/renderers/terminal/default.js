@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const toString_1 = __importDefault(require("@coffeekraken/sugar/shared/string/toString"));
+import __toString from '@coffeekraken/sugar/shared/string/toString';
 /**
  * @name                default
  * @namespace           sugar.js.interface.renderers.terminal
@@ -17,8 +12,7 @@ const toString_1 = __importDefault(require("@coffeekraken/sugar/shared/string/to
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function default_1({ value, interfaceClass }) {
-    return `<green>${toString_1.default(value, {})}</green>`;
+export default function ({ value, interfaceClass }) {
+    return `<green>${__toString(value, {})}</green>`;
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZmF1bHQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSwwRkFBb0U7QUFFcEU7Ozs7Ozs7Ozs7OztHQVlHO0FBQ0gsbUJBQXlCLEVBQUUsS0FBSyxFQUFFLGNBQWMsRUFBRTtJQUNoRCxPQUFPLFVBQVUsa0JBQVUsQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLFVBQVUsQ0FBQztBQUNuRCxDQUFDO0FBRkQsNEJBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZmF1bHQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxVQUFVLE1BQU0sNENBQTRDLENBQUM7QUFFcEU7Ozs7Ozs7Ozs7OztHQVlHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUFFLEtBQUssRUFBRSxjQUFjLEVBQUU7SUFDaEQsT0FBTyxVQUFVLFVBQVUsQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLFVBQVUsQ0FBQztBQUNuRCxDQUFDIn0=

@@ -1,11 +1,5 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.themeDefinition = void 0;
-const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
+import __STheme from '@coffeekraken/s-theme';
 /**
  * @name        themeInstance
  * @namespace      node.utils
@@ -19,23 +13,22 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  */
 const themeDefinition = {
     type: 'String',
-    values: s_theme_1.default.themes,
-    default: s_theme_1.default.baseTheme
+    values: __STheme.themes,
+    default: __STheme.baseTheme
 };
-exports.themeDefinition = themeDefinition;
-function theme(theme) {
+export { themeDefinition };
+export default function theme(theme) {
     if (global._postcssSugarPluginThemeScopeMixinTheme &&
         global._postcssSugarPluginThemeScopeMixinTheme.length >= 1) {
         theme = global._postcssSugarPluginThemeScopeMixinTheme.pop();
     }
     else {
-        theme = s_theme_1.default.baseTheme;
+        theme = __STheme.baseTheme;
     }
-    return s_theme_1.default.theme(theme);
+    return __STheme.theme(theme);
 }
-exports.default = theme;
 // // @ts-ignore
 // if (!global._sTheme) global._sTheme = new __STheme();
 // // @ts-ignore
 // export default global._sTheme;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7O0FBRWQsb0VBQTZDO0FBRTdDOzs7Ozs7Ozs7O0dBVUc7QUFFSCxNQUFNLGVBQWUsR0FBRztJQUN0QixJQUFJLEVBQUUsUUFBUTtJQUNkLE1BQU0sRUFBRSxpQkFBUSxDQUFDLE1BQU07SUFDdkIsT0FBTyxFQUFFLGlCQUFRLENBQUMsU0FBUztDQUM1QixDQUFDO0FBRU8sMENBQWU7QUFDeEIsU0FBd0IsS0FBSyxDQUFDLEtBQWM7SUFDMUMsSUFDRSxNQUFNLENBQUMsdUNBQXVDO1FBQzlDLE1BQU0sQ0FBQyx1Q0FBdUMsQ0FBQyxNQUFNLElBQUksQ0FBQyxFQUMxRDtRQUNBLEtBQUssR0FBRyxNQUFNLENBQUMsdUNBQXVDLENBQUMsR0FBRyxFQUFFLENBQUM7S0FDOUQ7U0FBTTtRQUNMLEtBQUssR0FBRyxpQkFBUSxDQUFDLFNBQVMsQ0FBQztLQUM1QjtJQUNELE9BQU8saUJBQVEsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUM7QUFDL0IsQ0FBQztBQVZELHdCQVVDO0FBRUQsZ0JBQWdCO0FBQ2hCLHdEQUF3RDtBQUN4RCxnQkFBZ0I7QUFDaEIsaUNBQWlDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7R0FVRztBQUVILE1BQU0sZUFBZSxHQUFHO0lBQ3RCLElBQUksRUFBRSxRQUFRO0lBQ2QsTUFBTSxFQUFFLFFBQVEsQ0FBQyxNQUFNO0lBQ3ZCLE9BQU8sRUFBRSxRQUFRLENBQUMsU0FBUztDQUM1QixDQUFDO0FBRUYsT0FBTyxFQUFFLGVBQWUsRUFBRSxDQUFDO0FBQzNCLE1BQU0sQ0FBQyxPQUFPLFVBQVUsS0FBSyxDQUFDLEtBQWM7SUFDMUMsSUFDRSxNQUFNLENBQUMsdUNBQXVDO1FBQzlDLE1BQU0sQ0FBQyx1Q0FBdUMsQ0FBQyxNQUFNLElBQUksQ0FBQyxFQUMxRDtRQUNBLEtBQUssR0FBRyxNQUFNLENBQUMsdUNBQXVDLENBQUMsR0FBRyxFQUFFLENBQUM7S0FDOUQ7U0FBTTtRQUNMLEtBQUssR0FBRyxRQUFRLENBQUMsU0FBUyxDQUFDO0tBQzVCO0lBQ0QsT0FBTyxRQUFRLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDO0FBQy9CLENBQUM7QUFFRCxnQkFBZ0I7QUFDaEIsd0RBQXdEO0FBQ3hELGdCQUFnQjtBQUNoQixpQ0FBaUMifQ==

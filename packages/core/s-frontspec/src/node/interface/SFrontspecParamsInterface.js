@@ -1,11 +1,6 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
+import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SFrontspecParamsInterface
  * @namespace           node.interface
@@ -18,21 +13,21 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SFrontspecParamsInterface extends s_interface_1.default {
+class SFrontspecParamsInterface extends __SInterface {
 }
 SFrontspecParamsInterface.definition = {
     cache: {
         type: 'Boolean',
-        default: s_sugar_config_1.default('frontspec.cache')
+        default: __sugarConfig('frontspec.cache')
     },
     env: {
         type: 'String',
-        default: s_sugar_config_1.default('env.env')
+        default: __sugarConfig('env.env')
     },
     clearCache: {
         type: 'Boolean',
         default: false
     }
 };
-exports.default = SFrontspecParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3BlY1BhcmFtc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHNwZWNQYXJhbXNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsa0ZBQXlEO0FBQ3pELDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7R0FXRztBQUNILE1BQU0seUJBQTBCLFNBQVEscUJBQVk7O0FBQzNDLG9DQUFVLEdBQUc7SUFDbEIsS0FBSyxFQUFFO1FBQ0wsSUFBSSxFQUFFLFNBQVM7UUFDZixPQUFPLEVBQUUsd0JBQWEsQ0FBQyxpQkFBaUIsQ0FBQztLQUMxQztJQUNELEdBQUcsRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsT0FBTyxFQUFFLHdCQUFhLENBQUMsU0FBUyxDQUFDO0tBQ2xDO0lBQ0QsVUFBVSxFQUFFO1FBQ1YsSUFBSSxFQUFFLFNBQVM7UUFDZixPQUFPLEVBQUUsS0FBSztLQUNmO0NBQ0YsQ0FBQztBQUVKLGtCQUFlLHlCQUF5QixDQUFDIn0=
+export default SFrontspecParamsInterface;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3BlY1BhcmFtc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGcm9udHNwZWNQYXJhbXNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sYUFBYSxNQUFNLDhCQUE4QixDQUFDO0FBQ3pELE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7OztHQVdHO0FBQ0gsTUFBTSx5QkFBMEIsU0FBUSxZQUFZOztBQUMzQyxvQ0FBVSxHQUFHO0lBQ2xCLEtBQUssRUFBRTtRQUNMLElBQUksRUFBRSxTQUFTO1FBQ2YsT0FBTyxFQUFFLGFBQWEsQ0FBQyxpQkFBaUIsQ0FBQztLQUMxQztJQUNELEdBQUcsRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsT0FBTyxFQUFFLGFBQWEsQ0FBQyxTQUFTLENBQUM7S0FDbEM7SUFDRCxVQUFVLEVBQUU7UUFDVixJQUFJLEVBQUUsU0FBUztRQUNmLE9BQU8sRUFBRSxLQUFLO0tBQ2Y7Q0FDRixDQUFDO0FBRUosZUFBZSx5QkFBeUIsQ0FBQyJ9

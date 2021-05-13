@@ -1,10 +1,5 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
+import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SProcessInterface
  * @namespace           sugar.node.process.interface
@@ -17,9 +12,8 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SProcessInterface extends s_interface_1.default {
+export default class SProcessInterface extends __SInterface {
 }
-exports.default = SProcessInterface;
 // static extendsArray = ['SProcess', 'SPromise'];
 SProcessInterface.definition = {
     help: {
@@ -28,4 +22,4 @@ SProcessInterface.definition = {
         default: false
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTUHJvY2Vzc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCw0RUFBcUQ7QUFFckQ7Ozs7Ozs7Ozs7O0dBV0c7QUFDSCxNQUFxQixpQkFBa0IsU0FBUSxxQkFBWTs7QUFBM0Qsb0NBU0M7QUFSQyxrREFBa0Q7QUFDM0MsNEJBQVUsR0FBRztJQUNsQixJQUFJLEVBQUU7UUFDSixJQUFJLEVBQUUsU0FBUztRQUNmLEtBQUssRUFBRSxHQUFHO1FBQ1YsT0FBTyxFQUFFLEtBQUs7S0FDZjtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTUHJvY2Vzc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7O0dBV0c7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLGlCQUFrQixTQUFRLFlBQVk7O0FBQ3pELGtEQUFrRDtBQUMzQyw0QkFBVSxHQUFHO0lBQ2xCLElBQUksRUFBRTtRQUNKLElBQUksRUFBRSxTQUFTO1FBQ2YsS0FBSyxFQUFFLEdBQUc7UUFDVixPQUFPLEVBQUUsS0FBSztLQUNmO0NBQ0YsQ0FBQyJ9

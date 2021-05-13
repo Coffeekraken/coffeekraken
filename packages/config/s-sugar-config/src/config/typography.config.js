@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+export default {
     /**
      * @name            font-family
      * @namespace       config.typography
@@ -84,4 +82,4 @@ exports.default = {
      */
     'vertical-rhythm-class': 'vertical-rhythm'
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwb2dyYXBoeS5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0eXBvZ3JhcGh5LmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILGFBQWEsRUFBRSxrQ0FBa0M7SUFFakQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFdBQVcsRUFBRSxnQ0FBZ0M7SUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FtQkc7SUFDSCxZQUFZLEVBQUUsSUFBSTtJQUVsQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsb0JBQW9CLEVBQUUsRUFBRTtJQUV4Qjs7Ozs7Ozs7Ozs7T0FXRztJQUNILG1CQUFtQixFQUFFLGFBQWE7SUFFbEM7Ozs7Ozs7Ozs7T0FVRztJQUNILHVCQUF1QixFQUFFLGlCQUFpQjtDQUMzQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwb2dyYXBoeS5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0eXBvZ3JhcGh5LmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxlQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILGFBQWEsRUFBRSxrQ0FBa0M7SUFFakQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFdBQVcsRUFBRSxnQ0FBZ0M7SUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FtQkc7SUFDSCxZQUFZLEVBQUUsSUFBSTtJQUVsQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsb0JBQW9CLEVBQUUsRUFBRTtJQUV4Qjs7Ozs7Ozs7Ozs7T0FXRztJQUNILG1CQUFtQixFQUFFLGFBQWE7SUFFbEM7Ozs7Ozs7Ozs7T0FVRztJQUNILHVCQUF1QixFQUFFLGlCQUFpQjtDQUMzQyxDQUFDIn0=

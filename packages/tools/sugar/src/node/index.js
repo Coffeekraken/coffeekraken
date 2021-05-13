@@ -1,13 +1,8 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const handleError_1 = __importDefault(require("./error/handleError"));
-const initEnv_1 = __importDefault(require("./init/initEnv"));
-const onProcessExit_1 = __importDefault(require("./process/onProcessExit"));
-const exitCleanup_1 = __importDefault(require("./process/exitCleanup"));
+import __handleError from './error/handleError';
+import __initEnv from './init/initEnv';
+import __onProcessExit from './process/onProcessExit';
+import __exitCleanup from './process/exitCleanup';
 // import __registerSFileClasses from './fs/registerSFileClasses';
 /**
  * @name                    index
@@ -21,15 +16,15 @@ const exitCleanup_1 = __importDefault(require("./process/exitCleanup"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 // init env
-initEnv_1.default();
+__initEnv();
 // handle the errors
-handleError_1.default();
+__handleError();
 // exit cleanup
-onProcessExit_1.default(() => {
-    return exitCleanup_1.default;
+__onProcessExit(() => {
+    return __exitCleanup;
 });
 // SFile classes
 // __registerSFileClasses();
 // Logging
 // new __SLog(__sugarConfig('log'));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFJZCxzRUFBZ0Q7QUFDaEQsNkRBQXVDO0FBQ3ZDLDRFQUFzRDtBQUN0RCx3RUFBa0Q7QUFFbEQsa0VBQWtFO0FBRWxFOzs7Ozs7Ozs7O0dBVUc7QUFFSCxXQUFXO0FBQ1gsaUJBQVMsRUFBRSxDQUFDO0FBRVosb0JBQW9CO0FBQ3BCLHFCQUFhLEVBQUUsQ0FBQztBQUVoQixlQUFlO0FBQ2YsdUJBQWUsQ0FBQyxHQUFHLEVBQUU7SUFDbkIsT0FBTyxxQkFBYSxDQUFDO0FBQ3ZCLENBQUMsQ0FBQyxDQUFDO0FBRUgsZ0JBQWdCO0FBQ2hCLDRCQUE0QjtBQUU1QixVQUFVO0FBQ1Ysb0NBQW9DIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBSWQsT0FBTyxhQUFhLE1BQU0scUJBQXFCLENBQUM7QUFDaEQsT0FBTyxTQUFTLE1BQU0sZ0JBQWdCLENBQUM7QUFDdkMsT0FBTyxlQUFlLE1BQU0seUJBQXlCLENBQUM7QUFDdEQsT0FBTyxhQUFhLE1BQU0sdUJBQXVCLENBQUM7QUFFbEQsa0VBQWtFO0FBRWxFOzs7Ozs7Ozs7O0dBVUc7QUFFSCxXQUFXO0FBQ1gsU0FBUyxFQUFFLENBQUM7QUFFWixvQkFBb0I7QUFDcEIsYUFBYSxFQUFFLENBQUM7QUFFaEIsZUFBZTtBQUNmLGVBQWUsQ0FBQyxHQUFHLEVBQUU7SUFDbkIsT0FBTyxhQUFhLENBQUM7QUFDdkIsQ0FBQyxDQUFDLENBQUM7QUFFSCxnQkFBZ0I7QUFDaEIsNEJBQTRCO0FBRTVCLFVBQVU7QUFDVixvQ0FBb0MifQ==

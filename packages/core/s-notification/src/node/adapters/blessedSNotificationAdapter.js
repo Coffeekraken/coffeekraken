@@ -1,11 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const SBlessedNotification_1 = __importDefault(require("@coffeekraken/sugar/node/blessed/notification/SBlessedNotification"));
-const uniqid_1 = __importDefault(require("@coffeekraken/sugar/shared/string/uniqid"));
-const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+import __SBlessedNotification from '@coffeekraken/sugar/node/blessed/notification/SBlessedNotification';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import __SPromise from '@coffeekraken/s-promise';
 /**
  * @name            blessedSNotificationAdapter
  * @namespace       sugar.node.notification.adapters
@@ -25,10 +20,10 @@ const nodeAdapter = {
     id: 'blessed',
     name: 'Blessed notification adapter',
     notify: (notificationObj, settings) => {
-        return new s_promise_1.default(({ resolve, reject, emit }) => {
+        return new __SPromise(({ resolve, reject, emit }) => {
             if (!notificationObj.id)
-                notificationObj.id = uniqid_1.default();
-            const notification = new SBlessedNotification_1.default(notificationObj.title, notificationObj.message, {
+                notificationObj.id = __uniqid();
+            const notification = new __SBlessedNotification(notificationObj.title, notificationObj.message, {
                 type: notificationObj.type,
                 onTimeout: () => {
                     emit('timeout', notificationObj);
@@ -43,5 +38,5 @@ const nodeAdapter = {
         });
     }
 };
-exports.default = nodeAdapter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxlc3NlZFNOb3RpZmljYXRpb25BZGFwdGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmxlc3NlZFNOb3RpZmljYXRpb25BZGFwdGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQ0EsOEhBQXdHO0FBQ3hHLHNGQUFnRTtBQUNoRSx3RUFBaUQ7QUFFakQ7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFNLFdBQVcsR0FBMEI7SUFDekMsRUFBRSxFQUFFLFNBQVM7SUFDYixJQUFJLEVBQUUsOEJBQThCO0lBQ3BDLE1BQU0sRUFBRSxDQUFDLGVBQWtDLEVBQUUsUUFBYSxFQUFFLEVBQUU7UUFDNUQsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtZQUNsRCxJQUFJLENBQUMsZUFBZSxDQUFDLEVBQUU7Z0JBQUUsZUFBZSxDQUFDLEVBQUUsR0FBRyxnQkFBUSxFQUFFLENBQUM7WUFFekQsTUFBTSxZQUFZLEdBQUcsSUFBSSw4QkFBc0IsQ0FDN0MsZUFBZSxDQUFDLEtBQUssRUFDckIsZUFBZSxDQUFDLE9BQU8sRUFDdkI7Z0JBQ0UsSUFBSSxFQUFFLGVBQWUsQ0FBQyxJQUFJO2dCQUMxQixTQUFTLEVBQUUsR0FBRyxFQUFFO29CQUNkLElBQUksQ0FBQyxTQUFTLEVBQUUsZUFBZSxDQUFDLENBQUM7Z0JBQ25DLENBQUM7Z0JBQ0QsT0FBTyxFQUFFLEdBQUcsRUFBRTtvQkFDWixJQUFJLENBQUMsT0FBTyxFQUFFLGVBQWUsQ0FBQyxDQUFDO2dCQUNqQyxDQUFDO2FBQ0YsQ0FDRixDQUFDO1lBRUYsSUFBSSxDQUFPLFlBQWEsQ0FBQyxNQUFNO2dCQUM3QixNQUFNLElBQUksS0FBSyxDQUNiLG9IQUFvSCxDQUNySCxDQUFDO1lBRUUsWUFBYSxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDLENBQUM7UUFDbEQsQ0FBQyxDQUFpQixDQUFDO0lBQ3JCLENBQUM7Q0FDRixDQUFDO0FBRUYsa0JBQWUsV0FBVyxDQUFDIn0=
+export default nodeAdapter;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxlc3NlZFNOb3RpZmljYXRpb25BZGFwdGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmxlc3NlZFNOb3RpZmljYXRpb25BZGFwdGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sc0JBQXNCLE1BQU0sb0VBQW9FLENBQUM7QUFDeEcsT0FBTyxRQUFRLE1BQU0sMENBQTBDLENBQUM7QUFDaEUsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFFakQ7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFNLFdBQVcsR0FBMEI7SUFDekMsRUFBRSxFQUFFLFNBQVM7SUFDYixJQUFJLEVBQUUsOEJBQThCO0lBQ3BDLE1BQU0sRUFBRSxDQUFDLGVBQWtDLEVBQUUsUUFBYSxFQUFFLEVBQUU7UUFDNUQsT0FBTyxJQUFJLFVBQVUsQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQ2xELElBQUksQ0FBQyxlQUFlLENBQUMsRUFBRTtnQkFBRSxlQUFlLENBQUMsRUFBRSxHQUFHLFFBQVEsRUFBRSxDQUFDO1lBRXpELE1BQU0sWUFBWSxHQUFHLElBQUksc0JBQXNCLENBQzdDLGVBQWUsQ0FBQyxLQUFLLEVBQ3JCLGVBQWUsQ0FBQyxPQUFPLEVBQ3ZCO2dCQUNFLElBQUksRUFBRSxlQUFlLENBQUMsSUFBSTtnQkFDMUIsU0FBUyxFQUFFLEdBQUcsRUFBRTtvQkFDZCxJQUFJLENBQUMsU0FBUyxFQUFFLGVBQWUsQ0FBQyxDQUFDO2dCQUNuQyxDQUFDO2dCQUNELE9BQU8sRUFBRSxHQUFHLEVBQUU7b0JBQ1osSUFBSSxDQUFDLE9BQU8sRUFBRSxlQUFlLENBQUMsQ0FBQztnQkFDakMsQ0FBQzthQUNGLENBQ0YsQ0FBQztZQUVGLElBQUksQ0FBTyxZQUFhLENBQUMsTUFBTTtnQkFDN0IsTUFBTSxJQUFJLEtBQUssQ0FDYixvSEFBb0gsQ0FDckgsQ0FBQztZQUVFLFlBQWEsQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDO1FBQ2xELENBQUMsQ0FBaUIsQ0FBQztJQUNyQixDQUFDO0NBQ0YsQ0FBQztBQUVGLGVBQWUsV0FBVyxDQUFDIn0=

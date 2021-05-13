@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(require("path"));
-exports.default = {
+import __path from 'path';
+export default {
     /**
      * @name            rootDirs
      * @namespace       config.views
@@ -51,7 +46,7 @@ exports.default = {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        'blade.php': path_1.default.resolve(__dirname, '../node/engines/blade/bladeViewEngine')
+        'blade.php': __path.resolve(__dirname, '../node/engines/blade/bladeViewEngine')
     },
     /**
      * @name      dataHandlers
@@ -75,7 +70,7 @@ exports.default = {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        'js,json': path_1.default.resolve(__dirname, '../node/dataHandlers/js.js')
+        'js,json': __path.resolve(__dirname, '../node/dataHandlers/js.js')
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlld3MuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidmlld3MuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0RBQTBCO0FBRTFCLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxDQUFDLCtCQUErQixDQUFDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsaUNBQWlDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7O1dBU0c7UUFDSCxXQUFXLEVBQUUsY0FBTSxDQUFDLE9BQU8sQ0FDekIsU0FBUyxFQUNULHVDQUF1QyxDQUN4QztLQUNGO0lBRUQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFlBQVksRUFBRTtRQUNaOzs7Ozs7Ozs7V0FTRztRQUNILFNBQVMsRUFBRSxjQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSw0QkFBNEIsQ0FBQztLQUNuRTtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlld3MuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidmlld3MuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUUxQixlQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxDQUFDLCtCQUErQixDQUFDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsaUNBQWlDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7O1dBU0c7UUFDSCxXQUFXLEVBQUUsTUFBTSxDQUFDLE9BQU8sQ0FDekIsU0FBUyxFQUNULHVDQUF1QyxDQUN4QztLQUNGO0lBRUQ7Ozs7Ozs7Ozs7T0FVRztJQUNILFlBQVksRUFBRTtRQUNaOzs7Ozs7Ozs7V0FTRztRQUNILFNBQVMsRUFBRSxNQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSw0QkFBNEIsQ0FBQztLQUNuRTtDQUNGLENBQUMifQ==

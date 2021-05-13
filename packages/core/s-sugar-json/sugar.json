@@ -4,6 +4,10 @@
       "stack": "json",
       "description": "Sugar.json processes like update, etc...",
       "actions": {
+        "list": {
+          "description": "Search and list for sugar.json files",
+          "process": "./src/node/list/list.cli.js"
+        },
         "updateCache": {
           "description": "Update the sugar.json files pathes cache",
           "process": "./src/node/updateCache/updateCache.cli.js"

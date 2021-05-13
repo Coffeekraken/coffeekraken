@@ -19,7 +19,7 @@
     }
   }
 
-  console.log('Hellow rodl');
+  console.log('FFfffF');
 
   const component = new MyCoolComponent($$props);
   let { theme, language } = component.props;
@@ -38,6 +38,7 @@
       prism.languages.javascript,
       'javascript'
     );
+    console.log('c');
     codeElement.innerHTML = result;
     codeElement.appendChild($style);
   });
@@ -48,4 +49,7 @@
 </pre>
 
 <style>
+  code {
+    color: sugar.color(primary) !important;
+  }
 </style>

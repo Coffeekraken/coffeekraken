@@ -3,7 +3,7 @@ import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __handlebars from 'handlebars/dist/handlebars';
-import __promisedHandlebars from 'promised-handlebars';
+// import __promisedHandlebars from 'promised-handlebars';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __glob from 'glob';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
@@ -392,9 +392,10 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _registerHandlerbarsHelpers() {
-    this._handlebars = __promisedHandlebars(__handlebars, {
-      Promise: Promise
-    });
+    // this._handlebars = __promisedHandlebars(__handlebars, {
+    //   Promise: Promise
+    // });
+    this._handlebars = __handlebars;
 
     let currentBlock;
     const blocksByHash: Record<string, any> = {};
@@ -556,6 +557,9 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
       async ({ resolve, reject }) => {
         // get the block in object format
         const blocksArray = this._docblockInstance.toObject();
+
+        if (!blocksArray.length) return resolve();
+
         // get the first block
         const firstBlock = blocksArray[0];
         // get the layout to render

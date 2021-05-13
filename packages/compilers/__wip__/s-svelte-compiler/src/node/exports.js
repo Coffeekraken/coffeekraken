@@ -1,0 +1,6 @@
+import SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
+import SSvelteCompiler from './SSvelteCompiler';
+export * from './SSvelteCompiler';
+export { SSvelteCompilerInterface };
+export default SSvelteCompiler;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyx3QkFBd0IsTUFBTSxzQ0FBc0MsQ0FBQztBQUM1RSxPQUFPLGVBQWUsTUFBTSxtQkFBbUIsQ0FBQztBQUVoRCxjQUFjLG1CQUFtQixDQUFDO0FBRWxDLE9BQU8sRUFBRSx3QkFBd0IsRUFBRSxDQUFDO0FBQ3BDLGVBQWUsZUFBZSxDQUFDIn0=

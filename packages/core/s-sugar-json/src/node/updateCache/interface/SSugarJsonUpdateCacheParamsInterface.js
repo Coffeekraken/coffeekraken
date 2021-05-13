@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
+import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SSugarJsonUpdateCacheParamsInterface
  * @namespace           sugar.cli
@@ -20,8 +15,8 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SSugarJsonUpdateCacheParamsInterface extends s_interface_1.default {
+class SSugarJsonUpdateCacheParamsInterface extends __SInterface {
 }
 SSugarJsonUpdateCacheParamsInterface.definition = {};
-exports.default = SSugarJsonUpdateCacheParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N1Z2FySnNvblVwZGF0ZUNhY2hlUGFyYW1zSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1N1Z2FySnNvblVwZGF0ZUNhY2hlUGFyYW1zSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQU0sb0NBQXFDLFNBQVEscUJBQVk7O0FBQ3RELCtDQUFVLEdBQUcsRUFBRSxDQUFDO0FBR3pCLGtCQUFlLG9DQUFvQyxDQUFDIn0=
+export default SSugarJsonUpdateCacheParamsInterface;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N1Z2FySnNvblVwZGF0ZUNhY2hlUGFyYW1zSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1N1Z2FySnNvblVwZGF0ZUNhY2hlUGFyYW1zSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQU0sb0NBQXFDLFNBQVEsWUFBWTs7QUFDdEQsK0NBQVUsR0FBRyxFQUFFLENBQUM7QUFHekIsZUFBZSxvQ0FBb0MsQ0FBQyJ9

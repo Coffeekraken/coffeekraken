@@ -160,6 +160,7 @@ export default class SFrontendServer extends __SClass {
         if (logLevelInt >= 4) {
           express.use((req, res, next) => {
             emit('log', {
+              type: 'detail',
               group: `s-frontend-server-${this.metas.id}`,
               value: `Request on "<cyan>${req.url}</cyan>"`
             });
@@ -177,17 +178,19 @@ export default class SFrontendServer extends __SClass {
           // server started successfully
           emit('log', {
             group: `s-frontend-server-${this.metas.id}`,
-            value: `The frontend server has been started <green>successfully</green>`
+            value: `<yellow>Frontend server</yellow> started <green>successfully</green>`
           });
           emit('log', {
             group: `s-frontend-server-${this.metas.id}`,
-            value: `You can access it on <yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`
+            value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`
           });
           emit('log', {
+            type: 'detail',
             group: `s-frontend-server-${this.metas.id}`,
             value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`
           });
           emit('log', {
+            type: 'detail',
             group: `s-frontend-server-${this.metas.id}`,
             value: `Log level: <yellow>${finalParams.logLevel}</yellow>`
           });

@@ -1,12 +1,7 @@
-"use strict";
 // @shared
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
-const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/src/shared/object/deepMerge"));
-class SCacheAdapter extends s_class_1.default {
+import __SClass from '@coffeekraken/s-class';
+import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
+export default class SCacheAdapter extends __SClass {
     /**
      * @name                              constructor
      * @type                              Function
@@ -18,7 +13,7 @@ class SCacheAdapter extends s_class_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(deepMerge_1.default({
+        super(__deepMerge({
             cacheAdapter: {}
         }, settings));
     }
@@ -26,5 +21,4 @@ class SCacheAdapter extends s_class_1.default {
         this.cache = cache;
     }
 }
-exports.default = SCacheAdapter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLFVBQVU7Ozs7O0FBRVYsb0VBQTZDO0FBQzdDLGdHQUEwRTtBQXNEMUUsTUFBOEIsYUFBYyxTQUFRLGlCQUFRO0lBSTFEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7UUFDdkIsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxZQUFZLEVBQUUsRUFBRTtTQUNqQixFQUNELFFBQVEsQ0FDVCxDQUNGLENBQUM7SUFDSixDQUFDO0lBRUQsUUFBUSxDQUFDLEtBQWU7UUFDdEIsSUFBSSxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7SUFDckIsQ0FBQztDQXFGRjtBQWhIRCxnQ0FnSEMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTtBQUVWLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sV0FBVyxNQUFNLGlEQUFpRCxDQUFDO0FBc0QxRSxNQUFNLENBQUMsT0FBTyxPQUFnQixhQUFjLFNBQVEsUUFBUTtJQUkxRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFFBQVEsR0FBRyxFQUFFO1FBQ3ZCLEtBQUssQ0FDSCxXQUFXLENBQ1Q7WUFDRSxZQUFZLEVBQUUsRUFBRTtTQUNqQixFQUNELFFBQVEsQ0FDVCxDQUNGLENBQUM7SUFDSixDQUFDO0lBRUQsUUFBUSxDQUFDLEtBQWU7UUFDdEIsSUFBSSxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7SUFDckIsQ0FBQztDQXFGRiJ9

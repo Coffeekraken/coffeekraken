@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,15 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
-const fs_1 = __importDefault(require("fs"));
-const exec_php_1 = __importDefault(require("exec-php"));
-const child_process_1 = __importDefault(require("child_process"));
-const unique_1 = __importDefault(require("@coffeekraken/sugar/shared/array/unique"));
+import __SPromise from '@coffeekraken/s-promise';
+import __fs from 'fs';
+import __execPhp from 'exec-php';
+import __childProcess from 'child_process';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 /**
  * @name            bladeViewEngine
  * @namespace       s-render.engines
@@ -29,25 +24,25 @@ const unique_1 = __importDefault(require("@coffeekraken/sugar/shared/array/uniqu
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-exports.default = {
+export default {
     settings: {},
     render(viewPath, data = {}, settings) {
-        return new s_promise_1.default(({ resolve, reject }) => {
-            if (!fs_1.default.existsSync(viewPath)) {
+        return new __SPromise(({ resolve, reject }) => {
+            if (!__fs.existsSync(viewPath)) {
                 return reject(`It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`);
             }
-            if (!fs_1.default.existsSync(settings.cacheDir)) {
-                fs_1.default.mkdirSync(settings.cacheDir, { recursive: true });
+            if (!__fs.existsSync(settings.cacheDir)) {
+                __fs.mkdirSync(settings.cacheDir, { recursive: true });
             }
             // preparing the php execution
-            exec_php_1.default(__dirname + '/compile.php', 
+            __execPhp(__dirname + '/compile.php', 
             // __path.resolve(__dirname, '../../../bin/php'),
             (error, php, outprint) => {
                 if (error) {
                     return reject(error + ' ---- ' + outprint);
                 }
                 let viewDotPath = viewPath;
-                unique_1.default([...settings.rootDirs]).forEach((path) => {
+                __unique([...settings.rootDirs]).forEach((path) => {
                     viewDotPath = viewDotPath.replace(`${path}/`, '');
                 });
                 viewDotPath = viewDotPath
@@ -55,12 +50,12 @@ exports.default = {
                     .join('.')
                     .replace('.blade.php', '');
                 // execute the php engine and get back the result
-                php.compile(unique_1.default([...settings.rootDirs]), viewDotPath, data, settings.cacheDir, (error, result, output, printed) => __awaiter(this, void 0, void 0, function* () {
+                php.compile(__unique([...settings.rootDirs]), viewDotPath, data, settings.cacheDir, (error, result, output, printed) => __awaiter(this, void 0, void 0, function* () {
                     if (error) {
                         const cmd = error
                             .toString()
                             .replace('Error: Command failed: ', '');
-                        const res = child_process_1.default.spawnSync(cmd, [], {
+                        const res = __childProcess.spawnSync(cmd, [], {
                             shell: true
                         });
                         if (res && res.stdout) {
@@ -80,4 +75,4 @@ exports.default = {
         });
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxhZGVWaWV3RW5naW5lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmxhZGVWaWV3RW5naW5lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQWlEO0FBQ2pELDRDQUFzQjtBQUN0Qix3REFBaUM7QUFHakMsa0VBQTJDO0FBQzNDLHFGQUErRDtBQUcvRDs7Ozs7Ozs7Ozs7R0FXRztBQUNILGtCQUFlO0lBQ2IsUUFBUSxFQUFFLEVBQUU7SUFDWixNQUFNLENBQUMsUUFBZ0IsRUFBRSxPQUFZLEVBQUUsRUFBRSxRQUFnQztRQUN2RSxPQUFPLElBQUksbUJBQVUsQ0FDbkIsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO1lBQ3RCLElBQUksQ0FBQyxZQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxFQUFFO2dCQUM5QixPQUFPLE1BQU0sQ0FDWCw0Q0FBNEMsUUFBUSw2QkFBNkIsQ0FDbEYsQ0FBQzthQUNIO1lBRUQsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxFQUFFO2dCQUN2QyxZQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsRUFBRSxTQUFTLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQzthQUN4RDtZQUNELDhCQUE4QjtZQUM5QixrQkFBUyxDQUNQLFNBQVMsR0FBRyxjQUFjO1lBQzFCLGlEQUFpRDtZQUNqRCxDQUFDLEtBQUssRUFBRSxHQUFHLEVBQUUsUUFBUSxFQUFFLEVBQUU7Z0JBQ3ZCLElBQUksS0FBSyxFQUFFO29CQUNULE9BQU8sTUFBTSxDQUFDLEtBQUssR0FBRyxRQUFRLEdBQUcsUUFBUSxDQUFDLENBQUM7aUJBQzVDO2dCQUVELElBQUksV0FBVyxHQUFHLFFBQVEsQ0FBQztnQkFDM0IsZ0JBQVEsQ0FBQyxDQUFDLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7b0JBQ2hELFdBQVcsR0FBRyxXQUFXLENBQUMsT0FBTyxDQUFDLEdBQUcsSUFBSSxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7Z0JBQ3BELENBQUMsQ0FBQyxDQUFDO2dCQUNILFdBQVcsR0FBRyxXQUFXO3FCQUN0QixLQUFLLENBQUMsR0FBRyxDQUFDO3FCQUNWLElBQUksQ0FBQyxHQUFHLENBQUM7cUJBQ1QsT0FBTyxDQUFDLFlBQVksRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFFN0IsaURBQWlEO2dCQUNqRCxHQUFHLENBQUMsT0FBTyxDQUNULGdCQUFRLENBQUMsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQyxFQUNoQyxXQUFXLEVBQ1gsSUFBSSxFQUNKLFFBQVEsQ0FBQyxRQUFRLEVBQ2pCLENBQU8sS0FBSyxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFLEVBQUU7b0JBQ3ZDLElBQUksS0FBSyxFQUFFO3dCQUNULE1BQU0sR0FBRyxHQUFHLEtBQUs7NkJBQ2QsUUFBUSxFQUFFOzZCQUNWLE9BQU8sQ0FBQyx5QkFBeUIsRUFBRSxFQUFFLENBQUMsQ0FBQzt3QkFDMUMsTUFBTSxHQUFHLEdBQUcsdUJBQWMsQ0FBQyxTQUFTLENBQUMsR0FBRyxFQUFFLEVBQUUsRUFBRTs0QkFDNUMsS0FBSyxFQUFFLElBQUk7eUJBQ1osQ0FBQyxDQUFDO3dCQUNILElBQUksR0FBRyxJQUFJLEdBQUcsQ0FBQyxNQUFNLEVBQUU7NEJBQ3JCLE9BQU8sT0FBTyxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQzt5QkFDdkM7cUJBQ0Y7b0JBQ0QsK0JBQStCO29CQUMvQixNQUFNLEdBQUcsR0FBRyxNQUFNLElBQUksT0FBTyxJQUFJLE1BQU0sSUFBSSxLQUFLLENBQUM7b0JBQ2pELG9EQUFvRDtvQkFDcEQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDO2dCQUNmLENBQUMsQ0FBQSxDQUNGLENBQUM7WUFDSixDQUFDLENBQ0YsQ0FBQztRQUNKLENBQUMsRUFDRDtZQUNFLFlBQVksRUFBRTtnQkFDWixJQUFJLEVBQUUsSUFBSTthQUNYO1NBQ0YsQ0FDRixDQUFDO0lBQ0osQ0FBQztDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxhZGVWaWV3RW5naW5lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmxhZGVWaWV3RW5naW5lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUN0QixPQUFPLFNBQVMsTUFBTSxVQUFVLENBQUM7QUFHakMsT0FBTyxjQUFjLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sUUFBUSxNQUFNLHlDQUF5QyxDQUFDO0FBRy9EOzs7Ozs7Ozs7OztHQVdHO0FBQ0gsZUFBZTtJQUNiLFFBQVEsRUFBRSxFQUFFO0lBQ1osTUFBTSxDQUFDLFFBQWdCLEVBQUUsT0FBWSxFQUFFLEVBQUUsUUFBZ0M7UUFDdkUsT0FBTyxJQUFJLFVBQVUsQ0FDbkIsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO1lBQ3RCLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxFQUFFO2dCQUM5QixPQUFPLE1BQU0sQ0FDWCw0Q0FBNEMsUUFBUSw2QkFBNkIsQ0FDbEYsQ0FBQzthQUNIO1lBRUQsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxFQUFFO2dCQUN2QyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsRUFBRSxTQUFTLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQzthQUN4RDtZQUNELDhCQUE4QjtZQUM5QixTQUFTLENBQ1AsU0FBUyxHQUFHLGNBQWM7WUFDMUIsaURBQWlEO1lBQ2pELENBQUMsS0FBSyxFQUFFLEdBQUcsRUFBRSxRQUFRLEVBQUUsRUFBRTtnQkFDdkIsSUFBSSxLQUFLLEVBQUU7b0JBQ1QsT0FBTyxNQUFNLENBQUMsS0FBSyxHQUFHLFFBQVEsR0FBRyxRQUFRLENBQUMsQ0FBQztpQkFDNUM7Z0JBRUQsSUFBSSxXQUFXLEdBQUcsUUFBUSxDQUFDO2dCQUMzQixRQUFRLENBQUMsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO29CQUNoRCxXQUFXLEdBQUcsV0FBVyxDQUFDLE9BQU8sQ0FBQyxHQUFHLElBQUksR0FBRyxFQUFFLEVBQUUsQ0FBQyxDQUFDO2dCQUNwRCxDQUFDLENBQUMsQ0FBQztnQkFDSCxXQUFXLEdBQUcsV0FBVztxQkFDdEIsS0FBSyxDQUFDLEdBQUcsQ0FBQztxQkFDVixJQUFJLENBQUMsR0FBRyxDQUFDO3FCQUNULE9BQU8sQ0FBQyxZQUFZLEVBQUUsRUFBRSxDQUFDLENBQUM7Z0JBRTdCLGlEQUFpRDtnQkFDakQsR0FBRyxDQUFDLE9BQU8sQ0FDVCxRQUFRLENBQUMsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQyxFQUNoQyxXQUFXLEVBQ1gsSUFBSSxFQUNKLFFBQVEsQ0FBQyxRQUFRLEVBQ2pCLENBQU8sS0FBSyxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFLEVBQUU7b0JBQ3ZDLElBQUksS0FBSyxFQUFFO3dCQUNULE1BQU0sR0FBRyxHQUFHLEtBQUs7NkJBQ2QsUUFBUSxFQUFFOzZCQUNWLE9BQU8sQ0FBQyx5QkFBeUIsRUFBRSxFQUFFLENBQUMsQ0FBQzt3QkFDMUMsTUFBTSxHQUFHLEdBQUcsY0FBYyxDQUFDLFNBQVMsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFOzRCQUM1QyxLQUFLLEVBQUUsSUFBSTt5QkFDWixDQUFDLENBQUM7d0JBQ0gsSUFBSSxHQUFHLElBQUksR0FBRyxDQUFDLE1BQU0sRUFBRTs0QkFDckIsT0FBTyxPQUFPLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDO3lCQUN2QztxQkFDRjtvQkFDRCwrQkFBK0I7b0JBQy9CLE1BQU0sR0FBRyxHQUFHLE1BQU0sSUFBSSxPQUFPLElBQUksTUFBTSxJQUFJLEtBQUssQ0FBQztvQkFDakQsb0RBQW9EO29CQUNwRCxPQUFPLENBQUMsR0FBRyxDQUFDLENBQUM7Z0JBQ2YsQ0FBQyxDQUFBLENBQ0YsQ0FBQztZQUNKLENBQUMsQ0FDRixDQUFDO1FBQ0osQ0FBQyxFQUNEO1lBQ0UsWUFBWSxFQUFFO2dCQUNaLElBQUksRUFBRSxJQUFJO2FBQ1g7U0FDRixDQUNGLENBQUM7SUFDSixDQUFDO0NBQ0YsQ0FBQyJ9

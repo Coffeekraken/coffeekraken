@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const theme_1 = __importDefault(require("./theme"));
+import __theme from './theme';
 /**
  * @name        themeVar
  * @namespace   node.utils
@@ -22,8 +17,7 @@ const theme_1 = __importDefault(require("./theme"));
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function themeVar(dotPath) {
-    return `var(--s-theme-${dotPath.replace(/\./gm, '-')}, ${theme_1.default().config(dotPath)})`;
+export default function themeVar(dotPath) {
+    return `var(--s-theme-${dotPath.replace(/\./gm, '-')}, ${__theme().config(dotPath)})`;
 }
-exports.default = themeVar;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVWYXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZVZhci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLG9EQUE4QjtBQUU5Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxTQUF3QixRQUFRLENBQUMsT0FBZTtJQUM5QyxPQUFPLGlCQUFpQixPQUFPLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxHQUFHLENBQUMsS0FBSyxlQUFPLEVBQUUsQ0FBQyxNQUFNLENBQ3ZFLE9BQU8sQ0FDUixHQUFHLENBQUM7QUFDUCxDQUFDO0FBSkQsMkJBSUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVWYXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZVZhci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLE9BQU8sTUFBTSxTQUFTLENBQUM7QUFFOUI7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxRQUFRLENBQUMsT0FBZTtJQUM5QyxPQUFPLGlCQUFpQixPQUFPLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxHQUFHLENBQUMsS0FBSyxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQ3ZFLE9BQU8sQ0FDUixHQUFHLENBQUM7QUFDUCxDQUFDIn0=

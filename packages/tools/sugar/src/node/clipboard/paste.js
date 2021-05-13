@@ -1,10 +1,5 @@
-"use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const clipboardy_1 = __importDefault(require("clipboardy"));
+import __clipboardy from 'clipboardy';
 /**
  * @name            paste
  * @namespace            node.clipboard
@@ -31,7 +26,7 @@ const clipboardy_1 = __importDefault(require("clipboardy"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function paste(text) {
-    return clipboardy_1.default.readSync();
+    return __clipboardy.readSync();
 }
-exports.default = paste;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFzdGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYXN0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCw0REFBc0M7QUFFdEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsS0FBSyxDQUFDLElBQUk7SUFDakIsT0FBTyxvQkFBWSxDQUFDLFFBQVEsRUFBRSxDQUFDO0FBQ2pDLENBQUM7QUFDRCxrQkFBZSxLQUFLLENBQUMifQ==
+export default paste;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFzdGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYXN0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sWUFBWSxDQUFDO0FBRXRDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxJQUFJO0lBQ2pCLE9BQU8sWUFBWSxDQUFDLFFBQVEsRUFBRSxDQUFDO0FBQ2pDLENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9

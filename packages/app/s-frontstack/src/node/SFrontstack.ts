@@ -122,9 +122,11 @@ export default class SFrontstack extends __SClass {
         emit('log', {
           clear: true,
           nude: true,
-          marginTop: 2,
-          marginBottom: 2,
-          value: __sugarBanner()
+          paddingTop: 0,
+          paddingBottom: 1,
+          value: __sugarBanner({
+            paddingBottom: 1
+          })
         });
 
         emit('log', {

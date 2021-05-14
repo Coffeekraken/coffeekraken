@@ -19,6 +19,10 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 class SViteBuildInterface extends __SInterface {
   static definition = {
+    input: {
+      type: 'String',
+      default: 
+    }
     bundle: {
       type: 'Boolean',
       default: false,
@@ -27,6 +31,11 @@ class SViteBuildInterface extends __SInterface {
     target: {
       type: 'String',
       values: ['modules', 'esnext', 'es2015', 'es2016', 'es2020']
+    },
+    lib: {
+      type: 'Boolean',
+      default: false,
+      alias: 'l'
     },
     prod: {
       type: 'Boolean',

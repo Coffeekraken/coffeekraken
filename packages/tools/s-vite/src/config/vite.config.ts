@@ -1,6 +1,7 @@
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 import __sveltePlugin from '@sveltejs/vite-plugin-svelte';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export default {
   root: '[config.storage.rootDir]',
@@ -11,6 +12,10 @@ export default {
   cacheDir: '[config.storage.cacheDir]/vite',
   clearScreen: false,
   build: {
+    lib: {
+      entry: '[config.storage.srcDir]/js/index.ts',
+      name: 'index'
+    },
     outDir: '[config.storage.distDir]/js'
   },
   server: {

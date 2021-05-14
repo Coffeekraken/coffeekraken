@@ -14,7 +14,9 @@ import __SProcess, {
 } from '@coffeekraken/s-process';
 import { createServer as __viteServer, build as __viteBuild } from 'vite';
 import __path from 'path';
+import __fs from 'fs';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __extractImports from '@coffeekraken/sugar/node/module/extractImport';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -26,6 +28,7 @@ export interface ISViteBuildParams {
   bundle: boolean;
   prod: boolean;
   target: string;
+  lib: boolean;
   chunks: boolean;
 }
 
@@ -127,11 +130,8 @@ export default class SVite extends __SClass {
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
         const viteConfig = __sugarConfig('vite');
-
         const duration = new __SDuration();
-
-        const config: any = __deepMerge({
-          ...viteConfig,
+        const config: any = __deepMerge(viteConfig, {
           logLevel: 'silent',
           build: {
             target: 'es2015',
@@ -145,6 +145,10 @@ export default class SVite extends __SClass {
             }
           }
         });
+
+        if (!params.lib) {
+          delete config.build.lib;
+        }
 
         if (!config.plugins) config.plugins = [];
         config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
@@ -172,54 +176,140 @@ export default class SVite extends __SClass {
             params.bundle
           }</${params.bundle ? 'green' : 'red'}> | Chunks: <${
             params.chunks ? 'green' : 'red'
-          }>${params.chunks}</${params.chunks ? 'green' : 'red'}>`
+          }>${params.chunks}</${params.chunks ? 'green' : 'red'}> | Lib: <${
+            params.lib ? 'green' : 'red'
+          }>${params.lib}</${params.lib ? 'green' : 'red'}>`
         });
 
-        const build: any = await __viteBuild(config);
+        let builds: any = await __viteBuild(config);
 
-        if (build && build.output) {
-          build.output.forEach((output) => {
-            switch (output.type) {
-              case 'chunk':
-                let outPath = __path.resolve(
-                  viteConfig.build.outDir,
-                  `${output.name}.js`
-                );
+        if (!Array.isArray(builds)) builds = [builds];
 
-                if (params.bundle) {
-                  if (output.name === 'index') {
-                    outPath = outPath.replace(/\.js$/, '.bundle.js');
-                  }
-                  if (output.name === 'index') {
-                    emit('log', {
-                      value: `<green>[save]</green> Saving bundle file under "<cyan>${__path.relative(
-                        __packageRoot(),
-                        outPath
-                      )}</cyan>"`
-                    });
+        builds.forEach((build) => {
+          if (build && build.output) {
+            build.output.forEach((output) => {
+              console.log(output);
+
+              switch (output.type) {
+                case 'chunk':
+                  let outPath = __path.resolve(
+                    viteConfig.build.outDir,
+                    params.lib
+                      ? `index.${output.fileName.split('.').slice(1).join('.')}`
+                      : `${output.name}.js`
+                  );
+
+                  let finalCode = output.code;
+
+                  // // const importPaths = finalCode.match(/\s?from"([^"]*)";?/gm);
+                  // const importPaths: string[] = [];
+                  // const imports = __extractImports(finalCode).filter(
+                  //   (importObj) => {
+                  //     if (importPaths.indexOf(importObj.path) !== -1)
+                  //       return false;
+                  //     importPaths.push(importObj.path);
+                  //     return true;
+                  //   }
+                  // );
+
+                  // if (imports) {
+                  //   imports.forEach((importObj) => {
+                  //     const path = importObj.path
+                  //       .trim()
+                  //       .replace(/^from\s?"/, '')
+                  //       .replace(/";?$/, '');
+                  //     const splits = path.split('node_modules/');
+                  //     if (splits.length >= 2) {
+                  //       const potentialPath1Level = splits[1]
+                  //         .split('/')
+                  //         .slice(0, 1)
+                  //         .join('/');
+                  //       const potentialPath2Level = splits[1]
+                  //         .split('/')
+                  //         .slice(0, 2)
+                  //         .join('/');
+                  //       const potentialPathFull = splits[1];
+
+                  //       const nodePotentialPath1Level = `${__packageRoot()}/node_modules/${potentialPath1Level}/package.json`;
+                  //       const nodePotentialPath2Level = `${__packageRoot()}/node_modules/${potentialPath2Level}/package.json`;
+                  //       const nodePotentialPath1LevelRoot = `${__packageRoot(
+                  //         process.cwd(),
+                  //         true
+                  //       )}/node_modules/${potentialPath1Level}/package.json`;
+                  //       const nodePotentialPath2LevelRoot = `${__packageRoot(
+                  //         process.cwd(),
+                  //         true
+                  //       )}/node_modules/${potentialPath2Level}/package.json`;
+                  //       const nodePotentialPathFull = `${__packageRoot()}/node_modules/${potentialPathFull}`;
+                  //       const nodePotentialPathFullRoot = `${__packageRoot(
+                  //         process.cwd(),
+                  //         true
+                  //       )}/node_modules/${potentialPathFull}`;
+
+                  //       // if (
+                  //       //   __fs.existsSync(nodePotentialPath2Level) ||
+                  //       //   __fs.existsSync(nodePotentialPath2LevelRoot)
+                  //       // ) {
+                  //       //   finalCode = finalCode.replace(
+                  //       //     `"${importObj.path}"`,
+                  //       //     `"${potentialPath2Level}"`
+                  //       //   );
+                  //       // } else if (
+                  //       //   __fs.existsSync(nodePotentialPath1Level) ||
+                  //       //   __fs.existsSync(nodePotentialPath1LevelRoot)
+                  //       // ) {
+                  //       //   finalCode = finalCode.replace(
+                  //       //     `"${importObj.path}"`,
+                  //       //     `"${potentialPath1Level}"`
+                  //       //   );
+                  //       if (
+                  //         __fs.existsSync(nodePotentialPathFull) ||
+                  //         __fs.existsSync(nodePotentialPathFullRoot)
+                  //       ) {
+                  //         finalCode = finalCode.replace(
+                  //           `"${importObj.path}"`,
+                  //           `"${potentialPathFull}"`
+                  //         );
+                  //       }
+                  //     }
+                  //   });
+                  // }
+
+                  if (params.bundle) {
+                    if (output.name === 'index') {
+                      outPath = outPath.replace(/\.js$/, '.bundle.js');
+                    }
+                    if (output.name === 'index') {
+                      emit('log', {
+                        value: `<green>[save]</green> Saving bundle file under "<cyan>${__path.relative(
+                          __packageRoot(),
+                          outPath
+                        )}</cyan>"`
+                      });
+                    } else {
+                      emit('log', {
+                        value: `<green>[save]</green> Saving chunk file under "<cyan>${__path.relative(
+                          __packageRoot(),
+                          outPath
+                        )}</cyan>"`
+                      });
+                    }
                   } else {
                     emit('log', {
-                      value: `<green>[save]</green> Saving chunk file under "<cyan>${__path.relative(
+                      value: `<green>[save]</green> Saving file under "<cyan>${__path.relative(
                         __packageRoot(),
                         outPath
                       )}</cyan>"`
                     });
                   }
-                } else {
-                  emit('log', {
-                    value: `<green>[save]</green> Saving file under "<cyan>${__path.relative(
-                      __packageRoot(),
-                      outPath
-                    )}</cyan>"`
-                  });
-                }
 
-                __writeFileSync(outPath, output.code);
+                  __writeFileSync(outPath, finalCode);
 
-                break;
-            }
-          });
-        }
+                  break;
+              }
+            });
+          }
+        });
 
         emit('log', {
           value: `<green>[success]</green> Build complete <green>successfully</green> in <yellow>${

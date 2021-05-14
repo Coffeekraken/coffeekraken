@@ -4,6 +4,7 @@ import __deepMerge from '../../shared/object/deepMerge';
 import * as __acorn from 'acorn-loose';
 import { generate as __astring } from 'astring';
 import { find as __find } from 'abstract-syntax-tree';
+import path from '../../shared/is/path';
 
 /**
  * @name            extractImport
@@ -77,26 +78,33 @@ export default function extractImport(
         path: importAst.source.value,
         raw: __astring(importAst)
       };
-      importAst.specifiers.forEach((specifier) => {
-        const obj = Object.assign({}, importObj);
-        switch (specifier.type) {
-          case 'ImportSpecifier':
-            obj.imported = specifier.imported.name;
-            obj.local = specifier.local.name;
-            finalImportsArray.push(<IExtractImportItem>obj);
-            break;
-          case 'ImportNamespaceSpecifier':
-            obj.imported = '*';
-            obj.local = specifier.local.name;
-            finalImportsArray.push(<IExtractImportItem>obj);
-            break;
-          case 'ImportDefaultSpecifier':
-            obj.imported = 'default';
-            obj.local = specifier.local.name;
-            finalImportsArray.push(<IExtractImportItem>obj);
-            break;
-        }
-      });
+
+      if (importAst.specifiers.length) {
+        importAst.specifiers.forEach((specifier) => {
+          const obj = Object.assign({}, importObj);
+          switch (specifier.type) {
+            case 'ImportSpecifier':
+              obj.imported = specifier.imported.name;
+              obj.local = specifier.local.name;
+              finalImportsArray.push(<IExtractImportItem>obj);
+              break;
+            case 'ImportNamespaceSpecifier':
+              obj.imported = '*';
+              obj.local = specifier.local.name;
+              finalImportsArray.push(<IExtractImportItem>obj);
+              break;
+            case 'ImportDefaultSpecifier':
+              obj.imported = 'default';
+              obj.local = specifier.local.name;
+              finalImportsArray.push(<IExtractImportItem>obj);
+              break;
+          }
+        });
+      } else {
+        importObj.imported = '*';
+        importObj.local = undefined;
+        finalImportsArray.push(<IExtractImportItem>importObj);
+      }
     });
 
     if (set.require) {

@@ -11,6 +11,7 @@
     "@coffeekraken/s-class": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "find-in-files": "^0.5.0",
-    "minimatch": "^3.0.4"
+    "minimatch": "^3.0.4",
+    "promised-handlebars": "^2.0.1"
   }
 }

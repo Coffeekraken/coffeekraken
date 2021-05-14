@@ -13,12 +13,13 @@
     "@coffeekraken/s-class": "^2.0.0",
     "@coffeekraken/s-duration": "^2.0.0",
     "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
+    "@coffeekraken/s-svelte-preprocess": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "precss": "^4.0.0",
     "svelte": "^3.38.2",
     "url-parse": "^1.5.1"
   },
   "peerDependencies": {
-    "postcss": "^8.2.15"
+    "postcss": "^7 || ^8"
   }
 }

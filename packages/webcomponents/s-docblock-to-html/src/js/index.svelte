@@ -5,7 +5,6 @@
   import __SDocblockToHtmlComponentInterface from './interface/SDocblockToHtmlComponentInterface';
   import __SDocblock from '@coffeekraken/s-docblock';
   import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
-  import '@coffeekraken/s-highlight-js';
 
   class MyCoolComponent extends __SSvelteComponent {
     static interface = __SDocblockToHtmlComponentInterface;

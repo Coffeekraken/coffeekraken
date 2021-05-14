@@ -1,5 +1,10 @@
 import __sugarConfig from '@coffeekraken/s-sugar-config';
-import { typescript, postcss, globalStyle, babel } from 'svelte-preprocess';
+import {
+  typescript,
+  postcss,
+  globalStyle,
+  babel
+} from '@coffeekraken/s-svelte-preprocess';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 import __sPostcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin';
@@ -17,7 +22,7 @@ export default {
       tsconfigFile: `${__dirname}/tsconfig.json`,
       tsconfigDirectory: __packageRoot()
     }),
-    babel({}),
+    // babel({}),
     postcss({
       plugins: [
         __sPostcssSugarPlugin({
@@ -28,7 +33,7 @@ export default {
         // __postcssPresetEnv()
         // __autoprefixer()
       ]
-    }),
-    globalStyle()
+    })
+    // globalStyle()
   ]
 };

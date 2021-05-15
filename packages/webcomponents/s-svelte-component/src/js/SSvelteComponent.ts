@@ -64,7 +64,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
   }
 
   /**
-   * @name      rootElm
+   * @name      $root
    * @type      HTMLElement
    * @get
    *
@@ -73,21 +73,20 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _currentComponent;
-  get rootElm(): HTMLElement {
-    for (
-      let i = 0;
-      i < this._currentComponent.shadowRoot.children.length;
-      i++
-    ) {
-      const elm = this._currentComponent.shadowRoot.children[i];
-      if (elm.tagName !== 'STYLE') return elm;
+  // _currentComponent;
+  _$root: HTMLElement;
+  get $root(): HTMLElement {
+    if (!this._$root) {
+      throw new Error(
+        `To use the $root property, you MUST call the "setRoot" in your onMount component code and pass it the root HTMLElement of your HTML component code`
+      );
     }
-    return this._currentComponent;
+    return this._$root;
   }
 
+  _componentElm: HTMLElement;
   get $elm(): HTMLElement {
-    return this._currentComponent;
+    return this._componentElm;
   }
 
   /**
@@ -101,12 +100,8 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get styleElm(): HTMLElement | undefined {
-    for (
-      let i = 0;
-      i < this._currentComponent.shadowRoot.children.length;
-      i++
-    ) {
-      const elm = this._currentComponent.shadowRoot.children[i];
+    for (let i = 0; i < this._componentElm.shadowRoot.children.length; i++) {
+      const elm = this._componentElm.shadowRoot.children[i];
       if (elm.tagName === 'STYLE') return elm;
     }
     return undefined;
@@ -123,8 +118,6 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
         settings || {}
       )
     );
-
-    this._currentComponent = get_current_component();
 
     // disable mustache escaping
     __mustache.escape = function (text) {
@@ -202,15 +195,20 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
 
     this.onMount(() => {
       if (this.props.noLnf) {
-        this.rootElm.classList.add('s-no-lnf');
+        this.$root.classList.add('s-no-lnf');
       }
       if (this.props.noBare) {
-        this.rootElm.classList.add('s-no-bare');
-      }
-      if (!this.props.noStyle) {
-        this._applyStyles();
+        this.$root.classList.add('s-no-bare');
       }
     });
+  }
+
+  setRoot($root) {
+    this._$root = $root;
+    this._componentElm = this._$root.parentNode.host;
+    if (!this.props.noStyle) {
+      this._applyStyles();
+    }
   }
 
   /**
@@ -255,7 +253,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
         /--[a-zA-Z0-9-_]+:[^;]+;/gm,
         ''
       );
-      this._currentComponent.shadowRoot.prepend(styleElm);
+      this._componentElm.shadowRoot.prepend(styleElm);
     }
   }
 

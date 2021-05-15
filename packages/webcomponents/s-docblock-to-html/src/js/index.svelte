@@ -5,15 +5,9 @@
   import __SDocblockToHtmlComponentInterface from './interface/SDocblockToHtmlComponentInterface';
   import __SDocblock from '@coffeekraken/s-docblock';
   import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
+  import '@coffeekraken/s-highlight-js';
 
-  class MyCoolComponent extends __SSvelteComponent {
-    static interface = __SDocblockToHtmlComponentInterface;
-    constructor(params) {
-      super(params, {
-        svelteComponent: {}
-      });
-    }
-  }
+  let rootElm, renderedHtml;
 
   const component = new __SSvelteComponent($$props, {
     svelteComponent: {
@@ -23,20 +17,27 @@
   });
   let {} = component.props;
 
-  let container;
-
-  component.beforeUpdate(() => {});
+  // component.beforeUpdate(() => {});
   component.onMount(async () => {
+    component.setRoot(rootElm);
     const docblock = new __SDocblock(component.$elm.innerHTML);
     const docblockHtmlRenderer = new SDocblockHtmlRenderer(docblock);
     const html = await docblockHtmlRenderer.render();
-    container.innerHTML = html;
+    // rootElm.innerHTML = html;
+    renderedHtml = html;
+
+    // const elm = document.createElement('s-highlight-js');
+    // elm.innerHTML = 'Somethinf';
+    // rootElm.appendChild(elm);
   });
 </script>
 
-<div class={component.className('__container')} bind:this={container} />
+<div class={component.className('__container')} bind:this={rootElm}>
+  {#if renderedHtml}
+    {@html renderedHtml}
+  {/if}
+</div>
 
-<!-- <div class={component.className()} /> -->
 <style>
   div {
     color: red;

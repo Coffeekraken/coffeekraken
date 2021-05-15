@@ -1,22 +1,16 @@
 import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __SDuration from '@coffeekraken/s-duration';
-import __SViteStartInterface from './start/interface/SViteStartInterface';
-import __SViteBuildInterface from './build/interface/SViteBuildInterface';
 import __SPromise from '@coffeekraken/s-promise';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __rewritesPlugin from './plugins/rewritesPlugin';
-import __SProcess, {
-  SProcessManager as __SProcessManager,
-  ISProcessSettings,
-  ISProcessManagerProcessSettings
-} from '@coffeekraken/s-process';
-import { createServer as __viteServer, build as __viteBuild } from 'vite';
-import __path from 'path';
-import __fs from 'fs';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __extractImports from '@coffeekraken/sugar/node/module/extractImport';
+import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __path from 'path';
+import { build as __viteBuild, createServer as __viteServer } from 'vite';
+import __rewritesPlugin from './plugins/rewritesPlugin';
+import __SViteStartInterface from './start/interface/SViteStartInterface';
+import __SFile from '@coffeekraken/s-file';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -25,11 +19,12 @@ export interface ISViteCtorSettings {
 
 export interface ISViteStartParams {}
 export interface ISViteBuildParams {
-  bundle: boolean;
   prod: boolean;
   target: string;
-  lib: boolean;
+  type: 'default' | 'lib' | 'bundle';
   chunks: boolean;
+  bundle: boolean;
+  lib: boolean;
 }
 
 export default class SVite extends __SClass {
@@ -134,7 +129,7 @@ export default class SVite extends __SClass {
         const config: any = __deepMerge(viteConfig, {
           logLevel: 'silent',
           build: {
-            target: 'es2015',
+            target: params.target ?? 'modules',
             write: false,
             rollupOptions: {
               output: {
@@ -146,39 +141,54 @@ export default class SVite extends __SClass {
           }
         });
 
-        if (!params.lib) {
+        // shortcuts
+        if (params.bundle) params.type = 'bundle';
+        if (params.lib) params.type = 'lib';
+
+        // library mode
+        if (params.type.toLowerCase() !== 'lib') {
           delete config.build.lib;
         }
 
+        // plugins
         if (!config.plugins) config.plugins = [];
         config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
 
+        // mode (production, development)
         if (params.prod) {
           config.mode = 'production';
         }
 
-        if (!params.bundle) {
-          config.build.target = 'esnext';
-          config.build.rollupOptions.external = [/node_modules/];
+        // target
+        if (params.type.toLowerCase() === 'bundle') {
+          config.build.target = params.target ?? 'es2015';
+        } else if (params.type.toLowerCase() === 'lib') {
+          config.build.target = params.target ?? 'esnext';
+        } else if (params.type.toLowerCase() === 'module') {
+          config.build.target = params.target ?? 'modules';
         }
 
-        if (params.target) {
-          config.build.target = params.target;
+        // external packages for library mode
+        if (params.type.toLowerCase() === 'lib') {
+          config.build.rollupOptions.external = [
+            ...(config.build.rollupOptions.external ?? []),
+            ...Object.keys(__listNodeModulesPackages({ monorepo: true }))
+          ];
         }
 
         emit('log', {
           value: `<yellow>[build]</yellow> Starting build`
         });
         emit('log', {
-          value: `<yellow>[build]</yellow> Target: <magenta>${
+          value: `<yellow>[build]</yellow> <bgBlack><white> Type </white></bgBlack><bgCyan><black> ${params.type.toLowerCase()} </black></bgCyan><bgBlack><white> Target </white></bgBlack><bgCyan><black> ${
             config.build.target
-          }</magenta> | Bundle: <${params.bundle ? 'green' : 'red'}>${
-            params.bundle
-          }</${params.bundle ? 'green' : 'red'}> | Chunks: <${
-            params.chunks ? 'green' : 'red'
-          }>${params.chunks}</${params.chunks ? 'green' : 'red'}> | Lib: <${
-            params.lib ? 'green' : 'red'
-          }>${params.lib}</${params.lib ? 'green' : 'red'}>`
+          } </black></bgCyan><bgBlack><white> Mode </white></bgBlack><bgCyan><black> ${
+            params.prod ? 'production' : 'development'
+          } </black></bgCyan><bgBlack><white> Chunks </white></bgBlack><${
+            params.chunks ? 'bgGreen' : 'bgRed'
+          }><black> ${params.chunks} </black></${
+            params.chunks ? 'bgGreen' : 'bgRed'
+          }>`
         });
 
         let builds: any = await __viteBuild(config);
@@ -188,8 +198,6 @@ export default class SVite extends __SClass {
         builds.forEach((build) => {
           if (build && build.output) {
             build.output.forEach((output) => {
-              console.log(output);
-
               switch (output.type) {
                 case 'chunk':
                   let outPath = __path.resolve(
@@ -201,97 +209,34 @@ export default class SVite extends __SClass {
 
                   let finalCode = output.code;
 
-                  // // const importPaths = finalCode.match(/\s?from"([^"]*)";?/gm);
-                  // const importPaths: string[] = [];
-                  // const imports = __extractImports(finalCode).filter(
-                  //   (importObj) => {
-                  //     if (importPaths.indexOf(importObj.path) !== -1)
-                  //       return false;
-                  //     importPaths.push(importObj.path);
-                  //     return true;
-                  //   }
-                  // );
-
-                  // if (imports) {
-                  //   imports.forEach((importObj) => {
-                  //     const path = importObj.path
-                  //       .trim()
-                  //       .replace(/^from\s?"/, '')
-                  //       .replace(/";?$/, '');
-                  //     const splits = path.split('node_modules/');
-                  //     if (splits.length >= 2) {
-                  //       const potentialPath1Level = splits[1]
-                  //         .split('/')
-                  //         .slice(0, 1)
-                  //         .join('/');
-                  //       const potentialPath2Level = splits[1]
-                  //         .split('/')
-                  //         .slice(0, 2)
-                  //         .join('/');
-                  //       const potentialPathFull = splits[1];
-
-                  //       const nodePotentialPath1Level = `${__packageRoot()}/node_modules/${potentialPath1Level}/package.json`;
-                  //       const nodePotentialPath2Level = `${__packageRoot()}/node_modules/${potentialPath2Level}/package.json`;
-                  //       const nodePotentialPath1LevelRoot = `${__packageRoot(
-                  //         process.cwd(),
-                  //         true
-                  //       )}/node_modules/${potentialPath1Level}/package.json`;
-                  //       const nodePotentialPath2LevelRoot = `${__packageRoot(
-                  //         process.cwd(),
-                  //         true
-                  //       )}/node_modules/${potentialPath2Level}/package.json`;
-                  //       const nodePotentialPathFull = `${__packageRoot()}/node_modules/${potentialPathFull}`;
-                  //       const nodePotentialPathFullRoot = `${__packageRoot(
-                  //         process.cwd(),
-                  //         true
-                  //       )}/node_modules/${potentialPathFull}`;
-
-                  //       // if (
-                  //       //   __fs.existsSync(nodePotentialPath2Level) ||
-                  //       //   __fs.existsSync(nodePotentialPath2LevelRoot)
-                  //       // ) {
-                  //       //   finalCode = finalCode.replace(
-                  //       //     `"${importObj.path}"`,
-                  //       //     `"${potentialPath2Level}"`
-                  //       //   );
-                  //       // } else if (
-                  //       //   __fs.existsSync(nodePotentialPath1Level) ||
-                  //       //   __fs.existsSync(nodePotentialPath1LevelRoot)
-                  //       // ) {
-                  //       //   finalCode = finalCode.replace(
-                  //       //     `"${importObj.path}"`,
-                  //       //     `"${potentialPath1Level}"`
-                  //       //   );
-                  //       if (
-                  //         __fs.existsSync(nodePotentialPathFull) ||
-                  //         __fs.existsSync(nodePotentialPathFullRoot)
-                  //       ) {
-                  //         finalCode = finalCode.replace(
-                  //           `"${importObj.path}"`,
-                  //           `"${potentialPathFull}"`
-                  //         );
-                  //       }
-                  //     }
-                  //   });
-                  // }
-
                   if (params.bundle) {
                     if (output.name === 'index') {
                       outPath = outPath.replace(/\.js$/, '.bundle.js');
                     }
+                  }
+
+                  __writeFileSync(outPath, finalCode);
+
+                  const file = __SFile.new(outPath);
+
+                  if (params.bundle) {
                     if (output.name === 'index') {
                       emit('log', {
                         value: `<green>[save]</green> Saving bundle file under "<cyan>${__path.relative(
                           __packageRoot(),
                           outPath
-                        )}</cyan>"`
+                        )}</cyan>" <yellow>${
+                          file.stats.kbytes
+                        }</yellow><yellow>kb</yellow>`
                       });
                     } else {
                       emit('log', {
                         value: `<green>[save]</green> Saving chunk file under "<cyan>${__path.relative(
                           __packageRoot(),
                           outPath
-                        )}</cyan>"`
+                        )}</cyan>" <yellow>${
+                          file.stats.kbytes
+                        }</yellow><yellow>kb</yellow>`
                       });
                     }
                   } else {
@@ -299,11 +244,11 @@ export default class SVite extends __SClass {
                       value: `<green>[save]</green> Saving file under "<cyan>${__path.relative(
                         __packageRoot(),
                         outPath
-                      )}</cyan>"`
+                      )}</cyan>" <yellow>${
+                        file.stats.kbytes
+                      }</yellow><yellow>kb</yellow>`
                     });
                   }
-
-                  __writeFileSync(outPath, finalCode);
 
                   break;
               }

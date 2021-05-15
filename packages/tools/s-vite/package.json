@@ -11,6 +11,7 @@
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.1",
     "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-file": "^2.0.0",
     "@coffeekraken/s-duration": "^2.0.0",
     "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
     "@coffeekraken/s-svelte-preprocess": "^2.0.0",

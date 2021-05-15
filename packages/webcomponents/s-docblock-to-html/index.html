@@ -7,19 +7,6 @@
     <title>Svelte + TS + Vite App</title>
   </head>
   <body>
-    <script>
-      (function () {
-        if (typeof global === 'object') return;
-        Object.defineProperty(Object.prototype, '__magic__', {
-          get: function () {
-            return this;
-          },
-          configurable: true // This makes it possible to `delete` the getter later.
-        });
-        __magic__.global = __magic__; // lolwat
-        delete Object.prototype.__magic__;
-      })();
-    </script>
     <script type="module" defer src="/src/js/index.ts"></script>
     <s-docblock-to-html>
       /** * @name SDocblockRenderer * @namespace node * @type Class * @extents

@@ -1,3 +1,6 @@
 module.exports = {
-  testEnvironment: 'node'
+  testEnvironment: 'node',
+  transform: {
+    '.js': 'jest-esm-transformer'
+  }
 };

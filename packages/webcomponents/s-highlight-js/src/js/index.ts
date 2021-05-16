@@ -1,4 +1,2 @@
-import component from './index.svelte';
-import nested from './nested.svelte';
-export { nested };
+import component from './index.riot';
 export default component;

@@ -8,9 +8,7 @@ import {
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 import __sPostcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin';
-// import __postcssImportExtGlob from 'postcss-import-ext-glob';
 import __precss from 'precss';
-// import __postcssPresetEnv from 'postcss-preset-env';
 
 export default {
   compilerOptions: {
@@ -22,18 +20,6 @@ export default {
       tsconfigFile: `${__dirname}/tsconfig.json`,
       tsconfigDirectory: __packageRoot()
     }),
-    // babel({}),
-    postcss({
-      plugins: [
-        __sPostcssSugarPlugin({
-          target: 'component'
-        }),
-        // __postcssImportExtGlob(),
-        __precss()
-        // __postcssPresetEnv()
-        // __autoprefixer()
-      ]
-    })
-    // globalStyle()
+    postcss(__sugarConfig('svelte'))
   ]
 };

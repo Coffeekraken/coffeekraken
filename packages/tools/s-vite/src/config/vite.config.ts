@@ -1,13 +1,17 @@
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __sveltePlugin from '@sveltejs/vite-plugin-svelte';
+import __vitePluginSvelte from '@sveltejs/vite-plugin-svelte';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __sVitePluginRiotjs from '@coffeekraken/s-vite-plugin-riotjs';
 
 export default {
   root: '[config.storage.rootDir]',
   base: '/',
   mode: 'development',
-  plugins: [__sveltePlugin(__sugarConfig('svelte'))],
+  plugins: [
+    __vitePluginSvelte(__sugarConfig('svelte')),
+    __sVitePluginRiotjs(__sugarConfig('riotjs'))
+  ],
   publicDir: '[config.storage.distDir]',
   cacheDir: '[config.storage.cacheDir]/vite',
   clearScreen: false,

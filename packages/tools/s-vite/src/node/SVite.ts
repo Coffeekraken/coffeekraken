@@ -12,6 +12,8 @@ import __rewritesPlugin from './plugins/rewritesPlugin';
 import __SViteStartInterface from './start/interface/SViteStartInterface';
 import __SFile from '@coffeekraken/s-file';
 
+import __sRiotjsPluginPostcssPreprocessor from '@coffeekraken/s-riotjs-plugin-postcss-preprocessor';
+
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
   vite: Partial<ISViteSettings>;
@@ -65,6 +67,9 @@ export default class SVite extends __SClass {
         settings ?? {}
       )
     );
+
+    // register some riotjs preprocessors
+    __sRiotjsPluginPostcssPreprocessor(__sugarConfig('postcss.plugins'));
   }
 
   /**

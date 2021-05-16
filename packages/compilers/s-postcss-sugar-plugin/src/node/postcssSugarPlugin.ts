@@ -158,7 +158,8 @@ const plugin = (settings: any = {}) => {
         });
       }
 
-      return finalAst.toString();
+      let finalCss = finalAst.toString();
+      return finalCss;
     }
   };
 };

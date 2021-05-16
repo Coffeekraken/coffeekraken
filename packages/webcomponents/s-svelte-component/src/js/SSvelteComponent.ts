@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SInterface from '@coffeekraken/s-interface';

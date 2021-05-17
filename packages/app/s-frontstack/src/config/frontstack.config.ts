@@ -17,40 +17,38 @@ export default {
     default: {
       title: 'Default',
       description: 'Default s-frontstack receipe ',
-      actions: {
-        frontendServer: '[config.frontstack.actions.frontendServer]',
-        css: '[config.frontstack.actions.css]',
-        js: '[config.frontstack.actions.js]',
-        ts: '[config.frontstack.actions.ts]',
-        svelte: '[config.frontstack.actions.svelte]',
-        docmap: '[config.frontstack.actions.docmap]'
+      stacks: {
+        dev: {
+          description: 'Start the development stack',
+          actions: {
+            frontendServer: '[config.frontstack.actions.frontendServer]',
+            css: '[config.frontstack.actions.css]',
+            js: '[config.frontstack.actions.js]',
+            ts: '[config.frontstack.actions.ts]',
+            svelte: '[config.frontstack.actions.svelte]',
+            docmap: '[config.frontstack.actions.docmap]'
+          }
+        },
+        build: {
+          description: 'Build your final production ready dist package',
+          actions: {}
+        }
       }
     },
-    svelteComponent: {
-      title: 'Svelte webcomponent',
-      description: 'Svelte webcomponent receipe ',
-      actions: {
-        frontendServer: '[config.frontstack.actions.frontendServer]',
-        vite: '[config.frontstack.actions.vite]'
-        // js: '[config.frontstack.actions.js]',
-        // css: '[config.frontstack.actions.css]',
-        // jsBundle: '[config.frontstack.actions.jsBundle]',
-        // ts: '[config.frontstack.actions.ts]',
-        // svelte: '[config.frontstack.actions.svelte]',
-        // docmap: '[config.frontstack.actions.docmap]'
+    riotjsComponent: {
+      title: 'RiotJs component',
+      description: 'RiotJs webcomponent receipe',
+      stacks: {
+        dev: {
+          description: 'Start the development stack',
+          actions: {
+            frontendServer: '[config.frontstack.actions.frontendServer]',
+            vite: '[config.frontstack.actions.vite]'
+            // docmap: '[config.frontstack.actions.docmap]'
+          }
+        }
       }
-    },
-    jsLib: {
-      title: 'Javascript library',
-      description: 'Javascript browser destinated library',
-      actions: {
-        // js: '[config.frontstack.actions.js]',
-        ts: '[config.frontstack.actions.ts]'
-        // docmap: '[config.frontstack.actions.docmap]'
-      }
-    },
-
-    react: {}
+    }
   },
 
   actions: {
@@ -88,20 +86,6 @@ export default {
         }
       }
     },
-    jsBundle: {
-      id: 'jsBundle',
-      title: 'Javascript bundle action',
-      description: 'Allow to compile .js files easily into a bundle file',
-      process: `sugard js.compile ${__sugarConfig('storage.distDir').replace(
-        __sugarConfig('storage.rootDir') + '/',
-        ''
-      )}/js/index.js -b -w`,
-      settings: {
-        processManager: {
-          restart: true
-        }
-      }
-    },
     ts: {
       id: 'ts',
       title: 'Typescript compile action',
@@ -117,7 +101,7 @@ export default {
       id: 'vite',
       title: 'Vite development stack',
       description: 'Allow to compile files easily',
-      process: 'sugard vite.start',
+      process: 'sugard vite',
       settings: {
         processManager: {
           restart: true

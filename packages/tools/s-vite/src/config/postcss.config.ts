@@ -11,14 +11,11 @@ import __propertyLookup from 'postcss-property-lookup';
 
 export default {
   plugins: [
-    // @ts-ignore
+    __sPostcssSugarPlugin(),
     __atRoot(),
     __extendRule(),
     __nested(),
     __propertyLookup(),
-    __sPostcssSugarPlugin({
-      target: 'component'
-    }),
     __autoprefixer()
   ]
 };

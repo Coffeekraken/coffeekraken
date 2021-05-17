@@ -38,13 +38,15 @@ export default function ({
     `@sugar.theme(${themeConfig.baseTheme});`,
     '@sugar.reset;',
     '@sugar.layout.classes;',
+    '@sugar.font.faces;',
     '@sugar.font.init;',
     '@sugar.font.classes;',
     '@sugar.color.docblocks;',
     '@sugar.color.classes;',
     '@sugar.size.classes;',
     '@sugar.depth.classes;',
-    '@sugar.util.classes;'
+    '@sugar.util.classes;',
+    '@sugar.style;'
   ];
 
   const AST = processNested(cssArray.join('\n'));

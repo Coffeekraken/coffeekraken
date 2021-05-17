@@ -11,6 +11,7 @@
     {
       "stack": "vite",
       "description": "Sugar vite wrapper",
+      "defaultAction": "start",
       "actions": {
         "start": {
           "description": "Start the vite server and compilators development stack",

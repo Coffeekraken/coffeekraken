@@ -11,6 +11,7 @@
     {
       "stack": "frontendServer",
       "description": "Frontend server API",
+      "defaultAction": "start",
       "actions": {
         "start": {
           "description": "Start a new frontend server process",

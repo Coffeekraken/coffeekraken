@@ -8,6 +8,8 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { ISDurationObject } from '@coffeekraken/s-duration';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 
+import { ISEventEmitterPipeSettingsFilterFn } from '@coffeekraken/s-event-emitter';
+
 /**
  * @name            SProcessManagerProcessWrapper
  * @namespace       s-process
@@ -39,14 +41,20 @@ export interface ISProcessManagerProcessWrapperProcessRestartSettings {
   before: Function;
 }
 
+export interface ISProcessManagerProcessWrapperProcessLogSettings {
+  filter: ISEventEmitterPipeSettingsFilterFn;
+}
+
 export interface ISProcessManagerProcessWrapperCtorSettings {
   processManagerProcess: Partial<ISProcessManagerProcessWrapperSettings>;
 }
 
 export interface ISProcessManagerProcessWrapperSettings {
+  stdio: string;
   restart:
     | Partial<ISProcessManagerProcessWrapperProcessRestartSettings>
     | boolean;
+  log: ISProcessManagerProcessWrapperProcessLogSettings;
 }
 
 class SProcessManagerProcessWrapper extends __SEventEmitter {
@@ -108,7 +116,10 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         {
           processManagerProcess: {
             stdio: 'inherit',
-            restart: false
+            restart: false,
+            log: {
+              filter: undefined
+            }
           }
         },
         settings

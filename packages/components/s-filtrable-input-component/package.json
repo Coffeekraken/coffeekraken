@@ -1,0 +1,20 @@
+{
+  "name": "@coffeekraken/s-filtrable-input-component",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://coffeekraken.io",
+  "main": "dist/js/index.js",
+  "scripts": {
+    "dev": "sugard frontstack dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-component-utils": "^2.0.0",
+    "@coffeekraken/s-raw-html-component": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
+    "highlight.js": "^10.7.2",
+    "prismjs": "^1.23.0"
+  }
+}

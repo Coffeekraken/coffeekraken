@@ -29,8 +29,11 @@ import __parseHtml from '../console/parseHtml';
 interface ISugarBannerSettings {
   version?: string;
   borders?: boolean;
+  marginLeft: number;
+  paddingTop: number;
+  paddingBottom: number;
 }
-function sugarBanner(settings: ISugarBannerSettings = {}): string {
+function sugarBanner(settings: Partial<ISugarBannerSettings> = {}): string {
   settings = __deepMerge(
     {
       version: '',

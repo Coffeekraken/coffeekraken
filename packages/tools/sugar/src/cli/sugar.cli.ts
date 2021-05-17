@@ -28,7 +28,7 @@ require('../node/index');
 const command =
   process.argv && process.argv[2] ? process.argv[2].split(' ')[0] : '';
 let stack = command.split('.')[0];
-const action = command.split('.')[1] || null;
+const cliAction = command.split('.')[1] || null;
 const args =
   process.argv
     .slice(3)
@@ -72,6 +72,7 @@ if (!stack) {
           `The sugar.json file of the package "<yellow>${packageName}</yellow>"is missing the "cli.actions" object`
         );
       }
+
       Object.keys(cliObj.actions).forEach((action) => {
         const actionObj = cliObj.actions[action];
 
@@ -84,12 +85,35 @@ if (!stack) {
             throw new Error(
               `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
             );
+          if (
+            !cliAction &&
+            cliObj.defaultAction &&
+            action === cliObj.defaultAction
+          ) {
+            availableCli[`${cliObj.stack}._default`] = {
+              packageJson,
+              ...actionObj,
+              processPath: cliPath
+            };
+          }
+
           availableCli[`${cliObj.stack}.${action}`] = {
             packageJson,
             ...actionObj,
             processPath: cliPath
           };
         } else if (actionObj.command) {
+          if (
+            !cliAction &&
+            cliObj.defaultAction &&
+            action === cliObj.defaultAction
+          ) {
+            console.log('ADD', actionObj);
+            availableCli[`${cliObj.stack}._default`] = {
+              packageJson,
+              ...actionObj
+            };
+          }
           availableCli[`${cliObj.stack}.${action}`] = {
             packageJson,
             ...actionObj
@@ -101,14 +125,16 @@ if (!stack) {
 
   // check if the requested stack.action exists
   let currentPackage;
-  if (!availableCli[`${stack}.${action}`]) {
+  if (!availableCli[`${stack}.${cliAction ?? '_default'}`]) {
     const logArray: string[] = [];
     logArray.push(' ');
     logArray.push(`--------------------`);
     logArray.push(`<yellow>Sugar CLI</yellow>`);
     logArray.push(`--------------------`);
     logArray.push(
-      `<red>Sorry</red> but the requested "<cyan>${stack}.${action}</cyan>" command does not exists...`
+      `<red>Sorry</red> but the requested "<cyan>${stack}.${
+        cliAction ?? 'default'
+      }</cyan>" command does not exists...`
     );
     logArray.push(
       `Here's the list of <green>available commands</green> in your context:`
@@ -138,7 +164,7 @@ if (!stack) {
     process.exit();
   }
 
-  const cliObj = availableCli[`${stack}.${action}`];
+  const cliObj = availableCli[`${stack}.${cliAction ?? '_default'}`];
   // @ts-ignore
   if (cliObj.processPath) {
     const processFn = require(cliObj.processPath).default;

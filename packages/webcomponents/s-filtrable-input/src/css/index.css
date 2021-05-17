@@ -1,9 +1,0 @@
-@sugar.theme (default);
-
-@sugar.init;
-
-@sugar.ui.form.classes;
-
-.coco {
-  @sugar.style.apply (list);
-}

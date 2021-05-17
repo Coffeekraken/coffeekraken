@@ -12,7 +12,7 @@ import { compile } from '@riotjs/compiler';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sVitePluginRiotjs(riotSettings: any = {}) {
-  const fileRegex = /\.(riot)$/;
+  const fileRegex = /\.riot(\?.*)?$/;
 
   return {
     name: 's-vite-plugin-riotjs',

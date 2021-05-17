@@ -123,11 +123,13 @@ export default class SFrontendServer extends __SClass {
         if (frontendServerConfig.proxy) {
           Object.keys(frontendServerConfig.proxy).forEach((proxyId) => {
             const proxyObj = frontendServerConfig.proxy[proxyId];
-
             // register the middleware inside the sails configuration
             // @ts-ignore
             express.use(
-              createProxyMiddleware(proxyObj.route, proxyObj.settings ?? {})
+              createProxyMiddleware(proxyObj.route, {
+                logLevel: 'silent',
+                ...(proxyObj.settings ?? {})
+              })
             );
           });
         }

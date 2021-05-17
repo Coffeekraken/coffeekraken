@@ -39,11 +39,6 @@ if (!global._definedStyles) {
   // @ts-ignore
   global._definedStyles = {};
 }
-// @ts-ignore
-if (!global._printedStyles) {
-  // @ts-ignore
-  global._printedStyles = [];
-}
 export default function ({
   params,
   atRule,
@@ -61,15 +56,15 @@ export default function ({
 
   const vars: string[] = [];
 
-  if (
-    // @ts-ignore
-    !global._definedStyles[finalParams.name] ||
-    settings.target !== 'global'
-  ) {
-    vars.push(`content: "s-style-${finalParams.name}"`);
-  } else {
-    vars.push(`@extend .s-style-${finalParams.name}`);
-  }
+  // if (
+  //   // @ts-ignore
+  //   !global._definedStyles[finalParams.name] ||
+  //   settings.target !== 'global'
+  // ) {
+  //   vars.push(`content: "s-style-${finalParams.name}"`);
+  // } else {
+  vars.push(`@extend .s-style-${finalParams.name}`);
+  // }
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

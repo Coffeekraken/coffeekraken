@@ -231,7 +231,13 @@ export default class SFrontspec extends __SPromise {
       // loop on all files
       filesPaths.forEach((filePath) => {
         const file = __SFile.new(filePath);
-        const content = file.content;
+        let content = file.content;
+
+        // merge it with the defaults
+        content = __deepMerge(
+          __sugarConfig('frontspec.default') ?? {},
+          content
+        );
 
         // process the content (env, etc...)
         const newContent = {};
@@ -314,6 +320,11 @@ export default class SFrontspec extends __SPromise {
             assetObj.path ?? assetObj.src
           );
 
+          if (type === 'css') {
+            assetObj.href = assetObj.src;
+            delete assetObj.src;
+          }
+
           const fileObj = {
             type,
             id: assetId,
@@ -334,5 +345,22 @@ export default class SFrontspec extends __SPromise {
     });
 
     return assetsToServe;
+  }
+
+  /**
+   * @name      updateCache
+   * @type      function
+   * @async
+   *
+   * This method allows you to clear the cache and update it with new search result
+   *
+   * @since     2.0.0
+   * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async updateCache() {
+    return await this.find({
+      clearCache: true,
+      cache: true
+    });
   }
 }

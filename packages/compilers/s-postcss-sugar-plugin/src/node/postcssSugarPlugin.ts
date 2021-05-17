@@ -30,6 +30,7 @@ const plugin = (settings: any = {}) => {
 
     css.walkAtRules((atRule) => {
       const string = atRule.toString();
+
       if (string.match(/\);?[.*\n][&>+:]\s?[a-zA-Z0-9-_>+:]+/gm)) {
         const parts = string.split(/\)[.*\n]+/gm);
         if (parts.length >= 2) {
@@ -80,14 +81,13 @@ const plugin = (settings: any = {}) => {
       }
     });
 
-    // console.log(css.toString());
-
     css.walkDecls((decl) => {
       if (!decl.prop || !decl.value) return;
       if (!decl.value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return;
       const calls = decl.value.match(
         /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,)+\)/gm
       );
+
       if (!calls || !calls.length) return;
       calls.forEach((sugarStatement) => {
         const functionName = sugarStatement.match(/sugar\.([a-zA-Z0-9\.]+)/)[1];
@@ -148,18 +148,7 @@ const plugin = (settings: any = {}) => {
     Once(root) {
       root.nodes.unshift(__postcss.parse(stylesCss));
       const finalAst = processNested(root);
-
-      // if target is a component, do not output styles
-      if (settings.target && settings.target === 'global') {
-        // @ts-ignore
-        Object.keys(global._definedStyles).forEach((styleName) => {
-          // @ts-ignore
-          finalAst.nodes.push(global._definedStyles[styleName]);
-        });
-      }
-
-      let finalCss = finalAst.toString();
-      return finalCss;
+      return finalAst.toString();
     }
   };
 };

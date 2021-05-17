@@ -72,7 +72,11 @@ export default function ({
 
   // @ts-ignore
   global._definedStyles[finalParams.name] = processNested(
-    [`.s-style-${finalParams.name} {`, styleCss, `}`].join('\n')
+    [
+      `.s-style-${finalParams.name.replace(/-default$/, '')} {`,
+      styleCss,
+      `}`
+    ].join('\n')
   );
 
   const AST = processNested([].join('\n'));

@@ -1205,7 +1205,7 @@ export default {
           'font-size': '0.5em'
         },
         mark: {
-          'background-color': 'sugar.color(primary, 30)'
+          'background-color': '[config.theme.themes.default.color.primary.30]'
         },
         del: {
           'text-decoration': 'line-through'
@@ -1236,6 +1236,13 @@ export default {
           transition: '[config.theme.themes.default.transition.fast]',
           styles: ['default:default'],
           colors: ['ui:default']
+        },
+        list: {
+          padding: '0.5em 0.8em',
+          borderRadius: '0.2em',
+          transition: '[config.theme.themes.default.transition.fast]',
+          styles: ['default'],
+          colors: ['primary:default']
         }
       },
 

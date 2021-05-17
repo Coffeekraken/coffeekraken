@@ -32,10 +32,17 @@ export interface IRewritesPluginRewrite {
 
 export default function rewritesPlugin(rewrites: IRewritesPluginRewrite[]) {
   return {
-    name: 'rewritesPlugin',
+    name: 'rewrites-plugin',
     transform(src, id) {
       for (let i = 0; i < rewrites.length; i++) {
-        const rewriteObj = rewrites[i];
+        let rewriteObj = rewrites[i];
+
+        // resolve pathes
+        if (typeof rewriteObj === 'string') {
+          const re = require(rewriteObj);
+          rewriteObj = re.default ?? re;
+        }
+
         if (!src.match(rewriteObj.match)) continue;
         return {
           code: rewriteObj.rewrite(src, id),

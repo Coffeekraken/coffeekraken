@@ -1,16 +1,16 @@
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __vitePluginSvelte from '@sveltejs/vite-plugin-svelte';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __sVitePluginRiotjs from '@coffeekraken/s-vite-plugin-riotjs';
+import __path from 'path';
 
 export default {
   root: '[config.storage.rootDir]',
   base: '/',
   mode: 'development',
   plugins: [
-    __vitePluginSvelte(__sugarConfig('svelte')),
-    __sVitePluginRiotjs(__sugarConfig('riotjs'))
+    __path.resolve(`${__dirname}/../node/plugins/sveltePlugin`),
+    __path.resolve(`${__dirname}/../node/plugins/riotjsPlugin`),
+    __path.resolve(`${__dirname}/../node/plugins/postcssPlugin`)
   ],
   publicDir: '[config.storage.distDir]',
   cacheDir: '[config.storage.cacheDir]/vite',
@@ -29,15 +29,5 @@ export default {
     proxy: {}
   },
   css: {},
-  rewrites: [
-    {
-      match: /handlebars\.js/,
-      rewrite(src, id) {
-        return src.replace(
-          'if (global.Symbol && context[global.Symbol.iterator])',
-          'if (false)'
-        );
-      }
-    }
-  ]
+  rewrites: [__path.resolve(`${__dirname}/../node/rewrites/handlebars`)]
 };

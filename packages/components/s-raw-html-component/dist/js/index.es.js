@@ -1,0 +1,1 @@
+import*as t from"riot";import e from"@coffeekraken/s-component-utils";const n=new e("s-raw-html"),r={css:null,exports:{setInnerHTML(){this.root.innerHTML=n.decodeHtml(this.props.html)},onMounted(){this.setInnerHTML()},onUpdated(){this.setInnerHTML()}},template:null,name:"s-raw-html"};t.register("s-raw-html",r),t.mount("s-raw-html");export default r;

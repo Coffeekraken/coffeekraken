@@ -6,7 +6,7 @@ import __SProcess from './SProcess';
 import __SStdio from '@coffeekraken/s-stdio';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __SProcessManagerProcessWrapper, {
-  ISProcessManagerAttachSettings
+  ISProcessManagerProcessWrapperSettings
 } from './SProcessManagerProcessWrapper';
 
 /**
@@ -30,7 +30,7 @@ import __SProcessManagerProcessWrapper, {
  */
 
 export interface ISProcessManagerProcessSettings
-  extends ISProcessManagerAttachSettings {}
+  extends ISProcessManagerProcessWrapperSettings {}
 
 export interface ISProcessManagerCtorSettings {
   processManager: Partial<ISProcessManagerSettings>;
@@ -106,7 +106,7 @@ class SProcessManager extends __SEventEmitter {
    *
    * @param       {String}        id                    A uniquid for your process
    * @param       {SProcess}      processInstance       The actual process instance
-   * @param       {ISProcessManagerAttachSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
+   * @param       {ISProcessManagerProcessWrapperSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -114,7 +114,7 @@ class SProcessManager extends __SEventEmitter {
   attachProcess(
     id: string,
     processInstance: __SProcess,
-    settings?: Partial<ISProcessManagerAttachSettings>
+    settings?: Partial<ISProcessManagerProcessWrapperSettings>
   ): void {
     // avoid multiple same processes
     if (this._processesStack[id])

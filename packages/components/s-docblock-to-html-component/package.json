@@ -1,0 +1,20 @@
+{
+  "name": "@coffeekraken/s-docblock-to-html-component",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://coffeekraken.io",
+  "main": "dist/js/index.js",
+  "scripts": {
+    "dev": "sugard frontstack dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-interface": "^2.0.0",
+    "@coffeekraken/s-docblock": "^2.0.0",
+    "@coffeekraken/s-docblock-renderer": "^2.0.0",
+    "@coffeekraken/s-highlight-js-component": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0"
+  }
+}

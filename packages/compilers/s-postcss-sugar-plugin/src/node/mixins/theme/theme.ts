@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __theme, { themeDefinition } from '../../utils/theme';
+import __copy from '@coffeekraken/sugar/node/clipboard/copy';
 
 class postcssSugarPluginThemeinInterface extends __SInterface {
   static definition = {
@@ -35,9 +36,18 @@ export default function ({
 
   // @ts-ignore
   const flattenedTheme = __flatten(themesObj[finalParams.theme]);
-  const vars: string[] = [];
+  let vars: string[] = [];
   Object.keys(flattenedTheme).forEach((key) => {
-    vars.push(`--s-theme-${key.replace(/\./gm, '-')}: ${flattenedTheme[key]};`);
+    const value = flattenedTheme[key];
+    if (`${value}`.match(/:/)) {
+      vars.push(
+        `--s-theme-${key.replace(/\./gm, '-')}: "${flattenedTheme[key]}";`
+      );
+    } else {
+      vars.push(
+        `--s-theme-${key.replace(/\./gm, '-')}: ${flattenedTheme[key]};`
+      );
+    }
   });
 
   if (atRule.parent.type === 'root') {

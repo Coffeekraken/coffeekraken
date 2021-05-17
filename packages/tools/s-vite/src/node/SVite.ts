@@ -94,6 +94,16 @@ export default class SVite extends __SClass {
 
         if (!config.plugins) config.plugins = [];
         config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
+
+        // resolve plugins paths
+        config.plugins = config.plugins.map((p) => {
+          if (typeof p === 'string') {
+            const plug = require(p);
+            return plug.default ?? plug;
+          }
+          return p;
+        });
+
         const server = await __viteServer(config);
         const listen = await server.listen();
         emit('log', {
@@ -158,6 +168,11 @@ export default class SVite extends __SClass {
         // plugins
         if (!config.plugins) config.plugins = [];
         config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
+
+        // resolve plugins paths
+        config.plugins = config.plugins.map((p) => {
+          if (typeof p === 'string') return require(p).default;
+        });
 
         // mode (production, development)
         if (params.prod) {

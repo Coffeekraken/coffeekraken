@@ -1,12 +1,5 @@
 {
   "config": {
-    "local": {
-      "js": {
-        "compile": {
-          "bundle": true
-        }
-      }
-    },
     "folders": [
       {
         "scope": "default",
@@ -18,10 +11,11 @@
     {
       "stack": "frontstack",
       "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
+      "defaultAction": "exec",
       "actions": {
-        "start": {
-          "description": "Start the frontstack application into the current working directory",
-          "process": "./src/node/start/start.cli.js"
+        "exec": {
+          "description": "Exec the frontstack application into the current working directory",
+          "process": "./src/node/exec/exec.cli.js"
         }
       }
     }

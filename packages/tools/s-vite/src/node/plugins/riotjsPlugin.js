@@ -1,0 +1,4 @@
+import __sVitePluginRiotjs from '@coffeekraken/s-vite-plugin-riotjs';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
+export default __sVitePluginRiotjs(__sugarConfig('riotjs'));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmlvdGpzUGx1Z2luLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmlvdGpzUGx1Z2luLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0sb0NBQW9DLENBQUM7QUFDckUsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsZUFBZSxtQkFBbUIsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyJ9

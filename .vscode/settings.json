@@ -15,6 +15,7 @@
   "editor.formatOnPaste": true,
   // Default (format when you save)
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "SimonSiefke.prettier-vscode",
   "todo-tree.general.enableFileWatcher": true,
   "todo-tree.general.tags": [
     "@todo",

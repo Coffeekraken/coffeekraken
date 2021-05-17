@@ -1,0 +1,4 @@
+import sVitePluginPostcss from './sVitePluginPostcss';
+export * from './sVitePluginPostcss';
+export default sVitePluginPostcss;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxrQkFBa0IsTUFBTSxzQkFBc0IsQ0FBQztBQUV0RCxjQUFjLHNCQUFzQixDQUFDO0FBRXJDLGVBQWUsa0JBQWtCLENBQUMifQ==

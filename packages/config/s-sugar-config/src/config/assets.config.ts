@@ -5,10 +5,8 @@ export default {
     main: {
       id: 'main',
       defer: true,
-      path: `${__sugarConfig('storage.srcDir')}/css/index.css`,
-      dev: {
-        path: `${__sugarConfig('storage.srcDir')}/css/index.css`
-      }
+      src: `./dist/css/index.css`,
+      'dev:src': '[config.vite.server.hostname]/src/css/index.css'
     }
   },
   js: {
@@ -16,10 +14,8 @@ export default {
       id: 'main',
       type: 'module',
       defer: true,
-      path: `${__sugarConfig('storage.distDir')}/js/index.js`,
-      dev: {
-        path: `${__sugarConfig('storage.srcDir')}/js/index.ts`
-      }
+      src: './dist/js/index.js',
+      'dev:src': '[config.vite.server.hostname]/src/js/index.ts'
     }
   }
 };

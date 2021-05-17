@@ -1,0 +1,13 @@
+{
+  "name": "@coffeekraken/s-vite-plugin-postcss",
+  "version": "2.0.0",
+  "description": "",
+  "main": "./src/node/exports.js",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "postcss": "^8.2.15"
+  },
+  "peerDependencies": {}
+}

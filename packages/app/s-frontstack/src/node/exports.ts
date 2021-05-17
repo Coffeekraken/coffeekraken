@@ -1,7 +1,7 @@
 import SFrontstack from './SFrontstack';
-import SFrontstackStartInterface from './start/interface/SFrontstackStartInterface';
+import SFrontstackExecInterface from './exec/interface/SFrontstackExecInterface';
 
 export * from './SFrontstack';
 
-export { SFrontstackStartInterface };
+export { SFrontstackExecInterface };
 export default SFrontstack;

@@ -1,0 +1,219 @@
+<s-filtrable-input>
+
+<div class={component.className()}>
+
+    <ul class={component.className('__list', 'list')}>
+        <li if={ state.filteredItems.length <= 0 } class={component.className('__list-item __list-no-item')}>
+            <s-raw-html html={ component.compileMustache(state.noItemTemplate, {}) } />
+        </li>
+
+        <li
+            if={ state.filteredItems.length }
+            each={ (item, idx) in state.filteredItems }
+            style="z-index: {999999999 - idx}"
+            class={component.className('__list-item')}
+        >
+            <s-raw-html html={ component.compileMustache(state.itemTemplate, item) } />
+        </li>
+    </ul>
+</div>
+
+  <style type="postcss">
+
+    :host {
+        display: inline-block;
+    }
+
+    .s-filtrable-input {
+        @sugar.scope.bare {
+            display: inline-block;
+            position: relative;
+
+            .s-filtrable-input__list {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                overflow-x: hidden;
+                overflow-y: auto;
+                opacity: 0;
+                max-width: calc(100vw - 100px);
+                pointer-events: none;
+            }
+
+            .s-filtrable-input__input:focus + .s-filtrable-input__list,
+            .s-filtrable-input__list:focus {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            /* .s-filtrable-input--ontop & {
+                    bottom: 100%;
+                    top: initial;
+                    } */
+
+            .s-filtrable-input__list-item {
+                cursor: pointer;
+                position: relative;
+
+                * {
+                    pointer-events: none;
+                }
+            }
+        }
+
+        @sugar.scope.lnf {
+            .s-filtrable-input__list {
+                /* width: 50vw;*/
+            }
+
+            /* .s-filtrable-input--ontop & {
+                bottom: 100%;
+                top: initial;
+                } */
+
+            /* .s-filtrable-input__list-item {
+                background-color: sugar.color(surface, 50);
+                padding: sugar.space(50);
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                background-color: sugar.color(surface, 55);
+                @sugar.depth (2);
+                }
+            } */
+
+            .s-filtrable-input__list-item-highlight {
+                background-color: sugar.color(primary);
+            }
+        }
+    }
+  </style>
+
+  <script lang="ts">
+
+    import { mount } from 'riot';
+    import __SRawHtmlComponent from '@coffeekraken/s-raw-html-component';
+    import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface.ts';
+    import __clone from '@coffeekraken/sugar/shared/object/clone';
+    import __SComponent from '@coffeekraken/s-component-utils';
+
+    export default {
+        state: {
+            $input: undefined,
+            $itemTemplateElm: undefined,
+            itemTemplate: undefined,
+            $noItemTemplateElm: undefined,
+            noItemTemplate: undefined,
+            value: '',
+            items: [{
+                title: 'Hello',
+                body: `Lorem Ipsum is simply dummy text of the printing`
+                },
+                {
+                title: 'Coco',
+                body: `Lorem Ipsum is simply dummy text of the printing`
+                },
+                {
+                title: 'Plopfopof',
+                body: `Lorem Ipsum is simply dummy text of the printing`
+            }],
+            filteredItems: []
+        },
+      async onBeforeMount() {
+          this.component = new __SComponent('s-filtrable-input', this.props, {
+            interface: __SFiltrableInputComponentInterface
+        });
+
+        for (let i = 0; i < 1000; i++) {
+            this.state.items.push({
+            title: 'Coco ' + i,
+            body: `Lorem Ipsum is simply dummy text of the printing`
+            });
+        }
+
+        // try to get the item and no item template elm
+        this.state.$itemTemplateElm = this.root.querySelector('template#item');
+        this.state.$noItemTemplateElm = this.root.querySelector('template#no-item');
+        this.state.$input = this.root.querySelector('input');
+
+        if (this.state.$itemTemplateElm) {
+            this.state.itemTemplate = this.state.$itemTemplateElm.innerHTML;
+        } else {
+            this.state.itemTemplate = `
+                <div class="${this.component.className('__item')}">
+                    {{value}}
+                </div>
+            `;
+        }
+        if (this.state.$noItemTemplateElm) {
+            this.state.noItemTemplate = this.state.$noItemTemplateElm.innerHTML;
+        } else {
+            this.state.noItemTemplate = `
+                <div class="${this.component.className('__no-item')}"> 
+                    ${this.component.props.noItemText}
+                </div>
+            `;
+        }
+        if (!this.state.$input) {
+            throw new Error(`<red>[s-filtrable-input]</red> In order to work you MUST have a valid input tag inside your s-filtrable-input component`);
+        }
+
+        this.state.$input.addEventListener('keyup', (e) => {
+            const value = e.target.value;
+            this.update({
+                value
+            });
+            this.filterItems();
+        });
+        this.state.$input.classList.add(this.component.className('__input'));
+
+        this.root.innerHTML = '';
+
+      },
+      onMounted() {
+          this.root.querySelector('.s-filtrable-input').prepend(this.state.$input);
+          this.filterItems();
+          mount('s-raw-html');
+      },
+      filterItems() {
+            let matchedItemsCount = 0;
+            const filteredItems = this.state.items
+            .map((item) => __clone(item))
+            .filter((item) => {
+                if (matchedItemsCount >= this.component.props.maxItems) return false;
+
+                let matchFilter = false;
+                for (let i = 0; i < Object.keys(item).length; i++) {
+                    const propName = Object.keys(item)[i],
+                        propValue = item[propName];
+
+                    // prevent not string value
+                    if (typeof propValue !== 'string') continue;
+                    // check if the current propName is specified in the filtrable list
+                    if (this.component.props.filtrable.indexOf(propName) !== -1) {
+                        const reg = new RegExp(this.state.value, 'gi');
+                        if (propValue.match(reg)) {
+                            matchFilter = true;
+                            if (this.state.value && this.state.value !== '') {
+                                const reg = new RegExp(this.state.value, 'gi');
+                                const finalString = propValue.replace(reg, (str) => {
+                                    return `<span class="${this.component.className('__list-item-highlight')}">${str}</span>`;
+                                });
+                                item[propName] = finalString;
+                            }
+                        }
+                    }
+                }
+                if (matchFilter) {
+                    matchedItemsCount++;
+                }
+                return matchFilter;
+            });
+            this.update({
+                filteredItems
+            });
+        }
+    }  
+
+  </script>
+</s-filtrable-input>

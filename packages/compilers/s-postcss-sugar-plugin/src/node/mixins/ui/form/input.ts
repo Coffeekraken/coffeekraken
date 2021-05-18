@@ -74,12 +74,12 @@ export default function ({
       vars.push(`
           background-color: transparent;
           border-color: sugar.color(${finalParams.color});
-          color: sugar.color(${finalParams.textColor}, 30);
+          color: sugar.color(${finalParams.textColor}, --darken 20);
           border-style: solid;
           border-width: ${1 / parseInt(defaultSize)}em;
           padding: ${__themeVar('ui.form.padding')};
           &:hover {
-            border-color: sugar.color(${finalParams.color}, 50);
+            border-color: sugar.color(${finalParams.color});
           }
         `);
       break;

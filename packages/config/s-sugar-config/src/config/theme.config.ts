@@ -1,6 +1,7 @@
 import __SColor from '@coffeekraken/s-color';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __isColor from '@coffeekraken/sugar/shared/is/color';
 
 export function prepare(themeConfig, config) {
   Object.keys(themeConfig.themes).forEach((themeName) => {
@@ -16,7 +17,24 @@ export function prepare(themeConfig, config) {
       );
       delete themeConfig.themes[themeName].extends;
     }
+
+    Object.keys(themeObj.color).forEach((colorName) => {
+      Object.keys(themeObj.color[colorName]).forEach((colorVariantName) => {
+        const colorValue = themeObj.color[colorName][colorVariantName];
+        if (__isColor(colorValue)) {
+          const color = new __SColor(colorValue);
+          themeObj.color[colorName][`${colorVariantName}-h`] = color.h;
+          themeObj.color[colorName][`${colorVariantName}-s`] = color.s;
+          themeObj.color[colorName][`${colorVariantName}-l`] = color.l;
+          themeObj.color[colorName][`${colorVariantName}-r`] = color.r;
+          themeObj.color[colorName][`${colorVariantName}-g`] = color.g;
+          themeObj.color[colorName][`${colorVariantName}-b`] = color.b;
+          themeObj.color[colorName][`${colorVariantName}-a`] = color.a;
+        }
+      });
+    });
   });
+
   return themeConfig;
 }
 
@@ -173,28 +191,6 @@ export default {
         defaultModifier: '70'
       },
 
-      colorModifier: {
-        5: '-lighten 45%',
-        10: '-lighten 40%',
-        15: '-lighten 35%',
-        20: '-lighten 30%',
-        25: '-lighten 25%',
-        30: '-lighten 20%',
-        35: '-lighten 15%',
-        40: '-lighten 10%',
-        45: '-lighten 5%',
-        50: '-lighten 0%',
-        55: '-darken 5%',
-        60: '-darken 10%',
-        65: '-darken 15%',
-        70: '-darken 20%',
-        75: '-darken 25%',
-        80: '-darken 30%',
-        85: '-darken 35%',
-        90: '-darken 40%',
-        95: '-darken 45%'
-      },
-
       color: {
         /**
          * @name                default
@@ -208,8 +204,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         default: {
-          default: '#848e91',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#848e91'
         },
 
         /**
@@ -224,8 +219,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         ui: {
-          default: '#BDBDBD',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#BDBDBD'
         },
 
         /**
@@ -240,8 +234,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         title: {
-          default: '#2b3438',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#2b3438'
         },
 
         /**
@@ -256,8 +249,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         text: {
-          default: '#848e91',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#848e91'
         },
 
         /**
@@ -272,8 +264,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         link: {
-          default: '#f2bc2b',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#f2bc2b'
         },
 
         /**
@@ -288,8 +279,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         primary: {
-          default: '#f2bc2b',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#f2bc2b'
         },
 
         /**
@@ -304,8 +294,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         secondary: {
-          default: '#6d858f',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#6d858f'
         },
 
         /**
@@ -320,8 +309,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         surface: {
-          default: '#ffffff',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#ffffff'
         },
 
         /**
@@ -336,8 +324,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         background: {
-          default: '#FAFAFA',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#FAFAFA'
         },
 
         /**
@@ -352,8 +339,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         success: {
-          default: '#5cb85c',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#5cb85c'
         },
 
         /**
@@ -368,8 +354,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         warning: {
-          default: '#f0ad4e',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#f0ad4e'
         },
 
         /**
@@ -384,8 +369,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         error: {
-          default: '#d9534f',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#d9534f'
         },
 
         /**
@@ -400,8 +384,7 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         info: {
-          default: '#2199e8',
-          '...': '[config.theme.themes.default.colorModifier]'
+          default: '#2199e8'
         },
 
         /**

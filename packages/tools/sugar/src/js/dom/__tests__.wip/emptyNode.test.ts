@@ -1,7 +1,6 @@
-import __emptyNode from '../emptyNode';
+import __emptyNode from '../manipulate/emptyNode';
 
 describe('sugar.js.dom.emptyNode', () => {
-
   document.body.innerHTML = `
       <div id="testing">
         <div class="coco">
@@ -16,5 +15,4 @@ describe('sugar.js.dom.emptyNode', () => {
   it('Should have empty the node correctly', () => {
     expect($elm.childNodes.length).toBe(0);
   });
-
 });

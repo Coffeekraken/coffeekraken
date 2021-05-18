@@ -1,7 +1,6 @@
-import __dataset from '../dataset';
+import __dataset from '../data/dataset';
 
 describe('sugar.js.dom.dataset', () => {
-
   document.body.innerHTML = `
       <div id="testing" data-coco="hello"></div>
       <div id="testing1" data-plop="{hello:'coco'}"></div>
@@ -27,5 +26,4 @@ describe('sugar.js.dom.dataset', () => {
       hello: 'coco'
     });
   });
-
 });

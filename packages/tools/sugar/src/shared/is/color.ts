@@ -25,9 +25,29 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isColor(value) {
-  const ele = document.createElement('div');
-  ele.style.color = value;
-  return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
+function isColor(value: any): boolean {
+  try {
+    const ele = document.createElement('div');
+    ele.style.color = value;
+    return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
+  } catch (e) {}
+
+  if (typeof value !== 'string') return false;
+
+  return (
+    value.match(/^#[a-zA-Z0-9]{3,6}$/) ||
+    value.match(
+      /^rgba\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/
+    ) ||
+    value.match(
+      /^rgb\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/
+    ) ||
+    value.match(
+      /^hsl\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/
+    ) ||
+    value.match(
+      /^hsv\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/
+    )
+  );
 }
 export default isColor;

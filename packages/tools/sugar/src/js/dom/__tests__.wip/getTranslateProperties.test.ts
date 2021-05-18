@@ -1,7 +1,6 @@
-import __getTranslateProperties from '../getTranslateProperties';
+import __getTranslateProperties from '../style/getTranslateProperties';
 
 describe('sugar.js.dom.getTranslateProperties', () => {
-
   document.body.innerHTML = `
     <style>
       #testing-matrix {
@@ -43,7 +42,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
       x: 10,
       y: 20,
       z: 0
-    })
+    });
   });
 
   it('Should get the translate properties from a matrix3d css declaration', () => {
@@ -52,7 +51,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
       x: 10,
       y: 20,
       z: 30
-    })
+    });
   });
 
   it('Should get the translate properties from a translate3d css declaration', () => {
@@ -61,7 +60,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
       x: 12,
       y: '50%',
       z: 48
-    })
+    });
   });
 
   it('Should get the translate properties from a translate css declaration', () => {
@@ -70,7 +69,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
       x: 20,
       y: 32,
       z: 0
-    })
+    });
   });
 
   it('Should get the translate properties from a default translateX, translateY and translateZ css declaration', () => {
@@ -79,7 +78,6 @@ describe('sugar.js.dom.getTranslateProperties', () => {
       x: 48,
       y: 10,
       z: '20%'
-    })
+    });
   });
-
 });

@@ -39,6 +39,14 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface ISConfigPrepareFn {
+  (currentConfig: any, config: any): any;
+}
+export interface ISConfigProxyFn {
+  (dotPath: string, originalValue: any, config: any): any;
+}
+
 export default class SConfig {
   /**
    * @name              _name
@@ -73,11 +81,55 @@ export default class SConfig {
    */
   _settings = {};
 
+  /**
+   * @name        registerProxy
+   * @type        Function
+   * @static
+   *
+   * This method allows you to register a proxy function for some particular config.
+   *
+   * @param     {String}      configId        The configuration id you want to proxy
+   * @param     {String}      scopePath       The dot path of the value you want to proxy
+   * @param     {ISConfigProxyFn}     proxyFn       The proxy function that must return a value and that take as parameters the dot path, the original value of the targeted config and the config object
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
   static _registeredProxies: any = {};
-  static registerProxy(configId, scopePath, proxyFn) {
+  static registerProxy(
+    configId: string,
+    scopePath: string,
+    proxyFn: ISConfigProxyFn
+  ) {
     if (!this._registeredProxies[configId])
       this._registeredProxies[configId] = {};
     this._registeredProxies[configId][scopePath] = proxyFn;
+  }
+
+  /**
+   * @name        registerPrepare
+   * @type        Function
+   * @static
+   *
+   * This method allows you to register a prepare function that will be fired once the config is ready so you can make updates as needed
+   *
+   * @param     {String}      configId        The configuration id you want to proxy
+   * @param     {String}      configKey       The root config key you want to prepare with that function. This has to be one of the root config property
+   * @param     {ISConfigPrepareFn}     prepareFn         The prepare function that MUST return the new current config and that take as parameters the current config object and the whole config object
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _registeredPrepares: any = {};
+  static registerPrepare(
+    configId: string,
+    configKey: string,
+    prepareFn: ISConfigPrepareFn
+  ) {
+    console.log('register', configId, configKey);
+    if (!this._registeredPrepares[configId])
+      this._registeredPrepares[configId] = {};
+    this._registeredPrepares[configId][configKey] = prepareFn;
   }
 
   /**
@@ -213,6 +265,16 @@ export default class SConfig {
     let config = this._adapters[adapter].instance.load();
 
     config = this._resolveInternalReferences(config, config);
+
+    if (this.constructor._registeredPrepares[this.id]) {
+      Object.keys(this.constructor._registeredPrepares[this.id]).forEach(
+        (configKey) => {
+          config[configKey] = this.constructor._registeredPrepares[this.id][
+            configKey
+          ](config[configKey], config);
+        }
+      );
+    }
 
     if (config instanceof Promise) {
       return new Promise((resolve) => {

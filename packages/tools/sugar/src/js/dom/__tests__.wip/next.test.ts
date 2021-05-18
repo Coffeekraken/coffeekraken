@@ -1,7 +1,6 @@
-import __next from '../next';
+import __next from '../query/next';
 
 describe('sugar.js.dom.next', () => {
-
   document.body.innerHTML = `
       <div id="testing"></div>
       <div id="next1"></div>
@@ -15,5 +14,4 @@ describe('sugar.js.dom.next', () => {
   it('Should find the $next2 element from the $testing one', () => {
     expect($finded).toEqual($next2);
   });
-
 });

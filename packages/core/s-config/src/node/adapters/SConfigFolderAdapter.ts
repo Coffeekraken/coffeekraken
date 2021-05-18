@@ -171,9 +171,10 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         );
 
         if (configData.prepare && typeof configData.prepare === 'function') {
-          configObj[configKey] = configData.prepare(
-            configObj[configKey],
-            configObj
+          __SConfig.registerPrepare(
+            this.configAdapterSettings.name,
+            configKey,
+            configData.prepare
           );
         }
 

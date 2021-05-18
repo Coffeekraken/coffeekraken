@@ -1,5 +1,5 @@
 import __scriptLoaded from '../scriptLoaded';
-import __dispatchEvent from '../dispatchEvent';
+import __dispatchEvent from '../event/dispatchEvent';
 
 describe('sugar.js.dom.scriptLoaded', () => {
   document.head.innerHTML = `

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import querySelectorLive from '../dom/querySelectorLive';
-import scrollTo from '../dom/scrollTo';
+import scrollTo from '../dom/scroll/scrollTo';
 import easeInOutQuint from '../../shared/easing/easeInOutQuint';
 
 /**

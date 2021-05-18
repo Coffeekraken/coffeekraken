@@ -1,7 +1,6 @@
-import __closestNotVisible from '../closestNotVisible';
+import __closestNotVisible from '../query/closestNotVisible';
 
 describe('sugar.js.dom.closestNotVisible', () => {
-
   document.body.innerHTML = `
   <style>
     #testing {
@@ -20,5 +19,4 @@ describe('sugar.js.dom.closestNotVisible', () => {
     const $testing = __closestNotVisible($elm, '.testing');
     expect($testing.id).toBe('testing');
   });
-
 });

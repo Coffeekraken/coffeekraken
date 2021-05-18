@@ -1,7 +1,6 @@
-import __closest from '../closest';
+import __closest from '../query/closest';
 
 describe('sugar.js.dom.closest', () => {
-
   document.body.innerHTML = `
       <div id="testing">
         <div class="coco">
@@ -15,5 +14,4 @@ describe('sugar.js.dom.closest', () => {
     const $testing = __closest($elm, '#testing');
     expect($testing.id).toBe('testing');
   });
-
 });

@@ -1,7 +1,6 @@
-import __matches from '../matches';
+import __matches from '../query/matches';
 
 describe('sugar.js.dom.matches', () => {
-
   document.body.innerHTML = `
       <div id="testing" class="hello-world coco">
       </div>
@@ -14,5 +13,4 @@ describe('sugar.js.dom.matches', () => {
   it('Should return false on the match testing', () => {
     expect(__matches($elm, '.hello-wold, .coco')).toBe(true);
   });
-
 });

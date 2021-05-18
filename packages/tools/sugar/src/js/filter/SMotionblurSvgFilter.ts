@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __offset from '../dom/offset';
+import __offset from '../dom/offset/offset';
 import SSvgFilter from './SSvgFilter';
 import fastdom from 'fastdom';
-import forceRedraw from '../dom/forceRedraw';
+import forceRedraw from '../dom/utlls/forceRedraw';
 
 /**
  * @name 		SMotionblurSvgFilter

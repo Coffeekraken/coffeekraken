@@ -1,7 +1,6 @@
-import __nodeIndex from '../nodeIndex';
+import __nodeIndex from '../utlls/nodeIndex';
 
 describe('sugar.js.dom.nodeIndex', () => {
-
   document.body.innerHTML = `
       
       <div></div>
@@ -14,5 +13,4 @@ describe('sugar.js.dom.nodeIndex', () => {
   it('Should return 2 as node index for the #testing node', () => {
     expect(__nodeIndex($elm)).toBe(2);
   });
-
 });

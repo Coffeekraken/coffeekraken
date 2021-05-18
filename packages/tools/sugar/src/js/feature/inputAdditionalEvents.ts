@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import fastdom from 'fastdom';
-import __dispatchEvent from '../dom/dispatchEvent';
+import __dispatchEvent from '../dom/event/dispatchEvent';
 
 /**
  * @name 		handleInputAttributes

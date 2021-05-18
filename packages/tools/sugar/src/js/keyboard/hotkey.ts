@@ -2,7 +2,7 @@
 
 import hotkeys from 'hotkeys-js/dist/hotkeys.common';
 import __SPromise from '@coffeekraken/s-promise';
-hotkeys.filter = function (event) {
+hotkeys.filter = function () {
   return true;
 };
 

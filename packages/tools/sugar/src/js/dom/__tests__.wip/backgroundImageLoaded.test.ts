@@ -1,5 +1,5 @@
-import __backgroundImageLoaded from '../backgroundImageLoaded';
-import __dispatchEvent from '../dispatchEvent';
+import __backgroundImageLoaded from '../load/backgroundImageLoaded';
+import __dispatchEvent from '../event/dispatchEvent';
 
 describe('sugar.js.dom.backgroundImageLoaded', () => {
   document.body.innerHTML = `

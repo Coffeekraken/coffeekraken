@@ -3,7 +3,7 @@
 import __SWebComponent from './SWebComponent';
 import { render, html } from 'lit-html';
 import __throttle from '../../shared/function/throttle';
-import __insertAfter from '../dom/insertAfter';
+import __insertAfter from '../dom/manipulate/insertAfter';
 import __deepMerge from '../../shared/object/deepMerge';
 import { asyncReplace } from 'lit-html/directives/async-replace.js';
 import { asyncAppend } from 'lit-html/directives/async-append.js';
@@ -17,7 +17,7 @@ import { templateContent } from 'lit-html/directives/template-content';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
 import { until } from 'lit-html/directives/until.js';
-import __canHaveChildren from '../dom/canHaveChildren';
+import __canHaveChildren from '../dom/utlls/canHaveChildren';
 
 /**
  * @name              SLitHtmlWebComponent

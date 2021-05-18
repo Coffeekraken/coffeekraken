@@ -1,5 +1,5 @@
-import __addEventListener from '../addEventListener';
-import __dispatchEvent from '../dispatchEvent';
+import __addEventListener from '../event/addEventListener';
+import __dispatchEvent from '../event/dispatchEvent';
 
 describe('sugar.js.dom.addEventListener', () => {
   let isCallbackCalled = false,

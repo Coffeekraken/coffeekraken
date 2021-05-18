@@ -1,7 +1,6 @@
-import __dispatchEvent from '../dispatchEvent';
+import __dispatchEvent from '../event/dispatchEvent';
 
 describe('sugar.js.dom.dispatchEvent', () => {
-
   document.body.innerHTML = `
       <div id="testing">
       </div>
@@ -10,7 +9,7 @@ describe('sugar.js.dom.dispatchEvent', () => {
 
   let isDetected = false;
 
-  $elm.addEventListener('coco', e => {
+  $elm.addEventListener('coco', (e) => {
     if (!e.detail.custom) return;
     isDetected = true;
   });
@@ -22,5 +21,4 @@ describe('sugar.js.dom.dispatchEvent', () => {
   it('Should detect the dispatched custom event with custom data attached', () => {
     expect(isDetected).toBe(true);
   });
-
 });

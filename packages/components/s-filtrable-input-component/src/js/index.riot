@@ -2,7 +2,7 @@
 
 <div class={component.className()}>
 
-    <ul class={component.className('__list', 'list')}>
+    <ul class={component.className('__list', 's-list')}>
         <li if={ state.filteredItems.length <= 0 } class={component.className('__list-item __list-no-item')}>
             <s-raw-html html={ component.compileMustache(state.noItemTemplate, {}) } />
         </li>
@@ -11,7 +11,11 @@
             if={ state.filteredItems.length }
             each={ (item, idx) in state.filteredItems }
             style="z-index: {999999999 - idx}"
+            tabindex={ state.isActive ? idx : -1}
+            onfocus={() => _setSelectedItemIdx(idx) }
+            ondblclick={() => _selectAndValidate(idx) }
             class={component.className('__list-item')}
+            
         >
             <s-raw-html html={ component.compileMustache(state.itemTemplate, item) } />
         </li>
@@ -38,18 +42,22 @@
                 opacity: 0;
                 max-width: calc(100vw - 100px);
                 pointer-events: none;
+                margin: 20px 0;
+            }
+
+            &.s-filtrable-input--top {
+                .s-filtrable-input__list {
+                    top: auto;
+                    bottom: 100%;
+                }
             }
 
             .s-filtrable-input__input:focus + .s-filtrable-input__list,
-            .s-filtrable-input__list:focus {
+            .s-filtrable-input__list:focus,
+            .s-filtrable-input__list:focus-within {
                 opacity: 1;
                 pointer-events: all;
             }
-
-            /* .s-filtrable-input--ontop & {
-                    bottom: 100%;
-                    top: initial;
-                    } */
 
             .s-filtrable-input__list-item {
                 cursor: pointer;
@@ -63,27 +71,11 @@
 
         @sugar.scope.lnf {
             .s-filtrable-input__list {
-                /* width: 50vw;*/
+                transition: max-height .1s ease-in-out;
             }
 
-            /* .s-filtrable-input--ontop & {
-                bottom: 100%;
-                top: initial;
-                } */
-
-            /* .s-filtrable-input__list-item {
-                background-color: sugar.color(surface, 50);
-                padding: sugar.space(50);
-                transition: all 0.2s ease-in-out;
-
-                &:hover {
-                background-color: sugar.color(surface, 55);
-                @sugar.depth (2);
-                }
-            } */
-
             .s-filtrable-input__list-item-highlight {
-                background-color: sugar.color(primary);
+                background-color: sugar.color(current);
             }
         }
     }
@@ -96,15 +88,28 @@
     import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface.ts';
     import __clone from '@coffeekraken/sugar/shared/object/clone';
     import __SComponent from '@coffeekraken/s-component-utils';
+    import __distanceFromElementTopToViewportBottom from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom';
+    import __getStyleProperty from '@coffeekraken/sugar/js/dom/style/getStyleProperty';
+    import __distanceFromElementTopToViewportTop from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportTop';
+    import __isFocus from '@coffeekraken/sugar/js/dom/is/focus';
+    import __isFocusWithin from '@coffeekraken/sugar/js/dom/is/focusWithin';
+    import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+    import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags'
 
     export default {
+        $: {
+            container: undefined,
+            list: undefined,
+            input: undefined,
+            itemTemplateElm: undefined,
+            noItemTemplateElm: undefined
+        },
         state: {
-            $input: undefined,
-            $itemTemplateElm: undefined,
             itemTemplate: undefined,
-            $noItemTemplateElm: undefined,
             noItemTemplate: undefined,
+            selectedItemIdx: -1,
             value: '',
+            isActive: false,
             items: [{
                 title: 'Hello',
                 body: `Lorem Ipsum is simply dummy text of the printing`
@@ -132,12 +137,12 @@
         }
 
         // try to get the item and no item template elm
-        this.state.$itemTemplateElm = this.root.querySelector('template#item');
-        this.state.$noItemTemplateElm = this.root.querySelector('template#no-item');
-        this.state.$input = this.root.querySelector('input');
+        this.$.itemTemplateElm = this.root.querySelector('template#item');
+        this.$.noItemTemplateElm = this.root.querySelector('template#no-item');
+        this.$.input = this.root.querySelector('input');
 
-        if (this.state.$itemTemplateElm) {
-            this.state.itemTemplate = this.state.$itemTemplateElm.innerHTML;
+        if (this.$.itemTemplateElm) {
+            this.state.itemTemplate = this.$.itemTemplateElm.innerHTML;
         } else {
             this.state.itemTemplate = `
                 <div class="${this.component.className('__item')}">
@@ -145,8 +150,8 @@
                 </div>
             `;
         }
-        if (this.state.$noItemTemplateElm) {
-            this.state.noItemTemplate = this.state.$noItemTemplateElm.innerHTML;
+        if (this.$.noItemTemplateElm) {
+            this.state.noItemTemplate = this.$.noItemTemplateElm.innerHTML;
         } else {
             this.state.noItemTemplate = `
                 <div class="${this.component.className('__no-item')}"> 
@@ -154,26 +159,120 @@
                 </div>
             `;
         }
-        if (!this.state.$input) {
+        if (!this.$.input) {
             throw new Error(`<red>[s-filtrable-input]</red> In order to work you MUST have a valid input tag inside your s-filtrable-input component`);
         }
 
-        this.state.$input.addEventListener('keyup', (e) => {
+        this.$.input.addEventListener('keyup', (e) => {
             const value = e.target.value;
             this.update({
                 value
             });
             this.filterItems();
         });
-        this.state.$input.classList.add(this.component.className('__input'));
+        this.$.input.classList.add(this.component.className('__input'));
 
         this.root.innerHTML = '';
 
       },
       onMounted() {
-          this.root.querySelector('.s-filtrable-input').prepend(this.state.$input);
+
+          this.$.container = this.root.children[0];
+           this.$.list = this.root.querySelector('ul');
+
+          this.root.querySelector('.s-filtrable-input').prepend(this.$.input);
           this.filterItems();
           mount('s-raw-html');
+
+        document.addEventListener('scroll', this._updateListSizeAndPosition);
+        this.$.input.addEventListener('focus', () => {
+            this.update({
+                isActive: true
+            });
+            this.filterItems();
+            this._updateListSizeAndPosition();
+        });
+        this._updateListSizeAndPosition();
+
+        __hotkey('up').on('press', (e) => {
+            if (!this.state.isActive) return;
+            this.update({
+                selectedItemIdx: this.state.selectedItemIdx > 0 ? this.state.selectedItemIdx - 1 : 0
+            });
+            const $item = this.$.list.children[this.state.selectedItemIdx];
+            $item.focus();
+        });
+        __hotkey('down').on('press', (e) => {
+            if (!this.state.isActive) return;
+            this.update({
+                selectedItemIdx: this.state.selectedItemIdx >= this.state.filteredItems.length-1 ? this.state.filteredItems.length-1 : this.state.selectedItemIdx + 1
+            });
+            const $item = this.$.list.children[this.state.selectedItemIdx];
+            $item.focus();
+        });
+        __hotkey('return').on('press', (e) => {
+            // protect agains actions when not focus
+            // if (!__isFocus(this.$.input) && !__isFocusWithin(this.$.list)) return;
+            if (!this.state.isActive) return;
+            this._validateAndClose()
+        });
+
+      },
+      get selectedItem() {
+          if (this.state.selectedItemIdx === -1) return;
+          return this.state.filteredItems[this.state.selectedItemIdx];
+      },
+      _validateAndClose() {
+        // protect against not selected item
+        if (!this.selectedItem) return;
+        // set the value in the input
+        if (this.selectedItem && !this.selectedItem[this.component.props.value]) {
+            throw new Error(`<red>[s-filtrable-input]</red> Sorry but the property "<yellow>${this.component.props.value}</yellow>" does not exists on your selected item`);
+        }
+        this.$.input.value = __stripTags(this.selectedItem[this.component.props.value]);
+        this.update({
+            value: this.$.input.value
+        });
+        this.$.input.focus();
+        this.$.input.blur();
+        this.update({
+            isActive: false
+        });
+      },
+      _selectAndValidate(idx) {
+          // set the selected idx
+          this._setSelectedItemIdx(idx);
+          // validate and close
+          this._validateAndClose();
+      },
+      _setSelectedItemIdx(idx) {
+          this.update({
+            selectedItemIdx: idx
+        });
+      },
+      _updateListSizeAndPosition() {
+
+        //   if (!__isFocus(this.$.input)) return;
+        if (!this.state.isActive) return;
+
+          const marginTop = __getStyleProperty(this.$.list, 'marginTop'), marginLeft = __getStyleProperty(this.$.list, 'marginLeft'), marginRight = __getStyleProperty(this.$.list, 'marginRight'), marginBottom = __getStyleProperty(this.$.list, 'marginBottom');
+          const distanceTop = __distanceFromElementTopToViewportTop(this.$.input);
+            const distanceBottom = __distanceFromElementTopToViewportBottom(this.$.input) - this.$.input.clientHeight;
+            let maxHeight;
+
+        if (distanceTop > distanceBottom) {
+            this.$.container.classList.add('s-filtrable-input--top');
+            this.$.list.style.top = `auto`;
+            this.$.list.style.bottom = `calc(100% - ${marginBottom})`;
+            maxHeight = distanceTop - parseInt(marginTop);
+        } else {
+            this.$.container.classList.remove('s-filtrable-input--top');
+            this.$.list.style.bottom = `auto`;
+            this.$.list.style.top = `calc(100% - ${marginTop})`;
+            maxHeight = distanceBottom - parseInt(marginBottom);
+        }
+        
+        this.$.list.style.maxHeight = `${maxHeight}px`;
       },
       filterItems() {
             let matchedItemsCount = 0;

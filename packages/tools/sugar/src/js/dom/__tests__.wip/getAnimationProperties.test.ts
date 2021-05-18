@@ -1,7 +1,6 @@
-import __getAnimationProperties from '../getAnimationProperties';
+import __getAnimationProperties from '../style/getAnimationProperties';
 
 describe('sugar.js.dom.getAnimationProperties', () => {
-
   document.body.innerHTML = `
   <style>
     @keyframes coco {
@@ -27,5 +26,4 @@ describe('sugar.js.dom.getAnimationProperties', () => {
   it('Should find the "testing" element that is up in the dom tree', () => {
     //  expect($testing.id).toBe('testing');
   });
-
 });

@@ -36,6 +36,7 @@ export default function ({
 
   const cssArray = [
     `@sugar.theme(${themeConfig.baseTheme});`,
+    `@sugar.color.current(primary);`,
     '@sugar.reset;',
     '@sugar.layout.classes;',
     '@sugar.font.faces;',
@@ -46,7 +47,7 @@ export default function ({
     '@sugar.size.classes;',
     '@sugar.depth.classes;',
     '@sugar.util.classes;',
-    '@sugar.style;'
+    '@sugar.style.classes;'
   ];
 
   const AST = processNested(cssArray.join('\n'));

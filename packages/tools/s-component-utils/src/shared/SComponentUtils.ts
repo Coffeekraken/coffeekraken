@@ -107,7 +107,7 @@ export default class SComponentUtils extends __SClass {
    * @since         2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  className(cls: string = '', style: string = '') {
+  className(cls = '', style = '') {
     let clsString = cls
       .split(' ')
       .map(
@@ -117,14 +117,14 @@ export default class SComponentUtils extends __SClass {
       .join(' ');
 
     if (style && this.props.defaultStyle) {
-      clsString += ` s-style-${style}`;
+      clsString += ` ${style}`;
     }
 
     return clsString;
   }
 
   decodeHtml(input) {
-    var e = document.createElement('textarea');
+    const e = document.createElement('textarea');
     e.innerHTML = input;
     // handle case of empty input
     return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue;

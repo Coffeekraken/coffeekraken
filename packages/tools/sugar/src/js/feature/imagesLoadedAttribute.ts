@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __imageLoaded from '../dom/imageLoaded';
+import __imageLoaded from '../dom/load/imageLoaded';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**

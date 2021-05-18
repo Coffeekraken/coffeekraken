@@ -1,5 +1,5 @@
-import __detectInOutDirection from '../detectInOutDirection';
-import __dispatchEvent from '../dispatchEvent';
+import __detectInOutDirection from '../detection/detectInOutDirection';
+import __dispatchEvent from '../event/dispatchEvent';
 
 describe('sugar.js.dom.detectInOutDirection', () => {
   document.body.innerHTML = `

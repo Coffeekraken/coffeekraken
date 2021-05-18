@@ -19,7 +19,7 @@ import __querySelectorLive from '../../dom/querySelectorLive';
  */
 
 import fastdom from 'fastdom';
-import __dispatchEvent from '../../dom/dispatchEvent';
+import __dispatchEvent from '../../dom/event/dispatchEvent';
 
 function handleDispatchEventAttributes(e) {
   e.preventDefault();

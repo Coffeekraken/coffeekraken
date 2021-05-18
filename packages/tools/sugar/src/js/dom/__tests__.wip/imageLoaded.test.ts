@@ -1,5 +1,5 @@
-import __imageLoaded from '../imageLoaded';
-import __dispatchEvent from '../dispatchEvent';
+import __imageLoaded from '../load/imageLoaded';
+import __dispatchEvent from '../event/dispatchEvent';
 
 describe('sugar.js.dom.imageLoaded', () => {
   document.head.innerHTML = `

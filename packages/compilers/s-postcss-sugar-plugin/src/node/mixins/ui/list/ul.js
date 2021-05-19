@@ -44,11 +44,11 @@ export default function ({ params, atRule, processNested }) {
         }
 
         & > li:hover {
-            background-color: sugar.color(current, --alpha 0.3);
+            background-color: sugar.color(primary, hover);
         }
         & > li:focus,
         & > li[focus] {
-            background-color: sugar.color(current);
+            background-color: sugar.color(primary, focus);
             outline: none;
         }
     }

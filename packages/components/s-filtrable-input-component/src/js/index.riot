@@ -95,19 +95,19 @@
     import __isFocusWithin from '@coffeekraken/sugar/js/dom/is/focusWithin';
     import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
     import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags'
+    import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
 
     export default {
-        $: {
-            container: undefined,
-            list: undefined,
-            input: undefined,
-            itemTemplateElm: undefined,
-            noItemTemplateElm: undefined
-        },
+        $container: undefined,
+        $list: undefined,
+        $input: undefined,
+        $itemTemplateElm: undefined,
+        $noItemTemplateElm: undefined,
         state: {
             itemTemplate: undefined,
             noItemTemplate: undefined,
             selectedItemIdx: -1,
+            displayedMaxItems: 0,
             value: '',
             isActive: false,
             items: [{
@@ -124,7 +124,7 @@
             }],
             filteredItems: []
         },
-      async onBeforeMount() {
+      onBeforeMount() {
           this.component = new __SComponent('s-filtrable-input', this.props, {
             interface: __SFiltrableInputComponentInterface
         });
@@ -136,13 +136,15 @@
             });
         }
 
-        // try to get the item and no item template elm
-        this.$.itemTemplateElm = this.root.querySelector('template#item');
-        this.$.noItemTemplateElm = this.root.querySelector('template#no-item');
-        this.$.input = this.root.querySelector('input');
+        this.state.displayedMaxItems = this.component.props.maxItems;
 
-        if (this.$.itemTemplateElm) {
-            this.state.itemTemplate = this.$.itemTemplateElm.innerHTML;
+        // try to get the item and no item template elm
+        this.$itemTemplateElm = this.$('template#item');
+        this.$noItemTemplateElm = this.$('template#no-item');
+        this.$input = this.$('input');
+
+        if (this.$itemTemplateElm) {
+            this.state.itemTemplate = this.$itemTemplateElm.innerHTML;
         } else {
             this.state.itemTemplate = `
                 <div class="${this.component.className('__item')}">
@@ -150,8 +152,8 @@
                 </div>
             `;
         }
-        if (this.$.noItemTemplateElm) {
-            this.state.noItemTemplate = this.$.noItemTemplateElm.innerHTML;
+        if (this.$noItemTemplateElm) {
+            this.state.noItemTemplate = this.$noItemTemplateElm.innerHTML;
         } else {
             this.state.noItemTemplate = `
                 <div class="${this.component.className('__no-item')}"> 
@@ -159,33 +161,36 @@
                 </div>
             `;
         }
-        if (!this.$.input) {
+        if (!this.$input) {
             throw new Error(`<red>[s-filtrable-input]</red> In order to work you MUST have a valid input tag inside your s-filtrable-input component`);
         }
 
-        this.$.input.addEventListener('keyup', (e) => {
+        this.$input.addEventListener('keyup', (e) => {
             const value = e.target.value;
             this.update({
-                value
+                value,
+                displayedMaxItems: this.component.props.maxItems
+            });
+            this.update({
+                
             });
             this.filterItems();
         });
-        this.$.input.classList.add(this.component.className('__input'));
+        this.$input.classList.add(this.component.className('__input'));
 
         this.root.innerHTML = '';
 
       },
       onMounted() {
+          this.$container = this.root.children[0];
+            this.$list = this.root.querySelector('ul');
 
-          this.$.container = this.root.children[0];
-           this.$.list = this.root.querySelector('ul');
-
-          this.root.querySelector('.s-filtrable-input').prepend(this.$.input);
+          this.root.querySelector('.s-filtrable-input').prepend(this.$input);
           this.filterItems();
           mount('s-raw-html');
 
         document.addEventListener('scroll', this._updateListSizeAndPosition);
-        this.$.input.addEventListener('focus', () => {
+        this.$input.addEventListener('focus', (e) => {
             this.update({
                 isActive: true
             });
@@ -194,12 +199,19 @@
         });
         this._updateListSizeAndPosition();
 
+        __onScrollEnd(this.$list, () => {
+            this.update({
+                displayedMaxItems: (this.state.displayedMaxItems ?? 0) + this.component.props.maxItems
+            });
+            this.filterItems();
+        });
+
         __hotkey('up').on('press', (e) => {
             if (!this.state.isActive) return;
             this.update({
                 selectedItemIdx: this.state.selectedItemIdx > 0 ? this.state.selectedItemIdx - 1 : 0
             });
-            const $item = this.$.list.children[this.state.selectedItemIdx];
+            const $item = this.$list.children[this.state.selectedItemIdx];
             $item.focus();
         });
         __hotkey('down').on('press', (e) => {
@@ -207,12 +219,11 @@
             this.update({
                 selectedItemIdx: this.state.selectedItemIdx >= this.state.filteredItems.length-1 ? this.state.filteredItems.length-1 : this.state.selectedItemIdx + 1
             });
-            const $item = this.$.list.children[this.state.selectedItemIdx];
+            const $item = this.$list.children[this.state.selectedItemIdx];
             $item.focus();
         });
         __hotkey('return').on('press', (e) => {
             // protect agains actions when not focus
-            // if (!__isFocus(this.$.input) && !__isFocusWithin(this.$.list)) return;
             if (!this.state.isActive) return;
             this._validateAndClose()
         });
@@ -229,12 +240,12 @@
         if (this.selectedItem && !this.selectedItem[this.component.props.value]) {
             throw new Error(`<red>[s-filtrable-input]</red> Sorry but the property "<yellow>${this.component.props.value}</yellow>" does not exists on your selected item`);
         }
-        this.$.input.value = __stripTags(this.selectedItem[this.component.props.value]);
+        this.$input.value = __stripTags(this.selectedItem[this.component.props.value]);
         this.update({
-            value: this.$.input.value
+            value: this.$input.value
         });
-        this.$.input.focus();
-        this.$.input.blur();
+        this.$input.focus();
+        this.$input.blur();
         this.update({
             isActive: false
         });
@@ -252,34 +263,34 @@
       },
       _updateListSizeAndPosition() {
 
-        //   if (!__isFocus(this.$.input)) return;
+        //   if (!__isFocus(this.$input)) return;
         if (!this.state.isActive) return;
 
-          const marginTop = __getStyleProperty(this.$.list, 'marginTop'), marginLeft = __getStyleProperty(this.$.list, 'marginLeft'), marginRight = __getStyleProperty(this.$.list, 'marginRight'), marginBottom = __getStyleProperty(this.$.list, 'marginBottom');
-          const distanceTop = __distanceFromElementTopToViewportTop(this.$.input);
-            const distanceBottom = __distanceFromElementTopToViewportBottom(this.$.input) - this.$.input.clientHeight;
+          const marginTop = __getStyleProperty(this.$list, 'marginTop'), marginLeft = __getStyleProperty(this.$list, 'marginLeft'), marginRight = __getStyleProperty(this.$list, 'marginRight'), marginBottom = __getStyleProperty(this.$list, 'marginBottom');
+          const distanceTop = __distanceFromElementTopToViewportTop(this.$input);
+            const distanceBottom = __distanceFromElementTopToViewportBottom(this.$input) - this.$input.clientHeight;
             let maxHeight;
 
         if (distanceTop > distanceBottom) {
-            this.$.container.classList.add('s-filtrable-input--top');
-            this.$.list.style.top = `auto`;
-            this.$.list.style.bottom = `calc(100% - ${marginBottom})`;
+            this.$container.classList.add('s-filtrable-input--top');
+            this.$list.style.top = `auto`;
+            this.$list.style.bottom = `calc(100% - ${marginBottom})`;
             maxHeight = distanceTop - parseInt(marginTop);
         } else {
-            this.$.container.classList.remove('s-filtrable-input--top');
-            this.$.list.style.bottom = `auto`;
-            this.$.list.style.top = `calc(100% - ${marginTop})`;
+            this.$container.classList.remove('s-filtrable-input--top');
+            this.$list.style.bottom = `auto`;
+            this.$list.style.top = `calc(100% - ${marginTop})`;
             maxHeight = distanceBottom - parseInt(marginBottom);
         }
         
-        this.$.list.style.maxHeight = `${maxHeight}px`;
+        this.$list.style.maxHeight = `${maxHeight}px`;
       },
       filterItems() {
             let matchedItemsCount = 0;
             const filteredItems = this.state.items
             .map((item) => __clone(item))
             .filter((item) => {
-                if (matchedItemsCount >= this.component.props.maxItems) return false;
+                if (matchedItemsCount >= this.state.displayedMaxItems) return false;
 
                 let matchFilter = false;
                 for (let i = 0; i < Object.keys(item).length; i++) {

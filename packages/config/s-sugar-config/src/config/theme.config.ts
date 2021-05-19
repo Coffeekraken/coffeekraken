@@ -108,6 +108,16 @@ export default {
       layout: {
         container: {
           'max-width': '1280px'
+        },
+        layout: {
+          '1': '1',
+          '12': '1 2',
+          '123': '1 2 3',
+          '1234': '1 2 3 4',
+          '122': '1 2 2',
+          '112': '1 1 2',
+          '12345': '1 2 3 4 5',
+          '123456': '1 2 3 4 5 6'
         }
       },
 
@@ -279,7 +289,12 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         primary: {
-          default: '#f2bc2b'
+          default: '#f2bc2b',
+          surface: '--lighten 0',
+          hover: '--lighten 30',
+          focus: '--lighten 15',
+          foreground: '--lighten',
+          'foreground-hover': '--lighten 50'
         },
 
         /**

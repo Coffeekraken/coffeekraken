@@ -87,18 +87,23 @@ export default function color({
   let colorName = finalParams.name;
   let modifierName = 'default';
 
-  const nameParts = finalParams.name.split('.');
-  if (nameParts.length === 2) {
-    colorName = nameParts[0];
-    modifierName = nameParts[1];
-  }
+  // const nameParts = finalParams.name.split('.');
+  // if (nameParts.length === 2) {
+  //   colorName = nameParts[0];
+  //   modifierName = nameParts[1];
+  // }
 
   let modifierParams = {};
-  if (finalParams.modifier) {
+  if (finalParams.modifier && finalParams.modifier.match(/^--/)) {
     modifierParams = ColorModifierInterface.apply(finalParams.modifier);
     if (!modifierParams.hasIssues()) {
       modifierParams = modifierParams.value;
     }
+  } else if (
+    finalParams.modifier &&
+    finalParams.modifier.trim().match(/[a-zA-Z0-9_-]+/)
+  ) {
+    modifierName = finalParams.modifier;
   }
 
   if (__isColor(colorName)) {
@@ -127,7 +132,7 @@ export default function color({
     }
 
     let colorVar = `--s-theme-color-${colorName}-${modifierName}`;
-    if (colorName === 'current') colorVar = `--s-theme-current-color`;
+    // if (colorName === 'current') colorVar = `--s-theme-current-color`;
     let finalValue = colorVar;
 
     if (

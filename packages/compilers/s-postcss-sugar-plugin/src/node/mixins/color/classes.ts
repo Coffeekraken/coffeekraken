@@ -1,6 +1,6 @@
 import __theme from '../../utils/theme';
 import __SInterface from '@coffeekraken/s-interface';
-import sugar from '@coffeekraken/s-sugar-config';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
   static definition = {};
@@ -33,76 +33,80 @@ export default function ({ params, atRule, processNested }) {
   colors.forEach((colorName) => {
     const colorObj = colorsObj[colorName];
 
-    cssArray.push(
-      [
-        `/**`,
-        ` * @name           s-current-color-${colorName}`,
-        ` * @namespace      sugar.css.color.classes.${colorName}`,
-        ` * @type           CssClass`,
-        ` *`,
-        ` * This class allows you to apply the "${colorName}" color to an HTMLElement`,
-        ` *`,
-        ` * @example        html`,
-        ` * <h1 class="s-current-color-${colorName}">`,
-        ` *     Something cool`,
-        ` * </h1>`,
-        ` */`,
-        `.s-current-color-${colorName} {`,
-        `   @sugar.color.current(${colorName})`,
-        `}`
-      ].join('\n')
-    );
+    Object.keys(colorObj).forEach((colorVariantName) => {
+      if (colorVariantName.match(/-[hslrgba]$/)) return;
 
-    Object.keys(colorObj).forEach((modifier) => {
-      if (modifier.match(/-[hslrgba]$/)) return;
+      const colorVariantValue = colorObj[colorVariantName];
 
       let modifierStr = '';
-      if (modifier.match(/^default/)) {
+      if (colorVariantName.match(/^default/)) {
         modifierStr = ``;
-        modifier = '';
+        colorVariantName = '';
       } else {
-        modifierStr = `-${modifier}`;
+        modifierStr = `-${colorVariantName}`;
       }
 
-      cssArray.push(
-        [
-          `/**`,
-          ` * @name           s-color-${colorName}${modifierStr}`,
-          ` * @namespace      sugar.css.color.classes.${colorName}.${modifier}`,
-          ` * @type           CssClass`,
-          ` *`,
-          ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
-          ` *`,
-          ` * @example        html`,
-          ` * <h1 class="s-color-${colorName}${modifierStr}">`,
-          ` *     Something cool`,
-          ` * </h1>`,
-          ` */`,
-          `.s-color-${colorName}${modifierStr} {`,
-          `   color: sugar.color(${colorName},${modifier});`,
-          `}`
-        ].join('\n')
-      );
+      if (colorVariantName.match(/^:/) && __isPlainObject(colorVariantValue)) {
+        Object.keys(colorVariantValue).forEach((modifierName) => {
+          let className;
+          switch (colorVariantName) {
+            case ':hover':
+              className = `[hoverable]:hover:not([hoverable]:not(:hover) &)`;
+              break;
+            case ':focus':
+              className = '*:focus, *:focus-within';
+              break;
+            case ':active':
+              className = `*:active`;
+              break;
+          }
 
-      cssArray.push(
-        [
-          `/**`,
-          ` * @name           s-bg-${colorName}${modifierStr}`,
-          ` * @namespace      sugar.css.color.classes.bg.${colorName}.${modifier}`,
-          ` * @type           CssClass`,
-          ` *`,
-          ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
-          ` *`,
-          ` * @example        html`,
-          ` * <h1 class="s-bg-${colorName}${modifierStr}">`,
-          ` *     Something cool`,
-          ` * </h1>`,
-          ` */`,
-          `.s-bg-${colorName}${modifierStr} {`,
-          `   background-color: sugar.color(${colorName},${modifier})`,
-          `}`
-        ].join('\n')
-      );
+          cssArray.push(`
+            .${className} {
+            }
+          `);
+        });
+      } else {
+        cssArray.push(
+          [
+            `/**`,
+            ` * @name           s-color-${colorName}${modifierStr}`,
+            ` * @namespace      sugar.css.color.classes.${colorName}.${colorVariantName}`,
+            ` * @type           CssClass`,
+            ` *`,
+            ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
+            ` *`,
+            ` * @example        html`,
+            ` * <h1 class="s-color-${colorName}${modifierStr}">`,
+            ` *     Something cool`,
+            ` * </h1>`,
+            ` */`,
+            `.s-color-${colorName}${modifierStr} {`,
+            `   color: sugar.color(${colorName},${colorVariantName});`,
+            `}`
+          ].join('\n')
+        );
+
+        cssArray.push(
+          [
+            `/**`,
+            ` * @name           s-bg-${colorName}${modifierStr}`,
+            ` * @namespace      sugar.css.color.classes.bg.${colorName}.${colorVariantName}`,
+            ` * @type           CssClass`,
+            ` *`,
+            ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
+            ` *`,
+            ` * @example        html`,
+            ` * <h1 class="s-bg-${colorName}${modifierStr}">`,
+            ` *     Something cool`,
+            ` * </h1>`,
+            ` */`,
+            `.s-bg-${colorName}${modifierStr} {`,
+            `   background-color: sugar.color(${colorName},${colorVariantName})`,
+            `}`
+          ].join('\n')
+        );
+      }
     });
   });
 

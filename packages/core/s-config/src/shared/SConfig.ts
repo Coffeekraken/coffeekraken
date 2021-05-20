@@ -402,7 +402,10 @@ export default class SConfig {
     }
 
     // check proxy
-    if (this.constructor._registeredProxies[this.id][path[0]]) {
+    if (
+      this.constructor._registeredProxies[this.id] &&
+      this.constructor._registeredProxies[this.id][path[0]]
+    ) {
       originalValue = this.constructor._registeredProxies[this.id][path[0]](
         path.join('.'),
         originalValue,

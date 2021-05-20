@@ -66,16 +66,21 @@ export default function ({
             padding: sugar.space(40);
         }
 
-        & > li:hover {
-            background-color: sugar.color(primary, hover);
+        @sugar.state.hover {
+          background-color: sugar.color(primary:hover, surface);
         }
-        & > li:focus,
-        & > li[focus] {
-            background-color: sugar.color(primary, focus);
-            outline: none;
-        }
+
     }
   `);
+
+  // & > li:hover {
+  //         background-color: sugar.color(primary, hover);
+  //     }
+  //     & > li:focus,
+  //     & > li[focus] {
+  //         background-color: sugar.color(primary, focus);
+  //         outline: none;
+  //     }
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

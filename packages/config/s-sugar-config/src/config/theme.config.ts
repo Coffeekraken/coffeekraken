@@ -2,6 +2,7 @@ import __SColor from '@coffeekraken/s-color';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 
 export function prepare(themeConfig, config) {
   Object.keys(themeConfig.themes).forEach((themeName) => {
@@ -21,15 +22,38 @@ export function prepare(themeConfig, config) {
     Object.keys(themeObj.color).forEach((colorName) => {
       Object.keys(themeObj.color[colorName]).forEach((colorVariantName) => {
         const colorValue = themeObj.color[colorName][colorVariantName];
-        if (__isColor(colorValue)) {
+        if (colorVariantName.match(/^:/) && __isPlainObject(colorValue)) {
+          Object.keys(colorValue).forEach((modifierName) => {
+            const modifierValue = colorValue[modifierName];
+
+            if (
+              colorVariantName !== ':hover' &&
+              colorVariantName !== ':focus' &&
+              colorVariantName !== ':active'
+            ) {
+              throw new Error(
+                `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but the specified state variant "<yellow>${modifierName}</yellow>" is not a valid one. Supported states are <green>:hover, :focus and :active</green>`
+              );
+            }
+
+            if (__isColor(modifierValue)) {
+              throw new Error(
+                `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but a color state variant cannot be a color but just a color modifier like "--darken 10", etc...`
+              );
+            }
+            // themeObj.color[colorName][
+            //   `${colorVariantName}-${modifierName}`
+            // ] = modifierValue;
+          });
+        } else if (__isColor(colorValue)) {
           const color = new __SColor(colorValue);
           themeObj.color[colorName][`${colorVariantName}-h`] = color.h;
           themeObj.color[colorName][`${colorVariantName}-s`] = color.s;
           themeObj.color[colorName][`${colorVariantName}-l`] = color.l;
-          themeObj.color[colorName][`${colorVariantName}-r`] = color.r;
-          themeObj.color[colorName][`${colorVariantName}-g`] = color.g;
-          themeObj.color[colorName][`${colorVariantName}-b`] = color.b;
-          themeObj.color[colorName][`${colorVariantName}-a`] = color.a;
+          // themeObj.color[colorName][`${colorVariantName}-r`] = color.r;
+          // themeObj.color[colorName][`${colorVariantName}-g`] = color.g;
+          // themeObj.color[colorName][`${colorVariantName}-b`] = color.b;
+          // themeObj.color[colorName][`${colorVariantName}-a`] = color.a;
         }
       });
     });
@@ -38,47 +62,47 @@ export function prepare(themeConfig, config) {
   return themeConfig;
 }
 
-export function proxy(path, originalValue, config) {
-  // if (path.match(/\.color\.[a-zA-Z0-9]+$/)) {
-  //   const newStack = originalValue;
-  //   Object.keys(originalValue).forEach((modName) => {
-  //     const color = new __SColor(newStack[modName]);
-  //     newStack[`${modName}-i`] = color.apply('-i').toString();
-  //   });
-  //   return newStack;
-  // }
+// export function proxy(path, originalValue, config) {
+//   // if (path.match(/\.color\.[a-zA-Z0-9]+$/)) {
+//   //   const newStack = originalValue;
+//   //   Object.keys(originalValue).forEach((modName) => {
+//   //     const color = new __SColor(newStack[modName]);
+//   //     newStack[`${modName}-i`] = color.apply('-i').toString();
+//   //   });
+//   //   return newStack;
+//   // }
 
-  if (path.match(/\.color\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
-    if (path.split('.').pop() === 'default') {
-      return originalValue;
-    }
-    const defaultColor = __get(
-      config,
-      path.split('.').slice(0, -1).join('.') + '.default'
-    );
-    if (typeof originalValue === 'string') {
-      if (
-        originalValue.slice(0, 1) === '#' &&
-        (originalValue.length === 7 || originalValue.length === 4)
-      ) {
-        return originalValue;
-      } else if (originalValue.match(/^rgb\(.*,.*,.*\)$/)) {
-        return originalValue;
-      } else if (originalValue.match(/^rgba\(.*,.*,.*,.*\)$/)) {
-        return originalValue;
-      } else if (originalValue.match(/^hsl\(.*,.*,.*\)$/)) {
-        return originalValue;
-      } else if (originalValue.match(/^hsla\(.*,.*,.*,.*\)$/)) {
-        return originalValue;
-      } else {
-        const color = new __SColor(defaultColor);
-        color.apply(originalValue);
-        return color.toString();
-      }
-    }
-  }
-  return originalValue;
-}
+//   if (path.match(/\.color\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/)) {
+//     if (path.split('.').pop() === 'default') {
+//       return originalValue;
+//     }
+//     const defaultColor = __get(
+//       config,
+//       path.split('.').slice(0, -1).join('.') + '.default'
+//     );
+//     if (typeof originalValue === 'string') {
+//       if (
+//         originalValue.slice(0, 1) === '#' &&
+//         (originalValue.length === 7 || originalValue.length === 4)
+//       ) {
+//         return originalValue;
+//       } else if (originalValue.match(/^rgb\(.*,.*,.*\)$/)) {
+//         return originalValue;
+//       } else if (originalValue.match(/^rgba\(.*,.*,.*,.*\)$/)) {
+//         return originalValue;
+//       } else if (originalValue.match(/^hsl\(.*,.*,.*\)$/)) {
+//         return originalValue;
+//       } else if (originalValue.match(/^hsla\(.*,.*,.*,.*\)$/)) {
+//         return originalValue;
+//       } else {
+//         const color = new __SColor(defaultColor);
+//         color.apply(originalValue);
+//         return color.toString();
+//       }
+//     }
+//   }
+//   return originalValue;
+// }
 
 export default {
   /**
@@ -291,10 +315,16 @@ export default {
         primary: {
           default: '#f2bc2b',
           surface: '--lighten 0',
-          hover: '--lighten 30',
-          focus: '--lighten 15',
-          foreground: '--lighten',
-          'foreground-hover': '--lighten 50'
+          ':hover': {
+            surface: '--darken 30'
+          }
+          // ':focus': {
+          //   surface: '--lighten 15',
+          //   foreground: '--lighten 40'
+          // },
+          // ':active': {
+          //   foreground: '--lighten 50'
+          // }
         },
 
         /**

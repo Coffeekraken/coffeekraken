@@ -15,7 +15,7 @@
             onfocus={() => _setSelectedItemIdx(idx) }
             ondblclick={() => _selectAndValidate(idx) }
             class={component.className('__list-item')}
-            
+            hoverable
         >
             <s-raw-html html={ component.compileMustache(state.itemTemplate, item) } />
         </li>

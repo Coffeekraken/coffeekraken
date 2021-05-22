@@ -2,10 +2,6 @@
 
 @sugar.ui.classes;
 
-.layout-1 {
+/* .layout-1 {
   @sugar.layout ('1 2 3');
-}
-
-/* .s-filtrable-input__list {
-  @sugar.style.apply (list-default);
 } */

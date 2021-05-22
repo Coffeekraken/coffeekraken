@@ -147,7 +147,20 @@ const plugin = (settings: any = {}) => {
     postcssPlugin: 'sugar',
     Once(root) {
       root.nodes.unshift(__postcss.parse(stylesCss));
-      const finalAst = processNested(root);
+      let finalAst = processNested(root);
+
+      const postProcessorsPaths = __glob.sync('**/*.js', {
+        cwd: `${__dirname}/postProcessors`
+      });
+      postProcessorsPaths.forEach((path) => {
+        const processorFn = require(`${__dirname}/postProcessors/${path}`)
+          .default;
+        finalAst = processorFn({
+          ast: finalAst,
+          root
+        });
+      });
+
       return finalAst.toString();
     }
   };

@@ -50,10 +50,6 @@ export function prepare(themeConfig, config) {
           themeObj.color[colorName][`${colorVariantName}-h`] = color.h;
           themeObj.color[colorName][`${colorVariantName}-s`] = color.s;
           themeObj.color[colorName][`${colorVariantName}-l`] = color.l;
-          // themeObj.color[colorName][`${colorVariantName}-r`] = color.r;
-          // themeObj.color[colorName][`${colorVariantName}-g`] = color.g;
-          // themeObj.color[colorName][`${colorVariantName}-b`] = color.b;
-          // themeObj.color[colorName][`${colorVariantName}-a`] = color.a;
         }
       });
     });
@@ -225,6 +221,12 @@ export default {
         defaultModifier: '70'
       },
 
+      colorSchema: {
+        default: 'default',
+        accent: 'primary',
+        complementary: 'secondary'
+      },
+
       color: {
         /**
          * @name                default
@@ -313,18 +315,23 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         primary: {
-          default: '#f2bc2b',
-          surface: '--lighten 0',
+          default: '#f2d72b',
+          text: '--darken 30',
+          highlight: '--lighten 0',
+          surface: '--lighten 45',
+          foreground: '--darken 0',
           ':hover': {
-            surface: '--darken 30'
+            surface: '--lighten 35',
+            foreground: '--darken 40'
+          },
+          ':focus': {
+            surface: '--lighten 20',
+            foreground: '--darken 40'
+          },
+          ':active': {
+            surface: '--lighten 0',
+            foreground: '--lighten 50'
           }
-          // ':focus': {
-          //   surface: '--lighten 15',
-          //   foreground: '--lighten 40'
-          // },
-          // ':active': {
-          //   foreground: '--lighten 50'
-          // }
         },
 
         /**
@@ -647,7 +654,7 @@ export default {
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
           default: {
-            'font-family': 'Titillium Web',
+            'font-family': '"Titillium Web"',
             'font-weight': 400,
             import:
               'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
@@ -664,7 +671,7 @@ export default {
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
           title: {
-            'font-family': 'Titillium Web',
+            'font-family': '"Titillium Web"',
             'font-weight': 400,
             import:
               'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
@@ -681,7 +688,7 @@ export default {
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
           quote: {
-            'font-family': 'Palatino, Times, Georgia, serif',
+            'font-family': '"Palatino, Times, Georgia, serif"',
             'font-weight': 'normal',
             'font-style': 'normal',
             'font-display': 'auto',
@@ -699,7 +706,7 @@ export default {
            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
           code: {
-            'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
+            'font-family': '"Menlo, Monaco, Consolas, Courier New, monospace"',
             'font-weight': 'normal',
             'font-style': 'normal',
             'font-display': 'auto',
@@ -1254,20 +1261,20 @@ export default {
       ui: {
         button: {
           padding: '1em 2em',
-          borderRadius: '0.2em',
+          borderRadius: '[config.theme.themes.default.border.radius.default]',
           transition: '[config.theme.themes.default.transition.fast]',
           styles: ['default', 'outlined', 'text']
         },
         form: {
           padding: '0.5em 0.8em',
-          borderRadius: '0.2em',
+          borderRadius: '[config.theme.themes.default.border.radius.default]',
           transition: '[config.theme.themes.default.transition.fast]',
           styles: ['default:default'],
           colors: ['ui:default']
         },
         list: {
           padding: '0.5em 0.8em',
-          borderRadius: '0.2em',
+          borderRadius: '[config.theme.themes.default.border.radius.default]',
           transition: '[config.theme.themes.default.transition.fast]',
           styles: ['default'],
           colors: ['primary:default']

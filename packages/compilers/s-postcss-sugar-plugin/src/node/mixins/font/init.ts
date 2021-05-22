@@ -35,8 +35,8 @@ export default function ({
   vars.push(
     [
       'html {',
-      `@sugar.font.family(default);`,
-      '@sugar.font.size(default);',
+      `   @sugar.font.family(default);`,
+      '   @sugar.font.size(default);',
       '}'
     ].join('\n')
   );

@@ -31,7 +31,7 @@ export default function ({
 }) {
   const cssArray = [
     // `@sugar.ui.button.classes;`,
-    // '@sugar.ui.form.classes;',
+    '@sugar.ui.form.classes;',
     '@sugar.ui.list.classes;'
   ];
 

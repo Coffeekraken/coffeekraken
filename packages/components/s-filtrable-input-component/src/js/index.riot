@@ -12,9 +12,9 @@
             each={ (item, idx) in state.filteredItems }
             style="z-index: {999999999 - idx}"
             tabindex={ state.isActive ? idx : -1}
-            onfocus={() => _setSelectedItemIdx(idx) }
+            onfocus={() => _setPreselectedItemIdx(idx) }
             ondblclick={() => _selectAndValidate(idx) }
-            class={component.className('__list-item')}
+            class={component.className('__list-item') + ' ' + (state.selectedItemIdx === idx ? 'active' : '')}
             hoverable
         >
             <s-raw-html html={ component.compileMustache(state.itemTemplate, item) } />
@@ -106,6 +106,7 @@
         state: {
             itemTemplate: undefined,
             noItemTemplate: undefined,
+            preselectedItemIdx: -1,
             selectedItemIdx: -1,
             displayedMaxItems: 0,
             value: '',
@@ -143,6 +144,10 @@
         this.$noItemTemplateElm = this.$('template#no-item');
         this.$input = this.$('input');
 
+        if (this.component.props.defaultStyle) {
+            this.$input.classList.add('s-form-input');
+        }
+
         if (this.$itemTemplateElm) {
             this.state.itemTemplate = this.$itemTemplateElm.innerHTML;
         } else {
@@ -171,8 +176,13 @@
                 value,
                 displayedMaxItems: this.component.props.maxItems
             });
+            this.filterItems();
+        });
+        this.$input.addEventListener('focus', (e) => {
+            const value = e.target.value;
             this.update({
-                
+                value,
+                displayedMaxItems: this.component.props.maxItems
             });
             this.filterItems();
         });
@@ -206,20 +216,27 @@
             this.filterItems();
         });
 
+        __hotkey('escape').on('press', (e) => {
+            e.preventDefault();
+            if (!this.state.isActive) return;
+            this.close();
+        });
         __hotkey('up').on('press', (e) => {
+            e.preventDefault();
             if (!this.state.isActive) return;
             this.update({
-                selectedItemIdx: this.state.selectedItemIdx > 0 ? this.state.selectedItemIdx - 1 : 0
+                preselectedItemIdx: this.state.preselectedItemIdx > 0 ? this.state.preselectedItemIdx - 1 : 0
             });
-            const $item = this.$list.children[this.state.selectedItemIdx];
+            const $item = this.$list.children[this.state.preselectedItemIdx];
             $item.focus();
         });
         __hotkey('down').on('press', (e) => {
+            e.preventDefault();
             if (!this.state.isActive) return;
             this.update({
-                selectedItemIdx: this.state.selectedItemIdx >= this.state.filteredItems.length-1 ? this.state.filteredItems.length-1 : this.state.selectedItemIdx + 1
+                preselectedItemIdx: this.state.preselectedItemIdx >= this.state.filteredItems.length-1 ? this.state.filteredItems.length-1 : this.state.preselectedItemIdx + 1
             });
-            const $item = this.$list.children[this.state.selectedItemIdx];
+            const $item = this.$list.children[this.state.preselectedItemIdx];
             $item.focus();
         });
         __hotkey('return').on('press', (e) => {
@@ -233,17 +250,28 @@
           if (this.state.selectedItemIdx === -1) return;
           return this.state.filteredItems[this.state.selectedItemIdx];
       },
+      get preselectedItem() {
+          if (this.state.preselectedItemIdx === -1) return;
+          return this.state.filteredItems[this.state.preselectedItemIdx];
+      },
       _validateAndClose() {
         // protect against not selected item
-        if (!this.selectedItem) return;
+        if (!this.preselectedItem) return;
         // set the value in the input
-        if (this.selectedItem && !this.selectedItem[this.component.props.value]) {
+        if (this.preselectedItem && !this.preselectedItem[this.component.props.value]) {
             throw new Error(`<red>[s-filtrable-input]</red> Sorry but the property "<yellow>${this.component.props.value}</yellow>" does not exists on your selected item`);
         }
-        this.$input.value = __stripTags(this.selectedItem[this.component.props.value]);
+        this.$input.value = __stripTags(this.preselectedItem[this.component.props.value]);
         this.update({
+            selectedItemIdx: this.state.preselectedItemIdx,
             value: this.$input.value
         });
+
+        setTimeout(() => {
+            this.close();
+        }, this.component.props.closeTimeout);
+      },
+      close() {
         this.$input.focus();
         this.$input.blur();
         this.update({
@@ -252,13 +280,13 @@
       },
       _selectAndValidate(idx) {
           // set the selected idx
-          this._setSelectedItemIdx(idx);
+          this._setPreselectedItemIdx(idx);
           // validate and close
           this._validateAndClose();
       },
-      _setSelectedItemIdx(idx) {
+      _setPreselectedItemIdx(idx) {
           this.update({
-            selectedItemIdx: idx
+            preselectedItemIdx: idx
         });
       },
       _updateListSizeAndPosition() {
@@ -307,7 +335,7 @@
                             if (this.state.value && this.state.value !== '') {
                                 const reg = new RegExp(this.state.value, 'gi');
                                 const finalString = propValue.replace(reg, (str) => {
-                                    return `<span class="${this.component.className('__list-item-highlight')}">${str}</span>`;
+                                    return `<span class="${this.component.className('__list-item-highlight')} s-highlight">${str}</span>`;
                                 });
                                 item[propName] = finalString;
                             }

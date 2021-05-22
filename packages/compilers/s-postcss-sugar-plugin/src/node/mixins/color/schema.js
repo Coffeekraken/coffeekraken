@@ -1,43 +1,46 @@
 // @ts-nocheck
 import __SInterface from '@coffeekraken/s-interface';
+import __themeColorObjToVars from '../../utils/themeColorObjToVars';
 class postcssSugarPluginColorSchemaInterface extends __SInterface {
 }
 postcssSugarPluginColorSchemaInterface.definition = {
-    primary: {
+    base: {
         type: 'String',
         required: true,
-        alias: 'p'
+        alias: 'b'
     },
-    secondary: {
+    accent: {
         type: 'String',
-        alias: 's'
+        alias: 'a'
+    },
+    complementary: {
+        type: 'String',
+        alias: 'c'
     }
 };
 export { postcssSugarPluginColorSchemaInterface as interface };
 export default function ({ params, atRule, processNested }) {
-    const finalParams = Object.assign({ primary: '', secondary: '' }, params);
-    const vars = [
-        `--s-theme-color-schema-primary: var(--s-theme-color-${finalParams.primary}-default);`,
-        `--s-theme-color-schema-primary-h: var(--s-theme-color-${finalParams.primary}-default-h);`,
-        `--s-theme-color-schema-primary-s: var(--s-theme-color-${finalParams.primary}-default-s);`,
-        `--s-theme-color-schema-primary-l: var(--s-theme-color-${finalParams.primary}-default-l);`
-        // `--s-theme-color-schema-primary-r: var(--s-theme-color-${finalParams.primary}-default-r);`,
-        // `--s-theme-color-schema-primary-g: var(--s-theme-color-${finalParams.primary}-default-g);`,
-        // `--s-theme-color-schema-primary-b: var(--s-theme-color-${finalParams.primary}-default-b);`,
-        // `--s-theme-color-schema-primary-a: var(--s-theme-color-${finalParams.primary}-default-a);`
-    ];
-    // if (finalParams.secondary) {
-    //   const vars: string[] = [
-    //     `--s-theme-color-schema-secondary: var(--s-theme-color-${finalParams.secondary}-default);`,
-    //     `--s-theme-color-schema-secondary-h: var(--s-theme-color-${finalParams.secondary}-default-h);`,
-    //     `--s-theme-color-schema-secondary-s: var(--s-theme-color-${finalParams.secondary}-default-s);`,
-    //     `--s-theme-color-schema-secondary-l: var(--s-theme-color-${finalParams.secondary}-default-l);`,
-    //     `--s-theme-color-schema-secondary-r: var(--s-theme-color-${finalParams.secondary}-default-r);`,
-    //     `--s-theme-color-schema-secondary-g: var(--s-theme-color-${finalParams.secondary}-default-g);`,
-    //     `--s-theme-color-schema-secondary-b: var(--s-theme-color-${finalParams.secondary}-default-b);`,
-    //     `--s-theme-color-schema-secondary-a: var(--s-theme-color-${finalParams.secondary}-default-a);`
-    //   ];
-    // }
+    const finalParams = Object.assign({ base: '', accent: '', complementary: '' }, params);
+    let vars = [];
+    let baseVars = [];
+    if (finalParams.base) {
+        baseVars = __themeColorObjToVars(finalParams.base).map((v) => {
+            return v.replace(`-color-${finalParams.base}-`, '-colorSchema-base-');
+        });
+    }
+    let accentVars = [];
+    if (finalParams.accent) {
+        accentVars = __themeColorObjToVars(finalParams.accent).map((v) => {
+            return v.replace(`-color-${finalParams.accent}-`, '-colorSchema-accent-');
+        });
+    }
+    let complementaryVars = [];
+    if (finalParams.complementary) {
+        complementaryVars = __themeColorObjToVars(finalParams.complementary).map((v) => {
+            return v.replace(`-color-${finalParams.complementary}-`, '-colorSchema-complementary-');
+        });
+    }
+    vars = [...vars, ...baseVars, ...accentVars, ...complementaryVars];
     if (atRule.parent.type === 'root') {
         vars.unshift(':root {');
         vars.push('}');
@@ -45,4 +48,4 @@ export default function ({ params, atRule, processNested }) {
     const AST = processNested(vars.join('\n'));
     atRule.replaceWith(AST);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NoZW1hLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2NoZW1hLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRCxNQUFNLHNDQUF1QyxTQUFRLFlBQVk7O0FBQ3hELGlEQUFVLEdBQUc7SUFDbEIsT0FBTyxFQUFFO1FBQ1AsSUFBSSxFQUFFLFFBQVE7UUFDZCxRQUFRLEVBQUUsSUFBSTtRQUNkLEtBQUssRUFBRSxHQUFHO0tBQ1g7SUFDRCxTQUFTLEVBQUU7UUFDVCxJQUFJLEVBQUUsUUFBUTtRQUNkLEtBQUssRUFBRSxHQUFHO0tBQ1g7Q0FDRixDQUFDO0FBRUosT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBTy9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDdkIsTUFBTSxFQUNOLE1BQU0sRUFDTixhQUFhLEVBS2Q7SUFDQyxNQUFNLFdBQVcsbUJBQ2YsT0FBTyxFQUFFLEVBQUUsRUFDWCxTQUFTLEVBQUUsRUFBRSxJQUNWLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWE7UUFDckIsdURBQXVELFdBQVcsQ0FBQyxPQUFPLFlBQVk7UUFDdEYseURBQXlELFdBQVcsQ0FBQyxPQUFPLGNBQWM7UUFDMUYseURBQXlELFdBQVcsQ0FBQyxPQUFPLGNBQWM7UUFDMUYseURBQXlELFdBQVcsQ0FBQyxPQUFPLGNBQWM7UUFDMUYsOEZBQThGO1FBQzlGLDhGQUE4RjtRQUM5Riw4RkFBOEY7UUFDOUYsNkZBQTZGO0tBQzlGLENBQUM7SUFFRiwrQkFBK0I7SUFDL0IsNkJBQTZCO0lBQzdCLGtHQUFrRztJQUNsRyxzR0FBc0c7SUFDdEcsc0dBQXNHO0lBQ3RHLHNHQUFzRztJQUN0RyxzR0FBc0c7SUFDdEcsc0dBQXNHO0lBQ3RHLHNHQUFzRztJQUN0RyxxR0FBcUc7SUFDckcsT0FBTztJQUNQLElBQUk7SUFFSixJQUFJLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBSSxLQUFLLE1BQU0sRUFBRTtRQUNqQyxJQUFJLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBQ3hCLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDaEI7SUFFRCxNQUFNLEdBQUcsR0FBRyxhQUFhLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBQzNDLE1BQU0sQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDMUIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NoZW1hLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2NoZW1hLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUdyRCxPQUFPLHFCQUFxQixNQUFNLGlDQUFpQyxDQUFDO0FBRXBFLE1BQU0sc0NBQXVDLFNBQVEsWUFBWTs7QUFDeEQsaURBQVUsR0FBRztJQUNsQixJQUFJLEVBQUU7UUFDSixJQUFJLEVBQUUsUUFBUTtRQUNkLFFBQVEsRUFBRSxJQUFJO1FBQ2QsS0FBSyxFQUFFLEdBQUc7S0FDWDtJQUNELE1BQU0sRUFBRTtRQUNOLElBQUksRUFBRSxRQUFRO1FBQ2QsS0FBSyxFQUFFLEdBQUc7S0FDWDtJQUNELGFBQWEsRUFBRTtRQUNiLElBQUksRUFBRSxRQUFRO1FBQ2QsS0FBSyxFQUFFLEdBQUc7S0FDWDtDQUNGLENBQUM7QUFFSixPQUFPLEVBQUUsc0NBQXNDLElBQUksU0FBUyxFQUFFLENBQUM7QUFRL0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFLZDtJQUNDLE1BQU0sV0FBVyxtQkFDZixJQUFJLEVBQUUsRUFBRSxFQUNSLE1BQU0sRUFBRSxFQUFFLEVBQ1YsYUFBYSxFQUFFLEVBQUUsSUFDZCxNQUFNLENBQ1YsQ0FBQztJQUVGLElBQUksSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUV4QixJQUFJLFFBQVEsR0FBRyxFQUFFLENBQUM7SUFDbEIsSUFBSSxXQUFXLENBQUMsSUFBSSxFQUFFO1FBQ3BCLFFBQVEsR0FBRyxxQkFBcUIsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDM0QsT0FBTyxDQUFDLENBQUMsT0FBTyxDQUFDLFVBQVUsV0FBVyxDQUFDLElBQUksR0FBRyxFQUFFLG9CQUFvQixDQUFDLENBQUM7UUFDeEUsQ0FBQyxDQUFDLENBQUM7S0FDSjtJQUVELElBQUksVUFBVSxHQUFHLEVBQUUsQ0FBQztJQUNwQixJQUFJLFdBQVcsQ0FBQyxNQUFNLEVBQUU7UUFDdEIsVUFBVSxHQUFHLHFCQUFxQixDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUMvRCxPQUFPLENBQUMsQ0FBQyxPQUFPLENBQUMsVUFBVSxXQUFXLENBQUMsTUFBTSxHQUFHLEVBQUUsc0JBQXNCLENBQUMsQ0FBQztRQUM1RSxDQUFDLENBQUMsQ0FBQztLQUNKO0lBRUQsSUFBSSxpQkFBaUIsR0FBRyxFQUFFLENBQUM7SUFDM0IsSUFBSSxXQUFXLENBQUMsYUFBYSxFQUFFO1FBQzdCLGlCQUFpQixHQUFHLHFCQUFxQixDQUFDLFdBQVcsQ0FBQyxhQUFhLENBQUMsQ0FBQyxHQUFHLENBQ3RFLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDSixPQUFPLENBQUMsQ0FBQyxPQUFPLENBQ2QsVUFBVSxXQUFXLENBQUMsYUFBYSxHQUFHLEVBQ3RDLDZCQUE2QixDQUM5QixDQUFDO1FBQ0osQ0FBQyxDQUNGLENBQUM7S0FDSDtJQUVELElBQUksR0FBRyxDQUFDLEdBQUcsSUFBSSxFQUFFLEdBQUcsUUFBUSxFQUFFLEdBQUcsVUFBVSxFQUFFLEdBQUcsaUJBQWlCLENBQUMsQ0FBQztJQUVuRSxJQUFJLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBSSxLQUFLLE1BQU0sRUFBRTtRQUNqQyxJQUFJLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBQ3hCLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDaEI7SUFFRCxNQUFNLEdBQUcsR0FBRyxhQUFhLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBQzNDLE1BQU0sQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDMUIsQ0FBQyJ9

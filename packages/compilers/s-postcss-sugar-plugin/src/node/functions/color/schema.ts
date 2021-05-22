@@ -38,8 +38,8 @@ class postcssSugarPluginColorInterface extends __SInterface {
   static definition = {
     color: {
       type: 'String',
-      required: true,
-      alias: 'n'
+      values: ['default', 'accent', 'complementary'],
+      required: true
     },
     modifier: {
       type: 'String',
@@ -50,7 +50,7 @@ class postcssSugarPluginColorInterface extends __SInterface {
 export { postcssSugarPluginColorInterface as interface };
 
 export interface IPostcssSugarPluginColorParams {
-  name: string;
+  color: string;
   modifier: string;
 }
 
@@ -89,51 +89,43 @@ export default function color({
     colorModifier = finalParams.modifier;
   }
 
-  if (__isColor(colorName)) {
-    const color = new __SColor(colorName);
-    if (finalParams.modifier) {
-      color.apply(finalParams.modifier);
-    }
-    return color.toString();
-  } else {
-    let colorVar = `--s-theme-color-${colorName}-default`;
-    let schemaVar = `--s-theme-color-schema-${colorName}`;
+  let schemaVar = `--s-theme-colorSchema-${colorName}-default`;
 
-    let colorModifierVar = `--s-theme-color-${colorName}`;
-    if (colorStateName) {
-      colorModifierVar += `--${colorStateName}`;
-    }
-    if (finalParams.modifier && !finalParams.modifier.match(/^--/)) {
-      colorModifierVar += `-${colorModifier}`;
-    }
+  let colorModifierVar = `--s-theme-colorSchema-${colorName}`;
+  if (colorStateName) {
+    colorModifierVar += `--${colorStateName}`;
+  }
+  if (finalParams.modifier && !finalParams.modifier.match(/^--/)) {
+    colorModifierVar += `-${colorModifier}`;
+  }
 
-    let finalValue = colorVar;
+  let finalValue = schemaVar;
 
-    let saturationOffset = modifierParams.saturate
-      ? modifierParams.saturate
-      : modifierParams.desaturate
-      ? modifierParams.desaturate * -1
-      : undefined;
-    if (saturationOffset === undefined)
-      saturationOffset = `var(${colorModifierVar}-saturationOffset, 0)`;
+  let saturationOffset = modifierParams.saturate
+    ? modifierParams.saturate
+    : modifierParams.desaturate
+    ? modifierParams.desaturate * -1
+    : undefined;
+  if (saturationOffset === undefined)
+    saturationOffset = `var(${colorModifierVar}-saturationOffset, 0)`;
 
-    let lightnessOffset = modifierParams.lighten
-      ? modifierParams.lighten
-      : modifierParams.darken
-      ? modifierParams.darken * -1
-      : undefined;
-    if (lightnessOffset === undefined)
-      lightnessOffset = `var(${colorModifierVar}-lightnessOffset, 0)`;
+  let lightnessOffset = modifierParams.lighten
+    ? modifierParams.lighten
+    : modifierParams.darken
+    ? modifierParams.darken * -1
+    : undefined;
+  if (lightnessOffset === undefined)
+    lightnessOffset = `var(${colorModifierVar}-lightnessOffset, 0)`;
 
-    finalValue = `hsl(
+  finalValue = `hsl(
       calc(
-        var(${schemaVar}-h, var(${colorVar}-h, 0))
+        var(${schemaVar}-h)
         +
         var(${colorModifierVar}-spin ,${modifierParams.spin ?? 0})
       ),
       calc(
         (
-          var(${schemaVar}-s, var(${colorVar}-s, 0))
+          var(${schemaVar}-s)
           + 
           ${saturationOffset}
         )
@@ -141,7 +133,7 @@ export default function color({
       ),
       calc(
         (
-           var(${schemaVar}-l, var(${colorVar}-l, 0))
+           var(${schemaVar}-l)
           +
           ${lightnessOffset}
         )
@@ -149,14 +141,13 @@ export default function color({
       )
     )`;
 
-    finalValue = finalValue
-      .replace(/(\n|\s{2,99999999})/gm, '')
-      .replace(/\t/gm, ' ')
-      .replace(/\s?\+\s?/gm, ' + ')
-      .replace(/\)\-\s?/gm, ') - ')
-      .replace(/\s?\*\s?/gm, ' * ')
-      .replace(/\s?\/\s?/gm, ' / ');
+  finalValue = finalValue
+    .replace(/(\n|\s{2,99999999})/gm, '')
+    .replace(/\t/gm, ' ')
+    .replace(/\s?\+\s?/gm, ' + ')
+    .replace(/\)\-\s?/gm, ') - ')
+    .replace(/\s?\*\s?/gm, ' * ')
+    .replace(/\s?\/\s?/gm, ' / ');
 
-    return finalValue;
-  }
+  return finalValue;
 }

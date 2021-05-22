@@ -64,23 +64,32 @@ export default function ({
         & > li {
             border-radius: 5px;
             padding: sugar.space(40);
-        }
 
-        @sugar.state.hover {
-          background-color: sugar.color(primary:hover, surface);
+            .s-highlight {
+              background-color: sugar.color.schema(accent, highlight) !important;
+              color: white !important;
+            }
+
+          @sugar.state.hover {
+            background-color: sugar.color.schema(accent:hover, surface);
+            color: sugar.color.schema(accent:hover, foreground);
+          }
+
+          @sugar.state.focus {
+            background-color: sugar.color.schema(accent:focus, surface) !important;
+            color: sugar.color.schema(accent:focus, foreground) !important;
+            outline: none;
+          }
+
+          @sugar.state.active {
+            background-color: sugar.color.schema(accent:active, surface) !important;
+            color: sugar.color.schema(accent:active, foreground) !important;
+          }
+
         }
 
     }
   `);
-
-  // & > li:hover {
-  //         background-color: sugar.color(primary, hover);
-  //     }
-  //     & > li:focus,
-  //     & > li[focus] {
-  //         background-color: sugar.color(primary, focus);
-  //         outline: none;
-  //     }
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __theme, { themeDefinition } from '../../utils/theme';
 import __copy from '@coffeekraken/sugar/node/clipboard/copy';
+import __themeColorObjToVars from '../../utils/themeColorObjToVars';
 
 class ColorModifierInterface extends __SInterface {
   static definition = {
@@ -26,10 +27,6 @@ class ColorModifierInterface extends __SInterface {
       default: 0
     },
     alpha: {
-      type: 'Number',
-      default: 0
-    },
-    opacify: {
       type: 'Number',
       default: 0
     },
@@ -82,36 +79,7 @@ export default function ({
       typeof value === 'string' &&
       value.match(/^--/)
     ) {
-      const modifierParams = ColorModifierInterface.apply(value).value;
-      Object.keys(modifierParams).forEach((propKey) => {
-        const propValue = modifierParams[propKey];
-        vars.push(`--s-theme-${varKey}-${propKey}: ${propValue};`);
-      });
-
-      if (modifierParams.saturate > 0) {
-        vars.push(
-          `--s-theme-${varKey}-saturationOffset: ${modifierParams.saturate};`
-        );
-      } else if (modifierParams.desaturate > 0) {
-        vars.push(
-          `--s-theme-${varKey}-saturationOffset: ${
-            modifierParams.desaturate * -1
-          };`
-        );
-      } else {
-        vars.push(`--s-theme-${varKey}-saturationOffset: 0;`);
-      }
-      if (modifierParams.lighten > 0) {
-        vars.push(
-          `--s-theme-${varKey}-lightnessOffset: ${modifierParams.lighten};`
-        );
-      } else if (modifierParams.darken > 0) {
-        vars.push(
-          `--s-theme-${varKey}-lightnessOffset: ${modifierParams.darken * -1};`
-        );
-      } else {
-        vars.push(`--s-theme-${varKey}-lightnessOffset: 0;`);
-      }
+      return;
     } else {
       if (`${value}`.match(/:/)) {
         vars.push(`--s-theme-${varKey}: "${flattenedTheme[key]}";`);
@@ -119,6 +87,11 @@ export default function ({
         vars.push(`--s-theme-${varKey}: ${flattenedTheme[key]};`);
       }
     }
+  });
+
+  Object.keys(themesObj[finalParams.theme].color).forEach((c) => {
+    const colorVars = __themeColorObjToVars(c);
+    vars = [...vars, ...colorVars];
   });
 
   if (atRule.parent.type === 'root') {

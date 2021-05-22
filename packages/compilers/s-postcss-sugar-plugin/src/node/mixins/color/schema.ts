@@ -1,25 +1,33 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
+import __flatten from '@coffeekraken/sugar/shared/object/flatten';
+import __themeColorObjToVars from '../../utils/themeColorObjToVars';
 
 class postcssSugarPluginColorSchemaInterface extends __SInterface {
   static definition = {
-    primary: {
+    base: {
       type: 'String',
       required: true,
-      alias: 'p'
+      alias: 'b'
     },
-    secondary: {
+    accent: {
       type: 'String',
-      alias: 's'
+      alias: 'a'
+    },
+    complementary: {
+      type: 'String',
+      alias: 'c'
     }
   };
 }
 export { postcssSugarPluginColorSchemaInterface as interface };
 
 export interface IPostcssSugarPluginColorSchemaParams {
-  primary: string;
-  secondary: string;
+  base: string;
+  accent: string;
+  complementary: string;
 }
 
 export default function ({
@@ -32,34 +40,41 @@ export default function ({
   processNested: Function;
 }) {
   const finalParams: IPostcssSugarPluginColorSchemaParams = {
-    primary: '',
-    secondary: '',
+    base: '',
+    accent: '',
+    complementary: '',
     ...params
   };
 
-  const vars: string[] = [
-    `--s-theme-color-schema-primary: var(--s-theme-color-${finalParams.primary}-default);`,
-    `--s-theme-color-schema-primary-h: var(--s-theme-color-${finalParams.primary}-default-h);`,
-    `--s-theme-color-schema-primary-s: var(--s-theme-color-${finalParams.primary}-default-s);`,
-    `--s-theme-color-schema-primary-l: var(--s-theme-color-${finalParams.primary}-default-l);`
-    // `--s-theme-color-schema-primary-r: var(--s-theme-color-${finalParams.primary}-default-r);`,
-    // `--s-theme-color-schema-primary-g: var(--s-theme-color-${finalParams.primary}-default-g);`,
-    // `--s-theme-color-schema-primary-b: var(--s-theme-color-${finalParams.primary}-default-b);`,
-    // `--s-theme-color-schema-primary-a: var(--s-theme-color-${finalParams.primary}-default-a);`
-  ];
+  let vars: string[] = [];
 
-  // if (finalParams.secondary) {
-  //   const vars: string[] = [
-  //     `--s-theme-color-schema-secondary: var(--s-theme-color-${finalParams.secondary}-default);`,
-  //     `--s-theme-color-schema-secondary-h: var(--s-theme-color-${finalParams.secondary}-default-h);`,
-  //     `--s-theme-color-schema-secondary-s: var(--s-theme-color-${finalParams.secondary}-default-s);`,
-  //     `--s-theme-color-schema-secondary-l: var(--s-theme-color-${finalParams.secondary}-default-l);`,
-  //     `--s-theme-color-schema-secondary-r: var(--s-theme-color-${finalParams.secondary}-default-r);`,
-  //     `--s-theme-color-schema-secondary-g: var(--s-theme-color-${finalParams.secondary}-default-g);`,
-  //     `--s-theme-color-schema-secondary-b: var(--s-theme-color-${finalParams.secondary}-default-b);`,
-  //     `--s-theme-color-schema-secondary-a: var(--s-theme-color-${finalParams.secondary}-default-a);`
-  //   ];
-  // }
+  let baseVars = [];
+  if (finalParams.base) {
+    baseVars = __themeColorObjToVars(finalParams.base).map((v) => {
+      return v.replace(`-color-${finalParams.base}-`, '-colorSchema-base-');
+    });
+  }
+
+  let accentVars = [];
+  if (finalParams.accent) {
+    accentVars = __themeColorObjToVars(finalParams.accent).map((v) => {
+      return v.replace(`-color-${finalParams.accent}-`, '-colorSchema-accent-');
+    });
+  }
+
+  let complementaryVars = [];
+  if (finalParams.complementary) {
+    complementaryVars = __themeColorObjToVars(finalParams.complementary).map(
+      (v) => {
+        return v.replace(
+          `-color-${finalParams.complementary}-`,
+          '-colorSchema-complementary-'
+        );
+      }
+    );
+  }
+
+  vars = [...vars, ...baseVars, ...accentVars, ...complementaryVars];
 
   if (atRule.parent.type === 'root') {
     vars.unshift(':root {');

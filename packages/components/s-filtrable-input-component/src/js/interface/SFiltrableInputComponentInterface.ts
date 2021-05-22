@@ -17,6 +17,10 @@ export default class SHighlightJsComponentInterface extends __SInterface {
       },
       default: []
     },
+    closeTimeout: {
+      type: 'Number',
+      default: 200
+    },
     maxItems: {
       type: 'Number',
       default: 25

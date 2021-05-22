@@ -36,8 +36,8 @@ export default function ({
 
   const cssArray = [
     `@sugar.theme(${themeConfig.baseTheme});`,
-    `@sugar.color.schema(primary, secondary);`,
     '@sugar.reset;',
+    '@sugar.color.schema(default, primary, secondary);',
     '@sugar.layout.classes;',
     '@sugar.font.faces;',
     '@sugar.font.init;',

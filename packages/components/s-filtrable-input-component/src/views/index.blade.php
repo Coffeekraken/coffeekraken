@@ -5,7 +5,8 @@
   <div class="s-container s-layout-123">
     <div>
       <div style="height: 3000px; background: red;"></div>
-
+      <br>
+      <br>
       <s-filtrable-input filtrable="title,body" value="title" default-style>
         <input type="text" class="s-form-input" value="Coco" />
         @php print('<template id="item">
@@ -18,7 +19,8 @@
         </template>');
         @endphp
       </s-filtrable-input>
-
+      <br>
+      <br>
       <div style="height: 3000px; background: green;"></div>
     </div>
 
@@ -26,8 +28,9 @@
 
     <div>
       <div style="height: 3000px; background: red;"></div>
-
-      <s-filtrable-input filtrable="title,body" value="title" default-style>
+      <br>
+      <br>
+      <s-filtrable-input class="s-cs-accent-success" filtrable="title,body" value="title" default-style>
         <input type="text" class="s-form-input" value="Coco" id="hello" />
         @php print('<template id="item">
             <h4 class="s-font-title">{{title}}</h4>
@@ -39,7 +42,8 @@
         </template>');
         @endphp
       </s-filtrable-input>
-
+      <br>
+      <br>
       <div style="height: 3000px; background: green;"></div>
     </div>
 

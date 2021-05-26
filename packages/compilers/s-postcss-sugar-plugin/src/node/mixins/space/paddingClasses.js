@@ -10,13 +10,13 @@ export default function ({ params, atRule, processNested }) {
     const spacesObj = __theme().config('space');
     Object.keys(spacesObj).forEach((spaceName) => {
         // paddings
-        const clsPadding = `s-pad-${spaceName}`;
+        const clsPadding = `s-padding-${spaceName}`;
         vars.push(`/**
     * @name            ${clsPadding}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" padding style around any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" padding style around any HTMLElement
     * 
     * @example      html
     * <span class="${clsPadding}">Something cool</span>
@@ -27,13 +27,13 @@ export default function ({ params, atRule, processNested }) {
    .${clsPadding} {
         padding: sugar.space(${spaceName});
    }`);
-        const clsPaddingTop = `s-pad-top-${spaceName}`;
+        const clsPaddingTop = `s-padding-top-${spaceName}`;
         vars.push(`/**
     * @name            .${clsPaddingTop}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" top padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" top padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingTop}">Something cool</span>
@@ -44,13 +44,13 @@ export default function ({ params, atRule, processNested }) {
    .${clsPaddingTop} {
         padding-top: sugar.space(${spaceName});
    }`);
-        const clsPaddingBottom = `s-pad-bottom-${spaceName}`;
+        const clsPaddingBottom = `s-padding-bottom-${spaceName}`;
         vars.push(`/**
     * @name            .${clsPaddingBottom}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" bottom padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" bottom padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingBottom}">Something cool</span>
@@ -61,13 +61,13 @@ export default function ({ params, atRule, processNested }) {
    .${clsPaddingBottom} {
         padding-bottom: sugar.space(${spaceName});
    }`);
-        const clsPaddingLeft = `s-pad-left-${spaceName}`;
+        const clsPaddingLeft = `s-padding-left-${spaceName}`;
         vars.push(`/**
     * @name            .${clsPaddingLeft}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" left padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" left padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingLeft}">Something cool</span>
@@ -78,13 +78,13 @@ export default function ({ params, atRule, processNested }) {
    .${clsPaddingLeft} {
         padding-left: sugar.space(${spaceName});
    }`);
-        const clsPaddingRight = `s-pad-right-${spaceName}`;
+        const clsPaddingRight = `s-padding-right-${spaceName}`;
         vars.push(`/**
     * @name            .${clsPaddingRight}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" right padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" right padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingRight}">Something cool</span>
@@ -95,13 +95,13 @@ export default function ({ params, atRule, processNested }) {
    .${clsPaddingRight} {
         padding-right: sugar.space(${spaceName});
    }`);
-        const clsPaddingX = `s-pad-x-${spaceName}`;
+        const clsPaddingX = `s-padding-x-${spaceName}`;
         vars.push(`/**
     * @name            .${clsPaddingX}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" left and right padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" left and right padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingX}">Something cool</span>
@@ -113,13 +113,13 @@ export default function ({ params, atRule, processNested }) {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
    }`);
-        const clsPaddingY = `s-pad-y-${spaceName}`;
+        const clsPaddingY = `s-padding-y-${spaceName}`;
         vars.push(`/**
     * @name            .${clsPaddingY}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" top and bottom padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" top and bottom padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingY}">Something cool</span>
@@ -135,4 +135,4 @@ export default function ({ params, atRule, processNested }) {
     const AST = processNested(vars.join('\n'));
     atRule.replaceWith(AST);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFkZGluZ0NsYXNzZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYWRkaW5nQ2xhc3Nlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLE9BQU8sTUFBTSxtQkFBbUIsQ0FBQztBQUV4QyxNQUFNLHlDQUEwQyxTQUFRLFlBQVk7O0FBQzNELG9EQUFVLEdBQUcsRUFBRSxDQUFDO0FBS3pCLE9BQU8sRUFBRSx5Q0FBeUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVsRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sYUFBYSxFQUtkO0lBQ0MsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE1BQU0sU0FBUyxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUU1QyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQzNDLFdBQVc7UUFDWCxNQUFNLFVBQVUsR0FBRyxTQUFTLFNBQVMsRUFBRSxDQUFDO1FBQ3hDLElBQUksQ0FBQyxJQUFJLENBQUM7eUJBQ1csVUFBVTs7OztvREFJaUIsU0FBUzs7O3FCQUd4QyxVQUFVOzs7OztNQUt6QixVQUFVOytCQUNlLFNBQVM7S0FDbkMsQ0FBQyxDQUFDO1FBQ0gsTUFBTSxhQUFhLEdBQUcsYUFBYSxTQUFTLEVBQUUsQ0FBQztRQUMvQyxJQUFJLENBQUMsSUFBSSxDQUFDOzBCQUNZLGFBQWE7Ozs7b0RBSWEsU0FBUzs7O3FCQUd4QyxhQUFhOzs7OztNQUs1QixhQUFhO21DQUNnQixTQUFTO0tBQ3ZDLENBQUMsQ0FBQztRQUNILE1BQU0sZ0JBQWdCLEdBQUcsZ0JBQWdCLFNBQVMsRUFBRSxDQUFDO1FBQ3JELElBQUksQ0FBQyxJQUFJLENBQUM7MEJBQ1ksZ0JBQWdCOzs7O29EQUlVLFNBQVM7OztxQkFHeEMsZ0JBQWdCOzs7OztNQUsvQixnQkFBZ0I7c0NBQ2dCLFNBQVM7S0FDMUMsQ0FBQyxDQUFDO1FBQ0gsTUFBTSxjQUFjLEdBQUcsY0FBYyxTQUFTLEVBQUUsQ0FBQztRQUNqRCxJQUFJLENBQUMsSUFBSSxDQUFDOzBCQUNZLGNBQWM7Ozs7b0RBSVksU0FBUzs7O3FCQUd4QyxjQUFjOzs7OztNQUs3QixjQUFjO29DQUNnQixTQUFTO0tBQ3hDLENBQUMsQ0FBQztRQUNILE1BQU0sZUFBZSxHQUFHLGVBQWUsU0FBUyxFQUFFLENBQUM7UUFDbkQsSUFBSSxDQUFDLElBQUksQ0FBQzswQkFDWSxlQUFlOzs7O29EQUlXLFNBQVM7OztxQkFHeEMsZUFBZTs7Ozs7TUFLOUIsZUFBZTtxQ0FDZ0IsU0FBUztLQUN6QyxDQUFDLENBQUM7UUFDSCxNQUFNLFdBQVcsR0FBRyxXQUFXLFNBQVMsRUFBRSxDQUFDO1FBQzNDLElBQUksQ0FBQyxJQUFJLENBQUM7MEJBQ1ksV0FBVzs7OztvREFJZSxTQUFTOzs7cUJBR3hDLFdBQVc7Ozs7O01BSzFCLFdBQVc7b0NBQ21CLFNBQVM7cUNBQ1IsU0FBUztLQUN6QyxDQUFDLENBQUM7UUFDSCxNQUFNLFdBQVcsR0FBRyxXQUFXLFNBQVMsRUFBRSxDQUFDO1FBQzNDLElBQUksQ0FBQyxJQUFJLENBQUM7MEJBQ1ksV0FBVzs7OztvREFJZSxTQUFTOzs7cUJBR3hDLFdBQVc7Ozs7O01BSzFCLFdBQVc7bUNBQ2tCLFNBQVM7c0NBQ04sU0FBUztLQUMxQyxDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILE1BQU0sR0FBRyxHQUFHLGFBQWEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDM0MsTUFBTSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUMxQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFkZGluZ0NsYXNzZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYWRkaW5nQ2xhc3Nlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLE9BQU8sTUFBTSxtQkFBbUIsQ0FBQztBQUV4QyxNQUFNLHlDQUEwQyxTQUFRLFlBQVk7O0FBQzNELG9EQUFVLEdBQUcsRUFBRSxDQUFDO0FBS3pCLE9BQU8sRUFBRSx5Q0FBeUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVsRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sYUFBYSxFQUtkO0lBQ0MsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE1BQU0sU0FBUyxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUU1QyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQzNDLFdBQVc7UUFDWCxNQUFNLFVBQVUsR0FBRyxhQUFhLFNBQVMsRUFBRSxDQUFDO1FBQzVDLElBQUksQ0FBQyxJQUFJLENBQUM7eUJBQ1csVUFBVTs7Ozs4REFJMkIsU0FBUzs7O3FCQUdsRCxVQUFVOzs7OztNQUt6QixVQUFVOytCQUNlLFNBQVM7S0FDbkMsQ0FBQyxDQUFDO1FBQ0gsTUFBTSxhQUFhLEdBQUcsaUJBQWlCLFNBQVMsRUFBRSxDQUFDO1FBQ25ELElBQUksQ0FBQyxJQUFJLENBQUM7MEJBQ1ksYUFBYTs7Ozs4REFJdUIsU0FBUzs7O3FCQUdsRCxhQUFhOzs7OztNQUs1QixhQUFhO21DQUNnQixTQUFTO0tBQ3ZDLENBQUMsQ0FBQztRQUNILE1BQU0sZ0JBQWdCLEdBQUcsb0JBQW9CLFNBQVMsRUFBRSxDQUFDO1FBQ3pELElBQUksQ0FBQyxJQUFJLENBQUM7MEJBQ1ksZ0JBQWdCOzs7OzhEQUlvQixTQUFTOzs7cUJBR2xELGdCQUFnQjs7Ozs7TUFLL0IsZ0JBQWdCO3NDQUNnQixTQUFTO0tBQzFDLENBQUMsQ0FBQztRQUNILE1BQU0sY0FBYyxHQUFHLGtCQUFrQixTQUFTLEVBQUUsQ0FBQztRQUNyRCxJQUFJLENBQUMsSUFBSSxDQUFDOzBCQUNZLGNBQWM7Ozs7OERBSXNCLFNBQVM7OztxQkFHbEQsY0FBYzs7Ozs7TUFLN0IsY0FBYztvQ0FDZ0IsU0FBUztLQUN4QyxDQUFDLENBQUM7UUFDSCxNQUFNLGVBQWUsR0FBRyxtQkFBbUIsU0FBUyxFQUFFLENBQUM7UUFDdkQsSUFBSSxDQUFDLElBQUksQ0FBQzswQkFDWSxlQUFlOzs7OzhEQUlxQixTQUFTOzs7cUJBR2xELGVBQWU7Ozs7O01BSzlCLGVBQWU7cUNBQ2dCLFNBQVM7S0FDekMsQ0FBQyxDQUFDO1FBQ0gsTUFBTSxXQUFXLEdBQUcsZUFBZSxTQUFTLEVBQUUsQ0FBQztRQUMvQyxJQUFJLENBQUMsSUFBSSxDQUFDOzBCQUNZLFdBQVc7Ozs7OERBSXlCLFNBQVM7OztxQkFHbEQsV0FBVzs7Ozs7TUFLMUIsV0FBVztvQ0FDbUIsU0FBUztxQ0FDUixTQUFTO0tBQ3pDLENBQUMsQ0FBQztRQUNILE1BQU0sV0FBVyxHQUFHLGVBQWUsU0FBUyxFQUFFLENBQUM7UUFDL0MsSUFBSSxDQUFDLElBQUksQ0FBQzswQkFDWSxXQUFXOzs7OzhEQUl5QixTQUFTOzs7cUJBR2xELFdBQVc7Ozs7O01BSzFCLFdBQVc7bUNBQ2tCLFNBQVM7c0NBQ04sU0FBUztLQUMxQyxDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILE1BQU0sR0FBRyxHQUFHLGFBQWEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDM0MsTUFBTSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUMxQixDQUFDIn0=

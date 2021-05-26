@@ -83,28 +83,28 @@ export default function parseArgs(string, settings = {}) {
     string = string.slice(1, -1);
 
     let currentStr = '';
-    let isInParenthesis = false;
-    let isInQuotes = false;
+    let parenthesisCount = 0;
+    let quotesCount = 0;
     for (let i = 0; i < string.length; i++) {
       const char = string[i];
       const previousChar = string[i - 1] || string[0];
 
       // check if we are in quotes or not
-      if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
-        isInQuotes = true;
-      } else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
-        isInQuotes = false;
+      if (char === valueQuote && previousChar !== '\\' && !quotesCount) {
+        quotesCount++;
+      } else if (char === valueQuote && previousChar !== '\\' && quotesCount) {
+        quotesCount--;
       }
 
       // check if we are in parenthesis
-      if (!isInQuotes && char === '(' && !isInParenthesis) {
-        isInParenthesis = true;
-      } else if (!isInQuotes && char === ')') {
-        isInParenthesis = false;
+      if (!quotesCount && char === '(') {
+        parenthesisCount++;
+      } else if (!quotesCount && char === ')') {
+        parenthesisCount--;
       }
 
       if (char === ',') {
-        if (isInQuotes || isInParenthesis) {
+        if (quotesCount || parenthesisCount) {
           currentStr += char;
         } else {
           stringArray.push(currentStr.trim());
@@ -114,23 +114,26 @@ export default function parseArgs(string, settings = {}) {
         currentStr += char;
       }
     }
+
+    if (parenthesisCount) currentStr += ')'.repeat(parenthesisCount);
+
     stringArray.push(currentStr.trim());
   } else {
     let currentStr = '';
-    let isInQuotes = false;
+    let quotesCount = false;
     for (let i = 0; i < string.length; i++) {
       const char = string[i];
       const previousChar = string[i - 1] || string[0];
 
       // check if we are in quotes or not
-      if (char === valueQuote && previousChar !== '\\' && !isInQuotes) {
-        isInQuotes = true;
-      } else if (char === valueQuote && previousChar !== '\\' && isInQuotes) {
-        isInQuotes = false;
+      if (char === valueQuote && previousChar !== '\\' && !quotesCount) {
+        quotesCount = true;
+      } else if (char === valueQuote && previousChar !== '\\' && quotesCount) {
+        quotesCount = false;
       }
 
       if (char === ' ') {
-        if (isInQuotes) {
+        if (quotesCount) {
           currentStr += char;
         } else {
           stringArray.push(currentStr.trim());
@@ -149,8 +152,6 @@ export default function parseArgs(string, settings = {}) {
   let currentArgName = undefined;
   let currentValue;
   stringArray = stringArray.forEach((part, i) => {
-    const isLast = i === stringArray.length - 1;
-
     if (
       !isFunctionStyle &&
       (part.slice(0, 2) === '--' || part.slice(0, 1) === '-')
@@ -158,14 +159,17 @@ export default function parseArgs(string, settings = {}) {
       if (
         currentValue === undefined &&
         currentArgName !== -1 &&
-        currentArgName
+        currentArgName &&
+        argsObj[currentArgName] === undefined
       ) {
         argsObj[currentArgName] = true;
       }
 
       currentArgName = part.replace(/^[-]{1,2}/, '');
 
-      argsObj[currentArgName] = true;
+      if (argsObj[currentArgName] === undefined) {
+        argsObj[currentArgName] = true;
+      }
     } else {
       let value;
       if (part && typeof part === 'string') {
@@ -182,6 +186,7 @@ export default function parseArgs(string, settings = {}) {
           value = parts.slice(1).join(':').trim();
         }
       }
+
       currentValue = __parse(value);
 
       if (currentArgName !== undefined) {

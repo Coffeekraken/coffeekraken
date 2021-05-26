@@ -1,0 +1,50 @@
+@include Sugar.context-setup(
+  'my-cool-context',
+  (
+    colors: (
+      default: (
+        color: #ff0000
+      )
+    )
+  )
+);
+
+@include Sugar.classes('sugar.helper.block');
+@include Sugar.classes('sugar.helper.border');
+@include Sugar.classes('sugar.helper.clear');
+@include Sugar.classes('sugar.helper.clearfix');
+@include Sugar.classes('sugar.helper.display');
+@include Sugar.classes('sugar.helper.flex');
+@include Sugar.classes('sugar.helper.link');
+@include Sugar.classes('sugar.helper.margin');
+@include Sugar.classes('sugar.helper.media');
+@include Sugar.classes('sugar.helper.overflow');
+@include Sugar.classes('sugar.helper.padding');
+@include Sugar.classes('sugar.helper.pointer');
+@include Sugar.classes('sugar.helper.position');
+@include Sugar.classes('sugar.helper.pull');
+@include Sugar.classes('sugar.helper.ratio');
+@include Sugar.classes('sugar.helper.screen-reader');
+@include Sugar.classes('sugar.helper.size');
+@include Sugar.classes('sugar.helper.text');
+@include Sugar.classes('sugar.helper.transmation');
+@include Sugar.classes('sugar.helper.user-select');
+@include Sugar.classes('sugar.helper.vertical-align');
+
+@include Sugar.classes('sugar.component.ul');
+@include Sugar.classes('sugar.component.ol');
+@include Sugar.classes('sugar.component.title');
+// @include Sugar.classes('sugar.component.paragraph');
+@include Sugar.classes('sugar.component.button');
+// @include Sugar.classes('sugar.component.icon');
+// @include Sugar.classes('sugar.component.shadow');
+
+@include Sugar.classes('sugar.font');
+
+@include Sugar.classes('sugar.color');
+
+// @include Sugar.context('my-cool-context') {
+// body {
+//     background-color: Sugar.setting-var('colors.default.color');
+// }
+// }

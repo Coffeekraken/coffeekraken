@@ -3,10 +3,6 @@ import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
   static definition = {
-    colors: {
-      type: 'String[]',
-      alias: 'c'
-    },
     styles: {
       type: 'String[]',
       alias: 's'
@@ -30,11 +26,9 @@ export default function ({
   atRule: any;
   processNested: Function;
 }) {
-  const colors = __theme().config('ui.form.colors');
   const styles = __theme().config('ui.form.styles');
 
   const finalParams: IPostcssSugarPluginUiFormClassesParams = {
-    colors,
     styles,
     ...params
   };
@@ -55,39 +49,22 @@ export default function ({
     const isDefaultStyle = style.match(/:default$/);
     style = style.split(':')[0];
 
-    finalParams.colors.forEach((colorName) => {
-      const isDefaultColor = colorName.match(/:default$/);
-      colorName = colorName.split(':')[0];
+    const styleCls = isDefaultStyle ? '' : `.s-form-input--${style}`;
+    const cls = `.s-form-input${styleCls}`;
 
-      const styleCls = isDefaultStyle ? '' : `.s-form-input--${style}`;
-      const cls = isDefaultColor
-        ? `.s-form-input${styleCls}`
-        : `.s-form-input.s-form-input--${colorName}${styleCls}`;
-
-      vars.push(`/**
+    vars.push(`/**
         * @name           ${cls}
         * @namespace      sugar.css.ui.form
         * @type           CssClass
         * 
-        * This class represent a(n) "<yellow>${style}</yellow>" form input with the "<yellow>${colorName}</yellow>" color applied
+        * This class represent a(n) "<yellow>${style}</yellow>" form
         * 
         * @example        html
-        * <input class="${cls
-          .replace(/\./gm, ' ')
-          .trim()}" placeholder="Hello world" />
+        * <input class="${cls.trim()}" placeholder="Hello world" />
       */`);
-      vars.push(
-        [
-          `${
-            isDefaultColor
-              ? `.s-form-input${styleCls}`
-              : `.s-form-input.s-form-input--${colorName}${styleCls}`
-          } {`,
-          ` @sugar.ui.form.input($color: ${colorName}, $style: ${style});`,
-          `}`
-        ].join('\n')
-      );
-    });
+    vars.push(
+      [`${cls} {`, ` @sugar.ui.form.input($style: ${style});`, `}`].join('\n')
+    );
   });
 
   vars.push('}');

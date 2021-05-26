@@ -22,11 +22,8 @@ export default {
           description: 'Start the development stack',
           actions: {
             frontendServer: '[config.frontstack.actions.frontendServer]',
-            css: '[config.frontstack.actions.css]',
-            js: '[config.frontstack.actions.js]',
-            ts: '[config.frontstack.actions.ts]',
-            svelte: '[config.frontstack.actions.svelte]',
-            docmap: '[config.frontstack.actions.docmap]'
+            vite: '[config.frontstack.actions.vite]'
+            // docmap: '[config.frontstack.actions.docmap]'
           }
         },
         build: {

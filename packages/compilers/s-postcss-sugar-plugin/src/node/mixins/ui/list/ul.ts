@@ -66,24 +66,24 @@ export default function ({
             padding: sugar.space(40);
 
             .s-highlight {
-              background-color: sugar.color.schema(accent, highlight) !important;
+              background-color: sugar.color(accent, highlight) !important;
               color: white !important;
             }
 
           @sugar.state.hover {
-            background-color: sugar.color.schema(accent:hover, surface);
-            color: sugar.color.schema(accent:hover, foreground);
+            background-color: sugar.color(accent:hover, surface);
+            color: sugar.color(accent:hover, foreground);
           }
 
           @sugar.state.focus {
-            background-color: sugar.color.schema(accent:focus, surface) !important;
-            color: sugar.color.schema(accent:focus, foreground) !important;
+            background-color: sugar.color(accent:focus, surface) !important;
+            color: sugar.color(accent:focus, foreground) !important;
             outline: none;
           }
 
           @sugar.state.active {
-            background-color: sugar.color.schema(accent:active, surface) !important;
-            color: sugar.color.schema(accent:active, foreground) !important;
+            background-color: sugar.color(accent:active, surface) !important;
+            color: sugar.color(accent:active, foreground) !important;
           }
 
         }

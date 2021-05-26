@@ -62,9 +62,11 @@ export default function color({
   const finalParams: IPostcssSugarPluginColorParams = {
     color: '',
     modifier: undefined,
-    return: 'var',
     ...params
   };
+
+  if (finalParams.color.match(/^sugar\.color\(/)) return finalParams.color;
+  if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
   let colorName = finalParams.color;
   let colorModifier = finalParams.modifier ? finalParams.modifier : 'default';
@@ -96,8 +98,7 @@ export default function color({
     }
     return color.toString();
   } else {
-    let colorVar = `--s-theme-color-${colorName}-default`;
-    let schemaVar = `--s-theme-color-schema-${colorName}`;
+    const colorVar = `--s-theme-color-${colorName}-default`;
 
     let colorModifierVar = `--s-theme-color-${colorName}`;
     if (colorStateName) {
@@ -127,13 +128,13 @@ export default function color({
 
     finalValue = `hsl(
       calc(
-        var(${schemaVar}-h, var(${colorVar}-h, 0))
+        var(${colorVar}-h, 0)
         +
         var(${colorModifierVar}-spin ,${modifierParams.spin ?? 0})
       ),
       calc(
         (
-          var(${schemaVar}-s, var(${colorVar}-s, 0))
+          var(${colorVar}-s, 0)
           + 
           ${saturationOffset}
         )
@@ -141,7 +142,7 @@ export default function color({
       ),
       calc(
         (
-           var(${schemaVar}-l, var(${colorVar}-l, 0))
+           var(${colorVar}-l, 0)
           +
           ${lightnessOffset}
         )

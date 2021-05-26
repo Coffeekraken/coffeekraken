@@ -41,6 +41,23 @@ export default function ({
 }`);
   });
 
+  const fontsSizesObj = __theme().config('font.size');
+  Object.keys(fontsSizesObj).forEach((sizeName) => {
+    vars.push(`/**
+  * @name          s-font-size-${sizeName}
+  * @namespace          sugar.css.mixins.font
+  * @type               CssClass
+  * 
+  * This class allows you to apply the font size "<yellow>${sizeName}</yellow>" to any HTMLElement
+  * 
+  * @example        html
+  * <h1 class="s-font-size-${sizeName}">Hello world</h1>
+  */
+.s-font-size-${sizeName} {
+    @sugar.font.size(${sizeName});
+}`);
+  });
+
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);
 }

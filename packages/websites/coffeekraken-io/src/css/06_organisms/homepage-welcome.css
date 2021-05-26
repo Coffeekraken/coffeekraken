@@ -1,0 +1,9 @@
+#homepage-welcome {
+  @sugar.gradient (sugar.color(complementary, --darken 30), background, $type: radial, $x: 50%, $y: 100%);
+
+  s-inline-svg {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

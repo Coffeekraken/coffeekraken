@@ -1,0 +1,17 @@
+{
+  "name": "@coffeekraken/coffeekraken.io",
+  "version": "2.0.0",
+  "description": "",
+  "main": "./src/shared/exports.js",
+  "scripts": {
+    "dev": "sugard frontstack dev",
+    "build": "sugard vite.build --lib"
+  },
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-inline-svg-component": "^2.0.0",
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0"
+  }
+}

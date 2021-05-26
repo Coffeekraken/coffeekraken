@@ -227,7 +227,7 @@ export default class SVite extends __SClass {
                       : `${output.name}.js`
                   );
 
-                  let finalCode = output.code;
+                  const finalCode = output.code;
 
                   if (params.bundle) {
                     if (output.name === 'index') {

@@ -17,9 +17,19 @@ class postcssSugarPluginGradientInterface extends __SInterface {
       values: ['linear', 'radial'],
       default: 'linear'
     },
+    x: {
+      type: 'String'
+    },
+    y: {
+      type: 'String'
+    },
     angle: {
       type: 'Number | String',
       default: 0
+    },
+    size: {
+      type: 'String',
+      default: 'farthest-side'
     }
   };
 }
@@ -27,8 +37,11 @@ class postcssSugarPluginGradientInterface extends __SInterface {
 export interface IPostcssSugarPluginGradientParams {
   start: string;
   end: string;
+  x: string;
+  y: string;
   type: string | 'linear' | 'radial';
   angle: string | number;
+  size: string;
 }
 
 export { postcssSugarPluginGradientInterface as interface };
@@ -43,20 +56,26 @@ export default function ({
   processNested: Function;
 }) {
   const finalParams: IPostcssSugarPluginGradientParams = {
-    start: 'primary--50',
-    end: 'primary--70',
+    start: undefined,
+    end: undefined,
+    x: '50%',
+    y: '50%',
     type: 'linear',
     angle: 0,
+    size: 'farthest-side',
     ...params
   };
 
-  let startColorVar = `var(--s-gradient-start-color-inline, sugar.color(${finalParams.start}))`;
-  let endColorVar = `var(--s-gradient-end-color-inline, sugar.color(${finalParams.end}))`;
-  let angleVar = `var(--s-gradient-angle-inline, ${finalParams.angle}deg)`;
+  let startColorVar = finalParams.start,
+    endColorVar = finalParams.end;
+
+  startColorVar = `sugar.color(${finalParams.start})`;
+  endColorVar = `sugar.color(${finalParams.end})`;
+  const angleVar = `${finalParams.angle}deg`;
 
   let gradientCss = `background: linear-gradient(${angleVar}, ${startColorVar} 0%, ${endColorVar} 100%);`;
   if (finalParams.type === 'radial') {
-    gradientCss = `background: radial-gradient(circle, ${startColorVar} 0%, ${endColorVar} 100%);`;
+    gradientCss = `background: radial-gradient(${finalParams.size} at ${finalParams.x} ${finalParams.y}, ${startColorVar} 0%, ${endColorVar} 100%);`;
   }
 
   const vars: string[] = [gradientCss];

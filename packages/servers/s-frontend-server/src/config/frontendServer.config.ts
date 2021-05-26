@@ -1,4 +1,5 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
+import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 export default {
   assets: '[config.assets]',
@@ -86,8 +87,11 @@ export default {
   logLevel: 'info',
 
   proxy: {
-    src: {
-      route: '/src',
+    assets: {
+      route: __sugarConfig('vite.publicDir').replace(
+        __sugarConfig('storage.rootDir'),
+        ''
+      ),
       settings: {
         target: '[config.vite.server.hostname]',
         changeOrigin: true

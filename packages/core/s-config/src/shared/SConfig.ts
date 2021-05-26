@@ -126,7 +126,6 @@ export default class SConfig {
     configKey: string,
     prepareFn: ISConfigPrepareFn
   ) {
-    console.log('register', configId, configKey);
     if (!this._registeredPrepares[configId])
       this._registeredPrepares[configId] = {};
     this._registeredPrepares[configId][configKey] = prepareFn;

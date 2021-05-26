@@ -40,47 +40,6 @@ const plugin = (settings: any = {}) => {
       }
     });
 
-    css.walkAtRules((atRule) => {
-      if (atRule.name.match(/^sugar\.[a-zA-Z0-9\.]+/)) {
-        let potentialMixinPath = `${__dirname}/mixins/${atRule.name
-          .replace(/^sugar\./, '')
-          .replace(/\./gm, '/')}.js`;
-
-        if (!__fs.existsSync(potentialMixinPath)) {
-          const potentialFileName = atRule.name.split('.').pop();
-          potentialMixinPath = potentialMixinPath.replace(
-            /\.js$/,
-            `/${potentialFileName}.js`
-          );
-        }
-        if (!__fs.existsSync(potentialMixinPath)) {
-          throw new Error(
-            `<red>[postcssSugarPlugin]</red> Sorry but the requested sugar mixin "<yellow>${atRule.name}</yellow>" does not exists...`
-          );
-        }
-
-        const mixin = require(potentialMixinPath);
-        const mixinFn = mixin.default;
-        const mixinInterface = mixin.interface;
-
-        let sanitizedParams = atRule.params;
-        sanitizedParams = sanitizedParams.split('\n&')[0];
-
-        const intRes = mixinInterface.apply(sanitizedParams, {});
-        if (intRes.hasIssues()) {
-          throw new Error(intRes.toString());
-        }
-        const params = intRes.value;
-        delete params.help;
-        return mixinFn({
-          params,
-          atRule,
-          processNested,
-          settings
-        });
-      }
-    });
-
     css.walkDecls((decl) => {
       if (!decl.prop || !decl.value) return;
       if (!decl.value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return;
@@ -130,6 +89,47 @@ const plugin = (settings: any = {}) => {
           console.error(e.message);
         }
       });
+    });
+
+    css.walkAtRules((atRule) => {
+      if (atRule.name.match(/^sugar\.[a-zA-Z0-9\.]+/)) {
+        let potentialMixinPath = `${__dirname}/mixins/${atRule.name
+          .replace(/^sugar\./, '')
+          .replace(/\./gm, '/')}.js`;
+
+        if (!__fs.existsSync(potentialMixinPath)) {
+          const potentialFileName = atRule.name.split('.').pop();
+          potentialMixinPath = potentialMixinPath.replace(
+            /\.js$/,
+            `/${potentialFileName}.js`
+          );
+        }
+        if (!__fs.existsSync(potentialMixinPath)) {
+          throw new Error(
+            `<red>[postcssSugarPlugin]</red> Sorry but the requested sugar mixin "<yellow>${atRule.name}</yellow>" does not exists...`
+          );
+        }
+
+        const mixin = require(potentialMixinPath);
+        const mixinFn = mixin.default;
+        const mixinInterface = mixin.interface;
+
+        let sanitizedParams = atRule.params;
+        sanitizedParams = sanitizedParams.split('\n&')[0];
+
+        const intRes = mixinInterface.apply(sanitizedParams, {});
+        if (intRes.hasIssues()) {
+          throw new Error(intRes.toString());
+        }
+        const params = intRes.value;
+        delete params.help;
+        return mixinFn({
+          params,
+          atRule,
+          processNested,
+          settings
+        });
+      }
     });
 
     return css;

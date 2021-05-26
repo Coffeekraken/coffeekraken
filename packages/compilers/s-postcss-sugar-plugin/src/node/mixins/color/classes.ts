@@ -105,66 +105,6 @@ export default function ({ params, atRule, processNested }) {
             `}`
           ].join('\n')
         );
-
-        cssArray.push(
-          [
-            `/**`,
-            ` * @name           s-cs-base-${colorName}`,
-            ` * @namespace      sugar.css.color.classes.cs.base.${colorName}`,
-            ` * @type           CssClass`,
-            ` *`,
-            ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
-            ` *`,
-            ` * @example        html`,
-            ` * <h1 class="s-cs-base-${colorName}">`,
-            ` *     Something cool`,
-            ` * </h1>`,
-            ` */`,
-            `.s-cs-base-${colorName} {`,
-            `   @sugar.color.schema(${colorName})`,
-            `}`
-          ].join('\n')
-        );
-
-        cssArray.push(
-          [
-            `/**`,
-            ` * @name           s-cs-accent-${colorName}`,
-            ` * @namespace      sugar.css.color.classes.cs.accent.${colorName}`,
-            ` * @type           CssClass`,
-            ` *`,
-            ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
-            ` *`,
-            ` * @example        html`,
-            ` * <h1 class="s-cs-accent-${colorName}">`,
-            ` *     Something cool`,
-            ` * </h1>`,
-            ` */`,
-            `.s-cs-accent-${colorName} {`,
-            `   @sugar.color.schema('', ${colorName})`,
-            `}`
-          ].join('\n')
-        );
-
-        cssArray.push(
-          [
-            `/**`,
-            ` * @name           s-cs-complementary-${colorName}`,
-            ` * @namespace      sugar.css.color.classes.cs.complementary.${colorName}`,
-            ` * @type           CssClass`,
-            ` *`,
-            ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
-            ` *`,
-            ` * @example        html`,
-            ` * <h1 class="s-cs-complementary-${colorName}">`,
-            ` *     Something cool`,
-            ` * </h1>`,
-            ` */`,
-            `.s-cs-complementary-${colorName} {`,
-            `   @sugar.color.schema('', '', ${colorName})`,
-            `}`
-          ].join('\n')
-        );
       }
     });
   });

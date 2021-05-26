@@ -10,9 +10,10 @@ export default {
   plugins: [
     __path.resolve(`${__dirname}/../node/plugins/sveltePlugin`),
     __path.resolve(`${__dirname}/../node/plugins/riotjsPlugin`),
-    __path.resolve(`${__dirname}/../node/plugins/postcssPlugin`)
+    __path.resolve(`${__dirname}/../node/plugins/postcssPlugin`),
+    __path.resolve(`${__dirname}/../node/plugins/imageminPlugin`)
   ],
-  publicDir: '[config.storage.distDir]',
+  publicDir: '[config.storage.srcDir]',
   cacheDir: '[config.storage.cacheDir]/vite',
   clearScreen: false,
   build: {

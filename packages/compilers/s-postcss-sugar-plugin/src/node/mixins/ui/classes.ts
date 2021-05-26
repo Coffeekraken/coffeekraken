@@ -32,7 +32,8 @@ export default function ({
   const cssArray = [
     // `@sugar.ui.button.classes;`,
     '@sugar.ui.form.classes;',
-    '@sugar.ui.list.classes;'
+    '@sugar.ui.list.classes;',
+    '@sugar.ui.navbar.classes;'
   ];
 
   const AST = processNested(cssArray.join('\n'));

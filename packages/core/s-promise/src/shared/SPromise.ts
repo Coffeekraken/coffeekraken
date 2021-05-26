@@ -114,8 +114,7 @@ export interface ISPromise extends Promise, ISEventEmitter {
   finally(...args: any): ISPromise;
 }
 
-class SPromise
-  extends __SClass.extends(Promise)
+class SPromise extends __SClass.extends(Promise)
   implements ISPromise, ISEventEmitter {
   /**
    * @name        treatAsValue

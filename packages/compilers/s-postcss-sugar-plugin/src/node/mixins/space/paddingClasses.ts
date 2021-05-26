@@ -28,13 +28,13 @@ export default function ({
 
   Object.keys(spacesObj).forEach((spaceName) => {
     // paddings
-    const clsPadding = `s-pad-${spaceName}`;
+    const clsPadding = `s-padding-${spaceName}`;
     vars.push(`/**
     * @name            ${clsPadding}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" padding style around any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" padding style around any HTMLElement
     * 
     * @example      html
     * <span class="${clsPadding}">Something cool</span>
@@ -45,13 +45,13 @@ export default function ({
    .${clsPadding} {
         padding: sugar.space(${spaceName});
    }`);
-    const clsPaddingTop = `s-pad-top-${spaceName}`;
+    const clsPaddingTop = `s-padding-top-${spaceName}`;
     vars.push(`/**
     * @name            .${clsPaddingTop}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" top padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" top padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingTop}">Something cool</span>
@@ -62,13 +62,13 @@ export default function ({
    .${clsPaddingTop} {
         padding-top: sugar.space(${spaceName});
    }`);
-    const clsPaddingBottom = `s-pad-bottom-${spaceName}`;
+    const clsPaddingBottom = `s-padding-bottom-${spaceName}`;
     vars.push(`/**
     * @name            .${clsPaddingBottom}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" bottom padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" bottom padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingBottom}">Something cool</span>
@@ -79,13 +79,13 @@ export default function ({
    .${clsPaddingBottom} {
         padding-bottom: sugar.space(${spaceName});
    }`);
-    const clsPaddingLeft = `s-pad-left-${spaceName}`;
+    const clsPaddingLeft = `s-padding-left-${spaceName}`;
     vars.push(`/**
     * @name            .${clsPaddingLeft}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" left padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" left padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingLeft}">Something cool</span>
@@ -96,13 +96,13 @@ export default function ({
    .${clsPaddingLeft} {
         padding-left: sugar.space(${spaceName});
    }`);
-    const clsPaddingRight = `s-pad-right-${spaceName}`;
+    const clsPaddingRight = `s-padding-right-${spaceName}`;
     vars.push(`/**
     * @name            .${clsPaddingRight}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" right padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" right padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingRight}">Something cool</span>
@@ -113,13 +113,13 @@ export default function ({
    .${clsPaddingRight} {
         padding-right: sugar.space(${spaceName});
    }`);
-    const clsPaddingX = `s-pad-x-${spaceName}`;
+    const clsPaddingX = `s-padding-x-${spaceName}`;
     vars.push(`/**
     * @name            .${clsPaddingX}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" left and right padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" left and right padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingX}">Something cool</span>
@@ -131,13 +131,13 @@ export default function ({
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
    }`);
-    const clsPaddingY = `s-pad-y-${spaceName}`;
+    const clsPaddingY = `s-padding-y-${spaceName}`;
     vars.push(`/**
     * @name            .${clsPaddingY}
-    * @namespace        sugar.css.space
+    * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
-    * This class allows you to apply the "<yellow>${spaceName}</yellow>" top and bottom padding style to any HTMLElement
+    * This class allows you to apply the "<s-color="accent">${spaceName}</s-color>" top and bottom padding style to any HTMLElement
     * 
     * @example      html
     * <span class="${clsPaddingY}">Something cool</span>

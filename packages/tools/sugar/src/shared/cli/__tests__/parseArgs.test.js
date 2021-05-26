@@ -1,73 +1,64 @@
 import __parseArgs from '../parseArgs';
 describe('sugar.shared.cli.parseArgs', () => {
-    // it('Should parse a simple string correctly', () => {
-    //   const res = __parseArgs('--something cool -e true');
-    //   expect(res).toEqual({
-    //     something: 'cool',
-    //     e: true
-    //   });
-    // });
-    // it('Should parse a simple string with a none ending argument correctly', () => {
-    //   const res = __parseArgs('--something cool -e');
-    //   expect(res).toEqual({
-    //     something: 'cool',
-    //     e: true
-    //   });
-    // });
-    // it('Should parse a simple string with multiple none value arguments one after the other', () => {
-    //   const res = __parseArgs('--something cool -e --plop -i');
-    //   expect(res).toEqual({
-    //     something: 'cool',
-    //     e: true,
-    //     plop: true,
-    //     i: true
-    //   });
-    // });
-    // it('Should parse correctly an object value passed in the string using the valueQuote setting "', () => {
-    //   const res = __parseArgs(
-    //     `-o "{'hello': 'world', '__plop': true}" --something World`,
-    //     {
-    //       valueQuote: '"'
-    //     }
-    //   );
-    //   expect(res).toEqual({
-    //     o: {
-    //       hello: 'world',
-    //       __plop: true
-    //     },
-    //     something: 'World'
-    //   });
-    // });
-    // it("Should parse correctly an object value passed in the string using the valueQuote setting '", () => {
-    //   const res = __parseArgs(
-    //     `-o '{"hello": "world", "__plop": true}' --something World`,
-    //     {
-    //       valueQuote: "'"
-    //     }
-    //   );
-    //   expect(res).toEqual({
-    //     o: {
-    //       hello: 'world',
-    //       __plop: true
-    //     },
-    //     something: 'World'
-    //   });
-    // });
-    // it('Should parse correctly an object value passed in the string using the valueQuote setting `', () => {
-    //   const res = __parseArgs(
-    //     "-o `{'hello': 'world', '__plop': true}` --something World",
-    //     {
-    //       valueQuote: '`'
-    //     }
-    //   );
-    //   expect(res).toEqual({
-    //     o: {
-    //       hello: 'world',
-    //       __plop: true
-    //     },
-    //     something: 'World'
-    //   });
-    // });
+    it('Should parse a simple string correctly', () => {
+        const res = __parseArgs('--something cool -e true');
+        expect(res).toEqual({
+            something: 'cool',
+            e: true
+        });
+    });
+    it('Should parse a simple string with a none ending argument correctly', () => {
+        const res = __parseArgs('--something cool -e');
+        expect(res).toEqual({
+            something: 'cool',
+            e: true
+        });
+    });
+    it('Should parse a simple string with multiple none value arguments one after the other', () => {
+        const res = __parseArgs('--something cool -e --plop -i');
+        expect(res).toEqual({
+            something: 'cool',
+            e: true,
+            plop: true,
+            i: true
+        });
+    });
+    it('Should parse correctly an object value passed in the string using the valueQuote setting "', () => {
+        const res = __parseArgs(`-o "{'hello': 'world', '__plop': true}" --something World`, {
+            valueQuote: '"'
+        });
+        expect(res).toEqual({
+            o: {
+                hello: 'world',
+                __plop: true
+            },
+            something: 'World'
+        });
+    });
+    it("Should parse correctly an object value passed in the string using the valueQuote setting '", () => {
+        const res = __parseArgs(`-o '{"hello": "world", "__plop": true}' --something World`, {
+            valueQuote: "'"
+        });
+        expect(res).toEqual({
+            o: {
+                hello: 'world',
+                __plop: true
+            },
+            something: 'World'
+        });
+    });
+    it('Should parse correctly an object value passed in the string using the valueQuote setting `', () => {
+        const res = __parseArgs("-o `{'hello': 'world', '__plop': true}` --something World", {
+            valueQuote: '`'
+        });
+        expect(res).toEqual({
+            o: {
+                hello: 'world',
+                __plop: true
+            },
+            something: 'World'
+        });
+    });
     it('Should parse correctly multiple same args into array', () => {
         const res = __parseArgs('-s js -s shared', {});
         expect(res).toEqual({
@@ -117,5 +108,17 @@ describe('sugar.shared.cli.parseArgs', () => {
             angle: 'var(--s-gradient-angle-inline, 45)'
         });
     });
+    it('Should parse correctly a nested parentheses arguments', () => {
+        const res = __parseArgs(`(
+        hsl(var(--something-h, 'Hello'), var(--something-s, 'World'), var(--something-l, 'Plop')),
+        hello world,
+        'Coco plop'
+      )`, {});
+        expect(res).toEqual({
+            '0': "hsl(var(--something-h, 'Hello'), var(--something-s, 'World'), var(--something-l, 'Plop'))",
+            '1': 'hello world',
+            '2': 'Coco plop'
+        });
+    });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VBcmdzLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYXJzZUFyZ3MudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxjQUFjLENBQUM7QUFFdkMsUUFBUSxDQUFDLDRCQUE0QixFQUFFLEdBQUcsRUFBRTtJQUMxQyx1REFBdUQ7SUFDdkQseURBQXlEO0lBQ3pELDBCQUEwQjtJQUMxQix5QkFBeUI7SUFDekIsY0FBYztJQUNkLFFBQVE7SUFDUixNQUFNO0lBRU4sbUZBQW1GO0lBQ25GLG9EQUFvRDtJQUNwRCwwQkFBMEI7SUFDMUIseUJBQXlCO0lBQ3pCLGNBQWM7SUFDZCxRQUFRO0lBQ1IsTUFBTTtJQUVOLG9HQUFvRztJQUNwRyw4REFBOEQ7SUFDOUQsMEJBQTBCO0lBQzFCLHlCQUF5QjtJQUN6QixlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLGNBQWM7SUFDZCxRQUFRO0lBQ1IsTUFBTTtJQUVOLDJHQUEyRztJQUMzRyw2QkFBNkI7SUFDN0IsbUVBQW1FO0lBQ25FLFFBQVE7SUFDUix3QkFBd0I7SUFDeEIsUUFBUTtJQUNSLE9BQU87SUFDUCwwQkFBMEI7SUFDMUIsV0FBVztJQUNYLHdCQUF3QjtJQUN4QixxQkFBcUI7SUFDckIsU0FBUztJQUNULHlCQUF5QjtJQUN6QixRQUFRO0lBQ1IsTUFBTTtJQUVOLDJHQUEyRztJQUMzRyw2QkFBNkI7SUFDN0IsbUVBQW1FO0lBQ25FLFFBQVE7SUFDUix3QkFBd0I7SUFDeEIsUUFBUTtJQUNSLE9BQU87SUFDUCwwQkFBMEI7SUFDMUIsV0FBVztJQUNYLHdCQUF3QjtJQUN4QixxQkFBcUI7SUFDckIsU0FBUztJQUNULHlCQUF5QjtJQUN6QixRQUFRO0lBQ1IsTUFBTTtJQUVOLDJHQUEyRztJQUMzRyw2QkFBNkI7SUFDN0IsbUVBQW1FO0lBQ25FLFFBQVE7SUFDUix3QkFBd0I7SUFDeEIsUUFBUTtJQUNSLE9BQU87SUFDUCwwQkFBMEI7SUFDMUIsV0FBVztJQUNYLHdCQUF3QjtJQUN4QixxQkFBcUI7SUFDckIsU0FBUztJQUNULHlCQUF5QjtJQUN6QixRQUFRO0lBQ1IsTUFBTTtJQUVOLEVBQUUsQ0FBQyxzREFBc0QsRUFBRSxHQUFHLEVBQUU7UUFDOUQsTUFBTSxHQUFHLEdBQUcsV0FBVyxDQUFDLGlCQUFpQixFQUFFLEVBQUUsQ0FBQyxDQUFDO1FBRS9DLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbEIsQ0FBQyxFQUFFLENBQUMsSUFBSSxFQUFFLFFBQVEsQ0FBQztTQUNwQixDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyxpRkFBaUYsRUFBRSxHQUFHLEVBQUU7UUFDekYsTUFBTSxHQUFHLEdBQUcsV0FBVyxDQUFDLHFDQUFxQyxFQUFFO1lBQzdELFVBQVUsRUFBRSxHQUFHO1NBQ2hCLENBQUMsQ0FBQztRQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbEIsSUFBSSxFQUFFLElBQUk7WUFDVixJQUFJLEVBQUUsYUFBYTtTQUNwQixDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyxzRUFBc0UsRUFBRSxHQUFHLEVBQUU7UUFDOUUsTUFBTSxHQUFHLEdBQUcsV0FBVyxDQUFDLHlDQUF5QyxFQUFFO1lBQ2pFLFVBQVUsRUFBRSxHQUFHO1NBQ2hCLENBQUMsQ0FBQztRQUVILE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbEIsQ0FBQyxFQUFFLENBQUMsTUFBTSxFQUFFLE1BQU0sQ0FBQztZQUNuQixTQUFTLEVBQUUsT0FBTztTQUNuQixDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyxpRkFBaUYsRUFBRSxHQUFHLEVBQUU7UUFDekYsTUFBTSxHQUFHLEdBQUcsV0FBVyxDQUFDLHFDQUFxQyxFQUFFO1lBQzdELFVBQVUsRUFBRSxHQUFHO1NBQ2hCLENBQUMsQ0FBQztRQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbEIsSUFBSSxFQUFFLElBQUk7WUFDVixJQUFJLEVBQUUsYUFBYTtTQUNwQixDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyw0R0FBNEcsRUFBRSxHQUFHLEVBQUU7UUFDcEgsTUFBTSxHQUFHLEdBQUcsV0FBVyxDQUNyQjs7Ozs7UUFLRSxFQUNGO1FBQ0Usa0JBQWtCO1NBQ25CLENBQ0YsQ0FBQztRQUVGLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbEIsS0FBSyxFQUFFLFNBQVM7WUFDaEIsR0FBRyxFQUFFLG9DQUFvQztZQUN6QyxJQUFJLEVBQUUsdUNBQXVDO1lBQzdDLEtBQUssRUFBRSxvQ0FBb0M7U0FDNUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQyxDQUFDLENBQUM7QUFDTCxDQUFDLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VBcmdzLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYXJzZUFyZ3MudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxjQUFjLENBQUM7QUFFdkMsUUFBUSxDQUFDLDRCQUE0QixFQUFFLEdBQUcsRUFBRTtJQUMxQyxFQUFFLENBQUMsd0NBQXdDLEVBQUUsR0FBRyxFQUFFO1FBQ2hELE1BQU0sR0FBRyxHQUFHLFdBQVcsQ0FBQywwQkFBMEIsQ0FBQyxDQUFDO1FBQ3BELE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbEIsU0FBUyxFQUFFLE1BQU07WUFDakIsQ0FBQyxFQUFFLElBQUk7U0FDUixDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyxvRUFBb0UsRUFBRSxHQUFHLEVBQUU7UUFDNUUsTUFBTSxHQUFHLEdBQUcsV0FBVyxDQUFDLHFCQUFxQixDQUFDLENBQUM7UUFDL0MsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLE9BQU8sQ0FBQztZQUNsQixTQUFTLEVBQUUsTUFBTTtZQUNqQixDQUFDLEVBQUUsSUFBSTtTQUNSLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsRUFBRSxDQUFDLHFGQUFxRixFQUFFLEdBQUcsRUFBRTtRQUM3RixNQUFNLEdBQUcsR0FBRyxXQUFXLENBQUMsK0JBQStCLENBQUMsQ0FBQztRQUN6RCxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ2xCLFNBQVMsRUFBRSxNQUFNO1lBQ2pCLENBQUMsRUFBRSxJQUFJO1lBQ1AsSUFBSSxFQUFFLElBQUk7WUFDVixDQUFDLEVBQUUsSUFBSTtTQUNSLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsRUFBRSxDQUFDLDRGQUE0RixFQUFFLEdBQUcsRUFBRTtRQUNwRyxNQUFNLEdBQUcsR0FBRyxXQUFXLENBQ3JCLDJE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

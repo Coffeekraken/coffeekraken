@@ -5,12 +5,6 @@ import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiFormInputInterface extends __SInterface {
   static definition = {
-    color: {
-      type: 'String',
-      required: true,
-      default: 'default',
-      alias: 'c'
-    },
     style: {
       type: 'String',
       values: ['default'],
@@ -20,7 +14,6 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormInputParams {
-  color: string;
   style: 'default';
 }
 
@@ -36,7 +29,6 @@ export default function ({
   processNested: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiFormInputParams = {
-    color: 'default',
     style: 'default',
     ...params
   };
@@ -64,13 +56,15 @@ export default function ({
   switch (finalParams.style) {
     default:
       vars.push(`
-          color: sugar.color(${finalParams.color}, text);
+          color: sugar.color(ui, text);
+          background-color: sugar.color(ui, surface);
           padding: ${__themeVar('ui.form.padding')};
-          border: sugar.color(${finalParams.color}) solid 1px;
+          border: sugar.color(ui) solid 1px;
           @sugar.depth(10);
+
           &:hover {
             @sugar.depth(20);
-            border: sugar.color(${finalParams.color}) solid 2px;
+            border: sugar.color(accent) solid 2px;
           }
         `);
       break;

@@ -95,5 +95,8 @@
       "background": "#64D5EE",
       "iconColour": "#64D5EE"
     }
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

@@ -142,9 +142,21 @@ export default {
       text: '--lighten 40',
       placeholder: '--lighten 20',
       surface: '--lighten 0',
-      ':hover': {},
+      background: '--lighten 0',
+      border: '--lighten 0',
+      ':hover': {
+        text: '--lighten 40',
+        placeholder: '--lighten 30',
+        surface: '--lighten 0',
+        background: '--lighten 10',
+        border: '--lighten 0'
+      },
       ':focus': {
-        surface: '--lighten 10'
+        text: '--lighten 40',
+        placeholder: '--lighten 30',
+        surface: '--lighten 10',
+        background: '--lighten 10',
+        border: '--lighten 0'
       }
     },
 
@@ -1105,13 +1117,16 @@ export default {
 
   ui: {
     button: {
-      padding: '1em 2em',
+      padding: '10 30',
       borderRadius: '[config.theme.themes.light.border.radius.default]',
       transition: '[config.theme.themes.light.transition.fast]',
-      styles: ['default', 'outlined', 'text']
+      defaultStyle: 'gradient',
+      ':gradient': {}
+      // ':outline': {},
+      // ':text': {}
     },
     form: {
-      padding: '10 20 ',
+      padding: '10 20',
       borderRadius: '[config.theme.themes.light.border.radius.default]',
       transition: '[config.theme.themes.light.transition.fast]',
       styles: ['default:default']

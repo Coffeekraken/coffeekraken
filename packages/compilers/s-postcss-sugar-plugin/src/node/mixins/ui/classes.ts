@@ -30,7 +30,7 @@ export default function ({
   processNested: Function;
 }) {
   const cssArray = [
-    // `@sugar.ui.button.classes;`,
+    `@sugar.ui.button.classes;`,
     '@sugar.ui.form.classes;',
     '@sugar.ui.list.classes;',
     '@sugar.ui.navbar.classes;'

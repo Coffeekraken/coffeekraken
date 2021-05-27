@@ -26,7 +26,16 @@ const plugin = (settings: any = {}) => {
         .join('\n');
     }
 
-    if (typeof css === 'string') css = __postcss.parse(css);
+    let isFunctionCall = false;
+
+    if (typeof css === 'string') {
+      if (css.trim().match(/^sugar\./)) {
+        isFunctionCall = true;
+        if (!css.match(/;$/)) css += ';';
+        css = `:root { content: ${css} }`;
+      }
+      css = __postcss.parse(css);
+    }
 
     css.walkAtRules((atRule) => {
       const string = atRule.toString();
@@ -115,13 +124,26 @@ const plugin = (settings: any = {}) => {
         const mixinInterface = mixin.interface;
 
         let sanitizedParams = atRule.params;
-        sanitizedParams = sanitizedParams.split('\n&')[0];
+        sanitizedParams = sanitizedParams.split('\n')[0];
 
         const intRes = mixinInterface.apply(sanitizedParams, {});
         if (intRes.hasIssues()) {
           throw new Error(intRes.toString());
         }
         const params = intRes.value;
+
+        Object.keys(params).forEach((paramName) => {
+          const paramValue = params[paramName];
+          if (
+            typeof paramValue === 'string' &&
+            paramValue.trim().match(/^sugar\./)
+          ) {
+            let res = processNested(paramValue);
+            if (typeof res !== 'string') res = res.toString();
+            params[paramName] = res;
+          }
+        });
+
         delete params.help;
         return mixinFn({
           params,
@@ -131,6 +153,15 @@ const plugin = (settings: any = {}) => {
         });
       }
     });
+
+    if (isFunctionCall) {
+      const functionRes = css
+        .toString()
+        .trim()
+        .replace(/^:root\s?\{\s?content:\s?/, '')
+        .replace(/;\s?\}$/, '');
+      return functionRes;
+    }
 
     return css;
   };
@@ -153,8 +184,8 @@ const plugin = (settings: any = {}) => {
         cwd: `${__dirname}/postProcessors`
       });
       postProcessorsPaths.forEach((path) => {
-        const processorFn = require(`${__dirname}/postProcessors/${path}`)
-          .default;
+        const processorFn =
+          require(`${__dirname}/postProcessors/${path}`).default;
         finalAst = processorFn({
           ast: finalAst,
           root

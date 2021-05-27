@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __unquote from '../string/unquote';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 /**
  * @name                          get
@@ -9,6 +10,8 @@ import __unquote from '../string/unquote';
  * @stable
  *
  * Retreive an object value using a dotted path like "myObject.myProperty.myValue"
+ *
+ * @feature       Support optional property in the doted path like "something.cool?.hello.world"
  *
  * @param               {Object}                 obj                The object in which to set the value
  * @param               {String}                path                The dotted object path to get
@@ -33,32 +36,49 @@ function get(obj, path, settings = {}) {
   if (!path || path === '' || path === '.') return obj;
   path = path.replace(/\[(\w+)\]/g, '.$1');
   path = path.replace(/^\./, '');
-  const a = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm).map((p) => __unquote(p));
-  let o = obj;
-  while (a.length) {
-    const n = a.shift();
-    if (typeof o !== 'object') return;
-    if (!(n in o)) return;
-    o = o[n];
+
+  let potentialPaths = [path.replace(/\?/gm, '')];
+
+  const parts = path.split('.');
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const part = parts[i];
+    if (part.match(/\?$/)) {
+      const before = parts.slice(0, i);
+      const after = parts.slice(i + 1);
+      potentialPaths.push([...before, ...after].join('.'));
+      potentialPaths.push(
+        [...before, ...after.filter((a) => !a.match(/\?$/))].join('.')
+      );
+    }
   }
-  return o;
+
+  potentialPaths = __unique(potentialPaths.map((s) => s.replace(/\?/gm, '')));
+
+  for (let i = 0; i < potentialPaths.length; i++) {
+    const path = potentialPaths[i];
+    const result = __get(obj, path, settings);
+    if (result !== undefined) return result;
+  }
 }
 
-// console.log(
-//   get(
-//     {
-//       someting: {
-//         cool: 'hello'
-//       },
-//       coco: ['hello', 'world'],
-//       world: {
-//         'coco.plop': {
-//           yep: 'dsojiofj'
-//         }
-//       }
-//     },
-//     'world."coco.plop".yep'
-//   )
-// );
+function __get(obj, path, settings = {}) {
+  settings = {
+    ...settings
+  };
+  if (obj[path] !== undefined) return obj[path];
+  if (!path || path === '' || path === '.') return obj;
+  const a = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm).map((p) => __unquote(p));
+  let o = obj;
+
+  while (a.length) {
+    const n = a.shift().replace(/\?$/, '');
+    if (typeof o !== 'object' || !(n in o)) {
+      return;
+    }
+    o = o[n];
+  }
+
+  return o;
+}
 
 export default get;

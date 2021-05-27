@@ -19,7 +19,10 @@ import __theme from './theme';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function themeVar(dotPath: string): string {
-  return `var(--s-theme-${dotPath.replace(/\./gm, '-')}, ${__theme().config(
-    dotPath
-  )})`;
+  const v = `var(--s-theme-${dotPath
+    .replace(/\./gm, '-')
+    .replace(/:/gm, '-')
+    .replace(/\?/gm, '')
+    .replace(/--/gm, '-')}, ${__theme().config(dotPath)})`;
+  return v;
 }

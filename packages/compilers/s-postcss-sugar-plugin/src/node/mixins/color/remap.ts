@@ -60,10 +60,10 @@ export default function ({
   const cssArray: string[] = [];
 
   cssArray.push(`
-    --s-theme-color-${finalParams.toColor}-default: var(--s-theme-color-${finalParams.color}-default);
-    --s-theme-color-${finalParams.toColor}-default-h: var(--s-theme-color-${finalParams.color}-default-h);
-    --s-theme-color-${finalParams.toColor}-default-s: var(--s-theme-color-${finalParams.color}-default-s);
-    --s-theme-color-${finalParams.toColor}-default-l: var(--s-theme-color-${finalParams.color}-default-l);
+    --s-theme-color-${finalParams.color}-default: var(--s-theme-color-${finalParams.toColor}-default);
+    --s-theme-color-${finalParams.color}-default-h: var(--s-theme-color-${finalParams.toColor}-default-h);
+    --s-theme-color-${finalParams.color}-default-s: var(--s-theme-color-${finalParams.toColor}-default-s);
+    --s-theme-color-${finalParams.color}-default-l: var(--s-theme-color-${finalParams.toColor}-default-l);
   `);
 
   if (atRule.parent.type === 'root') {

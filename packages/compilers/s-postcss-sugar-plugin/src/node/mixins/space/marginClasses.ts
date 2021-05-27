@@ -29,7 +29,7 @@ export default function ({
 
   Object.keys(spacesObj).forEach((spaceName) => {
     // margins
-    const clsMargin = `s-mar-${spaceName}`;
+    const clsMargin = `s-margin-${spaceName}`;
     vars.push(`/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.space
@@ -46,7 +46,7 @@ export default function ({
    .${clsMargin} {
         margin: sugar.space(${spaceName});
    }`);
-    const clsMarginTop = `s-mar-top-${spaceName}`;
+    const clsMarginTop = `s-margin-top-${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginTop}
     * @namespace        sugar.css.space
@@ -63,7 +63,7 @@ export default function ({
    .${clsMarginTop} {
         margin-top: sugar.space(${spaceName});
    }`);
-    const clsMarginBottom = `s-mar-bottom-${spaceName}`;
+    const clsMarginBottom = `s-margin-bottom-${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginBottom}
     * @namespace        sugar.css.space
@@ -80,7 +80,7 @@ export default function ({
    .${clsMarginBottom} {
         margin-bottom: sugar.space(${spaceName});
    }`);
-    const clsMarginLeft = `s-mar-left-${spaceName}`;
+    const clsMarginLeft = `s-margin-left-${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginLeft}
     * @namespace        sugar.css.space
@@ -97,7 +97,7 @@ export default function ({
    .${clsMarginLeft} {
         margin-left: sugar.space(${spaceName});
    }`);
-    const clsMarginRight = `s-mar-right-${spaceName}`;
+    const clsMarginRight = `s-margin-right-${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginRight}
     * @namespace        sugar.css.space
@@ -114,7 +114,7 @@ export default function ({
    .${clsMarginRight} {
         margin-right: sugar.space(${spaceName});
    }`);
-    const clsMarginX = `s-mar-x-${spaceName}`;
+    const clsMarginX = `s-margin-x-${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginX}
     * @namespace        sugar.css.space
@@ -132,7 +132,7 @@ export default function ({
         margin-left: sugar.space(${spaceName});
         margin-right: sugar.space(${spaceName});
    }`);
-    const clsMarginY = `s-mar-y-${spaceName}`;
+    const clsMarginY = `s-margin-y-${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginY}
     * @namespace        sugar.css.space

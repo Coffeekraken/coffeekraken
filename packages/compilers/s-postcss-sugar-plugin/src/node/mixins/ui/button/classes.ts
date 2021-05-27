@@ -3,10 +3,6 @@ import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
   static definition = {
-    colors: {
-      type: 'String[]',
-      alias: 'c'
-    },
     sizes: {
       type: 'String[]',
       alias: 's'
@@ -14,10 +10,7 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
   };
 }
 
-export interface IPostcssSugarPluginUiButtonClassesParams {
-  colors: string[];
-  sizes: string[];
-}
+export interface IPostcssSugarPluginUiButtonClassesParams {}
 
 export { postcssSugarPluginUiButtonClassesInterface as interface };
 
@@ -30,62 +23,67 @@ export default function ({
   atRule: any;
   processNested: Function;
 }) {
-  const colors = __theme().config('color'),
-    sizes = __theme().config('size');
-
   const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-    colors: Object.keys(colors),
-    sizes: Object.keys(sizes),
     ...params
   };
 
-  const vars: string[] = [
-    `
-    @sugar.scope(bare) {
-      .s-btn {
-        @sugar.ui.button()
-      }
-    }
-  `
+  const vars: string[] = [];
+
+  const defaultStyle = __theme().config('ui.button.defaultStyle') ?? 'default';
+
+  const styles = [
+    'default',
+    ...Object.keys(__theme().config('ui.button'))
+      .filter((s) => s.match(/^:/))
+      .map((s) => s.replace(':', ''))
   ];
 
-  const styles = __theme().config('ui.button.styles');
-
-  vars.push('@sugar.scope(lnf) {');
-
   styles.forEach((style) => {
-    finalParams.colors.forEach((colorName) => {
-      const styleCls = style === 'default' ? '' : `.s-btn--${style}`;
-      const cls =
-        colorName === 'default'
-          ? `.s-btn${styleCls}`
-          : `.s-btn.s-btn--${colorName}${styleCls}`;
+    if (style === 'default') return;
 
-      vars.push(`/**
+    let cls = `[class*="s-btn"]`;
+    if (style !== defaultStyle) {
+      cls += `[class*=":${style}"]`;
+    }
+
+    vars.push(`/**
         * @name           ${cls}
         * @namespace      sugar.css.ui.button
         * @type           CssClass
         * 
-        * This class represent a(n) "<yellow>${style}</yellow>" button with the "<yellow>${colorName}</yellow>" color applied
+        * This class represent a(n) "<s-color="accent">${style}</s-color>" button
         * 
         * @example        html
         * <a class="${cls.replace(/\./gm, ' ').trim()}">I'm a cool button</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
-      vars.push(
-        [
-          `${
-            colorName === 'default'
-              ? `.s-btn${styleCls}`
-              : `.s-btn.s-btn--${colorName}${styleCls}`
-          } {`,
-          ` @sugar.ui.button($color: ${colorName}, $style: ${style});`,
-          `}`
-        ].join('\n')
-      );
-    });
+    vars.push(
+      [`${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n')
+    );
   });
 
-  vars.push('}');
+  Object.keys(__theme().config('color')).forEach((colorName) => {
+    vars.push(`
+      /**
+       * @name        .s-btn:${colorName}
+       * @namespace     sugar.css.ui.button
+       * @type          CssClass
+       * 
+       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any button
+       * 
+       * @example       html
+       * <a class="<s-btn:${colorName}">I'm a cool ${colorName} button</a>
+       * 
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      [class*="s-btn"][class*=":${colorName}"] {
+        @sugar.color.remap(ui, ${colorName});
+      }
+    `);
+  });
 
   const AST = processNested(vars.join('\n'));
   atRule.replaceWith(AST);

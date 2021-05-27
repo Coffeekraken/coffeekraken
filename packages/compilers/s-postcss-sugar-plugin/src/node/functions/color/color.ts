@@ -65,7 +65,7 @@ export default function color({
     ...params
   };
 
-  if (finalParams.color.match(/^sugar\.color\(/)) return finalParams.color;
+  if (finalParams.color.match(/^(hsl\rgba?|hsv)\(/)) return finalParams.color;
   if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
   let colorName = finalParams.color;
@@ -115,8 +115,9 @@ export default function color({
       : modifierParams.desaturate
       ? modifierParams.desaturate * -1
       : undefined;
-    if (saturationOffset === undefined)
+    if (saturationOffset === undefined) {
       saturationOffset = `var(${colorModifierVar}-saturationOffset, 0)`;
+    }
 
     let lightnessOffset = modifierParams.lighten
       ? modifierParams.lighten

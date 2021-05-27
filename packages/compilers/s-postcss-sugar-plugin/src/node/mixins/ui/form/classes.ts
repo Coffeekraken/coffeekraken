@@ -11,7 +11,6 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormClassesParams {
-  colors: string[];
   styles: string[];
 }
 

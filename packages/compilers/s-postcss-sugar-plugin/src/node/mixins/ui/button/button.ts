@@ -5,28 +5,16 @@ import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiButtonInterface extends __SInterface {
   static definition = {
-    color: {
-      type: 'String',
-      required: true,
-      default: 'default',
-      alias: 'c'
-    },
-    textColor: {
-      type: 'String',
-      alias: 't'
-    },
     style: {
       type: 'String',
-      values: ['default', 'outlined', 'text'],
+      values: ['default', 'gradient', 'outlined', 'text'],
       default: 'default'
     }
   };
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-  color: string;
-  textColor: string;
-  style: 'default' | 'outlined' | 'text';
+  style: 'default' | 'gradient' | 'outlined' | 'text';
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
@@ -40,81 +28,92 @@ export default function ({
   processNested: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiButtonParams = {
-    color: 'default',
-    textColor: '',
     style: 'default',
     ...params
   };
 
   const vars: string[] = [];
 
-  const defaultSize = __theme().config('size.default');
+  const dotPath =
+    finalParams.style === 'default'
+      ? `ui.button`
+      : `ui.button.:${finalParams.style}?`;
 
   // bare
   vars.push(`
-      @sugar.scope.bare {
+    @sugar.scope.bare {
         display: inline-block;
         cursor: pointer;
-        padding: ${__themeVar('ui.button.padding')};
+        padding: sugar.space(${__theme().config(`${dotPath}.padding`)});
       }
     `);
 
   // lnf
   vars.push(`
-      @sugar.scope.lnf {
-  `);
-
-  vars.push(`
-      border-radius: ${__themeVar('ui.button.borderRadius')};
-      transition: ${__themeVar('ui.button.transition')};
+    @sugar.scope.lnf {
+      border-radius: ${__themeVar(`${dotPath}.borderRadius`)};
+      transition: ${__themeVar(`${dotPath}.transition`)};
   `);
 
   switch (finalParams.style) {
-    case 'outlined':
+    // case 'outlined':
+    //   vars.push(`
+    //       background-color: sugar.color(ui, background);
+    //       border-color: sugar.color(ui, border});
+    //       color: sugar.color(ui, text);
+    //       border-style: solid;
+    //       border-width: ${1 / parseInt(defaultSize)}em;
+    //       &:hover {
+    //         background-color: sugar.color(ui:hover, background);
+    //         border-color: sugar.color(ui:hover, border);
+    //         color: sugar.color(ui:hover, text);
+    //       }
+    //       &:focus {
+    //         background-color: sugar.color(ui:focus, background);
+    //         border-color: sugar.color(ui:focus, border);
+    //         color: sugar.color(ui:focus, text);
+    //       }
+    //     `);
+    //   break;
+    // case 'text':
+    //   vars.push(`
+    //       background-color: transparent;
+    //       color: sugar.color(${finalParams.color});
+    //       &:hover {
+    //         background-color: sugar.color(${
+    //           finalParams.textColor
+    //             ? finalParams.textColor
+    //             : `${finalParams.color}--10`
+    //         });
+    //       }
+    //   `);
+    //   break;
+    case 'gradient':
       vars.push(`
-          background-color: transparent;
-          border-color: sugar.color(${finalParams.color});
-          color: sugar.color(${finalParams.color});
-          border-style: solid;
-          border-width: ${1 / parseInt(defaultSize)}em;
-          &:hover {
-            background-color: sugar.color(${
-              finalParams.textColor
-                ? finalParams.textColor
-                : `${finalParams.color}--10`
-            });
-          }
-        `);
-      break;
-    case 'text':
-      vars.push(`
-          background-color: transparent;
-          color: sugar.color(${finalParams.color});
-          &:hover {
-            background-color: sugar.color(${
-              finalParams.textColor
-                ? finalParams.textColor
-                : `${finalParams.color}--10`
-            });
+          color: sugar.color(ui, text);
+          @sugar.gradient(ui, sugar.color(ui, --darken 20 --saturate 50), $angle: 90);
+          padding: ${__themeVar(`${dotPath}.padding`)};
+
+          &:hover, &:focus {
+            @sugar.gradient(sugar.color(ui, --darken 20 --saturate 50), ui, $angle: 90);
+            color: sugar.color(ui, text);
           }
       `);
+
       break;
     case 'default':
     default:
       vars.push(`
-        background-color: sugar.color(${finalParams.color});
-        color: sugar.color(${
-          finalParams.textColor
-            ? finalParams.textColor
-            : `${finalParams.color}--i`
-        });
+        background-color: sugar.color(ui, background);
+        color: sugar.color(ui, text);
+
         &:hover {
-          background-color: sugar.color(${
-            finalParams.textColor
-              ? finalParams.textColor
-              : `${finalParams.color}--i`
-          });
-          color: sugar.color(${finalParams.color});
+          background-color: sugar.color(ui:hover, background);
+          color: sugar.color(ui:hover, text);
+        }
+        &:focus {
+          background-color: sugar.color(ui:focus, background);
+          color: sugar.color(ui:focus, text);
         }
       `);
       break;

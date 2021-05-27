@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
 import __isInScope from '../../utils/isInScope';
+import __astNodesToString from '../../utils/astNodesToString';
 
 class postcssSugarPluginScopeBareMixinInterface extends __SInterface {
   static definition = {};
@@ -52,16 +53,7 @@ export default function ({
   } else {
     vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
   }
-  vars.push(
-    processNested(
-      atRule.nodes
-        .map((node) => {
-          if (node.type === 'decl') return node.toString() + ';';
-          return node.toString();
-        })
-        .join('\n')
-    )
-  );
+  vars.push(processNested(__astNodesToString(atRule.nodes)));
   vars.push(`}`);
 
   atRule.replaceWith(vars.join('\n'));

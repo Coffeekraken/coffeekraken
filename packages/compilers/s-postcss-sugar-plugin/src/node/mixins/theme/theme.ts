@@ -73,7 +73,11 @@ export default function ({
   let vars: string[] = [];
   Object.keys(flattenedTheme).forEach((key) => {
     const value = flattenedTheme[key];
-    const varKey = key.replace(/\./gm, '-').replace(/:/gm, '-');
+    const varKey = key
+      .replace(/\./gm, '-')
+      .replace(/:/gm, '-')
+      .replace(/\?/gm, '')
+      .replace(/--/gm, '-');
     if (
       key.match(/^color\./) &&
       typeof value === 'string' &&

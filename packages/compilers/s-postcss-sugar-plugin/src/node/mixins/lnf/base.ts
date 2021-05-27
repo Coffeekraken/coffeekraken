@@ -56,6 +56,10 @@ export default function ({
             @sugar.font.family(default);
             @sugar.font.size(default);
         }
+        ::selection {
+            color: sugar.color(accent, text);
+             background-color: sugar.color(accent);
+        }
     }
     `
   ];

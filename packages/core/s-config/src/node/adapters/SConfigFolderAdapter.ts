@@ -90,16 +90,13 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     );
 
     // handle configs
-    this.configFolderAdapterSettings.folderName = this.configFolderAdapterSettings.folderName.replace(
-      '[name]',
-      this.name
-    );
+    this.configFolderAdapterSettings.folderName =
+      this.configFolderAdapterSettings.folderName.replace('[name]', this.name);
 
     // handle each scopes
     Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
-      let scopeFoldersPathArray = this.configFolderAdapterSettings.scopes[
-        scope
-      ];
+      let scopeFoldersPathArray =
+        this.configFolderAdapterSettings.scopes[scope];
 
       if (scopeFoldersPathArray) {
         if (!Array.isArray(scopeFoldersPathArray))

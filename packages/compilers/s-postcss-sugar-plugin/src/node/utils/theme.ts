@@ -17,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
 const themeDefinition = {
   type: 'String',
   values: __STheme.themes,
-  default: __STheme.baseTheme
+  default: __STheme.theme
 };
 
 export { themeDefinition };
@@ -28,9 +28,9 @@ export default function theme(theme?: string): __STheme {
   ) {
     theme = global._postcssSugarPluginThemeScopeMixinTheme.pop();
   } else {
-    theme = __STheme.baseTheme;
+    theme = __STheme.theme;
   }
-  return __STheme.theme(theme);
+  return __STheme.getTheme(theme);
 }
 
 // // @ts-ignore

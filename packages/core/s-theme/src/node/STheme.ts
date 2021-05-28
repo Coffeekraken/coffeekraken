@@ -119,11 +119,6 @@ export interface ISThemeConfig {
   media: ISThemeMedia;
 }
 
-export interface ISthemes {
-  baseTheme: string;
-  themes: Record<string, ISThemeConfig>;
-}
-
 export default class STheme extends __SClass {
   /**
    * @name        name
@@ -159,16 +154,16 @@ export default class STheme extends __SClass {
   themes: any;
 
   /**
-   * @name      baseTheme
+   * @name      theme
    * @type      String
    * @static
    *
-   * Store the base theme setted in the config.theme namespace
+   * Store the current theme setted in the config.theme namespace
    *
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static baseTheme: string = __sugarConfig('theme.baseTheme');
+  static theme: string = __sugarConfig('theme.theme');
 
   /**
    * @name      themes
@@ -183,7 +178,7 @@ export default class STheme extends __SClass {
   static themes: string[] = Object.keys(__sugarConfig('theme.themes'));
 
   /**
-   * @name        theme
+   * @name        getTheme
    * @type        Function
    * @static
    *
@@ -197,7 +192,7 @@ export default class STheme extends __SClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static _instanciatedThemes: Record<string, STheme> = {};
-  static theme(theme: string): STheme {
+  static getTheme(theme: string): STheme {
     if (this._instanciatedThemes[theme]) return this._instanciatedThemes[theme];
     const themes = __sugarConfig('theme.themes');
     if (!themes[theme])

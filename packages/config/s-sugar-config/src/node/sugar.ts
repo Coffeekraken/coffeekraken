@@ -5,6 +5,7 @@ import __registerFolder from './registerFolder';
 import __sanitizeSugarJson from '@coffeekraken/sugar/shared/sugar/sanitizeSugarJson';
 import __fs from 'fs';
 import __path from 'path';
+import __get from '@coffeekraken/sugar/shared/object/get';
 import { SConfigFolderAdapter } from '@coffeekraken/s-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 
@@ -82,7 +83,7 @@ export default function sugar(dotPath: string): any {
             fileName: '[name].config.js',
             scopes: {
               default: [
-                __path.resolve(__dirname, '../../config'),
+                __path.resolve(__dirname, '../../src/config'),
                 // @ts-ignore
                 ...(global ?? window)._registeredConfigFolderPaths
                   .filter((obj) => obj.scope === 'default')
@@ -136,6 +137,19 @@ export default function sugar(dotPath: string): any {
             }
           }
         })
+      ],
+      resolvers: [
+        {
+          match: /\[theme.[a-zA-Z0-9.\-_]+\]/gm,
+          resolve(match, config, path) {
+            const themePath = path.slice(0, 3).join('.');
+            const valuePath = match
+              .replace('[theme.', themePath + '.')
+              .replace(']', '');
+            const value = __get(config, valuePath);
+            return value;
+          }
+        }
       ]
     });
   }

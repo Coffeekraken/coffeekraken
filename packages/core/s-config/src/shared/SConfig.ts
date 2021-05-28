@@ -47,6 +47,15 @@ export interface ISConfigProxyFn {
   (dotPath: string, originalValue: any, config: any): any;
 }
 
+export interface ISConfigResolverFn {
+  ();
+}
+
+export interface ISConfigResolverObj {
+  match: RegExp;
+  resolve: ISConfigResolverFn;
+}
+
 export default class SConfig {
   /**
    * @name              _name
@@ -150,6 +159,7 @@ export default class SConfig {
    * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
    * - autoSave (true) {Boolean}: Specify if you want the setting to be saved through the adapters directly on "set" action
    * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
+   * - resolvers ([]) {ISConfigResolverObj[]}: Specify some resolvers function to handle special values like "[theme.something....]"
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -176,6 +186,7 @@ export default class SConfig {
       autoSave: true,
       updateTimeout: 500,
       throwErrorOnUndefinedConfig: true,
+      resolvers: [],
       ...settings
     };
 
@@ -208,6 +219,14 @@ export default class SConfig {
     if (!this._settings.defaultAdapter) {
       this._settings.defaultAdapter = Object.keys(this._adapters)[0];
     }
+
+    // register the default resolver "[config...]"
+    this._settings.resolvers.unshift({
+      match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
+      resolve(match, config) {
+        return __get(config, match.replace('[config.', '').replace(']', ''));
+      }
+    });
 
     Object.keys(this._adapters).forEach((adapterName) => {
       const adapterObj = this._adapters[adapterName];
@@ -263,7 +282,9 @@ export default class SConfig {
 
     let config = this._adapters[adapter].instance.load();
 
-    config = this._resolveInternalReferences(config, config);
+    this._settings.resolvers.forEach((resolverObj) => {
+      config = this._resolveInternalReferences(config, config, resolverObj);
+    });
 
     if (this.constructor._registeredPrepares[this.id]) {
       Object.keys(this.constructor._registeredPrepares[this.id]).forEach(
@@ -340,16 +361,18 @@ export default class SConfig {
     return true;
   }
 
-  _resolveInternalReferences(originalValue, config, path = []) {
+  _resolveInternalReferences(originalValue, config, resolverObj, path = []) {
     if (__isPlainObject(originalValue)) {
       Object.keys(originalValue).forEach((key) => {
         if (key === '...') {
           originalValue = {
             ...originalValue,
-            ...this._resolveInternalReferences(originalValue[key], config, [
-              ...path,
-              key
-            ])
+            ...this._resolveInternalReferences(
+              originalValue[key],
+              config,
+              resolverObj,
+              [...path, key]
+            )
           };
         }
       });
@@ -359,27 +382,33 @@ export default class SConfig {
           originalValue[key] = this._resolveInternalReferences(
             originalValue[key],
             config,
+            resolverObj,
             [...path, key]
           );
         } catch (e) {}
       });
     } else if (Array.isArray(originalValue)) {
       originalValue = originalValue.map((v) => {
-        return this._resolveInternalReferences(v, config, path);
+        return this._resolveInternalReferences(v, config, resolverObj, path);
       });
     } else if (typeof originalValue === 'string') {
-      const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-      const matches = originalValue.match(reg);
+      const matches = originalValue.match(resolverObj.match);
 
       if (matches && matches.length) {
         if (matches.length === 1 && originalValue === matches[0]) {
-          const resolvedValue = __get(
-            config,
-            matches[0].replace('[config.', '').replace(']', '')
-          );
+          // console.log(
+          //   'resolve',
+          //   path.join('.'),
+          //   matches[0],
+          //   resolverObj.match
+          // );
+
+          const resolvedValue = resolverObj.resolve(matches[0], config, path);
+
           originalValue = this._resolveInternalReferences(
             resolvedValue,
             config,
+            resolverObj,
             path
           );
         } else {
@@ -387,6 +416,7 @@ export default class SConfig {
             const resolvedValue = this._resolveInternalReferences(
               match,
               config,
+              resolverObj,
               path
             );
             originalValue = originalValue.replace(match, resolvedValue);
@@ -394,11 +424,16 @@ export default class SConfig {
           originalValue = this._resolveInternalReferences(
             originalValue,
             config,
+            resolverObj,
             path
           );
         }
       }
     }
+
+    // if (path.length) {
+    //   __set(config, path.join('.'), originalValue);
+    // }
 
     // check proxy
     if (

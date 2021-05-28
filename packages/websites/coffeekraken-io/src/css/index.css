@@ -79,8 +79,6 @@
 
 @sugar.init;
 
-@sugar.theme (dark);
-
 @sugar.ui.classes;
 
 [class*='s-btn'] {

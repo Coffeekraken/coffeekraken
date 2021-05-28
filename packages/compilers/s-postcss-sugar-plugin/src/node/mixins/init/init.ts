@@ -2,7 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 import __sugarConfig from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
-  static definition = {};
+  static definition = {
+    theme: {
+      type: 'String'
+    }
+  };
 }
 export { postcssSugarPluginMediaMixinInterface as interface };
 
@@ -35,9 +39,8 @@ export default function ({
   const themeConfig = __sugarConfig('theme');
 
   const cssArray = [
-    `@sugar.theme(${themeConfig.baseTheme});`,
+    `@sugar.theme(${params.theme ?? themeConfig.theme});`,
     '@sugar.reset;',
-    // '@sugar.color.schema(default, primary, secondary);',
     '@sugar.font.faces;',
     '@sugar.font.classes;',
     '@sugar.lnf.base;',

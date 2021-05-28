@@ -18,41 +18,39 @@ export function prepare(themeConfig, config) {
       );
       delete themeConfig.themes[themeName].extends;
     }
+    if (themeObj.color) {
+      Object.keys(themeObj.color).forEach((colorName) => {
+        Object.keys(themeObj.color[colorName]).forEach((colorVariantName) => {
+          const colorValue = themeObj.color[colorName][colorVariantName];
+          if (colorVariantName.match(/^:/) && __isPlainObject(colorValue)) {
+            Object.keys(colorValue).forEach((modifierName) => {
+              const modifierValue = colorValue[modifierName];
 
-    Object.keys(themeObj.color).forEach((colorName) => {
-      Object.keys(themeObj.color[colorName]).forEach((colorVariantName) => {
-        const colorValue = themeObj.color[colorName][colorVariantName];
-        if (colorVariantName.match(/^:/) && __isPlainObject(colorValue)) {
-          Object.keys(colorValue).forEach((modifierName) => {
-            const modifierValue = colorValue[modifierName];
+              if (
+                colorVariantName !== ':hover' &&
+                colorVariantName !== ':focus' &&
+                colorVariantName !== ':active'
+              ) {
+                throw new Error(
+                  `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but the specified state variant "<yellow>${modifierName}</yellow>" is not a valid one. Supported states are <green>:hover, :focus and :active</green>`
+                );
+              }
 
-            if (
-              colorVariantName !== ':hover' &&
-              colorVariantName !== ':focus' &&
-              colorVariantName !== ':active'
-            ) {
-              throw new Error(
-                `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but the specified state variant "<yellow>${modifierName}</yellow>" is not a valid one. Supported states are <green>:hover, :focus and :active</green>`
-              );
-            }
-
-            if (__isColor(modifierValue)) {
-              throw new Error(
-                `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but a color state variant cannot be a color but just a color modifier like "--darken 10", etc...`
-              );
-            }
-            // themeObj.color[colorName][
-            //   `${colorVariantName}-${modifierName}`
-            // ] = modifierValue;
-          });
-        } else if (__isColor(colorValue)) {
-          const color = new __SColor(colorValue);
-          themeObj.color[colorName][`${colorVariantName}-h`] = color.h;
-          themeObj.color[colorName][`${colorVariantName}-s`] = color.s;
-          themeObj.color[colorName][`${colorVariantName}-l`] = color.l;
-        }
+              if (__isColor(modifierValue)) {
+                throw new Error(
+                  `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but a color state variant cannot be a color but just a color modifier like "--darken 10", etc...`
+                );
+              }
+            });
+          } else if (__isColor(colorValue)) {
+            const color = new __SColor(colorValue);
+            themeObj.color[colorName][`${colorVariantName}-h`] = color.h;
+            themeObj.color[colorName][`${colorVariantName}-s`] = color.s;
+            themeObj.color[colorName][`${colorVariantName}-l`] = color.l;
+          }
+        });
       });
-    });
+    }
   });
 
   return themeConfig;
@@ -60,10 +58,10 @@ export function prepare(themeConfig, config) {
 
 export default {
   /**
-   * @name          baseTheme
+   * @name          theme
    * @namespace     config.theme
    */
-  baseTheme: 'dark',
+  theme: 'dark',
 
   /**
    * @name          themes
@@ -76,6 +74,7 @@ export default {
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   themes: {
+    base: '[config.themeBase]',
     light: '[config.themeLight]',
     dark: '[config.themeDark]'
   }

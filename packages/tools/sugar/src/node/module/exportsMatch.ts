@@ -1,7 +1,7 @@
 import __minimatch from 'minimatch';
 import __isNode from '../../shared/is/node';
 import __isPlainObject from '../../shared/is/plainObject';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __path from 'path';
 import __extension from '../fs/extension';
@@ -45,7 +45,7 @@ export default function exportsMatch(
     method: 'import',
     target: __isNode() ? 'node' : 'default',
     // @ts-ignore
-    extensions: __sugarConfig('module.resolve.extensions'),
+    extensions: __SugarConfig.get('module.resolve.extensions'),
     ...(settings || {})
   };
 

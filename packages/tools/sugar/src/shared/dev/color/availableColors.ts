@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            availableColors

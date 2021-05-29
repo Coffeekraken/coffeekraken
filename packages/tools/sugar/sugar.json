@@ -1,1 +1,23 @@
-{}
+{
+  "config": {
+    "folders": [
+      {
+        "scope": "default",
+        "path": "./src/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "process",
+      "description": "Process related actions",
+      "defaultAction": "kill",
+      "actions": {
+        "kill": {
+          "description": "Kill a process by it's pid, port and more",
+          "process": "./src/cli/process/kill.cli.js"
+        }
+      }
+    }
+  ]
+}

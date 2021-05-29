@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            classname
@@ -25,7 +25,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function classname(classname) {
-  const prefix = __sugarConfig('classes.generate.prefix');
+  const prefix = __SugarConfig.get('classes.generate.prefix');
   if (prefix) return `${prefix}-${classname}`;
   return classname;
 }

@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -18,52 +18,52 @@ class SProcessSettingsInterface extends __SInterface {
     asyncStart: {
       type: 'Boolean',
       alias: 'a',
-      default: __sugarConfig('process.asyncStart')
+      default: __SugarConfig.get('process.asyncStart')
     },
     killOnError: {
       type: 'Boolean',
-      default: __sugarConfig('process.killOnError')
+      default: __SugarConfig.get('process.killOnError')
     },
     emitErrorAsEvent: {
       type: 'Boolean',
-      default: __sugarConfig('process.emitErrorAsEvent')
+      default: __SugarConfig.get('process.emitErrorAsEvent')
     },
     stdio: {
       type: 'String|SStdio|Boolean',
       alias: 's',
-      default: __sugarConfig('process.stdio')
+      default: __SugarConfig.get('process.stdio')
     },
     decorators: {
       type: 'Boolean',
       alias: 'd',
-      default: __sugarConfig('process.decorators')
+      default: __SugarConfig.get('process.decorators')
     },
     throw: {
       type: 'Boolean',
       alias: 't',
-      default: __sugarConfig('process.throw')
+      default: __SugarConfig.get('process.throw')
     },
     exitAtEnd: {
       type: 'Boolean',
       alias: 'e',
-      default: __sugarConfig('process.exitAtEnd')
+      default: __SugarConfig.get('process.exitAtEnd')
     },
     runAsChild: {
       type: 'Boolean',
       alias: 'c',
-      default: __sugarConfig('process.runAsChild')
+      default: __SugarConfig.get('process.runAsChild')
     },
     definition: {
       type: 'Object',
-      default: __sugarConfig('process.definition')
+      default: __SugarConfig.get('process.definition')
     },
     processPath: {
       type: 'String',
-      default: __sugarConfig('process.processPath')
+      default: __SugarConfig.get('process.processPath')
     },
     notification: {
       type: 'Object',
-      default: __sugarConfig('process.notification')
+      default: __SugarConfig.get('process.notification')
     }
   };
 }

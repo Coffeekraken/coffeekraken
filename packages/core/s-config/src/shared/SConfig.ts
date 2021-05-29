@@ -232,12 +232,12 @@ export default class SConfig {
       const adapterObj = this._adapters[adapterName];
       let timeout;
       if (!adapterObj.instance) return;
-      if (adapterObj.instance._settings.onUpdate) {
+      if (!adapterObj.instance._settings.onUpdate) {
         adapterObj.instance._settings.onUpdate = () => {
           clearTimeout(timeout);
           timeout = setTimeout(() => {
             // load the updated config
-            this.load();
+            this.load(adapterName, true);
           }, this._settings.updateTimeout);
         };
       }
@@ -263,7 +263,7 @@ export default class SConfig {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  load(adapter = this._settings.defaultAdapter) {
+  load(adapter = this._settings.defaultAdapter, isUpdate = false) {
     // make sure we load only once the config
     // if (_SConfigLoadingByAdapter[adapter]) {
     //   return null;
@@ -276,11 +276,11 @@ export default class SConfig {
       );
     }
 
-    if (Object.keys(this._adapters[adapter].config).length !== 0) {
+    if (!isUpdate && Object.keys(this._adapters[adapter].config).length !== 0) {
       return this._adapters[adapter].config;
     }
 
-    let config = this._adapters[adapter].instance.load();
+    let config = this._adapters[adapter].instance.load(isUpdate);
 
     this._settings.resolvers.forEach((resolverObj) => {
       config = this._resolveInternalReferences(config, config, resolverObj);

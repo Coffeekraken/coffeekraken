@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            colorValue
@@ -16,12 +16,12 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function colorValue(color) {
-  if (!__sugarConfig('dev.colors')[color]) {
+  if (!__SugarConfig.get('dev.colors')[color]) {
     throw new Error(
       `[sugar.shared.dev.colors.colorValue] Sorry but the color "<yellow>${color}</yellow>" you want to get the value from does not exists... Here's the list of available colors at this time: ${Object.keys(
-        __sugarConfig('dev.colors')
+        __SugarConfig.get('dev.colors')
       ).join(',')}`
     );
   }
-  return __sugarConfig('dev.colors')[color];
+  return __SugarConfig.get('dev.colors')[color];
 }

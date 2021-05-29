@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -19,21 +19,21 @@ class SDocMapGenerateParamsInterface extends __SInterface {
   static definition = {
     cache: {
       type: 'Boolean',
-      default: __sugarConfig('docmap.cache'),
+      default: __SugarConfig.get('docmap.cache'),
       level: 1
     },
     globs: {
       type: 'Array<String>',
       alias: 'i',
       description: 'Input files glob pattern',
-      default: __sugarConfig('docmap.generate.globs'),
+      default: __SugarConfig.get('docmap.generate.globs'),
       level: 1
     },
     exclude: {
       type: 'Array<String>',
       description:
         'Specify some regexp used to exclude files from resulting docMap',
-      default: __sugarConfig('docmap.generate.exclude'),
+      default: __SugarConfig.get('docmap.generate.exclude'),
       level: 1
     },
     fields: {
@@ -41,26 +41,26 @@ class SDocMapGenerateParamsInterface extends __SInterface {
       description:
         'Specify which docblock fields you want in your final docmap.json file',
       alias: 'f',
-      default: __sugarConfig('docmap.generate.fields')
+      default: __SugarConfig.get('docmap.generate.fields')
     },
     filters: {
       type: 'Object<RegExp>',
       description:
         'Specify some properties and regex to use to filter docblocks',
-      default: __sugarConfig('docmap.generate.filters')
+      default: __SugarConfig.get('docmap.generate.filters')
     },
     watch: {
       type: 'Boolean',
       alias: 'w',
       description:
         'Specify if you want to watch the sources files to re-generate the docmap.json automatically on updates',
-      default: __sugarConfig('docmap.generate.watch')
+      default: __SugarConfig.get('docmap.generate.watch')
     },
     outPath: {
       type: 'String',
       alias: 'p',
       description: 'Output file path',
-      default: __sugarConfig('docmap.generate.outPath'),
+      default: __SugarConfig.get('docmap.generate.outPath'),
       level: 1
     },
     save: {
@@ -68,7 +68,7 @@ class SDocMapGenerateParamsInterface extends __SInterface {
       alias: 's',
       description:
         'Specify if you want to save the generated file under the ```outPath``` path',
-      default: __sugarConfig('docmap.generate.save')
+      default: __SugarConfig.get('docmap.generate.save')
     }
   };
 }

@@ -5,7 +5,7 @@ import __fs from 'fs';
 import __packageRoot from '../../../path/packageRoot';
 import __SPromise from '../../../promise/SPromise';
 import __packageJson from '../../../package/json';
-import __sugarConfig from '../../../config/sugar';
+import __SugarConfig from '../../../config/sugar';
 import __STemplate from '../../../template/STemplate';
 import STemplate from '../../../template/STemplate';
 
@@ -42,7 +42,7 @@ function sugar(req, res, settings = {}) {
     title = packageJson.name;
     view = 'pages.index';
   } else {
-    const viewsDir = __sugarConfig('frontend.viewsDir');
+    const viewsDir = __SugarConfig.get('frontend.viewsDir');
     const viewInfoObj = __STemplate.getViewInfo(`${viewsDir}/index`);
     if (viewInfoObj) {
       view = viewInfoObj.relPath;

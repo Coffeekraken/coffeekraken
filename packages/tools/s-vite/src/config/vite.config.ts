@@ -1,7 +1,8 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
+
 
 export default {
   root: '[config.storage.rootDir]',

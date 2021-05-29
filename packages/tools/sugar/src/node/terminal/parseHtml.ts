@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __replaceTags from '../../shared/html/replaceTags';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __upperFirst from '../../shared/string/upperFirst';
 import __chalk from 'chalk';
 import __tagsMap from '../../shared/console/html/tagsMap';
@@ -39,16 +39,16 @@ function parseHtml(message) {
 
   const tagsMap = Object.assign({}, __tagsMap);
 
-  // const sugarColors = Object.keys(__sugarConfig('colors')).filter(
+  // const sugarColors = Object.keys(__SugarConfig.get('colors')).filter(
   //   (c) => c !== 'terminal'
   // );
-  const terminalColors = Object.keys(__sugarConfig('terminal.colors'));
+  const terminalColors = Object.keys(__SugarConfig.get('terminal.colors'));
   const colorsObj = {};
   // sugarColors.forEach((name) => {
-  //   colorsObj[name] = __sugarConfig(`colors.${name}`);
+  //   colorsObj[name] = __SugarConfig.get(`colors.${name}`);
   // });
   terminalColors.forEach((name) => {
-    colorsObj[name] = __sugarConfig(`terminal.colors.${name}`);
+    colorsObj[name] = __SugarConfig.get(`terminal.colors.${name}`);
   });
 
   message = message.map((m) => {

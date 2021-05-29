@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 import __packageRoot from '../../path/packageRoot';
 
@@ -17,33 +17,33 @@ class ResolveSettingsInterface extends __SInterface {
   static definition = {
     dirs: {
       type: 'Array<String>',
-      default: __sugarConfig('module.resolve.dirs')
+      default: __SugarConfig.get('module.resolve.dirs')
     },
     extensions: {
       type: 'Array<String>',
-      default: __sugarConfig('module.resolve.extensions')
+      default: __SugarConfig.get('module.resolve.extensions')
     },
     fields: {
       type: 'Array<String>',
-      default: __sugarConfig('module.resolve.fields')
+      default: __SugarConfig.get('module.resolve.fields')
     },
     buildInModules: {
       type: 'Boolean',
-      default: __sugarConfig('module.resolve.builtInModules')
+      default: __SugarConfig.get('module.resolve.builtInModules')
     },
     preferExports: {
       type: 'Boolean',
-      default: __sugarConfig('module.resolve.preferExports')
+      default: __SugarConfig.get('module.resolve.preferExports')
     },
     method: {
       type: 'String',
       values: ['import', 'require'],
-      default: __sugarConfig('module.resolve.method')
+      default: __SugarConfig.get('module.resolve.method')
     },
     target: {
       type: 'String',
       values: ['node', 'default'],
-      default: __sugarConfig('module.resolve.target')
+      default: __SugarConfig.get('module.resolve.target')
     },
     rootDir: {
       type: 'String',

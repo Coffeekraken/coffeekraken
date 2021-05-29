@@ -7,7 +7,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __childProcess from 'child_process';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 import __SLog, { ILog } from '@coffeekraken/s-log';
 
@@ -265,7 +265,7 @@ class SStdio extends __SClass implements ISStdio {
               ],
               warning: ['warn', '*.warn']
             },
-            types: __sugarConfig('log.types'),
+            types: __SugarConfig.get('log.types'),
             metas: {
               time: false
             }

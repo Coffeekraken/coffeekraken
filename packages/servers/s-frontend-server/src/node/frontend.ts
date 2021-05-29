@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
@@ -35,7 +35,7 @@ import __packageRoot from '../../path/packageRoot';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 const fn = function (args = {}) {
-  const settings = __deepMerge(__sugarConfig('frontend'), args);
+  const settings = __deepMerge(__SugarConfig.get('frontend'), args);
   const app = __express();
 
   let server;

@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
@@ -12,6 +12,7 @@ import __rewritesPlugin from './plugins/rewritesPlugin';
 import __SViteStartInterface from './start/interface/SViteStartInterface';
 import __SFile from '@coffeekraken/s-file';
 
+import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __sRiotjsPluginPostcssPreprocessor from '@coffeekraken/s-riotjs-plugin-postcss-preprocessor';
 
 export interface ISViteSettings {}
@@ -69,7 +70,7 @@ export default class SVite extends __SClass {
     );
 
     // register some riotjs preprocessors
-    __sRiotjsPluginPostcssPreprocessor(__sugarConfig('postcss.plugins'));
+    __sRiotjsPluginPostcssPreprocessor(__SugarConfig.get('postcss.plugins'));
   }
 
   /**
@@ -89,11 +90,12 @@ export default class SVite extends __SClass {
         const config = {
           configFile: false,
           // logLevel: 'silent',
-          ...__sugarConfig('vite')
+          ...__SugarConfig.get('vite')
         };
 
         if (!config.plugins) config.plugins = [];
         config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
+        config.plugins.unshift(__sInternalWatcherReloadVitePlugin());
 
         // resolve plugins paths
         config.plugins = config.plugins.map((p) => {
@@ -104,6 +106,7 @@ export default class SVite extends __SClass {
           return p;
         });
 
+      
         const server = await __viteServer(config);
         const listen = await server.listen();
         emit('log', {
@@ -139,7 +142,7 @@ export default class SVite extends __SClass {
   build(params: ISViteBuildParams) {
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
-        const viteConfig = __sugarConfig('vite');
+        const viteConfig = __SugarConfig.get('vite');
         const duration = new __SDuration();
         const config: any = __deepMerge(viteConfig, {
           logLevel: 'silent',

@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SFrontstackExecInterface from './exec/interface/SFrontstackExecInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
@@ -103,7 +103,7 @@ export default class SFrontstack extends __SClass {
   exec(params: ISFrontstackExecParams) {
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
-        const frontstackConfig = __sugarConfig('frontstack');
+        const frontstackConfig = __SugarConfig.get('frontstack');
         const receipesObj = frontstackConfig['receipes'];
 
         const finalParams: ISFrontstackExecParams = this.applyInterface(

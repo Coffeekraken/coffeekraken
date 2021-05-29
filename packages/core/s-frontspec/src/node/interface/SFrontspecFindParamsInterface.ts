@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 import __SFrontspecParamsInterface from './SFrontspecParamsInterface';
 
@@ -23,14 +23,14 @@ class SFrontspecFindParamsInterface extends __SInterface {
       type: 'Array<String>',
       alias: 'i',
       description: 'frontspec.json files glob pattern',
-      default: __sugarConfig('frontspec.find.globs'),
+      default: __SugarConfig.get('frontspec.find.globs'),
       level: 1
     },
     exclude: {
       type: 'Object',
       description:
         'Specify some regexp used to exclude files from searching frontspecs',
-      default: __sugarConfig('frontspec.find.exclude'),
+      default: __SugarConfig.get('frontspec.find.exclude'),
       level: 1
     }
   };

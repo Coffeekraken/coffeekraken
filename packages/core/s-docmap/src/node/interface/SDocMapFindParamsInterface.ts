@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 import __SDocMapParamsInterface from './SDocMapParamsInterface';
 
@@ -23,14 +23,14 @@ class SDocMapSettingsInterface extends __SInterface {
       type: 'Array<String>',
       alias: 'i',
       description: 'docMap.json files glob pattern',
-      default: __sugarConfig('docmap.find.globs'),
+      default: __SugarConfig.get('docmap.find.globs'),
       level: 1
     },
     exclude: {
       type: 'Object',
       description:
         'Specify some regexp used to exclude files from searching docMaps',
-      default: __sugarConfig('docmap.find.exclude'),
+      default: __SugarConfig.get('docmap.find.exclude'),
       level: 1
     }
   };

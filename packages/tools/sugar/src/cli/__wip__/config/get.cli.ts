@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __parseArgs from '../../node/cli/parseArgs';
-import __sugarConfig from '../../node/config/sugar';
+import __SugarConfig from '../../node/config/sugar';
 
 export default async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
@@ -17,5 +17,5 @@ export default async (stringArgs = '') => {
     throw new Error(`The cli action "config.get" need a "path" argument...`);
   }
 
-  console.log(__sugarConfig(args.path));
+  console.log(__SugarConfig.get(args.path));
 };

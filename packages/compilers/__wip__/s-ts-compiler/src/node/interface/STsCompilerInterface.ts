@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -29,7 +29,7 @@ class STsCompilerInterface extends __SInterface {
         glob: 'resolve'
       },
       alias: 'i',
-      default: __sugarConfig('ts.compile.input')
+      default: __SugarConfig.get('ts.compile.input')
     },
     inDir: {
       type: 'String',
@@ -38,7 +38,7 @@ class STsCompilerInterface extends __SInterface {
         exists: true
       },
       alias: 'o',
-      default: __sugarConfig('ts.compile.inDir')
+      default: __SugarConfig.get('ts.compile.inDir')
     },
     outDir: {
       type: 'String',
@@ -48,7 +48,7 @@ class STsCompilerInterface extends __SInterface {
         create: true
       },
       alias: 'o',
-      default: __sugarConfig('ts.compile.outDir')
+      default: __SugarConfig.get('ts.compile.outDir')
     },
     rootDir: {
       type: 'String',
@@ -57,7 +57,7 @@ class STsCompilerInterface extends __SInterface {
         exists: true
       },
       alias: 'r',
-      default: __sugarConfig('ts.compile.rootDir')
+      default: __SugarConfig.get('ts.compile.rootDir')
     },
     clear: {
       type: 'Boolean',
@@ -69,38 +69,38 @@ class STsCompilerInterface extends __SInterface {
       type: 'String|Boolean',
       alias: 'm',
       values: [true, false, 'inline'],
-      default: __sugarConfig('ts.compile.map')
+      default: __SugarConfig.get('ts.compile.map')
     },
     stack: {
       type: 'Array<String>',
       alias: 's',
-      default: __sugarConfig('ts.compile.stack')
+      default: __SugarConfig.get('ts.compile.stack')
     },
     config: {
       type: 'String',
       alias: 'c',
       description:
         'Specify either a full tsconfig file path to use as config, or a pre-build config name like "js", "node", etc...',
-      default: __sugarConfig('ts.compile.config')
+      default: __SugarConfig.get('ts.compile.config')
     },
     banner: {
       type: 'String',
       alias: 'b',
-      default: __sugarConfig('ts.compile.banner')
+      default: __SugarConfig.get('ts.compile.banner')
     },
     save: {
       type: 'Boolean',
       alias: 's',
-      default: __sugarConfig('ts.compile.save')
+      default: __SugarConfig.get('ts.compile.save')
     },
     watch: {
       type: 'Boolean',
       alias: 'w',
-      default: __sugarConfig('ts.compile.watch')
+      default: __SugarConfig.get('ts.compile.watch')
     },
     compilerOptions: {
       type: 'Object',
-      default: __sugarConfig('ts.compile.compilerOptions')
+      default: __SugarConfig.get('ts.compile.compilerOptions')
     }
   };
 }

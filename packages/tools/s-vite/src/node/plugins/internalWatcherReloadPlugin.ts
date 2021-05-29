@@ -1,0 +1,71 @@
+// @ts-nocheck
+
+import __picomatch from 'picomatch'
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
+import type { PluginOption, ViteDevServer } from 'vite'
+
+/**
+ * Configuration for the watched paths.
+ */
+interface Config {
+  config: boolean;
+}
+
+/**
+ * Allows to automatically reload the page when a watched file changes.
+ */
+export default (config: Config = {}): PluginOption => ({
+  name: 's-vite-plugin-internal-watcher-reload',
+
+  apply: 'serve',
+
+  // NOTE: Enable globbing so that Vite keeps track of the template files.
+  config: () => ({ server: { watch: { disableGlobbing: false, followSymlinks: true } } }),
+
+  configureServer ({ watcher, ws, config: { logger } }: ViteDevServer) {
+    config = __deepMerge({
+        config: true
+    }, config);
+
+    const configFiles = __SugarConfig.filesRealPaths;
+
+    console.log(configFiles);
+
+    // console.log(config);
+
+    // const w = __chokidar.watch(configFiles.map(path => {
+    //     return `${path}/*.js`;
+    // }), {
+    //     ignoreInitial: true
+    // });
+
+    // w.on('change', (path) => {
+    //     setTimeout(() => {
+    //         console.log('up', path);
+    //         ws.send({ type: 'full-reload', path: '*' });
+    //     }, 500);
+    // });
+    // __onProcessExit(() => {
+    //     w.close();
+    // });
+
+    const shouldReload = __picomatch(configFiles)
+    const checkReload = (path: string) => {
+        console.log('UP', path);
+      if (shouldReload(path)) {
+          console.log('SHOULD', path);
+        setTimeout(() => ws.send({ type: 'full-reload', path: '*' }), 1000)
+        // if (log)
+        //   logger.info(`${green('page reload')} ${dim(relative(root, path))}`, { clear: true, timestamp: true })
+      }
+    }
+
+    // Ensure Vite keeps track of the files and triggers HMR as needed.
+    watcher.add(configFiles)
+
+    // Do a full page reload if any of the watched files changes.
+    watcher.on('add', checkReload)
+    watcher.on('change', checkReload)
+  },
+})

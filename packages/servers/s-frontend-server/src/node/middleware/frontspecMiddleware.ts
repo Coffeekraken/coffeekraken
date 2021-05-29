@@ -2,7 +2,7 @@
 
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SFrontspec from '@coffeekraken/s-frontspec';

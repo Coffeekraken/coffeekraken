@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -25,7 +25,7 @@ class SSvelteCompilerParamsInterface extends __SInterface {
         absolute: true,
         glob: 'resolve'
       },
-      default: __sugarConfig('svelte.compile.input'),
+      default: __SugarConfig.get('svelte.compile.input'),
       alias: 'i'
     },
     inDir: {
@@ -34,7 +34,7 @@ class SSvelteCompilerParamsInterface extends __SInterface {
         absolute: true,
         exists: true
       },
-      default: __sugarConfig('svelte.compile.inDir')
+      default: __SugarConfig.get('svelte.compile.inDir')
     },
     outDir: {
       type: 'String',
@@ -43,7 +43,7 @@ class SSvelteCompilerParamsInterface extends __SInterface {
         exists: true,
         create: true
       },
-      default: __sugarConfig('svelte.compile.outDir'),
+      default: __SugarConfig.get('svelte.compile.outDir'),
       alias: 'o'
     },
     rootDir: {
@@ -52,48 +52,48 @@ class SSvelteCompilerParamsInterface extends __SInterface {
         absolute: true,
         exists: true
       },
-      default: __sugarConfig('svelte.compile.rootDir')
+      default: __SugarConfig.get('svelte.compile.rootDir')
     },
     map: {
       type: 'Boolean',
       alias: 'm',
       description: 'Generate a sourcemap file',
-      default: __sugarConfig('svelte.compile.map') ?? true,
+      default: __SugarConfig.get('svelte.compile.map') ?? true,
       level: 1
     },
     prod: {
       type: 'Boolean',
-      default: __sugarConfig('svelte.compile.prod')
+      default: __SugarConfig.get('svelte.compile.prod')
     },
     minify: {
       type: 'Boolean',
-      default: __sugarConfig('svelte.compile.minify')
+      default: __SugarConfig.get('svelte.compile.minify')
     },
     banner: {
       type: 'String',
       description:
         'Specify a banner (usually a comment) that you want to put on top of your generated code',
-      default: __sugarConfig('svelte.compile.banner')
+      default: __SugarConfig.get('svelte.compile.banner')
     },
     save: {
       type: 'Boolean',
-      default: __sugarConfig('svelte.compile.save')
+      default: __SugarConfig.get('svelte.compile.save')
     },
     watch: {
       type: 'Boolean',
       alias: 'w',
-      default: __sugarConfig('svelte.compile.watch')
+      default: __SugarConfig.get('svelte.compile.watch')
     },
     tsconfig: {
       type: 'String|Object',
       description:
         'Specify either directly a tsconfig object or a tsconfig valid path',
-      default: __sugarConfig('svelte.compile.tsconfig')
+      default: __SugarConfig.get('svelte.compile.tsconfig')
     },
     svelte: {
       type: 'Object',
       description: 'Object passed to the svelte compiler',
-      default: __sugarConfig('svelte.compile.svelte') || {},
+      default: __SugarConfig.get('svelte.compile.svelte') || {},
       level: 2
     }
   };

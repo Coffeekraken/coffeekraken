@@ -1,6 +1,6 @@
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';
 import __fs from 'fs';
 import __glob from 'glob';
@@ -173,7 +173,7 @@ class SView extends __SClass implements ISViewRenderer {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static defaultRootDirs: string[] = [
-    ...__sugarConfig('views.rootDirs'),
+    ...__SugarConfig.get('views.rootDirs'),
     __path.resolve(__dirname, '../php/views/blade')
   ];
 
@@ -339,7 +339,7 @@ class SView extends __SClass implements ISViewRenderer {
    * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static getViewMetas(viewPath: string): ISViewViewMetas | undefined {
-    const viewsDirs = __sugarConfig('views.rootDirs');
+    const viewsDirs = __SugarConfig.get('views.rootDirs');
 
     for (let i = 0; i < viewsDirs.length; i++) {
       const viewsDir = viewsDirs[i];
@@ -409,8 +409,8 @@ class SView extends __SClass implements ISViewRenderer {
       __deepMerge(
         {
           view: {
-            rootDirs: __sugarConfig('views.rootDirs'),
-            cacheDir: __sugarConfig('views.cacheDir'),
+            rootDirs: __SugarConfig.get('views.rootDirs'),
+            cacheDir: __SugarConfig.get('views.cacheDir'),
             engine: null,
             engineSettings: {},
             defaultData: {}
@@ -579,12 +579,12 @@ class SView extends __SClass implements ISViewRenderer {
   }
 }
 
-const defaultEngines = __sugarConfig('views.engines') || {};
+const defaultEngines = __SugarConfig.get('views.engines') || {};
 Object.keys(defaultEngines).forEach((ext) => {
   SView.registerEngine(defaultEngines[ext], ext);
 });
 
-const defaultDataHandlers = __sugarConfig('views.dataHandlers') || {};
+const defaultDataHandlers = __SugarConfig.get('views.dataHandlers') || {};
 Object.keys(defaultDataHandlers).forEach((ext) => {
   SView.registerDataHandler(defaultDataHandlers[ext], ext);
 });

@@ -1,5 +1,5 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 export default {
   assets: '[config.assets]',
@@ -88,8 +88,8 @@ export default {
 
   proxy: {
     assets: {
-      route: __sugarConfig('vite.publicDir').replace(
-        __sugarConfig('storage.rootDir'),
+      route: __SugarConfig.get('vite.publicDir').replace(
+        __SugarConfig.get('storage.rootDir'),
         ''
       ),
       settings: {

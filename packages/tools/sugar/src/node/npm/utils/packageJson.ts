@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __path from 'path';
 import __fs from 'fs';
@@ -32,7 +32,7 @@ export default function packageJson(
   settings?: Partial<IPackageJsonSettings>
 ): any {
   const set = <IPackageJsonSettings>__deepMerge({
-    rootDir: __sugarConfig('npm.rootDir')
+    rootDir: __SugarConfig.get('npm.rootDir')
   });
 
   // check if the package exists

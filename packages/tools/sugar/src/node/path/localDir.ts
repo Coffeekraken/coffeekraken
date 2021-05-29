@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            localDir
@@ -23,7 +23,7 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const fn: ILocalDir = function () {
-  const path = __sugarConfig('storage.localDir');
+  const path = __SugarConfig.get('storage.localDir');
   __fs.ensureDirSync(path);
   return path;
 };

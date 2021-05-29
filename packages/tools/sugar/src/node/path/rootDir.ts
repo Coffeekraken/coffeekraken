@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            rootDir
@@ -41,7 +41,7 @@ export default function (settings: IRootDirSettings = {}) {
     ...settings
   };
   if (settings.scope === 'local') {
-    const rootDir = __sugarConfig('storage.rootDir');
+    const rootDir = __SugarConfig.get('storage.rootDir');
     if (rootDir !== undefined) {
       __fs.ensureDirSync(rootDir);
       return rootDir;

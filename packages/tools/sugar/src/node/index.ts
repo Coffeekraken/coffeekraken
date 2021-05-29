@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SLog from '@coffeekraken/s-log';
 import __handleError from './error/handleError';
 import __initEnv from './init/initEnv';
@@ -36,4 +36,4 @@ __onProcessExit(() => {
 // __registerSFileClasses();
 
 // Logging
-// new __SLog(__sugarConfig('log'));
+// new __SLog(__SugarConfig.get('log'));

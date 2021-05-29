@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
   static definition = {
@@ -36,7 +36,7 @@ export default function ({
   atRule: any;
   processNested: Function;
 }) {
-  const themeConfig = __sugarConfig('theme');
+  const themeConfig = __SugarConfig.get('theme');
 
   const cssArray = [
     `@sugar.theme(${params.theme ?? themeConfig.theme});`,

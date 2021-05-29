@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            sugarDir
@@ -36,7 +36,7 @@ export default function (settings: ISugarDirSettings = {}) {
   settings = {
     ...settings
   };
-  const sugarDir = __sugarConfig('storage.sugarDir');
+  const sugarDir = __SugarConfig.get('storage.sugarDir');
   if (sugarDir !== undefined) {
     __fs.ensureDirSync(sugarDir);
     return sugarDir;

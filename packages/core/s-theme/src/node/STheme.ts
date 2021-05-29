@@ -1,5 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 
@@ -132,28 +132,6 @@ export default class STheme extends __SClass {
   name: String;
 
   /**
-   * @name        _config
-   * @type        String
-   *
-   * Store the current theme configuration
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _config: any;
-
-  /**
-   * @name        themes
-   * @type        String
-   *
-   * Store the themes configuration
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  themes: any;
-
-  /**
    * @name      theme
    * @type      String
    * @static
@@ -163,7 +141,7 @@ export default class STheme extends __SClass {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static theme: string = __sugarConfig('theme.theme');
+  static theme: string = __SugarConfig.get('theme.theme');
 
   /**
    * @name      themes
@@ -175,7 +153,7 @@ export default class STheme extends __SClass {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static themes: string[] = Object.keys(__sugarConfig('theme.themes'));
+  static themes: string[] = Object.keys(__SugarConfig.get('theme.themes'));
 
   /**
    * @name        getTheme
@@ -194,7 +172,7 @@ export default class STheme extends __SClass {
   static _instanciatedThemes: Record<string, STheme> = {};
   static getTheme(theme: string): STheme {
     if (this._instanciatedThemes[theme]) return this._instanciatedThemes[theme];
-    const themes = __sugarConfig('theme.themes');
+    const themes = __SugarConfig.get('theme.themes');
     if (!themes[theme])
       throw new Error(
         `<red>[${
@@ -220,8 +198,6 @@ export default class STheme extends __SClass {
   constructor(theme?: string) {
     super({});
 
-    this.themes = __sugarConfig('theme.themes');
-
     if (!theme) {
       const sugarJsonInstance = new __SSugarJson();
       const sugarJson = sugarJsonInstance.read();
@@ -239,11 +215,23 @@ export default class STheme extends __SClass {
       );
     } else if (theme) {
       this.name = theme;
-      this._config = this.themes[theme];
     } else {
       this.name = 'default';
-      this._config = this.themes.default;
     }
+  }
+
+  /**
+   * @name        themes
+   * @type        String
+   * @get
+   *
+   * Store the themes configuration
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get themes() {
+    return __SugarConfig.get('theme.themes');
   }
 
   /**
@@ -259,6 +247,10 @@ export default class STheme extends __SClass {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  get _config() {
+    // @ts-ignore
+    return __SugarConfig.get('theme.themes')[this.name];
+  }
   config(dotPath): any {
     const value = __get(this._config, dotPath);
     if (value === undefined) {

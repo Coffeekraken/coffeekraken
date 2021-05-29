@@ -3,7 +3,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __postCss from 'postcss';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
 import __cleanCss from 'clean-css';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
@@ -152,7 +152,7 @@ class SPostcssCompiler extends __SCompiler implements ISCompiler {
       async ({ resolve, reject, pipe, emit, on }) => {
         const set = __deepMerge(this.postcssCompilerSettings, {}, settings);
 
-        const cssCompileConfig = __sugarConfig('css.compile');
+        const cssCompileConfig = __SugarConfig.get('css.compile');
 
         let input = Array.isArray(params.input) ? params.input : [params.input];
 

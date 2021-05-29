@@ -51,7 +51,7 @@ function error(data = {}) {
     data
   );
 
-  const settings = __deepMerge(__sugarConfig('frontend'), args);
+  const settings = __deepMerge(__SugarConfig.get('frontend'), args);
   const server = __express();
 
   const promise = new __SPromise({

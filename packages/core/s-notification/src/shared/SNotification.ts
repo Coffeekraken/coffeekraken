@@ -1,5 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SNotificationSettingsInterface from './interface/SNotificationSettingsInterface';
@@ -183,7 +183,7 @@ class SNotification extends __SClass implements ISNotification {
       // check if this instance is enabled
       if (!set.enable) return resolve();
 
-      const notificationDefaultSettings = __sugarConfig('notification');
+      const notificationDefaultSettings = __SugarConfig.get('notification');
 
       const baseNotificationObj: Partial<ISNotificationObj> = {
         ...(notificationObj.type

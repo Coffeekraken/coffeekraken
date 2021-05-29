@@ -134,15 +134,17 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
     // watch for changes
     __chokidar
-      .watch(watchPaths, {
+      .watch(__unique(watchPaths), {
         ignoreInitial: true
       })
-      .on('change', (p) => this.update())
-      .on('unlink', (p) => this.update())
-      .on('add', (p) => this.update());
+      .on('change', (p) => {
+        this.update(p);
+      })
+      .on('unlink', (p) => this.update(p))
+      .on('add', (p) => this.update(p));
   }
 
-  _load(folderPaths, scope) {
+  _load(folderPaths, scope, clearCache = false) {
     const configObj = {};
 
     folderPaths = __unique(folderPaths);
@@ -158,7 +160,13 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
           configObj[file.replace('.config.js', '')] !== undefined
         )
           return;
-        const configData = require(`${path}/${file}`);
+
+
+        const configFilePath = `${path}/${file}`;
+        if (clearCache) delete require.cache[require.resolve(configFilePath)];
+        const configData = require(configFilePath);
+
+
         const configKey = file.replace('.config.js', '');
         if (!configObj[configKey]) configObj[configKey] = {};
 
@@ -183,23 +191,26 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
           );
         }
       });
-      process.env[`SConfigFolderAdapter-${scope}`] = JSON.stringify(configObj);
+      // process.env[`SConfigFolderAdapter-${scope}`] = JSON.stringify(configObj);
     });
+
+
 
     return Object.assign({}, configObj);
   }
 
-  load() {
+  load(clearCache = false) {
     try {
       Object.keys(this._scopedFoldersPaths).forEach((scope) => {
         const scopedFoldersPaths = this._scopedFoldersPaths[scope];
         if (scopedFoldersPaths) {
-          this._scopedSettings[scope] = this._load(scopedFoldersPaths, scope);
-        } else if (process.env[`SConfigFolderAdapter-${scope}`]) {
-          this._scopedSettings[scope] = JSON.parse(
-            process.env[`SConfigFolderAdapter-${scope}`]
-          );
+          this._scopedSettings[scope] = this._load(scopedFoldersPaths, scope, clearCache);
         }
+        // else if (process.env[`SConfigFolderAdapter-${scope}`]) {
+        //   this._scopedSettings[scope] = JSON.parse(
+        //     process.env[`SConfigFolderAdapter-${scope}`]
+        //   );
+        // }
       });
     } catch (e) {
       console.log('EEEE', e);
@@ -209,7 +220,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     Object.keys(this._scopedSettings).forEach((scope) => {
       resultSettings = __deepMerge(resultSettings, this._scopedSettings[scope]);
     });
-
+    
     return resultSettings;
   }
 

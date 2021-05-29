@@ -7,7 +7,7 @@ import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __SFrontspecFindParamsInterface from './interface/SFrontspecFindParamsInterface';
@@ -235,7 +235,7 @@ export default class SFrontspec extends __SPromise {
 
         // merge it with the defaults
         content = __deepMerge(
-          __sugarConfig('frontspec.default') ?? {},
+          __SugarConfig.get('frontspec.default') ?? {},
           content
         );
 
@@ -264,7 +264,7 @@ export default class SFrontspec extends __SPromise {
                     .replace(/^\[config\./, '')
                     .replace(/\]$/, '');
 
-                  const configValue = __sugarConfig(configPath);
+                  const configValue = __SugarConfig.get(configPath);
                   return configValue;
                 }
               );

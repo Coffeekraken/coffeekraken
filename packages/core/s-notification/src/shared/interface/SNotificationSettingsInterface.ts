@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -17,22 +17,22 @@ class SNotificationSettingsInterface extends __SInterface {
     adapters: {
       type: 'Array<String>',
       required: true,
-      default: __sugarConfig('notification.adapters')
+      default: __SugarConfig.get('notification.adapters')
     },
     adaptersSettings: {
       type: 'Object',
       required: true,
-      default: __sugarConfig('notification.adaptersSettings')
+      default: __SugarConfig.get('notification.adaptersSettings')
     },
     enable: {
       type: 'Boolean',
       required: true,
-      default: __sugarConfig('notification.enable')
+      default: __SugarConfig.get('notification.enable')
     },
     types: {
       type: 'Object',
       required: true,
-      default: __sugarConfig('notification.types')
+      default: __SugarConfig.get('notification.types')
     }
   };
 }

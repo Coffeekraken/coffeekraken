@@ -5355,7 +5355,7 @@ find@^0.1.5:
   dependencies:
     traverse-chain "~0.1.0"
 
-fkill@^7.0.1:
+fkill@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/fkill/-/fkill-7.1.1.tgz#d21e662b0677c25954840c6d551b5b6bb5cd55a8"
   integrity sha512-jFPrW3qmbPQxjbKUMGPTXbpWoX5plS0BMotAB7q9jwInFd/YdrY40/5Szt4gFroF2BfXHIVuMdQC40X8IcgL3w==
@@ -9121,6 +9121,11 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2, picomatch@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.3.tgz#465547f359ccc206d3c48e46a1bcb89bf7ee619d"
   integrity sha512-KpELjfwcCDUb9PeigTs2mBJzXUPzAuP2oPcA989He8Rte0+YUAjw1JVedDhuTKPkHjSYzMN3npC9luThGYEKdg==
+
+picomatch@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
+  integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
 
 pid-port@^0.1.0:
   version "0.1.1"

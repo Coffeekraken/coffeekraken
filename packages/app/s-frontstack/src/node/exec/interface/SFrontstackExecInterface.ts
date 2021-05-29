@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -26,14 +26,14 @@ class SFrontstackStartInterface extends __SInterface {
     receipe: {
       type: 'String',
       alias: 'r',
-      values: Object.keys(__sugarConfig('frontstack.receipes')),
-      default: __sugarConfig('frontstack.receipe')
+      values: Object.keys(__SugarConfig.get('frontstack.receipes')),
+      default: __SugarConfig.get('frontstack.receipe')
     },
     exclude: {
       type: 'Array<String>',
       alias: 'e',
-      values: Object.keys(__sugarConfig('frontstack.actions')),
-      default: __sugarConfig('frontstack.exclude')
+      values: Object.keys(__SugarConfig.get('frontstack.actions')),
+      default: __SugarConfig.get('frontstack.exclude')
     }
   };
 }

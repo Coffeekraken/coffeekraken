@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
 import __sails from 'sails';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __path from 'path';
 import __express from 'express';
@@ -99,7 +99,7 @@ export default class SFrontendServer extends __SClass {
           'silly'
         ].indexOf(finalParams.logLevel);
 
-        const frontendServerConfig = __sugarConfig('frontendServer');
+        const frontendServerConfig = __SugarConfig.get('frontendServer');
 
         // if (frontendServerConfig.staticDirs) {
         //   Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {

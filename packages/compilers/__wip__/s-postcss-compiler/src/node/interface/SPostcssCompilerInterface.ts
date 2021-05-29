@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -25,7 +25,7 @@ class SPostcssCompilerInterface extends __SInterface {
         absolute: true,
         glob: 'resolve'
       },
-      default: __sugarConfig('css.compile.input'),
+      default: __SugarConfig.get('css.compile.input'),
       alias: 'i'
     },
     inDir: {
@@ -35,7 +35,7 @@ class SPostcssCompilerInterface extends __SInterface {
         exists: true,
         create: true
       },
-      default: __sugarConfig('css.compile.inDir'),
+      default: __SugarConfig.get('css.compile.inDir'),
       alias: 'o'
     },
     outDir: {
@@ -45,7 +45,7 @@ class SPostcssCompilerInterface extends __SInterface {
         exists: true,
         create: true
       },
-      default: __sugarConfig('css.compile.outDir'),
+      default: __SugarConfig.get('css.compile.outDir'),
       alias: 'o'
     },
     rootDir: {
@@ -55,16 +55,16 @@ class SPostcssCompilerInterface extends __SInterface {
         exists: true
       },
       alias: 'r',
-      default: __sugarConfig('css.compile.rootDir')
+      default: __SugarConfig.get('css.compile.rootDir')
     },
     bundle: {
       type: 'Boolean',
       alias: 'b',
-      default: __sugarConfig('css.compile.bundle')
+      default: __SugarConfig.get('css.compile.bundle')
     },
     bundleSuffix: {
       type: 'String',
-      default: __sugarConfig('css.compile.bundleSuffix')
+      default: __SugarConfig.get('css.compile.bundleSuffix')
     },
     map: {
       type: 'Boolean|String',
@@ -72,45 +72,45 @@ class SPostcssCompilerInterface extends __SInterface {
       values: [true, false, 'inline'],
       description:
         'Generate the sourcemap. If "true", generate a .map file alongside the dist one, if "inline", set the sourcemap inline',
-      default: __sugarConfig('css.compile.map') || true,
+      default: __SugarConfig.get('css.compile.map') || true,
       level: 1
     },
     prod: {
       type: 'Boolean',
       alias: 'p',
-      default: __sugarConfig('css.compile.prod')
+      default: __SugarConfig.get('css.compile.prod')
     },
     minify: {
       type: 'Boolean',
-      default: __sugarConfig('css.compile.minify')
+      default: __SugarConfig.get('css.compile.minify')
     },
     beautify: {
       type: 'Boolean',
-      default: __sugarConfig('css.compile.beautify')
+      default: __SugarConfig.get('css.compile.beautify')
     },
     optimize: {
       type: 'Boolean',
-      default: __sugarConfig('css.compile.optimize')
+      default: __SugarConfig.get('css.compile.optimize')
     },
     banner: {
       type: 'String',
       description:
         'Specify a banner (usually a comment) that you want to put on top of your generated code',
-      default: __sugarConfig('css.compile.banner')
+      default: __SugarConfig.get('css.compile.banner')
     },
     save: {
       type: 'Boolean',
-      default: __sugarConfig('css.compile.save')
+      default: __SugarConfig.get('css.compile.save')
     },
     watch: {
       type: 'Boolean',
       alias: 'w',
-      default: __sugarConfig('css.compile.watch')
+      default: __SugarConfig.get('css.compile.watch')
     },
     postcss: {
       type: 'Object',
       description: 'Object passed to the postcss compiler',
-      default: __sugarConfig('css.compile.postcss') || {},
+      default: __SugarConfig.get('css.compile.postcss') || {},
       level: 2
     }
   };

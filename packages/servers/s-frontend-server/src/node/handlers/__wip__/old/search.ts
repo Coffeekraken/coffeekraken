@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '../../../config/sugar';
+import __SugarConfig from '../../../config/sugar';
 import __fs from 'fs';
 import __marked from 'marked';
 import __filter from '../../../object/filter';
@@ -32,7 +32,7 @@ function search(req, server) {
     let keyword = req.params[0] ? req.params[0].split(' ')[0] : 'doc';
     let searchString = req.params[0] ? req.params[0].replace(keyword, '') : '';
 
-    const searchRules = __sugarConfig(
+    const searchRules = __SugarConfig.get(
       'frontend.handlers.search.settings.rules'
     );
 

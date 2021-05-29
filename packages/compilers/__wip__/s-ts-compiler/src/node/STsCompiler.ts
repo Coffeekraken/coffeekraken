@@ -13,7 +13,7 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
@@ -189,13 +189,13 @@ class STsCompiler extends __SCompiler {
               input.push(`${__rootDir()}/tsconfig.${stackName}.js`);
             } else if (
               __fs.existsSync(
-                `${__sugarConfig(
+                `${__SugarConfig.get(
                   'ts.tsconfigStacksDir'
                 )}/tsconfig.${stackName}.js`
               )
             ) {
               input.push(
-                `${__sugarConfig(
+                `${__SugarConfig.get(
                   'ts.tsconfigStacksDir'
                 )}/tsconfig.${stackName}.js`
               );
@@ -219,12 +219,12 @@ class STsCompiler extends __SCompiler {
             configPath = `${__rootDir()}/tsconfig.${params.config}.js`;
           } else if (
             __fs.existsSync(
-              `${__sugarConfig('ts.tsconfigStacksDir')}/tsconfig.${
+              `${__SugarConfig.get('ts.tsconfigStacksDir')}/tsconfig.${
                 params.config
               }.js`
             )
           ) {
-            configPath = `${__sugarConfig('ts.tsconfigStacksDir')}/tsconfig.${
+            configPath = `${__SugarConfig.get('ts.tsconfigStacksDir')}/tsconfig.${
               params.config
             }.js`;
           }
@@ -503,7 +503,7 @@ class STsCompiler extends __SCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getStack(stack) {
-    const definedStacks = __sugarConfig('ts.stacks');
+    const definedStacks = __SugarConfig.get('ts.stacks');
     if (!definedStacks) return false;
     if (!definedStacks[stack]) return false;
     return definedStacks[stack];

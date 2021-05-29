@@ -3,7 +3,7 @@
 import __SBuildNodeCli from '../../node/build/node/SBuildNodeCli';
 import __SBuildNodeActionsStream from '../../node/build/node/SBuildNodeActionsStream';
 import __output from '../../node/process/output';
-import __sugarConfig from '../../node/config/sugar';
+import __SugarConfig from '../../node/config/sugar';
 
 export default (stringArgs = '') => {
   const cli = new __SBuildNodeCli();

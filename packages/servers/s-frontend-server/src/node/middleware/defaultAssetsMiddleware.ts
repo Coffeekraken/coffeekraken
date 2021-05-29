@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
@@ -36,12 +36,12 @@ import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
  */
 function defaultAssetsMiddleware(settings = {}) {
   return async function (req, res, next) {
-    const serverRootDir = __sugarConfig('frontendServer.rootDir');
-    const assetsConfig = __sugarConfig('frontendServer.assets');
+    const serverRootDir = __SugarConfig.get('frontendServer.rootDir');
+    const assetsConfig = __SugarConfig.get('frontendServer.assets');
 
     settings = {
       ...settings,
-      env: __sugarConfig('env.env')
+      env: __SugarConfig.get('env.env')
     };
 
     if (!res.templateData) res.templateData = {};

@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __postCss from 'postcss';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -72,7 +72,7 @@ export default function ({
   atRule: any;
   processNested: Function;
 }) {
-  const mediaConfig = __sugarConfig('media');
+  const mediaConfig = __SugarConfig.get('media');
 
   return;
 

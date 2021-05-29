@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -27,34 +27,34 @@ export default class SFrontendServerInterface extends __SInterface {
       alias: 'o',
       description: 'Server hostname',
       required: true,
-      default: __sugarConfig('frontendServer.hostname') || '127.0.0.1'
+      default: __SugarConfig.get('frontendServer.hostname') || '127.0.0.1'
     },
     port: {
       type: 'Number',
       alias: 'p',
       description: 'Server port',
-      default: __sugarConfig('frontendServer.port') || 3000,
+      default: __SugarConfig.get('frontendServer.port') || 3000,
       level: 1
     },
     rootDir: {
       type: 'String',
       description: 'Server root directory',
       default:
-        __sugarConfig('frontendServer.rootDir') || __packageRoot(process.cwd()),
+        __SugarConfig.get('frontendServer.rootDir') || __packageRoot(process.cwd()),
       level: 1
     },
     viewsDir: {
       type: 'String',
       description: 'Server views directory',
       default:
-        __sugarConfig('frontendServer.viewsDir') ||
+        __SugarConfig.get('frontendServer.viewsDir') ||
         __packageRoot(process.cwd()) + '/views'
     },
     logLevel: {
       type: 'String',
       description: 'Specify the log level you want for your server',
       values: ['silent', 'error', 'warn', 'debug', 'info', 'verbose', 'silly'],
-      default: __sugarConfig('frontendServer.logLevel') ?? 'info'
+      default: __SugarConfig.get('frontendServer.logLevel') ?? 'info'
     }
   };
 }

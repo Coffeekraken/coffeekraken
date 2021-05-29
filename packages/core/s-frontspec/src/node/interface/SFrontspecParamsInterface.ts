@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -19,11 +19,11 @@ class SFrontspecParamsInterface extends __SInterface {
   static definition = {
     cache: {
       type: 'Boolean',
-      default: __sugarConfig('frontspec.cache')
+      default: __SugarConfig.get('frontspec.cache')
     },
     env: {
       type: 'String',
-      default: __sugarConfig('env.env')
+      default: __SugarConfig.get('env.env')
     },
     clearCache: {
       type: 'Boolean',

@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -25,7 +25,7 @@ class SJsCompilerInterface extends __SInterface {
         absolute: true,
         glob: 'resolve'
       },
-      default: __sugarConfig('js.compile.input'),
+      default: __SugarConfig.get('js.compile.input'),
       alias: 'i'
     },
     inDir: {
@@ -34,7 +34,7 @@ class SJsCompilerInterface extends __SInterface {
         absolute: true,
         exists: true
       },
-      default: __sugarConfig('js.compile.inDir'),
+      default: __SugarConfig.get('js.compile.inDir'),
       alias: 'o'
     },
     outDir: {
@@ -44,7 +44,7 @@ class SJsCompilerInterface extends __SInterface {
         exists: true,
         create: true
       },
-      default: __sugarConfig('js.compile.outDir'),
+      default: __SugarConfig.get('js.compile.outDir'),
       alias: 'o'
     },
     rootDir: {
@@ -54,35 +54,35 @@ class SJsCompilerInterface extends __SInterface {
         exists: true
       },
       alias: 'r',
-      default: __sugarConfig('js.compile.rootDir')
+      default: __SugarConfig.get('js.compile.rootDir')
     },
     format: {
       type: 'String',
       alias: 'f',
       values: ['iife', 'cjs', 'esm'],
-      default: __sugarConfig('js.compile.format')
+      default: __SugarConfig.get('js.compile.format')
     },
     platform: {
       type: 'String',
       alias: 'p',
       values: ['node', 'browser'],
-      default: __sugarConfig('js.compile.platform')
+      default: __SugarConfig.get('js.compile.platform')
     },
     bundle: {
       type: 'Boolean',
       alias: 'b',
-      default: __sugarConfig('js.compile.bundle')
+      default: __SugarConfig.get('js.compile.bundle')
     },
     bundleSuffix: {
       type: 'String',
-      default: __sugarConfig('js.compile.bundleSuffix')
+      default: __SugarConfig.get('js.compile.bundleSuffix')
     },
     // tsconfig: {
     //   type: 'String',
     //   description:
     //     'Specify which tsconfig file you want to use when compiling ts files. Can be either a path to a valid tsconfig file, or a ts stack name like "node", "js" or "shared".',
     //   alias: 't',
-    //   default: __sugarConfig('js.compile.tsconfig')
+    //   default: __SugarConfig.get('js.compile.tsconfig')
     // },
     map: {
       type: 'Boolean|String',
@@ -90,37 +90,37 @@ class SJsCompilerInterface extends __SInterface {
       values: [true, false, 'inline'],
       description:
         'Generate the sourcemap. If "true", generate a .map file alongside the dist one, if "inline", set the sourcemap inline',
-      default: __sugarConfig('js.compile.map') || true,
+      default: __SugarConfig.get('js.compile.map') || true,
       level: 1
     },
     prod: {
       type: 'Boolean',
       alias: 'p',
-      default: __sugarConfig('js.compile.prod')
+      default: __SugarConfig.get('js.compile.prod')
     },
     minify: {
       type: 'Boolean',
-      default: __sugarConfig('js.compile.minify')
+      default: __SugarConfig.get('js.compile.minify')
     },
     banner: {
       type: 'String',
       description:
         'Specify a banner (usually a comment) that you want to put on top of your generated code',
-      default: __sugarConfig('js.compile.banner')
+      default: __SugarConfig.get('js.compile.banner')
     },
     save: {
       type: 'Boolean',
-      default: __sugarConfig('js.compile.save')
+      default: __SugarConfig.get('js.compile.save')
     },
     watch: {
       type: 'Boolean',
       alias: 'w',
-      default: __sugarConfig('js.compile.watch')
+      default: __SugarConfig.get('js.compile.watch')
     },
     esbuild: {
       type: 'Object',
       description: 'Object passed to the esbuild compiler',
-      default: __sugarConfig('js.compile.esbuild') || {},
+      default: __SugarConfig.get('js.compile.esbuild') || {},
       level: 2
     }
   };

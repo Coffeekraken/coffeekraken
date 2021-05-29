@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __ensureDirSync from '@coffeekraken/sugar/src/node/fs/ensureDirSync';
 import __removeSync from '@coffeekraken/sugar/src/node/fs/removeSync';
 import __tmpDir from '@coffeekraken/sugar/src/node/path/tmpDir';
@@ -62,7 +62,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
       __deepMerge(
         {
           fsCacheAdapter: {
-            rootDir: __sugarConfig('storage.cacheDir') || `${__tmpDir()}/SCache`
+            rootDir: __SugarConfig.get('storage.cacheDir') || `${__tmpDir()}/SCache`
           }
         },
         settings

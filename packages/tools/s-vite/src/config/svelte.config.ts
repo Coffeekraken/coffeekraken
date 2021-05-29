@@ -1,4 +1,4 @@
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import {
   typescript,
   postcss,
@@ -20,6 +20,6 @@ export default {
       tsconfigFile: `${__dirname}/tsconfig.json`,
       tsconfigDirectory: __packageRoot()
     }),
-    postcss(__sugarConfig('svelte'))
+    postcss(__SugarConfig.get('svelte'))
   ]
 };

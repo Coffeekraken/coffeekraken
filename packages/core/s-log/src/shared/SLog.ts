@@ -6,7 +6,7 @@ import __SLogConsoleAdapter from './adapters/SLogConsoleAdapter';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __env from '@coffeekraken/sugar/shared/core/env';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __SClass from '@coffeekraken/s-class';
@@ -175,7 +175,7 @@ export default class SLog extends __SClass implements ISLog {
       __deepMerge(
         {
           log: {
-            types: __sugarConfig('log.types'),
+            types: __SugarConfig.get('log.types'),
             adapters: {
               console: new __SLogConsoleAdapter()
             },

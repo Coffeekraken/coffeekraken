@@ -82,13 +82,19 @@ export default class SConfigAdapter {
    *
    * Function that you have to call with the new config when it has been updated
    *
+   * @param      {String}         identifier        A string identifier for the update. Can be a file path, an object hash, etc...
+   *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  update(): void {
+  _updatesTimeoutsStack = {};
+  update(identifier: string): void {
     // calling the "onUpdate" setting callback if exists
-    if (!this._settings.onUpdate) return;
-    this._settings.onUpdate();
+    clearTimeout(this._updatesTimeoutsStack[identifier]);
+    this._updatesTimeoutsStack[identifier] = setTimeout(() => {
+      if (!this._settings.onUpdate) return;
+      this._settings.onUpdate();
+    }, 50);
   }
 
   /**

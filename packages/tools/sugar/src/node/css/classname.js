@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name            classname
  * @namespace            node.css
@@ -23,10 +23,10 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function classname(classname) {
-    const prefix = __sugarConfig('classes.generate.prefix');
+    const prefix = __SugarConfig.get('classes.generate.prefix');
     if (prefix)
         return `${prefix}-${classname}`;
     return classname;
 }
 export default classname;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3NuYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2xhc3NuYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSw4QkFBOEIsQ0FBQztBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsU0FBUztJQUMxQixNQUFNLE1BQU0sR0FBRyxhQUFhLENBQUMseUJBQXlCLENBQUMsQ0FBQztJQUN4RCxJQUFJLE1BQU07UUFBRSxPQUFPLEdBQUcsTUFBTSxJQUFJLFNBQVMsRUFBRSxDQUFDO0lBQzVDLE9BQU8sU0FBUyxDQUFDO0FBQ25CLENBQUM7QUFDRCxlQUFlLFNBQVMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3NuYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2xhc3NuYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSw4QkFBOEIsQ0FBQztBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsU0FBUztJQUMxQixNQUFNLE1BQU0sR0FBRyxhQUFhLENBQUMsR0FBRyxDQUFDLHlCQUF5QixDQUFDLENBQUM7SUFDNUQsSUFBSSxNQUFNO1FBQUUsT0FBTyxHQUFHLE1BQU0sSUFBSSxTQUFTLEVBQUUsQ0FBQztJQUM1QyxPQUFPLFNBQVMsQ0FBQztBQUNuQixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==

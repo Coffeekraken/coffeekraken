@@ -1,11 +1,8 @@
 // import __postcss from 'postcss';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
-import __SFile from '@coffeekraken/s-file';
-import __parseFunction from 'parse-function';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
 import __glob from 'glob';
 import __postcss from 'postcss';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {

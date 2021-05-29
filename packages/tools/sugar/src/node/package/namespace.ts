@@ -3,7 +3,7 @@
 import __json from './json';
 import __deepMerge from '../../shared/object/deepMerge';
 import __getFilename from '../fs/filename';
-import __sugarConfig from '@coffeekraken/s-sugar-config';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name          namespace
@@ -30,7 +30,7 @@ import __sugarConfig from '@coffeekraken/s-sugar-config';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function namespace(path, settings = {}) {
-  settings = __deepMerge(__sugarConfig('core.namespace') || {}, settings);
+  settings = __deepMerge(__SugarConfig.get('core.namespace') || {}, settings);
   // get the package json content
   const json = __json(settings.context || process.cwd());
   let packageName = '',

@@ -156,7 +156,7 @@ export default {
         globs: __unique([
             'frontspec.json',
             `node_modules/**{4}/frontspec.json`,
-            `${__packageRoot(process.cwd(), true)}/node_modules/**{4}/frontspec.json`
+            `${__packageRoot(process.cwd(), true)}/node_modules/**{2}/frontspec.json`
         ]),
         /**
          * @name        exclude

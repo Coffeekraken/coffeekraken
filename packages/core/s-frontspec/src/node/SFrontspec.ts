@@ -16,6 +16,8 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __fs from 'fs';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __set from '@coffeekraken/sugar/shared/object/set';
+import __SEnv from '@coffeekraken/s-env';
+import json from '@coffeekraken/sugar/node/package/json';
 
 /**
  * @name                SFrontspec
@@ -138,22 +140,24 @@ export default class SFrontspec extends __SPromise {
 
       const cacheId = `find-files-${__md5.encrypt(process.cwd())}`;
 
-      if (findParams.cache && !findParams.clearCache) {
-        const cachedValue = await this._cache.get(cacheId);
-        if (cachedValue) {
-          emit('log', {
-            group: `s-frontspec-${this.metas.id}`,
-            value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
-          });
-          cachedValue.forEach((path) => {
-            emit('log', {
-              group: `s-frontspec-${this.metas.id}`,
-              value: `- <cyan>${__path.relative(process.cwd(), path)}</cyan>`
-            });
-          });
-          return resolve(cachedValue);
-        }
-      }
+      // @TODO    enable cache feature
+
+      // if (findParams.cache && !findParams.clearCache) {
+      //   const cachedValue = await this._cache.get(cacheId);
+      //   if (cachedValue) {
+      //     emit('log', {
+      //       group: `s-frontspec-${this.metas.id}`,
+      //       value: `<yellow>[${this.constructor.name}]</yellow> frontspec.json file(s) getted from cache`
+      //     });
+      //     cachedValue.forEach((path) => {
+      //       emit('log', {
+      //         group: `s-frontspec-${this.metas.id}`,
+      //         value: `- <cyan>${__path.relative(process.cwd(), path)}</cyan>`
+      //       });
+      //     });
+      //     return resolve(cachedValue);
+      //   }
+      // }
 
       let files: __SFile[] = [];
       await __wait(1);
@@ -226,63 +230,38 @@ export default class SFrontspec extends __SPromise {
       pipe(filesPromise);
       const filesPaths = await filesPromise;
 
-      let jsons = {};
+      const jsons = {};
 
-      // loop on all files
-      filesPaths.forEach((filePath) => {
-        const file = __SFile.new(filePath);
-        let content = file.content;
+      if (!filesPaths.length) {
 
-        // merge it with the defaults
-        content = __deepMerge(
-          __SugarConfig.get('frontspec.default') ?? {},
-          content
-        );
+        jsons.default = {
+          ...(__SugarConfig.get('frontspec.default') ?? {}),
+        };
 
-        // process the content (env, etc...)
-        const newContent = {};
-        __deepMap(content, ({ object, prop, value, path }) => {
-          let finalPath;
+        // console.log('DEF', __SugarConfig.get('frontspec.default').assets.css);
 
-          if (readParams.env && prop.includes(`${readParams.env}:`)) {
-            finalPath = `${path
-              .split('.')
-              .slice(0, -1)
-              .join('.')}.${prop.replace(`${readParams.env}:`, '')}`;
-          } else if (readParams.env && !object[`${readParams.env}:${prop}`]) {
-            finalPath = path;
-          } else if (!readParams.env && prop.split(':').length === 1) {
-            finalPath = path;
-          }
+      } else {
 
-          if (finalPath) {
-            if (typeof value === 'string') {
-              value = value.replace(
-                /\[config\.[a-zA-Z-_\.]+\]/gm,
-                (...args) => {
-                  const configPath = args[0]
-                    .replace(/^\[config\./, '')
-                    .replace(/\]$/, '');
+        // loop on all files
+        filesPaths.forEach((filePath) => {
+          const file = __SFile.new(filePath);
+          let content = file.content;
 
-                  const configValue = __SugarConfig.get(configPath);
-                  return configValue;
-                }
-              );
-            }
+          // merge it with the defaults
+          content = __deepMerge(
+            __SugarConfig.get('frontspec.default') ?? {},
+            content
+          );
 
-            __set(newContent, finalPath, value);
-          }
+          emit('log', {
+            group: `s-frontspec-${this.metas.id}`,
+            value: __toString(content)
+          });
 
-          return value;
+          jsons[file.path] = content;
         });
 
-        emit('log', {
-          group: `s-frontspec-${this.metas.id}`,
-          value: __toString(newContent)
-        });
-
-        jsons[file.path] = newContent;
-      });
+      }
 
       resolve(jsons);
     });
@@ -312,12 +291,14 @@ export default class SFrontspec extends __SPromise {
       Object.keys(frontspecJson.assets).forEach((type) => {
         const typeAssets = frontspecJson.assets[type];
         Object.keys(typeAssets).forEach((assetId) => {
-          const assetObj = typeAssets[assetId];
-          let url = assetObj.path ?? assetObj.src;
+          const assetObj = Object.assign({}, typeAssets[assetId]);
+          const url = assetObj.path ?? assetObj.src;
+
+          if (assetObj.env && !__SEnv.is(assetObj.env)) return;
 
           const filePath = __path.resolve(
             path.replace(/\/frontspec.json$/, ''),
-            assetObj.path ?? assetObj.src
+            assetObj.path ?? assetObj.src ?? assetObj.href
           );
 
           if (type === 'css') {

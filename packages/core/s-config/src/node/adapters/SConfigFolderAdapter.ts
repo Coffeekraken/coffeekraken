@@ -150,17 +150,17 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     folderPaths = __unique(folderPaths);
 
     folderPaths.forEach((path) => {
+
       __fs.readdirSync(path).forEach((file) => {
-        if (!file.match(/\.js(on)?$/)) return;
+              
+        if (!file.match(/\.js(on)?$/)) return;  
 
         if (
           !file.includes(
             this.configFolderAdapterSettings.fileName.replace('[name]', '')
-          ) ||
-          configObj[file.replace('.config.js', '')] !== undefined
+          )
         )
           return;
-
 
         const configFilePath = `${path}/${file}`;
         if (clearCache) delete require.cache[require.resolve(configFilePath)];

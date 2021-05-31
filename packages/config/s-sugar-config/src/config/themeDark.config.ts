@@ -108,7 +108,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     accent: {
-      default: '#f2d72b',
+      default: '#FFD501',
       text: '--darken 30',
       highlight: '--lighten 0',
       surface: '--lighten 45',

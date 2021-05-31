@@ -15,7 +15,7 @@ export { postcssSugarPluginUiClassesInterface as interface };
  * \@sugar.ui.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bospsel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ params, atRule, processNested }) {
     const cssArray = [

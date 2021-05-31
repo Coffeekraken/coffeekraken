@@ -2,6 +2,7 @@
 
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
+import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name                SFrontspecParamsInterface
@@ -23,7 +24,7 @@ class SFrontspecParamsInterface extends __SInterface {
     },
     env: {
       type: 'String',
-      default: __SugarConfig.get('env.env')
+      default: undefined
     },
     clearCache: {
       type: 'Boolean',

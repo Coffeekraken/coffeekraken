@@ -12,6 +12,7 @@ const __fs = require('fs');
 const __isPath = require('../shared/is/path').default;
 const __parseHtml = require('../shared/console/parseHtml').default;
 const __SSugarJson = require('@coffeekraken/s-sugar-json').default;
+const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
 
 require('../node/index');
 
@@ -45,6 +46,10 @@ if (!stack) {
   stack = 'app';
 }
 
+// setInterval(() => {
+//   console.log(__SSugarConfig.get('assets.js'));
+// }, 2000);
+
 (async () => {
   const sugarJsonInstance = new __SSugarJson();
   const sugarJsons = sugarJsonInstance.read();
@@ -55,6 +60,11 @@ if (!stack) {
   //   const packagePath = path.split('node_modules/').slice(-1);
   //   if (filteredFiles.indexOf(packagePath) === -1) filteredFiles.push(path);
   // });
+
+
+  // setInterval(() => {
+  //   console.log(__SSugarConfig.get('frontspec.default').assets.css);
+  // }, 3000);
 
   const availableCli: Record<string, string> = {};
 
@@ -108,7 +118,6 @@ if (!stack) {
             cliObj.defaultAction &&
             action === cliObj.defaultAction
           ) {
-            console.log('ADD', actionObj);
             availableCli[`${cliObj.stack}._default`] = {
               packageJson,
               ...actionObj

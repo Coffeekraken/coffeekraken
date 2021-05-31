@@ -1292,7 +1292,7 @@ export default {
 
   ui: {
     button: {
-      padding: '[theme.padding.30] [theme.padding.30]',
+      padding: '[theme.padding.20] [theme.padding.30]',
       borderRadius: '[theme.border.radius.default]',
       transition: '[theme.transition.fast]',
       defaultStyle: 'gradient',

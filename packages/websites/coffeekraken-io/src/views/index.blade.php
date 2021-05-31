@@ -4,5 +4,6 @@
 @section('content')
  
     @include('pages.homepage.welcome')
+    @include('pages.homepage.quote')
 
 @endsection

@@ -7,6 +7,7 @@ import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from './adapters/SConfigAdapter';
+import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name                                            config
@@ -296,6 +297,13 @@ export default class SConfig {
       );
     }
 
+    config = __deepMap(config, ({value}) => {
+      if (value === undefined) {
+        return -1;
+      }
+      return value;
+    });
+
     if (config instanceof Promise) {
       return new Promise((resolve) => {
         config.then((c) => {
@@ -362,7 +370,24 @@ export default class SConfig {
   }
 
   _resolveInternalReferences(originalValue, config, resolverObj, path = []) {
-    if (__isPlainObject(originalValue)) {
+
+
+    const prop = path.slice(-1)[0];
+    if (prop && prop.match(/.*@.*/) && originalValue) {
+      const parts = prop.split('@');
+      const env = parts[1];
+      const p = parts[0];
+
+      if (__SEnv.is(env)) {
+        __set(config, `${path.slice(0,-1).join('.')}.${p}`, this._resolveInternalReferences(
+          originalValue,
+          config,
+          resolverObj,
+          path.slice(0,-1)
+        ));
+        originalValue = undefined;        
+      }
+    } else if (__isPlainObject(originalValue)) {
       Object.keys(originalValue).forEach((key) => {
         if (key === '...') {
           originalValue = {
@@ -396,13 +421,6 @@ export default class SConfig {
 
       if (matches && matches.length) {
         if (matches.length === 1 && originalValue === matches[0]) {
-          // console.log(
-          //   'resolve',
-          //   path.join('.'),
-          //   matches[0],
-          //   resolverObj.match
-          // );
-
           const resolvedValue = resolverObj.resolve(matches[0], config, path);
 
           originalValue = this._resolveInternalReferences(
@@ -430,10 +448,6 @@ export default class SConfig {
         }
       }
     }
-
-    // if (path.length) {
-    //   __set(config, path.join('.'), originalValue);
-    // }
 
     // check proxy
     if (

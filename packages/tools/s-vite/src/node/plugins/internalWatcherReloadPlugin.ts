@@ -28,34 +28,12 @@ export default (config: Config = {}): PluginOption => ({
         config: true
     }, config);
 
-    const configFiles = __SugarConfig.filesRealPaths;
-
-    console.log(configFiles);
-
-    // console.log(config);
-
-    // const w = __chokidar.watch(configFiles.map(path => {
-    //     return `${path}/*.js`;
-    // }), {
-    //     ignoreInitial: true
-    // });
-
-    // w.on('change', (path) => {
-    //     setTimeout(() => {
-    //         console.log('up', path);
-    //         ws.send({ type: 'full-reload', path: '*' });
-    //     }, 500);
-    // });
-    // __onProcessExit(() => {
-    //     w.close();
-    // });
+    const configFiles = __SugarConfig.foldersRealPaths.map(p => `${p}/*.config.js`);
 
     const shouldReload = __picomatch(configFiles)
     const checkReload = (path: string) => {
-        console.log('UP', path);
       if (shouldReload(path)) {
-          console.log('SHOULD', path);
-        setTimeout(() => ws.send({ type: 'full-reload', path: '*' }), 1000)
+        setTimeout(() => ws.send({ type: 'full-reload' }), 100)
         // if (log)
         //   logger.info(`${green('page reload')} ${dim(relative(root, path))}`, { clear: true, timestamp: true })
       }

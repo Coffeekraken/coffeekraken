@@ -1,0 +1,3 @@
+import __sVitePluginSugar from '@coffeekraken/s-vite-plugin-sugar';
+export default __sVitePluginSugar({});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3VnYXJQbHVnaW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdWdhclBsdWdpbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGtCQUFrQixNQUFNLG1DQUFtQyxDQUFDO0FBQ25FLGVBQWUsa0JBQWtCLENBQUMsRUFBRSxDQUFDLENBQUMifQ==

@@ -68,8 +68,6 @@ export default function ({
       `Sorry but the requested theme "<yellow>${finalParams.theme}</yellow>" does not exists...`
     );
 
-      console.log(themesObj.dark.ui.button);
-
   // @ts-ignore
   const flattenedTheme = __flatten(themesObj[finalParams.theme]);
   let vars: string[] = [];

@@ -12,6 +12,7 @@
     "@coffeekraken/s-docblock-renderer": "^2.0.0",
     "@coffeekraken/s-docmap": "^2.0.0",
     "@coffeekraken/s-duration": "^2.0.0",
+    "@coffeekraken/s-env": "^2.0.0",
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/s-view-renderer": "^2.0.0",

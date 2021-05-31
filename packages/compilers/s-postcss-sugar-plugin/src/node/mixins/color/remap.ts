@@ -55,7 +55,6 @@ export default function ({
     toColor: '',
     ...params
   };
-  const colorsObj = __theme().config('color');
 
   const cssArray: string[] = [];
 

@@ -6,6 +6,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
+import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name            defaultAssetsMiddleware
@@ -40,8 +41,7 @@ function defaultAssetsMiddleware(settings = {}) {
     const assetsConfig = __SugarConfig.get('frontendServer.assets');
 
     settings = {
-      ...settings,
-      env: __SugarConfig.get('env.env')
+      ...settings
     };
 
     if (!res.templateData) res.templateData = {};
@@ -63,8 +63,14 @@ function defaultAssetsMiddleware(settings = {}) {
             finalId = assetObj.id ?? id;
           let src = assetObj.path.replace(serverRootDir, '');
 
-          if (settings.env === 'development') {
+          if (__SEnv.is('dev')) {
             src = `http://${__ipAddress()}${src}`;
+          }
+
+          const originalSrc = src;
+
+          if (!__SEnv.is('prod') && !src.match(/\?/)) {
+            src += `?v=${Math.round(Math.random()*9999999999)}`;
           }
 
           switch (assetObj.type.toLowerCase()) {
@@ -94,7 +100,7 @@ function defaultAssetsMiddleware(settings = {}) {
               type: assetObj.type + '.map',
               hash: `${assetHash}.map`,
               path: `${assetObj.path}.map`,
-              src: `${src}.map`
+              src: `${originalSrc}.map`
             };
           }
 

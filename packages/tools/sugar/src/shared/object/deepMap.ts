@@ -80,9 +80,13 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
       value: objectOrArray[prop],
       path: [..._path, prop].join('.')
     });
-    if (res === -1) return;
+    if (res === -1) {
+      delete objectOrArray[prop];
+      return;
+    }
     if (isArray) newObject.push(res);
     else newObject[prop] = res;
+
   });
   return newObject;
 }

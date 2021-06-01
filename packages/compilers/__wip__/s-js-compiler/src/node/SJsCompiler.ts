@@ -1,28 +1,18 @@
-import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __SDuration from '@coffeekraken/s-duration';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SPromise from '@coffeekraken/s-promise';
 import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
-import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
-import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
-import __dependencyTree from 'dependency-tree';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __isGlob from '@coffeekraken/sugar/shared/is/glob';
+import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
-
-import __path from 'path';
-import __fs from 'fs';
-import __filter from '@coffeekraken/sugar/shared/object/filter';
-// import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __SPromise from '@coffeekraken/s-promise';
 import __dependencyList from '@coffeekraken/sugar/node/fs/dependencyList';
+import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
-
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import * as __esbuild from 'esbuild';
-import __rollup from 'rollup';
-
+import __fs from 'fs';
+import __path from 'path';
 import __SJsCompilerInterface from './interface/SJsCompilerInterface';
+
+
+
 
 export interface ISJsCompilerParams {
   input: string | string[];

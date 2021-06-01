@@ -63,19 +63,17 @@
 @import './08_atoms/all';
 
 /**
-  * Views
-  * Import all the views scss files
-  * This need the node-sass-glob-importer package installed :
-  * https://www.npmjs.com/package/node-sass-glob-importer
-  */
-/** @import-glob '../views/ * * /*.scss'; */
-
-/**
   * Trumps
   * All the things that does not fit in any others directory. Try to keep this folder has small as possible.
   * If you have to many things in here, that mean that you probably need to refactor your codebase...
   */
 @import './09_trumps/all';
+
+/**
+  * Views
+  * Import all the views css files
+  */
+@sugar.import ('../views/**/*.css');
 
 @sugar.init;
 

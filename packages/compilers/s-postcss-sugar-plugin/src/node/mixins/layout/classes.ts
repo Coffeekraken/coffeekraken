@@ -48,7 +48,7 @@ export default function ({
     const colsCount = __unique(layout.split(/\n\s/)).length;
     vars.push(`
       /**
-       * @name       s-layout-${id}
+       * @name       s-grid-${id}
        * @namespace     sugar.css.layout
        * @type          CssClass
        * 
@@ -66,7 +66,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-layout-${id} {
+      .s-grid-${id} {
         @sugar.layout.grid('${layout}');
       }
     `);

@@ -35,7 +35,7 @@ export default function ({
 }) {
   const finalParams: IPostcssSugarPluginFontParams = {
     family: 'default',
-    size: undefined,
+    size: -1,
     ...params
   };
 

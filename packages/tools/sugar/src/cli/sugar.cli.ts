@@ -47,7 +47,7 @@ if (!stack) {
 }
 
 // setInterval(() => {
-//   console.log(__SSugarConfig.get('assets.js'));
+//   console.log(__SSugarConfig.get('assets.'));
 // }, 2000);
 
 (async () => {

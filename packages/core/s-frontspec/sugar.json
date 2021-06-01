@@ -12,10 +12,6 @@
       "stack": "frontspec",
       "description": "frontspec.json related CLI",
       "actions": {
-        "find": {
-          "description": "Find the frontspec.json files that are relative to your cwd",
-          "process": "./src/node/find.cli.js"
-        },
         "read": {
           "description": "Find the frontspec.json files that are relative to your cwd and read their content",
           "process": "./src/node/read.cli.js"

@@ -25,6 +25,7 @@ import __globParent from 'glob-parent';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
 function extractGlob(string) {
   const parent = __globParent(string);
   let final = string.replace(parent, '');

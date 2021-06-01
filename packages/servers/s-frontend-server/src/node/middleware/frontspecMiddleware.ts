@@ -56,7 +56,7 @@ function frontspecMiddleware(settings = {}) {
     }
 
     const frontspec = new __SFrontspec();
-    const assetsToServe = await frontspec.assetsToServe({});
+    const assetsToServe = await frontspec.assetsToServe();
 
     if (!res.templateData) res.templateData = {};
     if (!res.templateData.assets) res.templateData.assets = {};

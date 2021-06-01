@@ -1,15 +1,13 @@
 // @ts-nocheck
 
-import __deepMerge from '../../shared/object/deepMerge';
-import __SPromise from '@coffeekraken/s-promise';
-import __glob from 'glob';
 import __SFile from '@coffeekraken/s-file';
-import __isGlob from '../../shared/is/glob';
 import __fs from 'fs';
+import __glob from 'glob';
 import __path from 'path';
 import __toRegex from 'to-regex';
-import __isDirectory from '../is/directory';
 import __expandGlob from '../../shared/glob/expandGlob';
+import __deepMerge from '../../shared/object/deepMerge';
+import __isDirectory from '../is/directory';
 
 /**
  * @name            resolveGlob
@@ -21,12 +19,8 @@ import __expandGlob from '../../shared/glob/expandGlob';
  * with an Array of SFile instances to work with
  *
  * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for when using some "**" pattern
- * @param       {Object}            [settings={}]           An object of settings to configure your glob process
+ * @param       {Partial<IResolveGlobSettings>}            [settings={}]           An object of settings to configure your glob process
  * @return      {Array}                                  An array of SFile instances
- *
- * @setting     {String}        cwd                         The root directory where to start the glob search process
- * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
- * @setting     {RegExp}        [contentRegex=null]         Specify a regex that will be used to filter the results by searching in the content
  *
  * @todo      interface
  * @todo      doc
@@ -41,7 +35,16 @@ import __expandGlob from '../../shared/glob/expandGlob';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function resolveGlob(globs, settings = {}) {
+
+export interface IResolveGlobSettings {
+  cwd: string;
+  symlinks: boolean;
+  nodir: boolean;
+  contentRegExp: RegExp;
+  SFile: boolean;
+}
+
+export default function resolveGlob(globs: string | string[], settings: Partial<IResolveGlobSettings> = {}): __SFile[] {
   settings = __deepMerge(
     {
       cwd: settings.cwd || process.cwd(),
@@ -109,17 +112,16 @@ function resolveGlob(globs, settings = {}) {
       });
     }
 
-    pathes.forEach((path) => {
-      const sFile = __SFile.new(path, {
-        file: {
-          cwd
-        }
+      pathes.forEach((path) => {
+        const sFile = __SFile.new(path, {
+          file: {
+            cwd
+          }
+        });
+        filesArray.push(sFile);
       });
-      filesArray.push(sFile);
-    });
   }
 
   // resolve the promise
   return filesArray;
 }
-export default resolveGlob;

@@ -18,8 +18,9 @@ export default function sVitePluginPostcss(postcssPlugins: any[] = []) {
     name: 's-vite-plugin-postcss',
     transform(src, id) {
       if (fileRegex.test(id)) {
-        console.log('VITE', id);
-        const css = __postcss(postcssPlugins).process(src).css;
+        const css = __postcss(postcssPlugins).process(src, {
+          from: id.split('?')[0]
+        }).css;
         return {
           code: css,
           map: null

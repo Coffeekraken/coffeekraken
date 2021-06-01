@@ -1,0 +1,4 @@
+import __SGlob from './SGlob';
+export * from './SGlob';
+export default __SGlob;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxPQUFPLE1BQU0sU0FBUyxDQUFDO0FBRTlCLGNBQWMsU0FBUyxDQUFDO0FBRXhCLGVBQWUsT0FBTyxDQUFDIn0=

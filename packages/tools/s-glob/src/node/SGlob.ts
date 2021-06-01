@@ -1,13 +1,15 @@
 // @ts-nocheck
 
-import __deepMerge from '../../shared/object/deepMerge';
-import __resolveGlob from './resolveGlob';
-import __extractGlob from '../../shared/glob/extractGlob';
-import __extractNoneGlob from '../../shared/glob/extractNoneGlob';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __resolveGlob, { IResolveGlobSettings } from '@coffeekraken/sugar/node/glob/resolveGlob';
+import __extractGlob from '@coffeekraken/sugar/shared/glob/extractGlob';
+import __extractNoneGlob from '@coffeekraken/sugar/shared/glob/extractNoneGlob';
+import __SClass from '@coffeekraken/s-class';
+import SFile from '@coffeekraken/s-file';
 
 /**
  * @name                SGlob
- * @namespace            node.glob
+ * @namespace            node
  * @type                Class
  * @status              beta
  *
@@ -30,19 +32,15 @@ import __extractNoneGlob from '../../shared/glob/extractNoneGlob';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SGlob {
-  /**
-   * @name            _settings
-   * @type            Object
-   * @private
-   *
-   * Store the instance settings
-   *
-   * @since           2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
 
+export interface ISGlobCtorSettings {
+    glob: Partial<ISGlobSettings>
+}
+export interface ISGlobSettings {
+    resolve: Partial<IResolveGlobSettings>
+}
+
+export default class SGlob extends __SClass {
   /**
    * @name            _globs
    * @type            Array<String>
@@ -63,13 +61,13 @@ export default class SGlob {
    * Alias to the ```resolveGlob``` function available under "node/glob/resolveGlob"
    *
    * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
-   * @param       {Object}            [settings={}]           An object of settings to configure your glob process
-   * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
+   * @param       {Partial<IResolveGlobSettings>}            [settings={}]           An object of settings to configure your glob process
+   * @return      {SFile[]}                                An array of SFile instances
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static resolve(globs, settings = {}) {
+  static resolve(globs, settings: Partial<IResolveGlobSettings> = {}): SFile[] {
     return __resolveGlob(globs, settings);
   }
 
@@ -78,7 +76,7 @@ export default class SGlob {
    * @type                Function
    * @static
    *
-   * Alias to the ```extractGlob``` function available under "node/glob/extractGlob"
+   * This function simply return you the glob part of a passed string
    *
    * @param       {String}            string          The string from which to extract the glob part
    * @return      {String}                            The glob part of the passed string
@@ -86,7 +84,7 @@ export default class SGlob {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static extractGlob(string) {
+  static extractGlob(string: string): string {
     return __extractGlob(string);
   }
 
@@ -95,7 +93,7 @@ export default class SGlob {
    * @type                Function
    * @static
    *
-   * Alias to the ```extractNoneGlob``` function available under "node/glob/extractNoneGlob"
+   * his function simply return you the none glob part of the passed string
    *
    * @param       {String}            string          The string from which to extract the none glob part
    * @return      {String}                            The none glob part of the passed string
@@ -103,7 +101,7 @@ export default class SGlob {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static extractNoneGlob(string) {
+  static extractNoneGlob(string: string): string {
     return __extractNoneGlob(string);
   }
 
@@ -117,8 +115,12 @@ export default class SGlob {
    * @since          2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(globs, settings = {}) {
-    this._settings = __deepMerge({}, settings);
+  constructor(globs: string|string[], settings: Partial<ISGlobCtorSettings> = {}) {
+    super(__deepMerge({
+        glob: {
+            resolve: {}
+        }
+    }, settings));
     this._globs = Array.isArray(globs) ? globs : [globs];
   }
 
@@ -131,13 +133,13 @@ export default class SGlob {
    * Alias to the ```resolveGlob``` function available under "node/glob/resolveGlob"
    *
    * @param       {Object}            [settings={}]           An object of settings to configure your glob process
-   * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
+   * @return      {SFile[]}                                 An array of SFile instances
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  resolve(settings = {}) {
-    settings = __deepMerge(this._settings, {}, settings);
+  resolve(settings: Partial<IResolveGlobSettings> = {}): SFile[] {
+    settings = __deepMerge(this._settings.glob.resolve, {}, settings);
     return SGlob.resolve(this._globs, settings);
   }
 
@@ -145,14 +147,14 @@ export default class SGlob {
    * @name                extractGlob
    * @type                Function
    *
-   * Alias to the ```extractGlob``` function available under "node/glob/extractGlob"
+   * This function simply return you the glob part of the glob(s) passed in constructor
    *
-   * @return      {String|Array<String>}                            The glob part of the passed string
+   * @return      {String|Array<String>}                            The glob part of the glob(s) passed in constructor. If multiple globs, return an Array, otherwise a simple string
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  extractGlob() {
+  extractGlob():string|string[] {
     if (this._globs.length === 1) {
       return SGlob.extractGlob(this._globs[0]);
     }
@@ -165,14 +167,14 @@ export default class SGlob {
    * @name                extractNoneGlob
    * @type                Function
    *
-   * Alias to the ```extractNoneGlob``` function available under "node/glob/extractNoneGlob"
+   * This function simply return you the none glob part of the glob(s) passed in constructor
    *
-   * @return      {String|Array<String>}                            The glob part of the passed string
+   * @return      {String|Array<String>}                            The none glob part of the glob(s) passed in constructor. If multiple globs, return an Array, otherwise a simple string
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  extractNoneGlob() {
+  extractNoneGlob(): string|string[] {
     if (this._globs.length === 1) {
       return SGlob.extractNoneGlob(this._globs[0]);
     }

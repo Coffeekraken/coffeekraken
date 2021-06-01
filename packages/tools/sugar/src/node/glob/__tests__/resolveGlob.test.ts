@@ -1,8 +1,8 @@
 import __resolveGlob from '../resolveGlob';
 
 describe('sugar.node.glob.resolveGlob', () => {
-  it('Should resolve the passed glob correctly', async (done) => {
-    const files = await __resolveGlob(`data/**/*`, {
+  it('Should resolve the passed glob correctly', (done) => {
+    const files = __resolveGlob(`data/**/*`, {
       cwd: __dirname
     });
     const file = files[0];

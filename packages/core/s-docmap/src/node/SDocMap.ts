@@ -5,20 +5,17 @@ import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __SGlob from '@coffeekraken/sugar/node/glob/SGlob';
+import __SGlob from '@coffeekraken/s-glob';
+import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __path from 'path';
 import __SDocMapFindParamsInterface from './interface/SDocMapFindParamsInterface';
 import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
-import __resolve from '@coffeekraken/sugar/node/module/resolve';
 
-import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
 
 /**
  * @name                SDocMap

@@ -139,13 +139,6 @@ export default class SFrontstack extends __SClass {
           value: `Starting frontstack process using "<yellow>${finalParams.receipe}</yellow>" receipe`
         });
 
-        // clearing frontspec cache
-        emit('log', {
-          value: `<yellow>[frontspec]</yellow> Updating cache`
-        });
-        const frontspec = new __SFrontspec();
-        // await frontspec.updateCache();
-
         // get the receipe object and treat it
         const receipeObj: Partial<ISFrontstackReceipe> =
           // @ts-ignore

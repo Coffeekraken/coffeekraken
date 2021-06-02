@@ -11,11 +11,11 @@ export { postcssSugarPluginUtilPilledInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginUtilPilledParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUtilPilledParams = {
     ...params
@@ -23,6 +23,5 @@ export default function ({
 
   const vars: string[] = ['border-radius: 999999px !important;'];
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

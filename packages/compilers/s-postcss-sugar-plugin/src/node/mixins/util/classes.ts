@@ -11,11 +11,11 @@ export { postcssSugarPluginUtilClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginUtilClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUtilClassesParams = {
     ...params
@@ -103,6 +103,5 @@ export default function ({
 
   const vars: string[] = [pilled, centerAbs, centerAbsX, centerAbsY];
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

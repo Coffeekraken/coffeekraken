@@ -33,11 +33,11 @@ export interface IPostcssSugarPluginColorSchemaParams {
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginColorSchemaParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginColorSchemaParams = {
     base: '',
@@ -81,6 +81,5 @@ export default function ({
     vars.push('}');
   }
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

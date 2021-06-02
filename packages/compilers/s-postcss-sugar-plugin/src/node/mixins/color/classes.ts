@@ -24,7 +24,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, processNested }) {
+export default function ({ params, atRule, replaceWith }) {
   const colorsObj = __theme().config('color');
 
   const cssArray: string[] = [];
@@ -109,6 +109,5 @@ export default function ({ params, atRule, processNested }) {
     });
   });
 
-  const AST = processNested(cssArray.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(cssArray);
 }

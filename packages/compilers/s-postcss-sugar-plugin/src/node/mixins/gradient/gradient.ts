@@ -50,11 +50,11 @@ export { postcssSugarPluginGradientInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginGradientParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginGradientParams = {
     start: '',
@@ -91,6 +91,5 @@ export default function ({
   }
   const vars: string[] = [gradientCss];
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

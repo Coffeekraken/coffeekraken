@@ -46,11 +46,11 @@ export { postcssSugarPluginAlignFlexInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: IPostcssSugarPluginAlignFlexParams;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginAlignFlexParams = {
     ...params
@@ -103,6 +103,5 @@ export default function ({
     vars.push(`transform: ${transform.trim()};`);
   }
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

@@ -13,11 +13,11 @@ export { postcssSugarPluginLayoutClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginLayoutClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginLayoutClassesParams = {
     ...params
@@ -72,6 +72,122 @@ export default function ({
     `);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  const spaces = __theme().config('space');
+
+  Object.keys(spaces).forEach(spaceName => {
+
+    const clsX = `s-grid-gutter-x-${spaceName}`.replace('-default','');
+    const clsY = `s-grid-gutter-y-${spaceName}`.replace('-default','');
+    const cls = `s-grid-gutter-${spaceName}`.replace('-default','');
+
+    vars.push(`
+      /**
+       * @name       ${clsX}
+       * @namespace     sugar.css.layout
+       * @type          CssClass
+       * 
+       * This class allows you to apply some left and right gutters on your s-grid items
+       * 
+       * @example     html
+       * <div class="s-grid-123 ${clsX}">
+       *    ${Array(3)
+         .map((idx) => {
+           return `<div>I'm the area ${idx}</div>`;
+         })
+         .join('\n')}
+       * </div>
+       * 
+       * @since     2.0.0
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      [class*="${clsX}"] > * {
+        padding-left: sugar.space(${spaceName});
+        padding-right: sugar.space(${spaceName});
+      }
+    `);
+
+    vars.push(`
+      /**
+       * @name       ${clsY}
+       * @namespace     sugar.css.layout
+       * @type          CssClass
+       * 
+       * This class allows you to apply some left and right gutters on your s-grid items
+       * 
+       * @example     html
+       * <div class="s-grid-123 ${clsY}">
+       *    ${Array(3)
+         .map((idx) => {
+           return `<div>I'm the area ${idx}</div>`;
+         })
+         .join('\n')}
+       * </div>
+       * 
+       * @since     2.0.0
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+        [class*="${clsY}"] > * {
+        padding-top: sugar.space(${spaceName});
+        padding-bottom: sugar.space(${spaceName});
+      }
+    `);
+
+    vars.push(`
+      /**
+       * @name       ${cls}
+       * @namespace     sugar.css.layout
+       * @type          CssClass
+       * 
+       * This class allows you to apply some left and right gutters on your s-grid items
+       * 
+       * @example     html
+       * <div class="s-grid-123 ${cls}">
+       *    ${Array(3)
+         .map((idx) => {
+           return `<div>I'm the area ${idx}</div>`;
+         })
+         .join('\n')}
+       * </div>
+       * 
+       * @since     2.0.0
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      [class*="${cls}"]:not([class*="s-grid-gutter-x"]).not([class*="s-grid-gutter-y"]) > * {
+        padding: sugar.space(${spaceName});
+      }
+    `);
+  });
+
+  vars.push(`
+     /**
+       * @name       s-grid-gutter:between
+       * @namespace     sugar.css.layout
+       * @type          CssClass
+       * 
+       * This class allows you to specify that you want only gutters between grid items
+       * 
+       * @example     html
+       * <div class="s-grid-123 s-grid-gutter:between">
+       *    ${Array(3)
+         .map((idx) => {
+           return `<div>I'm the area ${idx}</div>`;
+         })
+         .join('\n')}
+       * </div>
+       * 
+       * @since     2.0.0
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      [class*="s-grid-gutter"][class*=":between"] > * {
+        &:first-child {
+          padding-left: 0 !important;
+        }
+        &:last-child {
+          padding-right: 0 !important;
+        }
+      }
+  `);
+
+
+  replaceWith(vars);
 }

@@ -30,11 +30,11 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: any;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const themeConfig = __SugarConfig.get('theme');
 
@@ -52,9 +52,9 @@ export default function ({
     '@sugar.size.classes;',
     '@sugar.depth.classes;',
     '@sugar.util.classes;',
-    '@sugar.style.classes;'
+    '@sugar.style.classes;',
+    '@sugar.typo.classes;'
   ];
 
-  const AST = processNested(cssArray.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(cssArray);
 }

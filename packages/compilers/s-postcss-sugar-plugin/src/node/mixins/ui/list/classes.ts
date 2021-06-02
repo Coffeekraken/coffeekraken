@@ -24,11 +24,11 @@ export { postcssSugarPluginUiListClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginUiListClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const colors = __theme().config('ui.list.colors');
   const styles = __theme().config('ui.list.styles');
@@ -56,6 +56,5 @@ export default function ({
       */`);
   vars.push([`ul.s-list,.s-list-ul {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

@@ -34,11 +34,11 @@ export interface IPostcssSugarPluginThemeScopeMixinParams {
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginThemeScopeMixinParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <IPostcssSugarPluginThemeScopeMixinParams>{
     ...(params ?? {})
@@ -53,10 +53,7 @@ export default function ({
   // @ts-ignore
   global._postcssSugarPluginThemeScopeMixinTheme.push(finalParams.theme);
 
-  const AST = processNested(
-    atRule.nodes.map((node) => node.toString()).join('\n')
-  );
-  atRule.replaceWith(AST);
+  replaceWith(atRule.nodes.map((node) => node.toString()).join('\n'));
 
   // @ts-ignore
   global._postcssSugarPluginThemeScopeMixinTheme =

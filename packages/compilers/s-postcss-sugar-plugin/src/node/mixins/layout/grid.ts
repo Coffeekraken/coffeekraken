@@ -5,12 +5,16 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
     layout: {
       type: 'String',
       required: true
+    },
+    gutter: {
+      type: 'Number'
     }
   };
 }
 
 export interface IPostcssSugarPluginLayoutParams {
   layout: string;
+  gutter: number;
 }
 
 export { postcssSugarPluginLayoutInterface as interface };
@@ -49,11 +53,11 @@ export { postcssSugarPluginLayoutInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: IPostcssSugarPluginLayoutParams;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginLayoutParams = {
     ...params
@@ -167,10 +171,10 @@ export default function ({
             grid-column-end: ${colsEndByArea[areaId] + 1};
             grid-row-start: ${rowsStartByArea[areaId]};
             grid-row-end: ${rowsEndByArea[areaId] + 1};
+            ${finalParams.gutter ? `padding: sugar.size(${finalParams.gutter})` : ''}
         }
       `);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

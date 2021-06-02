@@ -14,11 +14,11 @@ export { postcssSugarPluginLayoutContainerInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginLayoutContainerParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginLayoutContainerParams = {
     ratio: 1,
@@ -36,6 +36,5 @@ export default function ({
     vars.push(`${key}: ${containerConfig[key]};`);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

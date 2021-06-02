@@ -43,8 +43,6 @@ function frontspecMiddleware(settings = {}) {
     // handle already fetched files
     if (_requestedFiles[req.path]) {
       const assetObj = _requestedFiles[req.path];
-      // var readStream = __fs.createReadStream(assetObj.path);
-      // readStream.pipe(res);
       let content = __fs.readFileSync(assetObj.path, 'utf8').toString();
       content = content.replace(
         /\/\/# sourceMappingURL=.*\.map/gm,

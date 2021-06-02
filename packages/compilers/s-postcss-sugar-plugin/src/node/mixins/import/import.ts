@@ -36,16 +36,15 @@ export { postcssSugarPluginImportInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: IPostcssSugarPluginImportParams;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginImportParams = {
     ...params
   };
-
 
   const dirName =
     typeof atRule.source.input.file === 'string'
@@ -64,6 +63,5 @@ export default function ({
     vars.push(`@import '${file.relPath}';`);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

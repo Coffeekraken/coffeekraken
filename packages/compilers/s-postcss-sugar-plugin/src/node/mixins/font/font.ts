@@ -27,11 +27,11 @@ export { postcssSugarPluginFontInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginFontParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginFontParams = {
     family: 'default',
@@ -48,6 +48,5 @@ export default function ({
       vars.push(`@sugar.font.size(${finalParams.size});`);
   }
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

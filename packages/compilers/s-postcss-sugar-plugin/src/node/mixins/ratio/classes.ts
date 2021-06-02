@@ -14,11 +14,11 @@ export { postcssSugarPluginRatioClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginRatioClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginRatioClassesParams = {
     ratio: 1,
@@ -49,6 +49,5 @@ export default function ({
     vars.push(ratioCss);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

@@ -12,11 +12,11 @@ export { postcssSugarPluginFontFacesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginFontFacesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginFontFacesParams = {
     ...params
@@ -53,6 +53,5 @@ export default function ({
 `);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

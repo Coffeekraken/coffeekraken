@@ -44,11 +44,11 @@ export interface IPostcssSugarPluginColorRemapParams {
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginColorRemapParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginColorRemapParams = {
     color: '',
@@ -70,6 +70,5 @@ export default function ({
     cssArray.push('}');
   }
 
-  const AST = processNested(cssArray.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(cssArray);
 }

@@ -22,11 +22,11 @@ export { postcssSugarPluginUiFormInputInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginUiFormInputParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiFormInputParams = {
     style: 'default',
@@ -35,42 +35,14 @@ export default function ({
 
   const vars: string[] = [];
 
-  // bare
-  vars.push(`
-      @sugar.scope.bare {
-        display: inline-block;
-        padding: ${__themeVar('ui.form.padding')};
-      }
-    `);
+  vars.push('@sugar.ui.base(form);');
 
-  // lnf
-  vars.push(`
-      @sugar.scope.lnf {
-  `);
 
-  vars.push(`
-      border-radius: ${__themeVar('ui.form.borderRadius')};
-      transition: ${__themeVar('ui.form.transition')};
-  `);
+  // switch (finalParams.style) {
+  //   default:
+  //     break;
+  // }
 
-  switch (finalParams.style) {
-    default:
-      vars.push(`
-          color: sugar.color(ui, text);
-          background-color: sugar.color(ui, surface);
-          padding: ${__themeVar('ui.form.padding')};
-          border: sugar.color(ui) solid 1px;
-          @sugar.depth(10);
+  replaceWith(vars);
 
-          &:hover {
-            @sugar.depth(20);
-            border: sugar.color(accent) solid 2px;
-          }
-        `);
-      break;
-  }
-  vars.push('}');
-
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
 }

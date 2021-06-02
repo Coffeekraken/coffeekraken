@@ -34,11 +34,11 @@ export { postcssSugarPluginUiListUlInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginUiListUlParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   //   const finalParams: IPostcssSugarPluginUiListUlParams = {
   //     color: 'primary',
@@ -91,6 +91,5 @@ export default function ({
     }
   `);
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+    replaceWith(vars);
 }

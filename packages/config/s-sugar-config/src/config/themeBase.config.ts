@@ -258,9 +258,9 @@ export default {
        */
       title: {
         'font-family': '"Titillium Web"',
-        'font-weight': 400,
+        'font-weight': 600,
         import:
-          'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
+          'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap'
       },
 
       /**
@@ -338,19 +338,6 @@ export default {
       0: 0,
 
       /**
-       * @name          5
-       * @namespace     config.theme.themes.default.font.size
-       * @type          String
-       * @default       2px
-       *
-       * Declare the font size <s-color="accent">50</s-color>
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      5: '4px',
-
-      /**
        * @name          10
        * @namespace     config.theme.themes.default.font.size
        * @type          String
@@ -393,14 +380,14 @@ export default {
        * @name          40
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       14px
+       * @default       16px
        *
        * Declare the font size <s-color="accent">40</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      40: '14px',
+      40: '16px',
 
       /**
        * @name          50
@@ -413,72 +400,72 @@ export default {
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      50: '16px',
+      50: '24px',
 
       /**
        * @name          60
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       24px
+       * @default       32px
        *
        * Declare the font size <s-color="accent">60</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      60: '24px',
+      60: '32px',
 
       /**
        * @name          70
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       32px
+       * @default       40px
        *
        * Declare the font size <s-color="accent">70</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      70: '32px',
+      70: '40px',
 
       /**
        * @name          80
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       40px
+       * @default       48px
        *
        * Declare the font size <s-color="accent">80</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      80: '40px',
+      80: '48px',
 
       /**
        * @name          90
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default      48px
+       * @default      56px
        *
        * Declare the font size <s-color="accent">90</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      90: '48px',
+      90: '56px',
 
       /**
        * @name          10
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default      56px
+       * @default      64px
        *
        * Declare the font size <s-color="accent">100</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      100: '56px'
+      100: '64px'
     }
   },
 
@@ -1291,110 +1278,151 @@ export default {
   },
 
   ui: {
-    button: {
+    default: {
       padding: '[theme.padding.20] [theme.padding.30]',
       borderRadius: '[theme.border.radius.default]',
       transition: '[theme.transition.fast]',
+      depth: 10
+    },
+    button: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
       defaultStyle: 'gradient',
       ':gradient': {}
       // ':outline': {},
       // ':text': {}
     },
     form: {
-      padding: '10 20',
-      borderRadius: '[theme.border.radius.default]',
-      transition: '[theme.transition.fast]',
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
       styles: ['default:default']
     },
     list: {
-      padding: '0.5em 0.8em',
-      borderRadius: '[theme.border.radius.default]',
-      transition: '[theme.transition.fast]',
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
       styles: ['default'],
       colors: ['primary:default']
+    },
+    terminal: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]'
     }
-  }
+  },
 
-  //   typo: {
-  //     h1: {
-  //       'font-family': 'title',
-  //       'font-size': 80,
-  //       color: 'primary',
-  //       'margin-bottom': 80
-  //     },
-  //     h2: {
-  //       'font-family': 'title',
-  //       'font-size': 70,
-  //       color: 'primary',
-  //       'margin-bottom': 70
-  //     },
-  //     h3: {
-  //       'font-family': 'title',
-  //       'font-size': 60,
-  //       color: 'text',
-  //       'margin-bottom': 60
-  //     },
-  //     h4: {
-  //       'font-family': 'title',
-  //       'font-size': 50,
-  //       color: 'text',
-  //       'margin-bottom': 50
-  //     },
-  //     h5: {
-  //       'font-family': 'title',
-  //       'font-size': 40,
-  //       color: 'text',
-  //       'margin-bottom': 50
-  //     },
-  //     h6: {
-  //       'font-family': 'title',
-  //       'font-size': 30,
-  //       color: 'text',
-  //       'margin-bottom': 50
-  //     },
-  //     'p-lead': {
-  //       'font-family': 'default',
-  //       'font-size': 70,
-  //       color: 'text',
-  //       'margin-bottom': 50
-  //     },
-  //     p: {
-  //       'font-family': 'default',
-  //       'font-size': 50,
-  //       color: 'text',
-  //       'margin-bottom': 50
-  //     },
-  //     b: {
-  //       'font-weight': 'bold'
-  //     },
-  //     strong: {
-  //       'font-weight': 'bold'
-  //     },
-  //     i: {
-  //       'font-style': 'italic'
-  //     },
-  //     em: {
-  //       'font-style': 'italic'
-  //     },
-  //     small: {
-  //       'font-size': '0.5em'
-  //     },
-  //     mark: {
-  //       'background-color': '[theme.color.primary.30]'
-  //     },
-  //     del: {
-  //       'text-decoration': 'line-through'
-  //     },
-  //     ins: {
-  //       'text-decoration': 'underline'
-  //     },
-  //     sub: {
-  //       'vertical-align': 'sub',
-  //       'font-size': '0.6em'
-  //     },
-  //     sup: {
-  //       'vertical-align': 'sup',
-  //       'font-size': '0.6em'
-  //     }
-  //   }
+    typo: {
+      h1: {
+        'font-family': 'title',
+        'font-size': 80,
+        'line-height': 1,
+        ':rhythm-vertical': {
+          'margin-bottom': 50
+        }
+      },
+      h2: {
+        'font-family': 'title',
+        'font-size': 70,
+        'line-height': 1,
+        ':rhythm-vertical': {
+          'margin-bottom': 50
+        }
+      },
+      h3: {
+        'font-family': 'title',
+        'font-size': 60,
+        'line-height': 1,
+        ':rhythm-vertical': {
+          'margin-bottom': 40
+        }
+      },
+      h4: {
+        'font-family': 'title',
+        'font-size': 50,
+        'line-height': 1,
+        ':rhythm-vertical': {
+          'margin-bottom': 40
+        }
+      },
+      h5: {
+        'font-family': 'title',
+        'font-size': 40,
+        'line-height': 1,
+        ':rhythm-vertical': {
+          'margin-bottom': 30
+        }
+      },
+      h6: {
+        'font-family': 'title',
+        'font-size': 30,
+        'line-height': 1,
+        ':rhythm-vertical': {
+          'margin-bottom': 30
+        }
+      },
+      'p-lead': {
+        'font-family': 'default',
+        'font-size': 70,
+        'line-height': 1.5,
+        ':rhythm-vertical': {
+          'margin-bottom': 50
+        }
+      },
+      p: {
+        'font-family': 'default',
+        'font-size': 50,
+        'line-height': 1.5,
+        ':rhythm-vertical': {
+          'margin-bottom': 50
+        }
+      },
+      quote: {
+        'font-family': 'quote'
+      },
+      b: {
+        'font-weight': 'bold'
+      },
+      bold: {
+        'font-weight': 'bold'
+      },
+      strong: {
+        'font-weight': 'bold'
+      },
+      i: {
+        'font-style': 'italic'
+      },
+      italic: {
+        'font-style': 'italic'
+      },
+      em: {
+        'font-style': 'italic'
+      },
+      small: {
+        'font-size': '0.5em'
+      },
+      mark: {
+        'background-color': '[theme.color.accent.default]',
+        'color': '[theme.color.accent.foreground]'
+      },
+      del: {
+        'text-decoration': 'line-through'
+      },
+      ins: {
+        'text-decoration': 'underline'
+      },
+      sub: {
+        'vertical-align': 'sub',
+        'font-size': '0.6em'
+      },
+      sup: {
+        'vertical-align': 'sup',
+        'font-size': '0.6em'
+      }
+    }
 };

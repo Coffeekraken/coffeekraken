@@ -42,11 +42,11 @@ if (!global._definedStyles) {
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<postcssSugarPluginStyleDefineMixinParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <postcssSugarPluginStyleDefineMixinParams>{
     ...(params ?? {})
@@ -71,14 +71,12 @@ export default function ({
     .join('\n');
 
   // @ts-ignore
-  global._definedStyles[finalParams.name] = processNested(
+  global._definedStyles[finalParams.name] = 
     [
       `.s-style-${finalParams.name.replace(/-default$/, '')} {`,
       styleCss,
       `}`
-    ].join('\n')
-  );
+    ].join('\n');
 
-  const AST = processNested([].join('\n'));
-  atRule.replaceWith(AST);
+    replaceWith([]);
 }

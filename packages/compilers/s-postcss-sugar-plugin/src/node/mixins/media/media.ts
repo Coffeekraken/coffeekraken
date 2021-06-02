@@ -66,11 +66,11 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: any;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const mediaConfig = __SugarConfig.get('media');
 
@@ -170,7 +170,7 @@ export default function ({
     fullQueriesList.push(queryList.join(' and '));
   });
 
-  const AST = processNested(`@media ${fullQueriesList.join(',')} {}`);
+  const AST = replaceWith(`@media ${fullQueriesList.join(',')} {}`);
 
   // @ts-ignore
   AST.nodes[0].nodes = atRule.nodes;

@@ -32,11 +32,11 @@ export interface postcssSugarPluginStateHoverMixinParams {}
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<postcssSugarPluginStateHoverMixinParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <postcssSugarPluginStateHoverMixinParams>{
     className: '',
@@ -48,9 +48,8 @@ export default function ({
   vars.push(
     `&[hoverable]:hover, [hoverable]:hover:not([hoverable]:not(:hover) &) {`
   );
-
-  vars.push(processNested(__astNodesToString(atRule.nodes)));
+  vars.push(__astNodesToString(atRule.nodes));
   vars.push(`}`);
 
-  atRule.replaceWith(vars.join('\n'));
+  replaceWith(vars);
 }

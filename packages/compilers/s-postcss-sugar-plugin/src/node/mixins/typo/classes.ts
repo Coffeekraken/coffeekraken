@@ -13,11 +13,11 @@ export { postcssSugarPluginTypoClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginTypoClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function
 }) {
   const finalParams: IPostcssSugarPluginTypoClassesParams = {
     ...params
@@ -32,11 +32,11 @@ export default function ({
     const cls = `s-${typoName}`;
 
     const css = __jsObjectToCssProperties(typoObj, {
-      exclude: ['margin-bottom', 'margin-top', 'margin']
+      exclude: [':rhythm-vertical']
     });
 
     vars.push(`/**
-    * @name            ${cls}
+    * @name            .${cls}
     * @namespace        sugar.css.typo
     * @type             CssClass
     * 
@@ -52,30 +52,30 @@ export default function ({
         ${css}
    }`);
 
-    Object.keys(typoObj).forEach((prop) => {
-      switch (prop) {
-        case 'margin-bottom':
-        case 'margin-top':
-        case 'margin':
-          const clsName = `.s-space-children .${cls}, .${cls}.s-space`;
-          vars.push(`/**
-          * @name         ${clsName}
+   if (typoObj[':rhythm-vertical']) {
+
+        vars.push(`
+
+        /**
+          * @name         .${cls}
           * @namespace    sugar.css.typo
           * @type         CssClass
+          * @scope        .s-rhythm-vertical
           * 
           * This class allows you to activate the space(s) on your "<yellow>${cls}</yellow>" HTMLElement
           * 
           * @since    2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        ${clsName} {
-          ${prop}: sugar.space(${typoObj[prop]});
-        }`);
-          break;
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+       @sugar.rhythm.vertical {
+        &.${cls}, & .${cls} {
+          ${__jsObjectToCssProperties(typoObj[':rhythm-vertical'])}
+        }
       }
-    });
-  });
+      `);
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+    }
+  });
+  
+  replaceWith(vars);
 }

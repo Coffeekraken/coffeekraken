@@ -32,11 +32,11 @@ export interface postcssSugarPluginScopeBareMixinParams {}
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginColorParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <postcssSugarPluginScopeBareMixinParams>{
     ...(params ?? {})
@@ -53,8 +53,8 @@ export default function ({
   } else {
     vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
   }
-  vars.push(processNested(__astNodesToString(atRule.nodes)));
+  vars.push(__astNodesToString(atRule.nodes));
   vars.push(`}`);
 
-  atRule.replaceWith(vars.join('\n'));
+  replaceWith(vars);
 }

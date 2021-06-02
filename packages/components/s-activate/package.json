@@ -1,0 +1,25 @@
+{
+  "name": "@coffeekraken/s-activate-component",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://coffeekraken.io",
+  "main": "./dist/js/index.umd.js",
+  "module": "./dist/js/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/js/index.es.js",
+      "require": "./dist/js/index.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "sugard frontstack dev",
+    "build": "sugard vite.build --lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-interface": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0"
+  }
+}

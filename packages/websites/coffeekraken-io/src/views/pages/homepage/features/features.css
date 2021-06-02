@@ -1,22 +1,50 @@
-#homepage-welcome {
-  @sugar.gradient (sugar.color(complementary, --darken 45 --desaturate 50), background, $type: radial, $x: 50%, $y: 100%);
-  height: 70vh;
-  min-height: 600px;
-  position: relative;
+#homepage-features {
+  .__tabs {
+    display: flex;
 
-  /* s-inline-svg {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  } */
+    .__item {
+      text-align: center;
+      flex-grow: 1;
+      padding: sugar.space(30);
+      background-color: sugar.color(surface, --lighten 10);
+      @sugar.transition (fast);
+      cursor: pointer;
+      display: inline;
 
-  .__illustration {
-    position: absolute;
-    @sugar.align.abs (center);
+      &:hover {
+        @sugar.gradient (sugar.color(accent), sugar.color(accent, --darken 10), $angle: 90);
+      }
+      @sugar.state.active {
+        /* transform: scale(1.2); */
+        @sugar.gradient (sugar.color(complementary), sugar.color(complementary, --darken 10), $angle: 90);
+      }
+    }
+  }
+  .__contents {
+    & > *:not(.active) {
+      display: none;
+    }
   }
 
-  .__content {
-    @sugar.align.abs (center);
-    margin-left: -100px;
+  #features-development {
+    position: relative;
+
+    img {
+      max-width: 100%;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50vw;
+      height: 100%;
+      z-index: -1;
+      transform: translateX(-100%);
+      @sugar.gradient (sugar.color(accent), #D27F01, $angle: 90);
+      clip-path: polygon(0% 0%, 100% 0, calc(100% - 200px) 100%, 0% 100%);
+    }
   }
 }

@@ -44,6 +44,7 @@
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
   "dependencies": {
     "dependency-check": "^4.1.0",
+    "esm": "^3.2.25",
     "jest-esm-transformer": "^1.0.0",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.2.0",

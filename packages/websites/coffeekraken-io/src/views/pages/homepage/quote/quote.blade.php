@@ -11,7 +11,7 @@
 
         <s-inline-svg class="__quote-start" src="/src/img/quote.svg"></s-inline-svg>
 
-        <quote>
+        <quote class="s-quote">
             Take what <span class="s-color-accent">you need</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-color-complementary">leave the rest</span> aside
         </quote>
 

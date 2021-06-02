@@ -32,11 +32,11 @@ export interface postcssSugarPluginStateFocusMixinParams {}
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<postcssSugarPluginStateFocusMixinParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <postcssSugarPluginStateFocusMixinParams>{
     className: '',
@@ -46,9 +46,8 @@ export default function ({
   const vars: string[] = [];
 
   vars.push(`&:focus {`);
-
-  vars.push(processNested(__astNodesToString(atRule.nodes)));
+  vars.push(__astNodesToString(atRule.nodes));
   vars.push(`}`);
 
-  atRule.replaceWith(vars.join('\n'));
+  replaceWith(vars);
 }

@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
+import __themeVar from '../../utils/themeVar';
 
 class postcssSugarPluginDepthInterface extends __SInterface {
   static definition = {
@@ -20,22 +21,17 @@ export { postcssSugarPluginDepthInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginDepthParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginDepthParams = {
     depth: 1,
     ...params
   };
-  // console.log(atRule.toString());
-
-  const depthCss = __theme().config(`depth.${finalParams.depth}`);
-
+  const depthCss = __themeVar(`depth.${finalParams.depth}`);
   const vars: string[] = [`box-shadow: ${depthCss};`];
-
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

@@ -17,11 +17,11 @@ export { postcssSugarPluginUiButtonClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
     ...params
@@ -85,6 +85,5 @@ export default function ({
     `);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

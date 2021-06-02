@@ -42,11 +42,11 @@ export interface postcssSugarPluginScopeMixinParams {
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginColorParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <postcssSugarPluginScopeMixinParams>{
     scopes: '',
@@ -63,10 +63,7 @@ export default function ({
   //   console.log('AD', scopes);
   global._postcssSugarPluginScopeMixinScopesStack.push(finalParams.scopes);
 
-  const AST = processNested(
-    atRule.nodes.map((node) => node.toString()).join('\n')
-  );
-  atRule.replaceWith(AST);
+  replaceWith(atRule.nodes);
 
   // @ts-ignore
   global._postcssSugarPluginScopeMixinScopesStack =

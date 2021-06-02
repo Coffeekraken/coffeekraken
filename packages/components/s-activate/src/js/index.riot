@@ -1,0 +1,118 @@
+<s-activate>
+
+  <style type="postcss">
+    :host {
+      display: inline-block;
+    }
+  </style>
+
+  <script>
+    import __SActivateComponentInterface from './interface/SActivateComponentInterface.ts';
+    export default {
+      $targets: undefined,
+      $groupElements: undefined,
+      targetSelector: undefined,
+      onBeforeMount() {
+
+        this.$props = __SActivateComponentInterface.apply(this.props).value;
+
+        if (!this.$props.target.match(/^(\.|\[])/)) {
+          this.targetSelector = `#${this.$props.target}`;
+        } else {
+          this.targetSelector = this.$props.target;
+        }
+
+      },
+      onMounted() {
+        // handle target check
+        const targets = Array.from(document.querySelectorAll(this.targetSelector));
+        if (targets.length) this.$targets = targets;
+
+        if (this.$props.group) {
+          this.$groupElements = Array.from(document.querySelectorAll(`s-activate[group="${this.$props.group}"]`));
+        }
+
+        this.$props.trigger.forEach(trigger => {
+          switch(trigger) {
+            case 'click':
+              this.root.addEventListener('click', (e) => {
+                if (this.isActive() && this.$props.toggle) {
+                  this.unactivate();
+                } else {
+                  this.activate();
+                }
+              });
+            break;
+            case 'anchor':
+              if (document.location.hash === this.targetSelector) {
+                this.activate();
+              }
+              window.addEventListener('hashchange', (e) => {
+                if (document.location.hash === this.targetSelector) {
+                  this.activate();
+                }
+              });
+
+            break;
+          }
+        });
+
+        // expose API
+        this.root.activate = this.activate.bind(this);
+        this.root.unactivate = this.unactivate.bind(this);
+        this.root.isActive = this.isActive.bind(this);
+
+        // activate if has the "active" attribute
+        if (this.$props.active) {
+          this.activate(true);
+        }
+
+      },
+      isActive() {
+        return this.root.hasAttribute('active');
+      },
+      activate(force = false) {
+
+        // protect from activating multiple times
+        if (!force && this.isActive()) return;
+
+        // history
+        if (this.$props.history) {
+          document.location.hash = this.targetSelector;
+        }
+
+        // check if we have some elements in the group
+        if (this.$groupElements) {
+          this.$groupElements.forEach($element => {
+            if ($element === this.root) return;
+            try {
+              $element.unactivate();
+            } catch(e) {}
+          });
+        }
+
+        // add the "active" attribute to the component
+        this.root.setAttribute('active', true);
+
+        // loop on targets to activate them
+        this.$targets.forEach($target => {
+          $target.classList.add('active');
+        });
+
+      },
+      unactivate() {
+
+        // protect from unactivating multiple times
+        if (!this.isActive()) return;
+
+        // remove the "active" attribute to the component
+        this.root.removeAttribute('active');
+
+        // loop on targets to unactivate them
+        this.$targets.forEach($target => {
+          $target.classList.remove('active');
+        });
+      }
+    }
+  </script>
+</s-activate>

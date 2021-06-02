@@ -35,11 +35,11 @@ export interface postcssSugarPluginThemeScopeMixinParams {
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<postcssSugarPluginThemeScopeMixinParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <postcssSugarPluginThemeScopeMixinParams>{
     space: 'default',
@@ -54,6 +54,5 @@ export default function ({
   `
   ];
 
-  const AST = processNested(cssArray.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(cssArray);
 }

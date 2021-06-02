@@ -12,11 +12,11 @@ export { postcssSugarPluginDepthClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginDepthClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginDepthClassesParams = {
     ...params
@@ -43,6 +43,5 @@ export default function ({
     vars.push(depthCss);
   });
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

@@ -13,11 +13,11 @@ export { postcssSugarPluginSpaceClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginSpaceClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginSpaceClassesParams = {
     ...params
@@ -29,6 +29,5 @@ export default function ({
     '@sugar.space.autoClasses;'
   ];
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

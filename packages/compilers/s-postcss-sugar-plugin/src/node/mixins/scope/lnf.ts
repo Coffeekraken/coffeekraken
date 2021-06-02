@@ -30,11 +30,11 @@ export interface postcssSugarPluginScopeLnfMixinParams {}
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginColorParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams = <postcssSugarPluginScopeLnfMixinParams>{
     ...(params ?? {})
@@ -47,8 +47,8 @@ export default function ({
   const vars: string[] = [];
 
   vars.push(`&:not(.s-no-lnf &):not(.s-no-lnf) {`);
-  vars.push(processNested(__astNodesToString(atRule.nodes)));
+  vars.push(__astNodesToString(atRule.nodes));
   vars.push(`}`);
 
-  atRule.replaceWith(vars.join('\n'));
+  replaceWith(vars);
 }

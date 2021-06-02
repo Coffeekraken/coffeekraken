@@ -22,19 +22,19 @@ export { postcssSugarPluginUiClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: any;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const cssArray = [
     `@sugar.ui.button.classes;`,
     '@sugar.ui.form.classes;',
     '@sugar.ui.list.classes;',
-    '@sugar.ui.navbar.classes;'
+    '@sugar.ui.navbar.classes;',
+    '@sugar.ui.terminal.classes;'
   ];
 
-  const AST = processNested(cssArray.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(cssArray);
 }

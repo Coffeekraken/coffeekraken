@@ -19,11 +19,11 @@ export { postcssSugarPluginUiFormClassesInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: Partial<IPostcssSugarPluginUiFormClassesParams>;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const styles = __theme().config('ui.form.styles');
 
@@ -68,6 +68,6 @@ export default function ({
 
   vars.push('}');
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
+
 }

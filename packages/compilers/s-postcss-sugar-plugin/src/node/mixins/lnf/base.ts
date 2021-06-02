@@ -37,11 +37,11 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
 export default function ({
   params,
   atRule,
-  processNested
+  replaceWith
 }: {
   params: IPostcssSugarPluginLookAndFeelBaseParams;
   atRule: any;
-  processNested: Function;
+  replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginLookAndFeelBaseParams = {
     ...params
@@ -64,6 +64,5 @@ export default function ({
     `
   ];
 
-  const AST = processNested(vars.join('\n'));
-  atRule.replaceWith(AST);
+  replaceWith(vars);
 }

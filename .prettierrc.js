@@ -8,5 +8,13 @@ module.exports = {
   svelteStrictMode: true,
   svelteBracketNewLine: true,
   svelteAllowShorthand: true,
-  svelteIndentScriptAndStyle: true
+  svelteIndentScriptAndStyle: true,
+  overrides: [
+    {
+      files: ['*.riot'],
+      options: {
+        parser: 'html'
+      }
+    }
+  ]
 };

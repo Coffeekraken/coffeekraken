@@ -1,5 +1,4 @@
 <s-highlight-js>
-
   <pre>
     <code class={ `language-${$props.language}` }></code>
   </pre>
@@ -11,7 +10,6 @@
   </style>
 
   <script>
-
     import prism from 'prismjs';
     import 'prismjs/components/prism-javascript';
     import 'prismjs/components/prism-css';
@@ -30,7 +28,13 @@
       },
       onMounted() {
         const $code = this.root.querySelector('code');
-        $code.innerHTML = prism.highlight(this.state.code.trim(), prism.languages.javascript, 'javascript').trim();
+        $code.innerHTML = prism
+          .highlight(
+            this.state.code.trim(),
+            prism.languages.javascript,
+            'javascript'
+          )
+          .trim();
 
         const themeImport = `@import url('${this.$props.theme}');`;
         const $style = document.createElement('style');
@@ -38,6 +42,6 @@
         $style.appendChild(document.createTextNode(themeImport));
         this.root.appendChild($style);
       }
-    }
+    };
   </script>
 </s-highlight-js>

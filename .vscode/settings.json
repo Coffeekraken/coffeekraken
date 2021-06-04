@@ -8,14 +8,15 @@
     },
     "**/*.js.map": true
   },
+  "files.associations": {
+    "*.riot": "html"
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  // Default (format when you paste)
   "editor.formatOnPaste": true,
-  // Default (format when you save)
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "SimonSiefke.prettier-vscode",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "todo-tree.general.enableFileWatcher": true,
   "todo-tree.general.tags": [
     "@todo",
@@ -95,8 +96,5 @@
       "background": "#64D5EE",
       "iconColour": "#64D5EE"
     }
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

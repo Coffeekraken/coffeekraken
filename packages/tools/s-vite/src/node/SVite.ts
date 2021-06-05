@@ -22,7 +22,10 @@ export interface ISViteCtorSettings {
 
 export interface ISViteStartParams {}
 export interface ISViteBuildParams {
+  input: string;
   prod: boolean;
+  noWrite: boolean;
+  watch: boolean;
   target: string;
   type: 'default' | 'lib' | 'bundle';
   chunks: boolean;
@@ -140,16 +143,39 @@ export default class SVite extends __SClass {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   build(params: ISViteBuildParams) {
+    const _this = this;
     return new __SPromise(
-      async ({ resolve, reject, emit }) => {
+      async ({ resolve, reject, emit, pipe }) => {
         const viteConfig = __SugarConfig.get('vite');
-        const duration = new __SDuration();
+        let duration = new __SDuration(), buildTimeout;
+
         const config: any = __deepMerge(viteConfig, {
           logLevel: 'silent',
           build: {
+            watch: params.watch ? {} : false,
             target: params.target ?? 'modules',
             write: false,
             rollupOptions: {
+              plugins: [{
+                buildStart() {
+                  duration = new __SDuration();
+                },
+                generateBundle(options, bundle) {
+                  if (params.noWrite) return;
+                  pipe(_this._writeBundleOnDisk(options, bundle, params));
+                  clearTimeout(buildTimeout);
+                  buildTimeout = setTimeout(() => {
+                    emit('log', {
+                      value: `<green>[success]</green> Build completed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`
+                    });
+                    if (params.watch) {
+                      emit('log', {
+                        value: `<cyan>[watch]</cyan> Watching for changes...`
+                      });
+                    }
+                  }, 500);
+                }
+              }],
               output: {
                 manualChunks(id) {
                   return 'index';
@@ -214,76 +240,70 @@ export default class SVite extends __SClass {
           }>`
         });
 
-        let builds: any = await __viteBuild(config);
+        const outputs: any[] = [];
+        if (params.type === 'lib') {
+          outputs.push({
+            // file: __path.resolve(
+            //   viteConfig.build.outDir,
+            //   `lib.es.js`
+            // ),
+            dir: __path.resolve(
+              viteConfig.build.outDir
+            ),
+            format: 'es',
+            ...(config.build.rollupOptions.output ?? {})
+          });
+          outputs.push({
+            // file: __path.resolve(
+            //   viteConfig.build.outDir,
+            //   `lib.umd.js`
+            // ),
+            dir: __path.resolve(
+              viteConfig.build.outDir,
+            ),
+            format: 'umd',
+            ...(config.build.rollupOptions.output ?? {})
+          });
+        } else if (params.type === 'bundle') {
+          outputs.push({
+            file: __path.resolve(
+              viteConfig.build.outDir,
+              `bundle.es.js`
+            ),
+            format: 'es',
+            ...(config.build.rollupOptions.output ?? {})
+          });
+          outputs.push({
+            file: __path.resolve(
+              viteConfig.build.outDir,
+              `bundle.umd.js`
+            ),
+            format: 'umd',
+            ...(config.build.rollupOptions.output ?? {})
+          });
+        } else {
+          outputs.push({
+            file: __path.resolve(
+              viteConfig.build.outDir,
+              `index.es.js`
+            ),
+            format: 'es',
+            ...(config.build.rollupOptions.output ?? {})
+          });
+          outputs.push({
+            file: __path.resolve(
+              viteConfig.build.outDir,
+              `index.umd.js`
+            ),
+            format: 'umd',
+            ...(config.build.rollupOptions.output ?? {})
+          });
+        }
 
-        if (!Array.isArray(builds)) builds = [builds];
+        config.build.rollupOptions.output = outputs;
 
-        builds.forEach((build) => {
-          if (build && build.output) {
-            build.output.forEach((output) => {
-              switch (output.type) {
-                case 'chunk':
-                  let outPath = __path.resolve(
-                    viteConfig.build.outDir,
-                    params.lib
-                      ? `index.${output.fileName.split('.').slice(1).join('.')}`
-                      : `${output.name}.js`
-                  );
+        __viteBuild(config);
 
-                  const finalCode = output.code;
-
-                  if (params.bundle) {
-                    if (output.name === 'index') {
-                      outPath = outPath.replace(/\.js$/, '.bundle.js');
-                    }
-                  }
-
-                  __writeFileSync(outPath, finalCode);
-
-                  const file = __SFile.new(outPath);
-
-                  if (params.bundle) {
-                    if (output.name === 'index') {
-                      emit('log', {
-                        value: `<green>[save]</green> Saving bundle file under "<cyan>${__path.relative(
-                          __packageRoot(),
-                          outPath
-                        )}</cyan>" <yellow>${
-                          file.stats.kbytes
-                        }</yellow><yellow>kb</yellow>`
-                      });
-                    } else {
-                      emit('log', {
-                        value: `<green>[save]</green> Saving chunk file under "<cyan>${__path.relative(
-                          __packageRoot(),
-                          outPath
-                        )}</cyan>" <yellow>${
-                          file.stats.kbytes
-                        }</yellow><yellow>kb</yellow>`
-                      });
-                    }
-                  } else {
-                    emit('log', {
-                      value: `<green>[save]</green> Saving file under "<cyan>${__path.relative(
-                        __packageRoot(),
-                        outPath
-                      )}</cyan>" <yellow>${
-                        file.stats.kbytes
-                      }</yellow><yellow>kb</yellow>`
-                    });
-                  }
-
-                  break;
-              }
-            });
-          }
-        });
-
-        emit('log', {
-          value: `<green>[success]</green> Build complete <green>successfully</green> in <yellow>${
-            duration.end().formatedDuration
-          }</yellow>`
-        });
       },
       {
         metas: {
@@ -292,4 +312,70 @@ export default class SVite extends __SClass {
       }
     );
   }
+
+  _writeBundleOnDisk(options, bundle, params) {
+    return new __SPromise(({resolve, reject, emit}) => {
+
+      Object.keys(bundle).forEach((fileName) => {
+        const bundleFileObj = bundle[fileName];
+
+        let outputFileName = `index.${fileName.split('.').slice(1).join('.')}`;
+        if (params.type.toLowerCase() === 'lib') {
+          outputFileName = `index.lib.${fileName.split('.').slice(1).join('.')}`
+        } else if (params.type.toLowerCase() === 'bundle') {
+          outputFileName = `index.bundle.${fileName.split('.').slice(1).join('.')}`
+        }
+        const outPath = __path.resolve(
+            options.dir,
+            outputFileName
+          );
+        const finalCode = bundleFileObj.code;
+
+        switch (bundleFileObj.type) {
+          case 'chunk':
+            
+
+            __writeFileSync(outPath, finalCode);
+
+            const file = __SFile.new(outPath);
+
+            if (params.type.toLowerCase() === 'bundle') {
+              emit('log', {
+                value: `<green>[save]</green> Saving bundle file under "<cyan>${__path.relative(
+                  __packageRoot(),
+                  outPath
+                )}</cyan>" <yellow>${
+                  file.stats.kbytes
+                }</yellow><yellow>kb</yellow>`
+              });
+            } else if (params.type.toLowerCase() === 'lib') {
+              emit('log', {
+                value: `<green>[save]</green> Saving lib file under "<cyan>${__path.relative(
+                  __packageRoot(),
+                  outPath
+                )}</cyan>" <yellow>${
+                  file.stats.kbytes
+                }</yellow><yellow>kb</yellow>`
+              });
+            } else {
+              emit('log', {
+                value: `<green>[save]</green> Saving file under "<cyan>${__path.relative(
+                  __packageRoot(),
+                  outPath
+                )}</cyan>" <yellow>${
+                  file.stats.kbytes
+                }</yellow><yellow>kb</yellow>`
+              });
+            }
+
+            break;
+          }
+        });
+
+       resolve();
+    });
+
+
+  }
+
 }

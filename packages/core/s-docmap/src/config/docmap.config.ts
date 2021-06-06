@@ -2,19 +2,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 export default {
-  /**
-   * @name        cache
-   * @namespace    config.docmap
-   * @type        Boolean
-   *
-   * Specify if you want to use the cache when read the files, find them, etc...
-   * You can alwπLsπays purge the cache using the ```purgeCache``` method on the SDocMap class
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  cache: true,
-
+  
   generate: {
     /**
      * @name            globs
@@ -124,36 +112,5 @@ export default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     outPath: `[config.storage.rootDir]/docmap.json`
-  },
-
-  find: {
-    /**
-     * @name                globs
-     * @namespace           config.docmap.find
-     * @type                    Array<String>
-     *
-     * Specify some globs to find the "docmap.json"
-     *
-     * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    globs: __unique([
-      'docmap.json',
-      `node_modules/**{2}/docmap.json`,
-      `${__packageRoot(process.cwd(), true)}/node_modules/**{2}/docmap.json`
-    ]),
-
-    /**
-     * @name        exclude
-     * @namespace   config.docmap.find
-     * @type        Array<String>
-     *
-     * Specify some regex to apply path properties
-     * to exclude some files from the generated docMap json
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    exclude: ['**/__tests__/**/*', '**/__wip__/**/*']
   }
 };

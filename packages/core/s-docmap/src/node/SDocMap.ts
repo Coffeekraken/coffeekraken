@@ -57,12 +57,6 @@ export interface ISDocMapGenerateParams {
   outPath: string;
   find: Partial<ISDocMapFindParams>;
 }
-export interface ISDocMapFindParams {
-  cache: boolean;
-  clearCache: boolean;
-  globs: string[];
-  exclude: string[];
-}
 
 export interface ISDocMapReadParams {
   path: string;
@@ -146,123 +140,6 @@ class SDocMap extends __SClass implements ISDocMap {
         settings || {}
       )
     );
-
-    // init the cache
-    this._cache = new __SCache(
-      this.metas.id === 'SDocMap' ? this.metas.id : `SDocMap-${this.metas.id}`
-    );
-  }
-
-  /**
-   * @name          clearCache
-   * @type          Function
-   * @async
-   *
-   * Clear the cached values
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  async clearCache() {
-    return await this._cache.clear();
-  }
-
-  /**
-   * @name          find
-   * @type          Function
-   *
-   * This static method allows you to search for docMap.json files and get back the array of pathes where to
-   * find the found files
-   *
-   * @todo      update documentation
-   *
-   * @param       {Object}        [settings={}]       A settings object to override the instance level ones
-   * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  find(params?: Partial<ISDocMapFindParams>) {
-    const findParams = <ISDocMapFindParams>(
-      __deepMerge(__SDocMapFindParamsInterface.defaults(), params || {})
-    );
-
-    return new __SPromise(async ({ resolve, reject, emit }) => {
-      // build the glob pattern to use
-      const patterns: string[] = findParams.globs || [];
-
-      if (findParams.clearCache) {
-        emit('log', {
-          group: `s-docmap-${this.metas.id}`,
-          value: '<yellow>[cache]</yellow> Clearing the cache...'
-        });
-        await this.clearCache();
-      }
-
-      // if (findParams.cache && !findParams.clearCache) {
-      //   const cachedValue = await this._cache.get('find-files');
-      //   if (cachedValue) {
-      //     emit('log', {
-      //       value: `<yellow>[${this.constructor.name}]</yellow> docmap.json file(s) getted from cache`
-      //     });
-      //     cachedValue.forEach((fileObj) => {
-      //       emit('log', {
-      //         value: `- <cyan>${__path.relative(
-      //           process.cwd(),
-      //           fileObj.path
-      //         )}</cyan>`
-      //       });
-      //     });
-      //     return resolve(cachedValue);
-      //   }
-      // }
-
-      let files: __SFile[] = [];
-      await __wait(1);
-
-      const searchStrArray: string[] = ['Searching docmaps using globs:'];
-      patterns.forEach((pat) => {
-        searchStrArray.push(`- <yellow>${pat}</yellow>`);
-      });
-      emit('log', {
-        group: `s-docmap-${this.metas.id}`,
-        value: searchStrArray.join('\n')
-      });
-
-      for (let i = 0; i < patterns.length; i++) {
-        const foundedFiles: __SFile[] = <any>await __SGlob.resolve(patterns[i]);
-        files = [...files, ...foundedFiles];
-      }
-
-      files = files.filter((file) => {
-        if (!__fs.existsSync(`${file.dirPath}/package.json`)) return false;
-        return true;
-      });
-
-      const findedStrArray: string[] = [
-        `Found <yellow>${files.length}</yellow> docmap file(s):`
-      ];
-      files.forEach((file) => {
-        findedStrArray.push(`- <cyan>${file.relPath}</cyan>`);
-      });
-      emit('log', {
-        group: `s-docmap-${this.metas.id}`,
-        value: findedStrArray.join('\n')
-      });
-
-      // save in cache if asked
-      // if (findParams.cache) {
-      //   emit('log', {
-      //     value: `<yellow>[${this.constructor.name}]</yellow> updating cache with found file(s)`
-      //   });
-      //   await this._cache.set(
-      //     'find-files',
-      //     files.map((file) => file.toObject())
-      //   );
-      // }
-
-      resolve(files);
-    });
   }
 
   /**
@@ -297,48 +174,29 @@ class SDocMap extends __SClass implements ISDocMap {
         );
       }
 
-      const rootPath = set.path.replace(/\/docmap\.json/, '');
-
+      const extendedPackages = [];
       let finalDocmapJson = {};
-      const extendedPackages: string[] = [];
-      function loadJson(path) {
-        let docMapJson;
-        let docmapJsonPath = path.match(/docmap\.json$/)
-          ? path
-          : `${path}/docmap.json`;
+
+      function loadJson(packageNameOrPath) {
+        if (extendedPackages.indexOf(packageNameOrPath) !== -1) return;
+        extendedPackages.push(packageNameOrPath);
         try {
-          docMapJson = require(docmapJsonPath);
-        } catch (e) {}
-
-        const rootModulePath = require
-          .resolve(docmapJsonPath)
-          .replace(/\/docmap\.json/, '');
-
-        Object.keys(docMapJson.map).forEach((namespace) => {
-          const docmapObj = docMapJson.map[namespace];
-          const absPath = __path.resolve(rootModulePath, docmapObj.relPath);
-          const relPath = __path.relative(rootPath, absPath);
-          docMapJson.map[namespace].relPath = relPath;
-          docMapJson.map[namespace].path = absPath;
-        });
-
-        // add the map
-        finalDocmapJson = {
-          ...finalDocmapJson,
-          ...(docMapJson.map ?? {})
-        };
-        // loop on extends
-        if (docMapJson.extends) {
-          docMapJson.extends.forEach((path) => {
-            if (extendedPackages.indexOf(path) === -1) {
-              extendedPackages.push(path);
-              loadJson(path);
-            }
-          });
+          const docmapJson = require(`${packageNameOrPath}/docmap.json`);
+          if (docmapJson.extends) {
+            docmapJson.extends.forEach(extendsPackageName => {
+              loadJson(extendsPackageName);
+            });
+          }
+          finalDocmapJson = {
+            ...finalDocmapJson,
+            ...(docmapJson.map ?? {})
+          };
+        } catch(e) {
+          // console.log('ERRO', e);
         }
       }
 
-      loadJson(set.path);
+      loadJson(__packageRoot());
 
       // return the final docmap
       resolve(finalDocmapJson);
@@ -381,9 +239,15 @@ class SDocMap extends __SClass implements ISDocMap {
       const packageJson = __packageJson();
 
       // searching for actual docmaps
-      const currentDocmapsPromise = this.find(params.find);
-      pipe(currentDocmapsPromise);
-      const currentDocmapsFiles = await currentDocmapsPromise;
+      // const currentDocmapsPromise = this.find(params.find);
+      // pipe(currentDocmapsPromise);
+      // const currentDocmapsFiles = await currentDocmapsPromise;
+
+      const currentDocmapsFiles = __SGlob.resolve('node_modules/**{0,2}/docmap.json', {
+        cwd: __packageRoot()
+      });
+
+      console.log('CUr', currentDocmapsFiles);
 
       const extendsArray: string[] = [];
       currentDocmapsFiles.forEach((file) => {
@@ -447,7 +311,7 @@ class SDocMap extends __SClass implements ISDocMap {
             // const path = __path.relative(outputDir, filepath);
             const filename = __getFilename(filepath);
 
-            let docblockEntryObj: ISDocMapEntry = {};
+            const docblockEntryObj: ISDocMapEntry = {};
 
             generateParams.fields.forEach((field) => {
               if (docblock[field] === undefined) return;

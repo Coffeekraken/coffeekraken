@@ -26,13 +26,18 @@ export default function sVitePluginRiotjs(riotSettings: any = {}) {
           comments: false
         });
 
-        let code = [
+        const code = [
           'import * as riot from "riot";',
           result.code.replace('export default ', 'const Component = '),
           // @ts-ignore
           `riot.register('${result.meta.tagName}', Component);`,
           // @ts-ignore
-          `riot.mount('${result.meta.tagName}');`,
+          'setTimeout(() => {',
+          `   riot.mount('${result.meta.tagName}');`,
+          '});',
+          `Component.mount = () => {
+            riot.mount('${result.meta.tagName}');
+          };`,
           'export default Component;'
         ].join('\n');
 

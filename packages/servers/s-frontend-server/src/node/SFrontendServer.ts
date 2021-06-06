@@ -170,6 +170,7 @@ export default class SFrontendServer extends __SClass {
           });
         }
 
+        // handlers registration
         Object.keys(frontendServerConfig.handlers).forEach((handlerId) => {
           const handlerObj = frontendServerConfig.handlers[handlerId];
           const handlerFn = require(handlerObj.handler).default;

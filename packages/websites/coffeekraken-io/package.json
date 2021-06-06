@@ -11,6 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-inline-svg-component": "^2.0.0",
+    "@coffeekraken/s-filtrable-input-component": "^2.0.0",
+    "@coffeekraken/s-request-component": "^2.0.0",
     "@coffeekraken/s-activate-component": "^2.0.0",
     "@coffeekraken/s-class": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0"

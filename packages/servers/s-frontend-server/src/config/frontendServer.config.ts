@@ -297,171 +297,55 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: `${__dirname}/../node/handlers/doc`
+    },
+    /**
+     * @name            docmap
+     * @namespace       config.frontendServer.handlers
+     * @type            Object
+     *
+     * Store all the "api doc" configuration access like the route, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    docmap: {
+      /**
+       * @name          route
+       * @namespace     config.frontendServer.handlers.docmap
+       * @type          String
+       * @default       /api/docmap
+       *
+       * Specify the url route to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      route: '/api/docmap',
+      /**
+       * @name          title
+       * @namespace     config.frontendServer.handlers.docmap
+       * @type          String
+       * @default       Views | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Docmap | [title]',
+      /**
+       * @name            handler
+       * @namespace       config.frontendServer.handlers.docmap
+       * @type            Function
+       * @default         ${__dirname}/../node/api/doc
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../node/handlers/docmap`
     }
-    // /**
-    //  * @name            docMap
-    //  * @namespace       config.frontendServer.handlers
-    //  * @type            Object
-    //  *
-    //  * Store all the "docMap" configuration access like the route, the title, etc...
-    //  *
-    //  * @since         2.0.0
-    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //  */
-    // docMap: {
-    //   /**
-    //    * @name          route
-    //    * @namespace     config.frontendServer.handlers.docMap
-    //    * @type          String
-    //    * @default       /docMap
-    //    *
-    //    * Specify the url route to use for this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   route: '/docMap',
-    //   /**
-    //    * @name          title
-    //    * @namespace     config.frontendServer.handlers.docMap
-    //    * @type          String
-    //    * @default       docMap | [title]
-    //    *
-    //    * Specify the page title wanted. Accessible tokens:
-    //    * - [title]: Name of the view
-    //    *
-    //    * @since       2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   title: 'docMap.json',
-    //   /**
-    //    * @name            handler
-    //    * @namespace       config.frontendServer.handlers.docMap
-    //    * @type            Function
-    //    *
-    //    * Specify the handler function that will take care of responding to this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   handler: `${__dirname}/../node/server/frontend/handlers/docMap`
-    // },
-    // /**
-    //  * @name            doc
-    //  * @namespace       config.frontendServer.handlers
-    //  * @type            Object
-    //  *
-    //  * Store all the accessible pages of the frontend development website
-    //  *
-    //  * @since         2.0.0
-    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //  */
-    // doc: {
-    //   /**
-    //    * @name            route
-    //    * @namespace       config.frontendServer.handlers.doc
-    //    * @type            String
-    //    * @default         /doc
-    //    *
-    //    * Specify the url route to use for this "section"
-    //    *
-    //    * @since           2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   route: '/doc',
-    //   /**
-    //    * @name            title
-    //    * @namespace       config.frontendServer.handlers.doc
-    //    * @type            String
-    //    * @default         Documentation | [title]
-    //    *
-    //    * Specify the title to use for this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   title: 'Documentation | [title]',
-    //   /**
-    //    * @name            handler
-    //    * @namespace       config.frontendServer.handlers.doc
-    //    * @type            Function
-    //    *
-    //    * Specify the handler function that will take care of responding to this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   handler: `${__dirname}/../node/server/frontend/handlers/doc`
-    // },
-    // /**
-    //  * @name            search
-    //  * @namespace       config.frontendServer.handlers
-    //  * @type            Object
-    //  *
-    //  * Store all the accessible pages of the frontend development website
-    //  *
-    //  * @since         2.0.0
-    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //  */
-    // search: {
-    //   /**
-    //    * @name            route
-    //    * @namespace       config.frontendServer.handlers.search
-    //    * @type            String
-    //    * @default         /search
-    //    *
-    //    * Search handler that handle the response to search requests
-    //    *
-    //    * @since           2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   route: '/search',
-    //   /**
-    //    * @name            title
-    //    * @namespace       config.frontendServer.handlers.search
-    //    * @type            String
-    //    * @default         Search | [title]
-    //    *
-    //    * Specify the title to use for this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   title: 'Search | [title]',
-    //   /**
-    //    * @name            handler
-    //    * @namespace       config.frontendServer.handlers.search
-    //    * @type            Function
-    //    *
-    //    * Specify the handler function that will take care of responding to this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   handler: `${__dirname}/../node/server/frontend/handlers/search`,
-    //   /**
-    //    * @name        settings
-    //    * @namespace   config.frontendServer.handlers.search
-    //    * @type        Object
-    //    *
-    //    * Specify the settings passes to the handle function.
-    //    * For more documentation about these settings, please see the
-    //    * handler function documentation.
-    //    *
-    //    * @since           2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   settings: {
-    //     rules: {
-    //       docMap: {
-    //         keyword: 'doc',
-    //         handler: `${__dirname}/../node/search/handlers/docMap`,
-    //         settings: {
-    //           filePath: `${__packageRoot()}/docMap.json`
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
   }
 };

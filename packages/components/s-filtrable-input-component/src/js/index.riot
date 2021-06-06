@@ -1,38 +1,26 @@
 <s-filtrable-input>
-  <div class="{component.className()}">
-    <ul class="{component.className('__list', 's-list')}">
+  <div class={component.className()}>
+    <ul class={component.className('__list', 's-list')}>
       <li
-        if="{ state.filteredItems.length <= 0 } class={component.className('__list-item __list-no-item')}"
+        if={ state.filteredItems.length <= 0 } class={component.className('__list-item __list-no-item')}
       >
         <s-raw-html
-          html="{ component.compileMustache(state.noItemTemplate, {}) }"
+          html={ component.compileMustache(state.noItemTemplate, {}) }
         ></s-raw-html>
       </li>
 
       <li
-        if="{ state.filteredItems.length }"
-        each="{ (item, idx) in state.filteredItems }"
-        style="z-index: {999999999 - idx}"
-        tabindex="{ state.isActive ? idx : -1}"
-        onfocus="{() => _setPreselectedItemIdx(idx) }"
-        ondblclick="{() => _selectAndValidate(idx) }"
-        class="
-          {component.className('__list-item')
-          +
-          ' '
-          +
-          (state.selectedItemIdx
-          ===
-          idx
-          ?
-          'active'
-          :
-          '')}
-        "
+        if={ state.filteredItems.length }
+        each={ (item, idx) in state.filteredItems }
+        style="z-index: { 999999999 - idx }"
+        tabindex={ state.isActive ? idx : -1}
+        onfocus={() => _setPreselectedItemIdx(idx) }
+        ondblclick={() => _selectAndValidate(idx) }
+        class={component.className('__list-item') + ' ' + (state.selectedItemIdx === idx ? 'active' : '')}
         hoverable
       >
         <s-raw-html
-          html="{ component.compileMustache(state.itemTemplate, item) }"
+          html={ component.compileMustache(state.itemTemplate, item) }
         ></s-raw-html>
       </li>
     </ul>
@@ -97,7 +85,6 @@
   </style>
 
   <script lang="ts">
-    import { mount } from 'riot';
     import __SRawHtmlComponent from '@coffeekraken/s-raw-html-component';
     import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface.ts';
     import __clone from '@coffeekraken/sugar/shared/object/clone';
@@ -110,6 +97,8 @@
     import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
     import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
     import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
+
+    export { __SFiltrableInputComponentInterface as interface};
 
     export default {
       $container: undefined,
@@ -142,16 +131,16 @@
         filteredItems: []
       },
       onBeforeMount() {
-        this.component = new __SComponent('s-filtrable-input', this.props, {
+        this.component = new __SComponent(this.root, this.props, {
           interface: __SFiltrableInputComponentInterface
         });
 
-        for (let i = 0; i < 1000; i++) {
-          this.state.items.push({
-            title: 'Coco ' + i,
-            body: `Lorem Ipsum is simply dummy text of the printing`
-          });
-        }
+        // for (let i = 0; i < 1000; i++) {
+        //   this.state.items.push({
+        //     title: 'Coco ' + i,
+        //     body: `Lorem Ipsum is simply dummy text of the printing`
+        //   });
+        // }
 
         this.state.displayedMaxItems = this.component.props.maxItems;
 
@@ -194,16 +183,18 @@
             value,
             displayedMaxItems: this.component.props.maxItems
           });
+          console.log('KEYUP');
           this.filterItems();
         });
-        this.$input.addEventListener('focus', (e) => {
-          const value = e.target.value;
-          this.update({
-            value,
-            displayedMaxItems: this.component.props.maxItems
-          });
-          this.filterItems();
-        });
+        // this.$input.addEventListener('focus', (e) => {
+        //   const value = e.target.value;
+        //   this.update({
+        //     value,
+        //     displayedMaxItems: this.component.props.maxItems
+        //   });
+        //   console.log('FOCUS');
+        //   this.filterItems();
+        // });
         this.$input.classList.add(this.component.className('__input'));
 
         this.root.innerHTML = '';
@@ -213,8 +204,10 @@
         this.$list = this.root.querySelector('ul');
 
         this.root.querySelector('.s-filtrable-input').prepend(this.$input);
+        console.log('MOUNTED');
         this.filterItems();
-        mount('s-raw-html');
+        // mount('s-raw-html');
+        __SRawHtmlComponent.mount();
 
         document.addEventListener('scroll', this._updateListSizeAndPosition);
         this.$input.addEventListener('focus', (e) => {
@@ -349,12 +342,25 @@
 
         this.$list.style.maxHeight = `${maxHeight}px`;
       },
-      filterItems() {
+      async filterItems() {
+
+        let items = this.state.items;
+
+        try {
+          const res = await this.component.dispatchSyncEvent('update', {
+            value: this.$input.value
+          });
+          if (res && res.length) items = res;
+        } catch(e) {
+      }
+
         let matchedItemsCount = 0;
-        const filteredItems = this.state.items
+        const filteredItems = items
           .map((item) => __clone(item))
           .filter((item) => {
             if (matchedItemsCount >= this.state.displayedMaxItems) return false;
+
+            if (!this.component.props.filtrable.length) return true;
 
             let matchFilter = false;
             for (let i = 0; i < Object.keys(item).length; i++) {
@@ -363,6 +369,7 @@
 
               // prevent not string value
               if (typeof propValue !== 'string') continue;
+              
               // check if the current propName is specified in the filtrable list
               if (this.component.props.filtrable.indexOf(propName) !== -1) {
                 const reg = new RegExp(this.state.value, 'gi');
@@ -385,6 +392,7 @@
             }
             return matchFilter;
           });
+        console.log('DI', filteredItems);
         this.update({
           filteredItems
         });

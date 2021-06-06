@@ -14,8 +14,6 @@
       targetSelector: undefined,
       onBeforeMount() {
 
-        console.log('COCO');
-
         this.$props = __SActivateComponentInterface.apply(this.props).value;
 
         if (!this.$props.target.match(/^(\.|\[])/)) {

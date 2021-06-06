@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __axios from 'axios';
-import __strToHtml from '@coffeekraken/sugar/shared/html/strToHtml';
-import __htmlToString from '@coffeekraken/sugar/shared/html/toString';
+import __strToHtml from '@coffeekraken/sugar/js/html/strToHtml';
+import __htmlToString from '@coffeekraken/sugar/js/html/toString';
 import __SRequestConfig from './SRequestConfig';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __convert from '@coffeekraken/sugar/shared/time/convert';
@@ -216,6 +216,7 @@ export default class SRequest extends __SClass {
    */
   _onError(error) {
     // something has gone wrong with the request(s) so reject the session
+    console.log('EEE', error);
     this._reject(error);
   }
 
@@ -292,7 +293,7 @@ export default class SRequest extends __SClass {
    */
   send(requestSettings = {}) {
     // return a promise
-    return new Promise(({ resolve, reject }) => {
+    return new Promise((resolve, reject) => {
       // // check if a cache exist and if we have the content
       // if (this._settings.cache) {
       //   const response = this._settings.cache.get(this._defaultRequestSettings.url);

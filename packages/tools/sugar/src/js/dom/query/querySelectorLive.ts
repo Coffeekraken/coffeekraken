@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import uniqid from '../../shared/string/uniqid';
-import matches from './query/matches';
+import uniqid from '../../../shared/string/uniqid';
+import matches from './matches';
 
 /**
  * @name      querySelectorLive
@@ -120,6 +120,7 @@ function querySelectorLive(selector, cb, settings = {}) {
 
   // first search
   [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
+    console.log(node, selector);
     pushNewNode(node, selector);
   });
 }

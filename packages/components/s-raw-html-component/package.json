@@ -1,4 +1,4 @@
-{
+    {
   "name": "@coffeekraken/s-raw-html-component",
   "version": "2.0.0",
   "description": "",
@@ -6,16 +6,17 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/js/index.umd.js",
-  "module": "./dist/js/index.es.js",
+  "main": "./dist/js/index.lib.umd.js",
+  "module": "./dist/js/index.lib.es.js",
   "exports": {
     ".": {
-      "import": "./dist/js/index.es.js",
-      "require": "./dist/js/index.umd.js"
+      "import": "./dist/js/index.lib.es.js",
+      "require": "./dist/js/index.lib.umd.js"
     }
   },
   "scripts": {
     "dev": "sugard frontstack dev",
+    "build": "sugard vite.build --lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -1,11 +1,13 @@
 <s-raw-html>
   <script>
     import __SComponentUtils from '@coffeekraken/s-component-utils';
-    const component = new __SComponentUtils('s-raw-html');
 
     export default {
+      onBeforeMount() {
+        this.component = new __SComponentUtils(this.root, {});
+      },
       setInnerHTML() {
-        this.root.innerHTML = component.decodeHtml(this.props.html);
+        this.root.innerHTML = this.component.decodeHtml(this.props.html);
       },
       onMounted() {
         this.setInnerHTML();

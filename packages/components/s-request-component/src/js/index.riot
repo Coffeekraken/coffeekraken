@@ -1,0 +1,74 @@
+<s-request>
+
+  <style type="postcss">
+    :host {
+      display: none;
+    }
+  </style>
+
+  <script>
+    import __SRequest from '@coffeekraken/s-request';
+    import __SRequestComponentInterface from './interface/SRequestComponentInterface.ts';
+    import __SComponentUtils from '@coffeekraken/s-component-utils';
+    import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+
+    export default {
+
+      _inlineProxyObj: undefined,
+
+      async onBeforeMount() {
+        this.component = new __SComponentUtils(this.root, this.props, {
+          interface: __SRequestComponentInterface
+        });
+
+        const $script = this.root.querySelector('script');
+        if ($script) {
+          const id = __uniqid();
+          let scriptText = $script.innerText.trim();
+          scriptText = scriptText.replace(/^export default /, `window['${`s-request-script-${id}`}'] = `);
+          const $newScript = document.createElement('script');
+          $newScript.text = scriptText;
+          $script.parentNode.insertBefore($newScript, $script);
+          $script.remove();
+          this._inlineProxyObj = window[`s-request-script-${id}`];
+        }
+
+        // console.log(__script);
+
+        switch(this.component.props.trigger) {
+          case 'event':
+            // requested props (on, $targets)
+            if (!this.component.props.on) throw new Error(`<red>[s-request${this.root.id ? `#${this.root.id}` : ''}]</red> When using the trigger "event", you MUST specify the "<yellow>on</yellow>" property to tell the component which event to listen to`);
+            if (!this.component.$targets.length) throw new Error(`<red>[s-request${this.root.id ? `#${this.root.id}` : ''}]</red> When using the trigger "event", you MUST specify the "<yellow>target</yellow>" property to tell the component which other HTMLElement to listen to`);
+            // listen for the event on the target
+            this.component.addTargetsEventListener(this.component.props.on, async (e) => {
+
+              const res = await this._request(e.detail);
+
+              return res;
+            });
+          break;
+        }
+
+      },
+      async _request(details) {
+
+        if (this._inlineProxyObj?.send) {
+          details = this._inlineProxyObj.send(details);
+        }
+
+        const request = new __SRequest({
+          type: this.component.props.type,
+          url: this.component.props.url
+        });
+        let res = await request.send();
+        if (this._inlineProxyObj?.receive) {
+          res = this._inlineProxyObj.receive(res);
+        }
+        return res;
+      },
+      onMounted() {
+      }
+    }
+  </script>
+</s-request>

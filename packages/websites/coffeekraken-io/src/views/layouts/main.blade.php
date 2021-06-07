@@ -3,10 +3,10 @@
 
 @section('body')
  
-    @include('layouts.header')
+    @include('layouts.header.header')
     
     @yield('content')
 
-    @include('layouts.footer')
+    @include('layouts.footer.footer')
 
 @endsection

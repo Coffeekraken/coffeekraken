@@ -18,6 +18,10 @@ export default class SActivateComponentInterface extends __SInterface {
     },
     on: {
       type: 'String'
+    },
+    cache: {
+      type: 'String|Boolean',
+      default: false
     }
   };
 }

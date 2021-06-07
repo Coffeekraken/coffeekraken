@@ -1,72 +1,30 @@
 export default {
-  extends: 'base',
+  extends: 'themeBase',
 
   color: {
     /**
-     * @name                default
+     * @name                neutral
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #ffffff
+     * @default             #776c94
      *
-     * Specify the <s-color="default">default</s-color> color value.
+     * Specify the <s-color="neutral">neutral</s-color> color value.
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    default: {
-      default: '#ffffff'
-    },
-
-    /**
-     * @name                text
-     * @namespace           config.theme.themes.default.color
-     * @type                Color
-     * @default             #848e91
-     *
-     * Specify the <s-color="text">text</s-color> color value.
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    text: {
-      default: '#848e91'
-    },
-
-    /**
-     * @name                title
-     * @namespace           config.theme.themes.default.color
-     * @type                Color
-     * @default             #2b3438
-     *
-     * Specify the <s-color="title">title</s-color> color value.
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    title: {
-      default: '#2b3438'
-    },
-
-    /**
-     * @name                link
-     * @namespace           config.theme.themes.default.color
-     * @type                Color
-     * @default             [config.theme.themes.dark.color.accent]
-     *
-     * Specify the <s-color="link">link</s-color> color value.
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    link: {
-      default: '[config.theme.themes.dark.color.accent]'
+    neutral: {
+      default: '#776c94',
+      '...': '[theme.colorStates]',
+      text: '--lighten 50',
+      background: '--darken 42'
     },
 
     /**
      * @name                ui
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #474059
+     * @default             #77708a
      *
      * Specify the <s-color="ui">ui</s-color> color value.
      *
@@ -74,26 +32,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     ui: {
-      default: '#474059',
-      text: '--lighten 40',
-      placeholder: '--lighten 20',
-      surface: '--lighten 0',
-      background: '--lighten 0',
-      border: '--lighten 0',
-      ':hover': {
-        text: '--lighten 40',
-        placeholder: '--lighten 30',
-        surface: '--lighten 0',
-        background: '--lighten 10',
-        border: '--lighten 0'
-      },
-      ':focus': {
-        text: '--lighten 40',
-        placeholder: '--lighten 30',
-        surface: '--lighten 10',
-        background: '--lighten 10',
-        border: '--lighten 0'
-      }
+      default: '#77708a',
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -109,22 +49,7 @@ export default {
      */
     accent: {
       default: '#FFD501',
-      text: '--darken 30',
-      highlight: '--lighten 0',
-      surface: '--lighten 45',
-      foreground: '--darken 0',
-      ':hover': {
-        surface: '--lighten 35',
-        foreground: '--darken 40'
-      },
-      ':focus': {
-        surface: '--lighten 20',
-        foreground: '--darken 40'
-      },
-      ':active': {
-        surface: '--lighten 0',
-        foreground: '--lighten 50'
-      }
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -139,37 +64,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     complementary: {
-      default: '#7F43FF'
-    },
-
-    /**
-     * @name                surface
-     * @namespace           config.theme.themes.default.color
-     * @type                Color
-     * @default             #1D1B23
-     *
-     * Specify the <s-color="surface">surface</s-color> color value.
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    surface: {
-      default: '#1D1B23'
-    },
-
-    /**
-     * @name                background
-     * @namespace           config.theme.themes.default.color
-     * @type                Color
-     * @default             #1D1B23
-     *
-     * Specify the <s-color="background">background</s-color> color value.
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    background: {
-      default: '#1D1B23'
+      default: '#7F43FF',
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -184,7 +80,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     success: {
-      default: '#B5F168'
+      default: '#B5F168',
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -199,7 +96,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     warning: {
-      default: '#FFD501'
+      default: '#FFD501',
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -214,7 +112,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     error: {
-      default: '#FF4370'
+      default: '#FF4370',
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -229,7 +128,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     info: {
-      default: '#FDA622'
+      default: '#FDA622',
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -244,7 +144,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     extension: {
-      default: '[config.theme.themes.dark.color.primary.default]',
+      default: '[theme.color.accent.default]',
       blade: '#ff2d20',
       php: '#8892BF',
       js: '#f7df1e',

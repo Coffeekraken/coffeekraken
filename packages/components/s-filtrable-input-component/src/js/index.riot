@@ -1,16 +1,28 @@
 <s-filtrable-input>
-  <div class={component.className()}>
+  
     <ul class={component.className('__list', 's-list')}>
       <li
-        if={ state.filteredItems.length <= 0 } class={component.className('__list-item __list-no-item')}
+        if={ state.isLoading} class={component.className('__list-item __list-loading')}
       >
         <s-raw-html
-          html={ component.compileMustache(state.noItemTemplate, {}) }
+          html={ component.compileMustache(state.loadingTemplate, {
+            value: state.value
+          }) }
         ></s-raw-html>
       </li>
 
       <li
-        if={ state.filteredItems.length }
+        if={ !state.isLoading && state.filteredItems.length <= 0 } class={component.className('__list-item __list-no-item')}
+      >
+        <s-raw-html
+          html={ component.compileMustache(state.noItemTemplate, {
+            value: state.value
+          }) }
+        ></s-raw-html>
+      </li>
+
+      <li
+        if={ !state.isLoading && state.filteredItems.length }
         each={ (item, idx) in state.filteredItems }
         style="z-index: { 999999999 - idx }"
         tabindex={ state.isActive ? idx : -1}
@@ -24,14 +36,14 @@
         ></s-raw-html>
       </li>
     </ul>
-  </div>
+
 
   <style type="postcss">
     :host {
       display: inline-block;
     }
 
-    .s-filtrable-input {
+    :host {
       @sugar.scope.bare {
         display: inline-block;
         position: relative;
@@ -106,28 +118,18 @@
       $input: undefined,
       $itemTemplateElm: undefined,
       $noItemTemplateElm: undefined,
+      $loadingTemplateElm: undefined,
       state: {
         itemTemplate: undefined,
         noItemTemplate: undefined,
+        loadingTemplate: undefined,
         preselectedItemIdx: -1,
         selectedItemIdx: -1,
         displayedMaxItems: 0,
         value: '',
         isActive: false,
-        items: [
-          {
-            title: 'Hello',
-            body: `Lorem Ipsum is simply dummy text of the printing`
-          },
-          {
-            title: 'Coco',
-            body: `Lorem Ipsum is simply dummy text of the printing`
-          },
-          {
-            title: 'Plopfopof',
-            body: `Lorem Ipsum is simply dummy text of the printing`
-          }
-        ],
+        isLoading: false,
+        items: [],
         filteredItems: []
       },
       onBeforeMount() {
@@ -147,10 +149,21 @@
         // try to get the item and no item template elm
         this.$itemTemplateElm = this.$('template#item');
         this.$noItemTemplateElm = this.$('template#no-item');
+        this.$loadingTemplateElm = this.$('template#loading');
         this.$input = this.$('input');
 
         if (this.component.props.defaultStyle) {
           this.$input.classList.add('s-form-input');
+        }
+
+        if (this.$loadingTemplateElm) {
+          this.state.loadingTemplate = this.$loadingTemplateElm.innerHTML;
+        } else {
+          this.state.loadingTemplate = `
+                <div class="${this.component.className('__loading')}">
+                    {{value}}
+                </div>
+            `;
         }
 
         if (this.$itemTemplateElm) {
@@ -183,7 +196,6 @@
             value,
             displayedMaxItems: this.component.props.maxItems
           });
-          console.log('KEYUP');
           this.filterItems();
         });
         // this.$input.addEventListener('focus', (e) => {
@@ -192,7 +204,6 @@
         //     value,
         //     displayedMaxItems: this.component.props.maxItems
         //   });
-        //   console.log('FOCUS');
         //   this.filterItems();
         // });
         this.$input.classList.add(this.component.className('__input'));
@@ -203,10 +214,8 @@
         this.$container = this.root.children[0];
         this.$list = this.root.querySelector('ul');
 
-        this.root.querySelector('.s-filtrable-input').prepend(this.$input);
-        console.log('MOUNTED');
+        this.root.prepend(this.$input);
         this.filterItems();
-        // mount('s-raw-html');
         __SRawHtmlComponent.mount();
 
         document.addEventListener('scroll', this._updateListSizeAndPosition);
@@ -225,7 +234,7 @@
               (this.state.displayedMaxItems ?? 0) +
               this.component.props.maxItems
           });
-          this.filterItems();
+          this.filterItems(false);
         });
 
         __hotkey('escape').on('press', (e) => {
@@ -342,17 +351,25 @@
 
         this.$list.style.maxHeight = `${maxHeight}px`;
       },
-      async filterItems() {
+      async filterItems(needUpdate = true) {
 
         let items = this.state.items;
 
-        try {
-          const res = await this.component.dispatchSyncEvent('update', {
-            value: this.$input.value
-          });
-          if (res && res.length) items = res;
-        } catch(e) {
-      }
+        if (needUpdate) {
+          try {
+            this.update({
+              isLoading: true
+            });
+            const res = await this.component.dispatchSyncEvent('update', {
+              value: this.$input.value
+            });
+            if (res && res.length) items = res;
+            this.update({
+              items: res,
+              isLoading: false
+            });
+          } catch(e) {}
+        }
 
         let matchedItemsCount = 0;
         const filteredItems = items
@@ -392,7 +409,6 @@
             }
             return matchFilter;
           });
-        console.log('DI', filteredItems);
         this.update({
           filteredItems
         });

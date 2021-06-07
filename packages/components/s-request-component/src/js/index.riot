@@ -11,6 +11,8 @@
     import __SRequestComponentInterface from './interface/SRequestComponentInterface.ts';
     import __SComponentUtils from '@coffeekraken/s-component-utils';
     import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+    import __SCache from '@coffeekraken/s-cache';
+    import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
     export default {
 
@@ -33,7 +35,10 @@
           this._inlineProxyObj = window[`s-request-script-${id}`];
         }
 
-        // console.log(__script);
+        // init cache if needed
+        if (this.component.props.cache) {
+          this._cache = new __SCache('s-request');
+        }
 
         switch(this.component.props.trigger) {
           case 'event':
@@ -51,19 +56,49 @@
         }
 
       },
-      async _request(details) {
+      async _request(data) {
 
-        if (this._inlineProxyObj?.send) {
-          details = this._inlineProxyObj.send(details);
+        const payload = {
+          type: this.component.props.type,
+          url: this.component.props.url,
+          data,
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          }
+        };
+
+        // calculate the cache hash
+        const cacheHash = __md5.encrypt(payload);
+
+        // check if a cache is available and activated
+        if (this.component.props.cache !== false) {
+          let cachedValue = await this._cache.get(cacheHash);
+          if (cachedValue) {
+            if (this._inlineProxyObj?.response) {
+              cachedValue = this._inlineProxyObj.response(cachedValue);
+            }
+            return cachedValue;
+          }
+        }
+        
+        if (this._inlineProxyObj?.request) {
+          data = this._inlineProxyObj.request(data);
         }
 
-        const request = new __SRequest({
-          type: this.component.props.type,
-          url: this.component.props.url
-        });
+        const request = new __SRequest(payload);
         let res = await request.send();
-        if (this._inlineProxyObj?.receive) {
-          res = this._inlineProxyObj.receive(res);
+
+        // save in cache if needed
+        if (this.component.props.cache !== false) {
+          await this._cache.set(cacheHash, res.data, {
+            ttl: typeof this.component.props.cache === 'string' ? this.component.props.cache : -1
+          });
+        }
+
+        if (this._inlineProxyObj?.response) {
+          res = this._inlineProxyObj.response(res);
         }
         return res;
       },

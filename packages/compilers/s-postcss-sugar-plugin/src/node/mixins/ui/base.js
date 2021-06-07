@@ -7,10 +7,14 @@ postcssSugarPluginUiBaseInterface.definition = {
     name: {
         type: 'String',
         required: true
+    },
+    color: {
+        type: 'String'
     }
 };
 export { postcssSugarPluginUiBaseInterface as interface };
 export default function ({ params, atRule, replaceWith }) {
+    var _a, _b;
     const finalParams = Object.assign({}, params);
     if (!finalParams.name)
         return;
@@ -25,26 +29,32 @@ export default function ({ params, atRule, replaceWith }) {
     // lnf
     vars.push(`
       @sugar.scope.lnf {
-        color: sugar.color(ui, text);
+        color: sugar.color(ui, foreground);
         background-color: sugar.color(ui, surface);
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
-        border: sugar.color(ui) solid 1px;
+        border: sugar.color(ui, border) solid 1px;
         border-radius: ${__themeVar(`ui.${finalParams.name}.borderRadius`)};
         transition: ${__themeVar(`ui.${finalParams.name}.transition`)};
         @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
 
         &:hover {
           @sugar.depth(20);
-          background-color: sugar.color(ui:hover, background);
-          color: sugar.color(ui:hover, text);
+          background-color: sugar.color(ui:hover, surface);
+          color: sugar.color(ui:hover, foreground);
+          border: sugar.color(ui:hover, border) solid 2px;
         }
-        &:focus {
-          background-color: sugar.color(ui:focus, background);
-          color: sugar.color(ui:focus, text);
+        @sugar.state.focus {
+          background-color: sugar.color(ui:focus, surface);
+          color: sugar.color(ui:focus, foreground);
+          border: sugar.color(${(_a = finalParams.color) !== null && _a !== void 0 ? _a : 'ui'}:focus, border) solid 2px;
         }
-
+        @sugar.state.active {
+          background-color: sugar.color(ui:active, surface);
+          color: sugar.color(ui:active, foreground);
+          border: sugar.color(${(_b = finalParams.color) !== null && _b !== void 0 ? _b : 'ui'}:active, border) solid 2px;
+        }
     }
   `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxVQUFVLE1BQU0sc0JBQXNCLENBQUM7QUFDOUMsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZOztBQUNuRCw0Q0FBVSxHQUFHO0lBQ2hCLElBQUksRUFBRTtRQUNGLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7S0FDakI7Q0FDSixDQUFDO0FBT0osT0FBTyxFQUFFLGlDQUFpQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTFELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDdkIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBS1o7SUFDQyxNQUFNLFdBQVcscUJBQ1osTUFBTSxDQUNWLENBQUM7SUFFRixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUk7UUFBRSxPQUFPO0lBRTlCLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixPQUFPO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7O21CQUdPLFVBQVUsQ0FBQyxNQUFNLFdBQVcsQ0FBQyxJQUFJLFVBQVUsQ0FBQzs7S0FFMUQsQ0FBQyxDQUFDO0lBRUwsTUFBTTtJQUNOLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7bUJBSU8sVUFBVSxDQUFDLE1BQU0sV0FBVyxDQUFDLElBQUksVUFBVSxDQUFDOzt5QkFFdEMsVUFBVSxDQUFDLE1BQU0sV0FBVyxDQUFDLElBQUksZUFBZSxDQUFDO3NCQUNwRCxVQUFVLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxhQUFhLENBQUM7dUJBQzlDLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxNQUFNLFdBQVcsQ0FBQyxJQUFJLFFBQVEsQ0FBQzs7Ozs7Ozs7Ozs7OztHQWFwRSxDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxVQUFVLE1BQU0sc0JBQXNCLENBQUM7QUFDOUMsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZOztBQUNuRCw0Q0FBVSxHQUFHO0lBQ2hCLElBQUksRUFBRTtRQUNGLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7S0FDakI7SUFDRCxLQUFLLEVBQUU7UUFDTCxJQUFJLEVBQUUsUUFBUTtLQUNmO0NBQ0osQ0FBQztBQVFKLE9BQU8sRUFBRSxpQ0FBaUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUUxRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaOztJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSTtRQUFFLE9BQU87SUFFOUIsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7bUJBR08sVUFBVSxDQUFDLE1BQU0sV0FBVyxDQUFDLElBQUksVUFBVSxDQUFDOztLQUUxRCxDQUFDLENBQUM7SUFFTCxNQUFNO0lBQ04sSUFBSSxDQUFDLElBQUksQ0FBQzs7OzttQkFJTyxVQUFVLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxVQUFVLENBQUM7O3lCQUV0QyxVQUFVLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxlQUFlLENBQUM7c0JBQ3BELFVBQVUsQ0FBQyxNQUFNLFdBQVcsQ0FBQyxJQUFJLGFBQWEsQ0FBQzt1QkFDOUMsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLE1BQU0sV0FBVyxDQUFDLElBQUksUUFBUSxDQUFDOzs7Ozs7Ozs7OztnQ0FXdkMsTUFBQSxXQUFXLENBQUMsS0FBSyxtQ0FBSSxJQUFJOzs7OztnQ0FLekIsTUFBQSxXQUFXLENBQUMsS0FBSyxtQ0FBSSxJQUFJOzs7R0FHdEQsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3BCLENBQUMifQ==

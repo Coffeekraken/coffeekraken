@@ -1,22 +1,17 @@
-<header class="s-container">
+<header id="header" class="s-container">
 
-    <div class="s-navbar">
+    <div class="s-flex:align-center" style="position: relative">
         <a href="/" title="Coffeekraken.io">
             <s-inline-svg src="/src/img/ck-logo.svg"></s-inline-svg>
         </a>
-        <nav class="s-navbar__grow s-align-center s-font-size-50 s-padding-y-60">
-            <a class="s-padding-x-50" href="/#features" title="Features">Features</a>
-            <a class="s-padding-x-50" href="/#get-started" title="Get started">Get started</a>
-            <a class="s-padding-x-50" href="/#documentation" title="Documentation">Documentation</a>
-        </nav>
-        <form name="search" id="search-form">
-            <s-request target="search-input" url="/api/docmap" on="update">
+        <form class="s-flex-item:order-10" name="search" id="search-form">
+            <s-request target="search-input" cache="1h" url="/api/docmap" on="update">
                 <script type="module">
                     export default {
-                        /* send(detail) {
+                        /* request(detail) {
                             return detail;
                         },*/
-                        receive(result) {
+                        response(result) {
                             const items = [];
                             Object.keys(result.data ?? result).forEach(docmapItemNamespace => {
                                 const itemObj = (result.data ?? result)[docmapItemNamespace];
@@ -27,10 +22,14 @@
                     }
                 </script>
             </s-request>
-            <s-filtrable-input id="search-input" filtrable="name,namespace" value="namespace">
+            <s-filtrable-input id="search-input" filtrable="name,namespace" value="namespace" default-style>
                 <input type="text" placeholder="Search doc (cmd+shift+p)" class="s-form-input" />
+                @php print('<template id="loading">
+                    <p clsas="s-p">Searching.Please wait...</p>
+                </template>');
+                @endphp
                 @php print('<template id="item">
-                    <h4 class="s-font-title s-color-accent-foreground">{{name}}</h4>
+                    <h4 class="s-font-title s-font-size-50 s-color-accent s-margin-bottom-10">{{name}} <span class="s-color-complementary s-font-size-30">{{namespace}}</span></h4>
                     <p clsas="s-p">{{description}}</p>
                 </template>');
                 @endphp
@@ -40,6 +39,11 @@
                 @endphp
             </s-filtrable-input>
         </form>
+        <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-align-center s-font-size-50 s-padding-y-60">
+            <a class="s-padding-x-50" href="/#features" title="Features">Features</a>
+            <a class="s-padding-x-50" href="/#get-started" title="Get started">Get started</a>
+            <a class="s-padding-x-50" href="/#documentation" title="Documentation">Documentation</a>
+        </nav>
     </div>
 
 </header>

@@ -463,14 +463,6 @@ summary {
   display: list-item;
 }
 
-/*
- * Remove outline for editable content.
- */
-
-[contenteditable] {
-  outline: none;
-}
-
 /* Table */
 /* ============================================ */
 
@@ -515,6 +507,8 @@ template {
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
 }
 
   `

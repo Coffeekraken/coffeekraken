@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
 import __isInScope from '../../utils/isInScope';
 import __astNodesToString from '../../utils/astNodesToString';
+import __postcss from 'postcss';
 
 class postcssSugarPluginScopeLnfMixinInterface extends __SInterface {
   static definition = {};
@@ -45,7 +46,6 @@ export default function ({
   }
 
   const vars: string[] = [];
-
   vars.push(`&:not(.s-no-lnf &):not(.s-no-lnf) {`);
   vars.push(__astNodesToString(atRule.nodes));
   vars.push(`}`);

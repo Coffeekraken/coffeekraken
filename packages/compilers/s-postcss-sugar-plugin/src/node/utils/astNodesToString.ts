@@ -16,10 +16,16 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function astNodesToString(nodes) {
-  return nodes
+  const res =  nodes
     .map((node) => {
       if (node.type === 'decl') return node.toString() + ';';
       return node.toString();
-    })
-    .join('\n');
+    }).map(item => {
+      item = item.trim();
+      if (!item.match(/\}$/) & !item.match(/;$/)) {
+        item += ';';
+      }
+      return item;
+    });
+    return res.join('\n');
 }

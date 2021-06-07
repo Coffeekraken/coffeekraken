@@ -1,5 +1,5 @@
 export default {
-  extends: 'base',
+  extends: 'themeBase',
 
   color: {
     /**

@@ -33,14 +33,14 @@ export default function ({ params, atRule, replaceWith }) {
         `
     @sugar.scope(lnf) {
         html {
-            background-color: sugar.color(background);
-            color: sugar.color(default);
+            background-color: sugar.color(neutral, background);
+            color: sugar.color(neutral, text);
             @sugar.font.family(default);
             @sugar.font.size(default);
         }
         ::selection {
             color: sugar.color(accent, text);
-             background-color: sugar.color(accent);
+            background-color: sugar.color(accent);
         }
     }
     `

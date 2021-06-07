@@ -175,6 +175,7 @@ export default class SSugarConfig {
               const valuePath = match
                 .replace('[theme.', themePath + '.')
                 .replace(']', '');
+
               const value = __get(config, valuePath);
               return value;
             }

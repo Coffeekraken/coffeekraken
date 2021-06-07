@@ -283,6 +283,20 @@ export default class SConfig {
 
     let config = this._adapters[adapter].instance.load(isUpdate);
 
+    Object.keys(config).forEach(configName => {
+      if (config[configName].extends && typeof config[configName].extends === 'string') {
+        const extend = config[configName].extends;
+        if (!config[extend]) {
+          throw new Error(`<red>[SConfig]</red> You have set an "<yellow>extends</yellow>" property to "<magenta>${extend}</magenta>" inside the "<cyan>${configName}</cyan>" config but this configuration you want to extends does not exists...`);
+        }
+        config[configName] = __deepMerge(
+          Object.assign({}, config[extend]),
+          config[configName]
+        );
+        delete config[configName].extends;
+      }
+    });
+
     this._settings.resolvers.forEach((resolverObj) => {
       config = this._resolveInternalReferences(config, config, resolverObj);
     });
@@ -388,20 +402,35 @@ export default class SConfig {
         originalValue = undefined;        
       }
     } else if (__isPlainObject(originalValue)) {
+      const afterObj = {};
+      let isAfter = false;
       Object.keys(originalValue).forEach((key) => {
         if (key === '...') {
-          originalValue = {
-            ...originalValue,
-            ...this._resolveInternalReferences(
-              originalValue[key],
+          isAfter = true;
+        } else if (isAfter) {
+          afterObj[key] = originalValue[key];
+        }
+      })
+      Object.keys(originalValue).forEach((key) => {
+        if (key === '...') {
+          const val = originalValue['...'];
+          const res = this._resolveInternalReferences(
+              val,
               config,
               resolverObj,
               [...path, key]
-            )
-          };
+            );
+          if (res !== val) {
+            delete originalValue['...'];
+            originalValue = __deepMerge(originalValue, res);
+          }
         }
       });
-      delete originalValue['...'];
+
+      // apply after object
+      originalValue = __deepMerge(originalValue, afterObj);
+
+      // delete originalValue['...'];
       Object.keys(originalValue).forEach((key) => {
         try {
           originalValue[key] = this._resolveInternalReferences(

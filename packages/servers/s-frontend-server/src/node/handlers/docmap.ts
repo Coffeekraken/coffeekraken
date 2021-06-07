@@ -27,7 +27,7 @@ export default async function docMap(req, res, settings = {}) {
         const docMap = new __SDocMap();
 
         const json = await docMap.read();
-
+        
         res.status(200);
         res.type('application/json');
         res.send(json);

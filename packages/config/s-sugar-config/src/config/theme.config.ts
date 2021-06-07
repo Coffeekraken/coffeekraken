@@ -7,17 +7,17 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 export function prepare(themeConfig, config) {
   Object.keys(themeConfig.themes).forEach((themeName) => {
     const themeObj = themeConfig.themes[themeName];
-    if (themeObj.extends && !themeConfig.themes[themeObj.extends]) {
-      throw new Error(
-        `<red>[theme.config.js]</red> The theme "<yellow>${themeName}</yellow>" need to extends the theme "<yellow>${themeObj.extends}</yellow>" but this theme does not exists...`
-      );
-    } else if (themeObj.extends) {
-      themeConfig.themes[themeName] = __deepMerge(
-        themeConfig.themes[themeObj.extends],
-        themeConfig.themes[themeName]
-      );
-      delete themeConfig.themes[themeName].extends;
-    }
+    // if (themeObj.extends && !themeConfig.themes[themeObj.extends]) {
+    //   throw new Error(
+    //     `<red>[theme.config.js]</red> The theme "<yellow>${themeName}</yellow>" need to extends the theme "<yellow>${themeObj.extends}</yellow>" but this theme does not exists...`
+    //   );
+    // } else if (themeObj.extends) {
+    //   themeConfig.themes[themeName] = __deepMerge(
+    //     themeConfig.themes[themeObj.extends],
+    //     themeConfig.themes[themeName]
+    //   );
+    //   delete themeConfig.themes[themeName].extends;
+    // }
     if (themeObj.color) {
       Object.keys(themeObj.color).forEach((colorName) => {
         Object.keys(themeObj.color[colorName]).forEach((colorVariantName) => {

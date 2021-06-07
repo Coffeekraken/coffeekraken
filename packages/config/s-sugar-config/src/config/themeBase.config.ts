@@ -59,6 +59,40 @@ export default {
             0 20px 26px rgba(0, 0, 0, 0.06)`
   },
 
+  colorStates: {
+    text: '--darken 0',
+    highlight: '--lighten 0',
+    placeholder: '--darken 20',
+    surface: '--darken 30',
+    foreground: '--lighten 40',
+    background: '--darken 40',
+    border: '--darken 25',
+    ':hover': {
+      text: '--lighten 0',
+      placeholder: '--darken 15',
+      surface: '--darken 25',
+      foreground: '--lighten 40',
+      background: '--darken 40',
+      border: '--darken 20'
+    },
+    ':focus': {
+      text: '--lighten 40',
+      placeholder: '--lighten 30',
+      surface: '--darken 20',
+      foreground: '--lighten 40',
+      background: '--darken 40',
+      border: '--darken 15'
+    },
+    ':active': {
+      text: '--lighten 40',
+      placeholder: '--lighten 30',
+      surface: '--darken 15',
+      foreground: '--lighten 45',
+      background: '--darken 40',
+      border: '--darken 10'
+    }
+  },
+
   size: {
     /**
      * @name          default
@@ -354,46 +388,46 @@ export default {
        * @name          20
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       10px
+       * @default       12px
        *
        * Declare the font size <s-color="accent">20</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      20: '10px',
+      20: '12px',
 
       /**
        * @name          30
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       12px
+       * @default       16px
        *
        * Declare the font size <s-color="accent">30</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      30: '12px',
+      30: '16px',
 
       /**
        * @name          40
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       16px
+       * @default       20px
        *
        * Declare the font size <s-color="accent">40</s-color>
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      40: '16px',
+      40: '20px',
 
       /**
        * @name          50
        * @namespace     config.theme.themes.default.font.size
        * @type          String
-       * @default       16px
+       * @default       24px
        *
        * Declare the font size <s-color="accent">50</s-color>
        *

@@ -195,6 +195,7 @@ const plugin = (settings: any = {}) => {
           finalNodes.push(n);
         }
       });
+
       for (const node of finalNodes.reverse()) {
         if (!node) continue;
         atRule.parent.insertAfter(atRule, node);

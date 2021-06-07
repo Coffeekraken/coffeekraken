@@ -147,6 +147,16 @@ export default class SComponentUtils extends __SClass {
           default: false
         }
       };
+      Object.keys(this._settings.interface.definition).forEach(propName => {
+        const obj = this._settings.interface.definition[propName];
+        if (obj.type && (obj.type === 'Boolean' || obj.type === 'boolean')) {
+          obj.type = {
+            type: 'Boolean',
+            nullishAsTrue: true
+          }
+          this._settings.interface.definition[propName] = obj;
+        }
+      });
 
       this.props = this._settings.interface.apply(this.props ?? {}).value;
 

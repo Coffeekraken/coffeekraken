@@ -3,7 +3,7 @@ import __themeVar from '../../../utils/themeVar';
 import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
 
-class postcssSugarPluginUiListUlInterface extends __SInterface {
+class postcssSugarPluginUiListInteractiveInterface extends __SInterface {
   static definition = {
     color: {
       type: 'String',
@@ -23,24 +23,24 @@ class postcssSugarPluginUiListUlInterface extends __SInterface {
   };
 }
 
-export interface IPostcssSugarPluginUiListUlParams {
+export interface IPostcssSugarPluginUiListInteractiveParams {
   color: string;
   textColor: string;
   style: 'default';
 }
 
-export { postcssSugarPluginUiListUlInterface as interface };
+export { postcssSugarPluginUiListInteractiveInterface as interface };
 
 export default function ({
   params,
   atRule,
   replaceWith
 }: {
-  params: Partial<IPostcssSugarPluginUiListUlParams>;
+  params: Partial<IPostcssSugarPluginUiListInteractiveParams>;
   atRule: any;
   replaceWith: Function;
 }) {
-  //   const finalParams: IPostcssSugarPluginUiListUlParams = {
+  //   const finalParams: IPostcssSugarPluginUiListInteractiveParams = {
   //     color: 'primary',
   //     ...params
   //   };
@@ -51,13 +51,14 @@ export default function ({
     @sugar.scope.lnf {
         background-color: sugar.color(surface);
 
-        & > li {
+        & > li,
+        & > dt {
           @sugar.ui.base(list);
           display: block !important;
           
           .s-highlight {
-            background-color: sugar.color(accent, highlight) !important;
-            color: white !important;
+            background-color: sugar.color(accent:highlight, background) !important;
+            color: sugar.color(accent:highlight, foreground) !important;
           }
         }
 

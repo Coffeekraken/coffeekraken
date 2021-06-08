@@ -4,20 +4,20 @@ export default {
   {{#if name}}<!-- @name    {{name}} -->{{/if}}
 
 {{#if name}}
-<h1 class="{{ classname 'h1' }}">
-  {{#if static}}
-    <span class="{{ classname 'db-static' }}">Static</span>
-  {{/if}}
-  {{#if get}}
-    <span class="{{ classname 'db-get' }}">get</span>
-  {{/if}}
-  {{#if set}}
-    <span class="{{ classname 'db-set' }}">set</span>
-  {{/if}}
-  <span class="{{ classname 'db-name' }}">
-    {{name}}
-  </span>
-</h1>
+  <h1 class="{{ classname 'h1' }}">
+    {{#if static}}
+      <span class="{{ classname 'db-static' }}">Static</span>
+    {{/if}}
+    {{#if get}}
+      <span class="{{ classname 'db-get' }}">get</span>
+    {{/if}}
+    {{#if set}}
+      <span class="{{ classname 'db-set' }}">set</span>
+    {{/if}}
+    <span class="{{ classname 'db-name' }}">
+      {{name}}
+    </span>
+  </h1>
 {{/if}}
 
 {{ tag 'since' }}

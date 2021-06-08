@@ -1,6 +1,6 @@
 <s-filtrable-input>
   
-    <ul class={component.className('__list', 's-list')}>
+    <ul class={component.className('__list', 's-list:interactive')}>
       <li
         if={ state.isLoading} class={component.className('__list-item __list-loading')}
       >
@@ -20,7 +20,7 @@
           }) }
         ></s-raw-html>
       </li>
-
+''
       <li
         if={ !state.isLoading && state.filteredItems.length }
         each={ (item, idx) in state.filteredItems }

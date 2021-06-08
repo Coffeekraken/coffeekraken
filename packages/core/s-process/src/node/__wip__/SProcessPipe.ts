@@ -19,6 +19,8 @@ import __typeof from '@coffeekraken/sugar/shared/value/typeof';
  * @param         {Array<SProcess>|Array<ISProcessObject>|Array<Function>}           processes           The processes you want to pipe
  * @param         {ISProcessSettings}               [settings={}]               Some settings to configure your process pipe instance
  *
+ * @setting       {String}          something       My cool setting
+ * 
  * @example         js
  * import SProcess, { SProcessPipe } from '@coffeekraken/s-process';
  * class MyProcess extends SProcess {

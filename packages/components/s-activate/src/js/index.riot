@@ -8,18 +8,31 @@
 
   <script>
     import __SActivateComponentInterface from './interface/SActivateComponentInterface.ts';
+    import __SComponentUtils from '@coffeekraken/s-component-utils';
+
     export default {
       $targets: undefined,
       $groupElements: undefined,
       targetSelector: undefined,
       onBeforeMount() {
 
-        this.$props = __SActivateComponentInterface.apply(this.props).value;
+        this.component = new __SComponentUtils(this.root, this.props, {
+          interface: __SActivateComponentInterface
+        });
 
-        if (!this.$props.target.match(/^(\.|\[])/)) {
-          this.targetSelector = `#${this.$props.target}`;
-        } else {
-          this.targetSelector = this.$props.target;
+        // save state
+        if (this.component.props.saveState) {
+          if (!this.root.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
+          this.component.props.active = localStorage.getItem(`s-activate-state-${this.root.id}`);
+
+        }
+
+        if (this.component.props.target) {
+          if (!this.component.props.target.match(/^(\.|\[])/)) {
+            this.targetSelector = `#${this.component.props.target}`;
+          } else {
+            this.targetSelector = this.component.props.target;
+          }
         }
 
       },
@@ -28,15 +41,15 @@
         const targets = Array.from(document.querySelectorAll(this.targetSelector));
         if (targets.length) this.$targets = targets;
 
-        if (this.$props.group) {
-          this.$groupElements = Array.from(document.querySelectorAll(`s-activate[group="${this.$props.group}"]`));
+        if (this.component.props.group) {
+          this.$groupElements = Array.from(document.querySelectorAll(`s-activate[group="${this.component.props.group}"]`));
         }
 
-        this.$props.trigger.forEach(trigger => {
+        this.component.props.trigger.forEach(trigger => {
           switch(trigger) {
             case 'click':
               this.root.addEventListener('click', (e) => {
-                if (this.isActive() && this.$props.toggle) {
+                if (this.isActive() && this.component.props.toggle) {
                   this.unactivate();
                 } else {
                   this.activate();
@@ -63,7 +76,7 @@
         this.root.isActive = this.isActive.bind(this);
 
         // activate if has the "active" attribute
-        if (this.$props.active) {
+        if (this.component.props.active) {
           this.activate(true);
         }
 
@@ -76,8 +89,14 @@
         // protect from activating multiple times
         if (!force && this.isActive()) return;
 
+        // save state
+        if (this.component.props.saveState) {
+          if (!this.root.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
+          localStorage.setItem(`s-activate-state-${this.root.id}`, true);
+        }
+
         // history
-        if (this.$props.history) {
+        if (this.component.props.history) {
           document.location.hash = this.targetSelector;
         }
 
@@ -95,9 +114,11 @@
         this.root.setAttribute('active', true);
 
         // loop on targets to activate them
-        this.$targets.forEach($target => {
-          $target.classList.add('active');
-        });
+        if (this.$targets) {
+          this.$targets.forEach($target => {
+            $target.classList.add('active');
+          });
+        }
 
       },
       unactivate() {
@@ -105,13 +126,21 @@
         // protect from unactivating multiple times
         if (!this.isActive()) return;
 
+        // save state
+        if (this.component.props.saveState) {
+          if (!this.root.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
+          localStorage.setItem(`s-activate-state-${this.root.id}`, false);
+        }
+
         // remove the "active" attribute to the component
         this.root.removeAttribute('active');
 
         // loop on targets to unactivate them
-        this.$targets.forEach($target => {
-          $target.classList.remove('active');
-        });
+        if (this.$targets) {
+          this.$targets.forEach($target => {
+            $target.classList.remove('active');
+          });
+        }
       }
     }
   </script>

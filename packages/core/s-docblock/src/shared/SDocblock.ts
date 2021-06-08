@@ -133,19 +133,20 @@ class SDocblock extends __SClass implements ISDocblock {
     );
 
     // check if the source is path
-    // if (__isPath(source)) {
-    //   if (!__isNode())
-    //     throw new Error(
-    //       `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`
-    //     );
-    //   if (!e.existsSync(source))
-    //     throw new Error(
-    //       `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`
-    //     );
-    //   this._source = __fs.readFileSync(source, 'utf8');
-    // } else {
-    this._source = source;
-    // }
+    if (__isPath(source)) {
+      if (!__isNode())
+        throw new Error(
+          `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`
+        );
+      const __fs = require('fs');
+      if (!__fs.existsSync(source))
+        throw new Error(
+          `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`
+        );
+      this._source = __fs.readFileSync(source, 'utf8');
+    } else {
+      this._source = source;
+    }
 
     // parsing the source
     this._blocks = this.parse();

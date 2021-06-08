@@ -42,19 +42,19 @@ export default function ({
   const vars: string[] = [];
 
   vars.push(`/**
-        * @name           s-list-ul,ul.s-list
-        * @namespace      sugar.css.ui.list-ul
+        * @name           s-list:interactive
+        * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
-        * This class represent a "<yellow>ul</yellow>" list
+        * This class represent an "<yellow>interactive</yellow>" list
         * 
         * @example        html
-        * <ul class="s-list" />
+        * <ul class="s-list:interactive" />
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
       */`);
-  vars.push([`ul.s-list,.s-list-ul {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
+  vars.push([`[class*="s-list"][class*=":interactive"]:not([class*=":ul"]):not([class*=":ol"]) {`, `@sugar.ui.list.interactive;`, `}`].join('\n'));
 
   replaceWith(vars);
 }

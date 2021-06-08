@@ -177,26 +177,46 @@ class SDocMap extends __SClass implements ISDocMap {
       const extendedPackages = [];
       let finalDocmapJson = {};
 
-      function loadJson(packageNameOrPath) {
+      function loadJson(packageNameOrPath, currentPath) {
         if (extendedPackages.indexOf(packageNameOrPath) !== -1) return;
         extendedPackages.push(packageNameOrPath);
+
+
+        let currentPathDocmapJsonPath;
         try {
-          const docmapJson = require(`${packageNameOrPath}/docmap.json`);
+          currentPathDocmapJsonPath = require.resolve(`${packageNameOrPath}/docmap.json`);
+        } catch(e) {
+          // console.log('__', e);
+        }
+
+        if (!currentPathDocmapJsonPath) return;
+
+        const extendsRootPath = require.resolve(currentPathDocmapJsonPath).replace('/docmap.json', '');
+
+        try {
+          const docmapJson = require(currentPathDocmapJsonPath);
+
           if (docmapJson.extends) {
             docmapJson.extends.forEach(extendsPackageName => {
-              loadJson(extendsPackageName);
+              loadJson(extendsPackageName, extendsRootPath);
             });
           }
+          Object.keys(docmapJson.map ?? {}).forEach(namespace => {
+            const obj = docmapJson.map[namespace];
+            obj.path = __path.resolve(extendsRootPath, obj.relPath);
+            docmapJson.map[namespace] = obj;
+          });
+
           finalDocmapJson = {
             ...finalDocmapJson,
             ...(docmapJson.map ?? {})
           };
         } catch(e) {
-          // console.log('ERRO', e);
+          console.log('ERRO', e);
         }
       }
 
-      loadJson(__packageRoot());
+      loadJson(__packageRoot(), __packageRoot());
 
       // return the final docmap
       resolve(finalDocmapJson);

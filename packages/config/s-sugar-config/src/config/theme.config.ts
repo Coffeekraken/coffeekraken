@@ -26,15 +26,15 @@ export function prepare(themeConfig, config) {
             Object.keys(colorValue).forEach((modifierName) => {
               const modifierValue = colorValue[modifierName];
 
-              if (
-                colorVariantName !== ':hover' &&
-                colorVariantName !== ':focus' &&
-                colorVariantName !== ':active'
-              ) {
-                throw new Error(
-                  `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but the specified state variant "<yellow>${modifierName}</yellow>" is not a valid one. Supported states are <green>:hover, :focus and :active</green>`
-                );
-              }
+              // if (
+              //   colorVariantName !== ':hover' &&
+              //   colorVariantName !== ':focus' &&
+              //   colorVariantName !== ':active'
+              // ) {
+              //   throw new Error(
+              //     `<red>[config.theme.${themeName}.color.${colorName}.${colorVariantName}.${modifierName}]</red> Sorry but the specified state variant "<yellow>${modifierName}</yellow>" is not a valid one. Supported states are <green>:hover, :focus and :active</green>`
+              //   );
+              // }
 
               if (__isColor(modifierValue)) {
                 throw new Error(

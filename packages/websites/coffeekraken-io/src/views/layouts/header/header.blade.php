@@ -8,9 +8,10 @@
             <s-request target="search-input" cache="1h" url="/api/docmap" on="update">
                 <script type="module">
                     export default {
-                        /* request(detail) {
-                            return detail;
-                        },*/
+                        request(payload) {
+                            delete payload.data.value;
+                            return payload;
+                        },
                         response(result) {
                             const items = [];
                             Object.keys(result.data ?? result).forEach(docmapItemNamespace => {
@@ -29,8 +30,10 @@
                 </template>');
                 @endphp
                 @php print('<template id="item">
-                    <h4 class="s-font-title s-font-size-50 s-color-accent s-margin-bottom-10">{{name}} <span class="s-color-complementary s-font-size-30">{{namespace}}</span></h4>
-                    <p clsas="s-p">{{description}}</p>
+                    <a href="/doc/{{namespace}}">
+                        <h4 class="s-font-title s-font-size-50 s-color-accent s-margin-bottom-10"><span class="s-color-success">{{type}}</span> {{name}} <span class="s-color-complementary s-font-size-30">{{namespace}}</span></h4>
+                        <p clsas="s-p">{{description}}</p>
+                    </a>
                 </template>');
                 @endphp
                 @php print('<template id="no-item">

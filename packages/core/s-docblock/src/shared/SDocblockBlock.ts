@@ -158,7 +158,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
       .map((l) => l.trim())
       .filter((l) => l !== '')
       .join('\n')
-      .replace(/\*\s\*/gm, '*')
+      // .replace(/\*\s\*/gm, '*')
       .replace(/^\/\*\*/, '/**\n*')
       .replace(/\*\/$/, '\n*/');
 
@@ -237,7 +237,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
     // split the block by tags
     let lines = this._source.trim().split('\n');
     if (!lines || !lines.length) return null;
-    lines = lines.map((l) => l.trim());
+    lines = lines.map((l) => l.trim()).filter(l => l !== '');
 
     lines.forEach((line) => {
       // get the tag name
@@ -265,7 +265,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
           currentObj.value = true;
         }
         previousWasEmptyLine = false;
-      } else if (previousWasEmptyLine) {
+      } else if (previousWasEmptyLine && !line.trim().match(/^\*\/$/)) {
         currentTag = 'description';
         currentContent = [line.replace('*', '')];
         currentObj = {};
@@ -289,25 +289,6 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
         return this.docblockBlockSettings.tags[prop](value);
       return __simpleValueTag(value);
     });
-
-    // if (
-    //   docblockObj['src'] &&
-    //   __isNode() &&
-    //   this.docblockBlockSettings.filepath
-    // ) {
-    //   const absoluteFilepath = __path.resolve(
-    //     this.docblockBlockSettings.filepath,
-    //     docblockObj['src']
-    //   );
-
-    //   const srcValue = __fs.readFileSync(absoluteFilepath, 'utf8');
-    //   const srcDocblockInstance = new __SDocblock(srcValue);
-    //   const srcBlocks: any[] = srcDocblockInstance.parse();
-    //   if (srcBlocks.length) {
-    //     const tags = srcBlocks[0].parse();
-    //     docblockObj = __deepMege(docblockObj, tags);
-    //   }
-    // }
 
     // save the raw string
     docblockObj.raw = this._source.toString();
@@ -381,6 +362,7 @@ SDocblockBlock.registerTag('variation', __simpleValueTag);
 SDocblockBlock.registerTag('version', __simpleValueTag);
 SDocblockBlock.registerTag('enum', __simpleValueTag);
 SDocblockBlock.registerTag('src', __simpleValueTag);
+SDocblockBlock.registerTag('feature', __simpleValueTag);
 SDocblockBlock.registerTag('description', __descriptionTag);
 SDocblockBlock.registerTag('desc', __descriptionTag);
 // SDocblockBlock.registerTag('yields', __yieldsTag);
@@ -390,6 +372,7 @@ SDocblockBlock.registerTag('return', __returnTag);
 SDocblockBlock.registerTag('param', __paramTag);
 SDocblockBlock.registerTag('property', __paramTag);
 SDocblockBlock.registerTag('prop', __paramTag);
+SDocblockBlock.registerTag('setting', __paramTag);
 // SDocblockBlock.registerTag('listens', __listensTag);
 // SDocblockBlock.registerTag('member', __memberTag);
 // SDocblockBlock.registerTag('var', __memberTag);

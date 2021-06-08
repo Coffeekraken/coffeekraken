@@ -47,27 +47,31 @@ export default function doc(req, res, settings = {}) {
       }
     });
 
-    const docsHtml: string[] = [];
+    const docblocks: string[] = [];
     for (let i = 0; i < Object.keys(filteredDocmapObj).length; i++) {
       const docmapObj = filteredDocmapObj[Object.keys(filteredDocmapObj)[i]];
       // generate the docblocks
+      console.log(docmapObj.path);
       const docblock = new __SDocblock(docmapObj.path, {});
+      docblocks.push(docblock.toObject());
 
-      if (i < 1) {
-        // render them into html
-        const htmlRenderer = new SDocblockHtmlRenderer(docblock);
-        const html = await htmlRenderer.render();
-        docsHtml.push(html);
-      } else {
-        docsHtml.push(`
-          <s-docblock-to-html>
-            ${docblock.toString()}
-          </s-docblock-to-html>
-        `);
-      }
+      // if (i < 1) {
+      //   // render them into html
+      //   const htmlRenderer = new SDocblockHtmlRenderer(docblock);
+      //   const html = await htmlRenderer.render();
+      //   docsHtml.push(html);
+      // } else {
+      //   docsHtml.push(`
+      //     <s-docblock-to-html>
+      //       ${docblock.toString()}
+      //     </s-docblock-to-html>
+      //   `);
+      // }
     }
 
-    if (!docsHtml.length) {
+    // console.log(docblocks);
+
+    if (!docblocks.length) {
       const html = await page404({
         title: `Documentation "${namespace}" not found`,
         body: `The documentation "${namespace}" you requested does not exists...`
@@ -79,10 +83,10 @@ export default function doc(req, res, settings = {}) {
     }
 
     // render the proper template
-    const docView = new __SViewRenderer('pages.doc');
+    const docView = new __SViewRenderer('pages.doc.doc');
     const pageHtml = await docView.render({
       ...(res.templateData || {}),
-      body: docsHtml.join('\n')
+      docs: docblocks
     });
 
     res.type('text/html');

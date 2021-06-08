@@ -4,7 +4,7 @@
         
         <div class="s-grid-122 s-grid-gutter-x:between">
             <div>
-                <s-inline-svg class="__illustration" src="/src/img/features-illustration.svg"></s-inline-svg>
+                <img class="__illustration" src="/src/img/features-illustration.svg" />
             </div>
             <div class="s-rhythm-vertical">
                 <h1 class="s-h1">Features</h1>

@@ -47,8 +47,10 @@
             if (!this.component.$targets.length) throw new Error(`<red>[s-request${this.root.id ? `#${this.root.id}` : ''}]</red> When using the trigger "event", you MUST specify the "<yellow>target</yellow>" property to tell the component which other HTMLElement to listen to`);
             // listen for the event on the target
             this.component.addTargetsEventListener(this.component.props.on, async (e) => {
-
-              const res = await this._request(e.detail);
+              const detail = Object.assign({}, e.detail);
+              delete detail.onPing;
+              delete detail.onResolve;
+              const res = await this._request(detail);
 
               return res;
             });
@@ -58,8 +60,8 @@
       },
       async _request(data) {
 
-        const payload = {
-          type: this.component.props.type,
+        let payload = {
+          type: this.component.props.type ?? 'get',
           url: this.component.props.url,
           data,
           headers: {
@@ -68,6 +70,10 @@
             'Expires': '0'
           }
         };
+
+        if (this._inlineProxyObj?.request) {
+          payload = this._inlineProxyObj.request(payload);
+        }
 
         // calculate the cache hash
         const cacheHash = __md5.encrypt(payload);
@@ -82,19 +88,22 @@
             return cachedValue;
           }
         }
-        
-        if (this._inlineProxyObj?.request) {
-          data = this._inlineProxyObj.request(data);
-        }
 
         const request = new __SRequest(payload);
         let res = await request.send();
 
         // save in cache if needed
-        if (this.component.props.cache !== false) {
-          await this._cache.set(cacheHash, res.data, {
-            ttl: typeof this.component.props.cache === 'string' ? this.component.props.cache : -1
-          });
+        for (let i = 0; i<2; i++) {
+          try {
+            if (this.component.props.cache !== false) {
+              await this._cache.set(cacheHash, res.data, {
+                ttl: typeof this.component.props.cache === 'string' ? this.component.props.cache : -1
+              });
+            }
+            break;
+          } catch(e) {
+            this._cache.clear();
+          }
         }
 
         if (this._inlineProxyObj?.response) {

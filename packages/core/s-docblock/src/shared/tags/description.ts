@@ -18,6 +18,9 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function description(data) {
+
+  if (Array.isArray(data)) data = data[0];
+
   if (data.content && data.content[data.content.length - 1] === '') {
     data.content = data.content.slice(0, -1);
   }

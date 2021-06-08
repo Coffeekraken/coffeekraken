@@ -29,6 +29,10 @@ export default class SActivateComponentInterface extends __SInterface {
       },
       default: false
     },
+    saveState: {
+      type: 'Boolean',
+      default: false
+    },
     trigger: {
       type: {
         type: 'Array<String>',

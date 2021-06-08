@@ -61,7 +61,6 @@ export default {
 
   colorStates: {
     text: '--darken 0',
-    highlight: '--lighten 0',
     placeholder: '--darken 20',
     surface: '--darken 30',
     foreground: '--lighten 40',
@@ -89,6 +88,14 @@ export default {
       surface: '--darken 15',
       foreground: '--lighten 45',
       background: '--darken 40',
+      border: '--darken 10'
+    },
+    ':highlight': {
+      text: '--darken 40',
+      placeholder: '--lighten 30',
+      surface: '--darken 15',
+      foreground: '--darken 40',
+      background: '--darken 0',
       border: '--darken 10'
     }
   },

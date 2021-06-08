@@ -28,6 +28,7 @@
         }
         .s-filtrable-input__list-item {
             @sugar.depth(20);
+            border-radius: 0 !important;
         }
     }
 

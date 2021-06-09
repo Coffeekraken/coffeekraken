@@ -27,16 +27,16 @@ export default function ({
   const fontsFamiliesObj = __theme().config('font.family');
   Object.keys(fontsFamiliesObj).forEach((fontName) => {
     vars.push(`/**
-  * @name          s-font-${fontName}
+  * @name          s-font:${fontName}
   * @namespace          sugar.css.font
   * @type               CssClass
   * 
   * This class allows you to apply the font "<yellow>${fontName}</yellow>" to any HTMLElement
   * 
   * @example        html
-  * <h1 class="s-font-${fontName}">Hello world</h1>
+  * <h1 class="s-font:${fontName}">Hello world</h1>
   */
-.s-font-${fontName} {
+[class*="s-font"][class*=":${fontName}"] {
     @sugar.font.family(${fontName});
 }`);
   });
@@ -44,16 +44,16 @@ export default function ({
   const fontsSizesObj = __theme().config('font.size');
   Object.keys(fontsSizesObj).forEach((sizeName) => {
     vars.push(`/**
-  * @name          s-font-size-${sizeName}
+  * @name          s-font:${sizeName}
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
   * 
   * This class allows you to apply the font size "<yellow>${sizeName}</yellow>" to any HTMLElement
   * 
   * @example        html
-  * <h1 class="s-font-size-${sizeName}">Hello world</h1>
+  * <h1 class="s-font:${sizeName}">Hello world</h1>
   */
-.s-font-size-${sizeName} {
+[class*="s-font"][class*=":${sizeName}"] {
     @sugar.font.size(${sizeName});
 }`);
   });

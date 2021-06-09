@@ -36,7 +36,7 @@ export default class SActivateComponentInterface extends __SInterface {
     trigger: {
       type: {
         type: 'Array<String>',
-        commaSplit: true
+        splitChars: [',']
       },
       default: ['click']
     }

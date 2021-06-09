@@ -56,5 +56,40 @@ export default function ({
       */`);
   vars.push([`[class*="s-list"][class*=":interactive"]:not([class*=":ul"]):not([class*=":ol"]) {`, `@sugar.ui.list.interactive;`, `}`].join('\n'));
 
+  // ul
+  vars.push(`/**
+        * @name           s-list:ul
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>ul</yellow>" list
+        * 
+        * @example        html
+        * <ul class="s-list:ul" />
+        *   <li>Hello</li>
+        *   <li>World</li>
+        * </ul>
+      */`);
+  vars.push([`[class*="s-list"][class*=":ul"]:not([class*=":interactive"]):not([class*=":ol"]) {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
+
+  // ul:icon
+  vars.push(`/**
+        * @name           s-list:ul:icon
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>ul</yellow>" list with some "<cyan>icon</cyan>" instead of the default bullet
+        * 
+        * @example        html
+        * <ul class="s-list:ul:icon" />
+        *   <li>
+        *     <i class="s-icon-user" />
+        *     Hello
+        *   </li>
+        * </ul>
+      */`);
+  vars.push([`[class*="s-list"][class*=":ul"][class*=":icon"]:not([class*=":interactive"]):not([class*=":ol"]) {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
+
+
   replaceWith(vars);
 }

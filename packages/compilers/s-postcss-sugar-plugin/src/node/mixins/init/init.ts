@@ -50,11 +50,13 @@ export default function ({
     '@sugar.align.classes;',
     '@sugar.space.classes;',
     '@sugar.size.classes;',
+    '@sugar.text.classes;',
     '@sugar.depth.classes;',
     '@sugar.util.classes;',
     '@sugar.flex.classes;',
     '@sugar.style.classes;',
-    '@sugar.typo.classes;'
+    '@sugar.typo.classes;',
+    '@sugar.icon.classes;'
   ];
 
   replaceWith(cssArray);

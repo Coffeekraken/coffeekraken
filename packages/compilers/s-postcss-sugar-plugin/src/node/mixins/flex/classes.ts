@@ -35,7 +35,7 @@ export default function ({
             * @example        html
             * <div class="s-flex"></div>
             */
-            [class*="s-flex"] {
+            [class*="s-flex"]:not([class*="s-flex-item"]) {
                 display: flex;
             }`);
 
@@ -49,7 +49,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:row"></div>
             */
-            [class*="s-flex"][class*=":row"] {
+            [class*="s-flex"][class*=":row"]:not([class*="s-flex-item"]) {
                 flex-direction: row;
             }`);
 
@@ -63,7 +63,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:row-reverse"></div>
             */
-            [class*="s-flex"][class*=":row-reverse"] {
+            [class*="s-flex"][class*=":row-reverse"]:not([class*="s-flex-item"]) {
                 flex-direction: row-reverse;
             }`);
 
@@ -77,7 +77,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:column"></div>
             */
-            [class*="s-flex"][class*=":column"] {
+            [class*="s-flex"][class*=":column"]:not([class*="s-flex-item"]) {
                 flex-direction: column;
             }`);
 
@@ -91,7 +91,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:column-reverse"></div>
             */
-            [class*="s-flex"][class*=":column-reverse"] {
+            [class*="s-flex"][class*=":column-reverse"]:not([class*="s-flex-item"]) {
                 flex-direction: column-reverse;
             }`);
 
@@ -105,7 +105,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:nowrap"></div>
             */
-            [class*="s-flex"][class*=":nowrap"] {
+            [class*="s-flex"][class*=":nowrap"]:not([class*="s-flex-item"]) {
                 flex-wrap: nowrap;
             }`);
 
@@ -119,7 +119,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:wrap"></div>
             */
-            [class*="s-flex"][class*=":wrap"] {
+            [class*="s-flex"][class*=":wrap"]:not([class*="s-flex-item"]) {
                 flex-wrap: wrap;
             }`);
 
@@ -133,7 +133,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:wrap-reverse"></div>
             */
-            [class*="s-flex"][class*=":wrap-reverse"] {
+            [class*="s-flex"][class*=":wrap-reverse"]:not([class*="s-flex-item"]) {
                 flex-wrap: wrap-reverse;
             }`);
 
@@ -147,7 +147,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-start"></div>
             */
-            [class*="s-flex"][class*=":justify-start"] {
+            [class*="s-flex"][class*=":justify-start"]:not([class*="s-flex-item"]) {
                 justify-content: start;
             }`);
     
@@ -161,7 +161,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-flex-start"></div>
             */
-            [class*="s-flex"][class*=":justify-flex-start"] {
+            [class*="s-flex"][class*=":justify-flex-start"]:not([class*="s-flex-item"]) {
                 justify-content: flex-start;
             }`);
 
@@ -175,7 +175,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-end"></div>
             */
-            [class*="s-flex"][class*=":justify-end"] {
+            [class*="s-flex"][class*=":justify-end"]:not([class*="s-flex-item"]) {
                 justify-content: end;
             }`);
     
@@ -189,7 +189,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-flex-end"></div>
             */
-            [class*="s-flex"][class*=":justify-flex-end"] {
+            [class*="s-flex"][class*=":justify-flex-end"]:not([class*="s-flex-item"]) {
                 justify-content: flex-end;
             }`);
 
@@ -203,7 +203,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-center"></div>
             */
-            [class*="s-flex"][class*=":justify-center"] {
+            [class*="s-flex"][class*=":justify-center"]:not([class*="s-flex-item"]) {
                 justify-content: center;
             }`);
 
@@ -217,7 +217,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-space-between"></div>
             */
-            [class*="s-flex"][class*=":justify-space-between"] {
+            [class*="s-flex"][class*=":justify-space-between"]:not([class*="s-flex-item"]) {
                 justify-content: space-between;
             }`);
 
@@ -231,7 +231,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-space-around"></div>
             */
-            [class*="s-flex"][class*=":justify-space-around"] {
+            [class*="s-flex"][class*=":justify-space-around"]:not([class*="s-flex-item"]) {
                 justify-content: space-around;
             }`);
 
@@ -245,7 +245,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-space-evenly"></div>
             */
-            [class*="s-flex"][class*=":justify-space-evenly"] {
+            [class*="s-flex"][class*=":justify-space-evenly"]:not([class*="s-flex-item"]) {
                 justify-content: space-evenly;
             }`);
 
@@ -259,7 +259,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:justify-stretch"></div>
             */
-            [class*="s-flex"][class*=":justify-stretch"] {
+            [class*="s-flex"][class*=":justify-stretch"]:not([class*="s-flex-item"]) {
                 justify-content: stretch;
             }`);
 
@@ -273,7 +273,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:align-start"></div>
             */
-            [class*="s-flex"][class*=":align-start"] {
+            [class*="s-flex"][class*=":align-start"]:not([class*="s-flex-item"]) {
                 align-items: start;
             }`);
 
@@ -287,7 +287,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:align-flex-start"></div>
             */
-            [class*="s-flex"][class*=":align-flex-start"] {
+            [class*="s-flex"][class*=":align-flex-start"]:not([class*="s-flex-item"]) {
                 align-items: flex-start;
             }`);
 
@@ -301,7 +301,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:align-end"></div>
             */
-            [class*="s-flex"][class*=":align-end"] {
+            [class*="s-flex"][class*=":align-end"]:not([class*="s-flex-item"]) {
                 align-items: end;
             }`);
 
@@ -315,7 +315,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:align-flex-end"></div>
             */
-            [class*="s-flex"][class*=":align-flex-end"] {
+            [class*="s-flex"][class*=":align-flex-end"]:not([class*="s-flex-item"]) {
                 align-items: flex-end;
             }`);
 
@@ -329,7 +329,7 @@ export default function ({
             * @example        html
             * <div class="s-flex:align-center"></div>
             */
-            [class*="s-flex"][class*=":align-center"] {
+            [class*="s-flex"][class*=":align-center"]:not([class*="s-flex-item"]) {
                 align-items: center;
             }`);
 
@@ -343,9 +343,41 @@ export default function ({
             * @example        html
             * <div class="s-flex:align-baseline"></div>
             */
-            [class*="s-flex"][class*=":align-baseline"] {
+            [class*="s-flex"][class*=":align-baseline"]:not([class*="s-flex-item"]) {
                 align-items: baseline;
             }`);
+
+    vars.push(`/**
+        * @name          s-flex-item:grow
+        * @namespace          sugar.css.flex
+        * @type               CssClass
+        * 
+        * This class allows specify the flex-grow property of a flex item to 1
+        * 
+        * @example        html
+        * <div class="s-flex">
+        *   <div class="s-flex-item:grow"></div>
+        * </div>
+        */
+        [class*="s-flex-item"][class*=":grow"]:not([class*=":grow-"]) {
+            flex-grow: 1;
+        }`);
+
+    vars.push(`/**
+        * @name          s-flex-item:shrink
+        * @namespace          sugar.css.flex
+        * @type               CssClass
+        * 
+        * This class allows specify the flex-shrink property of a flex item to 1
+        * 
+        * @example        html
+        * <div class="s-flex">
+        *   <div class="s-flex-item:shrink"></div>
+        * </div>
+        */
+        [class*="s-flex-item"][class*=":shrink"]:not([class*=":shrink-"]) {
+            flex-shrink: 1;
+        }`);
 
     for (let i=1; i<20; i++) {
         vars.push(`/**
@@ -363,7 +395,8 @@ export default function ({
                 [class*="s-flex-item"][class*=":order-${i}"] {
                     order: ${i};
                 }`);
-            }
+    }
+
 
     for (let i=1; i<20; i++) {
         vars.push(`/**

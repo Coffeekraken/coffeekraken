@@ -29,7 +29,7 @@ export default function ({
 
   Object.keys(spacesObj).forEach((spaceName) => {
     // margins
-    const clsMargin = `s-margin-${spaceName}`;
+    const clsMargin = `s-m:${spaceName}`;
     vars.push(`/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.space
@@ -43,12 +43,12 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsMargin} {
+   [class*="${clsMargin}"] {
         margin: sugar.space(${spaceName});
    }`);
-    const clsMarginTop = `s-margin-top-${spaceName}`;
+    const clsMarginTop = `s-mt:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsMarginTop}
+    * @name            ${clsMarginTop}
     * @namespace        sugar.css.space
     * @type             CssClass
     * 
@@ -60,10 +60,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsMarginTop} {
+   [class*="${clsMarginTop}"] {
         margin-top: sugar.space(${spaceName});
    }`);
-    const clsMarginBottom = `s-margin-bottom-${spaceName}`;
+    const clsMarginBottom = `s-mb:${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginBottom}
     * @namespace        sugar.css.space
@@ -77,12 +77,12 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsMarginBottom} {
+   [class*="${clsMarginBottom}"] {
         margin-bottom: sugar.space(${spaceName});
    }`);
-    const clsMarginLeft = `s-margin-left-${spaceName}`;
+    const clsMarginLeft = `s-ml:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsMarginLeft}
+    * @name            ${clsMarginLeft}
     * @namespace        sugar.css.space
     * @type             CssClass
     * 
@@ -94,10 +94,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsMarginLeft} {
+   [class*="${clsMarginLeft}"] {
         margin-left: sugar.space(${spaceName});
    }`);
-    const clsMarginRight = `s-margin-right-${spaceName}`;
+    const clsMarginRight = `s-mr:${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginRight}
     * @namespace        sugar.css.space
@@ -111,12 +111,12 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsMarginRight} {
+   [class*="${clsMarginRight}"] {
         margin-right: sugar.space(${spaceName});
    }`);
-    const clsMarginX = `s-margin-x-${spaceName}`;
+    const clsMarginX = `s-mx:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsMarginX}
+    * @name            ${clsMarginX}
     * @namespace        sugar.css.space
     * @type             CssClass
     * 
@@ -128,13 +128,13 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsMarginX} {
+     [class*="${clsMarginX}"] {
         margin-left: sugar.space(${spaceName});
         margin-right: sugar.space(${spaceName});
    }`);
-    const clsMarginY = `s-margin-y-${spaceName}`;
+    const clsMarginY = `s-my:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsMarginY}
+    * @name            ${clsMarginY}
     * @namespace        sugar.css.space
     * @type             CssClass
     * 
@@ -146,7 +146,7 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsMarginY} {
+   [class*="${clsMarginY}"] {
         margin-top: sugar.space(${spaceName});
         margin-bottom: sugar.space(${spaceName});
    }`);

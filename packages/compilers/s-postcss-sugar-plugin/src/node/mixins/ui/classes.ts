@@ -29,9 +29,11 @@ export default function ({
   replaceWith: Function;
 }) {
   const cssArray = [
-    `@sugar.ui.button.classes;`,
+    '@sugar.ui.avatar.classes;',
+    '@sugar.ui.button.classes;',
     '@sugar.ui.form.classes;',
     '@sugar.ui.list.classes;',
+    '@sugar.ui.badge.classes;',
     '@sugar.ui.navbar.classes;',
     '@sugar.ui.terminal.classes;'
   ];

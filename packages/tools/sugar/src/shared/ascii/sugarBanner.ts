@@ -52,7 +52,7 @@ function sugarBanner(settings: Partial<ISugarBannerSettings> = {}): string {
     )}  ____                           </yellow>`,
     `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
       settings.marginLeft
-    )}/ ____|</yellow><white>Coffee<cyan>kraken</cyan></white><yellow> __ _ _ __   </yellow>`,
+    )}/ ____|</yellow><white>Coffee<magenta>kraken</magenta></white><yellow> __ _ _ __   </yellow>`,
     `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
       settings.marginLeft
     )}\\___ \\| | | |/ _\` |/ _\` | \`__|  </yellow>`,

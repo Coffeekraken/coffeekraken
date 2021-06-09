@@ -3,6 +3,8 @@
 import __isJson from '../is/json';
 import toString from '../string/toString';
 import parse from '../string/parse';
+import __btoa from 'btoa';
+import __atob from 'atob';
 
 /**
  * @name            base64
@@ -33,7 +35,7 @@ export default {
    */
   encrypt: function (message) {
     if (typeof message !== 'string') message = toString(message);
-    return btoa(message);
+    return __btoa(message);
   },
 
   /**
@@ -49,7 +51,7 @@ export default {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   decrypt: function (message) {
-    message = atob(message);
+    message = __atob(message);
     return parse(message);
   }
 };

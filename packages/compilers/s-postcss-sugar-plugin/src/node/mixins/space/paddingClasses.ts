@@ -28,7 +28,7 @@ export default function ({
 
   Object.keys(spacesObj).forEach((spaceName) => {
     // paddings
-    const clsPadding = `s-padding-${spaceName}`;
+    const clsPadding = `s-pd:${spaceName}`;
     vars.push(`/**
     * @name            ${clsPadding}
     * @namespace        sugar.css.mixins.space
@@ -42,12 +42,12 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsPadding} {
+   [class*="${clsPadding}"] {
         padding: sugar.space(${spaceName});
    }`);
-    const clsPaddingTop = `s-padding-top-${spaceName}`;
+    const clsPaddingTop = `s-pt:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsPaddingTop}
+    * @name            ${clsPaddingTop}
     * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
@@ -59,12 +59,12 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsPaddingTop} {
+   [class*="${clsPaddingTop}"] {
         padding-top: sugar.space(${spaceName});
    }`);
-    const clsPaddingBottom = `s-padding-bottom-${spaceName}`;
+    const clsPaddingBottom = `s-pb:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsPaddingBottom}
+    * @name            ${clsPaddingBottom}
     * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
@@ -76,10 +76,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsPaddingBottom} {
+   [class*="${clsPaddingBottom}"] {
         padding-bottom: sugar.space(${spaceName});
    }`);
-    const clsPaddingLeft = `s-padding-left-${spaceName}`;
+    const clsPaddingLeft = `s-pl:${spaceName}`;
     vars.push(`/**
     * @name            .${clsPaddingLeft}
     * @namespace        sugar.css.mixins.space
@@ -93,12 +93,12 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsPaddingLeft} {
+   [class*="${clsPaddingLeft}"] {
         padding-left: sugar.space(${spaceName});
    }`);
-    const clsPaddingRight = `s-padding-right-${spaceName}`;
+    const clsPaddingRight = `s-pr:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsPaddingRight}
+    * @name            ${clsPaddingRight}
     * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
@@ -110,12 +110,12 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsPaddingRight} {
+   [class*="${clsPaddingRight}"] {
         padding-right: sugar.space(${spaceName});
    }`);
-    const clsPaddingX = `s-padding-x-${spaceName}`;
+    const clsPaddingX = `s-px:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsPaddingX}
+    * @name            ${clsPaddingX}
     * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
@@ -127,13 +127,13 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsPaddingX} {
+   [class*="${clsPaddingX}"] {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
    }`);
-    const clsPaddingY = `s-padding-y-${spaceName}`;
+    const clsPaddingY = `s-py:${spaceName}`;
     vars.push(`/**
-    * @name            .${clsPaddingY}
+    * @name            ${clsPaddingY}
     * @namespace        sugar.css.mixins.space
     * @type             CssClass
     * 
@@ -145,7 +145,7 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${clsPaddingY} {
+   [class*="${clsPaddingY}"] {
         padding-top: sugar.space(${spaceName});
         padding-bottom: sugar.space(${spaceName});
    }`);

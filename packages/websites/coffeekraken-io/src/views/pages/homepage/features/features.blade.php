@@ -1,6 +1,6 @@
 <div id="homepage-features">
 
-    <section class="s-container s-padding-y-100">
+    <section class="s-container s-py:100">
         
         <div class="s-grid-122 s-grid-gutter-x:between">
             <div>
@@ -40,7 +40,7 @@
         <div class="__contents">
             <section id="features-development">
                 <div class="s-grid-12 s-grid-gutter-x:between">
-                    <div class="s-padding-y-100 s-rhythm-vertical">
+                    <div class="s-py:100 s-rhythm-vertical">
                         <img src="/src/img/features-development-logos.svg" />
 
                         <span class="s-terminal">
@@ -48,7 +48,7 @@
                         </span>
 
                     </div>
-                    <div class="s-padding-y-100 s-rhythm-vertical">
+                    <div class="s-py:100 s-rhythm-vertical">
                         <h2 class="s-h2">Development<br>stack</h2>
                         <p class="s-p">
                             Coffeekraken development stack, represented by the package <a href="#" class="s-color-accent">@coffeekraken/frontstack</a>, is the easiest entry point to the <span class="s-color-complementary">coffeekraken modular ecosystem</span>.

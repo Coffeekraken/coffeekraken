@@ -85,5 +85,24 @@ export default function ({
     `);
   });
 
+  vars.push(`/**
+        * @name           s-btn:shrinked
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">shrinked</s-color>" button
+        * 
+        * @example        html
+        * <a class="s-btn:shrinked">I'm a cool button</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */`);
+    vars.push(`
+      [class*="s-btn"][class*=":shrinked"] {
+        @sugar.ui.button($shrinked: true, $scope: shrinked);
+      }
+    `);
+
   replaceWith(vars);
 }

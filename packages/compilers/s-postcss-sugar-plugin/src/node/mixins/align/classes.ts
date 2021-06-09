@@ -28,58 +28,7 @@ export default function ({
   vars.push(`
 
     @sugar.scope(bare) {
-
-        /**
-         * @name            s-align-left
-         * @namespace       sugar.css.mixins.align
-         * @type            CssClass
-         * 
-         * This class allows you to align text to the left side
-         * 
-         * @example     html
-         * <div class="s-align-left">Hello world</div>
-         * 
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        .s-align-left {
-            text-align: left;
-        }
-
-       /**
-         * @name            s-align-right
-         * @namespace       sugar.css.mixins.align
-         * @type            CssClass
-         * 
-         * This class allows you to align text to the right side
-         * 
-         * @example     html
-         * <div class="s-align-right">Hello world</div>
-         * 
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        .s-align-right {
-            text-align: right;
-        }
-
-        /**
-         * @name            s-align-center
-         * @namespace       sugar.css.mixins.align
-         * @type            CssClass
-         * 
-         * This class allows you to align text to the center
-         * 
-         * @example     html
-         * <div class="s-align-center">Hello world</div>
-         * 
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        .s-align-center {
-            text-align: center;
-        }
-
+        
         /**
          * @name            s-align-abs-top
          * @namespace       sugar.css.mixins.align

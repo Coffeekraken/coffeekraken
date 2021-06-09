@@ -3,6 +3,12 @@
 @sugar.init;
 @sugar.ui.classes;
 
+@sugar.icon.classes(
+  fa-user:user
+  fa-heart:heart
+  fa-fire:fire
+);
+
 [class*='s-btn'] {
   border-radius: 100px !important;
   border: none !important;

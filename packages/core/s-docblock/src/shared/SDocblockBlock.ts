@@ -4,12 +4,15 @@ import __map from '@coffeekraken/sugar/shared/object/map';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 import __authorTag from './tags/author';
+import __contributorTag from './tags/contributor';
 import __simpleValueTag from './tags/simpleValue';
+import __simpleRepeatableValue from './tags/simpleRepeatableValue';
 import __descriptionTag from './tags/description';
 import __returnTag from './tags/return';
 import __exampleTag from './tags/example';
 import __paramTag from './tags/param';
 import __snippetTag from './tags/snippet';
+import __platformTag from './tags/platform';
 
 /**
  * @name          SDocblockBlock
@@ -299,6 +302,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 }
 
 SDocblockBlock.registerTag('author', __authorTag);
+SDocblockBlock.registerTag('contributor', __contributorTag);
 SDocblockBlock.registerTag('abstract', __simpleValueTag);
 SDocblockBlock.registerTag('final', __simpleValueTag);
 SDocblockBlock.registerTag('async', __simpleValueTag);
@@ -362,7 +366,7 @@ SDocblockBlock.registerTag('variation', __simpleValueTag);
 SDocblockBlock.registerTag('version', __simpleValueTag);
 SDocblockBlock.registerTag('enum', __simpleValueTag);
 SDocblockBlock.registerTag('src', __simpleValueTag);
-SDocblockBlock.registerTag('feature', __simpleValueTag);
+SDocblockBlock.registerTag('feature', __simpleRepeatableValue);
 SDocblockBlock.registerTag('description', __descriptionTag);
 SDocblockBlock.registerTag('desc', __descriptionTag);
 // SDocblockBlock.registerTag('yields', __yieldsTag);
@@ -373,6 +377,7 @@ SDocblockBlock.registerTag('param', __paramTag);
 SDocblockBlock.registerTag('property', __paramTag);
 SDocblockBlock.registerTag('prop', __paramTag);
 SDocblockBlock.registerTag('setting', __paramTag);
+SDocblockBlock.registerTag('platform', __platformTag);
 // SDocblockBlock.registerTag('listens', __listensTag);
 // SDocblockBlock.registerTag('member', __memberTag);
 // SDocblockBlock.registerTag('var', __memberTag);

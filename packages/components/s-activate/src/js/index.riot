@@ -23,8 +23,7 @@
         // save state
         if (this.component.props.saveState) {
           if (!this.root.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-          this.component.props.active = localStorage.getItem(`s-activate-state-${this.root.id}`);
-
+          this.component.props.active = localStorage.getItem(`s-activate-state-${this.root.id}`) !== null;
         }
 
         if (this.component.props.target) {
@@ -129,7 +128,7 @@
         // save state
         if (this.component.props.saveState) {
           if (!this.root.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-          localStorage.setItem(`s-activate-state-${this.root.id}`, false);
+          localStorage.removeItem(`s-activate-state-${this.root.id}`);
         }
 
         // remove the "active" attribute to the component

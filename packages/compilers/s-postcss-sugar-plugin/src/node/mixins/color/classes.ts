@@ -33,6 +33,31 @@ export default function ({ params, atRule, replaceWith }) {
   colors.forEach((colorName) => {
     const colorObj = colorsObj[colorName];
 
+    colors.forEach((innerColorName) => {
+
+      if (innerColorName === colorName) return;
+
+      cssArray.push(
+            [
+              `/**`,
+              ` * @name           *:${colorName}->${innerColorName}`,
+              ` * @namespace      sugar.css.color.classes.${innerColorName}`,
+              ` * @type           CssClass`,
+              ` *`,
+              ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
+              ` *`,
+              ` * @example        html`,
+              ` * <h1 class=":${colorName}->${innerColorName}">`,
+              ` *     <span class="s-color:${colorName}">Something cool</span>`,
+              ` * </h1>`,
+              ` */`,
+              `[class*=":${colorName}->${innerColorName}"] {`,
+              ` @sugar.color.remap(${colorName}, ${innerColorName})`,
+              `}`
+            ].join('\n')
+          );
+    });
+
     Object.keys(colorObj).forEach((colorVariantName) => {
       if (colorVariantName.match(/-[hslrgba]$/)) return;
 
@@ -43,7 +68,7 @@ export default function ({ params, atRule, replaceWith }) {
         modifierStr = ``;
         colorVariantName = '';
       } else {
-        modifierStr = `-${colorVariantName}`;
+        modifierStr = `:${colorVariantName}`;
       }
 
       if (colorVariantName.match(/^:/) && __isPlainObject(colorVariantValue)) {
@@ -69,18 +94,18 @@ export default function ({ params, atRule, replaceWith }) {
         cssArray.push(
           [
             `/**`,
-            ` * @name           s-color-${colorName}${modifierStr}`,
+            ` * @name           s-color:${colorName}${modifierStr}`,
             ` * @namespace      sugar.css.color.classes.${colorName}.${colorVariantName}`,
             ` * @type           CssClass`,
             ` *`,
             ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
             ` *`,
             ` * @example        html`,
-            ` * <h1 class="s-color-${colorName}${modifierStr}">`,
+            ` * <h1 class="s-color:${colorName}${modifierStr}">`,
             ` *     Something cool`,
             ` * </h1>`,
             ` */`,
-            `.s-color-${colorName}${modifierStr} {`,
+            `[class*="s-color:${colorName}${modifierStr}"] {`,
             `   color: sugar.color(${colorName},${colorVariantName});`,
             `}`
           ].join('\n')
@@ -89,18 +114,18 @@ export default function ({ params, atRule, replaceWith }) {
         cssArray.push(
           [
             `/**`,
-            ` * @name           s-bg-${colorName}${modifierStr}`,
+            ` * @name           s-bg:${colorName}${modifierStr}`,
             ` * @namespace      sugar.css.color.classes.bg.${colorName}.${colorVariantName}`,
             ` * @type           CssClass`,
             ` *`,
             ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
             ` *`,
             ` * @example        html`,
-            ` * <h1 class="s-bg-${colorName}${modifierStr}">`,
+            ` * <h1 class="s-bg:${colorName}${modifierStr}">`,
             ` *     Something cool`,
             ` * </h1>`,
             ` */`,
-            `.s-bg-${colorName}${modifierStr} {`,
+            `[class*="s-bg:${colorName}${modifierStr}"] {`,
             `   background-color: sugar.color(${colorName},${colorVariantName})`,
             `}`
           ].join('\n')

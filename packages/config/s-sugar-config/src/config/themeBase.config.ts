@@ -66,6 +66,8 @@ export default {
     foreground: '--lighten 40',
     background: '--darken 40',
     border: '--darken 25',
+    gradientStart: '--lighten 0',
+    gradientEnd: '--darken 20',
     ':hover': {
       text: '--lighten 0',
       placeholder: '--darken 15',
@@ -1355,7 +1357,13 @@ export default {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]'
-    }
+    },
+    badge: {
+      padding: '.35em .65em',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: 0
+    },
   },
 
     typo: {

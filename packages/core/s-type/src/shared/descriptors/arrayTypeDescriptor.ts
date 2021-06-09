@@ -31,8 +31,11 @@ const descriptor: ISTypeDescriptor = {
     return Array.isArray(value);
   },
   cast: (value: any, params: any = {}) => {
-    if (params.commaSplit && typeof value === 'string') {
-      value = value.split(',').map((i) => i.trim());
+
+    if (!value) return [];
+
+    if (params.splitChars && Array.isArray(params.splitChars)) {
+      value = value.split(new RegExp(`(${params.splitChars.join('|')})`,'gm')).filter(l => l.trim() !== '');
     }
 
     if (Array.isArray(value)) return value;

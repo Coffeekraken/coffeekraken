@@ -31,7 +31,7 @@
                 @endphp
                 @php print('<template id="item">
                     <a href="/doc/{{namespace}}">
-                        <h4 class="s-font-title s-font-size-50 s-color-accent s-margin-bottom-10"><span class="s-color-success">{{type}}</span> {{name}} <span class="s-color-complementary s-font-size-30">{{namespace}}</span></h4>
+                        <h4 class="s-font-title s-font-size-50 s-color-accent s-mb:10"><span class="s-color-success">{{type}}</span> {{name}} <span class="s-color-complementary s-font-size-30">{{namespace}}</span></h4>
                         <p clsas="s-p">{{description}}</p>
                     </a>
                 </template>');
@@ -42,10 +42,10 @@
                 @endphp
             </s-filtrable-input>
         </form>
-        <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-align-center s-font-size-50 s-padding-y-60">
-            <a class="s-padding-x-50" href="/#features" title="Features">Features</a>
-            <a class="s-padding-x-50" href="/#get-started" title="Get started">Get started</a>
-            <a class="s-padding-x-50" href="/#documentation" title="Documentation">Documentation</a>
+        <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-align-center s-font-size-50 s-py:60">
+            <a class="s-px:50" href="/#features" title="Features">Features</a>
+            <a class="s-px:50" href="/#get-started" title="Get started">Get started</a>
+            <a class="s-px:50" href="/#documentation" title="Documentation">Documentation</a>
         </nav>
     </div>
 

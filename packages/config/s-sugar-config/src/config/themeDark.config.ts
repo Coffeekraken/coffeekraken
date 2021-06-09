@@ -40,7 +40,7 @@ export default {
      * @name                accent
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #f2bc2b
+     * @default             #F2BC2B
      *
      * Specify the <s-color="accent">accent</s-color> color value.
      *
@@ -48,8 +48,9 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     accent: {
-      default: '#FFD501',
-      '...': '[theme.colorStates]'
+      default: '#F2BC2B',
+      '...': '[theme.colorStates]',
+      gradientEnd: '--spin 345 --darken 10',
     },
 
     /**

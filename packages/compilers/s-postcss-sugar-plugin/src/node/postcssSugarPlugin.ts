@@ -243,7 +243,10 @@ const plugin = (settings: any = {}) => {
         const mixinInterface = mixin.interface;
 
         let sanitizedParams = atRule.params;
-        sanitizedParams = sanitizedParams.split('\n')[0];
+
+        // console.log('PA', atRule.params);
+
+        // sanitizedParams = sanitizedParams.split('\n')[0];
 
         const intRes = mixinInterface.apply(sanitizedParams, {});
         if (intRes.hasIssues()) {

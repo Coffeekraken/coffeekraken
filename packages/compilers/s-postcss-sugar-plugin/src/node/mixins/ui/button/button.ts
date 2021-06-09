@@ -9,12 +9,23 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
       type: 'String',
       values: ['default', 'gradient', 'outlined', 'text'],
       default: 'default'
+    },
+    shrinked: {
+      type: 'Boolean',
+      default: false
+    },
+    scope: {
+      type: 'Array<String>',
+      values: ['bare','lnf','shrinked','style'],
+      default: ['bare','lnf','style']
     }
   };
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
   style: 'default' | 'gradient' | 'outlined' | 'text';
+  shrinked: boolean;
+  scope: string[];
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
@@ -29,6 +40,8 @@ export default function ({
 }) {
   const finalParams: IPostcssSugarPluginUiButtonParams = {
     style: 'default',
+    shrinked: false,
+    scope: ['bare','lnf','style'],
     ...params
   };
 
@@ -40,38 +53,85 @@ export default function ({
       : `ui.button.:${finalParams.style}?`;
 
   // lnf
-  vars.push(`
-    @sugar.ui.base(button);
-  `);
+  if (finalParams.scope.indexOf('lnf') !== -1) {
+    vars.push(`
+      @sugar.ui.base(button);
+    `);
+  }
 
   // bare
-  vars.push(`
-    @sugar.scope.bare {
-      display: inline-block;
-      cursor: pointer;
-    }
-  `);
+  if (finalParams.scope.indexOf('bare') !== -1) {
+    vars.push(`
+      @sugar.scope.bare {
+        display: inline-block;
+        cursor: pointer;
 
-  vars.push(`
-    @sugar.scope.lnf {
+        & > * {
+          pointer-events: none;
+        }
+      }
     `);
+  }
 
-  switch (finalParams.style) {
-    case 'gradient':
-      vars.push(`
-          @sugar.gradient(ui, sugar.color(ui, --darken 20 --saturate 50), $angle: 90);
-
-          &:hover, &:focus {
-            @sugar.gradient(sugar.color(ui, --darken 20 --saturate 50), ui, $angle: 90);
-          }
+  // style
+  if (finalParams.scope.indexOf('style') !== -1) {
+    vars.push(`
+      @sugar.scope.lnf {
       `);
 
-      break;
-    case 'default':
-    default:
-      break;
+    switch (finalParams.style) {
+      case 'gradient':
+        vars.push(`
+            @sugar.gradient(sugar.color(ui, gradientStart), sugar.color(ui, gradientEnd), $angle: 90);
+
+            &:hover, &:focus {
+              @sugar.gradient(sugar.color(ui,gradientEnd), sugar.color(ui, gradientStart), $angle: 90);
+            }
+        `);
+
+        break;
+      case 'default':
+      default:
+        break;
+    }
+    vars.push('}');
   }
-  vars.push('}');
+
+  // shrinked
+  if (finalParams.scope.indexOf('shrinked') !== -1) {
+
+    const transitionStr = __theme().config('ui.button.transition');
+    const duration = transitionStr.split(' ').map(l => l.trim()).filter(v => v.match(/[0-9.]+s$/))[0];
+
+    vars.push(`
+      max-width: 1em;
+      white-space: nowrap;
+
+      & > *:not(i) {
+        opacity: 0;
+        white-space: nowrap;
+        transition: ${__themeVar('ui.button.transition')};
+      }
+
+      & > i {
+        transform: translateX(-50%);
+        transition: ${__themeVar('ui.button.transition')};
+      }
+
+      &:hover {
+        max-width: 30ch;
+
+        & > *:not(i) {
+          opacity: 1;
+          transition-delay: ${duration}
+        }
+
+        & > i {
+          transform: translateX(0);
+        }
+      }
+    `);
+  }
 
   replaceWith(vars);
 }

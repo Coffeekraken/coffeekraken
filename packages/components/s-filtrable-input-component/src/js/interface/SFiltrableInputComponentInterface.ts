@@ -13,7 +13,7 @@ export default class SHighlightJsComponentInterface extends __SInterface {
     filtrable: {
       type: {
         type: 'Array<String>',
-        commaSplit: true
+        splitChars: [',']
       },
       default: []
     },

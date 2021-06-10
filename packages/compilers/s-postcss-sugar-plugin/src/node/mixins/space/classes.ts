@@ -25,8 +25,7 @@ export default function ({
 
   const vars: string[] = [
     '@sugar.space.marginClasses;',
-    '@sugar.space.paddingClasses;',
-    '@sugar.space.autoClasses;'
+    '@sugar.space.paddingClasses;'
   ];
 
   replaceWith(vars);

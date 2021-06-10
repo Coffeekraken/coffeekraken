@@ -25,20 +25,20 @@
             </s-request>
             <s-filtrable-input id="search-input" filtrable="name,namespace" value="namespace" default-style>
                 <input type="text" placeholder="Search doc (cmd+shift+p)" class="s-form-input" />
-                @php print('<template id="loading">
-                    <p clsas="s-p">Searching.Please wait...</p>
-                </template>');
+                @php print("<template id='loading'>
+                    <p clsas='s-p'>Searching.Please wait...</p>
+                </template>");
                 @endphp
-                @php print('<template id="item">
-                    <a href="/doc/{{namespace}}">
-                        <h4 class="s-font-title s-font-size-50 s-color-accent s-mb:10"><span class="s-color-success">{{type}}</span> {{name}} <span class="s-color-complementary s-font-size-30">{{namespace}}</span></h4>
-                        <p clsas="s-p">{{description}}</p>
+                @php print("<template id='item'>
+                    <a href='/doc/{{namespace}}'>
+                        <h4 class='s-font-title s-font-size-50 s-color-accent s-mb:10'><span class='s-color-success'>{{type}}</span> {{name}} <span class='s-color-complementary s-font-size-30'>{{namespace}}</span></h4>
+                        <p clsas='s-p'>{{description}}</p>
                     </a>
-                </template>');
+                </template>");
                 @endphp
-                @php print('<template id="no-item">
-                    <p class="s-p">Sorry but their\'s no items that correspond to your research...</p>
-                </template>');
+                @php print("<template id='no-item'>
+                    <p class='s-p'>Sorry but their\'s no items that correspond to your research...</p>
+                </template>");
                 @endphp
             </s-filtrable-input>
         </form>

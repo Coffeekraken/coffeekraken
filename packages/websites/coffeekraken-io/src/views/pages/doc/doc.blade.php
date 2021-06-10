@@ -15,9 +15,9 @@
 
     <div id="doc">
 
-        <header class="__banner s-py:60 s-bg-complementary">
+        <header class="__banner s-py:60 s-bg:complementary">
 
-            <div class="s-container s-grid-12">
+            <div class="s-container s-grid:12">
                 <div>
                     <span class="s-font:30">
                         <span class="s-badge:pill:accent->{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
@@ -82,11 +82,11 @@
 
         </header>
 
-        <section class="__toolbar s-py:40 s-bg:ui:background">
+        <section class="__toolbar s-py:40 s-bg:ui-background">
 
             <div class="s-container">
 
-                <div class="s-grid-12">
+                <div class="s-grid:12">
 
                     <div class="s-font:40">
                         <span>{{ $firstBlock->name }}</span>
@@ -109,9 +109,27 @@
                         </a>
                         &nbsp;
                         &nbsp;
-                        <a class="s-btn:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
-                            <i class="s-icon:fire"></i>
-                        </a>
+                        <div class="__toolbar-issue s-tooltip-container">
+                            <a class="s-btn:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                                <i class="s-icon:fire"></i>
+                            </a>
+                            <div class="s-tooltip:left-top s-pd:50">
+                                <span class="s-avatar s-mb:40 s-display:block s-mx:auto" style="font-size: 120px">
+                                    <img src="/src/img/kraken-avatar.png" alt="{{ $firstBlock->author->name }}" />
+                                </span>
+                                <p class="s-p s-font:40 s-mb:30">
+                                    Don't hesitate to declare an issue if something does not works as expected.
+                                    <br />
+                                    We are a community and this is what makes the strengh of this project.
+                                </p>
+                                <a class="s-btn:error s-display:block s-mb:20 s-depth:50" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                                    Declare my issue on Github
+                                </a>
+                                <a class="s-btn:info s-display:block" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                                    Talk about it on Discord
+                                </a>
+                            </div>
+                        </div>
                         &nbsp;
                         &nbsp;
                         <a class="s-btn:accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
@@ -132,7 +150,7 @@
 
             @foreach ( $docs as $docblocks )
 
-                <section class="s-grid-122">
+                <section class="s-grid:122">
 
                     <nav class="__nav">
                         

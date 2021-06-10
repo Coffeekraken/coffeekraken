@@ -120,7 +120,6 @@ function querySelectorLive(selector, cb, settings = {}) {
 
   // first search
   [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
-    console.log(node, selector);
     pushNewNode(node, selector);
   });
 }

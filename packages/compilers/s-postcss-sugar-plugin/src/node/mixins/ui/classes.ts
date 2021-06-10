@@ -35,7 +35,8 @@ export default function ({
     '@sugar.ui.list.classes;',
     '@sugar.ui.badge.classes;',
     '@sugar.ui.navbar.classes;',
-    '@sugar.ui.terminal.classes;'
+    '@sugar.ui.terminal.classes;',
+    '@sugar.ui.tooltip.classes;'
   ];
 
   replaceWith(cssArray);

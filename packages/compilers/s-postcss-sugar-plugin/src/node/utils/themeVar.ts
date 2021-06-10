@@ -18,11 +18,14 @@ import __theme from './theme';
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function themeVar(dotPath: string): string {
+export default function themeVar(dotPath: string, fallback = true): string {
+  let fb = __theme().config(dotPath);
+  if (!fallback || typeof fb === 'string' && fb.includes(',')) fb = 0;
+
   const v = `var(--s-theme-${dotPath
     .replace(/\./gm, '-')
     .replace(/:/gm, '-')
     .replace(/\?/gm, '')
-    .replace(/--/gm, '-')}, ${__theme().config(dotPath)})`;
+    .replace(/--/gm, '-')}, ${fb})`;
   return v;
 }

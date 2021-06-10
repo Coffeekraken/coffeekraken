@@ -1,0 +1,227 @@
+import __SInterface from '@coffeekraken/s-interface';
+import __themeVar from '../../../utils/themeVar';
+import __isInScope from '../../../utils/isInScope';
+import __theme from '../../../utils/theme';
+
+class postcssSugarPluginUiTooltipInterface extends __SInterface {
+  static definition = {
+    position: {
+      type: 'String',
+      values: ['top','top-left','top-right','right','right-top','right-bottom','bottom','bottom-left','bottom-right','left','left-top','left-bottom'],
+      default: 'top'
+    },
+    scope: {
+      type: 'Array<String>',
+      values: ['bare','lnf','position'],
+      default: ['bare','lnf','position']
+    }
+  };
+}
+
+export interface IPostcssSugarPluginUiTooltipParams {
+  position: 'top' | 'top-left' | 'top-right' | 'right' | 'right-top' | 'right-bottom' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'left-top' | 'left-bottom';
+  scope: string[];
+}
+
+export { postcssSugarPluginUiTooltipInterface as interface };
+export default function ({
+  params,
+  atRule,
+  replaceWith
+}: {
+  params: Partial<IPostcssSugarPluginUiTooltipParams>;
+  atRule: any;
+  replaceWith: Function;
+}) {
+  const finalParams: IPostcssSugarPluginUiTooltipParams = {
+    position: 'top',
+    scope: ['bare','lnf','position'],
+    ...params
+  };
+
+  const vars: string[] = [];
+
+  if (finalParams.scope.indexOf('bare') !== -1) {
+      vars.push(`
+        @sugar.scope.bare {
+            position: absolute;
+            display: block;
+            max-width: sugar.config(ui.tooltip.maxWidth);
+            text-align: center;
+        }
+      `)
+  }
+
+  if (finalParams.scope.indexOf('lnf') !== -1) {
+      vars.push(`
+        @sugar.scope.lnf {
+            background-color: sugar.color(ui, surface);
+            color: sugar.color(ui, foreground);
+            border-radius: sugar.config(ui.tooltip.borderRadius);
+            transition: sugar.config(ui.tooltip.transition);
+            padding: sugar.config(ui.tooltip.padding);
+            @sugar.depth( sugar.config(ui.tooltip.depth) );
+
+            &:after {
+                content: " ";
+                position: absolute;
+                border-style: solid;
+                border-color: sugar.color(ui, surface) transparent transparent transparent;
+            }
+        }
+      `)
+  }
+
+  if (finalParams.scope.indexOf('position') !== -1) {
+      switch(finalParams.position) {
+          case 'top':
+            vars.push(`  
+                bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                left: 50%;
+                transform: translateX(-50%);
+
+                &:after {
+                    top: 100%;
+                    left: 50%;
+                    margin-left: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                }
+            `);
+          break;
+          case 'top-left':
+            vars.push(`  
+                top: auto;
+                right: auto;
+                bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                left: 0;
+            `);
+          break;
+          case 'top-right':
+            vars.push(`  
+                top: auto;
+                left: auto;
+                bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                right: 0;
+            `);
+          break;
+          case 'right':
+            vars.push(`  
+                bottom: auto;
+                right: auto;
+                left: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                top: 50%;
+                transform: translateY(-50%);
+            `);
+          break;
+          case 'right-top':
+            vars.push(`  
+                bottom: auto;
+                right: auto;
+                left: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                top: 0;
+            `);
+          break;
+          case 'right-bottom':
+            vars.push(`  
+                top: auto;
+                right: auto;
+                left: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                bottom: 0;
+            `);
+          break;
+          case 'bottom':
+            vars.push(`  
+                bottom: auto;
+                right: auto;
+                left: 50%;
+                top: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                transform: translateY(-50%);
+            `);
+          break;
+          case 'bottom-left':
+            vars.push(` 
+                bottom: auto;
+                right: auto;
+                left: 0;
+                top: calc(100% + sugar.config(ui.tooltip.arrowSize));
+            `);
+          break;
+          case 'bottom-right':
+            vars.push(`  
+                bottom: auto;
+                left: auto;
+                right: 0;
+                top: calc(100% + sugar.config(ui.tooltip.arrowSize));
+            `);
+          break;
+          case 'left':
+            vars.push(` 
+                bottom: auto;
+                left: auto;
+                right: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                top: 50%;
+
+                &:after {
+                    top: 50%;
+                    left: 100%;
+                    margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                    margin-left: 0;
+                }
+            `);
+          break;
+          case 'left-top':
+            vars.push(`  
+                bottom: auto;
+                left: auto;
+                right: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                top: 0;
+                transform: none;
+
+                &:after {
+                    top: sugar.config(ui.tooltip.arrowSize);
+                    left: 100%;
+                    bottom: auto;
+                    right: auto;
+                    margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                    margin-left: 0;
+                }
+            `);
+          break;
+          case 'left-bottom':
+            vars.push(`  
+                top: auto;
+                left: auto;
+                right: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                bottom: 0;
+                transform: none;
+
+                &:after {
+                    bottom: sugar.config(ui.tooltip.arrowSize);
+                    left: 100%;
+                    top: auto;
+                    right: auto;
+                    margin-bottom: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                    margin-left: 0;
+                }
+            `);
+          break;
+          default:
+            vars.push(`  
+                top: auto;
+                right: auto;
+                bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
+                left: 50%;
+                transform: translateX(-50%);
+            `);
+          break;
+      }
+  }
+
+  replaceWith(vars);
+}

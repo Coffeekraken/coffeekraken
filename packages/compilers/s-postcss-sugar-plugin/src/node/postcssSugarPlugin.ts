@@ -289,12 +289,20 @@ const plugin = (settings: any = {}) => {
 
       if (!calls || !calls.length) return;
       calls.forEach((sugarStatement) => {
+
+        // FIX. sugarStatement comes with none corresponding count of "(" and ")"
+        const openingParenthesisCount = (sugarStatement.match(/\(/g) || []).length;
+        const closingParenthesisCount = (sugarStatement.match(/\)/g) || []).length;
+
+        if (openingParenthesisCount > closingParenthesisCount) {
+          sugarStatement += ')'.repeat(openingParenthesisCount - closingParenthesisCount);
+        }
+
         const functionName = sugarStatement.match(/sugar\.([a-zA-Z0-9\.]+)/)[1];
         const paramsStatement = sugarStatement.replace(
           /sugar\.[a-zA-Z0-9\.]+/,
           ''
         );
-
         let fnPath = `${__dirname}/functions/${functionName
           .split('.')
           .join('/')}.js`;

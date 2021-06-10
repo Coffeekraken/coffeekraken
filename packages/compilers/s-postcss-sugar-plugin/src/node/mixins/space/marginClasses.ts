@@ -29,7 +29,7 @@ export default function ({
 
   Object.keys(spacesObj).forEach((spaceName) => {
     // margins
-    const clsMargin = `s-m:${spaceName}`;
+    const clsMargin = `s-m--${spaceName}`;
     vars.push(`/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.space
@@ -43,10 +43,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMargin}"] {
+   .${clsMargin} {
         margin: sugar.space(${spaceName});
    }`);
-    const clsMarginTop = `s-mt:${spaceName}`;
+    const clsMarginTop = `s-mt--${spaceName}`;
     vars.push(`/**
     * @name            ${clsMarginTop}
     * @namespace        sugar.css.space
@@ -60,10 +60,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginTop}"] {
-        margin-top: sugar.space(${spaceName});
+   .${clsMarginTop} {
+        margin-top: sugar.space(${spaceName}) !important;
    }`);
-    const clsMarginBottom = `s-mb:${spaceName}`;
+    const clsMarginBottom = `s-mb--${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginBottom}
     * @namespace        sugar.css.space
@@ -77,10 +77,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginBottom}"] {
-        margin-bottom: sugar.space(${spaceName});
+   .${clsMarginBottom} {
+        margin-bottom: sugar.space(${spaceName}) !important;
    }`);
-    const clsMarginLeft = `s-ml:${spaceName}`;
+    const clsMarginLeft = `s-ml--${spaceName}`;
     vars.push(`/**
     * @name            ${clsMarginLeft}
     * @namespace        sugar.css.space
@@ -94,10 +94,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginLeft}"] {
-        margin-left: sugar.space(${spaceName});
+   .${clsMarginLeft} {
+        margin-left: sugar.space(${spaceName}) !important;
    }`);
-    const clsMarginRight = `s-mr:${spaceName}`;
+    const clsMarginRight = `s-mr--${spaceName}`;
     vars.push(`/**
     * @name            .${clsMarginRight}
     * @namespace        sugar.css.space
@@ -111,10 +111,10 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginRight}"] {
-        margin-right: sugar.space(${spaceName});
+   .${clsMarginRight} {
+        margin-right: sugar.space(${spaceName}) !important;
    }`);
-    const clsMarginX = `s-mx:${spaceName}`;
+    const clsMarginX = `s-mx--${spaceName}`;
     vars.push(`/**
     * @name            ${clsMarginX}
     * @namespace        sugar.css.space
@@ -128,11 +128,11 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-     [class*="${clsMarginX}"] {
-        margin-left: sugar.space(${spaceName});
-        margin-right: sugar.space(${spaceName});
+     .${clsMarginX} {
+        margin-left: sugar.space(${spaceName}) !important;
+        margin-right: sugar.space(${spaceName}) !important;
    }`);
-    const clsMarginY = `s-my:${spaceName}`;
+    const clsMarginY = `s-my--${spaceName}`;
     vars.push(`/**
     * @name            ${clsMarginY}
     * @namespace        sugar.css.space
@@ -146,11 +146,132 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginY}"] {
-        margin-top: sugar.space(${spaceName});
-        margin-bottom: sugar.space(${spaceName});
+   .${clsMarginY} {
+        margin-top: sugar.space(${spaceName}) !important;
+        margin-bottom: sugar.space(${spaceName}) !important;
    }`);
   });
+
+  vars.push(`/**
+    * @name            s-m--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-m--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-m--auto {
+        margin: auto;
+   }`);
+
+   vars.push(`/**
+    * @name            s-mt--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mt--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mt--auto {
+        margin-top: auto;
+   }`);
+
+   vars.push(`/**
+    * @name            s-mr--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mr--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mr--auto {
+        margin-right: auto;
+   }`);
+
+   vars.push(`/**
+    * @name            s-mb--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mb--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mb--auto {
+        margin-bottom: auto;
+   }`);
+
+   vars.push(`/**
+    * @name            s-left--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-left--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-left--auto {
+        margin-left: auto;
+   }`);
+
+   vars.push(`/**
+    * @name            s-mx--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mx--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mx--auto {
+        margin-left: auto;
+        margin-right: auto;
+   }`);
+
+   vars.push(`/**
+    * @name            s-my--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-my--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-my--auto {
+        margin-top: auto;
+        margin-bottom: auto;
+   }`);
 
   replaceWith(vars);
 }

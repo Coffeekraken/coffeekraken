@@ -30,6 +30,7 @@ export default {
   },
 
   depth: {
+    default: '[theme.depth.50]',
     0: '0',
     10: `0 0px 2px rgba(0, 0, 0, 0.2)`,
     20: `0 1px 4px rgba(0, 0, 0, 0.16)`,
@@ -1325,7 +1326,7 @@ export default {
       padding: '[theme.padding.20] [theme.padding.30]',
       borderRadius: '[theme.border.radius.default]',
       transition: '[theme.transition.fast]',
-      depth: 10
+      depth: '[theme.depth.default]'
     },
     button: {
       padding: '[theme.ui.default.padding]',
@@ -1357,6 +1358,14 @@ export default {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]'
+    },
+    tooltip: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
+      maxWidth: '30ch',
+      arrowSize: '20px'
     },
     badge: {
       padding: '.35em .65em',

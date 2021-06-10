@@ -44,8 +44,6 @@ export default function ({
     const iconName = icon.split(':')[0];
     const as = icon.split(':')[1] ?? iconName;
 
-    console.log(iconName.slice(3));
-
     // fontawesome
     if (iconName.slice(0,3) === 'fa-') {
 
@@ -54,20 +52,20 @@ export default function ({
 
       vars.push(`
         /**
-         * @name        s-icon:${as}
+         * @name        s-icon--${as}
           * @namespace      sugar.css.icon.classes.${as}
           * @type           CssClass
           *
           * This class allows you to display the "<yellow>${as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
           *
           * @example        html
-          * <i class="s-icon:${as} s-font:20"></i>
-          * <i class="s-icon:${as} s-font:40"></i>
-          * <i class="s-icon:${as} s-font:60"></i>
-          * <i class="s-icon:${as} s-font:80"></i>
-          * <i class="s-icon:${as} s-font:100"></i>
+          * <i class="s-icon--${as} s-font:20"></i>
+          * <i class="s-icon--${as} s-font:40"></i>
+          * <i class="s-icon--${as} s-font:60"></i>
+          * <i class="s-icon--${as} s-font:80"></i>
+          * <i class="s-icon--${as} s-font:100"></i>
           */
-          [class*="s-icon:${as}"] {
+          .s-icon--${as} {
             @sugar.icon.fa(${faIconName});
           }
       `);

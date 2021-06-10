@@ -10,7 +10,7 @@ export default function ({ params, atRule, replaceWith }) {
     const spacesObj = __theme().config('space');
     Object.keys(spacesObj).forEach((spaceName) => {
         // margins
-        const clsMargin = `s-m:${spaceName}`;
+        const clsMargin = `s-m--${spaceName}`;
         vars.push(`/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.space
@@ -24,10 +24,10 @@ export default function ({ params, atRule, replaceWith }) {
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMargin}"] {
+   .${clsMargin} {
         margin: sugar.space(${spaceName});
    }`);
-        const clsMarginTop = `s-mt:${spaceName}`;
+        const clsMarginTop = `s-mt--${spaceName}`;
         vars.push(`/**
     * @name            ${clsMarginTop}
     * @namespace        sugar.css.space
@@ -41,10 +41,10 @@ export default function ({ params, atRule, replaceWith }) {
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginTop}"] {
-        margin-top: sugar.space(${spaceName});
+   .${clsMarginTop} {
+        margin-top: sugar.space(${spaceName}) !important;
    }`);
-        const clsMarginBottom = `s-mb:${spaceName}`;
+        const clsMarginBottom = `s-mb--${spaceName}`;
         vars.push(`/**
     * @name            .${clsMarginBottom}
     * @namespace        sugar.css.space
@@ -58,10 +58,10 @@ export default function ({ params, atRule, replaceWith }) {
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginBottom}"] {
-        margin-bottom: sugar.space(${spaceName});
+   .${clsMarginBottom} {
+        margin-bottom: sugar.space(${spaceName}) !important;
    }`);
-        const clsMarginLeft = `s-ml:${spaceName}`;
+        const clsMarginLeft = `s-ml--${spaceName}`;
         vars.push(`/**
     * @name            ${clsMarginLeft}
     * @namespace        sugar.css.space
@@ -75,10 +75,10 @@ export default function ({ params, atRule, replaceWith }) {
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginLeft}"] {
-        margin-left: sugar.space(${spaceName});
+   .${clsMarginLeft} {
+        margin-left: sugar.space(${spaceName}) !important;
    }`);
-        const clsMarginRight = `s-mr:${spaceName}`;
+        const clsMarginRight = `s-mr--${spaceName}`;
         vars.push(`/**
     * @name            .${clsMarginRight}
     * @namespace        sugar.css.space
@@ -92,10 +92,10 @@ export default function ({ params, atRule, replaceWith }) {
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginRight}"] {
-        margin-right: sugar.space(${spaceName});
+   .${clsMarginRight} {
+        margin-right: sugar.space(${spaceName}) !important;
    }`);
-        const clsMarginX = `s-mx:${spaceName}`;
+        const clsMarginX = `s-mx--${spaceName}`;
         vars.push(`/**
     * @name            ${clsMarginX}
     * @namespace        sugar.css.space
@@ -109,11 +109,11 @@ export default function ({ params, atRule, replaceWith }) {
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-     [class*="${clsMarginX}"] {
-        margin-left: sugar.space(${spaceName});
-        margin-right: sugar.space(${spaceName});
+     .${clsMarginX} {
+        margin-left: sugar.space(${spaceName}) !important;
+        margin-right: sugar.space(${spaceName}) !important;
    }`);
-        const clsMarginY = `s-my:${spaceName}`;
+        const clsMarginY = `s-my--${spaceName}`;
         vars.push(`/**
     * @name            ${clsMarginY}
     * @namespace        sugar.css.space
@@ -127,11 +127,125 @@ export default function ({ params, atRule, replaceWith }) {
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   [class*="${clsMarginY}"] {
-        margin-top: sugar.space(${spaceName});
-        margin-bottom: sugar.space(${spaceName});
+   .${clsMarginY} {
+        margin-top: sugar.space(${spaceName}) !important;
+        margin-bottom: sugar.space(${spaceName}) !important;
    }`);
     });
+    vars.push(`/**
+    * @name            s-m--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-m--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-m--auto {
+        margin: auto;
+   }`);
+    vars.push(`/**
+    * @name            s-mt--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mt--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mt--auto {
+        margin-top: auto;
+   }`);
+    vars.push(`/**
+    * @name            s-mr--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mr--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mr--auto {
+        margin-right: auto;
+   }`);
+    vars.push(`/**
+    * @name            s-mb--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mb--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mb--auto {
+        margin-bottom: auto;
+   }`);
+    vars.push(`/**
+    * @name            s-left--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-left--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-left--auto {
+        margin-left: auto;
+   }`);
+    vars.push(`/**
+    * @name            s-mx--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-mx--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-mx--auto {
+        margin-left: auto;
+        margin-right: auto;
+   }`);
+    vars.push(`/**
+    * @name            s-my--auto
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="s-my--auto">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .s-my--auto {
+        margin-top: auto;
+        margin-bottom: auto;
+   }`);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFyZ2luQ2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1hcmdpbkNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFHeEMsTUFBTSx3Q0FBeUMsU0FBUSxZQUFZOztBQUMxRCxtREFBVSxHQUFHLEVBQUUsQ0FBQztBQUt6QixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixNQUFNLFNBQVMsR0FBRyxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUM7SUFFNUMsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUMzQyxVQUFVO1FBQ1YsTUFBTSxTQUFTLEdBQUcsT0FBTyxTQUFTLEVBQUUsQ0FBQztRQUNyQyxJQUFJLENBQUMsSUFBSSxDQUFDO3lCQUNXLFNBQVM7Ozs7b0RBSWtCLFNBQVM7OztxQkFHeEMsU0FBUzs7Ozs7Y0FLaEIsU0FBUzs4QkFDTyxTQUFTO0tBQ2xDLENBQUMsQ0FBQztRQUNILE1BQU0sWUFBWSxHQUFHLFFBQVEsU0FBUyxFQUFFLENBQUM7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzt5QkFDVyxZQUFZOzs7O29EQUllLFNBQVM7OztxQkFHeEMsWUFBWTs7Ozs7Y0FLbkIsWUFBWTtrQ0FDUSxTQUFTO0tBQ3RDLENBQUMsQ0FBQztRQUNILE1BQU0sZUFBZSxHQUFHLFFBQVEsU0FBUyxFQUFFLENBQUM7UUFDNUMsSUFBSSxDQUFDLElBQUksQ0FBQzswQkFDWSxlQUFlOzs7O29EQUlXLFNBQVM7OztxQkFHeEMsZUFBZTs7Ozs7Y0FLdEIsZUFBZTtxQ0FDUSxTQUFTO0tBQ3pDLENBQUMsQ0FBQztRQUNILE1BQU0sYUFBYSxHQUFHLFFBQVEsU0FBUyxFQUFFLENBQUM7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzt5QkFDVyxhQUFhOzs7O29EQUljLFNBQVM7OztxQkFHeEMsYUFBYTs7Ozs7Y0FLcEIsYUFBYTttQ0FDUSxTQUFTO0tBQ3ZDLENBQUMsQ0FBQztRQUNILE1BQU0sY0FBYyxHQUFHLFFBQVEsU0FBUyxFQUFFLENBQUM7UUFDM0MsSUFBSSxDQUFDLElBQUksQ0FBQzswQkFDWSxjQUFjOzs7O29EQUlZLFNBQVM7OztxQkFHeEMsY0FBYzs7Ozs7Y0FLckIsY0FBYztvQ0FDUSxTQUFTO0tBQ3hDLENBQUMsQ0FBQztRQUNILE1BQU0sVUFBVSxHQUFHLFFBQVEsU0FBUyxFQUFFLENBQUM7UUFDdkMsSUFBSSxDQUFDLElBQUksQ0FBQzt5QkFDVyxVQUFVOzs7O29EQUlpQixTQUFTOzs7cUJBR3hDLFVBQVU7Ozs7O2dCQUtmLFVBQVU7bUNBQ1MsU0FBUztvQ0FDUixTQUFTO0tBQ3hDLENBQUMsQ0FBQztRQUNILE1BQU0sVUFBVSxHQUFHLFFBQVEsU0FBUyxFQUFFLENBQUM7UUFDdkMsSUFBSSxDQUFDLElBQUksQ0FBQzt5QkFDVyxVQUFVOzs7O29EQUlpQixTQUFTOzs7cUJBR3hDLFVBQVU7Ozs7O2NBS2pCLFVBQVU7a0NBQ1UsU0FBUztxQ0FDTixTQUFTO0tBQ3pDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3BCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFyZ2luQ2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1hcmdpbkNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFHeEMsTUFBTSx3Q0FBeUMsU0FBUSxZQUFZOztBQUMxRCxtREFBVSxHQUFHLEVBQUUsQ0FBQztBQUt6QixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixNQUFNLFNBQVMsR0FBRyxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUM7SUFFNUMsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUMzQyxVQUFVO1FBQ1YsTUFBTSxTQUFTLEdBQUcsUUFBUSxTQUFTLEVBQUUsQ0FBQztRQUN0QyxJQUFJLENBQUMsSUFBSSxDQUFDO3lCQUNXLFNBQVM7Ozs7b0RBSWtCLFNBQVM7OztxQkFHeEMsU0FBUzs7Ozs7TUFLeEIsU0FBUzs4QkFDZSxTQUFTO0tBQ2xDLENBQUMsQ0FBQztRQUNILE1BQU0sWUFBWSxHQUFHLFNBQVMsU0FBUyxFQUFFLENBQUM7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzt5QkFDVyxZQUFZOzs7O29EQUllLFNBQVM7OztxQkFHeEMsWUFBWTs7Ozs7TUFLM0IsWUFBWTtrQ0FDZ0IsU0FBUztLQUN0QyxDQUFDLENBQUM7UUFDSCxNQUFNLGVBQWUsR0FBRyxTQUFTLFNBQVMsRUFBRSxDQUFDO1FBQzdDLElBQUksQ0FBQyxJQUFJLENBQUM7MEJBQ1ksZUFBZTs7OztvREFJVyxTQUFTOzs7cUJBR3hDLGVBQWU7Ozs7O01BSzlCLGVBQWU7cUNBQ2dCLFNBQVM7S0FDekMsQ0FBQyxDQUFDO1FBQ0gsTUFBTSxhQUFhLEdBQUcsU0FBUyxTQUFTLEVBQUUsQ0FBQztRQUMzQyxJQUFJLENBQUMsSUFBSSxDQUFDO3lCQUNXLGFBQWE7Ozs7b0RBSWMsU0FBUzs7O3FCQUd4QyxhQUFhOzs7OztNQUs1QixhQUFhO21DQUNnQixTQUFTO0tBQ3ZDLENBQUMsQ0FBQztRQUNILE1BQU0sY0FBYyxHQUFHLFNBQVMsU0FBUyxFQUFFLENBQUM7UUFDNUMsSUFBSSxDQUFDLElBQUksQ0FBQzswQkFDWSxjQUFjOzs7O29EQUlZLFNBQVM7OztxQkFHeEMsY0FBYzs7Ozs7TUFLN0IsY0FBYztvQ0FDZ0IsU0FBUztLQUN4QyxDQUFDLENBQUM7UUFDSCxNQUFNLFVBQVUsR0FBRyxTQUFTLFNBQVMsRUFBRSxDQUFDO1FBQ3hDLElBQUksQ0FBQyxJQUFJLENBQUM7eUJBQ1csVUFBVTs7OztvREFJaUIsU0FBUzs7O3FCQUd4QyxVQUFVOzs7OztRQUt2QixVQUFVO21DQUNpQixTQUFTO29DQUNSLFNBQVM7S0FDeEMsQ0FBQyxDQUFDO1FBQ0gsTUFBTSxVQUFVLEdBQUcsU0FBUyxTQUFTLEVBQUUsQ0FBQztRQUN4QyxJQUFJLENBQUMsSUFBSSxDQUFDO3lCQUNXLFVBQVU7Ozs7b0RBSWlCLFNBQVM7OztxQkFHeEMsVUFBVTs7Ozs7TUFLekIsVUFBVTtrQ0FDa0IsU0FBUztxQ0FDTixTQUFTO0tBQ3pDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0tBZVAsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0tBZVIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0tBZVIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0tBZVIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0tBZVIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztLQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O0tBZ0JSLENBQUMsQ0FBQztJQUVMLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNwQixDQUFDIn0=

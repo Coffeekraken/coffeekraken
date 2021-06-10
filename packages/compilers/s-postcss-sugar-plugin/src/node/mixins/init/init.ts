@@ -42,21 +42,22 @@ export default function ({
     `@sugar.theme(${params.theme ?? themeConfig.theme});`,
     '@sugar.reset;',
     '@sugar.font.faces;',
-    '@sugar.font.classes;',
     '@sugar.lnf.base;',
-    '@sugar.color.docblocks;',
+    // '@sugar.color.docblocks;',
+    '@sugar.ui.classes;',
+    '@sugar.typo.classes;',
     '@sugar.layout.classes;',
     '@sugar.color.classes;',
     '@sugar.align.classes;',
-    '@sugar.space.classes;',
-    '@sugar.size.classes;',
     '@sugar.text.classes;',
+    '@sugar.font.classes;',
     '@sugar.depth.classes;',
     '@sugar.util.classes;',
     '@sugar.flex.classes;',
+    '@sugar.display.classes;',
     '@sugar.style.classes;',
-    '@sugar.typo.classes;',
-    '@sugar.icon.classes;'
+    '@sugar.icon.classes;',
+    '@sugar.space.classes;'
   ];
 
   replaceWith(cssArray);

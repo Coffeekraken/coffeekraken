@@ -41,20 +41,20 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
     vars.push(`
-        [class*="s-avatar"] {
+        .s-avatar {
             @sugar.ui.avatar(default);
         }
     `);
 
     vars.push(`/**
-        * @name           .s-avatar:square
+        * @name           .s-avatar--square
         * @namespace      sugar.css.ui.avatar
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">square</s-color>" avatar
         * 
         * @example        html
-        * <span class="s-avatar:square">
+        * <span class="s-avatar--square">
         *   <img src="https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f" />
         * </span>
         * 
@@ -62,7 +62,7 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
     vars.push(`
-        [class*="s-avatar"][class*=":square"] {
+        .s-avatar--square {
             @sugar.ui.avatar(square);
         }
     `);

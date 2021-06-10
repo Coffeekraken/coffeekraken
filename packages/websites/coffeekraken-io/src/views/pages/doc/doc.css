@@ -29,7 +29,7 @@
     .__banner {
         position: relative;
 
-        .s-grid-12 {
+        .s-grid--12 {
             position: relative;
             z-index: 10;
         }
@@ -67,6 +67,28 @@
 
         [class^="platform-"] {
             font-size: 1em;
+        }
+    }
+
+    .__toolbar-issue {
+
+        .s-tooltip {
+            background-image: url('/src/img/issue-tooltip-bkg.jpg');
+            background-size: cover;
+            background-position: bottom center;
+            min-width: 50ch;
+
+            &:before {
+                content: '';
+                display: block; 
+                position: absolute;
+                top: 0; left: 0;
+                z-index: -1;
+                width: 100%; height: 100%;
+                border-radius: sugar.depth(sugar.config(ui.tooltip.borderRadius));
+
+                @sugar.gradient($start: sugar.color(ui, surface), $end: rgba(0,0,0,0));
+            }
         }
     }
 

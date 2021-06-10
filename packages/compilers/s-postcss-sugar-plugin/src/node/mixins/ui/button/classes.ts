@@ -41,9 +41,9 @@ export default function ({
   styles.forEach((style) => {
     if (style === 'default') return;
 
-    let cls = `[class*="s-btn"]`;
+    let cls = `s-btn`;
     if (style !== defaultStyle) {
-      cls += `[class*=":${style}"]`;
+      cls += `--${style}`;
     }
 
     vars.push(`/**
@@ -60,46 +60,46 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
     vars.push(
-      [`${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n')
+      [`.${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n')
     );
   });
 
   Object.keys(__theme().config('color')).forEach((colorName) => {
     vars.push(`
       /**
-       * @name        .s-btn:${colorName}
+       * @name        s-btn--${colorName}
        * @namespace     sugar.css.ui.button
        * @type          CssClass
        * 
        * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any button
        * 
        * @example       html
-       * <a class="<s-btn:${colorName}">I'm a cool ${colorName} button</a>
+       * <a class="<s-btn--${colorName}">I'm a cool ${colorName} button</a>
        * 
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      [class*="s-btn"][class*=":${colorName}"] {
+      .s-btn--${colorName} {
         @sugar.color.remap(ui, ${colorName});
       }
     `);
   });
 
   vars.push(`/**
-        * @name           s-btn:shrinked
+        * @name           s-btn--shrinked
         * @namespace      sugar.css.ui.button
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">shrinked</s-color>" button
         * 
         * @example        html
-        * <a class="s-btn:shrinked">I'm a cool button</a>
+        * <a class="s-btn--shrinked">I'm a cool button</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
     vars.push(`
-      [class*="s-btn"][class*=":shrinked"] {
+      .s-btn--shrinked {
         @sugar.ui.button($shrinked: true, $scope: shrinked);
       }
     `);

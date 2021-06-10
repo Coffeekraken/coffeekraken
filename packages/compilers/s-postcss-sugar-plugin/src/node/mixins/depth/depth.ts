@@ -28,10 +28,10 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginDepthParams = {
-    depth: 1,
+    depth: 0,
     ...params
   };
-  const depthCss = __themeVar(`depth.${finalParams.depth}`);
-  const vars: string[] = [`box-shadow: ${depthCss};`];
+  
+  const vars: string[] = [`box-shadow: sugar.depth(${finalParams.depth});`];
   replaceWith(vars);
 }

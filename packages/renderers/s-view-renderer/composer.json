@@ -1,5 +1,5 @@
 {
   "require": {
-    "jenssegers/blade": "^1.4"
+    "eftec/bladeone": "^3.52"
   }
 }

@@ -1,7 +1,6 @@
 @sugar.import ('../views/**/*.css');
 
 @sugar.init;
-@sugar.ui.classes;
 
 @sugar.icon.classes(
   fa-user:user

@@ -4,8 +4,8 @@ $nodeModulesVendorsPath = realpath(__DIR__.'/../../../../vendor/autoload.php');
 $monorepoVendorsPath = realpath(__DIR__.'/../../../../vendor/autoload.php');
 if ($nodeModulesVendorsPath) require_once($nodeModulesVendorsPath);
 else if ($monorepoVendorsPath) require_once($monorepoVendorsPath);
-use Jenssegers\Blade\Blade;
-// use eftec\bladeone\BladeOne;
+// use Jenssegers\Blade\Blade;
+use eftec\bladeone\BladeOne;
 
 // require the sugar toolkit
 $nodeModulesSugarPath = realpath(__DIR__.'/../../../../../sugar/src/php/autoload.php');
@@ -20,7 +20,12 @@ function compile($viewsFolders, $view, $data, $tmpPath) {
   $data = (array) $data;
   // preparing the paths
   $viewName = str_replace('.blade.php', '', $view);
-  $blade = new Blade($viewsFolders, $tmpPath);
-  return $blade->render($viewName, $data);
+  // $blade = new Blade($viewsFolders, $tmpPath);
+  // return $blade->render($viewName, $data);
+
+  $blade = new BladeOne($viewsFolders,$tmpPath,BladeOne::MODE_DEBUG); // MODE_DEBUG allows to pinpoint troubles.
+  $res = $blade->run($viewName,$data); // it calls /views/hello.blade.php
+
+  return \Sugar\html\expandColonClasses($res);
 
 }

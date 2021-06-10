@@ -42,53 +42,53 @@ export default function ({
   const vars: string[] = [];
 
   vars.push(`/**
-        * @name           s-list:interactive
+        * @name           s-list--interactive
         * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
         * This class represent an "<yellow>interactive</yellow>" list
         * 
         * @example        html
-        * <ul class="s-list:interactive" />
+        * <ul class="s-list--interactive" />
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
       */`);
-  vars.push([`[class*="s-list"][class*=":interactive"]:not([class*=":ul"]):not([class*=":ol"]) {`, `@sugar.ui.list.interactive;`, `}`].join('\n'));
+  vars.push([`.s-list--interactive {`, `@sugar.ui.list.interactive;`, `}`].join('\n'));
 
   // ul
   vars.push(`/**
-        * @name           s-list:ul
+        * @name           s-list--ul
         * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
         * This class represent an "<yellow>ul</yellow>" list
         * 
         * @example        html
-        * <ul class="s-list:ul" />
+        * <ul class="s-list--ul" />
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
       */`);
-  vars.push([`[class*="s-list"][class*=":ul"]:not([class*=":interactive"]):not([class*=":ol"]) {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
+  vars.push([`.s-list--ul {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
 
   // ul:icon
   vars.push(`/**
-        * @name           s-list:ul:icon
+        * @name           s-list--ul.s-list--icon
         * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
         * This class represent an "<yellow>ul</yellow>" list with some "<cyan>icon</cyan>" instead of the default bullet
         * 
         * @example        html
-        * <ul class="s-list:ul:icon" />
+        * <ul class="s-list--ul s-list--icon" />
         *   <li>
         *     <i class="s-icon-user" />
         *     Hello
         *   </li>
         * </ul>
       */`);
-  vars.push([`[class*="s-list"][class*=":ul"][class*=":icon"]:not([class*=":interactive"]):not([class*=":ol"]) {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
+  vars.push([`.s-list--icon.s-list--ul {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
 
 
   replaceWith(vars);

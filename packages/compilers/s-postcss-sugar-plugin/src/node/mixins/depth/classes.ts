@@ -27,8 +27,9 @@ export default function ({
   const vars: string[] = [];
 
   Object.keys(depthsObj).forEach((depthName) => {
+    console.log(depthName);
     const depthCss = `/**
-  * @name          s-depth-${depthName}
+  * @name          s-depth--${depthName}
   * @namespace          sugar.css.depth
   * @type               CssClass
   * 
@@ -37,7 +38,7 @@ export default function ({
   * @example        html
   * <a class="s-btn s-btn--primary s-depth-${depthName}">I'm a cool depth button</a>
   */
-.s-depth-${depthName} {
+.s-depth--${depthName} {
     @sugar.depth(${depthName});
 }`;
     vars.push(depthCss);

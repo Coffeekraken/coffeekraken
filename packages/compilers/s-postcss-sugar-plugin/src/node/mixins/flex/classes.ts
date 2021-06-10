@@ -35,320 +35,320 @@ export default function ({
             * @example        html
             * <div class="s-flex"></div>
             */
-            [class*="s-flex"]:not([class*="s-flex-item"]) {
+            .s-flex {
                 display: flex;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:row
+            * @name          s-flex--row
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the flex-direction to row
             * 
             * @example        html
-            * <div class="s-flex:row"></div>
+            * <div class="s-flex--row"></div>
             */
-            [class*="s-flex"][class*=":row"]:not([class*="s-flex-item"]) {
+            .s-flex--row {
                 flex-direction: row;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:row-reverse
+            * @name          s-flex--row-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the flex-direction to row-reverse
             * 
             * @example        html
-            * <div class="s-flex:row-reverse"></div>
+            * <div class="s-flex--row-reverse"></div>
             */
-            [class*="s-flex"][class*=":row-reverse"]:not([class*="s-flex-item"]) {
+            .s-flex--row-reverse {
                 flex-direction: row-reverse;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:column
+            * @name          s-flex--column
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the flex-direction to column
             * 
             * @example        html
-            * <div class="s-flex:column"></div>
+            * <div class="s-flex--column"></div>
             */
-            [class*="s-flex"][class*=":column"]:not([class*="s-flex-item"]) {
+            .s-flex--column {
                 flex-direction: column;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:column-reverse
+            * @name          s-flex--column-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the flex-direction to column-reverse
             * 
             * @example        html
-            * <div class="s-flex:column-reverse"></div>
+            * <div class="s-flex--column-reverse"></div>
             */
-            [class*="s-flex"][class*=":column-reverse"]:not([class*="s-flex-item"]) {
+            .s-flex--column-reverse {
                 flex-direction: column-reverse;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:nowrap
+            * @name          s-flex--nowrap
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the flex-wrap to nowrap
             * 
             * @example        html
-            * <div class="s-flex:nowrap"></div>
+            * <div class="s-flex--nowrap"></div>
             */
-            [class*="s-flex"][class*=":nowrap"]:not([class*="s-flex-item"]) {
+            .s-flex--nowrap {
                 flex-wrap: nowrap;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:wrap
+            * @name          s-flex--wrap
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the flex-wrap to wrap
             * 
             * @example        html
-            * <div class="s-flex:wrap"></div>
+            * <div class="s-flex--wrap"></div>
             */
-            [class*="s-flex"][class*=":wrap"]:not([class*="s-flex-item"]) {
+            .s-flex--wrap {
                 flex-wrap: wrap;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:wrap-reverse
+            * @name          s-flex--wrap-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the flex-wrap to wrap-reverse
             * 
             * @example        html
-            * <div class="s-flex:wrap-reverse"></div>
+            * <div class="s-flex--wrap-reverse"></div>
             */
-            [class*="s-flex"][class*=":wrap-reverse"]:not([class*="s-flex-item"]) {
+            .s-flex--wrap-reverse {
                 flex-wrap: wrap-reverse;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:justify-start
+            * @name          s-flex--justify-start
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to start
             * 
             * @example        html
-            * <div class="s-flex:justify-start"></div>
+            * <div class="s-flex--justify-start"></div>
             */
-            [class*="s-flex"][class*=":justify-start"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-start {
                 justify-content: start;
             }`);
     
     vars.push(`/**
-            * @name          s-flex:justify-flex-start
+            * @name          s-flex--justify-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to flex-start
             * 
             * @example        html
-            * <div class="s-flex:justify-flex-start"></div>
+            * <div class="s-flex--justify-flex-start"></div>
             */
-            [class*="s-flex"][class*=":justify-flex-start"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-flex-start {
                 justify-content: flex-start;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:justify-end
+            * @name          s-flex--justify-end
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to end
             * 
             * @example        html
-            * <div class="s-flex:justify-end"></div>
+            * <div class="s-flex--justify-end"></div>
             */
-            [class*="s-flex"][class*=":justify-end"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-end {
                 justify-content: end;
             }`);
     
     vars.push(`/**
-            * @name          s-flex:justify-flex-end
+            * @name          s-flex--justify-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to flex-end
             * 
             * @example        html
-            * <div class="s-flex:justify-flex-end"></div>
+            * <div class="s-flex--justify-flex-end"></div>
             */
-            [class*="s-flex"][class*=":justify-flex-end"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-flex-end {
                 justify-content: flex-end;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:justify-center
+            * @name          s-flex--justify-center
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to flex-center
             * 
             * @example        html
-            * <div class="s-flex:justify-center"></div>
+            * <div class="s-flex--justify-center"></div>
             */
-            [class*="s-flex"][class*=":justify-center"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-center {
                 justify-content: center;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:justify-space-between
+            * @name          s-flex--justify-space-between
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to space-between
             * 
             * @example        html
-            * <div class="s-flex:justify-space-between"></div>
+            * <div class="s-flex--justify-space-between"></div>
             */
-            [class*="s-flex"][class*=":justify-space-between"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-space-between {
                 justify-content: space-between;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:justify-space-around
+            * @name          s-flex--justify-space-around
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to space-around
             * 
             * @example        html
-            * <div class="s-flex:justify-space-around"></div>
+            * <div class="s-flex--justify-space-around"></div>
             */
-            [class*="s-flex"][class*=":justify-space-around"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-space-around {
                 justify-content: space-around;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:justify-space-evenly
+            * @name          s-flex--justify-space-evenly
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to space-evenly
             * 
             * @example        html
-            * <div class="s-flex:justify-space-evenly"></div>
+            * <div class="s-flex--justify-space-evenly"></div>
             */
-            [class*="s-flex"][class*=":justify-space-evenly"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-space-evenly {
                 justify-content: space-evenly;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:justify-stretch
+            * @name          s-flex--justify-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the justify-content property to stretch
             * 
             * @example        html
-            * <div class="s-flex:justify-stretch"></div>
+            * <div class="s-flex--justify-stretch"></div>
             */
-            [class*="s-flex"][class*=":justify-stretch"]:not([class*="s-flex-item"]) {
+            .s-flex--justify-stretch {
                 justify-content: stretch;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:align-start
+            * @name          s-flex--align-start
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the align-items property to start
             * 
             * @example        html
-            * <div class="s-flex:align-start"></div>
+            * <div class="s-flex--align-start"></div>
             */
-            [class*="s-flex"][class*=":align-start"]:not([class*="s-flex-item"]) {
+            .s-flex--align-start {
                 align-items: start;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:align-flex-start
+            * @name          s-flex--align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the align-items property to flex-start
             * 
             * @example        html
-            * <div class="s-flex:align-flex-start"></div>
+            * <div class="s-flex--align-flex-start"></div>
             */
-            [class*="s-flex"][class*=":align-flex-start"]:not([class*="s-flex-item"]) {
+            .s-flex--align-flex-start {
                 align-items: flex-start;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:align-end
+            * @name          s-flex--align-end
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the align-items property to end
             * 
             * @example        html
-            * <div class="s-flex:align-end"></div>
+            * <div class="s-flex--align-end"></div>
             */
-            [class*="s-flex"][class*=":align-end"]:not([class*="s-flex-item"]) {
+            .s-flex--align-end {
                 align-items: end;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:align-flex-end
+            * @name          s-flex--align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the align-items property to flex-end
             * 
             * @example        html
-            * <div class="s-flex:align-flex-end"></div>
+            * <div class="s-flex--align-flex-end"></div>
             */
-            [class*="s-flex"][class*=":align-flex-end"]:not([class*="s-flex-item"]) {
+            .s-flex--align-flex-end {
                 align-items: flex-end;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:align-center
+            * @name          s-flex--align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the align-items property to center
             * 
             * @example        html
-            * <div class="s-flex:align-center"></div>
+            * <div class="s-flex--align-center"></div>
             */
-            [class*="s-flex"][class*=":align-center"]:not([class*="s-flex-item"]) {
+            .s-flex--align-center {
                 align-items: center;
             }`);
 
     vars.push(`/**
-            * @name          s-flex:align-baseline
+            * @name          s-flex--align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
             * This class allows specify the align-items property to baseline
             * 
             * @example        html
-            * <div class="s-flex:align-baseline"></div>
+            * <div class="s-flex--align-baseline"></div>
             */
-            [class*="s-flex"][class*=":align-baseline"]:not([class*="s-flex-item"]) {
+            .s-flex--align-baseline {
                 align-items: baseline;
             }`);
 
     vars.push(`/**
-        * @name          s-flex-item:grow
+        * @name          s-flex-item--grow
         * @namespace          sugar.css.flex
         * @type               CssClass
         * 
@@ -356,15 +356,15 @@ export default function ({
         * 
         * @example        html
         * <div class="s-flex">
-        *   <div class="s-flex-item:grow"></div>
+        *   <div class="s-flex-item--grow"></div>
         * </div>
         */
-        [class*="s-flex-item"][class*=":grow"]:not([class*=":grow-"]) {
+        .s-flex-item--grow {
             flex-grow: 1;
         }`);
 
     vars.push(`/**
-        * @name          s-flex-item:shrink
+        * @name          s-flex-item--shrink
         * @namespace          sugar.css.flex
         * @type               CssClass
         * 
@@ -372,16 +372,16 @@ export default function ({
         * 
         * @example        html
         * <div class="s-flex">
-        *   <div class="s-flex-item:shrink"></div>
+        *   <div class="s-flex-item--shrink"></div>
         * </div>
         */
-        [class*="s-flex-item"][class*=":shrink"]:not([class*=":shrink-"]) {
+        .s-flex-item--shrink {
             flex-shrink: 1;
         }`);
 
     for (let i=1; i<20; i++) {
         vars.push(`/**
-                * @name          s-flex-item:order-${i}
+                * @name          s-flex-item--order-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
                 * 
@@ -389,10 +389,10 @@ export default function ({
                 * 
                 * @example        html
                 * <div class="s-flex">
-                *   <div class="s-flex-item:order-${i}"></div>
+                *   <div class="s-flex-item--order-${i}"></div>
                 * </div>
                 */
-                [class*="s-flex-item"][class*=":order-${i}"] {
+                .s-flex-item--order-${i} {
                     order: ${i};
                 }`);
     }
@@ -400,7 +400,7 @@ export default function ({
 
     for (let i=1; i<20; i++) {
         vars.push(`/**
-                * @name          s-flex-item:grow-${i}
+                * @name          s-flex-item--grow-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
                 * 
@@ -408,17 +408,17 @@ export default function ({
                 * 
                 * @example        html
                 * <div class="s-flex">
-                *   <div class="s-flex-item:grow-${i}"></div>
+                *   <div class="s-flex-item--grow-${i}"></div>
                 * </div>
                 */
-                [class*="s-flex-item"][class*=":grow-${i}"] {
+                .s-flex-item--grow-${i} {
                     flex-grow: ${i};
                 }`);
             }
 
     for (let i=1; i<20; i++) {
         vars.push(`/**
-                * @name          s-flex-item:shrink-${i}
+                * @name          s-flex-item--shrink-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
                 * 
@@ -426,16 +426,16 @@ export default function ({
                 * 
                 * @example        html
                 * <div class="s-flex">
-                *   <div class="s-flex-item:shrink-${i}"></div>
+                *   <div class="s-flex-item--shrink-${i}"></div>
                 * </div>
                 */
-                [class*="s-flex-item"][class*=":shrink-${i}"] {
+                .s-flex-item--shrink-${i} {
                     flex-shrink: ${i};
                 }`);
             }
 
     vars.push(`/**
-            * @name          s-flex-item:align-flex-start
+            * @name          s-flex-item--align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
@@ -443,15 +443,15 @@ export default function ({
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item:align-flex-start"></div>
+            *   <div class="s-flex-item--align-flex-start"></div>
             * </div>
             */
-            [class*="s-flex-item"][class*=":align-flex-start"] {
+            .s-flex-item--align-flex-start {
                 align-self: flex-start;
             }`);
 
     vars.push(`/**
-            * @name          s-flex-item:align-flex-end
+            * @name          s-flex-item--align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
@@ -459,15 +459,15 @@ export default function ({
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item:align-flex-end"></div>
+            *   <div class="s-flex-item--align-flex-end"></div>
             * </div>
             */
-            [class*="s-flex-item"][class*=":align-flex-end"] {
+            .s-flex-item--align-flex-end {
                 align-self: flex-end;
             }`);
 
     vars.push(`/**
-            * @name          s-flex-item:align-center
+            * @name          s-flex-item--align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
@@ -475,15 +475,15 @@ export default function ({
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item:align-center"></div>
+            *   <div class="s-flex-item--align-center"></div>
             * </div>
             */
-            [class*="s-flex-item"][class*=":align-center"] {
+            .s-flex-item--align-center {
                 align-self: center;
             }`);
 
     vars.push(`/**
-            * @name          s-flex-item:align-baseline
+            * @name          s-flex-item--align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
@@ -491,15 +491,15 @@ export default function ({
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item:align-baseline"></div>
+            *   <div class="s-flex-item--align-baseline"></div>
             * </div>
             */
-            [class*="s-flex-item"][class*=":align-baseline"] {
+            .s-flex-item--align-baseline {
                 align-self: baseline;
             }`);
 
     vars.push(`/**
-            * @name          s-flex-item:align-stretch
+            * @name          s-flex-item--align-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
             * 
@@ -507,10 +507,10 @@ export default function ({
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item:align-stretch"></div>
+            *   <div class="s-flex-item--align-stretch"></div>
             * </div>
             */
-            [class*="s-flex-item"][class*=":align-stretch"] {
+            .s-flex-item--align-stretch {
                 align-self: stretch;
             }`);
 

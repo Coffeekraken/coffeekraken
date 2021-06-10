@@ -48,14 +48,14 @@ export default function ({
     const colsCount = __unique(layout.split(/\n\s/)).length;
     vars.push(`
       /**
-       * @name       s-grid-${id}
+       * @name       s-grid--${id}
        * @namespace     sugar.css.layout
        * @type          CssClass
        * 
        * This class represent a layout of "<yellow>${layout}</yellow>"
        * 
        * @example     html
-       * <div class="s-container">
+       * <div class="s-container s-grid--${id}">
        *    ${Array(colsCount)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -66,7 +66,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-grid-${id} {
+      .s-grid--${id} {
         @sugar.layout.grid('${layout}');
       }
     `);
@@ -76,9 +76,9 @@ export default function ({
 
   Object.keys(spaces).forEach(spaceName => {
 
-    const clsX = `s-grid-gutter-x-${spaceName}`.replace('-default','');
-    const clsY = `s-grid-gutter-y-${spaceName}`.replace('-default','');
-    const cls = `s-grid-gutter-${spaceName}`.replace('-default','');
+    const clsX = `s-grid-gutter-x--${spaceName}`.replace('-default','');
+    const clsY = `s-grid-gutter-y--${spaceName}`.replace('-default','');
+    const cls = `s-grid-gutter--${spaceName}`.replace('-default','');
 
     vars.push(`
       /**
@@ -89,7 +89,7 @@ export default function ({
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid-123 ${clsX}">
+       * <div class="s-grid--123 ${clsX}">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -100,7 +100,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      [class*="${clsX}"] > * {
+      .${clsX} > * {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
       }
@@ -115,7 +115,7 @@ export default function ({
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid-123 ${clsY}">
+       * <div class="s-grid--123 ${clsY}">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -126,7 +126,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-        [class*="${clsY}"] > * {
+        .${clsY} > * {
         padding-top: sugar.space(${spaceName});
         padding-bottom: sugar.space(${spaceName});
       }
@@ -141,7 +141,7 @@ export default function ({
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid-123 ${cls}">
+       * <div class="s-grid--123 ${cls}">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -152,7 +152,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      [class*="${cls}"]:not([class*="s-grid-gutter-x"]).not([class*="s-grid-gutter-y"]) > * {
+      .${cls} > * {
         padding: sugar.space(${spaceName});
       }
     `);
@@ -160,14 +160,14 @@ export default function ({
 
   vars.push(`
      /**
-       * @name       s-grid-gutter:between
+       * @name       s-grid-gutter--between
        * @namespace     sugar.css.layout
        * @type          CssClass
        * 
        * This class allows you to specify that you want only gutters between grid items
        * 
        * @example     html
-       * <div class="s-grid-123 s-grid-gutter:between">
+       * <div class="s-grid--123 s-grid-gutter--between">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -178,7 +178,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      [class*="s-grid-gutter"][class*=":between"] > * {
+      .s-grid-gutter--between > * {
         &:first-child {
           padding-left: 0 !important;
         }

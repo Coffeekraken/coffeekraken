@@ -77,17 +77,18 @@
             background-size: cover;
             background-position: bottom center;
             min-width: 50ch;
+            padding: sugar.space(40);
+            /* @sugar.color.remap(ui, accent); */
 
             &:before {
                 content: '';
-                display: block; 
-                position: absolute;
+                display: block;
                 top: 0; left: 0;
-                z-index: -1;
                 width: 100%; height: 100%;
-                border-radius: sugar.depth(sugar.config(ui.tooltip.borderRadius));
+                position: absolute;
+                z-index: 0;
 
-                @sugar.gradient($start: sugar.color(ui, surface), $end: rgba(0,0,0,0));
+                @sugar.gradient.linear(sugar.color(ui, surface), rgba(0,0,0,0));
             }
         }
     }

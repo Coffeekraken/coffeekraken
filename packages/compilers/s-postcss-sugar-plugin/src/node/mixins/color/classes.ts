@@ -37,26 +37,26 @@ export default function ({ params, atRule, replaceWith }) {
 
       if (innerColorName === colorName) return;
 
-      cssArray.push(
-            [
-              `/**`,
-              ` * @name           s-color--${colorName}->${innerColorName}`,
-              ` * @namespace      sugar.css.color.classes.${innerColorName}`,
-              ` * @type           CssClass`,
-              ` *`,
-              ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
-              ` *`,
-              ` * @example        html`,
-              ` * <h1 class="s-color--${colorName}->${innerColorName}">`,
-              ` *     <span class="s-color--${colorName}">Something cool</span>`,
-              ` * </h1>`,
-              ` */`,
-              `[class*="s-color--${colorName}->${innerColorName}"] {`,
-              ` @sugar.color.remap(${colorName}, ${innerColorName})`,
-              `}`
-            ].join('\n')
-          );
-    });
+    //   cssArray.push(
+    //         [
+    //           `/**`,
+    //           ` * @name           s-color--${colorName}->${innerColorName}`,
+    //           ` * @namespace      sugar.css.color.classes.${innerColorName}`,
+    //           ` * @type           CssClass`,
+    //           ` *`,
+    //           ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
+    //           ` *`,
+    //           ` * @example        html`,
+    //           ` * <h1 class="s-color--${colorName}->${innerColorName}">`,
+    //           ` *     <span class="s-color--${colorName}">Something cool</span>`,
+    //           ` * </h1>`,
+    //           ` */`,
+    //           `[class*="s-color--${colorName}->${innerColorName}"] {`,
+    //           ` @sugar.color.remap(${colorName}, ${innerColorName})`,
+    //           `}`
+    //         ].join('\n')
+    //       );
+    // });
 
     Object.keys(colorObj).forEach((colorVariantName) => {
       if (colorVariantName.match(/-[hslrgba]$/)) return;

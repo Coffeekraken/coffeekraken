@@ -55,6 +55,7 @@ export default function ({
     '@sugar.util.classes;',
     '@sugar.flex.classes;',
     '@sugar.display.classes;',
+    '@sugar.position.classes;',
     '@sugar.style.classes;',
     '@sugar.icon.classes;',
     '@sugar.space.classes;'

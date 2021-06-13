@@ -113,21 +113,23 @@
                             <a class="s-btn:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
                                 <i class="s-icon:fire"></i>
                             </a>
-                            <div class="s-tooltip:left-top s-pd:50">
-                                <span class="s-avatar s-mb:40 s-display:block s-mx:auto" style="font-size: 120px">
-                                    <img src="/src/img/kraken-avatar.png" alt="{{ $firstBlock->author->name }}" />
-                                </span>
-                                <p class="s-p s-font:40 s-mb:30">
-                                    Don't hesitate to declare an issue if something does not works as expected.
-                                    <br />
-                                    We are a community and this is what makes the strengh of this project.
-                                </p>
-                                <a class="s-btn:error s-display:block s-mb:20 s-depth:50" href="https://olivierbossel.com" title="Share the love" target="_blank">
-                                    Declare my issue on Github
-                                </a>
-                                <a class="s-btn:info s-display:block" href="https://olivierbossel.com" title="Share the love" target="_blank">
-                                    Talk about it on Discord
-                                </a>
+                            <div class="s-tooltip:left-bottom">
+                                <div class="s-position:relative">
+                                    <span class="s-avatar s-mb:40 s-display:block s-mx:auto" style="font-size: 120px">
+                                        <img src="/src/img/kraken-avatar.png" alt="{{ $firstBlock->author->name }}" />
+                                    </span>
+                                    <p class="s-p s-font:40 s-mb:30">
+                                        Don't hesitate to declare an issue if something does not works as expected.
+                                        <br />
+                                        We are a community and this is what makes the strengh of this project.
+                                    </p>
+                                    <a class="s-btn:error s-display:block s-mb:20 s-depth:50" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                                        Declare my issue on Github
+                                    </a>
+                                    <a class="s-btn:info s-display:block" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                                        Talk about it on Discord
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         &nbsp;

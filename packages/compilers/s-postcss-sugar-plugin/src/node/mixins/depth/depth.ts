@@ -28,7 +28,7 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginDepthParams = {
-    depth: 0,
+    depth: 0  ,
     ...params
   };
   

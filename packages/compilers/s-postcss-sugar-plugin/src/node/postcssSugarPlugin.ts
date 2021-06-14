@@ -190,7 +190,7 @@ const plugin = (settings: any = {}) => {
 
       nodes.map(n => typeof n === 'string' ? n.trim() : n).forEach(n => {
         if (typeof n === 'string') {
-          finalNodes = [...finalNodes, ...__postcss.parse(n).nodes];
+          finalNodes = [...finalNodes, ...(__postcss.parse(n).nodes ?? [])];
         } else {
           finalNodes.push(n);
         }

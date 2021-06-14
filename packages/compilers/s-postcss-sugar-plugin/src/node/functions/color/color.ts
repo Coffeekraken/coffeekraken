@@ -102,7 +102,7 @@ export default function color({
 
     let colorModifierVar = `--s-theme-color-${colorName}`;
     if (colorStateName) {
-      colorModifierVar += `--${colorStateName}`;
+      colorModifierVar += `-${colorStateName}`;
     }
     if (finalParams.modifier && !finalParams.modifier.match(/^--/)) {
       colorModifierVar += `-${colorModifier}`;
@@ -159,6 +159,6 @@ export default function color({
       .replace(/\s?\*\s?/gm, ' * ')
       .replace(/\s?\/\s?/gm, ' / ');
 
-    return finalValue;
+      return finalValue;
   }
 }

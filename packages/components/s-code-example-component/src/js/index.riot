@@ -1,0 +1,117 @@
+<s-code-example>
+
+  <header class="{ component.className('__toolbar') }">
+    <ol class="{ component.className('__tabs', 's-tabs s-tabs--grow') }">
+      <li class="{ component.className('__tab') }"
+        id={ item.id }
+        active="{ state.activeTabId === item.id }"
+        onclick="{() => this.setActiveTab(item.id)}"
+        each="{ (item, idx) in (state.items ?? []) }">
+        { item.lang }
+      </li>
+    </ol>
+  </header>
+  <div class="{ component.className('__content') }">
+    <pre class="{ component.className('__code') + ` language-${ item.lang }` }"
+        
+        id={ item.id ?? item.lang }
+        active={ state.activeTabId === (item.id ?? item.lang) }
+        each={ (item, idx) in (state.items ?? []) }>
+        <code>{ item.code }</code>
+    </pre>
+  </div>
+
+  <style type="postcss">
+    :host {
+      display: block;
+    }
+
+      .s-code-example__toolbar {
+      }
+
+      .s-code-example__tabs {
+        display: flex;
+        list-style: none;
+      }
+      .s-code-example__tab {
+
+      }
+
+      .s-code-example__code {
+        display: none;
+        
+        &[active] {
+          display: block;
+        }
+      }
+
+  </style>
+
+  <script>
+    import prism from 'prismjs';
+    import 'prismjs/components/prism-javascript';
+    import 'prismjs/components/prism-css';
+    import 'prismjs/components/prism-markup';
+    import 'prismjs/components/prism-bash';
+    import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
+    import __SComponentUtils from '@coffeekraken/s-component-utils';
+    import __SActivateComponent from '@coffeekraken/s-activate-component';
+
+    export default {
+      state: {
+        activeTabId: undefined,
+        items: []
+      },
+      onBeforeMount() {
+        this.component = new __SComponentUtils(this.root, this.props, {
+          interface: __SCodeExampleComponentInterface
+        });
+      },
+      onMounted() {
+        this.$templates = Array.from(this.root.querySelectorAll('template'));
+
+        this.$templates.forEach($template => {
+          this.update({
+            items: [...this.state.items, {
+              id: $template.getAttribute('id') ?? $template.getAttribute('language') ?? $template.getAttribute('lang'),
+              lang: $template.getAttribute('language') ?? $template.getAttribute('lang'),
+              code: $template.innerHTML.trim()
+            }]
+          });
+        });
+
+        // active idx
+        if (this.component.props.active) {
+          this.setActiveTab(this.component.props.active);
+        } else {
+          this.setActiveTab(this.state.items[0].id);
+        }
+
+        // const themeImport = `@import url('${this.component.props.theme}');`;
+        // const $style = document.createElement('style');
+        // $style.type = 'text/css';
+        // $style.appendChild(document.createTextNode(themeImport));
+        // this.root.appendChild($style);
+      },
+      setActiveTab(id) {
+        this.update({
+          activeTabId: id
+        });
+        this.initPrismOnTab(id);
+      },
+      initPrismOnTab(id) {
+        const $tab = this.root.querySelector(`li#${id}`),
+              $content = this.root.querySelector(`pre#${id}`);
+
+        if ($content.hasAttribute('inited')) return;
+
+  
+        $content.setAttribute('inited', true);
+
+        console.log('HI');
+
+        prism.highlightElement($content);
+      }
+    };
+  </script>
+</s-code-example>

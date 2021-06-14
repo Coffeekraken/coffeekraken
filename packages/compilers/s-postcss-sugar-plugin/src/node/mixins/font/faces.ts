@@ -27,30 +27,21 @@ export default function ({
   const fontsFamiliesObj = __theme().config('font.family');
   Object.keys(fontsFamiliesObj).forEach((fontName) => {
     const fontObj = fontsFamiliesObj[fontName];
-    vars.push(`/**
-  * @name               ${fontName}
-  * @namespace          sugar.css.font
-  * @type               CssFontFace
-  * 
-  * This declare the @font-face for the "<yellow>${fontName}</yellow> font family"
-  * 
-  * @since          2.0.0
-  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  */
- ${
-   fontObj.import
-     ? `@import url("${fontObj.import}");`
-     : `
- @font-face {
-    ${Object.keys(fontObj)
-      .map((prop) => {
-        return `${prop}: ${fontObj[prop]};`;
-      })
-      .join('\n')}
- }
- `
- }
-`);
+    
+    if (fontObj.import) {
+      vars.push(`/**
+        * @name               ${fontName}
+        * @namespace          sugar.css.font
+        * @type               CssFontFace
+        * 
+        * This declare the @font-face for the "<yellow>${fontName}</yellow> font family"
+        * 
+        * @since          2.0.0
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        @import url("${fontObj.import}");
+      `);
+    }
   });
 
   replaceWith(vars);

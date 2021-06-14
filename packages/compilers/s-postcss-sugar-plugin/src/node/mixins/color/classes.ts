@@ -37,31 +37,29 @@ export default function ({ params, atRule, replaceWith }) {
 
       if (innerColorName === colorName) return;
 
-    //   cssArray.push(
-    //         [
-    //           `/**`,
-    //           ` * @name           s-color--${colorName}->${innerColorName}`,
-    //           ` * @namespace      sugar.css.color.classes.${innerColorName}`,
-    //           ` * @type           CssClass`,
-    //           ` *`,
-    //           ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
-    //           ` *`,
-    //           ` * @example        html`,
-    //           ` * <h1 class="s-color--${colorName}->${innerColorName}">`,
-    //           ` *     <span class="s-color--${colorName}">Something cool</span>`,
-    //           ` * </h1>`,
-    //           ` */`,
-    //           `[class*="s-color--${colorName}->${innerColorName}"] {`,
-    //           ` @sugar.color.remap(${colorName}, ${innerColorName})`,
-    //           `}`
-    //         ].join('\n')
-    //       );
-    // });
+      cssArray.push(
+            [
+              `/**`,
+              ` * @name           s-color--${colorName}->${innerColorName}`,
+              ` * @namespace      sugar.css.color.classes.${innerColorName}`,
+              ` * @type           CssClass`,
+              ` *`,
+              ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
+              ` *`,
+              ` * @example        html`,
+              ` * <h1 class="s-color--${colorName}->${innerColorName}">`,
+              ` *     <span class="s-color--${colorName}">Something cool</span>`,
+              ` * </h1>`,
+              ` */`,
+              `[class*="s-color--${colorName}->${innerColorName}"] {`,
+              ` @sugar.color.remap(${colorName}, ${innerColorName})`,
+              `}`
+            ].join('\n')
+          );
+    });
 
     Object.keys(colorObj).forEach((colorVariantName) => {
       if (colorVariantName.match(/-[hslrgba]$/)) return;
-
-      const colorVariantValue = colorObj[colorVariantName];
 
       let modifierStr = '';
       if (colorVariantName.match(/^default/)) {
@@ -70,67 +68,47 @@ export default function ({ params, atRule, replaceWith }) {
       } else {
         modifierStr = `-${colorVariantName}`;
       }
+      
+      cssArray.push(
+        [
+          `/**`,
+          ` * @name           s-color--${colorName}${modifierStr}`,
+          ` * @namespace      sugar.css.color.classes.${colorName}.${colorVariantName}`,
+          ` * @type           CssClass`,
+          ` *`,
+          ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
+          ` *`,
+          ` * @example        html`,
+          ` * <h1 class="s-color--${colorName}${modifierStr}">`,
+          ` *     Something cool`,
+          ` * </h1>`,
+          ` */`,
+          `.s-color--${colorName}${modifierStr} {`,
+          `   color: sugar.color(${colorName},${colorVariantName});`,
+          `}`
+        ].join('\n')
+      );
 
-      if (colorVariantName.match(/^:/) && __isPlainObject(colorVariantValue)) {
-        // Object.keys(colorVariantValue).forEach((modifierName) => {
-        //   let className;
-        //   switch (colorVariantName) {
-        //     case ':hover':
-        //       className = `[hoverable]:hover:not([hoverable]:not(:hover) &)`;
-        //       break;
-        //     case ':focus':
-        //       className = '*:focus, *:focus-within';
-        //       break;
-        //     case ':active':
-        //       className = `*:active`;
-        //       break;
-        //   }
-        //   cssArray.push(`
-        //     .${className} {
-        //     }
-        //   `);
-        // });
-      } else {
-        cssArray.push(
-          [
-            `/**`,
-            ` * @name           s-color--${colorName}${modifierStr}`,
-            ` * @namespace      sugar.css.color.classes.${colorName}.${colorVariantName}`,
-            ` * @type           CssClass`,
-            ` *`,
-            ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
-            ` *`,
-            ` * @example        html`,
-            ` * <h1 class="s-color--${colorName}${modifierStr}">`,
-            ` *     Something cool`,
-            ` * </h1>`,
-            ` */`,
-            `.s-color--${colorName}${modifierStr} {`,
-            `   color: sugar.color(${colorName},${colorVariantName});`,
-            `}`
-          ].join('\n')
-        );
+      cssArray.push(
+        [
+          `/**`,
+          ` * @name           s-bg--${colorName}${modifierStr}`,
+          ` * @namespace      sugar.css.color.classes.bg.${colorName}.${colorVariantName}`,
+          ` * @type           CssClass`,
+          ` *`,
+          ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
+          ` *`,
+          ` * @example        html`,
+          ` * <h1 class="s-bg--${colorName}${modifierStr}">`,
+          ` *     Something cool`,
+          ` * </h1>`,
+          ` */`,
+          `.s-bg--${colorName}${modifierStr} {`,
+          `   background-color: sugar.color(${colorName},${colorVariantName})`,
+          `}`
+        ].join('\n')
+      );
 
-        cssArray.push(
-          [
-            `/**`,
-            ` * @name           s-bg--${colorName}${modifierStr}`,
-            ` * @namespace      sugar.css.color.classes.bg.${colorName}.${colorVariantName}`,
-            ` * @type           CssClass`,
-            ` *`,
-            ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
-            ` *`,
-            ` * @example        html`,
-            ` * <h1 class="s-bg--${colorName}${modifierStr}">`,
-            ` *     Something cool`,
-            ` * </h1>`,
-            ` */`,
-            `.s-bg--${colorName}${modifierStr} {`,
-            `   background-color: sugar.color(${colorName},${colorVariantName})`,
-            `}`
-          ].join('\n')
-        );
-      }
     });
   });
 

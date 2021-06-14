@@ -31,6 +31,7 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginAssetPlatformParams = {
+    platform: '',
     ...params
   };
 

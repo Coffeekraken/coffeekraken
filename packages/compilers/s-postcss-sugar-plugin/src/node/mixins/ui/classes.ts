@@ -33,6 +33,7 @@ export default function ({
     '@sugar.ui.button.classes;',
     '@sugar.ui.form.classes;',
     '@sugar.ui.list.classes;',
+    '@sugar.ui.tabs.classes;',
     '@sugar.ui.badge.classes;',
     '@sugar.ui.navbar.classes;',
     '@sugar.ui.terminal.classes;',

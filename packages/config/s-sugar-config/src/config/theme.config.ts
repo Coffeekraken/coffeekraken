@@ -56,13 +56,14 @@ export function prepare(themeConfig, config) {
 
         if (colorVariantName.match(/^:/) && __isPlainObject(colorValue)) {
 
-          colorObj[colorVariantName] = expandColorObj(colorObj[colorVariantName]);
+          colorObj[colorVariantName.replace(/^:/, '')] = expandColorObj(colorObj[colorVariantName]);
+          delete colorObj[colorVariantName];
 
         } else if (typeof colorValue === 'string' && colorValue.trim().match(/^--/)) {
 
           const modifierParamsRes = ColorModifierInterface.apply(colorValue);
           if (modifierParamsRes.hasIssues()) {
-            throw new Error(modifierParamsRes);
+            throw new Error(modifierParamsRes.toString());
           }
           const modifierParams = modifierParamsRes.value;
 

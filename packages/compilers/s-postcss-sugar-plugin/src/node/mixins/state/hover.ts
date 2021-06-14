@@ -45,9 +45,14 @@ export default function ({
 
   const vars: string[] = [];
 
-  vars.push(
-    `&[hoverable]:hover, [hoverable]:hover:not([hoverable]:not(:hover) &) {`
-  );
+  // vars.push(
+  //   // `&:hover, [hoverable]:hover:not([hoverable]:not(:hover) &) {`,
+  //   `&:hover {`
+  // );
+  // vars.push(__astNodesToString(atRule.nodes));
+  // vars.push(`}`);
+
+  vars.push(`&:hover {`);
   vars.push(__astNodesToString(atRule.nodes));
   vars.push(`}`);
 

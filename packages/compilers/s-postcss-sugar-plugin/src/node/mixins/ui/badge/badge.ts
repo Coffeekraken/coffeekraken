@@ -7,11 +7,13 @@ class postcssSugarPluginUiBadgeInterface extends __SInterface {
   static definition = {
     shape: {
       type: 'String',
-      values: ['default', 'square', 'pill']
+      values: ['default', 'square', 'pill'],
+      default: 'default'
     },
     style: {
         type: 'String',
-        values: ['default', 'outline']
+        values: ['default', 'outline'],
+        default: 'default'
     }
   };
 }
@@ -32,6 +34,8 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiBadgeParams = {
+    shape: 'default',
+    style: 'default',
     ...params
   };
 

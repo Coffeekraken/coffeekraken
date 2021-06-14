@@ -20,6 +20,7 @@ class postcssSugarPluginIconClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginIconClassesParams {
+  icons: string[]
 }
 
 export { postcssSugarPluginIconClassesInterface as interface };
@@ -34,6 +35,7 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginIconClassesParams = {
+    icons: [],
     ...params
   };
 
@@ -48,7 +50,6 @@ export default function ({
     if (iconName.slice(0,3) === 'fa-') {
 
       const faIconName = iconName.slice(3);
-      console.log(faIconName);
 
       vars.push(`
         /**

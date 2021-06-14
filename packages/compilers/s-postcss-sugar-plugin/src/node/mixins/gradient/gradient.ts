@@ -82,7 +82,7 @@ export default function ({
     endColorVar = `sugar.color(${endColorVar})`;
   }
 
-  const angleVar = `${finalParams.angle}deg`;
+  const angleVar = typeof finalParams.angle === 'number' ? `${finalParams.angle}deg` : finalParams.angle;
 
   let gradientCss = `background: linear-gradient(${angleVar}, ${startColorVar} 0%, ${endColorVar} 100%);`;
 

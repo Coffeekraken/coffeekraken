@@ -83,7 +83,7 @@ export default class SComponentUtils extends __SClass {
    */
   $targets: HTMLElement[] = [];
 
-  _targetSelector: string;
+  _targetSelector?: string;
 
   /**
    * @name            setDefaultProps
@@ -126,8 +126,8 @@ export default class SComponentUtils extends __SClass {
     this.name = node.tagName.toLowerCase();
     this.props = props ?? {};
 
-    Object.keys(this.constructor._defaultProps).forEach(selector => {
-      const defaultProps = this.constructor._defaultProps[selector];
+    Object.keys((<any>this.constructor)._defaultProps).forEach(selector => {
+      const defaultProps = (<any>this.constructor)._defaultProps[selector];
       if (selector === this.name || (this.node.id && selector === `#${this.node.id}`) || (this.node.id && selector === `${this.name}#${this.node.id}`)) {
         this.props = __deepMerge(defaultProps, this.props);
       }
@@ -166,10 +166,11 @@ export default class SComponentUtils extends __SClass {
         } else {
           this._targetSelector = this.props.target;
         }
-        const targets = Array.from(document.querySelectorAll(this._targetSelector));
-        // @ts-ignore
-        if (targets.length) this.$targets = targets;
-        console.log(this.$targets);
+        if (this._targetSelector) {
+          const targets = Array.from(document.querySelectorAll(this._targetSelector));
+          // @ts-ignore
+          if (targets.length) this.$targets = targets;
+        }
       }
 
     }
@@ -268,12 +269,15 @@ export default class SComponentUtils extends __SClass {
     });
   }
 
-  addTargetsEventListener(name: string, handler: Function): Promise<any> {
+  addTargetsEventListener(name: string, handler: Function): void {
     this.$targets.forEach($target => {
       $target.addEventListener(name, async (e) => {
+        // @ts-ignore
         if (!e.detail?.onPing) return handler(e);
+        // @ts-ignore
         e.detail.onPing();
         const res = await handler(e);
+        // @ts-ignore
         e.detail.onResolve(res);
       });
     })

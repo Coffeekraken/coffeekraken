@@ -6,7 +6,7 @@ export default {
      * @name                neutral
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #776c94
+     * @default             #776d91
      *
      * Specify the <s-color="neutral">neutral</s-color> color value.
      *
@@ -14,7 +14,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     neutral: {
-      default: '#776c94',
+      default: '#776d91',
       '...': '[theme.colorStates]',
       text: '--lighten 50',
       background: '--darken 42'
@@ -24,7 +24,7 @@ export default {
      * @name                ui
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #77708a
+     * @default             #7a738c
      *
      * Specify the <s-color="ui">ui</s-color> color value.
      *
@@ -32,7 +32,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     ui: {
-      default: '#77708a',
+      default: '#7a738c',
       '...': '[theme.colorStates]'
     },
 
@@ -40,7 +40,7 @@ export default {
      * @name                accent
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #F2BC2B
+     * @default             #ffbb00
      *
      * Specify the <s-color="accent">accent</s-color> color value.
      *
@@ -48,7 +48,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     accent: {
-      default: '#F2BC2B',
+      default: '#ffbb00',
       '...': '[theme.colorStates]',
       gradientEnd: '--spin 345 --darken 10',
     },
@@ -57,7 +57,7 @@ export default {
      * @name                complementary
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #7F43FF
+     * @default             #5100ff
      *
      * Specify the <s-color="complementary">complementary</s-color> color value.
      *
@@ -65,7 +65,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     complementary: {
-      default: '#7F43FF',
+      default: '#5100ff',
       '...': '[theme.colorStates]'
     },
 
@@ -73,7 +73,7 @@ export default {
      * @name                success
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #B5F168
+     * @default             #91ff00
      *
      * Specify the <s-color="success">success</s-color> color value.
      *
@@ -81,7 +81,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     success: {
-      default: '#B5F168',
+      default: '#91ff00',
       '...': '[theme.colorStates]'
     },
 
@@ -89,7 +89,7 @@ export default {
      * @name                warning
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #FFD501
+     * @default             #ffd500
      *
      * Specify the <s-color="warning">warning</s-color> color value.
      *
@@ -97,7 +97,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     warning: {
-      default: '#FFD501',
+      default: '#ffd500',
       '...': '[theme.colorStates]'
     },
 
@@ -105,7 +105,7 @@ export default {
      * @name                error
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #FF4370
+     * @default             #ff003b
      *
      * Specify the <s-color="error">error</s-color> color value.
      *
@@ -113,7 +113,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     error: {
-      default: '#FF4370',
+      default: '#ff003b',
       '...': '[theme.colorStates]'
     },
 
@@ -121,7 +121,7 @@ export default {
      * @name                info
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #FDA622
+     * @default             #00ffff
      *
      * Specify the <s-color="info">info</s-color> color value.
      *
@@ -129,8 +129,9 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     info: {
-      default: '#FDA622',
-      '...': '[theme.colorStates]'
+      default: '#00ffff',
+      '...': '[theme.colorStates]',
+      text: '--lighten 20'
     },
 
     /**

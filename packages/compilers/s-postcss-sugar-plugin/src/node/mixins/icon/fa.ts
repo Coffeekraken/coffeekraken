@@ -40,6 +40,8 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginIconFaParams = {
+    icon: '',
+    style: 'solid',
     ...params
   };
 
@@ -61,6 +63,7 @@ export default function ({
 
   const iconDef = __fa.findIconDefinition({
       prefix: prefixes[finalParams.style],
+      // @ts-ignore
       iconName: finalParams.icon
   });
 

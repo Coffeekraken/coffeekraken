@@ -33,11 +33,13 @@ export default function sVitePluginRiotjs(riotSettings: any = {}) {
           `riot.register('${result.meta.tagName}', Component);`,
           // @ts-ignore
           'setTimeout(() => {',
+          // @ts-ignore
           `   riot.mount('${result.meta.tagName}');`,
           '});',
-          `Component.mount = () => {
-            riot.mount('${result.meta.tagName}');
-          };`,
+          `Component.mount = () => {`,
+            // @ts-ignore
+            `riot.mount('${result.meta.tagName}');`,
+          `};`,
           'export default Component;'
         ].join('\n');
 

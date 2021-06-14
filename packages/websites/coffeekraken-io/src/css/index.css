@@ -8,6 +8,8 @@
   fa-fire:fire
 );
 
+@sugar.prism.theme;
+
 [class*='s-btn'] {
   border-radius: 100px !important;
   border: none !important;

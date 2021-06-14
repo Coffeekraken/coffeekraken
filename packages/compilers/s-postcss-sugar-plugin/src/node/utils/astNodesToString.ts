@@ -22,7 +22,7 @@ export default function astNodesToString(nodes) {
       return node.toString();
     }).map(item => {
       item = item.trim();
-      if (!item.match(/\}$/) & !item.match(/;$/)) {
+      if (!item.match(/\}$/) && !item.match(/;$/)) {
         item += ';';
       }
       return item;

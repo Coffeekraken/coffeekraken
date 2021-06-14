@@ -7,7 +7,8 @@ class postcssSugarPluginUiAvatarInterface extends __SInterface {
   static definition = {
     shape: {
       type: 'String',
-      values: ['default', 'square']
+      values: ['default', 'square'],
+      default: 'square'
     }
   };
 }
@@ -27,6 +28,7 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiBadgeParams = {
+      shape: 'square',
     ...params
   };
 

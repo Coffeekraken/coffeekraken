@@ -28,6 +28,7 @@ export default function ({
   replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListUlParams = {
+      icon: false,
       ...params
     };
 

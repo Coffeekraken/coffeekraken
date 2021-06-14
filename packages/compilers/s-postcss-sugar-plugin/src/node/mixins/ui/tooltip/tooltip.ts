@@ -45,6 +45,7 @@ export default function ({
       vars.push(`
         @sugar.scope.bare {
             position: absolute;
+            z-index: 10;
             display: block;
             max-width: sugar.config(ui.tooltip.maxWidth);
             text-align: center;
@@ -90,45 +91,132 @@ export default function ({
           break;
           case 'top-left':
             vars.push(`  
-                top: auto;
-                right: auto;
                 bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                left: 0;
+                left: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                transform: translateX(-50%);
+
+                &:after {
+                    top: 100%;
+                    left: 50%;
+                    margin-left: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                }
             `);
           break;
           case 'top-right':
             vars.push(`  
-                top: auto;
-                left: auto;
                 bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                right: 0;
+                right: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                left: auto;
+                transform: translateX(50%);
+
+                &:after {
+                    top: 100%;
+                    left: 50%;
+                    margin-left: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                }
             `);
           break;
-          case 'right':
-            vars.push(`  
-                bottom: auto;
-                right: auto;
-                left: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                top: 50%;
-                transform: translateY(-50%);
-            `);
-          break;
-          case 'right-top':
-            vars.push(`  
-                bottom: auto;
-                right: auto;
-                left: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                top: 0;
-            `);
-          break;
-          case 'right-bottom':
-            vars.push(`  
-                top: auto;
-                right: auto;
-                left: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                bottom: 0;
-            `);
-          break;
+          // case 'top-left-right':
+          //   vars.push(`  
+          //       top: auto;
+          //       right: auto;
+          //       bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       left: 50%;
+          //       transform: none;
+          //       margin-left: calc(sugar.config(ui.tooltip.arrowSize) * -1);
+
+          //       &:after {
+          //           top: 100%;
+          //           left: 0;
+          //           right: auto;
+          //           bottom: auto;
+          //           margin-left: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //       }
+          //   `);
+          // break;
+          // case 'top-right-left':
+          //   vars.push(`  
+          //       top: auto;
+          //       left: auto;
+          //       bottom: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       right: 50%;
+          //       margin-right: calc(sugar.config(ui.tooltip.arrowSize) * -1);
+          //       margin-left: auto;
+          //       transform: none;
+
+          //       &:after {
+          //           top: 100%;
+          //           right: 0;
+          //           left: auto;
+          //           bottom: auto;
+          //           margin-right: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //       }
+          //   `);
+          // break;
+          // case 'right':
+          //   vars.push(`  
+          //       bottom: auto;
+          //       right: auto;
+          //       left: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       top: 50%;
+          //       transform: translateY(-50%);
+
+          //       &:after {
+          //           top: 50%;
+          //           right: 100%;
+          //           left: auto;
+          //           bottom: auto;
+          //           margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           transform: rotate(90deg);
+          //           margin-left: 0;
+          //       }
+          //   `);
+          // break;
+          // case 'right-top':
+          //   vars.push(`  
+          //       bottom: auto;
+          //       right: auto;
+          //       left: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       top: 0;
+          //       transform: none;
+
+          //       &:after {
+          //           top: sugar.config(ui.tooltip.arrowSize);
+          //           right: 100%;
+          //           bottom: auto;
+          //           left: auto;
+          //           margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           transform: rotate(90deg);
+          //           margin-left: 0;
+          //       }
+          //   `);
+          // break;
+          // case 'right-bottom':
+          //   vars.push(`  
+          //       top: auto;
+          //       right: auto;
+          //       left: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       bottom: 0;
+          //       transform: none;
+
+          //       &:after {
+          //           bottom: sugar.config(ui.tooltip.arrowSize);
+          //           right: 100%;
+          //           top: auto;
+          //           left: auto;
+          //           margin-bottom: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           transform: rotate(90deg);
+          //           margin-left: 0;
+          //       }
+          //   `);
+          // break;
           case 'bottom':
             vars.push(`  
                 bottom: auto;
@@ -136,6 +224,16 @@ export default function ({
                 left: 50%;
                 top: calc(100% + sugar.config(ui.tooltip.arrowSize));
                 transform: translateY(-50%);
+
+                &:after {
+                    bottom: 100%;
+                    top: auto;
+                    left: 50%;
+                    right: auto;
+                    margin-left: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(180deg);
+                }
             `);
           break;
           case 'bottom-left':
@@ -154,63 +252,63 @@ export default function ({
                 top: calc(100% + sugar.config(ui.tooltip.arrowSize));
             `);
           break;
-          case 'left':
-            vars.push(` 
-                bottom: auto;
-                left: auto;
-                right: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                top: 50%;
+          // case 'left':
+          //   vars.push(` 
+          //       bottom: auto;
+          //       left: auto;
+          //       right: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       top: 50%;
 
-                &:after {
-                    top: 50%;
-                    left: 100%;
-                    margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
-                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
-                    transform: rotate(-90deg);
-                    margin-left: 0;
-                }
-            `);
-          break;
-          case 'left-top':
-            vars.push(`  
-                bottom: auto;
-                left: auto;
-                right: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                top: 0;
-                transform: none;
+          //       &:after {
+          //           top: 50%;
+          //           left: 100%;
+          //           margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           transform: rotate(-90deg);
+          //           margin-left: 0;
+          //       }
+          //   `);
+          // break;
+          // case 'left-top':
+          //   vars.push(`  
+          //       bottom: auto;
+          //       left: auto;
+          //       right: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       top: 0;
+          //       transform: none;
 
-                &:after {
-                    top: sugar.config(ui.tooltip.arrowSize);
-                    left: 100%;
-                    bottom: auto;
-                    right: auto;
-                    margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
-                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
-                    transform: rotate(-90deg);
-                    margin-left: 0;
-                }
-            `);
-          break;
-          case 'left-bottom':
-            vars.push(`  
-                top: auto;
-                left: auto;
-                right: calc(100% + sugar.config(ui.tooltip.arrowSize));
-                bottom: 0;
-                transform: none;
+          //       &:after {
+          //           top: sugar.config(ui.tooltip.arrowSize);
+          //           left: 100%;
+          //           bottom: auto;
+          //           right: auto;
+          //           margin-top: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           transform: rotate(-90deg);
+          //           margin-left: 0;
+          //       }
+          //   `);
+          // break;
+          // case 'left-bottom':
+          //   vars.push(`  
+          //       top: auto;
+          //       left: auto;
+          //       right: calc(100% + sugar.config(ui.tooltip.arrowSize));
+          //       bottom: 0;
+          //       transform: none;
 
-                &:after {
-                    bottom: sugar.config(ui.tooltip.arrowSize);
-                    left: 100%;
-                    top: auto;
-                    right: auto;
-                    margin-bottom: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
-                    border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
-                    transform: rotate(-90deg);
-                    margin-left: 0;
-                }
-            `);
-          break;
+          //       &:after {
+          //           bottom: sugar.config(ui.tooltip.arrowSize);
+          //           left: 100%;
+          //           top: auto;
+          //           right: auto;
+          //           margin-bottom: calc(sugar.config(ui.tooltip.arrowSize) * -1 / 2);
+          //           border-width: calc(sugar.config(ui.tooltip.arrowSize) / 2);
+          //           transform: rotate(-90deg);
+          //           margin-left: 0;
+          //       }
+          //   `);
+          // break;
           default:
             vars.push(`  
                 top: auto;

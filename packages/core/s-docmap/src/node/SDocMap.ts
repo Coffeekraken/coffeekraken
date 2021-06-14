@@ -55,7 +55,6 @@ export interface ISDocMapGenerateParams {
   fields: string[];
   save: boolean;
   outPath: string;
-  find: Partial<ISDocMapFindParams>;
 }
 
 export interface ISDocMapReadParams {
@@ -106,18 +105,6 @@ class SDocMap extends __SClass implements ISDocMap {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _entries: ISDocMapEntries = {};
-
-  /**
-   * @name      _cache
-   * @type      SCache
-   * @private
-   *
-   * Store the SCache instance used for this instance
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _cache: __SCache;
 
   /**
    * @name            constructor
@@ -174,13 +161,12 @@ class SDocMap extends __SClass implements ISDocMap {
         );
       }
 
-      const extendedPackages = [];
+      const extendedPackages: string[] = [];
       let finalDocmapJson = {};
 
       function loadJson(packageNameOrPath, currentPath) {
         if (extendedPackages.indexOf(packageNameOrPath) !== -1) return;
         extendedPackages.push(packageNameOrPath);
-
 
         let currentPathDocmapJsonPath;
         try {

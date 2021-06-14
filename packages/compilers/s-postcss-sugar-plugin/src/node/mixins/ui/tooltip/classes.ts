@@ -46,6 +46,16 @@ export default function ({
         .s-tooltip-container {
             position: relative;
             display: inline-block;
+
+            & > [class*="s-tooltip"] {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            &:hover > [class*="s-tooltip"] {
+                opacity: 1;
+                pointer-events: all;
+            }
         }
     `);
 
@@ -88,64 +98,160 @@ export default function ({
             @sugar.ui.tooltip($position: top, $scope: 'position');
         }
     `);
+    vars.push(`/**
+        * @name           s-tooltip--top-left
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class represent a simple top-left tooltip
+        * 
+        * @example        html
+        * <a class="s-tooltip-container">I'm a cool button</a>
+        * <div class="s-tooltip">Something cool</div>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    vars.push(`
+        .s-tooltip--top-left {
+            @sugar.ui.tooltip($position: top-left, $scope: 'position');
+        }
+    `);
+    vars.push(`/**
+        * @name           s-tooltip--top-right
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class represent a simple top-right tooltip
+        * 
+        * @example        html
+        * <a class="s-tooltip-container">I'm a cool button</a>
+        * <div class="s-tooltip">Something cool</div>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    vars.push(`
+        .s-tooltip--top-right {
+            @sugar.ui.tooltip($position: top-right, $scope: 'position');
+        }
+    `);
 
-    vars.push(`/**
-        * @name           s-tooltip--left
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left {
-            @sugar.ui.tooltip($position: left, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left-top tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-top {
-            @sugar.ui.tooltip($position: left-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left-bottom tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left-bottom">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-bottom {
-            @sugar.ui.tooltip($position: left-bottom, $scope: 'position');
-        }
-    `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     * 
+    //     * This class represent a simple left tooltip
+    //     * 
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip:left">Something cool</div>
+    //     * 
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left {
+    //         @sugar.ui.tooltip($position: left, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     * 
+    //     * This class represent a simple left-top tooltip
+    //     * 
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip:left-top">Something cool</div>
+    //     * 
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-top {
+    //         @sugar.ui.tooltip($position: left-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-bottom
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     * 
+    //     * This class represent a simple left-bottom tooltip
+    //     * 
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip:left-bottom">Something cool</div>
+    //     * 
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-bottom {
+    //         @sugar.ui.tooltip($position: left-bottom, $scope: 'position');
+    //     }
+    // `);
+
+    // vars.push(`/**
+    //     * @name           s-tooltip--right
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     * 
+    //     * This class represent a simple right tooltip
+    //     * 
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip:right">Something cool</div>
+    //     * 
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--right {
+    //         @sugar.ui.tooltip($position: right, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--right-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     * 
+    //     * This class represent a simple right-top tooltip
+    //     * 
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip:right-top">Something cool</div>
+    //     * 
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--right-top {
+    //         @sugar.ui.tooltip($position: right-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--right-bottom
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     * 
+    //     * This class represent a simple right-bottom tooltip
+    //     * 
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip:right-bottom">Something cool</div>
+    //     * 
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--right-bottom {
+    //         @sugar.ui.tooltip($position: right-bottom, $scope: 'position');
+    //     }
+    // `);
 
     vars.push(`/**
         * @name           s-tooltip--nowrap

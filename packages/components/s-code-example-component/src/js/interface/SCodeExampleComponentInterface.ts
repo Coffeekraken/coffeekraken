@@ -7,6 +7,9 @@ export default class SHighlightJsComponentInterface extends __SInterface {
       default:
         'https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css'
     },
+    active: {
+      type: 'String'
+    },
     language: {
       type: 'String',
       default: 'javascript'

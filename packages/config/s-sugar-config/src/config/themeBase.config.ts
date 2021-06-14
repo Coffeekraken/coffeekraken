@@ -336,7 +336,7 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       code: {
-        'font-family': '"Menlo, Monaco, Consolas, Courier New, monospace"',
+        'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-display': 'auto',
@@ -1353,6 +1353,11 @@ export default {
       styles: ['default'],
       colors: ['primary:default']
     },
+    tab: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: 0,
+      transition: '[theme.ui.default.transition]'
+    },
     terminal: {
       padding: '[theme.ui.default.padding]',
       borderRadius: '[theme.ui.default.borderRadius]',
@@ -1366,6 +1371,13 @@ export default {
       depth: '[theme.ui.default.depth]',
       maxWidth: '30ch',
       arrowSize: '20px'
+    },
+    code: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
+      styles: ['default:default']
     },
     badge: {
       padding: '.35em .65em',

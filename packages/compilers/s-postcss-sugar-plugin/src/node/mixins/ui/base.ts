@@ -9,7 +9,8 @@ class postcssSugarPluginUiBaseInterface extends __SInterface {
           required: true
       },
       color: {
-        type: 'String'
+        type: 'String',
+        default: 'ui'
       }
   };
 }
@@ -31,6 +32,8 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiBaseParams = {
+    name: '',
+    color: 'ui',
     ...params
   };
 

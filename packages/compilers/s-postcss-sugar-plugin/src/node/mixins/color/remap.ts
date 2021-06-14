@@ -57,16 +57,8 @@ export default function ({
     ...params
   };
 
-  __remapColorVars(finalParams.color, finalParams.toColor);
 
-  const cssArray: string[] = [];
-
-  cssArray.push(`
-    --s-theme-color-${finalParams.color}-default: var(--s-theme-color-${finalParams.toColor}-default);
-    --s-theme-color-${finalParams.color}-default-h: var(--s-theme-color-${finalParams.toColor}-default-h);
-    --s-theme-color-${finalParams.color}-default-s: var(--s-theme-color-${finalParams.toColor}-default-s);
-    --s-theme-color-${finalParams.color}-default-l: var(--s-theme-color-${finalParams.toColor}-default-l);
-  `);
+  const cssArray: string[] = [...__remapColorVars(finalParams.color, finalParams.toColor)];
 
   if (atRule.parent.type === 'root') {
     cssArray.unshift(':root {');

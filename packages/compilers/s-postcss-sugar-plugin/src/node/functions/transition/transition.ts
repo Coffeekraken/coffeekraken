@@ -23,6 +23,7 @@ export default function ({
   params: Partial<IPostcssSugarPluginTransitionFunctionParams>;
 }) {
   const finalParams: IPostcssSugarPluginTransitionFunctionParams = {
+    name: 'default',
     ...params
   };
 

@@ -113,7 +113,7 @@
                             <a class="s-btn:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
                                 <i class="s-icon:fire"></i>
                             </a>
-                            <div class="s-tooltip:left-bottom">
+                            <div class="s-tooltip">
                                 <div class="s-position:relative">
                                     <span class="s-avatar s-mb:40 s-display:block s-mx:auto" style="font-size: 120px">
                                         <img src="/src/img/kraken-avatar.png" alt="{{ $firstBlock->author->name }}" />
@@ -292,18 +292,21 @@
 
                                 <h2 id="example" class="s-h2 s-mb:40">Example</h2>
 
-                                <s-code-example>
+                                <s-code-example default-style>
                                 @foreach ($block->example as $example)
-                                    <code language="{{ $example->language }}">
+                                    <template lang="{{ $example->language }}">
                                         {{  $example->code }}                     
-                                    </code>       
+                                    </template>       
                                 @endforeach
+                                <template lang="html">
+                                        {{  $example->code }}                     
+                                    </template>    
                                 </s-code-example>
                             @endif
 
                             <pre>
                         @php
-                    var_dump($block);
+                    // var_dump($block);
                 @endphp
                 </pre>
 

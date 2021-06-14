@@ -4,7 +4,7 @@
 @section('body')
   <div class="s-space-children">
 
-    <s-highlight-js>
+    <s-code-example>
   const fs = require('fs');
 const glob = require('glob');
 
@@ -42,7 +42,7 @@ packageJson.dependencies = newDeps;
 fs.writeFileSync(jsonPath, JSON.stringify(packageJson, null, 4));
 
 console.log(newDeps);
-    </s-highlight-js>
+    </s-code-example>
 
   </div>
 @endsection

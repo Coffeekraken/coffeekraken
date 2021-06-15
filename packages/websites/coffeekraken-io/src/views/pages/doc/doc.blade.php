@@ -165,51 +165,46 @@
                         <ul class="s-list:ul">
                             @if ($firstBlock->description)
                                 <li class="s-font:40">
-                                    <a href="#description" title="Description">
+                                    <a href="#{{ $firstBlock->name }}" title="Description">
                                         Description
                                     </a>
                                 </li>
                             @endif
                             @if ($firstBlock->feature)
                                 <li class="s-font:40">
-                                    <a href="#features" title="Features">
+                                    <a href="#features-{{ $firstBlock->name }}" title="Features">
                                         Features
                                     </a>
                                 </li>
                             @endif
                             @if ($firstBlock->example)
                                 <li class="s-font:40">
-                                    <a href="#example" title="Example">
+                                    <a href="#example-{{ $firstBlock->name }}" title="Example">
                                         Example
+                                    </a>
+                                </li>
+                            @endif
+                            @if ($firstBlock->param)
+                                <li class="s-font:40">
+                                    <a href="#parameters-{{ $firstBlock->name }}" title="Parameters">
+                                        Parameters
+                                    </a>
+                                </li>
+                            @endif
+                            @if ($firstBlock->setting)
+                                <li class="s-font:40">
+                                    <a href="#settings-{{ $firstBlock->name }}" title="Settings">
+                                        Settings
                                     </a>
                                 </li>
                             @endif
                         </ul>
 
-                        @if ($firstBlock->setting)
-
-                            <s-activate class="__nav-group s-mb:30 s-mt:50" id="doc-settings" toggle save-state>
-                                <h3 class="s-h3">
-                                    <span class="__nav-group-toggle"></span>
-                                    Settings
-                                </h3>
-                            </s-activate>
-                            <ul class="s-list:ul">
-                                @foreach ($firstBlock->setting as $setting)
-                                    <li class="s-font:40">
-                                        <a href="#setting-{{ $setting->name }}" title="{{ $setting->name }} setting">
-                                            <span class="s-color:success">{{ $setting->type }}</span> {{ $setting->name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-
-                        @endif
-
                         @php
                             $methods = array_filter($docblocks, function($block, $i) {
                                 if ($i <= 0) return false;
                                 if ($block->private) return false;
+                                if ($block->name == 'constructor') return false;
                                 if (strtolower($block->type) != 'function') return false;
                                 return true;
                             }, ARRAY_FILTER_USE_BOTH);
@@ -225,7 +220,7 @@
                             <ul class="s-list:ul">
                                 @foreach ($methods as $block)
                                     <li class="s-font:40">
-                                        <a href="#method-{{ $block->name }}" title="{{ $block->name }} method">
+                                        <a href="#{{ $block->name }}" title="{{ $block->name }} method">
                                             {{ $block->name }} 
                                         </a>
                                     </li>
@@ -253,7 +248,7 @@
                             <ul class="s-list:ul">
                                 @foreach ($props as $prop)                                
                                     <li class="s-font:40">
-                                        <a href="#property-{{ $prop->name }}" title="{{ $prop->name }} property">
+                                        <a href="#{{ $prop->name }}" title="{{ $prop->name }} property">
                                             {!! $prop->get ? '<span class="s-color:accent">get</span>' : '' !!}{!! $prop->set ? '|<span class="s-color:accent">set</span>' : '' !!} {{ $prop->name }}
                                         </a>
                                     </li>
@@ -266,51 +261,48 @@
 
                     <div>
 
-                        @foreach ( $docblocks as $block )
-                            
-                            @if ($block->private) @continue @endif
+                        @include('pages.doc.partials.block', ['block' => $firstBlock, 'isFirst' => true])
 
-                            @if ($block->description)
-                                <h2 id="description" class="s-h2 s-mb:30">{{ $block->name }}</h2>
-                                <p class="s-p s-mb:50">{{ $block->description }}</p>
-                            @endif
-
-                            @if ($block->feature)
-
-                                <h2 id="features" class="s-h2 s-mb:30">Features</h2>
-
-                                <ul class="s-list:ul s-mb:50">
-                                    @foreach ($block->feature as $feature)
-                                        <li class="s-p">
-                                            {{ $feature }}
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-
-                            @if ($block->example)
-
-                                <h2 id="example" class="s-h2 s-mb:40">Example</h2>
-
-                                <s-code-example default-style>
-                                @foreach ($block->example as $example)
-                                    <template lang="{{ $example->language }}">
-                                        {{  $example->code }}                     
-                                    </template>       
-                                @endforeach
-                                <template lang="html">
-                                        {{  $example->code }}                     
-                                    </template>    
-                                </s-code-example>
-                            @endif
-
-                            <pre>
                         @php
-                    // var_dump($block);
-                @endphp
-                </pre>
+                            $methods = array_filter($docblocks, function($block, $i) {
+                                if ($i <= 0) return false;
+                                if ($block->private) return false;
+                                if ($block->name == 'constructor') return false;
+                                if (strtolower($block->type) != 'function') return false;
+                                return true;
+                            }, ARRAY_FILTER_USE_BOTH);
+                        @endphp
+                        @if (count($methods))
 
-                        @endforeach
+                            <h2 id="properties" class="s-h2 s-my:50 s-color:accent">
+                                Methods
+                            </h2>
+
+                            @foreach ($methods as $block)
+                                @include('pages.doc.partials.block', ['block' => $block, 'isFirst' => false])
+                            @endforeach
+
+                        @endif
+
+                        @php
+                            $props = array_filter($docblocks, function($block, $i) {
+                                if ($i <= 0) return false;
+                                if ($block->private) return false;
+                                if (strtolower($block->type) == 'function') return false;
+                                return true;
+                            }, ARRAY_FILTER_USE_BOTH);
+                        @endphp
+                        @if (count($props))
+
+                            <h2 id="properties" class="s-h2 s-my:50 s-color:accent">
+                                Properties
+                            </h2>
+
+                            @foreach ($props as $block)
+                                @include('pages.doc.partials.block', ['block' => $block, 'isFirst' => false])
+                            @endforeach
+
+                        @endif
 
                     </div>
 

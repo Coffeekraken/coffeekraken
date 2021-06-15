@@ -1,7 +1,7 @@
 <s-code-example>
 
   <header class="{ component.className('__toolbar') }">
-    <ol class="{ component.className('__tabs', 's-tabs s-tabs--grow') }">
+    <ol class="{ component.className('__tabs', component.props.defaultStyleClasses.main) }">
       <li class="{ component.className('__tab') }"
         id={ item.id }
         active="{ state.activeTabId === item.id }"
@@ -12,12 +12,12 @@
     </ol>
   </header>
   <div class="{ component.className('__content') }">
-    <pre class="{ component.className('__code') + ` language-${ item.lang }` }"
-        
+    <s-clipboard-copy onclick="{() => this.copy()}"></s-clipboard-copy>
+    <pre class="{ component.className('__code') }"   
         id={ item.id ?? item.lang }
         active={ state.activeTabId === (item.id ?? item.lang) }
         each={ (item, idx) in (state.items ?? []) }>
-        <code>{ item.code }</code>
+        <code class="{ `language-${ item.lang }` }">{ item.code }</code>
     </pre>
   </div>
 
@@ -32,16 +32,37 @@
       .s-code-example__tabs {
         display: flex;
         list-style: none;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
       }
       .s-code-example__tab {
 
       }
 
+      .s-code-example__content {
+        position: relative;
+      }
+
       .s-code-example__code {
         display: none;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        line-height: 0;
         
         &[active] {
           display: block;
+        }
+      }
+
+      s-clipboard-copy {
+        font-size: 20px;
+        position: absolute;
+        top: sugar.space(30); right: sugar.space(30);
+        opacity: 0.5;
+        z-index: 10;
+
+        &:hover {
+          opacity: 1;
         }
       }
 
@@ -55,7 +76,7 @@
     import 'prismjs/components/prism-bash';
     import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
     import __SComponentUtils from '@coffeekraken/s-component-utils';
-    import __SActivateComponent from '@coffeekraken/s-activate-component';
+    import __SClipboardCopyComponent from '@coffeekraken/s-clipboard-copy-component';
 
     export default {
       state: {
@@ -69,6 +90,7 @@
       },
       onMounted() {
         this.$templates = Array.from(this.root.querySelectorAll('template'));
+        this.$copy = this.root.querySelector('s-clipboard-copy');
 
         this.$templates.forEach($template => {
           this.update({
@@ -101,16 +123,15 @@
       },
       initPrismOnTab(id) {
         const $tab = this.root.querySelector(`li#${id}`),
-              $content = this.root.querySelector(`pre#${id}`);
+              $content = this.root.querySelector(`pre#${id} code`);
 
         if ($content.hasAttribute('inited')) return;
-
-  
         $content.setAttribute('inited', true);
-
-        console.log('HI');
-
         prism.highlightElement($content);
+      },
+      copy(id = this.state.activeTabId) {
+        const item = this.state.items.filter(i => i.id === id)[0];
+        this.$copy.copy(item.code);
       }
     };
   </script>

@@ -57,6 +57,6 @@ export default function ({
   const vars: string[] = [`
     @sugar.gradient($type: linear, $start: ${finalParams.start}, $end: ${finalParams.end}, $x: ${finalParams.x}, $y: ${finalParams.y}, $angle: ${finalParams.angle});
   `];
-p
+
   replaceWith(vars);
 }

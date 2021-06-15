@@ -13,6 +13,12 @@ export default class SHighlightJsComponentInterface extends __SInterface {
     language: {
       type: 'String',
       default: 'javascript'
+    },
+    defaultStyleClasses: {
+      type: 'Object',
+      default: {
+        main: 's-tabs'
+      }
     }
   };
 }

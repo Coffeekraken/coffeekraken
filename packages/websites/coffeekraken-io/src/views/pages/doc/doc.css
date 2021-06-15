@@ -94,6 +94,12 @@
     }
 
     .__nav {
+        position: sticky;
+        top: 140px;
+        max-height: calc(100vh - 140px);
+        overflow: auto;
+
+
         [class*="s-list"] {
             overflow: hidden;
             max-height: 0; 

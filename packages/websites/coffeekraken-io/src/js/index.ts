@@ -10,6 +10,11 @@ import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorL
 //     noItemText: 'Yplop'
 // });
 
+__SComponentUtils.setDefaultProps('s-code-example', {
+    defaultStyleClasses: {
+        main: 's-tabs s-tabs--gradient'
+    }
+});
 
 const start = Date.now();
 

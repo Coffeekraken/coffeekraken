@@ -2,7 +2,7 @@
 
     <section class="s-container s-py:100">
         
-        <div class="s-grid-122 s-grid-gutter-x:between">
+        <div class="s-grid:122:gutter-x:gutter-between">
             <div>
                 <img class="__illustration" src="/src/img/features-illustration.svg" />
             </div>
@@ -39,7 +39,7 @@
 
         <div class="__contents">
             <section id="features-development">
-                <div class="s-grid-12 s-grid-gutter-x:between">
+                <div class="s-grid:12:gutter-x:gutter-between">
                     <div class="s-py:100 s-rhythm-vertical">
                         <img src="/src/img/features-development-logos.svg" />
 

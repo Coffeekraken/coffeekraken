@@ -30,7 +30,20 @@ export default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    exclude: ['**/__tests__/**/*', '**/__wip__/**/*'],
+    exclude: ['**/__tests__/**/*', '**/__tests__.wip/**/*', '**/__wip__/**/*'],
+
+    /**
+     * @name        noExtends
+     * @namespace   config.docmap.generate
+     * @type        Boolean
+     * @default     false
+     *
+     * Specify if you want to disable the extends search process that will result in the "extends" array in the docmap.json file
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    noExtends: false,
 
     /**
      * @name        filters

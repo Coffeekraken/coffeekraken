@@ -5,6 +5,7 @@ import __SDocMap from './SDocMap';
 import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
 
 export default (stringArgs = '') => {
+  console.log('COCC', stringArgs)
   const docmap = new __SDocMap();
   const pro = __SProcess.from(docmap.generate.bind(docmap), {
     process: {
@@ -12,14 +13,4 @@ export default (stringArgs = '') => {
     }
   });
   pro.run(stringArgs);
-
-  // const pro = new __SBuildDocMapProcess(
-  //   {},
-  //   {
-  //     process: {
-  //       stdio: 'inherit'
-  //     }
-  //   }
-  // );
-  // pro.run(stringArgs);
 };

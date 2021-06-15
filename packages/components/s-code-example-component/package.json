@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-component-utils": "^2.0.0",
-    "@coffeekraken/s-activate-component": "^2.0.0",
+    "@coffeekraken/s-clipboard-copy-component": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "highlight.js": "^10.7.2",
     "prismjs": "^1.23.0"

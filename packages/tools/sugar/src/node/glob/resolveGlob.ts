@@ -42,6 +42,7 @@ export interface IResolveGlobSettings {
   nodir: boolean;
   contentRegExp: RegExp;
   SFile: boolean;
+  exclude: string|string[]
 }
 
 export default function resolveGlob(globs: string | string[], settings: Partial<IResolveGlobSettings> = {}): __SFile[] {
@@ -50,7 +51,8 @@ export default function resolveGlob(globs: string | string[], settings: Partial
       cwd: settings.cwd || process.cwd(),
       symlinks: true,
       nodir: true,
-      contentRegExp: undefined
+      contentRegExp: undefined,
+      exclude: []
     },
     settings
   );
@@ -81,7 +83,14 @@ export default function resolveGlob(globs: string | string[], settings: Partial
       return split.replace(`${cwd}/`, '').replace(cwd, '');
     });
     if (splits[1]) {
-      searchReg = __toRegex(splits[1]);
+      // searchReg = __toRegex(splits[1]);
+
+      const innerReg = splits[1].replace(/^\//, '').replace(/\/[a-zA-Z]{0,10}$/, '');
+      let flags = splits[1].match(/\/[a-zA-Z]{1,10}$/g);
+      if (flags) {
+        flags = flags[0].replace('/', '');
+      }
+      searchReg = new RegExp(innerReg, flags);
     }
     globPattern = splits[0];
 
@@ -94,6 +103,11 @@ export default function resolveGlob(globs: string | string[], settings: Partial
         __glob.sync(pattern, {
           cwd,
           dot: true,
+          ignore: [
+            '**/bin/**',
+            '**/*\.DS_Store',
+            ...(settings.exclude ?? [])
+          ],
           ...settings
         })
       );
@@ -103,23 +117,27 @@ export default function resolveGlob(globs: string | string[], settings: Partial
     if (searchReg) {
       pathes = pathes.filter((path) => {
         if (__isDirectory(path)) return false;
-        const content = __fs.readFileSync(path, 'utf8');
-        const matches = content.match(searchReg);
-        if (matches) {
-          return true;
+        try {
+          const content = __fs.readFileSync(path, 'utf8');
+          const matches = searchReg.test(content ?? '');
+          if (matches) {
+            return true;
+          }
+          return false;
+        } catch(e) {
+          return false;
         }
-        return false;
       });
     }
 
-      pathes.forEach((path) => {
-        const sFile = __SFile.new(path, {
-          file: {
-            cwd
-          }
-        });
-        filesArray.push(sFile);
+    pathes.forEach((path) => {
+      const sFile = __SFile.new(path, {
+        file: {
+          cwd
+        }
       });
+      filesArray.push(sFile);
+    });
   }
 
   // resolve the promise

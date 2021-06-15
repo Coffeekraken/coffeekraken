@@ -13,9 +13,9 @@
       "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
       "defaultAction": "exec",
       "actions": {
-        "exec": {
-          "description": "Exec the frontstack application into the current working directory",
-          "process": "./src/node/exec/exec.cli.js"
+        "action": {
+          "description": "Exec an action of the frontstack application into the current working directory",
+          "process": "./src/node/action/action.cli.js"
         }
       }
     }

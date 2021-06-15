@@ -17,17 +17,11 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 class SDocMapGenerateParamsInterface extends __SInterface {
   static definition = {
-    cache: {
-      type: 'Boolean',
-      default: __SugarConfig.get('docmap.cache'),
-      level: 1
-    },
     globs: {
       type: 'Array<String>',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __SugarConfig.get('docmap.generate.globs'),
-      level: 1
+      description:
+        'Specify some globs to use to search docblocks to use in docmap generation',
+      default: __SugarConfig.get('docmap.generate.globs')
     },
     exclude: {
       type: 'Array<String>',
@@ -49,19 +43,13 @@ class SDocMapGenerateParamsInterface extends __SInterface {
         'Specify some properties and regex to use to filter docblocks',
       default: __SugarConfig.get('docmap.generate.filters')
     },
-    watch: {
-      type: 'Boolean',
-      alias: 'w',
-      description:
-        'Specify if you want to watch the sources files to re-generate the docmap.json automatically on updates',
-      default: __SugarConfig.get('docmap.generate.watch')
-    },
-    outPath: {
-      type: 'String',
-      alias: 'p',
-      description: 'Output file path',
-      default: __SugarConfig.get('docmap.generate.outPath'),
-      level: 1
+    noExtends: {
+      type: {
+        type: 'Boolean',
+        nullishAsTrue: true
+      },
+      description: 'Specify if you want to avoid searching for docmap.json files in the dependency packages',
+      default: __SugarConfig.get('docmap.generate.noExtends'),
     },
     save: {
       type: 'Boolean',
@@ -69,6 +57,12 @@ class SDocMapGenerateParamsInterface extends __SInterface {
       description:
         'Specify if you want to save the generated file under the ```outPath``` path',
       default: __SugarConfig.get('docmap.generate.save')
+    },
+    outPath: {
+      type: 'String',
+      alias: 'o',
+      description: 'Specify where you want to save the builded file. Usually saved in package root with the name docmap.json',
+      default: __SugarConfig.get('docmap.generate.outPath')
     }
   };
 }

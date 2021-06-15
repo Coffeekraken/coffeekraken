@@ -58,8 +58,8 @@ pre[class*="language-"],
 }
 
 pre[class*="language-"] {
-    padding: ${__themeVar(`ui.code.padding`)};
-    border-radius: ${__themeVar(`ui.code.borderRadius`)};
+    padding: sugar.theme(ui.code.padding);
+    border-radius: sugar.theme(ui.code.borderRadius);
     border: sugar.color(ui, border) solid 1px;
 	overflow: auto;
 	position: relative;

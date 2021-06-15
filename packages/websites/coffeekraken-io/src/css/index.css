@@ -6,6 +6,7 @@
   fa-user:user
   fa-heart:heart
   fa-fire:fire
+  fa-copy:copy
 );
 
 @sugar.prism.theme;

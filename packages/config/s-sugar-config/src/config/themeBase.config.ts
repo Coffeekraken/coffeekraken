@@ -1353,10 +1353,11 @@ export default {
       styles: ['default'],
       colors: ['primary:default']
     },
-    tab: {
+    tabs: {
       padding: '[theme.ui.default.padding]',
-      borderRadius: 0,
-      transition: '[theme.ui.default.transition]'
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]'
     },
     terminal: {
       padding: '[theme.ui.default.padding]',
@@ -1373,7 +1374,7 @@ export default {
       arrowSize: '20px'
     },
     code: {
-      padding: '[theme.ui.default.padding]',
+      padding: '[theme.padding.30]',
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',

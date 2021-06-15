@@ -42,7 +42,7 @@
                 @endphp
             </s-filtrable-input>
         </form>
-        <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-align-center s-font-size-50 s-py:60">
+        <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:50 s-py:60">
             <a class="s-px:50" href="/#features" title="Features">Features</a>
             <a class="s-px:50" href="/#get-started" title="Get started">Get started</a>
             <a class="s-px:50" href="/#documentation" title="Documentation">Documentation</a>

@@ -1,19 +1,15 @@
-import __SCache from '@coffeekraken/s-cache';
 import __SClass from '@coffeekraken/s-class';
 import __SDocblock from '@coffeekraken/s-docblock';
-import __SFile from '@coffeekraken/s-file';
+import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __SGlob from '@coffeekraken/s-glob';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __path from 'path';
-import __SDocMapFindParamsInterface from './interface/SDocMapFindParamsInterface';
 import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
 
 
@@ -51,9 +47,9 @@ export interface ISDocMapGenerateParams {
   watch: boolean;
   globs: string[];
   exclude: string[];
+  noExtends: boolean;
   filters: Record<string, RegExp>;
   fields: string[];
-  save: boolean;
   outPath: string;
 }
 
@@ -222,174 +218,163 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  generate(params: Partial<ISDocMapGenerateParams>) {
-    const generateParams = <ISDocMapGenerateParams>(
+  generate(params: Partial<ISDocMapGenerateParams>): Promise<any> {
+    const finalParams = <ISDocMapGenerateParams>(
       __deepMerge(__SDocMapGenerateParamsInterface.defaults(), params)
     );
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-      let globs: string[] = generateParams.globs || [];
-      if (!Array.isArray(globs)) globs = [globs];
 
       emit('notification', {
         message: `${this.metas.id} generation started`
       });
 
-      emit('log', {
-        group: `s-docmap-${this.metas.id}`,
-        value: `Searching files to use as docmap sources using globs:\n- <yellow>${globs.join(
-          '</yellow>\n- '
-        )}</yellow>`
-      });
-
-      // getting package infos
-      const packageJson = __packageJson();
-
-      // searching for actual docmaps
-      // const currentDocmapsPromise = this.find(params.find);
-      // pipe(currentDocmapsPromise);
-      // const currentDocmapsFiles = await currentDocmapsPromise;
-
-      const currentDocmapsFiles = __SGlob.resolve('node_modules/**{0,2}/docmap.json', {
-        cwd: __packageRoot()
-      });
-
-      console.log('CUr', currentDocmapsFiles);
-
-      const extendsArray: string[] = [];
-      currentDocmapsFiles.forEach((file) => {
-        const packageJson = require(`${file.dirPath}/package.json`);
-        extendsArray.push(packageJson.name);
-      });
-
-      const pool = __fsPool(globs, {
-        watch: generateParams.watch,
-        exclude: generateParams.exclude
-      });
-
-      const docmapJson = {
-        extends: extendsArray,
-        map: {}
+      let docmapJson = {
+        map: {},
+        generated: {
+          extends: [],
+          map: {}
+        }
       };
 
-      pool.on(generateParams.watch ? 'update' : 'files', (files) => {
-        files = Array.isArray(files) ? files : [files];
+      const packageRoot = __packageRoot();
+      const packageMonoRoot = __packageRoot(process.cwd(), true);
+
+      // check if a file already exists
+      if (__fs.existsSync(`${packageRoot}/docmap.json`)) {
+        const currentDocmapJson = require(`${packageRoot}/docmap.json`);
+        docmapJson = currentDocmapJson;
+        docmapJson.generated = {
+          extends: [],
+          map: {}
+        }
+      }
+
+      // getting package infos
+      const packageJson = __packageJson();    
+
+      console.log(finalParams);
+
+      if (!finalParams.noExtends) {
 
         emit('log', {
-          group: `s-docmap-${this.metas.id}`,
-          value: `<yellow>${
-            files.length
-          }</yellow> file(s) found using the glob "<cyan>${globs.join(
-            ','
-          )}</cyan>"`
-        });
-        // loop on each files to check for docblocks
-        for (let j = 0; j < files.length; j++) {
-          const filepath = files[j].path;
-          const content = __fs.readFileSync(filepath, 'utf8');
-          if (!content) continue;
-          const docblocks = new __SDocblock(content).toObject();
-
-          // const db = new __SDocblock(content);
-          // const renderer = new SDocblockHtmlRenderer(db);
-          // const str = renderer.render();
-
-          if (!docblocks || !docblocks.length) continue;
-          let docblockObj: any = {};
-          const children: any = {};
-          docblocks.forEach((docblock) => {
-            for (
-              let i = 0;
-              // @ts-ignore
-              i < Object.keys(generateParams.filters).length;
-              i++
-            ) {
-              const filterReg =
-                // @ts-ignore
-                generateParams.filters[Object.keys(generateParams.filters)[i]];
-              // @ts-ignore
-              const value = docblock[Object.keys(generateParams.filters)[i]];
-              if (value === undefined) continue;
-              if (value.match(filterReg)) return;
-            }
-            if (docblock.name && docblock.name.slice(0, 1) === '_') return;
-            if (docblock.private) return;
-
-            // const path = __path.relative(outputDir, filepath);
-            const filename = __getFilename(filepath);
-
-            const docblockEntryObj: ISDocMapEntry = {};
-
-            generateParams.fields.forEach((field) => {
-              if (docblock[field] === undefined) return;
-              if (field === 'namespace')
-                docblock[field] = `${packageJson.name.replace('/', '.')}.${
-                  docblock[field]
-                }`;
-              docblockEntryObj[field] = docblock[field];
-            });
-
-            if (docblock.namespace) {
-              docblockObj = {
-                ...docblockEntryObj,
-                filename,
-                extension: filename.split('.').slice(1)[0],
-                relPath: __path.relative(__packageRoot(), filepath)
-              };
-              this._entries[
-                `${docblock.namespace}.${docblock.name}`
-              ] = docblockObj;
-            } else if (docblock.name) {
-              children[docblock.name] = docblockEntryObj;
-            }
-          });
-          docblockObj.children = children;
-        }
-
-        emit('log', {
-          group: `s-docmap-${this.metas.id}`,
-          value: `<green>${
-            Object.keys(this._entries).length
-          }</green> entries gathered for this docMap`
+          value: `<yellow>[build]</yellow> Building extends array from existing docmap compliant packages`
         });
 
-        emit('notification', {
-          type: 'success',
-          message: `${this.metas.id} build success`
+        const globs: string[] = [`${packageRoot}/node_modules/**{0,2}/docmap.json`];
+        if (packageRoot !== packageMonoRoot) {
+          globs.push(`${packageMonoRoot}/node_modules/**{0,2}/docmap.json`);
+        }
+
+        const currentDocmapFiles = __SGlob.resolve(globs, {
+          exclude: finalParams.exclude ?? []
         });
 
-        // save entries inside the json map property
-        docmapJson.map = this._entries;
+        const extendsArray: string[] = [];
+        currentDocmapFiles.forEach((file) => {
+          const packageJson = require(`${file.dirPath}/package.json`);
+          extendsArray.push(packageJson.name);
+        });
 
-        if (generateParams.save) {
-          emit('log', {
-            group: `s-docmap-${this.metas.id}`,
-            value: `<yellow>[save]</yellow> File "<cyan>${generateParams.outPath.replace(
-              __rootDir() + '/',
-              ''
-            )}</cyan>"`
-          });
-          __fs.writeFileSync(
-            generateParams.outPath,
-            JSON.stringify(docmapJson, null, 4)
-          );
-        }
+        // @ts-ignore
+        docmapJson.generated.extends = extendsArray.filter(name => name !== packageJson.name);
+      }
 
-        if (generateParams.watch) {
-          emit('log', {
-            group: `s-docmap-${this.metas.id}`,
-            value: '<blue>[watch]</blue> Watching for changes...'
-          });
-        } else {
-          resolve(this._entries);
-        }
+      emit('log', {
+        value: `<yellow>[build]</yellow> Building map by searching for files inside the current package`
+      });  
+
+      // searching inside the current package for docblocks to use
+      const filesInPackage = __SGlob.resolve(finalParams.globs, {
+        cwd: packageRoot,
+        exclude: finalParams.exclude ?? []
       });
 
-      if (generateParams.watch) {
-        emit('log', {
-          group: `s-docmap-${this.metas.id}`,
-          value: '<blue>[watch]</blue> Watching for changes...'
+      filesInPackage.forEach(file => {
+        const content = file.raw;
+        const docblocks = new __SDocblock(content).toObject();
+
+        if (!docblocks || !docblocks.length) return;
+        let docblockObj: any = {};
+        const children: any = {};
+        docblocks.forEach((docblock) => {
+          for (
+            let i = 0;
+            // @ts-ignore
+            i < Object.keys(finalParams.filters).length;
+            i++
+          ) {
+            const filterReg =
+              // @ts-ignore
+              finalParams.filters[Object.keys(finalParams.filters)[i]];
+            // @ts-ignore
+            const value = docblock[Object.keys(finalParams.filters)[i]];
+            if (value === undefined) continue;
+            if (value.match(filterReg)) return;
+          }
+          if (docblock.name && docblock.name.slice(0, 1) === '_') return;
+          if (docblock.private) return;
+
+          // const path = __path.relative(outputDir, filepath);
+          const filename = __getFilename(file.path);
+
+          const docblockEntryObj: ISDocMapEntry = {};
+
+          finalParams.fields.forEach((field) => {
+            if (docblock[field] === undefined) return;
+            if (field === 'namespace')
+              docblock[field] = `${packageJson.name.replace('/', '.')}.${
+                docblock[field]
+              }`;
+            docblockEntryObj[field] = docblock[field];
+          });
+
+          if (docblock.namespace) {
+            docblockObj = {
+              ...docblockEntryObj,
+              filename,
+              extension: filename.split('.').slice(1)[0],
+              relPath: __path.relative(__packageRoot(), file.path)
+            };
+            this._entries[
+              `${docblock.namespace}.${docblock.name}`
+            ] = docblockObj;
+          } else if (docblock.name) {
+            children[docblock.name] = docblockEntryObj;
+          }
         });
+        docblockObj.children = children;
+
+      });
+
+      emit('log', {
+        value: `<yellow>[build]</yellow> <green>${
+          Object.keys(this._entries).length
+        }</green> entries gathered for this docMap`
+      });
+
+      emit('notification', {
+        type: 'success',
+        message: `${this.metas.id} build success`
+      });
+
+      // save entries inside the json map property
+      docmapJson.generated.map = this._entries;
+
+      if (finalParams.save) {
+        emit('log', {
+          value: `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${finalParams.outPath.replace(
+            __rootDir() + '/',
+            ''
+          )}</cyan>"`
+        });
+        __fs.writeFileSync(
+          finalParams.outPath,
+          JSON.stringify(docmapJson, null, 4)
+        );
       }
+
+      resolve(docmapJson);
+
     });
   }
 }

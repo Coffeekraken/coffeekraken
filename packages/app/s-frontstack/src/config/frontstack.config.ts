@@ -121,7 +121,7 @@ export default {
       title: 'Docmap generation action',
       description:
         'Allow to generate and maintain up to date the docmap.json file',
-      process: 'sugard docmap.generate --watch',
+      process: 'sugard docmap.generate --noExtends',
       settings: {
         processManager: {
           restart: true

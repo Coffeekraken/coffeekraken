@@ -41,6 +41,7 @@ function param(data) {
     const description = parts && parts[2] ? parts[2] : null;
     let name = variable;
     let defaultValue = undefined;
+    let defaultValueStr = '';
     let variableMatch = null;
 
     if (variable && typeof variable === 'string')
@@ -48,12 +49,15 @@ function param(data) {
 
     if (type && type.includes('|')) {
       type = type.split('|').map((l) => __upperFirst(l.trim()));
+    } else {
+      type = [type];
     }
 
     if (variableMatch) {
       const variableParts = variableMatch[1].split('=');
       if (variableParts.length === 2) {
         name = variableParts[0].trim();
+        defaultValueStr = variableParts[1].trim();
         defaultValue = __parse(variableParts[1].trim());
       }
     }
@@ -62,7 +66,8 @@ function param(data) {
       name,
       type,
       description,
-      default: defaultValue
+      default: defaultValue,
+      defaultStr: defaultValueStr
     };
     if (param.content) res[name].content = param.content.join('\n');
   });

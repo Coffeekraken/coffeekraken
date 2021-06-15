@@ -514,6 +514,23 @@ class SFile extends __SEventEmitter implements ISFile {
   }
 
   /**
+   * @name        raw
+   * @type        String
+   * @get
+   * 
+   * Access the raw file content in string format
+   * 
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _raw?: string;
+  get raw(): any {
+    if (this._raw) return this._raw;
+    this._raw = __fs.readFileSync(this.path, 'utf8');
+    return this._raw;
+  }
+
+  /**
    * @name          content
    * @type          String
    * @get

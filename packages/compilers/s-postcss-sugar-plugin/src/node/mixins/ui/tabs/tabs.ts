@@ -73,13 +73,17 @@ export default function ({
   if (finalParams.scope.indexOf('lnf') !== -1) {
     vars.push(`
       @sugar.scope.lnf {
+        background-color: sugar.color(ui, surface);
+        border-radius: sugar.theme(ui.tabs.borderRadius);
+        box-shadow: sugar.theme(ui.tabs.depth);
+        overflow: hidden;
 
           & > * {
             text-align: center;
-            padding: ${__themeVar('ui.tab.padding')};
+            padding: sugar.theme('ui.tabs.padding');
             background-color: sugar.color(ui, surface);
             color: sugar.color(ui, foreground);
-            @sugar.transition (fast);
+            transition: sugar.theme(ui.tabs.transition);
             cursor: pointer;
             display: block;      
           }
@@ -90,12 +94,14 @@ export default function ({
   if (finalParams.style === 'default' && finalParams.scope.indexOf('style') !== -1) {
     vars.push(`
       @sugar.scope.lnf {
-        & > * {
+        & > dt,
+        & > li,
+        & > div {
           @sugar.state.hover {
-            background-color: sugar.color(accent);
+            background-color: sugar.color(complementary);
           }
           @sugar.state.active {
-            background-color: sugar.color(complementary);
+            background-color: sugar.color(accent);
           }          
         }
       }
@@ -105,13 +111,14 @@ export default function ({
   if (finalParams.style === 'gradient' && finalParams.scope.indexOf('style') !== -1) {
     vars.push(`
       @sugar.scope.lnf {
-        & > *:hover {
-            @sugar.gradient.linear($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg);
-            background-color: red !important;
-        }
-        & > * {
-          @sugar.state.active {
+        & > dt,
+        & > li,
+        & > div {
+          @sugar.state.hover {
             @sugar.gradient.linear($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg);
+          }
+          @sugar.state.active {
+            @sugar.gradient.linear($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg);
           }          
         }
       }

@@ -54,9 +54,9 @@ export default function ({ params, atRule, replaceWith }) {
     });
     const spaces = __theme().config('space');
     Object.keys(spaces).forEach(spaceName => {
-        const clsX = `s-grid-gutter-x--${spaceName}`.replace('-default', '');
-        const clsY = `s-grid-gutter-y--${spaceName}`.replace('-default', '');
-        const cls = `s-grid-gutter--${spaceName}`.replace('-default', '');
+        const clsX = `s-grid--gutter-x-${spaceName}`.replace('-default', '');
+        const clsY = `s-grid--gutter-y-${spaceName}`.replace('-default', '');
+        const cls = `s-grid--gutter-${spaceName}`.replace('-default', '');
         vars.push(`
       /**
        * @name       ${clsX}
@@ -134,7 +134,7 @@ export default function ({ params, atRule, replaceWith }) {
     });
     vars.push(`
      /**
-       * @name       s-grid-gutter--between
+       * @name       s-grid--gutter-between
        * @namespace     sugar.css.layout
        * @type          CssClass
        * 
@@ -152,7 +152,7 @@ export default function ({ params, atRule, replaceWith }) {
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-grid-gutter--between > * {
+      .s-grid--gutter-between > * {
         &:first-child {
           padding-left: 0 !important;
         }

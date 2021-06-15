@@ -6,7 +6,7 @@ import __theme from '../../utils/theme';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
 import __themeVar from '../../utils/themeVar';
 
-class postcssSugarPluginConfigInterface extends __SInterface {
+class postcssSugarPluginThemeInterface extends __SInterface {
   static definition = {
     dotPath: {
         type: 'String',
@@ -23,9 +23,9 @@ class postcssSugarPluginConfigInterface extends __SInterface {
     }
   };
 }
-export { postcssSugarPluginConfigInterface as interface };
+export { postcssSugarPluginThemeInterface as interface };
 
-export interface IPostcssSugarPluginColorParams {
+export interface IPostcssSugarPluginThemeParams {
   dotPath: string;
   return: 'var' | 'value';
   fallback: boolean;
@@ -34,9 +34,9 @@ export interface IPostcssSugarPluginColorParams {
 export default function color({
   params
 }: {
-  params: Partial<IPostcssSugarPluginColorParams>;
+  params: Partial<IPostcssSugarPluginThemeParams>;
 }) {
-  const finalParams: IPostcssSugarPluginColorParams = {
+  const finalParams: IPostcssSugarPluginThemeParams = {
     ...params
   };
   if (finalParams.return === 'var') {

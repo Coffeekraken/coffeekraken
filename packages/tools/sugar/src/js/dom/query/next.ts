@@ -6,7 +6,8 @@ import __matches from './matches';
  * @name      next
  * @namespace            js.dom.query
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Browse the passed element next siblings to find the first element that matches the passed selector
  *
@@ -28,7 +29,7 @@ import __matches from './matches';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function next(elm, selector) {
+function next(elm: HTMLElement, selector: string): HTMLElement {
   elm = elm.nextSibling;
   while (elm) {
     if (__matches(elm, selector)) {

@@ -1,0 +1,56 @@
+<s-opengraph-viewer>
+
+  <style type="postcss">
+    :host {
+      display: block;
+    }
+
+  </style>
+
+  <script>
+    import __SOpengraphViewerComponentInterface from './interface/SOpengraphViewerComponentInterface.ts';
+    import __SComponentUtils from '@coffeekraken/s-component-utils';
+    // import __openGraphScrapper from 'open-graph-scraper-lite';
+    // import __metascraper from 'metascraper';
+
+    function httpGet(theUrl)
+{
+    // var xmlHttp = new XMLHttpRequest();
+    // xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    // xmlHttp.send( null );
+
+  var http_request;
+http_request = new XMLHttpRequest();
+http_request.onreadystatechange = function () { /* .. */ };
+http_request.open("GET", theUrl, true);
+http_request.withCredentials = true;
+http_request.setRequestHeader("Content-Type", "text/html");
+http_request.setRequestHeader('Access-Control-Allow-Origin', '*');
+http_request.send();
+
+    return http_request.responseText;
+}
+
+    export default {
+      state: {
+        loading: false
+      },
+      onBeforeMount() {
+        this.component = new __SComponentUtils(this.root, this.props, {
+          interface: __SOpengraphViewerComponentInterface
+        });
+      },
+      async onMounted() {
+
+       console.log(httpGet(this.component.props.url));
+      //  const res = await __metascraper({
+      //    url: this.component.props.url
+      //  });
+
+      //  console.log(res);
+
+        
+      }
+    };
+  </script>
+</s-opengraph-viewer>

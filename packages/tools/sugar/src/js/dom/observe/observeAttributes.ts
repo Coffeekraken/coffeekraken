@@ -6,7 +6,9 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        observeAttributes
  * @namespace            js.dom.observe
  * @type      Function
- * @stable
+ * @async
+ * @platform      js
+ * @status        beta
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance
  *
@@ -30,7 +32,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function observeAttributes(target, settings = {}) {
+function observeAttributes(target: HTMLElement, settings: any = {}): __SPromise<any> {
   return new __SPromise(
     ({ emit }) => {
       // create a new observer

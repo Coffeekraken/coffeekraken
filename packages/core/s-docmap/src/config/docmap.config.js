@@ -1,8 +1,22 @@
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 export default {
-    generate: {
+    read: {
+        /**
+         * @name          input
+         * @namespace     config.docmap.read
+         * @type          String
+         *
+         * Specify the path of the docmap.json source file to read
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        input: `${__packageRoot()}/docmap.json`
+    },
+    build: {
         /**
          * @name            globs
-         * @namespace       config.docmap.generate
+         * @namespace       config.docmap.build
          * @type                Array<String>
          *
          * Specify the input globs to use in order to find files that will
@@ -16,11 +30,11 @@ export default {
         globs: [`src/**{5}/*:/.*@namespace.*/gm`, `dist/css/*:/.*@namespace.*/gm`],
         /**
          * @name        exclude
-         * @namespace   config.docmap.generate
+         * @namespace   config.docmap.build
          * @type        Array<String>
          *
          * Specify some regex to apply on different docblock and path properties
-         * to exclude some files from the generated docMap json
+         * to exclude some files from the buildd docMap json
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -28,7 +42,7 @@ export default {
         exclude: ['**/__tests__/**/*', '**/__tests__.wip/**/*', '**/__wip__/**/*'],
         /**
          * @name        noExtends
-         * @namespace   config.docmap.generate
+         * @namespace   config.docmap.build
          * @type        Boolean
          * @default     false
          *
@@ -40,11 +54,11 @@ export default {
         noExtends: false,
         /**
          * @name        filters
-         * @namespace   config.docmap.generate
+         * @namespace   config.docmap.build
          * @type        Object<String>
          *
          * Specify some regex to apply on different docblock properties
-         * to exclude some files from the generated docmap json
+         * to exclude some files from the buildd docmap json
          *
          * @example     js
          * {
@@ -59,7 +73,7 @@ export default {
         },
         /**
          * @name        fields
-         * @namespace     config.docmap.generate
+         * @namespace     config.docmap.build
          * @type        Array<String>
          * @default     ['name','type','description','namespace','status','static','since']
          *
@@ -71,6 +85,7 @@ export default {
         fields: [
             'name',
             'type',
+            'platform',
             'description',
             'namespace',
             'status',
@@ -79,24 +94,12 @@ export default {
             'author'
         ],
         /**
-         * @name        watch
-         * @namespace     config.docmap.generate
-         * @type      Boolean
-         * @default     false
-         *
-         * Specify if you want to re-generate the docmap.json file when a source file has been updated
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        watch: false,
-        /**
          * @name      save
-         * @namespace       config.docmap.generate
+         * @namespace       config.docmap.build
          * @type        Boolean
          * @default     true
          *
-         * Specify if you want to save the generated docmap.json file under the ```outPath``` path
+         * Specify if you want to save the buildd docmap.json file under the ```outPath``` path
          *
          * @since     2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -104,7 +107,7 @@ export default {
         save: true,
         /**
          * @name        outPath
-         * @namespace   config.docmap.generate
+         * @namespace   config.docmap.build
          * @type         String
          * @default       [config.storage.rootDir]/docmap.json
          *
@@ -116,4 +119,4 @@ export default {
         outPath: `[config.storage.rootDir]/docmap.json`
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0EsZUFBZTtJQUViLFFBQVEsRUFBRTtRQUNSOzs7Ozs7Ozs7Ozs7V0FZRztRQUNILEtBQUssRUFBRSxDQUFDLGdDQUFnQyxFQUFFLCtCQUErQixDQUFDO1FBRTFFOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsQ0FBQyxtQkFBbUIsRUFBRSx1QkFBdUIsRUFBRSxpQkFBaUIsQ0FBQztRQUUxRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLEtBQUs7UUFFaEI7Ozs7Ozs7Ozs7Ozs7OztXQWVHO1FBQ0gsT0FBTyxFQUFFO1lBQ1AsU0FBUyxFQUFFLFdBQVc7U0FDdkI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFO1lBQ04sTUFBTTtZQUNOLE1BQU07WUFDTixhQUFhO1lBQ2IsV0FBVztZQUNYLFFBQVE7WUFDUixRQUFRO1lBQ1IsT0FBTztZQUNQLFFBQVE7U0FDVDtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsc0NBQXNDO0tBQ2hEO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsZUFBZTtJQUViLElBQUksRUFBRTtRQUNKOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRSxHQUFHLGFBQWEsRUFBRSxjQUFjO0tBQ3hDO0lBRUQsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7OztXQVlHO1FBQ0gsS0FBSyxFQUFFLENBQUMsZ0NBQWdDLEVBQUUsK0JBQStCLENBQUM7UUFFMUU7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxDQUFDLG1CQUFtQixFQUFFLHVCQUF1QixFQUFFLGlCQUFpQixDQUFDO1FBRTFFOzs7Ozs7Ozs7O1dBVUc7UUFDSCxTQUFTLEVBQUUsS0FBSztRQUVoQjs7Ozs7Ozs7Ozs7Ozs7O1dBZUc7UUFDSCxPQUFPLEVBQUU7WUFDUCxTQUFTLEVBQUUsV0FBVztTQUN2QjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUU7WUFDTixNQUFNO1lBQ04sTUFBTTtZQUNOLFVBQVU7WUFDVixhQUFhO1lBQ2IsV0FBVztZQUNYLFFBQVE7WUFDUixRQUFRO1lBQ1IsT0FBTztZQUNQLFFBQVE7U0FDVDtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsc0NBQXNDO0tBQ2hEO0NBQ0YsQ0FBQyJ9

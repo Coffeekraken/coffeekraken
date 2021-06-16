@@ -23,23 +23,21 @@
                     }
                 </script>
             </s-request>
-            <s-filtrable-input id="search-input" filtrable="name,namespace" value="namespace" default-style>
+            <s-filtrable-input id="search-input" filtrable="name,namespace" value="namespace" interactive default-style>
                 <input type="text" placeholder="Search doc (cmd+shift+p)" class="s-form-input" />
-                @php print("<template id='loading'>
-                    <p clsas='s-p'>Searching.Please wait...</p>
-                </template>");
-                @endphp
-                @php print("<template id='item'>
-                    <a href='/doc/{{namespace}}'>
-                        <h4 class='s-font-title s-font-size-50 s-color-accent s-mb:10'><span class='s-color-success'>{{type}}</span> {{name}} <span class='s-color-complementary s-font-size-30'>{{namespace}}</span></h4>
-                        <p clsas='s-p'>{{description}}</p>
+                <template id="loading">
+                    <p clsas="s-p">Searching.Please wait...</p>
+                </template>
+                <template id="item">
+                    <a href="/doc/@{{namespace}}.@{{name}}">
+                        <h4 class="s-font:title s-font:50 s-color:accent s-mb:10">@{{name}}</h4>
+                        <h5 class="s-color:info s-font:30 s-mb:10">@{{namespace}}</h5>
+                        <p clsas="s-p">@{{description}}</p>
                     </a>
-                </template>");
-                @endphp
-                @php print("<template id='no-item'>
-                    <p class='s-p'>Sorry but their\'s no items that correspond to your research...</p>
-                </template>");
-                @endphp
+                </template>
+                <template id="no-item">
+                    <p class="s-p">Sorry but their\'s no items that correspond to your research...</p>
+                </template>
             </s-filtrable-input>
         </form>
         <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:50 s-py:60">

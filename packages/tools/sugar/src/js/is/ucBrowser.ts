@@ -4,7 +4,8 @@
  * @name        isUcBrowser
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is the UC stock browser that is running the page
  *
@@ -23,7 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isUcBrowser(ua = navigator.userAgent) {
+function isUcBrowser(ua: string = navigator.userAgent): boolean {
   return ua.match(/UCBrowser/i) !== null;
 }
 export default isUcBrowser;

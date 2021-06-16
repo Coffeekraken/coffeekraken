@@ -6,7 +6,8 @@ import __SEvent from '../../event/SEvent';
  * @name      dispatchEvent
  * @namespace            js.dom.event
  * @type      Function
- * @stable
+ * @platform        js
+ * @status          stable
  *
  * Helper to quickly display an event with some optional data attached to it
  *
@@ -27,7 +28,7 @@ import __SEvent from '../../event/SEvent';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function dispatchEvent($target, name, data = null) {
+function dispatchEvent($target: HTMLElement, name: string, data: any = null): void {
   // create new event
   const e = new __SEvent(name, {
     detail: data,

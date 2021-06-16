@@ -34,7 +34,7 @@ export default function view(req, res, settings = {}) {
         const viewPath = req.params[0].split('/').join('.');
         const viewInstance = new __SViewRenderer(viewPath);
         const result = yield viewInstance.render(Object.assign({}, ((_a = res.templateData) !== null && _a !== void 0 ? _a : {})));
-        res.status(404);
+        res.status(200);
         res.type('text/html');
         res.send(result.value);
     });

@@ -4,12 +4,14 @@
  * @name      prependChild
  * @namespace            js.dom.manipulate
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Prepend an HTMLElement into another HTMLElement
  *
  * @param 		{HTMLElement} 				elm  		The element to prepend
  * @param 		{HTMLElement} 				refElm 		The element in which to prepend the new element
+ * @return    {HTMLElement}               The prepended element
  *
  * @todo      interface
  * @todo      doc
@@ -22,11 +24,12 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function prependChild(elm, refElm) {
+function prependChild(elm: HTMLElement, refElm: HTMLElement): HTMLElement {
   if (!refElm.firstChild) {
     refElm.appendChild(elm);
   } else {
     refElm.insertBefore(elm, refElm.firstChild);
   }
+  return elm;
 }
 export default prependChild;

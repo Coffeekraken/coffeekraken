@@ -8,7 +8,8 @@ import deepMerge from '../../shared/object/deepMerge';
  * @name 		imagesLazySrcAttribute
  * @namespace            js.feature
  * @type      Feature
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Add support for the `lazy-src` attribute on `img` elements.
  * The video `src` attribute will be populated when the `img` element enter the viewport
@@ -31,7 +32,12 @@ import deepMerge from '../../shared/object/deepMerge';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function imagesLazySrcAttribute(settings = {}) {
+
+export interface IImagesLazySrcAttributeSettings {
+  offset: number;
+}
+
+function imagesLazySrcAttribute(settings: Partial<IImagesLazySrcAttributeSettings> = {}): void {
   settings = deepMerge(
     {
       offset: 50

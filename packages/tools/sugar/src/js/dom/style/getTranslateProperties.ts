@@ -6,7 +6,8 @@ import __convert from '../../../shared/unit/convert';
  * @name      getTranslateProperties
  * @namespace            js.dom.style
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Get a translate properties of an HTMLElement
  *
@@ -30,7 +31,11 @@ import __convert from '../../../shared/unit/convert';
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getTranslateProperties($elm, unit = 'px') {
+function getTranslateProperties($elm: HTMLElement, unit: 'px' | 'rem' | 'em' = 'px'): {
+  x: number;
+  y: number;
+  z: number;
+} {
   if (!window.getComputedStyle) return;
   let idx, mat;
   const style = getComputedStyle($elm);

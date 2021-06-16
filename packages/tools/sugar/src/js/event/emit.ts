@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        emit
  * @namespace            js.event
  * @type          Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * This function can ben used to emit an event globally.
  * You can subscribe to these events using the "sugar.js.event.subscribe" function
@@ -25,7 +26,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function emit(name, value) {
+function emit(name: string, value: any): void {
   // check that the global SPromise exists
   if (!window._sugarEventSPromise)
     window._sugarEventSPromise = new __SPromise({

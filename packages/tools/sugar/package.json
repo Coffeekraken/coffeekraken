@@ -106,7 +106,8 @@
     "to-regex": "^3.0.2",
     "uniqid": "^5.2.0",
     "url-parse": "^1.4.7",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yargs": "^17.0.1"
   },
   "globalDependencies": {},
   "devDependencies": {}

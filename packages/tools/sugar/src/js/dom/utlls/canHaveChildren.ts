@@ -4,7 +4,8 @@
  * @name          canHaveChildren
  * @namespace            js.dom.utils
  * @type          Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * This function take as input either a tagName String like "img", "div", etc... or an HTMLElement node
  * and return true or false depending if this element is supposed to have children or not.
@@ -24,7 +25,7 @@
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function canHaveChildren(element) {
+function canHaveChildren(element: HTMLElement): boolean {
   if (typeof element === 'string') {
     element = document.createElement(element);
   } else if (!(element instanceof HTMLElement)) {

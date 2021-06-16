@@ -7,7 +7,8 @@ import exitFullscreen from './exitFullscreen';
  * @name      toggleFullscreen
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Toggle the fullscreen mode
  *
@@ -25,7 +26,7 @@ import exitFullscreen from './exitFullscreen';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toggleFullscreen(elm) {
+function toggleFullscreen(elm: HTMLElement): Promise<any> {
   const fullscreenElm =
     document.fullscreenElement ||
     document.mozFullScreenElement ||

@@ -6,10 +6,14 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        addEventListener
  * @namespace            js.dom.event
  * @type      Function
- * @stable
+ * @platform        js
+ * @status          beta
  *
  * Add an event listener on an element and return the function to remove the event listener
  *
+ * @feature       Returns an SPromise that you can use to remove the event listener using the `cancel` method
+ * @feature       Can listen to multiple events at once
+ * 
  * @param    {HTMLElement}    $elm    The HTMLElement on which to add the event listener
  * @param    {String}    eventNames    The event names to listen to. Can be a simple string like "click", multiple events like "click,focus", or an array of events like ['click','hover']
  * @param    {Function}    callback    The callback function to call on event. The passed event

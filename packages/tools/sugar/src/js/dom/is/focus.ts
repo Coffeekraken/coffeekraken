@@ -4,7 +4,8 @@
  * @name      focus
  * @namespace            js.dom.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Check if the mouse is focus the passed HTMLElement
  *
@@ -24,7 +25,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function focus($elm) {
+function focus($elm: HTMLElement): boolean {
   return $elm.parentElement.querySelector(':focus') === $elm;
 }
 export default focus;

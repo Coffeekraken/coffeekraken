@@ -2,6 +2,29 @@
     $titleStr = 'wefwef';
 @endphp
 
+@if ($block->see)
+
+<section class="s-bg:ui-surface">
+        @foreach ($block->see as $see)
+            @if ($see->og)
+                <div class="s-grid:122">
+                    <img src="{{ $see->og->ogImage->url }}" style="width: 100%;" />
+                    <div class="s-pd:30">
+                        <h5 class="s-h5 s-mb:30">{{ $see->og->ogTitle }}</h5>
+                        <p class="s-p s-mb:30">
+                            {{ $see->og->ogDescription}}
+                        </p>
+                        <a class="s-btn:info" href="{{ $see->og->ogUrl }}" title="{{ $see->og->ogTitle }}" target="_blank">
+                            See more
+                        </a>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+</section>
+
+@endif
+
 @if ($block->description)
 
     @php 

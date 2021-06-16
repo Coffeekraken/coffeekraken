@@ -6,7 +6,8 @@ import scriptLoaded from '../scriptLoaded';
  * @name        appendScriptTag
  * @namespace            js.dom.tag
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Append a script tag either to the head or the body
  *
@@ -24,7 +25,7 @@ import scriptLoaded from '../scriptLoaded';
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function appendScriptTag(src, $parent = document.body) {
+function appendScriptTag(src: string, $parent: HTMLElement = document.body): Promise<HTMLScriptElement> {
   const $script = document.createElement('script');
   $script.src = src;
   $parent.appendChild($script);

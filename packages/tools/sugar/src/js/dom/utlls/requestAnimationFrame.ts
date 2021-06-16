@@ -4,7 +4,8 @@
  * @name      requestAnimationFrame
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @plaform       js
+ * @status      beta
  *
  * Proxy for the window.requestAnimationFrame function
  *

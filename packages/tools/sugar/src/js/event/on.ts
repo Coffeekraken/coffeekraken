@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        on
  * @namespace            js.event
  * @type          Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * This function allows you to subscribe to global events triggered by the "sugar.js.event.dispatch" function
  * It use under the hood an SPromise instance
@@ -28,7 +29,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function on(name, callback) {
+function on(name: string, callback: Function): void {
   // check that the global SPromise exists
   if (!window._sugarEventSPromise)
     window._sugarEventSPromise = new __SPromise({

@@ -7,13 +7,15 @@ import __convert from '../../../shared/time/convert';
  * @name      getAnimationProperties
  * @namespace            js.dom.style
  * @type      Function
- * @stable
+ * @platform        js
+ * @status          wip
  *
  * Get the css animation properties from an HTMLElement in an object format
  *
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
  *
+ * @todo      refactore
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -35,7 +37,18 @@ import __convert from '../../../shared/time/convert';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getAnimationProperties(elm) {
+
+// export interface IGetAnimationPropertiesObject {
+//   name : ['animation1'],
+//   duration : [200],
+//   delay : [0],
+//   timingFunction : ['linear'],
+//   iterationCount : [1],
+//   direction : ['forward'],
+//   totalDuration : 200
+// }
+
+function getAnimationProperties(elm: HTMLElement) {
   // get the animation properties
   const name = __getStyleProperty(elm, 'animation-name') || '';
   const duration = __getStyleProperty(elm, 'animation-duration') || '0s';

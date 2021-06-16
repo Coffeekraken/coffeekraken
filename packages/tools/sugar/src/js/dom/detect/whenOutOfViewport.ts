@@ -4,18 +4,23 @@ import __isInViewport from './isInViewport';
 import __throttle from '../../shared/function/throttle';
 import __closest from './query/closest';
 
-// TODO tests
-
 /**
  * @name      whenOutOfViewport
  * @namespace            js.dom.detect
  * @type      Function
- * @stable
+ * @async
+ * @platform      js
+ * @status        stable
  *
  * Monitor an HTMLElement to be notified when it exit the viewport
  *
+ * @feature       Promise based API
+ * @feature       Some settings to tweak the detection behavior
+ * 
+ * @setting       {Number}      [offset=50]     An offset to detect sooner or later the element exits the viewport
+ * 
  * @param 		{HTMLElement} 				elm 				The element to monitor
- * @param 		{Number} 					[offset=50] 		An offset that represent the distance before entering the viewport for the detection
+ * @param 		{IWhenOutOfViewportSettings} 					[settings={}]       Some settings to tweak the detection behavior
  * @return 		(Promise) 										The promise that will be resolved when the element exit the viewport
  *
  * @todo      interface
@@ -31,7 +36,12 @@ import __closest from './query/closest';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenOutOfViewport(elm, offset = 50) {
+
+export interface IWhenOutOfViewportSettings {
+  offset: number;
+}
+
+function whenOutOfViewport(elm: HTMLElement, settings: Partial<IWhenOutOfViewportSettings> = {}) {
   return new Promise((resolve, reject) => {
     if (window.IntersectionObserver) {
       let isInViewport = false;
@@ -55,7 +65,7 @@ function whenOutOfViewport(elm, offset = 50) {
         },
         {
           root: null, // viewport
-          rootMargin: `${offset}px`,
+          rootMargin: `${settings.offset}px`,
           threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
         }
       );
@@ -86,7 +96,7 @@ function whenOutOfViewport(elm, offset = 50) {
         }
       };
       const checkViewport = __throttle((e) => {
-        isInViewport = __isInViewport(elm, offset);
+        isInViewport = __isInViewport(elm, settings.offset);
         _cb();
       }, 100);
 

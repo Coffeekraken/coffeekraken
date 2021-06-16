@@ -2,6 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __tmpDir from 'temp-dir';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __sanitizeSugarJson from '@coffeekraken/sugar/shared/sugar/sanitizeSugarJson';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
@@ -10,6 +11,7 @@ import __glob from 'glob-all';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs';
 
 export interface ISSugarJsonIncludeSettings {
   package: boolean;
@@ -19,7 +21,7 @@ export interface ISSugarJsonIncludeSettings {
 }
 
 export interface ISSugarJsonSettings {
-  packages: string;
+  modules: string;
   include: ISSugarJsonIncludeSettings;
   cache: boolean;
   cacheId: string;
@@ -55,7 +57,8 @@ export interface ISSugarJsonFileConfig {
 }
 
 export interface ISSugarJsonFile {
-  theme?: String;
+  theme?: string;
+  recipe?: string;
   cli?: ISSugarJsonFileCli;
   config?: ISSugarJsonFileConfig;
 }
@@ -90,7 +93,7 @@ export default class SSugarJson extends __SClass {
       __deepMerge(
         {
           sugarJson: {
-            packages: '*',
+            modules: '*',
             include: {
               package: true,
               modules: true,
@@ -156,6 +159,7 @@ export default class SSugarJson extends __SClass {
   read(
     settings?: Partial<ISSugarJsonSettings>
   ): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
+
     const finalSettings = <ISSugarJsonSettings>{
       ...this.sugarJsonSettings,
       ...settings
@@ -163,74 +167,82 @@ export default class SSugarJson extends __SClass {
 
     let sugarJsonPaths: string[] = [];
 
-    if (
-      finalSettings.cache &&
-      __fs.existsSync(
-        `${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.json`
-      )
-    ) {
-      const cachedValue = require(`${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.json`);
-      if (cachedValue) {
-        // @ts-ignore
-        sugarJsonPaths = cachedValue;
-      }
-    }
+    // if (
+    //   finalSettings.cache &&
+    //   __fs.existsSync(
+    //     `${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.json`
+    //   )
+    // ) {
+    //   const cachedValue = require(`${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.json`);
+    //   if (cachedValue) {
+    //     // @ts-ignore
+    //     sugarJsonPaths = cachedValue;
+    //   }
+    // }
 
-    if (finalSettings.cache && !__isChildProcess()) {
-      if (
-        !__fs.existsSync(
-          `${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.lock`
-        )
-      ) {
-        // const sp = __childProcess.spawn(
-        //   `node ${__dirname}/updateCache/updateCache.cli.js`,
-        //   [],
-        //   {
-        //     shell: true,
-        //     cwd: __packageRoot()
-        //   }
-        // );
-      }
-    }
+    // if (finalSettings.cache && !__isChildProcess()) {
+    //   if (
+    //     !__fs.existsSync(
+    //       `${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.lock`
+    //     )
+    //   ) {
+    //     // const sp = __childProcess.spawn(
+    //     //   `node ${__dirname}/updateCache/updateCache.cli.js`,
+    //     //   [],
+    //     //   {
+    //     //     shell: true,
+    //     //     cwd: __packageRoot()
+    //     //   }
+    //     // );
+    //   }
+    // }
 
     if (!sugarJsonPaths.length) {
       sugarJsonPaths = this.search(finalSettings);
     }
 
-    const packagesArray = this.sugarJsonSettings.packages.split(',');
+    let results = {
+    };
+    sugarJsonPaths.forEach((path) => {
 
-    let results = {};
-    if (
-      sugarJsonPaths.length === 1 &&
-      packagesArray.length === 1 &&
-      packagesArray[0] !== '*'
-    ) {
-      results = this.sanitizeJson({
+      // read the file
+      const json = require(path);
+      const packageJson = require(`${path.replace(
+        'sugar.json',
+        'package.json'
+      )}`);
+
+      const resultJson = this.sanitizeJson({
         metas: {
-          path: sugarJsonPaths[0],
-          folderPath: sugarJsonPaths[0].split('/').slice(0, -1).join('/')
+          path,
+          folderPath: path.split('/').slice(0, -1).join('/')
         },
-        ...require(sugarJsonPaths[0])
+        ...json
       });
-    } else {
-      sugarJsonPaths.forEach((path) => {
-        // read the file
-        const json = require(path);
-        const packageJson = require(`${path.replace(
-          'sugar.json',
-          'package.json'
-        )}`);
-        results[packageJson.name] = this.sanitizeJson({
-          metas: {
-            path,
-            folderPath: path.split('/').slice(0, -1).join('/')
-          },
-          ...json
-        });
-      });
-    }
+
+      results[packageJson.name] = resultJson;
+    });
 
     return results;
+  }
+
+  /**
+   * @name      current
+   * @type      Function
+   * 
+   * This method allows you to get the current package sugar.json content
+   * 
+   * @return      {ISSugarJsonFile}         The sugar.json file content for the current package
+   * 
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  current(): ISSugarJsonFile {
+    try {
+      return this.sanitizeJson(require(`${__packageRoot()}/sugar.json`));
+    } catch(e) {
+      return {};
+    }
   }
 
   /**
@@ -258,7 +270,7 @@ export default class SSugarJson extends __SClass {
       .toString()
       .trim();
 
-    const packagesArray = finalSettings.packages.split(',');
+    const packagesArray = finalSettings.modules.split(',');
 
     // get local node modules directory path
     const localNodeModulesPath = `${__packageRoot()}/node_modules`;
@@ -274,7 +286,7 @@ export default class SSugarJson extends __SClass {
 
     // local first
     if (localNodeModulesPath && finalSettings.include.modules) {
-      if (finalSettings.packages === '*') {
+      if (finalSettings.modules === '*') {
         globs.push(`${localNodeModulesPath}/*/sugar.json`);
         globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
         // globs.push(`${__packageRoot()}/sugar.json`);
@@ -290,7 +302,7 @@ export default class SSugarJson extends __SClass {
       finalSettings.include.modules &&
       finalSettings.include.top
     ) {
-      if (finalSettings.packages === '*') {
+      if (finalSettings.modules === '*') {
         globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
         globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
       } else {
@@ -305,7 +317,7 @@ export default class SSugarJson extends __SClass {
       finalSettings.include.modules &&
       finalSettings.include.global
     ) {
-      if (finalSettings.packages === '*') {
+      if (finalSettings.modules === '*') {
         globs.push(`${globalNodeModulesPath}/*/sugar.json`);
         globs.push(`${globalNodeModulesPath}/*/*/sugar.json`);
       } else {
@@ -336,10 +348,12 @@ export default class SSugarJson extends __SClass {
       }
     });
 
-    if (finalSettings.cache) {
-    }
-
-    return files;
+    return __unique(files.map(f => __fs.realpathSync(f)).filter(f => {
+      if (f.toLowerCase().split('__wip__').length > 1 || f.toLowerCase().split('__tests__').length > 1) {
+        return false;
+      }
+      return true;
+    }));
   }
 
   /**

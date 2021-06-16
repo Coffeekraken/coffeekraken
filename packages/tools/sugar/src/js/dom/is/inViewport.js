@@ -1,40 +1,16 @@
 // @ts-nocheck
-/**
- * @name      inViewport
- * @namespace            js.dom.is
- * @type      Function
- * @stable
- *
- * Check if the passed HTMLElement is in the viewport or not
- *
- * @param 		{HTMLElement} 				elm  			The element to insert
- * @param 		{Object} 					[offset=50] 	An object of top, right, bottom and left offset used to detect the status or an object with top, right, bottom and left offsets
- * @return 		{Boolean}									If the element is in the viewport or not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import inViewport from '@coffeekraken/sugar/js/dom/is/inViewport'
- * if (inViewport(myCoolHTMLElement) {
- * 		// i'm in the viewport
- * }
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function inViewport(elm, offset = 50) {
+function inViewport(elm, settings = {}) {
+    settings = Object.assign({ offset: 50 }, settings);
     // handle offset
-    let offsetTop = offset;
-    let offsetRight = offset;
-    let offsetBottom = offset;
-    let offsetLeft = offset;
-    if (typeof offset === 'object') {
-        offsetTop = offset.top || 0;
-        offsetRight = offset.right || 0;
-        offsetBottom = offset.bottom || 0;
-        offsetLeft = offset.left || 0;
+    let offsetTop = settings.offset;
+    let offsetRight = settings.offset;
+    let offsetBottom = settings.offset;
+    let offsetLeft = settings.offset;
+    if (typeof settings.offset === 'object') {
+        offsetTop = settings.offset.top || 0;
+        offsetRight = settings.offset.right || 0;
+        offsetBottom = settings.offset.bottom || 0;
+        offsetLeft = settings.offset.left || 0;
     }
     const containerHeight = window.innerHeight || document.documentElement.clientHeight;
     const containerWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -46,4 +22,4 @@ function inViewport(elm, offset = 50) {
     return isTopIn && isBottomIn && isLeftIn && isRightIn;
 }
 export default inViewport;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5WaWV3cG9ydC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluVmlld3BvcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLFVBQVUsQ0FBQyxHQUFHLEVBQUUsTUFBTSxHQUFHLEVBQUU7SUFDbEMsZ0JBQWdCO0lBQ2hCLElBQUksU0FBUyxHQUFHLE1BQU0sQ0FBQztJQUN2QixJQUFJLFdBQVcsR0FBRyxNQUFNLENBQUM7SUFDekIsSUFBSSxZQUFZLEdBQUcsTUFBTSxDQUFDO0lBQzFCLElBQUksVUFBVSxHQUFHLE1BQU0sQ0FBQztJQUN4QixJQUFJLE9BQU8sTUFBTSxLQUFLLFFBQVEsRUFBRTtRQUM5QixTQUFTLEdBQUcsTUFBTSxDQUFDLEdBQUcsSUFBSSxDQUFDLENBQUM7UUFDNUIsV0FBVyxHQUFHLE1BQU0sQ0FBQyxLQUFLLElBQUksQ0FBQyxDQUFDO1FBQ2hDLFlBQVksR0FBRyxNQUFNLENBQUMsTUFBTSxJQUFJLENBQUMsQ0FBQztRQUNsQyxVQUFVLEdBQUcsTUFBTSxDQUFDLElBQUksSUFBSSxDQUFDLENBQUM7S0FDL0I7SUFDRCxNQUFNLGVBQWUsR0FDbkIsTUFBTSxDQUFDLFdBQVcsSUFBSSxRQUFRLENBQUMsZUFBZSxDQUFDLFlBQVksQ0FBQztJQUM5RCxNQUFNLGNBQWMsR0FDbEIsTUFBTSxDQUFDLFVBQVUsSUFBSSxRQUFRLENBQUMsZUFBZSxDQUFDLFdBQVcsQ0FBQztJQUM1RCxNQUFNLElBQUksR0FBRyxHQUFHLENBQUMscUJBQXFCLEVBQUUsQ0FBQztJQUN6QyxNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsR0FBRyxHQUFHLGVBQWUsR0FBRyxZQUFZLElBQUksQ0FBQyxDQUFDO0lBQy9ELE1BQU0sVUFBVSxHQUFHLElBQUksQ0FBQyxNQUFNLEdBQUcsU0FBUyxJQUFJLENBQUMsQ0FBQztJQUNoRCxNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsSUFBSSxHQUFHLGNBQWMsR0FBRyxXQUFXLElBQUksQ0FBQyxDQUFDO0lBQy9ELE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxLQUFLLEdBQUcsVUFBVSxJQUFJLENBQUMsQ0FBQztJQUMvQyxPQUFPLE9BQU8sSUFBSSxVQUFVLElBQUksUUFBUSxJQUFJLFNBQVMsQ0FBQztBQUN4RCxDQUFDO0FBQ0QsZUFBZSxVQUFVLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5WaWV3cG9ydC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluVmlld3BvcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQWlDZCxTQUFTLFVBQVUsQ0FBQyxHQUFnQixFQUFFLFdBQWlDLEVBQUU7SUFFdkUsUUFBUSxtQkFDTixNQUFNLEVBQUUsRUFBRSxJQUNQLFFBQVEsQ0FDWixDQUFDO0lBRUYsZ0JBQWdCO0lBQ2hCLElBQUksU0FBUyxHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUM7SUFDaEMsSUFBSSxXQUFXLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQztJQUNsQyxJQUFJLFlBQVksR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDO0lBQ25DLElBQUksVUFBVSxHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUM7SUFDakMsSUFBSSxPQUFPLFFBQVEsQ0FBQyxNQUFNLEtBQUssUUFBUSxFQUFFO1FBQ3ZDLFNBQVMsR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLEdBQUcsSUFBSSxDQUFDLENBQUM7UUFDckMsV0FBVyxHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUMsS0FBSyxJQUFJLENBQUMsQ0FBQztRQUN6QyxZQUFZLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQyxNQUFNLElBQUksQ0FBQyxDQUFDO1FBQzNDLFVBQVUsR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLElBQUksSUFBSSxDQUFDLENBQUM7S0FDeEM7SUFDRCxNQUFNLGVBQWUsR0FDbkIsTUFBTSxDQUFDLFdBQVcsSUFBSSxRQUFRLENBQUMsZUFBZSxDQUFDLFlBQVksQ0FBQztJQUM5RCxNQUFNLGNBQWMsR0FDbEIsTUFBTSxDQUFDLFVBQVUsSUFBSSxRQUFRLENBQUMsZUFBZSxDQUFDLFdBQVcsQ0FBQztJQUM1RCxNQUFNLElBQUksR0FBRyxHQUFHLENBQUMscUJBQXFCLEVBQUUsQ0FBQztJQUN6QyxNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsR0FBRyxHQUFHLGVBQWUsR0FBRyxZQUFZLElBQUksQ0FBQyxDQUFDO0lBQy9ELE1BQU0sVUFBVSxHQUFHLElBQUksQ0FBQyxNQUFNLEdBQUcsU0FBUyxJQUFJLENBQUMsQ0FBQztJQUNoRCxNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsSUFBSSxHQUFHLGNBQWMsR0FBRyxXQUFXLElBQUksQ0FBQyxDQUFDO0lBQy9ELE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxLQUFLLEdBQUcsVUFBVSxJQUFJLENBQUMsQ0FBQztJQUMvQyxPQUFPLE9BQU8sSUFBSSxVQUFVLElBQUksUUFBUSxJQUFJLFNBQVMsQ0FBQztBQUN4RCxDQUFDO0FBQ0QsZUFBZSxVQUFVLENBQUMifQ==

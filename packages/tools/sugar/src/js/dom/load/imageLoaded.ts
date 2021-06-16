@@ -6,10 +6,14 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      imageLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Wait until the passed image is fully loaded
  *
+ * @feature         Promise based API
+ * @feature         Callback support
+ * 
  * @param 		{HTMLImageElement} 			$img  		The image to check the loading state
  * @param 		{Function}					[cb=null] 	An optional callback to call
  * @return 		{SPromise} 								The promise that will be resolved when all the images are correctly loaded
@@ -27,7 +31,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function imageLoaded($img, callback = null) {
+function imageLoaded($img: HTMLImageElement, callback = null): __SPromise<HTMLImageElement> {
   let imgLoadedHandler, imgErrorHandler;
 
   return new __SPromise(

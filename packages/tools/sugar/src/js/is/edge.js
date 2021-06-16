@@ -3,7 +3,8 @@
  * @name        isEdge
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is edge
  *
@@ -27,4 +28,4 @@ function isEdge(ua = navigator.userAgent) {
     return ua.indexOf('Edg/') > -1;
 }
 export default isEdge;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWRnZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVkZ2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsTUFBTSxDQUFDLEVBQUUsR0FBRyxTQUFTLENBQUMsU0FBUztJQUN0QyxPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7QUFDakMsQ0FBQztBQUNELGVBQWUsTUFBTSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWRnZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVkZ2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLE1BQU0sQ0FBQyxLQUFhLFNBQVMsQ0FBQyxTQUFTO0lBQzlDLE9BQU8sRUFBRSxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztBQUNqQyxDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==

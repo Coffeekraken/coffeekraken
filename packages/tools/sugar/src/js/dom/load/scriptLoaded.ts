@@ -6,11 +6,16 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      scriptLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Detect when a script has been fully loaded
  *
+ * @feature       Promise based API
+ * @feature       Callback support
+ * 
  * @param    {HTMLScriptElement}    $script    The script element to detect the loading state
+ * @param       {Function}      [cb=null]     A callback if you prefer
  * @return    {Promise}    The promise that will be resolved when the script is fully loaded
  *
  * @todo      interface
@@ -26,7 +31,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function loadScript($script) {
+function loadScript($script: HTMLScriptElement, cb = null): __SPromise<HTMLScriptElement> {
   return new __SPromise(
     ({ resolve, reject, emit }) => {
       let done = false;
@@ -38,6 +43,7 @@ function loadScript($script) {
       function handleLoad() {
         if (!done) {
           done = true;
+          if (cb) cb($script);
           resolve($script);
         }
       }

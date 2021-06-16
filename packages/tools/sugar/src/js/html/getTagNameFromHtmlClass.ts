@@ -7,7 +7,8 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @name            getHtmlhtmlClassFromHtmlClass
  * @namespace            js.html
  * @type            Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * This function simply return the tagname depending on the passed HTML class
  * like HTMLAnchorElement, HTMLLinkElement, etc...
@@ -26,7 +27,7 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getHtmlhtmlClassFromHtmlClass(htmlClass) {
+function getHtmlhtmlClassFromHtmlClass(htmlClass: HTMLElement): string {
   if (!htmlClass) return false;
 
   for (const key in __htmlTagToHtmlClassMap) {

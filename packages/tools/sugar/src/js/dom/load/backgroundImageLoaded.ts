@@ -9,11 +9,16 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        backgroundImageLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        betas
  *
  * Detect when a background image has been loaded on an HTMLElement
  *
+ * @feature       Promise based API
+ * @feature       Callback support
+ * 
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
+ * @param     {Function}      [cb=null]       A callback function if you prefer
  * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
  *
  * @todo      interface
@@ -29,7 +34,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function backgroundImageLoaded($elm) {
+function backgroundImageLoaded($elm: HTMLElement, cb = null): __SPromise<HTMLElement> {
   let isCancelled = false,
     $img;
   const promise = new __SPromise(
@@ -48,7 +53,10 @@ function backgroundImageLoaded($elm) {
       $img.src = url;
       // return the promise of image loaded
       __imageLoaded($img).then(() => {
-        if (!isCancelled) resolve($elm);
+        if (!isCancelled) {
+          if (cb) cb($elm);
+          resolve($elm);
+        }
       });
     },
     {

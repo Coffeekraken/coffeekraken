@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      observeMutations
  * @namespace            js.dom.observe
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Observe mutations on an HTMLElement and get them through the observable subscription.
  * You can pass the mutation observer settings through the second argument. By default, here's his values:
@@ -33,7 +34,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function observeMutations($target, settings = {}) {
+function observeMutations($target: HTMLElement, settings: MutationObserverInit = {}): __SPromise<any> {
   settings = {
     attributes: true,
     childList: false,

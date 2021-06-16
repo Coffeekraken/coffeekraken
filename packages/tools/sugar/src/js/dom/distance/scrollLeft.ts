@@ -4,7 +4,8 @@
  * @name      scrollLeft
  * @namespace            js.dom.distance
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        stable
  *
  * Get the amount of scroll left
  *
@@ -19,7 +20,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivier.bossel@gmail.com)
  */
-function scrollLeft() {
+function scrollLeft(): number {
   return window.pageXOffset || document.scrollLeft || document.body.scrollLeft;
 }
 export default scrollLeft;

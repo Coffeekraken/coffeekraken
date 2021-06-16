@@ -4,7 +4,8 @@
  * @name        isIe
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is ie (internet explorer)
  *
@@ -24,7 +25,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isIe(ua = navigator.userAgent) {
+function isIe(ua: string = navigator.userAgent): boolean {
   return ua.indexOf('MSIE') > -1;
 }
 export default isIe;

@@ -2,28 +2,28 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
 
-let receipe = 'default';
+let recipe = 'default';
 if (__fs.existsSync(`${__packageRoot()}/sugar.json`)) {
   const sugarJson = require(`${__packageRoot()}/sugar.json`);
-  if (sugarJson.receipe) receipe = sugarJson.receipe;
+  if (sugarJson.recipe) recipe = sugarJson.recipe;
 }
 
 export default {
-  receipe,
+  recipe,
 
   exclude: [],
 
-  receipes: {
+  recipes: {
     default: {
       title: 'Default',
-      description: 'Default s-frontstack receipe ',
+      description: 'Default s-frontstack recipe ',
+      defaultStack: 'dev',
       stacks: {
         dev: {
           description: 'Start the development stack',
           actions: {
             frontendServer: '[config.frontstack.actions.frontendServer]',
             vite: '[config.frontstack.actions.vite]'
-            // docmap: '[config.frontstack.actions.docmap]'
           }
         },
         build: {
@@ -34,7 +34,8 @@ export default {
     },
     riotjsComponent: {
       title: 'RiotJs component',
-      description: 'RiotJs webcomponent receipe',
+      description: 'RiotJs webcomponent recipe',
+      defaultStack: 'dev',
       stacks: {
         dev: {
           description: 'Start the development stack',
@@ -118,10 +119,10 @@ export default {
     },
     docmap: {
       id: 'docmap',
-      title: 'Docmap generation action',
+      title: 'Docmap build action',
       description:
-        'Allow to generate and maintain up to date the docmap.json file',
-      process: 'sugard docmap.generate --noExtends',
+        'Allow to build and maintain up to date the docmap.json file',
+      process: 'sugard docmap.build --noExtends',
       settings: {
         processManager: {
           restart: true

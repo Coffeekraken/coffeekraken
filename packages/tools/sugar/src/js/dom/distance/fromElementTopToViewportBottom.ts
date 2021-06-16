@@ -5,6 +5,8 @@ import __offset from '../offset/offset';
  * @name            fromElementTopToViewportBottom
  * @namespace       js.dom.distance
  * @type            Function
+ * @platform        js
+ * @status          beta
  *
  * This function take an element as parameter and returns you to distance it has
  * from the element top to the viewport bottom in pixels
@@ -19,7 +21,7 @@ import __offset from '../offset/offset';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function fromElementTopToViewportBottom(elm) {
+export default function fromElementTopToViewportBottom(elm: HTMLElement): number {
   const offsets = __offset(elm);
   const scrollTop = __scrollTop();
   // @ts-ignore

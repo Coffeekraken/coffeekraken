@@ -4,7 +4,8 @@
  * @name        isChrome
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is chrome
  *
@@ -24,7 +25,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isChrome(ua = navigator.userAgent) {
+function isChrome(ua: string = navigator.userAgent): boolean {
   return ua.indexOf('Chrome') > -1;
 }
 export default isChrome;

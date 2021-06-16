@@ -7,7 +7,8 @@ import __throttle from '../../shared/function/throttle';
  * @name      splitLines
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Split each lines inside an HTMLElement by scoping them inside some tags.
  * Here's an result sample for :
@@ -18,10 +19,12 @@ import __throttle from '../../shared/function/throttle';
  * <p class="s-split-lines">Hello</p>
  * <p class="s-split-lines">World</p>
  * ```
- *
+ * 
+ * @setting 	{String} 			[tag="p"] 		The tag to use to split the lines
+ * @setting 	{String} 			[class="s-split-lines"] 		The class to apply on the tags 
+ * 
  * @param 	{HTMLElement} 		elm 		 	The HTMLElement to split lines in
- * @param 	{String} 			[tag="p"] 		The tag to use to split the lines
- * @param 	{String} 			[tagClass="s-split-lines"] 		The class to apply on the tags
+ * @param     {ISplitLinesSettings}       [settings={}]       Some settings to tweak the process
  * @return 	{HTMLElement} 						The HTMLElement processed
  *
  * @todo      interface
@@ -36,29 +39,41 @@ import __throttle from '../../shared/function/throttle';
  * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function splitLines(elm, tag = 'p', tagClass = 'split-lines') {
+
+export interface ISplitLinesSettings {
+  tag: string;
+  class: string;
+}
+
+function splitLines(elm: HTMLElement, settings: Partial<ISplitLinesSettings> = {}): HTMLElement {
+
+  settings = {
+    tag: 'p', class: 'split-lines',
+    ...settings
+  };
+
   // apply again on resize
   window.addEventListener(
     'resize',
     __throttle((e) => {
-      _splitLines(elm, tag, tagClass);
+      _splitLines(elm, settings);
     }, 150)
   );
 
   // first call
-  _splitLines(elm, tag, tagClass);
+  _splitLines(elm, settings);
 
   return elm;
 }
 
-function _splitLines(elm, tag, tagClass) {
+function _splitLines(elm, settings) {
   let string = elm._splitLinesOriginalString;
   if (!string) {
     string = elm.innerHTML;
     elm._splitLinesOriginalString = string;
   }
 
-  elm.classList.add(tagClass);
+  elm.classList.add(settings.class);
 
   // wrap each characters inside two spans
   let words = string.match(
@@ -86,7 +101,7 @@ function _splitLines(elm, tag, tagClass) {
 
   elm.innerHTML = lines
     .map((lineStr) => {
-      return `<${tag} class="${tagClass}__line">${lineStr}</${tag}>`;
+      return `<${settings.tag} class="${settings.class}__line">${lineStr}</${settings.tag}>`;
     })
     .join('');
 }

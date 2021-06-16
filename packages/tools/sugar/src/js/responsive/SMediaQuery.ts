@@ -7,6 +7,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.responsive
  * @type                Class
  * @extends             SPromise
+ * @platform            js
  * @status              wip
  *
  * This class expose some nice and easy methods to get the active media query defined in the config.media.queries configuration

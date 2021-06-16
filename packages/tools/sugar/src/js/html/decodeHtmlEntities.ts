@@ -4,7 +4,8 @@
  * @name        decodeHtmlEntities
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Decode an htmlentities encoded string
  *
@@ -23,7 +24,7 @@
  * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function decodeHtmlEntities(string) {
+function decodeHtmlEntities(string: string): string {
   const txt = document.createElement('textarea');
   txt.innerHTML = string;
   return txt.value;

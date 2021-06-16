@@ -8,6 +8,7 @@ import __toRegex from 'to-regex';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __deepMerge from '../../shared/object/deepMerge';
 import __isDirectory from '../is/directory';
+import __excludeGlobs from '../path/excludeGlobs';
 
 /**
  * @name            resolveGlob
@@ -106,7 +107,8 @@ export default function resolveGlob(globs: string | string[], settings: Partial
           ignore: [
             '**/bin/**',
             '**/*\.DS_Store',
-            ...(settings.exclude ?? [])
+            ...(settings.exclude ?? []),
+            ...__excludeGlobs()
           ],
           ...settings
         })

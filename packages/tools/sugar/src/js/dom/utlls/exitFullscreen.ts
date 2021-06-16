@@ -4,7 +4,8 @@
  * @name      exitFullscreen
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Exit the fullscreen mode
  *
@@ -21,7 +22,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function exitFullscreen() {
+function exitFullscreen(): Promise<any> {
   if (document.cancelFullScreen) {
     return document.cancelFullScreen();
   } else if (document.mozCancelFullScreen) {

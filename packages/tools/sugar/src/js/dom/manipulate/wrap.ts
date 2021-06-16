@@ -4,13 +4,15 @@
  * @name      wrap
  * @namespace            js.dom.manipulate
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Wrap an HTMLElement inside another `$wrapper` one
  *
  * @param    {HTMLElement}    $toWrap    The element to wrap
  * @param    {HTMLElement}    $wrapper    The wrapper element
- *
+ * @return    {HTMLElement}           The toWrap element
+ * 
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -33,7 +35,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function wrap($elm, $wrapper) {
+function wrap($elm: HTMLElement, $wrapper: HTMLElement): HTMLElement {
   if (typeof $wrapper === 'string') {
     $wrapper = document.createElement($wrapper);
   }

@@ -5,10 +5,16 @@ import linkLoaded from './linkLoaded';
  * @name      stylesheetsReady
  * @namespace            js.dom.detect
  * @type      Function
- * @stable
+ * @async
+ * @platform        js
+ * @status        beta
  *
  * Wait until all the HTMLLinkElement's are properly loaded
  *
+ * @feature       Async promise based
+ * @feature       Callback support
+ * @feature       Multiple stylesheets elements listening
+ * 
  * @param 		{Array}<HTMLLinkElement> 		links 			The HTMLLinkElement tags to process
  * @param 		{Function} 						[cb=null] 		An optional callback function to call when all the links are loaded
  * @return 		{Promise} 										The promise that will be resolved when all the links are loaded

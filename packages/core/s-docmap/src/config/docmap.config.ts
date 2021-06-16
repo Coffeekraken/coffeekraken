@@ -3,10 +3,24 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 export default {
   
-  generate: {
+  read: {
+    /**
+     * @name          input
+     * @namespace     config.docmap.read
+     * @type          String
+     * 
+     * Specify the path of the docmap.json source file to read
+     * 
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    input: `${__packageRoot()}/docmap.json`
+  },
+
+  build: {
     /**
      * @name            globs
-     * @namespace       config.docmap.generate
+     * @namespace       config.docmap.build
      * @type                Array<String>
      *
      * Specify the input globs to use in order to find files that will
@@ -21,11 +35,11 @@ export default {
 
     /**
      * @name        exclude
-     * @namespace   config.docmap.generate
+     * @namespace   config.docmap.build
      * @type        Array<String>
      *
      * Specify some regex to apply on different docblock and path properties
-     * to exclude some files from the generated docMap json
+     * to exclude some files from the buildd docMap json
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -34,7 +48,7 @@ export default {
 
     /**
      * @name        noExtends
-     * @namespace   config.docmap.generate
+     * @namespace   config.docmap.build
      * @type        Boolean
      * @default     false
      *
@@ -47,11 +61,11 @@ export default {
 
     /**
      * @name        filters
-     * @namespace   config.docmap.generate
+     * @namespace   config.docmap.build
      * @type        Object<String>
      *
      * Specify some regex to apply on different docblock properties
-     * to exclude some files from the generated docmap json
+     * to exclude some files from the buildd docmap json
      *
      * @example     js
      * {
@@ -67,7 +81,7 @@ export default {
 
     /**
      * @name        fields
-     * @namespace     config.docmap.generate
+     * @namespace     config.docmap.build
      * @type        Array<String>
      * @default     ['name','type','description','namespace','status','static','since']
      *
@@ -79,6 +93,7 @@ export default {
     fields: [
       'name',
       'type',
+      'platform',
       'description',
       'namespace',
       'status',
@@ -88,25 +103,12 @@ export default {
     ],
 
     /**
-     * @name        watch
-     * @namespace     config.docmap.generate
-     * @type      Boolean
-     * @default     false
-     *
-     * Specify if you want to re-generate the docmap.json file when a source file has been updated
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    watch: false,
-
-    /**
      * @name      save
-     * @namespace       config.docmap.generate
+     * @namespace       config.docmap.build
      * @type        Boolean
      * @default     true
      *
-     * Specify if you want to save the generated docmap.json file under the ```outPath``` path
+     * Specify if you want to save the buildd docmap.json file under the ```outPath``` path
      *
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -115,7 +117,7 @@ export default {
 
     /**
      * @name        outPath
-     * @namespace   config.docmap.generate
+     * @namespace   config.docmap.build
      * @type         String
      * @default       [config.storage.rootDir]/docmap.json
      *

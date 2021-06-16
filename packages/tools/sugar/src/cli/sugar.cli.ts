@@ -15,7 +15,6 @@ const __SSugarJson = require('@coffeekraken/s-sugar-json').default;
 const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
 
 require('../node/index');
-
 /**
  * @name            sugar.cli
  * @namespace           cli
@@ -34,7 +33,10 @@ const args =
   process.argv
     .slice(3)
     .map((arg) => {
-      if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-') {
+      // @todo      support for command with 1 sub param like: --something "--else"
+      if (arg.includes(' ')) {
+        return `"${arg}"`;
+      } else if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-') {
         return `"${arg}"`;
       }
       return arg;
@@ -84,6 +86,7 @@ if (!stack) {
       }
 
       Object.keys(cliObj.actions).forEach((action) => {
+
         const actionObj = cliObj.actions[action];
 
         if (actionObj.process && __isPath(actionObj.process)) {

@@ -3,12 +3,14 @@
  * @name      prependChild
  * @namespace            js.dom.manipulate
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Prepend an HTMLElement into another HTMLElement
  *
  * @param 		{HTMLElement} 				elm  		The element to prepend
  * @param 		{HTMLElement} 				refElm 		The element in which to prepend the new element
+ * @return    {HTMLElement}               The prepended element
  *
  * @todo      interface
  * @todo      doc
@@ -28,6 +30,7 @@ function prependChild(elm, refElm) {
     else {
         refElm.insertBefore(elm, refElm.firstChild);
     }
+    return elm;
 }
 export default prependChild;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlcGVuZENoaWxkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicHJlcGVuZENoaWxkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxZQUFZLENBQUMsR0FBRyxFQUFFLE1BQU07SUFDL0IsSUFBSSxDQUFDLE1BQU0sQ0FBQyxVQUFVLEVBQUU7UUFDdEIsTUFBTSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztLQUN6QjtTQUFNO1FBQ0wsTUFBTSxDQUFDLFlBQVksQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0tBQzdDO0FBQ0gsQ0FBQztBQUNELGVBQWUsWUFBWSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlcGVuZENoaWxkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicHJlcGVuZENoaWxkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFlBQVksQ0FBQyxHQUFnQixFQUFFLE1BQW1CO0lBQ3pELElBQUksQ0FBQyxNQUFNLENBQUMsVUFBVSxFQUFFO1FBQ3RCLE1BQU0sQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDekI7U0FBTTtRQUNMLE1BQU0sQ0FBQyxZQUFZLENBQUMsR0FBRyxFQUFFLE1BQU0sQ0FBQyxVQUFVLENBQUMsQ0FBQztLQUM3QztJQUNELE9BQU8sR0FBRyxDQUFDO0FBQ2IsQ0FBQztBQUNELGVBQWUsWUFBWSxDQUFDIn0=

@@ -101,6 +101,27 @@ export default function ({
         }
     `);
 
+    Object.keys(__theme().config('color')).forEach((colorName) => {
+      vars.push(`
+        /**
+         * @name        s-badge--${colorName}
+         * @namespace     sugar.css.ui.badge
+         * @type          CssClass
+         * 
+         * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any badge
+         * 
+         * @example       html
+         * <a class="s-badge--${colorName}">I'm a cool ${colorName} badge</a>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        .s-badge--${colorName} {
+          @sugar.color.remap(ui, ${colorName});
+        }
+      `);
+    });
+
 
   replaceWith(vars);
 }

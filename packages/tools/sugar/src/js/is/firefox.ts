@@ -4,7 +4,8 @@
  * @name        isFirefox
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is firefox
  *
@@ -24,7 +25,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isFirefox(ua = navigator.userAgent) {
+function isFirefox(ua: string = navigator.userAgent): boolean {
   return ua.indexOf('Firefox') > -1;
 }
 export default isFirefox;

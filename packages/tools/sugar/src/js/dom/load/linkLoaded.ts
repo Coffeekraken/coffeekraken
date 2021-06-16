@@ -4,10 +4,14 @@
  * @name      linkLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Wait until the passed HTMLLinkElement is fully loaded
  *
+ * @feature       Promise based API
+ * @feature       Callback support
+ * 
  * @param 		{HTMLLinkElement} 			link  		The link tag to check the loading state
  * @param 		{Function}					[cb=null] 	An optional callback to call
  * @return 		{Promise} 								The promise that will be resolved
@@ -25,7 +29,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function alreadyLoaded(link) {
+function alreadyLoaded(link: HTMLLinkElement): boolean {
   const href = link.href;
   let result = false;
   for (let i = 0; i < document.styleSheets.length; i++) {
@@ -42,14 +46,14 @@ function alreadyLoaded(link) {
   return result;
 }
 
-function linkLoaded(link, callback = null) {
+function linkLoaded(link: HTMLLinkElement, cb = null): Promise<HTMLLinkElement> {
   return new Promise((resolve, reject) => {
     // check if image is already loaded
     if (alreadyLoaded(link)) {
       // resolve promise
       resolve(link);
-      // call the callback if exist
-      callback != null && callback(link);
+      // call the cb if exist
+      cb != null && cb(link);
     } else {
       const img = document.createElement('img');
 
@@ -61,8 +65,8 @@ function linkLoaded(link, callback = null) {
       img.addEventListener('error', (e) => {
         // resolve the promise
         resolve(link);
-        // callback if exist
-        callback != null && callback(link);
+        // cb if exist
+        cb != null && cb(link);
       });
       // listen for error
       // img.addEventListener('error', (e) => {

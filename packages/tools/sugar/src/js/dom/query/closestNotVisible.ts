@@ -6,7 +6,8 @@ import __isVisible from '../isVisible';
  * @name        closestNotVisible
  * @namespace            js.dom.query
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Go up the dom three to find the first element that is not visible.
  * Not visible mean that has either an opacity to 0, a visibility to hidden or a display to none
@@ -28,7 +29,7 @@ import __isVisible from '../isVisible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function closestNotVisible(elm) {
+function closestNotVisible(elm: HTMLElement): HTMLElement {
   const originalElm = elm;
   elm = elm.parentNode;
   while (elm && elm != originalElm.ownerDocument) {

@@ -1,55 +1,24 @@
 // @ts-nocheck
 import _map from 'lodash/map';
-/**
- * @name      splitWords
- * @namespace            js.dom.utils
- * @type      Function
- * @stable
- *
- * Split each words inside an HTMLElement by scoping them inside some tags.
- * Here's an result sample for :
- * Hello World
- *
- * ```html
- * <span class="s-split-words">Hello</span>
- * <span class="s-split-words">World</span>
- * ```
- *
- * @param 	{HTMLElement} 		elm 		 	The HTMLElement to split words in
- * @param 	{String} 			[tag="p"] 		The tag to use to split the words
- * @param 	{String} 			[tagClass="s-split-lines"] 		The class to apply on the tags
- * @return 	{HTMLElement} 						The HTMLElement processed
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import splitWords from '@coffeekraken/sugar/js/dom/splitLines'
- * const myCoolElement = document.querySelector('.my-cool-element');
- * splitWords(myCoolElement);
- *
- * @since       1.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function splitWords(elm, tag = 'span', tagClass = 'split-words') {
+function splitWords(elm, settings = {}) {
+    settings = Object.assign({ tag: 'span', class: 'split-words' }, settings);
     // first call
-    _splitWords(elm, tag, tagClass);
+    _splitWords(elm, settings);
     return elm;
 }
-function _splitWords(elm, tag, tagClass) {
+function _splitWords(elm, settings) {
     let string = elm._splitWordsOriginalString;
     if (!string) {
         string = elm.innerHTML;
         elm._splitWordsOriginalString = string;
     }
-    elm.classList.add(tagClass);
+    elm.classList.add(settings.class);
     // wrap each characters inside two spans
     let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
     words = _map(words, (word) => {
-        return `<${tag} class="${tagClass}__word">${word}</${tag}>`;
+        return `<${settings.tag} class="${settings.class}__word">${word}</${settings.tag}>`;
     }).join(' ');
     elm.innerHTML = words;
 }
 export default splitWords;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3BsaXRXb3Jkcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNwbGl0V29yZHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sSUFBSSxNQUFNLFlBQVksQ0FBQztBQUU5Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQStCRztBQUNILFNBQVMsVUFBVSxDQUFDLEdBQUcsRUFBRSxHQUFHLEdBQUcsTUFBTSxFQUFFLFFBQVEsR0FBRyxhQUFhO0lBQzdELGFBQWE7SUFDYixXQUFXLENBQUMsR0FBRyxFQUFFLEdBQUcsRUFBRSxRQUFRLENBQUMsQ0FBQztJQUVoQyxPQUFPLEdBQUcsQ0FBQztBQUNiLENBQUM7QUFFRCxTQUFTLFdBQVcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLFFBQVE7SUFDckMsSUFBSSxNQUFNLEdBQUcsR0FBRyxDQUFDLHlCQUF5QixDQUFDO0lBQzNDLElBQUksQ0FBQyxNQUFNLEVBQUU7UUFDWCxNQUFNLEdBQUcsR0FBRyxDQUFDLFNBQVMsQ0FBQztRQUN2QixHQUFHLENBQUMseUJBQXlCLEdBQUcsTUFBTSxDQUFDO0tBQ3hDO0lBRUQsR0FBRyxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsUUFBUSxDQUFDLENBQUM7SUFFNUIsd0NBQXdDO0lBQ3hDLElBQUksS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLENBQ3RCLDZEQUE2RCxDQUM5RCxDQUFDO0lBQ0YsS0FBSyxHQUFHLElBQUksQ0FBQyxLQUFLLEVBQUUsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUMzQixPQUFPLElBQUksR0FBRyxXQUFXLFFBQVEsV0FBVyxJQUFJLEtBQUssR0FBRyxHQUFHLENBQUM7SUFDOUQsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ2IsR0FBRyxDQUFDLFNBQVMsR0FBRyxLQUFLLENBQUM7QUFDeEIsQ0FBQztBQUNELGVBQWUsVUFBVSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3BsaXRXb3Jkcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNwbGl0V29yZHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sSUFBSSxNQUFNLFlBQVksQ0FBQztBQTJDOUIsU0FBUyxVQUFVLENBQUMsR0FBZ0IsRUFBRSxXQUF5QyxFQUFFO0lBRS9FLFFBQVEsbUJBQ04sR0FBRyxFQUFFLE1BQU0sRUFBRSxLQUFLLEVBQUUsYUFBYSxJQUM5QixRQUFRLENBQ1osQ0FBQztJQUVGLGFBQWE7SUFDYixXQUFXLENBQUMsR0FBRyxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBRTNCLE9BQU8sR0FBRyxDQUFDO0FBQ2IsQ0FBQztBQUVELFNBQVMsV0FBVyxDQUFDLEdBQUcsRUFBRSxRQUFRO0lBQ2hDLElBQUksTUFBTSxHQUFHLEdBQUcsQ0FBQyx5QkFBeUIsQ0FBQztJQUMzQyxJQUFJLENBQUMsTUFBTSxFQUFFO1FBQ1gsTUFBTSxHQUFHLEdBQUcsQ0FBQyxTQUFTLENBQUM7UUFDdkIsR0FBRyxDQUFDLHlCQUF5QixHQUFHLE1BQU0sQ0FBQztLQUN4QztJQUVELEdBQUcsQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUVsQyx3Q0FBd0M7SUFDeEMsSUFBSSxLQUFLLEdBQUcsTUFBTSxDQUFDLEtBQUssQ0FDdEIsNkRBQTZELENBQzlELENBQUM7SUFDRixLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssRUFBRSxDQUFDLElBQUksRUFBRSxFQUFFO1FBQzNCLE9BQU8sSUFBSSxRQUFRLENBQUMsR0FBRyxXQUFXLFFBQVEsQ0FBQyxLQUFLLFdBQVcsSUFBSSxLQUFLLFFBQVEsQ0FBQyxHQUFHLEdBQUcsQ0FBQztJQUN0RixDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDYixHQUFHLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQztBQUN4QixDQUFDO0FBQ0QsZUFBZSxVQUFVLENBQUMifQ==

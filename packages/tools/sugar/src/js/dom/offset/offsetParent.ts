@@ -5,12 +5,13 @@ import __offset from './offset';
  * @name      offsetParent
  * @namespace            js.dom.offset
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Get the offset top and left of the passed element from his parent top left point
  *
  * @param 		{HTMLElement} 					elm  		The element to get the offset from
- * @return 		{Object} 									The offset top and left object
+ * @return 		{top: number; left: number;} 									The offset top and left object
  *
  * @todo      interface
  * @todo      doc
@@ -24,7 +25,10 @@ import __offset from './offset';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function offsetParent(elm) {
+function offsetParent(elm: HTMLElement): {
+  top: number;
+  left: number;
+} {
   const parentOffset = __offset(elm.parentNode);
   const offset = __offset(elm);
   return {

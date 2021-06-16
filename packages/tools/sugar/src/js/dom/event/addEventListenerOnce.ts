@@ -7,10 +7,14 @@ import __addEventListener from './addEventListener';
  * @name        addEventListenerOnce
  * @namespace            js.dom.event
  * @type      Function
- * @stable
+ * @platform        js
+ * @status          beta
  *
  * Add an event listener that will be trigerred only once
  *
+ * @feature       All the features of the `sugar.js.dom.addEventListener` functions
+ * @feature       Remove automatically the listener after 1 event
+ * 
  * @param    {HTMLElement}    $elm    The element to add the event listener on
  * @param    {String}    event    The event to listen for
  * @param    {Function}    [callback=null]    The callback function to call on event
@@ -34,11 +38,11 @@ import __addEventListener from './addEventListener';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function addEventListenerOnce(
-  $elm,
-  eventNames,
+  $elm: HTMLElement,
+  eventNames: string | string[],
   callback = null,
   useCapture = false
-) {
+): __SPromise<any> {
   if (!Array.isArray(eventNames)) eventNames = [eventNames];
 
   const globalPromise = new __SPromise({

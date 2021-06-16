@@ -1,0 +1,31 @@
+{
+  "name": "@coffeekraken/s-opengraph-viewer-component",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://coffeekraken.io",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/js/index.lib.umd.js",
+  "module": "./dist/js/index.lib.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/js/index.lib.es.js",
+      "require": "./dist/js/index.lib.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "sugard frontstack",
+    "build": "sugard vite.build --lib",
+    "build.watch": "sugard vite.build --lib --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-component-utils": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
+    "metascraper": "^5.22.1",
+    "open-graph-scraper-lite": "^1.1.1"
+  }
+}

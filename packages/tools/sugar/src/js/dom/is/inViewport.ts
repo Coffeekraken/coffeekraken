@@ -4,7 +4,8 @@
  * @name      inViewport
  * @namespace            js.dom.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Check if the passed HTMLElement is in the viewport or not
  *
@@ -25,17 +26,28 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function inViewport(elm, offset = 50) {
+
+export interface IInViewport {
+  offset: number | Record<string, number>;
+}
+
+function inViewport(elm: HTMLElement, settings: Partial<IInViewport> = {}): boolean {
+
+  settings = {
+    offset: 50,
+    ...settings
+  };
+
   // handle offset
-  let offsetTop = offset;
-  let offsetRight = offset;
-  let offsetBottom = offset;
-  let offsetLeft = offset;
-  if (typeof offset === 'object') {
-    offsetTop = offset.top || 0;
-    offsetRight = offset.right || 0;
-    offsetBottom = offset.bottom || 0;
-    offsetLeft = offset.left || 0;
+  let offsetTop = settings.offset;
+  let offsetRight = settings.offset;
+  let offsetBottom = settings.offset;
+  let offsetLeft = settings.offset;
+  if (typeof settings.offset === 'object') {
+    offsetTop = settings.offset.top || 0;
+    offsetRight = settings.offset.right || 0;
+    offsetBottom = settings.offset.bottom || 0;
+    offsetLeft = settings.offset.left || 0;
   }
   const containerHeight =
     window.innerHeight || document.documentElement.clientHeight;

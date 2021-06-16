@@ -4,7 +4,8 @@
  * @name      focusWithin
  * @namespace            js.dom.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Check if the mouse is focusWithin the passed HTMLElement
  *
@@ -24,7 +25,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function focusWithin($elm) {
+function focusWithin($elm: HTMLElement): boolean {
   return $elm.parentElement.querySelector(':focus-within') === $elm;
 }
 export default focusWithin;

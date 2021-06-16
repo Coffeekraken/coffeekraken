@@ -4,7 +4,8 @@
  * @name      nodeIndex
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Return the inde of the passed node inside the html
  *
@@ -26,7 +27,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function nodeIndex(node) {
+function nodeIndex(node: HTMLElement): number {
   let index = 0;
   while ((node = node.previousElementSibling)) {
     index++;

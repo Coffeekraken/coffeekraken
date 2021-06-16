@@ -6,7 +6,8 @@ import __getStyleProperty from '../style/getStyleProperty';
  * @name      textWidth
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Get the text width in px of a passed string or the passed HTMLElement
  *
@@ -28,7 +29,7 @@ import __getStyleProperty from '../style/getStyleProperty';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function textWidth(source) {
+function textWidth(source: string | HTMLElement): number {
   // create an element
   const elm = document.createElement('span');
   elm.style.whiteSpace = 'nowrap';

@@ -7,6 +7,7 @@ import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
 import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __minimatch from 'minimatch';
+import __ogScraper from 'open-graph-scraper';
 
 /**
  * @name                doc
@@ -36,45 +37,12 @@ export default function doc(req, res, settings = {}) {
     const readPromise = docMap.read();
     pipe(readPromise);
     _docmapJson = await readPromise;
-
-    const filteredDocmapObj = {};
-    Object.keys(_docmapJson).forEach((namespace) => {
-      if (
-        namespace === requestedNamespace ||
-        __minimatch(namespace, `${requestedNamespace}.**`)
-      ) {
-        filteredDocmapObj[namespace] = _docmapJson[namespace];
-      }
-    });
-
-    const docblocks: string[] = [];
-    for (let i = 0; i < Object.keys(filteredDocmapObj).length; i++) {
-      const docmapObj = filteredDocmapObj[Object.keys(filteredDocmapObj)[i]];
-      // generate the docblocks
-      console.log(docmapObj.path);
-      const docblock = new __SDocblock(docmapObj.path, {});
-      docblocks.push(docblock.toObject());
-
-      // if (i < 1) {
-      //   // render them into html
-      //   const htmlRenderer = new SDocblockHtmlRenderer(docblock);
-      //   const html = await htmlRenderer.render();
-      //   docsHtml.push(html);
-      // } else {
-      //   docsHtml.push(`
-      //     <s-docblock-to-html>
-      //       ${docblock.toString()}
-      //     </s-docblock-to-html>
-      //   `);
-      // }
-    }
-
-    // console.log(docblocks);
-
-    if (!docblocks.length) {
+    
+    if (!_docmapJson[requestedNamespace]) {
       const html = await page404({
-        title: `Documentation "${namespace}" not found`,
-        body: `The documentation "${namespace}" you requested does not exists...`
+        ...(res.templateData || {}),
+        title: `Documentation "${requestedNamespace}" not found`,
+        body: `The documentation "${requestedNamespace}" you requested does not exists...`
       });
       res.type('text/html');
       res.status(404);
@@ -82,11 +50,58 @@ export default function doc(req, res, settings = {}) {
       return reject(html.value);
     }
 
+    // generate the docblocks
+    const docblocks = new __SDocblock(_docmapJson[requestedNamespace].path, {}).toObject();
+
+    // protect
+    if (!docblocks.length) {
+      const html = await page404({
+        ...(res.templateData || {}),
+        title: `Documentation "${requestedNamespace}" not found`,
+        body: `The documentation "${requestedNamespace}" you requested does not exists...`
+      });
+      res.type('text/html');
+      res.status(404);
+      res.send(html.value);
+      return reject(html.value);
+    }
+
+
+
+    // scrap @see fields opengraph metas
+    await new Promise((resolve, reject) => {
+
+      let pendingRequests = 0;
+
+      docblocks.forEach((block) => {
+        if (!block.see) return;
+
+        block.see.forEach((seeObj) => {
+
+          pendingRequests++;
+
+          const data = __ogScraper({
+            url: seeObj.url,
+            onlyGetOpenGraphInfo: true
+          }, (error, results, response) => {
+            if (results) {
+              seeObj.og = results
+            }
+            pendingRequests--;
+            if (!pendingRequests) {
+              resolve();
+            }
+          });
+        });
+      });
+    });
+
+
     // render the proper template
     const docView = new __SViewRenderer('pages.doc.doc');
     const pageHtml = await docView.render({
       ...(res.templateData || {}),
-      docs: docblocks
+      docblocks
     });
 
     res.type('text/html');

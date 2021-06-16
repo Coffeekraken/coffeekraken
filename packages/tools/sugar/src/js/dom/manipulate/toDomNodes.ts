@@ -30,7 +30,8 @@ function processNodeElm(elm) {
  * @name      toDomNodes
  * @namespace            js.dom.manipulate
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        betas
  *
  * Return a usable nodeTree from a variable source like selector, an html string, an html template tag or a node that will be cloned.
  *
@@ -48,7 +49,7 @@ function processNodeElm(elm) {
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toDomNodes(source) {
+function toDomNodes(source: string | HTMLElement): HTMLElement {
   // if the source is an HTMLElement
   if (source.tagName) {
     return processNodeElm(source);

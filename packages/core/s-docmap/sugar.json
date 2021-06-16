@@ -12,9 +12,9 @@
       "stack": "docmap",
       "description": "SDocMap CLI",
       "actions": {
-        "generate": {
-          "description": "Generate the docmap.json file by searching for source files with a @namespace defined",
-          "process": "./src/node/generate.cli.js"
+        "build": {
+          "description": "Build the docmap.json file by searching for source files with a @namespace defined",
+          "process": "./src/node/build.cli.js"
         },
         "read": {
           "description": "Get a special docmap entry",

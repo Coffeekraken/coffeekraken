@@ -4,7 +4,8 @@
  * @name        isSafari
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is safari
  *
@@ -24,7 +25,7 @@
  * @since         1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isSafari(ua = navigator.userAgent) {
+function isSafari(ua: string = navigator.userAgent): boolean {
   return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;
 }
 export default isSafari;

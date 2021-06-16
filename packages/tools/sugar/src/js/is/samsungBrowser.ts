@@ -4,7 +4,8 @@
  * @name        isSamsumgBrowser
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is the samsung stock browser that is running the page
  *
@@ -24,7 +25,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isSamsumgBrowser(ua = navigator.userAgent) {
+function isSamsumgBrowser(ua: string = navigator.userAgent): boolean {
   return ua.match(/SamsungBrowser/i) !== null;
 }
 export default isSamsumgBrowser;

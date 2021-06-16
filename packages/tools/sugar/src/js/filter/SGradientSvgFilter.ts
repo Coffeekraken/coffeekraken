@@ -7,7 +7,8 @@ import SSvgFilter from './SSvgFilter';
  * @namespace            js.filter
  * @type      Class
  * @extends 		SSvgFilter
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * This SVG filter class apply either a linear or a radial gradient of your choice
  * on an HTMLElement.

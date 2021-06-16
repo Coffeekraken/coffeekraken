@@ -6,7 +6,8 @@ import linkLoaded from './linkLoaded';
  * @name        appendStylesheetLinkTag
  * @namespace            js.dom.tag
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Append a stylesheet link to the page head
  *
@@ -24,7 +25,7 @@ import linkLoaded from './linkLoaded';
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function appendStylesheetLink(href) {
+function appendStylesheetLink(href: string): Promise<HTMLLinkElement> {
   const $link = document.createElement('link');
   $link.type = 'text/css';
   $link.rel = 'stylesheet';

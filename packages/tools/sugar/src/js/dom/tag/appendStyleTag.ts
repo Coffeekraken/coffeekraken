@@ -4,7 +4,8 @@
  * @name        appendStyleTag
  * @namespace            js.dom
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Append a style tag either to the head or the body
  *
@@ -23,9 +24,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function appendStyleTag(
-  css,
-  $parent = document.head || document.getElementsByTagName('head')[0]
-) {
+  css: sting,
+  $parent: HTMLElement = document.head || document.getElementsByTagName('head')[0]
+): HTMLStyleElement {
   const $style = document.createElement('style');
   if ($style.styleSheet) {
     // This is required for IE8 and below.
@@ -34,5 +35,6 @@ function appendStyleTag(
     $style.appendChild(document.createTextNode(css));
   }
   $parent.appendChild($style);
+  return $style;
 }
 export default appendStyleTag;

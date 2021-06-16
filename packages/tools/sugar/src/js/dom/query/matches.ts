@@ -4,7 +4,8 @@
  * @name      matches
  * @namespace            js.dom.query
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Polyfill for the Element.matches function
  *
@@ -26,7 +27,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function matches(el, selector) {
+function matches(el: HTMLElement, selector: string): boolean {
   if (el.nodeName == '#comment' || el.nodeName == '#text') {
     return false;
   }

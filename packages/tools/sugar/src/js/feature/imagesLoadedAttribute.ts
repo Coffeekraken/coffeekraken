@@ -7,7 +7,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name 		imagesLoadedAttribute
  * @namespace            js.feature
  * @type      Feature
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Add on every images the attribute "loaded" when it has been fully loaded. This is useful
  * for styling purposes and for others thinks as well.
@@ -25,8 +26,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function imagesLoadedAttribute(settings = {}) {
-  settings = __deepMerge({}, settings);
+function imagesLoadedAttribute(): void {
   document.addEventListener(
     'load',
     (e) => {

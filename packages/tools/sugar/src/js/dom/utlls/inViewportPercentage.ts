@@ -6,7 +6,8 @@ import __isVisible from '../isVisible';
  * @name      inViewportPercentage
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Return how many percent the passed element is visible in the viewport
  *
@@ -25,7 +26,7 @@ import __isVisible from '../isVisible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function inViewportPercentage(elm) {
+function inViewportPercentage(elm: HTMLElement): number {
   // if not visible at all
   if (!__isVisible(elm)) return 0;
 

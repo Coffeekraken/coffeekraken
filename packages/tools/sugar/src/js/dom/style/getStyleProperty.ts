@@ -7,7 +7,8 @@ import autoCast from '../../../shared/string/autoCast';
  * @name      getStyleProperty
  * @namespace            js.dom.style
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Get a style property on the passed element through the computed style.
  * This function try to store the actual style to not trigger more that 1 redraw
@@ -29,7 +30,7 @@ import autoCast from '../../../shared/string/autoCast';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getStyleProperty(elm, property) {
+function getStyleProperty(elm: HTMLElement, property: string): any {
   // caching mecanisme
   setTimeout(() => {
     elm._sComputedStyle = null;

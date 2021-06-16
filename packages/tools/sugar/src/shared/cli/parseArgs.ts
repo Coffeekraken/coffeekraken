@@ -60,6 +60,7 @@ export default function parseArgs(string, settings = {}) {
   );
 
   string = string.trim();
+  string = string.replace(/(["'`])--/gm, '$1--§ --');
 
   let valueQuote = settings.valueQuote;
   if (!valueQuote) {
@@ -154,6 +155,7 @@ export default function parseArgs(string, settings = {}) {
   stringArray = stringArray.forEach((part, i) => {
     if (
       !isFunctionStyle &&
+      !part.includes(' ') &&
       (part.slice(0, 2) === '--' || part.slice(0, 1) === '-')
     ) {
       if (
@@ -188,6 +190,9 @@ export default function parseArgs(string, settings = {}) {
       }
 
       currentValue = __parse(value);
+      if (typeof currentValue === 'string') {
+        currentValue = currentValue.replace('--§ ', '');
+      }
 
       if (currentArgName !== undefined) {
         if (

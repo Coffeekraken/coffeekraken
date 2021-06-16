@@ -3,7 +3,8 @@
  * @name      focus
  * @namespace            js.dom.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Check if the mouse is focus the passed HTMLElement
  *
@@ -27,4 +28,4 @@ function focus($elm) {
     return $elm.parentElement.querySelector(':focus') === $elm;
 }
 export default focus;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9jdXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb2N1cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxLQUFLLENBQUMsSUFBSTtJQUNqQixPQUFPLElBQUksQ0FBQyxhQUFhLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxLQUFLLElBQUksQ0FBQztBQUM3RCxDQUFDO0FBQ0QsZUFBZSxLQUFLLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9jdXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb2N1cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsS0FBSyxDQUFDLElBQWlCO0lBQzlCLE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLEtBQUssSUFBSSxDQUFDO0FBQzdELENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9

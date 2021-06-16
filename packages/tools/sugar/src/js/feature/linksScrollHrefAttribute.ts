@@ -8,7 +8,8 @@ import easeInOutQuint from '../../shared/easing/easeInOutQuint';
  * @name 		linksScrollHrefAttribute
  * @namespace            js.feature
  * @type      Feature
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Add the ability to set links href attribute with "scroll:#target" in order to animate the scroll to this target element
  *
@@ -31,7 +32,13 @@ import easeInOutQuint from '../../shared/easing/easeInOutQuint';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function linksScrollHrefAttribute(settings = {}) {
+
+export interface ILinksScrollHrefAttributeSettings {
+  duration: number;
+  easing: Function;
+}
+
+function linksScrollHrefAttribute(settings: Partial<ILinksScrollHrefAttributeSettings> = {}): void {
   settings = {
     duration: 400,
     easing: easeInOutQuint,

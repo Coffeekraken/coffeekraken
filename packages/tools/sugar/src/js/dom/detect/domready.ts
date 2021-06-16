@@ -4,6 +4,8 @@
  * @name      domReady
  * @namespace            js.dom.detection
  * @type      Function
+ * @async
+ * @platform        js
  * @stable
  *
  * Wait that the dom is ready before resolving the promise

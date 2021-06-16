@@ -12,7 +12,8 @@ function _decodeHtml(html) {
  * @name      splitLetters
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Split each letters inside an HTMLElement by scoping them inside multiple tags.
  * Here's an result sample for : Hello World
@@ -57,10 +58,12 @@ function _decodeHtml(html) {
  * ```
  *
  * @param 	{HTMLElement} 		elm 		 	The HTMLElement to split letters in
- * @param 	{String} 			[tag="span"] 	The tag to use to split the letters
- * @param 	{String} 			[tagClass="s-split-letters"] 		The class to apply on the tags
+ * @param     {ISplitLettersSettings}       [settings={}]       Some settings to tweak the process
  * @return 	{HTMLElement} 						The HTMLElement processed
  *
+ * @setting 	{String} 			[tag="span"] 	          The tag to use to split the letters
+ * @setting 	{String} 			[class="s-split-letters"] 		The class to apply on the tags
+ * 
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -73,14 +76,27 @@ function _decodeHtml(html) {
  * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
+
+export interface ISplitLettersSettings {
+  tag: string;
+  class: string;
+}
+
+function splitLetters(elm: HTMLElement, settings: Partial<ISplitLettersSettings> = {}): HTMLElement {
+
+  settings = {
+    tag: 'span',
+    class: 's-split-litters',
+    ...settings
+  };
+
   let string = elm._splitLettersOriginalString;
   if (!string) {
     string = elm.innerHTML;
     elm._splitLettersOriginalString = string;
   }
 
-  elm.classList.add(tagClass);
+  elm.classList.add(settings.class);
 
   // wrap each characters inside two spans
   let words = string.match(
@@ -89,7 +105,7 @@ function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
 
   // split words
   words = _map(words, (word) => {
-    return `<${tag} style="white-space:nowrap">${word}</${tag}>`;
+    return `<${settings.tag} style="white-space:nowrap">${word}</${settings.tag}>`;
   }).join(' ');
 
   let letters = _decodeHtml(words).split('');
@@ -104,7 +120,7 @@ function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
     }
     if (hasTagOpened) return letter;
     if (letter === ' ') letter = '&nbsp;';
-    return `<${tag} class="${tagClass}__letter-container"><${tag} class="${tagClass}__letter">${letter}</${tag}></${tag}>`;
+    return `<${settings.tag} class="${settings.class}__letter-container"><${settings.tag} class="${settings.class}__letter">${letter}</${settings.tag}></${settings.tag}>`;
   });
 
   elm.innerHTML = letters.join('');

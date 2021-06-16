@@ -49,7 +49,7 @@ export default function ({
     }
     @sugar.scope.lnf {
         font-size: 0.75em;
-        padding: ${__themeVar('ui.badge.padding')};
+        padding: sugar.theme(ui.badge.padding);
         vertical-align: baseline;
 
         ${finalParams.shape ?
@@ -64,12 +64,12 @@ export default function ({
 
         ${finalParams.style ?
             finalParams.style === 'default' ? `
-                color: sugar.color(accent, --darken 40);
-                background-color: sugar.color(accent);
+                color: sugar.color(ui, --darken 40);
+                background-color: sugar.color(ui);
             ` : finalParams.style === 'outline' ? `
-                color: sugar.color(accent, text);
+                color: sugar.color(ui, text);
                 background-color: transparent;
-                border: solid 1px sugar.color(accent, text);
+                border: solid 1px sugar.color(ui, text);
             ` : ''
         : ''}
 

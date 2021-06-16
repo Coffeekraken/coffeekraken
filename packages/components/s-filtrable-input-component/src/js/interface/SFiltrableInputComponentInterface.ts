@@ -21,6 +21,10 @@ export default class SHighlightJsComponentInterface extends __SInterface {
       type: 'Number',
       default: 200
     },
+    interactive: {
+      type: 'Boolean',
+      default: false
+    },
     maxItems: {
       type: 'Number',
       default: 25

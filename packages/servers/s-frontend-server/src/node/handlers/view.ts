@@ -34,7 +34,7 @@ export default async function view(req, res, settings = {}) {
     ...(res.templateData ?? {})
   });
 
-  res.status(404);
+  res.status(200);
   res.type('text/html');
   res.send(result.value);
 }

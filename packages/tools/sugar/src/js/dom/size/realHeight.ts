@@ -4,7 +4,8 @@
  * @name      realHeight
  * @namespace            js.dom.size
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Return the full height of an element that has maybe a max-height, etc...
  *
@@ -22,7 +23,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function realHeight(elm) {
+function realHeight(elm: HTMLElement): number {
   // apply an overflow-y to the element
   elm.style.transition = 'none';
   elm.style.overflowY = 'scroll';

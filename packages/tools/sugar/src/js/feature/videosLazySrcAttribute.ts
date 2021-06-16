@@ -7,7 +7,8 @@ import querySelectorLive from '../dom/querySelectorLive';
  * @name 		videoLazySrcAttribute
  * @namespace            js.feature
  * @type      Feature
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Add support for the `lazy-src` attribute on `video` elements.
  * The video `src` attribute will be populated when the `video` element enter the viewport
@@ -29,7 +30,12 @@ import querySelectorLive from '../dom/querySelectorLive';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function videoLazySrcAttribute(settings = {}) {
+
+export interface IVideoLazySrcAttributeSettings {
+  offset: number;
+}
+
+function videoLazySrcAttribute(settings: Partial<IVideoLazySrcAttributeSettings> = {}): void {
   settings = {
     offset: 50,
     ...settings

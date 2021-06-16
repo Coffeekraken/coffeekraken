@@ -8,7 +8,8 @@ import __styleObject2String from '../styleObject2String';
  * @name      style
  * @namespace            js.dom.style
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Set or remove a css style property on an HTMLElement
  *
@@ -30,7 +31,7 @@ import __styleObject2String from '../styleObject2String';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function style(elm, styleObj) {
+function style(elm: HTMLElement, styleObj: any): any {
   // convert style string to object
   const styleAttr = elm.getAttribute('style');
 

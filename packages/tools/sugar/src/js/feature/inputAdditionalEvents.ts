@@ -7,7 +7,8 @@ import __dispatchEvent from '../dom/event/dispatchEvent';
  * @name 		handleInputAttributes
  * @namespace            js.feature
  * @type      Feature
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Add some events on some DOM Elements. Here's the list:
  * - enter (onenter): Triggered when user tap ```enter``` on his keyboard from a **input*** or **textarea** element
@@ -30,7 +31,13 @@ import __dispatchEvent from '../dom/event/dispatchEvent';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function inputAdditionalEvents(settings = {}) {
+
+export interface IInputAdditionalEventsSettings {
+  enter: boolean;
+  escape: boolean;
+}
+
+function inputAdditionalEvents(settings: Partial<IInputAdditionalEventsSettings> = {}): void {
   settings = {
     enter: true,
     escape: true,

@@ -4,7 +4,8 @@
  * @name      visible
  * @namespace            js.dom.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Check if the passed HTMLElement is visible or not.
  * Visible mean that it has not an opacity of 0, not a visibility of hidden and not a display of none
@@ -25,7 +26,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function visible(elm) {
+function visible(elm: HTMLElement): boolean {
   // assume that the script tag is always visible
   if (elm.nodeName.toLowerCase() === 'script') return true;
 

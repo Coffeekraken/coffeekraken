@@ -9,7 +9,9 @@ import __whenOutOfViewport from '../whenOutOfViewport';
  * @name      inViewportStatusChange
  * @namespace            js.dom.detect
  * @type      Function
- * @stable
+ * @async
+ * @platform        js
+ * @status        beta
  *
  * Monitor when the passed element enter or exit the viewport
  *
@@ -22,9 +24,9 @@ import __whenOutOfViewport from '../whenOutOfViewport';
  *
  * @example  	js
  * import inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange';
- * inViewportStatusChange(myElm).enter($elm => {
+ * inViewportStatusChange(myElm).on('enter', $elm => {
  *    // do something...
- * }).exit($elm => {
+ * }).on('exit', $elm => {
  *    // do something...
  * });
  *

@@ -4,10 +4,17 @@
  * @name      onSwipe
  * @namespace            js.dom.detect
  * @type      Function
- * @stable
+ * @async
+ * @platform        js
+ * @status          beta
  *
  * Detect swipes gestures on touch devices.
  *
+ * @feature     Multi directional swipe detection (left, up, right, down)
+ * @feature     Threshold setting
+ * 
+ * @setting     {Number}      [threshold=100]       The minimum distance the user has to swipe before detection
+ * 
  * @param       {HTMLElement}         elm         The HTMLElement on which to detect the swipe
  * @param       {Function}            cb          The function to call on swipe. The callback function has as parameter an object that containthe swipe direction like left, right, up and down
  * @param       {Number}              [threshold=100]       The swipe threshold
@@ -29,11 +36,22 @@
  * 	threshold : 50
  * });
  *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @see 		https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
  * @since         1.0.0
- * @see 		https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d 	Based on
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function onSwipe(elm, cb, threshold = 100) {
+
+export interface IOnSwipeSettings {
+  threshold: number;
+}
+
+function onSwipe(elm, cb, settings: Partial<IOnSwipeSettings> = {}) {
+
+  settings = {
+    threshold: 100,
+    ...settings
+  };
+
   let touchstartX = 0;
   let touchstartY = 0;
   let touchendX = 0;
@@ -63,16 +81,16 @@ function onSwipe(elm, cb, threshold = 100) {
       distanceX: Math.abs(touchendX - touchstartX),
       distanceY: Math.abs(touchendY - touchstartY)
     };
-    if (touchendX + threshold < touchstartX) {
+    if (touchendX + settings.threshold < touchstartX) {
       swipeNfo.left = true;
     }
-    if (touchendX - threshold > touchstartX) {
+    if (touchendX - settings.threshold > touchstartX) {
       swipeNfo.right = true;
     }
-    if (touchendY + threshold < touchstartY) {
+    if (touchendY + settings.threshold < touchstartY) {
       swipeNfo.up = true;
     }
-    if (touchendY - threshold > touchstartY) {
+    if (touchendY - settings.threshold > touchstartY) {
       swipeNfo.down = true;
     }
     if (swipeNfo.left || swipeNfo.right || swipeNfo.down || swipeNfo.up) {

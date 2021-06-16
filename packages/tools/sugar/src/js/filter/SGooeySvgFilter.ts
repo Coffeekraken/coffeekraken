@@ -7,14 +7,15 @@ import SSvgFilter from './SSvgFilter';
  * @namespace            js.filter
  * @type           Class
  * @extends       SSvgFilter
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * This class represent a gooey SVG filter that can be applied on any HTMLElement.
  * Here's the values that you can control on it:
  * - blur: The amout of blur you want
  * - contrast: The amout of contrast you want
  * - shrink: The amount of shrink you want
- * - amout: The overall amount of effect you want
+ * - amount: The overall amount of effect you want
  *
  * @todo      interface
  * @todo      doc

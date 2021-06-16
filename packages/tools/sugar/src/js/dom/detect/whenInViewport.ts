@@ -6,12 +6,19 @@ import __inViewport from 'in-viewport';
  * @name      whenInViewport
  * @namespace            js.dom.detect
  * @type      Function
- * @stable
+ * @async
+ * @platform      js
+ * @status        beta
  *
  * Monitor an HTMLElement to be notified when it is in the viewport
  *
+ * @feature       Promise based API
+ * @feature       Some settings available to tweak the behavior
+ * 
+ * @setting     {Number}      [offset=50]         An offset to detect sooner or later the element entering in the viewport
+ * 
  * @param 		{HTMLElement} 				elm 					The element to monitor
- * @param 		{Number} 					[offset=50] 			An offset that represent the distance before entering the viewport for the detection
+ * @param 		{IWhenInViewportSettings} 					[settings={}] 		Some settings to tweak the detection behavior
  * @return 		(Promise) 											The promise that will be resolved when the element is in the viewport
  *
  * @todo      interface
@@ -27,12 +34,23 @@ import __inViewport from 'in-viewport';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenInViewport(elm, offset = 50) {
+
+export interface IWhenInViewportSettings {
+  offset: number;
+}
+
+function whenInViewport(elm: HTMLElement, settings: Partials<IWhenInViewportSettings> = {}) {
+
+  settings = {
+    offset: 50,
+    ...settings
+  };
+
   return new Promise((resolve, reject) => {
     __inViewport(
       elm,
       {
-        offset: offset
+        offset: settings.offset
       },
       () => {
         resolve(elm);

@@ -10,7 +10,7 @@ import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
-import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsInterface';
+import __SDocMapBuildParamsInterface from './interface/SDocMapBuildParamsInterface';
 
 
 /**
@@ -43,13 +43,14 @@ import __SDocMapGenerateParamsInterface from './interface/SDocMapGenerateParamsI
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISDocMapGenerateParams {
+export interface ISDocMapBuildParams {
   watch: boolean;
   globs: string[];
   exclude: string[];
   noExtends: boolean;
   filters: Record<string, RegExp>;
   fields: string[];
+  save: boolean;
   outPath: string;
 }
 
@@ -57,10 +58,6 @@ export interface ISDocMapReadParams {
   path: string;
 }
 
-export interface ISDocMapSaveSettings {
-  path: string;
-  generate: ISDocMapGenerateParams;
-}
 export interface ISDocMapCtorSettings {}
 
 export interface ISDocMapEntry {
@@ -144,16 +141,16 @@ class SDocMap extends __SClass implements ISDocMap {
    */
   read(params: Partial<ISDocMapReadParams>) {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
-      const set = <ISDocMapReadParams>__deepMerge(
+      const finalParams = <ISDocMapReadParams>__deepMerge(
         {
-          path: `${__packageRoot()}/docmap.json`
+          input: `${__packageRoot()}/docmap.json`
         },
         params ?? {}
       );
 
-      if (!__fs.existsSync(set.path)) {
+      if (!__fs.existsSync(finalParams.input)) {
         throw new Error(
-          `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${set.path}</cyan>" does not exists...`
+          `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${finalParams.input}</cyan>" does not exists...`
         );
       }
 
@@ -177,12 +174,21 @@ class SDocMap extends __SClass implements ISDocMap {
 
         try {
           const docmapJson = require(currentPathDocmapJsonPath);
+          docmapJson.extends = [
+            ...(docmapJson.extends ?? []),
+            ...(docmapJson.generated?.extends ?? [])
+          ];
+          docmapJson.map = {
+            ...(docmapJson.map ?? {}),
+            ...(docmapJson.generated?.map ?? {})
+          };
 
-          if (docmapJson.extends) {
-            docmapJson.extends.forEach(extendsPackageName => {
-              loadJson(extendsPackageName, extendsRootPath);
-            });
-          }
+          delete docmapJson.generated;
+
+          docmapJson.extends.forEach(extendsPackageName => {
+            loadJson(extendsPackageName, extendsRootPath);
+          });
+
           Object.keys(docmapJson.map ?? {}).forEach(namespace => {
             const obj = docmapJson.map[namespace];
             obj.path = __path.resolve(extendsRootPath, obj.relPath);
@@ -206,11 +212,11 @@ class SDocMap extends __SClass implements ISDocMap {
   }
 
   /**
-   * @name          generate
+   * @name          build
    * @type          Function
    *
    * This method allows you to specify one or more glob patterns to scan files for "@namespace" docblock tags
-   * and extract all the necessary informations to build the docMap.json file
+   * and extract all the necessary informations to build the docmap.json file
    *
    * @param         {String|Array<String>}          sources         The glob pattern(s) you want to scan files in
    * @return        {SPromise}                                     A promise resolved once the scan process has been finished
@@ -218,14 +224,14 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  generate(params: Partial<ISDocMapGenerateParams>): Promise<any> {
-    const finalParams = <ISDocMapGenerateParams>(
-      __deepMerge(__SDocMapGenerateParamsInterface.defaults(), params)
+  build(params: Partial<ISDocMapBuildParams>): Promise<any> {
+    const finalParams = <ISDocMapBuildParams>(
+      __deepMerge(__SDocMapBuildParamsInterface.defaults(), params)
     );
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
 
       emit('notification', {
-        message: `${this.metas.id} generation started`
+        message: `${this.metas.id} build started`
       });
 
       let docmapJson = {
@@ -251,8 +257,6 @@ class SDocMap extends __SClass implements ISDocMap {
 
       // getting package infos
       const packageJson = __packageJson();    
-
-      console.log(finalParams);
 
       if (!finalParams.noExtends) {
 

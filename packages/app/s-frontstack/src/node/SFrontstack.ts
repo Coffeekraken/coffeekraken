@@ -2,7 +2,9 @@ import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SFrontstackActionInterface from './action/interface/SFrontstackActionInterface';
+import __SFrontstackRecipeParamsInterface from './recipe/interface/SFrontstackRecipeParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __SProcess, {
   SProcessManager as __SProcessManager,
@@ -17,7 +19,7 @@ export interface ISFrontstackCtorSettings {
   frontstack: Partial<ISFrontstackSettings>;
 }
 
-export interface ISFrontstackReceipeSettings {
+export interface ISFrontstackRecipesettings {
   process: Partial<ISProcessSettings>;
   processManager: Partial<ISProcessManagerProcessSettings>;
 }
@@ -29,23 +31,24 @@ export interface ISFrontstackAction {
   params: any;
   command: string;
   process: string;
-  settings: Partial<ISFrontstackReceipeSettings>;
+  settings: Partial<ISFrontstackRecipesettings>;
 }
 
-export interface ISFrontstackReceipeStack {
+export interface ISFrontstackRecipestack {
   description: string;
   actions: Record<string, ISFrontstackAction>;
 }
 
-export interface ISFrontstackReceipe {
+export interface ISFrontstackRecipe {
   id: string;
   title: string;
   description: string;
-  stacks: Record<string, ISFrontstackReceipeStack>;
+  stacks: Record<string, ISFrontstackRecipestack>;
 }
 
 export interface ISFrontstackActionParams {
   action: string;
+  params: string;
 }
 
 export default class SFrontstack extends __SClass {
@@ -135,17 +138,17 @@ export default class SFrontstack extends __SClass {
           value: `Starting frontstack process using "<yellow>${finalParams.action}</yellow>" action`
         });
 
-        // get the receipe object and treat it
+        // get the recipe object and treat it
         const actionObj: Partial<ISFrontstackAction> =
           // @ts-ignore
           actionsObj[finalParams.action];
 
         // instanciate the process manager
         const processManager = new __SProcessManager();
-        // loop on each actions for this receipe
+        // loop on each actions for this recipe
         
         const actionId = actionObj.id ?? finalParams.action;
-        // create a process from the receipe object
+        // create a process from the recipe object
         const pro = __SProcess.from(
           // @ts-ignore
           actionObj.command ?? actionObj.process
@@ -157,9 +160,10 @@ export default class SFrontstack extends __SClass {
           //   filter: undefined
           // }
         });
+
         processManager.run(
           actionId,
-          actionObj.params ?? {},
+          finalParams.params ?? actionObj.params ?? {},
           actionObj.settings?.process ?? {}
         );
       },
@@ -171,143 +175,135 @@ export default class SFrontstack extends __SClass {
     );
   }
 
-  // /**
-  //  * @name        exec
-  //  * @type        Function
-  //  * @async
-  //  *
-  //  * This method allows you to exec a frontstack process
-  //  *
-  //  * @since       2.0.0
-  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //  */
-  // exec(params: ISFrontstackActionParams) {
-  //   return new __SPromise(
-  //     async ({ resolve, reject, emit }) => {
-  //       const frontstackConfig = __SSugarConfig.get('frontstack');
-  //       const receipesObj = frontstackConfig['receipes'];
+  /**
+   * @name        recipe
+   * @type        Function
+   * @async
+   *
+   * This method allows you to exec a frontstack process
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  recipe(params: ISFrontstackRecipeParams) {
+    return new __SPromise(
+      async ({ resolve, reject, emit }) => {
+        const frontstackConfig = __SSugarConfig.get('frontstack');
+        const recipesObj = frontstackConfig['recipes'];
 
-  //       const finalParams: ISFrontstackActionParams = this.applyInterface(
-  //         'startParams',
-  //         params
-  //       );
+        const finalParams = __SFrontstackRecipeParamsInterface.apply(params).value;
 
-  //       const availableReceipes = Object.keys(receipesObj);
+        if (!finalParams.recipe) {
+          const sugarJson = new __SSugarJson().current();
+          finalParams.recipe = sugarJson.recipe;
+        }
 
-  //       if (availableReceipes.indexOf(finalParams.receipe) === -1) {
-  //         throw new Error(
-  //           `<red>[${
-  //             this.constructor.name
-  //           }.start]</red> Sorry but the requested receipe "<yellow>${
-  //             finalParams.receipe
-  //           }</yellow>" does not exists. Here's the list of available receipe(s):\n${availableReceipes
-  //             .map((r) => `- <yellow>${r}</yellow>`)
-  //             .join('\n')}`
-  //         );
-  //       }
+        if (!recipesObj[finalParams.recipe]) {
+          throw new Error(`<red>[recipe]</red> Sorry but the specified "<yellow>${finalParams.recipe}</yellow>" recipe does not exists. Here's the available ones: <green>${Object.keys(recipesObj).join(', ')}</green>`);
+        }
 
-  //       emit('log', {
-  //         clear: true,
-  //         nude: true,
-  //         paddingTop: 0,
-  //         paddingBottom: 1,
-  //         value: __sugarBanner({
-  //           paddingBottom: 1
-  //         })
-  //       });
+        if (!finalParams.stack) {
+          if (!recipesObj[finalParams.recipe].defaultStack) {
+            throw new Error(`<red>[recipe]</red> Sorry but you MUST specify a "<yellow>stack</yellow>" to use in the requested "<cyan>${finalParams.recipe}</cyan>" recipe`);
+          }
+          finalParams.stack = recipesObj[finalParams.recipe].defaultStack;
+        }
 
-  //       emit('log', {
-  //         value: `Starting frontstack process using "<yellow>${finalParams.receipe}</yellow>" receipe`
-  //       });
+        emit('log', {
+          clear: true,
+          nude: true,
+          paddingTop: 0,
+          paddingBottom: 1,
+          value: __sugarBanner({
+            paddingBottom: 1
+          })
+        });
 
-  //       // get the receipe object and treat it
-  //       const receipeObj: Partial<ISFrontstackReceipe> =
-  //         // @ts-ignore
-  //         receipesObj[finalParams.receipe];
+        emit('log', {
+          value: `Starting frontstack process`
+        });
 
-  //       if (!receipeObj) {
-  //         throw new Error(
-  //           `<red>${
-  //             this.constructor.name
-  //           }.start</red> Sorry the the requested "<yellow>${
-  //             finalParams.receipe
-  //           }</yellow>" does not exists. Here's the available receipe(s): ${Object.keys(
-  //             receipesObj
-  //           )
-  //             .map((l) => `<green>${l}</green>`)
-  //             .join(',')}`
-  //         );
-  //       }
+        emit('log', {
+          value: `- Recipe: <yellow>${finalParams.recipe}</yellow>`
+        });
+        emit('log', {
+          value: `- Stack : <cyan>${finalParams.stack}</cyan>`
+        });
 
-  //       // check the receipe stacks
-  //       if (!receipeObj.stacks || !Object.keys(receipeObj.stacks).length) {
-  //         throw new Error(
-  //           `<red>${this.constructor.name}.start] Sorry but the requested "<yellow>${finalParams.receipe}</yellow>" configuration object missed the requested "<yellow>stacks</yellow>" property that list the stacks to execute`
-  //         );
-  //       }
-  //       if (!receipeObj.stacks[params.stack]) {
-  //         throw new Error(
-  //           `<red>${this.constructor.name}.start] Sorry but the requested "<yellow>${finalParams.receipe}.stacks.${params.stack}</yellow>" configuration object missed the requested "<yellow>${params.stack}</yellow>" stack`
-  //         );
-  //       }
+        // get the recipe object and treat it
+        const recipeObj: Partial<ISFrontstackRecipe> =
+          // @ts-ignore
+          recipesObj[finalParams.recipe];
 
-  //       // make sure this receipe has some actions
-  //       if (
-  //         !receipeObj.stacks[params.stack].actions ||
-  //         !Object.keys(receipeObj.stacks[params.stack].actions).length
-  //       ) {
-  //         throw new Error(
-  //           `<red>${this.constructor.name}.start] Sorry but the requested "<yellow>${finalParams.receipe}.stacks.${params.stack}.actions</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`
-  //         );
-  //       }
+        // check the recipe stacks
+        if (!recipeObj.stacks || !Object.keys(recipeObj.stacks).length) {
+          throw new Error(
+            `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}</yellow>" configuration object missed the requested "<yellow>stacks</yellow>" property that list the stacks to execute`
+          );
+        }
+        if (!recipeObj.stacks[finalParams.stack]) {
+          throw new Error(
+            `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks</yellow>" configuration object missed the requested "<yellow>${finalParams.stack}</yellow>" stack`
+          );
+        }
 
-  //       // instanciate the process manager
-  //       const processManager = new __SProcessManager();
-  //       // loop on each actions for this receipe
-  //       if (receipeObj.stacks[params.stack].actions) {
-  //         Object.keys(receipeObj.stacks[params.stack].actions).forEach(
-  //           (actionName) => {
-  //             if (
-  //               finalParams.exclude &&
-  //               finalParams.exclude.indexOf(actionName) !== -1
-  //             ) {
-  //               emit('log', {
-  //                 type: 'verbose',
-  //                 value: `Excluding the action "<yellow>${actionName}</yellow>"`
-  //               });
-  //               return;
-  //             }
+        // make sure this recipe has some actions
+        if (
+          !recipeObj.stacks[finalParams.stack].actions ||
+          !Object.keys(recipeObj.stacks[finalParams.stack].actions).length
+        ) {
+          throw new Error(
+            `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks.${finalParams.stack}.actions</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`
+          );
+        }
 
-  //             // @ts-ignore
-  //             const actionObj =
-  //               // @ts-ignore
-  //               receipeObj.stacks[params.stack].actions[actionName];
-  //             const actionId = actionObj.id ?? actionName;
-  //             // create a process from the receipe object
-  //             const pro = __SProcess.from(
-  //               actionObj.command ?? actionObj.process
-  //             );
-  //             // add the process to the process manager
-  //             // @TODO    integrate log filter feature
-  //             processManager.attachProcess(actionId, pro, {
-  //               // log: {
-  //               //   filter: undefined
-  //               // }
-  //             });
-  //             processManager.run(
-  //               actionId,
-  //               actionObj.params ?? {},
-  //               actionObj.settings?.process ?? {}
-  //             );
-  //           }
-  //         );
-  //       }
-  //     },
-  //     {
-  //       eventEmitter: {
-  //         bind: this
-  //       }
-  //     }
-  //   );
-  // }
+        // instanciate the process manager
+        const processManager = new __SProcessManager();
+        // loop on each actions for this recipe
+        if (recipeObj.stacks[finalParams.stack].actions) {
+          Object.keys(recipeObj.stacks[finalParams.stack].actions).forEach(
+            (actionName) => {
+              if (
+                finalParams.exclude &&
+                finalParams.exclude.indexOf(actionName) !== -1
+              ) {
+                emit('log', {
+                  type: 'verbose',
+                  value: `Excluding the action "<yellow>${actionName}</yellow>"`
+                });
+                return;
+              }
+
+              // @ts-ignore
+              const actionObj =
+                // @ts-ignore
+                recipeObj.stacks[finalParams.stack].actions[actionName];
+              const actionId = actionObj.id ?? actionName;
+              // create a process from the recipe object
+              const pro = __SProcess.from(
+                actionObj.command ?? actionObj.process
+              );
+              // add the process to the process manager
+              // @TODO    integrate log filter feature
+              processManager.attachProcess(actionId, pro, {
+                // log: {
+                //   filter: undefined
+                // }
+              });
+              processManager.run(
+                actionId,
+                actionObj.params ?? {},
+                actionObj.settings?.process ?? {}
+              );
+            }
+          );
+        }
+      },
+      {
+        eventEmitter: {
+          bind: this
+        }
+      }
+    );
+  }
 }

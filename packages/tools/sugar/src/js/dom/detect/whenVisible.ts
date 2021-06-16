@@ -7,10 +7,15 @@ import __closestNotVisible from './query/closestNotVisible';
  * @name      whenVisible
  * @namespace            js.dom.detect
  * @type      Function
- * @stable
+ * @async
+ * @platform        js
+ * @status          beta
  *
  * Monitor an HTMLElement to be notified when it is visible
  *
+ * @feature       Promise based API
+ * @feature       Callback support
+ * 
  * @param 		{HTMLElement} 				elm 		The element to monitor
  * @param 		{Function} 					[cb=null] 	An optional callback to call when the element is visible
  * @return 		(Promise) 								The promise that will be resolved when the element is visible
@@ -28,7 +33,7 @@ import __closestNotVisible from './query/closestNotVisible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenVisible(elm, cb = null) {
+function whenVisible(elm: HTMLElement, cb = null) {
   return new Promise((resolve, reject) => {
     // variables
     let isSelfVisible = false,

@@ -7,7 +7,8 @@ import __querySelectorLive from '../dom/querySelectorLive';
  * @name 		handleInputAttributes
  * @namespace            js.feature
  * @type      Feature
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Add some attributes on inputs, textarea and select to help with styling purposes and more.
  * Here's the attributes added:
@@ -33,7 +34,14 @@ import __querySelectorLive from '../dom/querySelectorLive';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function inputAdditionalAttributes(settings = {}) {
+
+export interface IInputAdditionalAttributesSettings {
+  empty: boolean;
+  dirty: boolean;
+  hasValue: boolean;
+}
+
+function inputAdditionalAttributes(settings: Partial<IInputAdditionalAttributesSettings> = {}): void {
   settings = {
     empty: true,
     hasValue: true,

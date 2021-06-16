@@ -6,7 +6,8 @@ import __matches from './matches';
  * @name        closest
  * @namespace            js.dom.query
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Go up the dom three to find the first element that matches the passed selector
  *
@@ -32,7 +33,7 @@ import __matches from './matches';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function closest($elm, selector) {
+function closest($elm: HTMLElement, selector: string | Function): HTMLElement {
   const originalElm = $elm;
   $elm = $elm.parentNode;
   while ($elm && $elm != originalElm.ownerDocument) {

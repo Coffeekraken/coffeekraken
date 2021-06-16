@@ -7,13 +7,15 @@ import __convert from '../../../shared/time/convert';
  * @name      getTransitionProperties
  * @namespace            js.dom.style
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        wip
  *
  * Get the css transition properties from an HTMLElement in an object format
  *
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
  *
+ * @todo      refactor
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -41,7 +43,7 @@ function splitIfNeeded(what, separator) {
   return [what];
 }
 
-function getTransitionProperties(elm) {
+function getTransitionProperties(elm: HTMLElement) {
   // get the transition properties
   const property = __getStyleProperty(elm, 'transition-property');
   const duration = __getStyleProperty(elm, 'transition-duration') || 0;

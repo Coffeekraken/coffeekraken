@@ -6,6 +6,7 @@ import uniqid from '../../shared/string/uniqid';
  * @name 		          SGooeySvgFilter
  * @namespace            js.filter
  * @type             Class
+ * @platform        js
  * @status          wip
  *
  * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want

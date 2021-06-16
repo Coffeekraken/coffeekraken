@@ -2,21 +2,29 @@
 
 import easeInOutQuad from '../../../shared/easing/easeInOutQuad';
 import requestAnimationFrame from '../utlls/requestAnimationFrame';
+
 /**
  * @name      scrollTo
  * @namespace            js.dom.scroll
  * @type      Function
- * @stable
+ * @platform        js
+ * @status          beta
  *
  * Function that let you make a smooth page scroll to a specific element in the page
  *
+ * @feature       Promise based API
+ * @feature       Tweak the scroll behavior like duration, easing, etc...
+ * 
+ * @setting 		{Number} 					[duration=1000] 		The animation duration
+ * @setting 		{Function} 					[easing=easeInOutQuad] 			An easing Function
+ * @setting 		{Number} 					[offset=0] 			The destination offset
+ * @setting 		{String} 					[align='top'] 			The destination align (top, center, bottom)
+ * @setting 		{Function} 					[onFinish=null] 		A callback to call when the animation if finished
+ * 
  * @param 		{HTMLElement} 				target 			The element to scroll to
- * @param 		{Number} 					[duration=1000] 		The animation duration
- * @param 		{Function} 					[easing=easeInOutQuad] 			An easing Function
- * @param 		{Number} 					[offset=0] 			The destination offset
- * @param 		{String} 					[align='top'] 			The destination align (top, center, bottom)
- * @param 		{Function} 					[onFinish=null] 		A callback to call when the animation if finished
- *
+ * @param       {IScrollToSettings}     [settings={}]       Some settings to tweak the scroll behavior
+ * @return      {Promise}           A promise resolved once the scroll has ended
+ * 
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -41,55 +49,76 @@ document.addEventListener('mousewheel', (e) => {
   }, 200);
 });
 
+export interface IScrollToSettings {
+  duration: number,
+  easing: Function,
+  offset: number,
+  align: 'top' | 'center' | 'bottom',
+  onFinish: Function;
+}
+
 function scrollTo(
-  target,
-  duration = 1000,
-  easing = easeInOutQuad,
-  offset = 0,
-  align = 'top',
-  onFinish = null
-) {
-  const docElem = document.documentElement; // to facilitate minification better
-  const windowHeight = docElem.clientHeight;
-  const maxScroll =
-    'scrollMaxY' in window
-      ? window.scrollMaxY
-      : docElem.scrollHeight - windowHeight;
-  const currentY = window.pageYOffset;
+  target: HTMLElement,
+  settings: Partial<IScrollToSettings> = {}
+): Promise<any> {
 
-  isScrollingHappening = true;
+  return new Promise((resolve, reject) => {
 
-  let targetY = currentY;
-  const elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
+    settings = {
+      duration: 1000,
+      easing: easeInOutQuad,
+      offset: 0,
+      align: 'top',
+      onFinish: null,
+      ...settings
+    }
 
-  if (align === 'center') {
-    targetY += elementBounds.top + elementBounds.height / 2;
-    targetY -= windowHeight / 2;
-    targetY -= offset;
-  } else if (align === 'bottom') {
-    targetY += elementBounds.bottom;
-    targetY -= windowHeight;
-    targetY += offset;
-  } else {
-    // top, undefined
-    targetY += elementBounds.top;
-    targetY -= offset;
-  }
-  targetY = Math.max(Math.min(maxScroll, targetY), 0);
+    const docElem = document.documentElement; // to facilitate minification better
+    const windowHeight = docElem.clientHeight;
+    const maxScroll =
+      'scrollMaxY' in window
+        ? window.scrollMaxY
+        : docElem.scrollHeight - windowHeight;
+    const currentY = window.pageYOffset;
 
-  const deltaY = targetY - currentY;
+    isScrollingHappening = true;
 
-  const obj = {
-    targetY: targetY,
-    deltaY: deltaY,
-    duration: duration,
-    easing: easing,
-    onFinish: onFinish,
-    startTime: Date.now(),
-    lastY: currentY,
-    step: scrollTo.step
-  };
-  requestAnimationFrame(obj.step.bind(obj));
+    let targetY = currentY;
+    const elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
+
+    if (settings.align === 'center') {
+      targetY += elementBounds.top + elementBounds.height / 2;
+      targetY -= windowHeight / 2;
+      targetY -= settings.offset;
+    } else if (settings.align === 'bottom') {
+      targetY += elementBounds.bottom;
+      targetY -= windowHeight;
+      targetY += settings.offset;
+    } else {
+      // top, undefined
+      targetY += elementBounds.top;
+      targetY -= settings.offset;
+    }
+    targetY = Math.max(Math.min(maxScroll, targetY), 0);
+
+    const deltaY = targetY - currentY;
+
+    const obj = {
+      targetY: targetY,
+      deltaY: deltaY,
+      duration: settings.duration,
+      easing: settings.easing,
+      onFinish() {
+        settings.onFinish && settingds.onFinish();
+        resolve();
+      },
+      startTime: Date.now(),
+      lastY: currentY,
+      step: scrollTo.step
+    };
+    requestAnimationFrame(obj.step.bind(obj));
+
+  });
 }
 
 scrollTo.step = function () {

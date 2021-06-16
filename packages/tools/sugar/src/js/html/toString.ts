@@ -4,7 +4,8 @@
  * @name            toString
  * @namespace            js.html
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Return the string version of a dom node or the dom node and his children
  *
@@ -24,7 +25,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toStringFn(html, deep = true) {
+function toStringFn(html: HTMLElement, deep: boolean = true): string {
   if (document !== undefined && document.createElement !== undefined) {
     const cont = document.createElement('div');
     cont.appendChild(html.cloneNode(deep));

@@ -4,7 +4,8 @@
  * @name            HtmlTagToHtmlClassMap
  * @namespace            js.html
  * @type            Object
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * This export an object mapping the HTML tag name to his corresponding HTML class (object not css class)
  *

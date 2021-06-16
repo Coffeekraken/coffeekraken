@@ -7,7 +7,8 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @name            getHtmlClassFromTagName
  * @namespace            js.html
  * @type            Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * This function simply return the HTML{name}Element class depending on the passed
  * tag name like "p", "input", "textarea", etc...
@@ -26,7 +27,7 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getHtmlClassFromTagName(tagName) {
+function getHtmlClassFromTagName(tagName: string): HTMLElement {
   if (!tagName) return HTMLElement;
 
   const tagNameUpperFirst = __upperFirst(tagName);

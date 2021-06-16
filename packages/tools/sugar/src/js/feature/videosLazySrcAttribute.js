@@ -1,32 +1,6 @@
 // @ts-nocheck
 import whenInViewport from '../dom/whenInViewport';
 import querySelectorLive from '../dom/querySelectorLive';
-/**
- * @name 		videoLazySrcAttribute
- * @namespace            js.feature
- * @type      Feature
- * @stable
- *
- * Add support for the `lazy-src` attribute on `video` elements.
- * The video `src` attribute will be populated when the `video` element enter the viewport
- *
- * @param       {Object}        [settings={}]         An object of settings to configure your feature
- *
- * @setting       {Number}      [offset=50]         The offset before entering in the viewport to set the "src" attribute
- *
- * @todo            interface
- * @todo            doc
- * @todo            tests
- *
- * @example     js
- * import videoLazySrcAttribute from '@coffeekraken/sugar/js/feature/videoLazySrcAttribute';
- * videoLazySrcAttribute();
- *
- * @example    html
- * <video lazy-src="my-cool-video.mp4"></video>
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
 function videoLazySrcAttribute(settings = {}) {
     settings = Object.assign({ offset: 50 }, settings);
     querySelectorLive('video[lazy-src]:not([is])', ($videoElm) => {
@@ -36,4 +10,4 @@ function videoLazySrcAttribute(settings = {}) {
     });
 }
 export default videoLazySrcAttribute;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlkZW9zTGF6eVNyY0F0dHJpYnV0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInZpZGVvc0xhenlTcmNBdHRyaWJ1dGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sY0FBYyxNQUFNLHVCQUF1QixDQUFDO0FBQ25ELE9BQU8saUJBQWlCLE1BQU0sMEJBQTBCLENBQUM7QUFFekQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLHFCQUFxQixDQUFDLFFBQVEsR0FBRyxFQUFFO0lBQzFDLFFBQVEsbUJBQ04sTUFBTSxFQUFFLEVBQUUsSUFDUCxRQUFRLENBQ1osQ0FBQztJQUNGLGlCQUFpQixDQUFDLDJCQUEyQixFQUFFLENBQUMsU0FBUyxFQUFFLEVBQUU7UUFDM0QsY0FBYyxDQUFDLFNBQVMsRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRTtZQUNuRCxTQUFTLENBQUMsWUFBWSxDQUFDLEtBQUssRUFBRSxTQUFTLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7UUFDcEUsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztBQUNMLENBQUM7QUFDRCxlQUFlLHFCQUFxQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlkZW9zTGF6eVNyY0F0dHJpYnV0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInZpZGVvc0xhenlTcmNBdHRyaWJ1dGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sY0FBYyxNQUFNLHVCQUF1QixDQUFDO0FBQ25ELE9BQU8saUJBQWlCLE1BQU0sMEJBQTBCLENBQUM7QUFrQ3pELFNBQVMscUJBQXFCLENBQUMsV0FBb0QsRUFBRTtJQUNuRixRQUFRLG1CQUNOLE1BQU0sRUFBRSxFQUFFLElBQ1AsUUFBUSxDQUNaLENBQUM7SUFDRixpQkFBaUIsQ0FBQywyQkFBMkIsRUFBRSxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQzNELGNBQWMsQ0FBQyxTQUFTLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUU7WUFDbkQsU0FBUyxDQUFDLFlBQVksQ0FBQyxLQUFLLEVBQUUsU0FBUyxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDO1FBQ3BFLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQyxDQUFDLENBQUM7QUFDTCxDQUFDO0FBQ0QsZUFBZSxxQkFBcUIsQ0FBQyJ9

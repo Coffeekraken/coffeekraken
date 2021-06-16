@@ -79,15 +79,16 @@
         const cacheHash = __md5.encrypt(payload);
 
         // check if a cache is available and activated
-        if (this.component.props.cache !== false) {
-          let cachedValue = await this._cache.get(cacheHash);
-          if (cachedValue) {
-            if (this._inlineProxyObj?.response) {
-              cachedValue = this._inlineProxyObj.response(cachedValue);
-            }
-            return cachedValue;
-          }
-        }
+        // if (this.component.props.cache !== false) {
+        //   let cachedValue = await this._cache.get(cacheHash);
+        //   console.log(cachedValue);
+        //   if (cachedValue) {
+        //     if (this._inlineProxyObj?.response) {
+        //       cachedValue = this._inlineProxyObj.response(cachedValue);
+        //     }
+        //     return cachedValue;
+        //   }
+        // }
 
         const request = new __SRequest(payload);
         let res = await request.send();
@@ -109,6 +110,7 @@
         if (this._inlineProxyObj?.response) {
           res = this._inlineProxyObj.response(res);
         }
+
         return res;
       },
       onMounted() {

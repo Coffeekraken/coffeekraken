@@ -5,7 +5,8 @@ import MobileDetect from 'mobile-detect';
  * @name        isTablet
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is a tablet device
  *
@@ -26,7 +27,7 @@ import MobileDetect from 'mobile-detect';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isTablet(ua = navigator.userAgent) {
+function isTablet(ua: string = navigator.userAgent): boolean {
   const md = new MobileDetect(ua);
   return md.tablet() !== null;
 }

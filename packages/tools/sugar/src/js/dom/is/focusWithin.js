@@ -3,7 +3,8 @@
  * @name      focusWithin
  * @namespace            js.dom.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Check if the mouse is focusWithin the passed HTMLElement
  *
@@ -27,4 +28,4 @@ function focusWithin($elm) {
     return $elm.parentElement.querySelector(':focus-within') === $elm;
 }
 export default focusWithin;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9jdXNXaXRoaW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb2N1c1dpdGhpbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxXQUFXLENBQUMsSUFBSTtJQUN2QixPQUFPLElBQUksQ0FBQyxhQUFhLENBQUMsYUFBYSxDQUFDLGVBQWUsQ0FBQyxLQUFLLElBQUksQ0FBQztBQUNwRSxDQUFDO0FBQ0QsZUFBZSxXQUFXLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9jdXNXaXRoaW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb2N1c1dpdGhpbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsV0FBVyxDQUFDLElBQWlCO0lBQ3BDLE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxhQUFhLENBQUMsZUFBZSxDQUFDLEtBQUssSUFBSSxDQUFDO0FBQ3BFLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9

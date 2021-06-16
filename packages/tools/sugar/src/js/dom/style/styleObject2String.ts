@@ -6,7 +6,8 @@ import __uncamelize from '../../shared/string/uncamelize';
  * @name      styleObject2String
  * @namespace            js.dom.style
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Transform a style object to inline string separated by ;
  *
@@ -28,7 +29,7 @@ import __uncamelize from '../../shared/string/uncamelize';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function styleObject2String(styleObj) {
+function styleObject2String(styleObj: any): string {
   // process the style object
   const propertiesArray = [];
   for (const key in styleObj) {

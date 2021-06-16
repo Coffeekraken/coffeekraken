@@ -11,11 +11,15 @@
     {
       "stack": "frontstack",
       "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
-      "defaultAction": "exec",
+      "defaultAction": "recipe",
       "actions": {
         "action": {
           "description": "Exec an action of the frontstack application into the current working directory",
           "process": "./src/node/action/action.cli.js"
+        },
+        "recipe": {
+          "description": "Exec a recipe of the frontstack application into the current working directory",
+          "process": "./src/node/recipe/recipe.cli.js"
         }
       }
     }

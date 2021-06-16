@@ -7,15 +7,19 @@ import __easeing from '../../shared/easing/easeInOutQuint';
  * @name      scrollToLocationHash
  * @namespace            js.dom.scroll
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Scroll to the location hash if an hash is present.
  * This function will try to get the target element from the hash and scroll to it
  *
- * @param    {Integer}    [duration=500]    The scroll duration
- * @param    {Integer}    [offset=0]    A pixel value to offset the scroll with
- * @param    {Function}    [easing=__easeing]    An easing function to use to scroll
+ * @setting    {Integer}    [duration=500]    The scroll duration
+ * @setting    {Integer}    [offset=0]    A pixel value to offset the scroll with
+ * @setting    {Function}    [easing=__easeing]    An easing function to use to scroll
  *
+ * @param       {IScrollToLocationHashSettings}       [settings={}]       Some settings to tweak the scroll behavior
+ * @return      {Promise}                     A promise resolved once the scroll has ended
+ * 
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -27,7 +31,22 @@ import __easeing from '../../shared/easing/easeInOutQuint';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
  */
-function scrollToLocationHash(duration = 500, offset = 0, easing = __easeing) {
+
+export interface IScrollToLocationHashSettings {
+  duration: number;
+  offset: number;
+  easing: Function;
+}
+
+function scrollToLocationHash(settings: Partial<IScrollToLocationHashSettings> = {}): Promise<any> {
+
+  settings = {
+    duration: 500,
+    offset: 0,
+    easing: __easeing,
+    ...settings
+  };
+
   // check if we have an hash in the url
   const hash = document.location.hash;
 
@@ -46,6 +65,6 @@ function scrollToLocationHash(duration = 500, offset = 0, easing = __easeing) {
   }
 
   // scroll to target
-  __scrollTo(targetElm, duration, easing, offset, 'top');
+  return __scrollTo(targetElm, settings);
 }
 export default scrollToLocationHash;

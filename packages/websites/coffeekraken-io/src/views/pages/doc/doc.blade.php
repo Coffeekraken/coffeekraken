@@ -3,14 +3,13 @@
 
 @section('content')
     
-    @foreach ( $docs as $docblocks )
-        @php $firstBlock = $docblocks[0]; @endphp
-    @endforeach
+    @php $firstBlock = $docblocks[0]; @endphp
 
     @php
         $statusColor = 'info';
         if ($firstBlock->status == 'alpha') $statusColor = 'error';
         if ($firstBlock->status == 'stable') $statusColor = 'success';
+        if ($firstBlock->status == 'wip') $statusColor = 'error';
     @endphp
 
     <div id="doc">
@@ -20,14 +19,14 @@
             <div class="s-container s-grid:12">
                 <div>
                     <span class="s-font:30">
-                        <span class="s-badge:pill:accent->{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
+                        <span class="s-badge:pill:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
                     </span>
                     <h1 class="s-h1 s-mb:20 s-mt:20">
                         {{ $firstBlock->name }}
 
                         <span class="s-color:accent s-font:30">Since {{ $firstBlock->since }}</span>
                     </h1>
-                    <h3 class="s-h3">
+                    <h3 class="s-h3 s-color:accent">
                         {{ $firstBlock->namespace }}
                     </h3>
                     <br />
@@ -92,7 +91,7 @@
                         <span>{{ $firstBlock->name }}</span>
                         &nbsp;&nbsp;
                         <span class="s-font:30">
-                            <span class="s-badge:pill:accent->{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
+                            <span class="s-badge:pill:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
                         </span>
                         &nbsp;&nbsp;
                         @if ($firstBlock->platform)
@@ -150,165 +149,161 @@
 
         <section class="s-container s-py:80">
 
-            @foreach ( $docs as $docblocks )
+            <section class="s-grid:122">
 
-                <section class="s-grid:122">
+                <nav class="__nav">
+                    
+                    <s-activate class="__nav-group s-mb:30" id="doc-intro" toggle save-state>             
+                        <h3 class="s-h3">
+                            <span class="__nav-group-toggle"></span>
+                            {{ $firstBlock->type }}
+                        </h3>
+                    </s-activate>
+                    <ul class="s-list:ul">
+                        @if ($firstBlock->description)
+                            <li class="s-font:40">
+                                <a href="#{{ $firstBlock->name }}" title="Description">
+                                    Description
+                                </a>
+                            </li>
+                        @endif
+                        @if ($firstBlock->feature)
+                            <li class="s-font:40">
+                                <a href="#features-{{ $firstBlock->name }}" title="Features">
+                                    Features
+                                </a>
+                            </li>
+                        @endif
+                        @if ($firstBlock->example)
+                            <li class="s-font:40">
+                                <a href="#example-{{ $firstBlock->name }}" title="Example">
+                                    Example
+                                </a>
+                            </li>
+                        @endif
+                        @if ($firstBlock->param)
+                            <li class="s-font:40">
+                                <a href="#parameters-{{ $firstBlock->name }}" title="Parameters">
+                                    Parameters
+                                </a>
+                            </li>
+                        @endif
+                        @if ($firstBlock->setting)
+                            <li class="s-font:40">
+                                <a href="#settings-{{ $firstBlock->name }}" title="Settings">
+                                    Settings
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
 
-                    <nav class="__nav">
-                        
-                        <s-activate class="__nav-group s-mb:30" id="doc-intro" toggle save-state>             
+                    @php
+                        $methods = array_filter($docblocks, function($block, $i) {
+                            if ($i <= 0) return false;
+                            if ($block->private) return false;
+                            if ($block->name == 'constructor') return false;
+                            if (strtolower($block->type) != 'function') return false;
+                            return true;
+                        }, ARRAY_FILTER_USE_BOTH);
+                    @endphp
+                    @if (count($methods))
+
+                        <s-activate class="__nav-group s-mb:30 s-mt:50" id="doc-methods" toggle save-state>
                             <h3 class="s-h3">
                                 <span class="__nav-group-toggle"></span>
-                                {{ $firstBlock->type }}
+                                Methods
                             </h3>
                         </s-activate>
                         <ul class="s-list:ul">
-                            @if ($firstBlock->description)
+                            @foreach ($methods as $block)
                                 <li class="s-font:40">
-                                    <a href="#{{ $firstBlock->name }}" title="Description">
-                                        Description
+                                    <a href="#{{ $block->name }}" title="{{ $block->name }} method">
+                                        {{ $block->name }} 
                                     </a>
                                 </li>
-                            @endif
-                            @if ($firstBlock->feature)
-                                <li class="s-font:40">
-                                    <a href="#features-{{ $firstBlock->name }}" title="Features">
-                                        Features
-                                    </a>
-                                </li>
-                            @endif
-                            @if ($firstBlock->example)
-                                <li class="s-font:40">
-                                    <a href="#example-{{ $firstBlock->name }}" title="Example">
-                                        Example
-                                    </a>
-                                </li>
-                            @endif
-                            @if ($firstBlock->param)
-                                <li class="s-font:40">
-                                    <a href="#parameters-{{ $firstBlock->name }}" title="Parameters">
-                                        Parameters
-                                    </a>
-                                </li>
-                            @endif
-                            @if ($firstBlock->setting)
-                                <li class="s-font:40">
-                                    <a href="#settings-{{ $firstBlock->name }}" title="Settings">
-                                        Settings
-                                    </a>
-                                </li>
-                            @endif
+                            @endforeach
                         </ul>
 
-                        @php
-                            $methods = array_filter($docblocks, function($block, $i) {
-                                if ($i <= 0) return false;
-                                if ($block->private) return false;
-                                if ($block->name == 'constructor') return false;
-                                if (strtolower($block->type) != 'function') return false;
-                                return true;
-                            }, ARRAY_FILTER_USE_BOTH);
-                        @endphp
-                        @if (count($methods))
+                    @endif
 
-                            <s-activate class="__nav-group s-mb:30 s-mt:50" id="doc-methods" toggle save-state>
-                                <h3 class="s-h3">
-                                    <span class="__nav-group-toggle"></span>
-                                    Methods
-                                </h3>
-                            </s-activate>
-                            <ul class="s-list:ul">
-                                @foreach ($methods as $block)
-                                    <li class="s-font:40">
-                                        <a href="#{{ $block->name }}" title="{{ $block->name }} method">
-                                            {{ $block->name }} 
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                    @php
+                        $props = array_filter($docblocks, function($block, $i) {
+                            if ($i <= 0) return false;
+                            if ($block->private) return false;
+                            if (strtolower($block->type) == 'function') return false;
+                            return true;
+                        }, ARRAY_FILTER_USE_BOTH);
+                    @endphp
+                    @if (count($props))
 
-                        @endif
-
-                        @php
-                            $props = array_filter($docblocks, function($block, $i) {
-                                if ($i <= 0) return false;
-                                if ($block->private) return false;
-                                if (strtolower($block->type) == 'function') return false;
-                                return true;
-                            }, ARRAY_FILTER_USE_BOTH);
-                        @endphp
-                        @if (count($props))
-
-                            <s-activate class="__nav-group s-mb:30 s-mt:50" id="doc-props" toggle save-state>
-                                <h3 class="s-h3">
-                                    <span class="__nav-group-toggle"></span>
-                                    Properties
-                                </h3>
-                            </s-activate>
-                            <ul class="s-list:ul">
-                                @foreach ($props as $prop)                                
-                                    <li class="s-font:40">
-                                        <a href="#{{ $prop->name }}" title="{{ $prop->name }} property">
-                                            {!! $prop->get ? '<span class="s-color:accent">get</span>' : '' !!}{!! $prop->set ? '|<span class="s-color:accent">set</span>' : '' !!} {{ $prop->name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-
-                        @endif
-
-                    </nav>
-
-                    <div>
-
-                        @include('pages.doc.partials.block', ['block' => $firstBlock, 'isFirst' => true])
-
-                        @php
-                            $methods = array_filter($docblocks, function($block, $i) {
-                                if ($i <= 0) return false;
-                                if ($block->private) return false;
-                                if ($block->name == 'constructor') return false;
-                                if (strtolower($block->type) != 'function') return false;
-                                return true;
-                            }, ARRAY_FILTER_USE_BOTH);
-                        @endphp
-                        @if (count($methods))
-
-                            <h2 id="properties" class="s-h2 s-my:50 s-color:accent">
-                                Methods
-                            </h2>
-
-                            @foreach ($methods as $block)
-                                @include('pages.doc.partials.block', ['block' => $block, 'isFirst' => false])
-                            @endforeach
-
-                        @endif
-
-                        @php
-                            $props = array_filter($docblocks, function($block, $i) {
-                                if ($i <= 0) return false;
-                                if ($block->private) return false;
-                                if (strtolower($block->type) == 'function') return false;
-                                return true;
-                            }, ARRAY_FILTER_USE_BOTH);
-                        @endphp
-                        @if (count($props))
-
-                            <h2 id="properties" class="s-h2 s-my:50 s-color:accent">
+                        <s-activate class="__nav-group s-mb:30 s-mt:50" id="doc-props" toggle save-state>
+                            <h3 class="s-h3">
+                                <span class="__nav-group-toggle"></span>
                                 Properties
-                            </h2>
-
-                            @foreach ($props as $block)
-                                @include('pages.doc.partials.block', ['block' => $block, 'isFirst' => false])
+                            </h3>
+                        </s-activate>
+                        <ul class="s-list:ul">
+                            @foreach ($props as $prop)                                
+                                <li class="s-font:40">
+                                    <a href="#{{ $prop->name }}" title="{{ $prop->name }} property">
+                                        {!! $prop->get ? '<span class="s-color:accent">get</span>' : '' !!}{!! $prop->set ? '|<span class="s-color:accent">set</span>' : '' !!} {{ $prop->name }}
+                                    </a>
+                                </li>
                             @endforeach
+                        </ul>
 
-                        @endif
+                    @endif
 
-                    </div>
+                </nav>
+
+                <div>
+
+                    @include('pages.doc.partials.block', ['block' => $firstBlock, 'isFirst' => true])
+
+                    @php
+                        $methods = array_filter($docblocks, function($block, $i) {
+                            if ($i <= 0) return false;
+                            if ($block->private) return false;
+                            if ($block->name == 'constructor') return false;
+                            if (strtolower($block->type) != 'function') return false;
+                            return true;
+                        }, ARRAY_FILTER_USE_BOTH);
+                    @endphp
+                    @if (count($methods))
+
+                        <h2 id="properties" class="s-h2 s-my:50 s-color:accent">
+                            Methods
+                        </h2>
+
+                        @foreach ($methods as $block)
+                            @include('pages.doc.partials.block', ['block' => $block, 'isFirst' => false])
+                        @endforeach
+
+                    @endif
+
+                    @php
+                        $props = array_filter($docblocks, function($block, $i) {
+                            if ($i <= 0) return false;
+                            if ($block->private) return false;
+                            if (strtolower($block->type) == 'function') return false;
+                            return true;
+                        }, ARRAY_FILTER_USE_BOTH);
+                    @endphp
+                    @if (count($props))
+
+                        <h2 id="properties" class="s-h2 s-my:50 s-color:accent">
+                            Properties
+                        </h2>
+
+                        @foreach ($props as $block)
+                            @include('pages.doc.partials.block', ['block' => $block, 'isFirst' => false])
+                        @endforeach
+
+                    @endif
 
                 </div>
 
-            @endforeach
+            </div>
 
         </section>
 

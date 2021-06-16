@@ -9,7 +9,8 @@ import forceRedraw from '../dom/utlls/forceRedraw';
  * @name 		SMotionblurSvgFilter
  * @namespace            js.filter
  * @type      Class
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * This class represent a motion blur svg filter that will blur your
  * element depending on his movements, direction and speed

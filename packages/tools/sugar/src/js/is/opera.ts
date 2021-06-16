@@ -4,7 +4,8 @@
  * @name        isOpera
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Detect if is opera
  *
@@ -24,7 +25,7 @@
  * @since         1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isOpera(ua = navigator.userAgent) {
+function isOpera(ua: string = navigator.userAgent): boolean {
   return ua.toLowerCase().indexOf('op') > -1;
 }
 export default isOpera;

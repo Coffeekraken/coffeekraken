@@ -7,10 +7,16 @@ import __observeAttribute from './observe/observeAttributes';
  * @name      whenAttribute
  * @namespace            js.dom.detect
  * @type      Function
- * @stable
+ * @async
+ * @platform        js
+ * @status        beta
  *
  * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided
  *
+ * @feature       Detect attribute changes
+ * @feature       Possibility to pass a check function to check if the attribute suits your needs
+ * @feature       Promise based API
+ * 
  * @param 		{HTMLElement} 				elm 				The HTMLElement on which to monitor the property
  * @param 		{String} 					attribute 			The attribute to monitor
  * @param 		{Function} 					[checkFn=null] 		An optional function to check the attribute. The promise is resolved when this function return true

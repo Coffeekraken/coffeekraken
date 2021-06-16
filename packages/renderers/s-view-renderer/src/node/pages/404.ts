@@ -30,11 +30,12 @@ export interface I404Data {
 export default function page404(
   data: I404Data
 ): Promise<ISViewRendererRenderResult> {
-  const engine = new __SViewRenderer('pages.404', {
+  const engine = new __SViewRenderer('pages.error.404', {
     view: {
       engine: 'blade'
     }
   });
+  console.log('DFA', data);
   const result = engine.render(data);
   return result;
 }

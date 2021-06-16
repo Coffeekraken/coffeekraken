@@ -103,5 +103,27 @@ export default {
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  nodeModulesDir: `[config.storage.rootDir]/node_modules`
+  nodeModulesDir: `[config.storage.rootDir]/node_modules`,
+
+  /**
+   * @name            exclude
+   * @namespace       config.storage
+   * @type            Array<String>
+   *
+   * Specify which file(s) or directory(ies) you want to exclude from the major part of the functions
+   * like resolveGlob, SSugarJson.search, etc...
+   * This accept globs.
+   *
+   * @since         2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  exclude: [
+    '**/bin/**',
+    '**/.DS_Store',
+    '**/__WIP__/**',
+    '**/__wip__/**',
+    '**/__TESTS/**',
+    '**/__tests__/**',
+    '**/__tests__.wip/**'
+  ]
 };

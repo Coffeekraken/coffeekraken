@@ -3,7 +3,8 @@
  * @name      requestAnimationFrame
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @plaform       js
+ * @status      beta
  *
  * Proxy for the window.requestAnimationFrame function
  *
@@ -28,4 +29,4 @@ export default window.requestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     window.oRequestAnimationFrame ||
     window.msRequestAnimationFrame;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWVzdEFuaW1hdGlvbkZyYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmVxdWVzdEFuaW1hdGlvbkZyYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxlQUFlLE1BQU0sQ0FBQyxxQkFBcUI7SUFDekMsTUFBTSxDQUFDLDJCQUEyQjtJQUNsQyxNQUFNLENBQUMsd0JBQXdCO0lBQy9CLE1BQU0sQ0FBQyxzQkFBc0I7SUFDN0IsTUFBTSxDQUFDLHVCQUF1QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWVzdEFuaW1hdGlvbkZyYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmVxdWVzdEFuaW1hdGlvbkZyYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsZUFBZSxNQUFNLENBQUMscUJBQXFCO0lBQ3pDLE1BQU0sQ0FBQywyQkFBMkI7SUFDbEMsTUFBTSxDQUFDLHdCQUF3QjtJQUMvQixNQUFNLENBQUMsc0JBQXNCO0lBQzdCLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQyJ9

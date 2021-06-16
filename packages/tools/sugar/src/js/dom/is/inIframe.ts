@@ -4,7 +4,8 @@
  * @name      inIframe
  * @namespace            js.dom.is
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Check if the page is loaded inside an iframe
  *
@@ -23,7 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function inIframe() {
+function inIframe(): boolean {
   try {
     return window.self !== window.top;
   } catch (e) {

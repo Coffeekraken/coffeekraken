@@ -7,7 +7,8 @@ import SSvgFilter from './SSvgFilter';
  * @namespace            js.filter
  * @type            Class
  * @extends 	    	SSvgFilter
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * This class represent an outline filter that can be applied on any HTMLElement.
  *

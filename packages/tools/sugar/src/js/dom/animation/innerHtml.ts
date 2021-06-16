@@ -9,7 +9,8 @@ import __convert from '../../../shared/time/convert';
  * @name            innerHtml
  * @namespace            js.dom.animation
  * @type            Function
- * @stable
+ * @platform        js
+ * @status          beta
  *
  * Change the content of a Node with the possibility to animate the change using one of these animations:
  * - fade

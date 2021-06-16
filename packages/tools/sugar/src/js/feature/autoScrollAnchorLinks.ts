@@ -9,14 +9,15 @@ import scrollTo from './scrollTo';
  * @name        autoScrollAnchorLinks
  * @namespace            js.feature
  * @type      Function
- * @stable
+ * @platform      js
+ * @status      beta
  *
  * Listen for links contains an hash to init them for scroll to target on click
  *
  * @param    {Integer}    [duration=500]    The scroll duration in ms
  * @param    {Integer}    [offset=0]    A scroll offset to apply
  * @param    {Function}    [easing=__easing]    An easing function used to scroll
- * @param    {Boolean}    [checkPathnames=true]    Specify if need to check the pathnames correspondance or not
+ * @param    {Boolean}    [checkPathNames=true]    Specify if need to check the pathnames correspondance or not
  *
  * @todo            interface
  * @todo            doc
@@ -29,12 +30,28 @@ import scrollTo from './scrollTo';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface IAutoScrollAnchorLinks {
+  duration: number;
+  offset: number;
+  align: 'top' | 'center' | 'bottom';
+  easing: Function;
+  checkPathNames: boolean;
+}
+
 function autoScrollAnchorLinks(
-  duration = 500,
-  offset = 0,
-  easing = __easing,
-  checkPathnames = true
-) {
+  settings: Partial<IAutoScrollAnchorLinks> = {}
+): void {
+
+  settings = {
+    duration: 500,
+    offset: 0,
+    align: 'top',
+    easing: __easing,
+    checkPathNames: true,
+    ...settings
+  };
+
   querySelectorLive('a:not([is])[href*="#"]', ($link) => {
     // listen for click
     $link.addEventListener('click', (e) => {
@@ -47,7 +64,7 @@ function autoScrollAnchorLinks(
 
       // if it's not the same pathname between the current url and the link one,
       // we do nothing and we let the link behave as he want
-      if (checkPathnames && currentUrl.pathname !== linkUrl.pathname) return;
+      if (settings.checkPathNames && currentUrl.pathname !== linkUrl.pathname) return;
 
       // try to get the target from the hash
       const $target = document.querySelector(linkUrl.hash);
@@ -62,7 +79,7 @@ function autoScrollAnchorLinks(
       history.pushState({}, null, linkUrl.hash);
 
       // all seems to be good, we can scroll to the target
-      scrollTo($target, duration, easing || __easing, offset, 'top');
+      scrollTo($target, settings);
     });
   });
 }

@@ -7,7 +7,8 @@ import __autoCast from '../../shared/string/autoCast';
  * @name      styleString2Object
  * @namespace            js.dom.style
  * @type      Function
- * @stable
+ * @platform      js
+ * @status        beta
  *
  * Transform a style string to an object representation
  *
@@ -29,7 +30,7 @@ import __autoCast from '../../shared/string/autoCast';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function styleString2Object(style) {
+function styleString2Object(style: string): any {
   if (!style || style === '') return {};
   const obj = {};
   const split = style.replace(/\s/g, '').split(';');

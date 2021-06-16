@@ -7,6 +7,7 @@ import __formSerialize from 'form-serialize';
  * @name      sendForm
  * @namespace            js.dom.form
  * @type      Function
+ * @platform        js
  * @status        wip
  *
  * Send a form through an ajax call and return back a promise resolved with the server response
@@ -28,7 +29,7 @@ import __formSerialize from 'form-serialize';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function sendForm(form) {
+function sendForm(form: HTMLFormElement): Promise<any> {
   // protect
   if (!form.tagName || form.tagName.toLowerCase() !== 'form') {
     console.error('passed arguments', form);

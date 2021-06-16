@@ -4,7 +4,8 @@
  * @name      requestFullscreen
  * @namespace            js.dom.utils
  * @type      Function
- * @stable
+ * @platform        js
+ * @status        beta
  *
  * Request fullscreen on the passed DOM element
  *
@@ -22,7 +23,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function requestFullscreen(elm) {
+function requestFullscreen(elm: HTMLElement): Promise<any> {
   if (elm.requestFullscreen) {
     return elm.requestFullscreen();
   } else if (elm.mozRequestFullScreen) {

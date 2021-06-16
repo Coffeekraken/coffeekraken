@@ -22,6 +22,10 @@ class SFrontstackActionInterface extends __SInterface {
     action: {
       type: 'String',
       requried: true
+    },
+    params: {
+      type: 'String',
+      alias: 'p'
     }
   };
 }

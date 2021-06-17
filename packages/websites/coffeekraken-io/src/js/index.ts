@@ -7,17 +7,25 @@ import "@coffeekraken/s-opengraph-viewer-component";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 
-// __SComponentUtils.setDefaultProps('s-filtrable-input', {
-//   interactive: true
-// });
+// generic
+import "./generic/docShortcut";
+
+// features
+import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
+
+// features
+__smoothScroll({
+  scroll: {
+    offset: 150
+  }
+});
 
 __SComponentUtils.setDefaultProps('s-code-example', {
+    toolbarPosition: 'nav',
     defaultStyleClasses: {
         main: 's-tabs s-tabs--gradient'
     }
 });
-
-const start = Date.now();
 
 __querySelectorLive('[class*="s-"][class*=":"]', ($elm) => {
    $elm.classList.forEach((cls) => {
@@ -33,6 +41,4 @@ __querySelectorLive('[class*="s-"][class*=":"]', ($elm) => {
     $elm.classList.remove(cls);
   });
 });
-
-// console.log("coco", Date.now() - start);
 

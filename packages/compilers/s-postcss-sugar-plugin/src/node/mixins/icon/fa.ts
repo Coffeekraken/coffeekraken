@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __theme from '../../utils/theme';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __parseHtml from '@coffeekraken/sugar/node/terminal/parseHtml';
 
 import * as __fa from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -66,6 +67,11 @@ export default function ({
       // @ts-ignore
       iconName: finalParams.icon
   });
+
+  if (!iconDef) {
+    console.log(__parseHtml(`<red>!!!</red> It seems that you don't have access to the icon "<yellow>${finalParams.icon}</<yellow>"...`));
+    return;
+  }
 
   const vars: string[] = [];
 

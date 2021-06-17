@@ -53,15 +53,24 @@ export default function ({
             ${!finalParams.icon ? `
                 content: '●';
                 margin-top: 0.25em;
+                font-size: 0.7em;
             `: `
-                margin-top: 0.6em;
+                margin-top: 0.25em;
+                font-size: 0.8em;
             `}    
-            font-size: 0.7em;
             display: inline-block;
             position: absolute;
-            left: 0;
+            left: 0.5em;
+            transform: translateX(-50%);
             color: sugar.color(accent);
           }
+
+          ${finalParams.icon ? `
+            padding-left: 1.5em;
+            &:before {
+              content: ' ' !important;
+            }
+          `: ''}
           
         }
     }

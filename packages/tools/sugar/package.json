@@ -91,6 +91,7 @@
     "minimatch": "^3.0.4",
     "mobile-detect": "^1.4.5",
     "object-encode": "^1.0.2",
+    "open-graph-scraper": "^4.9.0",
     "ora": "^5.4.0",
     "param-case": "^3.0.4",
     "parse-es6-imports": "^1.0.1",

@@ -27,7 +27,6 @@ export default function ({
   const vars: string[] = [];
 
   Object.keys(depthsObj).forEach((depthName) => {
-    console.log(depthName);
     const depthCss = `/**
   * @name          s-depth--${depthName}
   * @namespace          sugar.css.depth

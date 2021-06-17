@@ -12,7 +12,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * Parse the param tag
  *
  * @param       {Object}          data        The data object parsed in the string
- * @param      {Object}                      The formated object
+ * @param      {Array<IPlatform>}                      An array of platform obj
  *
  * @todo      interface
  * @todo      doc
@@ -20,10 +20,16 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function param(data) {
+
+export interface IPlatform {
+  name: string;
+  description: string;
+}
+
+function param(data): IPlatform[] {
   if (!Array.isArray(data)) data = [data];
 
-  const res = {};
+  const res = [];
 
   data.forEach((param) => {
     
@@ -31,7 +37,10 @@ function param(data) {
 
     const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
 
-    res[parts[0]] = parts[1] ?? true;
+    res.push({
+      name: parts[0],
+      description: parts[1] ?? ''
+    });
   });
   return res;
 }

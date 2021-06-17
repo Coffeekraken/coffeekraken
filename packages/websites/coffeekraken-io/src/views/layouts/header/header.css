@@ -1,5 +1,8 @@
 #header {
+    position: relative;
+    z-index: 100;
 
+    @sugar.gradient.linear($start: sugar.color(ui, background), $end: rgba(0,0,0,0), $angle: 180deg);
 }
 
 #search-form {
@@ -29,6 +32,20 @@
         .s-filtrable-input__list-item {
             @sugar.depth(20);
             border-radius: 0 !important;
+            padding: 0 !important;
+
+            .__code {
+                @sugar.gradient (sugar.color(accent, gradientEnd), sugar.color(accent, gradientStart), $angle: 90);
+                    /* background: sugar.color(complementary); */
+            }
+            &:nth-child(odd) {
+
+                .__code {
+                    @sugar.gradient (sugar.color(complementary, gradientStart), sugar.color(complementary, --lighten 10), $angle: 90);
+                    /* background: sugar.color(accent); */
+                }
+            }
+
         }
     }
 

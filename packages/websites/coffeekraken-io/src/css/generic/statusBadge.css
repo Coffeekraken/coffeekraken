@@ -1,0 +1,9 @@
+.s-badge--alpha {
+    @sugar.color.remap(ui, error);
+}
+.s-badge--beta {
+    @sugar.color.remap(ui, warning);
+}
+.s-badge--stable {
+    @sugar.color.remap(ui, success);
+}

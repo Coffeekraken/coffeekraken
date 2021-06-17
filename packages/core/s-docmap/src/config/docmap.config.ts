@@ -97,6 +97,7 @@ export default {
       'description',
       'namespace',
       'status',
+      'example',
       'static',
       'since',
       'author'

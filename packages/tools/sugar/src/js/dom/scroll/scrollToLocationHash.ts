@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import __scrollTo from './scrollTo';
-import __easeing from '../../shared/easing/easeInOutQuint';
+import __scrollTo, { IScrollToSettings } from './scrollTo';
+import __easing from '../../../shared/easing/easeInOutQuint';
+import __deepMerge from '../../../shared/object/deepMerge';
 
 /**
  * @name      scrollToLocationHash
@@ -13,9 +14,7 @@ import __easeing from '../../shared/easing/easeInOutQuint';
  * Scroll to the location hash if an hash is present.
  * This function will try to get the target element from the hash and scroll to it
  *
- * @setting    {Integer}    [duration=500]    The scroll duration
- * @setting    {Integer}    [offset=0]    A pixel value to offset the scroll with
- * @setting    {Function}    [easing=__easeing]    An easing function to use to scroll
+ * @setting    {IScrollToSettings}            [scroll={}]       Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function
  *
  * @param       {IScrollToLocationHashSettings}       [settings={}]       Some settings to tweak the scroll behavior
  * @return      {Promise}                     A promise resolved once the scroll has ended
@@ -33,19 +32,14 @@ import __easeing from '../../shared/easing/easeInOutQuint';
  */
 
 export interface IScrollToLocationHashSettings {
-  duration: number;
-  offset: number;
-  easing: Function;
+  scroll: Partial<IScrollToSettings>;
 }
 
 function scrollToLocationHash(settings: Partial<IScrollToLocationHashSettings> = {}): Promise<any> {
 
-  settings = {
-    duration: 500,
-    offset: 0,
-    easing: __easeing,
-    ...settings
-  };
+  settings = __deepMerge({
+    scroll: {}
+  }, settings);
 
   // check if we have an hash in the url
   const hash = document.location.hash;
@@ -65,6 +59,6 @@ function scrollToLocationHash(settings: Partial<IScrollToLocationHashSettings> =
   }
 
   // scroll to target
-  return __scrollTo(targetElm, settings);
+  return __scrollTo(targetElm, settings.scroll);
 }
 export default scrollToLocationHash;

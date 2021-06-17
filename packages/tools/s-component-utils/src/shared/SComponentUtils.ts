@@ -2,6 +2,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
 import __mustache from 'mustache';
 import __SInterface from '@coffeekraken/s-interface';
+import __handlebars from 'handlebars';
 
 /**
  * @name                SComponentUtils
@@ -174,6 +175,15 @@ export default class SComponentUtils extends __SClass {
       }
 
     }
+
+    __handlebars.registerHelper('if_even', function(conditional, options) {
+      if((conditional % 2) == 0) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      } 
+    });
+
   }
 
   /**
@@ -227,6 +237,26 @@ export default class SComponentUtils extends __SClass {
    */
   compileMustache(template: string, data: any): string {
     const res = __mustache.render(template, data);
+    return res;
+  }
+
+  /**
+   * @name          compileHandlebars
+   * @type          Function
+   *
+   * This method allows you to compile some mustache template
+   * directly from your component.
+   *
+   * @param         {String}        template        The template to compile
+   * @param         {any}           data            The data with which you want to compile your template
+   * @return        {String}                        The compiled template
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  compileHandlebars(template: string, data: any): string {
+    const renderFn = __handlebars.compile(template);
+    const res = renderFn(data);
     return res;
   }
 

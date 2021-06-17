@@ -1,6 +1,6 @@
-<s-code-example>
+<s-code-example toolbar-position="{ component.props.toolbarPosition }">
 
-  <header class="{ component.className('__toolbar') }">
+  <header class="{ component.className('__nav') }">
     <ol class="{ component.className('__tabs', component.props.defaultStyleClasses.main) }">
       <li class="{ component.className('__tab') }"
         id={ item.id }
@@ -12,7 +12,9 @@
     </ol>
   </header>
   <div class="{ component.className('__content') }">
-    <s-clipboard-copy onclick="{() => this.copy()}"></s-clipboard-copy>
+    <div class="{ component.className('__toolbar') }">
+      <s-clipboard-copy class="{ component.className('__copy')}" onclick="{() => this.copy()}"></s-clipboard-copy>
+    </div>
     <pre class="{ component.className('__code') }"   
         id={ item.id ?? item.lang }
         active={ state.activeTabId === (item.id ?? item.lang) }
@@ -24,9 +26,13 @@
   <style type="postcss">
     :host {
       display: block;
+
+      &[toolbar-position="nav"] {
+          position: relative;
+      }
     }
 
-      .s-code-example__toolbar {
+      .s-code-example__nav {
       }
 
       .s-code-example__tabs {
@@ -40,7 +46,11 @@
       }
 
       .s-code-example__content {
-        position: relative;
+        overflow: hidden;
+
+        s-code-example[toolbar-position="content"] & {
+          position: relative;
+        }
       }
 
       .s-code-example__code {
@@ -48,21 +58,31 @@
         border-top-left-radius: 0 !important;
         border-top-right-radius: 0 !important;
         line-height: 0;
+        overflow: hidden;
         
         &[active] {
           display: block;
         }
       }
 
-      s-clipboard-copy {
-        font-size: 20px;
+      .s-code-example__toolbar {
+        
         position: absolute;
         top: sugar.space(30); right: sugar.space(30);
-        opacity: 0.5;
         z-index: 10;
 
-        &:hover {
-          opacity: 1;
+        & > * {
+          font-size: 20px;
+          opacity: 0.5;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        s-code-example[toolbar-position="nav"] & {
+          top: sugar.space(20);
+          right: sugar.space(20);
         }
       }
 

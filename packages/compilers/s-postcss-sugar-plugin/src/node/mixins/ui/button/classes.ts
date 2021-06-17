@@ -104,5 +104,24 @@ export default function ({
       }
     `);
 
+  vars.push(`/**
+        * @name           s-btn--block
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">block</s-color>" button
+        * 
+        * @example        html
+        * <a class="s-btn--block">I'm a cool block button</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */`);
+    vars.push(`
+      .s-btn--block {
+        display: block !important;
+      }
+    `);
+
   replaceWith(vars);
 }

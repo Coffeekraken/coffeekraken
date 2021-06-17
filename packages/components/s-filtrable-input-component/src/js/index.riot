@@ -1,4 +1,4 @@
-<s-filtrable-input interactive="{ component.props.interactive }">
+<s-filtrable-input interactive="{ component.props.interactive }" not-selectable="{ component.props.notSelectable }">
   
     <ul class={component.className('__list', 's-list:interactive')}>
       <li
@@ -31,7 +31,7 @@
         hoverable
       >
         <s-raw-html
-          html={ component.compileMustache(state.itemTemplate, item) }
+          html={ component.compileHandlebars(state.itemTemplate, item) }
         ></s-raw-html>
       </li>
     </ul>
@@ -73,16 +73,15 @@
           pointer-events: all !important;
         }
 
-        .s-filtrable-input__list-item {
-          cursor: pointer;
+        .s-filtrable-input__list-item { 
           position: relative;
 
-          * {
-            pointer-events: none;
-          }
+          s-filtrable-input:not([interactive]) & {
+            cursor: pointer;
 
-          s-filtrable-input[interactive] & * {
-            pointer-events: all !important;
+            * {
+              pointer-events: none;
+            }
           }
         }
       }
@@ -322,6 +321,10 @@
         this._validateAndClose();
       },
       _setPreselectedItemIdx(idx) {
+
+        // check if the component is in not selectable mode
+        if (this.component.props.notSelectable) return;
+
         this.update({
           preselectedItemIdx: idx
         });

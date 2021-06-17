@@ -65,7 +65,7 @@ function scrollTo(
   return new Promise((resolve, reject) => {
 
     settings = {
-      duration: 1000,
+      duration: 500,
       easing: easeInOutQuad,
       offset: 0,
       align: 'top',
@@ -74,11 +74,8 @@ function scrollTo(
     }
 
     const docElem = document.documentElement; // to facilitate minification better
-    const windowHeight = docElem.clientHeight;
-    const maxScroll =
-      'scrollMaxY' in window
-        ? window.scrollMaxY
-        : docElem.scrollHeight - windowHeight;
+    const windowHeight = window.innerHeight;
+    const maxScroll = docElem.scrollHeight - windowHeight;
     const currentY = window.pageYOffset;
 
     isScrollingHappening = true;
@@ -99,6 +96,7 @@ function scrollTo(
       targetY += elementBounds.top;
       targetY -= settings.offset;
     }
+
     targetY = Math.max(Math.min(maxScroll, targetY), 0);
 
     const deltaY = targetY - currentY;
@@ -109,13 +107,14 @@ function scrollTo(
       duration: settings.duration,
       easing: settings.easing,
       onFinish() {
-        settings.onFinish && settingds.onFinish();
+        settings.onFinish && settings.onFinish();
         resolve();
       },
       startTime: Date.now(),
       lastY: currentY,
       step: scrollTo.step
     };
+
     requestAnimationFrame(obj.step.bind(obj));
 
   });

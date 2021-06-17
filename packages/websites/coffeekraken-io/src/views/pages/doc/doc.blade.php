@@ -31,8 +31,8 @@
                     </h3>
                     <br />
                     @if ($firstBlock->platform)
-                        @foreach ($firstBlock->platform as $key => $platform)
-                            <i class="platform-{{ $key }}"></i>
+                        @foreach ($firstBlock->platform as $platform)
+                            <i class="s-platform:{{ $platform->name }}"></i>
                         @endforeach
                     @endif
                 </div>
@@ -95,8 +95,8 @@
                         </span>
                         &nbsp;&nbsp;
                         @if ($firstBlock->platform)
-                            @foreach ($firstBlock->platform as $key => $platform)
-                                <i class="platform-{{ $key }}"></i>
+                            @foreach ($firstBlock->platform as $platform)
+                                <i class="s-platform:{{ $platform->name }}"></i>
                             @endforeach
                         @endif
                     </div>
@@ -122,10 +122,10 @@
                                         <br />
                                         We are a community and this is what makes the strengh of this project.
                                     </p>
-                                    <a class="s-btn:error s-display:block s-mb:20 s-depth:50" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                                    <a class="s-btn:error:block s-mb:20 s-depth:50" href="https://olivierbossel.com" title="Share the love" target="_blank">
                                         Declare my issue on Github
                                     </a>
-                                    <a class="s-btn:info s-display:block" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                                    <a class="s-btn:info:block" href="https://olivierbossel.com" title="Share the love" target="_blank">
                                         Talk about it on Discord
                                     </a>
                                 </div>
@@ -159,9 +159,10 @@
                             {{ $firstBlock->type }}
                         </h3>
                     </s-activate>
-                    <ul class="s-list:ul">
+                    <ul class="s-list:ul:icon">
                         @if ($firstBlock->description)
                             <li class="s-font:40">
+                                <i class="s-icon:info"></i>
                                 <a href="#{{ $firstBlock->name }}" title="Description">
                                     Description
                                 </a>
@@ -176,6 +177,7 @@
                         @endif
                         @if ($firstBlock->example)
                             <li class="s-font:40">
+                                <i class="s-icon:example"></i>
                                 <a href="#example-{{ $firstBlock->name }}" title="Example">
                                     Example
                                 </a>
@@ -183,15 +185,33 @@
                         @endif
                         @if ($firstBlock->param)
                             <li class="s-font:40">
+                                <i class="s-icon:list-ul"></i>
                                 <a href="#parameters-{{ $firstBlock->name }}" title="Parameters">
                                     Parameters
                                 </a>
                             </li>
                         @endif
+                        @if ($firstBlock->return)
+                            <li class="s-font:40">
+                                <i class="s-icon:return"></i>
+                                <a href="#return-{{ $firstBlock->name }}" title="Return">
+                                    Return
+                                </a>
+                            </li>
+                        @endif
                         @if ($firstBlock->setting)
                             <li class="s-font:40">
+                                <i class="s-icon:setting"></i>
                                 <a href="#settings-{{ $firstBlock->name }}" title="Settings">
                                     Settings
+                                </a>
+                            </li>
+                        @endif
+                        @if ($firstBlock->see)
+                            <li class="s-font:40">
+                                <i class="s-icon:box"></i>
+                                <a href="#related-{{ $firstBlock->name }}" title="Related resource(s)">
+                                    Related resource(s)
                                 </a>
                             </li>
                         @endif

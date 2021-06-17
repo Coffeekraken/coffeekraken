@@ -10,6 +10,16 @@ export default class SHighlightJsComponentInterface extends __SInterface {
     active: {
       type: 'String'
     },
+    toolbar: {
+      type: 'Array<String>',
+      values: ['copy'],
+      default: ['copy']
+    },
+    toolbarPosition: {
+      type: 'String',
+      values: ['content', 'nav'],
+      default: 'content'
+    },
     language: {
       type: 'String',
       default: 'javascript'

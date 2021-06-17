@@ -1,4 +1,5 @@
 @sugar.import ('../views/**/*.css');
+@sugar.import ('./generic/statusBadge.css');
 
 @sugar.init;
 
@@ -7,8 +8,17 @@
   fa-heart:heart
   fa-fire:fire
   fa-copy:copy
+  fa-box-open:box
+  fa-info:info
+  fa-chalkboard-teacher:example
+  fa-list-ul:list-ul
+  fa-cogs:setting
+  fa-th:return
+  fa-search:search
+  fa-radiation:nothing
 );
 
+@sugar.platform.classes;
 @sugar.prism.theme;
 
 [class*='s-btn'] {

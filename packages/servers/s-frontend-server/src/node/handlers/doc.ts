@@ -8,6 +8,7 @@ import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __minimatch from 'minimatch';
 import __ogScraper from 'open-graph-scraper';
+import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 
 /**
  * @name                doc
@@ -80,18 +81,31 @@ export default function doc(req, res, settings = {}) {
 
           pendingRequests++;
 
-          const data = __ogScraper({
-            url: seeObj.url,
-            onlyGetOpenGraphInfo: true
-          }, (error, results, response) => {
-            if (results) {
-              seeObj.og = results
+          __scrapeUrl(seeObj.url).then(results => {
+            seeObj.og = results
+            pendingRequests--;
+            if (!pendingRequests) {
+              resolve();
             }
+          }).catch(error => {
             pendingRequests--;
             if (!pendingRequests) {
               resolve();
             }
           });
+
+          // const data = __ogScraper({
+          //   url: seeObj.url,
+          //   onlyGetOpenGraphInfo: true
+          // }, (error, results, response) => {
+          //   if (results) {
+          //     seeObj.og = results
+          //   }
+          //   pendingRequests--;
+          //   if (!pendingRequests) {
+          //     resolve();
+          //   }
+          // });
         });
       });
     });

@@ -30,7 +30,7 @@ export default function ({
     @sugar.scope(bare) {
         
         /**
-         * @name            s-align-abs-top
+         * @name            s-align--abs-top
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -38,19 +38,19 @@ export default function ({
          * to the top
          * 
          * @example     html
-         * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-top">Hello world</div>
+         * <div class="s-ratio--1-1">
+         *      <div class="s-align--abs-top">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-top {
+        .s-align--abs-top {
             @sugar.align.abs(top);
         }
 
         /**
-         * @name            s-align-abs-left
+         * @name            s-align--abs-left
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -58,19 +58,19 @@ export default function ({
          * to the left
          * 
          * @example     html
-         * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-left">Hello world</div>
+         * <div class="s-ratio--1-1">
+         *      <div class="s-align--abs-left">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-left {
+        .s-align--abs-left {
             @sugar.align.abs(left);
         }
 
         /**
-         * @name            s-align-abs-right
+         * @name            s-align--abs-right
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -78,19 +78,19 @@ export default function ({
          * to the right
          * 
          * @example     html
-         * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-right">Hello world</div>
+         * <div class="s-ratio--1-1">
+         *      <div class="s-align--abs-right">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-right {
+        .s-align--abs-right {
             @sugar.align.abs(right);
         }
 
         /**
-         * @name            s-align-abs-bottom
+         * @name            s-align--abs-bottom
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -99,18 +99,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-bottom">Hello world</div>
+         *      <div class="s-align--abs-bottom">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-bottom {
+        .s-align--abs-bottom {
             @sugar.align.abs(bottom);
         }
 
         /**
-         * @name            s-align-abs-center
+         * @name            s-align--abs-center
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -119,18 +119,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-center">Hello world</div>
+         *      <div class="s-align--abs-center">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-center {
+        .s-align--abs-center {
             @sugar.align.abs(center);
         }
 
         /**
-         * @name            s-align-abs-top-left
+         * @name            s-align--abs-top-left
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -139,18 +139,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-top-left">Hello world</div>
+         *      <div class="s-align--abs-top-left">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-top-left {
+        .s-align--abs-top-left {
             @sugar.align.abs(top left);
         }
 
         /**
-         * @name            s-align-abs-top-center
+         * @name            s-align--abs-top-center
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -159,18 +159,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-top-center">Hello world</div>
+         *      <div class="s-align--abs-top-center">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-top-center {
+        .s-align--abs-top-center {
             @sugar.align.abs(top center-x);
         }
 
         /**
-         * @name            s-align-abs-top-right
+         * @name            s-align--abs-top-right
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -179,18 +179,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-top-right">Hello world</div>
+         *      <div class="s-align--abs-top-right">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-top-right {
+        .s-align--abs-top-right {
             @sugar.align.abs(top right);
         }
 
         /**
-         * @name            s-align-abs-center-left
+         * @name            s-align--abs-center-left
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -199,18 +199,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-center-left">Hello world</div>
+         *      <div class="s-align--abs-center-left">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-center-left {
+        .s-align--abs-center-left {
             @sugar.align.abs(left center-y);
         }
 
         /**
-         * @name            s-align-abs-center-right
+         * @name            s-align--abs-center-right
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -219,18 +219,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-center-right">Hello world</div>
+         *      <div class="s-align--abs-center-right">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-center-right {
+        .s-align--abs-center-right {
             @sugar.align.abs(right center-y);
         }
 
         /**
-         * @name            s-align-abs-bottom-left
+         * @name            s-align--abs-bottom-left
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -239,18 +239,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-bottom-left">Hello world</div>
+         *      <div class="s-align--abs-bottom-left">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-bottom-left {
+        .s-align--abs-bottom-left {
             @sugar.align.abs(bottom left);
         }
 
         /**
-         * @name            s-align-abs-bottom-center
+         * @name            s-align--abs-bottom-center
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -259,18 +259,18 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-bottom-center">Hello world</div>
+         *      <div class="s-align--abs-bottom-center">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-bottom-center {
+        .s-align--abs-bottom-center {
             @sugar.align.abs(bottom center-x);
         }
 
         /**
-         * @name            s-align-abs-bottom-right
+         * @name            s-align--abs-bottom-right
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
          * 
@@ -279,13 +279,13 @@ export default function ({
          * 
          * @example     html
          * <div class="s-ratio-1-1">
-         *      <div class="s-align-abs-bottom-right">Hello world</div>
+         *      <div class="s-align--abs-bottom-right">Hello world</div>
          * </div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-align-abs-bottom-right {
+        .s-align--abs-bottom-right {
             @sugar.align.abs(bottom right);
         }
 

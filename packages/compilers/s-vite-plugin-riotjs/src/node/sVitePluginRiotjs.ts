@@ -28,14 +28,23 @@ export default function sVitePluginRiotjs(riotSettings: any = {}) {
 
         const code = [
           'import * as riot from "riot";',
+          `import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';`,
+          `import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';`,
           result.code.replace('export default ', 'const Component = '),
           // @ts-ignore
           `riot.register('${result.meta.tagName}', Component);`,
+          // // @ts-ignore
+          // 'setTimeout(() => {',
+          // // @ts-ignore
+          // `   riot.mount('${result.meta.tagName}');`,
+          // '});',
           // @ts-ignore
-          'setTimeout(() => {',
+          `__querySelectorLive('${result.meta.tagName}', ($elm) => {`,
           // @ts-ignore
-          `   riot.mount('${result.meta.tagName}');`,
-          '});',
+          ` const id = $elm.id || '${result.meta.tagName}-' + __uniqid();
+            $elm.setAttribute('id', id);
+            riot.mount('#' + id);
+          });`,
           `Component.mount = () => {`,
             // @ts-ignore
             `riot.mount('${result.meta.tagName}');`,

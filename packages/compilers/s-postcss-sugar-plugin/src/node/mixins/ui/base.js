@@ -42,17 +42,17 @@ export default function ({ params, atRule, replaceWith }) {
           @sugar.depth(20);
           background-color: sugar.color(ui:hover, surface);
           color: sugar.color(ui:hover, foreground);
-          border: sugar.color(ui:hover, border) solid 2px;
+          border: sugar.color(ui:hover, border) solid 1px;
         }
         @sugar.state.focus {
           background-color: sugar.color(ui:focus, surface);
           color: sugar.color(ui:focus, foreground);
-          border: sugar.color(${(_a = finalParams.color) !== null && _a !== void 0 ? _a : 'ui'}:focus, border) solid 2px;
+          border: sugar.color(${(_a = finalParams.color) !== null && _a !== void 0 ? _a : 'ui'}:focus, border) solid 1px;
         }
         @sugar.state.active {
           background-color: sugar.color(ui:active, surface);
           color: sugar.color(ui:active, foreground);
-          border: sugar.color(${(_b = finalParams.color) !== null && _b !== void 0 ? _b : 'ui'}:active, border) solid 2px;
+          border: sugar.color(${(_b = finalParams.color) !== null && _b !== void 0 ? _b : 'ui'}:active, border) solid 1px;
         }
     }
   `);

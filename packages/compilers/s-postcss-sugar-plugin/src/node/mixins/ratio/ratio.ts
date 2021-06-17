@@ -33,6 +33,8 @@ export default function ({
   const vars: string[] = [
     `
     position: relative;
+    overflow: hidden;
+
     &::before {
         content: '';
         display: block;
@@ -40,11 +42,15 @@ export default function ({
         width: 100%;
         height: 0;
         padding: 0 0 calc(100% / ${finalParams.ratio});
-    }Pindex.css
-    & > *:not[class*="s-center-"] {
+    }
+    & > *:not([class*="s-align--"]) {
         position: absolute;
         top: 0; left: 0;
         width: 100%; height: 100%;
+    }
+    & > img:not([class*="s-align--"]),
+    & > video:not([class*="s-align--"]) {
+      object-fit: cover;
     }
   `
   ];

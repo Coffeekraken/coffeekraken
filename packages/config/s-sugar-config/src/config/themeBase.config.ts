@@ -1393,6 +1393,7 @@ export default {
         'font-family': 'title',
         'font-size': 80,
         'line-height': 1,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 50
         }
@@ -1401,6 +1402,7 @@ export default {
         'font-family': 'title',
         'font-size': 70,
         'line-height': 1,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 50
         }
@@ -1409,6 +1411,7 @@ export default {
         'font-family': 'title',
         'font-size': 60,
         'line-height': 1,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 40
         }
@@ -1417,6 +1420,7 @@ export default {
         'font-family': 'title',
         'font-size': 50,
         'line-height': 1,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 40
         }
@@ -1425,6 +1429,7 @@ export default {
         'font-family': 'title',
         'font-size': 40,
         'line-height': 1,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 30
         }
@@ -1433,22 +1438,25 @@ export default {
         'font-family': 'title',
         'font-size': 30,
         'line-height': 1,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 30
         }
       },
-      'p-lead': {
+      p: {
         'font-family': 'default',
-        'font-size': 70,
+        'font-size': 40,
         'line-height': 1.5,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 50
         }
       },
-      p: {
+      'p--lead': {
         'font-family': 'default',
-        'font-size': 50,
+        'font-size': 60,
         'line-height': 1.5,
+        'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 50
         }

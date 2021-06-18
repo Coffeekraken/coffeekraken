@@ -188,7 +188,7 @@ class SPromise extends __SClass.extends(Promise)
         {
           promise: {
             treatCancelAs: 'resolve',
-            destroyTimeout: 5000,
+            destroyTimeout: 1,
             preventRejectOnThrow: true,
             emitErrorEventOnThrow: true,
             proxies: {
@@ -217,8 +217,7 @@ class SPromise extends __SClass.extends(Promise)
       }
     );
 
-    this.expose(
-      new __SEventEmitter(
+    this._eventEmitter =  new __SEventEmitter(
         __deepMerge(
           {
             metas: this.metas,
@@ -226,7 +225,10 @@ class SPromise extends __SClass.extends(Promise)
           },
           this._settings
         )
-      ),
+      );
+
+    this.expose(
+      this._eventEmitter,
       {
         as: 'eventEmitter',
         props: ['on', 'off', 'emit', 'pipe', 'pipeFrom', 'pipeTo']
@@ -241,7 +243,7 @@ class SPromise extends __SClass.extends(Promise)
     ) {
       this.on('finally', (v, m) => {
         setTimeout(() => {
-          this._destroy();
+          this.destroy();
         }, (<ISPromiseConstructorSettings>this._settings).promise.destroyTimeout);
       });
     }
@@ -632,14 +634,16 @@ class SPromise extends __SClass.extends(Promise)
   }
 
   /**
-   * @name                      _destroy
+   * @name                      destroy
    * @type                      Function
    *
    * Destroying the SPromise instance by unregister all the callbacks, etc...
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _destroy() {
+  destroy() {
+    // destroy the event emitter
+    this._eventEmitter.destroy();
     // update the status
     this._promiseState = 'destroyed';
   }

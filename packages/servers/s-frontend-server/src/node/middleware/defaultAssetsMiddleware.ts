@@ -7,6 +7,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __SEnv from '@coffeekraken/s-env';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name            defaultAssetsMiddleware
@@ -69,9 +70,9 @@ function defaultAssetsMiddleware(settings = {}) {
 
           const originalSrc = src;
 
-          if (!__SEnv.is('prod') && !src.match(/\?/)) {
-            src += `?v=${Math.round(Math.random()*9999999999)}`;
-          }
+          // if (!__SEnv.is('prod') && !src.match(/\?/)) {
+          //   src += `?v=${Math.round(Math.random()*9999999999)}`;
+          // }
 
           switch (assetObj.type.toLowerCase()) {
             case 'js':
@@ -115,6 +116,8 @@ function defaultAssetsMiddleware(settings = {}) {
         }
       });
     });
+
+    __SBench.step('request', 'defaultAssetsMiddleware');
 
     return next();
   };

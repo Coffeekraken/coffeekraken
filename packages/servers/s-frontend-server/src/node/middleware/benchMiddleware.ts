@@ -1,14 +1,15 @@
 // @ts-nocheck
 
-import { createProxyMiddleware } from 'http-proxy-middleware';
+import __SBench from '@coffeekraken/s-bench';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
- * @name            proxyMiddleware
+ * @name            benchEndMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
  * @status              beta
  *
- * This function describe the middleware that will add the "env" property to the ```res.templateData``` object
+ * SMall middleware to end the request benchmark
  *
  * @param           {Object}            req             The request made on the express server
  * @param           {Object}            res             The response object of the express server
@@ -20,21 +21,31 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
  *
  * @example         js
  * import express from 'express';
- * import proxyMiddleware from '@coffeekraken/sugar/server/frontend/middleware/proxyMiddleware';
+ * import benchEndMiddleware from '@coffeekraken/sugar/server/frontend/middleware/benchEndMiddleware';
  * const server = express();
- * server.use(proxyMiddleware);
+ * server.use(benchEndMiddleware);
  * server.listen(3000);
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function proxyMiddleware(settings = {}) {
+function benchEndMiddleware(settings = {}) {
   return function (req, res, next) {
-    res.templateData = {
-      ...(res.templateData || {}),
-      env: __env('NODE_ENV') || 'development'
-    };
-    return next();
+    return new __SPromise(({resolve, reject, pipe}) => {
+
+      pipe(__SBench.start('request'));
+
+      function afterResponse() {
+        __SBench.end('request');
+      }
+
+      res.on('finish', afterResponse);
+      // res.on('close', afterResponse);
+
+      next();
+
+    });
+
   };
 }
-export default proxyMiddleware;
+export default benchEndMiddleware;

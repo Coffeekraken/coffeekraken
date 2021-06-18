@@ -2,6 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name                index
@@ -22,9 +23,9 @@ import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let _docmapJson;
 export default function doc(req, res, settings = {}) {
-  return new __SPromise(async ({ resolve, reject, pipe }) => {
+  return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+
     // render the proper template
     const indexView = new __SViewRenderer('index');
     const pageHtml = await indexView.render({

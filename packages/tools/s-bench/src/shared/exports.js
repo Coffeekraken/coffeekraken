@@ -1,0 +1,4 @@
+import __SBench from './SBench';
+export * from './SBench';
+export default __SBench;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxRQUFRLE1BQU0sVUFBVSxDQUFDO0FBRWhDLGNBQWMsVUFBVSxDQUFDO0FBRXpCLGVBQWUsUUFBUSxDQUFDIn0=

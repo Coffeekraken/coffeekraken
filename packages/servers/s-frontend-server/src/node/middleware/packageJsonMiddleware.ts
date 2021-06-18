@@ -3,6 +3,7 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
 import __standardizeJson from '@coffeekraken/sugar/shared/npm/utils/standardizeJson';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name            packageJsonMiddleware
@@ -43,6 +44,9 @@ function packageJsonMiddleware(settings = {}) {
         packageJson: __standardizeJson(pkg)
       };
     }
+
+    __SBench.step('request', 'packageJsonMiddleware');
+
     return next();
   };
 }

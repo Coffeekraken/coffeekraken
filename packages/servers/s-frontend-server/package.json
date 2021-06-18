@@ -16,6 +16,7 @@
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/s-view-renderer": "^2.0.0",
+    "@coffeekraken/s-bench": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "express": "^4.17.1",
     "file-type": "^16.3.0",

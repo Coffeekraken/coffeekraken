@@ -153,7 +153,9 @@ export default class SFrontendServer extends __SClass {
 
               // register the middleware inside the sails configuration
               // @ts-ignore
-              express.use(middleware);
+              express.use((req, res, next) => {
+                return pipe(middleware(res, res, next));
+              });
             }
           );
         }
@@ -174,7 +176,9 @@ export default class SFrontendServer extends __SClass {
         Object.keys(frontendServerConfig.handlers).forEach((handlerId) => {
           const handlerObj = frontendServerConfig.handlers[handlerId];
           const handlerFn = require(handlerObj.handler).default;
-          express.get(handlerObj.route, handlerFn);
+          express.get(handlerObj.route, (req, res, next) => {
+            return pipe(handlerFn(req, res, next));
+          });
         });
 
         express.listen(frontendServerConfig.port, () => {

@@ -107,6 +107,10 @@ export default {
   },
 
   middlewares: {
+    bench: {
+      path: `${__dirname}/../node/middleware/benchMiddleware`,
+      settings: {}
+    },
     // resolveExtensionFreePath: {
     //   path: `${__dirname}/../node/middleware/resolveExtensionFreePath`,
     //   settings: {

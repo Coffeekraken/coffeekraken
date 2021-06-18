@@ -5,6 +5,7 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __fs from 'fs';
 import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name                views
@@ -26,6 +27,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default async function view(req, res, settings = {}) {
+
   const viewPath = req.params[0].split('/').join('.');
 
   const viewInstance = new __SViewRenderer(viewPath);

@@ -1,5 +1,6 @@
 // @ts-nocheck
 import __env from '@coffeekraken/sugar/shared/core/env';
+import __SBench from '@coffeekraken/s-bench';
 /**
  * @name            envMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -29,8 +30,9 @@ import __env from '@coffeekraken/sugar/shared/core/env';
 function envMiddleware(settings = {}) {
     return function (req, res, next) {
         res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { env: __env('NODE_ENV') || 'development' });
+        __SBench.step('request', 'envMiddleware');
         return next();
     };
 }
 export default envMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW52TWlkZGxld2FyZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVudk1pZGRsZXdhcmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sS0FBSyxNQUFNLHFDQUFxQyxDQUFDO0FBRXhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxhQUFhLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDbEMsT0FBTyxVQUFVLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTtRQUM3QixHQUFHLENBQUMsWUFBWSxtQ0FDWCxDQUFDLEdBQUcsQ0FBQyxZQUFZLElBQUksRUFBRSxDQUFDLEtBQzNCLEdBQUcsRUFBRSxLQUFLLENBQUMsVUFBVSxDQUFDLElBQUksYUFBYSxHQUN4QyxDQUFDO1FBQ0YsT0FBTyxJQUFJLEVBQUUsQ0FBQztJQUNoQixDQUFDLENBQUM7QUFDSixDQUFDO0FBQ0QsZUFBZSxhQUFhLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW52TWlkZGxld2FyZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVudk1pZGRsZXdhcmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sS0FBSyxNQUFNLHFDQUFxQyxDQUFDO0FBQ3hELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxhQUFhLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDbEMsT0FBTyxVQUFVLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTtRQUM3QixHQUFHLENBQUMsWUFBWSxtQ0FDWCxDQUFDLEdBQUcsQ0FBQyxZQUFZLElBQUksRUFBRSxDQUFDLEtBQzNCLEdBQUcsRUFBRSxLQUFLLENBQUMsVUFBVSxDQUFDLElBQUksYUFBYSxHQUN4QyxDQUFDO1FBRUYsUUFBUSxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsZUFBZSxDQUFDLENBQUM7UUFFMUMsT0FBTyxJQUFJLEVBQUUsQ0FBQztJQUNoQixDQUFDLENBQUM7QUFDSixDQUFDO0FBQ0QsZUFBZSxhQUFhLENBQUMifQ==

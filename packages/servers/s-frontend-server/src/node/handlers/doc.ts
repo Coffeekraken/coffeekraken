@@ -9,6 +9,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __minimatch from 'minimatch';
 import __ogScraper from 'open-graph-scraper';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name                doc
@@ -31,6 +32,7 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
  */
 let _docmapJson;
 export default function doc(req, res, settings = {}) {
+
   return new __SPromise(async ({ resolve, reject, pipe }) => {
     const docMap = new __SDocMap();
     const requestedNamespace = req.path.replace('/doc/', '').trim();

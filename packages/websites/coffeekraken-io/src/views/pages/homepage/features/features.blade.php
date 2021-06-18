@@ -1,10 +1,12 @@
 <div id="homepage-features">
 
-    <section class="s-container s-py:100">
-        
+    <section class="__header s-container s-py:100">
+
+        <div class="__bg"></div>
+
         <div class="s-grid:122:gutter-x:gutter-between">
             <div>
-                <img class="__illustration" src="/src/img/features-illustration.svg" />
+                <img class="__illustration" src="/src/img/chest.png" />
             </div>
             <div class="s-rhythm-vertical">
                 <h1 class="s-h1">Features</h1>

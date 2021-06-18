@@ -8,6 +8,7 @@ import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __SEnv from '@coffeekraken/s-env';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name            frontspecMiddleware
@@ -76,11 +77,11 @@ function frontspecMiddleware(settings = {}) {
       const originalUrl = url;
 
       // cache busting in dev
-      if (!__SEnv.is('prod') && !assetObj.url?.match(/@vite/)) {
-        const version = `?v=${Math.round(Math.random() * 9999999999)}`;
-        if (assetObj.args.src) assetObj.args.src += version;
-        if (assetObj.args.href) assetObj.args.href += version;
-      }
+      // if (!__SEnv.is('prod') && !assetObj.url?.match(/@vite/)) {
+      //   const version = `?v=${Math.round(Math.random() * 9999999999)}`;
+      //   if (assetObj.args.src) assetObj.args.src += version;
+      //   if (assetObj.args.href) assetObj.args.href += version;
+      // }
 
       switch (assetObj.type.toLowerCase()) {
         case 'js':
@@ -147,6 +148,8 @@ function frontspecMiddleware(settings = {}) {
 
       res.templateData.assets[assetObj.type][assetHash] = _requestedFiles[originalUrl];
     }
+
+    __SBench.step('request', 'frontspecMiddleware');
 
     return next();
   };

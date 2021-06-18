@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __env from '@coffeekraken/sugar/shared/core/env';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name            envMiddleware
@@ -34,6 +35,9 @@ function envMiddleware(settings = {}) {
       ...(res.templateData || {}),
       env: __env('NODE_ENV') || 'development'
     };
+
+    __SBench.step('request', 'envMiddleware');
+
     return next();
   };
 }

@@ -3,6 +3,7 @@
 import __fs from 'fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name            resolveExtensionFreePath
@@ -62,6 +63,8 @@ function resolveExtensionFreePath(settings = {}) {
         break;
       }
     }
+
+    __SBench.step('request', 'resolveExtensionFreePathMiddleware');
 
     return next();
   };

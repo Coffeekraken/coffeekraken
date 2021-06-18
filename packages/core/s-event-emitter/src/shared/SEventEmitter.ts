@@ -140,7 +140,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  static async pipe(
+  static pipe(
     sourceSEventEmitter: ISEventEmitter,
     destSEventEmitter: ISEventEmitter,
     settings?: ISEventEmitterPipeSettings
@@ -159,6 +159,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       filter: undefined,
       ...(settings ?? {})
     };
+
+    // make sure it's a valid emitter
+    if (!sourceSEventEmitter || !sourceSEventEmitter.on || typeof sourceSEventEmitter.on !== 'function') return sourceSEventEmitter;
 
     // listen for all on the source promise
     sourceSEventEmitter.on(set.events || '*', async (value, metas) => {
@@ -937,14 +940,14 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   }
 
   /**
-   * @name                      _destroy
+   * @name                      destroy
    * @type                      Function
    *
    * Destroying the SEventEmitter instance by unregister all the callbacks, etc...
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _destroy() {
+  destroy() {
     // destroying all the callbacks stacks registered
     this._eventsStacks = {};
   }

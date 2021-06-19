@@ -4,18 +4,20 @@
 @sugar.init;
 
 @sugar.icon.classes(
-  fa-user:user
-  fa-heart:heart
-  fa-fire:fire
-  fa-copy:copy
-  fa-box-open:box
-  fa-info:info
-  fa-chalkboard-teacher:example
-  fa-list-ul:list-ul
-  fa-cogs:setting
-  fa-th:return
-  fa-search:search
-  fa-radiation:nothing
+  fa:user:user
+  fa:heart:heart
+  fa:fire:fire
+  fa:copy:copy
+  fa:box-open:box
+  fa:info:info
+  fa:chalkboard-teacher:example
+  fa:list-ul:list-ul
+  fa:cogs:setting
+  fa:th:return
+  fa:search:search
+  fa:radiation:nothing
+  fab:vuejs:vuejs
+  fs:src/icons/vuejs.svg:vue
 );
 
 @sugar.platform.classes;

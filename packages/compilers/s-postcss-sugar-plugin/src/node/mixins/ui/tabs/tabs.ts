@@ -14,10 +14,15 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
       type: 'Boolean',
       default: false
     },
+    direction: {
+      type: 'String',
+      values: ['vertical','horizontal'],
+      default : 'horizontal'
+    },
     scope: {
       type: 'Array<String>',
-      values: ['bare','lnf','grow','style'],
-      default: ['bare','lnf','grow','style']
+      values: ['bare','lnf','grow','style','direction'],
+      default: ['bare','lnf','grow','style','direction']
     }
   };
 }
@@ -25,6 +30,7 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
 export interface IPostcssSugarPluginUiTabParams {
   grow: boolean;
   style: 'default' | 'gradient';
+  direction: 'horizontal' | 'vertical';
   scope: string[];
 }
 
@@ -42,11 +48,10 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiTabParams = {
       style: 'default',
       grow: false,
-      scope: ['bare','lnf','grow','style'],
+      direction: 'horizontal',
+      scope: ['bare','lnf','grow','style','direction'],
       ...params
     };
-
-    console.log(finalParams);
 
   const vars: string[] = [];
 
@@ -113,13 +118,30 @@ export default function ({
       @sugar.scope.lnf {
         & > dt,
         & > li,
-        & > div {
+        & > div,
+        & > * {
           @sugar.state.hover {
             @sugar.gradient.linear($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg);
           }
           @sugar.state.active {
             @sugar.gradient.linear($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg);
           }          
+        }
+      }
+    `);
+  }
+
+  if (finalParams.direction === 'vertical' && finalParams.scope.indexOf('direction') !== -1) {
+    vars.push(`
+      @sugar.scope.bare {
+        display: block;
+
+        & > dt,
+        & > li,
+        & > div,
+        & > * {
+          display: block;
+          text-align: inherit;
         }
       }
     `);

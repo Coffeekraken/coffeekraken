@@ -1,15 +1,17 @@
 #homepage-welcome {
   /* @sugar.gradient (sugar.color(complementary, --darken 45 --desaturate 50), sugar.color(neutral, background), $type: radial, $x: 50%, $y: 100%); */
-  height: 70vh;
-  min-height: 600px;
+  /* height: 70vh;
+  min-height: 600px; */
   position: relative;
   z-index: 10;
 
   .__kraken {
     position: absolute;
+    bottom: calc(-16% + 3px);
+    /* position: absolute;
     bottom: 0; left: 100%;
     width: 800px;
-    transform: translate(-12%, 24%);
+    transform: translate(-12%, 24%); */
   }
 
   .__bg {
@@ -18,6 +20,7 @@
     position: absolute;
     top: 0; left: 0;
     opacity: 0.2;
+    z-index: -1;
 
     @sugar.gradient.linear(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
 
@@ -42,10 +45,11 @@
   .__illustration {
     position: absolute;
     @sugar.align.abs (center);
+    transform: translate(-50%, -60%) scale(1.5);
   }
 
   .__content {
-    @sugar.align.abs (center);
-    margin-left: -100px;
+    /* @sugar.align.abs (center);
+    margin-left: -100px; */
   }
 }

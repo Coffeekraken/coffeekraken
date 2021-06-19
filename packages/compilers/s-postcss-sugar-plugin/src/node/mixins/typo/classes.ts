@@ -29,7 +29,7 @@ export default function ({
 
   Object.keys(typosObj).forEach((typoName) => {
     const typoObj = typosObj[typoName];
-    const cls = `s-${typoName}`;
+    const cls = `s-typo--${typoName}`;
 
     const css = __jsObjectToCssProperties(typoObj, {
       exclude: [':rhythm-vertical']

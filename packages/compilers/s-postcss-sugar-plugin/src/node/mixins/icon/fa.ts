@@ -29,7 +29,7 @@ export interface IPostcssSugarPluginIconFaParams {
 
 export { postcssSugarPluginIconFaInterface as interface };
 
-let _isFaInitialised = false;
+const _isFaInitialised = false;
 
 export default function ({
   params,
@@ -46,12 +46,22 @@ export default function ({
     ...params
   };
 
+  if (finalParams.style === 'fa') finalParams.style = 'fas';
+
   const prefixes = {
     solid: 'fas',
     regular: 'far',
     light: 'fal',
     duotone: 'fad',
     brand: 'fab'
+  }
+
+  const fontNames = {
+    fas: 'Free',
+    far: 'Free',
+    fal: 'Free',
+    fad: 'Free',
+    fab: 'Brands'
   }
 
   // register icons if first call
@@ -62,8 +72,10 @@ export default function ({
     `);
   }
 
+  const prefix = prefixes[finalParams.style] ?? finalParams.style;
+
   const iconDef = __fa.findIconDefinition({
-      prefix: prefixes[finalParams.style],
+      prefix,
       // @ts-ignore
       iconName: finalParams.icon
   });
@@ -73,18 +85,17 @@ export default function ({
     return;
   }
 
+  if (finalParams.style === 'solid' || finalParams.style === 'fas') finalParams.style = 'free';
+
   const vars: string[] = [];
 
   const fontWeight = {
-      free: 900,
-      solid: 900,
-      regular: 400,
-      light: 300,
-      duotone: 900,
-      brands: 400
+      fas: 900,
+      far: 400,
+      fal: 300,
+      fad: 900,
+      fab: 400
   };
-
-  if (finalParams.style === 'solid') finalParams.style = 'free';
 
   vars.push(`
     -webkit-font-smoothing: antialiased;
@@ -93,8 +104,8 @@ export default function ({
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-    font-family: "Font Awesome 5 ${__upperFirst(finalParams.style)}";
-    font-weight: ${fontWeight[finalParams.style]};
+    font-family: "Font Awesome 5 ${__upperFirst(fontNames[prefix])}";
+    font-weight: ${fontWeight[prefix]};
     
 
     &:before {

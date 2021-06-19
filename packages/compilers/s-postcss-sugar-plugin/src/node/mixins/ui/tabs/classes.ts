@@ -80,5 +80,23 @@ export default function ({
     }
   `);
 
+    vars.push(`/**
+        * @name           s-tabs--vertical
+        * @namespace      sugar.css.ui.tabs
+        * @type           CssClass
+        * 
+        * This class represent a "<yellow>vertical</yellow>" tabs
+        * 
+        * @example        html
+        * <div class="s-tabs--vertical">
+        *    <div class="active">An active tab</div>
+        *    <div>A tab</div>
+        * </div>
+      */
+    .s-tabs--vertical {
+      @sugar.ui.tabs($direction: vertical, $scope: direction);
+    }
+  `);
+
   replaceWith(vars);
 }

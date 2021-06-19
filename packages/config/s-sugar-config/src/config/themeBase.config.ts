@@ -1391,7 +1391,7 @@ export default {
     typo: {
       h1: {
         'font-family': 'title',
-        'font-size': 80,
+        'font-size': 100,
         'line-height': 1,
         'max-width': '55ch',
         ':rhythm-vertical': {
@@ -1400,7 +1400,7 @@ export default {
       },
       h2: {
         'font-family': 'title',
-        'font-size': 70,
+        'font-size': 90,
         'line-height': 1,
         'max-width': '55ch',
         ':rhythm-vertical': {
@@ -1409,7 +1409,7 @@ export default {
       },
       h3: {
         'font-family': 'title',
-        'font-size': 60,
+        'font-size': 80,
         'line-height': 1,
         'max-width': '55ch',
         ':rhythm-vertical': {
@@ -1418,7 +1418,7 @@ export default {
       },
       h4: {
         'font-family': 'title',
-        'font-size': 50,
+        'font-size': 70,
         'line-height': 1,
         'max-width': '55ch',
         ':rhythm-vertical': {
@@ -1427,7 +1427,7 @@ export default {
       },
       h5: {
         'font-family': 'title',
-        'font-size': 40,
+        'font-size': 60,
         'line-height': 1,
         'max-width': '55ch',
         ':rhythm-vertical': {
@@ -1436,7 +1436,7 @@ export default {
       },
       h6: {
         'font-family': 'title',
-        'font-size': 30,
+        'font-size': 50,
         'line-height': 1,
         'max-width': '55ch',
         ':rhythm-vertical': {
@@ -1452,7 +1452,7 @@ export default {
           'margin-bottom': 50
         }
       },
-      'p--lead': {
+      'p-lead': {
         'font-family': 'default',
         'font-size': 60,
         'line-height': 1.5,
@@ -1460,6 +1460,9 @@ export default {
         ':rhythm-vertical': {
           'margin-bottom': 50
         }
+      },
+      a: {
+        'color': 'accent'
       },
       quote: {
         'font-family': 'quote'

@@ -29,6 +29,7 @@
                     <p class="s-p s-pd:30"><i class="s-icon:search s-color:accent"></i>&nbsp;&nbsp;Searching. Please wait...</p>
                 </template>
                 <template id="item">
+                    <div class="__bg"></div>
                     <div class="s-flex">
                         <div style="width:40%" class="s-pd:50">
                             <div class="s-font:40 s-mb:30">

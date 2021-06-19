@@ -1,17 +1,34 @@
 <section id="homepage-welcome">
-    
-    <div class="__bg"></div>
-    <s-inline-svg class="__illustration" src="/src/img/header-illustration.svg"></s-inline-svg>
 
-    <div class="__content">
-        <img class="__kraken" src="/src/img/kraken.png" />
-        <h1 class="s-font:100 s-bold s-mb:100">The toolkit<br/>as good as a <span class="s-color:complementary">coffee</span>...<br/>Delivered by<br />a <span class="s-color:accent">kraken</span>!!!</h1>
-        <a class="s-btn:accent s-mr:30" href="/#get-started" title="Get started!">
-            Get started!
-        </a>
-        <a class="s-btn:complementary" href="/#join-us" title="Join us!">
-            Join us on discord
-        </a>
+    <div class="__bg"></div>
+
+    <div class="s-container s-position:relative">
+
+        <s-inline-svg class="__illustration" src="/src/img/header-illustration.svg"></s-inline-svg>
+
+        <div class="s-grid:12">
+
+            <div class="s-pb:100 s-pt:60">
+                <h1 class="s-typo:h1:bold s-mb:50">The toolkit<br/>as good as a <span class="s-color:complementary">coffee</span>...<br/>Delivered by<br /><span class="s-color:accent">Kraken</span> Pop!!!</h1>
+                <s-code-example class="s-mb:50">
+                    <template lang="bash" default-style>
+npm i @coffeekraken/sugar -g
+sugar frontstack.init my-cool-project
+                    </template>
+                </s-code-example>
+                <a class="s-btn:accent s-mr:30" href="/#get-started" title="Get started!">
+                    Get started!
+                </a>
+                <a class="s-btn:complementary" href="/#join-us" title="Join us!">
+                    Join us on discord
+                </a>
+            </div>
+            <div class="s-position:relative">
+                <img class="__kraken" src="/src/img/kraken.png" />
+            </div>
+
+        </div>
+
     </div>
 
 </section>

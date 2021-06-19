@@ -26,6 +26,7 @@
             transition: all .2s ease-in-out 0s;
             margin-bottom: 0;
             background: none;
+            width: 100%;
 
             @sugar.scrollbar(accent, 2px);
         }
@@ -33,16 +34,52 @@
             @sugar.depth(20);
             border-radius: 0 !important;
             padding: 0 !important;
+            background: sugar.color(ui, background);
+
+            .__bg {
+                display: block;
+                width: 100%; height: 100%;
+                position: absolute;
+                top: 0; left: 0;
+                opacity: 0.1;
+
+                @sugar.gradient.linear(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
+
+                &:before {
+                    content:'';
+                    display: block;
+                    width: 100%; height: 100%;
+                    position: absolute;
+                    top: 0; left: 0;
+
+                    @sugar.gradient.linear(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
+                
+                }
+            }
 
             .__code {
-                @sugar.gradient (sugar.color(accent, gradientEnd), sugar.color(accent, gradientStart), $angle: 90);
-                    /* background: sugar.color(complementary); */
+                position: relative;
+                
+                &:before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    @sugar.gradient (sugar.color(accent), sugar.color(accent, --saturate 20 --darken 10), $angle: 90);
+                    clip-path: polygon(60% 0%, 100% 0, 100% 100%, 40% 100%);
+                }
             }
             &:nth-child(odd) {
 
                 .__code {
-                    @sugar.gradient (sugar.color(complementary, gradientStart), sugar.color(complementary, --lighten 10), $angle: 90);
-                    /* background: sugar.color(accent); */
+
+                    &:before {
+                        @sugar.gradient (sugar.color(complementary, gradientStart), sugar.color(complementary, --lighten 10), $angle: 90);
+                        clip-path: polygon(40% 0%, 100% 0, 100% 100%, 60% 100%);
+                    }
                 }
             }
 
@@ -72,7 +109,7 @@
         .s-filtrable-input__list {
             width: 100%;
             opacity: 1;
-            transition: all .2s ease-in-out .2s;
+            transition: all .2s ease-in-out .5s;
 
             
         }

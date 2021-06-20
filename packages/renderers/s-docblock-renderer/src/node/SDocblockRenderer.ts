@@ -1,28 +1,25 @@
-import __path from 'path';
 import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SPromise from '@coffeekraken/s-promise';
-import __handlebars from 'handlebars/dist/handlebars';
-import __promisedHandlebars from 'promised-handlebars';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __glob from 'glob';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-
-import __SDocblockRendererSettingsInterface from './interface/SDocblockRendererSettingsInterface';
 import SDocblock, {
   ISDocblock,
   ISDocblockBlock
 } from '@coffeekraken/s-docblock';
-
+import __SPromise from '@coffeekraken/s-promise';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __handlebars from 'handlebars/dist/handlebars';
+import __promisedHandlebars from 'promised-handlebars';
 import classBlock from './default/blocks/class';
 import defaultBlock from './default/blocks/default';
 import functionBlock from './default/blocks/function';
-
 import concatHelper from './default/helpers/concat';
-
 import classLayout from './default/layouts/class';
 import defaultLayout from './default/layouts/default';
 import functionLayout from './default/layouts/function';
+import __SDocblockRendererSettingsInterface from './interface/SDocblockRendererSettingsInterface';
+
+
+
+
 
 /**
  * @name            SDocblockRenderer

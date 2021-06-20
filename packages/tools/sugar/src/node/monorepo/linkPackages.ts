@@ -6,7 +6,7 @@ import _findPackages from './findPackages';
 import _childProcess from 'child_process';
 import __fs from 'fs';
 import __chalk from 'chalk';
-import __packageRoot from '../path/packageRoot';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name            linkPackages
@@ -64,7 +64,7 @@ export default function linkPackages(
       );
     }
 
-    const topPackagePath = `${__packageRoot(process.cwd(), true)}`;
+    const topPackagePath = `${__packageRootDir(process.cwd(), true)}`;
     const topPackageJson = require(`${topPackagePath}/package.json`); // eslint-disable-line
 
     if (!params.individual) {

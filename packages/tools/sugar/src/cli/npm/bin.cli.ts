@@ -3,7 +3,7 @@
 import _parseArgs from '../../node/cli/parseArgs';
 import _SNpmBinCliInterface from './interface/SNpmBinCliInterface';
 import _childProcess from 'child_process';
-import __packageRoot from '../../node/path/packageRoot';
+import __packageRootDir from '../../node/path/packageRootDir';
 import _glob from 'glob';
 import _fs from 'fs';
 import _path from 'path';
@@ -19,7 +19,7 @@ export default async function bin(stringArgs = '') {
 
   let packagePath;
   if (!argsObj.package) {
-    packagePath = __packageRoot();
+    packagePath = __packageRootDir();
     if (!_fs.existsSync(`${packagePath}/package.json`)) {
       throw "Sorry but you're not in any package folder to take the bin from...";
     }

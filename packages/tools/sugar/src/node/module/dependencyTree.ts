@@ -3,7 +3,7 @@ import __SCache from '@coffeekraken/s-cache';
 import __dependencyTree from 'dependency-tree';
 import __deepMerge from '../../shared/object/deepMerge';
 import __fs from 'fs';
-import __packageRoot from '../path/packageRoot';
+import __packageRootDir from '../path/packageRootDir';
 import __md5 from '../../shared/crypt/md5';
 import __folderPath from '../fs/folderPath';
 import __path from 'path';
@@ -63,7 +63,7 @@ export default function dependencyTree(
       settings || {}
     );
 
-    const logPath = __path.relative(__packageRoot(), filePath);
+    const logPath = __path.relative(__packageRootDir(), filePath);
 
     // check filename existence
     if (!__fs.existsSync(filePath)) {
@@ -77,7 +77,7 @@ export default function dependencyTree(
       fileMtimeMs = __fs.statSync(filePath).mtimeMs;
 
     // package.json mtimeMs
-    const packageJsonPath = `${__packageRoot()}/package.json`;
+    const packageJsonPath = `${__packageRootDir()}/package.json`;
     if (__fs.existsSync(packageJsonPath)) {
       packageJsonMtimeMs = __fs.statSync(packageJsonPath).mtimeMs;
     }

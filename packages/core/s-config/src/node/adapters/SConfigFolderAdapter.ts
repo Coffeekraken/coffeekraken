@@ -7,7 +7,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __diff from '@coffeekraken/sugar/shared/object/diff';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
 import __SConfig from '../../shared/SConfig';
@@ -78,9 +78,9 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
               default: [__path.resolve(__dirname, '../../config')],
               module: [],
               extends: [],
-              repo: [`${__packageRoot(process.cwd(), true)}/[folderName]`],
-              package: [`${__packageRoot(process.cwd())}/[folderName]`],
-              user: [`${__packageRoot(process.cwd())}/.local/[folderName]`]
+              repo: [`${__packageRootDir(process.cwd(), true)}/[folderName]`],
+              package: [`${__packageRootDir(process.cwd())}/[folderName]`],
+              user: [`${__packageRootDir(process.cwd())}/.local/[folderName]`]
             },
             savingScope: 'user'
           }

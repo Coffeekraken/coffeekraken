@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __fs from 'fs';
 import __standardizeJson from '@coffeekraken/sugar/shared/npm/utils/standardizeJson';
 import __SBench from '@coffeekraken/s-bench';
@@ -34,7 +34,7 @@ import __SBench from '@coffeekraken/s-bench';
  */
 function packageJsonMiddleware(settings = {}) {
   return function (req, res, next) {
-    const packageJsonPath = `${__packageRoot()}/package.json`;
+    const packageJsonPath = `${__packageRootDir()}/package.json`;
     let pkg;
     if (!__fs.existsSync(packageJsonPath)) {
     } else {

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-const __packageRoot = require('../../../path/packageRoot');
+const __packageRootDir = require('../../../path/packageRootDir');
 const __SPromise = require('../../../promise/SPromise');
 const __SDocMap = require('../../../doc/SDocMap');
 const __SDocblock = require('../../../docblock/SDocblock');

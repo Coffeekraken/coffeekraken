@@ -7,7 +7,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SDuration from '@coffeekraken/s-duration';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __path from 'path';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 
 export default function start(stringArgs = '') {
   const pro = __SProcess.from(
@@ -31,7 +31,7 @@ export default function start(stringArgs = '') {
           list.forEach((path) => {
             emit('log', {
               value: `<yellow>[file]</yellow> <cyan>${__path.relative(
-                __packageRoot(),
+                __packageRootDir(),
                 path
               )}</cyan>`
             });

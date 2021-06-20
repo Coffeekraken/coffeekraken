@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 export default {
@@ -73,7 +73,7 @@ export default {
        * @name            default
        * @namespace       config.notification.types.default
        * @type            String
-       * @default         `${__packageRoot(__dirname)}/src/data/notifications/ck_default.png`
+       * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_default.png`
        *
        * Specify the "default" default icon to use
        *
@@ -82,7 +82,7 @@ export default {
        * @since           2.0.0
        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      icon: `${__packageRoot(__dirname)}/src/data/notifications/ck_default.png`
+      icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_default.png`
     },
 
     start: {
@@ -116,14 +116,14 @@ export default {
        * @name            start
        * @namespace       config.notification.types.start
        * @type            String
-       * @default         `${__packageRoot(__dirname)}/src/data/notifications/ck_start.png`
+       * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_start.png`
        *
        * Specify the "start" default icon to use
        *
        * @since           2.0.0
        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      icon: `${__packageRoot(__dirname)}/src/data/notifications/ck_start.png`
+      icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_start.png`
     },
 
     success: {
@@ -157,14 +157,14 @@ export default {
        * @name            icon
        * @namespace       config.notification.types.success
        * @type            String
-       * @default         `${__packageRoot(__dirname)}/src/data/notifications/ck_success.png`
+       * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_success.png`
        *
        * Specify the "success" default icon to use
        *
        * @since           2.0.0
        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      icon: `${__packageRoot(__dirname)}/src/data/notifications/ck_success.png`
+      icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_success.png`
     },
 
     warning: {
@@ -198,7 +198,7 @@ export default {
        * @name            icon
        * @namespace       config.notification.types.warning
        * @type            String
-       * @default         `${__packageRoot(__dirname)}/src/data/notifications/ck_warning.png`
+       * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_warning.png`
        *
        * Specify the "warning" default icon to use
        *
@@ -207,7 +207,7 @@ export default {
        * @since           2.0.0
        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      icon: `${__packageRoot(__dirname)}/src/data/notifications/ck_warning.png`
+      icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_warning.png`
     },
 
     error: {
@@ -241,14 +241,14 @@ export default {
        * @name            icon
        * @namespace       config.notification.types.error
        * @type            String
-       * @default         `${__packageRoot(__dirname)}/src/data/notifications/ck_error.png`
+       * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_error.png`
        *
        * Specify the "error" default icon to use
        *
        * @since           2.0.0
        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      icon: `${__packageRoot(__dirname)}/src/data/notifications/ck_error.png`
+      icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_error.png`
     }
   }
 };

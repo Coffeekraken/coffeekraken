@@ -4,7 +4,7 @@ import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
@@ -83,7 +83,7 @@ export default class SFrontspec extends __SPromise {
   read() {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
 
-      const frontspecPath = `${__packageRoot()}/frontspec.json`;
+      const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
       let frontspecJson = {};
       try {
@@ -126,7 +126,7 @@ export default class SFrontspec extends __SPromise {
         if (assetObj.env && !__SEnv.is(assetObj.env)) return;
 
         const filePath = __path.resolve(
-          __packageRoot(),
+          __packageRootDir(),
           assetObj.path ?? assetObj.src ?? assetObj.href
         );
 

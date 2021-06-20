@@ -1,0 +1,44 @@
+// @ts-nocheck
+
+import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __fs from 'fs-extra';
+/**
+ * @name                            distFontsDir
+ * @namespace            node.path
+ * @type                            Function
+ * @stable
+ *
+ * Return the package dist directory path
+ *
+ * @param       {IDistFontsDirSettings}       [settings={}]   Some settings to configure your temp directory process
+ * @return                {String}                      The real os temp directory path
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example             js
+ * import distFontsDir from '@coffeekraken/node/fs/distFontsDir';
+ * distFontsDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ *
+ * @since         2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+export interface IDistFontsDirSettings {}
+
+export default interface IDistFontsDir {
+  (settings?: IDistFontsDirSettings): string;
+}
+
+export default function (settings: IDistFontsDirSettings = {}) {
+  settings = {
+    ...settings
+  };
+  const distFontsDir = __SugarConfig.get('storage.dist.fontsDir');
+  if (distFontsDir !== undefined) {
+    __fs.ensureDirSync(distFontsDir);
+    return distFontsDir;
+  }
+  return undefined;
+}

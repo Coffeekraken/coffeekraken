@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 
 export default {
   /**
@@ -20,7 +20,7 @@ export default {
    * @name          inputDir
    * @namespace     config.build
    * @type          String
-   * @default       `${__packageRoot()}/src`
+   * @default       `${__packageRootDir()}/src`
    *
    * Specify the base input directory you want for your build sources.
    * This is used as base for all the build process like js, scss, etc...
@@ -28,13 +28,13 @@ export default {
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  inputDir: `${__packageRoot()}/src`,
+  inputDir: `${__packageRootDir()}/src`,
 
   /**
    * @name          outputDir
    * @namespace     config.build
    * @type          String
-   * @default       `${__packageRoot()}/dist`
+   * @default       `${__packageRootDir()}/dist`
    *
    * Specify the base output directory you want for your build.
    * This is used as base for all the build process like js, scss, etc...
@@ -42,7 +42,7 @@ export default {
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  outputDir: `${__packageRoot()}/dist`,
+  outputDir: `${__packageRootDir()}/dist`,
 
   fonticons: {
     /**
@@ -121,14 +121,14 @@ export default {
      * @name            rootDir
      * @namespace       config.build.js
      * @type            String
-     * @default         __packageRoot()
+     * @default         __packageRootDir()
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: __packageRoot(),
+    rootDir: __packageRootDir(),
 
     /**
      * @name              map
@@ -324,7 +324,7 @@ export default {
      * @name         input
      * @namespace     config.build.docMap
      * @type          String
-     * @default       ${__packageRoot()/src/*\*\/\*}
+     * @default       ${__packageRootDir()/src/*\*\/\*}
      *
      * Specify the rootDir where to start for the docMap generation
      *
@@ -333,7 +333,7 @@ export default {
      */
     input: [
       // `[config.build.inputDir]/**/*:@namespace`,
-      `${__packageRoot()}/README.md`
+      `${__packageRootDir()}/README.md`
     ],
 
     /**
@@ -348,8 +348,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     externalDocMaps: [
-      `${__packageRoot()}/node_modules/*/docMap.json`,
-      `${__packageRoot()}/node_modules/*/*/docMap.json`
+      `${__packageRootDir()}/node_modules/*/docMap.json`,
+      `${__packageRootDir()}/node_modules/*/*/docMap.json`
     ],
 
     /**
@@ -479,12 +479,12 @@ export default {
         search: '*.frontspec.{json,js}'
       },
       nodeModules: {
-        rootDir: `${__packageRoot()}/node_modules`,
+        rootDir: `${__packageRootDir()}/node_modules`,
         dirDepth: 3,
         search: 'frontspec.{json,js}'
       },
       sugar: {
-        rootDir: `${__packageRoot()}/node_modules/@coffeekraken/sugar`,
+        rootDir: `${__packageRootDir()}/node_modules/@coffeekraken/sugar`,
         dirDepth: 3,
         search: 'frontspec.{json,js}'
       }

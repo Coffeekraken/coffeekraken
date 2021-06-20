@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __packageRoot from '../path/packageRoot';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name          rootPath
@@ -26,6 +26,6 @@ import __packageRoot from '../path/packageRoot';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function rootPath(from = process.cwd(), highest = false) {
-  return __packageRoot(from, highest);
+  return __packageRootDir(from, highest);
 }
 export default rootPath;

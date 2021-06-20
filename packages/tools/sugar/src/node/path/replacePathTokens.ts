@@ -1,9 +1,25 @@
-import __tmpDir from './tmpDir';
-import __localDir from './localDir';
-import __cacheDir from './cacheDir';
-import __rootDir from './rootDir';
-import __srcDir from './srcDir';
-import __distDir from './distDir';
+import __packageTmpDir from './packageTmpDir';
+import __packageLocalDir from './packageLocalDir';
+import __packageCacheDir from './packageCacheDir';
+import __packageRootDir from './packageRootDir';
+import __srcRootDir from './srcRootDir';
+import __distRootDir from './distRootDir';
+
+import __srcJsDir from './srcJsDir';
+import __srcCssDir from './srcCssDir';
+import __srcFontsDir from './srcFontsDir';
+import __srcIconsDir from './srcIconsDir';
+import __srcImgDir from './srcImgDir';
+import __srcNodeDir from './srcNodeDir';
+import __srcViewsDir from './srcViewsDir';
+
+import __distJsDir from './distJsDir';
+import __distCssDir from './distCssDir';
+import __distFontsDir from './distFontsDir';
+import __distIconsDir from './distIconsDir';
+import __distImgDir from './distImgDir';
+import __distNodeDir from './distNodeDir';
+import __distViewsDir from './distViewsDir';
 
 /**
  * @name            replacePathTokens
@@ -11,7 +27,7 @@ import __distDir from './distDir';
  * @type            Function
  *
  * This function take as parameter either a path string, or an array of paths
- * and return the according value type with the tokens (%tmpDir, %cacheDir, etc...) replaced
+ * and return the according value type with the tokens (%tmpDir, %packageCacheDir, etc...) replaced
  *
  * @param       {String|Array<String>}          paths           The path(s) you want to process
  * @param       {IReplacePathTokensSettings}            [settings={}]       Some settings to configure your tokens replacements
@@ -19,42 +35,87 @@ import __distDir from './distDir';
  *
  * @example         js
  * import replacePathTokens from '@coffeekraken/sugar/node/path/replacePathTokens';
- * replacePathTokens('%cacheDir/something.txt'); // => /path/to/cache/directory/something.txt'
+ * replacePathTokens('%packageCacheDir/something.txt'); // => /path/to/cache/directory/something.txt'
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface IReplacePathTokensSettings {
-  tmpDir: boolean;
-  localDir: boolean;
-  cacheDir: boolean;
-  rootDir: boolean;
-  srcDir: boolean;
-  distDir: boolean;
+  packageTmpDir: boolean;
+  packageLocalDir: boolean;
+  packageCacheDir: boolean;
+  packageRootDir: boolean;
+  srcRootDir: boolean;
+  distRootDir: boolean;
+  srcJsDir: boolean;
+  srcCssDir: boolean;
+  srcFontsDir: boolean;
+  srcIconsDir: boolean;
+  srcImgDir: boolean;
+  srcNodeDir: boolean;
+  srcViewsDir: boolean;
+  distJsDir: boolean;
+  distCssDir: boolean;
+  distFontsDir: boolean;
+  distIconsDir: boolean;
+  distImgDir: boolean;
+  distNodeDir: boolean;
+  distViewsDir: boolean;
 }
 export default function replacePathTokens(
   paths,
   settings?: Partial<IReplacePathTokensSettings>
 ): string | string[] {
   const set = <IReplacePathTokensSettings>{
-    tmpDir: true,
-    localDir: true,
-    cacheDir: true,
-    rootDir: true,
-    srcDir: true,
-    distDir: true,
+    packageTmpDir: true,
+    packageLocalDir: true,
+    packageCacheDir: true,
+    packageRootDir: true,
+    srcRootDir: true,
+    distRootDir: true,
+    srcJsDir: true,
+    srcCssDir: true,
+    srcFontsDir: true,
+    srcIconsDir: true,
+    srcImgDir: true,
+    srcNodeDir: true,
+    srcViewsDir: true,
+    distJsDir: true,
+    distCssDir: true,
+    distFontsDir: true,
+    distIconsDir: true,
+    distImgDir: true,
+    distNodeDir: true,
+    distViewsDir: true,
     ...settings
   };
 
   const isArray = Array.isArray(paths);
   if (!isArray) paths = [paths];
   const finalPaths = paths.map((path) => {
-    if (set.tmpDir) path = path.replace('%tmpDir', __tmpDir());
-    if (set.localDir) path = path.replace('%localDir', __localDir());
-    if (set.cacheDir) path = path.replace('%cacheDir', __cacheDir());
-    if (set.rootDir) path = path.replace('%rootDir', __rootDir());
-    if (set.srcDir) path = path.replace('%srcDir', __srcDir());
-    if (set.distDir) path = path.replace('%distDir', __distDir());
+    if (set.packageTmpDir) path = path.replace('%packageTmpDir', __packageTmpDir());
+    if (set.packageLocalDir) path = path.replace('%packageLocalDir', __packageLocalDir());
+    if (set.packageCacheDir) path = path.replace('%packageCacheDir', __packageCacheDir());
+    if (set.packageRootDir) path = path.replace('%packageRootDir', __packageRootDir());
+    if (set.srcRootDir) path = path.replace('%srcRootDir', __srcRootDir());
+    if (set.distRootDir) path = path.replace('%distRootDir', __distRootDir());
+    
+    if (set.srcJsDir) path = path.replace('%srcJsDir', __srcJsDir());
+    if (set.srcCssDir) path = path.replace('%srcCssDir', __srcCssDir());
+    if (set.srcFontsDir) path = path.replace('%srcFontsDir', __srcFontsDir());
+    if (set.srcIconsDir) path = path.replace('%srcIconsDir', __srcIconsDir());
+    if (set.srcImgDir) path = path.replace('%srcImgDir', __srcImgDir());
+    if (set.srcNodeDir) path = path.replace('%srcNodeDir', __srcNodeDir());
+    if (set.srcViewsDir) path = path.replace('%srcViewsDir', __srcViewsDir());
+
+    if (set.distJsDir) path = path.replace('%distJsDir', __distJsDir());
+    if (set.distCssDir) path = path.replace('%distCssDir', __distCssDir());
+    if (set.distFontsDir) path = path.replace('%distFontsDir', __distFontsDir());
+    if (set.distIconsDir) path = path.replace('%distIconsDir', __distIconsDir());
+    if (set.distImgDir) path = path.replace('%distImgDir', __distImgDir());
+    if (set.distNodeDir) path = path.replace('%distNodeDir', __distNodeDir());
+    if (set.distViewsDir) path = path.replace('%distViewsDir', __distViewsDir());
+    
     path = path.replace(/\/\//gm, '/');
     return path;
   });

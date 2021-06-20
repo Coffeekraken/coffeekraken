@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "sugar-fonticon";
+    src: url("./sugar-fonticon.eot?d7090342b2d586c26868bdb61257d4a2#iefix") format("embedded-opentype"),
+url("./sugar-fonticon.woff2?d7090342b2d586c26868bdb61257d4a2") format("woff2"),
+url("./sugar-fonticon.woff?d7090342b2d586c26868bdb61257d4a2") format("woff");
+}
+
+.s-icon--vue:before {
+    font-family: sugar-fonticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.s-icon--vue:before {
+    content: "\f101";
+}

@@ -18,20 +18,20 @@ export default {
      * @name              inDir
      * @namespace         config.js.compile
      * @type              String
-     * @default           [config.storage.srcDir]/js
+     * @default           [config.storage.src.rootDir]/js
      *
      * Specify the destination folder from where to search for js files to compile
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    inDir: '[config.storage.srcDir]/js',
+    inDir: '[config.storage.src.rootDir]/js',
 
     /**
      * @name              outDir
      * @namespace         config.js.compile
      * @type              String
-     * @default           [config.storage.distDir]/js
+     * @default           [config.storage.dist.rootDir]/js
      *
      * Specify the destination folder where to put the compiled files in.
      * If undefined, the files will be saved alongside the source one.
@@ -39,20 +39,20 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outDir: '[config.storage.distDir]/js',
+    outDir: '[config.storage.dist.rootDir]/js',
 
     /**
      * @name            rootDir
      * @namespace       config.js.compile
      * @type            String
-     * @default         [config.storage.rootDir]
+     * @default         [config.storage.package.rootDir]
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.rootDir]',
+    rootDir: '[config.storage.package.rootDir]',
 
     /**
      * @name        format

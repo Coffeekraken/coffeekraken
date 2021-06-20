@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __SEnv from '@coffeekraken/s-env';
 
 /**
@@ -17,7 +17,7 @@ export default function sVitePluginSugar(settings: any = {}) {
   let areEnvVarsInjected = false;
   let config;
 
-  const packageRoot = __packageRoot();
+  const packageRoot = __packageRootDir();
 
   function _injectEnvVars(src, id) {
       if (areEnvVarsInjected) return src;

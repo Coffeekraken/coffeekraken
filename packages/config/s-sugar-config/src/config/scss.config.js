@@ -21,7 +21,7 @@ export default {
          * @name              input
          * @namespace         config.scss.compile
          * @type              String
-         * @default           [config.storage.srcDir]/scss/** /*.scss
+         * @default           [config.storage.src.rootDir]/scss/** /*.scss
          *
          * Specify the root folder (or file) to check for .scss|sass files to build.
          * Glob patterns can be used
@@ -29,36 +29,36 @@ export default {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        input: '[config.storage.srcDir]/{css,scss}/**/*.scss',
+        input: '[config.storage.src.rootDir]/{css,scss}/**/*.scss',
         /**
          * @name              outputDir
          * @namespace         config.scss.compile
          * @type              String
-         * @default           [config.storage.distDir]/css
+         * @default           [config.storage.dist.rootDir]/css
          *
          * Specify the destination folder where to put the compiled files in
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        outputDir: `[config.storage.distDir]/css`,
+        outputDir: `[config.storage.dist.rootDir]/css`,
         /**
          * @name            rootDir
          * @namespace       config.scss.compile
          * @type            String
-         * @default         [config.storage.srcDir]/css
+         * @default         [config.storage.src.rootDir]/css
          *
          * Specify the root directory from where the compiler will try to resolve modules
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        rootDir: '[config.storage.srcDir]/css',
+        rootDir: '[config.storage.src.rootDir]/css',
         /**
          * @name              includePaths
          * @namespace         config.scss.compile
          * @type              Array<String>
-         * @default         [`[config.storage.rootDir]`, `[config.storage.rootDir]/node_modules`]
+         * @default         [`[config.storage.package.rootDir]`, `[config.storage.package.rootDir]/node_modules`]
          *
          * Specify the folders you want to use as resolve imports and uses sources
          *
@@ -66,8 +66,8 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         includePaths: [
-            '[config.storage.rootDir]',
-            '[config.storage.rootDir]/node_modules'
+            '[config.storage.package.rootDir]',
+            '[config.storage.package.rootDir]/node_modules'
         ],
         /**
          * @name              style
@@ -353,4 +353,4 @@ export default {
      */
     'border-box': true
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3NzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxrREFBa0QsQ0FBQztBQUUzRSxlQUFlO0lBQ2IsdUJBQXVCO0lBQ3ZCLE9BQU8sRUFBRSxrQkFBa0I7SUFDM0IsT0FBTyxFQUFFLGtCQUFrQjtJQUMzQixVQUFVLEVBQUUscUJBQXFCO0lBQ2pDLE1BQU0sRUFBRSxpQkFBaUI7SUFDekIsS0FBSyxFQUFFLGdCQUFnQjtJQUN2QixPQUFPLEVBQUUsa0JBQWtCO0lBQzNCLGVBQWUsRUFBRSx3QkFBd0I7SUFDekMsT0FBTyxFQUFFLGtCQUFrQjtJQUMzQixLQUFLLEVBQUUsZ0JBQWdCO0lBQ3ZCLFFBQVEsRUFBRSxtQkFBbUI7SUFDN0IsTUFBTSxFQUFFLGlCQUFpQjtJQUN6QixLQUFLLEVBQUUsZ0JBQWdCO0lBQ3ZCLDZCQUE2QjtJQUM3QixXQUFXLEVBQUUsc0JBQXNCO0lBQ25DLFVBQVUsRUFBRSxxQkFBcUI7SUFFakMsT0FBTyxFQUFFO1FBQ1A7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsOENBQThDO1FBRXJEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxTQUFTLEVBQUUsOEJBQThCO1FBRXpDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsNkJBQTZCO1FBRXRDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUU7WUFDWiwwQkFBMEI7WUFDMUIsdUNBQXVDO1NBQ3hDO1FBRUQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsVUFBVTtRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsR0FBRyxFQUFFLElBQUk7UUFFVDs7Ozs7Ozs7Ozs7V0FXRztRQUNILElBQUksRUFBRSxLQUFLO1FBRVg7Ozs7Ozs7Ozs7V0FVRztRQUNILGFBQWEsRUFBRSxJQUFJO1FBRW5COzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsSUFBSTtRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxVQUFVLEVBQUUsS0FBSztRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxTQUFTLEVBQUUsU0FBUztRQUVwQjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxlQUFlLEVBQUUsK0JBQStCO1FBRWhEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQ0osc0dBQXNHO1FBRXhHOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsV0FBVyxFQUFFO1FBRW5COzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7Ozs7Ozs7V0FlRztRQUNILElBQUksRUFBRSxFQUFFO0tBQ1Q7SUFFRCxPQUFPLEVBQUU7UUFDUCxJQUFJLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUFFLEVBQUU7U0FDaEI7S0FDRjtJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILGVBQWUsRUFBRSxDQUFDLE9BQU8sQ0FBQztJQUUxQjs7Ozs7Ozs7Ozs7T0FXRztJQUNILGVBQWUsRUFBRSxJQUFJO0lBRXJCOzs7Ozs7Ozs7O09BVUc7SUFDSCxJQUFJLEVBQUUsS0FBSztJQUVYOzs7Ozs7Ozs7O09BVUc7SUFDSCxLQUFLLEVBQUUsSUFBSTtJQUVYOzs7Ozs7Ozs7O09BVUc7SUFDSCxZQUFZLEVBQUUsSUFBSTtDQUNuQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3NzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxrREFBa0QsQ0FBQztBQUUzRSxlQUFlO0lBQ2IsdUJBQXVCO0lBQ3ZCLE9BQU8sRUFBRSxrQkFBa0I7SUFDM0IsT0FBTyxFQUFFLGtCQUFrQjtJQUMzQixVQUFVLEVBQUUscUJBQXFCO0lBQ2pDLE1BQU0sRUFBRSxpQkFBaUI7SUFDekIsS0FBSyxFQUFFLGdCQUFnQjtJQUN2QixPQUFPLEVBQUUsa0JBQWtCO0lBQzNCLGVBQWUsRUFBRSx3QkFBd0I7SUFDekMsT0FBTyxFQUFFLGtCQUFrQjtJQUMzQixLQUFLLEVBQUUsZ0JBQWdCO0lBQ3ZCLFFBQVEsRUFBRSxtQkFBbUI7SUFDN0IsTUFBTSxFQUFFLGlCQUFpQjtJQUN6QixLQUFLLEVBQUUsZ0JBQWdCO0lBQ3ZCLDZCQUE2QjtJQUM3QixXQUFXLEVBQUUsc0JBQXNCO0lBQ25DLFVBQVUsRUFBRSxxQkFBcUI7SUFFakMsT0FBTyxFQUFFO1FBQ1A7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsbURBQW1EO1FBRTFEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxTQUFTLEVBQUUsbUNBQW1DO1FBRTlDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsa0NBQWtDO1FBRTNDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUU7WUFDWixrQ0FBa0M7WUFDbEMsK0NBQStDO1NBQ2hEO1FBRUQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsVUFBVTtRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsR0FBRyxFQUFFLElBQUk7UUFFVDs7Ozs7Ozs7Ozs7V0FXRztRQUNILElBQUksRUFBRSxLQUFLO1FBRVg7Ozs7Ozs7Ozs7V0FVRztRQUNILGFBQWEsRUFBRSxJQUFJO1FBRW5COzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsSUFBSTtRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxVQUFVLEVBQUUsS0FBSztRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxTQUFTLEVBQUUsU0FBUztRQUVwQjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxlQUFlLEVBQUUsK0JBQStCO1FBRWhEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQ0osc0dBQXNHO1FBRXhHOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsV0FBVyxFQUFFO1FBRW5COzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7Ozs7Ozs7V0FlRztRQUNILElBQUksRUFBRSxFQUFFO0tBQ1Q7SUFFRCxPQUFPLEVBQUU7UUFDUCxJQUFJLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUFFLEVBQUU7U0FDaEI7S0FDRjtJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILGVBQWUsRUFBRSxDQUFDLE9BQU8sQ0FBQztJQUUxQjs7Ozs7Ozs7Ozs7T0FXRztJQUNILGVBQWUsRUFBRSxJQUFJO0lBRXJCOzs7Ozs7Ozs7O09BVUc7SUFDSCxJQUFJLEVBQUUsS0FBSztJQUVYOzs7Ozs7Ozs7O09BVUc7SUFDSCxLQUFLLEVBQUUsSUFBSTtJQUVYOzs7Ozs7Ozs7O09BVUc7SUFDSCxZQUFZLEVBQUUsSUFBSTtDQUNuQixDQUFDIn0=

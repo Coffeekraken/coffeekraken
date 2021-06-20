@@ -18,20 +18,20 @@ export default {
      * @name              inDir
      * @namespace         config.css.compile
      * @type              String
-     * @default           [config.storage.srcDir]/css
+     * @default           [config.storage.src.rootDir]/css
      *
      * Specify the destination folder from where to search for css files to compile
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    inDir: '[config.storage.srcDir]/css',
+    inDir: '[config.storage.src.rootDir]/css',
 
     /**
      * @name              outDir
      * @namespace         config.css.compile
      * @type              String
-     * @default           [config.storage.distDir]/css
+     * @default           [config.storage.dist.rootDir]/css
      *
      * Specify the destination folder where to put the compiled files in.
      * If undefined, the files will be saved alongside the source one.
@@ -39,20 +39,20 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outDir: '[config.storage.distDir]/css',
+    outDir: '[config.storage.dist.rootDir]/css',
 
     /**
      * @name            rootDir
      * @namespace       config.css.compile
      * @type            String
-     * @default         [config.storage.rootDir]
+     * @default         [config.storage.package.rootDir]
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.rootDir]',
+    rootDir: '[config.storage.package.rootDir]',
 
     /**
      * @name              bundle

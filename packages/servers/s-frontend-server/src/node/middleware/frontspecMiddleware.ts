@@ -1,14 +1,9 @@
 // @ts-nocheck
 
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __fs from 'fs';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
+import __SBench from '@coffeekraken/s-bench';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __SEnv from '@coffeekraken/s-env';
-import __SBench from '@coffeekraken/s-bench';
+import __fs from 'fs';
 
 /**
  * @name            frontspecMiddleware

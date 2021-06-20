@@ -3,7 +3,7 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
- * @name                            sugarDir
+ * @name                            sugarRootDir
  * @namespace            node.path
  * @type                            Function
  * @stable
@@ -12,33 +12,33 @@ import __fs from 'fs-extra';
  *
  * @return                {String}                      The real os temp directory path
  *
- * @setting     {String}        [scope='local']         Specify the scope in which you want your sugarDir to be returned. Can be "local" or "global"
+ * @setting     {String}        [scope='local']         Specify the scope in which you want your sugarRootDir to be returned. Can be "local" or "global"
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example             js
- * import sugarDir from '@coffeekraken/node/fs/sugarDir';
- * sugarDir(); // => '/something/node_modules/@coffeekraken/sugar'
+ * import sugarRootDir from '@coffeekraken/node/fs/sugarRootDir';
+ * sugarRootDir(); // => '/something/node_modules/@coffeekraken/sugar'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISugarDirSettings {}
+export interface ISugarRootDirSettings {}
 
-export interface ISugarDir {
-  (settings?: ISugarDirSettings): string;
+export interface ISugarRootDir {
+  (settings?: ISugarRootDirSettings): string;
 }
 
-export default function (settings: ISugarDirSettings = {}) {
+export default function (settings: ISugarRootDirSettings = {}) {
   settings = {
     ...settings
   };
-  const sugarDir = __SugarConfig.get('storage.sugarDir');
-  if (sugarDir !== undefined) {
-    __fs.ensureDirSync(sugarDir);
-    return sugarDir;
+  const sugarRootDir = __SugarConfig.get('storage.sugar.rootDir');
+  if (sugarRootDir !== undefined) {
+    __fs.ensureDirSync(sugarRootDir);
+    return sugarRootDir;
   }
 }

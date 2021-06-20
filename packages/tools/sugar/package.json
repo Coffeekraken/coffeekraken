@@ -67,6 +67,7 @@
     "find-in-files": "^0.5.0",
     "find-package-json": "^1.2.0",
     "fkill": "^7.1.1",
+    "folder-hash": "^4.0.1",
     "form-serialize": "^0.7.2",
     "fs-extra": "^9.1.0",
     "func-to-classes": "^1.0.0",

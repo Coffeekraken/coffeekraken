@@ -1,10 +1,10 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __fs from 'fs';
 
 let recipe = 'default';
-if (__fs.existsSync(`${__packageRoot()}/sugar.json`)) {
-  const sugarJson = require(`${__packageRoot()}/sugar.json`);
+if (__fs.existsSync(`${__packageRootDir()}/sugar.json`)) {
+  const sugarJson = require(`${__packageRootDir()}/sugar.json`);
   if (sugarJson.recipe) recipe = sugarJson.recipe;
 }
 

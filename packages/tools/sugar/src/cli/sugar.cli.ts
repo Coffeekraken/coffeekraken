@@ -6,7 +6,6 @@ require = require('esm')(module, {});
 
 const __childProcess = require('child_process');
 const __glob = require('glob-all');
-const __packageRoot = require('../node/path/packageRoot');
 const __path = require('path');
 const __fs = require('fs');
 const __isPath = require('../shared/is/path').default;
@@ -14,7 +13,7 @@ const __parseHtml = require('../shared/console/parseHtml').default;
 const __SSugarJson = require('@coffeekraken/s-sugar-json').default;
 const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
 
-require('../node/index');
+// require('../node/index');
 /**
  * @name            sugar.cli
  * @namespace           cli

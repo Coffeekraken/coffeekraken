@@ -201,7 +201,7 @@ export default class SSugarJson extends __SClass {
       sugarJsonPaths = this.search(finalSettings);
     }
 
-    let results = {
+    const results = {
     };
     sugarJsonPaths.forEach((path) => {
 
@@ -238,6 +238,8 @@ export default class SSugarJson extends __SClass {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   current(): ISSugarJsonFile {
+    console.log(`${__packageRoot()}/sugar.json`);
+
     try {
       return this.sanitizeJson(require(`${__packageRoot()}/sugar.json`));
     } catch(e) {

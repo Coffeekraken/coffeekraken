@@ -36,7 +36,7 @@ import __minimatch from 'minimatch';
  *
  * @param         {String}          filepath        The file path you want to init
  * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
- * - cwd (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
+ * - cwd (__packageRootDir()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
  * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
  *
  * @todo      interface

@@ -5,7 +5,7 @@ import __SProcess, {
 import __SNpmUnusedParamsInterface from './interface/SNpmUnusedParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';
-import __packageRoot from '../path/packageRoot';
+import __packageRootDir from '../path/packageRootDir';
 import __toString from '../../shared/string/toString';
 import __packageJson from './utils/packageJson';
 
@@ -75,7 +75,7 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
   ) {
     return new __SPromise(async ({ resolve, reject, emit }) => {
       // starting dependencies checking
-      const unusedDepJson = await __depCheck(__packageRoot(), {
+      const unusedDepJson = await __depCheck(__packageRootDir(), {
         // @ts-ignore
         skipMissing: params.skipMissing
       });

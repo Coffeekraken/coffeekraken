@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 export default {
@@ -14,7 +14,7 @@ export default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: `${__packageRoot()}/docmap.json`
+    input: `${__packageRootDir()}/docmap.json`
   },
 
   build: {
@@ -120,13 +120,13 @@ export default {
      * @name        outPath
      * @namespace   config.docmap.build
      * @type         String
-     * @default       [config.storage.rootDir]/docmap.json
+     * @default       [config.storage.package.rootDir]/docmap.json
      *
      * Specify where you want to outPath the file
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outPath: `[config.storage.rootDir]/docmap.json`
+    outPath: `[config.storage.package.rootDir]/docmap.json`
   }
 };

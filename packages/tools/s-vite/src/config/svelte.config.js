@@ -1,6 +1,6 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import { typescript, postcss } from '@coffeekraken/s-svelte-preprocess';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 export default {
     compilerOptions: {
         customElement: true,
@@ -9,9 +9,9 @@ export default {
     preprocess: [
         typescript({
             tsconfigFile: `${__dirname}/tsconfig.json`,
-            tsconfigDirectory: __packageRoot()
+            tsconfigDirectory: __packageRootDir()
         }),
         postcss(__SugarConfig.get('svelte'))
     ]
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsT0FBTyxFQUNMLFVBQVUsRUFDVixPQUFPLEVBR1IsTUFBTSxtQ0FBbUMsQ0FBQztBQUMzQyxPQUFPLGFBQWEsTUFBTSwyQ0FBMkMsQ0FBQztBQUt0RSxlQUFlO0lBQ2IsZUFBZSxFQUFFO1FBQ2YsYUFBYSxFQUFFLElBQUk7UUFDbkIsTUFBTSxFQUFFLEtBQUs7S0FDZDtJQUNELFVBQVUsRUFBRTtRQUNWLFVBQVUsQ0FBQztZQUNULFlBQVksRUFBRSxHQUFHLFNBQVMsZ0JBQWdCO1lBQzFDLGlCQUFpQixFQUFFLGFBQWEsRUFBRTtTQUNuQyxDQUFDO1FBQ0YsT0FBTyxDQUFDLGFBQWEsQ0FBQyxHQUFHLENBQUMsUUFBUSxDQUFDLENBQUM7S0FDckM7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsT0FBTyxFQUNMLFVBQVUsRUFDVixPQUFPLEVBR1IsTUFBTSxtQ0FBbUMsQ0FBQztBQUMzQyxPQUFPLGdCQUFnQixNQUFNLDhDQUE4QyxDQUFDO0FBSzVFLGVBQWU7SUFDYixlQUFlLEVBQUU7UUFDZixhQUFhLEVBQUUsSUFBSTtRQUNuQixNQUFNLEVBQUUsS0FBSztLQUNkO0lBQ0QsVUFBVSxFQUFFO1FBQ1YsVUFBVSxDQUFDO1lBQ1QsWUFBWSxFQUFFLEdBQUcsU0FBUyxnQkFBZ0I7WUFDMUMsaUJBQWlCLEVBQUUsZ0JBQWdCLEVBQUU7U0FDdEMsQ0FBQztRQUNGLE9BQU8sQ0FBQyxhQUFhLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0tBQ3JDO0NBQ0YsQ0FBQyJ9

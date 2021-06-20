@@ -8,7 +8,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __express from 'express';
 import __trimLines from '../../../shared/string/trimLines';
 import __extension from '../../fs/extension';
-import __packageRoot from '../../path/packageRoot';
+import __packageRootDir from '../../path/packageRootDir';
 
 /**
  * @name                express
@@ -77,7 +77,7 @@ const fn = function (args = {}) {
         if (!__fs.existsSync(handlerPath)) {
           emit('warn', {
             value: `Frontend handler "<cyan>${__path.relative(
-              __packageRoot(),
+              __packageRootDir(),
               handlerPath
             )}</cyan>" does not exists...`
           });

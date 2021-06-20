@@ -5,8 +5,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
@@ -25,7 +24,7 @@ import __SDocMapBuildParamsInterface from './interface/SDocMapBuildParamsInterfa
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
  * - filename (docMap.json) {String}: Specify the filename you want
- * - outputDir (packageRoot()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
+ * - outputDir (packageRootDir()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
  *
  * @todo      interface
  * @todo      doc
@@ -143,7 +142,7 @@ class SDocMap extends __SClass implements ISDocMap {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
       const finalParams = <ISDocMapReadParams>__deepMerge(
         {
-          input: `${__packageRoot()}/docmap.json`
+          input: `${__packageRootDir()}/docmap.json`
         },
         params ?? {}
       );
@@ -204,7 +203,7 @@ class SDocMap extends __SClass implements ISDocMap {
         }
       }
 
-      loadJson(__packageRoot(), __packageRoot());
+      loadJson(__packageRootDir(), __packageRootDir());
 
       // return the final docmap
       resolve(finalDocmapJson);
@@ -242,7 +241,7 @@ class SDocMap extends __SClass implements ISDocMap {
         }
       };
 
-      const packageRoot = __packageRoot();
+      const packageRoot = __packageRootDir();
       const packageMonoRoot = __packageRoot(process.cwd(), true);
 
       // check if a file already exists
@@ -337,7 +336,7 @@ class SDocMap extends __SClass implements ISDocMap {
               ...docblockEntryObj,
               filename,
               extension: filename.split('.').slice(1)[0],
-              relPath: __path.relative(__packageRoot(), file.path)
+              relPath: __path.relative(__packageRootDir(), file.path)
             };
             this._entries[
               `${docblock.namespace}.${docblock.name}`
@@ -367,7 +366,7 @@ class SDocMap extends __SClass implements ISDocMap {
       if (finalParams.save) {
         emit('log', {
           value: `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${finalParams.outPath.replace(
-            __rootDir() + '/',
+            __packageRootDir() + '/',
             ''
           )}</cyan>"`
         });

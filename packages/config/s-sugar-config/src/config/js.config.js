@@ -17,19 +17,19 @@ export default {
          * @name              inDir
          * @namespace         config.js.compile
          * @type              String
-         * @default           [config.storage.srcDir]/js
+         * @default           [config.storage.src.rootDir]/js
          *
          * Specify the destination folder from where to search for js files to compile
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        inDir: '[config.storage.srcDir]/js',
+        inDir: '[config.storage.src.rootDir]/js',
         /**
          * @name              outDir
          * @namespace         config.js.compile
          * @type              String
-         * @default           [config.storage.distDir]/js
+         * @default           [config.storage.dist.rootDir]/js
          *
          * Specify the destination folder where to put the compiled files in.
          * If undefined, the files will be saved alongside the source one.
@@ -37,19 +37,19 @@ export default {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        outDir: '[config.storage.distDir]/js',
+        outDir: '[config.storage.dist.rootDir]/js',
         /**
          * @name            rootDir
          * @namespace       config.js.compile
          * @type            String
-         * @default         [config.storage.rootDir]
+         * @default         [config.storage.package.rootDir]
          *
          * Specify the root directory from where the compiler will try to resolve modules
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        rootDir: '[config.storage.rootDir]',
+        rootDir: '[config.storage.package.rootDir]',
         /**
          * @name        format
          * @namespace     config.js.compile
@@ -200,4 +200,4 @@ export default {
         esbuild: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7SUFDYixPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEtBQUssRUFBRSxtQ0FBbUM7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSw0QkFBNEI7UUFFbkM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxNQUFNLEVBQUUsNkJBQTZCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsMEJBQTBCO1FBRW5DOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7Ozs7V0FXRztRQUNILFFBQVEsRUFBRSxTQUFTO1FBRW5COzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsS0FBSztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUUsU0FBUztRQUV2QixNQUFNO1FBQ04sNkJBQTZCO1FBQzdCLHNDQUFzQztRQUN0QywyQkFBMkI7UUFDM0IsMkJBQTJCO1FBQzNCLEtBQUs7UUFDTCwwRUFBMEU7UUFDMUUsc0dBQXNHO1FBQ3RHLEtBQUs7UUFDTCx3QkFBd0I7UUFDeEIsb0dBQW9HO1FBQ3BHLE1BQU07UUFDTixzQkFBc0I7UUFFdEI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxJQUFJO1FBRVQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUUsS0FBSztRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsS0FBSztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQ0osdUdBQXVHO1FBRXpHOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsRUFBRTtLQUNaO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7SUFDYixPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEtBQUssRUFBRSxtQ0FBbUM7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxpQ0FBaUM7UUFFeEM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxNQUFNLEVBQUUsa0NBQWtDO1FBRTFDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsa0NBQWtDO1FBRTNDOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7Ozs7V0FXRztRQUNILFFBQVEsRUFBRSxTQUFTO1FBRW5COzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsS0FBSztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUUsU0FBUztRQUV2QixNQUFNO1FBQ04sNkJBQTZCO1FBQzdCLHNDQUFzQztRQUN0QywyQkFBMkI7UUFDM0IsMkJBQTJCO1FBQzNCLEtBQUs7UUFDTCwwRUFBMEU7UUFDMUUsc0dBQXNHO1FBQ3RHLEtBQUs7UUFDTCx3QkFBd0I7UUFDeEIsb0dBQW9HO1FBQ3BHLE1BQU07UUFDTixzQkFBc0I7UUFFdEI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxJQUFJO1FBRVQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUUsS0FBSztRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsS0FBSztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQ0osdUdBQXVHO1FBRXpHOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsRUFBRTtLQUNaO0NBQ0YsQ0FBQyJ9

@@ -1,5 +1,3 @@
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export default {
   /**

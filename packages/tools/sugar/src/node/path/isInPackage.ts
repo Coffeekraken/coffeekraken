@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __packageRoot from './packageRoot';
+import __packageRootDir from './packageRootDir';
 import __fs from 'fs';
 
 /**
@@ -23,11 +23,11 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isInPackage(name, from = process.cwd(), highest = false) {
-  const packageRoot = __packageRoot(from);
-  if (!packageRoot) return false;
+  const packageRootDir = __packageRootDir(from);
+  if (!packageRootDir) return false;
 
-  if (!__fs.existsSync(`${packageRoot}/package.json`)) return false;
-  const pkg = require(`${packageRoot}/package.json`);
+  if (!__fs.existsSync(`${packageRootDir}/package.json`)) return false;
+  const pkg = require(`${packageRootDir}/package.json`);
 
   let names = name;
   if (typeof names === 'string') names = names.split(',').map((f) => f.trim());
@@ -37,7 +37,7 @@ function isInPackage(name, from = process.cwd(), highest = false) {
     }
   }
 
-  let newPath = packageRoot
+  const newPath = packageRootDir
     .split('/')
     .slice(0, -1)
     // .filter((i) => i !== '')

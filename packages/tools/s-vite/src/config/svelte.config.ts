@@ -5,7 +5,7 @@ import {
   globalStyle,
   babel
 } from '@coffeekraken/s-svelte-preprocess';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 
 import __sPostcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin';
 import __precss from 'precss';
@@ -18,7 +18,7 @@ export default {
   preprocess: [
     typescript({
       tsconfigFile: `${__dirname}/tsconfig.json`,
-      tsconfigDirectory: __packageRoot()
+      tsconfigDirectory: __packageRootDir()
     }),
     postcss(__SugarConfig.get('svelte'))
   ]

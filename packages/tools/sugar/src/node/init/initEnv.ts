@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __packageRoot from '../path/packageRoot';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name                initEnv
@@ -21,6 +21,6 @@ import __packageRoot from '../path/packageRoot';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
 function initEnv() {
-  process.env.PACKAGE_ROOT = __packageRoot();
+  process.env.PACKAGE_ROOT = __packageRootDir();
 }
 export default initEnv;

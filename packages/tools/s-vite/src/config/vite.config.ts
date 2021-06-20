@@ -1,11 +1,9 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
 
 
 export default {
-  root: '[config.storage.rootDir]',
+  root: '[config.storage.package.rootDir]',
   base: '/',
   mode: 'development',
   plugins: [
@@ -15,15 +13,15 @@ export default {
     __path.resolve(`${__dirname}/../node/plugins/postcssPlugin`),
     __path.resolve(`${__dirname}/../node/plugins/imageminPlugin`)
   ],
-  publicDir: '[config.storage.srcDir]',
-  cacheDir: '[config.storage.cacheDir]/vite',
+  publicDir: '[config.storage.src.rootDir]',
+  cacheDir: '[config.storage.package.cacheDir]/vite',
   clearScreen: false,
   build: {
     lib: {
-      entry: '[config.storage.srcDir]/js/index.ts',
+      entry: '[config.storage.src.rootDir]/js/index.ts',
       name: 'index'
     },
-    outDir: '[config.storage.distDir]/js'
+    outDir: '[config.storage.dist.rootDir]/js'
   },
   server: {
     host: __ipAddress(),

@@ -92,7 +92,7 @@ export default function ({
           * <i class="s-icon--${as} s-font:100"></i>
           */
           .s-icon--${as} {
-            @sugar.icon.fs(${path});
+            @sugar.icon.fs(${path}, ${as});
           }
       `);
     }

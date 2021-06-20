@@ -108,7 +108,7 @@ export default class SFrontstack extends __SClass {
         const frontstackConfig = __SSugarConfig.get('frontstack');
         const actionsObj = frontstackConfig.actions;
 
-        let finalParams: ISFrontstackActionParams = __SFrontstackActionInterface.apply(params).value;
+        const finalParams: ISFrontstackActionParams = __SFrontstackActionInterface.apply(params).value;
 
         const availableActions = Object.keys(actionsObj);
 

@@ -1,4 +1,4 @@
-import __packageRoot from '../../path/packageRoot';
+import __packageRootDir from '../../path/packageRootDir';
 import __glob from 'glob-all';
 import __fs from 'fs';
 import __unique from '../../../shared/array/unique';
@@ -31,14 +31,14 @@ export default function listNodeModulesPackages(
   settings?: Partial<IListNodeModulesPackagesSettings>
 ): Record<string, any> {
   const finalSettings = <IListNodeModulesPackagesSettings>{
-    pathes: [`${__packageRoot()}/node_modules`],
+    pathes: [`${__packageRootDir()}/node_modules`],
     monorepo: false,
     ...(settings ?? {})
   };
 
   if (finalSettings.monorepo) {
     finalSettings.pathes.push(
-      `${__packageRoot(process.cwd(), true)}/node_modules`
+      `${__packageRootDir(process.cwd(), true)}/node_modules`
     );
   }
 

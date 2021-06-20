@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const { getImportMapFromNodeModules, generateImportMapForProject } = require('@jsenv/node-module-import-map');
-const __packageRoot = require('../../node/path/packageRoot').default;
+const __packageRootDir = require('../../node/path/packageRootDir').default;
 export default () => __awaiter(void 0, void 0, void 0, function* () {
-    const projectDirectoryUrl = __packageRoot();
+    const projectDirectoryUrl = __packageRootDir();
     yield generateImportMapForProject([
         getImportMapFromNodeModules({
             projectDirectoryUrl,
@@ -21,4 +21,4 @@ export default () => __awaiter(void 0, void 0, void 0, function* () {
         importMapFileRelativeUrl: './dist/importmap.json'
     });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW1wb3J0TWFwLmNsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImltcG9ydE1hcC5jbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsTUFBTSxFQUNKLDJCQUEyQixFQUMzQiwyQkFBMkIsRUFDNUIsR0FBRyxPQUFPLENBQUMsK0JBQStCLENBQUMsQ0FBQztBQUM3QyxNQUFNLGFBQWEsR0FBRyxPQUFPLENBQUMsNkJBQTZCLENBQUMsQ0FBQyxPQUFPLENBQUM7QUFFckUsZUFBZSxHQUFTLEVBQUU7SUFDeEIsTUFBTSxtQkFBbUIsR0FBRyxhQUFhLEVBQUUsQ0FBQztJQUU1QyxNQUFNLDJCQUEyQixDQUMvQjtRQUNFLDJCQUEyQixDQUFDO1lBQzFCLG1CQUFtQjtZQUNuQixxQ0FBcUMsRUFBRSxJQUFJO1NBQzVDLENBQUM7S0FDSCxFQUNEO1FBQ0UsbUJBQW1CO1FBQ25CLHdCQUF3QixFQUFFLHVCQUF1QjtLQUNsRCxDQUNGLENBQUM7QUFDSixDQUFDLENBQUEsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW1wb3J0TWFwLmNsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImltcG9ydE1hcC5jbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsTUFBTSxFQUNKLDJCQUEyQixFQUMzQiwyQkFBMkIsRUFDNUIsR0FBRyxPQUFPLENBQUMsK0JBQStCLENBQUMsQ0FBQztBQUM3QyxNQUFNLGdCQUFnQixHQUFHLE9BQU8sQ0FBQyxnQ0FBZ0MsQ0FBQyxDQUFDLE9BQU8sQ0FBQztBQUUzRSxlQUFlLEdBQVMsRUFBRTtJQUN4QixNQUFNLG1CQUFtQixHQUFHLGdCQUFnQixFQUFFLENBQUM7SUFFL0MsTUFBTSwyQkFBMkIsQ0FDL0I7UUFDRSwyQkFBMkIsQ0FBQztZQUMxQixtQkFBbUI7WUFDbkIscUNBQXFDLEVBQUUsSUFBSTtTQUM1QyxDQUFDO0tBQ0gsRUFDRDtRQUNFLG1CQUFtQjtRQUNuQix3QkFBd0IsRUFBRSx1QkFBdUI7S0FDbEQsQ0FDRixDQUFDO0FBQ0osQ0FBQyxDQUFBLENBQUMifQ==

@@ -1,40 +1,25 @@
 // @ts-nocheck
 
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
 } from '@coffeekraken/s-compiler';
-import __typescript, {
-  collapseTextChangeRangesAcrossMultipleVersions
-} from 'typescript';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
-import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __rootDir from '@coffeekraken/sugar/node/path/rootDir';
-import __sugarDir from '@coffeekraken/sugar/node/path/sugarDir';
-import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
-import __spawn from '@coffeekraken/sugar/node/process/spawn';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import __childProcess from 'child_process';
 import __fs from 'fs';
 import __path from 'path';
+import __typescript from 'typescript';
 import __STsCompilerParamsInterface from './interface/STsCompilerInterface';
-import __moveFile from 'move-file';
-import __childProcess from 'child_process';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 
 export interface ISTsCompilerCtorSettings {
   tsCompiler: Partial<ISTsCompilerSettings>;
@@ -181,12 +166,12 @@ class STsCompiler extends __SCompiler {
         if (stacks) {
           input = [];
           stacks.forEach((stackName) => {
-            if (__fs.existsSync(`${__rootDir()}/tsconfig.${stackName}.json`)) {
-              input.push(`${__rootDir()}/tsconfig.${stackName}.json`);
+            if (__fs.existsSync(`${__packageRootDir()}/tsconfig.${stackName}.json`)) {
+              input.push(`${__packageRootDir()}/tsconfig.${stackName}.json`);
             } else if (
-              __fs.existsSync(`${__rootDir()}/tsconfig.${stackName}.js`)
+              __fs.existsSync(`${__packageRootDir()}/tsconfig.${stackName}.js`)
             ) {
-              input.push(`${__rootDir()}/tsconfig.${stackName}.js`);
+              input.push(`${__packageRootDir()}/tsconfig.${stackName}.js`);
             } else if (
               __fs.existsSync(
                 `${__SugarConfig.get(
@@ -210,13 +195,13 @@ class STsCompiler extends __SCompiler {
         if (params.config && typeof params.config === 'string') {
           let configPath;
           if (
-            __fs.existsSync(`${__rootDir()}/tsconfig.${params.config}.json`)
+            __fs.existsSync(`${__packageRootDir()}/tsconfig.${params.config}.json`)
           ) {
-            configPath = `${__rootDir()}/tsconfig.${params.config}.json`;
+            configPath = `${__packageRootDir()}/tsconfig.${params.config}.json`;
           } else if (
-            __fs.existsSync(`${__rootDir()}/tsconfig.${params.config}.js`)
+            __fs.existsSync(`${__packageRootDir()}/tsconfig.${params.config}.js`)
           ) {
-            configPath = `${__rootDir()}/tsconfig.${params.config}.js`;
+            configPath = `${__packageRootDir()}/tsconfig.${params.config}.js`;
           } else if (
             __fs.existsSync(
               `${__SugarConfig.get('ts.tsconfigStacksDir')}/tsconfig.${
@@ -273,7 +258,7 @@ class STsCompiler extends __SCompiler {
           let tsconfig = {};
 
           // search for config
-          const potentialRootPath = `${__packageRoot()}/tsconfig.json`;
+          const potentialRootPath = `${__packageRootDir())}/tsconfig.json`;
           if (__fs.existsSync(potentialRootPath)) {
             tsconfig = require(potentialRootPath);
           } else {
@@ -357,7 +342,7 @@ class STsCompiler extends __SCompiler {
                   value: `<green>[save]</green> File "<cyan>${
                     file.relPath
                   }</cyan>" under "<magenta>${__path.relative(
-                    __packageRoot(),
+                    __packageRootDir()),
                     outPath
                   )}</magenta>"`
                 });
@@ -369,7 +354,7 @@ class STsCompiler extends __SCompiler {
                     value: `<green>[save]</green> Map "<cyan>${
                       file.relPath
                     }</cyan>" under "<magenta>${__path.relative(
-                      __packageRoot(),
+                      __packageRootDir()),
                       outPath
                     )}.map</magenta>"`
                   });

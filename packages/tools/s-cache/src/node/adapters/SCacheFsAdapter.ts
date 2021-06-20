@@ -53,7 +53,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * Construct the SCacheFsAdapter instance with the settings passed in object format. See description bellow.
    *
    * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
-   * - rootDir (config.storage.cacheDir) {String}: Specify the root directory where to put all the files to cache
+   * - rootDir (config.storage.package.cacheDir) {String}: Specify the root directory where to put all the files to cache
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

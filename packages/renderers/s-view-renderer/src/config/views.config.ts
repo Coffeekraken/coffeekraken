@@ -5,27 +5,27 @@ export default {
    * @name            rootDirs
    * @namespace       config.views
    * @type            string[]
-   * @default          ['[config.storage.srcDir]/views']
+   * @default          ['[config.storage.src.rootDir]/views']
    *
    * Specify the roots views directories
    *
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDirs: [`[config.storage.srcDir]/views`],
+  rootDirs: [`[config.storage.src.rootDir]/views`],
 
   /**
    * @name            cacheDir
    * @namespace       config.views
    * @type            String
-   * @default          [config.storage.cacheDir]
+   * @default          [config.storage.package.cacheDir]
    *
    * Specify the views template rendering cache directory
    *
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  cacheDir: `[config.storage.cacheDir]/views`,
+  cacheDir: `[config.storage.package.cacheDir]/views`,
 
   /**
    * @name      engines

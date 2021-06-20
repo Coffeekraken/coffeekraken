@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __packageRoot from '../../node/path/packageRoot';
+import __packageRootDir from '../../node/path/packageRootDir';
 import __parseArgs from '../../node/cli/parseArgs';
 
 interface IPathRootOptions {
@@ -18,5 +18,5 @@ export default async (stringArgs = '') => {
     }
   });
 
-  console.log(__packageRoot(args.highest));
+  console.log(__packageRootDir(args.highest));
 };

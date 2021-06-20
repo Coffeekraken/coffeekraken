@@ -6,7 +6,7 @@ export default {
      * @name        dirs
      * @namespace   sugar.config.module.resolve
      * @type        Array<String>
-     * @default     [config.storage.rootDir]
+     * @default     [config.storage.package.rootDir]
      *
      * Specify the directories from which to try to resolve modules
      *

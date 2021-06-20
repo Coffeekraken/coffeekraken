@@ -1,12 +1,18 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __fs from 'fs';
 import __path from 'path';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
+import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 
 class postcssSugarPluginIconFsMixinInterface extends __SInterface {
   static definition = {
       path: {
+          type: 'String',
+          required: true
+      },
+      as: {
           type: 'String',
           required: true
       }
@@ -15,6 +21,7 @@ class postcssSugarPluginIconFsMixinInterface extends __SInterface {
 
 export interface IPostcssSugarPluginIconFsMixinParams {
     path: string;
+    as: string;
 }
 
 export { postcssSugarPluginIconFsMixinInterface as interface };
@@ -22,25 +29,47 @@ export { postcssSugarPluginIconFsMixinInterface as interface };
 export default function ({
   params,
   atRule,
-  replaceWith
+  replaceWith,
+  sourcePath,
+  sharedData
 }: {
   params: Partial<IPostcssSugarPluginIconFsMixinParams>;
   atRule: any;
   replaceWith: Function;
+  sourcePath: string;
+  sharedData: any;
 }) {
   const finalParams: IPostcssSugarPluginIconFsMixinParams = {
     path: '',
+    as: '',
     ...params
   };
 
-  const dirName =
-    typeof atRule.source.input.file === 'string'
-      ? __path.dirname(atRule.source.input.file)
-      : __dirname;
+  const tmpDirPath = `${__packageTmpDir()}/postcss/icons`;
+
+  if (!sharedData.iconsSourcePaths) {
+    sharedData.iconsSourcePaths = [];
+  }
+
+  if (!sharedData.iconsInputDir) {
+    sharedData.iconsInputDir = tmpDirPath;
+    try {
+      __fs.rmdirSync(tmpDirPath, { recursive: true });
+    } catch (e) {}
+  }
+
+  // const dirName =
+  //   typeof atRule.source.input.file === 'string'
+  //     ? __path.dirname(atRule.source.input.file)
+  //     : __dirname;
+
+  if (sharedData.iconsSourcePaths.indexOf(sourcePath) === -1) {
+    sharedData.iconsSourcePaths.push(sourcePath);
+  }
 
   // reading the icon file
-  const potentialFilePathFromRoot = __path.resolve(__packageRoot(), finalParams.path);
-  const potentialFilePathFromFile = __path.resolve(dirName, finalParams.path);
+  const potentialFilePathFromRoot = __path.resolve(__packageRootDir(), finalParams.path);
+  const potentialFilePathFromFile = __path.resolve(sourcePath, finalParams.path);
 
   let svgStr;
 
@@ -51,39 +80,12 @@ export default function ({
   } else {
       throw new Error(`<red>[sugar.css.mixins.icon.fs]</red> Sorry but it seems that the requested icon "<cyan>${finalParams.path}</cyan>" does not exists on the filesystem`);
   }
-  
-//   svgStr = svgStr.replace('</svg>', `<style> path { fill: currentColor; }</style></svg>`)
 
-//   console.log(svgStr);
+  const tmpFilePath = `${tmpDirPath}/${finalParams.as}.svg`;
 
-  const vars: string[] = [];
+  // write the svg into the temp postcss icons folder
+  // that will be handled by the "fonticon" postProcessor
+  __writeFileSync(tmpFilePath, svgStr);
 
-//   vars.push(`
-//     background-image: url("data:image/svg+xml;base64,${__base64.encrypt(svgStr)}");
-//     background-size: contain;
-//     background-position: center;
-//     width: 1em; height: 1em;
-//     display: inline-block;
-//     -webkit-filter: invert(100%) brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);
-//     filter: invert(100%) brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);
-//   `)
-
-  const pathD = svgStr.match(/\sd=".*"/);
-
-  if (!pathD) {
-    throw new Error(`<red>[sugar.css.mixins.icon.fs]</red> Sorry but it seems that the requested icon "<cyan>${finalParams.path}</cyan>" is not compatible with the icon system. It MUST be a file with a unique <path d="..." /> inside`);
-  }
-
-  const path = pathD[0].replace(/\sd=/, '');
-
-
-  vars.push(`
-    clip-path: path(${path});
-    display: inline-block;
-    background: currentColor;
-    width: 1em; height: 1em;
-  `);
-
-
-  replaceWith(vars);
+  replaceWith([]);
 }

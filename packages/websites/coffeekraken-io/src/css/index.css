@@ -18,6 +18,7 @@
   fa:radiation:nothing
   fab:vuejs:vuejs
   fs:src/icons/vuejs.svg:vue
+  fs:src/icons/copy.svg:copyS
 );
 
 @sugar.platform.classes;

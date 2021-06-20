@@ -63,7 +63,7 @@ function error(data = {}) {
     frontspec: JSON.stringify(frontspec),
     env: process.env.NODE_ENV || 'development',
     settings: JSON.stringify(settings),
-    packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
+    packageJson: __standardizeJson(require(__packageRootDir() + '/package.json'))
   };
 }
 export default error;

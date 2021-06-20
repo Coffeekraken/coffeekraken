@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 
 export default (opts = {}) => {
   return {
@@ -10,7 +10,7 @@ export default (opts = {}) => {
           [
             `<yellow>[${warnObj.plugin}]</yellow> ${warnObj.text}`,
             `<cyan>${warnObj.node.source.input.file.replace(
-              `${__packageRoot()}/`,
+              `${__packageRootDir()}/`,
               ''
             )}</cyan>:<yellow>${warnObj.line}</yellow>:<yellow>${
               warnObj.column

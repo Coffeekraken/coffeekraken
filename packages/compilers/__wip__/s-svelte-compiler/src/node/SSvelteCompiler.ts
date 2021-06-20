@@ -8,7 +8,7 @@ import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
 import __STsCompiler from '@coffeekraken/s-ts-compiler';
 import __SPostcssCompiler from '@coffeekraken/s-postcss-compiler';
-import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
+import __packageTmpDir from '@coffeekraken/sugar/node/path/tmpDir';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __path from 'path';
@@ -201,7 +201,7 @@ class SSvelteCompiler extends __SCompiler {
                 {
                   style: async (input) => {
                     // write a temp file to compile
-                    const tmpCssFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.css`;
+                    const tmpCssFilePath = `${__packageTmpDir()}/SSvelteCompiler/${Date.now()}.css`;
                     __writeFileSync(`${tmpCssFilePath}`, input.content);
 
                     const compiler = new __SPostcssCompiler(
@@ -247,14 +247,14 @@ class SSvelteCompiler extends __SCompiler {
                     }
 
                     // write a temp file to compile
-                    const tmpTsFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.ts`;
+                    const tmpTsFilePath = `${__packageTmpDir()}/SSvelteCompiler/${Date.now()}.ts`;
                     __writeFileSync(`${tmpTsFilePath}`, input.content);
 
                     const compiler = new __STsCompiler();
 
                     const res = await compiler.compile({
                       input: [tmpTsFilePath],
-                      rootDir: `${__tmpDir()}/SSvelteCompiler`,
+                      rootDir: `${__packageTmpDir()}/SSvelteCompiler`,
                       config: 'js',
                       save: false
                     });

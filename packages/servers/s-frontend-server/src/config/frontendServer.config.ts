@@ -34,20 +34,20 @@ export default {
    * @name              rootDir
    * @namespace         config.frontendServer
    * @type              String
-   * @default           [config.storage.rootDir]
+   * @default           [config.storage.package.rootDir]
    *
    * Specify the root directory to use for the frontend server
    *
    * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir: `[config.storage.rootDir]`,
+  rootDir: `[config.storage.package.rootDir]`,
 
   /**
    * @name              staticDirs
    * @namespace         config.frontendServer
    * @type              Object<String>
-   * @default           { '/dist': '[config.storage.distDir]' }
+   * @default           { '/dist': '[config.storage.dist.rootDir]' }
    *
    * Specify a directory that will be served as static files
    *
@@ -55,22 +55,22 @@ export default {
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   staticDirs: {
-    '/dist/*': `[config.storage.distDir]`
-    // '/node_modules': '[config.storage.rootDir]/node_modules'
+    '/dist/*': `[config.storage.dist.rootDir]`
+    // '/node_modules': '[config.storage.package.rootDir]/node_modules'
   },
 
   /**
    * @name            viewsDir
    * @namespace       config.frontendServer
    * @type            String
-   * @default         [config.storage.srcDir]/views
+   * @default         [config.storage.src.rootDir]/views
    *
    * Specify the views directory path
    *
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  viewsDir: `[config.storage.srcDir]/views`,
+  viewsDir: `[config.storage.src.rootDir]/views`,
 
   /**
    * @name          logLevel
@@ -89,7 +89,7 @@ export default {
   proxy: {
     assets: {
       route: __SugarConfig.get('vite.publicDir').replace(
-        __SugarConfig.get('storage.rootDir'),
+        __SugarConfig.get('storage.package.rootDir'),
         ''
       ),
       settings: {

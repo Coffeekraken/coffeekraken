@@ -2,7 +2,7 @@
 
 import __argsToObject from '../../node/cli/argsToObject';
 import __chokidar from 'chokidar';
-import __packageRoot from '../../node/path/packageRoot';
+import __packageRootDir from '../../node/path/packageRootDir';
 import __path from 'path';
 
 /**
@@ -56,7 +56,7 @@ export default (stringArgs = '') => {
     ignored: args.ignore,
     ignoreInitial: true,
     followSymlinks: true,
-    cwd: __packageRoot(process.cwd()),
+    cwd: __packageRootDir(process.cwd()),
     ignorePermissionErrors: false
   });
 

@@ -1,16 +1,15 @@
 // @ts-nocheck
 
-import __tmpDir from 'temp-dir';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 
 /**
- * @name                            tmpDir
+ * @name                            packageTmpDir
  * @namespace            node.path
  * @type                            Function
  * @stable
  *
- * Return the os temp directory path
+ * Return the package temp directory path
  *
  * @param       {ITmpDirSettings}       [settings={}]   Some settings to configure your temp directory process
  * @return                {String}                      The real os temp directory path
@@ -22,35 +21,19 @@ import __fs from 'fs-extra';
  * @todo      tests
  *
  * @example             js
- * import tmpDir from '@coffeekraken/node/fs/tmpDir';
- * tmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import packageTmpDir from '@coffeekraken/node/fs/packageTmpDir';
+ * packageTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
- * @see       https://www.npmjs.com/package/temp-dir
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ITmpDirSettings {
-  scope?: 'local' | 'global';
-}
-
-export interface ITmpDir {
-  (settings?: ITmpDirSettings): string;
-}
-
-const fn: ITmpDir = function (settings: ITmpDirSettings = {}) {
-  settings = {
-    scope: 'local',
-    ...settings
-  };
-  if (settings.scope === 'local') {
-    const tmpDir = __SugarConfig.get('storage.tmpDir');
-    if (tmpDir !== undefined) {
-      __fs.ensureDirSync(tmpDir);
-      return tmpDir;
-    }
+export default function () {
+  const tmpDir = __SugarConfig.get('storage.package.tmpDir');
+  if (tmpDir !== undefined) {
+    __fs.ensureDirSync(tmpDir);
+    return tmpDir;
   }
   __fs.ensureDirSync(__tmpDir);
   return __tmpDir;
-};
-export default fn;
+}

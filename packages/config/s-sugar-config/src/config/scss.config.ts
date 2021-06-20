@@ -23,7 +23,7 @@ export default {
      * @name              input
      * @namespace         config.scss.compile
      * @type              String
-     * @default           [config.storage.srcDir]/scss/** /*.scss
+     * @default           [config.storage.src.rootDir]/scss/** /*.scss
      *
      * Specify the root folder (or file) to check for .scss|sass files to build.
      * Glob patterns can be used
@@ -31,39 +31,39 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.storage.srcDir]/{css,scss}/**/*.scss',
+    input: '[config.storage.src.rootDir]/{css,scss}/**/*.scss',
 
     /**
      * @name              outputDir
      * @namespace         config.scss.compile
      * @type              String
-     * @default           [config.storage.distDir]/css
+     * @default           [config.storage.dist.rootDir]/css
      *
      * Specify the destination folder where to put the compiled files in
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: `[config.storage.distDir]/css`,
+    outputDir: `[config.storage.dist.rootDir]/css`,
 
     /**
      * @name            rootDir
      * @namespace       config.scss.compile
      * @type            String
-     * @default         [config.storage.srcDir]/css
+     * @default         [config.storage.src.rootDir]/css
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.srcDir]/css',
+    rootDir: '[config.storage.src.rootDir]/css',
 
     /**
      * @name              includePaths
      * @namespace         config.scss.compile
      * @type              Array<String>
-     * @default         [`[config.storage.rootDir]`, `[config.storage.rootDir]/node_modules`]
+     * @default         [`[config.storage.package.rootDir]`, `[config.storage.package.rootDir]/node_modules`]
      *
      * Specify the folders you want to use as resolve imports and uses sources
      *
@@ -71,8 +71,8 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     includePaths: [
-      '[config.storage.rootDir]',
-      '[config.storage.rootDir]/node_modules'
+      '[config.storage.package.rootDir]',
+      '[config.storage.package.rootDir]/node_modules'
     ],
 
     /**

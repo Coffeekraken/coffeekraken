@@ -2,7 +2,7 @@
 
 import __path from 'path';
 import __fs from 'fs';
-import __packageRoot from '../../../path/packageRoot';
+import __packageRootDir from '../../../path/packageRootDir';
 import __SPromise from '../../../promise/SPromise';
 import __packageJson from '../../../package/json';
 import __SugarConfig from '../../../config/sugar';
@@ -30,7 +30,7 @@ import STemplate from '../../../template/STemplate';
  */
 function sugar(req, res, settings = {}) {
   // search for the view to render
-  const packageRoot = __packageRoot();
+  const packageRoot = __packageRootDir();
   const packageJson = __packageJson();
 
   let body, content, view, title, error;
@@ -54,7 +54,7 @@ function sugar(req, res, settings = {}) {
       ${Object.keys(STemplate.engines)
         .map((engine) => {
           return `- ${viewsDir}/index.${engine}`.replace(
-            `${__packageRoot()}/`,
+            `${__packageRootDir()}/`,
             ''
           );
         })

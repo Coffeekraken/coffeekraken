@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 export default {
     read: {
         /**
@@ -11,7 +11,7 @@ export default {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        input: `${__packageRoot()}/docmap.json`
+        input: `${__packageRootDir()}/docmap.json`
     },
     build: {
         /**
@@ -110,14 +110,14 @@ export default {
          * @name        outPath
          * @namespace   config.docmap.build
          * @type         String
-         * @default       [config.storage.rootDir]/docmap.json
+         * @default       [config.storage.package.rootDir]/docmap.json
          *
          * Specify where you want to outPath the file
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        outPath: `[config.storage.rootDir]/docmap.json`
+        outPath: `[config.storage.package.rootDir]/docmap.json`
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsZUFBZTtJQUViLElBQUksRUFBRTtRQUNKOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRSxHQUFHLGFBQWEsRUFBRSxjQUFjO0tBQ3hDO0lBRUQsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7OztXQVlHO1FBQ0gsS0FBSyxFQUFFLENBQUMsZ0NBQWdDLEVBQUUsK0JBQStCLENBQUM7UUFFMUU7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxDQUFDLG1CQUFtQixFQUFFLHVCQUF1QixFQUFFLGlCQUFpQixDQUFDO1FBRTFFOzs7Ozs7Ozs7O1dBVUc7UUFDSCxTQUFTLEVBQUUsS0FBSztRQUVoQjs7Ozs7Ozs7Ozs7Ozs7O1dBZUc7UUFDSCxPQUFPLEVBQUU7WUFDUCxTQUFTLEVBQUUsV0FBVztTQUN2QjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUU7WUFDTixNQUFNO1lBQ04sTUFBTTtZQUNOLFVBQVU7WUFDVixhQUFhO1lBQ2IsV0FBVztZQUNYLFFBQVE7WUFDUixTQUFTO1lBQ1QsUUFBUTtZQUNSLE9BQU87WUFDUCxRQUFRO1NBQ1Q7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLHNDQUFzQztLQUNoRDtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxnQkFBZ0IsTUFBTSw4Q0FBOEMsQ0FBQztBQUc1RSxlQUFlO0lBRWIsSUFBSSxFQUFFO1FBQ0o7Ozs7Ozs7OztXQVNHO1FBQ0gsS0FBSyxFQUFFLEdBQUcsZ0JBQWdCLEVBQUUsY0FBYztLQUMzQztJQUVELEtBQUssRUFBRTtRQUNMOzs7Ozs7Ozs7Ozs7V0FZRztRQUNILEtBQUssRUFBRSxDQUFDLGdDQUFnQyxFQUFFLCtCQUErQixDQUFDO1FBRTFFOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsQ0FBQyxtQkFBbUIsRUFBRSx1QkFBdUIsRUFBRSxpQkFBaUIsQ0FBQztRQUUxRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLEtBQUs7UUFFaEI7Ozs7Ozs7Ozs7Ozs7OztXQWVHO1FBQ0gsT0FBTyxFQUFFO1lBQ1AsU0FBUyxFQUFFLFdBQVc7U0FDdkI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFO1lBQ04sTUFBTTtZQUNOLE1BQU07WUFDTixVQUFVO1lBQ1YsYUFBYTtZQUNiLFdBQVc7WUFDWCxRQUFRO1lBQ1IsU0FBUztZQUNULFFBQVE7WUFDUixPQUFPO1lBQ1AsUUFBUTtTQUNUO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSw4Q0FBOEM7S0FDeEQ7Q0FDRixDQUFDIn0=

@@ -77,12 +77,12 @@ function fn(value, settings = {}) {
   // error
   if (value instanceof Error) {
     const errorStr = value.toString();
-    let stackStr = value.stack;
+    const stackStr = value.stack;
     const messageStr = value.message;
 
     // if (settings.beautify) {
     //   if (__isNode()) {
-    //     const __packageRoot = require('../path/packageRoot').default; // eslint-disable-line
+    //     const __packageRoot = require('../path/packageRootDir').default; // eslint-disable-line
     //     stackStr = stackStr.replace(errorStr, '').trim();
     //     stackStr = stackStr
     //       .split(`${__packageRoot(process.cwd(), true)}/`)

@@ -9,7 +9,7 @@
 
 import __fs from 'fs';
 import __SScssCompiler from '../../../../scss/SScssCompiler';
-import __tmpDir from '../../../../fs/tmpDir';
+import __packageTmpDir from '../../../../fs/packageTmpDir';
 
 export default {
   name: 'esbuildScssLoaderPlugin',
@@ -17,7 +17,7 @@ export default {
     // Load ".txt" files and return an array of words
     build.onLoad({ filter: /\.scss$/ }, async (args) => {
       let text = await __fs.promises.readFile(args.path, 'utf8');
-      const filePath = `${__tmpDir()}/esbuildScssLoaderPlugin.scss`;
+      const filePath = `${__packageTmpDir()}/esbuildScssLoaderPlugin.scss`;
       __fs.writeFileSync(filePath, text);
 
       const compiler = new __SScssCompiler({

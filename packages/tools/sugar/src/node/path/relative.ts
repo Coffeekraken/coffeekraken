@@ -1,7 +1,7 @@
 import __isGlob from '../../shared/is/glob';
 import __isPath from '../../shared/is/path';
 import __path from 'path';
-import __packageRoot from './packageRoot';
+import __packageRootDir from './packageRootDir';
 
 /**
  * @name            relative
@@ -13,7 +13,7 @@ import __packageRoot from './packageRoot';
  * depending on the second argument which is the "from" one.
  *
  * @param       {String|Array<String>}          path            The path(s) to transform into relative ones
- * @param       {String}                [from=__packageRoot()]                    The path to the base directory from which transform the path(s) to relative
+ * @param       {String}                [from=__packageRootDir()]                    The path to the base directory from which transform the path(s) to relative
  * @param       {IRelativeSettings}     [settings={}]           Some settings to configure your transform process
  * @return      {String|Array<String>}                          The new transformed paths
  *
@@ -31,13 +31,13 @@ import __packageRoot from './packageRoot';
  */
 
 interface IRelativeSettings {
-  glob?: Boolean;
-  absolute?: Boolean;
+  glob?: boolean;
+  absolute?: boolean;
 }
 
 function relative(
   path,
-  from = __packageRoot(),
+  from = __packageRootDir(),
   settings: IRelativeSettings = {}
 ) {
   settings = {

@@ -4,7 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __path from 'path';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
@@ -342,7 +342,7 @@ export default class SVite extends __SClass {
             if (params.type.toLowerCase() === 'bundle') {
               emit('log', {
                 value: `<green>[save]</green> Saving bundle file under "<cyan>${__path.relative(
-                  __packageRoot(),
+                  __packageRootDir(),
                   outPath
                 )}</cyan>" <yellow>${
                   file.stats.kbytes
@@ -351,7 +351,7 @@ export default class SVite extends __SClass {
             } else if (params.type.toLowerCase() === 'lib') {
               emit('log', {
                 value: `<green>[save]</green> Saving lib file under "<cyan>${__path.relative(
-                  __packageRoot(),
+                  __packageRootDir(),
                   outPath
                 )}</cyan>" <yellow>${
                   file.stats.kbytes
@@ -360,7 +360,7 @@ export default class SVite extends __SClass {
             } else {
               emit('log', {
                 value: `<green>[save]</green> Saving file under "<cyan>${__path.relative(
-                  __packageRoot(),
+                  __packageRootDir(),
                   outPath
                 )}</cyan>" <yellow>${
                   file.stats.kbytes

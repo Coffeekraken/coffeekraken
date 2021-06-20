@@ -107,7 +107,6 @@ export default function ({
     font-family: "Font Awesome 5 ${__upperFirst(fontNames[prefix])}";
     font-weight: ${fontWeight[prefix]};
     
-
     &:before {
       content: "\\${iconDef.icon[3]}";
       display: inline-block;

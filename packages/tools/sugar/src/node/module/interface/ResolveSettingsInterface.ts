@@ -1,6 +1,6 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
-import __packageRoot from '../../path/packageRoot';
+import __packageRootDir from '../../path/packageRootDir';
 
 /**
  * @name            ResolveSettingsInterface
@@ -47,7 +47,7 @@ class ResolveSettingsInterface extends __SInterface {
     },
     rootDir: {
       type: 'String',
-      default: __packageRoot()
+      default: __packageRootDir()
     }
   };
 }

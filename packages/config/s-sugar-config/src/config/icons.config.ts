@@ -17,6 +17,36 @@ export default {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         url: 'https://use.fontawesome.com/releases/v5.15.3/css/all.css'
+    },
+
+    fantasticon: {
+
+        /**
+         * @name            name
+         * @namespace       config.icons.fantasticon
+         * @type            String
+         * @default         sugar-fonticon
+         * 
+         * Specify the name of the generated font
+         * 
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        name: 'sugar-fonticon',
+
+        /**
+         * @name            outputDir
+         * @namespace       config.icons.fantasticon
+         * @type            String
+         * @default         [config.storage.dist.fontsDir]/sugar-icons
+         * 
+         * Specify the output directory to generate fonticon in
+         * 
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        outputDir: '[config.storage.src.fontsDir]/sugar-icons'
+
     }
 
 }

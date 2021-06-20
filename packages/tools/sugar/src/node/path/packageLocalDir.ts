@@ -2,7 +2,7 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
- * @name                            localDir
+ * @name                            packageLocalDir
  * @namespace            node.fs
  * @type                            Function
  * @stable
@@ -16,14 +16,14 @@ import __fs from 'fs-extra';
  * @todo      tests
  *
  * @example             js
- * import localDir from '@coffeekraken/node/path/localDir';
- * localDir(); // => '/my/cool/path/.local'
+ * import packageLocalDir from '@coffeekraken/node/path/packageLocalDir';
+ * packageLocalDir(); // => '/my/cool/path/.local'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const fn: ILocalDir = function () {
-  const path = __SugarConfig.get('storage.localDir');
+const fn: IpackageLocalDir = function () {
+  const path = __SugarConfig.get('storage.package.localDir');
   __fs.ensureDirSync(path);
   return path;
 };

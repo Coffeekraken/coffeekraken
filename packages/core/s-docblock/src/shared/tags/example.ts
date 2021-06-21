@@ -9,6 +9,7 @@
  * Parse the example tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @example      {Object}                      The formated object
  *
  * @todo        interface
@@ -17,7 +18,7 @@
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function example(data) {
+function example(data, blockSettings) {
   if (!Array.isArray(data)) data = [data];
   data = data
     .map((item) => {

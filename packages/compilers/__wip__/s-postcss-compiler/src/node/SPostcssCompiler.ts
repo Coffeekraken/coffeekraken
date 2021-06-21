@@ -1,21 +1,16 @@
-import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __SDuration from '@coffeekraken/s-duration';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SPromise from '@coffeekraken/s-promise';
-import __postCss from 'postcss';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
+import __SDuration from '@coffeekraken/s-duration';
+import __SPromise from '@coffeekraken/s-promise';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __fsPool from '@coffeekraken/sugar/node/fs/pool';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __cleanCss from 'clean-css';
-import __isGlob from '@coffeekraken/sugar/shared/is/glob';
-import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-
-import __path from 'path';
 import __fs from 'fs';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-
+import __path from 'path';
+import __postCss from 'postcss';
 import __SPostcssCompilerInterface from './interface/SPostcssCompilerInterface';
+
+
 
 export interface ISPostcssCompilerParams {
   input: string | string[];

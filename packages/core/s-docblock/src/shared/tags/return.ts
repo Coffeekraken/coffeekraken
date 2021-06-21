@@ -11,6 +11,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * Parse the return tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @return      {Object}                      The formated object
  *
  * @todo      interface
@@ -19,7 +20,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function returnTag(data) {
+function returnTag(data, blockSettings) {
   const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
 
   let type =

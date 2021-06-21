@@ -13,6 +13,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * Parse the see tag
  *
  * @see       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @see      {Object}                      The formated object
  *
  * @todo      interface
@@ -21,7 +22,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function see(data) {
+function see(data, blockSettings) {
   if (!Array.isArray(data)) data = [data];
 
   const res = [];

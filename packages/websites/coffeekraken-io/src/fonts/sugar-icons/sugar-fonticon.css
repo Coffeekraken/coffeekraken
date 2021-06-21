@@ -6,6 +6,8 @@ url("./sugar-fonticon.woff?d7090342b2d586c26868bdb61257d4a2") format("woff");
 }
 
 .s-icon--vue:before {
+position: relative;
+top: 0.1em;
     font-family: sugar-fonticon !important;
     font-style: normal;
     font-weight: normal !important;

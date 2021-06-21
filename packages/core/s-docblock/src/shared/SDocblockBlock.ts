@@ -14,6 +14,7 @@ import __paramTag from './tags/param';
 import __seeTag from './tags/see';
 import __snippetTag from './tags/snippet';
 import __platformTag from './tags/platform';
+import __namespaceTag from './tags/namespace';
 
 /**
  * @name          SDocblockBlock
@@ -47,6 +48,7 @@ export interface ISDocblockBlockTagsMap {
 
 export interface ISDocblockBlockSettings {
   filepath?: string;
+  packageJson: any;
   tags: ISDocblockBlockTagsMap;
 }
 export interface ISDocblockBlockCtorSettings {
@@ -148,6 +150,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
         {
           docblockBlock: {
             filepath: null,
+            packageJson: null,
             tags: SDocblockBlock.tagsMap
           }
         },
@@ -290,8 +293,8 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
     docblockObj = __map(docblockObj, ({ value, prop }) => {
       if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') return value;
       if (this.docblockBlockSettings.tags[prop] && prop !== 'src')
-        return this.docblockBlockSettings.tags[prop](value);
-      return __simpleValueTag(value);
+        return this.docblockBlockSettings.tags[prop](value, this.docblockBlockSettings);
+      return __simpleValueTag(value, this.docblockBlockSettings);
     });
 
     // save the raw string
@@ -348,7 +351,6 @@ SDocblockBlock.registerTag('memberof', __simpleValueTag);
 SDocblockBlock.registerTag('mixes', __simpleValueTag);
 SDocblockBlock.registerTag('module', __simpleValueTag);
 SDocblockBlock.registerTag('name', __simpleValueTag);
-SDocblockBlock.registerTag('namespace', __simpleValueTag);
 SDocblockBlock.registerTag('package', __simpleValueTag);
 SDocblockBlock.registerTag('private', __simpleValueTag);
 SDocblockBlock.registerTag('protected', __simpleValueTag);
@@ -366,6 +368,7 @@ SDocblockBlock.registerTag('variation', __simpleValueTag);
 SDocblockBlock.registerTag('version', __simpleValueTag);
 SDocblockBlock.registerTag('enum', __simpleValueTag);
 SDocblockBlock.registerTag('src', __simpleValueTag);
+SDocblockBlock.registerTag('import', __simpleValueTag);
 SDocblockBlock.registerTag('feature', __simpleRepeatableValue);
 SDocblockBlock.registerTag('description', __descriptionTag);
 SDocblockBlock.registerTag('desc', __descriptionTag);
@@ -379,6 +382,7 @@ SDocblockBlock.registerTag('property', __paramTag);
 SDocblockBlock.registerTag('prop', __paramTag);
 SDocblockBlock.registerTag('setting', __paramTag);
 SDocblockBlock.registerTag('platform', __platformTag);
+SDocblockBlock.registerTag('namespace', __namespaceTag);
 // SDocblockBlock.registerTag('listens', __listensTag);
 // SDocblockBlock.registerTag('member', __memberTag);
 // SDocblockBlock.registerTag('var', __memberTag);

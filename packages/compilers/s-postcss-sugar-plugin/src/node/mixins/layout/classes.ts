@@ -67,7 +67,7 @@ export default function ({
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       .s-grid--${id} {
-        @sugar.layout.grid('${layout}');
+        @sugar.layout.grid(${layout}, $scope: bare);
       }
     `);
   });
@@ -167,7 +167,7 @@ export default function ({
        * This class allows you to specify that you want only gutters between grid items
        * 
        * @example     html
-       * <div class="s-grid--123 s-grid-gutter--between">
+       * <div class="s-grid--123 s-grid--gutter-between">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -187,6 +187,62 @@ export default function ({
         }
       }
   `);
+
+  // align items
+  ['start','end','center','stretch'].forEach(align => {
+    vars.push(`
+      /**
+         * @name       s-grid--align-${align}
+         * @namespace     sugar.css.layout
+         * @type          CssClass
+         * 
+         * This allows you to align all the items to "${align}"
+         * 
+         * @example     html
+         * <div class="s-grid--123 s-grid--align-${align}">
+         *    ${Array(3)
+           .map((idx) => {
+             return `<div>I'm the area ${idx}</div>`;
+          })
+          .join('\n')}
+        * </div>
+        * 
+        * @since     2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .s-grid--align-${align} {
+          align-items: ${align};
+        }
+    `);
+  });
+
+  // justify items
+  ['start','end','center','stretch'].forEach(justify => {
+    vars.push(`
+      /**
+         * @name       s-grid--justify-${justify}
+         * @namespace     sugar.css.layout
+         * @type          CssClass
+         * 
+         * This allows you to justify all the items to "${justify}"
+         * 
+         * @example     html
+         * <div class="s-grid--123 s-grid--justify-${justify}">
+         *    ${Array(3)
+           .map((idx) => {
+             return `<div>I'm the area ${idx}</div>`;
+          })
+          .join('\n')}
+        * </div>
+        * 
+        * @since     2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .s-grid--justify-${justify} {
+          justify-items: ${justify};
+        }
+    `);
+  });
 
 
   replaceWith(vars);

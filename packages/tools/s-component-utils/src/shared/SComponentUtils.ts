@@ -3,6 +3,7 @@ import __SClass from '@coffeekraken/s-class';
 import __mustache from 'mustache';
 import __SInterface from '@coffeekraken/s-interface';
 import __handlebars from 'handlebars';
+import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 
 /**
  * @name                SComponentUtils
@@ -181,7 +182,15 @@ export default class SComponentUtils extends __SClass {
         return options.fn(this);
       } else {
         return options.inverse(this);
-      } 
+      }
+    });
+
+    __handlebars.registerHelper("striptags", function( txt ){
+      // exit now if text is undefined 
+      if(typeof txt == "undefined") return;
+      // replacing the text
+      return __striptags(txt);
+      
     });
 
   }

@@ -9,6 +9,7 @@
  * Parse the snippet tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @snippet      {Object}                      The formated object
  *
  * @todo      interface
@@ -17,7 +18,7 @@
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function snippet(data) {
+function snippet(data, blockSettings) {
   if (data.content && data.content[data.content.length - 1] === '') {
     data.content = data.content.slice(0, -1);
   }

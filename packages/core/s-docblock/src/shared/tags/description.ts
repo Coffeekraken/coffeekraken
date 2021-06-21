@@ -9,6 +9,7 @@
  * Parse the description tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @return      {Object}                      The formated object
  *
  * @todo      interface
@@ -17,7 +18,7 @@
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function description(data) {
+function description(data, blockSettings) {
 
   if (Array.isArray(data)) data = data[0];
 

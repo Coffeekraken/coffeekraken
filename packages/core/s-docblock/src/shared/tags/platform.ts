@@ -12,6 +12,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * Parse the param tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @param      {Array<IPlatform>}                      An array of platform obj
  *
  * @todo      interface
@@ -26,7 +27,7 @@ export interface IPlatform {
   description: string;
 }
 
-function param(data): IPlatform[] {
+function param(data, blockSettings): IPlatform[] {
   if (!Array.isArray(data)) data = [data];
 
   const res = [];

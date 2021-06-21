@@ -266,4 +266,24 @@ export default class SBench extends __SPromise {
         this.resolve(this);
     }
 
+    /**
+     * @name            toString
+     * @type            Function
+     * 
+     * This method allows you to print the bench in string format
+     * 
+     * @return      {String}                The bench in string format
+     * 
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toString() {
+        let logsAr: stringn[] = [];
+        Object.keys(this._steps).forEach(stepId => {
+            const stepObj = this._steps[stepId];
+            logsAr = [...logsAr, ...stepObj.logs];
+        });
+        return logsAr.join('\n');
+    }
+
 }

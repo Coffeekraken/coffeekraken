@@ -1,12 +1,12 @@
 // @ts-nocheck
 
 /**
- * @name              simpleValue
+ * @name              namespace
  * @namespace           shared.tags
  * @type              Function
  * @status              wip
  *
- * Parse the simpleValue tag
+ * Parse the namespace tag
  *
  * @param       {Object}          data        The data object parsed in the string
  * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
@@ -15,10 +15,11 @@
  * @todo      interface
  * @todo      doc
  *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+ * @since       2.0.0
+ * @namespace 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function simpleValue(data, blockSettings) {
+function namespace(data, blockSettings) {
+ 
   if (
     data &&
     data.value &&
@@ -27,6 +28,13 @@ function simpleValue(data, blockSettings) {
   ) {
     return true;
   }
-  return data.value;
+
+  let namespace = data.value;
+  if (blockSettings.packageJson) {
+    namespace = `${blockSettings.packageJson.name.replace('/','.')}.${namespace}`;
+  }
+
+  return namespace;
+  
 }
-export default simpleValue;
+export default namespace;

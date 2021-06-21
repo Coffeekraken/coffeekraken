@@ -9,6 +9,7 @@
  * Parse the contributor tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @return      {Object}                      The formated object
  *
  * @todo      interface
@@ -17,7 +18,7 @@
  * @since       2.0.0
  * @contributor 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function contributor(data) {
+function contributor(data, blockSettings) {
 
   data = Array.from(data);
 

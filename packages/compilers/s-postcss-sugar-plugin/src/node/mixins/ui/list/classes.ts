@@ -90,6 +90,45 @@ export default function ({
       */`);
   vars.push([`.s-list--icon.s-list--ul {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
 
+  // ul
+  vars.push(`/**
+        * @name           s-list--ol
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>ol</yellow>" list
+        * 
+        * @example        html
+        * <ul class="s-list--ol" />
+        *   <li>Hello</li>
+        *   <li>World</li>
+        * </ul>
+      */`);
+  vars.push([`.s-list--ol {`, `@sugar.ui.list.ol;`, `}`].join('\n'));
+
+  Object.keys(__theme().config('color')).forEach((colorName) => {
+    vars.push(`
+      /**
+       * @name        s-list--${colorName}
+       * @namespace     sugar.css.ui.button
+       * @type          CssClass
+       * 
+       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any list
+       * 
+       * @example       html
+       * <ul class="s-list--${colorName}" />
+       *   <li>Hello</li>
+       *   <li>World</li>
+       * </ul>
+       * 
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      .s-list--${colorName} {
+        @sugar.color.remap(ui, ${colorName});
+      }
+    `);
+  });
 
   replaceWith(vars);
 }

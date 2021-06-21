@@ -9,6 +9,7 @@
  * Parse the author tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @return      {Object}                      The formated object
  *
  * @todo      interface
@@ -17,7 +18,7 @@
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function author(data) {
+function author(data, blockSettings) {
   const authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
     data.value
   );

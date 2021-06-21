@@ -1,18 +1,20 @@
+import __SDuration from '@coffeekraken/s-duration';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __childProcess from 'child_process';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
+import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
+import __childProcess from 'child_process';
 import __fs from 'fs';
 import __path from 'path';
-import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __postcss from 'postcss';
-import __distIconsDir from '@coffeekraken/sugar/node/path/distIconsDir';
-import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
 
 export default function ({ root, sharedData }) {
     
+    const duration = new __SDuration();
+
     const dirName =
         typeof root.source.input.file === 'string'
         ? __path.dirname(root.source.input.file)
@@ -31,7 +33,7 @@ export default function ({ root, sharedData }) {
 
     // handle cached hash
     const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
-    if (__fs.existsSync(hashCacheFilePath)) {
+    if (__fs.existsSync(hashCacheFilePath) && __fs.existsSync(sharedData.iconsInputDir)) {
         const hash = __folderHash(sharedData.iconsInputDir);
         const cachedHash = __fs.readFileSync(hashCacheFilePath, 'utf8').toString();
         // console.log('Dirname', dirName);
@@ -42,7 +44,7 @@ export default function ({ root, sharedData }) {
             try {
                 __fs.rmdirSync(sharedData.iconsInputDir, { recursive: true});
             } catch(e) {}
-            console.log(`<cyan>[icons]</cyan> No need to regenerate icons font`);
+            console.log(`<cyan>[fonticons]</cyan> No need to regenerate icons font`);            
             return;
         }
     }
@@ -51,7 +53,7 @@ export default function ({ root, sharedData }) {
 
     try {
 
-        console.log(`<yellow>[icons]</yellow> Generate icons font`);
+        console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
 
         __childProcess.execSync(`npx fantasticon -o ${fantasticonConfig.outputDir} -n ${fantasticonConfig.name} --normalize --selector .s-icon --prefix '--' ${sharedData.iconsInputDir}`, {
             stdio: 'pipe',
@@ -70,17 +72,12 @@ export default function ({ root, sharedData }) {
         iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, '')}:before`);
     });
 
-    // delete the temp icons folder for fresh new compilation
-    try {
-        __fs.rmdirSync(sharedData.iconsInputDir, { recursive: true});
-    } catch(e) {}
-
     const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
     let cssStr = __fs.readFileSync(cssPath, 'utf8').toString();
 
     // replace some parts in the output css
     cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
-    cssStr = cssStr.replace('.s-icon:before', iconsSelectorsArray.join(','));
+    cssStr = cssStr.replace(/\.s-icon:before\s?{/, `${iconsSelectorsArray.join(',')} {\nposition: relative;\ntop: 0.1em;`);
 
     // rewrite the css file
     __fs.writeFileSync(cssPath, cssStr);
@@ -89,6 +86,11 @@ export default function ({ root, sharedData }) {
     const folderHash = __folderHash(sharedData.iconsInputDir);
     __writeFileSync(hashCacheFilePath, folderHash);
 
-    // console.log('res', res);
+    // delete the temp icons folder for fresh new compilation
+    try {
+        __fs.rmdirSync(sharedData.iconsInputDir, { recursive: true});
+    } catch(e) {}
+
+    console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);
 
 }

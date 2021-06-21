@@ -34,6 +34,7 @@ let _docmapJson;
 export default function doc(req, res, settings = {}) {
 
   return new __SPromise(async ({ resolve, reject, pipe }) => {
+
     const docMap = new __SDocMap();
     const requestedNamespace = req.path.replace('/doc/', '').trim();
 
@@ -41,6 +42,7 @@ export default function doc(req, res, settings = {}) {
     pipe(readPromise);
     _docmapJson = await readPromise;
     
+
     if (!_docmapJson[requestedNamespace]) {
       const html = await page404({
         ...(res.templateData || {}),
@@ -52,6 +54,7 @@ export default function doc(req, res, settings = {}) {
       res.send(html.value);
       return reject(html.value);
     }
+
 
     // generate the docblocks
     const docblocks = new __SDocblock(_docmapJson[requestedNamespace].path, {}).toObject();
@@ -70,45 +73,36 @@ export default function doc(req, res, settings = {}) {
     }
 
 
-
     // scrap @see fields opengraph metas
     await new Promise((resolve, reject) => {
 
       let pendingRequests = 0;
 
-      docblocks.forEach((block) => {
-        if (!block.see) return;
+      docblocks.forEach((block, i) => {
+        if (block.see) {
+          block.see.forEach((seeObj, j) => {
 
-        block.see.forEach((seeObj) => {
+            pendingRequests++;
 
-          pendingRequests++;
+            __scrapeUrl(seeObj.url).then(results => {
+              seeObj.og = results
+              pendingRequests--;
+              if (!pendingRequests) {
+                resolve();
+              }
+            }).catch(error => {
+              pendingRequests--;
+              if (!pendingRequests) {
+                resolve();
+              }
+            });
 
-          __scrapeUrl(seeObj.url).then(results => {
-            seeObj.og = results
-            pendingRequests--;
-            if (!pendingRequests) {
-              resolve();
-            }
-          }).catch(error => {
-            pendingRequests--;
-            if (!pendingRequests) {
-              resolve();
-            }
           });
-
-          // const data = __ogScraper({
-          //   url: seeObj.url,
-          //   onlyGetOpenGraphInfo: true
-          // }, (error, results, response) => {
-          //   if (results) {
-          //     seeObj.og = results
-          //   }
-          //   pendingRequests--;
-          //   if (!pendingRequests) {
-          //     resolve();
-          //   }
-          // });
-        });
+        } else {
+          if (i === docblocks.length-1 && !pendingRequests) {
+            resolve();
+          }
+        }
       });
     });
 
@@ -120,9 +114,11 @@ export default function doc(req, res, settings = {}) {
       docblocks
     });
 
+
     res.type('text/html');
     res.status(200);
     res.send(pageHtml.value);
     resolve(pageHtml.value);
+
   });
 }

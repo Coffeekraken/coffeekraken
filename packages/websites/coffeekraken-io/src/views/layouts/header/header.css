@@ -2,11 +2,20 @@
     position: relative;
     z-index: 100;
 
-    @sugar.gradient.linear($start: sugar.color(ui, background), $end: rgba(0,0,0,0), $angle: 180deg);
+    &:before {
+        content: '';
+        display: block;
+        width: 100vw; height: 100%;
+        position: absolute;
+        left: 50%; top: 0;
+        transform: translateX(-50%);
+
+        @sugar.gradient.linear($start: sugar.color(ui, background), $end: rgba(0,0,0,0), $angle: 180deg);
+    }
 }
 
 #search-form {
-    width: 200px;
+    width: 300px;
     z-index: 99999;
 
     input, s-filtrable-input {
@@ -15,7 +24,7 @@
     }
 
     s-filtrable-input {
-        width: 200px;
+        width: 300px;
         right:0;
         position: absolute;
         transform: translateY(-50%);
@@ -36,12 +45,13 @@
             padding: 0 !important;
             background: sugar.color(ui, background);
 
-            .__bg {
+            /* .__bg {
                 display: block;
                 width: 100%; height: 100%;
                 position: absolute;
                 top: 0; left: 0;
                 opacity: 0.1;
+                z-index: -1;
 
                 @sugar.gradient.linear(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
 
@@ -55,7 +65,7 @@
                     @sugar.gradient.linear(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
                 
                 }
-            }
+            } */
 
             .__code {
                 position: relative;

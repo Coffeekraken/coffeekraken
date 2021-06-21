@@ -54,5 +54,16 @@ function expandColonClasses($html) {
 
     }
 
+    $escapedParts = [];
+    $escapedReg = '/class=".*\\\:.*"/';
+    $escapedMatches = preg_match_all($escapedReg, $html, $escapedParts);
+
+    if (count($escapedMatches)) {
+        foreach($escapedParts[0] as $class) {
+            $newClass = str_replace('\:', ':', $class);
+            $html = str_replace($class, $newClass, $html);
+        }
+    }
+
     return $html;
 }

@@ -4,6 +4,7 @@
  * @name 		                SEvent
  * @namespace            js.event
  * @type                    Class
+ * @import              import SEvent from '@coffeekraken/sugar/js/event/SEvent';
  * @platform                js
  * @status                  stable
  *

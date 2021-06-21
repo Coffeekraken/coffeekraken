@@ -38,7 +38,7 @@ export default function ({ params, atRule, replaceWith }) {
             position: absolute;
             left: 0.5em;
             transform: translateX(-50%);
-            color: sugar.color(accent);
+            color: sugar.color(ui);
           }
 
           ${finalParams.icon ? `

@@ -1,22 +1,22 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SDuration from '@coffeekraken/s-duration';
 import __SCompiler, { ISCompiler } from '@coffeekraken/s-compiler';
-import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
-import __STsCompiler from '@coffeekraken/s-ts-compiler';
+import __SDuration from '@coffeekraken/s-duration';
 import __SPostcssCompiler from '@coffeekraken/s-postcss-compiler';
-import __packageTmpDir from '@coffeekraken/sugar/node/path/tmpDir';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __SPromise from '@coffeekraken/s-promise';
+import __STsCompiler from '@coffeekraken/s-ts-compiler';
+import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __packagepackageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
+import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
+import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __cleanCss from 'clean-css';
 import __path from 'path';
 import __uglify from 'uglify-js';
-import __cleanCss from 'clean-css';
-import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
-import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
 
 // @ts-ignore
 const __svelte = require('svelte/compiler'); // eslint-disable-line
@@ -201,7 +201,7 @@ class SSvelteCompiler extends __SCompiler {
                 {
                   style: async (input) => {
                     // write a temp file to compile
-                    const tmpCssFilePath = `${__packageTmpDir()}/SSvelteCompiler/${Date.now()}.css`;
+                    const tmpCssFilePath = `${__packagepackageTmpDir()}/SSvelteCompiler/${Date.now()}.css`;
                     __writeFileSync(`${tmpCssFilePath}`, input.content);
 
                     const compiler = new __SPostcssCompiler(
@@ -247,14 +247,14 @@ class SSvelteCompiler extends __SCompiler {
                     }
 
                     // write a temp file to compile
-                    const tmpTsFilePath = `${__packageTmpDir()}/SSvelteCompiler/${Date.now()}.ts`;
+                    const tmpTsFilePath = `${__packagepackageTmpDir()}/SSvelteCompiler/${Date.now()}.ts`;
                     __writeFileSync(`${tmpTsFilePath}`, input.content);
 
                     const compiler = new __STsCompiler();
 
                     const res = await compiler.compile({
                       input: [tmpTsFilePath],
-                      rootDir: `${__packageTmpDir()}/SSvelteCompiler`,
+                      rootDir: `${__packagepackageTmpDir()}/SSvelteCompiler`,
                       config: 'js',
                       save: false
                     });

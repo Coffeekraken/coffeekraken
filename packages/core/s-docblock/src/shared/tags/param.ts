@@ -12,6 +12,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * Parse the param tag
  *
  * @param       {Object}          data        The data object parsed in the string
+ * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
  * @param      {Object}                      The formated object
  *
  * @todo      interface
@@ -20,7 +21,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function param(data) {
+function param(data, blockSettings) {
   if (!Array.isArray(data)) data = [data];
 
   const res = {};

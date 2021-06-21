@@ -108,8 +108,28 @@ export default function ({ params, atRule, replaceWith }) {
           `}`
         ].join('\n')
       );
-
     });
+
+    cssArray.push(
+      [
+        `/**`,
+        ` * @name           s-gradient--${colorName}`,
+        ` * @namespace      sugar.css.color.classes.gradient.${colorName}`,
+        ` * @type           CssClass`,
+        ` *`,
+        ` * This class allows you to apply the "${colorName}" color gradient to the background of an HTMLElement`,
+        ` *`,
+        ` * @example        html`,
+        ` * <h1 class="s-gradient--${colorName}">`,
+        ` *     Something cool`,
+        ` * </h1>`,
+        ` */`,
+        `.s-gradient--${colorName} {`,
+        `   @sugar.gradient.linear(sugar.color(${colorName}, gradientStart), sugar.color(${colorName}, gradientEnd), $angle: 90deg);`,
+        `}`
+      ].join('\n')
+    );
+
   });
 
   replaceWith(cssArray);

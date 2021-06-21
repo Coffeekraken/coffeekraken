@@ -8,6 +8,25 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
     },
     gutter: {
       type: 'Number'
+    },
+    gutterBetween: {
+      type: 'Boolean',
+      default: false
+    },
+    align: {
+      type: 'String',
+      values: ['start','end','center','stretch'],
+      default: 'stretch'
+    },
+    justify: {
+      type: 'String',
+      values: ['start','end','center','stretch'],
+      default: 'stretch'
+    },
+    scope: {
+      type: 'Array<String>',
+      values: ['bare','lnf','gutter','align','justify'],
+      default: ['bare','lnf','gutter','align','justify']
     }
   };
 }
@@ -15,6 +34,10 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
 export interface IPostcssSugarPluginLayoutParams {
   layout: string;
   gutter: number;
+  gutterBetween: boolean;
+  align: 'start' | 'end' | 'center' | 'stretch';
+  justify: 'start' | 'end' | 'center' | 'stretch';
+  scope: string[];
 }
 
 export { postcssSugarPluginLayoutInterface as interface };
@@ -85,7 +108,7 @@ export default function ({
       .split(' ')
       .map((l) => l.trim())
       .filter((l) => l);
-    colsCount += rowCols.length;
+    if (rowCols.length > colsCount) colsCount = rowCols.length;
   });
 
   let currentCol = 0,
@@ -156,25 +179,61 @@ export default function ({
     rowsStatement.push(`${100 / rowsCount}%`);
   }
 
-  const vars: string[] = [
-    `
-      display: grid;
-      grid-template-columns: ${colsStatement.join(' ')};
-      grid-template-rows: ${rowsStatement.join(' ')};
-    `
-  ];
+  const vars: string[] = [];
+  
+  if (finalParams.scope.indexOf('bare') !== -1) {
+    vars.push(
+      `
+        display: grid;
+        grid-template-columns: ${colsStatement.join(' ')};
+        grid-template-rows: ${rowsStatement.join(' ')};
+      `
+    );
+  }
 
-  areas.forEach((areaId) => {
+  if (finalParams.scope.indexOf('align') !== -1) {
     vars.push(`
-        .area-${areaId}, & > *:nth-child(${areaId}) {
-            grid-column-start: ${colsStartByArea[areaId]};
-            grid-column-end: ${colsEndByArea[areaId] + 1};
-            grid-row-start: ${rowsStartByArea[areaId]};
-            grid-row-end: ${rowsEndByArea[areaId] + 1};
-            ${finalParams.gutter ? `padding: sugar.size(${finalParams.gutter})` : ''}
-        }
+      align-items: ${finalParams.align};
+    `);
+  }
+
+  if (finalParams.scope.indexOf('justify') !== -1) {
+    vars.push(`
+      justify-items: ${finalParams.justify};
+    `);
+  }
+  
+  if (finalParams.scope.indexOf('bare') !== -1) {
+    areas.forEach((areaId) => {
+      vars.push(`
+          .area-${areaId}, & > *:nth-child(${areaId}) {
+              grid-column-start: ${colsStartByArea[areaId]};
+              grid-column-end: ${colsEndByArea[areaId] + 1};
+              grid-row-start: ${rowsStartByArea[areaId]};
+              grid-row-end: ${rowsEndByArea[areaId] + 1};
+              ${finalParams.gutter ? `padding: sugar.space(${finalParams.gutter})` : ''}
+          }
+        `);
+    });
+  }
+
+  if (finalParams.scope.indexOf('gutter') !== -1 && finalParams.gutter) {
+    areas.forEach((areaId) => {
+      vars.push(`
+          .area-${areaId}, & > *:nth-child(${areaId}) {
+            padding: sugar.space(${finalParams.gutter});
+          }
       `);
-  });
+    });
+
+    if (finalParams.gutterBetween) {
+      vars.push(`
+        width: calc(100% + sugar.space(${finalParams.gutter}) * 2);
+        margin-left: calc(sugar.space(${finalParams.gutter}) * -1);
+      `);
+    }
+
+  }
 
   replaceWith(vars);
 }

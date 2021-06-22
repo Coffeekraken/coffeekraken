@@ -35,7 +35,6 @@ export default function page404(
       engine: 'blade'
     }
   });
-  console.log('DFA', data);
   const result = engine.render(data);
   return result;
 }

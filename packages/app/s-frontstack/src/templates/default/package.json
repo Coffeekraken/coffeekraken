@@ -1,0 +1,14 @@
+{
+  "name": "@coffeekraken/default-recipe",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "sugard frontstack",
+    "build": "sugard vite.build --bundle --prod"
+  },
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^2.0.0"
+  }
+}

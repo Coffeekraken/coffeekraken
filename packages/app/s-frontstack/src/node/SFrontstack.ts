@@ -13,6 +13,7 @@ import __SProcess, {
 } from '@coffeekraken/s-process';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
+import param from '@coffeekraken/s-docblock/src/shared/tags/param';
 
 export interface ISFrontstackSettings {}
 export interface ISFrontstackCtorSettings {
@@ -43,12 +44,18 @@ export interface ISFrontstackRecipe {
   id: string;
   title: string;
   description: string;
+  templateDir: string;
+  defaultStack: string;
   stacks: Record<string, ISFrontstackRecipestack>;
 }
 
 export interface ISFrontstackActionParams {
   action: string;
   params: string;
+}
+
+export interface ISFrontstackListParams {
+  recipeStack: string;
 }
 
 export default class SFrontstack extends __SClass {
@@ -198,6 +205,10 @@ export default class SFrontstack extends __SClass {
           finalParams.recipe = sugarJson.recipe;
         }
 
+        if (!finalParams.recipe) {
+          throw new Error(`<red>[recipe]</red> Sorry but it seems that you missed to pass a recipe to use or that you don't have any "<cyan>sugar.json</cyan>" file at the root of your project with a "<yellow>recipe</yellow>" property that define which recipe to use for this project...`);
+        }
+
         if (!recipesObj[finalParams.recipe]) {
           throw new Error(`<red>[recipe]</red> Sorry but the specified "<yellow>${finalParams.recipe}</yellow>" recipe does not exists. Here's the available ones: <green>${Object.keys(recipesObj).join(', ')}</green>`);
         }
@@ -306,4 +317,119 @@ export default class SFrontstack extends __SClass {
       }
     );
   }
+
+  /**
+   * @name        listRecipes
+   * @type        Function
+   * 
+   * This method returns the recipes objects
+   * 
+   * @return     {Record<string, ISFrontstackRecipe>}        The recipes objects
+   * 
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  listRecipes(): Record<string, ISFrontstackRecipe> {
+    const recipes = __SSugarConfig.get('frontstack.recipes');
+    return recipes;
+  }
+
+  /**
+   * @name        list
+   * @type        Function
+   * @async
+   * 
+   * This method allows you to list all the current available recipes
+   * 
+   * @return      {}
+   * 
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  list(params: Partial<ISFrontstackListParams>): Promise<Record<string, ISFrontstackRecipe> | Record<string, ISFrontstackRecipestack> | Record<string, ISFrontstackAction>> {
+
+    return new __SPromise(({resolve, reject, emit}) => {
+
+      const recipes = this.listRecipes();
+
+      let recipe, stack;
+      if (params.recipeStack) {
+        recipe = params.recipeStack.split('.')[0];
+        stack = params.recipeStack.split('.')[1];
+      }
+
+      if (!recipe) {
+
+        emit('log', {
+          value: `Available recipe(s) list:`
+        });
+
+        let largerName = '';
+        for (const name in recipes) {
+          if (name.length > largerName.length) largerName = name;
+        }
+        for (const [name, obj] of Object.entries(recipes)) {
+          emit('log', {
+            value: `- <cyan>${name}</cyan>${' '.repeat(largerName.length - name.length)} : ${obj.description}`
+          });
+        }
+
+        return resolve(recipes);
+      }
+
+      if (recipe) {
+        if (!recipes[recipe]) {
+          throw new Error(`<red>[SFrontstack.list]</red> Sorry but the recipe "<yellow>${params.recipe}</yellow> does not exists...`);
+        }
+      }
+
+      if (recipe && !stack) {
+
+        emit('log', {
+          value: `Stacks list for the recipe "<yellow>${recipe}</yellow>":`
+        });
+        let largerName = '';
+        for (const name in recipes[recipe].stacks) {
+          if (name.length > largerName.length) largerName = name;
+        }
+        for (const [name, obj] of Object.entries(recipes[recipe].stacks)) {
+          emit('log', {
+            value: `- <cyan>${name}</cyan>${' '.repeat(largerName.length - name.length)} : ${obj.description}`
+          });
+        }
+
+        return resolve(recipes[recipe]);
+      }
+
+      if (stack) {
+        if (!recipes[recipe].stacks[stack]) {
+          throw new Error(`<red>[SFrontstack.list]</red> Sorry but the stack "<yellow>${stack}</yellow> does not exists in the recipe "<cyan>${recipe}</cyan>"...`);
+        }
+      }
+
+      if (recipe && stack) {
+
+        emit('log', {
+          value: `Actions list for the recipe "<yellow>${recipe}</yellow> and the stack "<cyan>${stack}</cyan>":`
+        });
+        let largerName = '';
+        for (const name in recipes[recipe].stacks[stack].actions) {
+          if (name.length > largerName.length) largerName = name;
+        }
+        for (const [name, obj] of Object.entries(recipes[recipe].stacks[stack].actions)) {
+          emit('log', {
+            value: `- <cyan>${name}</cyan>${' '.repeat(largerName.length - name.length)} : ${obj.description}`
+          });
+        }
+
+        return resolve(recipes[recipe].stacks[stack]);
+      }
+
+    }, {
+      metas: {
+        id: 'SFrontstack.list'
+      }
+    });
+  }
+
 }

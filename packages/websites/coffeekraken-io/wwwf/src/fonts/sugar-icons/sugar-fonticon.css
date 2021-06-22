@@ -1,0 +1,23 @@
+@font-face {
+    font-family: "sugar-fonticon";
+    src: url("./sugar-fonticon.eot?c65c42f6f893c44fdb7799beb90624c1#iefix") format("embedded-opentype"),
+url("./sugar-fonticon.woff2?c65c42f6f893c44fdb7799beb90624c1") format("woff2"),
+url("./sugar-fonticon.woff?c65c42f6f893c44fdb7799beb90624c1") format("woff");
+}
+
+.s-icon--copy:before {
+position: relative;
+top: 0.1em;
+    font-family: sugar-fonticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.s-icon--copy:before {
+    content: "\f101";
+}

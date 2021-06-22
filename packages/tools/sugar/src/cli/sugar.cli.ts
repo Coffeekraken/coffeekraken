@@ -16,7 +16,7 @@ const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
 const __SBench = require('@coffeekraken/s-bench').default;
 const __sugarBanner = require('@coffeekraken/sugar/shared/ascii/sugarBanner').default;
 
-const { prompt, Select } = require('enquirer');
+const { Select, AutoComplete } = require('enquirer');
 
 require('../node/index');
 
@@ -57,7 +57,8 @@ class SSugarCli {
   _args: string;
 
   _sugarJsons: any;
-  _availableCli: Record<string, string> = {}
+  _availableCli: Record<string, any> = {}
+  _availableInteractiveCli: Record<string, any> = {};
 
   constructor() {
 
@@ -103,6 +104,9 @@ class SSugarCli {
   }
 
   _process() {
+
+    console.log(this);
+
     if (!this._availableCli[`${this._stack}.${this._action ?? '_default'}`]) {
       this._displayHelpAfterError();      
       process.exit();
@@ -133,52 +137,55 @@ class SSugarCli {
           );
         }
 
+        if (cliObj.interactive) {
+          Object.keys(cliObj.interactive).forEach(interactiveName => {
+            const interactiveObj = cliObj.interactive[interactiveName];
+
+            const cliPath = __path.resolve(
+              sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
+              interactiveObj.process
+            );
+            if (!__fs.existsSync(cliPath))
+              throw new Error(
+                `[sugar.cli] Sorry but the references interactive cli file "${cliPath}" does not exists...`
+              );
+            
+            this._availableInteractiveCli[`${cliObj.stack}.${interactiveName}`] = {
+              ...interactiveObj,
+              processPath: cliPath
+            }
+          });
+        }
+
         Object.keys(cliObj.actions).forEach((action) => {
 
           const actionObj = cliObj.actions[action];
 
-          if (actionObj.process && __isPath(actionObj.process)) {
-            const cliPath = __path.resolve(
-              sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
-              actionObj.process
+          const cliPath = __path.resolve(
+            sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
+            actionObj.process
+          );
+          if (!__fs.existsSync(cliPath))
+            throw new Error(
+              `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
             );
-            if (!__fs.existsSync(cliPath))
-              throw new Error(
-                `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
-              );
-            if (
-              !this._action &&
-              cliObj.defaultAction &&
-              action === cliObj.defaultAction
-            ) {
-              this._availableCli[`${cliObj.stack}._default`] = {
-                packageJson,
-                ...actionObj,
-                processPath: cliPath
-              };
-            }
-
-            this._availableCli[`${cliObj.stack}.${action}`] = {
+          if (
+            !this._action &&
+            cliObj.defaultAction &&
+            action === cliObj.defaultAction
+          ) {
+            this._availableCli[`${cliObj.stack}._default`] = {
               packageJson,
               ...actionObj,
               processPath: cliPath
             };
-          } else if (actionObj.command) {
-            if (
-              !this._action &&
-              cliObj.defaultAction &&
-              action === cliObj.defaultAction
-            ) {
-              this._availableCli[`${cliObj.stack}._default`] = {
-                packageJson,
-                ...actionObj
-              };
-            }
-            this._availableCli[`${cliObj.stack}.${action}`] = {
-              packageJson,
-              ...actionObj
-            };
           }
+
+          this._availableCli[`${cliObj.stack}.${action}`] = {
+            packageJson,
+            ...actionObj,
+            processPath: cliPath
+          };
         });
       });
     });
@@ -186,24 +193,33 @@ class SSugarCli {
 
   _newStep() {
     console.clear();
-    console.log(__parseHtml(__sugarBanner()));
+    console.log(__parseHtml(__sugarBanner({
+      paddingTop: 1,
+      paddingBottom: 1
+    })));
   }
 
   async _interactivePrompt() {
 
     this._newStep();
+
+    const choices: string[] = [];
+    for (const [name, obj] of Object.entries(this._availableInteractiveCli)) {
+      choices.push(obj.title);
+    }    
     const prompt = new Select({
-      name: 'what',
       message: 'What do you want Sugar to do for you?',
-      choices: [
-        'Init a new project',
-        'List the available commands',
-        'Display the help'
-      ]
+      choices
     });
     const res = await prompt.run();
-    this._newStep();
-    console.log(res);
+    for(const [name, obj] of Object.entries(this._availableInteractiveCli)) {
+      if (res === obj.title) {
+        const pro = require(obj.processPath).default;
+        this._newStep();
+        pro();
+        break;
+      }
+    }
   }
 
   _displayHelp(stack: string, action:string) {

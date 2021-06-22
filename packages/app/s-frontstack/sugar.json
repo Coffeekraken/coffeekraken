@@ -11,6 +11,13 @@
     {
       "stack": "frontstack",
       "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
+      "interactive": {
+        "project": {
+          "title": "Init a new project",
+          "description": "Create a new project from a recipe (template) like the default one or for example the riotComponent one",
+          "process": "./src/node/interactiveInit/interactiveInit.cli.js"
+        }
+      },
       "defaultAction": "recipe",
       "actions": {
         "action": {
@@ -20,6 +27,10 @@
         "recipe": {
           "description": "Exec a recipe of the frontstack application into the current working directory",
           "process": "./src/node/recipe/recipe.cli.js"
+        },
+        "list": {
+          "description": "List either all the recipes available or particular recipe actions stack",
+          "process": "./src/node/list/list.cli.js"
         }
       }
     }

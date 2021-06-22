@@ -33,10 +33,6 @@ export interface ISSugarJsonFileCliAction {
   command?: string;
 }
 
-export interface ISSugarJsonFileCliActions {
-  [key: string]: ISSugarJsonFileCliAction;
-}
-
 export interface ISSugarJsonCtorSettings {
   sugarJson: Partial<ISSugarJsonSettings>;
 }
@@ -44,7 +40,9 @@ export interface ISSugarJsonCtorSettings {
 export interface ISSugarJsonFileCli {
   stack: string;
   description: string;
-  actions: ISSugarJsonFileCliActions;
+  interactive: Record<string, ISSugarJsonFileCliAction>,
+  defaultAction: string;
+  actions: Record<string, ISSugarJsonFileCliAction>;
 }
 
 export interface ISSugarJsonFileConfigFolder {

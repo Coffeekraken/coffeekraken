@@ -379,6 +379,19 @@ export default class SInterface extends __SClass implements ISInterface {
     if (typeof objectOrString === 'string') {
       objectOnWhichToApplyInterface = __parseArgs(objectOrString);
 
+      // explicit params
+      Object.keys(objectOnWhichToApplyInterface).forEach((argName) => {
+        for (let i = 0; i < Object.keys(this._definition).length; i++) {
+          const defArgName = Object.keys(this._definition)[i];
+          const obj = this._definition[defArgName];
+          if (obj.explicit) {
+            if (obj.alias && ` ${objectOrString} `.match(new RegExp(`\\s-${obj.alias}\\s`))) return;
+            else if (` ${objectOrString} `.match(new RegExp(`\\s--${argName}\\s`))) return;
+            delete objectOnWhichToApplyInterface[argName];
+          }
+        }
+      });
+
       // remplacing aliases
       Object.keys(objectOnWhichToApplyInterface).forEach((argName) => {
         for (let i = 0; i < Object.keys(this._definition).length; i++) {

@@ -8,7 +8,7 @@ import __parse from '../string/parse';
 
 /**
  * @name                    env
- * @namespace            js.core
+ * @namespace            js.env
  * @type                    Function
  * @status              wip
  *
@@ -29,14 +29,14 @@ import __parse from '../string/parse';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function env(dotPath, value) {
+function env(dotPath, value?) {
   if (!__isNode()) {
     if (!window.process) window.process = {};
     if (!window.process.env) window.process.env = {};
   }
   const targetObj = __isNode() ? global.process.env : window.process.env;
 
-  if (value === null) {
+  if (value === -1) {
     // delete the variable
     __delete(targetObj, dotPath.toUpperCase());
   } else if (value !== undefined) {

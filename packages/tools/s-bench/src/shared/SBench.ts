@@ -2,6 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise, { ISPromiseSettings } from '@coffeekraken/s-promise';
 import __utcTime from '@coffeekraken/sugar/shared/date/utcTime';
+import __SBenchEnv from './SBenchEnv';
 
 /**
  * @name            SBench
@@ -43,13 +44,26 @@ export interface ISBenchSettings {
 
 export interface ISBenchStep {
     id: string;
-    type: 'start' | 'end' | 'step';
+    type: 'start' | 'end' | 'step';
     description: string;
     time: number;
     logs: string[];
 }
 
 export default class SBench extends __SPromise {
+
+    /**
+     * @name        env
+     * @type        SBenchEnv
+     * @static
+     * @get
+     * 
+     * Access the SBenchEnv object to check activated bench, etc...
+     * 
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static env = __SBenchEnv;
 
     /**
      * @name        _stepsTime
@@ -74,6 +88,15 @@ export default class SBench extends __SPromise {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     private static _benchInstancesById: Record<string, SBench> = {};
+
+    /**
+     * @name            benchEnv
+     * @type            Function
+     * @static
+     * 
+     * This static method allows you to get the current bench environment
+     * the process is running in. The bench environment 
+     */
 
     /**
      * @name            getBenchInstanceById
@@ -174,6 +197,22 @@ export default class SBench extends __SPromise {
     }
 
     /**
+     * @name            isActive
+     * @type            Function
+     * 
+     * This method allows you to check if the current bench is active or not.
+     * 
+     * @return          {Boolean}           true if is active, false if not
+     * 
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    isActive(): boolean {
+        // @ts-ignore
+        return this.constructor.env.isBenchActive(this.metas.id);
+    }
+
+    /**
      * @name            start
      * @type            Function
      * 
@@ -183,6 +222,8 @@ export default class SBench extends __SPromise {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     start(): void {
+
+        if (!this.isActive()) return;
 
         // reset potential old bench
         this._steps.push({
@@ -210,6 +251,8 @@ export default class SBench extends __SPromise {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     step(id:string, description = ''): void {
+
+        if (!this.isActive()) return;
 
         const keys = Object.keys(this._steps);
 
@@ -239,6 +282,8 @@ export default class SBench extends __SPromise {
      */
     end(): void {
 
+        if (!this.isActive()) return;
+
         const startTime = this._steps[0].time;
 
         this._steps.push({
@@ -257,10 +302,18 @@ export default class SBench extends __SPromise {
             const stepObj = this._steps[stepId];
             logsAr = [...logsAr, ...stepObj.logs];
         });
+
+        this.emit('log', {
+            value: '-------------------- SBench --------------------'
+        });
         logsAr.forEach(log => {
             this.emit('log', {
+                id: this.metas.id,
                 value: log
             });
+        });
+        this.emit('log', {
+            value: '------------------------------------------------'
         });
 
         this.resolve(this);

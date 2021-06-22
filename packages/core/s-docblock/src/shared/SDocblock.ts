@@ -304,8 +304,10 @@ class SDocblock extends __SClass implements ISDocblock {
         })
         .map((block) => {
           return new __SDocblockBlock(block || ' ', {
-            packageJson: this._packageJson,
-            filepath: this.docblockSettings.filepath || ''
+            docblockBlock: {
+              packageJson: this._packageJson,
+              filepath: this.docblockSettings.filepath || ''
+            }
           });
         });
     }

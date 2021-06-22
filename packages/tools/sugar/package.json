@@ -61,6 +61,7 @@
     "dependency-tree": "^8.1.0",
     "domready": "^1.0.8",
     "download-file": "^0.1.5",
+    "enquire": "^0.0.2",
     "esm": "^3.2.25",
     "fastdom": "^1.0.9",
     "filesize": "^6.1.0",

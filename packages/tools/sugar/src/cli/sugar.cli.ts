@@ -8,12 +8,31 @@ const __childProcess = require('child_process');
 const __glob = require('glob-all');
 const __path = require('path');
 const __fs = require('fs');
+const __SInterface = require('@coffeekraken/s-interface').default;
 const __isPath = require('../shared/is/path').default;
 const __parseHtml = require('../shared/console/parseHtml').default;
 const __SSugarJson = require('@coffeekraken/s-sugar-json').default;
 const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
+const __SBench = require('@coffeekraken/s-bench').default;
+const __sugarBanner = require('@coffeekraken/sugar/shared/ascii/sugarBanner').default;
 
-// require('../node/index');
+const { prompt, Select } = require('enquirer');
+
+require('../node/index');
+
+class SSugarCliParamsInterface extends __SInterface {
+  static definition = {
+    bench: {
+      type: {
+        type: 'Array<String> | Boolean',
+        splitChars: [',']
+      },
+      default: false,
+      explicit: true
+    }
+  }
+}
+
 /**
  * @name            sugar.cli
  * @namespace           cli
@@ -24,162 +43,220 @@ const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
  *
  * @author                 Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const command =
-  process.argv && process.argv[2] ? process.argv[2].split(' ')[0] : '';
-let stack = command.split('.')[0];
-const cliAction = command.split('.')[1] || null;
-const args =
-  process.argv
-    .slice(3)
-    .map((arg) => {
-      // @todo      support for command with 1 sub param like: --something "--else"
-      if (arg.includes(' ')) {
-        return `"${arg}"`;
-      } else if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-') {
-        return `"${arg}"`;
-      }
-      return arg;
-    })
-    .join(' ') || '';
 
-// if theirs nothing as stack or action
-if (!stack) {
-  stack = 'app';
+const cliParams = SSugarCliParamsInterface.apply(process.argv.slice(2).join(' ')).value;
+if (cliParams.bench) {
+  __SBench.env.activateBench(cliParams.bench === true ? '*' : cliParams.bench);
 }
 
-// setInterval(() => {
-//   console.log(__SSugarConfig.get('assets.'));
-// }, 2000);
+class SSugarCli {
 
-(async () => {
-  const sugarJsonInstance = new __SSugarJson();
-  const sugarJsons = sugarJsonInstance.read();
+  _command: string;
+  _stack: string;
+  _action: string;
+  _args: string;
 
-  // // filter by packageJson
-  // const filteredFiles: string[] = [];
-  // files.forEach((path) => {
-  //   const packagePath = path.split('node_modules/').slice(-1);
-  //   if (filteredFiles.indexOf(packagePath) === -1) filteredFiles.push(path);
-  // });
+  _sugarJsons: any;
+  _availableCli: Record<string, string> = {}
 
+  constructor() {
 
-  // setInterval(() => {
-  //   console.log(__SSugarConfig.get('frontspec.default').assets.css);
-  // }, 3000);
+    this._command =
+      process.argv && process.argv[2] ? process.argv[2].split(' ')[0] : '';
+    this._stack = this._command.split('.')[0];
+    this._action = this._command.split('.')[1] || null;
+    this._args =
+      process.argv
+        .slice(3)
+        .map((arg) => {
+          // @todo      support for command with 1 sub param like: --something "--else"
+          if (arg.includes(' ')) {
+            return `"${arg}"`;
+          } else if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-') {
+            return `"${arg}"`;
+          }
+          return arg;
+        })
+        .join(' ') || '';
 
-  const availableCli: Record<string, string> = {};
+    // reading sugarJsons
+    const sugarJsonInstance = new __SSugarJson();
+    this._sugarJsons = sugarJsonInstance.read();
 
-  // loop on each filtered files to build the availableCli stack
-  Object.keys(sugarJsons).forEach((packageName) => {
-    const sugarJson = sugarJsons[packageName];
-    const packageJson = require(sugarJson.metas.path.replace(
-      '/sugar.json',
-      '/package.json'
-    ));
-    if (!sugarJson.cli) return;
-    sugarJson.cli.forEach((cliObj) => {
-      if (!cliObj.actions) {
-        throw new Error(
-          `The sugar.json file of the package "<yellow>${packageName}</yellow>"is missing the "cli.actions" object`
-        );
-      }
+    // init available cli
+    this._getAvailableCli();
 
-      Object.keys(cliObj.actions).forEach((action) => {
+    // interactive
+    if (!this._stack && !this._action && !this._args) {
+      this._interactivePrompt();
+      return;
+    }
 
-        const actionObj = cliObj.actions[action];
+    // help
+    if (this._args.match(/--help/)) {
+      this._displayHelp(this._stack, this._action);
+      process.exit();
+    }
 
-        if (actionObj.process && __isPath(actionObj.process)) {
-          const cliPath = __path.resolve(
-            sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
-            actionObj.process
+    // normal process
+    this._process();
+  }
+
+  _process() {
+    if (!this._availableCli[`${this._stack}.${this._action ?? '_default'}`]) {
+      this._displayHelpAfterError();      
+      process.exit();
+    }
+    const cliObj = this._availableCli[`${this._stack}.${this._action ?? '_default'}`];
+    // @ts-ignore
+    if (cliObj.processPath) {
+      const processFn = require(cliObj.processPath).default;
+      // @ts-ignore
+      processFn(this._args);
+    }
+  }
+
+  _getAvailableCli() {
+
+    // loop on each filtered files to build the this._availableCli stack
+    Object.keys(this._sugarJsons).forEach((packageName) => {
+      const sugarJson = this._sugarJsons[packageName];
+      const packageJson = require(sugarJson.metas.path.replace(
+        '/sugar.json',
+        '/package.json'
+      ));
+      if (!sugarJson.cli) return;
+      sugarJson.cli.forEach((cliObj) => {
+        if (!cliObj.actions) {
+          throw new Error(
+            `The sugar.json file of the package "<yellow>${packageName}</yellow>"is missing the "cli.actions" object`
           );
-          if (!__fs.existsSync(cliPath))
-            throw new Error(
-              `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
+        }
+
+        Object.keys(cliObj.actions).forEach((action) => {
+
+          const actionObj = cliObj.actions[action];
+
+          if (actionObj.process && __isPath(actionObj.process)) {
+            const cliPath = __path.resolve(
+              sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
+              actionObj.process
             );
-          if (
-            !cliAction &&
-            cliObj.defaultAction &&
-            action === cliObj.defaultAction
-          ) {
-            availableCli[`${cliObj.stack}._default`] = {
+            if (!__fs.existsSync(cliPath))
+              throw new Error(
+                `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`
+              );
+            if (
+              !this._action &&
+              cliObj.defaultAction &&
+              action === cliObj.defaultAction
+            ) {
+              this._availableCli[`${cliObj.stack}._default`] = {
+                packageJson,
+                ...actionObj,
+                processPath: cliPath
+              };
+            }
+
+            this._availableCli[`${cliObj.stack}.${action}`] = {
               packageJson,
               ...actionObj,
               processPath: cliPath
             };
-          }
-
-          availableCli[`${cliObj.stack}.${action}`] = {
-            packageJson,
-            ...actionObj,
-            processPath: cliPath
-          };
-        } else if (actionObj.command) {
-          if (
-            !cliAction &&
-            cliObj.defaultAction &&
-            action === cliObj.defaultAction
-          ) {
-            availableCli[`${cliObj.stack}._default`] = {
+          } else if (actionObj.command) {
+            if (
+              !this._action &&
+              cliObj.defaultAction &&
+              action === cliObj.defaultAction
+            ) {
+              this._availableCli[`${cliObj.stack}._default`] = {
+                packageJson,
+                ...actionObj
+              };
+            }
+            this._availableCli[`${cliObj.stack}.${action}`] = {
               packageJson,
               ...actionObj
             };
           }
-          availableCli[`${cliObj.stack}.${action}`] = {
-            packageJson,
-            ...actionObj
-          };
-        }
+        });
       });
     });
-  });
+  }
 
-  // check if the requested stack.action exists
-  let currentPackage;
-  if (!availableCli[`${stack}.${cliAction ?? '_default'}`]) {
+  _newStep() {
+    console.clear();
+    console.log(__parseHtml(__sugarBanner()));
+  }
+
+  async _interactivePrompt() {
+
+    this._newStep();
+    const prompt = new Select({
+      name: 'what',
+      message: 'What do you want Sugar to do for you?',
+      choices: [
+        'Init a new project',
+        'List the available commands',
+        'Display the help'
+      ]
+    });
+    const res = await prompt.run();
+    this._newStep();
+    console.log(res);
+  }
+
+  _displayHelp(stack: string, action:string) {
+    let currentPackage;
+    const logArray: string[] = [];
+    Object.keys(this._availableCli).forEach((stackAction) => {
+        const _stack = stackAction.split('.')[0];
+        const _action = stackAction.split('.')[1];
+
+        if (stack && stack !== _stack) return;
+        if (action && action !== _action) return;
+
+        const cliObj = this._availableCli[stackAction];
+        if (currentPackage !== cliObj.packageJson.name) {
+          logArray.push(' ');
+          logArray.push(
+            `<yellow>│</yellow> ${cliObj.packageJson.license ?? 'MIT'} <yellow>${
+              cliObj.packageJson.name
+            }</yellow> (<cyan>${cliObj.packageJson.version}</cyan>)`
+          );
+          currentPackage = cliObj.packageJson.name;
+        }
+        logArray.push(
+          // @ts-ignore
+          `<yellow>│</yellow> - '<yellow>sugar</yellow> <cyan>${stackAction}</cyan> ...': ${cliObj.description}`
+        );
+      });
+      logArray.push(' ');
+      logArray.push(
+        `For more help on each of these commands, simply call them with the <cyan>--help</cyan> flag`
+      );
+      logArray.push(' ');
+      console.log(__parseHtml(logArray.join('\n')));
+  }
+
+  _displayHelpAfterError() {
     const logArray: string[] = [];
     logArray.push(' ');
     logArray.push(`--------------------`);
     logArray.push(`<yellow>Sugar CLI</yellow>`);
     logArray.push(`--------------------`);
     logArray.push(
-      `<red>Sorry</red> but the requested "<cyan>${stack}.${
-        cliAction ?? 'default'
+      `<red>Sorry</red> but the requested "<cyan>${this._stack}.${
+        this._action ?? 'default'
       }</cyan>" command does not exists...`
     );
     logArray.push(
       `Here's the list of <green>available commands</green> in your context:`
     );
-    Object.keys(availableCli).forEach((stackAction) => {
-      const cliObj = availableCli[stackAction];
-      if (currentPackage !== cliObj.packageJson.name) {
-        logArray.push(' ');
-        logArray.push(
-          `<yellow>│</yellow> ${cliObj.packageJson.license ?? 'MIT'} <yellow>${
-            cliObj.packageJson.name
-          }</yellow> (<cyan>${cliObj.packageJson.version}</cyan>)`
-        );
-        currentPackage = cliObj.packageJson.name;
-      }
-      logArray.push(
-        // @ts-ignore
-        `<yellow>│</yellow> - '<yellow>sugar</yellow> <cyan>${stackAction}</cyan> ...': ${cliObj.description}`
-      );
-    });
-    logArray.push(' ');
-    logArray.push(
-      `For more help on each of these commands, simply call them with the <cyan>--help</cyan> flag`
-    );
-    logArray.push(' ');
     console.log(__parseHtml(logArray.join('\n')));
-    process.exit();
+    this._displayHelp();
   }
 
-  const cliObj = availableCli[`${stack}.${cliAction ?? '_default'}`];
-  // @ts-ignore
-  if (cliObj.processPath) {
-    const processFn = require(cliObj.processPath).default;
-    // @ts-ignore
-    processFn(args);
-  }
-})();
+}
+
+const cli = new SSugarCli();

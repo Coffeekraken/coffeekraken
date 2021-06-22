@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __env from '@coffeekraken/sugar/shared/core/env';
+import __env from '@coffeekraken/sugar/shared/env/env';
 import __SBench from '@coffeekraken/s-bench';
 
 /**

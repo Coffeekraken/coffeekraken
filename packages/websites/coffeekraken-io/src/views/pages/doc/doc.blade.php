@@ -20,12 +20,12 @@
                 <div>
                     <span class="s-font:30">
                         <span class="s-badge:pill:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
-                        &nbsp;<span class="s-color:accent s-font:30">Since {{ $firstBlock->since }}</span>
+                        &nbsp;&nbsp;<span class="s-color:accent s-font:30">Since {{ $firstBlock->since }}</span>
                     </span>
                     <h1 class="s-typo:h1 s-mb:20 s-mt:20">
                         {{ $firstBlock->name }}
                     </h1>
-                    <h3 class="s-typo:h5 s-color:info">
+                    <h3 class="s-typo:p s-color:info">
                         {{ $firstBlock->namespace }}
                     </h3>
                     <br />

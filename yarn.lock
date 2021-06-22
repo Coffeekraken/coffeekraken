@@ -4879,6 +4879,11 @@ enhanced-resolve@^5.3.2:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
 
+enquire@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/enquire/-/enquire-0.0.2.tgz#e92389cd80224971700e4fc8bac8129c75bf8661"
+  integrity sha1-6SOJzYAiSXFwDk/IusgSnHW/hmE=
+
 enquirer@^2.3.5:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/enquirer/-/enquirer-2.3.6.tgz#2a7fe5dd634a1e4125a975ec994ff5456dc3734d"

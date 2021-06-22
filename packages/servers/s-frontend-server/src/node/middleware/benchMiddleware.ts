@@ -40,7 +40,6 @@ function benchEndMiddleware(settings = {}) {
       }
 
       res.on('finish', afterResponse);
-      // res.on('close', afterResponse);
 
       next();
 

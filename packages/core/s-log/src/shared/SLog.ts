@@ -7,7 +7,7 @@ import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __env from '@coffeekraken/sugar/shared/core/env';
+import __env from '@coffeekraken/sugar/shared/env/env';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __SClass from '@coffeekraken/s-class';
 
@@ -66,7 +66,7 @@ export interface ISLogAdaptersByEnvironmentSettingObj {
 }
 
 export interface ISLogSettings {
-  types: String[];
+  types: string[];
   adapters: ISLogAdaptersSettingObj;
   adaptersByLevel: ISLogAdaptersByLevelSettingObj;
   adaptersByEnvironment: ISLogAdaptersByEnvironmentSettingObj;

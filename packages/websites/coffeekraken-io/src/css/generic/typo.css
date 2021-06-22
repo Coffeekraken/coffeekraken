@@ -1,0 +1,3 @@
+.s-typo--p {
+    color: sugar.color(main, --lighten 20);
+}

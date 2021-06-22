@@ -71,7 +71,7 @@
                             @endforeach
                         </div>
                     @endif
-                    <a class="s-btn:complementary:gradient s-mt:20" href="https://github.com/coffeekraken" target="_blank" title="Contribute to the project">
+                    <a class="s-btn:complementary s-mt:20" href="https://github.com/coffeekraken" target="_blank" title="Contribute to the project">
                         Contribute to the project
                     </a>
 

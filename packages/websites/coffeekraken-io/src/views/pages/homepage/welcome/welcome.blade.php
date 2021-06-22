@@ -1,10 +1,10 @@
 <section id="homepage-welcome">
 
-    <div class="__bg"></div>
+    {{-- <div class="__bg"></div> --}}
 
     <div class="s-container s-position:relative">
 
-        <s-inline-svg class="__illustration" src="/src/img/header-illustration.svg"></s-inline-svg>
+        {{-- <s-inline-svg class="__illustration" src="/src/img/header-illustration.svg"></s-inline-svg> --}}
 
         <div class="s-grid:12">
 
@@ -24,7 +24,7 @@ sugar frontstack.init my-cool-project
                 </a>
             </div>
             <div class="s-position:relative">
-                <img class="__kraken" src="/src/img/kraken.png" />
+                {{-- <img class="__kraken" src="/src/img/kraken.png" /> --}}
             </div>
 
         </div>

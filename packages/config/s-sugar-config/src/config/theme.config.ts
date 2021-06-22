@@ -116,7 +116,7 @@ export default {
    * @name          theme
    * @namespace     config.theme
    */
-  theme: 'dark',
+  theme: 'light',
 
   /**
    * @name          themes

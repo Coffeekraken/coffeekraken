@@ -8,7 +8,7 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
     style: {
       type: 'String',
       values: ['default', 'gradient'],
-      default: 'default'
+      default: __theme().config('ui.tabs.defaultStyle')
     },
     grow: {
       type: 'Boolean',
@@ -46,7 +46,7 @@ export default function ({
   replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
-      style: 'default',
+      style: __theme().config('ui.tabs.defaultStyle'),
       grow: false,
       direction: 'horizontal',
       scope: ['bare','lnf','grow','style','direction'],

@@ -60,8 +60,11 @@ export default function ({
         transition: ${__themeVar(`ui.${finalParams.name}.transition`)};
         @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
 
+        &::placeholder {
+          color: sugar.color(ui, placeholder);
+        }
+
         &:hover {
-          @sugar.depth(20);
           background-color: sugar.color(ui:hover, surface);
           color: sugar.color(ui:hover, foreground);
           border: sugar.color(ui:hover, border) solid 1px;

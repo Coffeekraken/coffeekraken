@@ -1,0 +1,9 @@
+s-code-example {
+    @sugar.theme(dark);
+    @sugar.depth(100);
+    @sugar.border.radius();
+}
+
+.s-code-example__toolbar {
+    color: sugar.color(ui, text);
+}

@@ -11,7 +11,7 @@
                 In order to help with that, Coffeekraken provide some fully customisable and framework agnostic webcomponents that you can
                 simply import and use in less than a minute...
             </p>
-            <a class="s-btn:complementary:gradient" href="/#get-started" title="Get started!">
+            <a class="s-btn:complementary" href="/#get-started" title="Get started!">
                 Get started!
             </a>
         </div>
@@ -48,9 +48,9 @@ Something cool...
         <ul class="__webcomponents-grid s-mb:50">
             @foreach (['complementary','accent','complementary','accent','complementary','accent','complementary','accent','complementary','accent'] as $i)
             <li>
-                <div class="s-ratio:1-1 s-gradient:{{ $i }} s-border:radius s-depth:50">
+                <div class="s-ratio:1-1 s-bg:accent s-border:radius s-depth:50">
                     <a href="/" title="">
-                        <div class="s-text:center s-align:abs-center">
+                        <div class="s-text:center s-color:accent-foreground s-align:abs-center">
                             <i class="s-icon:search s-font:100 s-mb:20"></i>
                             <p class="s-p">Search input</p>
                         </div>
@@ -65,7 +65,7 @@ Something cool...
                 There are just some of our webcomponents listed.<br>
                 A lot of other components are and will be available throught time. Keep updated by joining us.
             </p>
-            <a class="s-btn:complementary:gradient" href="/#get-started" title="Get started!">
+            <a class="s-btn:complementary" href="/#get-started" title="Get started!">
                 Check out more of our webcomponents!
             </a>
         </div>

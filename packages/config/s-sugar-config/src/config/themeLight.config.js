@@ -2,202 +2,127 @@ export default {
     extends: 'themeBase',
     color: {
         /**
-         * @name                default
+         * @name                main
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #848e91
+         * @default             #776d91
          *
-         * Specify the <default>default</default> color value and modifiers.
+         * Specify the <s-color="main">main</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        default: {
-            default: '#848e91'
+        main: {
+            default: '#787987',
+            '...': '[theme.colorStates]',
+            text: '--darken 20',
+            background: '--lighten 50'
         },
         /**
          * @name                ui
-         * @namespace           config.theme.themes.ui.color
+         * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @ui             #BDBDBD
+         * @default             #fff
          *
-         * Specify the <ui>ui</ui> color value and modifiers.
+         * Specify the <s-color="ui">ui</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         ui: {
-            default: '#BDBDBD'
+            default: '#787987',
+            '...': '[theme.colorStates]'
         },
         /**
-         * @name                title
+         * @name                accent
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #2b3438
+         * @default             #ffbb00
          *
-         * Specify the <title>title</title> color value and modifiers.
+         * Specify the <s-color="accent">accent</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        title: {
-            default: '#2b3438'
+        accent: {
+            default: '#ffbb00',
+            '...': '[theme.colorStates]'
         },
         /**
-         * @name                text
+         * @name                complementary
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #848e91
+         * @default             #5100ff
          *
-         * Specify the <text>text</text> color value and modifiers.
+         * Specify the <s-color="complementary">complementary</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        text: {
-            default: '#848e91'
-        },
-        /**
-         * @name                link
-         * @namespace           config.theme.themes.default.color
-         * @type                Color
-         * @default             primary
-         *
-         * Specify the <link>link</link> color value and modifiers.
-         *
-         * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        link: {
-            default: '#f2bc2b'
-        },
-        /**
-         * @name                primary
-         * @namespace           config.theme.themes.default.color
-         * @type                Color
-         * @default             #f2bc2b
-         *
-         * Specify the <primary>primary</primary> color value and modifiers.
-         *
-         * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        primary: {
-            default: '#f2d72b',
-            text: '--darken 30',
-            highlight: '--lighten 0',
-            surface: '--lighten 45',
-            foreground: '--darken 0',
-            ':hover': {
-                surface: '--lighten 35',
-                foreground: '--darken 40'
-            },
-            ':focus': {
-                surface: '--lighten 20',
-                foreground: '--darken 40'
-            },
-            ':active': {
-                surface: '--lighten 0',
-                foreground: '--lighten 50'
-            }
-        },
-        /**
-         * @name                secondary
-         * @namespace           config.theme.themes.default.color
-         * @type                Color
-         * @default             #2b3438
-         *
-         * Specify the <secondary>secondary</secondary> color value and modifiers.
-         *
-         * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        secondary: {
-            default: '#6d858f'
-        },
-        /**
-         * @name                surface
-         * @namespace           config.theme.themes.default.color
-         * @type                Color
-         * @default             #ffffff
-         *
-         * Specify the <surface>surface</surface> color value and modifiers.
-         *
-         * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        surface: {
-            default: '#ffffff'
-        },
-        /**
-         * @name                background
-         * @namespace           config.theme.themes.default.color
-         * @type                Color
-         * @default             #FAFAFA
-         *
-         * Specify the <background>background</background> color value and modifiers.
-         *
-         * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        background: {
-            default: '#FAFAFA'
+        complementary: {
+            default: '#ffbb00',
+            '...': '[theme.colorStates]'
         },
         /**
          * @name                success
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #5cb85c
+         * @default             #91ff00
          *
-         * Specify the <success>success</success> color value and modifiers.
+         * Specify the <s-color="success">success</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         success: {
-            default: '#5cb85c'
+            default: '#91ff00',
+            '...': '[theme.colorStates]'
         },
         /**
          * @name                warning
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #f0ad4e
+         * @default             #ffd500
          *
-         * Specify the <warning>warning</warning> color value and modifiers.
+         * Specify the <s-color="warning">warning</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         warning: {
-            default: '#f0ad4e'
+            default: '#ffd500',
+            '...': '[theme.colorStates]'
         },
         /**
          * @name                error
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #d9534f
+         * @default             #ff003b
          *
-         * Specify the <error>error</error> color value and modifiers.
+         * Specify the <s-color="error">error</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         error: {
-            default: '#d9534f'
+            default: '#ff003b',
+            '...': '[theme.colorStates]'
         },
         /**
          * @name                info
          * @namespace           config.theme.themes.default.color
          * @type                Color
-         * @default             #2199e8
+         * @default             #00ffff
          *
-         * Specify the <info>info</info> color value and modifiers.
+         * Specify the <s-color="info">info</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         info: {
-            default: '#2199e8'
+            default: '#00ffff',
+            '...': '[theme.colorStates]',
+            text: '--lighten 20'
         },
         /**
          * @name                extension
@@ -205,13 +130,13 @@ export default {
          * @type                Color
          * @default             #2b3438
          *
-         * Specify the <primary>extension</primary> color value and modifiers.
+         * Specify the <primary>extension</s-color> color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         extension: {
-            default: '[config.theme.themes.default.color.primary.default]',
+            default: '[theme.color.accent.default]',
             blade: '#ff2d20',
             php: '#8892BF',
             js: '#f7df1e',
@@ -233,4 +158,4 @@ export default {
         }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVMaWdodC5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZUxpZ2h0LmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxlQUFlO0lBQ2IsT0FBTyxFQUFFLFdBQVc7SUFFcEIsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRTtZQUNQLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTtZQUNGLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRTtZQUNMLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRTtZQUNKLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRTtZQUNKLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRTtZQUNQLE9BQU8sRUFBRSxTQUFTO1lBQ2xCLElBQUksRUFBRSxhQUFhO1lBQ25CLFNBQVMsRUFBRSxhQUFhO1lBQ3hCLE9BQU8sRUFBRSxjQUFjO1lBQ3ZCLFVBQVUsRUFBRSxZQUFZO1lBQ3hCLFFBQVEsRUFBRTtnQkFDUixPQUFPLEVBQUUsY0FBYztnQkFDdkIsVUFBVSxFQUFFLGFBQWE7YUFDMUI7WUFDRCxRQUFRLEVBQUU7Z0JBQ1IsT0FBTyxFQUFFLGNBQWM7Z0JBQ3ZCLFVBQVUsRUFBRSxhQUFhO2FBQzFCO1lBQ0QsU0FBUyxFQUFFO2dCQUNULE9BQU8sRUFBRSxhQUFhO2dCQUN0QixVQUFVLEVBQUUsY0FBYzthQUMzQjtTQUNGO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFNBQVMsRUFBRTtZQUNULE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRTtZQUNQLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFVBQVUsRUFBRTtZQUNWLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRTtZQUNQLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRTtZQUNQLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRTtZQUNMLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRTtZQUNKLE9BQU8sRUFBRSxTQUFTO1NBQ25CO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFNBQVMsRUFBRTtZQUNULE9BQU8sRUFBRSxxREFBcUQ7WUFDOUQsS0FBSyxFQUFFLFNBQVM7WUFDaEIsR0FBRyxFQUFFLFNBQVM7WUFDZCxFQUFFLEVBQUUsU0FBUztZQUNiLElBQUksRUFBRSxTQUFTO1lBQ2YsR0FBRyxFQUFFLFNBQVM7WUFDZCxJQUFJLEVBQUUsU0FBUztZQUNmLElBQUksRUFBRSxTQUFTO1lBQ2YsSUFBSSxFQUFFLFNBQVM7WUFDZixHQUFHLEVBQUUsU0FBUztZQUNkLElBQUksRUFBRSxTQUFTO1lBQ2YsR0FBRyxFQUFFLFNBQVM7WUFDZCxHQUFHLEVBQUUsU0FBUztZQUNkLEdBQUcsRUFBRSxTQUFTO1lBQ2QsR0FBRyxFQUFFLFNBQVM7WUFDZCxHQUFHLEVBQUUsU0FBUztZQUNkLEdBQUcsRUFBRSxTQUFTO1lBQ2QsR0FBRyxFQUFFLFNBQVM7WUFDZCxHQUFHLEVBQUUsU0FBUztTQUNmO0tBQ0Y7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVMaWdodC5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZUxpZ2h0LmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxlQUFlO0lBQ2IsT0FBTyxFQUFFLFdBQVc7SUFFcEIsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRTtZQUNKLE9BQU8sRUFBRSxTQUFTO1lBQ2xCLEtBQUssRUFBRSxxQkFBcUI7WUFDNUIsSUFBSSxFQUFFLGFBQWE7WUFDbkIsVUFBVSxFQUFFLGNBQWM7U0FDM0I7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFO1lBQ0YsT0FBTyxFQUFFLFNBQVM7WUFDbEIsS0FBSyxFQUFFLHFCQUFxQjtTQUM3QjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUU7WUFDTixPQUFPLEVBQUUsU0FBUztZQUNsQixLQUFLLEVBQUUscUJBQXFCO1NBQzdCO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILGFBQWEsRUFBRTtZQUNiLE9BQU8sRUFBRSxTQUFTO1lBQ2xCLEtBQUssRUFBRSxxQkFBcUI7U0FDN0I7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFO1lBQ1AsT0FBTyxFQUFFLFNBQVM7WUFDbEIsS0FBSyxFQUFFLHFCQUFxQjtTQUM3QjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUU7WUFDUCxPQUFPLEVBQUUsU0FBUztZQUNsQixLQUFLLEVBQUUscUJBQXFCO1NBQzdCO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRTtZQUNMLE9BQU8sRUFBRSxTQUFTO1lBQ2xCLEtBQUssRUFBRSxxQkFBcUI7U0FDN0I7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFO1lBQ0osT0FBTyxFQUFFLFNBQVM7WUFDbEIsS0FBSyxFQUFFLHFCQUFxQjtZQUM1QixJQUFJLEVBQUUsY0FBYztTQUNyQjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxTQUFTLEVBQUU7WUFDVCxPQUFPLEVBQUUsOEJBQThCO1lBQ3ZDLEtBQUssRUFBRSxTQUFTO1lBQ2hCLEdBQUcsRUFBRSxTQUFTO1lBQ2QsRUFBRSxFQUFFLFNBQVM7WUFDYixJQUFJLEVBQUUsU0FBUztZQUNmLEdBQUcsRUFBRSxTQUFTO1lBQ2QsSUFBSSxFQUFFLFNBQVM7WUFDZixJQUFJLEVBQUUsU0FBUztZQUNmLElBQUksRUFBRSxTQUFTO1lBQ2YsR0FBRyxFQUFFLFNBQVM7WUFDZCxJQUFJLEVBQUUsU0FBUztZQUNmLEdBQUcsRUFBRSxTQUFTO1lBQ2QsR0FBRyxFQUFFLFNBQVM7WUFDZCxHQUFHLEVBQUUsU0FBUztZQUNkLEdBQUcsRUFBRSxTQUFTO1lBQ2QsR0FBRyxFQUFFLFNBQVM7WUFDZCxHQUFHLEVBQUUsU0FBUztZQUNkLEdBQUcsRUFBRSxTQUFTO1lBQ2QsR0FBRyxFQUFFLFNBQVM7U0FDZjtLQUNGO0NBQ0YsQ0FBQyJ9

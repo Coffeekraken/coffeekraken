@@ -24,7 +24,7 @@ __SComponentUtils.setDefaultProps('s-code-example', {
     toolbarPosition: 'nav',
     defaultStyle: true,
     defaultStyleClasses: {
-        main: 's-tabs s-tabs--gradient'
+        main: 's-tabs'
     }
 });
 

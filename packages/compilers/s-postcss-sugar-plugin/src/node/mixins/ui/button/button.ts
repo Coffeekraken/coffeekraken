@@ -7,8 +7,8 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
   static definition = {
     style: {
       type: 'String',
-      values: ['default', 'gradient', 'outlined', 'text'],
-      default: 'default'
+      values: ['default', 'gradient', 'outline', 'text'],
+      default: __theme().config('ui.button.defaultStyle')
     },
     shrinked: {
       type: 'Boolean',
@@ -23,7 +23,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-  style: 'default' | 'gradient' | 'outlined' | 'text';
+  style: 'default' | 'gradient' | 'outline' | 'text';
   shrinked: boolean;
   scope: string[];
 }
@@ -39,7 +39,7 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiButtonParams = {
-    style: 'default',
+    style: __theme().config('ui.button.defaultStyle'),
     shrinked: false,
     scope: ['bare','lnf','style'],
     ...params
@@ -92,6 +92,13 @@ export default function ({
         break;
       case 'default':
       default:
+          vars.push(`
+            background-color: sugar.color(ui);
+
+            &:hover, &:focus {
+              background-color: sugar.color(ui:hover);
+            }
+        `);
         break;
     }
     vars.push('}');

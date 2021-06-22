@@ -62,44 +62,44 @@ export default {
 
   colorStates: {
     text: '--darken 0',
-    placeholder: '--darken 20',
-    surface: '--darken 30',
-    foreground: '--lighten 40',
+    placeholder: '--lighten 40',
+    surface: '--lighten 49',
+    foreground: '--lighten 50',
     background: '--darken 40',
-    border: '--darken 25',
+    border: '--lighten 45',
     gradientStart: '--lighten 0',
     gradientEnd: '--darken 20',
     ':hover': {
-      text: '--lighten 0',
-      placeholder: '--darken 15',
-      surface: '--darken 25',
-      foreground: '--lighten 40',
+      text: '--darken 0',
+      placeholder: '--lighten 40',
+      surface: '--lighten 49',
+      foreground: '--lighten 50',
       background: '--darken 40',
-      border: '--darken 20'
+      border: '--lighten 40'
     },
     ':focus': {
-      text: '--lighten 40',
-      placeholder: '--lighten 30',
-      surface: '--darken 20',
-      foreground: '--lighten 40',
+      text: '--darken 0',
+      placeholder: '--lighten 40',
+      surface: '--lighten 49',
+      foreground: '--lighten 50',
       background: '--darken 40',
-      border: '--darken 15'
+      border: '--lighten 40'
     },
     ':active': {
-      text: '--lighten 40',
-      placeholder: '--lighten 30',
-      surface: '--darken 15',
-      foreground: '--lighten 45',
+      text: '--darken 0',
+      placeholder: '--lighten 40',
+      surface: '--lighten 49',
+      foreground: '--lighten 50',
       background: '--darken 40',
-      border: '--darken 10'
+      border: '--lighten 40'
     },
     ':highlight': {
-      text: '--darken 40',
-      placeholder: '--lighten 30',
-      surface: '--darken 15',
-      foreground: '--darken 40',
-      background: '--darken 0',
-      border: '--darken 10'
+      text: '--darken 0',
+      placeholder: '--lighten 40',
+      surface: '--lighten 49',
+      foreground: '--lighten 50',
+      background: '--darken 40',
+      border: '--lighten 40'
     }
   },
 
@@ -1333,10 +1333,7 @@ export default {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',
-      defaultStyle: 'gradient',
-      ':gradient': {}
-      // ':outline': {},
-      // ':text': {}
+      defaultStyle: 'default'
     },
     form: {
       padding: '[theme.ui.default.padding]',
@@ -1357,7 +1354,8 @@ export default {
       padding: '[theme.ui.default.padding]',
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
-      depth: '[theme.ui.default.depth]'
+      depth: 0,
+      defaultStyle: 'default'
     },
     terminal: {
       padding: '[theme.ui.default.padding]',
@@ -1454,8 +1452,8 @@ export default {
       },
       'p-lead': {
         'font-family': 'default',
-        'font-size': 60,
-        'line-height': 1.5,
+        'font-size': 50,
+        'line-height': 1.2,
         'max-width': '55ch',
         ':rhythm-vertical': {
           'margin-bottom': 50

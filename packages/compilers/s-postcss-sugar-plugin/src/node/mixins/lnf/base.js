@@ -33,8 +33,8 @@ export default function ({ params, atRule, replaceWith }) {
         `
     @sugar.scope(lnf) {
         html {
-            background-color: sugar.color(neutral, background);
-            color: sugar.color(neutral, text);
+            background-color: sugar.color(main, background);
+            color: sugar.color(main, text);
             @sugar.font.family(default);
             @sugar.font.size(default);
         }

@@ -1,5 +1,5 @@
 @sugar.import ('../views/**/*.css');
-@sugar.import ('./generic/statusBadge.css');
+@sugar.import ('./generic/**/*.css');
 
 @sugar.init;
 

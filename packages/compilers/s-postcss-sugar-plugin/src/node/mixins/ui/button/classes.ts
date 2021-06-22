@@ -33,14 +33,12 @@ export default function ({
 
   const styles = [
     'default',
-    ...Object.keys(__theme().config('ui.button'))
-      .filter((s) => s.match(/^:/))
-      .map((s) => s.replace(':', ''))
+    'gradient',
+    'outline',
+    'text'
   ];
 
   styles.forEach((style) => {
-    if (style === 'default') return;
-
     let cls = `s-btn`;
     if (style !== defaultStyle) {
       cls += `--${style}`;

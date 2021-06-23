@@ -2,7 +2,7 @@
 @section('title', $title)
 
 @section('body')
- 
+
     @include('layouts.header.header')
     
     @yield('content')

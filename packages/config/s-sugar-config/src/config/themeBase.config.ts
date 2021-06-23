@@ -60,49 +60,6 @@ export default {
             0 20px 26px rgba(0, 0, 0, 0.06)`
   },
 
-  colorStates: {
-    text: '--darken 0',
-    placeholder: '--lighten 40',
-    surface: '--lighten 49',
-    foreground: '--lighten 50',
-    background: '--darken 40',
-    border: '--lighten 45',
-    gradientStart: '--lighten 0',
-    gradientEnd: '--darken 20',
-    ':hover': {
-      text: '--darken 0',
-      placeholder: '--lighten 40',
-      surface: '--lighten 49',
-      foreground: '--lighten 50',
-      background: '--darken 40',
-      border: '--lighten 40'
-    },
-    ':focus': {
-      text: '--darken 0',
-      placeholder: '--lighten 40',
-      surface: '--lighten 49',
-      foreground: '--lighten 50',
-      background: '--darken 40',
-      border: '--lighten 40'
-    },
-    ':active': {
-      text: '--darken 0',
-      placeholder: '--lighten 40',
-      surface: '--lighten 49',
-      foreground: '--lighten 50',
-      background: '--darken 40',
-      border: '--lighten 40'
-    },
-    ':highlight': {
-      text: '--darken 0',
-      placeholder: '--lighten 40',
-      surface: '--lighten 49',
-      foreground: '--lighten 50',
-      background: '--darken 40',
-      border: '--lighten 40'
-    }
-  },
-
   size: {
     /**
      * @name          default
@@ -823,131 +780,131 @@ export default {
      * @name            10
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         6px
+     * @default         12px
      *
      * Specify the <primary>10</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    10: '6px',
+    10: '12px',
 
     /**
      * @name            20
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         12px
+     * @default         24px
      *
      * Specify the <primary>20</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    20: '12px',
+    20: '24px',
 
     /**
      * @name            30
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         24px
+     * @default         36px
      *
      * Specify the <primary>30</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    30: '24px',
+    30: '36px',
 
     /**
      * @name            40
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         26px
+     * @default         48px
      *
      * Specify the <primary>40</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    40: '36px',
+    40: '48px',
 
     /**
      * @name            50
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         48px
+     * @default         60px
      *
      * Specify the <primary>50</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    50: '48px',
+    50: '60px',
 
     /**
      * @name            60
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         60px
+     * @default         72px
      *
      * Specify the <primary>60</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    60: '60px',
+    60: '72px',
 
     /**
      * @name            70
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         72px
+     * @default         84px
      *
      * Specify the <primary>70</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    70: '72px',
+    70: '84px',
 
     /**
      * @name            80
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         84px
+     * @default         96px
      *
      * Specify the <primary>80</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    80: '84px',
+    80: '96px',
 
     /**
      * @name            90
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         96px
+     * @default         108px
      *
      * Specify the <primary>90</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    90: '96px',
+    90: '108px',
 
     /**
      * @name            100
      * @namespace       config.theme.themes.default.space
      * @type            String
-     * @default         108px
+     * @default         120px
      *
      * Specify the <primary>100</s-color> space used for padding and margin
      *
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    100: '108px'
+    100: '120px'
   },
 
   margin: {
@@ -1323,7 +1280,7 @@ export default {
 
   ui: {
     default: {
-      padding: '[theme.padding.20] [theme.padding.30]',
+      padding: '[theme.padding.10] [theme.padding.20]',
       borderRadius: '[theme.border.radius.default]',
       transition: '[theme.transition.fast]',
       depth: '[theme.depth.default]'
@@ -1372,7 +1329,7 @@ export default {
       arrowSize: '20px'
     },
     code: {
-      padding: '[theme.padding.30]',
+      padding: '[theme.ui.default.padding]',
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',

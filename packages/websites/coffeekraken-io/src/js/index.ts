@@ -16,7 +16,15 @@ import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
 // features
 __smoothScroll({
   scroll: {
-    offset: 150
+    offset: 188
+  }
+});
+
+document.addEventListener('scroll', (e) => {
+  if (document.body.scrollTop >= 10) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
   }
 });
 

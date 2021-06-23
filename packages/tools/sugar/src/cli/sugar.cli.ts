@@ -105,8 +105,6 @@ class SSugarCli {
 
   _process() {
 
-    console.log(this);
-
     if (!this._availableCli[`${this._stack}.${this._action ?? '_default'}`]) {
       this._displayHelpAfterError();      
       process.exit();

@@ -1,6 +1,19 @@
+body {
+    padding-top: 146px;
+}
+
 #header {
-    position: relative;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
     z-index: 100;
+    background: white;
+    padding: sugar.space(40) 0;
+    transition: padding ease-in-out .2s;
+
+    .scrolled & {
+        padding: sugar.space(20) 0;
+    }
 
     /* &:before {
         content: '';
@@ -19,7 +32,7 @@
     z-index: 99999;
 
     input {
-        @sugar.depth(0);
+        @sugar.theme(dark);
     }
 
     input, s-filtrable-input {
@@ -37,18 +50,52 @@
         .s-filtrable-input__list {
             opacity: 0;
             transition: all .2s ease-in-out 0s;
-            margin-bottom: 0;
-            background: none;
+            margin-bottom: sugar.space(70);
+            top: calc(100% + sugar.space(10)) !important;
+            background: white;
             width: 100%;
-            
-            @sugar.depth(100);
+
+            @sugar.border.radius;
             @sugar.scrollbar(accent, 2px);
         }
         .s-filtrable-input__list-item {
             /* @sugar.depth(20); */
             border-radius: 0 !important;
             padding: 0 !important;
-            background: sugar.color(main, background);
+            /* background: sugar.color(main, background); */
+
+            /* &:nth-child(odd) {
+                background: sugar.color(ui, surface);
+            } */
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 60%;
+                height: 100%;
+                z-index: -1;
+                background: sugar.color(ui, surface);
+                clip-path: polygon(0 0%, 100% 0, calc(100% - 100px) 100%, 0 100%);
+            }
+
+            &:nth-child(odd) {
+               &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 70%;
+                width: 30%;
+                height: 100%;
+                z-index: -1;
+                background: sugar.color(ui, surface);
+                transform: scaleX(-1);
+                clip-path: polygon(0 0%, 100% 0, calc(100% - 100px) 100%, 0 100%);
+                } 
+            }
 
             /* .__bg {
                 display: block;
@@ -108,10 +155,11 @@
         top: 0; left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: white;
+        background-color: sugar.color(main, text);
         opacity: 0;
         pointer-events: none;
         transition: opacity .1s ease-out .2s;
+        /* backdrop-filter: blur(20px); */
     }
 
 }

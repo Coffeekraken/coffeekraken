@@ -26,11 +26,11 @@
 
     <div class="s-py:100">
 
-        <h4 class="s-typo:h4 s-mb:50">
-            Some example of what Sugar has to offer
+        <h4 class="s-typo:h4">
+            Some example of what <span class="s-color:accent">Sugar</span> has to offer
         </h4>
 
-        <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:100">
             <div>
                 <s-code-example>
                     <template lang="bash">
@@ -57,7 +57,7 @@ sugar --help
             </div>
         </div>
 
-        <div class="s-grid:122:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:122:gutter-x:gutter-between:align-center s-py:100">
             <div>
                 <h5 class="s-typo:h5 s-mb:30">
                     querySelector<span class="s-color:accent">Live</span>
@@ -80,7 +80,7 @@ querySelectorLive('.my-cool-component', ($elm) => {
             </div>
         </div>
 
-        <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:100">
             <div>
                 <s-code-example>
                     <template lang="js">
@@ -102,7 +102,7 @@ md5('Hello world'); // 3e25960a79dbc69b674cd4ec67a72c62
             </div>
         </div>
 
-        <div class="s-grid:122:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:122:gutter-x:gutter-between:align-center s-py:100">
             <div>
                 <h5 class="s-typo:h5 s-mb:30">
                     is(<span class="s-color:accent">Mobile</span>,<span class="s-color:accent">Color</span>,<span class="s-color:accent">PlainObject</span>, etc...)

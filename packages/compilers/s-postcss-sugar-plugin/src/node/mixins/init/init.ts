@@ -39,10 +39,10 @@ export default function ({
   const themeConfig = __SugarConfig.get('theme');
 
   const cssArray = [
-    `@sugar.theme(${params.theme ?? themeConfig.theme});`,
     '@sugar.reset;',
+    `@sugar.theme(${params.theme ?? themeConfig.theme});`,
     '@sugar.font.faces;',
-    '@sugar.lnf.base;',
+    // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
     // '@sugar.color.docblocks;',
     '@sugar.ui.classes;',
     '@sugar.typo.classes;',

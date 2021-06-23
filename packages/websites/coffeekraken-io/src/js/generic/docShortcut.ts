@@ -8,7 +8,7 @@ __hotkey('cmd+p').on('press', (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
     // svcroll to top
-    __scrollTo(document.body);
+    // __scrollTo(document.body);
     // focus in search input
     // @ts-ignore
     document.querySelector('#search-input > input').focus();

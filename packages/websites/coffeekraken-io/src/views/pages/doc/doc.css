@@ -19,6 +19,7 @@
 
     .__banner {
         position: relative;
+        /* background: sugar.color(ui, surface); */
 
         .s-grid--12 {
             position: relative;
@@ -30,13 +31,14 @@
             display: block;
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: 50%;
+            width: 50%;
             height: 100%;
-            @sugar.gradient (sugar.color(accent, gradientStart), sugar.color(accent, gradientEnd), $angle: 90);
+            background: sugar.color(ui, surface);
             clip-path: polygon(100px 0%, 100% 0, 100% 100%, 0% 100%);
         }
-        &:after {
+        
+        /* &:after {
             content: '';
             display: block;
             position: absolute;
@@ -47,16 +49,16 @@
             @sugar.gradient (sugar.color(complementary, gradientStart), sugar.color(complementary, gradientEnd), $angle: 90);
             clip-path: polygon(0% 0%, 100% 0, calc(100% - 100px) 100%, 0% 100%);
             transition: all ease-in-out 0.2s;
-        }
+        } */
     }
 
     .__toolbar {
-
+        background: sugar.color(ui, surface);
         position: sticky;
-        top: 0;
+        top: 98px;
         z-index: 10;
 
-        [class^="platform-"] {
+        [class*="s-platform-"] {
             font-size: 1em;
         }
     }
@@ -68,7 +70,7 @@
             background-size: cover;
             background-position: bottom center;
             min-width: 50ch;
-            padding: sugar.space(40);
+            padding: sugar.space(30);
             /* @sugar.color.remap(ui, accent); */
 
             &:before {
@@ -86,10 +88,9 @@
 
     .__nav {
         position: sticky;
-        top: 140px;
+        top:208px;
         max-height: calc(100vh - 140px);
         overflow: auto;
-
 
         [class*="s-list"] {
             overflow: hidden;
@@ -118,7 +119,7 @@
             display: inline-block;
             width: 0.8em;
             height: 0.8em;
-            border: 1px solid white;
+            border: 1px solid sugar.color(main, text);
             position: relative;
             top: 0.05em;
             margin-right: 0.2em;
@@ -127,7 +128,7 @@
                 content: '';
                 display: block;
                 width: 50%; height: 2px;
-                background: white;
+                background: sugar.color(main, text);
                 position: absolute;
                 top: 50%; left: 50%;
                 transform: translate(-50%, -50%);

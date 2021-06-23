@@ -39,7 +39,7 @@
                 <h4 class="s-font:title s-font:60 s-color:accent s-mb:10">
                     @{{name}}
                 </h4>
-                <h5 class="s-color:complementary-foreground s-font:40 s-mb:30">@{{namespace}}</h5>
+                <h5 class="s-color:complementary s-font:40 s-mb:30">@{{namespace}}</h5>
                 <p class="s-typo:p s-mb:30">@{{description}}</p>
                 <a href="/doc/@{{striptags namespace}}.@{{striptags name}}" class="s-btn:accent">
                     Check out more

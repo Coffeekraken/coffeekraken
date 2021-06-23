@@ -21,7 +21,7 @@
         </div>
 
         <div class="s-py:100 s-rhythm-vertical">
-            <img src="/src/img/features-development-logos.svg" />
+            <img src="/src/img/features-development-logos.svg" class="s-mx:auto s-display:block" />
             <s-code-example class="s-mt:50">
                 <template lang="bash">
 # Install sugar globally

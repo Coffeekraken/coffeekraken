@@ -44,6 +44,7 @@ pre[class*="language-"] {
 	color: sugar.color(info, text);
 	text-shadow: none;
     line-height: 1.5;
+	padding: sugar.space(20);
 
     @sugar.font.family(code);
 }

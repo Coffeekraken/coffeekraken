@@ -48,7 +48,7 @@
     .__item {
       text-align: center;
       flex-grow: 1;
-      padding: sugar.space(30);
+      padding: sugar.space(20);
       background-color: sugar.color(surface, --lighten 10);
       @sugar.transition (fast);
       cursor: pointer;
@@ -100,26 +100,25 @@
       max-width: 100%;
     }
 
-    &:after {
+    /* &:after {
       content: '';
       display: block;
       position: absolute;
       top: 0; left: calc(50%);
       width: 50vw; height: 1px;
       @sugar.gradient (sugar.color(complementary, --lighten 40), rgba(0,0,0,0), $angle: -90);
-    }
+    } */
     &:before {
       content: '';
       display: block;
       position: absolute;
       top: 0;
-      left: calc(50% - 100px);
+      left: calc(50% + 300px);
       width: calc(50vw + 100px);
       height: 100%;
       z-index: -1;
-      /* @sugar.gradient (sugar.color(complementary, gradientStart), sugar.color(complementary, gradientEnd), $angle: 90); */
-      @sugar.gradient(rgba(0,0,0,0), rgba(0,0,0,.01), $angle: 90);
-      clip-path: polygon(0 0%, 100% 0, 100% 100%, 200px 100%);
+      background: sugar.color(ui, surface);
+      clip-path: polygon(0 0%, 100% 0, 100% 100%, 400px 100%);
     }
   }
 
@@ -131,7 +130,7 @@
       max-width: 100%;
     }
 
-    &:after {
+    /* &:after {
       content: '';
       display: block;
       position: absolute;
@@ -139,7 +138,7 @@
       transform: translate(-100%);
       width: 100vw; height: 1px;
       @sugar.gradient (sugar.color(accent, --lighten 30), rgba(0,0,0,0), $angle: 90);
-    }
+    } */
     &:before {
       content: '';
       display: block;
@@ -149,10 +148,9 @@
       width: calc(50vw + 100px);
       height: 100%;
       z-index: -1;
-      transform: translateX(-100%);
-      /* @sugar.gradient (sugar.color(accent), #D27F01, $angle: 90); */
-      @sugar.gradient(rgba(0,0,0,.01), rgba(0,0,0,0), $angle: 90);
-      clip-path: polygon(-0 0%, 100% 0, calc(100% - 200px) 100%, 0% 100%);
+      transform: translateX(calc(-100% - 400px));
+      background: sugar.color(ui, surface);
+      clip-path: polygon(-0 0%, 100% 0, calc(100% - 300px) 100%, 0% 100%);
     }
     
   }

@@ -1,5 +1,5 @@
 export default {
-  extends: 'themeBase',
+  extends: 'themeLightBase',
 
   color: {
     /**
@@ -64,7 +64,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     complementary: {
-      default: '#ffbb00',
+      default: '#5100ff',
       '...': '[theme.colorStates]'
     },
 

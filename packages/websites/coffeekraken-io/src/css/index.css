@@ -24,8 +24,26 @@
 @sugar.platform.classes;
 @sugar.prism.theme;
 
+.s-tooltip {
+  @sugar.theme(dark);
+}
+
 [class*='s-btn'] {
   border-radius: 100px !important;
   border: none !important;
+}
+
+#bkg {
+  position:absolute;
+  top: 0; right: 0;
+  width: 135vh;
+  height: 100vh;
+  background: url(/src/img/idflood/08.jpg);
+  background-position: center;
+  background-size: cover;
+
+  &:after {
+
+  }
 }
   

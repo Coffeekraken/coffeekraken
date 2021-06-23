@@ -57,7 +57,6 @@ export default function ({
       vars.push(`
         @sugar.scope.lnf {
             background-color: sugar.color(ui, surface);
-            color: sugar.color(ui, foreground);
             border-radius: sugar.theme(ui.tooltip.borderRadius);
             transition: sugar.theme(ui.tooltip.transition);
             padding: sugar.theme(ui.tooltip.padding);

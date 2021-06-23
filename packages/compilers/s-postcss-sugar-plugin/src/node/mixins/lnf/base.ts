@@ -47,11 +47,15 @@ export default function ({
     ...params
   };
 
-  const vars: string[] = [
+  let selector = '&';
+  if (atRule.parent && atRule.parent.type === 'root') {
+    selector = 'html';
+  } 
+
+   const vars: string[] = [
     `
     @sugar.scope(lnf) {
-        html {
-            background-color: sugar.color(main, background);
+        ${selector} {
             color: sugar.color(main, text);
             @sugar.font.family(default);
             @sugar.font.size(default);

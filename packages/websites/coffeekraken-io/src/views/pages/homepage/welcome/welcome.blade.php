@@ -9,14 +9,14 @@
         <div class="s-grid:12">
 
             <div class="s-pb:100 s-pt:60">
-                <h1 class="s-typo:h1:bold s-mb:50">The toolkit<br/>as good as a <span class="s-color:complementary">coffee</span>...<br/>Delivered by<br /><span class="s-color:accent">Kraken</span> Pop!!!</h1>
+                <h1 class="s-typo:h1:bold s-mb:50">The frontend toolkit<br/>as good as a <span class="s-color:accent">coffee</span>...<br/>Also available with<br>a <span class="s-color:complementary">Sugar</span></h1>
                 <s-code-example class="s-mb:50">
                     <template lang="bash" default-style>
 npm i @coffeekraken/sugar -g
 sugar frontstack.init my-cool-project
                     </template>
                 </s-code-example>
-                <a class="s-btn:accent s-mr:30" href="/#get-started" title="Get started!">
+                <a class="s-btn:accent s-mr:20" href="/#get-started" title="Get started!">
                     Get started!
                 </a>
                 <a class="s-btn:complementary" href="/#join-us" title="Join us!">
@@ -24,7 +24,7 @@ sugar frontstack.init my-cool-project
                 </a>
             </div>
             <div class="s-position:relative">
-                {{-- <img class="__kraken" src="/src/img/kraken.png" /> --}}
+                <img class="__kraken" src="/src/img/microworld.png" />
             </div>
 
         </div>

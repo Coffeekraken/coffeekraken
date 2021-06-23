@@ -283,18 +283,33 @@ export default class SConfig {
 
     let config = this._adapters[adapter].instance.load(isUpdate);
 
-    Object.keys(config).forEach(configName => {
-      if (config[configName].extends && typeof config[configName].extends === 'string') {
-        const extend = config[configName].extends;
+    function extendsConfigIfNeeded(configToExtends) {
+      if (configToExtends.extends && typeof configToExtends.extends === 'string') {
+        const extend = configToExtends.extends;
         if (!config[extend]) {
           throw new Error(`<red>[SConfig]</red> You have set an "<yellow>extends</yellow>" property to "<magenta>${extend}</magenta>" inside the "<cyan>${configName}</cyan>" config but this configuration you want to extends does not exists...`);
         }
-        config[configName] = __deepMerge(
-          Object.assign({}, config[extend]),
-          config[configName]
+
+        const extendsConfig = extendsConfigIfNeeded(Object.assign({}, config[extend]));
+
+
+
+
+        delete configToExtends.extends;
+        const newExtendedConfig = __deepMerge(
+          extendsConfig,
+          configToExtends
         );
-        delete config[configName].extends;
+
+        return newExtendedConfig;
+
+      } else {
+        return configToExtends;
       }
+    }
+
+    Object.keys(config).forEach(configName => {
+      config[configName] = extendsConfigIfNeeded(config[configName]);
     });
 
     this._settings.resolvers.forEach((resolverObj) => {

@@ -34,5 +34,8 @@ export default function ({
     vars.push('}');
   }
 
+  // regenerate base lnf css (color, etc...)
+  vars.push(`@sugar.lnf.base;`);
+
   replaceWith(vars); 
 }

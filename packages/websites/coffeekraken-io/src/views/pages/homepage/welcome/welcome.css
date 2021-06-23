@@ -7,6 +7,7 @@
   .__kraken {
     position: absolute;
     bottom: calc(-16% + 3px);
+    width: 900px;
     /* position: absolute;
     bottom: 0; left: 100%;
     width: 800px;

@@ -2,6 +2,14 @@
 @sugar.import ('./generic/**/*.css');
 
 @sugar.init;
+@sugar.classes;
+
+@sugar.media.classes(tablet, tablet) {
+  @sugar.classes;
+}
+@sugar.media.classes(desktop, desktop) {
+  @sugar.classes;
+}
 
 @sugar.icon.classes(
   fa:user:user

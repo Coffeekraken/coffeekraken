@@ -152,6 +152,132 @@ export default function ({
    }`);
   });
 
+  // negatives
+  Object.keys(spacesObj).forEach((spaceName) => {
+    // margins
+    const clsMargin = `s-m---${spaceName}`;
+    vars.push(`/**
+    * @name            ${clsMargin}
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>-${spaceName}</yellow>" margin style around any HTMLElement
+    * 
+    * @example      html
+    * <span class="${clsMargin}">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .${clsMargin} {
+        margin: calc(sugar.space(${spaceName}) * -1);
+   }`);
+    const clsMarginTop = `s-mt---${spaceName}`;
+    vars.push(`/**
+    * @name            ${clsMarginTop}
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>-${spaceName}</yellow>" top margin style to any HTMLElement
+    * 
+    * @example      html
+    * <span class="${clsMarginTop}">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .${clsMarginTop} {
+        margin-top: calc(sugar.space(${spaceName}) * -1) !important;
+   }`);
+    const clsMarginBottom = `s-mb---${spaceName}`;
+    vars.push(`/**
+    * @name            .${clsMarginBottom}
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>-${spaceName}</yellow>" bottom margin style to any HTMLElement
+    * 
+    * @example      html
+    * <span class="${clsMarginBottom}">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .${clsMarginBottom} {
+        margin-bottom: calc(sugar.space(${spaceName}) * -1) !important;
+   }`);
+    const clsMarginLeft = `s-ml---${spaceName}`;
+    vars.push(`/**
+    * @name            ${clsMarginLeft}
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>-${spaceName}</yellow>" left margin style to any HTMLElement
+    * 
+    * @example      html
+    * <span class="${clsMarginLeft}">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .${clsMarginLeft} {
+        margin-left: calc(sugar.space(${spaceName}) * -1) !important;
+   }`);
+    const clsMarginRight = `s-mr---${spaceName}`;
+    vars.push(`/**
+    * @name            .${clsMarginRight}
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>-${spaceName}</yellow>" right margin style to any HTMLElement
+    * 
+    * @example      html
+    * <span class="${clsMarginRight}">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .${clsMarginRight} {
+        margin-right: calc(sugar.space(${spaceName}) * -1) !important;
+   }`);
+    const clsMarginX = `s-mx---${spaceName}`;
+    vars.push(`/**
+    * @name            ${clsMarginX}
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>-${spaceName}</yellow>" left and right margin style to any HTMLElement
+    * 
+    * @example      html
+    * <span class="${clsMarginX}">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+     .${clsMarginX} {
+        margin-left: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-right: calc(sugar.space(${spaceName}) * -1) !important;
+   }`);
+    const clsMarginY = `s-my---${spaceName}`;
+    vars.push(`/**
+    * @name            ${clsMarginY}
+    * @namespace        sugar.css.space
+    * @type             CssClass
+    * 
+    * This class allows you to apply the "<yellow>-${spaceName}</yellow>" top and bottom margin style to any HTMLElement
+    * 
+    * @example      html
+    * <span class="${clsMarginY}">Something cool</span>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   .${clsMarginY} {
+        margin-top: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-bottom: calc(sugar.space(${spaceName}) * -1) !important;
+   }`);
+  });
+
   vars.push(`/**
     * @name            s-m--auto
     * @namespace        sugar.css.space
@@ -221,19 +347,19 @@ export default function ({
    }`);
 
    vars.push(`/**
-    * @name            s-left--auto
+    * @name            s-left:auto
     * @namespace        sugar.css.space
     * @type             CssClass
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
     * 
     * @example      html
-    * <span class="s-left--auto">Something cool</span>
+    * <span class="s-left:auto">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .s-left--auto {
+   .s-left:auto {
         margin-left: auto;
    }`);
 

@@ -27,7 +27,7 @@ import '@coffeekraken/s-code-example';
                 </template>
             </s-code-example>
 
-            <s-code-example class="s-mt:50">
+            <s-code-example class="s-mt:50 s-mr:-50 s-ml:50">
                 <template lang="html">
 <p id="paragraph">
 Something cool...

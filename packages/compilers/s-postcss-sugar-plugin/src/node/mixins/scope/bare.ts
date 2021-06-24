@@ -32,11 +32,13 @@ export interface postcssSugarPluginScopeBareMixinParams {}
 export default function ({
   params,
   atRule,
-  replaceWith
+  replaceWith,
+  postcssApi
 }: {
   params: Partial<IPostcssSugarPluginColorParams>;
   atRule: any;
   replaceWith: Function;
+  postcssApi: any;
 }) {
   const finalParams = <postcssSugarPluginScopeBareMixinParams>{
     ...(params ?? {})
@@ -46,15 +48,25 @@ export default function ({
     return atRule.replaceWith('');
   }
 
-  const vars: string[] = [];
+  // const vars: string[] = [];
 
-  if (atRule.parent && atRule.parent.type === 'root') {
-    vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
-  } else {
-    vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
-  }
-  vars.push(__astNodesToString(atRule.nodes));
-  vars.push(`}`);
+  // if (atRule.parent && atRule.parent.type === 'root') {
+  //   vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
+  // } else {
+  //   vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
+  // }
+  // vars.push(__astNodesToString(atRule.nodes));
+  // vars.push(`}`);
 
-  replaceWith(vars);
+  const rule = new postcssApi.Rule({
+    selector: '&:not(.s-no-bare &):not(.no-bare)'
+  });
+
+  atRule.nodes.forEach(node => {
+    rule.append(node);
+  });
+
+  atRule.replaceWith(rule);
+
+  // replaceWith(vars);
 }

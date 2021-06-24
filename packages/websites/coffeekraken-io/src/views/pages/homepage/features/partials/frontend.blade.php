@@ -8,7 +8,7 @@
 
     <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
         <div>  
-            <s-code-example class="s-mb:30">
+            <s-code-example class="s-mb:30 @desktop s-ml:-100">
                 <template lang="html">
 <ul class="s-list\:ul\:icon">
 <li>
@@ -73,7 +73,7 @@ Cool don't you think?
             </ol>
         </div>
         <div>
-            <s-code-example class="s-mb:30">
+            <s-code-example class="s-mb:30 @desktop s-mr:-50">
                 <template lang="css">
 /* import some globs */
 @sugar.import('../views/**/*.css');
@@ -130,7 +130,7 @@ Cool don't you think?
         </div>
     </div>
 
-    <div class="s-text:center s-py:50">
+    <div class="s-text:center s-py:50 s-ml:-50">
         <p class="s-typo:p-lead s-mx:auto s-mb:30">
             Keep in mind that <span class="s-color:accent">all of these features are optional</span>. This mean that
             you can work with the things you like and let the rest aside...

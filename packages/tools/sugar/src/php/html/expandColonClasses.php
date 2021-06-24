@@ -21,7 +21,7 @@ namespace Sugar\html;
  */
 function expandColonClasses($html) {
 
-    $reg = '/class="[a-zA-Z0-9_\-:\s]+"/';
+    $reg = '/class="[a-zA-Z0-9_\-:@\s]+"/';
 
     $parts = [];
     $matches = preg_match_all($reg, $html, $parts);
@@ -33,18 +33,34 @@ function expandColonClasses($html) {
 
         $classesArray = [];
 
+        $currentMedia = '';
+
         foreach($classNames as $className) {
+            if (substr($className, 0, 1) == '@') {
+                $currentMedia = str_replace('@', '___', $className);
+                continue;
+            }
 
             $parts = explode(':', $className);
             if (count($parts) === 1) {
-                array_push($classesArray, $className);
+                $name = $className;
+                if ($currentMedia !== '') $name = $className . $currentMedia;
+                array_push($classesArray, $name);
             } else {
                 $firstClass = $parts[0];
-                array_push($classesArray, $firstClass);
+
+                $name = $firstClass;
+                if ($currentMedia !== '') $name = $firstClass . $currentMedia;
+
+                array_push($classesArray, $name);
 
                 foreach($parts as $index => $part) {
                     if ($index > 0) {
-                        array_push($classesArray, $firstClass . '--' . $part);
+
+                        $name = $firstClass . '--' . $part;                       
+                        if ($currentMedia !== '') $name = $name . $currentMedia;
+
+                        array_push($classesArray, $name);
                     }
                 }
             }

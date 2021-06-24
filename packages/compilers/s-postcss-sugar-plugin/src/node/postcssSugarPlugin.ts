@@ -79,8 +79,30 @@ const plugin = (settings: any = {}) => {
           sharedData
         });
       }
+
+      root.walkComments(comment => {
+        if (!comment.text.match(/^@sugar-media-classes-[a-zA-Z0-9-_]+/)) return;
+        const mediaName = comment.text.replace('@sugar-media-classes-', '').trim();
+        const mediaRule = comment.next();
+        if (!mediaRule) return;
+        mediaRule.walkRules(rule => {
+          if (rule.parent !== mediaRule) return;
+          if (!rule.selector) return;
+          if (!rule.selector.match(/^\./)) return;
+
+          const selectorParts = rule.selector.split(/[\s:#.]/).filter(l => l !== '');
+          if (!selectorParts.length) return;
+          const clsSelector = `.${selectorParts[0]}`;
+
+          const newSelector = rule.selector.split(clsSelector).join(`${clsSelector}___${mediaName}`);
+          rule.selector = newSelector;
+        });
+        comment.remove();
+      });
+
     },
-    AtRule( atRule) {
+    AtRule( atRule, postcssApi) {
+
         if (atRule.name.match(/^sugar\./)) {
 
         let potentialMixinPath = `${__dirname}/mixins/${atRule.name
@@ -141,6 +163,7 @@ const plugin = (settings: any = {}) => {
           replaceWith(nodes) {
             replaceWith(atRule, nodes);
           },
+          postcssApi,
           sourcePath,
           sharedData,
           postcss: __postcss,

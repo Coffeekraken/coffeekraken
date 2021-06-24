@@ -1203,7 +1203,7 @@ export default {
      * @namespace         config.theme.themes.default.media
      * @type              String
      * @values            >,<,=,>=,<=
-     * @default           =
+     * @default           >=
      *
      * Specify the default action to apply if you don't specify one in your media
      * mixin call like ```@include Sugar.media('tablet') {...}```. If the defaultAction is set to ">=",
@@ -1212,7 +1212,7 @@ export default {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    defaultAction: '=',
+    defaultAction: '>=',
 
     /**
      * @name              defaultQuery
@@ -1232,7 +1232,7 @@ export default {
        * @name          mobile
        * @namespace     config.theme.themes.default.media.queries
        * @type          Object
-       * @default       {'min-width': null, 'max-width': 639}
+       * @default       {'min-width': 0, 'max-width': 639}
        *
        * Specify the media query arguments needed to target mobile
        *
@@ -1240,7 +1240,7 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       mobile: {
-        'min-width': null,
+        'min-width': 0,
         'max-width': 639
       },
 

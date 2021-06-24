@@ -22,7 +22,7 @@
 
         <div class="s-py:100 s-rhythm-vertical">
             <img src="/src/img/features-development-logos.svg" class="s-mx:auto s-display:block" />
-            <s-code-example class="s-mt:50">
+            <s-code-example class="s-mt:50 @desktop s-mr:-100">
                 <template lang="bash">
 # Install sugar globally
 npm i @coffeekraken/sugar -g
@@ -41,7 +41,7 @@ sugar start
 
         <div>
 
-            <s-code-example class="s-mb:30">
+            <s-code-example class="s-mb:30 @desktop s-ml:-50">
                 <template lang="bach">
 # Init a Sugar step by step process
 sugar

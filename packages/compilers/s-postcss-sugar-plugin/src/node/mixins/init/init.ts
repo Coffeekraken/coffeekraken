@@ -41,25 +41,8 @@ export default function ({
   const cssArray = [
     '@sugar.reset;',
     `@sugar.theme(${params.theme ?? themeConfig.theme});`,
-    '@sugar.font.faces;',
+    '@sugar.font.faces;'
     // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
-    // '@sugar.color.docblocks;',
-    '@sugar.ui.classes;',
-    '@sugar.typo.classes;',
-    '@sugar.layout.classes;',
-    '@sugar.color.classes;',
-    '@sugar.align.classes;',
-    '@sugar.text.classes;',
-    '@sugar.font.classes;',
-    '@sugar.depth.classes;',
-    '@sugar.flex.classes;',
-    '@sugar.ratio.classes;',
-    '@sugar.border.classes;',
-    '@sugar.display.classes;',
-    '@sugar.position.classes;',
-    '@sugar.style.classes;',
-    '@sugar.icon.classes;',
-    '@sugar.space.classes;'
   ];
 
   replaceWith(cssArray);

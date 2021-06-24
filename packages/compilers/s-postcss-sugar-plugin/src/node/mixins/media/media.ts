@@ -3,6 +3,8 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __postCss from 'postcss';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __postcss from 'postcss';
+import __theme from '../../utils/theme';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
   static definition = {
@@ -26,15 +28,6 @@ class postcssSugarPluginMediaMixinInterface extends __SInterface {
       type: 'String'
     },
     query7: {
-      type: 'String'
-    },
-    query8: {
-      type: 'String'
-    },
-    query9: {
-      type: 'String'
-    },
-    query10: {
       type: 'String'
     }
   };
@@ -66,114 +59,155 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 export default function ({
   params,
   atRule,
-  replaceWith
+  replaceWith,
+  postcssApi
 }: {
   params: any;
   atRule: any;
   replaceWith: Function;
+  postcssApi: any;
 }) {
-  const mediaConfig = __SugarConfig.get('media');
+  const mediaConfig = __theme().config('media');
 
-  return;
+  const queries: string[] = [];
 
-  const mediasArray: string[] = [];
-  Object.keys(params).forEach((argName) => {
-    mediasArray.push(params[argName]);
+  Object.keys(params).forEach(queryId => {
+    const query = params[queryId].trim();
+    query.split(',').forEach(q => {
+      queries.push(q.trim());
+    });
   });
 
+  // const queries = params.query.split(',').map(l => l.trim());
   const fullQueriesList: string[] = [];
 
-  mediasArray.forEach((query) => {
-    const firstChar = query.slice(0, 1);
-    const firstTwoChar = query.slice(0, 2);
-    const lastChar = query.slice(-1);
-    let action = mediaConfig.defaultAction;
-    let mediaName = query;
+  queries.forEach(query => {
 
-    if (lastChar === '-' || lastChar === '|')
-      mediaName = mediaName.slice(0, -1);
+    // const mediasArray: string[] = [];
+    // let currentQuery = '';
+    // query.replace(/\sand\s/gm, ' , ').replace(/\sor\s/gm, ' _ ').split('').forEach(char => {
+    //   if (char === '_') {
+    //     mediasArray.push(currentQuery.trim());
+    //     mediasArray.push('or');
+    //     currentQuery = '';
+    //   } else if (char === ',') {
+    //     mediasArray.push(currentQuery.trim());
+    //     mediasArray.push('and');
+    //     currentQuery = '';
+    //   } else {
+    //     currentQuery += char;
+    //   }
+    // });
+    // mediasArray.push(currentQuery.trim());
 
-    if (
-      firstTwoChar === '>=' ||
-      firstTwoChar === '<=' ||
-      firstTwoChar === '=='
-    ) {
-      mediaName = mediaName.slice(2);
-      action = firstTwoChar;
-    } else if (firstChar === '<' || firstChar === '>' || firstChar === '=') {
-      mediaName = mediaName.slice(1);
-      action = firstChar;
-    }
+    const currentQueryList: string[] = [mediaConfig.defaultQuery, 'and'];
 
-    const mediaQueryConfig = mediaConfig.queries[mediaName];
-    if (!mediaQueryConfig)
-      throw new Error(
-        `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
-          mediaConfig.queries
-        )
-          .map((l) => `<green>${l}</green>`)
-          .join(',')}`
-      );
+    // mediasArray.forEach((query) => {
 
-    const queryList: string[] = [mediaConfig.defaultQuery];
+      if (query === 'and' || query === 'or') {
+        currentQueryList.push(query); 
+        return;
+      }
 
-    Object.keys(mediaQueryConfig).forEach((prop) => {
-      let value = mediaQueryConfig[prop];
-      if (!value) return;
+      const firstChar = query.slice(0, 1);
+      const firstTwoChar = query.slice(0, 2);
+      const lastChar = query.slice(-1);
+      let action = mediaConfig.defaultAction;
+      let mediaName = query;
 
-      if (typeof value === 'number') value = `${value}px`;
+      if (lastChar === '-' || lastChar === '|')
+        mediaName = mediaName.slice(0, -1);
 
       if (
-        [
-          'min-width',
-          'max-width',
-          'min-device-width',
-          'max-device-width'
-        ].indexOf(prop) !== -1
+        firstTwoChar === '>=' ||
+        firstTwoChar === '<=' ||
+        firstTwoChar === '=='
       ) {
-        if (action === '>') {
-          if (prop === 'max-width' || prop === 'max-device-width') {
-            let argName = 'min-width';
-            if (prop.includes('-device')) argName = 'min-device-width';
-            queryList.push(`(${argName}: ${value + 1})`);
-          }
-        } else if (action === '<') {
-          if (prop === 'min-width' || prop === 'min-device-width') {
-            let argName = 'max-width';
-            if (prop.includes('-device')) argName = 'max-device-width';
-            queryList.push(`(${argName}: ${value})`);
-          }
-        } else if (action === '=') {
-          queryList.push(`(${prop}: ${value})`);
-        } else if (action === '>=') {
-          if (prop === 'min-width' || prop === 'min-device-width') {
-            queryList.push(`(${prop}: ${value})`);
-          }
-        } else if (action === '<=') {
-          if (prop === 'max-width' || prop === 'max-device-width') {
-            queryList.push(`(${prop}: ${value})`);
+        mediaName = mediaName.slice(2);
+        action = firstTwoChar;
+      } else if (firstChar === '<' || firstChar === '>' || firstChar === '=') {
+        mediaName = mediaName.slice(1);
+        action = firstChar;
+      }
+
+      const mediaQueryConfig = mediaConfig.queries[mediaName];
+      if (!mediaQueryConfig)
+        throw new Error(
+          `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
+            mediaConfig.queries
+          )
+            .map((l) => `<green>${l}</green>`)
+            .join(',')}`
+        );
+
+      const queryList: string[] = [];
+
+      Object.keys(mediaQueryConfig).forEach((prop) => {
+        const value = mediaQueryConfig[prop];
+        if (!value) return;
+
+        if (
+          [
+            'min-width',
+            'max-width',
+            'min-device-width',
+            'max-device-width'
+          ].indexOf(prop) !== -1
+        ) {
+          if (action === '>') {
+            if (prop === 'max-width' || prop === 'max-device-width') {
+              let argName = 'min-width';
+              if (prop.includes('-device')) argName = 'min-device-width';
+              queryList.push(`(${argName}: ${value + 1}px)`);
+            }
+          } else if (action === '<') {
+            if (prop === 'min-width' || prop === 'min-device-width') {
+              let argName = 'max-width';
+              if (prop.includes('-device')) argName = 'max-device-width';
+              queryList.push(`(${argName}: ${value}px)`);
+            }
+          } else if (action === '=') {
+            queryList.push(`(${prop}: ${value}px)`);
+          } else if (action === '>=') {
+            if (prop === 'min-width' || prop === 'min-device-width') {
+              queryList.push(`(${prop}: ${value}px)`);
+            }
+          } else if (action === '<=') {
+            if (prop === 'max-width' || prop === 'max-device-width') {
+              queryList.push(`(${prop}: ${value}px)`);
+            }
+          } else {
+            queryList.push(`(${prop}: ${value}px)`);
           }
         } else {
-          queryList.push(`(${prop}: ${value})`);
+          queryList.push(`(${prop}: ${value}px)`);
         }
-      } else {
-        queryList.push(`(${prop}: ${value})`);
+      });
+
+      if (lastChar === '-') {
+        queryList.push('(orientation: landscape)');
+      } else if (lastChar === '|') {
+        queryList.push('(orientation: portrait)');
       }
-    });
 
-    if (lastChar === '-') {
-      queryList.push('(orientation: landscape)');
-    } else if (lastChar === '|') {
-      queryList.push('(orientation: portrait)');
-    }
+      currentQueryList.push(queryList.join(' and '));
+    // });
 
-    fullQueriesList.push(queryList.join(' and '));
+    fullQueriesList.push(currentQueryList.join(' '));
+
+  });
+  
+  const mediaRule = new postcssApi.AtRule({
+    name: 'media',
+    params: fullQueriesList.join(' ')
   });
 
-  const AST = replaceWith(`@media ${fullQueriesList.join(',')} {}`);
+  // const AST = __postcss.parse(`@media ${fullQueriesList.join(' ')} {}`);
 
   // @ts-ignore
-  AST.nodes[0].nodes = atRule.nodes;
+  atRule.nodes.forEach(node => {
+    mediaRule.append(node);
+  });
 
-  atRule.replaceWith(AST);
+  atRule.replaceWith(mediaRule);
 }

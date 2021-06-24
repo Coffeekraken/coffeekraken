@@ -47,12 +47,21 @@ export default function ({
     ...params
   };
 
+  const vars: string[] = [];
+
   let selector = '&';
   if (atRule.parent && atRule.parent.type === 'root') {
     selector = 'html';
+
+    vars.push(`
+      body {
+
+      }
+    `);
+
   } 
 
-   const vars: string[] = [
+   vars.push(
     `
     @sugar.scope(lnf) {
         ${selector} {
@@ -66,7 +75,7 @@ export default function ({
         }
     }
     `
-  ];
+   );
 
   replaceWith(vars);
 }

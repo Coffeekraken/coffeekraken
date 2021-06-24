@@ -32,7 +32,7 @@
 
         <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:100">
             <div>
-                <s-code-example>
+                <s-code-example class="s-ml:-50">
                     <template lang="bash">
 # Get our ip address
 sugar network.ip
@@ -69,7 +69,7 @@ sugar --help
                 </p>
             </div>
             <div>
-                <s-code-example>
+                <s-code-example class="s-mr:-100">
                     <template lang="js">
 import querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 querySelectorLive('.my-cool-component', ($elm) => {
@@ -82,7 +82,7 @@ querySelectorLive('.my-cool-component', ($elm) => {
 
         <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:100">
             <div>
-                <s-code-example>
+                <s-code-example class="s-ml:-50">
                     <template lang="js">
 import base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import md5 from '@coffeekraken/sugar/shared/crypt/md5';
@@ -113,7 +113,7 @@ md5('Hello world'); // 3e25960a79dbc69b674cd4ec67a72c62
                 </p>
             </div>
             <div>
-                <s-code-example>
+                <s-code-example class="s-mr:-50">
                     <template lang="js">
 import isEmail from '@coffeekraken/sugar/shared/is/email';
 import isColor from '@coffeekraken/sugar/shared/is/color';

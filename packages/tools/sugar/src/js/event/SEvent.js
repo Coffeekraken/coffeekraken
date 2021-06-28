@@ -4,7 +4,8 @@
  * @namespace            js.event
  * @type                    Class
  * @import              import SEvent from '@coffeekraken/sugar/js/event/SEvent';
- * @platform                js
+ * @platform          js
+ * @platform          ts
  * @status                  stable
  *
  * Proxy class to create custom events that can be dispatched
@@ -38,4 +39,4 @@
  */
 import customEvent from 'custom-event';
 export default customEvent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0V2ZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0V2ZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0NHO0FBQ0gsT0FBTyxXQUFXLE1BQU0sY0FBYyxDQUFDO0FBUXZDLGVBQWUsV0FBVyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0V2ZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0V2ZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFDRztBQUNILE9BQU8sV0FBVyxNQUFNLGNBQWMsQ0FBQztBQVF2QyxlQUFlLFdBQVcsQ0FBQyJ9

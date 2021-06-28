@@ -8,7 +8,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      querySelectorLive
  * @namespace            js.dom.query
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.

@@ -6,6 +6,8 @@ namespace Sugar\html;
  * @name        Sugar\html\expandColonClasses
  * @namespace            php.html
  * @type        Function
+ * @platform        php
+ * @status          beta
  * 
  * This method will look for classes like something:cool and transform it into
  * something like this: something something--cool

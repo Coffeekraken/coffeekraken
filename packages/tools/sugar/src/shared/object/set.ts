@@ -7,7 +7,10 @@ import __unquote from '../string/unquote';
  * @name                                        set
  * @namespace            js.object
  * @type                                        Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Set an object value using a dotted object path like "myObject.myProperty.myValue" to set his position
  *

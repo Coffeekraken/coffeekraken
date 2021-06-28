@@ -6,7 +6,10 @@ import __toRegex from 'to-regex';
  * @name        dedupe
  * @namespace            js.string
  * @type        Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function simple make sure that you don't have duplicate statements in the passed string
  *

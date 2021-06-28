@@ -7,7 +7,8 @@ import __convert from '../../../shared/time/convert';
  * @name      getTransitionProperties
  * @namespace            js.dom.style
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        wip
  *
  * Get the css transition properties from an HTMLElement in an object format

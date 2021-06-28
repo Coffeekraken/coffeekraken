@@ -7,7 +7,8 @@ import requestAnimationFrame from '../utlls/requestAnimationFrame';
  * @name      scrollTo
  * @namespace            js.dom.scroll
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          beta
  *
  * Function that let you make a smooth page scroll to a specific element in the page

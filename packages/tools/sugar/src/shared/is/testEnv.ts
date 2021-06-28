@@ -3,7 +3,10 @@
  * @name          testEnv
  * @namespace            js.is
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the current environment is in a test process or not
  *

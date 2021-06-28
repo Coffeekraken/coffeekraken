@@ -9,7 +9,9 @@ import __isChildProcess from '../is/childProcess';
  * @name                hotkey
  * @namespace            node.keyboard
  * @type                Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function allows you to add keyboard listening process and subscribe to some sequences
  * using the SPromise instance returned.

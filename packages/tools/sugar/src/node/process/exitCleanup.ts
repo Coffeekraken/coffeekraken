@@ -10,7 +10,9 @@ import __minimatch from 'minimatch';
  * @namespace            node.process
  * @type              Function
  * @async
- * @status              wip
+ * @platform        ts
+ * @platform        node
+ * @status          wip
  *
  * This function simply cleanup all the processes and other things that stay alive after that
  * the main process has been terminated

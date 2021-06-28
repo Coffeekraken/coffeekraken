@@ -6,7 +6,9 @@ import __extension from './extension';
  * @name                       filename
  * @namespace            node.fs
  * @type                        Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the filename from the passed path with or without the extension
  *

@@ -5,7 +5,8 @@
  * @namespace            js.event
  * @type                    Class
  * @import              import SEvent from '@coffeekraken/sugar/js/event/SEvent';
- * @platform                js
+ * @platform          js
+ * @platform          ts
  * @status                  stable
  *
  * Proxy class to create custom events that can be dispatched

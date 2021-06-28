@@ -1,3 +1,0 @@
-import postcssSugarErrorPlugin from './postcssSugarErrorPlugin';
-export default postcssSugarErrorPlugin;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyx1QkFBdUIsTUFBTSwyQkFBMkIsQ0FBQztBQUVoRSxlQUFlLHVCQUF1QixDQUFDIn0=

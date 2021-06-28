@@ -10,7 +10,10 @@ const __encryptedMessages = {};
  * @name            sha256
  * @namespace            js.crypt
  * @type            Object
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              beta
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha256 algorithm
  *

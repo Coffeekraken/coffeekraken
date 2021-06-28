@@ -6,7 +6,9 @@ import __fs from 'fs-extra';
  * @name                            srcViewsDir
  * @namespace            node.path
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the package dist directory path
  *

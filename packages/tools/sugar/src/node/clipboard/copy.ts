@@ -8,7 +8,9 @@ import __ncp from 'copy-paste';
  * @name            copy
  * @namespace            node.clipboard
  * @type            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Simple function to copy things into the system clipboard.
  * This is using https://www.npmjs.com/package/clipboardy under the hood.

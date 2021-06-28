@@ -4,7 +4,10 @@ import __argsToString from './argsToString';
  * @name            buildCommandLine
  * @namespace            js.cli
  * @type            Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              wip
  *
  * This function takes as parameters a command line (with tokens), an arguments object and a definition object to
  * generate the final command line string to launch.

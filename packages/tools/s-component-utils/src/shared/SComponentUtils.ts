@@ -31,6 +31,10 @@ import __striptags from '@coffeekraken/sugar/shared/html/striptags';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
+export interface ISComponentUtilsDataProvider {
+  getData(): Promise<any>
+}
+
 export interface ISComponentUtilsSettings {
   interface?: __SInterface;
 }
@@ -177,14 +181,6 @@ export default class SComponentUtils extends __SClass {
 
     }
 
-    __handlebars.registerHelper('if_even', function(conditional, options) {
-      if((conditional % 2) == 0) {
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
-    });
-
     __handlebars.registerHelper("striptags", function( txt ){
       // exit now if text is undefined 
       if(typeof txt == "undefined") return;
@@ -250,7 +246,7 @@ export default class SComponentUtils extends __SClass {
   }
 
   /**
-   * @name          compileHandlebars
+   * @name          renderHandlerbars
    * @type          Function
    *
    * This method allows you to compile some mustache template
@@ -263,7 +259,7 @@ export default class SComponentUtils extends __SClass {
    * @since         2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  compileHandlebars(template: string, data: any): string {
+  renderHandlerbars(template: string, data: any): string {
     const renderFn = __handlebars.compile(template);
     const res = renderFn(data);
     return res;
@@ -306,6 +302,32 @@ export default class SComponentUtils extends __SClass {
         if (!hasListeners) reject();
       });
     });
+  }
+
+  addSyncEventListener(name: string, handler: Function): void {
+    this.node.addEventListener(name, async (e) => {
+      // @ts-ignore
+      if (!e.detail?.onPing) return handler(e);
+      // @ts-ignore
+      e.detail.onPing();
+      const res = await handler(e);
+      // @ts-ignore
+      e.detail.onResolve(res);
+    });
+  }
+
+  addSyncEventListenerOn($targets, name: string, handler: Function): void {
+    $targets.forEach($target => {
+      $target.addEventListener(name, async (e) => {
+        // @ts-ignore
+        if (!e.detail?.onPing) return handler(e);
+        // @ts-ignore
+        e.detail.onPing();
+        const res = await handler(e);
+        // @ts-ignore
+        e.detail.onResolve(res);
+      });
+    })
   }
 
   addTargetsEventListener(name: string, handler: Function): void {

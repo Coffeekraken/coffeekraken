@@ -3,7 +3,10 @@
  * @name        isOdd
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if a number is odd or not
  *
@@ -26,4 +29,4 @@ function isOdd(value) {
     return value % 2 === 1;
 }
 export default isOdd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2RkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2RkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsS0FBSyxDQUFDLEtBQUs7SUFDbEIsT0FBTyxLQUFLLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQztBQUN6QixDQUFDO0FBQ0QsZUFBZSxLQUFLLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2RkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2RkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQVMsS0FBSyxDQUFDLEtBQUs7SUFDbEIsT0FBTyxLQUFLLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQztBQUN6QixDQUFDO0FBQ0QsZUFBZSxLQUFLLENBQUMifQ==

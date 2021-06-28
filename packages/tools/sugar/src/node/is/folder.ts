@@ -7,7 +7,9 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name            folder
  * @namespace            node.is
  * @type            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function check if the passed string path is a folder or not
  *

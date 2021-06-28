@@ -6,7 +6,8 @@ import linkLoaded from './linkLoaded';
  * @namespace            js.dom.detect
  * @type      Function
  * @async
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Wait until all the HTMLLinkElement's are properly loaded

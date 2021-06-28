@@ -7,7 +7,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name        smoothScrollOnPageLoad
  * @namespace            js.feature
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * This feature simply allow a snooth scroll on page load if an hash exists in the url

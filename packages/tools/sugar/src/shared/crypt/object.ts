@@ -6,6 +6,9 @@ import __encodeObject from 'object-encode';
  * @name            object
  * @namespace            js.crypt
  * @type            Object
+ * @platform          js
+ * @platform          ts
+ * @platform          node
  * @status              wip
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm

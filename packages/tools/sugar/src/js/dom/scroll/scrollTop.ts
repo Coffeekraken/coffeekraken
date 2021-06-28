@@ -4,7 +4,8 @@
  * @name      scrollTop
  * @namespace            js.dom.scroll
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Return the amount of scroll top that the user as made in the page

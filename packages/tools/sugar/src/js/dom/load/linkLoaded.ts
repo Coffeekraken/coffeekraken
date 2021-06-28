@@ -4,7 +4,8 @@
  * @name      linkLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Wait until the passed HTMLLinkElement is fully loaded

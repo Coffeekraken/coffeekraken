@@ -53,6 +53,9 @@ Cool don't you think?
             </h4>
             <ol class="s-list:ol:accent s-mb:30">
                 <li class="s-typo:p">
+                    Powerfull and pleasant classnames syntax
+                </li>
+                <li class="s-typo:p">
                     Color management simplified
                 </li>
                 <li class="s-typo:p">
@@ -86,6 +89,15 @@ fa:user:custom-user
 fa:fire
 fs:src/icons/copy.svg:copy
 );
+                </template>
+                <template lang="html">
+<!-- A simpler and powerfull classnames syntax -->
+<h1 class="s-typo\:h2 s-font\:bold s-mb\:30 @desktop s-typo\:h1">
+    Hello new css classnames syntax!
+</h1>
+<p class="s-typo\:p @tablet s-font\:quote">
+    Apply responsive styling after "@desktop", "@tablet" keyword...
+</p>
                 </template>
             </s-code-example>
         </div>    

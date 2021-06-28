@@ -5,6 +5,10 @@ import __clone from './clone';
  * @name            deepAssign
  * @namespace            js.object
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take as first parameter the object you want to assign others to,
  * then others objects you want to assign to the first.

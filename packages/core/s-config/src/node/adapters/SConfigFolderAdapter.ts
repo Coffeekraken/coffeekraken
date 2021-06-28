@@ -147,6 +147,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
   _load(folderPaths, scope, clearCache = false) {
     const configObj = {};
 
+
     folderPaths = __unique(folderPaths);
 
     folderPaths.forEach((path) => {
@@ -220,7 +221,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     Object.keys(this._scopedSettings).forEach((scope) => {
       resultSettings = __deepMerge(resultSettings, this._scopedSettings[scope]);
     });
-    
+
     return resultSettings;
   }
 

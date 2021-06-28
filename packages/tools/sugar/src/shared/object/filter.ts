@@ -4,7 +4,10 @@
  * @name                        filter
  * @namespace            js.object
  * @type                        Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Allow to filter an object using a function. It works the same as the filter method on the Array object type.
  * The passed filter function will have as parameter each object properties and must return true or false depending if you want the

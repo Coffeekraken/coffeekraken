@@ -7,7 +7,8 @@ import __convert from '../../../shared/time/convert';
  * @name      getAnimationProperties
  * @namespace            js.dom.style
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          wip
  *
  * Get the css animation properties from an HTMLElement in an object format

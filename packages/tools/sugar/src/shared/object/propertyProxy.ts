@@ -5,7 +5,10 @@ import _get from 'lodash/get';
  * @name        propertyProxy
  * @namespace            js.object
  * @type      Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Create a proxy for and object property.
  * This gives you the possibility to process the data of the property

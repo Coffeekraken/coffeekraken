@@ -4,7 +4,8 @@
  * @name      wrap
  * @namespace            js.dom.manipulate
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Wrap an HTMLElement inside another `$wrapper` one

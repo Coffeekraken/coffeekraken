@@ -8,6 +8,7 @@ import __express from 'express';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 import __mimeTypes from 'mime-types'; //eslint-disable-line
 import __minimatch from 'minimatch';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
@@ -171,15 +172,33 @@ export default class SFrontendServer extends __SClass {
             next();
           });
         }
+        // routes registration
+        if (frontendServerConfig.routes) {
+          Object.keys(frontendServerConfig.routes).forEach((routeSlug) => {
+            const routeObj = frontendServerConfig.routes[routeSlug];
+
+            const handlerObj = frontendServerConfig.handlers[routeObj.handler];
+
+            const handlerFn = require(handlerObj.handler).default;
+            express.get(routeSlug, (req, res, next) => {
+
+              if (routeObj.request) {
+                req = __deepMerge(req, routeObj.request);
+              }
+
+              return pipe(handlerFn(req, res, next));
+            });
+          });
+        }
 
         // handlers registration
-        Object.keys(frontendServerConfig.handlers).forEach((handlerId) => {
-          const handlerObj = frontendServerConfig.handlers[handlerId];
-          const handlerFn = require(handlerObj.handler).default;
-          express.get(handlerObj.route, (req, res, next) => {
-            return pipe(handlerFn(req, res, next));
-          });
-        });
+        // Object.keys(frontendServerConfig.handlers).forEach((handlerId) => {
+        //   const handlerObj = frontendServerConfig.handlers[handlerId];
+        //   const handlerFn = require(handlerObj.handler).default;
+        //   express.get(handlerObj.route, (req, res, next) => {
+        //     return pipe(handlerFn(req, res, next));
+        //   });
+        // });
 
         express.listen(frontendServerConfig.port, () => {
           // server started successfully

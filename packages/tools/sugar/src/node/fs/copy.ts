@@ -8,7 +8,9 @@ import __fs from 'fs-extra';
  * @namespace            node.fs
  * @type          Function
  * @async
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Copy a file or directory (async)
  * Support the ```replacePathTokens``` tokens

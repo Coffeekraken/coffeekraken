@@ -8,7 +8,10 @@ import __unique from '../array/unique';
  * @name                deepMerge
  * @namespace            js.object
  * @type                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Deep merge one object with another and return the merged object result. This merging implementation support:
  * - Merging object with getters/setters

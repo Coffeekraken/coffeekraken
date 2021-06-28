@@ -6,7 +6,10 @@ import __globParent from 'glob-parent';
  * @name                extractGlob
  * @namespace            js.glob
  * @type                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * This function simply return you the glob part of a passed string
  *

@@ -17,6 +17,7 @@
     "@coffeekraken/s-sugar-config": "^2.0.0",
     "@coffeekraken/s-theme": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/s-bench": "^2.0.0",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",

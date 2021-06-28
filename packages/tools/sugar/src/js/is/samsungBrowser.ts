@@ -4,7 +4,8 @@
  * @name        isSamsumgBrowser
  * @namespace            js.is
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Detect if is the samsung stock browser that is running the page

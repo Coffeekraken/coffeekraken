@@ -4,7 +4,10 @@ import __isClass from '../../is/class';
  * @name            getExtendsStack
  * @namespace       shared.class.utils
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * This function take a class as parameter and return an array of all the class names used to extends this one...
  *

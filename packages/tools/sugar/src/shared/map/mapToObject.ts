@@ -2,6 +2,10 @@
  * @name          mapToObject
  * @namespace            js.map
  * @type          Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function simply take a Map object and convert it to a plain object
  *
@@ -22,7 +26,7 @@
  */
 function mapToObject(map: any): object {
   const obj = {};
-  for (let [k, v] of map) obj[k] = v;
+  for (const [k, v] of map) obj[k] = v;
   return obj;
 }
 export default mapToObject;

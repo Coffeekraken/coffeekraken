@@ -10,7 +10,8 @@ import __whenOutOfViewport from '../whenOutOfViewport';
  * @namespace            js.dom.detect
  * @type      Function
  * @async
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Monitor when the passed element enter or exit the viewport

@@ -4,7 +4,10 @@
  * @name            parseAuthorString
  * @namespace            js.npm
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function simply take an author string like "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)" and
  * transform it into a plain object with these properties: name, email and url

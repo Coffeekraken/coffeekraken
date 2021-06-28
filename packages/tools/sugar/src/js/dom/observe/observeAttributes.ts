@@ -7,7 +7,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.dom.observe
  * @type      Function
  * @async
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance

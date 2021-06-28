@@ -7,7 +7,8 @@ import __dispatchEvent from '../dom/event/dispatchEvent';
  * @name 		handleInputAttributes
  * @namespace            js.feature
  * @type      Feature
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Add some events on some DOM Elements. Here's the list:

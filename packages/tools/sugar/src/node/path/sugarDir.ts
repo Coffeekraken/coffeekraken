@@ -6,7 +6,9 @@ import __fs from 'fs-extra';
  * @name                            sugarRootDir
  * @namespace            node.path
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the sugar package directory path
  *

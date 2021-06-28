@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        addEventListener
  * @namespace            js.dom.event
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          beta
  *
  * Add an event listener on an element and return the function to remove the event listener

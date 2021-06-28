@@ -4,7 +4,8 @@
  * @name      matches
  * @namespace            js.dom.query
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Polyfill for the Element.matches function

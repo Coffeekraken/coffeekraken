@@ -4,7 +4,10 @@
  * @name 		distanceBetween
  * @namespace            js.geom.2d
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Get the distance between two points
  *

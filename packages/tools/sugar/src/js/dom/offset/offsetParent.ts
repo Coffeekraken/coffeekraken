@@ -5,7 +5,8 @@ import __offset from './offset';
  * @name      offsetParent
  * @namespace            js.dom.offset
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Get the offset top and left of the passed element from his parent top left point

@@ -4,6 +4,9 @@
  * @name                              asyncForEach
  * @namespace            js.array
  * @type                              Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
  * @status              beta
  *
  * Allow to make some async foreach on your arrays

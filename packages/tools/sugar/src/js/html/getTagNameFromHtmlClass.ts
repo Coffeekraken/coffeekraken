@@ -7,7 +7,8 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @name            getHtmlhtmlClassFromHtmlClass
  * @namespace            js.html
  * @type            Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * This function simply return the tagname depending on the passed HTML class

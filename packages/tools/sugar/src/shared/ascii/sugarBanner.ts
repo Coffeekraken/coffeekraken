@@ -7,7 +7,10 @@ import __parseHtml from '../console/parseHtml';
  * @name          sugarBanner
  * @namespace            shared.ascii
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * This function returns an ascii version of the sugar logo
  *

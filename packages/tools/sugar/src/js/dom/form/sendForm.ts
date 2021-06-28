@@ -7,7 +7,8 @@ import __formSerialize from 'form-serialize';
  * @name      sendForm
  * @namespace            js.dom.form
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        wip
  *
  * Send a form through an ajax call and return back a promise resolved with the server response

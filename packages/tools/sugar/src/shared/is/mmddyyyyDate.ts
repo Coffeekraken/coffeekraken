@@ -4,7 +4,10 @@
  * @name        isMmddyyyyDate
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if is a valid mm.dd.yyyy date
  * This will match : mm.dd.yyyy | mm/dd/yyyy | mm-dd-yyyy | mm dd yyyy

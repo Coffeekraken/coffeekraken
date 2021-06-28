@@ -1,13 +1,11 @@
-import __SPromise from '@coffeekraken/s-promise';
 import __SCache from '@coffeekraken/s-cache';
-import __dependencyTree from 'dependency-tree';
-import __deepMerge from '../../shared/object/deepMerge';
-import __fs from 'fs';
-import __packageRootDir from '../path/packageRootDir';
-import __md5 from '../../shared/crypt/md5';
-import __folderPath from '../fs/folderPath';
-import __path from 'path';
 import __SFile from '@coffeekraken/s-file';
+import __SPromise from '@coffeekraken/s-promise';
+import __fs from 'fs';
+import __path from 'path';
+import __md5 from '../../shared/crypt/md5';
+import __deepMerge from '../../shared/object/deepMerge';
+import __packageRootDir from '../path/packageRootDir';
 import __extractImport from './extractImport';
 
 /**
@@ -15,6 +13,9 @@ import __extractImport from './extractImport';
  * @namespace            node.module
  * @type                Function
  * @async
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Async wrapper around the amazing dependency-tree module made by mrjoelkemp.
  * This wrapper add some capabilities like caching already parsed dependencies.

@@ -7,7 +7,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name 		imagesLoadedAttribute
  * @namespace            js.feature
  * @type      Feature
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Add on every images the attribute "loaded" when it has been fully loaded. This is useful

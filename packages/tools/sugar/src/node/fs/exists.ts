@@ -5,7 +5,9 @@ import __fs from 'fs';
  * @namespace            node.fs
  * @type        Function
  * @async
- * @status      stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply check if the path passed exists.
  * You can specify what you want to take care of using the settings object

@@ -7,7 +7,10 @@ import __stripAnsi from 'strip-ansi';
  * @name                                  countLine
  * @namespace            js.string
  * @type                                  Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Count how many characters their is in the passed line.
  * This function will exclude the characters like the html tags like <red>, etc...

@@ -14,7 +14,9 @@ import __excludeGlobs from '../path/excludeGlobs';
  * @name            resolveGlob
  * @namespace            node.glob
  * @type            Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply resolve the passed glob pattern(s) and resolve his promise
  * with an Array of SFile instances to work with

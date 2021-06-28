@@ -7,7 +7,10 @@ import __countLine from './countLine';
  * @name                                        crop
  * @namespace            js.string
  * @type                                        Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Allows you to crop a string at a certain length (this length take care of the croping characters like "...")
  *

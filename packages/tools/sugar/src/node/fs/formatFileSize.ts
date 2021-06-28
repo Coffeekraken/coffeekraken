@@ -6,7 +6,9 @@ import __filesize from 'filesize';
  * @name                                    formatFileSize
  * @namespace            node.fs
  * @type                                    Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Transform into human readable string a file size from a number (float or integer) or string.
  * This function use the wonderfull "filesize" npm package under the houd.

@@ -6,7 +6,10 @@ import __isGlob from 'is-glob';
  * @name                                      isGlob
  * @namespace            js.is
  * @type                                      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the passed string is a valid glob pattern or not
  *

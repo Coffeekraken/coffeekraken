@@ -4,7 +4,8 @@
  * @name      requestFullscreen
  * @namespace            js.dom.utils
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Request fullscreen on the passed DOM element

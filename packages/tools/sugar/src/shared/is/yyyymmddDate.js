@@ -3,7 +3,10 @@
  * @name        isYyyymmddDate
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if is a valid yyyy.mm.dd date
  * This will match : yyyy.mm.dd | yyyy/mm/dd | yyyy-mm-dd | yyyy mm dd
@@ -28,4 +31,4 @@ function isYyyymmddDate(date) {
     return /^\d{4}[\-\/\s\.]?((((0[13578])|(1[02]))[\-\/\s\.]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\-\/\s\.]?(([0-2][0-9])|(30)))|(02[\-\/\s\.]?[0-2][0-9]))$/.test(date);
 }
 export default isYyyymmddDate;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXl5eW1tZGREYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsieXl5eW1tZGREYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxjQUFjLENBQUMsSUFBSTtJQUMxQixPQUFPLHVKQUF1SixDQUFDLElBQUksQ0FDakssSUFBSSxDQUNMLENBQUM7QUFDSixDQUFDO0FBQ0QsZUFBZSxjQUFjLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXl5eW1tZGREYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsieXl5eW1tZGREYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBUyxjQUFjLENBQUMsSUFBSTtJQUMxQixPQUFPLHVKQUF1SixDQUFDLElBQUksQ0FDakssSUFBSSxDQUNMLENBQUM7QUFDSixDQUFDO0FBQ0QsZUFBZSxjQUFjLENBQUMifQ==

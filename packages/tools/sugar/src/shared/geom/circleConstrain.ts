@@ -6,7 +6,10 @@ import distanceBetween from './distanceBetween';
  * @name 		circleConstrain
  * @namespace            js.geom.2d
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius
  *

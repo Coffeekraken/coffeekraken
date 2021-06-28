@@ -6,7 +6,10 @@ import __globParent from 'glob-parent';
  * @name                extractNoneGlob
  * @namespace            js.glob
  * @type                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * This function simply return you the none glob part of a passed string
  *

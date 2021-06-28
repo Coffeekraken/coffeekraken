@@ -4,7 +4,10 @@
  * @name                                  convert
  * @namespace            js.time
  * @type                                  Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function allows you to convert time like seconds, ms, hours, minutes, etc... from one format to another
  *

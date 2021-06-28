@@ -7,7 +7,10 @@ import __deepClone from 'lodash.clonedeep';
  * @name                clone
  * @namespace            js.object
  * @type                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function allows you to clone an object either at 1 level, or deeply.
  *

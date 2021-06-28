@@ -7,7 +7,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      removeClassOnAnimationEnd
  * @namespace            js.dom.class
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Remove some class on animation end

@@ -9,7 +9,10 @@ import parse from '../string/parse';
  * @name            aes
  * @namespace            js.crypt
  * @type            Object
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              beta
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
  *

@@ -4,7 +4,10 @@ import { v4 as __uuidv4 } from 'uuid';
  * @name          uniqid
  * @namespace            js.string
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
  *
@@ -26,4 +29,4 @@ function uniqid() {
     return __uuidv4();
 }
 export default uniqid;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsRUFBRSxJQUFJLFFBQVEsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxNQUFNO0lBQ2IsT0FBTyxRQUFRLEVBQUUsQ0FBQztBQUNwQixDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsRUFBRSxJQUFJLFFBQVEsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxNQUFNO0lBQ2IsT0FBTyxRQUFRLEVBQUUsQ0FBQztBQUNwQixDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==

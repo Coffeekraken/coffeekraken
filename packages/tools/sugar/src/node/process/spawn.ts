@@ -13,7 +13,9 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @namespace            node.process
  * @type            Function
  * @async
- * @status              wip
+ * @platform        ts
+ * @platform        node
+ * @status          wip
  *
  * This function allows you to spawn a new child process just like the native ```spawn``` node function
  * but add the support for SEventEmitter communication layers

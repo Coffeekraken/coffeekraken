@@ -4,7 +4,8 @@
  * @name        emptyNode
  * @namespace            js.dom.manipulate
  * @type        Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Empty a node by removing each childs one after the other

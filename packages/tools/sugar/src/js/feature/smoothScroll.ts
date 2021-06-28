@@ -9,7 +9,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name        smoothScroll
  * @namespace            js.feature
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * This feature enable some underhood features like the automatic scroll on anchor links as well as

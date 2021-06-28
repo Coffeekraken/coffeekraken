@@ -15,7 +15,10 @@ import __clone from '../object/clone';
  * @name 		            SWatch
  * @namespace            js.object
  * @type                Class
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        wip
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
  *

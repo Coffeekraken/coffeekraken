@@ -9,7 +9,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name        writeJsonSync
  * @namespace            node.fs
  * @type          Function
- * @stabée
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... (sync)
  * Support the ```replacePathTokens``` tokens

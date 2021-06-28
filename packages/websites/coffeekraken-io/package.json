@@ -16,6 +16,7 @@
     "@coffeekraken/s-activate-component": "^2.0.0",
     "@coffeekraken/s-code-example-component": "^2.0.0",
     "@coffeekraken/s-clipboard-copy-component": "^2.0.0",
+    "@coffeekraken/s-handlebars-component": "^2.0.0",
     "@coffeekraken/s-class": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0"
   }

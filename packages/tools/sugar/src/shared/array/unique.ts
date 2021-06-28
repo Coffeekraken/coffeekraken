@@ -4,7 +4,10 @@
  * @name              unique
  * @namespace            js.array
  * @type                  Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              stable
  *
  * This function simply take an array as parameter and return a new one
  * with all the duplicates values removed.

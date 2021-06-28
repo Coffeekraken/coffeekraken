@@ -185,6 +185,8 @@ export default class SVite extends __SClass {
           }
         });
 
+        console.log(params);
+
         // shortcuts
         if (params.bundle) params.type = 'bundle';
         if (params.lib) params.type = 'lib';

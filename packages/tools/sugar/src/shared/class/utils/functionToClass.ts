@@ -6,7 +6,10 @@ import __funcToClass from 'func-to-classes';
  * @name            functionToClass
  * @namespace            js.class.utils
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Transform ES5 Functions to ES6 Classes
  *

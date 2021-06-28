@@ -7,7 +7,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name        smoothScrollOnHashChange
  * @namespace            js.feature
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * This feature simply allow a snooth scroll on hash changes

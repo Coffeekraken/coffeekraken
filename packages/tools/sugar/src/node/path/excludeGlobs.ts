@@ -6,7 +6,9 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @name                            excludeGlobs
  * @namespace            node.path
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the array of exclude globs
  *

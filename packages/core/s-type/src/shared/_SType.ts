@@ -19,12 +19,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * This class is the main one that MUST be used as parent one
  * when creating any type like object, string, etc...
  *
+ * @param       {String}        typeString          The type string to represent with this instance like "Array<String>", etc...
  * @param       {ISTypeSettings}      settings        An object of setting to configure your descriptor instance
  *
  * @setting     {String}        [id=this.constructor.name]        An id for your instance
  * @setting     {String}        [name=this.constructor.name]      A name for your instance
- * @setting     {Boolean}       [throw=true]            Specify if you want your instance to throw errors or not
- * @setting     {Boolean}       [verbose=true]          Specify if you want back an object describing the issue, or just a false
  * @setting     {Boolean}       [customTypes=true]      Specify if you want the instance to take care of custom types like "SType", "SPromise", etc. or not
  *
  * @todo      tests
@@ -74,8 +73,6 @@ export interface ISTypeDescriptor {
 export interface ISTypeSettings {
   name?: string | undefined;
   id?: string | undefined;
-  throw?: boolean;
-  verbose?: boolean;
 }
 
 export interface ISTypeRegisteredTypes {
@@ -183,7 +180,7 @@ class SType implements ISType {
    */
   static registerType(type: ISTypeDescriptor): void {
     if (type.id === undefined || typeof type.id !== 'string') {
-      throw `Sorry but you try to register a type that does not fit the ISTypeDescriptor interface...`;
+      throw new Error(`Sorry but you try to register a type that does not fit the ISTypeDescriptor interface...`);
     }
     this._registeredTypes[type.id] = type;
   }
@@ -213,10 +210,8 @@ class SType implements ISType {
       {
         id: this.constructor.name,
         name: this.constructor.name,
-        throw: false,
         customTypes: true,
-        interfaces: true,
-        verbose: false
+        interfaces: true
       },
       settings
     );
@@ -286,11 +281,7 @@ class SType implements ISType {
         // like "object", "array" or "map"
         const typeOf = __typeOf(value);
         if (typeOf !== 'Array' && typeOf !== 'Object' && typeOf !== 'Map') {
-          if (settings.throw) {
-            throw `Sorry but you have specified a type string "<yellow>${this.typeString}</yellow>" with some "<...>" definition on a type "<cyan>${typeOf}</cyan>" that does not support "child" value(s)...`;
-          } else {
-            continue;
-          }
+          throw new Error(`Sorry but you have specified a type string "<yellow>${this.typeString}</yellow>" with some "<...>" definition on a type "<cyan>${typeOf}</cyan>" that does not support "child" value(s)...`);
         }
 
         // get the keys on which to loop
@@ -360,7 +351,6 @@ class SType implements ISType {
       settings
     });
 
-    if (settings.throw === true) throw new Error(res.toString());
     return res;
   }
 
@@ -401,11 +391,7 @@ class SType implements ISType {
         );
         if (type === typeOf || extendsStack.indexOf(type) !== -1) return true;
       }
-      if (settings.throw) {
-        throw `Sorry but you try to validate a value with the type "<yellow>${type}</yellow>" but this type is not registered...`;
-      } else {
-        return false;
-      }
+      throw new Error(`Sorry but you try to validate a value with the type "<yellow>${type}</yellow>" but this type is not registered...`);
     }
     // validate the value using the "is" type method
     return this.constructor._registeredTypes[type.toLowerCase()].is(value);
@@ -432,8 +418,17 @@ class SType implements ISType {
     const verboseObj = {
       value,
       issues: {},
-      settings
+      settings,
+      toString() {
+        const strAr: string[] = Object.entries(this.issues);
+        return strAr.map(l => l[1]).join('\n');
+      }
     };
+
+    // check if the value is already at the good type
+    if (this.is(value)) {
+      return value;
+    }
 
     // loop on each types
     for (let i = 0; i < this.types.length; i++) {
@@ -472,11 +467,7 @@ class SType implements ISType {
         const issueStr = `Sorry but the passed type "<yellow>${typeId}</yellow>" has some child(s) dependencies "<green>${typeObj.of.join(
           '|'
         )}</green>" but this type can not have child(s)`;
-        if (settings.throw === true) {
-          throw __parseHtml(issueStr);
-        }
-        // add the issue in the verboseObj
-        verboseObj.issues[typeId] = issueStr;
+        throw new Error(__parseHtml(issueStr));
       } else if (typeObj.of !== undefined) {
         const sTypeInstance = new SType(typeObj.of.join('|'));
         castedValue = __map(castedValue, ({ value }) => {
@@ -495,27 +486,19 @@ class SType implements ISType {
     }
 
     // our value has not bein casted
-    if (settings.throw) {
-      const stack = [
-        `Sorry but the value of type "<cyan>${__typeOf(
-          value
-        )}</cyan>" passed to be casted in type "<yellow>${
-          this.typeString
-        }</yellow>" can not be casted correctly. Here's why:\n`
-      ];
-      Object.keys(verboseObj.issues).forEach((descriptorId) => {
-        stack.push(
-          `- <red>${descriptorId}</red>: ${verboseObj.issues[descriptorId]}`
-        );
-      });
-      throw __parseHtml(stack.join('\n'));
-    }
-    if (settings.verbose === true) {
-      return new Error(verboseObj);
-    }
-    return new Error(
-      `Something goes wrong with the casting process but not details available sorry...`
-    );
+    const stack = [
+      `Sorry but the value of type "<cyan>${__typeOf(
+        value
+      )}</cyan>" passed to be casted in type "<yellow>${
+        this.typeString
+      }</yellow>" can not be casted correctly. Here's why:\n`
+    ];
+    Object.keys(verboseObj.issues).forEach((descriptorId) => {
+      stack.push(
+        `- <red>${descriptorId}</red>: ${verboseObj.issues[descriptorId]}`
+      );
+    });
+    throw new Error(__parseHtml(stack.join('\n')));
   }
 
   /**

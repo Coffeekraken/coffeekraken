@@ -9,7 +9,8 @@ import __closest from './query/closest';
  * @namespace            js.dom.detect
  * @type      Function
  * @async
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        stable
  *
  * Monitor an HTMLElement to be notified when it exit the viewport

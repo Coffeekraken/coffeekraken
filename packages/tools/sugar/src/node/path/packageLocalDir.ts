@@ -5,7 +5,9 @@ import __fs from 'fs-extra';
  * @name                            packageLocalDir
  * @namespace            node.fs
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the .local directory path
  *

@@ -4,6 +4,9 @@
  * @name                                splitEvery
  * @namespace            js.array
  * @type                                Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
  * @status              beta
  *
  * Split an array every N items

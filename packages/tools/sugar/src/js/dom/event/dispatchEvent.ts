@@ -6,7 +6,8 @@ import __SEvent from '../../event/SEvent';
  * @name      dispatchEvent
  * @namespace            js.dom.event
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          stable
  *
  * Helper to quickly display an event with some optional data attached to it

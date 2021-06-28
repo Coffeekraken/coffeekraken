@@ -1,14 +1,17 @@
 import __SPromise from '@coffeekraken/s-promise';
+import __deepMap from '../../shared/object/deepMap';
 import __dependencyTree, {
   IDependencyTreeExtendedSettings
 } from './dependencyTree';
-import __deepMap from '../../shared/object/deepMap';
 
 /**
  * @name                dependencyList
  * @namespace            node.module
  * @type                Function
  * @async
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function make use of the ```dependencyTree``` one and returns the result into a simple array of file pathes
  *

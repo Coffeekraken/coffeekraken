@@ -33,6 +33,7 @@ export default {
         if (!__fs.existsSync(settings.cacheDir)) {
           __fs.mkdirSync(settings.cacheDir, { recursive: true });
         }
+
         // preparing the php execution
         __execPhp(
           __dirname + '/compile.php',

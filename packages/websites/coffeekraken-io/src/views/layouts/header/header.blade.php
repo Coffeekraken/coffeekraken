@@ -12,7 +12,7 @@
             <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:50">
                 <a class="s-pl:100 s-typo:bold" href="/#features" title="Features">Features</a>
                 <a class="s-px:50 s-typo:bold" href="/#get-started" title="Get started">Get started</a>
-                <a class="s-pr:100 s-typo:bold" href="/#documentation" title="Documentation">Documentation</a>
+                <a class="s-pr:100 s-typo:bold" href="/doc" title="Documentation">Documentation</a>
             </nav>
         </div>
 

@@ -6,7 +6,10 @@ import __SType from '@coffeekraken/s-type';
  * @name              ofType
  * @namespace            js.is
  * @type              Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take the value to check and an argument type definition string like "String", "Array<String>", etc... and return true or false depending
  * if the value pass the test or not...

@@ -4,7 +4,10 @@
  * @name            extractValues
  * @namespace            js.object
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take an array of objects and a key name as parameters and return an array containing
  * only the specified object key value.

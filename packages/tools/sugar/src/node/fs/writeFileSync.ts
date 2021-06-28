@@ -9,7 +9,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name        writeFileSync
  * @namespace            node.fs
  * @type          Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Write a file. If don't exist, will be created as well as the directory structure if needed... (sync)
  * Support the ```replacePathTokens``` tokens

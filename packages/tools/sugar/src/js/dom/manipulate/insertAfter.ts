@@ -4,7 +4,8 @@
  * @name      insertAfter
  * @namespace            js.dom.manipulate
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Insert an HTMLElement after another HTMLElement

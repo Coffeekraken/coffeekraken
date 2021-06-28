@@ -6,10 +6,11 @@
     }
   </style>
 
-  <script>
+  <script lang="ts">
+
     import __SRequest from '@coffeekraken/s-request';
     import __SRequestComponentInterface from './interface/SRequestComponentInterface.ts';
-    import __SComponentUtils from '@coffeekraken/s-component-utils';
+    import __SComponentUtils, { ISComponentUtilsDataProvider } from '@coffeekraken/s-component-utils';
     import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
     import __SCache from '@coffeekraken/s-cache';
     import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
@@ -40,25 +41,39 @@
           this._cache = new __SCache('s-request');
         }
 
-        switch(this.component.props.trigger) {
-          case 'event':
-            // requested props (on, $targets)
-            if (!this.component.props.on) throw new Error(`<red>[s-request${this.root.id ? `#${this.root.id}` : ''}]</red> When using the trigger "event", you MUST specify the "<yellow>on</yellow>" property to tell the component which event to listen to`);
-            if (!this.component.$targets.length) throw new Error(`<red>[s-request${this.root.id ? `#${this.root.id}` : ''}]</red> When using the trigger "event", you MUST specify the "<yellow>target</yellow>" property to tell the component which other HTMLElement to listen to`);
-            // listen for the event on the target
-            this.component.addTargetsEventListener(this.component.props.on, async (e) => {
-              const detail = Object.assign({}, e.detail);
-              delete detail.onPing;
-              delete detail.onResolve;
-              const res = await this._request(detail);
+        // this.component.addSyncEventListener('request', async (e) => {
+        //   const detail = Object.assign({}, e.detail);
+        //   delete detail.onPing;
+        //   delete detail.onResolve;
+        //   const res = await this.request(detail);
+        //   return res;
+        // });
 
-              return res;
-            });
-          break;
-        }
+        // switch(this.component.props.trigger) {
+        //   case 'event':
+        //     // requested props (on, $targets)
+        //     if (!this.component.props.on) throw new Error(`<red>[s-request${this.root.id ? `#${this.root.id}` : ''}]</red> When using the trigger "event", you MUST specify the "<yellow>on</yellow>" property to tell the component which event to listen to`);
+        //     if (!this.component.$targets.length) throw new Error(`<red>[s-request${this.root.id ? `#${this.root.id}` : ''}]</red> When using the trigger "event", you MUST specify the "<yellow>target</yellow>" property to tell the component which other HTMLElement to listen to`);
+        //     // listen for the event on the target
+        //     this.component.addTargetsEventListener(this.component.props.on, async (e) => {
+        //       const detail = Object.assign({}, e.detail);
+        //       delete detail.onPing;
+        //       delete detail.onResolve;
+        //       const res = await this.request(detail);
+        //       return res;
+        //     });
+        //   break;
+        // }
+
+        // expose API
+        this.root.request = this.request.bind(this);
+        this.root.getData = this.getData.bind(this);
 
       },
-      async _request(data) {
+      async getData(payload) {
+        return this.request(payload);
+      },
+      async request(data) {
 
         let payload = {
           type: this.component.props.type ?? 'get',
@@ -107,9 +122,13 @@
           }
         }
 
+        
+
         if (this._inlineProxyObj?.response) {
           res = this._inlineProxyObj.response(res);
         }
+
+        if (res.data && res.status && res.headers) res = res.data;
 
         return res;
       },

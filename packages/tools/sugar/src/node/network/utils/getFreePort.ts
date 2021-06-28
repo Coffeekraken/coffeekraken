@@ -7,7 +7,9 @@ import __isPortFree from './isPortFree';
  * @namespace            node.http
  * @type            Function
  * @async
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply returns you a free port.
  * You can pass a port to check as parameter and if it is free, you will get it back as result

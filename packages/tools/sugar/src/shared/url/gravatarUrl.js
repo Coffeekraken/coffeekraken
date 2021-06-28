@@ -4,7 +4,10 @@ import __md5 from '../crypt/md5';
  * @name            gravatarUrl
  * @namespace            js.url
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Return a gravatar url depending on the passed user email and size
  *
@@ -28,4 +31,4 @@ function gravatarUrl(email, size = 200) {
     return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
 }
 export default gravatarUrl;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3JhdmF0YXJVcmwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJncmF2YXRhclVybC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxLQUFLLE1BQU0sY0FBYyxDQUFDO0FBRWpDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsV0FBVyxDQUFDLEtBQUssRUFBRSxJQUFJLEdBQUcsR0FBRztJQUNwQyxPQUFPLG1DQUFtQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxNQUFNLElBQUksRUFBRSxDQUFDO0FBQzdFLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3JhdmF0YXJVcmwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJncmF2YXRhclVybC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxLQUFLLE1BQU0sY0FBYyxDQUFDO0FBRWpDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsV0FBVyxDQUFDLEtBQUssRUFBRSxJQUFJLEdBQUcsR0FBRztJQUNwQyxPQUFPLG1DQUFtQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxNQUFNLElBQUksRUFBRSxDQUFDO0FBQzdFLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9

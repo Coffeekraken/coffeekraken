@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        emit
  * @namespace            js.event
  * @type          Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * This function can ben used to emit an event globally.

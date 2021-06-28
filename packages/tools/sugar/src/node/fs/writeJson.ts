@@ -10,7 +10,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @namespace            node.fs
  * @type          Function
  * @async
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)
  * Support the ```replacePathTokens``` tokens

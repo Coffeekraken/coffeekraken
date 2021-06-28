@@ -6,7 +6,9 @@ import __ip from 'ip';
  * @name              ipAddress
  * @namespace            node.network
  * @type              Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function allows you to get your ip address
  *

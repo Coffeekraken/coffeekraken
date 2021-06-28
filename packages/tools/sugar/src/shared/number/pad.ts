@@ -4,7 +4,10 @@
  * @name        pad
  * @namespace            js.number
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Pad a number n of x 0 or another passed character
  *

@@ -6,7 +6,10 @@ import __isValidPath from 'is-valid-path';
  * @name                            path
  * @namespace           node.is
  * @type                            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the passed string is a valid path or not
  *

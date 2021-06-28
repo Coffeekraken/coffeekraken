@@ -6,7 +6,10 @@ import __deepMerge from '../object/deepMerge';
  * @name          trimLines
  * @namespace            js.string
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take a string and trim each lines
  *

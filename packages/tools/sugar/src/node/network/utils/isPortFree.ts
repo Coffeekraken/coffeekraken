@@ -7,7 +7,9 @@ import server from 'http';
  * @namespace            node.http
  * @type            Function
  * @async
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply check if the passed port is free or not
  *

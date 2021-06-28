@@ -4,7 +4,10 @@
  * @name                                    methodExists
  * @namespace            js.class.utils
  * @type                                    Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Check if one or more methods exists on a class instance
  *

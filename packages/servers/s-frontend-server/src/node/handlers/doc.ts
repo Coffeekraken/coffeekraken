@@ -36,6 +36,9 @@ export default function doc(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
 
     const docMap = new __SDocMap();
+
+    
+
     const requestedNamespace = req.path.replace('/doc/', '').trim();
 
     const readPromise = docMap.read();

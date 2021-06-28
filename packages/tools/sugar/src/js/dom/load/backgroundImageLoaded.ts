@@ -9,7 +9,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        backgroundImageLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        betas
  *
  * Detect when a background image has been loaded on an HTMLElement

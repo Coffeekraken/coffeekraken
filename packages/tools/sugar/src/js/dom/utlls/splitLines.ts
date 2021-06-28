@@ -7,7 +7,8 @@ import __throttle from '../../shared/function/throttle';
  * @name      splitLines
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Split each lines inside an HTMLElement by scoping them inside some tags.

@@ -6,7 +6,10 @@ import __countLine from './countLine';
  * @name                          splitEvery
  * @namespace            js.string
  * @type                          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Split a string every n chars either by taking care of not spliting the words, or by simply spliting without any attention to that...
  *

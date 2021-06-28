@@ -4,7 +4,8 @@
  * @name            toString
  * @namespace            js.html
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Return the string version of a dom node or the dom node and his children

@@ -15,6 +15,7 @@ import __seeTag from './tags/see';
 import __snippetTag from './tags/snippet';
 import __platformTag from './tags/platform';
 import __namespaceTag from './tags/namespace';
+import __todoTag from './tags/todo';
 
 /**
  * @name          SDocblockBlock
@@ -361,7 +362,6 @@ SDocblockBlock.registerTag('since', __simpleValueTag);
 SDocblockBlock.registerTag('static', __simpleValueTag);
 SDocblockBlock.registerTag('summary', __simpleValueTag);
 SDocblockBlock.registerTag('this', __simpleValueTag);
-SDocblockBlock.registerTag('todo', __simpleValueTag);
 SDocblockBlock.registerTag('tutorial', __simpleValueTag);
 SDocblockBlock.registerTag('type', __simpleValueTag);
 SDocblockBlock.registerTag('variation', __simpleValueTag);
@@ -390,5 +390,6 @@ SDocblockBlock.registerTag('namespace', __namespaceTag);
 // SDocblockBlock.registerTag('borrows', __borrowsTag);
 SDocblockBlock.registerTag('snippet', __snippetTag);
 SDocblockBlock.registerTag('example', __exampleTag);
+SDocblockBlock.registerTag('todo', __todoTag);
 
 export default SDocblockBlock;

@@ -7,7 +7,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      imagesLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Detect when some images are loaded. This function take advantage of the SPromise class

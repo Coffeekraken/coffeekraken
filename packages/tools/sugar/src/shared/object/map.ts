@@ -4,7 +4,10 @@
  * @name                map
  * @namespace            js.object
  * @type                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This is the same function as the "Array.map" but for objects. It will iterate over all the properties
  * of the passed object and pass the value to your process function. It will then save the property

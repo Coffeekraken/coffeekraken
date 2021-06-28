@@ -256,6 +256,7 @@ export default class SBench extends __SPromise {
 
         const keys = Object.keys(this._steps);
 
+        // @ts-ignore
         const lastTime = !keys.length ? this._startTime : this._steps[keys.pop()].time;
         const duration = Date.now() - lastTime;
 
@@ -297,7 +298,7 @@ export default class SBench extends __SPromise {
             ]
         });
 
-        let logsAr: stringn[] = [];
+        let logsAr: string[] = [];
         Object.keys(this._steps).forEach(stepId => {
             const stepObj = this._steps[stepId];
             logsAr = [...logsAr, ...stepObj.logs];
@@ -331,11 +332,12 @@ export default class SBench extends __SPromise {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     toString() {
-        let logsAr: stringn[] = [];
+        let logsAr: string[] = ['-------------------- SBench --------------------'];
         Object.keys(this._steps).forEach(stepId => {
             const stepObj = this._steps[stepId];
             logsAr = [...logsAr, ...stepObj.logs];
         });
+        logsAr.push('------------------------------------------------')
         return logsAr.join('\n');
     }
 

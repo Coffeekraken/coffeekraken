@@ -4,7 +4,10 @@
  * @name          sleep
  * @namespace            js.function
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Simple sleep function that can be used using "await" syntax in an "async" function
  *

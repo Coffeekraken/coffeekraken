@@ -11,7 +11,9 @@ import __sha256 from '../../shared/crypt/sha256';
  * @namespace       node.fs
  * @type            Function
  * @platform        node
- * @status          stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  * 
  * This function allows you to get back an integrity hash for the passed folder.
  * This mean that if a folder returns the same integrity hash twice, the folder or files in it

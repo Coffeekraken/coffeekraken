@@ -7,7 +7,10 @@ import __get from './get';
  * @name                      resolveTokens
  * @namespace            js.object
  * @type                      Function
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take an object and propare it to accept tokens like:
  * - '{this.something.else}'

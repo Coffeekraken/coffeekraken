@@ -6,7 +6,8 @@ import __matches from './matches';
  * @name        closest
  * @namespace            js.dom.query
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Go up the dom three to find the first element that matches the passed selector

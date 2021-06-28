@@ -13,8 +13,11 @@ import __rgba2hsv from './rgba2hsv';
  * @name            parse
  * @namespace            js.color
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  * @private
- * @stable
  *
  * Parse a string and return you the wanted object format like "rgba", "hsl" or "hsv".
  *

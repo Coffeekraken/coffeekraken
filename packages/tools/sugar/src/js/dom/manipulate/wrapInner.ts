@@ -4,7 +4,8 @@
  * @name      wrapInner
  * @namespace            js.dom.manipulate
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Wrap the content of the passed `$parent` inside a the passed HTMLElement `$wrapper`

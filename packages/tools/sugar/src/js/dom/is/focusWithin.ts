@@ -4,7 +4,8 @@
  * @name      focusWithin
  * @namespace            js.dom.is
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Check if the mouse is focusWithin the passed HTMLElement

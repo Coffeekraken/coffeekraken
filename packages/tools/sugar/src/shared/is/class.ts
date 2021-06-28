@@ -6,7 +6,10 @@ import __isClass from 'is-class';
  * @name                      class
  * @namespace            js.is
  * @type                      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the passed variable (or array of variables) is/are plain variable(s)
  *

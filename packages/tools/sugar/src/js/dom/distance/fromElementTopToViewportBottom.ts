@@ -5,7 +5,8 @@ import __offset from '../offset/offset';
  * @name            fromElementTopToViewportBottom
  * @namespace       js.dom.distance
  * @type            Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          beta
  *
  * This function take an element as parameter and returns you to distance it has

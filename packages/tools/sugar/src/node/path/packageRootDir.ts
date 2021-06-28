@@ -8,7 +8,9 @@ import __packageRoot from './packageRoot';
  * @name                            packageRootDir
  * @namespace            node.path
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the package root directory path
  *

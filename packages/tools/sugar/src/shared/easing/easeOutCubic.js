@@ -3,7 +3,10 @@
  * @name      easeOutCubic
  * @namespace            js.easing
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Ease out cubic function
  *
@@ -21,4 +24,4 @@ function ease(t) {
     return --t * t * t + 1;
 }
 export default ease;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWFzZU91dEN1YmljLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZWFzZU91dEN1YmljLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxTQUFTLElBQUksQ0FBQyxDQUFDO0lBQ2IsT0FBTyxFQUFFLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUN6QixDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWFzZU91dEN1YmljLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZWFzZU91dEN1YmljLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxTQUFTLElBQUksQ0FBQyxDQUFDO0lBQ2IsT0FBTyxFQUFFLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUN6QixDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==

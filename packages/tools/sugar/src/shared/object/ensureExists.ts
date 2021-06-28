@@ -7,7 +7,10 @@ import __set from './set';
  * @name                        ensureExists
  * @namespace            js.object
  * @type                        Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Pass a string like "my.cool.object" and the value it has to be and this function will ensure that this deep object exist
  *

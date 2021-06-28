@@ -4,7 +4,10 @@
  * @name                        parseRgba
  * @namespace            js.color
  * @type                        Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * Parse RGBA string and return an object
  *

@@ -5,10 +5,14 @@ import { spawnSync } from 'child_process';
  * @namespace       node.command
  * @type            Function
  * @async
+ * @platform        ts
  * @platform        node
  * @status          beta
  * 
  * This function allows you to check if a command exists on the system where the script is running
+ * 
+ * @todo        tests           high
+ * @todo        Documentation
  * 
  * @param       {String}            command         The command to check like "ls", "node", etc...
  * @return      {Promise}                           A promise fullfiled once the check has finished with true of false as value

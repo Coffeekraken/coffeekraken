@@ -6,7 +6,8 @@ import scriptLoaded from '../scriptLoaded';
  * @name        appendScriptTag
  * @namespace            js.dom.tag
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Append a script tag either to the head or the body

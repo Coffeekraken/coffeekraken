@@ -7,7 +7,10 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * @name                          get
  * @namespace            js.object
  * @type                          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Retreive an object value using a dotted path like "myObject.myProperty.myValue"
  *

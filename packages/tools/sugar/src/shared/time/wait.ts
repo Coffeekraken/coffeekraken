@@ -5,7 +5,10 @@
  * @namespace            js.time
  * @type            Function
  * @async
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function is a simple "setTimeout" wrapper inside a promise.
  *

@@ -7,6 +7,10 @@ __chalk.level = 3;
  * @name        tagsMap
  * @namespace            js.console.html
  * @type        Object
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * Store the tag->function map used in ```parseHtml``` function for example
  *

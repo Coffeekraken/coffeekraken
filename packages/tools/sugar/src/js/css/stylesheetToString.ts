@@ -2,7 +2,8 @@
  * @name            stylesheetToString
  * @namespace       js.css
  * @type             Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status           stable
  *
  * This function take a StyleSheet instance and convert it to a simple string

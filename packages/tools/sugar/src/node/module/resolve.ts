@@ -1,17 +1,23 @@
-import __deepMerge from '../../shared/object/deepMerge';
-import __ResolveSettingsInterface from './interface/ResolveSettingsInterface';
+import __SInterface from '@coffeekraken/s-interface';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __path from 'path';
+import __deepMerge from '../../shared/object/deepMerge';
+import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtensions';
+import __existsSync from '../fs/existsSync';
 import __isFile from '../is/file';
+import __packageRootDir from '../path/packageRootDir';
 import __builtInNodeModules from './buildInNodeModules';
 import __exportsMatch from './exportsMatch';
-import __existsSync from '../fs/existsSync';
-import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtensions';
+
 
 /**
  * @name            resolve
  * @namespace            node.module
  * @type            Function
+ * @platform        ts
+ * @platform        node
+ * @status          wip
  *
  * This function take as parameter a module path to resolve and returns back the
  * correct path to this module. It check for package.json file and fields like "main", "module", etc...
@@ -39,6 +45,46 @@ import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtens
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export class ResolveSettingsInterface extends __SInterface {
+  static definition = {
+    dirs: {
+      type: 'Array<String>',
+      default: __SugarConfig.get('module.resolve.dirs')
+    },
+    extensions: {
+      type: 'Array<String>',
+      default: __SugarConfig.get('module.resolve.extensions')
+    },
+    fields: {
+      type: 'Array<String>',
+      default: __SugarConfig.get('module.resolve.fields')
+    },
+    buildInModules: {
+      type: 'Boolean',
+      default: __SugarConfig.get('module.resolve.builtInModules')
+    },
+    preferExports: {
+      type: 'Boolean',
+      default: __SugarConfig.get('module.resolve.preferExports')
+    },
+    method: {
+      type: 'String',
+      values: ['import', 'require'],
+      default: __SugarConfig.get('module.resolve.method')
+    },
+    target: {
+      type: 'String',
+      values: ['node', 'default'],
+      default: __SugarConfig.get('module.resolve.target')
+    },
+    rootDir: {
+      type: 'String',
+      default: __packageRootDir()
+    }
+  };
+}
+
 export interface IResolveSettings {
   dirs: string[];
   extensions: string[];
@@ -56,7 +102,7 @@ export default function resolve(
 ) {
   const set = <IResolveSettings>__deepMerge(
     {
-      ...__ResolveSettingsInterface.defaults()
+      ...ResolveSettingsInterface.defaults()
     },
     settings || {}
   );

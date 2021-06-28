@@ -6,7 +6,8 @@ import __uncamelize from '../../shared/string/uncamelize';
  * @name      styleObject2String
  * @namespace            js.dom.style
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Transform a style object to inline string separated by ;

@@ -6,7 +6,8 @@ import _map from 'lodash/map';
  * @name      splitWords
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Split each words inside an HTMLElement by scoping them inside some tags.

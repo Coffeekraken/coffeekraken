@@ -6,6 +6,7 @@ import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
@@ -54,6 +55,7 @@ export interface ISDocMapBuildParams {
 }
 
 export interface ISDocMapReadParams {
+  input: string;
   path: string;
 }
 
@@ -362,6 +364,8 @@ class SDocMap extends __SClass implements ISDocMap {
 
       // save entries inside the json map property
       docmapJson.generated.map = this._entries;
+
+      // console.log(docmapJson.generated.map['@coffeekraken.sugar.node.process.SProcessPipe']);
 
       if (finalParams.save) {
         emit('log', {

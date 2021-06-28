@@ -9,7 +9,10 @@ import __isPlainObject from '../is/plainObject';
  * @name                  argsToString
  * @namespace            js.cli
  * @type                  Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * This function take a simple object, a definition object and return you the string version that you can pass
  * directly to the command line interface

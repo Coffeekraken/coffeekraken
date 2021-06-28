@@ -6,7 +6,9 @@ import __isInPackage from '../path/isInPackage';
  * @name            inPackage
  * @namespace            node.is
  * @type            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function check if the we are in (one of) the package(s) passed as parameter
  *

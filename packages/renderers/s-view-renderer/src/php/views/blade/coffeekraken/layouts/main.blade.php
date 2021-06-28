@@ -27,10 +27,10 @@ $package = $package ? json_decode($package) : null;
       @if (!$css->body)
         @if ($css->raw)
           {!! $css->raw !!}
-        @elseif (Sugar\path\is_absolute($css->src) || Sugar\url\is_url($css->src))
-          <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replace_tokens($css->src) }}" />
+        @elseif (Sugar\is\absolutePath($css->src) || Sugar\is\url($css->src))
+          <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replaceTokens($css->src) }}" />
         @else
-          <link rel="stylesheet" id="{{ $name }}" href="/{{ Sugar\string\replace_tokens($css->src) }}" />
+          <link rel="stylesheet" id="{{ $name }}" href="/{{ Sugar\string\replaceTokens($css->src) }}" />
         @endif
       @endif
     @endforeach
@@ -41,10 +41,10 @@ $package = $package ? json_decode($package) : null;
       @if (!$js->body)
         @if ($js->raw)
           {!! $js->raw !!}
-        @elseif (Sugar\path\is_absolute($js->src) || Sugar\url\is_url($js->src))
-          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="{{ Sugar\string\replace_tokens($js->src) }}"></script>
+        @elseif (Sugar\is\absolutePath($js->src) || Sugar\is\url($js->src))
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="{{ Sugar\string\replaceTokens($js->src) }}"></script>
         @else
-          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="/{{ Sugar\string\replace_tokens($js->src) }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="/{{ Sugar\string\replaceTokens($js->src) }}"></script>
         @endif
       @endif
     @endforeach
@@ -61,10 +61,10 @@ $package = $package ? json_decode($package) : null;
       @if ($css->body)
         @if ($css->raw)
           {!! $css->raw !!}
-        @elseif (Sugar\path\is_absolute($css->src) || Sugar\url\is_url($css->src)) {
-          <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replace_tokens($css->src) }}" />
+        @elseif (Sugar\is\absolutePath($css->src) || Sugar\is\url($css->src)) {
+          <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replaceTokens($css->src) }}" />
         @else
-          <link rel="stylesheet" id="{{ $name }}" href="/{{ Sugar\string\replace_tokens($css->src) }}" />
+          <link rel="stylesheet" id="{{ $name }}" href="/{{ Sugar\string\replaceTokens($css->src) }}" />
         @endif
       @endif
     @endforeach
@@ -75,10 +75,10 @@ $package = $package ? json_decode($package) : null;
       @if ($js->body)
         @if ($js->raw)
           {!! $js->raw !!}
-        @elseif (Sugar\path\is_absolute($js->src) || Sugar\url\is_url($js->src))
-          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="{{ Sugar\string\replace_tokens($js->src) }}"></script>
+        @elseif (Sugar\is\absolutePath($js->src) || Sugar\is\url($js->src))
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="{{ Sugar\string\replaceTokens($js->src) }}"></script>
         @else
-          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="/{{ Sugar\string\replace_tokens($js->src) }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="/{{ Sugar\string\replaceTokens($js->src) }}"></script>
         @endif
       @endif
     @endforeach

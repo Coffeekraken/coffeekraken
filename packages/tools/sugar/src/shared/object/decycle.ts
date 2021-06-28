@@ -4,6 +4,10 @@ import { decycle as __decycle } from 'json-cyclic';
  * @name          decycle
  * @namespace            js.object
  * @type          Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This method simply remove the circular references in the passed object
  *

@@ -4,7 +4,10 @@
  * @name              extractSame
  * @namespace            js.string
  * @type              Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function return you what has been find the same in the two passed string.
  * It will return you either an array of same string parts or a simple string

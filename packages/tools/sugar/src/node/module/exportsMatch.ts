@@ -1,16 +1,19 @@
-import __minimatch from 'minimatch';
-import __isNode from '../../shared/is/node';
-import __isPlainObject from '../../shared/is/plainObject';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
+import __minimatch from 'minimatch';
 import __path from 'path';
-import __extension from '../fs/extension';
+import __isNode from '../../shared/is/node';
+import __isPlainObject from '../../shared/is/plainObject';
 import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtensions';
+import __extension from '../fs/extension';
 
 /**
  * @name        exportsMatch
  * @namespace            node.module
  * @type        Function
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function take as parameter the content of the "exports" package.json field
  * and the requested "module" string/path. With these informations, it will search
@@ -91,7 +94,7 @@ export default function exportsMatch(
     }
     if (__isPlainObject(modulesSubpaths)) {
       // check if a key match
-      for (let key in modulesSubpaths) {
+      for (const key in modulesSubpaths) {
         if (__minimatch(modulePath, key.replace(/^\.\//, ''))) {
           // console.log('MATCH', modulePath, key);
           const matchStr = key.replace(/^\.\//, '').replace(/\/\*$/, '');

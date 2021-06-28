@@ -2,6 +2,10 @@
  * @name            expandGlob
  * @namespace            js.glob
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            alpha
  *
  * This function take some extended glob pattern(s) and expand them to standard supported
  * glob patterns. With this, you will have access to some syntax sugar like these:
@@ -34,7 +38,7 @@ function expandGlob(globs) {
         .replace('}', '')
         .replace(/[\{\}\/]/g, '');
 
-      let toReplace = maxDepthMatch[0].replace(/\//g, '');
+      const toReplace = maxDepthMatch[0].replace(/\//g, '');
 
       const spl = minMaxStr.split(',');
       let min = 0;
@@ -43,7 +47,7 @@ function expandGlob(globs) {
         min = parseInt(spl[0]);
         max = parseInt(spl[1]);
       }
-      let foldersArray = [
+      const foldersArray = [
         ...'* '
           .repeat(min)
           .split(' ')

@@ -4,7 +4,8 @@
  * @name        isSafari
  * @namespace            js.is
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Detect if is safari

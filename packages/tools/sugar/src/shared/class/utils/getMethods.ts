@@ -4,7 +4,10 @@
  * @name              getMethods
  * @namespace            js.class
  * @type              Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * This function take an instance as parameter and return all the methods in array format
  *

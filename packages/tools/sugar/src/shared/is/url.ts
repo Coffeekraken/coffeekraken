@@ -4,7 +4,10 @@
  * @name        isUrl
  * @namespace            js.is
  * @type      Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the passed value is a valid url
  *

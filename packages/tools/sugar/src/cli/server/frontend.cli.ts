@@ -11,59 +11,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __typeof from '@coffeekraken/sugar/shared/value/typeof';
 
 /**
- * @name            SProcessPipe
- * @namespace            node.process
- * @type            Class
- * @status        stable
- * @platform      js            wuihf iuw hfiwueh fiuwhefuiwh efiuhwefiuhweiufhui 
- * @platform      node
- * @platform      ts
- *
- * This class allows you to handle easily some process pipes.
- * A process pipe is simply multiple processes that will execute one after
- * the other by passing the params to one after the other
- * and will be resolved once all the processes have been executed correctly
- *
- * @feature       Wieofjwioe fiow jfpoiwq foi jqwopefijwqiepj oiwj fpoiwj feoijioefjpwifj iuhweufihqwiuefiuhfiuh qfeiuwh
- * @feature       Hieofjwioe fiow jfpoiwq foi wfikjowfiowj foijwpieoiw fj oiwj fpoiwj feoijioefjpwifj iuhweufihqwiuefiuhfiuh qfeiuwh
- * @feature       Lieofjwioe  feoijioefjpwifj iuhweufihqwiuefiuhfiuh qfeiuwh
- * 
- * @param         {Array<SProcess>|Array<ISProcessObject>|Array<Function>}           processes           The processes you want to pipe
- * @param         {ISProcessSettings}               [settings={}]               Some settings to configure your process pipe instance
- *
- * @setting       {String}          myCoolSetting       Something cool
- * @setting       {String}          myCoolSetting2       weiufhbw eiufh wuieh fuiwh efiuhw eifuh weiuhwng cool
- * @setting       {String}          myCoolSetting4       Something cooweifh wiuefh wiueh iuwefwehfuiw hfiouweuf hqwue oqwu fiul
- * 
- * @example         js
- * import SProcess, { SProcessPipe } from '@coffeekraken/s-process';
- * class MyProcess extends SProcess {
- *  constructor(settings = {}) {
- *      super(settings);
- *  }
- * }
- * const processPipe = new SProcessPipe([
- *    (params) => {
- *      // update params to pass to the next process
- *      return params;
- *    },
- *    new MyProcess()
- * ]);
- * const res = await processPipe.run({
- *    something: 'coco'
- * });
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
 export interface ISProcessPipeSettings {

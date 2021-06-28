@@ -996,7 +996,7 @@ class SFile extends __SEventEmitter implements ISFile {
       data = __toString(data, {
         beautify: true,
         highlight: false
-      });
+      }) ?? '';
       __ensureDirSync(set.path);
       __fs.writeFile(
         set.path,
@@ -1035,7 +1035,7 @@ class SFile extends __SEventEmitter implements ISFile {
     data = __toString(data, {
       beautify: true,
       highlight: false
-    });
+    }) ?? '';
     __ensureDirSync(__folderPath(set.path));
     const result: any = __fs.writeFileSync(set.path, data, {
       encoding: set.encoding

@@ -8,6 +8,10 @@ import __replaceTags from '../html/replaceTags';
  * @name                                parseHtml
  * @namespace            js.console
  * @type                                Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Parse the simple html tags to format the console message
  *

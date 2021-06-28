@@ -6,7 +6,10 @@ import __toString from '../string/toString';
  * @name                            replaceTags
  * @namespace            js.html
  * @type                            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * Replace all the html tags that you specify by something else that you can fully choose
  *

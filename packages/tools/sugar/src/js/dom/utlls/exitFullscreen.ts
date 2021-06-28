@@ -4,7 +4,8 @@
  * @name      exitFullscreen
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Exit the fullscreen mode

@@ -13,7 +13,9 @@ import __packageRootDir from '../path/packageRootDir';
  * @namespace            node.monorepo
  * @type            Function
  * @async
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply check all the packages available in the monorepo
  * and link then together using symbolic links in each node_modules folders

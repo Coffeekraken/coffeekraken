@@ -7,7 +7,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name        removeSync
  * @namespace            node.fs
  * @type          Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Removes a file or directory. The directory can have contents. If the path does not exist, silently does nothing. Like rm -rf (sync)
  * Support the ```replacePathTokens``` tokens

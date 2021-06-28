@@ -17,6 +17,9 @@ import __convert from './convert';
  * @name 		SColor
  * @namespace            js.color
  * @type    Class
+ * @platform          js
+ * @platform          ts
+ * @platform          node
  * @status              beta
  *
  * Class that provide complete and simple to use color manupilation capabilities like:

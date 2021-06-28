@@ -4,7 +4,10 @@
  * @name        constrain
  * @namespace            js.number
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Constrain a value between a min and a max value
  *

@@ -38,7 +38,6 @@ class postcssSugarPluginColorInterface extends __SInterface {
   static definition = {
     color: {
       type: 'String',
-      required: true,
       alias: 'n'
     },
     modifier: {

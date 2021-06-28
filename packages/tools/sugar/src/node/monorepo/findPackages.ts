@@ -7,7 +7,9 @@ import _glob from 'glob';
  * @namespace            node.monorepo
  * @type            Function
  * @async
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply let you search for packages (that are not dependencies) inside
  * the passed folder and returns a object with relative paths as keys and package.json

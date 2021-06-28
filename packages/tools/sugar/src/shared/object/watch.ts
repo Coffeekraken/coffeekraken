@@ -7,7 +7,10 @@ import __uniqid from '../string/uniqid';
  * @name                      watch
  * @namespace            js.object
  * @type                      Function
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        wip
  *
  * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
  *

@@ -4,7 +4,9 @@ import __isPath from '../fs/isPath';
  * @name                            path
  * @namespace            node.is
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Check if the passed string is a valid path or not
  *
@@ -27,4 +29,4 @@ function path(path, checkExistence = false) {
     return __isPath(path, checkExistence);
 }
 export default path;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGF0aC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInBhdGgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sUUFBUSxNQUFNLGNBQWMsQ0FBQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsSUFBSSxDQUFDLElBQUksRUFBRSxjQUFjLEdBQUcsS0FBSztJQUN4QyxPQUFPLFFBQVEsQ0FBQyxJQUFJLEVBQUUsY0FBYyxDQUFDLENBQUM7QUFDeEMsQ0FBQztBQUNELGVBQWUsSUFBSSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGF0aC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInBhdGgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sUUFBUSxNQUFNLGNBQWMsQ0FBQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxJQUFJLENBQUMsSUFBSSxFQUFFLGNBQWMsR0FBRyxLQUFLO0lBQ3hDLE9BQU8sUUFBUSxDQUFDLElBQUksRUFBRSxjQUFjLENBQUMsQ0FBQztBQUN4QyxDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==

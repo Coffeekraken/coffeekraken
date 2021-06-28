@@ -6,7 +6,10 @@ import __md5 from '../crypt/md5';
  * @name            gravatarUrl
  * @namespace            js.url
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Return a gravatar url depending on the passed user email and size
  *

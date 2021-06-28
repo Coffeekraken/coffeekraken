@@ -5,7 +5,10 @@ import __set from './set';
  * @name          deepize
  * @namespace            js.object
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function simply take an object like this one:
  * {

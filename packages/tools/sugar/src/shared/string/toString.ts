@@ -22,7 +22,10 @@ import { decycle } from 'json-cyclic';
  * @name        toString
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Convert passed value to a string
  *
@@ -71,9 +74,9 @@ function fn(value, settings = {}) {
   // string
   if (typeof value === 'string') return value;
   // null
-  if (value === null) return 'null';
+  if (value === null) return null;
   // undefined
-  if (value === undefined) return 'undefined';
+  if (value === undefined) return undefined;
   // error
   if (value instanceof Error) {
     const errorStr = value.toString();

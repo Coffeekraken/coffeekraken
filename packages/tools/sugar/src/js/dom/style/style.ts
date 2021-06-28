@@ -8,7 +8,8 @@ import __styleObject2String from '../styleObject2String';
  * @name      style
  * @namespace            js.dom.style
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Set or remove a css style property on an HTMLElement

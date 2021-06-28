@@ -101,6 +101,7 @@ export default class SSugarConfig {
     }
 
     if (!this._sConfigInstance) {
+
       this._sConfigInstance = new __SConfig('sugar', {
         adapters: [
           new SConfigFolderAdapter({

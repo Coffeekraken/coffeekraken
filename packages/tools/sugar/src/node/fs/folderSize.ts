@@ -9,7 +9,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @namespace            node.fs
  * @type                            Function
  * @async
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...
  * Support the ```replacePathTokens``` tokens

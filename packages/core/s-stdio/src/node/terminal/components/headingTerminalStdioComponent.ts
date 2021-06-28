@@ -14,7 +14,7 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
 export default {
   id: 'heading',
   render(logObj, settings = {}) {
-    const value = __toString(logObj.value || logObj);
+    const value = __toString(logObj.value || logObj) ?? '';
     const color = logObj.color || 'yellow';
 
     const character = logObj.character ? logObj.character.slice(0, 1) : '-';

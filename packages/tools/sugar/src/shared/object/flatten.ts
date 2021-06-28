@@ -8,7 +8,10 @@ import __decycle from './decycle';
  * @name                              flatten
  * @namespace            js.object
  * @type                              Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Transform the passed multiple level object into a single level one
  *

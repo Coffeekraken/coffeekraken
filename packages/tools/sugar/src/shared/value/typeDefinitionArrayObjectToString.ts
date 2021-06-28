@@ -4,7 +4,10 @@
  * @name          typeDefinitionArrayObjectToString
  * @namespace            js.value
  * @type          Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take as parameter a type definition object like this one:
  * {

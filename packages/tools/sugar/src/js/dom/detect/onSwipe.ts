@@ -5,7 +5,8 @@
  * @namespace            js.dom.detect
  * @type      Function
  * @async
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          beta
  *
  * Detect swipes gestures on touch devices.

@@ -8,7 +8,10 @@ import __crypto from 'crypto';
  * @name                            uid
  * @namespace           node.object
  * @type                            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function allows you to generate a uniqid based on the objects you pass as parameters.
  * The uid is hashed into a SHA256 32bits string but you can specify it using the "format" parameter described above

@@ -6,7 +6,10 @@ import __deepMerge from '../object/deepMerge';
  * @name          simply
  * @namespace            js.string
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take a string with accents, etc and convert it to a more simply
  * version like "éàddö" to "eaddo"

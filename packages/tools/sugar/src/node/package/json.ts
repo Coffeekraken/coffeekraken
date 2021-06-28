@@ -7,7 +7,9 @@ import __fs from 'fs';
  * @name          json
  * @namespace            node.package
  * @type          Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function return you the package.json of the current working package into object format
  *

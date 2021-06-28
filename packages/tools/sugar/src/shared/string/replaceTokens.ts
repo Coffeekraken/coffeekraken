@@ -6,7 +6,10 @@ import __deepMerge from '../../node/object/deepMerge';
  * @name            replaceTokens
  * @namespace            js.string
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function takes as parameter a tokened string like "something [cool]", an object
  * of arguments/values and return the processed string with the tokens replaced by the arguments values.

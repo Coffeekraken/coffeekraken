@@ -6,7 +6,10 @@ import { sprintf as _sprintf } from 'sprintf-js';
  * @name        sprintf
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Javascript implementation of the sprintf php function.
  * >For more infos, check [this github repository](https://github.com/alexei/sprintf.js)

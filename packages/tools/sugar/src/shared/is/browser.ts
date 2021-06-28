@@ -4,7 +4,10 @@
  * @name        isBrowser
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the script is running inside a browser or not
  *

@@ -4,7 +4,8 @@
  * @name      nodeIndex
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Return the inde of the passed node inside the html

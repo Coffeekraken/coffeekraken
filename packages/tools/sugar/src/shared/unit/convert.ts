@@ -9,7 +9,10 @@ import __px2rem from './px2rem';
  * @name                  convert
  * @namespace            js.unit
  * @type                  Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Convert a passed unit to the wanted one. If the passed unit is a number and not a string like "10rem", the unit is take as pixels
  *

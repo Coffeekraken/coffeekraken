@@ -7,7 +7,9 @@ import __fs from 'fs';
  * @name                packageJson
  * @namespace            node.npm.utils
  * @type                Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply take a package name as parameter, and return the corresponding
  * package.json JSON content

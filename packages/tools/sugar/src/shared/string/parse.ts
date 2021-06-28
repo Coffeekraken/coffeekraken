@@ -4,7 +4,10 @@
  * @name                                  parse
  * @namespace            js.string
  * @type                                  Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Parse a string and convert it into his native data type like date, number, boolean, etc...
  *

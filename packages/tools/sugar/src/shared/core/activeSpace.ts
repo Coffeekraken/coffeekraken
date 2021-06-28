@@ -8,6 +8,9 @@ import __isGlob from 'is-glob';
  * @name                    activeSpace
  * @namespace            js.core
  * @type                    Object
+ * @platform          js
+ * @platform          ts
+ * @platform          node
  * @status              wip
  *
  * This object expose some functions that are usefull to manage the "active" space of your application.

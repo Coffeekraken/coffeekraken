@@ -7,6 +7,9 @@ import __fs from 'fs';
  * @name                    isInPackage
  * @namespace            node.path
  * @type                    Function
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the path to either the first finded package root going up the folders, or the highest package root finded
  *

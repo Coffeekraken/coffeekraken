@@ -4,6 +4,10 @@ import __typeOf from '../value/typeof';
  * @name            map
  * @namespace            js.iterable
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take an iterable value like an Array, an Object, a Map, a String, an Integer, a Set, etc... and
  * simply iterate over like a forEach.

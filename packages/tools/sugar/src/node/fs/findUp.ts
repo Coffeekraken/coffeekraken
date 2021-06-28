@@ -1,17 +1,19 @@
 // @ts-nocheck
 
-import IFindUp, { IFindUpSettings } from './interface/IFindUp';
-import __findUp from 'find-up';
+import __SFile from '@coffeekraken/s-file';
+import __fs from 'fs';
 import __glob from 'glob';
 import __isGlob from '../../shared/is/glob';
-import __fs from 'fs';
-import __SFile from '@coffeekraken/s-file';
+import { IFindUpSettings } from './interface/IFindUp';
 
 /**
  * @name            findUp
  * @namespace            node.fs
  * @type            Function
  * @async
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply walk across upper folders to search for a file
  * and returns you the first finded
@@ -28,7 +30,15 @@ import __SFile from '@coffeekraken/s-file';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const fn: IFindUp = function findUp(
+
+export interface IFindUpSettings {
+  symlinks?: boolean;
+  cwd?: string;
+  stopWhenFound?: boolean;
+  SFile?: boolean;
+}
+
+export default function findUp(
   search: string,
   settings: IFindUpSettings
 ): Promise<string | string[] | null> {
@@ -40,7 +50,7 @@ const fn: IFindUp = function findUp(
     ...settings
   };
 
-  return new Promise(async ({ resolve, reject }) => {
+  return new Promise(async ({ resolve }) => {
     const cwd = settings.cwd;
     let currentPath = cwd.split('/').filter((p) => p.trim() !== '');
     let foundedFiles = [];
@@ -79,6 +89,4 @@ const fn: IFindUp = function findUp(
     // resolve at the end
     return resolve(foundedFiles);
   });
-};
-
-export default fn;
+}

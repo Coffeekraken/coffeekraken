@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      imageLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Wait until the passed image is fully loaded

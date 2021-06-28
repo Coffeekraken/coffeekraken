@@ -1,13 +1,15 @@
 // @ts-nocheck
 
-import { parse } from 'micromatch';
 import __parseEs6Imports from 'parse-es6-imports';
 
 /**
  * @name            SEs6Import
  * @namespace            js.es6
  * @type            Class
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              alpha
  *
  * This class represent an es6 import statement with properties like:
  * - path {String}: The import path

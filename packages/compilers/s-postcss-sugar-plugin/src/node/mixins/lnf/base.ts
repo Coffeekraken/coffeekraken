@@ -2,15 +2,10 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginLiikAndFeelBaseInterface extends __SInterface {
   static definition = {
-    layout: {
-      type: 'String',
-      required: true
-    }
   };
 }
 
 export interface IPostcssSugarPluginLookAndFeelBaseParams {
-  layout: string;
 }
 
 export { postcssSugarPluginLiikAndFeelBaseInterface as interface };

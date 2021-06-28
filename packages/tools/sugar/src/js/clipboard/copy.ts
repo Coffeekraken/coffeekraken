@@ -4,7 +4,9 @@ import __copy from 'clipboard-copy';
  * @name                copy
  * @namespace           js.clipboard
  * @type                Function
- * @platform            js
+ * @platform          js
+ * @platform          ts
+ * @platform            ts
  * @async
  * @status              stable
  * 

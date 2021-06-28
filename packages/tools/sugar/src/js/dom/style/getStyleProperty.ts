@@ -7,7 +7,8 @@ import autoCast from '../../../shared/string/autoCast';
  * @name      getStyleProperty
  * @namespace            js.dom.style
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Get a style property on the passed element through the computed style.

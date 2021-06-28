@@ -1,7 +1,0 @@
-import STsCompilerInterface from './interface/STsCompilerInterface';
-import __STsCompiler from './STsCompiler';
-export * from './interface/STsCompilerInterface';
-export * from './STsCompiler';
-export { STsCompilerInterface };
-export default __STsCompiler;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxvQkFBb0IsTUFBTSxrQ0FBa0MsQ0FBQztBQUNwRSxPQUFPLGFBQWEsTUFBTSxlQUFlLENBQUM7QUFFMUMsY0FBYyxrQ0FBa0MsQ0FBQztBQUNqRCxjQUFjLGVBQWUsQ0FBQztBQUU5QixPQUFPLEVBQUUsb0JBQW9CLEVBQUUsQ0FBQztBQUNoQyxlQUFlLGFBQWEsQ0FBQyJ9

@@ -5,7 +5,9 @@ import __fs from 'fs';
  * @name            checkPathWithMultipleExtensions
  * @namespace            node.fs
  * @type            Function
- * @status          stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function take a path and some extensions to check if a file
  * exists with one of these particular extensions.

@@ -7,7 +7,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.dom.detection
  * @type      Function
  * @async
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status              wip
  *
  * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.

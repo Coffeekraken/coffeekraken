@@ -7,7 +7,10 @@ import { decycle } from 'json-cyclic';
  * @name            stringify
  * @namespace            js.json
  * @type            Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function do the same as the ```JSON.stringify``` one but add some features.
  *

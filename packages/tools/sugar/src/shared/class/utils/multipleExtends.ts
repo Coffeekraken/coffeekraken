@@ -6,7 +6,10 @@ import __aggregation from 'aggregation/es5';
  * @name                multipleExtends
  * @namespace           shared.class.utils
  * @type                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          alpha
  *
  * This function allows you to extends your class with multiple other ones.
  *

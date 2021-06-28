@@ -3,7 +3,10 @@
  * @name            availableEasingsArray
  * @namespace            js.easing
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * This function simply return back an array of all the available easings function in the sugar toolkit
  *
@@ -33,4 +36,4 @@ function availableEasingsArray() {
     ];
 }
 export default availableEasingsArray;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXZhaWxhYmxlRWFzaW5nc0FycmF5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXZhaWxhYmxlRWFzaW5nc0FycmF5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUNILFNBQVMscUJBQXFCO0lBQzVCLE9BQU87UUFDTCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIsYUFBYTtRQUNiLFlBQVk7UUFDWixhQUFhO1FBQ2IsYUFBYTtRQUNiLGNBQWM7UUFDZCxhQUFhO1FBQ2IsY0FBYztRQUNkLGNBQWM7S0FDZixDQUFDO0FBQ0osQ0FBQztBQUNELGVBQWUscUJBQXFCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXZhaWxhYmxlRWFzaW5nc0FycmF5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXZhaWxhYmxlRWFzaW5nc0FycmF5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMscUJBQXFCO0lBQzVCLE9BQU87UUFDTCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIsYUFBYTtRQUNiLFlBQVk7UUFDWixhQUFhO1FBQ2IsYUFBYTtRQUNiLGNBQWM7UUFDZCxhQUFhO1FBQ2IsY0FBYztRQUNkLGNBQWM7S0FDZixDQUFDO0FBQ0osQ0FBQztBQUNELGVBQWUscUJBQXFCLENBQUMifQ==

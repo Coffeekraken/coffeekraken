@@ -4,7 +4,8 @@
  * @name          canHaveChildren
  * @namespace            js.dom.utils
  * @type          Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * This function take as input either a tagName String like "img", "div", etc... or an HTMLElement node

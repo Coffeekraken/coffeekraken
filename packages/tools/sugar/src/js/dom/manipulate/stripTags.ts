@@ -4,7 +4,8 @@
  * @name      stripTags
  * @namespace            js.dom.manipulate
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Strip the tags of the passed text

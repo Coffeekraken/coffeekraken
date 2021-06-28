@@ -6,7 +6,10 @@ import __sprintf from 'sprintf-js';
  * @name        printf
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * printf php equavalent
  *

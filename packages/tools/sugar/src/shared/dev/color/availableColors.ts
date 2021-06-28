@@ -4,6 +4,10 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @name            availableColors
  * @namespace            shared.dev.colors
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Return the list of color names you can access using the ```colorValue``` function.
  * These colors are specified in the config.terminal configuration file under the "colors" property.
@@ -33,8 +37,6 @@ export default function availableColors(
     'magenta',
     'red',
     'blue',
-    'primary',
-    'secondary',
     'grey',
     'gray'
   ];

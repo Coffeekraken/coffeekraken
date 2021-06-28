@@ -6,7 +6,10 @@ import __isPlainObject from 'is-plain-object';
  * @name                      plainObject
  * @namespace            js.is
  * @type                      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the passed object (or array of objects) is/are plain object(s)
  *

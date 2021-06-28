@@ -54,6 +54,12 @@ export interface ISFrontstackActionParams {
   params: string;
 }
 
+export interface ISFrontstackRecipeParams {
+  recipe: string;
+  stack: string;
+  exclude: string[];
+}
+
 export interface ISFrontstackListParams {
   recipeStack: string;
 }
@@ -379,7 +385,7 @@ export default class SFrontstack extends __SClass {
 
       if (recipe) {
         if (!recipes[recipe]) {
-          throw new Error(`<red>[SFrontstack.list]</red> Sorry but the recipe "<yellow>${params.recipe}</yellow> does not exists...`);
+          throw new Error(`<red>[SFrontstack.list]</red> Sorry but the recipe "<yellow>${recipe}</yellow> does not exists...`);
         }
       }
 

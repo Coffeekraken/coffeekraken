@@ -4,7 +4,10 @@
  * @name                            windows
  * @namespace            js.is
  * @type                            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the app run on mac OS X or not
  *

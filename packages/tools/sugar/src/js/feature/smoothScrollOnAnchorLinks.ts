@@ -10,7 +10,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name        smoothScrollOnAnchorLinks
  * @namespace            js.feature
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Listen for links contains an hash to init them for scroll to target on click

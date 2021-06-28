@@ -7,7 +7,9 @@ import __fs from 'fs-extra';
  * @name                            packageTmpDir
  * @namespace            node.path
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the package temp directory path
  *

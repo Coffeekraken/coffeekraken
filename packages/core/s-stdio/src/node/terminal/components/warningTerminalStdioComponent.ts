@@ -16,7 +16,7 @@ export default {
   render(logObj, settings: any) {
     const value = logObj.value || logObj;
 
-    let logStr = __toString(value);
+    let logStr = __toString(value) ?? '';
     if (settings.terminalStdio.actionPrefix) {
       logStr = `<yellow>Warning:</yellow>\n${logStr}`;
     }

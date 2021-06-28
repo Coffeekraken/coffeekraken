@@ -4,7 +4,10 @@
  * @name                          toPlainObject
  * @namespace          shared.class.utils
  * @type                          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * This function take a instance as parameter and return a plain object of it
  *

@@ -4,7 +4,10 @@
  * @name              hsl2rgba
  * @namespace            js.color
  * @type              Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * HSL to RGBA
  *

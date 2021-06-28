@@ -8,6 +8,10 @@ import __unquote from '../string/unquote';
  * @name                        parseArgs
  * @namespace            js.cli
  * @type                        Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * Parse a string to find the provided arguments into the list and return a corresponding object.
  *

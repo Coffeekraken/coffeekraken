@@ -8,7 +8,8 @@ import __toString from '../../../shared/string/toString';
  * @name      dataset
  * @namespace            js.dom.data
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status              wip
  *
  * Get or set a value on the passed element with the passed name

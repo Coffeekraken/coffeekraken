@@ -4,7 +4,9 @@
  * @name                    extension
  * @namespace            node.fs
  * @type                    Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Return the passed file path extension
  *

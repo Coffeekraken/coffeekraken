@@ -4,7 +4,8 @@
  * @name            injectStyle
  * @namespace            js.css
  * @type            Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status              beta
  *
  * Inject a passed style string in the DOM

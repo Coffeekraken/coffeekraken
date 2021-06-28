@@ -6,7 +6,8 @@ import linkLoaded from './linkLoaded';
  * @name        appendStylesheetLinkTag
  * @namespace            js.dom.tag
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Append a stylesheet link to the page head

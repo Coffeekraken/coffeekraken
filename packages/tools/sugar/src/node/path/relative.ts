@@ -7,7 +7,9 @@ import __packageRootDir from './packageRootDir';
  * @name            relative
  * @namespace            js.path
  * @type            Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function take as input either a string or an array of string and transform the pathes to relative
  * depending on the second argument which is the "from" one.

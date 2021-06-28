@@ -7,7 +7,9 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name            file
  * @namespace            node.is
  * @type            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function check if the passed string path is a file or not
  *

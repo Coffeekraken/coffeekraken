@@ -4,7 +4,10 @@
  * @name        debounce
  * @namespace            js.function
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This utils function allows you to make sure that a function that will normally be called
  * several times, for example during a scroll event, to be called only once after

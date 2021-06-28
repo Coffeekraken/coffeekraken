@@ -6,7 +6,9 @@ import __isPath from '../fs/isPath';
  * @name                            path
  * @namespace            node.is
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Check if the passed string is a valid path or not
  *

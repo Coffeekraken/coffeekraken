@@ -7,7 +7,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name        ensureDirSync
  * @namespace            node.fs
  * @type          Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Ensure that the passed directory exists. If not, will be created recursively... (sync)
  * Support the ```replacePathTokens``` tokens

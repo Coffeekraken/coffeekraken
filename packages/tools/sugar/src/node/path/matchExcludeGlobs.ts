@@ -7,6 +7,9 @@ import __excludeGlobs from './excludeGlobs';
  * @name                    matchExcludeGlobs
  * @namespace            node.path
  * @type                    Function
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function check if the passed path match one or more exclude globs specified in the config "storage.exclude"
  *

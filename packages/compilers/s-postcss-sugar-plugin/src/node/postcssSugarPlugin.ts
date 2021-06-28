@@ -6,6 +6,7 @@ import __postcss from 'postcss';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';
 import __getRoot from './utils/getRoot';
+import __SBench from '@coffeekraken/s-bench';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {
@@ -59,6 +60,11 @@ const plugin = (settings: any = {}) => {
 
   return {
     postcssPlugin: 'sugar',
+    Once() {
+      if (__SBench.env.isBenchActive('postcssSugarPlugin')) {
+        __SBench.start('postcssSugarPlugin');
+      }
+    },
     OnceExit(root) {
 
       // console.log('EX');
@@ -99,6 +105,10 @@ const plugin = (settings: any = {}) => {
         });
         comment.remove();
       });
+
+      if (__SBench.env.isBenchActive('postcssSugarPlugin')) {
+        console.log(__SBench.end('postcssSugarPlugin').toString());
+      }
 
     },
     AtRule( atRule, postcssApi) {

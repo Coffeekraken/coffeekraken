@@ -11,6 +11,7 @@ hotkeys.filter = function () {
  * @namespace            js.keyboard
  * @type      Function
  * @platform          js
+ * @platform          ts
  * @status              beta
  *
  * Simple function to add a hotkey like "ctrl+a" and an handler function that will be called when the hotkey has been pressed

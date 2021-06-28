@@ -8,7 +8,10 @@ import __isClassInstance from '../is/classInstance';
  * @name            deepMap
  * @namespace            js.object
  * @type            Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function is the same as the "map" one. The only difference is that this one goes deep into the object
  *

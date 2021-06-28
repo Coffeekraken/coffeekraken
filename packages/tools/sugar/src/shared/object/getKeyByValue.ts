@@ -4,7 +4,10 @@
  * @name          getKeyByValue
  * @namespace            js.object
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Return the key that correspond to the passed value in the passed object
  *

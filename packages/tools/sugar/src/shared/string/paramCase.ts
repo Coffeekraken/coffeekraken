@@ -6,7 +6,10 @@ import { paramCase } from 'param-case';
  * @name          paramCase
  * @namespace            js.string
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function transform a string into a param case one like so "something-cool"
  *

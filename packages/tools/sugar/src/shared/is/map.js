@@ -3,7 +3,10 @@
  * @name        isMap
  * @namespace            js.is
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the passed value is a js Map
  *
@@ -28,4 +31,4 @@ function isMap(value) {
     return value instanceof Map;
 }
 export default isMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztJQUNsQixPQUFPLEtBQUssWUFBWSxHQUFHLENBQUM7QUFDOUIsQ0FBQztBQUNELGVBQWUsS0FBSyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztJQUNsQixPQUFPLEtBQUssWUFBWSxHQUFHLENBQUM7QUFDOUIsQ0FBQztBQUNELGVBQWUsS0FBSyxDQUFDIn0=

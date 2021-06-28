@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      observeMutations
  * @namespace            js.dom.observe
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Observe mutations on an HTMLElement and get them through the observable subscription.

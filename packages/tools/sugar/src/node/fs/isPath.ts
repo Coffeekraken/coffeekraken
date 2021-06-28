@@ -8,7 +8,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name                            isPath
  * @namespace            node.fs
  * @type                            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Check if the passed string is a valid path or not
  * Support the ```replacePathTokens``` tokens

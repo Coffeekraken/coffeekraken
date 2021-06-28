@@ -4,7 +4,8 @@
  * @name      scrollLeft
  * @namespace            js.dom.distance
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        stable
  *
  * Get the amount of scroll left

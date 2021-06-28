@@ -5,7 +5,10 @@ import { v4 as __uuidv4 } from 'uuid';
  * @name          uniqid
  * @namespace            js.string
  * @type          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
  *

@@ -4,7 +4,10 @@
  * @name                    px2em
  * @namespace            js.unit
  * @type                    Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Convert rem value to a px one
  *

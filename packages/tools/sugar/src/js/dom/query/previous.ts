@@ -6,7 +6,8 @@ import __matches from './matches';
  * @name      previous
  * @namespace            js.dom.query
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Browse the passed element previous siblings to find the first element that matches the passed selector

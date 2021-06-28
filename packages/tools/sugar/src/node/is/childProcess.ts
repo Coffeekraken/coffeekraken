@@ -5,7 +5,9 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @name                            childProcess
  * @namespace            node.is
  * @type                            Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Check if the current script is running as a child process or not by checking if the ```process.send``` exists, or is the environment variable ```IS_CHILD_PROCESS``` is true.
  *

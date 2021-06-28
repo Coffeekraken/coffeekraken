@@ -6,7 +6,8 @@ import __convert from '../../../shared/unit/convert';
  * @name      getTranslateProperties
  * @namespace            js.dom.style
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Get a translate properties of an HTMLElement

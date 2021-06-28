@@ -9,7 +9,9 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @name          namespace
  * @namespace            node.package
  * @type          Function
- * @status              wip
+ * @platform        ts
+ * @platform        node
+ * @status          wip
  *
  * This function take a string as parameter like a path, or a doted string like "something.cool" and return you
  * a proper namespace build using the package name, your passed string sanitized, etc...

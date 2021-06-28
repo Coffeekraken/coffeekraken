@@ -180,6 +180,14 @@
                                 </a>
                             </li>
                         @endif
+                        @if ($firstBlock->todo)
+                            <li class="s-font:40">
+                                <i class="s-icon:info"></i>
+                                <a href="#todo-{{ $firstBlock->name }}" title="Todo">
+                                    Todo
+                                </a>
+                            </li>
+                        @endif
                         @if ($firstBlock->import)
                             <li class="s-font:40">
                                 <i class="s-icon:import"></i>

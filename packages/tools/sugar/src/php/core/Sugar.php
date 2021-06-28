@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/../array/merge_deep.php';
+require_once dirname(__FILE__).'/../array/deepMerge.php';
 
 /**
  * @class
@@ -43,7 +43,7 @@ class Sugar {
 	 */
 	public static function requireFolder($folder, $settings = []) {
 		// generate settings
-		$settings = Sugar\ar\merge_deep([
+		$settings = Sugar\ar\deepMerge([
 			'recursive' => false,
 			'exclude' => []
 		], $settings);

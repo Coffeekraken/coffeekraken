@@ -4,7 +4,10 @@
  * @name                                sort
  * @namespace            js.object
  * @type                                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Sort an object properties the same way as the Array.sort do it
  *

@@ -8,7 +8,6 @@ Sugar::requireFolder(__DIR__, [
     'exclude' => [
         __DIR__.'/core/Sugar.php',
         __DIR__.'/__wip__',
-        __DIR__.'/autoload.php',
-        __DIR__.'/views/blade'    
+        __DIR__.'/autoload.php'  
     ]
 ]);

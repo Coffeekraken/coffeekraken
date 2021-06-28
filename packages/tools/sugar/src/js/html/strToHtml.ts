@@ -4,7 +4,8 @@
  * @name        strToHtml
  * @namespace            js.html
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Return the html (dom) version of a string

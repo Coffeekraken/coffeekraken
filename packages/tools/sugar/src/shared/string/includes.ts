@@ -4,7 +4,10 @@
  * @name        includes
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Same as the native String.includes function but accept either an array of items
  * or a simple comma separated string like "something,cool,hello,world"

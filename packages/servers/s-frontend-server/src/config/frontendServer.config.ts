@@ -155,6 +155,21 @@ export default {
     }
   },
 
+  routes: {
+    '/': {
+      handler: 'index'
+    },
+    '/view/*': {
+      handler: 'view'
+    },
+    '/doc/*': {
+      handler: 'doc'
+    },
+    '/api/docmap': {
+      handler: 'docmap'
+    }
+  },
+
   handlers: {
     /**
      * @name            index
@@ -167,18 +182,6 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     index: {
-      /**
-       * @name          route
-       * @namespace     config.frontendServer.handlers.index
-       * @type          String
-       * @default       /
-       *
-       * Specify the url route to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      route: '/',
       /**
        * @name          title
        * @namespace     config.frontendServer.handlers.index
@@ -217,18 +220,6 @@ export default {
      */
     view: {
       /**
-       * @name          route
-       * @namespace     config.frontendServer.handlers.view
-       * @type          String
-       * @default       /view
-       *
-       * Specify the url route to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      route: '/view/*',
-      /**
        * @name          title
        * @namespace     config.frontendServer.handlers.view
        * @type          String
@@ -264,18 +255,6 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     doc: {
-      /**
-       * @name          route
-       * @namespace     config.frontendServer.handlers.doc
-       * @type          String
-       * @default       /doc/*
-       *
-       * Specify the url route to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      route: '/doc/*',
       /**
        * @name          title
        * @namespace     config.frontendServer.handlers.doc
@@ -313,18 +292,6 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     docmap: {
-      /**
-       * @name          route
-       * @namespace     config.frontendServer.handlers.docmap
-       * @type          String
-       * @default       /api/docmap
-       *
-       * Specify the url route to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      route: '/api/docmap',
       /**
        * @name          title
        * @namespace     config.frontendServer.handlers.docmap

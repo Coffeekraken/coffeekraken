@@ -1,15 +1,16 @@
-import __isPath from '../../shared/is/path';
-import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
+import { find as __find } from 'abstract-syntax-tree';
 import * as __acorn from 'acorn-loose';
 import { generate as __astring } from 'astring';
-import { find as __find } from 'abstract-syntax-tree';
-import path from '../../shared/is/path';
+import __fs from 'fs';
+import __isPath from '../../shared/is/path';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name            extractImport
  * @namespace            node.module
  * @type            Function
+ * @platform        ts
+ * @platform        node
  * @status          beta
  *
  * This function simply parse a file content or a passed string directly and

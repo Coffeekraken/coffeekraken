@@ -5,7 +5,8 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @name        addAnimationClass
  * @namespace            js.dom.class
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Add a class that trigger an animation and remove it at the end

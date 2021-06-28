@@ -6,7 +6,10 @@ import __parseAuthorString from './parseAuthorString';
  * @name            standardizeJson
  * @namespace            js.npm
  * @type            Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function simply take a package.json JSON formatted object and standardize
  * some fields like the "author" one to be sure it is an object at the end,

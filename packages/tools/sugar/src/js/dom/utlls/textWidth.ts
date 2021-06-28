@@ -6,7 +6,8 @@ import __getStyleProperty from '../style/getStyleProperty';
  * @name      textWidth
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Get the text width in px of a passed string or the passed HTMLElement

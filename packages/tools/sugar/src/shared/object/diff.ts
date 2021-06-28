@@ -7,7 +7,10 @@ import __isEqual from 'is-equal';
  * @name                      diff
  * @namespace            js.object
  * @type                      Function
- * @status              beta
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function take two objects and return an object that contains only what has been changed between the two.
  * This function is a simple wrapper around the nice object-diff package from Thomas Jensen that you can find here: https://www.npmjs.com/package/object-diff

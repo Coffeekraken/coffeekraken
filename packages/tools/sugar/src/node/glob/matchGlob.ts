@@ -11,6 +11,9 @@ import __path from 'path';
  * @name            matchGlob
  * @namespace       node.glob
  * @type            Function
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function take as input a file path and a glob pattern that can be an extended one (this mean that is support the listed features above).
  * Then it check if the passed filepath match the passed glob pattern or not and return true or false depending on the result.

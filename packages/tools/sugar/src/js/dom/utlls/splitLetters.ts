@@ -12,7 +12,8 @@ function _decodeHtml(html) {
  * @name      splitLetters
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Split each letters inside an HTMLElement by scoping them inside multiple tags.

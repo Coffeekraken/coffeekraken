@@ -7,7 +7,10 @@ import __stripCssComments from 'strip-css-comments';
  * @name          stripCssComments
  * @namespace            js.css
  * @type          Function
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              beta
  *
  * This function simply remove all the css comments like:
  * - Multiline blocks css comments begining with /* *, ending with * /

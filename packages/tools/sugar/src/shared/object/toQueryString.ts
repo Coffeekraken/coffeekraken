@@ -4,7 +4,10 @@
  * @name        toQueryString
  * @namespace            js.object
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Transform an object (key => pairs) to a query string like "?var1=value1&var2"
  *

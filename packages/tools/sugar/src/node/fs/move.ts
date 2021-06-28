@@ -7,7 +7,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name        move
  * @namespace            node.fs
  * @type          Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Moves a file or directory, even across devices (async)
  * Support the ```replacePathTokens``` tokens

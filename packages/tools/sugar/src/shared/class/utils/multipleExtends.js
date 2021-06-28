@@ -4,7 +4,10 @@ import __aggregation from 'aggregation/es5';
  * @name                multipleExtends
  * @namespace           shared.class.utils
  * @type                Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          alpha
  *
  * This function allows you to extends your class with multiple other ones.
  *
@@ -26,4 +29,4 @@ import __aggregation from 'aggregation/es5';
 export default (...classes) => {
     return __aggregation(...classes);
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibXVsdGlwbGVFeHRlbmRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibXVsdGlwbGVFeHRlbmRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxpQkFBaUIsQ0FBQztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILGVBQWUsQ0FBQyxHQUFHLE9BQU8sRUFBRSxFQUFFO0lBQzVCLE9BQU8sYUFBYSxDQUFDLEdBQUcsT0FBTyxDQUFDLENBQUM7QUFDbkMsQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibXVsdGlwbGVFeHRlbmRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibXVsdGlwbGVFeHRlbmRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxpQkFBaUIsQ0FBQztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILGVBQWUsQ0FBQyxHQUFHLE9BQU8sRUFBRSxFQUFFO0lBQzVCLE9BQU8sYUFBYSxDQUFDLEdBQUcsT0FBTyxDQUFDLENBQUM7QUFDbkMsQ0FBQyxDQUFDIn0=

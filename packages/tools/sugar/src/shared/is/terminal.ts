@@ -2,6 +2,10 @@
  * @name            isTerminal
  * @namespace            js.is
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function simply returns if the process runs inside a terminal or not
  *

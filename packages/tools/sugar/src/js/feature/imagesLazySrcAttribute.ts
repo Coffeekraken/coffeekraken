@@ -8,7 +8,8 @@ import deepMerge from '../../shared/object/deepMerge';
  * @name 		imagesLazySrcAttribute
  * @namespace            js.feature
  * @type      Feature
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Add support for the `lazy-src` attribute on `img` elements.

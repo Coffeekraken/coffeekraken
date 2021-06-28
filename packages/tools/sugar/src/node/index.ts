@@ -1,12 +1,8 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __SLog from '@coffeekraken/s-log';
 import __handleError from './error/handleError';
-import __initEnv from './init/initEnv';
-import __onProcessExit from './process/onProcessExit';
 import __exitCleanup from './process/exitCleanup';
-import __hotkey from './keyboard/hotkey';
+import __onProcessExit from './process/onProcessExit';
 // import __registerSFileClasses from './fs/registerSFileClasses';
 
 /**
@@ -20,9 +16,6 @@ import __hotkey from './keyboard/hotkey';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-// init env
-__initEnv();
 
 // handle the errors
 __handleError();

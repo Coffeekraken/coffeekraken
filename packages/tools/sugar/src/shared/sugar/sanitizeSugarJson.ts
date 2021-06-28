@@ -2,6 +2,10 @@
  * @name            sanitizeSugarJson
  * @namespace            node.sugar
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function allows you to sanitize a sugarJson JSON to be sure you'll get
  * the same structure everytime

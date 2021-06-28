@@ -30,7 +30,8 @@ function processNodeElm(elm) {
  * @name      toDomNodes
  * @namespace            js.dom.manipulate
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        betas
  *
  * Return a usable nodeTree from a variable source like selector, an html string, an html template tag or a node that will be cloned.

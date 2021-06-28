@@ -8,7 +8,9 @@ import __toString from '../../shared/string/toString';
  * @name                    handleError
  * @namespace            node.error
  * @type                    Function
- * @status              wip
+ * @platform        ts
+ * @platform        node
+ * @status          wip
  *
  * This function take a thrown error and try to display it the best way possible.
  * Simply add the "uncaughtException" and the "unhandledRejection" listeners on the process object,

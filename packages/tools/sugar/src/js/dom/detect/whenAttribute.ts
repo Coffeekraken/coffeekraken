@@ -8,7 +8,8 @@ import __observeAttribute from './observe/observeAttributes';
  * @namespace            js.dom.detect
  * @type      Function
  * @async
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided

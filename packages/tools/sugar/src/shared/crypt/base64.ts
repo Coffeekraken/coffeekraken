@@ -10,7 +10,10 @@ import __atob from 'atob';
  * @name            base64
  * @namespace            js.crypt
  * @type            Object
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              beta
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the base64 algorithm
  *

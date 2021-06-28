@@ -4,7 +4,8 @@
  * @name      prependChild
  * @namespace            js.dom.manipulate
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Prepend an HTMLElement into another HTMLElement

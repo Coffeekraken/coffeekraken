@@ -4,7 +4,8 @@
  * @name        decodeHtmlEntities
  * @namespace            js.string
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Decode an htmlentities encoded string

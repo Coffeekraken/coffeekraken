@@ -4,7 +4,10 @@
  * @name      easeOutQuad
  * @namespace            js.easing
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Ease out quad function
  *

@@ -7,7 +7,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name                folderPath
  * @namespace            node.fs
  * @type                Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function returns you the folder path of the file path passed.
  * You can tell the function to check for file existence before getting

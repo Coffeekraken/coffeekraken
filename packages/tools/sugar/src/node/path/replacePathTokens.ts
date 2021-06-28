@@ -25,6 +25,9 @@ import __distViewsDir from './distViewsDir';
  * @name            replacePathTokens
  * @namespace            node.path
  * @type            Function
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function take as parameter either a path string, or an array of paths
  * and return the according value type with the tokens (%tmpDir, %packageCacheDir, etc...) replaced

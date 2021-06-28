@@ -5,6 +5,10 @@ import __set from './set';
  * @name                toJson
  * @namespace            shared.object
  * @type                Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Convert class instances to plain JSON object
  *

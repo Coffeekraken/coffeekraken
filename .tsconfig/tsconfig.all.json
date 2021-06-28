@@ -5,7 +5,9 @@
     "../packages/*/*/src/cli/**/*.ts",
     "../packages/*/*/src/js/**/*.ts",
     "../packages/*/*/src/node/**/*.ts",
-    "../packages/*/*/src/shared/**/*.ts"
+    "../packages/*/*/src/shared/**/*.ts",
+    "../packages/*/*/.local/.sugar/**/*.ts",
+    "../packages/*/*/.sugar/**/*.ts"
   ],
   "compilerOptions": {
     "target": "es6",

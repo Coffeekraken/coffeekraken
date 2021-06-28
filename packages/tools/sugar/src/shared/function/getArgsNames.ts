@@ -4,7 +4,10 @@
  * @name                            getArgsNames
  * @namespace           shared.function
  * @type                            Function
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status              beta
  *
  * Get the arguments names of the passed function. Return an array of the arguments names
  *

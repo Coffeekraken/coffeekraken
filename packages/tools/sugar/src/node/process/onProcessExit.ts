@@ -8,7 +8,9 @@ import __terminalKit from 'terminal-kit';
  * @name            onProcessExit222
  * @namespace            node.process
  * @type            Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function allows you to register a callback to execute when the process
  * is exiting by one of these events:

@@ -7,7 +7,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @name        copySync
  * @namespace            node.fs
  * @type          Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Copy a file or directory (sync)
  * Support the ```replacePathTokens``` tokens

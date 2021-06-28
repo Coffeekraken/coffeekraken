@@ -1,0 +1,92 @@
+<s-handlebars>
+  <style type="postcss">
+    :host {
+    }
+  </style>
+
+  <script>
+    
+    import riotAndCompiler from 'riot/riot+compiler';
+    import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+
+    import __SComponentUtils from '@coffeekraken/s-component-utils';
+    import __SHandlerbarsComponentInterface from './interface/SHandlerbarsComponentInterface'
+
+    export default {
+      $source: undefined,
+      tagName: `riot-${__uniqid()}`,
+      state: {
+      },
+      async onBeforeMount() {
+        this.component = new __SComponentUtils(this.root, this.props, {
+            interface: __SHandlerbarsComponentInterface
+        });
+
+        // console.log(riotAndCompiler);
+
+        // get the sources
+        if (this.component.props.source) {
+            this.$source = document.querySelector(this.component.props.source);
+        }
+
+        let data = {};
+
+        // handle source
+        if (this.$source) {
+            if (!this.$source.getData) {
+                throw new Error(`<red>[s-handlebars]</red> Sorry but the spcified data source provider does not provide an "<yellow>getData</yellow>" api method`);
+            }
+            data = await this.$source.getData();
+        }
+        
+        this.$template = this.root.querySelector('template');
+
+        this._template = this.$template.innerHTML;
+
+        const codeStr = [
+            `<${this.tagName}>`,
+            `   ${this._template}`,
+            '   <script>',
+            '   export default {',
+            '      onBeforeMount() {',
+            '        this.root.update = this.update.bind(this);',
+            '      }',
+            '   };',
+            '   <\/script>',
+            `</${this.tagName}>`
+        ].join('\n');
+
+
+        const { code } = riotAndCompiler.compileFromString(codeStr);
+
+        // console.log(res);
+
+        riotAndCompiler.inject(code, this.tagName, 'index.html');
+
+        const $tag = document.createElement(this.tagName);
+
+        this.$template.parentNode.insertBefore($tag, this.$template.nextSibling);
+
+        riotAndCompiler.mount(this.tagName);
+
+        $tag.update(data);
+
+        // this._template = this.root.innerHTML;
+
+        // const templateRes = this.component.renderHandlerbars(this._template, this.state.data);
+
+        // this.root.innerHTML = templateRes;
+
+
+        // expose api
+        this.root.setData = this.setData.bind(this);
+      },
+      onMounted() {
+          console.log('COCO');
+      },
+      setData(data) {
+          console.log('data', data);
+      }
+    };
+  </script>
+</s-handlebars>

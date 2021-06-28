@@ -10,7 +10,10 @@ import __unquote from '../string/unquote';
  * @name                          getGlob
  * @namespace            js.object
  * @type                          Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Retreive an object value using a dotted path like "myObject.myProperty.myValue".
  * It support glob patterns like "something.*.id" and returns you a new object containing

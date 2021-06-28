@@ -10,7 +10,10 @@ import __deepMerge from '../object/deepMerge';
  * @name                            deepProxy
  * @namespace            js.object
  * @type                            Function
- * @status              wip
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        wip
  *
  * This function allows you to add Proxy to an object in deep fashion.
  * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the

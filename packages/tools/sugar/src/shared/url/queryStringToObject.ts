@@ -6,7 +6,10 @@ import ltrim from '../string/ltrim';
  * @name        queryStringToObject
  * @namespace            js.url
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Transform a query string into his object (key => pairs) representation
  *

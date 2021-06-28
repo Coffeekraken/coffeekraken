@@ -6,7 +6,9 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        on
  * @namespace            node.event
  * @type          Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function allows you to subscribe to global events emited by the "sugar.node.event.dispatch" function
  * It use under the hood an SPromise instance

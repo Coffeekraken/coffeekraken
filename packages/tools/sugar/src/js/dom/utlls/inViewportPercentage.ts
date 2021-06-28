@@ -6,7 +6,8 @@ import __isVisible from '../isVisible';
  * @name      inViewportPercentage
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Return how many percent the passed element is visible in the viewport

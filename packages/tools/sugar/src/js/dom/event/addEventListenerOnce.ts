@@ -7,7 +7,8 @@ import __addEventListener from './addEventListener';
  * @name        addEventListenerOnce
  * @namespace            js.dom.event
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          beta
  *
  * Add an event listener that will be trigerred only once

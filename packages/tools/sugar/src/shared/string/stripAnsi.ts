@@ -4,6 +4,10 @@ import __stripAnsi from 'strip-ansi';
  * @name            stripAnsi
  * @namespace            js.string
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * This function simply strip all the ansi characters in a string
  *

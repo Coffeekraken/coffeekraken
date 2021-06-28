@@ -27,6 +27,7 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginPlatformClassesParams = {
+    platforms: [],
     ...params
   };
 

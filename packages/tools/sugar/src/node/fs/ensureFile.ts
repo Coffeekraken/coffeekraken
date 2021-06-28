@@ -8,7 +8,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @namespace            node.fs
  * @type          Function
  * @async
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Ensure that the passed file exists. If not, it will be created... (async)
  * Support the ```replacePathTokens``` tokens

@@ -7,6 +7,7 @@ import __SCache, { ISCacheSettings } from '@coffeekraken/s-cache';
  * @namespace       node.og
  * @type            Function
  * @async
+ * @platform        ts
  * @platform        node
  * @status          beta
  * 

@@ -7,7 +7,8 @@ import exitFullscreen from './exitFullscreen';
  * @name      toggleFullscreen
  * @namespace            js.dom.utils
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Toggle the fullscreen mode

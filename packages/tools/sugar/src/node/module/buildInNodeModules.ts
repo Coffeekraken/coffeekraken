@@ -4,7 +4,9 @@
  * @name            buildInNodeModules
  * @namespace            node.module
  * @type            Object
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This object store the list of built-in node module
  * with a polyfill property for each that point to some

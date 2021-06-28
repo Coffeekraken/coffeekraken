@@ -4,7 +4,9 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @name                            childProcess
  * @namespace            node.is
  * @type                            Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Check if the current script is running as a child process or not by checking if the ```process.send``` exists, or is the environment variable ```IS_CHILD_PROCESS``` is true.
  *
@@ -27,4 +29,4 @@ function isChildProcess() {
     return (process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined);
 }
 export default isChildProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hpbGRQcm9jZXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hpbGRQcm9jZXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLFdBQVcsTUFBTSx5QkFBeUIsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxTQUFTLGNBQWM7SUFDckIsSUFBSSxXQUFXLEVBQUU7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUNoQyxPQUFPLENBQ0wsT0FBTyxDQUFDLElBQUksS0FBSyxTQUFTLElBQUksT0FBTyxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsS0FBSyxTQUFTLENBQ3pFLENBQUM7QUFDSixDQUFDO0FBQ0QsZUFBZSxjQUFjLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hpbGRQcm9jZXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hpbGRQcm9jZXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLFdBQVcsTUFBTSx5QkFBeUIsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsY0FBYztJQUNyQixJQUFJLFdBQVcsRUFBRTtRQUFFLE9BQU8sS0FBSyxDQUFDO0lBQ2hDLE9BQU8sQ0FDTCxPQUFPLENBQUMsSUFBSSxLQUFLLFNBQVMsSUFBSSxPQUFPLENBQUMsR0FBRyxDQUFDLGdCQUFnQixLQUFLLFNBQVMsQ0FDekUsQ0FBQztBQUNKLENBQUM7QUFDRCxlQUFlLGNBQWMsQ0FBQyJ9

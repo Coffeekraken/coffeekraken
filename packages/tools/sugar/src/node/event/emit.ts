@@ -6,7 +6,9 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        emit
  * @namespace            node.event
  * @type          Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function can ben used to emit an event globally.
  * You can subscribe to these events using the "sugar.node.event.subscribe" function

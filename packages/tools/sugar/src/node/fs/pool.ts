@@ -15,6 +15,9 @@ import __fs from 'fs';
  * @namespace            ts.fs
  * @type                Function
  * @async
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function simply take as parameter a glob (or array of globs) pattern(s)
  * and return an SPromise instance through which you can subscribe to events like:

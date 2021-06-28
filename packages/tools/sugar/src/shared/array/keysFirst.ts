@@ -6,7 +6,10 @@ import uniq from 'lodash/uniq';
  * @name        keysFirst
  * @namespace            js.array
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * Make sure the passed array start with the passed keys
  *

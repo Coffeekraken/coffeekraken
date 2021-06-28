@@ -7,7 +7,8 @@ import __autoCast from '../../shared/string/autoCast';
  * @name      styleString2Object
  * @namespace            js.dom.style
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Transform a style string to an object representation

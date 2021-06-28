@@ -6,7 +6,9 @@ import __clipboardy from 'clipboardy';
  * @name            paste
  * @namespace            node.clipboard
  * @type            Function
- * @stable
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * Simple function to paste things from the system clipboard.
  * This is using https://www.npmjs.com/package/clipboardy under the hood.

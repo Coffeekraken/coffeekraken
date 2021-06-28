@@ -5,7 +5,8 @@ import MobileDetect from 'mobile-detect';
  * @name        isTablet
  * @namespace            js.is
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Detect if is a tablet device

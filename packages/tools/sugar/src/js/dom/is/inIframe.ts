@@ -4,7 +4,8 @@
  * @name      inIframe
  * @namespace            js.dom.is
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Check if the page is loaded inside an iframe

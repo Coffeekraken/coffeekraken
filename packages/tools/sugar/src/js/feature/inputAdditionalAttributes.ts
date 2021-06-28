@@ -7,7 +7,8 @@ import __querySelectorLive from '../dom/querySelectorLive';
  * @name 		handleInputAttributes
  * @namespace            js.feature
  * @type      Feature
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Add some attributes on inputs, textarea and select to help with styling purposes and more.

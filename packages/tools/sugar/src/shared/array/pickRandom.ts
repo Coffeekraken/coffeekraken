@@ -2,6 +2,10 @@
  * @name            pickRandom
  * @namespace            shared.array
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * Pick a random item in the passed array
  *

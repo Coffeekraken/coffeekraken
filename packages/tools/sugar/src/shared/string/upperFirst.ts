@@ -4,7 +4,10 @@
  * @name        upperFirst
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Upper first
  *

@@ -8,7 +8,8 @@ import __closestNotVisible from './closestNotVisible';
  * @name      querySelector
  * @namespace            js.dom.query
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Enhanced proxy of the Element.querySelector function that let you specify
@@ -47,7 +48,7 @@ export interface IQuerySelectorSettings {
   visible: boolean;
   inViewport: boolean;
   rootNode: HTMLElement
-};
+}
 
 function querySelector(selector: HTMLElement, settings: Partial<IQuerySelectorSettings> = {}): HTMLElement {
   // extend settings

@@ -6,7 +6,10 @@ import __set from './set';
  * @name                      delete
  * @namespace            js.object
  * @type                      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Delete an object property using a dotPath like "something.else"
  *

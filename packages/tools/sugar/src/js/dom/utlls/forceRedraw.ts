@@ -6,7 +6,8 @@ import __getStyleProperty from '../style/getStyleProperty';
  * @name      forceRedraw
  * @namespace            js.dom.utils
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Force the element to be painted again in case of visual issues

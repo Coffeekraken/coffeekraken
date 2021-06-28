@@ -9,8 +9,10 @@ import __minimatch from 'minimatch';
  * @name            dependencyList
  * @namespace       node.fs
  * @type            Function
- * @status          beta
  * @async
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function allows you to specify a file from which to get all the dependencies
  * tree.

@@ -1,4 +1,4 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -22,8 +22,11 @@ class SViteBuildInterface extends __SInterface {
     input: {
       type: 'String',
       path: {
+        exists: true,
         absolute: true
-      }
+      },
+      default: `${__SSugarConfig.get('storage.src.jsDir')}/index.ts`,
+      required: true
     },
     type: {
       type: 'String',

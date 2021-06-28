@@ -1,12 +1,10 @@
+import _SInterface from '@coffeekraken/s-interface';
 import __SProcess, {
-  ISProcessSettings,
-  ISProcessCtorSettings
+  ISProcessCtorSettings, ISProcessSettings
 } from '@coffeekraken/s-process';
-import __SNpmUnusedParamsInterface from './interface/SNpmUnusedParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';
 import __packageRootDir from '../path/packageRootDir';
-import __toString from '../../shared/string/toString';
 import __packageJson from './utils/packageJson';
 
 /**
@@ -14,6 +12,9 @@ import __packageJson from './utils/packageJson';
  * @namespace            node.npm
  * @type            Class
  * @extends         SProcess
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This process is used to check npm unused dependencies, remove unsused once, etc...
  * It use under the hood the amazing depcheck package made by @rumpl and @lijunle
@@ -32,11 +33,35 @@ interface ISNpmUnusedProcessParams {
 }
 interface ISNpmUnusedProcess {}
 
+
+export class SNpmUnusedParamsInterface extends _SInterface {
+  static definition = {
+    clean: {
+      type: 'Boolean',
+      alias: 'r',
+      description:
+        'Specify if you want the found unused dependencies to be reflected back into the package.json file',
+      default: false
+    },
+    skipDev: {
+      type: 'Boolean',
+      description: 'Specify if you want to skip the "devDependencies" check',
+      default: false
+    },
+    skipMissing: {
+      type: 'Boolean',
+      description: 'Specify if you want to skip the missing packages check',
+      default: false
+    }
+  };
+}
+
+
 // @ts-ignore
 class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
   static interfaces = {
     params: {
-      class: __SNpmUnusedParamsInterface
+      class: SNpmUnusedParamsInterface
     }
   };
 

@@ -4,7 +4,10 @@
  * @name        lowerFirst
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Lower first letter
  *

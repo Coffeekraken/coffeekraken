@@ -8,7 +8,8 @@ import __closestNotVisible from './query/closestNotVisible';
  * @namespace            js.dom.detect
  * @type      Function
  * @async
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status          beta
  *
  * Monitor an HTMLElement to be notified when it is visible

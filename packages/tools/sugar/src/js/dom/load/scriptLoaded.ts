@@ -6,7 +6,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      scriptLoaded
  * @namespace            js.dom.load
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Detect when a script has been fully loaded

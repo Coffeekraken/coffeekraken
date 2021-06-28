@@ -10,6 +10,9 @@ import __parse from '../string/parse';
  * @name                    env
  * @namespace            js.env
  * @type                    Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
  * @status              wip
  *
  * This function allows you to access environment variables through the same method in node and javascript

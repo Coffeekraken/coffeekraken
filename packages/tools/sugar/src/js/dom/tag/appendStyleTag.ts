@@ -4,7 +4,8 @@
  * @name        appendStyleTag
  * @namespace            js.dom
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Append a style tag either to the head or the body

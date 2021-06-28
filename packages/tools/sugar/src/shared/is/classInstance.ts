@@ -2,6 +2,10 @@
  * @name        isClassInstance
  * @namespace            shared.is
  * @type         Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Check if the passed item is an object class and not a plain object.
  *

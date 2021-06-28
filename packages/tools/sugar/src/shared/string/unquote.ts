@@ -4,7 +4,10 @@
  * @name        unquote
  * @namespace            js.string
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Remove the quotes of a string
  * Types of quotes removed :

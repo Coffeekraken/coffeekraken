@@ -4,7 +4,8 @@
  * @name      realHeight
  * @namespace            js.dom.size
  * @type      Function
- * @platform      js
+ * @platform          js
+ * @platform          ts
  * @status      beta
  *
  * Return the full height of an element that has maybe a max-height, etc...

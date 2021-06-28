@@ -2,6 +2,10 @@
  * @name            isValidUnitValue
  * @namespace       shared.css
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status          beta
  *
  * This function tells you if the passed value is a valid css unit based one like 10px, 20em, etc...
  *

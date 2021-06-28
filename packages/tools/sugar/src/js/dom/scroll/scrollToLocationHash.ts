@@ -8,7 +8,8 @@ import __deepMerge from '../../../shared/object/deepMerge';
  * @name      scrollToLocationHash
  * @namespace            js.dom.scroll
  * @type      Function
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Scroll to the location hash if an hash is present.

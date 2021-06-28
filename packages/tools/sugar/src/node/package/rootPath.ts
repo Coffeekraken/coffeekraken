@@ -6,7 +6,9 @@ import __packageRootDir from '../path/packageRootDir';
  * @name          rootPath
  * @namespace            node.package
  * @type          Function
- * @status              beta
+ * @platform        ts
+ * @platform        node
+ * @status          beta
  *
  * This function return the absolute path of your current working package
  *

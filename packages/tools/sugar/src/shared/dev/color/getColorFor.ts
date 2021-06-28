@@ -7,6 +7,10 @@ import __deepMerge from '../../object/deepMerge';
  * @name            getColorFor
  * @namespace            shared.dev.color
  * @type            Function
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status            beta
  *
  * This function let you pass anything like an object, a string, etc... and get the same
  * color back everytime you pass the same value.

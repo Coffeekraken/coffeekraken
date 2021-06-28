@@ -4,7 +4,10 @@
  * @name        constructorName
  * @namespace            js.object
  * @type      Function
- * @stable
+ * @platform          js
+ * @platform          ts
+ * @platform          node
+ * @status        beta
  *
  * Return the constructor name of the passed object
  *

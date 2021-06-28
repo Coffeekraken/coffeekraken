@@ -7,7 +7,8 @@ import __getTransitionProperties from './style/getTransitionProperties';
  * @namespace            js.dom.detect
  * @type      Function
  * @async
- * @platform        js
+ * @platform          js
+ * @platform          ts
  * @status        beta
  *
  * Monitor an HTMLElement to be notified when his transition has ended

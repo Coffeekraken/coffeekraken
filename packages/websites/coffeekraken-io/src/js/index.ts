@@ -4,9 +4,11 @@ import "@coffeekraken/s-filtrable-input-component";
 import "@coffeekraken/s-request-component";
 import "@coffeekraken/s-code-example-component";
 import "@coffeekraken/s-opengraph-viewer-component";
-import "@coffeekraken/s-handlebars-component";
+// import "@coffeekraken/s-handlebars-component";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+
+import './components/docNav.riot';
 
 // generic
 import "./generic/docShortcut";

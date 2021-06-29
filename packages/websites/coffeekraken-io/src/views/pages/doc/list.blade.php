@@ -44,26 +44,7 @@
          <div class="s-grid:122">
             <nav class="__nav">
                
-               <s-handlebars id="doc-nav" source="#doc-nav-request">
-                  <template>
-                     <form name="doc">
-
-                        <section class="__nav-platform">
-                           <h3 class="s-typo:h3 s-mb:30">
-                              Platform
-                           </h3>
-
-                           <ol class="s-list:ol">
-                              <li each="{ (platform, idx) in state.platforms }"">
-                                 { platform }
-                              </li>
-                           </ol>
-
-                        </section>
-
-                     </form>
-                  </template>
-               </s-handlebars>
+               <doc-nav></doc-nav>
 
             </nav>
             <section class="__list">

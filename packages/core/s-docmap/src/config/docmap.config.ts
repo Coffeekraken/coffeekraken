@@ -14,7 +14,19 @@ export default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: `${__packageRootDir()}/docmap.json`
+    input: `${__packageRootDir()}/docmap.json`,
+
+    /**
+     * @name        collect
+     * @namespace     config.docmap.read
+     * @type        Array<String>
+     * 
+     * Specify which "fields" you want to collect and make an array of value with
+     * 
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    collect: ['type','platform','status','author','since']
   },
 
   build: {

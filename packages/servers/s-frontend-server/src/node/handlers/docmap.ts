@@ -27,14 +27,17 @@ export default async function docMap(req, res, settings = {}) {
         const docMap = new __SDocMap();
 
         const json = await docMap.read();
-        const finalJson = {};
+        const finalJson = {
+            ...json,
+            map: {}
+        };
 
-        Object.keys(json).forEach(key => {
-            const obj = json[key];
+        Object.keys(json.map).forEach(key => {
+            const obj = json.map[key];
             if (!obj.platform) return;
             if (!obj.status) return;
             if (['stable','beta','alpha'].indexOf(obj.status) === -1) return;
-            finalJson[key] = obj;
+            finalJson.map[key] = obj;
         });
 
         res.status(200);

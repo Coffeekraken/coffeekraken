@@ -43,23 +43,34 @@
 
         this._template = this.$template.innerHTML;
 
-        const codeStr = [
-            `<${this.tagName}>`,
-            `   ${this._template}`,
-            '   <script>',
-            '   export default {',
-            '      onBeforeMount() {',
-            '        this.root.update = this.update.bind(this);',
-            '      }',
-            '   };',
-            '   <\/script>',
-            `</${this.tagName}>`
-        ].join('\n');
+        let codeStr;
 
+        if (!this._template.match(/<script(.*)?>/)) {
+
+            this._template = `
+                ${this._template}
+                <script>
+                    export default {
+                        onBeforeMount() {
+                            this.root.update = this.update.bind(this);
+                        }
+                    };
+                <\/script>
+            `;
+        } else if (this._template.match(/onBeforeMount\(\)\s?\{/)) {
+            this._template = this._template.replace(/onBeforeMount\(\)\s?\{/, `onBeforeMount() { this.root.update = this.update.bind(this); `);
+        } else {
+            this._template = this._template.replace(/export default\s?\{/, `export default {
+                onBeforeMount() { this.root.update = this.update.bind(this); }, `);
+        }
+
+        codeStr = `
+            <${this.tagName}>
+                ${this._template}
+            </${this.tagName}>
+        `;
 
         const { code } = riotAndCompiler.compileFromString(codeStr);
-
-        // console.log(res);
 
         riotAndCompiler.inject(code, this.tagName, 'index.html');
 
@@ -69,14 +80,9 @@
 
         riotAndCompiler.mount(this.tagName);
 
-        $tag.update(data);
-
-        // this._template = this.root.innerHTML;
-
-        // const templateRes = this.component.renderHandlerbars(this._template, this.state.data);
-
-        // this.root.innerHTML = templateRes;
-
+        $tag.update({
+            data
+        });
 
         // expose api
         this.root.setData = this.setData.bind(this);

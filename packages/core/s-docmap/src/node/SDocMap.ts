@@ -11,6 +11,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
 import __SDocMapBuildParamsInterface from './interface/SDocMapBuildParamsInterface';
+import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
 
 /**
@@ -56,6 +58,7 @@ export interface ISDocMapBuildParams {
 
 export interface ISDocMapReadParams {
   input: string;
+  collect: string[];
   path: string;
 }
 
@@ -79,6 +82,11 @@ export interface ISDocMapEntry {
 }
 export interface ISDocMapEntries {
   [key: string]: ISDocMapEntry;
+}
+
+export interface ISDocMapObj {
+  collected: Record<string, any>;
+  map: ISDocMapEntries;
 }
 
 export interface ISDocMap {
@@ -135,17 +143,15 @@ class SDocMap extends __SClass implements ISDocMap {
    * @todo      integrate the "cache" feature
    *
    * @param       {Object}        [settings={}]       A settings object to override the instance level ones
-   * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
+   * @return      {SPromise<ISDocMapObj>}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(params: Partial<ISDocMapReadParams>) {
+  read(params: Partial<ISDocMapReadParams>): Promise<ISDocMapObj> {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
       const finalParams = <ISDocMapReadParams>__deepMerge(
-        {
-          input: `${__packageRootDir()}/docmap.json`
-        },
+        __SDocMapReadParamsInterface.defaults(),
         params ?? {}
       );
 
@@ -156,7 +162,12 @@ class SDocMap extends __SClass implements ISDocMap {
       }
 
       const extendedPackages: string[] = [];
-      let finalDocmapJson = {};
+      const finalDocmapJson = {
+        collected: {},
+        map: {}
+      };
+
+      const collectedHashes = {};
 
       function loadJson(packageNameOrPath, currentPath) {
         if (extendedPackages.indexOf(packageNameOrPath) !== -1) return;
@@ -194,10 +205,34 @@ class SDocMap extends __SClass implements ISDocMap {
             const obj = docmapJson.map[namespace];
             obj.path = __path.resolve(extendsRootPath, obj.relPath);
             docmapJson.map[namespace] = obj;
+
+            // extract the "collect" fields
+            (finalParams.collect ?? []).forEach(collect => {
+              if (obj[collect] === undefined) return;
+
+              // make sure we have a stack for hashes of this collect
+              if (!collectedHashes[collect]) collectedHashes[collect] = [];
+              if (!finalDocmapJson.collected[collect]) finalDocmapJson.collected[collect] = [];
+
+              const value = Array.isArray(obj[collect]) ? obj[collect] : [obj[collect]];
+              value.forEach(v => {
+                if (typeof v === 'string') {
+                  if (finalDocmapJson.collected[collect].indexOf(v) === -1) finalDocmapJson.collected[collect].push(v);
+                } else {
+                  // generate hash
+                  const hash = __md5.encrypt(v);
+                  if (collectedHashes[collect].indexOf(hash) !== -1) return;
+                  finalDocmapJson.collected[collect].push(v);
+                  collectedHashes[collect].push(hash);
+                  // throw new Error(`<red>[SDocmap.read]</red> Sorry but collecting fields that contains other that string values is not supported for now...`);
+                }
+              })
+            });
+
           });
 
-          finalDocmapJson = {
-            ...finalDocmapJson,
+          finalDocmapJson.map = {
+            ...finalDocmapJson.map,
             ...(docmapJson.map ?? {})
           };
         } catch(e) {

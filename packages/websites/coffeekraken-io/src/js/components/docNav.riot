@@ -1,0 +1,115 @@
+<doc-nav>
+
+    <form name="doc">
+
+        <fieldset class="__nav-platform">
+            <legend class="s-typo:h3 s-mb:30">
+                Platform
+            </legend>
+            <ol class="s-list:ol">
+                <li each="{ (platform, idx) in state.collected.platform }"">
+                    { platform.name }
+
+                    <label for="platform-{ platform.name }">
+                        <input name="platform-{ platform.name }" type="checkbox" id="platform-{ platform.name }">
+                        <div class="s-switch"></div>
+                    </label>
+
+                </li>
+            </ol>
+        </fieldset>
+
+        <fieldset class="__nav-type">
+            <legend class="s-typo:h3 s-mb:30">
+                Type
+            </legend>
+            <ol class="s-list:ol">
+                <li each="{ (type, idx) in state.collected.type }"">
+                    { type }
+                    <input type="checkbox" name="type-{ type }" />
+                </li>
+            </ol>
+        </fieldset>
+
+    </form>
+
+    <style type="postcss">
+
+        input[type="checkbox"] {
+            position: absolute;
+            visibility: hidden;
+        }
+
+        input[type="checkbox"]:checked + .s-switch {
+            &:before {
+                background-color: sugar.color(ui:active);
+            }
+            &:after {
+                left: 1em;
+            }
+        }
+
+        .s-switch {
+            display: inline-block;
+            position: relative;
+            width: 2em; height: 1em;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0; left: 0;
+                background: sugar.color(ui);
+
+                height: 1em;
+                width: 2em;
+
+                transition: sugar.theme(ui.form.transition);
+                border-radius: sugar.theme(ui.form.borderRadius);
+            }
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0; left: 0;
+                background: sugar.color(ui, foreground);
+
+                height: 1em;
+                width: 1em;
+
+                transform: scale(0.7);
+                transition: sugar.theme(ui.form.transition);
+                border-radius: sugar.theme(ui.form.borderRadius);
+            }
+        }
+
+    </style>
+
+    <script>
+
+        import __SInterface from '@coffeekraken/s-interface';
+        import __SComponentUtils from '@coffeekraken/s-component-utils';
+        import __SRequest from '@coffeekraken/s-request';
+
+        class SDocNavComponentInterface extends __SInterface {
+            static definition = {
+            }
+        }
+
+        export default {
+
+            async onBeforeMount() {
+                this.component = new __SComponentUtils(this.root, this.props, {
+                    interface: SDocNavComponentInterface
+                });
+                const request = new __SRequest({
+                    url: '/api/docmap',
+                    method: 'GET'
+                });
+                const docmapJson = (await request.send()).data;
+                this.update(docmapJson);
+            }
+        }
+    </script>
+
+</doc-nav>

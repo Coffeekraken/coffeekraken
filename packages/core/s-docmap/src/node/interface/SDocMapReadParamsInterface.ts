@@ -19,8 +19,12 @@ class SDocMapReadParamsInterface extends __SInterface {
   static definition = {
     input: {
       type: 'String',
-      default: __SSugarConfig.get('docmap.build.input')
+      default: __SSugarConfig.get('docmap.read.input')
     },
+    collect: {
+      type: 'Array<String>',
+      default: __SSugarConfig.get('docmap.read.collect')
+    }
     // cache: {
     //   type: 'Boolean',
     //   default: __SSugarConfig.get('docmap.cache')

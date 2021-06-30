@@ -74,6 +74,7 @@
     "glob-all": "^3.2.1",
     "glob-parent": "^5.1.2",
     "hotkeys-js": "^3.8.1",
+    "in-view": "^0.6.1",
     "in-viewport": "^3.6.0",
     "inline-style-prefixer": "^6.0.0",
     "ip": "^1.1.5",

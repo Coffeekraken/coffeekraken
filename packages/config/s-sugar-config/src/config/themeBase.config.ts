@@ -16,6 +16,10 @@ export default {
       '1234': '1 2 3 4',
       '122': '1 2 2',
       '112': '1 1 2',
+      '1222': '1 2 2 2',
+      '1112': '1 1 1 2',
+      '12222': '1 2 2 2 2',
+      '11112': '1 1 1 1 2',
       '12345': '1 2 3 4 5',
       '123456': '1 2 3 4 5 6'
     }
@@ -1298,6 +1302,12 @@ export default {
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',
       styles: ['default:default']
+    },
+    switch: {
+      borderRadius: '[theme.ui.form.borderRadius]',
+      transition: '[theme.ui.form.transition]',
+      depth: '[theme.ui..depth]',
+      defaultStyle: 'default'
     },
     list: {
       padding: '[theme.ui.default.padding]',

@@ -40,8 +40,9 @@ __SComponentUtils.setDefaultProps('s-code-example', {
 });
 
 __querySelectorLive('[class*="s-"][class*=":"]', ($elm) => {
-   $elm.classList.forEach((cls) => {
-    
+
+   $elm.getAttribute('class').split(' ').forEach((cls) => {
+  
     if (!cls.includes(':')) return;
     const parts = cls.split(":");
     const startCls = parts[0];

@@ -1,87 +1,85 @@
 <doc-nav>
 
-    <form name="doc">
+    <div class="s-grid:12222">
+        <nav class="__nav">
+        
+            <form name="doc">
 
-        <fieldset class="__nav-platform">
-            <legend class="s-typo:h3 s-mb:30">
-                Platform
-            </legend>
-            <ol class="s-list:ol">
-                <li each="{ (platform, idx) in state.collected.platform }"">
-                    { platform.name }
+                <fieldset class="__nav-platform s-mb:30">
+                    <legend class="s-typo:h5 s-mb:10">
+                        Platform
+                    </legend>
+                    <dl class="s-list s-bg:even">
+                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (platform, idx) in state.docmap.collected.platform }">
+                            <label class="s-flex-item:grow" for="platform-{ platform.name }">
+                                { platform.name }
+                            </label>
+                            <label class="s-switch:accent" for="platform-{ platform.name }">
+                                <input name="platform-{ platform.name }" type="checkbox" id="platform-{ platform.name }" onchange="{() => _togglePlatform(platform)}" checked="{ state.saved.platforms.indexOf(platform.name) !== -1 }">
+                                <div class="s-switch-handler"></div>
+                            </label>
+                        </dt>
+                    </dl>
+                </fieldset>
 
-                    <label for="platform-{ platform.name }">
-                        <input name="platform-{ platform.name }" type="checkbox" id="platform-{ platform.name }">
-                        <div class="s-switch"></div>
-                    </label>
+                <fieldset class="__nav-type">
+                    <legend class="s-typo:h5 s-mb:10">
+                        Type
+                    </legend>
+                    <dl class="s-list">
+                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (type, idx) in state.docmap.collected.type }">
+                            <label class="s-flex-item:grow" for="type-{ type }">
+                                { type }
+                            </label>
+                            <label class="s-switch:accent" for="type-{ type }">
+                                <input name="type-{ type }" type="checkbox" id="type-{ type }">
+                                <div class="s-switch-handler"></div>
+                            </label>
+                        </dt>
+                    </dl>
+                </fieldset>
 
-                </li>
-            </ol>
-        </fieldset>
+            </form>
+            
 
-        <fieldset class="__nav-type">
-            <legend class="s-typo:h3 s-mb:30">
-                Type
-            </legend>
-            <ol class="s-list:ol">
-                <li each="{ (type, idx) in state.collected.type }"">
-                    { type }
-                    <input type="checkbox" name="type-{ type }" />
-                </li>
-            </ol>
-        </fieldset>
+        </nav>
+        <section class="__list">
+            <div class="__list-item" if="{ idx <= state.maxItemsToDisplay }" each="{ (item, idx) in Object.values(state.filteredItems) }">
+                <!-- <div class="__bg"></div> -->
+                <div class="s-pd:30">
+                    <div class="">
+                        <div class="s-flex">
+                            <h4 class="s-font:title s-font:60 s-color:accent s-mb:10 s-flex-item:grow">
+                                { item.name }
+                            </h4>
+                            <div>
+                                <div class="s-font:40">
+                                    <span class="s-badge:pill:{ item.status }">{ item.status }</span>
+                                    &nbsp;
+                                    <i class="s-platform:{platform.name} s-font:50" each="{ platform in item.platform}"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="s-color:complementary s-font:40 s-mb:30">{ item.namespace }</h5>
+                        <p class="s-typo:p s-mb:30">{ item.description }</p>
+                        <!-- <a href="/doc/{_striptags(namespace)}.{_striptags(name)}" class="s-btn:accent">
+                            Check out more
+                        </a> -->
+                    </div>
+                    <div if="{ item.example && item.example.length }" class="__code">
+                        <s-code-example default-style style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink">
+                            <div lang="{ item.example[0].language }">
+                                { item.example[0].code }                    
+                            </div>
+                        </s-code-example>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-    </form>
 
     <style type="postcss">
-
-        input[type="checkbox"] {
-            position: absolute;
-            visibility: hidden;
-        }
-
-        input[type="checkbox"]:checked + .s-switch {
-            &:before {
-                background-color: sugar.color(ui:active);
-            }
-            &:after {
-                left: 1em;
-            }
-        }
-
-        .s-switch {
-            display: inline-block;
-            position: relative;
-            width: 2em; height: 1em;
-
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0; left: 0;
-                background: sugar.color(ui);
-
-                height: 1em;
-                width: 2em;
-
-                transition: sugar.theme(ui.form.transition);
-                border-radius: sugar.theme(ui.form.borderRadius);
-            }
-            &:after {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0; left: 0;
-                background: sugar.color(ui, foreground);
-
-                height: 1em;
-                width: 1em;
-
-                transform: scale(0.7);
-                transition: sugar.theme(ui.form.transition);
-                border-radius: sugar.theme(ui.form.borderRadius);
-            }
-        }
 
     </style>
 
@@ -90,6 +88,9 @@
         import __SInterface from '@coffeekraken/s-interface';
         import __SComponentUtils from '@coffeekraken/s-component-utils';
         import __SRequest from '@coffeekraken/s-request';
+        import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
+        import __striptags from '@coffeekraken/sugar/shared/html/striptags';
+        import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
 
         class SDocNavComponentInterface extends __SInterface {
             static definition = {
@@ -97,7 +98,17 @@
         }
 
         export default {
-
+            maxItems: 10,
+            state: {
+                maxItemsToDisplay: 10,
+                filteredItems: {},
+                docmap: {},
+                saved: {
+                    platforms: [],
+                    types: []
+                }
+            },
+            _striptags: __striptags,
             async onBeforeMount() {
                 this.component = new __SComponentUtils(this.root, this.props, {
                     interface: SDocNavComponentInterface
@@ -107,7 +118,81 @@
                     method: 'GET'
                 });
                 const docmapJson = (await request.send()).data;
-                this.update(docmapJson);
+                this.update({
+                    docmap: docmapJson
+                });
+
+                // restore state
+                this._restoreState();
+
+                // filter items
+                this._filterItems();
+
+                // scroll end
+                __onScrollEnd(document.body, () => {
+                    this.update({
+                        maxItemsToDisplay: this.state.maxItemsToDisplay + this.maxItems
+                    });
+                });
+
+            },
+            get availableTypes() {
+
+                const availableTypes = {};
+                Object.keys(this.state.docmap).forEach(namespace => {
+
+                });
+
+            },
+            _filterItems() {
+
+                const filteredItems = {};
+                Object.keys(this.state.docmap.map).forEach(namespace => {
+
+                    const docmapObj = this.state.docmap.map[namespace];
+
+                    if (this.state.saved.platforms.length) {
+                        if (!docmapObj.platform) return;
+                        const samePlatforms = __sameItems(docmapObj.platform.map(l => l.name), this.state.saved.platforms);
+                        if (!samePlatforms.length) return;
+                    }
+
+                    // add theitem in the filtered stack
+                    filteredItems[namespace] = docmapObj;
+
+                });
+
+                this.update({
+                    maxItemsToDisplay: this.maxItems,
+                    filteredItems
+                });
+
+            },
+            _togglePlatform(platform) {
+                const idx = this.state.saved.platforms.indexOf(platform.name);
+                if (idx !== -1) {
+                    this.state.saved.platforms.splice(idx, 1);
+                    this.update({
+                        platforms: this.state.saved.platforms
+                    });
+                } else {
+                    this.state.saved.platforms.push(platform.name);
+                }
+
+                // filter items
+                this._filterItems();
+
+                // save state
+                this._saveState();
+            },
+            _saveState() {
+                window.localStorage.setItem('docState', JSON.stringify(this.state.saved));
+            },
+            _restoreState() {
+                const savedState = JSON.parse(window.localStorage.getItem('docState') ?? '{}');
+                this.update({
+                    saved: savedState
+                });
             }
         }
     </script>

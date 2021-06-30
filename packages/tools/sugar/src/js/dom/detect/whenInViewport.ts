@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __inViewport from 'in-viewport';
-
 /**
  * @name      whenInViewport
  * @namespace            js.dom.detect
@@ -47,16 +45,28 @@ function whenInViewport(elm: HTMLElement, settings: Partials<IWhenInViewportSett
     ...settings
   };
 
-  return new Promise((resolve, reject) => {
-    __inViewport(
-      elm,
-      {
-        offset: settings.offset
-      },
-      () => {
-        resolve(elm);
-      }
-    );
+  return new Promise((resolve) => {
+
+    const options = {
+      root: null, // relative to document viewport 
+      rootMargin: `${settings.offset}px`, // margin around root. Values are similar to css property. Unitless values not allowed
+      threshold: 1.0 // visible amount of item shown in relation to root
+    };
+    
+    function onChange(changes, observer) {
+      changes.forEach(change => {
+        if (change.intersectionRatio > 0) {
+            // your observer logic
+            observer.disconnect();
+            resolve(elm);
+        }
+      });
+    }
+
+    const observer = new IntersectionObserver(onChange, options);
+
+    observer.observe(elm);
+
   });
 }
 export default whenInViewport;

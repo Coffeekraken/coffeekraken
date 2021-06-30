@@ -45,30 +45,61 @@ export default function onScrollEnd(
     ...(settings ?? {})
   };
 
+  let isBody = false;
+
+  let $scrollListenedElm = $elm;
+  let $scrollHeightElm = $elm;
+  if ($elm === document.body) {
+    isBody = true;
+    $scrollListenedElm = document;
+    $scrollHeightElm = document.body;
+  } else if ($elm === document || $elm === window) {
+    isBody = true;
+    $elm = document.body;
+    $scrollHeightElm = document.body;
+  }
+
   let active = true,
     count = 0;
 
   const internalCallback = (e) => {
+
+    let fullHeight, viewportHeight, scrollTop;
+    if (isBody) {
+      viewportHeight = window.innerHeight;
+      scrollTop = $scrollHeightElm.scrollTop;
+      fullHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+      );
+    } else {
+      viewportHeight = $scrollHeightElm.scrollHeight;
+      scrollTop = $scrollHeightElm.scrollTop;
+      fullHeight = $scrollHeightElm.scrollHeight;
+    }
+
     if (
       active &&
-      $elm.offsetHeight + $elm.scrollTop >=
-        $elm.scrollHeight - finalSettings.offset
+      scrollTop + viewportHeight >=
+        fullHeight - finalSettings.offset
     ) {
       callback();
-      active = false;
       count++;
-      if (finalSettings.once)
-        $elm.removeEventListener('scroll', internalCallback);
-      else if (finalSettings.times > 0 && count >= finalSettings.times) {
-        $elm.removeEventListener('scroll', internalCallback);
+      if (finalSettings.once) {
+        $scrollListenedElm.removeEventListener('scroll', internalCallback);
+        active = false;
+      } else if (finalSettings.times > 0 && count >= finalSettings.times) {
+        $scrollListenedElm.removeEventListener('scroll', internalCallback);
+        active = false;
       }
     } else if (
-      $elm.offsetHeight + $elm.scrollTop <
-      $elm.scrollHeight - finalSettings.offset
+      $scrollHeightElm.offsetHeight + $scrollHeightElm.scrollTop <
+      $scrollHeightElm.scrollHeight - finalSettings.offset
     ) {
       active = true;
     }
   };
 
-  $elm.addEventListener('scroll', internalCallback);
+  $scrollListenedElm.addEventListener('scroll', internalCallback);
 }

@@ -1,5 +1,9 @@
 <s-code-example toolbar-position="{ component.props.toolbarPosition }">
 
+  <div class="{ component.className('__slot') }">
+    <slot/>
+  </div>
+
   <header class="{ component.className('__nav') }">
     <ol class="{ component.className('__tabs', component.props.defaultStyleClasses.main) }">
       <li class="{ component.className('__tab') }"
@@ -31,6 +35,10 @@
           position: relative;
       }
     }
+
+      .s-code-example__slot {
+        display: none;
+      }
 
       .s-code-example__nav {
       }
@@ -97,6 +105,7 @@
     import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
     import __SComponentUtils from '@coffeekraken/s-component-utils';
     import __SClipboardCopyComponent from '@coffeekraken/s-clipboard-copy-component';
+    import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
 
     export default {
       state: {
@@ -108,9 +117,12 @@
           interface: __SCodeExampleComponentInterface
         });
       },
-      onMounted() {
-        this.$templates = Array.from(this.root.querySelectorAll('template'));
+      async onMounted() {
+
+        await __whenInViewport(this.root);
+
         this.$copy = this.root.querySelector('s-clipboard-copy');
+        this.$templates = Array.from(this.root.querySelectorAll(`.${this.component.className('__slot')} template, .${this.component.className('__slot')} div`));
 
         this.$templates.forEach($template => {
           this.update({
@@ -121,6 +133,8 @@
             }]
           });
         });
+
+        console.log(this.state);
 
         // active idx
         if (this.component.props.active) {

@@ -132,5 +132,48 @@ export default function ({ params, atRule, replaceWith }) {
 
   });
 
+  cssArray.push(
+        [
+          `/**`,
+          ` * @name           s-bg--odd`,
+          ` * @namespace      sugar.css.bg.classes`,
+          ` * @type           CssClass`,
+          ` *`,
+          ` * This class allows you to scope the applied bgs on the direct childs to only be applied on "odd" HTMLElement`,
+          ` *`,
+          ` * @example        html`,
+          ` * <ol class="s-bg--odd">`,
+          ` *     <li class="s-bg--accent">Something cool</li>`,
+          ` *     <li class="s-bg--accent">Something cool</li>`,
+          ` *     <li class="s-bg--accent">Something cool</li>`,
+          ` * </li>`,
+          ` */`,
+          `.s-bg--odd > *:nth-child(even) {`,
+          '   background-color: transparent !important;',
+          `}`
+        ].join('\n')
+      );
+    cssArray.push(
+        [
+          `/**`,
+          ` * @name           s-bg--even`,
+          ` * @namespace      sugar.css.color.classes`,
+          ` * @type           CssClass`,
+          ` *`,
+          ` * This class allows you to scope the applied colors on the direct childs to only be applied on "even" HTMLElement`,
+          ` *`,
+          ` * @example        html`,
+          ` * <ol class="s-bg--even">`,
+          ` *     <li class="s-bg--accent">Something cool</li>`,
+          ` *     <li class="s-bg--accent">Something cool</li>`,
+          ` *     <li class="s-bg--accent">Something cool</li>`,
+          ` * </li>`,
+          ` */`,
+          `.s-bg--even > *:nth-child(even) {`,
+          '   background-color: transparent !important;',
+          `}`
+        ].join('\n')
+      );
+
   replaceWith(cssArray);
 }

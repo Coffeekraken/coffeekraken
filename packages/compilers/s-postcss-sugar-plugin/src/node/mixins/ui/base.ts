@@ -7,17 +7,12 @@ class postcssSugarPluginUiBaseInterface extends __SInterface {
       name: {
           type: 'String',
           required: true
-      },
-      color: {
-        type: 'String',
-        default: 'ui'
       }
   };
 }
 
 export interface IPostcssSugarPluginUiBaseParams {
     name: string;
-    color: string;
 }
 
 export { postcssSugarPluginUiBaseInterface as interface };
@@ -33,7 +28,6 @@ export default function ({
 }) {
   const finalParams: IPostcssSugarPluginUiBaseParams = {
     name: '',
-    color: 'ui',
     ...params
   };
 
@@ -72,12 +66,12 @@ export default function ({
         @sugar.state.focus {
           background-color: sugar.color(ui:focus, surface);
           color: sugar.color(ui:focus, foreground);
-          border: sugar.color(${finalParams.color ?? 'ui'}:focus, border) solid 1px;
+          border: sugar.color(ui:focus, border) solid 1px;
         }
         @sugar.state.active {
           background-color: sugar.color(ui:active, surface);
           color: sugar.color(ui:active, foreground);
-          border: sugar.color(${finalParams.color ?? 'ui'}:active, border) solid 1px;
+          border: sugar.color(ui:active, border) solid 1px;
         }
     }
   `);

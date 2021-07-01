@@ -186,7 +186,7 @@ const plugin = (settings: any = {}) => {
       if (!decl.prop || !decl.value) return;
       if (!decl.value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return;
       const calls = decl.value.match(
-        /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,)+\)/gm
+        /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm
       );
 
       if (!calls || !calls.length) return;
@@ -229,6 +229,7 @@ const plugin = (settings: any = {}) => {
         }
         const params = intRes.value;
         delete params.help;
+
         try {
           const result = funcFn({
             params,

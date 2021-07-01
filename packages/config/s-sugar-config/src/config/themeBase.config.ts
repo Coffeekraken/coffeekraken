@@ -33,6 +33,20 @@ export default {
     '3-4': 3 / 4
   },
 
+  width: {
+    '0': '0',
+    '10': '10%',
+    '20': '20%',
+    '30': '30%',
+    '40': '40%',
+    '50': '50%',
+    '60': '60%',
+    '70': '70%',
+    '80': '80%',
+    '90': '90%',
+    '100': '100%'
+  },
+
   depth: {
     default: '[theme.depth.50]',
     0: '0',
@@ -1296,16 +1310,16 @@ export default {
       depth: '[theme.ui.default.depth]',
       defaultStyle: 'default'
     },
-    form: {
+    input: {
       padding: '[theme.ui.default.padding]',
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',
-      styles: ['default:default']
+      defaultStyle: 'default',
     },
     switch: {
-      borderRadius: '[theme.ui.form.borderRadius]',
-      transition: '[theme.ui.form.transition]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
       depth: '[theme.ui..depth]',
       defaultStyle: 'default'
     },

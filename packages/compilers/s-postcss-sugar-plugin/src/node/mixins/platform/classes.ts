@@ -39,7 +39,7 @@ export default function ({
   files.forEach(filename => {
     const name = filename.split('.')[0];
 
-    if (finalParams.platforms && finalParams.platforms.indexOf(name) === -1) return;
+    if (finalParams.platforms.length && finalParams.platforms.indexOf(name) === -1) return;
 
     vars.push(`
         

@@ -5,7 +5,7 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
   static definition = {
     styles: {
       type: 'String[]',
-      alias: 's'
+      default: ['default']
     }
   };
 }
@@ -25,18 +25,17 @@ export default function ({
   atRule: any;
   replaceWith: Function;
 }) {
-  const styles = __theme().config('ui.form.styles');
 
   const finalParams: IPostcssSugarPluginUiFormClassesParams = {
-    styles,
+    styles: ['default'],
     ...params
   };
 
   const vars: string[] = [
     `
-    @sugar.scope(bare) {
-      .s-form-input {
-        @sugar.ui.form.input()
+    @sugar.scope.bare {
+      .s-input {
+        @sugar.ui.input.text()
       }
     }
   `
@@ -44,25 +43,24 @@ export default function ({
 
   vars.push('@sugar.scope(lnf) {');
 
-  styles.forEach((style) => {
-    const isDefaultStyle = style.match(/:default$/);
-    style = style.split(':')[0];
+  finalParams.styles.forEach((style) => {
+    const isDefaultStyle = __theme().config('ui.input.defaultStyle') === style;
 
-    const styleCls = isDefaultStyle ? '' : `.s-form-input--${style}`;
-    const cls = `.s-form-input${styleCls}`;
+    const styleCls = isDefaultStyle ? '' : `.s-input--${style}`;
+    const cls = `.s-input${styleCls}`;
 
     vars.push(`/**
         * @name           ${cls}
-        * @namespace      sugar.css.ui.form
+        * @namespace      sugar.css.ui.input
         * @type           CssClass
         * 
-        * This class represent a(n) "<yellow>${style}</yellow>" form
+        * This class represent a(n) "<yellow>${style}</yellow>" input
         * 
         * @example        html
-        * <input class="${cls.trim()}" placeholder="Hello world" />
+        * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
       */`);
     vars.push(
-      [`${cls} {`, ` @sugar.ui.form.input($style: ${style});`, `}`].join('\n')
+      [`${cls} {`, ` @sugar.ui.input.text($style: ${style});`, `}`].join('\n')
     );
   });
 

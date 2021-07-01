@@ -119,10 +119,14 @@
       },
       async onMounted() {
 
+        
+
         await __whenInViewport(this.root);
 
         this.$copy = this.root.querySelector('s-clipboard-copy');
-        this.$templates = Array.from(this.root.querySelectorAll(`.${this.component.className('__slot')} template, .${this.component.className('__slot')} div`));
+        this.$templates = Array.from(this.$$(`code`));
+        console.log(this.$templates)
+
 
         this.$templates.forEach($template => {
           this.update({
@@ -132,9 +136,8 @@
               code: $template.innerHTML.trim()
             }]
           });
+          $template.remove();
         });
-
-        console.log(this.state);
 
         // active idx
         if (this.component.props.active) {

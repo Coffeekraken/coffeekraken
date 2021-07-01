@@ -162,7 +162,7 @@ export default {
     '/view/*': {
       handler: 'view'
     },
-    '/doc/*': {
+    '/doc/api/*': {
       handler: 'doc'
     },
     '/api/docmap': {

@@ -1,15 +1,10 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-import __SDocMap from '@coffeekraken/s-docmap';
 import __SDocblock from '@coffeekraken/s-docblock';
-import { SDocblockHtmlRenderer } from '@coffeekraken/s-docblock-renderer';
+import __SDocMap from '@coffeekraken/s-docmap';
+import __SPromise from '@coffeekraken/s-promise';
 import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __minimatch from 'minimatch';
-import __ogScraper from 'open-graph-scraper';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
-import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name                doc
@@ -37,16 +32,13 @@ export default function doc(req, res, settings = {}) {
 
     const docMap = new __SDocMap();
 
-    
-
-    const requestedNamespace = req.path.replace('/doc/', '').trim();
+    const requestedNamespace = req.params['0'].trim();
 
     const readPromise = docMap.read();
     pipe(readPromise);
     _docmapJson = await readPromise;
-    
 
-    if (!_docmapJson[requestedNamespace]) {
+    if (!_docmapJson.map[requestedNamespace]) {
       const html = await page404({
         ...(res.templateData || {}),
         title: `Documentation "${requestedNamespace}" not found`,
@@ -58,9 +50,8 @@ export default function doc(req, res, settings = {}) {
       return reject(html.value);
     }
 
-
     // generate the docblocks
-    const docblocks = new __SDocblock(_docmapJson[requestedNamespace].path, {}).toObject();
+    const docblocks = new __SDocblock(_docmapJson.map[requestedNamespace].path, {}).toObject();
 
     // protect
     if (!docblocks.length) {

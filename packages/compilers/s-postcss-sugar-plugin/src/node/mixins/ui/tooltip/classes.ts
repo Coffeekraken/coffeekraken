@@ -47,12 +47,16 @@ export default function ({
             position: relative;
             display: inline-block;
 
-            & > [class*="s-tooltip"] {
+            & > .s-tooltip {
                 opacity: 0;
                 pointer-events: none;
             }
 
-            &:hover > [class*="s-tooltip"] {
+            &:focus > .s-tooltip,
+            &:focus-within > .s-tooltip,
+            .s-tooltip:focus,
+            .s-tooltip:focus-within,
+            &:hover > .s-tooltip {
                 opacity: 1;
                 pointer-events: all;
             }
@@ -134,6 +138,64 @@ export default function ({
     vars.push(`
         .s-tooltip--top-right {
             @sugar.ui.tooltip($position: top-right, $scope: 'position');
+        }
+    `);
+
+    vars.push(`/**
+        * @name           s-tooltip--bottom
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class represent a simple bottom tooltip
+        * 
+        * @example        html
+        * <a class="s-tooltip-container">I'm a cool button</a>
+        * <div class="s-tooltip">Something cool</div>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    vars.push(`
+        .s-tooltip--bottom {
+            @sugar.ui.tooltip($position: bottom, $scope: 'position');
+        }
+    `);
+    vars.push(`/**
+        * @name           s-tooltip--bottom-left
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class represent a simple bottom-left tooltip
+        * 
+        * @example        html
+        * <a class="s-tooltip-container">I'm a cool button</a>
+        * <div class="s-tooltip">Something cool</div>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    vars.push(`
+        .s-tooltip--bottom-left {
+            @sugar.ui.tooltip($position: bottom-left, $scope: 'position');
+        }
+    `);
+    vars.push(`/**
+        * @name           s-tooltip--bottom-right
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class represent a simple bottom-right tooltip
+        * 
+        * @example        html
+        * <a class="s-tooltip-container">I'm a cool button</a>
+        * <div class="s-tooltip">Something cool</div>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    vars.push(`
+        .s-tooltip--bottom-right {
+            @sugar.ui.tooltip($position: bottom-right, $scope: 'position');
         }
     `);
 

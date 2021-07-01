@@ -21,7 +21,7 @@
     </script>
 </s-request>
 <s-filtrable-input id="{{ $id }}" filtrable="name,namespace,status" value="namespace" interactive not-selectable>
-    <input type="text" placeholder="Search doc ( cmd+p )" class="s-form-input s-depth:50" />
+    <input type="text" placeholder="Search doc ( cmd+p )" class="s-input s-depth:50" />
     <template id="loading">
         <p class="s-p s-pd:30"><i class="s-icon:search s-color:accent"></i>&nbsp;&nbsp;Searching. Please wait...</p>
     </template>

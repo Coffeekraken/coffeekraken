@@ -6,21 +6,22 @@ import sugar from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginUiFormInputInterface extends __SInterface {
   static definition = {
-    color: {
-      type: 'String',
-      default: 'accent'
-    },
     style: {
       type: 'String',
       values: ['default'],
-      default: 'default'
+      default: __theme().config('ui.input.defaultStyle')
+    },
+    scope: {
+      type: 'String',
+      values: ['bare','lnf','style'],
+      default: ['bare','lnf','style']
     }
   };
 }
 
 export interface IPostcssSugarPluginUiFormInputParams {
   style: 'default';
-  color: string;
+  scope: string[];
 }
 
 export { postcssSugarPluginUiFormInputInterface as interface };
@@ -35,19 +36,16 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiFormInputParams = {
-    color: 'accent',
     style: 'default',
+    scope: [],
     ...params
   };
 
   const vars: string[] = [];
 
   vars.push(`
-    @sugar.ui.base(form, ${finalParams.color});
-    
-    @sugar.state.hover {
-      border: 1px solid sugar.color(accent)
-    }
+    @sugar.ui.base(input);
+    color: sugar.color(ui, text) !important;
   `);
   
 

@@ -10,6 +10,7 @@ body {
     background: white;
     padding: sugar.space(40) 0;
     transition: padding ease-in-out .2s;
+    @sugar.depth(10);
 
     .scrolled & {
         padding: sugar.space(20) 0;
@@ -27,164 +28,40 @@ body {
     } */
 }
 
-#search-form {
-    width: 300px;
-    z-index: 99999;
+#header {
 
-    input {
-        @sugar.theme(dark);
+
+    .s-tooltip {
+        padding: sugar.space(10);
     }
 
-    input, s-filtrable-input {
-        width: 100%;
-        transition: all .1s ease-in-out;
-    }
+    .__subnav {
+        text-align: left;
+        @sugar.border.radius;
+        /* overflow: hidden; */
 
-    s-filtrable-input {
-        width: 300px;
-        right:0;
-        position: absolute;
-        transform: translateY(-50%);
-        transition: all .1s ease-in-out .2s;
+        & > * {
+            display: block;
+            padding: sugar.space(10) sugar.space(20);
+            /* @sugar.border.radius; */
+            background: sugar.color(ui, border);
 
-        .s-filtrable-input__list {
-            opacity: 0;
-            transition: all .2s ease-in-out 0s;
-            margin-bottom: sugar.space(70);
-            top: calc(100% + sugar.space(10)) !important;
-            background: white;
-            width: 100%;
-
-            @sugar.border.radius;
-            @sugar.scrollbar(accent, 2px);
+            &:first-child {
+                border-top-right-radius: sugar.border.radius();
+                border-top-left-radius: sugar.border.radius();
+            }
+            &:last-child {
+                border-bottom-right-radius: sugar.border.radius();
+                border-bottom-left-radius: sugar.border.radius();
+            }
         }
-        .s-filtrable-input__list-item {
-            /* @sugar.depth(20); */
-            border-radius: 0 !important;
-            padding: 0 !important;
-            /* background: sugar.color(main, background); */
-
-            /* &:nth-child(odd) {
-                background: sugar.color(ui, surface);
-            } */
-
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 60%;
-                height: 100%;
-                z-index: -1;
-                background: sugar.color(ui, surface);
-                clip-path: polygon(0 0%, 100% 0, calc(100% - 100px) 100%, 0 100%);
-            }
-
-            &:nth-child(odd) {
-               &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 70%;
-                width: 30%;
-                height: 100%;
-                z-index: -1;
-                background: sugar.color(ui, surface);
-                transform: scaleX(-1);
-                clip-path: polygon(0 0%, 100% 0, calc(100% - 100px) 100%, 0 100%);
-                } 
-            }
-
-            /* .__bg {
-                display: block;
-                width: 100%; height: 100%;
-                position: absolute;
-                top: 0; left: 0;
-                opacity: 0.1;
-                z-index: -1;
-
-                @sugar.gradient.linear(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
-
-                &:before {
-                    content:'';
-                    display: block;
-                    width: 100%; height: 100%;
-                    position: absolute;
-                    top: 0; left: 0;
-
-                    @sugar.gradient.linear(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
-                
-                }
-            } */
-
-            /* .__code {
-                position: relative;
-                
-                &:before {
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    @sugar.gradient (sugar.color(accent), sugar.color(accent, --saturate 20 --darken 10), $angle: 90);
-                    clip-path: polygon(60% 0%, 100% 0, 100% 100%, 40% 100%);
-                }
-            }
-            &:nth-child(odd) {
-
-                .__code {
-
-                    &:before {
-                        @sugar.gradient (sugar.color(complementary, gradientStart), sugar.color(complementary, --lighten 10), $angle: 90);
-                        clip-path: polygon(40% 0%, 100% 0, 100% 100%, 60% 100%);
-                    }
-                }
-            } */
-
+        & > a:hover {
+             background: sugar.color(accent);
+             transform: scale(1.1);
         }
-    }
-
-    &:before {
-        content: '';
-        display: block;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: sugar.color(main, text);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .1s ease-out .2s;
-        /* backdrop-filter: blur(20px); */
     }
 
 }
-#search-form:focus-within {
 
-    s-filtrable-input {
-        width: 100%;
-        transition: all .1s ease-in-out;
 
-        .s-filtrable-input__list {
-            width: 100%;
-            opacity: 1;
-            transition: all .2s ease-in-out .5s;
-
-            
-        }
-        .s-filtrable-input__list-item {
-            width: 100%;
-            /* margin-top: 3px; */
-        }
-    }       
-
-    &:before {
-        opacity: .9;
-        pointer-events: all;
-    }
-}
 

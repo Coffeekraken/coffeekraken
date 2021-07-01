@@ -50,5 +50,32 @@ export default function ({
         transform: translate(-50%);
    }`);
 
+   const widthObj = __theme().config('width');
+   Object.keys(widthObj).forEach(name => {
+
+      vars.push(`/**
+        * @name            s-width:${name}
+        * @namespace        sugar.css.width
+        * @type             CssClass
+        * 
+        * This class allows you to apply the "<yellow>${name}</yellow>" width to any HTMLElement
+        * 
+        * @example      html
+        * <div class="s-container">
+        *   <h1 class="s-typo:h1">Hello world</h1>
+        *   <div class="s-width:${name}">
+        *       <p class="s-typo:p">Something cool</p>
+        *   </div>
+        * </div>
+        * 
+        * @since        2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .s-width--${name} {
+            width: ${widthObj[name]};
+      }`);
+
+   });
+
   replaceWith(vars);
 }

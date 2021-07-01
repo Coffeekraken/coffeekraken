@@ -4,7 +4,7 @@
 
 @if ($block->see)
 
-    <a href="#related-{{ $block->name }}" title="Related resource(s)" class="s-bg:complementary s-display:block s-pd:30 s-border:radius s-mb:50">
+    <a href="#related-{{ $block->name }}" title="Related resource(s)" class="s-bg:complementary s-color:complementary-foreground s-display:block s-pd:30 s-border:radius s-mb:50">
         <i class="s-icon:box s-color:accent"></i>&nbsp;&nbsp;This {{ $block->type }} make use of related resource(s).
     <a>
 
@@ -27,6 +27,34 @@
     <p class="s-typo:p s-mb:50">{{ $block->description }}</p>
 @endif
 
+@if ($block->import)
+
+    <h4 id="import-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+        <i class="s-icon:import s-color:accent"></i>&nbsp;&nbsp;Import
+    </h4>
+
+    <s-code-example class="s-mb:50" default-style>
+        <code hidden lang="js">
+            {{ $block->import }}
+        </code>       
+    </s-code-example>
+@endif
+
+@if ($block->example)
+
+    <h4 id="example-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+        <i class="s-icon:example s-color:accent"></i>&nbsp;&nbsp;Example
+    </h4>
+
+    <s-code-example class="s-mb:50" default-style>
+        @foreach ($block->example as $example)
+            <code hidden lang="{{ $example->language }}">
+                {{  $example->code }}                     
+            </code>       
+        @endforeach
+    </s-code-example>
+@endif
+
 @if ($block->feature)
 
     <h4 id="features-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
@@ -40,62 +68,6 @@
             </li>
         @endforeach
     </ul>
-@endif
-
-@if ($block->todo)
-    <h4 id="todo-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
-        <i class="s-icon:tasks s-color:accent"></i>&nbsp;&nbsp;Todo
-    </h4>
-
-    <ul class="s-list:ul:accent s-mb:50">
-        @foreach ($block->todo as $todo)
-            @php
-                $todoColor = 'warning';
-                if ($todo->priority == 'low') {
-                    $todoColor = 'success';
-                }
-                if ($todo->priority == 'high') {
-                    $todoColor = 'error';
-                }
-            @endphp
-            <li class="s-typo:p">
-                <span class="s-tooltip-container">
-                    <i class="s-icon:todo s-color:{{ $todoColor }}"></i>
-                    <div class="s-tooltip:nowrap">
-                        {{ $todo->priority }}
-                    </div>
-                </span>&nbsp;&nbsp;{{ $todo->description }}
-            </li>
-        @endforeach
-    </ul>
-@endif
-
-@if ($block->import)
-
-    <h4 id="import-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
-        <i class="s-icon:import s-color:accent"></i>&nbsp;&nbsp;Import
-    </h4>
-
-    <s-code-example class="s-mb:50" default-style>
-        <template lang="js">
-            {{ $block->import }}
-        </template>       
-    </s-code-example>
-@endif
-
-@if ($block->example)
-
-    <h4 id="example-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
-        <i class="s-icon:example s-color:accent"></i>&nbsp;&nbsp;Example
-    </h4>
-
-    <s-code-example class="s-mb:50" default-style>
-        @foreach ($block->example as $example)
-            <template lang="{{ $example->language }}">
-                {{  $example->code }}                     
-            </template>       
-        @endforeach
-    </s-code-example>
 @endif
 
 @if ($block->param)
@@ -196,6 +168,34 @@
         </li>                                   
     @endforeach
     </ol>
+@endif
+
+@if ($block->todo)
+    <h4 id="todo-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+        <i class="s-icon:tasks s-color:accent"></i>&nbsp;&nbsp;Todo
+    </h4>
+
+    <ul class="s-list:ul:accent s-mb:50">
+        @foreach ($block->todo as $todo)
+            @php
+                $todoColor = 'warning';
+                if ($todo->priority == 'low') {
+                    $todoColor = 'success';
+                }
+                if ($todo->priority == 'high') {
+                    $todoColor = 'error';
+                }
+            @endphp
+            <li class="s-typo:p">
+                <span class="s-tooltip-container">
+                    <i class="s-icon:todo s-color:{{ $todoColor }}"></i>
+                    <div class="s-tooltip:nowrap">
+                        {{ $todo->priority }} priority
+                    </div>
+                </span>&nbsp;&nbsp;{{ $todo->description }}
+            </li>
+        @endforeach
+    </ul>
 @endif
 
 @if ($block->see)

@@ -1,6 +1,6 @@
 export default {
     routes: {
-        '/doc': {
+        '/doc/api': {
             handler: 'view',
             request: {
                 params: {

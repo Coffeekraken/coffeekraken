@@ -32,9 +32,9 @@ export default function ({
   if (__theme().config('border.radius')[radius] === undefined) return radius;
 
   const radiuses = radius.split(' ').map((s) => {
-    const radius = __theme().config(`border.radius.${s}`);
-    if (!radius) return radius;
-    return `var(--s-theme-border-radius-${s}, ${radius})`;
+    // const radius = __theme().config(`border.radius.${s}`);
+    // if (!radius) return radius;
+    return `var(--s-theme-border-radius-${s})`;
   });
 
   return radiuses.join(' ');

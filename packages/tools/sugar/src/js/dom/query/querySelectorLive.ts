@@ -19,6 +19,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @feature         Specify what you want to select and get notified each time a node like this appears in the dom
  * @feature         Promise based API
  * @feature         Callback support
+ * @feature         Monitor added nodes and existing nodes that have class and id attributes updated
  * 
  * @param	{String} 		selector 		The css selector that we are interested in
  * @param 	{Function} 		cb 				The function to call with the newly added node
@@ -67,6 +68,7 @@ function querySelectorLive(selector: string, cb: Function<HTMLElement> = null, s
         id: id,
         selector: selector,
         cb: cb,
+        lastMutationId: null,
         settings: settings
       }
     ];
@@ -75,17 +77,22 @@ function querySelectorLive(selector: string, cb: Function<HTMLElement> = null, s
       id: id,
       selector: selector,
       cb: cb,
+      lastMutationId: null,
       settings: settings
     });
   }
 
   return new __SPromise(({resolve, reject, emit}) => {
 
-    function pushNewNode(node, sel) {
+    function pushNewNode(node, sel, mutationId) {
       const objs = _selectors[sel];
       if (!objs) return;
 
       objs.forEach((obj) => {
+
+        // avoid calling multiple times sams callback for the same mutation process
+        if (obj.lastMutationId && obj.lastMutationId === mutationId) return;
+
         if (obj.settings.once) {
           if (!node._querySelectorLive) {
             node._querySelectorLive = {};
@@ -106,8 +113,12 @@ function querySelectorLive(selector: string, cb: Function<HTMLElement> = null, s
     // listen for updates in document
     if (!_observer) {
       _observer = new MutationObserver((mutations) => {
+
+        const mutationId = `mutation-${uniqid()}`;
+
         mutations.forEach((mutation) => {
-          if (mutation.addedNodes) {
+
+          if (mutation.addedNodes && mutation.addedNodes.length) {
             [].forEach.call(mutation.addedNodes, (node) => {
               // get all the selectors registered
               const selectors = Object.keys(_selectors);
@@ -115,29 +126,40 @@ function querySelectorLive(selector: string, cb: Function<HTMLElement> = null, s
               // loop on each selectors
               selectors.forEach((sel) => {
                 if (matches(node, sel)) {
-                  pushNewNode(node, sel);
+                  pushNewNode(node, sel, mutationId);
                 }
               });
               if (!node.querySelectorAll) return;
               selectors.forEach((sel) => {
                 const nestedNodes = node.querySelectorAll(sel);
                 [].forEach.call(nestedNodes, (nestedNode) => {
-                  pushNewNode(nestedNode, sel);
+                  pushNewNode(nestedNode, sel, mutationId);
                 });
               });
+            });
+          } else if (mutation.attributeName) {
+            // get all the selectors registered
+            const selectors = Object.keys(_selectors);
+            // loop on each selectors
+            selectors.forEach((sel) => {
+              if (matches(mutation.target, sel)) {
+                pushNewNode(mutation.target, sel, mutationId);
+              }
             });
           }
         });
       });
       _observer.observe(settings.rootNode, {
         childList: true,
-        subtree: true
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class','id']
       });
     }
 
     // first search
     [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
-      pushNewNode(node, selector);
+      pushNewNode(node, selector, 'init');
     });
   });
 }

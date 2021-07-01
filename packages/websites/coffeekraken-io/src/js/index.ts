@@ -39,10 +39,8 @@ __SComponentUtils.setDefaultProps('s-code-example', {
     }
 });
 
-__querySelectorLive('[class*="s-"][class*=":"]', ($elm) => {
-
+__querySelectorLive('[class*=":"]', ($elm) => {
    $elm.getAttribute('class').split(' ').forEach((cls) => {
-  
     if (!cls.includes(':')) return;
     const parts = cls.split(":");
     const startCls = parts[0];
@@ -53,5 +51,7 @@ __querySelectorLive('[class*="s-"][class*=":"]', ($elm) => {
     });
     $elm.classList.remove(cls);
   });
+}, {
+  once: false
 });
 

@@ -58,7 +58,6 @@ export interface ISDocMapBuildParams {
 
 export interface ISDocMapReadParams {
   input: string;
-  collect: string[];
   path: string;
 }
 
@@ -85,7 +84,6 @@ export interface ISDocMapEntries {
 }
 
 export interface ISDocMapObj {
-  collected: Record<string, any>;
   map: ISDocMapEntries;
 }
 
@@ -163,11 +161,8 @@ class SDocMap extends __SClass implements ISDocMap {
 
       const extendedPackages: string[] = [];
       const finalDocmapJson = {
-        collected: {},
         map: {}
       };
-
-      const collectedHashes = {};
 
       function loadJson(packageNameOrPath, currentPath) {
         if (extendedPackages.indexOf(packageNameOrPath) !== -1) return;
@@ -205,30 +200,6 @@ class SDocMap extends __SClass implements ISDocMap {
             const obj = docmapJson.map[namespace];
             obj.path = __path.resolve(extendsRootPath, obj.relPath);
             docmapJson.map[namespace] = obj;
-
-            // extract the "collect" fields
-            (finalParams.collect ?? []).forEach(collect => {
-              if (obj[collect] === undefined) return;
-
-              // make sure we have a stack for hashes of this collect
-              if (!collectedHashes[collect]) collectedHashes[collect] = [];
-              if (!finalDocmapJson.collected[collect]) finalDocmapJson.collected[collect] = [];
-
-              const value = Array.isArray(obj[collect]) ? obj[collect] : [obj[collect]];
-              value.forEach(v => {
-                if (typeof v === 'string') {
-                  if (finalDocmapJson.collected[collect].indexOf(v) === -1) finalDocmapJson.collected[collect].push(v);
-                } else {
-                  // generate hash
-                  const hash = __md5.encrypt(v);
-                  if (collectedHashes[collect].indexOf(hash) !== -1) return;
-                  finalDocmapJson.collected[collect].push(v);
-                  collectedHashes[collect].push(hash);
-                  // throw new Error(`<red>[SDocmap.read]</red> Sorry but collecting fields that contains other that string values is not supported for now...`);
-                }
-              })
-            });
-
           });
 
           finalDocmapJson.map = {

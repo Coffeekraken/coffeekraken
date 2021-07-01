@@ -222,7 +222,7 @@ export default function ({
                 right: auto;
                 left: 50%;
                 top: calc(100% + sugar.theme(ui.tooltip.arrowSize));
-                transform: translateY(-50%);
+                transform: translateX(-50%);
 
                 &:after {
                     bottom: 100%;
@@ -241,6 +241,17 @@ export default function ({
                 right: auto;
                 left: 0;
                 top: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                transform: translate(0,0);
+
+                &:after {
+                    bottom: 100%;
+                    top: auto;
+                    left: 50%;
+                    right: auto;
+                    margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(180deg);
+                }
             `);
           break;
           case 'bottom-right':
@@ -249,6 +260,17 @@ export default function ({
                 left: auto;
                 right: 0;
                 top: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                transform: translate(0,0);
+
+                &:after {
+                    bottom: 100%;
+                    top: auto;
+                    left: 50%;
+                    right: auto;
+                    margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(180deg);
+                }
             `);
           break;
           // case 'left':

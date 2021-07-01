@@ -44,7 +44,7 @@ export default function ({ root, sharedData }) {
             try {
                 __fs.rmdirSync(sharedData.iconsInputDir, { recursive: true});
             } catch(e) {}
-            console.log(`<cyan>[fonticons]</cyan> No need to regenerate icons font`);            
+            // console.log(`<cyan>[fonticons]</cyan> No need to regenerate icons font`);            
             return;
         }
     }
@@ -65,6 +65,8 @@ export default function ({ root, sharedData }) {
 
     // read folder icons
     const iconsFilenames = __fs.readdirSync(sharedData.iconsInputDir);
+
+    if (!iconsFilenames.length) return;
 
     // generate the scoped icons selector
     const iconsSelectorsArray: string[] = [];

@@ -1,20 +1,55 @@
 #doc-list {
 
+    [class^="s-platform"] {
+        font-size: sugar.font.size(50);
+        margin-left: sugar.space(10);
+    }
+
+    .__nav form {
+        position: sticky;
+        top: 98px;
+        max-height: calc(100vh - 98px);
+        overflow: auto;
+        @sugar.scrollbar(accent, 2px);
+    }
 
     .__list-item {
         position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 100%; height: sugar.space(50);
+            background: sugar.color(ui, surface);
+        }
 
         &:before {
             content: '';
             display: block;
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
+            right: 0;
+            width: 30%;
             height: 100%;
             z-index: -1;
             background: sugar.color(ui, surface);
-            clip-path: polygon(0 0%, 100% 0, 100% 100%, 400px 100%);
+            clip-path: polygon(0 0%, 100% 0, 100% 100%, 200px 100%);
+        }
+
+        &:nth-child(odd) {
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 30%;
+                height: 100%;
+                z-index: -1;
+                /* transform: translateX(calc(-100% - 400px)); */
+                background: sugar.color(ui, surface);
+                clip-path: polygon(-0 0%, 100% 0, calc(100% - 200px) 100%, 0% 100%);
+                }
         }
     }
 

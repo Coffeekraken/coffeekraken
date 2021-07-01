@@ -5,34 +5,55 @@
         
             <form name="doc">
 
+                <fieldset class="__nav-search s-mb:30 s-pr:20 s-pt:20">
+                    <input type="text" class="s-input s-width:100" name="search" placeholder="Search doc" value="{state.saved.search}" onkeyup="{_search}" />
+                </fieldset>
+
                 <fieldset class="__nav-platform s-mb:30">
-                    <legend class="s-typo:h5 s-mb:10">
+                    <legend class="s-typo:h6 s-mb:10">
                         Platform
                     </legend>
                     <dl class="s-list s-bg:even">
-                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (platform, idx) in state.docmap.collected.platform }">
-                            <label class="s-flex-item:grow" for="platform-{ platform.name }">
-                                { platform.name }
+                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (platform, idx) in availablePlatforms }">
+                            <label class="s-flex-item:grow" for="platform-{ platform }">
+                                { platform }
                             </label>
-                            <label class="s-switch:accent" for="platform-{ platform.name }">
-                                <input name="platform-{ platform.name }" type="checkbox" id="platform-{ platform.name }" onchange="{() => _togglePlatform(platform)}" checked="{ state.saved.platforms.indexOf(platform.name) !== -1 }">
+                            <label class="s-switch:accent" for="platform-{ platform }">
+                                <input name="platform-{ platform }" type="checkbox" id="platform-{ platform }" onchange="{() => _togglePlatform(platform)}" checked="{ state.saved.platforms.indexOf(platform) !== -1 }">
                                 <div class="s-switch-handler"></div>
                             </label>
                         </dt>
                     </dl>
                 </fieldset>
 
-                <fieldset class="__nav-type">
-                    <legend class="s-typo:h5 s-mb:10">
+                <fieldset class="__nav-type s-mb:30">
+                    <legend class="s-typo:h6 s-mb:10">
                         Type
                     </legend>
-                    <dl class="s-list">
-                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (type, idx) in state.docmap.collected.type }">
+                    <dl class="s-list s-bg:even">
+                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (type, idx) in availableTypes }">
                             <label class="s-flex-item:grow" for="type-{ type }">
                                 { type }
                             </label>
                             <label class="s-switch:accent" for="type-{ type }">
-                                <input name="type-{ type }" type="checkbox" id="type-{ type }">
+                                <input name="type-{ type }" type="checkbox" id="type-{ type }" onchange="{() => _toggleType(type)}" checked="{ state.saved.types.indexOf(type) !== -1 }">
+                                <div class="s-switch-handler"></div>
+                            </label>
+                        </dt>
+                    </dl>
+                </fieldset>
+
+                <fieldset class="__nav-status s-mb:30">
+                    <legend class="s-typo:h6 s-mb:10">
+                        Status
+                    </legend>
+                    <dl class="s-list s-bg:even">
+                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (status, idx) in availableStatuses }">
+                            <label class="s-flex-item:grow" for="status-{ status }">
+                                { status }
+                            </label>
+                            <label class="s-switch:accent" for="status-{ status }">
+                                <input name="status-{ status }" type="checkbox" id="status-{ status }" onchange="{() => _toggleStatus(status)}" checked="{ state.saved.statuses.indexOf(status) !== -1 }">
                                 <div class="s-switch-handler"></div>
                             </label>
                         </dt>
@@ -45,32 +66,32 @@
         </nav>
         <section class="__list">
             <div class="__list-item" if="{ idx <= state.maxItemsToDisplay }" each="{ (item, idx) in Object.values(state.filteredItems) }">
-                <!-- <div class="__bg"></div> -->
-                <div class="s-pd:30">
+                <div class="s-pd:50">
                     <div class="">
                         <div class="s-flex">
                             <h4 class="s-font:title s-font:60 s-color:accent s-mb:10 s-flex-item:grow">
-                                { item.name }
+                                <a href="/doc/api/{_striptags(item.namespace)}.{_striptags(item.name)}">
+                                    { item.name }
+                                </a>
                             </h4>
                             <div>
                                 <div class="s-font:40">
-                                    <span class="s-badge:pill:{ item.status }">{ item.status }</span>
+                                    <span class="s-font:30">Since <span class="s-color:complementary">{ item.since }</span></span>
                                     &nbsp;
                                     <i class="s-platform:{platform.name} s-font:50" each="{ platform in item.platform}"></i>
+                                    &nbsp;
+                                    <span class="s-badge:pill:{ item.status }">{ item.status }</span>
                                 </div>
                             </div>
                         </div>
                         <h5 class="s-color:complementary s-font:40 s-mb:30">{ item.namespace }</h5>
                         <p class="s-typo:p s-mb:30">{ item.description }</p>
-                        <!-- <a href="/doc/{_striptags(namespace)}.{_striptags(name)}" class="s-btn:accent">
-                            Check out more
-                        </a> -->
                     </div>
                     <div if="{ item.example && item.example.length }" class="__code">
                         <s-code-example default-style style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink">
-                            <div lang="{ item.example[0].language }">
+                            <code lang="{ item.example[0].language }">
                                 { item.example[0].code }                    
-                            </div>
+                            </code>
                         </s-code-example>
                     </div>
                 </div>
@@ -91,6 +112,8 @@
         import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
         import __striptags from '@coffeekraken/sugar/shared/html/striptags';
         import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
+        import __miniSearch from 'minisearch';
+        import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
 
         class SDocNavComponentInterface extends __SInterface {
             static definition = {
@@ -104,8 +127,10 @@
                 filteredItems: {},
                 docmap: {},
                 saved: {
+                    search: undefined,
                     platforms: [],
-                    types: []
+                    types: [],
+                    statuses: []
                 }
             },
             _striptags: __striptags,
@@ -117,6 +142,7 @@
                     url: '/api/docmap',
                     method: 'GET'
                 });
+
                 const docmapJson = (await request.send()).data;
                 this.update({
                     docmap: docmapJson
@@ -124,6 +150,12 @@
 
                 // restore state
                 this._restoreState();
+
+                // query string
+                const queryStringObj = __queryStringToObject(document.location.search);
+                if (queryStringObj.search) {
+                    this.state.saved.search = queryStringObj.search;
+                }
 
                 // filter items
                 this._filterItems();
@@ -136,47 +168,170 @@
                 });
 
             },
-            get availableTypes() {
-
-                const availableTypes = {};
-                Object.keys(this.state.docmap).forEach(namespace => {
-
+            get availablePlatforms() {
+                if (!this.state.docmap.map) return [];
+                const availablePlatforms = [];
+                Object.keys(this.state.docmap.map).forEach(namespace => {
+                    const docmapObj = this.state.docmap.map[namespace];
+                    if (!docmapObj.platform) return;
+                    docmapObj.platform.forEach(platform => {
+                        if (availablePlatforms.indexOf(platform.name) === -1) availablePlatforms.push(platform.name);
+                    });
                 });
-
+                return availablePlatforms;
             },
+            get availableTypes() {
+                if (!this.state.docmap.map) return [];
+                const availableTypes = [];
+                Object.keys(this.state.docmap.map).forEach(namespace => {
+                    const docmapObj = this.state.docmap.map[namespace];
+                    if (!docmapObj.type) return;
+                    if (availableTypes.indexOf(docmapObj.type) === -1) availableTypes.push(docmapObj.type);
+                });
+                return availableTypes;
+            },
+            get availableStatuses() {
+                if (!this.state.docmap.map) return [];
+                const availableStatus = [];
+                Object.keys(this.state.docmap.map).forEach(namespace => {
+                    const docmapObj = this.state.docmap.map[namespace];
+                    if (!docmapObj.status) return;
+                    if (availableStatus.indexOf(docmapObj.status) === -1) availableStatus.push(docmapObj.status);
+                });
+                return availableStatus;
+            },
+            
             _filterItems() {
 
-                const filteredItems = {};
-                Object.keys(this.state.docmap.map).forEach(namespace => {
+                let items = Object.values(this.state.docmap.map).map(i => {
+                    i.id = i.name;
+                    return i;
+                });
 
-                    const docmapObj = this.state.docmap.map[namespace];
+                if (this.state.saved.search) {
+                    let miniSearch = new __miniSearch({
+                        fields: ['name', 'namespace', 'description', 'since', 'type', 'status'],
+                        storeFields: Object.keys(items[0])
+                    });
+                    miniSearch.addAll(items);
+                    items = miniSearch.search(this.state.saved.search);
+                }
+
+
+                items = items.filter(docmapObj => {
 
                     if (this.state.saved.platforms.length) {
-                        if (!docmapObj.platform) return;
+                        if (!docmapObj.platform) return false;
                         const samePlatforms = __sameItems(docmapObj.platform.map(l => l.name), this.state.saved.platforms);
-                        if (!samePlatforms.length) return;
+                        if (!samePlatforms.length) return false;
                     }
 
-                    // add theitem in the filtered stack
-                    filteredItems[namespace] = docmapObj;
+                    if (this.state.saved.types.length) {
+                        if (this.state.saved.types.indexOf(docmapObj.type) === -1) return false;
+                    }
+
+                    if (this.state.saved.statuses.length) {
+                        if (this.state.saved.statuses.indexOf(docmapObj.status) === -1) return false;
+                    }
+
+                    return true;
 
                 });
 
                 this.update({
                     maxItemsToDisplay: this.maxItems,
-                    filteredItems
+                    filteredItems: items
                 });
 
             },
+            _searchTimeout: 0,
+            _search(e) {
+
+                clearTimeout(this._searchTimeout);
+                this._searchTimeout = setTimeout(() => {
+
+                    this.update({
+                        saved: {
+                            ...this.state.saved,
+                            search: e.target.value
+                        }
+                    });
+
+                    // filter items
+                    this._filterItems();
+
+                    // save state
+                    this._saveState();
+
+                }, 300);
+            },
             _togglePlatform(platform) {
-                const idx = this.state.saved.platforms.indexOf(platform.name);
+                const idx = this.state.saved.platforms.indexOf(platform);
                 if (idx !== -1) {
                     this.state.saved.platforms.splice(idx, 1);
                     this.update({
-                        platforms: this.state.saved.platforms
+                        saved: {
+                            ...this.state.saved,
+                            platforms: this.state.saved.platforms
+                        }
                     });
                 } else {
-                    this.state.saved.platforms.push(platform.name);
+                    this.update({
+                        saved: {
+                            ...this.state.saved,
+                            platforms: [...this.state.saved.platforms, platform]
+                        }
+                    });
+                }
+
+                // filter items
+                this._filterItems();
+
+                // save state
+                this._saveState();
+            },
+            _toggleType(type) {
+                const idx = this.state.saved.types.indexOf(type);
+                if (idx !== -1) {
+                    this.state.saved.types.splice(idx, 1);
+                    this.update({
+                        saved: {
+                            ...this.state.saved,
+                            types: this.state.saved.types
+                        }
+                    });
+                } else {
+                    this.update({
+                        saved: {
+                            ...this.state.saved,
+                            types: [...this.state.saved.types, type]
+                        }
+                    });
+                }
+
+                // filter items
+                this._filterItems();
+
+                // save state
+                this._saveState();
+            },
+            _toggleStatus(status) {
+                const idx = this.state.saved.statuses.indexOf(status);
+                if (idx !== -1) {
+                    this.state.saved.statuses.splice(idx, 1);
+                    this.update({
+                        saved: {
+                            ...this.state.saved,
+                            statuses: this.state.saved.statuses,
+                        }
+                    });
+                } else {
+                    this.update({
+                        saved: {
+                            ...this.state.saved,
+                            statuses: [...this.state.saved.statuses, status],
+                        }
+                    });
                 }
 
                 // filter items

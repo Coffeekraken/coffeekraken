@@ -8,6 +8,8 @@ export default {
         foreground: '--lighten 50',
         background: '--darken 40',
         border: '--lighten 45',
+        dark: '--darken 45',
+        light: '--lighten 45',
         gradientStart: '--lighten 0',
         gradientEnd: '--darken 20',
         ':hover': {
@@ -16,7 +18,9 @@ export default {
           surface: '--lighten 49',
           foreground: '--lighten 50',
           background: '--darken 40',
-          border: '--lighten 40'
+          border: '--lighten 40',
+          dark: '--darken 45',
+          light: '--lighten 45',
         },
         ':focus': {
           text: '--darken 0',
@@ -24,7 +28,9 @@ export default {
           surface: '--lighten 49',
           foreground: '--lighten 50',
           background: '--darken 40',
-          border: '--lighten 40'
+          border: '--lighten 40',
+          dark: '--darken 45',
+          light: '--lighten 45',
         },
         ':active': {
           text: '--darken 0',
@@ -32,7 +38,9 @@ export default {
           surface: '--lighten 49',
           foreground: '--lighten 50',
           background: '--darken 40',
-          border: '--lighten 40'
+          border: '--lighten 40',
+          dark: '--darken 45',
+          light: '--lighten 45',
         },
         ':highlight': {
           text: '--darken 0',
@@ -40,7 +48,9 @@ export default {
           surface: '--lighten 49',
           foreground: '--lighten 50',
           background: '--darken 40',
-          border: '--lighten 40'
+          border: '--lighten 40',
+          dark: '--darken 45',
+          light: '--lighten 45',
         }
   }
 }

@@ -68,6 +68,11 @@ export default function ({
                 border-style: solid;
                 border-color: sugar.color(ui, surface) transparent transparent transparent;
             }
+            &:before {
+              content: '';
+              position: absolute;
+              background: rgba(0,0,0,0);
+            }
         }
       `)
   }
@@ -86,6 +91,12 @@ export default function ({
                     margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
                     border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
                 }
+                &:before {
+                  width: 100%;
+                  height: sugar.theme(ui.tooltip.arrowSize);
+                  top: 100%;
+                  left: 0;
+                }
             `);
           break;
           case 'top-left':
@@ -99,6 +110,12 @@ export default function ({
                     left: 50%;
                     margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
                     border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                }
+                &:before {
+                  width: 100%;
+                  height: sugar.theme(ui.tooltip.arrowSize);
+                  top: 100%;
+                  left: 0;
                 }
             `);
           break;
@@ -114,6 +131,12 @@ export default function ({
                     left: 50%;
                     margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
                     border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                }
+                &:before {
+                  width: 100%;
+                  height: sugar.theme(ui.tooltip.arrowSize);
+                  top: 100%;
+                  left: 0;
                 }
             `);
           break;
@@ -233,6 +256,13 @@ export default function ({
                     border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
                     transform: rotate(180deg);
                 }
+                &:before {
+                  width: 100%;
+                  height: sugar.theme(ui.tooltip.arrowSize);
+                  bottom: 100%;
+                  top: auto;
+                  left: 0;
+                }
             `);
           break;
           case 'bottom-left':
@@ -252,6 +282,13 @@ export default function ({
                     border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
                     transform: rotate(180deg);
                 }
+                &:before {
+                  width: 100%;
+                  height: sugar.theme(ui.tooltip.arrowSize);
+                  bottom: 100%;
+                  top: auto;
+                  left: 0;
+                }
             `);
           break;
           case 'bottom-right':
@@ -270,6 +307,13 @@ export default function ({
                     margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
                     border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
                     transform: rotate(180deg);
+                }
+                &:before {
+                  width: 100%;
+                  height: sugar.theme(ui.tooltip.arrowSize);
+                  bottom: 100%;
+                  top: auto;
+                  left: 0;
                 }
             `);
           break;

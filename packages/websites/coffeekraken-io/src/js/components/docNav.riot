@@ -89,9 +89,9 @@
                     </div>
                     <div if="{ item.example && item.example.length }" class="__code">
                         <s-code-example default-style style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink">
-                            <code lang="{ item.example[0].language }">
+                            <textarea lang="{ item.example[0].language }">
                                 { item.example[0].code }                    
-                            </code>
+                            </textarea>
                         </s-code-example>
                     </div>
                 </div>
@@ -134,7 +134,17 @@
                 }
             },
             _striptags: __striptags,
+            // shouldUpdate() {
+            //     return this._shouldUpdate;
+            // },
+            // onBeforeUpdate() {
+
+            // },
+            // _shouldUpdate: false,
             async onBeforeMount() {
+                // setTimeout(() => {
+                //     this._shouldUpdate = true;
+                // }, 200);
                 this.component = new __SComponentUtils(this.root, this.props, {
                     interface: SDocNavComponentInterface
                 });

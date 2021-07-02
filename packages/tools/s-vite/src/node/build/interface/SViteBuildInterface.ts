@@ -34,6 +34,12 @@ class SViteBuildInterface extends __SInterface {
       default: 'module',
       alias: 't'
     },
+    format: {
+      type: 'Array<String>',
+      values: ['es','umd','cjs','iife'],
+      default: ['es','umd'],
+      alias: 'f'
+    },
     target: {
       type: 'String',
       values: ['modules', 'esnext', 'es2015', 'es2016', 'es2020'],
@@ -67,6 +73,16 @@ class SViteBuildInterface extends __SInterface {
       type: 'Boolean',
       default: false,
       alias: 'c'
+    },
+    minify: {
+      type: 'Boolean',
+      default: false,
+      alias: 'm'
+    },
+    analyze: {
+      type: 'Boolean',
+      default: false,
+      alias: 'a'
     }
   };
 }

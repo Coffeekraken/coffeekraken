@@ -8,6 +8,10 @@ import __nesting from 'postcss-nesting';
 import __propertyLookup from 'postcss-property-lookup';
 
 export default {
+
+  input: '[config.storage.srcCssDir]/index.css',
+  output: '[config.storage.distCssDir]/index.css',
+
   plugins: [
     __sPostcssSugarPlugin(),
     __nested(),

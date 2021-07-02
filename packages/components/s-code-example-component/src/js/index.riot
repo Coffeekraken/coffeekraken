@@ -102,6 +102,8 @@
     import 'prismjs/components/prism-css';
     import 'prismjs/components/prism-markup';
     import 'prismjs/components/prism-bash';
+    import 'prismjs/components/prism-php';
+    import 'prismjs/components/prism-markup-templating';
     import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
     import __SComponentUtils from '@coffeekraken/s-component-utils';
     import __SClipboardCopyComponent from '@coffeekraken/s-clipboard-copy-component';
@@ -119,14 +121,10 @@
       },
       async onMounted() {
 
-        
-
         await __whenInViewport(this.root);
 
-        this.$copy = this.root.querySelector('s-clipboard-copy');
-        this.$templates = Array.from(this.$$(`code`));
-        console.log(this.$templates)
-
+        this.$copy = this.$('s-clipboard-copy');
+        this.$templates = Array.from(this.$$('template,textarea'));
 
         this.$templates.forEach($template => {
           this.update({

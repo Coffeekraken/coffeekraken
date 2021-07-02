@@ -1,0 +1,4 @@
+import SBuilder from './SBuilder';
+export * from './SBuilder';
+export default SBuilder;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxRQUFRLE1BQU0sWUFBWSxDQUFDO0FBRWxDLGNBQWMsWUFBWSxDQUFDO0FBRTNCLGVBQWUsUUFBUSxDQUFDIn0=

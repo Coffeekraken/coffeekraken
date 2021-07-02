@@ -11,7 +11,7 @@ import __isJson from '../is/json';
 import __isObject from '../is/object';
 import __deepMerge from '../object/deepMerge';
 import __mapToObj from '../map/mapToObject';
-import { highlight as __cliHighlight } from 'cli-highlight';
+// import { highlight as __cliHighlight } from 'cli-highlight';
 import { decycle } from 'json-cyclic';
 
 // import __prettyFormat from 'pretty-format';
@@ -140,10 +140,10 @@ function fn(value, settings = {}) {
       .replace(/"([^"]+)":/g, '$1:')
       .replace(/\uFFFF/g, '\\"');
     if (settings.highlight) {
-      prettyString = __cliHighlight(prettyString, {
-        language: 'js',
-        theme: settings.theme
-      });
+      // prettyString = __cliHighlight(prettyString, {
+      //   language: 'js',
+      //   theme: settings.theme
+      // });
     }
     return prettyString;
   }

@@ -1,0 +1,4 @@
+import SPostcssBuilder from './SPostcssBuilder';
+export * from './SPostcssBuilder';
+export default SPostcssBuilder;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxlQUFlLE1BQU0sbUJBQW1CLENBQUM7QUFDaEQsY0FBYyxtQkFBbUIsQ0FBQztBQUNsQyxlQUFlLGVBQWUsQ0FBQyJ9

@@ -1,3 +1,10 @@
 {
-    "extends": ["@coffeekraken/sugar"]
+    "extends": [
+    ],
+    "generated": {
+        "extends": [
+            "@coffeekraken/sugar"
+        ],
+        "map": {}
+    }
 }

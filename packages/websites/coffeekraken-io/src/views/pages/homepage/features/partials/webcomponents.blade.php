@@ -18,22 +18,22 @@
 
         <div>
             <s-code-example>
-                <code hidden lang="js">
+                <template lang="js">
 // import webcomponents
 import '@coffeekraken/s-filtrable-input';
 import '@coffeekraken/s-clipboard-copy';
 import '@coffeekraken/s-code-example';
 // etc...
-                </code>
+                </template>
             </s-code-example>
 
             <s-code-example class="s-mt:50 s-mr:-50 s-ml:50">
-                <code hidden lang="html">
+                <template lang="html">
 <p id="paragraph">
 Something cool...
 </p>
 <s-clipboard-copy target="#paragraph"></s-clipboard-copy>
-                </code>
+                </template>
             </s-code-example>
 
         </div>

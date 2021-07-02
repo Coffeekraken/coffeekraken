@@ -30,9 +30,8 @@ import __minimatch from 'minimatch';
  * - relPath: The relative file path from the cwd
  * - dirPath: The path to the folder where is the file
  * - extension: The file extension
- * - size: The file size in megabytes
- * - bytes: The file siz in bytes
- * - exists:Bytestrue if the file exists on the disk, false otherwise
+ * - stats: An object with file stats like size in mb, kb, etc...
+ * - exists: true if the file exists on the disk, false otherwise
  *
  * @param         {String}          filepath        The file path you want to init
  * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
@@ -293,12 +292,26 @@ class SFile extends __SEventEmitter implements ISFile {
    *
    * Store the full file path
    * Some tokens can be used in the file path like:
-   * - %tmpDir: return the absolute tmp package directory path
-   * - %localDir: return the absolute .local package directory path
-   * - %cacheDir: return the absolute cache package directory path
-   * - %rootDir: return the absolute package root directory path
-   * - %srcDir: return the absolute source package directory path
-   * - %distDir: return the absolute dist package directory path
+   * - %packageTmpDir: return the absolute path to the package tmp directory
+   * - %packageLocalDir: return the absolute path to the package .local directory
+   * - %packageCacheDir: return the absolute path to the package cache directory
+   * - %packageRootDir: return the absolute path to the package root directory
+   * 
+   * - %srcRootDir: return the absolute path to the source root directory
+   * - %srcJsDir: return the absolute path to the source js directory
+   * - %srcCssDir: return the absolute path to the source css directory
+   * - %srcIconsDir: return the absolute path to the source icons directory
+   * - %srcImgDir: return the absolute path to the source images directory
+   * - %srcNodeDir: return the absolute path to the source node directory
+   * - %srcViewsDir: return the absolute path to the source views directory
+   * 
+   * - %distRootDir: return the absolute path to the dist root directory
+   * - %distJsDir: return the absolute path to the dist js directory
+   * - %distCssDir: return the absolute path to the dist css directory
+   * - %distIconsDir: return the absolute path to the dist icons directory
+   * - %distImgDir: return the absolute path to the dist images directory
+   * - %distNodeDir: return the absolute path to the dist node directory
+   * - %distViewsDir: return the absolute path to the dist views directory
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -33,7 +33,7 @@
         <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:100">
             <div>
                 <s-code-example class="s-ml:-50">
-                    <code hidden lang="bash">
+                    <template lang="bash">
 # Get our ip address
 sugar network.ip
 # Kill a process on the port 8080
@@ -42,7 +42,7 @@ sugar kill.port 8080
 sugar frontstack.dev
 # And a lot more to discover...
 sugar --help
-                    </code>
+                    </template>
                 </s-code-example>
             </div>
             <div>
@@ -70,12 +70,12 @@ sugar --help
             </div>
             <div>
                 <s-code-example class="s-mr:-100">
-                    <code hidden lang="js">
+                    <template lang="js">
 import querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 querySelectorLive('.my-cool-component', ($elm) => {
 // do something with your element...
 });
-                    </code>
+                    </template>
                 </s-code-example>
             </div>
         </div>
@@ -83,12 +83,12 @@ querySelectorLive('.my-cool-component', ($elm) => {
         <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:100">
             <div>
                 <s-code-example class="s-ml:-50">
-                    <code hidden lang="js">
+                    <template lang="js">
 import base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import md5 from '@coffeekraken/sugar/shared/crypt/md5';
 base64('Hello world'); // SGVsbG8gd29ybGQ=
 md5('Hello world'); // 3e25960a79dbc69b674cd4ec67a72c62
-                    </code>
+                    </template>
                 </s-code-example>
             </div>
             <div>
@@ -114,12 +114,12 @@ md5('Hello world'); // 3e25960a79dbc69b674cd4ec67a72c62
             </div>
             <div>
                 <s-code-example class="s-mr:-50">
-                    <code hidden lang="js">
+                    <template lang="js">
 import isEmail from '@coffeekraken/sugar/shared/is/email';
 import isColor from '@coffeekraken/sugar/shared/is/color';
 isEmail('hello@world.com'); // true
 isColor('rgba(10,20,30,1)'); // true
-                    </code>
+                    </template>
                 </s-code-example>
             </div>
         </div>

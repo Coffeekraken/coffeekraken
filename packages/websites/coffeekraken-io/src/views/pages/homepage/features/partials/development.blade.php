@@ -23,7 +23,7 @@
         <div class="s-py:100 s-rhythm-vertical">
             <img src="/src/img/features-development-logos.svg" class="s-mx:auto s-display:block" />
             <s-code-example class="s-mt:50 @desktop s-mr:-100">
-                <code hidden lang="bash">
+                <template lang="bash">
 # Install sugar globally
 npm i @coffeekraken/sugar -g
 # Init your project using the default "recipe"
@@ -31,7 +31,7 @@ sugar init my-cool-project
 # Launch your development environment
 sugar start
 # ...start working... I know I know...
-                </code>
+                </template>
             </s-code-example>
 
         </div>
@@ -42,14 +42,14 @@ sugar start
         <div>
 
             <s-code-example class="s-mb:30 @desktop s-ml:-50">
-                <code hidden lang="bach">
+                <template lang="bach">
 # Init a Sugar step by step process
 sugar
 # Init a default template based website project
 sugar init --recipe default
 # Init a RiotJs based webcomponent
 sugar init --recipe riotComponent
-                </code>
+                </template>
             </s-code-example>
 
             <ul class="__recipes-grid">

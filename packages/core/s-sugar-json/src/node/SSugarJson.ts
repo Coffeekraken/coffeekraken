@@ -203,12 +203,14 @@ export default class SSugarJson extends __SClass {
     };
     sugarJsonPaths.forEach((path) => {
 
+      const jsonStr = __fs.readFileSync(path, 'utf8').toString();
+      const json = JSON.parse(jsonStr);
+
       // read the file
-      const json = require(path);
-      const packageJson = require(`${path.replace(
+      const packageJson = JSON.parse(__fs.readFileSync(path.replace(
         'sugar.json',
         'package.json'
-      )}`);
+      )).toString());
 
       const resultJson = this.sanitizeJson({
         metas: {
@@ -236,8 +238,6 @@ export default class SSugarJson extends __SClass {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   current(): ISSugarJsonFile {
-    console.log(`${__packageRoot()}/sugar.json`);
-
     try {
       return this.sanitizeJson(require(`${__packageRoot()}/sugar.json`));
     } catch(e) {
@@ -340,12 +340,9 @@ export default class SSugarJson extends __SClass {
 
     // search for "sugar.json" files
     const files = __glob.sync(globs, {}).filter((path) => {
-      try {
-        require(`${path.replace('sugar.json', 'package.json')}`);
-        return true;
-      } catch (e) {
-        return false;
-      }
+      const packageJsonPath = path.replace(/sugar\.json$/, 'package.json');
+      if (__fs.existsSync(packageJsonPath)) return true;
+      return false
     });
 
     return __unique(files.map(f => __fs.realpathSync(f)).filter(f => {

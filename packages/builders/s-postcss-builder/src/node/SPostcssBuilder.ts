@@ -1,5 +1,13 @@
 import __SBuilder from '@coffeekraken/s-builder';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SPromise from '@coffeekraken/s-promise';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __postcss from 'postcss';
+import __SFile from '@coffeekraken/s-file';
+import __fs from 'fs';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+
+import { PurgeCSS } from 'purgecss';
 
 /**
  * @name                SPostcssBuilder
@@ -47,6 +55,7 @@ export interface ISPostcssBuilderCtorSettings {
 export interface ISPostcssBuilderBuildParams {
     input: string;
     output: string;
+    purge: boolean;
 }
 
 export default class SPostcssBuilder extends __SBuilder {
@@ -76,7 +85,9 @@ export default class SPostcssBuilder extends __SBuilder {
      */
     constructor(settings?: Partial<ISPostcssBuilderCtorSettings>) {
         super(__deepMerge({
-            postcssBuilder: {}
+            postcssBuilder: {
+                ...__SSugarConfig.get('postcssBuilder')
+            }
         }, settings ?? {}));
     }
 
@@ -89,7 +100,74 @@ export default class SPostcssBuilder extends __SBuilder {
      * It will be called by the SBuilder class with the final params
      * for the build
      * 
-     * @param       {ISPost}
+     * @param       {Partial<ISPostcssBuilderBuildParams>}          [params={}]         Some params for your build
+     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the build
+     * 
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
+    _build(params?: Partial<ISPostcssBuilderBuildParams>): Promise<any> {
+        return new __SPromise(async ({resolve, reject, emit}) => {
+
+            let finalCss;
+
+            // handle input
+            let src = params.input,
+                from = undefined;
+            try {
+                src = __fs.readFileSync(params.input, 'utf8').toString();
+                from = params.input;
+            } catch(e) {}
+
+            // resolve plugins paths
+            const plugins = this.postcssBuilderSettings.postcss.plugins.map((p) => {
+                if (typeof p === 'string') {
+                    const plugin = require(p);
+                    const fn = plugin.default ?? plugin;
+                    const options = this.postcssBuilderSettings.postcss.pluginsOptions[p] ?? {};
+                    return fn(options);
+                }
+                return p;
+            });
+
+            // build postcss
+            const result = __postcss(plugins).process(src, {
+                from
+            });
+            if (!result.css) {
+                throw new Error(`<red>[${this.constructor.name}.build]</red> Something went wrong...`);
+            }
+
+            finalCss = result.css;
+
+            // purge if needed
+            if (params.purge) {
+                const purgeCssResult = await new PurgeCSS().purge({
+                    ...this.postcssBuilderSettings.purgeCssOptions,
+                    css: [{
+                        raw: finalCss
+                    }]
+                });
+                finalCss = purgeCssResult[0].css;
+            }
+
+            if (params.output) {
+                __writeFileSync(params.output, finalCss);
+                const file = new __SFile(params.output);
+                emit('log', {
+                    value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`
+                });
+            }
+
+            resolve({
+                css: finalCss,
+                map: null
+            });
+        }, {
+            metas: {
+                id: this.constructor.name
+            }
+        });
+    }
 
 }

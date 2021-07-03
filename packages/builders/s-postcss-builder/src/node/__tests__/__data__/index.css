@@ -1,0 +1,16 @@
+body {
+    background: red;
+    color: sugar.color(accent);
+}
+
+div {
+    color: red;
+}
+
+.app {
+    content: 'plop';
+}
+
+.hello {
+    content: 'coco';
+}

@@ -1,11 +1,13 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __SClass from '@coffeekraken/s-class';
+import __SPromise from '@coffeekraken/s-promise';
+import __SDuration from '@coffeekraken/s-duration';
 
 /**
  * @name                SBuilder
  * @namespace           node
  * @type                Class
- * @extends             SEventEmitter
+ * @extends             SClass
  * @status              wip
  *
  * This represent the main builder class that has to be extended for builders like typescript, scss, etc...
@@ -42,17 +44,7 @@ export interface ISBuilder {
   build(params: any, settings?: any);
 }
 
-class SBuilder extends __SEventEmitter implements ISBuilder {
-  /**
-   * @name        initialParams
-   * @type        Object
-   *
-   * Store the initial params object
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  initialParams: any;
+class SBuilder extends __SClass implements ISBuilder {
 
   /**
    * @name        builderSettings
@@ -78,7 +70,7 @@ class SBuilder extends __SEventEmitter implements ISBuilder {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(initialParams: any, settings: ISBuilderCtorSettings) {
+  constructor(settings: ISBuilderCtorSettings) {
     super(
       __deepMerge(
         {
@@ -89,7 +81,6 @@ class SBuilder extends __SEventEmitter implements ISBuilder {
         settings || {}
       )
     );
-    this.initialParams = Object.assign({}, initialParams);
   }
 
   /**
@@ -106,7 +97,10 @@ class SBuilder extends __SEventEmitter implements ISBuilder {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   build(params: any = {}, settings: any = {}) {
+
     settings = __deepMerge(this.builderSettings, settings);
+
+    const duration = new __SDuration();
 
     // @weird:ts-compilation-issue
     let finalParams = params;
@@ -116,9 +110,19 @@ class SBuilder extends __SEventEmitter implements ISBuilder {
 
     // @ts-ignore
     const promise = this._build(finalParams, settings);
-    // @weird:ts-compilation-issue
-    (<any>this).pipe(promise);
+
+    promise.emit('log', {
+      value: `<yellow>[build]</yellow> Start ${this.constructor.name} build`
+    });
+
+    promise.then(() => {
+      promise.emit('log', {
+        value: `<green>[success]</green> Build ${this.constructor.name} finished <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`
+      });
+    });
+
     return promise;
+
   }
 }
 

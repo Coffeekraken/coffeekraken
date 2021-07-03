@@ -7,7 +7,9 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-event-emitter": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0"
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/s-duration": "^2.0.0"
   }
 }

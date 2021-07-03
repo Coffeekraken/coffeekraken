@@ -9,12 +9,19 @@
   "dependencies": {
     "@coffeekraken/s-builder": "^2.0.0",
     "@coffeekraken/s-event-emitter": "^2.0.0",
+    "@coffeekraken/s-file": "^2.0.0",
     "@coffeekraken/s-interface": "^2.0.0",
+    "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-sugar-config": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
     "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
     "postcss-atroot": "^0.2.3",
     "postcss-extend-rule": "^3.0.0",
     "postcss-nested": "^5.0.5",
-    "postcss-property-lookup": "^3.0.0"
+    "postcss-property-lookup": "^3.0.0",
+    "purgecss": "^4.0.3"
   }
 }

@@ -224,8 +224,9 @@ export default class SConfig {
     // register the default resolver "[config...]"
     this._settings.resolvers.unshift({
       match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
-      resolve(match, config) {
-        return __get(config, match.replace('[config.', '').replace(']', ''));
+      resolve(match, config) { 
+        const value = __get(config, match.replace('[config.', '').replace(']', ''));
+        return value;
       }
     });
 
@@ -402,7 +403,7 @@ export default class SConfig {
 
 
     const prop = path.slice(-1)[0];
-    if (prop && prop.match(/.*@.*/) && originalValue) {
+    if (prop && prop.match(/.*@.*/) && !prop.includes('/') && originalValue) {
       const parts = prop.split('@');
       const env = parts[1];
       const p = parts[0];
@@ -446,15 +447,13 @@ export default class SConfig {
       originalValue = __deepMerge(originalValue, afterObj);
 
       // delete originalValue['...'];
-      Object.keys(originalValue).forEach((key) => {
-        try {
-          originalValue[key] = this._resolveInternalReferences(
-            originalValue[key],
-            config,
-            resolverObj,
-            [...path, key]
-          );
-        } catch (e) {}
+      Object.keys(originalValue).forEach((key) => {          
+        originalValue[key] = this._resolveInternalReferences(
+          originalValue[key],
+          config,
+          resolverObj,
+          [...path, key]
+        );
       });
     } else if (Array.isArray(originalValue)) {
       originalValue = originalValue.map((v) => {
@@ -464,8 +463,13 @@ export default class SConfig {
       const matches = originalValue.match(resolverObj.match);
 
       if (matches && matches.length) {
-        if (matches.length === 1 && originalValue === matches[0]) {
-          const resolvedValue = resolverObj.resolve(matches[0], config, path);
+
+        if (matches.length === 1) {
+
+          let resolvedValue = resolverObj.resolve(matches[0], config, path);
+          if (originalValue.length != matches[0].length) {
+            resolvedValue = originalValue.replace(matches[0], resolvedValue);
+          }
 
           originalValue = this._resolveInternalReferences(
             resolvedValue,

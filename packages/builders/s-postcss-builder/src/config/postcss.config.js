@@ -1,20 +1,22 @@
-import __sPostcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin';
-import __autoprefixer from 'autoprefixer';
-import __atRoot from 'postcss-atroot';
-import __extendRule from 'postcss-extend-rule';
+// import __sPostcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin';
+// import __autoprefixer from 'autoprefixer';
+// import __atRoot from 'postcss-atroot';
+// import __extendRule from 'postcss-extend-rule';
+// import __purgePostcssPlugin from '@fullhuman/postcss-purgecss';
 // @ts-ignore
-import __nested from 'postcss-nested';
-import __propertyLookup from 'postcss-property-lookup';
+// import __nested from 'postcss-nested';
+// import __nesting from 'postcss-nesting';
+// import __propertyLookup from 'postcss-property-lookup';
 export default {
-    input: '[config.storage.srcCssDir]/index.css',
-    output: '[config.storage.distCssDir]/index.css',
     plugins: [
-        __sPostcssSugarPlugin(),
-        __nested(),
-        __atRoot(),
-        __extendRule(),
-        __propertyLookup(),
-        __autoprefixer()
-    ]
+        '@coffeekraken/s-postcss-sugar-plugin',
+        'postcss-nested',
+        'postcss-atroot',
+        'postcss-extend-rule',
+        'postcss-property-lookup',
+        'autoprefixer',
+        // '@fullhuman/postcss-purgecss'
+    ],
+    pluginsOptions: {}
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9zdGNzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwb3N0Y3NzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLHFCQUFxQixNQUFNLHNDQUFzQyxDQUFDO0FBQ3pFLE9BQU8sY0FBYyxNQUFNLGNBQWMsQ0FBQztBQUMxQyxPQUFPLFFBQVEsTUFBTSxnQkFBZ0IsQ0FBQztBQUN0QyxPQUFPLFlBQVksTUFBTSxxQkFBcUIsQ0FBQztBQUMvQyxhQUFhO0FBQ2IsT0FBTyxRQUFRLE1BQU0sZ0JBQWdCLENBQUM7QUFFdEMsT0FBTyxnQkFBZ0IsTUFBTSx5QkFBeUIsQ0FBQztBQUV2RCxlQUFlO0lBRWIsS0FBSyxFQUFFLHNDQUFzQztJQUM3QyxNQUFNLEVBQUUsdUNBQXVDO0lBRS9DLE9BQU8sRUFBRTtRQUNQLHFCQUFxQixFQUFFO1FBQ3ZCLFFBQVEsRUFBRTtRQUNWLFFBQVEsRUFBRTtRQUNWLFlBQVksRUFBRTtRQUNkLGdCQUFnQixFQUFFO1FBQ2xCLGNBQWMsRUFBRTtLQUNqQjtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9zdGNzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwb3N0Y3NzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw0RUFBNEU7QUFDNUUsNkNBQTZDO0FBQzdDLHlDQUF5QztBQUN6QyxrREFBa0Q7QUFDbEQsa0VBQWtFO0FBQ2xFLGFBQWE7QUFDYix5Q0FBeUM7QUFDekMsMkNBQTJDO0FBQzNDLDBEQUEwRDtBQUUxRCxlQUFlO0lBSWIsT0FBTyxFQUFFO1FBQ1Asc0NBQXNDO1FBQ3RDLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIscUJBQXFCO1FBQ3JCLHlCQUF5QjtRQUN6QixjQUFjO1FBQ2QsZ0NBQWdDO0tBQ2pDO0lBQ0QsY0FBYyxFQUFFLEVBQUU7Q0FDbkIsQ0FBQyJ9

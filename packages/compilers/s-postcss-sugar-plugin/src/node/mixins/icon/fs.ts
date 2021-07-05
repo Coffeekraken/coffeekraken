@@ -54,7 +54,7 @@ export default function ({
   if (!sharedData.iconsInputDir) {
     sharedData.iconsInputDir = tmpDirPath;
     try {
-      __fs.rmdirSync(tmpDirPath, { recursive: true });
+      __fs.rmSync(tmpDirPath, { recursive: true });
     } catch (e) {}
   }
 

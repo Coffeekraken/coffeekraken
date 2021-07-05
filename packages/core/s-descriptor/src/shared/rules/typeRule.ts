@@ -23,6 +23,7 @@ export interface IParams {
 }
 export interface IRuleSettings {}
 const ruleObj: ISDescriptorRule = {
+  prority: 10,
   name: 'Type',
   id: 'type',
   settings: {},

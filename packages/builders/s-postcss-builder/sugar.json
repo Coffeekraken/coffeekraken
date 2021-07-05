@@ -6,5 +6,18 @@
         "path": "./src/config"
       }
     ]
-  }
+  },
+  "cli": [
+    {
+      "stack": "postcss",
+      "description": "Postcss related actions",
+      "defaultAction": "build",
+      "actions": {
+        "build": {
+          "description": "Build your css using postcss and some built-in tools like the sugar plugin.",
+          "process": "./src/cli/build.cli.js"
+        }
+      }
+    }
+  ]
 }

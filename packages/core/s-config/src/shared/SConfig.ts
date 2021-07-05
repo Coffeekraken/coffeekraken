@@ -327,27 +327,41 @@ export default class SConfig {
       );
     }
 
-    config = __deepMap(config, ({value}) => {
+    __deepMap(config, ({value, prop, path, object}) => {
       if (value === undefined) {
         return -1;
       }
+
+      // @environment handling
+      if (prop && prop.match(/.*@.*/) && !prop.includes('/')) {
+        const parts = prop.split('@');
+        const env = parts[1];
+        const p = parts[0];
+
+        if (__SEnv.is(env)) {
+          object[p] = value;
+          return -1;
+        }
+      }
+
       return value;
     });
 
     if (config instanceof Promise) {
-      return new Promise((resolve) => {
-        config.then((c) => {
-          if (Object.keys(this._adapters[adapter].config).length === 0 && c) {
-            this._adapters[adapter].config = c;
-            this._adapters[adapter].config.$ = {
-              hash: __md5.encrypt(c),
-              loadedAt: Date.now()
-            };
-            return resolve(c);
-          }
-          return resolve(this._adapters[adapter].config);
-        });
-      });
+      throw new Error('Promise based SConfig is not already implemented...');
+      // return new Promise((resolve) => {
+      //   config.then((c) => {
+      //     if (Object.keys(this._adapters[adapter].config).length === 0 && c) {
+      //       this._adapters[adapter].config = c;
+      //       this._adapters[adapter].config.$ = {
+      //         hash: __md5.encrypt(c),
+      //         loadedAt: Date.now()
+      //       };
+      //       return resolve(c);
+      //     }
+      //     return resolve(this._adapters[adapter].config);
+      //   });
+      // });
     } else if (__isPlainObject(config)) {
       this._adapters[adapter].config = config;
       this._adapters[adapter].config.$ = {
@@ -402,22 +416,7 @@ export default class SConfig {
   _resolveInternalReferences(originalValue, config, resolverObj, path = []) {
 
 
-    const prop = path.slice(-1)[0];
-    if (prop && prop.match(/.*@.*/) && !prop.includes('/') && originalValue) {
-      const parts = prop.split('@');
-      const env = parts[1];
-      const p = parts[0];
-
-      if (__SEnv.is(env)) {
-        __set(config, `${path.slice(0,-1).join('.')}.${p}`, this._resolveInternalReferences(
-          originalValue,
-          config,
-          resolverObj,
-          path.slice(0,-1)
-        ));
-        originalValue = undefined;        
-      }
-    } else if (__isPlainObject(originalValue)) {
+    if (__isPlainObject(originalValue)) {
       const afterObj = {};
       let isAfter = false;
       Object.keys(originalValue).forEach((key) => {
@@ -463,13 +462,8 @@ export default class SConfig {
       const matches = originalValue.match(resolverObj.match);
 
       if (matches && matches.length) {
-
-        if (matches.length === 1) {
-
-          let resolvedValue = resolverObj.resolve(matches[0], config, path);
-          if (originalValue.length != matches[0].length) {
-            resolvedValue = originalValue.replace(matches[0], resolvedValue);
-          }
+        if (matches.length === 1 && originalValue === matches[0]) {
+          const resolvedValue = resolverObj.resolve(matches[0], config, path);
 
           originalValue = this._resolveInternalReferences(
             resolvedValue,
@@ -543,7 +537,7 @@ export default class SConfig {
     }
 
     if (Object.keys(this._adapters[adapter].config).length === 0) {
-      this.load();
+     this.load();
     }
 
     const originalValue = __get(this._adapters[adapter].config, path);

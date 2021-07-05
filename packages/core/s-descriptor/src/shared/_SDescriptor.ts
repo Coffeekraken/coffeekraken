@@ -10,6 +10,7 @@ import __get from '@coffeekraken/sugar/shared/object/get';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __sortObject from '@coffeekraken/sugar/shared/object/sort';
 
 /**
  * @name                SDescriptor
@@ -51,7 +52,6 @@ export interface ISDescriptorSettings {
   throw: boolean;
   complete: boolean;
   rules: ISDescriptorRules;
-  verbose: boolean;
 }
 
 export interface ISDescriptorDescription {
@@ -205,9 +205,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
             type: 'Object',
             arrayAsValue: false,
             throwOnMissingRule: false,
-            throw: false,
-            complete: true,
-            verbose: false
+            complete: true
           }
         },
         settings ?? {}
@@ -343,7 +341,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
       );
     }
 
-    if (this._descriptorResult.hasIssues() && set.throw) {
+    if (this._descriptorResult.hasIssues()) {
       throw new Error(this._descriptorResult.toString());
     }
 
@@ -375,12 +373,22 @@ class SDescriptor extends __SClass implements ISDescriptor {
       if (value === undefined || value === null) return value;
     }
 
+    let rulesNamesInOrder = Object.keys(rulesObj).filter(l => l !== 'default');
+    rulesNamesInOrder = rulesNamesInOrder.sort((a, b) => {
+      const objA = (<any>this).constructor._registeredRules[a];
+      const objB = (<any>this).constructor._registeredRules[b];
+      if (!objA) return -1;
+      if (!objB) return 1;
+      if (objA.priority === undefined) objA.priority = 9999999999;
+      if (objB.priority === undefined) objB.priority = 9999999999;
+      return objA.priotity - objB.priority;
+    }).reverse();
+
     let resultValue = value;
 
     // loop on the rules object
-    Object.keys(rulesObj).forEach((ruleName) => {
-      // do not take care of "default" rule name
-      if (ruleName === 'default') return;
+    rulesNamesInOrder.forEach((ruleName) => {
+
       const ruleValue = rulesObj[ruleName];
       // make sure we have this rule registered
       if ((<any>this).constructor._registeredRules[ruleName] === undefined) {
@@ -452,10 +460,11 @@ class SDescriptor extends __SClass implements ISDescriptor {
       params.type &&
       params.type.toLowerCase() === 'boolean' &&
       ruleResult === true
-    )
+    ) {
       return true;
-    if (ruleResult === true) return value;
-    else if (ruleResult instanceof Error) {
+    }
+
+    if (ruleResult instanceof Error) {
       const obj: ISDescriptorResultRule = {
         __error: ruleResult,
         __ruleObj: ruleObj,
@@ -463,7 +472,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
       };
       // @ts-ignore
       this._descriptorResult.add(obj);
-      return value;
+      throw new Error(this._descriptorResult.toString());
     } else {
       return ruleResult;
     }

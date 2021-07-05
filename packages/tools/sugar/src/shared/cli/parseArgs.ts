@@ -218,5 +218,10 @@ export default function parseArgs(string, settings = {}) {
     }
   });
 
+  Object.keys(argsObj).forEach(key => {
+    const value = argsObj[key];
+    if (value === undefined) delete argsObj[key];
+  });
+
   return argsObj;
 }

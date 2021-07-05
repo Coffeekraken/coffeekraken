@@ -110,6 +110,7 @@ class SSugarCli {
       process.exit();
     }
     const cliObj = this._availableCli[`${this._stack}.${this._action ?? '_default'}`];
+
     // @ts-ignore
     if (cliObj.processPath) {
       const processFn = require(cliObj.processPath).default;

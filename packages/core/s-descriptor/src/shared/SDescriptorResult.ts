@@ -264,7 +264,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
     return __parseHtml(`
 ${headerArray.join('\n')}
 ${issuesArray.join('\n')}
-${this._descriptorSettings.verbose ? settingsArray.join('\n') : ''}
+${settingsArray.join('\n')}
     `).trim();
   }
 }

@@ -22,6 +22,7 @@ export interface IRuleSettings {
 }
 
 const ruleObj: ISDescriptorRule = {
+  priority: 1,
   name: 'Required',
   id: 'required',
   settings: {
@@ -39,10 +40,10 @@ const ruleObj: ISDescriptorRule = {
   ): ISDescriptorResultObj | true => {
     if (params.value === true) {
       if (ruleSettings.when.indexOf(value) !== -1) {
-        return false;
+        return new Error('This property is <yellow>required</yellow>');
       }
     }
-    return true;
+    return value;
   }
 };
 

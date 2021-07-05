@@ -1,12 +1,14 @@
 import __SBuilder from '@coffeekraken/s-builder';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SFile from '@coffeekraken/s-file';
+import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __postcss from 'postcss';
-import __SFile from '@coffeekraken/s-file';
-import __fs from 'fs';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-
+import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __csso from 'csso';
+import __fs from 'fs';
+import __postcss from 'postcss';
 import { PurgeCSS } from 'purgecss';
 
 /**
@@ -24,7 +26,8 @@ import { PurgeCSS } from 'purgecss';
  * @feature            Support Sugar postcss plugin out of the box
  * @feature            Support all postcss configurations
  * @feature            Allow minification of output
- * @feature            Threeshaking capabilities to compact your bundles as low as possible
+ * @feature            Threeshaking capabilities to compact your bundles as low as possible using PurgeCSS.
+ * @feature            Support sugar "pleasant" css syntax in your views
  * 
  * @param           {ISPostcssBuilderCtorSettings}          [settings={}]           Some settings to configure your builder instance
  * 
@@ -45,7 +48,8 @@ import { PurgeCSS } from 'purgecss';
  */
 
 export interface ISPostcssBuilderSettings {
-
+    postcss: any;
+    purgecss: any;
 }
 
 export interface ISPostcssBuilderCtorSettings {
@@ -56,6 +60,8 @@ export interface ISPostcssBuilderBuildParams {
     input: string;
     output: string;
     purge: boolean;
+    minify: boolean;
+    prod: boolean;
 }
 
 export default class SPostcssBuilder extends __SBuilder {
@@ -111,6 +117,12 @@ export default class SPostcssBuilder extends __SBuilder {
 
             let finalCss;
 
+            // handle prod shortcut
+            if (params.prod) {
+                params.minify = true;
+                params.purge = true;
+            }
+
             // handle input
             let src = params.input,
                 from = undefined;
@@ -142,13 +154,50 @@ export default class SPostcssBuilder extends __SBuilder {
 
             // purge if needed
             if (params.purge) {
+                emit('log', {
+                    value: `<green>[build]</green> Purging unused css`
+                });
+
+                // get content to use
+                const content: any[] = [];
+                const globs: string[] = [];
+
+                this.postcssBuilderSettings.purgecss.content.forEach(contentObj => {
+                    if (typeof contentObj === 'string') {
+                        globs.push(contentObj);
+                    } else {
+                        if (contentObj.raw) {
+                            contentObj.raw = __expandPleasantCssClassnames(contentObj.raw);
+                        }
+                        content.push(contentObj);
+                    }
+                });
+                const files = __SGlob.resolve(globs);
+                files.forEach(file => {
+                    content.push({
+                        extension: file.extension,
+                        raw: __expandPleasantCssClassnames(file.content)
+                    });
+                });
+
                 const purgeCssResult = await new PurgeCSS().purge({
-                    ...this.postcssBuilderSettings.purgeCssOptions,
+                    ...this.postcssBuilderSettings.purgecss,
+                    content,
                     css: [{
                         raw: finalCss
                     }]
                 });
                 finalCss = purgeCssResult[0].css;
+            }
+
+            // minify
+            if (params.minify) {
+                emit('log', {
+                    value: `<green>[build]</green> Minifying css`
+                });
+                finalCss = __csso.minify(finalCss, {
+                    restructure: true
+                }).css;
             }
 
             if (params.output) {
@@ -160,6 +209,8 @@ export default class SPostcssBuilder extends __SBuilder {
             }
 
             resolve({
+                inputFile: __SFile.new(from),
+                outputFile: params.output ? __SFile.new(params.output) : undefined,
                 css: finalCss,
                 map: null
             });

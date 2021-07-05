@@ -392,6 +392,7 @@ export default class SInterface extends __SClass implements ISInterface {
         }
       });
 
+
       // remplacing aliases
       Object.keys(objectOnWhichToApplyInterface).forEach((argName) => {
         for (let i = 0; i < Object.keys(this._definition).length; i++) {

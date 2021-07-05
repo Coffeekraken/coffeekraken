@@ -36,12 +36,9 @@ const ruleObj: ISDescriptorRule = {
     settings: ISDescriptorSettings
   ): ISDescriptorResultObj | true => {
     if (value > params.value) {
-      return {
-        max: params.value,
-        received: value
-      };
+      return new Error(`<red>[minRule]</red> Sorry but the passed value "<yellow>${value}</yellow>" must be lower or equal at <cyan>${params.value}</cyan>`)
     }
-    return true;
+    return value;
   }
 };
 

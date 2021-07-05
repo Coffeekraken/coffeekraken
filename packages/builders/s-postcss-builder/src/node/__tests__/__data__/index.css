@@ -14,3 +14,7 @@ div {
 .hello {
     content: 'coco';
 }
+
+.s-something--cool {
+    content: 'HELLO';
+}

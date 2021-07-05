@@ -7,6 +7,7 @@ class postcssSugarPluginIconClassesInterface extends __SInterface {
         type: 'Array<String>',
         splitChars: [',',' ','\n']
       },
+      default: [],
       required: true
     }
   };

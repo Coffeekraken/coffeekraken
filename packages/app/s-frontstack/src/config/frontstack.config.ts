@@ -65,39 +65,18 @@ export default {
         }
       }
     },
-    css: {
+    postcss: {
       id: 'css',
-      title: 'PostCSS compile action',
-      description: 'Compile css using the amazing PostCSS package',
-      process: 'sugard postcss.compile -w',
+      title: 'PostCSS build action',
+      description: 'Build css using the amazing PostCSS package',
+      process: 'sugard postcss.build -w',
       settings: {
         processManager: {
           restart: true
         }
       }
     },
-    js: {
-      id: 'js',
-      title: 'Javascript compile action',
-      description: 'Allow to compile .js files easily',
-      process: 'sugard js.compile -w',
-      settings: {
-        processManager: {
-          restart: true
-        }
-      }
-    },
-    ts: {
-      id: 'ts',
-      title: 'Typescript compile action',
-      description: 'Allow to compile .ts files easily',
-      process: 'sugard ts.compile -w',
-      settings: {
-        processManager: {
-          restart: true
-        }
-      }
-    },
+    
     vite: {
       id: 'vite',
       title: 'Vite development stack',

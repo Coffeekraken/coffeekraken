@@ -6,7 +6,7 @@
 // import "@coffeekraken/s-opengraph-viewer-component";
 // import "@coffeekraken/s-handlebars-component";
 // import __SComponentUtils from "@coffeekraken/s-component-utils";
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
 // import './components/docNav.riot';
 
@@ -39,19 +39,4 @@ import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorL
 //     }
 // });
 
-__querySelectorLive('[class*=":"]', ($elm) => {
-   $elm.getAttribute('class').split(' ').forEach((cls) => {
-    if (!cls.includes(':')) return;
-    const parts = cls.split(":");
-    const startCls = parts[0];
-    $elm.classList.add(startCls);
-    parts.forEach((p, i) => {
-      if (i <= 0) return;
-      $elm.classList.add(`${startCls}--${p}`);
-    });
-    $elm.classList.remove(cls);
-  });
-}, {
-  once: false
-});
-
+__expandPleasantCssClassnamesLive();

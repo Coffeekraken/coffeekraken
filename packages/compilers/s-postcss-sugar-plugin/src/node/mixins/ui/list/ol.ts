@@ -31,30 +31,28 @@ export default function ({
   const iconSelector = '&:before';
 
   vars.push(`
-    @sugar.scope.lnf {
-        position: relative;
-        counter-reset: list-ol; 
+      position: relative;
+      counter-reset: list-ol; 
 
-        & > li,
-        & > dt {
-          display: block !important;
-          padding-left: 1.5em;
-          margin-bottom: 0.5em;
-        
-          &:before {  
-            counter-increment: list-ol;    
-            content: counter(list-ol);
-            font-size: 1em;
-            display: inline-block;
-            position: absolute;
-            left: 0.5em;
-            transform: translateX(-50%);
-            color: sugar.color(ui);
-            text-align: right;
-            width: 2ch;
-          }          
-        }
-    }
+      & > li,
+      & > dt {
+        display: block !important;
+        padding-left: 1.5em;
+        margin-bottom: 0.5em;
+      
+        &:before {  
+          counter-increment: list-ol;    
+          content: counter(list-ol);
+          font-size: 1em;
+          display: inline-block;
+          position: absolute;
+          left: 0.5em;
+          transform: translateX(-50%);
+          color: sugar.color(ui);
+          text-align: right;
+          width: 2ch;
+        }          
+      }
   `);
 
     replaceWith(vars);

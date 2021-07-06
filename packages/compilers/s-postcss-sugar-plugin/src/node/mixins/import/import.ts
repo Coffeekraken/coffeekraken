@@ -36,11 +36,11 @@ export { postcssSugarPluginImportInterface as interface };
 export default function ({
   params,
   atRule,
-  replaceWith
+  postcss
 }: {
   params: IPostcssSugarPluginImportParams;
   atRule: any;
-  replaceWith: Function;
+  postcss: any;
 }) {
   const finalParams: IPostcssSugarPluginImportParams = {
     ...params
@@ -51,17 +51,16 @@ export default function ({
       ? __path.dirname(atRule.source.input.file)
       : __dirname;
 
-
-  const vars: string[] = [];
-
   // resolve globs even if it's a simple path
   const files = __SGlob.resolve(finalParams.path, {
     cwd: dirName
   });
 
   files.forEach(file => {
-    vars.push(`@import '${file.relPath}';`);
+    const newRule = postcss.parse(`@import '${file.relPath}';`);
+    newRule.source.input.file = atRule.source.input.file;    
+    atRule.parent.insertAfter(atRule, newRule);
   });
 
-  replaceWith(vars);
+  atRule.remove();
 }

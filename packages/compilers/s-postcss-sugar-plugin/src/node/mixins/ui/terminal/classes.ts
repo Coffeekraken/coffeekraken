@@ -23,8 +23,6 @@ export default function ({
 
   const vars: string[] = [
     `
-    @sugar.scope(bare) {
-
         /**
          * @name            s-terminal
          * @namespace       sugar.css.ui.terminal
@@ -43,8 +41,6 @@ export default function ({
         .s-terminal {
             @sugar.ui.terminal;
         }
-    }
-
   `
   ];
 

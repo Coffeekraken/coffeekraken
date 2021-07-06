@@ -40,40 +40,38 @@ export default function ({
   }
 
   vars.push(`
-    @sugar.scope.lnf {
-        position: relative;
+      position: relative;
 
-        & > li,
-        & > dt {
-          display: block !important;
-          padding-left: 1em;
-          margin-bottom: 0.5em;
-        
-          ${iconSelector} {  
-            ${!finalParams.icon ? `
-                content: '●';
-                margin-top: 0.25em;
-                font-size: 0.7em;
-            `: `
-                margin-top: 0.25em;
-                font-size: 0.8em;
-            `}    
-            display: inline-block;
-            position: absolute;
-            left: 0.5em;
-            transform: translateX(-50%);
-            color: sugar.color(ui);
-          }
-
-          ${finalParams.icon ? `
-            padding-left: 1.5em;
-            &:before {
-              content: ' ' !important;
-            }
-          `: ''}
-          
+      & > li,
+      & > dt {
+        display: block !important;
+        padding-left: 1em;
+        margin-bottom: 0.5em;
+      
+        ${iconSelector} {  
+          ${!finalParams.icon ? `
+              content: '●';
+              margin-top: 0.25em;
+              font-size: 0.7em;
+          `: `
+              margin-top: 0.25em;
+              font-size: 0.8em;
+          `}    
+          display: inline-block;
+          position: absolute;
+          left: 0.5em;
+          transform: translateX(-50%);
+          color: sugar.color(ui);
         }
-    }
+
+        ${finalParams.icon ? `
+          padding-left: 1.5em;
+          &:before {
+            content: ' ' !important;
+          }
+        `: ''}
+        
+      }
   `);
 
     replaceWith(vars);

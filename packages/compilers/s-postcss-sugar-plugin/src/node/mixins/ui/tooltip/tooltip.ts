@@ -43,37 +43,33 @@ export default function ({
 
   if (finalParams.scope.indexOf('bare') !== -1) {
       vars.push(`
-        @sugar.scope.bare {
-            position: absolute;
-            z-index: 10;
-            display: block;
-            max-width: sugar.theme(ui.tooltip.maxWidth);
-            text-align: center;
-        }
+          position: absolute;
+          z-index: 10;
+          display: block;
+          max-width: sugar.theme(ui.tooltip.maxWidth);
+          text-align: center;
       `)
   }
 
   if (finalParams.scope.indexOf('lnf') !== -1) {
       vars.push(`
-        @sugar.scope.lnf {
-            background-color: sugar.color(ui, surface);
-            border-radius: sugar.theme(ui.tooltip.borderRadius);
-            transition: sugar.theme(ui.tooltip.transition);
-            padding: sugar.theme(ui.tooltip.padding);
-            @sugar.depth( sugar.theme(ui.tooltip.depth) );
+          background-color: sugar.color(ui, surface);
+          border-radius: sugar.theme(ui.tooltip.borderRadius);
+          transition: sugar.theme(ui.tooltip.transition);
+          padding: sugar.theme(ui.tooltip.padding);
+          @sugar.depth( sugar.theme(ui.tooltip.depth) );
 
-            &:after {
-                content: " ";
-                position: absolute;
-                border-style: solid;
-                border-color: sugar.color(ui, surface) transparent transparent transparent;
-            }
-            &:before {
-              content: '';
+          &:after {
+              content: " ";
               position: absolute;
-              background: rgba(0,0,0,0);
-            }
-        }
+              border-style: solid;
+              border-color: sugar.color(ui, surface) transparent transparent transparent;
+          }
+          &:before {
+            content: '';
+            position: absolute;
+            background: rgba(0,0,0,0);
+          }
       `)
   }
 

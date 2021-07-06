@@ -4,12 +4,12 @@
 @sugar.init;
 @sugar.classes;
 
-@sugar.media.classes(tablet, tablet) {
+/* @sugar.media.classes(tablet, tablet) {
   @sugar.classes;
 }
 @sugar.media.classes(desktop, desktop) {
   @sugar.classes;
-}
+} */
 
 @sugar.icon.classes(
   fa:user:user

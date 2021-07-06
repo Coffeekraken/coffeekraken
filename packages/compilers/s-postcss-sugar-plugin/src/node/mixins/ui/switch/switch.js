@@ -20,43 +20,41 @@ export default function ({ params, atRule, replaceWith }) {
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-        @sugar.scope.bare {
+        display: inline-block;
+        position: relative;            
+
+        & input[type="checkbox"] {
+            visibility: hidden;
+            position: absolute;
+        } 
+
+        & input[type="checkbox"]:checked + *:after {
+            left: 1em;
+        }
+
+        & input[type="checkbox"] + * {
+            height: 1em;
+            width: 2em;
+            top: 0.1em;
             display: inline-block;
-            position: relative;            
+        }
 
-            & input[type="checkbox"] {
-                visibility: hidden;
-                position: absolute;
-            } 
-
-            & input[type="checkbox"]:checked + *:after {
-                left: 1em;
-            }
-
-            & input[type="checkbox"] + * {
-                height: 1em;
-                width: 2em;
-                top: 0.1em;
-                display: inline-block;
-            }
-
-            & input[type="checkbox"] + *:before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0; left: 0;
-                height: 1em;
-                width: 2em;
-            }
-            & input[type="checkbox"] + *:after {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0; left: 0;
-                height: 1em;
-                width: 1em;
-                transform: scale(0.7);
-            }
+        & input[type="checkbox"] + *:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0; left: 0;
+            height: 1em;
+            width: 2em;
+        }
+        & input[type="checkbox"] + *:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0; left: 0;
+            height: 1em;
+            width: 1em;
+            transform: scale(0.7);
         }
         `);
     }
@@ -69,22 +67,20 @@ export default function ({ params, atRule, replaceWith }) {
             case 'default':
             default:
                 vars.push(`
-                @sugar.scope.lnf {
 
-                    & input[type="checkbox"]:checked + *:before {
-                        background-color: sugar.color(ui);
-                    }
+                & input[type="checkbox"]:checked + *:before {
+                    background-color: sugar.color(ui);
+                }
 
-                    & input[type="checkbox"] + *:before {
-                        background: sugar.color(ui, --lighten 40 --desaturate 100);
-                        transition: sugar.theme(ui.switch.transition);
-                        border-radius: sugar.theme(ui.switch.borderRadius);
-                    }
-                    & input[type="checkbox"] + *:after {
-                        background: sugar.color(ui, foreground);
-                        transition: sugar.theme(ui.switch.transition);
-                        border-radius: sugar.theme(ui.switch.borderRadius);
-                    }
+                & input[type="checkbox"] + *:before {
+                    background: sugar.color(ui, --lighten 40 --desaturate 100);
+                    transition: sugar.theme(ui.switch.transition);
+                    border-radius: sugar.theme(ui.switch.borderRadius);
+                }
+                & input[type="checkbox"] + *:after {
+                    background: sugar.color(ui, foreground);
+                    transition: sugar.theme(ui.switch.transition);
+                    border-radius: sugar.theme(ui.switch.borderRadius);
                 }
             `);
                 break;
@@ -92,4 +88,4 @@ export default function ({ params, atRule, replaceWith }) {
     }
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3dpdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3dpdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBS3JELE1BQU0sd0NBQXlDLFNBQVEsWUFBWTs7QUFDMUQsbURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBQyxVQUFVLEVBQUMsU0FBUyxDQUFDO1FBQ3hDLE9BQU8sRUFBRSxTQUFTO0tBQ3JCO0lBQ0QsS0FBSyxFQUFFO1FBQ0gsSUFBSSxFQUFFLFFBQVE7UUFDZCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUMsS0FBSyxFQUFDLE9BQU8sQ0FBQztRQUM5QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUMsS0FBSyxFQUFDLE9BQU8sQ0FBQztLQUNsQztDQUNKLENBQUM7QUFRSixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixPQUFPO0lBQ1AsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUM1QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0F1Q0wsQ0FBQyxDQUFDO0tBQ1I7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBRXhGLFFBQU8sV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN0QixLQUFLLFVBQVU7Z0JBRWYsTUFBTTtZQUNOLEtBQUssU0FBUztnQkFFZCxNQUFNO1lBQ04sS0FBSyxTQUFTLENBQUM7WUFDZjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7YUFrQlQsQ0FBQyxDQUFBO2dCQUVOLE1BQU07U0FDVDtLQUVGO0lBSUQsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3BCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3dpdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3dpdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBS3JELE1BQU0sd0NBQXlDLFNBQVEsWUFBWTs7QUFDMUQsbURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBQyxVQUFVLEVBQUMsU0FBUyxDQUFDO1FBQ3hDLE9BQU8sRUFBRSxTQUFTO0tBQ3JCO0lBQ0QsS0FBSyxFQUFFO1FBQ0gsSUFBSSxFQUFFLFFBQVE7UUFDZCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUMsS0FBSyxFQUFDLE9BQU8sQ0FBQztRQUM5QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUMsS0FBSyxFQUFDLE9BQU8sQ0FBQztLQUNsQztDQUNKLENBQUM7QUFRSixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixPQUFPO0lBQ1AsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUM1QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBcUNMLENBQUMsQ0FBQztLQUNSO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUV4RixRQUFPLFdBQVcsQ0FBQyxLQUFLLEVBQUU7WUFDdEIsS0FBSyxVQUFVO2dCQUVmLE1BQU07WUFDTixLQUFLLFNBQVM7Z0JBRWQsTUFBTTtZQUNOLEtBQUssU0FBUyxDQUFDO1lBQ2Y7Z0JBQ0ksSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OzthQWdCVCxDQUFDLENBQUE7Z0JBRU4sTUFBTTtTQUNUO0tBRUY7SUFJRCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsQ0FBQyJ9

@@ -37,15 +37,12 @@ export default function ({
 
   // bare
   vars.push(`
-      @sugar.scope.bare {
         display: inline-block;
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
-      }
     `);
 
   // lnf
   vars.push(`
-      @sugar.scope.lnf {
         color: sugar.color(ui, foreground);
         background-color: sugar.color(ui, surface);
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
@@ -73,7 +70,6 @@ export default function ({
           color: sugar.color(ui:active, foreground);
           border: sugar.color(ui:active, border) solid 1px;
         }
-    }
   `);
 
   replaceWith(vars);

@@ -62,22 +62,17 @@ export default function ({
   // bare
   if (finalParams.scope.indexOf('bare') !== -1) {
     vars.push(`
-      @sugar.scope.bare {
-        display: inline-block;
-        cursor: pointer;
+      display: inline-block;
+      cursor: pointer;
 
-        & > * {
-          pointer-events: none;
-        }
+      & > * {
+        pointer-events: none;
       }
     `);
   }
 
   // style
   if (finalParams.scope.indexOf('style') !== -1) {
-    vars.push(`
-      @sugar.scope.lnf {
-      `);
 
     switch (finalParams.style) {
       case 'gradient':
@@ -101,7 +96,6 @@ export default function ({
         `);
         break;
     }
-    vars.push('}');
   }
 
   // shrinked

@@ -41,18 +41,16 @@ export default function ({
 
   // lnf
   vars.push(`
-    @sugar.scope.lnf {
-        &::-webkit-scrollbar {
-            width: ${finalParams.width}
-        }
-        &::-webkit-scrollbar-track {
-            background-color: sugar.color(${finalParams.color}, --darken 30);
-            background: rgba(0,0,0,0);
-        }
-        &::-webkit-scrollbar-thumb {
-            background-color: sugar.color(${finalParams.color});
-        }
-    }
+      &::-webkit-scrollbar {
+          width: ${finalParams.width}
+      }
+      &::-webkit-scrollbar-track {
+          background-color: sugar.color(${finalParams.color}, --darken 30);
+          background: rgba(0,0,0,0);
+      }
+      &::-webkit-scrollbar-thumb {
+          background-color: sugar.color(${finalParams.color});
+      }
   `);
 
   replaceWith(vars);

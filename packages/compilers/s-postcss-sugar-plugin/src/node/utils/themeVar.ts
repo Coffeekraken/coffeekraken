@@ -1,4 +1,5 @@
 import __theme from './theme';
+import __minifyVar from './minifyVar';
 
 /**
  * @name        themeVar
@@ -22,10 +23,10 @@ export default function themeVar(dotPath: string, fallback = true): string {
   let fb = __theme().config(dotPath);
   if (!fallback || typeof fb === 'string' && fb.includes(',')) fb = 0;
 
-  const v = `var(--s-theme-${dotPath
+  const v = `var(${__minifyVar(`--s-theme-${dotPath
     .replace(/\./gm, '-')
     .replace(/:/gm, '-')
     .replace(/\?/gm, '')
-    .replace(/--/gm, '-')}, ${fb})`;
+    .replace(/--/gm, '-')}`)}, ${fb})`;
   return v;
 }

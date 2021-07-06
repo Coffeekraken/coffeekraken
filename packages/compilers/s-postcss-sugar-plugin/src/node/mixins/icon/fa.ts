@@ -29,7 +29,7 @@ export interface IPostcssSugarPluginIconFaParams {
 
 export { postcssSugarPluginIconFaInterface as interface };
 
-const _isFaInitialised = false;
+let _isFaInitialised = false;
 
 export default function ({
   params,
@@ -70,6 +70,7 @@ export default function ({
     atRule.root().append(`
       @import url('${__SSugarConfig.get('icons.fontawesome.url')}');
     `);
+    _isFaInitialised = true;
   }
 
   const prefix = prefixes[finalParams.style] ?? finalParams.style;

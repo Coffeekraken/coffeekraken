@@ -193,9 +193,6 @@ class SProcessManager extends __SEventEmitter {
       time: Date.now()
     });
     // run the process
-
-    console.log('p', paramsOrStringArgs, settings);
-
     const promise = this._processesStack[processId].run(
       paramsOrStringArgs,
       settings

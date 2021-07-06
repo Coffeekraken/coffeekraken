@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
+import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginBorderRadiusFunctionInterface extends __SInterface {
   static definition = {
@@ -34,7 +35,7 @@ export default function ({
   const radiuses = radius.split(' ').map((s) => {
     // const radius = __theme().config(`border.radius.${s}`);
     // if (!radius) return radius;
-    return `var(--s-theme-border-radius-${s})`;
+    return `var(${__minifyVar(`--s-theme-border-radius-${s}`)})`;
   });
 
   return radiuses.join(' ');

@@ -4,6 +4,7 @@ var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __pow = Math.pow;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, {enumerable: true, configurable: true, writable: true, value}) : obj[key] = value;
 var __spreadValues = (a, b) => {
   for (var prop in b || (b = {}))
@@ -2296,7 +2297,7 @@ convert$1.rgb.cmyk = function(rgb) {
   return [c * 100, m * 100, y * 100, k * 100];
 };
 function comparativeDistance(x, y) {
-  return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
+  return __pow(x[0] - y[0], 2) + __pow(x[1] - y[1], 2) + __pow(x[2] - y[2], 2);
 }
 convert$1.rgb.keyword = function(rgb) {
   const reversed = reverseKeywords[rgb];
@@ -2322,9 +2323,9 @@ convert$1.rgb.xyz = function(rgb) {
   let r = rgb[0] / 255;
   let g = rgb[1] / 255;
   let b = rgb[2] / 255;
-  r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
-  g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
-  b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
+  r = r > 0.04045 ? __pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
+  g = g > 0.04045 ? __pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+  b = b > 0.04045 ? __pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
   const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
   const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
   const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
@@ -2338,9 +2339,9 @@ convert$1.rgb.lab = function(rgb) {
   x /= 95.047;
   y /= 100;
   z /= 108.883;
-  x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
-  y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
-  z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+  x = x > 8856e-6 ? __pow(x, 1 / 3) : 7.787 * x + 16 / 116;
+  y = y > 8856e-6 ? __pow(y, 1 / 3) : 7.787 * y + 16 / 116;
+  z = z > 8856e-6 ? __pow(z, 1 / 3) : 7.787 * z + 16 / 116;
   const l = 116 * y - 16;
   const a = 500 * (x - y);
   const b = 200 * (y - z);
@@ -2514,9 +2515,9 @@ convert$1.xyz.rgb = function(xyz) {
   r = x * 3.2406 + y * -1.5372 + z * -0.4986;
   g = x * -0.9689 + y * 1.8758 + z * 0.0415;
   b = x * 0.0557 + y * -0.204 + z * 1.057;
-  r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
-  g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
-  b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
+  r = r > 31308e-7 ? 1.055 * __pow(r, 1 / 2.4) - 0.055 : r * 12.92;
+  g = g > 31308e-7 ? 1.055 * __pow(g, 1 / 2.4) - 0.055 : g * 12.92;
+  b = b > 31308e-7 ? 1.055 * __pow(b, 1 / 2.4) - 0.055 : b * 12.92;
   r = Math.min(Math.max(0, r), 1);
   g = Math.min(Math.max(0, g), 1);
   b = Math.min(Math.max(0, b), 1);
@@ -2529,9 +2530,9 @@ convert$1.xyz.lab = function(xyz) {
   x /= 95.047;
   y /= 100;
   z /= 108.883;
-  x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
-  y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
-  z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+  x = x > 8856e-6 ? __pow(x, 1 / 3) : 7.787 * x + 16 / 116;
+  y = y > 8856e-6 ? __pow(y, 1 / 3) : 7.787 * y + 16 / 116;
+  z = z > 8856e-6 ? __pow(z, 1 / 3) : 7.787 * z + 16 / 116;
   const l = 116 * y - 16;
   const a = 500 * (x - y);
   const b = 200 * (y - z);
@@ -2547,9 +2548,9 @@ convert$1.lab.xyz = function(lab) {
   y = (l + 16) / 116;
   x = a / 500 + y;
   z = y - b / 200;
-  const y2 = y ** 3;
-  const x2 = x ** 3;
-  const z2 = z ** 3;
+  const y2 = __pow(y, 3);
+  const x2 = __pow(x, 3);
+  const z2 = __pow(z, 3);
   y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
   x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
   z = z2 > 8856e-6 ? z2 : (z - 16 / 116) / 7.787;
@@ -5558,4 +5559,7 @@ function expandPleasantCssClassnamesLive() {
     once: false
   });
 }
+if (!window.env)
+  window.env = {SUGAR: {}};
+window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');
 expandPleasantCssClassnamesLive();

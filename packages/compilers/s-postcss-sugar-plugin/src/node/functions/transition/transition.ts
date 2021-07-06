@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
+import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginTransitionFunctionInterface extends __SInterface {
   static definition = {
@@ -32,7 +33,7 @@ export default function ({
   const transitions = finalParams.name.split(' ').map((t) => {
     const transition = __theme().config(`transition.${t}`);
     if (!transition) return transition;
-    return `var(--s-theme-transition-${t}, ${transition})`;
+    return `var(${__minifyVar(`--s-theme-transition-${t}`)}, ${transition})`;
   });
 
   return transitions.join(' ');

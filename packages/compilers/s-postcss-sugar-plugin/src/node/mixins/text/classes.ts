@@ -27,8 +27,6 @@ export default function ({
 
   // align
   vars.push(`
-    @sugar.scope(bare) {
-
         /**
          * @name            s-text--left
          * @namespace       sugar.css.mixins.align
@@ -79,7 +77,6 @@ export default function ({
         .s-text--center {
             text-align: center;
         }
-    }
   `);
 
 

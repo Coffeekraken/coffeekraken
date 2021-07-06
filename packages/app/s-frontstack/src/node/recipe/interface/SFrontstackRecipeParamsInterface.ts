@@ -20,11 +20,18 @@ import __SInterface from '@coffeekraken/s-interface';
 class SFrontstackRecipeParamsInterface extends __SInterface {
   static definition = {
     stack: {
-      type: 'String'
+      type: 'String',
+      alias: 's'
     },
     recipe: {
-      type: 'String'
+      type: 'String',
+      alias: 'r'
     },
+    prod: {
+      type: 'Boolean',
+      default: false,
+      alias: 'p'
+    }
   };
 }
 

@@ -30,21 +30,18 @@ export default function ({
   const vars: string[] = [];
 
   vars.push(`
-    @sugar.scope.lnf {
-        background-color: sugar.color(surface);
+      background-color: sugar.color(surface);
 
-        & > li,
-        & > dt {
-          @sugar.ui.base(list);
-          display: block !important;
-          
-          .s-highlight {
-            background-color: sugar.color(accent:highlight, background) !important;
-            color: sugar.color(accent:highlight, foreground) !important;
-          }
+      & > li,
+      & > dt {
+        @sugar.ui.base(list);
+        display: block !important;
+        
+        .s-highlight {
+          background-color: sugar.color(accent:highlight, background) !important;
+          color: sugar.color(accent:highlight, foreground) !important;
         }
-
-    }
+      }
   `);
 
     replaceWith(vars);

@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SProcessInterface from './SProcessInterface';
 
 /**
- * @name                SProcessInterface
+ * @name                SCommandProcessInterface
  * @namespace           sugar.node.process.interface
  * @type                Class
  * @extends             SInterface
@@ -15,7 +15,7 @@ import __SProcessInterface from './SProcessInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SProcessInterface extends __SInterface {
+export default class SCommandProcessInterface extends __SInterface {
   // static extendsArray = ['SProcess', 'SPromise'];
   static definition = {
     ...__SProcessInterface.definition,

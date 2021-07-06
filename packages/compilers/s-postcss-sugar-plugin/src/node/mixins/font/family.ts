@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __theme from '../../utils/theme';
+import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginFontFamilyInterface extends __SInterface {
   static definition = {
@@ -42,7 +43,7 @@ export default function ({
       case 'font-weight':
       case 'font-style':
         vars.push(
-          `${prop}: var(--s-theme-font-family-${finalParams.font}-${prop}, ${fontFamilyObj[prop]});`
+          `${prop}: var(${__minifyVar(`--s-theme-font-family-${finalParams.font}-${prop}`)}, ${fontFamilyObj[prop]});`
         );
         break;
       default:

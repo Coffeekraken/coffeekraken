@@ -11,7 +11,8 @@ export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
         },
         output: {
             type: 'String',
-            alias: 'o'
+            alias: 'o',
+            default: __SSugarConfig.get('postcssBuilder.output')
         },
         prod: {
             type: 'Boolean',

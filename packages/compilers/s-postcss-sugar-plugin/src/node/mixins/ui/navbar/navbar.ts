@@ -28,22 +28,13 @@ export default function ({
 
   // bare
   vars.push(`
-      @sugar.scope.bare {
-        display: flex;
-        align-items: center;
+      display: flex;
+      align-items: center;
 
-        & > * {
-            flex-grow: 0;
-        }
+      & > * {
+          flex-grow: 0;
       }
     `);
-
-  // lnf
-  vars.push(`
-      @sugar.scope.lnf {
-
-    }
-  `);
 
   replaceWith(vars);
 }

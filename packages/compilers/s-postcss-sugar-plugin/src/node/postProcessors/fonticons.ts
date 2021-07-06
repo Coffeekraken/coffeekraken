@@ -42,7 +42,7 @@ export default function ({ root, sharedData }) {
         if (hash === cachedHash) {
             // delete the temp icons folder for fresh new compilation
             try {
-                __fs.rmdirSync(sharedData.iconsInputDir, { recursive: true});
+                __fs.rmSync(sharedData.iconsInputDir, { recursive: true});
             } catch(e) {}
             // console.log(`<cyan>[fonticons]</cyan> No need to regenerate icons font`);            
             return;
@@ -90,7 +90,7 @@ export default function ({ root, sharedData }) {
 
     // delete the temp icons folder for fresh new compilation
     try {
-        __fs.rmdirSync(sharedData.iconsInputDir, { recursive: true});
+        __fs.rmSync(sharedData.iconsInputDir, { recursive: true});
     } catch(e) {}
 
     console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);

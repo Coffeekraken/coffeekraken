@@ -22,8 +22,10 @@
     "postcss": "^8.3.5",
     "postcss-atroot": "^0.2.3",
     "postcss-extend-rule": "^3.0.0",
+    "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.5",
     "postcss-property-lookup": "^3.0.0",
-    "purgecss": "^4.0.3"
+    "purgecss": "^4.0.3",
+    "shorter": "^0.3.1"
   }
 }

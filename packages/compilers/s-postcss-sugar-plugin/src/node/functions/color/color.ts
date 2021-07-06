@@ -4,6 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SColor from '@coffeekraken/s-color';
 import __theme from '../../utils/theme';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
+import __minifyVar from '../../utils/minifyVar';
 
 class ColorModifierInterface extends __SInterface {
   static definition = {
@@ -115,7 +116,7 @@ export default function color({
       ? modifierParams.desaturate * -1
       : undefined;
     if (saturationOffset === undefined) {
-      saturationOffset = `var(${colorModifierVar}-saturationOffset, 0)`;
+      saturationOffset = `var(${__minifyVar(`${colorModifierVar}-saturationOffset`)}, 0)`;
     }
 
     let lightnessOffset = modifierParams.lighten
@@ -124,17 +125,17 @@ export default function color({
       ? modifierParams.darken * -1
       : undefined;
     if (lightnessOffset === undefined)
-      lightnessOffset = `var(${colorModifierVar}-lightnessOffset, 0)`;
+      lightnessOffset = `var(${__minifyVar(`${colorModifierVar}-lightnessOffset`)}, 0)`;
 
     finalValue = `hsl(
       calc(
-        var(${colorVar}-h, 0)
+        var(${__minifyVar(`${colorVar}-h`)}, 0)
         +
-        var(${colorModifierVar}-spin ,${modifierParams.spin ?? 0})
+        var(${__minifyVar(`${colorModifierVar}-spin`)} ,${modifierParams.spin ?? 0})
       ),
       calc(
         (
-          var(${colorVar}-s, 0)
+          var(${__minifyVar(`${colorVar}-s`)}, 0)
           + 
           ${saturationOffset}
         )
@@ -142,7 +143,7 @@ export default function color({
       ),
       calc(
         (
-           var(${colorVar}-l, 0)
+           var(${__minifyVar(`${colorVar}-l`)}, 0)
           +
           ${lightnessOffset}
         )

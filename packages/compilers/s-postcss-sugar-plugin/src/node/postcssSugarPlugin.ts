@@ -7,11 +7,13 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';
 import __getRoot from './utils/getRoot';
 import __SBench from '@coffeekraken/s-bench';
+import __unquote from '@coffeekraken/sugar/shared/string/unquote';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {
   settings = __deepMerge(
     {
+      inlineImport: true
     },
     settings
   );
@@ -56,7 +58,6 @@ const plugin = (settings: any = {}) => {
   }
 
   const sharedData = {};
-  const postProcessorsExecuted = false;
 
   return {
     postcssPlugin: 'sugar',
@@ -113,7 +114,7 @@ const plugin = (settings: any = {}) => {
     },
     AtRule( atRule, postcssApi) {
 
-        if (atRule.name.match(/^sugar\./)) {
+      if (atRule.name.match(/^sugar\./)) {
 
         let potentialMixinPath = `${__dirname}/mixins/${atRule.name
           .replace(/^sugar\./, '')
@@ -179,6 +180,30 @@ const plugin = (settings: any = {}) => {
           postcss: __postcss,
           settings
         });
+
+      } else if (atRule.name.match(/^import/)) {
+
+        // check settings
+        if (!settings.inlineImport) return;
+
+        // do not take care of imported assets using url('...');
+        if (atRule.params.match(/^url\(/)) return;
+
+        const dirName =
+          typeof atRule.source.input.file === 'string'
+          ? __path.dirname(atRule.source.input.file)
+          : __dirname;
+        
+        const path = __path.resolve(dirName, __unquote(atRule.params));
+
+        if (!__fs.existsSync(path)) {
+          throw new Error(`<red>[postcssSugarPlugin.@import]</red> You try to load the file "<yellow>${path}</yellow>" but this file does not exists`);
+        }
+
+        const contentStr = __fs.readFileSync(path, 'utf8').toString();
+        
+        atRule.after(contentStr);
+        atRule.remove();
 
       }
     },

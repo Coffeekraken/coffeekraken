@@ -5,6 +5,7 @@ import __SFrontstackActionInterface from './action/interface/SFrontstackActionIn
 import __SFrontstackRecipeParamsInterface from './recipe/interface/SFrontstackRecipeParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __SProcess, {
   SProcessManager as __SProcessManager,
@@ -241,10 +242,10 @@ export default class SFrontstack extends __SClass {
         });
 
         emit('log', {
-          value: `- Recipe: <yellow>${finalParams.recipe}</yellow>`
+          value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`
         });
         emit('log', {
-          value: `- Stack : <cyan>${finalParams.stack}</cyan>`
+          value: `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`
         });
 
         // get the recipe object and treat it
@@ -274,6 +275,15 @@ export default class SFrontstack extends __SClass {
           );
         }
 
+        // build shared params to pass to every sub-processes
+        const sharedParams = Object.assign({}, finalParams);
+        delete sharedParams.recipe;
+        delete sharedParams.stack;
+        delete sharedParams.help;
+
+        // build shared params cli string
+        const sharedParamsStr = __argsToString(sharedParams).trim();
+
         // instanciate the process manager
         const processManager = new __SProcessManager();
         // loop on each actions for this recipe
@@ -297,8 +307,14 @@ export default class SFrontstack extends __SClass {
                 recipeObj.stacks[finalParams.stack].actions[actionName];
               const actionId = actionObj.id ?? actionName;
               // create a process from the recipe object
+              const finalCommand = (actionObj.command ?? actionObj.process).trim() + ' ' + sharedParamsStr;
+              
+              emit('log', {
+                value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`
+              });
+              
               const pro = __SProcess.from(
-                actionObj.command ?? actionObj.process
+                finalCommand
               );
               // add the process to the process manager
               // @TODO    integrate log filter feature
@@ -309,7 +325,10 @@ export default class SFrontstack extends __SClass {
               });
               processManager.run(
                 actionId,
-                actionObj.params ?? {},
+                {
+                  ...sharedParams,
+                  ...(actionObj.params ?? {})
+                },
                 actionObj.settings?.process ?? {}
               );
             }

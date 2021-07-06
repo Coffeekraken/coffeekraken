@@ -28,11 +28,9 @@ export default function ({
 
   // bare
   vars.push(`
-      @sugar.scope.bare {
-        &:before {
-            content: '$';
-            color: sugar.color(complementary);
-        }
+      &:before {
+          content: '$';
+          color: sugar.color(complementary);
       }
     `);
 

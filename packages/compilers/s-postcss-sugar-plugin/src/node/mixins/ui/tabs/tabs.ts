@@ -57,11 +57,9 @@ export default function ({
 
   if (finalParams.scope.indexOf('bare') !== -1) {
     vars.push(`
-      @sugar.scope.bare {
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
-      }
     `);
   }
 
@@ -77,72 +75,64 @@ export default function ({
 
   if (finalParams.scope.indexOf('lnf') !== -1) {
     vars.push(`
-      @sugar.scope.lnf {
-        background-color: sugar.color(ui, surface);
-        border-radius: sugar.theme(ui.tabs.borderRadius);
-        box-shadow: sugar.theme(ui.tabs.depth);
-        overflow: hidden;
+      background-color: sugar.color(ui, surface);
+      border-radius: sugar.theme(ui.tabs.borderRadius);
+      box-shadow: sugar.theme(ui.tabs.depth);
+      overflow: hidden;
 
-          & > * {
-            text-align: center;
-            padding: sugar.theme('ui.tabs.padding');
-            background-color: sugar.color(ui, surface);
-            color: sugar.color(ui, foreground);
-            transition: sugar.theme(ui.tabs.transition);
-            cursor: pointer;
-            display: block;      
-          }
-      }
+        & > * {
+          text-align: center;
+          padding: sugar.theme('ui.tabs.padding');
+          background-color: sugar.color(ui, surface);
+          color: sugar.color(ui, foreground);
+          transition: sugar.theme(ui.tabs.transition);
+          cursor: pointer;
+          display: block;      
+        }
     `);
   }
 
   if (finalParams.style === 'default' && finalParams.scope.indexOf('style') !== -1) {
     vars.push(`
-      @sugar.scope.lnf {
-        & > dt,
-        & > li,
-        & > div {
-          @sugar.state.hover {
-            background-color: sugar.color(complementary);
-          }
-          @sugar.state.active {
-            background-color: sugar.color(accent);
-          }          
+      & > dt,
+      & > li,
+      & > div {
+        @sugar.state.hover {
+          background-color: sugar.color(complementary);
         }
+        @sugar.state.active {
+          background-color: sugar.color(accent);
+        }          
       }
     `);
   }
 
   if (finalParams.style === 'gradient' && finalParams.scope.indexOf('style') !== -1) {
     vars.push(`
-      @sugar.scope.lnf {
-        & > dt,
-        & > li,
-        & > div,
-        & > * {
-          @sugar.state.hover {
-            @sugar.gradient.linear($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg);
-          }
-          @sugar.state.active {
-            @sugar.gradient.linear($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg);
-          }          
+      & > dt,
+      & > li,
+      & > div,
+      & > * {
+        @sugar.state.hover {
+          @sugar.gradient.linear($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg);
         }
+        @sugar.state.active {
+          @sugar.gradient.linear($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg);
+        }          
       }
     `);
   }
 
   if (finalParams.direction === 'vertical' && finalParams.scope.indexOf('direction') !== -1) {
     vars.push(`
-      @sugar.scope.bare {
-        display: block;
+      display: block;
 
-        & > dt,
-        & > li,
-        & > div,
-        & > * {
-          display: block;
-          text-align: inherit;
-        }
+      & > dt,
+      & > li,
+      & > div,
+      & > * {
+        display: block;
+        text-align: inherit;
       }
     `);
   }

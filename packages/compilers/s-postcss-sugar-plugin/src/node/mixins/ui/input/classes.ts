@@ -33,15 +33,11 @@ export default function ({
 
   const vars: string[] = [
     `
-    @sugar.scope.bare {
       .s-input {
         @sugar.ui.input.text()
       }
-    }
   `
   ];
-
-  vars.push('@sugar.scope(lnf) {');
 
   finalParams.styles.forEach((style) => {
     const isDefaultStyle = __theme().config('ui.input.defaultStyle') === style;
@@ -63,8 +59,6 @@ export default function ({
       [`${cls} {`, ` @sugar.ui.input.text($style: ${style});`, `}`].join('\n')
     );
   });
-
-  vars.push('}');
 
   replaceWith(vars);
 

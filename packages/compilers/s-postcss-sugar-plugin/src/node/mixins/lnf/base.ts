@@ -58,7 +58,6 @@ export default function ({
 
    vars.push(
     `
-    @sugar.scope(lnf) {
         ${selector} {
             color: sugar.color(main, text);
             @sugar.font.family(default);
@@ -68,7 +67,6 @@ export default function ({
             color: sugar.color(accent, text);
             background-color: sugar.color(accent);
         }
-    }
     `
    );
 

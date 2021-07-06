@@ -29,9 +29,9 @@ class SViteBuildInterface extends __SInterface {
       required: true
     },
     type: {
-      type: 'String',
+      type: 'Array<String>',
       values: ['lib', 'bundle', 'module'],
-      default: 'module',
+      default: ['bundle','module'],
       alias: 't'
     },
     format: {
@@ -58,16 +58,6 @@ class SViteBuildInterface extends __SInterface {
       type: 'Boolean',
       default: false,
       alias: 'p'
-    },
-    bundle: {
-      type: 'Boolean',
-      default: false,
-      alias: 'b'
-    },
-    lib: {
-      type: 'Boolean',
-      default: false,
-      alias: 'l'
     },
     chunks: {
       type: 'Boolean',

@@ -7,7 +7,9 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __csso from 'csso';
+import __path from 'path';
 import __fs from 'fs';
+import __SPostcssBuilderBuildParamsInterface from './interface/SPostcssBuilderBuildParamsInterface';
 import __postcss from 'postcss';
 import { PurgeCSS } from 'purgecss';
 
@@ -117,10 +119,20 @@ export default class SPostcssBuilder extends __SBuilder {
 
             let finalCss;
 
+            const defaultParams = __SPostcssBuilderBuildParamsInterface.defaults();
+
+
             // handle prod shortcut
             if (params.prod) {
                 params.minify = true;
                 params.purge = true;
+            }
+
+            // handle default output
+            if (params.output && params.output === defaultParams.output) {
+                if (params.prod) {
+                    params.output = params.output.replace(/\.css/, '.prod.css');
+                }
             }
 
             // handle input
@@ -130,6 +142,32 @@ export default class SPostcssBuilder extends __SBuilder {
                 src = __fs.readFileSync(params.input, 'utf8').toString();
                 from = params.input;
             } catch(e) {}
+
+            emit('log', {
+                value: `<yellow>[build]</yellow> Starting Postcss Build`
+            });
+            emit('log', {
+                value: `<yellow>○</yellow> Environment : ${params.prod ? '<green>production</green>' : '<yellow>development</yellow>'}`
+            });
+            if (params.output) {
+                emit('log', {
+                    value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(process.cwd(), params.output)}</cyan>`
+                });
+            }
+            emit('log', {
+                value: `<yellow>○</yellow> Minify      : ${params.minify ? '<green>true</green>' : '<red>false</red>'}`
+            });
+            emit('log', {
+                value: `<yellow>○</yellow> Purge       : ${params.purge ? '<green>true</green>' : '<red>false</red>'}`
+            });
+            emit('log', {
+                value: `<yellow>○</yellow> Plugins     :`
+            });
+            this.postcssBuilderSettings.postcss.plugins.forEach(pluginName => {
+                emit('log', {
+                    value: `<yellow>|------------</yellow> : ${pluginName}`
+                });
+            });
 
             // resolve plugins paths
             const plugins = this.postcssBuilderSettings.postcss.plugins.map((p) => {

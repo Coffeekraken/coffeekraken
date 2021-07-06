@@ -1,5 +1,7 @@
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __theme from './theme';
+import __minifyVar from '../utils/minifyVar';
+import minifyVar from '../utils/minifyVar';
 
 export default function (from: string, to: string): string[] {
   const flattenedTheme = __flatten(__theme().config(`.`));
@@ -32,7 +34,7 @@ let fromVars: string[] = [],
       if (toVars.indexOf(key) === -1) {
           // vars.push(`--s-theme-color-${from}-${varKey}: initial;`);
       } else {
-          vars.push(`--s-theme-color-${from}-${varKey}: var(--s-theme-color-${to}-${varKey});`);
+          vars.push(`${__minifyVar(`--s-theme-color-${from}-${varKey}`)}: var(${minifyVar(`--s-theme-color-${to}-${varKey}`)});`);
           toVars = toVars.filter(l => l !== key);
       }
   });

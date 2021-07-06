@@ -83,6 +83,9 @@ function argsToString(args, settings = {}) {
 
       string += ` --${key} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
     } else {
+      if (argValue === false) {
+        return;
+      }
       if (argValue === true) {
         str = '';
       } else {

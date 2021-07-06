@@ -36,7 +36,6 @@ export default function ({
 
   // @todo          find a way to use sugar.space for paddings
   vars.push(`
-    @sugar.scope.bare {
         position: relative;
         display: inline-block;
         overflow: hidden;
@@ -51,8 +50,7 @@ export default function ({
             min-height: 100%;
             max-width: 100%;
         }
-    }
-    @sugar.scope.lnf {
+
         ${finalParams.shape ?
             finalParams.shape === 'default' ? `
                 border-radius: 99999999px;
@@ -60,7 +58,6 @@ export default function ({
                 border-radius: 0;
             ` : ''
         : ''}
-    }
   `);
 
   replaceWith(vars);

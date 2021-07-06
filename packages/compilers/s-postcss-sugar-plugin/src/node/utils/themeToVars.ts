@@ -1,6 +1,7 @@
 import __theme from './theme';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __SInterface from '@coffeekraken/s-interface';
+import __minifyVar from './minifyVar';
 
 export default function (theme: string): string[] {
 
@@ -22,9 +23,9 @@ export default function (theme: string): string[] {
       .replace(/--/gm, '-');
     
     if (`${value}`.match(/:/)) {
-    vars.push(`--s-theme-${varKey}: "${flattenedTheme[key]}";`);
+    vars.push(`${__minifyVar(`--s-theme-${varKey}`)}: "${flattenedTheme[key]}";`);
     } else {
-    vars.push(`--s-theme-${varKey}: ${flattenedTheme[key]};`);
+    vars.push(`${__minifyVar(`--s-theme-${varKey}`)}: ${flattenedTheme[key]};`);
     }
   });
 

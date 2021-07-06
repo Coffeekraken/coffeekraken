@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
+import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginSpaceFunctionInterface extends __SInterface {
   static definition = {
@@ -34,7 +35,7 @@ export default function ({
   const spaces = space.split(' ').map((s) => {
     const size = __theme().config(`space.${s}`);
     if (!size) return size;
-    return `var(--s-theme-space-${s}, ${size})`;
+    return `var(${__minifyVar(`--s-theme-space-${s}`)}, ${size})`;
   });
 
   return spaces.join(' ');

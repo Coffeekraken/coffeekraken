@@ -30,7 +30,11 @@ export default {
         },
         build: {
           description: 'Build your final production ready dist package',
-          actions: {}
+          actions: {
+            postcssBuild: '[config.frontstack.actions.postcssBuild]',
+            viteBuild: '[config.frontstack.actions.viteBuild]',
+            docmapBuild: '[config.frontstack.actions.docmapBuild]'
+          }
         }
       }
     },
@@ -65,22 +69,21 @@ export default {
         }
       }
     },
-    postcss: {
-      id: 'css',
+    postcssBuild: {
+      id: 'postcssBuild',
       title: 'PostCSS build action',
       description: 'Build css using the amazing PostCSS package',
-      process: 'sugard postcss.build -w',
+      process: 'sugard postcss.build',
       settings: {
         processManager: {
           restart: true
         }
       }
     },
-    
     vite: {
       id: 'vite',
       title: 'Vite development stack',
-      description: 'Allow to compile files easily',
+      description: 'Allow to build files easily while developing',
       process: 'sugard vite',
       settings: {
         processManager: {
@@ -88,19 +91,19 @@ export default {
         }
       }
     },
-    svelte: {
-      id: 'svelte',
-      title: 'Svelte compile action',
-      description: 'Allow to compile .svelte files easily',
-      process: 'sugard svelte.compile -w',
+    viteBuild: {
+      id: 'viteBuild',
+      title: 'Vite build stack',
+      description: 'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
+      process: 'sugard vite.build',
       settings: {
         processManager: {
           restart: true
         }
       }
     },
-    docmap: {
-      id: 'docmap',
+    docmapBuild: {
+      id: 'docmapBuild',
       title: 'Docmap build action',
       description:
         'Allow to build and maintain up to date the docmap.json file',

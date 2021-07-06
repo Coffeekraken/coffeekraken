@@ -24,8 +24,6 @@ export default function ({
 
   const vars: string[] = [
     `
-    @sugar.scope(bare) {
-
         /**
          * @name            s-navbar
          * @namespace       sugar.css.ui.navbar
@@ -76,9 +74,6 @@ export default function ({
         .s-navbar__grow {
             flex-grow: 1 !important;
         }
-
-    }
-
   `
   ];
 

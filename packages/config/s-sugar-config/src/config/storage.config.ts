@@ -301,6 +301,80 @@ export default {
 
   },
 
+  serve: {
+
+    /**
+     * @name            rootDir
+     * @namespace       config.storage.serve
+     * @type            String
+     * @default         [config.storage.package.rootDir]/serve
+     *
+     * Configure where is located the "serve" folder in which are stored usually the "distribution" files like production css, js, images, etc...
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    rootDir: `/dist`,
+    'rootDir@dev': '/src',
+
+    /**
+     * @name            jsDir
+     * @namespace       config.storage.serve
+     * @type            String
+     * @default         /dist/js
+     *
+     * Configure where is located the javascript/typescript served files
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    jsDir: `/dist/js`,
+    'jsDir@dev': `/src/js`,
+
+    /**
+     * @name            cssDir
+     * @namespace       config.storage.serve
+     * @type            String
+     * @default         /dist/css
+     *
+     * Configure where is located the css served files
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    cssDir: `/dist/css`,
+    'cssDir@dev': `/src/css`,
+
+    /**
+     * @name            fontsDir
+     * @namespace       config.storage.serve
+     * @type            String
+     * @default         /dist/fonts
+     *
+     * Configure where is located the fonts served files
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    fontsDir: `/dist/fonts`,
+    'fontsDir@dev': `/src/fonts`,
+
+    /**
+     * @name            imgDir
+     * @namespace       config.storage.serve
+     * @type            String
+     * @default         /dist/img
+     *
+     * Configure where is located the images served files
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    imgDir: `/dist/img`,
+    'imgDir@dev': `/src/img`
+
+  },
+
   /**
    * @name            exclude
    * @namespace       config.storage

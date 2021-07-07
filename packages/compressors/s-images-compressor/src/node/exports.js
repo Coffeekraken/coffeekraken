@@ -1,0 +1,4 @@
+import __SImagesCompressor from './SImagesCompressor';
+export * from './SImagesCompressor';
+export default __SImagesCompressor;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxtQkFBbUIsTUFBTSxxQkFBcUIsQ0FBQztBQUN0RCxjQUFjLHFCQUFxQixDQUFDO0FBQ3BDLGVBQWUsbUJBQW1CLENBQUMifQ==

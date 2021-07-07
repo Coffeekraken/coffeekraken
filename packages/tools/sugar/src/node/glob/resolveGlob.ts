@@ -45,7 +45,8 @@ export interface IResolveGlobSettings {
   nodir: boolean;
   contentRegExp: RegExp;
   SFile: boolean;
-  exclude: string|string[]
+  exclude: string|string[];
+  defaultExcludes: boolean;
 }
 
 export default function resolveGlob(globs: string | string[], settings: Partial<IResolveGlobSettings> = {}): __SFile[] {
@@ -55,7 +56,8 @@ export default function resolveGlob(globs: string | string[], settings: Partial
       symlinks: true,
       nodir: true,
       contentRegExp: undefined,
-      exclude: []
+      exclude: [],
+      defaultExcludes: true
     },
     settings
   );
@@ -107,10 +109,8 @@ export default function resolveGlob(globs: string | string[], settings: Partial
           cwd,
           dot: true,
           ignore: [
-            '**/bin/**',
-            '**/*\.DS_Store',
             ...(settings.exclude ?? []),
-            ...__excludeGlobs()
+            ...settings.defaultExcludes ? __excludeGlobs() : []
           ],
           ...settings
         })

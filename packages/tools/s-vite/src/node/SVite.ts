@@ -148,11 +148,10 @@ export default class SVite extends __SClass {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   build(params: ISViteBuildParams) {
-    const _this = this;
     return new __SPromise(
       async ({ resolve, reject, emit, pipe }) => {
         const viteConfig = __SugarConfig.get('vite');
-        let duration = new __SDuration(), buildTimeout;
+        const duration = new __SDuration();
 
         // object to store results of each "type"
         const results = {};
@@ -232,10 +231,24 @@ export default class SVite extends __SClass {
             ];
           }
 
+          // automatic formats
+          let finalFormats = params.format;
+          if (!params.format.length) {
+            switch(buildType) {
+              case 'bundle':
+                finalFormats = ['iife'];
+              break;
+              case 'module':
+              case 'lib':
+                finalFormats = ['es'];
+              break;
+            }
+          }
+
           // setup outputs
           const outputs: any[] = [];
           let outputsFilenames: string[] = [];
-          params.format.forEach(format => {
+          finalFormats.forEach(format => {
             outputs.push(__deepMerge({
               dir: __path.resolve(
                 viteConfig.build.outDir
@@ -273,7 +286,7 @@ export default class SVite extends __SClass {
             value: `<yellow>○</yellow> Target      : ${config.build.target}`
           });
           emit('log', {
-            value: `<yellow>○</yellow> Format(s)   : ${params.format.join(',')}`
+            value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(',')}`
           });
 
           // set the outputs

@@ -28,6 +28,15 @@ export default {
             vite: '[config.frontstack.actions.vite]'
           }
         },
+        prod: {
+          description: 'Start the production testing stack',
+          sharedParams: {
+            env: 'production'
+          },
+          actions: {
+            frontendServer: '[config.frontstack.actions.frontendServer]'
+          }
+        },
         build: {
           description: 'Build your final production ready dist package',
           actions: {
@@ -49,7 +58,6 @@ export default {
           actions: {
             frontendServer: '[config.frontstack.actions.frontendServer]',
             vite: '[config.frontstack.actions.vite]'
-            // docmap: '[config.frontstack.actions.docmap]'
           }
         }
       }

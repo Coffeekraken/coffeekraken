@@ -9,6 +9,8 @@ import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 import __mimeTypes from 'mime-types'; //eslint-disable-line
 import __minimatch from 'minimatch';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __compression from 'compression';
+import __SEnv from '@coffeekraken/s-env';
 
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
@@ -37,6 +39,7 @@ export interface ISFrontendServerParams {
   rootDir: string;
   viewsDir: string;
   logLevel: string;
+  prod: boolean;
 }
 
 export default class SFrontendServer extends __SClass {
@@ -90,6 +93,11 @@ export default class SFrontendServer extends __SClass {
       ({ resolve, reject, emit, pipe }) => {
         const express = __express();
 
+        // enable compression if prod
+        if (params.prod || __SEnv.is('production')) {
+          express.use(__compression());
+        }
+
         const logLevelInt = [
           'silent',
           'error',
@@ -102,24 +110,31 @@ export default class SFrontendServer extends __SClass {
 
         const frontendServerConfig = __SugarConfig.get('frontendServer');
 
-        // if (frontendServerConfig.staticDirs) {
-        //   Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
-        //     sailsConfig.routes[dir] = (req, res, next) => {
-        //       // @ts-ignore
-        //       const potentialFilePath = __path.join(
-        //         finalParams.rootDir,
-        //         req.url
-        //       );
-        //       if (__fs.existsSync(potentialFilePath)) {
-        //         const type = __mimeTypes.lookup(potentialFilePath);
-        //         res.setHeader('content-type', type);
-        //         __fs.createReadStream(potentialFilePath).pipe(res);
-        //       } else {
-        //         next();
-        //       }
-        //     };
-        //   });
-        // }
+        if (frontendServerConfig.staticDirs) {
+          Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
+
+            const fsPath = frontendServerConfig.staticDirs[dir];
+            emit('log', {
+              value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(process.cwd(), fsPath)}</cyan>" behind "<yellow>${dir}</yellow>" url`
+            });
+            express.use(dir, __express.static(fsPath));
+
+            // sailsConfig.routes[dir] = (req, res, next) => {
+            //   // @ts-ignore
+            //   const potentialFilePath = __path.join(
+            //     finalParams.rootDir,
+            //     req.url
+            //   );
+            //   if (__fs.existsSync(potentialFilePath)) {
+            //     const type = __mimeTypes.lookup(potentialFilePath);
+            //     res.setHeader('content-type', type);
+            //     __fs.createReadStream(potentialFilePath).pipe(res);
+            //   } else {
+            //     next();
+            //   }
+            // };
+          });
+        }
 
         if (frontendServerConfig.proxy) {
           Object.keys(frontendServerConfig.proxy).forEach((proxyId) => {
@@ -190,15 +205,6 @@ export default class SFrontendServer extends __SClass {
             });
           });
         }
-
-        // handlers registration
-        // Object.keys(frontendServerConfig.handlers).forEach((handlerId) => {
-        //   const handlerObj = frontendServerConfig.handlers[handlerId];
-        //   const handlerFn = require(handlerObj.handler).default;
-        //   express.get(handlerObj.route, (req, res, next) => {
-        //     return pipe(handlerFn(req, res, next));
-        //   });
-        // });
 
         express.listen(frontendServerConfig.port, () => {
           // server started successfully

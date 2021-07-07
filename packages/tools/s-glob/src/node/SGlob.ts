@@ -40,6 +40,8 @@ export interface ISGlobSettings {
     resolve: Partial<IResolveGlobSettings>
 }
 
+export { IResolveGlobSettings };
+
 export default class SGlob extends __SClass {
   /**
    * @name            _globs

@@ -8,6 +8,7 @@ const __childProcess = require('child_process');
 const __glob = require('glob-all');
 const __path = require('path');
 const __fs = require('fs');
+const __parseArgs = require('../shared/cli/parseArgs').default;
 const __SInterface = require('@coffeekraken/s-interface').default;
 const __isPath = require('../shared/is/path').default;
 const __parseHtml = require('../shared/console/parseHtml').default;
@@ -80,6 +81,27 @@ class SSugarCli {
         })
         .join(' ') || '';
 
+    // checking and set "NODE_ENV"
+    const params = __parseArgs(this._args);
+    if (params.env) {
+      switch(params.env) {
+        case 'dev':
+        case 'development':
+          process.env.NODE_ENV = 'development';
+        break;
+        case 'prod':
+        case 'production':
+          process.env.NODE_ENV = 'production';
+        break;
+        case 'test':
+          process.env.NODE_ENV = 'test';
+        break;
+        default:
+          throw new Error(`<red>[sugar]</red> Sorry but the passed env "<yellow>${params.env}</yellow>" is not supported. Valid values are "<green>dev,development,prod,production,test</green>"`);
+        break;
+      }
+    }
+    
     // reading sugarJsons
     const sugarJsonInstance = new __SSugarJson();
     this._sugarJsons = sugarJsonInstance.read();

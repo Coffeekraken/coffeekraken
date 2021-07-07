@@ -1,4 +1,4 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -31,6 +31,9 @@ class SFrontstackRecipeParamsInterface extends __SInterface {
       type: 'Boolean',
       default: false,
       alias: 'p'
+    },
+    env: {
+      type: 'String'
     }
   };
 }

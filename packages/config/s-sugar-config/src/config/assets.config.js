@@ -3,18 +3,25 @@ export default {
         main: {
             id: 'main',
             defer: true,
-            src: `./dist/css/index.css`,
-            'src@dev': '[config.vite.server.hostname]/src/css/index.css'
+            src: `[config.storage.serve.cssDir]/index.css`,
+            'src@dev': '[config.vite.server.hostname][config.storage.serve.cssDir]/index.css'
         }
     },
     js: {
-        main: {
-            id: 'main',
+        module: {
+            id: 'module',
             type: 'module',
             defer: true,
-            src: './dist/js/index.js',
-            'src@dev': '[config.vite.server.hostname]/src/js/index.ts'
+            src: '[config.storage.serve.jsDir]/module.es.js',
+            'src@dev': '[config.vite.server.hostname][config.storage.serve.jsDir]/index.ts'
+        },
+        main: {
+            id: 'main',
+            nomodule: true,
+            defer: true,
+            src: '[config.storage.serve.jsDir]/index.iife.js',
+            'src@dev': undefined
         }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXNzZXRzLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFzc2V0cy5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZUFBZTtJQUNiLEdBQUcsRUFBRTtRQUNILElBQUksRUFBRTtZQUNKLEVBQUUsRUFBRSxNQUFNO1lBQ1YsS0FBSyxFQUFFLElBQUk7WUFDWCxHQUFHLEVBQUUsc0JBQXNCO1lBQzNCLFNBQVMsRUFBRSxpREFBaUQ7U0FDN0Q7S0FDRjtJQUNELEVBQUUsRUFBRTtRQUNGLElBQUksRUFBRTtZQUNKLEVBQUUsRUFBRSxNQUFNO1lBQ1YsSUFBSSxFQUFFLFFBQVE7WUFDZCxLQUFLLEVBQUUsSUFBSTtZQUNYLEdBQUcsRUFBRSxvQkFBb0I7WUFDekIsU0FBUyxFQUFFLCtDQUErQztTQUMzRDtLQUNGO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXNzZXRzLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFzc2V0cy5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZUFBZTtJQUNiLEdBQUcsRUFBRTtRQUNILElBQUksRUFBRTtZQUNKLEVBQUUsRUFBRSxNQUFNO1lBQ1YsS0FBSyxFQUFFLElBQUk7WUFDWCxHQUFHLEVBQUUseUNBQXlDO1lBQzlDLFNBQVMsRUFBRSxzRUFBc0U7U0FDbEY7S0FDRjtJQUNELEVBQUUsRUFBRTtRQUNGLE1BQU0sRUFBRTtZQUNOLEVBQUUsRUFBRSxRQUFRO1lBQ1osSUFBSSxFQUFFLFFBQVE7WUFDZCxLQUFLLEVBQUUsSUFBSTtZQUNYLEdBQUcsRUFBRSwyQ0FBMkM7WUFDaEQsU0FBUyxFQUFFLG9FQUFvRTtTQUNoRjtRQUNELElBQUksRUFBRTtZQUNKLEVBQUUsRUFBRSxNQUFNO1lBQ1YsUUFBUSxFQUFFLElBQUk7WUFDZCxLQUFLLEVBQUUsSUFBSTtZQUNYLEdBQUcsRUFBRSw0Q0FBNEM7WUFDakQsU0FBUyxFQUFFLFNBQVM7U0FDckI7S0FDRjtDQUNGLENBQUMifQ==

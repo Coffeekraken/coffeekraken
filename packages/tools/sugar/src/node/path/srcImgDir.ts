@@ -37,7 +37,7 @@ export default function (settings: ISrcImgDirSettings = {}) {
   settings = {
     ...settings
   };
-  const srcImgDir = __SugarConfig.get('storage.src.jsDir');
+  const srcImgDir = __SugarConfig.get('storage.src.imgDir');
   if (srcImgDir !== undefined) {
     __fs.ensureDirSync(srcImgDir);
     return srcImgDir;

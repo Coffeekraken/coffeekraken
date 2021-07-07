@@ -55,8 +55,8 @@ export default {
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   staticDirs: {
-    '/dist/*': `[config.storage.dist.rootDir]`
-    // '/node_modules': '[config.storage.package.rootDir]/node_modules'
+    '/dist': `[config.storage.dist.rootDir]`,
+    '/src': `[config.storage.src.rootDir]`
   },
 
   /**

@@ -37,7 +37,7 @@ class SViteBuildInterface extends __SInterface {
     format: {
       type: 'Array<String>',
       values: ['es','umd','cjs','iife'],
-      default: ['es','umd'],
+      default: [],
       alias: 'f'
     },
     target: {

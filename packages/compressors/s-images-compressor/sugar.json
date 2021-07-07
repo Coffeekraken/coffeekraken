@@ -1,0 +1,23 @@
+{
+  "config": {
+    "folders": [
+      {
+        "scope": "default",
+        "path": "./src/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "images",
+      "description": "Images related actions",
+      "defaultAction": "compress",
+      "actions": {
+        "compress": {
+          "description": "Compress the images using imagemin and some plugins like jpegtran, pngopti, etc...",
+          "process": "./src/cli/compress.cli.js"
+        }
+      }
+    }
+  ]
+}

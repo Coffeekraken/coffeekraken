@@ -38,6 +38,7 @@ export interface ISFrontstackAction {
 
 export interface ISFrontstackRecipestack {
   description: string;
+  sharedParams: any;
   actions: Record<string, ISFrontstackAction>;
 }
 
@@ -276,10 +277,20 @@ export default class SFrontstack extends __SClass {
         }
 
         // build shared params to pass to every sub-processes
-        const sharedParams = Object.assign({}, finalParams);
+        let sharedParams = Object.assign({}, finalParams);
         delete sharedParams.recipe;
         delete sharedParams.stack;
         delete sharedParams.help;
+
+        // extend with "sharedParams" if exists on the recipe stack
+        if (recipeObj.stacks[finalParams.stack].sharedParams) {
+          sharedParams = {
+            ...recipeObj.stacks[finalParams.stack].sharedParams,
+            ...sharedParams
+          };
+        }
+
+        console.log(sharedParams);
 
         // build shared params cli string
         const sharedParamsStr = __argsToString(sharedParams).trim();

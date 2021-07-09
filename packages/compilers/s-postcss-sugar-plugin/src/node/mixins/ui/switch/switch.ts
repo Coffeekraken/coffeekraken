@@ -35,6 +35,8 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
+      style: 'default',
+      scope: [],
     ...params
   };
 

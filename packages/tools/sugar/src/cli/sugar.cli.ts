@@ -16,6 +16,7 @@ const __SSugarJson = require('@coffeekraken/s-sugar-json').default;
 const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
 const __SBench = require('@coffeekraken/s-bench').default;
 const __sugarBanner = require('@coffeekraken/sugar/shared/ascii/sugarBanner').default;
+const __isChildProcess = require('@coffeekraken/sugar/node/is/childProcess').default;
 
 const { Select, AutoComplete } = require('enquirer');
 
@@ -45,7 +46,7 @@ class SSugarCliParamsInterface extends __SInterface {
  * @author                 Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-const cliParams = SSugarCliParamsInterface.apply(process.argv.slice(2).join(' ')).value;
+const cliParams = SSugarCliParamsInterface.apply(process.argv.slice(2).join(' '));
 if (cliParams.bench) {
   __SBench.env.activateBench(cliParams.bench === true ? '*' : cliParams.bench);
 }
@@ -100,8 +101,15 @@ class SSugarCli {
           throw new Error(`<red>[sugar]</red> Sorry but the passed env "<yellow>${params.env}</yellow>" is not supported. Valid values are "<green>dev,development,prod,production,test</green>"`);
         break;
       }
+    } else {
+      process.env.NODE_ENV = 'development';
     }
-    
+
+    // print header
+    if (!__isChildProcess()) {
+      this._newStep();
+    }
+
     // reading sugarJsons
     const sugarJsonInstance = new __SSugarJson();
     this._sugarJsons = sugarJsonInstance.read();
@@ -218,6 +226,8 @@ class SSugarCli {
       paddingTop: 1,
       paddingBottom: 1
     })));
+    console.log(__parseHtml(`<yellow>█</yellow> This process is running in the ${process.env.NODE_ENV === 'production' ? '<green>production</green>' : process.env.NODE_ENV === 'test' ? '<cyan>test</cyan>' : '<yellow>development</yellow>'} environment`))
+    console.log(__parseHtml('<yellow>█</yellow>'));
   }
 
   async _interactivePrompt() {

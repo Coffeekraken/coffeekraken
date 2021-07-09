@@ -5104,14 +5104,14 @@ function applyInterface(ctx, name2, on = null) {
         throw: true
       });
       if (interfaceObj.on && typeof interfaceObj.on === "object") {
-        const returnValue = deepAssign(interfaceObj.on, res.value);
+        const returnValue = deepAssign(interfaceObj.on, res);
         return returnValue;
       } else if (interfaceObj.on && typeof interfaceObj.on === "string") {
-        return deepAssign(get(ctx, interfaceObj.on), res.value);
+        return deepAssign(get(ctx, interfaceObj.on), res);
       } else if (ctx[name2] !== void 0) {
         return ctx[name2];
-      } else if (!res.hasIssues()) {
-        return res.value;
+      } else {
+        return res;
       }
     }
   }
@@ -6110,7 +6110,7 @@ class SDescriptor extends SClass {
   }
   static registerRule(rule) {
     if (rule.id === void 0 || typeof rule.id !== "string") {
-      throw `Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`;
+      throw new Error(`Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`);
     }
     this._registeredRules[rule.id] = rule;
   }
@@ -6125,7 +6125,7 @@ class SDescriptor extends SClass {
     this._descriptorResult = new SDescriptorResult(this, finalValuesObj, Object.assign({}, set2));
     const rules2 = set2.rules;
     if (!ofType(value, set2.type)) {
-      throw `Sorry but this descriptor "<yellow>${this.metas.name}</yellow>" does not accept values of type "<cyan>${typeOf(value)}</cyan>" but only "<green>${set2.type}</green>"...`;
+      throw new Error(`Sorry but this descriptor "<yellow>${this.metas.name}</yellow>" does not accept values of type "<cyan>${typeOf(value)}</cyan>" but only "<green>${set2.type}</green>"...`);
     }
     if (Array.isArray(value) && !set2.arrayAsValue) {
       throw new Error(`Sorry but the support for arrays like values has not been integrated for not...`);
@@ -6144,15 +6144,9 @@ class SDescriptor extends SClass {
         }
         if (ruleObj2.interface !== void 0) {
           const interfaceValue = valuesObjToProcess[propName];
-          const interfaceRes = ruleObj2.interface.apply(interfaceValue || {}, {
-            complete: true,
-            throw: false
+          valuesObjToProcess[propName] = ruleObj2.interface.apply(interfaceValue || {}, {
+            complete: true
           });
-          if (interfaceRes.hasIssues()) {
-            throw new Error(interfaceRes.toString());
-          } else {
-            valuesObjToProcess[propName] = interfaceRes.value;
-          }
         }
         const validationResult = this._validate(valuesObjToProcess[propName], propName, ruleObj2, set2);
         if (validationResult !== void 0 && validationResult !== null) {
@@ -6194,8 +6188,8 @@ class SDescriptor extends SClass {
       const ruleValue = rulesObj[ruleName];
       if (this.constructor._registeredRules[ruleName] === void 0) {
         if (settings.throwOnMissingRule) {
-          throw `Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
-              - ${Object.keys(this.constructor._registeredRules).join("\n- ")}`;
+          throw new Error(`Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
+              - ${Object.keys(this.constructor._registeredRules).join("\n- ")}`);
         }
       } else {
         const ruleObj2 = this.constructor._registeredRules[ruleName];
@@ -6231,8 +6225,10 @@ class SDescriptor extends SClass {
         __ruleObj: ruleObj2,
         __propName: propName
       };
-      this._descriptorResult.add(obj);
-      throw new Error(this._descriptorResult.toString());
+      if (this._descriptorResult) {
+        this._descriptorResult.add(obj);
+        throw new Error(this._descriptorResult.toString());
+      }
     } else {
       return ruleResult;
     }
@@ -6328,47 +6324,6 @@ SDescriptor.registerRule(ruleObj$3);
 SDescriptor.registerRule(ruleObj$2);
 SDescriptor.registerRule(ruleObj$1);
 SDescriptor.registerRule(ruleObj);
-function getAvailableInterfaceTypes() {
-  if (global !== void 0)
-    return global._registeredInterfacesTypes || {};
-  else if (window !== void 0)
-    return window._registeredInterfacesTypes || {};
-  else
-    return {};
-}
-class SInterfaceResult {
-  constructor(data = {}) {
-    this._data = {};
-    this._data = deepMerge$1({}, data);
-  }
-  get value() {
-    var _a2, _b;
-    if (this.hasIssues())
-      return void 0;
-    return (_b = (_a2 = this._data) === null || _a2 === void 0 ? void 0 : _a2.descriptorResult) === null || _b === void 0 ? void 0 : _b.value;
-  }
-  hasIssues() {
-    if (this._data.descriptorResult)
-      return this._data.descriptorResult.hasIssues();
-    return false;
-  }
-  toString() {
-    if (__isNode$1()) {
-      return this.toConsole();
-    } else {
-      return `The method "toHtml" has not being integrated for now...`;
-    }
-  }
-  toConsole() {
-    const stringArray = [];
-    if (this._data.descriptorResult) {
-      stringArray.push(this._data.descriptorResult.toConsole());
-    }
-    return `
-${stringArray.join("\n")}
-    `.trim();
-  }
-}
 function parseArgs(string, settings = {}) {
   settings = deepMerge$1({
     throw: true,
@@ -6499,6 +6454,14 @@ function parseArgs(string, settings = {}) {
   });
   return argsObj;
 }
+function getAvailableInterfaceTypes() {
+  if (global !== void 0)
+    return global._registeredInterfacesTypes || {};
+  else if (window !== void 0)
+    return window._registeredInterfacesTypes || {};
+  else
+    return {};
+}
 if (__isNode$1())
   global._registeredInterfacesTypes = {};
 else
@@ -6506,9 +6469,7 @@ else
 class SInterface extends SClass {
   constructor(settings) {
     super(deepMerge$1({
-      interface: {
-        throw: true
-      }
+      interface: {}
     }, settings !== null && settings !== void 0 ? settings : {}));
     this._definition = {};
     this._definition = this.constructor.definition;
@@ -6557,12 +6518,8 @@ class SInterface extends SClass {
     }
   }
   static defaults() {
-    const result = this.apply({}, {
-      throw: false
-    });
-    if (!result.hasIssues())
-      return result.value;
-    return {};
+    var _a2;
+    return (_a2 = this.apply({}, {})) !== null && _a2 !== void 0 ? _a2 : {};
   }
   static apply(objectOrString, settings) {
     const int = new this({
@@ -6623,19 +6580,16 @@ class SInterface extends SClass {
       });
     }
     const descriptor2 = new SDescriptor({
-      descriptor: Object.assign({type: "Object", rules: this._definition, throw: false}, (_a2 = set2.descriptor) !== null && _a2 !== void 0 ? _a2 : {})
+      descriptor: Object.assign({type: "Object", rules: this._definition}, (_a2 = set2.descriptor) !== null && _a2 !== void 0 ? _a2 : {})
     });
     if (set2.baseObj) {
       objectOnWhichToApplyInterface = deepMerge$1(set2.baseObj, objectOnWhichToApplyInterface);
     }
     const descriptorResult = descriptor2.apply(objectOnWhichToApplyInterface);
-    const interfaceResult = new SInterfaceResult({
-      descriptorResult
-    });
-    if (interfaceResult.hasIssues() && set2.throw) {
-      throw new Error(interfaceResult.toString());
+    if (descriptorResult.hasIssues()) {
+      throw new Error(descriptorResult.toString());
     }
-    return interfaceResult;
+    return descriptorResult.value;
   }
 }
 SInterface._definition = {};
@@ -12543,7 +12497,7 @@ class SComponentUtils extends SClass {
           this._settings.interface.definition[propName] = obj;
         }
       });
-      this.props = this._settings.interface.apply((_a2 = this.props) !== null && _a2 !== void 0 ? _a2 : {}).value;
+      this.props = this._settings.interface.apply((_a2 = this.props) !== null && _a2 !== void 0 ? _a2 : {});
       if (this.props.target) {
         if (!this.props.target.match(/^(\.|\[])/)) {
           this._targetSelector = `#${this.props.target}`;
@@ -74940,14 +74894,14 @@ function onScrollEnd($elm, callback, settings) {
   let isBody = false;
   let $scrollListenedElm = $elm;
   let $scrollHeightElm = $elm;
-  if ($elm === document.body) {
+  if ($elm === window.document.body) {
     isBody = true;
     $scrollListenedElm = document;
-    $scrollHeightElm = document.body;
-  } else if ($elm === document || $elm === window) {
+    $scrollHeightElm = window.document.body;
+  } else if ($elm === window.document) {
     isBody = true;
-    $elm = document.body;
-    $scrollHeightElm = document.body;
+    $elm = window.document.body;
+    $scrollHeightElm = window.document.body;
   }
   let active = true, count = 0;
   const internalCallback = (e2) => {
@@ -74955,7 +74909,7 @@ function onScrollEnd($elm, callback, settings) {
     if (isBody) {
       viewportHeight = window.innerHeight;
       scrollTop2 = $scrollHeightElm.scrollTop;
-      fullHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+      fullHeight = Math.max(window.document.body.scrollHeight, window.document.documentElement.scrollHeight, window.document.body.offsetHeight, window.document.documentElement.offsetHeight, window.document.body.clientHeight, window.document.documentElement.clientHeight);
     } else {
       viewportHeight = $scrollHeightElm.scrollHeight;
       scrollTop2 = $scrollHeightElm.scrollTop;

@@ -5127,14 +5127,14 @@ var __async = (__this, __arguments, generator) => {
           throw: true
         });
         if (interfaceObj.on && typeof interfaceObj.on === "object") {
-          const returnValue = deepAssign(interfaceObj.on, res.value);
+          const returnValue = deepAssign(interfaceObj.on, res);
           return returnValue;
         } else if (interfaceObj.on && typeof interfaceObj.on === "string") {
-          return deepAssign(get(ctx, interfaceObj.on), res.value);
+          return deepAssign(get(ctx, interfaceObj.on), res);
         } else if (ctx[name2] !== void 0) {
           return ctx[name2];
-        } else if (!res.hasIssues()) {
-          return res.value;
+        } else {
+          return res;
         }
       }
     }
@@ -6133,7 +6133,7 @@ ${settingsArray.join("\n")}
     }
     static registerRule(rule) {
       if (rule.id === void 0 || typeof rule.id !== "string") {
-        throw `Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`;
+        throw new Error(`Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`);
       }
       this._registeredRules[rule.id] = rule;
     }
@@ -6148,7 +6148,7 @@ ${settingsArray.join("\n")}
       this._descriptorResult = new SDescriptorResult(this, finalValuesObj, Object.assign({}, set));
       const rules = set.rules;
       if (!ofType(value, set.type)) {
-        throw `Sorry but this descriptor "<yellow>${this.metas.name}</yellow>" does not accept values of type "<cyan>${typeOf(value)}</cyan>" but only "<green>${set.type}</green>"...`;
+        throw new Error(`Sorry but this descriptor "<yellow>${this.metas.name}</yellow>" does not accept values of type "<cyan>${typeOf(value)}</cyan>" but only "<green>${set.type}</green>"...`);
       }
       if (Array.isArray(value) && !set.arrayAsValue) {
         throw new Error(`Sorry but the support for arrays like values has not been integrated for not...`);
@@ -6167,15 +6167,9 @@ ${settingsArray.join("\n")}
           }
           if (ruleObj.interface !== void 0) {
             const interfaceValue = valuesObjToProcess[propName];
-            const interfaceRes = ruleObj.interface.apply(interfaceValue || {}, {
-              complete: true,
-              throw: false
+            valuesObjToProcess[propName] = ruleObj.interface.apply(interfaceValue || {}, {
+              complete: true
             });
-            if (interfaceRes.hasIssues()) {
-              throw new Error(interfaceRes.toString());
-            } else {
-              valuesObjToProcess[propName] = interfaceRes.value;
-            }
           }
           const validationResult = this._validate(valuesObjToProcess[propName], propName, ruleObj, set);
           if (validationResult !== void 0 && validationResult !== null) {
@@ -6217,8 +6211,8 @@ ${settingsArray.join("\n")}
         const ruleValue = rulesObj[ruleName];
         if (this.constructor._registeredRules[ruleName] === void 0) {
           if (settings.throwOnMissingRule) {
-            throw `Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
-              - ${Object.keys(this.constructor._registeredRules).join("\n- ")}`;
+            throw new Error(`Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
+              - ${Object.keys(this.constructor._registeredRules).join("\n- ")}`);
           }
         } else {
           const ruleObj = this.constructor._registeredRules[ruleName];
@@ -6254,8 +6248,10 @@ ${settingsArray.join("\n")}
           __ruleObj: ruleObj,
           __propName: propName
         };
-        this._descriptorResult.add(obj);
-        throw new Error(this._descriptorResult.toString());
+        if (this._descriptorResult) {
+          this._descriptorResult.add(obj);
+          throw new Error(this._descriptorResult.toString());
+        }
       } else {
         return ruleResult;
       }
@@ -6351,47 +6347,6 @@ ${settingsArray.join("\n")}
   SDescriptor.registerRule(ruleObj$2);
   SDescriptor.registerRule(ruleObj$1);
   SDescriptor.registerRule(ruleObj);
-  function getAvailableInterfaceTypes() {
-    if (global !== void 0)
-      return global._registeredInterfacesTypes || {};
-    else if (window !== void 0)
-      return window._registeredInterfacesTypes || {};
-    else
-      return {};
-  }
-  class SInterfaceResult {
-    constructor(data = {}) {
-      this._data = {};
-      this._data = deepMerge$1({}, data);
-    }
-    get value() {
-      var _a, _b;
-      if (this.hasIssues())
-        return void 0;
-      return (_b = (_a = this._data) === null || _a === void 0 ? void 0 : _a.descriptorResult) === null || _b === void 0 ? void 0 : _b.value;
-    }
-    hasIssues() {
-      if (this._data.descriptorResult)
-        return this._data.descriptorResult.hasIssues();
-      return false;
-    }
-    toString() {
-      if (__isNode$1()) {
-        return this.toConsole();
-      } else {
-        return `The method "toHtml" has not being integrated for now...`;
-      }
-    }
-    toConsole() {
-      const stringArray = [];
-      if (this._data.descriptorResult) {
-        stringArray.push(this._data.descriptorResult.toConsole());
-      }
-      return `
-${stringArray.join("\n")}
-    `.trim();
-    }
-  }
   function parseArgs(string, settings = {}) {
     settings = deepMerge$1({
       throw: true,
@@ -6522,6 +6477,14 @@ ${stringArray.join("\n")}
     });
     return argsObj;
   }
+  function getAvailableInterfaceTypes() {
+    if (global !== void 0)
+      return global._registeredInterfacesTypes || {};
+    else if (window !== void 0)
+      return window._registeredInterfacesTypes || {};
+    else
+      return {};
+  }
   if (__isNode$1())
     global._registeredInterfacesTypes = {};
   else
@@ -6529,9 +6492,7 @@ ${stringArray.join("\n")}
   class SInterface extends SClass {
     constructor(settings) {
       super(deepMerge$1({
-        interface: {
-          throw: true
-        }
+        interface: {}
       }, settings !== null && settings !== void 0 ? settings : {}));
       this._definition = {};
       this._definition = this.constructor.definition;
@@ -6580,12 +6541,8 @@ ${stringArray.join("\n")}
       }
     }
     static defaults() {
-      const result = this.apply({}, {
-        throw: false
-      });
-      if (!result.hasIssues())
-        return result.value;
-      return {};
+      var _a;
+      return (_a = this.apply({}, {})) !== null && _a !== void 0 ? _a : {};
     }
     static apply(objectOrString, settings) {
       const int = new this({
@@ -6646,19 +6603,16 @@ ${stringArray.join("\n")}
         });
       }
       const descriptor = new SDescriptor({
-        descriptor: Object.assign({type: "Object", rules: this._definition, throw: false}, (_a = set.descriptor) !== null && _a !== void 0 ? _a : {})
+        descriptor: Object.assign({type: "Object", rules: this._definition}, (_a = set.descriptor) !== null && _a !== void 0 ? _a : {})
       });
       if (set.baseObj) {
         objectOnWhichToApplyInterface = deepMerge$1(set.baseObj, objectOnWhichToApplyInterface);
       }
       const descriptorResult = descriptor.apply(objectOnWhichToApplyInterface);
-      const interfaceResult = new SInterfaceResult({
-        descriptorResult
-      });
-      if (interfaceResult.hasIssues() && set.throw) {
-        throw new Error(interfaceResult.toString());
+      if (descriptorResult.hasIssues()) {
+        throw new Error(descriptorResult.toString());
       }
-      return interfaceResult;
+      return descriptorResult.value;
     }
   }
   SInterface._definition = {};
@@ -12568,7 +12522,7 @@ ${stringArray.join("\n")}
             this._settings.interface.definition[propName] = obj;
           }
         });
-        this.props = this._settings.interface.apply((_a = this.props) !== null && _a !== void 0 ? _a : {}).value;
+        this.props = this._settings.interface.apply((_a = this.props) !== null && _a !== void 0 ? _a : {});
         if (this.props.target) {
           if (!this.props.target.match(/^(\.|\[])/)) {
             this._targetSelector = `#${this.props.target}`;
@@ -74991,14 +74945,14 @@ ${stringArray.join("\n")}
     let isBody = false;
     let $scrollListenedElm = $elm;
     let $scrollHeightElm = $elm;
-    if ($elm === document.body) {
+    if ($elm === window.document.body) {
       isBody = true;
       $scrollListenedElm = document;
-      $scrollHeightElm = document.body;
-    } else if ($elm === document || $elm === window) {
+      $scrollHeightElm = window.document.body;
+    } else if ($elm === window.document) {
       isBody = true;
-      $elm = document.body;
-      $scrollHeightElm = document.body;
+      $elm = window.document.body;
+      $scrollHeightElm = window.document.body;
     }
     let active = true, count = 0;
     const internalCallback = (e) => {
@@ -75006,7 +74960,7 @@ ${stringArray.join("\n")}
       if (isBody) {
         viewportHeight = window.innerHeight;
         scrollTop = $scrollHeightElm.scrollTop;
-        fullHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+        fullHeight = Math.max(window.document.body.scrollHeight, window.document.documentElement.scrollHeight, window.document.body.offsetHeight, window.document.documentElement.offsetHeight, window.document.body.clientHeight, window.document.documentElement.clientHeight);
       } else {
         viewportHeight = $scrollHeightElm.scrollHeight;
         scrollTop = $scrollHeightElm.scrollTop;

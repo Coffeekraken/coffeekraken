@@ -149,11 +149,7 @@ const plugin = (settings: any = {}) => {
 
         // sanitizedParams = sanitizedParams.split('\n')[0];
 
-        const intRes = mixinInterface.apply(sanitizedParams, {});
-        if (intRes.hasIssues()) {
-          throw new Error(intRes.toString());
-        }
-        const params = intRes.value;
+        const params = mixinInterface.apply(sanitizedParams, {});
 
         // Object.keys(params).forEach((paramName) => {
         //   const paramValue = params[paramName];
@@ -248,11 +244,7 @@ const plugin = (settings: any = {}) => {
         const func = require(fnPath);
         const functionInterface = func.interface;
         const funcFn = func.default;
-        const intRes = functionInterface.apply(paramsStatement, {});
-        if (intRes.hasIssues()) {
-          throw new Error(intRes.toString());
-        }
-        const params = intRes.value;
+        const params = functionInterface.apply(paramsStatement, {});
         delete params.help;
 
         try {

@@ -87,7 +87,7 @@ export default class SFrontendServer extends __SClass {
   start(params: Partial<ISFrontendServerParams>): Promise<any> {
     const finalParams: ISFrontendServerParams = __SFrontendServerInterface.apply(
       params
-    ).value;
+    );
 
     return new __SPromise(
       ({ resolve, reject, emit, pipe }) => {

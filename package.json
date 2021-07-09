@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
-    "dev": "tsc -p .tsconfig/tsconfig.all.json --watch",
-    "dev.js": "tsc -p .tsconfig/tsconfig.js.json --watch",
-    "dev.node": "tsc -p .tsconfig/tsconfig.node.json --watch",
-    "dev.shared": "tsc -p .tsconfig/tsconfig.shared.json --watch",
+    "dev": "tsc --watch",
     "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
   },
   "private": true,

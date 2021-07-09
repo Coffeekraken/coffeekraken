@@ -309,9 +309,13 @@ export default class SConfig {
       }
     }
 
+    // handle the "extends" global property
     Object.keys(config).forEach(configName => {
       config[configName] = extendsConfigIfNeeded(config[configName]);
     });
+
+    // resolve environment properties like src@dev
+    this._resolveEnvironments(config);
 
     this._settings.resolvers.forEach((resolverObj) => {
       config = this._resolveInternalReferences(config, config, resolverObj);
@@ -326,26 +330,6 @@ export default class SConfig {
         }
       );
     }
-
-    __deepMap(config, ({value, prop, path, object}) => {
-      if (value === undefined) {
-        return -1;
-      }
-
-      // @environment handling
-      if (prop && prop.match(/.*@.*/) && !prop.includes('/')) {
-        const parts = prop.split('@');
-        const env = parts[1];
-        const p = parts[0];
-
-        if (__SEnv.is(env)) {
-          object[p] = value;
-          return -1;
-        }
-      }
-
-      return value;
-    });
 
     if (config instanceof Promise) {
       throw new Error('Promise based SConfig is not already implemented...');
@@ -374,6 +358,28 @@ export default class SConfig {
         `SConfig: Your "load" method of the "${adapter}" adapter has to return either a plain object, or a Promise resolved with a plain object. The returned value is "${config}" which is of type "${typeof config}"...`
       );
     }
+  }
+
+  _resolveEnvironments(config) {
+    __deepMap(config, ({value, prop, path, object}) => {
+      if (value === undefined) {
+        return -1;
+      }
+
+      // @environment handling
+      if (prop && prop.match(/.*@.*/) && !prop.includes('/')) {
+        const parts = prop.split('@');
+        const env = parts[1];
+        const p = parts[0];
+
+        if (__SEnv.is(env)) {
+          object[p] = value;
+          return -1;
+        }
+      }
+
+      return value;
+    });
   }
 
   /**

@@ -50,7 +50,7 @@ export default function sameItems(...args): any[] {
         const array1 = arrays[0] ?? [],
                 array2 = arrays[1] ?? [];
 
-        const sameArray = [];
+        const sameArray: any[] = [];
 
         array1.forEach(array1Item => {
 

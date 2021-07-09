@@ -132,6 +132,7 @@ export default class SComponentUtils extends __SClass {
     this.name = node.tagName.toLowerCase();
     this.props = props ?? {};
 
+    // @ts-ignore
     this.node.setAttribute('s-mounted', true);
 
     Object.keys((<any>this.constructor)._defaultProps).forEach(selector => {
@@ -166,7 +167,7 @@ export default class SComponentUtils extends __SClass {
         }
       });
 
-      this.props = this._settings.interface.apply(this.props ?? {}).value;
+      this.props = this._settings.interface.apply(this.props ?? {});
 
       if (this.props.target) {
         if (!this.props.target.match(/^(\.|\[])/)) {

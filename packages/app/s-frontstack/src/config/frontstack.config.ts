@@ -42,6 +42,7 @@ export default {
           actions: {
             postcssBuild: '[config.frontstack.actions.postcssBuild]',
             viteBuild: '[config.frontstack.actions.viteBuild]',
+            imagesBuild: '[config.frontstack.actions.imagesBuild]',
             docmapBuild: '[config.frontstack.actions.docmapBuild]'
           }
         }
@@ -82,6 +83,17 @@ export default {
       title: 'PostCSS build action',
       description: 'Build css using the amazing PostCSS package',
       process: 'sugard postcss.build',
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
+    imagesBuild: {
+      id: 'imagesBuild',
+      title: 'Images build action',
+      description: 'Build your images with ease. Compress, resize, webp version, etc...',
+      process: 'sugard images.build',
       settings: {
         processManager: {
           restart: true

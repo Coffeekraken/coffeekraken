@@ -58,6 +58,13 @@ export interface ISPostcssBuilderCtorSettings {
     postcssBuilder: Partial<ISPostcssBuilderSettings>
 }
 
+export interface ISPostcssBuilderResult {
+    inputFile?: __SFile;
+    outputFile?: __SFile;
+    css: string;
+    map: null;
+}
+
 export interface ISPostcssBuilderBuildParams {
     input: string;
     output: string;
@@ -114,7 +121,7 @@ export default class SPostcssBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _build(params?: Partial<ISPostcssBuilderBuildParams>): Promise<any> {
+    _build(params: ISPostcssBuilderBuildParams): Promise<ISPostcssBuilderResult> {
         return new __SPromise(async ({resolve, reject, emit}) => {
 
             let finalCss;
@@ -137,7 +144,7 @@ export default class SPostcssBuilder extends __SBuilder {
 
             // handle input
             let src = params.input,
-                from = undefined;
+                from: any = undefined;
             try {
                 src = __fs.readFileSync(params.input, 'utf8').toString();
                 from = params.input;
@@ -181,7 +188,7 @@ export default class SPostcssBuilder extends __SBuilder {
             });
 
             // build postcss
-            const result = __postcss(plugins).process(src, {
+            const result = __postcss(plugins).process(src ?? '', {
                 from
             });
             if (!result.css) {
@@ -246,12 +253,15 @@ export default class SPostcssBuilder extends __SBuilder {
                 });
             }
 
-            resolve({
-                inputFile: __SFile.new(from),
+            const res: ISPostcssBuilderResult = {
                 outputFile: params.output ? __SFile.new(params.output) : undefined,
                 css: finalCss,
                 map: null
-            });
+            };
+
+            if (from) res.inputFile = __SFile.new(from);
+
+            resolve(res);
         }, {
             metas: {
                 id: this.constructor.name

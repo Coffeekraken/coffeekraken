@@ -49,7 +49,6 @@ export interface ISDescriptorSettings {
   type: string;
   arrayAsValue: boolean;
   throwOnMissingRule: boolean;
-  throw: boolean;
   complete: boolean;
   rules: ISDescriptorRules;
 }
@@ -166,7 +165,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
    */
   static registerRule(rule: ISDescriptorRule): void {
     if (rule.id === undefined || typeof rule.id !== 'string') {
-      throw `Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`;
+      throw new Error(`Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`);
     }
     this._registeredRules[rule.id] = rule;
   }
@@ -258,11 +257,11 @@ class SDescriptor extends __SClass implements ISDescriptor {
 
     // check the passed value type correspond to the descriptor type
     if (!__isOfType(value, set.type)) {
-      throw `Sorry but this descriptor "<yellow>${
+      throw new Error(`Sorry but this descriptor "<yellow>${
         this.metas.name
       }</yellow>" does not accept values of type "<cyan>${__typeof(
         value
-      )}</cyan>" but only "<green>${set.type}</green>"...`;
+      )}</cyan>" but only "<green>${set.type}</green>"...`);
     }
 
     // check the type to validate correctly the value
@@ -311,15 +310,9 @@ class SDescriptor extends __SClass implements ISDescriptor {
         if (ruleObj.interface !== undefined) {
           const interfaceValue = valuesObjToProcess[propName];
           // _console.log('VAL', valuesObjToProcess[propName], propName);
-          const interfaceRes = ruleObj.interface.apply(interfaceValue || {}, {
-            complete: true,
-            throw: false
+          valuesObjToProcess[propName] = ruleObj.interface.apply(interfaceValue || {}, {
+            complete: true
           });
-          if (interfaceRes.hasIssues()) {
-            throw new Error(interfaceRes.toString());
-          } else {
-            valuesObjToProcess[propName] = interfaceRes.value;
-          }
         }
 
         // validate the property
@@ -393,10 +386,10 @@ class SDescriptor extends __SClass implements ISDescriptor {
       // make sure we have this rule registered
       if ((<any>this).constructor._registeredRules[ruleName] === undefined) {
         if (settings.throwOnMissingRule) {
-          throw `Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
+          throw new Error(`Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
               - ${Object.keys((<any>this).constructor._registeredRules).join(
                 '\n- '
-              )}`;
+              )}`);
         }
       } else {
         const ruleObj = (<any>this).constructor._registeredRules[ruleName];
@@ -470,9 +463,10 @@ class SDescriptor extends __SClass implements ISDescriptor {
         __ruleObj: ruleObj,
         __propName: propName
       };
-      // @ts-ignore
-      this._descriptorResult.add(obj);
-      throw new Error(this._descriptorResult.toString());
+      if (this._descriptorResult) {
+        this._descriptorResult.add(obj);
+        throw new Error(this._descriptorResult.toString());
+      }
     } else {
       return ruleResult;
     }

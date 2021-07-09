@@ -1,34 +1,24 @@
-import __SPromise from '@coffeekraken/s-promise';
-import __path from 'path';
-import __fs from 'fs';
-import __stackTrace from 'stack-trace';
-import { ISClass as __ISClass } from '@coffeekraken/s-class';
-import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
+import __SDuration from '@coffeekraken/s-duration';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { ILog } from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
+import __SStdio from '@coffeekraken/s-stdio';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __spawn from '@coffeekraken/sugar/node/process/spawn';
+import __extendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
+import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
+import __isClass from '@coffeekraken/sugar/shared/is/class';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
-import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
-import { ISInterface, ISInterfaceCtor } from '@coffeekraken/s-interface';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
-import __SStdio, { ISStdio } from '@coffeekraken/s-stdio';
+import __path from 'path';
+import __stackTrace from 'stack-trace';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __extendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
-import __spawn, {
-  ISpawnSettings
-} from '@coffeekraken/sugar/node/process/spawn';
 import {
-  ISProcessSettings,
-  ISProcessCtorSettings,
-  ISProcessProcessObj,
-  ISProcessInternal,
-  ISProcessParams,
-  ISProcessResultObject,
   ISCommandProcessCtorSettings,
-  ISCommandProcessParams
+  ISCommandProcessParams, ISProcessCtorSettings, ISProcessInternal,
+  ISProcessParams, ISProcessProcessObj, ISProcessResultObject, ISProcessSettings
 } from './ISProcess';
 
 // process.on('uncaughtException', function (err) {
@@ -504,7 +494,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     if (this.paramsInterface) {
       paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
         baseObj: this.initialParams ?? {}
-      }).value;
+      });
     }
 
     // check if asking for the help

@@ -1,4 +1,0 @@
-export default {
-    optimizationLevel: 4
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW1hZ2VtaW5PcHRpcG5nLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImltYWdlbWluT3B0aXBuZy5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZUFBZTtJQUNYLGlCQUFpQixFQUFFLENBQUM7Q0FDdkIsQ0FBQSJ9

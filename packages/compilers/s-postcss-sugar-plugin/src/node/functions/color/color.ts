@@ -81,9 +81,6 @@ export default function color({
   let modifierParams = {};
   if (finalParams.modifier && finalParams.modifier.match(/^--/)) {
     modifierParams = ColorModifierInterface.apply(finalParams.modifier);
-    if (!modifierParams.hasIssues()) {
-      modifierParams = modifierParams.value;
-    }
   } else if (
     finalParams.modifier &&
     finalParams.modifier.trim().match(/[a-zA-Z0-9_-]+/)

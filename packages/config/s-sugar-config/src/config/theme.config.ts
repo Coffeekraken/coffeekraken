@@ -61,11 +61,7 @@ export function prepare(themeConfig, config) {
 
         } else if (typeof colorValue === 'string' && colorValue.trim().match(/^--/)) {
 
-          const modifierParamsRes = ColorModifierInterface.apply(colorValue);
-          if (modifierParamsRes.hasIssues()) {
-            throw new Error(modifierParamsRes.toString());
-          }
-          const modifierParams = modifierParamsRes.value;
+          const modifierParams = ColorModifierInterface.apply(colorValue);
 
           Object.keys(modifierParams).forEach((propKey) => {
             const propValue = modifierParams[propKey];

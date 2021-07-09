@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name            onScrollEnd
  * @namespace       js.dom.detect
@@ -49,14 +51,14 @@ export default function onScrollEnd(
 
   let $scrollListenedElm = $elm;
   let $scrollHeightElm = $elm;
-  if ($elm === document.body) {
+  if ($elm === window.document.body) {
     isBody = true;
     $scrollListenedElm = document;
-    $scrollHeightElm = document.body;
-  } else if ($elm === document || $elm === window) {
+    $scrollHeightElm = window.document.body;
+  } else if ($elm === window.document) {
     isBody = true;
-    $elm = document.body;
-    $scrollHeightElm = document.body;
+    $elm = window.document.body;
+    $scrollHeightElm = window.document.body;
   }
 
   let active = true,
@@ -69,9 +71,9 @@ export default function onScrollEnd(
       viewportHeight = window.innerHeight;
       scrollTop = $scrollHeightElm.scrollTop;
       fullHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
+        window.document.body.scrollHeight, window.document.documentElement.scrollHeight,
+        window.document.body.offsetHeight, window.document.documentElement.offsetHeight,
+        window.document.body.clientHeight, window.document.documentElement.clientHeight
       );
     } else {
       viewportHeight = $scrollHeightElm.scrollHeight;

@@ -1,22 +1,19 @@
+import __SClass from '@coffeekraken/s-class';
 import __SDescriptor, {
-  ISDescriptorRules,
-  ISDescriptorSettings,
-  ISDescriptorResult
+  ISDescriptorResult, ISDescriptorRules,
+  ISDescriptorSettings
 } from '@coffeekraken/s-descriptor';
+import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
-import __SInterfaceResult, { ISInterfaceResult } from './SInterfaceResult';
-import __SClass from '@coffeekraken/s-class';
-import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 export interface ISInterfaceCtorSettings {
   interface: Partial<ISInterfaceSettings>;
 }
 
 export interface ISInterfaceSettings {
-  throw?: boolean;
   descriptor?: Partial<ISDescriptorSettings>;
   baseObj?: any;
 }
@@ -236,14 +233,10 @@ export default class SInterface extends __SClass implements ISInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static defaults() {
-    const result: ISInterfaceResult = this.apply(
+    return this.apply(
       {},
-      {
-        throw: false
-      }
-    );
-    if (!result.hasIssues()) return result.value;
-    return {};
+      {}
+    ) ?? {};
   }
 
   /**
@@ -258,7 +251,6 @@ export default class SInterface extends __SClass implements ISInterface {
    *
    * @param       {Any}                objectOrString              The object on which to apply the interface on, or a cli string to use as input
    * @param       {ISInterfaceSettings}               [settings={}]         An object of settings to configure your apply process
-   * - throw (false) {Boolean}: Specify if you want that an error is throwned if the test does not pass
    * - return (String) {String}: Specify in which return you want the result back. Can be "String" of "Object".
    * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
    *
@@ -268,7 +260,7 @@ export default class SInterface extends __SClass implements ISInterface {
   static apply(
     objectOrString: any,
     settings?: Partial<ISInterfaceSettings>
-  ): ISInterfaceResult {
+  ): any {
     // instanciate a new SInterface
     const int = new this({
       interface: settings ?? {}
@@ -340,7 +332,6 @@ export default class SInterface extends __SClass implements ISInterface {
       __deepMerge(
         {
           interface: {
-            throw: true
           }
         },
         settings ?? {}
@@ -369,7 +360,7 @@ export default class SInterface extends __SClass implements ISInterface {
   apply(
     objectOrString: any,
     settings?: Partial<ISInterfaceSettings>
-  ): ISInterfaceResult {
+  ): any {
     const set = <ISInterfaceSettings>(
       __deepMerge(this.interfaceSettings, settings ?? {})
     );
@@ -426,7 +417,6 @@ export default class SInterface extends __SClass implements ISInterface {
       descriptor: {
         type: 'Object',
         rules: this._definition,
-        throw: false,
         ...(set.descriptor ?? {})
       }
     });
@@ -443,16 +433,11 @@ export default class SInterface extends __SClass implements ISInterface {
       objectOnWhichToApplyInterface
     );
 
-    // instanciate a new interface result object
-    const interfaceResult: ISInterfaceResult = new __SInterfaceResult({
-      descriptorResult
-    });
-
-    if (interfaceResult.hasIssues() && set.throw) {
-      throw new Error(interfaceResult.toString());
+    if (descriptorResult.hasIssues()) {
+      throw new Error(descriptorResult.toString());
     }
 
     // return new result object
-    return interfaceResult;
+    return descriptorResult.value;
   }
 }

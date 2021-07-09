@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "include": ["../packages/*/*/src/shared/**/*.ts"],
-  "compilerOptions": {
-    "target": "es6",
-    "module": "esnext",
-    "moduleResolution": "node"
-  }
-}

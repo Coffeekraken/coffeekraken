@@ -16,7 +16,7 @@
 
     export default {
       async onBeforeMount() {
-        this.$props = __SDocblockToHtmlComponentInterface.apply(this.props).value;
+        this.$props = __SDocblockToHtmlComponentInterface.apply(this.props);
         const docblock = new __SDocblock(this.root.innerHTML);
         const docblockHtmlRenderer = new SDocblockHtmlRenderer(docblock);
         const html = await docblockHtmlRenderer.render();

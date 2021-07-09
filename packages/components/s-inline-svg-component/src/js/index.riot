@@ -9,7 +9,7 @@
     import __SInlineSvgComponentInterface from './interface/SInlineSvgComponentInterface.ts';
     export default {
       async onBeforeMount() {
-        this.$props = __SInlineSvgComponentInterface.apply(this.props).value;
+        this.$props = __SInlineSvgComponentInterface.apply(this.props);
         const response = await fetch(this.$props.src);
         const value = await response.text();
         this.root.innerHTML = value;

@@ -113,7 +113,7 @@ function _handleKeypress(ch, keyObj) {
 }
 
 function hotkey(key, settings?: Partial<IHotkeySettings>) {
-  const set: IHotkeySettings = HotkeySettingsInterface.apply(settings).value;
+  const set: IHotkeySettings = HotkeySettingsInterface.apply(settings);
 
   const promise = new __SPromise({
     id: 'hotkey'

@@ -242,7 +242,7 @@ export default class SVite extends __SClass {
                 results[buildType] = res;
                 // handle generated bundles
                 if (!params.noWrite) {
-                    // @ts.ignore
+                    // @ts-ignore
                     res.forEach((bundleObj, i) => {
                         const output = bundleObj.output[0];
                         const baseOutputConfig = outputs[i], baseOutputFilenames = outputsFilenames[i];

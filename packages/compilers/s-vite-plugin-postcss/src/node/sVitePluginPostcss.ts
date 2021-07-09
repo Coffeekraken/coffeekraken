@@ -1,4 +1,5 @@
 import __postcss from 'postcss';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            sVitePluginPostcss
@@ -11,15 +12,31 @@ import __postcss from 'postcss';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function sVitePluginPostcss(postcssPlugins: any[] = []) {
+export default function sVitePluginPostcss() {
   const fileRegex = /\.css(\?.*)?$/;
+
+  const postcssConfig = __SSugarConfig.get('postcss');
 
   return {
     name: 's-vite-plugin-postcss',
     transform(src, id) {
+
       if (fileRegex.test(id)) {
-        const css = __postcss(postcssPlugins).process(src, {
-          from: id.split('?')[0]
+
+        // resolve plugins paths
+        const plugins = postcssConfig.plugins.map((p) => {
+            if (typeof p === 'string') {
+                const plugin = require(p);
+                const fn = plugin.default ?? plugin;
+                const options = postcssConfig.pluginsOptions[p] ?? {};
+                return fn(options);
+            }
+            return p;
+        });
+
+        // build postcss
+        const css = __postcss(plugins).process(src ?? '', {
+            from: id.split('?')[0]
         }).css;
         return {
           code: css,

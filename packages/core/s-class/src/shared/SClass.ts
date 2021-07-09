@@ -422,15 +422,14 @@ function applyInterface(ctx: any, name: string, on: any = null) {
       });
 
       if (interfaceObj.on && typeof interfaceObj.on === 'object') {
-        const returnValue = __deepAssign(interfaceObj.on, res.value);
+        const returnValue = __deepAssign(interfaceObj.on, res);
         return returnValue;
       } else if (interfaceObj.on && typeof interfaceObj.on === 'string') {
-        return __deepAssign(__get(ctx, interfaceObj.on), res.value);
+        return __deepAssign(__get(ctx, interfaceObj.on), res);
       } else if (ctx[name] !== undefined) {
         return ctx[name];
-      } else if (!res.hasIssues()) {
-        return res.value;
-        // throw `You try to apply the interface "<yellow>${interfaceObj.class.name}</yellow>" on a data "<cyan>${interfaceObj.on}</cyan>" that seems to be inexistant`;
+      } else {
+        return res;
       }
     }
   }

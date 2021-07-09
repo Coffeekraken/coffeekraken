@@ -40,7 +40,6 @@ export interface ISBuilderCtorSettings {
 }
 
 export interface ISBuilder {
-  initialParams: any;
   build(params: any, settings?: any);
 }
 
@@ -105,7 +104,7 @@ class SBuilder extends __SClass implements ISBuilder {
     // @weird:ts-compilation-issue
     let finalParams = params;
     if (settings.interface) {
-      finalParams = settings.interface.apply(params).value;
+      finalParams = settings.interface.apply(params);
     }
 
     // @ts-ignore

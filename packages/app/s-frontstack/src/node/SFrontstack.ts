@@ -123,7 +123,7 @@ export default class SFrontstack extends __SClass {
         const frontstackConfig = __SSugarConfig.get('frontstack');
         const actionsObj = frontstackConfig.actions;
 
-        const finalParams: ISFrontstackActionParams = __SFrontstackActionInterface.apply(params).value;
+        const finalParams: ISFrontstackActionParams = __SFrontstackActionInterface.apply(params);
 
         const availableActions = Object.keys(actionsObj);
 
@@ -139,15 +139,15 @@ export default class SFrontstack extends __SClass {
           );
         }
 
-        emit('log', {
-          clear: true,
-          nude: true,
-          paddingTop: 0,
-          paddingBottom: 1,
-          value: __sugarBanner({
-            paddingBottom: 1
-          })
-        });
+        // emit('log', {
+        //   clear: true,
+        //   nude: true,
+        //   paddingTop: 0,
+        //   paddingBottom: 1,
+        //   value: __sugarBanner({
+        //     paddingBottom: 1
+        //   })
+        // });
 
         emit('log', {
           value: `Starting frontstack process using "<yellow>${finalParams.action}</yellow>" action`
@@ -206,7 +206,7 @@ export default class SFrontstack extends __SClass {
         const frontstackConfig = __SSugarConfig.get('frontstack');
         const recipesObj = frontstackConfig['recipes'];
 
-        const finalParams = __SFrontstackRecipeParamsInterface.apply(params).value;
+        const finalParams = __SFrontstackRecipeParamsInterface.apply(params);
 
         if (!finalParams.recipe) {
           const sugarJson = new __SSugarJson().current();
@@ -228,15 +228,15 @@ export default class SFrontstack extends __SClass {
           finalParams.stack = recipesObj[finalParams.recipe].defaultStack;
         }
 
-        emit('log', {
-          clear: true,
-          nude: true,
-          paddingTop: 0,
-          paddingBottom: 1,
-          value: __sugarBanner({
-            paddingBottom: 1
-          })
-        });
+        // emit('log', {
+        //   clear: true,
+        //   nude: true,
+        //   paddingTop: 0,
+        //   paddingBottom: 1,
+        //   value: __sugarBanner({
+        //     paddingBottom: 1
+        //   })
+        // });
 
         emit('log', {
           value: `Starting frontstack process`
@@ -289,8 +289,6 @@ export default class SFrontstack extends __SClass {
             ...sharedParams
           };
         }
-
-        console.log(sharedParams);
 
         // build shared params cli string
         const sharedParamsStr = __argsToString(sharedParams).trim();

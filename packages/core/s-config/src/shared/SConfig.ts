@@ -265,12 +265,7 @@ export default class SConfig {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  load(adapter = this._settings.defaultAdapter, isUpdate = false) {
-    // make sure we load only once the config
-    // if (_SConfigLoadingByAdapter[adapter]) {
-    //   return null;
-    // }
-    // _SConfigLoadingByAdapter[adapter] = true;
+  async load(adapter = this._settings.defaultAdapter, isUpdate = false) {
 
     if (!this._adapters[adapter]) {
       throw new Error(
@@ -282,7 +277,7 @@ export default class SConfig {
       return this._adapters[adapter].config;
     }
 
-    let config = this._adapters[adapter].instance.load(isUpdate);
+    let config = await this._adapters[adapter].instance.load(isUpdate);
 
     function extendsConfigIfNeeded(configToExtends) {
       if (configToExtends.extends && typeof configToExtends.extends === 'string') {
@@ -292,9 +287,6 @@ export default class SConfig {
         }
 
         const extendsConfig = extendsConfigIfNeeded(Object.assign({}, config[extend]));
-
-
-
 
         delete configToExtends.extends;
         const newExtendedConfig = __deepMerge(
@@ -333,19 +325,6 @@ export default class SConfig {
 
     if (config instanceof Promise) {
       throw new Error('Promise based SConfig is not already implemented...');
-      // return new Promise((resolve) => {
-      //   config.then((c) => {
-      //     if (Object.keys(this._adapters[adapter].config).length === 0 && c) {
-      //       this._adapters[adapter].config = c;
-      //       this._adapters[adapter].config.$ = {
-      //         hash: __md5.encrypt(c),
-      //         loadedAt: Date.now()
-      //       };
-      //       return resolve(c);
-      //     }
-      //     return resolve(this._adapters[adapter].config);
-      //   });
-      // });
     } else if (__isPlainObject(config)) {
       this._adapters[adapter].config = config;
       this._adapters[adapter].config.$ = {
@@ -358,6 +337,7 @@ export default class SConfig {
         `SConfig: Your "load" method of the "${adapter}" adapter has to return either a plain object, or a Promise resolved with a plain object. The returned value is "${config}" which is of type "${typeof config}"...`
       );
     }
+
   }
 
   _resolveEnvironments(config) {
@@ -420,7 +400,6 @@ export default class SConfig {
   }
 
   _resolveInternalReferences(originalValue, config, resolverObj, path = []) {
-
 
     if (__isPlainObject(originalValue)) {
       const afterObj = {};
@@ -543,8 +522,10 @@ export default class SConfig {
     }
 
     if (Object.keys(this._adapters[adapter].config).length === 0) {
-     this.load();
+      throw new Error(`<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`);
     }
+
+    // console.log('get', path, this._adapters[adapter].config);
 
     const originalValue = __get(this._adapters[adapter].config, path);
 

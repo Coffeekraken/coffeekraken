@@ -8,6 +8,7 @@ import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __childProcess from 'child_process';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __globalEventEmitter from '@coffeekraken/sugar/node/event/globalEventEmitter';
 
 import __SLog, { ILog } from '@coffeekraken/s-log';
 
@@ -15,11 +16,21 @@ export interface ISStdioCtorSettings {
   stdio?: ISStdioSettings;
 }
 
+export interface ISStdioSettingsMetas {
+  time: boolean;
+}
+
 export interface ISStdioSettings {
+  processor: typeof Function;
+  maxItems: number;
   events: string[];
+  spaceBetween: number;
+  spaceAround: number;
+  globalEvents: boolean;
   filter: typeof Function;
   processor: typeof Function;
   types: string[];
+  metas: ISStdioSettingsMetas;
   mapTypesToEvents: Record<string, string[]>;
 }
 
@@ -174,6 +185,7 @@ class SStdio extends __SClass implements ISStdio {
   /**
    * @name            new
    * @type            Function
+   * @async
    *
    * This static method is a sugar to instanciate an stdio by specifying some sources,
    * and either a path to a SStdio class, an SStdio class directly or a pre-registered
@@ -194,13 +206,13 @@ class SStdio extends __SClass implements ISStdio {
    * import SStdio from '@coffeekraken/s-stdio';
    * import spawn from '@coffeekraken/sugar/node/process/spawn';
    * const proc = spawn('ls -la');
-   * SStdio.new(proc);
+   * await SStdio.new(proc);
    *
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static new(sources, stdio: any = 'inherit', settings = {}) {
-    const n = require('./new').default;
+  static async new(sources, stdio: any = 'inherit', settings = {}) {
+    const { default: n } = await import('./new');
     return n(sources, stdio, settings);
   }
 
@@ -237,10 +249,11 @@ class SStdio extends __SClass implements ISStdio {
         {
           stdio: {
             filter: null,
-            process: null,
+            processor: null,
             maxItems: -1,
             spaceBetween: 0,
             spaceAround: 0,
+            globalEvents: true,
             events: [
               'log',
               '*.log',
@@ -275,6 +288,9 @@ class SStdio extends __SClass implements ISStdio {
       )
     );
     this.sources = Array.isArray(sources) ? sources : [sources];
+    if (this.stdioSettings.globalEvents) {
+      this.sources.push(__globalEventEmitter);
+    }
     this.sources.forEach((s) => {
       // subscribe to the process
       this.registerSource(s);

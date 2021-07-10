@@ -3,6 +3,8 @@ import __SInterface from '../SInterface';
 
 import { ISInterfaceRendererSettings } from '../../shared/renderers/ISInterfaceRenderer';
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+
 /**
  * @name            SInterfaceTerminalRenderer
  * @namespace       sugar.node.interface.renderers
@@ -35,7 +37,7 @@ class SInterfaceTerminalRenderer extends __SInterfaceRenderer {
     settings?: Partial<ISInterfaceRendererSettings>
   ) {
     super(int, {
-      templatesDir: `${__dirname}/terminal`,
+      templatesDir: `${__dirname()}/terminal`,
       ...settings
     });
   }

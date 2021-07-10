@@ -2,6 +2,7 @@
   "name": "@coffeekraken/s-notification",
   "version": "2.0.0",
   "description": "",
+  "type": "module",
   "main": "./src/node/exports.js",
   "browser": "./src/shared/exports.js",
   "scripts": {},

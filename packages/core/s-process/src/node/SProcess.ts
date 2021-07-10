@@ -20,6 +20,7 @@ import {
   ISCommandProcessParams, ISProcessCtorSettings, ISProcessInternal,
   ISProcessParams, ISProcessProcessObj, ISProcessResultObject, ISProcessSettings
 } from './ISProcess';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 // process.on('uncaughtException', function (err) {
 //   console.log('CAUGHT__', err);
@@ -432,7 +433,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _duration: any;
-  run(
+  async run(
     paramsOrStringArgs: string | Partial<ISProcessParams> = {},
     settings: Partial<ISProcessSettings> = {}
   ) {
@@ -452,7 +453,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
 
     if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
-      this.stdio = __SStdio.new(this, processSettings.stdio, {});
+      this.stdio = await __SStdio.new(this, processSettings.stdio, {});
     }
 
     this._duration = new __SDuration();
@@ -520,7 +521,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     if (processSettings.runAsChild && !__isChildProcess()) {
       // build the command to run depending on the passed command in the constructor and the params
       const commandToRun = __buildCommandLine(
-        `node ${__path.resolve(__dirname, 'runAsChild.cli.js')} [arguments]`,
+        `node ${__path.resolve(__dirname(), 'runAsChild.cli.js')} [arguments]`,
         {
           ...this._params,
           _settings: processSettings

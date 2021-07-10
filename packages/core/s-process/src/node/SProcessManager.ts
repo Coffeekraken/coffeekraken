@@ -89,11 +89,13 @@ class SProcessManager extends __SEventEmitter {
     );
 
     if (this.processManagerSettings.stdio) {
-      this._stdio = __SStdio.new(
-        [],
-        this.processManagerSettings.stdio,
-        this.processManagerSettings.stdioSettings
-      );
+      (async () => {
+        this._stdio = await __SStdio.new(
+          [],
+          this.processManagerSettings.stdio,
+          this.processManagerSettings.stdioSettings
+        );
+      })();
     }
   }
 

@@ -6,6 +6,7 @@ import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __childProcess from 'child_process';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import { ISViewRendererSettings } from '../../SViewRenderer';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name            bladeViewEngine
@@ -36,8 +37,8 @@ export default {
 
         // preparing the php execution
         __execPhp(
-          __dirname + '/compile.php',
-          // __path.resolve(__dirname, '../../../bin/php'),
+          __dirname() + '/compile.php',
+          // __path.resolve(__dirname(), '../../../bin/php'),
           (error, php, outprint) => {
             if (error) {
               return reject(error + ' ---- ' + outprint);

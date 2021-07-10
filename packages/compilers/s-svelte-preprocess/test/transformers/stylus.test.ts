@@ -3,6 +3,8 @@ import { resolve } from 'path';
 import sveltePreprocess from '../../src';
 import { preprocess } from '../utils';
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+
 describe('transformer - stylus', () => {
   it('should return @imported files as dependencies', async () => {
     const template = `<style lang="stylus">@import "fixtures/style.styl";</style>`;
@@ -10,7 +12,7 @@ describe('transformer - stylus', () => {
     const preprocessed = await preprocess(template, opts);
 
     expect(preprocessed.dependencies).toContain(
-      resolve(__dirname, '..', 'fixtures', 'style.styl'),
+      resolve(__dirname(), '..', 'fixtures', 'style.styl'),
     );
   });
 });

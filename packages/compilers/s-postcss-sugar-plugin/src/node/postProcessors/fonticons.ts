@@ -10,6 +10,7 @@ import __childProcess from 'child_process';
 import __fs from 'fs';
 import __path from 'path';
 import __postcss from 'postcss';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default function ({ root, sharedData }) {
     
@@ -18,7 +19,7 @@ export default function ({ root, sharedData }) {
     const dirName =
         typeof root.source.input.file === 'string'
         ? __path.dirname(root.source.input.file)
-        : __dirname;
+        : __dirname();
 
     if (!sharedData.iconsSourcePaths || sharedData.iconsSourcePaths.indexOf(dirName) === -1) return;
     if (!sharedData.iconsInputDir) return;

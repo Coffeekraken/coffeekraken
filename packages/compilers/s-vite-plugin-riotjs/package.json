@@ -2,6 +2,7 @@
   "name": "@coffeekraken/s-vite-plugin-riotjs",
   "version": "2.0.0",
   "description": "",
+  "type": "module",
   "main": "./src/node/exports.js",
   "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",

@@ -11,6 +11,7 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
 import __SConfig from '../../shared/SConfig';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -75,7 +76,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             fileName: '[name].config.js',
             folderName: '.sugar',
             scopes: {
-              default: [__path.resolve(__dirname, '../../config')],
+              default: [__path.resolve(__dirname(), '../../config')],
               module: [],
               extends: [],
               repo: [`${__packageRootDir(process.cwd(), true)}/[folderName]`],
@@ -144,29 +145,35 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       .on('add', (p) => this.update(p));
   }
 
-  _load(folderPaths, scope, clearCache = false) {
+  async _load(folderPaths, scope, clearCache = false) {
     const configObj = {};
-
 
     folderPaths = __unique(folderPaths);
 
-    folderPaths.forEach((path) => {
+    for (let i=0; i<folderPaths.length; i++) {
+      
+      const path = folderPaths[i];
 
-      __fs.readdirSync(path).forEach((file) => {
+      const paths = __fs.readdirSync(path);
+
+      for (let j=0; j<paths.length; j++) {
+
+        const file = paths[j];
               
-        if (!file.match(/\.js(on)?$/)) return;  
+        if (!file.match(/\.js(on)?$/)) continue;  
 
         if (
           !file.includes(
             this.configFolderAdapterSettings.fileName.replace('[name]', '')
           )
-        )
-          return;
+        ) {
+          continue;
+        }
 
         const configFilePath = `${path}/${file}`;
-        if (clearCache) delete require.cache[require.resolve(configFilePath)];
-        const configData = require(configFilePath);
-
+        // @TODO      check for delete cache with import
+        // if (clearCache) delete require.cache[require.resolve(configFilePath)];
+        const { default: configData } = await import(configFilePath);
 
         const configKey = file.replace('.config.js', '');
         if (!configObj[configKey]) configObj[configKey] = {};
@@ -191,28 +198,25 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             configData.proxy
           );
         }
-      });
-      // process.env[`SConfigFolderAdapter-${scope}`] = JSON.stringify(configObj);
-    });
-
-
+      }
+    }
 
     return Object.assign({}, configObj);
   }
 
-  load(clearCache = false) {
+  async load(clearCache = false) {
     try {
-      Object.keys(this._scopedFoldersPaths).forEach((scope) => {
+
+      for (let i=0; i<Object.keys(this._scopedFoldersPaths).length; i++) {
+
+        const scope = Object.keys(this._scopedFoldersPaths)[i];
+
         const scopedFoldersPaths = this._scopedFoldersPaths[scope];
+
         if (scopedFoldersPaths && scopedFoldersPaths.length) {
-          this._scopedSettings[scope] = this._load(scopedFoldersPaths, scope, clearCache);
+          this._scopedSettings[scope] = await this._load(scopedFoldersPaths, scope, clearCache);
         }
-        // else if (process.env[`SConfigFolderAdapter-${scope}`]) {
-        //   this._scopedSettings[scope] = JSON.parse(
-        //     process.env[`SConfigFolderAdapter-${scope}`]
-        //   );
-        // }
-      });
+      }
     } catch (e) {
       console.log('fffffffff', e);
     }

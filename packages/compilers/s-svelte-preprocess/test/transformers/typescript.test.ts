@@ -2,6 +2,8 @@ import { resolve } from 'path';
 
 import type { Diagnostic } from 'typescript';
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+
 import sveltePreprocess from '../../src';
 import { loadTsconfig } from '../../src/transformers/typescript';
 import type { Processed } from '../../src/types';
@@ -30,7 +32,7 @@ const autoProcessTS = (content: string, compilerOptions?: any) => {
   return opts.script({
     content,
     attributes: { type: 'text/typescript' },
-    filename: resolve(__dirname, '..', 'App.svelte'),
+    filename: resolve(__dirname(), '..', 'App.svelte'),
   }) as Processed & { diagnostics: Diagnostic[] };
 };
 

@@ -33,7 +33,7 @@ function benchEndMiddleware(settings = {}) {
   return function (req, res, next) {
     return new __SPromise(({resolve, reject, pipe}) => {
 
-      pipe(__SBench.start('request'));
+      __SBench.start('request');
 
       function afterResponse() {
         __SBench.end('request');

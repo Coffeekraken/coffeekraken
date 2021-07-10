@@ -1,17 +1,17 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 import __path from 'path';
-
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default {
   root: '[config.storage.package.rootDir]',
   base: '/',
   mode: 'development',
   plugins: [
-    __path.resolve(`${__dirname}/../node/plugins/sugarPlugin`),
-    __path.resolve(`${__dirname}/../node/plugins/sveltePlugin`),
-    __path.resolve(`${__dirname}/../node/plugins/riotjsPlugin`),
-    __path.resolve(`${__dirname}/../node/plugins/postcssPlugin`),
-    __path.resolve(`${__dirname}/../node/plugins/imageminPlugin`)
+    __path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`),
+    __path.resolve(`${__dirname()}/../node/plugins/sveltePlugin`),
+    __path.resolve(`${__dirname()}/../node/plugins/riotjsPlugin`),
+    __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`),
+    __path.resolve(`${__dirname()}/../node/plugins/imageminPlugin`)
   ],
   publicDir: '[config.storage.src.rootDir]',
   cacheDir: '[config.storage.package.cacheDir]/vite',
@@ -30,5 +30,5 @@ export default {
     proxy: {}
   },
   css: {},
-  rewrites: [__path.resolve(`${__dirname}/../node/rewrites/handlebars`)]
+  rewrites: [__path.resolve(`${__dirname()}/../node/rewrites/handlebars`)]
 };

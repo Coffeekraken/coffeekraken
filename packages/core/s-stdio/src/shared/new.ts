@@ -5,6 +5,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 /**
  * @name            new
  * @type            Function
+ * @async
  *
  * This static method is a sugar to instanciate an stdio by specifying some sources,
  * and either a path to a SStdio class, an SStdio class directly or a pre-registered
@@ -25,12 +26,12 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * import SStdio from '@coffeekraken/s-stdio';
  * import spawn from '@coffeekraken/sugar/node/process/spawn';
  * const proc = spawn('ls -la');
- * SStdio.new(proc);
+ * await SStdio.new(proc);
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function _new(sources, stdio: any = 'inherit', settings = {}) {
+export default async function _new(sources, stdio: any = 'inherit', settings = {}) {
   if (!Array.isArray(sources)) sources = [sources];
 
   let stdioInstance: any;
@@ -43,15 +44,14 @@ export default function _new(sources, stdio: any = 'inherit', settings = {}) {
     //     `<yellow>[SStdio.new]</<yellow> Sorry but to use a path based stdio, you must be in a <magenta>node</magenta> context...`
     //   );
     // @ts-ignore
-    let Cls = require(stdio).default; // eslint-disable-line
+    let { default: Cls } = await import(stdio); // eslint-disable-line
     Cls = Cls.default || Cls;
     stdioInstance = new Cls(sources, settings);
   } else if (typeof stdio === 'string') {
     switch (stdio) {
       case 'inherit':
         if (__isNode()) {
-          const __STerminalStdio = require('../node/terminal/STerminalStdio')
-            .default; // eslint-disable-line
+          const { default: __STerminalStdio } = await import('../node/terminal/STerminalStdio');
           stdioInstance = new __STerminalStdio(sources, settings);
         } else {
           throw new Error(
@@ -64,8 +64,7 @@ export default function _new(sources, stdio: any = 'inherit', settings = {}) {
           throw new Error(
             `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`
           );
-        const __STerminalStdio = require('../node/terminal/STerminalStdio')
-          .default; // eslint-disable-line
+        const { default: __STerminalStdio } = await import('../node/terminal/STerminalStdio');
         stdioInstance = new __STerminalStdio(sources, settings);
         break;
       case 'blessed':
@@ -73,8 +72,7 @@ export default function _new(sources, stdio: any = 'inherit', settings = {}) {
           throw new Error(
             `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>SBlessedStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`
           );
-        const __SBlessedStdio = require('../node/terminal/SBlessedStdio')
-          .default; // eslint-disable-line
+        const { default: __SBlessedStdio } = await import('../node/terminal/SBlessedStdio');
         stdioInstance = new __SBlessedStdio(sources, {
           ...settings,
           attach: true

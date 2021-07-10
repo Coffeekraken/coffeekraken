@@ -1,5 +1,5 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default {
   assets: '[config.assets]',
@@ -88,10 +88,7 @@ export default {
 
   proxy: {
     assets: {
-      route: __SugarConfig.get('vite.publicDir').replace(
-        __SugarConfig.get('storage.package.rootDir'),
-        ''
-      ),
+      route: '[config.storage.serve.rootDir]',
       settings: {
         target: '[config.vite.server.hostname]',
         changeOrigin: true
@@ -108,11 +105,11 @@ export default {
 
   middlewares: {
     bench: {
-      path: `${__dirname}/../node/middleware/benchMiddleware`,
+      path: `${__dirname()}/../node/middleware/benchMiddleware`,
       settings: {}
     },
     // resolveExtensionFreePath: {
-    //   path: `${__dirname}/../node/middleware/resolveExtensionFreePath`,
+    //   path: `${__dirname()}/../node/middleware/resolveExtensionFreePath`,
     //   settings: {
     //     exclude: ['/docMap'],
     //     rootDir: '[config.frontendServer.rootDir]',
@@ -138,19 +135,19 @@ export default {
     //   }
     // },
     frontspec: {
-      path: `${__dirname}/../node/middleware/frontspecMiddleware`,
+      path: `${__dirname()}/../node/middleware/frontspecMiddleware`,
       settings: {}
     },
     // defaultAssets: {
-    //   path: `${__dirname}/../node/middleware/defaultAssetsMiddleware`,
+    //   path: `${__dirname()}/../node/middleware/defaultAssetsMiddleware`,
     //   settings: {}
     // },
     env: {
-      path: `${__dirname}/../node/middleware/envMiddleware`,
+      path: `${__dirname()}/../node/middleware/envMiddleware`,
       settings: {}
     },
     packageJson: {
-      path: `${__dirname}/../node/middleware/packageJsonMiddleware`,
+      path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
       settings: {}
     }
   },
@@ -205,7 +202,7 @@ export default {
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: `${__dirname}/../node/handlers/index`
+      handler: `${__dirname()}/../node/handlers/index`
     },
 
     /**
@@ -242,7 +239,7 @@ export default {
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: `${__dirname}/../node/handlers/view`
+      handler: `${__dirname()}/../node/handlers/view`
     },
     /**
      * @name            doc
@@ -272,14 +269,14 @@ export default {
        * @name            handler
        * @namespace       config.frontendServer.handlers.doc
        * @type            Function
-       * @default         ${__dirname}/../node/handlers/view
+       * @default         ${__dirname()}/../node/handlers/view
        *
        * Specify the handler function that will take care of responding to this "section"
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: `${__dirname}/../node/handlers/doc`
+      handler: `${__dirname()}/../node/handlers/doc`
     },
     /**
      * @name            docmap
@@ -309,14 +306,14 @@ export default {
        * @name            handler
        * @namespace       config.frontendServer.handlers.docmap
        * @type            Function
-       * @default         ${__dirname}/../node/api/doc
+       * @default         ${__dirname()}/../node/api/doc
        *
        * Specify the handler function that will take care of responding to this "section"
        *
        * @since         2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: `${__dirname}/../node/handlers/docmap`
+      handler: `${__dirname()}/../node/handlers/docmap`
     }
   }
 };

@@ -9,6 +9,7 @@ import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
 import __SFile, { ISFileObject } from '@coffeekraken/s-file';
 // import __page404 from './pages/404';
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name          SViews
@@ -174,7 +175,7 @@ class SView extends __SClass implements ISViewRenderer {
    */
   static defaultRootDirs: string[] = [
     ...__SugarConfig.get('views.rootDirs'),
-    __path.resolve(__dirname, '../php/views/blade')
+    __path.resolve(__dirname(), '../php/views/blade')
   ];
 
   /**

@@ -4,6 +4,7 @@ import __theme from '../../utils/theme';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 class postcssSugarPluginAssetPlatformInterface extends __SInterface {
   static definition = {
@@ -37,10 +38,10 @@ export default function ({
 
   const vars: string[] = [];
 
-  if (!__fs.readFileSync(`${__dirname}/platforms/${finalParams.platform}.svg`)) {
+  if (!__fs.readFileSync(`${__dirname()}/platforms/${finalParams.platform}.svg`)) {
       throw new Error(`<red>[s-postcss-sugar-plugin]</red> Sorry but the requested platform "<yellow>${finalParams.platform}</yellow>" does not exists...`);
   }
-  const svgStr = __fs.readFileSync(`${__dirname}/platforms/${finalParams.platform}.svg`, 'utf8');
+  const svgStr = __fs.readFileSync(`${__dirname()}/platforms/${finalParams.platform}.svg`, 'utf8');
 
   vars.push(`
     display: inline-block;

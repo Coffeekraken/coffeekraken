@@ -43,7 +43,7 @@ export default class SEnv {
   static construct() {
     this.constructed = true;
     // Set environment
-    SEnv.set('environment', __SSugarConfig.get('env.env'));
+    SEnv.set('environment', process?.env?.NODE_ENV ?? window?.env?.ENV ?? 'dev');
   }
 
   /**

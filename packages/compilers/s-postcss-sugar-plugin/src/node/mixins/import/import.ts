@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SGlob from '@coffeekraken/s-glob';
 import __path from 'path';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 class postcssSugarPluginImportInterface extends __SInterface {
   static definition = {
@@ -49,7 +50,7 @@ export default function ({
   const dirName =
     typeof atRule.source.input.file === 'string'
       ? __path.dirname(atRule.source.input.file)
-      : __dirname;
+      : __dirname();
 
   // resolve globs even if it's a simple path
   const files = __SGlob.resolve(finalParams.path, {

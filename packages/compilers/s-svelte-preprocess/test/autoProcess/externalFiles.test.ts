@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 import sveltePreprocess from '../../src';
 import {
@@ -31,16 +32,16 @@ describe('external files', () => {
         content: `<template src="./fixtures/template.html"></template>
         <style src="./fixtures/style.css"></style>
         <script src="./fixtures/script.js"></script>`,
-        filename: resolve(__dirname, '..', 'App.svelte'),
+        filename: resolve(__dirname(), '..', 'App.svelte'),
       }),
       await scriptProcessor({
         content: ``,
-        filename: resolve(__dirname, '..', 'App.svelte'),
+        filename: resolve(__dirname(), '..', 'App.svelte'),
         attributes: { src: `./fixtures/script.js` },
       }),
       await styleProcessor({
         content: ``,
-        filename: resolve(__dirname, '..', 'App.svelte'),
+        filename: resolve(__dirname(), '..', 'App.svelte'),
         attributes: { src: `./fixtures/style.css` },
       }),
     ];
@@ -56,7 +57,7 @@ describe('external files', () => {
   it('should support self-closing tags', async () => {
     const markup = await markupProcessor({
       content: `<template src="./fixtures/template.html"/>`,
-      filename: resolve(__dirname, '..', 'App.svelte'),
+      filename: resolve(__dirname(), '..', 'App.svelte'),
     });
 
     expect(markup.code).toContain(getFixtureContent('template.html'));

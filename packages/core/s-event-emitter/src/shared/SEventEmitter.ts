@@ -4,6 +4,9 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
+import __nodeIpc from 'node-ipc';
 
 /**
  * @name                  SEventEmitter
@@ -108,6 +111,7 @@ export interface ISEventEmitterSettings {
   asyncStart: boolean;
   defaults: Record<string, any>;
   forceObject: boolean | string[];
+  crossProcess: boolean;
   bind: any;
 }
 
@@ -142,7 +146,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    */
   static pipe(
     sourceSEventEmitter: ISEventEmitter,
-    destSEventEmitter: ISEventEmitter,
+    destSEventEmitter: ISEventEmitter | Process,
     settings?: ISEventEmitterPipeSettings
   ) {
     // settings
@@ -230,14 +234,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         if (!metas.emitter) {
           metas.emitter = this;
         }
-        // path
-        // if (!metas.path) {
-        //   metas.path = `${(<any>sourceSEventEmitter).id}.${
-        //     (<any>destSEventEmitter).id
-        //   }`;
-        // } else {
-        //   metas.path = `${metas.path}.${(<any>sourceSEventEmitter).id}`;
-        // }
         if (set.prefixEvent) {
           if (typeof set.prefixEvent === 'string') {
             emitStack = `${set.prefixEvent}.${metas.event}`;
@@ -258,15 +254,29 @@ class SEventEmitter extends SClass implements ISEventEmitter {
           ...metas,
           level: metas && metas.level ? metas.level + 1 : 1
         };
-        if (
-          set.overrideEmitter === 'bind' &&
-          destSEventEmitter.eventEmitterSettings.bind
-        ) {
-          emitMetas.emitter = destSEventEmitter.eventEmitterSettings.bind;
-        } else if (set.overrideEmitter === true) {
-          emitMetas.emitter = destSEventEmitter;
+
+        if (destSEventEmitter instanceof SEventEmitter) {
+          if (
+            set.overrideEmitter === 'bind' &&
+            destSEventEmitter.eventEmitterSettings.bind
+          ) {
+            emitMetas.emitter = destSEventEmitter.eventEmitterSettings.bind;
+          } else if (set.overrideEmitter === true) {
+            emitMetas.emitter = destSEventEmitter;
+          }
         }
-        destSEventEmitter.emit(metas.event, value, emitMetas);
+
+        if (destSEventEmitter === process && __isChildProcess() && process.send) {
+          if (value.value && value.value instanceof Error) {
+              value.value = __toString(value.value);
+            }
+            process.send({
+              value,
+              emitMetas
+            });
+        } else {
+          destSEventEmitter.emit(metas.event, value, emitMetas);
+        }
       }
     });
   }
@@ -375,6 +385,26 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         settings || {}
       )
     );
+
+      // listen child processes events
+      if (__isNode()) {
+        if (global._sEventEmitterIpcServer) return;
+        __nodeIpc.config.retry = 1500;
+        __nodeIpc.config.silent = true;
+        if (__isChildProcess()) {
+          __nodeIpc.config.id = `s-event-emitter-child-${process.pid}`;
+          __nodeIpc.connectTo(`s-event-emitter-parent-${process.ppid}`, () => {
+
+          });
+        } else {
+          __nodeIpc.config.id = `s-event-emitter-parent-${process.id}`;
+          __nodeIpc.serve(() => __nodeIpc.server.on('s-event-emitter-event', message => {
+            console.log(message);
+          }));
+          __nodeIpc.server.start();
+        }
+        global._sEventEmitterIpcServer = __nodeIpc;
+      }
   }
 
   /**

@@ -12,9 +12,10 @@ import __upperFirst from '../../node/string/upperFirst';
 import __appRootPath from 'app-root-path';
 import __findPkgJson from 'find-package-json';
 import __parseArgs from '../../node/cli/parseArgs';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default async (stringArgs = '') => {
-  const f = __findPkgJson(__dirname);
+  const f = __findPkgJson(__dirname());
   let file = f.next();
   let finalFile, rootPath;
   while (!file.done) {
@@ -49,7 +50,7 @@ export default async (stringArgs = '') => {
   const filepathesProcessed = [];
   const files = await __find.find(
     '@namespace',
-    `${__dirname}/../../${args.language}`,
+    `${__dirname()}/../../${args.language}`,
     '.js$'
   );
 
@@ -68,7 +69,7 @@ export default async (stringArgs = '') => {
 
     let docObjs = __parse(fileContent);
     const folderPath = __path
-      .relative(__dirname, filepath)
+      .relative(__dirname(), filepath)
       .split('/')
       .slice(0, -1);
 
@@ -80,7 +81,7 @@ export default async (stringArgs = '') => {
     const firstBlock = docObjs[0];
     if (firstBlock.src) {
       const relativeSrcPath = __path.resolve(
-        __dirname,
+        __dirname(),
         firstBlock.src.replace('../'.repeat(folderPath.length), '')
       );
 

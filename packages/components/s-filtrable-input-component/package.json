@@ -2,6 +2,7 @@
   "name": "@coffeekraken/s-filtrable-input-component",
   "version": "2.0.0",
   "description": "",
+  "type": "module",
   "homepage": "https://coffeekraken.io",
   "main": "./dist/js/index.lib.umd.js",
   "module": "./dist/js/index.lib.es.js",

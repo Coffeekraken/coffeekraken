@@ -1,5 +1,6 @@
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 export default {
     /**
      * @name            enable
@@ -67,7 +68,7 @@ export default {
              * @name            default
              * @namespace       config.notification.types.default
              * @type            String
-             * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_default.png`
+             * @default         `${__packageRootDir(__dirname())}/src/data/notifications/ck_default.png`
              *
              * Specify the "default" default icon to use
              *
@@ -76,7 +77,7 @@ export default {
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_default.png`
+            icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_default.png`
         },
         start: {
             /**
@@ -107,14 +108,14 @@ export default {
              * @name            start
              * @namespace       config.notification.types.start
              * @type            String
-             * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_start.png`
+             * @default         `${__packageRootDir(__dirname())}/src/data/notifications/ck_start.png`
              *
              * Specify the "start" default icon to use
              *
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_start.png`
+            icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_start.png`
         },
         success: {
             /**
@@ -145,14 +146,14 @@ export default {
              * @name            icon
              * @namespace       config.notification.types.success
              * @type            String
-             * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_success.png`
+             * @default         `${__packageRootDir(__dirname())}/src/data/notifications/ck_success.png`
              *
              * Specify the "success" default icon to use
              *
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_success.png`
+            icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_success.png`
         },
         warning: {
             /**
@@ -183,7 +184,7 @@ export default {
              * @name            icon
              * @namespace       config.notification.types.warning
              * @type            String
-             * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_warning.png`
+             * @default         `${__packageRootDir(__dirname())}/src/data/notifications/ck_warning.png`
              *
              * Specify the "warning" default icon to use
              *
@@ -192,7 +193,7 @@ export default {
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_warning.png`
+            icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_warning.png`
         },
         error: {
             /**
@@ -223,15 +224,15 @@ export default {
              * @name            icon
              * @namespace       config.notification.types.error
              * @type            String
-             * @default         `${__packageRootDir(__dirname)}/src/data/notifications/ck_error.png`
+             * @default         `${__packageRootDir(__dirname())}/src/data/notifications/ck_error.png`
              *
              * Specify the "error" default icon to use
              *
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            icon: `${__packageRootDir(__dirname)}/src/data/notifications/ck_error.png`
+            icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_error.png`
         }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm90aWZpY2F0aW9uLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5vdGlmaWNhdGlvbi5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxnQkFBZ0IsTUFBTSw4Q0FBOEMsQ0FBQztBQUM1RSxPQUFPLFFBQVEsTUFBTSxvQ0FBb0MsQ0FBQztBQUUxRCxlQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILE1BQU0sRUFBRSxJQUFJO0lBRVo7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FBQztJQUUzQzs7Ozs7Ozs7OztPQVVHO0lBQ0gsZ0JBQWdCLEVBQUUsRUFBRTtJQUVwQixLQUFLLEVBQUU7UUFDTCxPQUFPLEVBQUU7WUFDUDs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFLFNBQVM7WUFFaEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxXQUFXO1lBRXBCOzs7Ozs7Ozs7Ozs7ZUFZRztZQUNILElBQUksRUFBRSxHQUFHLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyx3Q0FBd0M7U0FDN0U7UUFFRCxLQUFLLEVBQUU7WUFDTDs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFLFNBQVM7WUFFaEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxXQUFXO1lBRXBCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRyxnQkFBZ0IsQ0FBQyxTQUFTLENBQUMsc0NBQXNDO1NBQzNFO1FBRUQsT0FBTyxFQUFFO1lBQ1A7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxTQUFTO1lBRWhCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsV0FBVztZQUVwQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUcsZ0JBQWdCLENBQUMsU0FBUyxDQUFDLHdDQUF3QztTQUM3RTtRQUVELE9BQU8sRUFBRTtZQUNQOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsU0FBUztZQUVoQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLFdBQVc7WUFFcEI7Ozs7Ozs7Ozs7OztlQVlHO1lBQ0gsSUFBSSxFQUFFLEdBQUcsZ0JBQWdCLENBQUMsU0FBUyxDQUFDLHdDQUF3QztTQUM3RTtRQUVELEtBQUssRUFBRTtZQUNMOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsU0FBUztZQUVoQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLFdBQVc7WUFFcEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxHQUFHLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyxzQ0FBc0M7U0FDM0U7S0FDRjtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm90aWZpY2F0aW9uLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5vdGlmaWNhdGlvbi5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxnQkFBZ0IsTUFBTSw4Q0FBOEMsQ0FBQztBQUM1RSxPQUFPLFFBQVEsTUFBTSxvQ0FBb0MsQ0FBQztBQUMxRCxPQUFPLFNBQVMsTUFBTSxxQ0FBcUMsQ0FBQztBQUU1RCxlQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILE1BQU0sRUFBRSxJQUFJO0lBRVo7Ozs7Ozs7Ozs7T0FVRztJQUNILFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FBQztJQUUzQzs7Ozs7Ozs7OztPQVVHO0lBQ0gsZ0JBQWdCLEVBQUUsRUFBRTtJQUVwQixLQUFLLEVBQUU7UUFDTCxPQUFPLEVBQUU7WUFDUDs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFLFNBQVM7WUFFaEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxXQUFXO1lBRXBCOzs7Ozs7Ozs7Ozs7ZUFZRztZQUNILElBQUksRUFBRSxHQUFHLGdCQUFnQixDQUFDLFNBQVMsRUFBRSxDQUFDLHdDQUF3QztTQUMvRTtRQUVELEtBQUssRUFBRTtZQUNMOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsU0FBUztZQUVoQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLFdBQVc7WUFFcEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxHQUFHLGdCQUFnQixDQUFDLFNBQVMsRUFBRSxDQUFDLHNDQUFzQztTQUM3RTtRQUVELE9BQU8sRUFBRTtZQUNQOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsU0FBUztZQUVoQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLFdBQVc7WUFFcEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxHQUFHLGdCQUFnQixDQUFDLFNBQVMsRUFBRSxDQUFDLHdDQUF3QztTQUMvRTtRQUVELE9BQU8sRUFBRTtZQUNQOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsU0FBUztZQUVoQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLFdBQVc7WUFFcEI7Ozs7Ozs7Ozs7OztlQVlHO1lBQ0gsSUFBSSxFQUFFLEdBQUcsZ0JBQWdCLENBQUMsU0FBUyxFQUFFLENBQUMsd0NBQXdDO1NBQy9FO1FBRUQsS0FBSyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxTQUFTO1lBRWhCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsV0FBVztZQUVwQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUcsZ0JBQWdCLENBQUMsU0FBUyxFQUFFLENBQUMsc0NBQXNDO1NBQzdFO0tBQ0Y7Q0FDRixDQUFDIn0=

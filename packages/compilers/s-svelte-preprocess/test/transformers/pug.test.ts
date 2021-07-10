@@ -3,6 +3,8 @@ import { resolve } from 'path';
 import sveltePreprocess from '../../src';
 import { preprocess } from '../utils';
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+
 describe('transformer - pug', () => {
   it('should de-indent if necessary', async () => {
     const template = `<template lang="pug">
@@ -46,7 +48,7 @@ main
     const preprocessed = await preprocess(template, opts);
 
     expect(preprocessed.dependencies).toContain(
-      resolve(__dirname, '..', 'fixtures', 'template.pug'),
+      resolve(__dirname(), '..', 'fixtures', 'template.pug'),
     );
   });
 

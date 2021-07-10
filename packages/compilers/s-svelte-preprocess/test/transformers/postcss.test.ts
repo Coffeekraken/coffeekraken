@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { resolve } from 'path';
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import sveltePreprocess from '../../src';
 import { preprocess, spyConsole } from '../utils';
 import { transformer } from '../../src/transformers/postcss';
@@ -103,7 +104,7 @@ test('should return @imported files as dependencies', async () => {
   const preprocessed = await preprocess(template, opts);
 
   expect(preprocessed.dependencies).toContain(
-    resolve(__dirname, '..', 'fixtures', 'style.css'),
+    resolve(__dirname(), '..', 'fixtures', 'style.css'),
   );
 });
 

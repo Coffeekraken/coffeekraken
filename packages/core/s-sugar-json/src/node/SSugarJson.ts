@@ -12,6 +12,8 @@ import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs';
+import __SBench from '@coffeekraken/s-bench';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export interface ISSugarJsonIncludeSettings {
   package: boolean;
@@ -21,7 +23,7 @@ export interface ISSugarJsonIncludeSettings {
 }
 
 export interface ISSugarJsonSettings {
-  modules: string;
+  modules: string | boolean;
   include: ISSugarJsonIncludeSettings;
   cache: boolean;
   cacheId: string;
@@ -91,7 +93,7 @@ export default class SSugarJson extends __SClass {
       __deepMerge(
         {
           sugarJson: {
-            modules: '*',
+            modules: false,
             include: {
               package: true,
               modules: true,
@@ -158,6 +160,8 @@ export default class SSugarJson extends __SClass {
     settings?: Partial<ISSugarJsonSettings>
   ): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
 
+    __SBench.start('SSugarJson.read');
+
     const finalSettings = <ISSugarJsonSettings>{
       ...this.sugarJsonSettings,
       ...settings
@@ -185,7 +189,7 @@ export default class SSugarJson extends __SClass {
     //     )
     //   ) {
     //     // const sp = __childProcess.spawn(
-    //     //   `node ${__dirname}/updateCache/updateCache.cli.js`,
+    //     //   `node ${__dirname()}/updateCache/updateCache.cli.js`,
     //     //   [],
     //     //   {
     //     //     shell: true,
@@ -222,6 +226,8 @@ export default class SSugarJson extends __SClass {
 
       results[packageJson.name] = resultJson;
     });
+
+    __SBench.end('SSugarJson.read');
 
     return results;
   }
@@ -264,14 +270,16 @@ export default class SSugarJson extends __SClass {
       ...(settings ?? {})
     };
 
+    __SBench.start('SSugarJson.search');
+
     // get global node modules directory path
     const globalNodeModulesPath = __childProcess
       .execSync(`npm root -g`)
       .toString()
       .trim();
 
-    const packagesArray = finalSettings.modules.split(',');
-
+    const packagesArray = finalSettings.modules ? finalSettings.modules.split(',') : [];
+      
     // get local node modules directory path
     const localNodeModulesPath = `${__packageRoot()}/node_modules`;
 
@@ -286,22 +294,29 @@ export default class SSugarJson extends __SClass {
 
     // local first
     if (localNodeModulesPath && finalSettings.include.modules) {
+      // coffeekraken modules are always loaded
+      globs.push(`${localNodeModulesPath}/@coffeekraken/*/sugar.json`);
+
       if (finalSettings.modules === '*') {
         globs.push(`${localNodeModulesPath}/*/sugar.json`);
         globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
-        // globs.push(`${__packageRoot()}/sugar.json`);
-      } else {
+      } else if (finalSettings.modules !== false) {
         packagesArray.forEach((name) => {
           globs.push(`${localNodeModulesPath}/${name}/sugar.json`);
         });
       }
     }
+
     // top local
     if (
       localNodeModulesPath !== topLocalNodeModulesPath &&
       finalSettings.include.modules &&
       finalSettings.include.top
     ) {
+
+      // coffeekraken modules are always loaded
+      globs.push(`${topLocalNodeModulesPath}/@coffeekraken/*/sugar.json`);
+
       if (finalSettings.modules === '*') {
         globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
         globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
@@ -317,6 +332,10 @@ export default class SSugarJson extends __SClass {
       finalSettings.include.modules &&
       finalSettings.include.global
     ) {
+
+      // coffeekraken modules are always loaded
+      globs.push(`${globalNodeModulesPath}/@coffeekraken/*/sugar.json`);
+
       if (finalSettings.modules === '*') {
         globs.push(`${globalNodeModulesPath}/*/sugar.json`);
         globs.push(`${globalNodeModulesPath}/*/*/sugar.json`);
@@ -344,6 +363,8 @@ export default class SSugarJson extends __SClass {
       if (__fs.existsSync(packageJsonPath)) return true;
       return false
     });
+
+    __SBench.end('SSugarJson.search');
 
     return __unique(files.map(f => __fs.realpathSync(f)).filter(f => {
       if (f.toLowerCase().split('__wip__').length > 1 || f.toLowerCase().split('__tests__').length > 1) {

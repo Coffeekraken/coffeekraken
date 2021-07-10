@@ -1,13 +1,7 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import __fs from 'fs';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
-let recipe = 'default';
-if (__fs.existsSync(`${__packageRootDir()}/sugar.json`)) {
-  const sugarJson = require(`${__packageRootDir()}/sugar.json`);
-  if (sugarJson.recipe) recipe = sugarJson.recipe;
-}
+const recipe = 'default';
 
 export default {
   recipe,
@@ -18,7 +12,7 @@ export default {
     default: {
       title: 'Default',
       description: 'Default s-frontstack recipe ',
-      templateDir: __path.resolve(`${__dirname}/../templates/default`),
+      templateDir: __path.resolve(`${__dirname()}/../templates/default`),
       defaultStack: 'dev',
       stacks: {
         dev: {
@@ -51,7 +45,7 @@ export default {
     riotComponent: {
       title: 'RiotJs component',
       description: 'RiotJs webcomponent recipe',
-      templateDir: __path.resolve(`${__dirname}/../templates/riotComponent`),
+      templateDir: __path.resolve(`${__dirname()}/../templates/riotComponent`),
       defaultStack: 'dev',
       stacks: {
         dev: {

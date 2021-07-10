@@ -8,6 +8,8 @@ import { preprocess } from '../utils';
 import type { Options } from '../../src/types';
 import { transformer } from '../../src/transformers/scss';
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+
 const implementation: Options.Sass['implementation'] = {
   render(options, callback) {
     callback(null, {
@@ -47,7 +49,7 @@ describe('transformer - scss', () => {
     const preprocessed = await preprocess(template, opts);
 
     expect(preprocessed.dependencies).toContain(
-      resolve(__dirname, '..', 'fixtures', 'style.scss').replace(/[\\/]/g, '/'),
+      resolve(__dirname(), '..', 'fixtures', 'style.scss').replace(/[\\/]/g, '/'),
     );
   });
 
@@ -65,7 +67,7 @@ describe('transformer - scss', () => {
     const preprocessed = await preprocess(template, opts);
 
     expect(preprocessed.dependencies).toContain(
-      resolve(__dirname, '..', 'fixtures', 'style.scss').replace(/[\\/]/g, '/'),
+      resolve(__dirname(), '..', 'fixtures', 'style.scss').replace(/[\\/]/g, '/'),
     );
   });
 

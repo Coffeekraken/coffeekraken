@@ -2,6 +2,7 @@
   "name": "@coffeekraken/s-inline-svg-component",
   "version": "2.0.0",
   "description": "",
+  "type": "module",
   "homepage": "https://coffeekraken.io",
   "main": "./dist/js/index.umd.js",
   "module": "./dist/js/index.es.js",

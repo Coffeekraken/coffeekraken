@@ -2,6 +2,7 @@
   "name": "@coffeekraken/s-svelte-preprocess",
   "version": "2.0.0",
   "license": "MIT",
+  "type": "module",
   "main": "src/node/index.js",
   "description": "A Svelte preprocessor wrapper with baked-in support for commonly used preprocessors",
   "author": "Christian Kaisermann <christian@kaisermann.me>",

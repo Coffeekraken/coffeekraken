@@ -2,6 +2,7 @@
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
   "version": "2.0.0",
+  "type": "module",
   "homepage": "http://coffeekraken.io",
   "author": "Coffeekraken <hello@coffeekraken.io> (https://coffeekraken.io)",
   "contributors": [
@@ -41,6 +42,7 @@
     "atob": "^2.1.2",
     "blessed": "^0.1.81",
     "btoa": "^1.2.1",
+    "caller-callsite": "^4.1.0",
     "chalk": "^4.1.0",
     "chokidar": "^3.5.1",
     "cli-cursor": "^3.1.0",

@@ -1,4 +1,4 @@
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 export default {
@@ -14,7 +14,7 @@ export default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: `${__packageRootDir()}/docmap.json`,
+    input: `${__packageRoot()}/docmap.json`,
 
     /**
      * @name        collect

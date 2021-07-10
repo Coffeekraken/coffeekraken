@@ -1,26 +1,27 @@
-#!/usr/bin/env node --trace-warnings --trace-uncaught
+#!/usr/bin/env node --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node
 // @ts-nocheck
 
-require = require('esm')(module, {});
+// import esmRequire from 'esm';
+// const require = esmRequire(module, {});
 // module.exports = require('./main.js');
 
-const __childProcess = require('child_process');
-const __glob = require('glob-all');
-const __path = require('path');
-const __fs = require('fs');
-const __parseArgs = require('../shared/cli/parseArgs').default;
-const __SInterface = require('@coffeekraken/s-interface').default;
-const __isPath = require('../shared/is/path').default;
-const __parseHtml = require('../shared/console/parseHtml').default;
-const __SSugarJson = require('@coffeekraken/s-sugar-json').default;
-const __SSugarConfig = require('@coffeekraken/s-sugar-config').default;
-const __SBench = require('@coffeekraken/s-bench').default;
-const __sugarBanner = require('@coffeekraken/sugar/shared/ascii/sugarBanner').default;
-const __isChildProcess = require('@coffeekraken/sugar/node/is/childProcess').default;
+import __childProcess from 'child_process';
+import __glob from 'glob-all';
+import __path from 'path';
+import __fs from 'fs';
+import __parseArgs from '../shared/cli/parseArgs';
+import __SInterface from '@coffeekraken/s-interface';
+import __isPath from '../shared/is/path';
+import __parseHtml from '../shared/console/parseHtml';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SBench from '@coffeekraken/s-bench';
+import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 
-const { Select, AutoComplete } = require('enquirer');
+import * as Enquirer from 'enquirer';
 
-require('../node/index');
+import '../node/index';
 
 class SSugarCliParamsInterface extends __SInterface {
   static definition = {
@@ -110,30 +111,37 @@ class SSugarCli {
       this._newStep();
     }
 
-    // reading sugarJsons
-    const sugarJsonInstance = new __SSugarJson();
-    this._sugarJsons = sugarJsonInstance.read();
+    (async () => {
 
-    // init available cli
-    this._getAvailableCli();
+      // load the sugar config
+      await __SSugarConfig.load();
 
-    // interactive
-    if (!this._stack && !this._action && !this._args) {
-      this._interactivePrompt();
-      return;
-    }
+      // reading sugarJsons
+      const sugarJsonInstance = new __SSugarJson();
+      this._sugarJsons = await sugarJsonInstance.read();
 
-    // help
-    if (this._args.match(/--help/)) {
-      this._displayHelp(this._stack, this._action);
-      process.exit();
-    }
+      // init available cli
+      await this._getAvailableCli();
 
-    // normal process
-    this._process();
+      // interactive
+      if (!this._stack && !this._action && !this._args) {
+        this._interactivePrompt();
+        return;
+      }
+
+      // help
+      if (this._args.match(/--help/)) {
+        this._displayHelp(this._stack, this._action);
+        process.exit();
+      }
+
+      // normal process
+      this._process();
+
+    })();
   }
 
-  _process() {
+  async _process() {
 
     if (!this._availableCli[`${this._stack}.${this._action ?? '_default'}`]) {
       this._displayHelpAfterError();      
@@ -143,22 +151,24 @@ class SSugarCli {
 
     // @ts-ignore
     if (cliObj.processPath) {
-      const processFn = require(cliObj.processPath).default;
+      const {default: processFn} = await import(cliObj.processPath);
       // @ts-ignore
       processFn(this._args);
     }
   }
 
-  _getAvailableCli() {
+  async _getAvailableCli() {
 
     // loop on each filtered files to build the this._availableCli stack
-    Object.keys(this._sugarJsons).forEach((packageName) => {
+
+    for (let i = 0; i<Object.keys(this._sugarJsons).length; i++) {
+      const packageName = Object.keys(this._sugarJsons)[i];
       const sugarJson = this._sugarJsons[packageName];
-      const packageJson = require(sugarJson.metas.path.replace(
+      const packageJson = await import(sugarJson.metas.path.replace(
         '/sugar.json',
         '/package.json'
       ));
-      if (!sugarJson.cli) return;
+      if (!sugarJson.cli) continue;
       sugarJson.cli.forEach((cliObj) => {
         if (!cliObj.actions) {
           throw new Error(
@@ -217,7 +227,9 @@ class SSugarCli {
           };
         });
       });
-    });
+    }
+
+    return true;
   }
 
   _newStep() {
@@ -245,7 +257,7 @@ class SSugarCli {
     const res = await prompt.run();
     for(const [name, obj] of Object.entries(this._availableInteractiveCli)) {
       if (res === obj.title) {
-        const pro = require(obj.processPath).default;
+        const pro = await import(obj.processPath);
         this._newStep();
         pro();
         break;

@@ -1,5 +1,7 @@
 // TODO: doc
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+
 export default {
   /**
    * @name        types
@@ -21,7 +23,7 @@ export default {
   types: ['info', 'warning', 'error'],
 
   adapters: {
-    console: `${__dirname}/../shared/log/adapters/SLogConsoleAdapter`
+    console: `${__dirname()}/../shared/log/adapters/SLogConsoleAdapter`
   },
   adaptersByLevel: {
     log: null,

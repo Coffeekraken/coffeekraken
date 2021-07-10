@@ -1,4 +1,5 @@
 import __SInterfaceRenderer from './SInterfaceRenderer';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 /**
  * @name            SInterfaceTerminalRenderer
  * @namespace       sugar.node.interface.renderers
@@ -25,10 +26,10 @@ class SInterfaceTerminalRenderer extends __SInterfaceRenderer {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(int, settings) {
-        super(int, Object.assign({ templatesDir: `${__dirname}/terminal` }, settings));
+        super(int, Object.assign({ templatesDir: `${__dirname()}/terminal` }, settings));
     }
     renderType(type) { }
 }
 SInterfaceTerminalRenderer.id = 'terminal';
 export default SInterfaceTerminalRenderer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZVRlcm1pbmFsUmVuZGVyZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTSW50ZXJmYWNlVGVybWluYWxSZW5kZXJlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLG9CQUFvQixNQUFNLHNCQUFzQixDQUFDO0FBS3hEOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFDSCxNQUFNLDBCQUEyQixTQUFRLG9CQUFvQjtJQUczRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUNFLEdBQWlCLEVBQ2pCLFFBQStDO1FBRS9DLEtBQUssQ0FBQyxHQUFHLGtCQUNQLFlBQVksRUFBRSxHQUFHLFNBQVMsV0FBVyxJQUNsQyxRQUFRLEVBQ1gsQ0FBQztJQUNMLENBQUM7SUFFRCxVQUFVLENBQUMsSUFBSSxJQUFHLENBQUM7O0FBdEJaLDZCQUFFLEdBQUcsVUFBVSxDQUFDO0FBeUJ6QixlQUFlLDBCQUEwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZVRlcm1pbmFsUmVuZGVyZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTSW50ZXJmYWNlVGVybWluYWxSZW5kZXJlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLG9CQUFvQixNQUFNLHNCQUFzQixDQUFDO0FBS3hELE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVEOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFDSCxNQUFNLDBCQUEyQixTQUFRLG9CQUFvQjtJQUczRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUNFLEdBQWlCLEVBQ2pCLFFBQStDO1FBRS9DLEtBQUssQ0FBQyxHQUFHLGtCQUNQLFlBQVksRUFBRSxHQUFHLFNBQVMsRUFBRSxXQUFXLElBQ3BDLFFBQVEsRUFDWCxDQUFDO0lBQ0wsQ0FBQztJQUVELFVBQVUsQ0FBQyxJQUFJLElBQUcsQ0FBQzs7QUF0QlosNkJBQUUsR0FBRyxVQUFVLENBQUM7QUF5QnpCLGVBQWUsMEJBQTBCLENBQUMifQ==

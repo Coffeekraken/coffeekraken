@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 class postcssSugarPluginPlatformClassesMixinInterface extends __SInterface {
   static definition = {
@@ -32,7 +33,7 @@ export default function ({
   };
 
   // list all the available platforms in the folder
-  const files = __fs.readdirSync(`${__dirname}/platforms`);
+  const files = __fs.readdirSync(`${__dirname()}/platforms`);
 
   const vars: string[] = [];
 

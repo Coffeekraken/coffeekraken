@@ -1,5 +1,6 @@
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default {
 
@@ -84,7 +85,7 @@ export default {
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: `${__packageRoot(__dirname)}`,
+    rootDir: `${__packageRoot(__dirname())}`,
   },
 
   src: {

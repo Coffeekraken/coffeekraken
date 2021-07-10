@@ -128,7 +128,6 @@ export default class SPostcssBuilder extends __SBuilder {
 
             const defaultParams = __SPostcssBuilderBuildParamsInterface.defaults();
 
-
             // handle prod shortcut
             if (params.prod) {
                 params.minify = true;
@@ -177,18 +176,21 @@ export default class SPostcssBuilder extends __SBuilder {
             });
 
             // resolve plugins paths
-            const plugins = this.postcssBuilderSettings.postcss.plugins.map((p) => {
+            const plugins = [];
+            for (let i=0; i<this.postcssBuilderSettings.postcss.plugins.length; i++) {
+                const p = this.postcssBuilderSettings.postcss.plugins[i];
                 if (typeof p === 'string') {
-                    const plugin = require(p);
+                    const { default: plugin } = await import(p);
                     const fn = plugin.default ?? plugin;
                     const options = this.postcssBuilderSettings.postcss.pluginsOptions[p] ?? {};
-                    return fn(options);
-                }
-                return p;
-            });
+                    plugins.push(fn(options));
+                } else {
+                    plugins.push(p);
+                 }
+            }
 
             // build postcss
-            const result = __postcss(plugins).process(src ?? '', {
+            const result = await __postcss(plugins).process(src ?? '', {
                 from
             });
             if (!result.css) {

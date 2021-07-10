@@ -1,4 +1,5 @@
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default {
   /**
@@ -25,7 +26,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    dirs: [__packageRootDir(__dirname), __packageRootDir()],
+    dirs: [__packageRoot(__dirname()), __packageRoot()],
 
     /**
      * @name              imports
@@ -98,7 +99,7 @@ export default {
      * @name            context
      * @namespace       config.core.namespace
      * @type            String
-     * @default         __packageRootDir()
+     * @default         __packageRoot()
      *
      * Specify the context in which to generate the namespace.
      * The context is simply a root folder from which to search for the package.json
@@ -107,6 +108,6 @@ export default {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    context: __packageRootDir()
+    context: __packageRoot()
   }
 };

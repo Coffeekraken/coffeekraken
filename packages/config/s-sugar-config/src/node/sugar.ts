@@ -6,6 +6,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __fs from 'fs';
 import __path from 'path';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name                  sugar
@@ -94,95 +95,102 @@ export default class SSugarConfig {
     return this._registeredConfigFolderPaths.map(f => f.path);
   }
 
-  static get(dotPath: string): any {
+  static async load(): any {
 
-    if (!this._rootSugarJson || !this._sugarJson) {
-      this._searchConfigFiles();
-    }
+    if (!this._rootSugarJson || !this._sugarJson) {
+      await this._searchConfigFiles();
+    }   
 
-    if (!this._sConfigInstance) {
-
-      this._sConfigInstance = new __SConfig('sugar', {
-        adapters: [
-          new SConfigFolderAdapter({
-            configAdapter: {
-              name: 'sugar'
-            },
-            configFolderAdapter: {
-              folderName: '.sugar',
-              fileName: '[name].config.js',
-              scopes: {
-                default: [
-                  __path.resolve(__dirname, '../../src/config'),
-                  // @ts-ignore
-                  ...this._registeredConfigFolderPaths
-                    .filter((obj) => obj.scope === 'default')
-                    .map((obj) => obj.path)
-                ],
-                module: [
-                  // @ts-ignore
-                  ...this._registeredConfigFolderPaths
-                    .filter((obj) => {
-                      if (obj.scope === 'module') return true;
-                      return false;
-                    })
-                    .map((obj) => obj.path)
-                ],
-                extends: [
-                  // @ts-ignore
-                  ...this._registeredConfigFolderPaths
-                    .filter((obj) => {
-                      if (
-                        this._rootSugarJson &&
-                        obj.scope === 'extends' &&
-                        this._rootSugarJson.extends.indexOf(obj.packageName) !== -1
-                      ) {
-                        return true;
-                      }
-                      return false;
-                    })
-                    .map((obj) => obj.path)
-                ],
-                repo: [
-                  `${__packageRoot(process.cwd(), true)}/[folderName]`,
-                  // @ts-ignore
-                  ...this._registeredConfigFolderPaths
-                    .filter((obj) => obj.scope === 'repo')
-                    .map((obj) => obj.path)
-                ],
-                package: [
-                  `${__packageRoot(process.cwd())}/[folderName]`,
-                  // @ts-ignore
-                  ...this._registeredConfigFolderPaths
-                    .filter((obj) => obj.scope === 'package')
-                    .map((obj) => obj.path)
-                ],
-                user: [
-                  `${__packageRoot(process.cwd())}/.local/[folderName]`,
-                  // @ts-ignore
-                  ...this._registeredConfigFolderPaths
-                    .filter((obj) => obj.scope === 'user')
-                    .map((obj) => obj.path)
-                ]
-              }
-            }
-          })
-        ],
-        resolvers: [
-          {
-            match: /\[theme.[a-zA-Z0-9.\-_]+\]/gm,
-            resolve(match, config, path) {
-              const themePath = path.slice(0, 3).join('.');
-              const valuePath = match
-                .replace('[theme.', themePath + '.')
-                .replace(']', '');
-
-              const value = __get(config, valuePath);
-              return value;
+    this._sConfigInstance = new __SConfig('sugar', {
+      adapters: [
+        new SConfigFolderAdapter({
+          configAdapter: {
+            name: 'sugar'
+          },
+          configFolderAdapter: {
+            folderName: '.sugar',
+            fileName: '[name].config.js',
+            scopes: {
+              default: [
+                __path.resolve(__dirname(), '../../src/config'),
+                // @ts-ignore
+                ...this._registeredConfigFolderPaths
+                  .filter((obj) => obj.scope === 'default')
+                  .map((obj) => obj.path)
+              ],
+              module: [
+                // @ts-ignore
+                ...this._registeredConfigFolderPaths
+                  .filter((obj) => {
+                    if (obj.scope === 'module') return true;
+                    return false;
+                  })
+                  .map((obj) => obj.path)
+              ],
+              extends: [
+                // @ts-ignore
+                ...this._registeredConfigFolderPaths
+                  .filter((obj) => {
+                    if (
+                      this._rootSugarJson &&
+                      obj.scope === 'extends' &&
+                      this._rootSugarJson.extends.indexOf(obj.packageName) !== -1
+                    ) {
+                      return true;
+                    }
+                    return false;
+                  })
+                  .map((obj) => obj.path)
+              ],
+              repo: [
+                `${__packageRoot(process.cwd(), true)}/[folderName]`,
+                // @ts-ignore
+                ...this._registeredConfigFolderPaths
+                  .filter((obj) => obj.scope === 'repo')
+                  .map((obj) => obj.path)
+              ],
+              package: [
+                `${__packageRoot(process.cwd())}/[folderName]`,
+                // @ts-ignore
+                ...this._registeredConfigFolderPaths
+                  .filter((obj) => obj.scope === 'package')
+                  .map((obj) => obj.path)
+              ],
+              user: [
+                `${__packageRoot(process.cwd())}/.local/[folderName]`,
+                // @ts-ignore
+                ...this._registeredConfigFolderPaths
+                  .filter((obj) => obj.scope === 'user')
+                  .map((obj) => obj.path)
+              ]
             }
           }
-        ]
-      });
+        })
+      ],
+      resolvers: [
+        {
+          match: /\[theme.[a-zA-Z0-9.\-_]+\]/gm,
+          resolve(match, config, path) {
+            const themePath = path.slice(0, 3).join('.');
+            const valuePath = match
+              .replace('[theme.', themePath + '.')
+              .replace(']', '');
+
+            const value = __get(config, valuePath);
+            return value;
+          }
+        }
+      ]
+    });
+
+    return await this._sConfigInstance.load();
+
+  }
+
+  static get(dotPath: string): any {
+
+    if (!this._sConfigInstance) {
+      throw new Error(`<red>[${this.name}]</red> You MUST load the configuration before accessing them by calling the SSugarConfig.load() async instance function`);
     }
 
     // get the config
@@ -191,14 +199,14 @@ export default class SSugarConfig {
     });
   }
 
-  static _searchConfigFiles() {
+  static async _searchConfigFiles() {
 
     const sugarJson = new __SSugarJson();
 
     if (!this._rootSugarJson) {
       const rootSugarJsonPath = `${__packageRoot()}/sugar.json`;
       if (__fs.existsSync(rootSugarJsonPath)) {
-        this._rootSugarJson = sugarJson.sanitizeJson(require(rootSugarJsonPath));
+        this._rootSugarJson = sugarJson.sanitizeJson(await import(rootSugarJsonPath));
         if (this._rootSugarJson.extends && !Array.isArray(this._rootSugarJson.extends))
           this._rootSugarJson.extends = [this._rootSugarJson.extends];
       }

@@ -1,5 +1,5 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 export default {
     assets: '[config.assets]',
     /**
@@ -80,7 +80,7 @@ export default {
     logLevel: 'info',
     proxy: {
         assets: {
-            route: __SugarConfig.get('vite.publicDir').replace(__SugarConfig.get('storage.package.rootDir'), ''),
+            route: '[config.storage.serve.rootDir]',
             settings: {
                 target: '[config.vite.server.hostname]',
                 changeOrigin: true
@@ -96,11 +96,11 @@ export default {
     },
     middlewares: {
         bench: {
-            path: `${__dirname}/../node/middleware/benchMiddleware`,
+            path: `${__dirname()}/../node/middleware/benchMiddleware`,
             settings: {}
         },
         // resolveExtensionFreePath: {
-        //   path: `${__dirname}/../node/middleware/resolveExtensionFreePath`,
+        //   path: `${__dirname()}/../node/middleware/resolveExtensionFreePath`,
         //   settings: {
         //     exclude: ['/docMap'],
         //     rootDir: '[config.frontendServer.rootDir]',
@@ -126,19 +126,19 @@ export default {
         //   }
         // },
         frontspec: {
-            path: `${__dirname}/../node/middleware/frontspecMiddleware`,
+            path: `${__dirname()}/../node/middleware/frontspecMiddleware`,
             settings: {}
         },
         // defaultAssets: {
-        //   path: `${__dirname}/../node/middleware/defaultAssetsMiddleware`,
+        //   path: `${__dirname()}/../node/middleware/defaultAssetsMiddleware`,
         //   settings: {}
         // },
         env: {
-            path: `${__dirname}/../node/middleware/envMiddleware`,
+            path: `${__dirname()}/../node/middleware/envMiddleware`,
             settings: {}
         },
         packageJson: {
-            path: `${__dirname}/../node/middleware/packageJsonMiddleware`,
+            path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
             settings: {}
         }
     },
@@ -191,7 +191,7 @@ export default {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            handler: `${__dirname}/../node/handlers/index`
+            handler: `${__dirname()}/../node/handlers/index`
         },
         /**
          * @name            view
@@ -227,7 +227,7 @@ export default {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            handler: `${__dirname}/../node/handlers/view`
+            handler: `${__dirname()}/../node/handlers/view`
         },
         /**
          * @name            doc
@@ -257,14 +257,14 @@ export default {
              * @name            handler
              * @namespace       config.frontendServer.handlers.doc
              * @type            Function
-             * @default         ${__dirname}/../node/handlers/view
+             * @default         ${__dirname()}/../node/handlers/view
              *
              * Specify the handler function that will take care of responding to this "section"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            handler: `${__dirname}/../node/handlers/doc`
+            handler: `${__dirname()}/../node/handlers/doc`
         },
         /**
          * @name            docmap
@@ -294,15 +294,15 @@ export default {
              * @name            handler
              * @namespace       config.frontendServer.handlers.docmap
              * @type            Function
-             * @default         ${__dirname}/../node/api/doc
+             * @default         ${__dirname()}/../node/api/doc
              *
              * Specify the handler function that will take care of responding to this "section"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            handler: `${__dirname}/../node/handlers/docmap`
+            handler: `${__dirname()}/../node/handlers/docmap`
         }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGtEQUFrRCxDQUFDO0FBQzNFLE9BQU8sYUFBYSxNQUFNLDhCQUE4QixDQUFDO0FBRXpELGVBQWU7SUFDYixNQUFNLEVBQUUsaUJBQWlCO0lBRXpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxJQUFJLEVBQUUsSUFBSTtJQUVWOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsV0FBVyxFQUFFO0lBRXZCOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUUsa0NBQWtDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUU7UUFDVixPQUFPLEVBQUUsK0JBQStCO1FBQ3hDLE1BQU0sRUFBRSw4QkFBOEI7S0FDdkM7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG9DQUFvQztJQUU5Qzs7Ozs7Ozs7Ozs7T0FXRztJQUNILFFBQVEsRUFBRSxNQUFNO0lBRWhCLEtBQUssRUFBRTtRQUNMLE1BQU0sRUFBRTtZQUNOLEtBQUssRUFBRSxhQUFhLENBQUMsR0FBRyxDQUFDLGdCQUFnQixDQUFDLENBQUMsT0FBTyxDQUNoRCxhQUFhLENBQUMsR0FBRyxDQUFDLHlCQUF5QixDQUFDLEVBQzVDLEVBQUUsQ0FDSDtZQUNELFFBQVEsRUFBRTtnQkFDUixNQUFNLEVBQUUsK0JBQStCO2dCQUN2QyxZQUFZLEVBQUUsSUFBSTthQUNuQjtTQUNGO1FBQ0QsUUFBUSxFQUFFO1lBQ1IsS0FBSyxFQUFFLGNBQWM7WUFDckIsUUFBUSxFQUFFO2dCQUNSLE1BQU0sRUFBRSwrQkFBK0I7Z0JBQ3ZDLFlBQVksRUFBRSxJQUFJO2FBQ25CO1NBQ0Y7S0FDRjtJQUVELFdBQVcsRUFBRTtRQUNYLEtBQUssRUFBRTtZQUNMLElBQUksRUFBRSxHQUFHLFNBQVMscUNBQXFDO1lBQ3ZELFFBQVEsRUFBRSxFQUFFO1NBQ2I7UUFDRCw4QkFBOEI7UUFDOUIsc0VBQXNFO1FBQ3RFLGdCQUFnQjtRQUNoQiw0QkFBNEI7UUFDNUIsa0RBQWtEO1FBQ2xELG9CQUFvQjtRQUNwQixjQUFjO1FBQ2QsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixjQUFjO1FBQ2QsZUFBZTtRQUNmLGVBQWU7UUFDZixlQUFlO1FBQ2YsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixlQUFlO1FBQ2YsZUFBZTtRQUNmLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsY0FBYztRQUNkLFFBQVE7UUFDUixNQUFNO1FBQ04sS0FBSztRQUNMLFNBQVMsRUFBRTtZQUNULElBQUksRUFBRSxHQUFHLFNBQVMseUNBQXlDO1lBQzNELFFBQVEsRUFBRSxFQUFFO1NBQ2I7UUFDRCxtQkFBbUI7UUFDbkIscUVBQXFFO1FBQ3JFLGlCQUFpQjtRQUNqQixLQUFLO1FBQ0wsR0FBRyxFQUFFO1lBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxtQ0FBbUM7WUFDckQsUUFBUSxFQUFFLEVBQUU7U0FDYjtRQUNELFdBQVcsRUFBRTtZQUNYLElBQUksRUFBRSxHQUFHLFNBQVMsMkNBQTJDO1lBQzdELFFBQVEsRUFBRSxFQUFFO1NBQ2I7S0FDRjtJQUVELE1BQU0sRUFBRTtRQUNOLEdBQUcsRUFBRTtZQUNILE9BQU8sRUFBRSxPQUFPO1NBQ2pCO1FBQ0QsU0FBUyxFQUFFO1lBQ1QsT0FBTyxFQUFFLE1BQU07U0FDaEI7UUFDRCxZQUFZLEVBQUU7WUFDWixPQUFPLEVBQUUsS0FBSztTQUNmO1FBQ0QsYUFBYSxFQUFFO1lBQ2IsT0FBTyxFQUFFLFFBQVE7U0FDbEI7S0FDRjtJQUVELFFBQVEsRUFBRTtRQUNSOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRTtZQUNMOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLG1CQUFtQjtZQUMxQjs7Ozs7Ozs7O2VBU0c7WUFDSCxPQUFPLEVBQUUsR0FBRyxTQUFTLHlCQUF5QjtTQUMvQztRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILElBQUksRUFBRTtZQUNKOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLGdCQUFnQjtZQUN2Qjs7Ozs7Ozs7O2VBU0c7WUFDSCxPQUFPLEVBQUUsR0FBRyxTQUFTLHdCQUF3QjtTQUM5QztRQUNEOzs7Ozs7Ozs7V0FTRztRQUNILEdBQUcsRUFBRTtZQUNIOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLGVBQWU7WUFDdEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxHQUFHLFNBQVMsdUJBQXVCO1NBQzdDO1FBQ0Q7Ozs7Ozs7OztXQVNHO1FBQ0gsTUFBTSxFQUFFO1lBQ047Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxLQUFLLEVBQUUsa0JBQWtCO1lBQ3pCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsR0FBRyxTQUFTLDBCQUEwQjtTQUNoRDtLQUNGO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGtEQUFrRCxDQUFDO0FBQzNFLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVELGVBQWU7SUFDYixNQUFNLEVBQUUsaUJBQWlCO0lBRXpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxJQUFJLEVBQUUsSUFBSTtJQUVWOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsV0FBVyxFQUFFO0lBRXZCOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUUsa0NBQWtDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUU7UUFDVixPQUFPLEVBQUUsK0JBQStCO1FBQ3hDLE1BQU0sRUFBRSw4QkFBOEI7S0FDdkM7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG9DQUFvQztJQUU5Qzs7Ozs7Ozs7Ozs7T0FXRztJQUNILFFBQVEsRUFBRSxNQUFNO0lBRWhCLEtBQUssRUFBRTtRQUNMLE1BQU0sRUFBRTtZQUNOLEtBQUssRUFBRSxnQ0FBZ0M7WUFDdkMsUUFBUSxFQUFFO2dCQUNSLE1BQU0sRUFBRSwrQkFBK0I7Z0JBQ3ZDLFlBQVksRUFBRSxJQUFJO2FBQ25CO1NBQ0Y7UUFDRCxRQUFRLEVBQUU7WUFDUixLQUFLLEVBQUUsY0FBYztZQUNyQixRQUFRLEVBQUU7Z0JBQ1IsTUFBTSxFQUFFLCtCQUErQjtnQkFDdkMsWUFBWSxFQUFFLElBQUk7YUFDbkI7U0FDRjtLQUNGO0lBRUQsV0FBVyxFQUFFO1FBQ1gsS0FBSyxFQUFFO1lBQ0wsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHFDQUFxQztZQUN6RCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsOEJBQThCO1FBQzlCLHdFQUF3RTtRQUN4RSxnQkFBZ0I7UUFDaEIsNEJBQTRCO1FBQzVCLGtEQUFrRDtRQUNsRCxvQkFBb0I7UUFDcEIsY0FBYztRQUNkLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsY0FBYztRQUNkLGVBQWU7UUFDZixlQUFlO1FBQ2YsZUFBZTtRQUNmLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsZ0JBQWdCO1FBQ2hCLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGVBQWU7UUFDZixlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGNBQWM7UUFDZCxRQUFRO1FBQ1IsTUFBTTtRQUNOLEtBQUs7UUFDTCxTQUFTLEVBQUU7WUFDVCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUseUNBQXlDO1lBQzdELFFBQVEsRUFBRSxFQUFFO1NBQ2I7UUFDRCxtQkFBbUI7UUFDbkIsdUVBQXVFO1FBQ3ZFLGlCQUFpQjtRQUNqQixLQUFLO1FBQ0wsR0FBRyxFQUFFO1lBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLG1DQUFtQztZQUN2RCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsV0FBVyxFQUFFO1lBQ1gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLDJDQUEyQztZQUMvRCxRQUFRLEVBQUUsRUFBRTtTQUNiO0tBQ0Y7SUFFRCxNQUFNLEVBQUU7UUFDTixHQUFHLEVBQUU7WUFDSCxPQUFPLEVBQUUsT0FBTztTQUNqQjtRQUNELFNBQVMsRUFBRTtZQUNULE9BQU8sRUFBRSxNQUFNO1NBQ2hCO1FBQ0QsWUFBWSxFQUFFO1lBQ1osT0FBTyxFQUFFLEtBQUs7U0FDZjtRQUNELGFBQWEsRUFBRTtZQUNiLE9BQU8sRUFBRSxRQUFRO1NBQ2xCO0tBQ0Y7SUFFRCxRQUFRLEVBQUU7UUFDUjs7Ozs7Ozs7O1dBU0c7UUFDSCxLQUFLLEVBQUU7WUFDTDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEtBQUssRUFBRSxtQkFBbUI7WUFDMUI7Ozs7Ozs7OztlQVNHO1lBQ0gsT0FBTyxFQUFFLEdBQUcsU0FBUyxFQUFFLHlCQUF5QjtTQUNqRDtRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILElBQUksRUFBRTtZQUNKOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLGdCQUFnQjtZQUN2Qjs7Ozs7Ozs7O2VBU0c7WUFDSCxPQUFPLEVBQUUsR0FBRyxTQUFTLEVBQUUsd0JBQXdCO1NBQ2hEO1FBQ0Q7Ozs7Ozs7OztXQVNHO1FBQ0gsR0FBRyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxLQUFLLEVBQUUsZUFBZTtZQUN0Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLEdBQUcsU0FBUyxFQUFFLHVCQUF1QjtTQUMvQztRQUNEOzs7Ozs7Ozs7V0FTRztRQUNILE1BQU0sRUFBRTtZQUNOOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLGtCQUFrQjtZQUN6Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLEdBQUcsU0FBUyxFQUFFLDBCQUEwQjtTQUNsRDtLQUNGO0NBQ0YsQ0FBQyJ9

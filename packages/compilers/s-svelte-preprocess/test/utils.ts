@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 import {
   compile as svelteCompile,
@@ -8,7 +9,7 @@ import {
 
 export const CSS_PATTERN = /div(\.svelte-\w{4,7})?\s*\{\s*color:\s*(red|#f00);?\s*\}/;
 
-export const getTestAppFilename = () => resolve(__dirname, 'App.svelte');
+export const getTestAppFilename = () => resolve(__dirname(), 'App.svelte');
 
 export const preprocess = async (input: string, opts: any) =>
   sveltePreprocess(input, opts, { filename: getTestAppFilename() });
@@ -35,7 +36,7 @@ export const doesCompileThrow = async (input: string, opts: any) => {
 };
 
 export const getFixturePath = (file: string) =>
-  resolve(__dirname, 'fixtures', file);
+  resolve(__dirname(), 'fixtures', file);
 
 export const getFixtureContent = (file: string) =>
   readFileSync(exports.getFixturePath(file)).toString().trim();

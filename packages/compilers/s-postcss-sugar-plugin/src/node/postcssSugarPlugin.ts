@@ -8,6 +8,7 @@ import __path from 'path';
 import __getRoot from './utils/getRoot';
 import __SBench from '@coffeekraken/s-bench';
 import __unquote from '@coffeekraken/sugar/shared/string/unquote';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {
@@ -58,14 +59,38 @@ const plugin = (settings: any = {}) => {
   }
 
   const sharedData = {};
+  const mixinsStack = {}, functionsStack = {};
+
+  async function _load() {
+    // list all mixins
+    const mixinsPaths = __glob.sync(`${__dirname()}/mixins/**/*.js`);
+    // list all functions
+    const functionsPaths = __glob.sync(`${__dirname()}/functions/**/*.js`);
+
+    for (let i=0; i<mixinsPaths.length; i++) {
+      const path = mixinsPaths[i];
+      const { default: mixin } = await import(path);
+      mixinsStack[`${path.split('/').slice(-2).join('.').replace(/\.js$/, '')}`] = mixin;
+      console.log(mixinsStack)
+    }
+
+    console.log(mixinsStack);
+
+    return true;
+
+  }
 
   return {
     postcssPlugin: 'sugar',
-    Once() {
+    async Once() {
       if (__SBench.env.isBenchActive('postcssSugarPlugin')) {
         __SBench.start('postcssSugarPlugin');
       }
+
+      await _load();
+
     },
+
     OnceExit(root) {
 
       // console.log('EX');
@@ -74,13 +99,13 @@ const plugin = (settings: any = {}) => {
       // console.log('IT');
 
       const postProcessorsPaths = __glob.sync('**/*.js', {
-        cwd: `${__dirname}/postProcessors`
+        cwd: `${__dirname()}/postProcessors`
       });
 
       for (let i=0; i<postProcessorsPaths.length; i++) {
         const path = postProcessorsPaths[i];
         const processorFn =
-        require(`${__dirname}/postProcessors/${path}`).default;
+        require(`${__dirname()}/postProcessors/${path}`).default;
         processorFn({
           root,
           sharedData
@@ -116,7 +141,7 @@ const plugin = (settings: any = {}) => {
 
       if (atRule.name.match(/^sugar\./)) {
 
-        let potentialMixinPath = `${__dirname}/mixins/${atRule.name
+        let potentialMixinPath = `${__dirname()}/mixins/${atRule.name
           .replace(/^sugar\./, '')
           .replace(/\./gm, '/')}.js`;
 
@@ -137,7 +162,7 @@ const plugin = (settings: any = {}) => {
         const sourcePath =
           typeof root.source.input.file === 'string'
             ? __path.dirname(root.source.input.file)
-            : __dirname;
+            : __dirname();
 
         const mixin = require(potentialMixinPath);
         const mixinFn = mixin.default;
@@ -188,7 +213,7 @@ const plugin = (settings: any = {}) => {
         const dirName =
           typeof atRule.source.input.file === 'string'
           ? __path.dirname(atRule.source.input.file)
-          : __dirname;
+          : __dirname();
         
         const path = __path.resolve(dirName, __unquote(atRule.params));
 
@@ -226,12 +251,12 @@ const plugin = (settings: any = {}) => {
           /sugar\.[a-zA-Z0-9\.]+/,
           ''
         );
-        let fnPath = `${__dirname}/functions/${functionName
+        let fnPath = `${__dirname()}/functions/${functionName
           .split('.')
           .join('/')}.js`;
         if (!__fs.existsSync(fnPath)) {
           const potentialFileName = functionName.split('.').pop();
-          fnPath = `${__dirname}/functions/${functionName
+          fnPath = `${__dirname()}/functions/${functionName
             .split('.')
             .join('/')}/${potentialFileName}.js`;
         }

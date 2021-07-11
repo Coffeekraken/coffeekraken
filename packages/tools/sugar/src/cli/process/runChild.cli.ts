@@ -7,12 +7,12 @@ interface IProcessRunChildOptions {
   processPath: string;
 }
 
-export default (stringArgs = '') => {
+export default async (stringArgs = '') => {
   const args: IProcessRunChildOptions = __parseArgs(stringArgs);
   if (!args.processPath) {
     throw `Sorry but to use this endpont you have to specify at least a "--processPath" parameter...`;
   }
-  const ProcessClass = require(args.processPath).default;
+  const { default: ProcessClass } = await import(args.processPath);
   if (ProcessClass.prototype instanceof __SProcess) {
     const processInstance = new ProcessClass();
     processInstance.run(stringArgs);

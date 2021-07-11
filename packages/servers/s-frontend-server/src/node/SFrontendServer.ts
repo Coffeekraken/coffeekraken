@@ -1,18 +1,16 @@
 import __SClass from '@coffeekraken/s-class';
+import __SEnv from '@coffeekraken/s-env';
 import __SPromise from '@coffeekraken/s-promise';
-import __sails from 'sails';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs';
-import __path from 'path';
-import __express from 'express';
-import __SFrontendServerInterface from './interface/SFrontendServerInterface';
-import __mimeTypes from 'mime-types'; //eslint-disable-line
-import __minimatch from 'minimatch';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __compression from 'compression';
-import __SEnv from '@coffeekraken/s-env';
-
+import __express from 'express';
+import __fs from 'fs';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import __path from 'path';
+import __sails from 'sails';
+import __SFrontendServerInterface from './interface/SFrontendServerInterface';
+
 
 /**
  * @name            SFrontendServer
@@ -152,7 +150,7 @@ export default class SFrontendServer extends __SClass {
 
         if (frontendServerConfig.middlewares) {
           Object.keys(frontendServerConfig.middlewares).forEach(
-            (middlewareName) => {
+            async (middlewareName) => {
               const middlewareObj =
                 frontendServerConfig.middlewares[middlewareName];
 
@@ -162,7 +160,7 @@ export default class SFrontendServer extends __SClass {
                 );
               }
 
-              const middlewareWrapperFn = require(middlewareObj.path).default; // eslint-disable-line
+              const { default: middlewareWrapperFn } = await import(middlewareObj.path); // eslint-disable-line
               const middleware = middlewareWrapperFn(
                 middlewareObj.settings ?? {}
               );
@@ -189,12 +187,12 @@ export default class SFrontendServer extends __SClass {
         }
         // routes registration
         if (frontendServerConfig.routes) {
-          Object.keys(frontendServerConfig.routes).forEach((routeSlug) => {
+          Object.keys(frontendServerConfig.routes).forEach(async (routeSlug) => {
             const routeObj = frontendServerConfig.routes[routeSlug];
 
             const handlerObj = frontendServerConfig.handlers[routeObj.handler];
 
-            const handlerFn = require(handlerObj.handler).default;
+            const { default: handlerFn } = await import(handlerObj.handler);
             express.get(routeSlug, (req, res, next) => {
 
               if (routeObj.request) {

@@ -32,7 +32,6 @@ import __fs from 'fs';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-require('events').EventEmitter.defaultMaxListeners = Infinity;
 const _requestedFiles: Record<string, any> = {};
 function frontspecMiddleware(settings = {}) {
   return async function (req, res, next) {

@@ -59,7 +59,7 @@ const fn = function (args = {}) {
           );
         }
         // register the middleware
-        const middlewareData = require(middleware.path);
+        const { default: middlewareData } = await import(middleware.path);
         app.use(
           (middlewareData.default || middlewareData)(middleware.settings || {})
         );
@@ -82,7 +82,7 @@ const fn = function (args = {}) {
             )}</cyan>" does not exists...`
           });
         } else {
-          let handlerFn = require(handlerPath);
+          let { default: handlerFn } = await import(handlerPath);
           handlerFn = handlerFn.default || handlerFn;
           const method = handlerSettings.method || 'get';
           let slug = handlerSettings.slug || '*';

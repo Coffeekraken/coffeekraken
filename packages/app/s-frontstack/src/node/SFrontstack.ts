@@ -164,7 +164,7 @@ export default class SFrontstack extends __SClass {
         
         const actionId = actionObj.id ?? finalParams.action;
         // create a process from the recipe object
-        const pro = __SProcess.from(
+        const pro = await __SProcess.from(
           // @ts-ignore
           actionObj.command ?? actionObj.process
         );
@@ -228,16 +228,6 @@ export default class SFrontstack extends __SClass {
           finalParams.stack = recipesObj[finalParams.recipe].defaultStack;
         }
 
-        // emit('log', {
-        //   clear: true,
-        //   nude: true,
-        //   paddingTop: 0,
-        //   paddingBottom: 1,
-        //   value: __sugarBanner({
-        //     paddingBottom: 1
-        //   })
-        // });
-
         emit('log', {
           value: `Starting frontstack process`
         });
@@ -295,10 +285,11 @@ export default class SFrontstack extends __SClass {
 
         // instanciate the process manager
         const processManager = new __SProcessManager();
+
         // loop on each actions for this recipe
         if (recipeObj.stacks[finalParams.stack].actions) {
           Object.keys(recipeObj.stacks[finalParams.stack].actions).forEach(
-            (actionName) => {
+            async (actionName) => {
               if (
                 finalParams.exclude &&
                 finalParams.exclude.indexOf(actionName) !== -1
@@ -322,9 +313,10 @@ export default class SFrontstack extends __SClass {
                 value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`
               });
               
-              const pro = __SProcess.from(
+              const pro = await __SProcess.from(
                 finalCommand
               );
+
               // add the process to the process manager
               // @TODO    integrate log filter feature
               processManager.attachProcess(actionId, pro, {

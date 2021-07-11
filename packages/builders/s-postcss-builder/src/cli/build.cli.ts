@@ -3,11 +3,11 @@ import __SPostcssBuilderBuildParamsInterface from '../node/interface/SPostcssBui
 import __SPostcssBuilder from '../node/SPostcssBuilder';
 
 
-export default function build(stringArgs = '') {
+export default async function build(stringArgs = '') {
 
     const builder = new __SPostcssBuilder();
 
-    const pro = __SProcess.from(
+    const pro = await __SProcess.from(
         builder.build.bind(builder)
     , {
         process: {

@@ -4,6 +4,7 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __fs from 'fs';
 import __standardizeJson from '@coffeekraken/sugar/shared/npm/utils/standardizeJson';
 import __SBench from '@coffeekraken/s-bench';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 /**
  * @name            packageJsonMiddleware
@@ -38,7 +39,7 @@ function packageJsonMiddleware(settings = {}) {
     let pkg;
     if (!__fs.existsSync(packageJsonPath)) {
     } else {
-      pkg = require(packageJsonPath);
+      pkg = __readJsonSync(packageJsonPath);
       res.templateData = {
         ...(res.templateData || {}),
         packageJson: __standardizeJson(pkg)

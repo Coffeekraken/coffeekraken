@@ -159,6 +159,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @name					from
    * @type 					Function
    * @static
+   * @async
    *
    * This static method allows you to pass arguments like:
    * - file path: Will require it, check what's returned from and instanciate an SProcess depending on that
@@ -176,7 +177,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @since
    * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static from(
+  static async from(
     what: string | Function | Promise<any> | __SPromise | SProcess,
     settings?: Partial<ISProcessCtorSettings>
   ): SProcess {
@@ -225,7 +226,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       let requireValue;
 
       try {
-        requireValue = require(potentialPath).default; // eslint-disable-line
+        requireValue = (await import(potentialPath)).default; // eslint-disable-line
       } catch (e) {} // eslint-disable-line
 
       if (requireValue) {
@@ -242,7 +243,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           )
         );
       } else {
-        const __SCommandProcess = require('./SCommandProcess').default; // eslint-disable-line
+        const { default: __SCommandProcess } = await import('./SCommandProcess'); // eslint-disable-line
         // considere the passed string as a command
         const commandProcess = new __SCommandProcess(
           {
@@ -269,6 +270,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @name					fromCommand
    * @type 					Function
    * @static
+   * @async
    *
    * Initialize an SCommandProcess instance on which you can call the standard "run" method
    * and execute a command by passing inside the params object the ```command``` prop.
@@ -280,11 +282,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @since 				2.0.0
    * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static fromCommand(
+  static async fromCommand(
     initialParams: Partial<ISCommandProcessParams> = {},
     settings?: Partial<ISCommandProcessCtorSettings>
   ): SProcess {
-    const __SCommandProcess = require('./SCommandProcess').default; // eslint-disable-line
+    const { default: __SCommandProcess } = await import('./SCommandProcess'); // eslint-disable-line
     return new __SCommandProcess(initialParams, settings);
   }
 
@@ -453,7 +455,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
 
     if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
-      this.stdio = await __SStdio.new(this, processSettings.stdio, {});
+      this.stdio = await __SStdio.new([], processSettings.stdio, {});
     }
 
     this._duration = new __SDuration();
@@ -536,35 +538,24 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       // run the actual process using the "process" method
       this._processPromise = (<any>this).process(this._params, processSettings);
 
-      if (
-        __isChildProcess() &&
-        this._processPromise &&
-        this._processPromise.on &&
-        typeof this._processPromise.on === 'function' &&
-        process.send &&
-        typeof process.send === 'function'
-      ) {
-        this._processPromise &&
-          this._processPromise.on('*', (value, metas) => {
-            if (value.value && value.value instanceof Error) {
-              value.value = __toString(value.value);
-            }
-            process.send !== undefined &&
-              process.send({
-                value,
-                metas
-              });
-          });
+      if (__isChildProcess() && this._processPromise && this._processPromise.pipeTo) {
+        this._processPromise.pipeTo(process);
       }
     }
 
     // handle SPromise based processes
     if (this._processPromise instanceof __SPromise) {
-      this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
+      // this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
+
+      // stdio
+      if (this.stdio) this.stdio.registerSource(this._processPromise);
 
       // listen for "data" and "log" events
       this._processPromise &&
         this._processPromise.on('log', (data, metas) => {
+          if (!__isChildProcess()) {
+            console.log('DDDDDD', data.value);
+          }
           if (this.currentExecutionObj) {
             this.currentExecutionObj.stdout.push(data);
           }

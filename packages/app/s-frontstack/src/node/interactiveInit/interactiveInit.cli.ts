@@ -6,7 +6,7 @@ import __childProcess from 'child_process';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
 
-const { Select, Input, AutoComplete, Confirm } = require('enquirer');
+import * as Enquirer from 'enquirer';
 
 export default async function interactiveInit(stringArgs = '') {
     
@@ -19,7 +19,7 @@ export default async function interactiveInit(stringArgs = '') {
     for (const [name, obj] of Object.entries(recipes)) {
       choices.push(`${name}: ${obj.description}`);
     }    
-    const prompt = new Select({
+    const prompt = new Enquirer.Select({
       message: 'Please select a recipe that suits your needs',
       choices
     });
@@ -32,7 +32,7 @@ export default async function interactiveInit(stringArgs = '') {
     }
 
     // project name
-    const namePrompt = new Input({
+    const namePrompt = new Enquirer.Input({
         message: 'Project name',
         validate(...args) {
             if (!args[0].match(/^[a-zA-Z0-9-_@\\/]+$/)) return `Please do not use spaces or special characters other than "@" and "/"`;
@@ -42,7 +42,7 @@ export default async function interactiveInit(stringArgs = '') {
     projectName = await namePrompt.run();
 
      // project name
-    const descriptionPrompt = new Input({
+    const descriptionPrompt = new Enquirer.Input({
         message: 'Project description'
     });
     projectDescription = await descriptionPrompt.run();
@@ -59,27 +59,27 @@ export default async function interactiveInit(stringArgs = '') {
         'CDDL-1.0',
         'EPL-2.0'
     ];
-    const licensePrompt = new Select({
+    const licensePrompt = new Enquirer.Select({
       message: 'Please select a license for your project',
       choices: licenses
     });
     projectLicense = await licensePrompt.run();
 
      // author
-    const authorPrompt = new Input({
+    const authorPrompt = new Enquirer.Input({
         message: 'Project author'
     });
     projectAuthor = await authorPrompt.run();
 
     // folder
-    const folderPrompt = new Input({
+    const folderPrompt = new Enquirer.Input({
         message: 'Project folder',
         initial: `${process.cwd()}/${projectName}`
     });
     projectFolder = await folderPrompt.run();
 
     // confirmation
-    const confirmPrompt = new Confirm({
+    const confirmPrompt = new Enquirer.Confirm({
         message: 'Process to new project initialisation?',
         initial: true
     });
@@ -101,7 +101,7 @@ export default async function interactiveInit(stringArgs = '') {
     // set the project name
     console.log(`- Set the project name and description in some files like package.json`);
     try {
-        const packageJson = require(`${projectFolder}/package.json`);
+        const packageJson = await import(`${projectFolder}/package.json`);
         packageJson.name = projectName;
         packageJson.description = projectDescription ?? '';
         packageJson.license = projectLicense ?? 'MIT';
@@ -131,7 +131,7 @@ export default async function interactiveInit(stringArgs = '') {
     // check if has code installed
     if (await __commandExists('code')) {
         // launch development stack
-        const openVsCodeConfirm = new Confirm({
+        const openVsCodeConfirm = new Enquirer.Confirm({
             message: 'Open the new project in VSCode?',
             initial: true
         });
@@ -146,7 +146,7 @@ export default async function interactiveInit(stringArgs = '') {
     }
 
     // launch development stack
-    const launchDevStackConfirm = new Confirm({
+    const launchDevStackConfirm = new Enquirer.Confirm({
         message: 'Launch development stack?',
         initial: true
     });

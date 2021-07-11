@@ -1,4 +1,0 @@
-// @ts-nocheck
-import * as Options from './options';
-export { Options };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBUWQsT0FBTyxLQUFLLE9BQU8sTUFBTSxXQUFXLENBQUM7QUFFckMsT0FBTyxFQUFFLE9BQU8sRUFBRSxDQUFDIn0=

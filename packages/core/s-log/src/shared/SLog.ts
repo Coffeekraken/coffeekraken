@@ -202,7 +202,7 @@ export default class SLog extends __SClass implements ISLog {
     // ensure every adapters are a class instance
     Object.keys(this.logSettings.adapters).forEach(async (adapterName) => {
       if (typeof this.logSettings.adapters[adapterName] === 'string') {
-        const cls = require(this.logSettings.adapters[adapterName]);
+        const { default: cls } = await import(this.logSettings.adapters[adapterName]);
         this.logSettings.adapters[adapterName] = new (cls.default || cls)();
       }
     });

@@ -282,17 +282,19 @@ export default class SConfig {
     function extendsConfigIfNeeded(configToExtends) {
       if (configToExtends.extends && typeof configToExtends.extends === 'string') {
         const extend = configToExtends.extends;
+
         if (!config[extend]) {
           throw new Error(`<red>[SConfig]</red> You have set an "<yellow>extends</yellow>" property to "<magenta>${extend}</magenta>" inside the "<cyan>${configName}</cyan>" config but this configuration you want to extends does not exists...`);
         }
 
         const extendsConfig = extendsConfigIfNeeded(Object.assign({}, config[extend]));
 
-        delete configToExtends.extends;
+        // delete configToExtends.extends;
         const newExtendedConfig = __deepMerge(
           extendsConfig,
           configToExtends
         );
+          delete newExtendedConfig.extends;
 
         return newExtendedConfig;
 

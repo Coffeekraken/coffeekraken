@@ -1,6 +1,6 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import caller from 'caller-callsite';
+import __callsites from 'callsites';
 
 /**
  * @name            dirname
@@ -25,5 +25,5 @@ import caller from 'caller-callsite';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function() {
-    return fileURLToPath(caller({depth: 1}).getFileName()).split('/').slice(0,-1).join('/');
+    return fileURLToPath(__callsites()[1].getFileName()).split('/').slice(0,-1).join('/');
 }

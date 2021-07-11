@@ -1,10 +1,6 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node
 // @ts-nocheck
 
-// import esmRequire from 'esm';
-// const require = esmRequire(module, {});
-// module.exports = require('./main.js');
-
 import __childProcess from 'child_process';
 import __glob from 'glob-all';
 import __path from 'path';
@@ -109,6 +105,10 @@ class SSugarCli {
     // print header
     if (!__isChildProcess()) {
       this._newStep();
+      console.log('PID', process.pid);
+    } else {
+      console.log('PPID', process.ppid);
+      // console.log('HEllo');
     }
 
     (async () => {
@@ -233,7 +233,7 @@ class SSugarCli {
   }
 
   _newStep() {
-    console.clear();
+    // console.clear();
     console.log(__parseHtml(__sugarBanner({
       paddingTop: 1,
       paddingBottom: 1

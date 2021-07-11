@@ -1,14 +1,13 @@
 // import __postcss from 'postcss';
+import __SBench from '@coffeekraken/s-bench';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __unquote from '@coffeekraken/sugar/shared/string/unquote';
 import __fs from 'fs';
 import __glob from 'glob';
-import __postcss from 'postcss';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';
+import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
-import __SBench from '@coffeekraken/s-bench';
-import __unquote from '@coffeekraken/sugar/shared/string/unquote';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {
@@ -63,18 +62,30 @@ const plugin = (settings: any = {}) => {
 
   async function _load() {
     // list all mixins
-    const mixinsPaths = __glob.sync(`${__dirname()}/mixins/**/*.js`);
-    // list all functions
-    const functionsPaths = __glob.sync(`${__dirname()}/functions/**/*.js`);
-
+    const mixinsPaths = __glob.sync(`mixins/**/*.js`, {
+      cwd: __dirname()
+    });
     for (let i=0; i<mixinsPaths.length; i++) {
       const path = mixinsPaths[i];
-      const { default: mixin } = await import(path);
-      mixinsStack[`${path.split('/').slice(-2).join('.').replace(/\.js$/, '')}`] = mixin;
-      console.log(mixinsStack)
+      const { default: mixin, interface: int } = await import(`./${path}`);
+      mixinsStack[`${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`] = {
+        mixin,
+        interface: int
+      };
     }
 
-    console.log(mixinsStack);
+    // list all functions
+    const functionsPaths = __glob.sync(`functions/**/*.js`, {
+      cwd: __dirname()
+    });
+    for (let i=0; i<functionsPaths.length; i++) {
+      const path = functionsPaths[i];
+      const { default: fn, interface: int } = await import(`./${path}`);
+      functionsStack[`${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`] = {
+        fn,
+        interface: int
+      };
+    }
 
     return true;
 
@@ -91,7 +102,7 @@ const plugin = (settings: any = {}) => {
 
     },
 
-    OnceExit(root) {
+    async OnceExit(root) {
 
       // console.log('EX');
       // if (postProcessorsExecuted) return;
@@ -104,8 +115,8 @@ const plugin = (settings: any = {}) => {
 
       for (let i=0; i<postProcessorsPaths.length; i++) {
         const path = postProcessorsPaths[i];
-        const processorFn =
-        require(`${__dirname()}/postProcessors/${path}`).default;
+        const { default: processorFn } =
+        await import(`${__dirname()}/postProcessors/${path}`);
         processorFn({
           root,
           sharedData
@@ -141,18 +152,13 @@ const plugin = (settings: any = {}) => {
 
       if (atRule.name.match(/^sugar\./)) {
 
-        let potentialMixinPath = `${__dirname()}/mixins/${atRule.name
-          .replace(/^sugar\./, '')
-          .replace(/\./gm, '/')}.js`;
+        let mixinId = atRule.name.replace(/^sugar\./, '');
 
-        if (!__fs.existsSync(potentialMixinPath)) {
-          const potentialFileName = atRule.name.split('.').pop();
-          potentialMixinPath = potentialMixinPath.replace(
-            /\.js$/,
-            `/${potentialFileName}.js`
-          );
+        if (!mixinsStack[mixinId]) {
+          mixinId = `${mixinId}.${mixinId.split('.').slice(-1)[0]}`
         }
-        if (!__fs.existsSync(potentialMixinPath)) {
+
+        if (!mixinsStack[mixinId]) {
           throw new Error(
             `<red>[postcssSugarPlugin]</red> Sorry but the requested sugar mixin "<yellow>${atRule.name}</yellow>" does not exists...`
           );
@@ -164,29 +170,12 @@ const plugin = (settings: any = {}) => {
             ? __path.dirname(root.source.input.file)
             : __dirname();
 
-        const mixin = require(potentialMixinPath);
-        const mixinFn = mixin.default;
-        const mixinInterface = mixin.interface;
+        const mixinFn = mixinsStack[mixinId].mixin;
+        const mixinInterface = mixinsStack[mixinId].interface;
 
         const sanitizedParams = atRule.params;
 
-        // console.log('PA', atRule.params);
-
-        // sanitizedParams = sanitizedParams.split('\n')[0];
-
         const params = mixinInterface.apply(sanitizedParams, {});
-
-        // Object.keys(params).forEach((paramName) => {
-        //   const paramValue = params[paramName];
-        //   if (
-        //     typeof paramValue === 'string' &&
-        //     paramValue.trim().match(/^sugar\./)
-        //   ) {
-        //     let res = processNested(paramValue);
-        //     if (typeof res !== 'string') res = res.toString();
-        //     params[paramName] = res;
-        //   }
-        // });
 
         delete params.help;
         mixinFn({
@@ -251,24 +240,20 @@ const plugin = (settings: any = {}) => {
           /sugar\.[a-zA-Z0-9\.]+/,
           ''
         );
-        let fnPath = `${__dirname()}/functions/${functionName
-          .split('.')
-          .join('/')}.js`;
-        if (!__fs.existsSync(fnPath)) {
-          const potentialFileName = functionName.split('.').pop();
-          fnPath = `${__dirname()}/functions/${functionName
-            .split('.')
-            .join('/')}/${potentialFileName}.js`;
+
+        let fnId = functionName;
+        if (!functionsStack[fnId]) {
+          fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`
         }
 
-        if (!__fs.existsSync(fnPath)) {
+        if (!functionsStack[fnId]) {
           throw new Error(
-            `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${functionName}</yellow>" does not exists...`
+            `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`
           );
         }
-        const func = require(fnPath);
-        const functionInterface = func.interface;
-        const funcFn = func.default;
+
+        const functionInterface = functionsStack[fnId].interface;
+        const funcFn = functionsStack[fnId].fn;
         const params = functionInterface.apply(paramsStatement, {});
         delete params.help;
 

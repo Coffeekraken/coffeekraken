@@ -10,8 +10,7 @@ export default {
     __path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`),
     __path.resolve(`${__dirname()}/../node/plugins/sveltePlugin`),
     __path.resolve(`${__dirname()}/../node/plugins/riotjsPlugin`),
-    __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`),
-    __path.resolve(`${__dirname()}/../node/plugins/imageminPlugin`)
+    __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`)
   ],
   publicDir: '[config.storage.src.rootDir]',
   cacheDir: '[config.storage.package.cacheDir]/vite',

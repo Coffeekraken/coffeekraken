@@ -9,7 +9,7 @@ import __isFile from '../is/file';
 import __packageRootDir from '../path/packageRootDir';
 import __builtInNodeModules from './buildInNodeModules';
 import __exportsMatch from './exportsMatch';
-
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 /**
  * @name            resolve
@@ -114,7 +114,7 @@ export default function resolve(
     );
   }
 
-  const rootPackageJson = require(`${set.rootDir}/package.json`);
+  const rootPackageJson = __readJsonSync(`${set.rootDir}/package.json`);
 
   // // if is an absolute or relative path
   // if (moduleName.match(/^[\.\/]/)) {
@@ -161,7 +161,7 @@ export default function resolve(
           parts.length >= 1 &&
           __existsSync(__path.resolve(dirPath, parts[0], 'package.json'))
         ) {
-          requestedModulePackageJson = require(__path.resolve(
+          requestedModulePackageJson = __readJsonSync(__path.resolve(
             dirPath,
             parts[0],
             'package.json'
@@ -176,7 +176,7 @@ export default function resolve(
             __path.resolve(dirPath, parts[0], parts[1], 'package.json')
           )
         ) {
-          requestedModulePackageJson = require(__path.resolve(
+          requestedModulePackageJson = __readJsonSync(__path.resolve(
             dirPath,
             parts[0],
             parts[1],
@@ -196,7 +196,7 @@ export default function resolve(
 
         // check if the passed moduleName is a node module
         if (__existsSync(__path.resolve(dirPath, moduleName, 'package.json'))) {
-          requestedModulePackageJson = require(__path.resolve(
+          requestedModulePackageJson = __readJsonSync(__path.resolve(
             dirPath,
             moduleName,
             'package.json'

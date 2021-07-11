@@ -1,13 +1,13 @@
 import __SClass from '@coffeekraken/s-class';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __md5 from '@coffeekraken/sugar/src/shared/crypt/md5';
 import __isClass from '@coffeekraken/sugar/src/shared/is/class';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/src/shared/string/toString';
 import __convert from '@coffeekraken/sugar/src/shared/time/convert';
-import { ISCacheAdapter } from './adapters/SCacheAdapter';
 import __SCacheLsAdapter from '../js/adapters/SCacheLsAdapter';
+import { ISCacheAdapter } from './adapters/SCacheAdapter';
 import __SCacheSettingsInterface from './interface/SCacheSettingsInterface';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 /**
  * @name                                SCache
@@ -153,31 +153,33 @@ class SCache extends __SClass implements ISCache {
 
     this.id = id;
 
-    if (__isNode()) {
-      // @ts-ignore
-      this.constructor.registerAdapter(
-        require('../node/adapters/SCacheFsAdapter').default
-      );
+    (async () => {
 
-      // check if we need to clear the cache on exit
-      if (this.cacheSettings.clearOnExit) {
-        const __onProcessExit = require('@coffeekraken/sugar/node/process/onProcessExit')
-          .default;
-        const __parseHtml = require('@coffeekraken/sugar/node/terminal/parseHtml')
-          .default;
-        __onProcessExit(async () => {
-          console.log(
-            __parseHtml(
-              `<yellow>[${this.constructor.name}.${this.id}]</yellow> Clearing the cache`
-            )
-          );
-          await this.clear();
-        });
+      if (__isNode()) {
+
+        // @ts-ignore
+        this.constructor.registerAdapter(
+          (await import('../node/adapters/SCacheFsAdapter')).default
+        );
+
+        // check if we need to clear the cache on exit
+        if (this.cacheSettings.clearOnExit) {
+          const { default: __onProcessExit } = await import('@coffeekraken/sugar/node/process/onProcessExit');
+          const { default: __parseHtml } = await import('@coffeekraken/sugar/shared/console/parseHtml');
+          __onProcessExit(async () => {
+            console.log(
+              __parseHtml(
+                `<yellow>[${this.constructor.name}.${this.id}]</yellow> Clearing the cache`
+              )
+            );
+            await this.clear();
+          });
+        }
+      } else {
+        // @ts-ignore
+        this.constructor.registerAdapter(__SCacheLsAdapter);
       }
-    } else {
-      // @ts-ignore
-      this.constructor.registerAdapter(__SCacheLsAdapter);
-    }
+    })();
 
     // make sure we have a name
     if (!id) {

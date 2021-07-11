@@ -13,6 +13,7 @@ import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __minimatch from 'minimatch';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 /**
  * @name            SFile
@@ -964,7 +965,7 @@ class SFile extends __SEventEmitter implements ISFile {
     };
     let content: any;
     if (this.extension === 'json' && set.cast) {
-      content = require(this.path);
+      content = __readJsonSync(this.path);
       return content;
     } else {
       content = __fs.readFileSync(this.path, {

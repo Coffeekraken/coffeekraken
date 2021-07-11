@@ -7,6 +7,7 @@ import _childProcess from 'child_process';
 import __fs from 'fs';
 import __chalk from 'chalk';
 import __packageRootDir from '../path/packageRootDir';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 /**
  * @name            linkPackages
@@ -67,7 +68,7 @@ export default function linkPackages(
     }
 
     const topPackagePath = `${__packageRootDir(process.cwd(), true)}`;
-    const topPackageJson = require(`${topPackagePath}/package.json`); // eslint-disable-line
+    const topPackageJson = __readJsonSync(`${topPackagePath}/package.json`); // eslint-disable-line
 
     if (!params.individual) {
       // logs

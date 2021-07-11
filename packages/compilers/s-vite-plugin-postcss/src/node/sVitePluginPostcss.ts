@@ -19,20 +19,23 @@ export default function sVitePluginPostcss() {
 
   return {
     name: 's-vite-plugin-postcss',
-    transform(src, id) {
+    async transform(src, id) {
 
       if (fileRegex.test(id)) {
 
         // resolve plugins paths
-        const plugins = postcssConfig.plugins.map((p) => {
-            if (typeof p === 'string') {
-                const plugin = require(p);
-                const fn = plugin.default ?? plugin;
-                const options = postcssConfig.pluginsOptions[p] ?? {};
-                return fn(options);
-            }
-            return p;
-        });
+        const plugins: any[] = [];
+        for (let i=0; i<postcssConfig.plugins.length; i++) {
+          const p = postcssConfig.plugins[i];
+          if (typeof p === 'string') {
+              const { default: plugin } = await import(p);
+              const fn = plugin.default ?? plugin;
+              const options = postcssConfig.pluginsOptions[p] ?? {};
+              plugins.push(fn(options));
+          } else {
+            plugins.push(p);
+          }
+        }
 
         // build postcss
         const css = __postcss(plugins).process(src ?? '', {

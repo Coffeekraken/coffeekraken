@@ -18,8 +18,8 @@ export class SProcessKillCliInterface extends __SInterface {
   };
 }
 
-export default function start(stringArgs = '') {
-  const pro = __SProcess.from(
+export default async function start(stringArgs = '') {
+  const pro = await __SProcess.from(
     (params) => {
       return new __SPromise(async ({ resolve, reject, emit }) => {
         if (params.id) {

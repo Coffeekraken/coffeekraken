@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import _glob from 'glob';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 /**
  * @name            findPackages
@@ -44,7 +45,7 @@ export default async function findPackages(
     .filter((path) => path !== 'package.json');
   packagesPaths.forEach((path) => {
     const folder = path.split('/').slice(0, -1).join('/');
-    packagesObj[folder] = require(`${rootDir}/${path}`);
+    packagesObj[folder] = __readJsonSync(`${rootDir}/${path}`);
   });
   return packagesObj;
 }

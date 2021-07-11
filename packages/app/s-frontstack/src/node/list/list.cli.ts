@@ -4,7 +4,7 @@ import __SFrontstackListParamsInterface from './interface/SFrontstackListParamsI
 
 export default async function action(stringArgs = '') {
   const frontstack = new __SFrontstack();
-  const pro = __SProcess.from(frontstack.list.bind(frontstack), {
+  const pro = await __SProcess.from(frontstack.list.bind(frontstack), {
     process: {
       interface: __SFrontstackListParamsInterface
     }

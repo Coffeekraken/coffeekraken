@@ -539,11 +539,11 @@ class SView extends __SClass implements ISViewRenderer {
       const duration = new __SDuration();
 
       // load engine, datahandler, etc...
-      const engineObj = require(this._enginePath).default;
+      const { default: engineObj } = await import(this._enginePath);
 
       let dataHandlerObj;
       if (this._dataHandlerPath && this._dataFilePath) {
-        dataHandlerObj = require(this._dataHandlerPath).default;
+        dataHandlerObj = (await import(this._dataHandlerPath)).default;
         const gettedData = await dataHandlerObj.handle(this._dataFilePath);
         if (gettedData) data = __deepMerge(gettedData, data);
       }

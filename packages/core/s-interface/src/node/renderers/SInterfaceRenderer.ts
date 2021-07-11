@@ -81,6 +81,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
   /**
    * @name          render
    * @type          Function
+   * @async
    *
    * This method simply render the passed interface
    *
@@ -90,7 +91,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  render(settings?: Partial<ISInterfaceRendererSettings>): string {
+  async render(settings?: Partial<ISInterfaceRendererSettings>): string {
     const set = <ISInterfaceRendererSettings>(
       __deepMerge(this._settings, {}, settings)
     );
@@ -128,8 +129,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
             __fs.existsSync(`${set.templatesDir}/${propKey}.js`)
           ) {
             // load the template
-            const templateFunction = require(`${set.templatesDir}/${propKey}.js`)
-              .default;
+            const { default: templateFunction } = await import(`${set.templatesDir}/${propKey}.js`);
             // execute the template function
             renderedProperties[key][propKey] = templateFunction(toRenderObj);
           } else if (
@@ -150,7 +150,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
       set.templatesDir &&
       __fs.existsSync(`${set.templatesDir}/template.js`)
     ) {
-      templateFunction = require(`${set.templatesDir}/template.js`).default;
+      templateFunction = (await import(`${set.templatesDir}/template.js`)).default;
     } else if (
       this['renderTemplate'] &&
       typeof this['renderTemplate'] === 'function'

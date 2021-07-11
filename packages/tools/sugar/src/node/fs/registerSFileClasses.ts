@@ -14,10 +14,10 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  *
  * @since       2.0.0
  */
-export default () => {
+export default  () => {
   const map: Record<string, string> = __SugarConfig.get('fs.sFileClassesMap');
-  Object.keys(map).forEach((key) => {
-    const cls = require(map[key]).default;
+  Object.keys(map).forEach(async (key) => {
+    const { default: cls } = await import(map[key]);
     key
       .split(',')
       .map((l) => l.trim())

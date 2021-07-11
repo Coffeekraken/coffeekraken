@@ -267,13 +267,30 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         }
 
         if (destSEventEmitter === process && __isChildProcess() && process.send) {
+
           if (value.value && value.value instanceof Error) {
               value.value = __toString(value.value);
             }
-            process.send({
-              value,
-              emitMetas
-            });
+
+          //   console.log('EM;IT', emitMetas);
+
+
+          //   __nodeIpc.connectTo(`s-event-emitter-parent-${process.ppid}`, () => {
+            
+
+          //   __nodeIpc.of[`s-event-emitter-parent-${process.ppid}`].on('connect', () => {
+          //     __nodeIpc.of[`s-event-emitter-parent-${process.ppid}`].emit('s-event-emitter-event', {
+          //       value,
+          //       emitMetas
+          //     });
+          //   });
+
+          // });
+
+          process.send({
+            value,
+            emitMetas
+          });
         } else {
           destSEventEmitter.emit(metas.event, value, emitMetas);
         }
@@ -393,12 +410,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         __nodeIpc.config.silent = true;
         if (__isChildProcess()) {
           __nodeIpc.config.id = `s-event-emitter-child-${process.pid}`;
-          __nodeIpc.connectTo(`s-event-emitter-parent-${process.ppid}`, () => {
-
-          });
+          
         } else {
-          __nodeIpc.config.id = `s-event-emitter-parent-${process.id}`;
+          __nodeIpc.config.id = `s-event-emitter-parent-${process.pid}`;
           __nodeIpc.serve(() => __nodeIpc.server.on('s-event-emitter-event', message => {
+            // throw new Error(message);
             console.log(message);
           }));
           __nodeIpc.server.start();

@@ -26,6 +26,6 @@ global._sugarEventSEventEmitter = new __SEventEmitter({
     }
 });
 // pipe the events to parent process
-global._sugarEventSEventEmitter.pipeTo(process);
+// global._sugarEventSEventEmitter.pipeTo(process);
 
 export default global._sugarEventSEventEmitter;

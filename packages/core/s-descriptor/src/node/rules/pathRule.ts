@@ -110,7 +110,6 @@ const ruleObj: ISDescriptorRule = {
     }
 
     if (params.exists) {
-      const __fs = require('fs'); // eslint-disable-line
       if (!__fs.existsSync(value))
         if (params.create) {
           __fs.mkdirSync(value, { recursive: true });

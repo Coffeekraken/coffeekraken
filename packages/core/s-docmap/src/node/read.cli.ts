@@ -6,7 +6,7 @@ import __SDocMapParamsReadInterface from './interface/SDocMapReadParamsInterface
 
 export default async (stringArgs = '') => {
   const docmap = new __SDocMap();
-  const pro = __SProcess.from(docmap.read.bind(docmap), {
+  const pro = await __SProcess.from(docmap.read.bind(docmap), {
     process: {
       interface: __SDocMapParamsReadInterface
     }

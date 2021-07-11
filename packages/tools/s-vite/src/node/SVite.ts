@@ -1,21 +1,20 @@
 import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
+import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
+import __sRiotjsPluginPostcssPreprocessor from '@coffeekraken/s-riotjs-plugin-postcss-preprocessor';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __path from 'path';
+import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
+import { uglify as __uglifyPlugin } from "rollup-plugin-uglify";
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
+import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
 import __SViteStartInterface from './start/interface/SViteStartInterface';
-import __SFile from '@coffeekraken/s-file';
-import { uglify as __uglifyPlugin } from "rollup-plugin-uglify";
-import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
 
-import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
-import __sRiotjsPluginPostcssPreprocessor from '@coffeekraken/s-riotjs-plugin-postcss-preprocessor';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -106,14 +105,17 @@ export default class SVite extends __SClass {
         config.plugins.unshift(__sInternalWatcherReloadVitePlugin());
 
         // resolve plugins paths
-        config.plugins = config.plugins.map((p) => {
+        const plugins: any[] = [];
+        for (let i=0; i<config.plugins.length; i++) {
+          const p = config.plugins[i];
           if (typeof p === 'string') {
-            const plug = require(p);
-            return plug.default ?? plug;
+            const { default: plug } = await import(p);
+            plugins.push(plug.default ?? plug);
+          } else {
+            plugins.push(p);
           }
-          return p;
-        });
-
+        }
+        config.plugins = plugins;
       
         const server = await __viteServer(config);
         const listen = await server.listen();
@@ -205,9 +207,17 @@ export default class SVite extends __SClass {
           config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
 
           // resolve plugins paths
-          config.plugins = config.plugins.map((p) => {
-            if (typeof p === 'string') return require(p).default;
-          });
+          const plugins: any[] = [];
+          for (let i=0; i<config.plugins.length; i++) {
+            const p = config.plugins[i];
+            if (typeof p === 'string') {
+              const { default: plug } = await import(p);
+              plugins.push(plug.default ?? plug);
+            } else {
+              plugins.push(p);
+            }
+          }
+          config.plugins = plugins;
 
           // mode (production, development)
           if (params.prod) {

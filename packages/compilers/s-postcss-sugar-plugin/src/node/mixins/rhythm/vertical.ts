@@ -1,7 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __astNodesToString from '../../utils/astNodesToString';
-import * as __postcss from 'postcss';
+
 
 class postcssSugarPluginRhythmVerticalMixinInterface extends __SInterface {
   static definition = {};
@@ -39,15 +37,17 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {
  */
 export default function ({
   params,
-  atRule
+  atRule,
+  postcssApi
 }: {
   params: Partial<postcssSugarPluginRhythmVerticalMixinParams>;
   atRule: any;
+  postcssApi: any;
 }) {
   const finalParams = <postcssSugarPluginRhythmVerticalMixinParams>{
     ...(params ?? {})
   };
-  const container = __postcss.rule({
+  const container = new postcssApi.Rule({
     selectors: [`.s-rhythm-vertical`]
   });
   atRule.nodes.forEach(n => {

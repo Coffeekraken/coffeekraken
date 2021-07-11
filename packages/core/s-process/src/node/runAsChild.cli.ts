@@ -7,45 +7,35 @@ interface IProcessRunChildOptions {
   processPath: string;
 }
 
-const stringArgs =
-  process.argv
-    .slice(1)
-    .map((arg) => {
-      if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-') {
-        return `"${arg}"`;
-      }
-      return arg;
-    })
-    .join(' ') || '';
-const args: IProcessRunChildOptions = __parseArgs(stringArgs);
-delete args[-1];
-if (!args._settings.processPath) {
-  throw `Sorry but to use this endpoint you have to specify at least a "--processPath" parameter...`;
-}
+(async() => {
 
-const settings = Object.assign({}, args._settings);
-const processPath = settings.processPath;
-delete settings.processPath;
-delete args._settings;
-
-const pro = __SProcess.from(processPath, {
-  process: {
-    ...settings,
-    runAsChild: false
+  const stringArgs =
+    process.argv
+      .slice(1)
+      .map((arg) => {
+        if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-') {
+          return `"${arg}"`;
+        }
+        return arg;
+      })
+      .join(' ') || '';
+  const args: IProcessRunChildOptions = __parseArgs(stringArgs);
+  delete args[-1];
+  if (!args._settings.processPath) {
+    throw `Sorry but to use this endpoint you have to specify at least a "--processPath" parameter...`;
   }
-});
-if (pro && pro.run) pro.run(args);
 
-// const ProcessClass = require(args.processPath).default; // eslint-disable-line
-// if (ProcessClass.prototype instanceof __SProcess) {
-//   const processInstance = new ProcessClass(
-//     {},
-//     {
-//       process: {
-//         ...settings,
-//         runAsChild: false
-//       }
-//     }
-//   );
-//   processInstance.run(stringArgs);
-// }
+  const settings = Object.assign({}, args._settings);
+  const processPath = settings.processPath;
+  delete settings.processPath;
+  delete args._settings;
+
+  const pro = await __SProcess.from(processPath, {
+    process: {
+      ...settings,
+      runAsChild: false
+    }
+  });
+  if (pro && pro.run) pro.run(args);
+
+})();

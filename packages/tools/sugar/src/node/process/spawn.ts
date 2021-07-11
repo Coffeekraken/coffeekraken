@@ -113,6 +113,7 @@ export default function spawn(
           rejectValue = dataObj.value;
           childProcess.kill('SIGINT');
         } else {
+          console.log('SPSPS', dataObj);
           emit(dataObj.metas.event, dataObj.value, dataObj.metas);
         }
       });

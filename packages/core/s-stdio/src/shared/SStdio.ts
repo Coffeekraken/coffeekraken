@@ -295,16 +295,6 @@ class SStdio extends __SClass implements ISStdio {
       // subscribe to the process
       this.registerSource(s);
     });
-
-    // this.expose(
-    //   new __SEventEmitter({
-    //     id: this.id
-    //   }),
-    //   {
-    //     as: 'eventEmitter',
-    //     props: ['on', 'off', 'emit', 'pipe', 'pipeFrom', 'pipeTo']
-    //   }
-    // );
   }
 
   /**
@@ -371,10 +361,15 @@ class SStdio extends __SClass implements ISStdio {
       __deepMerge(this._settings.stdio || {}, settings ?? {})
     )) as ISStdioSettings;
     // subscribe to data
+
+      // console.log('REG', source, set.events);
+
     source.on(
       (set.events || []).join(','),
       (data, metas) => {
         if (data === undefined || data === null) return;
+
+        console.log('fff', data.value);
 
         // handle the type depending on the passed stack
         const types = Object.keys(set.mapTypesToEvents);

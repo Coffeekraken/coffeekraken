@@ -13,7 +13,8 @@ import __path from 'path';
 import __SDocMapBuildParamsInterface from './interface/SDocMapBuildParamsInterface';
 import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __require from '@coffeekraken/sugar/node/esm/require';
 
 /**
  * @name                SDocMap
@@ -170,17 +171,17 @@ class SDocMap extends __SClass implements ISDocMap {
 
         let currentPathDocmapJsonPath;
         try {
-          currentPathDocmapJsonPath = require.resolve(`${packageNameOrPath}/docmap.json`);
+          currentPathDocmapJsonPath = __require().resolve(`${packageNameOrPath}/docmap.json`);
         } catch(e) {
           // console.log('__', e);
         }
 
         if (!currentPathDocmapJsonPath) return;
 
-        const extendsRootPath = require.resolve(currentPathDocmapJsonPath).replace('/docmap.json', '');
+        const extendsRootPath = __require().resolve(currentPathDocmapJsonPath).replace('/docmap.json', '');
 
         try {
-          const docmapJson = require(currentPathDocmapJsonPath);
+          const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
           docmapJson.extends = [
             ...(docmapJson.extends ?? []),
             ...(docmapJson.generated?.extends ?? [])
@@ -254,7 +255,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
       // check if a file already exists
       if (__fs.existsSync(`${packageRoot}/docmap.json`)) {
-        const currentDocmapJson = require(`${packageRoot}/docmap.json`);
+        const currentDocmapJson = __readJsonSync(`${packageRoot}/docmap.json`);
         docmapJson = currentDocmapJson;
         docmapJson.generated = {
           extends: [],
@@ -282,7 +283,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
         const extendsArray: string[] = [];
         currentDocmapFiles.forEach((file) => {
-          const packageJson = require(`${file.dirPath}/package.json`);
+          const packageJson = __readJsonSync(`${file.dirPath}/package.json`);
           extendsArray.push(packageJson.name);
         });
 

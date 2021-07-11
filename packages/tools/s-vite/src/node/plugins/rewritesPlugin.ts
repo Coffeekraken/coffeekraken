@@ -1,3 +1,4 @@
+
 /**
  * @name            rewritesPlugin
  * @namespace       node.plugins
@@ -33,14 +34,14 @@ export interface IRewritesPluginRewrite {
 export default function rewritesPlugin(rewrites: IRewritesPluginRewrite[]) {
   return {
     name: 'rewrites-plugin',
-    transform(src, id) {
+    async transform(src, id) {
       for (let i = 0; i < rewrites.length; i++) {
         let rewriteObj = rewrites[i];
 
         // resolve pathes
         if (typeof rewriteObj === 'string') {
-          const re = require(rewriteObj);
-          rewriteObj = re.default ?? re;
+          const { default: re } = await import(rewriteObj);
+          rewriteObj = re;
         }
 
         if (!src.match(rewriteObj.match)) continue;

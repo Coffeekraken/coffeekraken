@@ -8,6 +8,7 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 /**
  * @name                SFrontspec
@@ -87,7 +88,7 @@ export default class SFrontspec extends __SPromise {
 
       let frontspecJson = {};
       try {
-        frontspecJson = require(frontspecPath);
+        frontspecJson = __readJsonSync(frontspecPath);
       } catch(e) {}
 
       const res = __deepMerge(

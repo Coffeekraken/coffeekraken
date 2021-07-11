@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-const __packageRootDir = require('../../../path/packageRootDir');
-const __SPromise = require('../../../promise/SPromise');
-const __SDocMap = require('../../../doc/SDocMap');
-const __SDocblock = require('../../../docblock/SDocblock');
-const __SDocblockHtmlOutput = require('../../../docblock/outputs/SDocblockHtmlOutput');
-const __render = require('../../../template/render');
+import __packageRootDir from '../../../path/packageRootDir';
+import __SPromise from '../../../promise/SPromise';
+import __SDocMap from '../../../doc/SDocMap';
+import __SDocblock from '../../../docblock/SDocblock';
+import __SDocblockHtmlOutput from '../../../docblock/outputs/SDocblockHtmlOutput';
+import __render from '../../../template/render';
 
 /**
  * @name                styleguide

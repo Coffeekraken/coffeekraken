@@ -14,6 +14,7 @@ import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs';
 import __SBench from '@coffeekraken/s-bench';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 export interface ISSugarJsonIncludeSettings {
   package: boolean;
@@ -169,36 +170,6 @@ export default class SSugarJson extends __SClass {
 
     let sugarJsonPaths: string[] = [];
 
-    // if (
-    //   finalSettings.cache &&
-    //   __fs.existsSync(
-    //     `${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.json`
-    //   )
-    // ) {
-    //   const cachedValue = require(`${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.json`);
-    //   if (cachedValue) {
-    //     // @ts-ignore
-    //     sugarJsonPaths = cachedValue;
-    //   }
-    // }
-
-    // if (finalSettings.cache && !__isChildProcess()) {
-    //   if (
-    //     !__fs.existsSync(
-    //       `${__tmpDir}/sugarJsonPaths.${finalSettings.cacheId}.lock`
-    //     )
-    //   ) {
-    //     // const sp = __childProcess.spawn(
-    //     //   `node ${__dirname()}/updateCache/updateCache.cli.js`,
-    //     //   [],
-    //     //   {
-    //     //     shell: true,
-    //     //     cwd: __packageRoot()
-    //     //   }
-    //     // );
-    //   }
-    // }
-
     if (!sugarJsonPaths.length) {
       sugarJsonPaths = this.search(finalSettings);
     }
@@ -245,7 +216,7 @@ export default class SSugarJson extends __SClass {
    */
   current(): ISSugarJsonFile {
     try {
-      return this.sanitizeJson(require(`${__packageRoot()}/sugar.json`));
+      return this.sanitizeJson(__readJsonSync(`${__packageRoot()}/sugar.json`));
     } catch(e) {
       return {};
     }

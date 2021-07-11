@@ -2,6 +2,7 @@
 
 import __packageRootDir from './packageRootDir';
 import __fs from 'fs';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 
 /**
  * @name                    isInPackage
@@ -30,7 +31,7 @@ function isInPackage(name, from = process.cwd(), highest = false) {
   if (!packageRootDir) return false;
 
   if (!__fs.existsSync(`${packageRootDir}/package.json`)) return false;
-  const pkg = require(`${packageRootDir}/package.json`);
+  const pkg = __readJsonSync(`${packageRootDir}/package.json`);
 
   let names = name;
   if (typeof names === 'string') names = names.split(',').map((f) => f.trim());

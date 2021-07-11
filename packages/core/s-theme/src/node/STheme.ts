@@ -129,7 +129,7 @@ export default class STheme extends __SClass {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  name: String;
+  name: string;
 
   /**
    * @name      theme
@@ -297,13 +297,13 @@ export default class STheme extends __SClass {
             ? firstKey
             : Object.keys(colorObj)[j];
 
-        let previous = {
+        const previous = {
           name: colorName,
           modifier: previousKey,
           // @ts-ignore
           value: colorObj[previousKey]
         };
-        let next = {
+        const next = {
           name: colorName,
           modifier: nextKey,
           value: colorObj[nextKey]

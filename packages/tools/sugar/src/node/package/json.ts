@@ -2,6 +2,7 @@
 
 import __packageRoot from './rootPath';
 import __fs from 'fs';
+import __readJsonSync from '../fs/readJsonSync';
 
 /**
  * @name          json
@@ -30,6 +31,6 @@ import __fs from 'fs';
 function json(from = process.cwd(), highest = false) {
   const path = `${__packageRoot(from, highest)}/package.json`;
   if (!__fs.existsSync(path)) return false;
-  return require(path);
+  return __readJsonSync(path);
 }
 export default json;

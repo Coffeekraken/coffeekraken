@@ -7,7 +7,7 @@ export default async function build(stringArgs = '') {
 
     const builder = new __SImagesBuilder();
 
-    const pro = __SProcess.from(
+    const pro = await __SProcess.from(
         builder.build.bind(builder)
     , {
         process: {

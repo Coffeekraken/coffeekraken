@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme, { themeDefinition } from '../../utils/theme';
 import __astNodesToString from '../../utils/astNodesToString';
 
 class postcssSugarPluginStateFocusMixinInterface extends __SInterface {
@@ -13,9 +12,12 @@ export interface postcssSugarPluginStateFocusMixinParams {}
  * @name           focus
  * @namespace      mixins.state
  * @type           Mixin
+ * @platform      css
  * @status        beta
  *
- * This mixin allows you to target some focus items to apply correct color schema
+ * This mixin allows you to target some focus items to apply some styling.
+ * Here's the generated selector:
+ * - &:focus
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *

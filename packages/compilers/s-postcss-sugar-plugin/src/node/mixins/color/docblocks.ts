@@ -9,7 +9,8 @@ export { postcssSugarPluginDocblockColorsMixinInterface as interface };
 /**
  * @name           docblocks
  * @namespace      mixins.color
- * @type           Mixin
+ * @type           PostcssMixin
+ * @platform      css
  * @status        beta
  *
  * This mixin print the documentation docblocks for the colors
@@ -40,6 +41,8 @@ export default function ({ params, atRule, replaceWith }) {
           ` * @modifier        ${modifier}`,
           ` * @namespace       sugar.css.theme.${__theme().name}.colors`,
           ` * @type            color`,
+          ` * @platform       css`,
+          ` * @status         stable`,
           ` *`,
           ` * This is the "${colorName}${
             modifier !== 'default' ? `-${modifier}` : ''

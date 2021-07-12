@@ -38,13 +38,15 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @name           media
  * @namespace      mixins
  * @type           Mixin
+ * @platform      css
  * @status        beta
  *
- * This mixin allows you to apply media queries depending on the ```media.config.js``` config
- * file with ease.
+ * This mixin allows you to apply any media queries that are defined
+ * in the config.theme.media.queries configuration stack like "tablet", "mobile", etc...
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
- *
+ * @return      {Css}         The generated css
+ * 
  * @example         postcss
  * \@sugar.media >=desktop {
  *      // ...
@@ -59,12 +61,10 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 export default function ({
   params,
   atRule,
-  replaceWith,
   postcssApi
 }: {
   params: any;
   atRule: any;
-  replaceWith: Function;
   postcssApi: any;
 }) {
   const mediaConfig = __theme().config('media');

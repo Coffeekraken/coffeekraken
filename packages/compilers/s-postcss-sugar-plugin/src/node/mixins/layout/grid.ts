@@ -1,5 +1,49 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name           grid
+ * @namespace      node.mixins.layout
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin allows you to generate all the css needed for complex grids with multiple
+ * columns and rows like:
+ * 
+ * |-|----|-|
+ * |--|--|--|
+ * |-----|--|
+ * 
+ * The mixin accept 1 parameter called layout. Here's some simple layouts to
+ * illustrate how it works:
+ *
+ * - layout 1: <span class="s-color-accent">'1 2 3 4 5 6'</span> : This describe a simple 6 columns layout
+ * - layout 2: <span class="s-color-accent">'1 1 2'</span>: This describe a two columns layout with the first columns taking 2/3 of the space and the second one taking 1/3 of it
+ * - layout 3: <span class="s-color-accent">'1 2 _ 3 3'</span>: This describe 2 rows with the first having two columns and the second just one
+ *
+ * @param       {String}        layout      The layout you want to generate
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * .my-element {
+ *    \@sugar.layout.grid(
+ *      1 1 1 2 2
+ *      3 3 4 4 4
+ *    );
+ * }
+ * 
+ * @example     html
+ * <div class="my-element">
+ *    <div>Area 1</div>
+ *    <div>Area 2</div>
+ *    <div>Area 3</div>
+ *    <div>Area 4</div>
+ * </div>
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginLayoutInterface extends __SInterface {
   static definition = {
     layout: {
@@ -42,37 +86,6 @@ export interface IPostcssSugarPluginLayoutParams {
 
 export { postcssSugarPluginLayoutInterface as interface };
 
-/**
- * @name          grid
- * @namespace     sugar.postcss.mixin.layout
- * @type          PostcssMixin
- *
- * This mixin allows you to create with ease some grid layouts by using a visual
- * description syntax.
- * The mixin accept 1 parameter called layout. Here's some simple layouts to
- * illustrate how it works:
- *
- * - layout 1: <span class="s-color-accent">'1 2 3 4 5 6'</span> : This describe a simple 6 columns layout
- * - layout 2: <span class="s-color-accent">'1 1 2'</span>: This describe a two columns layout with the first columns taking 2/3 of the space and the second one taking 1/3 of it
- * - layout 3: <span class="s-color-accent">'1 2 _ 3 3'</span>: This describe 2 rows with the first having two columns and the second just one
- *
- * @param       {String}        layout      The layout to generate
- * @return      {Css}                   The corresponding grid css
- *
- * @example       css
- * .my-element {
- *    @sugar.layout.grid('1 1 2');
- * }
- *
- * @example     html
- * <div class="my-element">
- *    <div>Column 1</div>
- *    <div>Column 2</div>
- * </div>
- *
- * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
 export default function ({
   params,
   atRule,

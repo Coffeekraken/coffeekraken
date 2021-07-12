@@ -22,13 +22,6 @@ import {
 } from './ISProcess';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
-// process.on('uncaughtException', function (err) {
-//   console.log('CAUGHT__', err);
-// });
-// process.on('unhandledRejection', function (err) {
-//   console.log('CAUGHT', err);
-// });
-
 /**
  * @name                SProcess
  * @namespace           sugar.node.process
@@ -366,11 +359,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
 
     // ready if not an asyncStart process
-    if (this.processSettings.asyncStart === false) {
-      setTimeout(() => {
-        this.ready();
-      });
-    }
+    // if (this.processSettings.asyncStart === false) {
+    //   setTimeout(() => {
+    //     this.ready();
+    //   });
+    // }
   }
 
   /**
@@ -435,7 +428,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _duration: any;
-  async run(
+  run(
     paramsOrStringArgs: string | Partial<ISProcessParams> = {},
     settings: Partial<ISProcessSettings> = {}
   ) {
@@ -454,9 +447,14 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       return;
     }
 
-    if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
-      this.stdio = await __SStdio.new([], processSettings.stdio, {});
-    }
+    (async () => {
+      if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
+        this.stdio = await __SStdio.new(this, processSettings.stdio, {});
+        if (this._processPromise) {
+          this._processPromise._eventEmitter.start();
+        }
+      }
+    })();
 
     this._duration = new __SDuration();
 
@@ -545,17 +543,17 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     // handle SPromise based processes
     if (this._processPromise instanceof __SPromise) {
-      // this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
 
-      // stdio
-      if (this.stdio) this.stdio.registerSource(this._processPromise);
+      // make event emitter async to wait for stdio to be ready
+      if (!__isChildProcess() && processSettings.stdio) {
+        this._processPromise.eventEmitterSettings.asyncStart = true;
+      }
+
+      this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
 
       // listen for "data" and "log" events
       this._processPromise &&
         this._processPromise.on('log', (data, metas) => {
-          if (!__isChildProcess()) {
-            console.log('DDDDDD', data.value);
-          }
           if (this.currentExecutionObj) {
             this.currentExecutionObj.stdout.push(data);
           }

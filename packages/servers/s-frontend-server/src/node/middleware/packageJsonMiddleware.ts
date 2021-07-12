@@ -35,6 +35,7 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  */
 function packageJsonMiddleware(settings = {}) {
   return function (req, res, next) {
+
     const packageJsonPath = `${__packageRootDir()}/package.json`;
     let pkg;
     if (!__fs.existsSync(packageJsonPath)) {

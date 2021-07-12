@@ -2,6 +2,24 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
+/**
+ * @name           classes
+ * @namespace      node.mixins.layout
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the layout helper classes like s-grid:12, s-container, etc...
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.layout.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginLayoutClassesInterface extends __SInterface {
   static definition = {};
 }
@@ -29,6 +47,8 @@ export default function ({
   * @name          s-container
   * @namespace          sugar.css.layout
   * @type               CssClass
+  * @platform       css
+  * @status         beta
   * 
   * This class allows you to apply the container styling to any HTMLElement
   * 
@@ -48,14 +68,16 @@ export default function ({
     const colsCount = __unique(layout.split(/\n\s/)).length;
     vars.push(`
       /**
-       * @name       s-grid--${id}
+       * @name       s-grid:${id}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status      beta
        * 
        * This class represent a layout of "<yellow>${layout}</yellow>"
        * 
        * @example     html
-       * <div class="s-container s-grid--${id}">
+       * <div class="s-container s-grid\:${id}">
        *    ${Array(colsCount)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -76,20 +98,22 @@ export default function ({
 
   Object.keys(spaces).forEach(spaceName => {
 
-    const clsX = `s-grid--gutter-x-${spaceName}`.replace('-default','');
-    const clsY = `s-grid--gutter-y-${spaceName}`.replace('-default','');
-    const cls = `s-grid--gutter-${spaceName}`.replace('-default','');
+    const clsX = `s-grid:gutter-x-${spaceName}`.replace('-default','');
+    const clsY = `s-grid:gutter-y-${spaceName}`.replace('-default','');
+    const cls = `s-grid:gutter-${spaceName}`.replace('-default','');
 
     vars.push(`
       /**
        * @name       ${clsX}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status        beta
        * 
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid--123 ${clsX}">
+       * <div class="s-grid\:123 ${clsX.replace(':', '\:')}">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -100,7 +124,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .${clsX} > * {
+      .${clsX.replace(':','--')} > * {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
       }
@@ -111,11 +135,13 @@ export default function ({
        * @name       ${clsY}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status        beta
        * 
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid--123 ${clsY}">
+       * <div class="s-grid\:123 ${clsY.replace(':','\:')}">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -126,7 +152,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-        .${clsY} > * {
+        .${clsY.replace(':','--')} > * {
         padding-top: sugar.space(${spaceName});
         padding-bottom: sugar.space(${spaceName});
       }
@@ -137,11 +163,13 @@ export default function ({
        * @name       ${cls}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status      beta
        * 
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid--123 ${cls}">
+       * <div class="s-grid\:123 ${cls.replace(':','\:')}">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -152,7 +180,7 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .${cls} > * {
+      .${cls.replace(':','--')} > * {
         padding: sugar.space(${spaceName});
       }
     `);
@@ -160,14 +188,16 @@ export default function ({
 
   vars.push(`
      /**
-       * @name       s-grid--gutter-between
+       * @name       s-grid:gutter-between
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status      beta
        * 
        * This class allows you to specify that you want only gutters between grid items
        * 
        * @example     html
-       * <div class="s-grid--123 s-grid--gutter-between">
+       * <div class="s-grid\:123 s-grid\:gutter-between">
        *    ${Array(3)
          .map((idx) => {
            return `<div>I'm the area ${idx}</div>`;
@@ -192,14 +222,16 @@ export default function ({
   ['start','end','center','stretch'].forEach(align => {
     vars.push(`
       /**
-         * @name       s-grid--align-${align}
+         * @name       s-grid:align-${align}
          * @namespace     sugar.css.layout
          * @type          CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This allows you to align all the items to "${align}"
          * 
          * @example     html
-         * <div class="s-grid--123 s-grid--align-${align}">
+         * <div class="s-grid\:123 s-grid\:align-${align}">
          *    ${Array(3)
            .map((idx) => {
              return `<div>I'm the area ${idx}</div>`;
@@ -220,14 +252,16 @@ export default function ({
   ['start','end','center','stretch'].forEach(justify => {
     vars.push(`
       /**
-         * @name       s-grid--justify-${justify}
+         * @name       s-grid:justify-${justify}
          * @namespace     sugar.css.layout
          * @type          CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This allows you to justify all the items to "${justify}"
          * 
          * @example     html
-         * <div class="s-grid--123 s-grid--justify-${justify}">
+         * <div class="s-grid\:123 s-grid\:justify-${justify}">
          *    ${Array(3)
            .map((idx) => {
              return `<div>I'm the area ${idx}</div>`;

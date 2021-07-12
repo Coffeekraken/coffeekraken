@@ -1,4 +1,53 @@
 import __SInterface from '@coffeekraken/s-interface';
+/**
+ * @name           classes
+ * @namespace      node.mixins.icon
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the classes needed to display the icons you've
+ * passed as parameter.
+ * The icons parameter define all the icons you want. Each line define a new icon and you can use these
+ * different "adapters" to specify your icons:
+ *
+ * - Line syntax: {adapter}:{iconName}:{iconNameYouWant}
+ *
+ * Available adapters are:
+ *
+ * - Filesystem:
+ * Here's some example of filesystem icons declarations:
+ * @sugar.icon.classes(
+ *    fs:src/icons/vuejs.svg:vue
+ *    fs:src/icons/something.svg:something
+ * );
+ *
+ * - Font awesome (5)
+ * Here's some example of font awesome icons declarations:
+ * @sugar.icon.classes(
+ *    fa:user:user
+ *    fa:heart:heart
+ *    fa:fire:fire
+ *    fa:copy:copy
+ *    fa:box-open:box
+ * );
+ *
+ * @param       {String}       icons        The icons you want. Each line define a new icon
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.icon.classes(
+ *    fa:user:user
+ *    fa:heart:heart
+ *    fs:src/icons/vuejs.svg:vue
+ *    fa:fire:fire
+ *    fa:copy:copy
+ *    fa:box-open:box
+ * );
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class postcssSugarPluginIconClassesInterface extends __SInterface {
 }
 postcssSugarPluginIconClassesInterface.definition = {
@@ -26,18 +75,20 @@ export default function ({ params, atRule, replaceWith }) {
             const as = (_a = splits[2]) !== null && _a !== void 0 ? _a : faIconName;
             vars.push(`
         /**
-         * @name        s-icon--${as}
-          * @namespace      sugar.css.icon.classes.${as}
+         * @name        s-icon:${as}
+          * @namespace      sugar.css.icon
           * @type           CssClass
+          * @platform       css
+          * @status         beta
           *
           * This class allows you to display the "<yellow>${as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
           *
           * @example        html
-          * <i class="s-icon--${as} s-font:20"></i>
-          * <i class="s-icon--${as} s-font:40"></i>
-          * <i class="s-icon--${as} s-font:60"></i>
-          * <i class="s-icon--${as} s-font:80"></i>
-          * <i class="s-icon--${as} s-font:100"></i>
+          * <i class="s-icon\:${as} s-font\:20"></i>
+          * <i class="s-icon\:${as} s-font\:40"></i>
+          * <i class="s-icon\:${as} s-font\:60"></i>
+          * <i class="s-icon\:${as} s-font\:80"></i>
+          * <i class="s-icon\:${as} s-font\:100"></i>
           */
           .s-icon--${as} {
             @sugar.icon.fa(${faIconName}, ${protocol});
@@ -52,18 +103,20 @@ export default function ({ params, atRule, replaceWith }) {
             const as = splits[2];
             vars.push(`
         /**
-         * @name        s-icon--${as}
-          * @namespace      sugar.css.icon.classes.${as}
+         * @name        s-icon:${as}
+          * @namespace      sugar.css.icon
           * @type           CssClass
+          * @platform         css
+          * @status         beta
           *
           * This class allows you to display the "<yellow>${as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
           *
           * @example        html
-          * <i class="s-icon--${as} s-font:20"></i>
-          * <i class="s-icon--${as} s-font:40"></i>
-          * <i class="s-icon--${as} s-font:60"></i>
-          * <i class="s-icon--${as} s-font:80"></i>
-          * <i class="s-icon--${as} s-font:100"></i>
+          * <i class="s-icon\:${as} s-font\:20"></i>
+          * <i class="s-icon\:${as} s-font\:40"></i>
+          * <i class="s-icon\:${as} s-font\:60"></i>
+          * <i class="s-icon\:${as} s-font\:80"></i>
+          * <i class="s-icon\:${as} s-font\:100"></i>
           */
           .s-icon--${as} {
             @sugar.icon.fs(${path}, ${as});
@@ -73,4 +126,4 @@ export default function ({ params, atRule, replaceWith }) {
     });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZOztBQUN4RCxpREFBVSxHQUFHO0lBQ2xCLEtBQUssRUFBRTtRQUNMLElBQUksRUFBRTtZQUNKLElBQUksRUFBRSxlQUFlO1lBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBQyxHQUFHLEVBQUMsSUFBSSxDQUFDO1NBQzNCO1FBQ0QsT0FBTyxFQUFFLEVBQUU7UUFDWCxRQUFRLEVBQUUsSUFBSTtLQUNmO0NBQ0YsQ0FBQztBQU9KLE9BQU8sRUFBRSxzQ0FBc0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUUvRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLG1CQUNmLEtBQUssRUFBRSxFQUFFLElBQ04sTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEVBQUU7O1FBRS9CLE1BQU0sUUFBUSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFFcEMsY0FBYztRQUNkLElBQUksUUFBUSxLQUFLLElBQUksSUFBSSxRQUFRLEtBQUssS0FBSyxJQUFJLFFBQVEsS0FBSyxLQUFLLElBQUksUUFBUSxLQUFLLEtBQUssSUFBSSxRQUFRLEtBQUssS0FBSyxFQUFFO1lBRTdHLDZDQUE2QztZQUM3QyxNQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQy9CLE1BQU0sVUFBVSxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUM3QixNQUFNLEVBQUUsR0FBRyxNQUFBLE1BQU0sQ0FBQyxDQUFDLENBQUMsbUNBQUksVUFBVSxDQUFDO1lBRW5DLElBQUksQ0FBQyxJQUFJLENBQUM7O2tDQUVrQixFQUFFO3FEQUNpQixFQUFFOzs7NERBR0ssRUFBRTs7O2dDQUc5QixFQUFFO2dDQUNGLEVBQUU7Z0NBQ0YsRUFBRTtnQ0FDRixFQUFFO2dDQUNGLEVBQUU7O3FCQUViLEVBQUU7NkJBQ00sVUFBVSxLQUFLLFFBQVE7O09BRTdDLENBQUMsQ0FBQztTQUNKO1FBRUQsYUFBYTtRQUNiLElBQUksUUFBUSxLQUFLLElBQUksRUFBRTtZQUVyQiw2Q0FBNkM7WUFDN0MsTUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUMvQixNQUFNLElBQUksR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDdkIsTUFBTSxFQUFFLEdBQUcsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBR3JCLElBQUksQ0FBQyxJQUFJLENBQUM7O2tDQUVrQixFQUFFO3FEQUNpQixFQUFFOzs7NERBR0ssRUFBRTs7O2dDQUc5QixFQUFFO2dDQUNGLEVBQUU7Z0NBQ0YsRUFBRTtnQ0FDRixFQUFFO2dDQUNGLEVBQUU7O3FCQUViLEVBQUU7NkJBQ00sSUFBSSxLQUFLLEVBQUU7O09BRWpDLENBQUMsQ0FBQztTQUNKO0lBRUgsQ0FBQyxDQUFDLENBQUM7SUFJSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWdERztBQUVILE1BQU0sc0NBQXVDLFNBQVEsWUFBWTs7QUFDeEQsaURBQVUsR0FBRztJQUNsQixLQUFLLEVBQUU7UUFDTCxJQUFJLEVBQUU7WUFDSixJQUFJLEVBQUUsZUFBZTtZQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUMsR0FBRyxFQUFDLElBQUksQ0FBQztTQUMzQjtRQUNELE9BQU8sRUFBRSxFQUFFO1FBQ1gsUUFBUSxFQUFFLElBQUk7S0FDZjtDQUNGLENBQUM7QUFPSixPQUFPLEVBQUUsc0NBQXNDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFL0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxtQkFDZixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxFQUFFOztRQUUvQixNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBRXBDLGNBQWM7UUFDZCxJQUFJLFFBQVEsS0FBSyxJQUFJLElBQUksUUFBUSxLQUFLLEtBQUssSUFBSSxRQUFRLEtBQUssS0FBSyxJQUFJLFFBQVEsS0FBSyxLQUFLLElBQUksUUFBUSxLQUFLLEtBQUssRUFBRTtZQUU3Ryw2Q0FBNkM7WUFDN0MsTUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUMvQixNQUFNLFVBQVUsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDN0IsTUFBTSxFQUFFLEdBQUcsTUFBQSxNQUFNLENBQUMsQ0FBQyxDQUFDLG1DQUFJLFVBQVUsQ0FBQztZQUVuQyxJQUFJLENBQUMsSUFBSSxDQUFDOztpQ0FFaUIsRUFBRTs7Ozs7OzREQU15QixFQUFFOzs7Z0NBRzlCLEVBQUU7Z0NBQ0YsRUFBRTtnQ0FDRixFQUFFO2dDQUNGLEVBQUU7Z0NBQ0YsRUFBRTs7cUJBRWIsRUFBRTs2QkFDTSxVQUFVLEtBQUssUUFBUTs7T0FFN0MsQ0FBQyxDQUFDO1NBQ0o7UUFFRCxhQUFhO1FBQ2IsSUFBSSxRQUFRLEtBQUssSUFBSSxFQUFFO1lBRXJCLDZDQUE2QztZQUM3QyxNQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQy9CLE1BQU0sSUFBSSxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUN2QixNQUFNLEVBQUUsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFHckIsSUFBSSxDQUFDLElBQUksQ0FBQzs7aUNBRWlCLEVBQUU7Ozs7Ozs0REFNeUIsRUFBRTs7O2dDQUc5QixFQUFFO2dDQUNGLEVBQUU7Z0NBQ0YsRUFBRTtnQ0FDRixFQUFFO2dDQUNGLEVBQUU7O3FCQUViLEVBQUU7NkJBQ00sSUFBSSxLQUFLLEVBQUU7O09BRWpDLENBQUMsQ0FBQztTQUNKO0lBRUgsQ0FBQyxDQUFDLENBQUM7SUFJSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsQ0FBQyJ9

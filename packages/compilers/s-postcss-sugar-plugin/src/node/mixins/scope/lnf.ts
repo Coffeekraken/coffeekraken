@@ -15,10 +15,11 @@ export interface postcssSugarPluginScopeLnfMixinParams {}
  * @name           lnf
  * @namespace      mixins.scope
  * @type           Mixin
+ * @platform      css
  * @status        beta
  *
  * This mixin allows you to wrap some look-and-feel type styling to be able to
- * disable it later using classes like ```.s-nude``` or ```.s-no-lnf```
+ * disable it later using the ```.s-no-lnf``` class
  *
  * @example         postcss
  * \@sugar.scope.lnf {
@@ -40,10 +41,6 @@ export default function ({
   const finalParams = <postcssSugarPluginScopeLnfMixinParams>{
     ...(params ?? {})
   };
-
-  if (!__isInScope('lnf')) {
-    return atRule.replaceWith('');
-  }
 
   const vars: string[] = [];
   vars.push(`&:not(.s-no-lnf &):not(.s-no-lnf) {`);

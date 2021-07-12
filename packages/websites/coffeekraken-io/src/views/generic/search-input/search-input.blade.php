@@ -23,12 +23,12 @@
 <s-filtrable-input id="{{ $id }}" filtrable="name,namespace,status" value="namespace" interactive not-selectable>
     <input type="text" placeholder="Search doc ( cmd+p )" class="s-input s-depth:50" />
     <template id="loading">
-        <p class="s-p s-pd:30"><i class="s-icon:search s-color:accent"></i>&nbsp;&nbsp;Searching. Please wait...</p>
+        <p class="s-p s-p:30"><i class="s-icon:search s-color:accent"></i>&nbsp;&nbsp;Searching. Please wait...</p>
     </template>
     <template id="item">
         <div class="__bg"></div>
         <div class="s-flex">
-            <div style="width:40%" class="s-pd:50">
+            <div style="width:40%" class="s-p:50">
                 <div class="s-font:40 s-mb:30">
                     <span class="s-badge:pill:@{{ status }}">@{{ status }}</span>
                     &nbsp;
@@ -47,7 +47,7 @@
             </div>
             @{{#if example}}
                 @{{#with example.[0]}}
-                    <div style="width: 60%" class="__code s-pd:50 s-flex:align-center">
+                    <div style="width: 60%" class="__code s-p:50 s-flex:align-center">
                         <s-code-example default-style style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink">
                             <template lang="@{{ this.language }}">
                                 @{{ this.code }}                    
@@ -59,7 +59,7 @@
         </div>
     </template>
     <template id="no-item">
-        <div class="s-pd:100 s-text:center">
+        <div class="s-p:100 s-text:center">
             <i class="s-icon:nothing s-color:accent s-font:100 s-mb:50"></i>
             <br />
             <p class="s-p:lead s-mb:30 s-mx:auto">

@@ -6,7 +6,7 @@ import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __nodeIpc from 'node-ipc';
+import __toString from '@coffeekraken/sugar/shared/string/toString';
 
 /**
  * @name                  SEventEmitter
@@ -272,24 +272,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
               value.value = __toString(value.value);
             }
 
-          //   console.log('EM;IT', emitMetas);
-
-
-          //   __nodeIpc.connectTo(`s-event-emitter-parent-${process.ppid}`, () => {
-            
-
-          //   __nodeIpc.of[`s-event-emitter-parent-${process.ppid}`].on('connect', () => {
-          //     __nodeIpc.of[`s-event-emitter-parent-${process.ppid}`].emit('s-event-emitter-event', {
-          //       value,
-          //       emitMetas
-          //     });
-          //   });
-
-          // });
-
           process.send({
             value,
-            emitMetas
+            metas: emitMetas
           });
         } else {
           destSEventEmitter.emit(metas.event, value, emitMetas);
@@ -402,25 +387,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         settings || {}
       )
     );
-
-      // listen child processes events
-      if (__isNode()) {
-        if (global._sEventEmitterIpcServer) return;
-        __nodeIpc.config.retry = 1500;
-        __nodeIpc.config.silent = true;
-        if (__isChildProcess()) {
-          __nodeIpc.config.id = `s-event-emitter-child-${process.pid}`;
-          
-        } else {
-          __nodeIpc.config.id = `s-event-emitter-parent-${process.pid}`;
-          __nodeIpc.serve(() => __nodeIpc.server.on('s-event-emitter-event', message => {
-            // throw new Error(message);
-            console.log(message);
-          }));
-          __nodeIpc.server.start();
-        }
-        global._sEventEmitterIpcServer = __nodeIpc;
-      }
   }
 
   /**

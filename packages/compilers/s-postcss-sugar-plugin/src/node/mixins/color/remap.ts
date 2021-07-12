@@ -18,19 +18,21 @@ class postcssSugarPluginColorRemapMixinInterface extends __SInterface {
 export { postcssSugarPluginColorRemapMixinInterface as interface };
 
 /**
- * @name           classes
- * @namespace      mixins.colors
- * @type           Mixin
+ * @name           remap
+ * @namespace      node.mixins.colors
+ * @type           PostcssMixin
+ * @platform      css
  * @status        beta
  *
  * This mixin allows you to (re)map a color to another one like saying you want the "warning" color as the "primary" one
  *
  * @param       {String}        color           The color you want to map on another one
  * @param       {String}        toColor         THe color you want to override with the previous one
- *
+ * @return      {Css}                     The generated remap css
+ * 
  * @example         postcss
  * .my-section {
- *      @sugar.color.map(warning, primary);
+ *      @sugar.color.remap(warning, primary);
  * }
  *
  * @since       2.0.0

@@ -50,6 +50,16 @@ class SViteBuildInterface extends __SInterface {
       default: false,
       alias: 'w'
     },
+    lib: {
+      type: 'Boolean',
+      default: false,
+      alias: 'l'
+    },
+    bundle: {
+      type: 'Boolean',
+      default: false,
+      alias: 'b'
+    },
     noWrite: {
       type: 'Boolean',
       default: false

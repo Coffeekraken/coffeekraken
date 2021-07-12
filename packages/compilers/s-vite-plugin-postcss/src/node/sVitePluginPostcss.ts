@@ -38,11 +38,11 @@ export default function sVitePluginPostcss() {
         }
 
         // build postcss
-        const css = __postcss(plugins).process(src ?? '', {
+        const result = await __postcss(plugins).process(src ?? '', {
             from: id.split('?')[0]
-        }).css;
+        });
         return {
-          code: css,
+          code: result.css,
           map: null
         };
       }

@@ -1,6 +1,23 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
+/**
+ * @name           classes
+ * @namespace      node.mixins.layout
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the layout helper classes like s-grid:12, s-container, etc...
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.layout.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class postcssSugarPluginLayoutClassesInterface extends __SInterface {
 }
 postcssSugarPluginLayoutClassesInterface.definition = {};
@@ -12,6 +29,8 @@ export default function ({ params, atRule, replaceWith }) {
   * @name          s-container
   * @namespace          sugar.css.layout
   * @type               CssClass
+  * @platform       css
+  * @status         beta
   * 
   * This class allows you to apply the container styling to any HTMLElement
   * 
@@ -29,14 +48,16 @@ export default function ({ params, atRule, replaceWith }) {
         const colsCount = __unique(layout.split(/\n\s/)).length;
         vars.push(`
       /**
-       * @name       s-grid--${id}
+       * @name       s-grid:${id}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status      beta
        * 
        * This class represent a layout of "<yellow>${layout}</yellow>"
        * 
        * @example     html
-       * <div class="s-container s-grid--${id}">
+       * <div class="s-container s-grid\:${id}">
        *    ${Array(colsCount)
             .map((idx) => {
             return `<div>I'm the area ${idx}</div>`;
@@ -54,19 +75,21 @@ export default function ({ params, atRule, replaceWith }) {
     });
     const spaces = __theme().config('space');
     Object.keys(spaces).forEach(spaceName => {
-        const clsX = `s-grid--gutter-x-${spaceName}`.replace('-default', '');
-        const clsY = `s-grid--gutter-y-${spaceName}`.replace('-default', '');
-        const cls = `s-grid--gutter-${spaceName}`.replace('-default', '');
+        const clsX = `s-grid:gutter-x-${spaceName}`.replace('-default', '');
+        const clsY = `s-grid:gutter-y-${spaceName}`.replace('-default', '');
+        const cls = `s-grid:gutter-${spaceName}`.replace('-default', '');
         vars.push(`
       /**
        * @name       ${clsX}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status        beta
        * 
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid--123 ${clsX}">
+       * <div class="s-grid\:123 ${clsX.replace(':', '\:')}">
        *    ${Array(3)
             .map((idx) => {
             return `<div>I'm the area ${idx}</div>`;
@@ -77,7 +100,7 @@ export default function ({ params, atRule, replaceWith }) {
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .${clsX} > * {
+      .${clsX.replace(':', '--')} > * {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
       }
@@ -87,11 +110,13 @@ export default function ({ params, atRule, replaceWith }) {
        * @name       ${clsY}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status        beta
        * 
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid--123 ${clsY}">
+       * <div class="s-grid\:123 ${clsY.replace(':', '\:')}">
        *    ${Array(3)
             .map((idx) => {
             return `<div>I'm the area ${idx}</div>`;
@@ -102,7 +127,7 @@ export default function ({ params, atRule, replaceWith }) {
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-        .${clsY} > * {
+        .${clsY.replace(':', '--')} > * {
         padding-top: sugar.space(${spaceName});
         padding-bottom: sugar.space(${spaceName});
       }
@@ -112,11 +137,13 @@ export default function ({ params, atRule, replaceWith }) {
        * @name       ${cls}
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status      beta
        * 
        * This class allows you to apply some left and right gutters on your s-grid items
        * 
        * @example     html
-       * <div class="s-grid--123 ${cls}">
+       * <div class="s-grid\:123 ${cls.replace(':', '\:')}">
        *    ${Array(3)
             .map((idx) => {
             return `<div>I'm the area ${idx}</div>`;
@@ -127,21 +154,23 @@ export default function ({ params, atRule, replaceWith }) {
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .${cls} > * {
+      .${cls.replace(':', '--')} > * {
         padding: sugar.space(${spaceName});
       }
     `);
     });
     vars.push(`
      /**
-       * @name       s-grid--gutter-between
+       * @name       s-grid:gutter-between
        * @namespace     sugar.css.layout
        * @type          CssClass
+       * @platform      css
+       * @status      beta
        * 
        * This class allows you to specify that you want only gutters between grid items
        * 
        * @example     html
-       * <div class="s-grid--123 s-grid--gutter-between">
+       * <div class="s-grid\:123 s-grid\:gutter-between">
        *    ${Array(3)
         .map((idx) => {
         return `<div>I'm the area ${idx}</div>`;
@@ -165,14 +194,16 @@ export default function ({ params, atRule, replaceWith }) {
     ['start', 'end', 'center', 'stretch'].forEach(align => {
         vars.push(`
       /**
-         * @name       s-grid--align-${align}
+         * @name       s-grid:align-${align}
          * @namespace     sugar.css.layout
          * @type          CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This allows you to align all the items to "${align}"
          * 
          * @example     html
-         * <div class="s-grid--123 s-grid--align-${align}">
+         * <div class="s-grid\:123 s-grid\:align-${align}">
          *    ${Array(3)
             .map((idx) => {
             return `<div>I'm the area ${idx}</div>`;
@@ -192,14 +223,16 @@ export default function ({ params, atRule, replaceWith }) {
     ['start', 'end', 'center', 'stretch'].forEach(justify => {
         vars.push(`
       /**
-         * @name       s-grid--justify-${justify}
+         * @name       s-grid:justify-${justify}
          * @namespace     sugar.css.layout
          * @type          CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This allows you to justify all the items to "${justify}"
          * 
          * @example     html
-         * <div class="s-grid--123 s-grid--justify-${justify}">
+         * <div class="s-grid\:123 s-grid\:justify-${justify}">
          *    ${Array(3)
             .map((idx) => {
             return `<div>I'm the area ${idx}</div>`;
@@ -217,4 +250,4 @@ export default function ({ params, atRule, replaceWith }) {
     });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxRQUFRLE1BQU0seUNBQXlDLENBQUM7QUFFL0QsTUFBTSx3Q0FBeUMsU0FBUSxZQUFZOztBQUMxRCxtREFBVSxHQUFHLEVBQUUsQ0FBQztBQUt6QixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztFQWNWLENBQUMsQ0FBQztJQUVGLE1BQU0sT0FBTyxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxlQUFlLENBQUMsQ0FBQztJQUVsRCxNQUFNLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEVBQUUsRUFBRSxFQUFFO1FBQ2xDLE1BQU0sTUFBTSxHQUFHLE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUMzQixNQUFNLFNBQVMsR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQztRQUN4RCxJQUFJLENBQUMsSUFBSSxDQUFDOzsrQkFFaUIsRUFBRTs7OztxREFJb0IsTUFBTTs7OzJDQUdoQixFQUFFO2NBQy9CLEtBQUssQ0FBQyxTQUFTLENBQUM7YUFDcEIsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7WUFDWCxPQUFPLHFCQUFxQixHQUFHLFFBQVEsQ0FBQztRQUMx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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxRQUFRLE1BQU0seUNBQXlDLENBQUM7QUFFL0Q7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLHdDQUF5QyxTQUFRLFlBQVk7O0FBQzFELG1EQUFVLEdBQUcsRUFBRSxDQUFDO0FBS3pCLE9BQU8sRUFBRSx3Q0FBd0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVqRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7RUFnQlYsQ0FBQyxDQUFDO0lBRUYsTUFBTSxPQUFPLEdBQUcsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLGVBQWUsQ0FBQyxDQUFDO0lBRWxELE1BQU0sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsRUFBRSxFQUFFLEVBQUU7UUFDbEMsTUFBTSxNQUFNLEdBQUcsT0FBTyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQzNCLE1BQU0sU0FBUyxHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDO1FBQ3hELElBQUksQ0FBQyxJQUFJLENBQUM7OzhCQUVnQixFQUFFOzs7Ozs7cURBTXFCLE1BQU07OzsyQ0FHaEIsRUFBRTtjQUMvQixLQUFLLENBQUMsU0FBUyxDQUFDO2FBQ3BCLEdBQUcsQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO1lBQ1gs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

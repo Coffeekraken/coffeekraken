@@ -14,7 +14,7 @@
                         Platform
                     </legend>
                     <dl class="s-list s-bg:even">
-                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (platform, idx) in availablePlatforms }">
+                        <dt class="s-flex s-font:40 s-p:10 s-bg:ui-surface" each="{ (platform, idx) in availablePlatforms }">
                             <label class="s-flex-item:grow" for="platform-{ platform }">
                                 { platform }
                             </label>
@@ -31,7 +31,7 @@
                         Type
                     </legend>
                     <dl class="s-list s-bg:even">
-                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (type, idx) in availableTypes }">
+                        <dt class="s-flex s-font:40 s-p:10 s-bg:ui-surface" each="{ (type, idx) in availableTypes }">
                             <label class="s-flex-item:grow" for="type-{ type }">
                                 { type }
                             </label>
@@ -48,7 +48,7 @@
                         Status
                     </legend>
                     <dl class="s-list s-bg:even">
-                        <dt class="s-flex s-font:40 s-pd:10 s-bg:ui-surface" each="{ (status, idx) in availableStatuses }">
+                        <dt class="s-flex s-font:40 s-p:10 s-bg:ui-surface" each="{ (status, idx) in availableStatuses }">
                             <label class="s-flex-item:grow" for="status-{ status }">
                                 { status }
                             </label>
@@ -66,19 +66,22 @@
         </nav>
         <section class="__list">
             <div class="__list-item" if="{ idx <= state.maxItemsToDisplay }" each="{ (item, idx) in Object.values(state.filteredItems) }">
-                <div class="s-pd:50">
+                <div class="s-p:50">
                     <div class="">
                         <div class="s-flex">
-                            <h4 class="s-font:title s-font:60 s-color:accent s-mb:10 s-flex-item:grow">
-                                <a href="/doc/api/{_striptags(item.namespace)}.{_striptags(item.name)}">
-                                    { item.name }
-                                </a>
-                            </h4>
+                            <div class="s-flex-item:grow">
+                                <div>
+                                    <i class="s-platform:{platform.name} s-font:80 s-mb:30 s-mr:10" each="{ platform in item.platform}"></i>
+                                </div>
+                                <h4 class="s-font:title s-font:60 s-color:accent s-mb:10 s-flex-item:grow">
+                                    <a href="/doc/api/{_striptags(item.namespace)}.{_striptags(item.name)}">
+                                        { item.name }
+                                    </a>
+                                </h4>
+                            </div>
                             <div>
                                 <div class="s-font:40">
                                     <span class="s-font:30">Since <span class="s-color:complementary">{ item.since }</span></span>
-                                    &nbsp;
-                                    <i class="s-platform:{platform.name} s-font:50" each="{ platform in item.platform}"></i>
                                     &nbsp;
                                     <span class="s-badge:pill:{ item.status }">{ item.status }</span>
                                 </div>

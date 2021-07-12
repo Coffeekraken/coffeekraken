@@ -12,9 +12,11 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
 
 /**
  * @name          base
- * @namespace     sugar.postcss.mixin.lnf
+ * @namespace     node.mixin.lnf
  * @type          PostcssMixin
- *
+ * @platform      css
+ * @status        beta
+ * 
  * This mixin apply some base look and feel depending on the current theme like:
  *
  * - Page background using the <s-color="accent">background</s-color> theme color

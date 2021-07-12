@@ -31,6 +31,7 @@ import __SBench from '@coffeekraken/s-bench';
  */
 function envMiddleware(settings = {}) {
   return function (req, res, next) {
+
     res.templateData = {
       ...(res.templateData || {}),
       env: __env('NODE_ENV') || 'development'

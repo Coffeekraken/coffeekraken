@@ -6,6 +6,7 @@ import __SStdio from '../../shared/SStdio';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import { terminal as __terminalKit } from 'terminal-kit';
+import __countLine from '@coffeekraken/sugar/shared/string/countLine';
 
 /**
  * @name            STerminalStdio
@@ -143,25 +144,35 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _currentLogId = '';
   _log(logObj, component) {
     // handle empty logs
     if (!logObj) return;
 
     // __terminalKit.saveCursor();
 
+    let needId = false;
+    if (this._currentLogId !== logObj.metas.emitter.metas.id) {
+      needId = true;
+      this._currentLogId = logObj.metas.emitter.metas.id;
+    }
+
+    let lineStart = '', idStr = '', idSeparator = '';
+
     // render the component
     let renderedStr = component.render(logObj, this._settings);
     // handle metas if needed
     if (!logObj.nude) {
       if (this.terminalStdioSettings.metas && logObj.metas?.emitter) {
-        const idStr = `<bg${__upperFirst(
+        lineStart = `<bg${__upperFirst(
           logObj.metas.emitter.metas.color || 'yellow'
         )}> </bg${__upperFirst(
           logObj.metas.emitter.metas.color || 'yellow'
-        )}><${logObj.metas.emitter.metas.color || 'yellow'}> ${
+        )}>`;
+        idStr = `<${logObj.metas.emitter.metas.color || 'yellow'}> ${
           logObj.metas.emitter.metas.id
-        } │ </${logObj.metas.emitter.metas.color || 'yellow'}>`;
-        renderedStr = `${idStr}${renderedStr}`;
+        }</${logObj.metas.emitter.metas.color || 'yellow'}>`;
+        idSeparator = `<${logObj.metas.emitter.metas.color || 'yellow'}> │ </${logObj.metas.emitter.metas.color || 'yellow'}>`;
       }
     }
     if (logObj.marginTop && typeof logObj.marginTop === 'number') {
@@ -170,9 +181,24 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     if (logObj.marginBottom && typeof logObj.marginBottom === 'number') {
       renderedStr = renderedStr + '\n'.repeat(logObj.marginBottom);
     }
+
+    if (needId) {
+      console.log(__parseHtml(lineStart));
+    }
+
+    let lines = renderedStr.split('\n');
+    // const firstStr = lines[0];
+    // const idPart = firstStr.split('│')[0];
+    const idLength = __countLine(__parseHtml(idStr));
+
+    lines = lines.map((line, i) => {
+      if (needId) return `${lineStart}${idStr}${idSeparator}${line.trim()}`;
+      return `${lineStart}${' '.repeat(idLength)}${idSeparator}${line.trim()}`;
+    })
+
     // log the string
     try {
-      console.log(__parseHtml(renderedStr));
+      console.log(__parseHtml(lines.join('\n')));
     } catch (e) {}
   }
 }

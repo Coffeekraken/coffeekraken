@@ -6,17 +6,17 @@ postcssSugarPluginClassesMixinInterface.definition = {};
 export { postcssSugarPluginClassesMixinInterface as interface };
 /**
  * @name           classes
- * @namespace      mixins.colors
- * @type           Mixin
+ * @namespace      node.mixins.colors
+ * @type           PostcssMixin
+ * @platform      css
  * @status        beta
  *
- * This mixin print the documentation docblocks for the colors
- * into your final css.
+ * This mixin allows you to generate all the colors helpers classes like s-color:accent, etc...
  *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
+ * @return    {Css}         The generated css for color classes
  *
  * @example         postcss
- * \@sugar.Classes;
+ * \@sugar.color;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -32,15 +32,17 @@ export default function ({ params, atRule, replaceWith }) {
                 return;
             cssArray.push([
                 `/**`,
-                ` * @name           s-color--${colorName}->${innerColorName}`,
-                ` * @namespace      sugar.css.color.classes.${innerColorName}`,
+                ` * @name           s-color:${colorName}->${innerColorName}`,
+                ` * @namespace      sugar.css.color.${innerColorName}`,
                 ` * @type           CssClass`,
+                ` * @platform       css`,
+                ` * @status         beta`,
                 ` *`,
                 ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
                 ` *`,
                 ` * @example        html`,
-                ` * <h1 class="s-color--${colorName}->${innerColorName}">`,
-                ` *     <span class="s-color--${colorName}">Something cool</span>`,
+                ` * <h1 class="s-color\:${colorName}->${innerColorName}">`,
+                ` *     <span class="s-color\:${colorName}">Something cool</span>`,
                 ` * </h1>`,
                 ` */`,
                 `[class*="s-color--${colorName}->${innerColorName}"] {`,
@@ -61,14 +63,16 @@ export default function ({ params, atRule, replaceWith }) {
             }
             cssArray.push([
                 `/**`,
-                ` * @name           s-color--${colorName}${modifierStr}`,
-                ` * @namespace      sugar.css.color.classes.${colorName}.${colorVariantName}`,
+                ` * @name           s-color:${colorName}${modifierStr}`,
+                ` * @namespace      sugar.css.color.${colorName}.${colorVariantName}`,
                 ` * @type           CssClass`,
+                ` * @platform       css`,
+                ` * @status         beta`,
                 ` *`,
                 ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
                 ` *`,
                 ` * @example        html`,
-                ` * <h1 class="s-color--${colorName}${modifierStr}">`,
+                ` * <h1 class="s-color\:${colorName}${modifierStr}">`,
                 ` *     Something cool`,
                 ` * </h1>`,
                 ` */`,
@@ -78,14 +82,16 @@ export default function ({ params, atRule, replaceWith }) {
             ].join('\n'));
             cssArray.push([
                 `/**`,
-                ` * @name           s-bg--${colorName}${modifierStr}`,
-                ` * @namespace      sugar.css.color.classes.bg.${colorName}.${colorVariantName}`,
+                ` * @name           s-bg:${colorName}${modifierStr}`,
+                ` * @namespace      sugar.css.color.bg.${colorName}.${colorVariantName}`,
                 ` * @type           CssClass`,
+                ` * @platform       css`,
+                ` * @status         beta`,
                 ` *`,
                 ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
                 ` *`,
                 ` * @example        html`,
-                ` * <h1 class="s-bg--${colorName}${modifierStr}">`,
+                ` * <h1 class="s-bg\:${colorName}${modifierStr}">`,
                 ` *     Something cool`,
                 ` * </h1>`,
                 ` */`,
@@ -96,32 +102,36 @@ export default function ({ params, atRule, replaceWith }) {
         });
         cssArray.push([
             `/**`,
-            ` * @name           s-gradient--${colorName}`,
-            ` * @namespace      sugar.css.color.classes.gradient.${colorName}`,
+            ` * @name           s-gradient:${colorName}`,
+            ` * @namespace      sugar.css.color.gradient.${colorName}`,
             ` * @type           CssClass`,
+            ` * @platform       css`,
+            ` * @status         beta`,
             ` *`,
             ` * This class allows you to apply the "${colorName}" color gradient to the background of an HTMLElement`,
             ` *`,
             ` * @example        html`,
-            ` * <h1 class="s-gradient--${colorName}">`,
+            ` * <h1 class="s-gradient\:${colorName}">`,
             ` *     Something cool`,
             ` * </h1>`,
             ` */`,
             `.s-gradient--${colorName} {`,
-            `   @sugar.gradient.linear(sugar.color(${colorName}, gradientStart), sugar.color(${colorName}, gradientEnd), $angle: 90deg);`,
+            `   @sugar.gradient(sugar.color(${colorName}, gradientStart), sugar.color(${colorName}, gradientEnd), $angle: 90deg, $type: linear);`,
             `}`
         ].join('\n'));
     });
     cssArray.push([
         `/**`,
-        ` * @name           s-bg--odd`,
+        ` * @name           s-bg:odd`,
         ` * @namespace      sugar.css.bg.classes`,
         ` * @type           CssClass`,
+        ` * @platform       css`,
+        ` * @status         beta`,
         ` *`,
         ` * This class allows you to scope the applied bgs on the direct childs to only be applied on "odd" HTMLElement`,
         ` *`,
         ` * @example        html`,
-        ` * <ol class="s-bg--odd">`,
+        ` * <ol class="s-bg\:odd">`,
         ` *     <li class="s-bg--accent">Something cool</li>`,
         ` *     <li class="s-bg--accent">Something cool</li>`,
         ` *     <li class="s-bg--accent">Something cool</li>`,
@@ -133,14 +143,16 @@ export default function ({ params, atRule, replaceWith }) {
     ].join('\n'));
     cssArray.push([
         `/**`,
-        ` * @name           s-bg--even`,
-        ` * @namespace      sugar.css.color.classes`,
+        ` * @name           s-bg:even`,
+        ` * @namespace      sugar.css.color`,
         ` * @type           CssClass`,
+        ` * @platform       css`,
+        ` * @status         beta`,
         ` *`,
         ` * This class allows you to scope the applied colors on the direct childs to only be applied on "even" HTMLElement`,
         ` *`,
         ` * @example        html`,
-        ` * <ol class="s-bg--even">`,
+        ` * <ol class="s-bg\:even">`,
         ` *     <li class="s-bg--accent">Something cool</li>`,
         ` *     <li class="s-bg--accent">Something cool</li>`,
         ` *     <li class="s-bg--accent">Something cool</li>`,
@@ -152,4 +164,4 @@ export default function ({ params, atRule, replaceWith }) {
     ].join('\n'));
     replaceWith(cssArray);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZOztBQUN6RCxrREFBVSxHQUFHLEVBQUUsQ0FBQztBQUV6QixPQUFPLEVBQUUsdUNBQXVDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxXQUFXLEVBQUU7SUFDdEQsTUFBTSxTQUFTLEdBQUcsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRTVDLE1BQU0sUUFBUSxHQUFhLEVBQUUsQ0FBQztJQUU5QixNQUFNLE1BQU0sR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQ3RDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUMzQixNQUFNLFFBQVEsR0FBRyxTQUFTLENBQUMsU0FBUyxDQUFDLENBQUM7UUFFdEMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLGNBQWMsRUFBRSxFQUFFO1lBRWhDLElBQUksY0FBYyxLQUFLLFNBQVM7Z0JBQUUsT0FBTztZQUV6QyxRQUFRLENBQUMsSUFBSSxDQUNQO2dCQUNFLEtBQUs7Z0JBQ0wsK0JBQStCLFNBQVMsS0FBSyxjQUFjLEVBQUU7Z0JBQzdELDhDQUE4QyxjQUFjLEVBQUU7Z0JBQzlELDZCQUE2QjtnQkFDN0IsSUFBSTtnQkFDSiw4REFBOEQsY0FBYyxVQUFVO2dCQUN0RixJQUFJO2dCQUNKLHlCQUF5QjtnQkFDekIsMEJBQTBCLFNBQVMsS0FBSyxjQUFjLElBQUk7Z0JBQzFELGdDQUFnQyxTQUFTLHlCQUF5Qjtn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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZOztBQUN6RCxrREFBVSxHQUFHLEVBQUUsQ0FBQztBQUV6QixPQUFPLEVBQUUsdUNBQXVDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxXQUFXLEVBQUU7SUFDdEQsTUFBTSxTQUFTLEdBQUcsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRTVDLE1BQU0sUUFBUSxHQUFhLEVBQUUsQ0FBQztJQUU5QixNQUFNLE1BQU0sR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQ3RDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUMzQixNQUFNLFFBQVEsR0FBRyxTQUFTLENBQUMsU0FBUyxDQUFDLENBQUM7UUFFdEMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLGNBQWMsRUFBRSxFQUFFO1lBRWhDLElBQUksY0FBYyxLQUFLLFNBQVM7Z0JBQUUsT0FBTztZQUV6QyxRQUFRLENBQUMsSUFBSSxDQUNQO2dCQUNFLEtBQUs7Z0JBQ0wsOEJBQThCLFNBQVMsS0FBSyxjQUFjLEVBQUU7Z0JBQzVELHNDQUFzQyxjQUFjLEVBQUU7Z0JBQ3RELDZCQUE2QjtnQkFDN0Isd0JBQXdCO2dCQUN4Qix5QkFBeUI7Z0JBQ3pCLElBQUk7Z0JBQ0osOERBQThELGNBQWMsVUFBVTtnQkFDdEYsSUFBSTtnQkFDSix5QkFBeUI7Z0JBQ3pCLDBCQUEwQixTQUFTLEtBQUssY0FBYyxJQUFJ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

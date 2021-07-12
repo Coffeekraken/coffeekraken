@@ -1,7 +1,25 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../utils/themeVar';
-import __isInScope from '../../utils/isInScope';
-import __theme from '../../utils/theme';
+
+/**
+ * @name           scrollbar
+ * @namespace      mixins.scrollbar
+ * @type           Mixin
+ * @platform        css
+ * @status        beta
+ *
+ * This mixin allows you to skin your scrollbar easily by applying a color and
+ * a width to it.
+ *
+ * @return        {Css}           The generated css
+ *
+ * @example         postcss
+ * body {
+ *    @sugar.scrollbar(accent, 5px);
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 
 class postcssSugarPluginScrollbarInterface extends __SInterface {
   static definition = {

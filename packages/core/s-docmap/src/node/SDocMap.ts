@@ -244,6 +244,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
       let docmapJson = {
         map: {},
+        extends: [],
         generated: {
           extends: [],
           map: {}

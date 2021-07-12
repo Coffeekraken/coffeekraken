@@ -1,6 +1,25 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 
+/**
+ * @name           transition
+ * @namespace      node.mixins.transition
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the needed css to apply a transition setted in
+ * the config.theme.transition configuration stack like "slow", "default" and "fast"
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.platform.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginTransitionMixinInterface extends __SInterface {
   static definition = {
       name: {

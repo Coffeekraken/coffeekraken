@@ -4,7 +4,7 @@
 
 @if ($block->see)
 
-    <a href="#related-{{ $block->name }}" title="Related resource(s)" class="s-bg:complementary s-color:complementary-foreground s-display:block s-pd:30 s-border:radius s-mb:50">
+    <a href="#related-{{ $block->name }}" title="Related resource(s)" class="s-bg:complementary s-color:complementary-foreground s-display:block s-p:30 s-border:radius s-mb:50">
         <i class="s-icon:box s-color:accent"></i>&nbsp;&nbsp;This {{ $block->type }} make use of related resource(s).
     <a>
 
@@ -79,19 +79,19 @@
     @foreach ($block->param as $param)
         <li class="s-font:40 s-mb:30">
             <header class="s-flex s-bg:ui-surface">
-                <div class="s-flex-item:grow s-color:accent s-pd:20">
+                <div class="s-flex-item:grow s-color:accent s-p:20">
                     {{ $param->name }}
                 </div>
-                <div class="s-typo:bold s-pd:20">
+                <div class="s-typo:bold s-p:20">
                     {{ implode(' | ', $param->type) }}
                 </div>
                 @if ($param->defaultStr)
-                    <div class="s-color:info s-pd:20">
+                    <div class="s-color:info s-p:20">
                         {{ $param->defaultStr }}
                     </div>
                 @endif
             </header>
-            <p class="s-typo:p s-pd:20">{{ $param->description }}</p> 
+            <p class="s-typo:p s-p:20">{{ $param->description }}</p> 
         </li>                                   
     @endforeach
     </ol>
@@ -103,16 +103,16 @@
     </h4>
 
     <header class="s-flex s-bg:ui-surface">
-        <div class="s-typo:bold s-pd:20">
+        <div class="s-typo:bold s-p:20">
             {{ implode(' | ', $block->return->type) }}
         </div>
         @if ($block->return->defaultStr)
-            <div class="s-color:info s-pd:20">
+            <div class="s-color:info s-p:20">
                 {{ $block->return->defaultStr }}
             </div>
         @endif
     </header>
-    <p class="s-typo:p s-pd:20">{{ $block->return->description }}</p> 
+    <p class="s-typo:p s-p:20">{{ $block->return->description }}</p> 
 
 @endif
 
@@ -125,19 +125,19 @@
     @foreach ($block->setting as $setting)
         <li class="s-font:40 s-mb:30">
             <header class="s-flex s-bg:ui-surface">
-                <div class="s-flex-item:grow s-color:accent s-pd:20">
+                <div class="s-flex-item:grow s-color:accent s-p:20">
                     {{ $setting->name }}
                 </div>
-                <div class="s-typo:bold s-pd:20">
+                <div class="s-typo:bold s-p:20">
                     {{ implode(' | ', $setting->type) }}
                 </div>
                 @if ($setting->defaultStr)
-                    <div class="s-color:info s-pd:20">
+                    <div class="s-color:info s-p:20">
                         {{ $setting->defaultStr }}
                     </div>
                 @endif
             </header>
-            <p class="s-typo:p s-pd:20">{{ $setting->description }}</p> 
+            <p class="s-typo:p s-p:20">{{ $setting->description }}</p> 
         </li>                                   
     @endforeach
     </ol>
@@ -152,19 +152,19 @@
     @foreach ($block->props as $prop)
         <li class="s-font:40 s-mb:30">
             <header class="s-flex s-bg:ui-surface">
-                <div class="s-flex-item:grow s-color:accent s-pd:20">
+                <div class="s-flex-item:grow s-color:accent s-p:20">
                     {{ $prop->name }}
                 </div>
-                <div class="s-typo:bold s-pd:20">
+                <div class="s-typo:bold s-p:20">
                     {{ implode(' | ', $prop->type) }}
                 </div>
                 @if ($prop->defaultStr)
-                    <div class="s-color:info s-pd:20">
+                    <div class="s-color:info s-p:20">
                         {{ $prop->defaultStr }}
                     </div>
                 @endif
             </header>
-            <p class="s-typo:p s-pd:20">{{ $prop->description }}</p> 
+            <p class="s-typo:p s-p:20">{{ $prop->description }}</p> 
         </li>                                   
     @endforeach
     </ol>
@@ -211,7 +211,7 @@
                     <div class="s-ratio:1-1 s-bg:accent s-border:radius">
                         <img src="{{ $see->og->ogImage->url }}" />
                     </div>
-                    <div class="s-pd:50">
+                    <div class="s-p:50">
                         <h5 class="s-typo:h3 s-mb:30">{{ $see->og->ogTitle }}</h5>
                         <p class="s-typo:p s-mb:30">
                             {{ $see->og->ogDescription}}

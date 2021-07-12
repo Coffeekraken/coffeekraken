@@ -33,6 +33,7 @@ function benchEndMiddleware(settings = {}) {
   return function (req, res, next) {
     return new __SPromise(({resolve, reject, pipe}) => {
 
+      // console.log('___ST');
       __SBench.start('request');
 
       function afterResponse() {
@@ -41,7 +42,9 @@ function benchEndMiddleware(settings = {}) {
 
       res.on('finish', afterResponse);
 
-      next();
+      setTimeout(() => {
+        next();
+      }, 100);
 
     });
 

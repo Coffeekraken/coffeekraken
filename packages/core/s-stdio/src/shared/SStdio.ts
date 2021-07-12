@@ -368,9 +368,6 @@ class SStdio extends __SClass implements ISStdio {
       (set.events || []).join(','),
       (data, metas) => {
         if (data === undefined || data === null) return;
-
-        console.log('fff', data.value);
-
         // handle the type depending on the passed stack
         const types = Object.keys(set.mapTypesToEvents);
         for (let i = 0; i < types.length; i++) {

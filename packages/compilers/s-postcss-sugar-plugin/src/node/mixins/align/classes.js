@@ -1,4 +1,21 @@
 import __SInterface from '@coffeekraken/s-interface';
+/**
+ * @name          classes
+ * @namespace     node.mixins.align
+ * @type          PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate the align helper classes
+ *
+ * @return      {Css}                   The generated css
+ *
+ * @example       css
+ * @sugar.align.classes;
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class postcssSugarPluginAlignClassesInterface extends __SInterface {
 }
 postcssSugarPluginAlignClassesInterface.definition = {};
@@ -9,16 +26,18 @@ export default function ({ params, atRule, replaceWith }) {
     vars.push(`
         
     /**
-     * @name            s-align--abs-top
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-top
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the top
      * 
      * @example     html
      * <div class="s-ratio--1-1">
-     *      <div class="s-align--abs-top">Hello world</div>
+     *      <div class="s-align\:abs-top">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -29,16 +48,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-left
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-left
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the left
      * 
      * @example     html
      * <div class="s-ratio--1-1">
-     *      <div class="s-align--abs-left">Hello world</div>
+     *      <div class="s-align\:abs-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -49,16 +70,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-right
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-right
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the right
      * 
      * @example     html
      * <div class="s-ratio--1-1">
-     *      <div class="s-align--abs-right">Hello world</div>
+     *      <div class="s-align\:abs-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -69,16 +92,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-bottom
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-bottom
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the bottom
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-bottom">Hello world</div>
+     *      <div class="s-align\:abs-bottom">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -89,16 +114,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-center
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-center
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the center
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-center">Hello world</div>
+     *      <div class="s-align\:abs-center">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -109,16 +136,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-top-left
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-top-left
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the top-left
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-top-left">Hello world</div>
+     *      <div class="s-align\:abs-top-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -129,16 +158,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-top-center
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-top-center
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the top-center
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-top-center">Hello world</div>
+     *      <div class="s-align\:abs-top-center">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -149,16 +180,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-top-right
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-top-right
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the top-right
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-top-right">Hello world</div>
+     *      <div class="s-align\:abs-top-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -169,16 +202,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-center-left
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-center-left
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the center-y and left
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-center-left">Hello world</div>
+     *      <div class="s-align\:abs-center-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -189,16 +224,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-center-right
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-center-right
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the center-y and right
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-center-right">Hello world</div>
+     *      <div class="s-align\:abs-center-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -209,16 +246,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-bottom-left
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-bottom-left
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the bottom left
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-bottom-left">Hello world</div>
+     *      <div class="s-align\:abs-bottom-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -229,16 +268,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-bottom-center
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-bottom-center
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the bottom center-x
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-bottom-center">Hello world</div>
+     *      <div class="s-align\:abs-bottom-center">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -249,16 +290,18 @@ export default function ({ params, atRule, replaceWith }) {
     }
 
     /**
-     * @name            s-align--abs-bottom-right
-     * @namespace       sugar.css.mixins.align
+     * @name            s-align:abs-bottom-right
+     * @namespace       sugar.css.align
      * @type            CssClass
+     * @platform        css
+     * @status          beta
      * 
      * This class allows you to align an element using the absolute method
      * to the bottom right
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align--abs-bottom-right">Hello world</div>
+     *      <div class="s-align\:abs-bottom-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -271,4 +314,4 @@ export default function ({ params, atRule, replaceWith }) {
   `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFJckQsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZOztBQUN6RCxrREFBVSxHQUFHLEVBQUUsQ0FBQztBQUt6QixPQUFPLEVBQUUsdUNBQXVDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFaEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc1FULENBQUMsQ0FBQztJQUVELFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLHVDQUF3QyxTQUFRLFlBQVk7O0FBQ3pELGtEQUFVLEdBQUcsRUFBRSxDQUFDO0FBS3pCLE9BQU8sRUFBRSx1Q0FBdUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVoRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWdTVCxDQUFDLENBQUM7SUFFRCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

@@ -2,6 +2,24 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
+/**
+ * @name           classes
+ * @namespace      node.mixins.text
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the text helper classes like s-text:center, s-text:left, etc...
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.text.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginTextClassesInterface extends __SInterface {
   static definition = {};
 }
@@ -28,14 +46,16 @@ export default function ({
   // align
   vars.push(`
         /**
-         * @name            s-text--left
+         * @name            s-text:left
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This class allows you to align text to the left side
          * 
          * @example     html
-         * <div class="s-text--left">Hello world</div>
+         * <div class="s-text\:left">Hello world</div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -45,14 +65,16 @@ export default function ({
         }
 
        /**
-         * @name            s-text--right
+         * @name            s-text:right
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This class allows you to align text to the right side
          * 
          * @example     html
-         * <div class="s-text--right">Hello world</div>
+         * <div class="s-text\:right">Hello world</div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -62,14 +84,16 @@ export default function ({
         }
 
         /**
-         * @name            s-text--center
+         * @name            s-text:center
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This class allows you to align text to the center
          * 
          * @example     html
-         * <div class="s-text--center">Hello world</div>
+         * <div class="s-text\:center">Hello world</div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -37,17 +37,6 @@ class ColorModifierInterface extends __SInterface {
 export function prepare(themeConfig, config) {
   Object.keys(themeConfig.themes).forEach((themeName) => {
     const themeObj = themeConfig.themes[themeName];
-    // if (themeObj.extends && !themeConfig.themes[themeObj.extends]) {
-    //   throw new Error(
-    //     `<red>[theme.config.js]</red> The theme "<yellow>${themeName}</yellow>" need to extends the theme "<yellow>${themeObj.extends}</yellow>" but this theme does not exists...`
-    //   );
-    // } else if (themeObj.extends) {
-    //   themeConfig.themes[themeName] = __deepMerge(
-    //     themeConfig.themes[themeObj.extends],
-    //     themeConfig.themes[themeName]
-    //   );
-    //   delete themeConfig.themes[themeName].extends;
-    // }
 
     function expandColorObj(colorObj) {
 

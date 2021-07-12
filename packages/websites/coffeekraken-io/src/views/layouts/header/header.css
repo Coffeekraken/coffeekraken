@@ -24,7 +24,7 @@ body {
         left: 50%; top: 0;
         transform: translateX(-50%);
 
-        @sugar.gradient.linear($start: sugar.color(ui, background), $end: rgba(0,0,0,0), $angle: 180deg);
+        @sugar.gradient($start: sugar.color(ui, background), $end: rgba(0,0,0,0), $angle: 180deg);
     } */
 }
 

@@ -155,8 +155,16 @@ export default class SVite extends __SClass {
         const viteConfig = __SugarConfig.get('vite');
         const duration = new __SDuration();
 
+        if (params.watch) {
+          throw new Error('The watch feature is not implemented yet...');
+        }
+
         // object to store results of each "type"
         const results = {};
+
+        // types shortcuts
+        if (params.lib && params.type.indexOf('lib') === -1) params.type = ['lib'];
+        if (params.bundle && params.type.indexOf('bundle') === -1) params.type = ['bundle'];
 
         for (let i = 0; i<params.type.length; i++) {
           const buildType = params.type[i];

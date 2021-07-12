@@ -7,14 +7,7 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/js/index.lib.umd.js",
-  "module": "./dist/js/index.lib.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/js/index.lib.es.js",
-      "require": "./dist/js/index.lib.umd.js"
-    }
-  },
+  "main": "./dist/js/lib.es.js",
   "scripts": {
     "dev": "sugard frontstack dev",
     "build": "sugard vite.build --lib",

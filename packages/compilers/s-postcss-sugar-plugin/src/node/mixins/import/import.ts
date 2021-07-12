@@ -3,6 +3,27 @@ import __SGlob from '@coffeekraken/s-glob';
 import __path from 'path';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
+/**
+ * @name           import
+ * @namespace      node.mixins.import
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin allows you to import other files just like the @import statement does.
+ * It add the feature to specify a glob pattern to import multiple files at once.
+ *
+ * @param         {String}        path        The file path you want to import relative to the file you're in
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.import('./my-cool-file.css');
+ * \@sugar.import('../views/** /*.css');
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginImportInterface extends __SInterface {
   static definition = {
     path: {

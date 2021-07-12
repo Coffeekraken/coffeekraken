@@ -14,10 +14,14 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @name           init
  * @namespace      mixins.init
  * @type           Mixin
+ * @platform      css
  * @status        beta
  *
- * This mixin allows you to apply media queries depending on the ```media.config.js``` config
- * file with ease.
+ * This mixin is the one you usually call first in your css.
+ * His job is to:
+ * - Apply a reset.css to standardize the display across browser
+ * - Generate the base theme variables like colors, etc...
+ * - Generate all the font-faces needed
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *

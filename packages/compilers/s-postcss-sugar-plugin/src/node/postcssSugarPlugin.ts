@@ -113,6 +113,8 @@ const plugin = (settings: any = {}) => {
         cwd: `${__dirname()}/postProcessors`
       });
 
+      console.log('EXIT');
+
       for (let i=0; i<postProcessorsPaths.length; i++) {
         const path = postProcessorsPaths[i];
         const { default: processorFn } =
@@ -271,5 +273,5 @@ const plugin = (settings: any = {}) => {
   };
 };
 plugin.postcss = true;
-
+export const postcss = true;
 export default plugin;

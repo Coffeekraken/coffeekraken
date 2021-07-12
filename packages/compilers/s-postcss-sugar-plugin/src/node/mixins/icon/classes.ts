@@ -1,5 +1,55 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name           classes
+ * @namespace      node.mixins.icon
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the classes needed to display the icons you've
+ * passed as parameter.
+ * The icons parameter define all the icons you want. Each line define a new icon and you can use these
+ * different "adapters" to specify your icons:
+ * 
+ * - Line syntax: {adapter}:{iconName}:{iconNameYouWant}
+ * 
+ * Available adapters are:
+ * 
+ * - Filesystem:
+ * Here's some example of filesystem icons declarations:
+ * @sugar.icon.classes(
+ *    fs:src/icons/vuejs.svg:vue
+ *    fs:src/icons/something.svg:something
+ * );
+ * 
+ * - Font awesome (5)
+ * Here's some example of font awesome icons declarations:
+ * @sugar.icon.classes(
+ *    fa:user:user
+ *    fa:heart:heart
+ *    fa:fire:fire
+ *    fa:copy:copy
+ *    fa:box-open:box
+ * );
+ *
+ * @param       {String}       icons        The icons you want. Each line define a new icon
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.icon.classes(
+ *    fa:user:user
+ *    fa:heart:heart
+ *    fs:src/icons/vuejs.svg:vue
+ *    fa:fire:fire
+ *    fa:copy:copy
+ *    fa:box-open:box
+ * );
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginIconClassesInterface extends __SInterface {
   static definition = {
     icons: {
@@ -49,18 +99,20 @@ export default function ({
 
       vars.push(`
         /**
-         * @name        s-icon--${as}
-          * @namespace      sugar.css.icon.classes.${as}
+         * @name        s-icon:${as}
+          * @namespace      sugar.css.icon
           * @type           CssClass
+          * @platform       css
+          * @status         beta
           *
           * This class allows you to display the "<yellow>${as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
           *
           * @example        html
-          * <i class="s-icon--${as} s-font:20"></i>
-          * <i class="s-icon--${as} s-font:40"></i>
-          * <i class="s-icon--${as} s-font:60"></i>
-          * <i class="s-icon--${as} s-font:80"></i>
-          * <i class="s-icon--${as} s-font:100"></i>
+          * <i class="s-icon\:${as} s-font\:20"></i>
+          * <i class="s-icon\:${as} s-font\:40"></i>
+          * <i class="s-icon\:${as} s-font\:60"></i>
+          * <i class="s-icon\:${as} s-font\:80"></i>
+          * <i class="s-icon\:${as} s-font\:100"></i>
           */
           .s-icon--${as} {
             @sugar.icon.fa(${faIconName}, ${protocol});
@@ -79,18 +131,20 @@ export default function ({
 
       vars.push(`
         /**
-         * @name        s-icon--${as}
-          * @namespace      sugar.css.icon.classes.${as}
+         * @name        s-icon:${as}
+          * @namespace      sugar.css.icon
           * @type           CssClass
+          * @platform         css
+          * @status         beta
           *
           * This class allows you to display the "<yellow>${as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
           *
           * @example        html
-          * <i class="s-icon--${as} s-font:20"></i>
-          * <i class="s-icon--${as} s-font:40"></i>
-          * <i class="s-icon--${as} s-font:60"></i>
-          * <i class="s-icon--${as} s-font:80"></i>
-          * <i class="s-icon--${as} s-font:100"></i>
+          * <i class="s-icon\:${as} s-font\:20"></i>
+          * <i class="s-icon\:${as} s-font\:40"></i>
+          * <i class="s-icon\:${as} s-font\:60"></i>
+          * <i class="s-icon\:${as} s-font\:80"></i>
+          * <i class="s-icon\:${as} s-font\:100"></i>
           */
           .s-icon--${as} {
             @sugar.icon.fs(${path}, ${as});

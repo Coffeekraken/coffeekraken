@@ -82,10 +82,10 @@ export default function ({ params, atRule, replaceWith }) {
       & > div,
       & > * {
         @sugar.state.hover {
-          @sugar.gradient.linear($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg);
+          @sugar.gradient($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg, $type: linear);
         }
         @sugar.state.active {
-          @sugar.gradient.linear($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg);
+          @sugar.gradient($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg, $type: linear);
         }          
       }
     `);

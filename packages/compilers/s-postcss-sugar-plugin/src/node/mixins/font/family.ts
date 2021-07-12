@@ -3,6 +3,28 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __theme from '../../utils/theme';
 import __minifyVar from '../../utils/minifyVar';
 
+/**
+ * @name           family
+ * @namespace      node.mixins.font
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate the css needed to apply a particular font in your css.
+ * The font parameter accept any defined font family from the
+ * config.theme.font.family stack
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * .my-cool-element {
+ *    \@sugar.font.family(title);
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginFontFamilyInterface extends __SInterface {
   static definition = {
     font: {

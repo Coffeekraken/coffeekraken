@@ -2,6 +2,30 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __themeVar from '../../utils/themeVar';
 
+/**
+ * @name          radius
+ * @namespace     node.mixins.border
+ * @type          PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin allows you to apply a border radius with a value coming
+ * from the config.theme.border.radius stack like 10, 20, etc...
+ *
+ * @param       {Number}      value     The border radius value you want to apply like 10, 20, etc...
+ * @return      {Css}                   The generated css
+ *
+ * @todo      Add multiple values support like @sugar.border.radius(10 20);
+ * 
+ * @example       css
+ * .my-element {
+ *    @sugar.border.radius(10);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginBorderRadiusMixinInterface extends __SInterface {
   static definition = {
     radius: {
@@ -31,7 +55,7 @@ export default function ({
     radius: 0,
     ...params
   };
-  
+
   const vars: string[] = [`border-radius: sugar.border.radius(${finalParams.radius});`];
   replaceWith(vars);
 }

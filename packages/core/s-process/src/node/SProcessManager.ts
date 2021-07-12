@@ -91,7 +91,7 @@ class SProcessManager extends __SEventEmitter {
     if (this.processManagerSettings.stdio) {
       (async () => {
         this._stdio = await __SStdio.new(
-          [],
+          this,
           this.processManagerSettings.stdio,
           this.processManagerSettings.stdioSettings
         );
@@ -142,7 +142,10 @@ class SProcessManager extends __SEventEmitter {
     );
 
     // register process for stdio
-    if (this._stdio) this._stdio.registerSource(processManagerProcess);
+    this.pipe(processManagerProcess, {
+      prefixEvent: id,
+      exclude: []
+    });
 
     this._processesStack[id] = processManagerProcess;
   }
@@ -199,11 +202,11 @@ class SProcessManager extends __SEventEmitter {
       paramsOrStringArgs,
       settings
     );
-    this.pipe(promise, {
-      prefixEvent: processId,
-      exclude: [],
-      overrideEmitter: true
-    });
+    // this.pipe(promise, {
+    //   prefixEvent: processId,
+    //   exclude: [],
+    //   overrideEmitter: true
+    // });
     return promise;
   }
 }

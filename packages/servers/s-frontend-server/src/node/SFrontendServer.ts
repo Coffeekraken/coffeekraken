@@ -88,7 +88,7 @@ export default class SFrontendServer extends __SClass {
     );
 
     return new __SPromise(
-      ({ resolve, reject, emit, pipe }) => {
+      async ({ resolve, reject, emit, pipe }) => {
         const express = __express();
 
         // enable compression if prod
@@ -116,21 +116,6 @@ export default class SFrontendServer extends __SClass {
               value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(process.cwd(), fsPath)}</cyan>" behind "<yellow>${dir}</yellow>" url`
             });
             express.use(dir, __express.static(fsPath));
-
-            // sailsConfig.routes[dir] = (req, res, next) => {
-            //   // @ts-ignore
-            //   const potentialFilePath = __path.join(
-            //     finalParams.rootDir,
-            //     req.url
-            //   );
-            //   if (__fs.existsSync(potentialFilePath)) {
-            //     const type = __mimeTypes.lookup(potentialFilePath);
-            //     res.setHeader('content-type', type);
-            //     __fs.createReadStream(potentialFilePath).pipe(res);
-            //   } else {
-            //     next();
-            //   }
-            // };
           });
         }
 
@@ -149,8 +134,8 @@ export default class SFrontendServer extends __SClass {
         }
 
         if (frontendServerConfig.middlewares) {
-          Object.keys(frontendServerConfig.middlewares).forEach(
-            async (middlewareName) => {
+          for (let i=0; i<Object.keys(frontendServerConfig.middlewares).length; i++) {
+              const middlewareName = Object.keys(frontendServerConfig.middlewares)[i];
               const middlewareObj =
                 frontendServerConfig.middlewares[middlewareName];
 
@@ -171,7 +156,6 @@ export default class SFrontendServer extends __SClass {
                 return pipe(middleware(res, res, next));
               });
             }
-          );
         }
 
         // logging requests

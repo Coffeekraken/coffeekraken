@@ -232,6 +232,7 @@ class SView extends __SClass implements ISViewRenderer {
           ...resultObj
         });
       } catch (e) {
+
         const errorViewInstance = new SView('pages.501', {
           ...settings
         });

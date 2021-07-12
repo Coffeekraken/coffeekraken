@@ -1,6 +1,25 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __themeVar from '../../utils/themeVar';
 
+/**
+ * @name           theme
+ * @namespace      node.mixins.prism
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the css needed to skin "Prism js"
+ * with the theme colors
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.prism.theme;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginPrismThemeInterface extends __SInterface {
   static definition = {};
 }

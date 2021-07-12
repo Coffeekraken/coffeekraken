@@ -8,7 +8,7 @@ export default {
   mode: 'development',
   plugins: [
     __path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`),
-    __path.resolve(`${__dirname()}/../node/plugins/sveltePlugin`),
+    // __path.resolve(`${__dirname()}/../node/plugins/sveltePlugin`),
     __path.resolve(`${__dirname()}/../node/plugins/riotjsPlugin`),
     __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`)
   ],

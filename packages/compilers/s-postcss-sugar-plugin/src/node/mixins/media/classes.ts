@@ -3,6 +3,49 @@ import __theme from '../../utils/theme';
 import __jsObjectToCssProperties from '../../utils/jsObjectToCssProperties';
 import __postcss from 'postcss';
 
+/**
+ * @name           classes
+ * @namespace      node.mixins.media
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin allows you to automatically generate the requested media query as well
+ * as updating all the direct child classnames so you will have classes that applies
+ * only for these media queries.
+ * 
+ * Take this as an example:
+ * 
+ * ```css
+ * .my-cool-element {
+ *    color: red;
+ * }
+ * \@sugar.media.classes(max-width: 1200px, myQuery) {
+ *    .my-cool-element {
+ *      color: green;
+ *    }
+ * }
+ * ```
+ * 
+ * This wil generate these two classes:
+ * - .my-cool-element: Always available
+ * - .my-cool-element___myQuery: Available only in the myQuery media query context
+ *
+ * Note that you can use the @sugar.media mixin parameters syntax here in the first argument.
+ * 
+ * @param         {String}      query
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.media.classes(tablet, myQuery) {
+ *    // any classes you want to "duplicate" and generate
+ *    // only for this media context...
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginMediaClassesMixinInterface extends __SInterface {
   static definition = {
       query: {

@@ -15,10 +15,23 @@ export default function sRiotjsPluginPostcssPreprocessor(
   postcssPlugins: any[]
 ) {
   // @ts-ignore
-  registerPreprocessor('css', 'postcss', function (code) {
-    const css = postcss(postcssPlugins).process(code).css;
+  registerPreprocessor('css', 'postcss', async function (code) {
+
+    // resolve plugins paths
+    const plugins: any[] = [];
+    for (let i=0; i<postcssPlugins.length; i++) {
+      const p = postcssPlugins[i];
+      if (typeof p === 'string') {
+        const { default: plug } = await import(p);
+        plugins.push(plug.default ?? plug);
+      } else {
+        plugins.push(p);
+      }
+    }
+
+    const result = await postcss(plugins).process(code);
     return {
-      code: css,
+      code: result.css,
       map: null
     };
   });

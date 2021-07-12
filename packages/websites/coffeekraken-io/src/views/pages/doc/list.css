@@ -1,10 +1,5 @@
 #doc-list {
 
-    [class^="s-platform"] {
-        font-size: sugar.font.size(50);
-        margin-left: sugar.space(10);
-    }
-
     .__nav form {
         position: sticky;
         top: 98px;

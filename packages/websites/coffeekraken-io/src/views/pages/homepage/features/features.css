@@ -10,7 +10,7 @@
     opacity: 0.2;
     z-index:-1;
 
-    @sugar.gradient.linear(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
+    @sugar.gradient(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
 
     &:before {
       content:'';
@@ -19,7 +19,7 @@
       position: absolute;
       top: 0; left: 0;
 
-      @sugar.gradient.linear(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
+      @sugar.gradient(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
       
     }
   }
@@ -36,7 +36,7 @@
         bottom: -33px; left: 50%;
         z-index: -1;
 
-        @sugar.gradient.linear(rgba(255,255,255,.03), rgba(255,255,255,0.02), $angle: 180deg);
+        @sugar.gradient(rgba(255,255,255,.03), rgba(255,255,255,0.02), $angle: 180deg);
       } */
   }
 

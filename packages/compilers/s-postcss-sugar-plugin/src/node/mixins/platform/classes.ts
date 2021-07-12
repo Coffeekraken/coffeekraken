@@ -4,6 +4,25 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
+/**
+ * @name           classes
+ * @namespace      node.mixins.platform
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the "platforms" css classes like s-platform:css, etc...
+ * "Platforms" are some kind of "icons" of platforms like "css", "node", "js", "php", etc...
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.platform.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginPlatformClassesMixinInterface extends __SInterface {
   static definition = {
     platforms: {
@@ -45,14 +64,16 @@ export default function ({
     vars.push(`
         
         /**
-         * @name            s-platform--${name}
-         * @namespace       sugar.css.mixins.platform
+         * @name            s-platform:${name}
+         * @namespace       sugar.css.platform
          * @type            CssClass
+         * @platform          css
+         * @status          beta
          * 
          * This class allows you to display a plarform "icon" like "js", "node, "php", etc...
          * 
          * @example     html
-         * <i class="s-platform--${name} s-font:50"></i>
+         * <i class="s-platform\:${name} s-font:50"></i>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -7,16 +7,17 @@ export { postcssSugarPluginClassesMixinInterface as interface };
 
 /**
  * @name           classes
- * @namespace      mixins.classes
- * @type           Mixin
+ * @namespace      node.mixins.classes
+ * @type           PostcssMixin
+ * @platform      css
  * @status        beta
  *
  * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...
  *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
+ * @return        {Css}         The generated css for all the classes in the toolkit
  *
  * @example         postcss
- * \@sugar.Classes;
+ * \@sugar.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -37,9 +38,9 @@ export default function ({ params, atRule, replaceWith }) {
     '@sugar.border.classes;',
     '@sugar.display.classes;',
     '@sugar.position.classes;',
-    '@sugar.style.classes;',
     '@sugar.icon.classes;',
-    '@sugar.space.classes;',
+    '@sugar.margin.classes;',
+    '@sugar.padding.classes;',
     '@sugar.width.classes;'
   ];
 

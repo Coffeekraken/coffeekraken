@@ -13,19 +13,15 @@ $monorepoSugarPath = realpath(__DIR__.'/../../../../../../tools/sugar/src/php/au
 if ($nodeModulesSugarPath) require_once($nodeModulesSugarPath);
 else if ($monorepoSugarPath) require_once($monorepoSugarPath);
 
-function compile($viewsFolders, $view, $data, $tmpPath) {
+$params = json_decode($argv[1]);
 
-  // prepare data to pass it to the template engine
-	$data = json_decode(json_encode($data), FALSE);
-  $data = (array) $data;
-  // preparing the paths
-  $viewName = str_replace('.blade.php', '', $view);
-  // $blade = new Blade($viewsFolders, $tmpPath);
-  // return $blade->render($viewName, $data);
+// prepare data to pass it to the template engine
+$data = $params->data;
+$data = (array) $data;
+// preparing the paths
+$viewName = str_replace('.blade.php', '', $params->viewDotPath);
 
-  $blade = new BladeOne($viewsFolders,$tmpPath,BladeOne::MODE_DEBUG); // MODE_DEBUG allows to pinpoint troubles.
-  $res = $blade->run($viewName,$data); // it calls /views/hello.blade.php
+$blade = new BladeOne($params->rootDirs,$params->cacheDir,BladeOne::MODE_DEBUG);
+$res = $blade->run($viewName,$data);
 
-  return \Sugar\html\expandColonClasses($res);
-
-}
+print \Sugar\html\expandColonClasses($res);

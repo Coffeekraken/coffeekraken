@@ -1,6 +1,26 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 
+/**
+ * @name           gradient
+ * @namespace      node.mixins.gradient
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the css needed to apply a gradient on your elements
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * .my-cool-element {
+ *    \@sugar.gradient(accent, secondary, radial);
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginGradientInterface extends __SInterface {
   static definition = {
     start: {

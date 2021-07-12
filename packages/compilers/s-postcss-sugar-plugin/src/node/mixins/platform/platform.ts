@@ -6,11 +6,33 @@ import __fs from 'fs';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
+/**
+ * @name           platform
+ * @namespace      node.mixins.platform
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the css needed to display correctly a "platform" icon like
+ * css, node, js, php, etc...
+ *
+ * @param         {IPostcssSugarPluginAssetPlatformParams}    params      The parameters object
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * .my-platform {
+ *    \@sugar.platform(css);
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginAssetPlatformInterface extends __SInterface {
   static definition = {
       platform: {
           type: 'String',
-          values: ['js','node','ts'],
+          values: ['js','node','ts','php'],
         required: true
       }
   };

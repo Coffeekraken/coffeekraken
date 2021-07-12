@@ -13,11 +13,13 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {
  * @name           vertical
  * @namespace      mixins.rhythm
  * @type           Mixin
+ * @platform      css
  * @status        beta
  *
- * This mixin allows you to scope some css that you want to apply only in vertical rhythm context
+ * This mixin allows you to scope some css that you want to apply only in vertical rhythm context.
+ * Your css will be scoped inside the "s-rhythm:vertical" class.
  *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
+ * @return      {Css}         The generated css
  *
  * @example         postcss
  * .my-cool-element {
@@ -27,8 +29,8 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {
  * }
  * 
  * @example       html
- * <h1 class="my-cool-element s-rhythm-vertical">Hello world</h1>
- * <div class="s-rhythm-vertical">
+ * <h1 class="my-cool-element s-rhythm\:vertical">Hello world</h1>
+ * <div class="s-rhythm\:vertical">
  *     <h1 class="my-cool-element">Hello world</h1>
  * </div>
  *
@@ -48,7 +50,7 @@ export default function ({
     ...(params ?? {})
   };
   const container = new postcssApi.Rule({
-    selectors: [`.s-rhythm-vertical`]
+    selectors: [`.s-rhythm--vertical`]
   });
   atRule.nodes.forEach(n => {
     container.append(n.clone());

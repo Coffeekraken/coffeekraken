@@ -260,7 +260,11 @@ function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
 
   if (settings.props) {
     settings.props.forEach((prop) => {
-      ctx[prop] = instance[prop].bind(instance);
+      if (instance[prop].bind && typeof instance[prop].bind === 'function') {
+        ctx[prop] = instance[prop].bind(instance);
+      } else {
+        ctx[prop] = instance[prop];
+      }
     });
   }
 }

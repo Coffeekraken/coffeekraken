@@ -1,6 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 
+/**
+ * @name           size
+ * @namespace      node.mixins.font
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate the css needed to apply a font-size depending on the font sizes
+ * defines in the config.theme.font.size stack
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * .my-cool-element {
+ *    \@sugar.font.size(20);
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginFontSizeInterface extends __SInterface {
   static definition = {
     size: {

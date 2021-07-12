@@ -14,10 +14,11 @@ export interface postcssSugarPluginScopeBareMixinParams {}
  * @name           bare
  * @namespace      mixins.scope
  * @type           Mixin
+ * @platform        css
  * @status        beta
  *
  * This mixin allows you to wrap some bare type styling to be able to
- * disable it later using classes like ```.s-nude``` or ```.s-no-bare```
+ * disable it later using the ```.s-no-bare``` class
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
@@ -44,22 +45,8 @@ export default function ({
     ...(params ?? {})
   };
 
-  if (!__isInScope('bare')) {
-    return atRule.replaceWith('');
-  }
-
-  // const vars: string[] = [];
-
-  // if (atRule.parent && atRule.parent.type === 'root') {
-  //   vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
-  // } else {
-  //   vars.push(`&:not(.s-no-bare &):not(.no-bare) {`);
-  // }
-  // vars.push(__astNodesToString(atRule.nodes));
-  // vars.push(`}`);
-
   const rule = new postcssApi.Rule({
-    selector: '&:not(.s-no-bare &):not(.no-bare)'
+    selector: '&:not(.s-no-bare &):not(.s-no-bare)'
   });
 
   atRule.nodes.forEach(node => {
@@ -68,5 +55,4 @@ export default function ({
 
   atRule.replaceWith(rule);
 
-  // replaceWith(vars);
 }

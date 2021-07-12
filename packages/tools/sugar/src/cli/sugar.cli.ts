@@ -105,10 +105,6 @@ class SSugarCli {
     // print header
     if (!__isChildProcess()) {
       this._newStep();
-      console.log('PID', process.pid);
-    } else {
-      console.log('PPID', process.ppid);
-      // console.log('HEllo');
     }
 
     (async () => {
@@ -233,7 +229,7 @@ class SSugarCli {
   }
 
   _newStep() {
-    // console.clear();
+    console.clear();
     console.log(__parseHtml(__sugarBanner({
       paddingTop: 1,
       paddingBottom: 1

@@ -76,7 +76,7 @@
                 opacity: 0.1;
                 z-index: -1;
 
-                @sugar.gradient.linear(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
+                @sugar.gradient(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
 
                 &:before {
                     content:'';
@@ -85,7 +85,7 @@
                     position: absolute;
                     top: 0; left: 0;
 
-                    @sugar.gradient.linear(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
+                    @sugar.gradient(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
                 
                 }
             } */

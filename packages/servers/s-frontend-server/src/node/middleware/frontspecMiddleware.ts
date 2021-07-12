@@ -35,6 +35,7 @@ import __fs from 'fs';
 const _requestedFiles: Record<string, any> = {};
 function frontspecMiddleware(settings = {}) {
   return async function (req, res, next) {
+
     // handle already fetched files
     if (_requestedFiles[req.path]) {
       const assetObj = _requestedFiles[req.path];

@@ -1,4 +1,21 @@
 import __SInterface from '@coffeekraken/s-interface';
+/**
+ * @name           classes
+ * @namespace      node.mixins.text
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the text helper classes like s-text:center, s-text:left, etc...
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.text.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class postcssSugarPluginTextClassesInterface extends __SInterface {
 }
 postcssSugarPluginTextClassesInterface.definition = {};
@@ -9,14 +26,16 @@ export default function ({ params, atRule, replaceWith }) {
     // align
     vars.push(`
         /**
-         * @name            s-text--left
+         * @name            s-text:left
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This class allows you to align text to the left side
          * 
          * @example     html
-         * <div class="s-text--left">Hello world</div>
+         * <div class="s-text\:left">Hello world</div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -26,14 +45,16 @@ export default function ({ params, atRule, replaceWith }) {
         }
 
        /**
-         * @name            s-text--right
+         * @name            s-text:right
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This class allows you to align text to the right side
          * 
          * @example     html
-         * <div class="s-text--right">Hello world</div>
+         * <div class="s-text\:right">Hello world</div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -43,14 +64,16 @@ export default function ({ params, atRule, replaceWith }) {
         }
 
         /**
-         * @name            s-text--center
+         * @name            s-text:center
          * @namespace       sugar.css.mixins.align
          * @type            CssClass
+         * @platform      css
+         * @status        beta
          * 
          * This class allows you to align text to the center
          * 
          * @example     html
-         * <div class="s-text--center">Hello world</div>
+         * <div class="s-text\:center">Hello world</div>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -61,4 +84,4 @@ export default function ({ params, atRule, replaceWith }) {
   `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFJckQsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZOztBQUN4RCxpREFBVSxHQUFHLEVBQUUsQ0FBQztBQUt6QixPQUFPLEVBQUUsc0NBQXNDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFL0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixRQUFRO0lBQ1IsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbURULENBQUMsQ0FBQztJQUdILFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFJckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLHNDQUF1QyxTQUFRLFlBQVk7O0FBQ3hELGlEQUFVLEdBQUcsRUFBRSxDQUFDO0FBS3pCLE9BQU8sRUFBRSxzQ0FBc0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUUvRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLFFBQVE7SUFDUixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5RFQsQ0FBQyxDQUFDO0lBR0gsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3BCLENBQUMifQ==

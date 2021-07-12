@@ -1,5 +1,25 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name           reset
+ * @namespace      node.mixins.reset
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the reset css needed to standardize display
+ * on all browsers.
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.ratio.classes;
+ *
+ * @see       https://github.com/nicolas-cusan/destyle.css
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginResetInterface extends __SInterface {
   static definition = {};
 }

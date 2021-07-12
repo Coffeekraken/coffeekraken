@@ -173,29 +173,30 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         const configFilePath = `${path}/${file}`;
         // @TODO      check for delete cache with import
         // if (clearCache) delete require.cache[require.resolve(configFilePath)];
-        const { default: configData } = await import(configFilePath);
+        const importedConfig = await import(configFilePath);
+        const configData = importedConfig.default;
 
         const configKey = file.replace('.config.js', '');
         if (!configObj[configKey]) configObj[configKey] = {};
 
         configObj[configKey] = __deepMerge(
           configObj[configKey],
-          configData.default ? configData.default : configData
+          configData
         );
 
-        if (configData.prepare && typeof configData.prepare === 'function') {
+        if (importedConfig.prepare && typeof importedConfig.prepare === 'function') {
           __SConfig.registerPrepare(
             this.configAdapterSettings.name,
             configKey,
-            configData.prepare
+            importedConfig.prepare
           );
         }
 
-        if (configData.proxy && typeof configData.proxy === 'function') {
+        if (importedConfig.proxy && typeof importedConfig.proxy === 'function') {
           __SConfig.registerProxy(
             this.configAdapterSettings.name,
             configKey,
-            configData.proxy
+            importedConfig.proxy
           );
         }
       }

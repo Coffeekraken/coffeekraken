@@ -2,6 +2,24 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
+/**
+ * @name           classes
+ * @namespace      node.mixins.position
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the position helper classes like s-position:absolute, etc...
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.position.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginPositionClassesInterface extends __SInterface {
   static definition = {};
 }
@@ -28,14 +46,16 @@ export default function ({
   vars.push(`
         
       /**
-       * @name            s-position--absolute
-       * @namespace       sugar.css.mixins.position
+       * @name            s-position:absolute
+       * @namespace       sugar.css.position
        * @type            CssClass
+       * @platform      css
+       * @status        stable
        * 
        * This class allows you to apply the value "<yellow>absolute</yellow>" to the position property on any HTMLElement
        * 
        * @example     html
-       * <div class="s-position--absolute">
+       * <div class="s-position\:absolute">
        *  Hello world
        * </div>
        * 
@@ -47,14 +67,16 @@ export default function ({
       }
 
       /**
-       * @name            s-position--relative
-       * @namespace       sugar.css.mixins.position
+       * @name            s-position:relative
+       * @namespace       sugar.css.position
        * @type            CssClass
+       * @platform        css
+       * @status          stable
        * 
        * This class allows you to apply the value "<yellow>relative</yellow>" to the position property on any HTMLElement
        * 
        * @example     html
-       * <div class="s-position--relative">
+       * <div class="s-position\:relative">
        *  Hello world
        * </div>
        * 
@@ -66,14 +88,16 @@ export default function ({
       }
 
       /**
-       * @name            s-position--fixed
-       * @namespace       sugar.css.mixins.position
+       * @name            s-position:fixed
+       * @namespace       sugar.css.position
        * @type            CssClass
+       * @platform        css
+       * @status          stable
        * 
        * This class allows you to apply the value "<yellow>fixed</yellow>" to the position property on any HTMLElement
        * 
        * @example     html
-       * <div class="s-position--fixed">
+       * <div class="s-position\:fixed">
        *  Hello world
        * </div>
        * 
@@ -85,14 +109,16 @@ export default function ({
       }
 
       /**
-       * @name            s-position--sticky
+       * @name            s-position::sticky
        * @namespace       sugar.css.mixins.position
        * @type            CssClass
+       * @platform        css
+       * @status          stable
        * 
        * This class allows you to apply the value "<yellow>sticky</yellow>" to the position property on any HTMLElement
        * 
        * @example     html
-       * <div class="s-position--sticky">
+       * <div class="s-position\:sticky">
        *  Hello world
        * </div>
        * 

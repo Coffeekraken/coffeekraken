@@ -13,9 +13,12 @@ export interface postcssSugarPluginStateHoverMixinParams {}
  * @name           hover
  * @namespace      mixins.state
  * @type           Mixin
+ * @platform      css
  * @status        beta
  *
- * This mixin allows you to target some hoverable items to apply correct color schema
+ * This mixin allows you to target some hover item to apply some styling on it.
+ * Here's the generated selector:
+ * - &:hover
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
@@ -44,13 +47,6 @@ export default function ({
   };
 
   const vars: string[] = [];
-
-  // vars.push(
-  //   // `&:hover, [hoverable]:hover:not([hoverable]:not(:hover) &) {`,
-  //   `&:hover {`
-  // );
-  // vars.push(__astNodesToString(atRule.nodes));
-  // vars.push(`}`);
 
   vars.push(`&:hover {`);
   vars.push(__astNodesToString(atRule.nodes));

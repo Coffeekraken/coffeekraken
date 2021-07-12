@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __SEventEmitter, { ISEventEmitterPipeSettingsFilterFn } from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SProcess from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
@@ -8,7 +8,7 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { ISDurationObject } from '@coffeekraken/s-duration';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 
-import { ISEventEmitterPipeSettingsFilterFn } from '@coffeekraken/s-event-emitter';
+
 
 /**
  * @name            SProcessManagerProcessWrapper

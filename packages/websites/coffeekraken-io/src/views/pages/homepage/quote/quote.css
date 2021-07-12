@@ -8,7 +8,8 @@
   .__content {
     position: absolute;
     z-index: 10;
-    @sugar.font (title, 100);
+    @sugar.font.family(title);
+    @sugar.font.size(100);
   }
 
   .s-color-complementary {

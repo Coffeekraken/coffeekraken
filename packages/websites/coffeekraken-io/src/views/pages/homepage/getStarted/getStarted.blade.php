@@ -22,7 +22,7 @@
         </div>
         <div>
            <ul class="__tabs s-tabs:vertical">
-                <li class="s-pd:30">
+                <li class="s-p:30">
                     <div class="s-flex">
                         <div class="s-flex-item:grow">
                             <span class="s-typo:b">Standard view based website template</span> (<span class="s-color:accent">views</span>, <span class="s-color:accent">typescript</span>, <span class="s-color:accent">postcss</span>, <span class="s-color:accent">assets</span>)
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="s-pd:30">
+                <li class="s-p:30">
                     <div class="s-flex">
                         <div class="s-flex-item:grow">
                             <span class="s-typo:b">React component</span> (<span class="s-color:accent">typescript</span>)

@@ -9,6 +9,23 @@ export interface IPostcssSugarPluginBorderRadiusClassesMixinParams {}
 
 export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
 
+/**
+ * @name          classes
+ * @namespace     node.mixins.border
+ * @type          PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate the borders helpers like s-border:radius-20, etc...
+ *
+ * @return      {Css}                   The generated css
+ *
+ * @example       css
+ * @sugar.border.classes;
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default function ({
   params,
   atRule,
@@ -29,15 +46,18 @@ export default function ({
   Object.keys(radiusesObj).forEach((radiusName) => {
 
     const cls = `s-border--radius-${radiusName}`.replace('-default', '');
+    const clsName = `s-border:radius-${radiusName}`.replace('-default', '');
     const radiusCss = `/**
-  * @name          ${cls}
+  * @name               ${clsName}
   * @namespace          sugar.css.border
   * @type               CssClass
+  * @platform         css
+  * @status           beta
   * 
   * This class allows you to apply a "<yellow>${radiusName}</yellow>" border radius style to any HTMLElement
   * 
   * @example        html
-  * <div class="s-border--radius-30 s-color--complementary">
+  * <div class="${clsName.replace(':','\:')} s-color--complementary">
   *     Hello world
   * </div>
   */

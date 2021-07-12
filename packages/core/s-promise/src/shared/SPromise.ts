@@ -231,7 +231,7 @@ class SPromise extends __SClass.extends(Promise)
       this._eventEmitter,
       {
         as: 'eventEmitter',
-        props: ['on', 'off', 'emit', 'pipe', 'pipeFrom', 'pipeTo']
+        props: ['on', 'off', 'emit', 'pipe', 'pipeFrom', 'pipeTo', 'eventEmitterSettings']
       }
     );
 

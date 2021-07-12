@@ -1,6 +1,24 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 
+/**
+ * @name           classes
+ * @namespace      node.mixins.gradient
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the gradient helper classes like s-gradient:accent, etc...
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.gradient.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginGradientClassesInterface extends __SInterface {
   static definition = {
     types: {
@@ -43,34 +61,48 @@ export default function ({
 
   if (finalParams.types.indexOf('linear') !== -1) {
     vars.push(`/**
-        * @name             s-gradient-type-linear
+        * @name             s-gradient:linear
         * @namespace          sugar.css.gradient
         * @type                 CssClass
+        * @platform         css
+        * @status           beta
         *
         * This class allows you to apply a "<yellow>linear</yellow> gradient to any HTMLElement. Note that this will apply a linear gradient using the "<yellow>primary</yellow>" color. If you want
         * apply something different, make use of the "<cyan>s-gradient-start-{colorName}</cyan>" and "<cyan>s-gradient-end-{colorName}</cyan>" classes...
         *
+        * @example        html
+        * <div class="s-gradient\:linear\:accent">
+        *   Hello gradient
+        * </div>
+        * 
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    .s-gradient-type-linear {
+    .s-gradient--linear {
         --s-gradient-type-inline: linear;
     }`);
   }
 
   if (finalParams.types.indexOf('radial') !== -1) {
     vars.push(`/**
-        * @name             s-gradient-type-radial
+        * @name             s-gradient:radial
         * @namespace          sugar.css.gradient
         * @type                 CssClass
+        * @platform       css
+        * @status         beta
         *
         * This class allows you to apply a "<yellow>radial</yellow> gradient to any HTMLElement. Note that this will apply a radial gradient using the "<yellow>primary</yellow>" color. If you want
         * apply something different, make use of the "<cyan>s-gradient-start-{colorName}</cyan>" and "<cyan>s-gradient-end-{colorName}</cyan>" classes...
         *
+        * @example        html
+        * <div class="s-gradient\:radial\:accent">
+        *   Hello gradient
+        * </div>
+        * 
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    .s-gradient-type-radial {
+    .s-gradient--radial {
         --s-gradient-type-inline: radial;
     }`);
   }
@@ -79,22 +111,24 @@ export default function ({
     finalParams.angles.forEach((angle) => {
       vars.push(`
         /**
-         * @name        .s-gradient-angle-${angle}
+         * @name        .s-gradient:${angle}deg
          * @namespace       sugar.css.gradient
          * @type            CssClass
+         * @platform        css
+         * @status          beta
          * 
          * This class allows you to apply an angle of "<magenta>${angle}</magenta>" you want if your gradient
          * is of type "<yellow>linear</yellow>" of course.
          * 
          * @example             html
-         * <div class="s-ratio-16-9 s-gradient-linear s-gradient-start-primary-50 s-gradient-end-primary-70">
+         * <div class="s-ratio\:16-9 s-gradient\:linear\:${angle}deg\:start-primary-50\:end-primary-70">
          *     <div class="s-center-abs">I'm a cool depth button</div>
          * </div>
          * 
          * @since            2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        .s-gradient-angle-${angle} {
+        .s-gradient--${angle}deg {
             --s-gradient-angle-inline: ${angle}deg;
         }
     `);
@@ -107,9 +141,11 @@ export default function ({
       // default gradients
       vars.push(`
           /**
-           * @name        .s-gradient-${name}
+           * @name        .s-gradient:${name}
            * @namespace   sugar.css.gradient
            * @type            CssClass
+           * @platform        css
+           * @status          beta
            *
            * This class allows you to apply directly a "<yellow>${name}</yellow>" gradient on any HTMLElement.
            * This gradient uses the "<yellow>gradient.defaultType</yellow>" and "<yellow>gradient.defaultAngle</yellow>" theme config.
@@ -117,14 +153,14 @@ export default function ({
            * classes like the "<yellow>s-gradient-type-{type}</yellow>", etc...
            *
            * @example         html
-           * <div class="s-ratio-16-9 s-gradient-${name}">
+           * <div class="s-ratio\:16-9 s-gradient\:${name}">
            *     <div class="s-center-abs">I'm a cool depth button</div>
            * </div>
            *
            * @since       2.0.0
            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
-          .s-gradient-${name} {
+          .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
                   $end: ${name}--${__theme().config(
@@ -138,18 +174,20 @@ export default function ({
     }
     currentName = name;
 
-    const startColorClassName = `s-gradient-start-${name}${
+    const startColorClassName = `s-gradient:start-${name}${
       modifier === 'default' ? '' : `-${modifier}`
     }`;
     vars.push(`/**
-        * @name          .${startColorClassName}
+        * @name          ${startColorClassName}
         * @namespace          sugar.css.gradient
         * @type               CssClass
+        * @platform           css
+        * @status           beta
         *
         * This class allows you to apply a "<yellow>${name}</yellow>" gradient start color to any HTMLElement
         *
         * @example        html
-        * <div class="s-ratio-16-9 s-gradient-linear ${startColorClassName} s-gradient-end-${name}${
+        * <div class="s-ratio\:16-9 ${startColorClassName.replace(':','\:')}\:end-${name}${
       next.modifier === 'default' ? '' : `-${next.modifier}`
     }">
         *     <div class="s-center-abs">I'm a cool depth button</div>
@@ -158,24 +196,26 @@ export default function ({
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-      .${startColorClassName} {
+      .${startColorClassName.replace(':','--')} {
           --s-gradient-start-color-inline: sugar.color(${name}, ${modifier});
       }`);
 
-    const endColorClassName = `s-gradient-end-${name}${
+    const endColorClassName = `s-gradient:end-${name}${
       modifier === 'default' ? '' : `-${modifier}`
     }`;
     vars.push(`/**
-      * @name          .${endColorClassName}
+      * @name          ${endColorClassName}
       * @namespace          sugar.css.gradient
       * @type               CssClass
+      * @platform         css
+      * @status           beta
       *
       * This class allows you to apply a "<yellow>${name}${
       modifier === 'default' ? '' : `-${modifier}`
     }</yellow>" gradient end color to any HTMLElement
       *
       * @example        html
-      * <div class="s-ratio-16-9 s-gradient-linear s-gradient-start-${name}${
+      * <div class="s-ratio\:16-9 ${endColorClassName.replace(':','\:')}\:start-${name}${
       previous.modifier === 'default' ? '' : `-${previous.modifier}`
     } ${endColorClassName}">
       *     <div class="s-center-abs">I'm a cool depth button</div>
@@ -184,7 +224,7 @@ export default function ({
       * @since            2.0.0
       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    .${endColorClassName} {
+    .${endColorClassName.replace(':','--')} {
         --s-gradient-end-color-inline: sugar.color(${name}, ${modifier});
     }`);
   });

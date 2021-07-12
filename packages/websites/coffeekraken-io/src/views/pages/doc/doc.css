@@ -82,7 +82,7 @@
                 position: absolute;
                 z-index: 0;
 
-                @sugar.gradient.linear(sugar.color(ui, surface), rgba(0,0,0,0));
+                @sugar.gradient(sugar.color(ui, surface), rgba(0,0,0,0));
             }
         }
     }

@@ -19,6 +19,8 @@ export { postcssSugarPluginAlignInterface as interface };
  * @name          abs
  * @namespace     sugar.postcss.mixin.lnf
  * @type          PostcssMixin
+ * @platform      css
+ * @status        beta
  *
  * This mixin allows you to center an item using the absolute method. Here's the accepted alignements:
  *

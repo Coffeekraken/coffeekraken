@@ -11,18 +11,36 @@ export default {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        input: `${__packageRoot()}/docmap.json`,
+        input: `${__packageRoot()}/docmap.json`
+    },
+    snapshot: {
         /**
-         * @name        collect
-         * @namespace     config.docmap.read
-         * @type        Array<String>
+         * @name          outDir
+         * @namespace     config.docmap.snapshot
+         * @type          String
+         * @default       [config.storage.package.rootDir]/.docmap/%packageVersion.version
          *
-         * Specify which "fields" you want to collect and make an array of value with
+         * Specify where to save the generated snapshot
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        collect: ['type', 'platform', 'status', 'author', 'since']
+        outDir: `[config.storage.package.rootDir]/.docmap/%packageJson.version`,
+    },
+    installSnapshot: {
+        /**
+         * @name          glob
+         * @namespace     config.docmap.installSnapshot
+         * @type          String
+         * @default       [config.storage.package.rootDir]/.docmap/* /
+         *
+         * Specify where to find the snapshot(s) to install. It must refer
+         * to folder(s) where a docmap.json and a package.json exists...
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        glob: `[config.storage.package.rootDir]/.docmap/*`,
     },
     build: {
         /**
@@ -131,4 +149,4 @@ export default {
         outPath: `[config.storage.package.rootDir]/docmap.json`
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsZUFBZTtJQUViLElBQUksRUFBRTtRQUNKOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRSxHQUFHLGFBQWEsRUFBRSxjQUFjO1FBRXZDOzs7Ozs7Ozs7V0FTRztRQUNILE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBQyxVQUFVLEVBQUMsUUFBUSxFQUFDLFFBQVEsRUFBQyxPQUFPLENBQUM7S0FDdkQ7SUFFRCxLQUFLLEVBQUU7UUFDTDs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxLQUFLLEVBQUUsQ0FBQyxnQ0FBZ0MsRUFBRSwrQkFBK0IsQ0FBQztRQUUxRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLENBQUMsbUJBQW1CLEVBQUUsdUJBQXVCLEVBQUUsaUJBQWlCLENBQUM7UUFFMUU7Ozs7Ozs7Ozs7V0FVRztRQUNILFNBQVMsRUFBRSxLQUFLO1FBRWhCOzs7Ozs7Ozs7Ozs7Ozs7V0FlRztRQUNILE9BQU8sRUFBRTtZQUNQLFNBQVMsRUFBRSxXQUFXO1NBQ3ZCO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRTtZQUNOLE1BQU07WUFDTixNQUFNO1lBQ04sVUFBVTtZQUNWLGFBQWE7WUFDYixXQUFXO1lBQ1gsUUFBUTtZQUNSLFNBQVM7WUFDVCxRQUFRO1lBQ1IsT0FBTztZQUNQLFFBQVE7U0FDVDtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsOENBQThDO0tBQ3hEO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsZUFBZTtJQUViLElBQUksRUFBRTtRQUNKOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRSxHQUFHLGFBQWEsRUFBRSxjQUFjO0tBQ3hDO0lBRUQsUUFBUSxFQUFFO1FBRVI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSwrREFBK0Q7S0FFeEU7SUFFRCxlQUFlLEVBQUU7UUFFZjs7Ozs7Ozs7Ozs7V0FXRztRQUNILElBQUksRUFBRSw0Q0FBNEM7S0FFbkQ7SUFFRCxLQUFLLEVBQUU7UUFDTDs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxLQUFLLEVBQUUsQ0FBQyxnQ0FBZ0MsRUFBRSwrQkFBK0IsQ0FBQztRQUUxRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLENBQUMsbUJBQW1CLEVBQUUsdUJBQXVCLEVBQUUsaUJBQWlCLENBQUM7UUFFMUU7Ozs7Ozs7Ozs7V0FVRztRQUNILFNBQVMsRUFBRSxLQUFLO1FBRWhCOzs7Ozs7Ozs7Ozs7Ozs7V0FlRztRQUNILE9BQU8sRUFBRTtZQUNQLFNBQVMsRUFBRSxXQUFXO1NBQ3ZCO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRTtZQUNOLE1BQU07WUFDTixNQUFNO1lBQ04sVUFBVTtZQUNWLGFBQWE7WUFDYixXQUFXO1lBQ1gsUUFBUTtZQUNSLFNBQVM7WUFDVCxRQUFRO1lBQ1IsT0FBTztZQUNQLFFBQVE7U0FDVDtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsOENBQThDO0tBQ3hEO0NBQ0YsQ0FBQyJ9

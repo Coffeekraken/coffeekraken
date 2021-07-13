@@ -1,0 +1,37 @@
+/**
+*
+* @name            inline-bar
+* @namespace            scss.component.mixin
+* @type            Mixin
+*
+* This mixin allows you to display an inline styled bar.
+* Pretty simple you may think but this is very usefull for somple displays like
+* shields display, links, etc...
+* Their's also the mixin ```inline-bar-bare``` and ```inline-bar-style``` that you
+* can use if you need more controls.
+*
+* @param       {String}        [$name='inline-bar']       The className to use for the generation
+*
+* @classes
+* .#{$name}: Base class to apply on the container
+* .#{$name}--center: Align the items vertically in the middle
+* .#{$name}--top: Align the items vertically to the top
+* .#{$name}--bottom: Align the items vertically to the bottom
+* .#{$name} .#{$name}__item: Class to apply on each items
+*
+* @example         html
+* <ul class="s-inline-bar">
+*   <li class="s-inline-bar__item">Something cool</li>
+*   <li class="s-inline-bar__item">
+*      <img alt="NPM" src="https://img.shields.io/npm/l/@coffeekraken/sugar?style=for-the-badge">
+*   </li>
+*   <li class="s-inline-bar__item">Something cool</li>
+* </ul>
+*
+* @example           scss
+* @include Sugar.inline-bar();
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

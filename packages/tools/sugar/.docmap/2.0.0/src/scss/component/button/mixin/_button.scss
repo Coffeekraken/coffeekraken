@@ -1,0 +1,18 @@
+/**
+*
+* @name              button
+* @namespace            scss.component.button.mixin
+* @type              Mixin
+*
+* This mixin generate all the properties for a button depending on the parameters you set.
+*
+* @param       {String}      [$color:primary]       The color you want to generate
+* @param       {String}      [$size:default]       The size you want to generate
+* @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+* @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+* @param       {String}        [$scope:null]       The scope you want to generate. Can be "bare" or "style"
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

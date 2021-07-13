@@ -2,8 +2,9 @@
 
 import __folderPath from './folderPath';
 import __ensureDirSync from './ensureDirSync';
-import __fs from 'fs-extra';
+import __fs from 'fs';
 import __replacePathTokens from '../path/replacePathTokens';
+import __stringify from '../../shared/json/stringify';
 
 /**
  * @name        writeJson
@@ -32,7 +33,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  *    // do something on complete...
  * });
  *
- * @see             https://github.com/jprichardson/node-fs-extra
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -40,6 +40,7 @@ function writeJson(path, data, options = {}) {
   path = __replacePathTokens(path);
   const folderPath = __folderPath(path);
   __ensureDirSync(folderPath);
-  return __fs.outputJson(path, data, options);
+  const jsonStr = __stringify(data, null, 4);
+  return __fs.writeFile(path, jsonStr);
 }
 export default writeJson;

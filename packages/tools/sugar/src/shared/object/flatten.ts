@@ -21,7 +21,6 @@ import __decycle from './decycle';
  *
  * @setting               {String}            [separation="."]          The separation character to use for preperty names
  * @setting 							{Boolean}			    	[array=false] 		Specify if you want to flatten array or not
- * @setting               {Boolean}          [arrayWithDots=false]     Specify if you want to flatten array using the "something.0" syntax instead of the default one "something[0]"
  * @setting               {Boolean}          [quoteSeparatedProperties=true]      Specify if you want to quote dotted properties to be able to restore them correctly later
  * @setting               {String}        [quoteCharacter='"']        Specify the quote character to use when need to quote separated properties
  * @setting               {Boolean}       [keepLastIntact=false]       Specify if you want to keep the last level (object, array) intact and not to flatten each properties
@@ -53,7 +52,6 @@ function flatten(object, settings = {}) {
   settings = {
     separator: '.',
     array: false,
-    arrayWithDots: false,
     quoteSeparatedProperties: true,
     quoteCharacter: '"',
     excludeProps: [],
@@ -78,10 +76,6 @@ function flatten(object, settings = {}) {
       (Array.isArray(object[key]) && settings.array) ||
       (!Array.isArray(object[key]) && typeof object[key]) == 'object'
     ) {
-      // if (object[key].__isFlattened === true) {
-      //   toReturn[key] = object[key];
-      //   continue;
-      // }
 
       const isArray = Array.isArray(object[key]);
 
@@ -89,20 +83,12 @@ function flatten(object, settings = {}) {
         ...settings,
         keepLastIntact: false
       });
-      // delete object[key].__isFlattened;
 
       for (const x in flatObject) {
         if (flatObject[x] === undefined) continue;
 
-        // if (flatObject[x] && flatObject[x].__proto__)
-        //   flatObject[x].__proto__.__isFlattened = true;
-
         if (isArray) {
-          if (settings.arrayWithDots) {
-            toReturn[`${key}.${x}`] = flatObject[x];
-          } else {
-            toReturn[`${key}[${x}]`] = flatObject[x];
-          }
+          toReturn[`${key}[${x}]`] = flatObject[x];
         } else {
           const part = key;
           if (
@@ -125,84 +111,7 @@ function flatten(object, settings = {}) {
     toReturn[key] = object[key];
   }
 
-  // console.log('BE', toReturn);
-
-  // if (settings.keepLastIntact) {
-  //   const returnWithLastIntact = {};
-  //   Object.keys(toReturn).forEach((path) => {
-  //     // split paths
-  //     const a = path
-  //       .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
-  //       .map((p) => __unquote(p));
-
-  //     // single part path
-  //     if (a.length <= 1)
-  //       return (returnWithLastIntact[a.join(settings.separator)] =
-  //         toReturn[path]);
-
-  //     const propName = a.slice(-1)[0];
-  //     let p = a
-  //       .slice(0, -1)
-  //       .map((t) => {
-  //         if (t.includes(settings.separator))
-  //           return `${settings.quoteCharacter}${t}${settings.quoteCharacter}`;
-  //         return t;
-  //       })
-  //       .join(settings.separator);
-  //     p = __unquote(p);
-
-  //     // if (propName === '__isFlattened') return;
-
-  //     if (propName.match(/\[[0-9]+\]$/gm)) {
-  //       p = p += `${settings.separator}${propName.split('[')[0]}`;
-  //       if (returnWithLastIntact[p] === undefined) returnWithLastIntact[p] = [];
-  //       returnWithLastIntact[p].push(toReturn[path]);
-  //     } else {
-  //       if (returnWithLastIntact[p] === undefined) returnWithLastIntact[p] = {};
-  //       returnWithLastIntact[p][propName] = toReturn[path];
-  //     }
-  //   });
-  //   // console.log('LA', returnWithLastIntact);
-
-  //   return returnWithLastIntact;
-  // }
-
-  // console.log(toReturn);
-
   return toReturn;
 }
-
-// const obj1 = {},
-//   obj2 = {};
-
-// obj1.hello = 'hello world';
-// obj1.obj2 = obj2;
-// obj2.world = 'wodls';
-// obj2.obj1 = obj1;
-
-// console.log(
-//   flatten(
-//     {
-//       object1: obj1,
-//       object2: obj2,
-//       someting: {
-//         cool: 'hello'
-//       },
-//       popop: null,
-//       hello: {
-//         coo: null
-//       },
-//       coco: ['hello', 'world'],
-//       world: {
-//         'coco.plop': {
-//           yep: 'dsojiofj'
-//         }
-//       }
-//     },
-//     {
-//       keepLastIntact: true
-//     }
-//   )
-// );
 
 export default flatten;

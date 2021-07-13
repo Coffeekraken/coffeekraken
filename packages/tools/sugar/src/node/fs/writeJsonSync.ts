@@ -2,8 +2,9 @@
 
 import __folderPath from './folderPath';
 import __ensureDirSync from './ensureDirSync';
-import __fs from 'fs-extra';
+import __fs from 'fs';
 import __replacePathTokens from '../path/replacePathTokens';
+import __stringify from '../../shared/json/stringify';
 
 /**
  * @name        writeJsonSync
@@ -30,7 +31,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  *    writeJsonSync('my/cool/file.json', { hello: 'world' });
  * } catch(e) {}
  *
- * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -38,6 +38,7 @@ function writeJsonSync(path, data, options = {}) {
   path = __replacePathTokens(path);
   const folderPath = __folderPath(path);
   __ensureDirSync(folderPath);
-  __fs.outputJsonSync(path, data, options);
+  const jsonStr = __stringify(data, null, 4);
+  __fs.writeFileSync(path, jsonStr);
 }
 export default writeJsonSync;

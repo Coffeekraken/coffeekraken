@@ -1,0 +1,18 @@
+/**
+*
+* @name      math-cos
+* @namespace            scss.core.math.function
+* @type      function
+*
+* Calculate the cosinus of the passed angle
+*
+* @param         {Number}        $angle      The angle to calculate the cosinus from
+* @return        {Number}                    The calculated cosinus
+*
+* @example     scss
+* Sugar.math-cos(10); // => 6.6645643378
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

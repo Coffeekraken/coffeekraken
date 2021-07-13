@@ -1,0 +1,19 @@
+/**
+*
+* @name      list-remove-nth
+* @namespace            scss.core.list.function
+* @type      function
+*
+* Remove item from list using an index
+*
+* @param         {List}          $list           The list to process
+* @param         {Number}        $index          The index of the item to remove from the list
+* @return        {List}                          The processes list
+*
+* @example       scss
+* Sugar.list-remove-nth(('hello','world'), 1); // ('hello')
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

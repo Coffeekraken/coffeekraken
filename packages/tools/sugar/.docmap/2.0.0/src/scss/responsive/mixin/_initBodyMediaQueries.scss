@@ -1,0 +1,18 @@
+/**
+*
+* @name                init-body-media-queries
+* @namespace            scss.responsive.mixin
+* @type                Mixin
+*
+* This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+* This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+* So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+* namespace.
+*
+* @example             scss
+* @include Sugar.init-body-media-queries();
+*
+* @since           2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

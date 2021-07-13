@@ -1,0 +1,18 @@
+/**
+*
+* @name              paragraph
+* @namespace            scss.component.paragraph.mixin
+* @type              Mixin
+*
+* This mixin generate all the properties for a paragraph depending on the parameters you set.
+*
+* @param         {Number}        [$name=default]          The paragraph "type" you want to generate. These can be found in the 'settings.components.paragraph' settings
+* @param         {Number}        [$font-size='settings.components.title.h#{level}.font-size']      Specify the font size for the title
+* @param         {String}        [$font-family='settings.components.title.h#{level}.font-family']      Specify the font family for the title
+* @param         {Number}        [$vr-margin-bottom='settings.components.title.h#{level}.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context
+* @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

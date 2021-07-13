@@ -1,0 +1,18 @@
+/**
+*
+* @name    color-saturation
+* @namespace            scss.core.color
+* @type          Function
+*
+* Return the saturation of the passed color
+*
+* @param       {Color}     $color      The color to process
+* @return      {Number}                The color saturation
+*
+* @example   scss
+* Sugar.color-saturation(#e1d7d2); // => 20%
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

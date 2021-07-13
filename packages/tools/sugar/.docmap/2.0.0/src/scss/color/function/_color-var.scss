@@ -1,0 +1,33 @@
+/**
+*
+* @name      color-var
+* @namespace            scss.core.color
+* @type      function
+*
+* Get a registered color by name or wrap a new color into a sugar.color call
+* to manipulate it with ease.
+* Supported modifier :
+* - hue {Deg}
+* - lighten {Percent}
+* - darken {Percent}
+* - saturate {Percent}
+* - desaturate {Percent}
+* - grayscale {Boolean}
+* - complement {Boolean}
+* - invert {Boolean}
+* - opacity {Percent}
+* - mix {Color}
+* - lightness {Percent}
+* - saturation {Percent}
+*
+* @param 		{String|Color} 		$color 				The color name or the color value to manipulate
+* @param 		{String} 			[$modifier=null] 	The color modifier to apply. See color-mod css function signature for more infos: https://www.digitalocean.com/community/tutorials/css-color-function
+* @return 		{Color} 									The actual color value
+*
+* @example 	 	scss
+* // default color (settings.colors.default)
+* $myColor : Sugar.color-var(default);
+*
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

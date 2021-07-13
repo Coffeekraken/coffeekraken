@@ -1,0 +1,48 @@
+/**
+*
+* @name      convert
+* @namespace            scss.unit.function
+* @type      function
+*
+* Convert a passed value to the wanted unit
+* The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.
+*
+* Available conversions
+* - from px
+* 	- to em
+* 	- to rem
+* 	- to pt
+* 	- to %
+*
+* - from em
+* 	- to rem
+* 	- to px
+* 	- to pt
+* 	- to %
+*
+* - from pt
+* 	- to em
+* 	- to rem
+* 	- to px
+* 	- to pt
+* 	- to %
+*
+* - from rem
+* 	- to em
+* 	- to px
+* 	- to pt
+* 	- to %
+*
+* @param 			{Number} 		$value 			The value to convert
+* @param 			{String} 		$unit 			The unit in which to convert the value
+* @return 			{Number} 						The converted value
+*
+* @example     scss
+* // if the settings.typography.font-size === 16px
+* Sugar.convert(24px, rem) // 1.5rem
+* Sugar.convert(3rem, pt) // 36pt
+*
+* @since      1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

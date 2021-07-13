@@ -1,3 +1,4 @@
+
 import __SClass from '@coffeekraken/s-class';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SGlob from '@coffeekraken/s-glob';
@@ -9,12 +10,23 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
+import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __path from 'path';
 import __SDocMapBuildParamsInterface from './interface/SDocMapBuildParamsInterface';
 import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface';
+import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
+import __SDocmapInstallSnapshotParamsInterface from './interface/SDocmapInstallSnapshotParamsInterface';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __require from '@coffeekraken/sugar/node/esm/require';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import __SDuration from '@coffeekraken/s-duration';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __npmInstall from '@coffeekraken/sugar/node/npm/install';
+import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 
 /**
  * @name                SDocMap
@@ -57,9 +69,18 @@ export interface ISDocMapBuildParams {
   outPath: string;
 }
 
+export interface ISDocMapSnapshotParams {
+  outDir: string;
+}
+
+export interface ISDocmapInstallSnapshotsParams {
+  glob: string;
+}
+
 export interface ISDocMapReadParams {
   input: string;
   path: string;
+  inline: boolean;
 }
 
 export interface ISDocMapCtorSettings {}
@@ -197,10 +218,21 @@ class SDocMap extends __SClass implements ISDocMap {
             loadJson(extendsPackageName, extendsRootPath);
           });
 
-          Object.keys(docmapJson.map ?? {}).forEach(namespace => {
+          Object.keys(docmapJson.map ?? {}).forEach((namespace, i) => {
             const obj = docmapJson.map[namespace];
             obj.path = __path.resolve(extendsRootPath, obj.relPath);
             docmapJson.map[namespace] = obj;
+
+            if (finalParams.inline) {
+              const content = __fs.readFileSync(obj.path, 'utf8').toString();
+              if (obj.type === 'markdown') {
+                obj.content = content;
+              } else {
+                const docblock = new __SDocblock(content);
+                obj.content = docblock.toString();
+              }
+              delete obj.path;
+            }
           });
 
           finalDocmapJson.map = {
@@ -216,6 +248,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
       // return the final docmap
       resolve(finalDocmapJson);
+    }, {
+      metas: {
+        id: `read`
+      }
     });
   }
 
@@ -226,7 +262,7 @@ class SDocMap extends __SClass implements ISDocMap {
    * This method allows you to specify one or more glob patterns to scan files for "@namespace" docblock tags
    * and extract all the necessary informations to build the docmap.json file
    *
-   * @param         {String|Array<String>}          sources         The glob pattern(s) you want to scan files in
+   * @param         {Partial<ISDocMapBuildParams>}          params        The params to use to build your docmap
    * @return        {SPromise}                                     A promise resolved once the scan process has been finished
    *
    * @since         2.0.0
@@ -274,9 +310,9 @@ class SDocMap extends __SClass implements ISDocMap {
         });
 
         const globs: string[] = [`${packageRoot}/node_modules/**{0,2}/docmap.json`];
-        if (packageRoot !== packageMonoRoot) {
-          globs.push(`${packageMonoRoot}/node_modules/**{0,2}/docmap.json`);
-        }
+        // if (packageRoot !== packageMonoRoot) {
+        //   globs.push(`${packageMonoRoot}/node_modules/**{0,2}/docmap.json`);
+        // }
 
         const currentDocmapFiles = __SGlob.resolve(globs, {
           exclude: finalParams.exclude ?? []
@@ -390,8 +426,209 @@ class SDocMap extends __SClass implements ISDocMap {
 
       resolve(docmapJson);
 
+    }, {
+      metas: {
+        id: `build`
+      }
     });
   }
+
+  /**
+   * @name        installSnapshot
+   * @type        Function
+   * @async
+   * 
+   * This method allows you to install all the snapshots dependencies
+   * to make the access to these works.
+   *
+   * @param         {Partial<ISDocmapInstallSnapshotsParams>}        params      Some params to configure your snapshots installation process
+   * @returns       {Promise<any>}              A promise resolved with the installation process result
+   * 
+   * @since   2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  installSnapshot(params: Partial<ISDocmapInstallSnapshotsParams>): Promise<any> {
+    return new __SPromise(async ({resolve, reject, emit, pipe}) => {
+
+      const finalParams = <ISDocmapInstallSnapshotsParams>__deepMerge(
+        __SDocmapInstallSnapshotParamsInterface.defaults(),
+        params ?? {}
+      );
+
+      const duration = new __SDuration();
+
+      const folders = __SGlob.resolve(finalParams.glob, {
+        defaultExcludes: false
+      });
+
+      if (!folders.length) {
+        emit('log', {
+          value: `<cyan>[info]</cyan> It seem's that you don't have any snapshot(s) matching the glob "<cyan>${params.glob}</cyan>". Try generating a snapshot first with the command "<yellow>sugar docmap.snapshot</yellow>"`
+        });
+        return resolve();
+      }
+
+      for (let i=0; i<folders.length; i++) {
+        const folderPath = <string>folders[i];
+
+        emit('log', {
+          value: `<yellow>[install]</yellow> Installing snapshot <yellow>${__path.relative(__packageRootDir(), folderPath)}</yellow>`
+        });
+
+        const packageJson = __packageJson();
+        const packageMonoRootPath = __packageRoot(process.cwd(), true);
+
+        // symlink repos from monorepo
+        const removedDependencies = {}, removedDevDependencies = {};
+        if (packageMonoRootPath !== __packageRoot()) {
+          const packageJsonFiles = __SGlob.resolve(`${packageMonoRootPath}/**/package.json`);
+          packageJsonFiles.forEach(file => {
+            
+            if (!packageJson.dependencies[file.content.name] && !packageJson.devDependencies[file.content.name]) return;
+
+            if (packageJson.dependencies[file.content.name]) {
+              removedDependencies[file.content.name] = packageJson.dependencies[file.content.name];
+              delete packageJson.dependencies[file.content.name];
+            }
+            if (packageJson.devDependencies[file.content.name]) {
+              removedDevDependencies[file.content.name] = packageJson.devDependencies[file.content.name];
+              delete packageJson.devDependencies[file.content.name];
+            }
+            
+            const packageFolderPath = __folderPath(file.path);
+            const destinationFolderPath = `${folderPath}/node_modules/${file.content.name}`;
+            __ensureDirSync(destinationFolderPath.split('/').slice(0,-1).join('/'));
+            try {
+              __fs.unlinkSync(destinationFolderPath);
+            } catch(e) {}
+            __fs.symlinkSync(packageFolderPath, destinationFolderPath);
+          });
+        }
+        if (Object.keys(removedDependencies).length || Object.keys(removedDevDependencies).length) {
+          __writeJsonSync(`${folderPath}/package.json`, packageJson);
+        }
+
+        // installing dependencies
+        await pipe(__npmInstall({
+          cwd: folderPath,
+          yarn: true,
+          args: {
+            silent: false
+          }
+        }));
+
+        // restoring package.json
+        if (Object.keys(removedDependencies).length || Object.keys(removedDevDependencies).length) {
+          packageJson.dependencies = {
+            ...packageJson.dependencies,
+            ...removedDependencies
+          };
+          packageJson.devDependencies = {
+            ...packageJson.devDependencies,
+            ...removedDevDependencies
+          };
+          __writeJsonSync(`${folderPath}/package.json`, packageJson);
+        }
+
+        emit('log', {
+          value: `<green>[success]</green> Snapshot "<yellow>${__path.relative(__packageRootDir(), folderPath)}</yellow>" installed <green>successfully</green>`
+        });
+
+      }
+
+      emit('log', {
+        value: `<green>[success]</green> Snapshot(s) installed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`
+      });
+
+    }, {
+      metas: {
+        id: `installSnapshots`
+      }
+    })
+  }
+
+  /**
+   * @name        snapshot
+   * @type        Function
+   * @async
+   * 
+   * This method allows you to make a snapshot of your project doc in the docmap.json format
+   * and store it to have access later. It is usefull to make versions backup for example.
+   * 
+   * @param         {Partial<ISDocMapSnapshotParams>}          params       THe params you want to make your snapshot
+   * @return        {SPromise}                                     A promise resolved once the scan process has been finished
+   *
+   * @since         2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  snapshot(params: Partial<ISDocMapSnapshotParams>): Promise<any> {
+    return new __SPromise(async ({resolve, reject, emit, pipe}) => {
+
+      const finalParams = <ISDocMapSnapshotParams>(
+        __deepMerge(__SDocmapSnapshotParamsInterface.defaults(), params)
+      );
+
+      const duration = new __SDuration();
+
+      emit('log', {
+        value: `<yellow>[snapshot]</yellow> Creating a docmap snapshot. This can take some time so please be patient...`
+      });
+      
+      if (!__fs.existsSync(`${__packageRootDir()}/package.json`)) {
+        throw new Error(`<red>[${this.constructor.name}.snapshot]</red> Sorry but a package.json file is required in order to create a snapshot...`);
+      }
+      if (!__fs.existsSync(`${__packageRootDir()}/docmap.json`)) {
+        throw new Error(`<red>[${this.constructor.name}.snapshot]</red> Sorry but a docmap.json file is required in order to create a snapshot...`);
+      }
+      
+      const docmapJson = __readJsonSync(`${__packageRootDir()}/docmap.json`);
+
+      // write the docmap
+      const outDir = __replaceTokens(finalParams.outDir);
+      __removeSync(outDir);
+      __ensureDirSync(outDir);
+
+      // copy package.json file
+      __copySync(`${__packageRootDir()}/package.json`, `${outDir}/package.json`);
+      __copySync(`${__packageRootDir()}/docmap.json`, `${outDir}/docmap.json`);
+      try {
+        __copySync(`${__packageRootDir()}/package-lock.json`, `${outDir}/package-lock.json`);
+        __copySync(`${__packageRootDir()}/yarn.lock`, `${outDir}/yarn.lock`);
+      } catch(e) {}
+
+      const fullMap = {
+        ...docmapJson.map,
+        ...docmapJson.generated.map
+      };
+
+      Object.keys(fullMap).forEach(namespace => {
+        const docmapObj = fullMap[namespace];
+        const path = __path.resolve(__packageRootDir(), docmapObj.relPath);
+        let content = __fs.readFileSync(path, 'utf8').toString();
+        if (docmapObj.type === 'markdown') {
+        } else {
+          const docblock = new __SDocblock(content);
+          content = docblock.toString();
+        }
+        __writeFileSync(__path.resolve(outDir, docmapObj.relPath), content);
+      });
+
+      emit('log', {
+        value: `<green>[save]</green> Snapshot saved under "<cyan>${__path.relative(process.cwd(), outDir)}</cyan>"`
+      });
+      emit('log', {
+        value: `<green>[success]</green> Snapshot generated <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`
+      });
+
+      resolve();
+
+    }, {
+      metas: {
+        id: `snapshot`
+      }
+    });
+  }
+
 }
 
 export default SDocMap;

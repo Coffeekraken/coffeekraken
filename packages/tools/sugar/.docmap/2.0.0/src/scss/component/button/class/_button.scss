@@ -1,0 +1,90 @@
+/**
+*
+* @name            button-classes
+* @namespace            scss.component.button.class
+* @type            Mixin
+*
+* This mixin generate all the css needed to display properly some buttons.
+*
+* @feature
+* - Support all the registered sugar colors like ```primary```, ```secondary```, etc...
+* - Support for sizes like ```smaller```, ```small```, ```medium```, etc...
+* - Support disable state
+*
+* @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+* @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+* @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+* @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+* @param       {String}        [$name='btn']       The className to use for the generation
+*
+* @example         html
+* <a class="#{sel(btn)}">I'm a cool button</a>
+*
+* @example           scss
+* @include Sugar.button-classes();
+* @include Sugar.classes('sugar.component.button');
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name              .#{sel($name)}, .#{sel(#{tf-class()})} button
+* @namespace            scss.component.button
+* @type              Classname
+*
+* This class can be applied on any ```#{$name}``` component
+*
+* @example         html
+* <a class="#{sel($name)}">I am a cool button</a>
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} button.#{sel($size)}
+* @namespace            scss.component.button.#{$size}
+* @type              Classname
+*
+* This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
+*
+* @example         html
+* <a class="#{sel($name)} #{sel(#{$name}--#{$size})}">I am a cool #{$size} button</a>
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name              .#{sel($name)}, .#{sel(#{tf-class()})} button
+* @namespace            scss.component.button
+* @type              Classname
+*
+* This class can be applied on any ```#{$name}``` component
+*
+* @example         html
+* <a class="#{sel($name)}">I am a cool button</a>
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} button.#{sel($color)}
+* @namespace            scss.component.button.#{$color}
+* @type              Classname
+*
+* This class can be applied on any ```#{$name}``` component to specify his color to ```#{$color}```
+*
+* @example         html
+* <a class="#{sel($name)} #{sel(#{$name}--#{$color})}">I am a cool #{$color} button</a>
+*
+* @since       2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

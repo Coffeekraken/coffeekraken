@@ -21,6 +21,10 @@ class SDocMapReadParamsInterface extends __SInterface {
       type: 'String',
       default: __SSugarConfig.get('docmap.read.input')
     },
+    inline: {
+      type: 'Boolean',
+      default: false
+    }
     // cache: {
     //   type: 'Boolean',
     //   default: __SSugarConfig.get('docmap.cache')

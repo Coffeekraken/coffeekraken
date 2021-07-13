@@ -1,0 +1,28 @@
+/**
+*
+* @name      context-setup
+* @namespace            scss.core.context.mixin
+* @type      mixin
+*
+* Register a context with a name to use it later
+*
+* @param 			{String} 		$name 			The context name
+* @param 			{Map} 			$settings 		The settings to override for this context
+*
+* @example       scss
+* \@include Sugar.context-setup(my-cool-context, (
+* 		look-and-feel : (
+* 			padding-vertical : (
+* 				default : 0.6em
+* 			)
+* 		)
+* ));
+*
+* // using your context
+* \@include Sugar.context(my-cool-context) {
+* 		Sugar.look-and-feel(padding-vertical); // => 0.6em
+* }
+*
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

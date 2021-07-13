@@ -1,0 +1,18 @@
+/**
+*
+* @name    color-hue
+* @namespace            scss.core.color
+* @type          Function
+*
+* Return the hue of the passed color
+*
+* @param       {Color}     $color      The color to process
+* @return      {Number}                The color hue
+*
+* @example   scss
+* Sugar.color-hue(#e1d7d2); // => 20deg
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

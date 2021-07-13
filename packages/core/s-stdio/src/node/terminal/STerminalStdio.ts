@@ -7,6 +7,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import { terminal as __terminalKit } from 'terminal-kit';
 import __countLine from '@coffeekraken/sugar/shared/string/countLine';
+import __splitEvery from '@coffeekraken/sugar/shared/string/splitEvery';
 
 /**
  * @name            STerminalStdio
@@ -187,18 +188,38 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     }
 
     let lines = renderedStr.split('\n');
-    // const firstStr = lines[0];
-    // const idPart = firstStr.split('│')[0];
-    const idLength = __countLine(__parseHtml(idStr));
+    const idLength = __countLine(__parseHtml(idStr)),
+          idSeparatorLength = __countLine(__parseHtml(idSeparator)),
+          lineStartLength = __countLine(__parseHtml(lineStart));
+    const maxLineLenght = process.stdout.columns - idLength - idSeparatorLength - lineStartLength;
 
-    lines = lines.map((line, i) => {
-      if (needId) return `${lineStart}${idStr}${idSeparator}${line.trim()}`;
-      return `${lineStart}${' '.repeat(idLength)}${idSeparator}${line.trim()}`;
+    const finalLines: string[] = [];
+
+    lines.forEach((line, i) => {
+
+      if (__countLine(line) > maxLineLenght) {
+        __splitEvery(line, maxLineLenght).forEach((l, j) => {
+
+          if (j === 0) {
+            if (needId) {
+              finalLines.push(`${lineStart}${idStr}${idSeparator}${l.trim()}`);
+            } else {
+              finalLines.push(`${lineStart}${' '.repeat(idLength)}${idSeparator}${l.trim()}`)
+            }
+          } else {
+            finalLines.push(`${lineStart}${' '.repeat(idLength)}${idSeparator}${l.trim()}`)
+          }
+
+        });
+      } else {
+        finalLines.push(`${lineStart}${idStr}${idSeparator}${line.trim()}`);
+      }
+
     })
 
     // log the string
     try {
-      console.log(__parseHtml(lines.join('\n')));
+      console.log(__parseHtml(finalLines.join('\n')));
     } catch (e) {}
   }
 }

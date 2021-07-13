@@ -1,0 +1,29 @@
+/**
+*
+* @name      position-map
+* @namespace            scss.util.function
+* @type      function
+*
+* Return the representation of a position styling like position:absolute; top:0; left:100%; etc...
+* This function gives you some shortcuts to align your element top, bottom, middle, center, etc...
+*
+* @param 		{String} 			[$position=absolute] 			The position css property
+* @param 		{String} 			[$vertical-align=top] 			The vertical alignement wanted (top,middle,bottom)
+* @param 		{String} 			[$align=left] 					The horizontal alignement wanted (left,center,right)
+* @param 		{Number} 			[$top=null] 					The top property wanted
+* @param 		{Number} 			[$right=null] 					The right property wanted
+* @param 		{Number} 			[$bottom=null] 					The bottom property wanted
+* @param 		{Number} 			[$left=null] 					The left property wanted
+* @return 		{Map} 												The map representation of the position wanted
+*
+* @example   scss
+* Sugar.position-map(absolute, top, right);
+* Sugar.position-map(absolute, middle, center);
+* Sugar.position-map(relative, bottom, right);
+* Sugar.position-map(absolute, bottom, center);
+* // etc...
+*
+* @since      1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

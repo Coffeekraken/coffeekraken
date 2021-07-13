@@ -1,0 +1,18 @@
+/**
+*
+* @name      list-pop
+* @namespace            scss.core.list.function
+* @type      function
+*
+* Remove the last item of the passed list
+*
+* @param       {List}        $list         The list to process
+* @return      {List}                      The processed list
+*
+* @example       scss
+* Sugar.list-pop(('hello', 'world')); // ('hello')
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

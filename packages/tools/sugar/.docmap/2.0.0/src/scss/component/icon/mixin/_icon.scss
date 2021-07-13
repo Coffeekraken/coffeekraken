@@ -1,0 +1,20 @@
+/**
+*
+* @name      icon
+* @namespace            scss.icon.mixin
+* @type      mixin
+*
+* Apply an icon on the element. This mixin support font-awesome and custom icons systems that have an icon name formated like "icon-{name}"
+* The custom icon style if you pass as name "user" will extend %icon, %icon-user, .icon and .icon-user classes
+*
+* @param 		{String} 		$name 		The icon name to apply
+* @param     {Color}     [$color=null]    The color wanted for the icon
+*
+* @example 	scss
+* .my-cool-icon {
+* 	\@include Sugar.icon(fa-user, primary);
+* }
+*
+* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

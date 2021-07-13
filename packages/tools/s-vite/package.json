@@ -17,7 +17,6 @@
     "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
     "@coffeekraken/s-riotjs-plugin-postcss-preprocessor": "^2.0.0",
     "@coffeekraken/s-sugar-config": "^2.0.0",
-    "@coffeekraken/s-svelte-preprocess": "^2.0.0",
     "@coffeekraken/s-vite-plugin-postcss": "^2.0.0",
     "@coffeekraken/s-vite-plugin-riotjs": "^2.0.0",
     "@coffeekraken/s-vite-plugin-sugar": "^2.0.0",

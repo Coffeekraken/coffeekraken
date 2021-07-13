@@ -1,0 +1,25 @@
+/**
+*
+* @name                    matchExcludeGlobs
+* @namespace            node.path
+* @type                    Function
+* @platform        ts
+* @platform        node
+* @status          beta
+*
+* This function check if the passed path match one or more exclude globs specified in the config "storage.exclude"
+*
+* @param           {String}            path            The path to check
+* @return          {Boolean}                           true if the path match at least 1 exclude glob, false if not
+*
+* @example         js
+* import matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs';
+* if (matchExcludeGlobs('something/cool.js')) {
+*      // ...
+* }
+*
+* @see             https://www.npmjs.com/package/minimatch
+* @since           2.0.0
+* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

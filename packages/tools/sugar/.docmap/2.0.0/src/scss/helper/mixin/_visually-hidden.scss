@@ -1,0 +1,18 @@
+/**
+*
+* @name      visually-hidden
+* @namespace            scss.helper.mixin
+* @type      mixin
+*
+* Hide an element only visually. This ensure that the element is still correctly displayed in the page for SEO
+* but will not being visible to the user
+*
+* @example 	scss
+* .my-cool-element {
+* 	\@include Sugar.visually-hidden();
+* }
+*
+* @since       1.0.0
+* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

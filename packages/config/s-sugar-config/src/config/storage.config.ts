@@ -395,6 +395,8 @@ export default {
     '**/__wip__/**',
     '**/__TESTS/**',
     '**/__tests__/**',
-    '**/__tests__.wip/**'
+    '**/__tests__.wip/**',
+    '**/.*/**',
+    '**/node_modules/**'
   ]
 };

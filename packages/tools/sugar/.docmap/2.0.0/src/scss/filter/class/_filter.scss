@@ -1,0 +1,35 @@
+/**
+*
+* @name              filter-classes
+* @namespace            scss.filter.class
+* @type              Mixin
+*
+* This mixin generate all the "filter" related classes.
+*
+* @classname       #{sel(fi-[name])}        Apply the filter [name]
+*
+* @example         scss
+* @include Sugar.filter-classes();
+*
+* @since         2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name       	#{sel(fi-#{$name})}
+* @namespace            scss.filter.class
+* @class-namespace           sugar.filter.#{$name}
+* @type        Classname
+*
+* Apply the filter **#{$name}**
+*
+* @example 	html
+* <div class="#{sel(fi-#{$name})}">
+* 	I'm filtered with #{$name}
+* </div>
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

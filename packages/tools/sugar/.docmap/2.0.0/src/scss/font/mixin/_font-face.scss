@@ -1,0 +1,36 @@
+/**
+*
+* @name    font-face
+* @namespace            scss.font.mixin
+* @type      mixin
+*
+* Helper to print a font-face
+*
+* @param 			{String} 		$font-family 			The font-family
+* @param 			{String} 		$src 					The source url (only 1 extension)
+* @param 			{List} 			[$extensions=woff2] 	The extensions list that you have available
+* @param 			{String} 		[$font-weight=normal] 	The font-weight property
+* @param 			{String} 		[$font-style=normal] 	The font-style property
+* @param       {String}    [$font-display=auto]    The font-display property
+*
+* @example     scss
+* // if you have these extensions files : .woff .eot .woff2
+* \@include Sugar.font-face(
+* 		$name : my-cool-font,
+* 		$src : '/fonts/my-font.eot',
+* 		$extensions : eot woff woff2
+* )
+*
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name   			#{$font-family}
+* @styleguide 		Fonts / Faces
+* @display 		font
+* @font-family 	#{$font-family}
+* @font-style 		#{$font-style}
+* @font-weight 	#{$font-weight}
+
+*/

@@ -23,7 +23,7 @@ import __excludeGlobs from '../path/excludeGlobs';
  *
  * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for when using some "**" pattern
  * @param       {Partial<IResolveGlobSettings>}            [settings={}]           An object of settings to configure your glob process
- * @return      {Array}                                  An array of SFile instances
+ * @return      {SFile[]|String[]}                                  An array of SFile instances or an array of string if is a folder
  *
  * @todo      interface
  * @todo      doc
@@ -49,12 +49,12 @@ export interface IResolveGlobSettings {
   defaultExcludes: boolean;
 }
 
-export default function resolveGlob(globs: string | string[], settings: Partial<IResolveGlobSettings> = {}): __SFile[] {
+export default function resolveGlob(globs: string | string[], settings: Partial<IResolveGlobSettings> = {}): __SFile[] | string[] {
   settings = __deepMerge(
     {
       cwd: settings.cwd || process.cwd(),
       symlinks: true,
-      nodir: true,
+      nodir: false,
       contentRegExp: undefined,
       exclude: [],
       defaultExcludes: true
@@ -107,7 +107,9 @@ export default function resolveGlob(globs: string | string[], settings: Partial
       pathes = pathes.concat(
         __glob.sync(pattern, {
           cwd,
+          nodir: settings.nodir,
           dot: true,
+          follow: settings.symlinks,
           ignore: [
             ...(settings.exclude ?? []),
             ...settings.defaultExcludes ? __excludeGlobs() : []
@@ -135,6 +137,10 @@ export default function resolveGlob(globs: string | string[], settings: Partial
     }
 
     pathes.forEach((path) => {
+      if (__isDirectory(path)) {
+        filesArray.push(path);
+        return;
+      }
       const sFile = __SFile.new(path, {
         file: {
           cwd

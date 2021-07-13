@@ -62,6 +62,7 @@
     "download-file": "^0.1.5",
     "enquire": "^0.0.2",
     "esm": "^3.2.25",
+    "fast-safe-stringify": "^2.0.8",
     "fastdom": "^1.0.9",
     "filesize": "^6.1.0",
     "find-in-files": "^0.5.0",

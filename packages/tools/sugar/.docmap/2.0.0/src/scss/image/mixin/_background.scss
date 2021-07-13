@@ -1,0 +1,37 @@
+/**
+*
+* @name      background
+* @namespace            scss.image.mixin
+* @type      mixin
+*
+* Helper mixin to set a background image
+*
+* @param 			{String} 				[$repeat=null] 				The background-repeat property
+* @param 			{String} 				[$size=null] 				The background-size property
+* @param 			{String} 				[$attachment=null] 			The background-attachment property
+* @param 			{String} 				[$blend-mode=null] 			The background-blend-mode property
+* @param 			{String} 				[$clip=null] 				The background-clip property
+* @param 			{String} 				[$url=null] 				The background-image url property
+* @param 			{Number} 				[$width=null] 				The background-size width property
+* @param 			{Number} 				[$height=null] 				The background-size height property
+* @param 			{Number} 				[$top=null] 				The background-position top property
+* @param 			{Number} 				[$left=null] 				The background-position left property
+* @param 			{String} 				[$suffix2x=@2x] 			The suffix to add the the url if the 2x resolution if wanted
+* @param 			{String} 				[$suffix3x=@3x] 			The suffix to add the the url if the 3x resolution if wanted
+* @param 			{String} 				[$suffix4x=@4x] 			The suffix to add the the url if the 4x resolution if wanted
+* @param 			{List} 					[$resolution=null] 			The resolution wanted like 2x, 3x and 4x
+* @param 			{List} 					[$position=null] 			The background-position property
+*
+* @example     scss
+* .my-cool-element {
+* 		\@include Sugar.background(
+* 			$url : 'img/my-cool-image.jpg',
+* 			$size : cover,
+* 			$resolution : 2x 3x 4x
+* 		);
+* }
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

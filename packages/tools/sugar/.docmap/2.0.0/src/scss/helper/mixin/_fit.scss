@@ -1,0 +1,19 @@
+/**
+*
+* @name      fit
+* @namespace            scss.helper.mixin
+* @type      mixin
+*
+* Make the element fit his container.
+*
+* @param 	{String} 			[$position=null] 		The position how to fit the element.
+*
+* @example 	scss
+* .my-cool-element {
+* 	\@include Sugar.fit(absolute);
+* }
+*
+* @since       1.0.0
+* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

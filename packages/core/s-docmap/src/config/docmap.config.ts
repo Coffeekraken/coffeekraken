@@ -14,19 +14,42 @@ export default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: `${__packageRoot()}/docmap.json`,
+    input: `${__packageRoot()}/docmap.json`
+  },
+
+  snapshot: {
 
     /**
-     * @name        collect
-     * @namespace     config.docmap.read
-     * @type        Array<String>
+     * @name          outDir
+     * @namespace     config.docmap.snapshot
+     * @type          String
+     * @default       [config.storage.package.rootDir]/.docmap/%packageVersion.version
      * 
-     * Specify which "fields" you want to collect and make an array of value with
+     * Specify where to save the generated snapshot
      * 
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    collect: ['type','platform','status','author','since']
+    outDir: `[config.storage.package.rootDir]/.docmap/%packageJson.version`,
+    
+  },
+
+  installSnapshot: {
+
+    /**
+     * @name          glob
+     * @namespace     config.docmap.installSnapshot
+     * @type          String
+     * @default       [config.storage.package.rootDir]/.docmap/* /
+     * 
+     * Specify where to find the snapshot(s) to install. It must refer
+     * to folder(s) where a docmap.json and a package.json exists...
+     * 
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    glob: `[config.storage.package.rootDir]/.docmap/*`,
+    
   },
 
   build: {

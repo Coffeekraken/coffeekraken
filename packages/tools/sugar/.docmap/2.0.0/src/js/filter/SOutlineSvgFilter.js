@@ -1,0 +1,46 @@
+/**
+*
+* @name 		        SOutlineSvgFilter
+* @namespace            js.filter
+* @type            Class
+* @extends 	    	SSvgFilter
+* @platform          js
+* @platform          ts
+* @status        beta
+*
+* This class represent an outline filter that can be applied on any HTMLElement.
+*
+* @example 		js
+* const filter = new SOutlineSvgFilter();
+* filter.applyTo(myCoolHTMLElement);
+*
+* @todo      interface
+* @todo      doc
+* @todo      tests
+*
+* @since         1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name            constructor
+* @type            Function
+*
+* Constructor
+*
+* @param 		{Number} 		[radius=8] 		The amount of effect to apply
+*
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/
+/**
+*
+* @name          radius
+* @type          Number
+*
+* Get/Set the radius to produce the effect
+*
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

@@ -1,0 +1,18 @@
+/**
+*
+* @name      math-abs
+* @namespace            scss.core.math.function
+* @type      function
+*
+* Return the absolute version of the passed number
+*
+* @param         {Number}        $number       The number to process
+* @return        {Number}                      The absolute version of the number
+*
+* @example     scss
+* Sugar.math-abs(-10); // => 10
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

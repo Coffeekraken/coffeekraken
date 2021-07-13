@@ -1,0 +1,19 @@
+/**
+*
+* @name      math-asin
+* @namespace            scss.core.math.function
+* @type      function
+*
+* Calculate the sinus inverse
+*
+* @param         {Number}        $value        The value to use
+* @param         {String}        [$unit=deg]   The unit wanted. Possible values are deg, rad, grad and turn
+* @return        {Number}                      The calculated asin
+*
+* @example     scss
+* Sugar.math-asin(1, rad); // => 1.5698197643rad
+*
+* @since       1.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+
+*/

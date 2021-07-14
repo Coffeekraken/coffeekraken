@@ -19,6 +19,10 @@ class SDocMapSnapshotParamsInterface extends __SInterface {
   static definition = {
     outDir: {
         type: 'String',
+        path: {
+          absolute: true,
+          tokens: true
+        },
         default: __SSugarConfig.get('docmap.snapshot.outDir')
     }
   };

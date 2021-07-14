@@ -23,14 +23,14 @@ export default {
      * @name          outDir
      * @namespace     config.docmap.snapshot
      * @type          String
-     * @default       [config.storage.package.rootDir]/.docmap/%packageVersion.version
+     * @default       [config.storage.package.rootDir]/.docmap
      * 
      * Specify where to save the generated snapshot
      * 
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outDir: `[config.storage.package.rootDir]/.docmap/%packageJson.version`,
+    outDir: `[config.storage.package.rootDir]/.docmap`,
     
   },
 

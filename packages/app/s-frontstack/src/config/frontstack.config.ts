@@ -65,7 +65,7 @@ export default {
       title: 'Frontend server',
       description:
         'Frontend server using the @coffeekraken/s-frontend-server package',
-      process: 'sugard frontendServer.start',
+      process: 'sugar frontendServer.start',
       settings: {
         processManager: {
           restart: true
@@ -76,7 +76,7 @@ export default {
       id: 'postcssBuild',
       title: 'PostCSS build action',
       description: 'Build css using the amazing PostCSS package',
-      process: 'sugard postcss.build',
+      process: 'sugar postcss.build',
       settings: {
         processManager: {
           restart: true
@@ -87,7 +87,7 @@ export default {
       id: 'imagesBuild',
       title: 'Images build action',
       description: 'Build your images with ease. Compress, resize, webp version, etc...',
-      process: 'sugard images.build',
+      process: 'sugar images.build',
       settings: {
         processManager: {
           restart: true
@@ -98,7 +98,7 @@ export default {
       id: 'vite',
       title: 'Vite development stack',
       description: 'Allow to build files easily while developing',
-      process: 'sugard vite',
+      process: 'sugar vite',
       settings: {
         processManager: {
           restart: true
@@ -109,7 +109,7 @@ export default {
       id: 'viteBuild',
       title: 'Vite build stack',
       description: 'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
-      process: 'sugard vite.build',
+      process: 'sugar vite.build',
       settings: {
         processManager: {
           restart: true
@@ -121,7 +121,7 @@ export default {
       title: 'Docmap build action',
       description:
         'Allow to build and maintain up to date the docmap.json file',
-      process: 'sugard docmap.build --noExtends',
+      process: 'sugar docmap.build --noExtends',
       settings: {
         processManager: {
           restart: true

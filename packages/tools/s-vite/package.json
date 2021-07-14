@@ -22,6 +22,7 @@
     "@coffeekraken/s-vite-plugin-sugar": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
+    "@vitejs/plugin-vue": "^1.2.5",
     "chokidar": "^3.5.1",
     "glob-all": "^3.2.1",
     "picomatch": "^2.3.0",
@@ -34,11 +35,15 @@
     "postcss-property-lookup": "^2.0.0",
     "precss": "^4.0.0",
     "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-import-css": "^3.0.0",
     "rollup-plugin-uglify": "^6.0.4",
+    "rollup-plugin-vue": "^6.0.0",
+    "style-loader": "^3.1.0",
     "svelte": "^3.38.2",
     "url-parse": "^1.5.1",
     "vite": "^2.3.2",
-    "vite-plugin-imagemin": "^0.3.2"
+    "vite-plugin-imagemin": "^0.3.2",
+    "vite-plugin-singlefile": "^0.5.1"
   },
   "peerDependencies": {
     "postcss": "^7 || ^8"

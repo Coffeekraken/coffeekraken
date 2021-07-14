@@ -9,18 +9,20 @@
   ],
   "main": "./dist/js/lib.es.js",
   "scripts": {
-    "dev": "sugard frontstack dev",
-    "build": "sugard vite.build --lib",
-    "build.watch": "sugard vite.build --lib --watch",
+    "dev": "sugar frontstack dev",
+    "build": "sugar vite.build --lib",
+    "build.watch": "sugar vite.build --lib --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-component-utils": "^2.0.0",
     "@coffeekraken/s-clipboard-copy-component": "^2.0.0",
+    "@coffeekraken/s-component-utils": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
+    "@vue/web-component-wrapper": "^1.3.0",
     "highlight.js": "^10.7.2",
-    "prismjs": "^1.23.0"
+    "prismjs": "^1.23.0",
+    "vue": "^3.1.4"
   }
 }

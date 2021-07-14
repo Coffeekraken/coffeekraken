@@ -7,7 +7,7 @@ import { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __fs from 'fs';
 import __path from 'path';
-import __replacePathTokens from '@coffeekraken/sugar/node/path/replacePathTokens';
+import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
 
 /**
@@ -69,7 +69,7 @@ const ruleObj: ISDescriptorRule = {
 
     // tokens
     if (params.tokens && __isNode()) {
-      value = __replacePathTokens(value);
+      value = __replaceTokens(value);
     }
 
     if (params.glob) {

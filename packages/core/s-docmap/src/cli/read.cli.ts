@@ -11,5 +11,6 @@ export default async (stringArgs = '') => {
       interface: __SDocMapParamsReadInterface
     }
   });
-  console.log(await pro.run(stringArgs));
+  const res = await pro.run(stringArgs);
+  console.log(res);
 };

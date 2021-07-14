@@ -3,21 +3,6 @@
     "generated": {
         "extends": [],
         "map": {
-            "@coffeekraken.sugar.cli.sugar.cli": {
-                "name": "sugar.cli",
-                "type": "File",
-                "description": "This is the main sugar cli file that split the commands\nby calling the proper files with the parsed cli args",
-                "namespace": "@coffeekraken.sugar.cli",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "sugar.cli.js",
-                "extension": "cli",
-                "relPath": "src/cli/sugar.cli.js",
-                "children": {}
-            },
             "@coffeekraken.sugar.doc.readme": {
                 "name": "readme",
                 "type": "markdown",

@@ -119,7 +119,7 @@ export default {
      * @example         js
      * export default {
      *      specificParams: {
-     *          'myCoolFolder/*.js': {
+     *          'myCoolFolder/*': {
      *              quality: 20
      *          }
      *      }

@@ -2,7 +2,7 @@ import '@coffeekraken/s-inline-svg-component';
 import '@coffeekraken/s-activate-component';
 import "@coffeekraken/s-filtrable-input-component";
 import "@coffeekraken/s-request-component";
-import "@coffeekraken/s-code-example-component";
+import { define as __SCodeExampleComponentDefine } from "@coffeekraken/s-code-example-component";
 import "@coffeekraken/s-handlebars-component";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
@@ -11,6 +11,9 @@ import './components/docNav.riot';
 
 // generic
 import "./generic/docShortcut";
+
+// webcomponents
+__SCodeExampleComponentDefine();
 
 // features
 import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';

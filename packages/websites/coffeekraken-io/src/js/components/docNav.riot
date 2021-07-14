@@ -19,7 +19,7 @@
                                 { platform }
                             </label>
                             <label class="s-switch:accent" for="platform-{ platform }">
-                                <input name="platform-{ platform }" type="checkbox" id="platform-{ platform }" onchange="{() => _togglePlatform(platform)}" checked="{ state.saved.platforms.indexOf(platform) !== -1 }">
+                                <input name="platform-{ platform }" type="checkbox" id="platform-{ platform }" onchange="{() => _togglePlatform(platform)}" checked="{ (state.saved.platforms ?? []).indexOf(platform) !== -1 }">
                                 <div class="s-switch-handler"></div>
                             </label>
                         </dt>
@@ -36,7 +36,7 @@
                                 { type }
                             </label>
                             <label class="s-switch:accent" for="type-{ type }">
-                                <input name="type-{ type }" type="checkbox" id="type-{ type }" onchange="{() => _toggleType(type)}" checked="{ state.saved.types.indexOf(type) !== -1 }">
+                                <input name="type-{ type }" type="checkbox" id="type-{ type }" onchange="{() => _toggleType(type)}" checked="{ (state.saved.types ?? []).indexOf(type) !== -1 }">
                                 <div class="s-switch-handler"></div>
                             </label>
                         </dt>
@@ -53,7 +53,7 @@
                                 { status }
                             </label>
                             <label class="s-switch:accent" for="status-{ status }">
-                                <input name="status-{ status }" type="checkbox" id="status-{ status }" onchange="{() => _toggleStatus(status)}" checked="{ state.saved.statuses.indexOf(status) !== -1 }">
+                                <input name="status-{ status }" type="checkbox" id="status-{ status }" onchange="{() => _toggleStatus(status)}" checked="{ (state.saved.statuses ?? []).indexOf(status) !== -1 }">
                                 <div class="s-switch-handler"></div>
                             </label>
                         </dt>
@@ -357,6 +357,7 @@
                 window.localStorage.setItem('docState', JSON.stringify(this.state.saved));
             },
             _restoreState() {
+                // return;
                 const savedState = JSON.parse(window.localStorage.getItem('docState') ?? '{}');
                 this.update({
                     saved: savedState

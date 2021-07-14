@@ -5,10 +5,10 @@ import __childProcess from 'child_process';
 import __glob from 'glob-all';
 import __path from 'path';
 import __fs from 'fs';
-import __parseArgs from '../shared/cli/parseArgs';
+import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __SInterface from '@coffeekraken/s-interface';
-import __isPath from '../shared/is/path';
-import __parseHtml from '../shared/console/parseHtml';
+import __isPath from '@coffeekraken/sugar/shared/is/path';
+import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SBench from '@coffeekraken/s-bench';
@@ -17,7 +17,7 @@ import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 
 import * as Enquirer from 'enquirer';
 
-import '../node/index';
+import '@coffeekraken/sugar/node/index';
 
 class SSugarCliParamsInterface extends __SInterface {
   static definition = {

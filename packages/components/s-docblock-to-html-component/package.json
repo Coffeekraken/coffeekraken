@@ -6,8 +6,8 @@
   "homepage": "https://coffeekraken.io",
   "main": "./dist/js/lib.es.js",
   "scripts": {
-    "dev": "sugard frontstack",
-    "build": "sugard vite.build --lib",
+    "dev": "sugar frontstack",
+    "build": "sugar vite.build --lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

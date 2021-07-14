@@ -9,12 +9,19 @@ export default {
   plugins: [
     __path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`),
     // __path.resolve(`${__dirname()}/../node/plugins/sveltePlugin`),
+    __path.resolve(`${__dirname()}/../node/plugins/vuejsPlugin`),
     __path.resolve(`${__dirname()}/../node/plugins/riotjsPlugin`),
-    __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`)
+    __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`),
+    __path.resolve(__dirname(), '../node/singleFile')
   ],
   publicDir: '[config.storage.src.rootDir]',
   cacheDir: '[config.storage.package.cacheDir]/vite',
   clearScreen: false,
+  optimizeDeps: {
+      exclude: [
+        'vue'
+      ]
+    },
   build: {
     lib: {
       entry: '[config.storage.src.rootDir]/js/index.ts',

@@ -79,8 +79,8 @@ export interface ISDocmapInstallSnapshotsParams {
 
 export interface ISDocMapReadParams {
   input: string;
-  path: string;
-  inline: boolean;
+  snapshot: string;
+  snapshotDir: string;
 }
 
 export interface ISDocMapCtorSettings {}
@@ -175,31 +175,52 @@ class SDocMap extends __SClass implements ISDocMap {
         params ?? {}
       );
 
+      // snapshot param handling
+      if (finalParams.snapshot) {
+        finalParams.input = __path.resolve(finalParams.snapshotDir, finalParams.snapshot, 'docmap.json');
+      }
+
+      let docmapRootPath = __folderPath(finalParams.input);
+
       if (!__fs.existsSync(finalParams.input)) {
         throw new Error(
           `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${finalParams.input}</cyan>" does not exists...`
         );
       }
 
+      const packageMonoRoot = __packageRoot(process.cwd(), true);
+
       const extendedPackages: string[] = [];
       const finalDocmapJson = {
-        map: {}
+        meta: {
+          type: finalParams.snapshot ? 'snapshot' : 'current',
+          snapshot: finalParams.snapshot
+        },
+        map: {},
+        snapshots: []
       };
 
       function loadJson(packageNameOrPath, currentPath) {
         if (extendedPackages.indexOf(packageNameOrPath) !== -1) return;
         extendedPackages.push(packageNameOrPath);
 
-        let currentPathDocmapJsonPath;
-        try {
-          currentPathDocmapJsonPath = __require().resolve(`${packageNameOrPath}/docmap.json`);
-        } catch(e) {
-          // console.log('__', e);
+        let currentPathDocmapJsonPath,
+            potentialPackagePath = __path.resolve(docmapRootPath, 'node_modules', packageNameOrPath, 'docmap.json'),
+            potentialRootPackagePath = __path.resolve(packageMonoRoot, 'node_modules', packageNameOrPath, 'docmap.json');
+
+        if (__fs.existsSync(potentialPackagePath)) {
+          currentPathDocmapJsonPath = potentialPackagePath;
+        } else if (__fs.existsSync(`${packageNameOrPath}/docmap.json`)) {
+          currentPathDocmapJsonPath = `${packageNameOrPath}/docmap.json`;
+        } else if (__fs.existsSync(potentialRootPackagePath)) {
+          currentPathDocmapJsonPath = potentialRootPackagePath;
+        } else {
+          throw new Error(`<red>[read]</red> Sorry but the references docmap path/package "<yellow>${packageNameOrPath}</yellow>" does not exists`);
         }
 
         if (!currentPathDocmapJsonPath) return;
 
-        const extendsRootPath = __require().resolve(currentPathDocmapJsonPath).replace('/docmap.json', '');
+        const extendsRootPath = currentPathDocmapJsonPath.replace('/docmap.json', '');
 
         try {
           const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
@@ -222,17 +243,6 @@ class SDocMap extends __SClass implements ISDocMap {
             const obj = docmapJson.map[namespace];
             obj.path = __path.resolve(extendsRootPath, obj.relPath);
             docmapJson.map[namespace] = obj;
-
-            if (finalParams.inline) {
-              const content = __fs.readFileSync(obj.path, 'utf8').toString();
-              if (obj.type === 'markdown') {
-                obj.content = content;
-              } else {
-                const docblock = new __SDocblock(content);
-                obj.content = docblock.toString();
-              }
-              delete obj.path;
-            }
           });
 
           finalDocmapJson.map = {
@@ -244,7 +254,16 @@ class SDocMap extends __SClass implements ISDocMap {
         }
       }
 
-      loadJson(__packageRootDir(), __packageRootDir());
+      const docmapJsonFolderPath = __folderPath(finalParams.input);
+      loadJson(docmapJsonFolderPath, docmapJsonFolderPath);
+
+      // loadJson(__packageRootDir(), __packageRootDir());
+
+      // loading available snapshots
+      try {
+        const availableSnapshots = __fs.readdirSync(finalParams.snapshotDir);
+        finalDocmapJson.snapshots = availableSnapshots;
+      } catch(e) {}
 
       // return the final docmap
       resolve(finalDocmapJson);
@@ -482,15 +501,17 @@ class SDocMap extends __SClass implements ISDocMap {
         const removedDependencies = {}, removedDevDependencies = {};
         if (packageMonoRootPath !== __packageRoot()) {
           const packageJsonFiles = __SGlob.resolve(`${packageMonoRootPath}/**/package.json`);
-          packageJsonFiles.forEach(file => {
-            
-            if (!packageJson.dependencies[file.content.name] && !packageJson.devDependencies[file.content.name]) return;
 
-            if (packageJson.dependencies[file.content.name]) {
+          packageJsonFiles.forEach(file => {
+
+            if (file.dirPath === packageMonoRootPath) return;
+            if (!packageJson.dependencies?.[file.content.name] && !packageJson.devDependencies?.[file.content.name]) return;
+
+            if (packageJson.dependencies?.[file.content.name]) {
               removedDependencies[file.content.name] = packageJson.dependencies[file.content.name];
               delete packageJson.dependencies[file.content.name];
             }
-            if (packageJson.devDependencies[file.content.name]) {
+            if (packageJson.devDependencies?.[file.content.name]) {
               removedDevDependencies[file.content.name] = packageJson.devDependencies[file.content.name];
               delete packageJson.devDependencies[file.content.name];
             }
@@ -500,7 +521,8 @@ class SDocMap extends __SClass implements ISDocMap {
             __ensureDirSync(destinationFolderPath.split('/').slice(0,-1).join('/'));
             try {
               __fs.unlinkSync(destinationFolderPath);
-            } catch(e) {}
+            } catch(e) {
+            }
             __fs.symlinkSync(packageFolderPath, destinationFolderPath);
           });
         }
@@ -580,11 +602,12 @@ class SDocMap extends __SClass implements ISDocMap {
       if (!__fs.existsSync(`${__packageRootDir()}/docmap.json`)) {
         throw new Error(`<red>[${this.constructor.name}.snapshot]</red> Sorry but a docmap.json file is required in order to create a snapshot...`);
       }
-      
+
+      const packageJson = __packageJson();
       const docmapJson = __readJsonSync(`${__packageRootDir()}/docmap.json`);
 
       // write the docmap
-      const outDir = __replaceTokens(finalParams.outDir);
+      const outDir = __path.resolve(finalParams.outDir, packageJson.version);
       __removeSync(outDir);
       __ensureDirSync(outDir);
 

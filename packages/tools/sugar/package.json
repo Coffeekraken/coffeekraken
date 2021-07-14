@@ -12,9 +12,6 @@
       "url": "http://olivierbossel.com"
     }
   ],
-  "bin": {
-    "sugar": "./src/cli/sugar.cli.js"
-  },
   "license": "MIT",
   "scripts": {
     "test": "jest --silent"

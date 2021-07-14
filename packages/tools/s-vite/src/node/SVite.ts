@@ -5,7 +5,6 @@ import __SPromise from '@coffeekraken/s-promise';
 import __sRiotjsPluginPostcssPreprocessor from '@coffeekraken/s-riotjs-plugin-postcss-preprocessor';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __path from 'path';
 import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
@@ -14,7 +13,8 @@ import { build as __viteBuild, createServer as __viteServer } from 'vite';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
 import __SViteStartInterface from './start/interface/SViteStartInterface';
-
+import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
+import __rollupPluginImportCss from 'rollup-plugin-import-css/dist/plugin.esm';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -176,6 +176,7 @@ export default class SVite extends __SClass {
               target: params.target ?? 'modules',
               write: false,
               minify: params.minify,
+              cssCodeSplit: false,
               rollupOptions: {
                 input: params.input,
                 plugins: [],
@@ -209,6 +210,7 @@ export default class SVite extends __SClass {
                   summaryOnly: true
                 }));
           }
+          config.build.rollupOptions.plugins.push(__rollupPluginImportCss());
 
           // plugins
           if (!config.plugins) config.plugins = [];
@@ -245,7 +247,8 @@ export default class SVite extends __SClass {
           if (buildType.toLowerCase() === 'lib') {
             config.build.rollupOptions.external = [
               ...(config.build.rollupOptions.external ?? []),
-              ...Object.keys(__listNodeModulesPackages({ monorepo: true }))
+              ...Object.keys(__listNodeModulesPackages({ monorepo: true })),
+              'vue'
             ];
           }
 
@@ -313,8 +316,12 @@ export default class SVite extends __SClass {
           // process to bundle
           const res = await __viteBuild(config);
 
+          // console.log(res[0].output[0]);
+
           // stacking res inside the results object
           results[buildType] = res;
+
+
 
           // handle generated bundles
           if (!params.noWrite) {

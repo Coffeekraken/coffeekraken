@@ -30,6 +30,9 @@ export default function sRiotjsPluginPostcssPreprocessor(
     }
 
     const result = await postcss(plugins).process(code);
+
+    console.log(result);
+
     return {
       code: result.css,
       map: null

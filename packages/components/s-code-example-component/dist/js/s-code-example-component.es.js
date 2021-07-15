@@ -992,19 +992,12 @@ const _sfc_render = /* @__PURE__ */ _withId((_ctx, _cache, $props, $setup, $data
 });
 _sfc_main.render = _sfc_render;
 _sfc_main.__scopeId = "data-v-2c5508a7";
+if (!window.env)
+  window.env = {SUGAR: {}};
+window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');
 function define() {
   const webComponent = wrapper(_sfc_main, createApp, h);
   window.customElements.define("s-code-example", webComponent);
 }
 export default _sfc_main;
 export {define};
-
-                var $style = document.querySelector('style#SCodeExample_vue_vue_type_style_index_0_scoped_true_lang');
-                if (!$style) {
-                  $style = document.createElement('style');
-                  $style.setAttribute('id', 'SCodeExample_vue_vue_type_style_index_0_scoped_true_lang');
-                  $style.type = 'text/css';
-                  $style.appendChild(document.createTextNode(SCodeExample_vue_vue_type_style_index_0_scoped_true_lang));
-                  document.head.appendChild($style);
-                }
-              

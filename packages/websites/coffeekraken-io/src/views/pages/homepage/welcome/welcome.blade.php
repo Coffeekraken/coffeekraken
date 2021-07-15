@@ -10,8 +10,8 @@
 
             <div class="s-pb:100 s-pt:60">
                 <h1 class="s-typo:h1:bold s-mb:50">The frontend toolkit<br/>as good as a <span class="s-color:accent">coffee</span>...<br/>Also available with<br>a <span class="s-color:complementary">Sugar</span></h1>
-                <s-code-example class="s-mb:50 @desktop s-ml:-100">
-                    <template lang="bash" default-style>
+                <s-code-example class="s-mb:50 @desktop s-ml:-100" default-style>
+                    <template lang="bash">
 npm i @coffeekraken/sugar -g
 sugar frontstack.init my-cool-project
                     </template>

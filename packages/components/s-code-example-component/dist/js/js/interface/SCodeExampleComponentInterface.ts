@@ -1,9 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { SComponentUtilsDefaultInterface } from '@coffeekraken/s-component-utils';
 
 export default class SHighlightJsComponentInterface extends __SInterface {
   static definition = {
-    ...SComponentUtilsDefaultInterface.definition,
     theme: {
       type: 'String',
       default:
@@ -21,6 +19,10 @@ export default class SHighlightJsComponentInterface extends __SInterface {
       type: 'String',
       values: ['content', 'nav'],
       default: 'content'
+    },
+    language: {
+      type: 'String',
+      default: 'javascript'
     },
     defaultStyleClasses: {
       type: 'Object',

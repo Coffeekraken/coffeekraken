@@ -40,6 +40,11 @@ class SViteBuildInterface extends __SInterface {
       default: [],
       alias: 'f'
     },
+    verbose: {
+      type: 'Boolean',
+      default: true,
+      alias: 'v'
+    },
     target: {
       type: 'String',
       values: ['modules', 'esnext', 'es2015', 'es2016', 'es2020'],

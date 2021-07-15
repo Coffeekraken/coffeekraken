@@ -6,13 +6,17 @@ export default {
   root: '[config.storage.package.rootDir]',
   base: '/',
   mode: 'development',
+  resolve: {
+    alias: {
+      'vue': 'vue/dist/vue.esm-bundler.js'
+    }
+  },
   plugins: [
     __path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`),
     // __path.resolve(`${__dirname()}/../node/plugins/sveltePlugin`),
     __path.resolve(`${__dirname()}/../node/plugins/vuejsPlugin`),
     __path.resolve(`${__dirname()}/../node/plugins/riotjsPlugin`),
-    __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`),
-    __path.resolve(__dirname(), '../node/singleFile')
+    __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`)
   ],
   publicDir: '[config.storage.src.rootDir]',
   cacheDir: '[config.storage.package.cacheDir]/vite',

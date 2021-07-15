@@ -3,6 +3,7 @@ import __SClass from '@coffeekraken/s-class';
 import __mustache from 'mustache';
 import __SInterface from '@coffeekraken/s-interface';
 import __handlebars from 'handlebars';
+import __SInterface from '@coffeekraken/s-interface';
 import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 
 /**
@@ -37,10 +38,20 @@ export interface ISComponentUtilsDataProvider {
 
 export interface ISComponentUtilsSettings {
   interface?: __SInterface;
+  display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'grid'
 }
 
 export interface ISComponentUtilsCtorSettings {
   componentUtils: Partial<ISComponentUtilsSettings>;
+}
+
+export class SComponentUtilsDefaultInterface extends __SInterface {
+  static definition = {
+    defaultStyle: {
+        type: 'Boolean',
+      default: false
+    }
+  }
 }
 
 export default class SComponentUtils extends __SClass {
@@ -130,14 +141,21 @@ export default class SComponentUtils extends __SClass {
     super(__deepMerge({}, settings));
     this.node = node;
     this.name = node.tagName.toLowerCase();
-    this.props = props ?? {};
+    this.props = __deepMerge({}, props ?? {});
 
     // @ts-ignore
     this.node.setAttribute('s-mounted', true);
 
+    if (this._settings.display) {
+      this.node.style.display = this._settings.display;
+    }
+
     Object.keys((<any>this.constructor)._defaultProps).forEach(selector => {
       const defaultProps = (<any>this.constructor)._defaultProps[selector];
       if (selector === this.name || (this.node.id && selector === `#${this.node.id}`) || (this.node.id && selector === `${this.name}#${this.node.id}`)) {
+        Object.keys(this.props).forEach(propName => {
+          if (this.props[propName] === undefined) delete this.props[propName];
+        })
         this.props = __deepMerge(defaultProps, this.props);
       }
     });
@@ -147,13 +165,6 @@ export default class SComponentUtils extends __SClass {
         ...this._settings.interface.definition,
         target: {
           type: 'String'
-        },
-        defaultStyle: {
-          type: {
-            type: 'Boolean',
-            nullishAsTrue: true
-          },
-          default: false
         }
       };
       Object.keys(this._settings.interface.definition).forEach(propName => {

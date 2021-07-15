@@ -5,6 +5,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __sRiotjsPluginPostcssPreprocessor from '@coffeekraken/s-riotjs-plugin-postcss-preprocessor';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __path from 'path';
 import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
@@ -13,8 +14,6 @@ import { build as __viteBuild, createServer as __viteServer } from 'vite';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
 import __SViteStartInterface from './start/interface/SViteStartInterface';
-import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
-import __rollupPluginImportCss from 'rollup-plugin-import-css/dist/plugin.esm';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -27,6 +26,7 @@ export interface ISViteBuildParams {
   prod: boolean;
   noWrite: boolean;
   watch: boolean;
+  verbose: boolean;
   target: string;
   format: ('es' | 'umd' | 'cjs' | 'iife')[];
   type: ('module' | 'modules' | 'lib' | 'bundle')[];
@@ -155,9 +155,9 @@ export default class SVite extends __SClass {
         const viteConfig = __SugarConfig.get('vite');
         const duration = new __SDuration();
 
-        if (params.watch) {
-          throw new Error('The watch feature is not implemented yet...');
-        }
+        // if (params.watch) {
+        //   throw new Error('The watch feature is not implemented yet...');
+        // }
 
         // object to store results of each "type"
         const results = {};
@@ -210,7 +210,6 @@ export default class SVite extends __SClass {
                   summaryOnly: true
                 }));
           }
-          config.build.rollupOptions.plugins.push(__rollupPluginImportCss());
 
           // plugins
           if (!config.plugins) config.plugins = [];
@@ -287,28 +286,30 @@ export default class SVite extends __SClass {
             });
           }
 
-          emit('log', {
-            value: `<yellow>[build]</yellow> Starting "<magenta>${buildType}</magenta>" build`
-          });
-          emit('log', {
-            value: `<yellow>○</yellow> Environment : ${params.prod ? '<green>production</green>' : '<yellow>development</yellow>'}`
-          });
-          outputsFilenames.forEach(filename => {
+          if (params.verbose) {
             emit('log', {
-              value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(process.cwd(), `${__path.resolve(
-                viteConfig.build.outDir
-              )}/${filename}`)}</cyan>`
+              value: `<yellow>[build]</yellow> Starting "<magenta>${buildType}</magenta>" build`
             });
-          });
-          emit('log', {
-            value: `<yellow>○</yellow> Type        : ${buildType.toLowerCase()}`
-          });
-          emit('log', {
-            value: `<yellow>○</yellow> Target      : ${config.build.target}`
-          });
-          emit('log', {
-            value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(',')}`
-          });
+            emit('log', {
+              value: `<yellow>○</yellow> Environment : ${params.prod ? '<green>production</green>' : '<yellow>development</yellow>'}`
+            });
+            outputsFilenames.forEach(filename => {
+              emit('log', {
+                value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(process.cwd(), `${__path.resolve(
+                  viteConfig.build.outDir
+                )}/${filename}`)}</cyan>`
+              });
+            });
+            emit('log', {
+              value: `<yellow>○</yellow> Type        : ${buildType.toLowerCase()}`
+            });
+            emit('log', {
+              value: `<yellow>○</yellow> Target      : ${config.build.target}`
+            });
+            emit('log', {
+              value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(',')}`
+            });
+          }
 
           // set the outputs
           config.build.rollupOptions.output = outputs;
@@ -316,12 +317,55 @@ export default class SVite extends __SClass {
           // process to bundle
           const res = await __viteBuild(config);
 
-          // console.log(res[0].output[0]);
+          if (res.constructor?.name === 'WatchEmitter') {
+            res.on('change', async () => {
+              emit('log', {
+                value: `<yellow>[watch]</yellow> Update detected. Re-building...`
+              });
+              await pipe(this.build({
+                ...params,
+                watch: false,
+                verbose: false
+              }));
+              emit('log', {
+                value: `<cyan>[watch]</cyan> Watching for changes...`
+              });
+            });
+            await pipe(this.build({
+              ...params,
+              watch: false,
+              verbose: false
+            }));
+            emit('log', {
+              value: `<cyan>[watch]</cyan> Watching for changes...`
+            });
+            return;
+          }
+
+          // @TODO        check to replace this dirty fix
+          let outCode = res[0].output[0].code;
+          // var SCodeExample_vue_vue_type_style_index_0_scoped_true_lang
+          const cssVarMatches = outCode.match(/var\s[a-zA-Z0-9-_]+type_style[a-zA-Z0-9-_]+/gm);
+          if (cssVarMatches) {
+            cssVarMatches.forEach(match => {
+              const varName = match.replace(/var\s?/, '').trim();
+              const injectCode = `
+                var $style = document.querySelector('style#${varName}');
+                if (!$style) {
+                  $style = document.createElement('style');
+                  $style.setAttribute('id', '${varName}');
+                  $style.type = 'text/css';
+                  $style.appendChild(document.createTextNode(${varName}));
+                  document.head.appendChild($style);
+                }
+              `;
+              outCode += injectCode;
+              res[0].output[0].code = outCode;
+            });
+          }
 
           // stacking res inside the results object
           results[buildType] = res;
-
-
 
           // handle generated bundles
           if (!params.noWrite) {
@@ -348,11 +392,6 @@ export default class SVite extends __SClass {
         emit('log', {
           value: `<green>[success]</green> Build completed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`
         });
-        if (params.watch) {
-          emit('log', {
-            value: `<cyan>[watch]</cyan> Watching for changes...`
-          });
-        }
 
         resolve(results);
 

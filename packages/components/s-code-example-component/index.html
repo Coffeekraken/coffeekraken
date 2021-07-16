@@ -7,21 +7,42 @@
     <title>Svelte + TS + Vite App</title>
   </head>
   <body>
-    <script type="module" defer src="/src/js/index.ts"></script>
+    <script type="module">
+      import { createApp } from 'vue';
+      import SCodeExample, { webcomponent } from './src/js/index.ts';
+      
+      webcomponent();
+
+      const App = {
+        components: {
+          'SCodeExample': SCodeExample
+        },
+        template: `
+          <h1>Hello world</h1>
+          <s-code-example>
+            <textarea lang="js">console.log('hello');</textarea>
+          </s-code-example>
+        `
+      };
+
+      createApp(App).mount('#app')
+
+    </script>
     <s-code-example>
-      <div slot="default">
-        <div lang="js">
-          import __SClass from '@coffeekraken/s-class'; import __deepMerge from
-          '@coffeekraken/sugar/shared/object/deepMerge'; import __SInterface from
-          '@coffeekraken/s-interface'; import __mustache from 'mustache'; import
-          __stylesheetToString from '@coffeekraken/sugar/js/css/stylesheetToString';
-          export default SSVelteComponent;
-        </div>
-        <template lang="html">
-          <h1>Something cool</h1>
-          <p>iwfj wioef oiw efjoijw oiefjw ioefjwiofj oij</p>
-        </template>
-      </div>
+      <template lang="js">
+        import __SClass from '@coffeekraken/s-class'; import __deepMerge from
+        '@coffeekraken/sugar/shared/object/deepMerge'; import __SInterface from
+        '@coffeekraken/s-interface'; import __mustache from 'mustache'; import
+        __stylesheetToString from '@coffeekraken/sugar/js/css/stylesheetToString';
+        export default SSVelteComponent;
+      </template>
+      <template lang="html">
+        <h1>Something cool</h1>
+        <p>iwfj wioef oiw efjoijw oiefjw ioefjwiofj oij</p>
+      </template>
     </s-code-example>
+
+    <div id="app"></div>
+
   </body>
 </html>

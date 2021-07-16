@@ -2,7 +2,7 @@ import '@coffeekraken/s-inline-svg-component';
 import '@coffeekraken/s-activate-component';
 import "@coffeekraken/s-filtrable-input-component";
 import "@coffeekraken/s-request-component";
-import __SCodeExampleComponent, { define as __SCodeExampleComponentDefine } from "@coffeekraken/s-code-example-component";
+import __SCodeExampleComponent, { webcomponent as __SCodeExampleComponentDefine } from "@coffeekraken/s-code-example-component";
 import "@coffeekraken/s-handlebars-component";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
@@ -19,7 +19,6 @@ __SComponentUtils.setDefaultProps('s-code-example', {
         main: 's-tabs'
     }
 });
-
 
 // webcomponents
 __SCodeExampleComponentDefine();

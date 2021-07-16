@@ -4,22 +4,40 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Svelte + TS + Vite App</title>
+    <title>Vue js component</title>
   </head>
   <body>
-    <script type="module" defer src="/src/js/index.ts"></script>
-    <s-code-example default-style>
-      <template lang="js">
-        import __SClass from '@coffeekraken/s-class'; import __deepMerge from
-        '@coffeekraken/sugar/shared/object/deepMerge'; import __SInterface from
-        '@coffeekraken/s-interface'; import __mustache from 'mustache'; import
-        __stylesheetToString from '@coffeekraken/sugar/js/css/stylesheetToString';
-        export default SSVelteComponent;
-      </template>
-      <template lang="html">
-        <h1>Something cool</h1>
-        <p>iwfj wioef oiw efjoijw oiefjw ioefjwiofj oij</p>
-      </template>
-    </s-code-example>
+    <script type="module">
+      import { createApp } from 'vue';
+      import SClipboardCopy, { webcomponent } from './src/js/index.ts';
+      
+      webcomponent();
+
+      const App = {
+        components: {
+          'SClipboardCopy': SClipboardCopy
+        },
+        template: `
+          <h1>Hello world</h1>
+          <s-clipboard-copy id="vueCopy"></s-clipboard-copy>
+        `
+      };
+
+      createApp(App).mount('#app')
+
+      setTimeout(() => {
+        const $vueCopy = document.querySelector('#vueCopy');
+        console.log($vueCopy);
+        $vueCopy.copy('Hello');
+        const $webCopy = document.querySelector('#webCopy');
+        console.log($webCopy);
+        $webCopy.copy('Hello');
+      }, 1000);
+
+    </script>
+    <s-clipboard-copy id="webCopy"></s-clipboard-copy>
+
+    <div id="app"></div>
+
   </body>
 </html>

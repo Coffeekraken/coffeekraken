@@ -1,11 +1,12 @@
 <template>
 
+    <div :class="component?.className()" :toolbar-position="component?.props.toolbarPosition" ref="root">
 
-    <div v-if="mounted">
+        <div ref="templates">
+          <slot></slot>
+        </div>
 
-        <slot ref="templates"></slot>
-
-        <header :class="component.className('__nav')">
+        <header v-if="component" ref="header" :class="component.className('__nav')">
             <ol :class="component.className('__tabs', component.props.defaultStyleClasses.main)">
             <li :class="component.className('__tab')"
                 :id="item.id"
@@ -16,8 +17,9 @@
             </li>
             </ol>
         </header>
-        <div :class="component.className('__content')">
+        <div v-if="component" :class="component.className('__content')">
             <div :class="component.className('__toolbar')">
+              <s-clipboard-copy ref="copy" @click="copy"></s-clipboard-copy>
             </div>
             <pre :class="component.className('__code')"   
                 :id="item.id ?? item.lang"
@@ -32,17 +34,13 @@
 
 <style scoped>
 
-        :root {  
+    .s-code-example {  
         display: block;
 
             &[toolbar-position="nav"] {
-            position: relative;
-        }
+              position: relative;
+          }
       }
-
-
-      
-
 
       .s-code-example__slot {
         display: none;
@@ -64,7 +62,7 @@
       .s-code-example__content {
         overflow: hidden;
 
-        s-code-example[toolbar-position="content"] & {
+        .s-code-example[toolbar-position="content"] & {
           position: relative;
         }
       }
@@ -111,49 +109,57 @@
     import 'prismjs/components/prism-bash';
     import 'prismjs/components/prism-php';
     import 'prismjs/components/prism-markup-templating';
+    import __SClipboardCopyComponent from '@coffeekraken/s-clipboard-copy-component';
     import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
     import __SComponentUtils from '@coffeekraken/s-component-utils';
     import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
     import __wait from '@coffeekraken/sugar/shared/time/wait';
 
     export default {
+      components: {
+        SClipboardCopy: __SClipboardCopyComponent
+      },
       data() {
           return {
-            mounted: false,
             activeTabId: undefined,
             items: [],
-            component: null
+            component: null,
+            props: null
           }
       },
         props: [...Object.keys(__SCodeExampleComponentInterface.definition)],
         async mounted() {
 
-            this.component = new __SComponentUtils(this.$el.parentNode, this.$props, {
-                interface: __SCodeExampleComponentInterface,
-                display: 'block'
-            });
-            this.mounted = true;
+          this.component = new __SComponentUtils('s-code-example', this.$el, this.$props, {
+            interface: __SCodeExampleComponentInterface,
+            display: 'block'
+          });
 
-            await __whenInViewport(this.$el.parentNode);
+          await __wait();
 
-            // this.$copy = this.$('s-clipboard-copy');
-            this.$templates = Array.from(this.$el.querySelectorAll('textarea,template'));
+          await __whenInViewport(this.component.node);
 
-            this.$templates.forEach($template => {
-                this.items = [...this.items, {
-                    id: $template.getAttribute('id') ?? $template.__vnode?.props?.attrs?.language ?? $template.__vnode?.props?.attrs?.lang,
-                    lang: $template.__vnode?.props?.attrs?.language ?? $template.__vnode?.props?.attrs?.lang,
-                    code: $template.__vnode?.props?.domProps.innerHTML
-                }];
-                $template.remove();
-            });
+      this.props = this.component.props;
 
-            // active idx
-            if (this.component.props.active) {
+          // this.$copy = this.$('s-clipboard-copy');
+          this.$copy = this.$refs.copy;
+          this.$templates = Array.from(this.$refs.templates.querySelectorAll('textarea,template'));
+
+          this.$templates.forEach($template => {
+              this.items = [...this.items, {
+                  id: $template.getAttribute('id') ?? this.component.getAttributeSafely($template, 'language') ?? this.component.getAttributeSafely($template, 'lang'),
+                  lang: this.component.getAttributeSafely($template, 'language') ?? this.component.getAttributeSafely($template, 'lang'),
+                  code: this.component.getDomPropertySafely($template, 'innerHTML')
+              }];
+              $template.remove();
+          });
+
+          // active idx
+          if (this.component.props.active) {
             this.setActiveTab(this.component.props.active);
-            } else {
-            this.setActiveTab(this.items[0].id);
-            }
+          } else {
+           this.setActiveTab(this.items[0].id);
+          }
 
         },
         methods: {
@@ -166,14 +172,14 @@
                 this.initPrismOnTab(id);
             },
             initPrismOnTab(id) {
-                const $tab = this.$el.querySelector(`li#${id}`),
-                    $content = this.$el.parentNode.querySelector(`pre#${id} code`);
+                const $content = this.$refs.root.querySelector(`pre#${id} code`);
 
                 if ($content.hasAttribute('inited')) return;
                 $content.setAttribute('inited', true);
                 prism.highlightElement($content);
             },
-            copy(id = this.activeTabId) {
+            copy() {
+              const id = this.activeTabId;
                 const item = this.items.filter(i => i.id === id)[0];
                 this.$copy.copy(item.code);
             }

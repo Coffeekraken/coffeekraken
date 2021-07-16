@@ -42,17 +42,27 @@ export default {
         }
       }
     },
-    riotComponent: {
-      title: 'RiotJs component',
-      description: 'RiotJs webcomponent recipe',
-      templateDir: __path.resolve(`${__dirname()}/../templates/riotComponent`),
+    vueComponent: {
+      title: 'Vuejs component',
+      description: 'Vuejs (web)component recipe',
+      templateDir: __path.resolve(`${__dirname()}/../templates/vueComponent`),
       defaultStack: 'dev',
       stacks: {
         dev: {
           description: 'Start the development stack',
           actions: {
-            frontendServer: '[config.frontstack.actions.frontendServer]',
             vite: '[config.frontstack.actions.vite]'
+          }
+        },
+        build: {
+          description: 'Build your final production ready dist package',
+          actions: {
+            viteBuild: {
+              action: '[config.frontstack.actions.viteBuild]',
+              params: {
+                lib: true
+              }
+            }
           }
         }
       }
@@ -66,6 +76,7 @@ export default {
       description:
         'Frontend server using the @coffeekraken/s-frontend-server package',
       process: 'sugar frontendServer.start',
+      params: {},
       settings: {
         processManager: {
           restart: true
@@ -77,6 +88,7 @@ export default {
       title: 'PostCSS build action',
       description: 'Build css using the amazing PostCSS package',
       process: 'sugar postcss.build',
+      params: {},
       settings: {
         processManager: {
           restart: true
@@ -88,6 +100,7 @@ export default {
       title: 'Images build action',
       description: 'Build your images with ease. Compress, resize, webp version, etc...',
       process: 'sugar images.build',
+      params: {},
       settings: {
         processManager: {
           restart: true
@@ -99,6 +112,7 @@ export default {
       title: 'Vite development stack',
       description: 'Allow to build files easily while developing',
       process: 'sugar vite',
+      params: {},
       settings: {
         processManager: {
           restart: true
@@ -110,6 +124,7 @@ export default {
       title: 'Vite build stack',
       description: 'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
       process: 'sugar vite.build',
+      params: {},
       settings: {
         processManager: {
           restart: true
@@ -122,6 +137,7 @@ export default {
       description:
         'Allow to build and maintain up to date the docmap.json file',
       process: 'sugar docmap.build --noExtends',
+      params: {},
       settings: {
         processManager: {
           restart: true

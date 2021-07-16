@@ -134,13 +134,24 @@ export default class SComponentUtils extends __SClass {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   constructor(
+    name: string,
     node: HTMLElement,
     props: any,
     settings: Partial<ISComponentUtilsCtorSettings> = {}
   ) {
     super(__deepMerge({}, settings));
+
+    // name
+    this.name = name;
+
+    // node
     this.node = node;
-    this.name = node.tagName.toLowerCase();
+    if (!this.node.tagName) this.node = this.node.parentNode;
+    if (this.node.parentNode?.tagName?.toLowerCase() === this.name) {
+      this.node = node.parentNode;
+    }
+
+    // props
     this.props = __deepMerge({}, props ?? {});
 
     // @ts-ignore
@@ -202,6 +213,66 @@ export default class SComponentUtils extends __SClass {
       return __striptags(txt);
       
     });
+
+  }
+
+  exposeApi(apiObj: any): void {
+    setTimeout(() => {
+      let $on = this.node;
+      // @ts-ignore
+      if (this.node.parentNode?._component) { // check if the parent a a vue3-component-wrapper
+        // @ts-ignore
+        $on = this.node.parentNode;
+      }
+      Object.keys(apiObj).forEach(apiFnName => {
+        const apiFn = apiObj[apiFnName];
+        $on[apiFnName] = apiFn;
+      });
+    });
+  }
+
+  /**
+   * @name          getAttributeSafely
+   * @type          Function
+   * 
+   * This method allows you to get an HTMLElement attribute safely.
+   * It will check if it's a vue, react or another framework and will
+   * get the attribute accordingly
+   * 
+   * @param       {HTMLElement}       element       The element on which to get attribute
+   * @param       {String}            attribute       The attribute name you want to get
+   * @return      {Any}                               The attribute value getted
+   * 
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  getAttributeSafely(element: HTMLElement, attribute: string): any {
+    return element.getAttribute?.(attribute) || element.__vnode?.props?.attrs?.[attribute];
+  }
+
+  /**
+   * @name          getDomPropertySafely
+   * @type          Function
+   * 
+   * This method allows you to get an HTMLElement attribute safely.
+   * It will check if it's a vue, react or another framework and will
+   * get the attribute accordingly
+   * 
+   * @param       {HTMLElement}       element       The element on which to get attribute
+   * @param       {String}            property       The property name you want to get
+   * @return      {Any}                               The property value getted
+   * 
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  getDomPropertySafely(element: HTMLElement, property: string): any {
+
+    if (element.__vnode?.props?.domProps) {
+      return element.__vnode.props.domProps[property];
+    }
+
+    return element[property];
+
 
   }
 

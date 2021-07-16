@@ -34,12 +34,19 @@ export interface ISFrontstackAction {
   command: string;
   process: string;
   settings: Partial<ISFrontstackRecipesettings>;
+  [key: string]: any;
+}
+
+export interface ISFrontstackActionWrapper {
+  action: ISFrontstackAction;
+  params: any;
+  [key: string]: any;
 }
 
 export interface ISFrontstackRecipestack {
   description: string;
   sharedParams: any;
-  actions: Record<string, ISFrontstackAction>;
+  actions: Record<string, ISFrontstackAction> | Record<string, ISFrontstackActionWrapper>;
 }
 
 export interface ISFrontstackRecipe {
@@ -280,9 +287,6 @@ export default class SFrontstack extends __SClass {
           };
         }
 
-        // build shared params cli string
-        const sharedParamsStr = __argsToString(sharedParams).trim();
-
         // instanciate the process manager
         const processManager = new __SProcessManager();
 
@@ -302,12 +306,25 @@ export default class SFrontstack extends __SClass {
               }
 
               // @ts-ignore
-              const actionObj =
+              let actionObj =
                 // @ts-ignore
                 recipeObj.stacks[finalParams.stack].actions[actionName];
+              let actionSpecificParams = {}, actionParams = {};
+
+              if (actionObj.action && (!actionObj.process && !actionObj.command)) {
+                actionSpecificParams = actionObj.params ?? {};
+                actionObj = actionObj.action;
+              }
+              actionParams = actionObj.params ?? {};
+
+              const finalActionParams = __deepMerge(actionParams, actionSpecificParams);
+
+              // build shared params cli string
+              const paramsStr = __argsToString(finalActionParams).trim();
+
               const actionId = actionObj.id ?? actionName;
               // create a process from the recipe object
-              const finalCommand = (actionObj.command ?? actionObj.process).trim() + ' ' + sharedParamsStr;
+              const finalCommand = (actionObj.command ?? actionObj.process).trim() + ' ' + paramsStr;
               
               emit('log', {
                 value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`

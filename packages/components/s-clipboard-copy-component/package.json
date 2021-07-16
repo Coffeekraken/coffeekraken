@@ -10,7 +10,7 @@
   "main": "./dist/js/lib.es.js",
   "scripts": {
     "dev": "sugar frontstack dev",
-    "build": "sugar vite.build --lib",
+    "build": "sugar frontstack build",
     "build.watch": "sugar vite.build --lib --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-component-utils": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0"
+    "@coffeekraken/sugar": "^2.0.0",
+    "vue": "^3.1.4",
+    "vue3-webcomponent-wrapper": "^0.1.4"
   }
 }

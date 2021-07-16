@@ -1,8 +1,9 @@
-import {pushScopeId, popScopeId, openBlock, createBlock, renderSlot, createVNode, Fragment, renderList, toDisplayString, createCommentVNode, withScopeId, createTextVNode, createApp, h} from "vue";
+import {pushScopeId, popScopeId, resolveComponent, openBlock, createBlock, createVNode, renderSlot, Fragment, renderList, toDisplayString, createCommentVNode, withScopeId, createTextVNode, createApp, h} from "vue";
+import wrapper from "vue3-webcomponent-wrapper";
 import prism from "prismjs";
+import __SClipboardCopyComponent from "@coffeekraken/s-clipboard-copy-component";
 import __SInterface from "@coffeekraken/s-interface";
 import __SComponentUtils, {SComponentUtilsDefaultInterface} from "@coffeekraken/s-component-utils";
-import wrapper from "vue3-webcomponent-wrapper";
 Prism.languages.javascript = Prism.languages.extend("clike", {
   "class-name": [
     Prism.languages.clike["class-name"],
@@ -884,31 +885,36 @@ function wait(timeout) {
     }, timeout);
   });
 }
-var SCodeExample_vue_vue_type_style_index_0_scoped_true_lang = '\n[data-v-2c5508a7]:root {  \n        display: block;\n}\n[data-v-2c5508a7]:root[toolbar-position="nav"][data-v-2c5508a7] {\n            position: relative;\n}\n.s-code-example__slot[data-v-2c5508a7] {\n        display: none;\n}\n.s-code-example__nav[data-v-2c5508a7] {\n}\n.s-code-example__tabs[data-v-2c5508a7] {\n        display: flex;\n        list-style: none;\n        border-bottom-left-radius: 0 !important;\n        border-bottom-right-radius: 0 !important;\n}\n.s-code-example__tab[data-v-2c5508a7] {\n}\n.s-code-example__content[data-v-2c5508a7] {\n        overflow: hidden;\n}\ns-code-example[toolbar-position="content"] .s-code-example__content[data-v-2c5508a7][data-v-2c5508a7] {\n          position: relative;\n}\n.s-code-example__code[data-v-2c5508a7] {\n        display: none;\n        border-top-left-radius: 0 !important;\n        border-top-right-radius: 0 !important;\n        line-height: 0;\n        overflow: hidden;\n}\n.s-code-example__code[data-v-2c5508a7][active][data-v-2c5508a7] {\n          display: block;\n}\n.s-code-example__toolbar[data-v-2c5508a7] {\n        \n        position: absolute;\n        top: var(--s93aeae3f06c, 24px); right: var(--s93aeae3f06c, 24px);\n        z-index: 10;\n}\n.s-code-example__toolbar[data-v-2c5508a7] > *[data-v-2c5508a7] {\n          font-size: 20px;\n          opacity: 0.5;\n}\n.s-code-example__toolbar[data-v-2c5508a7] > *[data-v-2c5508a7][data-v-2c5508a7]:hover {\n            opacity: 1;\n}\ns-code-example[toolbar-position="nav"] .s-code-example__toolbar[data-v-2c5508a7][data-v-2c5508a7] {\n          top: var(--s99674b3ff1e, 12px);\n          right: var(--s99674b3ff1e, 12px);\n}\n';
+var SCodeExample_vue_vue_type_style_index_0_scoped_true_lang = '\n.s-code-example[data-v-2c5508a7] {  \n        display: block;\n}\n.s-code-example[data-v-2c5508a7][toolbar-position="nav"][data-v-2c5508a7] {\n              position: relative;\n}\n.s-code-example__slot[data-v-2c5508a7] {\n        display: none;\n}\n.s-code-example__nav[data-v-2c5508a7] {\n}\n.s-code-example__tabs[data-v-2c5508a7] {\n        display: flex;\n        list-style: none;\n        border-bottom-left-radius: 0 !important;\n        border-bottom-right-radius: 0 !important;\n}\n.s-code-example__tab[data-v-2c5508a7] {\n}\n.s-code-example__content[data-v-2c5508a7] {\n        overflow: hidden;\n}\n.s-code-example[toolbar-position="content"] .s-code-example__content[data-v-2c5508a7][data-v-2c5508a7] {\n          position: relative;\n}\n.s-code-example__code[data-v-2c5508a7] {\n        display: none;\n        border-top-left-radius: 0 !important;\n        border-top-right-radius: 0 !important;\n        line-height: 0;\n        overflow: hidden;\n}\n.s-code-example__code[data-v-2c5508a7][active][data-v-2c5508a7] {\n          display: block;\n}\n.s-code-example__toolbar[data-v-2c5508a7] {\n        \n        position: absolute;\n        top: var(--s93aeae3f06c, 24px); right: var(--s93aeae3f06c, 24px);\n        z-index: 10;\n}\n.s-code-example__toolbar[data-v-2c5508a7] > *[data-v-2c5508a7] {\n          font-size: 20px;\n          opacity: 0.5;\n}\n.s-code-example__toolbar[data-v-2c5508a7] > *[data-v-2c5508a7][data-v-2c5508a7]:hover {\n            opacity: 1;\n}\ns-code-example[toolbar-position="nav"] .s-code-example__toolbar[data-v-2c5508a7][data-v-2c5508a7] {\n          top: var(--s99674b3ff1e, 12px);\n          right: var(--s99674b3ff1e, 12px);\n}\n';
 const _sfc_main = {
+  components: {
+    SClipboardCopy: __SClipboardCopyComponent
+  },
   data() {
     return {
-      mounted: false,
       activeTabId: void 0,
       items: [],
-      component: null
+      component: null,
+      props: null
     };
   },
   props: [...Object.keys(SHighlightJsComponentInterface.definition)],
   async mounted() {
-    this.component = new __SComponentUtils(this.$el.parentNode, this.$props, {
+    this.component = new __SComponentUtils("s-code-example", this.$el, this.$props, {
       interface: SHighlightJsComponentInterface,
       display: "block"
     });
-    this.mounted = true;
-    await whenInViewport(this.$el.parentNode);
-    this.$templates = Array.from(this.$el.querySelectorAll("textarea,template"));
+    await wait();
+    await whenInViewport(this.component.node);
+    this.props = this.component.props;
+    this.$copy = this.$refs.copy;
+    this.$templates = Array.from(this.$refs.templates.querySelectorAll("textarea,template"));
     this.$templates.forEach(($template) => {
-      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q;
+      var _a, _b, _c;
       this.items = [...this.items, {
-        id: (_h = (_d = $template.getAttribute("id")) != null ? _d : (_c = (_b = (_a = $template.__vnode) == null ? void 0 : _a.props) == null ? void 0 : _b.attrs) == null ? void 0 : _c.language) != null ? _h : (_g = (_f = (_e = $template.__vnode) == null ? void 0 : _e.props) == null ? void 0 : _f.attrs) == null ? void 0 : _g.lang,
-        lang: (_o = (_k = (_j = (_i = $template.__vnode) == null ? void 0 : _i.props) == null ? void 0 : _j.attrs) == null ? void 0 : _k.language) != null ? _o : (_n = (_m = (_l = $template.__vnode) == null ? void 0 : _l.props) == null ? void 0 : _m.attrs) == null ? void 0 : _n.lang,
-        code: (_q = (_p = $template.__vnode) == null ? void 0 : _p.props) == null ? void 0 : _q.domProps.innerHTML
+        id: (_b = (_a = $template.getAttribute("id")) != null ? _a : this.component.getAttributeSafely($template, "language")) != null ? _b : this.component.getAttributeSafely($template, "lang"),
+        lang: (_c = this.component.getAttributeSafely($template, "language")) != null ? _c : this.component.getAttributeSafely($template, "lang"),
+        code: this.component.getDomPropertySafely($template, "innerHTML")
       }];
       $template.remove();
     });
@@ -928,14 +934,14 @@ const _sfc_main = {
       this.initPrismOnTab(id);
     },
     initPrismOnTab(id) {
-      this.$el.querySelector(`li#${id}`);
-      const $content = this.$el.parentNode.querySelector(`pre#${id} code`);
+      const $content = this.$refs.root.querySelector(`pre#${id} code`);
       if ($content.hasAttribute("inited"))
         return;
       $content.setAttribute("inited", true);
       prism.highlightElement($content);
     },
-    copy(id = this.activeTabId) {
+    copy() {
+      const id = this.activeTabId;
       const item = this.items.filter((i) => i.id === id)[0];
       this.$copy.copy(item.code);
     }
@@ -943,21 +949,30 @@ const _sfc_main = {
 };
 const _withId = /* @__PURE__ */ withScopeId("data-v-2c5508a7");
 pushScopeId("data-v-2c5508a7");
-const _hoisted_1 = {key: 0};
+const _hoisted_1 = {ref: "templates"};
 const _hoisted_2 = /* @__PURE__ */ createTextVNode("                ");
 const _hoisted_3 = /* @__PURE__ */ createTextVNode("\n            ");
 popScopeId();
 const _sfc_render = /* @__PURE__ */ _withId((_ctx, _cache, $props, $setup, $data, $options) => {
-  var _a, _b;
-  return $data.mounted ? (openBlock(), createBlock("div", _hoisted_1, [
-    renderSlot(_ctx.$slots, "default", {ref: "templates"}, void 0, true),
-    createVNode("header", {
+  var _a, _b, _c, _d;
+  const _component_s_clipboard_copy = resolveComponent("s-clipboard-copy");
+  return openBlock(), createBlock("div", {
+    class: (_a = $data.component) == null ? void 0 : _a.className(),
+    "toolbar-position": (_b = $data.component) == null ? void 0 : _b.props.toolbarPosition,
+    ref: "root"
+  }, [
+    createVNode("div", _hoisted_1, [
+      renderSlot(_ctx.$slots, "default", {}, void 0, true)
+    ], 512),
+    $data.component ? (openBlock(), createBlock("header", {
+      key: 0,
+      ref: "header",
       class: $data.component.className("__nav")
     }, [
       createVNode("ol", {
         class: $data.component.className("__tabs", $data.component.props.defaultStyleClasses.main)
       }, [
-        (openBlock(true), createBlock(Fragment, null, renderList((_a = $data.items) != null ? _a : [], (item, idx) => {
+        (openBlock(true), createBlock(Fragment, null, renderList((_c = $data.items) != null ? _c : [], (item, idx) => {
           return openBlock(), createBlock("li", {
             class: $data.component.className("__tab"),
             id: item.id,
@@ -966,14 +981,20 @@ const _sfc_render = /* @__PURE__ */ _withId((_ctx, _cache, $props, $setup, $data
           }, toDisplayString(item.lang), 11, ["id", "active"]);
         }), 256))
       ], 2)
-    ], 2),
-    createVNode("div", {
+    ], 2)) : createCommentVNode("v-if", true),
+    $data.component ? (openBlock(), createBlock("div", {
+      key: 1,
       class: $data.component.className("__content")
     }, [
       createVNode("div", {
         class: $data.component.className("__toolbar")
-      }, null, 2),
-      (openBlock(true), createBlock(Fragment, null, renderList((_b = $data.items) != null ? _b : [], (item, idx) => {
+      }, [
+        createVNode(_component_s_clipboard_copy, {
+          ref: "copy",
+          onClick: $options.copy
+        }, null, 8, ["onClick"])
+      ], 2),
+      (openBlock(true), createBlock(Fragment, null, renderList((_d = $data.items) != null ? _d : [], (item, idx) => {
         var _a2, _b2;
         return openBlock(), createBlock("pre", {
           class: $data.component.className("__code"),
@@ -987,17 +1008,20 @@ const _sfc_render = /* @__PURE__ */ _withId((_ctx, _cache, $props, $setup, $data
           _hoisted_3
         ], 10, ["id", "active"]);
       }), 256))
-    ], 2)
-  ])) : createCommentVNode("v-if", true);
+    ], 2)) : createCommentVNode("v-if", true)
+  ], 10, ["toolbar-position"]);
 });
 _sfc_main.render = _sfc_render;
 _sfc_main.__scopeId = "data-v-2c5508a7";
-function define() {
+if (!window.env)
+  window.env = {SUGAR: {}};
+window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');
+function webcomponent(tagName = "s-code-example") {
   const webComponent = wrapper(_sfc_main, createApp, h);
-  window.customElements.define("s-code-example", webComponent);
+  window.customElements.define(tagName, webComponent);
 }
 export default _sfc_main;
-export {define};
+export {webcomponent};
 
                 var $style = document.querySelector('style#SCodeExample_vue_vue_type_style_index_0_scoped_true_lang');
                 if (!$style) {

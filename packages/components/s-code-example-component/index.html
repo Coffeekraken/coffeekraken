@@ -8,27 +8,13 @@
   </head>
   <body>
     <script type="module">
-      import { createApp } from 'vue';
       import SCodeExample, { webcomponent } from './src/js/index.ts';
       
       webcomponent();
 
-      const App = {
-        components: {
-          'SCodeExample': SCodeExample
-        },
-        template: `
-          <h1>Hello world</h1>
-          <s-code-example>
-            <textarea lang="js">console.log('hello');</textarea>
-          </s-code-example>
-        `
-      };
-
-      createApp(App).mount('#app')
 
     </script>
-    <s-code-example>
+    <s-code-example something="plop">
       <template lang="js">
         import __SClass from '@coffeekraken/s-class'; import __deepMerge from
         '@coffeekraken/sugar/shared/object/deepMerge'; import __SInterface from
@@ -41,8 +27,6 @@
         <p>iwfj wioef oiw efjoijw oiefjw ioefjwiofj oij</p>
       </template>
     </s-code-example>
-
-    <div id="app"></div>
 
   </body>
 </html>

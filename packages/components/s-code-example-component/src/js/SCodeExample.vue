@@ -139,7 +139,7 @@
 
           await __whenInViewport(this.component.node);
 
-      this.props = this.component.props;
+        this.props = this.component.props;
 
           // this.$copy = this.$('s-clipboard-copy');
           this.$copy = this.$refs.copy;

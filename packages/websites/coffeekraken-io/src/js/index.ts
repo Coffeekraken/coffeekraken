@@ -2,15 +2,17 @@ import '@coffeekraken/s-inline-svg-component';
 import '@coffeekraken/s-activate-component';
 import "@coffeekraken/s-filtrable-input-component";
 import "@coffeekraken/s-request-component";
-import __SCodeExampleComponent, { webcomponent as __SCodeExampleComponentDefine } from "@coffeekraken/s-code-example-component";
+import __SCodeExampleComponent, { webcomponent as __SCodeExampleWebcomponent } from "@coffeekraken/s-code-example-component";
 import "@coffeekraken/s-handlebars-component";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
-import './components/docNav.riot';
+import { webcomponent as __docNavWebcomponent } from './components/docNav';
 
 // generic
 import "./generic/docShortcut";
+
+__docNavWebcomponent();
 
 __SComponentUtils.setDefaultProps('s-code-example', {
     toolbarPosition: 'nav',
@@ -21,7 +23,7 @@ __SComponentUtils.setDefaultProps('s-code-example', {
 });
 
 // webcomponents
-__SCodeExampleComponentDefine();
+__SCodeExampleWebcomponent('s-code-example');
 
 // features
 import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';

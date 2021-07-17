@@ -22,6 +22,7 @@
     "@coffeekraken/sugar": "^2.0.0",
     "@vue/web-component-wrapper": "^1.3.0",
     "highlight.js": "^10.7.2",
+    "lit-element": "^2.5.1",
     "prismjs": "^1.23.0",
     "vue": "^3.1.4",
     "vue3-webcomponent-wrapper": "^0.1.4"

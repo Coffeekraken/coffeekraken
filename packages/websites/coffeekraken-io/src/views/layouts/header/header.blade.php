@@ -4,7 +4,7 @@
 
         <div class="s-flex:align-center" style="position: relative">
             <a href="/" title="Coffeekraken.io">
-                <s-inline-svg src="/src/img/ck-logo.svg"></s-inline-svg>
+                {{-- <s-inline-svg src="/src/img/ck-logo.svg"></s-inline-svg> --}}
             </a>
             <form action="/doc/api" method="get" class="s-flex-item:order-10" name="search" id="search-form">
                 <input class="s-input" type="text" name="search" placeholder="Search API doc..." />

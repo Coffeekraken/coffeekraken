@@ -1,0 +1,8 @@
+body {
+    /* background-color: red; */
+}
+
+.s-code-example__tab:first-child {
+    background: yellow;
+    display: block;
+}

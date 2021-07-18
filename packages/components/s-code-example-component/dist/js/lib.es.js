@@ -1,7 +1,5 @@
-import {pushScopeId, popScopeId, resolveComponent, openBlock, createBlock, createVNode, renderSlot, Fragment, renderList, toDisplayString, createCommentVNode, withScopeId, createTextVNode, createApp, h} from "vue";
-import wrapper from "vue3-webcomponent-wrapper";
+import {LitElement, css, unsafeCSS, html, property, query, queryAssignedNodes} from "lit-element";
 import prism from "prismjs";
-import __SClipboardCopyComponent from "@coffeekraken/s-clipboard-copy-component";
 import __SInterface from "@coffeekraken/s-interface";
 import __SComponentUtils, {SComponentUtilsDefaultInterface} from "@coffeekraken/s-component-utils";
 Prism.languages.javascript = Prism.languages.extend("clike", {
@@ -858,26 +856,6 @@ SHighlightJsComponentInterface.definition = {
     }
   }
 };
-function whenInViewport(elm, settings = {}) {
-  settings = Object.assign({offset: 50}, settings);
-  return new Promise((resolve) => {
-    const options = {
-      root: null,
-      rootMargin: `${settings.offset}px`,
-      threshold: 1
-    };
-    function onChange(changes, observer2) {
-      changes.forEach((change) => {
-        if (change.intersectionRatio > 0) {
-          observer2.disconnect();
-          resolve(elm);
-        }
-      });
-    }
-    const observer = new IntersectionObserver(onChange, options);
-    observer.observe(elm);
-  });
-}
 function wait(timeout) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -885,150 +863,175 @@ function wait(timeout) {
     }, timeout);
   });
 }
-var SCodeExample_vue_vue_type_style_index_0_scoped_true_lang = '\n.s-code-example[data-v-2c5508a7] {  \n        display: block;\n}\n.s-code-example[data-v-2c5508a7][toolbar-position="nav"][data-v-2c5508a7] {\n              position: relative;\n}\n.s-code-example__slot[data-v-2c5508a7] {\n        display: none;\n}\n.s-code-example__nav[data-v-2c5508a7] {\n}\n.s-code-example__tabs[data-v-2c5508a7] {\n        display: flex;\n        list-style: none;\n        border-bottom-left-radius: 0 !important;\n        border-bottom-right-radius: 0 !important;\n}\n.s-code-example__tab[data-v-2c5508a7] {\n}\n.s-code-example__content[data-v-2c5508a7] {\n        overflow: hidden;\n}\n.s-code-example[toolbar-position="content"] .s-code-example__content[data-v-2c5508a7][data-v-2c5508a7] {\n          position: relative;\n}\n.s-code-example__code[data-v-2c5508a7] {\n        display: none;\n        border-top-left-radius: 0 !important;\n        border-top-right-radius: 0 !important;\n        line-height: 0;\n        overflow: hidden;\n}\n.s-code-example__code[data-v-2c5508a7][active][data-v-2c5508a7] {\n          display: block;\n}\n.s-code-example__toolbar[data-v-2c5508a7] {\n        \n        position: absolute;\n        top: var(--s93aeae3f06c, 24px); right: var(--s93aeae3f06c, 24px);\n        z-index: 10;\n}\n.s-code-example__toolbar[data-v-2c5508a7] > *[data-v-2c5508a7] {\n          font-size: 20px;\n          opacity: 0.5;\n}\n.s-code-example__toolbar[data-v-2c5508a7] > *[data-v-2c5508a7][data-v-2c5508a7]:hover {\n            opacity: 1;\n}\ns-code-example[toolbar-position="nav"] .s-code-example__toolbar[data-v-2c5508a7][data-v-2c5508a7] {\n          top: var(--s99674b3ff1e, 12px);\n          right: var(--s99674b3ff1e, 12px);\n}\n';
-const _sfc_main = {
-  components: {
-    SClipboardCopy: __SClipboardCopyComponent
-  },
-  data() {
-    return {
-      activeTabId: void 0,
-      items: [],
-      component: null,
-      props: null
-    };
-  },
-  props: [...Object.keys(SHighlightJsComponentInterface.definition)],
-  async mounted() {
-    this.component = new __SComponentUtils("s-code-example", this.$el, this.$props, {
-      interface: SHighlightJsComponentInterface,
-      display: "block"
+var __css = ':host {  \n    display: block;\n}\n\n    :host[toolbar-position="nav"] {\n        position: relative;\n    }\n\n      .s-code-example__slot {\n        display: none;\n      }\n\n      .s-code-example__nav {\n      }\n\n      .s-code-example__tabs {\n        display: flex;\n        list-style: none;\n        border-bottom-left-radius: 0 !important;\n        border-bottom-right-radius: 0 !important;\n      }\n      .s-code-example__tab {\n\n      }\n\n      .s-code-example__content {\n        overflow: hidden;\n      }\n\n      .s-code-example[toolbar-position="content"] .s-code-example__content {\n          position: relative;\n        }\n\n      .s-code-example__code {\n        display: none;\n        border-top-left-radius: 0 !important;\n        border-top-right-radius: 0 !important;\n        line-height: 0;\n        overflow: hidden;\n      }\n\n      .s-code-example__code[active] {\n          display: block;\n        }\n\n      .s-code-example__toolbar {\n        \n        position: absolute;\n        top: var(--s93aeae3f06c, 24px); right: var(--s93aeae3f06c, 24px);\n        z-index: 10;\n      }\n\n      .s-code-example__toolbar > * {\n          font-size: 20px;\n          opacity: 0.5;\n        }\n\n      .s-code-example__toolbar > *:hover {\n            opacity: 1;\n          }\n\n      s-code-example[toolbar-position="nav"] .s-code-example__toolbar {\n          top: var(--s99674b3ff1e, 12px);\n          right: var(--s99674b3ff1e, 12px);\n        }';
+var __decorate = function(decorators, target, key, desc) {
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+    r = Reflect.decorate(decorators, target, key, desc);
+  else
+    for (var i = decorators.length - 1; i >= 0; i--)
+      if (d = decorators[i])
+        r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __awaiter = function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
     });
-    await wait();
-    await whenInViewport(this.component.node);
-    this.props = this.component.props;
-    this.$copy = this.$refs.copy;
-    this.$templates = Array.from(this.$refs.templates.querySelectorAll("textarea,template"));
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+class MyElement extends LitElement {
+  constructor() {
+    super();
+    this._component = void 0;
+    this._$copy = void 0;
+    this._items = [];
+    this._activeTabId = void 0;
+    this._component = new __SComponentUtils("s-code-example", this, this.attributes, {
+      interface: SHighlightJsComponentInterface,
+      defaultProps: {}
+    });
+  }
+  static get styles() {
+    return css`${unsafeCSS(__css)}`;
+  }
+  shouldUpdate() {
+    var _a;
+    return (_a = this._component) === null || _a === void 0 ? void 0 : _a.shouldUpdate;
+  }
+  firstUpdated() {
     this.$templates.forEach(($template) => {
       var _a, _b, _c;
-      this.items = [...this.items, {
-        id: (_b = (_a = $template.getAttribute("id")) != null ? _a : this.component.getAttributeSafely($template, "language")) != null ? _b : this.component.getAttributeSafely($template, "lang"),
-        lang: (_c = this.component.getAttributeSafely($template, "language")) != null ? _c : this.component.getAttributeSafely($template, "lang"),
-        code: this.component.getDomPropertySafely($template, "innerHTML")
+      if (!$template.getAttribute)
+        return;
+      this._items = [...this._items, {
+        id: (_b = (_a = $template.getAttribute("id")) !== null && _a !== void 0 ? _a : this._component.getAttributeSafely($template, "language")) !== null && _b !== void 0 ? _b : this._component.getAttributeSafely($template, "lang"),
+        lang: (_c = this._component.getAttributeSafely($template, "language")) !== null && _c !== void 0 ? _c : this._component.getAttributeSafely($template, "lang"),
+        code: this._component.getDomPropertySafely($template, "innerHTML")
       }];
       $template.remove();
     });
-    if (this.component.props.active) {
-      this.setActiveTab(this.component.props.active);
+    if (this.active) {
+      this.setActiveTab(this.active);
     } else {
-      this.setActiveTab(this.items[0].id);
-    }
-  },
-  methods: {
-    setActiveTabByTab(e) {
-      this.setActiveTab(e.target.id);
-    },
-    async setActiveTab(id) {
-      await wait();
-      this.activeTabId = id;
-      this.initPrismOnTab(id);
-    },
-    initPrismOnTab(id) {
-      const $content = this.$refs.root.querySelector(`pre#${id} code`);
-      if ($content.hasAttribute("inited"))
-        return;
-      $content.setAttribute("inited", true);
-      prism.highlightElement($content);
-    },
-    copy() {
-      const id = this.activeTabId;
-      const item = this.items.filter((i) => i.id === id)[0];
-      this.$copy.copy(item.code);
+      this.setActiveTab(this._items[0].id);
     }
   }
-};
-const _withId = /* @__PURE__ */ withScopeId("data-v-2c5508a7");
-pushScopeId("data-v-2c5508a7");
-const _hoisted_1 = {ref: "templates"};
-const _hoisted_2 = /* @__PURE__ */ createTextVNode("                ");
-const _hoisted_3 = /* @__PURE__ */ createTextVNode("\n            ");
-popScopeId();
-const _sfc_render = /* @__PURE__ */ _withId((_ctx, _cache, $props, $setup, $data, $options) => {
-  var _a, _b, _c, _d;
-  const _component_s_clipboard_copy = resolveComponent("s-clipboard-copy");
-  return openBlock(), createBlock("div", {
-    class: (_a = $data.component) == null ? void 0 : _a.className(),
-    "toolbar-position": (_b = $data.component) == null ? void 0 : _b.props.toolbarPosition,
-    ref: "root"
-  }, [
-    createVNode("div", _hoisted_1, [
-      renderSlot(_ctx.$slots, "default", {}, void 0, true)
-    ], 512),
-    $data.component ? (openBlock(), createBlock("header", {
-      key: 0,
-      ref: "header",
-      class: $data.component.className("__nav")
-    }, [
-      createVNode("ol", {
-        class: $data.component.className("__tabs", $data.component.props.defaultStyleClasses.main)
-      }, [
-        (openBlock(true), createBlock(Fragment, null, renderList((_c = $data.items) != null ? _c : [], (item, idx) => {
-          return openBlock(), createBlock("li", {
-            class: $data.component.className("__tab"),
-            id: item.id,
-            active: $data.activeTabId === item.id ? true : null,
-            onClick: _cache[1] || (_cache[1] = (...args) => $options.setActiveTabByTab && $options.setActiveTabByTab(...args))
-          }, toDisplayString(item.lang), 11, ["id", "active"]);
-        }), 256))
-      ], 2)
-    ], 2)) : createCommentVNode("v-if", true),
-    $data.component ? (openBlock(), createBlock("div", {
-      key: 1,
-      class: $data.component.className("__content")
-    }, [
-      createVNode("div", {
-        class: $data.component.className("__toolbar")
-      }, [
-        createVNode(_component_s_clipboard_copy, {
-          ref: "copy",
-          onClick: $options.copy
-        }, null, 8, ["onClick"])
-      ], 2),
-      (openBlock(true), createBlock(Fragment, null, renderList((_d = $data.items) != null ? _d : [], (item, idx) => {
-        var _a2, _b2;
-        return openBlock(), createBlock("pre", {
-          class: $data.component.className("__code"),
-          id: (_a2 = item.id) != null ? _a2 : item.lang,
-          active: $data.activeTabId === ((_b2 = item.id) != null ? _b2 : item.lang) ? true : null
-        }, [
-          _hoisted_2,
-          createVNode("code", {
-            class: `language-${item.lang}`
-          }, toDisplayString(item.code), 3),
-          _hoisted_3
-        ], 10, ["id", "active"]);
-      }), 256))
-    ], 2)) : createCommentVNode("v-if", true)
-  ], 10, ["toolbar-position"]);
-});
-_sfc_main.render = _sfc_render;
-_sfc_main.__scopeId = "data-v-2c5508a7";
+  render() {
+    var _a, _b, _c, _d;
+    return html`
+            <div class="${(_a = this._component) === null || _a === void 0 ? void 0 : _a.className()}" toolbar-position="${(_b = this._component) === null || _b === void 0 ? void 0 : _b.props.toolbarPosition}">
+
+            <div class="templates">
+                <slot></slot>
+            </div>
+
+            ${this._component ? html`<header class="${this._component.className("__nav")}">
+                <ol class="${this._component.className("__tabs", this._component.props.defaultStyleClasses.main)}">
+                ${((_c = this._items) !== null && _c !== void 0 ? _c : []).map((item) => html`
+                    <li class="${this._component.className("__tab")}"
+                        id="${item.id}"
+                        ?active="${this._activeTabId === item.id}"
+                        @click="${this.setActiveTabByTab}">
+                        ${item.lang}
+                    </li>
+                `)}
+                </ol>
+            </header>` : ""}
+            ${this._component ? html`
+                <div class="${this._component.className("__content")}">
+                    <div class="${this._component.className("__toolbar")}">
+                    <s-clipboard-copy ref="copy" @click="copy"></s-clipboard-copy>
+                    </div>
+                    ${((_d = this._items) !== null && _d !== void 0 ? _d : []).map((item) => {
+      var _a2, _b2;
+      return html`
+                        <pre class="${this._component.className("__code")}"   
+                            id="${(_a2 = item.id) !== null && _a2 !== void 0 ? _a2 : item.lang}"
+                            ?active="${this._activeTabId === ((_b2 = item.id) !== null && _b2 !== void 0 ? _b2 : item.lang)}">
+                            <code class="language-${item.lang}">
+                                ${item.code}
+                            </code>
+                        </pre>
+                    `;
+    })}
+                </div>
+            ` : ""}
+        </div>
+        `;
+  }
+  setActiveTabByTab(e) {
+    this.setActiveTab(e.target.id);
+  }
+  setActiveTab(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+      yield wait();
+      this._activeTabId = id;
+      this.initPrismOnTab(id);
+    });
+  }
+  initPrismOnTab(id) {
+    const $content = this.shadowRoot.querySelector(`pre#${id} code`);
+    if ($content.hasAttribute("inited"))
+      return;
+    $content.setAttribute("inited", true);
+    prism.highlightElement($content);
+  }
+  copy() {
+    const id = this._activeTabId;
+    const item = this._items.filter((i) => i.id === id)[0];
+    this._$copy.copy(item.code);
+  }
+}
+__decorate([
+  property()
+], MyElement.prototype, "_items", void 0);
+__decorate([
+  property()
+], MyElement.prototype, "_activeTabId", void 0);
+__decorate([
+  property({
+    type: String
+  })
+], MyElement.prototype, "active", void 0);
+__decorate([
+  property()
+], MyElement.prototype, "props", void 0);
+__decorate([
+  query("s-clipboard-copy")
+], MyElement.prototype, "$copy", void 0);
+__decorate([
+  query(".templates")
+], MyElement.prototype, "$templatesContainer", void 0);
+__decorate([
+  queryAssignedNodes()
+], MyElement.prototype, "$templates", void 0);
+function webcomponent(tagName = "s-code-example") {
+  customElements.define(tagName, MyElement);
+}
 if (!window.env)
   window.env = {SUGAR: {}};
 window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');
-function webcomponent(tagName = "s-code-example") {
-  const webComponent = wrapper(_sfc_main, createApp, h);
-  window.customElements.define(tagName, webComponent);
-}
-export default _sfc_main;
+export default MyElement;
 export {webcomponent};
-
-                var $style = document.querySelector('style#SCodeExample_vue_vue_type_style_index_0_scoped_true_lang');
-                if (!$style) {
-                  $style = document.createElement('style');
-                  $style.setAttribute('id', 'SCodeExample_vue_vue_type_style_index_0_scoped_true_lang');
-                  $style.type = 'text/css';
-                  $style.appendChild(document.createTextNode(SCodeExample_vue_vue_type_style_index_0_scoped_true_lang));
-                  document.head.appendChild($style);
-                }
-              

@@ -1,10 +1,12 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
-import __mustache from 'mustache';
+// import __mustache from 'mustache';
 import __SInterface from '@coffeekraken/s-interface';
-import __handlebars from 'handlebars';
-import __SInterface from '@coffeekraken/s-interface';
+// import __handlebars from 'handlebars';
 import __striptags from '@coffeekraken/sugar/shared/html/striptags';
+import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
+import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 
 /**
  * @name                SComponentUtils
@@ -47,6 +49,15 @@ export interface ISComponentUtilsCtorSettings {
 
 export class SComponentUtilsDefaultInterface extends __SInterface {
   static definition = {
+    mountWhen: {
+      type: 'String',
+      values: ['directly', 'inViewport'],
+      default: 'directly'
+    },
+    adoptStyles: {
+      type: 'Boolean',
+      default: true
+    },
     defaultStyle: {
         type: 'Boolean',
       default: false
@@ -102,6 +113,8 @@ export default class SComponentUtils extends __SClass {
 
   _targetSelector?: string;
 
+  _shouldUpdate = false;
+
   /**
    * @name            setDefaultProps
    * @type            Function
@@ -152,68 +165,120 @@ export default class SComponentUtils extends __SClass {
     }
 
     // props
-    this.props = __deepMerge({}, props ?? {});
+    const defaultProps = __deepMerge(
+      this._settings.interface?.defaults() ?? {},
+      this._settings.defaultProps ?? {},
+      (<any>this.constructor)._defaultProps[this.name] ?? {}
+    );
+    const passedProps = {};
+    if (props.constructor.name === 'NamedNodeMap') {
+      Object.keys(props).forEach(key => {
+        let value;
+        if (props[key]?.nodeValue !== undefined) {
+          if (props[key].nodeValue === '') value = true;
+          else value = props[key].nodeValue;
+        }
+        if (!value) return;
+        passedProps[__camelCase(props[key]?.name ?? key)] = value;
+      });
+    } else {
+      passedProps = props;
+    }
+    this.props = __deepMerge(defaultProps, passedProps);
 
+    // mount component when needed
+    switch(this.props.mountWhen) {
+      case 'inViewport':
+        (async () => {
+          await __whenInViewport(this.node);
+          this.mount();
+        })();
+      break;
+      case 'directly':
+      default:
+        this.mount();
+      break;
+    }
+
+    
+
+    // if (this._settings.interface) {
+    //   this._settings.interface.definition = {
+    //     ...this._settings.interface.definition,
+    //     target: {
+    //       type: 'String'
+    //     }
+    //   };
+    //   Object.keys(this._settings.interface.definition).forEach(propName => {
+    //     const obj = this._settings.interface.definition[propName];
+    //     if (obj.type && (obj.type === 'Boolean' || obj.type === 'boolean')) {
+    //       obj.type = {
+    //         type: 'Boolean',
+    //         nullishAsTrue: true
+    //       }
+    //       this._settings.interface.definition[propName] = obj;
+    //     }
+    //   });
+
+    //   if (this.props.target) {
+    //     if (!this.props.target.match(/^(\.|\[])/)) {
+    //       this._targetSelector = `#${this.props.target}`;
+    //     } else {
+    //       this._targetSelector = this.props.target;
+    //     }
+    //     if (this._targetSelector) {
+    //       const targets = Array.from(document.querySelectorAll(this._targetSelector));
+    //       // @ts-ignore
+    //       if (targets.length) this.$targets = targets;
+    //     }
+    //   }
+
+    // }
+
+    // __handlebars.registerHelper("striptags", function( txt ){
+    //   // exit now if text is undefined 
+    //   if(typeof txt == "undefined") return;
+    //   // replacing the text
+    //   return __striptags(txt);
+      
+    // });
+
+  }
+
+  async mount() {
+    this.shouldUpdate = true;
+    this.node.requestUpdate?.(); // litelement update
+    await __wait();
+    // adopting parent styles
+    if (this.props.adoptStyles) this._adoptStyles();
+    await __wait();
     // @ts-ignore
     this.node.setAttribute('s-mounted', true);
+  }
 
-    if (this._settings.display) {
-      this.node.style.display = this._settings.display;
-    }
-
-    Object.keys((<any>this.constructor)._defaultProps).forEach(selector => {
-      const defaultProps = (<any>this.constructor)._defaultProps[selector];
-      if (selector === this.name || (this.node.id && selector === `#${this.node.id}`) || (this.node.id && selector === `${this.name}#${this.node.id}`)) {
-        Object.keys(this.props).forEach(propName => {
-          if (this.props[propName] === undefined) delete this.props[propName];
-        })
-        this.props = __deepMerge(defaultProps, this.props);
-      }
-    });
-
-    if (this._settings.interface) {
-      this._settings.interface.definition = {
-        ...this._settings.interface.definition,
-        target: {
-          type: 'String'
-        }
-      };
-      Object.keys(this._settings.interface.definition).forEach(propName => {
-        const obj = this._settings.interface.definition[propName];
-        if (obj.type && (obj.type === 'Boolean' || obj.type === 'boolean')) {
-          obj.type = {
-            type: 'Boolean',
-            nullishAsTrue: true
+  _adoptStyles() {
+      const $styles = document.querySelectorAll('style');
+      if ($styles && this.node.shadowRoot) {
+        const addedStyles: CSSStyleSheet[] = [];
+        Array.from($styles).forEach($style => {
+          if (Array.isArray(this.props.adoptStyles) && this.props.adoptStyles.indexOf($style.id ?? '') === -1) {
+            return; // this style is not wanted...
           }
-          this._settings.interface.definition[propName] = obj;
-        }
-      });
-
-      this.props = this._settings.interface.apply(this.props ?? {});
-
-      if (this.props.target) {
-        if (!this.props.target.match(/^(\.|\[])/)) {
-          this._targetSelector = `#${this.props.target}`;
-        } else {
-          this._targetSelector = this.props.target;
-        }
-        if (this._targetSelector) {
-          const targets = Array.from(document.querySelectorAll(this._targetSelector));
-          // @ts-ignore
-          if (targets.length) this.$targets = targets;
-        }
+          const styleStr = new CSSStyleSheet();
+          styleStr.replace($style.innerHTML);
+          addedStyles.push(styleStr);
+        })
+        this.node.shadowRoot.adoptedStyleSheets = [...this.node.shadowRoot.adoptedStyleSheets, ...addedStyles];
       }
-
-    }
-
-    __handlebars.registerHelper("striptags", function( txt ){
-      // exit now if text is undefined 
-      if(typeof txt == "undefined") return;
-      // replacing the text
-      return __striptags(txt);
-      
-    });
-
+      const $links = document.querySelectorAll('link[rel="stylesheet"]');
+      if ($links && this.node.shadowRoot) {
+        Array.from($links).forEach($link => {
+          if (Array.isArray(this.props.adoptStyles) && this.props.adoptStyles.indexOf($link.id ?? '') === -1) {
+            return; // this style is not wanted...
+          }
+          this.node.shadowRoot?.appendChild($link.cloneNode());
+        });
+      }
   }
 
   exposeApi(apiObj: any): void {
@@ -311,44 +376,44 @@ export default class SComponentUtils extends __SClass {
     return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue;
   }
 
-  /**
-   * @name          compileMustache
-   * @type          Function
-   *
-   * This method allows you to compile some mustache template
-   * directly from your component.
-   *
-   * @param         {String}        template        The template to compile
-   * @param         {any}           data            The data with which you want to compile your template
-   * @return        {String}                        The compiled template
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  compileMustache(template: string, data: any): string {
-    const res = __mustache.render(template, data);
-    return res;
-  }
+  // /**
+  //  * @name          compileMustache
+  //  * @type          Function
+  //  *
+  //  * This method allows you to compile some mustache template
+  //  * directly from your component.
+  //  *
+  //  * @param         {String}        template        The template to compile
+  //  * @param         {any}           data            The data with which you want to compile your template
+  //  * @return        {String}                        The compiled template
+  //  *
+  //  * @since         2.0.0
+  //  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+  //  */
+  // compileMustache(template: string, data: any): string {
+  //   const res = __mustache.render(template, data);
+  //   return res;
+  // }
 
-  /**
-   * @name          renderHandlerbars
-   * @type          Function
-   *
-   * This method allows you to compile some mustache template
-   * directly from your component.
-   *
-   * @param         {String}        template        The template to compile
-   * @param         {any}           data            The data with which you want to compile your template
-   * @return        {String}                        The compiled template
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  renderHandlerbars(template: string, data: any): string {
-    const renderFn = __handlebars.compile(template);
-    const res = renderFn(data);
-    return res;
-  }
+  // /**
+  //  * @name          renderHandlerbars
+  //  * @type          Function
+  //  *
+  //  * This method allows you to compile some mustache template
+  //  * directly from your component.
+  //  *
+  //  * @param         {String}        template        The template to compile
+  //  * @param         {any}           data            The data with which you want to compile your template
+  //  * @return        {String}                        The compiled template
+  //  *
+  //  * @since         2.0.0
+  //  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+  //  */
+  // renderHandlerbars(template: string, data: any): string {
+  //   const renderFn = __handlebars.compile(template);
+  //   const res = renderFn(data);
+  //   return res;
+  // }
 
   /**
    * @name        dispatchSyncEvent

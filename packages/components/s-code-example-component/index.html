@@ -5,16 +5,25 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Svelte + TS + Vite App</title>
+
+    <link rel="stylesheet" type="text/css" href="src/css/index.css" />
+
   </head>
   <body>
     <script type="module">
       import SCodeExample, { webcomponent } from './src/js/index.ts';
-      
       webcomponent();
-
-
     </script>
-    <s-code-example something="plop">
+
+      <style>
+
+        .s-code-example__tab {
+          background: green ;
+        }
+
+      </style>
+    
+    <s-code-example>
       <template lang="js">
         import __SClass from '@coffeekraken/s-class'; import __deepMerge from
         '@coffeekraken/sugar/shared/object/deepMerge'; import __SInterface from

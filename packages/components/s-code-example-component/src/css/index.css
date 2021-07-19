@@ -1,8 +1,3 @@
-body {
-    /* background-color: red; */
-}
-
-.s-code-example__tab:first-child {
-    background: yellow;
-    display: block;
-}
+@sugar.init($theme: dark);
+@sugar.classes;
+@sugar.prism.theme;

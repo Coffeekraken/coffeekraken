@@ -44,8 +44,11 @@ s-code-example {
   fs:src/icons/vuejs.svg:vue
 );
 
+.hljs > * {
+  display: inline-block !important;
+}
+
 @sugar.platform.classes;
-@sugar.prism.theme;
 
 .s-tooltip {
   @sugar.theme(dark);

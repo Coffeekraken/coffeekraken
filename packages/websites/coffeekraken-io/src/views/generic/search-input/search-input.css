@@ -119,7 +119,7 @@
         }
     }
 
-    &:before {
+    /* &:before {
         content: '';
         display: block;
         position: fixed;
@@ -130,8 +130,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity .1s ease-out .2s;
-        /* backdrop-filter: blur(20px); */
-    }
+    } */
 
 }
 #search-form:focus-within {

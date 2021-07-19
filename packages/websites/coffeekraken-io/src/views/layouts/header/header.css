@@ -26,10 +26,10 @@ body {
 
         @sugar.gradient($start: sugar.color(ui, background), $end: rgba(0,0,0,0), $angle: 180deg);
     } */
-}
 
-#header {
-
+    version-selector {
+        margin-left: sugar.space(10);
+    }
 
     .s-tooltip {
         padding: sugar.space(10);

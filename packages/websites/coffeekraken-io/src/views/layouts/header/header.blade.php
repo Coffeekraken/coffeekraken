@@ -4,11 +4,14 @@
 
         <div class="s-flex:align-center" style="position: relative">
             <a href="/" title="Coffeekraken.io">
-                {{-- <s-inline-svg src="/src/img/ck-logo.svg"></s-inline-svg> --}}
+                <s-inline-svg src="/src/img/ck-logo.svg"></s-inline-svg>
             </a>
-            <form action="/doc/api" method="get" class="s-flex-item:order-10" name="search" id="search-form">
-                <input class="s-input" type="text" name="search" placeholder="Search API doc..." />
-            </form>
+            <div class="s-flex-item:order-10 s-flex:align-center">
+                <form action="/doc/api" method="get" name="search" id="search-form">
+                    <input class="s-input" type="text" name="search" placeholder="Search API doc..." />
+                </form>
+                <version-selector></version-selector>
+            </div>
             <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:50">
                 <a class="s-pl:100 s-typo:bold" href="/#features" title="Features">Features</a>
                 <a class="s-px:50 s-typo:bold" href="/#get-started" title="Get started">Get started</a>

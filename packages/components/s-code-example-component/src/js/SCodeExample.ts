@@ -10,23 +10,21 @@
 
 // export default __component;
 
-import {LitElement, html, property, css, unsafeCSS, query, queryAssignedNodes} from 'lit-element';
-
-import prism from 'prismjs';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-markup';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-php';
-import 'prismjs/components/prism-markup-templating';
-import __SClipboardCopyComponent from '@coffeekraken/s-clipboard-copy-component';
-import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
-import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __css from '../css/s-code-example.css';
+import { css, html, LitElement, property, query, queryAssignedNodes, unsafeCSS } from 'lit-element';
 
-export default class MyElement extends LitElement {
+import __hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+__hljs.registerLanguage('javascript', javascript);
+
+import __css from '../css/s-code-example.css';
+import { webcomponent as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component'; 
+import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
+
+__SClipboardCopy();
+
+export default class SCodeExample extends LitElement {
 
     static get styles() {
         return css`${unsafeCSS(__css)}`;
@@ -60,22 +58,18 @@ export default class MyElement extends LitElement {
 
     constructor() {
         super();
-        this._component = new __SComponentUtils('s-code-example', this, this.attributes, {
+        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
             interface: __SCodeExampleComponentInterface,
             defaultProps: {}
         });
     }
-    shouldUpdate() {
-        return this._component?.shouldUpdate;
-    }
     firstUpdated() {
-
         this.$templates.forEach($template => {
             if (!$template.getAttribute) return;
             this._items = [...this._items, {
-                id: $template.getAttribute('id') ?? this._component.getAttributeSafely($template, 'language') ?? this._component.getAttributeSafely($template, 'lang'),
-                lang: this._component.getAttributeSafely($template, 'language') ?? this._component.getAttributeSafely($template, 'lang'),
-                code: this._component.getDomPropertySafely($template, 'innerHTML')
+                id: $template.getAttribute('id') ?? $template.getAttribute('language') ?? $template.getAttribute('lang'),
+                lang: $template.getAttribute('language') ?? $template.getAttribute('lang'),
+                code: $template.innerHTML
             }];
             $template.remove();
         });
@@ -97,21 +91,28 @@ export default class MyElement extends LitElement {
 
             ${this._component ? html`<header class="${this._component.className('__nav')}">
                 <ol class="${this._component.className('__tabs', this._component.props.defaultStyleClasses.main)}">
-                ${(this._items ?? []).map(item => html`
-                    <li class="${this._component.className('__tab')}"
-                        id="${item.id}"
-                        ?active="${this._activeTabId === item.id}"
-                        @click="${this.setActiveTabByTab}">
-                        ${item.lang}
-                    </li>
-                `)}
+                    ${(this._items ?? []).map(item => html`
+                        <li class="${this._component.className('__tab')}"
+                            id="${item.id}"
+                            ?active="${this._activeTabId === item.id}"
+                            @click="${this.setActiveTabByTab}">
+                            ${item.lang}
+                        </li>
+                    `)}
                 </ol>
+                ${this._component.props.toolbarPosition === 'nav' ? html`
+                    <div class="${this._component.className('__toolbar')}">
+                        <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                    </div>
+                ` : ''}
             </header>` : ''}
             ${this._component ? html`
                 <div class="${this._component.className('__content')}">
-                    <div class="${this._component.className('__toolbar')}">
-                    <s-clipboard-copy ref="copy" @click="copy"></s-clipboard-copy>
-                    </div>
+                    ${this._component.props.toolbarPosition !== 'nav' ? html`
+                        <div class="${this._component.className('__toolbar')}">
+                            <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                        </div>
+                    ` : ''}
                     ${(this._items ?? []).map(item => html`
                         <pre class="${this._component.className('__code')}"   
                             id="${item.id ?? item.lang}"
@@ -138,15 +139,18 @@ export default class MyElement extends LitElement {
         const $content = this.shadowRoot.querySelector(`pre#${id} code`);
         if ($content.hasAttribute('inited')) return;
         $content.setAttribute('inited', true);
-        prism.highlightElement($content);
+
+        const highlightedCode = __hljs.highlight($content?.innerHTML, {language: 'js'}).value.trim();
+        $content?.classList.add('hljs');
+        $content?.innerHTML = highlightedCode;
     }
     copy() {
         const id = this._activeTabId;
         const item = this._items.filter(i => i.id === id)[0];
-        this._$copy.copy(item.code);
+        this.$copy.copy(item.code);
     }
 }
 
 export function webcomponent(tagName = 's-code-example') {
-    customElements.define(tagName, MyElement);
+    customElements.define(tagName, SCodeExample);
 }

@@ -113,7 +113,7 @@ export default class SComponentUtils extends __SClass {
 
   _targetSelector?: string;
 
-  _shouldUpdate = false;
+  shouldUpdate = false;
 
   /**
    * @name            setDefaultProps
@@ -168,9 +168,10 @@ export default class SComponentUtils extends __SClass {
     const defaultProps = __deepMerge(
       this._settings.interface?.defaults() ?? {},
       this._settings.defaultProps ?? {},
+      (<any>this.constructor)._defaultProps['*'] ?? {},
       (<any>this.constructor)._defaultProps[this.name] ?? {}
     );
-    const passedProps = {};
+    let passedProps = {};
     if (props.constructor.name === 'NamedNodeMap') {
       Object.keys(props).forEach(key => {
         let value;
@@ -186,6 +187,13 @@ export default class SComponentUtils extends __SClass {
     }
     this.props = __deepMerge(defaultProps, passedProps);
 
+    // litElement shouldUpdate
+    if (!this.node.shouldUpdate) {
+      this.node.shouldUpdate = () => {
+        return this.shouldUpdate;
+      }
+    }
+
     // mount component when needed
     switch(this.props.mountWhen) {
       case 'inViewport':
@@ -199,50 +207,6 @@ export default class SComponentUtils extends __SClass {
         this.mount();
       break;
     }
-
-    
-
-    // if (this._settings.interface) {
-    //   this._settings.interface.definition = {
-    //     ...this._settings.interface.definition,
-    //     target: {
-    //       type: 'String'
-    //     }
-    //   };
-    //   Object.keys(this._settings.interface.definition).forEach(propName => {
-    //     const obj = this._settings.interface.definition[propName];
-    //     if (obj.type && (obj.type === 'Boolean' || obj.type === 'boolean')) {
-    //       obj.type = {
-    //         type: 'Boolean',
-    //         nullishAsTrue: true
-    //       }
-    //       this._settings.interface.definition[propName] = obj;
-    //     }
-    //   });
-
-    //   if (this.props.target) {
-    //     if (!this.props.target.match(/^(\.|\[])/)) {
-    //       this._targetSelector = `#${this.props.target}`;
-    //     } else {
-    //       this._targetSelector = this.props.target;
-    //     }
-    //     if (this._targetSelector) {
-    //       const targets = Array.from(document.querySelectorAll(this._targetSelector));
-    //       // @ts-ignore
-    //       if (targets.length) this.$targets = targets;
-    //     }
-    //   }
-
-    // }
-
-    // __handlebars.registerHelper("striptags", function( txt ){
-    //   // exit now if text is undefined 
-    //   if(typeof txt == "undefined") return;
-    //   // replacing the text
-    //   return __striptags(txt);
-      
-    // });
-
   }
 
   async mount() {
@@ -256,31 +220,64 @@ export default class SComponentUtils extends __SClass {
     this.node.setAttribute('s-mounted', true);
   }
 
+  static _styleNodes = [];
   _adoptStyles() {
+
+      const $links = document.querySelectorAll('link[rel="stylesheet"]');
+      if ($links && this.node.shadowRoot) {
+        Array.from($links).forEach(async $link => {
+          if (Array.isArray(this.props.adoptStyles) && this.props.adoptStyles.indexOf($link.id ?? '') === -1) {
+            return; // this style is not wanted...
+          }
+
+          if ($link._stylesheet) {
+            this.node.shadowRoot.adoptedStyleSheets = [...this.node.shadowRoot.adoptedStyleSheets, $link._stylesheet];
+            return;
+          }
+
+          this.node.shadowRoot?.appendChild($link.cloneNode());
+
+          // avoid processing multiple time same stylesheet
+          if (this.constructor._styleNodes.indexOf($link) !== -1) return;
+          this.constructor._styleNodes.push($link);
+
+          // request stylesheet to store it in a unique CSSStylesheet instance
+          const res = await fetch($link.href, {
+            headers: {
+              Accept: 'text/css,*/*;q=0.1'
+            }
+          });
+
+          let cssStr = await res.text();
+          const stylesheet = new CSSStyleSheet();
+          stylesheet.replace(cssStr);
+          $link._stylesheet = stylesheet;
+
+        });
+      }
+
       const $styles = document.querySelectorAll('style');
       if ($styles && this.node.shadowRoot) {
-        const addedStyles: CSSStyleSheet[] = [];
         Array.from($styles).forEach($style => {
           if (Array.isArray(this.props.adoptStyles) && this.props.adoptStyles.indexOf($style.id ?? '') === -1) {
             return; // this style is not wanted...
           }
-          const styleStr = new CSSStyleSheet();
-          styleStr.replace($style.innerHTML);
-          addedStyles.push(styleStr);
-        })
-        this.node.shadowRoot.adoptedStyleSheets = [...this.node.shadowRoot.adoptedStyleSheets, ...addedStyles];
-      }
-      const $links = document.querySelectorAll('link[rel="stylesheet"]');
-      if ($links && this.node.shadowRoot) {
-        Array.from($links).forEach($link => {
-          if (Array.isArray(this.props.adoptStyles) && this.props.adoptStyles.indexOf($link.id ?? '') === -1) {
-            return; // this style is not wanted...
+
+          if ($style._stylesheet) {
+            this.node.shadowRoot.adoptedStyleSheets = [...this.node.shadowRoot.adoptedStyleSheets, $style._stylesheet];
+            return;
           }
-          this.node.shadowRoot?.appendChild($link.cloneNode());
+
+          const stylesheet = new CSSStyleSheet();
+          stylesheet.replace($style.innerHTML);
+          $style._stylesheet = stylesheet;
+
+          this.node.shadowRoot.adoptedStyleSheets = [...this.node.shadowRoot.adoptedStyleSheets, $style._stylesheet];
+
         });
       }
   }
-
+  
   exposeApi(apiObj: any): void {
     setTimeout(() => {
       let $on = this.node;
@@ -294,51 +291,6 @@ export default class SComponentUtils extends __SClass {
         $on[apiFnName] = apiFn;
       });
     });
-  }
-
-  /**
-   * @name          getAttributeSafely
-   * @type          Function
-   * 
-   * This method allows you to get an HTMLElement attribute safely.
-   * It will check if it's a vue, react or another framework and will
-   * get the attribute accordingly
-   * 
-   * @param       {HTMLElement}       element       The element on which to get attribute
-   * @param       {String}            attribute       The attribute name you want to get
-   * @return      {Any}                               The attribute value getted
-   * 
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  getAttributeSafely(element: HTMLElement, attribute: string): any {
-    return element.getAttribute?.(attribute) || element.__vnode?.props?.attrs?.[attribute];
-  }
-
-  /**
-   * @name          getDomPropertySafely
-   * @type          Function
-   * 
-   * This method allows you to get an HTMLElement attribute safely.
-   * It will check if it's a vue, react or another framework and will
-   * get the attribute accordingly
-   * 
-   * @param       {HTMLElement}       element       The element on which to get attribute
-   * @param       {String}            property       The property name you want to get
-   * @return      {Any}                               The property value getted
-   * 
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  getDomPropertySafely(element: HTMLElement, property: string): any {
-
-    if (element.__vnode?.props?.domProps) {
-      return element.__vnode.props.domProps[property];
-    }
-
-    return element[property];
-
-
   }
 
   /**

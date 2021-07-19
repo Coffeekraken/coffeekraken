@@ -36,6 +36,7 @@ export default function ({
     '@sugar.ui.tabs.classes;',
     '@sugar.ui.badge.classes;',
     '@sugar.ui.navbar.classes;',
+    '@sugar.ui.select.classes;',
     '@sugar.ui.switch.classes;',
     '@sugar.ui.terminal.classes;',
     '@sugar.ui.tooltip.classes;'

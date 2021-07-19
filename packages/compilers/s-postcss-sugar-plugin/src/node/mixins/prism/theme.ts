@@ -48,8 +48,7 @@ export default function ({
 * based on: https://github.com/MoOx/sass-prism-theme-base by Maxime Thirouin ~ MoOx --> http://moox.fr/ , which is Loosely based on Monokai textmate theme by http://www.monokai.nl/
 * license: MIT; http://moox.mit-license.org/
 */
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*="language-"] {
 	-moz-tab-size: 2;
 	-o-tab-size: 2;
 	tab-size: 2;

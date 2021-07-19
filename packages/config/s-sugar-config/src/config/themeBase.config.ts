@@ -1318,6 +1318,13 @@ export default {
       depth: '[theme.ui.default.depth]',
       defaultStyle: 'default',
     },
+    select: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
+      defaultStyle: 'default',
+    },
     switch: {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',

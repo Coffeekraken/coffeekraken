@@ -11,6 +11,8 @@
     "@coffeekraken/s-class": "^2.0.0",
     "@coffeekraken/s-interface": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/s-request": "^2.0.0",
+    "get-css-data": "^2.0.2",
     "handlebars": "^4.7.7",
     "mustache": "^4.2.0"
   }

@@ -11,19 +11,12 @@
   </head>
   <body>
     <script type="module">
+      import __css from './src/css/index.css';
       import SCodeExample, { webcomponent } from './src/js/index.ts';
       webcomponent();
     </script>
-
-      <style>
-
-        .s-code-example__tab {
-          background: green ;
-        }
-
-      </style>
     
-    <s-code-example>
+    <s-code-example toolbar-position="nav" default-style>
       <template lang="js">
         import __SClass from '@coffeekraken/s-class'; import __deepMerge from
         '@coffeekraken/sugar/shared/object/deepMerge'; import __SInterface from

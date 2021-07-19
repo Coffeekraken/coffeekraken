@@ -7,17 +7,22 @@ import "@coffeekraken/s-handlebars-component";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
-// import { webcomponent as __docNavWebcomponent } from './components/docNav';
+import { webcomponent as __DocNavComponent } from './components/docNav';
+import { webcomponent as __VersionSelector } from './components/VersionSelector';
 
 // generic
 // import "./generic/docShortcut";
 
-// __docNavWebcomponent();
+// internal components
+__DocNavComponent();
+__VersionSelector();
 
+__SComponentUtils.setDefaultProps('*', {
+  mountWhen: 'inViewport'
+});
 __SComponentUtils.setDefaultProps('s-code-example', {
     toolbarPosition: 'nav',
     defaultStyle: true,
-    mountWhen: 'inViewport',
     adoptStyles: ['main'],
     defaultStyleClasses: {
         main: 's-tabs'
@@ -45,4 +50,4 @@ __SCodeExampleWebcomponent();
 //   }
 // });
 
-// __expandPleasantCssClassnamesLive();
+__expandPleasantCssClassnamesLive();

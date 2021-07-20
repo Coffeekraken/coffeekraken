@@ -128,6 +128,7 @@ export default {
     fields: [
       'name',
       'type',
+      'menu',
       'platform',
       'description',
       'namespace',

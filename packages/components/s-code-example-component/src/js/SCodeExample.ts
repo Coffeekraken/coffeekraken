@@ -114,10 +114,11 @@ export default class SCodeExample extends LitElement {
                         </div>
                     ` : ''}
                     ${(this._items ?? []).map(item => html`
-                        <pre class="${this._component.className('__code')}"   
+                        <pre class="${this._component.className('__code')}"
+                            style="line-height:0;"   
                             id="${item.id ?? item.lang}"
                             ?active="${this._activeTabId === (item.id ?? item.lang)}">
-                            <code class="language-${ item.lang }">
+                            <code class="language-${ item.lang } ${item.lang} ${this._component.props.defaultStyle ? 'hljs' : ''}">
                                 ${item.code }
                             </code>
                         </pre>
@@ -141,7 +142,6 @@ export default class SCodeExample extends LitElement {
         $content.setAttribute('inited', true);
 
         const highlightedCode = __hljs.highlight($content?.innerHTML, {language: 'js'}).value.trim();
-        $content?.classList.add('hljs');
         $content?.innerHTML = highlightedCode;
     }
     copy() {

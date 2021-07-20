@@ -55,6 +55,8 @@ function frontspecMiddleware(settings = {}) {
     if (!res.templateData) res.templateData = {};
     if (!res.templateData.assets) res.templateData.assets = {};
 
+    res.templateData.frontspec = await frontspec.read();
+
     for (let i = 0; i < assetsToServe.length; i++) {
       const assetObj = assetsToServe[i];
       if (!res.templateData.assets[assetObj.type])

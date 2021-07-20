@@ -14,10 +14,6 @@
 s-code-example {
   opacity: 0;
   transition: all .2s ease-out;
-  /* display: block;
-  min-height: 50px;
-  max-height: 50px;
-  overflow: hidden; */
 
   &[s-mounted] {
     opacity: 1;

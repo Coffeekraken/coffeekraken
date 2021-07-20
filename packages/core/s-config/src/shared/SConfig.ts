@@ -316,13 +316,12 @@ export default class SConfig {
     });
 
     if (this.constructor._registeredPrepares[this.id]) {
-      Object.keys(this.constructor._registeredPrepares[this.id]).forEach(
-        (configKey) => {
-          config[configKey] = this.constructor._registeredPrepares[this.id][
+      for (let k=0; k<Object.keys(this.constructor._registeredPrepares[this.id]).length; k++) {
+        const configKey = Object.keys(this.constructor._registeredPrepares[this.id])[k];
+          config[configKey] = await this.constructor._registeredPrepares[this.id][
             configKey
           ](config[configKey], config);
-        }
-      );
+      }
     }
 
     if (config instanceof Promise) {

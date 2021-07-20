@@ -35,9 +35,14 @@
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     overflow: hidden;
+    line-height: 0;
     
     &[active] {
       display: block;
+    }
+
+    & > code {
+      line-height: 1;
     }
   }
 

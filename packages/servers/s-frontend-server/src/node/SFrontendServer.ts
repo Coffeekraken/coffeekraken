@@ -10,6 +10,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
 import __sails from 'sails';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
+// import __vhost from 'vhost';
 
 
 /**
@@ -108,6 +109,21 @@ export default class SFrontendServer extends __SClass {
 
         const frontendServerConfig = __SugarConfig.get('frontendServer');
 
+        if (frontendServerConfig.modules) {
+          for (let i=0; i<Object.keys(frontendServerConfig.modules).length; i++) {
+            const moduleId = Object.keys(frontendServerConfig.modules)[i];
+            const modulePath = __path.resolve(frontendServerConfig.modules[moduleId]);
+            let module;
+            try {
+              module = await import(modulePath);
+            } catch(e) {
+              console.log(e);
+              throw new Error(`<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${modulePath}</cyan>"`);
+            }
+            await module.default(express, frontendServerConfig);
+          }
+        }
+
         if (frontendServerConfig.staticDirs) {
           Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
 
@@ -132,6 +148,11 @@ export default class SFrontendServer extends __SClass {
             );
           });
         }
+
+        // express.use('*.localhost', (req, res, next) => {
+        //   console.log(res, res);
+        //   next();
+        // }));
 
         if (frontendServerConfig.middlewares) {
           for (let i=0; i<Object.keys(frontendServerConfig.middlewares).length; i++) {
@@ -169,6 +190,7 @@ export default class SFrontendServer extends __SClass {
             next();
           });
         }
+
         // routes registration
         if (frontendServerConfig.routes) {
           Object.keys(frontendServerConfig.routes).forEach(async (routeSlug) => {

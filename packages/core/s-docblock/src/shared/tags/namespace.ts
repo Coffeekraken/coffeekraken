@@ -31,10 +31,9 @@ function namespace(data, blockSettings) {
 
   let namespace = data.value;
   if (blockSettings.packageJson) {
-    namespace = `${blockSettings.packageJson.name.replace('/','.')}.${namespace}`;
+    namespace = `${blockSettings.packageJson.name.replace('/','.')}.${namespace.replace(/\s{1,9999999}/gm,'-')}`;
   }
-
-  return namespace;
+  return namespace.replace(/\s{1,999999}/gm, '-');
   
 }
 export default namespace;

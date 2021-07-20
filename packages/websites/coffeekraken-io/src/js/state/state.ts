@@ -7,9 +7,14 @@ export async function loadState(): Promise<any> {
 }
 
 export async function getCurrentVersion(): string {
-    const state = await loadState();
     const docmapJson = await loadDocmap();
-    return state.version ?? docmapJson.snapshots[0];
+
+    let version;
+    if (document.location.hostname.split('.').length >= 4) {
+        version = document.location.hostname.split('.').slice(0,3).join('.').replace(/^v/,'');
+    }
+
+    return version ?? docmapJson.snapshots.slice(-1)[0];
 }
 
 export async function setState(stateObj) {
@@ -26,7 +31,7 @@ export async function loadDocmap(): Promise<any> {
 if (_docmapPromise) return (await _docmapPromise).data;  
 
   const request = new __SRequest({
-      url: `/api/docmap?v=${state.version}`,
+      url: `/api/docmap?v=${state.version ?? ''}`,
       method: 'GET'
   });
 

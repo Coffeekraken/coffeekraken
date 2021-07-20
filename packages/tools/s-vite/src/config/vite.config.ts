@@ -34,7 +34,7 @@ export default {
     outDir: '[config.storage.dist.rootDir]/js'
   },
   server: {
-    host: __ipAddress(),
+    host: '127.0.0.1',
     port: 3000,
     hostname: 'http://[config.vite.server.host]:[config.vite.server.port]',
     proxy: {}

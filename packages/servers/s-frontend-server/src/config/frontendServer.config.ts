@@ -1,5 +1,6 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __SDocmap from '@coffeekraken/s-docmap';
 
 export default {
   assets: '[config.assets]',
@@ -108,40 +109,14 @@ export default {
       path: `${__dirname()}/../node/middleware/benchMiddleware`,
       settings: {}
     },
-    // resolveExtensionFreePath: {
-    //   path: `${__dirname()}/../node/middleware/resolveExtensionFreePath`,
-    //   settings: {
-    //     exclude: ['/docMap'],
-    //     rootDir: '[config.frontendServer.rootDir]',
-    //     extensions: [
-    //       'js',
-    //       'jsx',
-    //       'json',
-    //       'ts',
-    //       'tsx',
-    //       'mjs',
-    //       'cjs',
-    //       'css',
-    //       'scss',
-    //       'sass',
-    //       'jpg',
-    //       'jpeg',
-    //       'png',
-    //       'gif',
-    //       'svg',
-    //       'html',
-    //       'htm'
-    //     ]
-    //   }
-    // },
     frontspec: {
       path: `${__dirname()}/../node/middleware/frontspecMiddleware`,
       settings: {}
     },
-    // defaultAssets: {
-    //   path: `${__dirname()}/../node/middleware/defaultAssetsMiddleware`,
-    //   settings: {}
-    // },
+    docmap: {
+      path: `${__dirname()}/../node/middleware/docmapMiddleware`,
+      settings: {}
+    },
     env: {
       path: `${__dirname()}/../node/middleware/envMiddleware`,
       settings: {}
@@ -150,6 +125,10 @@ export default {
       path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
       settings: {}
     }
+  },
+
+  modules: {
+    'docmapRoutes': `${__dirname()}/../node/modules/docmap/docmap`
   },
 
   routes: {
@@ -277,6 +256,43 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: `${__dirname()}/../node/handlers/doc`
+    },
+    /**
+     * @name            markdown
+     * @namespace       config.frontendServer.handlers
+     * @type            Object
+     *
+     * Store all the "markdown" configuration access like the route, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    markdown: {
+      /**
+       * @name          title
+       * @namespace     config.frontendServer.handlers.markdown
+       * @type          String
+       * @default       Views | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Doc | [title]',
+      /**
+       * @name            handler
+       * @namespace       config.frontendServer.handlers.markdown
+       * @type            Function
+       * @default         ${__dirname()}/../node/handlers/view
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname()}/../node/handlers/markdown`
     },
     /**
      * @name            docmap

@@ -99,40 +99,14 @@ export default {
             path: `${__dirname()}/../node/middleware/benchMiddleware`,
             settings: {}
         },
-        // resolveExtensionFreePath: {
-        //   path: `${__dirname()}/../node/middleware/resolveExtensionFreePath`,
-        //   settings: {
-        //     exclude: ['/docMap'],
-        //     rootDir: '[config.frontendServer.rootDir]',
-        //     extensions: [
-        //       'js',
-        //       'jsx',
-        //       'json',
-        //       'ts',
-        //       'tsx',
-        //       'mjs',
-        //       'cjs',
-        //       'css',
-        //       'scss',
-        //       'sass',
-        //       'jpg',
-        //       'jpeg',
-        //       'png',
-        //       'gif',
-        //       'svg',
-        //       'html',
-        //       'htm'
-        //     ]
-        //   }
-        // },
         frontspec: {
             path: `${__dirname()}/../node/middleware/frontspecMiddleware`,
             settings: {}
         },
-        // defaultAssets: {
-        //   path: `${__dirname()}/../node/middleware/defaultAssetsMiddleware`,
-        //   settings: {}
-        // },
+        docmap: {
+            path: `${__dirname()}/../node/middleware/docmapMiddleware`,
+            settings: {}
+        },
         env: {
             path: `${__dirname()}/../node/middleware/envMiddleware`,
             settings: {}
@@ -141,6 +115,9 @@ export default {
             path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
             settings: {}
         }
+    },
+    modules: {
+        'docmapRoutes': `${__dirname()}/../node/modules/docmap/docmap`
     },
     routes: {
         '/': {
@@ -267,6 +244,43 @@ export default {
             handler: `${__dirname()}/../node/handlers/doc`
         },
         /**
+         * @name            markdown
+         * @namespace       config.frontendServer.handlers
+         * @type            Object
+         *
+         * Store all the "markdown" configuration access like the route, the title, etc...
+         *
+         * @since         2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        markdown: {
+            /**
+             * @name          title
+             * @namespace     config.frontendServer.handlers.markdown
+             * @type          String
+             * @default       Views | [title]
+             *
+             * Specify the page title wanted. Accessible tokens:
+             * - [title]: Name of the view
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            title: 'Doc | [title]',
+            /**
+             * @name            handler
+             * @namespace       config.frontendServer.handlers.markdown
+             * @type            Function
+             * @default         ${__dirname()}/../node/handlers/view
+             *
+             * Specify the handler function that will take care of responding to this "section"
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            handler: `${__dirname()}/../node/handlers/markdown`
+        },
+        /**
          * @name            docmap
          * @namespace       config.frontendServer.handlers
          * @type            Object
@@ -305,4 +319,4 @@ export default {
         }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGtEQUFrRCxDQUFDO0FBQzNFLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVELGVBQWU7SUFDYixNQUFNLEVBQUUsaUJBQWlCO0lBRXpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxJQUFJLEVBQUUsSUFBSTtJQUVWOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsV0FBVyxFQUFFO0lBRXZCOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUUsa0NBQWtDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUU7UUFDVixPQUFPLEVBQUUsK0JBQStCO1FBQ3hDLE1BQU0sRUFBRSw4QkFBOEI7S0FDdkM7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG9DQUFvQztJQUU5Qzs7Ozs7Ozs7Ozs7T0FXRztJQUNILFFBQVEsRUFBRSxNQUFNO0lBRWhCLEtBQUssRUFBRTtRQUNMLE1BQU0sRUFBRTtZQUNOLEtBQUssRUFBRSxnQ0FBZ0M7WUFDdkMsUUFBUSxFQUFFO2dCQUNSLE1BQU0sRUFBRSwrQkFBK0I7Z0JBQ3ZDLFlBQVksRUFBRSxJQUFJO2FBQ25CO1NBQ0Y7UUFDRCxRQUFRLEVBQUU7WUFDUixLQUFLLEVBQUUsY0FBYztZQUNyQixRQUFRLEVBQUU7Z0JBQ1IsTUFBTSxFQUFFLCtCQUErQjtnQkFDdkMsWUFBWSxFQUFFLElBQUk7YUFDbkI7U0FDRjtLQUNGO0lBRUQsV0FBVyxFQUFFO1FBQ1gsS0FBSyxFQUFFO1lBQ0wsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHFDQUFxQztZQUN6RCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsOEJBQThCO1FBQzlCLHdFQUF3RTtRQUN4RSxnQkFBZ0I7UUFDaEIsNEJBQTRCO1FBQzVCLGtEQUFrRDtRQUNsRCxvQkFBb0I7UUFDcEIsY0FBYztRQUNkLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsY0FBYztRQUNkLGVBQWU7UUFDZixlQUFlO1FBQ2YsZUFBZTtRQUNmLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsZ0JBQWdCO1FBQ2hCLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGVBQWU7UUFDZixlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGNBQWM7UUFDZCxRQUFRO1FBQ1IsTUFBTTtRQUNOLEtBQUs7UUFDTCxTQUFTLEVBQUU7WUFDVCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUseUNBQXlDO1lBQzdELFFBQVEsRUFBRSxFQUFFO1NBQ2I7UUFDRCxtQkFBbUI7UUFDbkIsdUVBQXVFO1FBQ3ZFLGlCQUFpQjtRQUNqQixLQUFLO1FBQ0wsR0FBRyxFQUFFO1lBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLG1DQUFtQztZQUN2RCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsV0FBVyxFQUFFO1lBQ1gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLDJDQUEyQztZQUMvRCxRQUFRLEVBQUUsRUFBRTtTQUNiO0tBQ0Y7SUFFRCxNQUFNLEVBQUU7UUFDTixHQUFHLEVBQUU7WUFDSCxPQUFPLEVBQUUsT0FBTztTQUNqQjtRQUNELFNBQVMsRUFBRTtZQUNULE9BQU8sRUFBRSxNQUFNO1NBQ2hCO1FBQ0QsWUFBWSxFQUFFO1lBQ1osT0FBTyxFQUFFLEtBQUs7U0FDZjtRQUNELGFBQWEsRUFBRTtZQUNiLE9BQU8sRUFBRSxRQUFRO1NBQ2xCO0tBQ0Y7SUFFRCxRQUFRLEVBQUU7UUFDUjs7Ozs7Ozs7O1dBU0c7UUFDSCxLQUFLLEVBQUU7WUFDTDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEtBQUssRUFBRSxtQkFBbUI7WUFDMUI7Ozs7Ozs7OztlQVNHO1lBQ0gsT0FBTyxFQUFFLEdBQUcsU0FBUyxFQUFFLHlCQUF5QjtTQUNqRDtRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILElBQUksRUFBRTtZQUNKOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLGdCQUFnQjtZQUN2Qjs7Ozs7Ozs7O2VBU0c7WUFDSCxPQUFPLEVBQUUsR0FBRyxTQUFTLEVBQUUsd0JBQXdCO1NBQ2hEO1FBQ0Q7Ozs7Ozs7OztXQVNHO1FBQ0gsR0FBRyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxLQUFLLEVBQUUsZUFBZTtZQUN0Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLEdBQUcsU0FBUyxFQUFFLHVCQUF1QjtTQUMvQztRQUNEOzs7Ozs7Ozs7V0FTRztRQUNILE1BQU0sRUFBRTtZQUNOOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLGtCQUFrQjtZQUN6Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLEdBQUcsU0FBUyxFQUFFLDBCQUEwQjtTQUNsRDtLQUNGO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGtEQUFrRCxDQUFDO0FBQzNFLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRzVELGVBQWU7SUFDYixNQUFNLEVBQUUsaUJBQWlCO0lBRXpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxJQUFJLEVBQUUsSUFBSTtJQUVWOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsV0FBVyxFQUFFO0lBRXZCOzs7Ozs7Ozs7O09BVUc7SUFDSCxPQUFPLEVBQUUsa0NBQWtDO0lBRTNDOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUU7UUFDVixPQUFPLEVBQUUsK0JBQStCO1FBQ3hDLE1BQU0sRUFBRSw4QkFBOEI7S0FDdkM7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG9DQUFvQztJQUU5Qzs7Ozs7Ozs7Ozs7T0FXRztJQUNILFFBQVEsRUFBRSxNQUFNO0lBRWhCLEtBQUssRUFBRTtRQUNMLE1BQU0sRUFBRTtZQUNOLEtBQUssRUFBRSxnQ0FBZ0M7WUFDdkMsUUFBUSxFQUFFO2dCQUNSLE1BQU0sRUFBRSwrQkFBK0I7Z0JBQ3ZDLFlBQVksRUFBRSxJQUFJO2FBQ25CO1NBQ0Y7UUFDRCxRQUFRLEVBQUU7WUFDUixLQUFLLEVBQUUsY0FBYztZQUNyQixRQUFRLEVBQUU7Z0JBQ1IsTUFBTSxFQUFFLCtCQUErQjtnQkFDdkMsWUFBWSxFQUFFLElBQUk7YUFDbkI7U0FDRjtLQUNGO0lBRUQsV0FBVyxFQUFFO1FBQ1gsS0FBSyxFQUFFO1lBQ0wsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHFDQUFxQztZQUN6RCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsU0FBUyxFQUFFO1lBQ1QsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHlDQUF5QztZQUM3RCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsTUFBTSxFQUFFO1lBQ04sSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHNDQUFzQztZQUMxRCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsR0FBRyxFQUFFO1lBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLG1DQUFtQztZQUN2RCxRQUFRLEVBQUUsRUFBRTtTQUNiO1FBQ0QsV0FBVyxFQUFFO1lBQ1gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLDJDQUEyQztZQUMvRCxRQUFRLEVBQUUsRUFBRTtTQUNiO0tBQ0Y7SUFFRCxPQUFPLEVBQUU7UUFDUCxjQUFjLEVBQUUsR0FBRyxTQUFTLEVBQUUsZ0NBQWdDO0tBQy9EO0lBRUQsTUFBTSxFQUFFO1FBQ04sR0FBRyxFQUFFO1lBQ0gsT0FBTyxFQUFFLE9BQU87U0FDakI7UUFDRCxTQUFTLEVBQUU7WUFDVCxPQUFPLEVBQUUsTUFBTTtTQUNoQjtRQUNELFlBQVksRUFBRTtZQUNaLE9BQU8sRUFBRSxLQUFLO1NBQ2Y7UUFDRCxhQUFhLEVBQUU7WUFDYixPQUFPLEVBQUUsUUFBUTtTQUNsQjtLQUNGO0lBRUQsUUFBUSxFQUFFO1FBQ1I7Ozs7Ozs7OztXQVNHO1FBQ0gsS0FBSyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxLQUFLLEVBQUUsbUJBQW1CO1lBQzFCOzs7Ozs7Ozs7ZUFTRztZQUNILE9BQU8sRUFBRSxHQUFHLFNBQVMsRUFBRSx5QkFBeUI7U0FDakQ7UUFFRDs7Ozs7Ozs7O1dBU0c7UUFDSCxJQUFJLEVBQUU7WUFDSjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEtBQUssRUFBRSxnQkFBZ0I7WUFDdkI7Ozs7Ozs7OztlQVNHO1lBQ0gsT0FBTyxFQUFFLEdBQUcsU0FBUyxFQUFFLHdCQUF3QjtTQUNoRDtRQUNEOzs7Ozs7Ozs7V0FTRztRQUNILEdBQUcsRUFBRTtZQUNIOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsS0FBSyxFQUFFLGVBQWU7WUFDdEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxHQUFHLFNBQVMsRUFBRSx1QkFBdUI7U0FDL0M7UUFDRDs7Ozs7Ozs7O1dBU0c7UUFDSCxRQUFRLEVBQUU7WUFDUjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEtBQUssRUFBRSxlQUFlO1lBQ3RCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsR0FBRyxTQUFTLEVBQUUsNEJBQTRCO1NBQ3BEO1FBQ0Q7Ozs7Ozs7OztXQVNHO1FBQ0gsTUFBTSxFQUFFO1lBQ047Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxLQUFLLEVBQUUsa0JBQWtCO1lBQ3pCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsR0FBRyxTQUFTLEVBQUUsMEJBQTBCO1NBQ2xEO0tBQ0Y7Q0FDRixDQUFDIn0=

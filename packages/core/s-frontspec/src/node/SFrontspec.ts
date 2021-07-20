@@ -9,6 +9,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 
 /**
  * @name                SFrontspec
@@ -91,10 +92,32 @@ export default class SFrontspec extends __SPromise {
         frontspecJson = __readJsonSync(frontspecPath);
       } catch(e) {}
 
-      const res = __deepMerge(
+      let res = __deepMerge(
         __SSugarConfig.get('frontspec.default'),
         frontspecJson
       );
+
+      __deepMap(res, ({path, prop, value, object}) => {
+        if (value === undefined) {
+          return -1;
+        }
+
+        // @environment handling
+        if (prop && prop.match(/.*@.*/) && !prop.includes('/')) {
+          const parts = prop.split('@');
+          const env = parts[1];
+          const p = parts[0];
+
+          if (__SEnv.is(env)) {
+            object[p] = value;
+            return -1;
+          }
+        }
+
+        return value;
+      }, {
+        cloneFirst: false
+      });
 
       resolve(res);
     });
@@ -126,16 +149,6 @@ export default class SFrontspec extends __SPromise {
 
         if (assetObj.env && !__SEnv.is(assetObj.env)) return;
 
-        const filePath = __path.resolve(
-          __packageRootDir(),
-          assetObj.path ?? assetObj.src ?? assetObj.href
-        );
-
-        if (type === 'css') {
-          assetObj.href = assetObj.src;
-          delete assetObj.src;
-        }
-
         const fileObj = {
           type,
           id: assetId,
@@ -143,6 +156,16 @@ export default class SFrontspec extends __SPromise {
             ...assetObj
           }
         };
+
+        const filePath = __path.resolve(
+          __packageRootDir(),
+          assetObj.path ?? assetObj.src ?? assetObj.href
+        );
+
+        if (type === 'css') {
+          fileObj.args.href = fileObj.args.src;
+          delete fileObj.args.src;
+        }
 
         if (__fs.existsSync(filePath)) {
           fileObj.file = __SFile.new(filePath);

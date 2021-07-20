@@ -27,6 +27,10 @@ import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __SFile from '@coffeekraken/s-file';
+import __set from '@coffeekraken/sugar/shared/object/set';
+import __get from '@coffeekraken/sugar/shared/object/get';
+import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 
 /**
  * @name                SDocMap
@@ -127,6 +131,18 @@ class SDocMap extends __SClass implements ISDocMap {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _entries: ISDocMapEntries = {};
+
+  /**
+   * @name    _docmapJson
+   * @type    Object
+   * @private
+   * 
+   * Store the docmap readed with the method "read"
+   * 
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _docmapJson: any;
 
   /**
    * @name            constructor
@@ -265,6 +281,9 @@ class SDocMap extends __SClass implements ISDocMap {
         finalDocmapJson.snapshots = availableSnapshots;
       } catch(e) {}
 
+      // save the docmap json
+      this._docmapJson = finalDocmapJson;
+
       // return the final docmap
       resolve(finalDocmapJson);
     }, {
@@ -272,6 +291,75 @@ class SDocMap extends __SClass implements ISDocMap {
         id: `read`
       }
     });
+  }
+
+  /**
+   * @name          extractMenu
+   * @type          Function
+   * @async
+   * 
+   * This method allows you to extract the docmap items that have a "menu" array property and
+   * return all of these in a structured object
+   * 
+   * @return        {Record<string: SFile>}       The structured menu tree with an SFile instance attached for each source file
+   * 
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async extraceMenu(docmapJson: ISDocMapObj = this._docmapJson): Record<string, __SFile> {
+
+
+
+    const menuObj = {}, menuObjBySlug = {};
+
+    if (!docmapJson) {
+      docmapJson = await this.read();
+    }
+
+    // extract menus
+    Object.keys(docmapJson.map).forEach(namespace => {
+        const docmapObj = docmapJson.map[namespace];
+        if (docmapObj.menu) {
+
+          const dotPath = docmapObj.menu.tree.map(l => {
+            return __camelCase(l);
+          }).join('.');
+
+          let currentObj = menuObj;
+
+          dotPath.split('.').forEach((part, i) => {
+            if (!currentObj[part]) {
+              currentObj[part] = {
+                name: docmapObj.menu.tree[i],
+                items: [],
+                children: {}
+              };
+            }
+
+            if (i >= dotPath.split('.').length - 1) {
+              currentObj[part].items.push({
+                slug: docmapObj.menu.slug,
+                tree: docmapObj.menu.tree,
+                docmap: docmapObj
+              });
+              menuObjBySlug[docmapObj.menu.slug] = {
+                slug: docmapObj.menu.slug,
+                tree: docmapObj.menu.tree,
+                docmap: docmapObj
+              };
+            }
+
+            currentObj = currentObj[part].children;
+
+          });
+        }
+    });
+
+    return {
+      tree: menuObj,
+      slug: menuObjBySlug
+    };
+
   }
 
   /**
@@ -404,10 +492,10 @@ class SDocMap extends __SClass implements ISDocMap {
               relPath: __path.relative(__packageRootDir(), file.path)
             };
             this._entries[
-              `${docblock.namespace}.${docblock.name}`
+              `${docblock.namespace}.${__camelCase(docblock.name)}`
             ] = docblockObj;
           } else if (docblock.name) {
-            children[docblock.name] = docblockEntryObj;
+            children[__camelCase(docblock.name)] = docblockEntryObj;
           }
         });
         docblockObj.children = children;

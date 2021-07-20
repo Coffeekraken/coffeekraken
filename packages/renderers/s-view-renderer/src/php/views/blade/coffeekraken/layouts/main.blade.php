@@ -49,6 +49,13 @@ $package = $package ? json_decode($package) : null;
       @endif
     @endforeach
   @endif
+  <!-- head -->
+  @if ($frontspec && $frontspec->head)
+    @foreach ($frontspec->head as $id=>$raw)
+      <!-- {{ $id }} -->
+      {!! $raw !!}
+    @endforeach
+  @endif
   @yield('head')
 </head>
 <body>

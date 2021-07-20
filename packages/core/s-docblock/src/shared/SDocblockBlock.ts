@@ -16,6 +16,7 @@ import __snippetTag from './tags/snippet';
 import __platformTag from './tags/platform';
 import __namespaceTag from './tags/namespace';
 import __todoTag from './tags/todo';
+import __menuTag from './tags/menu';
 
 /**
  * @name          SDocblockBlock
@@ -383,6 +384,7 @@ SDocblockBlock.registerTag('prop', __paramTag);
 SDocblockBlock.registerTag('setting', __paramTag);
 SDocblockBlock.registerTag('platform', __platformTag);
 SDocblockBlock.registerTag('namespace', __namespaceTag);
+SDocblockBlock.registerTag('menu', __menuTag);
 // SDocblockBlock.registerTag('listens', __listensTag);
 // SDocblockBlock.registerTag('member', __memberTag);
 // SDocblockBlock.registerTag('var', __memberTag);

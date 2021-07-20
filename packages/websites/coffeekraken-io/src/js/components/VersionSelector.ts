@@ -23,11 +23,14 @@ export default class VersionSelector extends LitElement {
         return this;
     }
     _change(e) {
-        setState({
-            version: e.target.value
-        });
         setTimeout(() => {
-            document.location.reload();
+            let newLocation = document.location.href;
+            if (document.location.href.match(/^https?:\/\/v[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\./)) {
+                newLocation = document.location.href.replace(/^(https?:\/\/v)[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.(.*)/, `$1${e.target.value}.$2`);
+            } else {
+                newLocation = document.location.href.replace(/^(https?:\/\/)(.*)/, `$1v${e.target.value}.$2`);
+            }
+            document.location = newLocation;
         });
     }
     render() {

@@ -15,42 +15,50 @@
             <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:50">
                 <a class="s-pl:100 s-typo:bold" href="/#features" title="Features">Features</a>
                 <a class="s-px:50 s-typo:bold" href="/#get-started" title="Get started">Get started</a>
-                <span class="s-pr:100 s-typo:bold" href="/doc" title="Documentation">
-                    <span class="s-tooltip-container">
-                        <a href="/doc/api" title="Documentation">
-                            Documentation
-                        </a>
-                        <div class="s-tooltip:bottom:nowrap">
-                            <div class="__subnav">
-                                
-                                <a href="/doc/get-started" title="Get Started">
-                                    Get started
+
+                @foreach ($docMenu->tree as $menuItem)
+
+                    <span class="s-pr:100 s-typo:bold" >
+                        <span class="s-tooltip-container">
+                            @if ($menuItem->slug)
+                                <a href="{{ $menuItem->slug }}" title="{{ $menuItem->name }}">
+                                    {{ $menuItem->name }}
                                 </a>
-                                <a href="/doc/config" title="Configuration">
-                                    Configuration
-                                </a>
-                                <a href="/doc/development-stack" title="Built-in development stack">
-                                    Built-in <span class="s-color:accent">development stack</span>
-                                </a>
-                                <a href="/doc/css" title="CSS made pleasant again">
-                                    CSS made pleasant again
-                                </a>
-                                <a href="/doc/webcomponents" title="Fully customizable webcomponents">
-                                    Fully customizable webcomponents
-                                </a>
-                                <a href="/doc/sugar-toolkit" title="Sugar toolkit">
-                                    Sugar toolkit
-                                </a>
-                                <a href="/doc/sugar-cli" title="Sugar CLI">
-                                    Sugar CLI
-                                </a>
-                                <a href="/doc/api" title="API navigator">
-                                    API navigator
-                                </a>
-                            </div>
-                        </div>
+                            @else
+                                {{ $menuItem->name }}
+                                <div class="s-tooltip:bottom:nowrap">
+                                    <div class="__subnav">
+                                        @foreach($menuItem as $item)
+                                            @if ($item->slug)
+                                                <a href="{{ $item->slug }}" title="{{ $item->name }}">
+                                                    {{ $item->name }}
+                                                </a>
+                                            @else  
+                                                @if (is_object($item))
+                                                    <span title="{{ $item->name }}" class="s-tooltip-container">
+                                                        {{ $item->name }}
+                                                        <div class="s-tooltip:right-bottom-top:nowrap">
+                                                          <div class="__subnav">
+                                                                @foreach($item as $subItem)
+                                                                    @if ($subItem->slug)
+                                                                        <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}">
+                                                                            {{ $subItem->name }}
+                                                                        </a>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </span>
+                                                @endif
+                                            @endif                                    
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        </span>
                     </span>
-                </span>
+
+                @endforeach
             </nav>
         </div>
 

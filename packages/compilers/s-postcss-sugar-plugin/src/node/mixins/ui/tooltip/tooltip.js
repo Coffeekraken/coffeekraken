@@ -110,6 +110,386 @@ export default function ({ params, atRule, replaceWith }) {
                 }
             `);
                 break;
+            // RIGHT
+            case 'right':
+                vars.push(`  
+                top: 50%;
+                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: auto;    
+                bottom: auto;
+                transform: translateY(-50%);
+
+                &:after {
+                    top: 50%;
+                    left: auto;
+                    right: 100%;
+                    bottom: auto;
+                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  right: 100%;
+                  left: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'right-top':
+                vars.push(`  
+                top: 0;
+                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: auto;    
+                bottom: auto;
+                transform: translateY(-50%);
+
+                &:after {
+                    top: 50%;
+                    left: auto;
+                    right: 100%;
+                    bottom: auto;
+                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  right: 100%;
+                  left: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'right-top-top':
+                vars.push(`  
+                top: 0;
+                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: auto;    
+                bottom: auto;
+                transform: none;
+
+                &:after {
+                    top: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    left: auto;
+                    right: calc(100% - 0.5px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  right: 100%;
+                  left: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'right-center-top':
+                vars.push(`  
+                top: 50%;
+                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: auto;    
+                bottom: auto;
+                transform: translateY(calc(sugar.theme(ui.tooltip.arrowSize) * -1));
+
+                &:after {
+                    top: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    left: auto;
+                    right: calc(100% - 0.5px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  right: 100%;
+                  left: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'right-bottom-top':
+                vars.push(`  
+                top: calc(100% - sugar.theme(ui.tooltip.arrowSize) / 2);
+                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: auto;    
+                bottom: auto;
+                transform: translateY(calc(sugar.theme(ui.tooltip.arrowSize) * -1));
+
+                &:after {
+                    top: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    left: auto;
+                    right: calc(100% - 0.5px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  right: 100%;
+                  left: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'right-bottom':
+                vars.push(`  
+                top: auto;
+                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: auto;    
+                bottom: 0;
+                transform: translateY(50%);
+
+                &:after {
+                    top: 50%;
+                    left: auto;
+                    right: 100%;
+                    bottom: auto;
+                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  right: 100%;
+                  left: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'right-bottom-bottom':
+                vars.push(`  
+                bottom: 0;
+                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: auto;    
+                top: auto;
+                transform: none;
+
+                &:after {
+                    top: calc(100% - sugar.theme(ui.tooltip.arrowSize) * 1.5);
+                    left: auto;
+                    right: calc(100% - 1px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            // LEFT
+            case 'left':
+                vars.push(`  
+                top: 50%;
+                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: auto;    
+                bottom: auto;
+                transform: translateY(-50%);
+
+                &:after {
+                    top: 50%;
+                    right: auto;
+                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    bottom: auto;
+                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'left-top':
+                vars.push(`  
+                top: 0;
+                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: auto;    
+                bottom: auto;
+                transform: translateY(-50%);
+
+                &:after {
+                    top: 50%;
+                    right: auto;
+                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    bottom: auto;
+                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'left-top-top':
+                vars.push(`  
+                top: 0;
+                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: auto;    
+                bottom: auto;
+                transform: none;
+
+                &:after {
+                    top: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    right: auto;
+                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'left-center-top':
+                vars.push(`  
+                top: 50%;
+                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: auto;    
+                bottom: auto;
+                transform: translateY(calc(sugar.theme(ui.tooltip.arrowSize) * -1));
+
+                &:after {
+                    top: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    right: auto;
+                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'left-bottom-top':
+                vars.push(`  
+                top: calc(100% - sugar.theme(ui.tooltip.arrowSize) / 2);
+                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: auto;    
+                bottom: auto;
+                transform: translateY(calc(sugar.theme(ui.tooltip.arrowSize) * -1));
+
+                &:after {
+                    top: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    right: auto;
+                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'left-bottom':
+                vars.push(`  
+                top: auto;
+                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: auto;    
+                bottom: 0;
+                transform: translateY(50%);
+
+                &:after {
+                    top: 50%;
+                    right: auto;
+                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    bottom: auto;
+                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
+            case 'left-bottom-bottom':
+                vars.push(`  
+                bottom: 0;
+                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: auto;    
+                top: auto;
+                transform: none;
+
+                &:after {
+                    top: calc(100% - sugar.theme(ui.tooltip.arrowSize) * 1.5);
+                    right: auto;
+                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    bottom: auto;
+                    margin-top: 0;
+                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    transform: rotate(-90deg);
+                }
+                &:before {
+                  height: 100%;
+                  width: sugar.theme(ui.tooltip.arrowSize);
+                  left: 100%;
+                  right: auto;
+                  bottom: auto;
+                  top: 0;
+                }
+            `);
+                break;
             // case 'top-left-right':
             //   vars.push(`  
             //       top: auto;
@@ -349,4 +729,4 @@ export default function ({ params, atRule, replaceWith }) {
     }
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9vbHRpcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvb2x0aXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFLckQsTUFBTSxvQ0FBcUMsU0FBUSxZQUFZOztBQUN0RCwrQ0FBVSxHQUFHO0lBQ2xCLFFBQVEsRUFBRTtRQUNSLElBQUksRUFBRSxRQUFRO1FBQ2QsTUFBTSxFQUFFLENBQUMsS0FBSyxFQUFDLFVBQVUsRUFBQyxXQUFXLEVBQUMsT0FBTyxFQUFDLFdBQVcsRUFBQyxjQUFjLEVBQUMsUUFBUSxFQUFDLGFBQWEsRUFBQyxjQUFjLEVBQUMsTUFBTSxFQUFDLFVBQVUsRUFBQyxhQUFhLENBQUM7UUFDL0ksT0FBTyxFQUFFLEtBQUs7S0FDZjtJQUNELEtBQUssRUFBRTtRQUNMLElBQUksRUFBRSxlQUFlO1FBQ3JCLE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBQyxLQUFLLEVBQUMsVUFBVSxDQUFDO1FBQ2pDLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBQyxLQUFLLEVBQUMsVUFBVSxDQUFDO0tBQ25DO0NBQ0YsQ0FBQztBQVFKLE9BQU8sRUFBRSxvQ0FBb0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUM3RCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLG1CQUNmLFFBQVEsRUFBRSxLQUFLLEVBQ2YsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFDLEtBQUssRUFBQyxVQUFVLENBQUMsSUFDN0IsTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7T0FNVCxDQUFDLENBQUE7S0FDTDtJQUVELElB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9vbHRpcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvb2x0aXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFLckQsTUFBTSxvQ0FBcUMsU0FBUSxZQUFZOztBQUN0RCwrQ0FBVSxHQUFHO0lBQ2xCLFFBQVEsRUFBRTtRQUNSLElBQUksRUFBRSxRQUFRO1FBQ2QsTUFBTSxFQUFFLENBQUMsS0FBSyxFQUFDLFVBQVUsRUFBQyxXQUFXLEVBQUMsT0FBTyxFQUFDLFdBQVcsRUFBQyxjQUFjLEVBQUMsUUFBUSxFQUFDLGFBQWEsRUFBQyxjQUFjLEVBQUMsTUFBTSxFQUFDLFVBQVUsRUFBQyxhQUFhLENBQUM7UUFDL0ksT0FBTyxFQUFFLEtBQUs7S0FDZjtJQUNELEtBQUssRUFBRTtRQUNMLElBQUksRUFBRSxlQUFlO1FBQ3JCLE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBQyxLQUFLLEVBQUMsVUFBVSxDQUFDO1FBQ2pDLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBQyxLQUFLLEVBQUMsVUFBVSxDQUFDO0tBQ25DO0NBQ0YsQ0FBQztBQVFKLE9BQU8sRUFBRSxvQ0FBb0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUM3RCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLG1CQUNmLFFBQVEsRUFBRSxLQUFLLEVBQ2YsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFDLEtBQUssRUFBQyxVQUFVLENBQUMsSUFDN0IsTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7T0FNVCxDQUFDLENBQUE7S0FDTDtJQUVELElB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

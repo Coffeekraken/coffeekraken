@@ -20,6 +20,10 @@ s-code-example {
   }
 }
 
+a:active {
+  color: red;
+}
+
 @sugar.icon.classes(
   fa:user:user
   fa:heart:heart

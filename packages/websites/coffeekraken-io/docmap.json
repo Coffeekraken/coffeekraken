@@ -38,7 +38,65 @@
                 "menu": {
                     "tree": [
                         "Documentation",
-                        "Configuration concept"
+                        "Configuration"
+                    ],
+                    "slug": "/doc/config/concept"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "configSystem.md",
+                "extension": "md",
+                "relPath": "src/doc/config/configSystem.md",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.config.configurationConcept1": {
+                "name": "Configuration concept #1",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Configuration"
+                    ],
+                    "slug": "/doc/config/concept"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "configSystem.md",
+                "extension": "md",
+                "relPath": "src/doc/config/configSystem.md",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.config.configurationConcept2": {
+                "name": "Configuration concept #2",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Configuration"
                     ],
                     "slug": "/doc/config/concept"
                 },

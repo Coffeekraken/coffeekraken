@@ -8,7 +8,7 @@
             <div>
                 <img class="__illustration" src="/src/img/chest.png" />
             </div>
-            <div class="s-rhythm-vertical">
+            <div class="s-vr">
                 <h1 class="s-typo:h1">Features</h1>
                 <p class="s-typo:p">
                     Coffeekraken toolkit has been designed from the ground up to be <span class="s-color-accent">as modular as possible</span>. This mean that we want you to be able to pick what you need and leave the rest aside...<br>

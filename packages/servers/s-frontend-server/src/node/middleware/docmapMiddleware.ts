@@ -32,19 +32,15 @@ import __SDocmap from '@coffeekraken/s-docmap';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const _requestedFiles: Record<string, any> = {};
 function docmapMiddleware(settings = {}) {
   return async function (req, res, next) {
 
     const docmap = new __SDocmap();
-    const menu = await docmap.extraceMenu();
+    const menu = await docmap.extractMenu();
 
-    // console.log(menu);
-
-    // console.log(docmapJson);
-
-    //  res.templateData.assets[assetObj.type][assetHash] = _requestedFiles[originalUrl];
-    
+    if (!res.templateData) res.templateData = {};
+    res.templateData.docMenu = menu;
+   
 
     __SBench.step('request', 'docmapMiddleware');
 

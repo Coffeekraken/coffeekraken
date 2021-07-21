@@ -1,0 +1,17 @@
+.markdown {
+
+
+    .__nav {
+        position: sticky;
+        top: 98px;
+        height: calc(100vh - 98px);
+        overflow: auto;
+        border-right: 1px solid sugar.color(ui, border);
+        @sugar.scrollbar(accent, 2px);
+    }
+
+    a[actual] {
+        color: sugar.color(accent);
+    }
+
+}

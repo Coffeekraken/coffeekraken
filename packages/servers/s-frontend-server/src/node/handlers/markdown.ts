@@ -30,7 +30,7 @@ export default function markdown(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
 
     const docmap = new __SDocMap();
-    const menu = await docmap.extraceMenu();
+    const menu = await docmap.extractMenu();
 
     let html;
 

@@ -1,57 +1,42 @@
-// import __SInterface from '@coffeekraken/s-interface';
-// import __theme from '../../utils/theme';
+import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
+import __minifyVar from '../../utils/minifyVar';
 
-// class postcssSugarPluginPaddingInterface extends __SInterface {
-//   static definition = {
-//     name: {
-//       type: 'String',
-//       required: true,
-//       alias: 'n'
-//     },
-//     ratio: {
-//       type: 'Number',
-//       alias: 'r'
-//     },
-//     return: {
-//       type: 'String',
-//       values: ['var', 'value'],
-//       default: 'var'
-//     }
-//   };
-// }
-// export { postcssSugarPluginPaddingInterface as interface };
+class postcssSugarPluginPaddingFunctionInterface extends __SInterface {
+  static definition = {
+    padding: {
+      type: 'String',
+      values: Object.keys(__theme().config('padding')),
+      default: 'default',
+      required: true
+    }
+  };
+}
+export { postcssSugarPluginPaddingFunctionInterface as interface };
 
-// export interface IPostcssSugarPluginPaddingParams {
-//   name: string;
-//   return: 'var' | 'value';
-// }
+export interface IPostcssSugarPluginPaddingFunctionParams {
+  padding: string;
+}
 
-// export default function (
-//   params: Partial<IPostcssSugarPluginPaddingParams> = {}
-// ) {
-//   const finalParams: IPostcssSugarPluginPaddingParams = {
-//     name: '',
-//     return: 'var',
-//     ...params
-//   };
+export default function ({
+  params
+}: {
+  params: Partial<IPostcssSugarPluginPaddingFunctionParams>;
+}) {
+  const finalParams: IPostcssSugarPluginPaddingFunctionParams = {
+    padding: '',
+    ...params
+  };
 
-//   let theme = 'default',
-//     name = finalParams.name;
+  const padding = finalParams.padding;
 
-//   if (name.split('.').length === 2) {
-//     theme = name.split('.')[0];
-//     name = name.split('.')[1];
-//   }
+  if (__theme().config('padding')[padding] === undefined) return padding;
 
-//   const size = themeConfig(`padding.${name}`, theme);
+  const paddings = padding.split(' ').map((s) => {
+    const size = __theme().config(`padding.${s}`);
+    if (!size) return size;
+    return `var(${__minifyVar(`--s-theme-padding-${s}`)}, ${size})`;
+  });
 
-//   // if (finalParams.ratio) {
-
-//   // }
-
-//   if (finalParams.return === 'var') {
-//     return `var(--s-theme-${theme}-padding-${name}, ${size})`;
-//   } else {
-//     return size;
-//   }
-// }
+  return paddings.join(' ');
+}

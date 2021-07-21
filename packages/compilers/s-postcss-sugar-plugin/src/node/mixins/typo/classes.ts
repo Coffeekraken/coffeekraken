@@ -51,7 +51,7 @@ export default function ({
     const cls = `s-typo:${typoName}`;
 
     const css = __jsObjectToCssProperties(typoObj, {
-      exclude: [':rhythm-vertical']
+      exclude: [':rhythm:vertical']
     });
 
     vars.push(`/**
@@ -73,7 +73,29 @@ export default function ({
         ${css}
    }`);
 
-   if (typoObj[':rhythm-vertical']) {
+   vars.push(`/**
+    * @name            s-format:text ${typoName}
+    * @namespace        sugar.css.typo
+    * @type             CssClass
+    * @platform         css
+    * @status           beta
+    * 
+    * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any ${typoName} tag in the .s-format:text scope
+    * 
+    * @example      html
+    * <div class="s-format\:text">
+    *   <${typoName}>Something cool</${typoName}>
+    * 
+    * @since        2.0.0
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+   @sugar.format.text {
+     ${typoName} {
+           ${css}
+     }
+   }`);
+
+   if (typoObj[':rhythm:vertical']) {
 
         vars.push(`
 
@@ -95,10 +117,34 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
        @sugar.rhythm.vertical {
-        &.${cls}, & .${cls} {
-          ${__jsObjectToCssProperties(typoObj[':rhythm-vertical'])}
+        &.${cls.replace(':','--')}, & .${cls.replace(':','--')} {
+          ${__jsObjectToCssProperties(typoObj[':rhythm:vertical'])}
         }
       }
+      `);
+
+      vars.push(`
+
+        /**
+          * @name         s-rhythm:vertical.s-format:text ${typoName}
+          * @namespace    sugar.css.typo
+          * @type         CssClass
+          * @platform     css
+          * @status       beta
+          * 
+          * This class allows you to activate the space(s) on your "<yellow>${typoName}</yellow>" scopes .s-format:text tags
+          * 
+          * @example      html
+          * <div class="s-rhythm\:vertical s-format\:text">
+          *     <${typoName}>Something cool</${typoName}>
+          * </div>
+          * 
+          * @since    2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+       .s-rhythm--vertical.s-format--text ${typoName}, ${typoName}.s-rhythm--vertical.s-format--text {
+          ${__jsObjectToCssProperties(typoObj[':rhythm:vertical'])}
+        }
       `);
 
     }

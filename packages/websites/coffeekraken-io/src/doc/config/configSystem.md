@@ -4,7 +4,7 @@
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Documentation / Configuration concept           /doc/config/concept
+ * @menu            Documentation / Configuration           /doc/config/concept
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

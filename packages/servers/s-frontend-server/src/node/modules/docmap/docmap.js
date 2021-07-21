@@ -11,7 +11,7 @@ import __SDocmap from '@coffeekraken/s-docmap';
 export default function docmapRoutes(express, config) {
     return __awaiter(this, void 0, void 0, function* () {
         const docmap = new __SDocmap();
-        const menu = yield docmap.extraceMenu();
+        const menu = yield docmap.extractMenu();
         Object.keys(menu.slug).forEach(slug => {
             config.routes[slug] = {
                 handler: 'markdown'

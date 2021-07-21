@@ -49,10 +49,13 @@ export default function ({
         * This class represent an "<yellow>interactive</yellow>" list
         * 
         * @example        html
-        * <ul class="s-list--interactive" />
+        * <ul class="s-list--interactive">
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
   vars.push([`.s-list--interactive {`, `@sugar.ui.list.interactive;`, `}`].join('\n'));
 
@@ -65,10 +68,13 @@ export default function ({
         * This class represent an "<yellow>ul</yellow>" list
         * 
         * @example        html
-        * <ul class="s-list--ul" />
+        * <ul class="s-list--ul">
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
   vars.push([`.s-list--ul {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
 
@@ -81,16 +87,67 @@ export default function ({
         * This class represent an "<yellow>ul</yellow>" list with some "<cyan>icon</cyan>" instead of the default bullet
         * 
         * @example        html
-        * <ul class="s-list--ul s-list--icon" />
+        * <ul class="s-list--ul s-list--icon">
         *   <li>
         *     <i class="s-icon-user" />
         *     Hello
         *   </li>
         * </ul>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
   vars.push([`.s-list--icon.s-list--ul {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
 
-  // ul
+  vars.push(`/**
+        * @name           s-rhythm:vertical ul
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>ul</yellow>" list in the s-rhythm:vertical scope
+        * 
+        * @example        html
+        * <div class="s-format\:text s-rhythm\:vertical">
+        *   <ul class="s-list--ul">
+        *     <li>Hello</li>
+        *     <li>World</li>
+        *   </ul>
+        * </div>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+    .s-rhythm--vertical ul {
+        margin-bottom: sugar.theme(ui.list.rhythmVertical);
+    } 
+  `);
+  
+  vars.push(`/**
+        * @name           s-format:text ul
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>ul</yellow>" list in the s-format:text scope
+        * 
+        * @example        html
+        * <div class="s-format\:text">
+        *   <ul>
+        *     <li>Hello</li>
+        *     <li>World</li>
+        *   </ul>
+        * </div>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+    @sugar.format.text {
+      ul {
+        @sugar.ui.list.ul;
+      }
+    } 
+  `);
+
+  // ol
   vars.push(`/**
         * @name           s-list--ol
         * @namespace      sugar.css.ui.list
@@ -99,12 +156,64 @@ export default function ({
         * This class represent an "<yellow>ol</yellow>" list
         * 
         * @example        html
-        * <ul class="s-list--ol" />
+        * <ul class="s-list--ol">
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
   vars.push([`.s-list--ol {`, `@sugar.ui.list.ol;`, `}`].join('\n'));
+
+    vars.push(`/**
+        * @name           s-rhythm:vertical ol
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>ol</yellow>" list in the s-rhythm:vertical scope
+        * 
+        * @example        html
+        * <div class="s-format\:text s-rhythm\:vertical">
+        *   <ol>
+        *     <li>Hello</li>
+        *     <li>World</li>
+        *   </ol>
+        * </div>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+    .s-rhythm--vertical ol {
+        margin-bottom: sugar.theme(ui.list.rhythmVertical);
+    } 
+  `);
+
+  vars.push(`/**
+        * @name           s-format:text ol
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>ol</yellow>" list in the s-format:text scope
+        * 
+        * @example        html
+        * <div class="s-format\:text">
+        *   <ol>
+        *     <li>Hello</li>
+        *     <li>World</li>
+        *   </ol>
+        * </div>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+    @sugar.format.text {
+      ol {
+        @sugar.ui.list.ol;
+      }
+    } 
+  `);
+
 
   Object.keys(__theme().config('color')).forEach((colorName) => {
     vars.push(`

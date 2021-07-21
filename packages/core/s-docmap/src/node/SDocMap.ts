@@ -306,11 +306,10 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async extraceMenu(docmapJson: ISDocMapObj = this._docmapJson): Record<string, __SFile> {
+  async extractMenu(docmapJson: ISDocMapObj = this._docmapJson): Record<string, __SFile> {
 
-
-
-    const menuObj = {}, menuObjBySlug = {};
+    const menuObj = {
+    }, menuObjBySlug = {};
 
     if (!docmapJson) {
       docmapJson = await this.read();
@@ -319,40 +318,43 @@ class SDocMap extends __SClass implements ISDocMap {
     // extract menus
     Object.keys(docmapJson.map).forEach(namespace => {
         const docmapObj = docmapJson.map[namespace];
-        if (docmapObj.menu) {
 
-          const dotPath = docmapObj.menu.tree.map(l => {
-            return __camelCase(l);
-          }).join('.');
+        if (!docmapObj.menu) return;
 
-          let currentObj = menuObj;
+        const dotPath = docmapObj.menu.tree.map(l => {
+          return __camelCase(l);
+        }).join('.');
 
-          dotPath.split('.').forEach((part, i) => {
-            if (!currentObj[part]) {
-              currentObj[part] = {
-                name: docmapObj.menu.tree[i],
-                items: [],
-                children: {}
-              };
-            }
+        let currentObj = menuObj;
 
-            if (i >= dotPath.split('.').length - 1) {
-              currentObj[part].items.push({
-                slug: docmapObj.menu.slug,
-                tree: docmapObj.menu.tree,
-                docmap: docmapObj
-              });
-              menuObjBySlug[docmapObj.menu.slug] = {
-                slug: docmapObj.menu.slug,
-                tree: docmapObj.menu.tree,
-                docmap: docmapObj
-              };
-            }
 
-            currentObj = currentObj[part].children;
 
-          });
-        }
+        dotPath.split('.').forEach((part, i) => {
+
+          if (!currentObj[part]) {
+            currentObj[part] = {
+              name: docmapObj.menu.tree[i]
+            };
+          }
+        
+          if (i >= dotPath.split('.').length -1) {
+            currentObj[part][__camelCase(docmapObj.name)] = {
+              name: docmapObj.name,
+              slug: docmapObj.menu.slug,
+              tree: docmapObj.menu.tree,
+              // docmap: docmapObj
+            };
+            menuObjBySlug[docmapObj.menu.slug] = {
+              name: docmapObj.name,
+              slug: docmapObj.menu.slug,
+              tree: docmapObj.menu.tree,
+              docmap: docmapObj
+            };
+          }
+
+          currentObj = currentObj[part];          
+
+        });
     });
 
     return {

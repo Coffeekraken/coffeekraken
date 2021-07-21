@@ -36,7 +36,7 @@ export default function markdown(req, res, settings = {}) {
     return new __SPromise(({ resolve, reject, pipe }) => __awaiter(this, void 0, void 0, function* () {
         var _a;
         const docmap = new __SDocMap();
-        const menu = yield docmap.extraceMenu();
+        const menu = yield docmap.extractMenu();
         let html;
         if (menu.slug[req.url]) {
             const markdownStr = __fs.readFileSync(menu.slug[req.url].docmap.path, 'utf8').toString();

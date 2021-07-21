@@ -20,7 +20,7 @@
             </a>
         </div>
 
-        <div class="s-py:100 s-rhythm-vertical">
+        <div class="s-py:100 s-vr">
             <img src="/src/img/features-development-logos.svg" class="s-mx:auto s-display:block" />
             <s-code-example class="s-mt:50 @desktop s-mr:-100">
                 <template lang="bash">

@@ -32,22 +32,24 @@ __SComponentUtils.setDefaultProps('s-code-example', {
 // webcomponents
 __SCodeExampleWebcomponent();
 
-// // features
-// import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
+// features
+import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
+import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
 
-// // features
-// __smoothScroll({
-//   scroll: {
-//     offset: 188
-//   }
-// });
+// features
+__smoothScroll({
+  scroll: {
+    offset: 188
+  }
+});
+__linksStateAttributes();
 
-// document.addEventListener('scroll', (e) => {
-//   if (document.body.scrollTop >= 10) {
-//     document.body.classList.add('scrolled');
-//   } else {
-//     document.body.classList.remove('scrolled');
-//   }
-// });
+document.addEventListener('scroll', (e) => {
+  if (document.body.scrollTop >= 10) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
+  }
+});
 
 __expandPleasantCssClassnamesLive();

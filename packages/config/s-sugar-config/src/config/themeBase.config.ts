@@ -1336,6 +1336,7 @@ export default {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',
+      rhythmVertical: '[theme.margin.20]',
       styles: ['default'],
       colors: ['primary:default']
     },
@@ -1381,8 +1382,8 @@ export default {
         'font-size': 100,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 50
+        ':rhythm:vertical': {
+          'margin-bottom': 40
         }
       },
       h2: {
@@ -1390,8 +1391,8 @@ export default {
         'font-size': 90,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 50
+        ':rhythm:vertical': {
+          'margin-bottom': 30
         }
       },
       h3: {
@@ -1399,8 +1400,8 @@ export default {
         'font-size': 80,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 40
+        ':rhythm:vertical': {
+          'margin-bottom': 30
         }
       },
       h4: {
@@ -1408,8 +1409,8 @@ export default {
         'font-size': 70,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 40
+        ':rhythm:vertical': {
+          'margin-bottom': 30
         }
       },
       h5: {
@@ -1417,8 +1418,8 @@ export default {
         'font-size': 60,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 30
+        ':rhythm:vertical': {
+          'margin-bottom': 20
         }
       },
       h6: {
@@ -1426,8 +1427,8 @@ export default {
         'font-size': 50,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 30
+        ':rhythm:vertical': {
+          'margin-bottom': 20
         }
       },
       p: {
@@ -1435,8 +1436,8 @@ export default {
         'font-size': 40,
         'line-height': 1.5,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 50
+        ':rhythm:vertical': {
+          'margin-bottom': 30
         }
       },
       'p-lead': {
@@ -1444,8 +1445,15 @@ export default {
         'font-size': 50,
         'line-height': 1.2,
         'max-width': '55ch',
-        ':rhythm-vertical': {
-          'margin-bottom': 50
+        ':rhythm:vertical': {
+          'margin-bottom': 30
+        }
+      },
+      hr: {
+        color: '[theme.color.main.default]',
+        opacity: 0.2,
+        ':rhythm:vertical': {
+          'margin-bottom': 30
         }
       },
       a: {

@@ -8,13 +8,9 @@ body {
     width: 100%;
     z-index: 100;
     background: white;
-    padding: sugar.space(40) 0;
+    padding: sugar.space(20) 0;
     transition: padding ease-in-out .2s;
     @sugar.depth(10);
-
-    .scrolled & {
-        padding: sugar.space(20) 0;
-    }
 
     /* &:before {
         content: '';

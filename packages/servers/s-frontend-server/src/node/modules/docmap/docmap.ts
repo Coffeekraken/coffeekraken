@@ -5,7 +5,7 @@ export default async function docmapRoutes(express, config) {
 
     const docmap = new __SDocmap();
 
-    const menu = await docmap.extraceMenu();
+    const menu = await docmap.extractMenu();
 
     Object.keys(menu.slug).forEach(slug => {
         config.routes[slug] = {

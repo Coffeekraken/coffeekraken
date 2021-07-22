@@ -303,6 +303,13 @@ export default class SConfig {
       }
     }
 
+    // make a simple [] correspondance check
+    __deepMap(config, ({prop, value, path}) => {
+      if (typeof value === 'string' && value.split('[').length !== value.split(']').length) {
+        throw new Error(`<red>[${this.constructor.name}]</red> We think that you've made a mistake in your config file at path "<yellow>${path}</yellow>" with the value "<cyan>${value}</cyan>"`);
+      }
+    })
+
     // handle the "extends" global property
     Object.keys(config).forEach(configName => {
       config[configName] = extendsConfigIfNeeded(config[configName]);

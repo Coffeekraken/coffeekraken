@@ -42,6 +42,9 @@ export default function jsObjectToCssProperties(
     if (finalSettings.exclude.indexOf(prop) !== -1) return;
 
     const value = jsObject[prop];
+
+    if (!value) return;
+
     switch (prop) {
       case 'font-family':
         propsStack.push(`@sugar.font.family(${value});`);
@@ -52,17 +55,22 @@ export default function jsObjectToCssProperties(
       case 'color':
         propsStack.push(`color: sugar.color(${value});`);
         break;
+      case 'background-color':
+        propsStack.push(`background-color: sugar.color(${value});`);
+        break;
       case 'margin':
       case 'margin-top':
       case 'margin-bottom':
       case 'margin-left':
       case 'margin-right':
+        propsStack.push(`${prop}: sugar.margin(${value});`);
+      break;
       case 'padding':
       case 'padding-top':
       case 'padding-bottom':
       case 'padding-left':
       case 'padding-right':
-        propsStack.push(`${prop}: sugar.space(${value})`);
+        propsStack.push(`${prop}: sugar.padding(${value});`);
         break;
       default:
         propsStack.push(`${prop}: ${value};`);

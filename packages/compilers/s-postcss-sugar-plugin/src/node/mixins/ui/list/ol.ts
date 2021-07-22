@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __themeVar from '../../../utils/themeVar';
 import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
+import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiListOlMixinInterface extends __SInterface {
   static definition = {
@@ -53,6 +54,11 @@ export default function ({
           width: 2ch;
         }          
       }
+
+      &.s-rhythm--vertical,
+      .s-rhythm--vertical & {
+        ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+     } 
   `);
 
     replaceWith(vars);

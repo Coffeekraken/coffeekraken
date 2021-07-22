@@ -4,6 +4,9 @@ import __picomatch from 'picomatch'
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import type { PluginOption, ViteDevServer } from 'vite'
+import __globalEventEmitter from '@coffeekraken/sugar/node/event/globalEventEmitter';
+import __fs from 'fs';
+import __chokidar from 'chokidar';
 
 /**
  * Configuration for the watched paths.
@@ -25,25 +28,42 @@ export default (config: Config = {}): PluginOption => ({
 
   configureServer ({ watcher, ws, config: { logger } }: ViteDevServer) {
     config = __deepMerge({
-        config: true
+        config: true,
+        css: true
     }, config);
 
     const configFiles = __SugarConfig.foldersRealPaths.map(p => `${p}/*.config.js`);
 
-    const shouldReload = __picomatch(configFiles)
+    const shouldReloadConfigs = __picomatch(configFiles)
     const checkReload = (path: string) => {
-      if (shouldReload(path)) {
-        setTimeout(() => ws.send({ type: 'full-reload' }), 100)
-        // if (log)
-        //   logger.info(`${green('page reload')} ${dim(relative(root, path))}`, { clear: true, timestamp: true })
-      }
+
+      if (!path.match(/\.config\.js$/) && !path.match(/\.css$/)) return;
+    
+
+      let passChecks = false;
+
+      if (shouldReloadConfigs(path) && config.config) passChecks = true;
+      if (!passChecks && path.match(/\.css$/) && config.css) passChecks = true;
+
+      if (!passChecks) return;
+  
+
+      setTimeout(() => ws.send({ type: 'full-reload' }, path ), 100);
     }
 
+    __globalEventEmitter.on('s-postcss-sugar-plugin-import-update', (e) => {
+      checkReload(e.path);
+    });
+
+    const localWatcher = __chokidar.watch(configFiles, {
+      ignoreInitial: true
+    });
+
     // Ensure Vite keeps track of the files and triggers HMR as needed.
-    watcher.add(configFiles)
+    // watcher.add(configFiles)
 
     // Do a full page reload if any of the watched files changes.
-    watcher.on('add', checkReload)
-    watcher.on('change', checkReload)
+    localWatcher.on('add', checkReload)
+    localWatcher.on('change', checkReload)
   },
 })

@@ -1,12 +1,9 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
+import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
   static definition = {
-    colors: {
-      type: 'String[]',
-      alias: 'c'
-    },
     styles: {
       type: 'String[]',
       alias: 's'
@@ -30,11 +27,9 @@ export default function ({
   atRule: any;
   replaceWith: Function;
 }) {
-  const colors = __theme().config('ui.list.colors');
   const styles = __theme().config('ui.list.styles');
 
   const finalParams: IPostcssSugarPluginUiListClassesParams = {
-    colors,
     styles,
     ...params
   };
@@ -47,6 +42,8 @@ export default function ({
         * @type           CssClass
         * 
         * This class represent an "<yellow>interactive</yellow>" list
+        * 
+        * @feature       Support vertical rhythm
         * 
         * @example        html
         * <ul class="s-list--interactive">
@@ -67,6 +64,8 @@ export default function ({
         * 
         * This class represent an "<yellow>ul</yellow>" list
         * 
+        * @feature       Support vertical rhythm
+        * 
         * @example        html
         * <ul class="s-list--ul">
         *   <li>Hello</li>
@@ -75,8 +74,17 @@ export default function ({
         * 
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-  vars.push([`.s-list--ul {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
+      */
+      .s-list--ul {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
+        @sugar.ui.list.ul;
+      }
+
+      ul.s-rhythm--vertical,
+      .s-rhythm--vertical ul {
+        ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+      } 
+  `);
 
   // ul:icon
   vars.push(`/**
@@ -98,29 +106,6 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
   vars.push([`.s-list--icon.s-list--ul {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
-
-  vars.push(`/**
-        * @name           s-rhythm:vertical ul
-        * @namespace      sugar.css.ui.list
-        * @type           CssClass
-        * 
-        * This class represent an "<yellow>ul</yellow>" list in the s-rhythm:vertical scope
-        * 
-        * @example        html
-        * <div class="s-format\:text s-rhythm\:vertical">
-        *   <ul class="s-list--ul">
-        *     <li>Hello</li>
-        *     <li>World</li>
-        *   </ul>
-        * </div>
-        * 
-        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-    .s-rhythm--vertical ul {
-        margin-bottom: sugar.theme(ui.list.rhythmVertical);
-    } 
-  `);
   
   vars.push(`/**
         * @name           s-format:text ul
@@ -140,10 +125,10 @@ export default function ({
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    @sugar.format.text {
-      ul {
+     ul.s-format--text,
+    .s-format--text ul {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
         @sugar.ui.list.ul;
-      }
     } 
   `);
 
@@ -155,6 +140,8 @@ export default function ({
         * 
         * This class represent an "<yellow>ol</yellow>" list
         * 
+        * @feature       Support vertical rhythm
+        * 
         * @example        html
         * <ul class="s-list--ol">
         *   <li>Hello</li>
@@ -163,30 +150,16 @@ export default function ({
         * 
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-  vars.push([`.s-list--ol {`, `@sugar.ui.list.ol;`, `}`].join('\n'));
-
-    vars.push(`/**
-        * @name           s-rhythm:vertical ol
-        * @namespace      sugar.css.ui.list
-        * @type           CssClass
-        * 
-        * This class represent an "<yellow>ol</yellow>" list in the s-rhythm:vertical scope
-        * 
-        * @example        html
-        * <div class="s-format\:text s-rhythm\:vertical">
-        *   <ol>
-        *     <li>Hello</li>
-        *     <li>World</li>
-        *   </ol>
-        * </div>
-        * 
-        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    .s-rhythm--vertical ol {
-        margin-bottom: sugar.theme(ui.list.rhythmVertical);
-    } 
+      .s-list--ol {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
+        @sugar.ui.list.ol;
+      }   
+
+      ol.s-rhythm--vertical,
+      .s-rhythm--vertical ol {
+        ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+      } 
   `);
 
   vars.push(`/**
@@ -207,11 +180,11 @@ export default function ({
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    @sugar.format.text {
-      ol {
+      ol.s-format--text,
+      .s-format--text ol {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
         @sugar.ui.list.ol;
       }
-    } 
   `);
 
 

@@ -51,7 +51,7 @@ export default function ({
     const cls = `s-typo:${typoName}`;
 
     const css = __jsObjectToCssProperties(typoObj, {
-      exclude: [':rhythm:vertical']
+      exclude: [':rhythmVertical']
     });
 
     vars.push(`/**
@@ -95,7 +95,7 @@ export default function ({
      }
    }`);
 
-   if (typoObj[':rhythm:vertical']) {
+   if (typoObj[':rhythmVertical']) {
 
         vars.push(`
 
@@ -118,7 +118,7 @@ export default function ({
         */
        @sugar.rhythm.vertical {
         &.${cls.replace(':','--')}, & .${cls.replace(':','--')} {
-          ${__jsObjectToCssProperties(typoObj[':rhythm:vertical'])}
+          ${__jsObjectToCssProperties(typoObj[':rhythmVertical'])}
         }
       }
       `);
@@ -143,7 +143,7 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
        .s-rhythm--vertical.s-format--text ${typoName}, ${typoName}.s-rhythm--vertical.s-format--text {
-          ${__jsObjectToCssProperties(typoObj[':rhythm:vertical'])}
+          ${__jsObjectToCssProperties(typoObj[':rhythmVertical'])}
         }
       `);
 

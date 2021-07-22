@@ -37,7 +37,8 @@ export default {
     host: '127.0.0.1',
     port: 3000,
     hostname: 'http://[config.vite.server.host]:[config.vite.server.port]',
-    proxy: {}
+    proxy: {},
+    disableGlobbing: false
   },
   css: {},
   rewrites: [__path.resolve(`${__dirname()}/../node/rewrites/handlebars`)]

@@ -3,10 +3,10 @@ import __SPromise from '@coffeekraken/s-promise';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SMarkdownRendererSettingsInterface from './interface/SMarkdownRendererSettingsInterface';
+import __marked from 'marked';
 
-
-
-
+import __sCodeExampleMarkedExtension from './extensions/sCodeExampleMarkedExtension';
+import __sRepoStateMarkedExtension from './extensions/sRepoStateMarkedExtension';
 
 /**
  * @name            SMarkdownRenderer
@@ -86,6 +86,18 @@ export interface ISMarkdownRenderer {
 class SMarkdownRenderer extends __SClass implements ISMarkdownRenderer {
 
   /**
+   * @name        marked
+   * @type        Any
+   * @static
+   * 
+   * Access the marked object to register extensions, etc...
+   * 
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static marked = __marked;
+
+  /**
    * @name        markdownRendererSettings
    * @type        ISMarkdownRendererSettings
    * @get
@@ -123,6 +135,14 @@ class SMarkdownRenderer extends __SClass implements ISMarkdownRenderer {
         settings
       )
     );
+
+    __marked.use({
+      extensions: [
+        __sCodeExampleMarkedExtension(),
+        __sRepoStateMarkedExtension()
+      ]
+    });
+
   }
 
   /**
@@ -137,10 +157,12 @@ class SMarkdownRenderer extends __SClass implements ISMarkdownRenderer {
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  render() {
+  render(markdown: string): Promise<string> {
     return new __SPromise(
       async ({ resolve, reject }) => {
         
+        resolve(__marked(markdown));
+
       },
       {
         id: 'SMarkdownRendererRender'

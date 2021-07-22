@@ -8,6 +8,8 @@ import __glob from 'glob';
 import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
+import __theme from './utils/theme';
+import __jsObjectToCssProperties from './utils/jsObjectToCssProperties';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {

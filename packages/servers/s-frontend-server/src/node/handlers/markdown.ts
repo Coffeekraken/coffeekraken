@@ -5,6 +5,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __marked from 'marked';
 import __fs from 'fs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
+import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 
 /**
  * @name                markdown
@@ -36,7 +37,16 @@ export default function markdown(req, res, settings = {}) {
 
     if (menu.slug[req.url]) {
         const markdownStr = __fs.readFileSync(menu.slug[req.url].docmap.path, 'utf8').toString();
-        html = __marked((markdownStr));
+
+        const builder = new __SMarkdownBuilder();
+        const res = await builder.build({
+          input: markdownStr,
+          target: 'html' 
+        });
+
+        html = res.code;
+
+  
     }
 
     if (!html) {

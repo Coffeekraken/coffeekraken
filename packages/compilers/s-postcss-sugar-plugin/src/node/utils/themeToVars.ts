@@ -12,9 +12,11 @@ export default function (theme: string): string[] {
     );
 
   // @ts-ignore
-  const flattenedTheme = __flatten(themesObj[theme]);
+        const flattenedTheme = __flatten(themesObj[theme]);
+
   let vars: string[] = [];
   Object.keys(flattenedTheme).forEach((key) => {
+
     const value = flattenedTheme[key];
     const varKey = key
       .replace(/\./gm, '-')
@@ -27,6 +29,7 @@ export default function (theme: string): string[] {
     } else {
     vars.push(`${__minifyVar(`--s-theme-${varKey}`)}: ${flattenedTheme[key]};`);
     }
+
   });
 
   vars = vars.filter((v) => {

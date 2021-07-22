@@ -1,12 +1,9 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
+import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
 }
 postcssSugarPluginUiListClassesInterface.definition = {
-    colors: {
-        type: 'String[]',
-        alias: 'c'
-    },
     styles: {
         type: 'String[]',
         alias: 's'
@@ -14,10 +11,8 @@ postcssSugarPluginUiListClassesInterface.definition = {
 };
 export { postcssSugarPluginUiListClassesInterface as interface };
 export default function ({ params, atRule, replaceWith }) {
-    const colors = __theme().config('ui.list.colors');
     const styles = __theme().config('ui.list.styles');
-    const finalParams = Object.assign({ colors,
-        styles }, params);
+    const finalParams = Object.assign({ styles }, params);
     const vars = [];
     vars.push(`/**
         * @name           s-list--interactive
@@ -25,6 +20,8 @@ export default function ({ params, atRule, replaceWith }) {
         * @type           CssClass
         * 
         * This class represent an "<yellow>interactive</yellow>" list
+        * 
+        * @feature       Support vertical rhythm
         * 
         * @example        html
         * <ul class="s-list--interactive">
@@ -44,6 +41,8 @@ export default function ({ params, atRule, replaceWith }) {
         * 
         * This class represent an "<yellow>ul</yellow>" list
         * 
+        * @feature       Support vertical rhythm
+        * 
         * @example        html
         * <ul class="s-list--ul">
         *   <li>Hello</li>
@@ -52,8 +51,17 @@ export default function ({ params, atRule, replaceWith }) {
         * 
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push([`.s-list--ul {`, `@sugar.ui.list.ul;`, `}`].join('\n'));
+      */
+      .s-list--ul {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
+        @sugar.ui.list.ul;
+      }
+
+      ul.s-rhythm--vertical,
+      .s-rhythm--vertical ul {
+        ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+      } 
+  `);
     // ul:icon
     vars.push(`/**
         * @name           s-list--ul.s-list--icon
@@ -75,28 +83,6 @@ export default function ({ params, atRule, replaceWith }) {
       */`);
     vars.push([`.s-list--icon.s-list--ul {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
     vars.push(`/**
-        * @name           s-rhythm:vertical ul
-        * @namespace      sugar.css.ui.list
-        * @type           CssClass
-        * 
-        * This class represent an "<yellow>ul</yellow>" list in the s-rhythm:vertical scope
-        * 
-        * @example        html
-        * <div class="s-format\:text s-rhythm\:vertical">
-        *   <ul class="s-list--ul">
-        *     <li>Hello</li>
-        *     <li>World</li>
-        *   </ul>
-        * </div>
-        * 
-        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-    .s-rhythm--vertical ul {
-        margin-bottom: sugar.theme(ui.list.rhythmVertical);
-    } 
-  `);
-    vars.push(`/**
         * @name           s-format:text ul
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -114,10 +100,10 @@ export default function ({ params, atRule, replaceWith }) {
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    @sugar.format.text {
-      ul {
+     ul.s-format--text,
+    .s-format--text ul {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
         @sugar.ui.list.ul;
-      }
     } 
   `);
     // ol
@@ -128,6 +114,8 @@ export default function ({ params, atRule, replaceWith }) {
         * 
         * This class represent an "<yellow>ol</yellow>" list
         * 
+        * @feature       Support vertical rhythm
+        * 
         * @example        html
         * <ul class="s-list--ol">
         *   <li>Hello</li>
@@ -136,29 +124,16 @@ export default function ({ params, atRule, replaceWith }) {
         * 
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push([`.s-list--ol {`, `@sugar.ui.list.ol;`, `}`].join('\n'));
-    vars.push(`/**
-        * @name           s-rhythm:vertical ol
-        * @namespace      sugar.css.ui.list
-        * @type           CssClass
-        * 
-        * This class represent an "<yellow>ol</yellow>" list in the s-rhythm:vertical scope
-        * 
-        * @example        html
-        * <div class="s-format\:text s-rhythm\:vertical">
-        *   <ol>
-        *     <li>Hello</li>
-        *     <li>World</li>
-        *   </ol>
-        * </div>
-        * 
-        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    .s-rhythm--vertical ol {
-        margin-bottom: sugar.theme(ui.list.rhythmVertical);
-    } 
+      .s-list--ol {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
+        @sugar.ui.list.ol;
+      }   
+
+      ol.s-rhythm--vertical,
+      .s-rhythm--vertical ol {
+        ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+      } 
   `);
     vars.push(`/**
         * @name           s-format:text ol
@@ -178,11 +153,11 @@ export default function ({ params, atRule, replaceWith }) {
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    @sugar.format.text {
-      ol {
+      ol.s-format--text,
+      .s-format--text ol {
+        @sugar.color.remap(ui, ${__theme().config('ui.list.defaultColor')});
         @sugar.ui.list.ol;
       }
-    } 
   `);
     Object.keys(__theme().config('color')).forEach((colorName) => {
         vars.push(`
@@ -209,4 +184,4 @@ export default function ({ params, atRule, replaceWith }) {
     });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFFM0MsTUFBTSx3Q0FBeUMsU0FBUSxZQUFZOztBQUMxRCxtREFBVSxHQUFHO0lBQ2xCLE1BQU0sRUFBRTtRQUNOLElBQUksRUFBRSxVQUFVO1FBQ2hCLEtBQUssRUFBRSxHQUFHO0tBQ1g7SUFDRCxNQUFNLEVBQUU7UUFDTixJQUFJLEVBQUUsVUFBVTtRQUNoQixLQUFLLEVBQUUsR0FBRztLQUNYO0NBQ0YsQ0FBQztBQVFKLE9BQU8sRUFBRSx3Q0FBd0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVqRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxNQUFNLEdBQUcsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLGdCQUFnQixDQUFDLENBQUM7SUFDbEQsTUFBTSxNQUFNLEdBQUcsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLGdCQUFnQixDQUFDLENBQUM7SUFFbEQsTUFBTSxXQUFXLG1CQUNmLE1BQU07UUFDTixNQUFNLElBQ0gsTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O1NBZUgsQ0FBQyxDQUFDO0lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLHdCQUF3QixFQUFFLDZCQUE2QixFQUFFLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBRXJGLEtBQUs7SUFDTCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7U0FlSCxDQUFDLENBQUM7SUFDVCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsZUFBZSxFQUFFLG9CQUFvQixFQUFFLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBRW5FLFVBQVU7SUFDVixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7OztTQWlCSCxDQUFDLENBQUM7SUFDVCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsNEJBQTRCLEVBQUUsMEJBQTBCLEVBQUUsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFFdEYsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJULENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJULENBQUMsQ0FBQztJQUVILEtBQUs7SUFDTCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7U0FlSCxDQUFDLENBQUM7SUFDVCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsZUFBZSxFQUFFLG9CQUFvQixFQUFFLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBRWpFLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCWCxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCVCxDQUFDLENBQUM7SUFHSCxNQUFNLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQzNELElBQUksQ0FBQyxJQUFJLENBQUM7O2dDQUVrQixTQUFTOzs7O29FQUkyQixTQUFTLElBQUksU0FBUzs7OzhCQUc1RCxTQUFTOzs7Ozs7OztpQkFRdEIsU0FBUztpQ0FDTyxTQUFTOztLQUVyQyxDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFDM0MsT0FBTyx5QkFBeUIsTUFBTSx3Q0FBd0MsQ0FBQztBQUUvRSxNQUFNLHdDQUF5QyxTQUFRLFlBQVk7O0FBQzFELG1EQUFVLEdBQUc7SUFDbEIsTUFBTSxFQUFFO1FBQ04sSUFBSSxFQUFFLFVBQVU7UUFDaEIsS0FBSyxFQUFFLEdBQUc7S0FDWDtDQUNGLENBQUM7QUFRSixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sTUFBTSxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO0lBRWxELE1BQU0sV0FBVyxtQkFDZixNQUFNLElBQ0gsTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FpQkgsQ0FBQyxDQUFDO0lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLHdCQUF3QixFQUFFLDZCQUE2QixFQUFFLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBRXJGLEtBQUs7SUFDTCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O2lDQW1CcUIsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHNCQUFzQixDQUFDOzs7Ozs7VUFNL0QseUJBQXlCLENBQUMsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHlCQUF5QixDQUFDLENBQUM7O0dBRTdFLENBQUMsQ0FBQztJQUVILFVBQVU7SUFDVixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7OztTQWlCSCxDQUFDLENBQUM7SUFDVCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsNEJBQTRCLEVBQUUsMEJBQTBCLEVBQUUsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFFdEYsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7aUNBb0JxQixPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsc0JBQXNCLENBQUM7OztHQUd0RSxDQUFDLENBQUM7SUFFSCxLQUFLO0lBQ0wsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQ0FtQnFCLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxzQkFBc0IsQ0FBQzs7Ozs7O1VBTS9ELHlCQUF5QixDQUFDLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyx5QkFBeUIsQ0FBQyxDQUFDOztHQUU3RSxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQ0FvQnFCLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxzQkFBc0IsQ0FBQzs7O0dBR3RFLENBQUMsQ0FBQztJQUdILE1BQU0sQ0FBQyxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsU0FBUyxFQUFFLEVBQUU7UUFDM0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Z0NBRWtCLFNBQVM7Ozs7b0VBSTJCLFNBQVMsSUFBSSxTQUFTOzs7OEJBRzVELFNBQVM7Ozs7Ozs7O2lCQVF0QixTQUFTO2lDQUNPLFNBQVM7O0tBRXJDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3BCLENBQUMifQ==

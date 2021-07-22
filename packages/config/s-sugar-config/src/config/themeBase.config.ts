@@ -490,14 +490,28 @@ export default {
   },
 
   border: {
-    size: {
+    width: {
+
+      /**
+       * @name              default
+       * @namespace         config.theme.themes.border.width
+       * @type              Number
+       * @default           [theme.border.width.20]
+       *
+       * Specify the <s-color="accent">default</s-color> border width
+       *
+       * @since             2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      default: '[theme.border.width.20]',
+
       /**
        * @name              0
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           0
        *
-       * Specify the <s-color="accent">0</s-color> border size
+       * Specify the <s-color="accent">0</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -506,11 +520,11 @@ export default {
 
       /**
        * @name              10
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           1px
        *
-       * Specify the <s-color="accent">10</s-color> border size
+       * Specify the <s-color="accent">10</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -519,11 +533,11 @@ export default {
 
       /**
        * @name              20
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           2px
        *
-       * Specify the <s-color="accent">20</s-color> border size
+       * Specify the <s-color="accent">20</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -532,11 +546,11 @@ export default {
 
       /**
        * @name              30
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           4px
        *
-       * Specify the <s-color="accent">30</s-color> border size
+       * Specify the <s-color="accent">30</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -545,11 +559,11 @@ export default {
 
       /**
        * @name              40
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           6px
        *
-       * Specify the <s-color="accent">40</s-color> border size
+       * Specify the <s-color="accent">40</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -558,11 +572,11 @@ export default {
 
       /**
        * @name              50
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           8px
        *
-       * Specify the <s-color="accent">50</s-color> border size
+       * Specify the <s-color="accent">50</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -571,11 +585,11 @@ export default {
 
       /**
        * @name              60
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           12px
        *
-       * Specify the <s-color="accent">60</s-color> border size
+       * Specify the <s-color="accent">60</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -584,11 +598,11 @@ export default {
 
       /**
        * @name              70
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           16px
        *
-       * Specify the <s-color="accent">70</s-color> border size
+       * Specify the <s-color="accent">70</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -597,11 +611,11 @@ export default {
 
       /**
        * @name              80
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           20px
        *
-       * Specify the <s-color="accent">80</s-color> border size
+       * Specify the <s-color="accent">80</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -610,11 +624,11 @@ export default {
 
       /**
        * @name              90
-       * @namespace         config.theme.themes.border.size
+       * @namespace         config.theme.themes.border.width
        * @type              Number
        * @default           24px
        *
-       * Specify the <s-color="accent">90</s-color> border size
+       * Specify the <s-color="accent">90</s-color> border width
        *
        * @since             2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1301,8 +1315,13 @@ export default {
     default: {
       padding: '[theme.padding.10] [theme.padding.20]',
       borderRadius: '[theme.border.radius.default]',
+      borderWidth: '[theme.border.width.default]',
       transition: '[theme.transition.fast]',
-      depth: '[theme.depth.default]'
+      defaultColor: 'accent',
+      depth: '[theme.depth.default]',
+      ':rhythmVertical': {
+        'margin-bottom': 40
+      }
     },
     button: {
       padding: '[theme.ui.default.padding]',
@@ -1336,9 +1355,9 @@ export default {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',
-      rhythmVertical: '[theme.margin.20]',
       styles: ['default'],
-      colors: ['primary:default']
+      defaultColor: '[theme.ui.default.defaultColor]',
+      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
     },
     tabs: {
       padding: '[theme.ui.default.padding]',
@@ -1351,7 +1370,9 @@ export default {
       padding: '[theme.ui.default.padding]',
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
-      depth: '[theme.ui.default.depth]'
+      depth: '[theme.ui.default.depth]',
+      defaultColor: '[theme.ui.default.defaultColor]',
+      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
     },
     tooltip: {
       padding: '[theme.ui.default.padding]',
@@ -1366,7 +1387,26 @@ export default {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',
-      styles: ['default:default']
+      styles: ['default:default'],
+      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
+    },
+    blockquote: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      borderWidth: '[theme.ui.default.borderWidth]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
+      defaultColor: '[theme.ui.default.defaultColor]',
+      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
+    },
+    table: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      borderWidth: '[theme.border.width.10]',
+      transition: '[theme.ui.default.transition]',
+      depth: 0,
+      defaultColor: '[theme.ui.default.defaultColor]',
+      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
     },
     badge: {
       padding: '.35em .65em',
@@ -1382,7 +1422,7 @@ export default {
         'font-size': 100,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 40
         }
       },
@@ -1391,7 +1431,7 @@ export default {
         'font-size': 90,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 30
         }
       },
@@ -1400,7 +1440,7 @@ export default {
         'font-size': 80,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 30
         }
       },
@@ -1409,7 +1449,7 @@ export default {
         'font-size': 70,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 30
         }
       },
@@ -1418,7 +1458,7 @@ export default {
         'font-size': 60,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 20
         }
       },
@@ -1427,7 +1467,7 @@ export default {
         'font-size': 50,
         'line-height': 1,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 20
         }
       },
@@ -1436,7 +1476,7 @@ export default {
         'font-size': 40,
         'line-height': 1.5,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 30
         }
       },
@@ -1445,14 +1485,14 @@ export default {
         'font-size': 50,
         'line-height': 1.2,
         'max-width': '55ch',
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 30
         }
       },
       hr: {
         color: '[theme.color.main.default]',
         opacity: 0.2,
-        ':rhythm:vertical': {
+        ':rhythmVertical': {
           'margin-bottom': 30
         }
       },

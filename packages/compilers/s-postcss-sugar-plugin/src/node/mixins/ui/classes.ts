@@ -31,6 +31,7 @@ export default function ({
   const cssArray = [
     '@sugar.ui.avatar.classes;',
     '@sugar.ui.button.classes;',
+    '@sugar.ui.blockquote.classes;',
     '@sugar.ui.input.classes;',
     '@sugar.ui.list.classes;',
     '@sugar.ui.tabs.classes;',
@@ -38,6 +39,7 @@ export default function ({
     '@sugar.ui.navbar.classes;',
     '@sugar.ui.select.classes;',
     '@sugar.ui.switch.classes;',
+    '@sugar.ui.table.classes;',
     '@sugar.ui.terminal.classes;',
     '@sugar.ui.tooltip.classes;'
   ];

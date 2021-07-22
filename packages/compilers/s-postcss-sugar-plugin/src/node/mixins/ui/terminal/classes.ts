@@ -1,4 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../../utils/theme';
+import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiTerminalClassesInterface extends __SInterface {
   static definition = {};
@@ -29,6 +31,8 @@ export default function ({
          * @type            CssClass
          * 
          * This class allows you to apply a terminal look to any HTMLElement
+         * 
+         * @feature       Support vertical rhythm
          * 
          * @example         css
          * <span class="s-terminal">

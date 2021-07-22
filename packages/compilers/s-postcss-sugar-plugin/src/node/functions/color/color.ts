@@ -73,6 +73,7 @@ export default function color({
   let colorStateName = '';
 
   const nameParts = finalParams.color.split(':');
+
   if (nameParts.length === 2) {
     colorName = nameParts[0];
     colorStateName = nameParts[1];

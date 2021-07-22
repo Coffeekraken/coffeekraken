@@ -169,7 +169,7 @@ export default class SSugarConfig {
       ],
       resolvers: [
         {
-          match: /\[theme.[a-zA-Z0-9.\-_]+\]/gm,
+          match: /\[theme.[a-zA-Z0-9.\-_:]+\]/gm,
           resolve(match, config, path) {
             const themePath = path.slice(0, 3).join('.');
             const valuePath = match

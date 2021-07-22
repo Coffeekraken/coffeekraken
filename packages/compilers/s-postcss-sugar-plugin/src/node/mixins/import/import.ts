@@ -2,6 +2,8 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SGlob from '@coffeekraken/s-glob';
 import __path from 'path';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __chokidar from 'chokidar';
+import __globalEventEmitter from '@coffeekraken/sugar/node/event/globalEventEmitter';
 
 /**
  * @name           import
@@ -55,6 +57,7 @@ export { postcssSugarPluginImportInterface as interface };
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+let _watcher;
 export default function ({
   params,
   atRule,
@@ -78,8 +81,30 @@ export default function ({
     cwd: dirName
   });
 
+  // watch for new / deleted files
+  if (!_watcher) {
+    function triggerUpdate(path) {
+      __globalEventEmitter.emit('s-postcss-sugar-plugin-import-update', {
+        path: __path.resolve(dirName, path)
+      });
+    }
+    const watcher = __chokidar.watch(finalParams.path, {
+      cwd: dirName,
+      ignoreInitial: true
+    });
+    watcher.on('change', (path) => {
+      triggerUpdate(path);
+    });
+    watcher.on('add', (path) => {
+      triggerUpdate(path);
+    });
+    watcher.on('unlink', (path) => {
+      triggerUpdate(path);
+    });
+  }
+
   files.forEach(file => {
-    const newRule = postcss.parse(`@import '${file.relPath}';`);
+    const newRule = postcss.parse(`@import url('${file.relPath}');`);
     newRule.source.input.file = atRule.source.input.file;    
     atRule.parent.insertAfter(atRule, newRule);
   });

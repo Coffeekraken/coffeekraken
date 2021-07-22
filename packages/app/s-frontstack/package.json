@@ -14,6 +14,10 @@
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-sugar-json": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/s-markdown-builder": "^2.0.0",
+    "@coffeekraken/s-images-builder": "^2.0.0",
+    "@coffeekraken/s-postcss-builder": "^2.0.0",
+    "@coffeekraken/s-vite": "^2.0.0",
     "enquirer": "^2.3.6"
   }
 }

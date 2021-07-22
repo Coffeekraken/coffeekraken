@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __themeVar from '../../../utils/themeVar';
 import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
+import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiTerminalInterface extends __SInterface {
   static definition = {};
@@ -32,6 +33,12 @@ export default function ({
           content: '$';
           color: sugar.color(complementary);
       }
+
+      &.s-rhythm--vertical,
+    .s-thythm--vertical & {
+        ${__jsObjectToCssProperties(__theme().config('ui.terminal.:rhythmVertical'))}
+    } 
+
     `);
 
   replaceWith(vars);

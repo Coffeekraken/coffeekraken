@@ -1,20 +1,23 @@
 <!-- 
- * @name            Get Started
+ * @name            README
  * @namespace       doc
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Documentation           /doc/get-started
+ * @menu            Packages / Coffeekraken.io           /packages/coffeekraken-io
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
 -->
 
-# Get Started
 
-<!-- %repoState --package @coffeekraken/sugar -->
+# @coffeekraken/coffeekraken-io (2.0.0) MIT
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+![size](https://shields.io/bundlephobia/min/@coffeekraken/coffeekraken-io) ![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken-io) ![license](https://shields.io/npm/l/@coffeekraken/coffeekraken-io) ![discord](https://shields.io/discord/coffeekraken)
+
+[Git repository](https://olivierbossel.com)
+
+wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu
 
 ---
 __Advertisement :)__
@@ -183,9 +186,6 @@ The killer feature of `markdown-it` is very effective support of
 
 ### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
 
-> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
->
-> Shortcuts (emoticons): :-) :-( 8-) ;)
 
 see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
 
@@ -255,9 +255,3 @@ This is HTML abbreviation example.
 It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 
 *[HTML]: Hyper Text Markup Language
-
-### [Custom containers](https://github.com/markdown-it/markdown-it-container)
-
-::: warning
-*here be dragons*
-:::

@@ -5,17 +5,17 @@ export default {
     shields: [
         'size',
         'downloads',
-        'issues',
+        // 'issues',
         'license',
         'discord'
     ],
 
     urls: {
-        size: 'bundlephobia/min/%packageName',
-        downloads: 'npm/dm/%packageName',
-        issues: 'github/issues/&user/&repo',
-        license: 'npm/l/&packageName',
-        discord: 'https://img.shields.io/discord/%serverId'
+        size: 'bundlephobia/min/[packageJson.name]',
+        downloads: 'npm/dm/[packageJson.name]',
+        issues: 'github/issues/[config.git.user]/[config.git.repo.name]',
+        license: 'npm/l/[packageJson.name]',
+        discord: 'discord/[config.discord.server.id]'
     }
 
 }

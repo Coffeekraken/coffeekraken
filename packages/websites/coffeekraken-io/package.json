@@ -1,12 +1,16 @@
 {
   "name": "@coffeekraken/coffeekraken-io",
   "version": "2.0.0",
-  "description": "",
+  "description": "wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu",
   "main": "./src/shared/exports.js",
   "type": "module",
   "scripts": {
     "dev": "sugar frontstack",
     "build": "sugar frontstack.recipe"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://olivierbossel.com"
   },
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",

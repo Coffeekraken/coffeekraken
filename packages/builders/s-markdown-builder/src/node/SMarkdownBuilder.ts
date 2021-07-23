@@ -10,6 +10,10 @@ import __fs from 'fs';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
 import __marked from 'marked';
 import __unescapeHtml from '@coffeekraken/sugar/shared/html/unescapeHtml';
+import __handlebars from 'handlebars';
+import __SMarkdownBuilderSCodeExampleHandlebarsHelper from './helpers/sCodeExampleHandlebarsHelper';
+import __SMarkdownBuilderShieldsioHandlebarsHelper from './helpers/shieldsioHandlebarsHelper';
+import __packageJson from '@coffeekraken/sugar/node/package/json';
 
 import __sCodeExampleToken from './tokens/sCodeExampleToken';
 
@@ -81,10 +85,10 @@ export interface ISMarkdownBuilderBuildParams {
 
 export default class SMarkdownBuilder extends __SBuilder {
 
-    static _registeredTokens: any = [];
+    static _registeredHelpers: any = [];
 
     /**
-     * @name              registerToken
+     * @name              registerHelper
      * @type                Function
      * @static
      * 
@@ -96,10 +100,25 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerToken(token: Function<ISMarkdownBuilderToken>): void {
+    static registerHelper(name: string, helper: Function<ISMarkdownBuilderToken>): void {
         // @ts-ignore
-        this._registeredTokens.push(token);
+        this._registeredHelpers.push({
+            name,
+            helper
+        });
     }
+
+    /**
+     * @name            marked
+     * @type            Object
+     * @static
+     * 
+     * Access the marked object through this property
+     * 
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static marked = __marked;
 
     /**
      * @name            markdownBuilderSettings
@@ -150,6 +169,14 @@ export default class SMarkdownBuilder extends __SBuilder {
     _build(params: ISMarkdownBuilderBuildParams): Promise<ISMarkdownBuilderResult> {
         return new __SPromise(async ({resolve, reject, emit}) => {
 
+            const handlebars = __handlebars.create();
+
+            this.constructor._registeredHelpers.forEach(helperObj => {
+                handlebars.registerHelper(helperObj.name, helperObj.helper({
+                    target: params.target
+                }));
+            });
+
             // handle input
             let src = params.input,
                 from: any = undefined;
@@ -176,28 +203,38 @@ export default class SMarkdownBuilder extends __SBuilder {
                 });
             }
 
-            // @ts-ignore
             let currentTransformedString = src;
-            this.constructor._registeredTokens.forEach(tokenFn => {
 
-                const tokenObj = tokenFn();
-                const matches = tokenObj.extract(currentTransformedString);
+            // take some datas like packagejson, etc...
+            const data = {
+                packageJson: __packageJson(),
+                ...__SSugarConfig.get('.')
+            };
 
-                if (!matches) return;
+            const tplFn = handlebars.compile(currentTransformedString);
+            currentTransformedString = tplFn(data);
 
-                matches.forEach(match => {
-                    const renderedStr = tokenObj.render(match, params.target);
-                    if (!renderedStr) return;
-                    currentTransformedString = currentTransformedString.replace(match.raw, renderedStr);
-                });
+            // @ts-ignore
+//             let currentTransformedString = src;
+//             this.constructor._registeredHelpers.forEach(tokenFn => {
 
+//                 const tokenObj = tokenFn();
+//                 const matches = tokenObj.extract(currentTransformedString);
 
-            });
+//                 if (!matches) return;
 
-            // marked if html is the target
+//                 matches.forEach(match => {
+//                     const renderedStr = tokenObj.render(match, params.target);
+//                     if (!renderedStr) return;
+//                     currentTransformedString = currentTransformedString.replace(match.raw, renderedStr);
+//                 });
+// e
+
+//             });
+
+//             // marked if html is the target
             if (params.target === 'html') {
                 currentTransformedString = __marked(currentTransformedString, {});
-                // currentTransformedString = __unescapeHtml(currentTransformedString);
             }
 
             if (params.output) {
@@ -225,4 +262,7 @@ export default class SMarkdownBuilder extends __SBuilder {
 
 }
 
-SMarkdownBuilder.registerToken(__sCodeExampleToken);
+SMarkdownBuilder.registerHelper('s-code-example', __SMarkdownBuilderSCodeExampleHandlebarsHelper);
+SMarkdownBuilder.registerHelper('shieldsio', __SMarkdownBuilderShieldsioHandlebarsHelper);
+
+// SMarkdownBuilder.registerHelper(__sCodeExampleToken);

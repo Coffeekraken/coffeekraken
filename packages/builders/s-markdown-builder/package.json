@@ -17,6 +17,7 @@
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/s-sugar-config": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
+    "handlebars": "^4.7.7",
     "marked": "^2.1.3"
   }
 }

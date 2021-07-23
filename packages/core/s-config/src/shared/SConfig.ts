@@ -8,6 +8,7 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from './adapters/SConfigAdapter';
 import __SEnv from '@coffeekraken/s-env';
+import __packageJson from '@coffeekraken/sugar/node/package/json';
 
 /**
  * @name                                            config
@@ -226,6 +227,16 @@ export default class SConfig {
       match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
       resolve(match, config) { 
         const value = __get(config, match.replace('[config.', '').replace(']', ''));
+        return value;
+      }
+    });
+
+    // register the default resolver "[packageJson...]"
+    const packageJson = __packageJson();
+    this._settings.resolvers.unshift({
+      match: /\[packageJson.[a-zA-Z0-9.\-_]+\]/gm,
+      resolve(match, config) { 
+        const value = __get(packageJson, match.replace('[packageJson.', '').replace(']', ''));
         return value;
       }
     });

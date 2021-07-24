@@ -12,5 +12,12 @@ export default async (stringArgs = '') => {
     }
   });
   const res = await pro.run(stringArgs);
-  console.log(res);
+
+  Object.keys(res.value.map).forEach((key, i) => {
+    if (i<10) {
+      console.log(res.value.map[key]); 
+    }
+  })
+
+  // console.log(res);
 };

@@ -6,6 +6,7 @@ import __extractGlob from '@coffeekraken/sugar/shared/glob/extractGlob';
 import __extractNoneGlob from '@coffeekraken/sugar/shared/glob/extractNoneGlob';
 import __SClass from '@coffeekraken/s-class';
 import SFile from '@coffeekraken/s-file';
+import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 
 /**
  * @name                SGlob
@@ -56,11 +57,28 @@ export default class SGlob extends __SClass {
   _globs = null;
 
   /**
+   * @name                isGlob
+   * @type                Function
+   * @static
+   * 
+   * Alias to the ```isGlob``` function available in sugar under "shared.is.isGlob" namespace
+   * 
+   * @param       {String}        glob        The string to check
+   * @return    {Boolean}                   true if is a glob, false if not
+   * 
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static isGlob(glob: string): boolean {
+    return __isGlob(glob);
+  }
+
+  /**
    * @name                resolve
    * @type                Function
    * @static
    *
-   * Alias to the ```resolveGlob``` function available under "node/glob/resolveGlob"
+   * Alias to the ```resolveGlob``` function available in sugar under "node.glob.resolveGlob"
    *
    * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
    * @param       {Partial<IResolveGlobSettings>}            [settings={}]           An object of settings to configure your glob process

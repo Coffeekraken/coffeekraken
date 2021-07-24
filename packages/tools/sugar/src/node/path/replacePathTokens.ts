@@ -7,6 +7,7 @@ import __distRootDir from './distRootDir';
 
 import __srcJsDir from './srcJsDir';
 import __srcCssDir from './srcCssDir';
+import __srcDocDir from './srcDocDir';
 import __srcFontsDir from './srcFontsDir';
 import __srcIconsDir from './srcIconsDir';
 import __srcImgDir from './srcImgDir';
@@ -15,6 +16,7 @@ import __srcViewsDir from './srcViewsDir';
 
 import __distJsDir from './distJsDir';
 import __distCssDir from './distCssDir';
+import __distDocDir from './distDocDir';
 import __distFontsDir from './distFontsDir';
 import __distIconsDir from './distIconsDir';
 import __distImgDir from './distImgDir';
@@ -52,6 +54,7 @@ export interface IReplacePathTokensSettings {
   distRootDir: boolean;
   srcJsDir: boolean;
   srcCssDir: boolean;
+  srcDocDir: boolean;
   srcFontsDir: boolean;
   srcIconsDir: boolean;
   srcImgDir: boolean;
@@ -59,6 +62,7 @@ export interface IReplacePathTokensSettings {
   srcViewsDir: boolean;
   distJsDir: boolean;
   distCssDir: boolean;
+  distDocDir: boolean;
   distFontsDir: boolean;
   distIconsDir: boolean;
   distImgDir: boolean;
@@ -78,6 +82,7 @@ export default function replacePathTokens(
     distRootDir: true,
     srcJsDir: true,
     srcCssDir: true,
+    srcDocDir: true,
     srcFontsDir: true,
     srcIconsDir: true,
     srcImgDir: true,
@@ -85,6 +90,7 @@ export default function replacePathTokens(
     srcViewsDir: true,
     distJsDir: true,
     distCssDir: true,
+    distDocDir: true,
     distFontsDir: true,
     distIconsDir: true,
     distImgDir: true,
@@ -105,6 +111,7 @@ export default function replacePathTokens(
     
     if (set.srcJsDir) path = path.replace('%srcJsDir', __srcJsDir());
     if (set.srcCssDir) path = path.replace('%srcCssDir', __srcCssDir());
+    if (set.srcDocDir) path = path.replace('%srcDocDir', __srcDocDir());
     if (set.srcFontsDir) path = path.replace('%srcFontsDir', __srcFontsDir());
     if (set.srcIconsDir) path = path.replace('%srcIconsDir', __srcIconsDir());
     if (set.srcImgDir) path = path.replace('%srcImgDir', __srcImgDir());
@@ -113,6 +120,7 @@ export default function replacePathTokens(
 
     if (set.distJsDir) path = path.replace('%distJsDir', __distJsDir());
     if (set.distCssDir) path = path.replace('%distCssDir', __distCssDir());
+    if (set.distDocDir) path = path.replace('%distDocDir', __distDocDir());
     if (set.distFontsDir) path = path.replace('%distFontsDir', __distFontsDir());
     if (set.distIconsDir) path = path.replace('%distIconsDir', __distIconsDir());
     if (set.distImgDir) path = path.replace('%distImgDir', __distImgDir());

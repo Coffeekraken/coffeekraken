@@ -239,7 +239,26 @@ class SDocMap extends __SClass implements ISDocMap {
         const extendsRootPath = currentPathDocmapJsonPath.replace('/docmap.json', '');
 
         try {
+
+          const packageJsonPath = `${extendsRootPath}/package.json`;
+          if (!__fs.existsSync(packageJsonPath)) {
+            throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`);
+          }
+
+          const currentPackageJson = __readJsonSync(packageJsonPath);
           const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
+
+          Object.keys(docmapJson.map).forEach(namespace => {
+            if (docmapJson.map[namespace]) {
+              docmapJson.map[namespace].package = currentPackageJson.name;
+            }
+          });
+          Object.keys(docmapJson.generated?.map ?? []).forEach(namespace => {
+            if (docmapJson.generated.map[namespace]) {
+              docmapJson.generated.map[namespace].package = currentPackageJson.name;
+            }
+          });
+
           docmapJson.extends = [
             ...(docmapJson.extends ?? []),
             ...(docmapJson.generated?.extends ?? [])
@@ -447,7 +466,8 @@ class SDocMap extends __SClass implements ISDocMap {
         exclude: finalParams.exclude ?? []
       });
 
-      filesInPackage.forEach(file => {
+      filesInPackage.forEach((file, i) => {
+
         const content = file.raw;
         const docblocks = new __SDocblock(content).toObject();
 

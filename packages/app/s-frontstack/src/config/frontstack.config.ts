@@ -37,6 +37,7 @@ export default {
             postcssBuild: '[config.frontstack.actions.postcssBuild]',
             viteBuild: '[config.frontstack.actions.viteBuild]',
             imagesBuild: '[config.frontstack.actions.imagesBuild]',
+            docBuild: '[config.frontstack.actions.docBuild]',
             docmapBuild: '[config.frontstack.actions.docmapBuild]'
           }
         }
@@ -62,7 +63,9 @@ export default {
               params: {
                 lib: true
               }
-            }
+            },
+            docBuild: '[config.frontstack.actions.docBuild]',
+            docmapBuild: '[config.frontstack.actions.docmapBuild]'
           }
         }
       }
@@ -124,6 +127,18 @@ export default {
       title: 'Vite build stack',
       description: 'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
       process: 'sugar vite.build',
+      params: {},
+      settings: {
+        processManager: {
+          restart: true
+        }
+      }
+    },
+    docBuild: {
+      id: 'docBuild',
+      title: 'Markdown doc build stack',
+      description: 'Allow to build markdown documentation with special features files easily. Take care of src/README and src/doc/**/*.md files',
+      process: 'sugar markdown.build -p readme -p doc',
       params: {},
       settings: {
         processManager: {

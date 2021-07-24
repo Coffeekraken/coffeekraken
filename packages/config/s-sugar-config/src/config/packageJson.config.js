@@ -1,0 +1,6 @@
+import __packageJson from '@coffeekraken/sugar/node/package/json';
+export function prepare(config) {
+    return __packageJson();
+}
+export default {};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZUpzb24uY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFja2FnZUpzb24uY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLHVDQUF1QyxDQUFDO0FBRWxFLE1BQU0sVUFBVSxPQUFPLENBQUMsTUFBTTtJQUMxQixPQUFPLGFBQWEsRUFBRSxDQUFDO0FBQzNCLENBQUM7QUFFRCxlQUFlLEVBQUUsQ0FBQSJ9

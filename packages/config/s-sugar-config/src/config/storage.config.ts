@@ -142,6 +142,19 @@ export default {
     cssDir: `[config.storage.src.rootDir]/css`,
 
     /**
+     * @name            docDir
+     * @namespace       config.storage.src
+     * @type            String
+     * @default         [config.storage.src.rootDir]/doc
+     *
+     * Configure where is located the documentation markdown source files
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    docDir: `[config.storage.src.rootDir]/doc`,
+
+    /**
      * @name            fontsDir
      * @namespace       config.storage.src
      * @type            String
@@ -247,6 +260,19 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     cssDir: `[config.storage.dist.rootDir]/css`,
+
+    /**
+     * @name            docDir
+     * @namespace       config.storage.dist
+     * @type            String
+     * @default         [config.storage.dist.rootDir]/doc
+     *
+     * Configure where is located the doc markdown distribution files
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    docDir: `[config.storage.dist.rootDir]/doc`,
 
     /**
      * @name            fontsDir

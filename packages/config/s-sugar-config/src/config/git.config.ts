@@ -4,7 +4,7 @@ import __packageJson from '@coffeekraken/sugar/node/package/json';
 export function prepare(config) {
     if (!config.repo?.url) {
         const packageJson = __packageJson();
-        if (packageJson.repository.url) {
+        if (packageJson.repository?.url) {
             config.repo.url = packageJson.repository.url;
         } else {
             const url = __childProcess.execSync('git config --get remote.origin.url').toString().trim();

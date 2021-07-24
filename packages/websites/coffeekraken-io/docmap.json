@@ -4,14 +4,15 @@
     "generated": {
         "extends": [],
         "map": {
-            "@coffeekraken.coffeekraken-io.doc.getStarted": {
-                "name": "Get Started",
+            "@coffeekraken.coffeekraken-io.doc.rEADME": {
+                "name": "README",
                 "type": "Markdown",
                 "menu": {
                     "tree": [
-                        "Documentation"
+                        "Packages",
+                        "Coffeekraken.io"
                     ],
-                    "slug": "/doc/get-started"
+                    "slug": "/packages/coffeekraken-io"
                 },
                 "platform": [
                     {
@@ -34,64 +35,6 @@
             },
             "@coffeekraken.coffeekraken-io.doc.config.configurationConcept": {
                 "name": "Configuration concept",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
-                    "slug": "/doc/config/concept"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "configSystem.md",
-                "extension": "md",
-                "relPath": "src/doc/config/configSystem.md",
-                "children": {}
-            },
-            "@coffeekraken.coffeekraken-io.doc.config.configurationConcept1": {
-                "name": "Configuration concept #1",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
-                    "slug": "/doc/config/concept"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "configSystem.md",
-                "extension": "md",
-                "relPath": "src/doc/config/configSystem.md",
-                "children": {}
-            },
-            "@coffeekraken.coffeekraken-io.doc.config.configurationConcept2": {
-                "name": "Configuration concept #2",
                 "type": "Markdown",
                 "menu": {
                     "tree": [
@@ -520,6 +463,237 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote": {
+                "name": "s-blockquote",
+                "type": "CssClass",
+                "description": "This class represent a simple blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sFormat:text": {
+                "name": "s-format:text",
+                "type": "CssClass",
+                "description": "This class represent a simple blockquote tag in the s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <blockquote>\n      <p>Hello world</p>\n  </blockquote>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:main": {
+                "name": "s-blockquote:main",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"main\">main</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:main\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:ui": {
+                "name": "s-blockquote:ui",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"ui\">ui</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:ui\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:accent": {
+                "name": "s-blockquote:accent",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"accent\">accent</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:accent\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:complementary": {
+                "name": "s-blockquote:complementary",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"complementary\">complementary</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:complementary\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:success": {
+                "name": "s-blockquote:success",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"success\">success</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:success\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:warning": {
+                "name": "s-blockquote:warning",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"warning\">warning</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:warning\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:error": {
+                "name": "s-blockquote:error",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"error\">error</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:error\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:info": {
+                "name": "s-blockquote:info",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"info\">info</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:info\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote.sBlockquote:extension": {
+                "name": "s-blockquote:extension",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"extension\">extension</s-color> blockquote",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.blockquote",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<blockquote class=\"s-blockquote:extension\">\n  <p>Hello world</p>\n</blockquote>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.input..sInput": {
                 "name": ".s-input",
                 "type": "CssClass",
@@ -543,9 +717,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list--interactive\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
+                        "code": "<ul class=\"s-list--interactive\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -558,9 +738,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list--ul\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
+                        "code": "<ul class=\"s-list--ul\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -573,9 +759,36 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list--ul s-list--icon\" />\n  <li>\n    <i class=\"s-icon-user\" />\n    Hello\n  </li>\n</ul>"
+                        "code": "<ul class=\"s-list--ul s-list--icon\">\n  <li>\n    <i class=\"s-icon-user\" />\n    Hello\n  </li>\n</ul>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.list.sFormat:textUl": {
+                "name": "s-format:text ul",
+                "type": "CssClass",
+                "description": "This class represent an \"<yellow>ul</yellow>\" list in the s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.list",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <ul>\n    <li>Hello</li>\n    <li>World</li>\n  </ul>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -588,9 +801,36 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list--ol\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
+                        "code": "<ul class=\"s-list--ol\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.list.sFormat:textOl": {
+                "name": "s-format:text ol",
+                "type": "CssClass",
+                "description": "This class represent an \"<yellow>ol</yellow>\" list in the s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.list",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <ol>\n    <li>Hello</li>\n    <li>World</li>\n  </ol>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -1159,6 +1399,27 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.select..sSelect": {
+                "name": ".s-select",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<yellow>default</yellow>\" select",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.select",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<select class=\".s-select\">\n  <option value=\"value 1\">Hello</option>\n  <option value=\"value 2\">World</option>\n</select>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch": {
                 "name": "s-switch",
                 "type": "CssClass",
@@ -1369,6 +1630,237 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable": {
+                "name": "s-table",
+                "type": "CssClass",
+                "description": "This class represent a simple table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sFormat:text": {
+                "name": "s-format:text",
+                "type": "CssClass",
+                "description": "This class represent a simple table tag in the s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <table>\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:main": {
+                "name": "s-table:main",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"main\">main</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:main\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:ui": {
+                "name": "s-table:ui",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"ui\">ui</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:ui\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:accent": {
+                "name": "s-table:accent",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"accent\">accent</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:accent\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:complementary": {
+                "name": "s-table:complementary",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"complementary\">complementary</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:complementary\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:success": {
+                "name": "s-table:success",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"success\">success</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:success\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:warning": {
+                "name": "s-table:warning",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"warning\">warning</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:warning\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:error": {
+                "name": "s-table:error",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"error\">error</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:error\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:info": {
+                "name": "s-table:info",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"info\">info</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:info\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.table.sTable:extension": {
+                "name": "s-table:extension",
+                "type": "CssClass",
+                "description": "This class represent a simple \"<s-color=\"extension\">extension</s-color> table",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.table",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<table class=\"s-table:extension\">\n  <tr>\n      <th>Hello</th>\n      </th>World</th>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n  <tr>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>\n  </tr>\n</table>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.terminal.sTerminal": {
                 "name": "s-terminal",
                 "type": "CssClass",
@@ -1478,6 +1970,300 @@
                 "name": "s-tooltip--top-right",
                 "type": "CssClass",
                 "description": "This class represent a simple top-right tooltip",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Right": {
+                "name": "s-tooltip--right",
+                "type": "CssClass",
+                "description": "This class represent a simple right tooltip",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightCenterTop": {
+                "name": "s-tooltip--right-center-top",
+                "type": "CssClass",
+                "description": "This class represent a right tooltip centered and aligned top",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-center-top\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightTop": {
+                "name": "s-tooltip--right-top",
+                "type": "CssClass",
+                "description": "This class represent a simple right-top tooltip",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightTopTop": {
+                "name": "s-tooltip--right-top-top",
+                "type": "CssClass",
+                "description": "This class represent a right tooltip top and aligned top",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-top-top\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightBottomTop": {
+                "name": "s-tooltip--right-bottom-top",
+                "type": "CssClass",
+                "description": "This class represent a right tooltip bottom and aligned top",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-bottom-top\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightBottom": {
+                "name": "s-tooltip--right-bottom",
+                "type": "CssClass",
+                "description": "This class represent a simple right-bottom tooltip",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightBottomBottom": {
+                "name": "s-tooltip--right-bottom-bottom",
+                "type": "CssClass",
+                "description": "This class represent a right tooltip bottom and aligned bottom",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-bottom-bottom\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Left": {
+                "name": "s-tooltip--left",
+                "type": "CssClass",
+                "description": "This class represent a simple left tooltip",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftCenterTop": {
+                "name": "s-tooltip--left-center-top",
+                "type": "CssClass",
+                "description": "This class represent a left tooltip centered and aligned top",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-center-top\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftTop": {
+                "name": "s-tooltip--left-top",
+                "type": "CssClass",
+                "description": "This class represent a simple left-top tooltip",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftTopTop": {
+                "name": "s-tooltip--left-top-top",
+                "type": "CssClass",
+                "description": "This class represent a left tooltip top and aligned top",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-top-top\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftBottomTop": {
+                "name": "s-tooltip--left-bottom-top",
+                "type": "CssClass",
+                "description": "This class represent a left tooltip bottom and aligned top",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-bottom-top\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftBottomBottom": {
+                "name": "s-tooltip--left-bottom-bottom",
+                "type": "CssClass",
+                "description": "This class represent a left tooltip bottom and aligned bottom",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-bottom-bottom\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftBottom": {
+                "name": "s-tooltip--left-bottom",
+                "type": "CssClass",
+                "description": "This class represent a simple left-bottom tooltip",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
                 "example": [
                     {
@@ -1607,6 +2393,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textH1": {
+                "name": "s-format:text h1",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>h1</yellow>\" typography style to any h1 tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <h1>Something cool</h1>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:h1": {
                 "name": "s-rhythm:vertical s-typo:h1",
                 "type": "CssClass",
@@ -1623,6 +2437,34 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:h1\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textH1": {
+                "name": "s-rhythm:vertical.s-format:text h1",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>h1</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <h1>Something cool</h1>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1663,6 +2505,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textH2": {
+                "name": "s-format:text h2",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>h2</yellow>\" typography style to any h2 tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <h2>Something cool</h2>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:h2": {
                 "name": "s-rhythm:vertical s-typo:h2",
                 "type": "CssClass",
@@ -1679,6 +2549,34 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:h2\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textH2": {
+                "name": "s-rhythm:vertical.s-format:text h2",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>h2</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <h2>Something cool</h2>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1719,6 +2617,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textH3": {
+                "name": "s-format:text h3",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>h3</yellow>\" typography style to any h3 tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <h3>Something cool</h3>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:h3": {
                 "name": "s-rhythm:vertical s-typo:h3",
                 "type": "CssClass",
@@ -1735,6 +2661,34 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:h3\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textH3": {
+                "name": "s-rhythm:vertical.s-format:text h3",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>h3</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <h3>Something cool</h3>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1775,6 +2729,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textH4": {
+                "name": "s-format:text h4",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>h4</yellow>\" typography style to any h4 tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <h4>Something cool</h4>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:h4": {
                 "name": "s-rhythm:vertical s-typo:h4",
                 "type": "CssClass",
@@ -1791,6 +2773,34 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:h4\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textH4": {
+                "name": "s-rhythm:vertical.s-format:text h4",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>h4</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <h4>Something cool</h4>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1831,6 +2841,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textH5": {
+                "name": "s-format:text h5",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>h5</yellow>\" typography style to any h5 tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <h5>Something cool</h5>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:h5": {
                 "name": "s-rhythm:vertical s-typo:h5",
                 "type": "CssClass",
@@ -1847,6 +2885,34 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:h5\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textH5": {
+                "name": "s-rhythm:vertical.s-format:text h5",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>h5</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <h5>Something cool</h5>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1887,6 +2953,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textH6": {
+                "name": "s-format:text h6",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>h6</yellow>\" typography style to any h6 tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <h6>Something cool</h6>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:h6": {
                 "name": "s-rhythm:vertical s-typo:h6",
                 "type": "CssClass",
@@ -1903,6 +2997,34 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:h6\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textH6": {
+                "name": "s-rhythm:vertical.s-format:text h6",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>h6</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <h6>Something cool</h6>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1943,6 +3065,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textP": {
+                "name": "s-format:text p",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>p</yellow>\" typography style to any p tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <p>Something cool</p>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:p": {
                 "name": "s-rhythm:vertical s-typo:p",
                 "type": "CssClass",
@@ -1959,6 +3109,34 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:p\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textP": {
+                "name": "s-rhythm:vertical.s-format:text p",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>p</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <p>Something cool</p>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1999,6 +3177,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textPLead": {
+                "name": "s-format:text p-lead",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>p-lead</yellow>\" typography style to any p-lead tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <p-lead>Something cool</p-lead>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:pLead": {
                 "name": "s-rhythm:vertical s-typo:p-lead",
                 "type": "CssClass",
@@ -2015,6 +3221,146 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:p-lead\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textPLead": {
+                "name": "s-rhythm:vertical.s-format:text p-lead",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>p-lead</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <p-lead>Something cool</p-lead>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:hr": {
+                "name": "s-typo:hr",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>hr</yellow>\" typography style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-typo:hr\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textHr": {
+                "name": "s-format:text hr",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>hr</yellow>\" typography style to any hr tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <hr>Something cool</hr>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:verticalSTypo:hr": {
+                "name": "s-rhythm:vertical s-typo:hr",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>s-typo:hr</yellow>\" HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:hr\">Something cool</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm:vertical.sFormat:textHr": {
+                "name": "s-rhythm:vertical.s-format:text hr",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to activate the space(s) on your \"<yellow>hr</yellow>\" scopes .s-format:text tags",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-rhythm:vertical s-format:text\">\n    <hr>Something cool</hr>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2055,6 +3401,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textA": {
+                "name": "s-format:text a",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>a</yellow>\" typography style to any a tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <a>Something cool</a>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:quote": {
                 "name": "s-typo:quote",
                 "type": "CssClass",
@@ -2071,6 +3445,34 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-typo:quote\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textQuote": {
+                "name": "s-format:text quote",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>quote</yellow>\" typography style to any quote tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <quote>Something cool</quote>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2111,6 +3513,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textB": {
+                "name": "s-format:text b",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>b</yellow>\" typography style to any b tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <b>Something cool</b>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:bold": {
                 "name": "s-typo:bold",
                 "type": "CssClass",
@@ -2127,6 +3557,34 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-typo:bold\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textBold": {
+                "name": "s-format:text bold",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>bold</yellow>\" typography style to any bold tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <bold>Something cool</bold>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2167,6 +3625,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textStrong": {
+                "name": "s-format:text strong",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>strong</yellow>\" typography style to any strong tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <strong>Something cool</strong>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:i": {
                 "name": "s-typo:i",
                 "type": "CssClass",
@@ -2183,6 +3669,34 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-typo:i\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textI": {
+                "name": "s-format:text i",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>i</yellow>\" typography style to any i tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <i>Something cool</i>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2223,6 +3737,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textItalic": {
+                "name": "s-format:text italic",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>italic</yellow>\" typography style to any italic tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <italic>Something cool</italic>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:em": {
                 "name": "s-typo:em",
                 "type": "CssClass",
@@ -2239,6 +3781,34 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-typo:em\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textEm": {
+                "name": "s-format:text em",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>em</yellow>\" typography style to any em tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <em>Something cool</em>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2279,6 +3849,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textSmall": {
+                "name": "s-format:text small",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>small</yellow>\" typography style to any small tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <small>Something cool</small>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:mark": {
                 "name": "s-typo:mark",
                 "type": "CssClass",
@@ -2295,6 +3893,34 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-typo:mark\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textMark": {
+                "name": "s-format:text mark",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>mark</yellow>\" typography style to any mark tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <mark>Something cool</mark>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2335,6 +3961,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textDel": {
+                "name": "s-format:text del",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>del</yellow>\" typography style to any del tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <del>Something cool</del>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:ins": {
                 "name": "s-typo:ins",
                 "type": "CssClass",
@@ -2351,6 +4005,34 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-typo:ins\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textIns": {
+                "name": "s-format:text ins",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>ins</yellow>\" typography style to any ins tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <ins>Something cool</ins>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2391,6 +4073,34 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textSub": {
+                "name": "s-format:text sub",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>sub</yellow>\" typography style to any sub tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <sub>Something cool</sub>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.typo.sTypo:sup": {
                 "name": "s-typo:sup",
                 "type": "CssClass",
@@ -2407,6 +4117,34 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-typo:sup\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.typo.sFormat:textSup": {
+                "name": "s-format:text sup",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>sup</yellow>\" typography style to any sup tag in the .s-format:text scope",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-format:text\">\n  <sup>Something cool</sup>"
                     }
                 ],
                 "since": "2.0.0",

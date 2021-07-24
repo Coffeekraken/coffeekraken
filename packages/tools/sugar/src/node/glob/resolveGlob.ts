@@ -56,13 +56,14 @@ export default function resolveGlob(globs: string | string[], settings: Partial
       symlinks: true,
       nodir: false,
       contentRegExp: undefined,
+      SFile: true,
       exclude: [],
       defaultExcludes: true
     },
     settings
   );
 
-  const filesArray: __SFile[] = [];
+  const filesArray: __SFile[] | string[] = [];
 
   if (!Array.isArray(globs)) globs = [globs];
 
@@ -75,12 +76,17 @@ export default function resolveGlob(globs: string | string[], settings: Partial
 
     // make sure it's a glob pattern
     if (__fs.existsSync(glob)) {
-      const sFile = __SFile.new(glob, {
-        file: {
-          cwd
-        }
-      });
-      filesArray.push(sFile);
+
+      if (settings.SFile) {
+        const sFile = __SFile.new(glob, {
+          file: {
+            cwd
+          }
+        });
+        filesArray.push(sFile);
+      } else {
+        filesArray.push(glob);
+      }
       continue;
     }
 
@@ -124,9 +130,14 @@ export default function resolveGlob(globs: string | string[], settings: Partial
       pathes = pathes.filter((path) => {
         if (__isDirectory(path)) return false;
         try {
-          const content = __fs.readFileSync(path, 'utf8');
-          const matches = searchReg.test(content ?? '');
-          if (matches) {
+          const content = __fs.readFileSync(path, 'utf8').toString();
+          const matches = content.match(searchReg);
+
+          // if (path.includes('/doc/getStarted')) {
+          //   console.log(path, searchReg, searchReg.test(content), matches);
+          // }
+
+          if (matches && matches.length) {
             return true;
           }
           return false;
@@ -141,12 +152,16 @@ export default function resolveGlob(globs: string | string[], settings: Partial
         filesArray.push(path);
         return;
       }
-      const sFile = __SFile.new(path, {
-        file: {
-          cwd
-        }
-      });
-      filesArray.push(sFile);
+      if (settings.SFile) {
+        const sFile = __SFile.new(path, {
+          file: {
+            cwd
+          }
+        });
+        filesArray.push(sFile);
+      } else {
+        filesArray.push(path);
+      }
     });
   }
 

@@ -4,20 +4,20 @@
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Packages / Coffeekraken.io           /packages/coffeekraken-io
+ * @menu            Documentation               /doc/readme
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
 -->
 
 
-# @coffeekraken/coffeekraken-io (2.0.0) MIT
+# {{ packageJson.name }} ({{ packageJson.version }}) {{ packageJson.license }}
 
-![size](https://shields.io/bundlephobia/min/@coffeekraken/coffeekraken-io) ![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken-io) ![license](https://shields.io/npm/l/@coffeekraken/coffeekraken-io) ![discord](https://shields.io/discord/coffeekraken)
+{{#shieldsio}}{{/shieldsio}}
 
-[Git repository](https://olivierbossel.com)
+[Git repository]({{ git.repo.url }})
 
-wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu
+{{ packageJson.description }}
 
 ---
 __Advertisement :)__

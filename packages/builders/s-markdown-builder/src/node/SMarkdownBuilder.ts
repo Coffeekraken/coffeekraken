@@ -17,6 +17,8 @@ import __SMarkdownBuilderSCodeExampleHandlebarsHelper from './helpers/sCodeExamp
 import __SMarkdownBuilderShieldsioHandlebarsHelper from './helpers/shieldsioHandlebarsHelper';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __isDirectory from '@coffeekraken/sugar/node/is/directory';
+import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
 
 import __sCodeExampleToken from './tokens/sCodeExampleToken';
 
@@ -83,7 +85,10 @@ export interface ISMarkdownBuilderToken {
 export interface ISMarkdownBuilderBuildParams {
     glob: string;
     inDir: string;
+    inPath: string;
+    inRaw: string;
     outDir: string;
+    outPath: string;
     save: boolean;
     target: 'html' | 'markdown',
     preset: string[];
@@ -212,6 +217,17 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                 const buildedFiles: ISMarkdownBuilderResult[] = [];
 
+                if (params.inRaw) {
+                    params.inPath = __writeTmpFileSync(params.inRaw);
+                    delete params.inRaw;
+                }
+
+                if (params.inPath) {
+                    params.inDir = __folderPath(params.inPath);
+                    params.glob = __path.relative(params.inDir, params.inPath);
+                    delete params.inPath;
+                }  
+
                 // @ts-ignore
                 this.constructor._registeredHelpers.forEach(helperObj => {
                     handlebars.registerHelper(helperObj.name, helperObj.helper({
@@ -219,16 +235,29 @@ export default class SMarkdownBuilder extends __SBuilder {
                     }));
                 });
 
-                const sources: any[] = [];
+                // save with no output
+                if (params.save && !params.outPath && !params.outDir) {
+                    throw new Error(`<red>[${this.constructor.name}]</red> The param "<yellow>save</yellow>" MUST be used alongside the params "<yellow>outPath</yellow>" or "<yellow>outDir</yellow>"`);
+                }
 
-                const inDir = params.inDir;
-                let path = `${inDir}/${params.glob}`;
+                // inDir with no glob
+                if (params.inDir && !params.glob) {
+                    throw new Error(`<red>[${this.constructor.name}]</red> The param "<yellow>inDir</yellow>" MUST be used alongside the param "<yellow>glob</yellow>"`);
+                }
+
+                // either no outDir with inDir or inverse...
+                if (params.save && ((params.outDir && !params.inDir) || (!params.outDir && params.inDir))) {
+                    throw new Error(`<red>[${this.constructor.name}]</red> The param "<yellow>outDir</yellow>" MUST be used alongside the params "<yellow>inDir</yellow>" and "<yellow>glob</yellow>"`);
+                }
+
+                let path = `${params.inDir}/${params.glob}`;
                 const sourceObj = {
                     inputStr: '',
                     outputStr: '',
                     files: [],
-                    inDir,
-                    outDir: params.outDir
+                    inDir: params.inDir,
+                    outDir: params.outDir,
+                    outPath: params.outPath
                 }
                 if (__fs.existsSync(path)) {
                     sourceObj.inputStr = __path.relative(process.cwd(), path);
@@ -246,21 +275,18 @@ export default class SMarkdownBuilder extends __SBuilder {
                 if (sourceObj.outDir) {
                     sourceObj.outputStr = __path.relative(process.cwd(), sourceObj.outDir) || '.';
                 }
-                sources.push(sourceObj);
 
                 emit('log', {
                     value: `<yellow>[build]</yellow> Starting markdown Build`
                 });
 
-                const inputStrArray = sources.map(sourceObj => sourceObj.inputStr);
                 emit('log', {
-                    value: `<yellow>○</yellow> Input       : <cyan>${inputStrArray.join(', ')}</cyan>`
+                    value: `<yellow>○</yellow> Input       : <cyan>${sourceObj.inputStr}</cyan>`
                 });
 
-                const outputStrArray = sources.map(sourceObj => sourceObj.outputStr);
-                if (outputStrArray.length) {
+                if (sourceObj.outputStr) {
                     emit('log', {
-                        value: `<yellow>○</yellow> Output      : <cyan>${outputStrArray.join(',')}</cyan>`
+                        value: `<yellow>○</yellow> Output      : <cyan>${sourceObj.outputStr}</cyan>`
                     });
                 }
 
@@ -269,48 +295,49 @@ export default class SMarkdownBuilder extends __SBuilder {
                     ...__SSugarConfig.get('.')
                 };
 
-                for (let i=0; i<sources.length; i++) {
+                if (!sourceObj.files.length) {
+                    return reject();
+                };
 
-                    const sourceObj = sources[i];
+                for (let j=0; j<sourceObj.files.length; j++) {
 
-                    if (!sourceObj.files.length) continue;
+                    const filePath = sourceObj.files[j];
 
-                    for (let j=0; j<sourceObj.files.length; j++) {
-
-                        const filePath = sourceObj.files[j];
-
-                        const buildObj = {
-                            data: __fs.readFileSync(filePath, 'utf8').toString(),
-                            output: `${sourceObj.outDir}/${__path.relative(sourceObj.inDir, filePath)}`
-                        };
-
-                        let currentTransformedString = buildObj.data;
-
-                        const tplFn = handlebars.compile(currentTransformedString);
-                        currentTransformedString = tplFn(viewData);
-
-                        // marked if html is the target
-                        if (params.target === 'html') {
-                            currentTransformedString = __marked(currentTransformedString, {});
-                        }
-
-                        if (params.save) {
-                            __writeFileSync(buildObj.output, currentTransformedString);
-                            const file = new __SFile(buildObj.output);
-                            emit('log', {
-                                value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`
-                            });
-                        }
-
-                        const res: ISMarkdownBuilderResult = {
-                            inputFile: __SFile.new(filePath),
-                            outputFile: params.save ? __SFile.new(buildObj.output) : undefined,
-                            code: currentTransformedString
-                        };
-
-                        buildedFiles.push(res);
-
+                    const buildObj = {
+                        data: __fs.readFileSync(filePath, 'utf8').toString(),
+                        output: ''
+                    };
+                    if (sourceObj.outPath) {
+                        buildObj.output = sourceObj.outPath;
+                    } else if (sourceObj.inDir && sourceObj.outDir) {
+                        buildObj.output = `${sourceObj.outDir}/${__path.relative(sourceObj.inDir, filePath)}`;
                     }
+
+                    let currentTransformedString = buildObj.data;
+
+                    const tplFn = handlebars.compile(currentTransformedString);
+                    currentTransformedString = tplFn(viewData);
+
+                    // marked if html is the target
+                    if (params.target === 'html') {
+                        currentTransformedString = __marked(currentTransformedString, {});
+                    }
+
+                    if (params.save) {
+                        __writeFileSync(buildObj.output, currentTransformedString);
+                        const file = new __SFile(buildObj.output);
+                        emit('log', {
+                            value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`
+                        });
+                    }
+
+                    const res: ISMarkdownBuilderResult = {
+                        inputFile: __SFile.new(filePath),
+                        outputFile: params.save ? __SFile.new(buildObj.output) : undefined,
+                        code: currentTransformedString
+                    };
+
+                    buildedFiles.push(res);
 
                 }
 

@@ -1,10 +1,10 @@
 <!-- 
- * @name            README
+ * @name            Get started
  * @namespace       doc
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Packages / Coffeekraken.io           /packages/coffeekraken-io
+ * @menu            Documentation           /doc/get-started
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

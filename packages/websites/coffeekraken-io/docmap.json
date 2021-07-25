@@ -2,17 +2,45 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [],
+        "extends": [
+            "@coffeekraken/sugar"
+        ],
         "map": {
             "@coffeekraken.coffeekraken-io.doc.rEADME": {
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
                     "tree": [
-                        "Packages",
-                        "Coffeekraken.io"
+                        "Documentation"
                     ],
-                    "slug": "/packages/coffeekraken-io"
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README",
+                "relPath": "src/README",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.getStarted": {
+                "name": "Get started",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/get-started"
                 },
                 "platform": [
                     {

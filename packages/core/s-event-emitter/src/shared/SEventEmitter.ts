@@ -410,6 +410,26 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   }
 
   /**
+   * @name          pipeError
+   * @type          Function
+   *
+   * This is the exact same as the original ```pipe``` method. It's just pipe only the errors.
+   *
+   * @param       {SEventEmitter}      input      The input promise on which to pipe the events in this one
+   * @param       {ISEventEmitterPipeSettings}      [settings={}]    An object ob settings to configure the pipe process:
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  pipeError(input: ISEventEmitter, settings?: ISEventEmitterPipeSettings) {
+    SEventEmitter.pipe(input, <any>this, {
+      ...settings,
+      events: 'error'
+    });
+    return input;
+  }
+
+  /**
    * @name      pipeFrom
    * @type      Function
    *

@@ -6,6 +6,7 @@ import __marked from 'marked';
 import __fs from 'fs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
+import { page404 } from '@coffeekraken/s-view-renderer';
 
 /**
  * @name                markdown
@@ -28,25 +29,33 @@ import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
  */
 export default function markdown(req, res, settings = {}) {
 
-  return new __SPromise(async ({ resolve, reject, pipe }) => {
+  return new __SPromise(async ({ resolve, reject, pipe, pipeError }) => {
 
     const docmap = new __SDocMap();
     const menu = await docmap.extractMenu();
 
     let html;
 
-    if (menu.slug[req.url]) {
-        const markdownStr = __fs.readFileSync(menu.slug[req.url].docmap.path, 'utf8').toString();
+    let slugObj = menu.slug[req.url];
+    if (!slugObj) {
+      Object.keys(menu.packages ?? {}).forEach(packageName => {
+        if (slugObj) return;
+        const packageObj = menu.packages[packageName];
+        slugObj = packageObj.slug[req.url];
+      });
+    }
+
+    if (slugObj) {
+        const markdownStr = __fs.readFileSync(slugObj.docmap.path, 'utf8').toString();
 
         const builder = new __SMarkdownBuilder();
-        const res = await builder.build({
-          input: markdownStr,
-          target: 'html' 
-        });
+        const res = await pipeError(builder.build({
+          inRaw: markdownStr,
+          target: 'html' ,
+          save: false
+        }));
 
-        html = res.code;
-
-  
+        html = res[0].code;  
     }
 
     if (!html) {

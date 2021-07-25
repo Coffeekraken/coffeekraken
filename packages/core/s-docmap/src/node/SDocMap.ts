@@ -3,6 +3,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
@@ -303,6 +304,8 @@ class SDocMap extends __SClass implements ISDocMap {
       // save the docmap json
       this._docmapJson = finalDocmapJson;
 
+      finalDocmapJson.menu = await this.extractMenu(finalDocmapJson);
+
       // return the final docmap
       resolve(finalDocmapJson);
     }, {
@@ -327,16 +330,63 @@ class SDocMap extends __SClass implements ISDocMap {
    */
   async extractMenu(docmapJson: ISDocMapObj = this._docmapJson): Record<string, __SFile> {
 
-    const menuObj = {
-    }, menuObjBySlug = {};
-
     if (!docmapJson) {
       docmapJson = await this.read();
     }
 
-    // extract menus
+    const docmapJsonMenuByPackage = {};
+
+    // split menus by packages
     Object.keys(docmapJson.map).forEach(namespace => {
-        const docmapObj = docmapJson.map[namespace];
+      const docmapObj = docmapJson.map[namespace];
+      if (!docmapObj.menu) return;
+      if (!docmapJsonMenuByPackage[docmapObj.package]) {
+        docmapJsonMenuByPackage[docmapObj.package] = [];
+      }
+      docmapJsonMenuByPackage[docmapObj.package].push(docmapObj);
+    });
+
+    let finalMenu = {
+      packages: {}
+    };
+    const packageJson = __packageJson();
+
+    Object.keys(docmapJsonMenuByPackage).forEach(packageName => {
+
+      const menuObj = this._extractMenuFromDocmapJsonStack(docmapJsonMenuByPackage[packageName]);
+
+      if (packageName === packageJson.name) {
+        finalMenu = {
+          ...finalMenu,
+          ...menuObj
+        }
+      } else {
+        const scopedSlugMenu = {};
+        Object.keys(menuObj.slug).forEach(slug => {
+          scopedSlugMenu[`/${packageName}${slug}`] = menuObj.slug[slug];
+        });
+        finalMenu.packages[packageName] = {
+          name: packageJson.name,
+          tree: __deepMap(menuObj.tree, ({prop, value}) => {
+              if (prop === 'slug') return `/${packageName}${value}`;
+              return value;
+            }),
+          slug: scopedSlugMenu
+        }
+      }
+
+    });
+    
+    return finalMenu;
+  }
+  _extractMenuFromDocmapJsonStack(docmapJsonMap) {
+
+    const menuObj = {
+    }, menuObjBySlug = {}, menuObjByPackage = {};
+
+    // extract menus
+    Object.keys(docmapJsonMap).forEach(namespace => {
+        const docmapObj = docmapJsonMap[namespace];
 
         if (!docmapObj.menu) return;
 
@@ -345,8 +395,6 @@ class SDocMap extends __SClass implements ISDocMap {
         }).join('.');
 
         let currentObj = menuObj;
-
-
 
         dotPath.split('.').forEach((part, i) => {
 
@@ -380,7 +428,6 @@ class SDocMap extends __SClass implements ISDocMap {
       tree: menuObj,
       slug: menuObjBySlug
     };
-
   }
 
   /**
@@ -438,18 +485,20 @@ class SDocMap extends __SClass implements ISDocMap {
         });
 
         const globs: string[] = [`${packageRoot}/node_modules/**{0,2}/docmap.json`];
-        // if (packageRoot !== packageMonoRoot) {
-        //   globs.push(`${packageMonoRoot}/node_modules/**{0,2}/docmap.json`);
-        // }
+        if (packageRoot !== packageMonoRoot) {
+          globs.push(`${packageMonoRoot}/node_modules/**{0,2}/docmap.json`);
+        }
 
         const currentDocmapFiles = __SGlob.resolve(globs, {
+          defaultExcludes: false,
           exclude: finalParams.exclude ?? []
         });
 
         const extendsArray: string[] = [];
         currentDocmapFiles.forEach((file) => {
-          const packageJson = __readJsonSync(`${file.dirPath}/package.json`);
-          extendsArray.push(packageJson.name);
+          const currentPackageJson = __readJsonSync(`${file.dirPath}/package.json`);
+          if (currentPackageJson.name === packageJson.name) return;
+          extendsArray.push(currentPackageJson.name);
         });
 
         // @ts-ignore

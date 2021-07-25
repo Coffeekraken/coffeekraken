@@ -12,5 +12,15 @@ export default async function docmapRoutes(express, config) {
             handler: 'markdown'
         }
     });
+    if (menu.packages) {
+        Object.keys(menu.packages).forEach(packageName => {
+            const packageObj = menu.packages[packageName];
+            Object.keys(packageObj.slug).forEach(slug => {
+                config.routes[slug] = {
+                    handler: 'markdown'
+                }
+            });
+        });
+    }
 
 }

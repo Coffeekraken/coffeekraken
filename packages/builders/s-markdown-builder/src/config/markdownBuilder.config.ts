@@ -1,13 +1,19 @@
 export default {
     default: {
-        glob: 'README',
-        inDir: '[config.storage.src.rootDir]',
-        outDir: '[config.storage.package.rootDir]',
+        glob: undefined,
+        inDir: undefined,
+        inPath: undefined,
+        inRaw: undefined,
+        outDir: undefined,
         save: true,
         target: 'markdown',
     },
     presets: {
-        readme: {},
+        readme: {
+            glob: 'README',
+            inDir: '[config.storage.src.rootDir]',
+            outDir: '[config.storage.package.rootDir]'
+        },
         doc: {
             glob: '**/*.md',
             inDir: '[config.storage.src.docDir]',

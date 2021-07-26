@@ -1,4 +1,0 @@
-// @ts-ignore
-import component from './index.riot';
-export default component;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxhQUFhO0FBQ2IsT0FBTyxTQUFTLE1BQU0sY0FBYyxDQUFDO0FBQ3JDLGVBQWUsU0FBUyxDQUFDIn0=

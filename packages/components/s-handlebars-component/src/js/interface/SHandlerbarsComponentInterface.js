@@ -1,9 +1,0 @@
-import __SInterface from '@coffeekraken/s-interface';
-export default class SHandlebarsComponentInterface extends __SInterface {
-}
-SHandlebarsComponentInterface.definition = {
-    source: {
-        type: 'String'
-    }
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0hhbmRsZXJiYXJzQ29tcG9uZW50SW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0hhbmRsZXJiYXJzQ29tcG9uZW50SW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0sQ0FBQyxPQUFPLE9BQU8sNkJBQThCLFNBQVEsWUFBWTs7QUFDOUQsd0NBQVUsR0FBRztJQUNsQixNQUFNLEVBQUU7UUFDTixJQUFJLEVBQUUsUUFBUTtLQUNmO0NBQ0YsQ0FBQyJ9

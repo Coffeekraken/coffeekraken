@@ -1,0 +1,19 @@
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+const markdownConfig = __SSugarConfig.get('markdownBuilder');
+export default function isSectionWanted(conditional, options) {
+    let wantedSections = [];
+    let sections = this.sections;
+    if (!this.sections) {
+        sections = Object.keys(markdownConfig.sections);
+    }
+    else {
+        sections = this.sections.split(',').map(l => l.trim());
+    }
+    if (sections.indexOf(conditional) !== -1) {
+        return options.fn(this);
+    }
+    else {
+        return options.inverse(this);
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaXNTZWN0aW9uV2FudGVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaXNTZWN0aW9uV2FudGVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLDhCQUE4QixDQUFDO0FBRTFELE1BQU0sY0FBYyxHQUFHLGNBQWMsQ0FBQyxHQUFHLENBQUMsaUJBQWlCLENBQUMsQ0FBQztBQUU3RCxNQUFNLENBQUMsT0FBTyxVQUFVLGVBQWUsQ0FBQyxXQUFXLEVBQUUsT0FBTztJQUV4RCxJQUFJLGNBQWMsR0FBRyxFQUFFLENBQUM7SUFDeEIsSUFBSSxRQUFRLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztJQUM3QixJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtRQUNoQixRQUFRLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsUUFBUSxDQUFDLENBQUM7S0FDbkQ7U0FBTTtRQUNILFFBQVEsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztLQUMxRDtJQUVELElBQUksUUFBUSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN0QyxPQUFPLE9BQU8sQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDM0I7U0FBTTtRQUNILE9BQU8sT0FBTyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztLQUNoQztBQUVMLENBQUMifQ==

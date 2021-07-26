@@ -13,8 +13,8 @@
                     Coffeekraken
                 </h5>
 
-                @php $menu = get_object_vars($docMenu->tree); @endphp
-                @include('pages.markdown.menu', ['menu' => $menu])
+                @php $menu = get_object_vars($docMenu->tree->documentation); @endphp
+                @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
 
                 @if (count(get_object_vars($docMenu->packages)))
 
@@ -24,13 +24,13 @@
 
                     <ul class="s-list:ul">
                         @foreach ((array)$docMenu->packages as $package)
-                            <li>
-                                <h6 class="s-mb:10">
+                            <li class="__toggle">
+                                <s-activate href="#{{ \Sugar\string\idCompliant($package->name) }}" id="doc-{{ \Sugar\string\idCompliant($package->name) }}" toggle save-state>
                                     {{ $package->name }}
-                                </h6>
+                                </s-activate>
 
                                 @php $menu = get_object_vars($package->tree); @endphp
-                                @include('pages.markdown.menu', ['menu' => $menu])
+                                @include('pages.markdown.menu', ['menu' => $menu, 'id' => \Sugar\string\idCompliant($package->name)])
                             </li>
                         @endforeach
                     </ul>

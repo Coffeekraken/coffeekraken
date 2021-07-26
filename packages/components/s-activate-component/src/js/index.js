@@ -1,4 +1,4 @@
-// @ts-nocheck
-import __RiotComponent from './index.riot';
-export default __RiotComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxlQUFlLE1BQU0sY0FBYyxDQUFDO0FBRTNDLGVBQWUsZUFBZSxDQUFDIn0=
+import __SActivate from './SActivate';
+export * from './SActivate';
+export default __SActivate;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxhQUFhLENBQUM7QUFDdEMsY0FBYyxhQUFhLENBQUM7QUFDNUIsZUFBZSxXQUFXLENBQUMifQ==

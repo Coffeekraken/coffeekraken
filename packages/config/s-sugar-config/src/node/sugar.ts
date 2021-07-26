@@ -95,6 +95,13 @@ export default class SSugarConfig {
     return this._registeredConfigFolderPaths.map(f => f.path);
   }
 
+  static resolve(dotPath) {
+    if (!this._isLoaded) return undefined;
+    return this.get(dotPath);
+  }
+
+  static _isLoaded = false;
+
   static async load(): any {
 
     if (!this._rootSugarJson || !this._sugarJson) {
@@ -183,8 +190,18 @@ export default class SSugarConfig {
       ]
     });
 
-    return await this._sConfigInstance.load();
+    const res = await this._sConfigInstance.load();
+    this._isLoaded = true;
+    return res;
 
+  }
+
+  static safeGet(dotPath: string): any {
+    if (!this._sConfigInstance || !this._isLoaded) return undefined;
+    // get the config
+    return this._sConfigInstance.get(dotPath, undefined, {
+      throwErrorOnUndefinedConfig: false
+    });
   }
 
   static get(dotPath: string): any {

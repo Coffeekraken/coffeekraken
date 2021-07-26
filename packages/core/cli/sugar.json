@@ -11,6 +11,13 @@
     {
       "stack": "process",
       "description": "Process related actions",
+      "interactive": {
+        "project": {
+          "title": "Kill a process",
+          "description": "Allows you to kill particular process through parameters like the port on which it runs, etc...",
+          "process": "./src/cli/process/interactiveKill.cli.js"
+        }
+      },
       "defaultAction": "kill",
       "actions": {
         "kill": {

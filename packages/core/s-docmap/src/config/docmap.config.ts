@@ -66,7 +66,11 @@ export default {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    globs: [`src/**{5}/*:/.*@namespace.*/gm`, `dist/css/*:/.*@namespace.*/gm`],
+    globs: [
+      `src/**{5}/*.!(md):/.*@namespace.*/gm`,
+      `dist/css/*:/.*@namespace.*/gm`,
+      `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`
+    ],
 
     /**
      * @name        exclude

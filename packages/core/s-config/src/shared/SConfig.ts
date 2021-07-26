@@ -450,13 +450,18 @@ export default class SConfig {
       originalValue = __deepMerge(originalValue, afterObj);
 
       // delete originalValue['...'];
-      Object.keys(originalValue).forEach((key) => {          
+      Object.keys(originalValue).forEach((key) => {       
+        
+        try {
+
         originalValue[key] = this._resolveInternalReferences(
           originalValue[key],
           config,
           resolverObj,
           [...path, key]
         );
+
+        } catch(e) {}
       });
     } else if (Array.isArray(originalValue)) {
       originalValue = originalValue.map((v) => {

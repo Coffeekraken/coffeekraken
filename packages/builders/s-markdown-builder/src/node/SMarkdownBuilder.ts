@@ -96,7 +96,10 @@ export interface ISMarkdownBuilderBuildParams {
 
 export default class SMarkdownBuilder extends __SBuilder {
 
-    static _registeredHelpers: any = [];
+    static _registeredHelpers: any = {};
+    static _registeredLayouts: any = {};
+    static _registeredPartials: any = {};
+    static _registeredSections: any = {};
 
     /**
      * @name              registerHelper
@@ -111,12 +114,68 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerHelper(name: string, helper: Function<ISMarkdownBuilderToken>): void {
+    static registerHelper(name: string, helperPath: string): void {
         // @ts-ignore
-        this._registeredHelpers.push({
-            name,
-            helper
-        });
+        this._registeredHelpers[name] = helperPath
+    }
+
+    /**
+     * @name              registerLayout
+     * @type                Function
+     * @static
+     * 
+     * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
+     * used to transform your passed markdown
+     * 
+     * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
+     * 
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static registerLayout(name: string, layout: Record<'markdown' | 'html', string>): void {
+        // @ts-ignore
+        this._registeredLayouts[name] = {
+            ...layout
+        };
+    }
+
+    /**
+     * @name              registerPartial
+     * @type                Function
+     * @static
+     * 
+     * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
+     * used to transform your passed markdown
+     * 
+     * @param           {String}            name            The name of your partial
+     * @param           {Record<'markdown'|'html',string>}      partial     The partial object with the targets properties like markdown and html that point to their proper handlebar syntax files
+     * 
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static registerPartial(name: string, partial: Record<'markdown' | 'html', string>): void {
+        // @ts-ignore
+        this._registeredPartials[name] = partial;
+    }
+
+    /**
+     * @name              registerSection
+     * @type                Function
+     * @static
+     * 
+     * This static method allows you to register a new section
+     * 
+     * @param               {String}            name            The section name that will be used inside the templates
+     * @param               {Record<'markdown'|'html', string>}     sectionObj          The section object with the targets properties like markdown and html that point to their proper handlebar syntax files
+     * 
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static registerSection(name: string, section: Record<'markdown' | 'html', string>): void {
+        // @ts-ignore
+        this._registeredSections[name] = {
+            ...section
+        };
     }
 
     /**
@@ -160,6 +219,37 @@ export default class SMarkdownBuilder extends __SBuilder {
                 ...__SSugarConfig.get('markdownBuilder')
             }
         }, settings ?? {}));
+
+        // register layouts from config
+        const config = __SSugarConfig.get('markdownBuilder');
+        if (config.helpers) {
+            Object.keys(config.helpers).forEach(helperName => {
+                const helperPath = config.helpers[helperName];
+                // @ts-ignore
+                this.constructor.registerHelper(helperName, helperPath);
+            });
+        }
+        if (config.layouts) {
+            Object.keys(config.layouts).forEach(layoutName => {
+                const layoutObj = config.layouts[layoutName];
+                // @ts-ignore
+                this.constructor.registerLayout(layoutName, layoutObj);
+            });
+        }
+        if (config.sections) {
+            Object.keys(config.sections).forEach(sectionName => {
+                const sectionObj = config.sections[sectionName];
+                // @ts-ignore
+                this.constructor.registerSection(sectionName, sectionObj);
+            });
+        }
+        if (config.partials) {
+            Object.keys(config.partials).forEach(partialName => {
+                const partialObj = config.partials[partialName];
+                // @ts-ignore
+                this.constructor.registerPartial(partialName, partialObj);
+            });
+        }
 
 
     }
@@ -228,12 +318,45 @@ export default class SMarkdownBuilder extends __SBuilder {
                     delete params.inPath;
                 }  
 
+                // register helpers and layouts in handlebars
                 // @ts-ignore
-                this.constructor._registeredHelpers.forEach(helperObj => {
-                    handlebars.registerHelper(helperObj.name, helperObj.helper({
-                        target: params.target
-                    }));
+                Object.keys(this.constructor._registeredLayouts ?? []).forEach(layoutName => {
+                    // @ts-ignore
+                    if (!this.constructor._registeredLayouts[layoutName]?.[params.target]) {
+                        throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the requested layout "<yellow>${layoutName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`);
+                    }
+                    // @ts-ignore
+                    const layoutStr = __fs.readFileSync(this.constructor._registeredLayouts[layoutName][params.target], 'utf8').toString();
+                    handlebars.registerPartial(`layout-${layoutName}`, layoutStr);
                 });
+                 // @ts-ignore
+                Object.keys(this.constructor._registeredSections ?? []).forEach(sectionName => {
+                    // @ts-ignore
+                    if (!this.constructor._registeredSections[sectionName]?.[params.target]) {
+                        throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the requested section "<yellow>${sectionName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`);
+                    }
+                    // @ts-ignore
+                    const sectionStr = __fs.readFileSync(this.constructor._registeredSections[sectionName][params.target], 'utf8').toString();
+                    handlebars.registerPartial(`section-${sectionName}`, sectionStr);
+                });
+                // @ts-ignore
+                Object.keys(this.constructor._registeredPartials ?? []).forEach(partialName => {
+                    // @ts-ignore
+                    if (!this.constructor._registeredPartials[partialName]?.[params.target]) {
+                        throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the requested partial "<yellow>${partialName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`);
+                    }
+                    // @ts-ignore
+                    const partialStr = __fs.readFileSync(this.constructor._registeredPartials[partialName][params.target], 'utf8').toString();
+                    handlebars.registerPartial(partialName, partialStr);
+                });
+                // @ts-ignore
+                for (let i=0; i<Object.keys(this.constructor._registeredHelpers ?? []).length; i++) {
+                    // @ts-ignore
+                    const helperName = Object.keys(this.constructor._registeredHelpers ?? [])[i];
+                    // @ts-ignore
+                    const helperFn = (await import(this.constructor._registeredHelpers[helperName])).default;
+                    handlebars.registerHelper(helperName, helperFn);
+                }
 
                 // save with no output
                 if (params.save && !params.outPath && !params.outDir) {
@@ -292,7 +415,12 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                 // take some datas like packagejson, etc...
                 const viewData = {
-                    ...__SSugarConfig.get('.')
+                    config: __SSugarConfig.get('.'),
+                    time: {
+                        year: new Date().getFullYear(),
+                        month: new Date().getMonth(),
+                        day: new Date().getDay()
+                    }
                 };
 
                 if (!sourceObj.files.length) {
@@ -351,8 +479,3 @@ export default class SMarkdownBuilder extends __SBuilder {
     }
 
 }
-
-SMarkdownBuilder.registerHelper('s-code-example', __SMarkdownBuilderSCodeExampleHandlebarsHelper);
-SMarkdownBuilder.registerHelper('shieldsio', __SMarkdownBuilderShieldsioHandlebarsHelper);
-
-// SMarkdownBuilder.registerHelper(__sCodeExampleToken);

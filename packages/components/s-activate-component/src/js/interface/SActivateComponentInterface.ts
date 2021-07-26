@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 export default class SActivateComponentInterface extends __SInterface {
   static definition = {
-    target: {
+    href: {
       type: 'String'
     },
     group: {

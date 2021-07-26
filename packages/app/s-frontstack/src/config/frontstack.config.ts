@@ -43,10 +43,10 @@ export default {
         }
       }
     },
-    vueComponent: {
-      title: 'Vuejs component',
-      description: 'Vuejs (web)component recipe',
-      templateDir: __path.resolve(`${__dirname()}/../templates/vueComponent`),
+    litElement: {
+      title: 'LitElement component',
+      description: 'LitElement webcomponent recipe',
+      templateDir: __path.resolve(`${__dirname()}/../templates/litElement`),
       defaultStack: 'dev',
       stacks: {
         dev: {

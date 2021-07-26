@@ -1,0 +1,15 @@
+<!-- 
+ * @name            LICENSE
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation               /doc/license
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+-->
+
+{{#> layout-license }}
+
+{{/ layout-license }}

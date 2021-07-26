@@ -1,25 +1,34 @@
-<ul class="s-list:ul">
+<ul class="s-list:ul" id="{{ $id }}">
 
-    {{-- <pre>@php var_dump($menu) @endphp</pre> --}}
+    {{-- <pre>@php var_dump($id) @endphp</pre> --}}
 
     @foreach ($menu as $item)
         
+        @php
+            $subId = $id . '-' . \Sugar\string\idCompliant($item->name);
+        @endphp
+
         @if (is_object($item))
-            <li>
+            <li class="{{ $item->slug ? '__slug' : '__toggle' }}">
                 @if ($item->slug)
                     <a href="{{ $item->slug }}">
+                @else
+                    <s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle save-state>
                 @endif
                 @if ($item->name)
-                    <h5 class="s-mb:10">
+                    <h5>
                         {{ $item->name }}
                     </h5>
                 @endif
                 @if ($item->slug)
                     </a>
+                @else
+                    </s-activate>
                 @endif
                 @if (!$item->tree)
                     @include('pages.markdown.menu', [
-                        'menu' => $item
+                        'menu' => $item,
+                        'id' => $subId
                     ])
                 @endif
             </li>

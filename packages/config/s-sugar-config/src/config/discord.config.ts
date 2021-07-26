@@ -1,5 +1,6 @@
 export default {
     server: {
-        id: 'coffeekraken'
+        id: 'Coffeekraken',
+        url: 'https://discord.gg/ERsX54UE'
     }
 }

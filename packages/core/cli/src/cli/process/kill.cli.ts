@@ -42,5 +42,6 @@ export default async function start(stringArgs = '') {
       }
     }
   );
-  pro.run(stringArgs);
+  await pro.run(stringArgs);
+  process.exit();
 }

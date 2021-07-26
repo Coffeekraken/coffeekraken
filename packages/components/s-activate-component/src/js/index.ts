@@ -1,5 +1,3 @@
-// @ts-nocheck
-
-import __RiotComponent from './index.riot';
-
-export default __RiotComponent;
+import __SActivate from './SActivate';
+export * from './SActivate';
+export default __SActivate;

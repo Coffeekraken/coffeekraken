@@ -5,6 +5,7 @@ import __childProcess from 'child_process';
 import __glob from 'glob-all';
 import __path from 'path';
 import __fs from 'fs';
+import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __SInterface from '@coffeekraken/s-interface';
 import __isPath from '@coffeekraken/sugar/shared/is/path';
@@ -228,6 +229,32 @@ class SSugarCli {
     return true;
   }
 
+  _log(message) {
+    console.log(__parseHtml(message));
+  }
+
+  async _run(command: string): string {
+
+    const promise = __spawn(command, [], {
+      shell: true
+    });
+    promise.on('*', (data) => {
+      this._log(data.value);
+    });
+
+    const res = await promise;
+
+    // const res = __childProcess.spawnSync(command, [], {
+    //   shell: true
+    // });
+    // if (res.stderr) {
+    //   this._log(res.stderr.toString());
+    // } else if (res.stdout) {
+    //   this._log(res.stdout.toString());
+    // }
+    return res;
+  }
+
   _newStep() {
     console.clear();
     console.log(__parseHtml(__sugarBanner({
@@ -246,16 +273,20 @@ class SSugarCli {
     for (const [name, obj] of Object.entries(this._availableInteractiveCli)) {
       choices.push(obj.title);
     }    
-    const prompt = new Select({
+
+    const prompt = new Enquirer.default.Select({
       message: 'What do you want Sugar to do for you?',
       choices
     });
     const res = await prompt.run();
     for(const [name, obj] of Object.entries(this._availableInteractiveCli)) {
       if (res === obj.title) {
-        const pro = await import(obj.processPath);
+        const pro = (await import(obj.processPath)).default;
         this._newStep();
-        pro();
+        pro({
+          log: this._log.bind(this),
+          exec: this._run.bind(this)
+        });
         break;
       }
     }

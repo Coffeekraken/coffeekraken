@@ -3,93 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/s-activate-component",
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.coffeekraken-io.doc.rEADME": {
-                "name": "README",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "README",
-                "relPath": "src/README",
-                "children": {}
-            },
-            "@coffeekraken.coffeekraken-io.doc.getStarted": {
-                "name": "Get started",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/get-started"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "getStarted.md",
-                "extension": "md",
-                "relPath": "src/doc/getStarted.md",
-                "children": {}
-            },
-            "@coffeekraken.coffeekraken-io.doc.config.configurationConcept": {
-                "name": "Configuration concept",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
-                    "slug": "/doc/config/concept"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "configSystem.md",
-                "extension": "md",
-                "relPath": "src/doc/config/configSystem.md",
-                "children": {}
-            },
             "@coffeekraken.coffeekraken-io.sugar.css.font.default": {
                 "name": "default",
                 "type": "CssFontFace",
@@ -37626,6 +37543,117 @@
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.config.configurationConcept": {
+                "name": "Configuration concept",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Configuration"
+                    ],
+                    "slug": "/doc/config/concept"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "configSystem.md",
+                "extension": "md",
+                "relPath": "dist/doc/config/configSystem.md",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.getStarted": {
+                "name": "Get started",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/get-started"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "getStarted.md",
+                "extension": "md",
+                "relPath": "dist/doc/getStarted.md",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.lICENSE": {
+                "name": "LICENSE",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/license"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "LICENSE",
+                "relPath": "dist/LICENSE",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.rEADME": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README",
+                "relPath": "dist/README",
                 "children": {}
             }
         }

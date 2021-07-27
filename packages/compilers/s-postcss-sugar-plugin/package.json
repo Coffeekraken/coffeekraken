@@ -17,6 +17,7 @@
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/s-sugar-config": "^2.0.0",
+    "@coffeekraken/s-event-emitter": "^2.0.0",
     "@coffeekraken/s-theme": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "@fortawesome/fontawesome-free": "^5.15.3",

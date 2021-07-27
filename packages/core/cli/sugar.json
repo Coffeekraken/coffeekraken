@@ -9,10 +9,22 @@
   },
   "cli": [
     {
+      "stack": "new",
+      "description": "Create project, etc...",
+      "actions": {
+        "project1": {
+          "scope": "global",
+          "description": "Create a new project",
+          "process": "./src/cli/process/kill.cli.js"
+        }
+      }
+    },
+    {
       "stack": "process",
       "description": "Process related actions",
       "interactive": {
         "project": {
+          "scope": "global",
           "title": "Kill a process",
           "description": "Allows you to kill particular process through parameters like the port on which it runs, etc...",
           "process": "./src/cli/process/interactiveKill.cli.js"
@@ -21,7 +33,9 @@
       "defaultAction": "kill",
       "actions": {
         "kill": {
+          "scope": "global",
           "description": "Kill a process by it's pid, port and more",
+          "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
           "process": "./src/cli/process/kill.cli.js"
         }
       }

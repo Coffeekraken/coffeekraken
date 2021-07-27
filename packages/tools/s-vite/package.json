@@ -14,6 +14,7 @@
     "@coffeekraken/s-class": "^2.0.0",
     "@coffeekraken/s-duration": "^2.0.0",
     "@coffeekraken/s-file": "^2.0.0",
+    "@coffeekraken/s-event-emitter": "^2.0.0",
     "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
     "@coffeekraken/s-riotjs-plugin-postcss-preprocessor": "^2.0.0",
     "@coffeekraken/s-sugar-config": "^2.0.0",

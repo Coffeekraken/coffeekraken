@@ -1,51 +1,51 @@
-import SFrontstack from "../node/SFrontstack";
-import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
-import __fs from 'fs';
-import __childProcess from 'child_process';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
-
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
+import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import __childProcess from 'child_process';
 import * as Enquirer from 'enquirer';
+import __fs from 'fs';
+import SFrontstack from "../node/SFrontstack";
 
-export default async function createProject(stringArgs = '') {
+export default async function createProject({ emit, ask, log, exec, writeLog, safeExec}) {
     
     const frontstack = new SFrontstack();
     const recipes = frontstack.listRecipes();
-    let selectedRecipeObj, projectName, projectFolder, projectLicense, projectAuthor, projectDescription;
+    let selectedRecipeObj;
 
     // recipe choice
     const choices: string[] = [];
     for (const [name, obj] of Object.entries(recipes)) {
       choices.push(`${name}: ${obj.description}`);
-    }    
-    const prompt = new Enquirer.default.Select({
-      message: 'Please select a recipe that suits your needs',
+    }   
+    let recipe = await ask({
+        type: 'autocomplete',
+        message: 'Please select a recipe that suits your needs',
       choices
     });
-    const res = await prompt.run();
+    
     for(const [name, obj] of Object.entries(recipes)) {
-      if (res === `${name}: ${obj.description}`) {
+      if (recipe === `${name}: ${obj.description}`) {
         selectedRecipeObj = obj;
         break;
       }
     }
 
     // project name
-    const namePrompt = new Enquirer.default.Input({
+    const projectName = await ask({
+        type: 'input',
         message: 'Project name',
         validate(...args) {
             if (!args[0].match(/^[a-zA-Z0-9-_@\\/]+$/)) return `Please do not use spaces or special characters other than "@" and "/"`;
             return true;
         }
     });
-    projectName = await namePrompt.run();
 
      // project name
-    const descriptionPrompt = new Enquirer.default.Input({
-        message: 'Project description'
-    });
-    projectDescription = await descriptionPrompt.run();
+     const projectDescription = await ask({
+         type: 'input',
+            message: 'Project description'
+     });
 
     // licence choice
     const licenses: string[] = [
@@ -59,47 +59,47 @@ export default async function createProject(stringArgs = '') {
         'CDDL-1.0',
         'EPL-2.0'
     ];
-    const licensePrompt = new Enquirer.default.Select({
-      message: 'Please select a license for your project',
-      choices: licenses
+    const projectLicense = await ask({
+        type: 'autocomplete',
+        message: 'Please select a license for your project',
+        choices: licenses
     });
-    projectLicense = await licensePrompt.run();
 
      // author
-    const authorPrompt = new Enquirer.default.Input({
-        message: 'Project author'
-    });
-    projectAuthor = await authorPrompt.run();
-
+     const projectAuthor = await ask({
+         type: 'input',
+         message: 'Project author'
+     });
+    
     // folder
-    const folderPrompt = new Enquirer.default.Input({
+    const projectFolder = await ask({
+        type: 'input',
         message: 'Project folder',
         initial: `${process.cwd()}/${projectName}`
     });
-    projectFolder = await folderPrompt.run();
-
+    
     // confirmation
-    const confirmPrompt = new Enquirer.default.Confirm({
+    const confirmRes = await ask({
+        type: 'confirm',
         message: 'Process to new project initialisation?',
         initial: true
     });
-    const confirmRes = await confirmPrompt.run();
-
+    
     if (!confirmRes) {
-        console.log(`The new project setup process has been canceled`);
+        log(`The new project setup process has been canceled`);
         process.exit();
     }
 
     // ensure we have the folder
-    console.log('- Ensure the project folder exists');
+    log('- Ensure the project folder exists');
     __ensureDirSync(projectFolder);
 
     // move into the project
-    console.log(`- Init the new project folder with the template of the "<yellow>${selectedRecipeObj.title}</yellow>" recipe`);
+    log(`- Init the new project folder with the template of the "<yellow>${selectedRecipeObj.title}</yellow>" recipe`);
     __copySync(selectedRecipeObj.templateDir, projectFolder);
 
     // set the project name
-    console.log(`- Set the project name and description in some files like package.json`);
+    log(`- Set the project name and description in some files like package.json`);
     try {
         const packageJson = await import(`${projectFolder}/package.json`);
         packageJson.name = projectName;
@@ -111,20 +111,18 @@ export default async function createProject(stringArgs = '') {
 
     // install dependencies
     const isYarn = await __commandExists('yarn');
+
     const command = isYarn ? 'yarn' : 'npm i';
-    console.log(`- Installing dependencies using ${isYarn ? 'yarn' : 'npm'}...`);
-    const npmInitRes = __childProcess.spawnSync(command, [], {
-        shell: true,
-        // stdio: 'ignore',
+    log(`- Installing dependencies using ${isYarn ? 'yarn' : 'npm'}...`);
+    const npmInitRes = await safeExec(command, {
         cwd: projectFolder
     });
     let errorStr;
     if (npmInitRes.stderr) {
         errorStr = npmInitRes.stderr.toString();
         if (errorStr !== '' && !errorStr.match(/^warning\s/)) {
-            console.log(__parseHtml(`<red>[npm] Error during the npm dependencies instalation...</red>`));
-            console.log(npmInitRes.stderr.toString());
-            process.exit();
+            log(`<red>[${isYarn ? 'yarn' : 'npm'}] Error during the dependencies instalation. More details in the sugar.log file at the root of your project</red>`);
+            writeLog(npmInitRes.stderr.toString());
         }
     }
 
@@ -158,8 +156,7 @@ export default async function createProject(stringArgs = '') {
             cwd: projectFolder
         });
     } else {
-        console.log(__parseHtml(`<green>[success]</green> Congrats, your new project "<yellow>${projectName}</yellow>" has been <green>successfully</green> initialised!`));
+        log(`<green>[success]</green> Congrats, your new project "<yellow>${projectName}</yellow>" has been <green>successfully</green> initialised!`);
         process.exit();
     }
-
 }

@@ -4,9 +4,9 @@ import __picomatch from 'picomatch'
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import type { PluginOption, ViteDevServer } from 'vite'
-import __globalEventEmitter from '@coffeekraken/sugar/node/event/globalEventEmitter';
 import __fs from 'fs';
 import __chokidar from 'chokidar';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * Configuration for the watched paths.
@@ -51,7 +51,7 @@ export default (config: Config = {}): PluginOption => ({
       setTimeout(() => ws.send({ type: 'full-reload' }, path ), 100);
     }
 
-    __globalEventEmitter.on('s-postcss-sugar-plugin-import-update', (e) => {
+    __SEventEmitter.global.on('s-postcss-sugar-plugin-import-update', (e) => {
       checkReload(e.path);
     });
 

@@ -1,6 +1,7 @@
-import SLog from './SLog';
+import ISLog from './ISLog';
+import ISLogAsk from './ISLogAsk';
 
-export * from './SLog';
-export * from './log';
+export * from './ISLog';
 
-export default SLog;
+export { ISLog, ISLogAsk };
+export default ISLog;

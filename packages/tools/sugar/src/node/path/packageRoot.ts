@@ -33,6 +33,8 @@ function packageRoot(from = process.cwd(), highest = false) {
   const f = __findPkgJson(from);
   let file = f.next();
 
+  if (!file || !file.filename) return false;
+
   if (!highest) {
     const filename = file.filename || false;
     if (!filename) return filename;

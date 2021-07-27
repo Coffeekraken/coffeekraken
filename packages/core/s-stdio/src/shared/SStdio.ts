@@ -2,15 +2,14 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __minimatch from 'minimatch';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __SClass, { ISClass } from '@coffeekraken/s-class';
-import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __childProcess from 'child_process';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __globalEventEmitter from '@coffeekraken/sugar/node/event/globalEventEmitter';
 
-import __SLog, { ILog } from '@coffeekraken/s-log';
+import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 
 export interface ISStdioCtorSettings {
   stdio?: ISStdioSettings;
@@ -32,24 +31,24 @@ export interface ISStdioSettings {
   types: string[];
   metas: ISStdioSettingsMetas;
   mapTypesToEvents: Record<string, string[]>;
+  defaultLogObj: Partial<ISLog>;
+  defaultAskObj: Partial<ISLogAsk>;
 }
 
 export interface ISStdioCtor {
   new (sources: ISPromise | ISPromise[], settings: ISStdioSettings): ISStdio;
 }
 
-export type ISStdioLog = ILog;
-
 export interface ISStdioRegisteredComponents {
   [key: string]: ISStdioComponent;
 }
 export interface ISStdioComponent {
   id: string;
-  render(logObj: ILog, settings: any);
+  render(logObj: ISLog, settings: any);
 }
 
 export interface ISStdioLogFn {
-  (...logObj: ILog[]): void;
+  (...logObj: ISLog[]): void;
 }
 
 export interface ISStdio extends ISClass {
@@ -111,7 +110,7 @@ class SStdio extends __SClass implements ISStdio {
 
   /**
    * @name      _lastLogObj
-   * @type      ILog
+   * @type      ISLog
    * @private
    *
    * Store the last log object logged
@@ -119,11 +118,11 @@ class SStdio extends __SClass implements ISStdio {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _lastLogObj?: ILog;
+  _lastLogObj?: ISLog;
 
   /**
    * @name      _logsBuffer
-   * @type      ILog[]
+   * @type      ISLog[]
    * @private
    *
    * Store the logs that does not have been displayed yet
@@ -131,7 +130,7 @@ class SStdio extends __SClass implements ISStdio {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _logsBuffer: ILog[] = [];
+  _logsBuffer: ISLog[] = [];
 
   /**
    * @name        _isDisplayed
@@ -281,6 +280,9 @@ class SStdio extends __SClass implements ISStdio {
             types: __SugarConfig.get('log.types'),
             metas: {
               time: false
+            },
+            defaultLogObj: {
+              decorators: true
             }
           }
         },
@@ -288,9 +290,9 @@ class SStdio extends __SClass implements ISStdio {
       )
     );
     this.sources = Array.isArray(sources) ? sources : [sources];
-    if (this.stdioSettings.globalEvents) {
-      this.sources.push(__globalEventEmitter);
-    }
+    // if (this.stdioSettings.globalEvents) {
+    //   this.sources.push(__SEventEmitter.global);
+    // }
     this.sources.forEach((s) => {
       // subscribe to the process
       this.registerSource(s);
@@ -364,6 +366,26 @@ class SStdio extends __SClass implements ISStdio {
 
       // console.log('REG', source, set.events);
 
+    // "ask" event
+    this.sources.forEach((source) => {
+      source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
+        // switch (askObj.type.toLowerCase()) {
+        //   case 'boolean':
+        //     const res = await __inquirer.prompt({
+        //       ...askObj,
+        //       type: 'confirm',
+        //       name: 'value'
+        //     });
+        //     return res.value;
+        //     break;
+        // }
+
+        // console.log(askObj);
+        const res = await this.ask(askObj);
+        answer(res);
+      });
+    });
+
     source.on(
       (set.events || []).join(','),
       (data, metas) => {
@@ -410,16 +432,19 @@ class SStdio extends __SClass implements ISStdio {
    * It will call the ```_log``` method that each implementation of the
    * SStdio class MUST have
    *
-   * @param         {ILog[]}        ...logObj      The log object(s) you want to log
+   * @param         {ISLog[]}        ...logObj      The log object(s) you want to log
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _isClearing = false;
   // _isCleared = true;
-  log(...logObj: ILog[]) {
+  log(...logObj: ISLog[]) {
     for (let i = 0; i < logObj.length; i++) {
-      let log: ILog = logObj[i];
+      let log = <ISLog>__deepMerge(
+        this.stdioSettings.defaultLogObj,
+        logObj[i]
+      );
 
       // filter by type
       if (
@@ -427,9 +452,6 @@ class SStdio extends __SClass implements ISStdio {
         this.stdioSettings.types.indexOf(log.type.toLowerCase()) === -1
       )
         continue;
-
-      // if (this._isCleared && logObj.clear) delete logObj.clear;
-      // this._isCleared = false;
 
       // put in buffer if not displayed
       if (!this.isDisplayed() || this._isClearing) {
@@ -474,8 +496,6 @@ class SStdio extends __SClass implements ISStdio {
         // console.log(log.type);
       }
 
-      log = __SLog.parseAndFormatLog(log);
-
       // get the correct component to pass to the _log method
       const componentObj = (<any>this).constructor.registeredComponents[
         this.constructor.name
@@ -501,6 +521,34 @@ class SStdio extends __SClass implements ISStdio {
       // save the last log object
       this._lastLogObj = log;
     }
+  }
+
+  /**
+   * @name      ask
+   * @type      Function
+   * @async
+   *
+   * This method is the one called to ask something.
+   * It will call the ```_ask``` method that each implementation of the
+   * SStdio class MUST have
+   *
+   * @param         {ISLog[]}        ...logObj      The log object(s) you want to log
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  // _isCleared = true;
+  async ask(askObj: Partial<ISLogAsk>) {
+  
+    let ask = <ISLogAsk>__deepMerge(
+      this.stdioSettings.defaultAskObj,
+      askObj
+    );
+
+    // @ts-ignore
+    const answer = await this._ask(ask);
+    return answer;
+
   }
 
   /**

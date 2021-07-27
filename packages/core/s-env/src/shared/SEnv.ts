@@ -1,5 +1,6 @@
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __packageJson from '@coffeekraken/sugar/node/package/json';
 
 // @ts-ignore
 if (!__isNode() && !window.env) {
@@ -163,4 +164,17 @@ export default class SEnv {
     // @ts-ignore
     SEnv.env = env;
   }
+
+  /**
+   * @name        packageJson
+   * @type        Object
+   * @static
+   * 
+   * Access the package.json content from the current package the process
+   * runs in.
+   * 
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static packageJson = __packageJson();
 }

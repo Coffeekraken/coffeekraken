@@ -1,5 +1,0 @@
-"use strict";
-const __SLog = require('../SLog');
-const __SLogConsoleAdapter = require('../adapters/SLogConsoleAdapter');
-require('./SLogConsoleAdapter')(__SLog, __SLogConsoleAdapter);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0xvZ0NvbnNvbGVBZGFwdGVyLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTTG9nQ29uc29sZUFkYXB0ZXIudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsTUFBTSxNQUFNLEdBQUcsT0FBTyxDQUFDLFNBQVMsQ0FBQyxDQUFDO0FBQ2xDLE1BQU0sb0JBQW9CLEdBQUcsT0FBTyxDQUFDLGdDQUFnQyxDQUFDLENBQUM7QUFDdkUsT0FBTyxDQUFDLHNCQUFzQixDQUFDLENBQUMsTUFBTSxFQUFFLG9CQUFvQixDQUFDLENBQUMifQ==

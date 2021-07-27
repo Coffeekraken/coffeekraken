@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __isPath from './isPath';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name                folderPath
@@ -32,7 +31,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function folderPath(path, checkExistence = false) {
-  path = __replacePathTokens(path);
   if (checkExistence) {
     if (!__isPath(path, true)) return false;
   }

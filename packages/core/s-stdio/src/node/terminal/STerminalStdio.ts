@@ -2,12 +2,14 @@ import __inquirer from 'inquirer';
 import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 // import __SNotification from '../../notification/SNotification';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SStdio from '../../shared/SStdio';
+import __SStdio, { ISStdioSettings } from '../../shared/SStdio';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import { terminal as __terminalKit } from 'terminal-kit';
 import __countLine from '@coffeekraken/sugar/shared/string/countLine';
 import __splitEvery from '@coffeekraken/sugar/shared/string/splitEvery';
+import __SPromise from '@coffeekraken/s-promise';
+import * as __Enquirer from 'enquirer';
 
 /**
  * @name            STerminalStdio
@@ -34,24 +36,11 @@ export interface ISTerminalStdioCtorSettings {
 }
 
 export interface ISTerminalStdioSettings {
-  metas: boolean;
-  actionPrefix: boolean;
 }
 
 export interface ISTerminalStdio {}
 
 class STerminalStdio extends __SStdio implements ISTerminalStdio {
-  // /**
-  //  * @name      _notifier
-  //  * @type      SNotification
-  //  * @private
-  //  *
-  //  * Store the SNotification instance used in this class
-  //  *
-  //  * @since     2.0.0
-  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //  */
-  // _notifier: __SNotification;
 
   /**
    * @name      terminalStdioSettings
@@ -86,39 +75,12 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
       __deepMerge(
         {
           terminalStdio: {
-            metas: true,
-            actionPrefix: true,
             icons: true
           }
         },
         settings || {}
       )
     );
-
-    // this._notifier = new __SNotification({
-    //   adapters: ['node']
-    // });
-    // this.sources.forEach((source) => {
-    //   source.on('notification', (notificationObj, metas) => {
-    //     this._notifier.notify(notificationObj);
-    //   });
-    // });
-
-    // "ask" event
-    this.sources.forEach((source) => {
-      source.on('ask', async (askObj, metas) => {
-        switch (askObj.type.toLowerCase()) {
-          case 'boolean':
-            const res = await __inquirer.prompt({
-              ...askObj,
-              type: 'confirm',
-              name: 'value'
-            });
-            return res.value;
-            break;
-        }
-      });
-    });
 
     this.display();
   }
@@ -150,7 +112,11 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     // handle empty logs
     if (!logObj) return;
 
-    // __terminalKit.saveCursor();
+    
+    if (!logObj.decorators) {
+      console.log(__parseHtml(logObj.value));
+      return;
+    }
 
     let needId = false;
     if (this._currentLogId !== logObj.metas.emitter.metas.id) {
@@ -164,7 +130,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     let renderedStr = component.render(logObj, this._settings);
     // handle metas if needed
     if (!logObj.nude) {
-      if (this.terminalStdioSettings.metas && logObj.metas?.emitter) {
+      if (logObj.metas?.emitter) {
         lineStart = `<bg${__upperFirst(
           logObj.metas.emitter.metas.color || 'yellow'
         )}> </bg${__upperFirst(
@@ -193,35 +159,138 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
           lineStartLength = __countLine(__parseHtml(lineStart));
     const maxLineLenght = process.stdout.columns - idLength - idSeparatorLength - lineStartLength;
 
-    const finalLines: string[] = [];
+    let finalLines: string[] = [];
 
     lines.forEach((line, i) => {
-
-      if (__countLine(line) > maxLineLenght) {
+      if (line.includes('-%-')) {
+        finalLines.push(line.replace('-%-', '-'.repeat(maxLineLenght)));
+      } else if (__countLine(line) > maxLineLenght) {
         __splitEvery(line, maxLineLenght).forEach((l, j) => {
-
-          if (j === 0) {
-            if (needId) {
-              finalLines.push(`${lineStart}${idStr}${idSeparator}${l.trim()}`);
-            } else {
-              finalLines.push(`${lineStart}${' '.repeat(idLength)}${idSeparator}${l.trim()}`)
-            }
-          } else {
-            finalLines.push(`${lineStart}${' '.repeat(idLength)}${idSeparator}${l.trim()}`)
-          }
-
+          finalLines.push(l.trim());
         });
       } else {
-        finalLines.push(`${lineStart}${idStr}${idSeparator}${line.trim()}`);
+        finalLines.push(line.trim());
       }
+    });
 
-    })
+    finalLines = finalLines.map(line => {
+        if (needId) {
+          needId = false;
+          return `${lineStart}${idStr}${idSeparator}${line.trim()}`;
+        } else {
+          return `${lineStart}${' '.repeat(idLength)}${idSeparator}${line.trim()}`;
+        }
+    });
 
     // log the string
     try {
       console.log(__parseHtml(finalLines.join('\n')));
     } catch (e) {}
   }
+
+  /**
+   * @name          _ask
+   * @type          Function
+   * @private
+   *
+   * Method that actually log the passed log object with the passed component
+   *
+   * @param         {ILogAsk}        askObj            The ask object to ask to the user
+   * @param         {ISStdioComponent}      component       The component to use for logging
+   *
+   * @since         2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _ask(askObj) {
+
+    return new __SPromise(async ({resolve, reject, emit}) => {
+
+      let prompt, res;
+
+      switch(askObj.type) {
+        case 'select':
+          // @ts-ignore
+          prompt = new __Enquirer.default.Select({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'autocomplete':
+          // @ts-ignore
+          prompt = new __Enquirer.default.AutoComplete({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'confirm':
+          // @ts-ignore
+          prompt = new __Enquirer.default.Confirm({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'form':
+          // @ts-ignore
+          prompt = new __Enquirer.default.Form({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'input':
+          // @ts-ignore
+          prompt = new __Enquirer.default.Input({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'secret':
+          // @ts-ignore
+          prompt = new __Enquirer.default.Secret({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'list':
+          // @ts-ignore
+          prompt = new __Enquirer.default.List({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'multiselect':
+          // @ts-ignore
+          prompt = new __Enquirer.default.MultiSelect({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'number':
+          // @ts-ignore
+          prompt = new __Enquirer.default.NumberPrompt({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'password':
+          // @ts-ignore
+          prompt = new __Enquirer.default.Password({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+        case 'toggle':
+          // @ts-ignore
+          prompt = new __Enquirer.default.Toggle({
+            ...askObj
+          });
+          res = await prompt.run();
+        break;
+      }
+      resolve(res);
+
+    });
+  }
+
 }
 
 import __defaultTerminalStdioComponent from './components/defaultTerminalStdioComponent';

@@ -3,7 +3,7 @@ import __SGlob from '@coffeekraken/s-glob';
 import __path from 'path';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __chokidar from 'chokidar';
-import __globalEventEmitter from '@coffeekraken/sugar/node/event/globalEventEmitter';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * @name           import
@@ -84,7 +84,7 @@ export default function ({
   // watch for new / deleted files
   if (!_watcher) {
     function triggerUpdate(path) {
-      __globalEventEmitter.emit('s-postcss-sugar-plugin-import-update', {
+      __SEventEmitter.global.emit('s-postcss-sugar-plugin-import-update', {
         path: __path.resolve(dirName, path)
       });
     }

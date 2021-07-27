@@ -3,7 +3,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise, { ISPromiseSettings } from '@coffeekraken/s-promise';
 import __utcTime from '@coffeekraken/sugar/shared/date/utcTime';
 import __SBenchEnv from './SBenchEnv';
-import __globalEventEmitter from '@coffeekraken/sugar/node/event/globalEventEmitter';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * @name            SBench
@@ -305,16 +305,16 @@ export default class SBench extends __SPromise {
             logsAr = [...logsAr, ...stepObj.logs];
         });
 
-        __globalEventEmitter.emit('log', {
+        __SEventEmitter.global.emit('log', {
             value: '-------------------- SBench --------------------'
         });
         logsAr.forEach(log => {
-            __globalEventEmitter.emit('log', {
+            __SEventEmitter.global.emit('log', {
                 id: this.metas.id,
                 value: log
             });
         });
-        __globalEventEmitter.emit('log', {
+        __SEventEmitter.global.emit('log', {
             value: '------------------------------------------------'
         });
 

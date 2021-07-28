@@ -64,7 +64,7 @@ export default class SSugarConfig {
    */
   static registerFolder(
     path: string,
-    scope?: 'default' | 'module' | 'extends' | 'repo' | 'package' | 'user',
+    scope?: 'default' | 'module' | 'repo' | 'package' | 'user',
     packageName?: string
   ): void {
 
@@ -134,21 +134,21 @@ export default class SSugarConfig {
                   })
                   .map((obj) => obj.path)
               ],
-              extends: [
-                // @ts-ignore
-                ...this._registeredConfigFolderPaths
-                  .filter((obj) => {
-                    if (
-                      this._rootSugarJson &&
-                      obj.scope === 'extends' &&
-                      this._rootSugarJson.extends.indexOf(obj.packageName) !== -1
-                    ) {
-                      return true;
-                    }
-                    return false;
-                  })
-                  .map((obj) => obj.path)
-              ],
+              // extends: [
+              //   // @ts-ignore
+              //   ...this._registeredConfigFolderPaths
+              //     .filter((obj) => {
+              //       if (
+              //         this._rootSugarJson &&
+              //         obj.scope === 'extends' &&
+              //         this._rootSugarJson.extends.indexOf(obj.packageName) !== -1
+              //       ) {
+              //         return true;
+              //       }
+              //       return false;
+              //     })
+              //     .map((obj) => obj.path)
+              // ],
               repo: [
                 `${__packageRoot(process.cwd(), true)}/[folderName]`,
                 // @ts-ignore

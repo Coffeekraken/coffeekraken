@@ -68,17 +68,17 @@ export default function ({ params, atRule, replaceWith }) {
             default:
                 vars.push(`
 
-                & input[type="checkbox"]:checked + *:before {
+                & input[type="checkbox"]:checked + *:after {
                     background-color: sugar.color(ui);
                 }
 
                 & input[type="checkbox"] + *:before {
-                    background: sugar.color(ui, --lighten 40 --desaturate 100);
+                    background: sugar.color(ui, --alpha 0.15);
                     transition: sugar.theme(ui.switch.transition);
                     border-radius: sugar.theme(ui.switch.borderRadius);
                 }
                 & input[type="checkbox"] + *:after {
-                    background: sugar.color(ui, foreground);
+                    background: sugar.color(ui, --alpha 0.5);
                     transition: sugar.theme(ui.switch.transition);
                     border-radius: sugar.theme(ui.switch.borderRadius);
                 }

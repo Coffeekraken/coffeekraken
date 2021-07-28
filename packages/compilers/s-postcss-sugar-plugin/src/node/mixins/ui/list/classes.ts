@@ -80,9 +80,10 @@ export default function ({
         @sugar.ui.list.ul;
       }
 
-      ul.s-rhythm--vertical,
-      .s-rhythm--vertical ul {
-        ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+      ul {
+        @sugar.rhythm.vertical {
+          ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+        }
       } 
   `);
 
@@ -156,9 +157,10 @@ export default function ({
         @sugar.ui.list.ol;
       }   
 
-      ol.s-rhythm--vertical,
-      .s-rhythm--vertical ol {
-        ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+      ol {
+        @sugar.rhythm.vertical {
+          ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+        }
       } 
   `);
 

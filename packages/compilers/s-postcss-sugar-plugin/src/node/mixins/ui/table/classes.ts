@@ -63,9 +63,10 @@ export default function ({
             @sugar.color.remap(ui, sugar.theme(ui.table.defaultColor));
             @sugar.ui.table;
         } 
-        table.s-rhythm--vertical,
-        .s-rhythm--vertical table {
+        table {
+          @sugar.rhythm.vertical {
             ${__jsObjectToCssProperties(__theme().config('ui.table.:rhythmVertical'))}
+          }
         } 
     `);
 

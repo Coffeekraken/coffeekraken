@@ -37,11 +37,14 @@ export default function ({ params, atRule, replaceWith }) {
     '@sugar.ratio.classes;',
     '@sugar.border.classes;',
     '@sugar.display.classes;',
+    '@sugar.overflow.classes;',
     '@sugar.position.classes;',
+    '@sugar.pointer.classes;',
     '@sugar.icon.classes;',
     '@sugar.margin.classes;',
     '@sugar.padding.classes;',
-    '@sugar.width.classes;'
+    '@sugar.width.classes;',
+    '@sugar.components.classes;'
   ];
 
   replaceWith(cssArray);

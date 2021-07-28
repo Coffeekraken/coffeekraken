@@ -28,6 +28,10 @@ class ColorModifierInterface extends __SInterface {
       type: 'Number',
       default: 0
     },
+    alpha: {
+      type: 'Number',
+      default: 1
+    },
     grayscale: {
       type: 'Boolean',
       default: false
@@ -65,7 +69,7 @@ export default function color({
     ...params
   };
 
-  if (finalParams.color.match(/^(hsl\rgba?|hsv)\(/)) return finalParams.color;
+  if (finalParams.color.match(/^(hsla?|rgba?|hsv)\(/)) return finalParams.color;
   if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
   let colorName = finalParams.color;
@@ -125,7 +129,9 @@ export default function color({
     if (lightnessOffset === undefined)
       lightnessOffset = `var(${__minifyVar(`${colorModifierVar}-lightnessOffset`)}, 0)`;
 
-    finalValue = `hsl(
+    let alpha = modifierParams.alpha !== undefined ? modifierParams.alpha : 1;
+
+    finalValue = `hsla(
       calc(
         var(${__minifyVar(`${colorVar}-h`)}, 0)
         +
@@ -146,7 +152,8 @@ export default function color({
           ${lightnessOffset}
         )
         * 1%
-      )
+      ),
+      var(${__minifyVar(`${colorModifierVar}-a`)}, ${alpha})
     )`;
 
     finalValue = finalValue

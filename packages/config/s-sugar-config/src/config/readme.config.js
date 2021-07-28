@@ -1,12 +1,7 @@
 export default {
-    shields: '[config.shieldsio.shields]',
-    sections: {
-        header: {},
-        description: {},
-        install: {},
-        license: {},
-        contact: {}
+    layout: {
+        headerImageUrl: '/dist/img/doc/readmeHeader.jpg'
     },
-    presets: {}
+    shields: '[config.shieldsio.shields]'
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZG1lLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlYWRtZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZUFBZTtJQUVYLE9BQU8sRUFBRSw0QkFBNEI7SUFDckMsUUFBUSxFQUFFO1FBQ04sTUFBTSxFQUFFLEVBQUU7UUFDVixXQUFXLEVBQUUsRUFBRTtRQUNmLE9BQU8sRUFBRSxFQUFFO1FBQ1gsT0FBTyxFQUFFLEVBQUU7UUFDWCxPQUFPLEVBQUUsRUFBRTtLQUNkO0lBRUQsT0FBTyxFQUFFLEVBRVI7Q0FHSixDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZG1lLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlYWRtZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZUFBZTtJQUNYLE1BQU0sRUFBRTtRQUNKLGNBQWMsRUFBRSxnQ0FBZ0M7S0FDbkQ7SUFDRCxPQUFPLEVBQUUsNEJBQTRCO0NBQ3hDLENBQUEifQ==

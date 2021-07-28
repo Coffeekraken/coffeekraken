@@ -52,9 +52,10 @@ export default function ({
             @sugar.color.remap(ui, sugar.theme(ui.blockquote.defaultColor));
             @sugar.ui.blockquote;
         } 
-        blockquote.s-rhythm--vertical,
-        .s-rhythm--vertical blockquote {
-            ${__jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
+        blockquote {
+            @sugar.rhythm.vertical {
+              ${__jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
+            }
         } 
     `);
 

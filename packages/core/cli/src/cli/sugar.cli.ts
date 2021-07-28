@@ -1,29 +1,20 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node
 // @ts-nocheck
 
-import __childProcess from 'child_process';
-import __glob from 'glob-all';
-import __path from 'path';
-import __fs from 'fs';
-import __SEnv from '@coffeekraken/s-env';
-import __spawn from '@coffeekraken/sugar/node/process/spawn';
-import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
-import __SInterface from '@coffeekraken/s-interface';
-import __isPath from '@coffeekraken/sugar/shared/is/path';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
-import __SSugarJson from '@coffeekraken/s-sugar-json';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SBench from '@coffeekraken/s-bench';
-import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
-import __SProcess from '@coffeekraken/s-process';
-import __SPromise from '@coffeekraken/s-promise';
-import { STerminalStdio } from '@coffeekraken/s-stdio';
+import __SEnv from '@coffeekraken/s-env';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-
-import * as Enquirer from 'enquirer';
-
+import __SInterface from '@coffeekraken/s-interface';
+import { STerminalStdio } from '@coffeekraken/s-stdio';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 import '@coffeekraken/sugar/node/index';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import __spawn from '@coffeekraken/sugar/node/process/spawn';
+import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
+import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
+import __fs from 'fs';
+import __path from 'path';
 
 export interface ISSugarCliAvailableCliObj {
   packageJson: any;
@@ -138,6 +129,11 @@ class SSugarCli {
       });
       this._stdio = new STerminalStdio(this._eventEmitter);
 
+      // writeLog event
+      this._eventEmitter.on('writeLog', (logObj) => {
+        this.writeLog(logObj.value);
+      });
+
       // print header 
       if (!__isChildProcess()) {
         this._newStep(true);
@@ -151,10 +147,10 @@ class SSugarCli {
       await this._getAvailableCli();
 
       // interactive
-      // if (!this._stack && !this._action && !this._args) {
-      //   this._interactivePrompt();
-      //   return;
-      // }
+      if (!this._stack && !this._action && !this._args) {
+        this._interactivePrompt();
+        return;
+      }
 
       // help
       if (this._args.match(/--help/)) {
@@ -190,7 +186,12 @@ class SSugarCli {
       }
 
       // @ts-ignore
-      this._eventEmitter.pipe(processFn(args));
+      this._eventEmitter.pipe(processFn(args), {
+        processor(value) {
+          value.decorators = false;
+          return value;
+        }
+      });
     }
   }
 
@@ -347,7 +348,7 @@ class SSugarCli {
 
     const choices: string[] = [];
     for (const [name, obj] of Object.entries(this._availableInteractiveCli)) {
-      choices.push(obj.title);
+      choices.push(`> ${obj.title}`);
     }
 
     const res = await this.ask({
@@ -357,10 +358,22 @@ class SSugarCli {
     });
 
     for(const [name, obj] of Object.entries(this._availableInteractiveCli)) {
-      if (res === obj.title) {
+      if (res === `> ${obj.title}`) {
         const pro = (await import(obj.processPath)).default;
+
+        let args = {};
+        if (obj.interfacePath) {
+          const { default: int} = await import(obj.interfacePath);
+          args = int.apply({});
+        }
+
         this._newStep(true);
-        pro(this);
+        this._eventEmitter.pipe(pro(args), {
+          processor(value) {
+            value.decorators = false;
+            return value;
+          }
+        });
         break;
       }
     }
@@ -455,4 +468,4 @@ class SSugarCli {
 
 }
 
-const cli = new SSugarCli();
+new SSugarCli();

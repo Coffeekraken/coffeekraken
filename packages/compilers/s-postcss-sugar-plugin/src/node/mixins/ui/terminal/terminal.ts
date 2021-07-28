@@ -34,8 +34,7 @@ export default function ({
           color: sugar.color(complementary);
       }
 
-      &.s-rhythm--vertical,
-    .s-thythm--vertical & {
+      @sugar.rhythm.vertical {
         ${__jsObjectToCssProperties(__theme().config('ui.terminal.:rhythmVertical'))}
     } 
 

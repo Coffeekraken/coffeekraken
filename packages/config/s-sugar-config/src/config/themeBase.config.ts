@@ -1311,6 +1311,12 @@ export default {
     }
   },
 
+  components: {
+    's-code-example': {
+      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
+    }
+  },
+
   ui: {
     default: {
       padding: '[theme.padding.10] [theme.padding.20]',
@@ -1381,6 +1387,15 @@ export default {
       depth: '[theme.ui.default.depth]',
       maxWidth: '30ch',
       arrowSize: '20px'
+    },
+    pre: {
+      padding: '[theme.ui.default.padding]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]',
+      styles: ['default'],
+      defaultColor: '[theme.ui.default.defaultColor]',
+      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
     },
     code: {
       padding: '[theme.ui.default.padding]',
@@ -1495,6 +1510,22 @@ export default {
         ':rhythmVertical': {
           'margin-bottom': 30
         }
+      },
+      pre: {
+        'font-family': 'code',
+        color: ['ui', 'text'],
+        'background-color': ['ui','surface'],
+        padding: 20,
+        ':rhythmVertical': {
+          'margin-bottom': 30
+        }
+      },
+      'code:not(pre > code)': {
+        'display': 'inline-block',
+        'font-family': 'code',
+        color: ['ui', 'text'],
+        'background-color': ['ui','surface'],
+        padding: 10
       },
       a: {
         'color': 'accent'

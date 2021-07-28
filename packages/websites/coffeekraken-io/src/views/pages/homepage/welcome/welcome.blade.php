@@ -1,10 +1,6 @@
 <section id="homepage-welcome">
 
-    {{-- <div class="__bg"></div> --}}
-
     <div class="s-container s-position:relative">
-
-        {{-- <s-inline-svg class="__illustration" src="/src/img/header-illustration.svg"></s-inline-svg> --}}
 
         <div class="s-grid:1_2 @desktop s-grid:12">
 
@@ -23,9 +19,9 @@ sugar frontstack.init my-cool-project
                     Join us on discord
                 </a>
             </div>
-            <div class="s-position:relative">
+            {{-- <div class="s-position:relative">
                 <img class="__kraken" src="/src/img/microworld.png" />
-            </div>
+            </div> --}}
 
         </div>
 

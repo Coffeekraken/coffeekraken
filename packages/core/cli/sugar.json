@@ -27,6 +27,7 @@
           "scope": "global",
           "title": "Kill a process",
           "description": "Allows you to kill particular process through parameters like the port on which it runs, etc...",
+          "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
           "process": "./src/cli/process/interactiveKill.cli.js"
         }
       },

@@ -5,34 +5,37 @@ import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __childProcess from 'child_process';
 import * as Enquirer from 'enquirer';
 import __fs from 'fs';
-import SFrontstack from "../node/SFrontstack";
+import __SFrontstack from "../node/SFrontstack";
+import __SPromise from '@coffeekraken/s-promise';
 
-export default async function createProject({ emit, ask, log, exec, writeLog, safeExec}) {
+export default function createProject() {
     
-    const frontstack = new SFrontstack();
+    return new __SPromise(async ({resolve, reject, emit, pipe}) => {
+
+    const frontstack = new __SFrontstack();
     const recipes = frontstack.listRecipes();
     let selectedRecipeObj;
 
     // recipe choice
     const choices: string[] = [];
     for (const [name, obj] of Object.entries(recipes)) {
-      choices.push(`${name}: ${obj.description}`);
+      choices.push(`> ${name}: ${obj.description}`);
     }   
-    let recipe = await ask({
+    let recipe = await emit('ask', {
         type: 'autocomplete',
         message: 'Please select a recipe that suits your needs',
       choices
     });
     
     for(const [name, obj] of Object.entries(recipes)) {
-      if (recipe === `${name}: ${obj.description}`) {
+      if (recipe === `> ${name}: ${obj.description}`) {
         selectedRecipeObj = obj;
         break;
       }
     }
 
     // project name
-    const projectName = await ask({
+    const projectName = await emit('ask', {
         type: 'input',
         message: 'Project name',
         validate(...args) {
@@ -42,7 +45,7 @@ export default async function createProject({ emit, ask, log, exec, writeLog, sa
     });
 
      // project name
-     const projectDescription = await ask({
+     const projectDescription = await emit('ask', {
          type: 'input',
             message: 'Project description'
      });
@@ -59,47 +62,55 @@ export default async function createProject({ emit, ask, log, exec, writeLog, sa
         'CDDL-1.0',
         'EPL-2.0'
     ];
-    const projectLicense = await ask({
+    const projectLicense = (await emit('ask', {
         type: 'autocomplete',
         message: 'Please select a license for your project',
-        choices: licenses
-    });
+        choices: licenses.map(l => `> ${l}`)
+    })).replace('> ', '');
 
      // author
-     const projectAuthor = await ask({
+     const projectAuthor = await emit('ask', {
          type: 'input',
          message: 'Project author'
      });
     
     // folder
-    const projectFolder = await ask({
+    const projectFolder = await emit('ask', {
         type: 'input',
         message: 'Project folder',
         initial: `${process.cwd()}/${projectName}`
     });
     
     // confirmation
-    const confirmRes = await ask({
+    const confirmRes = await emit('ask', {
         type: 'confirm',
         message: 'Process to new project initialisation?',
         initial: true
     });
     
     if (!confirmRes) {
-        log(`The new project setup process has been canceled`);
+        emit('log', {
+            value: `The new project setup process has been canceled`
+        });
         process.exit();
     }
 
     // ensure we have the folder
-    log('- Ensure the project folder exists');
+    emit('log', {
+        value: '- Ensure the project folder exists'
+    });
     __ensureDirSync(projectFolder);
 
     // move into the project
-    log(`- Init the new project folder with the template of the "<yellow>${selectedRecipeObj.title}</yellow>" recipe`);
+    emit('log', {
+        value: `- Init the new project folder with the template of the "<yellow>${selectedRecipeObj.title}</yellow>" recipe`
+    });
     __copySync(selectedRecipeObj.templateDir, projectFolder);
 
     // set the project name
-    log(`- Set the project name and description in some files like package.json`);
+    emit('log', {
+        value: `- Set the project name and description in some files like package.json`
+    });
     try {
         const packageJson = await import(`${projectFolder}/package.json`);
         packageJson.name = projectName;
@@ -113,27 +124,34 @@ export default async function createProject({ emit, ask, log, exec, writeLog, sa
     const isYarn = await __commandExists('yarn');
 
     const command = isYarn ? 'yarn' : 'npm i';
-    log(`- Installing dependencies using ${isYarn ? 'yarn' : 'npm'}...`);
-    const npmInitRes = await safeExec(command, {
+    emit('log', {
+        value: `- Installing dependencies using ${isYarn ? 'yarn' : 'npm'}...`
+    });
+    const npmInitRes = __childProcess.spawnSync(command, [], {
+        shell: true,
         cwd: projectFolder
     });
     let errorStr;
     if (npmInitRes.stderr) {
         errorStr = npmInitRes.stderr.toString();
         if (errorStr !== '' && !errorStr.match(/^warning\s/)) {
-            log(`<red>[${isYarn ? 'yarn' : 'npm'}] Error during the dependencies instalation. More details in the sugar.log file at the root of your project</red>`);
-            writeLog(npmInitRes.stderr.toString());
+            emit('log', {
+                value: `<red>[${isYarn ? 'yarn' : 'npm'}] Error during the dependencies instalation. More details in the sugar.log file at the root of your project</red>`
+            });
+            emit('writeLog', {
+                value: npmInitRes.stderr.toString()
+            });
         }
     }
 
     // check if has code installed
     if (await __commandExists('code')) {
         // launch development stack
-        const openVsCodeConfirm = new Enquirer.default.Confirm({
+        const openVsCodeConfirmRes = await emit('ask', {
+            type: 'confirm',
             message: 'Open the new project in VSCode?',
             initial: true
         });
-        const openVsCodeConfirmRes = await openVsCodeConfirm.run();
 
         if (openVsCodeConfirmRes) {
             __childProcess.spawnSync('code .', [], {
@@ -144,11 +162,11 @@ export default async function createProject({ emit, ask, log, exec, writeLog, sa
     }
 
     // launch development stack
-    const launchDevStackConfirm = new Enquirer.default.Confirm({
+    const launchDevStackConfirmRes = await emit('ask', {
+        type: 'confirm',
         message: 'Launch development stack?',
         initial: true
     });
-    const launchDevStackConfirmRes = await launchDevStackConfirm.run();
 
     if (launchDevStackConfirmRes) {
         __childProcess.spawnSync(`npm run dev`, [], {
@@ -156,7 +174,15 @@ export default async function createProject({ emit, ask, log, exec, writeLog, sa
             cwd: projectFolder
         });
     } else {
-        log(`<green>[success]</green> Congrats, your new project "<yellow>${projectName}</yellow>" has been <green>successfully</green> initialised!`);
+        emit('log', {
+            value: `<green>[success]</green> Congrats, your new project "<yellow>${projectName}</yellow>" has been <green>successfully</green> initialised!`
+        });
         process.exit();
     }
+
+    }, {
+        metas: {
+            id: 'new.project'
+        }
+    });
 }

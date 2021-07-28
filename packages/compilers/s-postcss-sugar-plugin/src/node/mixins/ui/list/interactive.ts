@@ -44,8 +44,7 @@ export default function ({
         }
       }
 
-      &.s-rhythm--vertical,
-      .s-rhythm--vertical & {
+      @sugar.rhythm.vertical {
         ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
       } 
 

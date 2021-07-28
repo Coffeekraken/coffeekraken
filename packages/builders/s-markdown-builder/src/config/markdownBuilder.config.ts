@@ -63,21 +63,29 @@ export default {
         },
         shields: {
             markdown: __path.resolve(__dirname(), '../partials/shields/shields.md'),
-            html: __path.resolve(__dirname(), '../partials/shields/shields.md')
+            html: __path.resolve(__dirname(), '../partials/shields/shields.md'),
+            data: '[config.shieldsio]'
+        },
+        'doc-menu': {
+            markdown: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md'),
+            html: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md')
         }
     },
     layouts: {
         doc: {
             markdown: __path.resolve(__dirname(), '../layouts/doc/docLayout.md'),
-            html: __path.resolve(__dirname(), '../layouts/doc/docLayout.md')
+            html: __path.resolve(__dirname(), '../layouts/doc/docLayout.md'),
+            data: '[config.doc.layout]'
         },
         readme: {
             markdown: __path.resolve(__dirname(), '../layouts/readme/readmeLayout.md'),
-            html: __path.resolve(__dirname(), '../layouts/readme/readmeLayout.md')
+            html: __path.resolve(__dirname(), '../layouts/readme/readmeLayout.md'),
+            data: '[config.readme.layout]'
         },
         license: {
             markdown: __path.resolve(__dirname(), '../layouts/license/licenseLayout.md'),
-            html: __path.resolve(__dirname(), '../layouts/license/licenseLayout.md')
+            html: __path.resolve(__dirname(), '../layouts/license/licenseLayout.md'),
+            data: '[config.license.layout]'
         }
     },
     sections: {
@@ -88,6 +96,10 @@ export default {
         'doc-header': {
             markdown: __path.resolve(__dirname(), '../sections/docHeader/docHeaderSection.md'),
             html: __path.resolve(__dirname(), '../sections/docHeader/docHeaderSection.md')
+        },
+        'doc-menu': {
+            markdown: __path.resolve(__dirname(), '../sections/docMenu/docMenuSection.md'),
+            html: __path.resolve(__dirname(), '../sections/docMenu/docMenuSection.md')
         },
         description: {
             markdown: __path.resolve(__dirname(), '../sections/description/descriptionSection.md'),

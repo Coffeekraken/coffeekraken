@@ -39,8 +39,7 @@ export default function ({
 
     @sugar.font.family(quote);
 
-    &.s-rhythm--vertical,
-    .s-rhythm--vertical & {
+    @sugar.rhythm.vertical {
         ${__jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
     } 
 

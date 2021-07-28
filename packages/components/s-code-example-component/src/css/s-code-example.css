@@ -5,6 +5,9 @@
     border-radius: sugar.theme(ui.code.borderRadius);
     border: sugar.color(ui, border) solid 1px;
     overflow: hidden;
+
+    @sugar.utils.configToCss(ui.code, $only: rhythm-vertical);
+
 }
 
   .s-code-example__slot {

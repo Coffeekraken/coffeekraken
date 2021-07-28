@@ -116,8 +116,8 @@ export default function ({
           * @since    2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-       @sugar.rhythm.vertical {
-        &.${cls.replace(':','--')}, & .${cls.replace(':','--')} {
+       &.${cls.replace(':','--')}, & .${cls.replace(':','--')} {
+        @sugar.rhythm.vertical {
           ${__jsObjectToCssProperties(typoObj[':rhythmVertical'])}
         }
       }
@@ -142,7 +142,7 @@ export default function ({
           * @since    2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-       .s-rhythm--vertical.s-format--text ${typoName}, ${typoName}.s-rhythm--vertical.s-format--text {
+       .s-rhythm--vertical.s-format--text > ${typoName}, ${typoName}.s-rhythm--vertical.s-format--text {
           ${__jsObjectToCssProperties(typoObj[':rhythmVertical'])}
         }
       `);

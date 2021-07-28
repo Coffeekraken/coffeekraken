@@ -27,6 +27,9 @@ class ColorModifierInterface extends __SInterface {
       type: 'Number',
       default: 0
     },
+    alpha: {
+      type: 'Number'
+    },
     grayscale: {
       type: 'Boolean',
       default: false
@@ -54,7 +57,7 @@ export function prepare(themeConfig, config) {
 
           Object.keys(modifierParams).forEach((propKey) => {
             const propValue = modifierParams[propKey];
-            if (['saturate','desaturate','lighten','darken','help'].indexOf(propKey) !== -1) return;
+            if (['saturate','desaturate','lighten','darken','alpha','help'].indexOf(propKey) !== -1) return;
             colorObj[`${colorVariantName}-${propKey}`] = propValue;
           });
 
@@ -65,6 +68,7 @@ export function prepare(themeConfig, config) {
           } else {
             colorObj[`${colorVariantName}-saturationOffset`] = 0;
           }
+
           if (modifierParams.lighten > 0) {
             colorObj[`${colorVariantName}-lightnessOffset`] = modifierParams.lighten;
           } else if (modifierParams.darken > 0) {
@@ -73,11 +77,20 @@ export function prepare(themeConfig, config) {
             colorObj[`${colorVariantName}-lightnessOffset`] = 0;
           }
 
+          if (modifierParams.alpha >= 0 && modifierParams.alpha <= 1) {
+            colorObj[`${colorVariantName}-a`] = modifierParams.alpha;
+          } else {
+            colorObj[`${colorVariantName}-a`] = 1;
+          }
+
+          delete colorObj[colorVariantName];
+
         } else if (__isColor(colorValue)) {
           const color = new __SColor(colorValue);
           colorObj[`${colorVariantName}-h`] = color.h;
           colorObj[`${colorVariantName}-s`] = color.s;
           colorObj[`${colorVariantName}-l`] = color.l;
+          colorObj[`${colorVariantName}-a`] = color.a;
         }
       });
 

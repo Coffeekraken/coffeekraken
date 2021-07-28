@@ -11,6 +11,14 @@
   @sugar.classes;
 } */
 
+@sugar.theme(dark, true);
+
+body {
+  @sugar.theme.when(dark) {
+    background-color: sugar.color(main, --darken 30);
+  }
+}
+
 s-code-example {
   opacity: 0;
   transition: all .2s ease-out;
@@ -50,7 +58,8 @@ a:active {
 
 @sugar.platform.classes;
 
-.s-tooltip {
+.s-theme--dark,
+.s-tooltip:not(.s-theme--dark .s-tooltip) {
   @sugar.theme(dark);
 }
 

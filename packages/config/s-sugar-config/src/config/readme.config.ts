@@ -1,17 +1,6 @@
 export default {
-
-    shields: '[config.shieldsio.shields]',
-    sections: {
-        header: {},
-        description: {},
-        install: {},
-        license: {},
-        contact: {}
+    layout: {
+        headerImageUrl: '/dist/img/doc/readmeHeader.jpg'
     },
-
-    presets: {
-
-    }
-
-
+    shields: '[config.shieldsio.shields]'
 }

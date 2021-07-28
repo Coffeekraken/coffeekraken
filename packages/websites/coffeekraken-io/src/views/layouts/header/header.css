@@ -7,10 +7,14 @@ body {
     top: 0; left: 0;
     width: 100%;
     z-index: 100;
-    background: white;
+    background: sugar.color(main, background);
     padding: sugar.space(20) 0;
     transition: padding ease-in-out .2s;
     @sugar.depth(10);
+
+    @sugar.theme.when(dark) {
+        background-color: sugar.color(main, --darken 33);
+    }
 
     /* &:before {
         content: '';
@@ -34,12 +38,11 @@ body {
     .__subnav {
         text-align: left;
         @sugar.border.radius;
-        /* overflow: hidden; */
+        font-size: 1rem;
 
         & > * {
             display: block;
             padding: sugar.space(10) sugar.space(20);
-            /* @sugar.border.radius; */
             background: sugar.color(ui, border);
 
             &:first-child {

@@ -6,7 +6,7 @@ export default {
      * @name                main
      * @namespace           config.theme.themes.default.color
      * @type                Color
-     * @default             #776d91
+     * @default             #776D91
      *
      * Specify the <s-color="main">main</s-color> color value.
      *
@@ -14,7 +14,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     main: {
-      default: '#776d91',
+      default: '#776D91',
       '...': '[theme.colorStates]',
       text: '--lighten 50',
       background: '--darken 42'

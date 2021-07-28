@@ -11,11 +11,24 @@
     .__list-item {
         position: relative;
 
+        & > * {
+            position: relative;
+        }
+
         &:after {
             content: '';
             display: block;
             width: 100%; height: sugar.space(50);
-            background: sugar.color(ui, surface);
+            background: sugar.color(ui, --lighten 49);   
+        }
+
+        @sugar.theme.when(dark) {
+            &:after {
+                background-color: sugar.color(main, --darken 31);
+            }
+            &:before {
+                background: sugar.color(main, --darken 31) !important;
+            }
         }
 
         &:before {
@@ -26,8 +39,8 @@
             right: 0;
             width: 30%;
             height: 100%;
-            z-index: -1;
-            background: sugar.color(ui, surface);
+            z-index: 0;
+            background: sugar.color(ui, --lighten 49);
             clip-path: polygon(0 0%, 100% 0, 100% 100%, 200px 100%);
         }
 
@@ -40,12 +53,13 @@
                 left: 0;
                 width: 30%;
                 height: 100%;
-                z-index: -1;
+                z-index: 0;
                 /* transform: translateX(calc(-100% - 400px)); */
-                background: sugar.color(ui, surface);
+                background: sugar.color(ui, --lighten 49);
                 clip-path: polygon(-0 0%, 100% 0, calc(100% - 200px) 100%, 0% 100%);
                 }
         }
+
     }
 
 }

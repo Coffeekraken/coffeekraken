@@ -9,6 +9,9 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin generate all the reset css needed to standardize display
  * on all browsers.
+ * 
+ * @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css
+ * @feature      Body height on desktop and IOS using "fill-available" technique
  *
  * @return        {Css}         The generated css
  *
@@ -529,6 +532,17 @@ template {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   outline: none;
+}
+
+/**
+ * Body height
+ */
+html {
+  height: fill-available;
+}
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
   `

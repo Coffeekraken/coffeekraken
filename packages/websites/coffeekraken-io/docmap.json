@@ -37545,15 +37545,73 @@
                 "relPath": "dist/css/index.css",
                 "children": {}
             },
-            "@coffeekraken.coffeekraken-io.doc.config.configurationConcept": {
-                "name": "Configuration concept",
+            "@coffeekraken.coffeekraken-io.doc.config.builtInConfigs": {
+                "name": "Built-in configs",
                 "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation",
                         "Configuration"
                     ],
-                    "slug": "/doc/config/concept"
+                    "slug": "/doc/config/built-in"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "configBuiltIn.md",
+                "extension": "md",
+                "relPath": "dist/doc/config/configBuiltIn.md",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.config.overrideConfigs": {
+                "name": "Override configs",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Configuration"
+                    ],
+                    "slug": "/doc/config/override"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "configOverride.md",
+                "extension": "md",
+                "relPath": "dist/doc/config/configOverride.md",
+                "children": {}
+            },
+            "@coffeekraken.coffeekraken-io.doc.config.overview": {
+                "name": "Overview",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Configuration"
+                    ],
+                    "slug": "/doc/config/overview"
                 },
                 "platform": [
                     {

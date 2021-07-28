@@ -1,14 +1,14 @@
 ### Install
 
-##### Using npm
+###### Using npm
 
-{{#> s-code-example lang='bash'}}
+```shell
 npm i {{ config.packageJson.name }}
-{{/s-code-example}}
+```
 
 
-##### Using yarn
+###### Using yarn
 
-{{#> s-code-example lang='bash'}}
+```shell
 yarn add {{ config.packageJson.name }}
-{{/s-code-example}}
+```

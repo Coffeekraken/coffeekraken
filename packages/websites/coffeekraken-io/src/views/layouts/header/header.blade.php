@@ -11,6 +11,27 @@
                     <input class="s-input" type="text" name="search" placeholder="Search API doc..." />
                 </form>
                 <version-selector></version-selector>
+                <label for="theme-switcher" class="s-switch:accent">
+                    <input type="checkbox" id="theme-switcher" />
+                    <div class="s-switch-handler"></div>
+                    <script>
+                        var isDark = window.localStorage.getItem('theme');
+                        var $themeSwitch = document.querySelector('#theme-switcher');
+                        if (isDark) {
+                            document.body.classList.add('s-theme--dark');
+                            $themeSwitch.checked = true;
+                        }
+                        $themeSwitch.addEventListener('change', (e) => {
+                            if (e.target.checked) {
+                                document.body.classList.add('s-theme--dark');
+                                window.localStorage.setItem('theme', true);
+                            } else {
+                                document.body.classList.remove('s-theme--dark');
+                                window.localStorage.removeItem('theme');
+                            }
+                        });
+                    </script>
+                </label>
             </div>
             <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:50">
                 <a class="s-pl:100 s-typo:bold" href="/#features" title="Features">Features</a>

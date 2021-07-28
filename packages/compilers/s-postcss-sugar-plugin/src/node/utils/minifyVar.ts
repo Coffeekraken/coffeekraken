@@ -2,6 +2,7 @@
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
 export default function minifyVar(variableStr: string): string {
+    return variableStr;
     const encoded = __md5.encrypt(variableStr.replace(/^--/, ''));
     const minifiedArray: string[] = [];
     let cur = 0, every = 3;

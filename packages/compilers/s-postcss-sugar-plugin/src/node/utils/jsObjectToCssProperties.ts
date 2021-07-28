@@ -1,4 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import __knownCssProperties from 'known-css-properties';
 
 /**
  * @name                jsObjectToCssProperties
@@ -24,6 +26,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  */
 export interface IJsObjectToCssProperties {
   exclude: string[];
+  only: string[];
 }
 
 export default function jsObjectToCssProperties(
@@ -32,7 +35,8 @@ export default function jsObjectToCssProperties(
 ): string {
   const finalSettings = <IJsObjectToCssProperties>__deepMerge(
     {
-      exclude: []
+      exclude: [],
+      only: []
     },
     settings
   );
@@ -40,10 +44,18 @@ export default function jsObjectToCssProperties(
   const propsStack: string[] = [];
   Object.keys(jsObject).forEach((prop) => {
     if (finalSettings.exclude.indexOf(prop) !== -1) return;
+    if (finalSettings.exclude.indexOf(__dashCase(prop)) !== -1) return;
 
-    const value = jsObject[prop];
+    const originalProp = prop;
+    prop = __dashCase(prop).trim();
 
+    if (finalSettings.exclude.length && finalSettings.exclude.indexOf(prop) !== -1) return;
+    if (finalSettings.only.length && finalSettings.only.indexOf(prop) === -1) return;
+
+    const value = jsObject[originalProp];
     if (!value) return;
+
+    let color, modifier;
 
     switch (prop) {
       case 'font-family':
@@ -53,10 +65,32 @@ export default function jsObjectToCssProperties(
         propsStack.push(`@sugar.font.size(${value});`);
         break;
       case 'color':
-        propsStack.push(`color: sugar.color(${value});`);
+        color = value;
+        modifier = '';
+        if (Array.isArray(value)) {
+          color = value[0];
+          modifier = value[1];
+        }
+        propsStack.push(`color: sugar.color(${color}, ${modifier});`);
         break;
       case 'background-color':
-        propsStack.push(`background-color: sugar.color(${value});`);
+        color = value;
+        modifier = '';
+        if (Array.isArray(value)) {
+          color = value[0];
+          modifier = value[1];
+        }
+        propsStack.push(`background-color: sugar.color(${color}, ${modifier});`);
+        break;
+      case 'border-radius':
+      case 'border-top-left-radius':
+      case 'border-top-right-radius':
+      case 'border-bottom-right-radius':
+      case 'border-bottom-left-radius':
+        propsStack.push(`border-radius: sugar.border.radius(${value});`);
+        break;
+      case 'border-width':
+        propsStack.push(`border-width: sugar.border.width(${value});`);
         break;
       case 'margin':
       case 'margin-top':
@@ -72,7 +106,24 @@ export default function jsObjectToCssProperties(
       case 'padding-right':
         propsStack.push(`${prop}: sugar.padding(${value});`);
         break;
+      case 'depth':
+        propsStack.push(`@sugar.depth(${value});`);
+        break;
+      case 'default-color':
+        propsStack.push(`@sugar.color.remap(ui, ${value});`);
+        break;
+      case 'rhythm-vertical':
+        propsStack.push(`
+          @sugar.rhythm.vertical {
+            ${jsObjectToCssProperties(jsObject[':rhythmVertical'])}
+          }
+        `);
+      break;
       default:
+
+        const props = __knownCssProperties.all;
+        if (props.indexOf(prop) === -1) return;
+
         propsStack.push(`${prop}: ${value};`);
         break;
     }

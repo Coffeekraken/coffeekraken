@@ -48,27 +48,24 @@ export default function ({
 
   let selector = '&';
   if (atRule.parent && atRule.parent.type === 'root') {
-    selector = 'html';
-
-    vars.push(`
-      body {
-
-      }
-    `);
-
+    selector = ':root';
   } 
 
    vars.push(
     `
         ${selector} {
+            background-color: sugar.color(main, background);
             color: sugar.color(main, text);
             @sugar.font.family(default);
             @sugar.font.size(default);
-        }
-        ::selection {
+
+          ::selection {
             color: sugar.color(accent, text);
             background-color: sugar.color(accent);
+          }
+
         }
+        
     `
    );
 

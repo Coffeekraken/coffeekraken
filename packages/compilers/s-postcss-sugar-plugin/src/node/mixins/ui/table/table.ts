@@ -47,8 +47,7 @@ export default function ({
         padding: sugar.theme(ui.table.padding);
     }
 
-    &.s-rhythm--vertical,
-    .s-rhythm--vertical & {
+    @sugar.rhythm.vertical {
         ${__jsObjectToCssProperties(__theme().config('ui.table.:rhythmVertical'))}
     } 
 

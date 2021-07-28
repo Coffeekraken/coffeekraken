@@ -10,8 +10,62 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
 -->
 
-{{#> layout-readme }}
+<!-- image -->
+![@coffeekraken/coffeekraken-io](/dist/img/doc/readmeHeader.jpg)
+
+<!-- header -->
+# @coffeekraken/coffeekraken-io
+
+[![size](https://shields.io/bundlephobia/min/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](hhttps://www.npmjs.com/package/@coffeekraken/coffeekraken-io)
+[![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](hhttps://www.npmjs.com/package/@coffeekraken/coffeekraken-io)
+[![license](https://shields.io/npm/l/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](./LICENSE)
+[![discord](https://shields.io/discord/Coffeekraken?style&#x3D;for-the-badge)](https://discord.gg/ERsX54UE)
+
+
+<!-- description -->
+wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu
+
+<!-- install -->
+### Install
+
+###### Using npm
+
+```shell
+npm i @coffeekraken/coffeekraken-io
+```
+
+
+###### Using yarn
+
+```shell
+yarn add @coffeekraken/coffeekraken-io
+```
+
 
   PLop
 
-{{/ layout-readme }}
+
+<!-- doc-menu -->
+## Documentation
+
+
+
+- Documentation
+    - Configuration
+        - [Configuration concept](/doc/config/concept)
+    - [Get started](/doc/get-started)
+    - [LICENSE](/doc/license)
+    - [README](/doc/readme)
+
+
+### License
+
+Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
+
+### Contact
+
+Here's all the ways you can contact us listed:
+
+[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style&#x3D;for-the-badge&amp;logo&#x3D;discord)](https://discord.gg/ERsX54UE)
+[![email](https://img.shields.io/badge/Email%20us-Go-green?style&#x3D;for-the-badge&amp;logo&#x3D;Mail.Ru)]()
+

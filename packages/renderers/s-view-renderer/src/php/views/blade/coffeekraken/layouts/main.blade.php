@@ -11,19 +11,29 @@
 <?php
 $settings = $settings ? json_decode($settings) : null;
 $package = $package ? json_decode($package) : null;
+$metasOg = $metas->og ? $metas->og : $frontspec->metas->og ? $frontspec->metas->og : null;
 ?>
-<html>
+<!doctype html>
+<html lang="{{ $metas->lang ? $metas->lang : $frontspec->metas->lang ? $frontspec->metas->lang : 'en' }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="description" content="&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;http://support.shufflehound.com/&amp;quot; rel=&amp;quot;nofollow&amp;quot;&amp;gt;&amp;lt;...">
+  <meta name="description" content="{{ $metas->description ? $metas->description : $frontspec->metas->description ? $frontspec->metas->description : '' }}">
   <meta name="robots" content="{{ $env === 'production' ? 'all' : 'noindex, nofollow' }}" />
   <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-  <title>{{ $title ? $title : $package->name }}</title>
+  <title>{{ $title ? $title : $metas->title ? $metas->title : $frontspec->metas->title ? $frontspec->metas->title : $package->name }}</title>
   
+  @if ($metasOg)
+    <meta property="og:title" content="{{ $metasOg->title }}">
+    <meta property="og:description" content="{{ $metasOg->description }}">
+    <meta property="og:type" content="{{ $metasOg->type }}">
+    <meta property="og:url" content="{{ $metasOg->url }}">
+    <meta property="og:image" content="{{ $metasOg->image }}">
+  @endif
+
   <!-- stylesheets -->
-  @if ($assets && $assets->css)
-    @foreach ($assets->css as $name=>$css)
+  @if ($frontspec->assets && $frontspec->assets->css)
+    @foreach ($frontspec->assets->css as $name=>$css)
       @if (!$css->body)
         @if ($css->raw)
           {!! $css->raw !!}
@@ -36,8 +46,8 @@ $package = $package ? json_decode($package) : null;
     @endforeach
   @endif
   <!-- scripts -->
-  @if ($assets && $assets->js)
-    @foreach ($assets->js as $name=>$js)
+  @if ($frontspec->assets && $frontspec->assets->js)
+    @foreach ($frontspec->assets->js as $name=>$js)
       @if (!$js->body)
         @if ($js->raw)
           {!! $js->raw !!}
@@ -63,8 +73,8 @@ $package = $package ? json_decode($package) : null;
   @yield('body')
 
   <!-- body stylesheets -->
-  @if ($assets && $assets->css)
-    @foreach ($assets->css as $name=>$css)
+  @if ($frontspec->assets && $frontspec->assets->css)
+    @foreach ($frontspec->assets->css as $name=>$css)
       @if ($css->body)
         @if ($css->raw)
           {!! $css->raw !!}
@@ -77,8 +87,8 @@ $package = $package ? json_decode($package) : null;
     @endforeach
   @endif
   <!-- body scripts -->
-  @if ($assets && $assets->js)
-    @foreach ($assets->js as $name=>$js)
+  @if ($frontspec->assets && $frontspec->assets->js)
+    @foreach ($frontspec->assets->js as $name=>$js)
       @if ($js->body)
         @if ($js->raw)
           {!! $js->raw !!}

@@ -37571,7 +37571,7 @@
                 },
                 "filename": "configBuiltIn.md",
                 "extension": "md",
-                "relPath": "dist/doc/config/configBuiltIn.md",
+                "relPath": "src/doc/config/configBuiltIn.md",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.config.overrideConfigs": {
@@ -37600,7 +37600,7 @@
                 },
                 "filename": "configOverride.md",
                 "extension": "md",
-                "relPath": "dist/doc/config/configOverride.md",
+                "relPath": "src/doc/config/configOverride.md",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.config.overview": {
@@ -37629,7 +37629,7 @@
                 },
                 "filename": "configSystem.md",
                 "extension": "md",
-                "relPath": "dist/doc/config/configSystem.md",
+                "relPath": "src/doc/config/configSystem.md",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.getStarted": {
@@ -37657,7 +37657,7 @@
                 },
                 "filename": "getStarted.md",
                 "extension": "md",
-                "relPath": "dist/doc/getStarted.md",
+                "relPath": "src/doc/getStarted.md",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.lICENSE": {
@@ -37684,7 +37684,7 @@
                     "url": "https://olivierbossel.com"
                 },
                 "filename": "LICENSE",
-                "relPath": "dist/LICENSE",
+                "relPath": "src/LICENSE",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.rEADME": {
@@ -37711,7 +37711,7 @@
                     "url": "https://olivierbossel.com"
                 },
                 "filename": "README",
-                "relPath": "dist/README",
+                "relPath": "src/README",
                 "children": {}
             }
         }

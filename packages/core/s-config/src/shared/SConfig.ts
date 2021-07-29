@@ -9,6 +9,7 @@ import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from './adapters/SConfigAdapter';
 import __SEnv from '@coffeekraken/s-env';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __applyScope from '@coffeekraken/sugar/shared/object/applyScope';
 
 /**
  * @name                                            config
@@ -325,9 +326,9 @@ export default class SConfig {
     Object.keys(config).forEach(configName => {
       config[configName] = extendsConfigIfNeeded(config[configName]);
     });
-
-    // resolve environment properties like src@dev
-    this._resolveEnvironments(config);
+    
+    // resolve environment properties like env:dev
+    config = this._resolveEnvironments(config);
 
     this._settings.resolvers.forEach((resolverObj) => {
       config = this._resolveInternalReferences(config, config, resolverObj);
@@ -360,24 +361,8 @@ export default class SConfig {
   }
 
   _resolveEnvironments(config) {
-    __deepMap(config, ({value, prop, path, object}) => {
-      if (value === undefined) {
-        return -1;
-      }
-
-      // @environment handling
-      if (prop && prop.match(/.*@.*/) && !prop.includes('/')) {
-        const parts = prop.split('@');
-        const env = parts[1];
-        const p = parts[0];
-
-        if (__SEnv.is(env)) {
-          object[p] = value;
-          return -1;
-        }
-      }
-
-      return value;
+    return __applyScope(config, {
+      env: __SEnv.get('env') === 'production' ? ['prod','production'] : ['dev','development'] 
     });
   }
 

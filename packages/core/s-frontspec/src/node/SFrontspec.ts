@@ -10,6 +10,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
+import __delete from '@coffeekraken/sugar/shared/object/delete';
 
 /**
  * @name                SFrontspec
@@ -92,31 +93,16 @@ export default class SFrontspec extends __SPromise {
         frontspecJson = __readJsonSync(frontspecPath);
       } catch(e) {}
 
-      let res = __deepMerge(
-        __SSugarConfig.get('frontspec.default'),
-        frontspecJson
-      );
+      let res = __SSugarConfig.get('frontspec');
 
-      __deepMap(res, ({path, prop, value, object}) => {
-        if (value === undefined) {
-          return -1;
-        }
-
-        // @environment handling
-        if (prop && prop.match(/.*@.*/) && !prop.includes('/')) {
-          const parts = prop.split('@');
-          const env = parts[1];
-          const p = parts[0];
-
-          if (__SEnv.is(env)) {
-            object[p] = value;
-            return -1;
+      Object.keys(res.assets).forEach(type => {
+        const typeObj = res.assets[type];
+        Object.keys(typeObj).forEach(asset => {
+          const assetObj = typeObj[asset];
+          if (assetObj.env && !__SEnv.is(assetObj.env)) {
+            __delete(res.assets, `${type}.${asset}`);
           }
-        }
-
-        return value;
-      }, {
-        cloneFirst: false
+        });
       });
 
       resolve(res);

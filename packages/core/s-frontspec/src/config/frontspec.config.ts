@@ -1,18 +1,17 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
+import __fs from 'fs';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+
+export function prepare(config) {
+  const potentialFrontspecJsonFilePath = `${__packageRoot()}/frontspec.json`;
+  if (!__fs.existsSync(potentialFrontspecJsonFilePath)) return config;
+  const json = __readJsonSync(potentialFrontspecJsonFilePath);
+  return __deepMerge(config, json);
+}
 
 export default {
-  /**
-   * @name        default
-   * @namespace       config.frontspec
-   * @type          Object
-   *
-   * Specify the default frontspec file values that will be overrided by the user frontspec file ones
-   *
-   * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  default: {
-
     /**
      * @name      head
      * @namespace     config.frontspec.default
@@ -24,17 +23,21 @@ export default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     head: {
-      'viteClient@dev': `
-        <script>
-          document.addEventListener("DOMContentLoaded", function() {
-            var $script = document.createElement("script");
-            var ip = "${__ipAddress()}";
-            $script.setAttribute("type", "module");
-            $script.setAttribute("src", "[config.vite.server.hostname]/@vite/client");
-            document.body.appendChild($script);
-          });
-        </script>
-      `
+
+      'env:dev': {
+
+        viteClient: `
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              var $script = document.createElement("script");
+              var ip = "${__ipAddress()}";
+              $script.setAttribute("type", "module");
+              $script.setAttribute("src", "[config.vite.server.hostname]/@vite/client");
+              document.body.appendChild($script);
+            });
+          </script>
+        `
+      }
     },
 
     /**
@@ -51,5 +54,4 @@ export default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     assets: '[config.assets]'
-  }
 };

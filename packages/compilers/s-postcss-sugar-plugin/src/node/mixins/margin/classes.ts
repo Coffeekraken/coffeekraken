@@ -46,7 +46,7 @@ export default function ({
 
   Object.keys(marginsObj).forEach((spaceName) => {
     // margins
-    const clsMargin = `s-m:${spaceName}`;
+    const clsMargin = `s-mg:${spaceName}`;
     vars.push(`/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.margin
@@ -63,7 +63,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMargin.replace(':','--')} {
-        margin: sugar.space(${spaceName});
+        margin: sugar.margin(${spaceName});
    }`);
     const clsMarginTop = `s-mt:${spaceName}`;
     vars.push(`/**
@@ -82,7 +82,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginTop.replace(':','--')} {
-        margin-top: sugar.space(${spaceName}) !important;
+        margin-top: sugar.margin(${spaceName}) !important;
    }`);
     const clsMarginBottom = `s-mb:${spaceName}`;
     vars.push(`/**
@@ -101,7 +101,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginBottom.replace(':','--')} {
-        margin-bottom: sugar.space(${spaceName}) !important;
+        margin-bottom: sugar.margin(${spaceName}) !important;
    }`);
     const clsMarginLeft = `s-ml:${spaceName}`;
     vars.push(`/**
@@ -120,7 +120,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginLeft.replace(':','--')} {
-        margin-left: sugar.space(${spaceName}) !important;
+        margin-left: sugar.margin(${spaceName}) !important;
    }`);
     const clsMarginRight = `s-mr:${spaceName}`;
     vars.push(`/**
@@ -139,7 +139,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginRight.replace(':','--')} {
-        margin-right: sugar.space(${spaceName}) !important;
+        margin-right: sugar.margin(${spaceName}) !important;
    }`);
     const clsMarginX = `s-mx:${spaceName}`;
     vars.push(`/**
@@ -158,8 +158,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
      .${clsMarginX.replace(':','--')} {
-        margin-left: sugar.space(${spaceName}) !important;
-        margin-right: sugar.space(${spaceName}) !important;
+        margin-left: sugar.margin(${spaceName}) !important;
+        margin-right: sugar.margin(${spaceName}) !important;
    }`);
     const clsMarginY = `s-my:${spaceName}`;
     vars.push(`/**
@@ -178,8 +178,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginY.replace(':','--')} {
-        margin-top: sugar.space(${spaceName}) !important;
-        margin-bottom: sugar.space(${spaceName}) !important;
+        margin-top: sugar.margin(${spaceName}) !important;
+        margin-bottom: sugar.margin(${spaceName}) !important;
    }`);
   });
 
@@ -203,7 +203,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMargin.replace(':','--')} {
-        margin: calc(sugar.space(${spaceName}) * -1);
+        margin: calc(sugar.margin(${spaceName}) * -1);
    }`);
     const clsMarginTop = `s-mt:-${spaceName}`;
     vars.push(`/**
@@ -222,7 +222,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginTop.replace(':','--')} {
-        margin-top: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-top: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
     const clsMarginBottom = `s-mb:-${spaceName}`;
     vars.push(`/**
@@ -241,7 +241,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginBottom.replace(':','--')} {
-        margin-bottom: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-bottom: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
     const clsMarginLeft = `s-ml:-${spaceName}`;
     vars.push(`/**
@@ -260,7 +260,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginLeft.replace(':','--')} {
-        margin-left: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-left: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
     const clsMarginRight = `s-mr:-${spaceName}`;
     vars.push(`/**
@@ -279,7 +279,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginRight.replace(':','--')} {
-        margin-right: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-right: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
     const clsMarginX = `s-mx:-${spaceName}`;
     vars.push(`/**
@@ -298,8 +298,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
      .${clsMarginX.replace(':','--')} {
-        margin-left: calc(sugar.space(${spaceName}) * -1) !important;
-        margin-right: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-left: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-right: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
     const clsMarginY = `s-my:-${spaceName}`;
     vars.push(`/**
@@ -318,8 +318,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginY.replace(':','--')} {
-        margin-top: calc(sugar.space(${spaceName}) * -1) !important;
-        margin-bottom: calc(sugar.space(${spaceName}) * -1) !important;
+        margin-top: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-bottom: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
   });
 

@@ -43,26 +43,33 @@ export default function ({
 
   const vars: string[] = [];
 
-  vars.push(`/**
-  * @name          s-container
-  * @namespace          sugar.css.layout
-  * @type               CssClass
-  * @platform       css
-  * @status         beta
-  * 
-  * This class allows you to apply the container styling to any HTMLElement
-  * 
-  * @example        html
-  * <div class="s-container">
-  *     <h1 class="s-h1">Hello world</h1>
-  * </div>
-  */
-.s-container {
-    @sugar.layout.container;
-}`);
+  const layoutConfig = __theme().config('layout');
 
-  const layouts = __theme().config('layout.layout');
+  const containers = layoutConfig.container;
+  Object.keys(containers).forEach(containerName => {
 
+      const cls = containerName === 'default' ? `s-container` : `s-container:${containerName}`;
+
+      vars.push(`/**
+      * @name          ${cls}
+      * @namespace          sugar.css.layout
+      * @type               CssClass
+      * @platform       css
+      * @status         beta
+      * 
+      * This class allows you to apply the "<yellow>${containerName}</yellow>" container styling to any HTMLElement
+      * 
+      * @example        html
+      * <div class="${cls.replace(':','\:')}">
+      *     <h1 class="s-h1">Hello world</h1>
+      * </div>
+      */
+    .${cls.replace(':','--')} {
+        @sugar.layout.container(${containerName});
+    }`);
+  });
+
+  const layouts = layoutConfig.layout;
   Object.keys(layouts).forEach((id) => {
     const layout = layouts[id];
     const colsCount = __unique(layout.split(/\n\s/)).length;

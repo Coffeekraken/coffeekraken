@@ -7,7 +7,12 @@ export default {
 
   layout: {
     container: {
-      'max-width': '1280px'
+      default: {
+        'max-width': '1280px'
+      },
+      full: {
+        'max-width': 'none'
+      }
     },
     layout: {
       '1': '1',

@@ -45,6 +45,7 @@ export default class SEnv {
     this.constructed = true;
     // Set environment
     SEnv.set('environment', process?.env?.NODE_ENV ?? window?.env?.ENV ?? 'dev');
+    SEnv.set('env', process?.env?.NODE_ENV ?? window?.env?.ENV ?? 'dev');
   }
 
   /**

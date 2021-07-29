@@ -32,119 +32,18 @@ import __fs from 'fs';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const _requestedFiles: Record<string, any> = {};
 function frontspecMiddleware(settings = {}) {
   return async function (req, res, next) {
 
-    // handle already fetched files
-    if (_requestedFiles[req.path]) {
-      const assetObj = _requestedFiles[req.path];
-      let content = __fs.readFileSync(assetObj.path, 'utf8').toString();
-      content = content.replace(
-        /\/\/# sourceMappingURL=.*\.map/gm,
-        `// #sourceMappingUrl=${assetObj.src}.map`
-      );
-      console.log(`Request on "<cyan>${assetObj.src}</cyan>"`);
-      res.send(content);
-      return;
-    }
-
     const frontspec = new __SFrontspec();
-    const assetsToServe = await frontspec.assetsToServe();
 
     if (!res.templateData) res.templateData = {};
-    if (!res.templateData.assets) res.templateData.assets = {};
+    if (!res.templateData.frontspec) res.templateData.frontspec = {};
 
-    res.templateData.frontspec = await frontspec.read();
-
-    for (let i = 0; i < assetsToServe.length; i++) {
-      const assetObj = assetsToServe[i];
-      if (!res.templateData.assets[assetObj.type])
-        res.templateData.assets[assetObj.type] = {};
-      const assetHash = __md5.encrypt(
-        assetObj.src ?? assetObj.url ?? assetObj.file?.path
-      );
-      let raw = '';
-
-      let url;
-      if (assetObj.file) {
-        url = `/frontspec/${assetHash}-${assetObj.file.name}`;
-      } else if (assetObj.url) url = assetObj.url;
-
-      const originalUrl = url;
-
-      // cache busting in dev
-      // if (!__SEnv.is('prod') && !assetObj.url?.match(/@vite/)) {
-      //   const version = `?v=${Math.round(Math.random() * 9999999999)}`;
-      //   if (assetObj.args.src) assetObj.args.src += version;
-      //   if (assetObj.args.href) assetObj.args.href += version;
-      // }
-
-      switch (assetObj.type.toLowerCase()) {
-        case 'js':
-          raw = `<script ${[
-            assetObj.id ? `id="${assetObj.id}"` : '',
-            Object.keys(assetObj.args)
-              .map((argName) => {
-                return `${argName}${
-                  assetObj.args[argName] === true
-                    ? ''
-                    : `="${assetObj.args[argName]}"`
-                }`;
-              })
-              .join(' ')
-          ]
-            .join(' ')
-            .replace(/\s{2,9999}/gm, ' ')}></script>`;
-          break;
-        case 'css':
-          raw = `<link rel="stylesheet" ${[
-            assetObj.id ? `id="${assetObj.id}"` : '',
-            Object.keys(assetObj.args)
-              .map((argName) => {
-                return `${argName}${
-                  assetObj.args[argName] === true
-                    ? ''
-                    : `="${assetObj.args[argName]}"`
-                }`;
-              })
-              .join(' ')
-          ]
-            .join(' ')
-            .replace(/\s{2,9999}/gm, ' ')} />`;
-          break;
-      }
-
-      if (assetObj.file) {
-        if (__fs.existsSync(assetObj.file.path + '.map')) {
-          _requestedFiles[`${originalUrl}.map`] = {
-            id: assetObj.id + '.map',
-            type: assetObj.type + '.map',
-            hash: `${assetHash}.map`,
-            path: `${assetObj.file.path}.map`,
-            src: `${originalUrl}.map`
-          };
-        }
-        _requestedFiles[originalUrl] = {
-          id: assetObj.id,
-          type: assetObj.type,
-          hash: assetHash,
-          path: assetObj.file.path,
-          url,
-          raw
-        };
-      } else if (assetObj.url) {
-        _requestedFiles[originalUrl] = {
-          id: assetObj.id,
-          type: assetObj.type,
-          hash: assetHash,
-          url,
-          raw
-        };
-      }
-
-      res.templateData.assets[assetObj.type][assetHash] = _requestedFiles[originalUrl];
-    }
+    res.templateData.frontspec = {
+      ...(await frontspec.read()),
+      ...res.templateData.frontspec
+    };
 
     __SBench.step('request', 'frontspecMiddleware');
 

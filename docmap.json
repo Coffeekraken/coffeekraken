@@ -1,0 +1,12 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-component",
+            "@coffeekraken/sugar"
+        ],
+        "map": {}
+    }
+}

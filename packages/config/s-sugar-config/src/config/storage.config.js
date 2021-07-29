@@ -302,7 +302,7 @@ export default {
          * @name            rootDir
          * @namespace       config.storage.serve
          * @type            String
-         * @default         [config.storage.package.rootDir]/serve
+         * @default         /dist
          *
          * Configure where is located the "serve" folder in which are stored usually the "distribution" files like production css, js, images, etc...
          *
@@ -310,59 +310,20 @@ export default {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         rootDir: `/dist`,
-        'rootDir@dev': '/src',
-        /**
-         * @name            jsDir
-         * @namespace       config.storage.serve
-         * @type            String
-         * @default         /dist/js
-         *
-         * Configure where is located the javascript/typescript served files
-         *
-         * @since         2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        jsDir: `/dist/js`,
-        'jsDir@dev': `/src/js`,
-        /**
-         * @name            cssDir
-         * @namespace       config.storage.serve
-         * @type            String
-         * @default         /dist/css
-         *
-         * Configure where is located the css served files
-         *
-         * @since         2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        cssDir: `/dist/css`,
-        'cssDir@dev': `/src/css`,
-        /**
-         * @name            fontsDir
-         * @namespace       config.storage.serve
-         * @type            String
-         * @default         /dist/fonts
-         *
-         * Configure where is located the fonts served files
-         *
-         * @since         2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        fontsDir: `/dist/fonts`,
-        'fontsDir@dev': `/src/fonts`,
-        /**
-         * @name            imgDir
-         * @namespace       config.storage.serve
-         * @type            String
-         * @default         /dist/img
-         *
-         * Configure where is located the images served files
-         *
-         * @since         2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        imgDir: `/dist/img`,
-        'imgDir@dev': `/src/img`
+        'env:dev': {
+            /**
+             * @name            rootDir
+             * @namespace       config.storage.serve.env:dev
+             * @type            String
+             * @default         /src
+             *
+             * Configure where is located the "serve" folder in which are stored usually the "distribution" files like production css, js, images, etc...
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rootDir: `/src`
+        }
     },
     /**
      * @name            exclude
@@ -388,4 +349,4 @@ export default {
         '**/node_modules/**'
     ]
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdG9yYWdlLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSxPQUFPLGFBQWEsTUFBTSwyQ0FBMkMsQ0FBQztBQUN0RSxPQUFPLFNBQVMsTUFBTSxxQ0FBcUMsQ0FBQztBQUU1RCxlQUFlO0lBRWIsT0FBTyxFQUFFO1FBRVA7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxHQUFHLGFBQWEsRUFBRSxFQUFFO1FBRTdCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUseUNBQXlDO1FBRW5EOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUseUNBQXlDO1FBRW5EOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsd0NBQXdDO1FBRWhEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxjQUFjLEVBQUUsK0NBQStDO0tBRWhFO0lBRUQsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxHQUFHLGFBQWEsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxFQUFFO0tBQ3pDO0lBRUQsR0FBRyxFQUFFO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxzQ0FBc0M7UUFFL0M7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxpQ0FBaUM7UUFFeEM7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxtQ0FBbUM7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxrQ0FBa0M7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxrQ0FBa0M7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxrQ0FBa0M7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7S0FDL0M7SUFFRCxJQUFJLEVBQUU7UUFFSjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLHVDQUF1QztRQUVoRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLGtDQUFrQztRQUV6Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLG9DQUFvQztRQUU3Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLG1DQUFtQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLG1DQUFtQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLHFDQUFxQztRQUUvQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLHFDQUFxQztRQUUvQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLG1DQUFtQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLHFDQUFxQztLQUVoRDtJQUVELEtBQUssRUFBRTtRQUVMOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsT0FBTztRQUNoQixhQUFhLEVBQUUsTUFBTTtRQUVyQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFVBQVU7UUFDakIsV0FBVyxFQUFFLFNBQVM7UUFFdEI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxXQUFXO1FBQ25CLFlBQVksRUFBRSxVQUFVO1FBRXhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUsYUFBYTtRQUN2QixjQUFjLEVBQUUsWUFBWTtRQUU1Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLFdBQVc7UUFDbkIsWUFBWSxFQUFFLFVBQVU7S0FFekI7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRTtRQUNQLFdBQVc7UUFDWCxjQUFjO1FBQ2QsZUFBZTtRQUNmLGVBQWU7UUFDZixlQUFlO1FBQ2YsaUJBQWlCO1FBQ2pCLHFCQUFxQjtRQUNyQixVQUFVO1FBQ1Ysb0JBQW9CO0tBQ3JCO0NBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmFnZS5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdG9yYWdlLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSxPQUFPLGFBQWEsTUFBTSwyQ0FBMkMsQ0FBQztBQUN0RSxPQUFPLFNBQVMsTUFBTSxxQ0FBcUMsQ0FBQztBQUU1RCxlQUFlO0lBRWIsT0FBTyxFQUFFO1FBRVA7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxHQUFHLGFBQWEsRUFBRSxFQUFFO1FBRTdCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUseUNBQXlDO1FBRW5EOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUseUNBQXlDO1FBRW5EOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsd0NBQXdDO1FBRWhEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxjQUFjLEVBQUUsK0NBQStDO0tBRWhFO0lBRUQsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxHQUFHLGFBQWEsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxFQUFFO0tBQ3pDO0lBRUQsR0FBRyxFQUFFO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxzQ0FBc0M7UUFFL0M7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxpQ0FBaUM7UUFFeEM7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxtQ0FBbUM7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxrQ0FBa0M7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxrQ0FBa0M7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxrQ0FBa0M7UUFFMUM7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7S0FDL0M7SUFFRCxJQUFJLEVBQUU7UUFFSjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLHVDQUF1QztRQUVoRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLGtDQUFrQztRQUV6Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLG9DQUFvQztRQUU3Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLG1DQUFtQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLG1DQUFtQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLHFDQUFxQztRQUUvQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLHFDQUFxQztRQUUvQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLG1DQUFtQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLHFDQUFxQztLQUVoRDtJQUVELEtBQUssRUFBRTtRQUVMOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsT0FBTztRQUVoQixTQUFTLEVBQUU7WUFFVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLE1BQU07U0FFaEI7S0FFRjtJQUVEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFO1FBQ1AsV0FBVztRQUNYLGNBQWM7UUFDZCxlQUFlO1FBQ2YsZUFBZTtRQUNmLGVBQWU7UUFDZixpQkFBaUI7UUFDakIscUJBQXFCO1FBQ3JCLFVBQVU7UUFDVixvQkFBb0I7S0FDckI7Q0FDRixDQUFDIn0=

@@ -199,7 +199,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     sourceSEventEmitter.on(set.events || '*', async (value, metas) => {
 
       // @TODO    check why this arrive...
-      if (!metas) return;
+      if (!metas) {
+        return;
+      }
 
       // check excluded stacks
       if (set.exclude && set.exclude.indexOf(metas.event) !== -1) return;
@@ -593,7 +595,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       }); 
       this._emitEvents(logObj.event, logObj.value, logObj.metas);
     } else {
-      const res = await this._emitEvents(logObj.event, logObj.value, logObj.metas);
+      const res = await this._emitEvents(logObj.event, logObj.value, Object.assign({}, logObj.metas));
       logObj.resolve(res);
     } 
   }
@@ -777,28 +779,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       }
     });
 
-    // // handle buffers
-    // if (eventStackArray.length === 0) {
-    //   for (
-    //     let i = 0;
-    //     // @ts-ignore
-    //     i < this.eventEmitterSettings.bufferedEvents.length;
-    //     i++
-    //   ) {
-    //     // @ts-ignore
-    //     const bufferedStack = this.eventEmitterSettings.bufferedEvents[i];
-    //     if (bufferedStack && __minimatch(event, bufferedStack)) {
-    //       console.log('addeee', metasObj.name, metasObj.level);
-    //       this._buffer.push({
-    //         event,
-    //         value: initialValue,
-    //         metas: metasObj
-    //       });
-    //     }
-    //   }
-    //   return initialValue;
-    // }
-
     // filter the catchStack
     eventStackArray.map((item: ISEventEmitterEventStackItem) => item.called++);
     eventStackArray = eventStackArray.filter(
@@ -841,7 +821,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         currentCallbackReturnedValue,
         metasObj,
         metasObj?.askId ? (answer) => {
-          this.constructor.global.emit(`answer.${metasObj.askId}`, answer);
+          this.constructor.global.emit(`answer.${metasObj.askId}`, answer, metasObj);
         } : undefined
       );
 
@@ -875,9 +855,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     metas: ISEventEmitterMetas
   ) {
     return new Promise(async (resolve, reject) => {
-      // await __wait(0);
 
-      if (!events) return this;
+      // @TODO      check why need this...
+      if (!events || !metas) return this;
 
       // check if the stacks is "*"
       if (typeof events === 'string')

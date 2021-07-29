@@ -23,11 +23,17 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginLayoutContainerInterface extends __SInterface {
-  static definition = {};
+  static definition = {
+    name: {
+      type: 'String',
+      required: true,
+      default: 'default'
+    }
+  };
 }
 
 export interface IPostcssSugarPluginLayoutContainerParams {
-  ratio: number;
+  name: string;
 }
 
 export { postcssSugarPluginLayoutContainerInterface as interface };
@@ -42,7 +48,7 @@ export default function ({
   replaceWith: Function;
 }) {
   const finalParams: IPostcssSugarPluginLayoutContainerParams = {
-    ratio: 1,
+    name: 'default',
     ...params
   };
 
@@ -52,7 +58,12 @@ export default function ({
   `
   ];
 
-  const containerConfig = __theme().config('layout.container');
+  const containerConfig = __theme().config(`layout.container.${finalParams.name}`);
+
+  if (!containerConfig) {
+    throw new Error(`<red>[mixins.layout.container]</red> Sorry but the requested "<yellow>${finalParams.name}</yellow>" does not exists in the "<cyan>config.theme.layout.container</cyan>" configuration`);
+  }
+
   Object.keys(containerConfig).forEach((key) => {
     vars.push(`${key}: ${containerConfig[key]};`);
   });

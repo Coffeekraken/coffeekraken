@@ -5,20 +5,16 @@ describe('sugar.shared.object.applyScope', () => {
     
     const myObj = {
         myValue: 'Hello',
-        'env:dev': {
+        '@dev': {
             myValue: 'World'
         },
-        'something:cool': {
+        '@cool': {
             plop: 'yop'
         }
     };
 
-    const applied = __applyScope(myObj, {
-        env: 'dev'
-    });
-    const notApplied = __applyScope(myObj, {
-        env: 'prod'
-    });
+    const applied = __applyScope(myObj, ['dev']);
+    const notApplied = __applyScope(myObj, ['prod']);
 
     expect(applied).toEqual({
         myValue: 'World'
@@ -34,34 +30,64 @@ describe('sugar.shared.object.applyScope', () => {
     
     const myObj = {
         myValue: 'Hello',
-        'env:dev': {
-            myValue: 'World',
-            else: 'coco',
-            'env:prod': {
-                else: 'else'
-            }
+        something: {
+            else: 'plop'
         },
-        'something:cool': {
-            plop: 'yop'
+        'something@dev': {
+            else: 'haha'
         }
     };
 
-    const applied = __applyScope(myObj, {
-        env: ['dev','prod']
-    });
-
-    const notApplied = __applyScope(myObj, {
-        env: 'prod',
-        something: '*'
-    });
+    const applied = __applyScope(myObj, ['dev']);
 
     expect(applied).toEqual({
-        myValue: 'World',
-        else: 'else'
-    });
-    expect(notApplied).toEqual({
         myValue: 'Hello',
-        plop: 'yop'
+        something: {
+            else: 'haha'
+        }
+    });
+
+    done();
+  });
+
+  it('Should apply a simple scope on a nested deep object correctly', (done) => {
+    
+    const myObj = {
+        myValue: 'Hello',
+        something: {
+            else: 'plop'
+        },
+        'something@dev': {
+            else: 'haha',
+            '@dev': {
+                else: 'youhou'
+            }
+        }
+    };
+
+    const applied = __applyScope(myObj, ['dev']);
+
+    expect(applied).toEqual({
+        myValue: 'Hello',
+        something: {
+            else: 'youhou'
+        }
+    });
+
+    done();
+  });
+
+  it('Should apply a simple scope on a non object property correctly', (done) => {
+    
+    const myObj = {
+        myValue: 'Hello',
+        'myValue@dev': 'Plop'
+    };
+
+    const applied = __applyScope(myObj, ['dev']);
+
+    expect(applied).toEqual({
+        myValue: 'Plop',
     });
 
     done();

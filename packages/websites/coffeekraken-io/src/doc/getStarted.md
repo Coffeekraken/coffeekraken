@@ -16,9 +16,9 @@
 
 To start using Coffeekraken tools, the easier way is to install the **@coffeekraken/cli** package like so:
 
-{{#> s-code-example lang='shell'}}
+```shell
 npm install @coffeekraken/cli -g
-{{/s-code-example}}
+```
 
 This will give you access to the **sugar** CLI and will give you the ability to generate new projects
 that directly integrate all access to your toolchain power like:
@@ -33,27 +33,27 @@ that directly integrate all access to your toolchain power like:
 
 To start using and discover what the CLI can do for your, the easiest way it to simple call it like so:
 
-{{#> s-code-example lang='shell'}}
+```shell
 sugar
-{{/s-code-example}}
+```
 
 
 > calling sugar this way will start a simple interactive process that will let you discover his features
 
 You can as well access to the help by taping:
 
-{{#> s-code-example lang='shell'}}
+```shell
 sugar --help
-{{/s-code-example}}
+```
 
 
 ## Create a new project
 
 To create a new project, simply enter this command:
 
-{{#> s-code-example lang='shell'}}
+```shell
 sugar new
-{{/s-code-example}}
+```
 
 
 This will launch a quick and easy step by step creation process that will ask you for the project name, the [recipe](#recipes) to use, etc...
@@ -62,9 +62,41 @@ This will launch a quick and easy step by step creation process that will ask yo
 
 Once this process is done, you can start working on your project. If you choose to **not launch the development process** at the end of the step by step creation process, simply enter this command:
 
-{{#> s-code-example lang='shell'}}
+```shell
 sugar dev
-{{/s-code-example}}
+```
+
+
+## Start developing
+
+In order to start developing your newly created project, you just need to enter this simple command:
+
+```shell
+sugar dev
+```
+
+That will launch some processes like:
+
+###### **frontendServer**
+
+This server is the main one to access your project. It runs by default on port __8888__ and handle thinks like views compilation (bladePHP, twig, and others to come depending on needs...).
+
+More on this server in  the [@coffeekraken/s-frontend-server](https://www.npmjs.com/package/@coffeekraken/s-sfrontend-server) package documentation
+
+###### **vitejs**
+
+This server is powered by the AWESOME [vitejs](https://vitejs.dev/) project and is responsible to compile and serve on the fly your assets like javascript and typescript files, css through [PostCSS](https://postcss.org/), and more...
+
+We use this package under the hood to add built-in support for things ike [PostCSS](https://postcss.org/), [Typescript](https://www.typescriptlang.org/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/) and more...
+
+
+## Build for production
+
+Each recipes comes with full production ready build stack. To build your project, simply launch thie simply command:
+
+```shell
+sugar build
+```
 
 
 ## Recipes

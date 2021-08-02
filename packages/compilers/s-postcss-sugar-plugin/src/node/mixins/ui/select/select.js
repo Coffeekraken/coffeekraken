@@ -19,7 +19,7 @@ export default function ({ params, atRule, replaceWith }) {
     const finalParams = Object.assign({ style: 'default', scope: [] }, params);
     const vars = [];
     vars.push(`
-
+    position: relative;
     display: inline-block;
     cursor: pointer;
 

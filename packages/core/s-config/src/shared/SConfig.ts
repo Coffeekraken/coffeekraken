@@ -327,7 +327,7 @@ export default class SConfig {
       config[configName] = extendsConfigIfNeeded(config[configName]);
     });
     
-    // resolve environment properties like env:dev
+    // resolve environment properties like @dev
     config = this._resolveEnvironments(config);
 
     this._settings.resolvers.forEach((resolverObj) => {
@@ -361,9 +361,7 @@ export default class SConfig {
   }
 
   _resolveEnvironments(config) {
-    return __applyScope(config, {
-      env: __SEnv.get('env') === 'production' ? ['prod','production'] : ['dev','development'] 
-    });
+    return __applyScope(config, __SEnv.get('env') === 'production' ? ['prod','production'] : ['dev','development']);
   }
 
   /**

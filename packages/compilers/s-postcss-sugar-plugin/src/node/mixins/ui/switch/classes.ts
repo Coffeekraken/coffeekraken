@@ -52,10 +52,11 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(
-      [`.${cls} {`, ` @sugar.ui.switch($style: ${style});`, `}`].join('\n')
-    );
+      */
+      .${cls} {
+        @sugar.ui.switch($style: ${style});
+      }
+    `);
   });
 
   Object.keys(__theme().config('color')).forEach((colorName) => {

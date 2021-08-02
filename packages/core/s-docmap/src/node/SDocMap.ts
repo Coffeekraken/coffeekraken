@@ -32,6 +32,7 @@ import __SFile from '@coffeekraken/s-file';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 
 /**
  * @name                SDocMap
@@ -110,8 +111,28 @@ export interface ISDocMapEntries {
   [key: string]: ISDocMapEntry;
 }
 
+export interface ISDocmapMenuObjItem {
+  name: any;
+  slug: any;
+  [key: string]: Partial<ISDocmapMenuObjItem>;
+}
+
+export interface ISDocmapMenuObj {
+  packages: Record<string, Partial<ISDocmapMenuObjItem>>;
+  tree: Record<string, Partial<ISDocmapMenuObjItem>>;
+  slug: Record<string, Partial<ISDocmapMenuObjItem>>;
+}
+
+export interface ISDocmapMetasObj {
+  type: 'current' | 'snapshot';
+  snapshot?: string;
+}
+
 export interface ISDocMapObj {
+  metas: ISDocmapMetasObj;
   map: ISDocMapEntries;
+  menu: Partial<ISDocmapMenuObj>;
+  snapshots: string[];
 }
 
 export interface ISDocMap {
@@ -171,6 +192,7 @@ class SDocMap extends __SClass implements ISDocMap {
   /**
    * @name          read
    * @type          Function
+   * @async
    *
    * This static method allows you to search for docMap.json files and read them to get
    * back the content of them in one call. It can take advantage of the cache if
@@ -185,7 +207,7 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(params: Partial<ISDocMapReadParams>): Promise<ISDocMapObj> {
+  read(params?: Partial<ISDocMapReadParams>): Promise<ISDocMapObj> {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
       const finalParams = <ISDocMapReadParams>__deepMerge(
         __SDocMapReadParamsInterface.defaults(),
@@ -208,12 +230,13 @@ class SDocMap extends __SClass implements ISDocMap {
       const packageMonoRoot = __packageRoot(process.cwd(), true);
 
       const extendedPackages: string[] = [];
-      const finalDocmapJson = {
-        meta: {
+      const finalDocmapJson: Partial<ISDocMapObj> = {
+        metas: {
           type: finalParams.snapshot ? 'snapshot' : 'current',
           snapshot: finalParams.snapshot
         },
         map: {},
+        menu: {},
         snapshots: []
       };
 
@@ -239,72 +262,64 @@ class SDocMap extends __SClass implements ISDocMap {
 
         const extendsRootPath = currentPathDocmapJsonPath.replace('/docmap.json', '');
 
-        try {
-
-          const packageJsonPath = `${extendsRootPath}/package.json`;
-          if (!__fs.existsSync(packageJsonPath)) {
-            throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`);
-          }
-
-          const currentPackageJson = __readJsonSync(packageJsonPath);
-          const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
-
-          Object.keys(docmapJson.map).forEach(namespace => {
-            if (docmapJson.map[namespace]) {
-              docmapJson.map[namespace].package = currentPackageJson.name;
-            }
-          });
-          Object.keys(docmapJson.generated?.map ?? []).forEach(namespace => {
-            if (docmapJson.generated.map[namespace]) {
-              docmapJson.generated.map[namespace].package = currentPackageJson.name;
-            }
-          });
-
-          docmapJson.extends = [
-            ...(docmapJson.extends ?? []),
-            ...(docmapJson.generated?.extends ?? [])
-          ];
-          docmapJson.map = {
-            ...(docmapJson.map ?? {}),
-            ...(docmapJson.generated?.map ?? {})
-          };
-
-          delete docmapJson.generated;
-
-          docmapJson.extends.forEach(extendsPackageName => {
-            loadJson(extendsPackageName, extendsRootPath);
-          });
-
-          Object.keys(docmapJson.map ?? {}).forEach((namespace, i) => {
-            const obj = docmapJson.map[namespace];
-            obj.path = __path.resolve(extendsRootPath, obj.relPath);
-            docmapJson.map[namespace] = obj;
-          });
-
-          finalDocmapJson.map = {
-            ...finalDocmapJson.map,
-            ...(docmapJson.map ?? {})
-          };
-        } catch(e) {
-          console.log('ERRO', e);
+        const packageJsonPath = `${extendsRootPath}/package.json`;
+        if (!__fs.existsSync(packageJsonPath)) {
+          throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`);
         }
+
+        const currentPackageJson = __readJsonSync(packageJsonPath);
+        const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
+
+        Object.keys(docmapJson.map).forEach(namespace => {
+          if (docmapJson.map[namespace]) {
+            docmapJson.map[namespace].package = currentPackageJson.name;
+          }
+        });
+        Object.keys(docmapJson.generated?.map ?? []).forEach(namespace => {
+          if (docmapJson.generated.map[namespace]) {
+            docmapJson.generated.map[namespace].package = currentPackageJson.name;
+          }
+        });
+
+        docmapJson.extends = [
+          ...(docmapJson.extends ?? []),
+          ...(docmapJson.generated?.extends ?? [])
+        ];
+        docmapJson.map = {
+          ...(docmapJson.map ?? {}),
+          ...(docmapJson.generated?.map ?? {})
+        };
+
+        delete docmapJson.generated;
+
+        docmapJson.extends.forEach(extendsPackageName => {
+          loadJson(extendsPackageName, extendsRootPath);
+        });
+
+        Object.keys(docmapJson.map ?? {}).forEach((namespace, i) => {
+          const obj = docmapJson.map[namespace];
+          obj.path = __path.resolve(extendsRootPath, obj.relPath);
+          docmapJson.map[namespace] = obj;
+        });
+
+        finalDocmapJson.map = {
+          ...finalDocmapJson.map,
+          ...(docmapJson.map ?? {})
+        };
+        
       }
 
       const docmapJsonFolderPath = __folderPath(finalParams.input);
       loadJson(docmapJsonFolderPath, docmapJsonFolderPath);
 
-      // loadJson(__packageRootDir(), __packageRootDir());
-
       // loading available snapshots
-      try {
-        const availableSnapshots = __fs.readdirSync(finalParams.snapshotDir);
-        finalDocmapJson.snapshots = availableSnapshots;
-      } catch(e) {}
+      const availableSnapshots = __fs.readdirSync(finalParams.snapshotDir);
+      finalDocmapJson.snapshots = availableSnapshots;
 
       // save the docmap json
       this._docmapJson = finalDocmapJson;
 
-      finalDocmapJson.menu = await this.extractMenu(finalDocmapJson);
+      finalDocmapJson.menu = this._extractMenu(finalDocmapJson);
 
       // return the final docmap
       resolve(finalDocmapJson);
@@ -318,7 +333,6 @@ class SDocMap extends __SClass implements ISDocMap {
   /**
    * @name          extractMenu
    * @type          Function
-   * @async
    * 
    * This method allows you to extract the docmap items that have a "menu" array property and
    * return all of these in a structured object
@@ -328,57 +342,54 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async extractMenu(docmapJson: ISDocMapObj = this._docmapJson): Record<string, __SFile> {
+  _extractMenu(docmapJson: Partial<ISDocMapObj> = this._docmapJson): Promise<ISDocmapMenuObj> {
 
-    if (!docmapJson) {
-      docmapJson = await this.read();
-    }
+      const docmapJsonMenuByPackage = {};
 
-    const docmapJsonMenuByPackage = {};
-
-    // split menus by packages
-    Object.keys(docmapJson.map).forEach(namespace => {
-      const docmapObj = docmapJson.map[namespace];
-      if (!docmapObj.menu) return;
-      if (!docmapJsonMenuByPackage[docmapObj.package]) {
-        docmapJsonMenuByPackage[docmapObj.package] = [];
-      }
-      docmapJsonMenuByPackage[docmapObj.package].push(docmapObj);
-    });
-
-    let finalMenu = {
-      packages: {}
-    };
-    const packageJson = __packageJson();
-
-    Object.keys(docmapJsonMenuByPackage).forEach(packageName => {
-
-      const menuObj = this._extractMenuFromDocmapJsonStack(docmapJsonMenuByPackage[packageName]);
-
-      if (packageName === packageJson.name) {
-        finalMenu = {
-          ...finalMenu,
-          ...menuObj
+      // split menus by packages
+      Object.keys(docmapJson.map).forEach(namespace => {
+        const docmapObj = docmapJson.map[namespace];
+        if (!docmapObj.menu) return;
+        if (!docmapJsonMenuByPackage[docmapObj.package]) {
+          docmapJsonMenuByPackage[docmapObj.package] = [];
         }
-      } else {
-        const scopedSlugMenu = {};
-        Object.keys(menuObj.slug).forEach(slug => {
-          scopedSlugMenu[`/${packageName}${slug}`] = menuObj.slug[slug];
-        });
-        finalMenu.packages[packageName] = {
-          name: packageJson.name,
-          tree: __deepMap(menuObj.tree, ({prop, value}) => {
-              if (prop === 'slug') return `/${packageName}${value}`;
-              return value;
-            }),
-          slug: scopedSlugMenu
-        }
-      }
+        docmapJsonMenuByPackage[docmapObj.package].push(docmapObj);
+      });
 
-    });
-    
-    return finalMenu;
+      let finalMenu = {
+        packages: {}
+      };
+      const packageJson = __packageJson();
+
+      Object.keys(docmapJsonMenuByPackage).forEach(packageName => {
+
+        const menuObj = this._extractMenuFromDocmapJsonStack(docmapJsonMenuByPackage[packageName]);
+
+        if (packageName === packageJson.name) {
+          finalMenu = {
+            ...finalMenu,
+            ...menuObj
+          }
+        } else {
+          const scopedSlugMenu = {};
+          Object.keys(menuObj.slug).forEach(slug => {
+            scopedSlugMenu[`/${packageName}${slug}`] = menuObj.slug[slug];
+          });
+          finalMenu.packages[packageName] = {
+            name: packageJson.name,
+            tree: __deepMap(menuObj.tree, ({prop, value}) => {
+                if (prop === 'slug') return `/${packageName}${value}`;
+                return value;
+              }),
+            slug: scopedSlugMenu
+          }
+        }
+      });
+
+      return finalMenu;
+
   }
+
   _extractMenuFromDocmapJsonStack(docmapJsonMap) {
 
     const menuObj = {

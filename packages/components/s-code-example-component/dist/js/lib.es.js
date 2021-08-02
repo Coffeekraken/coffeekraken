@@ -2138,6 +2138,6 @@ function webcomponent(tagName = "s-code-example") {
 }
 if (!window.env)
   window.env = {SUGAR: {}};
-window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');
+window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development","ENV":"development"}');
 export default SCodeExample;
 export {webcomponent};

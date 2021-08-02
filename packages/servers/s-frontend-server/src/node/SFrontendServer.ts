@@ -8,7 +8,6 @@ import __express from 'express';
 import __fs from 'fs';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
-import __sails from 'sails';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 // import __vhost from 'vhost';
 
@@ -42,18 +41,6 @@ export interface ISFrontendServerParams {
 }
 
 export default class SFrontendServer extends __SClass {
-  /**
-   * @name            _sailsInstance
-   * @type            Sails
-   * @private
-   *
-   * Store the sails instance
-   *
-   * @see             https://sailsjs.com
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  private _sails;
 
   /**
    * @name					constructor
@@ -67,8 +54,6 @@ export default class SFrontendServer extends __SClass {
    */
   constructor() {
     super();
-
-    this._sails = new __sails.constructor();
   }
 
   /**
@@ -124,6 +109,7 @@ export default class SFrontendServer extends __SClass {
           }
         }
 
+
         if (frontendServerConfig.staticDirs) {
           Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
 
@@ -138,7 +124,6 @@ export default class SFrontendServer extends __SClass {
         if (frontendServerConfig.proxy) {
           Object.keys(frontendServerConfig.proxy).forEach((proxyId) => {
             const proxyObj = frontendServerConfig.proxy[proxyId];
-            // register the middleware inside the sails configuration
             // @ts-ignore
             express.use(
               createProxyMiddleware(proxyObj.route, {
@@ -148,11 +133,6 @@ export default class SFrontendServer extends __SClass {
             );
           });
         }
-
-        // express.use('*.localhost', (req, res, next) => {
-        //   console.log(res, res);
-        //   next();
-        // }));
 
         if (frontendServerConfig.middlewares) {
           for (let i=0; i<Object.keys(frontendServerConfig.middlewares).length; i++) {

@@ -44,7 +44,7 @@ export default function ({
   const vars: string[] = [];
 
   vars.push(`
-
+    position: relative;
     display: inline-block;
     cursor: pointer;
 

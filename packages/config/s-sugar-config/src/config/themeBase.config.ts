@@ -1393,15 +1393,16 @@ export default {
       maxWidth: '30ch',
       arrowSize: '20px'
     },
-    pre: {
-      padding: '[theme.ui.default.padding]',
-      borderRadius: '[theme.ui.default.borderRadius]',
-      transition: '[theme.ui.default.transition]',
-      depth: '[theme.ui.default.depth]',
-      styles: ['default'],
-      defaultColor: '[theme.ui.default.defaultColor]',
-      ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
-    },
+    // pre: {
+    //   padding: '[theme.ui.default.padding]',
+    //   borderRadius: '[theme.ui.default.borderRadius]',
+    //   transition: '[theme.ui.default.transition]',
+    //   depth: '[theme.ui.default.depth]',
+    //   lineHeight: 2,
+    //   styles: ['default'],
+    //   defaultColor: '[theme.ui.default.defaultColor]',
+    //   ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
+    // },
     code: {
       padding: '[theme.ui.default.padding]',
       borderRadius: '[theme.ui.default.borderRadius]',
@@ -1520,6 +1521,7 @@ export default {
         'font-family': 'code',
         color: ['ui', 'text'],
         'background-color': ['ui','surface'],
+        'line-height': 1.5,
         padding: 20,
         ':rhythmVertical': {
           'margin-bottom': 30
@@ -1530,7 +1532,7 @@ export default {
         'font-family': 'code',
         color: ['ui', 'text'],
         'background-color': ['ui','surface'],
-        padding: 10
+        padding: 0
       },
       a: {
         'color': 'accent'

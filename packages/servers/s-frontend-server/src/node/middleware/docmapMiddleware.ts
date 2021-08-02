@@ -36,7 +36,8 @@ function docmapMiddleware(settings = {}) {
   return async function (req, res, next) {
 
     const docmap = new __SDocmap();
-    const menu = await docmap.extractMenu();
+    const docmapJson = await docmap.read();
+    const menu = docmapJson.menu;
 
     if (!res.templateData) res.templateData = {};
     res.templateData.docMenu = menu;

@@ -21,7 +21,6 @@ __SComponentUtils.setDefaultProps('*', {
 __SComponentUtils.setDefaultProps('s-code-example', {
     toolbarPosition: 'nav',
     defaultStyle: true,
-    adoptStyles: ['main'],
     defaultStyleClasses: {
         main: 's-tabs'
     }

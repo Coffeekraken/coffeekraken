@@ -48,7 +48,13 @@ export default function ({
         display: block !important;
         padding-left: 1em;
         margin-bottom: 0.5em;
-      
+        
+        & > ul,
+        & > ol,
+        & > dl {
+          margin-top: 0.5em;
+        }
+
         ${iconSelector} {  
           ${!finalParams.icon ? `
               content: '●';

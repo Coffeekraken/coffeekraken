@@ -417,7 +417,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                 // take some datas like packagejson, etc...
                 const viewData = {
                     config: __SSugarConfig.get('.'),
-                    docMenu: await new __SDocmap().extractMenu(),
+                    docMenu: (await new __SDocmap().read()).menu,
                     time: {
                         year: new Date().getFullYear(),
                         month: new Date().getMonth(),

@@ -466,15 +466,22 @@ class SPromise extends __SClass.extends(Promise)
     // update the status
     this._promiseState = 'resolved';
     // exec the wanted stacks
-    let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
+    const stacksOrderArray = stacksOrder.split(',').map(l => l.trim());
+    for (let i=0; i<stacksOrderArray.length; i++) {
+        const stack = stacksOrderArray[i];
+        arg = await this.eventEmitter.emit(
+          stack,
+          arg
+        );
+    }
     // execute proxies
     for (const proxyFn of this._settings.promise.proxies.resolve || []) {
-      stacksResult = await proxyFn(stacksResult);
+      arg = await proxyFn(arg);
     }
     // resolve the master promise
-    this._resolvers.resolve(stacksResult);
+    this._resolvers.resolve(arg);
     // return the stack result
-    return stacksResult;
+    return arg;
   }
 
   then<R, E2 = E>(f: (r: T) => R): Promisish<R, E>;
@@ -515,14 +522,21 @@ class SPromise extends __SClass.extends(Promise)
     // update the status
     this._promiseState = 'rejected';
     // exec the wanted stacks
-    let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
+    const stacksOrderArray = stacksOrder.split(',').map(l => l.trim());
+    for (let i=0; i<stacksOrderArray.length; i++) {
+        const stack = stacksOrderArray[i];
+        arg = await this.eventEmitter.emit(
+          stack,
+          arg
+        );
+    }
     // execute proxies
     for (const proxyFn of this._settings.promise.proxies.reject || []) {
-      stacksResult = await proxyFn(stacksResult);
+      arg = await proxyFn(arg);
     }
     // resolve the master promise
-    this._resolvers.reject(stacksResult);
-    return stacksResult;
+    this._resolvers.reject(arg);
+    return arg;
   }
 
   /**
@@ -562,18 +576,22 @@ class SPromise extends __SClass.extends(Promise)
       // update the status
       this._promiseState = 'canceled';
       // exec the wanted stacks
-      const stacksResult = await this.eventEmitter._emitEvents(
-        stacksOrder,
-        arg
-      );
+      const stacksOrderArray = stacksOrder.split(',').map(l => l.trim());
+      for (let i=0; i<stacksOrderArray.length; i++) {
+          const stack = stacksOrderArray[i];
+          arg = await this.eventEmitter.emit(
+            stack,
+            arg
+          );
+      }
       // resolve the master promise
       if (this._settings.promise.treatCancelAs === 'reject') {
-        this._resolvers.reject(stacksResult);
+        this._resolvers.reject(arg);
       } else {
-        this._resolvers.resolve(stacksResult);
+        this._resolvers.resolve(arg);
       }
       // return the stack result
-      resolve(stacksResult);
+      resolve(arg);
     });
   }
 

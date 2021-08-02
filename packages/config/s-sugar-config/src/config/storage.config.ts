@@ -343,7 +343,7 @@ export default {
      */
     rootDir: `/dist`,
 
-    'env:dev': {
+    '@dev': {
 
       /**
        * @name            rootDir

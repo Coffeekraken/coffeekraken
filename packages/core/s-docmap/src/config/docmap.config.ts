@@ -71,7 +71,7 @@ export default {
       `dist/css/*:/.*@namespace.*/gm`,
       `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`
     ],
-    'env:dev': {
+    '@dev': {
       globs: [
         `src/**{5}/*.!(md):/.*@namespace.*/gm`,
         `dist/css/*:/.*@namespace.*/gm`,

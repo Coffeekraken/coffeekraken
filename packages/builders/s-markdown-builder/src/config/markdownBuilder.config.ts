@@ -69,7 +69,11 @@ export default {
         'doc-menu': {
             markdown: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md'),
             html: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md')
-        }
+        },
+        'recipes-list': {
+            markdown: __path.resolve(__dirname(), '../partials/recipesList/recipesList.md'),
+            html: __path.resolve(__dirname(), '../partials/recipesList/recipesList.md')
+        },
     },
     layouts: {
         doc: {

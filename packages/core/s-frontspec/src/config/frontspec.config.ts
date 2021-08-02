@@ -24,7 +24,7 @@ export default {
      */
     head: {
 
-      'env:dev': {
+      '@dev': {
 
         viteClient: `
           <script>

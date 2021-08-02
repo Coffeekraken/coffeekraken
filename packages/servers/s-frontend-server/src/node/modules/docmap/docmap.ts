@@ -1,11 +1,11 @@
 import __SDocmap from '@coffeekraken/s-docmap';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 
-export default async function docmapRoutes(express, config) {
+export default async function docmap(express, config) {
 
     const docmap = new __SDocmap();
-
-    const menu = await docmap.extractMenu();
+    const docmapJson = await docmap.read();
+    const menu = docmapJson.menu;
 
     Object.keys(menu.slug).forEach(slug => {
         config.routes[slug] = {
@@ -22,5 +22,7 @@ export default async function docmapRoutes(express, config) {
             });
         });
     }
+
+    return true;
 
 }

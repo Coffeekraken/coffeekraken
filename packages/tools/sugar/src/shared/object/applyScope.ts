@@ -26,38 +26,36 @@ import __isPlainObject from '../is/plainObject';
  * import applyScope from '@coffeekraken/sugar/shared/object/applyScope';
  * const myObject = {
  *      myValue: 'Hello',
- *      'env:dev': {
+ *      '@dev': {
  *          myValue: 'World'
  *      },
- *      'something:cool': {
+ *      'something@prod': {
  *          plop: 'yop'
  *      }
  * };
  * 
  * // apply the "env" scope with the value of "dev"
- * applyScope(myObject, {
- *      env: 'dev'
- * });
+ * applyScope(myObject, ['dev']);
  * // {
  * //   myValue: 'World'
  * // }
  * 
  * // apply two scopes
- * applyScope(myObject, {
- *      env: 'prod',
- *      something: '*'
- * });
+ * applyScope(myObject, ['prod']);
  * // {
  * //   myValue: 'Hello',
- * //   plop: 'yop'
+ * //   something: {
+ * //       plop: 'yop'
+ * //   }
  * // }
  * 
  * // apply a scope with multiple values
- * applyScope(myObject, {
- *      env: ['dev','prod']
- * });
+ * applyScope(myObject, ['dev','prod']);
  * // {
- * //   myValue: 'World'
+ * //   myValue: 'World',
+ * //   something: {
+ * //       plop: 'yop'
+ * //   }
  * // }
  * 
  * @since           2.0.0
@@ -67,24 +65,12 @@ export interface IApplyScopeSettings {
     deep: boolean;
 }
 
-export default function applyScope(object: Record<string, any>, scope: Record<string, string|string[]>, settings?: Partial<IApplyScopeSettings>): Record<string, any> {
+export default function applyScope(object: Record<string, any>, scopes: string[], settings?: Partial<IApplyScopeSettings>): Record<string, any> {
     
     settings = {
         deep: true,
         ...settings
     };
-
-    const scopes: string[] = [];
-    Object.keys(scope).forEach(scopeKey => {
-        const scopeValue = scope[scopeKey];
-        if (Array.isArray(scopeValue)) {
-            scopeValue.forEach(v => {
-                scopes.push(`${scopeKey}:${v}`);
-            })
-        } else {
-            scopes.push(`${scopeKey}:${scopeValue}`);
-        }
-    });
 
     function recursive(obj) {
 
@@ -93,12 +79,24 @@ export default function applyScope(object: Record<string, any>, scope: Record<st
 
         Object.keys(obj).forEach(prop => {
             const value = obj[prop];
-            if (prop.split(':').length === 2) {
-                if (scopes.indexOf(prop) !== -1 || scopes.indexOf(`${prop.split(':')[0]}:*`) !== -1) {
-                    if (__isPlainObject(value)) {
+            if (prop.split('@').length === 2) {
+                const scope = prop.split('@')[1],
+                      scopedProp = prop.split('@')[0];
+
+                if (scopes.indexOf(scope) !== -1) {
+                    // plain object with no scoped prop
+                    if (__isPlainObject(value) && !scopedProp) {
                         Object.keys(value).forEach(valueProp => {
                             obj[valueProp] = value[valueProp];
                         });
+                    } else if (__isPlainObject(value) && scopedProp) {
+                        if (!obj[scopedProp]) obj[scopedProp] = value;
+                        else obj[scopedProp] = {
+                            ...obj[scopedProp],
+                            ...value
+                        };
+                    } else if (scopedProp) {
+                        obj[scopedProp] = value;
                     }
                 }
                 delete obj[prop];
@@ -108,7 +106,7 @@ export default function applyScope(object: Record<string, any>, scope: Record<st
         let needRecursion = false;
         for (let i=0; i<Object.keys(obj).length; i++) {
             const prop = Object.keys(obj)[i];
-            if (prop.split(':').length === 2) {
+            if (prop.split('@').length === 2) {
                 needRecursion = true;
                 break;
             }

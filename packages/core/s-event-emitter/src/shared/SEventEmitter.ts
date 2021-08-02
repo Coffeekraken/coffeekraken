@@ -518,11 +518,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  emit(event: string, value: any, metas?: Partial<ISEventEmitterMetas>): any {
-    return new Promise(async (resolve, reject) => {
-
-      let metasObj: ISEventEmitterMetas = <ISEventEmitterMetas>__deepMerge(
-        <ISEventEmitterMetas>{
+  _createMetas(event: string, metas: Partial<ISEventEmitterMetas> = {}): ISEventEmitterMetas {
+    return <ISEventEmitterMetas>__deepMerge(
+       {
           event: event,
           name: event,
           emitter: this.eventEmitterSettings.bind ?? metas?.emitter ?? this,
@@ -533,6 +531,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         },
         metas ?? {}
       );
+  }
+  emit(event: string, value: any, metas?: Partial<ISEventEmitterMetas>): any {
+    return new Promise(async (resolve, reject) => {
+
+      let metasObj = this._createMetas(event, metas);
 
       const isFirstLevel = !metasObj.level;
 
@@ -589,7 +592,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   async _emit(logObj: ISEventEmitterEventObj) {
     // if is an ask event, set the askId in metas
     if (logObj.event === 'ask') {
-
       this.constructor.global.on(`answer.${logObj.metas.askId}:1`, (answer, metas) => {
         logObj.resolve(answer);
       }); 
@@ -857,7 +859,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     return new Promise(async (resolve, reject) => {
 
       // @TODO      check why need this...
-      if (!events || !metas) return this;
+      if (!events) return this;
 
       // check if the stacks is "*"
       if (typeof events === 'string')
@@ -866,6 +868,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       let currentStackResult = initialValue;
 
       for (let i = 0; i < events.length; i++) {
+        // if (!metas) metas = this._createMetas(events[i]);
+
         const stackResult = await this._emitEventStack(
           events[i],
           currentStackResult,

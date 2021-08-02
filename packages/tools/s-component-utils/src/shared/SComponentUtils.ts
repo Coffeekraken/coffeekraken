@@ -223,6 +223,7 @@ export default class SComponentUtils extends __SClass {
   static _styleNodes = [];
   _adoptStyles() {
 
+
       const $links = document.querySelectorAll('link[rel="stylesheet"]');
       if ($links && this.node.shadowRoot) {
         Array.from($links).forEach(async $link => {

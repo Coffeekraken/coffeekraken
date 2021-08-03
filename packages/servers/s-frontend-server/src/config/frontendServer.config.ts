@@ -141,6 +141,9 @@ export default {
     '/doc/api/*': {
       handler: 'doc'
     },
+    '/api/config': {
+      handler: 'config'
+    },
     '/api/docmap': {
       handler: 'docmap'
     }
@@ -330,6 +333,44 @@ export default {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: `${__dirname()}/../node/handlers/docmap`
+    },
+
+    /**
+     * @name            config
+     * @namespace       config.frontendServer.handlers
+     * @type            Object
+     *
+     * Store all the "api doc" configuration access like the route, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    config: {
+      /**
+       * @name          title
+       * @namespace     config.frontendServer.handlers.config
+       * @type          String
+       * @default       Views | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'config | [title]',
+      /**
+       * @name            handler
+       * @namespace       config.frontendServer.handlers.config
+       * @type            Function
+       * @default         ${__dirname()}/../node/api/doc
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname()}/../node/handlers/config`
     }
   }
 };

@@ -1,3 +1,0 @@
-import { readdirSync } from 'fs';
-let files = readdirSync('test/printer/samples').filter((name) => name.endsWith('.html') || name.endsWith('.md'));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsV0FBVyxFQUE0QixNQUFNLElBQUksQ0FBQztBQUczRCxJQUFJLEtBQUssR0FBRyxXQUFXLENBQUMsc0JBQXNCLENBQUMsQ0FBQyxNQUFNLENBQ3BELENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxJQUFJLElBQUksQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQ3pELENBQUMifQ==

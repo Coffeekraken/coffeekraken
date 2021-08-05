@@ -29,10 +29,13 @@
             font-weight: bold;
         }
 
-        .__toggle:before {
+        .__slug:before {
             content: '-';
+        }
+        .__toggle:before {
+            content: '│';
             font-weight: bold;
-            color: sugar.color(complementary);
+            color: sugar.color(accent);
         }  
 
     }

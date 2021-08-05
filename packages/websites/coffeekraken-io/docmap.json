@@ -37661,6 +37661,35 @@
                 "relPath": "src/doc/01-config/04-registerNewConfigFiles.md",
                 "children": {}
             },
+            "@coffeekraken.coffeekraken-io.doc.config.configurationExplorer": {
+                "name": "Configuration explorer",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Configuration"
+                    ],
+                    "slug": "/doc/config/explorer"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc.config",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "05-explorer.md",
+                "extension": "md",
+                "relPath": "src/doc/01-config/05-explorer.md",
+                "children": {}
+            },
             "@coffeekraken.coffeekraken-io.doc.config.more...": {
                 "name": "More...",
                 "type": "Markdown",
@@ -37685,9 +37714,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "05-more.md",
+                "filename": "06-more.md",
                 "extension": "md",
-                "relPath": "src/doc/01-config/05-more.md",
+                "relPath": "src/doc/01-config/06-more.md",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.getStarted": {

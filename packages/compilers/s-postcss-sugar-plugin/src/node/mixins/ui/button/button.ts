@@ -81,6 +81,7 @@ export default function ({
 
             &:hover, &:focus {
               @sugar.gradient(sugar.color(ui,gradientEnd), sugar.color(ui, gradientStart), $angle: 90);
+              color: sugar.color(ui:hover, foreground);
             }
         `);
 
@@ -92,6 +93,7 @@ export default function ({
 
             &:hover, &:focus {
               background-color: sugar.color(ui:hover);
+              color: sugar.color(ui:hover, foreground);
             }
         `);
         break;

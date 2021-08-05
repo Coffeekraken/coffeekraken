@@ -1,0 +1,4 @@
+import __SConfigExplorer from './SConfigExplorer';
+export * from './SConfigExplorer';
+export default __SConfigExplorer;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGlCQUFpQixNQUFNLG1CQUFtQixDQUFDO0FBQ2xELGNBQWMsbUJBQW1CLENBQUM7QUFDbEMsZUFBZSxpQkFBaUIsQ0FBQyJ9

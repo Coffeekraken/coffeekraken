@@ -52,6 +52,10 @@ export default function ({
       @sugar.ui.base(input);
       color: sugar.color(ui, text);
       padding-right: 2.5em;
+
+      @sugar.state.hover {
+        color: sugar.color(ui, text);
+      }
     }
 
     &:after {

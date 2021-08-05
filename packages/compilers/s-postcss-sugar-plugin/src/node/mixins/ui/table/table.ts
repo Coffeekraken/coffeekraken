@@ -31,17 +31,20 @@ export default function ({
 
   vars.push(`
     width: 100%;
-    border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(ui);
-    background-color: sugar.color(ui, surface);
+    table-layout: fixed;
+    overflow-wrap: break-word;
+    border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(ui, border);
     border-radius: sugar.theme(ui.table.borderRadius);
     border-collapse: collapse;
     @sugar.depth(sugar.theme(ui.table.depth));
 
     &, th, td {
-        border: sugar.theme(ui.table.borderWidth) solid sugar.color(ui)
+        border: sugar.theme(ui.table.borderWidth) solid sugar.color(ui, border)
     }
     th {
+        background-color: sugar.color(ui, surface);
         font-weight: bold;
+        vertical-align: middle;
     }
     td, th {
         padding: sugar.theme(ui.table.padding);

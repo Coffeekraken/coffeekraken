@@ -1511,7 +1511,7 @@ export default {
         }
       },
       hr: {
-        color: '[theme.color.main.default]',
+        color: '[theme.color.main.color]',
         opacity: 0.2,
         ':rhythmVertical': {
           'margin-bottom': 30
@@ -1562,7 +1562,7 @@ export default {
         'font-size': '0.5em'
       },
       mark: {
-        'background-color': '[theme.color.accent.default]',
+        'background-color': '[theme.color.accent.color]',
         'color': '[theme.color.accent.foreground]'
       },
       del: {

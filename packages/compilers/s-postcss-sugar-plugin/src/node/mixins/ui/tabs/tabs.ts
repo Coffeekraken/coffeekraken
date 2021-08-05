@@ -99,9 +99,11 @@ export default function ({
       & > div {
         @sugar.state.hover {
           background-color: sugar.color(complementary);
+          color: sugar.color(complementary, foreground);
         }
         @sugar.state.active {
           background-color: sugar.color(accent);
+          color: sugar.color(accent, foreground);
         }          
       }
     `);

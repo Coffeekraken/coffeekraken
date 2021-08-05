@@ -1,7 +1,8 @@
 import __SClass from '@coffeekraken/s-class';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __SColor from '@coffeekraken/s-color';
 
 /**
  * @name            STheme
@@ -94,16 +95,14 @@ export interface ISThemeMedia {
   queries: ISThemeMediaQueries;
 }
 
-export interface ISThemeLoopOnColorsColor {
-  name: string;
-  modifier: string;
-  value: string;
-  previous: ISThemeLoopOnColorsColor;
-  next: ISThemeLoopOnColorsColor;
-}
-
 export interface ISThemeLayout {
   container: Record<string, any>;
+}
+
+export interface ISThemesConfig {
+  theme: string;
+  cssVariables: string[];
+  themes: Record<string, ISThemeConfig>;
 }
 
 export interface ISThemeConfig {
@@ -117,6 +116,41 @@ export interface ISThemeConfig {
   font: ISThemeFont;
   ui: ISThemeUi;
   media: ISThemeMedia;
+}
+
+export interface ISThemeLoopOnColorsColor {
+  name: string;
+  variant: string;
+  state?: string;
+  value: ISThemeColor;
+}
+
+export interface ISThemeLoopOnColorsCallback {
+  (color: ISThemeLoopOnColorsColor): boolean | void;
+}
+
+export interface ISThemeColorModifiers {
+  saturate: number;
+  desaturate: number;
+  lighten: number;
+  darken: number;
+  spin: number;
+  alpha: number;
+  grayscale: boolean;
+}
+
+export interface ISThemeColor {
+  original?: ISThemeColor,
+  color: string;
+  variable: string;
+  r: number;
+  g: number;
+  b: number;
+  h: number;
+  s: number;
+  l: number;
+  a: number;
+  modifiers?: ISThemeColorModifiers;
 }
 
 export default class STheme extends __SClass {
@@ -141,7 +175,9 @@ export default class STheme extends __SClass {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static theme: string = __SugarConfig.get('theme.theme');
+  static get theme(): string {
+    return __SSugarConfig.get('theme.theme');
+  }
 
   /**
    * @name      themes
@@ -153,7 +189,9 @@ export default class STheme extends __SClass {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static themes: string[] = Object.keys(__SugarConfig.get('theme.themes'));
+  static get themes(): string[] {
+    return Object.keys(__SSugarConfig.get('theme.themes'));
+  }
 
   /**
    * @name        getTheme
@@ -172,7 +210,7 @@ export default class STheme extends __SClass {
   static _instanciatedThemes: Record<string, STheme> = {};
   static getTheme(theme: string): STheme {
     if (this._instanciatedThemes[theme]) return this._instanciatedThemes[theme];
-    const themes = __SugarConfig.get('theme.themes');
+    const themes = __SSugarConfig.get('theme.themes');
     if (!themes[theme])
       throw new Error(
         `<red>[${
@@ -202,7 +240,8 @@ export default class STheme extends __SClass {
       const sugarJsonInstance = new __SSugarJson();
       const sugarJson = sugarJsonInstance.read();
       // @ts-ignore
-      if (sugarJson.theme) theme = sugarJson.theme ?? 'default';
+      if (sugarJson.theme) theme = sugarJson.theme;
+      else theme = (<any>this.constructor).theme;
     }
 
     if (theme && Object.keys(this.themes).indexOf(theme) === -1) {
@@ -231,7 +270,7 @@ export default class STheme extends __SClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get themes() {
-    return __SugarConfig.get('theme.themes');
+    return __SSugarConfig.get('theme.themes');
   }
 
   /**
@@ -249,7 +288,7 @@ export default class STheme extends __SClass {
    */
   get _config() {
     // @ts-ignore
-    return __SugarConfig.get('theme.themes')[this.name];
+    return __SSugarConfig.get('theme.themes')[this.name];
   }
   config(dotPath): any {
     const value = __get(this._config, dotPath);
@@ -262,6 +301,54 @@ export default class STheme extends __SClass {
   }
 
   /**
+   * @name        themesConfig
+   * @type        ISThemesConfig
+   * 
+   * Get access to the themes configuration
+   * 
+   * @return      ISThemesConfig        The themes configuration
+   * 
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  themesConfig(): ISThemesConfig {
+    return __SSugarConfig.get('theme');
+  }
+
+  /**
+   * @name        baseColors
+   * @type        Function
+   * 
+   * This function returns a simple object with the base colors and their value
+   * from the theme config.
+   * 
+   * @return      {Record<string, ISThemeColor>}          The simple base colors map object
+   * 
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  baseColors(): Record<string, ISThemeColor> {
+    const map = {};
+    Object.keys(this._config.color).forEach(color => {
+      const colorObj = this._config.color[color];
+      if (!colorObj.color) return;
+      const c = new __SColor(colorObj.color);
+      map[color] = {
+        color: colorObj.color,
+        variable: `--s-theme-color-${color}`,
+        r: c.r,
+        g: c.g,
+        b: c.b,
+        h: c.h,
+        s: c.s,
+        l: c.l,
+        a: c.a
+      };
+    });
+    return map;
+  }
+
+  /**
    * @name        loopOnThemeColors
    * @type        Function
    *
@@ -270,15 +357,14 @@ export default class STheme extends __SClass {
    *
    * @param       {Function}      callback            Specify the callback that will be called for each color with an object containing these properties:
    * - name       {String}        The name of the color like "primary", "secondary", etc...
-   * - modifier   {String}        The name of the modifier like "default", "10", "20", etc...
-   * - value      {String}        The actual color value
-   * - previous   {ISThemeLoopOnColorsColor}        The previous color object. If the current color is the first one, the previous will be the last one.
-   * - next       {ISThemeLoopOnColorsColor}        The next color object. If the current color is the last one, the next will be the first one.
+   * - variant    {String}        The name of the variant like "background", "surface", etc...
+   * - state      {String}        The name of the state like "hover", "active", etc...
+   * - value      {ISThemeColor}        The actual color object that
    *
    * @since             2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  loopOnColors(callback): void {
+  loopOnColors(callback: ISThemeLoopOnColorsCallback): void {
     const colorsObj = this.config('color');
     let triggeredStop = false;
 
@@ -286,39 +372,56 @@ export default class STheme extends __SClass {
       if (triggeredStop) return;
       const colorObj = colorsObj[colorName];
 
-      Object.keys(colorObj).forEach((modifierName, j) => {
+      Object.keys(colorObj).forEach((variantOrStateName, j) => {
         if (triggeredStop) return;
+      
+        let state: string = '', variant: string = '', res;
+      
+        const val = colorObj[variantOrStateName];
 
-        const lastKey = Object.keys(colorObj).pop();
-        const firstKey = Object.keys(colorObj)[0];
-        const previousKey = j === 0 ? lastKey : Object.keys(colorObj)[j - 1];
-        const nextKey =
-          j >= Object.keys(colorObj).length - 1
-            ? firstKey
-            : Object.keys(colorObj)[j];
+        if (variantOrStateName === 'color') {
+          const c = new __SColor(val);
+          res = callback({
+            name: colorName,
+            variant: '',
+            state: '',
+            value: {
+              color: val,
+              variable: `--s-theme-color-${colorName}`,
+              r: c.r,
+              g: c.g,
+              b: c.b,
+              h: c.h,
+              s: c.s,
+              l: c.l,
+              a: c.a
+            }
+          });
+        } else if (val.a !== undefined && val.r !== undefined && val.g !== undefined && val.b !== undefined) {
+          variant = variantOrStateName;
 
-        const previous = {
-          name: colorName,
-          modifier: previousKey,
-          // @ts-ignore
-          value: colorObj[previousKey]
-        };
-        const next = {
-          name: colorName,
-          modifier: nextKey,
-          value: colorObj[nextKey]
-        };
-        // console.log(modifierName, j);
+          res = callback(<ISThemeLoopOnColorsColor>{
+            name: colorName,
+            variant,
+            state,
+            value: val
+          });
+          if (res === false || res === -1) {
+            triggeredStop = true;
+          }
 
-        const res = callback(<ISThemeLoopOnColorsColor>{
-          name: colorName,
-          modifier: modifierName,
-          value: colorObj[modifierName],
-          previous,
-          next
-        });
-        if (res === false || res === -1) {
-          triggeredStop = true;
+        } else {
+          Object.keys(val).forEach(stateName => {
+            res = callback(<ISThemeLoopOnColorsColor>{
+              name: colorName,
+              variant: variantOrStateName,
+              state: stateName,
+              value: val[stateName]
+            });
+            if (res === false || res === -1) {
+              triggeredStop = true;
+            }
+          });
         }
       });
     });

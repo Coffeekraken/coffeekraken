@@ -62,7 +62,7 @@ a:active {
 
 .s-theme--dark,
 .s-tooltip:not(.s-theme--dark .s-tooltip) {
-  @sugar.theme(dark);
+  /* @sugar.theme(dark); */
 }
 
 [class*='s-btn'] {

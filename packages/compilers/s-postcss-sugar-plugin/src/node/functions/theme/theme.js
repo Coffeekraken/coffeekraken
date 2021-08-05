@@ -20,7 +20,7 @@ postcssSugarPluginThemeInterface.definition = {
     }
 };
 export { postcssSugarPluginThemeInterface as interface };
-export default function color({ params }) {
+export default function theme({ params }) {
     const finalParams = Object.assign({}, params);
     if (finalParams.return === 'var') {
         return __themeVar(finalParams.dotPath, finalParams.fallback);

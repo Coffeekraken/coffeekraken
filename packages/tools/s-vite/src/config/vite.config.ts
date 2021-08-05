@@ -37,7 +37,9 @@ export default {
     host: '127.0.0.1',
     port: 3000,
     hostname: 'http://[config.vite.server.host]:[config.vite.server.port]',
-    proxy: {},
+    proxy: {
+      '/api/config': 'http://localhost:[config.frontendServer.port]',
+    },
     disableGlobbing: false
   },
   css: {},

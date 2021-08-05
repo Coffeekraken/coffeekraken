@@ -14,7 +14,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     main: {
-      default: '#787987',
+      color: '#787987',
       '...': '[theme.colorStates]',
       text: '--darken 20',
       background: '--lighten 50'
@@ -32,7 +32,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     ui: {
-      default: '#787987',
+      color: '#787987',
       '...': '[theme.colorStates]'
     },
 
@@ -48,7 +48,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     accent: {
-      default: '#ffbb00',
+      color: '#ffbb00',
       '...': '[theme.colorStates]'
     },
 
@@ -64,7 +64,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     complementary: {
-      default: '#5100ff',
+      color: '#5100ff',
       '...': '[theme.colorStates]'
     },
 
@@ -80,7 +80,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     success: {
-      default: '#91ff00',
+      color: '#91ff00',
       '...': '[theme.colorStates]'
     },
 
@@ -96,7 +96,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     warning: {
-      default: '#ffd500',
+      color: '#ffd500',
       '...': '[theme.colorStates]'
     },
 
@@ -112,7 +112,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     error: {
-      default: '#ff003b',
+      color: '#ff003b',
       '...': '[theme.colorStates]'
     },
 
@@ -128,7 +128,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     info: {
-      default: '#00ffff',
+      color: '#00ffff',
       '...': '[theme.colorStates]',
       text: '--lighten 20'
     },
@@ -145,7 +145,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     extension: {
-      default: '[theme.color.accent.default]',
+      color: '[theme.color.accent.color]',
       blade: '#ff2d20',
       php: '#8892BF',
       js: '#f7df1e',

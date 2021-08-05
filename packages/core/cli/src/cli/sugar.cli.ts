@@ -15,6 +15,7 @@ import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __fs from 'fs';
 import __path from 'path';
+import __STheme from '@coffeekraken/s-theme';
 
 export interface ISSugarCliAvailableCliObj {
   packageJson: any;

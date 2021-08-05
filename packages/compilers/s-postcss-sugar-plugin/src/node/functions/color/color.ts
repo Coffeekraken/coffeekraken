@@ -6,7 +6,7 @@ import __theme from '../../utils/theme';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
 import __minifyVar from '../../utils/minifyVar';
 
-class ColorModifierInterface extends __SInterface {
+class colorVariantNameInterface extends __SInterface {
   static definition = {
     saturate: {
       type: 'Number|String',
@@ -43,11 +43,11 @@ class postcssSugarPluginColorInterface extends __SInterface {
   static definition = {
     color: {
       type: 'String',
-      alias: 'n'
+      alias: 'c'
     },
-    modifier: {
+    variant: {
       type: 'String',
-      alias: 'm'
+      alias: 'v'
     }
   };
 }
@@ -55,7 +55,7 @@ export { postcssSugarPluginColorInterface as interface };
 
 export interface IPostcssSugarPluginColorParams {
   name: string;
-  modifier: string;
+  variant: string;
 }
 
 export default function color({
@@ -65,7 +65,7 @@ export default function color({
 }) {
   const finalParams: IPostcssSugarPluginColorParams = {
     color: '',
-    modifier: undefined,
+    variant: undefined,
     ...params
   };
 
@@ -73,7 +73,7 @@ export default function color({
   if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
   let colorName = finalParams.color;
-  let colorModifier = finalParams.modifier ? finalParams.modifier : 'default';
+  let colorVariantName = finalParams.variant ? finalParams.variant : 'default';
   let colorStateName = '';
 
   const nameParts = finalParams.color.split(':');
@@ -84,30 +84,30 @@ export default function color({
   }
 
   let modifierParams = {};
-  if (finalParams.modifier && finalParams.modifier.match(/^--/)) {
-    modifierParams = ColorModifierInterface.apply(finalParams.modifier);
+  if (finalParams.variant && finalParams.variant.match(/^--/)) {
+    modifierParams = colorVariantNameInterface.apply(finalParams.variant);
   } else if (
-    finalParams.modifier &&
-    finalParams.modifier.trim().match(/[a-zA-Z0-9_-]+/)
+    finalParams.variant &&
+    finalParams.variant.trim().match(/[a-zA-Z0-9_-]+/)
   ) {
-    colorModifier = finalParams.modifier;
+    colorVariantName = finalParams.variant;
   }
 
   if (__isColor(colorName)) {
     const color = new __SColor(colorName);
-    if (finalParams.modifier) {
-      color.apply(finalParams.modifier);
+    if (finalParams.variant) {
+      color.apply(finalParams.variant);
     }
     return color.toString();
   } else {
-    const colorVar = `--s-theme-color-${colorName}-default`;
-
-    let colorModifierVar = `--s-theme-color-${colorName}`;
+    const colorVar = `--s-theme-color-${colorName}`;
+   
+    let colorVariantNameVar = `--s-theme-color-${colorName}`;
     if (colorStateName) {
-      colorModifierVar += `-${colorStateName}`;
+      colorVariantNameVar += `-${colorStateName}`;
     }
-    if (finalParams.modifier && !finalParams.modifier.match(/^--/)) {
-      colorModifierVar += `-${colorModifier}`;
+    if (finalParams.variant && !finalParams.variant.match(/^--/)) {
+      colorVariantNameVar += `-${colorVariantName}`;
     }
 
     let finalValue = colorVar;
@@ -118,7 +118,7 @@ export default function color({
       ? modifierParams.desaturate * -1
       : undefined;
     if (saturationOffset === undefined) {
-      saturationOffset = `var(${__minifyVar(`${colorModifierVar}-saturationOffset`)}, 0)`;
+      saturationOffset = `var(${colorVariantNameVar}-saturation-offset, 0)`;
     }
 
     let lightnessOffset = modifierParams.lighten
@@ -127,19 +127,19 @@ export default function color({
       ? modifierParams.darken * -1
       : undefined;
     if (lightnessOffset === undefined)
-      lightnessOffset = `var(${__minifyVar(`${colorModifierVar}-lightnessOffset`)}, 0)`;
+      lightnessOffset = `var(${__minifyVar(`${colorVariantNameVar}-lightness-offset`)}, 0)`;
 
     let alpha = modifierParams.alpha !== undefined ? modifierParams.alpha : 1;
 
     finalValue = `hsla(
       calc(
-        var(${__minifyVar(`${colorVar}-h`)}, 0)
+        var(${colorVar}-h, 0)
         +
-        var(${__minifyVar(`${colorModifierVar}-spin`)} ,${modifierParams.spin ?? 0})
+        var(${colorVariantNameVar}-spin ,${modifierParams.spin ?? 0})
       ),
       calc(
         (
-          var(${__minifyVar(`${colorVar}-s`)}, 0)
+          var(${colorVar}-s, 0)
           + 
           ${saturationOffset}
         )
@@ -147,13 +147,13 @@ export default function color({
       ),
       calc(
         (
-           var(${__minifyVar(`${colorVar}-l`)}, 0)
+          var(${colorVar}-l, 0)
           +
           ${lightnessOffset}
         )
         * 1%
       ),
-      var(${__minifyVar(`${colorModifierVar}-a`)}, ${alpha})
+      var(${colorVariantNameVar}-a, ${alpha})
     )`;
 
     finalValue = finalValue

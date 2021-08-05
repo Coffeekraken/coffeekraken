@@ -33,43 +33,47 @@ export default function ({ params, atRule, replaceWith }) {
   colors.forEach((colorName) => {
     const colorObj = colorsObj[colorName];
 
-    colors.forEach((innerColorName) => {
+    // colors.forEach((innerColorName) => {
 
-      if (innerColorName === colorName) return;
+    //   if (innerColorName === colorName) return;
 
-      cssArray.push(
-            [
-              `/**`,
-              ` * @name           s-color:${colorName}->${innerColorName}`,
-              ` * @namespace      sugar.css.color.${innerColorName}`,
-              ` * @type           CssClass`,
-              ` * @platform       css`,
-              ` * @status         beta`,
-              ` *`,
-              ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
-              ` *`,
-              ` * @example        html`,
-              ` * <h1 class="s-color\:${colorName}->${innerColorName}">`,
-              ` *     <span class="s-color\:${colorName}">Something cool</span>`,
-              ` * </h1>`,
-              ` */`,
-              `[class*="s-color--${colorName}->${innerColorName}"] {`,
-              ` @sugar.color.remap(${colorName}, ${innerColorName})`,
-              `}`
-            ].join('\n')
-          );
-    });
+    //   cssArray.push(
+    //         [
+    //           `/**`,
+    //           ` * @name           s-color:${colorName}->${innerColorName}`,
+    //           ` * @namespace      sugar.css.color.${innerColorName}`,
+    //           ` * @type           CssClass`,
+    //           ` * @platform       css`,
+    //           ` * @status         beta`,
+    //           ` *`,
+    //           ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
+    //           ` *`,
+    //           ` * @example        html`,
+    //           ` * <h1 class="s-color\:${colorName}->${innerColorName}">`,
+    //           ` *     <span class="s-color\:${colorName}">Something cool</span>`,
+    //           ` * </h1>`,
+    //           ` */`,
+    //           `[class*="s-color--${colorName}->${innerColorName}"] {`,
+    //           ` @sugar.color.remap(${colorName}, ${innerColorName})`,
+    //           `}`
+    //         ].join('\n')
+    //       );
+    // });
 
     Object.keys(colorObj).forEach((colorVariantName) => {
-      if (colorVariantName.match(/-[hslrgba]$/)) return;
+      // if (colorVariantName.match(/-[hslrgba]$/)) return;
 
       let modifierStr = '';
-      if (colorVariantName.match(/^default/)) {
+      if (colorVariantName.match(/^color/)) {
         modifierStr = ``;
         colorVariantName = '';
       } else {
         modifierStr = `-${colorVariantName}`;
+
+        const obj = colorObj[colorVariantName];
+        if (!obj || obj.r === undefined || obj.g === undefined || obj.b === undefined) return;
       }
+      
       
       cssArray.push(
         [

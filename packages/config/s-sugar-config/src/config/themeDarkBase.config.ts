@@ -4,9 +4,11 @@ export default {
     colorStates: {
         text: '--lighten 50',
         placeholder: '--lighten 20',
-        surface: '--darken 20',
         foreground: '--lighten 50',
+        surface: '--darken 20',
+        surfaceForeground: '--darken 0',
         background: '--darken 40',
+        backgroundForeground: '--darken 0',
         border: '--darken 25',
         gradientStart: '--lighten 0',
         gradientEnd: '--darken 20',

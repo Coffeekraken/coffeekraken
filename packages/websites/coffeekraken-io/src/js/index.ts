@@ -2,6 +2,7 @@ import '@coffeekraken/s-inline-svg-component';
 import "@coffeekraken/s-request-component";
 import __SCodeExampleComponent, { webcomponent as __SCodeExampleWebcomponent } from "@coffeekraken/s-code-example-component";
 import __SActivateComponent, { webcomponent as __SActivateWebcomponent } from "@coffeekraken/s-activate-component";
+import __SConfigExplorer, { webcomponent as __SConfigExplorerWebcomponent } from "@coffeekraken/s-config-explorer-component";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
@@ -29,6 +30,7 @@ __SComponentUtils.setDefaultProps('s-code-example', {
 // webcomponents
 __SCodeExampleWebcomponent();
 __SActivateWebcomponent();
+__SConfigExplorerWebcomponent();
 
 // features
 import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';

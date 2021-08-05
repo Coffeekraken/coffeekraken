@@ -84,7 +84,7 @@ export default function ({
         } 
     `);
 
-    Object.keys(__theme().config('color')).forEach((colorName) => {
+    Object.keys(__theme().baseColors()).forEach((colorName) => {
     vars.push(`/**
         * @name           s-blockquote:${colorName}
         * @namespace      sugar.css.ui.blockquote

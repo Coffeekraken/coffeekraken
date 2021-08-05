@@ -701,8 +701,7 @@ class SColor extends __SClass {
   ): SColor {
     // process params
     const intRes = __SColorApplyParamsInterface.apply(params);
-    if (intRes.hasIssues()) throw new Error(intRes.toString());
-    params = intRes.value;
+    params = intRes;
 
     let colorInstance = this;
     if (returnNewInstance) {

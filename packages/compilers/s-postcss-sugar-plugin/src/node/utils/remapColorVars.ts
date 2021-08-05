@@ -4,47 +4,34 @@ import __minifyVar from '../utils/minifyVar';
 import minifyVar from '../utils/minifyVar';
 
 export default function (from: string, to: string): string[] {
-  const flattenedTheme = __flatten(__theme().config(`.`));
 
   let vars: string[] = [];
 
-let fromVars: string[] = [],
-      toVars: string[] = [];
+  // protect from remaping same colors
+  if (from === to) return [];
 
-  // let vars: string[] = [];
-  Object.keys(flattenedTheme).forEach((key) => {
-    
-    if (key.includes(`color.${from}`)) {
-        const internalColorKey = key.replace(`color.${from}.`, '');
-        fromVars.push(internalColorKey);
-    } else if (key.includes(`color.${to}`)) {
-        const internalColorKey = key.replace(`color.${to}.`, '');
-        toVars.push(internalColorKey);
+  let fromVariable, toVariable;
+
+  const baseColors = __theme().baseColors();
+
+  Object.keys(baseColors).forEach(colorName => {
+    const colorObj = baseColors[colorName];
+    if (colorName === from && !fromVariable) {
+      fromVariable = colorObj.variable;
+    } else if (colorName === to && !toVariable) {
+      toVariable = colorObj.variable;
     }
+    if (fromVariable && toVariable) return -1;
   });
 
-  fromVars.forEach(key => {
-    const varKey = key.replace(/\./gm, '-')
-      .replace(/:/gm, '-')
-      .replace(/\?/gm, '')
-      .replace(/--/gm, '-');
-
-      // console.log(varKey);
-
-      if (toVars.indexOf(key) === -1) {
-          // vars.push(`--s-theme-color-${from}-${varKey}: initial;`);
-      } else {
-          vars.push(`${__minifyVar(`--s-theme-color-${from}-${varKey}`)}: var(${minifyVar(`--s-theme-color-${to}-${varKey}`)});`);
-          toVars = toVars.filter(l => l !== key);
-      }
-  });
-
-  vars = vars.filter((v) => {
-    return (
-      !v.match(/-(saturate|desaturate|lighten|darken|help|grayscale):\s/) &&
-      !v.match(/\s0;$/)
-    );
-  });
+  vars.push([
+    `${fromVariable}-h: var(${toVariable}-h);`,
+    `${fromVariable}-s: var(${toVariable}-s);`,
+    `${fromVariable}-l: var(${toVariable}-l);`,
+    `${fromVariable}-a: var(${toVariable}-a);`,
+    `${fromVariable}-saturation-offset: var(${toVariable}-saturation-offset, 0);`,
+    `${fromVariable}-lightness-offset: var(${toVariable}-lightness-offset, 0);`,
+  ].join('\n'));
 
   return vars;
 }

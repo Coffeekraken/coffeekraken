@@ -14,7 +14,8 @@ export default {
     presets: {},
     helpers: {
         isSectionWanted: __path.resolve(__dirname(), '../node/helpers/isSectionWanted'),
-        isLicense: __path.resolve(__dirname(), '../node/helpers/isLicense')
+        isLicense: __path.resolve(__dirname(), '../node/helpers/isLicense'),
+        sanitizeValue: __path.resolve(__dirname(), '../node/helpers/sanitizeValue')
     },
     partials: {
         's-code-example': {
@@ -69,6 +70,10 @@ export default {
         'doc-menu': {
             markdown: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md'),
             html: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md')
+        },
+        'config-explorer': {
+            markdown: __path.resolve(__dirname(), '../partials/configExplorer/configExplorer.md'),
+            html: __path.resolve(__dirname(), '../partials/configExplorer/configExplorer.html')
         },
         'recipes-list': {
             markdown: __path.resolve(__dirname(), '../partials/recipesList/recipesList.md'),

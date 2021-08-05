@@ -20,6 +20,7 @@ import __isDirectory from '@coffeekraken/sugar/node/is/directory';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
 import __SDocmap from '@coffeekraken/s-docmap';
+import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 
 import __sCodeExampleToken from './tokens/sCodeExampleToken';
 
@@ -417,6 +418,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                 // take some datas like packagejson, etc...
                 const viewData = {
                     config: __SSugarConfig.get('.'),
+                    flatConfig: __flatten(__SSugarConfig.get('.')),
                     docMenu: (await new __SDocmap().read()).menu,
                     time: {
                         year: new Date().getFullYear(),

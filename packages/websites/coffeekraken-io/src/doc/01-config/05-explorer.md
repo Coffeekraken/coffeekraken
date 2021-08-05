@@ -12,6 +12,6 @@
 
 {{#> layout-doc }}
 
-
+{{#> config-explorer}}{{/config-explorer}}
 
 {{/layout-doc }}

@@ -31,7 +31,7 @@ export interface IPostcssSugarPluginThemeParams {
   fallback: boolean;
 }
 
-export default function color({
+export default function theme({
   params
 }: {
   params: Partial<IPostcssSugarPluginThemeParams>;

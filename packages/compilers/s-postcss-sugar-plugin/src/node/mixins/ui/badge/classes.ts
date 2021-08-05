@@ -101,7 +101,7 @@ export default function ({
         }
     `);
 
-    Object.keys(__theme().config('color')).forEach((colorName) => {
+    Object.keys(__theme().baseColors()).forEach((colorName) => {
       vars.push(`
         /**
          * @name        s-badge--${colorName}

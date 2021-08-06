@@ -7,7 +7,7 @@ body {
     top: 0; left: 0;
     width: 100%;
     z-index: 100;
-    background: sugar.color(main, background);
+    background: sugar.color(main, 100);
     padding: sugar.space(20) 0;
     transition: padding ease-in-out .2s;
     @sugar.depth(10);

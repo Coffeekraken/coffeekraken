@@ -4,6 +4,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __SInterface from '@coffeekraken/s-interface';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
+import __SDuration from '@coffeekraken/s-duration';
 
 class ColorModifierInterface extends __SInterface {
   static definition = {
@@ -38,21 +40,24 @@ class ColorModifierInterface extends __SInterface {
 }
 
 export function prepare(themeConfig, config) {
+
+  const duration = new __SDuration();
+
   Object.keys(themeConfig.themes).forEach((themeName) => {
     const themeObj = themeConfig.themes[themeName];
 
     let currentColorStringBase = `--s-theme-color-`;
     let currentColor;
 
-    function expandColorObj(colorObj, path = '') {
+    function expandColorObj(colorObj, path = '', baseObj = {}, baseColor = '#ff0000') {
 
       let currentColorString = currentColorStringBase + path;
+      currentColor = new __SColor(baseColor);
 
       Object.keys(colorObj).forEach((colorVariantName) => {
         const colorValue = colorObj[colorVariantName];
         
-        if (colorVariantName === 'color') {
-          currentColor = new __SColor(colorValue);
+        if (colorVariantName === 'color') {  
           return;
         }
 
@@ -60,37 +65,21 @@ export function prepare(themeConfig, config) {
 
         if (colorVariantName.match(/^:/) && __isPlainObject(colorValue)) {
 
-          colorObj[colorVariantName.replace(/^:/, '')] = expandColorObj(colorObj[colorVariantName], path + '-' + colorVariantName.replace(/^:/, ''));
+          const newObj = {
+            ...baseObj,
+            ...colorObj[colorVariantName]
+          };
+
+          colorObj[colorVariantName.replace(/^:/, '')] = expandColorObj(newObj, path + '-' + colorVariantName.replace(/^:/, ''), baseObj, baseColor);
           delete colorObj[colorVariantName];
 
         } else if (typeof colorValue === 'string' && colorValue.trim().match(/^--/)) {
 
           const modifierParams = ColorModifierInterface.apply(colorValue);
-
-          const newColor = new __SColor(currentColor).apply(modifierParams);
-
           colorObj[colorVariantName] = {
-            // original: {
-            // color: currentColor.toHex(),
-            // r: currentColor.r,
-            // g: currentColor.g,
-            // b: currentColor.b,
-            // h: currentColor.h,
-            // s: currentColor.s,
-            // l: currentColor.l,
-            // a: currentColor.a
-            // },
-            modifiers: modifierParams,
-            // color: newColor.toHex(),
-            variable: currentColorString + '-' + colorVariantName,
-            // r: newColor.r,
-            // g: newColor.g,
-            // b: newColor.b,
-            // h: newColor.h,
-            // s: newColor.s,
-            // l: newColor.l,
-            // a: newColor.a
             color: currentColor.toHex(),
+            modifiers: modifierParams,
+            variable: currentColorString + '-' + colorVariantName,
             r: currentColor.r,
             g: currentColor.g,
             b: currentColor.b,
@@ -125,10 +114,21 @@ export function prepare(themeConfig, config) {
     if (themeObj.color) {
       Object.keys(themeObj.color).forEach((colorName) => {
         const colorObj = themeObj.color[colorName];
-        themeObj.color[colorName] = expandColorObj(colorObj, colorName);
+        if (!colorObj.color) {
+        throw new Error(`<red>[config.theme.prepare]</red> Sorry but the color ${colorName} missed the required "<yellow>color</yellow>" property...`);
+      }
+        const baseObj = __filter(Object.assign({}, colorObj), (key, value) => {
+          if (key.match(/^:/)) return false;
+          if (key === 'color') return false;
+          return true;
+        });
+        const baseColor = colorObj.color;
+        themeObj.color[colorName] = expandColorObj(colorObj, colorName, baseObj, baseColor);
       });
     }
   });
+
+  console.log(duration.end().formatedDuration);
 
   return themeConfig;
 }

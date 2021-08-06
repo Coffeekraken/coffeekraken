@@ -54,13 +54,13 @@ export default function ({
    vars.push(
     `
         ${selector} {
-            background-color: sugar.color(main, background);
+            background-color: sugar.color(main, 100);
             color: sugar.color(main, text);
             @sugar.font.family(default);
             @sugar.font.size(default);
 
           ::selection {
-            color: sugar.color(accent, text);
+            color: sugar.color(accent, 100);
             background-color: sugar.color(accent);
           }
 

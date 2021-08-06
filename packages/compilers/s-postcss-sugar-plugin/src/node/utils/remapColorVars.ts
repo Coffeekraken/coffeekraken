@@ -28,9 +28,9 @@ export default function (from: string, to: string): string[] {
     `${fromVariable}-h: var(${toVariable}-h);`,
     `${fromVariable}-s: var(${toVariable}-s);`,
     `${fromVariable}-l: var(${toVariable}-l);`,
-    `${fromVariable}-a: var(${toVariable}-a);`,
-    `${fromVariable}-saturation-offset: var(${toVariable}-saturation-offset, 0);`,
-    `${fromVariable}-lightness-offset: var(${toVariable}-lightness-offset, 0);`,
+    // `${fromVariable}-a: var(${toVariable}-a);`,
+    // `${fromVariable}-saturation-offset: var(${toVariable}-saturation-offset, 0);`,
+    // `${fromVariable}-lightness-offset: var(${toVariable}-lightness-offset, 0);`,
   ].join('\n'));
 
   return vars;

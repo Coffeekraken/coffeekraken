@@ -398,7 +398,7 @@ export default class STheme extends __SClass {
             }
           });
         } else if (val.a !== undefined && val.r !== undefined && val.g !== undefined && val.b !== undefined) {
-          variant = variantOrStateName;
+          variant = variantOrStateName;;
 
           res = callback(<ISThemeLoopOnColorsColor>{
             name: colorName,

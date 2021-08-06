@@ -43,7 +43,7 @@ export default function ({
 
   // lnf
   vars.push(`
-        color: sugar.color(ui, foreground);
+        color: sugar.color(ui, 30);
         background-color: sugar.color(ui, surface);
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
         border: sugar.color(ui, border) solid 1px;
@@ -52,22 +52,19 @@ export default function ({
         @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
 
         &::placeholder {
-          color: sugar.color(ui, placeholder);
+          color: sugar.color(ui, 80);
         }
 
-        &:hover {
+        @sugar.state.hover {
           background-color: sugar.color(ui:hover, surface);
-          color: sugar.color(ui:hover, foreground);
           border: sugar.color(ui:hover, border) solid 1px;
         }
         @sugar.state.focus {
           background-color: sugar.color(ui:focus, surface);
-          color: sugar.color(ui:focus, foreground);
           border: sugar.color(ui:focus, border) solid 1px;
         }
         @sugar.state.active {
           background-color: sugar.color(ui:active, surface);
-          color: sugar.color(ui:active, foreground);
           border: sugar.color(ui:active, border) solid 1px;
         }
   `);

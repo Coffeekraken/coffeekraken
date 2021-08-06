@@ -124,7 +124,7 @@ export default function ({
     }
 
     .hljs-params {
-        color: sugar.color(text, foreground);
+        color: sugar.color(text);
     }
 
     .hljs-bullet {
@@ -152,11 +152,11 @@ export default function ({
     }
 
     .hljs-quote {
-        color: sugar.color(ui, foreground);
+        color: sugar.color(ui, 30);
     }
 
     .hljs-comment {
-        color: sugar.color(ui, foreground);
+        color: sugar.color(ui, 30);
     }
 
     .hljs-doctag {
@@ -177,7 +177,7 @@ export default function ({
     }
 
     .hljs-attribute {
-        color: sugar.color(text, foreground);
+        color: sugar.color(text, 30);
     }
 
     .hljs-builtin-name {
@@ -197,11 +197,11 @@ export default function ({
     }
 
     .hljs-variable {
-        color: sugar.color(text, foreground);
+        color: sugar.color(text);
     }
 
     .hljs-template-variable {
-        color: sugar.color(text, foreground);
+        color: sugar.color(text);
     }
 
     .hljs-template-tag {

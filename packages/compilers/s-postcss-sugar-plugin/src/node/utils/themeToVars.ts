@@ -22,17 +22,12 @@ export default function (theme: string): string[] {
   __theme().loopOnColors(colorObj => {
     const baseVariable = colorObj.value.variable;
 
-    if (!__micromatch(`color.${colorObj.name}`, themesConfig.cssVariables).length) return;
-
-    // vars.push(`${baseVariable}-h: ${colorObj.value.original.h};`);
-      // vars.push(`${baseVariable}-s: ${colorObj.value.original.s};`);
-      // vars.push(`${baseVariable}-l: ${colorObj.value.original.l};`);
-      // // vars.push(`${baseVariable}-a: ${colorObj.value.original.a};`);
+    // if (!__micromatch(`color.${colorObj.name}`, themesConfig.cssVariables).length) return;
 
     vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
     vars.push(`${baseVariable}-s: ${colorObj.value.s};`);
     vars.push(`${baseVariable}-l: ${colorObj.value.l};`);
-    // vars.push(`${baseVariable}-a: ${colorObj.value.a};`);
+    vars.push(`${baseVariable}-a: ${colorObj.value.a};`);
 
     if (colorObj.value.modifiers) {
       if (colorObj.value.modifiers.saturate) {

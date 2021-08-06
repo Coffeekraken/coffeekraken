@@ -2,47 +2,29 @@ export default {
     extends: 'themeBase',
 
     colorStates: {
-        text: '--lighten 50',
-        placeholder: '--lighten 20',
-        foreground: '--lighten 50',
-        surface: '--darken 20',
-        surfaceForeground: '--darken 0',
-        background: '--darken 40',
-        backgroundForeground: '--darken 0',
-        border: '--darken 25',
-        gradientStart: '--lighten 0',
-        gradientEnd: '--darken 20',
+
+        '0': '--darken 50',
+        '10': '--darken 40',
+        '20': '--darken 30',
+        '30': '--darken 20',
+        '40': '--darken 10',
+        '50': '--darken 0',
+        '60': '--lighten 10',
+        '70': '--lighten 20',
+        '80': '--lighten 30',
+        '90': '--lighten 40',
+        '100': '--lighten 100',
         ':hover': {
-            text: '--lighten 50',
-            placeholder: '--lighten 25',
-            surface: '--darken 15',
-            foreground: '--lighten 50',
-            background: '--darken 40',
-            border: '--darken 20'
+            
         },
         ':focus': {
-            text: '--lighten 50',
-            placeholder: '--lighten 30',
-            surface: '--darken 15',
-            foreground: '--lighten 50',
-            background: '--darken 40',
-            border: '--darken 15'
+            
         },
         ':active': {
-            text: '--lighten 50',
-            placeholder: '--lighten 30',
-            surface: '--darken 15',
-            foreground: '--lighten 50',
-            background: '--darken 40',
-            border: '--darken 15'
+            
         },
         ':highlight': {
-            text: '--lighten 50',
-            placeholder: '--lighten 30',
-            surface: '--darken 15',
-            foreground: '--lighten 50',
-            background: '--darken 40',
-            border: '--darken 15'
+            
         }
     }
 }

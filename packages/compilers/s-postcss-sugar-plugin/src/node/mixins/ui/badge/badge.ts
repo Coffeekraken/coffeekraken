@@ -69,7 +69,7 @@ export default function ({
           ` : finalParams.style === 'outline' ? `
               color: sugar.color(ui, text);
               background-color: transparent;
-              border: solid 1px sugar.color(ui, text);
+              border: solid 1px sugar.color(ui);
           ` : ''
       : ''}
   `);

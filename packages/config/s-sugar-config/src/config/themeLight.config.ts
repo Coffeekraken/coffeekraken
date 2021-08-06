@@ -15,9 +15,7 @@ export default {
      */
     main: {
       color: '#787987',
-      '...': '[theme.colorStates]',
-      text: '--darken 20',
-      background: '--lighten 50'
+      '...': '[theme.colorStates]'
     },
 
     /**
@@ -129,8 +127,7 @@ export default {
      */
     info: {
       color: '#00ffff',
-      '...': '[theme.colorStates]',
-      text: '--lighten 20'
+      '...': '[theme.colorStates]'
     },
 
     /**

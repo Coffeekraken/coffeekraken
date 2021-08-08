@@ -50,7 +50,7 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
 
   const isArray = Array.isArray(objectOrArray);
 
-  const newObject = isArray
+  let newObject = isArray
     ? []
     : settings.cloneFirst
     ? Object.assign({}, objectOrArray)
@@ -72,7 +72,14 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
       if (isArray) {
         newObject.push(res);
       } else {
-        newObject[prop] = res;
+        if (prop === '...' && __isPlainObject(res)) {
+          newObject = {
+            ...newObject,
+            ...res
+          };
+        } else {
+          newObject[prop] = res;
+        }
       }
       return;
     }
@@ -88,7 +95,17 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
       return;
     }
     if (isArray) newObject.push(res);
-    else newObject[prop] = res;
+    else {
+      if (prop === '...' && __isPlainObject(res)) {
+        // console.log('DEFEF', res);
+        newObject = {
+          ...newObject,
+          ...res
+        };
+      } else {
+        newObject[prop] = res;
+      }
+    }
 
   });
   return newObject;

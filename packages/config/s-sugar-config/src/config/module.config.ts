@@ -6,14 +6,14 @@ export default {
      * @name        dirs
      * @namespace   sugar.config.module.resolve
      * @type        Array<String>
-     * @default     [config.storage.package.rootDir]
+     * @default     [config.storage.package.nodeModulesDir]
      *
      * Specify the directories from which to try to resolve modules
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    dirs: ['[config.storage.nodeModulesDir]'],
+    dirs: ['[config.storage.package.nodeModulesDir]'],
 
     /**
      * @name        extensions

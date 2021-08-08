@@ -1358,7 +1358,7 @@ export default {
     switch: {
       borderRadius: '[theme.ui.default.borderRadius]',
       transition: '[theme.ui.default.transition]',
-      depth: '[theme.ui..depth]',
+      depth: '[theme.ui.default.depth]',
       defaultStyle: 'default'
     },
     list: {

@@ -24,7 +24,7 @@ export default {
         '95': '--lighten 48',
         '100': '--lighten 50',
 
-        text: '[theme.colorStates.50]',
+        text: '--darken 0',
         foreground: '--lighten 50',
         background: '--lighten 50',
         backgroundForeground: '--darken 0',
@@ -56,7 +56,7 @@ export default {
           '90': '--lighten 35',
           '95': '--lighten 40',
           '100': '--lighten 45',
-          text: '[theme.colorStates.50]',
+          text: '--darken 0',
           foreground: '--lighten 50',
           background: '--lighten 50',
           backgroundForeground: '--darken 0',

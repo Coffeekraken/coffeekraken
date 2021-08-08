@@ -31,15 +31,13 @@ class ColorModifierInterface extends __SInterface {
     },
     alpha: {
       type: 'Number'
-    },
-    grayscale: {
-      type: 'Boolean',
-      default: false
     }
   };
 }
 
 export function prepare(themeConfig, config) {
+
+  console.log('PREPARE');
 
   const duration = new __SDuration();
 
@@ -52,9 +50,10 @@ export function prepare(themeConfig, config) {
     function expandColorObj(colorObj, path = '', baseObj = {}, baseColor = '#ff0000') {
 
       let currentColorString = currentColorStringBase + path;
-      currentColor = new __SColor(baseColor);
+      // currentColor = new __SColor(baseColor);
 
       Object.keys(colorObj).forEach((colorVariantName) => {
+
         const colorValue = colorObj[colorVariantName];
         
         if (colorVariantName === 'color') {  
@@ -75,35 +74,64 @@ export function prepare(themeConfig, config) {
 
         } else if (typeof colorValue === 'string' && colorValue.trim().match(/^--/)) {
 
-          const modifierParams = ColorModifierInterface.apply(colorValue);
           colorObj[colorVariantName] = {
-            color: currentColor.toHex(),
-            modifiers: modifierParams,
+            get color() {
+              if (!this._color) {
+                Object.defineProperty(this, '_color', {
+                  enumerable: false,
+                  value: new __SColor(baseColor)
+                });
+              }
+              return this._color.toHex();
+            },
+            get modifiers() {
+              if (!this._modifiers) {
+                Object.defineProperty(this, '_modifiers', {
+                  enumerable: false,
+                  value: ColorModifierInterface.apply(colorValue)
+                });
+                return this._modifiers;
+              }
+            },
             variable: currentColorString + '-' + colorVariantName,
-            r: currentColor.r,
-            g: currentColor.g,
-            b: currentColor.b,
-            h: currentColor.h,
-            s: currentColor.s,
-            l: currentColor.l,
-            a: currentColor.a
+            get r() {
+              return this.color.r;
+            },
+            get g() {
+              return this.color.g;
+            },
+            get b() {
+              return this.color.b;
+            },
+            get h() {
+              return this.color.h;
+            },
+            get s() {
+              return this.color.s;
+            },
+            get l() {
+              return this.color.l;
+            },
+            get a() {
+              return this.color.a;
+            }
           };
 
           delete colorObj[colorVariantName].modifiers.help;
 
         } else if (__isColor(colorValue)) {
-          const color = new __SColor(colorValue);
-          colorObj[colorVariantName] = {
-            color: color.toHex(),
-            variable: currentColorString + '-' + colorVariantName,
-            r: color.r,
-            g: color.g,
-            b: color.b,
-            h: color.h,
-            s: color.s,
-            l: color.l,
-            a: color.a,
-          };
+          // const color = new __SColor(colorValue);
+          // colorObj[colorVariantName] = {
+          //   color: color.toHex(),
+          //   variable: currentColorString + '-' + colorVariantName,
+          //   r: color.r,
+          //   g: color.g,
+          //   b: color.b,
+          //   h: color.h,
+          //   s: color.s,
+          //   l: color.l,
+          //   a: color.a,
+          // };
         }
       });
 
@@ -115,7 +143,7 @@ export function prepare(themeConfig, config) {
       Object.keys(themeObj.color).forEach((colorName) => {
         const colorObj = themeObj.color[colorName];
         if (!colorObj.color) {
-        throw new Error(`<red>[config.theme.prepare]</red> Sorry but the color ${colorName} missed the required "<yellow>color</yellow>" property...`);
+        throw new Error(`<red>[config.theme.prepare]</red> Sorry but the color <cyan>${colorName}</cyan> missed the required "<yellow>color</yellow>" property...`);
       }
         const baseObj = __filter(Object.assign({}, colorObj), (key, value) => {
           if (key.match(/^:/)) return false;

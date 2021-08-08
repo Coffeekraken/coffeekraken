@@ -1,15 +1,16 @@
 // @ts-nocheck
 
+import __SDuration from '@coffeekraken/s-duration';
+import __SEnv from '@coffeekraken/s-env';
+import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __applyScope from '@coffeekraken/sugar/shared/object/applyScope';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from './adapters/SConfigAdapter';
-import __SEnv from '@coffeekraken/s-env';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
-import __applyScope from '@coffeekraken/sugar/shared/object/applyScope';
 
 /**
  * @name                                            config
@@ -228,7 +229,23 @@ export default class SConfig {
       match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
       resolve(match, config) { 
         const value = __get(config, match.replace('[config.', '').replace(']', ''));
+        if (value === undefined) {
+          throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`);
+        }
         return value;
+      }
+    });
+    
+    // register the default resolver "[extends...]"
+    this._settings.resolvers.unshift({
+      match: /\[extends.[a-zA-Z0-9.\-_]+\]/gm,
+      resolve(match, config, path) { 
+        const ext = __get(config, path.slice(0,1)[0] + '.extends');
+        const res = __get(config, `${ext}.${match.replace('[extends.', '').replace(']', '')}`);
+        if (res === undefined) {
+          throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" extends config value does not exiats...`);
+        }
+        return res;
       }
     });
 
@@ -238,6 +255,9 @@ export default class SConfig {
       match: /\[packageJson.[a-zA-Z0-9.\-_]+\]/gm,
       resolve(match, config) { 
         const value = __get(packageJson, match.replace('[packageJson.', '').replace(']', ''));
+        if (value === undefined) {
+          throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" package.json value does not exiats...`);
+        }
         return value;
       }
     });
@@ -279,6 +299,9 @@ export default class SConfig {
    */
   async load(adapter = this._settings.defaultAdapter, isUpdate = false) {
 
+    console.log('start load');
+    const duration = new __SDuration();
+
     if (!this._adapters[adapter]) {
       throw new Error(
         `You try to load the config from the adapter "${adapter}" but this adapter does not exists...`
@@ -306,7 +329,7 @@ export default class SConfig {
           extendsConfig,
           configToExtends
         );
-          delete newExtendedConfig.extends;
+          // delete newExtendedConfig.extends;
 
         return newExtendedConfig;
 
@@ -326,13 +349,107 @@ export default class SConfig {
     Object.keys(config).forEach(configName => {
       config[configName] = extendsConfigIfNeeded(config[configName]);
     });
-    
+
     // resolve environment properties like @dev
     config = this._resolveEnvironments(config);
 
     this._settings.resolvers.forEach((resolverObj) => {
       config = this._resolveInternalReferences(config, config, resolverObj);
     });
+
+
+
+  let count = 0;
+
+  // const remap = [];
+
+  // __deepMap(config, ({path, value}) => {
+  //   count++;
+  //   if (path.includes('...')) {
+  //     const parts = path.split('.....');
+  //     if (parts.length !== 2) return value;
+  //     // console.log(parts);
+  //     remap.push({
+  //       src: parts[0],
+  //       prop: parts[1].split('.')[0]
+  //     });
+  //   }
+  // });
+
+  // remap.forEach(remapObj => {
+  //   const obj = __get(config, remapObj.src);
+  //   obj[remapObj.prop] = obj['...'][remapObj.prop];
+  // });
+
+
+    let called = 1;
+    function restProps(obj, level = 1, path = []) {
+
+      if (!__isPlainObject(obj)) return {};
+      if (!obj) return {};
+
+      called++;
+      
+      let newObj = {};
+
+      Object.keys(obj).forEach(key => {
+        let newValue = obj[key];
+
+        if (__isPlainObject(newValue)) {
+
+          const newPath = path.join('.').split('.');
+          newPath.push(key)
+          newValue = restProps(newValue, level+1, newPath);
+        }
+
+        if (key === '...') {
+
+
+          newObj = {
+            ...newObj,
+            ...newValue
+          };
+
+
+          // const order = Object.keys(obj);
+          // const newObj = Object.assign({}, obj);
+          // order.forEach(keyName => {
+          //   delete obj[keyName];
+          // });
+          // order.forEach(keyName => {
+          //   if (keyName === '...') {
+          //     Object.keys(newObj[keyName]).forEach(kn => {
+          //       obj[kn] = newObj[keyName][kn];
+          //     });
+          //   } else {
+          //     obj[keyName] = newObj[keyName];
+          //   }
+          // });
+        } else {
+          newObj[key] = newValue;
+        }
+
+
+      });
+
+      return newObj;
+    }
+
+
+
+    // const flatten = __flatten(config);
+    // // console.log(Object.keys(flatten));
+
+    // Object.keys(flatten).forEach(key => {
+    //   if (key.includes('...')) {
+    //     const value = flatten[key].$ref;
+
+    //     console.log(key, flatten[key], typeof value);
+    //   }
+    // })
+
+    config = restProps(Object.assign({}, config))
+
 
     if (this.constructor._registeredPrepares[this.id]) {
       for (let k=0; k<Object.keys(this.constructor._registeredPrepares[this.id]).length; k++) {
@@ -342,6 +459,9 @@ export default class SConfig {
           ](config[configKey], config);
       }
     }
+
+    console.log('end load');
+    console.log(duration.end().formatedDuration);
 
     if (config instanceof Promise) {
       throw new Error('Promise based SConfig is not already implemented...');
@@ -404,47 +524,13 @@ export default class SConfig {
   _resolveInternalReferences(originalValue, config, resolverObj, path = []) {
 
     if (__isPlainObject(originalValue)) {
-      const afterObj = {};
-      let isAfter = false;
-      Object.keys(originalValue).forEach((key) => {
-        if (key === '...') {
-          isAfter = true;
-        } else if (isAfter) {
-          afterObj[key] = originalValue[key];
-        }
-      })
-      Object.keys(originalValue).forEach((key) => {
-        if (key === '...') {
-          const val = originalValue['...'];
-          const res = this._resolveInternalReferences(
-              val,
-              config,
-              resolverObj,
-              [...path, key]
-            );
-          if (res !== val) {
-            delete originalValue['...'];
-            originalValue = __deepMerge(originalValue, res);
-          }
-        }
-      });
-
-      // apply after object
-      originalValue = __deepMerge(originalValue, afterObj);
-
-      // delete originalValue['...'];
       Object.keys(originalValue).forEach((key) => {       
-        
-        try {
-
         originalValue[key] = this._resolveInternalReferences(
           originalValue[key],
           config,
           resolverObj,
           [...path, key]
         );
-
-        } catch(e) {}
       });
     } else if (Array.isArray(originalValue)) {
       originalValue = originalValue.map((v) => {
@@ -457,12 +543,27 @@ export default class SConfig {
         if (matches.length === 1 && originalValue === matches[0]) {
           const resolvedValue = resolverObj.resolve(matches[0], config, path);
 
-          originalValue = this._resolveInternalReferences(
-            resolvedValue,
-            config,
-            resolverObj,
-            path
-          );
+          if (typeof resolvedValue === 'function') {
+
+            // console.log(path.slice(0,-1).join('.'), path.slice(-1)[0]);
+
+            Object.defineProperty(__get(config, path.slice(0,-1).join('.')), path.slice(-1)[0], {
+              get: resolvedValue,
+              set(value) {}
+            });
+            originalValue = __get(config, path.join('.'));
+
+            // console.log('SETTER', originalValue, path);
+            // originalValue = resolvedValue;
+            // return originalValue;
+          } else {
+            originalValue = this._resolveInternalReferences(
+              resolvedValue,
+              config,
+              resolverObj,
+              path
+            );
+          }
         } else {
           matches.forEach((match) => {
             const resolvedValue = this._resolveInternalReferences(

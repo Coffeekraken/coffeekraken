@@ -15,9 +15,7 @@ export default {
      */
     main: {
       color: '#776D91',
-      '...': '[theme.colorStates]',
-      text: '--lighten 50',
-      background: '--darken 42'
+      '...': '[extends.colorStates]'
     },
 
     /**
@@ -33,7 +31,7 @@ export default {
      */
     ui: {
       color: '#7a738c',
-      '...': '[theme.colorStates]'
+      '...': '[extends.colorStates]'
     },
 
     /**
@@ -49,8 +47,7 @@ export default {
      */
     accent: {
       color: '#ffbb00',
-      '...': '[theme.colorStates]',
-      gradientEnd: '--spin 345 --darken 10',
+      '...': '[extends.colorStates]'
     },
 
     /**
@@ -66,7 +63,7 @@ export default {
      */
     complementary: {
       color: '#5100ff',
-      '...': '[theme.colorStates]'
+      '...': '[extends.colorStates]'
     },
 
     /**
@@ -82,7 +79,7 @@ export default {
      */
     success: {
       color: '#91ff00',
-      '...': '[theme.colorStates]'
+      '...': '[extends.colorStates]'
     },
 
     /**
@@ -98,7 +95,7 @@ export default {
      */
     warning: {
       color: '#ffd500',
-      '...': '[theme.colorStates]'
+      '...': '[extends.colorStates]'
     },
 
     /**
@@ -114,7 +111,7 @@ export default {
      */
     error: {
       color: '#ff003b',
-      '...': '[theme.colorStates]'
+      '...': '[extends.colorStates]'
     },
 
     /**
@@ -130,8 +127,7 @@ export default {
      */
     info: {
       color: '#00ffff',
-      '...': '[theme.colorStates]',
-      text: '--lighten 20'
+      '...': '[extends.colorStates]'
     },
 
     /**

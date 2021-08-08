@@ -178,13 +178,25 @@ export default class SSugarConfig {
         {
           match: /\[theme.[a-zA-Z0-9.\-_:]+\]/gm,
           resolve(match, config, path) {
-            const themePath = path.slice(0, 3).join('.');
+
             const valuePath = match
-              .replace('[theme.', themePath + '.')
+              .replace('[theme.','')
               .replace(']', '');
 
-            const value = __get(config, valuePath);
-            return value;
+            return function() {
+              // console.log('GET', `theme.themes.${config.theme.theme}.${valuePath}`);
+              // console.log(__get(config, `theme.current.${valuePath}`));
+              return __get(config, `theme.themes.${config.theme.theme}.${valuePath}`);
+            }
+
+            //
+            // 
+            // const value = __get(config, valuePath);
+            // if (value === undefined) {
+            //   console.log(match, path, valuePath);
+            //   throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" theme value does not exiats...`);
+            // }
+            // return value;
           }
         }
       ]

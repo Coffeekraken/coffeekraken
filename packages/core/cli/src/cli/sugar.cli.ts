@@ -76,6 +76,8 @@ class SSugarCli {
 
   constructor() {
 
+    __SBench.start('sugar.cli');
+
     this._command =
       process.argv && process.argv[2] ? process.argv[2].split(' ')[0] : '';
     this._stack = this._command.split('.')[0];
@@ -119,8 +121,14 @@ class SSugarCli {
 
     (async () => {
 
+      __SBench.step('sugar.cli', 'beforeLoadConfig');
+
       // load the sugar config
       await __SSugarConfig.load();
+
+      __SBench.step('sugar.cli', 'afterLoadConfig');
+
+      console.log(__SSugarConfig.get('theme.themes.light.color.main'));
 
       // init stdio and event emitter
       this._eventEmitter = new __SEventEmitter({
@@ -140,12 +148,20 @@ class SSugarCli {
         this._newStep(true);
       }
 
+      __SBench.step('sugar.cli', 'beforeLoadSugarJson');
+
       // reading sugarJsons
       const sugarJsonInstance = new __SSugarJson();
       this._sugarJsons = await sugarJsonInstance.read();
 
+      __SBench.step('sugar.cli', 'afterLoadSugarJson');
+
+      __SBench.step('sugar.cli', 'beforeLoadAvailableCli');
+
       // init available cli
       await this._getAvailableCli();
+
+      __SBench.step('sugar.cli', 'afterLoadAvailableCli');
 
       // interactive
       if (!this._stack && !this._action && !this._args) {
@@ -159,8 +175,18 @@ class SSugarCli {
         process.exit();
       }
 
+      __SBench.step('sugar.cli', 'beforeProcess');
+      const b = __SBench.end('sugar.cli')
+      console.log(b.toString());
+
+      return;
+
       // normal process
-      this._process();
+      await this._process();
+
+      __SBench.step('sugar.cli', 'afterProcess');
+
+      __SBench.end('sugar.cli');
 
     })();
   }

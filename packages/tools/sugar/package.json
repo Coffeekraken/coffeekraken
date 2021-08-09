@@ -87,6 +87,7 @@
     "keypress": "^0.2.1",
     "lodash.clone": "^4.5.0",
     "lodash.clonedeep": "^4.5.0",
+    "memoizee": "^0.4.15",
     "micromatch": "^4.0.2",
     "minimatch": "^3.0.4",
     "mobile-detect": "^1.4.5",

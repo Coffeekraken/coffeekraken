@@ -4,7 +4,7 @@ import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/shared/is/path';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 
 /**
  * @name                  Dockblock
@@ -157,7 +157,7 @@ class SDocblock extends __SClass implements ISDocblock {
             `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`
           );
         this._source = __fs.readFileSync(source, 'utf8');
-        this._packageJson = __packageJson(source);
+        this._packageJson = __packageJsonSync(source);
       })();
     } else {
       this._source = source;

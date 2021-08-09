@@ -43,7 +43,7 @@ export default function ({
 
   // lnf
   vars.push(`
-        color: sugar.color(ui, 30);
+        color: sugar.color(ui, surfaceForeground);
         background-color: sugar.color(ui, surface);
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
         border: sugar.color(ui, border) solid 1px;
@@ -52,7 +52,7 @@ export default function ({
         @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
 
         &::placeholder {
-          color: sugar.color(ui, 80);
+          color: sugar.color(ui, placeholder);
         }
 
         @sugar.state.hover {

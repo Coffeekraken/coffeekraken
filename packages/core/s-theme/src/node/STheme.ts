@@ -122,7 +122,7 @@ export interface ISThemeLoopOnColorsColor {
   name: string;
   variant: string;
   state?: string;
-  value: ISThemeColor;
+  value: ISThemeColor | ISThemeColorModifiers;
 }
 
 export interface ISThemeLoopOnColorsCallback {
@@ -136,11 +136,10 @@ export interface ISThemeColorModifiers {
   darken: number;
   spin: number;
   alpha: number;
-  grayscale: boolean;
+  [key: string]: any;
 }
 
 export interface ISThemeColor {
-  original?: ISThemeColor,
   color: string;
   variable: string;
   r: number;
@@ -150,7 +149,7 @@ export interface ISThemeColor {
   s: number;
   l: number;
   a: number;
-  modifiers?: ISThemeColorModifiers;
+  [key: string]: any;
 }
 
 export default class STheme extends __SClass {
@@ -208,9 +207,14 @@ export default class STheme extends __SClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static _instanciatedThemes: Record<string, STheme> = {};
-  static getTheme(theme: string): STheme {
+  static getTheme(theme?: string): STheme {
+
+    theme = <string>(theme ?? __SSugarConfig.get('theme.theme'));
+
     if (this._instanciatedThemes[theme]) return this._instanciatedThemes[theme];
+
     const themes = __SSugarConfig.get('theme.themes');
+    
     if (!themes[theme])
       throw new Error(
         `<red>[${
@@ -359,7 +363,7 @@ export default class STheme extends __SClass {
    * - name       {String}        The name of the color like "primary", "secondary", etc...
    * - variant    {String}        The name of the variant like "background", "surface", etc...
    * - state      {String}        The name of the state like "hover", "active", etc...
-   * - value      {ISThemeColor}        The actual color object that
+   * - value      {ISThemeColor | ISThemeColorModifiers}        The actual color object
    *
    * @since             2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -372,56 +376,63 @@ export default class STheme extends __SClass {
       if (triggeredStop) return;
       const colorObj = colorsObj[colorName];
 
+      if (colorObj.color) {
+        const c = new __SColor(colorObj.color);
+        callback({
+          name: colorName,
+          variant: '',
+          state: '',
+          value: {
+            color: colorObj.color,
+            variable: `--s-theme-color-${colorName}`,
+            r: c.r,
+            g: c.g,
+            b: c.b,
+            h: c.h,
+            s: c.s,
+            l: c.l,
+            a: c.a
+          }
+        });
+      }
+
       Object.keys(colorObj).forEach((variantOrStateName, j) => {
         if (triggeredStop) return;
       
-        let state: string = '', variant: string = '', res;
+        let state = '', variant = '', res;
       
         const val = colorObj[variantOrStateName];
 
         if (variantOrStateName === 'color') {
-          const c = new __SColor(val);
-          res = callback({
-            name: colorName,
-            variant: '',
-            state: '',
-            value: {
-              color: val,
-              variable: `--s-theme-color-${colorName}`,
-              r: c.r,
-              g: c.g,
-              b: c.b,
-              h: c.h,
-              s: c.s,
-              l: c.l,
-              a: c.a
-            }
-          });
-        } else if (val.a !== undefined && val.r !== undefined && val.g !== undefined && val.b !== undefined) {
-          variant = variantOrStateName;;
-
-          res = callback(<ISThemeLoopOnColorsColor>{
-            name: colorName,
-            variant,
-            state,
-            value: val
-          });
-          if (res === false || res === -1) {
-            triggeredStop = true;
-          }
-
-        } else {
-          Object.keys(val).forEach(stateName => {
+        } else if (variantOrStateName.match(/^:/)) {
+          Object.keys(val).forEach(variantName => {
             res = callback(<ISThemeLoopOnColorsColor>{
               name: colorName,
-              variant: variantOrStateName,
-              state: stateName,
-              value: val[stateName]
+              state: variantOrStateName.slice(1),
+              variant: variantName,
+              value: {
+                variable: `--s-theme-color-${colorName}-${variantOrStateName.slice(1)}-${variantName}`,
+                ...val[variantName]
+              }
             });
             if (res === false || res === -1) {
               triggeredStop = true;
             }
           });
+        } else {
+          variant = variantOrStateName;
+          res = callback(<ISThemeLoopOnColorsColor>{
+            name: colorName,
+            variant,
+            state,
+            value: {
+              variable: state ? `--s-theme-color-${colorName}-${state}-${variant}` : `--s-theme-color-${colorName}-${variant}`,
+              ...val
+            }
+          });
+          if (res === false || res === -1) {
+            triggeredStop = true;
+          }
         }
       });
     });

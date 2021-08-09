@@ -31,10 +31,6 @@ class colorVariantNameInterface extends __SInterface {
     alpha: {
       type: 'Number',
       default: 1
-    },
-    grayscale: {
-      type: 'Boolean',
-      default: false
     }
   };
 }
@@ -73,7 +69,7 @@ export default function color({
   if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
   let colorName = finalParams.color;
-  let colorVariantName = finalParams.variant ? finalParams.variant : 'default';
+  let colorVariantName = finalParams.variant ? finalParams.variant : '';
   let colorStateName = '';
 
   const nameParts = finalParams.color.split(':');
@@ -102,13 +98,15 @@ export default function color({
   } else {
     const colorVar = `--s-theme-color-${colorName}`;
    
-    let colorVariantNameVar = `--s-theme-color-${colorName}`;
+    let colorVariantNameVar = `s-theme-color-${colorName}`;
     if (colorStateName) {
       colorVariantNameVar += `-${colorStateName}`;
     }
     if (finalParams.variant && !finalParams.variant.match(/^--/)) {
       colorVariantNameVar += `-${colorVariantName}`;
     }
+
+    colorVariantNameVar = '--' + colorVariantNameVar.replace(/-{2,999}/gm, '-');
 
     let finalValue = colorVar;
 
@@ -127,7 +125,7 @@ export default function color({
       ? modifierParams.darken * -1
       : undefined;
     if (lightnessOffset === undefined)
-      lightnessOffset = `var(${__minifyVar(`${colorVariantNameVar}-lightness-offset`)}, 0)`;
+      lightnessOffset = `var(${colorVariantNameVar}-lightness-offset, 0)`;
 
     let alpha = modifierParams.alpha !== undefined ? modifierParams.alpha : 1;
 

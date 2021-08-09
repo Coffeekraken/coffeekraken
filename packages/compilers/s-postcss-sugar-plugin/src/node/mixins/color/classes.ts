@@ -25,61 +25,19 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ params, atRule, replaceWith }) {
-  const colorsObj = __theme().config('color');
-
   const cssArray: string[] = [];
 
-  const colors = Object.keys(colorsObj);
-  colors.forEach((colorName) => {
-    const colorObj = colorsObj[colorName];
+  __theme().loopOnColors(colorObj => {
 
-    // colors.forEach((innerColorName) => {
+    const colorName = colorObj.name;
+    let modifierStr = '';
+    if (colorObj.variant) modifierStr = `-${colorObj.variant}`;
 
-    //   if (innerColorName === colorName) return;
-
-    //   cssArray.push(
-    //         [
-    //           `/**`,
-    //           ` * @name           s-color:${colorName}->${innerColorName}`,
-    //           ` * @namespace      sugar.css.color.${innerColorName}`,
-    //           ` * @type           CssClass`,
-    //           ` * @platform       css`,
-    //           ` * @status         beta`,
-    //           ` *`,
-    //           ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
-    //           ` *`,
-    //           ` * @example        html`,
-    //           ` * <h1 class="s-color\:${colorName}->${innerColorName}">`,
-    //           ` *     <span class="s-color\:${colorName}">Something cool</span>`,
-    //           ` * </h1>`,
-    //           ` */`,
-    //           `[class*="s-color--${colorName}->${innerColorName}"] {`,
-    //           ` @sugar.color.remap(${colorName}, ${innerColorName})`,
-    //           `}`
-    //         ].join('\n')
-    //       );
-    // });
-
-    Object.keys(colorObj).forEach((colorVariantName) => {
-      // if (colorVariantName.match(/-[hslrgba]$/)) return;
-
-      let modifierStr = '';
-      if (colorVariantName.match(/^color/)) {
-        modifierStr = ``;
-        colorVariantName = '';
-      } else {
-        modifierStr = `-${colorVariantName}`;
-
-        const obj = colorObj[colorVariantName];
-        if (!obj || obj.r === undefined || obj.g === undefined || obj.b === undefined) return;
-      }
-      
-      
-      cssArray.push(
+    cssArray.push(
         [
           `/**`,
           ` * @name           s-color:${colorName}${modifierStr}`,
-          ` * @namespace      sugar.css.color.${colorName}.${colorVariantName}`,
+          ` * @namespace      sugar.css.color.${colorName}.${colorObj.variant}`,
           ` * @type           CssClass`,
           ` * @platform       css`,
           ` * @status         beta`,
@@ -92,7 +50,7 @@ export default function ({ params, atRule, replaceWith }) {
           ` * </h1>`,
           ` */`,
           `.s-color--${colorName}${modifierStr} {`,
-          `   color: sugar.color(${colorName},${colorVariantName});`,
+          `   color: sugar.color(${colorName}, ${colorObj.variant});`,
           `}`
         ].join('\n')
       );
@@ -101,7 +59,7 @@ export default function ({ params, atRule, replaceWith }) {
         [
           `/**`,
           ` * @name           s-bg:${colorName}${modifierStr}`,
-          ` * @namespace      sugar.css.color.bg.${colorName}.${colorVariantName}`,
+          ` * @namespace      sugar.css.color.bg.${colorName}.${colorObj.variant}`,
           ` * @type           CssClass`,
           ` * @platform       css`,
           ` * @status         beta`,
@@ -114,33 +72,10 @@ export default function ({ params, atRule, replaceWith }) {
           ` * </h1>`,
           ` */`,
           `.s-bg--${colorName}${modifierStr} {`,
-          `   background-color: sugar.color(${colorName},${colorVariantName})`,
+          `   background-color: sugar.color(${colorName}, ${colorObj.variant})`,
           `}`
         ].join('\n')
       );
-    });
-
-    cssArray.push(
-      [
-        `/**`,
-        ` * @name           s-gradient:${colorName}`,
-        ` * @namespace      sugar.css.color.gradient.${colorName}`,
-        ` * @type           CssClass`,
-        ` * @platform       css`,
-        ` * @status         beta`,
-        ` *`,
-        ` * This class allows you to apply the "${colorName}" color gradient to the background of an HTMLElement`,
-        ` *`,
-        ` * @example        html`,
-        ` * <h1 class="s-gradient\:${colorName}">`,
-        ` *     Something cool`,
-        ` * </h1>`,
-        ` */`,
-        `.s-gradient--${colorName} {`,
-        `   @sugar.gradient(sugar.color(${colorName}, gradientStart), sugar.color(${colorName}, gradientEnd), $angle: 90deg, $type: linear);`,
-        `}`
-      ].join('\n')
-    );
 
   });
 

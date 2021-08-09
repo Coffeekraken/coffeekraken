@@ -20,10 +20,17 @@ import __fs from 'fs';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function readJson(path: string): any {
+const _cache = {};
+export default function readJson(path: string): any {
+
+    if (_cache[path]) return _cache[path];
+
     if (!__fs.existsSync(path)) {
         throw new Error(`<red>[readJson]</red> Sorry but the passed file path "<cyan>${path}</cyan>" does not exists...`);
     }
-    const jsonStr = __fs.readFileSync(path, 'utf8').toString();
-    return JSON.parse(jsonStr);
+    return new Promise(async (resolve, reject) => {
+        const json = (await import(path)).default;
+        _cache[path] = json;
+        resolve(json);
+    });
 }

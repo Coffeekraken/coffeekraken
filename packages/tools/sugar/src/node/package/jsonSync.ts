@@ -2,12 +2,11 @@
 
 import __packageRoot from './rootPath';
 import __fs from 'fs';
-import __readJson from '../fs/readJson';
+import __readJsonSync from '../fs/readJsonSync';
 
 /**
- * @name          json
+ * @name          jsonSync
  * @namespace            node.package
- * @async
  * @type          Function
  * @platform        ts
  * @platform        node
@@ -29,8 +28,8 @@ import __readJson from '../fs/readJson';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-const __packageJson = {};
-function json(from = process.cwd(), highest = false) {
+let __packageJson = {};
+function jsonSync(from = process.cwd(), highest = false) {
 
   const prop = highest ? 'highest' : 'default';
 
@@ -41,14 +40,11 @@ function json(from = process.cwd(), highest = false) {
   const path = `${__packageRoot(from, highest)}/package.json`;
   if (!__fs.existsSync(path)) return false;
 
-  return new Promise(async (resolve) => {
+  const json = __readJsonSync(path);
 
-    const json = await __readJson(path);
+  if (!__packageJson[from]) __packageJson[from] = {};
+  __packageJson[from][prop] = json;
 
-    if (!__packageJson[from]) __packageJson[from] = {};
-    __packageJson[from][prop] = json;
-
-    resolve(json);
-  });
+  return json;
 }
-export default json;
+export default jsonSync;

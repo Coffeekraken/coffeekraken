@@ -44,15 +44,16 @@ export default function ({
   const vars: string[] = [
     `
 .hljs {
-  display: block;
-  overflow: hidden;
-  padding: sugar.space(30);
+    display: block;
+    overflow: hidden;
+    padding: sugar.space(30);
     background-color: sugar.color(ui, surface);
+    color: sugar.color(ui, surfaceForeground);
     line-height: 1.5 !important;
 
     &,
     &.hljs-subst {
-        color: sugar.color(ui, foreground);
+        color: sugar.color(ui, surfaceForeground);
     }
 
     .hljs-selector-tag {

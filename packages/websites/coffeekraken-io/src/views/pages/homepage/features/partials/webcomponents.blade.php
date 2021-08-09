@@ -39,7 +39,7 @@ Something cool...
         </div>
     </div>
 
-    <div class="s-py:50">
+    <div class="s-pt:50">
 
         <h4 class="s-typo:h4 s-mb:50">
             Some of our webcomponents
@@ -60,7 +60,7 @@ Something cool...
             @endforeach
         </ul>
 
-        <div class="s-text:center s-pb:50">
+        <div class="s-text:center">
             <p class="s-typo:p-lead s-mx:auto s-mb:30">
                 There are just some of our webcomponents listed.<br>
                 A lot of other components are and will be available throught time. Keep updated by joining us.

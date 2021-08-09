@@ -63,7 +63,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMargin.replace(':','--')} {
-        padding: sugar.space(${spaceName});
+        padding: sugar.padding(${spaceName});
    }`);
     const clsMarginTop = `s-pt:${spaceName}`;
     vars.push(`/**
@@ -82,7 +82,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginTop.replace(':','--')} {
-        padding-top: sugar.space(${spaceName}) !important;
+        padding-top: sugar.padding(${spaceName}) !important;
    }`);
     const clsMarginBottom = `s-pb:${spaceName}`;
     vars.push(`/**
@@ -101,7 +101,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginBottom.replace(':','--')} {
-        padding-bottom: sugar.space(${spaceName}) !important;
+        padding-bottom: sugar.padding(${spaceName}) !important;
    }`);
     const clsMarginLeft = `s-pl:${spaceName}`;
     vars.push(`/**
@@ -120,7 +120,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginLeft.replace(':','--')} {
-        padding-left: sugar.space(${spaceName}) !important;
+        padding-left: sugar.padding(${spaceName}) !important;
    }`);
     const clsMarginRight = `s-pr:${spaceName}`;
     vars.push(`/**
@@ -139,7 +139,7 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginRight.replace(':','--')} {
-        padding-right: sugar.space(${spaceName}) !important;
+        padding-right: sugar.padding(${spaceName}) !important;
    }`);
     const clsMarginX = `s-px:${spaceName}`;
     vars.push(`/**
@@ -158,8 +158,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
      .${clsMarginX.replace(':','--')} {
-        padding-left: sugar.space(${spaceName}) !important;
-        padding-right: sugar.space(${spaceName}) !important;
+        padding-left: sugar.padding(${spaceName}) !important;
+        padding-right: sugar.padding(${spaceName}) !important;
    }`);
     const clsMarginY = `s-py:${spaceName}`;
     vars.push(`/**
@@ -178,8 +178,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
    .${clsMarginY.replace(':','--')} {
-        padding-top: sugar.space(${spaceName}) !important;
-        padding-bottom: sugar.space(${spaceName}) !important;
+        padding-top: sugar.padding(${spaceName}) !important;
+        padding-bottom: sugar.padding(${spaceName}) !important;
    }`);
   });
 

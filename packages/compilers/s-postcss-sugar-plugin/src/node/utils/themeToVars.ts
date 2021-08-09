@@ -14,34 +14,37 @@ export default function (theme: string): string[] {
 
   // @ts-ignore
 
-  const themesConfig = __theme().themesConfig();
+  const themeInstance = __theme(theme);
+
+      console.log(themeInstance.config('color.main'));
+
+  const themesConfig = themeInstance.themesConfig();
 
   let vars: string[] = [];
 
   // handle colors
-  __theme().loopOnColors(colorObj => {
+  themeInstance.loopOnColors(colorObj => {
     const baseVariable = colorObj.value.variable;
 
     if (!__micromatch(`color.${colorObj.name}`, themesConfig.cssVariables).length) return;
 
-    if (!colorObj.state && !colorObj.variant) {
+    if (!colorObj.state && !colorObj.variant && colorObj.value.color) {
       vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
       vars.push(`${baseVariable}-s: ${colorObj.value.s};`);
       vars.push(`${baseVariable}-l: ${colorObj.value.l};`);
-      // vars.push(`${baseVariable}-a: ${colorObj.value.a};`);
-    } else if (colorObj.value.modifiers) {
-      if (colorObj.value.modifiers.saturate) {
-        vars.push(`${baseVariable}-saturation-offset: ${colorObj.value.modifiers.saturate};`);
-      } else if (colorObj.value.modifiers.desaturate) {
-        vars.push(`${baseVariable}-saturation-offset: ${colorObj.value.modifiers.desaturate * -1};`);
+    } else if (!colorObj.value.color) {
+      if (colorObj.value.saturate) {
+        vars.push(`${baseVariable}-saturation-offset: ${colorObj.value.saturate};`);
+      } else if (colorObj.value.desaturate) {
+        vars.push(`${baseVariable}-saturation-offset: ${colorObj.value.desaturate * -1};`);
       }
-      if (colorObj.value.modifiers.lighten) {
-        vars.push(`${baseVariable}-lightness-offset: ${colorObj.value.modifiers.lighten};`);
-      } else if (colorObj.value.modifiers.darken) {
-        vars.push(`${baseVariable}-lightness-offset: ${colorObj.value.modifiers.darken * -1};`);
+      if (colorObj.value.lighten) {
+        vars.push(`${baseVariable}-lightness-offset: ${colorObj.value.lighten};`);
+      } else if (colorObj.value.darken) {
+        vars.push(`${baseVariable}-lightness-offset: ${colorObj.value.darken * -1};`);
       }
-      if (colorObj.value.modifiers.alpha >= 0 && colorObj.value.modifiers.alpha <= 1) {
-        vars.push(`${baseVariable}-a: ${colorObj.value.modifiers.alpha};`);
+      if (colorObj.value.alpha >= 0 && colorObj.value.alpha <= 1) {
+        vars.push(`${baseVariable}-a: ${colorObj.value.alpha};`);
       }
     }
   });

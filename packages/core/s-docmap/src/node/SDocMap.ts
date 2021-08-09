@@ -6,7 +6,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -359,7 +359,7 @@ class SDocMap extends __SClass implements ISDocMap {
       let finalMenu = {
         packages: {}
       };
-      const packageJson = __packageJson();
+      const packageJson = __packageJsonSync();
 
       Object.keys(docmapJsonMenuByPackage).forEach(packageName => {
 
@@ -487,7 +487,7 @@ class SDocMap extends __SClass implements ISDocMap {
       }
 
       // getting package infos
-      const packageJson = __packageJson();    
+      const packageJson = __packageJsonSync();    
 
       if (!finalParams.noExtends) {
 
@@ -664,7 +664,7 @@ class SDocMap extends __SClass implements ISDocMap {
           value: `<yellow>[install]</yellow> Installing snapshot <yellow>${__path.relative(__packageRootDir(), folderPath)}</yellow>`
         });
 
-        const packageJson = __packageJson();
+        const packageJson = __packageJsonSync();
         const packageMonoRootPath = __packageRoot(process.cwd(), true);
 
         // symlink repos from monorepo
@@ -773,7 +773,7 @@ class SDocMap extends __SClass implements ISDocMap {
         throw new Error(`<red>[${this.constructor.name}.snapshot]</red> Sorry but a docmap.json file is required in order to create a snapshot...`);
       }
 
-      const packageJson = __packageJson();
+      const packageJson = __packageJsonSync();
       const docmapJson = __readJsonSync(`${__packageRootDir()}/docmap.json`);
 
       // write the docmap

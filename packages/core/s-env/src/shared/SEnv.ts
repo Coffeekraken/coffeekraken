@@ -1,6 +1,6 @@
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 
 // @ts-ignore
 if (!__isNode() && !window.env) {
@@ -177,5 +177,5 @@ export default class SEnv {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static packageJson = __packageJson();
+  static packageJson = __packageJsonSync();
 }

@@ -7,6 +7,7 @@ import __get from '@coffeekraken/sugar/shared/object/get';
 import __fs from 'fs';
 import __path from 'path';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __memoize  from '@coffeekraken/sugar/shared/function/memoize';
 
 /**
  * @name                  sugar
@@ -177,26 +178,23 @@ export default class SSugarConfig {
       resolvers: [
         {
           match: /\[theme.[a-zA-Z0-9.\-_:]+\]/gm,
-          resolve(match, config, path) {
+          resolve(string, matches, config, path) {
 
-            const valuePath = match
-              .replace('[theme.','')
-              .replace(']', '');
-
-            return function() {
-              // console.log('GET', `theme.themes.${config.theme.theme}.${valuePath}`);
-              // console.log(__get(config, `theme.current.${valuePath}`));
-              return __get(config, `theme.themes.${config.theme.theme}.${valuePath}`);
-            }
-
-            //
-            // 
-            // const value = __get(config, valuePath);
-            // if (value === undefined) {
-            //   console.log(match, path, valuePath);
-            //   throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" theme value does not exiats...`);
-            // }
-            // return value;
+            return __memoize(() => {
+              for (let i=0; i<matches.length; i++) {
+                const match = matches[i];
+                const valuePath = match
+                  .replace('[theme.','')
+                  .replace(']', '');
+                const value = __get(config, `theme.themes.${config.theme.theme}.${valuePath}`);
+                // if (value === undefined) {
+                //   throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" theme config value does not exiats...`);
+                // }
+                if (string === match) return value;
+                string = string.replace(match, value);
+              }
+              return string;
+            });
           }
         }
       ]

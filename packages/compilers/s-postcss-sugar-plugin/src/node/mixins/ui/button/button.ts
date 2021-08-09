@@ -78,6 +78,7 @@ export default function ({
       case 'gradient':
         vars.push(`
             @sugar.gradient(sugar.color(ui, gradientStart), sugar.color(ui, gradientEnd), $angle: 90);
+            color: sugar.color(ui, foreground);
 
             &:hover, &:focus {
               @sugar.gradient(sugar.color(ui,gradientEnd), sugar.color(ui, gradientStart), $angle: 90);
@@ -90,6 +91,7 @@ export default function ({
       default:
           vars.push(`
             background-color: sugar.color(ui);
+            color: sugar.color(ui, foreground);
 
             &:hover, &:focus {
               background-color: sugar.color(ui:hover);

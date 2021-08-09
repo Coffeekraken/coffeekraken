@@ -66,6 +66,8 @@ export default function ({
     vars.unshift(':root {');
     vars.push(`@sugar.lnf.base;`);
     vars.push('}');
+  } else {
+    vars.push(`@sugar.lnf.base;`);
   }
 
   replaceWith(vars); 

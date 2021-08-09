@@ -1,4 +1,4 @@
-<!-- 
+}<!-- 
  * @name            Built-in configs
  * @namespace       doc.config
  * @type            Markdown

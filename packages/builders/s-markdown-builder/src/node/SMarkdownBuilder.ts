@@ -1,28 +1,20 @@
 import __SBuilder from '@coffeekraken/s-builder';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __path from 'path';
-import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
-import __fs from 'fs';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
-import __marked from 'marked';
-import __unescapeHtml from '@coffeekraken/sugar/shared/html/unescapeHtml';
-import __handlebars from 'handlebars';
-import __SMarkdownBuilderSCodeExampleHandlebarsHelper from './helpers/sCodeExampleHandlebarsHelper';
-import __SMarkdownBuilderShieldsioHandlebarsHelper from './helpers/shieldsioHandlebarsHelper';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
-import __isDirectory from '@coffeekraken/sugar/node/is/directory';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
-import __SDocmap from '@coffeekraken/s-docmap';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
+import __fs from 'fs';
+import __handlebars from 'handlebars';
+import __marked from 'marked';
+import __path from 'path';
+import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
 
-import __sCodeExampleToken from './tokens/sCodeExampleToken';
 
 /**
  * @name                SMarkdownBuilder

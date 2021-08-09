@@ -45,7 +45,6 @@ export default function ({
 
   vars.push(`
     @sugar.ui.base(input);
-    color: sugar.color(ui, text) !important;
   `);
   
 

@@ -22,18 +22,5 @@ const themeDefinition = {
 
 export { themeDefinition };
 export default function theme(theme?: string): __STheme {
-  if (
-    global._postcssSugarPluginThemeScopeMixinTheme &&
-    global._postcssSugarPluginThemeScopeMixinTheme.length >= 1
-  ) {
-    theme = global._postcssSugarPluginThemeScopeMixinTheme.pop();
-  } else {
-    theme = __STheme.theme;
-  }
   return __STheme.getTheme(theme);
 }
-
-// // @ts-ignore
-// if (!global._sTheme) global._sTheme = new __STheme();
-// // @ts-ignore
-// export default global._sTheme;

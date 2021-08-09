@@ -61,8 +61,13 @@ a:active {
 @sugar.platform.classes;
 
 .s-theme--dark,
-.s-tooltip:not(.s-theme--dark .s-tooltip) {
-  /* @sugar.theme(dark); */
+/* .s-tooltip:not(.s-theme--dark .s-tooltip), */
+.s-code-example {
+  @sugar.theme(dark);
+}
+
+.s-tooltip {
+  @sugar.depth(100);
 }
 
 [class*='s-btn'] {

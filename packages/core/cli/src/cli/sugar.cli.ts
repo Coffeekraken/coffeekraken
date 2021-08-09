@@ -14,8 +14,10 @@ import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __fs from 'fs';
+import __SDuration from '@coffeekraken/s-duration';
 import __path from 'path';
 import __STheme from '@coffeekraken/s-theme';
+import __packageJson from '@coffeekraken/sugar/node/package/json';
 
 export interface ISSugarCliAvailableCliObj {
   packageJson: any;
@@ -128,8 +130,6 @@ class SSugarCli {
 
       __SBench.step('sugar.cli', 'afterLoadConfig');
 
-      console.log(__SSugarConfig.get('theme.themes.light.color.main'));
-
       // init stdio and event emitter
       this._eventEmitter = new __SEventEmitter({
         metas: {
@@ -177,9 +177,7 @@ class SSugarCli {
 
       __SBench.step('sugar.cli', 'beforeProcess');
       const b = __SBench.end('sugar.cli')
-      console.log(b.toString());
-
-      return;
+      // console.log(b.toString());
 
       // normal process
       await this._process();

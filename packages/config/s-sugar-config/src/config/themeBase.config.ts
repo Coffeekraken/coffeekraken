@@ -39,6 +39,20 @@ export default {
     '3-4': 3 / 4
   },
 
+  opacity: {
+    '0': 0,
+    '10': 0.1,
+    '20': 0.2,
+    '30': 0.3,
+    '40': 0.4,
+    '50': 0.5,
+    '60': 0.6,
+    '70': 0.7,
+    '80': 0.8,
+    '90': 0.9,
+    '100': 1
+  },
+
   width: {
     '0': '0',
     '10': '10%',
@@ -1087,7 +1101,20 @@ export default {
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    90: '[theme.space.90]'
+    90: '[theme.space.90]',
+
+    /**
+     * @name            100
+     * @namespace       config.theme.themes.default.margin
+     * @type            String
+     * @default         [theme.space.100]
+     *
+     * Specify the <primary>100</s-color> space used for padding and margin
+     *
+     * @since           1.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    100: '[theme.space.100]'
   },
 
   padding: {
@@ -1232,7 +1259,20 @@ export default {
      * @since           1.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    90: '[theme.space.90]'
+    90: '[theme.space.90]',
+
+    /**
+     * @name            100
+     * @namespace       config.theme.themes.default.padding
+     * @type            String
+     * @default         [theme.space.90]
+     *
+     * Specify the <primary>100</s-color> space used for padding and padding
+     *
+     * @since           1.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    100: '[theme.space.100]'
   },
 
   media: {

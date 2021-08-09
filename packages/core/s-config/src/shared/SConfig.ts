@@ -2,7 +2,7 @@
 
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __applyScope from '@coffeekraken/sugar/shared/object/applyScope';
@@ -11,6 +11,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __SConfigAdapter from './adapters/SConfigAdapter';
+import __memoize from '@coffeekraken/sugar/shared/function/memoize';
 
 /**
  * @name                                            config
@@ -227,40 +228,56 @@ export default class SConfig {
     // register the default resolver "[config...]"
     this._settings.resolvers.unshift({
       match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
-      resolve(match, config) { 
-        const value = __get(config, match.replace('[config.', '').replace(']', ''));
-        if (value === undefined) {
-          throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`);
-        }
-        return value;
+      resolve(string, matches, config, path) { 
+
+        return __memoize(() => {
+          for (let i=0; i<matches.length; i++) {
+            const match = matches[i];
+            const value = __get(config, match.replace('[config.', '').replace(']', ''));
+              if (value === undefined) {
+                throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`);
+              }
+              if (string === match) return value;
+              string = string.replace(match, value);
+          }
+          return string;
+        });
       }
     });
     
     // register the default resolver "[extends...]"
     this._settings.resolvers.unshift({
       match: /\[extends.[a-zA-Z0-9.\-_]+\]/gm,
-      resolve(match, config, path) { 
-        const ext = __get(config, path.slice(0,1)[0] + '.extends');
-        const res = __get(config, `${ext}.${match.replace('[extends.', '').replace(']', '')}`);
-        if (res === undefined) {
-          throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" extends config value does not exiats...`);
-        }
-        return res;
+      resolve(string, matches, config, path) { 
+
+        return __memoize(() => {
+          for (let i=0; i<matches.length; i++) {
+            const match = matches[i];
+            const ext = __get(config, path.slice(0,1)[0] + '.extends');
+            const value = __get(config, `${ext}.${matches[0].replace('[extends.', '').replace(']', '')}`);
+            if (value === undefined) {
+              throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" extends config value does not exiats...`);
+            }
+            if (string === match) return value;
+            string = string.replace(match, value);
+          }
+          return string;
+        });
       }
     });
 
     // register the default resolver "[packageJson...]"
-    const packageJson = __packageJson();
-    this._settings.resolvers.unshift({
-      match: /\[packageJson.[a-zA-Z0-9.\-_]+\]/gm,
-      resolve(match, config) { 
-        const value = __get(packageJson, match.replace('[packageJson.', '').replace(']', ''));
-        if (value === undefined) {
-          throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" package.json value does not exiats...`);
-        }
-        return value;
-      }
-    });
+    // const packageJson = __packageJsonSync();
+    // this._settings.resolvers.unshift({
+    //   match: /\[packageJson.[a-zA-Z0-9.\-_]+\]/gm,
+    //   resolve(match, config) { 
+    //     const value = __get(packageJson, match.replace('[packageJson.', '').replace(']', ''));
+    //     if (value === undefined) {
+    //       throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" package.json value does not exiats...`);
+    //     }
+    //     return value;
+    //   }
+    // });
 
     Object.keys(this._adapters).forEach((adapterName) => {
       const adapterObj = this._adapters[adapterName];
@@ -299,7 +316,6 @@ export default class SConfig {
    */
   async load(adapter = this._settings.defaultAdapter, isUpdate = false) {
 
-    console.log('start load');
     const duration = new __SDuration();
 
     if (!this._adapters[adapter]) {
@@ -357,41 +373,10 @@ export default class SConfig {
       config = this._resolveInternalReferences(config, config, resolverObj);
     });
 
-
-
-  let count = 0;
-
-  // const remap = [];
-
-  // __deepMap(config, ({path, value}) => {
-  //   count++;
-  //   if (path.includes('...')) {
-  //     const parts = path.split('.....');
-  //     if (parts.length !== 2) return value;
-  //     // console.log(parts);
-  //     remap.push({
-  //       src: parts[0],
-  //       prop: parts[1].split('.')[0]
-  //     });
-  //   }
-  // });
-
-  // remap.forEach(remapObj => {
-  //   const obj = __get(config, remapObj.src);
-  //   obj[remapObj.prop] = obj['...'][remapObj.prop];
-  // });
-
-
-    let called = 1;
     function restProps(obj, level = 1, path = []) {
-
       if (!__isPlainObject(obj)) return {};
-      if (!obj) return {};
-
-      called++;
-      
+      if (!obj) return {};      
       let newObj = {};
-
       Object.keys(obj).forEach(key => {
         let newValue = obj[key];
 
@@ -403,65 +388,29 @@ export default class SConfig {
         }
 
         if (key === '...') {
-
-
           newObj = {
             ...newObj,
             ...newValue
           };
-
-
-          // const order = Object.keys(obj);
-          // const newObj = Object.assign({}, obj);
-          // order.forEach(keyName => {
-          //   delete obj[keyName];
-          // });
-          // order.forEach(keyName => {
-          //   if (keyName === '...') {
-          //     Object.keys(newObj[keyName]).forEach(kn => {
-          //       obj[kn] = newObj[keyName][kn];
-          //     });
-          //   } else {
-          //     obj[keyName] = newObj[keyName];
-          //   }
-          // });
         } else {
           newObj[key] = newValue;
         }
-
-
       });
 
       return newObj;
     }
-
-
-
-    // const flatten = __flatten(config);
-    // // console.log(Object.keys(flatten));
-
-    // Object.keys(flatten).forEach(key => {
-    //   if (key.includes('...')) {
-    //     const value = flatten[key].$ref;
-
-    //     console.log(key, flatten[key], typeof value);
-    //   }
-    // })
-
     config = restProps(Object.assign({}, config))
-
 
     if (this.constructor._registeredPrepares[this.id]) {
       for (let k=0; k<Object.keys(this.constructor._registeredPrepares[this.id]).length; k++) {
+        const dur = new __SDuration();
         const configKey = Object.keys(this.constructor._registeredPrepares[this.id])[k];
           config[configKey] = await this.constructor._registeredPrepares[this.id][
             configKey
           ](config[configKey], config);
+        // console.log(configKey, dur.end().formatedDuration);
       }
     }
-
-    console.log('end load');
-    console.log(duration.end().formatedDuration);
 
     if (config instanceof Promise) {
       throw new Error('Promise based SConfig is not already implemented...');
@@ -533,49 +482,60 @@ export default class SConfig {
         );
       });
     } else if (Array.isArray(originalValue)) {
-      originalValue = originalValue.map((v) => {
-        return this._resolveInternalReferences(v, config, resolverObj, path);
+      originalValue = new Proxy(originalValue, {
+        get: (target, name) => {
+
+          if (name === '_processed') return target._processed;
+          if (name instanceof Symbol) return target[name];
+
+          if (!target._processed) {
+            Object.defineProperty(target, '_processed', {
+              enumerable: false,
+              value: {}
+            });
+          }          
+
+          if (target._processed?.[name] !== undefined) {
+            return target._processed[name];
+          }
+
+          
+
+          const res = this._resolveInternalReferences(target[name], config, resolverObj, path);
+          // console.log(res);
+          target[name] = res;
+          target._processed[name] = res;
+          return target[name];
+        }
       });
+
+      // originalValue = originalValue.map((v) => {
+      //   return this._resolveInternalReferences(v, config, resolverObj, path);
+      // });
+
     } else if (typeof originalValue === 'string') {
       const matches = originalValue.match(resolverObj.match);
 
       if (matches && matches.length) {
-        if (matches.length === 1 && originalValue === matches[0]) {
-          const resolvedValue = resolverObj.resolve(matches[0], config, path);
+        const resolvedValue = resolverObj.resolve(originalValue, matches, config, path);
 
-          if (typeof resolvedValue === 'function') {
+        if (typeof resolvedValue === 'function') {
 
-            // console.log(path.slice(0,-1).join('.'), path.slice(-1)[0]);
+          const target = __get(config, path.slice(0,-1).join('.'));
 
-            Object.defineProperty(__get(config, path.slice(0,-1).join('.')), path.slice(-1)[0], {
+          if (Array.isArray(target)) {
+
+          } else {
+            Object.defineProperty(target, path.slice(-1)[0], {
               get: resolvedValue,
               set(value) {}
             });
-            originalValue = __get(config, path.join('.'));
-
-            // console.log('SETTER', originalValue, path);
-            // originalValue = resolvedValue;
-            // return originalValue;
-          } else {
-            originalValue = this._resolveInternalReferences(
-              resolvedValue,
-              config,
-              resolverObj,
-              path
-            );
           }
+          originalValue = __get(config, path.join('.'));
+
         } else {
-          matches.forEach((match) => {
-            const resolvedValue = this._resolveInternalReferences(
-              match,
-              config,
-              resolverObj,
-              path
-            );
-            originalValue = originalValue.replace(match, resolvedValue);
-          });
           originalValue = this._resolveInternalReferences(
-            originalValue,
+            resolvedValue,
             config,
             resolverObj,
             path

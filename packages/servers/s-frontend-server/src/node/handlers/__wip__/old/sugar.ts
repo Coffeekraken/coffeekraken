@@ -4,7 +4,7 @@ import __path from 'path';
 import __fs from 'fs';
 import __packageRootDir from '../../../path/packageRootDir';
 import __SPromise from '../../../promise/SPromise';
-import __packageJson from '../../../package/json';
+import __packageJsonSync from '../../../package/jsonSync';
 import __SugarConfig from '../../../config/sugar';
 import __STemplate from '../../../template/STemplate';
 import STemplate from '../../../template/STemplate';
@@ -31,7 +31,7 @@ import STemplate from '../../../template/STemplate';
 function sugar(req, res, settings = {}) {
   // search for the view to render
   const packageRoot = __packageRootDir();
-  const packageJson = __packageJson();
+  const packageJson = __packageJsonSync();
 
   let body, content, view, title, error;
 

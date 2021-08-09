@@ -22,104 +22,48 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ params, atRule, replaceWith }) {
-    const colorsObj = __theme().config('color');
     const cssArray = [];
-    const colors = Object.keys(colorsObj);
-    colors.forEach((colorName) => {
-        const colorObj = colorsObj[colorName];
-        // colors.forEach((innerColorName) => {
-        //   if (innerColorName === colorName) return;
-        //   cssArray.push(
-        //         [
-        //           `/**`,
-        //           ` * @name           s-color:${colorName}->${innerColorName}`,
-        //           ` * @namespace      sugar.css.color.${innerColorName}`,
-        //           ` * @type           CssClass`,
-        //           ` * @platform       css`,
-        //           ` * @status         beta`,
-        //           ` *`,
-        //           ` * This class allows you to remap the accent color to the "${innerColorName}" color `,
-        //           ` *`,
-        //           ` * @example        html`,
-        //           ` * <h1 class="s-color\:${colorName}->${innerColorName}">`,
-        //           ` *     <span class="s-color\:${colorName}">Something cool</span>`,
-        //           ` * </h1>`,
-        //           ` */`,
-        //           `[class*="s-color--${colorName}->${innerColorName}"] {`,
-        //           ` @sugar.color.remap(${colorName}, ${innerColorName})`,
-        //           `}`
-        //         ].join('\n')
-        //       );
-        // });
-        Object.keys(colorObj).forEach((colorVariantName) => {
-            // if (colorVariantName.match(/-[hslrgba]$/)) return;
-            let modifierStr = '';
-            if (colorVariantName.match(/^color/)) {
-                modifierStr = ``;
-                colorVariantName = '';
-            }
-            else {
-                modifierStr = `-${colorVariantName}`;
-                const obj = colorObj[colorVariantName];
-                if (!obj || obj.r === undefined || obj.g === undefined || obj.b === undefined)
-                    return;
-            }
-            cssArray.push([
-                `/**`,
-                ` * @name           s-color:${colorName}${modifierStr}`,
-                ` * @namespace      sugar.css.color.${colorName}.${colorVariantName}`,
-                ` * @type           CssClass`,
-                ` * @platform       css`,
-                ` * @status         beta`,
-                ` *`,
-                ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
-                ` *`,
-                ` * @example        html`,
-                ` * <h1 class="s-color\:${colorName}${modifierStr}">`,
-                ` *     Something cool`,
-                ` * </h1>`,
-                ` */`,
-                `.s-color--${colorName}${modifierStr} {`,
-                `   color: sugar.color(${colorName},${colorVariantName});`,
-                `}`
-            ].join('\n'));
-            cssArray.push([
-                `/**`,
-                ` * @name           s-bg:${colorName}${modifierStr}`,
-                ` * @namespace      sugar.css.color.bg.${colorName}.${colorVariantName}`,
-                ` * @type           CssClass`,
-                ` * @platform       css`,
-                ` * @status         beta`,
-                ` *`,
-                ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
-                ` *`,
-                ` * @example        html`,
-                ` * <h1 class="s-bg\:${colorName}${modifierStr}">`,
-                ` *     Something cool`,
-                ` * </h1>`,
-                ` */`,
-                `.s-bg--${colorName}${modifierStr} {`,
-                `   background-color: sugar.color(${colorName},${colorVariantName})`,
-                `}`
-            ].join('\n'));
-        });
+    __theme().loopOnColors(colorObj => {
+        const colorName = colorObj.name;
+        let modifierStr = '';
+        if (colorObj.variant)
+            modifierStr = `-${colorObj.variant}`;
         cssArray.push([
             `/**`,
-            ` * @name           s-gradient:${colorName}`,
-            ` * @namespace      sugar.css.color.gradient.${colorName}`,
+            ` * @name           s-color:${colorName}${modifierStr}`,
+            ` * @namespace      sugar.css.color.${colorName}.${colorObj.variant}`,
             ` * @type           CssClass`,
             ` * @platform       css`,
             ` * @status         beta`,
             ` *`,
-            ` * This class allows you to apply the "${colorName}" color gradient to the background of an HTMLElement`,
+            ` * This class allows you to apply the "${colorName}${modifierStr}" color to an HTMLElement`,
             ` *`,
             ` * @example        html`,
-            ` * <h1 class="s-gradient\:${colorName}">`,
+            ` * <h1 class="s-color\:${colorName}${modifierStr}">`,
             ` *     Something cool`,
             ` * </h1>`,
             ` */`,
-            `.s-gradient--${colorName} {`,
-            `   @sugar.gradient(sugar.color(${colorName}, gradientStart), sugar.color(${colorName}, gradientEnd), $angle: 90deg, $type: linear);`,
+            `.s-color--${colorName}${modifierStr} {`,
+            `   color: sugar.color(${colorName}, ${colorObj.variant});`,
+            `}`
+        ].join('\n'));
+        cssArray.push([
+            `/**`,
+            ` * @name           s-bg:${colorName}${modifierStr}`,
+            ` * @namespace      sugar.css.color.bg.${colorName}.${colorObj.variant}`,
+            ` * @type           CssClass`,
+            ` * @platform       css`,
+            ` * @status         beta`,
+            ` *`,
+            ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
+            ` *`,
+            ` * @example        html`,
+            ` * <h1 class="s-bg\:${colorName}${modifierStr}">`,
+            ` *     Something cool`,
+            ` * </h1>`,
+            ` */`,
+            `.s-bg--${colorName}${modifierStr} {`,
+            `   background-color: sugar.color(${colorName}, ${colorObj.variant})`,
             `}`
         ].join('\n'));
     });
@@ -167,4 +111,4 @@ export default function ({ params, atRule, replaceWith }) {
     ].join('\n'));
     replaceWith(cssArray);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZOztBQUN6RCxrREFBVSxHQUFHLEVBQUUsQ0FBQztBQUV6QixPQUFPLEVBQUUsdUNBQXVDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxXQUFXLEVBQUU7SUFDdEQsTUFBTSxTQUFTLEdBQUcsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRTVDLE1BQU0sUUFBUSxHQUFhLEVBQUUsQ0FBQztJQUU5QixNQUFNLE1BQU0sR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQ3RDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUMzQixNQUFNLFFBQVEsR0FBRyxTQUFTLENBQUMsU0FBUyxDQUFDLENBQUM7UUFFdEMsdUNBQXVDO1FBRXZDLDhDQUE4QztRQUU5QyxtQkFBbUI7UUFDbkIsWUFBWTtRQUNaLG1CQUFtQjtRQUNuQiwwRUFBMEU7UUFDMUUsb0VBQW9FO1FBQ3BFLDJDQUEyQztRQUMzQyxzQ0FBc0M7UUFDdEMsdUNBQXVDO1FBQ3ZDLGtCQUFrQjtRQUNsQixvR0FBb0c7UUFDcEcsa0JBQWtCO1FBQ2xCLHVDQUF1QztRQUN2Qyx3RUFBd0U7UUFDeEUsZ0ZBQWdGO1FBQ2hGLHdCQUF3QjtRQUN4QixtQkFBbUI7UUFDbkIscUVBQXFFO1FBQ3JFLG9FQUFvRTtRQUNwRSxnQkFBZ0I7UUFDaEIsdUJBQXVCO1FBQ3ZCLFdBQVc7UUFDWCxNQUFNO1FBRU4sTUFB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZOztBQUN6RCxrREFBVSxHQUFHLEVBQUUsQ0FBQztBQUV6QixPQUFPLEVBQUUsdUNBQXVDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxXQUFXLEVBQUU7SUFDdEQsTUFBTSxRQUFRLEdBQWEsRUFBRSxDQUFDO0lBRTlCLE9BQU8sRUFBRSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsRUFBRTtRQUVoQyxNQUFNLFNBQVMsR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDO1FBQ2hDLElBQUksV0FBVyxHQUFHLEVBQUUsQ0FBQztRQUNyQixJQUFJLFFBQVEsQ0FBQyxPQUFPO1lBQUUsV0FBVyxHQUFHLElBQUksUUFBUSxDQUFDLE9BQU8sRUFBRSxDQUFDO1FBRTNELFFBQVEsQ0FBQyxJQUFJLENBQ1Q7WUFDRSxLQUFLO1lBQ0wsOEJBQThCLFNBQVMsR0FBRyxXQUFXLEVBQUU7WUFDdkQsc0NBQXNDLFNBQVMsSUFBSSxRQUFRLENBQUMsT0FBTyxFQUFFO1lBQ3JFLDZCQUE2QjtZQUM3Qix3QkFBd0I7WUFDeEIseUJBQXlCO1lBQ3pCLElBQUk7WUFDSiwwQ0FBMEMsU0FBUyxHQUFHLFdBQVcsMkJBQTJCO1lBQzVGLElBQUk7WUFDSix5QkFBeUI7WUFDekIsMEJBQTBCLFNBQVMsR0FBRyxXQUFXLElBQUk7WUFDckQsdUJBQXVCO1lBQ3ZCLFVBQVU7WUFDVixLQUFLO1lBQ0wsYUFBYSxTQUFTLEdBQUcsV0FBVyxJQUFJO1lBQ3hDLHlCQUF5QixTQUFTLEtBQUssUUFBUSxDQUFDLE9BQU8sSUFBSTtZQUMzRCxHQUFHO1NBQ0osQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQ2IsQ0FBQztRQUVGLFFBQVEsQ0FBQyxJQUFJLENBQ1g7WUFDRSxLQUFLO1lBQ0wsMkJBQTJCLFNBQVMsR0FBRyxXQUFXLEVBQUU7WUFDcEQseUNBQXlDLFNBQVMsSUFBSSxRQUFRLENBQUMsT0FBTyxFQUFFO1lBQ3hFLDZCQUE2QjtZQUM3Qix3QkFBd0I7WUFDeEIseUJBQXlCO1lBQ3pCLElBQUk7WUFDSiwwQ0FBMEMsU0FBUyxHQUFHLFdBQVcsNkNBQTZDO1lBQzlHLElBQUk7WUFDSix5QkFBeUI7WUFDekIsdUJBQXVCLFNBQVMsR0FBRyxXQUFXLElBQUk7WUFDbEQsdUJBQXVCO1lBQ3ZCLFVBQVU7WUFDVixLQUFLO1lBQ0wsVUFBVSxTQUFTLEdBQUcsV0FBVyxJQUFJO1lBQ3JDLG9DQUFvQyxTQUFTLEtBQUssUUFBUSxDQUFDLE9BQU8sR0FBRztZQUNyRSxHQUFHO1NBQ0osQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQ2IsQ0FBQztJQUVOLENBQUMsQ0FBQyxDQUFDO0lBRUgsUUFBUSxDQUFDLElBQUksQ0FDUDtRQUNFLEtBQUs7UUFDTCw2QkFBNkI7UUFDN0IseUNBQXlDO1FBQ3pDLDZCQUE2QjtRQUM3Qix3QkFBd0I7UUFDeEIseUJBQXlCO1FBQ3pCLElBQUk7UUFDSixnSEFBZ0g7UUFDaEgsSUFBSTtRQUNKLHlCQUF5QjtRQUN6QiwyQkFBMkI7UUFDM0IscURBQXFEO1FBQ3JELHFEQUFxRDtRQUNyRCxxREFBcUQ7UUFDckQsVUFBVTtRQUNWLEtBQUs7UUFDTCxrQ0FBa0M7UUFDbEMsOENBQThDO1FBQzlDLEdBQUc7S0FDSixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FDYixDQUFDO0lBQ0osUUFBUSxDQUFDLElBQUksQ0FDVDtRQUNFLEtBQUs7UUFDTCw4QkFBOEI7UUFDOUIsb0NBQW9DO1FBQ3BDLDZCQUE2QjtRQUM3Qix3QkFBd0I7UUFDeEIseUJBQXlCO1FBQ3pCLElBQUk7UUFDSixvSEFBb0g7UUFDcEgsSUFBSTtRQUNKLHlCQUF5QjtRQUN6Qiw0QkFBNEI7UUFDNUIscURBQXFEO1FBQ3JELHFEQUFxRDtRQUNyRCxxREFBcUQ7UUFDckQsVUFBVTtRQUNWLEtBQUs7UUFDTCxtQ0FBbUM7UUFDbkMsOENBQThDO1FBQzlDLEdBQUc7S0FDSixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FDYixDQUFDO0lBRU4sV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQ3hCLENBQUMifQ==

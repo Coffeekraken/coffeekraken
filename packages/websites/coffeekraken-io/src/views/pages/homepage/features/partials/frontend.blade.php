@@ -142,7 +142,7 @@ Cool don't you think?
         </div>
     </div>
 
-    <div class="s-text:center s-py:50 s-ml:-50">
+    <div class="s-text:center s-pt:50 s-ml:-50">
         <p class="s-typo:p-lead s-mx:auto s-mb:30">
             Keep in mind that <span class="s-color:accent">all of these features are optional</span>. This mean that
             you can work with the things you like and let the rest aside...

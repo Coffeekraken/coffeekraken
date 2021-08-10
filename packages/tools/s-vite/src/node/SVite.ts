@@ -14,6 +14,8 @@ import { build as __viteBuild, createServer as __viteServer } from 'vite';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
 import __SViteStartInterface from './start/interface/SViteStartInterface';
+import __kill from '@coffeekraken/sugar/node/process/kill';
+import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -116,7 +118,14 @@ export default class SVite extends __SClass {
           }
         }
         config.plugins = plugins;
-      
+        
+        if (!(await __isPortFree(config.server.port))) {
+          emit('log', {
+            value: `Port <yellow>${config.server.port}</yellow> already in use. Try to kill it before continue...`
+          });
+          await __kill(`:${config.server.port}`);
+        }
+
         const server = await __viteServer(config);
         const listen = await server.listen();
         emit('log', {

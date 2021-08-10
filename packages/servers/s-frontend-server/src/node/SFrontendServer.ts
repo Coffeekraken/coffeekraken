@@ -6,10 +6,12 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __compression from 'compression';
 import __express from 'express';
 import __fs from 'fs';
+import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 // import __vhost from 'vhost';
+import __kill from '@coffeekraken/sugar/node/process/kill';
 
 
 /**
@@ -188,6 +190,13 @@ export default class SFrontendServer extends __SClass {
               return pipe(handlerFn(req, res, next));
             });
           });
+        }
+
+        if (!(await __isPortFree(frontendServerConfig.port))) {
+          emit('log', {
+            value: `Port <yellow>${frontendServerConfig.port}</yellow> already in use. Try to kill it before continue...`
+          });
+          await __kill(`:${frontendServerConfig.port}`);
         }
 
         express.listen(frontendServerConfig.port, () => {

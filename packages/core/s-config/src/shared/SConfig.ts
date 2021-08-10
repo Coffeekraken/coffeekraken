@@ -373,42 +373,28 @@ export default class SConfig {
       config = this._resolveInternalReferences(config, config, resolverObj);
     });
 
-    function restProps(obj, level = 1, path = []) {
-      if (!__isPlainObject(obj)) return {};
-      if (!obj) return {};      
+    this._restPaths.forEach(path => {
+      let obj = __get(config, path);
       let newObj = {};
       Object.keys(obj).forEach(key => {
-        let newValue = obj[key];
-
-        if (__isPlainObject(newValue)) {
-
-          const newPath = path.join('.').split('.');
-          newPath.push(key)
-          newValue = restProps(newValue, level+1, newPath);
-        }
-
         if (key === '...') {
           newObj = {
             ...newObj,
-            ...newValue
+            ...obj['...']
           };
         } else {
-          newObj[key] = newValue;
+          newObj[key] = obj[key];
         }
       });
-
-      return newObj;
-    }
-    config = restProps(Object.assign({}, config))
+      __set(config, path, newObj);
+    });
 
     if (this.constructor._registeredPrepares[this.id]) {
       for (let k=0; k<Object.keys(this.constructor._registeredPrepares[this.id]).length; k++) {
-        const dur = new __SDuration();
         const configKey = Object.keys(this.constructor._registeredPrepares[this.id])[k];
-          config[configKey] = await this.constructor._registeredPrepares[this.id][
+        config[configKey] = await this.constructor._registeredPrepares[this.id][
             configKey
           ](config[configKey], config);
-        // console.log(configKey, dur.end().formatedDuration);
       }
     }
 
@@ -470,7 +456,16 @@ export default class SConfig {
     return true;
   }
 
+  _restPaths = [];
+
   _resolveInternalReferences(originalValue, config, resolverObj, path = []) {
+
+    if (path.indexOf('...') !== -1) {
+      const p = path.slice(0,path.indexOf('...'));
+      if (this._restPaths.indexOf(p.join('.')) === -1) {
+        this._restPaths.push(p.join('.'));
+      }
+    }
 
     if (__isPlainObject(originalValue)) {
       Object.keys(originalValue).forEach((key) => {       
@@ -499,10 +494,7 @@ export default class SConfig {
             return target._processed[name];
           }
 
-          
-
           const res = this._resolveInternalReferences(target[name], config, resolverObj, path);
-          // console.log(res);
           target[name] = res;
           target._processed[name] = res;
           return target[name];
@@ -592,8 +584,6 @@ export default class SConfig {
     if (Object.keys(this._adapters[adapter].config).length === 0) {
       throw new Error(`<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`);
     }
-
-    // console.log('get', path, this._adapters[adapter].config);
 
     const originalValue = __get(this._adapters[adapter].config, path);
 

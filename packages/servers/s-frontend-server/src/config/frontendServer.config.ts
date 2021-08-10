@@ -3,8 +3,6 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __SDocmap from '@coffeekraken/s-docmap';
 
 export default {
-  assets: '[config.assets]',
-
   /**
    * @name              port
    * @namespace         config.frontendServer

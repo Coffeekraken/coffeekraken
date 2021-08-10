@@ -38,20 +38,5 @@ export default {
           </script>
         `
       }
-    },
-
-    /**
-     * @name      assets
-     * @namespace     config.frontspec.default
-     * @type      Object
-     * @default       [config.assets]
-     *
-     * Specify the default assets available in the current working directory like js, css, etc...
-     *
-     * @todo      Types
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    assets: '[config.assets]'
+    }
 };

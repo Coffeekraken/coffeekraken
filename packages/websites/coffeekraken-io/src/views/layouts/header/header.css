@@ -13,7 +13,7 @@ body {
     @sugar.depth(10);
 
     @sugar.theme.when(dark) {
-        background-color: sugar.color(main, --darken 33);
+        background-color: sugar.color(main, --darken 40);
     }
 
     /* &:before {

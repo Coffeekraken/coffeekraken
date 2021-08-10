@@ -1,6 +1,5 @@
 // @ts-nocheck
-
-import server from 'http';
+import __tcpPortUsed from 'tcp-port-used';
 
 /**
  * @name            isPortFree
@@ -24,23 +23,18 @@ import server from 'http';
  * import isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
  * await isPortFree(22000); // => true
  *
- * @see             https://stackoverflow.com/a/60897593
+ * @see             https://www.npmjs.com/package/tcp-port-used
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function isPortFree(port) {
-  return new Promise(async (resolve) => {
-    server
-      .createServer()
-      .listen(port, () => {
-        try {
-          server.close();
-        } catch (e) {}
-        resolve(true);
-      })
-      .on('error', () => {
+  return new Promise((resolve) => {
+    __tcpPortUsed.check(port, '127.0.0.1')
+    .then(function(inUse) {
+      resolve(!inUse);
+    }, function() {
         resolve(false);
-      });
+    });
   });
 }
 export default isPortFree;

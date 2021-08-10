@@ -95,15 +95,17 @@ export default class SFrontspec extends __SPromise {
 
       let res = __SSugarConfig.get('frontspec');
 
-      Object.keys(res.assets).forEach(type => {
-        const typeObj = res.assets[type];
-        Object.keys(typeObj).forEach(asset => {
-          const assetObj = typeObj[asset];
-          if (assetObj.env && !__SEnv.is(assetObj.env)) {
-            __delete(res.assets, `${type}.${asset}`);
-          }
+      if (res.assets) {
+        Object.keys(res.assets).forEach(type => {
+          const typeObj = res.assets[type];
+          Object.keys(typeObj).forEach(asset => {
+            const assetObj = typeObj[asset];
+            if (assetObj.env && !__SEnv.is(assetObj.env)) {
+              __delete(res.assets, `${type}.${asset}`);
+            }
+          });
         });
-      });
+      }
 
       resolve(res);
     });

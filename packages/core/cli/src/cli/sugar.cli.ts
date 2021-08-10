@@ -18,6 +18,8 @@ import __SDuration from '@coffeekraken/s-duration';
 import __path from 'path';
 import __STheme from '@coffeekraken/s-theme';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import { Server as __nodeIpcStoreServer } from 'node-ipc-store';
 
 export interface ISSugarCliAvailableCliObj {
   packageJson: any;
@@ -120,6 +122,16 @@ class SSugarCli {
     } else {
       process.env.NODE_ENV = 'development';
     }
+
+    // if (!__isChildProcess()) {
+    //   new __nodeIpcStoreServer({
+    //     ipc: { // node-ipc config
+    //       id: "sugar-ipc-store",
+    //       // silent: true
+    //       startupTimeout: -1
+    //     },
+    //   });
+    // }
 
     (async () => {
 

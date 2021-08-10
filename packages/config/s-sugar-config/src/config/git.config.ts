@@ -20,7 +20,8 @@ export function prepare(config) {
             const email = __childProcess.execSync('git config --get user.email').toString().trim();
             config.user.email = email;
         }
-    } catch(e) {}
+    } catch(e) {
+    }
     
     return config;
 }

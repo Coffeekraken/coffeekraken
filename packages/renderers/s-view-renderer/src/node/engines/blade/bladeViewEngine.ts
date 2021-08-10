@@ -47,8 +47,6 @@ export default {
               .join('.')
               .replace('.blade.php', '');
 
-            console.log('render', settings, viewDotPath);
-
         resolve(__execPhp(__dirname() + '/compile.php', {
           rootDirs: __unique([...settings.rootDirs]),
           viewDotPath,

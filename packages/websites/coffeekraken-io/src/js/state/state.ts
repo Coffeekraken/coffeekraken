@@ -1,7 +1,7 @@
 import __SRequest from '@coffeekraken/s-request';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function loadState(): Promise<any> {
+export function getState(): any {
     const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
     return state;
 }
@@ -17,8 +17,8 @@ export async function getCurrentVersion(): string {
     return version ?? docmapJson.snapshots.slice(-1)[0];
 }
 
-export async function setState(stateObj) {
-    const state = await loadState();
+export function setState(stateObj) {
+    const state = getState();
     const newState = __deepMerge(state, stateObj);
     window.localStorage.setItem('coffeekrakenio', JSON.stringify(newState));
 }
@@ -26,7 +26,7 @@ export async function setState(stateObj) {
 let _docmap, _docmapPromise;
 export async function loadDocmap(): Promise<any> {
 
-    const state = await loadState();
+    const state = getState();
   if (_docmap) return _docmap;
 if (_docmapPromise) return (await _docmapPromise).data;  
 

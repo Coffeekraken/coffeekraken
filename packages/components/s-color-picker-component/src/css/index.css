@@ -1,0 +1,6 @@
+@sugar.init(dark);
+/* @sugar.classes; */
+
+.s-side-panel__container {
+    max-width: 400px;
+}

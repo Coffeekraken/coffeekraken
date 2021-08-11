@@ -1,6 +1,6 @@
 #search-form {
     width: 300px;
-    z-index: 99999;
+    z-index: 100;
 
     /* input {
         @sugar.theme(dark);

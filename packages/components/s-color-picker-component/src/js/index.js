@@ -1,0 +1,4 @@
+import __SColorPickerComponent from './SColorPickerComponent';
+export * from './SColorPickerComponent';
+export default __SColorPickerComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLHVCQUF1QixNQUFNLHlCQUF5QixDQUFDO0FBQzlELGNBQWMseUJBQXlCLENBQUM7QUFDeEMsZUFBZSx1QkFBdUIsQ0FBQyJ9

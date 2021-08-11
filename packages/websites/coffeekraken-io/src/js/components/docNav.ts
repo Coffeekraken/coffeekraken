@@ -9,7 +9,7 @@ import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
 import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
 import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
 
-import { loadDocmap, setState, loadState } from '../state/state';
+import { loadDocmap, setState, getState } from '../state/state';
 
 export default class DocNav extends LitElement {
 
@@ -245,7 +245,7 @@ export default class DocNav extends LitElement {
     }
     async _restoreState() {
         // return;
-        const state = await loadState();
+        const state = await getState();
         if (!state.docList) return;
         this._saved = state.docList;
     }

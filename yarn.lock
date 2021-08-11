@@ -1518,6 +1518,14 @@
   resolved "https://registry.yarnpkg.com/@sailshq/lodash/-/lodash-3.10.4.tgz#2299648a81a67f4c6ee222c6cf8e261bd9c3fa50"
   integrity sha512-YXJqp9gdHcZKAmBY/WnwFpPtNQp2huD/ME2YMurH2YHJvxrVzYsmpKw/pb7yINArRpp8E++fwbQd3ajYXGA45Q==
 
+"@simonwep/pickr@^1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@simonwep/pickr/-/pickr-1.8.1.tgz#e136cbd9c345ddbb7d71eb14af544c798165d495"
+  integrity sha512-3Q5+INWW0Py+/E9hgy0cyD0/0w/yGZbkxam6RzFVFDOEHgAqMVJR+x9znx58/ky/ZIvE/78FbH189yIC9h111A==
+  dependencies:
+    core-js "^3.12.1"
+    nanopop "^2.1.0"
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
@@ -3850,6 +3858,11 @@ core-js-compat@^3.9.0, core-js-compat@^3.9.1:
   dependencies:
     browserslist "^4.16.6"
     semver "7.0.0"
+
+core-js@^3.12.1:
+  version "3.16.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.16.1.tgz#f4485ce5c9f3c6a7cb18fa80488e08d362097249"
+  integrity sha512-AAkP8i35EbefU+JddyWi12AWE9f2N/qr/pwnDtWz4nyUIBGMJPX99ANFFRSw6FefM374lDujdtLDyhN2A/btHw==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -9116,6 +9129,11 @@ nanomatch@^1.2.9:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+nanopop@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/nanopop/-/nanopop-2.1.0.tgz#23476513cee2405888afd2e8a4b54066b70b9e60"
+  integrity sha512-jGTwpFRexSH+fxappnGQtN9dspgE2ipa1aOjtR24igG0pv6JCxImIAmrLRHX+zUF5+1wtsFVbKyfP51kIGAVNw==
 
 napi-build-utils@^1.0.1:
   version "1.0.2"

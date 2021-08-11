@@ -16,8 +16,6 @@ export default function (theme: string): string[] {
 
   const themeInstance = __theme(theme);
 
-      console.log(themeInstance.config('color.main'));
-
   const themesConfig = themeInstance.themesConfig();
 
   let vars: string[] = [];

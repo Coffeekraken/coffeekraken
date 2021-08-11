@@ -33,7 +33,8 @@ export default function ({
     display: block;
     padding: sugar.theme(ui.blockquote.padding);
     border-left: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(ui);
-    background-color: sugar.color(ui, 90);
+    color: sugar.color(ui, surfaceForeground);
+    background-color: sugar.color(ui, surface);
     border-radius: sugar.theme(ui.blockquote.borderRadius);
     @sugar.depth(sugar.theme(ui.blockquote.depth));
 

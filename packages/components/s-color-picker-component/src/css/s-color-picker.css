@@ -1,0 +1,43 @@
+.s-color-picker[default-style] {
+}
+
+.s-color-picker__picker {
+
+    /* top: auto !important;
+    left: auto !important; */
+
+    [default-style] & {
+        background: sugar.color(ui, surface);
+        overflow: hidden;
+        @sugar.depth(sugar.theme(ui.colorPicker.depth));
+        border-radius: sugar.theme(ui.colorPicker.borderRadius);
+        padding: sugar.theme(ui.colorPicker.padding);
+    }
+
+}
+
+.pickr.s-color-picker__preview {
+    display: inline-block;
+    outline: none;
+    border-radius: 0 !important;
+
+    [default-style] & {
+        transition: sugar.transition(fast);
+    }
+
+    button:focus {
+        display: none;
+    }
+
+    button {
+        width: 1em;
+        height: 1em;
+        border-radius: 0 !important;
+
+        &:before,
+        &:after {
+            border-radius: 0 !important;
+        }
+
+    }
+}

@@ -39,7 +39,7 @@ export default function sVitePluginRiotjs(riotSettings: any = {}) {
           // `   riot.mount('${result.meta.tagName}');`,
           // '});',
           // @ts-ignore
-          `____querySelectorLive('${result.meta.tagName}:not([s-mounted])', ($elm) => {`,
+          `____querySelectorLive('${result.meta.tagName}:not([mounted])', ($elm) => {`,
           // @ts-ignore
           ` const id = $elm.id || '${result.meta.tagName}-' + ____uniqid();
             $elm.setAttribute('id', id);

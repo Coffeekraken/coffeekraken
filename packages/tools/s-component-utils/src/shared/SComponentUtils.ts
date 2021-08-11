@@ -7,6 +7,8 @@ import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __injectStyle from '@coffeekraken/sugar/js/css/injectStyle';
+import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 
 /**
  * @name                SComponentUtils
@@ -40,6 +42,7 @@ export interface ISComponentUtilsDataProvider {
 
 export interface ISComponentUtilsSettings {
   interface?: __SInterface;
+  rootNode?: HTMLElement;
   display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'grid'
 }
 
@@ -49,18 +52,29 @@ export interface ISComponentUtilsCtorSettings {
 
 export class SComponentUtilsDefaultInterface extends __SInterface {
   static definition = {
+    id: {
+      type: 'String',
+      physical: true
+    },
+    mounted: {
+      type: 'Boolean',
+      default: false,
+      physical: true
+    },
     mountWhen: {
       type: 'String',
       values: ['directly', 'inViewport'],
       default: 'directly'
     },
-    adoptStyles: {
+    adoptStyle: {
       type: 'Boolean',
-      default: true
+      default: true,
+      physical: true
     },
     defaultStyle: {
         type: 'Boolean',
-      default: false
+      default: false,
+      physical: true
     }
   }
 }
@@ -111,6 +125,7 @@ export default class SComponentUtils extends __SClass {
    */
   $targets: HTMLElement[] = [];
 
+  _InterfaceToApply: __SInterface;
   _targetSelector?: string;
 
   shouldUpdate = false;
@@ -125,15 +140,17 @@ export default class SComponentUtils extends __SClass {
    * Once the component is instanciated, it will check if some defaults are specified and
    * extends them with the passed props.
    * 
-   * @param     {String}      selector      The selector to use to target elements on which these props will be applied
+   * @param     {String|String[]}      selector      The selector to use to target elements on which these props will be applied
    * @param     {Any}         props         An object of props you want to set defaults for
    * 
    * @since       2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   static _defaultProps: any = {};
-  static setDefaultProps(selector: string, props: any): void {
-    this._defaultProps[selector] = props;
+  static setDefaultProps(selector: string|string[], props: any): void {
+    Array.from(selector).forEach(sel => {
+      this._defaultProps[sel] = props;
+    });
   }
 
   /**
@@ -152,7 +169,11 @@ export default class SComponentUtils extends __SClass {
     props: any,
     settings: Partial<ISComponentUtilsCtorSettings> = {}
   ) {
-    super(__deepMerge({}, settings));
+    super(__deepMerge({
+      get rootNode() {
+        return node.shadowRoot?.querySelector('*:first-child');
+      }
+    }, settings));
 
     // name
     this.name = name;
@@ -164,9 +185,18 @@ export default class SComponentUtils extends __SClass {
       this.node = node.parentNode;
     }
 
+    let InterfaceToApply = SComponentUtilsDefaultInterface;
+    if (this._settings.interface) {
+      InterfaceToApply.definition = {
+        ...InterfaceToApply.definition,
+        ...this._settings.interface.definition
+      }
+    }
+    this._InterfaceToApply = InterfaceToApply;
+
     // props
     const defaultProps = __deepMerge(
-      this._settings.interface?.defaults() ?? {},
+      InterfaceToApply.defaults(),
       this._settings.defaultProps ?? {},
       (<any>this.constructor)._defaultProps['*'] ?? {},
       (<any>this.constructor)._defaultProps[this.name] ?? {}
@@ -194,6 +224,41 @@ export default class SComponentUtils extends __SClass {
       }
     }
 
+    const _updateProp = (propName, oldValue) => {
+      // if (this[propName] === oldValue) return;
+
+        if (this._InterfaceToApply.definition?.[propName]?.physical) {
+          if (this.node[propName] === false || this.node[propName] === undefined) {
+            if (this._settings.rootNode) {
+              this._settings.rootNode.removeAttribute(__dashCase(propName));
+            }
+            this.node.removeAttribute(__dashCase(propName));
+          } else {
+            if (this._settings.rootNode) {
+              this._settings.rootNode.setAttribute(__dashCase(propName), this.node[propName]);  
+            }
+            console.log(propName, this.node[propName]);
+            this.node.setAttribute(__dashCase(propName), this.node[propName]);
+          }
+        }
+    }
+
+    // @ts-ignore
+    const superUpdated = this.node.updated;
+    this.node.updated = (changedProperties) => {
+      changedProperties.forEach((oldValue, propName) => {
+        _updateProp(propName, oldValue);
+      });
+      superUpdated?.(changedProperties);
+    }
+    Object.keys(this.props).forEach(prop => {
+      _updateProp(prop, this.node[prop]);
+    })
+
+
+    const styleStr = this.node.constructor.getStyles();
+    this.injectStyle(styleStr.cssText);
+
     // mount component when needed
     switch(this.props.mountWhen) {
       case 'inViewport':
@@ -202,6 +267,7 @@ export default class SComponentUtils extends __SClass {
           this.mount();
         })();
       break;
+      case 'direct':
       case 'directly':
       default:
         this.mount();
@@ -209,25 +275,74 @@ export default class SComponentUtils extends __SClass {
     }
   }
 
+  attrsStr() {
+    return 'coco="jhello"';
+  }
+
+  static getFinalInterface(int?: __SInterface): __SInterface {
+    let InterfaceToApply = SComponentUtilsDefaultInterface;
+    if (int) {
+      InterfaceToApply.definition = {
+        ...InterfaceToApply.definition,
+        // @ts-ignore
+        ...int.definition
+      }
+    }
+    return InterfaceToApply;
+  }
+
+  static properties(properties: any, int: __SInterface): any {
+    const propertiesObj = {};
+    const InterfaceToApply = this.getFinalInterface(int);
+
+    // @ts-ignore
+    Object.keys(InterfaceToApply.definition).forEach(prop => {
+      // @ts-ignore
+      const definition = InterfaceToApply.definition[prop];
+      propertiesObj[prop] = {
+        ...(definition.lit ?? {})
+      };
+    });
+
+    const props = {
+      ...propertiesObj,
+      ...(properties ?? {})
+    };
+
+    return props;
+  }
+
+  static _injectedStyles: string[] = [];
+  injectStyle(css, id = this.node.tagName) {
+    if (this.constructor._injectedStyles.indexOf(id) !== -1) return;
+    this.constructor._injectedStyles.push(id);
+    __injectStyle(css);
+  }
+
+
   async mount() {
     this.shouldUpdate = true;
     this.node.requestUpdate?.(); // litelement update
+    
     await __wait();
     // adopting parent styles
-    if (this.props.adoptStyles) this._adoptStyles();
+    if (this.props.adoptStyle) this._adoptStyle();
+    Object.keys(this.props).forEach(prop => {
+      this.node[prop] = this.props[prop];
+    });
     await __wait();
     // @ts-ignore
-    this.node.setAttribute('s-mounted', true);
+    this.node.mounted = true;
+
   }
 
   static _styleNodes = [];
-  _adoptStyles() {
-
-
+  _adoptStyle() {
       const $links = document.querySelectorAll('link[rel="stylesheet"]');
       if ($links && this.node.shadowRoot) {
+
         Array.from($links).forEach(async $link => {
-          if (Array.isArray(this.props.adoptStyles) && this.props.adoptStyles.indexOf($link.id ?? '') === -1) {
+          if (Array.isArray(this.props.adoptStyle) && this.props.adoptStyle.indexOf($link.id ?? '') === -1) {
             return; // this style is not wanted...
           }
 
@@ -260,7 +375,7 @@ export default class SComponentUtils extends __SClass {
       const $styles = document.querySelectorAll('style');
       if ($styles && this.node.shadowRoot) {
         Array.from($styles).forEach($style => {
-          if (Array.isArray(this.props.adoptStyles) && this.props.adoptStyles.indexOf($style.id ?? '') === -1) {
+          if (Array.isArray(this.props.adoptStyle) && this.props.adoptStyle.indexOf($style.id ?? '') === -1) {
             return; // this style is not wanted...
           }
 
@@ -320,6 +435,21 @@ export default class SComponentUtils extends __SClass {
     }
 
     return clsString;
+  }
+
+  /**
+   * @name      isMounted
+   * @type      Function
+   * 
+   * This method returns true if the component is mounted, false if not
+   * 
+   * @return    {Boolean}       true if is mounted, false if not
+   * 
+   * @since   2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  isMounted() {
+    return this.node?.hasAttribute('mounted');
   }
 
   decodeHtml(input) {

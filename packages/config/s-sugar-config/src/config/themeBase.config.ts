@@ -1,8 +1,8 @@
 export default {
   transition: {
-    slow: 'all 6s ease-in-out',
-    default: 'all .3s ease-in-out',
-    fast: 'all .1s ease-in-out'
+    slow: 'all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)',
+    default: 'all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)',
+    fast: 'all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)'
   },
 
   layout: {
@@ -1380,6 +1380,12 @@ export default {
       transition: '[theme.ui.default.transition]',
       depth: '[theme.ui.default.depth]',
       defaultStyle: 'default'
+    },
+    colorPicker: {
+      padding: '[theme.padding.10]',
+      borderRadius: '[theme.ui.default.borderRadius]',
+      transition: '[theme.ui.default.transition]',
+      depth: '[theme.ui.default.depth]'
     },
     input: {
       padding: '[theme.ui.default.padding]',

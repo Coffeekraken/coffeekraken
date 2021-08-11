@@ -24,6 +24,8 @@
     "@coffeekraken/s-inline-svg-component": "^2.0.0",
     "@coffeekraken/s-request": "^2.0.0",
     "@coffeekraken/s-request-component": "^2.0.0",
+    "@coffeekraken/s-color-picker-component": "^2.0.0",
+    "@coffeekraken/s-side-panel-component": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "lit-element": "^2.5.1",
     "minisearch": "^3.0.4",

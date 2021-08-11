@@ -25,7 +25,7 @@ s-code-example {
   opacity: 0;
   transition: all .2s ease-out;
 
-  &[s-mounted] {
+  &[mounted] {
     opacity: 1;
   }
 }
@@ -48,6 +48,7 @@ a:active {
   fa:search:search
   fa:radiation:nothing
   fa:download:import
+  fa:cogs:settings
   fab:vuejs:vuejs
   fa:tasks:tasks
   fa:hammer:todo

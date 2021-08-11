@@ -13,19 +13,8 @@ body {
     @sugar.depth(10);
 
     @sugar.theme.when(dark) {
-        background-color: sugar.color(main, --darken 40);
+        background-color: sugar.color(main, --darken 35);
     }
-
-    /* &:before {
-        content: '';
-        display: block;
-        width: 100vw; height: 100%;
-        position: absolute;
-        left: 50%; top: 0;
-        transform: translateX(-50%);
-
-        @sugar.gradient($start: sugar.color(ui, background), $end: rgba(0,0,0,0), $angle: 180deg);
-    } */
 
     version-selector {
         margin-left: sugar.space(10);
@@ -61,6 +50,14 @@ body {
         }
     }
 
+}
+
+#settings .s-side-panel__container {
+    background-color: sugar.color(main, background);
+    min-width: 33vw;
+    overflow-y: scroll;
+    @sugar.scrollbar(accent, 2px);
+    @sugar.depth(100);
 }
 
 

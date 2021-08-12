@@ -18,6 +18,9 @@ SSidePanelComponentInterface.definition = {
     type: "Boolean",
     default: false
   },
+  triggerer: {
+    type: "String"
+  },
   closeOn: {
     type: {
       type: "Array<String>",
@@ -483,7 +486,7 @@ function hotkey(hotkey2, settings = {}) {
     hotkeys_common.unbind(hotkey2);
   });
 }
-var __css = 's-side-panel {\n    display: block;\n    position: fixed;\n    top: 0; left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 9999;\n}\n\n.s-side-panel__overlay {\n    position: absolute;\n    top: 0; left: 0;\n    z-index: 0;\n    width: 100%; height: 100%;\n\n}\n\n[default-style] .s-side-panel__overlay {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-lightness-offset, 0)) * 1%),var(--s-theme-color-main-a, 0.3));\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n        opacity: 0;\n    }\n\n[default-style][active] .s-side-panel__overlay {\n        opacity: 1;\n    }\n\n.s-side-panel__container {\n    display: none;\n    position: absolute;\n    z-index: 1;\n}\n\n[mounted] .s-side-panel__container {\n        display: block;\n    }\n\n[default-style] .s-side-panel__container {\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n    }\n\n[side="left"] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        height: 100%;\n        transform: translateX(-100%);\n    }\n\n[side="top"] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(-100%);\n    }\n\n[side="right"] .s-side-panel__container {\n        right: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        transform: translateX(100%);\n    }\n\n[side="bottom"] .s-side-panel__container {\n        left: 0;\n        bottom: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(100%);\n    }\n\n[active] .s-side-panel__container {\n        transform: translateX(0) translateY(0);\n    }\n\n.s-side-panel {\n    position: absolute;\n    top: 0; left: 0;\n    width: 100%; height: 100%;\n    pointer-events: none;\n}\n\n.s-side-panel[active] {\n        pointer-events: all;\n    }';
+var __css = 's-side-panel {\n    display: block;\n    position: fixed;\n    top: 0; left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 9999;\n    pointer-events: none;\n}\n\n    s-side-panel[active] {\n        pointer-events: all;\n    }\n\n.s-side-panel__overlay {\n    position: absolute;\n    top: 0; left: 0;\n    z-index: 0;\n    width: 100%; height: 100%;\n\n}\n\n[default-style] .s-side-panel__overlay {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-lightness-offset, 0)) * 1%),var(--s-theme-color-main-a, 0.3));\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n        opacity: 0;\n    }\n\n[default-style][active] .s-side-panel__overlay {\n        opacity: 1;\n    }\n\n.s-side-panel__container {\n    display: none;\n    position: absolute;\n    z-index: 1;\n}\n\n[mounted] .s-side-panel__container {\n        display: block;\n    }\n\n[default-style] .s-side-panel__container {\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n    }\n\n[side="left"] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        height: 100%;\n        transform: translateX(-100%);\n    }\n\n[side="top"] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(-100%);\n    }\n\n[side="right"] .s-side-panel__container {\n        right: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        transform: translateX(100%);\n    }\n\n[side="bottom"] .s-side-panel__container {\n        left: 0;\n        bottom: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(100%);\n    }\n\n[active] .s-side-panel__container {\n        transform: translateX(0) translateY(0);\n    }\n\n.s-side-panel {\n    position: absolute;\n    top: 0; left: 0;\n    width: 100%; height: 100%;\n    pointer-events: none;\n}\n\n.s-side-panel[active] {\n        pointer-events: all;\n    }';
 var __decorate = function(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
@@ -496,7 +499,6 @@ var __decorate = function(decorators, target, key, desc) {
 };
 class SSidePanel extends LitElement {
   constructor() {
-    var _a;
     super();
     this._component = void 0;
     this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
@@ -504,8 +506,8 @@ class SSidePanel extends LitElement {
       defaultProps: {}
     });
     if (this._component.props.closeOn.indexOf("click") !== -1) {
-      (_a = this.querySelector(".s-side-panel__overlay")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", (e) => {
-        if (e.target !== this)
+      this.addEventListener("click", (e) => {
+        if (this._$container.contains(e.target))
           return;
         if (this.constructor._activePanels.slice(-1)[0] !== this)
           return;
@@ -525,12 +527,20 @@ class SSidePanel extends LitElement {
       this.setAttribute("default-style", true);
     }
     this._$nodes = Array.from(this.children);
+    if (this._component.props.triggerer) {
+      const $triggerers = Array.from(document.querySelectorAll(this._component.props.triggerer));
+      $triggerers.forEach(($triggerer) => {
+        $triggerer.addEventListener("click", (e) => {
+          this.open();
+        });
+      });
+    }
+  }
+  static get properties() {
+    return __SComponentUtils.properties({}, SSidePanelComponentInterface);
   }
   static get styles() {
     return css`${unsafeCSS(__css)}`;
-  }
-  static get properties() {
-    return {active: {type: Boolean}};
   }
   set active(value) {
     this._active = value;
@@ -547,13 +557,20 @@ class SSidePanel extends LitElement {
     return this._active;
   }
   firstUpdated() {
-    const $container = this.querySelector(".s-side-panel__container");
+    this._$container = this.querySelector(".s-side-panel__container");
     this._$nodes.forEach(($node) => {
-      $container === null || $container === void 0 ? void 0 : $container.appendChild($node);
+      var _a;
+      (_a = this._$container) === null || _a === void 0 ? void 0 : _a.appendChild($node);
     });
   }
   createRenderRoot() {
     return this;
+  }
+  open() {
+    this.active = true;
+  }
+  close() {
+    this.active = false;
   }
   render() {
     return html`

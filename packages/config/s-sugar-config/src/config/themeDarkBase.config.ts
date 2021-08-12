@@ -79,14 +79,17 @@ export default {
             lighten: 50
         },
         surface: {
-          darken: 20
+          darken: 25
         },
         surfaceForeground: {
             lighten: 50
         },
+        ui: {
+          darken: 15
+        },
         border: {
           alpha: 0.2
-        },        
+        },      
         ':hover': {
           '0': {
             lighten: 55
@@ -155,7 +158,10 @@ export default {
             darken: 30
           },
           surface: {
-            darken: 18
+            darken: 23
+          },
+          ui: {
+            darken: 14
           },
           border: {
             alpha: 0.3
@@ -227,10 +233,13 @@ export default {
             darken: 30
           },
           surface: {
-            darken: 16
+            darken: 21
+          },
+          ui: {
+            darken: 13
           },
           border: {
-            alpha: 0.3
+            alpha: 0.6
           }
         },
         ':active': {
@@ -300,10 +309,13 @@ export default {
             darken: 30
           },
           surface: {
-            darken: 16
+            darken: 21
+          },
+          ui: {
+            darken: 13
           },
           border: {
-            alpha: 0.3
+            alpha: 1
           }
         }
     }

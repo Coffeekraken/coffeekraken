@@ -1,5 +1,5 @@
 import __SRequest from '@coffeekraken/s-request';
-import { html, LitElement, property } from 'lit-element';
+import { html, LitElement, property, query, queryAsync } from 'lit-element';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
 import { loadDocmap, getCurrentVersion, setState, getState } from '../state/state';
@@ -14,6 +14,12 @@ export default class CkSettings extends LitElement {
         }
     };
 
+    @queryAsync('#setting-main-color')
+    _$mainColorPicker;
+    
+    @queryAsync('#setting-accent-color')
+    _$accentColorPicker;
+
     constructor() {
         super();
         (async () => {
@@ -22,6 +28,28 @@ export default class CkSettings extends LitElement {
 
         this._restoreState();
 
+    }
+
+    async firstUpdated() {
+
+        const $root = document.querySelector(':root'),
+                $darkRoot = document.querySelector('.s-theme--dark'),
+                $theme = $darkRoot ?? $root;
+
+        const $mainColorPicker = await this._$mainColorPicker;
+        const $accentColorPicker = await this._$accentColorPicker;
+
+        $mainColorPicker.addEventListener('change', (e) => {
+            $theme.style.setProperty('--s-theme-color-main-h', e.detail.hsla.h);
+            $theme.style.setProperty('--s-theme-color-main-s', e.detail.hsla.s);
+            $theme.style.setProperty('--s-theme-color-main-l', e.detail.hsla.l);
+        });
+
+        $accentColorPicker.addEventListener('change', (e) => {
+            $theme.style.setProperty('--s-theme-color-accent-h', e.detail.hsla.h);
+            $theme.style.setProperty('--s-theme-color-accent-s', e.detail.hsla.s);
+            $theme.style.setProperty('--s-theme-color-accent-l', e.detail.hsla.l);
+        });
     }
 
     _restoreState() {
@@ -51,25 +79,60 @@ export default class CkSettings extends LitElement {
         return html`
             <div class="s-p:10">
                 <ul class="__settings s-bg:odd">
-                    <li class="s-flex s-bg:main-surface s-p:20">
-                        <label class="s-flex-item:grow" for="theme-switcher">
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="theme-switcher">
                             Dark mode
-                        </label>
-                        <label for="theme-switcher" class="s-switch:accent">
-                            <input type="checkbox" id="theme-switcher" ?checked="${this._settings.darkMode}" @change="${ (e) => {
+                            <input class="s-switch" type="checkbox" id="theme-switcher" ?checked="${this._settings.darkMode}" @change="${ (e) => {
                                 this.setDarkMode(e.target.checked);
                             } }" />
-                            <div class="s-switch-handler"></div>
-                            <script>
-                            </script>
                         </label>
                     </li>
-                    <li class="s-flex s-bg:main-surface s-p:20">
-                        <label class="s-flex-item:grow" for="setting-accent-color">
-                            Accent color
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-main-color">
+                            Main color
+                            <s-color-picker id="setting-main-color" color="#ff0000" />
                         </label>
-                        <label for="setting-accent-color">
-                            <s-color-picker color="#ff0000" />
+                    </li>
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-accent-color">
+                            Accent color
+                            <s-color-picker id="setting-accent-color" color="#ff0000" />
+                        </label>
+                    </li>
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-accent-color">
+                            Complementary color
+                            <s-color-picker id="setting-complementary-color" color="#ff0000" />
+                        </label>
+                    </li>
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-accent-color">
+                            Spread
+                            <input type="text" class="s-input" id="setting-spread" />
+                        </label>
+                    </li>
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-accent-color">
+                            Spread
+                            <input type="text" class="s-input" id="setting-spread" />
+                        </label>
+                    </li>
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-accent-color">
+                            Spread
+                            <input type="text" class="s-input" id="setting-spread" />
+                        </label>
+                    </li>
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-accent-color">
+                            Spread
+                            <input type="text" class="s-input" id="setting-spread" />
+                        </label>
+                    </li>
+                    <li class="s-bg:main-surface">
+                        <label class="s-label s-p:20" for="setting-accent-color">
+                            Spread
+                            <input type="text" class="s-input" id="setting-spread" />
                         </label>
                     </li>
                 </ul>

@@ -72,10 +72,13 @@ export default {
         },
         backgroundForeground: {},
         surface: {
-          lighten: 48
+          lighten: 49
         },
         surfaceForeground: {
 
+        },
+        ui: {
+          lighten: 49
         },
         border: {
           alpha: 0.2
@@ -164,7 +167,10 @@ export default {
           },
           backgroundForeground: {},
           surface: {
-            lighten: 47
+            lighten: 48
+          },
+          ui: {
+            lighten: 48
           },
           surfaceForeground: {},
           border: {
@@ -235,7 +241,13 @@ export default {
           },
           text: {},
           surface: {
-            lighten: 46
+            lighten: 47
+          },
+          ui: {
+          lighten: 47
+        },
+          border: {
+            alpha: 0.6
           }
         },
         ':active': {
@@ -302,7 +314,13 @@ export default {
           },
           text: {},
           surface: {
-            lighten: 46
+            lighten: 47
+          },
+          ui: {
+            lighten: 47
+          },
+          border: {
+            alpha: 1
           }
         }
   }

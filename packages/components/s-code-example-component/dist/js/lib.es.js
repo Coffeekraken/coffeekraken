@@ -2014,6 +2014,9 @@ class SCodeExample extends LitElement {
       defaultProps: {}
     });
   }
+  static get properties() {
+    return __SComponentUtils.properties({}, SHighlightJsComponentInterface);
+  }
   static get styles() {
     return css`${unsafeCSS(__css)}`;
   }

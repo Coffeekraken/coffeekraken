@@ -11,14 +11,17 @@
                     <input class="s-input" type="text" name="search" placeholder="Search API doc..." />
                 </form>
                 <version-selector></version-selector>
+                <a href="javascript:void" class="s-ml:10" id="settings-opener">
+                    <i class="s-icon:settings"></i>
+                </a>
             </div>
             <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:40">
-                <a class="s-pl:100 s-typo:bold" href="/#features" title="Features">Features</a>
+                <a class="s-pl:50 s-typo:bold" href="/#features" title="Features">Features</a>
                 <a class="s-px:50 s-typo:bold" href="/#get-started" title="Get started">Get started</a>
 
                 @foreach ($docMenu->tree as $menuItem)
 
-                    <span class="s-pr:100 s-typo:bold" >
+                    <span class="s-pr:50 s-typo:bold" >
                         <span class="s-tooltip-container">
                             @if ($menuItem->slug)
                                 <a href="{{ $menuItem->slug }}" title="{{ $menuItem->name }}">
@@ -63,14 +66,10 @@
         </div>
 
     </div>
+        
 
-    <div class="sidemenu">
-        <i class="s-icon:settings"></i>
-
-        <s-side-panel id="settings" side="right" active overlay>
-            <ck-settings></ck-settings> 
-        </s-side-panel>
-
-    </div>
+    <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
+        <ck-settings></ck-settings> 
+    </s-side-panel>
 
 </header>

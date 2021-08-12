@@ -15,10 +15,13 @@ export default class SSidePanelComponentInterface extends __SInterface {
       type: 'Boolean',
       default: false
     },
+    triggerer: {
+      type: 'String'
+    },
     closeOn: {
       type: {
         type: "Array<String>",
-        splitChars: [','
+        splitChars: [',']
       },
       values: ['click','escape'],
       default: ['click','escape']

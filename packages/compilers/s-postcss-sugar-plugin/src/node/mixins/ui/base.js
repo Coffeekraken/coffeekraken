@@ -22,8 +22,8 @@ export default function ({ params, atRule, replaceWith }) {
     `);
     // lnf
     vars.push(`
-        color: sugar.color(ui, surfaceForeground);
-        background-color: sugar.color(ui, surface);
+        color: sugar.color(main, surfaceForeground);
+        background-color: sugar.color(main, ui);
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
         border: sugar.color(ui, border) solid 1px;
         border-radius: ${__themeVar(`ui.${finalParams.name}.borderRadius`)};
@@ -35,15 +35,15 @@ export default function ({ params, atRule, replaceWith }) {
         }
 
         @sugar.state.hover {
-          background-color: sugar.color(ui:hover, surface);
+          background-color: sugar.color(main:hover, ui);
           border: sugar.color(ui:hover, border) solid 1px;
         }
         @sugar.state.focus {
-          background-color: sugar.color(ui:focus, surface);
+          background-color: sugar.color(main:focus, ui);
           border: sugar.color(ui:focus, border) solid 1px;
         }
         @sugar.state.active {
-          background-color: sugar.color(ui:active, surface);
+          background-color: sugar.color(main:active, ui);
           border: sugar.color(ui:active, border) solid 1px;
         }
   `);

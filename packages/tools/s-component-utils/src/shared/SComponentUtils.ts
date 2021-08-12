@@ -237,7 +237,6 @@ export default class SComponentUtils extends __SClass {
             if (this._settings.rootNode) {
               this._settings.rootNode.setAttribute(__dashCase(propName), this.node[propName]);  
             }
-            console.log(propName, this.node[propName]);
             this.node.setAttribute(__dashCase(propName), this.node[propName]);
           }
         }

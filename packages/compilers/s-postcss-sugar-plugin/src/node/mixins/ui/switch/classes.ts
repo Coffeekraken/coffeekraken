@@ -62,14 +62,14 @@ export default function ({
   Object.keys(__theme().baseColors()).forEach((colorName) => {
     vars.push(`
       /**
-       * @name        s-btn--${colorName}
+       * @name        s-switch:${colorName}
        * @namespace     sugar.css.ui.switch
        * @type          CssClass
        * 
        * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any switch
        * 
        * @example       html
-       * <label class="s-switch--${colorName}">
+       * <label class="s-switch\:${colorName}">
         *   <input type="checkbox" />
         *   <div></div>
         * </label>

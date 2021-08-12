@@ -16,6 +16,13 @@ body {
         background-color: sugar.color(main, --darken 35);
     }
 
+    svg .main {
+        fill: sugar.color(main, text);
+    }
+    svg .accent {
+        fill: sugar.color(accent);
+    }
+
     version-selector {
         margin-left: sugar.space(10);
     }

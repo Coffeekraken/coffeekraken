@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
 class postcssSugarPluginUiClassesInterface extends __SInterface {
 }
 postcssSugarPluginUiClassesInterface.definition = {};
@@ -23,6 +24,7 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.ui.button.classes;',
         '@sugar.ui.blockquote.classes;',
         '@sugar.ui.input.classes;',
+        '@sugar.ui.label.classes;',
         '@sugar.ui.list.classes;',
         '@sugar.ui.tabs.classes;',
         '@sugar.ui.badge.classes;',
@@ -33,6 +35,29 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.ui.terminal.classes;',
         '@sugar.ui.tooltip.classes;'
     ];
+    Object.keys(__theme().baseColors()).forEach((colorName) => {
+        cssArray.push(`
+      /**
+       * @name        s-ui:${colorName}
+       * @namespace     sugar.css.ui.label
+       * @type          CssClass
+       * 
+       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any ui element
+       * 
+       * @example       html
+       * <label class="s-ui\:${colorName}">
+       *   Hello world
+       *   <input type="text" class="s-input" />
+       * </label>
+       * 
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      .s-ui--${colorName} {
+        @sugar.color.remap(ui, ${colorName});
+      }
+    `);
+    });
     replaceWith(cssArray);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsTUFBTSxvQ0FBcUMsU0FBUSxZQUFZOztBQUN0RCwrQ0FBVSxHQUFHLEVBQUUsQ0FBQztBQUV6QixPQUFPLEVBQUUsb0NBQW9DLElBQUksU0FBUyxFQUFFLENBQUM7QUFFN0Q7Ozs7Ozs7Ozs7Ozs7R0FhRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDdkIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBS1o7SUFDQyxNQUFNLFFBQVEsR0FBRztRQUNmLDJCQUEyQjtRQUMzQiwyQkFBMkI7UUFDM0IsK0JBQStCO1FBQy9CLDBCQUEwQjtRQUMxQix5QkFBeUI7UUFDekIseUJBQXlCO1FBQ3pCLDBCQUEwQjtRQUMxQiwyQkFBMkI7UUFDM0IsMkJBQTJCO1FBQzNCLDJCQUEyQjtRQUMzQiwwQkFBMEI7UUFDMUIsNkJBQTZCO1FBQzdCLDRCQUE0QjtLQUM3QixDQUFDO0lBRUYsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQ3hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSxvQ0FBcUMsU0FBUSxZQUFZOztBQUN0RCwrQ0FBVSxHQUFHLEVBQUUsQ0FBQztBQUV6QixPQUFPLEVBQUUsb0NBQW9DLElBQUksU0FBUyxFQUFFLENBQUM7QUFFN0Q7Ozs7Ozs7Ozs7Ozs7R0FhRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDdkIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBS1o7SUFDQyxNQUFNLFFBQVEsR0FBRztRQUNmLDJCQUEyQjtRQUMzQiwyQkFBMkI7UUFDM0IsK0JBQStCO1FBQy9CLDBCQUEwQjtRQUMxQiwwQkFBMEI7UUFDMUIseUJBQXlCO1FBQ3pCLHlCQUF5QjtRQUN6QiwwQkFBMEI7UUFDMUIsMkJBQTJCO1FBQzNCLDJCQUEyQjtRQUMzQiwyQkFBMkI7UUFDM0IsMEJBQTBCO1FBQzFCLDZCQUE2QjtRQUM3Qiw0QkFBNEI7S0FDN0IsQ0FBQztJQUVGLE1BQU0sQ0FBQyxJQUFJLENBQUMsT0FBTyxFQUFFLENBQUMsVUFBVSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUN4RCxRQUFRLENBQUMsSUFBSSxDQUFDOzs2QkFFVyxTQUFTOzs7O29FQUk4QixTQUFTLElBQUksU0FBUzs7OytCQUczRCxTQUFTOzs7Ozs7OztlQVF6QixTQUFTO2lDQUNTLFNBQVM7O0tBRXJDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQ3hCLENBQUMifQ==

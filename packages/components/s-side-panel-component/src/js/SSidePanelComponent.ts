@@ -12,12 +12,12 @@ export default class SSidePanel extends LitElement {
 
     static _activePanels: SSidePanel[] = [];
 
-    static get styles() {
-        return css`${unsafeCSS(__css)}`;
+    static get properties() {
+        return __SComponentUtils.properties({}, __SSidePanelComponentInterface);
     }
 
-    static get properties() { 
-        return { active: { type: Boolean } };
+    static get styles() {
+        return css`${unsafeCSS(__css)}`;
     }
 
     _component = undefined;
@@ -49,8 +49,8 @@ export default class SSidePanel extends LitElement {
         });
 
         if (this._component.props.closeOn.indexOf('click') !== -1) {
-            this.querySelector('.s-side-panel__overlay')?.addEventListener('click', (e) => {
-                if (e.target !== this) return;
+            this.addEventListener('click', (e) => {
+                if (this._$container.contains(e.target)) return; 
                 if (this.constructor._activePanels.slice(-1)[0] !== this) return;
                 this.constructor._activePanels.pop();
                 this.active = false;
@@ -70,17 +70,32 @@ export default class SSidePanel extends LitElement {
 
         this._$nodes = Array.from(this.children);
 
+        if (this._component.props.triggerer) {
+            const $triggerers = Array.from(document.querySelectorAll(this._component.props.triggerer));
+            $triggerers.forEach($triggerer => {
+                $triggerer.addEventListener('click', (e) => {
+                    this.open();
+                });
+            });
+        }
+
     }
     firstUpdated() {
 
-        const $container = this.querySelector('.s-side-panel__container');
+        this._$container = this.querySelector('.s-side-panel__container');
 
         this._$nodes.forEach($node => {
-            $container?.appendChild($node);
+            this._$container?.appendChild($node);
         });
     }
     createRenderRoot() {
         return this;
+    }
+    open() {
+        this.active = true;
+    }
+    close() {
+        this.active = false;
     }
     render() {
         return html`

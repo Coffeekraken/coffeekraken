@@ -26,6 +26,10 @@ __SClipboardCopy();
 
 export default class SCodeExample extends LitElement {
 
+    static get properties() {
+        return __SComponentUtils.properties({}, __SCodeExampleComponentInterface);
+    }
+
     static get styles() {
         return css`${unsafeCSS(__css)}`;
     }
@@ -81,6 +85,9 @@ export default class SCodeExample extends LitElement {
             this.setActiveTab(this._items[0].id);
         }
     }
+    // createRenderRoot() {
+    //     return this;
+    // }
     render() {
         return html`
             <div class="${this._component?.className()}" toolbar-position="${this._component?.props.toolbarPosition}">

@@ -17,11 +17,10 @@ $params = json_decode($argv[1]);
 
 // prepare data to pass it to the template engine
 $data = $params->data;
-$data = (array) $data;
 // preparing the paths
 $viewName = str_replace('.blade.php', '', $params->viewDotPath);
 
-$blade = new BladeOne($params->rootDirs,$params->cacheDir,BladeOne::MODE_DEBUG);
-$res = $blade->run($viewName,$data);
+$blade = new BladeOne($params->rootDirs, $params->cacheDir, BladeOne::MODE_DEBUG);
+$res = $blade->run($viewName, (array) $data);
 
 print \Sugar\html\expandColonClasses($res);

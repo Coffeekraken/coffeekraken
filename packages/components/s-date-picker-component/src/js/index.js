@@ -1,0 +1,4 @@
+import __SDatePickerComponent from './SDatePickerComponent';
+export * from './SDatePickerComponent';
+export default __SDatePickerComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLHNCQUFzQixNQUFNLHdCQUF3QixDQUFDO0FBQzVELGNBQWMsd0JBQXdCLENBQUM7QUFDdkMsZUFBZSxzQkFBc0IsQ0FBQyJ9

@@ -10,7 +10,7 @@ import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
-import __SConfig from '../../shared/SConfig';
+import __SConfig, { ISConfigEnvObj } from '../../shared/SConfig';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
@@ -40,225 +40,198 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  */
 
 export interface ISConfigFolderAdapterScopesSettings {
-  default: string[];
-  module: string[];
-  extends: string[];
-  repo: string[];
-  package: string[];
-  user: string[];
+    default: string[];
+    module: string[];
+    extends: string[];
+    repo: string[];
+    package: string[];
+    user: string[];
 }
 
 export interface ISConfigFolderAdapterSettings {
-  fileName: string;
-  folderName: string;
-  scopes: ISConfigFolderAdapterScopesSettings;
-  savingScope: string;
+    fileName: string;
+    folderName: string;
+    scopes: ISConfigFolderAdapterScopesSettings;
+    savingScope: string;
 }
 export interface ISConfigFolderAdapterCtorSettings {
-  configFolderAdapter?: Partial<ISConfigFolderAdapterSettings>;
-  configAdapter?: any;
+    configFolderAdapter?: Partial<ISConfigFolderAdapterSettings>;
+    configAdapter?: any;
 }
 
 export default class SConfigFolderAdapter extends __SConfigAdapter {
-  get configFolderAdapterSettings(): ISConfigFolderAdapterSettings {
-    return (<any>this)._settings.configFolderAdapter;
-  }
+    get configFolderAdapterSettings(): ISConfigFolderAdapterSettings {
+        return (<any>this)._settings.configFolderAdapter;
+    }
 
-  _scopedSettings: any = {};
-  _scopedFoldersPaths: any = {};
-  _foldersPaths: string[] = [];
+    _scopedSettings: any = {};
+    _scopedFoldersPaths: any = {};
+    _foldersPaths: string[] = [];
 
-  constructor(settings: Partial<ISConfigFolderAdapterCtorSettings>) {
-    super(
-      __deepMerge(
-        {
-          configFolderAdapter: {
-            fileName: '[name].config.js',
-            folderName: '.sugar',
-            scopes: {
-              default: [__path.resolve(__dirname(), '../../config')],
-              module: [],
-              extends: [],
-              repo: [`${__packageRootDir(process.cwd(), true)}/[folderName]`],
-              package: [`${__packageRootDir(process.cwd())}/[folderName]`],
-              user: [`${__packageRootDir(process.cwd())}/.local/[folderName]`]
-            },
-            savingScope: 'user'
-          }
-        },
-        settings || {}
-      )
-    );
-
-    // handle configs
-    this.configFolderAdapterSettings.folderName =
-      this.configFolderAdapterSettings.folderName.replace('[name]', this.name);
-
-    // handle each scopes
-    Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
-      let scopeFoldersPathArray =
-        this.configFolderAdapterSettings.scopes[scope];
-
-      if (scopeFoldersPathArray) {
-        if (!Array.isArray(scopeFoldersPathArray))
-          scopeFoldersPathArray = [scopeFoldersPathArray];
-        scopeFoldersPathArray = scopeFoldersPathArray.map((path) => {
-          return path.replace(
-            '[folderName]',
-            this.configFolderAdapterSettings.folderName
-          );
-        });
-      }
-
-      // append to the scoped folders path array
-      this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
-    });
-
-    const watchPaths: string[] = [];
-    Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
-      if (this._scopedFoldersPaths[scope]) {
-        this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[
-          scope
-        ].filter((path) => {
-          if (
-            __fs.existsSync(path) &&
-            this._foldersPaths.indexOf(path) === -1
-          ) {
-            watchPaths.push(path);
-            this._foldersPaths.push(path);
-            return true;
-          }
-          return false;
-        });
-      }
-    });
-
-    // watch for changes
-    __chokidar
-      .watch(__unique(watchPaths), {
-        ignoreInitial: true
-      })
-      .on('change', (p) => {
-        this.update(p);
-      })
-      .on('unlink', (p) => this.update(p))
-      .on('add', (p) => this.update(p));
-  }
-
-  async _load(folderPaths, scope, clearCache = false) {
-    const configObj = {};
-
-    folderPaths = __unique(folderPaths);
-
-    for (let i=0; i<folderPaths.length; i++) {
-      
-      const path = folderPaths[i];
-
-      const paths = __fs.readdirSync(path);
-
-      for (let j=0; j<paths.length; j++) {
-
-        const file = paths[j];
-              
-        if (!file.match(/\.js(on)?$/)) continue;  
-
-        if (
-          !file.includes(
-            this.configFolderAdapterSettings.fileName.replace('[name]', '')
-          )
-        ) {
-          continue;
-        }
-
-        const configFilePath = `${path}/${file}`;
-        // @TODO      check for delete cache with import
-        // if (clearCache) delete require.cache[require.resolve(configFilePath)];
-        const importedConfig = await import(configFilePath);
-        const configData = importedConfig.default;
-
-        const configKey = file.replace('.config.js', '');
-        if (!configObj[configKey]) configObj[configKey] = {};
-
-        configObj[configKey] = __deepMerge(
-          configObj[configKey],
-          configData
+    constructor(settings: Partial<ISConfigFolderAdapterCtorSettings>) {
+        super(
+            __deepMerge(
+                {
+                    configFolderAdapter: {
+                        fileName: '[name].config.js',
+                        folderName: '.sugar',
+                        scopes: {
+                            default: [__path.resolve(__dirname(), '../../config')],
+                            module: [],
+                            extends: [],
+                            repo: [`${__packageRootDir(process.cwd(), true)}/[folderName]`],
+                            package: [`${__packageRootDir(process.cwd())}/[folderName]`],
+                            user: [`${__packageRootDir(process.cwd())}/.local/[folderName]`],
+                        },
+                        savingScope: 'user',
+                    },
+                },
+                settings || {},
+            ),
         );
 
-        if (importedConfig.prepare && typeof importedConfig.prepare === 'function') {
-          __SConfig.registerPrepare(
-            this.configAdapterSettings.name,
-            configKey,
-            importedConfig.prepare
-          );
-        }
+        // handle configs
+        this.configFolderAdapterSettings.folderName = this.configFolderAdapterSettings.folderName.replace(
+            '[name]',
+            this.name,
+        );
 
-        if (importedConfig.proxy && typeof importedConfig.proxy === 'function') {
-          __SConfig.registerProxy(
-            this.configAdapterSettings.name,
-            configKey,
-            importedConfig.proxy
-          );
-        }
-      }
+        // handle each scopes
+        Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
+            let scopeFoldersPathArray = this.configFolderAdapterSettings.scopes[scope];
+
+            if (scopeFoldersPathArray) {
+                if (!Array.isArray(scopeFoldersPathArray)) scopeFoldersPathArray = [scopeFoldersPathArray];
+                scopeFoldersPathArray = scopeFoldersPathArray.map((path) => {
+                    return path.replace('[folderName]', this.configFolderAdapterSettings.folderName);
+                });
+            }
+
+            // append to the scoped folders path array
+            this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
+        });
+
+        const watchPaths: string[] = [];
+        Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
+            if (this._scopedFoldersPaths[scope]) {
+                this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[scope].filter((path) => {
+                    if (__fs.existsSync(path) && this._foldersPaths.indexOf(path) === -1) {
+                        watchPaths.push(path);
+                        this._foldersPaths.push(path);
+                        return true;
+                    }
+                    return false;
+                });
+            }
+        });
+
+        // watch for changes
+        __chokidar
+            .watch(__unique(watchPaths), {
+                ignoreInitial: true,
+            })
+            .on('change', (p) => {
+                this.update(p);
+            })
+            .on('unlink', (p) => this.update(p))
+            .on('add', (p) => this.update(p));
     }
 
-    return Object.assign({}, configObj);
-  }
+    async _load(folderPaths, clearCache = false, env: ISConfigEnvObj, configObj) {
+        const configObj = {};
 
-  async load(clearCache = false) {
-    try {
+        folderPaths = __unique(folderPaths);
 
-      for (let i=0; i<Object.keys(this._scopedFoldersPaths).length; i++) {
+        for (let i = 0; i < folderPaths.length; i++) {
+            const path = folderPaths[i];
 
-        const scope = Object.keys(this._scopedFoldersPaths)[i];
+            const paths = __fs.readdirSync(path);
 
-        const scopedFoldersPaths = this._scopedFoldersPaths[scope];
+            for (let j = 0; j < paths.length; j++) {
+                const file = paths[j];
 
-        if (scopedFoldersPaths && scopedFoldersPaths.length) {
-          this._scopedSettings[scope] = await this._load(scopedFoldersPaths, scope, clearCache);
+                if (!file.match(/\.js(on)?$/)) continue;
+
+                if (!file.includes(this.configFolderAdapterSettings.fileName.replace('[name]', ''))) {
+                    continue;
+                }
+
+                const configFilePath = `${path}/${file}`;
+                // @TODO      check for delete cache with import
+                const importedConfig = await import(configFilePath);
+                let configData = importedConfig.default;
+                if (typeof configData === 'function') configData = configData(env, configObj);
+
+                const configKey = file.replace('.config.js', '');
+                if (!configObj[configKey]) configObj[configKey] = {};
+
+                configObj[configKey] = __deepMerge(configObj[configKey], configData);
+
+                if (importedConfig.prepare && typeof importedConfig.prepare === 'function') {
+                    __SConfig.registerPrepare(this.configAdapterSettings.name, configKey, importedConfig.prepare);
+                }
+
+                if (importedConfig.proxy && typeof importedConfig.proxy === 'function') {
+                    __SConfig.registerProxy(this.configAdapterSettings.name, configKey, importedConfig.proxy);
+                }
+            }
         }
-      }
-    } catch (e) {
-      console.log('fffffffff', e);
+
+        return Object.assign({}, configObj);
     }
 
-    let resultSettings: any = {};
-    Object.keys(this._scopedSettings).forEach((scope) => {
-      resultSettings = __deepMerge(resultSettings, this._scopedSettings[scope]);
-    });
+    async load(clearCache = false, env: ISConfigEnvObj, configObj) {
+        try {
+            for (let i = 0; i < Object.keys(this._scopedFoldersPaths).length; i++) {
+                const scope = Object.keys(this._scopedFoldersPaths)[i];
 
-    return resultSettings;
-  }
+                const scopedFoldersPaths = this._scopedFoldersPaths[scope];
 
-  save(newConfig = {}) {
-    throw new Error(
-      `<red>[${this.constructor.name}.save]</red> Sorry but the save feature has not been implemented yet...`
-    );
+                if (scopedFoldersPaths && scopedFoldersPaths.length) {
+                    this._scopedSettings[scope] = await this._load(scopedFoldersPaths, clearCache, env, configObj);
+                }
+            }
+        } catch (e) {
+            console.log('fffffffff', e);
+        }
 
-    // if (!this.configFolderAdapterSettings.userConfigPath) {
-    //   throw new Error(
-    //     `You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`
-    //   );
-    // }
+        let resultSettings: any = {};
+        Object.keys(this._scopedSettings).forEach((scope) => {
+            resultSettings = __deepMerge(resultSettings, this._scopedSettings[scope]);
+        });
 
-    // const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
+        return resultSettings;
+    }
 
-    // Object.keys(baseConfig).forEach((name) => {
-    //   const configToSave = __diff(baseConfig[name], newConfig[name] || {});
+    save(newConfig = {}) {
+        throw new Error(
+            `<red>[${this.constructor.name}.save]</red> Sorry but the save feature has not been implemented yet...`,
+        );
 
-    //   const newConfigString = `
-    //   module.exports = ${JSON.stringify(configToSave)};
-    // `;
+        // if (!this.configFolderAdapterSettings.userConfigPath) {
+        //   throw new Error(
+        //     `You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`
+        //   );
+        // }
 
-    //   // write the new config file
-    //   __writeFileSync(
-    //     this.configFolderAdapterSettings.userConfigPath +
-    //       '/' +
-    //       this.configFolderAdapterSettings.fileName.replace('[name]', name),
-    //     newConfigString
-    //   );
-    // });
+        // const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
 
-    // return true;
-  }
+        // Object.keys(baseConfig).forEach((name) => {
+        //   const configToSave = __diff(baseConfig[name], newConfig[name] || {});
+
+        //   const newConfigString = `
+        //   module.exports = ${JSON.stringify(configToSave)};
+        // `;
+
+        //   // write the new config file
+        //   __writeFileSync(
+        //     this.configFolderAdapterSettings.userConfigPath +
+        //       '/' +
+        //       this.configFolderAdapterSettings.fileName.replace('[name]', name),
+        //     newConfigString
+        //   );
+        // });
+
+        // return true;
+    }
 }

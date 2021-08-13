@@ -8,124 +8,123 @@ import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __SDuration from '@coffeekraken/s-duration';
 
 class ColorModifierInterface extends __SInterface {
-  static definition = {
-    saturate: {
-      type: 'Number|String',
-      default: 0
-    },
-    desaturate: {
-      type: 'Number',
-      default: 0
-    },
-    darken: {
-      type: 'Number',
-      default: 0
-    },
-    lighten: {
-      type: 'Number',
-      default: 0
-    },
-    spin: {
-      type: 'Number',
-      default: 0
-    },
-    alpha: {
-      type: 'Number'
-    }
-  };
+    static definition = {
+        saturate: {
+            type: 'Number|String',
+            default: 0,
+        },
+        desaturate: {
+            type: 'Number',
+            default: 0,
+        },
+        darken: {
+            type: 'Number',
+            default: 0,
+        },
+        lighten: {
+            type: 'Number',
+            default: 0,
+        },
+        spin: {
+            type: 'Number',
+            default: 0,
+        },
+        alpha: {
+            type: 'Number',
+        },
+    };
 }
 
 function expandColorObj(colorObj, path = '', baseObj = {}, baseColor = '#ff0000', currentColorStringBase = '') {
+    let currentColorString = currentColorStringBase + path;
+    // currentColor = new __SColor(baseColor);
 
-  let currentColorString = currentColorStringBase + path;
-  // currentColor = new __SColor(baseColor);
+    Object.keys(colorObj).forEach((colorVariantName) => {
+        const colorValue = colorObj[colorVariantName];
 
-  Object.keys(colorObj).forEach((colorVariantName) => {
+        if (colorVariantName === 'color') {
+            return;
+        }
 
-    const colorValue = colorObj[colorVariantName];
-    
-    if (colorVariantName === 'color') {  
-      return;
-    }
+        if (!colorObj[colorVariantName]) colorObj[colorVariantName] = {};
 
-    if (!colorObj[colorVariantName]) colorObj[colorVariantName] = {};
+        if (colorVariantName.match(/^:/) && __isPlainObject(colorValue)) {
+            const newObj = {
+                ...baseObj,
+                ...colorObj[colorVariantName],
+            };
 
-    if (colorVariantName.match(/^:/) && __isPlainObject(colorValue)) {
+            colorObj[colorVariantName.replace(/^:/, '')] = expandColorObj(
+                newObj,
+                path + '-' + colorVariantName.replace(/^:/, ''),
+                baseObj,
+                baseColor,
+                currentColorStringBase,
+            );
+            delete colorObj[colorVariantName];
+        } else if (typeof colorValue === 'string' && colorValue.trim().match(/^--/)) {
+            colorObj[colorVariantName] = {
+                // get color() {
+                //   if (!this._color) {
+                //     Object.defineProperty(this, '_color', {
+                //       enumerable: false,
+                //       value: new __SColor(baseColor)
+                //     });
+                //   }
+                //   console.log('GET');
+                //   return this._color.toHex();
+                // },
+                // get modifiers() {
+                //   if (!this._modifiers) {
+                //     Object.defineProperty(this, '_modifiers', {
+                //       enumerable: false,
+                //       value: ColorModifierInterface.apply(colorValue)
+                //     });
+                //     return this._modifiers;
+                //   }
+                // },
+                variable: currentColorString + '-' + colorVariantName,
+                // get r() {
+                //   return this.color.r;
+                // },
+                // get g() {
+                //   return this.color.g;
+                // },
+                // get b() {
+                //   return this.color.b;
+                // },
+                // get h() {
+                //   return this.color.h;
+                // },
+                // get s() {
+                //   return this.color.s;
+                // },
+                // get l() {
+                //   return this.color.l;
+                // },
+                // get a() {
+                //   return this.color.a;
+                // }
+            };
 
-      const newObj = {
-        ...baseObj,
-        ...colorObj[colorVariantName]
-      };
+            // delete colorObj[colorVariantName].modifiers.help;
+        } else if (__isColor(colorValue)) {
+            // const color = new __SColor(colorValue);
+            // colorObj[colorVariantName] = {
+            //   color: color.toHex(),
+            //   variable: currentColorString + '-' + colorVariantName,
+            //   r: color.r,
+            //   g: color.g,
+            //   b: color.b,
+            //   h: color.h,
+            //   s: color.s,
+            //   l: color.l,
+            //   a: color.a,
+            // };
+        }
+    });
 
-      colorObj[colorVariantName.replace(/^:/, '')] = expandColorObj(newObj, path + '-' + colorVariantName.replace(/^:/, ''), baseObj, baseColor, currentColorStringBase);
-      delete colorObj[colorVariantName];
-
-    } else if (typeof colorValue === 'string' && colorValue.trim().match(/^--/)) {
-
-      colorObj[colorVariantName] = {
-        // get color() {
-        //   if (!this._color) {
-        //     Object.defineProperty(this, '_color', {
-        //       enumerable: false,
-        //       value: new __SColor(baseColor)
-        //     });
-        //   }
-        //   console.log('GET');
-        //   return this._color.toHex();
-        // },
-        // get modifiers() {
-        //   if (!this._modifiers) {
-        //     Object.defineProperty(this, '_modifiers', {
-        //       enumerable: false,
-        //       value: ColorModifierInterface.apply(colorValue)
-        //     });
-        //     return this._modifiers;
-        //   }
-        // },
-        variable: currentColorString + '-' + colorVariantName,
-        // get r() {
-        //   return this.color.r;
-        // },
-        // get g() {
-        //   return this.color.g;
-        // },
-        // get b() {
-        //   return this.color.b;
-        // },
-        // get h() {
-        //   return this.color.h;
-        // },
-        // get s() {
-        //   return this.color.s;
-        // },
-        // get l() {
-        //   return this.color.l;
-        // },
-        // get a() {
-        //   return this.color.a;
-        // }
-      };
-
-      // delete colorObj[colorVariantName].modifiers.help;
-
-    } else if (__isColor(colorValue)) {
-      // const color = new __SColor(colorValue);
-      // colorObj[colorVariantName] = {
-      //   color: color.toHex(),
-      //   variable: currentColorString + '-' + colorVariantName,
-      //   r: color.r,
-      //   g: color.g,
-      //   b: color.b,
-      //   h: color.h,
-      //   s: color.s,
-      //   l: color.l,
-      //   a: color.a,
-      // };
-    }
-  });
-
-  return colorObj;
-
+    return colorObj;
 }
 
 // export function prepare(themeConfig, config) {
@@ -163,43 +162,41 @@ function expandColorObj(colorObj, path = '', baseObj = {}, baseColor = '#ff0000'
 // }
 
 export default {
-  /**
-   * @name          theme
-   * @namespace     config.theme
-   */
-  theme: 'light',
+    /**
+     * @name          theme
+     * @namespace     config.theme
+     */
+    theme: 'light',
 
-  /**
-   * @name          cssVariables
-   * @namespace     config.theme
-   * 
-   * Specify which config(s) you want to be printed in your css as variables.
-   * If we have a configuration available like "some.thing.cool", the outgoing variable
-   * will be "--s-theme-some-thing-cool".
-   * You can specify some patterns like "color.*", "typo.something.*" cause the check will be
-   * made using micromatch package
-   * 
-   * @see           https://www.npmjs.com/package/micromatch
-   * @since       2.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  cssVariables: [
-    '*'
-  ],
+    /**
+     * @name          cssVariables
+     * @namespace     config.theme
+     *
+     * Specify which config(s) you want to be printed in your css as variables.
+     * If we have a configuration available like "some.thing.cool", the outgoing variable
+     * will be "--s-theme-some-thing-cool".
+     * You can specify some patterns like "color.*", "typo.something.*" cause the check will be
+     * made using micromatch package
+     *
+     * @see           https://www.npmjs.com/package/micromatch
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    cssVariables: ['*'],
 
-  /**
-   * @name          themes
-   * @namespace     config.theme
-   * @type          Object
-   *
-   * Store all the themes inside a property each like "default", "myCoolTheme", etc...
-   *
-   * @since       2.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  themes: {
-    base: '[config.themeBase]',
-    light: '[config.themeLight]',
-    dark: '[config.themeDark]'
-  }
+    /**
+     * @name          themes
+     * @namespace     config.theme
+     * @type          Object
+     *
+     * Store all the themes inside a property each like "default", "myCoolTheme", etc...
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    themes: {
+        base: '[config.themeBase]',
+        light: '[config.themeLight]',
+        dark: '[config.themeDark]',
+    },
 };

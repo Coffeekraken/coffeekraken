@@ -20,18 +20,21 @@ export function prepare(config) {
             const email = __childProcess.execSync('git config --get user.email').toString().trim();
             config.user.email = email;
         }
-    } catch(e) {
-    }
-    
+    } catch (e) {}
+
     return config;
 }
 
-export default {
-    user: {
-        name: undefined,
-        email: undefined
-    },
-    repo: {
-        url: undefined
-    }
+export default function (env) {
+    if (env.platform !== 'node') return {};
+
+    return {
+        user: {
+            name: undefined,
+            email: undefined,
+        },
+        repo: {
+            url: undefined,
+        },
+    };
 }

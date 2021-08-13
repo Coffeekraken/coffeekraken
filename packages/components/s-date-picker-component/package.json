@@ -1,0 +1,23 @@
+{
+    "name": "@coffeekraken/s-date-picker-component",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "homepage": "https://coffeekraken.io",
+    "main": "./dist/js/lib.es.js",
+    "scripts": {
+        "dev": "sugar frontstack",
+        "build": "sugar vite.build --lib",
+        "build.watch": "sugar vite.build --lib --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "@simonwep/pickr": "^1.8.1",
+        "lit-element": "^2.5.1",
+        "pikaday": "^1.8.2"
+    }
+}

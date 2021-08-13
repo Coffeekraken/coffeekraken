@@ -1,14 +1,15 @@
 {
-  "name": "@coffeekraken/s-vite-plugin-sugar",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/node/exports.js",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-env": "^2.0.0"
-  },
-  "peerDependencies": {}
+    "name": "@coffeekraken/s-vite-plugin-sugar",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/node/exports.js",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-env": "^2.0.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0"
+    },
+    "peerDependencies": {}
 }

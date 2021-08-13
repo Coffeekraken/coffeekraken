@@ -4,7 +4,7 @@ import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 if (!__isNode() && !window.env) {
     // @ts-ignore
     window.env = {
-        SUGAR: {}
+        SUGAR: {},
     };
 }
 else
@@ -36,39 +36,25 @@ else
  */
 // @ts-ignore
 export default class SEnv {
-    static construct() {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
-        this.constructed = true;
-        // Set environment
-        SEnv.set('environment', (_d = (_b = (_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.NODE_ENV) !== null && _b !== void 0 ? _b : (_c = window === null || window === void 0 ? void 0 : window.env) === null || _c === void 0 ? void 0 : _c.ENV) !== null && _d !== void 0 ? _d : 'dev');
-        SEnv.set('env', (_h = (_f = (_e = process === null || process === void 0 ? void 0 : process.env) === null || _e === void 0 ? void 0 : _e.NODE_ENV) !== null && _f !== void 0 ? _f : (_g = window === null || window === void 0 ? void 0 : window.env) === null || _g === void 0 ? void 0 : _g.ENV) !== null && _h !== void 0 ? _h : 'dev');
-    }
-    /**
-     * @name        env
-     * @type        Object
-     * @static
-     *
-     * Store the actual environment variables object. In node it will be process.env, in the browser,
-     * window.env
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
     static get env() {
-        if (!this.constructed)
-            this.construct();
-        // @ts-ignore
-        if (__isNode())
-            return JSON.parse(process.env.SUGAR);
-        // @ts-ignore
-        return window.env.SUGAR;
-    }
-    static set env(value) {
-        if (__isNode())
-            process.env.SUGAR = JSON.stringify(value);
-        // @ts-ignore
-        else
-            window.env.SUGAR = value;
+        var _a, _b, _c, _d, _e, _f;
+        if (this._env)
+            return this._env;
+        if (__isNode()) {
+            this._env = {
+                environment: (_a = process.env.NODE_ENV) !== null && _a !== void 0 ? _a : 'dev',
+                env: (_b = process.env.NODE_ENV) !== null && _b !== void 0 ? _b : 'dev',
+                platform: 'node',
+            };
+        }
+        else {
+            this._env = {
+                environment: (_d = (_c = window === null || window === void 0 ? void 0 : window.env) === null || _c === void 0 ? void 0 : _c.ENV) !== null && _d !== void 0 ? _d : 'dev',
+                env: (_f = (_e = window === null || window === void 0 ? void 0 : window.env) === null || _e === void 0 ? void 0 : _e.ENV) !== null && _f !== void 0 ? _f : 'dev',
+                platform: 'browser',
+            };
+        }
+        return this._env;
     }
     /**
      * @name        is
@@ -115,7 +101,7 @@ export default class SEnv {
      */
     static get(name) {
         // @ts-ignore
-        return SEnv.env[name.toUpperCase()];
+        return this.env[name.toUpperCase()];
     }
     /**
      * @name        set
@@ -133,12 +119,7 @@ export default class SEnv {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static set(name, value) {
-        // @ts-ignore
-        const env = Object.assign({}, SEnv.env);
-        // @ts-ignore
-        env[name.toUpperCase()] = value;
-        // @ts-ignore
-        SEnv.env = env;
+        SEnv.env[name.toUpperCase()] = value;
         return value;
     }
     /**
@@ -157,15 +138,9 @@ export default class SEnv {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static delete(name) {
-        // @ts-ignore
-        const env = Object.assign({}, SEnv.env);
-        // @ts-ignore
-        delete env[name.toUpperCase()];
-        // @ts-ignore
-        SEnv.env = env;
+        delete SEnv.env[name.toUpperCase()];
     }
 }
-SEnv.constructed = false;
 /**
  * @name        packageJson
  * @type        Object
@@ -178,4 +153,4 @@ SEnv.constructed = false;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 SEnv.packageJson = __packageJsonSync();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Vudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxRQUFRLE1BQU0sb0NBQW9DLENBQUM7QUFFMUQsT0FBTyxpQkFBaUIsTUFBTSwyQ0FBMkMsQ0FBQztBQUUxRSxhQUFhO0FBQ2IsSUFBSSxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsRUFBRTtJQUM5QixhQUFhO0lBQ2IsTUFBTSxDQUFDLEdBQUcsR0FBRztRQUNYLEtBQUssRUFBRSxFQUFFO0tBQ1YsQ0FBQztDQUNIOztJQUNJLE9BQU8sQ0FBQyxHQUFHLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsRUFBRSxDQUFDLENBQUM7QUFFNUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILGFBQWE7QUFDYixNQUFNLENBQUMsT0FBTyxPQUFPLElBQUk7SUFHdkIsTUFBTSxDQUFDLFNBQVM7O1FBQ2QsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUM7UUFDeEIsa0JBQWtCO1FBQ2xCLElBQUksQ0FBQyxHQUFHLENBQUMsYUFBYSxFQUFFLE1BQUEsTUFBQSxNQUFBLE9BQU8sYUFBUCxPQUFPLHVCQUFQLE9BQU8sQ0FBRSxHQUFHLDBDQUFFLFFBQVEsbUNBQUksTUFBQSxNQUFNLGFBQU4sTUFBTSx1QkFBTixNQUFNLENBQUUsR0FBRywwQ0FBRSxHQUFHLG1DQUFJLEtBQUssQ0FBQyxDQUFDO1FBQzdFLElBQUksQ0FBQyxHQUFHLENBQUMsS0FBSyxFQUFFLE1BQUEsTUFBQSxNQUFBLE9BQU8sYUFBUCxPQUFPLHVCQUFQLE9BQU8sQ0FBRSxHQUFHLDBDQUFFLFFBQVEsbUNBQUksTUFBQSxNQUFNLGFBQU4sTUFBTSx1QkFBTixNQUFNLENBQUUsR0FBRywwQ0FBRSxHQUFHLG1DQUFJLEtBQUssQ0FBQyxDQUFDO0lBQ3ZFLENBQUM7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Vudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxRQUFRLE1BQU0sb0NBQW9DLENBQUM7QUFFMUQsT0FBTyxpQkFBaUIsTUFBTSwyQ0FBMkMsQ0FBQztBQUUxRSxhQUFhO0FBQ2IsSUFBSSxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsRUFBRTtJQUM1QixhQUFhO0lBQ2IsTUFBTSxDQUFDLEdBQUcsR0FBRztRQUNULEtBQUssRUFBRSxFQUFFO0tBQ1osQ0FBQztDQUNMOztJQUFNLE9BQU8sQ0FBQyxHQUFHLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsRUFBRSxDQUFDLENBQUM7QUFFOUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILGFBQWE7QUFDYixNQUFNLENBQUMsT0FBTyxPQUFPLElBQUk7SUFhckIsTUFBTSxLQUFLLEdBQUc7O1FBQ1YsSUFBSSxJQUFJLENBQUMsSUFBSTtZQUFFLE9BQU8sSUFBSSxDQUFDLElBQUksQ0FBQztRQUNoQyxJQUFJLFFBQVEsRUFBRSxFQUFFO1lBQ1osSUFBSSxDQUFDLElBQUksR0FBRztnQkFDUixXQUFXLEVBQUUsTUFBQSxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsbUNBQUksS0FBSztnQkFDMUMsR0FBRyxFQUFFLE1BQUEsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLG1DQUFJLEtBQUs7Z0JBQ2xDLFFBQVEsRUFBRSxNQUFNO2FBQ25CLENBQUM7U0FDTDthQUFNO1lBQ0gsSUFBSSxDQUFDLElBQUksR0FBRztnQkFDUixXQUFXLEVBQUUsTUFBQSxNQUFBLE1BQU0sYUFBTixNQUFNLHVCQUFOLE1BQU0sQ0FBRSxHQUFHLDBDQUFFLEdBQUcsbUNBQUksS0FBSztnQkFDdEMsR0FBRyxFQUFFLE1BQUEsTUFBQSxNQUFNLGFBQU4sTUFBTSx1QkFBTixNQUFNLENBQUUsR0FBRywwQ0FBRSxHQUFHLG1DQUFJLEtBQUs7Z0JBQzlCLFFBQVEsRUFBRSxTQUFTO2FBQ3RCLENBQUM7U0FDTDtRQUNELE9BQU8sSUFBSSxDQUFDLElBQUksQ0FBQztJQUNyQixDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7T0FhRztJQUNILE1BQU0sQ0FBQyxFQUFFLENBQUMsR0FBVztRQUNqQixHQUFHLEdBQUcsR0FBRyxDQUFDLFdBQVcsRUFBRSxDQUFDO1FBQ3hCLElBQUksR0FBRyxLQUFLLEtBQUssSUFBSSxHQUFHLEtBQUssYUFBYSxFQUFFO1lBQ3hDLElBQUksSUFBSSxDQUFDLEdBQUcsQ0FBQyxhQUFhLENBQUMsS0FBSyxLQUFLLElBQUksSUFBSSxDQUFDLEdBQUcsQ0FBQyxhQUFhLENBQUMsS0FBSyxhQUFhO2dCQUFFLE9BQU8sSUFBSSxDQUFDO1NBQ25HO2FBQU0sSUFBSSxHQUFHLEtBQUssTUFBTSxJQUFJLEdBQUcsS0FBSyxZQUFZLEVBQUU7WUFDL0MsSUFBSSxJQUFJLENBQUMsR0FBRyxDQUFDLGFBQWEsQ0FBQyxLQUFLLE1BQU0sSUFBSSxJQUFJLENBQUMsR0FBRyxDQUFDLGFBQWEsQ0FBQyxLQUFLLFlBQVk7Z0JBQUUsT0FBTyxJQUFJLENBQUM7U0FDbkc7YUFBTTtZQUNILE9BQU8sSUFBSSxDQUFDLEdBQUcsQ0FBQyxhQUFhLENBQUMsS0FBSyxHQUFHLENBQUM7U0FDMUM7UUFDRCxPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7T0FhRztJQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMsSUFBWTtRQUNuQixhQUFhO1FBQ2IsT0FBTyxJQUFJLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQyxDQUFDO0lBQ3hDLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMsSUFBWSxFQUFFLEtBQVU7UUFDL0IsSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUMsR0FBRyxLQUFLLENBQUM7UUFDckMsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0gsTUFBTSxDQUFDLE1BQU0sQ0FBQyxJQUFZO1FBQ3RCLE9BQU8sSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUMsQ0FBQztJQUN4QyxDQUFDOztBQUVEOzs7Ozs7Ozs7O0dBVUc7QUFDSSxnQkFBVyxHQUFHLGlCQUFpQixFQUFFLENBQUMifQ==

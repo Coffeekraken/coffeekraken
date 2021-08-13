@@ -5,28 +5,28 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __readJson from '@coffeekraken/sugar/node/fs/readJson';
 
 export async function prepare(config) {
-  const potentialFrontspecJsonFilePath = `${__packageRoot()}/frontspec.json`;
-  if (!__fs.existsSync(potentialFrontspecJsonFilePath)) return config;
-  const json = await __readJson(potentialFrontspecJsonFilePath);
-  return __deepMerge(config, json);
+    const potentialFrontspecJsonFilePath = `${__packageRoot()}/frontspec.json`;
+    if (!__fs.existsSync(potentialFrontspecJsonFilePath)) return config;
+    const json = await __readJson(potentialFrontspecJsonFilePath);
+    return __deepMerge(config, json);
 }
 
-export default {
-    /**
-     * @name      head
-     * @namespace     config.frontspec.default
-     * @type      Object
-     * 
-     * Specify some items you want to integrate to the head tag. It can be everything you want
-     * 
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    head: {
-
-      '@dev': {
-
-        viteClient: `
+export default function (env, config) {
+    if (env.platform !== 'node') return {};
+    return {
+        /**
+         * @name      head
+         * @namespace     config.frontspec.default
+         * @type      Object
+         *
+         * Specify some items you want to integrate to the head tag. It can be everything you want
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        head: {
+            '@dev': {
+                viteClient: `
           <script>
             document.addEventListener("DOMContentLoaded", function() {
               var $script = document.createElement("script");
@@ -36,7 +36,8 @@ export default {
               document.body.appendChild($script);
             });
           </script>
-        `
-      }
-    }
-};
+        `,
+            },
+        },
+    };
+}

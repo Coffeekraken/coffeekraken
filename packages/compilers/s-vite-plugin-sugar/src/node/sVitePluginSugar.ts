@@ -1,5 +1,6 @@
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __SEnv from '@coffeekraken/s-env';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            sVitePluginSugar
@@ -13,49 +14,57 @@ import __SEnv from '@coffeekraken/s-env';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sVitePluginSugar(settings: any = {}) {
-  const jsReg = /\.(j|t)s(\?.*)?$/;
-  let areEnvVarsInjected = false;
-  let config;
+    const jsReg = /\.(j|t)s(\?.*)?$/;
+    let areEnvVarsInjected = false;
+    let config;
 
-  const packageRoot = __packageRootDir();
+    const packageRoot = __packageRootDir();
 
-  function _injectEnvVars(src, id) {
-      if (areEnvVarsInjected) return src;
-      areEnvVarsInjected = true;
+    async function _injectEnvVars(src, id) {
+        if (areEnvVarsInjected) return src;
+        areEnvVarsInjected = true;
 
-      const envJson = JSON.stringify({
-        // @ts-ignore
-        ...__SEnv.env,
-        ENVIRONMENT: config.isProduction ? 'production' : 'development'
-      });
+        await __SSugarConfig.load('browser', {
+            platform: 'browser',
+            env: 'dev',
+        });
 
-      const code = [
-        `// sugar variables`,
-        `if (!window.env) window.env = {SUGAR:{}};`,
-        `window.env.SUGAR = JSON.parse('${envJson}');`
-      ];
+        const browserConfig = __SSugarConfig.get('.', 'browser');
 
-      return [code.join('\n'), src].join('\n');
+        const envJson = JSON.stringify({
+            // @ts-ignore
+            ...__SEnv.env,
+            config: browserConfig,
+            // ENVIRONMENT: config.isProduction ? 'production' : 'development',
+        });
+        // console.log(envJson);
+
+        const code = [
+            `// sugar variables`,
+            `if (!window.env) window.env = {SUGAR:{}};`,
+            `window.env.SUGAR = JSON.parse('${envJson}');`,
+        ];
+
+        return [code.join('\n'), src].join('\n');
     }
 
-  return {
-    name: 's-vite-plugin-sugar',
-    configResolved(resolvedConfig) {
-      // store the resolved config
-      config = resolvedConfig
-    },
-    transform(src, id) {
-      if (jsReg.test(id)) {
-      
-        if (id.includes(packageRoot) && id.match(/\/index\.(t|j)s/)) {
-          src = _injectEnvVars(src, id);
-        }        
+    return {
+        name: 's-vite-plugin-sugar',
+        configResolved(resolvedConfig) {
+            // store the resolved config
+            config = resolvedConfig;
+        },
+        async transform(src, id) {
+            if (jsReg.test(id)) {
+                if (id.includes(packageRoot) && id.match(/\/index\.(t|j)s/)) {
+                    src = await _injectEnvVars(src, id);
+                }
 
-        return {
-          code: src,
-          map: null
-        };
-      }
-    }
-  };
+                return {
+                    code: src,
+                    map: null,
+                };
+            }
+        },
+    };
 }

@@ -12,7 +12,7 @@ export async function prepare(config) {
 }
 
 export default function (env, config) {
-    if (env.platform !== 'node') return {};
+    if (env.platform !== 'node') return;
     return {
         /**
          * @name      head

@@ -346,7 +346,7 @@ export default class SConfig {
 
         const loadedConfig = await this._adapters[adapter].instance.load(isUpdate, this._settings.env, config);
         Object.keys(loadedConfig).forEach((configId) => {
-            if (!Object.keys(loadedConfig[configId]).length) return;
+            if (!loadedConfig[configId]) return;
             config[configId] = loadedConfig[configId];
         });
 
@@ -358,7 +358,7 @@ export default class SConfig {
             }
         });
 
-        function extendsConfigIfNeeded(configToExtends) {
+        function extendsConfigIfNeeded(configToExtends, configName) {
             if (configToExtends.extends && typeof configToExtends.extends === 'string') {
                 const extend = configToExtends.extends;
 
@@ -368,7 +368,7 @@ export default class SConfig {
                     );
                 }
 
-                const extendsConfig = extendsConfigIfNeeded(Object.assign({}, config[extend]));
+                const extendsConfig = extendsConfigIfNeeded(Object.assign({}, config[extend]), configName);
 
                 // delete configToExtends.extends;
                 const newExtendedConfig = __deepMerge(extendsConfig, configToExtends);
@@ -391,7 +391,7 @@ export default class SConfig {
 
         // handle the "extends" global property
         Object.keys(config).forEach((configName) => {
-            config[configName] = extendsConfigIfNeeded(config[configName]);
+            config[configName] = extendsConfigIfNeeded(config[configName], configName);
         });
 
         // resolve environment properties like @dev

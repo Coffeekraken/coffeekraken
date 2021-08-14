@@ -2,7 +2,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 export default function (env, config) {
-    if (env.platform !== 'node') return {};
+    if (env.platform !== 'node') return;
 
     return {
         read: {

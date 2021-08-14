@@ -2,7 +2,7 @@ import __parseAuthorString from '@coffeekraken/sugar/shared/npm/utils/parseAutho
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 export default function (env, config) {
-    if (env.platform !== 'node') return {};
+    if (env.platform !== 'node') return;
 
     return {
         discord: {

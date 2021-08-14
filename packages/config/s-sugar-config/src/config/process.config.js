@@ -1,6 +1,6 @@
 export default function (env) {
     if (env.platform !== 'node')
-        return {};
+        return;
     return {
         /**
          * @name            asyncStart
@@ -102,18 +102,6 @@ export default function (env) {
          */
         runAsChild: false,
         /**
-         * @name          definition
-         * @namespace     config.process
-         * @type          Object
-         * @default       undefined
-         *
-         * Specify a definition object (see SInterface class) to be used for this process parameters
-         *
-         * @since             2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        definition: undefined,
-        /**
          * @name          processPath
          * @namespace         config.process
          * @type          String
@@ -140,4 +128,4 @@ export default function (env) {
         notification: '[config.notification]',
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvY2Vzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcm9jZXNzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPLEVBQUUsQ0FBQztJQUV2QyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILFVBQVUsRUFBRSxLQUFLO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsSUFBSTtRQUVqQjs7Ozs7Ozs7Ozs7V0FXRztRQUNILGdCQUFnQixFQUFFLEtBQUs7UUFFdkI7Ozs7Ozs7Ozs7OztXQVlHO1FBQ0gsS0FBSyxFQUFFLFNBQVM7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILFVBQVUsRUFBRSxLQUFLO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsSUFBSTtRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxTQUFTLEVBQUUsS0FBSztRQUVoQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFLEtBQUs7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILFVBQVUsRUFBRSxTQUFTO1FBRXJCOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsV0FBVyxFQUFFLElBQUk7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSx1QkFBdUI7S0FDeEMsQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvY2Vzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcm9jZXNzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXBDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFLEtBQUs7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILFdBQVcsRUFBRSxJQUFJO1FBRWpCOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsZ0JBQWdCLEVBQUUsS0FBSztRQUV2Qjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxLQUFLLEVBQUUsU0FBUztRQUVoQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFLEtBQUs7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxJQUFJO1FBRVg7Ozs7Ozs7Ozs7V0FVRztRQUNILFNBQVMsRUFBRSxLQUFLO1FBRWhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxVQUFVLEVBQUUsS0FBSztRQUVqQjs7Ozs7Ozs7Ozs7V0FXRztRQUNILFdBQVcsRUFBRSxJQUFJO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUUsdUJBQXVCO0tBQ3hDLENBQUM7QUFDTixDQUFDIn0=

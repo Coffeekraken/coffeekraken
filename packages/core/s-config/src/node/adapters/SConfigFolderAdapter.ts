@@ -163,7 +163,8 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 if (typeof configData === 'function') configData = configData(env, configObj);
 
                 const configKey = file.replace('.config.js', '');
-                if (!configObj[configKey]) configObj[configKey] = {};
+
+                if (!configData) continue;
 
                 configObj[configKey] = __deepMerge(configObj[configKey], configData);
 

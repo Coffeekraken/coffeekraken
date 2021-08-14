@@ -1,5 +1,5 @@
 export default function (env) {
-    if (env.platform !== 'node') return {};
+    if (env.platform !== 'node') return;
 
     return {
         /**
@@ -108,19 +108,6 @@ export default function (env) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         runAsChild: false,
-
-        /**
-         * @name          definition
-         * @namespace     config.process
-         * @type          Object
-         * @default       undefined
-         *
-         * Specify a definition object (see SInterface class) to be used for this process parameters
-         *
-         * @since             2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        definition: undefined,
 
         /**
          * @name          processPath

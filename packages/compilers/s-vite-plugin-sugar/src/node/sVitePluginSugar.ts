@@ -1,6 +1,8 @@
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __copy from '@coffeekraken/sugar/node/clipboard/copy';
+import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonString';
 
 /**
  * @name            sVitePluginSugar
@@ -24,25 +26,32 @@ export default function sVitePluginSugar(settings: any = {}) {
         if (areEnvVarsInjected) return src;
         areEnvVarsInjected = true;
 
-        await __SSugarConfig.load('browser', {
-            platform: 'browser',
-            env: 'dev',
-        });
+        await __SSugarConfig.load(
+            {
+                platform: 'browser',
+                env: 'dev',
+            },
+            'browser',
+        );
 
         const browserConfig = __SSugarConfig.get('.', 'browser');
 
-        const envJson = JSON.stringify({
+        let envJsonStr = JSON.stringify({
             // @ts-ignore
-            ...__SEnv.env,
+            ...{
+                platform: 'browser',
+                env: 'dev',
+            },
             config: browserConfig,
             // ENVIRONMENT: config.isProduction ? 'production' : 'development',
         });
-        // console.log(envJson);
+
+        envJsonStr = __sanitizeJsonString(envJsonStr);
 
         const code = [
             `// sugar variables`,
             `if (!window.env) window.env = {SUGAR:{}};`,
-            `window.env.SUGAR = JSON.parse('${envJson}');`,
+            `window.env.SUGAR = JSON.parse(\`${envJsonStr}\`);`,
         ];
 
         return [code.join('\n'), src].join('\n');

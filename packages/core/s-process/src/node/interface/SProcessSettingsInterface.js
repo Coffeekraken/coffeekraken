@@ -1,4 +1,4 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SProcessSettingsInterface
@@ -18,55 +18,51 @@ class SProcessSettingsInterface extends __SInterface {
             asyncStart: {
                 type: 'Boolean',
                 alias: 'a',
-                default: __SugarConfig.get('process.asyncStart')
+                default: __SSugarConfig.get('process.asyncStart'),
             },
             killOnError: {
                 type: 'Boolean',
-                default: __SugarConfig.get('process.killOnError')
+                default: __SSugarConfig.get('process.killOnError'),
             },
             emitErrorAsEvent: {
                 type: 'Boolean',
-                default: __SugarConfig.get('process.emitErrorAsEvent')
+                default: __SSugarConfig.get('process.emitErrorAsEvent'),
             },
             stdio: {
                 type: 'String|SStdio|Boolean',
                 alias: 's',
-                default: __SugarConfig.get('process.stdio')
+                default: __SSugarConfig.get('process.stdio'),
             },
             decorators: {
                 type: 'Boolean',
                 alias: 'd',
-                default: __SugarConfig.get('process.decorators')
+                default: __SSugarConfig.get('process.decorators'),
             },
             throw: {
                 type: 'Boolean',
                 alias: 't',
-                default: __SugarConfig.get('process.throw')
+                default: __SSugarConfig.get('process.throw'),
             },
             exitAtEnd: {
                 type: 'Boolean',
                 alias: 'e',
-                default: __SugarConfig.get('process.exitAtEnd')
+                default: __SSugarConfig.get('process.exitAtEnd'),
             },
             runAsChild: {
                 type: 'Boolean',
                 alias: 'c',
-                default: __SugarConfig.get('process.runAsChild')
-            },
-            definition: {
-                type: 'Object',
-                default: __SugarConfig.get('process.definition')
+                default: __SSugarConfig.get('process.runAsChild'),
             },
             processPath: {
                 type: 'String',
-                default: __SugarConfig.get('process.processPath')
+                default: __SSugarConfig.get('process.processPath'),
             },
             notification: {
                 type: 'Object',
-                default: __SugarConfig.get('process.notification')
-            }
+                default: __SSugarConfig.get('process.notification'),
+            },
         };
     }
 }
 export default SProcessSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NTZXR0aW5nc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNQcm9jZXNzU2V0dGluZ3NJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7O0dBV0c7QUFDSCxNQUFNLHlCQUEwQixTQUFRLFlBQVk7SUFDbEQsTUFBTSxLQUFLLFVBQVU7UUFDbkIsT0FBTztZQUNMLFVBQVUsRUFBRTtnQkFDVixJQUFJLEVBQUUsU0FBUztnQkFDZixLQUFLLEVBQUUsR0FBRztnQkFDVixPQUFPLEVBQUUsYUFBYSxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQzthQUNqRDtZQUNELFdBQVcsRUFBRTtnQkFDWCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsYUFBYSxDQUFDLEdBQUcsQ0FBQyxxQkFBcUIsQ0FBQzthQUNsRDtZQUNELGdCQUFnQixFQUFFO2dCQUNoQixJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsYUFBYSxDQUFDLEdBQUcsQ0FBQywwQkFBMEIsQ0FBQzthQUN2RDtZQUNELEtBQUssRUFBRTtnQkFDTCxJQUFJLEVBQUUsdUJBQXVCO2dCQUM3QixLQUFLLEVBQUUsR0FBRztnQkFDVixPQUFPLEVBQUUsYUFBYSxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDNUM7WUFDRCxVQUFVLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsS0FBSyxFQUFFLEdBQUc7Z0JBQ1YsT0FBTyxFQUFFLGFBQWEsQ0FBQyxHQUFHLENBQUMsb0JBQW9CLENBQUM7YUFDakQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsS0FBSyxFQUFFLEdBQUc7Z0JBQ1YsT0FBTyxFQUFFLGFBQWEsQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDO2FBQzVDO1lBQ0QsU0FBUyxFQUFFO2dCQUNULElBQUksRUFBRSxTQUFTO2dCQUNmLEtBQUssRUFBRSxHQUFHO2dCQUNWLE9BQU8sRUFBRSxhQUFhLENBQUMsR0FBRyxDQUFDLG1CQUFtQixDQUFDO2FBQ2hEO1lBQ0QsVUFBVSxFQUFFO2dCQUNWLElBQUksRUFBRSxTQUFTO2dCQUNmLEtBQUssRUFBRSxHQUFHO2dCQUNWLE9BQU8sRUFBRSxhQUFhLENBQUMsR0FBRyxDQUFDLG9CQUFvQixDQUFDO2FBQ2pEO1lBQ0QsVUFBVSxFQUFFO2dCQUNWLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxhQUFhLENBQUMsR0FBRyxDQUFDLG9CQUFvQixDQUFDO2FBQ2pEO1lBQ0QsV0FBVyxFQUFFO2dCQUNYLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxhQUFhLENBQUMsR0FBRyxDQUFDLHFCQUFxQixDQUFDO2FBQ2xEO1lBQ0QsWUFBWSxFQUFFO2dCQUNaLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxhQUFhLENBQUMsR0FBRyxDQUFDLHNCQUFzQixDQUFDO2FBQ25EO1NBQ0YsQ0FBQTtJQUNILENBQUM7Q0FDRjtBQUNELGVBQWUseUJBQXlCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NTZXR0aW5nc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNQcm9jZXNzU2V0dGluZ3NJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxjQUFjLE1BQU0sOEJBQThCLENBQUM7QUFDMUQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7O0dBV0c7QUFDSCxNQUFNLHlCQUEwQixTQUFRLFlBQVk7SUFDaEQsTUFBTSxLQUFLLFVBQVU7UUFDakIsT0FBTztZQUNILFVBQVUsRUFBRTtnQkFDUixJQUFJLEVBQUUsU0FBUztnQkFDZixLQUFLLEVBQUUsR0FBRztnQkFDVixPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQzthQUNwRDtZQUNELFdBQVcsRUFBRTtnQkFDVCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxxQkFBcUIsQ0FBQzthQUNyRDtZQUNELGdCQUFnQixFQUFFO2dCQUNkLElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxjQUFjLENBQUMsR0FBRyxDQUFDLDBCQUEwQixDQUFDO2FBQzFEO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSx1QkFBdUI7Z0JBQzdCLEtBQUssRUFBRSxHQUFHO2dCQUNWLE9BQU8sRUFBRSxjQUFjLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQzthQUMvQztZQUNELFVBQVUsRUFBRTtnQkFDUixJQUFJLEVBQUUsU0FBUztnQkFDZixLQUFLLEVBQUUsR0FBRztnQkFDVixPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQzthQUNwRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZixLQUFLLEVBQUUsR0FBRztnQkFDVixPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDL0M7WUFDRCxTQUFTLEVBQUU7Z0JBQ1AsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsS0FBSyxFQUFFLEdBQUc7Z0JBQ1YsT0FBTyxFQUFFLGNBQWMsQ0FBQyxHQUFHLENBQUMsbUJBQW1CLENBQUM7YUFDbkQ7WUFDRCxVQUFVLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsS0FBSyxFQUFFLEdBQUc7Z0JBQ1YsT0FBTyxFQUFFLGNBQWMsQ0FBQyxHQUFHLENBQUMsb0JBQW9CLENBQUM7YUFDcEQ7WUFDRCxXQUFXLEVBQUU7Z0JBQ1QsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLGNBQWMsQ0FBQyxHQUFHLENBQUMscUJBQXFCLENBQUM7YUFDckQ7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLGNBQWMsQ0FBQyxHQUFHLENBQUMsc0JBQXNCLENBQUM7YUFDdEQ7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ0QsZUFBZSx5QkFBeUIsQ0FBQyJ9

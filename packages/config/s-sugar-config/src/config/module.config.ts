@@ -1,7 +1,7 @@
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 export default function (env) {
-    if (env.platform !== 'node') return {};
+    if (env.platform !== 'node') return;
 
     return {
         resolve: {

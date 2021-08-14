@@ -26,7 +26,7 @@ export function prepare(config) {
 }
 
 export default function (env) {
-    if (env.platform !== 'node') return {};
+    if (env.platform !== 'node') return;
 
     return {
         user: {

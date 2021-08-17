@@ -66,6 +66,8 @@ export default function sVitePluginSugar(settings: any = {}) {
         async transform(src, id) {
             if (jsReg.test(id)) {
                 if (id.includes(packageRoot) && id.match(/\/index\.(t|j)s/)) {
+                    // @TODO             find a better way to determine where to inject things
+                    console.log('inject');
                     src = await _injectEnvVars(src, id);
                 }
 

@@ -1,8 +1,6 @@
 // @ts-nocheck
 
 import __isPlain from '../is/plainObject';
-import __unquote from '../string/unquote';
-import __decycle from './decycle';
 
 /**
  * @name                              flatten
@@ -41,77 +39,68 @@ import __decycle from './decycle';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function flatten(object, settings = {}) {
-  const toReturn = {};
+    const toReturn = {};
 
-  // make sure the passed object is not null, undefined
-  if (!Array.isArray(object) && !__isPlain(object)) return object;
+    // make sure the passed object is not null, undefined
+    if (!Array.isArray(object) && !__isPlain(object)) return object;
 
-  // decycle object
-  object = __decycle(object);
-
-  settings = {
-    separator: '.',
-    array: false,
-    quoteSeparatedProperties: true,
-    quoteCharacter: '"',
-    excludeProps: [],
-    keepLastIntact: false,
-    ...settings
-  };
-
-  for (const key in object) {
-    if (object[key] === undefined) continue;
-
-    if (object[key] === null) {
-      toReturn[key] = null;
-      continue;
-    }
-
-    if (settings.excludeProps.indexOf(key) !== -1) {
-      toReturn[key] = object[key];
-      continue;
-    }
-
-    if (
-      (Array.isArray(object[key]) && settings.array) ||
-      (!Array.isArray(object[key]) && typeof object[key]) == 'object'
-    ) {
-
-      const isArray = Array.isArray(object[key]);
-
-      const flatObject = flatten(object[key], {
+    settings = {
+        separator: '.',
+        array: false,
+        quoteSeparatedProperties: true,
+        quoteCharacter: '"',
+        excludeProps: [],
+        keepLastIntact: false,
         ...settings,
-        keepLastIntact: false
-      });
+    };
 
-      for (const x in flatObject) {
-        if (flatObject[x] === undefined) continue;
+    for (const key in object) {
+        if (object[key] === undefined) continue;
 
-        if (isArray) {
-          toReturn[`${key}[${x}]`] = flatObject[x];
-        } else {
-          const part = key;
-          if (
-            settings.quoteSeparatedProperties &&
-            part.includes(settings.separator)
-          ) {
-            toReturn[
-              `${settings.quoteCharacter}${key}${settings.quoteCharacter}` +
-                settings.separator +
-                x
-            ] = flatObject[x];
-          } else {
-            toReturn[key + settings.separator + x] = flatObject[x];
-          }
+        if (object[key] === null) {
+            toReturn[key] = null;
+            continue;
         }
-      }
-      continue;
+
+        if (settings.excludeProps.indexOf(key) !== -1) {
+            toReturn[key] = object[key];
+            continue;
+        }
+
+        if (
+            (Array.isArray(object[key]) && settings.array) ||
+            (!Array.isArray(object[key]) && typeof object[key]) == 'object'
+        ) {
+            const isArray = Array.isArray(object[key]);
+
+            const flatObject = flatten(object[key], {
+                ...settings,
+                keepLastIntact: false,
+            });
+
+            for (const x in flatObject) {
+                if (flatObject[x] === undefined) continue;
+
+                if (isArray) {
+                    toReturn[`${key}[${x}]`] = flatObject[x];
+                } else {
+                    const part = key;
+                    if (settings.quoteSeparatedProperties && part.includes(settings.separator)) {
+                        toReturn[
+                            `${settings.quoteCharacter}${key}${settings.quoteCharacter}` + settings.separator + x
+                        ] = flatObject[x];
+                    } else {
+                        toReturn[key + settings.separator + x] = flatObject[x];
+                    }
+                }
+            }
+            continue;
+        }
+
+        toReturn[key] = object[key];
     }
 
-    toReturn[key] = object[key];
-  }
-
-  return toReturn;
+    return toReturn;
 }
 
 export default flatten;

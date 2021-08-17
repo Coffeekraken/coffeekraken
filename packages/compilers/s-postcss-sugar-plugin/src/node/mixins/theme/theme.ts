@@ -26,49 +26,49 @@ import __themeToVars from '../../utils/themeToVars';
  */
 
 class postcssSugarPluginThemeinInterface extends __SInterface {
-  static definition = {
-    theme: themeDefinition,
-    scope: {
-      type: 'Boolean',
-      default: false
-    }
-  };
+    static definition = {
+        theme: themeDefinition,
+        scope: {
+            type: 'Boolean',
+            default: false,
+        },
+    };
 }
 
 export interface IPostcssSugarPluginThemeParams {
-  theme: string;
-  scope: boolean;
+    theme: string;
+    scope: boolean;
 }
 
 export { postcssSugarPluginThemeinInterface as interface };
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginThemeParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginThemeParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginThemeParams = {
-    theme: '',
-    scope: false,
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginThemeParams = {
+        theme: '',
+        scope: false,
+        ...params,
+    };
 
-  const vars = __themeToVars(finalParams.theme);
+    const vars = __themeToVars(finalParams.theme);
 
-  if (finalParams.scope) {
-    vars.unshift(`.s-theme--${finalParams.theme} {`);
-    vars.push(`@sugar.lnf.base;`);
-    vars.push('}');
-  } else if (atRule.parent.type === 'root') {
-    vars.unshift(':root {');
-    vars.push(`@sugar.lnf.base;`);
-    vars.push('}');
-  } else {
-    vars.push(`@sugar.lnf.base;`);
-  }
+    if (finalParams.scope) {
+        vars.unshift(`.s-theme--${finalParams.theme} {`);
+        vars.push(`@sugar.lnf.base;`);
+        vars.push('}');
+    } else if (atRule.parent.type === 'root') {
+        vars.unshift(':root {');
+        vars.push(`@sugar.lnf.base;`);
+        vars.push('}');
+    } else {
+        vars.push(`@sugar.lnf.base;`);
+    }
 
-  replaceWith(vars); 
+    replaceWith(vars);
 }

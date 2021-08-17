@@ -3,91 +3,93 @@ export default function (env, config) {
         extends: 'themeBase',
 
         colorStates: {
-            '0': {
-                darken: 50,
+            default: {
+                '0': {
+                    darken: 50,
+                },
+                '5': {
+                    darken: 45,
+                },
+                '10': {
+                    darken: 40,
+                },
+                '15': {
+                    darken: 35,
+                },
+                '20': {
+                    darken: 30,
+                },
+                '25': {
+                    darken: 25,
+                },
+                '30': {
+                    darken: 20,
+                },
+                '35': {
+                    darken: 15,
+                },
+                '40': {
+                    darken: 10,
+                },
+                '45': {
+                    darken: 5,
+                },
+                '50': {},
+                '55': {
+                    lighten: 5,
+                },
+                '60': {
+                    lighten: 10,
+                },
+                '65': {
+                    lighten: 15,
+                },
+                '70': {
+                    lighten: 20,
+                },
+                '75': {
+                    lighten: 25,
+                },
+                '80': {
+                    lighten: 30,
+                },
+                '85': {
+                    lighten: 35,
+                },
+                '90': {
+                    lighten: 40,
+                },
+                '95': {
+                    lighten: 48,
+                },
+                '100': {
+                    lighten: 50,
+                },
+                text: {},
+                foreground: {
+                    lighten: 50,
+                },
+                background: {
+                    lighten: 50,
+                },
+                backgroundForeground: {},
+                surface: {
+                    lighten: 49,
+                },
+                surfaceForeground: {},
+                ui: {
+                    lighten: 49,
+                },
+                border: {
+                    alpha: 0.2,
+                },
+                gradientStart: {},
+                gradientEnd: {
+                    darken: 20,
+                },
             },
-            '5': {
-                darken: 45,
-            },
-            '10': {
-                darken: 40,
-            },
-            '15': {
-                darken: 35,
-            },
-            '20': {
-                darken: 30,
-            },
-            '25': {
-                darken: 25,
-            },
-            '30': {
-                darken: 20,
-            },
-            '35': {
-                darken: 15,
-            },
-            '40': {
-                darken: 10,
-            },
-            '45': {
-                darken: 5,
-            },
-            '50': {},
-            '55': {
-                lighten: 5,
-            },
-            '60': {
-                lighten: 10,
-            },
-            '65': {
-                lighten: 15,
-            },
-            '70': {
-                lighten: 20,
-            },
-            '75': {
-                lighten: 25,
-            },
-            '80': {
-                lighten: 30,
-            },
-            '85': {
-                lighten: 35,
-            },
-            '90': {
-                lighten: 40,
-            },
-            '95': {
-                lighten: 48,
-            },
-            '100': {
-                lighten: 50,
-            },
-            text: {},
-            foreground: {
-                lighten: 50,
-            },
-            background: {
-                lighten: 50,
-            },
-            backgroundForeground: {},
-            surface: {
-                lighten: 49,
-            },
-            surfaceForeground: {},
-            ui: {
-                lighten: 49,
-            },
-            border: {
-                alpha: 0.2,
-            },
-            gradientStart: {},
-            gradientEnd: {
-                darken: 20,
-            },
-
             ':hover': {
+                // '...': '[this.colorStates.default]',
                 '0': {
                     darken: 55,
                 },
@@ -158,7 +160,7 @@ export default function (env, config) {
                     lighten: 44,
                 },
                 foreground: {
-                    lighten: 50,
+                    lighten: 60,
                 },
                 background: {
                     lighten: 50,
@@ -176,6 +178,7 @@ export default function (env, config) {
                 },
             },
             ':focus': {
+                '...': '[this.colorStates.default]',
                 '0': {
                     darken: 60,
                 },
@@ -249,6 +252,7 @@ export default function (env, config) {
                 },
             },
             ':active': {
+                '...': '[this.colorStates.default]',
                 '0': {
                     darken: 60,
                 },

@@ -53,6 +53,7 @@
     "crypto-js": "^4.0.0",
     "css": "^3.0.0",
     "custom-event": "^1.0.1",
+    "deepmerge": "^4.2.2",
     "depcheck": "^1.4.0",
     "dependency-tree": "^8.1.0",
     "domready": "^1.0.8",

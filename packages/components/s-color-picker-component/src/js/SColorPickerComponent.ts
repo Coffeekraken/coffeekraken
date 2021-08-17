@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import {LitElement, html, property, css, unsafeCSS, query, queryAssignedNodes} from 'lit-element';
+import { LitElement, html, property, css, unsafeCSS, query, queryAssignedNodes } from 'lit-element';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
@@ -10,16 +10,17 @@ import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
 import __css from '../css/s-color-picker.css';
 
 export default class SColorPicker extends LitElement {
-
     static get properties() {
         return __SComponentUtils.properties({}, __SColorPickerComponentInterface);
     }
 
     static get styles() {
-        return css`${unsafeCSS(`
+        return css`
+            ${unsafeCSS(`
             ${__baseCss}
             ${__css}
-        `)}`;
+        `)}
+        `;
     }
 
     _component = undefined;
@@ -29,11 +30,10 @@ export default class SColorPicker extends LitElement {
         const _this = this;
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
             interface: __SColorPickerComponentInterface,
-            defaultProps: {}
+            defaultProps: {},
         });
     }
     firstUpdated() {
-
         const pickr = __Pickr.create({
             el: this.shadowRoot?.querySelector('.s-color-picker__preview'),
             theme: 'nano', // or 'monolith', or 'nano'
@@ -59,7 +59,6 @@ export default class SColorPicker extends LitElement {
             ],
 
             components: {
-
                 // Main components
                 preview: true,
                 opacity: true,
@@ -75,8 +74,8 @@ export default class SColorPicker extends LitElement {
                     input: true,
                     clear: true,
                     // save: true
-                }
-            }
+                },
+            },
         });
 
         function getPickrState() {
@@ -94,21 +93,21 @@ export default class SColorPicker extends LitElement {
                     s: hsla[1],
                     l: hsla[2],
                     a: hsla[3],
-                    string: `hsla(${hsla[0]},${hsla[1]},${hsla[2]},${hsla[3]})`
+                    string: `hsla(${hsla[0]},${hsla[1]},${hsla[2]},${hsla[3]})`,
                 },
                 hsva: {
                     h: hsva[0],
                     s: hsva[1],
                     v: hsva[2],
                     a: hsva[3],
-                    string: `hsva(${hsva[0]},${hsva[1]},${hsva[2]},${hsva[3]})`
+                    string: `hsva(${hsva[0]},${hsva[1]},${hsva[2]},${hsva[3]})`,
                 },
                 rgba: {
                     r: rgba[0],
                     g: rgba[1],
                     b: rgba[2],
                     a: rgba[3],
-                    string: `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`
+                    string: `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`,
                 },
                 hex: hex.toString(),
                 cmyk: {
@@ -116,8 +115,8 @@ export default class SColorPicker extends LitElement {
                     m: cmyk[1],
                     y: cmyk[2],
                     k: cmyk[3],
-                    string: `cmyk(${cmyk[0]},${cmyk[1]},${cmyk[2]},${cmyk[3]})`
-                }
+                    string: `cmyk(${cmyk[0]},${cmyk[1]},${cmyk[2]},${cmyk[3]})`,
+                },
             };
         }
 
@@ -125,38 +124,37 @@ export default class SColorPicker extends LitElement {
             pickr.applyColor();
             const detail = getPickrState();
             const change = new CustomEvent('change', {
-                detail
+                detail,
             });
             this.dispatchEvent(change);
         });
         pickr.on('show', () => {
             const detail = getPickrState();
             const change = new CustomEvent('show', {
-                detail
+                detail,
             });
             this.dispatchEvent(change);
         });
         pickr.on('hide', () => {
             const detail = getPickrState();
             const change = new CustomEvent('hide', {
-                detail
+                detail,
             });
             this.dispatchEvent(change);
         });
         pickr.on('cancel', () => {
             const detail = getPickrState();
             const change = new CustomEvent('cancel', {
-                detail
+                detail,
             });
             this.dispatchEvent(change);
         });
 
         const $app = this.shadowRoot?.querySelector('.pcr-app');
-        $app?.classList.add(this._component.className('__picker'))
+        $app?.classList.add(this._component.className('__picker'));
 
         const $preview = this.shadowRoot?.querySelector('.pickr');
         $preview?.classList.add(this._component.className('__preview'));
-
     }
     // createRenderRoot() {
     //     return this;
@@ -164,8 +162,8 @@ export default class SColorPicker extends LitElement {
     render() {
         return html`
             <div class="${this._component.className('')}">
-                <div class="${this._component.className('__picker-wrapper')}"></div>  
-                <div class="${this._component.className('__preview')}"></div>    
+                <div class="${this._component.className('__picker-wrapper')}"></div>
+                <div class="${this._component.className('__preview')}"></div>
             </div>
         `;
     }

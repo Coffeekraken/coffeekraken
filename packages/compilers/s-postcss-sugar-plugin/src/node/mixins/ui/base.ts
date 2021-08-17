@@ -3,12 +3,12 @@ import __themeVar from '../../utils/themeVar';
 import __theme from '../../utils/theme';
 
 class postcssSugarPluginUiBaseInterface extends __SInterface {
-  static definition = {
-      name: {
-          type: 'String',
-          required: true
-      }
-  };
+    static definition = {
+        name: {
+            type: 'String',
+            required: true,
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiBaseParams {
@@ -18,31 +18,31 @@ export interface IPostcssSugarPluginUiBaseParams {
 export { postcssSugarPluginUiBaseInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiBaseParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiBaseParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiBaseParams = {
-    name: '',
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiBaseParams = {
+        name: '',
+        ...params,
+    };
 
-  if (!finalParams.name) return;
+    if (!finalParams.name) return;
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  // bare
-  vars.push(`
+    // bare
+    vars.push(`
         display: inline-block;
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
     `);
 
-  // lnf
-  vars.push(`
+    // lnf
+    vars.push(`
         color: sugar.color(main, surfaceForeground);
         background-color: sugar.color(main, ui);
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
@@ -58,16 +58,19 @@ export default function ({
         @sugar.state.hover {
           background-color: sugar.color(main:hover, ui);
           border: sugar.color(ui:hover, border) solid 1px;
+          color: sugar.color(ui:hover, foreground);
         }
         @sugar.state.focus {
           background-color: sugar.color(main:focus, ui);
           border: sugar.color(ui:focus, border) solid 1px;
+          color: sugar.color(ui:focus, foreground);
         }
         @sugar.state.active {
           background-color: sugar.color(main:active, ui);
           border: sugar.color(ui:active, border) solid 1px;
+          color: sugar.color(ui:active, foreground);
         }
   `);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

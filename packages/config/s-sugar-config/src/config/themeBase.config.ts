@@ -658,14 +658,14 @@ export default function (env, config) {
                  * @name              default
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           10px
+                 * @default           6px
                  *
                  * Specify the <s-color="accent">0</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                default: '10px',
+                default: '6px',
 
                 /**
                  * @name              0
@@ -830,131 +830,131 @@ export default function (env, config) {
              * @name            10
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         12px
+             * @default         6px
              *
              * Specify the <primary>10</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            10: '12px',
+            10: '6px',
 
             /**
              * @name            20
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         24px
+             * @default         12px
              *
              * Specify the <primary>20</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            20: '24px',
+            20: '12px',
 
             /**
              * @name            30
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         36px
+             * @default         24px
              *
              * Specify the <primary>30</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            30: '36px',
+            30: '24px',
 
             /**
              * @name            40
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         48px
+             * @default         36px
              *
              * Specify the <primary>40</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            40: '48px',
+            40: '36px',
 
             /**
              * @name            50
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         60px
+             * @default         48px
              *
              * Specify the <primary>50</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            50: '60px',
+            50: '48px',
 
             /**
              * @name            60
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         72px
+             * @default         60px
              *
              * Specify the <primary>60</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            60: '72px',
+            60: '60px',
 
             /**
              * @name            70
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         84px
+             * @default         72px
              *
              * Specify the <primary>70</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            70: '84px',
+            70: '72px',
 
             /**
              * @name            80
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         96px
+             * @default         84px
              *
              * Specify the <primary>80</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '96px',
+            80: '84px',
 
             /**
              * @name            90
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         108px
+             * @default         96px
              *
              * Specify the <primary>90</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            90: '108px',
+            90: '96px',
 
             /**
              * @name            100
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         120px
+             * @default         108px
              *
              * Specify the <primary>100</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            100: '120px',
+            100: '108px',
         },
 
         margin: {

@@ -1,43 +1,20 @@
-.s-color-picker[default-style] {
+.s-date-picker {
+    display: flex;
 }
 
-.s-color-picker__picker {
-
-    /* top: auto !important;
-    left: auto !important; */
-
-    [default-style] & {
-        background: sugar.color(ui, surface);
-        overflow: hidden;
-        @sugar.depth(sugar.theme(ui.colorPicker.depth));
-        border-radius: sugar.theme(ui.colorPicker.borderRadius);
-        padding: sugar.theme(ui.colorPicker.padding);
+s-date-picker[default-style] {
+    .s-date-picker__input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
-
+    .s-date-picker__button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 }
 
-.pickr.s-color-picker__preview {
-    display: inline-block;
-    outline: none;
-    border-radius: 0 !important;
-
-    [default-style] & {
-        transition: sugar.transition(fast);
-    }
-
-    button:focus {
-        display: none;
-    }
-
-    button {
-        width: 1em;
+.s-date-picker__button {
+    svg {
         height: 1em;
-        border-radius: 0 !important;
-
-        &:before,
-        &:after {
-            border-radius: 0 !important;
-        }
-
     }
 }

@@ -2,12 +2,12 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
-  static definition = {
-    sizes: {
-      type: 'String[]',
-      alias: 's'
-    }
-  };
+    static definition = {
+        sizes: {
+            type: 'String[]',
+            alias: 's',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiButtonClassesParams {}
@@ -15,36 +15,31 @@ export interface IPostcssSugarPluginUiButtonClassesParams {}
 export { postcssSugarPluginUiButtonClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  const defaultStyle = __theme().config('ui.button.defaultStyle') ?? 'default';
+    const defaultStyle = __theme().config('ui.button.defaultStyle') ?? 'default';
 
-  const styles = [
-    'default',
-    'gradient',
-    'outline',
-    'text'
-  ];
+    const styles = ['default', 'gradient', 'outline', 'text'];
 
-  styles.forEach((style) => {
-    let cls = `s-btn`;
-    if (style !== defaultStyle) {
-      cls += `--${style}`;
-    }
+    styles.forEach((style) => {
+        let cls = `s-btn`;
+        if (style !== defaultStyle) {
+            cls += `--${style}`;
+        }
 
-    vars.push(`/**
+        vars.push(`/**
         * @name           ${cls}
         * @namespace      sugar.css.ui.button
         * @type           CssClass
@@ -57,13 +52,11 @@ export default function ({
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
-    vars.push(
-      [`.${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n')
-    );
-  });
+        vars.push([`.${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n'));
+    });
 
-  Object.keys(__theme().baseColors()).forEach((colorName) => {
-    vars.push(`
+    Object.keys(__theme().baseColors()).forEach((colorName) => {
+        vars.push(`
       /**
        * @name        s-btn--${colorName}
        * @namespace     sugar.css.ui.button
@@ -81,9 +74,9 @@ export default function ({
         @sugar.color.remap(ui, ${colorName});
       }
     `);
-  });
+    });
 
-  vars.push(`/**
+    vars.push(`/**
         * @name           s-btn--shrinked
         * @namespace      sugar.css.ui.button
         * @type           CssClass
@@ -102,7 +95,7 @@ export default function ({
       }
     `);
 
-  vars.push(`/**
+    vars.push(`/**
         * @name           s-btn--block
         * @namespace      sugar.css.ui.button
         * @type           CssClass
@@ -121,5 +114,5 @@ export default function ({
       }
     `);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

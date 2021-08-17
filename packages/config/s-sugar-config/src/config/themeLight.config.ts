@@ -16,7 +16,7 @@ export default function (env, config) {
              */
             main: {
                 color: '#787987',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**
@@ -32,7 +32,7 @@ export default function (env, config) {
              */
             ui: {
                 color: '#787987',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**
@@ -48,7 +48,7 @@ export default function (env, config) {
              */
             accent: {
                 color: '#ffbb00',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**
@@ -64,7 +64,7 @@ export default function (env, config) {
              */
             complementary: {
                 color: '#5100ff',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**
@@ -80,7 +80,7 @@ export default function (env, config) {
              */
             success: {
                 color: '#91ff00',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**
@@ -96,7 +96,7 @@ export default function (env, config) {
              */
             warning: {
                 color: '#ffd500',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**
@@ -112,7 +112,7 @@ export default function (env, config) {
              */
             error: {
                 color: '#ff003b',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**
@@ -128,7 +128,7 @@ export default function (env, config) {
              */
             info: {
                 color: '#00ffff',
-                '...': '[theme.colorStates]',
+                '...': '[extends.colorStates]',
             },
 
             /**

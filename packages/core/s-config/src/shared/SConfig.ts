@@ -267,10 +267,35 @@ export default class SConfig {
                     for (let i = 0; i < matches.length; i++) {
                         const match = matches[i];
                         const ext = __get(config, path.slice(0, 1)[0] + '.extends');
-                        const value = __get(config, `${ext}.${matches[0].replace('[extends.', '').replace(']', '')}`);
+                        const value = __get(config, `${ext}.${match.replace('[extends.', '').replace(']', '')}`);
                         if (value === undefined) {
                             throw new Error(
                                 `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" extends config value does not exiats...`,
+                            );
+                        }
+                        if (string === match) return value;
+                        string = string.replace(match, value);
+                    }
+                    return string;
+                });
+            },
+        });
+
+        // register the default resolver "[extends...]"
+        this._settings.resolvers.unshift({
+            match: /\[this.[a-zA-Z0-9.\-_]+\]/gm,
+            resolve(string, matches, config, path) {
+                return __memoize(() => {
+                    for (let i = 0; i < matches.length; i++) {
+                        const match = matches[i];
+                        // console.log(`${path.slice(0, 1)[0]}.${match.replace('[this.', '').replace(']', '')}`);
+                        const value = __get(
+                            config,
+                            `${path.slice(0, 1)[0]}.${match.replace('[this.', '').replace(']', '')}`,
+                        );
+                        if (value === undefined) {
+                            throw new Error(
+                                `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" "this" config value does not exiats...`,
                             );
                         }
                         if (string === match) return value;
@@ -401,21 +426,30 @@ export default class SConfig {
             config = this._resolveInternalReferences(config, config, resolverObj);
         });
 
-        this._restPaths.forEach((path) => {
-            let obj = __get(config, path);
-            let newObj = {};
-            Object.keys(obj).forEach((key) => {
-                if (key === '...') {
-                    newObj = {
-                        ...newObj,
-                        ...obj['...'],
-                    };
-                } else {
-                    newObj[key] = obj[key];
-                }
+        let nestedRests = [];
+
+        this._restPaths
+            // .sort((first, second) => {
+            //     if (first.split('.').length < second.split('.').length) return -1;
+            // })
+            .forEach((path) => {
+                let obj = __get(config, path);
+                let newObj = {};
+                Object.keys(obj).forEach((key) => {
+                    if (key === '...') {
+                        // console.log('FF', obj['...']);
+
+                        newObj = {
+                            ...newObj,
+                            ...obj['...'],
+                        };
+                        delete obj['...'];
+                    } else {
+                        newObj[key] = obj[key];
+                    }
+                });
+                __set(config, path, newObj);
             });
-            __set(config, path, newObj);
-        });
 
         if (this.constructor._registeredPrepares[this.id]) {
             for (let k = 0; k < Object.keys(this.constructor._registeredPrepares[this.id]).length; k++) {

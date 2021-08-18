@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { html, css, unsafeCSS } from 'lit-element/lit-element';
+import { html, css, unsafeCSS } from 'lit-element';
 import __SRangeComponentInterface from './interface/SRangeComponentInterface';
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -65,6 +65,7 @@ export default class SRange extends SLitElement {
     async firstUpdated() {
         this._$input = this.querySelector('input');
         this._$tooltip = this.querySelector('.s-range__tooltip');
+
         this._$input.addEventListener('input', (e) => {
             this._handleTooltip();
             this._handleTarget();

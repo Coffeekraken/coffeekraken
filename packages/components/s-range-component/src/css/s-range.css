@@ -1,5 +1,6 @@
 s-range {
-    display: inline-block;
+    display: block;
+    width: 100%;
 }
 .s-range {
     display: flex;

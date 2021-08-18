@@ -125,27 +125,29 @@ export default class CkSettings extends LitElement {
                     <li class="s-bg:main-surface">
                         <label class="s-label s-p:20" for="setting-accent-color">
                             Spread
-                            <!-- <s-range
+                            <s-range
                                 name="hello"
                                 class="s-range s-ui"
                                 id="setting-spread"
+                                tooltip
                                 min="0"
                                 max="100"
                                 step="10"
-                            ></s-range> -->
+                            ></s-range>
                         </label>
                     </li>
                     <li class="s-bg:main-surface">
                         <label class="s-label s-p:20" for="setting-accent-color">
                             Spread
-                            <!-- <s-range
+                            <s-range
                                 name="coco"
                                 class="s-ui:accent"
                                 id="setting-spread"
+                                tooltip
                                 min="0"
                                 max="100"
                                 step="10"
-                            ></s-range> -->
+                            ></s-range>
                         </label>
                     </li>
                     <li class="s-bg:main-surface">

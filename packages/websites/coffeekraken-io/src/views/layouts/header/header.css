@@ -4,15 +4,16 @@ body {
 
 #header {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     z-index: 100;
     background: sugar.color(main, 100);
     padding: sugar.space(20) 0;
-    transition: padding ease-in-out .2s;
-    @sugar.depth(10);
+    transition: padding ease-in-out 0.2s;
+    @sugar.depth (10);
 
-    @sugar.theme.when(dark) {
+    @sugar.theme.when (dark) {
         background-color: sugar.color(main, --darken 35);
     }
 
@@ -51,21 +52,23 @@ body {
             }
         }
         & > a:hover {
-             background: sugar.color(accent);
-             color: sugar.color(accent, foreground);
-             transform: scale(1.1);
+            background: sugar.color(accent);
+            color: sugar.color(accent, foreground);
+            transform: scale(1.1);
         }
     }
-
 }
 
 #settings .s-side-panel__container {
     background-color: sugar.color(main, background);
-    min-width: 33vw;
+    min-width: 300px;
+    width: 33vw;
+    max-width: 500px;
     overflow-y: scroll;
-    @sugar.scrollbar(accent, 2px);
-    @sugar.depth(100);
+    @sugar.scrollbar (accent, 2px);
+    @sugar.depth (100);
+
+    .s-label > *:last-child {
+        max-width: 50%;
+    }
 }
-
-
-

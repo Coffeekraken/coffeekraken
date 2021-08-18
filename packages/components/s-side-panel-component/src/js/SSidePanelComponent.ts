@@ -58,8 +58,6 @@ export default class SSidePanel extends SLitElement {
             defaultProps: {},
         });
 
-        console.log('CC');
-
         if (this._component.props.closeOn.indexOf('click') !== -1) {
             this.addEventListener('click', (e) => {
                 if (this._$container.contains(e.target)) return;

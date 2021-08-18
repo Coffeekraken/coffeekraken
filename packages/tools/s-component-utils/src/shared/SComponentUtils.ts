@@ -9,6 +9,8 @@ import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __injectStyle from '@coffeekraken/sugar/js/css/injectStyle';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import __cloneClass from '@coffeekraken/sugar/shared/class/utils/cloneClass';
+import __clone from '@coffeekraken/sugar/shared/object/clone';
 
 /**
  * @name                SComponentUtils
@@ -48,6 +50,13 @@ export interface ISComponentUtilsSettings {
 
 export interface ISComponentUtilsCtorSettings {
     componentUtils: Partial<ISComponentUtilsSettings>;
+}
+
+export interface ISComponentUtilsDefaultProps {
+    id: string;
+    mountWhen: 'directly' | 'inViewport';
+    adoptStyle: boolean;
+    defaultStyle: boolean;
 }
 
 export class SComponentUtilsDefaultInterface extends __SInterface {
@@ -148,7 +157,10 @@ export default class SComponentUtils extends __SClass {
     static _defaultProps: any = {};
     static setDefaultProps(selector: string | string[], props: any): void {
         Array.from(selector).forEach((sel) => {
-            this._defaultProps[sel] = props;
+            this._defaultProps[sel] = {
+                ...(this._defaultProps[sel] ?? {}),
+                ...props,
+            };
         });
     }
 
@@ -184,7 +196,12 @@ export default class SComponentUtils extends __SClass {
             this.node = node.parentNode;
         }
 
-        let InterfaceToApply = SComponentUtilsDefaultInterface;
+        let InterfaceToApply =
+            this._settings.interface ??
+            class InlineComponentUtilsInterface extends __SInterface {
+                static definition = Object.assign({}, SComponentUtilsDefaultInterface.definition);
+            };
+
         if (this._settings.interface) {
             InterfaceToApply.definition = {
                 ...InterfaceToApply.definition,
@@ -200,6 +217,7 @@ export default class SComponentUtils extends __SClass {
             (<any>this.constructor)._defaultProps['*'] ?? {},
             (<any>this.constructor)._defaultProps[this.name] ?? {},
         );
+
         let passedProps = {};
         if (props.constructor.name === 'NamedNodeMap') {
             Object.keys(props).forEach((key) => {
@@ -214,7 +232,14 @@ export default class SComponentUtils extends __SClass {
         } else {
             passedProps = props;
         }
-        this.props = __deepMerge(defaultProps, passedProps);
+        this.props = __deepMerge(
+            defaultProps,
+            InterfaceToApply.apply(passedProps, {
+                descriptor: {
+                    defaults: false,
+                },
+            }),
+        );
 
         // litElement shouldUpdate
         if (!this.node.shouldUpdate) {
@@ -272,20 +297,18 @@ export default class SComponentUtils extends __SClass {
         }
     }
 
-    attrsStr() {
-        return 'coco="jhello"';
-    }
-
     static getFinalInterface(int?: __SInterface): __SInterface {
-        let InterfaceToApply = SComponentUtilsDefaultInterface;
+        class InlineComponentUtilsInterface extends __SInterface {
+            static definition = SComponentUtilsDefaultInterface.definition;
+        }
         if (int) {
-            InterfaceToApply.definition = {
-                ...InterfaceToApply.definition,
+            InlineComponentUtilsInterface.definition = {
+                ...SComponentUtilsDefaultInterface.definition,
                 // @ts-ignore
                 ...int.definition,
             };
         }
-        return InterfaceToApply;
+        return InlineComponentUtilsInterface;
     }
 
     static properties(properties: any, int: __SInterface): any {
@@ -299,6 +322,10 @@ export default class SComponentUtils extends __SClass {
             propertiesObj[prop] = {
                 ...(definition.lit ?? {}),
             };
+            // const type = definition.type?.type ?? definition.type ?? 'string';
+            if (definition.physical) {
+                propertiesObj[prop].reflect = true;
+            }
         });
 
         const props = {

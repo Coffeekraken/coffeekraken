@@ -1,15 +1,20 @@
 // @ts-nocheck
 
-import { LitElement, html, property, css, unsafeCSS, query, queryAssignedNodes } from 'lit-element';
+import { html, property, css, unsafeCSS, query, queryAssignedNodes } from 'lit-element';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
-import __SComponentUtils from '@coffeekraken/s-component-utils';
+import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __Pickr from '@simonwep/pickr';
 
 import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
 import __css from '../css/s-color-picker.css';
 
-export default class SColorPicker extends LitElement {
+export interface ISColorPickerComponentProps {
+    name: string;
+    value: string;
+}
+
+export default class SColorPicker extends SLitElement {
     static get properties() {
         return __SComponentUtils.properties({}, __SColorPickerComponentInterface);
     }
@@ -38,7 +43,7 @@ export default class SColorPicker extends LitElement {
             el: this.shadowRoot?.querySelector('.s-color-picker__preview'),
             theme: 'nano', // or 'monolith', or 'nano'
             container: this.shadowRoot?.querySelector('.s-color-picker__picker-wrapper'),
-            default: this.color,
+            default: this.value,
             // autoReposition: false,
             comparison: false,
             swatches: [
@@ -169,6 +174,7 @@ export default class SColorPicker extends LitElement {
     }
 }
 
-export function webcomponent(tagName = 's-color-picker') {
+export function webcomponent(props: Partial<ISColorPickerComponentProps> = {}, tagName = 's-color-picker') {
+    __SComponentUtils.setDefaultProps(tagName, props);
     customElements.define(tagName, SColorPicker);
 }

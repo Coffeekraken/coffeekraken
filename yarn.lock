@@ -3528,6 +3528,11 @@ cliui@^7.0.2:
     strip-ansi "^6.0.0"
     wrap-ansi "^7.0.0"
 
+clone-class@^0.6.20:
+  version "0.6.20"
+  resolved "https://registry.yarnpkg.com/clone-class/-/clone-class-0.6.20.tgz#b199a51f1e7466d3f544fe1de74b6b8d97ca007e"
+  integrity sha512-h5ZvC7K0wptqIamtMkRF3LPoIr0bz0f60G3u5KkUhtRRz0PKJG8BnjiUyK4xgJ1FO+YS8muadU0r1J981CluBw==
+
 clone-response@1.0.2, clone-response@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/clone-response/-/clone-response-1.0.2.tgz#d1dc973920314df67fbeb94223b4ee350239e96b"

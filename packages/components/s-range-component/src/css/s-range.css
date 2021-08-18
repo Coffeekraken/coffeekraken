@@ -1,0 +1,18 @@
+s-range {
+    display: inline-block;
+}
+.s-range {
+    display: flex;
+    width: 100%;
+}
+
+.s-range__input {
+    flex-grow: 1;
+}
+
+.s-range__tooltip {
+    transition: none;
+}
+
+s-range[default-style] {
+}

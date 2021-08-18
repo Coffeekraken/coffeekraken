@@ -1,6 +1,6 @@
-import {LitElement, css, unsafeCSS, html, property} from "lit-element";
+import {css, unsafeCSS, html, property} from "lit-element";
 import __SInterface from "@coffeekraken/s-interface";
-import __SComponentUtils from "@coffeekraken/s-component-utils";
+import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
 import __SPromise from "@coffeekraken/s-promise";
 class SSidePanelComponentInterface extends __SInterface {
 }
@@ -497,7 +497,7 @@ var __decorate = function(decorators, target, key, desc) {
         r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-class SSidePanel extends LitElement {
+class SSidePanel extends SLitElement {
   constructor() {
     super();
     this._component = void 0;
@@ -505,6 +505,7 @@ class SSidePanel extends LitElement {
       interface: SSidePanelComponentInterface,
       defaultProps: {}
     });
+    console.log("CC");
     if (this._component.props.closeOn.indexOf("click") !== -1) {
       this.addEventListener("click", (e) => {
         if (this._$container.contains(e.target))
@@ -537,10 +538,13 @@ class SSidePanel extends LitElement {
     }
   }
   static get properties() {
-    return __SComponentUtils.properties({}, SSidePanelComponentInterface);
+    const cls = __SComponentUtils.properties({}, SSidePanelComponentInterface);
+    return cls;
   }
   static get styles() {
-    return css`${unsafeCSS(__css)}`;
+    return css`
+            ${unsafeCSS(__css)}
+        `;
   }
   set active(value) {
     this._active = value;
@@ -574,11 +578,8 @@ class SSidePanel extends LitElement {
   }
   render() {
     return html`
-            ${this.overlay ? html`
-                <div class="${this._component.className("__overlay")}"></div>
-            ` : ""} 
-            <div class="${this._component.className("__container")}">
-            </div>            
+            ${this.overlay ? html` <div class="${this._component.className("__overlay")}"></div> ` : ""}
+            <div class="${this._component.className("__container")}"></div>
         `;
   }
 }
@@ -586,11 +587,9 @@ SSidePanel._activePanels = [];
 __decorate([
   property()
 ], SSidePanel.prototype, "overlay", void 0);
-function webcomponent(tagName = "s-side-panel") {
+function webcomponent(props = {}, tagName = "s-side-panel") {
+  __SComponentUtils.setDefaultProps(tagName, props);
   customElements.define(tagName, SSidePanel);
 }
-if (!window.env)
-  window.env = {SUGAR: {}};
-window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development","ENV":"development"}');
 export default SSidePanel;
 export {webcomponent};

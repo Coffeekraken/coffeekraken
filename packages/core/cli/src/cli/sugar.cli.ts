@@ -137,7 +137,7 @@ class SSugarCli {
 
             // load the sugar config
             const config = await __SSugarConfig.load();
-            // console.log(__SSugarConfig.get('themeDarkBase.colorStates'));
+            // console.log(__SSugarConfig.get('markdownBuilder'));
             // return;
 
             // __STheme.getTheme().loopOnColors((colorObj) => {

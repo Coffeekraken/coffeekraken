@@ -4,18 +4,18 @@ import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
-  static definition = {
-      style: {
-          type: 'String',
-          values: ['default','gradient','outline'],
-          default: 'default'
-      },
-      scope: {
-          type: 'String',
-          values: ['bare','lnf','style'],
-          default: ['bare','lnf','style']
-      }
-  };
+    static definition = {
+        style: {
+            type: 'String',
+            values: ['default', 'gradient', 'outline'],
+            default: 'default',
+        },
+        scope: {
+            type: 'String',
+            values: ['bare', 'lnf', 'style'],
+            default: ['bare', 'lnf', 'style'],
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiSwitchMixinParams {
@@ -26,25 +26,25 @@ export interface IPostcssSugarPluginUiSwitchMixinParams {
 export { postcssSugarPluginUiSwitchMixinInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiSwitchMixinParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiSwitchMixinParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
-      style: 'default',
-      scope: [],
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
+        style: 'default',
+        scope: [],
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  // bare
-  if (finalParams.scope.indexOf('bare') !== -1) {
-    vars.push(`
+    // bare
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
         
         --thumb-size: 1em;
         --thumb: sugar.color(main, surface);
@@ -78,7 +78,7 @@ export default function ({
         appearance: none;
         pointer-events: none;
         touch-action: pan-y;
-        border: none;
+        border: sugar.color(ui, border) solid sugar.theme(ui.switch.borderWidth);
         outline-offset: 5px;
         box-sizing: content-box;
 
@@ -141,29 +141,23 @@ export default function ({
         }
 
     `);
-  }
-
-  if (finalParams.scope.indexOf('lnf') !== -1 && finalParams.scope.indexOf('style') !== -1) {
-
-    switch(finalParams.style) {
-        case 'gradient':
-
-        break;
-        case 'outline':
-
-        break;
-        case 'default':
-        default:
-            vars.push(`
-
-            `)
-
-        break;
     }
 
-  }
+    if (finalParams.scope.indexOf('lnf') !== -1 && finalParams.scope.indexOf('style') !== -1) {
+        switch (finalParams.style) {
+            case 'gradient':
+                break;
+            case 'outline':
+                break;
+            case 'default':
+            default:
+                vars.push(`
 
-    
+            `);
 
-  replaceWith(vars);
+                break;
+        }
+    }
+
+    replaceWith(vars);
 }

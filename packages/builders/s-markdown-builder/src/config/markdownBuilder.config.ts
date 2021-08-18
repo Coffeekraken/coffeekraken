@@ -8,9 +8,10 @@ export default function (env, config) {
         default: {
             glob: '**/+(README|LICENSE|*.md)',
             inDir: '[config.storage.src.rootDir]',
-            inPath: undefined,
-            inRaw: undefined,
+            inPath: null,
+            inRaw: null,
             outDir: '[config.storage.dist.rootDir]',
+            outPath: null,
             save: true,
             target: 'markdown',
         },

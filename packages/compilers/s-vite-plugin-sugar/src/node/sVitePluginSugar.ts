@@ -43,7 +43,6 @@ export default function sVitePluginSugar(settings: any = {}) {
                 env: 'dev',
             },
             config: browserConfig,
-            // ENVIRONMENT: config.isProduction ? 'production' : 'development',
         });
 
         envJsonStr = __sanitizeJsonString(envJsonStr);
@@ -65,10 +64,11 @@ export default function sVitePluginSugar(settings: any = {}) {
         },
         async transform(src, id) {
             if (jsReg.test(id)) {
-                if (id.includes(packageRoot) && id.match(/\/index\.(t|j)s/)) {
-                    // @TODO             find a better way to determine where to inject things
-                    console.log('inject');
-                    src = await _injectEnvVars(src, id);
+                if (id.includes(packageRoot) && id === config.build.rollupOptions?.input) {
+                    if (!config.build.lib) {
+                        src = await _injectEnvVars(src, id);
+                        console.log('not lib');
+                    }
                 }
 
                 return {

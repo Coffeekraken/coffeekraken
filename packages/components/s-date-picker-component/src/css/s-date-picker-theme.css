@@ -1,0 +1,102 @@
+/**
+ * This theme is an example to show how you can create your own.
+ */
+.pika-single.s-pikaday {
+    color: s-color(main, foreground);
+    background: sugar.color(main, surface);
+    border: 1px solid sugar.color(ui, border);
+    @sugar.depth (100);
+    border-radius: sugar.theme(ui.colorPicker.borderRadius);
+    padding: sugar.theme(ui.colorPicker.padding);
+}
+
+.s-pikaday .pika-label {
+    background-color: transparent;
+    color: sugar.color(ui);
+    top: -0.5em;
+}
+
+.s-pikaday .pika-prev,
+.s-pikaday .is-rtl .pika-next,
+.s-pikaday .pika-next,
+.s-pikaday .is-rtl .pika-prev {
+    background: none;
+    position: relative;
+    display: inline-block;
+    font-size: 0;
+    color: sugar.color(ui);
+    overflow: visible;
+    background: red;
+    opacity: 1;
+    width: 1em;
+    height: 1em;
+    opacity: 0.7;
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+
+    &:after {
+        content: '❯';
+        color: inherit;
+        font-size: 1rem;
+        position: absolute;
+        top: 0;
+        left: -2.2em;
+    }
+}
+.s-pikaday .pika-prev,
+.s-pikaday .is-rtl .pika-next {
+    &:after {
+        transform: rotate(180deg);
+        left: 1em;
+    }
+}
+
+.s-pikaday .pika-next,
+.s-pikaday .is-rtl .pika-prev {
+    /* background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAQAAACGG/bgAAAAP0lEQVQ4y+3TMQoAMAgEwfwfAvvjTZ1uGzuvHhBPPGczEG+FRqqRaqQaqUaqkX6QBmmjacvQ6qEVTjsh+xizebvlaWptGXZAAAAAAElFTkSuQmCC'); */
+}
+
+.s-pikaday .pika-table {
+    background: sugar.color(main, background);
+    border-radius: sugar.theme(ui.colorPicker.borderRadius);
+    padding: sugar.theme(ui.colorPicker.padding);
+}
+
+.s-pikaday .pika-table th * {
+    text-decoration: none;
+    color: sugar.color(main, text);
+}
+
+.s-pikaday .pika-button {
+    background: sugar.color(main, background);
+    color: sugar.color(main, text);
+    padding: sugar.theme(ui.colorPicker.padding);
+}
+
+.s-pikaday .pika-week {
+    text-decoration: none;
+}
+
+.s-pikaday .is-today .pika-button {
+    color: sugar.color(ui);
+    outline: none;
+}
+
+.s-pikaday .is-selected .pika-button {
+    color: sugar.color(main, text);
+    background: sugar.color(ui, --alpha 0.5);
+    box-shadow: none !important;
+}
+
+.s-pikaday .is-disabled .pika-button {
+    color: sugar.color(main, text);
+    opacity: 0.3;
+}
+
+.s-pikaday .pika-button:hover {
+    color: sugar.color(ui, foreground) !important;
+    background: sugar.color(ui) !important;
+}

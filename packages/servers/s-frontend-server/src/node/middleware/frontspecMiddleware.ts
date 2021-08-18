@@ -33,21 +33,20 @@ import __fs from 'fs';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function frontspecMiddleware(settings = {}) {
-  return async function (req, res, next) {
+    return async function (req, res, next) {
+        const frontspec = new __SFrontspec();
 
-    const frontspec = new __SFrontspec();
+        if (!res.templateData) res.templateData = {};
+        if (!res.templateData.frontspec) res.templateData.frontspec = {};
 
-    if (!res.templateData) res.templateData = {};
-    if (!res.templateData.frontspec) res.templateData.frontspec = {};
+        res.templateData.frontspec = {
+            ...(await frontspec.read()),
+            ...res.templateData.frontspec,
+        };
 
-    res.templateData.frontspec = {
-      ...(await frontspec.read()),
-      ...res.templateData.frontspec
+        __SBench.step('request', 'frontspecMiddleware');
+
+        return next();
     };
-
-    __SBench.step('request', 'frontspecMiddleware');
-
-    return next();
-  };
 }
 export default frontspecMiddleware;

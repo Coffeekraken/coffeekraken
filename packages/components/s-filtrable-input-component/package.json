@@ -1,25 +1,25 @@
 {
-  "name": "@coffeekraken/s-filtrable-input-component",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "homepage": "https://coffeekraken.io",
-  "main": "./dist/js/lib.es.js",
-  "scripts": {
-    "dev": "sugar frontstack",
-    "build": "sugar vite.build --lib",
-    "build.watch": "sugar vite.build --lib --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-component-utils": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0",
-    "babylon": "^6.18.0",
-    "highlight.js": "^10.7.2",
-    "prismjs": "^1.23.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  }
+    "name": "@coffeekraken/s-filtrable-input-component",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "homepage": "https://coffeekraken.io",
+    "main": "./dist/js/lib.es.js",
+    "scripts": {
+        "dev": "sugar frontstack",
+        "build": "sugar frontstack build",
+        "build.watch": "sugar vite.build --lib --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-component-utils": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "babylon": "^6.18.0",
+        "highlight.js": "^10.7.2",
+        "prismjs": "^1.23.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    }
 }

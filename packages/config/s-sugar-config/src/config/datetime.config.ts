@@ -1,3 +1,11 @@
+export interface ISDatetimeConfigI18n {
+    previousMonth: string;
+    nextMonth: string;
+    months: string[12];
+    weekdays: string[7];
+    weekdaysShort: string[7];
+}
+
 export default function (env) {
     return {
         /**
@@ -31,5 +39,36 @@ export default function (env) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         timeFormat: 'h:mm:ss',
+
+        /**
+         * @name            i18n
+         * @namespace       config.datetime
+         * @type            ISDatetimeConfigI18n
+         *
+         * This specify some traductions for date and time display like days of the week, months names, etc...
+         *
+         * @since           2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        i18n: {
+            previousMonth: 'Previous Month',
+            nextMonth: 'Next Month',
+            months: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ],
+            weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        },
     };
 }

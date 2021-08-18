@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 
 class postcssSugarPluginUiClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 export { postcssSugarPluginUiClassesInterface as interface };
 
@@ -20,34 +20,27 @@ export { postcssSugarPluginUiClassesInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bospsel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({
-  params,
-  atRule,
-  replaceWith
-}: {
-  params: any;
-  atRule: any;
-  replaceWith: Function;
-}) {
-  const cssArray = [
-    '@sugar.ui.avatar.classes;',
-    '@sugar.ui.button.classes;',
-    '@sugar.ui.blockquote.classes;',
-    '@sugar.ui.input.classes;',
-    '@sugar.ui.label.classes;',
-    '@sugar.ui.list.classes;',
-    '@sugar.ui.tabs.classes;',
-    '@sugar.ui.badge.classes;',
-    '@sugar.ui.navbar.classes;',
-    '@sugar.ui.select.classes;',
-    '@sugar.ui.switch.classes;',
-    '@sugar.ui.table.classes;',
-    '@sugar.ui.terminal.classes;',
-    '@sugar.ui.tooltip.classes;'
-  ];
+export default function ({ params, atRule, replaceWith }: { params: any; atRule: any; replaceWith: Function }) {
+    const cssArray = [
+        '@sugar.ui.avatar.classes;',
+        '@sugar.ui.button.classes;',
+        '@sugar.ui.blockquote.classes;',
+        '@sugar.ui.input.classes;',
+        '@sugar.ui.label.classes;',
+        '@sugar.ui.list.classes;',
+        '@sugar.ui.tabs.classes;',
+        '@sugar.ui.badge.classes;',
+        '@sugar.ui.navbar.classes;',
+        '@sugar.ui.range.classes;',
+        '@sugar.ui.select.classes;',
+        '@sugar.ui.switch.classes;',
+        '@sugar.ui.table.classes;',
+        '@sugar.ui.terminal.classes;',
+        '@sugar.ui.tooltip.classes;',
+    ];
 
-  Object.keys(__theme().baseColors()).forEach((colorName) => {
-    cssArray.push(`
+    Object.keys(__theme().baseColors()).forEach((colorName) => {
+        cssArray.push(`
       /**
        * @name        s-ui:${colorName}
        * @namespace     sugar.css.ui.label
@@ -68,7 +61,7 @@ export default function ({
         @sugar.color.remap(ui, ${colorName});
       }
     `);
-  });
+    });
 
-  replaceWith(cssArray);
+    replaceWith(cssArray);
 }

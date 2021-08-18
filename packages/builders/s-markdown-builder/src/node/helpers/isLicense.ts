@@ -1,6 +1,7 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 
-const packageJson = __SSugarConfig.get('packageJson');
+const packageJson = __packageJsonSync();
 
 export default function isLicense(conditional, options) {
     let license = this.license ?? packageJson.license;
@@ -10,5 +11,4 @@ export default function isLicense(conditional, options) {
     } else {
         return options.inverse(this);
     }
-
 }

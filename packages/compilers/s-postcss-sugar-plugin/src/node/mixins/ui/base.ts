@@ -46,7 +46,7 @@ export default function ({
         color: sugar.color(main, surfaceForeground);
         background-color: sugar.color(main, ui);
         padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
-        border: sugar.color(ui, border) solid 1px;
+        border: sugar.color(ui, border) solid sugar.theme(ui.${finalParams.name}.borderWidth);
         border-radius: ${__themeVar(`ui.${finalParams.name}.borderRadius`)};
         transition: ${__themeVar(`ui.${finalParams.name}.transition`)};
         @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});

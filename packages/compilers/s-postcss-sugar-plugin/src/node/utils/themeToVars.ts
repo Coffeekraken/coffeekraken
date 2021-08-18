@@ -44,12 +44,6 @@ export default function (theme: string): string[] {
         }
     });
 
-    console.log(
-        vars.filter((v) => {
-            return v.includes('--s-theme-color-ui-hover');
-        }),
-    );
-
     // others than colors
     const themeObjWithoutColors = Object.assign({}, themesObj[theme]);
     delete themeObjWithoutColors.color;

@@ -1,6 +1,6 @@
-import {LitElement, css, unsafeCSS, html, property} from "lit-element";
+import {css, unsafeCSS, html, property} from "lit-element";
 import __SInterface from "@coffeekraken/s-interface";
-import __SComponentUtils from "@coffeekraken/s-component-utils";
+import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
 class SActivateComponentInterface extends __SInterface {
 }
 SActivateComponentInterface.definition = {
@@ -53,7 +53,7 @@ var __decorate = function(decorators, target, key, desc) {
         r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-class SActivate extends LitElement {
+class SActivate extends SLitElement {
   constructor() {
     super();
     this._component = void 0;
@@ -67,12 +67,14 @@ class SActivate extends LitElement {
     });
   }
   static get styles() {
-    return css`${unsafeCSS(`
+    return css`
+            ${unsafeCSS(`
             :host {
                 display: inline-block;
                 cursor: pointer;
             }
-        `)}`;
+        `)}
+        `;
   }
   firstUpdated() {
     if (this._component.props.saveState) {
@@ -171,11 +173,9 @@ class SActivate extends LitElement {
 __decorate([
   property()
 ], SActivate.prototype, "_state", void 0);
-function webcomponent(tagName = "s-activate", settings = {}) {
+function webcomponent(props = {}, tagName = "s-activate", settings = {}) {
+  __SComponentUtils.setDefaultProps(tagName, props);
   customElements.define(tagName, SActivate, settings);
 }
-if (!window.env)
-  window.env = {SUGAR: {}};
-window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');
 export default SActivate;
 export {webcomponent};

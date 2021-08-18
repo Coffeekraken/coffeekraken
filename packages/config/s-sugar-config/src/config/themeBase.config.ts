@@ -513,14 +513,14 @@ export default function (env, config) {
                  * @name              default
                  * @namespace         config.theme.themes.border.width
                  * @type              Number
-                 * @default           [theme.border.width.20]
+                 * @default           [theme.border.width.10]
                  *
                  * Specify the <s-color="accent">default</s-color> border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                default: '[theme.border.width.20]',
+                default: '[theme.border.width.10]',
 
                 /**
                  * @name              0
@@ -1362,6 +1362,17 @@ export default function (env, config) {
 
         ui: {
             default: {
+                padding: '[theme.padding.20] [theme.padding.30]',
+                borderRadius: '[theme.border.radius.default]',
+                borderWidth: '[theme.border.width.default]',
+                transition: '[theme.transition.fast]',
+                defaultColor: 'accent',
+                depth: '[theme.depth.default]',
+                ':rhythmVertical': {
+                    'margin-bottom': 40,
+                },
+            },
+            form: {
                 padding: '[theme.padding.10] [theme.padding.20]',
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
@@ -1375,46 +1386,61 @@ export default function (env, config) {
             button: {
                 padding: '[theme.ui.default.padding]',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 defaultStyle: 'default',
             },
             colorPicker: {
-                padding: '[theme.padding.10]',
-                borderRadius: '[theme.ui.default.borderRadius]',
-                transition: '[theme.ui.default.transition]',
-                depth: '[theme.ui.default.depth]',
+                padding: '[theme.ui.form.padding]',
+                borderRadius: '[theme.ui.form.borderRadius]',
+                borderWidth: '[theme.ui.form.borderWidth]',
+                transition: '[theme.ui.form.transition]',
+                depth: '[theme.ui.form.depth]',
             },
             input: {
-                padding: '[theme.ui.default.padding]',
-                borderRadius: '[theme.ui.default.borderRadius]',
-                transition: '[theme.ui.default.transition]',
-                depth: '[theme.ui.default.depth]',
+                padding: '[theme.ui.form.padding]',
+                borderRadius: '[theme.ui.form.borderRadius]',
+                borderWidth: '[theme.ui.form.borderWidth]',
+                transition: '[theme.ui.form.transition]',
+                depth: '[theme.ui.form.depth]',
+                defaultStyle: 'default',
+            },
+            range: {
+                padding: '[theme.ui.form.padding]',
+                borderRadius: '[theme.ui.form.borderRadius]',
+                borderWidth: '[theme.ui.form.borderWidth]',
+                transition: '[theme.ui.form.transition]',
+                depth: '[theme.ui.form.depth]',
                 defaultStyle: 'default',
             },
             label: {
-                padding: '[theme.ui.default.padding]',
-                borderRadius: '[theme.ui.default.borderRadius]',
-                transition: '[theme.ui.default.transition]',
-                depth: '[theme.ui.default.depth]',
+                padding: '[theme.ui.form.padding]',
+                borderRadius: '[theme.ui.form.borderRadius]',
+                borderWidth: '[theme.ui.form.borderWidth]',
+                transition: '[theme.ui.form.transition]',
+                depth: '[theme.ui.form.depth]',
                 defaultStyle: 'default',
             },
             select: {
-                padding: '[theme.ui.default.padding]',
-                borderRadius: '[theme.ui.default.borderRadius]',
-                transition: '[theme.ui.default.transition]',
-                depth: '[theme.ui.default.depth]',
+                padding: '[theme.ui.form.padding]',
+                borderRadius: '[theme.ui.form.borderRadius]',
+                borderWidth: '[theme.ui.form.borderWidth]',
+                transition: '[theme.ui.form.transition]',
+                depth: '[theme.ui.form.depth]',
                 defaultStyle: 'default',
             },
             switch: {
-                borderRadius: '[theme.ui.default.borderRadius]',
-                transition: '[theme.ui.default.transition]',
-                depth: '[theme.ui.default.depth]',
+                borderRadius: '[theme.ui.form.borderRadius]',
+                borderWidth: '[theme.ui.form.borderWidth]',
+                transition: '[theme.ui.form.transition]',
+                depth: '[theme.ui.form.depth]',
                 defaultStyle: 'default',
             },
             list: {
                 padding: '[theme.ui.default.padding]',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 styles: ['default'],
@@ -1424,6 +1450,7 @@ export default function (env, config) {
             tabs: {
                 padding: '[theme.ui.default.padding]',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: 0,
                 defaultStyle: 'default',
@@ -1431,6 +1458,7 @@ export default function (env, config) {
             terminal: {
                 padding: '[theme.ui.default.padding]',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
@@ -1439,6 +1467,7 @@ export default function (env, config) {
             tooltip: {
                 padding: '[theme.ui.default.padding]',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 maxWidth: '30ch',
@@ -1457,6 +1486,7 @@ export default function (env, config) {
             code: {
                 padding: '[theme.ui.default.padding]',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 styles: ['default:default'],
@@ -1483,6 +1513,7 @@ export default function (env, config) {
             badge: {
                 padding: '.35em .65em',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: 0,
             },

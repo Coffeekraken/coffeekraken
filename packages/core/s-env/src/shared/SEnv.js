@@ -42,16 +42,16 @@ export default class SEnv {
             return this._env;
         if (__isNode()) {
             this._env = {
-                environment: (_a = process.env.NODE_ENV) !== null && _a !== void 0 ? _a : 'dev',
-                env: (_b = process.env.NODE_ENV) !== null && _b !== void 0 ? _b : 'dev',
-                platform: 'node',
+                ENVIRONMENT: (_a = process.env.NODE_ENV) !== null && _a !== void 0 ? _a : 'dev',
+                ENV: (_b = process.env.NODE_ENV) !== null && _b !== void 0 ? _b : 'dev',
+                PLATFORM: 'node',
             };
         }
         else {
             this._env = {
-                environment: (_d = (_c = window === null || window === void 0 ? void 0 : window.env) === null || _c === void 0 ? void 0 : _c.ENV) !== null && _d !== void 0 ? _d : 'dev',
-                env: (_f = (_e = window === null || window === void 0 ? void 0 : window.env) === null || _e === void 0 ? void 0 : _e.ENV) !== null && _f !== void 0 ? _f : 'dev',
-                platform: 'browser',
+                ENVIRONMENT: (_d = (_c = window === null || window === void 0 ? void 0 : window.env) === null || _c === void 0 ? void 0 : _c.ENV) !== null && _d !== void 0 ? _d : 'dev',
+                ENV: (_f = (_e = window === null || window === void 0 ? void 0 : window.env) === null || _e === void 0 ? void 0 : _e.ENV) !== null && _f !== void 0 ? _f : 'dev',
+                PLATFORM: 'browser',
             };
         }
         return this._env;

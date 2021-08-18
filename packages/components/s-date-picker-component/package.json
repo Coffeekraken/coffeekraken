@@ -7,7 +7,7 @@
     "main": "./dist/js/lib.es.js",
     "scripts": {
         "dev": "sugar frontstack",
-        "build": "sugar vite.build --lib",
+        "build": "sugar frontstack build",
         "build.watch": "sugar vite.build --lib --watch",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

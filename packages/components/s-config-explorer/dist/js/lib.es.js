@@ -1,12 +1,12 @@
-import __SComponentUtils from "@coffeekraken/s-component-utils";
-import {LitElement, css, unsafeCSS, html, property, query} from "lit-element";
+import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
+import {css, unsafeCSS, html, property, query} from "lit-element";
 import __SInterface from "@coffeekraken/s-interface";
 import __SRequest from "@coffeekraken/s-request";
 import __minimatch from "minimatch";
 class SConfigExplorerComponentInterface extends __SInterface {
 }
 SConfigExplorerComponentInterface.definition = {
-  path: {
+  apiUrl: {
     type: "String",
     default: "api/config"
   },
@@ -52,7 +52,7 @@ var __awaiter = function(thisArg, _arguments, P, generator) {
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-class SConfigExplorer extends LitElement {
+class SConfigExplorer extends SLitElement {
   constructor() {
     super();
     this._component = void 0;
@@ -65,17 +65,19 @@ class SConfigExplorer extends LitElement {
       const request = new __SRequest({});
       const response = yield request.send({
         type: "GET",
-        url: `/${this._component.props.path}?flat=1`
+        url: `/${this._component.props.apiUrl}?flat=1`
       });
       this._config = response.data;
     }))();
   }
   static get styles() {
-    return css`${unsafeCSS(`
+    return css`
+            ${unsafeCSS(`
             :host {
                 display: block;
             }
-        `)}`;
+        `)}
+        `;
   }
   firstUpdated() {
     let timeout;
@@ -102,12 +104,17 @@ class SConfigExplorer extends LitElement {
                 <table class="${(_b = this._component) === null || _b === void 0 ? void 0 : _b.className("__table", "s-table")}">
                     <tr>
                         <th>
-                            <input class="${(_c = this._component) === null || _c === void 0 ? void 0 : _c.className("__search", "s-input s-width:100")}" type="text" name="dotpath" placeholder="Filter by dotpath" />
+                            <input
+                                class="${(_c = this._component) === null || _c === void 0 ? void 0 : _c.className("__search", "s-input s-width:100")}"
+                                type="text"
+                                name="dotpath"
+                                placeholder="Filter by dotpath"
+                            />
                         </th>
                         <th>Value</th>
                     </tr>
                     ${this._config ? html`
-                        ${Object.keys(this._config).filter((dotpath, i) => {
+                              ${Object.keys(this._config).filter((dotpath, i) => {
       if (!this._$dotpath.value) {
         const splits = dotpath.split(".");
         if (this._displayedConfig.indexOf(splits[0]) === -1) {
@@ -123,29 +130,32 @@ class SConfigExplorer extends LitElement {
       });
     }).map((dotpath) => {
       return html`
-                                <tr>
-                                    <td>
-                                        ${dotpath.split(".").map((part, i) => {
+                                          <tr>
+                                              <td>
+                                                  ${dotpath.split(".").map((part, i) => {
         if (i < dotpath.split(".").length - 1) {
           return html`
-                                                    <a @click="${() => {
+                                                              <a
+                                                                  @click="${() => {
             this._filter(dotpath.split(".").slice(0, i + 1).join("."));
-          }}">${part}</a>${i < dotpath.split(".").length - 1 ? "." : ""}
-                                                `;
+          }}"
+                                                                  >${part}</a
+                                                              >${i < dotpath.split(".").length - 1 ? "." : ""}
+                                                          `;
         } else {
           return part;
         }
-      })}    
-                                    </td>
-                                    <td>${this._config[dotpath]}</td>
-                                </tr>
-                            `;
+      })}
+                                              </td>
+                                              <td>${this._config[dotpath]}</td>
+                                          </tr>
+                                      `;
     })}
-                    ` : html`
-                        <tr>
-                            <td colspan="2">Loading configurations please wait...</td>
-                        </tr>
-                    `}
+                          ` : html`
+                              <tr>
+                                  <td colspan="2">Loading configurations please wait...</td>
+                              </tr>
+                          `}
                 </table>
             </div>
         `;
@@ -157,11 +167,9 @@ __decorate([
 __decorate([
   query('input[name="dotpath"]')
 ], SConfigExplorer.prototype, "_$dotpath", void 0);
-function webcomponent(tagName = "s-config-explorer", settings = {}) {
+function webcomponent(props = {}, tagName = "s-config-explorer", settings = {}) {
+  __SComponentUtils.setDefaultProps(tagName, props);
   customElements.define(tagName, SConfigExplorer, settings);
 }
-if (!window.env)
-  window.env = {SUGAR: {}};
-window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development","ENV":"development"}');
 export default SConfigExplorer;
 export {webcomponent};

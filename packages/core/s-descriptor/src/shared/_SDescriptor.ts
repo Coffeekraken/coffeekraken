@@ -51,6 +51,7 @@ export interface ISDescriptorSettings {
     throwOnMissingRule: boolean;
     complete: boolean;
     rules: ISDescriptorRules;
+    defaults: boolean;
 }
 
 export interface ISDescriptorDescription {
@@ -201,7 +202,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
                         type: 'Object',
                         arrayAsValue: false,
                         throwOnMissingRule: false,
-                        complete: true,
+                        defaults: true,
                     },
                 },
                 settings ?? {},
@@ -282,7 +283,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
             Object.keys(valuesObjToProcess).forEach((propName) => {
                 const ruleObj = rules[propName];
                 // complete
-                if (valuesObjToProcess[propName] === undefined && set.complete && ruleObj.default !== undefined) {
+                if (valuesObjToProcess[propName] === undefined && set.defaults && ruleObj.default !== undefined) {
                     valuesObjToProcess[propName] = ruleObj.default;
                 }
 
@@ -290,9 +291,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
                 if (ruleObj.interface !== undefined) {
                     const interfaceValue = valuesObjToProcess[propName];
                     // _console.log('VAL', valuesObjToProcess[propName], propName);
-                    valuesObjToProcess[propName] = ruleObj.interface.apply(interfaceValue || {}, {
-                        complete: true,
-                    });
+                    valuesObjToProcess[propName] = ruleObj.interface.apply(interfaceValue || {}, {});
                 }
 
                 // validate the property

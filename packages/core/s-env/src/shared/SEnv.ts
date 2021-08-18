@@ -54,15 +54,15 @@ export default class SEnv {
         if (this._env) return this._env;
         if (__isNode()) {
             this._env = {
-                environment: process.env.NODE_ENV ?? 'dev',
-                env: process.env.NODE_ENV ?? 'dev',
-                platform: 'node',
+                ENVIRONMENT: process.env.NODE_ENV ?? 'dev',
+                ENV: process.env.NODE_ENV ?? 'dev',
+                PLATFORM: 'node',
             };
         } else {
             this._env = {
-                environment: window?.env?.ENV ?? 'dev',
-                env: window?.env?.ENV ?? 'dev',
-                platform: 'browser',
+                ENVIRONMENT: window?.env?.ENV ?? 'dev',
+                ENV: window?.env?.ENV ?? 'dev',
+                PLATFORM: 'browser',
             };
         }
         return this._env;

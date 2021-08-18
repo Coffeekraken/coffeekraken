@@ -1,6 +1,27 @@
+s-date-picker {
+    display: inline-block;
+}
 .s-date-picker {
     display: flex;
+    width: 100%;
 }
+
+.s-date-picker__input {
+    flex-grow: 1;
+}
+
+/* .s-pikaday.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+.s-pikaday {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+    display: block !important;
+    transition: sugar.theme(ui.colorPicker.transition);
+} */
 
 s-date-picker[default-style] {
     .s-date-picker__input {

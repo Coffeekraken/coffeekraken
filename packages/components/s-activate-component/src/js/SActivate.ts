@@ -1,11 +1,20 @@
-import {LitElement, html, property, css, unsafeCSS, query, queryAssignedNodes} from 'lit-element';
+import { html, property, css, unsafeCSS, query, queryAssignedNodes } from 'lit-element';
 import __SActivateComponentInterface from './interface/SActivateComponentInterface';
-import __SComponentUtils from '@coffeekraken/s-component-utils';
+import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 
-export default class SActivate extends LitElement {
+export interface ISActivateComponentProps {
+    href: string;
+    group: string;
+    toggle: boolean;
+    history: boolean;
+    active: boolean;
+    saveState: boolean;
+    trigger: string[];
+}
 
+export default class SActivate extends SLitElement {
     _component = undefined;
     _hrefSelector = undefined;
     _$targets = undefined;
@@ -15,26 +24,31 @@ export default class SActivate extends LitElement {
     _state = 'pending';
 
     static get styles() {
-        return css`${unsafeCSS(`
+        return css`
+            ${unsafeCSS(`
             :host {
                 display: inline-block;
                 cursor: pointer;
             }
-        `)}`;
+        `)}
+        `;
     }
 
     constructor() {
         super();
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
             interface: __SActivateComponentInterface,
-            defaultProps: {}
+            defaultProps: {},
         });
     }
     firstUpdated() {
         // save state
         if (this._component.props.saveState) {
-          if (!this.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-          this._component.props.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
+            if (!this.id)
+                throw new Error(
+                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
+                );
+            this._component.props.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
         }
 
         if (this._component.props.href) {
@@ -45,32 +59,34 @@ export default class SActivate extends LitElement {
         if (targets.length) this._$targets = targets;
 
         if (this._component.props.group) {
-          this._$groupElements = Array.from(document.querySelectorAll(`s-activate[group="${this._component.props.group}"]`));
+            this._$groupElements = Array.from(
+                document.querySelectorAll(`s-activate[group="${this._component.props.group}"]`),
+            );
         }
 
-        this._component.props.trigger.forEach(trigger => {
-          switch(trigger) {
-            case 'click':
-              this.addEventListener('click', (e) => {
-                if (this.isActive() && this._component.props.toggle) {
-                  this.unactivate();
-                } else {
-                  this.activate();
-                }
-              });
-            break;
-            case 'anchor':
-              if (document.location.hash === this._hrefSelector) {
-                this.activate();
-              }
-              window.addEventListener('hashchange', (e) => {
-                if (document.location.hash === this._hrefSelector) {
-                  this.activate();
-                }
-              });
+        this._component.props.trigger.forEach((trigger) => {
+            switch (trigger) {
+                case 'click':
+                    this.addEventListener('click', (e) => {
+                        if (this.isActive() && this._component.props.toggle) {
+                            this.unactivate();
+                        } else {
+                            this.activate();
+                        }
+                    });
+                    break;
+                case 'anchor':
+                    if (document.location.hash === this._hrefSelector) {
+                        this.activate();
+                    }
+                    window.addEventListener('hashchange', (e) => {
+                        if (document.location.hash === this._hrefSelector) {
+                            this.activate();
+                        }
+                    });
 
-            break;
-          }
+                    break;
+            }
         });
 
         // expose API
@@ -80,37 +96,38 @@ export default class SActivate extends LitElement {
 
         // activate if has the "active" attribute
         if (this._component.props.active) {
-          this.activate(true);
+            this.activate(true);
         }
-
     }
     isActive() {
         return this.hasAttribute('active');
     }
     activate(force = false) {
-
         // protect from activating multiple times
         if (!force && this.isActive()) return;
 
         // save state
         if (this._component.props.saveState) {
-          if (!this.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-          localStorage.setItem(`s-activate-state-${this.id}`, true);
+            if (!this.id)
+                throw new Error(
+                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
+                );
+            localStorage.setItem(`s-activate-state-${this.id}`, true);
         }
 
         // history
         if (this._component.props.history) {
-          document.location.hash = this._hrefSelector;
+            document.location.hash = this._hrefSelector;
         }
 
         // check if we have some elements in the group
         if (this._$groupElements) {
-          this._$groupElements.forEach($element => {
-            if ($element === this) return;
-            try {
-              $element.unactivate();
-            } catch(e) {}
-          });
+            this._$groupElements.forEach(($element) => {
+                if ($element === this) return;
+                try {
+                    $element.unactivate();
+                } catch (e) {}
+            });
         }
 
         // add the "active" attribute to the component
@@ -118,21 +135,22 @@ export default class SActivate extends LitElement {
 
         // loop on targets to activate them
         if (this._$targets) {
-          this._$targets.forEach($target => {
-            $target.classList.add('active');
-            $target.setAttribute('active', true);
-          });
+            this._$targets.forEach(($target) => {
+                $target.classList.add('active');
+                $target.setAttribute('active', true);
+            });
         }
-
     }
     unactivate() {
-
         // protect from unactivating multiple times
         if (!this.isActive()) return;
 
         // save state
         if (this._component.props.saveState) {
-            if (!this.id) throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
+            if (!this.id)
+                throw new Error(
+                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
+                );
             localStorage.removeItem(`s-activate-state-${this.id}`);
         }
 
@@ -141,7 +159,7 @@ export default class SActivate extends LitElement {
 
         // loop on targets to unactivate them
         if (this._$targets) {
-            this._$targets.forEach($target => {
+            this._$targets.forEach(($target) => {
                 $target.classList.remove('active');
                 $target.removeAttribute('active');
             });
@@ -152,6 +170,7 @@ export default class SActivate extends LitElement {
     }
 }
 
-export function webcomponent(tagName = 's-activate', settings = {}) {
+export function webcomponent(props: Partial<ISActivateComponentProps> = {}, tagName = 's-activate', settings = {}) {
+    __SComponentUtils.setDefaultProps(tagName, props);
     customElements.define(tagName, SActivate, settings);
 }

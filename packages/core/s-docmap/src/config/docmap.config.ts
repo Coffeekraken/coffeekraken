@@ -143,6 +143,8 @@ export default function (env, config) {
                 'namespace',
                 'status',
                 'example',
+                'interface',
+                'styleguide',
                 'static',
                 'since',
                 'author',

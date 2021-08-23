@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import __SProcess from '@coffeekraken/s-process';
+import __SPromise from '@coffeekraken/s-promise';
 import __SDocMap from '../node/SDocMap';
-import __SDocMapBuildParamsInterface from '../node/interface/SDocMapBuildParamsInterface';
 
-export default async (stringArgs = '') => {
-  const docmap = new __SDocMap();
-  const pro = await __SProcess.from(docmap.build.bind(docmap), {
-    process: {
-      interface: __SDocMapBuildParamsInterface
-    }
-  });
-  pro.run(stringArgs);
+export default (stringArgs = '') => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+        const docmap = new __SDocMap();
+        console.log('CCC');
+        // const buildPromise = docmap.build(stringArgs);
+        // pipe(buildPromise);
+        // console.log('BUI');
+        // resolve(await buildPromise);
+    });
 };

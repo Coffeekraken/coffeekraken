@@ -1,0 +1,67 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-component",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-inline-svg-component",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request-component",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-date-picker-component.js.sDatePicker": {
+                "name": "s-date-picker",
+                "type": "Webcomponent",
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a date picker. It uses under the hood the AMAZING pikaday library with some additional features like\nsugar theming support as well as some events and more.\nAlmost all the pikaday options are available through properties. Check out the api documentation for more details...",
+                "namespace": "@coffeekraken.s-date-picker-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<s-date-picker name=\"myCoolDate\" class=\"s-ui:accent\"></s-date-picker>\n<s-date-picker name=\"myOtherDate\" number-of-months=\"3\" rtl></s-date-picker>"
+                    },
+                    {
+                        "language": "js",
+                        "code": "import { webcomponent as SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';\nSDatePickerWebcomponent();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SDatePickerComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SDatePickerComponent.ts",
+                "children": {
+                    "webcomponent": {
+                        "name": "webcomponent",
+                        "type": "Function",
+                        "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

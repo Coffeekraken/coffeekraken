@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SRequest from '@coffeekraken/s-request';
 import { html, LitElement, property, query, queryAsync } from 'lit-element';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
@@ -31,7 +33,7 @@ export default class CkSettings extends LitElement {
     async firstUpdated() {
         const $root = document.querySelector(':root'),
             $darkRoot = document.querySelector('.s-theme--dark'),
-            $theme = $darkRoot ?? $root;
+            $theme = <HTMLElement>($darkRoot ?? $root);
 
         const $mainColorPicker = await this._$mainColorPicker;
         const $accentColorPicker = await this._$accentColorPicker;

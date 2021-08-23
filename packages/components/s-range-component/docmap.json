@@ -1,0 +1,117 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-component",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-inline-svg-component",
+            "@coffeekraken/s-request-component",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-range-component.js.sRange": {
+                "name": "s-range",
+                "type": "Webcomponent",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/s-range"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a range with some additional features that the native one like\ndisplaying the value automatically in tooltip or inline.",
+                "namespace": "@coffeekraken.s-range-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h6>Simple range</h6>\n<s-range name=\"myCoolRange\" class=\"s-ui:accent\"></s-range>\n\n<h6>With a tooltip</h6>\n<s-range name=\"myOtherRanfe\" tooltip></s-range>\n\n<h6>Using steps</h6>\n<s-range name=\"myRangeWithSteps\" class=\"s-ui:complementary\" step=\"5\"></s-range>\n\n<h6>Different colors</h6>\n<s-range name=\"myRangeColoredSuccess\" class=\"s-ui:success\"></s-range>\n<s-range name=\"myRangeColoredWarning\" class=\"s-ui:warning\"></s-range>\n<s-range name=\"myRangeColoredError\" class=\"s-ui:error\"></s-range>"
+                    },
+                    {
+                        "language": "js",
+                        "code": "import { webcomponent as SRangeWebcomponent } from '@coffeekraken/s-range-component';\nSRangeWebcomponent();"
+                    }
+                ],
+                "interface": {
+                    "name": "SRangeComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "description": "Specify the name to assign to the internal input[type=\"range\"]",
+                            "required": true
+                        },
+                        "value": {
+                            "type": "String",
+                            "description": "Specify the initial range value"
+                        },
+                        "min": {
+                            "type": "Number",
+                            "description": "Specify the minimal value or the range",
+                            "default": 0
+                        },
+                        "max": {
+                            "type": "Number",
+                            "description": "Specify the maximal value of the range",
+                            "default": 100
+                        },
+                        "step": {
+                            "type": "Number",
+                            "description": "Specify the steps between each values"
+                        },
+                        "target": {
+                            "type": "String",
+                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
+                        },
+                        "tooltip": {
+                            "type": "Boolean",
+                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
+                            "default": false
+                        },
+                        "help": {
+                            "type": "Boolean",
+                            "description": "Display the help for this \"<yellow>SRangeComponentInterface</yellow>\" interface...",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SRangeComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SRangeComponent.ts",
+                "children": {
+                    "webcomponent": {
+                        "name": "webcomponent",
+                        "type": "Function",
+                        "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

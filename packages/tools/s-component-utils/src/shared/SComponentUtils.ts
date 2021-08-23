@@ -412,10 +412,15 @@ export default class SComponentUtils extends __SClass {
 
                 const stylesheet = new CSSStyleSheet();
                 stylesheet.replace($style.innerHTML);
+                // @ts-ignore
                 $style._stylesheet = stylesheet;
 
+                // @TODO            avoid these ts-ignore
+                // @ts-ignore
                 this.node.shadowRoot.adoptedStyleSheets = [
+                    // @ts-ignore
                     ...this.node.shadowRoot.adoptedStyleSheets,
+                    // @ts-ignore
                     $style._stylesheet,
                 ];
             });

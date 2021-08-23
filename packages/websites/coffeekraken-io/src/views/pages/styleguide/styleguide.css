@@ -1,0 +1,13 @@
+#styleguide {
+    .__toolbar {
+        background: sugar.color(main, background);
+        position: sticky;
+        top: 98px;
+        z-index: 10;
+        @sugar.depth (100);
+
+        [class*='s-platform-'] {
+            font-size: 1em;
+        }
+    }
+}

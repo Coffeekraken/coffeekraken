@@ -4,7 +4,6 @@
 @sugar.init;
 @sugar.classes;
 
-
 /* 
 @sugar.media.classes(tablet, tablet) {
   @sugar.classes;
@@ -13,28 +12,28 @@
   @sugar.classes;
 } */
 
-@sugar.theme(dark, true);
+@sugar.theme (dark, true);
 
 body {
-  @sugar.theme.when(dark) {
-    background-color: sugar.color(main, --darken 30);
-  }
+    @sugar.theme.when (dark) {
+        background-color: sugar.color(main, --darken 30);
+    }
 }
 
 s-code-example {
-  opacity: 0;
-  transition: all .2s ease-out;
+    opacity: 0;
+    transition: all 0.2s ease-out;
 
-  &[mounted] {
-    opacity: 1;
-  }
+    &[mounted] {
+        opacity: 1;
+    }
 }
 
 a:active {
-  color: red;
+    color: red;
 }
 
-@sugar.icon.classes(
+@sugar.icon.classes (
   fa:user:user
   fa:heart:heart
   fa:fire:fire
@@ -56,7 +55,7 @@ a:active {
 );
 
 .hljs > * {
-  display: inline-block !important;
+    display: inline-block !important;
 }
 
 @sugar.platform.classes;
@@ -64,29 +63,28 @@ a:active {
 .s-theme--dark,
 /* .s-tooltip:not(.s-theme--dark .s-tooltip), */
 .s-code-example {
-  @sugar.theme(dark);
+    @sugar.theme (dark);
 }
 
 .s-tooltip {
-  @sugar.depth(100);
+    @sugar.depth (100);
 }
 
 [class*='s-btn'] {
-  border-radius: 100px !important;
-  border: none !important;
+    border-radius: 100px !important;
+    border: none !important;
 }
 
 #bkg {
-  position:absolute;
-  top: 0; right: 0;
-  width: 135vh;
-  height: 100vh;
-  background: url(/src/img/idflood/08.jpg);
-  background-position: center;
-  background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 135vh;
+    height: 100vh;
+    background: url(/src/img/idflood/08.jpg);
+    background-position: center;
+    background-size: cover;
 
-  &:after {
-
-  }
+    &:after {
+    }
 }
-  

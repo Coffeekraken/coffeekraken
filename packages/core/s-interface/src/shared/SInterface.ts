@@ -26,6 +26,12 @@ export interface ISInterfaceDefinitionMap extends ISDescriptorRules {
     [key: string]: Partial<ISInterfaceDefinitionProperty>;
 }
 
+export interface ISInterfaceObj {
+    name?: string;
+    description?: string;
+    definition: Record<string, ISInterfaceDefinitionProperty>;
+}
+
 export interface ISInterfaceCtor {
     new (settings?: Partial<ISInterfaceSettings>): ISInterface;
     definition: ISInterfaceDefinitionMap;
@@ -100,6 +106,18 @@ export default class SInterface extends __SClass implements ISInterface {
     static set definition(value) {
         this._definition = value;
     }
+
+    /**
+     * @name            description
+     * @type            String
+     * @static
+     *
+     * Store the interface description
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static description = '';
 
     /**
      * @name      interfaceSettings
@@ -218,6 +236,26 @@ export default class SInterface extends __SClass implements ISInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _definition: ISInterfaceDefinitionMap = {};
+
+    /**
+     * @name              toObject
+     * @type              Function
+     * @static
+     *
+     * This function allows you to get back a simple object describing the interface
+     *
+     * @return              {ISInterfaceObj}                The interface in plain object format
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static toObject(): ISInterfaceObj {
+        return {
+            name: this.name,
+            description: this.description ?? '',
+            definition: <ISInterfaceDefinitionProperty>Object.assign({}, this.definition),
+        };
+    }
 
     /**
      * @name              defaults

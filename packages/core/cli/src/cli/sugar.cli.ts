@@ -140,11 +140,6 @@ class SSugarCli {
             // console.log(__SSugarConfig.get('markdownBuilder'));
             // return;
 
-            // __STheme.getTheme().loopOnColors((colorObj) => {
-            //     console.log(colorObj.value.variable);
-            // });
-            // return;
-
             __SBench.step('sugar.cli', 'afterLoadConfig');
 
             // init stdio and event emitter
@@ -153,7 +148,7 @@ class SSugarCli {
                     id: 'Sugar',
                 },
             });
-            this._stdio = new STerminalStdio(this._eventEmitter);
+            this._stdio = new STerminalStdio('default', this._eventEmitter);
 
             // writeLog event
             this._eventEmitter.on('writeLog', (logObj) => {
@@ -226,12 +221,8 @@ class SSugarCli {
             }
 
             // @ts-ignore
-            this._eventEmitter.pipe(processFn(args), {
-                processor(value) {
-                    value.decorators = false;
-                    return value;
-                },
-            });
+            const proPromise = processFn(args);
+            this._eventEmitter.pipe(proPromise, {});
         }
     }
 
@@ -404,7 +395,8 @@ class SSugarCli {
                 }
 
                 this._newStep(true);
-                this._eventEmitter.pipe(pro(args), {
+                const proPromise = pro(args);
+                this._eventEmitter.pipe(proPromise, {
                     processor(value) {
                         value.decorators = false;
                         return value;

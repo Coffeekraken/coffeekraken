@@ -32,265 +32,258 @@ import * as __Enquirer from 'enquirer';
  */
 
 export interface ISTerminalStdioCtorSettings {
-  terminalStdio?: Partial<ISTerminalStdioSettings>;
+    terminalStdio?: Partial<ISTerminalStdioSettings>;
 }
 
-export interface ISTerminalStdioSettings {
-}
+export interface ISTerminalStdioSettings {}
 
 export interface ISTerminalStdio {}
 
 class STerminalStdio extends __SStdio implements ISTerminalStdio {
-
-  /**
-   * @name      terminalStdioSettings
-   * @type      ISTerminalStdioSettings
-   * @get
-   *
-   * Access the stdio settings
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get terminalStdioSettings(): ISTerminalStdioSettings {
-    return (<any>this)._settings.terminalStdio;
-  }
-
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(
-    sources: ISEventEmitter | ISEventEmitter[],
-    settings: ISTerminalStdioCtorSettings
-  ) {
-    super(
-      sources,
-      __deepMerge(
-        {
-          terminalStdio: {
-            icons: true
-          }
-        },
-        settings || {}
-      )
-    );
-
-    this.display();
-  }
-
-  clearLast() {
-    // __terminalKit.previousLine();
-    // __terminalKit.eraseLine();
-  }
-
-  clear() {
-    process.stdout.write('\x1Bc');
-  }
-
-  /**
-   * @name          _log
-   * @type          Function
-   * @private
-   *
-   * Method that actually log the passed log object with the passed component
-   *
-   * @param         {ILog}        logObj            The log object to log
-   * @param         {ISStdioComponent}      component       The component to use for logging
-   *
-   * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _currentLogId = '';
-  _log(logObj, component) {
-    // handle empty logs
-    if (!logObj) return;
-
-    
-    if (!logObj.decorators) {
-      console.log(__parseHtml(logObj.value));
-      return;
+    /**
+     * @name      terminalStdioSettings
+     * @type      ISTerminalStdioSettings
+     * @get
+     *
+     * Access the stdio settings
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get terminalStdioSettings(): ISTerminalStdioSettings {
+        return (<any>this)._settings.terminalStdio;
     }
 
-    let needId = false;
-    if (this._currentLogId !== logObj.metas.emitter.metas.id) {
-      needId = true;
-      this._currentLogId = logObj.metas.emitter.metas.id;
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(id: string, sources: ISEventEmitter | ISEventEmitter[], settings: ISTerminalStdioCtorSettings) {
+        super(
+            id,
+            sources,
+            __deepMerge(
+                {
+                    terminalStdio: {
+                        icons: true,
+                    },
+                },
+                settings || {},
+            ),
+        );
+
+        this.display();
     }
 
-    let lineStart = '', idStr = '', idSeparator = '';
-
-    // render the component
-    let renderedStr = component.render(logObj, this._settings);
-    // handle metas if needed
-    if (!logObj.nude) {
-      if (logObj.metas?.emitter) {
-        lineStart = `<bg${__upperFirst(
-          logObj.metas.emitter.metas.color || 'yellow'
-        )}> </bg${__upperFirst(
-          logObj.metas.emitter.metas.color || 'yellow'
-        )}>`;
-        idStr = `<${logObj.metas.emitter.metas.color || 'yellow'}> ${
-          logObj.metas.emitter.metas.id
-        }</${logObj.metas.emitter.metas.color || 'yellow'}>`;
-        idSeparator = `<${logObj.metas.emitter.metas.color || 'yellow'}> │ </${logObj.metas.emitter.metas.color || 'yellow'}>`;
-      }
-    }
-    if (logObj.marginTop && typeof logObj.marginTop === 'number') {
-      renderedStr = '\n'.repeat(logObj.marginTop) + renderedStr;
-    }
-    if (logObj.marginBottom && typeof logObj.marginBottom === 'number') {
-      renderedStr = renderedStr + '\n'.repeat(logObj.marginBottom);
+    clearLast() {
+        // __terminalKit.previousLine();
+        // __terminalKit.eraseLine();
     }
 
-    if (needId) {
-      console.log(__parseHtml(lineStart));
+    clear() {
+        process.stdout.write('\x1Bc');
     }
 
-    let lines = renderedStr.split('\n');
-    const idLength = __countLine(__parseHtml(idStr)),
-          idSeparatorLength = __countLine(__parseHtml(idSeparator)),
-          lineStartLength = __countLine(__parseHtml(lineStart));
-    const maxLineLenght = process.stdout.columns - idLength - idSeparatorLength - lineStartLength;
+    /**
+     * @name          _log
+     * @type          Function
+     * @private
+     *
+     * Method that actually log the passed log object with the passed component
+     *
+     * @param         {ILog}        logObj            The log object to log
+     * @param         {ISStdioComponent}      component       The component to use for logging
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _currentLogId = '';
+    _log(logObj, component) {
+        // handle empty logs
+        if (!logObj) return;
 
-    let finalLines: string[] = [];
-
-    lines.forEach((line, i) => {
-      if (line.includes('-%-')) {
-        finalLines.push(line.replace('-%-', '-'.repeat(maxLineLenght)));
-      } else if (__countLine(line) > maxLineLenght) {
-        __splitEvery(line, maxLineLenght).forEach((l, j) => {
-          finalLines.push(l.trim());
-        });
-      } else {
-        finalLines.push(line.trim());
-      }
-    });
-
-    finalLines = finalLines.map(line => {
-        if (needId) {
-          needId = false;
-          return `${lineStart}${idStr}${idSeparator}${line.trim()}`;
-        } else {
-          return `${lineStart}${' '.repeat(idLength)}${idSeparator}${line.trim()}`;
+        if (!logObj.decorators) {
+            console.log(__parseHtml(logObj.value));
+            return;
         }
-    });
 
-    // log the string
-    try {
-      console.log(__parseHtml(finalLines.join('\n')));
-    } catch (e) {}
-  }
+        let needId = false;
+        if (logObj.metas?.emitter?.metas?.id && this._currentLogId !== logObj.metas?.emitter?.metas?.id) {
+            needId = true;
+            this._currentLogId = logObj.metas.emitter.metas.id;
+        }
 
-  /**
-   * @name          _ask
-   * @type          Function
-   * @private
-   *
-   * Method that actually log the passed log object with the passed component
-   *
-   * @param         {ILogAsk}        askObj            The ask object to ask to the user
-   * @param         {ISStdioComponent}      component       The component to use for logging
-   *
-   * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _ask(askObj) {
+        let lineStart = '',
+            idStr = '',
+            idSeparator = '';
 
-    return new __SPromise(async ({resolve, reject, emit}) => {
+        // render the component
+        let renderedStr = component.render(logObj, this._settings);
+        // handle metas if needed
+        if (!logObj.nude) {
+            if (logObj.metas?.emitter) {
+                lineStart = `<bg${__upperFirst(logObj.metas.emitter.metas.color || 'yellow')}> </bg${__upperFirst(
+                    logObj.metas.emitter.metas.color || 'yellow',
+                )}>`;
+                idStr = `<${logObj.metas.emitter.metas.color || 'yellow'}> ${logObj.metas.emitter.metas.id}</${
+                    logObj.metas.emitter.metas.color || 'yellow'
+                }>`;
+                idSeparator = `<${logObj.metas.emitter.metas.color || 'yellow'}> │ </${
+                    logObj.metas.emitter.metas.color || 'yellow'
+                }>`;
+            }
+        }
+        if (logObj.marginTop && typeof logObj.marginTop === 'number') {
+            renderedStr = '\n'.repeat(logObj.marginTop) + renderedStr;
+        }
+        if (logObj.marginBottom && typeof logObj.marginBottom === 'number') {
+            renderedStr = renderedStr + '\n'.repeat(logObj.marginBottom);
+        }
 
-      let prompt, res;
+        if (needId) {
+            console.log(__parseHtml(lineStart));
+        }
 
-      switch(askObj.type) {
-        case 'select':
-          // @ts-ignore
-          prompt = new __Enquirer.default.Select({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'autocomplete':
-          // @ts-ignore
-          prompt = new __Enquirer.default.AutoComplete({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'confirm':
-          // @ts-ignore
-          prompt = new __Enquirer.default.Confirm({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'form':
-          // @ts-ignore
-          prompt = new __Enquirer.default.Form({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'input':
-          // @ts-ignore
-          prompt = new __Enquirer.default.Input({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'secret':
-          // @ts-ignore
-          prompt = new __Enquirer.default.Secret({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'list':
-          // @ts-ignore
-          prompt = new __Enquirer.default.List({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'multiselect':
-          // @ts-ignore
-          prompt = new __Enquirer.default.MultiSelect({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'number':
-          // @ts-ignore
-          prompt = new __Enquirer.default.NumberPrompt({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'password':
-          // @ts-ignore
-          prompt = new __Enquirer.default.Password({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-        case 'toggle':
-          // @ts-ignore
-          prompt = new __Enquirer.default.Toggle({
-            ...askObj
-          });
-          res = await prompt.run();
-        break;
-      }
-      resolve(res);
+        let lines = renderedStr.split('\n');
+        const idLength = __countLine(__parseHtml(idStr)),
+            idSeparatorLength = __countLine(__parseHtml(idSeparator)),
+            lineStartLength = __countLine(__parseHtml(lineStart));
+        const maxLineLenght = process.stdout.columns - idLength - idSeparatorLength - lineStartLength;
 
-    });
-  }
+        let finalLines: string[] = [];
 
+        lines.forEach((line, i) => {
+            if (line.includes('-%-')) {
+                finalLines.push(line.replace('-%-', '-'.repeat(maxLineLenght)));
+            } else if (__countLine(line) > maxLineLenght) {
+                __splitEvery(line, maxLineLenght).forEach((l, j) => {
+                    finalLines.push(l.trim());
+                });
+            } else {
+                finalLines.push(line.trim());
+            }
+        });
+
+        finalLines = finalLines.map((line) => {
+            if (needId) {
+                needId = false;
+                return `${lineStart}${idStr}${idSeparator}${line.trim()}`;
+            } else {
+                return `${lineStart}${' '.repeat(idLength)}${idSeparator}${line.trim()}`;
+            }
+        });
+
+        // log the string
+        try {
+            console.log(__parseHtml(finalLines.join('\n')));
+        } catch (e) {}
+    }
+
+    /**
+     * @name          _ask
+     * @type          Function
+     * @private
+     *
+     * Method that actually log the passed log object with the passed component
+     *
+     * @param         {ILogAsk}        askObj            The ask object to ask to the user
+     * @param         {ISStdioComponent}      component       The component to use for logging
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _ask(askObj) {
+        return new __SPromise(async ({ resolve, reject, emit }) => {
+            let prompt, res;
+
+            switch (askObj.type) {
+                case 'select':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.Select({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'autocomplete':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.AutoComplete({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'confirm':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.Confirm({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'form':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.Form({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'input':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.Input({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'secret':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.Secret({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'list':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.List({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'multiselect':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.MultiSelect({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'number':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.NumberPrompt({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'password':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.Password({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+                case 'toggle':
+                    // @ts-ignore
+                    prompt = new __Enquirer.default.Toggle({
+                        ...askObj,
+                    });
+                    res = await prompt.run();
+                    break;
+            }
+            resolve(res);
+        });
+    }
 }
 
 import __defaultTerminalStdioComponent from './components/defaultTerminalStdioComponent';

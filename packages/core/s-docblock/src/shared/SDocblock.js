@@ -9,11 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SDocblockBlock from './SDocblockBlock';
+// import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/shared/is/path';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 // @ts-ignore
 class SDocblock extends __SClass {
     /**
@@ -51,8 +50,8 @@ class SDocblock extends __SClass {
                 filepath: null,
                 to: {
                 // markdown: __markdown
-                }
-            }
+                },
+            },
         }, settings || {}));
         /**
          * @name            _blocks
@@ -69,18 +68,22 @@ class SDocblock extends __SClass {
             if (!__isNode())
                 throw new Error(`Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`);
             (() => __awaiter(this, void 0, void 0, function* () {
-                const { default: __fs } = yield import('fs');
-                if (!__fs.existsSync(source))
-                    throw new Error(`Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`);
-                this._source = __fs.readFileSync(source, 'utf8');
-                this._packageJson = __packageJsonSync(source);
+                // const { default: __fs } = await import('fs');
+                // if (!__fs.existsSync(source))
+                //     throw new Error(
+                //         `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
+                //     );
+                // this._source = __fs.readFileSync(source, 'utf8');
+                // this._packageJson = __packageJsonSync(source);
             }))();
         }
         else {
             this._source = source;
         }
         // parsing the source
-        this._blocks = this.parse();
+        // (async () => {
+        //     this._blocks = this.parse();
+        // })();
     }
     /**
      * @name          docblockSettings
@@ -123,31 +126,15 @@ class SDocblock extends __SClass {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
     get blocks() {
-        if (!this._blocks)
-            this.parse();
+        if (!this._blocks) {
+            throw new Error(`<red>${this.constructor.name}</red> Before accessing the blocks you'll need to parse the docblocks using "<yellow>await this.parse()</yellow>"`);
+        }
         return this._blocks;
     }
-    // /**
-    //  * @name        getBlockByName
-    //  * @type        Function
-    //  *
-    //  * Get a block by it's name
-    //  *
-    //  * @param       {String}        name      The name you want to get block for
-    //  * @return      SDocblockBlock            The getted block
-    //  *
-    //  * @since     2.0.0
-    //  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //  */
-    // getBlockByName(name: string): __SDocblockBlock {
-    //   // for (let i = 0; this._blocks.length; i++) {
-    //   //   const block = this._blocks[i];
-    //   //   console.log(block);
-    //   // }
-    // }
     /**
      * @name          parse
      * @type          Function
+     * @async
      *
      * This method is the principal one. Use it to parse a string
      * and get back the object version of it
@@ -159,90 +146,86 @@ class SDocblock extends __SClass {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     parse(string = this._source) {
-        // extract each docblocks
-        const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
-        // extracting blocks
-        // @ts-ignore
-        let blocksArrayStr = string.match(reg);
-        let blocks = [];
-        if (!Array.isArray(blocksArrayStr)) {
-            blocksArrayStr = [];
-        }
-        else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
-            blocksArrayStr = blocksArrayStr.map((t) => t.trim());
-            if (!blocksArrayStr || !blocksArrayStr.length)
-                return [];
-            blocks = blocksArrayStr
-                .filter((blockStr) => {
-                const lines = blockStr.split('\n');
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i];
-                    if (line.trim().slice(0, 2) === '//')
-                        return false;
-                }
-                if (this.docblockSettings.filterByTag) {
-                    let isBlockMatchFilter = true;
-                    for (let i = 0; i < Object.keys(this.docblockSettings.filterByTag).length; i++) {
-                        const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
-                        const tagFilter = this.docblockSettings.filterByTag[tagName];
-                        const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
-                        const tagValue = blockStr.match(tagValueReg);
-                        const tagFilterArray = Array.isArray(tagFilter)
-                            ? tagFilter
-                            : [tagFilter];
-                        let isMatchOrCondition = false;
-                        if (tagValue && tagValue[1]) {
-                            const tagValueValue = tagValue[1].trim();
-                            for (let j = 0; j < tagFilterArray.length; j++) {
-                                const tagFilterFilter = tagFilterArray[j];
-                                if (typeof tagFilterFilter === 'string') {
-                                    if (tagValueValue === tagFilterFilter) {
-                                        isMatchOrCondition = true;
-                                        break;
-                                    }
-                                }
-                                else if (tagFilterFilter instanceof RegExp) {
-                                    if (tagValueValue.trim().match(tagFilterFilter)) {
-                                        isMatchOrCondition = true;
-                                        break;
-                                    }
-                                }
-                                else if (typeof tagFilterFilter === 'function') {
-                                    if (tagFilterFilter(tagValueValue.trim())) {
-                                        isMatchOrCondition = true;
-                                        break;
-                                    }
-                                }
-                                else {
-                                    throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`);
-                                }
-                            }
-                        }
-                        if (!isMatchOrCondition)
-                            isBlockMatchFilter = false;
-                    }
-                    if (isBlockMatchFilter)
-                        return true;
-                    return false;
-                }
-                return true;
-            })
-                .map((block) => {
-                return new __SDocblockBlock(block || ' ', {
-                    docblockBlock: {
-                        packageJson: this._packageJson,
-                        filepath: this.docblockSettings.filepath || ''
-                    }
-                });
-            });
-        }
-        if (blocks && blocks.length) {
-            this._blocks = blocks;
-        }
-        // sort
-        this.sort();
-        // return the class instance itself
-        return this._blocks;
+        return __awaiter(this, void 0, void 0, function* () {
+            // extract each docblocks
+            const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
+            // extracting blocks
+            // @ts-ignore
+            let blocksArrayStr = string.match(reg);
+            // let blocks: __SDocblockBlock[] = [];
+            // if (!Array.isArray(blocksArrayStr)) {
+            //     blocksArrayStr = [];
+            // } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
+            //     blocksArrayStr = blocksArrayStr.map((t) => t.trim());
+            //     if (!blocksArrayStr || !blocksArrayStr.length) return [];
+            //     blocks = blocksArrayStr.filter((blockStr) => {
+            //         const lines = blockStr.split('\n');
+            //         for (let i = 0; i < lines.length; i++) {
+            //             const line = lines[i];
+            //             if (line.trim().slice(0, 2) === '//') return false;
+            //         }
+            //         if (this.docblockSettings.filterByTag) {
+            //             let isBlockMatchFilter = true;
+            //             for (let i = 0; i < Object.keys(this.docblockSettings.filterByTag).length; i++) {
+            //                 const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
+            //                 const tagFilter = this.docblockSettings.filterByTag[tagName];
+            //                 const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
+            //                 const tagValue = blockStr.match(tagValueReg);
+            //                 const tagFilterArray = Array.isArray(tagFilter) ? tagFilter : [tagFilter];
+            //                 let isMatchOrCondition = false;
+            //                 if (tagValue && tagValue[1]) {
+            //                     const tagValueValue = tagValue[1].trim();
+            //                     for (let j = 0; j < tagFilterArray.length; j++) {
+            //                         const tagFilterFilter = tagFilterArray[j];
+            //                         if (typeof tagFilterFilter === 'string') {
+            //                             if (tagValueValue === tagFilterFilter) {
+            //                                 isMatchOrCondition = true;
+            //                                 break;
+            //                             }
+            //                         } else if (tagFilterFilter instanceof RegExp) {
+            //                             if (tagValueValue.trim().match(tagFilterFilter)) {
+            //                                 isMatchOrCondition = true;
+            //                                 break;
+            //                             }
+            //                         } else if (typeof tagFilterFilter === 'function') {
+            //                             if (tagFilterFilter(tagValueValue.trim())) {
+            //                                 isMatchOrCondition = true;
+            //                                 break;
+            //                             }
+            //                         } else {
+            //                             throw new Error(
+            //                                 `<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`,
+            //                             );
+            //                         }
+            //                     }
+            //                 }
+            //                 if (!isMatchOrCondition) isBlockMatchFilter = false;
+            //             }
+            //             if (isBlockMatchFilter) return true;
+            //             return false;
+            //         }
+            //         return true;
+            //     });
+            // }
+            // for (let i = 0; i < blocks.length; i++) {
+            //     const block = blocks[i];
+            //     const docblockBlock = new __SDocblockBlock(block || ' ', {
+            //         docblockBlock: {
+            //             packageJson: this._packageJson,
+            //             filepath: this.docblockSettings.filepath || '',
+            //         },
+            //     });
+            //     await docblockBlock.parse();
+            //     blocks[i] = docblockBlock;
+            // }
+            if (blocks && blocks.length) {
+                this._blocks = blocks;
+            }
+            // sort
+            this.sort();
+            // return the class instance itself
+            return this._blocks;
+        });
     }
     /**
      * @name          toObject
@@ -276,4 +259,4 @@ class SDocblock extends __SClass {
     }
 }
 export default SDocblock;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY2Jsb2NrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0RvY2Jsb2NrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLE9BQU8sZ0JBQXFDLE1BQU0sa0JBQWtCLENBQUM7QUFDckUsNkNBQTZDO0FBQzdDLE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8saUJBQWlCLE1BQU0sMkNBQTJDLENBQUM7QUFpRDFFLGFBQWE7QUFDYixNQUFNLFNBQVUsU0FBUSxRQUFRO0lBZ0Q5Qjs7Ozs7OztPQU9HO0lBQ0gsWUFBWSxNQUFjLEVBQUUsUUFBaUM7UUFDM0QsS0FBSyxDQUNILFdBQVcsQ0FDVDtZQUNFLFFBQVEsRUFBRTtnQkFDUixXQUFXLEVBQUUsU0FBUztnQkFDdEIsWUFBWSxFQUFFLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFO29CQUNyQixJQUFJLEdBQUcsR0FBRyxDQUFDLENBQUM7b0JBRVosSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7d0JBQUUsT0FBTyxHQUFHLENBQUM7b0JBRXpCLE1BQU0sSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFDdkIsSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztvQkFFdEIsc0RBQXNEO29CQUN0RCxJQUFJLElBQUksQ0FBQyxTQUFTO3dCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7b0JBQzdCLElBQUksSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLE9BQU87d0JBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQztvQkFDL0QsSUFBSSxJQUFJLENBQUMsV0FBVzt3QkFBRSxHQUFHLElBQUksQ0FBQyxD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY2Jsb2NrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0RvY2Jsb2NrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLHdFQUF3RTtBQUN4RSw2Q0FBNkM7QUFDN0MsT0FBTyxRQUFRLE1BQU0sb0NBQW9DLENBQUM7QUFDMUQsT0FBTyxRQUFRLE1BQU0sb0NBQW9DLENBQUM7QUFrRDFELGFBQWE7QUFDYixNQUFNLFNBQVUsU0FBUSxRQUFRO0lBZ0Q1Qjs7Ozs7OztPQU9HO0lBQ0gsWUFBWSxNQUFjLEVBQUUsUUFBaUM7UUFDekQsS0FBSyxDQUNELFdBQVcsQ0FDUDtZQUNJLFFBQVEsRUFBRTtnQkFDTixXQUFXLEVBQUUsU0FBUztnQkFDdEIsWUFBWSxFQUFFLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFO29CQUNuQixJQUFJLEdBQUcsR0FBRyxDQUFDLENBQUM7b0JBRVosSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7d0JBQUUsT0FBTyxHQUFHLENBQUM7b0JBRXpCLE1BQU0sSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFDckIsSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztvQkFFeEIsc0RBQXNEO29CQUN0RCxJQUFJLElBQUksQ0FBQyxTQUFTO3dCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7b0JBQzdCLElBQUksSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLE9BQU87d0JBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQztvQkFDL0QsSUFBSSxJQUFJLENBQUMsV0FBVzt3QkFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO29CQUMvQixJQUFJLElBQUksQ0FBQyxPQUFPO3dCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7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

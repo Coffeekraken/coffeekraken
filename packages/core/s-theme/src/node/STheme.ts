@@ -418,15 +418,6 @@ export default class STheme extends __SClass {
                 if (stateName === 'color') {
                 } else if (stateName.match(/^:/)) {
                     Object.keys(variantColorObj).forEach((variant) => {
-                        if (colorName === 'ui' && state === 'hover')
-                            console.log(`--s-theme-color-${colorName}-${state}-${variant}`);
-                        // if (
-                        //     `--s-theme-color-${colorName}-${state}-${variant}--lightness-offset` ===
-                        //     '--s-theme-color-ui-hover-foreground-lightness-offset'
-                        // ) {
-                        //     console.log('BINGO');
-                        // }
-
                         res = callback(<ISThemeLoopOnColorsColor>{
                             name: colorName,
                             state: state === 'default' ? '' : state,
@@ -442,11 +433,6 @@ export default class STheme extends __SClass {
                         if (res === false || res === -1) {
                             triggeredStop = true;
                         }
-                        // console.log(
-                        //     state && state !== 'default'
-                        //         ? `--s-theme-color-${colorName}-${state}-${variant}`
-                        //         : `--s-theme-color-${colorName}-${variant}`,
-                        // );
                     });
                 } else {
                     res = callback(<ISThemeLoopOnColorsColor>{

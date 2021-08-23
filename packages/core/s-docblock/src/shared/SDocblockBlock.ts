@@ -17,6 +17,7 @@ import __platformTag from './tags/platform';
 import __namespaceTag from './tags/namespace';
 import __todoTag from './tags/todo';
 import __menuTag from './tags/menu';
+import __interfaceTag from './tags/interface';
 
 /**
  * @name          SDocblockBlock
@@ -45,266 +46,271 @@ import __menuTag from './tags/menu';
  */
 
 export interface ISDocblockBlockTagsMap {
-  [key: string]: Function;
+    [key: string]: Function;
 }
 
 export interface ISDocblockBlockSettings {
-  filepath?: string;
-  packageJson: any;
-  tags: ISDocblockBlockTagsMap;
+    filepath?: string;
+    packageJson: any;
+    tags: ISDocblockBlockTagsMap;
 }
 export interface ISDocblockBlockCtorSettings {
-  docblockBlock?: Partial<ISDocblockBlockSettings>;
+    docblockBlock?: Partial<ISDocblockBlockSettings>;
 }
 
 export interface ISDocblockBlock {
-  new (source: string, settings: ISDocblockBlockCtorSettings);
-  _source: string;
-  _blockObj: any;
-  toObject(): any;
+    new (source: string, settings: ISDocblockBlockCtorSettings);
+    _source: string;
+    _blockObj: any;
+    toObject(): any;
 }
 
 // @ts-ignore
 class SDocblockBlock extends __SClass implements ISDocblockBlock {
-  /**
-   * @name            tagsMap
-   * @type            Object
-   * @static
-   *
-   * Store the default tags mapping to their parsing functions
-   *
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-   */
-  static tagsMap: ISDocblockBlockTagsMap = {};
+    /**
+     * @name            tagsMap
+     * @type            Object
+     * @static
+     *
+     * Store the default tags mapping to their parsing functions
+     *
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static tagsMap: ISDocblockBlockTagsMap = {};
 
-  /**
-   * @name          _source
-   * @type          String
-   * @private
-   *
-   * Store the passed source
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
-   */
-  _source: string;
+    /**
+     * @name          _source
+     * @type          String
+     * @private
+     *
+     * Store the passed source
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
+     */
+    _source: string;
 
-  /**
-   * @name        _blockObj
-   * @type        {Object}
-   * @private
-   *
-   * Store the parsed docblock object
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
-   */
-  _blockObj: any;
+    /**
+     * @name        _blockObj
+     * @type        {Object}
+     * @private
+     *
+     * Store the parsed docblock object
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
+     */
+    _blockObj: any;
 
-  /**
-   * @name          registerTag
-   * @type          Function
-   * @static
-   *
-   * This static method allows you to register a new tag that will
-   * be recognized by the SDocblockBlock class.
-   *
-   * @param     {String}      tagName       The tag you want to register without the @
-   * @param     {Function}    parser    A function that will be called with the string tag content. You can parse this string and return an object that represent the tag data
-   *
-   * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
-   */
-  static registerTag(tagName: string, parser: Function): void {
-    // check the params
-    if (typeof parser !== 'function')
-      throw new Error(
-        `The "<yellow>parser</yellow>" parameter of the static "<cyan>SDocblockBlock</cyan>" class method needs to be a "<green>Function</green>"`
-      );
-    // register the tag
-    SDocblockBlock.tagsMap[tagName] = parser;
-  }
-
-  /**
-   * @name        docblockBlockSettings
-   * @type        ISDocblockBlockSettings
-   * @get
-   *
-   * Access the docblockBlock settings
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get docblockBlockSettings(): ISDocblockBlockSettings {
-    return (<any>this._settings).docblockBlock;
-  }
-
-  /**
-   * @name          constructor
-   * @type          Function
-   * @contructor
-   *
-   * Constructor
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(source, settings = {}) {
-    super(
-      __deepMege(
-        {
-          docblockBlock: {
-            filepath: null,
-            packageJson: null,
-            tags: SDocblockBlock.tagsMap
-          }
-        },
-        settings
-      )
-    );
-
-    this._source = source
-      .trim()
-      .replace(/\s\*\s/gm, '\n * ')
-      .split(/\n/gm)
-      .map((l) => l.trim())
-      .filter((l) => l !== '')
-      .join('\n')
-      // .replace(/\*\s\*/gm, '*')
-      .replace(/^\/\*\*/, '/**\n*')
-      .replace(/\*\/$/, '\n*/');
-
-    // parse the docblock string
-    this._blockObj = this.parse();
-  }
-
-  /**
-   * @name          toString
-   * @type          Function
-   *
-   * This method return the passed source string
-   *
-   * @return      {String}              The passed docblock string
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  toString() {
-    return this._source.trim();
-  }
-
-  /**
-   * @name          toObject
-   * @type          Function
-   *
-   * This method return the parsed docblock object
-   *
-   * @return      {Object}              The parsed dobclock object
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  toObject() {
-    return this._blockObj;
-  }
-
-  /**
-   * @name          parse
-   * @type          Function
-   * @private
-   *
-   * This method take a docblick string and parse it to a javascript object
-   *
-   * @return      {Object}          The object version of the source string
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  parse() {
-    // some variables
-    let currentTag: string;
-    let currentContent: string[] = [];
-    let currentObj: any = {};
-    let docblockObj: any = {};
-    let previousWasEmptyLine = false;
-
-    function add() {
-      if (currentContent.length) currentObj.content = currentContent;
-      if (
-        docblockObj.hasOwnProperty(currentTag) &&
-        !Array.isArray(docblockObj[currentTag])
-      ) {
-        const currentValue = docblockObj[currentTag];
-        docblockObj[currentTag] = [currentValue];
-      }
-      if (!currentObj.value) currentObj.value = true;
-      if (Array.isArray(docblockObj[currentTag])) {
-        docblockObj[currentTag].push(currentObj);
-      } else {
-        docblockObj[currentTag] = currentObj;
-      }
-      currentObj = {};
-      currentContent = [];
-      // @ts-ignore
-      currentTag = undefined;
+    /**
+     * @name          registerTag
+     * @type          Function
+     * @static
+     *
+     * This static method allows you to register a new tag that will
+     * be recognized by the SDocblockBlock class.
+     *
+     * @param     {String}      tagName       The tag you want to register without the @
+     * @param     {Function}    parser    A function that will be called with the string tag content. You can parse this string and return an object that represent the tag data
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
+     */
+    static registerTag(tagName: string, parser: Function): void {
+        // check the params
+        if (typeof parser !== 'function')
+            throw new Error(
+                `The "<yellow>parser</yellow>" parameter of the static "<cyan>SDocblockBlock</cyan>" class method needs to be a "<green>Function</green>"`,
+            );
+        // register the tag
+        SDocblockBlock.tagsMap[tagName] = parser;
     }
 
-    // split the block by tags
-    let lines = this._source.trim().split('\n');
-    if (!lines || !lines.length) return null;
-    lines = lines.map((l) => l.trim()).filter(l => l !== '');
+    /**
+     * @name        docblockBlockSettings
+     * @type        ISDocblockBlockSettings
+     * @get
+     *
+     * Access the docblockBlock settings
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get docblockBlockSettings(): ISDocblockBlockSettings {
+        return (<any>this._settings).docblockBlock;
+    }
 
-    lines.forEach((line) => {
-      // get the tag name
-      const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
-      const tagNameMatch = line.match(tagNameReg);
+    /**
+     * @name          constructor
+     * @type          Function
+     * @contructor
+     *
+     * Constructor
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(source, settings = {}) {
+        super(
+            __deepMege(
+                {
+                    docblockBlock: {
+                        filepath: null,
+                        packageJson: null,
+                        tags: SDocblockBlock.tagsMap,
+                    },
+                },
+                settings,
+            ),
+        );
 
-      if (line.replace('*', '').trim() === '') {
-        if (currentContent.length > 0) {
-          currentContent.push('');
-        } else {
-          if (currentTag && currentObj.value) {
-            add();
-          }
-          previousWasEmptyLine = true;
+        this._source = source
+            .trim()
+            .replace(/\s\*\s/gm, '\n * ')
+            .split(/\n/gm)
+            .map((l) => l.trim())
+            .filter((l) => l !== '')
+            .join('\n')
+            // .replace(/\*\s\*/gm, '*')
+            .replace(/^\/\*\*/, '/**\n*')
+            .replace(/\*\/$/, '\n*/');
+    }
+
+    /**
+     * @name          toString
+     * @type          Function
+     *
+     * This method return the passed source string
+     *
+     * @return      {String}              The passed docblock string
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toString() {
+        return this._source.trim();
+    }
+
+    /**
+     * @name          toObject
+     * @type          Function
+     *
+     * This method return the parsed docblock object
+     *
+     * @return      {Object}              The parsed dobclock object
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toObject() {
+        if (!this._blockObj) {
+            throw new Error(
+                `<red>${this.constructor.name}</red> Before accessing the blocks you'll need to parse the docblocks using "<yellow>await this.parse()</yellow>"`,
+            );
         }
-      } else if (tagNameMatch) {
-        if (currentTag) {
-          add();
-        }
-        currentTag = tagNameMatch[1];
-        line = line.replace(tagNameMatch[0], '').trim();
-        if (line.length > 0) {
-          currentObj.value = line;
-        } else {
-          currentObj.value = true;
-        }
-        previousWasEmptyLine = false;
-      } else if (previousWasEmptyLine && !line.trim().match(/^\*\/$/)) {
-        currentTag = 'description';
-        currentContent = [line.replace('*', '')];
-        currentObj = {};
-        previousWasEmptyLine = false;
-      } else {
-        line = line.replace('/**', '');
-        line = line.replace('*/', '');
-        line = line.replace('* ', '');
-        line = line.replace('*', '');
-        if (line.trim().length) {
-          currentContent.push(line);
-        }
-      }
-    });
+        return this._blockObj;
+    }
 
-    add();
+    /**
+     * @name          parse
+     * @type          Function
+     * @async
+     * @private
+     *
+     * This method take a docblick string and parse it to a javascript object
+     *
+     * @return      {Object}          The object version of the source string
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    async parse() {
+        // some variables
+        let currentTag: string;
+        let currentContent: string[] = [];
+        let currentObj: any = {};
+        let docblockObj: any = {};
+        let previousWasEmptyLine = false;
 
-    docblockObj = __map(docblockObj, ({ value, prop }) => {
-      if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') return value;
-      if (this.docblockBlockSettings.tags[prop] && prop !== 'src')
-        return this.docblockBlockSettings.tags[prop](value, this.docblockBlockSettings);
-      return __simpleValueTag(value, this.docblockBlockSettings);
-    });
+        // function add() {
+        //     if (currentContent.length) currentObj.content = currentContent;
+        //     if (docblockObj.hasOwnProperty(currentTag) && !Array.isArray(docblockObj[currentTag])) {
+        //         const currentValue = docblockObj[currentTag];
+        //         docblockObj[currentTag] = [currentValue];
+        //     }
+        //     if (!currentObj.value) currentObj.value = true;
+        //     if (Array.isArray(docblockObj[currentTag])) {
+        //         docblockObj[currentTag].push(currentObj);
+        //     } else {
+        //         docblockObj[currentTag] = currentObj;
+        //     }
+        //     currentObj = {};
+        //     currentContent = [];
+        //     // @ts-ignore
+        //     currentTag = undefined;
+        // }
 
-    // save the raw string
-    docblockObj.raw = this._source.toString();
+        // // split the block by tags
+        // let lines = this._source.trim().split('\n');
+        // if (!lines || !lines.length) return null;
+        // lines = lines.map((l) => l.trim()).filter((l) => l !== '');
 
-    // return the parsed docblock object
-    return docblockObj;
-  }
+        // lines.forEach((line) => {
+        //     // get the tag name
+        //     const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
+        //     const tagNameMatch = line.match(tagNameReg);
+
+        //     if (line.replace('*', '').trim() === '') {
+        //         if (currentContent.length > 0) {
+        //             currentContent.push('');
+        //         } else {
+        //             if (currentTag && currentObj.value) {
+        //                 add();
+        //             }
+        //             previousWasEmptyLine = true;
+        //         }
+        //     } else if (tagNameMatch) {
+        //         if (currentTag) {
+        //             add();
+        //         }
+        //         currentTag = tagNameMatch[1];
+        //         line = line.replace(tagNameMatch[0], '').trim();
+        //         if (line.length > 0) {
+        //             currentObj.value = line;
+        //         } else {
+        //             currentObj.value = true;
+        //         }
+        //         previousWasEmptyLine = false;
+        //     } else if (previousWasEmptyLine && !line.trim().match(/^\*\/$/)) {
+        //         currentTag = 'description';
+        //         currentContent = [line.replace('*', '')];
+        //         currentObj = {};
+        //         previousWasEmptyLine = false;
+        //     } else {
+        //         line = line.replace('/**', '');
+        //         line = line.replace('*/', '');
+        //         line = line.replace('* ', '');
+        //         line = line.replace('*', '');
+        //         if (line.trim().length) {
+        //             currentContent.push(line);
+        //         }
+        //     }
+        // });
+
+        // add();
+
+        // for (let i = 0; i < Object.keys(docblockObj).length; i++) {
+        //     const prop = Object.keys(docblockObj)[i];
+        //     const value = docblockObj[prop];
+
+        //     if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') continue;
+        //     if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
+        //         docblockObj[prop] = await this.docblockBlockSettings.tags[prop](value, this.docblockBlockSettings);
+        //     } else {
+        //         docblockObj[prop] = __simpleValueTag(value, this.docblockBlockSettings);
+        //     }
+        // }
+
+        // // save the raw string
+        // docblockObj.raw = this._source.toString();
+
+        // return the parsed docblock object
+        return docblockObj;
+    }
 }
 
 SDocblockBlock.registerTag('author', __authorTag);
@@ -377,6 +383,7 @@ SDocblockBlock.registerTag('desc', __descriptionTag);
 // SDocblockBlock.registerTag('typedef', __typedefTag);
 // SDocblockBlock.registerTag('throws', __throwsTag);
 SDocblockBlock.registerTag('see', __seeTag);
+SDocblockBlock.registerTag('interface', __interfaceTag);
 SDocblockBlock.registerTag('return', __returnTag);
 SDocblockBlock.registerTag('param', __paramTag);
 SDocblockBlock.registerTag('property', __paramTag);

@@ -1,0 +1,21 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-component",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-inline-svg-component",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request-component",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/sugar"
+        ],
+        "map": {}
+    }
+}

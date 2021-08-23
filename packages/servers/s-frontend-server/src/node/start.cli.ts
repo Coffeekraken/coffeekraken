@@ -1,13 +1,11 @@
-import __SProcess from '@coffeekraken/s-process';
+import __SPromise from '@coffeekraken/s-promise';
 import __SFrontendServer from './SFrontendServer';
-import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 
-export default async function start(stringArgs = '') {
-  const server = new __SFrontendServer();
-  const pro = await __SProcess.from(server.start.bind(server), {
-    process: {
-      interface: __SFrontendServerInterface
-    }
-  });
-  pro.run(stringArgs);
+export default function start(stringArgs = '') {
+    return new __SPromise(async ({ resolve, pipe, emit }) => {
+        const server = new __SFrontendServer();
+        const promise = server.start(stringArgs);
+        pipe(promise);
+        resolve(await promise);
+    });
 }

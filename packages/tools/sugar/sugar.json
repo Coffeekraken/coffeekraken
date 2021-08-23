@@ -1,10 +1,24 @@
 {
-  "config": {
-    "folders": [
-      {
-        "scope": "default",
-        "path": "./src/config"
-      }
+    "config": {
+        "folders": [
+            {
+                "scope": "default",
+                "path": "./src/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "run",
+            "description": "Allows you to run commands easily even in multiple packages at once",
+            "defaultAction": "command",
+            "actions": {
+                "command": {
+                    "scope": "global",
+                    "description": "Run a line command either in current directory or in a(some) specific packages",
+                    "process": "./src/cli/runCommand.cli.js"
+                }
+            }
+        }
     ]
-  }
 }

@@ -16,7 +16,7 @@ export default function (env, config) {
                 description: 'Default s-frontstack recipe ',
                 templateDir: __path.resolve(`${__dirname()}/../templates/default`),
                 defaultStack: 'dev',
-                stacks: {
+                Rangestacks: {
                     dev: {
                         description: 'Start the development stack',
                         actions: {

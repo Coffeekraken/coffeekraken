@@ -1,6 +1,5 @@
 #doc {
-
-    [class^="s-platform"] {
+    [class^='s-platform'] {
         font-size: sugar.font.size(70);
         margin-right: 0.2em;
     }
@@ -9,7 +8,6 @@
         border: solid 2px sugar.color(accent);
     }
     .__author {
-
     }
     .__contributors {
         .s-avatar {
@@ -38,7 +36,7 @@
             clip-path: polygon(100px 0%, 100% 0, 100% 100%, 0% 100%);
             z-index: -1;
         }
-        
+
         /* &:after {
             content: '';
             display: block;
@@ -59,13 +57,12 @@
         top: 98px;
         z-index: 10;
 
-        [class*="s-platform-"] {
+        [class*='s-platform-'] {
             font-size: 1em;
         }
     }
 
     .__toolbar-issue {
-
         .s-tooltip {
             background-image: url('/src/img/issue-tooltip-bkg.jpg');
             background-size: cover;
@@ -77,31 +74,33 @@
             &:before {
                 content: '';
                 display: block;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
                 position: absolute;
                 z-index: 0;
 
-                @sugar.gradient(sugar.color(ui, surface), rgba(0,0,0,0));
+                @sugar.gradient (sugar.color(ui, surface), rgba(0,0,0,0));
             }
         }
     }
 
     .__nav {
         position: sticky;
-        top:208px;
+        top: 208px;
         max-height: calc(100vh - 140px);
         overflow: auto;
 
-        [class*="s-list"] {
+        [class*='s-list'] {
             overflow: hidden;
-            max-height: 0; 
+            max-height: 0;
             opacity: 0;
-            transition: all .2s ease-in-out;
+            transition: all 0.2s ease-in-out;
             margin-left: 0.4em;
         }
 
-        .__nav-group[active] + [class*="s-list"] {
+        .__nav-group[active] + [class*='s-list'] {
             opacity: 1;
             max-height: 3000px;
         }
@@ -113,8 +112,8 @@
 
         .s-h3 {
             color: sugar.color(complementary);
-            transition: color .2s ease-in-out;
-        }        
+            transition: color 0.2s ease-in-out;
+        }
 
         .__nav-group-toggle {
             display: inline-block;
@@ -125,18 +124,21 @@
             top: 0.05em;
             margin-right: 0.2em;
 
-            &:before, &:after {
+            &:before,
+            &:after {
                 content: '';
                 display: block;
-                width: 50%; height: 2px;
+                width: 50%;
+                height: 2px;
                 background: sugar.color(main, text);
                 position: absolute;
-                top: 50%; left: 50%;
+                top: 50%;
+                left: 50%;
                 transform: translate(-50%, -50%);
             }
             &:after {
                 transform: translate(-50%, -50%) rotate(270deg);
-                transition: transform .2s ease-in-out;
+                transition: transform 0.2s ease-in-out;
             }
         }
 
@@ -148,8 +150,5 @@
                 transform: translate(-50%, -50%) rotate(0);
             }
         }
-
     }
-
-
 }

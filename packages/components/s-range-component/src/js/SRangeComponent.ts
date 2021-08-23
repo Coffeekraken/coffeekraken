@@ -4,13 +4,14 @@ import { html, css, unsafeCSS } from 'lit-element';
 import __SRangeComponentInterface from './interface/SRangeComponentInterface';
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-
 import __css from '../css/s-range.css';
 
 /**
  * @name                s-range
  * @namespace           js
  * @type                Webcomponent
+ * @interface           ./interface/SRangeComponentInterface.js        param
+ * @menu                Styleguide / Forms              /styleguide/forms/s-range
  * @platform            html
  * @status              beta
  *
@@ -18,8 +19,19 @@ import __css from '../css/s-range.css';
  * displaying the value automatically in tooltip or inline.
  *
  * @example         html
+ * <h6>Simple range</h6>
  * <s-range name="myCoolRange" class="s-ui:accent"></s-range>
+ *
+ * <h6>With a tooltip</h6>
  * <s-range name="myOtherRanfe" tooltip></s-range>
+ *
+ * <h6>Using steps</h6>
+ * <s-range name="myRangeWithSteps" class="s-ui:complementary" step="5"></s-range>
+ *
+ * <h6>Different colors</h6>
+ * <s-range name="myRangeColoredSuccess" class="s-ui:success"></s-range>
+ * <s-range name="myRangeColoredWarning" class="s-ui:warning"></s-range>
+ * <s-range name="myRangeColoredError" class="s-ui:error"></s-range>
  *
  * @example         js
  * import { webcomponent as SRangeWebcomponent } from '@coffeekraken/s-range-component';

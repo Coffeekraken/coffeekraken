@@ -19,7 +19,7 @@
                 <a class="s-pl:50 s-typo:bold" href="/#features" title="Features">Features</a>
                 <a class="s-px:50 s-typo:bold" href="/#get-started" title="Get started">Get started</a>
 
-                @foreach ($docMenu->tree as $menuItem)
+                @foreach ($docMenu->mixedTree as $menuItem)
 
                     <span class="s-pr:50 s-typo:bold" >
                         <span class="s-tooltip-container">

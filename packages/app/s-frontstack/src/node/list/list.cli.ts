@@ -1,13 +1,11 @@
-import __SProcess from '@coffeekraken/s-process';
+import __SPromise from '@coffeekraken/s-promise';
 import __SFrontstack from '../SFrontstack';
-import __SFrontstackListParamsInterface from './interface/SFrontstackListParamsInterface';
 
-export default async function action(stringArgs = '') {
-  const frontstack = new __SFrontstack();
-  const pro = await __SProcess.from(frontstack.list.bind(frontstack), {
-    process: {
-      interface: __SFrontstackListParamsInterface
-    }
-  });
-  pro.run(stringArgs);
+export default function action(stringArgs = '') {
+    return new __SPromise(async ({ resolve, pipe }) => {
+        const frontstack = new __SFrontstack();
+        const promise = frontstack.list(stringArgs);
+        pipe(promise);
+        resolve(await promise);
+    });
 }

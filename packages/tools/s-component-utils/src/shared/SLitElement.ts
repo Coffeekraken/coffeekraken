@@ -1,3 +1,6 @@
+// @ts-nocheck
+// @TODO            check how to override private static methods
+
 import { LitElement } from 'lit-element';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 

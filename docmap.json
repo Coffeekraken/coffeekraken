@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-component",
+            "@coffeekraken/s-range-component",
             "@coffeekraken/sugar"
         ],
         "map": {}

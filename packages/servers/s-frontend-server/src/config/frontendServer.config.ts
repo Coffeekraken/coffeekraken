@@ -148,6 +148,9 @@ export default function (env, config) {
             '/api/docmap': {
                 handler: 'docmap',
             },
+            '/*/*/styleguide/*': {
+                handler: 'styleguide',
+            },
         },
 
         handlers: {
@@ -297,6 +300,43 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 handler: `${__dirname()}/../node/handlers/markdown`,
+            },
+            /**
+             * @name            styleguide
+             * @namespace       config.frontendServer.handlers
+             * @type            Object
+             *
+             * Store all the "styleguide" configuration access like the route, the title, etc...
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            styleguide: {
+                /**
+                 * @name          title
+                 * @namespace     config.frontendServer.handlers.styleguide
+                 * @type          String
+                 * @default       Views | [title]
+                 *
+                 * Specify the page title wanted. Accessible tokens:
+                 * - [title]: Name of the view
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Styleguide | [title]',
+                /**
+                 * @name            handler
+                 * @namespace       config.frontendServer.handlers.styleguide
+                 * @type            Function
+                 * @default         ${__dirname()}/../node/handlers/view
+                 *
+                 * Specify the handler function that will take care of responding to this "section"
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                handler: `${__dirname()}/../node/handlers/styleguide`,
             },
             /**
              * @name            docmap

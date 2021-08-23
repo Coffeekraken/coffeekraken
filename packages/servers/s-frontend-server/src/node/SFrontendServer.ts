@@ -68,7 +68,7 @@ export default class SFrontendServer extends __SClass {
      * @since       2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    start(params: Partial<ISFrontendServerParams>): Promise<any> {
+    start(params: Partial<ISFrontendServerParams> | string): Promise<any> {
         const finalParams: ISFrontendServerParams = __SFrontendServerInterface.apply(params);
 
         return new __SPromise(
@@ -76,7 +76,7 @@ export default class SFrontendServer extends __SClass {
                 const express = __express();
 
                 // enable compression if prod
-                if (params.prod || __SEnv.is('production')) {
+                if (finalParams.prod || __SEnv.is('production')) {
                     express.use(__compression());
                 }
 

@@ -26,11 +26,11 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function wait(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, timeout);
-  });
+function wait(timeout: number = 0) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, timeout);
+    });
 }
 export default wait;

@@ -26,8 +26,10 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default interface ISLog {
-  decorators: boolean;
-  time: boolean;
-  clear: boolean;
-  temp: boolean;
+    decorators: boolean;
+    time: boolean;
+    clear: boolean;
+    temp: boolean;
+    type: string;
+    value: any;
 }

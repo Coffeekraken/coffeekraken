@@ -64,7 +64,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(id: string, sources: ISEventEmitter | ISEventEmitter[], settings: ISTerminalStdioCtorSettings) {
+    constructor(id: string, sources: ISEventEmitter | ISEventEmitter[], settings?: ISTerminalStdioCtorSettings) {
         super(
             id,
             sources,

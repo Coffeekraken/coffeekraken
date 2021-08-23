@@ -191,8 +191,11 @@ export default class SComponentUtils extends __SClass {
 
         // node
         this.node = node;
+        // @ts-ignore
         if (!this.node.tagName) this.node = this.node.parentNode;
+        // @ts-ignore
         if (this.node.parentNode?.tagName?.toLowerCase() === this.name) {
+            // @ts-ignore
             this.node = node.parentNode;
         }
 
@@ -242,15 +245,18 @@ export default class SComponentUtils extends __SClass {
         );
 
         // litElement shouldUpdate
+        // @ts-ignore
         if (!this.node.shouldUpdate) {
+            // @ts-ignore
             this.node.shouldUpdate = () => {
                 return this.shouldUpdate;
             };
         }
 
         const _updateProp = (propName, oldValue) => {
-            // if (this[propName] === oldValue) return;
+            if (this[propName] === oldValue) return;
 
+            // @ts-ignore
             if (this._InterfaceToApply.definition?.[propName]?.physical) {
                 if (this.node[propName] === false || this.node[propName] === undefined) {
                     if (this._settings.rootNode) {
@@ -268,6 +274,7 @@ export default class SComponentUtils extends __SClass {
 
         // @ts-ignore
         const superUpdated = this.node.updated;
+        // @ts-ignore
         this.node.updated = (changedProperties) => {
             changedProperties.forEach((oldValue, propName) => {
                 _updateProp(propName, oldValue);
@@ -278,6 +285,7 @@ export default class SComponentUtils extends __SClass {
             _updateProp(prop, this.node[prop]);
         });
 
+        // @ts-ignore
         const styleStr = this.node.constructor.getStyles();
         this.injectStyle(styleStr.cssText);
 
@@ -285,6 +293,7 @@ export default class SComponentUtils extends __SClass {
         switch (this.props.mountWhen) {
             case 'inViewport':
                 (async () => {
+                    // @ts-ignore
                     await __whenInViewport(this.node);
                     this.mount();
                 })();
@@ -308,6 +317,7 @@ export default class SComponentUtils extends __SClass {
                 ...int.definition,
             };
         }
+        // @ts-ignore
         return InlineComponentUtilsInterface;
     }
 
@@ -338,13 +348,16 @@ export default class SComponentUtils extends __SClass {
 
     static _injectedStyles: string[] = [];
     injectStyle(css, id = this.node.tagName) {
+        // @ts-ignore
         if (this.constructor._injectedStyles.indexOf(id) !== -1) return;
+        // @ts-ignore
         this.constructor._injectedStyles.push(id);
         __injectStyle(css);
     }
 
     async mount() {
         this.shouldUpdate = true;
+        // @ts-ignore
         this.node.requestUpdate?.(); // litelement update
 
         await __wait();
@@ -367,9 +380,13 @@ export default class SComponentUtils extends __SClass {
                     return; // this style is not wanted...
                 }
 
+                // @ts-ignore
                 if ($link._stylesheet) {
+                    // @ts-ignore
                     this.node.shadowRoot.adoptedStyleSheets = [
+                        // @ts-ignore
                         ...this.node.shadowRoot.adoptedStyleSheets,
+                        // @ts-ignore
                         $link._stylesheet,
                     ];
                     return;
@@ -378,10 +395,13 @@ export default class SComponentUtils extends __SClass {
                 this.node.shadowRoot?.appendChild($link.cloneNode());
 
                 // avoid processing multiple time same stylesheet
+                // @ts-ignore
                 if (this.constructor._styleNodes.indexOf($link) !== -1) return;
+                // @ts-ignore
                 this.constructor._styleNodes.push($link);
 
                 // request stylesheet to store it in a unique CSSStylesheet instance
+                // @ts-ignore
                 const res = await fetch($link.href, {
                     headers: {
                         Accept: 'text/css,*/*;q=0.1',
@@ -390,7 +410,9 @@ export default class SComponentUtils extends __SClass {
 
                 let cssStr = await res.text();
                 const stylesheet = new CSSStyleSheet();
+                // @ts-ignore
                 stylesheet.replace(cssStr);
+                // @ts-ignore
                 $link._stylesheet = stylesheet;
             });
         }
@@ -402,15 +424,20 @@ export default class SComponentUtils extends __SClass {
                     return; // this style is not wanted...
                 }
 
+                // @ts-ignore
                 if ($style._stylesheet) {
+                    // @ts-ignore
                     this.node.shadowRoot.adoptedStyleSheets = [
+                        // @ts-ignore
                         ...this.node.shadowRoot.adoptedStyleSheets,
+                        // @ts-ignore
                         $style._stylesheet,
                     ];
                     return;
                 }
 
                 const stylesheet = new CSSStyleSheet();
+                // @ts-ignore
                 stylesheet.replace($style.innerHTML);
                 // @ts-ignore
                 $style._stylesheet = stylesheet;

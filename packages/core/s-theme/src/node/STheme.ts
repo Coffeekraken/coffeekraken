@@ -384,6 +384,7 @@ export default class STheme extends __SClass {
                     name: colorName,
                     variant: '',
                     state: '',
+                    // @ts-ignore
                     value: {
                         color: colorObj.color,
                         variable: `--s-theme-color-${colorName}`,

@@ -1,6 +1,6 @@
 import __SDuration from '@coffeekraken/s-duration';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import { ILog } from '@coffeekraken/s-log';
+import { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
@@ -178,7 +178,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     static async from(
         what: string | Function | Promise<any> | __SPromise | SProcess,
         settings?: Partial<ISProcessCtorSettings>,
-    ): SProcess {
+    ): Promise<SProcess> {
         if (__isClass(what) && __extendsStack(what)['SProcess']) {
             // @ts-ignore
             return new what({}, settings);
@@ -280,7 +280,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     static async fromCommand(
         initialParams: Partial<ISCommandProcessParams> = {},
         settings?: Partial<ISCommandProcessCtorSettings>,
-    ): SProcess {
+    ): Promise<SProcess> {
         const { default: __SCommandProcess } = await import('./SCommandProcess'); // eslint-disable-line
         return new __SCommandProcess(initialParams, settings);
     }
@@ -828,7 +828,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      *
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    log(...logs: ILog[]) {
+    log(...logs: ISLog[]) {
         logs.forEach((log) => {
             if (this.currentExecutionObj) {
                 this.currentExecutionObj.stdout.push(log.value || log.toString());
@@ -847,7 +847,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      *
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    error(...errors: ILog[]) {
+    error(...errors: ISLog[]) {
         errors.forEach((error) => {
             if (this.currentExecutionObj) {
                 this.currentExecutionObj.stderr.push(error.value || error.toString());

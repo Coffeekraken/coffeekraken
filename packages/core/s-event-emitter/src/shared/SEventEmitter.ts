@@ -1,5 +1,5 @@
 import __minimatch from 'minimatch';
-import SClass, { ISClass } from '@coffeekraken/s-class';
+import SClass, { ISClass, ISClassCtor } from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
@@ -99,7 +99,7 @@ export interface ISEventEmitterEventObj {
     reject: Function;
 }
 
-export interface ISEventEmitterConstructorSettings {
+export interface ISEventEmitterConstructorSettings extends ISClassCtor {
     eventEmitter?: Partial<ISEventEmitterSettings>;
 }
 export interface ISEventEmitterInstanceSettings {
@@ -172,7 +172,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      */
     static pipe(
         sourceSEventEmitter: ISEventEmitter,
-        destSEventEmitter: ISEventEmitter | Process,
+        destSEventEmitter: ISEventEmitter | typeof process,
         settings?: ISEventEmitterPipeSettings,
     ) {
         // settings
@@ -267,7 +267,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 // emit on the destination promise
                 const emitMetas = {
                     ...metas,
-                    level: metas.level + 1,
+                    level: (metas?.level ?? 0) + 1,
                 };
 
                 if (destSEventEmitter instanceof SEventEmitter) {
@@ -288,7 +288,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         metas: emitMetas,
                     });
                 } else {
-                    destSEventEmitter.emit(metas.event, value, emitMetas);
+                    (<SEventEmitter>destSEventEmitter).emit(metas.event, value, emitMetas);
                 }
             }
         });
@@ -579,6 +579,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     async _emit(logObj: ISEventEmitterEventObj) {
         // if is an ask event, set the askId in metas
         if (logObj.event === 'ask') {
+            // @ts-ignore
             this.constructor.global.on(`answer.${logObj.metas.askId}:1`, (answer, metas) => {
                 logObj.resolve(answer);
             });
@@ -791,6 +792,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 metasObj,
                 metasObj?.askId
                     ? (answer) => {
+                          // @ts-ignore
                           this.constructor.global.emit(`answer.${metasObj.askId}`, answer, metasObj);
                       }
                     : undefined,

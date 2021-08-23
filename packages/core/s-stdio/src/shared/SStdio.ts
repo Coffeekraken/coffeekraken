@@ -338,6 +338,7 @@ class SStdio extends __SClass implements ISStdio {
         this.sources = Array.isArray(sources) ? sources : [sources];
 
         // store this instance reference
+        // @ts-ignore
         if (this.constructor._instanciatedStdio[this.id]) {
             throw new Error(
                 `<red>${this.constructor.name}</red> Sorry but a instance of the SStdio class already exists with the id "<yellow>${this.id}</yellow>"`,
@@ -420,7 +421,7 @@ class SStdio extends __SClass implements ISStdio {
             source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
                 // console.log(askObj);
                 const res = await this.ask(askObj);
-                answer(res);
+                answer?.(res);
             });
         });
 

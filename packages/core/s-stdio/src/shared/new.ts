@@ -53,7 +53,7 @@ export default async function _new(id: string, sources, stdio: any = 'inherit', 
             case 'inherit':
                 if (__isNode()) {
                     const { default: __STerminalStdio } = await import('../node/terminal/STerminalStdio');
-                    stdioInstance = new __STerminalStdio(sources, settings);
+                    stdioInstance = new __STerminalStdio(id, sources, settings);
                 } else {
                     throw new Error(
                         `<red>[SStdio.new]</red> Sorry but the "<yellow>SConsoleStdio</yellow>" class is not yet implemented...`,

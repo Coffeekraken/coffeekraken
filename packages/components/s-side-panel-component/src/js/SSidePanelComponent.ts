@@ -54,8 +54,10 @@ export default class SSidePanel extends SLitElement {
     constructor() {
         super();
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            interface: __SSidePanelComponentInterface,
-            defaultProps: {},
+            componentUtils: {
+                interface: __SSidePanelComponentInterface,
+                defaultProps: {},
+            },
         });
 
         if (this._component.props.closeOn.indexOf('click') !== -1) {

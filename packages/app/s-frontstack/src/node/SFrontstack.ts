@@ -3,6 +3,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SFrontstackActionInterface from './action/interface/SFrontstackActionInterface';
 import __SFrontstackRecipeParamsInterface from './recipe/interface/SFrontstackRecipeParamsInterface';
+import __SFrontstackListParamsInterface from './list/interface/SFrontstackListParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
@@ -123,7 +124,7 @@ export default class SFrontstack extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    action(params: ISFrontstackActionParams) {
+    action(params: ISFrontstackActionParams | string) {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const frontstackConfig = __SSugarConfig.get('frontstack');
@@ -195,7 +196,7 @@ export default class SFrontstack extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    recipe(params: ISFrontstackRecipeParams) {
+    recipe(params: ISFrontstackRecipeParams | string) {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const frontstackConfig = __SSugarConfig.get('frontstack');
@@ -379,7 +380,7 @@ export default class SFrontstack extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     list(
-        params: Partial<ISFrontstackListParams>,
+        params: ISFrontstackListParams | string,
     ): Promise<
         | Record<string, ISFrontstackRecipe>
         | Record<string, ISFrontstackRecipestack>
@@ -389,10 +390,12 @@ export default class SFrontstack extends __SClass {
             ({ resolve, reject, emit }) => {
                 const recipes = this.listRecipes();
 
+                const finalParams = __SFrontstackListParamsInterface.apply(params);
+
                 let recipe, stack;
-                if (params.recipeStack) {
-                    recipe = params.recipeStack.split('.')[0];
-                    stack = params.recipeStack.split('.')[1];
+                if (finalParams.recipeStack) {
+                    recipe = finalParams.recipeStack.split('.')[0];
+                    stack = finalParams.recipeStack.split('.')[1];
                 }
 
                 if (!recipe) {

@@ -2,7 +2,7 @@ import __SComponentUtils, {SComponentUtilsDefaultInterface, SLitElement} from "@
 import {css, unsafeCSS, html, property, query, queryAssignedNodes} from "lit-element";
 import {webcomponent as webcomponent$1} from "@coffeekraken/s-clipboard-copy-component";
 import __SInterface from "@coffeekraken/s-interface";
-function wait(timeout) {
+function wait(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
@@ -1935,34 +1935,27 @@ function javascript(hljs) {
   };
 }
 var __css = '.hljs {\n    display: block;\n    overflow: hidden;\n    padding: var(--s-theme-space-30, 24px);\n    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    line-height: 1.5 !important;\n}\n\n    .hljs,\n    .hljs.hljs-subst {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    }\n\n    .hljs .hljs-selector-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-selector-id {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n        font-weight: bold;\n    }\n\n    .hljs .hljs-selector-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-pseudo {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-addition {\n        background-color: rgba(163, 190, 140, 0.5);\n    }\n\n    .hljs .hljs-deletion {\n        background-color: rgba(191, 97, 106, 0.5);\n    }\n\n    .hljs .hljs-built_in,\n    .hljs .hljs-type {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-function {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-function > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-keyword,\n    .hljs .hljs-literal,\n    .hljs .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-number {\n        color: #B48EAD;\n    }\n\n    .hljs .hljs-regexp {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-title {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-params {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-bullet {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-code {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-emphasis {\n        font-style: italic;\n    }\n\n    .hljs .hljs-formula {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-strong {\n        font-weight: bold;\n    }\n\n    .hljs .hljs-link:hover {\n        text-decoration: underline;\n    }\n\n    .hljs .hljs-quote {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-comment {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-doctag {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-meta,\n    .hljs .hljs-meta-keyword {\n        color: #5E81AC;\n    }\n\n    .hljs .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-30-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-30-lightness-offset, 0)) * 1%),var(--s-theme-color-text-30-a, 1));\n    }\n\n    .hljs .hljs-builtin-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-section {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-tag {\n        color: #5E81AC;\n    }\n\n    .hljs.abnf .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.abnf .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.apache .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.apache .hljs-section {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.arduino .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.aspectj .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.aspectj > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs.bnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.clojure .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.clojure .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.coq .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.cpp .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.css .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.css .hljs-keyword {\n        color: #D08770;\n    }\n\n    .hljs.diff .hljs-meta {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.ebnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.glsl .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.groovy .hljs-meta:not(:first-child) {\n        color: #D08770;\n    }\n\n    .hljs.haxe .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.java .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.ldif .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.lisp .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.lua .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.moonscript .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-section {\n        color: #5E81AC;\n    }\n\n    .hljs.pf .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.processing .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.scss .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.stylus .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.swift .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.vim .hljs-built_in {\n        color: #88C0D0;\n        font-style: italic;\n    }\n\n    .hljs.yaml .hljs-meta {\n        color: #D08770;\n    }\n\n:host {  \n    display: block;\n    border-radius: var(--s-theme-ui-code-borderRadius, 6px);\n    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;\n    overflow: hidden;\n\n}\n\n.s-rhythm--vertical > :host, :host.s-rhythm--vertical {\n            margin-bottom: var(--s-theme-margin-40, 36px);\n}\n\n  .s-code-example__slot {\n    display: none;\n  }\n\n  .s-code-example__nav {\n    position: relative;\n  }\n\n  .s-code-example__tabs {\n    display: flex;\n    list-style: none;\n    border-bottom-left-radius: 0 !important;\n    border-bottom-right-radius: 0 !important;\n  }\n  .s-code-example__tab {\n\n  }\n\n  .s-code-example__content {\n    overflow: hidden;\n    position: relative;\n  }\n\n  .s-code-example__code {\n    display: none;\n    border-top-left-radius: 0 !important;\n    border-top-right-radius: 0 !important;\n    overflow: hidden;\n    line-height: 0;\n  }\n\n  .s-code-example__code[active] {\n      display: block;\n    }\n\n  .s-code-example__code > code {\n      line-height: 1;\n    }\n\n  .s-code-example__toolbar {\n    position: absolute;\n    right: var(--s-theme-space-20, 12px);\n    top: var(--s-theme-space-20, 12px);\n    z-index: 10;\n  }\n\n  .s-code-example__toolbar > * {\n      font-size: 20px;\n      opacity: 0.5;\n    }\n\n  .s-code-example__toolbar > *:hover {\n        opacity: 1;\n      }\n\n  [toolbar-position="nav"] .s-code-example__toolbar {\n      right: var(--s-theme-space-20, 12px);\n      top: 50%;\n      transform: translate(0, -50%);\n    }';
-class SHighlightJsComponentInterface extends __SInterface {
+class SCodeExampleInterface extends __SInterface {
 }
-SHighlightJsComponentInterface.definition = {
-  ...SComponentUtilsDefaultInterface.definition,
-  theme: {
-    type: "String",
-    default: "https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css"
-  },
-  active: {
-    type: "String"
-  },
-  toolbar: {
-    type: "Array<String>",
-    values: ["copy"],
-    default: ["copy"]
-  },
-  toolbarPosition: {
-    type: "String",
-    values: ["content", "nav"],
-    default: "content"
-  },
-  defaultStyleClasses: {
-    type: "Object",
-    default: {
-      main: "s-tabs"
-    }
+SCodeExampleInterface.definition = Object.assign(Object.assign({}, SComponentUtilsDefaultInterface.definition), {theme: {
+  type: "String",
+  default: "https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css"
+}, active: {
+  type: "String"
+}, toolbar: {
+  type: "Array<String>",
+  values: ["copy"],
+  default: ["copy"]
+}, toolbarPosition: {
+  type: "String",
+  values: ["content", "nav"],
+  default: "content"
+}, defaultStyleClasses: {
+  type: "Object",
+  default: {
+    main: "s-tabs"
   }
-};
+}});
 var __decorate = function(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
@@ -2005,17 +1998,18 @@ webcomponent$1();
 class SCodeExample extends SLitElement {
   constructor() {
     super();
-    this._component = void 0;
     this._$copy = void 0;
     this._items = [];
     this._activeTabId = void 0;
     this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      interface: SHighlightJsComponentInterface,
-      defaultProps: {}
+      componentUtils: {
+        interface: SCodeExampleInterface,
+        defaultProps: {}
+      }
     });
   }
   static get properties() {
-    return __SComponentUtils.properties({}, SHighlightJsComponentInterface);
+    return __SComponentUtils.properties({}, SCodeExampleInterface);
   }
   static get styles() {
     return css`
@@ -2024,14 +2018,14 @@ class SCodeExample extends SLitElement {
   }
   firstUpdated() {
     this.$templates.forEach(($template) => {
-      var _a, _b, _c;
+      var _a, _b, _c, _d, _e;
       if (!$template.getAttribute)
         return;
       this._items = [
         ...this._items,
         {
-          id: (_b = (_a = $template.getAttribute("id")) !== null && _a !== void 0 ? _a : $template.getAttribute("language")) !== null && _b !== void 0 ? _b : $template.getAttribute("lang"),
-          lang: (_c = $template.getAttribute("language")) !== null && _c !== void 0 ? _c : $template.getAttribute("lang"),
+          id: (_c = (_b = (_a = $template.getAttribute("id")) !== null && _a !== void 0 ? _a : $template.getAttribute("language")) !== null && _b !== void 0 ? _b : $template.getAttribute("lang")) !== null && _c !== void 0 ? _c : "html",
+          lang: (_e = (_d = $template.getAttribute("language")) !== null && _d !== void 0 ? _d : $template.getAttribute("lang")) !== null && _e !== void 0 ? _e : "html",
           code: $template.innerHTML
         }
       ];
@@ -2044,7 +2038,7 @@ class SCodeExample extends SLitElement {
     }
   }
   render() {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
     return html`
             <div class="${(_a = this._component) === null || _a === void 0 ? void 0 : _a.className()}" toolbar-position="${(_b = this._component) === null || _b === void 0 ? void 0 : _b.props.toolbarPosition}">
                 <div class="templates">
@@ -2075,12 +2069,12 @@ class SCodeExample extends SLitElement {
                 ${this._component ? html`
                           <div class="${this._component.className("__content")}">
                               ${this._component.props.toolbarPosition !== "nav" ? html`
-                                        <div class="${this._component.className("__toolbar")}">
+                                        <div class="${(_d = this._component) === null || _d === void 0 ? void 0 : _d.className("__toolbar")}">
                                             <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
                                         </div>
                                     ` : ""}
-                              ${((_d = this._items) !== null && _d !== void 0 ? _d : []).map((item) => {
-      var _a2, _b2;
+                              ${((_e = this._items) !== null && _e !== void 0 ? _e : []).map((item) => {
+      var _a2, _b2, _c2;
       return html`
                                       <pre
                                           class="${this._component.className("__code")}"
@@ -2088,7 +2082,8 @@ class SCodeExample extends SLitElement {
                                           id="${(_a2 = item.id) !== null && _a2 !== void 0 ? _a2 : item.lang}"
                                           ?active="${this._activeTabId === ((_b2 = item.id) !== null && _b2 !== void 0 ? _b2 : item.lang)}"
                                       >
-                            <code class="language-${item.lang} ${item.lang} ${this._component.props.defaultStyle ? "hljs" : ""}">
+                            <code class="language-${item.lang} ${item.lang} ${((_c2 = this._component) === null || _c2 === void 0 ? void 0 : _c2.props.defaultStyle) ? "hljs" : ""}">
+                                
                                 ${item.code}
                             </code>
                         </pre>
@@ -2110,12 +2105,13 @@ class SCodeExample extends SLitElement {
     });
   }
   initPrismOnTab(id) {
-    const $content = this.shadowRoot.querySelector(`pre#${id} code`);
+    var _a;
+    const $content = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector(`pre#${id} code`);
     if ($content.hasAttribute("inited"))
       return;
-    $content.setAttribute("inited", true);
+    $content.setAttribute("inited", "true");
     const highlightedCode = core.highlight($content === null || $content === void 0 ? void 0 : $content.innerHTML, {language: "js"}).value.trim();
-    $content === null || $content === void 0 ? void 0 : $content.innerHTML = highlightedCode;
+    $content.innerHTML = highlightedCode;
   }
   copy() {
     const id = this._activeTabId;

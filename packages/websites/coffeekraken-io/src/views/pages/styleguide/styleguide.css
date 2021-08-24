@@ -2,9 +2,13 @@
     .__toolbar {
         background: sugar.color(main, background);
         position: sticky;
-        top: 98px;
-        z-index: 10;
+        top: 100px;
+        z-index: 500;
         @sugar.depth (100);
+
+        .s-tooltip {
+            min-width: 400px;
+        }
 
         [class*='s-platform-'] {
             font-size: 1em;

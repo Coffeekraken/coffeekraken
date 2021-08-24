@@ -5,6 +5,7 @@ import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/shared/is/path';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import __require from '@coffeekraken/sugar/node/esm/require';
 
 /**
  * @name                  Dockblock
@@ -126,11 +127,11 @@ class SDocblock extends __SClass implements ISDocblock {
 
                             // if (.object.namespace && !aObj.namespace) res -= 1;
                             if (bObj.namespace) res += 1;
-                            if (bObj.type && bObj.type.toLowerCase() === 'class') res += 1;
+                            if (bObj.type?.toLowerCase() === 'class') res += 1;
                             if (bObj.constructor) res += 1;
                             if (bObj.private) res += 1;
-                            if (bObj.type && bObj.type.toLowerCase() === 'function') res += 1;
-                            if (aObj.name && bObj.name && bObj.name.length > aObj.name.length) res += 1;
+                            if (bObj.type?.toLowerCase() === 'function') res += 1;
+                            if (bObj.name?.length > aObj.name?.length) res += 1;
                             return res;
                         },
                         filepath: null,
@@ -149,23 +150,17 @@ class SDocblock extends __SClass implements ISDocblock {
                 throw new Error(
                     `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`,
                 );
-            (async () => {
-                const { default: __fs } = await import('fs');
-                if (!__fs.existsSync(source))
-                    throw new Error(
-                        `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
-                    );
-                this._source = __fs.readFileSync(source, 'utf8');
-                this._packageJson = __packageJsonSync(source);
-            })();
+            const __fs = __require()('fs');
+            if (!__fs.existsSync(source))
+                throw new Error(
+                    `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
+                );
+            this.docblockSettings.filepath = source;
+            this._source = __fs.readFileSync(source, 'utf8');
+            this._packageJson = __packageJsonSync(source);
         } else {
             this._source = source;
         }
-
-        // parsing the source
-        // (async () => {
-        //     this._blocks = this.parse();
-        // })();
     }
 
     /**

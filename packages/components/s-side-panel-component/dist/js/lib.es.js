@@ -502,10 +502,11 @@ class SSidePanel extends SLitElement {
     super();
     this._component = void 0;
     this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      interface: SSidePanelComponentInterface,
-      defaultProps: {}
+      componentUtils: {
+        interface: SSidePanelComponentInterface,
+        defaultProps: {}
+      }
     });
-    console.log("CC");
     if (this._component.props.closeOn.indexOf("click") !== -1) {
       this.addEventListener("click", (e) => {
         if (this._$container.contains(e.target))

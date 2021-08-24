@@ -31,11 +31,12 @@ var __decorate = function(decorators, target, key, desc) {
 class SClipboardCopy extends SLitElement {
   constructor() {
     super();
-    this._component = void 0;
     this._state = "pending";
     this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      interface: SHighlightJsComponentInterface,
-      defaultProps: {}
+      componentUtils: {
+        interface: SHighlightJsComponentInterface,
+        defaultProps: {}
+      }
     });
   }
   static get styles() {

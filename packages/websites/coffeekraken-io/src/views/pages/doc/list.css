@@ -1,11 +1,10 @@
 #doc-list {
-
     .__nav form {
         position: sticky;
-        top: 98px;
-        max-height: calc(100vh - 98px);
+        top: 100px;
+        max-height: calc(100vh - 100px);
         overflow: auto;
-        @sugar.scrollbar(accent, 2px);
+        @sugar.scrollbar (accent, 2px);
     }
 
     .__list-item {
@@ -18,11 +17,12 @@
         &:after {
             content: '';
             display: block;
-            width: 100%; height: sugar.space(50);
-            background: sugar.color(ui, --lighten 49);   
+            width: 100%;
+            height: sugar.space(50);
+            background: sugar.color(ui, --lighten 49);
         }
 
-        @sugar.theme.when(dark) {
+        @sugar.theme.when (dark) {
             &:after {
                 background-color: sugar.color(main, --darken 31);
             }
@@ -57,9 +57,7 @@
                 /* transform: translateX(calc(-100% - 400px)); */
                 background: sugar.color(ui, --lighten 49);
                 clip-path: polygon(-0 0%, 100% 0, calc(100% - 200px) 100%, 0% 100%);
-                }
+            }
         }
-
     }
-
 }

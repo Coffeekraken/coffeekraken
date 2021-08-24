@@ -6,7 +6,6 @@ import __SInterface from "@coffeekraken/s-interface";
 import __SComponentUtils from "@coffeekraken/s-component-utils";
 import __SCache from "@coffeekraken/s-cache";
 import __chalk from "chalk";
-import __copyTo from "copy-to";
 import {decycle} from "json-cyclic";
 function uniqid() {
   return v4();
@@ -626,21 +625,7 @@ function plainObject(object) {
     return false;
   return true;
 }
-function unique(array) {
-  const a = array.concat();
-  for (let i = 0; i < a.length; ++i) {
-    for (let j = i + 1; j < a.length; ++j) {
-      if (a[i] === a[j])
-        a.splice(j--, 1);
-    }
-  }
-  return a;
-}
-function deepMerge(...args) {
-  const settings = {
-    array: false,
-    object: true
-  };
+function __deepMerge(...args) {
   function merge(firstObj, secondObj) {
     const newObj = {};
     if (!firstObj && secondObj)
@@ -649,31 +634,31 @@ function deepMerge(...args) {
       return firstObj;
     if (!firstObj && !secondObj)
       return {};
-    __copyTo(firstObj).override(newObj);
-    for (const key of Object.keys(secondObj)) {
-      if (settings.array === true && Array.isArray(firstObj[key]) && Array.isArray(secondObj[key])) {
-        const newArray = unique([...firstObj[key], ...secondObj[key]]);
-        newObj[key] = newArray;
-        continue;
-      } else if (settings.object === true && plainObject(firstObj[key]) && plainObject(secondObj[key])) {
-        newObj[key] = merge(firstObj[key], secondObj[key]);
-        continue;
+    const firstProps = Object.getOwnPropertyNames(firstObj);
+    firstProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(firstObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = firstObj[key];
       }
-      __copyTo(secondObj).pick(key).toCover(newObj);
-    }
+    });
+    const secondProps = Object.getOwnPropertyNames(secondObj);
+    secondProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(secondObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else if (plainObject(newObj[key]) && plainObject(secondObj[key])) {
+        newObj[key] = merge(newObj[key], secondObj[key]);
+      } else {
+        newObj[key] = secondObj[key];
+      }
+    });
     return newObj;
-  }
-  const potentialSettingsObj = args[args.length - 1] || {};
-  if (potentialSettingsObj.array && typeof potentialSettingsObj.array === "boolean" || potentialSettingsObj.object && typeof potentialSettingsObj.object === "boolean") {
-    if (potentialSettingsObj.array !== void 0)
-      settings.array = potentialSettingsObj.array;
-    if (potentialSettingsObj.object !== void 0)
-      settings.object = potentialSettingsObj.object;
-    args.pop();
   }
   let currentObj = {};
   for (let i = 0; i < args.length; i++) {
-    const toMergeObj = args[i] || {};
+    const toMergeObj = args[i];
     currentObj = merge(currentObj, toMergeObj);
   }
   return currentObj;
@@ -692,14 +677,14 @@ function classInstance(object) {
   return true;
 }
 function deepMap(objectOrArray, processor, settings = {}, _path = []) {
-  settings = deepMerge({
+  settings = __deepMerge({
     classInstances: false,
     array: true,
     privateProps: false,
     cloneFirst: true
   }, settings);
   const isArray2 = Array.isArray(objectOrArray);
-  const newObject = isArray2 ? [] : settings.cloneFirst ? Object.assign({}, objectOrArray) : objectOrArray;
+  let newObject = isArray2 ? [] : settings.cloneFirst ? Object.assign({}, objectOrArray) : objectOrArray;
   Object.keys(objectOrArray).forEach((prop) => {
     if (!settings.privateProps && prop.match(/^_/))
       return;
@@ -711,7 +696,11 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
       if (isArray2) {
         newObject.push(res2);
       } else {
-        newObject[prop] = res2;
+        if (prop === "..." && plainObject(res2)) {
+          newObject = Object.assign(Object.assign({}, newObject), res2);
+        } else {
+          newObject[prop] = res2;
+        }
       }
       return;
     }
@@ -727,8 +716,13 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
     }
     if (isArray2)
       newObject.push(res);
-    else
-      newObject[prop] = res;
+    else {
+      if (prop === "..." && plainObject(res)) {
+        newObject = Object.assign(Object.assign({}, newObject), res);
+      } else {
+        newObject[prop] = res;
+      }
+    }
   });
   return newObject;
 }
@@ -765,7 +759,7 @@ function mapToObject(map) {
   return obj;
 }
 function fn(value, settings = {}) {
-  settings = deepMerge({
+  settings = __deepMerge({
     beautify: true,
     highlight: true,
     verbose: true,
@@ -948,7 +942,7 @@ const Component = {
   "name": "s-request"
 };
 riot.register("s-request", Component);
-querySelectorLive("s-request:not([s-mounted])", ($elm) => {
+querySelectorLive("s-request:not([mounted])", ($elm) => {
   const id = $elm.id || "s-request-" + uniqid();
   $elm.setAttribute("id", id);
   riot.mount("#" + id);
@@ -956,7 +950,4 @@ querySelectorLive("s-request:not([s-mounted])", ($elm) => {
 Component.mount = () => {
   riot.mount("s-request");
 };
-if (!window.env)
-  window.env = {SUGAR: {}};
-window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');
 export default Component;

@@ -55,11 +55,12 @@ var __awaiter = function(thisArg, _arguments, P, generator) {
 class SConfigExplorer extends SLitElement {
   constructor() {
     super();
-    this._component = void 0;
     this._displayedConfig = [];
     this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      interface: SConfigExplorerComponentInterface,
-      defaultProps: {}
+      componentUtils: {
+        interface: SConfigExplorerComponentInterface,
+        defaultProps: {}
+      }
     });
     (() => __awaiter(this, void 0, void 0, function* () {
       const request = new __SRequest({});

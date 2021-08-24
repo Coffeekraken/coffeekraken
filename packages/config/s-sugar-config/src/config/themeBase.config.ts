@@ -1465,7 +1465,7 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             tooltip: {
-                padding: '[theme.ui.default.padding]',
+                padding: '[theme.padding.default]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',

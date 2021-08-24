@@ -10,8 +10,8 @@
                 <form action="/doc/api" method="get" name="search" id="search-form">
                     <input class="s-input" type="text" name="search" placeholder="Search API doc..." />
                 </form>
-                <version-selector></version-selector>
-                <a href="javascript:void" class="s-ml:10" id="settings-opener">
+                <version-selector class="s-ml:20"></version-selector>
+                <a href="javascript:void" class="s-ml:20" id="settings-opener">
                     <i class="s-icon:settings"></i>
                 </a>
             </div>

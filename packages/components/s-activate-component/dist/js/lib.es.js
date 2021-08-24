@@ -56,14 +56,12 @@ var __decorate = function(decorators, target, key, desc) {
 class SActivate extends SLitElement {
   constructor() {
     super();
-    this._component = void 0;
-    this._hrefSelector = void 0;
-    this._$targets = void 0;
-    this._$groupElements = void 0;
     this._state = "pending";
     this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      interface: SActivateComponentInterface,
-      defaultProps: {}
+      componentUtils: {
+        interface: SActivateComponentInterface,
+        defaultProps: {}
+      }
     });
   }
   static get styles() {
@@ -85,7 +83,9 @@ class SActivate extends SLitElement {
     if (this._component.props.href) {
       this._hrefSelector = this._component.props.href;
     }
-    const targets = Array.from(document.querySelectorAll(this._hrefSelector));
+    let targets;
+    if (this._hrefSelector)
+      targets = Array.from(document.querySelectorAll(this._hrefSelector));
     if (targets.length)
       this._$targets = targets;
     if (this._component.props.group) {
@@ -127,9 +127,9 @@ class SActivate extends SLitElement {
     if (this._component.props.saveState) {
       if (!this.id)
         throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-      localStorage.setItem(`s-activate-state-${this.id}`, true);
+      localStorage.setItem(`s-activate-state-${this.id}`, "true");
     }
-    if (this._component.props.history) {
+    if (this._component.props.history && this._hrefSelector) {
       document.location.hash = this._hrefSelector;
     }
     if (this._$groupElements) {
@@ -142,11 +142,11 @@ class SActivate extends SLitElement {
         }
       });
     }
-    this.setAttribute("active", true);
+    this.setAttribute("active", "true");
     if (this._$targets) {
       this._$targets.forEach(($target) => {
         $target.classList.add("active");
-        $target.setAttribute("active", true);
+        $target.setAttribute("active", "true");
       });
     }
   }

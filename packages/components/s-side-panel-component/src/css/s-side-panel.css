@@ -1,7 +1,8 @@
 s-side-panel {
     display: block;
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 9999;
@@ -14,9 +15,11 @@ s-side-panel {
 
 .s-side-panel__overlay {
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     z-index: 0;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
 
     [default-style] & {
         background: sugar.color(main, --alpha 0.3);
@@ -26,7 +29,6 @@ s-side-panel {
     [default-style][active] & {
         opacity: 1;
     }
-
 }
 
 .s-side-panel__container {
@@ -36,33 +38,33 @@ s-side-panel {
 
     [mounted] & {
         display: block;
-    }    
+    }
 
     [default-style] & {
         transition: sugar.transition(default);
     }
 
-    [side="left"] & {
+    [side='left'] & {
         left: 0;
         top: 0;
         height: 100%;
         transform: translateX(-100%);
     }
-    [side="top"] & {
+    [side='top'] & {
         left: 0;
         top: 0;
         width: 100%;
         min-height: 40px;
         transform: translateY(-100%);
     }
-    [side="right"] & {
+    [side='right'] & {
         right: 0;
         top: 0;
         height: 100%;
         min-width: 40px;
         transform: translateX(100%);
     }
-    [side="bottom"] & {
+    [side='bottom'] & {
         left: 0;
         bottom: 0;
         width: 100%;
@@ -77,8 +79,10 @@ s-side-panel {
 
 .s-side-panel {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
 
     &[active] {

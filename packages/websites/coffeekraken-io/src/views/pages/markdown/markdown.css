@@ -1,17 +1,17 @@
 .markdown {
     .__nav {
         position: sticky;
-        top: 98px;
-        height: calc(100vh - 98px);
+        top: 100px;
+        height: calc(100vh - 100px);
         overflow: auto;
         border-right: 1px solid sugar.color(ui, border);
-        user-select: none; 
-        @sugar.scrollbar(accent, 2px);
+        user-select: none;
+        @sugar.scrollbar (accent, 2px);
 
         .s-list--ul .s-list--ul {
             max-height: 0;
             opacity: 0;
-            transition: all .2s ease-out;
+            transition: all 0.2s ease-out;
             margin-top: 0;
             margin-bottom: 0;
             pointer-events: none;
@@ -36,13 +36,11 @@
             content: '│';
             font-weight: bold;
             color: sugar.color(accent);
-        }  
-
+        }
     }
 
     a[actual] {
         color: sugar.color(accent);
         font-weight: bold;
     }
-
 }

@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 export default class SRangeComponentInterface extends __SInterface {
     static definition = {

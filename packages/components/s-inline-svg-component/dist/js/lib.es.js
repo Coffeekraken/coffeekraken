@@ -130,7 +130,7 @@ const Component = {
   "name": "s-inline-svg"
 };
 riot.register("s-inline-svg", Component);
-querySelectorLive("s-inline-svg:not([s-mounted])", ($elm) => {
+querySelectorLive("s-inline-svg:not([mounted])", ($elm) => {
   const id = $elm.id || "s-inline-svg-" + uniqid();
   $elm.setAttribute("id", id);
   riot.mount("#" + id);
@@ -138,6 +138,3 @@ querySelectorLive("s-inline-svg:not([s-mounted])", ($elm) => {
 Component.mount = () => {
   riot.mount("s-inline-svg");
 };
-if (!window.env)
-  window.env = {SUGAR: {}};
-window.env.SUGAR = JSON.parse('{"ENVIRONMENT":"development"}');

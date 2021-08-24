@@ -19,14 +19,9 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function simpleValue(data, blockSettings) {
-  if (
-    data &&
-    data.value &&
-    typeof data.value === 'string' &&
-    data.value.trim() === ''
-  ) {
-    return true;
-  }
-  return data.value;
+    if (data && data.value && typeof data.value === 'string' && data.value.trim() === '') {
+        return true;
+    }
+    return data.value;
 }
 export default simpleValue;

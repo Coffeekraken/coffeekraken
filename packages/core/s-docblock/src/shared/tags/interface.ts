@@ -1,8 +1,6 @@
-// @ts-nocheck
+// // @ts-nocheck
 
-import __filename from '@coffeekraken/sugar/node/fs/filename';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
 import __path from 'path';
 
@@ -10,6 +8,9 @@ import __path from 'path';
  * @name              interface
  * @namespace           shared.tags
  * @type              Function
+ * @async
+ * @platform            node
+ * @platform            ts
  * @status              wip
  *
  * Parse the interface tag
@@ -31,16 +32,11 @@ export default async function interfaceTag(data, blockSettings) {
         path,
         relPath;
 
-    // if (stringArray[1]) prop = stringArray[1].trim();
-
     const potentialPath = __path.resolve(__folderPath(blockSettings.filepath), name);
 
     if (__fs.existsSync(potentialPath)) {
-        name = __filename(name).split('.').slice(0, -1)[0];
-        relPath = __path.relative(__packageRoot(), potentialPath);
-        path = potentialPath;
-        // const interface = (await import(potentialPath)).default;
-        // return interface.toObject();
+        const int = await import(potentialPath);
+        return int.default.toObject();
     }
 
     return {

@@ -114,7 +114,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
      */
-    static registerTag(tagName: string, parser: Function): void {
+    static registerTag(tagName: string, parser: any): void {
         // check the params
         if (typeof parser !== 'function')
             throw new Error(
@@ -218,98 +218,103 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async parse() {
-        // some variables
-        let currentTag: string;
-        let currentContent: string[] = [];
-        let currentObj: any = {};
-        let docblockObj: any = {};
-        let previousWasEmptyLine = false;
+    parse() {
+        return new Promise(async (resolve) => {
+            // some variables
+            let currentTag: string;
+            let currentContent: string[] = [];
+            let currentObj: any = {};
+            let docblockObj: any = {};
+            let previousWasEmptyLine = false;
 
-        // function add() {
-        //     if (currentContent.length) currentObj.content = currentContent;
-        //     if (docblockObj.hasOwnProperty(currentTag) && !Array.isArray(docblockObj[currentTag])) {
-        //         const currentValue = docblockObj[currentTag];
-        //         docblockObj[currentTag] = [currentValue];
-        //     }
-        //     if (!currentObj.value) currentObj.value = true;
-        //     if (Array.isArray(docblockObj[currentTag])) {
-        //         docblockObj[currentTag].push(currentObj);
-        //     } else {
-        //         docblockObj[currentTag] = currentObj;
-        //     }
-        //     currentObj = {};
-        //     currentContent = [];
-        //     // @ts-ignore
-        //     currentTag = undefined;
-        // }
+            function add() {
+                if (currentContent.length) currentObj.content = currentContent;
+                if (docblockObj.hasOwnProperty(currentTag) && !Array.isArray(docblockObj[currentTag])) {
+                    const currentValue = docblockObj[currentTag];
+                    docblockObj[currentTag] = [currentValue];
+                }
+                if (!currentObj.value) currentObj.value = true;
+                if (Array.isArray(docblockObj[currentTag])) {
+                    docblockObj[currentTag].push(currentObj);
+                } else {
+                    docblockObj[currentTag] = currentObj;
+                }
+                currentObj = {};
+                currentContent = [];
+                // @ts-ignore
+                currentTag = undefined;
+            }
 
-        // // split the block by tags
-        // let lines = this._source.trim().split('\n');
-        // if (!lines || !lines.length) return null;
-        // lines = lines.map((l) => l.trim()).filter((l) => l !== '');
+            // split the block by tags
+            let lines = this._source.trim().split('\n');
+            if (!lines || !lines.length) return null;
+            lines = lines.map((l) => l.trim()).filter((l) => l !== '');
 
-        // lines.forEach((line) => {
-        //     // get the tag name
-        //     const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
-        //     const tagNameMatch = line.match(tagNameReg);
+            lines.forEach((line) => {
+                // get the tag name
+                const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
+                const tagNameMatch = line.match(tagNameReg);
 
-        //     if (line.replace('*', '').trim() === '') {
-        //         if (currentContent.length > 0) {
-        //             currentContent.push('');
-        //         } else {
-        //             if (currentTag && currentObj.value) {
-        //                 add();
-        //             }
-        //             previousWasEmptyLine = true;
-        //         }
-        //     } else if (tagNameMatch) {
-        //         if (currentTag) {
-        //             add();
-        //         }
-        //         currentTag = tagNameMatch[1];
-        //         line = line.replace(tagNameMatch[0], '').trim();
-        //         if (line.length > 0) {
-        //             currentObj.value = line;
-        //         } else {
-        //             currentObj.value = true;
-        //         }
-        //         previousWasEmptyLine = false;
-        //     } else if (previousWasEmptyLine && !line.trim().match(/^\*\/$/)) {
-        //         currentTag = 'description';
-        //         currentContent = [line.replace('*', '')];
-        //         currentObj = {};
-        //         previousWasEmptyLine = false;
-        //     } else {
-        //         line = line.replace('/**', '');
-        //         line = line.replace('*/', '');
-        //         line = line.replace('* ', '');
-        //         line = line.replace('*', '');
-        //         if (line.trim().length) {
-        //             currentContent.push(line);
-        //         }
-        //     }
-        // });
+                if (line.replace('*', '').trim() === '') {
+                    if (currentContent.length > 0) {
+                        currentContent.push('');
+                    } else {
+                        if (currentTag && currentObj.value) {
+                            add();
+                        }
+                        previousWasEmptyLine = true;
+                    }
+                } else if (tagNameMatch) {
+                    if (currentTag) {
+                        add();
+                    }
+                    currentTag = tagNameMatch[1];
+                    line = line.replace(tagNameMatch[0], '').trim();
+                    if (line.length > 0) {
+                        currentObj.value = line;
+                    } else {
+                        currentObj.value = true;
+                    }
+                    previousWasEmptyLine = false;
+                } else if (previousWasEmptyLine && !line.trim().match(/^\*\/$/)) {
+                    currentTag = 'description';
+                    currentContent = [line.replace('*', '')];
+                    currentObj = {};
+                    previousWasEmptyLine = false;
+                } else {
+                    line = line.replace('/**', '');
+                    line = line.replace('*/', '');
+                    line = line.replace('* ', '');
+                    line = line.replace('*', '');
+                    if (line.trim().length) {
+                        currentContent.push(line);
+                    }
+                }
+            });
 
-        // add();
+            add();
 
-        // for (let i = 0; i < Object.keys(docblockObj).length; i++) {
-        //     const prop = Object.keys(docblockObj)[i];
-        //     const value = docblockObj[prop];
+            for (let i = 0; i < Object.keys(docblockObj).length; i++) {
+                const prop = Object.keys(docblockObj)[i];
+                const value = docblockObj[prop];
 
-        //     if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') continue;
-        //     if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
-        //         docblockObj[prop] = await this.docblockBlockSettings.tags[prop](value, this.docblockBlockSettings);
-        //     } else {
-        //         docblockObj[prop] = __simpleValueTag(value, this.docblockBlockSettings);
-        //     }
-        // }
+                if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') continue;
+                if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
+                    docblockObj[prop] = await this.docblockBlockSettings.tags[prop](value, this.docblockBlockSettings);
+                } else {
+                    docblockObj[prop] = __simpleValueTag(value, this.docblockBlockSettings);
+                }
+            }
 
-        // // save the raw string
-        // docblockObj.raw = this._source.toString();
+            // save the raw string
+            docblockObj.raw = this._source.toString();
 
-        // return the parsed docblock object
-        return docblockObj;
+            // save into internal property
+            this._blockObj = docblockObj;
+
+            // return the parsed docblock object
+            return resolve(docblockObj);
+        });
     }
 }
 

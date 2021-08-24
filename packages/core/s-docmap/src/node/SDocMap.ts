@@ -938,6 +938,6 @@ class SDocMap extends __SClass implements ISDocMap {
 }
 
 // register global field proxy
-SDocMap.registerFieldProxy('interface', __interfaceFieldProxy);
+// SDocMap.registerFieldProxy('interface', __interfaceFieldProxy);
 
 export default SDocMap;

@@ -37,7 +37,7 @@ import __css from '../css/s-range.css';
  * import { webcomponent as SRangeWebcomponent } from '@coffeekraken/s-range-component';
  * SRangeWebcomponent();
  *
- * @see             https://github.com/darlanrod/input-range-scss/blob/master
+ * @see             https://github.com/darlanrod/input-range-scss
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

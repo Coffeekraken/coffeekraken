@@ -54,7 +54,7 @@
     .__toolbar {
         background: sugar.color(ui, surface);
         position: sticky;
-        top: 98px;
+        top: 100px;
         z-index: 10;
 
         [class*='s-platform-'] {

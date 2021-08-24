@@ -8,6 +8,7 @@ import __fs from 'fs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import { page404 } from '@coffeekraken/s-view-renderer';
+import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 
 /**
  * @name                styleguide
@@ -47,21 +48,51 @@ export default function styleguide(req, res, settings = {}) {
             res.send(error.value);
             return reject(error.value);
         }
-        const docblockStr = __fs.readFileSync(styleguideObj.docmap.path, 'utf8').toString();
-        const docblocksInstance = new __SDocblock(docblockStr);
+        const docblocksInstance = new __SDocblock(styleguideObj.docmap.path);
         await docblocksInstance.parse();
-        const docblock = docblocksInstance.toObject();
+        const docblocks = docblocksInstance.toObject();
 
-        const viewInstance = new __SViewRenderer('pages.styleguide.styleguide');
+        // // scrap @see fields opengraph metas
+        // await new Promise((resolve, reject) => {
+        //     let pendingRequests = 0;
 
-        const result = await viewInstance.render({
-            ...(res.templateData ?? {}),
-            docblocks: docblock.toObject(),
+        //     docblocks.forEach((block, i) => {
+        //         if (block.see) {
+        //             block.see.forEach((seeObj, j) => {
+        //                 pendingRequests++;
+
+        //                 __scrapeUrl(seeObj.url)
+        //                     .then((results) => {
+        //                         seeObj.og = results;
+        //                         pendingRequests--;
+        //                         if (!pendingRequests) {
+        //                             resolve();
+        //                         }
+        //                     })
+        //                     .catch((error) => {
+        //                         pendingRequests--;
+        //                         if (!pendingRequests) {
+        //                             resolve();
+        //                         }
+        //                     });
+        //             });
+        //         } else {
+        //             if (i === docblocks.length - 1 && !pendingRequests) {
+        //                 resolve();
+        //             }
+        //         }
+        //     });
+        // });
+
+        const docView = new __SViewRenderer('pages.styleguide.styleguide');
+        const pageHtml = await docView.render({
+            ...(res.templateData || {}),
+            docblocks,
         });
 
         res.status(200);
         res.type('text/html');
-        res.send(result.value);
-        resolve(result.value);
+        res.send(pageHtml.value);
+        resolve(pageHtml.value);
     });
 }

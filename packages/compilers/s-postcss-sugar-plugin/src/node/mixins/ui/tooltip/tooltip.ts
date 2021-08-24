@@ -85,7 +85,7 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
           position: absolute;
-          z-index: 10;
+          z-index: 500;
           display: block;
           max-width: sugar.theme(ui.tooltip.maxWidth);
           text-align: center;
@@ -94,7 +94,8 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          background-color: sugar.color(ui, surface);
+          background-color: sugar.color(main, background);
+          color: sugar.color(main, backgroundForeground);
           border-radius: sugar.theme(ui.tooltip.borderRadius);
           transition: sugar.theme(ui.tooltip.transition);
           padding: sugar.theme(ui.tooltip.padding);

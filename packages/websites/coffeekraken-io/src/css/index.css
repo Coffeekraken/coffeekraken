@@ -66,10 +66,6 @@ a:active {
     @sugar.theme (dark);
 }
 
-.s-tooltip {
-    @sugar.depth (100);
-}
-
 [class*='s-btn'] {
     border-radius: 100px !important;
     border: none !important;

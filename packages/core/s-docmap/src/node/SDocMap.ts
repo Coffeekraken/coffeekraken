@@ -117,6 +117,8 @@ export interface ISDocMapEntry {
     static?: boolean;
     since?: string;
     status?: string;
+    package?: any;
+    menu?: any;
 }
 export interface ISDocMapEntries {
     [key: string]: ISDocMapEntry;
@@ -132,6 +134,8 @@ export interface ISDocmapMenuObj {
     packages: Record<string, Partial<ISDocmapMenuObjItem>>;
     tree: Record<string, Partial<ISDocmapMenuObjItem>>;
     slug: Record<string, Partial<ISDocmapMenuObjItem>>;
+    mixedTree: Record<string, Partial<ISDocmapMenuObjItem>>;
+    mixedSlug: Record<string, Partial<ISDocmapMenuObjItem>>;
 }
 
 export interface ISDocmapMetasObj {
@@ -235,6 +239,7 @@ class SDocMap extends __SClass implements ISDocMap {
         );
         // @ts-ignore
         this.docmapSettings.fieldsProxy = {
+            // @ts-ignore
             ...this.constructor._registeredFieldsProxy,
             ...this.docmapSettings.fieldsProxy,
         };
@@ -412,11 +417,13 @@ class SDocMap extends __SClass implements ISDocMap {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _extractMenu(docmapJson: Partial<ISDocMapObj> = this._docmapJson): Promise<ISDocmapMenuObj> {
+    _extractMenu(docmapJson: Partial<ISDocMapObj> = this._docmapJson): ISDocmapMenuObj {
         const docmapJsonMenuByPackage = {};
 
         // split menus by packages
+        // @ts-ignore
         Object.keys(docmapJson.map).forEach((namespace) => {
+            // @ts-ignore
             const docmapObj = docmapJson.map[namespace];
             if (!docmapObj.menu) return;
             if (!docmapJsonMenuByPackage[docmapObj.package]) {
@@ -425,8 +432,12 @@ class SDocMap extends __SClass implements ISDocMap {
             docmapJsonMenuByPackage[docmapObj.package].push(docmapObj);
         });
 
-        let finalMenu = {
+        let finalMenu: ISDocmapMenuObj = {
             packages: {},
+            tree: {},
+            slug: {},
+            mixedTree: {},
+            mixedSlug: {},
         };
         const packageJson = __packageJsonSync();
 
@@ -465,6 +476,7 @@ class SDocMap extends __SClass implements ISDocMap {
         finalMenu.mixedTree = mixedTree;
         finalMenu.mixedSlug = mixedSlug;
 
+        // @ts-ignore
         return finalMenu;
     }
 
@@ -603,10 +615,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
                 for (let i = 0; i < filesInPackage.length; i++) {
                     const file = filesInPackage[i];
-                    const content = file.raw;
+                    const content = (<__SFile>file).raw;
                     const docblocksInstance = new __SDocblock(content, {
                         docblock: {
-                            filepath: file.path,
+                            filepath: (<__SFile>file).path,
                         },
                     });
                     await docblocksInstance.parse();
@@ -635,7 +647,7 @@ class SDocMap extends __SClass implements ISDocMap {
                         if (docblock.private) continue;
 
                         // const path = __path.relative(outputDir, filepath);
-                        const filename = __getFilename(file.path);
+                        const filename = __getFilename((<__SFile>file).path);
 
                         const docblockEntryObj: ISDocMapEntry = {};
 
@@ -657,7 +669,7 @@ class SDocMap extends __SClass implements ISDocMap {
                                 ...docblockEntryObj,
                                 filename,
                                 extension: filename.split('.').slice(1)[0],
-                                relPath: __path.relative(__packageRootDir(), file.path),
+                                relPath: __path.relative(__packageRootDir(), (<__SFile>file).path),
                             };
                             this._entries[`${docblock.namespace}.${__camelCase(docblock.name)}`] = docblockObj;
                         } else if (docblock.name) {

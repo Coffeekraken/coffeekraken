@@ -62,11 +62,11 @@ export interface ISClassExposeSettings {
 }
 
 export interface ISClass {
-    _settings: ISClassSettings;
+    // _settings: ISClassSettings;
     metas: ISClassMetas;
 }
 
-export default class SClass implements ISClass {
+export default class SClass {
     /**
      * @name            _settings
      * @type            ISClassSettings

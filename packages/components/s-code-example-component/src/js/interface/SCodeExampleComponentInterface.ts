@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import { SComponentUtilsDefaultInterface } from '@coffeekraken/s-component-utils';
 
-export default class SHighlightJsComponentInterface extends __SInterface {
+export default class SCodeExampleInterface extends __SInterface {
     static definition = {
         ...SComponentUtilsDefaultInterface.definition,
         theme: {

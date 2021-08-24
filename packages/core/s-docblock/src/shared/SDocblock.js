@@ -9,10 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-// import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
+import __SDocblockBlock from './SDocblockBlock';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/shared/is/path';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 // @ts-ignore
 class SDocblock extends __SClass {
     /**
@@ -54,6 +55,16 @@ class SDocblock extends __SClass {
             },
         }, settings || {}));
         /**
+         * @name            _source
+         * @type            String|Array<Object>
+         * @private
+         *
+         * Store the passed source
+         *
+         * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+         */
+        this._source = '';
+        /**
          * @name            _blocks
          * @type            Array<Object>
          * @private
@@ -68,13 +79,11 @@ class SDocblock extends __SClass {
             if (!__isNode())
                 throw new Error(`Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`);
             (() => __awaiter(this, void 0, void 0, function* () {
-                // const { default: __fs } = await import('fs');
-                // if (!__fs.existsSync(source))
-                //     throw new Error(
-                //         `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
-                //     );
-                // this._source = __fs.readFileSync(source, 'utf8');
-                // this._packageJson = __packageJsonSync(source);
+                const { default: __fs } = yield import('fs');
+                if (!__fs.existsSync(source))
+                    throw new Error(`Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`);
+                this._source = __fs.readFileSync(source, 'utf8');
+                this._packageJson = __packageJsonSync(source);
             }))();
         }
         else {
@@ -152,72 +161,78 @@ class SDocblock extends __SClass {
             // extracting blocks
             // @ts-ignore
             let blocksArrayStr = string.match(reg);
-            // let blocks: __SDocblockBlock[] = [];
-            // if (!Array.isArray(blocksArrayStr)) {
-            //     blocksArrayStr = [];
-            // } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
-            //     blocksArrayStr = blocksArrayStr.map((t) => t.trim());
-            //     if (!blocksArrayStr || !blocksArrayStr.length) return [];
-            //     blocks = blocksArrayStr.filter((blockStr) => {
-            //         const lines = blockStr.split('\n');
-            //         for (let i = 0; i < lines.length; i++) {
-            //             const line = lines[i];
-            //             if (line.trim().slice(0, 2) === '//') return false;
-            //         }
-            //         if (this.docblockSettings.filterByTag) {
-            //             let isBlockMatchFilter = true;
-            //             for (let i = 0; i < Object.keys(this.docblockSettings.filterByTag).length; i++) {
-            //                 const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
-            //                 const tagFilter = this.docblockSettings.filterByTag[tagName];
-            //                 const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
-            //                 const tagValue = blockStr.match(tagValueReg);
-            //                 const tagFilterArray = Array.isArray(tagFilter) ? tagFilter : [tagFilter];
-            //                 let isMatchOrCondition = false;
-            //                 if (tagValue && tagValue[1]) {
-            //                     const tagValueValue = tagValue[1].trim();
-            //                     for (let j = 0; j < tagFilterArray.length; j++) {
-            //                         const tagFilterFilter = tagFilterArray[j];
-            //                         if (typeof tagFilterFilter === 'string') {
-            //                             if (tagValueValue === tagFilterFilter) {
-            //                                 isMatchOrCondition = true;
-            //                                 break;
-            //                             }
-            //                         } else if (tagFilterFilter instanceof RegExp) {
-            //                             if (tagValueValue.trim().match(tagFilterFilter)) {
-            //                                 isMatchOrCondition = true;
-            //                                 break;
-            //                             }
-            //                         } else if (typeof tagFilterFilter === 'function') {
-            //                             if (tagFilterFilter(tagValueValue.trim())) {
-            //                                 isMatchOrCondition = true;
-            //                                 break;
-            //                             }
-            //                         } else {
-            //                             throw new Error(
-            //                                 `<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`,
-            //                             );
-            //                         }
-            //                     }
-            //                 }
-            //                 if (!isMatchOrCondition) isBlockMatchFilter = false;
-            //             }
-            //             if (isBlockMatchFilter) return true;
-            //             return false;
-            //         }
-            //         return true;
-            //     });
-            // }
-            // for (let i = 0; i < blocks.length; i++) {
-            //     const block = blocks[i];
-            //     const docblockBlock = new __SDocblockBlock(block || ' ', {
-            //         docblockBlock: {
-            //             packageJson: this._packageJson,
-            //             filepath: this.docblockSettings.filepath || '',
-            //         },
-            //     });
-            //     await docblockBlock.parse();
-            //     blocks[i] = docblockBlock;
-            // }
+            let blocks = [];
+            if (!Array.isArray(blocksArrayStr)) {
+                blocksArrayStr = [];
+            }
+            else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
+                blocksArrayStr = blocksArrayStr.map((t) => t.trim());
+                if (!blocksArrayStr || !blocksArrayStr.length)
+                    return [];
+                blocksArrayStr = blocksArrayStr.filter((blockStr) => {
+                    const lines = blockStr.split('\n');
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i];
+                        if (line.trim().slice(0, 2) === '//')
+                            return false;
+                    }
+                    if (this.docblockSettings.filterByTag) {
+                        let isBlockMatchFilter = true;
+                        for (let i = 0; i < Object.keys(this.docblockSettings.filterByTag).length; i++) {
+                            const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
+                            const tagFilter = this.docblockSettings.filterByTag[tagName];
+                            const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
+                            const tagValue = blockStr.match(tagValueReg);
+                            const tagFilterArray = Array.isArray(tagFilter) ? tagFilter : [tagFilter];
+                            let isMatchOrCondition = false;
+                            if (tagValue && tagValue[1]) {
+                                const tagValueValue = tagValue[1].trim();
+                                for (let j = 0; j < tagFilterArray.length; j++) {
+                                    const tagFilterFilter = tagFilterArray[j];
+                                    if (typeof tagFilterFilter === 'string') {
+                                        if (tagValueValue === tagFilterFilter) {
+                                            isMatchOrCondition = true;
+                                            break;
+                                        }
+                                    }
+                                    else if (tagFilterFilter instanceof RegExp) {
+                                        if (tagValueValue.trim().match(tagFilterFilter)) {
+                                            isMatchOrCondition = true;
+                                            break;
+                                        }
+                                    }
+                                    else if (typeof tagFilterFilter === 'function') {
+                                        if (tagFilterFilter(tagValueValue.trim())) {
+                                            isMatchOrCondition = true;
+                                            break;
+                                        }
+                                    }
+                                    else {
+                                        throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`);
+                                    }
+                                }
+                            }
+                            if (!isMatchOrCondition)
+                                isBlockMatchFilter = false;
+                        }
+                        if (isBlockMatchFilter)
+                            return true;
+                        return false;
+                    }
+                    return true;
+                });
+            }
+            for (let i = 0; i < blocksArrayStr.length; i++) {
+                const block = blocksArrayStr[i];
+                const docblockBlock = new __SDocblockBlock(block || ' ', {
+                    docblockBlock: {
+                        packageJson: this._packageJson,
+                        filepath: this.docblockSettings.filepath || '',
+                    },
+                });
+                yield docblockBlock.parse();
+                blocks[i] = docblockBlock;
+            }
             if (blocks && blocks.length) {
                 this._blocks = blocks;
             }
@@ -259,4 +274,4 @@ class SDocblock extends __SClass {
     }
 }
 export default SDocblock;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY2Jsb2NrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0RvY2Jsb2NrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLHdFQUF3RTtBQUN4RSw2Q0FBNkM7QUFDN0MsT0FBTyxRQUFRLE1BQU0sb0NBQW9DLENBQUM7QUFDMUQsT0FBTyxRQUFRLE1BQU0sb0NBQW9DLENBQUM7QUFrRDFELGFBQWE7QUFDYixNQUFNLFNBQVUsU0FBUSxRQUFRO0lBZ0Q1Qjs7Ozs7OztPQU9HO0lBQ0gsWUFBWSxNQUFjLEVBQUUsUUFBaUM7UUFDekQsS0FBSyxDQUNELFdBQVcsQ0FDUDtZQUNJLFFBQVEsRUFBRTtnQkFDTixXQUFXLEVBQUUsU0FBUztnQkFDdEIsWUFBWSxFQUFFLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFO29CQUNuQixJQUFJLEdBQUcsR0FBRyxDQUFDLENBQUM7b0JBRVosSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7d0JBQUUsT0FBTyxHQUFHLENBQUM7b0JBRXpCLE1BQU0sSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFDckIsSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztvQkFFeEIsc0RBQXNEO29CQUN0RCxJQUFJLElBQUksQ0FBQyxTQUFTO3dCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7b0JBQzdCLElBQUksSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLE9BQU87d0JBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQztvQkFDL0QsSUFBSSxJQUFJLENBQUMsV0FBVzt3QkFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO29CQUMvQixJQUFJLElBQUksQ0FBQyxPQUFPO3dCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY2Jsb2NrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0RvY2Jsb2NrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLE9BQU8sZ0JBQXFDLE1BQU0sa0JBQWtCLENBQUM7QUFDckUsNkNBQTZDO0FBQzdDLE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8saUJBQWlCLE1BQU0sMkNBQTJDLENBQUM7QUFpRDFFLGFBQWE7QUFDYixNQUFNLFNBQVUsU0FBUSxRQUFRO0lBZ0Q1Qjs7Ozs7OztPQU9HO0lBQ0gsWUFBWSxNQUFjLEVBQUUsUUFBaUM7UUFDekQsS0FBSyxDQUNELFdBQVcsQ0FDUDtZQUNJLFFBQVEsRUFBRTtnQkFDTixXQUFXLEVBQUUsU0FBUztnQkFDdEIsWUFBWSxFQUFFLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFO29CQUNuQixJQUFJLEdBQUcsR0FBRyxDQUFDLENBQUM7b0JBRVosSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7d0JBQUUsT0FBTyxHQUFHLENBQUM7b0JBRXpCLE1BQU0sSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFDckIsSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztvQkFFeEIsc0RBQXNEO29CQUN0RCxJQUFJLElBQUksQ0FBQyxTQUFTO3dCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7b0JBQzdCLElBQUksSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLE9BQU87d0JBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQztvQkFDL0QsSUFBSSxJQUFJLENBQUMsV0FBVzt3QkFBRSxHQUFHLElBQUksQ0FBQyxD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

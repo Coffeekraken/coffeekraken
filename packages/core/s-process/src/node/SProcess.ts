@@ -1,5 +1,5 @@
 import __SDuration from '@coffeekraken/s-duration';
-import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import __SEventEmitter, { ISEventEmitter, ISEventEmitterConstructorSettings } from '@coffeekraken/s-event-emitter';
 import { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
@@ -320,7 +320,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     constructor(initialParams?: Partial<ISProcessParams>, settings?: ISProcessCtorSettings) {
         super(
-            __deepMerge(
+            <ISEventEmitterConstructorSettings>__deepMerge(
                 {
                     process: {},
                 },

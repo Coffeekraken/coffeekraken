@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-// import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
+import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/shared/is/path';
@@ -64,7 +64,7 @@ class SDocblock extends __SClass implements ISDocblock {
      *
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
-    _source: string;
+    _source: string = '';
 
     /**
      * @name            _packageJson
@@ -150,13 +150,13 @@ class SDocblock extends __SClass implements ISDocblock {
                     `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`,
                 );
             (async () => {
-                // const { default: __fs } = await import('fs');
-                // if (!__fs.existsSync(source))
-                //     throw new Error(
-                //         `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
-                //     );
-                // this._source = __fs.readFileSync(source, 'utf8');
-                // this._packageJson = __packageJsonSync(source);
+                const { default: __fs } = await import('fs');
+                if (!__fs.existsSync(source))
+                    throw new Error(
+                        `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
+                    );
+                this._source = __fs.readFileSync(source, 'utf8');
+                this._packageJson = __packageJsonSync(source);
             })();
         } else {
             this._source = source;
@@ -218,7 +218,7 @@ class SDocblock extends __SClass implements ISDocblock {
      * @since       2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async parse(string = this._source): any[] {
+    async parse(string = this._source): Promise<any[]> {
         // extract each docblocks
         const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
 
@@ -226,77 +226,77 @@ class SDocblock extends __SClass implements ISDocblock {
         // @ts-ignore
         let blocksArrayStr: string[] = string.match(reg);
 
-        // let blocks: __SDocblockBlock[] = [];
+        let blocks: __SDocblockBlock[] = [];
 
-        // if (!Array.isArray(blocksArrayStr)) {
-        //     blocksArrayStr = [];
-        // } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
-        //     blocksArrayStr = blocksArrayStr.map((t) => t.trim());
-        //     if (!blocksArrayStr || !blocksArrayStr.length) return [];
+        if (!Array.isArray(blocksArrayStr)) {
+            blocksArrayStr = [];
+        } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
+            blocksArrayStr = blocksArrayStr.map((t) => t.trim());
+            if (!blocksArrayStr || !blocksArrayStr.length) return [];
 
-        //     blocks = blocksArrayStr.filter((blockStr) => {
-        //         const lines = blockStr.split('\n');
-        //         for (let i = 0; i < lines.length; i++) {
-        //             const line = lines[i];
-        //             if (line.trim().slice(0, 2) === '//') return false;
-        //         }
+            blocksArrayStr = blocksArrayStr.filter((blockStr) => {
+                const lines = blockStr.split('\n');
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    if (line.trim().slice(0, 2) === '//') return false;
+                }
 
-        //         if (this.docblockSettings.filterByTag) {
-        //             let isBlockMatchFilter = true;
-        //             for (let i = 0; i < Object.keys(this.docblockSettings.filterByTag).length; i++) {
-        //                 const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
-        //                 const tagFilter = this.docblockSettings.filterByTag[tagName];
-        //                 const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
-        //                 const tagValue = blockStr.match(tagValueReg);
-        //                 const tagFilterArray = Array.isArray(tagFilter) ? tagFilter : [tagFilter];
-        //                 let isMatchOrCondition = false;
-        //                 if (tagValue && tagValue[1]) {
-        //                     const tagValueValue = tagValue[1].trim();
-        //                     for (let j = 0; j < tagFilterArray.length; j++) {
-        //                         const tagFilterFilter = tagFilterArray[j];
-        //                         if (typeof tagFilterFilter === 'string') {
-        //                             if (tagValueValue === tagFilterFilter) {
-        //                                 isMatchOrCondition = true;
-        //                                 break;
-        //                             }
-        //                         } else if (tagFilterFilter instanceof RegExp) {
-        //                             if (tagValueValue.trim().match(tagFilterFilter)) {
-        //                                 isMatchOrCondition = true;
-        //                                 break;
-        //                             }
-        //                         } else if (typeof tagFilterFilter === 'function') {
-        //                             if (tagFilterFilter(tagValueValue.trim())) {
-        //                                 isMatchOrCondition = true;
-        //                                 break;
-        //                             }
-        //                         } else {
-        //                             throw new Error(
-        //                                 `<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`,
-        //                             );
-        //                         }
-        //                     }
-        //                 }
-        //                 if (!isMatchOrCondition) isBlockMatchFilter = false;
-        //             }
-        //             if (isBlockMatchFilter) return true;
-        //             return false;
-        //         }
+                if (this.docblockSettings.filterByTag) {
+                    let isBlockMatchFilter = true;
+                    for (let i = 0; i < Object.keys(this.docblockSettings.filterByTag).length; i++) {
+                        const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
+                        const tagFilter = this.docblockSettings.filterByTag[tagName];
+                        const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
+                        const tagValue = blockStr.match(tagValueReg);
+                        const tagFilterArray = Array.isArray(tagFilter) ? tagFilter : [tagFilter];
+                        let isMatchOrCondition = false;
+                        if (tagValue && tagValue[1]) {
+                            const tagValueValue = tagValue[1].trim();
+                            for (let j = 0; j < tagFilterArray.length; j++) {
+                                const tagFilterFilter = tagFilterArray[j];
+                                if (typeof tagFilterFilter === 'string') {
+                                    if (tagValueValue === tagFilterFilter) {
+                                        isMatchOrCondition = true;
+                                        break;
+                                    }
+                                } else if (tagFilterFilter instanceof RegExp) {
+                                    if (tagValueValue.trim().match(tagFilterFilter)) {
+                                        isMatchOrCondition = true;
+                                        break;
+                                    }
+                                } else if (typeof tagFilterFilter === 'function') {
+                                    if (tagFilterFilter(tagValueValue.trim())) {
+                                        isMatchOrCondition = true;
+                                        break;
+                                    }
+                                } else {
+                                    throw new Error(
+                                        `<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`,
+                                    );
+                                }
+                            }
+                        }
+                        if (!isMatchOrCondition) isBlockMatchFilter = false;
+                    }
+                    if (isBlockMatchFilter) return true;
+                    return false;
+                }
 
-        //         return true;
-        //     });
-        // }
+                return true;
+            });
+        }
 
-        // for (let i = 0; i < blocks.length; i++) {
-        //     const block = blocks[i];
-        //     const docblockBlock = new __SDocblockBlock(block || ' ', {
-        //         docblockBlock: {
-        //             packageJson: this._packageJson,
-        //             filepath: this.docblockSettings.filepath || '',
-        //         },
-        //     });
-        //     await docblockBlock.parse();
-        //     blocks[i] = docblockBlock;
-        // }
+        for (let i = 0; i < blocksArrayStr.length; i++) {
+            const block = blocksArrayStr[i];
+            const docblockBlock = new __SDocblockBlock(block || ' ', {
+                docblockBlock: {
+                    packageJson: this._packageJson,
+                    filepath: this.docblockSettings.filepath || '',
+                },
+            });
+            await docblockBlock.parse();
+            blocks[i] = docblockBlock;
+        }
 
         if (blocks && blocks.length) {
             this._blocks = blocks;

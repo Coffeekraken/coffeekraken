@@ -60,7 +60,9 @@ export default class SEnv {
             };
         } else {
             this._env = {
+                // @ts-ignore
                 ENVIRONMENT: window?.env?.ENV ?? 'dev',
+                // @ts-ignore
                 ENV: window?.env?.ENV ?? 'dev',
                 PLATFORM: 'browser',
             };

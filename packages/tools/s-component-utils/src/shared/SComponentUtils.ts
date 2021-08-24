@@ -43,9 +43,10 @@ export interface ISComponentUtilsDataProvider {
 }
 
 export interface ISComponentUtilsSettings {
-    interface?: __SInterface;
+    interface?: typeof __SInterface;
     rootNode?: HTMLElement;
     display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'grid';
+    defaultProps?: any;
 }
 
 export interface ISComponentUtilsCtorSettings {
@@ -165,6 +166,20 @@ export default class SComponentUtils extends __SClass {
     }
 
     /**
+     * @name        componentUtilsSettings
+     * @type        ISComponentUtilsSettings
+     * @get
+     *
+     * Access the component utils sertings
+     *
+     * @since           2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    get componentUtilsSettings(): ISComponentUtilsSettings {
+        return (<any>this._settings).componentUtils;
+    }
+
+    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -178,8 +193,10 @@ export default class SComponentUtils extends __SClass {
         super(
             __deepMerge(
                 {
-                    get rootNode() {
-                        return node.shadowRoot?.querySelector('*:first-child');
+                    componentUtils: {
+                        get rootNode() {
+                            return node.shadowRoot?.querySelector('*:first-child');
+                        },
                     },
                 },
                 settings,
@@ -200,23 +217,28 @@ export default class SComponentUtils extends __SClass {
         }
 
         let InterfaceToApply =
-            this._settings.interface ??
+            this.componentUtilsSettings.interface ??
             class InlineComponentUtilsInterface extends __SInterface {
                 static definition = Object.assign({}, SComponentUtilsDefaultInterface.definition);
             };
 
-        if (this._settings.interface) {
+        if (this.componentUtilsSettings.interface) {
+            // @ts-ignore
             InterfaceToApply.definition = {
+                // @ts-ignore
                 ...InterfaceToApply.definition,
-                ...this._settings.interface.definition,
+                // @ts-ignore
+                ...this.componentUtilsSettings.interface.definition,
             };
         }
+        // @ts-ignore
         this._InterfaceToApply = InterfaceToApply;
 
         // props
         const defaultProps = __deepMerge(
+            // @ts-ignore
             InterfaceToApply.defaults(),
-            this._settings.defaultProps ?? {},
+            this.componentUtilsSettings.defaultProps ?? {},
             (<any>this.constructor)._defaultProps['*'] ?? {},
             (<any>this.constructor)._defaultProps[this.name] ?? {},
         );
@@ -259,13 +281,13 @@ export default class SComponentUtils extends __SClass {
             // @ts-ignore
             if (this._InterfaceToApply.definition?.[propName]?.physical) {
                 if (this.node[propName] === false || this.node[propName] === undefined) {
-                    if (this._settings.rootNode) {
-                        this._settings.rootNode.removeAttribute(__dashCase(propName));
+                    if (this.componentUtilsSettings.rootNode) {
+                        this.componentUtilsSettings.rootNode.removeAttribute(__dashCase(propName));
                     }
                     this.node.removeAttribute(__dashCase(propName));
                 } else {
-                    if (this._settings.rootNode) {
-                        this._settings.rootNode.setAttribute(__dashCase(propName), this.node[propName]);
+                    if (this.componentUtilsSettings.rootNode) {
+                        this.componentUtilsSettings.rootNode.setAttribute(__dashCase(propName), this.node[propName]);
                     }
                     this.node.setAttribute(__dashCase(propName), this.node[propName]);
                 }
@@ -306,7 +328,7 @@ export default class SComponentUtils extends __SClass {
         }
     }
 
-    static getFinalInterface(int?: __SInterface): __SInterface {
+    static getFinalInterface(int?: typeof __SInterface): __SInterface {
         class InlineComponentUtilsInterface extends __SInterface {
             static definition = SComponentUtilsDefaultInterface.definition;
         }
@@ -321,7 +343,7 @@ export default class SComponentUtils extends __SClass {
         return InlineComponentUtilsInterface;
     }
 
-    static properties(properties: any, int: __SInterface): any {
+    static properties(properties: any, int: typeof __SInterface): any {
         const propertiesObj = {};
         const InterfaceToApply = this.getFinalInterface(int);
 

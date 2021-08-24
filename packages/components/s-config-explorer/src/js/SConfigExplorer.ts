@@ -10,8 +10,8 @@ export interface ISConfigExplorerComponentProps extends ISComponentUtilsDefaultP
 }
 
 export default class SConfigExplorer extends SLitElement {
-    _component = undefined;
-    _displayedConfig = [];
+    _component: __SComponentUtils;
+    _displayedConfig: any[] = [];
 
     @property()
     _config;
@@ -32,14 +32,19 @@ export default class SConfigExplorer extends SLitElement {
     constructor() {
         super();
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            interface: __SConfigExplorerComponentInterface,
-            defaultProps: {},
+            componentUtils: {
+                // @TODO        check why is an issue here...
+                // @ts-ignore
+                interface: __SConfigExplorerComponentInterface,
+                defaultProps: {},
+            },
         });
 
         (async () => {
             const request = new __SRequest({});
             const response: any = await request.send({
                 type: 'GET',
+                // @ts-ignore
                 url: `/${this._component.props.apiUrl}?flat=1`,
             });
             this._config = response.data;

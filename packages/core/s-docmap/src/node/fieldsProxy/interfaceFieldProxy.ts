@@ -18,7 +18,7 @@
 
 export interface ISDocMapInterfaceField {}
 
-export default async function interfaceFieldProxy(data: any): ISDocMapInterfaceField {
+export default async function interfaceFieldProxy(data: any): Promise<ISDocMapInterfaceField> {
     const int = (await import(data.path)).default;
     return int.toObject();
 }

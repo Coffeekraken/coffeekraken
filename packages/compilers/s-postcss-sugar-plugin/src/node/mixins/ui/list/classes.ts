@@ -3,40 +3,37 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
-  static definition = {
-    styles: {
-      type: 'String[]',
-      alias: 's'
-    }
-  };
+    static definition = {
+        styles: {
+            type: 'String[]',
+            alias: 's',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {
-  colors: string[];
-  styles: string[];
+    styles: string[];
 }
 
 export { postcssSugarPluginUiListClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiListClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiListClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const styles = __theme().config('ui.list.styles');
+    const finalParams: IPostcssSugarPluginUiListClassesParams = {
+        styles: __theme().config('ui.list.styles'),
+        ...params,
+    };
 
-  const finalParams: IPostcssSugarPluginUiListClassesParams = {
-    styles,
-    ...params
-  };
+    const vars: string[] = [];
 
-  const vars: string[] = [];
-
-  vars.push(`/**
+    vars.push(`/**
         * @name           s-list--interactive
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -54,10 +51,10 @@ export default function ({
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
-  vars.push([`.s-list--interactive {`, `@sugar.ui.list.interactive;`, `}`].join('\n'));
+    vars.push([`.s-list--interactive {`, `@sugar.ui.list.interactive;`, `}`].join('\n'));
 
-  // ul
-  vars.push(`/**
+    // ul
+    vars.push(`/**
         * @name           s-list--ul
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -87,8 +84,8 @@ export default function ({
       } 
   `);
 
-  // ul:icon
-  vars.push(`/**
+    // ul:icon
+    vars.push(`/**
         * @name           s-list--ul.s-list--icon
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -106,9 +103,9 @@ export default function ({
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
-  vars.push([`.s-list--icon.s-list--ul {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
-  
-  vars.push(`/**
+    vars.push([`.s-list--icon.s-list--ul {`, `@sugar.ui.list.ul(true);`, `}`].join('\n'));
+
+    vars.push(`/**
         * @name           s-format:text ul
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -133,8 +130,8 @@ export default function ({
     } 
   `);
 
-  // ol
-  vars.push(`/**
+    // ol
+    vars.push(`/**
         * @name           s-list--ol
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -164,7 +161,7 @@ export default function ({
       } 
   `);
 
-  vars.push(`/**
+    vars.push(`/**
         * @name           s-format:text ol
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -189,9 +186,8 @@ export default function ({
       }
   `);
 
-
-  Object.keys(__theme().baseColors()).forEach((colorName) => {
-    vars.push(`
+    Object.keys(__theme().baseColors()).forEach((colorName) => {
+        vars.push(`
       /**
        * @name        s-list--${colorName}
        * @namespace     sugar.css.ui.button
@@ -212,7 +208,7 @@ export default function ({
         @sugar.color.remap(ui, ${colorName});
       }
     `);
-  });
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

@@ -15,10 +15,10 @@ export interface ISActivateComponentProps {
 }
 
 export default class SActivate extends SLitElement {
-    _component = undefined;
-    _hrefSelector = undefined;
-    _$targets = undefined;
-    _$groupElements = undefined;
+    _component: __SComponentUtils;
+    _hrefSelector?: string;
+    _$targets?: HTMLElement[];
+    _$groupElements?: HTMLElement[];
 
     @property()
     _state = 'pending';
@@ -37,8 +37,10 @@ export default class SActivate extends SLitElement {
     constructor() {
         super();
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            interface: __SActivateComponentInterface,
-            defaultProps: {},
+            componentUtils: {
+                interface: __SActivateComponentInterface,
+                defaultProps: {},
+            },
         });
     }
     firstUpdated() {
@@ -55,7 +57,8 @@ export default class SActivate extends SLitElement {
             this._hrefSelector = this._component.props.href;
         }
 
-        const targets = Array.from(document.querySelectorAll(this._hrefSelector));
+        let targets;
+        if (this._hrefSelector) targets = Array.from(document.querySelectorAll(this._hrefSelector));
         if (targets.length) this._$targets = targets;
 
         if (this._component.props.group) {
@@ -112,32 +115,35 @@ export default class SActivate extends SLitElement {
                 throw new Error(
                     `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
                 );
-            localStorage.setItem(`s-activate-state-${this.id}`, true);
+            localStorage.setItem(`s-activate-state-${this.id}`, 'true');
         }
 
         // history
-        if (this._component.props.history) {
+        if (this._component.props.history && this._hrefSelector) {
             document.location.hash = this._hrefSelector;
         }
 
         // check if we have some elements in the group
         if (this._$groupElements) {
+            // @ts-ignore
             this._$groupElements.forEach(($element) => {
                 if ($element === this) return;
                 try {
+                    // @ts-ignore
                     $element.unactivate();
                 } catch (e) {}
             });
         }
 
         // add the "active" attribute to the component
-        this.setAttribute('active', true);
+        this.setAttribute('active', 'true');
 
         // loop on targets to activate them
         if (this._$targets) {
+            // @ts-ignore
             this._$targets.forEach(($target) => {
                 $target.classList.add('active');
-                $target.setAttribute('active', true);
+                $target.setAttribute('active', 'true');
             });
         }
     }
@@ -159,6 +165,7 @@ export default class SActivate extends SLitElement {
 
         // loop on targets to unactivate them
         if (this._$targets) {
+            // @ts-ignore
             this._$targets.forEach(($target) => {
                 $target.classList.remove('active');
                 $target.removeAttribute('active');

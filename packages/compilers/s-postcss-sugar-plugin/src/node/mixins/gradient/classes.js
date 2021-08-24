@@ -1,3 +1,4 @@
+// @ts-nocheck
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 /**
@@ -24,16 +25,16 @@ postcssSugarPluginGradientClassesInterface.definition = {
         type: 'String[]',
         values: ['linear', 'radial'],
         default: ['linear', 'radial'],
-        alias: 't'
+        alias: 't',
     },
     angles: {
         type: 'Number[]',
         default: [0, 45, 90, 135, 180, 225, 270],
-        alias: 'a'
-    }
+        alias: 'a',
+    },
 };
 export { postcssSugarPluginGradientClassesInterface as interface };
-export default function ({ params, atRule, replaceWith }) {
+export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({ types: ['linear', 'radial'], angles: [0, 45, 90, 135, 180, 225, 270] }, params);
     const vars = [];
     if (finalParams.types.indexOf('linear') !== -1) {
@@ -110,7 +111,7 @@ export default function ({ params, atRule, replaceWith }) {
         });
     }
     let currentName;
-    __theme().loopOnColors(({ name, modifier, value, previous, next }) => {
+    __theme().loopOnColors(({ name, variant, value }) => {
         if (currentName !== name) {
             // default gradients
             vars.push(`
@@ -137,7 +138,7 @@ export default function ({ params, atRule, replaceWith }) {
           .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
-                  $end: ${name}--${__theme().config('gradient.defaultModifier')},
+                  $end: ${name}--${__theme().config('gradient.defaultVariant')},
                   $type: ${__theme().config('gradient.defaultType')},
                   $angle: ${__theme().config('gradient.defaultAngle')}
               );
@@ -145,7 +146,7 @@ export default function ({ params, atRule, replaceWith }) {
       `);
         }
         currentName = name;
-        const startColorClassName = `s-gradient:start-${name}${modifier === 'default' ? '' : `-${modifier}`}`;
+        const startColorClassName = `s-gradient:start-${name}${variant === 'default' ? '' : `-${variant}`}`;
         vars.push(`/**
         * @name          ${startColorClassName}
         * @namespace          sugar.css.gradient
@@ -156,7 +157,7 @@ export default function ({ params, atRule, replaceWith }) {
         * This class allows you to apply a "<yellow>${name}</yellow>" gradient start color to any HTMLElement
         *
         * @example        html
-        * <div class="s-ratio\:16-9 ${startColorClassName.replace(':', '\:')}\:end-${name}${next.modifier === 'default' ? '' : `-${next.modifier}`}">
+        * <div class="s-ratio\:16-9 ${startColorClassName.replace(':', ':')}\:end-${name}${next.variant === 'default' ? '' : `-${next.variant}`}">
         *     <div class="s-center-abs">I'm a cool depth button</div>
         * </div>
         *
@@ -164,9 +165,9 @@ export default function ({ params, atRule, replaceWith }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
       .${startColorClassName.replace(':', '--')} {
-          --s-gradient-start-color-inline: sugar.color(${name}, ${modifier});
+          --s-gradient-start-color-inline: sugar.color(${name}, ${variant});
       }`);
-        const endColorClassName = `s-gradient:end-${name}${modifier === 'default' ? '' : `-${modifier}`}`;
+        const endColorClassName = `s-gradient:end-${name}${variant === 'default' ? '' : `-${variant}`}`;
         vars.push(`/**
       * @name          ${endColorClassName}
       * @namespace          sugar.css.gradient
@@ -174,10 +175,10 @@ export default function ({ params, atRule, replaceWith }) {
       * @platform         css
       * @status           beta
       *
-      * This class allows you to apply a "<yellow>${name}${modifier === 'default' ? '' : `-${modifier}`}</yellow>" gradient end color to any HTMLElement
+      * This class allows you to apply a "<yellow>${name}${variant === 'default' ? '' : `-${variant}`}</yellow>" gradient end color to any HTMLElement
       *
       * @example        html
-      * <div class="s-ratio\:16-9 ${endColorClassName.replace(':', '\:')}\:start-${name}${previous.modifier === 'default' ? '' : `-${previous.modifier}`} ${endColorClassName}">
+      * <div class="s-ratio\:16-9 ${endColorClassName.replace(':', ':')}\:start-${name}${previous.variant === 'default' ? '' : `-${previous.variant}`} ${endColorClassName}">
       *     <div class="s-center-abs">I'm a cool depth button</div>
       * </div>
       *
@@ -185,9 +186,9 @@ export default function ({ params, atRule, replaceWith }) {
       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
     .${endColorClassName.replace(':', '--')} {
-        --s-gradient-end-color-inline: sugar.color(${name}, ${modifier});
+        --s-gradient-end-color-inline: sugar.color(${name}, ${variant});
     }`);
     });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEM7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7O0FBQzVELHFEQUFVLEdBQUc7SUFDbEIsS0FBSyxFQUFFO1FBQ0wsSUFBSSxFQUFFLFVBQVU7UUFDaEIsTUFBTSxFQUFFLENBQUMsUUFBUSxFQUFFLFFBQVEsQ0FBQztRQUM1QixPQUFPLEVBQUUsQ0FBQyxRQUFRLEVBQUUsUUFBUSxDQUFDO1FBQzdCLEtBQUssRUFBRSxHQUFHO0tBQ1g7SUFDRCxNQUFNLEVBQUU7UUFDTixJQUFJLEVBQUUsVUFBVTtRQUNoQixPQUFPLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRSxFQUFFLEVBQUUsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLENBQUM7UUFDeEMsS0FBSyxFQUFFLEdBQUc7S0FDWDtDQUNGLENBQUM7QUFRSixPQUFPLEVBQUUsMENBQTBDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbkUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxtQkFDZixLQUFLLEVBQUUsQ0FBQyxRQUFRLEVBQUUsUUFBUSxDQUFDLEVBQzNCLE1BQU0sRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsQ0FBQyxJQUNwQyxNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzlDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bb0JSLENBQUMsQ0FBQztLQUNMO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUM5QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQW9CUixDQUFDLENBQUM7S0FDTDtJQUVELElBQUksV0FBVyxDQUFDLE1BQU0sRUFBRTtRQUN0QixXQUFXLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1lBQ25DLElBQUksQ0FBQyxJQUFJLENBQUM7O3NDQUVzQixLQUFLOzs7Ozs7a0VBTXVCLEtBQUs7Ozs7MkRBSVosS0FBSzs7Ozs7Ozt1QkFPekMsS0FBSzt5Q0FDYSxLQUFLOztLQUV6QyxDQUFDLENBQUM7UUFDSCxDQUFDLENBQUMsQ0FBQztLQUNKO0lBRUQsSUFBSSxXQUFXLENBQUM7SUFDaEIsT0FBTyxFQUFFLENBQUMsWUFBWSxDQUFDLENBQUMsRUFBRSxJQUFJLEVBQUUsUUFBUSxFQUFFLEtBQUssRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNuRSxJQUFJLFdBQVcsS0FBSyxJQUFJLEVBQUU7WUFDeEIsb0JBQW9CO1lBQ3BCLElBQUksQ0FBQyxJQUFJLENBQUM7O3dDQUV3QixJQUFJOzs7Ozs7a0VBTXNCLElBQUk7Ozs7OztxREFNakIsSUFBSTs7Ozs7Ozt5QkFPaEMsSUFBSTs7NEJBRUQsSUFBSTswQkFDTixJQUFJLEtBQUssT0FBTyxFQUFFLENBQUMsTUFBTSxDQUMzQywwQkFBMEIsQ0FDM0I7MkJBQ29CLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxzQkFBc0IsQ0FBQzs0QkFDdkMsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHVCQUF1QixDQUFDOzs7T0FHOUQsQ0FBQyxDQUFDO1NBQ0o7UUFDRCxXQUFXLEdBQUcsSUFBSSxDQUFDO1FBRW5CLE1BQU0sbUJBQW1CLEdBQUcsb0JBQW9CLElBQUksR0FDbEQsUUFBUSxLQUFLLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLFFBQVEsRUFDNUMsRUFBRSxDQUFDO1FBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQzsyQkFDYSxtQkFBbUI7Ozs7OztzREFNUSxJQUFJOzs7c0NBR3BCLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUMsSUFBSSxDQUFDLFNBQVMsSUFBSSxHQUNsRixJQUFJLENBQUMsUUFBUSxLQUFLLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLElBQUksQ0FBQyxRQUFRLEVBQ3REOzs7Ozs7O1NBT0ssbUJBQW1CLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBQyxJQUFJLENBQUM7eURBQ1csSUFBSSxLQUFLLFFBQVE7UUFDbEUsQ0FBQyxDQUFDO1FBRU4sTUFBTSxpQkFBaUIsR0FBRyxrQkFBa0IsSUFBSSxHQUM5QyxRQUFRLEtBQUssU0FBUyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksUUFBUSxFQUM1QyxFQUFFLENBQUM7UUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDO3lCQUNXLGlCQUFpQjs7Ozs7O29EQU1VLElBQUksR0FDbEQsUUFBUSxLQUFLLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLFFBQVEsRUFDNUM7OztvQ0FHZ0MsaUJBQWlCLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBQyxJQUFJLENBQUMsV0FBVyxJQUFJLEdBQ2hGLFFBQVEsQ0FBQyxRQUFRLEtBQUssU0FBUyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksUUFBUSxDQUFDLFFBQVEsRUFDOUQsSUFBSSxpQkFBaUI7Ozs7Ozs7T0FPbEIsaUJBQWlCLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBQyxJQUFJLENBQUM7cURBQ1csSUFBSSxLQUFLLFFBQVE7TUFDaEUsQ0FBQyxDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sT0FBTyxNQUFNLG1CQUFtQixDQUFDO0FBRXhDOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSwwQ0FBMkMsU0FBUSxZQUFZOztBQUMxRCxxREFBVSxHQUFHO0lBQ2hCLEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxVQUFVO1FBQ2hCLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRSxRQUFRLENBQUM7UUFDNUIsT0FBTyxFQUFFLENBQUMsUUFBUSxFQUFFLFFBQVEsQ0FBQztRQUM3QixLQUFLLEVBQUUsR0FBRztLQUNiO0lBQ0QsTUFBTSxFQUFFO1FBQ0osSUFBSSxFQUFFLFVBQVU7UUFDaEIsT0FBTyxFQUFFLENBQUMsQ0FBQyxFQUFFLEVBQUUsRUFBRSxFQUFFLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxDQUFDO1FBQ3hDLEtBQUssRUFBRSxHQUFHO0tBQ2I7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRW5FLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLENBQUMsUUFBUSxFQUFFLFFBQVEsQ0FBQyxFQUMzQixNQUFNLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRSxFQUFFLEVBQUUsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLENBQUMsSUFDcEMsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENB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

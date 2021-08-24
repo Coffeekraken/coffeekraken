@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 
@@ -20,47 +22,47 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginGradientClassesInterface extends __SInterface {
-  static definition = {
-    types: {
-      type: 'String[]',
-      values: ['linear', 'radial'],
-      default: ['linear', 'radial'],
-      alias: 't'
-    },
-    angles: {
-      type: 'Number[]',
-      default: [0, 45, 90, 135, 180, 225, 270],
-      alias: 'a'
-    }
-  };
+    static definition = {
+        types: {
+            type: 'String[]',
+            values: ['linear', 'radial'],
+            default: ['linear', 'radial'],
+            alias: 't',
+        },
+        angles: {
+            type: 'Number[]',
+            default: [0, 45, 90, 135, 180, 225, 270],
+            alias: 'a',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginGradientClassesParams {
-  types: string[];
-  angles: number[];
+    types: string[];
+    angles: number[];
 }
 
 export { postcssSugarPluginGradientClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginGradientClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginGradientClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginGradientClassesParams = {
-    types: ['linear', 'radial'],
-    angles: [0, 45, 90, 135, 180, 225, 270],
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginGradientClassesParams = {
+        types: ['linear', 'radial'],
+        angles: [0, 45, 90, 135, 180, 225, 270],
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  if (finalParams.types.indexOf('linear') !== -1) {
-    vars.push(`/**
+    if (finalParams.types.indexOf('linear') !== -1) {
+        vars.push(`/**
         * @name             s-gradient:linear
         * @namespace          sugar.css.gradient
         * @type                 CssClass
@@ -81,10 +83,10 @@ export default function ({
     .s-gradient--linear {
         --s-gradient-type-inline: linear;
     }`);
-  }
+    }
 
-  if (finalParams.types.indexOf('radial') !== -1) {
-    vars.push(`/**
+    if (finalParams.types.indexOf('radial') !== -1) {
+        vars.push(`/**
         * @name             s-gradient:radial
         * @namespace          sugar.css.gradient
         * @type                 CssClass
@@ -105,11 +107,11 @@ export default function ({
     .s-gradient--radial {
         --s-gradient-type-inline: radial;
     }`);
-  }
+    }
 
-  if (finalParams.angles) {
-    finalParams.angles.forEach((angle) => {
-      vars.push(`
+    if (finalParams.angles) {
+        finalParams.angles.forEach((angle) => {
+            vars.push(`
         /**
          * @name        .s-gradient:${angle}deg
          * @namespace       sugar.css.gradient
@@ -132,14 +134,14 @@ export default function ({
             --s-gradient-angle-inline: ${angle}deg;
         }
     `);
-    });
-  }
+        });
+    }
 
-  let currentName;
-  __theme().loopOnColors(({ name, modifier, value, previous, next }) => {
-    if (currentName !== name) {
-      // default gradients
-      vars.push(`
+    let currentName;
+    __theme().loopOnColors(({ name, variant, value }) => {
+        if (currentName !== name) {
+            // default gradients
+            vars.push(`
           /**
            * @name        .s-gradient:${name}
            * @namespace   sugar.css.gradient
@@ -163,21 +165,17 @@ export default function ({
           .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
-                  $end: ${name}--${__theme().config(
-        'gradient.defaultModifier'
-      )},
+                  $end: ${name}--${__theme().config('gradient.defaultVariant')},
                   $type: ${__theme().config('gradient.defaultType')},
                   $angle: ${__theme().config('gradient.defaultAngle')}
               );
           }
       `);
-    }
-    currentName = name;
+        }
+        currentName = name;
 
-    const startColorClassName = `s-gradient:start-${name}${
-      modifier === 'default' ? '' : `-${modifier}`
-    }`;
-    vars.push(`/**
+        const startColorClassName = `s-gradient:start-${name}${variant === 'default' ? '' : `-${variant}`}`;
+        vars.push(`/**
         * @name          ${startColorClassName}
         * @namespace          sugar.css.gradient
         * @type               CssClass
@@ -187,23 +185,21 @@ export default function ({
         * This class allows you to apply a "<yellow>${name}</yellow>" gradient start color to any HTMLElement
         *
         * @example        html
-        * <div class="s-ratio\:16-9 ${startColorClassName.replace(':','\:')}\:end-${name}${
-      next.modifier === 'default' ? '' : `-${next.modifier}`
-    }">
+        * <div class="s-ratio\:16-9 ${startColorClassName.replace(':', ':')}\:end-${name}${
+            next.variant === 'default' ? '' : `-${next.variant}`
+        }">
         *     <div class="s-center-abs">I'm a cool depth button</div>
         * </div>
         *
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-      .${startColorClassName.replace(':','--')} {
-          --s-gradient-start-color-inline: sugar.color(${name}, ${modifier});
+      .${startColorClassName.replace(':', '--')} {
+          --s-gradient-start-color-inline: sugar.color(${name}, ${variant});
       }`);
 
-    const endColorClassName = `s-gradient:end-${name}${
-      modifier === 'default' ? '' : `-${modifier}`
-    }`;
-    vars.push(`/**
+        const endColorClassName = `s-gradient:end-${name}${variant === 'default' ? '' : `-${variant}`}`;
+        vars.push(`/**
       * @name          ${endColorClassName}
       * @namespace          sugar.css.gradient
       * @type               CssClass
@@ -211,23 +207,23 @@ export default function ({
       * @status           beta
       *
       * This class allows you to apply a "<yellow>${name}${
-      modifier === 'default' ? '' : `-${modifier}`
-    }</yellow>" gradient end color to any HTMLElement
+            variant === 'default' ? '' : `-${variant}`
+        }</yellow>" gradient end color to any HTMLElement
       *
       * @example        html
-      * <div class="s-ratio\:16-9 ${endColorClassName.replace(':','\:')}\:start-${name}${
-      previous.modifier === 'default' ? '' : `-${previous.modifier}`
-    } ${endColorClassName}">
+      * <div class="s-ratio\:16-9 ${endColorClassName.replace(':', ':')}\:start-${name}${
+            previous.variant === 'default' ? '' : `-${previous.variant}`
+        } ${endColorClassName}">
       *     <div class="s-center-abs">I'm a cool depth button</div>
       * </div>
       *
       * @since            2.0.0
       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-    .${endColorClassName.replace(':','--')} {
-        --s-gradient-end-color-inline: sugar.color(${name}, ${modifier});
+    .${endColorClassName.replace(':', '--')} {
+        --s-gradient-end-color-inline: sugar.color(${name}, ${variant});
     }`);
-  });
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

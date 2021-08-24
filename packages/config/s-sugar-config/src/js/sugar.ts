@@ -33,6 +33,7 @@ export default class SSugarConfig {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static get(dotpath: string): any {
+        // @ts-ignore
         return __get(window.env?.SUGAR?.config ?? {}, dotpath);
     }
 }

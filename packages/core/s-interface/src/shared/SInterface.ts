@@ -78,7 +78,7 @@ else window._registeredInterfacesTypes = {};
  */
 
 // @ts-ignore
-export default class SInterface extends __SClass implements ISInterface {
+export default class SInterface extends __SClass {
     /**
      * @name              definition
      * @type              ISDescriptorRules

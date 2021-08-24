@@ -4,6 +4,7 @@ import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils'
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 
+// @ts-ignore
 import __css from '../css/s-clipboard-copy.css';
 
 export interface ISClipboardCopyComponentProps {
@@ -18,7 +19,7 @@ export default class SClipboardCopy extends SLitElement {
         `;
     }
 
-    _component = undefined;
+    _component: __SComponentUtils;
 
     @property()
     _state = 'pending';
@@ -26,8 +27,10 @@ export default class SClipboardCopy extends SLitElement {
     constructor() {
         super();
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            interface: __SClipboardCopyComponentInterface,
-            defaultProps: {},
+            componentUtils: {
+                interface: __SClipboardCopyComponentInterface,
+                defaultProps: {},
+            },
         });
     }
     firstUpdated() {}

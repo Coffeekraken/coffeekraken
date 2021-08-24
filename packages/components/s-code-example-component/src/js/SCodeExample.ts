@@ -6,9 +6,10 @@ import __hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 __hljs.registerLanguage('javascript', javascript);
 
+// @ts-ignore
 import __css from '../css/s-code-example.css';
 import { webcomponent as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
-import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.ts';
+import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
 
 __SClipboardCopy();
 
@@ -31,11 +32,11 @@ export default class SCodeExample extends SLitElement {
         `;
     }
 
-    _component = undefined;
+    _component: __SComponentUtils;
     _$copy = undefined;
 
     @property()
-    _items = [];
+    _items: HTMLElement[] = [];
 
     @property()
     _activeTabId = undefined;
@@ -60,12 +61,14 @@ export default class SCodeExample extends SLitElement {
     constructor() {
         super();
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            interface: __SCodeExampleComponentInterface,
-            defaultProps: {},
+            componentUtils: {
+                interface: __SCodeExampleComponentInterface,
+                defaultProps: {},
+            },
         });
     }
     firstUpdated() {
-        this.$templates.forEach(($template) => {
+        this.$templates.forEach(($template: HTMLElement) => {
             if (!$template.getAttribute) return;
             this._items = [
                 ...this._items,
@@ -73,8 +76,10 @@ export default class SCodeExample extends SLitElement {
                     id:
                         $template.getAttribute('id') ??
                         $template.getAttribute('language') ??
-                        $template.getAttribute('lang'),
-                    lang: $template.getAttribute('language') ?? $template.getAttribute('lang'),
+                        $template.getAttribute('lang') ??
+                        'html',
+                    lang: $template.getAttribute('language') ?? $template.getAttribute('lang') ?? 'html',
+                    // @ts-ignore
                     code: $template.innerHTML,
                 },
             ];
@@ -133,7 +138,7 @@ export default class SCodeExample extends SLitElement {
                           <div class="${this._component.className('__content')}">
                               ${this._component.props.toolbarPosition !== 'nav'
                                   ? html`
-                                        <div class="${this._component.className('__toolbar')}">
+                                        <div class="${this._component?.className('__toolbar')}">
                                             <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
                                         </div>
                                     `
@@ -146,10 +151,14 @@ export default class SCodeExample extends SLitElement {
                                           id="${item.id ?? item.lang}"
                                           ?active="${this._activeTabId === (item.id ?? item.lang)}"
                                       >
-                            <code class="language-${item.lang} ${item.lang} ${this._component.props.defaultStyle
+                            <code class="language-${item.lang} ${item.lang} ${this._component?.props.defaultStyle
                                           ? 'hljs'
                                           : ''}">
-                                ${item.code}
+                                
+                                ${
+                                          // @ts-ignore
+                                          item.code
+                                      }
                             </code>
                         </pre>
                                   `,
@@ -169,16 +178,17 @@ export default class SCodeExample extends SLitElement {
         this.initPrismOnTab(id);
     }
     initPrismOnTab(id) {
-        const $content = this.shadowRoot.querySelector(`pre#${id} code`);
+        const $content = <HTMLElement>this.shadowRoot?.querySelector(`pre#${id} code`);
         if ($content.hasAttribute('inited')) return;
-        $content.setAttribute('inited', true);
+        $content.setAttribute('inited', 'true');
 
         const highlightedCode = __hljs.highlight($content?.innerHTML, { language: 'js' }).value.trim();
-        $content?.innerHTML = highlightedCode;
+        $content.innerHTML = highlightedCode;
     }
     copy() {
         const id = this._activeTabId;
         const item = this._items.filter((i) => i.id === id)[0];
+        // @ts-ignore
         this.$copy.copy(item.code);
     }
 }

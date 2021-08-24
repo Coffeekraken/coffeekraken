@@ -99,8 +99,9 @@ export interface ISEventEmitterEventObj {
     reject: Function;
 }
 
-export interface ISEventEmitterConstructorSettings extends ISClassCtor {
+export interface ISEventEmitterConstructorSettings {
     eventEmitter?: Partial<ISEventEmitterSettings>;
+    [key: string]: any;
 }
 export interface ISEventEmitterInstanceSettings {
     eventEmitter: ISEventEmitterSettings;

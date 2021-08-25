@@ -10,6 +10,7 @@ export interface ISActivateComponentProps {
     toggle: boolean;
     history: boolean;
     active: boolean;
+    activeClass: string;
     saveState: boolean;
     trigger: string[];
 }
@@ -26,7 +27,7 @@ export default class SActivate extends SLitElement {
     static get styles() {
         return css`
             ${unsafeCSS(`
-            :host {
+            s-activate {
                 display: inline-block;
                 cursor: pointer;
             }
@@ -42,8 +43,17 @@ export default class SActivate extends SLitElement {
                 defaultProps: {},
             },
         });
+
+        this._$nodes = Array.from(this.children);
+    }
+    createRenderRoot() {
+        return this;
     }
     firstUpdated() {
+        this._$nodes.forEach(($node) => {
+            this.appendChild($node);
+        });
+
         // save state
         if (this._component.props.saveState) {
             if (!this.id)
@@ -78,6 +88,14 @@ export default class SActivate extends SLitElement {
                         }
                     });
                     break;
+                case 'hover':
+                    this.addEventListener('mouseover', (e) => {
+                        this.activate();
+                    });
+                    this.addEventListener('mouseleave', (e) => {
+                        this.unactivate();
+                    });
+                    break;
                 case 'anchor':
                     if (document.location.hash === this._hrefSelector) {
                         this.activate();
@@ -91,11 +109,6 @@ export default class SActivate extends SLitElement {
                     break;
             }
         });
-
-        // expose API
-        // this.activate = this.activate.bind(this);
-        // this.unactivate = this.unactivate.bind(this);
-        // this.isActive = this.isActive.bind(this);
 
         // activate if has the "active" attribute
         if (this._component.props.active) {
@@ -142,8 +155,12 @@ export default class SActivate extends SLitElement {
         if (this._$targets) {
             // @ts-ignore
             this._$targets.forEach(($target) => {
-                $target.classList.add('active');
-                $target.setAttribute('active', 'true');
+                if (this._component.props.activeClass) {
+                    $target.classList.add(this._component.props.activeClass);
+                }
+                if (this._component.props.activeAttribute) {
+                    $target.setAttribute(this._component.props.activeAttribute, 'true');
+                }
             });
         }
     }
@@ -167,13 +184,17 @@ export default class SActivate extends SLitElement {
         if (this._$targets) {
             // @ts-ignore
             this._$targets.forEach(($target) => {
-                $target.classList.remove('active');
-                $target.removeAttribute('active');
+                if (this._component.props.activeClass) {
+                    $target.classList.remove(this._component.props.activeClass);
+                }
+                if (this._component.props.activeAttribute) {
+                    $target.removeAttribute(this._component.props.activeAttribute);
+                }
             });
         }
     }
     render() {
-        return html`<slot></slot>`;
+        return html``;
     }
 }
 

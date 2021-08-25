@@ -31,6 +31,16 @@ SActivateComponentInterface.definition = {
     },
     default: false
   },
+  activeClass: {
+    type: "String",
+    description: "Specify the class to apply on target(s) when activate",
+    default: "active"
+  },
+  activeAttribute: {
+    type: "String",
+    description: "Specify the attribute to apply on target(s) when activate",
+    default: "active"
+  },
   saveState: {
     type: "Boolean",
     default: false
@@ -63,18 +73,26 @@ class SActivate extends SLitElement {
         defaultProps: {}
       }
     });
+    console.log(this.textContent);
+    this._$nodes = Array.from(this.children);
   }
   static get styles() {
     return css`
             ${unsafeCSS(`
-            :host {
+            s-activate {
                 display: inline-block;
                 cursor: pointer;
             }
         `)}
         `;
   }
+  createRenderRoot() {
+    return this;
+  }
   firstUpdated() {
+    this._$nodes.forEach(($node) => {
+      this.appendChild($node);
+    });
     if (this._component.props.saveState) {
       if (!this.id)
         throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
@@ -100,6 +118,14 @@ class SActivate extends SLitElement {
             } else {
               this.activate();
             }
+          });
+          break;
+        case "hover":
+          this.addEventListener("mouseover", (e) => {
+            this.activate();
+          });
+          this.addEventListener("mouseleave", (e) => {
+            this.unactivate();
           });
           break;
         case "anchor":
@@ -145,8 +171,12 @@ class SActivate extends SLitElement {
     this.setAttribute("active", "true");
     if (this._$targets) {
       this._$targets.forEach(($target) => {
-        $target.classList.add("active");
-        $target.setAttribute("active", "true");
+        if (this._component.props.activeClass) {
+          $target.classList.add(this._component.props.activeClass);
+        }
+        if (this._component.props.activeAttribute) {
+          $target.setAttribute(this._component.props.activeAttribute, "true");
+        }
       });
     }
   }
@@ -161,13 +191,17 @@ class SActivate extends SLitElement {
     this.removeAttribute("active");
     if (this._$targets) {
       this._$targets.forEach(($target) => {
-        $target.classList.remove("active");
-        $target.removeAttribute("active");
+        if (this._component.props.activeClass) {
+          $target.classList.remove(this._component.props.activeClass);
+        }
+        if (this._component.props.activeAttribute) {
+          $target.removeAttribute(this._component.props.activeAttribute);
+        }
       });
     }
   }
   render() {
-    return html`<slot></slot>`;
+    return html``;
   }
 }
 __decorate([

@@ -1,5 +1,7 @@
 <header id="header">
 
+    <div class="__subnav-overlay"></div>
+
     <div class="s-container">
 
         <div class="s-flex:align-center" style="position: relative">
@@ -28,35 +30,37 @@
                                     {{ $menuItem->name }}
                                 </a>
                             @else
-                                {{ $menuItem->name }}
-                                <div class="s-tooltip:bottom:nowrap">
-                                    <div class="__subnav">
-                                        @foreach($menuItem as $item)
-                                            @if ($item->slug)
-                                                <a href="{{ $item->slug }}" title="{{ $item->name }}">
-                                                    {{ $item->name }}
-                                                </a>
-                                            @else  
-                                                @if (is_object($item))
-                                                    <span title="{{ $item->name }}" class="s-tooltip-container">
+                                <s-activate href="body" trigger="hover" active-class="subnav-active" active-attribute="subnav-active">
+                                    <span>{{ $menuItem->name }}</span>
+                                    <div class="s-tooltip:bottom:nowrap">
+                                        <div class="__subnav">
+                                            @foreach($menuItem as $item)
+                                                @if ($item->slug)
+                                                    <a href="{{ $item->slug }}" title="{{ $item->name }}">
                                                         {{ $item->name }}
-                                                        <div class="s-tooltip:right-bottom-top:nowrap">
-                                                          <div class="__subnav">
-                                                                @foreach($item as $subItem)
-                                                                    @if ($subItem->slug)
-                                                                        <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}">
-                                                                            {{ $subItem->name }}
-                                                                        </a>
-                                                                    @endif
-                                                                @endforeach
+                                                    </a>
+                                                @else  
+                                                    @if (is_object($item))
+                                                        <span title="{{ $item->name }}" class="s-tooltip-container">
+                                                            {{ $item->name }}
+                                                            <div class="s-tooltip:right-bottom-top:nowrap">
+                                                            <div class="__subnav">
+                                                                    @foreach($item as $subItem)
+                                                                        @if ($subItem->slug)
+                                                                            <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}">
+                                                                                {{ $subItem->name }}
+                                                                            </a>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </span>
-                                                @endif
-                                            @endif                                    
-                                        @endforeach
+                                                        </span>
+                                                    @endif
+                                                @endif                                    
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
+                                </s-activate>
                             @endif
                         </span>
                     </span>

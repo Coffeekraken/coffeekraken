@@ -4,6 +4,10 @@
         margin-right: 0.2em;
     }
 
+    img {
+        max-width: 100%;
+    }
+
     .s-avatar {
         border: solid 2px sugar.color(accent);
     }

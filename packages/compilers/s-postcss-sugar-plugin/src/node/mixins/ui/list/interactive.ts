@@ -5,42 +5,49 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiListInteractiveInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginUiListInteractiveParams {
-}
+export interface IPostcssSugarPluginUiListInteractiveParams {}
 
 export { postcssSugarPluginUiListInteractiveInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiListInteractiveParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiListInteractiveParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  //   const finalParams: IPostcssSugarPluginUiListInteractiveParams = {
-  //     color: 'primary',
-  //     ...params
-  //   };
+    //   const finalParams: IPostcssSugarPluginUiListInteractiveParams = {
+    //     color: 'primary',
+    //     ...params
+    //   };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`
-      background-color: sugar.color(surface);
+    vars.push(`
 
-      & > li,
-      & > dt {
+      & li,
+      & dt {
         @sugar.ui.base(list);
+        background: none;
+        border:none;
         display: block !important;
         
-        .s-highlight {
-          background-color: sugar.color(accent:highlight, background) !important;
-          color: sugar.color(accent:highlight, foreground) !important;
+        @sugar.state.hover {
+          background-color: sugar.color(ui, --alpha 0.5);
+          color: sugar.color(ui, foreground);
+        }
+        @sugar.state.active {
+          background-color: sugar.color(ui);
+          color: sugar.color(ui, foreground);
+        }
+        @sugar.state.focus {
+          background-color: sugar.color(ui, --alpha 0.5);
+          color: sugar.color(ui, foreground);
         }
       }
 

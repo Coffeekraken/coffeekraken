@@ -45,6 +45,14 @@ SActivateComponentInterface.definition = {
     type: "Boolean",
     default: false
   },
+  activateTimeout: {
+    type: "Number",
+    default: 0
+  },
+  unactivateTimeout: {
+    type: "Number",
+    default: 0
+  },
   trigger: {
     type: {
       type: "Array<String>",
@@ -63,6 +71,33 @@ var __decorate = function(decorators, target, key, desc) {
         r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __awaiter = function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
 class SActivate extends SLitElement {
   constructor() {
     super();
@@ -73,8 +108,10 @@ class SActivate extends SLitElement {
         defaultProps: {}
       }
     });
-    console.log(this.textContent);
     this._$nodes = Array.from(this.children);
+  }
+  static get properties() {
+    return __SComponentUtils.properties({}, SActivateComponentInterface);
   }
   static get styles() {
     return css`
@@ -90,7 +127,8 @@ class SActivate extends SLitElement {
     return this;
   }
   firstUpdated() {
-    this._$nodes.forEach(($node) => {
+    var _a;
+    (_a = this._$nodes) === null || _a === void 0 ? void 0 : _a.forEach(($node) => {
       this.appendChild($node);
     });
     if (this._component.props.saveState) {
@@ -120,10 +158,13 @@ class SActivate extends SLitElement {
             }
           });
           break;
-        case "hover":
+        case "mouseover":
           this.addEventListener("mouseover", (e) => {
             this.activate();
           });
+          break;
+        case "mouseout":
+        case "mouseleave":
           this.addEventListener("mouseleave", (e) => {
             this.unactivate();
           });
@@ -148,57 +189,66 @@ class SActivate extends SLitElement {
     return this.hasAttribute("active");
   }
   activate(force = false) {
-    if (!force && this.isActive())
-      return;
-    if (this._component.props.saveState) {
-      if (!this.id)
-        throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-      localStorage.setItem(`s-activate-state-${this.id}`, "true");
-    }
-    if (this._component.props.history && this._hrefSelector) {
-      document.location.hash = this._hrefSelector;
-    }
-    if (this._$groupElements) {
-      this._$groupElements.forEach(($element) => {
-        if ($element === this)
-          return;
-        try {
-          $element.unactivate();
-        } catch (e) {
+    return __awaiter(this, void 0, void 0, function* () {
+      clearTimeout(this._unactivateTimeout);
+      if (!force && this.isActive())
+        return;
+      setTimeout(() => {
+        if (this._component.props.saveState) {
+          if (!this.id)
+            throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
+          localStorage.setItem(`s-activate-state-${this.id}`, "true");
         }
-      });
-    }
-    this.setAttribute("active", "true");
-    if (this._$targets) {
-      this._$targets.forEach(($target) => {
-        if (this._component.props.activeClass) {
-          $target.classList.add(this._component.props.activeClass);
+        if (this._component.props.history && this._hrefSelector) {
+          document.location.hash = this._hrefSelector;
         }
-        if (this._component.props.activeAttribute) {
-          $target.setAttribute(this._component.props.activeAttribute, "true");
+        if (this._$groupElements) {
+          this._$groupElements.forEach(($element) => {
+            if ($element === this)
+              return;
+            try {
+              $element.unactivate();
+            } catch (e) {
+            }
+          });
         }
-      });
-    }
+        this.setAttribute("active", "true");
+        if (this._$targets) {
+          this._$targets.forEach(($target) => {
+            if (this._component.props.activeClass) {
+              $target.classList.add(this._component.props.activeClass);
+            }
+            if (this._component.props.activeAttribute) {
+              $target.setAttribute(this._component.props.activeAttribute, "true");
+            }
+          });
+        }
+      }, this._component.props.activateTimeout);
+    });
   }
   unactivate() {
-    if (!this.isActive())
-      return;
-    if (this._component.props.saveState) {
-      if (!this.id)
-        throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-      localStorage.removeItem(`s-activate-state-${this.id}`);
-    }
-    this.removeAttribute("active");
-    if (this._$targets) {
-      this._$targets.forEach(($target) => {
-        if (this._component.props.activeClass) {
-          $target.classList.remove(this._component.props.activeClass);
+    return __awaiter(this, void 0, void 0, function* () {
+      if (!this.isActive())
+        return;
+      this._unactivateTimeout = setTimeout(() => {
+        if (this._component.props.saveState) {
+          if (!this.id)
+            throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
+          localStorage.removeItem(`s-activate-state-${this.id}`);
         }
-        if (this._component.props.activeAttribute) {
-          $target.removeAttribute(this._component.props.activeAttribute);
+        this.removeAttribute("active");
+        if (this._$targets) {
+          this._$targets.forEach(($target) => {
+            if (this._component.props.activeClass) {
+              $target.classList.remove(this._component.props.activeClass);
+            }
+            if (this._component.props.activeAttribute) {
+              $target.removeAttribute(this._component.props.activeAttribute);
+            }
+          });
         }
-      });
-    }
+      }, this._component.props.unactivateTimeout);
+    });
   }
   render() {
     return html``;

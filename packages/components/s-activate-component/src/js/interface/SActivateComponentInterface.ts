@@ -43,6 +43,14 @@ export default class SActivateComponentInterface extends __SInterface {
             type: 'Boolean',
             default: false,
         },
+        activateTimeout: {
+            type: 'Number',
+            default: 0,
+        },
+        unactivateTimeout: {
+            type: 'Number',
+            default: 0,
+        },
         trigger: {
             type: {
                 type: 'Array<String>',

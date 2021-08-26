@@ -20,9 +20,15 @@ export default class SActivate extends SLitElement {
     _hrefSelector?: string;
     _$targets?: HTMLElement[];
     _$groupElements?: HTMLElement[];
+    _$nodes?: Element[];
+    _unactivateTimeout;
 
     @property()
     _state = 'pending';
+
+    static get properties() {
+        return __SComponentUtils.properties({}, __SActivateComponentInterface);
+    }
 
     static get styles() {
         return css`
@@ -50,7 +56,7 @@ export default class SActivate extends SLitElement {
         return this;
     }
     firstUpdated() {
-        this._$nodes.forEach(($node) => {
+        this._$nodes?.forEach(($node) => {
             this.appendChild($node);
         });
 
@@ -88,10 +94,13 @@ export default class SActivate extends SLitElement {
                         }
                     });
                     break;
-                case 'hover':
+                case 'mouseover':
                     this.addEventListener('mouseover', (e) => {
                         this.activate();
                     });
+                    break;
+                case 'mouseout':
+                case 'mouseleave':
                     this.addEventListener('mouseleave', (e) => {
                         this.unactivate();
                     });
@@ -118,80 +127,87 @@ export default class SActivate extends SLitElement {
     isActive() {
         return this.hasAttribute('active');
     }
-    activate(force = false) {
+    async activate(force = false) {
+        // clear the unactivate timeout
+        clearTimeout(this._unactivateTimeout);
+
         // protect from activating multiple times
         if (!force && this.isActive()) return;
 
-        // save state
-        if (this._component.props.saveState) {
-            if (!this.id)
-                throw new Error(
-                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
-                );
-            localStorage.setItem(`s-activate-state-${this.id}`, 'true');
-        }
+        setTimeout(() => {
+            // save state
+            if (this._component.props.saveState) {
+                if (!this.id)
+                    throw new Error(
+                        `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
+                    );
+                localStorage.setItem(`s-activate-state-${this.id}`, 'true');
+            }
 
-        // history
-        if (this._component.props.history && this._hrefSelector) {
-            document.location.hash = this._hrefSelector;
-        }
+            // history
+            if (this._component.props.history && this._hrefSelector) {
+                document.location.hash = this._hrefSelector;
+            }
 
-        // check if we have some elements in the group
-        if (this._$groupElements) {
-            // @ts-ignore
-            this._$groupElements.forEach(($element) => {
-                if ($element === this) return;
-                try {
-                    // @ts-ignore
-                    $element.unactivate();
-                } catch (e) {}
-            });
-        }
+            // check if we have some elements in the group
+            if (this._$groupElements) {
+                // @ts-ignore
+                this._$groupElements.forEach(($element) => {
+                    if ($element === this) return;
+                    try {
+                        // @ts-ignore
+                        $element.unactivate();
+                    } catch (e) {}
+                });
+            }
 
-        // add the "active" attribute to the component
-        this.setAttribute('active', 'true');
+            // add the "active" attribute to the component
+            this.setAttribute('active', 'true');
 
-        // loop on targets to activate them
-        if (this._$targets) {
-            // @ts-ignore
-            this._$targets.forEach(($target) => {
-                if (this._component.props.activeClass) {
-                    $target.classList.add(this._component.props.activeClass);
-                }
-                if (this._component.props.activeAttribute) {
-                    $target.setAttribute(this._component.props.activeAttribute, 'true');
-                }
-            });
-        }
+            // loop on targets to activate them
+            if (this._$targets) {
+                // @ts-ignore
+                this._$targets.forEach(($target) => {
+                    if (this._component.props.activeClass) {
+                        $target.classList.add(this._component.props.activeClass);
+                    }
+                    if (this._component.props.activeAttribute) {
+                        $target.setAttribute(this._component.props.activeAttribute, 'true');
+                    }
+                });
+            }
+        }, this._component.props.activateTimeout);
     }
-    unactivate() {
+    async unactivate() {
         // protect from unactivating multiple times
         if (!this.isActive()) return;
 
-        // save state
-        if (this._component.props.saveState) {
-            if (!this.id)
-                throw new Error(
-                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
-                );
-            localStorage.removeItem(`s-activate-state-${this.id}`);
-        }
+        this._unactivateTimeout = setTimeout(() => {
+            // save state
+            if (this._component.props.saveState) {
+                if (!this.id)
+                    throw new Error(
+                        `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
+                    );
+                localStorage.removeItem(`s-activate-state-${this.id}`);
+            }
 
-        // remove the "active" attribute to the component
-        this.removeAttribute('active');
+            // remove the "active" attribute to the component
+            this.removeAttribute('active');
 
-        // loop on targets to unactivate them
-        if (this._$targets) {
-            // @ts-ignore
-            this._$targets.forEach(($target) => {
-                if (this._component.props.activeClass) {
-                    $target.classList.remove(this._component.props.activeClass);
-                }
-                if (this._component.props.activeAttribute) {
-                    $target.removeAttribute(this._component.props.activeAttribute);
-                }
-            });
-        }
+            // loop on targets to unactivate them
+            if (this._$targets) {
+                // @ts-ignore
+                this._$targets.forEach(($target) => {
+                    if (this._component.props.activeClass) {
+                        $target.classList.remove(this._component.props.activeClass);
+                    }
+                    if (this._component.props.activeAttribute) {
+                        $target.removeAttribute(this._component.props.activeAttribute);
+                    }
+                });
+            }
+        }, this._component.props.unactivateTimeout);
     }
     render() {
         return html``;

@@ -43,7 +43,7 @@ export default function ({
         * @feature       Support vertical rhythm
         * 
         * @example        html
-        * <ul class="s-list--interactive">
+        * <ul class="s-list\:interactive">
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>

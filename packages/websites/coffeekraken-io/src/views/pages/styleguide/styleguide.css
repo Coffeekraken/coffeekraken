@@ -14,4 +14,17 @@
             font-size: 1em;
         }
     }
+
+    .__preview {
+        background-color: sugar.color(main, background);
+        background-position: 0 0;
+        background-size: cover;
+        animation: subnav-bkg 240s linear;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+
+        @sugar.theme.when (dark) {
+            background-image: url('/src/img/discord-illustration-05-bkg.png');
+        }
+    }
 }

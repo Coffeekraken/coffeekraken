@@ -1,6 +1,7 @@
 s-code-example {
-    @sugar.theme(dark);
-    @sugar.depth(100);
+    display: block;
+    @sugar.theme (dark);
+    @sugar.depth (100);
     @sugar.border.radius();
 }
 

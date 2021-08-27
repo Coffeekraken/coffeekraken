@@ -71,6 +71,11 @@ export class SComponentUtilsDefaultInterface extends __SInterface {
             default: false,
             physical: true,
         },
+        ready: {
+            type: 'Boolean',
+            default: false,
+            physical: true,
+        },
         mountWhen: {
             type: 'String',
             values: ['directly', 'inViewport'],
@@ -303,9 +308,19 @@ export default class SComponentUtils extends __SClass {
             });
             superUpdated?.(changedProperties);
         };
-        Object.keys(this.props).forEach((prop) => {
-            _updateProp(prop, this.node[prop]);
-        });
+        // Object.keys(this.props).forEach((prop) => {
+        //     _updateProp(prop, this.node[prop]);
+        // });
+
+        // @ts-ignore
+        const superFirstUpdated = this.node.firstUpdated.bind(this.node);
+        // @ts-ignore
+        this.node.firstUpdated = () => {
+            superFirstUpdated?.();
+            setTimeout(() => {
+                this.node.ready = true;
+            }, 1000);
+        };
 
         // @ts-ignore
         const styleStr = this.node.constructor.getStyles();
@@ -355,8 +370,18 @@ export default class SComponentUtils extends __SClass {
                 ...(definition.lit ?? {}),
             };
             // const type = definition.type?.type ?? definition.type ?? 'string';
-            if (definition.physical) {
+            if (
+                definition.physical ||
+                definition.type?.toLowerCase?.() === 'boolean' ||
+                definition.type?.type?.toLowerCase?.() === 'boolean'
+            ) {
                 propertiesObj[prop].reflect = true;
+                propertiesObj[prop].converter = {
+                    toAttribute(value) {
+                        if (value === false || value === null) return null;
+                        return String(value);
+                    },
+                };
             }
         });
 
@@ -380,17 +405,17 @@ export default class SComponentUtils extends __SClass {
     async mount() {
         this.shouldUpdate = true;
         // @ts-ignore
-        this.node.requestUpdate?.(); // litelement update
-
+        // this.node.requestUpdate?.(); // litelement update
+        // @ts-ignore
         await __wait();
         // adopting parent styles
         if (this.props.adoptStyle) this._adoptStyle();
-        Object.keys(this.props).forEach((prop) => {
-            this.node[prop] = this.props[prop];
-        });
         await __wait();
-        // @ts-ignore
         this.node.mounted = true;
+        // Object.keys(this.props).forEach((prop) => {
+        //     this.node[prop] = this.props[prop];
+        // });
+        // await __wait();
     }
 
     static _styleNodes = [];

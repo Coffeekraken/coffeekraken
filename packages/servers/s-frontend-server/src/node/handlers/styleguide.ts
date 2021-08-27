@@ -85,6 +85,7 @@ export default function styleguide(req, res, settings = {}) {
         // });
 
         const docView = new __SViewRenderer('pages.styleguide.styleguide');
+
         const pageHtml = await docView.render({
             ...(res.templateData || {}),
             docblocks,

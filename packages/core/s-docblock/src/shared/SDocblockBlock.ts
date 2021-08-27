@@ -381,6 +381,7 @@ SDocblockBlock.registerTag('version', __simpleValueTag);
 SDocblockBlock.registerTag('enum', __simpleValueTag);
 SDocblockBlock.registerTag('src', __simpleValueTag);
 SDocblockBlock.registerTag('import', __simpleValueTag);
+SDocblockBlock.registerTag('install', __simpleValueTag);
 SDocblockBlock.registerTag('feature', __simpleRepeatableValue);
 SDocblockBlock.registerTag('description', __descriptionTag);
 SDocblockBlock.registerTag('desc', __descriptionTag);

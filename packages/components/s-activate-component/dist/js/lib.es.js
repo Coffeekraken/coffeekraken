@@ -5,7 +5,8 @@ class SActivateComponentInterface extends __SInterface {
 }
 SActivateComponentInterface.definition = {
   href: {
-    type: "String"
+    type: "String",
+    default: ""
   },
   group: {
     type: "String"
@@ -142,7 +143,7 @@ class SActivate extends SLitElement {
     let targets;
     if (this._hrefSelector)
       targets = Array.from(document.querySelectorAll(this._hrefSelector));
-    if (targets.length)
+    if (targets === null || targets === void 0 ? void 0 : targets.length)
       this._$targets = targets;
     if (this._component.props.group) {
       this._$groupElements = Array.from(document.querySelectorAll(`s-activate[group="${this._component.props.group}"]`));

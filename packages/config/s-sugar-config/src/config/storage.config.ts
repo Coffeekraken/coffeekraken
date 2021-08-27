@@ -1,11 +1,25 @@
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 
 export default function (env) {
     if (env.platform !== 'node') return;
 
     return {
+        system: {
+            /**
+             * @name            tmpDir
+             * @namespace       config.storage.system
+             * @type            String
+             *
+             * Configure where is located the system "temp" folder
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            tmpDir: __systemTmpDir(),
+        },
         package: {
             /**
              * @name            rootDir

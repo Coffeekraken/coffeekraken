@@ -75,7 +75,7 @@ export default class SActivate extends SLitElement {
 
         let targets;
         if (this._hrefSelector) targets = Array.from(document.querySelectorAll(this._hrefSelector));
-        if (targets.length) this._$targets = targets;
+        if (targets?.length) this._$targets = targets;
 
         if (this._component.props.group) {
             this._$groupElements = Array.from(

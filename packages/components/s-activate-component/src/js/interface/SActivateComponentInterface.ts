@@ -4,6 +4,7 @@ export default class SActivateComponentInterface extends __SInterface {
     static definition = {
         href: {
             type: 'String',
+            default: '',
         },
         group: {
             type: 'String',

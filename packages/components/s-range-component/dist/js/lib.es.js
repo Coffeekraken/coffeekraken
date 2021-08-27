@@ -70,8 +70,10 @@ class SRange extends SLitElement {
     super();
     this._component = void 0;
     this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      interface: SRangeComponentInterface,
-      defaultProps: {}
+      componentUtils: {
+        interface: SRangeComponentInterface,
+        defaultProps: {}
+      }
     });
   }
   static get properties() {

@@ -14,6 +14,7 @@ import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __fs from 'fs';
+import __fsExtra from 'fs-extra';
 import __SDuration from '@coffeekraken/s-duration';
 import __path from 'path';
 import __STheme from '@coffeekraken/s-theme';
@@ -139,6 +140,9 @@ class SSugarCli {
             const config = await __SSugarConfig.load();
             // console.log(__SSugarConfig.get('markdownBuilder'));
             // return;
+
+            // clean somr folders like tmp, etc...
+            __fsExtra.emptyDirSync(__SSugarConfig.get('storage.package.tmpDir'));
 
             __SBench.step('sugar.cli', 'afterLoadConfig');
 

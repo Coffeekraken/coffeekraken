@@ -21,7 +21,16 @@
 
     .__banner {
         position: relative;
-        /* background: sugar.color(ui, surface); */
+        background-color: sugar.color(main, background);
+        background-position: 0 50%;
+        background-size: contain;
+        animation: subnav-bkg 240s linear;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+
+        @sugar.theme.when (dark) {
+            background-image: url('/src/img/discord-illustration-05-bkg.png');
+        }
 
         .s-grid--12 {
             position: relative;
@@ -53,106 +62,5 @@
             clip-path: polygon(0% 0%, 100% 0, calc(100% - 100px) 100%, 0% 100%);
             transition: all ease-in-out 0.2s;
         } */
-    }
-
-    .__toolbar {
-        background: sugar.color(ui, surface);
-        position: sticky;
-        top: 100px;
-        z-index: 10;
-
-        [class*='s-platform-'] {
-            font-size: 1em;
-        }
-    }
-
-    .__toolbar-issue {
-        .s-tooltip {
-            background-image: url('/src/img/issue-tooltip-bkg.jpg');
-            background-size: cover;
-            background-position: bottom center;
-            min-width: 50ch;
-            padding: sugar.space(30);
-            /* @sugar.color.remap(ui, accent); */
-
-            &:before {
-                content: '';
-                display: block;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                z-index: 0;
-
-                @sugar.gradient (sugar.color(ui, surface), rgba(0,0,0,0));
-            }
-        }
-    }
-
-    .__nav {
-        position: sticky;
-        top: 208px;
-        max-height: calc(100vh - 140px);
-        overflow: auto;
-
-        [class*='s-list'] {
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            transition: all 0.2s ease-in-out;
-            margin-left: 0.4em;
-        }
-
-        .__nav-group[active] + [class*='s-list'] {
-            opacity: 1;
-            max-height: 3000px;
-        }
-    }
-
-    .__nav-group {
-        display: block;
-        cursor: pointer;
-
-        .s-h3 {
-            color: sugar.color(complementary);
-            transition: color 0.2s ease-in-out;
-        }
-
-        .__nav-group-toggle {
-            display: inline-block;
-            width: 0.8em;
-            height: 0.8em;
-            border: 1px solid sugar.color(main, text);
-            position: relative;
-            top: 0.05em;
-            margin-right: 0.2em;
-
-            &:before,
-            &:after {
-                content: '';
-                display: block;
-                width: 50%;
-                height: 2px;
-                background: sugar.color(main, text);
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            &:after {
-                transform: translate(-50%, -50%) rotate(270deg);
-                transition: transform 0.2s ease-in-out;
-            }
-        }
-
-        &[active] {
-            .s-h3 {
-                color: sugar.color(accent);
-            }
-            .__nav-group-toggle:after {
-                transform: translate(-50%, -50%) rotate(0);
-            }
-        }
     }
 }

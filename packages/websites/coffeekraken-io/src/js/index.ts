@@ -22,12 +22,12 @@ import { webcomponent as __CkSettingsWebcomponent } from './components/CkSetting
 // import "./generic/docShortcut";
 
 // internal components
-__DocNavComponent();
+// __DocNavComponent();
 __VersionSelector();
 __CkSettingsWebcomponent();
 
 __SComponentUtils.setDefaultProps('*', {
-    // mountWhen: 'inViewport',
+    mountWhen: 'inViewport',
     // mountWhen: 'directly',
     defaultStyle: true,
 });
@@ -44,30 +44,30 @@ __SComponentUtils.setDefaultProps('s-code-example', {
 // webcomponents
 __SCodeExampleWebcomponent();
 __SActivateWebcomponent();
-__SConfigExplorerWebcomponent();
+// __SConfigExplorerWebcomponent();
 __SSidePanelWebcomponent();
 __SColorPickerWebcomponent();
 __SDatePickerWebcomponent();
 __SRangeWebcomponent();
 
 // features
-import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
-import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
+// import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
+// import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
 
 // features
-__smoothScroll({
-    scroll: {
-        offset: 188,
-    },
-});
-__linksStateAttributes();
+// __smoothScroll({
+//     scroll: {
+//         offset: 188,
+//     },
+// });
+// __linksStateAttributes();
 
-document.addEventListener('scroll', (e) => {
-    if (document.body.scrollTop >= 10) {
-        document.body.classList.add('scrolled');
-    } else {
-        document.body.classList.remove('scrolled');
-    }
-});
+// document.addEventListener('scroll', (e) => {
+//     if (document.body.scrollTop >= 10) {
+//         document.body.classList.add('scrolled');
+//     } else {
+//         document.body.classList.remove('scrolled');
+//     }
+// });
 
 __expandPleasantCssClassnamesLive();

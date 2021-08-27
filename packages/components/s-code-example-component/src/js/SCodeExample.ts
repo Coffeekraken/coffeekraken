@@ -98,7 +98,11 @@ export default class SCodeExample extends SLitElement {
     // }
     render() {
         return html`
-            <div class="${this._component?.className()}" toolbar-position="${this._component?.props.toolbarPosition}">
+            <div
+                class="${this._component?.className()}"
+                ?ready="${this.ready}"
+                toolbar-position="${this._component?.props.toolbarPosition}"
+            >
                 <div class="templates">
                     <slot></slot>
                 </div>
@@ -195,5 +199,7 @@ export default class SCodeExample extends SLitElement {
 
 export function webcomponent(props: Partial<ISCodeExampleComponentProps> = {}, tagName = 's-code-example') {
     __SComponentUtils.setDefaultProps(tagName, props);
+    const $tags = document.querySelectorAll(tagName);
+    console.log($tags);
     customElements.define(tagName, SCodeExample);
 }

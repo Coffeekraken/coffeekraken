@@ -44,6 +44,8 @@ export default function ({
         --track-color: sugar.color(main, ui);
         --thumb-color: sugar.color(ui);
 
+        --focus-spread: sugar.theme(ui.range.focusSpread);
+
         --thumb-radius: 50%;
         --thumb-height: 1em;
         --thumb-width: 1em;
@@ -68,23 +70,25 @@ export default function ({
     const trackCssBare = `
         height: var(--track-height);
         width: 100%;
-        cursor: default;
+        cursor: pointer;
     `;
     const thumbCss = `
         background: var(--thumb-color);
         border: var(--thumb-border-width) solid var(--thumb-border-color);
         border-radius: var(--thumb-radius);
+        box-shadow: 0 0 0 0 var(--thumb-border-color);
     `;
     const thumbCssBare = `
         box-sizing: border-box;
-        cursor: default;
         height: var(--thumb-height);
         width: var(--thumb-width);
+        cursor: pointer;
     `;
 
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
+            &:hover,
             &:focus {
 
                 &::-webkit-slider-runnable-track {
@@ -98,6 +102,27 @@ export default function ({
                 &::-ms-fill-upper {
                     background: var(--track-color);
                 }
+
+                &::-webkit-slider-thumb {
+                     box-shadow: 0 0 0 var(--focus-spread) var(--thumb-border-color);
+                }
+                &::-moz-range-thumb {
+                     box-shadow: 0 0 0 var(--focus-spread) var(--thumb-border-color);
+                }
+                &::-ms-thumb {
+                     box-shadow: 0 0 0 var(--focus-spread) var(--thumb-border-color);
+                }
+
+            }
+
+            &::-webkit-slider-thumb {
+                ${thumbCss}
+            }
+             &::-moz-range-thumb {
+                ${thumbCss}
+            }
+            &::-ms-thumb {
+                ${thumbCss}
             }
 
             &::-webkit-slider-runnable-track {
@@ -106,22 +131,12 @@ export default function ({
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: var(--track-radius);
             }
-
-            &::-webkit-slider-thumb {
-                ${thumbCss}
-            }
-
             &::-moz-range-track {
                 ${trackCss}
                 background: var(--track-color);
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: var(--track-radius);
             }
-
-            &::-moz-range-thumb {
-                ${thumbCss}
-            }
-
             &::-ms-track {
                 ${trackCss}
                 background: transparent;
@@ -129,20 +144,15 @@ export default function ({
                 border-width: calc(var(--thumb-height) / 2) 0;
                 color: transparent;
             }
-
             &::-ms-fill-lower {
                 background: var(--ie-bottom-track-color);
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
             }
-
             &::-ms-fill-upper {
                 background: var(--track-color);
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
-            }
-            &::-ms-thumb {
-                ${thumbCss}
             }
     `);
     }

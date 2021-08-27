@@ -65,7 +65,7 @@ export default class SClipboardCopy extends SLitElement {
     }
     render() {
         return html`
-            <div class="root" ref="root" state="${this._state}">
+            <div class="${this._component.className('')}" state="${this._state}">
                 <svg
                     ref="svg"
                     class="icon-copy"

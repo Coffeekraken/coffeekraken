@@ -19,13 +19,12 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function simpleRepeatableValue(data, blockSettings) {
-
     data = Array.from(data);
 
-  data = data.map(d => {
-    return d.value;
-  });
+    data = data.map((d) => {
+        return d.value;
+    });
 
-  return data;
+    return data;
 }
 export default simpleRepeatableValue;

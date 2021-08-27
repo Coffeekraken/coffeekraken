@@ -94,8 +94,8 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          background-color: sugar.color(main, background);
-          color: sugar.color(main, backgroundForeground);
+          background-color: sugar.color(ui, surface);
+          color: sugar.color(ui, surfaceForeground);
           border-radius: sugar.theme(ui.tooltip.borderRadius);
           transition: sugar.theme(ui.tooltip.transition);
           padding: sugar.theme(ui.tooltip.padding);

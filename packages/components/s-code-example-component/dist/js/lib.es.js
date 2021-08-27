@@ -1934,7 +1934,390 @@ function javascript(hljs) {
     ]
   };
 }
-var __css = '.hljs {\n    display: block;\n    overflow: hidden;\n    padding: var(--s-theme-space-30, 24px);\n    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    line-height: 1.5 !important;\n}\n\n    .hljs,\n    .hljs.hljs-subst {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    }\n\n    .hljs .hljs-selector-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-selector-id {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n        font-weight: bold;\n    }\n\n    .hljs .hljs-selector-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-pseudo {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-addition {\n        background-color: rgba(163, 190, 140, 0.5);\n    }\n\n    .hljs .hljs-deletion {\n        background-color: rgba(191, 97, 106, 0.5);\n    }\n\n    .hljs .hljs-built_in,\n    .hljs .hljs-type {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-function {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-function > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-keyword,\n    .hljs .hljs-literal,\n    .hljs .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-number {\n        color: #B48EAD;\n    }\n\n    .hljs .hljs-regexp {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-title {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-params {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-bullet {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-code {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-emphasis {\n        font-style: italic;\n    }\n\n    .hljs .hljs-formula {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-strong {\n        font-weight: bold;\n    }\n\n    .hljs .hljs-link:hover {\n        text-decoration: underline;\n    }\n\n    .hljs .hljs-quote {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-comment {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-doctag {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-meta,\n    .hljs .hljs-meta-keyword {\n        color: #5E81AC;\n    }\n\n    .hljs .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-30-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-30-lightness-offset, 0)) * 1%),var(--s-theme-color-text-30-a, 1));\n    }\n\n    .hljs .hljs-builtin-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-section {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-tag {\n        color: #5E81AC;\n    }\n\n    .hljs.abnf .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.abnf .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.apache .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.apache .hljs-section {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.arduino .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.aspectj .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.aspectj > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs.bnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.clojure .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.clojure .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.coq .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.cpp .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.css .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.css .hljs-keyword {\n        color: #D08770;\n    }\n\n    .hljs.diff .hljs-meta {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.ebnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.glsl .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.groovy .hljs-meta:not(:first-child) {\n        color: #D08770;\n    }\n\n    .hljs.haxe .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.java .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.ldif .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.lisp .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.lua .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.moonscript .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-section {\n        color: #5E81AC;\n    }\n\n    .hljs.pf .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.processing .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.scss .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.stylus .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.swift .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.vim .hljs-built_in {\n        color: #88C0D0;\n        font-style: italic;\n    }\n\n    .hljs.yaml .hljs-meta {\n        color: #D08770;\n    }\n\n:host {  \n    display: block;\n    border-radius: var(--s-theme-ui-code-borderRadius, 6px);\n    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;\n    overflow: hidden;\n\n}\n\n.s-rhythm--vertical > :host, :host.s-rhythm--vertical {\n            margin-bottom: var(--s-theme-margin-40, 36px);\n}\n\n  .s-code-example__slot {\n    display: none;\n  }\n\n  .s-code-example__nav {\n    position: relative;\n  }\n\n  .s-code-example__tabs {\n    display: flex;\n    list-style: none;\n    border-bottom-left-radius: 0 !important;\n    border-bottom-right-radius: 0 !important;\n  }\n  .s-code-example__tab {\n\n  }\n\n  .s-code-example__content {\n    overflow: hidden;\n    position: relative;\n  }\n\n  .s-code-example__code {\n    display: none;\n    border-top-left-radius: 0 !important;\n    border-top-right-radius: 0 !important;\n    overflow: hidden;\n    line-height: 0;\n  }\n\n  .s-code-example__code[active] {\n      display: block;\n    }\n\n  .s-code-example__code > code {\n      line-height: 1;\n    }\n\n  .s-code-example__toolbar {\n    position: absolute;\n    right: var(--s-theme-space-20, 12px);\n    top: var(--s-theme-space-20, 12px);\n    z-index: 10;\n  }\n\n  .s-code-example__toolbar > * {\n      font-size: 20px;\n      opacity: 0.5;\n    }\n\n  .s-code-example__toolbar > *:hover {\n        opacity: 1;\n      }\n\n  [toolbar-position="nav"] .s-code-example__toolbar {\n      right: var(--s-theme-space-20, 12px);\n      top: 50%;\n      transform: translate(0, -50%);\n    }';
+var __css = `.hljs {
+    display: block;
+    overflow: hidden;
+    padding: var(--s-theme-space-30, 24px);
+    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
+    line-height: 1.5 !important;
+}
+
+    .hljs,
+    .hljs.hljs-subst {
+        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
+    }
+
+    .hljs .hljs-selector-tag {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-selector-id {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+        font-weight: bold;
+    }
+
+    .hljs .hljs-selector-class {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-selector-attr {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-selector-pseudo {
+        color: #88C0D0;
+    }
+
+    .hljs .hljs-addition {
+        background-color: rgba(163, 190, 140, 0.5);
+    }
+
+    .hljs .hljs-deletion {
+        background-color: rgba(191, 97, 106, 0.5);
+    }
+
+    .hljs .hljs-built_in,
+    .hljs .hljs-type {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-class {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-function {
+        color: #88C0D0;
+    }
+
+    .hljs .hljs-function > .hljs-title {
+        color: #88C0D0;
+    }
+
+    .hljs .hljs-keyword,
+    .hljs .hljs-literal,
+    .hljs .hljs-symbol {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-number {
+        color: #B48EAD;
+    }
+
+    .hljs .hljs-regexp {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-string {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-title {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-params {
+        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));
+    }
+
+    .hljs .hljs-bullet {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-code {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-emphasis {
+        font-style: italic;
+    }
+
+    .hljs .hljs-formula {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-strong {
+        font-weight: bold;
+    }
+
+    .hljs .hljs-link:hover {
+        text-decoration: underline;
+    }
+
+    .hljs .hljs-quote {
+        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));
+    }
+
+    .hljs .hljs-comment {
+        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));
+    }
+
+    .hljs .hljs-doctag {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-meta,
+    .hljs .hljs-meta-keyword {
+        color: #5E81AC;
+    }
+
+    .hljs .hljs-meta-string {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-attr {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs .hljs-attribute {
+        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-30-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-30-lightness-offset, 0)) * 1%),var(--s-theme-color-text-30-a, 1));
+    }
+
+    .hljs .hljs-builtin-name {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-name {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-section {
+        color: #88C0D0;
+    }
+
+    .hljs .hljs-tag {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs .hljs-variable {
+        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));
+    }
+
+    .hljs .hljs-template-variable {
+        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));
+    }
+
+    .hljs .hljs-template-tag {
+        color: #5E81AC;
+    }
+
+    .hljs.abnf .hljs-attribute {
+        color: #88C0D0;
+    }
+
+    .hljs.abnf .hljs-symbol {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs.apache .hljs-attribute {
+        color: #88C0D0;
+    }
+
+    .hljs.apache .hljs-section {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs.arduino .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.aspectj .hljs-meta {
+        color: #D08770;
+    }
+
+    .hljs.aspectj > .hljs-title {
+        color: #88C0D0;
+    }
+
+    .hljs.bnf .hljs-attribute {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs.clojure .hljs-name {
+        color: #88C0D0;
+    }
+
+    .hljs.clojure .hljs-symbol {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs.coq .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.cpp .hljs-meta-string {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs.css .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.css .hljs-keyword {
+        color: #D08770;
+    }
+
+    .hljs.diff .hljs-meta {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs.ebnf .hljs-attribute {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs.glsl .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.groovy .hljs-meta:not(:first-child) {
+        color: #D08770;
+    }
+
+    .hljs.haxe .hljs-meta {
+        color: #D08770;
+    }
+
+    .hljs.java .hljs-meta {
+        color: #D08770;
+    }
+
+    .hljs.ldif .hljs-attribute {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));
+    }
+
+    .hljs.lisp .hljs-name {
+        color: #88C0D0;
+    }
+
+    .hljs.lua .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.moonscript .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.nginx .hljs-attribute {
+        color: #88C0D0;
+    }
+
+    .hljs.nginx .hljs-section {
+        color: #5E81AC;
+    }
+
+    .hljs.pf .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.processing .hljs-built_in {
+        color: #88C0D0;
+    }
+
+    .hljs.scss .hljs-keyword {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs.stylus .hljs-keyword {
+        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+    }
+
+    .hljs.swift .hljs-meta {
+        color: #D08770;
+    }
+
+    .hljs.vim .hljs-built_in {
+        color: #88C0D0;
+        font-style: italic;
+    }
+
+    .hljs.yaml .hljs-meta {
+        color: #D08770;
+    }
+
+:host {  
+    display: block;
+    border-radius: var(--s-theme-ui-code-borderRadius, 6px);
+    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;
+    overflow: hidden;
+
+}
+
+.s-rhythm--vertical > :host, :host.s-rhythm--vertical {
+            margin-bottom: var(--s-theme-margin-40, 36px);
+}
+
+s-code-example:not([ready]) > * {
+            display: block;
+        }
+
+s-code-example:not([ready]):before {
+            display: block;
+            content: 'Loading example. Please wait...';
+            background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+            color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
+            padding: var(--s-theme-padding-40, 36px);box-shadow: var(--s-theme-depth-100, 0);border-radius: 6px;
+        }
+
+  .s-code-example__slot {
+    display: none;
+  }
+
+  .s-code-example__nav {
+    position: relative;
+  }
+
+  .s-code-example__tabs {
+    display: flex;
+    list-style: none;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  .s-code-example__tab {
+
+  }
+
+  .s-code-example__content {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .s-code-example__code {
+    display: none;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .s-code-example__code[active] {
+      display: block;
+    }
+
+  .s-code-example__code > code {
+      line-height: 1;
+    }
+
+  .s-code-example__toolbar {
+    position: absolute;
+    right: var(--s-theme-space-20, 12px);
+    top: var(--s-theme-space-20, 12px);
+    z-index: 10;
+  }
+
+  .s-code-example__toolbar > * {
+      font-size: 20px;
+      opacity: 0.5;
+    }
+
+  .s-code-example__toolbar > *:hover {
+        opacity: 1;
+      }
+
+  [toolbar-position="nav"] .s-code-example__toolbar {
+      right: var(--s-theme-space-20, 12px);
+      top: 50%;
+      transform: translate(0, -50%);
+    }`;
 class SCodeExampleInterface extends __SInterface {
 }
 SCodeExampleInterface.definition = Object.assign(Object.assign({}, SComponentUtilsDefaultInterface.definition), {theme: {
@@ -2040,7 +2423,11 @@ class SCodeExample extends SLitElement {
   render() {
     var _a, _b, _c, _d, _e;
     return html`
-            <div class="${(_a = this._component) === null || _a === void 0 ? void 0 : _a.className()}" toolbar-position="${(_b = this._component) === null || _b === void 0 ? void 0 : _b.props.toolbarPosition}">
+            <div
+                class="${(_a = this._component) === null || _a === void 0 ? void 0 : _a.className()}"
+                ?ready="${this.ready}"
+                toolbar-position="${(_b = this._component) === null || _b === void 0 ? void 0 : _b.props.toolbarPosition}"
+            >
                 <div class="templates">
                     <slot></slot>
                 </div>
@@ -2144,6 +2531,8 @@ __decorate([
 ], SCodeExample.prototype, "$templates", void 0);
 function webcomponent(props = {}, tagName = "s-code-example") {
   __SComponentUtils.setDefaultProps(tagName, props);
+  const $tags = document.querySelectorAll(tagName);
+  console.log($tags);
   customElements.define(tagName, SCodeExample);
 }
 export default SCodeExample;

@@ -23,42 +23,44 @@ import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-  settings: {},
-  render(viewPath: string, data: any = {}, settings: ISViewRendererSettings) {
-    
-    return new __SPromise(({resolve, reject, emit}) => {
+    settings: {},
+    render(viewPath: string, data: any = {}, settings: ISViewRendererSettings) {
+        return new __SPromise(
+            ({ resolve, reject, emit }) => {
+                if (!__fs.existsSync(viewPath)) {
+                    return reject(`It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`);
+                }
 
-        if (!__fs.existsSync(viewPath)) {
-          return reject(
-            `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`
-          );
-        }
+                if (!__fs.existsSync(settings.cacheDir)) {
+                    __fs.mkdirSync(settings.cacheDir, { recursive: true });
+                }
 
-        if (!__fs.existsSync(settings.cacheDir)) {
-          __fs.mkdirSync(settings.cacheDir, { recursive: true });
-        }
+                let viewDotPath = viewPath;
+                __unique([...settings.rootDirs]).forEach((path) => {
+                    viewDotPath = viewDotPath.replace(`${path}/`, '');
+                });
+                viewDotPath = viewDotPath.split('/').join('.').replace('.blade.php', '');
 
-        let viewDotPath = viewPath;
-            __unique([...settings.rootDirs]).forEach((path) => {
-              viewDotPath = viewDotPath.replace(`${path}/`, '');
-            });
-            viewDotPath = viewDotPath
-              .split('/')
-              .join('.')
-              .replace('.blade.php', '');
-
-        resolve(__execPhp(__dirname() + '/compile.php', {
-          rootDirs: __unique([...settings.rootDirs]),
-          viewDotPath,
-          data,
-          cacheDir: settings.cacheDir
-        }));
-      },
-      {
-        eventEmitter: {
-          bind: this
-        }
-      }
-    );
-  }
+                resolve(
+                    __execPhp(
+                        __dirname() + '/compile.php',
+                        {
+                            rootDirs: __unique([...settings.rootDirs]),
+                            viewDotPath,
+                            data,
+                            cacheDir: settings.cacheDir,
+                        },
+                        {
+                            paramsThroughFile: true,
+                        },
+                    ),
+                );
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
+    },
 };

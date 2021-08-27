@@ -20,14 +20,14 @@ body {
     }
 }
 
-s-code-example {
-    opacity: 0;
+/* s-code-example {
+    opacity: 0.1;
     transition: all 0.2s ease-out;
 
     &[mounted] {
         opacity: 1;
     }
-}
+} */
 
 a:active {
     color: red;
@@ -47,6 +47,7 @@ a:active {
   fa:search:search
   fa:radiation:nothing
   fa:download:import
+  fa:cloud-download-alt:install
   fa:cogs:settings
   fab:vuejs:vuejs
   fa:tasks:tasks

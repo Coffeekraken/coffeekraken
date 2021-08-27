@@ -1,0 +1,18 @@
+@if ($block->return)
+    <h4 id="return-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+        <i class="s-icon:return s-color:accent"></i>&nbsp;&nbsp;Return
+    </h4>
+
+    <header class="s-flex s-bg:ui-surface">
+        <div class="s-typo:bold s-p:20">
+            {{ implode(' | ', $block->return->type) }}
+        </div>
+        @if ($block->return->defaultStr)
+            <div class="s-color:info s-p:20">
+                {{ $block->return->defaultStr }}
+            </div>
+        @endif
+    </header>
+    <p class="s-typo:p s-p:20">{{ $block->return->description }}</p> 
+
+@endif

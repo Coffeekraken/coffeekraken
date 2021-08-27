@@ -20,7 +20,7 @@ body {
     }
 
     @sugar.theme.when (dark) {
-        background-color: sugar.color(main, --darken 35);
+        background-color: sugar.color(main, 85);
     }
 
     svg .main {
@@ -32,6 +32,15 @@ body {
 
     .s-tooltip {
         padding: sugar.space(20);
+    }
+
+    .__main-link {
+        &:hover,
+        &:focus-within {
+            & > *:first-child {
+                color: sugar.color(accent);
+            }
+        }
     }
 
     @keyframes subnav-bkg {
@@ -49,40 +58,42 @@ body {
     .__subnav {
         position: absolute;
         padding: sugar.padding(50) 0;
-        top: calc(100% + 20px);
+        top: calc(100% + 22px);
         left: 50%;
         transform: translateX(-50%);
         width: 100vw;
         background-color: sugar.color(main, surface);
-
         background-position: 0 0;
-        background-size: cover;
+        background-size: contain;
         text-align: left;
         display: none;
-        animation: subnav-bkg 240s linear;
+        animation: subnav-bkg 480s linear;
         animation-fill-mode: both;
         animation-iteration-count: infinite;
 
         @sugar.theme.when (dark) {
-            background-image: url('/src/img/discord-illustration-bkg.png');
+            background-color: sugar.color(main, 85);
+            background-image: url('/src/img/discord-illustration-02-bkg.png');
         }
 
         &:before {
             z-index: -1;
             content: '';
             position: absolute;
-            top: 0;
+            top: 100%;
             left: 0;
             width: 100vw;
             height: 100vh;
-            opacity: 0.5;
+            /* opacity: 0.7; */
             transition: sugar.transition(fast);
-            background-color: sugar.color(main, surface);
+            /* background-color: sugar.color(main, surface); */
             pointer-events: none;
+            backdrop-filter: blur(30px);
         }
     }
     [active] .__subnav {
         display: block;
+        /* border-bottom: 1px solid sugar.color(accent, border); */
     }
 
     .__subnav-chapters {
@@ -117,7 +128,7 @@ body {
             top: calc(sugar.padding(50) * -1);
             width: 400px;
             height: calc(100% + sugar.padding(50) * 2);
-            background: linear-gradient(90deg, sugar.color(main, background), sugar.color(main, --alpha 0));
+            background: linear-gradient(95deg, sugar.color(main, 85), sugar.color(main, --alpha 0));
         }
     }
 

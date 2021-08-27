@@ -13,7 +13,12 @@ $monorepoSugarPath = realpath(__DIR__.'/../../../../../../tools/sugar/src/php/au
 if ($nodeModulesSugarPath) require_once($nodeModulesSugarPath);
 else if ($monorepoSugarPath) require_once($monorepoSugarPath);
 
-$params = json_decode($argv[1]);
+$params = [];
+
+if (file_exists($argv[1])) {
+    $params = json_decode(file_get_contents($argv[1]));
+    unlink($argv[1]);
+}
 
 // prepare data to pass it to the template engine
 $data = $params->data;

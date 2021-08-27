@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isVisible from '../isVisible';
+import __isVisible from '../is/visible';
 
 /**
  * @name        closestNotVisible
@@ -31,14 +31,14 @@ import __isVisible from '../isVisible';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function closestNotVisible(elm: HTMLElement): HTMLElement {
-  const originalElm = elm;
-  elm = elm.parentNode;
-  while (elm && elm != originalElm.ownerDocument) {
-    if (!__isVisible(elm)) {
-      return elm;
-    }
+    const originalElm = elm;
     elm = elm.parentNode;
-  }
-  return null;
+    while (elm && elm != originalElm.ownerDocument) {
+        if (!__isVisible(elm)) {
+            return elm;
+        }
+        elm = elm.parentNode;
+    }
+    return null;
 }
 export default closestNotVisible;

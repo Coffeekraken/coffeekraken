@@ -1,93 +1,82 @@
 @sugar.highlightjs.theme;
 
-:host {  
+:host {
     display: block;
     border-radius: sugar.theme(ui.code.borderRadius);
     border: sugar.color(ui, border) solid 1px;
     overflow: hidden;
 
-    @sugar.utils.configToCss(ui.code, $only: rhythm-vertical);
-
+    /* @sugar.utils.configToCss(ui.code, $only: rhythm-vertical); */
 }
 
-s-code-example {
-    
-    &:not([ready]) {
+.s-code-example {
+    > * {
+        display: none;
+    }
+
+    &[ready] {
         > * {
             display: block;
         }
-
-        &:before {
-            display: block;
-            content: 'Loading example. Please wait...';
-            background: sugar.color(ui, surface);
-            color: sugar.color(ui, surfaceForeground);
-            padding: sugar.padding(40);
-
-            @sugar.depth (100);
-            @sugar.border.radius();
-        }
     }
-
 }
 
-  .s-code-example__slot {
+.s-code-example__slot {
     display: none;
-  }
+}
 
-  .s-code-example__nav {
+.s-code-example__nav {
     position: relative;
-  }
+}
 
-  .s-code-example__tabs {
+.s-code-example__tabs {
     display: flex;
     list-style: none;
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
-  }
-  .s-code-example__tab {
+}
+.s-code-example__tab {
+}
 
-  }
-
-  .s-code-example__content {
+.s-code-example__content {
     overflow: hidden;
     position: relative;
-  }
+}
 
-  .s-code-example__code {
+.s-code-example__code {
     display: none;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     overflow: hidden;
     line-height: 0;
-    
+
     &[active] {
-      display: block;
+        display: block;
     }
 
     & > code {
-      line-height: 1;
+        line-height: 1;
     }
-  }
+}
 
-  .s-code-example__toolbar {
+.s-code-example__toolbar {
     position: absolute;
     right: sugar.space(20);
     top: sugar.space(20);
     z-index: 10;
-    
+
     & > * {
-      font-size: 20px;
-      opacity: 0.5;
+        font-size: 20px;
+        opacity: 0.5;
 
-      &:hover {
-        opacity: 1;
-      }
+        &:hover {
+            opacity: 1;
+        }
     }
-  }
+}
 
-  [toolbar-position="nav"] .s-code-example__toolbar {
-      right: sugar.space(20);
-      top: 50%;
-      transform: translate(0, -50%);
-    }
+[toolbar-position='nav'] .s-code-example__toolbar {
+    right: sugar.space(20);
+    top: 50%;
+    transform: translate(0, -50%);
+}

@@ -312,15 +312,13 @@ export default class SComponentUtils extends __SClass {
         //     _updateProp(prop, this.node[prop]);
         // });
 
-        // @ts-ignore
-        const superFirstUpdated = this.node.firstUpdated.bind(this.node);
-        // @ts-ignore
-        this.node.firstUpdated = () => {
-            superFirstUpdated?.();
-            setTimeout(() => {
-                this.node.ready = true;
-            }, 1000);
-        };
+        // // @ts-ignore
+        // const superFirstUpdated = this.node.firstUpdated.bind(this.node);
+        // // @ts-ignore
+        // this.node.firstUpdated = () => {
+        //     superFirstUpdated?.();
+        //     console.log(this.node.tagName, 'ready');
+        // };
 
         // @ts-ignore
         const styleStr = this.node.constructor.getStyles();
@@ -407,19 +405,18 @@ export default class SComponentUtils extends __SClass {
         // @ts-ignore
         // this.node.requestUpdate?.(); // litelement update
         // @ts-ignore
-        await __wait();
+        // await __wait();
         // adopting parent styles
-        if (this.props.adoptStyle) this._adoptStyle();
-        await __wait();
+        if (this.props.adoptStyle) await this._adoptStyle();
         this.node.mounted = true;
+        this.node.ready = true;
         // Object.keys(this.props).forEach((prop) => {
         //     this.node[prop] = this.props[prop];
         // });
-        // await __wait();
     }
 
     static _styleNodes = [];
-    _adoptStyle() {
+    async _adoptStyle() {
         const $links = document.querySelectorAll('link[rel="stylesheet"]');
         if ($links && this.node.shadowRoot) {
             Array.from($links).forEach(async ($link) => {
@@ -499,6 +496,8 @@ export default class SComponentUtils extends __SClass {
                 ];
             });
         }
+
+        return true;
     }
 
     exposeApi(apiObj: any): void {

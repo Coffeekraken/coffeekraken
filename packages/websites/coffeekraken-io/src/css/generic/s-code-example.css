@@ -3,6 +3,23 @@ s-code-example {
     @sugar.theme (dark);
     @sugar.depth (100);
     @sugar.border.radius();
+
+    &:not([ready]) {
+        > * {
+            display: block;
+        }
+
+        &:before {
+            display: block;
+            content: 'Loading example. Please wait...';
+            background: sugar.color(ui, surface);
+            color: sugar.color(ui, surfaceForeground);
+            padding: sugar.padding(40);
+
+            @sugar.depth (100);
+            @sugar.border.radius();
+        }
+    }
 }
 
 .s-code-example__toolbar {

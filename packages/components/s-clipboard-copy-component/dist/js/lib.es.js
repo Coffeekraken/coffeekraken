@@ -1,7 +1,44 @@
-import {css, unsafeCSS, html, property} from "lit-element";
+import {css, unsafeCSS, html} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
 import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
 import __copy from "clipboard-copy";
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const standardProperty = (options, element) => {
+  if (element.kind === "method" && element.descriptor && !("value" in element.descriptor)) {
+    return {
+      ...element,
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  } else {
+    return {
+      kind: "field",
+      key: Symbol(),
+      placement: "own",
+      descriptor: {},
+      originalKey: element.key,
+      initializer() {
+        if (typeof element.initializer === "function") {
+          this[element.key] = element.initializer.call(this);
+        }
+      },
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  }
+};
+const legacyProperty = (options, proto, name) => {
+  proto.constructor.createProperty(name, options);
+};
+function property(options) {
+  return (protoOrDescriptor, name) => name !== void 0 ? legacyProperty(options, protoOrDescriptor, name) : standardProperty(options, protoOrDescriptor);
+}
 class SHighlightJsComponentInterface extends __SInterface {
 }
 SHighlightJsComponentInterface.definition = {
@@ -17,7 +54,7 @@ SHighlightJsComponentInterface.definition = {
 function copy(text) {
   return __copy(text);
 }
-var __css = ".s-clipboard-copy {\n    display: inline-block;\n    width: 1em;\n    height: 1em;\n    position: relative;\n    cursor: pointer;\n}\n\n    .s-clipboard-copy[state='pending'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='copy'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='success'] {\n        color: hsla(calc(var(--s-theme-color-success-h, 0) + var(--s-theme-color-success-spin ,0)),calc((var(--s-theme-color-success-s, 0) + var(--s-theme-color-success-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-success-l, 0) + var(--s-theme-color-success-lightness-offset, 0)) * 1%),var(--s-theme-color-success-a, 1));\n    }\n\n    .s-clipboard-copy[state='success'] .icon-success {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='error'] {\n        color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0) + var(--s-theme-color-error-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + var(--s-theme-color-error-lightness-offset, 0)) * 1%),var(--s-theme-color-error-a, 1));\n    }\n\n    .s-clipboard-copy[state='error'] .icon-error {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy svg {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -50%);\n        display: block;\n        width: 1em;\n        height: 1em;\n        background-size: contain;\n        opacity: 0;\n        pointer-events: none;\n    }\n";
+var __css = ".s-clipboard-copy {\n    display: inline-block;\n    width: 1em;\n    height: 1em;\n    position: relative;\n    cursor: pointer;\n}\n\n    .s-clipboard-copy:not([mounted]) > * {\n        opacity: 0.001;\n        pointer-events: none;\n    }\n\n    .s-clipboard-copy[state='pending'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='copy'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='success'] {\n        color: hsla(calc(var(--s-theme-color-success-h, 0) + var(--s-theme-color-success-spin ,0)),calc((var(--s-theme-color-success-s, 0) + var(--s-theme-color-success-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-success-l, 0) + var(--s-theme-color-success-lightness-offset, 0)) * 1%),var(--s-theme-color-success-a, 1));\n    }\n\n    .s-clipboard-copy[state='success'] .icon-success {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='error'] {\n        color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0) + var(--s-theme-color-error-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + var(--s-theme-color-error-lightness-offset, 0)) * 1%),var(--s-theme-color-error-a, 1));\n    }\n\n    .s-clipboard-copy[state='error'] .icon-error {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy svg {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -50%);\n        display: block;\n        width: 1em;\n        height: 1em;\n        background-size: contain;\n        opacity: 0;\n        pointer-events: none;\n    }\n";
 var __decorate = function(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
@@ -43,8 +80,6 @@ class SClipboardCopy extends SLitElement {
     return css`
             ${unsafeCSS(__css)}
         `;
-  }
-  firstUpdated() {
   }
   copy(text) {
     this._state = "copy";

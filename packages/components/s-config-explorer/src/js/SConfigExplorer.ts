@@ -1,5 +1,6 @@
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
-import { css, html, property, unsafeCSS, query } from 'lit-element';
+import { css, html, unsafeCSS } from 'lit';
+import { query, property } from 'lit/decorators.js';
 import __SConfigExplorerComponentInterface from './interface/SConfigExplorerComponentInterface';
 import __SRequest from '@coffeekraken/s-request';
 import __minimatch from 'minimatch';

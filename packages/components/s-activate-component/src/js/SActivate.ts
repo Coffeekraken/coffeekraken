@@ -1,4 +1,5 @@
-import { html, property, css, unsafeCSS, query, queryAssignedNodes } from 'lit-element';
+import { html, css, unsafeCSS } from 'lit';
+import { property } from 'lit/decorators.js';
 import __SActivateComponentInterface from './interface/SActivateComponentInterface';
 import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
@@ -61,12 +62,12 @@ export default class SActivate extends SLitElement {
         });
 
         // save state
-        if (this._component.props.saveState) {
+        if (this.saveState) {
             if (!this.id)
                 throw new Error(
                     `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
                 );
-            this._component.props.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
+            this.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
         }
 
         if (this._component.props.href) {
@@ -162,7 +163,7 @@ export default class SActivate extends SLitElement {
             }
 
             // add the "active" attribute to the component
-            this.setAttribute('active', 'true');
+            this.active = true;
 
             // loop on targets to activate them
             if (this._$targets) {

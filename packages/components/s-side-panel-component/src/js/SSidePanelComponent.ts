@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import { html, property, css, unsafeCSS } from 'lit-element';
+import { html, css, unsafeCSS } from 'lit';
+import { property } from 'lit/decorators.js';
 import __SSidePanelComponentInterface from './interface/SSidePanelComponentInterface';
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
@@ -20,8 +21,7 @@ export default class SSidePanel extends SLitElement {
     static _activePanels: SSidePanel[] = [];
 
     static get properties() {
-        const cls = __SComponentUtils.properties({}, __SSidePanelComponentInterface);
-        return cls;
+        return __SComponentUtils.properties({}, __SSidePanelComponentInterface);
     }
 
     static get styles() {

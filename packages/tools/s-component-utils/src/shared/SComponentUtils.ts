@@ -71,11 +71,11 @@ export class SComponentUtilsDefaultInterface extends __SInterface {
             default: false,
             physical: true,
         },
-        ready: {
-            type: 'Boolean',
-            default: false,
-            physical: true,
-        },
+        // ready: {
+        //     type: 'Boolean',
+        //     default: false,
+        //     physical: true,
+        // },
         mountWhen: {
             type: 'String',
             values: ['directly', 'inViewport'],
@@ -221,21 +221,16 @@ export default class SComponentUtils extends __SClass {
             this.node = node.parentNode;
         }
 
-        let InterfaceToApply =
-            this.componentUtilsSettings.interface ??
-            class InlineComponentUtilsInterface extends __SInterface {
-                static definition = Object.assign({}, SComponentUtilsDefaultInterface.definition);
-            };
+        let InterfaceToApply = class InlineComponentUtilsInterface extends __SInterface {
+            static definition = {};
+        };
 
-        if (this.componentUtilsSettings.interface) {
+        // @ts-ignore
+        InterfaceToApply.definition = {
+            ...Object.assign({}, SComponentUtilsDefaultInterface.definition),
             // @ts-ignore
-            InterfaceToApply.definition = {
-                // @ts-ignore
-                ...InterfaceToApply.definition,
-                // @ts-ignore
-                ...this.componentUtilsSettings.interface.definition,
-            };
-        }
+            ...(this.componentUtilsSettings.interface?.definition ?? {}),
+        };
         // @ts-ignore
         this._InterfaceToApply = InterfaceToApply;
 
@@ -271,58 +266,38 @@ export default class SComponentUtils extends __SClass {
             }),
         );
 
+        // @ts-ignore
+        const nodeFirstUpdated = this.node.firstUpdated?.bind(this.node);
+        // @ts-ignore
+        this.node.firstUpdated = async () => {
+            if (nodeFirstUpdated) {
+                await nodeFirstUpdated();
+            }
+            // set the component as mounted
+            this.node.mounted = true;
+        };
+
         // litElement shouldUpdate
         // @ts-ignore
-        if (!this.node.shouldUpdate) {
-            // @ts-ignore
-            this.node.shouldUpdate = () => {
-                return this.shouldUpdate;
-            };
-        }
-
-        const _updateProp = (propName, oldValue) => {
-            if (this[propName] === oldValue) return;
-
-            // @ts-ignore
-            if (this._InterfaceToApply.definition?.[propName]?.physical) {
-                if (this.node[propName] === false || this.node[propName] === undefined) {
-                    if (this.componentUtilsSettings.rootNode) {
-                        this.componentUtilsSettings.rootNode.removeAttribute(__dashCase(propName));
-                    }
-                    this.node.removeAttribute(__dashCase(propName));
-                } else {
-                    if (this.componentUtilsSettings.rootNode) {
-                        this.componentUtilsSettings.rootNode.setAttribute(__dashCase(propName), this.node[propName]);
-                    }
-                    this.node.setAttribute(__dashCase(propName), this.node[propName]);
-                }
+        const nodeShouldUpdate = this.node.shouldUpdate?.bind(this.node);
+        // @ts-ignore
+        this.node.shouldUpdate = () => {
+            if (nodeShouldUpdate) {
+                const res = nodeShouldUpdate();
+                if (!res) return false;
             }
+            return this.shouldUpdate;
         };
 
-        // @ts-ignore
-        const superUpdated = this.node.updated;
-        // @ts-ignore
-        this.node.updated = (changedProperties) => {
-            changedProperties.forEach((oldValue, propName) => {
-                _updateProp(propName, oldValue);
-            });
-            superUpdated?.(changedProperties);
-        };
-        // Object.keys(this.props).forEach((prop) => {
-        //     _updateProp(prop, this.node[prop]);
-        // });
-
-        // // @ts-ignore
-        // const superFirstUpdated = this.node.firstUpdated.bind(this.node);
-        // // @ts-ignore
-        // this.node.firstUpdated = () => {
-        //     superFirstUpdated?.();
-        //     console.log(this.node.tagName, 'ready');
-        // };
+        // set each props on the node
+        Object.keys(this.props).forEach((prop) => {
+            // _updateProp(prop, this.node[prop]);
+            this.node[prop] = this.props[prop];
+        });
 
         // @ts-ignore
-        const styleStr = this.node.constructor.getStyles();
-        this.injectStyle(styleStr.cssText);
+        const styleStr = this.node.constructor.styles;
+        this.injectStyle(styleStr?.cssText ?? '');
 
         // mount component when needed
         switch (this.props.mountWhen) {
@@ -374,6 +349,7 @@ export default class SComponentUtils extends __SClass {
                 definition.type?.type?.toLowerCase?.() === 'boolean'
             ) {
                 propertiesObj[prop].reflect = true;
+                propertiesObj[prop].attribute = __dashCase(prop);
                 propertiesObj[prop].converter = {
                     toAttribute(value) {
                         if (value === false || value === null) return null;
@@ -401,18 +377,12 @@ export default class SComponentUtils extends __SClass {
     }
 
     async mount() {
-        this.shouldUpdate = true;
-        // @ts-ignore
-        // this.node.requestUpdate?.(); // litelement update
-        // @ts-ignore
-        // await __wait();
         // adopting parent styles
         if (this.props.adoptStyle) await this._adoptStyle();
-        this.node.mounted = true;
-        this.node.ready = true;
-        // Object.keys(this.props).forEach((prop) => {
-        //     this.node[prop] = this.props[prop];
-        // });
+        // set the not as updatable
+        this.shouldUpdate = true;
+        // @ts-ignore
+        this.node.requestUpdate();
     }
 
     static _styleNodes = [];

@@ -20,6 +20,6 @@
         "@coffeekraken/s-component-utils": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "highlight.js": "^11.1.0",
-        "lit-element": "^2.5.1"
+        "lit": "^2.0.0-rc.3"
     }
 }

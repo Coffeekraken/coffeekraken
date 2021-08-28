@@ -1,6 +1,10 @@
 s-range {
     display: block;
     width: 100%;
+
+    &:not([mounted]) > * {
+        display: none;
+    }
 }
 .s-range {
     display: flex;

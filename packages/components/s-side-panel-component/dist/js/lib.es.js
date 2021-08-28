@@ -1,7 +1,44 @@
-import {css, unsafeCSS, html, property} from "lit-element";
+import {css, unsafeCSS, html} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
 import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
 import __SPromise from "@coffeekraken/s-promise";
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const standardProperty = (options, element) => {
+  if (element.kind === "method" && element.descriptor && !("value" in element.descriptor)) {
+    return {
+      ...element,
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  } else {
+    return {
+      kind: "field",
+      key: Symbol(),
+      placement: "own",
+      descriptor: {},
+      originalKey: element.key,
+      initializer() {
+        if (typeof element.initializer === "function") {
+          this[element.key] = element.initializer.call(this);
+        }
+      },
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  }
+};
+const legacyProperty = (options, proto, name) => {
+  proto.constructor.createProperty(name, options);
+};
+function property(options) {
+  return (protoOrDescriptor, name) => name !== void 0 ? legacyProperty(options, protoOrDescriptor, name) : standardProperty(options, protoOrDescriptor);
+}
 class SSidePanelComponentInterface extends __SInterface {
 }
 SSidePanelComponentInterface.definition = {
@@ -486,7 +523,7 @@ function hotkey(hotkey2, settings = {}) {
     hotkeys_common.unbind(hotkey2);
   });
 }
-var __css = 's-side-panel {\n    display: block;\n    position: fixed;\n    top: 0; left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 9999;\n    pointer-events: none;\n}\n\n    s-side-panel[active] {\n        pointer-events: all;\n    }\n\n.s-side-panel__overlay {\n    position: absolute;\n    top: 0; left: 0;\n    z-index: 0;\n    width: 100%; height: 100%;\n\n}\n\n[default-style] .s-side-panel__overlay {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-lightness-offset, 0)) * 1%),var(--s-theme-color-main-a, 0.3));\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n        opacity: 0;\n    }\n\n[default-style][active] .s-side-panel__overlay {\n        opacity: 1;\n    }\n\n.s-side-panel__container {\n    display: none;\n    position: absolute;\n    z-index: 1;\n}\n\n[mounted] .s-side-panel__container {\n        display: block;\n    }\n\n[default-style] .s-side-panel__container {\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n    }\n\n[side="left"] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        height: 100%;\n        transform: translateX(-100%);\n    }\n\n[side="top"] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(-100%);\n    }\n\n[side="right"] .s-side-panel__container {\n        right: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        transform: translateX(100%);\n    }\n\n[side="bottom"] .s-side-panel__container {\n        left: 0;\n        bottom: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(100%);\n    }\n\n[active] .s-side-panel__container {\n        transform: translateX(0) translateY(0);\n    }\n\n.s-side-panel {\n    position: absolute;\n    top: 0; left: 0;\n    width: 100%; height: 100%;\n    pointer-events: none;\n}\n\n.s-side-panel[active] {\n        pointer-events: all;\n    }';
+var __css = "s-side-panel {\n    display: block;\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 9999;\n    pointer-events: none;\n}\n\n    s-side-panel[active] {\n        pointer-events: all;\n    }\n\n    s-side-panel:not([mounted]) > * {\n        display: none;\n    }\n\n.s-side-panel__overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 0;\n    width: 100%;\n    height: 100%;\n}\n\n[default-style] .s-side-panel__overlay {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-lightness-offset, 0)) * 1%),var(--s-theme-color-main-a, 0.3));\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n        opacity: 0;\n    }\n\n[default-style][active] .s-side-panel__overlay {\n        opacity: 1;\n    }\n\n.s-side-panel__container {\n    display: none;\n    position: absolute;\n    z-index: 1;\n}\n\n[mounted] .s-side-panel__container {\n        display: block;\n    }\n\n[default-style] .s-side-panel__container {\n        transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));\n    }\n\n[side='left'] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        height: 100%;\n        transform: translateX(-100%);\n    }\n\n[side='top'] .s-side-panel__container {\n        left: 0;\n        top: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(-100%);\n    }\n\n[side='right'] .s-side-panel__container {\n        right: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        transform: translateX(100%);\n    }\n\n[side='bottom'] .s-side-panel__container {\n        left: 0;\n        bottom: 0;\n        width: 100%;\n        min-height: 40px;\n        transform: translateY(100%);\n    }\n\n[active] .s-side-panel__container {\n        transform: translateX(0) translateY(0);\n    }\n\n.s-side-panel {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    pointer-events: none;\n}\n\n.s-side-panel[active] {\n        pointer-events: all;\n    }\n";
 var __decorate = function(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
@@ -539,8 +576,7 @@ class SSidePanel extends SLitElement {
     }
   }
   static get properties() {
-    const cls = __SComponentUtils.properties({}, SSidePanelComponentInterface);
-    return cls;
+    return __SComponentUtils.properties({}, SSidePanelComponentInterface);
   }
   static get styles() {
     return css`

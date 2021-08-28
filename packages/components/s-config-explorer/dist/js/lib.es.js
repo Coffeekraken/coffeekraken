@@ -1,8 +1,104 @@
 import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
-import {css, unsafeCSS, html, property, query} from "lit-element";
+import {css, unsafeCSS, html} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
 import __SRequest from "@coffeekraken/s-request";
 import __minimatch from "minimatch";
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const standardProperty = (options, element) => {
+  if (element.kind === "method" && element.descriptor && !("value" in element.descriptor)) {
+    return {
+      ...element,
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  } else {
+    return {
+      kind: "field",
+      key: Symbol(),
+      placement: "own",
+      descriptor: {},
+      originalKey: element.key,
+      initializer() {
+        if (typeof element.initializer === "function") {
+          this[element.key] = element.initializer.call(this);
+        }
+      },
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  }
+};
+const legacyProperty = (options, proto, name) => {
+  proto.constructor.createProperty(name, options);
+};
+function property(options) {
+  return (protoOrDescriptor, name) => name !== void 0 ? legacyProperty(options, protoOrDescriptor, name) : standardProperty(options, protoOrDescriptor);
+}
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const decorateProperty = ({finisher, descriptor}) => (protoOrDescriptor, name) => {
+  var _a;
+  if (name !== void 0) {
+    const ctor = protoOrDescriptor.constructor;
+    if (descriptor !== void 0) {
+      Object.defineProperty(protoOrDescriptor, name, descriptor(name));
+    }
+    finisher === null || finisher === void 0 ? void 0 : finisher(ctor, name);
+  } else {
+    const key = (_a = protoOrDescriptor.originalKey) !== null && _a !== void 0 ? _a : protoOrDescriptor.key;
+    const info = descriptor != void 0 ? {
+      kind: "method",
+      placement: "prototype",
+      key,
+      descriptor: descriptor(protoOrDescriptor.key)
+    } : {...protoOrDescriptor, key};
+    if (finisher != void 0) {
+      info.finisher = function(ctor) {
+        finisher(ctor, key);
+      };
+    }
+    return info;
+  }
+};
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+function query(selector, cache) {
+  return decorateProperty({
+    descriptor: (name) => {
+      const descriptor = {
+        get() {
+          var _a;
+          return (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(selector);
+        },
+        enumerable: true,
+        configurable: true
+      };
+      if (cache) {
+        const key = typeof name === "symbol" ? Symbol() : `__${name}`;
+        descriptor.get = function() {
+          var _a;
+          if (this[key] === void 0) {
+            this[key] = (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(selector);
+          }
+          return this[key];
+        };
+      }
+      return descriptor;
+    }
+  });
+}
 class SConfigExplorerComponentInterface extends __SInterface {
 }
 SConfigExplorerComponentInterface.definition = {

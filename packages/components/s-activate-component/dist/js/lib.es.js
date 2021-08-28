@@ -1,6 +1,43 @@
-import {css, unsafeCSS, html, property} from "lit-element";
+import {css, unsafeCSS, html} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
 import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const standardProperty = (options, element) => {
+  if (element.kind === "method" && element.descriptor && !("value" in element.descriptor)) {
+    return {
+      ...element,
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  } else {
+    return {
+      kind: "field",
+      key: Symbol(),
+      placement: "own",
+      descriptor: {},
+      originalKey: element.key,
+      initializer() {
+        if (typeof element.initializer === "function") {
+          this[element.key] = element.initializer.call(this);
+        }
+      },
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  }
+};
+const legacyProperty = (options, proto, name) => {
+  proto.constructor.createProperty(name, options);
+};
+function property(options) {
+  return (protoOrDescriptor, name) => name !== void 0 ? legacyProperty(options, protoOrDescriptor, name) : standardProperty(options, protoOrDescriptor);
+}
 class SActivateComponentInterface extends __SInterface {
 }
 SActivateComponentInterface.definition = {
@@ -132,10 +169,10 @@ class SActivate extends SLitElement {
     (_a = this._$nodes) === null || _a === void 0 ? void 0 : _a.forEach(($node) => {
       this.appendChild($node);
     });
-    if (this._component.props.saveState) {
+    if (this.saveState) {
       if (!this.id)
         throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-      this._component.props.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
+      this.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
     }
     if (this._component.props.href) {
       this._hrefSelector = this._component.props.href;
@@ -213,7 +250,7 @@ class SActivate extends SLitElement {
             }
           });
         }
-        this.setAttribute("active", "true");
+        this.active = true;
         if (this._$targets) {
           this._$targets.forEach(($target) => {
             if (this._component.props.activeClass) {

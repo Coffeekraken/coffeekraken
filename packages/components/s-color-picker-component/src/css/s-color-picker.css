@@ -1,19 +1,20 @@
 .s-color-picker[default-style] {
 }
 
+s-color-picker {
+    &:not([mounted]) > * {
+        display: none;
+    }
+}
+
 .s-color-picker__picker {
-
-    /* top: auto !important;
-    left: auto !important; */
-
     [default-style] & {
         background: sugar.color(ui, surface);
         overflow: hidden;
-        @sugar.depth(sugar.theme(ui.colorPicker.depth));
+        @sugar.depth (sugar.theme(ui.colorPicker.depth));
         border-radius: sugar.theme(ui.colorPicker.borderRadius);
         padding: sugar.theme(ui.colorPicker.padding);
     }
-
 }
 
 .pickr.s-color-picker__preview {
@@ -38,6 +39,5 @@
         &:after {
             border-radius: 0 !important;
         }
-
     }
 }

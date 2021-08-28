@@ -1,4 +1,5 @@
-import { html, property, css, unsafeCSS, query, queryAssignedNodes } from 'lit-element';
+import { html, css, unsafeCSS } from 'lit';
+import { property } from 'lit/decorators.js';
 import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface';
 import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
@@ -33,7 +34,6 @@ export default class SClipboardCopy extends SLitElement {
             },
         });
     }
-    firstUpdated() {}
 
     /**
      * @name                copy

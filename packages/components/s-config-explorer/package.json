@@ -17,6 +17,7 @@
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/s-request": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
+        "lit": "^2.0.0-rc.3",
         "minimatch": "^3.0.4"
     }
 }

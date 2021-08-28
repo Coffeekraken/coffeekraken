@@ -1,4 +1,4 @@
-import {css, unsafeCSS, html} from "lit-element";
+import {css, unsafeCSS, html} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
 import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
 class SRangeComponentInterface extends __SInterface {
@@ -37,7 +37,7 @@ SRangeComponentInterface.definition = {
     default: false
   }
 };
-var __css = "s-range {\n    display: block;\n    width: 100%;\n}\n.s-range {\n    display: flex;\n    width: 100%;\n}\n\n.s-range__input {\n    flex-grow: 1;\n}\n\n.s-range__tooltip {\n    transition: none;\n}\n\ns-range[default-style] {\n}\n";
+var __css = "s-range {\n    display: block;\n    width: 100%;\n}\n\n    s-range:not([mounted]) > * {\n        display: none;\n    }\n.s-range {\n    display: flex;\n    width: 100%;\n}\n\n.s-range__input {\n    flex-grow: 1;\n}\n\n.s-range__tooltip {\n    transition: none;\n}\n\ns-range[default-style] {\n}\n";
 var __awaiter = function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
@@ -137,13 +137,13 @@ class SRange extends SLitElement {
                 <input
                     class="${this._component.className("__input", "s-range")}"
                     type="range"
-                    name="${this._component.props.name}"
-                    value="${this._component.props.value}"
-                    min="${this._component.props.min}"
-                    max="${this._component.props.max}"
-                    step="${this._component.props.step}"
+                    name="${this.name}"
+                    value="${this.value}"
+                    min="${this.min}"
+                    max="${this.max}"
+                    step="${this.step}"
                 />
-                ${this._component.props.tooltip ? html` <div class="${this._component.className("__tooltip", "s-tooltip")}">Hello</div> ` : ""}
+                ${this._component.props.tooltip ? html` <div class="${this._component.className("__tooltip", "s-tooltip")}"></div> ` : ""}
             </div>
         `;
   }

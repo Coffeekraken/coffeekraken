@@ -11,6 +11,10 @@ s-side-panel {
     &[active] {
         pointer-events: all;
     }
+
+    &:not([mounted]) > * {
+        display: none;
+    }
 }
 
 .s-side-panel__overlay {

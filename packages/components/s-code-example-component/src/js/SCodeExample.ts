@@ -1,6 +1,7 @@
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import { css, html, property, query, queryAssignedNodes, unsafeCSS } from 'lit-element';
+import { css, html, unsafeCSS } from 'lit';
+import { property, query, queryAssignedNodes } from 'lit/decorators.js';
 
 import __hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -67,7 +68,7 @@ export default class SCodeExample extends SLitElement {
             },
         });
     }
-    firstUpdated() {
+    async firstUpdated() {
         this.$templates.forEach(($template: HTMLElement) => {
             if (!$template.getAttribute) return;
             this._items = [
@@ -92,6 +93,8 @@ export default class SCodeExample extends SLitElement {
         } else {
             this.setActiveTab(this._items[0].id);
         }
+        await __wait(500);
+        return true;
     }
     // createRenderRoot() {
     //     return this;
@@ -100,8 +103,8 @@ export default class SCodeExample extends SLitElement {
         return html`
             <div
                 class="${this._component?.className()}"
-                ?ready="${this.ready}"
-                toolbar-position="${this._component?.props.toolbarPosition}"
+                ?mounted="${this.mounted}"
+                toolbar-position="${this.toolbarPosition}"
             >
                 <div class="templates">
                     <slot></slot>
@@ -109,12 +112,7 @@ export default class SCodeExample extends SLitElement {
 
                 ${this._component
                     ? html`<header class="${this._component.className('__nav')}">
-                          <ol
-                              class="${this._component.className(
-                                  '__tabs',
-                                  this._component.props.defaultStyleClasses.main,
-                              )}"
-                          >
+                          <ol class="${this._component.className('__tabs', 's-tabs')}">
                               ${(this._items ?? []).map(
                                   (item) => html`
                                       <li
@@ -128,7 +126,7 @@ export default class SCodeExample extends SLitElement {
                                   `,
                               )}
                           </ol>
-                          ${this._component.props.toolbarPosition === 'nav'
+                          ${this.toolbarPosition === 'nav'
                               ? html`
                                     <div class="${this._component.className('__toolbar')}">
                                         <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
@@ -140,7 +138,7 @@ export default class SCodeExample extends SLitElement {
                 ${this._component
                     ? html`
                           <div class="${this._component.className('__content')}">
-                              ${this._component.props.toolbarPosition !== 'nav'
+                              ${this.toolbarPosition !== 'nav'
                                   ? html`
                                         <div class="${this._component?.className('__toolbar')}">
                                             <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
@@ -155,9 +153,7 @@ export default class SCodeExample extends SLitElement {
                                           id="${item.id ?? item.lang}"
                                           ?active="${this._activeTabId === (item.id ?? item.lang)}"
                                       >
-                            <code class="language-${item.lang} ${item.lang} ${this._component?.props.defaultStyle
-                                          ? 'hljs'
-                                          : ''}">
+                            <code class="language-${item.lang} ${item.lang} ${this.defaultStyle ? 'hljs' : ''}">
                                 
                                 ${
                                           // @ts-ignore
@@ -199,7 +195,5 @@ export default class SCodeExample extends SLitElement {
 
 export function webcomponent(props: Partial<ISCodeExampleComponentProps> = {}, tagName = 's-code-example') {
     __SComponentUtils.setDefaultProps(tagName, props);
-    const $tags = document.querySelectorAll(tagName);
-    console.log($tags);
     customElements.define(tagName, SCodeExample);
 }

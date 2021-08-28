@@ -1,4 +1,4 @@
-<section id="features-webcomponents" class="s-py:100">
+<section id="features-webcomponents" class="s-container s-py:100">
     <div class="s-grid:122:gutter-x:gutter-between">
 
         <div>
@@ -17,24 +17,24 @@
         </div>
 
         <div>
-            <s-code-example>
-                <template lang="js">
-// import webcomponents
-import '@coffeekraken/s-filtrable-input';
-import '@coffeekraken/s-clipboard-copy';
-import '@coffeekraken/s-code-example';
-// etc...
-                </template>
-            </s-code-example>
+            <div class="s-mb:30">
+                @include('generic.code.example', ['examples' => [
+                    'js' => '// import webcomponents
+import \'@coffeekraken/s-filtrable-input\';
+import \'@coffeekraken/s-clipboard-copy\';
+import \'@coffeekraken/s-code-example\';
+// etc...'
+                ]])
+            </div>
 
-            <s-code-example class="s-mt:50 s-mr:-50 s-ml:50">
-                <template lang="html">
-<p id="paragraph">
+            <div>
+                @include('generic.code.example', ['examples' => [
+                    'html' => '<p id="paragraph">
 Something cool...
 </p>
-<s-clipboard-copy target="#paragraph"></s-clipboard-copy>
-                </template>
-            </s-code-example>
+<s-clipboard-copy target="#paragraph"></s-clipboard-copy>'
+                ]])
+            </div>
 
         </div>
     </div>

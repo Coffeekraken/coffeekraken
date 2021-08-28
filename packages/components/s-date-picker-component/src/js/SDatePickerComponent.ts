@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { html, property, css, unsafeCSS, queryAsync } from 'lit-element/lit-element';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { html, css, unsafeCSS } from 'lit';
+import { html as staticHTML } from 'lit/static-html.js';
+import { queryAsync } from 'lit/decorators.js';
 import __SDatePickerComponentInterface from './interface/SDatePickerComponentInterface';
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -82,8 +83,10 @@ export default class SDatePicker extends SLitElement {
     constructor() {
         super();
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            interface: __SDatePickerComponentInterface,
-            defaultProps: {},
+            componentUtils: {
+                interface: __SDatePickerComponentInterface,
+                defaultProps: {},
+            },
         });
     }
     async firstUpdated() {
@@ -177,10 +180,10 @@ export default class SDatePicker extends SLitElement {
                     name="${this.name}"
                     autocomplete="off"
                 />
-                ${this._component.props.button
+                ${this.button
                     ? html`
                           <button class="${this._component.className('__button', 's-btn')}">
-                              ${unsafeHTML(this._component.props.calendarIcon)}
+                              ${staticHTML([this.calendarIcon])}
                           </button>
                       `
                     : ''}

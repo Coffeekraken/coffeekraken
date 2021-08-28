@@ -1,4 +1,4 @@
-<section id="features-sugar" class="s-py:100">
+<section id="features-sugar" class="s-container s-py:100">
     <div class="s-grid:12:gutter-x:gutter-between">
         <div>
             <h3 class="s-typo:h3 s-mb:30">
@@ -32,26 +32,26 @@
 
         <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
             <div>
-                <s-code-example class="s-ml:-50">
-                    <template lang="bash">
-# Get our ip address
-sugar network.ip
-# Kill a process on the port 8080
-sugar kill.port 8080
-# Lauch the development stack in the current directory
-sugar frontstack.dev
-# And a lot more to discover...
-sugar --help
-                    </template>
-                </s-code-example>
+                <div class="s-ml:-50">
+                    @include('generic.code.example', ['examples' => [
+                        'bash' => '# Get our ip address
+    sugar network.ip
+    # Kill a process on the port 8080
+    sugar kill.port 8080
+    # Lauch the development stack in the current directory
+    sugar frontstack.dev
+    # And a lot more to discover...
+    sugar --help'
+                    ]])
+                </div>
             </div>
             <div>
                 <h5 class="s-typo:h5 s-mb:30">
                     A coherant <span class="s-color:accent">CLI</span> with some cool features
                 </h5>
                 <p class="s-typo:p ">
-                    The "<span class="s-color:accent">@coffeekraken/sugar</span> package is the one that provides you these CLI features.
-                    <br>Some other packages are extending the CLI with new features like the "<span class="s-color:accent">@coffeekraken/s-frontstack</span>" that represent the
+                    The "<span class="s-color:accent">@@coffeekraken/sugar</span> package is the one that provides you these CLI features.
+                    <br>Some other packages are extending the CLI with new features like the "<span class="s-color:accent">@@coffeekraken/s-frontstack</span>" that represent the
                     development stack that provide his features through the Sugar CLI.
                 </p>
             </div>
@@ -69,27 +69,28 @@ sugar --help
                 </p>
             </div>
             <div>
-                <s-code-example class="s-mr:-100">
-                    <template lang="js">
-import querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
-querySelectorLive('.my-cool-component', ($elm) => {
-// do something with your element...
-});
-                    </template>
-                </s-code-example>
+
+                <div class="s-mr:-100">
+                    @include('generic.code.example', ['examples' => [
+                        'js' => 'import querySelectorLive from \'@@coffeekraken/sugar/js/dom/query/querySelectorLive\';
+querySelectorLive(\'.my-cool-component\', (elm) => {
+// do something with your element..
+});'
+                    ]])
+                </div>
             </div>
         </div>
 
         <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
             <div>
-                <s-code-example class="s-ml:-50">
-                    <template lang="js">
-import base64 from '@coffeekraken/sugar/shared/crypt/base64';
-import md5 from '@coffeekraken/sugar/shared/crypt/md5';
-base64('Hello world'); // SGVsbG8gd29ybGQ=
-md5('Hello world'); // 3e25960a79dbc69b674cd4ec67a72c62
-                    </template>
-                </s-code-example>
+                <div class="s-ml:-50">
+                    @include('generic.code.example', ['examples' => [
+                        'js' => 'import base64 from \'@@coffeekraken/sugar/shared/crypt/base64\';
+import md5 from \'@@coffeekraken/sugar/shared/crypt/md5\';
+base64(\'Hello world\'); // SGVsbG8gd29ybGQ=
+md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
+                    ]])
+                </div>
             </div>
             <div>
                 <h5 class="s-typo:h5 s-mb:30">
@@ -113,14 +114,14 @@ md5('Hello world'); // 3e25960a79dbc69b674cd4ec67a72c62
                 </p>
             </div>
             <div>
-                <s-code-example class="s-mr:-50">
-                    <template lang="js">
-import isEmail from '@coffeekraken/sugar/shared/is/email';
-import isColor from '@coffeekraken/sugar/shared/is/color';
-isEmail('hello@world.com'); // true
-isColor('rgba(10,20,30,1)'); // true
-                    </template>
-                </s-code-example>
+                <div class="s-mr:-50">
+                    @include('generic.code.example', ['examples' => [
+                        'js' => 'iimport isEmail from \'@@coffeekraken/sugar/shared/is/email\';
+import isColor from \'@@coffeekraken/sugar/shared/is/color\';
+isEmail(\'hello@world.com\'); // true
+isColor(\'rgba(10,20,30,1)\'); // true'
+                    ]])
+                </div>
             </div>
         </div>
 

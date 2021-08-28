@@ -14,6 +14,7 @@
     "@coffeekraken/sugar": "^2.0.0",
     "get-css-data": "^2.0.2",
     "handlebars": "^4.7.7",
+    "lit": "^2.0.0-rc.3",
     "lit-element": "^2.5.1",
     "mustache": "^4.2.0"
   }

@@ -1522,6 +1522,14 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 depth: 0,
             },
+            loader: {
+                duration: '1s',
+                easing: 'linear',
+            },
+            loaderSpinner: {
+                duration: '[theme.ui.loader.duration]',
+                easing: '[theme.ui.loader.easing]',
+            },
         },
 
         typo: {

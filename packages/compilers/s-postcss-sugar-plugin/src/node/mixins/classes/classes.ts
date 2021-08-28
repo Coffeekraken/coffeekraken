@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 export { postcssSugarPluginClassesMixinInterface as interface };
 
@@ -23,31 +23,31 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ params, atRule, replaceWith }) {
+    const cssArray: string[] = [
+        '@sugar.ui.classes;',
+        '@sugar.typo.classes;',
+        '@sugar.layout.classes;',
+        '@sugar.color.classes;',
+        '@sugar.align.classes;',
+        '@sugar.text.classes;',
+        '@sugar.font.classes;',
+        '@sugar.depth.classes;',
+        '@sugar.flex.classes;',
+        '@sugar.ratio.classes;',
+        '@sugar.border.classes;',
+        '@sugar.display.classes;',
+        '@sugar.overflow.classes;',
+        '@sugar.position.classes;',
+        '@sugar.pointer.classes;',
+        '@sugar.icon.classes;',
+        '@sugar.transition.classes;',
+        '@sugar.margin.classes;',
+        '@sugar.opacity.classes;',
+        '@sugar.padding.classes;',
+        '@sugar.until.classes;',
+        '@sugar.width.classes;',
+        '@sugar.components.classes;',
+    ];
 
-  const cssArray: string[] = [
-    '@sugar.ui.classes;',
-    '@sugar.typo.classes;',
-    '@sugar.layout.classes;',
-    '@sugar.color.classes;',
-    '@sugar.align.classes;',
-    '@sugar.text.classes;',
-    '@sugar.font.classes;',
-    '@sugar.depth.classes;',
-    '@sugar.flex.classes;',
-    '@sugar.ratio.classes;',
-    '@sugar.border.classes;',
-    '@sugar.display.classes;',
-    '@sugar.overflow.classes;',
-    '@sugar.position.classes;',
-    '@sugar.pointer.classes;',
-    '@sugar.icon.classes;',
-    '@sugar.transition.classes;',
-    '@sugar.margin.classes;',
-    '@sugar.opacity.classes;',
-    '@sugar.padding.classes;',
-    '@sugar.width.classes;',
-    '@sugar.components.classes;'
-  ];
-
-  replaceWith(cssArray);
+    replaceWith(cssArray);
 }

@@ -1,4 +1,4 @@
-<section id="features-frontend" class="s-py:100">
+<section id="features-frontend" class="s-container s-py:100">
 
     <h3 class="s-typo:h3 s-mb:30">Frontend<br><span class="s-color:accent">sugar</span></h3>
     <p class="s-typo:p s-mb:50">
@@ -8,9 +8,10 @@
 
     <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
         <div>  
-            <s-code-example class="s-mb:30 @desktop s-ml:-100">
-                <template lang="html">
-<ul class="s-list\:ul\:icon">
+
+            <div class="s-mb:30">
+                @include('generic.code.example', ['examples' => [
+                    'html' => '<ul class="s-list\:ul\:icon">
 <li>
 <i class="s-icon\:custom-user"></i>
 Hello <span class="s-color\:accent">world</span>
@@ -21,11 +22,12 @@ This is <span class="s-font\:bold">a cool</span> list
 </li>
 <li>
 <i class="s-icon\:copy"></i>
-Cool don't you think?
+Cool don\'t you think?
 </li>
-</ul>
-                </template>
-            </s-code-example>
+</ul>'
+                ]])
+            </div>
+
         </div>
         <div>
             <h4 class="s-typo:h4 s-mb:30">
@@ -76,10 +78,10 @@ Cool don't you think?
             </ol>
         </div>
         <div>
-            <s-code-example class="s-mb:30 @desktop s-mr:-50">
-                <template lang="css">
-/* import some globs */
-@sugar.import('../views/**/*.css');
+            <div class="s-mb:30">
+                @include('generic.code.example', ['examples' => [
+                    'css' => '/* import some globs */
+@sugar.import(\'../views/**/*.css\');
 /* init sugar (classes, resetcss, etc...) */
 @sugar.init;
 /* list icons you want in your project */
@@ -88,26 +90,18 @@ Cool don't you think?
 fa:user:custom-user
 fa:fire
 fs:src/icons/copy.svg:copy
-);
-                </template>
-                <template lang="html">
-<!-- A simpler and powerfull classnames syntax -->
-<h1 class="s-typo\:h2 s-font\:bold s-mb\:30 @desktop s-typo\:h1">
-    Hello new css classnames syntax!
-</h1>
-<p class="s-typo\:p @tablet s-font\:quote">
-    Apply responsive styling after "@desktop", "@tablet" keyword...
-</p>
-                </template>
-            </s-code-example>
+);'
+                ]])
+            </div>
         </div>    
     </div>
 
     <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
         <div>  
-            <s-code-example class="s-mb:30">
-                <template lang="html">
-<ul class="s-list\:ul\:icon">
+
+            <div class="s-mb:30">
+                @include('generic.code.example', ['examples' => [
+                    'html' => '<ul class="s-list\:ul\:icon">
 <li>
 <i class="s-icon\:custom-user"></i>
 Hello <span class="s-color\:accent">world</span>
@@ -118,11 +112,11 @@ This is <span class="s-font\:bold">a cool</span> list
 </li>
 <li>
 <i class="s-icon\:copy"></i>
-Cool don't you think?
+Cool don\'t you think?
 </li>
-</ul>
-                </template>
-            </s-code-example>
+</ul>'
+                ]])
+            </div>
         </div>
         <div>
             <h4 class="s-typo:h4 s-mb:30">

@@ -1,13 +1,11 @@
 // @ts-nocheck
 
-import { html, property, css, unsafeCSS, query, queryAssignedNodes } from 'lit-element';
-import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
 import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __Pickr from '@simonwep/pickr';
-
 import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
+import { css, html, unsafeCSS } from 'lit';
 import __css from '../css/s-color-picker.css';
+import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
 
 export interface ISColorPickerComponentProps {
     name: string;
@@ -32,10 +30,11 @@ export default class SColorPicker extends SLitElement {
 
     constructor() {
         super();
-        const _this = this;
         this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            interface: __SColorPickerComponentInterface,
-            defaultProps: {},
+            componentUtils: {
+                interface: __SColorPickerComponentInterface,
+                defaultProps: {},
+            },
         });
     }
     firstUpdated() {
@@ -46,30 +45,11 @@ export default class SColorPicker extends SLitElement {
             default: this.value,
             // autoReposition: false,
             comparison: false,
-            swatches: [
-                // 'rgba(244, 67, 54, 1)',
-                // 'rgba(233, 30, 99, 0.95)',
-                // 'rgba(156, 39, 176, 0.9)',
-                // 'rgba(103, 58, 183, 0.85)',
-                // 'rgba(63, 81, 181, 0.8)',
-                // 'rgba(33, 150, 243, 0.75)',
-                // 'rgba(3, 169, 244, 0.7)',
-                // 'rgba(0, 188, 212, 0.7)',
-                // 'rgba(0, 150, 136, 0.75)',
-                // 'rgba(76, 175, 80, 0.8)',
-                // 'rgba(139, 195, 74, 0.85)',
-                // 'rgba(205, 220, 57, 0.9)',
-                // 'rgba(255, 235, 59, 0.95)',
-                // 'rgba(255, 193, 7, 1)'
-            ],
-
+            swatches: [],
             components: {
-                // Main components
                 preview: true,
                 opacity: true,
                 hue: true,
-
-                // Input / output Options
                 interaction: {
                     hex: true,
                     rgba: true,

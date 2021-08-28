@@ -1,4 +1,4 @@
-<section id="features-development" class="s-pb:100">
+<section id="features-development" class="s-container s-pb:100">
     <div class="s-grid:122:gutter-x:gutter-between">
 
         <div class="s-py:100">
@@ -22,17 +22,18 @@
 
         <div class="s-py:100 s-vr">
             <img src="/src/img/features-development-logos.svg" class="s-mx:auto s-display:block" />
-            <s-code-example class="s-mt:50 @desktop s-mr:-100">
-                <template lang="bash">
-# Install sugar globally
+            
+            <div class="s-mt:50">
+                @include('generic.code.example', ['examples' => [
+                    'bash' => '# Install sugar globally
 npm i @coffeekraken/sugar -g
 # Init your project using the default "recipe"
 sugar init my-cool-project
 # Launch your development environment
 sugar start
-# ...start working... I know I know...
-                </template>
-            </s-code-example>
+# ...start working... I know I know...'
+                ]])
+            </div>
 
         </div>
     </div>
@@ -41,16 +42,16 @@ sugar start
 
         <div>
 
-            <s-code-example class="s-mb:30 @desktop s-ml:-50">
-                <template lang="bach">
-# Init a Sugar step by step process
+            <div class="s-mt:30 s-mb:30">
+                @include('generic.code.example', ['examples' => [
+                    'bash' => '# Init a Sugar step by step process
 sugar
 # Init a default template based website project
 sugar init --recipe default
 # Init a RiotJs based webcomponent
-sugar init --recipe riotComponent
-                </template>
-            </s-code-example>
+sugar init --recipe riotComponent'
+                ]])
+            </div>
 
             <ul class="__recipes-grid">
                 @foreach (['accent','accent','accent','accent'] as $i)

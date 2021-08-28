@@ -21,11 +21,5 @@ export default class SCodeExampleInterface extends __SInterface {
             values: ['content', 'nav'],
             default: 'content',
         },
-        defaultStyleClasses: {
-            type: 'Object',
-            default: {
-                main: 's-tabs',
-            },
-        },
     };
 }

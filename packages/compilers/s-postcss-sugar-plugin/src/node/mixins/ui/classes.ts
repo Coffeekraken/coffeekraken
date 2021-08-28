@@ -28,6 +28,7 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
         '@sugar.ui.input.classes;',
         '@sugar.ui.label.classes;',
         '@sugar.ui.list.classes;',
+        '@sugar.ui.loader.classes;',
         '@sugar.ui.tabs.classes;',
         '@sugar.ui.badge.classes;',
         '@sugar.ui.navbar.classes;',

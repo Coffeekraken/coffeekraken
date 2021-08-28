@@ -1,5 +1,9 @@
 s-date-picker {
     display: inline-block;
+
+    &:not([mounted]) > * {
+        display: none;
+    }
 }
 .s-date-picker {
     display: flex;

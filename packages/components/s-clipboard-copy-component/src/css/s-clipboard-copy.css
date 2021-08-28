@@ -5,6 +5,11 @@
     position: relative;
     cursor: pointer;
 
+    &:not([mounted]) > * {
+        opacity: 0.001;
+        pointer-events: none;
+    }
+
     &[state='pending'] {
         .icon-copy {
             opacity: 1;

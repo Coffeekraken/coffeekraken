@@ -1,55 +1,27 @@
 #homepage-welcome {
-  /* height: 70vh;
+    /* height: 70vh;
   min-height: 600px; */
-  position: relative;
-  z-index: 10;
-
-  .__kraken {
-    position: absolute;
-    bottom: calc(-16% + 3px);
-    width: 900px;
-    /* position: absolute;
-    bottom: 0; left: 100%;
-    width: 800px;
-    transform: translate(-12%, 24%); */
-  }
-
-  .__bg {
-    display: block;
-    width: 100%; height: 100%;
-    position: absolute;
-    top: 0; left: 0;
-    opacity: 0.2;
-    z-index: -1;
-
-    @sugar.gradient(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
-
-    &:before {
-      content:'';
-      display: block;
-      width: 100%; height: 100%;
-      position: absolute;
-      top: 0; left: 0;
-
-      @sugar.gradient(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
-      
-    }
-  }
-
-  /* s-inline-svg {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  } */
+    z-index: 10;
+    background-color: sugar.color(main, background);
+    background-position: 0 0;
+    background-size: cover;
+    animation: subnav-bkg 240s linear;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
 
-  .__illustration {
-    position: absolute;
-    @sugar.align.abs (center);
-    transform: translate(-50%, -60%) scale(1.5);
-  }
+    @sugar.theme.when (dark) {
+        background-image: url('/src/img/discord-illustration-05-bkg.png');
+    }
 
-  .__content {
-    /* @sugar.align.abs (center);
+    .__illustration {
+        position: absolute;
+        @sugar.align.abs (center);
+        transform: translate(-50%, -60%) scale(1.5);
+    }
+
+    .__content {
+        /* @sugar.align.abs (center);
     margin-left: -100px; */
-  }
+    }
 }

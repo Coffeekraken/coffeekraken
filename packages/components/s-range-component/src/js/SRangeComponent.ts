@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { html, css, unsafeCSS } from 'lit-element';
+import { html, css, unsafeCSS } from 'lit';
 import __SRangeComponentInterface from './interface/SRangeComponentInterface';
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -137,11 +137,11 @@ export default class SRange extends SLitElement {
                 <input
                     class="${this._component.className('__input', 's-range')}"
                     type="range"
-                    name="${this._component.props.name}"
-                    value="${this._component.props.value}"
-                    min="${this._component.props.min}"
-                    max="${this._component.props.max}"
-                    step="${this._component.props.step}"
+                    name="${this.name}"
+                    value="${this.value}"
+                    min="${this.min}"
+                    max="${this.max}"
+                    step="${this.step}"
                 />
                 ${this._component.props.tooltip
                     ? html` <div class="${this._component.className('__tooltip', 's-tooltip')}"></div> `

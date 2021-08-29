@@ -1399,6 +1399,13 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
             },
+            datePicker: {
+                padding: '[theme.ui.form.padding]',
+                borderRadius: '[theme.ui.form.borderRadius]',
+                borderWidth: '[theme.ui.form.borderWidth]',
+                transition: '[theme.ui.form.transition]',
+                depth: '[theme.ui.form.depth]',
+            },
             input: {
                 padding: '[theme.ui.form.padding]',
                 borderRadius: '[theme.ui.form.borderRadius]',

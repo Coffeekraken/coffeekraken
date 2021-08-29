@@ -1,11 +1,15 @@
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { css, html, unsafeCSS } from 'lit';
+import { html as __unsafeHTML } from 'lit/static-html.js';
 import { property, query, queryAssignedNodes } from 'lit/decorators.js';
 
 import __hljs from 'highlight.js/lib/core';
-import javascript from 'highlight.js/lib/languages/javascript';
-__hljs.registerLanguage('javascript', javascript);
+import __langJavascript from 'highlight.js/lib/languages/javascript';
+import __langHtml from 'highlight.js/lib/languages/xml';
+import __langBash from 'highlight.js/lib/languages/bash';
+import __langPhp from 'highlight.js/lib/languages/php';
+import __langCss from 'highlight.js/lib/languages/css';
 
 // @ts-ignore
 import __css from '../css/s-code-example.css';
@@ -67,6 +71,21 @@ export default class SCodeExample extends SLitElement {
                 defaultProps: {},
             },
         });
+
+        const languages = {
+            html: __langHtml,
+            javascript: __langJavascript,
+            js: __langJavascript,
+            php: __langPhp,
+            bash: __langBash,
+            shell: __langBash,
+            css: __langCss,
+            ...(this._component.props.languages ?? {}),
+        };
+
+        Object.keys(languages).forEach((lang) => {
+            __hljs.registerLanguage(lang, languages[lang]);
+        });
     }
     async firstUpdated() {
         this.$templates.forEach(($template: HTMLElement) => {
@@ -93,6 +112,7 @@ export default class SCodeExample extends SLitElement {
         } else {
             this.setActiveTab(this._items[0].id);
         }
+
         await __wait(500);
         return true;
     }
@@ -103,8 +123,18 @@ export default class SCodeExample extends SLitElement {
         return html`
             <div
                 class="${this._component?.className()}"
-                ?mounted="${this.mounted}"
-                toolbar-position="${this.toolbarPosition}"
+                ?mounted="${
+                    // @ts-ignore
+                    this.mounted
+                }"
+                ?default-style="${
+                    // @ts-ignore
+                    this.defaultStyle
+                }"
+                toolbar-position="${
+                    // @ts-ignore
+                    this.toolbarPosition
+                }"
             >
                 <div class="templates">
                     <slot></slot>
@@ -126,25 +156,31 @@ export default class SCodeExample extends SLitElement {
                                   `,
                               )}
                           </ol>
-                          ${this.toolbarPosition === 'nav'
-                              ? html`
-                                    <div class="${this._component.className('__toolbar')}">
-                                        <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                    </div>
-                                `
-                              : ''}
+                          ${
+                              // @ts-ignore
+                              this.toolbarPosition === 'nav'
+                                  ? html`
+                                        <div class="${this._component.className('__toolbar')}">
+                                            <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                        </div>
+                                    `
+                                  : ''
+                          }
                       </header>`
                     : ''}
                 ${this._component
                     ? html`
                           <div class="${this._component.className('__content')}">
-                              ${this.toolbarPosition !== 'nav'
-                                  ? html`
-                                        <div class="${this._component?.className('__toolbar')}">
-                                            <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                        </div>
-                                    `
-                                  : ''}
+                              ${
+                                  // @ts-ignore
+                                  this.toolbarPosition !== 'nav'
+                                      ? html`
+                                            <div class="${this._component?.className('__toolbar')}">
+                                                <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                            </div>
+                                        `
+                                      : ''
+                              }
                               ${(this._items ?? []).map(
                                   (item) => html`
                                       <pre
@@ -153,11 +189,14 @@ export default class SCodeExample extends SLitElement {
                                           id="${item.id ?? item.lang}"
                                           ?active="${this._activeTabId === (item.id ?? item.lang)}"
                                       >
-                            <code class="language-${item.lang} ${item.lang} ${this.defaultStyle ? 'hljs' : ''}">
+                            <code lang="${item.lang ?? item.id}" class="language-${item.lang} ${item.lang} ${this
+                                          ._component.props.defaultStyle
+                                          ? 'hljs'
+                                          : ''}">
                                 
                                 ${
                                           // @ts-ignore
-                                          item.code
+                                          __unsafeHTML([item.code])
                                       }
                             </code>
                         </pre>
@@ -182,7 +221,11 @@ export default class SCodeExample extends SLitElement {
         if ($content.hasAttribute('inited')) return;
         $content.setAttribute('inited', 'true');
 
-        const highlightedCode = __hljs.highlight($content?.innerHTML, { language: 'js' }).value.trim();
+        const highlightedCode = __hljs
+            .highlight($content?.innerHTML.replace(/\<\!\-\-\?lit\$.*\$\-\-\>/g, ''), {
+                language: <string>$content.getAttribute('lang'),
+            })
+            .value.trim();
         $content.innerHTML = highlightedCode;
     }
     copy() {

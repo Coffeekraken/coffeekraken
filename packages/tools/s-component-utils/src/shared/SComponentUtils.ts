@@ -266,6 +266,12 @@ export default class SComponentUtils extends __SClass {
             }),
         );
 
+        // set each props on the node
+        Object.keys(this.props).forEach((prop) => {
+            // _updateProp(prop, this.node[prop]);
+            this.node[prop] = this.props[prop];
+        });
+
         // @ts-ignore
         const nodeFirstUpdated = this.node.firstUpdated?.bind(this.node);
         // @ts-ignore
@@ -274,6 +280,7 @@ export default class SComponentUtils extends __SClass {
                 await nodeFirstUpdated();
             }
             // set the component as mounted
+            // @ts-ignore
             this.node.mounted = true;
         };
 
@@ -289,18 +296,26 @@ export default class SComponentUtils extends __SClass {
             return this.shouldUpdate;
         };
 
-        // set each props on the node
-        Object.keys(this.props).forEach((prop) => {
-            // _updateProp(prop, this.node[prop]);
-            this.node[prop] = this.props[prop];
-        });
-
         // @ts-ignore
         const styleStr = this.node.constructor.styles;
         this.injectStyle(styleStr?.cssText ?? '');
 
         // mount component when needed
         switch (this.props.mountWhen) {
+            // case 'interact':
+            //     this.node.addEventListener('mouseover', (e) => {
+            //         console.log('over');
+            //     });
+            //     this.node.addEventListener('touchstart', (e) {
+            //         console.log('touchStart');
+            //     });
+            //     this.node.addEventListener('focus', (e) => {
+            //         console.log('focus');
+            //     });
+            //     this.node.addEventListener('focusin', (e) => {
+            //         console.log('in');
+            //     });
+            //     break;
             case 'inViewport':
                 (async () => {
                     // @ts-ignore
@@ -532,45 +547,6 @@ export default class SComponentUtils extends __SClass {
         // handle case of empty input
         return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue;
     }
-
-    // /**
-    //  * @name          compileMustache
-    //  * @type          Function
-    //  *
-    //  * This method allows you to compile some mustache template
-    //  * directly from your component.
-    //  *
-    //  * @param         {String}        template        The template to compile
-    //  * @param         {any}           data            The data with which you want to compile your template
-    //  * @return        {String}                        The compiled template
-    //  *
-    //  * @since         2.0.0
-    //  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-    //  */
-    // compileMustache(template: string, data: any): string {
-    //   const res = __mustache.render(template, data);
-    //   return res;
-    // }
-
-    // /**
-    //  * @name          renderHandlerbars
-    //  * @type          Function
-    //  *
-    //  * This method allows you to compile some mustache template
-    //  * directly from your component.
-    //  *
-    //  * @param         {String}        template        The template to compile
-    //  * @param         {any}           data            The data with which you want to compile your template
-    //  * @return        {String}                        The compiled template
-    //  *
-    //  * @since         2.0.0
-    //  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-    //  */
-    // renderHandlerbars(template: string, data: any): string {
-    //   const renderFn = __handlebars.compile(template);
-    //   const res = renderFn(data);
-    //   return res;
-    // }
 
     /**
      * @name        dispatchSyncEvent

@@ -9,7 +9,7 @@ import __moment from "moment";
 * Copyright 2017 Google LLC
 * SPDX-License-Identifier: BSD-3-Clause
 */
-var _a$1, _b$1, _c, _d, _e;
+var _a$1, _b$1, _c$1, _d, _e;
 var _f;
 {
   console.warn("lit-html is in dev mode. Not recommended for production!");
@@ -600,7 +600,7 @@ class ElementPart {
     resolveDirective(this, value);
   }
 }
-(_d = (_c = globalThis)["litHtmlPlatformSupport"]) === null || _d === void 0 ? void 0 : _d.call(_c, Template, ChildPart);
+(_d = (_c$1 = globalThis)["litHtmlPlatformSupport"]) === null || _d === void 0 ? void 0 : _d.call(_c$1, Template, ChildPart);
 ((_e = (_f = globalThis)["litHtmlVersions"]) !== null && _e !== void 0 ? _e : _f["litHtmlVersions"] = []).push("2.0.0-rc.4");
 /**
 * @license
@@ -689,7 +689,10 @@ function queryAsync(selector) {
     })
   });
 }
-var _a, _b;
+var __isNode = () => {
+  return typeof process !== "undefined" && process.release && process.release.name === "node";
+};
+var _a, _b, _c;
 class SDatePickerComponentInterface extends __SInterface {
 }
 SDatePickerComponentInterface.definition = {
@@ -700,9 +703,12 @@ SDatePickerComponentInterface.definition = {
   value: {
     type: "String"
   },
+  placeholder: {
+    type: "String"
+  },
   format: {
     type: "String",
-    default: __SSugarConfig.get("datetime.dateFormat")
+    default: (_a = __SSugarConfig.get("datetime.dateFormat")) !== null && _a !== void 0 ? _a : "YYYY-MM-DD"
   },
   firstDay: {
     type: "Number",
@@ -729,20 +735,15 @@ SDatePickerComponentInterface.definition = {
     },
     description: "number of years either side (e.g. 10) or array of upper/lower range (e.g. [1900,2015])"
   },
-  showWeekNumber: {
-    type: "Boolean",
-    description: " show the ISO week number at the head of the row (default false)",
-    default: false
-  },
   rtl: {
     type: "Boolean",
     description: "reverse the calendar for right-to-left languages",
-    default: ((_a = document.querySelector("html")) === null || _a === void 0 ? void 0 : _a.getAttribute("dir")) === "rtl"
+    default: !__isNode() ? ((_b = document.querySelector("html")) === null || _b === void 0 ? void 0 : _b.getAttribute("dir")) === "rtl" : false
   },
   i18n: {
     type: "String",
     description: "language defaults for month and weekday names",
-    default: (_b = __SSugarConfig.get("datetime.i18n")) !== null && _b !== void 0 ? _b : {
+    default: (_c = __SSugarConfig.get("datetime.i18n")) !== null && _c !== void 0 ? _c : {
       previousMonth: "Previous Month",
       nextMonth: "Next Month",
       months: [
@@ -789,8 +790,122 @@ SDatePickerComponentInterface.definition = {
     default: '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="calendar-alt" class="svg-inline--fa fa-calendar-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg>'
   }
 };
-var __css = "s-date-picker {\n    display: inline-block;\n}\n\n    s-date-picker:not([mounted]) > * {\n        display: none;\n    }\n.s-date-picker {\n    display: flex;\n    width: 100%;\n}\n\n.s-date-picker__input {\n    flex-grow: 1;\n}\n\n/* .s-pikaday.is-hidden {\n    opacity: 0;\n    pointer-events: none;\n    transform: translateY(20px);\n}\n.s-pikaday {\n    opacity: 1;\n    pointer-events: all;\n    transform: translateY(0);\n    display: block !important;\n    transition: sugar.theme(ui.colorPicker.transition);\n} */\n\ns-date-picker[default-style] .s-date-picker__input {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0;\n    }\n\ns-date-picker[default-style] .s-date-picker__button {\n        border-top-left-radius: 0;\n        border-bottom-left-radius: 0;\n    }\n\n.s-date-picker__button svg {\n        height: 1em;\n    }\n";
-var __themeCss = "/**\n * This theme is an example to show how you can create your own.\n */\n.pika-single.s-pikaday {\n    color: s-color(main, foreground);\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surface-a, 1));\n    border: 1px solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));box-shadow: var(--s-theme-depth-100, 0);\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-label {\n    background-color: transparent;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    top: -0.5em;\n}\n\n.s-pikaday .pika-prev,\n.s-pikaday .is-rtl .pika-next,\n.s-pikaday .pika-next,\n.s-pikaday .is-rtl .pika-prev {\n    background: none;\n    position: relative;\n    display: inline-block;\n    font-size: 0;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    overflow: visible;\n    background: red;\n    opacity: 1;\n    width: 1em;\n    height: 1em;\n    opacity: 0.7;\n}\n\n.s-pikaday .pika-prev:hover,\n    .s-pikaday .pika-prev:focus,\n    .s-pikaday .is-rtl .pika-next:hover,\n    .s-pikaday .is-rtl .pika-next:focus,\n    .s-pikaday .pika-next:hover,\n    .s-pikaday .pika-next:focus,\n    .s-pikaday .is-rtl .pika-prev:hover,\n    .s-pikaday .is-rtl .pika-prev:focus {\n        opacity: 1;\n    }\n\n.s-pikaday .pika-prev:after, .s-pikaday .is-rtl .pika-next:after, .s-pikaday .pika-next:after, .s-pikaday .is-rtl .pika-prev:after {\n        content: '\u276F';\n        color: inherit;\n        font-size: 1rem;\n        position: absolute;\n        top: 0;\n        left: -2.2em;\n    }\n.s-pikaday .pika-prev:after, .s-pikaday .is-rtl .pika-next:after {\n        transform: rotate(180deg);\n        left: 1em;\n    }\n\n.s-pikaday .pika-next,\n.s-pikaday .is-rtl .pika-prev {\n    /* background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAQAAACGG/bgAAAAP0lEQVQ4y+3TMQoAMAgEwfwfAvvjTZ1uGzuvHhBPPGczEG+FRqqRaqQaqUaqkX6QBmmjacvQ6qEVTjsh+xizebvlaWptGXZAAAAAAElFTkSuQmCC'); */\n}\n\n.s-pikaday .pika-table {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-table th * {\n    text-decoration: none;\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n}\n\n.s-pikaday .pika-button {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-week {\n    text-decoration: none;\n}\n\n.s-pikaday .is-today .pika-button {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    outline: none;\n}\n\n.s-pikaday .is-selected .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.5));\n    box-shadow: none !important;\n}\n\n.s-pikaday .is-disabled .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    opacity: 0.3;\n}\n\n.s-pikaday .pika-button:hover {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1)) !important;\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1)) !important;\n}\n";
+function plainObject(object) {
+  if (!object)
+    return false;
+  if (typeof object !== "object")
+    return false;
+  if (object.constructor && object.constructor.name !== "Object")
+    return false;
+  if (Object.prototype.toString.call(object) !== "[object Object]")
+    return false;
+  if (object !== Object(object))
+    return false;
+  return true;
+}
+function __deepMerge(...args) {
+  function merge(firstObj, secondObj) {
+    const newObj = {};
+    if (!firstObj && secondObj)
+      return secondObj;
+    if (!secondObj && firstObj)
+      return firstObj;
+    if (!firstObj && !secondObj)
+      return {};
+    const firstProps = Object.getOwnPropertyNames(firstObj);
+    firstProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(firstObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = firstObj[key];
+      }
+    });
+    const secondProps = Object.getOwnPropertyNames(secondObj);
+    secondProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(secondObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else if (plainObject(newObj[key]) && plainObject(secondObj[key])) {
+        newObj[key] = merge(newObj[key], secondObj[key]);
+      } else {
+        newObj[key] = secondObj[key];
+      }
+    });
+    return newObj;
+  }
+  let currentObj = {};
+  for (let i = 0; i < args.length; i++) {
+    const toMergeObj = args[i];
+    currentObj = merge(currentObj, toMergeObj);
+  }
+  return currentObj;
+}
+function whenInteract(elm, settings) {
+  return new Promise((resolve, reject) => {
+    settings = __deepMerge({
+      mouse: {
+        over: true,
+        out: true,
+        click: true
+      },
+      touch: {
+        start: true,
+        end: true
+      },
+      focus: true
+    }, settings !== null && settings !== void 0 ? settings : {});
+    function interacted(interaction) {
+      resolve(interaction);
+      elm.removeEventListener("mouseover", mouseover);
+      elm.removeEventListener("mouseout", mouseout);
+      elm.removeEventListener("click", click);
+      elm.removeEventListener("touchstart", touchstart);
+      elm.removeEventListener("touchend", touchend);
+      elm.removeEventListener("focus", focus);
+      elm.removeEventListener("focusin", focus);
+    }
+    function mouseover(e) {
+      interacted("mouseover");
+    }
+    if (settings.mouse === true || settings.mouse.over) {
+      elm.addEventListener("mouseover", mouseover);
+    }
+    function mouseout(e) {
+      interacted("mouseout");
+    }
+    if (settings.mouse === true || settings.mouse.out) {
+      elm.addEventListener("mouseout", mouseout);
+    }
+    function click(e) {
+      interacted("click");
+    }
+    if (settings.mouse === true || settings.mouse.click) {
+      elm.addEventListener("click", click);
+    }
+    function touchstart(e) {
+      interacted("touchstart");
+    }
+    if (settings.touch === true || settings.touch.start) {
+      elm.addEventListener("touchstart", touchstart);
+    }
+    function touchend(e) {
+      interacted("touchend");
+    }
+    if (settings.touch === true || settings.touch.start) {
+      elm.addEventListener("touchend", touchend);
+    }
+    function focus(e) {
+      interacted("focus");
+    }
+    if (settings.focus === true) {
+      elm.addEventListener("focus", focus);
+      elm.addEventListener("focusin", focus);
+    }
+  });
+}
+var __css = "s-date-picker {\n    display: inline-block;\n}\n\n    s-date-picker:not([mounted]) > * {\n        /* display: none; */\n    }\n.s-date-picker {\n    display: flex;\n    width: 100%;\n}\n\n.s-date-picker__input {\n    flex-grow: 1;\n    padding: var(--s-theme-ui-datePicker-padding, 6px 12px);\n}\n.s-date-picker__button {\n    padding: var(--s-theme-ui-datePicker-padding, 6px 12px);\n}\n\ns-date-picker[default-style]:not([rtl]) .s-date-picker__input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n\ns-date-picker[default-style]:not([rtl]) .s-date-picker__button {\n            border-top-left-radius: 0;\n            border-bottom-left-radius: 0;\n        }\n\ns-date-picker[default-style][rtl] .s-date-picker__button {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n            order: 0;\n        }\n\ns-date-picker[default-style][rtl] .s-date-picker__input {\n            border-top-left-radius: 0;\n            border-bottom-left-radius: 0;\n            order: 1;\n        }\n\n.s-date-picker__button svg {\n        height: 1em;\n    }\n\n.s-date-picker__button svg,\n        .s-date-picker__button svg > * {\n            box-shadow: 0px 0px 3px 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + -10) * 1%),var(--s-theme-color-ui-a, 1));\n        }\n";
+var __themeCss = "/**\n * This theme is an example to show how you can create your own.\n */\n\n.pika-lendar {\n    width: auto;\n}\n\n.pika-single.s-pikaday {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-foreground-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-main-foreground-a, 1));\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surface-a, 1));\n    border: 1px solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));box-shadow: var(--s-theme-depth-100, 0);\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-label {\n    background-color: transparent;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    top: -0.5em;\n}\n\n.s-pikaday .pika-prev,\n.s-pikaday .is-rtl .pika-next,\n.s-pikaday .pika-next,\n.s-pikaday .is-rtl .pika-prev {\n    background: none;\n    position: relative;\n    display: inline-block;\n    font-size: 0;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    overflow: visible;\n    background: red;\n    opacity: 1;\n    width: 1em;\n    height: 1em;\n    opacity: 0.7;\n}\n\n.s-pikaday .pika-prev:hover,\n    .s-pikaday .pika-prev:focus,\n    .s-pikaday .is-rtl .pika-next:hover,\n    .s-pikaday .is-rtl .pika-next:focus,\n    .s-pikaday .pika-next:hover,\n    .s-pikaday .pika-next:focus,\n    .s-pikaday .is-rtl .pika-prev:hover,\n    .s-pikaday .is-rtl .pika-prev:focus {\n        opacity: 1;\n    }\n\n.s-pikaday .pika-prev:after, .s-pikaday .is-rtl .pika-next:after, .s-pikaday .pika-next:after, .s-pikaday .is-rtl .pika-prev:after {\n        content: '\u276F';\n        color: inherit;\n        font-size: 1rem;\n        position: absolute;\n        top: 0;\n        left: -2.2em;\n    }\n.s-pikaday .pika-prev:after, .s-pikaday.is-rtl .pika-next:after {\n        transform: rotate(180deg);\n        left: 1em;\n    }\n.s-pikaday.is-rtl .pika-prev:after {\n        transform: rotate(0deg) !important;\n        left: -2em;\n    }\n\n.s-pikaday .pika-table {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-table th * {\n    text-decoration: none;\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n}\n\n.s-pikaday .pika-button {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-week {\n    text-decoration: none;\n}\n\n.s-pikaday .is-today .pika-button {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    outline: none;\n}\n\n.s-pikaday .is-selected .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.5));\n    box-shadow: none !important;\n}\n\n.s-pikaday .is-disabled .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    opacity: 0.3;\n}\n\n.s-pikaday .pika-button:hover {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1)) !important;\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1)) !important;\n}\n";
 var __baseCss = `@charset "UTF-8";
 
 /*!
@@ -1089,27 +1204,28 @@ class SDatePicker extends SLitElement {
       let $button;
       if (this._component.props.button)
         $button = yield this._$button;
+      yield whenInteract(this);
+      const _this = this;
       this._picker = new __pikaday({
         field: $input,
         format: this._component.props.format,
         trigger: $button,
         firstDay: this._component.props.firstDay,
-        minDate: this._component.props.minDate,
-        maxDate: this._component.props.maxDate,
+        minDate: this.parseDate(this._component.props.minDate),
+        maxDate: this.parseDate(this._component.props.maxDate),
         disableWeekends: this._component.props.disableWeekends,
         yearRange: this._component.props.yearRange,
-        showWeekNumber: this._component.props.showWeekNumber,
-        rtl: this._component.props.rtl,
+        isRTL: this._component.props.rtl,
         i18n: this._component.props.i18n,
         numberOfMonths: this._component.props.numberOfMonths,
         events: this._component.props.events,
         defaultDate: this._component.props.value,
         theme: this._component.props.defaultStyle ? "s-pikaday" : "",
         toString(date, format) {
-          return __moment(date).format(format);
+          return _this.dateToString(date, format);
         },
         parse(dateString, format) {
-          return __moment(dateString, format).toDate();
+          return _this.parseDate(dateString, format);
         },
         onSelect: () => {
           this._dispatchEvent("select");
@@ -1154,6 +1270,12 @@ class SDatePicker extends SLitElement {
       });
     });
   }
+  parseDate(dateString, format = this._component.props.format) {
+    return __moment(dateString, format).toDate();
+  }
+  dateToString(date, format = this._component.props.format) {
+    return __moment(date).format(format);
+  }
   _dispatchEvent(eventName) {
     const event = new CustomEvent(eventName, {
       detail: {
@@ -1173,6 +1295,8 @@ class SDatePicker extends SLitElement {
                     class="${this._component.className("__input", "s-input")}"
                     type="text"
                     name="${this.name}"
+                    ?rtl="${this.rtl}"
+                    placeholder="${this.placeholder}"
                     autocomplete="off"
                 />
                 ${this.button ? html$2`

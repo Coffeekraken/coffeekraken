@@ -1,10 +1,10 @@
-<!-- 
+<!--
  * @name            First project
  * @namespace       doc
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Documentation           /doc/first-project
+ * @menu            Documentation / Get Started           /doc/get-started/first-project
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -20,17 +20,15 @@ To create a new project, simply enter this command:
 sugar new
 ```
 
-
 This will launch a quick and easy step by step creation process that will ask you for the project name, the [recipe](#recipes) to use, etc...
 
-> **[Recipe](#recipes)** is the term used in the coffeekraken environment for **"project template"** 
+> **[Recipe](#recipes)** is the term used in the coffeekraken environment for **"project template"**
 
 Once this process is done, you can start working on your project. If you choose to **not launch the development process** at the end of the step by step creation process, simply enter this command:
 
 ```shell
 sugar dev
 ```
-
 
 ## Start developing
 
@@ -44,16 +42,15 @@ That will launch some processes like:
 
 ###### **frontendServer**
 
-This server is the main one to access your project. It runs by default on port __8888__ and handle thinks like views compilation (bladePHP, twig, and others to come depending on needs...).
+This server is the main one to access your project. It runs by default on port **8888** and handle thinks like views compilation (bladePHP, twig, and others to come depending on needs...).
 
-More on this server in  the [@coffeekraken/s-frontend-server](https://www.npmjs.com/package/@coffeekraken/s-sfrontend-server) package documentation
+More on this server in the [@coffeekraken/s-frontend-server](https://www.npmjs.com/package/@coffeekraken/s-sfrontend-server) package documentation
 
 ###### **vitejs**
 
 This server is powered by the AWESOME [vitejs](https://vitejs.dev/) project and is responsible to compile and serve on the fly your assets like javascript and typescript files, css through [PostCSS](https://postcss.org/), and more...
 
 We use this package under the hood to add built-in support for things ike [PostCSS](https://postcss.org/), [Typescript](https://www.typescriptlang.org/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/) and more...
-
 
 ## Build for production
 

@@ -19,7 +19,11 @@ export default class SCodeExampleInterface extends __SInterface {
         toolbarPosition: {
             type: 'String',
             values: ['content', 'nav'],
-            default: 'content',
+            default: 'nav',
+        },
+        languages: {
+            type: 'Object',
+            default: {},
         },
     };
 }

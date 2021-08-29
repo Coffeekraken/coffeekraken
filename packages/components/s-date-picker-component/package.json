@@ -18,6 +18,7 @@
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "@simonwep/pickr": "^1.8.1",
+        "jsdom": "^17.0.0",
         "lit": "^2.0.0-rc.3",
         "moment": "^2.29.1",
         "pikaday": "^1.8.2"

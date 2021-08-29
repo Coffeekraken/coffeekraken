@@ -413,7 +413,7 @@ export default class STheme extends __SClass {
                 if (state !== 'default')
                     variantColorObj = {
                         ...defaultColorObj,
-                        variantColorObj,
+                        ...variantColorObj,
                     };
 
                 if (stateName === 'color') {

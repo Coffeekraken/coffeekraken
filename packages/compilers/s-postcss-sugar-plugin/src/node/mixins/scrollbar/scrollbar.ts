@@ -22,45 +22,46 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginScrollbarInterface extends __SInterface {
-  static definition = {
-    color: {
-      type: 'String',
-      default: 'accent'
-    },
-    width: {
-      type: 'String',
-      default: '5px'
-    }
-  };
+    static definition = {
+        color: {
+            type: 'String',
+            default: 'accent',
+        },
+        size: {
+            type: 'String',
+            default: '5px',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginScrollbarParams {
-  color: string;
-  width: string;
+    color: string;
+    size: string;
 }
 
 export { postcssSugarPluginScrollbarInterface as interface };
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginScrollbarParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginScrollbarParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginScrollbarParams = {
-    color: 'accent',
-    width: '5px',
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginScrollbarParams = {
+        color: 'accent',
+        size: '5px',
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  // lnf
-  vars.push(`
+    // lnf
+    vars.push(`
       &::-webkit-scrollbar {
-          width: ${finalParams.width}
+          width: ${finalParams.size};
+          height: ${finalParams.size};
       }
       &::-webkit-scrollbar-track {
           background-color: sugar.color(${finalParams.color}, --darken 30);
@@ -71,5 +72,5 @@ export default function ({
       }
   `);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

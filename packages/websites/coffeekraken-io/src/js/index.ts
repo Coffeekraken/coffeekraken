@@ -44,23 +44,22 @@ __SComponentUtils.setDefaultProps('s-code-example', {
 // webcomponents
 __SCodeExampleWebcomponent();
 __SActivateWebcomponent();
-// __SConfigExplorerWebcomponent();
+__SConfigExplorerWebcomponent();
 __SSidePanelWebcomponent();
 __SColorPickerWebcomponent();
 __SDatePickerWebcomponent();
 __SRangeWebcomponent();
 
 // features
-// import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
-// import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
+import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
+import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
 
-// features
-// __smoothScroll({
-//     scroll: {
-//         offset: 188,
-//     },
-// });
-// __linksStateAttributes();
+__smoothScroll({
+    scroll: {
+        offset: 188,
+    },
+});
+__linksStateAttributes();
 
 // document.addEventListener('scroll', (e) => {
 //     if (document.body.scrollTop >= 10) {

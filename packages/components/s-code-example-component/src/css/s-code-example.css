@@ -4,7 +4,7 @@
     display: block;
     border-radius: sugar.theme(ui.code.borderRadius);
     border: sugar.color(ui, border) solid 1px;
-    overflow: hidden;
+    /* overflow: hidden; */
 
     /* @sugar.utils.configToCss(ui.code, $only: rhythm-vertical); */
 }
@@ -19,6 +19,11 @@
             display: block;
         }
     }
+}
+
+.hljs {
+    overflow: visible;
+    white-space: pre-wrap;
 }
 
 .s-code-example__slot {
@@ -39,15 +44,20 @@
 }
 
 .s-code-example__content {
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
+
+    /* [default-style] & {
+        overflow: auto;
+        @sugar.scrollbar (accent);
+    } */
 }
 
 .s-code-example__code {
     display: none;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
-    overflow: hidden;
+    /* overflow: hidden; */
     line-height: 0;
 
     &[active] {
@@ -77,6 +87,6 @@
 
 [toolbar-position='nav'] .s-code-example__toolbar {
     right: sugar.space(20);
-    top: 50%;
-    transform: translate(0, -50%);
+    top: sugar.space(20);
+    /* transform: translate(0, -50%); */
 }

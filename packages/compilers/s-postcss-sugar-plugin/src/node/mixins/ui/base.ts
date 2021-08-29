@@ -52,13 +52,14 @@ export default function ({
         @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
 
         &::placeholder {
-          color: sugar.color(ui, placeholder);
+          color: sugar.color(main, placeholder);
         }
 
         @sugar.state.hover {
           background-color: sugar.color(main:hover, ui);
           border: sugar.color(ui:hover, border) solid 1px;
           color: sugar.color(ui:hover, foreground);
+          
         }
         @sugar.state.focus {
           background-color: sugar.color(main:focus, ui);

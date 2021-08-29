@@ -62,11 +62,12 @@ export default class SActivate extends SLitElement {
         });
 
         // save state
-        if (this.saveState) {
+        if (this._component.props.saveState) {
             if (!this.id)
                 throw new Error(
                     `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
                 );
+            // @ts-ignore
             this.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
         }
 
@@ -163,6 +164,7 @@ export default class SActivate extends SLitElement {
             }
 
             // add the "active" attribute to the component
+            // @ts-ignore
             this.active = true;
 
             // loop on targets to activate them

@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 export default class SDatePickerComponentInterface extends __SInterface {
     static definition = {
@@ -10,9 +11,12 @@ export default class SDatePickerComponentInterface extends __SInterface {
         value: {
             type: 'String',
         },
+        placeholder: {
+            type: 'String',
+        },
         format: {
             type: 'String',
-            default: __SSugarConfig.get('datetime.dateFormat'),
+            default: __SSugarConfig.get('datetime.dateFormat') ?? 'YYYY-MM-DD',
         },
         firstDay: {
             type: 'Number',
@@ -41,15 +45,15 @@ export default class SDatePickerComponentInterface extends __SInterface {
             },
             description: 'number of years either side (e.g. 10) or array of upper/lower range (e.g. [1900,2015])',
         },
-        showWeekNumber: {
-            type: 'Boolean',
-            description: ' show the ISO week number at the head of the row (default false)',
-            default: false,
-        },
+        // showWeekNumber: {
+        //     type: 'Boolean',
+        //     description: ' show the ISO week number at the head of the row (default false)',
+        //     default: false,
+        // },
         rtl: {
             type: 'Boolean',
             description: 'reverse the calendar for right-to-left languages',
-            default: document.querySelector('html')?.getAttribute('dir') === 'rtl',
+            default: !__isNode() ? document.querySelector('html')?.getAttribute('dir') === 'rtl' : false,
         },
         i18n: {
             type: 'String',

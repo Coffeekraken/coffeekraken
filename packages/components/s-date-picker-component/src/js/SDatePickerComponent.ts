@@ -7,6 +7,7 @@ import __SDatePickerComponentInterface from './interface/SDatePickerComponentInt
 import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __pikaday from 'pikaday';
+import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
 
 import __moment from 'moment';
 
@@ -18,6 +19,9 @@ import __baseCss from 'pikaday/css/pikaday.css';
  * @name                s-date-picker
  * @namespace           js
  * @type                Webcomponent
+ * @interface           ./interface/SDatePickerComponentInterface.js        param
+ * @menu                Styleguide / Forms              /styleguide/forms/s-date-picker
+ * @install             npm i @coffeekraken/s-date-picker-component
  * @platform            html
  * @status              beta
  *
@@ -25,13 +29,79 @@ import __baseCss from 'pikaday/css/pikaday.css';
  * sugar theming support as well as some events and more.
  * Almost all the pikaday options are available through properties. Check out the api documentation for more details...
  *
+ * @feature           All the pikaday features are supported
+ * @feature           Full support for sugar theming system for easy integration
+ *
  * @example         html
- * <s-date-picker name="myCoolDate" class="s-ui:accent"></s-date-picker>
- * <s-date-picker name="myOtherDate" number-of-months="3" rtl></s-date-picker>
+ * <label class="s-label s-mb--30">
+ *      Min and max date
+ *      <s-date-picker
+ *          placeholder="Select a date"
+ *          class="s-ui--accent s-width--50"
+ *          min-date="2021-08-10"
+ *          max-date="2021-08-20"
+ *          name="myDatePicker2"
+ *          default-style
+ *      ></s-date-picker>
+ * </label>
+ *
+ * <label class="s-label s-mb--30">
+ *     Disable weekends
+ *     <s-date-picker
+ *         placeholder="Select a date"
+ *         class="s-ui--complementary s-width--50"
+ *         name="myDatePicker3"
+ *         disable-weekends
+ *         default-style
+ *     ></s-date-picker>
+ * </label>
+ *
+ * <label class="s-label s-mb--30">
+ *     RTL support
+ *     <s-date-picker
+ *         placeholder="Select a date"
+ *         class="s-ui--accent s-width--50"
+ *         min-date="2021-08-10"
+ *         name="myDatePicker1"
+ *         rtl
+ *         default-style
+ *     ></s-date-picker>
+ * </label>
+ *
+ * <label class="s-label s-mb--30">
+ *     Display more than 1 month
+ *     <s-date-picker
+ *         placeholder="Select a date"
+ *         class="s-ui--success s-width--50"
+ *         name="myDatePicker4"
+ *         number-of-months="2"
+ *         default-style
+ *     ></s-date-picker>
+ * </label>
+ *
+ * <label class="s-label s-mb--30">
+ *     Custom calendar icon
+ *     <s-date-picker
+ *         placeholder="Select a date"
+ *         class="s-ui--error s-width--50"
+ *         name="myDatePicker5"
+ *         calendar-icon="<?xml version='1.0' encoding='iso-8859-1'?>
+ * <*svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 488.901 488.901' style='enable-background:new 0 0 488.901 488.901;' xml:space='preserve'><g><g><g><path fill='currentColor' d='M468.9,56.1h-76.2v-36c0-10.6-9.5-20.1-20.1-20.1s-20.1,8.5-20.1,20.1v36H136.6v-36c0-10.6-9.5-20.1-20.1-20.1
+ *			S96.4,8.5,96.4,20.1v36H20.1C9.5,56.1,0,64.6,0,76.2v392.6c0,10.6,8.5,20.1,20.1,20.1h329.1c5.3,0,9.5-1.1,13.8-5.3l119.6-111.1
+ *			c4.2-4.2,6.3-9.5,6.3-14.8V76.2C489,65.6,480.5,56.1,468.9,56.1z M40.2,96.3h408.5v241.3H348.2c-10.6,0-20.1,8.5-20.1,20.1v91
+ *			H40.2V96.3z M417.7,377.8l-48.4,44.6v-44.6H417.7z'/></g><path fill='currentColor' d='M286.3,256.1c8.7-9.8,13.9-22.7,13.9-36.8c0-30.7-25-55.7-55.7-55.7s-55.7,25-55.7,55.7c0,14.1,5.3,27,13.9,36.8
+ *		c-13,11.6-21.2,28.4-21.2,47.1c0,34.7,28.3,63,63,63s63-28.3,63-63C307.5,284.5,299.3,267.7,286.3,256.1z M244.5,198.6
+ *		c11.4,0,20.7,9.3,20.7,20.7s-9.3,20.7-20.7,20.7s-20.7-9.3-20.7-20.7S233.1,198.6,244.5,198.6z M244.5,331.3
+ *		c-15.4,0-28-12.6-28-28s12.6-28,28-28s28,12.6,28,28S259.9,331.3,244.5,331.3z'/></g></g><g></svg>"
+ *         default-style
+ *     ></s-date-picker>
+ * </label>
  *
  * @example         js
  * import { webcomponent as SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
  * SDatePickerWebcomponent();
+ *
+ * @todo            Support for the "showWeekNumber" setting
  *
  * @see             https://www.npmjs.com/package/pikaday
  * @since           2.0.0
@@ -47,7 +117,7 @@ export interface ISDatePickerComponentProps extends ISComponentUtilsDefaultProps
     maxDate: string;
     disableWeekends: boolean;
     yearRange: number[];
-    showWeekNumber: boolean;
+    // showWeekNumber: boolean;
     rtl: boolean;
     i18n: string;
     numberOfMonths: number;
@@ -94,27 +164,30 @@ export default class SDatePicker extends SLitElement {
         let $button;
         if (this._component.props.button) $button = await this._$button;
 
+        await __whenInteract(this);
+
+        const _this = this;
         this._picker = new __pikaday({
             field: $input,
             format: this._component.props.format,
             trigger: $button,
             firstDay: this._component.props.firstDay,
-            minDate: this._component.props.minDate,
-            maxDate: this._component.props.maxDate,
+            minDate: this.parseDate(this._component.props.minDate),
+            maxDate: this.parseDate(this._component.props.maxDate),
             disableWeekends: this._component.props.disableWeekends,
             yearRange: this._component.props.yearRange,
-            showWeekNumber: this._component.props.showWeekNumber,
-            rtl: this._component.props.rtl,
+            // showWeekNumber: this._component.props.showWeekNumber,
+            isRTL: this._component.props.rtl,
             i18n: this._component.props.i18n,
             numberOfMonths: this._component.props.numberOfMonths,
             events: this._component.props.events,
             defaultDate: this._component.props.value,
             theme: this._component.props.defaultStyle ? 's-pikaday' : '',
             toString(date, format) {
-                return __moment(date).format(format);
+                return _this.dateToString(date, format);
             },
             parse(dateString, format) {
-                return __moment(dateString, format).toDate();
+                return _this.parseDate(dateString, format);
             },
             onSelect: () => {
                 this._dispatchEvent('select');
@@ -159,6 +232,14 @@ export default class SDatePicker extends SLitElement {
             this[key] = this._picker[key].bind(this._picker);
         });
     }
+
+    parseDate(dateString, format = this._component.props.format) {
+        return __moment(dateString, format).toDate();
+    }
+    dateToString(date, format = this._component.props.format) {
+        return __moment(date).format(format);
+    }
+
     _dispatchEvent(eventName) {
         const event = new CustomEvent(eventName, {
             detail: {
@@ -178,6 +259,8 @@ export default class SDatePicker extends SLitElement {
                     class="${this._component.className('__input', 's-input')}"
                     type="text"
                     name="${this.name}"
+                    ?rtl="${this.rtl}"
+                    placeholder="${this.placeholder}"
                     autocomplete="off"
                 />
                 ${this.button

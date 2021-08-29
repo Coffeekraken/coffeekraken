@@ -1,8 +1,13 @@
 /**
  * This theme is an example to show how you can create your own.
  */
+
+.pika-lendar {
+    width: auto;
+}
+
 .pika-single.s-pikaday {
-    color: s-color(main, foreground);
+    color: sugar.color(main, foreground);
     background: sugar.color(main, surface);
     border: 1px solid sugar.color(ui, border);
     @sugar.depth (100);
@@ -47,16 +52,17 @@
     }
 }
 .s-pikaday .pika-prev,
-.s-pikaday .is-rtl .pika-next {
+.s-pikaday.is-rtl .pika-next {
     &:after {
         transform: rotate(180deg);
         left: 1em;
     }
 }
-
-.s-pikaday .pika-next,
-.s-pikaday .is-rtl .pika-prev {
-    /* background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAQAAACGG/bgAAAAP0lEQVQ4y+3TMQoAMAgEwfwfAvvjTZ1uGzuvHhBPPGczEG+FRqqRaqQaqUaqkX6QBmmjacvQ6qEVTjsh+xizebvlaWptGXZAAAAAAElFTkSuQmCC'); */
+.s-pikaday.is-rtl .pika-prev {
+    &:after {
+        transform: rotate(0deg) !important;
+        left: -2em;
+    }
 }
 
 .s-pikaday .pika-table {

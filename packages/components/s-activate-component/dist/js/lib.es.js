@@ -169,7 +169,7 @@ class SActivate extends SLitElement {
     (_a = this._$nodes) === null || _a === void 0 ? void 0 : _a.forEach(($node) => {
       this.appendChild($node);
     });
-    if (this.saveState) {
+    if (this._component.props.saveState) {
       if (!this.id)
         throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
       this.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;

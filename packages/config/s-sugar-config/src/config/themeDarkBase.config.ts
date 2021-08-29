@@ -69,7 +69,8 @@ export default function (env, config) {
                     lighten: 46,
                 },
                 placeholder: {
-                    darken: 10,
+                    lighten: 50,
+                    alpha: 0.4,
                 },
                 foreground: {
                     lighten: 50,

@@ -25,7 +25,6 @@
                         @include('doc.description', ['block' => $firstBlock])
                         @include('doc.install', ['block' => $firstBlock])
 
-
                     </div>
 
                     <div>

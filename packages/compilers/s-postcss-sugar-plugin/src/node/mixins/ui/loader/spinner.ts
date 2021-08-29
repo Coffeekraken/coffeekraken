@@ -39,6 +39,9 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLoaderSpinnerMixinParams = {
+        name: '',
+        duration: '',
+        easing: '',
         ...params,
     };
 

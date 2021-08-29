@@ -1,17 +1,16 @@
 s-code-example {
     display: block;
+    position: relative;
     @sugar.theme (dark);
     @sugar.depth (100);
     @sugar.border.radius();
+
+    /* @sugar.shadow.gradient (0, 10px, 10px, 1, sugar.color(accent), sugar.color(complementary)) {
+        width: calc(100% - 40px);
+        opacity: 0.3;
+    } */
 }
 
 .s-code-example__toolbar {
     color: sugar.color(ui, text);
 }
-
-/* .s-until--mounted {
-    display: none;
-}
-*:not([mounted]) + .s-until--mounted {
-    display: block;
-} */

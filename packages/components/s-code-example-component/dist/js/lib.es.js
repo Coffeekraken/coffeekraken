@@ -1,5 +1,5 @@
 import __SComponentUtils, {SComponentUtilsDefaultInterface, SLitElement} from "@coffeekraken/s-component-utils";
-import {css, unsafeCSS, html} from "lit";
+import {css as css$1, unsafeCSS, html as html$2} from "lit";
 import {webcomponent as webcomponent$1} from "@coffeekraken/s-clipboard-copy-component";
 import __SInterface from "@coffeekraken/s-interface";
 function wait(timeout = 0) {
@@ -9,6 +9,644 @@ function wait(timeout = 0) {
     }, timeout);
   });
 }
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+var _a, _b, _c, _d, _e;
+var _f;
+{
+  console.warn("lit-html is in dev mode. Not recommended for production!");
+}
+const wrap = ((_a = window.ShadyDOM) === null || _a === void 0 ? void 0 : _a.inUse) && ((_b = window.ShadyDOM) === null || _b === void 0 ? void 0 : _b.noPatch) === true ? window.ShadyDOM.wrap : (node) => node;
+const trustedTypes = globalThis.trustedTypes;
+const policy = trustedTypes ? trustedTypes.createPolicy("lit-html", {
+  createHTML: (s) => s
+}) : void 0;
+const identityFunction = (value) => value;
+const noopSanitizer = (_node, _name, _type) => identityFunction;
+const createSanitizer = (node, name, type) => {
+  return sanitizerFactoryInternal();
+};
+const boundAttributeSuffix = "$lit$";
+const marker = `lit$${String(Math.random()).slice(9)}$`;
+const markerMatch = "?" + marker;
+const nodeMarker = `<${markerMatch}>`;
+const d = document;
+const createMarker = (v = "") => d.createComment(v);
+const isPrimitive = (value) => value === null || typeof value != "object" && typeof value != "function";
+const isArray = Array.isArray;
+const isIterable = (value) => {
+  var _a2;
+  return isArray(value) || typeof ((_a2 = value) === null || _a2 === void 0 ? void 0 : _a2[Symbol.iterator]) === "function";
+};
+const SPACE_CHAR = `[ 	
+\f\r]`;
+const ATTR_VALUE_CHAR = `[^ 	
+\f\r"'\`<>=]`;
+const NAME_CHAR = `[^\\s"'>=/]`;
+const textEndRegex = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g;
+const COMMENT_START = 1;
+const TAG_NAME = 2;
+const DYNAMIC_TAG_NAME = 3;
+const commentEndRegex = /-->/g;
+const comment2EndRegex = />/g;
+const tagEndRegex = new RegExp(`>|${SPACE_CHAR}(?:(${NAME_CHAR}+)(${SPACE_CHAR}*=${SPACE_CHAR}*(?:${ATTR_VALUE_CHAR}|("|')|))|$)`, "g");
+const ENTIRE_MATCH = 0;
+const ATTRIBUTE_NAME = 1;
+const SPACES_AND_EQUALS = 2;
+const QUOTE_CHAR = 3;
+const singleQuoteAttrEndRegex = /'/g;
+const doubleQuoteAttrEndRegex = /"/g;
+const rawTextElement = /^(?:script|style|textarea)$/i;
+const HTML_RESULT = 1;
+const SVG_RESULT = 2;
+const ATTRIBUTE_PART = 1;
+const CHILD_PART = 2;
+const PROPERTY_PART = 3;
+const BOOLEAN_ATTRIBUTE_PART = 4;
+const EVENT_PART = 5;
+const ELEMENT_PART = 6;
+const COMMENT_PART = 7;
+const tag = (type) => (strings, ...values) => {
+  if (strings.some((s) => s === void 0)) {
+    console.warn("Some template strings are undefined.\nThis is probably caused by illegal octal escape sequences.");
+  }
+  return {
+    ["_$litType$"]: type,
+    strings,
+    values
+  };
+};
+const html$1 = tag(HTML_RESULT);
+const noChange = Symbol.for("lit-noChange");
+const nothing = Symbol.for("lit-nothing");
+const templateCache = new WeakMap();
+const walker = d.createTreeWalker(d, 129, null, false);
+let sanitizerFactoryInternal = noopSanitizer;
+const getTemplateHtml = (strings, type) => {
+  const l = strings.length - 1;
+  const attrNames = [];
+  let html2 = type === SVG_RESULT ? "<svg>" : "";
+  let rawTextEndRegex;
+  let regex = textEndRegex;
+  for (let i = 0; i < l; i++) {
+    const s = strings[i];
+    let attrNameEndIndex = -1;
+    let attrName;
+    let lastIndex = 0;
+    let match;
+    while (lastIndex < s.length) {
+      regex.lastIndex = lastIndex;
+      match = regex.exec(s);
+      if (match === null) {
+        break;
+      }
+      lastIndex = regex.lastIndex;
+      if (regex === textEndRegex) {
+        if (match[COMMENT_START] === "!--") {
+          regex = commentEndRegex;
+        } else if (match[COMMENT_START] !== void 0) {
+          regex = comment2EndRegex;
+        } else if (match[TAG_NAME] !== void 0) {
+          if (rawTextElement.test(match[TAG_NAME])) {
+            rawTextEndRegex = new RegExp(`</${match[TAG_NAME]}`, "g");
+          }
+          regex = tagEndRegex;
+        } else if (match[DYNAMIC_TAG_NAME] !== void 0) {
+          regex = tagEndRegex;
+        }
+      } else if (regex === tagEndRegex) {
+        if (match[ENTIRE_MATCH] === ">") {
+          regex = rawTextEndRegex !== null && rawTextEndRegex !== void 0 ? rawTextEndRegex : textEndRegex;
+          attrNameEndIndex = -1;
+        } else if (match[ATTRIBUTE_NAME] === void 0) {
+          attrNameEndIndex = -2;
+        } else {
+          attrNameEndIndex = regex.lastIndex - match[SPACES_AND_EQUALS].length;
+          attrName = match[ATTRIBUTE_NAME];
+          regex = match[QUOTE_CHAR] === void 0 ? tagEndRegex : match[QUOTE_CHAR] === '"' ? doubleQuoteAttrEndRegex : singleQuoteAttrEndRegex;
+        }
+      } else if (regex === doubleQuoteAttrEndRegex || regex === singleQuoteAttrEndRegex) {
+        regex = tagEndRegex;
+      } else if (regex === commentEndRegex || regex === comment2EndRegex) {
+        regex = textEndRegex;
+      } else {
+        regex = tagEndRegex;
+        rawTextEndRegex = void 0;
+      }
+    }
+    {
+      console.assert(attrNameEndIndex === -1 || regex === tagEndRegex || regex === singleQuoteAttrEndRegex || regex === doubleQuoteAttrEndRegex, "unexpected parse state B");
+    }
+    const end = regex === tagEndRegex && strings[i + 1].startsWith("/>") ? " " : "";
+    html2 += regex === textEndRegex ? s + nodeMarker : attrNameEndIndex >= 0 ? (attrNames.push(attrName), s.slice(0, attrNameEndIndex) + boundAttributeSuffix + s.slice(attrNameEndIndex)) + marker + end : s + marker + (attrNameEndIndex === -2 ? (attrNames.push(void 0), i) : end);
+  }
+  const htmlResult = html2 + (strings[l] || "<?>") + (type === SVG_RESULT ? "</svg>" : "");
+  return [
+    policy !== void 0 ? policy.createHTML(htmlResult) : htmlResult,
+    attrNames
+  ];
+};
+class Template {
+  constructor({strings, ["_$litType$"]: type}, options) {
+    this.parts = [];
+    let node;
+    let nodeIndex = 0;
+    let attrNameIndex = 0;
+    const partCount = strings.length - 1;
+    const parts = this.parts;
+    const [html2, attrNames] = getTemplateHtml(strings, type);
+    this.el = Template.createElement(html2, options);
+    walker.currentNode = this.el.content;
+    if (type === SVG_RESULT) {
+      const content = this.el.content;
+      const svgElement = content.firstChild;
+      svgElement.remove();
+      content.append(...svgElement.childNodes);
+    }
+    while ((node = walker.nextNode()) !== null && parts.length < partCount) {
+      if (node.nodeType === 1) {
+        if (node.hasAttributes()) {
+          const attrsToRemove = [];
+          for (const name of node.getAttributeNames()) {
+            if (name.endsWith(boundAttributeSuffix) || name.startsWith(marker)) {
+              const realName = attrNames[attrNameIndex++];
+              attrsToRemove.push(name);
+              if (realName !== void 0) {
+                const value = node.getAttribute(realName.toLowerCase() + boundAttributeSuffix);
+                const statics = value.split(marker);
+                const m = /([.?@])?(.*)/.exec(realName);
+                parts.push({
+                  type: ATTRIBUTE_PART,
+                  index: nodeIndex,
+                  name: m[2],
+                  strings: statics,
+                  ctor: m[1] === "." ? PropertyPart : m[1] === "?" ? BooleanAttributePart : m[1] === "@" ? EventPart : AttributePart
+                });
+              } else {
+                parts.push({
+                  type: ELEMENT_PART,
+                  index: nodeIndex
+                });
+              }
+            }
+          }
+          for (const name of attrsToRemove) {
+            node.removeAttribute(name);
+          }
+        }
+        if (rawTextElement.test(node.tagName)) {
+          const strings2 = node.textContent.split(marker);
+          const lastIndex = strings2.length - 1;
+          if (lastIndex > 0) {
+            node.textContent = trustedTypes ? trustedTypes.emptyScript : "";
+            for (let i = 0; i < lastIndex; i++) {
+              node.append(strings2[i], createMarker());
+              walker.nextNode();
+              parts.push({type: CHILD_PART, index: ++nodeIndex});
+            }
+            node.append(strings2[lastIndex], createMarker());
+          }
+        }
+      } else if (node.nodeType === 8) {
+        const data = node.data;
+        if (data === markerMatch) {
+          parts.push({type: CHILD_PART, index: nodeIndex});
+        } else {
+          let i = -1;
+          while ((i = node.data.indexOf(marker, i + 1)) !== -1) {
+            parts.push({type: COMMENT_PART, index: nodeIndex});
+            i += marker.length - 1;
+          }
+        }
+      }
+      nodeIndex++;
+    }
+  }
+  static createElement(html2, _options) {
+    const el = d.createElement("template");
+    el.innerHTML = html2;
+    return el;
+  }
+}
+function resolveDirective(part, value, parent = part, attributeIndex) {
+  var _a2, _b2, _c2;
+  var _d2;
+  if (value === noChange) {
+    return value;
+  }
+  let currentDirective = attributeIndex !== void 0 ? (_a2 = parent.__directives) === null || _a2 === void 0 ? void 0 : _a2[attributeIndex] : parent.__directive;
+  const nextDirectiveConstructor = isPrimitive(value) ? void 0 : value["_$litDirective$"];
+  if ((currentDirective === null || currentDirective === void 0 ? void 0 : currentDirective.constructor) !== nextDirectiveConstructor) {
+    (_b2 = currentDirective === null || currentDirective === void 0 ? void 0 : currentDirective["_$notifyDirectiveConnectionChanged"]) === null || _b2 === void 0 ? void 0 : _b2.call(currentDirective, false);
+    if (nextDirectiveConstructor === void 0) {
+      currentDirective = void 0;
+    } else {
+      currentDirective = new nextDirectiveConstructor(part);
+      currentDirective._$initialize(part, parent, attributeIndex);
+    }
+    if (attributeIndex !== void 0) {
+      ((_c2 = (_d2 = parent).__directives) !== null && _c2 !== void 0 ? _c2 : _d2.__directives = [])[attributeIndex] = currentDirective;
+    } else {
+      parent.__directive = currentDirective;
+    }
+  }
+  if (currentDirective !== void 0) {
+    value = resolveDirective(part, currentDirective._$resolve(part, value.values), currentDirective, attributeIndex);
+  }
+  return value;
+}
+class TemplateInstance {
+  constructor(template, parent) {
+    this._parts = [];
+    this._$disconnectableChildren = void 0;
+    this._$template = template;
+    this._$parent = parent;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _clone(options) {
+    var _a2;
+    const {el: {content}, parts} = this._$template;
+    const fragment = ((_a2 = options === null || options === void 0 ? void 0 : options.creationScope) !== null && _a2 !== void 0 ? _a2 : d).importNode(content, true);
+    walker.currentNode = fragment;
+    let node = walker.nextNode();
+    let nodeIndex = 0;
+    let partIndex = 0;
+    let templatePart = parts[0];
+    while (templatePart !== void 0) {
+      if (nodeIndex === templatePart.index) {
+        let part;
+        if (templatePart.type === CHILD_PART) {
+          part = new ChildPart(node, node.nextSibling, this, options);
+        } else if (templatePart.type === ATTRIBUTE_PART) {
+          part = new templatePart.ctor(node, templatePart.name, templatePart.strings, this, options);
+        } else if (templatePart.type === ELEMENT_PART) {
+          part = new ElementPart(node, this, options);
+        }
+        this._parts.push(part);
+        templatePart = parts[++partIndex];
+      }
+      if (nodeIndex !== (templatePart === null || templatePart === void 0 ? void 0 : templatePart.index)) {
+        node = walker.nextNode();
+        nodeIndex++;
+      }
+    }
+    return fragment;
+  }
+  _update(values) {
+    let i = 0;
+    for (const part of this._parts) {
+      if (part !== void 0) {
+        if (part.strings !== void 0) {
+          part._$setValue(values, part, i);
+          i += part.strings.length - 2;
+        } else {
+          part._$setValue(values[i]);
+        }
+      }
+      i++;
+    }
+  }
+}
+class ChildPart {
+  constructor(startNode, endNode, parent, options) {
+    this.type = CHILD_PART;
+    this.__isConnected = true;
+    this._$disconnectableChildren = void 0;
+    this._$startNode = startNode;
+    this._$endNode = endNode;
+    this._$parent = parent;
+    this.options = options;
+    {
+      this._textSanitizer = void 0;
+    }
+  }
+  get _$isConnected() {
+    var _a2, _b2;
+    return (_b2 = (_a2 = this._$parent) === null || _a2 === void 0 ? void 0 : _a2._$isConnected) !== null && _b2 !== void 0 ? _b2 : this.__isConnected;
+  }
+  get parentNode() {
+    return wrap(this._$startNode).parentNode;
+  }
+  get startNode() {
+    return this._$startNode;
+  }
+  get endNode() {
+    return this._$endNode;
+  }
+  _$setValue(value, directiveParent = this) {
+    value = resolveDirective(this, value, directiveParent);
+    if (isPrimitive(value)) {
+      if (value === nothing || value == null || value === "") {
+        if (this._$committedValue !== nothing) {
+          this._$clear();
+        }
+        this._$committedValue = nothing;
+      } else if (value !== this._$committedValue && value !== noChange) {
+        this._commitText(value);
+      }
+    } else if (value["_$litType$"] !== void 0) {
+      this._commitTemplateResult(value);
+    } else if (value.nodeType !== void 0) {
+      this._commitNode(value);
+    } else if (isIterable(value)) {
+      this._commitIterable(value);
+    } else {
+      this._commitText(value);
+    }
+  }
+  _insert(node, ref = this._$endNode) {
+    return wrap(wrap(this._$startNode).parentNode).insertBefore(node, ref);
+  }
+  _commitNode(value) {
+    var _a2;
+    if (this._$committedValue !== value) {
+      this._$clear();
+      if (sanitizerFactoryInternal !== noopSanitizer) {
+        const parentNodeName = (_a2 = this._$startNode.parentNode) === null || _a2 === void 0 ? void 0 : _a2.nodeName;
+        if (parentNodeName === "STYLE" || parentNodeName === "SCRIPT") {
+          this._insert(new Text("/* lit-html will not write TemplateResults to scripts and styles */"));
+          return;
+        }
+      }
+      this._$committedValue = this._insert(value);
+    }
+  }
+  _commitText(value) {
+    const node = wrap(this._$startNode).nextSibling;
+    if (node !== null && node.nodeType === 3 && (this._$endNode === null ? wrap(node).nextSibling === null : node === wrap(this._$endNode).previousSibling)) {
+      {
+        if (this._textSanitizer === void 0) {
+          this._textSanitizer = createSanitizer();
+        }
+        value = this._textSanitizer(value);
+      }
+      node.data = value;
+    } else {
+      {
+        const textNode = document.createTextNode("");
+        this._commitNode(textNode);
+        if (this._textSanitizer === void 0) {
+          this._textSanitizer = createSanitizer();
+        }
+        value = this._textSanitizer(value);
+        textNode.data = value;
+      }
+    }
+    this._$committedValue = value;
+  }
+  _commitTemplateResult(result) {
+    var _a2;
+    const {values, ["_$litType$"]: type} = result;
+    const template = typeof type === "number" ? this._$getTemplate(result) : (type.el === void 0 && (type.el = Template.createElement(type.h, this.options)), type);
+    if (((_a2 = this._$committedValue) === null || _a2 === void 0 ? void 0 : _a2._$template) === template) {
+      this._$committedValue._update(values);
+    } else {
+      const instance = new TemplateInstance(template, this);
+      const fragment = instance._clone(this.options);
+      instance._update(values);
+      this._commitNode(fragment);
+      this._$committedValue = instance;
+    }
+  }
+  _$getTemplate(result) {
+    let template = templateCache.get(result.strings);
+    if (template === void 0) {
+      templateCache.set(result.strings, template = new Template(result));
+    }
+    return template;
+  }
+  _commitIterable(value) {
+    if (!isArray(this._$committedValue)) {
+      this._$committedValue = [];
+      this._$clear();
+    }
+    const itemParts = this._$committedValue;
+    let partIndex = 0;
+    let itemPart;
+    for (const item of value) {
+      if (partIndex === itemParts.length) {
+        itemParts.push(itemPart = new ChildPart(this._insert(createMarker()), this._insert(createMarker()), this, this.options));
+      } else {
+        itemPart = itemParts[partIndex];
+      }
+      itemPart._$setValue(item);
+      partIndex++;
+    }
+    if (partIndex < itemParts.length) {
+      this._$clear(itemPart && wrap(itemPart._$endNode).nextSibling, partIndex);
+      itemParts.length = partIndex;
+    }
+  }
+  _$clear(start = wrap(this._$startNode).nextSibling, from) {
+    var _a2;
+    (_a2 = this._$notifyConnectionChanged) === null || _a2 === void 0 ? void 0 : _a2.call(this, false, true, from);
+    while (start && start !== this._$endNode) {
+      const n = wrap(start).nextSibling;
+      wrap(start).remove();
+      start = n;
+    }
+  }
+  setConnected(isConnected) {
+    var _a2;
+    if (this._$parent === void 0) {
+      this.__isConnected = isConnected;
+      (_a2 = this._$notifyConnectionChanged) === null || _a2 === void 0 ? void 0 : _a2.call(this, isConnected);
+    } else {
+      throw new Error("part.setConnected() may only be called on a RootPart returned from render().");
+    }
+  }
+}
+class AttributePart {
+  constructor(element, name, strings, parent, options) {
+    this.type = ATTRIBUTE_PART;
+    this._$committedValue = nothing;
+    this._$disconnectableChildren = void 0;
+    this.element = element;
+    this.name = name;
+    this._$parent = parent;
+    this.options = options;
+    if (strings.length > 2 || strings[0] !== "" || strings[1] !== "") {
+      this._$committedValue = new Array(strings.length - 1).fill(nothing);
+      this.strings = strings;
+    } else {
+      this._$committedValue = nothing;
+    }
+    {
+      this._sanitizer = void 0;
+    }
+  }
+  get tagName() {
+    return this.element.tagName;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _$setValue(value, directiveParent = this, valueIndex, noCommit) {
+    const strings = this.strings;
+    let change = false;
+    if (strings === void 0) {
+      value = resolveDirective(this, value, directiveParent, 0);
+      change = !isPrimitive(value) || value !== this._$committedValue && value !== noChange;
+      if (change) {
+        this._$committedValue = value;
+      }
+    } else {
+      const values = value;
+      value = strings[0];
+      let i, v;
+      for (i = 0; i < strings.length - 1; i++) {
+        v = resolveDirective(this, values[valueIndex + i], directiveParent, i);
+        if (v === noChange) {
+          v = this._$committedValue[i];
+        }
+        change || (change = !isPrimitive(v) || v !== this._$committedValue[i]);
+        if (v === nothing) {
+          value = nothing;
+        } else if (value !== nothing) {
+          value += (v !== null && v !== void 0 ? v : "") + strings[i + 1];
+        }
+        this._$committedValue[i] = v;
+      }
+    }
+    if (change && !noCommit) {
+      this._commitValue(value);
+    }
+  }
+  _commitValue(value) {
+    if (value === nothing) {
+      wrap(this.element).removeAttribute(this.name);
+    } else {
+      {
+        if (this._sanitizer === void 0) {
+          this._sanitizer = sanitizerFactoryInternal(this.element, this.name);
+        }
+        value = this._sanitizer(value !== null && value !== void 0 ? value : "");
+      }
+      wrap(this.element).setAttribute(this.name, value !== null && value !== void 0 ? value : "");
+    }
+  }
+}
+class PropertyPart extends AttributePart {
+  constructor() {
+    super(...arguments);
+    this.type = PROPERTY_PART;
+  }
+  _commitValue(value) {
+    {
+      if (this._sanitizer === void 0) {
+        this._sanitizer = sanitizerFactoryInternal(this.element, this.name);
+      }
+      value = this._sanitizer(value);
+    }
+    this.element[this.name] = value === nothing ? void 0 : value;
+  }
+}
+class BooleanAttributePart extends AttributePart {
+  constructor() {
+    super(...arguments);
+    this.type = BOOLEAN_ATTRIBUTE_PART;
+  }
+  _commitValue(value) {
+    if (value && value !== nothing) {
+      wrap(this.element).setAttribute(this.name, "");
+    } else {
+      wrap(this.element).removeAttribute(this.name);
+    }
+  }
+}
+class EventPart extends AttributePart {
+  constructor() {
+    super(...arguments);
+    this.type = EVENT_PART;
+  }
+  _$setValue(newListener, directiveParent = this) {
+    var _a2;
+    newListener = (_a2 = resolveDirective(this, newListener, directiveParent, 0)) !== null && _a2 !== void 0 ? _a2 : nothing;
+    if (newListener === noChange) {
+      return;
+    }
+    const oldListener = this._$committedValue;
+    const shouldRemoveListener = newListener === nothing && oldListener !== nothing || newListener.capture !== oldListener.capture || newListener.once !== oldListener.once || newListener.passive !== oldListener.passive;
+    const shouldAddListener = newListener !== nothing && (oldListener === nothing || shouldRemoveListener);
+    if (shouldRemoveListener) {
+      this.element.removeEventListener(this.name, this, oldListener);
+    }
+    if (shouldAddListener) {
+      this.element.addEventListener(this.name, this, newListener);
+    }
+    this._$committedValue = newListener;
+  }
+  handleEvent(event) {
+    var _a2, _b2;
+    if (typeof this._$committedValue === "function") {
+      this._$committedValue.call((_b2 = (_a2 = this.options) === null || _a2 === void 0 ? void 0 : _a2.host) !== null && _b2 !== void 0 ? _b2 : this.element, event);
+    } else {
+      this._$committedValue.handleEvent(event);
+    }
+  }
+}
+class ElementPart {
+  constructor(element, parent, options) {
+    this.element = element;
+    this.type = ELEMENT_PART;
+    this._$disconnectableChildren = void 0;
+    this._$parent = parent;
+    this.options = options;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _$setValue(value) {
+    resolveDirective(this, value);
+  }
+}
+(_d = (_c = globalThis)["litHtmlPlatformSupport"]) === null || _d === void 0 ? void 0 : _d.call(_c, Template, ChildPart);
+((_e = (_f = globalThis)["litHtmlVersions"]) !== null && _e !== void 0 ? _e : _f["litHtmlVersions"] = []).push("2.0.0-rc.4");
+/**
+* @license
+* Copyright 2020 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const stringsCache = new Map();
+const withStatic = (coreTag) => (strings, ...values) => {
+  var _a2;
+  const l = values.length;
+  let staticValue;
+  let dynamicValue;
+  const staticStrings = [];
+  const dynamicValues = [];
+  let i = 0;
+  let hasStatics = false;
+  let s;
+  while (i < l) {
+    s = strings[i];
+    while (i < l && (dynamicValue = values[i], staticValue = (_a2 = dynamicValue) === null || _a2 === void 0 ? void 0 : _a2["_$litStatic$"]) !== void 0) {
+      s += staticValue + strings[++i];
+      hasStatics = true;
+    }
+    dynamicValues.push(dynamicValue);
+    staticStrings.push(s);
+    i++;
+  }
+  if (i === l) {
+    staticStrings.push(strings[l]);
+  }
+  if (hasStatics) {
+    const key = staticStrings.join("$$lit$$");
+    strings = stringsCache.get(key);
+    if (strings === void 0) {
+      stringsCache.set(key, strings = staticStrings);
+    }
+    values = dynamicValues;
+  }
+  return coreTag(strings, ...values);
+};
+const html = withStatic(html$1);
 /**
 * @license
 * Copyright 2017 Google LLC
@@ -52,7 +690,7 @@ function property(options) {
 * SPDX-License-Identifier: BSD-3-Clause
 */
 const decorateProperty = ({finisher, descriptor}) => (protoOrDescriptor, name) => {
-  var _a;
+  var _a2;
   if (name !== void 0) {
     const ctor = protoOrDescriptor.constructor;
     if (descriptor !== void 0) {
@@ -60,7 +698,7 @@ const decorateProperty = ({finisher, descriptor}) => (protoOrDescriptor, name) =
     }
     finisher === null || finisher === void 0 ? void 0 : finisher(ctor, name);
   } else {
-    const key = (_a = protoOrDescriptor.originalKey) !== null && _a !== void 0 ? _a : protoOrDescriptor.key;
+    const key = (_a2 = protoOrDescriptor.originalKey) !== null && _a2 !== void 0 ? _a2 : protoOrDescriptor.key;
     const info = descriptor != void 0 ? {
       kind: "method",
       placement: "prototype",
@@ -85,8 +723,8 @@ function query(selector, cache) {
     descriptor: (name) => {
       const descriptor = {
         get() {
-          var _a;
-          return (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(selector);
+          var _a2;
+          return (_a2 = this.renderRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(selector);
         },
         enumerable: true,
         configurable: true
@@ -94,9 +732,9 @@ function query(selector, cache) {
       if (cache) {
         const key = typeof name === "symbol" ? Symbol() : `__${name}`;
         descriptor.get = function() {
-          var _a;
+          var _a2;
           if (this[key] === void 0) {
-            this[key] = (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(selector);
+            this[key] = (_a2 = this.renderRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(selector);
           }
           return this[key];
         };
@@ -116,10 +754,10 @@ function queryAssignedNodes(slotName = "", flatten = false, selector = "") {
   return decorateProperty({
     descriptor: (_name) => ({
       get() {
-        var _a, _b;
+        var _a2, _b2;
         const slotSelector = `slot${slotName ? `[name=${slotName}]` : ":not([name])"}`;
-        const slot = (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(slotSelector);
-        let nodes = (_b = slot) === null || _b === void 0 ? void 0 : _b.assignedNodes({flatten});
+        const slot = (_a2 = this.renderRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(slotSelector);
+        let nodes = (_b2 = slot) === null || _b2 === void 0 ? void 0 : _b2.assignedNodes({flatten});
         if (nodes && selector) {
           nodes = nodes.filter((node) => node.nodeType === Node.ELEMENT_NODE && (node.matches ? node.matches(selector) : legacyMatches.call(node, selector)));
         }
@@ -317,21 +955,21 @@ class TokenTreeEmitter extends TokenTree {
     return true;
   }
 }
-function source$1(re) {
+function source$4(re) {
   if (!re)
     return null;
   if (typeof re === "string")
     return re;
   return re.source;
 }
-function lookahead$1(re) {
-  return concat$1("(?=", re, ")");
+function lookahead$3(re) {
+  return concat$4("(?=", re, ")");
 }
-function concat$1(...args) {
-  const joined = args.map((x) => source$1(x)).join("");
+function concat$4(...args) {
+  const joined = args.map((x) => source$4(x)).join("");
   return joined;
 }
-function stripOptionsFromArgs(args) {
+function stripOptionsFromArgs$1(args) {
   const opts = args[args.length - 1];
   if (typeof opts === "object" && opts.constructor === Object) {
     args.splice(args.length - 1, 1);
@@ -340,9 +978,9 @@ function stripOptionsFromArgs(args) {
     return {};
   }
 }
-function either(...args) {
-  const opts = stripOptionsFromArgs(args);
-  const joined = "(" + (opts.capture ? "" : "?:") + args.map((x) => source$1(x)).join("|") + ")";
+function either$1(...args) {
+  const opts = stripOptionsFromArgs$1(args);
+  const joined = "(" + (opts.capture ? "" : "?:") + args.map((x) => source$4(x)).join("|") + ")";
   return joined;
 }
 function countMatchGroups(re) {
@@ -358,7 +996,7 @@ function _rewriteBackreferences(regexps, {joinWith}) {
   return regexps.map((regex) => {
     numCaptures += 1;
     const offset = numCaptures;
-    let re = source$1(regex);
+    let re = source$4(regex);
     let out = "";
     while (re.length > 0) {
       const match = BACKREF_RE.exec(re);
@@ -390,7 +1028,7 @@ const RE_STARTERS_RE = "!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|
 const SHEBANG = (opts = {}) => {
   const beginShebang = /^#![ ]*\//;
   if (opts.binary) {
-    opts.begin = concat$1(beginShebang, /.*\b/, opts.binary, /\b.*/);
+    opts.begin = concat$4(beginShebang, /.*\b/, opts.binary, /\b.*/);
   }
   return inherit$1({
     scope: "meta",
@@ -438,9 +1076,9 @@ const COMMENT = function(begin, end, modeOptions = {}) {
     excludeBegin: true,
     relevance: 0
   });
-  const ENGLISH_WORD = either("I", "a", "is", "so", "us", "to", "at", "if", "in", "it", "on", /[A-Za-z]+['](d|ve|re|ll|t|s|n)/, /[A-Za-z]+[-][a-z]+/, /[A-Za-z][a-z]{2,}/);
+  const ENGLISH_WORD = either$1("I", "a", "is", "so", "us", "to", "at", "if", "in", "it", "on", /[A-Za-z]+['](d|ve|re|ll|t|s|n)/, /[A-Za-z]+[-][a-z]+/, /[A-Za-z][a-z]{2,}/);
   mode.contains.push({
-    begin: concat$1(/[ ]+/, "(", ENGLISH_WORD, /[.]?[:]?([.][ ]|[ ])/, "){3}")
+    begin: concat$4(/[ ]+/, "(", ENGLISH_WORD, /[.]?[:]?([.][ ]|[ ])/, "){3}")
   });
   return mode;
 };
@@ -505,7 +1143,7 @@ const END_SAME_AS_BEGIN = function(mode) {
     }
   });
 };
-var MODES = /* @__PURE__ */ Object.freeze({
+var MODES$1 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   MATCH_NOTHING_RE,
   IDENT_RE: IDENT_RE$1,
@@ -559,7 +1197,7 @@ function beginKeywords(mode, parent) {
 function compileIllegal(mode, _parent) {
   if (!Array.isArray(mode.illegal))
     return;
-  mode.illegal = either(...mode.illegal);
+  mode.illegal = either$1(...mode.illegal);
 }
 function compileMatch(mode, _parent) {
   if (!mode.match)
@@ -583,7 +1221,7 @@ const beforeMatchExt = (mode, parent) => {
     delete mode[key];
   });
   mode.keywords = originalMode.keywords;
-  mode.begin = concat$1(originalMode.beforeMatch, lookahead$1(originalMode.begin));
+  mode.begin = concat$4(originalMode.beforeMatch, lookahead$3(originalMode.begin));
   mode.starts = {
     relevance: 0,
     contains: [
@@ -713,7 +1351,7 @@ function MultiClass(mode) {
 }
 function compileLanguage(language) {
   function langRe(value, global) {
-    return new RegExp(source$1(value), "m" + (language.case_insensitive ? "i" : "") + (global ? "g" : ""));
+    return new RegExp(source$4(value), "m" + (language.case_insensitive ? "i" : "") + (global ? "g" : ""));
   }
   class MultiRegex {
     constructor() {
@@ -846,7 +1484,7 @@ function compileLanguage(language) {
         mode.end = /\B|\b/;
       if (mode.end)
         cmode.endRe = langRe(mode.end);
-      cmode.terminatorEnd = source$1(mode.end) || "";
+      cmode.terminatorEnd = source$4(mode.end) || "";
       if (mode.endsWithParent && parent.terminatorEnd) {
         cmode.terminatorEnd += (mode.end ? "|" : "") + parent.terminatorEnd;
       }
@@ -1479,12 +2117,12 @@ const HLJS = function(hljs) {
     SAFE_MODE = true;
   };
   hljs.versionString = version;
-  for (const key in MODES) {
-    if (typeof MODES[key] === "object") {
-      deepFreeze$1(MODES[key]);
+  for (const key in MODES$1) {
+    if (typeof MODES$1[key] === "object") {
+      deepFreeze$1(MODES$1[key]);
     }
   }
-  Object.assign(hljs, MODES);
+  Object.assign(hljs, MODES$1);
   return hljs;
 };
 var highlight = HLJS({});
@@ -1614,24 +2252,24 @@ const BUILT_IN_VARIABLES = [
   "global"
 ];
 const BUILT_INS = [].concat(BUILT_IN_GLOBALS, TYPES, ERROR_TYPES);
-function source(re) {
+function source$3(re) {
   if (!re)
     return null;
   if (typeof re === "string")
     return re;
   return re.source;
 }
-function lookahead(re) {
-  return concat("(?=", re, ")");
+function lookahead$2(re) {
+  return concat$3("(?=", re, ")");
 }
-function concat(...args) {
-  const joined = args.map((x) => source(x)).join("");
+function concat$3(...args) {
+  const joined = args.map((x) => source$3(x)).join("");
   return joined;
 }
 function javascript(hljs) {
   const hasClosingTag = (match, {after}) => {
-    const tag = "</" + match[0].slice(1);
-    const pos = match.input.indexOf(tag, after);
+    const tag2 = "</" + match[0].slice(1);
+    const pos = match.input.indexOf(tag2, after);
     return pos !== -1;
   };
   const IDENT_RE$12 = IDENT_RE;
@@ -1814,7 +2452,7 @@ function javascript(hljs) {
         match: [
           /extends/,
           /\s+/,
-          concat(IDENT_RE$12, "(", concat(/\./, IDENT_RE$12), ")*")
+          concat$3(IDENT_RE$12, "(", concat$3(/\./, IDENT_RE$12), ")*")
         ],
         scope: {
           1: "keyword",
@@ -1871,18 +2509,18 @@ function javascript(hljs) {
     className: "variable.constant"
   };
   function noneOf(list) {
-    return concat("(?!", list.join("|"), ")");
+    return concat$3("(?!", list.join("|"), ")");
   }
   const FUNCTION_CALL = {
-    match: concat(/\b/, noneOf([
+    match: concat$3(/\b/, noneOf([
       ...BUILT_IN_GLOBALS,
       "super"
-    ]), IDENT_RE$12, lookahead(/\(/)),
+    ]), IDENT_RE$12, lookahead$2(/\(/)),
     className: "title.function",
     relevance: 0
   };
   const PROPERTY_ACCESS = {
-    begin: concat(/\./, lookahead(concat(IDENT_RE$12, /(?![0-9A-Za-z$_(])/))),
+    begin: concat$3(/\./, lookahead$2(concat$3(IDENT_RE$12, /(?![0-9A-Za-z$_(])/))),
     end: IDENT_RE$12,
     excludeBegin: true,
     keywords: "prototype",
@@ -1915,7 +2553,7 @@ function javascript(hljs) {
       IDENT_RE$12,
       /\s*/,
       /=\s*/,
-      lookahead(FUNC_LEAD_IN_RE)
+      lookahead$2(FUNC_LEAD_IN_RE)
     ],
     className: {
       1: "keyword",
@@ -1948,7 +2586,7 @@ function javascript(hljs) {
       CLASS_REFERENCE,
       {
         className: "attr",
-        begin: IDENT_RE$12 + lookahead(":"),
+        begin: IDENT_RE$12 + lookahead$2(":"),
         relevance: 0
       },
       FUNCTION_VARIABLE,
@@ -2055,7 +2693,1093 @@ function javascript(hljs) {
     ]
   };
 }
-var __css = ".hljs {\n    display: block;\n    overflow: hidden;\n    padding: var(--s-theme-space-30, 24px);\n    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    line-height: 1.5 !important;\n}\n\n    .hljs,\n    .hljs.hljs-subst {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    }\n\n    .hljs .hljs-selector-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-selector-id {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n        font-weight: bold;\n    }\n\n    .hljs .hljs-selector-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-pseudo {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-addition {\n        background-color: rgba(163, 190, 140, 0.5);\n    }\n\n    .hljs .hljs-deletion {\n        background-color: rgba(191, 97, 106, 0.5);\n    }\n\n    .hljs .hljs-built_in,\n    .hljs .hljs-type {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-function {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-function > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-keyword,\n    .hljs .hljs-literal,\n    .hljs .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-number {\n        color: #B48EAD;\n    }\n\n    .hljs .hljs-regexp {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-title {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-params {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-bullet {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-code {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-emphasis {\n        font-style: italic;\n    }\n\n    .hljs .hljs-formula {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-strong {\n        font-weight: bold;\n    }\n\n    .hljs .hljs-link:hover {\n        text-decoration: underline;\n    }\n\n    .hljs .hljs-quote {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-comment {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-doctag {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-meta,\n    .hljs .hljs-meta-keyword {\n        color: #5E81AC;\n    }\n\n    .hljs .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-30-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-30-lightness-offset, 0)) * 1%),var(--s-theme-color-text-30-a, 1));\n    }\n\n    .hljs .hljs-builtin-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-section {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-tag {\n        color: #5E81AC;\n    }\n\n    .hljs.abnf .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.abnf .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.apache .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.apache .hljs-section {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.arduino .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.aspectj .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.aspectj > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs.bnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.clojure .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.clojure .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.coq .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.cpp .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.css .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.css .hljs-keyword {\n        color: #D08770;\n    }\n\n    .hljs.diff .hljs-meta {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.ebnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.glsl .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.groovy .hljs-meta:not(:first-child) {\n        color: #D08770;\n    }\n\n    .hljs.haxe .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.java .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.ldif .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.lisp .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.lua .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.moonscript .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-section {\n        color: #5E81AC;\n    }\n\n    .hljs.pf .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.processing .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.scss .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.stylus .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.swift .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.vim .hljs-built_in {\n        color: #88C0D0;\n        font-style: italic;\n    }\n\n    .hljs.yaml .hljs-meta {\n        color: #D08770;\n    }\n\n:host {\n    display: block;\n    border-radius: var(--s-theme-ui-code-borderRadius, 6px);\n    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;\n    overflow: hidden;\n\n    /* @sugar.utils.configToCss(ui.code, $only: rhythm-vertical); */\n}\n\n.s-code-example > * {\n        display: none;\n    }\n\n.s-code-example[mounted] > * {\n            display: block;\n        }\n\n.s-code-example__slot {\n    display: none;\n}\n\n.s-code-example__nav {\n    position: relative;\n}\n\n.s-code-example__tabs {\n    display: flex;\n    list-style: none;\n    border-bottom-left-radius: 0 !important;\n    border-bottom-right-radius: 0 !important;\n}\n.s-code-example__tab {\n}\n\n.s-code-example__content {\n    overflow: hidden;\n    position: relative;\n}\n\n.s-code-example__code {\n    display: none;\n    border-top-left-radius: 0 !important;\n    border-top-right-radius: 0 !important;\n    overflow: hidden;\n    line-height: 0;\n}\n\n.s-code-example__code[active] {\n        display: block;\n    }\n\n.s-code-example__code > code {\n        line-height: 1;\n    }\n\n.s-code-example__toolbar {\n    position: absolute;\n    right: var(--s-theme-space-20, 12px);\n    top: var(--s-theme-space-20, 12px);\n    z-index: 10;\n}\n\n.s-code-example__toolbar > * {\n        font-size: 20px;\n        opacity: 0.5;\n    }\n\n.s-code-example__toolbar > *:hover {\n            opacity: 1;\n        }\n\n[toolbar-position='nav'] .s-code-example__toolbar {\n    right: var(--s-theme-space-20, 12px);\n    top: 50%;\n    transform: translate(0, -50%);\n}\n";
+function source$2(re) {
+  if (!re)
+    return null;
+  if (typeof re === "string")
+    return re;
+  return re.source;
+}
+function lookahead$1(re) {
+  return concat$2("(?=", re, ")");
+}
+function optional(re) {
+  return concat$2("(?:", re, ")?");
+}
+function concat$2(...args) {
+  const joined = args.map((x) => source$2(x)).join("");
+  return joined;
+}
+function stripOptionsFromArgs(args) {
+  const opts = args[args.length - 1];
+  if (typeof opts === "object" && opts.constructor === Object) {
+    args.splice(args.length - 1, 1);
+    return opts;
+  } else {
+    return {};
+  }
+}
+function either(...args) {
+  const opts = stripOptionsFromArgs(args);
+  const joined = "(" + (opts.capture ? "" : "?:") + args.map((x) => source$2(x)).join("|") + ")";
+  return joined;
+}
+function xml(hljs) {
+  const TAG_NAME_RE = concat$2(/[A-Z_]/, optional(/[A-Z0-9_.-]*:/), /[A-Z0-9_.-]*/);
+  const XML_IDENT_RE = /[A-Za-z0-9._:-]+/;
+  const XML_ENTITIES = {
+    className: "symbol",
+    begin: /&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/
+  };
+  const XML_META_KEYWORDS = {
+    begin: /\s/,
+    contains: [
+      {
+        className: "keyword",
+        begin: /#?[a-z_][a-z1-9_-]+/,
+        illegal: /\n/
+      }
+    ]
+  };
+  const XML_META_PAR_KEYWORDS = hljs.inherit(XML_META_KEYWORDS, {
+    begin: /\(/,
+    end: /\)/
+  });
+  const APOS_META_STRING_MODE = hljs.inherit(hljs.APOS_STRING_MODE, {
+    className: "string"
+  });
+  const QUOTE_META_STRING_MODE = hljs.inherit(hljs.QUOTE_STRING_MODE, {
+    className: "string"
+  });
+  const TAG_INTERNALS = {
+    endsWithParent: true,
+    illegal: /</,
+    relevance: 0,
+    contains: [
+      {
+        className: "attr",
+        begin: XML_IDENT_RE,
+        relevance: 0
+      },
+      {
+        begin: /=\s*/,
+        relevance: 0,
+        contains: [
+          {
+            className: "string",
+            endsParent: true,
+            variants: [
+              {
+                begin: /"/,
+                end: /"/,
+                contains: [XML_ENTITIES]
+              },
+              {
+                begin: /'/,
+                end: /'/,
+                contains: [XML_ENTITIES]
+              },
+              {
+                begin: /[^\s"'=<>`]+/
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  return {
+    name: "HTML, XML",
+    aliases: [
+      "html",
+      "xhtml",
+      "rss",
+      "atom",
+      "xjb",
+      "xsd",
+      "xsl",
+      "plist",
+      "wsf",
+      "svg"
+    ],
+    case_insensitive: true,
+    contains: [
+      {
+        className: "meta",
+        begin: /<![a-z]/,
+        end: />/,
+        relevance: 10,
+        contains: [
+          XML_META_KEYWORDS,
+          QUOTE_META_STRING_MODE,
+          APOS_META_STRING_MODE,
+          XML_META_PAR_KEYWORDS,
+          {
+            begin: /\[/,
+            end: /\]/,
+            contains: [
+              {
+                className: "meta",
+                begin: /<![a-z]/,
+                end: />/,
+                contains: [
+                  XML_META_KEYWORDS,
+                  XML_META_PAR_KEYWORDS,
+                  QUOTE_META_STRING_MODE,
+                  APOS_META_STRING_MODE
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      hljs.COMMENT(/<!--/, /-->/, {
+        relevance: 10
+      }),
+      {
+        begin: /<!\[CDATA\[/,
+        end: /\]\]>/,
+        relevance: 10
+      },
+      XML_ENTITIES,
+      {
+        className: "meta",
+        begin: /<\?xml/,
+        end: /\?>/,
+        relevance: 10
+      },
+      {
+        className: "tag",
+        begin: /<style(?=\s|>)/,
+        end: />/,
+        keywords: {
+          name: "style"
+        },
+        contains: [TAG_INTERNALS],
+        starts: {
+          end: /<\/style>/,
+          returnEnd: true,
+          subLanguage: [
+            "css",
+            "xml"
+          ]
+        }
+      },
+      {
+        className: "tag",
+        begin: /<script(?=\s|>)/,
+        end: />/,
+        keywords: {
+          name: "script"
+        },
+        contains: [TAG_INTERNALS],
+        starts: {
+          end: /<\/script>/,
+          returnEnd: true,
+          subLanguage: [
+            "javascript",
+            "handlebars",
+            "xml"
+          ]
+        }
+      },
+      {
+        className: "tag",
+        begin: /<>|<\/>/
+      },
+      {
+        className: "tag",
+        begin: concat$2(/</, lookahead$1(concat$2(TAG_NAME_RE, either(/\/>/, />/, /\s/)))),
+        end: /\/?>/,
+        contains: [
+          {
+            className: "name",
+            begin: TAG_NAME_RE,
+            relevance: 0,
+            starts: TAG_INTERNALS
+          }
+        ]
+      },
+      {
+        className: "tag",
+        begin: concat$2(/<\//, lookahead$1(concat$2(TAG_NAME_RE, />/))),
+        contains: [
+          {
+            className: "name",
+            begin: TAG_NAME_RE,
+            relevance: 0
+          },
+          {
+            begin: />/,
+            relevance: 0,
+            endsParent: true
+          }
+        ]
+      }
+    ]
+  };
+}
+function source$1(re) {
+  if (!re)
+    return null;
+  if (typeof re === "string")
+    return re;
+  return re.source;
+}
+function concat$1(...args) {
+  const joined = args.map((x) => source$1(x)).join("");
+  return joined;
+}
+function bash(hljs) {
+  const VAR = {};
+  const BRACED_VAR = {
+    begin: /\$\{/,
+    end: /\}/,
+    contains: [
+      "self",
+      {
+        begin: /:-/,
+        contains: [VAR]
+      }
+    ]
+  };
+  Object.assign(VAR, {
+    className: "variable",
+    variants: [
+      {begin: concat$1(/\$[\w\d#@][\w\d_]*/, `(?![\\w\\d])(?![$])`)},
+      BRACED_VAR
+    ]
+  });
+  const SUBST = {
+    className: "subst",
+    begin: /\$\(/,
+    end: /\)/,
+    contains: [hljs.BACKSLASH_ESCAPE]
+  };
+  const HERE_DOC = {
+    begin: /<<-?\s*(?=\w+)/,
+    starts: {
+      contains: [
+        hljs.END_SAME_AS_BEGIN({
+          begin: /(\w+)/,
+          end: /(\w+)/,
+          className: "string"
+        })
+      ]
+    }
+  };
+  const QUOTE_STRING = {
+    className: "string",
+    begin: /"/,
+    end: /"/,
+    contains: [
+      hljs.BACKSLASH_ESCAPE,
+      VAR,
+      SUBST
+    ]
+  };
+  SUBST.contains.push(QUOTE_STRING);
+  const ESCAPED_QUOTE = {
+    className: "",
+    begin: /\\"/
+  };
+  const APOS_STRING = {
+    className: "string",
+    begin: /'/,
+    end: /'/
+  };
+  const ARITHMETIC = {
+    begin: /\$\(\(/,
+    end: /\)\)/,
+    contains: [
+      {begin: /\d+#[0-9a-f]+/, className: "number"},
+      hljs.NUMBER_MODE,
+      VAR
+    ]
+  };
+  const SH_LIKE_SHELLS = [
+    "fish",
+    "bash",
+    "zsh",
+    "sh",
+    "csh",
+    "ksh",
+    "tcsh",
+    "dash",
+    "scsh"
+  ];
+  const KNOWN_SHEBANG = hljs.SHEBANG({
+    binary: `(${SH_LIKE_SHELLS.join("|")})`,
+    relevance: 10
+  });
+  const FUNCTION = {
+    className: "function",
+    begin: /\w[\w\d_]*\s*\(\s*\)\s*\{/,
+    returnBegin: true,
+    contains: [hljs.inherit(hljs.TITLE_MODE, {begin: /\w[\w\d_]*/})],
+    relevance: 0
+  };
+  const KEYWORDS2 = [
+    "if",
+    "then",
+    "else",
+    "elif",
+    "fi",
+    "for",
+    "while",
+    "in",
+    "do",
+    "done",
+    "case",
+    "esac",
+    "function"
+  ];
+  const LITERALS2 = [
+    "true",
+    "false"
+  ];
+  return {
+    name: "Bash",
+    aliases: ["sh"],
+    keywords: {
+      $pattern: /\b[a-z._-]+\b/,
+      keyword: KEYWORDS2,
+      literal: LITERALS2,
+      built_in: "break cd continue eval exec exit export getopts hash pwd readonly return shift test times trap umask unset alias bind builtin caller command declare echo enable help let local logout mapfile printf read readarray source type typeset ulimit unalias set shopt autoload bg bindkey bye cap chdir clone comparguments compcall compctl compdescribe compfiles compgroups compquote comptags comptry compvalues dirs disable disown echotc echoti emulate fc fg float functions getcap getln history integer jobs kill limit log noglob popd print pushd pushln rehash sched setcap setopt stat suspend ttyctl unfunction unhash unlimit unsetopt vared wait whence where which zcompile zformat zftp zle zmodload zparseopts zprof zpty zregexparse zsocket zstyle ztcp"
+    },
+    contains: [
+      KNOWN_SHEBANG,
+      hljs.SHEBANG(),
+      FUNCTION,
+      ARITHMETIC,
+      hljs.HASH_COMMENT_MODE,
+      HERE_DOC,
+      QUOTE_STRING,
+      ESCAPED_QUOTE,
+      APOS_STRING,
+      VAR
+    ]
+  };
+}
+function php(hljs) {
+  const VARIABLE = {
+    className: "variable",
+    begin: `\\$+[a-zA-Z_\x7F-\xFF][a-zA-Z0-9_\x7F-\xFF]*(?![A-Za-z0-9])(?![$])`
+  };
+  const PREPROCESSOR = {
+    className: "meta",
+    variants: [
+      {begin: /<\?php/, relevance: 10},
+      {begin: /<\?[=]?/},
+      {begin: /\?>/}
+    ]
+  };
+  const SUBST = {
+    className: "subst",
+    variants: [
+      {begin: /\$\w+/},
+      {begin: /\{\$/, end: /\}/}
+    ]
+  };
+  const SINGLE_QUOTED = hljs.inherit(hljs.APOS_STRING_MODE, {
+    illegal: null
+  });
+  const DOUBLE_QUOTED = hljs.inherit(hljs.QUOTE_STRING_MODE, {
+    illegal: null,
+    contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
+  });
+  const HEREDOC = hljs.END_SAME_AS_BEGIN({
+    begin: /<<<[ \t]*(\w+)\n/,
+    end: /[ \t]*(\w+)\b/,
+    contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
+  });
+  const STRING = {
+    className: "string",
+    contains: [hljs.BACKSLASH_ESCAPE, PREPROCESSOR],
+    variants: [
+      hljs.inherit(SINGLE_QUOTED, {
+        begin: "b'",
+        end: "'"
+      }),
+      hljs.inherit(DOUBLE_QUOTED, {
+        begin: 'b"',
+        end: '"'
+      }),
+      DOUBLE_QUOTED,
+      SINGLE_QUOTED,
+      HEREDOC
+    ]
+  };
+  const NUMBER = {
+    className: "number",
+    variants: [
+      {begin: `\\b0b[01]+(?:_[01]+)*\\b`},
+      {begin: `\\b0o[0-7]+(?:_[0-7]+)*\\b`},
+      {begin: `\\b0x[\\da-f]+(?:_[\\da-f]+)*\\b`},
+      {begin: `(?:\\b\\d+(?:_\\d+)*(\\.(?:\\d+(?:_\\d+)*))?|\\B\\.\\d+)(?:e[+-]?\\d+)?`}
+    ],
+    relevance: 0
+  };
+  const KEYWORDS2 = {
+    keyword: "__CLASS__ __DIR__ __FILE__ __FUNCTION__ __LINE__ __METHOD__ __NAMESPACE__ __TRAIT__ die echo exit include include_once print require require_once array abstract and as binary bool boolean break callable case catch class clone const continue declare default do double else elseif empty enddeclare endfor endforeach endif endswitch endwhile enum eval extends final finally float for foreach from global goto if implements instanceof insteadof int integer interface isset iterable list match|0 mixed new object or private protected public real return string switch throw trait try unset use var void while xor yield",
+    literal: "false null true",
+    built_in: "Error|0 AppendIterator ArgumentCountError ArithmeticError ArrayIterator ArrayObject AssertionError BadFunctionCallException BadMethodCallException CachingIterator CallbackFilterIterator CompileError Countable DirectoryIterator DivisionByZeroError DomainException EmptyIterator ErrorException Exception FilesystemIterator FilterIterator GlobIterator InfiniteIterator InvalidArgumentException IteratorIterator LengthException LimitIterator LogicException MultipleIterator NoRewindIterator OutOfBoundsException OutOfRangeException OuterIterator OverflowException ParentIterator ParseError RangeException RecursiveArrayIterator RecursiveCachingIterator RecursiveCallbackFilterIterator RecursiveDirectoryIterator RecursiveFilterIterator RecursiveIterator RecursiveIteratorIterator RecursiveRegexIterator RecursiveTreeIterator RegexIterator RuntimeException SeekableIterator SplDoublyLinkedList SplFileInfo SplFileObject SplFixedArray SplHeap SplMaxHeap SplMinHeap SplObjectStorage SplObserver SplObserver SplPriorityQueue SplQueue SplStack SplSubject SplSubject SplTempFileObject TypeError UnderflowException UnexpectedValueException UnhandledMatchError ArrayAccess Closure Generator Iterator IteratorAggregate Serializable Stringable Throwable Traversable WeakReference WeakMap Directory __PHP_Incomplete_Class parent php_user_filter self static stdClass"
+  };
+  return {
+    case_insensitive: true,
+    keywords: KEYWORDS2,
+    contains: [
+      hljs.HASH_COMMENT_MODE,
+      hljs.COMMENT("//", "$", {contains: [PREPROCESSOR]}),
+      hljs.COMMENT("/\\*", "\\*/", {
+        contains: [
+          {
+            className: "doctag",
+            begin: "@[A-Za-z]+"
+          }
+        ]
+      }),
+      hljs.COMMENT("__halt_compiler.+?;", false, {
+        endsWithParent: true,
+        keywords: "__halt_compiler"
+      }),
+      PREPROCESSOR,
+      {
+        className: "keyword",
+        begin: /\$this\b/
+      },
+      VARIABLE,
+      {
+        begin: /(::|->)+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/
+      },
+      {
+        className: "function",
+        relevance: 0,
+        beginKeywords: "fn function",
+        end: /[;{]/,
+        excludeEnd: true,
+        illegal: "[$%\\[]",
+        contains: [
+          {
+            beginKeywords: "use"
+          },
+          hljs.UNDERSCORE_TITLE_MODE,
+          {
+            begin: "=>",
+            endsParent: true
+          },
+          {
+            className: "params",
+            begin: "\\(",
+            end: "\\)",
+            excludeBegin: true,
+            excludeEnd: true,
+            keywords: KEYWORDS2,
+            contains: [
+              "self",
+              VARIABLE,
+              hljs.C_BLOCK_COMMENT_MODE,
+              STRING,
+              NUMBER
+            ]
+          }
+        ]
+      },
+      {
+        className: "class",
+        variants: [
+          {beginKeywords: "enum", illegal: /[($"]/},
+          {beginKeywords: "class interface trait", illegal: /[:($"]/}
+        ],
+        relevance: 0,
+        end: /\{/,
+        excludeEnd: true,
+        contains: [
+          {beginKeywords: "extends implements"},
+          hljs.UNDERSCORE_TITLE_MODE
+        ]
+      },
+      {
+        beginKeywords: "namespace",
+        relevance: 0,
+        end: ";",
+        illegal: /[.']/,
+        contains: [hljs.UNDERSCORE_TITLE_MODE]
+      },
+      {
+        beginKeywords: "use",
+        relevance: 0,
+        end: ";",
+        contains: [hljs.UNDERSCORE_TITLE_MODE]
+      },
+      STRING,
+      NUMBER
+    ]
+  };
+}
+const MODES = (hljs) => {
+  return {
+    IMPORTANT: {
+      scope: "meta",
+      begin: "!important"
+    },
+    HEXCOLOR: {
+      scope: "number",
+      begin: "#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})"
+    },
+    ATTRIBUTE_SELECTOR_MODE: {
+      scope: "selector-attr",
+      begin: /\[/,
+      end: /\]/,
+      illegal: "$",
+      contains: [
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE
+      ]
+    },
+    CSS_NUMBER_MODE: {
+      scope: "number",
+      begin: hljs.NUMBER_RE + "(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?",
+      relevance: 0
+    },
+    CSS_VARIABLE: {
+      className: "attr",
+      begin: /--[A-Za-z][A-Za-z0-9_-]*/
+    }
+  };
+};
+const TAGS = [
+  "a",
+  "abbr",
+  "address",
+  "article",
+  "aside",
+  "audio",
+  "b",
+  "blockquote",
+  "body",
+  "button",
+  "canvas",
+  "caption",
+  "cite",
+  "code",
+  "dd",
+  "del",
+  "details",
+  "dfn",
+  "div",
+  "dl",
+  "dt",
+  "em",
+  "fieldset",
+  "figcaption",
+  "figure",
+  "footer",
+  "form",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "header",
+  "hgroup",
+  "html",
+  "i",
+  "iframe",
+  "img",
+  "input",
+  "ins",
+  "kbd",
+  "label",
+  "legend",
+  "li",
+  "main",
+  "mark",
+  "menu",
+  "nav",
+  "object",
+  "ol",
+  "p",
+  "q",
+  "quote",
+  "samp",
+  "section",
+  "span",
+  "strong",
+  "summary",
+  "sup",
+  "table",
+  "tbody",
+  "td",
+  "textarea",
+  "tfoot",
+  "th",
+  "thead",
+  "time",
+  "tr",
+  "ul",
+  "var",
+  "video"
+];
+const MEDIA_FEATURES = [
+  "any-hover",
+  "any-pointer",
+  "aspect-ratio",
+  "color",
+  "color-gamut",
+  "color-index",
+  "device-aspect-ratio",
+  "device-height",
+  "device-width",
+  "display-mode",
+  "forced-colors",
+  "grid",
+  "height",
+  "hover",
+  "inverted-colors",
+  "monochrome",
+  "orientation",
+  "overflow-block",
+  "overflow-inline",
+  "pointer",
+  "prefers-color-scheme",
+  "prefers-contrast",
+  "prefers-reduced-motion",
+  "prefers-reduced-transparency",
+  "resolution",
+  "scan",
+  "scripting",
+  "update",
+  "width",
+  "min-width",
+  "max-width",
+  "min-height",
+  "max-height"
+];
+const PSEUDO_CLASSES = [
+  "active",
+  "any-link",
+  "blank",
+  "checked",
+  "current",
+  "default",
+  "defined",
+  "dir",
+  "disabled",
+  "drop",
+  "empty",
+  "enabled",
+  "first",
+  "first-child",
+  "first-of-type",
+  "fullscreen",
+  "future",
+  "focus",
+  "focus-visible",
+  "focus-within",
+  "has",
+  "host",
+  "host-context",
+  "hover",
+  "indeterminate",
+  "in-range",
+  "invalid",
+  "is",
+  "lang",
+  "last-child",
+  "last-of-type",
+  "left",
+  "link",
+  "local-link",
+  "not",
+  "nth-child",
+  "nth-col",
+  "nth-last-child",
+  "nth-last-col",
+  "nth-last-of-type",
+  "nth-of-type",
+  "only-child",
+  "only-of-type",
+  "optional",
+  "out-of-range",
+  "past",
+  "placeholder-shown",
+  "read-only",
+  "read-write",
+  "required",
+  "right",
+  "root",
+  "scope",
+  "target",
+  "target-within",
+  "user-invalid",
+  "valid",
+  "visited",
+  "where"
+];
+const PSEUDO_ELEMENTS = [
+  "after",
+  "backdrop",
+  "before",
+  "cue",
+  "cue-region",
+  "first-letter",
+  "first-line",
+  "grammar-error",
+  "marker",
+  "part",
+  "placeholder",
+  "selection",
+  "slotted",
+  "spelling-error"
+];
+const ATTRIBUTES = [
+  "align-content",
+  "align-items",
+  "align-self",
+  "animation",
+  "animation-delay",
+  "animation-direction",
+  "animation-duration",
+  "animation-fill-mode",
+  "animation-iteration-count",
+  "animation-name",
+  "animation-play-state",
+  "animation-timing-function",
+  "auto",
+  "backface-visibility",
+  "background",
+  "background-attachment",
+  "background-clip",
+  "background-color",
+  "background-image",
+  "background-origin",
+  "background-position",
+  "background-repeat",
+  "background-size",
+  "border",
+  "border-bottom",
+  "border-bottom-color",
+  "border-bottom-left-radius",
+  "border-bottom-right-radius",
+  "border-bottom-style",
+  "border-bottom-width",
+  "border-collapse",
+  "border-color",
+  "border-image",
+  "border-image-outset",
+  "border-image-repeat",
+  "border-image-slice",
+  "border-image-source",
+  "border-image-width",
+  "border-left",
+  "border-left-color",
+  "border-left-style",
+  "border-left-width",
+  "border-radius",
+  "border-right",
+  "border-right-color",
+  "border-right-style",
+  "border-right-width",
+  "border-spacing",
+  "border-style",
+  "border-top",
+  "border-top-color",
+  "border-top-left-radius",
+  "border-top-right-radius",
+  "border-top-style",
+  "border-top-width",
+  "border-width",
+  "bottom",
+  "box-decoration-break",
+  "box-shadow",
+  "box-sizing",
+  "break-after",
+  "break-before",
+  "break-inside",
+  "caption-side",
+  "clear",
+  "clip",
+  "clip-path",
+  "color",
+  "column-count",
+  "column-fill",
+  "column-gap",
+  "column-rule",
+  "column-rule-color",
+  "column-rule-style",
+  "column-rule-width",
+  "column-span",
+  "column-width",
+  "columns",
+  "content",
+  "counter-increment",
+  "counter-reset",
+  "cursor",
+  "direction",
+  "display",
+  "empty-cells",
+  "filter",
+  "flex",
+  "flex-basis",
+  "flex-direction",
+  "flex-flow",
+  "flex-grow",
+  "flex-shrink",
+  "flex-wrap",
+  "float",
+  "font",
+  "font-display",
+  "font-family",
+  "font-feature-settings",
+  "font-kerning",
+  "font-language-override",
+  "font-size",
+  "font-size-adjust",
+  "font-smoothing",
+  "font-stretch",
+  "font-style",
+  "font-variant",
+  "font-variant-ligatures",
+  "font-variation-settings",
+  "font-weight",
+  "height",
+  "hyphens",
+  "icon",
+  "image-orientation",
+  "image-rendering",
+  "image-resolution",
+  "ime-mode",
+  "inherit",
+  "initial",
+  "justify-content",
+  "left",
+  "letter-spacing",
+  "line-height",
+  "list-style",
+  "list-style-image",
+  "list-style-position",
+  "list-style-type",
+  "margin",
+  "margin-bottom",
+  "margin-left",
+  "margin-right",
+  "margin-top",
+  "marks",
+  "mask",
+  "max-height",
+  "max-width",
+  "min-height",
+  "min-width",
+  "nav-down",
+  "nav-index",
+  "nav-left",
+  "nav-right",
+  "nav-up",
+  "none",
+  "normal",
+  "object-fit",
+  "object-position",
+  "opacity",
+  "order",
+  "orphans",
+  "outline",
+  "outline-color",
+  "outline-offset",
+  "outline-style",
+  "outline-width",
+  "overflow",
+  "overflow-wrap",
+  "overflow-x",
+  "overflow-y",
+  "padding",
+  "padding-bottom",
+  "padding-left",
+  "padding-right",
+  "padding-top",
+  "page-break-after",
+  "page-break-before",
+  "page-break-inside",
+  "perspective",
+  "perspective-origin",
+  "pointer-events",
+  "position",
+  "quotes",
+  "resize",
+  "right",
+  "src",
+  "tab-size",
+  "table-layout",
+  "text-align",
+  "text-align-last",
+  "text-decoration",
+  "text-decoration-color",
+  "text-decoration-line",
+  "text-decoration-style",
+  "text-indent",
+  "text-overflow",
+  "text-rendering",
+  "text-shadow",
+  "text-transform",
+  "text-underline-position",
+  "top",
+  "transform",
+  "transform-origin",
+  "transform-style",
+  "transition",
+  "transition-delay",
+  "transition-duration",
+  "transition-property",
+  "transition-timing-function",
+  "unicode-bidi",
+  "vertical-align",
+  "visibility",
+  "white-space",
+  "widows",
+  "width",
+  "word-break",
+  "word-spacing",
+  "word-wrap",
+  "z-index"
+].reverse();
+function source(re) {
+  if (!re)
+    return null;
+  if (typeof re === "string")
+    return re;
+  return re.source;
+}
+function lookahead(re) {
+  return concat("(?=", re, ")");
+}
+function concat(...args) {
+  const joined = args.map((x) => source(x)).join("");
+  return joined;
+}
+function css(hljs) {
+  const modes = MODES(hljs);
+  const FUNCTION_DISPATCH = {
+    className: "built_in",
+    begin: /[\w-]+(?=\()/
+  };
+  const VENDOR_PREFIX = {
+    begin: /-(webkit|moz|ms|o)-(?=[a-z])/
+  };
+  const AT_MODIFIERS = "and or not only";
+  const AT_PROPERTY_RE = /@-?\w[\w]*(-\w+)*/;
+  const IDENT_RE2 = "[a-zA-Z-][a-zA-Z0-9_-]*";
+  const STRINGS = [
+    hljs.APOS_STRING_MODE,
+    hljs.QUOTE_STRING_MODE
+  ];
+  return {
+    name: "CSS",
+    case_insensitive: true,
+    illegal: /[=|'\$]/,
+    keywords: {
+      keyframePosition: "from to"
+    },
+    classNameAliases: {
+      keyframePosition: "selector-tag"
+    },
+    contains: [
+      hljs.C_BLOCK_COMMENT_MODE,
+      VENDOR_PREFIX,
+      modes.CSS_NUMBER_MODE,
+      {
+        className: "selector-id",
+        begin: /#[A-Za-z0-9_-]+/,
+        relevance: 0
+      },
+      {
+        className: "selector-class",
+        begin: "\\." + IDENT_RE2,
+        relevance: 0
+      },
+      modes.ATTRIBUTE_SELECTOR_MODE,
+      {
+        className: "selector-pseudo",
+        variants: [
+          {
+            begin: ":(" + PSEUDO_CLASSES.join("|") + ")"
+          },
+          {
+            begin: "::(" + PSEUDO_ELEMENTS.join("|") + ")"
+          }
+        ]
+      },
+      modes.CSS_VARIABLE,
+      {
+        className: "attribute",
+        begin: "\\b(" + ATTRIBUTES.join("|") + ")\\b"
+      },
+      {
+        begin: ":",
+        end: "[;}]",
+        contains: [
+          modes.HEXCOLOR,
+          modes.IMPORTANT,
+          modes.CSS_NUMBER_MODE,
+          ...STRINGS,
+          {
+            begin: /(url|data-uri)\(/,
+            end: /\)/,
+            relevance: 0,
+            keywords: {
+              built_in: "url data-uri"
+            },
+            contains: [
+              {
+                className: "string",
+                begin: /[^)]/,
+                endsWithParent: true,
+                excludeEnd: true
+              }
+            ]
+          },
+          FUNCTION_DISPATCH
+        ]
+      },
+      {
+        begin: lookahead(/@/),
+        end: "[{;]",
+        relevance: 0,
+        illegal: /:/,
+        contains: [
+          {
+            className: "keyword",
+            begin: AT_PROPERTY_RE
+          },
+          {
+            begin: /\s/,
+            endsWithParent: true,
+            excludeEnd: true,
+            relevance: 0,
+            keywords: {
+              $pattern: /[a-z-]+/,
+              keyword: AT_MODIFIERS,
+              attribute: MEDIA_FEATURES.join(" ")
+            },
+            contains: [
+              {
+                begin: /[a-z-]+(?=:)/,
+                className: "attribute"
+              },
+              ...STRINGS,
+              modes.CSS_NUMBER_MODE
+            ]
+          }
+        ]
+      },
+      {
+        className: "selector-tag",
+        begin: "\\b(" + TAGS.join("|") + ")\\b"
+      }
+    ]
+  };
+}
+var __css = ".hljs {\n    display: block;\n    overflow: hidden;\n    padding: var(--s-theme-space-30, 24px);\n    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    line-height: 1.5 !important;\n}\n\n    .hljs,\n    .hljs.hljs-subst {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    }\n\n    .hljs .hljs-selector-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-selector-id {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n        font-weight: bold;\n    }\n\n    .hljs .hljs-selector-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-pseudo {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-addition {\n        background-color: rgba(163, 190, 140, 0.5);\n    }\n\n    .hljs .hljs-deletion {\n        background-color: rgba(191, 97, 106, 0.5);\n    }\n\n    .hljs .hljs-built_in,\n    .hljs .hljs-type {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-function {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-function > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-keyword,\n    .hljs .hljs-literal,\n    .hljs .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-number {\n        color: #B48EAD;\n    }\n\n    .hljs .hljs-regexp {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-title {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-params {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-bullet {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-code {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-emphasis {\n        font-style: italic;\n    }\n\n    .hljs .hljs-formula {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-strong {\n        font-weight: bold;\n    }\n\n    .hljs .hljs-link:hover {\n        text-decoration: underline;\n    }\n\n    .hljs .hljs-quote {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-comment {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-doctag {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-meta,\n    .hljs .hljs-meta-keyword {\n        color: #5E81AC;\n    }\n\n    .hljs .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-30-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-30-lightness-offset, 0)) * 1%),var(--s-theme-color-text-30-a, 1));\n    }\n\n    .hljs .hljs-builtin-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-section {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-tag {\n        color: #5E81AC;\n    }\n\n    .hljs.abnf .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.abnf .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.apache .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.apache .hljs-section {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.arduino .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.aspectj .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.aspectj > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs.bnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.clojure .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.clojure .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.coq .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.cpp .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.css .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.css .hljs-keyword {\n        color: #D08770;\n    }\n\n    .hljs.diff .hljs-meta {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.ebnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.glsl .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.groovy .hljs-meta:not(:first-child) {\n        color: #D08770;\n    }\n\n    .hljs.haxe .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.java .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.ldif .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.lisp .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.lua .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.moonscript .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-section {\n        color: #5E81AC;\n    }\n\n    .hljs.pf .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.processing .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.scss .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.stylus .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.swift .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.vim .hljs-built_in {\n        color: #88C0D0;\n        font-style: italic;\n    }\n\n    .hljs.yaml .hljs-meta {\n        color: #D08770;\n    }\n\n:host {\n    display: block;\n    border-radius: var(--s-theme-ui-code-borderRadius, 6px);\n    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;\n    /* overflow: hidden; */\n\n    /* @sugar.utils.configToCss(ui.code, $only: rhythm-vertical); */\n}\n\n.s-code-example > * {\n        display: none;\n    }\n\n.s-code-example[mounted] > * {\n            display: block;\n        }\n\n.hljs {\n    overflow: visible;\n    white-space: pre-wrap;\n}\n\n.s-code-example__slot {\n    display: none;\n}\n\n.s-code-example__nav {\n    position: relative;\n}\n\n.s-code-example__tabs {\n    display: flex;\n    list-style: none;\n    border-bottom-left-radius: 0 !important;\n    border-bottom-right-radius: 0 !important;\n}\n.s-code-example__tab {\n}\n\n.s-code-example__content {\n    /* overflow: hidden; */\n    position: relative;\n\n    /* [default-style] & {\n        overflow: auto;\n        @sugar.scrollbar (accent);\n    } */\n}\n\n.s-code-example__code {\n    display: none;\n    border-top-left-radius: 0 !important;\n    border-top-right-radius: 0 !important;\n    /* overflow: hidden; */\n    line-height: 0;\n}\n\n.s-code-example__code[active] {\n        display: block;\n    }\n\n.s-code-example__code > code {\n        line-height: 1;\n    }\n\n.s-code-example__toolbar {\n    position: absolute;\n    right: var(--s-theme-space-20, 12px);\n    top: var(--s-theme-space-20, 12px);\n    z-index: 10;\n}\n\n.s-code-example__toolbar > * {\n        font-size: 20px;\n        opacity: 0.5;\n    }\n\n.s-code-example__toolbar > *:hover {\n            opacity: 1;\n        }\n\n[toolbar-position='nav'] .s-code-example__toolbar {\n    right: var(--s-theme-space-20, 12px);\n    top: var(--s-theme-space-20, 12px);\n    /* transform: translate(0, -50%); */\n}\n";
 class SCodeExampleInterface extends __SInterface {
 }
 SCodeExampleInterface.definition = Object.assign(Object.assign({}, SComponentUtilsDefaultInterface.definition), {theme: {
@@ -2070,16 +3794,19 @@ SCodeExampleInterface.definition = Object.assign(Object.assign({}, SComponentUti
 }, toolbarPosition: {
   type: "String",
   values: ["content", "nav"],
-  default: "content"
+  default: "nav"
+}, languages: {
+  type: "Object",
+  default: {}
 }});
 var __decorate = function(decorators, target, key, desc) {
-  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d2;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
     for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
-        r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      if (d2 = decorators[i])
+        r = (c < 3 ? d2(r) : c > 3 ? d2(target, key, r) : d2(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __awaiter = function(thisArg, _arguments, P, generator) {
@@ -2109,10 +3836,10 @@ var __awaiter = function(thisArg, _arguments, P, generator) {
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-core.registerLanguage("javascript", javascript);
 webcomponent$1();
 class SCodeExample extends SLitElement {
   constructor() {
+    var _a2;
     super();
     this._$copy = void 0;
     this._items = [];
@@ -2123,26 +3850,30 @@ class SCodeExample extends SLitElement {
         defaultProps: {}
       }
     });
+    const languages = Object.assign({html: xml, javascript, js: javascript, php, bash, shell: bash, css}, (_a2 = this._component.props.languages) !== null && _a2 !== void 0 ? _a2 : {});
+    Object.keys(languages).forEach((lang) => {
+      core.registerLanguage(lang, languages[lang]);
+    });
   }
   static get properties() {
     return __SComponentUtils.properties({}, SCodeExampleInterface);
   }
   static get styles() {
-    return css`
+    return css$1`
             ${unsafeCSS(__css)}
         `;
   }
   firstUpdated() {
     return __awaiter(this, void 0, void 0, function* () {
       this.$templates.forEach(($template) => {
-        var _a, _b, _c, _d, _e;
+        var _a2, _b2, _c2, _d2, _e2;
         if (!$template.getAttribute)
           return;
         this._items = [
           ...this._items,
           {
-            id: (_c = (_b = (_a = $template.getAttribute("id")) !== null && _a !== void 0 ? _a : $template.getAttribute("language")) !== null && _b !== void 0 ? _b : $template.getAttribute("lang")) !== null && _c !== void 0 ? _c : "html",
-            lang: (_e = (_d = $template.getAttribute("language")) !== null && _d !== void 0 ? _d : $template.getAttribute("lang")) !== null && _e !== void 0 ? _e : "html",
+            id: (_c2 = (_b2 = (_a2 = $template.getAttribute("id")) !== null && _a2 !== void 0 ? _a2 : $template.getAttribute("language")) !== null && _b2 !== void 0 ? _b2 : $template.getAttribute("lang")) !== null && _c2 !== void 0 ? _c2 : "html",
+            lang: (_e2 = (_d2 = $template.getAttribute("language")) !== null && _d2 !== void 0 ? _d2 : $template.getAttribute("lang")) !== null && _e2 !== void 0 ? _e2 : "html",
             code: $template.innerHTML
           }
         ];
@@ -2158,20 +3889,21 @@ class SCodeExample extends SLitElement {
     });
   }
   render() {
-    var _a, _b, _c, _d;
-    return html`
+    var _a2, _b2, _c2, _d2;
+    return html$2`
             <div
-                class="${(_a = this._component) === null || _a === void 0 ? void 0 : _a.className()}"
+                class="${(_a2 = this._component) === null || _a2 === void 0 ? void 0 : _a2.className()}"
                 ?mounted="${this.mounted}"
+                ?default-style="${this.defaultStyle}"
                 toolbar-position="${this.toolbarPosition}"
             >
                 <div class="templates">
                     <slot></slot>
                 </div>
 
-                ${this._component ? html`<header class="${this._component.className("__nav")}">
+                ${this._component ? html$2`<header class="${this._component.className("__nav")}">
                           <ol class="${this._component.className("__tabs", "s-tabs")}">
-                              ${((_b = this._items) !== null && _b !== void 0 ? _b : []).map((item) => html`
+                              ${((_b2 = this._items) !== null && _b2 !== void 0 ? _b2 : []).map((item) => html$2`
                                       <li
                                           class="${this._component.className("__tab")}"
                                           id="${item.id}"
@@ -2182,31 +3914,31 @@ class SCodeExample extends SLitElement {
                                       </li>
                                   `)}
                           </ol>
-                          ${this.toolbarPosition === "nav" ? html`
-                                    <div class="${this._component.className("__toolbar")}">
-                                        <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                    </div>
-                                ` : ""}
-                      </header>` : ""}
-                ${this._component ? html`
-                          <div class="${this._component.className("__content")}">
-                              ${this.toolbarPosition !== "nav" ? html`
-                                        <div class="${(_c = this._component) === null || _c === void 0 ? void 0 : _c.className("__toolbar")}">
+                          ${this.toolbarPosition === "nav" ? html$2`
+                                        <div class="${this._component.className("__toolbar")}">
                                             <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
                                         </div>
                                     ` : ""}
-                              ${((_d = this._items) !== null && _d !== void 0 ? _d : []).map((item) => {
-      var _a2, _b2;
-      return html`
+                      </header>` : ""}
+                ${this._component ? html$2`
+                          <div class="${this._component.className("__content")}">
+                              ${this.toolbarPosition !== "nav" ? html$2`
+                                            <div class="${(_c2 = this._component) === null || _c2 === void 0 ? void 0 : _c2.className("__toolbar")}">
+                                                <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                            </div>
+                                        ` : ""}
+                              ${((_d2 = this._items) !== null && _d2 !== void 0 ? _d2 : []).map((item) => {
+      var _a3, _b3, _c3;
+      return html$2`
                                       <pre
                                           class="${this._component.className("__code")}"
                                           style="line-height:0;"
-                                          id="${(_a2 = item.id) !== null && _a2 !== void 0 ? _a2 : item.lang}"
-                                          ?active="${this._activeTabId === ((_b2 = item.id) !== null && _b2 !== void 0 ? _b2 : item.lang)}"
+                                          id="${(_a3 = item.id) !== null && _a3 !== void 0 ? _a3 : item.lang}"
+                                          ?active="${this._activeTabId === ((_b3 = item.id) !== null && _b3 !== void 0 ? _b3 : item.lang)}"
                                       >
-                            <code class="language-${item.lang} ${item.lang} ${this.defaultStyle ? "hljs" : ""}">
+                            <code lang="${(_c3 = item.lang) !== null && _c3 !== void 0 ? _c3 : item.id}" class="language-${item.lang} ${item.lang} ${this._component.props.defaultStyle ? "hljs" : ""}">
                                 
-                                ${item.code}
+                                ${html([item.code])}
                             </code>
                         </pre>
                                   `;
@@ -2227,12 +3959,14 @@ class SCodeExample extends SLitElement {
     });
   }
   initPrismOnTab(id) {
-    var _a;
-    const $content = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector(`pre#${id} code`);
+    var _a2;
+    const $content = (_a2 = this.shadowRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(`pre#${id} code`);
     if ($content.hasAttribute("inited"))
       return;
     $content.setAttribute("inited", "true");
-    const highlightedCode = core.highlight($content === null || $content === void 0 ? void 0 : $content.innerHTML, {language: "js"}).value.trim();
+    const highlightedCode = core.highlight($content === null || $content === void 0 ? void 0 : $content.innerHTML.replace(/\<\!\-\-\?lit\$.*\$\-\-\>/g, ""), {
+      language: $content.getAttribute("lang")
+    }).value.trim();
     $content.innerHTML = highlightedCode;
   }
   copy() {

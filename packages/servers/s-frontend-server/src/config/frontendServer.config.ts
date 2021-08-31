@@ -148,6 +148,9 @@ export default function (env, config) {
             '/api/docmap': {
                 handler: 'docmap',
             },
+            '/styleguide/*': {
+                handler: 'styleguide',
+            },
             '/*/*/styleguide/*': {
                 handler: 'styleguide',
             },

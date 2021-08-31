@@ -47,6 +47,14 @@
                 </a>
             </li>
         @endif
+        @if ($block->cssClass)
+            <li class="s-font:40">
+                <i class="s-icon:css"></i>
+                <a href="#cssClass-{{ $block->name }}" title="CSS Classes">
+                    CSS Classes
+                </a>
+            </li>
+        @endif
         @if ($block->param)
             <li class="s-font:40">
                 <i class="s-icon:list-ul"></i>

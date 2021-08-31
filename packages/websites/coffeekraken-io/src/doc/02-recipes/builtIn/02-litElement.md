@@ -1,4 +1,5 @@
-<!-- 
+<!--
+/**
  * @name            Lit Element
  * @namespace       doc.recipes.builtIn
  * @type            Markdown
@@ -8,10 +9,11 @@
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 -->
 
 {{#> layout-doc }}
 
-# Lit Element recipe ```litElement```
+# Lit Element recipe `litElement`
 
 {{/layout-doc }}

@@ -83,6 +83,28 @@ export default function ({
         `);
 
                 break;
+            case 'outline':
+                vars.push(`
+                background-color: sugar.color(ui, --alpha 0);
+                border: sugar.color(ui) solid sugar.theme(ui.button.borderWidth);
+
+                &:hover, &:focus {
+                  background-color: sugar.color(ui, --alpha 0.3);
+                }
+              `);
+                break;
+            case 'text':
+                vars.push(`
+                  background-color: sugar.color(ui, --alpha 0);
+                  border: none !important;
+                  color: sugar.color(ui);
+
+                  &:hover, &:focus {
+                    background-color: sugar.color(ui, --alpha 0);
+                    transform: scale(1.1);
+                  }
+                `);
+                break;
             case 'default':
             default:
                 vars.push(`
@@ -90,7 +112,7 @@ export default function ({
             color: sugar.color(ui, foreground);
 
             &:hover, &:focus {
-              background-color: sugar.color(ui:hover);
+              background-color: sugar.color(ui:hover, 50);
               color: sugar.color(ui:hover, foreground);
             }
         `);

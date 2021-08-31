@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "dev": "sugar frontstack",
-        "build": "sugar frontstack.recipe"
+        "build": "sugar frontstack build"
     },
     "repository": {
         "type": "git",

@@ -1,4 +1,5 @@
-<!-- 
+<!--
+/**
  * @name            Configuration explorer
  * @namespace       doc.config
  * @type            Markdown
@@ -8,6 +9,7 @@
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 -->
 
 {{#> layout-doc }}

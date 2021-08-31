@@ -27,4 +27,19 @@
             background-image: url('/src/img/discord-illustration-05-bkg.png');
         }
     }
+
+    .__preview-example {
+        max-height: calc(100vh - 400px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-inline-end: sugar.padding(50);
+        @sugar.scrollbar (accent, 1px);
+    }
+
+    .toolbar {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+    }
 }

@@ -22,7 +22,7 @@ import { webcomponent as __CkSettingsWebcomponent } from './components/CkSetting
 // import "./generic/docShortcut";
 
 // internal components
-// __DocNavComponent();
+__DocNavComponent();
 __VersionSelector();
 __CkSettingsWebcomponent();
 

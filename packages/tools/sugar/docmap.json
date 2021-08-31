@@ -1,9 +1,7 @@
 {
     "map": {},
     "generated": {
-        "extends": [
-            "@coffeekraken/coffeekraken-io"
-        ],
+        "extends": ["@coffeekraken/coffeekraken-io"],
         "map": {
             "@coffeekraken.sugar.node.index": {
                 "name": "index",
@@ -23187,9 +23185,7 @@
                 "name": "Get started",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
+                    "tree": ["Documentation"],
                     "slug": "/doc/get-started"
                 },
                 "platform": [
@@ -23215,9 +23211,7 @@
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
+                    "tree": ["Documentation"],
                     "slug": "/doc/readme"
                 },
                 "platform": [

@@ -1,8 +1,9 @@
 // @ts-nocheck
 
-import __SComponentUtils from '@coffeekraken/s-component-utils';
+import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import { css, html, LitElement, property, query, queryAssignedNodes, unsafeCSS } from 'lit-element';
+import { html } from 'lit';
+import { property } from 'lit/decorators.js';
 import __SRequest from '@coffeekraken/s-request';
 import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
@@ -13,7 +14,7 @@ import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
 
 import { loadDocmap, setState, getState } from '../state/state';
 
-export default class DocNav extends LitElement {
+export default class DocNav extends SLitElement {
     maxItems = 10;
 
     @property()
@@ -37,6 +38,8 @@ export default class DocNav extends LitElement {
 
     constructor() {
         super();
+
+        console.log('Hello');
 
         (async () => {
             const docmapJson = await loadDocmap();
@@ -245,12 +248,24 @@ export default class DocNav extends LitElement {
     createRenderRoot() {
         return this;
     }
+    _renderExampleTimeout;
+    _renderExample = false;
     render() {
+        if (!this._renderExampleTimeout) {
+            this._renderExample = false;
+            this._renderExampleTimeout = setTimeout(() => {
+                this._renderExample = true;
+                this.requestUpdate();
+                setTimeout(() => {
+                    this._renderExampleTimeout = null;
+                });
+            });
+        }
         const tpl = html`
             <div class="s-grid:12222">
                 <nav class="__nav">
                     <form name="doc">
-                        <fieldset class="__nav-search s-mb:30 s-pr:20 s-pt:20">
+                        <fieldset class="__nav-search s-mb:30 s-pr:30 s-pt:30">
                             <input
                                 type="text"
                                 class="s-input s-width:100"
@@ -262,23 +277,23 @@ export default class DocNav extends LitElement {
                         </fieldset>
 
                         <fieldset class="__nav-platform s-mb:30">
-                            <legend class="s-typo:h6 s-mb:10">Platform</legend>
+                            <legend class="s-typo:h6 s-mb:30">Platform</legend>
                             <dl class="s-list s-bg:even">
                                 ${this.availablePlatforms.map(
                                     (platform) => html`
-                                        <dt class="s-flex s-font:40 s-p:10 s-bg:ui-surface">
+                                        <dt class="s-flex s-font:40 s-p:20 s-pr:30 s-bg:ui-background">
                                             <label class="s-flex-item:grow" for="platform-${platform}">
                                                 ${platform}
                                             </label>
-                                            <label class="s-switch:accent" for="platform-${platform}">
+                                            <label for="platform-${platform}">
                                                 <input
                                                     name="platform-${platform}"
+                                                    class="s-switch s-ui:accent"
                                                     type="checkbox"
                                                     id="platform-${platform}"
                                                     @change="${() => this._togglePlatform(platform)}"
                                                     ?checked="${(this._saved.platforms ?? []).indexOf(platform) !== -1}"
                                                 />
-                                                <div class="s-switch-handler"></div>
                                             </label>
                                         </dt>
                                     `,
@@ -287,21 +302,21 @@ export default class DocNav extends LitElement {
                         </fieldset>
 
                         <fieldset class="__nav-type s-mb:30">
-                            <legend class="s-typo:h6 s-mb:10">Type</legend>
+                            <legend class="s-typo:h6 s-mb:30">Type</legend>
                             <dl class="s-list s-bg:even">
                                 ${this.availableTypes.map(
                                     (type) => html`
-                                        <dt class="s-flex s-font:40 s-p:10 s-bg:ui-surface">
+                                        <dt class="s-flex s-font:40 s-p:20 s-pr:30 s-bg:ui-background">
                                             <label class="s-flex-item:grow" for="type-${type}"> ${type} </label>
-                                            <label class="s-switch:accent" for="type-${type}">
+                                            <label for="type-${type}">
                                                 <input
                                                     name="type-${type}"
+                                                    class="s-switch s-ui:accent"
                                                     type="checkbox"
                                                     id="type-${type}"
                                                     @change="${() => this._toggleType(type)}"
                                                     ?checked="${(this._saved.types ?? []).indexOf(type) !== -1}"
                                                 />
-                                                <div class="s-switch-handler"></div>
                                             </label>
                                         </dt>
                                     `,
@@ -310,21 +325,21 @@ export default class DocNav extends LitElement {
                         </fieldset>
 
                         <fieldset class="__nav-status s-mb:30">
-                            <legend class="s-typo:h6 s-mb:10">Status</legend>
+                            <legend class="s-typo:h6 s-mb:30">Status</legend>
                             <dl class="s-list s-bg:even">
                                 ${this.availableStatuses.map(
                                     (status) => html`
-                                        <dt class="s-flex s-font:40 s-p:10 s-bg:ui-surface">
+                                        <dt class="s-flex s-font:40 s-p:20 s-pr:30 s-bg:ui-background">
                                             <label class="s-flex-item:grow" for="status-${status}"> ${status} </label>
-                                            <label class="s-switch:accent" for="status-${status}">
+                                            <label for="status-${status}">
                                                 <input
                                                     name="status-${status}"
                                                     type="checkbox"
+                                                    class="s-switch s-ui:accent"
                                                     id="status-${status}"
                                                     @change="${() => this._toggleStatus(status)}"
                                                     ?checked="${(this._saved.statuses ?? []).indexOf(status) !== -1}"
                                                 />
-                                                <div class="s-switch-handler"></div>
                                             </label>
                                         </dt>
                                     `,
@@ -385,16 +400,27 @@ export default class DocNav extends LitElement {
                                     ${(<any>item).example && (<any>item).example.length
                                         ? html`
                                               <div class="__code">
-                                                  <s-code-example
-                                                      default-style
-                                                      style="max-width:100%;"
-                                                      class="s-depth:50 s-flex-item:grow:shrink"
-                                                  >
-                                                      <textarea lang="${(<any>item).example[0].language}">
+                                                  ${this._renderExample
+                                                      ? html`
+                                                            <s-code-example
+                                                                default-style
+                                                                style="max-width:100%;"
+                                                                class="s-depth:50 s-flex-item:grow:shrink"
+                                                            >
+                                                                <textarea lang="${(<any>item).example[0].language}">
                                                 ${(<any>item).example[0].code}                    
                                             </textarea
-                                                      >
-                                                  </s-code-example>
+                                                                >
+                                                            </s-code-example>
+                                                            <div class="s-until:sibling:mounted">
+                                                                <i class="s-loader:spinner s-ui:accent"></i>
+                                                                &nbsp;
+                                                                <p class="s-typo:p s-display:inline-block">
+                                                                    Loading code example. Please wait...
+                                                                </p>
+                                                            </div>
+                                                        `
+                                                      : ''}
                                               </div>
                                           `
                                         : ''}
@@ -410,5 +436,8 @@ export default class DocNav extends LitElement {
 }
 
 export function webcomponent(tagName = 'doc-nav') {
+    __SComponentUtils.setDefaultProps({
+        mountWhen: 'directly',
+    });
     customElements.define(tagName, DocNav);
 }

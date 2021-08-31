@@ -103,6 +103,41 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.buttons": {
+                "name": "Buttons",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/buttons"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to display any HTMLElement as a button",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- default style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">default style</h3>\n  <a class=\"s-btn:default s-mr:20\">Click me!</a>\n  <a class=\"s-btn:default s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:default s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:default s-ui:error\">Click me!</a>\n</div>\n\n<!-- gradient style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">gradient style</h3>\n  <a class=\"s-btn:gradient s-mr:20\">Click me!</a>\n  <a class=\"s-btn:gradient s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:gradient s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:gradient s-ui:error\">Click me!</a>\n</div>\n\n<!-- outline style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">outline style</h3>\n  <a class=\"s-btn:outline s-mr:20\">Click me!</a>\n  <a class=\"s-btn:outline s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:outline s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:outline s-ui:error\">Click me!</a>\n</div>\n\n<!-- text style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">text style</h3>\n  <a class=\"s-btn:text s-mr:20\">Click me!</a>\n  <a class=\"s-btn:text s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:text s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:text s-ui:error\">Click me!</a>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn": {
                 "name": "s-btn",
                 "type": "CssClass",
@@ -175,216 +210,6 @@
                     {
                         "language": "html",
                         "code": "<a class=\"s-btn--text\">I'm a cool button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Main": {
-                "name": "s-btn--main",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--main\">I'm a cool main button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Ui": {
-                "name": "s-btn--ui",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--ui\">I'm a cool ui button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Accent": {
-                "name": "s-btn--accent",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--accent\">I'm a cool accent button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Complementary": {
-                "name": "s-btn--complementary",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--complementary\">I'm a cool complementary button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Success": {
-                "name": "s-btn--success",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--success\">I'm a cool success button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Warning": {
-                "name": "s-btn--warning",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--warning\">I'm a cool warning button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Error": {
-                "name": "s-btn--error",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--error\">I'm a cool error button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Info": {
-                "name": "s-btn--info",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--info\">I'm a cool info button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Extension": {
-                "name": "s-btn--extension",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"<s-btn--extension\">I'm a cool extension button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn-Shrinked": {
-                "name": "s-btn--shrinked",
-                "type": "CssClass",
-                "description": "This class represent a(n) \"<s-color=\"accent\">shrinked</s-color>\" button",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-btn--shrinked\">I'm a cool button</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -649,6 +474,41 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.input.textInput": {
+                "name": "Text Input",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/text-input"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some styles to your text input",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.input",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- default style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">default style</h3>\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:accent\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:complementary\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:error\" />\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.input..sInput": {
                 "name": ".s-input",
                 "type": "CssClass",
@@ -664,6 +524,216 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel": {
+                "name": "s-label",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<s-color=\"accent\">default</s-color>\" label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:main": {
+                "name": "s-label:main",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:main\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:ui": {
+                "name": "s-label:ui",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:ui\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:accent": {
+                "name": "s-label:accent",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:accent\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:complementary": {
+                "name": "s-label:complementary",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:complementary\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:success": {
+                "name": "s-label:success",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:success\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:warning": {
+                "name": "s-label:warning",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:warning\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:error": {
+                "name": "s-label:error",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:error\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:info": {
+                "name": "s-label:info",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:info\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:extension": {
+                "name": "s-label:extension",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any label",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label:extension\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.list.sList-Interactive": {
                 "name": "s-list--interactive",
                 "type": "CssClass",
@@ -672,7 +742,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list--interactive\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
+                        "code": "<ul class=\"s-list:interactive\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
                     }
                 ],
                 "since": "2.0.0",
@@ -967,6 +1037,27 @@
                     {
                         "language": "html",
                         "code": "<ul class=\"s-list--extension\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.range.sLoader:spinner": {
+                "name": "s-loader:spinner",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<s-color=\"accent\">spinner</s-color>\" loader",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.range",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-loader:spinner\"></div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1354,6 +1445,27 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.range.sRange": {
+                "name": "s-range",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<s-color=\"accent\">default</s-color>\" range",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.range",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<input type=\"range\" class=\"s-range\" min=\"0\" max=\"100\" step=\"10\" />"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.select..sSelect": {
                 "name": ".s-select",
                 "type": "CssClass",
@@ -1396,15 +1508,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Main": {
-                "name": "s-btn--main",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:main": {
+                "name": "s-switch:main",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--main\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:main\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1417,15 +1529,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Ui": {
-                "name": "s-btn--ui",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:ui": {
+                "name": "s-switch:ui",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--ui\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:ui\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1438,15 +1550,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Accent": {
-                "name": "s-btn--accent",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:accent": {
+                "name": "s-switch:accent",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--accent\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:accent\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1459,15 +1571,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Complementary": {
-                "name": "s-btn--complementary",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:complementary": {
+                "name": "s-switch:complementary",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--complementary\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:complementary\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1480,15 +1592,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Success": {
-                "name": "s-btn--success",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:success": {
+                "name": "s-switch:success",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--success\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:success\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1501,15 +1613,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Warning": {
-                "name": "s-btn--warning",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:warning": {
+                "name": "s-switch:warning",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--warning\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:warning\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1522,15 +1634,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Error": {
-                "name": "s-btn--error",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:error": {
+                "name": "s-switch:error",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--error\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:error\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1543,15 +1655,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Info": {
-                "name": "s-btn--info",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:info": {
+                "name": "s-switch:info",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--info\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:info\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1564,15 +1676,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sBtn-Extension": {
-                "name": "s-btn--extension",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:extension": {
+                "name": "s-switch:extension",
                 "type": "CssClass",
                 "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-switch--extension\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
+                        "code": "<label class=\"s-switch:extension\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2308,6 +2420,195 @@
                     {
                         "language": "html",
                         "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:main": {
+                "name": "s-ui:main",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:main\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:ui": {
+                "name": "s-ui:ui",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:ui\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:accent": {
+                "name": "s-ui:accent",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:accent\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:complementary": {
+                "name": "s-ui:complementary",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:complementary\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:success": {
+                "name": "s-ui:success",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:success\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:warning": {
+                "name": "s-ui:warning",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:warning\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:error": {
+                "name": "s-ui:error",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:error\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:info": {
+                "name": "s-ui:info",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:info\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:extension": {
+                "name": "s-ui:extension",
+                "type": "CssClass",
+                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any ui element",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-ui:extension\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -7152,6 +7453,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.main.ui.sColor:mainUi": {
+                "name": "s-color:main-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.main.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:main-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.ui.sBg:mainUi": {
+                "name": "s-bg:main-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:main-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.main.border.sColor:mainBorder": {
                 "name": "s-color:main-border",
                 "type": "CssClass",
@@ -8554,6 +8899,50 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:ui-surfaceForeground\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.ui.ui.sColor:uiUi": {
+                "name": "s-color:ui-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.ui.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:ui-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.ui.sBg:uiUi": {
+                "name": "s-bg:ui-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:ui-ui\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -9968,6 +10357,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.accent.ui.sColor:accentUi": {
+                "name": "s-color:accent-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.accent.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:accent-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.ui.sBg:accentUi": {
+                "name": "s-bg:accent-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:accent-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.accent.border.sColor:accentBorder": {
                 "name": "s-color:accent-border",
                 "type": "CssClass",
@@ -11370,6 +11803,50 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:complementary-surfaceForeground\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.ui.sColor:complementaryUi": {
+                "name": "s-color:complementary-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:complementary-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.ui.sBg:complementaryUi": {
+                "name": "s-bg:complementary-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:complementary-ui\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -12784,6 +13261,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.success.ui.sColor:successUi": {
+                "name": "s-color:success-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.success.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:success-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.ui.sBg:successUi": {
+                "name": "s-bg:success-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:success-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.success.border.sColor:successBorder": {
                 "name": "s-color:success-border",
                 "type": "CssClass",
@@ -14186,6 +14707,50 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:warning-surfaceForeground\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.warning.ui.sColor:warningUi": {
+                "name": "s-color:warning-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.warning.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:warning-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.ui.sBg:warningUi": {
+                "name": "s-bg:warning-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:warning-ui\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -15600,6 +16165,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.error.ui.sColor:errorUi": {
+                "name": "s-color:error-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.error.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:error-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.ui.sBg:errorUi": {
+                "name": "s-bg:error-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:error-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.error.border.sColor:errorBorder": {
                 "name": "s-color:error-border",
                 "type": "CssClass",
@@ -17002,6 +17611,50 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:info-surfaceForeground\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.info.ui.sColor:infoUi": {
+                "name": "s-color:info-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-ui\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.info.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:info-ui\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.ui.sBg:infoUi": {
+                "name": "s-bg:info-ui",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-ui\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:info-ui\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -18512,6 +19165,45 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.font.fontFamilies": {
+                "name": "Font Families",
+                "type": "CssClass",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Fonts"
+                    ],
+                    "slug": "/styleguide/fonts/families"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a font to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Dynamic Solutions Supervisor Velma Price</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">District Operations Planner Miss Greg Schowalter</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Central Integration Administrator Charlotte O'Connell V</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Principal Quality Analyst Rhonda Hermiston</h1>"
+                    },
+                    {
+                        "language": "css",
+                        "code": ".my-font-default {\n    @sugar.font.family(default);\n}\n.my-font-title {\n    @sugar.font.family(title);\n}\n.my-font-quote {\n    @sugar.font.family(quote);\n}\n.my-font-code {\n    @sugar.font.family(code);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.font.sFont:default": {
                 "name": "s-font:default",
                 "type": "CssClass",
@@ -18530,6 +19222,12 @@
                         "code": "<h1 class=\"s-font:default\">Hello world</h1>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -18552,6 +19250,12 @@
                         "code": "<h1 class=\"s-font:title\">Hello world</h1>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -18574,6 +19278,12 @@
                         "code": "<h1 class=\"s-font:quote\">Hello world</h1>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -18596,6 +19306,51 @@
                         "code": "<h1 class=\"s-font:code\">Hello world</h1>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.font.fontSizes": {
+                "name": "Font Sizes",
+                "type": "CssClass",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Fonts"
+                    ],
+                    "slug": "/styleguide/fonts/sizes"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a font size to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-font:50 s-mb:30\">Direct Accountability Analyst Henrietta Lind</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-font:50 s-mb:30\">Internal Marketing Supervisor Candice Kuhn</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-font:50 s-mb:30\">Principal Branding Specialist Mitchell Monahan</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-font:50 s-mb:30\">Legacy Factors Specialist Eva Donnelly</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-font:50 s-mb:30\">Dynamic Usability Developer Francis Schamberger</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-font:50 s-mb:30\">National Paradigm Agent Joyce Kohler</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-font:50 s-mb:30\">National Marketing Associate Shelia Emmerich</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-font:50 s-mb:30\">Future Response Assistant Lamar McKenzie</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-font:50 s-mb:30\">Future Brand Designer Roy Bechtelar</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-font:50 s-mb:30\">International Communications Assistant Vivian Volkman</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-font:50 s-mb:30\">Central Applications Manager Craig Weissnat</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Principal Security Supervisor Cora Heidenreich</h1>"
+                    },
+                    {
+                        "language": "css",
+                        "code": ".my-font-0 {\n    @sugar.font.size(0);\n}\n.my-font-10 {\n    @sugar.font.size(10);\n}\n.my-font-20 {\n    @sugar.font.size(20);\n}\n.my-font-30 {\n    @sugar.font.size(30);\n}\n.my-font-40 {\n    @sugar.font.size(40);\n}\n.my-font-50 {\n    @sugar.font.size(50);\n}\n.my-font-60 {\n    @sugar.font.size(60);\n}\n.my-font-70 {\n    @sugar.font.size(70);\n}\n.my-font-80 {\n    @sugar.font.size(80);\n}\n.my-font-90 {\n    @sugar.font.size(90);\n}\n.my-font-100 {\n    @sugar.font.size(100);\n}\n.my-font-default {\n    @sugar.font.size(default);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -18842,8 +19597,43 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.mixins.font.sFont:default": {
-                "name": "s-font:default",
+            "@coffeekraken.coffeekraken-io.sugar.css.font.fontResets": {
+                "name": "Font Resets",
+                "type": "CssClass",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Fonts"
+                    ],
+                    "slug": "/styleguide/fonts/resets"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to reset fonts like size, family, etc...",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Corporate Tactics Director <span class=\"s-font:reset-size\">Jeffery Hermann</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Future Interactions Analyst <span class=\"s-font:reset-family\">Carl Feest</span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.mixins.font.sFont:resetSize": {
+                "name": "s-font:reset-size",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -18851,13 +19641,35 @@
                         "description": ""
                     }
                 ],
-                "description": "This class allows you to apply the font size \"<yellow>default</yellow>\" to any HTMLElement",
+                "description": "This class allows you to reset the font size to 1rem on any HTMLElement",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.mixins.font",
                 "status": "beta",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<h1 class=\"s-font:default\">Hello world</h1>"
+                        "code": "<h1 class=\"s-font:reset-size\">Hello world</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.mixins.font.sFont:resetFamily": {
+                "name": "s-font:reset-family",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to reset the font family to default on any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.mixins.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:reset-family\">Hello world</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -24064,6 +24876,202 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sMg:100": {
+                "name": "s-mg:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" margin style around any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-mg:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sMt:100": {
+                "name": "s-mt:-100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>-100</yellow>\" top margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-mt:-100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sMb:100": {
+                "name": "s-mb:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" bottom margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-mb:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sMl:100": {
+                "name": "s-ml:-100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>-100</yellow>\" left margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-ml:-100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin..sMr:100": {
+                "name": ".s-mr:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" right margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-mr:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sMx:100": {
+                "name": "s-mx:-100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>-100</yellow>\" left and right margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-mx:-100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sMy:100": {
+                "name": "s-my:-100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>-100</yellow>\" top and bottom margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-my:-100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.margin.sMg:default": {
                 "name": "s-mg:default",
                 "type": "CssClass",
@@ -25088,6 +26096,90 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-mr:-90\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sM:100": {
+                "name": "s-m:-100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>-100</yellow>\" margin style around any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-m:-100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin..sMb:100": {
+                "name": ".s-mb:-100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>-100</yellow>\" bottom margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-mb:-100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.margin.sMr:100": {
+                "name": "s-mr:-100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>-100</yellow>\" right margin style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-mr:-100\">Something cool</span>"
                     }
                 ],
                 "since": "2.0.0",
@@ -27760,6 +28852,202 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.padding.sP:100": {
+                "name": "s-p:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" padding style around any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-p:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.padding.sPt:100": {
+                "name": "s-pt:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" top padding style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-pt:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.padding.sPb:100": {
+                "name": "s-pb:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" bottom padding style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-pb:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.padding.sPl:100": {
+                "name": "s-pl:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" left padding style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-pl:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.padding..sPr:100": {
+                "name": ".s-pr:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" right padding style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-pr:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.padding.sPx:100": {
+                "name": "s-px:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" left and right padding style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-px:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.padding.sPy:100": {
+                "name": "s-py:100",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"<yellow>100</yellow>\" top and bottom padding style to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<span class=\"s-py:100\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.padding.sP:default": {
                 "name": "s-p:default",
                 "type": "CssClass",
@@ -27944,6 +29232,118 @@
                     {
                         "language": "html",
                         "code": "<span class=\"s-py:default\">Something cool</span>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.until.sUntil:mounted:hide": {
+                "name": "s-until:mounted:hide",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to hide any HTMLElement until it has reached the state \"mounted\".",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.until",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<s-range class=\"s-until:mounted:hide\" />"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.until.sUntil:sibling:mounted:hide": {
+                "name": "s-until:sibling:mounted:hide",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to hide any HTMLElement until his previous sibling has reached the state \"mounted\".",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.until",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<s-range name=\"myCoolRange\" />\n<div class=\"s-until:sibling:mounted:hide\">\n      Display something until the previous webcomponent has been mounted\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.until.sUntil:mounted": {
+                "name": "s-until:mounted",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to show any HTMLElement until it has reached the state \"mounted\".",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.until",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<s-range class=\"s-until:mounted\" />"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.until.sUntil:sibling:mounted": {
+                "name": "s-until:sibling:mounted",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to show any HTMLElement until his previous sibling has reached the state \"mounted\".",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.until",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<s-range name=\"myCoolRange\" />\n<div class=\"s-until:sibling:mounted\">\n      Display something until the previous webcomponent has been mounted\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -28380,6 +29780,28 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:css": {
+                "name": "s-icon:css",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>css</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:css s-font:20\"></i>\n<i class=\"s-icon:css s-font:40\"></i>\n<i class=\"s-icon:css s-font:60\"></i>\n<i class=\"s-icon:css s-font:80\"></i>\n<i class=\"s-icon:css s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:box": {
                 "name": "s-icon:box",
                 "type": "CssClass",
@@ -28572,6 +29994,50 @@
                     {
                         "language": "html",
                         "code": "<i class=\"s-icon:import s-font:20\"></i>\n<i class=\"s-icon:import s-font:40\"></i>\n<i class=\"s-icon:import s-font:60\"></i>\n<i class=\"s-icon:import s-font:80\"></i>\n<i class=\"s-icon:import s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:install": {
+                "name": "s-icon:install",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>install</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:install s-font:20\"></i>\n<i class=\"s-icon:install s-font:40\"></i>\n<i class=\"s-icon:install s-font:60\"></i>\n<i class=\"s-icon:install s-font:80\"></i>\n<i class=\"s-icon:install s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:settings": {
+                "name": "s-icon:settings",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>settings</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:settings s-font:20\"></i>\n<i class=\"s-icon:settings s-font:40\"></i>\n<i class=\"s-icon:settings s-font:60\"></i>\n<i class=\"s-icon:settings s-font:80\"></i>\n<i class=\"s-icon:settings s-font:100\"></i>"
                     }
                 ],
                 "filename": "index.css",
@@ -28805,35 +30271,6 @@
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css",
-                "children": {}
-            },
-            "@coffeekraken.coffeekraken-io.doc.installation": {
-                "name": "Installation",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Get Started"
-                    ],
-                    "slug": "/doc/get-started/installation"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "01-getStarted.md",
-                "extension": "md",
-                "relPath": "src/doc/00-get-started/01-getStarted.md",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.firstProject": {
@@ -30837,60 +32274,6 @@
                 "filename": "05-more.md",
                 "extension": "md",
                 "relPath": "src/doc/11-cli/05-more.md",
-                "children": {}
-            },
-            "@coffeekraken.coffeekraken-io.doc.lICENSE": {
-                "name": "LICENSE",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/license"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "LICENSE",
-                "relPath": "src/LICENSE",
-                "children": {}
-            },
-            "@coffeekraken.coffeekraken-io.doc.rEADME": {
-                "name": "README",
-                "type": "Markdown",
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.coffeekraken-io.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "README",
-                "relPath": "src/README",
                 "children": {}
             }
         }

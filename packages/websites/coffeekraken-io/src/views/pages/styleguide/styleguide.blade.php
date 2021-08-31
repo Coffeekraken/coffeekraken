@@ -16,24 +16,30 @@
 
         <section class="__preview s-py:100 s-bg:main-surface">
 
-            <div class="s-container s-format:text s-rhythm:vertical">
+            <div class="s-container">
 
                 <div class="s-grid:12:gutter-between:gutter-50:align-center">
 
-                    <div>
+                    <div class="s-format:text s-rhythm:vertical">
 
                         @include('doc.description', ['block' => $firstBlock])
-                        @include('doc.install', ['block' => $firstBlock])
+                        @if ($firstBlock->install)
+                            @include('doc.install', ['block' => $firstBlock])
+                        @elseif ($firstBlock->example)
+                            @include('generic.code.example', ['examples' => $firstBlock->example, 'lines' => 1])
+                        @endif
 
                     </div>
 
                     <div>
                         
-                        @foreach ($firstBlock->example as $example)
-                            @if ($example->language == 'html')
-                                {!! $example->code !!}                     
-                            @endif
-                        @endforeach
+                        <div class="__preview-example">
+                            @foreach ($firstBlock->example as $example)
+                                @if ($example->language == 'html')
+                                    {!! $example->code !!}                     
+                                @endif
+                            @endforeach
+                        </div>
 
                     </div>
 

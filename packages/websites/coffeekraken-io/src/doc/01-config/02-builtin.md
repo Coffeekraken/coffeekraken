@@ -1,4 +1,5 @@
-<!-- 
+<!--
+/**
  * @name            Built-in configs
  * @namespace       doc.config
  * @type            Markdown
@@ -8,6 +9,7 @@
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 -->
 
 {{#> layout-doc }}
@@ -19,20 +21,20 @@ The easiest way to discover configurations is to take a look at the [configurati
 
 Here's some of the main available configurations just for the example:
 
-| File | Dotpath | Description |
-|------|---------|-------|
-| storage.config.js | storage.package.rootDir | The current package root path |
-| | storage.src.jsDir | The path to the javascript sources directory |
-| | storage.src.css | The path to the css sources directory |
-| | storage.src.imgDir | The path to the images sources directory |
-| | storage.dist.jsDir | The path to the javascript distribution directory |
-| | ... | Some other configs... |
-| packageJson.config.js | packageJson.name | The package name getted from the package.json file |
-| | packageJson.version | The package version getted from the package.json file |
-| | ... | Some other configs... |
-| theme.config.js | theme.color.main.default | The main color used through the theming system |
-| | theme.ui.switch | The configurations used for the "switch" component |
-| | ... | Some other configs... |
+| File                  | Dotpath                  |  Description                                           |
+| --------------------- | ------------------------ | ------------------------------------------------------ |
+| storage.config.js     | storage.package.rootDir  |  The current package root path                         |
+|                       | storage.src.jsDir        |  The path to the javascript sources directory          |
+|                       | storage.src.css          |  The path to the css sources directory                 |
+|                       | storage.src.imgDir       |  The path to the images sources directory              |
+|                       | storage.dist.jsDir       |  The path to the javascript distribution directory     |
+|                       | ...                      |  Some other configs...                                 |
+| packageJson.config.js | packageJson.name         |  The package name getted from the package.json file    |
+|                       | packageJson.version      |  The package version getted from the package.json file |
+|                       | ...                      |  Some other configs...                                 |
+| theme.config.js       | theme.color.main.default |  The main color used through the theming system        |
+|                       | theme.ui.switch          |  The configurations used for the "switch" component    |
+|                       | ...                      |  Some other configs...                                 |
 
 > All of these configurations are accessible from your JS as well as in your CSS through the [PostCss Sugar plugin](https://www.npmjs.com/package/@coffeekraken/s-postcss-sugar-plugin). This plugin is directly integrated into our development tools but can be installed manually as all standard [PostCss plugins](https://github.com/postcss/postcss)
 

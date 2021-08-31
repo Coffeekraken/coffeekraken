@@ -48,9 +48,22 @@ export default function styleguide(req, res, settings = {}) {
             res.send(error.value);
             return reject(error.value);
         }
-        const docblocksInstance = new __SDocblock(styleguideObj.docmap.path);
+        const docblocksInstance = new __SDocblock(styleguideObj.docmap.path, {
+            docblock: {
+                filterByTag: {
+                    menu: (value) => {
+                        if (!value || typeof value !== 'string') return false;
+                        const parts = value.split(/\s{2,99999999}/);
+                        if (parts.length >= 2 && parts[1] === req.path) return true;
+                        return false;
+                    },
+                },
+            },
+        });
         await docblocksInstance.parse();
         const docblocks = docblocksInstance.toObject();
+
+        // console.log(docblocks[0].example);
 
         // // scrap @see fields opengraph metas
         // await new Promise((resolve, reject) => {

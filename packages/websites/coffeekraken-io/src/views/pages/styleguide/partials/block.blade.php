@@ -4,6 +4,7 @@
 @include('doc.install', ['block' => $block])
 @include('doc.example', ['block' => $block])
 @include('doc.feature', ['block' => $block])
+@include('doc.cssClass', ['block' => $block])
 @include('doc.interface', ['block' => $block])
 @include('doc.param', ['block' => $block])
 @include('doc.return', ['block' => $block])

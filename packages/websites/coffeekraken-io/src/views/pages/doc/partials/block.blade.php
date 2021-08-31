@@ -144,8 +144,8 @@
 @endif
 
 @if ($block->props)
-    <h4 id="propeters-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
-        <i class="s-icon:list-ul s-color:accent"></i>&nbsp;&nbsp;propeters
+    <h4 id="properties-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+        <i class="s-icon:list-ul s-color:accent"></i>&nbsp;&nbsp;properties
     </h4>
 
     <ol>

@@ -20,7 +20,7 @@
                     <span>Features</span>
                 </a>
 
-                @foreach ($docMenu->mixedTree as $menuItem)
+                @foreach ($docMenu->tree as $menuItem)
 
                     <span class="s-pl:50 s-typo:bold" >
                         @if ($menuItem->slug)
@@ -32,6 +32,9 @@
                                 <span>{{ $menuItem->name }}</span>
 
                                 <div class="__subnav">
+
+       {{-- <pre> @php print_r($menuItem->getStarted); @endphp</pre> --}}
+
                                     <div class="s-container s-grid:1222">
                                         <ul class="__subnav-chapters">
                                             @foreach($menuItem as $item)

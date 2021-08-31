@@ -38,6 +38,7 @@ a:active {
   fa:heart:heart
   fa:fire:fire
   fa:copy:copy
+  fab:css3-alt:css
   fa:box-open:box
   fa:info:info
   fa:chalkboard-teacher:example
@@ -62,12 +63,11 @@ a:active {
 @sugar.platform.classes;
 
 .s-theme--dark,
-/* .s-tooltip:not(.s-theme--dark .s-tooltip), */
 .s-code-example {
     @sugar.theme (dark);
 }
 
-[class*='s-btn']:not(s-date-picker [class*='s-btn']) {
+[class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.__preview-example [class*='s-btn']) {
     border-radius: 100px !important;
     border: none !important;
 }

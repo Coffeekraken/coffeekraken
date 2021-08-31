@@ -37,6 +37,18 @@ import __baseCss from 'pikaday/css/pikaday.css';
  *      Min and max date
  *      <s-date-picker
  *          placeholder="Select a date"
+ *          class="s-width--50"
+ *          min-date="2021-08-10"
+ *          max-date="2021-08-20"
+ *          name="myDatePicker2"
+ *          default-style
+ *      ></s-date-picker>
+ * </label>
+ *
+ * <label class="s-label s-mb--30">
+ *      Min and max date
+ *      <s-date-picker
+ *          placeholder="Select a date"
  *          class="s-ui--accent s-width--50"
  *          min-date="2021-08-10"
  *          max-date="2021-08-20"

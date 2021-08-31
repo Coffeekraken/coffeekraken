@@ -33,6 +33,46 @@ export default function ({
 
     const styles = ['default', 'gradient', 'outline', 'text'];
 
+    vars.push(`
+      /**
+        * @name          Buttons
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/buttons
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to display any HTMLElement as a button
+        * 
+        * 
+        ${styles
+            .map((style) => {
+                return ` * @cssClass     s-btn${
+                    style === 'default' ? '' : `\:${style}`
+                }           Apply the ${style} button style`;
+            })
+            .join('\n')}
+        * 
+        * @example        html
+        ${styles
+            .map((style) => {
+                return ` * <!-- ${style} style -->
+            * <div class="s-mb\:50">
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
+            *   <a class="s-btn\:${style} s-mr\:20">Click me!</a>
+            *   <a class="s-btn\:${style} s-mr\:20 s-ui\:accent">Click me!</a>
+            *   <a class="s-btn\:${style} s-mr\:20 s-ui\:complementary">Click me!</a>
+            *   <a class="s-btn\:${style} s-ui\:error">Click me!</a>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
     styles.forEach((style) => {
         let cls = `s-btn`;
         if (style !== defaultStyle) {
@@ -55,45 +95,26 @@ export default function ({
         vars.push([`.${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n'));
     });
 
-    Object.keys(__theme().baseColors()).forEach((colorName) => {
-        vars.push(`
-      /**
-       * @name        s-btn--${colorName}
-       * @namespace     sugar.css.ui.button
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any button
-       * 
-       * @example       html
-       * <a class="<s-btn--${colorName}">I'm a cool ${colorName} button</a>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      .s-btn--${colorName} {
-        @sugar.color.remap(ui, ${colorName});
-      }
-    `);
-    });
-
-    vars.push(`/**
-        * @name           s-btn--shrinked
-        * @namespace      sugar.css.ui.button
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">shrinked</s-color>" button
-        * 
-        * @example        html
-        * <a class="s-btn--shrinked">I'm a cool button</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(`
-      .s-btn--shrinked {
-        @sugar.ui.button($shrinked: true, $scope: shrinked);
-      }
-    `);
+    // Object.keys(__theme().baseColors()).forEach((colorName) => {
+    //     vars.push(`
+    //   /**
+    //    * @name        s-btn--${colorName}
+    //    * @namespace     sugar.css.ui.button
+    //    * @type          CssClass
+    //    *
+    //    * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any button
+    //    *
+    //    * @example       html
+    //    * <a class="<s-btn--${colorName}">I'm a cool ${colorName} button</a>
+    //    *
+    //    * @since       2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   .s-btn--${colorName} {
+    //     @sugar.color.remap(ui, ${colorName});
+    //   }
+    // `);
+    // });
 
     vars.push(`/**
         * @name           s-btn--block

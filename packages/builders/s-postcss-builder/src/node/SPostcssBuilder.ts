@@ -1,4 +1,4 @@
-import __SBuilder from '@coffeekraken/s-builder';
+import __SBuilder, { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
@@ -54,7 +54,7 @@ export interface ISPostcssBuilderSettings {
     purgecss: any;
 }
 
-export interface ISPostcssBuilderCtorSettings {
+export interface ISPostcssBuilderCtorSettings extends ISBuilderCtorSettings {
     postcssBuilder: Partial<ISPostcssBuilderSettings>;
 }
 

@@ -1,18 +1,14 @@
-import __SProcess from '@coffeekraken/s-process';
-import __SPostcssBuilderBuildParamsInterface from '../node/interface/SPostcssBuilderBuildParamsInterface';
+import __SPromise from '@coffeekraken/s-promise';
 import __SPostcssBuilder from '../node/SPostcssBuilder';
+import __SPostcssBuilderBuildParamsInterface from '../node/interface/SPostcssBuilderBuildParamsInterface';
 
-
-export default async function build(stringArgs = '') {
-
-    const builder = new __SPostcssBuilder();
-
-    const pro = await __SProcess.from(
-        builder.build.bind(builder)
-    , {
-        process: {
-          interface: __SPostcssBuilderBuildParamsInterface
-        }   
+export default function build(stringArgs = '') {
+    return new __SPromise(async ({ resolve, reject, pipe }) => {
+        const builder = new __SPostcssBuilder({
+            builder: {
+                interface: __SPostcssBuilderBuildParamsInterface,
+            },
+        });
+        resolve(await pipe(builder.build(stringArgs)));
     });
-    pro.run(stringArgs);
 }

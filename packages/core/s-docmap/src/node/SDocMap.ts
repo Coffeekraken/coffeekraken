@@ -592,6 +592,10 @@ class SDocMap extends __SClass implements ISDocMap {
                         exclude: finalParams.exclude ?? [],
                     });
 
+                    emit('log', {
+                        value: `<yellow>[build]</yellow> Found <cyan>${currentDocmapFiles.length}</cyan> docmap.json file(s) in dependencies`,
+                    });
+
                     const extendsArray: string[] = [];
                     currentDocmapFiles.forEach((file) => {
                         const currentPackageJson = __readJsonSync(`${file.dirPath}/package.json`);
@@ -613,18 +617,34 @@ class SDocMap extends __SClass implements ISDocMap {
                     exclude: finalParams.exclude ?? [],
                 });
 
+                emit('log', {
+                    value: `<yellow>[build]</yellow> Found <cyan>${filesInPackage.length}</cyan> file(s) to parse in package`,
+                });
+
                 for (let i = 0; i < filesInPackage.length; i++) {
                     const file = filesInPackage[i];
                     const content = (<__SFile>file).raw;
+
+                    emit('log', {
+                        value: `<yellow>[build]</yellow> Parsing file "<cyan>${__path.relative(
+                            __packageRootDir(),
+                            // @ts-ignore
+                            file.path,
+                        )}</cyan>"`,
+                    });
+
                     const docblocksInstance = new __SDocblock(content, {
                         docblock: {
                             filepath: (<__SFile>file).path,
                         },
                     });
+
                     await docblocksInstance.parse();
+
                     const docblocks = docblocksInstance.toObject();
 
-                    if (!docblocks || !docblocks.length) return;
+                    if (!docblocks || !docblocks.length) continue;
+
                     let docblockObj: any = {};
                     const children: any = {};
                     for (let j = 0; j < docblocks.length; j++) {
@@ -643,6 +663,7 @@ class SDocMap extends __SClass implements ISDocMap {
                             if (value === undefined) continue;
                             if (value.match(filterReg)) break;
                         }
+
                         if (docblock.name && docblock.name.slice(0, 1) === '_') continue;
                         if (docblock.private) continue;
 

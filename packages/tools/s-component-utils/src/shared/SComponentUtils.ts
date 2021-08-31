@@ -302,20 +302,6 @@ export default class SComponentUtils extends __SClass {
 
         // mount component when needed
         switch (this.props.mountWhen) {
-            // case 'interact':
-            //     this.node.addEventListener('mouseover', (e) => {
-            //         console.log('over');
-            //     });
-            //     this.node.addEventListener('touchstart', (e) {
-            //         console.log('touchStart');
-            //     });
-            //     this.node.addEventListener('focus', (e) => {
-            //         console.log('focus');
-            //     });
-            //     this.node.addEventListener('focusin', (e) => {
-            //         console.log('in');
-            //     });
-            //     break;
             case 'inViewport':
                 (async () => {
                     // @ts-ignore

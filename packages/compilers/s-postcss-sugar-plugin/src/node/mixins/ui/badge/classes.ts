@@ -2,28 +2,104 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {
+        styles: {
+            type: 'String[]',
+            values: ['solid', 'outline'],
+            default: ['solid', 'outline'],
+        },
+        defaultStyle: {
+            type: 'String',
+            values: ['solid', 'outline'],
+            default: __theme().config('ui.badge.defaultStyle') ?? 'solid',
+        },
+    };
 }
 
-export interface IPostcssSugarPluginUiBadgeClassesParams {}
+export interface IPostcssSugarPluginUiBadgeClassesParams {
+    styles: ('solid' | 'outline')[];
+    defaultStyle: 'solid' | 'outline';
+}
 
 export { postcssSugarPluginUiBadgeClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiBadgeClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiBadgeClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiBadgeClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiBadgeClassesParams = {
+        styles: ['solid', 'outline'],
+        defaultStyle: 'solid',
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
+
+    vars.push(`
+      /**
+        * @name          Badges
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/badges
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to display any HTMLElement as a badge
+        * 
+        ${finalParams.styles
+            .map((style) => {
+                return ` * @cssClass     s-badge${
+                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                }           Apply the ${style} badge style`;
+            })
+            .join('\n')}
+        * 
+        * @cssClass         s-badge\:square       Display your badge with squared corners
+        * @cssClass         s-badge\:pill         Display your badge with rounded corners
+        * 
+        * @example        html
+        ${finalParams.styles
+            .map((style) => {
+                return ` * <!-- ${style} style -->
+            * <div class="s-font\:40 s-mb\:50">
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
+            *   <a class="s-badge\:${style} s-mr\:20">Say hello!</a>
+            *   <a class="s-badge\:${style} s-mr\:20 s-ui\:accent">Say hello!</a>
+            *   <a class="s-badge\:${style} s-mr\:20 s-ui\:complementary">Say hello!</a>
+            *   <a class="s-badge\:${style} s-ui\:error">Say hello!</a>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        *
+        * <!-- shapes -->
+        * <div class="s-font\:40 s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Shapes</h3>
+        *   <a class="s-badge\:square s-mr\:20 s-mb\:20">Say hello!</a>
+        *   <a class="s-badge\:pill s-mr\:20 s-mb\:20">Say hello!</a>
+        *   <a class="s-badge\:outline\:square s-mr\:20 s-mb\:20">Say hello!</a>
+        *   <a class="s-badge\:outline\:pill s-mr\:20 s-mb\:20">Say hello!</a>
+        * </div>
+        * 
+        * <!-- scales -->
+        * <div class="s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
+        *   <a class="s-badge s-scale\:05 s-mr\:20 s-mb\:20">Say hello!</a>
+        *   <a class="s-badge s-scale\:1 s-mr\:20 s-mb\:20">Say hello!</a>
+        *   <a class="s-badge s-scale\:12 s-mr\:20 s-mb\:20">Say hello!</a>
+        *   <a class="s-badge s-scale\:15 s-mr\:20 s-mb\:20">Say hello!</a>
+        *   <a class="s-badge s-scale\:20 s-mb\:20">Say hello!</a>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
 
     vars.push(`/**
         * @name           s-badge
@@ -40,88 +116,70 @@ export default function ({
       */`);
     vars.push(`
       .s-badge {
-            @sugar.ui.badge(default, default);
+            @sugar.ui.badge($scope: bare);
         }
     `);
 
+    finalParams.styles.forEach((style) => {
+        vars.push(`/**
+        * @name           s-badge:${style}
+        * @namespace      sugar.css.ui.badge
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">outline</s-color>" badge
+        * 
+        * @example        html
+        * <a class="s-badge\:${style}">I'm a cool ${style} badge</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */`);
+        vars.push(`
+        .s-badge${style === finalParams.defaultStyle ? '' : `--${style}`} {
+            @sugar.ui.badge($style: ${style}, $scope: 'lnf,shape');
+        }
+    `);
+    });
+
     vars.push(`/**
-        * @name           s-badge--square
+        * @name           s-badge:square
         * @namespace      sugar.css.ui.button
         * @type           CssClass
         * 
-        * This class represent a(n) "<s-color="accent">square</s-color>" badge
+        * This class represent a(n) "<s-color="accent">squared</s-color>" badge
+        * 
+        * 
         * 
         * @example        html
-        * <a class="s-badge--square">I'm a cool badge</a>
+        * <a class="s-badge\:square">I'm a cool badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
     vars.push(`
         .s-badge--square {
-            @sugar.ui.badge(square);
+            @sugar.ui.badge($shape: square, $scope: shape);
         }
     `);
 
     vars.push(`/**
-        * @name           s-badge--pill
+        * @name           s-badge:pill
         * @namespace      sugar.css.ui.button
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">pill</s-color>" badge
         * 
         * @example        html
-        * <a class="s-badge--pill">I'm a cool badge</a>
+        * <a class="s-badge\:pill">I'm a cool badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
     vars.push(`
         .s-badge--pill {
-            @sugar.ui.badge(pill);
+            @sugar.ui.badge($shape: pill, $scope: shape);
         }
     `);
 
-    vars.push(`/**
-        * @name           s-badge--outline
-        * @namespace      sugar.css.ui.button
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">outline</s-color>" badge
-        * 
-        * @example        html
-        * <a class="s-badge--outline">I'm a cool badge</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(`
-        .s-badge--outline {
-            @sugar.ui.badge($style: outline);
-        }
-    `);
-
-    Object.keys(__theme().baseColors()).forEach((colorName) => {
-      vars.push(`
-        /**
-         * @name        s-badge--${colorName}
-         * @namespace     sugar.css.ui.badge
-         * @type          CssClass
-         * 
-         * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any badge
-         * 
-         * @example       html
-         * <a class="s-badge--${colorName}">I'm a cool ${colorName} badge</a>
-         * 
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        .s-badge--${colorName} {
-          @sugar.color.remap(ui, ${colorName});
-        }
-      `);
-    });
-
-
-  replaceWith(vars);
+    replaceWith(vars);
 }

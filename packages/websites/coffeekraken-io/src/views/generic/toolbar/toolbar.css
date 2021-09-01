@@ -3,7 +3,8 @@
     position: sticky;
     top: 100px;
     z-index: 10;
-    padding: sugar.padding(20) 0;
+    padding-inline: 0;
+    padding-block: sugar.scalable(sugar.padding(20));
 
     [class*='s-platform-'] {
         font-size: 1em;
@@ -17,7 +18,6 @@
         background-position: bottom center;
         min-width: 50ch;
         padding: sugar.space(30);
-        /* @sugar.color.remap(ui, accent); */
 
         &:before {
             content: '';

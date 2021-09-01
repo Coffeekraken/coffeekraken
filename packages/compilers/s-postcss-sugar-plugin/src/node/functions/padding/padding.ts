@@ -3,40 +3,42 @@ import __theme from '../../utils/theme';
 import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginPaddingFunctionInterface extends __SInterface {
-  static definition = {
-    padding: {
-      type: 'String',
-      values: Object.keys(__theme().config('padding')),
-      default: 'default',
-      required: true
-    }
-  };
+    static definition = {
+        padding: {
+            type: 'String',
+            values: Object.keys(__theme().config('padding')),
+            default: 'default',
+            required: true,
+        },
+        scalable: {
+            type: 'Boolean',
+            default: __theme().config('scalable.padding'),
+        },
+    };
 }
 export { postcssSugarPluginPaddingFunctionInterface as interface };
 
 export interface IPostcssSugarPluginPaddingFunctionParams {
-  padding: string;
+    padding: string;
+    scalable: boolean;
 }
 
-export default function ({
-  params
-}: {
-  params: Partial<IPostcssSugarPluginPaddingFunctionParams>;
-}) {
-  const finalParams: IPostcssSugarPluginPaddingFunctionParams = {
-    padding: '',
-    ...params
-  };
+export default function ({ params }: { params: Partial<IPostcssSugarPluginPaddingFunctionParams> }) {
+    const finalParams: IPostcssSugarPluginPaddingFunctionParams = {
+        padding: '',
+        scalable: true,
+        ...params,
+    };
 
-  const padding = finalParams.padding;
+    const padding = finalParams.padding;
+    let paddings = padding.split(' ').map((s) => {
+        if (s === `${parseInt(s)}`) return `sugar.theme(padding.${s})`;
+        return s;
+    });
 
-  if (__theme().config('padding')[padding] === undefined) return padding;
+    if (finalParams.scalable) {
+        paddings = paddings.map((p) => `sugar.scalable(${p})`);
+    }
 
-  const paddings = padding.split(' ').map((s) => {
-    const size = __theme().config(`padding.${s}`);
-    if (!size) return size;
-    return `var(${__minifyVar(`--s-theme-padding-${s}`)}, ${size})`;
-  });
-
-  return paddings.join(' ');
+    return paddings.join(' ');
 }

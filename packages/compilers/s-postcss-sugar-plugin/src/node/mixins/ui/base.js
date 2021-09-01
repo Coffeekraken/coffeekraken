@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../utils/themeVar';
 import __theme from '../../utils/theme';
 class postcssSugarPluginUiBaseInterface extends __SInterface {
 }
@@ -18,17 +17,19 @@ export default function ({ params, atRule, replaceWith, }) {
     // bare
     vars.push(`
         display: inline-block;
-        padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
+        padding-inline: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline));
+        padding-block: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock));
     `);
     // lnf
     vars.push(`
         color: sugar.color(main, surfaceForeground);
         background-color: sugar.color(main, ui);
-        padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
+        font-size: sugar.scalable(1rem);
         border: sugar.color(ui, border) solid sugar.theme(ui.${finalParams.name}.borderWidth);
-        border-radius: ${__themeVar(`ui.${finalParams.name}.borderRadius`)};
-        transition: ${__themeVar(`ui.${finalParams.name}.transition`)};
-        @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
+        border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
+        transition: sugar.theme(ui.${finalParams.name}.transition);
+
+        /** @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)}); */
 
         &::placeholder {
           color: sugar.color(main, placeholder);
@@ -53,4 +54,4 @@ export default function ({ params, atRule, replaceWith, }) {
   `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxVQUFVLE1BQU0sc0JBQXNCLENBQUM7QUFDOUMsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZOztBQUNqRCw0Q0FBVSxHQUFHO0lBQ2hCLElBQUksRUFBRTtRQUNGLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7S0FDakI7Q0FDSixDQUFDO0FBT04sT0FBTyxFQUFFLGlDQUFpQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTFELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsSUFDTCxNQUFNLENBQ1osQ0FBQztJQUVGLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSTtRQUFFLE9BQU87SUFFOUIsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzttQkFFSyxVQUFVLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxVQUFVLENBQUM7S0FDMUQsQ0FBQyxDQUFDO0lBRUgsTUFBTTtJQUNOLElBQUksQ0FBQyxJQUFJLENBQUM7OzttQkFHSyxVQUFVLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxVQUFVLENBQUM7K0RBQ0EsV0FBVyxDQUFDLElBQUk7eUJBQ3RELFVBQVUsQ0FBQyxNQUFNLFdBQVcsQ0FBQyxJQUFJLGVBQWUsQ0FBQztzQkFDcEQsVUFBVSxDQUFDLE1BQU0sV0FBVyxDQUFDLElBQUksYUFBYSxDQUFDO3VCQUM5QyxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxRQUFRLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQnBFLENBQUMsQ0FBQztJQUVELFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZOztBQUNqRCw0Q0FBVSxHQUFHO0lBQ2hCLElBQUksRUFBRTtRQUNGLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7S0FDakI7Q0FDSixDQUFDO0FBT04sT0FBTyxFQUFFLGlDQUFpQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTFELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsSUFDTCxNQUFNLENBQ1osQ0FBQztJQUVGLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSTtRQUFFLE9BQU87SUFFOUIsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzt1REFFeUMsV0FBVyxDQUFDLElBQUk7c0RBQ2pCLFdBQVcsQ0FBQyxJQUFJO0tBQ2pFLENBQUMsQ0FBQztJQUVILE1BQU07SUFDTixJQUFJLENBQUMsSUFBSSxDQUFDOzs7OytEQUlpRCxXQUFXLENBQUMsSUFBSTt3Q0FDdkMsV0FBVyxDQUFDLElBQUk7cUNBQ25CLFdBQVcsQ0FBQyxJQUFJOzsyQkFFMUIsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLE1BQU0sV0FBVyxDQUFDLElBQUksUUFBUSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0J4RSxDQUFDLENBQUM7SUFFRCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

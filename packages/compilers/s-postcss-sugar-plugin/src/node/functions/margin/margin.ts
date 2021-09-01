@@ -3,40 +3,42 @@ import __theme from '../../utils/theme';
 import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginMarginFunctionInterface extends __SInterface {
-  static definition = {
-    margin: {
-      type: 'String',
-      values: Object.keys(__theme().config('margin')),
-      default: 'default',
-      required: true
-    }
-  };
+    static definition = {
+        margin: {
+            type: 'String',
+            values: Object.keys(__theme().config('margin')),
+            default: 'default',
+            required: true,
+        },
+        scalable: {
+            type: 'Boolean',
+            default: __theme().config('scalable.margin'),
+        },
+    };
 }
 export { postcssSugarPluginMarginFunctionInterface as interface };
 
 export interface IPostcssSugarPluginMarginFunctionParams {
-  margin: string;
+    margin: string;
+    scalable: boolean;
 }
 
-export default function ({
-  params
-}: {
-  params: Partial<IPostcssSugarPluginMarginFunctionParams>;
-}) {
-  const finalParams: IPostcssSugarPluginMarginFunctionParams = {
-    margin: '',
-    ...params
-  };
+export default function ({ params }: { params: Partial<IPostcssSugarPluginMarginFunctionParams> }) {
+    const finalParams: IPostcssSugarPluginMarginFunctionParams = {
+        margin: '',
+        scalable: false,
+        ...params,
+    };
 
-  const margin = finalParams.margin;
+    const margin = finalParams.margin;
+    let margins = margin.split(' ').map((s) => {
+        if (s === `${parseInt(s)}`) return `sugar.theme(margin.${s})`;
+        return s;
+    });
 
-  if (__theme().config('margin')[margin] === undefined) return margin;
+    if (finalParams.scalable) {
+        margins = margins.map((p) => `sugar.scalable(${p})`);
+    }
 
-  const margins = margin.split(' ').map((s) => {
-    const size = __theme().config(`margin.${s}`);
-    if (!size) return size;
-    return `var(${__minifyVar(`--s-theme-margin-${s}`)}, ${size})`;
-  });
-
-  return margins.join(' ');
+    return margins.join(' ');
 }

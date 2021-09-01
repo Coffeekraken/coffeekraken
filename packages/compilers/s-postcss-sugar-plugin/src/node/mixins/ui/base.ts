@@ -38,18 +38,20 @@ export default function ({
     // bare
     vars.push(`
         display: inline-block;
-        padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
+        padding-inline: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline));
+        padding-block: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock));
     `);
 
     // lnf
     vars.push(`
         color: sugar.color(main, surfaceForeground);
         background-color: sugar.color(main, ui);
-        padding: ${__themeVar(`ui.${finalParams.name}.padding`)};
+        font-size: sugar.scalable(1rem);
         border: sugar.color(ui, border) solid sugar.theme(ui.${finalParams.name}.borderWidth);
-        border-radius: ${__themeVar(`ui.${finalParams.name}.borderRadius`)};
-        transition: ${__themeVar(`ui.${finalParams.name}.transition`)};
-        @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
+        border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
+        transition: sugar.theme(ui.${finalParams.name}.transition);
+
+        /** @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)}); */
 
         &::placeholder {
           color: sugar.color(main, placeholder);

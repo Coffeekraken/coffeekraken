@@ -43,6 +43,7 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.transition.classes;',
         '@sugar.margin.classes;',
         '@sugar.opacity.classes;',
+        '@sugar.scale.classes;',
         '@sugar.padding.classes;',
         '@sugar.until.classes;',
         '@sugar.width.classes;',

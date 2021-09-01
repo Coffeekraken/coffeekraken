@@ -5,33 +5,32 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginUiBlockquoteParams {
-}
+export interface IPostcssSugarPluginUiBlockquoteParams {}
 
 export { postcssSugarPluginUiBlockquoteInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiBlockquoteParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiBlockquoteParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiBlockquoteParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiBlockquoteParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
-  
-  vars.push(`
+    const vars: string[] = [];
+
+    vars.push(`
     display: block;
-    padding: sugar.theme(ui.blockquote.padding);
+    padding-inline: sugar.scalable(sugar.theme(ui.blockquote.paddingInline));
+    padding-block: sugar.scalable(sugar.theme(ui.blockquote.paddingBlock));
     border-left: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(ui);
     color: sugar.color(ui, surfaceForeground);
     background-color: sugar.color(ui, surface);
@@ -46,7 +45,5 @@ export default function ({
 
   `);
 
-
-  replaceWith(vars);
-
+    replaceWith(vars);
 }

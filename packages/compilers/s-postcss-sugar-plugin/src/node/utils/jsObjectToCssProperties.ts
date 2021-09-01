@@ -96,6 +96,12 @@ export default function jsObjectToCssProperties(jsObject: any, settings?: Partia
             case 'margin-right':
                 propsStack.push(`${prop}: sugar.margin(${value});`);
                 break;
+            case 'padding-inline':
+            case 'padding-block':
+            case 'padding-inline-start':
+            case 'padding-inline-end':
+            case 'padding-block-start':
+            case 'padding-block-end':
             case 'padding':
             case 'padding-top':
             case 'padding-bottom':

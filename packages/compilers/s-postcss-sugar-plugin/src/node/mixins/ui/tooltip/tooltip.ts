@@ -98,7 +98,8 @@ export default function ({
           color: sugar.color(ui, surfaceForeground);
           border-radius: sugar.theme(ui.tooltip.borderRadius);
           transition: sugar.theme(ui.tooltip.transition);
-          padding: sugar.theme(ui.tooltip.padding);
+          padding-inline: sugar.scalable(sugar.theme(ui.tooltip.paddingInline));
+            padding-block: sugar.scalable(sugar.theme(ui.tooltip.paddingBlock));
           @sugar.depth( sugar.theme(ui.tooltip.depth) );
 
           &:after {

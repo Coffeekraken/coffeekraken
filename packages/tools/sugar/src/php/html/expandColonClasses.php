@@ -21,10 +21,29 @@ namespace Sugar\html;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+function get_tag( $tag, $xml ) {
+  $tag = preg_quote($tag);
+  preg_match_all('{<'.$tag.'[^>]*>(.*?)</'.$tag.'>'.'}',
+                   $xml,
+                   $matches,
+                   PREG_PATTERN_ORDER);
+
+  return $matches;
+}
+
 function expandColonClasses($html) {
 
-    $reg = '/class="[a-zA-Z0-9_\-:@\s]+"/';
+    // grab do not touch tags
+    preg_match('/<code[^>]*>(.*?)<\/code>/s', $html, $doNotTouchTagCode);
+    foreach($doNotTouchTagCode as $idx => $tag) {
+        $html = str_replace($tag, '[sExpandColonClassesTagCode:'.$idx.']', $html);
+    }
+    preg_match('/<template[^>]*>(.*?)<\/template>/s', $html, $doNotTouchTagTemplate);
+    foreach($doNotTouchTagTemplate as $idx => $tag) {
+        $html = str_replace($tag, '[sExpandColonClassesTagTemplate:'.$idx.']', $html);
+    }
 
+    $reg = '/class="[a-zA-Z0-9_\-:@\s]+"/';
     $parts = [];
     $matches = preg_match_all($reg, $html, $parts);
 
@@ -81,6 +100,16 @@ function expandColonClasses($html) {
             $newClass = str_replace('\:', ':', $class);
             $html = str_replace($class, $newClass, $html);
         }
+    }
+
+    // restore do not touch tags
+    preg_match('/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/s', $html, $restoreTagCode);
+    preg_match('/\[sExpandColonClassesTagTemplate:[0-9]{1,999}\]/s', $html, $restoreTagTemplate);
+    foreach($restoreTagCode as $idx => $tag) {
+        $html = str_replace($tag, $doNotTouchTagCode[$idx], $html);
+    }
+    foreach($restoreTagTemplate as $idx => $tag) {
+        $html = str_replace($tag, $doNotTouchTagTemplate[$idx], $html);
     }
 
     return $html;

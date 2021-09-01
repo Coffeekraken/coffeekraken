@@ -1,20 +1,24 @@
+var _a;
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
 }
 postcssSugarPluginUiButtonClassesInterface.definition = {
-    sizes: {
+    styles: {
         type: 'String[]',
-        alias: 's',
+        values: ['solid', 'gradient', 'outline', 'text'],
+        default: ['solid', 'gradient', 'outline', 'text'],
+    },
+    defaultStyle: {
+        type: 'String',
+        values: ['solid', 'gradient', 'outline', 'text'],
+        default: (_a = __theme().config('ui.button.defaultStyle')) !== null && _a !== void 0 ? _a : 'solid',
     },
 };
 export { postcssSugarPluginUiButtonClassesInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    var _a;
     const finalParams = Object.assign({}, params);
     const vars = [];
-    const defaultStyle = (_a = __theme().config('ui.button.defaultStyle')) !== null && _a !== void 0 ? _a : 'default';
-    const styles = ['default', 'gradient', 'outline', 'text'];
     vars.push(`
       /**
         * @name          Buttons
@@ -27,14 +31,14 @@ export default function ({ params, atRule, replaceWith, }) {
         * These classes allows you to display any HTMLElement as a button
         * 
         * 
-        ${styles
+        ${finalParams.styles
         .map((style) => {
-        return ` * @cssClass     s-btn${style === 'default' ? '' : `\:${style}`}           Apply the ${style} button style`;
+        return ` * @cssClass     s-btn${style === finalParams.defaultStyle ? '' : `\:${style}`}           Apply the ${style} button style`;
     })
         .join('\n')}
         * 
         * @example        html
-        ${styles
+        ${finalParams.styles
         .map((style) => {
         return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
@@ -47,14 +51,24 @@ export default function ({ params, atRule, replaceWith, }) {
             * `;
     })
         .join('\n')}
+        *
+        * <!-- scales -->
+        * <div class="s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
+        *   <a class="s-btn s-scale\:05 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:1 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:12 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:15 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:20 s-mb\:20">Click me!</a>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    styles.forEach((style) => {
+    finalParams.styles.forEach((style) => {
         let cls = `s-btn`;
-        if (style !== defaultStyle) {
+        if (style !== finalParams.defaultStyle) {
             cls += `--${style}`;
         }
         vars.push(`/**
@@ -72,26 +86,6 @@ export default function ({ params, atRule, replaceWith, }) {
       */`);
         vars.push([`.${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n'));
     });
-    // Object.keys(__theme().baseColors()).forEach((colorName) => {
-    //     vars.push(`
-    //   /**
-    //    * @name        s-btn--${colorName}
-    //    * @namespace     sugar.css.ui.button
-    //    * @type          CssClass
-    //    *
-    //    * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any button
-    //    *
-    //    * @example       html
-    //    * <a class="<s-btn--${colorName}">I'm a cool ${colorName} button</a>
-    //    *
-    //    * @since       2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   .s-btn--${colorName} {
-    //     @sugar.color.remap(ui, ${colorName});
-    //   }
-    // `);
-    // });
     vars.push(`/**
         * @name           s-btn--block
         * @namespace      sugar.css.ui.button
@@ -112,4 +106,4 @@ export default function ({ params, atRule, replaceWith, }) {
     `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFFM0MsTUFBTSwwQ0FBMkMsU0FBUSxZQUFZOztBQUMxRCxxREFBVSxHQUFHO0lBQ2hCLEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxVQUFVO1FBQ2hCLEtBQUssRUFBRSxHQUFHO0tBQ2I7Q0FDSixDQUFDO0FBS04sT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRW5FLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7O0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE1BQU0sWUFBWSxHQUFHLE1BQUEsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHdCQUF3QixDQUFDLG1DQUFJLFNBQVMsQ0FBQztJQUU3RSxNQUFNLE1BQU0sR0FBRyxDQUFDLFNBQVMsRUFBRSxVQUFVLEVBQUUsU0FBUyxFQUFFLE1BQU0sQ0FBQyxDQUFDO0lBRTFELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7OztVQVlKLE1BQU07U0FDSCxHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8seUJBQ0gsS0FBSyxLQUFLLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxLQUFLLEtBQUssRUFDekMsd0JBQXdCLEtBQUssZUFBZSxDQUFDO0lBQ2pELENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7OztVQUdiLE1BQU07U0FDSCxHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sV0FBVyxLQUFLOztrRUFFMkIsS0FBSzttQ0FDcEMsS0FBSzttQ0FDTCxLQUFLO21DQUNMLEtBQUs7bUNBQ0wsS0FBSzs7ZUFFekIsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS2xCLENBQUMsQ0FBQztJQUVILE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNyQixJQUFJLEdBQUcsR0FBRyxPQUFPLENBQUM7UUFDbEIsSUFBSSxLQUFLLEtBQUssWUFBWSxFQUFFO1lBQ3hCLEdBQUcsSUFBSSxLQUFLLEtBQUssRUFBRSxDQUFDO1NBQ3ZCO1FBRUQsSUFBSSxDQUFDLElBQUksQ0FBQzs0QkFDVSxHQUFHOzs7O3lEQUkwQixLQUFLOzs7c0JBR3hDLEdBQUcsQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLEdBQUcsQ0FBQyxDQUFDLElBQUksRUFBRTs7OztTQUk1QyxDQUFDLENBQUM7UUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxHQUFHLElBQUksRUFBRSw2QkFBNkIsS0FBSyxJQUFJLEVBQUUsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDckYsQ0FBQyxDQUFDLENBQUM7SUFFSCwrREFBK0Q7SUFDL0Qsa0JBQWtCO0lBQ2xCLFFBQVE7SUFDUix3Q0FBd0M7SUFDeEMsMENBQTBDO0lBQzFDLCtCQUErQjtJQUMvQixPQUFPO0lBQ1Asc0hBQXNIO0lBQ3RILE9BQU87SUFDUCwyQkFBMkI7SUFDM0IsMEVBQTBFO0lBQzFFLE9BQU87SUFDUCwwQkFBMEI7SUFDMUIsc0dBQXNHO0lBQ3RHLFFBQVE7SUFDUiwyQkFBMkI7SUFDM0IsNENBQTRDO0lBQzVDLE1BQU07SUFDTixNQUFNO0lBQ04sTUFBTTtJQUVOLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7OztTQVlMLENBQUMsQ0FBQztJQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sT0FBTyxNQUFNLHNCQUFzQixDQUFDO0FBRTNDLE1BQU0sMENBQTJDLFNBQVEsWUFBWTs7QUFDMUQscURBQVUsR0FBRztJQUNoQixNQUFNLEVBQUU7UUFDSixJQUFJLEVBQUUsVUFBVTtRQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7UUFDaEQsT0FBTyxFQUFFLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxTQUFTLEVBQUUsTUFBTSxDQUFDO0tBQ3BEO0lBQ0QsWUFBWSxFQUFFO1FBQ1YsSUFBSSxFQUFFLFFBQVE7UUFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7UUFDaEQsT0FBTyxFQUFFLE1BQUEsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHdCQUF3QixDQUFDLG1DQUFJLE9BQU87S0FDakU7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRW5FLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1VBWUosV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8seUJBQ0gsS0FBSyxLQUFLLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsS0FBSyxLQUFLLEVBQ3hELHdCQUF3QixLQUFLLGVBQWUsQ0FBQztJQUNqRCxDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7VUFHYixXQUFXLENBQUMsTUFBTTtTQUNmLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ1gsT0FBTyxXQUFXLEtBQUs7O2tFQUUyQixLQUFLO21DQUNwQyxLQUFLO21DQUNMLEtBQUs7bUNBQ0wsS0FBSzttQ0FDTCxLQUFLOztlQUV6QixDQUFDO0lBQ0osQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0tBZWxCLENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDakMsSUFBSSxHQUFHLEdBQUcsT0FBTyxDQUFDO1FBQ2xCLElBQUksS0FBSyxLQUFLLFdBQVcsQ0FBQyxZQUFZLEVBQUU7WUFDcEMsR0FBRyxJQUFJLEtBQUssS0FBSyxFQUFFLENBQUM7U0FDdkI7UUFFRCxJQUFJLENBQUMsSUFBSSxDQUFDOzRCQUNVLEdBQUc7Ozs7eURBSTBCLEtBQUs7OztzQkFHeEMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsR0FBRyxDQUFDLENBQUMsSUFBSSxFQUFFOzs7O1NBSTVDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLEdBQUcsSUFBSSxFQUFFLDZCQUE2QixLQUFLLElBQUksRUFBRSxHQUFHLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUNyRixDQUFDLENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7OztTQVlMLENBQUMsQ0FBQztJQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

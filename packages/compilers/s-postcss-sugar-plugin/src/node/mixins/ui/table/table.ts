@@ -5,31 +5,29 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiTableInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginUiTableParams {
-}
+export interface IPostcssSugarPluginUiTableParams {}
 
 export { postcssSugarPluginUiTableInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiTableParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiTableParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiTableParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiTableParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`
+    vars.push(`
     width: 100%;
     table-layout: fixed;
     overflow-wrap: break-word;
@@ -47,7 +45,8 @@ export default function ({
         vertical-align: middle;
     }
     td, th {
-        padding: sugar.theme(ui.table.padding);
+        padding-inline: sugar.scalable(sugar.theme(ui.table.paddingInline));
+      padding-block: sugar.scalable(sugar.theme(ui.table.paddingBlock));
     }
 
     @sugar.rhythm.vertical {
@@ -56,7 +55,5 @@ export default function ({
 
   `);
 
-
-  replaceWith(vars);
-
+    replaceWith(vars);
 }

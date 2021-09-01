@@ -1,0 +1,75 @@
+import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
+
+/**
+ * @name           classes
+ * @namespace      node.mixins.scale
+ * @type           PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.
+ * The generated scales are specified in the config.theme.scale configuration stack
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example         postcss
+ * \@sugar.scale.classes;
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+class postcssSugarPluginScaleClassesInterface extends __SInterface {
+    static definition = {};
+}
+
+export interface IPostcssSugarPluginScaleClassesParams {}
+
+export { postcssSugarPluginScaleClassesInterface as interface };
+
+export default function ({
+    params,
+    atRule,
+    replaceWith,
+}: {
+    params: Partial<IPostcssSugarPluginScaleClassesParams>;
+    atRule: any;
+    replaceWith: Function;
+}) {
+    const finalParams: IPostcssSugarPluginScaleClassesParams = {
+        ...params,
+    };
+
+    const scaleObj = __theme().config('scale');
+
+    const vars: string[] = [];
+
+    Object.keys(scaleObj).forEach((scaleName) => {
+        const scaleValue = scaleObj[scaleName];
+        const scaleCss = `/**
+  * @name          s-scale:${scaleName}
+  * @namespace          sugar.css.scale
+  * @type               CssClass
+  * @platform             css
+  * @status             beta
+  * 
+  * This class allows you to apply a "<yellow>${scaleName}</yellow>" scale style to any HTMLElement.
+  * Note that this scale is not applied using the "transform" property but it will scale
+  * all the properties that uses the function "sugar.scalable" to set his value.
+  * 
+  * @example        html
+  * <h1 class="s-font\:40 s-mb\:30">I'm a cool title</h1>
+  * <h1 class="s-font\:40 s-scale\:15">I'm a cool scaled title</h1>
+  * 
+  * since           2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-scale--${scaleName} {
+    --s-scale: ${scaleValue};
+}`;
+        vars.push(scaleCss);
+    });
+
+    replaceWith(vars);
+}

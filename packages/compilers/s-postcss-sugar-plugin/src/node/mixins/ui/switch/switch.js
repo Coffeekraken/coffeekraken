@@ -4,36 +4,34 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
 postcssSugarPluginUiSwitchMixinInterface.definition = {
     style: {
         type: 'String',
-        values: ['default', 'gradient', 'outline'],
-        default: 'default',
+        values: ['solid'],
+        default: 'solid',
     },
     scope: {
         type: 'String',
-        values: ['bare', 'lnf', 'style'],
-        default: ['bare', 'lnf', 'style'],
+        values: ['bare', 'lnf'],
+        default: ['bare', 'lnf'],
     },
 };
 export { postcssSugarPluginUiSwitchMixinInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ style: 'default', scope: [] }, params);
+    const finalParams = Object.assign({ style: 'solid', scope: [] }, params);
     const vars = [];
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         
+        font-size: sugar.scalable(0.8rem);
+
         --thumb-size: 1em;
-        --thumb: sugar.color(main, surface);
-        --thumb-highlight: sugar.color(ui, --alpha 0.3);
-        
+        --thumb-color-active: sugar.color(main, surface);
+        --thumb-color-inactive: sugar.color(ui);
+        --thumb-color-highlight: sugar.color(ui, --alpha 0.2);
+
         --track-size: calc(var(--thumb-size) * 2);
         --track-padding: 0.2em;
-        --track-inactive: sugar.color(ui, --alpha 0.3);
-        --track-active: sugar.color(ui);
-
-        --thumb-color: var(--thumb);
-        --thumb-color-highlight: var(--thumb-highlight);
-        --track-color-inactive: var(--track-inactive);
-        --track-color-active: var(--track-active);
+        --track-color-active: sugar.color(ui);
+        --track-color-inactive: sugar.color(ui, --alpha 0.1);
 
         --isLTR: 1;
 
@@ -51,7 +49,8 @@ export default function ({ params, atRule, replaceWith, }) {
         border-radius: var(--track-size);
 
         appearance: none;
-        pointer-events: none;
+        pointer-events: all;
+        cursor: pointer;
         touch-action: pan-y;
         border: sugar.color(ui, border) solid sugar.theme(ui.switch.borderWidth);
         outline-offset: 5px;
@@ -62,31 +61,53 @@ export default function ({ params, atRule, replaceWith, }) {
         align-items: center;
         grid: [track] 1fr / [track] 1fr;
 
-        transition: background-color .25s ease;
+        transition: sugar.theme(ui.switch.transition);
+
+        &:checked {
+            &::before {
+                background: var(--thumb-color-active) !important;
+            }
+            &::after {
+                box-shadow: 0 0 3px sugar.color(ui, --darken 20);
+            }
+        }
 
         &::before {
             --highlight-size: 0;
 
             content: "";
             cursor: pointer;
-            pointer-events: auto;
+            pointer-events: none;
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
-            background: var(--thumb-color);
+            background: var(--thumb-color-inactive);
             box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
             border-radius: 50%;
             transform: translateX(var(--thumb-position));
+            box-shadow: 0;
+            transition: sugar.theme(ui.switch.transition);
+        }
 
-            @media (--motionOK) { & {
-                transition: 
-                transform var(--thumb-transition-duration) ease,
-                box-shadow .25s ease;
-            }}
+        &::after {
+            content: "";
+            cursor: pointer;
+            pointer-events: none;
+            grid-area: track;
+            inline-size: var(--thumb-size);
+            block-size: var(--thumb-size);
+            background: rgba(255,255,25,0);
+            border-radius: 50%;
+            transform: translateX(var(--thumb-position));
+            box-shadow: 0;
+            transition: sugar.theme(ui.switch.transition);
         }
 
         &:not(:disabled):hover::before {
             --highlight-size: .5rem;
+        }
+        &:not(:disabled):focus::before {
+            --highlight-size: .25rem;
         }
 
         &:checked {
@@ -104,33 +125,24 @@ export default function ({ params, atRule, replaceWith, }) {
         &:disabled {
             cursor: not-allowed;
             --thumb-color: transparent;
-
-            &::before {
-                cursor: not-allowed;
-                box-shadow: inset 0 0 0 2px hsl(0 0% 100% / 50%);
-
-                @media (prefers-color-scheme: dark) { & {
-                    box-shadow: inset 0 0 0 2px hsl(0 0% 0% / 50%);
-                }}
-            }
+            opacity: .3;
         }
 
     `);
     }
-    if (finalParams.scope.indexOf('lnf') !== -1 && finalParams.scope.indexOf('style') !== -1) {
-        switch (finalParams.style) {
-            case 'gradient':
-                break;
-            case 'outline':
-                break;
-            case 'default':
-            default:
-                vars.push(`
-
-            `);
-                break;
-        }
-    }
+    // if (finalParams.scope.indexOf('lnf') !== -1 && finalParams.scope.indexOf('style') !== -1) {
+    //     switch (finalParams.style) {
+    //         case 'gradient':
+    //             break;
+    //         case 'outline':
+    //             break;
+    //         case 'default':
+    //         default:
+    //             vars.push(`
+    //         `);
+    //             break;
+    //     }
+    // }
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3dpdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3dpdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBS3JELE1BQU0sd0NBQXlDLFNBQVEsWUFBWTs7QUFDeEQsbURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBRSxVQUFVLEVBQUUsU0FBUyxDQUFDO1FBQzFDLE9BQU8sRUFBRSxTQUFTO0tBQ3JCO0lBQ0QsS0FBSyxFQUFFO1FBQ0gsSUFBSSxFQUFFLFFBQVE7UUFDZCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztRQUNoQyxPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztLQUNwQztDQUNKLENBQUM7QUFRTixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsU0FBUyxFQUNoQixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQWdHYixDQUFDLENBQUM7S0FDRjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDdEYsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1lBQ3ZCLEtBQUssVUFBVTtnQkFDWCxNQUFNO1lBQ1YsS0FBSyxTQUFTO2dCQUNWLE1BQU07WUFDVixLQUFLLFNBQVMsQ0FBQztZQUNmO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7O2FBRWIsQ0FBQyxDQUFDO2dCQUVDLE1BQU07U0FDYjtLQUNKO0lBRUQsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3RCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3dpdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3dpdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBS3JELE1BQU0sd0NBQXlDLFNBQVEsWUFBWTs7QUFDeEQsbURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sQ0FBQztRQUNqQixPQUFPLEVBQUUsT0FBTztLQUNuQjtJQUNELEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQztRQUN2QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO0tBQzNCO0NBQ0osQ0FBQztBQVFOLE9BQU8sRUFBRSx3Q0FBd0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVqRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxPQUFPLEVBQ2QsS0FBSyxFQUFFLEVBQUUsSUFDTixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixPQUFPO0lBQ1AsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBNkdiLENBQUMsQ0FBQztLQUNGO0lBRUQsOEZBQThGO0lBQzlGLG1DQUFtQztJQUNuQywyQkFBMkI7SUFDM0IscUJBQXFCO0lBQ3JCLDBCQUEwQjtJQUMxQixxQkFBcUI7SUFDckIsMEJBQTBCO0lBQzFCLG1CQUFtQjtJQUNuQiwwQkFBMEI7SUFFMUIsY0FBYztJQUVkLHFCQUFxQjtJQUNyQixRQUFRO0lBQ1IsSUFBSTtJQUVKLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=

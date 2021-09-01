@@ -125,7 +125,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- default style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">default style</h3>\n  <a class=\"s-btn:default s-mr:20\">Click me!</a>\n  <a class=\"s-btn:default s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:default s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:default s-ui:error\">Click me!</a>\n</div>\n\n<!-- gradient style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">gradient style</h3>\n  <a class=\"s-btn:gradient s-mr:20\">Click me!</a>\n  <a class=\"s-btn:gradient s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:gradient s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:gradient s-ui:error\">Click me!</a>\n</div>\n\n<!-- outline style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">outline style</h3>\n  <a class=\"s-btn:outline s-mr:20\">Click me!</a>\n  <a class=\"s-btn:outline s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:outline s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:outline s-ui:error\">Click me!</a>\n</div>\n\n<!-- text style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">text style</h3>\n  <a class=\"s-btn:text s-mr:20\">Click me!</a>\n  <a class=\"s-btn:text s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:text s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:text s-ui:error\">Click me!</a>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <a class=\"s-btn:solid s-mr:20\">Click me!</a>\n  <a class=\"s-btn:solid s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:solid s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:solid s-ui:error\">Click me!</a>\n</div>\n\n<!-- gradient style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">gradient style</h3>\n  <a class=\"s-btn:gradient s-mr:20\">Click me!</a>\n  <a class=\"s-btn:gradient s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:gradient s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:gradient s-ui:error\">Click me!</a>\n</div>\n\n<!-- outline style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">outline style</h3>\n  <a class=\"s-btn:outline s-mr:20\">Click me!</a>\n  <a class=\"s-btn:outline s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:outline s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:outline s-ui:error\">Click me!</a>\n</div>\n\n<!-- text style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">text style</h3>\n  <a class=\"s-btn:text s-mr:20\">Click me!</a>\n  <a class=\"s-btn:text s-mr:20 s-ui:accent\">Click me!</a>\n  <a class=\"s-btn:text s-mr:20 s-ui:complementary\">Click me!</a>\n  <a class=\"s-btn:text s-ui:error\">Click me!</a>\n</div>\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <a class=\"s-btn s-scale:05 s-mr:20 s-mb:20\">Click me!</a>\n  <a class=\"s-btn s-scale:1 s-mr:20 s-mb:20\">Click me!</a>\n  <a class=\"s-btn s-scale:12 s-mr:20 s-mb:20\">Click me!</a>\n  <a class=\"s-btn s-scale:15 s-mr:20 s-mb:20\">Click me!</a>\n  <a class=\"s-btn s-scale:20 s-mb:20\">Click me!</a>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -141,7 +141,7 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBtn": {
                 "name": "s-btn",
                 "type": "CssClass",
-                "description": "This class represent a(n) \"<s-color=\"accent\">default</s-color>\" button",
+                "description": "This class represent a(n) \"<s-color=\"accent\">solid</s-color>\" button",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
                 "example": [
                     {
@@ -496,7 +496,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- default style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">default style</h3>\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:accent\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:complementary\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:error\" />\n</div>"
+                        "code": "<!-- default style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">default style</h3>\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:accent s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:complementary s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:error s-mb:30\" />\n</div>\n\n<!-- underline style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">underline style</h3>\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-ui:accent s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-ui:complementary s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-ui:error s-mb:30\" />\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -518,6 +518,21 @@
                     {
                         "language": "html",
                         "code": "<input type=\"text\" class=\".s-input\" placeholder=\"Hello world\" />"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.input..sInput.sInput-Underline": {
+                "name": ".s-input.s-input--underline",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<yellow>underline</yellow>\" input",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.input",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<input type=\"text\" class=\".s-input.s-input--underline\" placeholder=\"Hello world\" />"
                     }
                 ],
                 "filename": "index.css",
@@ -734,15 +749,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.list.sList-Interactive": {
-                "name": "s-list--interactive",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.lists": {
+                "name": "Lists",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/lists"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply list styles to any ul, ol, dl, etc...",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- ul style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ul style</h3>\n  <ul class=\"s-list:ul \">\n    <li>Lead Intranet Director Dr. Rafael Cummings</li>\n    <li>Direct Quality Supervisor Martha Graham</li>\n    <li>Chief Solutions Designer Alexander Mohr</li>\n  </ul>\n</div>\n\n<!-- ol style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ol style</h3>\n  <ul class=\"s-list:ol s-ui:accent s-scale:15\">\n    <li>Product Accounts Officer Cassandra Lockman</li>\n    <li>Chief Division Developer Shari Daugherty</li>\n    <li>National Group Producer Ms. Glenn Towne</li>\n  </ul>\n</div>\n\n<!-- icon style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">icon style</h3>\n  <ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Product Applications Supervisor Molly Sauer</li>\n    <li><i class=\"s-icon:heart s-ui:accent\"></i>Lead Security Coordinator Peter Cruickshank</li>\n    <li><i class=\"s-icon:fire s-ui:error\"></i>Dynamic Accounts Associate Robert Collier</li>\n  </ul>\n</div>\n\n\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Colors</h3>\n  <ul class=\"s-list s-ui:accent\">\n    <li>National Group Officer Clayton Mayer</li>\n    <li class=\"s-ui:complementary\">Principal Brand Officer Charlie Cronin</li>\n    <li class=\"s-ui:error\">Dynamic Optimization Director Jonathon Goldner</li>\n  </ul>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.list.sList": {
+                "name": "s-list",
                 "type": "CssClass",
-                "description": "This class represent an \"<yellow>interactive</yellow>\" list",
+                "description": "This class represent an \"<yellow>ul</yellow>\" list",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.list",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list:interactive\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
+                        "code": "<ul class=\"s-list\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
                     }
                 ],
                 "since": "2.0.0",
@@ -763,7 +813,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list--ul\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
+                        "code": "<ul class=\"s-list:ul\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
                     }
                 ],
                 "since": "2.0.0",
@@ -784,28 +834,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<ul class=\"s-list--ul s-list--icon\">\n  <li>\n    <i class=\"s-icon-user\" />\n    Hello\n  </li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.list.sFormat:textUl": {
-                "name": "s-format:text ul",
-                "type": "CssClass",
-                "description": "This class represent an \"<yellow>ul</yellow>\" list in the s-format:text scope",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.list",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<div class=\"s-format:text\">\n  <ul>\n    <li>Hello</li>\n    <li>World</li>\n  </ul>\n</div>"
+                        "code": "<ul class=\"s-list:icon\">\n  <li>\n    <i class=\"s-icon-user\" />\n    Hello\n  </li>\n</ul>"
                     }
                 ],
                 "since": "2.0.0",
@@ -827,216 +856,6 @@
                     {
                         "language": "html",
                         "code": "<ul class=\"s-list--ol\">\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.list.sFormat:textOl": {
-                "name": "s-format:text ol",
-                "type": "CssClass",
-                "description": "This class represent an \"<yellow>ol</yellow>\" list in the s-format:text scope",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.list",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<div class=\"s-format:text\">\n  <ol>\n    <li>Hello</li>\n    <li>World</li>\n  </ol>\n</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Main": {
-                "name": "s-list--main",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--main\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Ui": {
-                "name": "s-list--ui",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--ui\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Accent": {
-                "name": "s-list--accent",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--accent\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Complementary": {
-                "name": "s-list--complementary",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--complementary\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Success": {
-                "name": "s-list--success",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--success\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Warning": {
-                "name": "s-list--warning",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--warning\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Error": {
-                "name": "s-list--error",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--error\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Info": {
-                "name": "s-list--info",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--info\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sList-Extension": {
-                "name": "s-list--extension",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any list",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<ul class=\"s-list--extension\" />\n  <li>Hello</li>\n  <li>World</li>\n</ul>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1130,6 +949,41 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.badges": {
+                "name": "Badges",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/badges"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to display any HTMLElement as a badge",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- solid style -->\n<div class=\"s-font:40 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <a class=\"s-badge:solid s-mr:20\">Say hello!</a>\n  <a class=\"s-badge:solid s-mr:20 s-ui:accent\">Say hello!</a>\n  <a class=\"s-badge:solid s-mr:20 s-ui:complementary\">Say hello!</a>\n  <a class=\"s-badge:solid s-ui:error\">Say hello!</a>\n</div>\n\n<!-- outline style -->\n<div class=\"s-font:40 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">outline style</h3>\n  <a class=\"s-badge:outline s-mr:20\">Say hello!</a>\n  <a class=\"s-badge:outline s-mr:20 s-ui:accent\">Say hello!</a>\n  <a class=\"s-badge:outline s-mr:20 s-ui:complementary\">Say hello!</a>\n  <a class=\"s-badge:outline s-ui:error\">Say hello!</a>\n</div>\n\n\n<!-- shapes -->\n<div class=\"s-font:40 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Shapes</h3>\n  <a class=\"s-badge:square s-mr:20 s-mb:20\">Say hello!</a>\n  <a class=\"s-badge:pill s-mr:20 s-mb:20\">Say hello!</a>\n  <a class=\"s-badge:outline:square s-mr:20 s-mb:20\">Say hello!</a>\n  <a class=\"s-badge:outline:pill s-mr:20 s-mb:20\">Say hello!</a>\n</div>\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <a class=\"s-badge s-scale:05 s-mr:20 s-mb:20\">Say hello!</a>\n  <a class=\"s-badge s-scale:1 s-mr:20 s-mb:20\">Say hello!</a>\n  <a class=\"s-badge s-scale:12 s-mr:20 s-mb:20\">Say hello!</a>\n  <a class=\"s-badge s-scale:15 s-mr:20 s-mb:20\">Say hello!</a>\n  <a class=\"s-badge s-scale:20 s-mb:20\">Say hello!</a>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBadge": {
                 "name": "s-badge",
                 "type": "CssClass",
@@ -1151,15 +1005,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBadge-Square": {
-                "name": "s-badge--square",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge:solid": {
+                "name": "s-badge:solid",
                 "type": "CssClass",
-                "description": "This class represent a(n) \"<s-color=\"accent\">square</s-color>\" badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
+                "description": "This class represent a(n) \"<s-color=\"accent\">outline</s-color>\" badge",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-badge--square\">I'm a cool badge</a>"
+                        "code": "<a class=\"s-badge:solid\">I'm a cool solid badge</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1172,225 +1026,57 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBadge-Pill": {
-                "name": "s-badge--pill",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge:outline": {
+                "name": "s-badge:outline",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<s-color=\"accent\">outline</s-color>\" badge",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-badge:outline\">I'm a cool outline badge</a>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBadge:square": {
+                "name": "s-badge:square",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<s-color=\"accent\">squared</s-color>\" badge",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-badge:square\">I'm a cool badge</a>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBadge:pill": {
+                "name": "s-badge:pill",
                 "type": "CssClass",
                 "description": "This class represent a(n) \"<s-color=\"accent\">pill</s-color>\" badge",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-badge--pill\">I'm a cool badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.button.sBadge-Outline": {
-                "name": "s-badge--outline",
-                "type": "CssClass",
-                "description": "This class represent a(n) \"<s-color=\"accent\">outline</s-color>\" badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.button",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--outline\">I'm a cool badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Main": {
-                "name": "s-badge--main",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--main\">I'm a cool main badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Ui": {
-                "name": "s-badge--ui",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--ui\">I'm a cool ui badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Accent": {
-                "name": "s-badge--accent",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--accent\">I'm a cool accent badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Complementary": {
-                "name": "s-badge--complementary",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--complementary\">I'm a cool complementary badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Success": {
-                "name": "s-badge--success",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--success\">I'm a cool success badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Warning": {
-                "name": "s-badge--warning",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--warning\">I'm a cool warning badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Error": {
-                "name": "s-badge--error",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--error\">I'm a cool error badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Info": {
-                "name": "s-badge--info",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--info\">I'm a cool info badge</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.badge.sBadge-Extension": {
-                "name": "s-badge--extension",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any badge",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.badge",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-badge--extension\">I'm a cool extension badge</a>"
+                        "code": "<a class=\"s-badge:pill\">I'm a cool badge</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1445,8 +1131,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.range.sRange": {
-                "name": "s-range",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.range.sRange-Default": {
+                "name": "s-range--default",
                 "type": "CssClass",
                 "description": "This class represent a(n) \"<s-color=\"accent\">default</s-color>\" range",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.range",
@@ -1487,204 +1173,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.switches": {
+                "name": "Switches",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/switches"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to style checkbox HTMLElement as switches",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- solid style -->\n<div class=\"s-font:40 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch s-ui:complementary\" />\n  </label>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch s-ui:error\" />\n  </label>\n</div>\n\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <label class=\"s-mb:30 s-scale:05\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-scale:10\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-scale:15\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch": {
                 "name": "s-switch",
                 "type": "CssClass",
-                "description": "This class represent a(n) \"<s-color=\"accent\">default</s-color>\" switch",
+                "description": "This class represent a(n) \"<s-color=\"accent\">solid</s-color>\" switch",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
                 "example": [
                     {
                         "language": "html",
                         "code": "<label class=\"s-switch\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:main": {
-                "name": "s-switch:main",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:main\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:ui": {
-                "name": "s-switch:ui",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:ui\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:accent": {
-                "name": "s-switch:accent",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:accent\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:complementary": {
-                "name": "s-switch:complementary",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:complementary\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:success": {
-                "name": "s-switch:success",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:success\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:warning": {
-                "name": "s-switch:warning",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:warning\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:error": {
-                "name": "s-switch:error",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:error\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:info": {
-                "name": "s-switch:info",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:info\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.switch.sSwitch:extension": {
-                "name": "s-switch:extension",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any switch",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.switch",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-switch:extension\">\n  <input type=\"checkbox\" />\n  <div></div>\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -19187,7 +18719,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Dynamic Solutions Supervisor Velma Price</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">District Operations Planner Miss Greg Schowalter</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Central Integration Administrator Charlotte O'Connell V</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Principal Quality Analyst Rhonda Hermiston</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Human Functionality Planner Mrs. Alberta Littel</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">Senior Factors Consultant Mrs. Allen Schmidt</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Future Intranet Representative Alyssa Farrell</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Direct Applications Facilitator Nicolas Gorczany</h1>"
                     },
                     {
                         "language": "css",
@@ -19338,11 +18870,11 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-font:50 s-mb:30\">Direct Accountability Analyst Henrietta Lind</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-font:50 s-mb:30\">Internal Marketing Supervisor Candice Kuhn</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-font:50 s-mb:30\">Principal Branding Specialist Mitchell Monahan</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-font:50 s-mb:30\">Legacy Factors Specialist Eva Donnelly</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-font:50 s-mb:30\">Dynamic Usability Developer Francis Schamberger</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-font:50 s-mb:30\">National Paradigm Agent Joyce Kohler</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-font:50 s-mb:30\">National Marketing Associate Shelia Emmerich</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-font:50 s-mb:30\">Future Response Assistant Lamar McKenzie</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-font:50 s-mb:30\">Future Brand Designer Roy Bechtelar</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-font:50 s-mb:30\">International Communications Assistant Vivian Volkman</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-font:50 s-mb:30\">Central Applications Manager Craig Weissnat</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Principal Security Supervisor Cora Heidenreich</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-mb:30\">Legacy Optimization Specialist Vanessa Leuschke Sr.</h1>\n<span class=\"s-color:accent s-font:30\">5</span><br /><br /><h1 class=\"s-font:5 s-mb:30\">District Program Assistant Boyd Berge</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-mb:30\">Future Configuration Engineer Ashley Brown</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-mb:30\">Human Security Liaison Rachel Rempel</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-mb:30\">Dynamic Web Agent Sammy Luettgen</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-mb:30\">Legacy Creative Associate Kent Stoltenberg</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-mb:30\">Dynamic Brand Director Jeffrey Hintz II</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-mb:30\">International Factors Planner Ms. Christie Klocko</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-mb:30\">Product Metrics Engineer Ms. Stephanie Robel</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-mb:30\">Lead Mobility Agent Wilbert Becker</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-mb:30\">Chief Mobility Associate Miss Everett Grady</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-mb:30\">Investor Operations Liaison Scott Bednar</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-mb:30\">Customer Web Representative Daniel Morissette Jr.</h1>"
                     },
                     {
                         "language": "css",
-                        "code": ".my-font-0 {\n    @sugar.font.size(0);\n}\n.my-font-10 {\n    @sugar.font.size(10);\n}\n.my-font-20 {\n    @sugar.font.size(20);\n}\n.my-font-30 {\n    @sugar.font.size(30);\n}\n.my-font-40 {\n    @sugar.font.size(40);\n}\n.my-font-50 {\n    @sugar.font.size(50);\n}\n.my-font-60 {\n    @sugar.font.size(60);\n}\n.my-font-70 {\n    @sugar.font.size(70);\n}\n.my-font-80 {\n    @sugar.font.size(80);\n}\n.my-font-90 {\n    @sugar.font.size(90);\n}\n.my-font-100 {\n    @sugar.font.size(100);\n}\n.my-font-default {\n    @sugar.font.size(default);\n}"
+                        "code": ".my-font-0 {\n    @sugar.font.size(0);\n}\n.my-font-5 {\n    @sugar.font.size(5);\n}\n.my-font-10 {\n    @sugar.font.size(10);\n}\n.my-font-20 {\n    @sugar.font.size(20);\n}\n.my-font-30 {\n    @sugar.font.size(30);\n}\n.my-font-40 {\n    @sugar.font.size(40);\n}\n.my-font-50 {\n    @sugar.font.size(50);\n}\n.my-font-60 {\n    @sugar.font.size(60);\n}\n.my-font-70 {\n    @sugar.font.size(70);\n}\n.my-font-80 {\n    @sugar.font.size(80);\n}\n.my-font-90 {\n    @sugar.font.size(90);\n}\n.my-font-100 {\n    @sugar.font.size(100);\n}\n.my-font-default {\n    @sugar.font.size(default);\n}"
                     }
                 ],
                 "since": "2.0.0",
@@ -19371,6 +18903,28 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-font:0\">Hello world</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.mixins.font.sFont:5": {
+                "name": "s-font:5",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the font size \"<yellow>5</yellow>\" to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.mixins.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:5\">Hello world</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -19619,7 +19173,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Corporate Tactics Director <span class=\"s-font:reset-size\">Jeffery Hermann</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Future Interactions Analyst <span class=\"s-font:reset-family\">Carl Feest</span>\n</div>"
+                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Senior Paradigm Strategist <span class=\"s-font:reset-size\">Mike Haley</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Future Division Representative <span class=\"s-font:reset-family\">Phyllis Barrows</span>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -26883,6 +26437,546 @@
                     }
                 ],
                 "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:10": {
+                "name": "s-scale:10",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>10</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:11": {
+                "name": "s-scale:11",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>11</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:12": {
+                "name": "s-scale:12",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>12</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:13": {
+                "name": "s-scale:13",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>13</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:14": {
+                "name": "s-scale:14",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>14</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:15": {
+                "name": "s-scale:15",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>15</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:16": {
+                "name": "s-scale:16",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>16</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:17": {
+                "name": "s-scale:17",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>17</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:18": {
+                "name": "s-scale:18",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>18</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:19": {
+                "name": "s-scale:19",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>19</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:20": {
+                "name": "s-scale:20",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>20</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:01": {
+                "name": "s-scale:01",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>01</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:02": {
+                "name": "s-scale:02",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>02</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:03": {
+                "name": "s-scale:03",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>03</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:04": {
+                "name": "s-scale:04",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>04</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:05": {
+                "name": "s-scale:05",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>05</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:06": {
+                "name": "s-scale:06",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>06</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:07": {
+                "name": "s-scale:07",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>07</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:08": {
+                "name": "s-scale:08",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>08</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.scale.sScale:09": {
+                "name": "s-scale:09",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>09</yellow>\" scale style to any HTMLElement.\nNote that this scale is not applied using the \"transform\" property but it will scale\nall the properties that uses the function \"sugar.scalable\" to set his value.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-font:40 s-mb:30\">I'm a cool title</h1>\n<h1 class=\"s-font:40 s-scale:15\">I'm a cool scaled title</h1>\n\nsince           2.0.0"
+                    }
+                ],
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",

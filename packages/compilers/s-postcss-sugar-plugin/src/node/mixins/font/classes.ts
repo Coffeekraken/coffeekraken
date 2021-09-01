@@ -127,7 +127,7 @@ export default function ({
         * @example        html
         * ${Object.keys(fontsSizesObj)
             .map((fontSize) => {
-                return `<span class="s-color:accent s-font\:30">${fontSize}</span><br /><br /><h1 class="s-font\:${fontSize} s-font\:50 s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
+                return `<span class="s-color:accent s-font\:30">${fontSize}</span><br /><br /><h1 class="s-font\:${fontSize} s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
             })
             .join('\n * ')}
         * 
@@ -206,7 +206,7 @@ export default function ({
   * <h1 class="s-font\:reset-size">Hello world</h1>
   */
 .s-font--reset-size {
-  font-size: 1rem;
+  font-size: sugar.scalable(1rem);
 }`);
     vars.push(`/**
   * @name          s-font:reset-family

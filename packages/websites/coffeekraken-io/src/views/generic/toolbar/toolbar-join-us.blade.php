@@ -1,11 +1,11 @@
 <div class="s-flex-item:grow s-text:right">
-    <a class="s-btn:complementary" href="https://olivierbossel.com" title="Share the love" target="_blank">
+    <a class="s-btn s-ui:complementary" href="https://olivierbossel.com" title="Share the love" target="_blank">
         <i class="s-icon:heart"></i>
     </a>
     &nbsp;
     &nbsp;
     <div class="toolbar__issue s-tooltip-container">
-        <a class="s-btn:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+        <a class="s-btn s-ui:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
             <i class="s-icon:fire"></i>
         </a>
         <div class="s-tooltip:bottom:discord">
@@ -29,7 +29,7 @@
     </div>
     &nbsp;
     &nbsp;
-    <a class="s-btn:accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
+    <a class="s-btn s-ui:accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
         <i class="s-icon:user"></i>
         &nbsp;
         <span>Join us!</span>

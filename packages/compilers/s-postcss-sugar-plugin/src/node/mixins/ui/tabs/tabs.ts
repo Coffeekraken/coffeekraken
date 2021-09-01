@@ -4,77 +4,81 @@ import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiTabInterface extends __SInterface {
-  static definition = {
-    style: {
-      type: 'String',
-      values: ['default', 'gradient'],
-      default: __theme().config('ui.tabs.defaultStyle')
-    },
-    grow: {
-      type: 'Boolean',
-      default: false
-    },
-    direction: {
-      type: 'String',
-      values: ['vertical','horizontal'],
-      default : 'horizontal'
-    },
-    scope: {
-      type: 'Array<String>',
-      values: ['bare','lnf','grow','style','direction'],
-      default: ['bare','lnf','grow','style','direction']
-    }
-  };
+    static definition = {
+        style: {
+            type: 'String',
+            values: ['default', 'gradient'],
+            default: __theme().config('ui.tabs.defaultStyle'),
+        },
+        grow: {
+            type: 'Boolean',
+            default: false,
+        },
+        direction: {
+            type: 'String',
+            values: ['vertical', 'horizontal'],
+            default: 'horizontal',
+        },
+        scope: {
+            type: 'Array<String>',
+            values: ['bare', 'lnf', 'grow', 'style', 'direction'],
+            default: ['bare', 'lnf', 'grow', 'style', 'direction'],
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiTabParams {
-  grow: boolean;
-  style: 'default' | 'gradient';
-  direction: 'horizontal' | 'vertical';
-  scope: string[];
+    grow: boolean;
+    style: 'default' | 'gradient';
+    direction: 'horizontal' | 'vertical';
+    scope: string[];
 }
 
 export { postcssSugarPluginUiTabInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiTabParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiTabParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
-      style: __theme().config('ui.tabs.defaultStyle'),
-      grow: false,
-      direction: 'horizontal',
-      scope: ['bare','lnf','grow','style','direction'],
-      ...params
+        style: __theme().config('ui.tabs.defaultStyle'),
+        grow: false,
+        direction: 'horizontal',
+        scope: ['bare', 'lnf', 'grow', 'style', 'direction'],
+        ...params,
     };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  if (finalParams.scope.indexOf('bare') !== -1) {
-    vars.push(`
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
     `);
-  }
+    }
 
-  if (finalParams.grow && finalParams.scope.indexOf('grow') !== -1) {
-    vars.push(`
-      ${finalParams.grow && finalParams.scope.indexOf('grow') !== -1 ? `
+    if (finalParams.grow && finalParams.scope.indexOf('grow') !== -1) {
+        vars.push(`
+      ${
+          finalParams.grow && finalParams.scope.indexOf('grow') !== -1
+              ? `
         & > * {
           flex-grow: 1;
         }
-      `: ''}
+      `
+              : ''
+      }
     `);
-  }
+    }
 
-  if (finalParams.scope.indexOf('lnf') !== -1) {
-    vars.push(`
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
       background-color: sugar.color(ui, surface);
       border-radius: sugar.theme(ui.tabs.borderRadius);
       box-shadow: sugar.theme(ui.tabs.depth);
@@ -82,7 +86,8 @@ export default function ({
 
         & > * {
           text-align: center;
-          padding: sugar.theme('ui.tabs.padding');
+          padding-inline: sugar.scalable(sugar.theme(ui.tabs.paddingInline));
+         padding-block: sugar.scalable(sugar.theme(ui.tabs.paddingBlock));
           background-color: sugar.color(ui, surface);
           color: sugar.color(ui, foreground);
           transition: sugar.theme(ui.tabs.transition);
@@ -90,10 +95,10 @@ export default function ({
           display: block;      
         }
     `);
-  }
+    }
 
-  if (finalParams.style === 'default' && finalParams.scope.indexOf('style') !== -1) {
-    vars.push(`
+    if (finalParams.style === 'default' && finalParams.scope.indexOf('style') !== -1) {
+        vars.push(`
       & > dt,
       & > li,
       & > div {
@@ -107,10 +112,10 @@ export default function ({
         }          
       }
     `);
-  }
+    }
 
-  if (finalParams.style === 'gradient' && finalParams.scope.indexOf('style') !== -1) {
-    vars.push(`
+    if (finalParams.style === 'gradient' && finalParams.scope.indexOf('style') !== -1) {
+        vars.push(`
       & > dt,
       & > li,
       & > div,
@@ -123,10 +128,10 @@ export default function ({
         }          
       }
     `);
-  }
+    }
 
-  if (finalParams.direction === 'vertical' && finalParams.scope.indexOf('direction') !== -1) {
-    vars.push(`
+    if (finalParams.direction === 'vertical' && finalParams.scope.indexOf('direction') !== -1) {
+        vars.push(`
       display: block;
 
       & > dt,
@@ -137,8 +142,7 @@ export default function ({
         text-align: inherit;
       }
     `);
-  }
+    }
 
-
-  replaceWith(vars);
+    replaceWith(vars);
 }

@@ -4,35 +4,39 @@ import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue'
 import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginFontSizeInterface extends __SInterface {
-  static definition = {
-    name: {
-      type: 'String',
-      required: true,
-      alias: 'n'
-    }
-  };
+    static definition = {
+        name: {
+            type: 'String',
+            required: true,
+            alias: 'n',
+        },
+        scalable: {
+            type: 'Boolean',
+            default: true,
+        },
+    };
 }
 export { postcssSugarPluginFontSizeInterface as interface };
 
 export interface IPostcssSugarPluginFontSizeParams {
-  name: string;
+    name: string;
+    scalable: boolean;
 }
 
-export default function ({
-  params
-}: {
-  params: Partial<IPostcssSugarPluginFontSizeParams>;
-}) {
-  const finalParams: IPostcssSugarPluginFontSizeParams = {
-    name: '',
-    ...params
-  };
+export default function ({ params }: { params: Partial<IPostcssSugarPluginFontSizeParams> }) {
+    const finalParams: IPostcssSugarPluginFontSizeParams = {
+        name: '',
+        scalable: true,
+        ...params,
+    };
 
-  const name = finalParams.name;
+    const name = finalParams.name;
 
-  if (__isValidUnitValue(name)) return name;
+    if (__isValidUnitValue(name)) {
+        if (finalParams.scalable) return `sugar.scalable(${name})`;
+        return name;
+    }
 
-  const size = __theme().config(`font.size.${name}`);
-
-  return `var(${__minifyVar(`--s-theme-font-size-${name}`)}, ${size})`;
+    if (finalParams.scalable) return `sugar.scalable(sugar.theme(font.size.${name}))`;
+    return `sugar.theme(font.size.${name})`;
 }

@@ -40,6 +40,35 @@ export default function (env, config) {
             '3-4': 3 / 4,
         },
 
+        scalable: {
+            margin: false,
+            padding: true,
+            font: true,
+        },
+
+        scale: {
+            '01': 0.1,
+            '02': 0.2,
+            '03': 0.3,
+            '04': 0.4,
+            '05': 0.5,
+            '06': 0.6,
+            '07': 0.7,
+            '08': 0.8,
+            '09': 0.9,
+            '10': 1,
+            '11': 1.1,
+            '12': 1.2,
+            '13': 1.3,
+            '14': 1.4,
+            '15': 1.5,
+            '16': 1.6,
+            '17': 1.7,
+            '18': 1.8,
+            '19': 1.9,
+            '20': 2,
+        },
+
         opacity: {
             '0': 0,
             '10': 0.1,
@@ -117,144 +146,157 @@ export default function (env, config) {
              * @name          0
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       0
+             * @default       0.25rem
              *
              * Declare the font size <s-color="accent">50</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            0: 0,
+            0: '0.25rem',
 
             /**
              * @name          5
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       2px
+             * @default       0.5rem
              *
              * Declare the font size <s-color="accent">50</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            5: '4px',
+            5: '0.5rem',
 
             /**
              * @name          10
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       4px
+             * @default       0.65rem
              *
              * Declare the font size <s-color="accent">10</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            10: '4px',
+            10: '0.65rem',
 
             /**
              * @name          20
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       8px
+             * @default       0.75rem
              *
              * Declare the font size <s-color="accent">20</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            20: '8px',
+            20: '0.75rem',
 
             /**
              * @name          30
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       12px
+             * @default       1rem
              *
              * Declare the font size <s-color="accent">30</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            30: '12px',
+            30: '1rem',
 
             /**
              * @name          40
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       16px
+             * @default       1.25rem
              *
              * Declare the font size <s-color="accent">40</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            40: '16px',
+            40: '1.25rem',
 
             /**
              * @name          50
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       24px
+             * @default       1.75rem
              *
              * Declare the font size <s-color="accent">50</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            50: '24px',
+            50: '1.75rem',
 
             /**
              * @name          60
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       32px
+             * @default       2.25rem
              *
              * Declare the font size <s-color="accent">60</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            60: '32px',
+            60: '2.25rem',
 
             /**
              * @name          70
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       40px
+             * @default       3rem
              *
              * Declare the font size <s-color="accent">70</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            70: '40px',
+            70: '3rem',
 
             /**
              * @name          80
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       48px
+             * @default       3.5rem
              *
              * Declare the font size <s-color="accent">80</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '48px',
+            80: '3.5rem',
 
             /**
              * @name          90
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       56px
+             * @default       4rem
              *
              * Declare the font size <s-color="accent">90</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            90: '56px',
+            90: '4rem',
+
+            /**
+             * @name          100
+             * @namespace     config.theme.themes.default.size
+             * @type          String
+             * @default       4.5rem
+             *
+             * Declare the font size <s-color="accent">100</s-color>
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            100: '4.5rem',
         },
 
         font: {
@@ -353,157 +395,170 @@ export default function (env, config) {
                  * @name          default
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       16px
+                 * @default       [theme.size.default]
                  *
                  * Declare the font size <s-color="accent">default</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                default: '16px',
+                default: '[theme.size.default]',
 
                 /**
                  * @name          0
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       0
+                 * @default       [theme.size.0]
                  *
-                 * Declare the font size <s-color="accent">50</s-color>
+                 * Declare the font size <s-color="accent">0</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                0: 0,
+                0: '[theme.size.0]',
+
+                /**
+                 * @name          5
+                 * @namespace     config.theme.themes.default.font.size
+                 * @type          String
+                 * @default       [theme.size.5]
+                 *
+                 * Declare the font size <s-color="accent">5</s-color>
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                5: '[theme.size.5]',
 
                 /**
                  * @name          10
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       8px
+                 * @default       [theme.size.10]
                  *
                  * Declare the font size <s-color="accent">10</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                10: '8px',
+                10: '[theme.size.10]',
 
                 /**
                  * @name          20
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       12px
+                 * @default       [theme.size.20]
                  *
                  * Declare the font size <s-color="accent">20</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                20: '12px',
+                20: '[theme.size.20]',
 
                 /**
                  * @name          30
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       16px
+                 * @default       [theme.size.30]
                  *
                  * Declare the font size <s-color="accent">30</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                30: '16px',
+                30: '[theme.size.30]',
 
                 /**
                  * @name          40
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       20px
+                 * @default       [theme.size.40]
                  *
                  * Declare the font size <s-color="accent">40</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                40: '20px',
+                40: '[theme.size.40]',
 
                 /**
                  * @name          50
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       24px
+                 * @default       [theme.size.50]
                  *
                  * Declare the font size <s-color="accent">50</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                50: '24px',
+                50: '[theme.size.50]',
 
                 /**
                  * @name          60
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       32px
+                 * @default       [theme.size.60]
                  *
                  * Declare the font size <s-color="accent">60</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                60: '32px',
+                60: '[theme.size.60]',
 
                 /**
                  * @name          70
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       40px
+                 * @default       [theme.size.70]
                  *
                  * Declare the font size <s-color="accent">70</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                70: '40px',
+                70: '[theme.size.70]',
 
                 /**
                  * @name          80
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       48px
+                 * @default       [theme.size.80]
                  *
                  * Declare the font size <s-color="accent">80</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                80: '48px',
+                80: '[theme.size.80]',
 
                 /**
                  * @name          90
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default      56px
+                 * @default      [theme.size.90]
                  *
                  * Declare the font size <s-color="accent">90</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                90: '56px',
+                90: '[theme.size.90]',
 
                 /**
                  * @name          10
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default      64px
+                 * @default      [theme.size.100]
                  *
                  * Declare the font size <s-color="accent">100</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                100: '64px',
+                100: '[theme.size.100]',
             },
         },
 
@@ -804,14 +859,14 @@ export default function (env, config) {
              * @name            default
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         48px
+             * @default         3rem
              *
              * Specify the <primary>default</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            default: '48px',
+            default: '3rem',
 
             /**
              * @name            0
@@ -830,131 +885,131 @@ export default function (env, config) {
              * @name            10
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         6px
+             * @default         0.375rem
              *
              * Specify the <primary>10</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            10: '6px',
+            10: '0.375rem',
 
             /**
              * @name            20
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         12px
+             * @default         0.75rem
              *
              * Specify the <primary>20</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            20: '12px',
+            20: '0.75rem',
 
             /**
              * @name            30
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         24px
+             * @default         1.5rem
              *
              * Specify the <primary>30</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            30: '24px',
+            30: '1.5rem',
 
             /**
              * @name            40
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         36px
+             * @default         2.25
              *
              * Specify the <primary>40</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            40: '36px',
+            40: '2.25',
 
             /**
              * @name            50
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         48px
+             * @default         3rem
              *
              * Specify the <primary>50</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            50: '48px',
+            50: '3rem',
 
             /**
              * @name            60
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         60px
+             * @default         3.75rem
              *
              * Specify the <primary>60</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            60: '60px',
+            60: '3.75rem',
 
             /**
              * @name            70
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         72px
+             * @default         4.5rem
              *
              * Specify the <primary>70</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            70: '72px',
+            70: '4.5rem',
 
             /**
              * @name            80
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         84px
+             * @default         5.25
              *
              * Specify the <primary>80</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '84px',
+            80: '5.25',
 
             /**
              * @name            90
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         96px
+             * @default         6rem
              *
              * Specify the <primary>90</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            90: '96px',
+            90: '6rem',
 
             /**
              * @name            100
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         108px
+             * @default         6.75rem
              *
              * Specify the <primary>100</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            100: '108px',
+            100: '6.75rem',
         },
 
         margin: {
@@ -1362,7 +1417,8 @@ export default function (env, config) {
 
         ui: {
             default: {
-                padding: '[theme.padding.20] [theme.padding.30]',
+                paddingInline: '[theme.padding.30]',
+                paddingBlock: '[theme.padding.20] ',
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
@@ -1373,7 +1429,8 @@ export default function (env, config) {
                 },
             },
             form: {
-                padding: '[theme.padding.10] [theme.padding.20]',
+                paddingInline: '[theme.padding.20]',
+                paddingBlock: '[theme.padding.10]',
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
@@ -1385,29 +1442,33 @@ export default function (env, config) {
                 },
             },
             button: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             colorPicker: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
             },
             datePicker: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
             },
             input: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1416,7 +1477,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             range: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1425,7 +1487,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             label: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1433,7 +1496,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             select: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1444,23 +1508,25 @@ export default function (env, config) {
             switch: {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
-                transition: '[theme.ui.form.transition]',
+                transition: '[theme.ui.default.transition]',
                 focusSpread: '[theme.ui.form.focusSpread]',
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             list: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
+                bulletChar: '●',
                 depth: '[theme.ui.default.depth]',
-                styles: ['default'],
-                defaultColor: '[theme.ui.default.defaultColor]',
+                defaultStyle: 'ul',
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             tabs: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1468,7 +1534,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             terminal: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1477,7 +1544,8 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             tooltip: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1486,7 +1554,8 @@ export default function (env, config) {
                 arrowSize: '20px',
             },
             // pre: {
-            //   padding: '[theme.ui.default.padding]',
+            //   paddingInline: '[theme.ui.default.paddingInline]',
+            //        paddingBlock: '[theme.ui.default.paddingBlock]',
             //   borderRadius: '[theme.ui.default.borderRadius]',
             //   transition: '[theme.ui.default.transition]',
             //   depth: '[theme.ui.default.depth]',
@@ -1496,7 +1565,8 @@ export default function (env, config) {
             //   ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
             // },
             code: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1505,7 +1575,8 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             blockquote: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1514,7 +1585,8 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             table: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.border.width.10]',
                 transition: '[theme.ui.default.transition]',
@@ -1523,10 +1595,12 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             badge: {
-                padding: '.35em .65em',
+                paddingInline: '.65em',
+                paddingBlock: '.35em',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
+                defaultStyle: 'solid',
                 depth: 0,
             },
             loader: {
@@ -1624,7 +1698,8 @@ export default function (env, config) {
                 color: ['ui', 'text'],
                 'background-color': ['ui', 'surface'],
                 'line-height': 1.5,
-                padding: 20,
+                paddingInline: 20,
+                paddingBlock: 20,
                 ':rhythmVertical': {
                     'margin-bottom': 30,
                 },
@@ -1634,7 +1709,8 @@ export default function (env, config) {
                 'font-family': 'code',
                 color: ['ui', 'text'],
                 'background-color': ['ui', 'surface'],
-                padding: 0,
+                paddingInline: 0,
+                paddingBlock: 0,
             },
             a: {
                 color: 'accent',

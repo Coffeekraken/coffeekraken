@@ -8,10 +8,12 @@ s-date-picker {
 
 .s-date-picker__input {
     flex-grow: 1;
-    padding: sugar.theme(ui.datePicker.padding);
+    padding-inline: sugar.scalable(sugar.theme(ui.datePicker.paddingInline));
+    padding-block: sugar.scalable(sugar.theme(ui.datePicker.paddingBlock));
 }
 .s-date-picker__button {
-    padding: sugar.theme(ui.datePicker.padding);
+    padding-inline: sugar.scalable(sugar.theme(ui.datePicker.paddingInline));
+    padding-block: sugar.scalable(sugar.theme(ui.datePicker.paddingBlock));
 }
 
 s-date-picker[default-style] {

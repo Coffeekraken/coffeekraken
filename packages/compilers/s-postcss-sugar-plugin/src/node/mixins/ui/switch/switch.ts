@@ -7,13 +7,13 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
-            values: ['default', 'gradient', 'outline'],
-            default: 'default',
+            values: ['solid'],
+            default: 'solid',
         },
         scope: {
             type: 'String',
-            values: ['bare', 'lnf', 'style'],
-            default: ['bare', 'lnf', 'style'],
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
         },
     };
 }
@@ -35,7 +35,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
-        style: 'default',
+        style: 'solid',
         scope: [],
         ...params,
     };
@@ -46,19 +46,17 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         
+        font-size: sugar.scalable(0.8rem);
+
         --thumb-size: 1em;
-        --thumb: sugar.color(main, surface);
-        --thumb-highlight: sugar.color(ui, --alpha 0.3);
-        
+        --thumb-color-active: sugar.color(main, surface);
+        --thumb-color-inactive: sugar.color(ui);
+        --thumb-color-highlight: sugar.color(ui, --alpha 0.2);
+
         --track-size: calc(var(--thumb-size) * 2);
         --track-padding: 0.2em;
-        --track-inactive: sugar.color(ui, --alpha 0.3);
-        --track-active: sugar.color(ui);
-
-        --thumb-color: var(--thumb);
-        --thumb-color-highlight: var(--thumb-highlight);
-        --track-color-inactive: var(--track-inactive);
-        --track-color-active: var(--track-active);
+        --track-color-active: sugar.color(ui);
+        --track-color-inactive: sugar.color(ui, --alpha 0.1);
 
         --isLTR: 1;
 
@@ -76,7 +74,8 @@ export default function ({
         border-radius: var(--track-size);
 
         appearance: none;
-        pointer-events: none;
+        pointer-events: all;
+        cursor: pointer;
         touch-action: pan-y;
         border: sugar.color(ui, border) solid sugar.theme(ui.switch.borderWidth);
         outline-offset: 5px;
@@ -87,31 +86,53 @@ export default function ({
         align-items: center;
         grid: [track] 1fr / [track] 1fr;
 
-        transition: background-color .25s ease;
+        transition: sugar.theme(ui.switch.transition);
+
+        &:checked {
+            &::before {
+                background: var(--thumb-color-active) !important;
+            }
+            &::after {
+                box-shadow: 0 0 3px sugar.color(ui, --darken 20);
+            }
+        }
 
         &::before {
             --highlight-size: 0;
 
             content: "";
             cursor: pointer;
-            pointer-events: auto;
+            pointer-events: none;
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
-            background: var(--thumb-color);
+            background: var(--thumb-color-inactive);
             box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
             border-radius: 50%;
             transform: translateX(var(--thumb-position));
+            box-shadow: 0;
+            transition: sugar.theme(ui.switch.transition);
+        }
 
-            @media (--motionOK) { & {
-                transition: 
-                transform var(--thumb-transition-duration) ease,
-                box-shadow .25s ease;
-            }}
+        &::after {
+            content: "";
+            cursor: pointer;
+            pointer-events: none;
+            grid-area: track;
+            inline-size: var(--thumb-size);
+            block-size: var(--thumb-size);
+            background: rgba(255,255,25,0);
+            border-radius: 50%;
+            transform: translateX(var(--thumb-position));
+            box-shadow: 0;
+            transition: sugar.theme(ui.switch.transition);
         }
 
         &:not(:disabled):hover::before {
             --highlight-size: .5rem;
+        }
+        &:not(:disabled):focus::before {
+            --highlight-size: .25rem;
         }
 
         &:checked {
@@ -129,35 +150,27 @@ export default function ({
         &:disabled {
             cursor: not-allowed;
             --thumb-color: transparent;
-
-            &::before {
-                cursor: not-allowed;
-                box-shadow: inset 0 0 0 2px hsl(0 0% 100% / 50%);
-
-                @media (prefers-color-scheme: dark) { & {
-                    box-shadow: inset 0 0 0 2px hsl(0 0% 0% / 50%);
-                }}
-            }
+            opacity: .3;
         }
 
     `);
     }
 
-    if (finalParams.scope.indexOf('lnf') !== -1 && finalParams.scope.indexOf('style') !== -1) {
-        switch (finalParams.style) {
-            case 'gradient':
-                break;
-            case 'outline':
-                break;
-            case 'default':
-            default:
-                vars.push(`
+    // if (finalParams.scope.indexOf('lnf') !== -1 && finalParams.scope.indexOf('style') !== -1) {
+    //     switch (finalParams.style) {
+    //         case 'gradient':
+    //             break;
+    //         case 'outline':
+    //             break;
+    //         case 'default':
+    //         default:
+    //             vars.push(`
 
-            `);
+    //         `);
 
-                break;
-        }
-    }
+    //             break;
+    //     }
+    // }
 
     replaceWith(vars);
 }

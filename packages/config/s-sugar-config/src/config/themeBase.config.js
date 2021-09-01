@@ -37,6 +37,33 @@ export default function (env, config) {
             '4-3': 4 / 3,
             '3-4': 3 / 4,
         },
+        scalable: {
+            margin: false,
+            padding: true,
+            font: true,
+        },
+        scale: {
+            '01': 0.1,
+            '02': 0.2,
+            '03': 0.3,
+            '04': 0.4,
+            '05': 0.5,
+            '06': 0.6,
+            '07': 0.7,
+            '08': 0.8,
+            '09': 0.9,
+            '10': 1,
+            '11': 1.1,
+            '12': 1.2,
+            '13': 1.3,
+            '14': 1.4,
+            '15': 1.5,
+            '16': 1.6,
+            '17': 1.7,
+            '18': 1.8,
+            '19': 1.9,
+            '20': 2,
+        },
         opacity: {
             '0': 0,
             '10': 0.1,
@@ -110,134 +137,146 @@ export default function (env, config) {
              * @name          0
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       0
+             * @default       0.25rem
              *
              * Declare the font size <s-color="accent">50</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            0: 0,
+            0: '0.25rem',
             /**
              * @name          5
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       2px
+             * @default       0.5rem
              *
              * Declare the font size <s-color="accent">50</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            5: '4px',
+            5: '0.5rem',
             /**
              * @name          10
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       4px
+             * @default       0.65rem
              *
              * Declare the font size <s-color="accent">10</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            10: '4px',
+            10: '0.65rem',
             /**
              * @name          20
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       8px
+             * @default       0.75rem
              *
              * Declare the font size <s-color="accent">20</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            20: '8px',
+            20: '0.75rem',
             /**
              * @name          30
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       12px
+             * @default       1rem
              *
              * Declare the font size <s-color="accent">30</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            30: '12px',
+            30: '1rem',
             /**
              * @name          40
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       16px
+             * @default       1.25rem
              *
              * Declare the font size <s-color="accent">40</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            40: '16px',
+            40: '1.25rem',
             /**
              * @name          50
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       24px
+             * @default       1.75rem
              *
              * Declare the font size <s-color="accent">50</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            50: '24px',
+            50: '1.75rem',
             /**
              * @name          60
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       32px
+             * @default       2.25rem
              *
              * Declare the font size <s-color="accent">60</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            60: '32px',
+            60: '2.25rem',
             /**
              * @name          70
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       40px
+             * @default       3rem
              *
              * Declare the font size <s-color="accent">70</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            70: '40px',
+            70: '3rem',
             /**
              * @name          80
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       48px
+             * @default       3.5rem
              *
              * Declare the font size <s-color="accent">80</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '48px',
+            80: '3.5rem',
             /**
              * @name          90
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       56px
+             * @default       4rem
              *
              * Declare the font size <s-color="accent">90</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            90: '56px',
+            90: '4rem',
+            /**
+             * @name          100
+             * @namespace     config.theme.themes.default.size
+             * @type          String
+             * @default       4.5rem
+             *
+             * Declare the font size <s-color="accent">100</s-color>
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            100: '4.5rem',
         },
         font: {
             /**
@@ -331,146 +370,158 @@ export default function (env, config) {
                  * @name          default
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       16px
+                 * @default       [theme.size.default]
                  *
                  * Declare the font size <s-color="accent">default</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                default: '16px',
+                default: '[theme.size.default]',
                 /**
                  * @name          0
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       0
+                 * @default       [theme.size.0]
                  *
-                 * Declare the font size <s-color="accent">50</s-color>
+                 * Declare the font size <s-color="accent">0</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                0: 0,
+                0: '[theme.size.0]',
+                /**
+                 * @name          5
+                 * @namespace     config.theme.themes.default.font.size
+                 * @type          String
+                 * @default       [theme.size.5]
+                 *
+                 * Declare the font size <s-color="accent">5</s-color>
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                5: '[theme.size.5]',
                 /**
                  * @name          10
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       8px
+                 * @default       [theme.size.10]
                  *
                  * Declare the font size <s-color="accent">10</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                10: '8px',
+                10: '[theme.size.10]',
                 /**
                  * @name          20
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       12px
+                 * @default       [theme.size.20]
                  *
                  * Declare the font size <s-color="accent">20</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                20: '12px',
+                20: '[theme.size.20]',
                 /**
                  * @name          30
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       16px
+                 * @default       [theme.size.30]
                  *
                  * Declare the font size <s-color="accent">30</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                30: '16px',
+                30: '[theme.size.30]',
                 /**
                  * @name          40
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       20px
+                 * @default       [theme.size.40]
                  *
                  * Declare the font size <s-color="accent">40</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                40: '20px',
+                40: '[theme.size.40]',
                 /**
                  * @name          50
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       24px
+                 * @default       [theme.size.50]
                  *
                  * Declare the font size <s-color="accent">50</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                50: '24px',
+                50: '[theme.size.50]',
                 /**
                  * @name          60
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       32px
+                 * @default       [theme.size.60]
                  *
                  * Declare the font size <s-color="accent">60</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                60: '32px',
+                60: '[theme.size.60]',
                 /**
                  * @name          70
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       40px
+                 * @default       [theme.size.70]
                  *
                  * Declare the font size <s-color="accent">70</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                70: '40px',
+                70: '[theme.size.70]',
                 /**
                  * @name          80
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default       48px
+                 * @default       [theme.size.80]
                  *
                  * Declare the font size <s-color="accent">80</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                80: '48px',
+                80: '[theme.size.80]',
                 /**
                  * @name          90
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default      56px
+                 * @default      [theme.size.90]
                  *
                  * Declare the font size <s-color="accent">90</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                90: '56px',
+                90: '[theme.size.90]',
                 /**
                  * @name          10
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
-                 * @default      64px
+                 * @default      [theme.size.100]
                  *
                  * Declare the font size <s-color="accent">100</s-color>
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                100: '64px',
+                100: '[theme.size.100]',
             },
         },
         border: {
@@ -748,14 +799,14 @@ export default function (env, config) {
              * @name            default
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         48px
+             * @default         3rem
              *
              * Specify the <primary>default</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            default: '48px',
+            default: '3rem',
             /**
              * @name            0
              * @namespace       config.theme.themes.default.space
@@ -772,122 +823,122 @@ export default function (env, config) {
              * @name            10
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         6px
+             * @default         0.375rem
              *
              * Specify the <primary>10</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            10: '6px',
+            10: '0.375rem',
             /**
              * @name            20
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         12px
+             * @default         0.75rem
              *
              * Specify the <primary>20</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            20: '12px',
+            20: '0.75rem',
             /**
              * @name            30
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         24px
+             * @default         1.5rem
              *
              * Specify the <primary>30</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            30: '24px',
+            30: '1.5rem',
             /**
              * @name            40
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         36px
+             * @default         2.25
              *
              * Specify the <primary>40</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            40: '36px',
+            40: '2.25',
             /**
              * @name            50
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         48px
+             * @default         3rem
              *
              * Specify the <primary>50</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            50: '48px',
+            50: '3rem',
             /**
              * @name            60
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         60px
+             * @default         3.75rem
              *
              * Specify the <primary>60</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            60: '60px',
+            60: '3.75rem',
             /**
              * @name            70
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         72px
+             * @default         4.5rem
              *
              * Specify the <primary>70</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            70: '72px',
+            70: '4.5rem',
             /**
              * @name            80
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         84px
+             * @default         5.25
              *
              * Specify the <primary>80</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '84px',
+            80: '5.25',
             /**
              * @name            90
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         96px
+             * @default         6rem
              *
              * Specify the <primary>90</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            90: '96px',
+            90: '6rem',
             /**
              * @name            100
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         108px
+             * @default         6.75rem
              *
              * Specify the <primary>100</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            100: '108px',
+            100: '6.75rem',
         },
         margin: {
             /**
@@ -1264,7 +1315,8 @@ export default function (env, config) {
         },
         ui: {
             default: {
-                padding: '[theme.padding.20] [theme.padding.30]',
+                paddingInline: '[theme.padding.30]',
+                paddingBlock: '[theme.padding.20] ',
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
@@ -1275,7 +1327,8 @@ export default function (env, config) {
                 },
             },
             form: {
-                padding: '[theme.padding.10] [theme.padding.20]',
+                paddingInline: '[theme.padding.20]',
+                paddingBlock: '[theme.padding.10]',
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
@@ -1287,29 +1340,33 @@ export default function (env, config) {
                 },
             },
             button: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             colorPicker: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
             },
             datePicker: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
             },
             input: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1318,7 +1375,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             range: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1327,7 +1385,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             label: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1335,7 +1394,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             select: {
-                padding: '[theme.ui.form.padding]',
+                paddingInline: '[theme.ui.form.paddingInline]',
+                paddingBlock: '[theme.ui.form.paddingBlock]',
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
@@ -1346,23 +1406,25 @@ export default function (env, config) {
             switch: {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
-                transition: '[theme.ui.form.transition]',
+                transition: '[theme.ui.default.transition]',
                 focusSpread: '[theme.ui.form.focusSpread]',
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             list: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
+                bulletChar: '●',
                 depth: '[theme.ui.default.depth]',
-                styles: ['default'],
-                defaultColor: '[theme.ui.default.defaultColor]',
+                defaultStyle: 'ul',
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             tabs: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1370,7 +1432,8 @@ export default function (env, config) {
                 defaultStyle: 'default',
             },
             terminal: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1379,7 +1442,8 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             tooltip: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1388,7 +1452,8 @@ export default function (env, config) {
                 arrowSize: '20px',
             },
             // pre: {
-            //   padding: '[theme.ui.default.padding]',
+            //   paddingInline: '[theme.ui.default.paddingInline]',
+            //        paddingBlock: '[theme.ui.default.paddingBlock]',
             //   borderRadius: '[theme.ui.default.borderRadius]',
             //   transition: '[theme.ui.default.transition]',
             //   depth: '[theme.ui.default.depth]',
@@ -1398,7 +1463,8 @@ export default function (env, config) {
             //   ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
             // },
             code: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1407,7 +1473,8 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             blockquote: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
@@ -1416,7 +1483,8 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             table: {
-                padding: '[theme.ui.default.padding]',
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.border.width.10]',
                 transition: '[theme.ui.default.transition]',
@@ -1425,10 +1493,12 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             badge: {
-                padding: '.35em .65em',
+                paddingInline: '.65em',
+                paddingBlock: '.35em',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
+                defaultStyle: 'solid',
                 depth: 0,
             },
             loader: {
@@ -1525,7 +1595,8 @@ export default function (env, config) {
                 color: ['ui', 'text'],
                 'background-color': ['ui', 'surface'],
                 'line-height': 1.5,
-                padding: 20,
+                paddingInline: 20,
+                paddingBlock: 20,
                 ':rhythmVertical': {
                     'margin-bottom': 30,
                 },
@@ -1535,7 +1606,8 @@ export default function (env, config) {
                 'font-family': 'code',
                 color: ['ui', 'text'],
                 'background-color': ['ui', 'surface'],
-                padding: 0,
+                paddingInline: 0,
+                paddingBlock: 0,
             },
             a: {
                 color: 'accent',
@@ -1585,4 +1657,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVCYXNlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQmFzZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsVUFBVSxFQUFFO1lBQ1IsSUFBSSxFQUFFLGtEQUFrRDtZQUN4RCxPQUFPLEVBQUUsa0RBQWtEO1lBQzNELElBQUksRUFBRSxrREFBa0Q7U0FDM0Q7UUFFRCxNQUFNLEVBQUU7WUFDSixTQUFTLEVBQUU7Z0JBQ1AsT0FBTyxFQUFFO29CQUNMLFdBQVcsRUFBRSxRQUFRO2lCQUN4QjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0YsV0FBVyxFQUFFLE1BQU07aUJBQ3RCO2FBQ0o7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osR0FBRyxFQUFFLEdBQUc7Z0JBQ1IsSUFBSSxFQUFFLEtBQUs7Z0JBQ1gsS0FBSyxFQUFFLE9BQU87Z0JBQ2QsTUFBTSxFQUFFLFNBQVM7Z0JBQ2pCLEtBQUssRUFBRSxPQUFPO2dCQUNkLEtBQUssRUFBRSxPQUFPO2dCQUNkLE1BQU0sRUFBRSxTQUFTO2dCQUNqQixNQUFNLEVBQUUsU0FBUztnQkFDakIsT0FBTyxFQUFFLFdBQVc7Z0JBQ3BCLE9BQU8sRUFBRSxXQUFXO2dCQUNwQixPQUFPLEVBQUUsV0FBVztnQkFDcEIsUUFBUSxFQUFFLGFBQWE7YUFDMUI7U0FDSjtRQUVELEtBQUssRUFBRTtZQUNILEdBQUcsRUFBRSxDQUFDO1lBQ04sS0FBSyxFQUFFLENBQUM7WUFDUixNQUFNLEVBQUUsRUFBRSxHQUFHLENBQUM7WUFDZCxLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUM7WUFDWixLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUM7WUFDWixLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUM7U0FDZjtRQUVELE9BQU8sRUFBRTtZQUNMLEdBQUcsRUFBRSxDQUFDO1lBQ04sSUFBSSxFQUFFLEdBQUc7WUFD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RUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07YUFDYjtZQUVELE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsS0FBSztnQkFFZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxDQUFDLEVBQUUsS0FBSztnQkFFUjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTthQUNiO1NBQ0o7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLE1BQU07WUFFZjs7Ozs7Ozs7OztlQVVHO1lBQ0gsQ0FBQyxFQUFFLEdBQUc7WUFFTjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLEtBQUs7WUFFVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLE1BQU07WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLE1BQU07WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLE1BQU07WUFFVjs7Ozs7Ozs7OztlQVVH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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVCYXNlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQmFzZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsVUFBVSxFQUFFO1lBQ1IsSUFBSSxFQUFFLGtEQUFrRDtZQUN4RCxPQUFPLEVBQUUsa0RBQWtEO1lBQzNELElBQUksRUFBRSxrREFBa0Q7U0FDM0Q7UUFFRCxNQUFNLEVBQUU7WUFDSixTQUFTLEVBQUU7Z0JBQ1AsT0FBTyxFQUFFO29CQUNMLFdBQVcsRUFBRSxRQUFRO2lCQUN4QjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0YsV0FBVyxFQUFFLE1BQU07aUJBQ3RCO2FBQ0o7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osR0FBRyxFQUFFLEdBQUc7Z0JBQ1IsSUFBSSxFQUFFLEtBQUs7Z0JBQ1gsS0FBSyxFQUFFLE9BQU87Z0JBQ2QsTUFBTSxFQUFFLFNBQVM7Z0JBQ2pCLEtBQUssRUFBRSxPQUFPO2dCQUNkLEtBQUssRUFBRSxPQUFPO2dCQUNkLE1BQU0sRUFBRSxTQUFTO2dCQUNqQixNQUFNLEVBQUUsU0FBUztnQkFDakIsT0FBTyxFQUFFLFdBQVc7Z0JBQ3BCLE9BQU8sRUFBRSxXQUFXO2dCQUNwQixPQUFPLEVBQUUsV0FBVztnQkFDcEIsUUFBUSxFQUFFLGFBQWE7YUFDMUI7U0FDSjtRQUVELEtBQUssRUFBRTtZQUNILEdBQUcsRUFBRSxDQUFDO1lBQ04sS0FBSyxFQUFFLENBQUM7WUFDUixNQUFNLEVBQUUsRUFBRSxHQUFHLENBQUM7WUFDZCxLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUM7WUFDWixLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUM7WUFDWixLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUM7U0FDZjtRQUVELFFBQVEsRUFBRTtZQUNOLE1BQU0sRUFBRSxLQUFLO1lBQ2IsT0FBTyxFQUFFLElBQUk7WUFDYixJQUFJLEVBQUUsSUFBSTtTQUNiO1FBRUQsS0FBSyxFQUFFO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLENBQUM7WUFDUCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsQ0FBQztTQUNWO1FBRUQsT0FBTyxFQUFFO1lBQ0wsR0FBRyxFQUFFLENBQUM7WUFDTixJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxJQUFJLEVBQUUsR0FBRztZQUNULElBQUksRUFBRSxHQUFHO1lBQ1QsSUFBSSxFQUFFLEdBQUc7WUFDVCxLQUFLLEVBQUUsQ0FBQztTQUNYO1FBRUQsS0FBSyxFQUFFO1lBQ0gsR0FBRyxFQUFFLEdBQUc7WUFDUixJQUFJLEVBQUUsS0FBSztZQUNYLElBQUksRUFBRSxLQUFLO1lBQ1gsSUFBSSxFQUFFLEtBQUs7WUFDWCxJQUFJLEVBQUUsS0FBSztZQUNYLElBQUksRUFBRSxLQUFLO1lBQ1gsSUFBSSxFQUFFLEtBQUs7WUFDWCxJQUFJLEVBQUUsS0FBSztZQUNYLElBQUksRUFBRSxLQUFLO1lBQ1gsSUFBSSxFQUFFLEtBQUs7WUFDWCxLQUFLLEVBQUUsTUFBTTtTQUNoQjtRQUVELEtBQUssRUFBRTtZQUNILE9BQU8sRUFBRSxrQkFBa0I7WUFDM0IsQ0FBQyxFQUFFLEdBQUc7WUFDTixFQUFFLEVBQUUsOEJBQThCO1lBQ2xDLEVBQUUsRUFBRSwrQkFBK0I7WUFDbkMsRUFBRSxFQUFFLCtCQUErQjtZQUNuQyxFQUFFLEVBQUUsK0JBQStCO1lBQ25DLEVBQUUsRUFBRTswQ0FDMEI7WUFDOUIsRUFBRSxFQUFFOzBDQUMwQjtZQUM5QixFQUFFLEVBQUU7OzJDQUUyQjtZQUMvQixFQUFFLEVBQUU7Ozs0Q0FHNEI7WUFDaEMsRUFBRSxFQUFFOzs7OzRDQUk0QjtZQUNoQyxHQUFHLEVBQUU7Ozs7OzRDQUsyQjtTQUNuQztRQUVELElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsTUFBTTtZQUVmOzs7Ozs7Ozs7O2VBVUc7WUFDSCxDQUFDLEVBQUUsU0FBUztZQUVaOzs7Ozs7Ozs7O2VBVUc7WUFDSCxDQUFDLEVBQUUsUUFBUTtZQUVYOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsU0FBUztZQUViOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsU0FBUztZQUViOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsTUFBTTtZQUVWOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsU0FBUztZQUViOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsU0FBUztZQUViOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsU0FBUztZQUViOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsTUFBTTtZQUVWOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsUUFBUTtZQUVaOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUUsTUFBTTtZQUVWOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsUUFBUTtTQUNoQjtRQUVELElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7ZUFTRztZQUNILE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7O21CQVNHO2dCQUNILE9BQU8sRUFBRTtvQkFDTCxhQUFhLEVBQUUsaUJBQWlCO29CQUNoQyxhQUFhLEVBQUUsR0FBRztvQkFDbEIsTUFBTSxFQUFFLDhFQUE4RTtpQkFDekY7Z0JBRUQ7Ozs7Ozs7OzttQkFTRztnQkFDSCxLQUFLLEVBQUU7b0JBQ0gsYUFBYSxFQUFFLGlCQUFpQjtvQkFDaEMsYUFBYSxFQUFFLEdBQUc7b0JBQ2xCLE1BQU0sRUFBRSw4RUFBOEU7aUJBQ3pGO2dCQUVEOzs7Ozs7Ozs7bUJBU0c7Z0JBQ0gsS0FBSyxFQUFFO29CQUNILGFBQWEsRUFBRSxtQ0FBbUM7b0JBQ2xELGFBQWEsRUFBRSxRQUFRO29CQUN2QixZQUFZLEVBQUUsUUFBUTtvQkFDdEIsY0FBYyxFQUFFLE1BQU07b0JBQ3RCLFlBQVksRUFBRSxJQUFJO2lCQUNyQjtnQkFFRDs7Ozs7Ozs7O21CQVNHO2dCQUNILElBQUksRUFBRTtvQkFDRixhQUFhLEVBQUUsaURBQWlEO29CQUNoRSxhQUFhLEVBQUUsUUFBUTtvQkFDdkIsWUFBWSxFQUFFLFFBQVE7b0JBQ3RCLGNBQWMsRUFBRSxNQUFNO29CQUN0QixZQUFZLEVBQUUsSUFBSTtpQkFDckI7YUFDSjtZQUVEOzs7Ozs7Ozs7ZUFTRztZQUNILElBQUksRUFBRTtnQkFDRjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsc0JBQXNCO2dCQUUvQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxDQUFDLEVBQUUsZ0JBQWdCO2dCQUVuQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxDQUFDLEVBQUUsZ0JBQWdCO2dCQUVuQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsaUJBQWlCO2dCQUVyQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsa0JBQWtCO2FBQzFCO1NBQ0o7UUFFRCxNQUFNLEVBQUU7WUFDSixLQUFLLEVBQUU7Z0JBQ0g7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsT0FBTyxFQUFFLHlCQUF5QjtnQkFFbEM7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsQ0FBQyxFQUFFLEtBQUs7Z0JBRVI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLEtBQUs7Z0JBRVQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLEtBQUs7Z0JBRVQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLEtBQUs7Z0JBRVQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLEtBQUs7Z0JBRVQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLEtBQUs7Z0JBRVQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07YUFDYjtZQUVELE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsS0FBSztnQkFFZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxDQUFDLEVBQUUsS0FBSztnQkFFUjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTthQUNiO1NBQ0o7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLE1BQU07WUFFZjs7Ozs7Ozs7OztlQVVHO1lBQ0gsQ0FBQyxFQUFFLEdBQUc7WUFFTjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFVBQVU7WUFFZDs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFNBQVM7WUFFYjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFFBQVE7WUFFWjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLE1BQU07WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLE1BQU07WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFNBQVM7WUFFYjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFFBQVE7WUFFWjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLE1BQU07WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLE1BQU07WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsR0FBRyxFQUFFLFNBQVM7U0FDakI7UUFFRCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLHVCQUF1QjtZ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

@@ -3,14 +3,23 @@ import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
     static definition = {
-        sizes: {
+        styles: {
             type: 'String[]',
-            alias: 's',
+            values: ['solid', 'gradient', 'outline', 'text'],
+            default: ['solid', 'gradient', 'outline', 'text'],
+        },
+        defaultStyle: {
+            type: 'String',
+            values: ['solid', 'gradient', 'outline', 'text'],
+            default: __theme().config('ui.button.defaultStyle') ?? 'solid',
         },
     };
 }
 
-export interface IPostcssSugarPluginUiButtonClassesParams {}
+export interface IPostcssSugarPluginUiButtonClassesParams {
+    styles: ('solid' | 'gradient' | 'outline' | 'text')[];
+    defaultStyle: 'solid' | 'gradient' | 'outline' | 'text';
+}
 
 export { postcssSugarPluginUiButtonClassesInterface as interface };
 
@@ -29,10 +38,6 @@ export default function ({
 
     const vars: string[] = [];
 
-    const defaultStyle = __theme().config('ui.button.defaultStyle') ?? 'default';
-
-    const styles = ['default', 'gradient', 'outline', 'text'];
-
     vars.push(`
       /**
         * @name          Buttons
@@ -45,16 +50,16 @@ export default function ({
         * These classes allows you to display any HTMLElement as a button
         * 
         * 
-        ${styles
+        ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-btn${
-                    style === 'default' ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `\:${style}`
                 }           Apply the ${style} button style`;
             })
             .join('\n')}
         * 
         * @example        html
-        ${styles
+        ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
@@ -67,15 +72,25 @@ export default function ({
             * `;
             })
             .join('\n')}
+        *
+        * <!-- scales -->
+        * <div class="s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
+        *   <a class="s-btn s-scale\:05 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:1 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:12 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:15 s-mr\:20 s-mb\:20">Click me!</a>
+        *   <a class="s-btn s-scale\:20 s-mb\:20">Click me!</a>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
 
-    styles.forEach((style) => {
+    finalParams.styles.forEach((style) => {
         let cls = `s-btn`;
-        if (style !== defaultStyle) {
+        if (style !== finalParams.defaultStyle) {
             cls += `--${style}`;
         }
 
@@ -94,27 +109,6 @@ export default function ({
       */`);
         vars.push([`.${cls} {`, ` @sugar.ui.button($style: ${style});`, `}`].join('\n'));
     });
-
-    // Object.keys(__theme().baseColors()).forEach((colorName) => {
-    //     vars.push(`
-    //   /**
-    //    * @name        s-btn--${colorName}
-    //    * @namespace     sugar.css.ui.button
-    //    * @type          CssClass
-    //    *
-    //    * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any button
-    //    *
-    //    * @example       html
-    //    * <a class="<s-btn--${colorName}">I'm a cool ${colorName} button</a>
-    //    *
-    //    * @since       2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   .s-btn--${colorName} {
-    //     @sugar.color.remap(ui, ${colorName});
-    //   }
-    // `);
-    // });
 
     vars.push(`/**
         * @name           s-btn--block

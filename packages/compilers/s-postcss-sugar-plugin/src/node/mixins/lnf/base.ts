@@ -1,12 +1,10 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginLiikAndFeelBaseInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginLookAndFeelBaseParams {
-}
+export interface IPostcssSugarPluginLookAndFeelBaseParams {}
 
 export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
 
@@ -16,7 +14,7 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  * @type          PostcssMixin
  * @platform      css
  * @status        beta
- * 
+ *
  * This mixin apply some base look and feel depending on the current theme like:
  *
  * - Page background using the <s-color="accent">background</s-color> theme color
@@ -32,21 +30,21 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: IPostcssSugarPluginLookAndFeelBaseParams;
-  atRule: any;
-  replaceWith: Function;
+    params: IPostcssSugarPluginLookAndFeelBaseParams;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginLookAndFeelBaseParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginLookAndFeelBaseParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  const css = `
+    const css = `
     background-color: sugar.color(main, background);
     color: sugar.color(main, text);
     @sugar.font.family(default);
@@ -58,7 +56,7 @@ export default function ({
     }
   `;
 
-  vars.push(css);
+    vars.push(css);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

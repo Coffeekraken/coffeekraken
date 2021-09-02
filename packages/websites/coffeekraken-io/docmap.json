@@ -480,9 +480,9 @@
                 "menu": {
                     "tree": [
                         "Styleguide",
-                        "UI"
+                        "Forms"
                     ],
-                    "slug": "/styleguide/ui/text-input"
+                    "slug": "/styleguide/forms/text-input"
                 },
                 "platform": [
                     {
@@ -496,7 +496,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- default style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">default style</h3>\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:accent s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:complementary s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:default s-mr:20 s-ui:error s-mb:30\" />\n</div>\n\n<!-- underline style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">underline style</h3>\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-ui:accent s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-ui:complementary s-mb:30\" />\n  <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-mr:20 s-ui:error s-mb:30\" />\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-label s-mb:30\">\n      Kristine Berge\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n      Alison Metz\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Dr. Danny Klocko\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:complementary\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Pedro McCullough\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:error\" />\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -512,7 +512,7 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.input..sInput": {
                 "name": ".s-input",
                 "type": "CssClass",
-                "description": "This class represent a(n) \"<yellow>default</yellow>\" input",
+                "description": "This class represent a(n) \"<yellow>solid</yellow>\" input",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.input",
                 "example": [
                     {
@@ -524,17 +524,37 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.input..sInput.sInput-Underline": {
-                "name": ".s-input.s-input--underline",
-                "type": "CssClass",
-                "description": "This class represent a(n) \"<yellow>underline</yellow>\" input",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.input",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.labels": {
+                "name": "Labels",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/labels"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to structure forms using labels.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui",
+                "status": "beta",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<input type=\"text\" class=\".s-input.s-input--underline\" placeholder=\"Hello world\" />"
+                        "code": "<!-- inline style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">inline style</h3>\n  <label class=\"s-mb:30 s-label\">\n    Direct Mobility Director Courtney Heaney\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n</div>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
@@ -542,201 +562,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel": {
                 "name": "s-label",
                 "type": "CssClass",
-                "description": "This class represent a(n) \"<s-color=\"accent\">default</s-color>\" label",
+                "description": "This class represent a(n) \"<s-color=\"accent\">inline</s-color>\" label",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-label\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:main": {
-                "name": "s-label:main",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:main\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:ui": {
-                "name": "s-label:ui",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:ui\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:accent": {
-                "name": "s-label:accent",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:accent\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:complementary": {
-                "name": "s-label:complementary",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:complementary\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:success": {
-                "name": "s-label:success",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:success\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:warning": {
-                "name": "s-label:warning",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:warning\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:error": {
-                "name": "s-label:error",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:error\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:info": {
-                "name": "s-label:info",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:info\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sLabel:extension": {
-                "name": "s-label:extension",
-                "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any label",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label:extension\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label class=\"s-label\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -771,7 +602,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- ul style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ul style</h3>\n  <ul class=\"s-list:ul \">\n    <li>Lead Intranet Director Dr. Rafael Cummings</li>\n    <li>Direct Quality Supervisor Martha Graham</li>\n    <li>Chief Solutions Designer Alexander Mohr</li>\n  </ul>\n</div>\n\n<!-- ol style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ol style</h3>\n  <ul class=\"s-list:ol s-ui:accent s-scale:15\">\n    <li>Product Accounts Officer Cassandra Lockman</li>\n    <li>Chief Division Developer Shari Daugherty</li>\n    <li>National Group Producer Ms. Glenn Towne</li>\n  </ul>\n</div>\n\n<!-- icon style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">icon style</h3>\n  <ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Product Applications Supervisor Molly Sauer</li>\n    <li><i class=\"s-icon:heart s-ui:accent\"></i>Lead Security Coordinator Peter Cruickshank</li>\n    <li><i class=\"s-icon:fire s-ui:error\"></i>Dynamic Accounts Associate Robert Collier</li>\n  </ul>\n</div>\n\n\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Colors</h3>\n  <ul class=\"s-list s-ui:accent\">\n    <li>National Group Officer Clayton Mayer</li>\n    <li class=\"s-ui:complementary\">Principal Brand Officer Charlie Cronin</li>\n    <li class=\"s-ui:error\">Dynamic Optimization Director Jonathon Goldner</li>\n  </ul>\n</div>"
+                        "code": "<!-- ul style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ul style</h3>\n  <ul class=\"s-list:ul \">\n    <li>International Infrastructure Representative Rudolph Kreiger</li>\n    <li>Central Research Representative Kendra Schaefer</li>\n    <li>Dynamic Integration Executive Miss Angel Hamill</li>\n  </ul>\n</div>\n\n<!-- ol style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ol style</h3>\n  <ul class=\"s-list:ol s-ui:accent s-scale:15\">\n    <li>Global Accounts Manager Faith Beatty</li>\n    <li>Dynamic Paradigm Engineer Mrs. John Dickens</li>\n    <li>Regional Division Liaison Catherine Lowe</li>\n  </ul>\n</div>\n\n<!-- icon style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">icon style</h3>\n  <ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Legacy Paradigm Specialist Kristin Becker</li>\n    <li><i class=\"s-icon:heart s-ui:accent\"></i>Dynamic Functionality Supervisor Cristina Labadie</li>\n    <li><i class=\"s-icon:fire s-ui:error\"></i>Corporate Metrics Specialist Barry O'Kon</li>\n  </ul>\n</div>\n\n\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Colors</h3>\n  <ul class=\"s-list s-ui:accent\">\n    <li>Human Branding Strategist Chris Thompson</li>\n    <li class=\"s-ui:complementary\">Legacy Response Assistant Wilbur Ernser</li>\n    <li class=\"s-ui:error\">International Applications Manager Shirley Lesch</li>\n  </ul>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -889,10 +720,45 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tabs": {
+                "name": "Tabs",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/tabs"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to style list (or any others) HTMLElement as tabs",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <ul class=\"s-tabs s-ui:accent\">\n    <li tabindex=\"0\">Dr. Tracey Brekke</li>\n    <li tabindex=\"0\" active>Gerardo Hartmann</li>\n    <li tabindex=\"0\">Bernice Powlowski</li>\n  </ul>\n</div>\n\n\n<!-- grow -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Grow</h3>\n  <ul class=\"s-tabs:grow\">\n    <li tabindex=\"0\" active>Roxanne Thompson</li>\n    <li tabindex=\"0\">Mr. Curtis Ruecker</li>\n    <li tabindex=\"0\">Evelyn Reilly</li>\n  </ul>\n</div>\n\n<!-- rtl -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">RTL</h3>\n  <ul class=\"s-tabs\">\n    <li class=\"s-ui:accent\" tabindex=\"0\" active>Hugh Hagenes</li>\n    <li class=\"s-ui:complementary\" tabindex=\"0\">Ana Hoppe</li>\n    <li tabindex=\"0\">Boyd Powlowski</li>\n  </ul>\n</div>\n\n<!-- vertical -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Vertical</h3>\n  <ul class=\"s-tabs:vertical s-ui:complementary\">\n    <li tabindex=\"0\" active>Mr. Joanne Breitenberg</li>\n    <li tabindex=\"0\">Terri Bergnaum V</li>\n    <li tabindex=\"0\">Darryl Abshire</li>\n  </ul>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.tabs.sTabs": {
                 "name": "s-tabs",
                 "type": "CssClass",
-                "description": "This class represent a \"<yellow>default</yellow>\" tabs",
+                "description": "This class represent a \"<yellow>solid</yellow>\" tabs",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tabs",
                 "example": [
                     {
@@ -913,21 +779,6 @@
                     {
                         "language": "html",
                         "code": "<div class=\"s-tabs--grow\">\n   <div class=\"active\">An active tab</div>\n   <div>A tab</div>\n</div>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tabs.sTabs-Gradient": {
-                "name": "s-tabs--gradient",
-                "type": "CssClass",
-                "description": "This class represent a \"<yellow>gradient</yellow>\" tabs",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tabs",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<div class=\"s-tabs--gradient\">\n   <div class=\"active\">An active tab</div>\n   <div>A tab</div>\n</div>"
                     }
                 ],
                 "filename": "index.css",
@@ -1195,7 +1046,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:40 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch s-ui:complementary\" />\n  </label>\n  <label class=\"s-mb:30\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch s-ui:error\" />\n  </label>\n</div>\n\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <label class=\"s-mb:30 s-scale:05\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-scale:10\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-scale:15\">\n    Check that switch!\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <label class=\"s-mb:30 s-label\">\n    Investor Assurance Supervisor Clarence Grady\n    <input type=\"checkbox\" checked class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Dynamic Paradigm Officer Arturo Shields\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Principal Group Technician Ms. Andres Ruecker\n    <input type=\"checkbox\"  class=\"s-switch s-ui:complementary\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Regional Communications Specialist Gladys Stamm\n    <input type=\"checkbox\"  class=\"s-switch s-ui:error\" />\n  </label>\n</div>\n\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <label class=\"s-mb:30 s-label s-scale:05\">\n    Customer Group Coordinator Hugh McCullough\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:10\">\n    Human Paradigm Planner Peggy Jenkins\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:15\">\n    Lead Tactics Director Edgar Schiller\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:accent\" />\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1481,6 +1332,41 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltips": {
+                "name": "Tooltips",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/tooltips"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you display nice tooltips on any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-font:30 s-mb:50\">\n  <span class=\"s-tooltip-container:active\">\n      <a class=\"s-btn s-mr:20\">Hello</a>\n      <div class=\"s-tooltip:right s-ui:accent\">\n          Dynamic Web Specialist Karla Hammes\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Positions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip\">\n          Principal Assurance Director Patty Mayer\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip:right s-ui:accent\">\n          Central Accounts Developer Dr. Derek Schamberger\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip:bottom s-ui:complementary\">\n          Future Optimization Specialist Willie Hartmann\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip:left s-ui:error\">\n          Senior Assurance Engineer Mrs. Shawn Jacobi\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Colors</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:accent\">\n          Customer Assurance Strategist Kurt Watsica\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:complementary\">\n          Internal Functionality Specialist Frank Schumm\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:error\">\n          Dynamic Program Specialist Simon Kunde\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:info\">\n          Internal Metrics Officer Ronald Weissnat\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Interactions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">I'm not interactive</a>\n      <div class=\"s-tooltip\">\n          <a class=\"s-btn s-ui:accent\">Click me if you can!</a>\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">I'm interactive</a>\n      <div class=\"s-tooltip:interactive\">\n          <a class=\"s-btn s-ui:accent\">Click me because you can!</a>\n      </div>\n  </span>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sToolipContainer": {
                 "name": "s-toolip-container",
                 "type": "CssClass",
@@ -1502,6 +1388,27 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sToolipContainer:active": {
+                "name": "s-toolip-container:active",
+                "type": "CssClass",
+                "description": "This class allows you to display a tooltip inside a tooltip container without needing hover by the user",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-tooltip-container:active\">\n  <img src=\"...\" />\n  <div class=\"s-tooltip\">Something cool</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip": {
                 "name": "s-tooltip",
                 "type": "CssClass",
@@ -1510,7 +1417,28 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip\">Something cool</div>\n</a>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Interactive": {
+                "name": "s-tooltip--interactive",
+                "type": "CssClass",
+                "description": "This class make a tooltip interactive. This mean that the user can hover the tooltip,\nselect texts in it, click on buttons, etc...",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:interactive\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1531,49 +1459,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-TopLeft": {
-                "name": "s-tooltip--top-left",
-                "type": "CssClass",
-                "description": "This class represent a simple top-left tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-TopRight": {
-                "name": "s-tooltip--top-right",
-                "type": "CssClass",
-                "description": "This class represent a simple top-right tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1594,133 +1480,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightCenterTop": {
-                "name": "s-tooltip--right-center-top",
-                "type": "CssClass",
-                "description": "This class represent a right tooltip centered and aligned top",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-center-top\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightTop": {
-                "name": "s-tooltip--right-top",
-                "type": "CssClass",
-                "description": "This class represent a simple right-top tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightTopTop": {
-                "name": "s-tooltip--right-top-top",
-                "type": "CssClass",
-                "description": "This class represent a right tooltip top and aligned top",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-top-top\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightBottomTop": {
-                "name": "s-tooltip--right-bottom-top",
-                "type": "CssClass",
-                "description": "This class represent a right tooltip bottom and aligned top",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-bottom-top\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightBottom": {
-                "name": "s-tooltip--right-bottom",
-                "type": "CssClass",
-                "description": "This class represent a simple right-bottom tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-RightBottomBottom": {
-                "name": "s-tooltip--right-bottom-bottom",
-                "type": "CssClass",
-                "description": "This class represent a right tooltip bottom and aligned bottom",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:right-bottom-bottom\">Something cool</div>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:right\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1741,133 +1501,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftCenterTop": {
-                "name": "s-tooltip--left-center-top",
-                "type": "CssClass",
-                "description": "This class represent a left tooltip centered and aligned top",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-center-top\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftTop": {
-                "name": "s-tooltip--left-top",
-                "type": "CssClass",
-                "description": "This class represent a simple left-top tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftTopTop": {
-                "name": "s-tooltip--left-top-top",
-                "type": "CssClass",
-                "description": "This class represent a left tooltip top and aligned top",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-top-top\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftBottomTop": {
-                "name": "s-tooltip--left-bottom-top",
-                "type": "CssClass",
-                "description": "This class represent a left tooltip bottom and aligned top",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-bottom-top\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftBottomBottom": {
-                "name": "s-tooltip--left-bottom-bottom",
-                "type": "CssClass",
-                "description": "This class represent a left tooltip bottom and aligned bottom",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip:left-bottom-bottom\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-LeftBottom": {
-                "name": "s-tooltip--left-bottom",
-                "type": "CssClass",
-                "description": "This class represent a simple left-bottom tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:left\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1888,70 +1522,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-BottomLeft": {
-                "name": "s-tooltip--bottom-left",
-                "type": "CssClass",
-                "description": "This class represent a simple bottom-left tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-BottomRight": {
-                "name": "s-tooltip--bottom-right",
-                "type": "CssClass",
-                "description": "This class represent a simple bottom-right tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Nowrap": {
-                "name": "s-tooltip--nowrap",
-                "type": "w CssClass",
-                "description": "This class represent a simple tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container\">I'm a cool button</a>\n<div class=\"s-tooltip\">Something cool</div>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -18719,7 +18290,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Human Functionality Planner Mrs. Alberta Littel</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">Senior Factors Consultant Mrs. Allen Schmidt</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Future Intranet Representative Alyssa Farrell</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Direct Applications Facilitator Nicolas Gorczany</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Forward Security Orchestrator Miss Lila Bashirian</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">Chief Directives Associate Miss Sherman Larkin</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Lead Paradigm Agent Caleb Nitzsche</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Chief Solutions Representative Vivian Tromp</h1>"
                     },
                     {
                         "language": "css",
@@ -18870,7 +18441,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-mb:30\">Legacy Optimization Specialist Vanessa Leuschke Sr.</h1>\n<span class=\"s-color:accent s-font:30\">5</span><br /><br /><h1 class=\"s-font:5 s-mb:30\">District Program Assistant Boyd Berge</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-mb:30\">Future Configuration Engineer Ashley Brown</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-mb:30\">Human Security Liaison Rachel Rempel</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-mb:30\">Dynamic Web Agent Sammy Luettgen</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-mb:30\">Legacy Creative Associate Kent Stoltenberg</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-mb:30\">Dynamic Brand Director Jeffrey Hintz II</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-mb:30\">International Factors Planner Ms. Christie Klocko</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-mb:30\">Product Metrics Engineer Ms. Stephanie Robel</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-mb:30\">Lead Mobility Agent Wilbert Becker</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-mb:30\">Chief Mobility Associate Miss Everett Grady</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-mb:30\">Investor Operations Liaison Scott Bednar</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-mb:30\">Customer Web Representative Daniel Morissette Jr.</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-mb:30\">Regional Infrastructure Manager Kellie Howe</h1>\n<span class=\"s-color:accent s-font:30\">5</span><br /><br /><h1 class=\"s-font:5 s-mb:30\">Customer Group Associate Candace Parisian</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-mb:30\">Regional Division Coordinator Ron Kub I</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-mb:30\">Regional Response Strategist Irma Pollich</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-mb:30\">Senior Metrics Executive Mrs. Floyd Halvorson</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-mb:30\">Investor Branding Technician Paulette Mann</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-mb:30\">Regional Functionality Representative Todd Breitenberg</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-mb:30\">Senior Markets Producer Roxanne Gerlach</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-mb:30\">International Infrastructure Designer Luther Abernathy PhD</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-mb:30\">International Marketing Orchestrator Lola Sanford</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-mb:30\">Internal Usability Director Norman Nolan</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-mb:30\">Lead Intranet Administrator Rosemarie Kilback</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-mb:30\">Senior Mobility Agent Anna Bernhard</h1>"
                     },
                     {
                         "language": "css",
@@ -19173,7 +18744,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Senior Paradigm Strategist <span class=\"s-font:reset-size\">Mike Haley</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Future Division Representative <span class=\"s-font:reset-family\">Phyllis Barrows</span>\n</div>"
+                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Regional Identity Administrator <span class=\"s-font:reset-size\">Jeffrey Armstrong</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  District Division Producer <span class=\"s-font:reset-family\">Rebecca Stoltenberg</span>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -30198,6 +29769,116 @@
                     {
                         "language": "html",
                         "code": "<i class=\"s-icon:todo s-font:20\"></i>\n<i class=\"s-icon:todo s-font:40\"></i>\n<i class=\"s-icon:todo s-font:60\"></i>\n<i class=\"s-icon:todo s-font:80\"></i>\n<i class=\"s-icon:todo s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:supportRtl": {
+                "name": "s-icon:support-rtl",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>support-rtl</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:support-rtl s-font:20\"></i>\n<i class=\"s-icon:support-rtl s-font:40\"></i>\n<i class=\"s-icon:support-rtl s-font:60\"></i>\n<i class=\"s-icon:support-rtl s-font:80\"></i>\n<i class=\"s-icon:support-rtl s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:supportEdge": {
+                "name": "s-icon:support-edge",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>support-edge</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:support-edge s-font:20\"></i>\n<i class=\"s-icon:support-edge s-font:40\"></i>\n<i class=\"s-icon:support-edge s-font:60\"></i>\n<i class=\"s-icon:support-edge s-font:80\"></i>\n<i class=\"s-icon:support-edge s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:supportChromium": {
+                "name": "s-icon:support-chromium",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>support-chromium</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:support-chromium s-font:20\"></i>\n<i class=\"s-icon:support-chromium s-font:40\"></i>\n<i class=\"s-icon:support-chromium s-font:60\"></i>\n<i class=\"s-icon:support-chromium s-font:80\"></i>\n<i class=\"s-icon:support-chromium s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:supportFirefox": {
+                "name": "s-icon:support-firefox",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>support-firefox</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:support-firefox s-font:20\"></i>\n<i class=\"s-icon:support-firefox s-font:40\"></i>\n<i class=\"s-icon:support-firefox s-font:60\"></i>\n<i class=\"s-icon:support-firefox s-font:80\"></i>\n<i class=\"s-icon:support-firefox s-font:100\"></i>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.icon.sIcon:supportSafari": {
+                "name": "s-icon:support-safari",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to display the \"<yellow>support-safari</yellow>\" icon using the \"<cyan>i</cyan>\" tag like bellow",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<i class=\"s-icon:support-safari s-font:20\"></i>\n<i class=\"s-icon:support-safari s-font:40\"></i>\n<i class=\"s-icon:support-safari s-font:60\"></i>\n<i class=\"s-icon:support-safari s-font:80\"></i>\n<i class=\"s-icon:support-safari s-font:100\"></i>"
                     }
                 ],
                 "filename": "index.css",

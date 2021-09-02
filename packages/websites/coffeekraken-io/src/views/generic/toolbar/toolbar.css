@@ -6,6 +6,9 @@
     padding-inline: 0;
     padding-block: sugar.scalable(sugar.padding(20));
 
+    .s-icon {
+        font-size: 0.8em;
+    }
     [class*='s-platform-'] {
         font-size: 1em;
     }

@@ -53,9 +53,14 @@ export default function ({
         vars.push(`
       display: inline-block;
       cursor: pointer;
+      white-space: nowrap;
 
       & > * {
         pointer-events: none;
+      }
+      & > i,
+      & > .s-icon {
+        font-size: 1em;
       }
     `);
     }

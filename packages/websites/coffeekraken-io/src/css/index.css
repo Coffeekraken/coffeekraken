@@ -53,6 +53,11 @@ a:active {
   fab:vuejs:vuejs
   fa:tasks:tasks
   fa:hammer:todo
+  fs:src/icons/read-direction.svg:support-rtl
+  fs:src/icons/edge.svg:support-edge
+  fs:src/icons/chrome.svg:support-chromium
+  fs:src/icons/firefox.svg:support-firefox
+  fs:src/icons/safari.svg:support-safari
   fs:src/icons/vuejs.svg:vue
 );
 

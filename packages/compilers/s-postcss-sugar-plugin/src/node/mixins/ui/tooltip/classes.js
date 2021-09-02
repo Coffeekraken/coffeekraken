@@ -1,11 +1,118 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __faker from 'faker';
 class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
 }
 postcssSugarPluginUiTooltipClassesInterface.definition = {};
 export { postcssSugarPluginUiTooltipClassesInterface as interface };
-export default function ({ params, atRule, replaceWith }) {
+export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
+    vars.push(`
+      /**
+        * @name          Tooltips
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/tooltips
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you display nice tooltips on any HTMLElement
+        * 
+        * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
+        * @cssClass             s-tooltip-container\:active     Allow to display a tooltip without having the need of the user interaction
+        * @cssClass             s-tooltip                       Apply on the element you want as a tooltip
+        * @cssClass             s-tooltip\:top                  Align your tooltip on top
+        * @cssClass             s-tooltip\:right               Align your tooltip at right
+        * @cssClass             s-tooltip\:left               Align your tooltip at left
+        * @cssClass             s-tooltip\:bottom               Align your tooltip at bottom
+        * @cssClass             s-tooltip\:interactive          Allow the user to interact with the tooltip
+        * 
+        * @example        html
+        * <div class="s-font\:30 s-mb\:50">
+        *   <span class="s-tooltip-container\:active">
+        *       <a class="s-btn s-mr\:20">Hello</a>
+        *       <div class="s-tooltip\:right s-ui\:accent">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * <div class="s-font\:30 s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Positions</h3>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip\:right s-ui\:accent">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip\:bottom s-ui\:complementary">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip\:left s-ui\:error">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * <div class="s-font\:30 s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Colors</h3>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui\:accent">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui\:complementary">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui\:error">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui\:info">
+        *           ${__faker.name.title()} ${__faker.name.findName()}
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * <div class="s-font\:30 s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Interactions</h3>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">I'm not interactive</a>
+        *       <div class="s-tooltip">
+        *           <a class="s-btn s-ui\:accent">Click me if you can!</a>
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr\:20">I'm interactive</a>
+        *       <div class="s-tooltip\:interactive">
+        *           <a class="s-btn s-ui\:accent">Click me because you can!</a>
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
     vars.push(`/**
         * @name           s-toolip-container
         * @namespace      sugar.css.ui.tooltip
@@ -30,7 +137,6 @@ export default function ({ params, atRule, replaceWith }) {
 
             & > .s-tooltip {
                 opacity: 0;
-                pointer-events: none;
             }
 
             &:focus > .s-tooltip,
@@ -38,10 +144,33 @@ export default function ({ params, atRule, replaceWith }) {
             .s-tooltip:focus,
             &:hover > .s-tooltip {
                 opacity: 1;
-                pointer-events: all;
             }
         }
     `);
+    vars.push(`/**
+        * @name           s-toolip-container:active
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class allows you to display a tooltip inside a tooltip container without needing hover by the user
+        * 
+        * @example        html
+        * <div class="s-tooltip-container\:active">
+        *   <img src="..." />
+        *   <div class="s-tooltip">Something cool</div>
+        * </div>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    // no need to write a class here cause this is handled in the tooltip.ts file directly...
+    // vars.push(`
+    //     .s-tooltip-container--active {
+    //         & > .s-tooltip {
+    //             opacity: 1;
+    //         }
+    //     }
+    // `);
     vars.push(`/**
         * @name           s-tooltip
         * @namespace      sugar.css.ui.tooltip
@@ -50,8 +179,10 @@ export default function ({ params, atRule, replaceWith }) {
         * This class represent a simple tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -59,6 +190,29 @@ export default function ({ params, atRule, replaceWith }) {
     vars.push(`
         .s-tooltip {
             @sugar.ui.tooltip();
+        }
+    `);
+    // Interactive
+    vars.push(`/**
+        * @name           s-tooltip--interactive
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class make a tooltip interactive. This mean that the user can hover the tooltip,
+        * select texts in it, click on buttons, etc...
+        * 
+        * @example        html
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip\:interactive">Something cool</div>
+        * </a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    vars.push(`
+        .s-tooltip--interactive {
+            @sugar.ui.tooltip($interactive: true, $scope: 'interactive');
         }
     `);
     // TOP
@@ -70,8 +224,10 @@ export default function ({ params, atRule, replaceWith }) {
         * This class represent a simple top tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -81,44 +237,44 @@ export default function ({ params, atRule, replaceWith }) {
             @sugar.ui.tooltip($position: top, $scope: 'position');
         }
     `);
-    vars.push(`/**
-        * @name           s-tooltip--top-left
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple top-left tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--top-left {
-            @sugar.ui.tooltip($position: top-left, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--top-right
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple top-right tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--top-right {
-            @sugar.ui.tooltip($position: top-right, $scope: 'position');
-        }
-    `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--top-left
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a simple top-left tooltip
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--top-left {
+    //         @sugar.ui.tooltip($position: top-left, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--top-right
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a simple top-right tooltip
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--top-right {
+    //         @sugar.ui.tooltip($position: top-right, $scope: 'position');
+    //     }
+    // `);
     // RIGHT
     vars.push(`/**
         * @name           s-tooltip--right
@@ -128,8 +284,10 @@ export default function ({ params, atRule, replaceWith }) {
         * This class represent a simple right tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:right">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip\:right">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -139,399 +297,36 @@ export default function ({ params, atRule, replaceWith }) {
             @sugar.ui.tooltip($position: right, $scope: 'position');
         }
     `);
-    vars.push(`/**
-        * @name           s-tooltip--right-center-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip centered and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:right-center-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--right-center-top {
-            @sugar.ui.tooltip($position: right-center-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--right-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple right-top tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--right-top {
-            @sugar.ui.tooltip($position: right-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--right-top-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip top and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:right-top-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--right-top-top {
-            @sugar.ui.tooltip($position: right-top-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--right-bottom-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip bottom and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:right-bottom-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--right-bottom-top {
-            @sugar.ui.tooltip($position: right-bottom-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--right-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple right-bottom tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--right-bottom {
-            @sugar.ui.tooltip($position: right-bottom, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--right-bottom-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip bottom and aligned bottom
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:right-bottom-bottom">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--right-bottom-bottom {
-            @sugar.ui.tooltip($position: right-bottom-bottom, $scope: 'position');
-        }
-    `);
-    // left
-    vars.push(`/**
-        * @name           s-tooltip--left
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:left">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left {
-            @sugar.ui.tooltip($position: left, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-center-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip centered and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:left-center-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-center-top {
-            @sugar.ui.tooltip($position: left-center-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left-top tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-top {
-            @sugar.ui.tooltip($position: left-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-top-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip top and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:left-top-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-top-top {
-            @sugar.ui.tooltip($position: left-top-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-bottom-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip bottom and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:left-bottom-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-bottom-top {
-            @sugar.ui.tooltip($position: left-bottom-top, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-bottom-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip bottom and aligned bottom
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip\:left-bottom-bottom">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-bottom-bottom {
-            @sugar.ui.tooltip($position: left-bottom-bottom, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--left-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left-bottom tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--left-bottom {
-            @sugar.ui.tooltip($position: left-bottom, $scope: 'position');
-        }
-    `);
-    // BOTTOM
-    vars.push(`/**
-        * @name           s-tooltip--bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple bottom tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--bottom {
-            @sugar.ui.tooltip($position: bottom, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--bottom-left
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple bottom-left tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--bottom-left {
-            @sugar.ui.tooltip($position: bottom-left, $scope: 'position');
-        }
-    `);
-    vars.push(`/**
-        * @name           s-tooltip--bottom-right
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple bottom-right tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip--bottom-right {
-            @sugar.ui.tooltip($position: bottom-right, $scope: 'position');
-        }
-    `);
     // vars.push(`/**
-    //     * @name           s-tooltip--left
+    //     * @name           s-tooltip--right-center-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
-    //     * 
-    //     * This class represent a simple left tooltip
-    //     * 
+    //     *
+    //     * This class represent a right tooltip centered and aligned top
+    //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:left">Something cool</div>
-    //     * 
+    //     * <div class="s-tooltip\:right-center-top">Something cool</div>
+    //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
     // vars.push(`
-    //     .s-tooltip--left {
-    //         @sugar.ui.tooltip($position: left, $scope: 'position');
-    //     }
-    // `);
-    // vars.push(`/**
-    //     * @name           s-tooltip--left-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     * 
-    //     * This class represent a simple left-top tooltip
-    //     * 
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:left-top">Something cool</div>
-    //     * 
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.push(`
-    //     .s-tooltip--left-top {
-    //         @sugar.ui.tooltip($position: left-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.push(`/**
-    //     * @name           s-tooltip--left-bottom
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     * 
-    //     * This class represent a simple left-bottom tooltip
-    //     * 
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:left-bottom">Something cool</div>
-    //     * 
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.push(`
-    //     .s-tooltip--left-bottom {
-    //         @sugar.ui.tooltip($position: left-bottom, $scope: 'position');
-    //     }
-    // `);
-    // vars.push(`/**
-    //     * @name           s-tooltip--right
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     * 
-    //     * This class represent a simple right tooltip
-    //     * 
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:right">Something cool</div>
-    //     * 
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.push(`
-    //     .s-tooltip--right {
-    //         @sugar.ui.tooltip($position: right, $scope: 'position');
+    //     .s-tooltip--right-center-top {
+    //         @sugar.ui.tooltip($position: right-center-top, $scope: 'position');
     //     }
     // `);
     // vars.push(`/**
     //     * @name           s-tooltip--right-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
-    //     * 
+    //     *
     //     * This class represent a simple right-top tooltip
-    //     * 
+    //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:right-top">Something cool</div>
-    //     * 
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
@@ -541,16 +336,54 @@ export default function ({ params, atRule, replaceWith }) {
     //     }
     // `);
     // vars.push(`/**
+    //     * @name           s-tooltip--right-top-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a right tooltip top and aligned top
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip\:right-top-top">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--right-top-top {
+    //         @sugar.ui.tooltip($position: right-top-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--right-bottom-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a right tooltip bottom and aligned top
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip\:right-bottom-top">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--right-bottom-top {
+    //         @sugar.ui.tooltip($position: right-bottom-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
     //     * @name           s-tooltip--right-bottom
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
-    //     * 
+    //     *
     //     * This class represent a simple right-bottom tooltip
-    //     * 
+    //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:right-bottom">Something cool</div>
-    //     * 
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
@@ -559,26 +392,221 @@ export default function ({ params, atRule, replaceWith }) {
     //         @sugar.ui.tooltip($position: right-bottom, $scope: 'position');
     //     }
     // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--right-bottom-bottom
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a right tooltip bottom and aligned bottom
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip\:right-bottom-bottom">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--right-bottom-bottom {
+    //         @sugar.ui.tooltip($position: right-bottom-bottom, $scope: 'position');
+    //     }
+    // `);
+    // left
     vars.push(`/**
-        * @name           s-tooltip--nowrap
+        * @name           s-tooltip--left
         * @namespace      sugar.css.ui.tooltip
-        * @type          w CssClass
+        * @type           CssClass
         * 
-        * This class represent a simple tooltip
+        * This class represent a simple left tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip\:left">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--nowrap {
-            white-space: nowrap;
-            max-width: 9999999px !important;
+        .s-tooltip--left {
+            @sugar.ui.tooltip($position: left, $scope: 'position');
         }
     `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-center-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a left tooltip centered and aligned top
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip\:left-center-top">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-center-top {
+    //         @sugar.ui.tooltip($position: left-center-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a simple left-top tooltip
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-top {
+    //         @sugar.ui.tooltip($position: left-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-top-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a left tooltip top and aligned top
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip\:left-top-top">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-top-top {
+    //         @sugar.ui.tooltip($position: left-top-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-bottom-top
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a left tooltip bottom and aligned top
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip\:left-bottom-top">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-bottom-top {
+    //         @sugar.ui.tooltip($position: left-bottom-top, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-bottom-bottom
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a left tooltip bottom and aligned bottom
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip\:left-bottom-bottom">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-bottom-bottom {
+    //         @sugar.ui.tooltip($position: left-bottom-bottom, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--left-bottom
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a simple left-bottom tooltip
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--left-bottom {
+    //         @sugar.ui.tooltip($position: left-bottom, $scope: 'position');
+    //     }
+    // `);
+    // BOTTOM
+    vars.push(`/**
+        * @name           s-tooltip--bottom
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class represent a simple bottom tooltip
+        * 
+        * @example        html
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip">Something cool</div>
+        * </a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+    vars.push(`
+        .s-tooltip--bottom {
+            @sugar.ui.tooltip($position: bottom, $scope: 'position');
+        }
+    `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--bottom-left
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a simple bottom-left tooltip
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--bottom-left {
+    //         @sugar.ui.tooltip($position: bottom-left, $scope: 'position');
+    //     }
+    // `);
+    // vars.push(`/**
+    //     * @name           s-tooltip--bottom-right
+    //     * @namespace      sugar.css.ui.tooltip
+    //     * @type           CssClass
+    //     *
+    //     * This class represent a simple bottom-right tooltip
+    //     *
+    //     * @example        html
+    //     * <a class="s-tooltip-container">I'm a cool button</a>
+    //     * <div class="s-tooltip">Something cool</div>
+    //     *
+    //     * @since    2.0.0
+    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //     */`);
+    // vars.push(`
+    //     .s-tooltip--bottom-right {
+    //         @sugar.ui.tooltip($position: bottom-right, $scope: 'position');
+    //     }
+    // `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsTUFBTSwyQ0FBNEMsU0FBUSxZQUFZOztBQUM3RCxzREFBVSxHQUFHLEVBQ25CLENBQUM7QUFLSixPQUFPLEVBQUUsMkNBQTJDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFcEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxxQkFDWixNQUFNLENBQ1YsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O1dBZ0JELENBQUMsQ0FBQztJQUNULElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQWtCVCxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O1dBYUgsQ0FBQyxDQUFDO0lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILE1BQU07SUFDTixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O1dBYUgsQ0FBQyxDQUFDO0lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUNILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7V0FhSCxDQUFDLENBQUM7SUFDVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O0tBSVQsQ0FBQyxDQUFDO0lBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7OztXQWFILENBQUMsQ0FBQztJQUNULElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFFSCxRQUFRO0lBQ1IsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7OztXQWFILENBQUMsQ0FBQztJQUNULElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O1dBYUgsQ0FBQyxDQUFDO0lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUNILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7V0FhSCxDQUFDLENBQUM7SUFDVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O0tBSVQsQ0FBQyxDQUFDO0lBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7OztXQWFILENBQUMsQ0FBQztJQUNULElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O1dBYUgsQ0FBQyxDQUFDO0lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUNILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7V0FhSCxDQUFDLENBQUM7SUFDVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O0tBSVQsQ0FBQyxDQUFDO0lBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7OztXQWFILENBQUMsQ0FBQztJQUNULElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFFSCxPQUFPO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7OztXQWFILENBQUMsQ0FBQztJQUNULElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O1dBYUgsQ0FBQyxDQUFDO0lBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUNILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7V0FhSCxDQUFDLENBQUM7SUFDVCxJQUFJLENB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0sMkNBQTRDLFNBQVEsWUFBWTs7QUFDM0Qsc0RBQVUsR0FBRyxFQUFFLENBQUM7QUFLM0IsT0FBTyxFQUFFLDJDQUEyQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXBFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztzQkF5QlEsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OztzQkFVL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7O3NCQU0vQyxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7c0JBTS9DLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7OztzQkFNL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OztzQkFVL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFB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

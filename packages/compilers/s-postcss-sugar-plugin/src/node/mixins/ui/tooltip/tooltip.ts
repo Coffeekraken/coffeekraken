@@ -31,10 +31,18 @@ class postcssSugarPluginUiTooltipInterface extends __SInterface {
             ],
             default: 'top',
         },
+        interactive: {
+            type: 'Boolean',
+            default: false,
+        },
+        nowrap: {
+            type: 'Boolean',
+            default: false,
+        },
         scope: {
             type: 'Array<String>',
-            values: ['bare', 'lnf', 'position'],
-            default: ['bare', 'lnf', 'position'],
+            values: ['bare', 'lnf', 'position', 'interactive', 'nowrap'],
+            default: ['bare', 'lnf', 'position', 'interactive', 'nowrap'],
         },
     };
 }
@@ -61,6 +69,8 @@ export interface IPostcssSugarPluginUiTooltipParams {
         | 'right-bottom-top'
         | 'right-center-top'
         | 'right-top-top';
+    interactive: Boolean;
+    nowrap: boolean;
     scope: string[];
 }
 
@@ -76,7 +86,9 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipParams = {
         position: 'top',
-        scope: ['bare', 'lnf', 'position'],
+        interactive: false,
+        nowrap: false,
+        scope: ['bare', 'lnf', 'position', 'interactive', 'nowrap'],
         ...params,
     };
 
@@ -87,26 +99,48 @@ export default function ({
           position: absolute;
           z-index: 500;
           display: block;
-          max-width: sugar.theme(ui.tooltip.maxWidth);
           text-align: center;
+          white-space: nowrap;
+          max-width: 9999999px !important;
+          pointer-events: none;
       `);
+    }
+
+    vars.push(`
+        .s-tooltip-container--active > & {
+            opacity: 1;
+        }
+    `);
+
+    if (finalParams.scope.indexOf('interactive') !== -1) {
+        if (finalParams.interactive) {
+            vars.push(`
+                .s-tooltip-container--active > &,
+                .s-tooltip-container:focus > &,
+                .s-tooltip-container:focus-within > &,
+                .s-tooltip-container &:focus,
+                .s-tooltip-container:hover > & {
+                    pointer-events: all;
+                }
+            `);
+        }
     }
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          background-color: sugar.color(ui, surface);
-          color: sugar.color(ui, surfaceForeground);
+          background-color: sugar.color(ui);
+          color: sugar.color(ui, foreground);
           border-radius: sugar.theme(ui.tooltip.borderRadius);
           transition: sugar.theme(ui.tooltip.transition);
           padding-inline: sugar.scalable(sugar.theme(ui.tooltip.paddingInline));
-            padding-block: sugar.scalable(sugar.theme(ui.tooltip.paddingBlock));
+          padding-block: sugar.scalable(sugar.theme(ui.tooltip.paddingBlock));
           @sugar.depth( sugar.theme(ui.tooltip.depth) );
 
           &:after {
               content: " ";
               position: absolute;
               border-style: solid;
-              border-color: sugar.color(ui, surface) transparent transparent transparent;
+              border-color: sugar.color(ui) transparent transparent transparent;
           }
           &:before {
             content: '';

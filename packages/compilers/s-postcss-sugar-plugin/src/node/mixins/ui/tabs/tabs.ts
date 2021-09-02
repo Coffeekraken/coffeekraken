@@ -7,7 +7,7 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
-            values: ['default', 'gradient'],
+            values: ['solid'],
             default: __theme().config('ui.tabs.defaultStyle'),
         },
         grow: {
@@ -21,15 +21,15 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
         },
         scope: {
             type: 'Array<String>',
-            values: ['bare', 'lnf', 'grow', 'style', 'direction'],
-            default: ['bare', 'lnf', 'grow', 'style', 'direction'],
+            values: ['bare', 'lnf', 'grow', 'direction'],
+            default: ['bare', 'lnf', 'grow', 'direction'],
         },
     };
 }
 
 export interface IPostcssSugarPluginUiTabParams {
     grow: boolean;
-    style: 'default' | 'gradient';
+    style: 'solid';
     direction: 'horizontal' | 'vertical';
     scope: string[];
 }
@@ -49,7 +49,7 @@ export default function ({
         style: __theme().config('ui.tabs.defaultStyle'),
         grow: false,
         direction: 'horizontal',
-        scope: ['bare', 'lnf', 'grow', 'style', 'direction'],
+        scope: ['bare', 'lnf', 'grow', 'direction'],
         ...params,
     };
 
@@ -79,56 +79,74 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-      background-color: sugar.color(ui, surface);
-      border-radius: sugar.theme(ui.tabs.borderRadius);
-      box-shadow: sugar.theme(ui.tabs.depth);
-      overflow: hidden;
+          /** background-color: sugar.color(ui, surface); */
+          border-radius: sugar.theme(ui.tabs.borderRadius);
+          overflow: hidden;
+          user-select: none;
 
-        & > * {
-          text-align: center;
-          padding-inline: sugar.scalable(sugar.theme(ui.tabs.paddingInline));
-         padding-block: sugar.scalable(sugar.theme(ui.tabs.paddingBlock));
-          background-color: sugar.color(ui, surface);
-          color: sugar.color(ui, foreground);
-          transition: sugar.theme(ui.tabs.transition);
-          cursor: pointer;
-          display: block;      
+            & > * {
+              text-align: center;
+              padding-inline: sugar.scalable(sugar.theme(ui.tabs.paddingInline));
+              padding-block: sugar.scalable(sugar.theme(ui.tabs.paddingBlock));
+              transition: sugar.theme(ui.tabs.transition);
+              cursor: pointer;
+              display: block;      
+            }
+      `);
+        if (finalParams.direction !== 'vertical') {
+            vars.push(`
+          & > *:last-child:not([dir="rtl"] & > *) {
+            border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
+            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+          }
+          [dir="rtl"] & > *:last-child,
+          &[dir="rtl"] > *:last-child {
+            border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
+            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+          }
+        `);
         }
-    `);
     }
 
-    if (finalParams.style === 'default' && finalParams.scope.indexOf('style') !== -1) {
-        vars.push(`
-      & > dt,
-      & > li,
-      & > div {
-        @sugar.state.hover {
-          background-color: sugar.color(complementary);
-          color: sugar.color(complementary, foreground);
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        switch (finalParams.style) {
+            case 'solid':
+            default:
+                vars.push(`
+          & > dt,
+          & > li,
+          & > div {
+            @sugar.state.hover {
+              background-color: sugar.color(ui, --alpha 0.4);
+            }
+            @sugar.state.focus {
+              background-color: sugar.color(ui, --alpha 0.3);
+            }
+            @sugar.state.active {
+              background-color: sugar.color(ui);
+              color: sugar.color(ui, foreground);
+            }          
+          }
+        `);
+                break;
         }
-        @sugar.state.active {
-          background-color: sugar.color(accent);
-          color: sugar.color(accent, foreground);
-        }          
-      }
-    `);
     }
 
-    if (finalParams.style === 'gradient' && finalParams.scope.indexOf('style') !== -1) {
-        vars.push(`
-      & > dt,
-      & > li,
-      & > div,
-      & > * {
-        @sugar.state.hover {
-          @sugar.gradient($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg, $type: linear);
-        }
-        @sugar.state.active {
-          @sugar.gradient($start: sugar.color(accent, gradientStart), $end: sugar.color(accent, gradientEnd), $angle: 90deg, $type: linear);
-        }          
-      }
-    `);
-    }
+    // if (finalParams.style === 'gradient' && finalParams.scope.indexOf('style') !== -1) {
+    //     vars.push(`
+    //   & > dt,
+    //   & > li,
+    //   & > div,
+    //   & > * {
+    //     @sugar.state.hover {
+    //       @sugar.gradient($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg, $type: linear);
+    //     }
+    //     @sugar.state.active {
+    //       @sugar.gradient($start: sugar.color(ui, gradientStart), $end: sugar.color(ui, gradientEnd), $angle: 90deg, $type: linear);
+    //     }
+    //   }
+    // `);
+    // }
 
     if (finalParams.direction === 'vertical' && finalParams.scope.indexOf('direction') !== -1) {
         vars.push(`

@@ -4,76 +4,205 @@ import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiLabelInterface extends __SInterface {
-  static definition = {
-    style: {
-      type: 'String',
-      values: ['default'],
-      default: __theme().config('ui.label.defaultStyle')
-    },
-    scope: {
-      type: 'Array<String>',
-      values: ['bare','lnf','style'],
-      default: ['bare','lnf','style']
-    }
-  };
+    static definition = {
+        style: {
+            type: 'String',
+            values: ['inline', 'float'],
+            default: __theme().config('ui.label.defaultStyle'),
+        },
+        scope: {
+            type: 'Array<String>',
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiLabelParams {
-  style: 'default';
-  scope: string[];
+    style: 'inline' | 'float';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiLabelInterface as interface };
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiLabelParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiLabelParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiLabelParams = {
-    style: __theme().config('ui.label.defaultStyle'),
-    scope: ['bare','lnf','style'],
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiLabelParams = {
+        style: __theme().config('ui.label.defaultStyle'),
+        scope: ['bare', 'lnf'],
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  // lnf
-  if (finalParams.scope.indexOf('lnf') !== -1) {
-    vars.push(`
+    // bare
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
+          width: 100%;
+          cursor: pointer;
+          font-size: 1rem;
     `);
-  }
-
-  // bare
-  if (finalParams.scope.indexOf('bare') !== -1) {
-    vars.push(`
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      cursor: pointer;
-
-      & > * {
-        margin-inline-start: sugar.margin(20);
-      }
-    `);
-  }
-
-  // style
-  if (finalParams.scope.indexOf('style') !== -1) {
-
-    switch (finalParams.style) {
-      case 'default':
-      default:
-          vars.push(`
-            color: sugar.color(ui, text);
-            `);
-        break;
     }
-  }
 
-  replaceWith(vars);
+    // lnf
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
+    `);
+    }
+
+    // style
+    switch (finalParams.style) {
+        case 'float':
+            if (finalParams.scope.indexOf('bare') !== -1) {
+                vars.push(`
+                  display: block;
+                  line-height: 1;
+                  position: relative;
+
+                  --delta: 0.1em;
+
+                  & > *:not(input):not(textarea):not(select) {
+                    --top: sugar.theme(ui.form.paddingBlock);
+                    top: calc(var(--top) + 0.6em + var(--delta));
+                    --left: sugar.theme(ui.form.paddingInline);
+                    left: calc(var(--left) + 0.2em);
+                    position: absolute;
+                    z-index: 1;
+                    transition: sugar.theme(ui.label.transition);
+                  }
+
+                  &:focus,
+                  &:focus-within {
+                    & > *:not(input):not(textarea):not(select) {
+                      --top: sugar.theme(ui.form.paddingBlock);
+                      top: calc(var(--top) + 0.3em);
+                      --left: sugar.theme(ui.form.paddingInline);
+                      left: calc(var(--left) + 0.3em);
+                      font-size: 0.7em;
+                    }
+                  }
+                  & > input:not(:placeholder-shown) + *,
+                  & > textarea:not(:placeholder-shown) + * {
+                    --top: sugar.theme(ui.form.paddingBlock);
+                    top: calc(var(--top) + 0.3em);
+                    --left: sugar.theme(ui.form.paddingInline);
+                    left: calc(var(--left) + 0.3em);
+                    font-size: 0.7em;
+                  }
+
+                  & > input,
+                  & > textarea,
+                  & > select {
+                    width: 100%;
+                    margin: 0;
+                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.35em + var(--delta));
+                    padding-block-end: calc(sugar.theme(ui.form.paddingBlock) + 0.35em + var(--delta));
+                    transition: sugar.theme(ui.label.transition);
+
+                    &::placeholder {
+                      color: sugar.color(ui, --alpha 0);
+                    }
+                  }
+
+                  &:focus,
+                  &:focus-within {
+                    & > input,
+                    & > textarea,
+                    & > select {
+                      padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.7em + calc(var(--delta) * 2));
+                      padding-block-end: sugar.theme(ui.form.paddingBlock);
+
+                      &::placeholder {
+                        color: sugar.color(ui, placeholder);
+                      }
+                    }
+                  }
+                  & > input:not(:placeholder-shown),
+                  & > textarea:not(:placeholder-shown) {
+                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.7em + calc(var(--delta) * 2));
+                    padding-block-end: sugar.theme(ui.form.paddingBlock);
+
+                    &::placeholder {
+                      color: sugar.color(ui, placeholder);
+                    }
+                  }
+
+                `);
+            }
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
+
+
+                  & > *:not(input):not(textarea):not(select) {
+                    color: sugar.color(ui, placeholder);
+                    transition: sugar.theme(ui.label.transition);
+                  }
+
+                  &:focus,
+                  &:focus-within {
+                    & > *:not(input):not(textarea):not(select) {
+                      color: sugar.color(ui) !important;
+                    }
+                  }
+
+                  & > input,
+                  & > textarea,
+                  & > select {
+                    transition: sugar.theme(ui.label.transition);
+
+                    &::placeholder {
+                      color: sugar.color(ui, --alpha 0);
+                    }
+                  }
+
+                  &:focus,
+                  &:focus-within {
+                    & > input,
+                    & > textarea,
+                    & > select {
+                      &::placeholder {
+                        color: sugar.color(ui, placeholder);
+                      }
+                    }
+                  }
+                `);
+            }
+            break;
+        case 'inline':
+        default:
+            if (finalParams.scope.indexOf('bare') !== -1) {
+                vars.push(`
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;    
+
+                  & > input:first-child,
+                  & > select:first-child,
+                  & > textarea:first-child {
+                    order: 2;
+                  }
+
+                  & > input,
+                  & > textarea,
+                  & > select {
+                    margin-inline-start: sugar.margin(20);
+                  }
+
+                `);
+            }
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
+                  color: sugar.color(ui, text);
+                `);
+            }
+            break;
+    }
+
+    replaceWith(vars);
 }

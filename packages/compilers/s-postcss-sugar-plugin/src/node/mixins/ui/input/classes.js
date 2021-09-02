@@ -1,17 +1,21 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
+import __faker from 'faker';
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
 }
 postcssSugarPluginUiFormClassesInterface.definition = {
     styles: {
         type: 'String[]',
-        default: ['default', 'underline'],
+        default: ['solid'],
+    },
+    defaultStyle: {
+        type: 'String',
+        default: __theme().config('ui.input.defaultStyle'),
     },
 };
 export { postcssSugarPluginUiFormClassesInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ styles: ['default', 'underline'] }, params);
-    const defaultStyle = __theme().config('ui.input.defaultStyle');
+    const finalParams = Object.assign({ styles: ['solid'], defaultStyle: 'solid' }, params);
     const vars = [
         `
       .s-input {
@@ -24,7 +28,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @name          Text Input
         * @namespace          sugar.css.ui.input
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/text-input
+        * @menu           Styleguide / Forms        /styleguide/forms/text-input
         * @platform       css
         * @status       beta
         * 
@@ -32,7 +36,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         ${finalParams.styles
         .map((style) => {
-        return ` * @cssClass     s-input${defaultStyle === style ? '' : `\:${style}`}           Apply the ${style} input style`;
+        return ` * @cssClass     s-input${finalParams.defaultStyle === style ? '' : `\:${style}`}           Apply the ${style} input style`;
     })
         .join('\n')}
         * 
@@ -42,10 +46,22 @@ export default function ({ params, atRule, replaceWith, }) {
         return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
             *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-mb\:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-ui\:accent s-mb\:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-ui\:complementary s-mb\:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-ui\:error s-mb\:30" />
+            *   <label class="s-label s-mb\:30">
+            *       ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50" />
+            *   </label>
+            *   <label class="s-label s-mb\:30">
+            *       ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:accent" />
+            *   </label>
+            *   <label class="s-label s-mb\:30">
+            *        ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:complementary" />
+            *   </label>
+            *   <label class="s-label s-mb\:30">
+            *        ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:error" />
+            *   </label>
             * </div>
             * `;
     })
@@ -56,7 +72,7 @@ export default function ({ params, atRule, replaceWith, }) {
         */
     `);
     finalParams.styles.forEach((style) => {
-        const isDefaultStyle = defaultStyle === style;
+        const isDefaultStyle = finalParams.defaultStyle === style;
         const styleCls = isDefaultStyle ? '' : `.s-input--${style}`;
         const cls = `.s-input${styleCls}`;
         vars.push(`/**
@@ -73,4 +89,4 @@ export default function ({ params, atRule, replaceWith, }) {
     });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFFM0MsTUFBTSx3Q0FBeUMsU0FBUSxZQUFZOztBQUN4RCxtREFBVSxHQUFHO0lBQ2hCLE1BQU0sRUFBRTtRQUNKLElBQUksRUFBRSxVQUFVO1FBQ2hCLE9BQU8sRUFBRSxDQUFDLFNBQVMsRUFBRSxXQUFXLENBQUM7S0FDcEM7Q0FDSixDQUFDO0FBT04sT0FBTyxFQUFFLHdDQUF3QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWpFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsTUFBTSxFQUFFLENBQUMsU0FBUyxFQUFFLFdBQVcsQ0FBQyxJQUM3QixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sWUFBWSxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDO0lBRS9ELE1BQU0sSUFBSSxHQUFhO1FBQ25COzs7O0dBSUw7S0FDRSxDQUFDO0lBRUYsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7VUFXSixXQUFXLENBQUMsTUFBTTtTQUNmLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ1gsT0FBTywyQkFDSCxZQUFZLEtBQUssS0FBSyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLEtBQUssS0FBSyxFQUM1Qyx3QkFBd0IsS0FBSyxjQUFjLENBQUM7SUFDaEQsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7O1VBR2IsV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sV0FBVyxLQUFLOztrRUFFMkIsS0FBSzttRkFDWSxLQUFLO21GQUNMLEtBQUs7bUZBQ0wsS0FBSzttRkFDTCxLQUFLOztlQUV6RSxDQUFDO0lBQ0osQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7S0FLbEIsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNqQyxNQUFNLGNBQWMsR0FBRyxZQUFZLEtBQUssS0FBSyxDQUFDO1FBRTlDLE1BQU0sUUFBUSxHQUFHLGNBQWMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxhQUFhLEtBQUssRUFBRSxDQUFDO1FBQzVELE1BQU0sR0FBRyxHQUFHLFdBQVcsUUFBUSxFQUFFLENBQUM7UUFFbEMsSUFBSSxDQUFDLElBQUksQ0FBQzs0QkFDVSxHQUFHOzs7OytDQUlnQixLQUFLOzs7c0NBR2QsR0FBRyxDQUFDLElBQUksRUFBRTtTQUN2QyxDQUFDLENBQUM7UUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsR0FBRyxHQUFHLElBQUksRUFBRSxpQ0FBaUMsS0FBSyxJQUFJLEVBQUUsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDeEYsQ0FBQyxDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFDM0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0sd0NBQXlDLFNBQVEsWUFBWTs7QUFDeEQsbURBQVUsR0FBRztJQUNoQixNQUFNLEVBQUU7UUFDSixJQUFJLEVBQUUsVUFBVTtRQUNoQixPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUM7S0FDckI7SUFDRCxZQUFZLEVBQUU7UUFDVixJQUFJLEVBQUUsUUFBUTtRQUNkLE9BQU8sRUFBRSxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsdUJBQXVCLENBQUM7S0FDckQ7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLHdDQUF3QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWpFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDLEVBQ2pCLFlBQVksRUFBRSxPQUFPLElBQ2xCLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWE7UUFDbkI7Ozs7R0FJTDtLQUNFLENBQUM7SUFFRixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7OztVQVdKLFdBQVcsQ0FBQyxNQUFNO1NBQ2YsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDWCxPQUFPLDJCQUNILFdBQVcsQ0FBQyxZQUFZLEtBQUssS0FBSyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLEtBQUssS0FBSyxFQUN4RCx3QkFBd0IsS0FBSyxjQUFjLENBQUM7SUFDaEQsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7O1VBR2IsV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sV0FBVyxLQUFLOztrRUFFMkIsS0FBSzs7c0JBRWpELE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VGQUMwQyxLQUFLOzs7c0JBR3RFLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VGQUMwQyxLQUFLOzs7dUJBR3JFLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VGQUN5QyxLQUFLOzs7dUJBR3JFLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VGQUN5QyxLQUFLOzs7ZUFHN0UsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS2xCLENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDakMsTUFBTSxjQUFjLEdBQUcsV0FBVyxDQUFDLFlBQVksS0FBSyxLQUFLLENBQUM7UUFFMUQsTUFBTSxRQUFRLEdBQUcsY0FBYyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLGFBQWEsS0FBSyxFQUFFLENBQUM7UUFDNUQsTUFBTSxHQUFHLEdBQUcsV0FBVyxRQUFRLEVBQUUsQ0FBQztRQUVsQyxJQUFJLENBQUMsSUFBSSxDQUFDOzRCQUNVLEdBQUc7Ozs7K0NBSWdCLEtBQUs7OztzQ0FHZCxHQUFHLENBQUMsSUFBSSxFQUFFO1NBQ3ZDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxHQUFHLEdBQUcsSUFBSSxFQUFFLGlDQUFpQyxLQUFLLElBQUksRUFBRSxHQUFHLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUN4RixDQUFDLENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=

@@ -1,32 +1,125 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
+import __faker from 'faker';
 
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {
+        styles: {
+            type: 'String[]',
+            values: ['solid'],
+            default: ['solid'],
+        },
+        defaultStyle: {
+            type: 'String',
+            values: ['solid'],
+            default: __theme().config('ui.tabs.defaultStyle') ?? 'solid',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {
+    styles: 'solid'[];
+    defaultStyle: 'solid';
 }
 
 export { postcssSugarPluginUiListClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiListClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiListClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiListClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiListClassesParams = {
+        styles: ['solid'],
+        defaultStyle: 'solid',
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`/**
+    vars.push(`
+      /**
+        * @name          Tabs
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/tabs
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to style list (or any others) HTMLElement as tabs
+        * 
+        * @support          rtl
+        * @support          chromium            
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        ${finalParams.styles
+            .map((style) => {
+                return ` * @cssClass     s-tabs${
+                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                }           Apply the ${style} tabs style`;
+            })
+            .join('\n')}
+        * @cssClass       s-tabs\:grow        Make the tabs items grow and take the available space
+        * @cssClass       s-tabs\:vertical    Display the tabs horizontally
+        * 
+        * @example        html
+        ${finalParams.styles
+            .map((style) => {
+                return ` * <!-- ${style} style -->
+            * <div class="s-font\:30 s-mb\:50">
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
+            *   <ul class="s-tabs${style === finalParams.defaultStyle ? '' : `\:${style}`} s-ui\:accent">
+            *     <li tabindex="0">${__faker.name.findName()}</li>
+            *     <li tabindex="0" active>${__faker.name.findName()}</li>
+            *     <li tabindex="0">${__faker.name.findName()}</li>
+            *   </ul>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        * 
+        * <!-- grow -->
+        * <div class="s-font\:30 s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Grow</h3>
+        *   <ul class="s-tabs\:grow">
+        *     <li tabindex="0" active>${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *   </ul>
+        * </div>
+        * 
+        * <!-- rtl -->
+        * <div class="s-font\:30 s-mb\:50" dir="rtl">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">RTL</h3>
+        *   <ul class="s-tabs">
+        *     <li class="s-ui\:accent" tabindex="0" active>${__faker.name.findName()}</li>
+        *     <li class="s-ui\:complementary" tabindex="0">${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *   </ul>
+        * </div>
+        * 
+        * <!-- vertical -->
+        * <div class="s-font\:30 s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Vertical</h3>
+        *   <ul class="s-tabs\:vertical s-ui\:complementary">
+        *     <li tabindex="0" active>${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *   </ul>
+        * </div>
+        *
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`/**
         * @name           s-tabs
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
@@ -44,7 +137,7 @@ export default function ({
     }
   `);
 
-  vars.push(`/**
+    vars.push(`/**
         * @name           s-tabs--grow
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
@@ -62,23 +155,25 @@ export default function ({
     }
   `);
 
-  vars.push(`/**
-        * @name           s-tabs--gradient
+    finalParams.styles.forEach((style) => {
+        vars.push(`/**
+        * @name           s-tabs${finalParams.defaultStyle === style ? '' : `:${style}`}
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
         * 
-        * This class represent a "<yellow>gradient</yellow>" tabs
+        * This class represent a "<yellow>${style}</yellow>" tabs
         * 
         * @example        html
-        * <div class="s-tabs--gradient">
+        * <div class="s-tabs${finalParams.defaultStyle === style ? '' : `\:${style}`}">
         *    <div class="active">An active tab</div>
         *    <div>A tab</div>
         * </div>
       */
-    .s-tabs--gradient {
-      @sugar.ui.tabs($style: gradient, $scope: style);
+    .s-tabs${finalParams.defaultStyle === style ? '' : `--${style}`} {
+      @sugar.ui.tabs($style: ${style}, $scope: lnf);
     }
   `);
+    });
 
     vars.push(`/**
         * @name           s-tabs--vertical
@@ -98,5 +193,5 @@ export default function ({
     }
   `);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

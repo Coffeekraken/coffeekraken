@@ -1429,8 +1429,8 @@ export default function (env, config) {
                 },
             },
             form: {
-                paddingInline: '[theme.padding.20]',
-                paddingBlock: '[theme.padding.10]',
+                paddingInline: '0.75em',
+                paddingBlock: '0.375em',
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
@@ -1474,7 +1474,7 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 focusSpread: '[theme.ui.form.focusSpread]',
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             range: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1493,7 +1493,7 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'inline',
             },
             select: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1531,7 +1531,7 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: 0,
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             terminal: {
                 paddingInline: '[theme.ui.default.paddingInline]',
@@ -1544,13 +1544,12 @@ export default function (env, config) {
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             tooltip: {
-                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingInline: '[theme.ui.default.paddingBlock]',
                 paddingBlock: '[theme.ui.default.paddingBlock]',
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
-                maxWidth: '30ch',
                 arrowSize: '20px',
             },
             // pre: {
@@ -1616,7 +1615,7 @@ export default function (env, config) {
         typo: {
             h1: {
                 'font-family': 'title',
-                'font-size': 100,
+                'font-size': 90,
                 'line-height': 1,
                 'max-width': '55ch',
                 ':rhythmVertical': {
@@ -1625,7 +1624,7 @@ export default function (env, config) {
             },
             h2: {
                 'font-family': 'title',
-                'font-size': 90,
+                'font-size': 80,
                 'line-height': 1,
                 'max-width': '55ch',
                 ':rhythmVertical': {
@@ -1634,7 +1633,7 @@ export default function (env, config) {
             },
             h3: {
                 'font-family': 'title',
-                'font-size': 80,
+                'font-size': 70,
                 'line-height': 1,
                 'max-width': '55ch',
                 ':rhythmVertical': {
@@ -1643,7 +1642,7 @@ export default function (env, config) {
             },
             h4: {
                 'font-family': 'title',
-                'font-size': 70,
+                'font-size': 60,
                 'line-height': 1,
                 'max-width': '55ch',
                 ':rhythmVertical': {
@@ -1652,7 +1651,7 @@ export default function (env, config) {
             },
             h5: {
                 'font-family': 'title',
-                'font-size': 60,
+                'font-size': 50,
                 'line-height': 1,
                 'max-width': '55ch',
                 ':rhythmVertical': {
@@ -1661,7 +1660,7 @@ export default function (env, config) {
             },
             h6: {
                 'font-family': 'title',
-                'font-size': 50,
+                'font-size': 40,
                 'line-height': 1,
                 'max-width': '55ch',
                 ':rhythmVertical': {
@@ -1670,8 +1669,8 @@ export default function (env, config) {
             },
             p: {
                 'font-family': 'default',
-                'font-size': 40,
-                'line-height': 1.5,
+                'font-size': 30,
+                'line-height': 1.2,
                 'max-width': '55ch',
                 ':rhythmVertical': {
                     'margin-bottom': 30,

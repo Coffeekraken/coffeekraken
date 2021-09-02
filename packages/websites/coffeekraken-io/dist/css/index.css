@@ -1626,8 +1626,8 @@ body {
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-default-rhythmVertical-margin-bottom: 40;
---s-theme-ui-form-paddingInline: 0.75rem;
---s-theme-ui-form-paddingBlock: 0.375rem;
+--s-theme-ui-form-paddingInline: 0.75em;
+--s-theme-ui-form-paddingBlock: 0.375em;
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -1644,31 +1644,31 @@ body {
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
---s-theme-ui-colorPicker-paddingInline: 0.75rem;
---s-theme-ui-colorPicker-paddingBlock: 0.375rem;
+--s-theme-ui-colorPicker-paddingInline: 0.75em;
+--s-theme-ui-colorPicker-paddingBlock: 0.375em;
 --s-theme-ui-colorPicker-borderRadius: 6px;
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-datePicker-paddingInline: 0.75rem;
---s-theme-ui-datePicker-paddingBlock: 0.375rem;
+--s-theme-ui-datePicker-paddingInline: 0.75em;
+--s-theme-ui-datePicker-paddingBlock: 0.375em;
 --s-theme-ui-datePicker-borderRadius: 6px;
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-input-paddingInline: 0.75rem;
---s-theme-ui-input-paddingBlock: 0.375rem;
+--s-theme-ui-input-paddingInline: 0.75em;
+--s-theme-ui-input-paddingBlock: 0.375em;
 --s-theme-ui-input-borderRadius: 6px;
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusSpread: 5px;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-input-defaultStyle: default;
---s-theme-ui-range-paddingInline: 0.75rem;
---s-theme-ui-range-paddingBlock: 0.375rem;
+--s-theme-ui-input-defaultStyle: solid;
+--s-theme-ui-range-paddingInline: 0.75em;
+--s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -1676,16 +1676,16 @@ body {
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-range-defaultStyle: default;
---s-theme-ui-label-paddingInline: 0.75rem;
---s-theme-ui-label-paddingBlock: 0.375rem;
+--s-theme-ui-label-paddingInline: 0.75em;
+--s-theme-ui-label-paddingBlock: 0.375em;
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-label-defaultStyle: default;
---s-theme-ui-select-paddingInline: 0.75rem;
---s-theme-ui-select-paddingBlock: 0.375rem;
+--s-theme-ui-label-defaultStyle: inline;
+--s-theme-ui-select-paddingInline: 0.75em;
+--s-theme-ui-select-paddingBlock: 0.375em;
 --s-theme-ui-select-borderRadius: 6px;
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -1716,7 +1716,7 @@ body {
 --s-theme-ui-tabs-borderWidth: 1px;
 --s-theme-ui-tabs-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-tabs-depth: 0;
---s-theme-ui-tabs-defaultStyle: default;
+--s-theme-ui-tabs-defaultStyle: solid;
 --s-theme-ui-terminal-paddingInline: 1.5rem;
 --s-theme-ui-terminal-paddingBlock: 0.75rem ;
 --s-theme-ui-terminal-borderRadius: 6px;
@@ -1726,14 +1726,13 @@ body {
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-terminal-defaultColor: accent;
 --s-theme-ui-terminal-rhythmVertical-margin-bottom: 40;
---s-theme-ui-tooltip-paddingInline: 1.5rem;
+--s-theme-ui-tooltip-paddingInline: 0.75rem ;
 --s-theme-ui-tooltip-paddingBlock: 0.75rem ;
 --s-theme-ui-tooltip-borderRadius: 6px;
 --s-theme-ui-tooltip-borderWidth: 1px;
 --s-theme-ui-tooltip-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-tooltip-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-tooltip-maxWidth: 30ch;
 --s-theme-ui-tooltip-arrowSize: 20px;
 --s-theme-ui-code-paddingInline: 1.5rem;
 --s-theme-ui-code-paddingBlock: 0.75rem ;
@@ -1773,38 +1772,38 @@ body {
 --s-theme-ui-loaderSpinner-duration: 1s;
 --s-theme-ui-loaderSpinner-easing: linear;
 --s-theme-typo-h1-font-family: title;
---s-theme-typo-h1-font-size: 100;
+--s-theme-typo-h1-font-size: 90;
 --s-theme-typo-h1-line-height: 1;
 --s-theme-typo-h1-max-width: 55ch;
 --s-theme-typo-h1-rhythmVertical-margin-bottom: 40;
 --s-theme-typo-h2-font-family: title;
---s-theme-typo-h2-font-size: 90;
+--s-theme-typo-h2-font-size: 80;
 --s-theme-typo-h2-line-height: 1;
 --s-theme-typo-h2-max-width: 55ch;
 --s-theme-typo-h2-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h3-font-family: title;
---s-theme-typo-h3-font-size: 80;
+--s-theme-typo-h3-font-size: 70;
 --s-theme-typo-h3-line-height: 1;
 --s-theme-typo-h3-max-width: 55ch;
 --s-theme-typo-h3-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h4-font-family: title;
---s-theme-typo-h4-font-size: 70;
+--s-theme-typo-h4-font-size: 60;
 --s-theme-typo-h4-line-height: 1;
 --s-theme-typo-h4-max-width: 55ch;
 --s-theme-typo-h4-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h5-font-family: title;
---s-theme-typo-h5-font-size: 60;
+--s-theme-typo-h5-font-size: 50;
 --s-theme-typo-h5-line-height: 1;
 --s-theme-typo-h5-max-width: 55ch;
 --s-theme-typo-h5-rhythmVertical-margin-bottom: 20;
 --s-theme-typo-h6-font-family: title;
---s-theme-typo-h6-font-size: 50;
+--s-theme-typo-h6-font-size: 40;
 --s-theme-typo-h6-line-height: 1;
 --s-theme-typo-h6-max-width: 55ch;
 --s-theme-typo-h6-rhythmVertical-margin-bottom: 20;
 --s-theme-typo-p-font-family: default;
---s-theme-typo-p-font-size: 40;
---s-theme-typo-p-line-height: 1.5;
+--s-theme-typo-p-font-size: 30;
+--s-theme-typo-p-line-height: 1.2;
 --s-theme-typo-p-max-width: 55ch;
 --s-theme-typo-p-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-p-lead-font-family: default;
@@ -2148,10 +2147,8 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-button-borderWidth, 1px);
         border-radius: var(--s-theme-ui-button-borderRadius, 6px);
-        transition: var(--s-theme-ui-button-transition, 0);
+        transition: var(--s-theme-ui-button-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);
 }
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
 .s-btn::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -2181,9 +2178,14 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 
       display: inline-block;
       cursor: pointer;
+      white-space: nowrap;
 }
 .s-btn > * {
         pointer-events: none;
+      }
+.s-btn > i,
+      .s-btn > .s-icon {
+        font-size: 1em;
       }
 .s-btn{
     
@@ -2218,10 +2220,8 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-button-borderWidth, 1px);
         border-radius: var(--s-theme-ui-button-borderRadius, 6px);
-        transition: var(--s-theme-ui-button-transition, 0);
+        transition: var(--s-theme-ui-button-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);
 }
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
 .s-btn--gradient::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -2251,9 +2251,14 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 
       display: inline-block;
       cursor: pointer;
+      white-space: nowrap;
 }
 .s-btn--gradient > * {
         pointer-events: none;
+      }
+.s-btn--gradient > i,
+      .s-btn--gradient > .s-icon {
+        font-size: 1em;
       }
 .s-btn--gradient{background: linear-gradient(90deg, hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-gradientStart-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-gradientStart-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-gradientStart-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-gradientStart-a, 1)) 0%, hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-gradientEnd-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-gradientEnd-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-gradientEnd-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-gradientEnd-a, 1)) 100%);
             color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
@@ -2284,10 +2289,8 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-button-borderWidth, 1px);
         border-radius: var(--s-theme-ui-button-borderRadius, 6px);
-        transition: var(--s-theme-ui-button-transition, 0);
+        transition: var(--s-theme-ui-button-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);
 }
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
 .s-btn--outline::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -2317,9 +2320,14 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 
       display: inline-block;
       cursor: pointer;
+      white-space: nowrap;
 }
 .s-btn--outline > * {
         pointer-events: none;
+      }
+.s-btn--outline > i,
+      .s-btn--outline > .s-icon {
+        font-size: 1em;
       }
 .s-btn--outline{
     
@@ -2353,10 +2361,8 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-button-borderWidth, 1px);
         border-radius: var(--s-theme-ui-button-borderRadius, 6px);
-        transition: var(--s-theme-ui-button-transition, 0);
+        transition: var(--s-theme-ui-button-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);
 }
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
 .s-btn--text::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -2386,9 +2392,14 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 
       display: inline-block;
       cursor: pointer;
+      white-space: nowrap;
 }
 .s-btn--text > * {
         pointer-events: none;
+      }
+.s-btn--text > i,
+      .s-btn--text > .s-icon {
+        font-size: 1em;
       }
 .s-btn--text{
     
@@ -2656,8 +2667,8 @@ font-style: var(--s-theme-font-family-quote-font-style, normal);
 --s-theme-color-ui-l: var(--s-theme-color-extension-l);
         }
 .s-input {display: inline-block;
-        padding-inline: calc(var(--s-theme-ui-input-paddingInline, 0.75rem) * var(--s-scale, 1));
-        padding-block: calc(var(--s-theme-ui-input-paddingBlock, 0.375rem) * var(--s-scale, 1));
+        padding-inline: calc(var(--s-theme-ui-input-paddingInline, 0.75em) * var(--s-scale, 1));
+        padding-block: calc(var(--s-theme-ui-input-paddingBlock, 0.375em) * var(--s-scale, 1));
     
 
         color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surfaceForeground-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surfaceForeground-a, 1));
@@ -2665,9 +2676,7 @@ font-style: var(--s-theme-font-family-quote-font-style, normal);
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-input-borderWidth, 1px);
         border-radius: var(--s-theme-ui-input-borderRadius, 6px);
-        transition: var(--s-theme-ui-input-transition, 0);}
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
+        transition: var(--s-theme-ui-input-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);}
 .s-input::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -2695,38 +2704,40 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 .s-input{
   
 
-        width: 100%;
+            width: 100%;
 }
 /**
         * @name          Text Input
         * @namespace          sugar.css.ui.input
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/text-input
+        * @menu           Styleguide / Forms        /styleguide/forms/text-input
         * @platform       css
         * @status       beta
         * 
         * These classes allows you to apply some styles to your text input
         * 
-         * @cssClass     s-input           Apply the default input style
- * @cssClass     s-input:underline           Apply the underline input style
+         * @cssClass     s-input           Apply the solid input style
         * 
         * @example        html
-         * <!-- default style -->
+         * <!-- solid style -->
             * <div class="s-mb:50">
-            *   <h3 class="s-color:accent s-font:30 s-mb:30">default style</h3>
-            *   <input type="text" placeholder="Type something!" class="s-input:default s-mr:20 s-mb:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input:default s-mr:20 s-ui:accent s-mb:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input:default s-mr:20 s-ui:complementary s-mb:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input:default s-mr:20 s-ui:error s-mb:30" />
-            * </div>
-            * 
- * <!-- underline style -->
-            * <div class="s-mb:50">
-            *   <h3 class="s-color:accent s-font:30 s-mb:30">underline style</h3>
-            *   <input type="text" placeholder="Type something!" class="s-input:underline s-mr:20 s-mb:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input:underline s-mr:20 s-ui:accent s-mb:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input:underline s-mr:20 s-ui:complementary s-mb:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input:underline s-mr:20 s-ui:error s-mb:30" />
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
+            *   <label class="s-label s-mb:30">
+            *       Blanca Bosco
+            *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50" />
+            *   </label>
+            *   <label class="s-label s-mb:30">
+            *       Terri Rolfson
+            *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:accent" />
+            *   </label>
+            *   <label class="s-label s-mb:30">
+            *        Roger Orn DVM
+            *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:complementary" />
+            *   </label>
+            *   <label class="s-label s-mb:30">
+            *        Sonya Doyle
+            *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:error" />
+            *   </label>
             * </div>
             * 
         * 
@@ -2738,14 +2749,14 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * @namespace      sugar.css.ui.input
         * @type           CssClass
         * 
-        * This class represent a(n) "<yellow>default</yellow>" input
+        * This class represent a(n) "<yellow>solid</yellow>" input
         * 
         * @example        html
         * <input type="text" class=".s-input" placeholder="Hello world" />
       */
 .s-input {display: inline-block;
-        padding-inline: calc(var(--s-theme-ui-input-paddingInline, 0.75rem) * var(--s-scale, 1));
-        padding-block: calc(var(--s-theme-ui-input-paddingBlock, 0.375rem) * var(--s-scale, 1));
+        padding-inline: calc(var(--s-theme-ui-input-paddingInline, 0.75em) * var(--s-scale, 1));
+        padding-block: calc(var(--s-theme-ui-input-paddingBlock, 0.375em) * var(--s-scale, 1));
     
 
         color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surfaceForeground-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surfaceForeground-a, 1));
@@ -2753,10 +2764,8 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-input-borderWidth, 1px);
         border-radius: var(--s-theme-ui-input-borderRadius, 6px);
-        transition: var(--s-theme-ui-input-transition, 0);
+        transition: var(--s-theme-ui-input-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);
 }
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
 .s-input::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -2784,282 +2793,279 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 .s-input{
   
 
-        width: 100%;
+            width: 100%;
 }
 /**
-        * @name           .s-input.s-input--underline
-        * @namespace      sugar.css.ui.input
-        * @type           CssClass
+        * @name          Labels
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / Forms        /styleguide/forms/labels
+        * @platform       css
+        * @status       beta
         * 
-        * This class represent a(n) "<yellow>underline</yellow>" input
+        * These classes allows you to structure forms using labels.
+        * 
+         * @cssClass     s-label           Apply the inline label style
+ * @cssClass     s-label:float           Apply the float label style
         * 
         * @example        html
-        * <input type="text" class=".s-input.s-input--underline" placeholder="Hello world" />
-      */
-.s-input.s-input--underline {display: inline-block;
-        padding-inline: calc(var(--s-theme-ui-input-paddingInline, 0.75rem) * var(--s-scale, 1));
-        padding-block: calc(var(--s-theme-ui-input-paddingBlock, 0.375rem) * var(--s-scale, 1));
-    
-
-        color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surfaceForeground-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surfaceForeground-a, 1));
-        background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-ui-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-main-ui-a, 1));
-        font-size: calc(1rem * var(--s-scale, 1));
-        border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-input-borderWidth, 1px);
-        border-radius: var(--s-theme-ui-input-borderRadius, 6px);
-        transition: var(--s-theme-ui-input-transition, 0);
-}
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
-.s-input.s-input--underline::-moz-placeholder {
-          color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
-        }
-.s-input.s-input--underline:-ms-input-placeholder {
-          color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
-        }
-.s-input.s-input--underline::placeholder {
-          color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
-        }
-.s-input.s-input--underline:hover {
-background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-hover-ui-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-hover-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-hover-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-main-hover-ui-a, 1));
-border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-hover-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-hover-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-hover-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-hover-border-a, 1)) solid 1px;
-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-hover-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-hover-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-hover-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-hover-foreground-a, 1));
-}
-.s-input.s-input--underline:focus {
-background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-focus-ui-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-focus-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-focus-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-main-focus-ui-a, 1));
-border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-focus-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-focus-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-focus-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-focus-border-a, 1)) solid 1px;
-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-focus-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-focus-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-focus-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-focus-foreground-a, 1));
-}
-.s-input.s-input--underline:active:not(:hover), .s-input.s-input--underline.active, .s-input.s-input--underline[active] {
-background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-active-ui-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-active-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-active-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-main-active-ui-a, 1));
-border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-active-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-active-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-active-border-a, 1)) solid 1px;
-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-active-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-active-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-active-foreground-a, 1));
-}
-.s-input.s-input--underline{
-  
-
-        width: 100%;
-    
-
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
-                    border-top: none !important;
-                    border-left: none !important;
-                    border-right: none !important;
-                    border-bottom: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1)) solid var(--s-theme-ui-input-borderWidth, 1px) !important;
-                    border-radius: 0;
-                    padding-inline: 0 !important;
-}
-.s-input.s-input--underline:hover, .s-input.s-input--underline:focus {
-                        background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.1));
-                    }
+         * <!-- inline style -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:20">inline style</h3>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
+            *     <span>Senior Identity Executive Angel Little</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:info s-label">
+            *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
+            *     <span>Legacy Response Planner Alan Baumbach</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:error s-label">
+            *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
+            *     <span>Investor Marketing Executive Diane Kohler</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
+            *     <span>Human Operations Liaison Lorenzo Dach</span>
+            *   </label>
+            * </div>
+            * 
+ * <!-- float style -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:20">float style</h3>
+            *   <label class="s-mb:30 s-ui:accent s-label:float">
+            *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
+            *     <span>Principal Paradigm Engineer Alicia Beier</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:info s-label:float">
+            *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
+            *     <span>Central Branding Officer Ms. Javier Greenfelder</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:error s-label:float">
+            *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
+            *     <span>Future Response Liaison Dr. Sally Willms</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:accent s-label:float">
+            *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
+            *     <span>Principal Group Officer Daisy Herman</span>
+            *   </label>
+            * </div>
+            * 
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
 /**
         * @name           s-label
         * @namespace      sugar.css.ui.label
         * @type           CssClass
         * 
-        * This class represent a(n) "<s-color="accent">default</s-color>" label
+        * This class represent a(n) "<s-color="accent">inline</s-color>" label
         * 
         * @example        html
         * <label class="s-label">
         *   Hello world
-        *   <input type="text" class="s-input" />
+        *   <input type="text" class="s-input" placeholder="Type something!" />
         * </label>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-.s-label {display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      cursor: pointer;
-      }
-.s-label > * {
-        -webkit-margin-start: var(--s-theme-margin-20, 0.75rem);
-                margin-inline-start: var(--s-theme-margin-20, 0.75rem);
-      }
-.s-label{
+.s-label {width: 100%;
+          cursor: pointer;
+          font-size: 1rem;
     
 
-            color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-text-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-text-a, 1));
+    
+
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+      }
+.s-label > input:first-child,
+                  .s-label > select:first-child,
+                  .s-label > textarea:first-child {
+                    order: 2;
+                  }
+.s-label > input,
+                  .s-label > textarea,
+                  .s-label > select {
+                    -webkit-margin-start: var(--s-theme-margin-20, 0.75rem);
+                            margin-inline-start: var(--s-theme-margin-20, 0.75rem);
+                  }
+.s-label{
+
+                
+
+                  color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-text-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-text-a, 1));
 }
 /**
-       * @name        s-label:main
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-main>main</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:main">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--main {--s-theme-color-ui-h: var(--s-theme-color-main-h);
---s-theme-color-ui-s: var(--s-theme-color-main-s);
---s-theme-color-ui-l: var(--s-theme-color-main-l);
+        * @name           s-label:float
+        * @namespace      sugar.css.ui.label
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">float</s-color>" label
+        * 
+        * @example        html
+        * <label class="s-label:float">
+        *   Hello world
+        *   <input type="text" class="s-input" placeholder="Type something!" />
+        * </label>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+.s-label--float {width: 100%;
+          cursor: pointer;
+          font-size: 1rem;
+    
+
+    
+
+                  display: block;
+                  line-height: 1;
+                  position: relative;
+
+                  --delta: 0.1em;
       }
-/**
-       * @name        s-label:ui
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-ui>ui</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:ui">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--ui {
-      }
-/**
-       * @name        s-label:accent
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-accent>accent</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:accent">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--accent {--s-theme-color-ui-h: var(--s-theme-color-accent-h);
---s-theme-color-ui-s: var(--s-theme-color-accent-s);
---s-theme-color-ui-l: var(--s-theme-color-accent-l);
-      }
-/**
-       * @name        s-label:complementary
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-complementary>complementary</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:complementary">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--complementary {--s-theme-color-ui-h: var(--s-theme-color-complementary-h);
---s-theme-color-ui-s: var(--s-theme-color-complementary-s);
---s-theme-color-ui-l: var(--s-theme-color-complementary-l);
-      }
-/**
-       * @name        s-label:success
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-success>success</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:success">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--success {--s-theme-color-ui-h: var(--s-theme-color-success-h);
---s-theme-color-ui-s: var(--s-theme-color-success-s);
---s-theme-color-ui-l: var(--s-theme-color-success-l);
-      }
-/**
-       * @name        s-label:warning
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-warning>warning</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:warning">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--warning {--s-theme-color-ui-h: var(--s-theme-color-warning-h);
---s-theme-color-ui-s: var(--s-theme-color-warning-s);
---s-theme-color-ui-l: var(--s-theme-color-warning-l);
-      }
-/**
-       * @name        s-label:error
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-error>error</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:error">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--error {--s-theme-color-ui-h: var(--s-theme-color-error-h);
---s-theme-color-ui-s: var(--s-theme-color-error-s);
---s-theme-color-ui-l: var(--s-theme-color-error-l);
-      }
-/**
-       * @name        s-label:info
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-info>info</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:info">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--info {--s-theme-color-ui-h: var(--s-theme-color-info-h);
---s-theme-color-ui-s: var(--s-theme-color-info-s);
---s-theme-color-ui-l: var(--s-theme-color-info-l);
-      }
-/**
-       * @name        s-label:extension
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-extension>extension</span>" color to any label
-       * 
-       * @example       html
-       * <label class="s-label:extension">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-.s-label--extension {--s-theme-color-ui-h: var(--s-theme-color-extension-h);
---s-theme-color-ui-s: var(--s-theme-color-extension-s);
---s-theme-color-ui-l: var(--s-theme-color-extension-l);
-      }
+.s-label--float > *:not(input):not(textarea):not(select) {
+                    --top: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                    top: calc(var(--top) + 0.6em + var(--delta));
+                    --left: var(--s-theme-ui-form-paddingInline, 0.75em);
+                    left: calc(var(--left) + 0.2em);
+                    position: absolute;
+                    z-index: 1;
+                    transition: var(--s-theme-ui-label-transition, 0);
+                  }
+.s-label--float:focus > *:not(input):not(textarea):not(select), .s-label--float:focus-within > *:not(input):not(textarea):not(select) {
+                      --top: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                      top: calc(var(--top) + 0.3em);
+                      --left: var(--s-theme-ui-form-paddingInline, 0.75em);
+                      left: calc(var(--left) + 0.3em);
+                      font-size: 0.7em;
+                    }
+.s-label--float > input:not(:-moz-placeholder-shown) + *, .s-label--float > textarea:not(:-moz-placeholder-shown) + * {
+                    --top: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                    top: calc(var(--top) + 0.3em);
+                    --left: var(--s-theme-ui-form-paddingInline, 0.75em);
+                    left: calc(var(--left) + 0.3em);
+                    font-size: 0.7em;
+                  }
+.s-label--float > input:not(:-ms-input-placeholder) + *, .s-label--float > textarea:not(:-ms-input-placeholder) + * {
+                    --top: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                    top: calc(var(--top) + 0.3em);
+                    --left: var(--s-theme-ui-form-paddingInline, 0.75em);
+                    left: calc(var(--left) + 0.3em);
+                    font-size: 0.7em;
+                  }
+.s-label--float > input:not(:placeholder-shown) + *,
+                  .s-label--float > textarea:not(:placeholder-shown) + * {
+                    --top: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                    top: calc(var(--top) + 0.3em);
+                    --left: var(--s-theme-ui-form-paddingInline, 0.75em);
+                    left: calc(var(--left) + 0.3em);
+                    font-size: 0.7em;
+                  }
+.s-label--float > input,
+                  .s-label--float > textarea,
+                  .s-label--float > select {
+                    width: 100%;
+                    margin: 0;
+                    -webkit-padding-before: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.35em + var(--delta));
+                            padding-block-start: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.35em + var(--delta));
+                    -webkit-padding-after: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.35em + var(--delta));
+                            padding-block-end: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.35em + var(--delta));
+                    transition: var(--s-theme-ui-label-transition, 0);
+                  }
+.s-label--float > input::-moz-placeholder, .s-label--float > textarea::-moz-placeholder, .s-label--float > select::-moz-placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
+                    }
+.s-label--float > input:-ms-input-placeholder, .s-label--float > textarea:-ms-input-placeholder, .s-label--float > select:-ms-input-placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
+                    }
+.s-label--float > input::placeholder, .s-label--float > textarea::placeholder, .s-label--float > select::placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
+                    }
+.s-label--float:focus > input,
+                    .s-label--float:focus > textarea,
+                    .s-label--float:focus > select,
+                    .s-label--float:focus-within > input,
+                    .s-label--float:focus-within > textarea,
+                    .s-label--float:focus-within > select {
+                      -webkit-padding-before: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.7em + calc(var(--delta) * 2));
+                              padding-block-start: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.7em + calc(var(--delta) * 2));
+                      -webkit-padding-after: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                              padding-block-end: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                    }
+.s-label--float:focus > input::-moz-placeholder, .s-label--float:focus > textarea::-moz-placeholder, .s-label--float:focus > select::-moz-placeholder, .s-label--float:focus-within > input::-moz-placeholder, .s-label--float:focus-within > textarea::-moz-placeholder, .s-label--float:focus-within > select::-moz-placeholder {
+                        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                      }
+.s-label--float:focus > input:-ms-input-placeholder, .s-label--float:focus > textarea:-ms-input-placeholder, .s-label--float:focus > select:-ms-input-placeholder, .s-label--float:focus-within > input:-ms-input-placeholder, .s-label--float:focus-within > textarea:-ms-input-placeholder, .s-label--float:focus-within > select:-ms-input-placeholder {
+                        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                      }
+.s-label--float:focus > input::placeholder, .s-label--float:focus > textarea::placeholder, .s-label--float:focus > select::placeholder, .s-label--float:focus-within > input::placeholder, .s-label--float:focus-within > textarea::placeholder, .s-label--float:focus-within > select::placeholder {
+                        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                      }
+.s-label--float > input:not(:-moz-placeholder-shown), .s-label--float > textarea:not(:-moz-placeholder-shown) {
+                    padding-block-start: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.7em + calc(var(--delta) * 2));
+                    padding-block-end: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                  }
+.s-label--float > input:not(:-ms-input-placeholder), .s-label--float > textarea:not(:-ms-input-placeholder) {
+                    padding-block-start: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.7em + calc(var(--delta) * 2));
+                    padding-block-end: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                  }
+.s-label--float > input:not(:placeholder-shown),
+                  .s-label--float > textarea:not(:placeholder-shown) {
+                    -webkit-padding-before: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.7em + calc(var(--delta) * 2));
+                            padding-block-start: calc(var(--s-theme-ui-form-paddingBlock, 0.375em) + 0.7em + calc(var(--delta) * 2));
+                    -webkit-padding-after: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                            padding-block-end: var(--s-theme-ui-form-paddingBlock, 0.375em);
+                  }
+.s-label--float > input:not(:placeholder-shown)::-moz-placeholder, .s-label--float > textarea:not(:placeholder-shown)::-moz-placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                    }
+.s-label--float > input:not(:placeholder-shown):-ms-input-placeholder, .s-label--float > textarea:not(:placeholder-shown):-ms-input-placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                    }
+.s-label--float > input:not(:-moz-placeholder-shown)::placeholder, .s-label--float > textarea:not(:-moz-placeholder-shown)::placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                    }
+.s-label--float > input:not(:-ms-input-placeholder)::placeholder, .s-label--float > textarea:not(:-ms-input-placeholder)::placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                    }
+.s-label--float > input:not(:placeholder-shown)::placeholder, .s-label--float > textarea:not(:placeholder-shown)::placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                    }
+.s-label--float > *:not(input):not(textarea):not(select) {
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                    transition: var(--s-theme-ui-label-transition, 0);
+                  }
+.s-label--float:focus > *:not(input):not(textarea):not(select), .s-label--float:focus-within > *:not(input):not(textarea):not(select) {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1)) !important;
+                    }
+.s-label--float > input,
+                  .s-label--float > textarea,
+                  .s-label--float > select {
+                    transition: var(--s-theme-ui-label-transition, 0);
+                  }
+.s-label--float > input::-moz-placeholder, .s-label--float > textarea::-moz-placeholder, .s-label--float > select::-moz-placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
+                    }
+.s-label--float > input:-ms-input-placeholder, .s-label--float > textarea:-ms-input-placeholder, .s-label--float > select:-ms-input-placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
+                    }
+.s-label--float > input::placeholder, .s-label--float > textarea::placeholder, .s-label--float > select::placeholder {
+                      color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
+                    }
+.s-label--float:focus > input::-moz-placeholder, .s-label--float:focus > textarea::-moz-placeholder, .s-label--float:focus > select::-moz-placeholder, .s-label--float:focus-within > input::-moz-placeholder, .s-label--float:focus-within > textarea::-moz-placeholder, .s-label--float:focus-within > select::-moz-placeholder {
+                        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                      }
+.s-label--float:focus > input:-ms-input-placeholder, .s-label--float:focus > textarea:-ms-input-placeholder, .s-label--float:focus > select:-ms-input-placeholder, .s-label--float:focus-within > input:-ms-input-placeholder, .s-label--float:focus-within > textarea:-ms-input-placeholder, .s-label--float:focus-within > select:-ms-input-placeholder {
+                        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                      }
+.s-label--float:focus > input::placeholder, .s-label--float:focus > textarea::placeholder, .s-label--float:focus > select::placeholder, .s-label--float:focus-within > input::placeholder, .s-label--float:focus-within > textarea::placeholder, .s-label--float:focus-within > select::placeholder {
+                        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-placeholder-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-placeholder-a, 1));
+                      }
 /**
         * @name          Lists
         * @namespace          sugar.css.ui
@@ -3079,9 +3085,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">ul style</h3>
             *   <ul class="s-list:ul ">
-            *     <li>Product Security Consultant Connie Luettgen</li>
-            *     <li>National Accountability Engineer Ethel Sipes</li>
-            *     <li>Central Accounts Developer Mrs. Marlon Ruecker</li>
+            *     <li>District Quality Director Marsha Erdman</li>
+            *     <li>Forward Accounts Agent Albert Schiller MD</li>
+            *     <li>Investor Marketing Consultant Pat Carter</li>
             *   </ul>
             * </div>
             * 
@@ -3089,9 +3095,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">ol style</h3>
             *   <ul class="s-list:ol s-ui:accent s-scale:15">
-            *     <li>Corporate Interactions Liaison Sammy Deckow</li>
-            *     <li>International Implementation Analyst Armando Cormier</li>
-            *     <li>Global Intranet Architect Rosie Mitchell</li>
+            *     <li>Legacy Program Officer Darla Nader</li>
+            *     <li>Corporate Applications Liaison Christie Frami</li>
+            *     <li>Chief Functionality Officer Rudy Christiansen</li>
             *   </ul>
             * </div>
             * 
@@ -3099,9 +3105,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">icon style</h3>
             *   <ul class="s-list:icon ">
-            *     <li><i class="s-icon:user"></i>National Brand Assistant Kenny Hamill</li>
-            *     <li><i class="s-icon:heart s-ui:accent"></i>Legacy Accounts Designer Cameron Veum Jr.</li>
-            *     <li><i class="s-icon:fire s-ui:error"></i>Chief Brand Analyst Nadine Mills</li>
+            *     <li><i class="s-icon:user"></i>Human Marketing Associate Sally Little</li>
+            *     <li><i class="s-icon:heart s-ui:accent"></i>Legacy Identity Officer Molly Ryan</li>
+            *     <li><i class="s-icon:fire s-ui:error"></i>District Tactics Orchestrator Beatrice Hauck II</li>
             *   </ul>
             * </div>
             * 
@@ -3109,9 +3115,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">Colors</h3>
             *   <ul class="s-list s-ui:accent">
-            *     <li>Direct Quality Architect Mr. Patrick Sanford</li>
-            *     <li class="s-ui:complementary">Internal Configuration Agent Dixie Wunsch</li>
-            *     <li class="s-ui:error">Legacy Research Assistant Guadalupe Pouros</li>
+            *     <li>Internal Implementation Planner Claude Mayert</li>
+            *     <li class="s-ui:complementary">Senior Interactions Engineer Elaine Murazik</li>
+            *     <li class="s-ui:error">Chief Creative Producer Dr. Julio Walker</li>
             *   </ul>
             * </div>
         * 
@@ -3303,6 +3309,71 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         }
     }
 /**
+        * @name          Tabs
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/tabs
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to style list (or any others) HTMLElement as tabs
+        * 
+        * @support          rtl
+        * @support          chromium            
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+         * @cssClass     s-tabs           Apply the solid tabs style
+        * @cssClass       s-tabs:grow        Make the tabs items grow and take the available space
+        * @cssClass       s-tabs:vertical    Display the tabs horizontally
+        * 
+        * @example        html
+         * <!-- solid style -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
+            *   <ul class="s-tabs s-ui:accent">
+            *     <li tabindex="0">Bernadette Morissette</li>
+            *     <li tabindex="0" active>Wayne Conroy MD</li>
+            *     <li tabindex="0">Myron Thiel</li>
+            *   </ul>
+            * </div>
+            * 
+        * 
+        * <!-- grow -->
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:20">Grow</h3>
+        *   <ul class="s-tabs:grow">
+        *     <li tabindex="0" active>Ruben Graham</li>
+        *     <li tabindex="0">Melinda Labadie</li>
+        *     <li tabindex="0">Francisco Hamill</li>
+        *   </ul>
+        * </div>
+        * 
+        * <!-- rtl -->
+        * <div class="s-font:30 s-mb:50" dir="rtl">
+        *   <h3 class="s-color:accent s-font:30 s-mb:20">RTL</h3>
+        *   <ul class="s-tabs">
+        *     <li class="s-ui:accent" tabindex="0" active>Mrs. Derek Schaden</li>
+        *     <li class="s-ui:complementary" tabindex="0">Pete Bruen I</li>
+        *     <li tabindex="0">Nina Bechtelar</li>
+        *   </ul>
+        * </div>
+        * 
+        * <!-- vertical -->
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:20">Vertical</h3>
+        *   <ul class="s-tabs:vertical s-ui:complementary">
+        *     <li tabindex="0" active>Paulette Pagac III</li>
+        *     <li tabindex="0">Angela Skiles</li>
+        *     <li tabindex="0">Lyle Bergstrom</li>
+        *   </ul>
+        * </div>
+        *
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
         * @name           s-tabs
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
@@ -3320,28 +3391,40 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         flex-wrap: nowrap;
     
 
-      background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
-      border-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
-      box-shadow: var(--s-theme-ui-tabs-depth, 0);
-      overflow: hidden;
+          /** background-color: sugar.color(ui, surface); */
+          border-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+          overflow: hidden;
+          -webkit-user-select: none;
+             -moz-user-select: none;
+              -ms-user-select: none;
+                  user-select: none;
     }
 .s-tabs > * {
-          text-align: center;
-          padding-inline: calc(var(--s-theme-ui-tabs-paddingInline, 1.5rem) * var(--s-scale, 1));
-         padding-block: calc(var(--s-theme-ui-tabs-paddingBlock, 0.75rem ) * var(--s-scale, 1));
-          background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
-          color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
-          transition: var(--s-theme-ui-tabs-transition, 0);
-          cursor: pointer;
-          display: block;      
-        }
+              text-align: center;
+              padding-inline: calc(var(--s-theme-ui-tabs-paddingInline, 1.5rem) * var(--s-scale, 1));
+              padding-block: calc(var(--s-theme-ui-tabs-paddingBlock, 0.75rem ) * var(--s-scale, 1));
+              transition: var(--s-theme-ui-tabs-transition, 0);
+              cursor: pointer;
+              display: block;      
+            }
+.s-tabs > *:last-child:not([dir="rtl"] .s-tabs > *) {
+            border-top-right-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+            border-bottom-right-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+          }
+[dir="rtl"] .s-tabs > *:last-child,
+          .s-tabs[dir="rtl"] > *:last-child {
+            border-top-left-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+            border-bottom-left-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+          }
 .s-tabs > dt:hover, .s-tabs > li:hover, .s-tabs > div:hover {
-background-color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0) + var(--s-theme-color-complementary-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + var(--s-theme-color-complementary-lightness-offset, 0)) * 1%),var(--s-theme-color-complementary-a, 1));
-color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-foreground-spin ,0)),calc((var(--s-theme-color-complementary-s, 0) + var(--s-theme-color-complementary-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + var(--s-theme-color-complementary-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-complementary-foreground-a, 1));
+background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.4));
+}
+.s-tabs > dt:focus, .s-tabs > li:focus, .s-tabs > div:focus {
+background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
 }
 .s-tabs > dt:active:not(:hover), .s-tabs > dt.active, .s-tabs > dt[active], .s-tabs > li:active:not(:hover), .s-tabs > li.active, .s-tabs > li[active], .s-tabs > div:active:not(:hover), .s-tabs > div.active, .s-tabs > div[active] {
-background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-foreground-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-foreground-a, 1));
+background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
 }
 /**
         * @name           s-tabs--grow
@@ -3360,21 +3443,52 @@ color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-f
           flex-grow: 1;
         }
 /**
-        * @name           s-tabs--gradient
+        * @name           s-tabs
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
         * 
-        * This class represent a "<yellow>gradient</yellow>" tabs
+        * This class represent a "<yellow>solid</yellow>" tabs
         * 
         * @example        html
-        * <div class="s-tabs--gradient">
+        * <div class="s-tabs">
         *    <div class="active">An active tab</div>
         *    <div>A tab</div>
         * </div>
       */
-.s-tabs--gradient > dt:hover, .s-tabs--gradient > li:hover, .s-tabs--gradient > div:hover, .s-tabs--gradient > *:hover {background: linear-gradient(90deg, hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-gradientStart-spin ,0)),calc((var(--s-theme-color-complementary-s, 0) + var(--s-theme-color-complementary-gradientStart-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + var(--s-theme-color-complementary-gradientStart-lightness-offset, 0)) * 1%),var(--s-theme-color-complementary-gradientStart-a, 1)) 0%, hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-gradientEnd-spin ,0)),calc((var(--s-theme-color-complementary-s, 0) + var(--s-theme-color-complementary-gradientEnd-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + var(--s-theme-color-complementary-gradientEnd-lightness-offset, 0)) * 1%),var(--s-theme-color-complementary-gradientEnd-a, 1)) 100%);
+.s-tabs {/** background-color: sugar.color(ui, surface); */
+          border-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+          overflow: hidden;
+          -webkit-user-select: none;
+             -moz-user-select: none;
+              -ms-user-select: none;
+                  user-select: none;
+    }
+.s-tabs > * {
+              text-align: center;
+              padding-inline: calc(var(--s-theme-ui-tabs-paddingInline, 1.5rem) * var(--s-scale, 1));
+              padding-block: calc(var(--s-theme-ui-tabs-paddingBlock, 0.75rem ) * var(--s-scale, 1));
+              transition: var(--s-theme-ui-tabs-transition, 0);
+              cursor: pointer;
+              display: block;      
+            }
+.s-tabs > *:last-child:not([dir="rtl"] .s-tabs > *) {
+            border-top-right-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+            border-bottom-right-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+          }
+[dir="rtl"] .s-tabs > *:last-child,
+          .s-tabs[dir="rtl"] > *:last-child {
+            border-top-left-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+            border-bottom-left-radius: var(--s-theme-ui-tabs-borderRadius, 6px);
+          }
+.s-tabs > dt:hover, .s-tabs > li:hover, .s-tabs > div:hover {
+background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.4));
 }
-.s-tabs--gradient > dt:active:not(:hover), .s-tabs--gradient > dt.active, .s-tabs--gradient > dt[active], .s-tabs--gradient > li:active:not(:hover), .s-tabs--gradient > li.active, .s-tabs--gradient > li[active], .s-tabs--gradient > div:active:not(:hover), .s-tabs--gradient > div.active, .s-tabs--gradient > div[active], .s-tabs--gradient > *:active:not(:hover), .s-tabs--gradient > *.active, .s-tabs--gradient > *[active] {background: linear-gradient(90deg, hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-gradientStart-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-gradientStart-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-gradientStart-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-gradientStart-a, 1)) 0%, hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-gradientEnd-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-gradientEnd-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-gradientEnd-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-gradientEnd-a, 1)) 100%);
+.s-tabs > dt:focus, .s-tabs > li:focus, .s-tabs > div:focus {
+background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
+}
+.s-tabs > dt:active:not(:hover), .s-tabs > dt.active, .s-tabs > dt[active], .s-tabs > li:active:not(:hover), .s-tabs > li.active, .s-tabs > li[active], .s-tabs > div:active:not(:hover), .s-tabs > div.active, .s-tabs > div[active] {
+background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
 }
 /**
         * @name           s-tabs--vertical
@@ -3849,8 +3963,8 @@ color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-f
     cursor: pointer;
 }
 .s-select select {display: inline-block;
-        padding-inline: calc(var(--s-theme-ui-input-paddingInline, 0.75rem) * var(--s-scale, 1));
-        padding-block: calc(var(--s-theme-ui-input-paddingBlock, 0.375rem) * var(--s-scale, 1));
+        padding-inline: calc(var(--s-theme-ui-input-paddingInline, 0.75em) * var(--s-scale, 1));
+        padding-block: calc(var(--s-theme-ui-input-paddingBlock, 0.375em) * var(--s-scale, 1));
     
 
         color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surfaceForeground-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surfaceForeground-a, 1));
@@ -3858,10 +3972,8 @@ color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-f
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-input-borderWidth, 1px);
         border-radius: var(--s-theme-ui-input-borderRadius, 6px);
-        transition: var(--s-theme-ui-input-transition, 0);
+        transition: var(--s-theme-ui-input-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);
     }
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
 .s-select select::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -3918,20 +4030,20 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
             * <div class="s-font:30 s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
             *   <label class="s-mb:30 s-label">
-            *     Chief Directives Facilitator Archie Cormier
-            *     <input type="checkbox" checked class="s-switch" />
+            *     Dynamic Brand Executive Jermaine Tromp
+            *     <input type="checkbox"  class="s-switch" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Customer Configuration Director Darrell Shanahan
+            *     Internal Assurance Analyst Sara Thompson
             *     <input type="checkbox"  class="s-switch s-ui:accent" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Product Applications Facilitator Darrin Morissette
+            *     Dynamic Data Architect Antonio Glover
             *     <input type="checkbox"  class="s-switch s-ui:complementary" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Human Quality Engineer Salvatore Stanton
-            *     <input type="checkbox"  class="s-switch s-ui:error" />
+            *     Corporate Communications Executive Lewis Weber
+            *     <input type="checkbox" checked class="s-switch s-ui:error" />
             *   </label>
             * </div>
             * 
@@ -3941,15 +4053,15 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
         * <div class="s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Scales</h3>
         *   <label class="s-mb:30 s-label s-scale:05">
-        *     Dynamic Applications Architect Miss Freda Gottlieb
+        *     Investor Tactics Producer Shelly Herman
         *     <input type="checkbox"  class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mb:30 s-label s-scale:10">
-        *     District Metrics Associate Clark Grant
-        *     <input type="checkbox"  class="s-switch s-ui:accent" />
+        *     Legacy Infrastructure Administrator Steve Sauer
+        *     <input type="checkbox" checked class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mb:30 s-label s-scale:15">
-        *     District Research Designer Mindy Schowalter
+        *     Corporate Marketing Representative Terrell Bins
         *     <input type="checkbox" checked class="s-switch s-ui:accent" />
         *   </label>
         * </div>
@@ -3973,7 +4085,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-.s-switch {font-size: calc(1rem * var(--s-scale, 1));
+.s-switch {font-size: calc(0.8rem * var(--s-scale, 1));
 
         --thumb-size: 1em;
         --thumb-color-active: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surface-a, 1));
@@ -4006,7 +4118,8 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
            -moz-appearance: none;
 
                 appearance: none;
-        pointer-events: none;
+        pointer-events: all;
+        cursor: pointer;
         touch-action: pan-y;
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-switch-borderWidth, 1px);
         outline-offset: 5px;
@@ -4030,7 +4143,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
 
             content: "";
             cursor: pointer;
-            pointer-events: auto;
+            pointer-events: none;
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
@@ -4043,7 +4156,8 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
         }
 .s-switch::after {
             content: "";
-            pointer-events: auto;
+            cursor: pointer;
+            pointer-events: none;
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
@@ -4478,10 +4592,8 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
         font-size: calc(1rem * var(--s-scale, 1));
         border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-terminal-borderWidth, 1px);
         border-radius: var(--s-theme-ui-terminal-borderRadius, 6px);
-        transition: var(--s-theme-ui-terminal-transition, 0);
+        transition: var(--s-theme-ui-terminal-transition, 0);box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.05);
         }
-/** @sugar.depth(0 0.5px 1.5px rgba(0, 0, 0, 0.05),
-            0 4px 12px rgba(0, 0, 0, 0.1)); */
 .s-terminal::-moz-placeholder {
           color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-placeholder-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-placeholder-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-placeholder-lightness-offset, 0)) * 1%),var(--s-theme-color-main-placeholder-a, 1));
         }
@@ -4514,6 +4626,110 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         margin-bottom: var(--s-theme-margin-40, 2.25);
 }
 /**
+        * @name          Tooltips
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/tooltips
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you display nice tooltips on any HTMLElement
+        * 
+        * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
+        * @cssClass             s-tooltip-container:active     Allow to display a tooltip without having the need of the user interaction
+        * @cssClass             s-tooltip                       Apply on the element you want as a tooltip
+        * @cssClass             s-tooltip:top                  Align your tooltip on top
+        * @cssClass             s-tooltip:right               Align your tooltip at right
+        * @cssClass             s-tooltip:left               Align your tooltip at left
+        * @cssClass             s-tooltip:bottom               Align your tooltip at bottom
+        * @cssClass             s-tooltip:interactive          Allow the user to interact with the tooltip
+        * 
+        * @example        html
+        * <div class="s-font:30 s-mb:50">
+        *   <span class="s-tooltip-container:active">
+        *       <a class="s-btn s-mr:20">Hello</a>
+        *       <div class="s-tooltip:right s-ui:accent">
+        *           Product Metrics Supervisor Emilio Gottlieb
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:20">Positions</h3>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip">
+        *           Regional Factors Producer Angel Johns
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip:right s-ui:accent">
+        *           Senior Response Engineer Jaime Lebsack MD
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip:bottom s-ui:complementary">
+        *           Regional Intranet Associate Alexander Hamill
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip:left s-ui:error">
+        *           District Accounts Manager Cornelius Ruecker
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:20">Colors</h3>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui:accent">
+        *           Global Communications Manager Faye Rempel
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui:complementary">
+        *           Legacy Brand Coordinator Della Swift
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui:error">
+        *           Dynamic Identity Designer Andrew Wyman
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">Hover me!</a>
+        *       <div class="s-tooltip s-ui:info">
+        *           Product Response Executive Ralph Hansen
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:20">Interactions</h3>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">I'm not interactive</a>
+        *       <div class="s-tooltip">
+        *           <a class="s-btn s-ui:accent">Click me if you can!</a>
+        *       </div>
+        *   </span>
+        *   <span class="s-tooltip-container">
+        *       <a class="s-btn s-mr:20">I'm interactive</a>
+        *       <div class="s-tooltip:interactive">
+        *           <a class="s-btn s-ui:accent">Click me because you can!</a>
+        *       </div>
+        *   </span>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
         * @name           s-toolip-container
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -4536,15 +4752,29 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         }
 .s-tooltip-container > .s-tooltip {
                 opacity: 0;
-                pointer-events: none;
             }
 .s-tooltip-container:focus > .s-tooltip,
             .s-tooltip-container:focus-within > .s-tooltip,
             .s-tooltip-container .s-tooltip:focus,
             .s-tooltip-container:hover > .s-tooltip {
                 opacity: 1;
-                pointer-events: all;
             }
+/**
+        * @name           s-toolip-container:active
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class allows you to display a tooltip inside a tooltip container without needing hover by the user
+        * 
+        * @example        html
+        * <div class="s-tooltip-container:active">
+        *   <img src="..." />
+        *   <div class="s-tooltip">Something cool</div>
+        * </div>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
 /**
         * @name           s-tooltip
         * @namespace      sugar.css.ui.tooltip
@@ -4553,8 +4783,10 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * This class represent a simple tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -4562,22 +4794,31 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 .s-tooltip {position: absolute;
           z-index: 500;
           display: block;
-          max-width: var(--s-theme-ui-tooltip-maxWidth, 30ch);
           text-align: center;
-      
+          white-space: nowrap;
+          max-width: 9999999px !important;
+          pointer-events: none;
+        }
+.s-tooltip-container--active > .s-tooltip {
+            opacity: 1;
+        }
+.s-tooltip{
+    
 
-          background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
-          color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
+          background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+          color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
           border-radius: var(--s-theme-ui-tooltip-borderRadius, 6px);
           transition: var(--s-theme-ui-tooltip-transition, 0);
-          padding-inline: calc(var(--s-theme-ui-tooltip-paddingInline, 1.5rem) * var(--s-scale, 1));
-            padding-block: calc(var(--s-theme-ui-tooltip-paddingBlock, 0.75rem ) * var(--s-scale, 1));box-shadow: var(--s-theme-ui-tooltip-depth, 0);
-        }
+          padding-inline: calc(var(--s-theme-ui-tooltip-paddingInline, 0.75rem ) * var(--s-scale, 1));
+          padding-block: calc(var(--s-theme-ui-tooltip-paddingBlock, 0.75rem ) * var(--s-scale, 1));
+}
+.s-tooltip{box-shadow: var(--s-theme-ui-tooltip-depth, 0);
+}
 .s-tooltip:after {
               content: " ";
               position: absolute;
               border-style: solid;
-              border-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1)) transparent transparent transparent;
+              border-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1)) transparent transparent transparent;
           }
 .s-tooltip:before {
             content: '';
@@ -4604,6 +4845,33 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
                   left: 0;
                 }
 /**
+        * @name           s-tooltip--interactive
+        * @namespace      sugar.css.ui.tooltip
+        * @type           CssClass
+        * 
+        * This class make a tooltip interactive. This mean that the user can hover the tooltip,
+        * select texts in it, click on buttons, etc...
+        * 
+        * @example        html
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip:interactive">Something cool</div>
+        * </a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+.s-tooltip-container--active > .s-tooltip--interactive {
+            opacity: 1;
+        }
+.s-tooltip-container--active > .s-tooltip--interactive,
+                .s-tooltip-container:focus > .s-tooltip--interactive,
+                .s-tooltip-container:focus-within > .s-tooltip--interactive,
+                .s-tooltip-container .s-tooltip--interactive:focus,
+                .s-tooltip-container:hover > .s-tooltip--interactive {
+                    pointer-events: all;
+                }
+/**
         * @name           s-tooltip--top
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -4611,16 +4879,24 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * This class represent a simple top tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-.s-tooltip--top {bottom: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
+.s-tooltip-container--active > .s-tooltip--top {
+            opacity: 1;
+        }
+.s-tooltip--top{
+    
+  
+                bottom: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
                 left: 50%;
                 transform: translateX(-50%);
-        }
+}
 .s-tooltip--top:after {
                     top: 100%;
                     left: 50%;
@@ -4634,67 +4910,6 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
                   left: 0;
                 }
 /**
-        * @name           s-tooltip--top-left
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple top-left tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--top-left {bottom: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                left: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                transform: translateX(-50%);
-        }
-.s-tooltip--top-left:after {
-                    top: 100%;
-                    left: 50%;
-                    margin-left: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                }
-.s-tooltip--top-left:before {
-                  width: 100%;
-                  height: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  top: 100%;
-                  left: 0;
-                }
-/**
-        * @name           s-tooltip--top-right
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple top-right tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--top-right {bottom: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                right: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                left: auto;
-                transform: translateX(50%);
-        }
-.s-tooltip--top-right:after {
-                    top: 100%;
-                    left: 50%;
-                    margin-left: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                }
-.s-tooltip--top-right:before {
-                  width: 100%;
-                  height: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  top: 100%;
-                  left: 0;
-                }
-/**
         * @name           s-tooltip--right
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -4702,18 +4917,26 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * This class represent a simple right tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:right">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip:right">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-.s-tooltip--right {top: 50%;
+.s-tooltip-container--active > .s-tooltip--right {
+            opacity: 1;
+        }
+.s-tooltip--right{
+    
+  
+                top: 50%;
                 left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
                 right: auto;    
                 bottom: auto;
                 transform: translateY(-50%);
-        }
+}
 .s-tooltip--right:after {
                     top: 50%;
                     left: auto;
@@ -4732,228 +4955,6 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
                   top: 0;
                 }
 /**
-        * @name           s-tooltip--right-center-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip centered and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:right-center-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--right-center-top {top: 50%;
-                left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                right: auto;    
-                bottom: auto;
-                transform: translateY(calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1));
-        }
-.s-tooltip--right-center-top:after {
-                    top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    left: auto;
-                    right: calc(100% - 0.5px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(90deg);
-                }
-.s-tooltip--right-center-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  right: 100%;
-                  left: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--right-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple right-top tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--right-top {top: 0;
-                left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                right: auto;    
-                bottom: auto;
-                transform: translateY(-50%);
-        }
-.s-tooltip--right-top:after {
-                    top: 50%;
-                    left: auto;
-                    right: 100%;
-                    bottom: auto;
-                    margin-top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(90deg);
-                }
-.s-tooltip--right-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  right: 100%;
-                  left: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--right-top-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip top and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:right-top-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--right-top-top {top: 0;
-                left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                right: auto;    
-                bottom: auto;
-                transform: none;
-        }
-.s-tooltip--right-top-top:after {
-                    top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    left: auto;
-                    right: calc(100% - 0.5px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(90deg);
-                }
-.s-tooltip--right-top-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  right: 100%;
-                  left: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--right-bottom-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip bottom and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:right-bottom-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--right-bottom-top {top: calc(100% - var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                right: auto;    
-                bottom: auto;
-                transform: translateY(calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1));
-        }
-.s-tooltip--right-bottom-top:after {
-                    top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    left: auto;
-                    right: calc(100% - 0.5px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(90deg);
-                }
-.s-tooltip--right-bottom-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  right: 100%;
-                  left: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--right-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple right-bottom tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--right-bottom {top: auto;
-                left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                right: auto;    
-                bottom: 0;
-                transform: translateY(50%);
-        }
-.s-tooltip--right-bottom:after {
-                    top: 50%;
-                    left: auto;
-                    right: 100%;
-                    bottom: auto;
-                    margin-top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(90deg);
-                }
-.s-tooltip--right-bottom:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  right: 100%;
-                  left: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--right-bottom-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a right tooltip bottom and aligned bottom
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:right-bottom-bottom">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--right-bottom-bottom {bottom: 0;
-                left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                right: auto;    
-                top: auto;
-                transform: none;
-        }
-.s-tooltip--right-bottom-bottom:after {
-                    top: calc(100% - var(--s-theme-ui-tooltip-arrowSize, 20px) * 1.5);
-                    left: auto;
-                    right: calc(100% - 1px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(90deg);
-                }
-.s-tooltip--right-bottom-bottom:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  left: 100%;
-                  right: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
         * @name           s-tooltip--left
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -4961,18 +4962,26 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * This class represent a simple left tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip:left">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-.s-tooltip--left {top: 50%;
+.s-tooltip-container--active > .s-tooltip--left {
+            opacity: 1;
+        }
+.s-tooltip--left{
+    
+  
+                top: 50%;
                 right: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
                 left: auto;    
                 bottom: auto;
                 transform: translateY(-50%);
-        }
+}
 .s-tooltip--left:after {
                     top: 50%;
                     right: auto;
@@ -4991,228 +5000,6 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
                   top: 0;
                 }
 /**
-        * @name           s-tooltip--left-center-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip centered and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left-center-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--left-center-top {top: 50%;
-                right: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                left: auto;    
-                bottom: auto;
-                transform: translateY(calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1));
-        }
-.s-tooltip--left-center-top:after {
-                    top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    right: auto;
-                    left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px) / 2 - 1px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(-90deg);
-                }
-.s-tooltip--left-center-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  left: 100%;
-                  right: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--left-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left-top tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--left-top {top: 0;
-                right: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                left: auto;    
-                bottom: auto;
-                transform: translateY(-50%);
-        }
-.s-tooltip--left-top:after {
-                    top: 50%;
-                    right: auto;
-                    left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px) / 2 - 1px);
-                    bottom: auto;
-                    margin-top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(-90deg);
-                }
-.s-tooltip--left-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  left: 100%;
-                  right: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--left-top-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip top and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left-top-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--left-top-top {top: 0;
-                right: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                left: auto;    
-                bottom: auto;
-                transform: none;
-        }
-.s-tooltip--left-top-top:after {
-                    top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    right: auto;
-                    left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px) / 2 - 1px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(-90deg);
-                }
-.s-tooltip--left-top-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  left: 100%;
-                  right: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--left-bottom-top
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip bottom and aligned top
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left-bottom-top">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--left-bottom-top {top: calc(100% - var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                right: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                left: auto;    
-                bottom: auto;
-                transform: translateY(calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1));
-        }
-.s-tooltip--left-bottom-top:after {
-                    top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    right: auto;
-                    left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px) / 2 - 1px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(-90deg);
-                }
-.s-tooltip--left-bottom-top:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  left: 100%;
-                  right: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--left-bottom-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a left tooltip bottom and aligned bottom
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip:left-bottom-bottom">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--left-bottom-bottom {bottom: 0;
-                right: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                left: auto;    
-                top: auto;
-                transform: none;
-        }
-.s-tooltip--left-bottom-bottom:after {
-                    top: calc(100% - var(--s-theme-ui-tooltip-arrowSize, 20px) * 1.5);
-                    right: auto;
-                    left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px) / 2 - 1px);
-                    bottom: auto;
-                    margin-top: 0;
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(-90deg);
-                }
-.s-tooltip--left-bottom-bottom:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  left: 100%;
-                  right: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
-        * @name           s-tooltip--left-bottom
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple left-bottom tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--left-bottom {top: auto;
-                right: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                left: auto;    
-                bottom: 0;
-                transform: translateY(50%);
-        }
-.s-tooltip--left-bottom:after {
-                    top: 50%;
-                    right: auto;
-                    left: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px) / 2 - 1px);
-                    bottom: auto;
-                    margin-top: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(-90deg);
-                }
-.s-tooltip--left-bottom:before {
-                  height: 100%;
-                  width: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  left: 100%;
-                  right: auto;
-                  bottom: auto;
-                  top: 0;
-                }
-/**
         * @name           s-tooltip--bottom
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -5220,18 +5007,26 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * This class represent a simple bottom tooltip
         * 
         * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
+        * <a class="s-tooltip-container s-btn">
+        *   I'm a cool button
+        *   <div class="s-tooltip">Something cool</div>
+        * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-.s-tooltip--bottom {bottom: auto;
+.s-tooltip-container--active > .s-tooltip--bottom {
+            opacity: 1;
+        }
+.s-tooltip--bottom{
+    
+  
+                bottom: auto;
                 right: auto;
                 left: 50%;
                 top: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
                 transform: translateX(-50%);
-        }
+}
 .s-tooltip--bottom:after {
                     bottom: 100%;
                     top: auto;
@@ -5248,96 +5043,6 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
                   top: auto;
                   left: 0;
                 }
-/**
-        * @name           s-tooltip--bottom-left
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple bottom-left tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--bottom-left {bottom: auto;
-                right: auto;
-                left: 0;
-                top: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                transform: translate(0,0);
-        }
-.s-tooltip--bottom-left:after {
-                    bottom: 100%;
-                    top: auto;
-                    left: 50%;
-                    right: auto;
-                    margin-left: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(180deg);
-                }
-.s-tooltip--bottom-left:before {
-                  width: 100%;
-                  height: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  bottom: 100%;
-                  top: auto;
-                  left: 0;
-                }
-/**
-        * @name           s-tooltip--bottom-right
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple bottom-right tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--bottom-right {bottom: auto;
-                left: auto;
-                right: 0;
-                top: calc(100% + var(--s-theme-ui-tooltip-arrowSize, 20px));
-                transform: translate(0,0);
-        }
-.s-tooltip--bottom-right:after {
-                    bottom: 100%;
-                    top: auto;
-                    left: 50%;
-                    right: auto;
-                    margin-left: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) * -1 / 2);
-                    border-width: calc(var(--s-theme-ui-tooltip-arrowSize, 20px) / 2);
-                    transform: rotate(180deg);
-                }
-.s-tooltip--bottom-right:before {
-                  width: 100%;
-                  height: var(--s-theme-ui-tooltip-arrowSize, 20px);
-                  bottom: 100%;
-                  top: auto;
-                  left: 0;
-                }
-/**
-        * @name           s-tooltip--nowrap
-        * @namespace      sugar.css.ui.tooltip
-        * @type          w CssClass
-        * 
-        * This class represent a simple tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container">I'm a cool button</a>
-        * <div class="s-tooltip">Something cool</div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-tooltip--nowrap {
-            white-space: nowrap;
-            max-width: 9999999px !important;
-        }
 /**
        * @name        s-ui:main
        * @namespace     sugar.css.ui.label
@@ -5532,7 +5237,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-typo--h1 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-100, 4.5rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-90, 4rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
    }
@@ -5553,7 +5258,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-format--text h1 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-100, 4.5rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-90, 4rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
      }
@@ -5613,7 +5318,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-typo--h2 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-90, 4rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-80, 3.5rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
    }
@@ -5634,7 +5339,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-format--text h2 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-90, 4rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-80, 3.5rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
      }
@@ -5694,7 +5399,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-typo--h3 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-80, 3.5rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-70, 3rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
    }
@@ -5715,7 +5420,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-format--text h3 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-80, 3.5rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-70, 3rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
      }
@@ -5775,7 +5480,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-typo--h4 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-70, 3rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-60, 2.25rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
    }
@@ -5796,7 +5501,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-format--text h4 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-70, 3rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-60, 2.25rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
      }
@@ -5856,7 +5561,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-typo--h5 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-60, 2.25rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-50, 1.75rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
    }
@@ -5877,7 +5582,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-format--text h5 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-60, 2.25rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-50, 1.75rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
      }
@@ -5937,7 +5642,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-typo--h6 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-50, 1.75rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-40, 1.25rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
    }
@@ -5958,7 +5663,7 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-format--text h6 {font-family: var(--s-theme-font-family-title-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-50, 1.75rem) * var(--s-scale, 1));
+font-weight: var(--s-theme-font-family-title-font-weight, 600);font-size: calc(var(--s-theme-font-size-40, 1.25rem) * var(--s-scale, 1));
 line-height: 1;
 max-width: 55ch;
      }
@@ -6018,8 +5723,8 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-typo--p {font-family: var(--s-theme-font-family-default-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc(var(--s-theme-font-size-40, 1.25rem) * var(--s-scale, 1));
-line-height: 1.5;
+font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc(var(--s-theme-font-size-30, 1rem) * var(--s-scale, 1));
+line-height: 1.2;
 max-width: 55ch;
    }
 /**
@@ -6039,8 +5744,8 @@ max-width: 55ch;
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .s-format--text p {font-family: var(--s-theme-font-family-default-font-family, "Titillium Web");
-font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc(var(--s-theme-font-size-40, 1.25rem) * var(--s-scale, 1));
-line-height: 1.5;
+font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc(var(--s-theme-font-size-30, 1rem) * var(--s-scale, 1));
+line-height: 1.2;
 max-width: 55ch;
      }
 /**
@@ -43757,10 +43462,10 @@ right: 0;
  * @cssClass      s-font:code       Apply the code font on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mb:30">Legacy Integration Officer Brooke Schuppe MD</h1>
- * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mb:30">Dynamic Group Supervisor Lynne Cummings</h1>
- * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mb:30">Forward Factors Representative Willard Bogisich</h1>
- * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mb:30">Direct Solutions Designer Randall Littel</h1>
+        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mb:30">Chief Accountability Planner Vicki Jacobson</h1>
+ * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mb:30">Investor Functionality Officer Damon Dickens</h1>
+ * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mb:30">Corporate Research Planner Leland Zemlak</h1>
+ * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mb:30">National Brand Representative Earnest MacGyver</h1>
         * 
         * @example        css
         * .my-font-default {
@@ -43878,19 +43583,19 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
  * @cssClass      s-font:default       Apply the default font size on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mb:30">Dynamic Interactions Administrator Cesar Halvorson</h1>
- * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mb:30">Customer Functionality Designer Gregory Hettinger</h1>
- * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mb:30">Investor Applications Specialist Tiffany Greenholt</h1>
- * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mb:30">Corporate Communications Assistant May Haag</h1>
- * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mb:30">Chief Applications Consultant Miss Kirk Price</h1>
- * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mb:30">Principal Communications Executive Alex Hills</h1>
- * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mb:30">Legacy Group Officer Randall Hamill</h1>
- * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mb:30">District Division Associate Mrs. Dana Abbott</h1>
- * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mb:30">Legacy Metrics Liaison Sheldon Leffler</h1>
- * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mb:30">Dynamic Group Administrator Alexis Runte</h1>
- * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mb:30">National Data Strategist Jana Haley I</h1>
- * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mb:30">Future Security Representative Suzanne Hegmann</h1>
- * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mb:30">Lead Factors Administrator Tracey Predovic</h1>
+        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mb:30">Human Quality Developer Flora Lindgren</h1>
+ * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mb:30">Global Mobility Analyst Heidi Stamm</h1>
+ * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mb:30">District Operations Representative Tom Weissnat</h1>
+ * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mb:30">Investor Brand Manager Lori Ward</h1>
+ * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mb:30">Direct Creative Analyst Andres Corkery</h1>
+ * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mb:30">Central Factors Agent Lorraine Bins</h1>
+ * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mb:30">Product Tactics Manager Nellie O'Connell Jr.</h1>
+ * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mb:30">Regional Communications Assistant Mario Rolfson</h1>
+ * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mb:30">Product Metrics Executive Guy Cummerata</h1>
+ * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mb:30">Product Assurance Strategist Glen Koelpin Sr.</h1>
+ * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mb:30">International Implementation Agent Micheal Boyle</h1>
+ * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mb:30">Chief Group Planner Gladys Haag</h1>
+ * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mb:30">Internal Creative Architect Elisa Beer</h1>
         * 
         * @example        css
         * .my-font-0 {
@@ -44120,12 +43825,12 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
         * @example        html
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset size</h3>
         * <div class="s-font:60 s-mb:30">
-        *   Dynamic Directives Orchestrator <span class="s-font:reset-size">Robyn Tremblay</span>
+        *   Investor Communications Architect <span class="s-font:reset-size">Marcus Farrell Jr.</span>
         * </div>
         * 
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset family</h3>
         * <div class="s-font:quote s-font:50">
-        *   Senior Branding Supervisor <span class="s-font:reset-family">Leah Heathcote</span>
+        *   Legacy Branding Facilitator <span class="s-font:reset-family">Lynda McLaughlin</span>
         * </div>
         * 
         * @since      2.0.0
@@ -53575,8 +53280,8 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-default-rhythmVertical-margin-bottom: 40;
---s-theme-ui-form-paddingInline: 0.75rem;
---s-theme-ui-form-paddingBlock: 0.375rem;
+--s-theme-ui-form-paddingInline: 0.75em;
+--s-theme-ui-form-paddingBlock: 0.375em;
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -53593,31 +53298,31 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
---s-theme-ui-colorPicker-paddingInline: 0.75rem;
---s-theme-ui-colorPicker-paddingBlock: 0.375rem;
+--s-theme-ui-colorPicker-paddingInline: 0.75em;
+--s-theme-ui-colorPicker-paddingBlock: 0.375em;
 --s-theme-ui-colorPicker-borderRadius: 6px;
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-datePicker-paddingInline: 0.75rem;
---s-theme-ui-datePicker-paddingBlock: 0.375rem;
+--s-theme-ui-datePicker-paddingInline: 0.75em;
+--s-theme-ui-datePicker-paddingBlock: 0.375em;
 --s-theme-ui-datePicker-borderRadius: 6px;
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-input-paddingInline: 0.75rem;
---s-theme-ui-input-paddingBlock: 0.375rem;
+--s-theme-ui-input-paddingInline: 0.75em;
+--s-theme-ui-input-paddingBlock: 0.375em;
 --s-theme-ui-input-borderRadius: 6px;
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusSpread: 5px;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-input-defaultStyle: default;
---s-theme-ui-range-paddingInline: 0.75rem;
---s-theme-ui-range-paddingBlock: 0.375rem;
+--s-theme-ui-input-defaultStyle: solid;
+--s-theme-ui-range-paddingInline: 0.75em;
+--s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -53625,16 +53330,16 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-range-defaultStyle: default;
---s-theme-ui-label-paddingInline: 0.75rem;
---s-theme-ui-label-paddingBlock: 0.375rem;
+--s-theme-ui-label-paddingInline: 0.75em;
+--s-theme-ui-label-paddingBlock: 0.375em;
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-label-defaultStyle: default;
---s-theme-ui-select-paddingInline: 0.75rem;
---s-theme-ui-select-paddingBlock: 0.375rem;
+--s-theme-ui-label-defaultStyle: inline;
+--s-theme-ui-select-paddingInline: 0.75em;
+--s-theme-ui-select-paddingBlock: 0.375em;
 --s-theme-ui-select-borderRadius: 6px;
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -53665,7 +53370,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-tabs-borderWidth: 1px;
 --s-theme-ui-tabs-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-tabs-depth: 0;
---s-theme-ui-tabs-defaultStyle: default;
+--s-theme-ui-tabs-defaultStyle: solid;
 --s-theme-ui-terminal-paddingInline: 1.5rem;
 --s-theme-ui-terminal-paddingBlock: 0.75rem ;
 --s-theme-ui-terminal-borderRadius: 6px;
@@ -53675,14 +53380,13 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-terminal-defaultColor: accent;
 --s-theme-ui-terminal-rhythmVertical-margin-bottom: 40;
---s-theme-ui-tooltip-paddingInline: 1.5rem;
+--s-theme-ui-tooltip-paddingInline: 0.75rem ;
 --s-theme-ui-tooltip-paddingBlock: 0.75rem ;
 --s-theme-ui-tooltip-borderRadius: 6px;
 --s-theme-ui-tooltip-borderWidth: 1px;
 --s-theme-ui-tooltip-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-tooltip-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-tooltip-maxWidth: 30ch;
 --s-theme-ui-tooltip-arrowSize: 20px;
 --s-theme-ui-code-paddingInline: 1.5rem;
 --s-theme-ui-code-paddingBlock: 0.75rem ;
@@ -53722,38 +53426,38 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-loaderSpinner-duration: 1s;
 --s-theme-ui-loaderSpinner-easing: linear;
 --s-theme-typo-h1-font-family: title;
---s-theme-typo-h1-font-size: 100;
+--s-theme-typo-h1-font-size: 90;
 --s-theme-typo-h1-line-height: 1;
 --s-theme-typo-h1-max-width: 55ch;
 --s-theme-typo-h1-rhythmVertical-margin-bottom: 40;
 --s-theme-typo-h2-font-family: title;
---s-theme-typo-h2-font-size: 90;
+--s-theme-typo-h2-font-size: 80;
 --s-theme-typo-h2-line-height: 1;
 --s-theme-typo-h2-max-width: 55ch;
 --s-theme-typo-h2-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h3-font-family: title;
---s-theme-typo-h3-font-size: 80;
+--s-theme-typo-h3-font-size: 70;
 --s-theme-typo-h3-line-height: 1;
 --s-theme-typo-h3-max-width: 55ch;
 --s-theme-typo-h3-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h4-font-family: title;
---s-theme-typo-h4-font-size: 70;
+--s-theme-typo-h4-font-size: 60;
 --s-theme-typo-h4-line-height: 1;
 --s-theme-typo-h4-max-width: 55ch;
 --s-theme-typo-h4-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h5-font-family: title;
---s-theme-typo-h5-font-size: 60;
+--s-theme-typo-h5-font-size: 50;
 --s-theme-typo-h5-line-height: 1;
 --s-theme-typo-h5-max-width: 55ch;
 --s-theme-typo-h5-rhythmVertical-margin-bottom: 20;
 --s-theme-typo-h6-font-family: title;
---s-theme-typo-h6-font-size: 50;
+--s-theme-typo-h6-font-size: 40;
 --s-theme-typo-h6-line-height: 1;
 --s-theme-typo-h6-max-width: 55ch;
 --s-theme-typo-h6-rhythmVertical-margin-bottom: 20;
 --s-theme-typo-p-font-family: default;
---s-theme-typo-p-font-size: 40;
---s-theme-typo-p-line-height: 1.5;
+--s-theme-typo-p-font-size: 30;
+--s-theme-typo-p-line-height: 1.2;
 --s-theme-typo-p-max-width: 55ch;
 --s-theme-typo-p-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-p-lead-font-family: default;
@@ -54551,6 +54255,106 @@ a:active {
       content: "\f6e3";
       display: inline-block;
     }
+
+/**
+         * @name        s-icon:support-rtl
+          * @namespace      sugar.css.icon
+          * @type           CssClass
+          * @platform         css
+          * @status         beta
+          *
+          * This class allows you to display the "<yellow>support-rtl</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+          *
+          * @example        html
+          * <i class="s-icon:support-rtl s-font:20"></i>
+          * <i class="s-icon:support-rtl s-font:40"></i>
+          * <i class="s-icon:support-rtl s-font:60"></i>
+          * <i class="s-icon:support-rtl s-font:80"></i>
+          * <i class="s-icon:support-rtl s-font:100"></i>
+          */
+
+.s-icon--support-rtl {
+          }
+
+/**
+         * @name        s-icon:support-edge
+          * @namespace      sugar.css.icon
+          * @type           CssClass
+          * @platform         css
+          * @status         beta
+          *
+          * This class allows you to display the "<yellow>support-edge</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+          *
+          * @example        html
+          * <i class="s-icon:support-edge s-font:20"></i>
+          * <i class="s-icon:support-edge s-font:40"></i>
+          * <i class="s-icon:support-edge s-font:60"></i>
+          * <i class="s-icon:support-edge s-font:80"></i>
+          * <i class="s-icon:support-edge s-font:100"></i>
+          */
+
+.s-icon--support-edge {
+          }
+
+/**
+         * @name        s-icon:support-chromium
+          * @namespace      sugar.css.icon
+          * @type           CssClass
+          * @platform         css
+          * @status         beta
+          *
+          * This class allows you to display the "<yellow>support-chromium</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+          *
+          * @example        html
+          * <i class="s-icon:support-chromium s-font:20"></i>
+          * <i class="s-icon:support-chromium s-font:40"></i>
+          * <i class="s-icon:support-chromium s-font:60"></i>
+          * <i class="s-icon:support-chromium s-font:80"></i>
+          * <i class="s-icon:support-chromium s-font:100"></i>
+          */
+
+.s-icon--support-chromium {
+          }
+
+/**
+         * @name        s-icon:support-firefox
+          * @namespace      sugar.css.icon
+          * @type           CssClass
+          * @platform         css
+          * @status         beta
+          *
+          * This class allows you to display the "<yellow>support-firefox</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+          *
+          * @example        html
+          * <i class="s-icon:support-firefox s-font:20"></i>
+          * <i class="s-icon:support-firefox s-font:40"></i>
+          * <i class="s-icon:support-firefox s-font:60"></i>
+          * <i class="s-icon:support-firefox s-font:80"></i>
+          * <i class="s-icon:support-firefox s-font:100"></i>
+          */
+
+.s-icon--support-firefox {
+          }
+
+/**
+         * @name        s-icon:support-safari
+          * @namespace      sugar.css.icon
+          * @type           CssClass
+          * @platform         css
+          * @status         beta
+          *
+          * This class allows you to display the "<yellow>support-safari</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+          *
+          * @example        html
+          * <i class="s-icon:support-safari s-font:20"></i>
+          * <i class="s-icon:support-safari s-font:40"></i>
+          * <i class="s-icon:support-safari s-font:60"></i>
+          * <i class="s-icon:support-safari s-font:80"></i>
+          * <i class="s-icon:support-safari s-font:100"></i>
+          */
+
+.s-icon--support-safari {
+          }
 
 /**
          * @name        s-icon:vue
@@ -55891,8 +55695,8 @@ a:active {
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-default-rhythmVertical-margin-bottom: 40;
---s-theme-ui-form-paddingInline: 0.75rem;
---s-theme-ui-form-paddingBlock: 0.375rem;
+--s-theme-ui-form-paddingInline: 0.75em;
+--s-theme-ui-form-paddingBlock: 0.375em;
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -55909,31 +55713,31 @@ a:active {
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
---s-theme-ui-colorPicker-paddingInline: 0.75rem;
---s-theme-ui-colorPicker-paddingBlock: 0.375rem;
+--s-theme-ui-colorPicker-paddingInline: 0.75em;
+--s-theme-ui-colorPicker-paddingBlock: 0.375em;
 --s-theme-ui-colorPicker-borderRadius: 6px;
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-datePicker-paddingInline: 0.75rem;
---s-theme-ui-datePicker-paddingBlock: 0.375rem;
+--s-theme-ui-datePicker-paddingInline: 0.75em;
+--s-theme-ui-datePicker-paddingBlock: 0.375em;
 --s-theme-ui-datePicker-borderRadius: 6px;
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-input-paddingInline: 0.75rem;
---s-theme-ui-input-paddingBlock: 0.375rem;
+--s-theme-ui-input-paddingInline: 0.75em;
+--s-theme-ui-input-paddingBlock: 0.375em;
 --s-theme-ui-input-borderRadius: 6px;
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusSpread: 5px;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-input-defaultStyle: default;
---s-theme-ui-range-paddingInline: 0.75rem;
---s-theme-ui-range-paddingBlock: 0.375rem;
+--s-theme-ui-input-defaultStyle: solid;
+--s-theme-ui-range-paddingInline: 0.75em;
+--s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -55941,16 +55745,16 @@ a:active {
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-range-defaultStyle: default;
---s-theme-ui-label-paddingInline: 0.75rem;
---s-theme-ui-label-paddingBlock: 0.375rem;
+--s-theme-ui-label-paddingInline: 0.75em;
+--s-theme-ui-label-paddingBlock: 0.375em;
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-label-defaultStyle: default;
---s-theme-ui-select-paddingInline: 0.75rem;
---s-theme-ui-select-paddingBlock: 0.375rem;
+--s-theme-ui-label-defaultStyle: inline;
+--s-theme-ui-select-paddingInline: 0.75em;
+--s-theme-ui-select-paddingBlock: 0.375em;
 --s-theme-ui-select-borderRadius: 6px;
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
@@ -55981,7 +55785,7 @@ a:active {
 --s-theme-ui-tabs-borderWidth: 1px;
 --s-theme-ui-tabs-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-tabs-depth: 0;
---s-theme-ui-tabs-defaultStyle: default;
+--s-theme-ui-tabs-defaultStyle: solid;
 --s-theme-ui-terminal-paddingInline: 1.5rem;
 --s-theme-ui-terminal-paddingBlock: 0.75rem ;
 --s-theme-ui-terminal-borderRadius: 6px;
@@ -55991,14 +55795,13 @@ a:active {
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-terminal-defaultColor: accent;
 --s-theme-ui-terminal-rhythmVertical-margin-bottom: 40;
---s-theme-ui-tooltip-paddingInline: 1.5rem;
+--s-theme-ui-tooltip-paddingInline: 0.75rem ;
 --s-theme-ui-tooltip-paddingBlock: 0.75rem ;
 --s-theme-ui-tooltip-borderRadius: 6px;
 --s-theme-ui-tooltip-borderWidth: 1px;
 --s-theme-ui-tooltip-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-tooltip-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-tooltip-maxWidth: 30ch;
 --s-theme-ui-tooltip-arrowSize: 20px;
 --s-theme-ui-code-paddingInline: 1.5rem;
 --s-theme-ui-code-paddingBlock: 0.75rem ;
@@ -56038,38 +55841,38 @@ a:active {
 --s-theme-ui-loaderSpinner-duration: 1s;
 --s-theme-ui-loaderSpinner-easing: linear;
 --s-theme-typo-h1-font-family: title;
---s-theme-typo-h1-font-size: 100;
+--s-theme-typo-h1-font-size: 90;
 --s-theme-typo-h1-line-height: 1;
 --s-theme-typo-h1-max-width: 55ch;
 --s-theme-typo-h1-rhythmVertical-margin-bottom: 40;
 --s-theme-typo-h2-font-family: title;
---s-theme-typo-h2-font-size: 90;
+--s-theme-typo-h2-font-size: 80;
 --s-theme-typo-h2-line-height: 1;
 --s-theme-typo-h2-max-width: 55ch;
 --s-theme-typo-h2-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h3-font-family: title;
---s-theme-typo-h3-font-size: 80;
+--s-theme-typo-h3-font-size: 70;
 --s-theme-typo-h3-line-height: 1;
 --s-theme-typo-h3-max-width: 55ch;
 --s-theme-typo-h3-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h4-font-family: title;
---s-theme-typo-h4-font-size: 70;
+--s-theme-typo-h4-font-size: 60;
 --s-theme-typo-h4-line-height: 1;
 --s-theme-typo-h4-max-width: 55ch;
 --s-theme-typo-h4-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-h5-font-family: title;
---s-theme-typo-h5-font-size: 60;
+--s-theme-typo-h5-font-size: 50;
 --s-theme-typo-h5-line-height: 1;
 --s-theme-typo-h5-max-width: 55ch;
 --s-theme-typo-h5-rhythmVertical-margin-bottom: 20;
 --s-theme-typo-h6-font-family: title;
---s-theme-typo-h6-font-size: 50;
+--s-theme-typo-h6-font-size: 40;
 --s-theme-typo-h6-line-height: 1;
 --s-theme-typo-h6-max-width: 55ch;
 --s-theme-typo-h6-rhythmVertical-margin-bottom: 20;
 --s-theme-typo-p-font-family: default;
---s-theme-typo-p-font-size: 40;
---s-theme-typo-p-line-height: 1.5;
+--s-theme-typo-p-font-size: 30;
+--s-theme-typo-p-line-height: 1.2;
 --s-theme-typo-p-max-width: 55ch;
 --s-theme-typo-p-rhythmVertical-margin-bottom: 30;
 --s-theme-typo-p-lead-font-family: default;

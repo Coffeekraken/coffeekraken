@@ -19,6 +19,7 @@ import __todoTag from './tags/todo';
 import __menuTag from './tags/menu';
 import __cssClass from './tags/cssClass';
 import __interfaceTag from './tags/interface';
+import __supportTag from './tags/support';
 
 /**
  * @name          SDocblockBlock
@@ -400,6 +401,7 @@ SDocblockBlock.registerTag('platform', __platformTag);
 SDocblockBlock.registerTag('namespace', __namespaceTag);
 SDocblockBlock.registerTag('menu', __menuTag);
 SDocblockBlock.registerTag('cssClass', __cssClass);
+SDocblockBlock.registerTag('support', __supportTag);
 // SDocblockBlock.registerTag('listens', __listensTag);
 // SDocblockBlock.registerTag('member', __memberTag);
 // SDocblockBlock.registerTag('var', __memberTag);

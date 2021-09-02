@@ -50,18 +50,21 @@ export default function ({
         border: sugar.color(ui, border) solid sugar.theme(ui.${finalParams.name}.borderWidth);
         border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
         transition: sugar.theme(ui.${finalParams.name}.transition);
-
-        /** @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)}); */
+        @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
 
         &::placeholder {
           color: sugar.color(main, placeholder);
+        }
+
+        &::selection {
+            color: sugar.color(ui, 100);
+            background-color: sugar.color(ui);
         }
 
         @sugar.state.hover {
           background-color: sugar.color(main:hover, ui);
           border: sugar.color(ui:hover, border) solid 1px;
           color: sugar.color(ui:hover, foreground);
-          
         }
         @sugar.state.focus {
           background-color: sugar.color(main:focus, ui);

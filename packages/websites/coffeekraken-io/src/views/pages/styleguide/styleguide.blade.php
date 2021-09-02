@@ -18,16 +18,20 @@
 
             <div class="s-container">
 
-                <div class="s-grid:12:gutter-between:gutter-50:align-center">
+                <div class="s-grid:12:gutter-between:gutter-50">
 
                     <div class="s-format:text s-rhythm:vertical">
 
-                        @include('doc.description', ['block' => $firstBlock])
-                        @if ($firstBlock->install)
-                            @include('doc.install', ['block' => $firstBlock])
-                        @elseif ($firstBlock->example)
-                            @include('generic.code.example', ['examples' => $firstBlock->example, 'lines' => 1])
-                        @endif
+                        <div class="__preview-metas">
+
+                            @include('doc.description', ['block' => $firstBlock])
+                            @if ($firstBlock->install)
+                                @include('doc.install', ['block' => $firstBlock])
+                            @elseif ($firstBlock->example)
+                                @include('generic.code.example', ['examples' => $firstBlock->example, 'lines' => 1])
+                            @endif
+
+                        </div>
 
                     </div>
 
@@ -67,6 +71,8 @@
                                 <i class="s-platform:{{ $platform->name }}"></i>
                             @endforeach
                         @endif
+                        &nbsp;&nbsp;
+                        @include('generic.support.icons', ['supports' => $firstBlock->support])
                     </div>
 
                     @include('generic.toolbar.toolbar-join-us')

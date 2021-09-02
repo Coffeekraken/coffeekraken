@@ -28,12 +28,18 @@
         }
     }
 
+    .__preview-metas {
+        position: sticky;
+        top: 208px;
+        /* max-height: calc(100vh - 140px); */
+    }
+
     .__preview-example {
-        max-height: calc(100vh - 400px);
+        /* max-height: calc(100vh - 400px);
         overflow-x: hidden;
         overflow-y: auto;
         padding-inline-end: sugar.padding(50);
-        @sugar.scrollbar (accent, 1px);
+        @sugar.scrollbar (accent, 1px); */
     }
 
     .toolbar {

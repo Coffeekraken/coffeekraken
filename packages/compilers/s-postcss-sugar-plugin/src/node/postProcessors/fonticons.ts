@@ -13,24 +13,22 @@ import __postcss from 'postcss';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default function ({ root, sharedData }) {
-    
     const duration = new __SDuration();
 
-    const dirName =
-        typeof root.source.input.file === 'string'
-        ? __path.dirname(root.source.input.file)
-        : __dirname();
+    const dirName = typeof root.source.input.file === 'string' ? __path.dirname(root.source.input.file) : __dirname();
 
     if (!sharedData.iconsSourcePaths || sharedData.iconsSourcePaths.indexOf(dirName) === -1) return;
     if (!sharedData.iconsInputDir) return;
-    
+
     const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
 
     // prepend the icons import
     const importFontUrl = __path.relative(__srcCssDir(), fantasticonConfig.outputDir);
-    root.nodes.unshift(__postcss.parse(`
+    root.nodes.unshift(
+        __postcss.parse(`
         @import url(${importFontUrl}/${fantasticonConfig.name}.css);
-    `));
+    `),
+    );
 
     // handle cached hash
     const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
@@ -43,9 +41,9 @@ export default function ({ root, sharedData }) {
         if (hash === cachedHash) {
             // delete the temp icons folder for fresh new compilation
             try {
-                __fs.rmSync(sharedData.iconsInputDir, { recursive: true});
-            } catch(e) {}
-            // console.log(`<cyan>[fonticons]</cyan> No need to regenerate icons font`);            
+                __fs.rmSync(sharedData.iconsInputDir, { recursive: true });
+            } catch (e) {}
+            // console.log(`<cyan>[fonticons]</cyan> No need to regenerate icons font`);
             return;
         }
     }
@@ -53,14 +51,16 @@ export default function ({ root, sharedData }) {
     __ensureDirSync(fantasticonConfig.outputDir);
 
     try {
-
         console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
 
-        __childProcess.execSync(`npx fantasticon -o ${fantasticonConfig.outputDir} -n ${fantasticonConfig.name} --normalize --selector .s-icon --prefix '--' ${sharedData.iconsInputDir}`, {
-            stdio: 'pipe',
-            cwd: __packageRootDir()
-        });
-    } catch(e) {
+        __childProcess.execSync(
+            `npx fantasticon -o ${fantasticonConfig.outputDir} -n ${fantasticonConfig.name} --normalize --selector .s-icon --prefix '--' ${sharedData.iconsInputDir}`,
+            {
+                stdio: 'pipe',
+                cwd: __packageRootDir(),
+            },
+        );
+    } catch (e) {
         throw new Error(e);
     }
 
@@ -71,7 +71,7 @@ export default function ({ root, sharedData }) {
 
     // generate the scoped icons selector
     const iconsSelectorsArray: string[] = [];
-    iconsFilenames.forEach(filename => {
+    iconsFilenames.forEach((filename) => {
         iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, '')}:before`);
     });
 
@@ -80,7 +80,10 @@ export default function ({ root, sharedData }) {
 
     // replace some parts in the output css
     cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
-    cssStr = cssStr.replace(/\.s-icon:before\s?{/, `${iconsSelectorsArray.join(',')} {\nposition: relative;\ntop: 0.1em;`);
+    cssStr = cssStr.replace(
+        /\.s-icon:before\s?{/,
+        `${iconsSelectorsArray.join(',')} {\nposition: relative;\ntop: 0.25em;`,
+    );
 
     // rewrite the css file
     __fs.writeFileSync(cssPath, cssStr);
@@ -91,9 +94,12 @@ export default function ({ root, sharedData }) {
 
     // delete the temp icons folder for fresh new compilation
     try {
-        __fs.rmSync(sharedData.iconsInputDir, { recursive: true});
-    } catch(e) {}
+        __fs.rmSync(sharedData.iconsInputDir, { recursive: true });
+    } catch (e) {}
 
-    console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);
-
+    console.log(
+        `<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${
+            duration.end().formatedDuration
+        }</cyan>`,
+    );
 }

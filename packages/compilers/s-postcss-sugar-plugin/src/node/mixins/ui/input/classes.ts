@@ -1,17 +1,23 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
+import __faker from 'faker';
 
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
     static definition = {
         styles: {
             type: 'String[]',
-            default: ['default', 'underline'],
+            default: ['solid'],
+        },
+        defaultStyle: {
+            type: 'String',
+            default: __theme().config('ui.input.defaultStyle'),
         },
     };
 }
 
 export interface IPostcssSugarPluginUiFormClassesParams {
     styles: string[];
+    defaultStyle: 'solid';
 }
 
 export { postcssSugarPluginUiFormClassesInterface as interface };
@@ -26,11 +32,10 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormClassesParams = {
-        styles: ['default', 'underline'],
+        styles: ['solid'],
+        defaultStyle: 'solid',
         ...params,
     };
-
-    const defaultStyle = __theme().config('ui.input.defaultStyle');
 
     const vars: string[] = [
         `
@@ -45,7 +50,7 @@ export default function ({
         * @name          Text Input
         * @namespace          sugar.css.ui.input
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/text-input
+        * @menu           Styleguide / Forms        /styleguide/forms/text-input
         * @platform       css
         * @status       beta
         * 
@@ -54,7 +59,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-input${
-                    defaultStyle === style ? '' : `\:${style}`
+                    finalParams.defaultStyle === style ? '' : `\:${style}`
                 }           Apply the ${style} input style`;
             })
             .join('\n')}
@@ -65,10 +70,22 @@ export default function ({
                 return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
             *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-mb\:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-ui\:accent s-mb\:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-ui\:complementary s-mb\:30" />
-            *   <input type="text" placeholder="Type something!" class="s-input\:${style} s-mr\:20 s-ui\:error s-mb\:30" />
+            *   <label class="s-label s-mb\:30">
+            *       ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50" />
+            *   </label>
+            *   <label class="s-label s-mb\:30">
+            *       ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:accent" />
+            *   </label>
+            *   <label class="s-label s-mb\:30">
+            *        ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:complementary" />
+            *   </label>
+            *   <label class="s-label s-mb\:30">
+            *        ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:error" />
+            *   </label>
             * </div>
             * `;
             })
@@ -80,7 +97,7 @@ export default function ({
     `);
 
     finalParams.styles.forEach((style) => {
-        const isDefaultStyle = defaultStyle === style;
+        const isDefaultStyle = finalParams.defaultStyle === style;
 
         const styleCls = isDefaultStyle ? '' : `.s-input--${style}`;
         const cls = `.s-input${styleCls}`;

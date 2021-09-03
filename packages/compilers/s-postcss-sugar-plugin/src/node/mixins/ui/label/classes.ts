@@ -82,6 +82,18 @@ export default function ({
             *     <textarea class="s-input s-width\:50" placeholder="Type something!" rows="3"></textarea>
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
+            *   <label dir="rtl" class="s-mb\:30 s-ui\:accent s-label${
+                style === finalParams.defaultStyle ? '' : `\:${style}`
+            }">
+            *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
+            *     <span>${__faker.name.title()} ${__faker.name.findName()} (RTL)</span>
+            *   </label>
+            *   <label class="s-mb\:30 s-scale\:15 s-ui\:accent s-label${
+                style === finalParams.defaultStyle ? '' : `\:${style}`
+            }">
+            *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
+            *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
+            *   </label>
             * </div>
             * `;
             })

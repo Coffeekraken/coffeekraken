@@ -64,10 +64,10 @@ export default function ({
                 return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
             *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
-            *   <a class="s-btn\:${style} s-mr\:20">Click me!</a>
-            *   <a class="s-btn\:${style} s-mr\:20 s-ui\:accent">Click me!</a>
-            *   <a class="s-btn\:${style} s-mr\:20 s-ui\:complementary">Click me!</a>
-            *   <a class="s-btn\:${style} s-ui\:error">Click me!</a>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-ui\:accent"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-ui\:complementary"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn\:${style} s-ui\:error"><span>Click me!</span></a>
             * </div>
             * `;
             })
@@ -76,11 +76,9 @@ export default function ({
         * <!-- scales -->
         * <div class="s-mb\:50">
         *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
-        *   <a class="s-btn s-scale\:05 s-mr\:20 s-mb\:20">Click me!</a>
-        *   <a class="s-btn s-scale\:1 s-mr\:20 s-mb\:20">Click me!</a>
-        *   <a class="s-btn s-scale\:12 s-mr\:20 s-mb\:20">Click me!</a>
-        *   <a class="s-btn s-scale\:15 s-mr\:20 s-mb\:20">Click me!</a>
-        *   <a class="s-btn s-scale\:20 s-mb\:20">Click me!</a>
+        *   <a tabindex="0" class="s-btn s-scale\:07 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale\:1 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale\:13 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
         * </div>
         * 
         * @since      2.0.0

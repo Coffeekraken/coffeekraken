@@ -11,6 +11,10 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
             values: ['solid'],
             default: __theme().config('ui.input.defaultStyle'),
         },
+        focusOutline: {
+            type: 'Boolean',
+            default: __theme().config('ui.input.focusOutline'),
+        },
         scope: {
             type: 'String',
             values: ['bare', 'lnf'],
@@ -21,6 +25,7 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiFormInputParams {
     style: 'solid';
+    focusOutline: boolean;
     scope: string[];
 }
 
@@ -37,6 +42,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiFormInputParams = {
         style: 'solid',
+        focusOutline: true,
         scope: [],
         ...params,
     };
@@ -44,6 +50,12 @@ export default function ({
     const vars: string[] = [];
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
+        if (finalParams.focusOutline) {
+            vars.push(`
+            @sugar.state.focusOutline;
+`);
+        }
+
         vars.push(`
             @sugar.ui.base(input);
   `);

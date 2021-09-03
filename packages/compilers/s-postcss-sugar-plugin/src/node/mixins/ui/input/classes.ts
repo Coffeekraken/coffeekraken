@@ -86,6 +86,14 @@ export default function ({
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:error" />
             *   </label>
+            *   <label dir="rtl" class="s-label s-mb\:30">
+            *        ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${style} s-width\:50 s-ui\:accent" />
+            *   </label>
+            *   <label class="s-label s-mb\:30">
+            *        ${__faker.name.findName()}
+            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-scale\:15 s-ui\:accent" />
+            *   </label>
             * </div>
             * `;
             })

@@ -46,7 +46,7 @@ export default function ({
         vars.push(`
           width: 100%;
           cursor: pointer;
-          font-size: 1rem;
+          font-size: sugar.scalable(1rem);
     `);
     }
 
@@ -66,34 +66,54 @@ export default function ({
                   position: relative;
 
                   --delta: 0.1em;
+                  --top: sugar.theme(ui.form.paddingBlock);
+                  --left: sugar.theme(ui.form.paddingInline);
 
                   & > *:not(input):not(textarea):not(select) {
-                    --top: sugar.theme(ui.form.paddingBlock);
                     top: calc(var(--top) + 0.6em + var(--delta));
-                    --left: sugar.theme(ui.form.paddingInline);
-                    left: calc(var(--left) + 0.2em);
+                    left: 0;
+                    padding-inline: sugar.scalable(sugar.theme(ui.form.paddingInline));
                     position: absolute;
                     z-index: 1;
                     transition: sugar.theme(ui.label.transition);
+                    transform: scale(1);
+                    transform-origin: 0 0;
                   }
 
                   &:focus,
                   &:focus-within {
                     & > *:not(input):not(textarea):not(select) {
-                      --top: sugar.theme(ui.form.paddingBlock);
                       top: calc(var(--top) + 0.3em);
-                      --left: sugar.theme(ui.form.paddingInline);
-                      left: calc(var(--left) + 0.3em);
-                      font-size: 0.7em;
+                      left: 0.3em;
+                      transform: scale(0.7);
                     }
                   }
                   & > input:not(:placeholder-shown) + *,
                   & > textarea:not(:placeholder-shown) + * {
-                    --top: sugar.theme(ui.form.paddingBlock);
                     top: calc(var(--top) + 0.3em);
-                    --left: sugar.theme(ui.form.paddingInline);
-                    left: calc(var(--left) + 0.3em);
-                    font-size: 0.7em;
+                    left: 0.3em;
+                    transform: scale(0.7);
+                  }
+
+                  [dir="rtl"] &,
+                  &[dir="rtl"] {
+                    & > *:not(input):not(textarea):not(select) {
+                      left: auto;
+                      right: 0;
+                      transform-origin: 100% 0;
+                    }
+                    &:focus,
+                    &:focus-within {
+                      & > *:not(input):not(textarea):not(select) {
+                        left: auto;
+                        right: 0.3em;
+                      }
+                    }
+                    & > input:not(:placeholder-shown) + *,
+                    & > textarea:not(:placeholder-shown) + * {
+                      left: auto;
+                      right: 0.3em;
+                    }
                   }
 
                   & > input,
@@ -137,8 +157,6 @@ export default function ({
             }
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-
-
                   & > *:not(input):not(textarea):not(select) {
                     color: sugar.color(ui, placeholder);
                     transition: sugar.theme(ui.label.transition);

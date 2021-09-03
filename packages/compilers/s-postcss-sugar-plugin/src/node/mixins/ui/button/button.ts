@@ -10,6 +10,10 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
             values: ['default', 'gradient', 'outline', 'text'],
             default: __theme().config('ui.button.defaultStyle'),
         },
+        focusOutline: {
+            type: 'Boolean',
+            default: __theme().config('ui.button.focusOutline'),
+        },
         scope: {
             type: 'Array<String>',
             values: ['bare', 'lnf'],
@@ -20,6 +24,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiButtonParams {
     style: 'default' | 'gradient' | 'outline' | 'text';
+    focusOutline: boolean;
     scope: string[];
 }
 
@@ -35,6 +40,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
         style: __theme().config('ui.button.defaultStyle'),
+        focusOutline: true,
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -51,6 +57,7 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
+        position: relative;
       display: inline-block;
       cursor: pointer;
       white-space: nowrap;
@@ -70,14 +77,49 @@ export default function ({
         switch (finalParams.style) {
             case 'gradient':
                 vars.push(`
-            @sugar.gradient(sugar.color(ui, gradientStart), sugar.color(ui, gradientEnd), $angle: 90);
-            color: sugar.color(ui, foreground);
+                    background: none !important;
+                    color: sugar.color(ui, foreground);
+                    border-radius: sugar.theme(ui.button.borderRadius);
+                    transition: sugar.theme(ui.button.transition);
 
-            &:hover, &:focus {
-              @sugar.gradient(sugar.color(ui,gradientEnd), sugar.color(ui, gradientStart), $angle: 90);
-              color: sugar.color(ui:hover, foreground);
-            }
-        `);
+                    --borderWidth: sugar.theme(ui.button.borderWidth);
+
+                    & > * {
+                      position: relative;
+                      z-index: 1;
+                    }
+
+                    &:before {
+                      content: '';
+                      position: absolute;
+                      top: var(--borderWidth); left: var(--borderWidth);
+                      width: calc(100% - (var(--borderWidth) * 2));
+                      height: calc(100% - (var(--borderWidth) * 2));
+                      border-radius: sugar.theme(ui.button.borderRadius);
+                      @sugar.gradient(sugar.color(ui, gradientStart), sugar.color(ui, gradientEnd), $angle: 90);
+                      transition: sugar.theme(ui.button.transition);
+                    }
+
+                    &:after {
+                      content: '';
+                      position: absolute;
+                      top: var(--borderWidth); left: var(--borderWidth);
+                      width: calc(100% - (var(--borderWidth) * 2));
+                      height: calc(100% - (var(--borderWidth) * 2));
+                      border-radius: sugar.theme(ui.button.borderRadius);
+                      @sugar.gradient(sugar.color(ui,gradientEnd), sugar.color(ui, gradientStart), $angle: 90);
+                      opacity: 0;
+                      transition: sugar.theme(ui.button.transition);
+                    }
+
+                    &:hover, &:focus {
+                      color: sugar.color(ui:hover, foreground);
+
+                      &:after {
+                        opacity: 1;
+                      }
+                    }
+                `);
 
                 break;
             case 'outline':
@@ -105,15 +147,21 @@ export default function ({
             case 'default':
             default:
                 vars.push(`
-            background-color: sugar.color(ui);
-            color: sugar.color(ui, foreground);
+                  background-color: sugar.color(ui);
+                  color: sugar.color(ui, foreground);
 
-            &:hover, &:focus {
-              background-color: sugar.color(ui:hover, 50);
-              color: sugar.color(ui:hover, foreground);
-            }
+                  &:hover, &:focus {
+                    background-color: sugar.color(ui:hover, 50);
+                    color: sugar.color(ui:hover, foreground);
+                  }
         `);
                 break;
+        }
+
+        if (finalParams.focusOutline) {
+            vars.push(`
+            @sugar.state.focusOutline;
+        `);
         }
     }
 

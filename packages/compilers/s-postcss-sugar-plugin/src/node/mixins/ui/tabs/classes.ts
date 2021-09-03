@@ -113,6 +113,16 @@ export default function ({
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *   </ul>
         * </div>
+        * 
+        * <!-- scaled -->
+        * <div class="s-font\:30 s-mb\:50">
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scaled</h3>
+        *   <ul class="s-tabs\:grow s-scale\:13 s-ui\:accebt">
+        *     <li tabindex="0" active>${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *   </ul>
+        * </div>
         *
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

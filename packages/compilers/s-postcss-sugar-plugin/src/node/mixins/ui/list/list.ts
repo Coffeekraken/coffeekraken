@@ -82,6 +82,16 @@ export default function ({
                     color: sugar.color(ui);
                 }
             }
+
+            [dir="rtl"] & > *,
+            &[dir="rtl"] > * {
+                ${bulletSelector} {
+                    left: auto;
+                    right: 0;
+                    transform: none;
+                }
+            }
+
         `);
 
         switch (finalParams.style) {
@@ -101,7 +111,7 @@ export default function ({
             case 'icon':
                 vars.push(`
                     & > * {
-                        padding-left: 1.5em;
+                        padding-inline-start: 1.5em;
                         &:before {
                             content: ' ' !important;
                         }
@@ -111,6 +121,7 @@ export default function ({
                             font-size: 0.8em;
                         }
                     }
+
                 `);
                 break;
             case 'ul':

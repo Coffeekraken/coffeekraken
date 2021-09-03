@@ -19,6 +19,10 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
             values: ['vertical', 'horizontal'],
             default: 'horizontal',
         },
+        focusOutline: {
+            type: 'Boolean',
+            default: __theme().config('ui.tabs.focusOutline'),
+        },
         scope: {
             type: 'Array<String>',
             values: ['bare', 'lnf', 'grow', 'direction'],
@@ -31,6 +35,7 @@ export interface IPostcssSugarPluginUiTabParams {
     grow: boolean;
     style: 'solid';
     direction: 'horizontal' | 'vertical';
+    focusOutline: boolean;
     scope: string[];
 }
 
@@ -49,17 +54,27 @@ export default function ({
         style: __theme().config('ui.tabs.defaultStyle'),
         grow: false,
         direction: 'horizontal',
+        focusOutline: true,
         scope: ['bare', 'lnf', 'grow', 'direction'],
         ...params,
     };
 
     const vars: string[] = [];
 
+    if (finalParams.focusOutline) {
+        vars.push(`
+        & > * {
+          @sugar.state.focusOutline;
+        }
+      `);
+    }
+
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
+        font-size: sugar.scalable(1rem);
     `);
     }
 
@@ -81,31 +96,53 @@ export default function ({
         vars.push(`
           /** background-color: sugar.color(ui, surface); */
           border-radius: sugar.theme(ui.tabs.borderRadius);
-          overflow: hidden;
           user-select: none;
 
             & > * {
               text-align: center;
-              padding-inline: sugar.scalable(sugar.theme(ui.tabs.paddingInline));
-              padding-block: sugar.scalable(sugar.theme(ui.tabs.paddingBlock));
+              padding-inline: sugar.theme(ui.tabs.paddingInline);
+              padding-block: sugar.theme(ui.tabs.paddingBlock);
               transition: sugar.theme(ui.tabs.transition);
               cursor: pointer;
               display: block;      
             }
+
+            & > *:first-child {
+              border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
+              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+              border-top-right-radius: 0;
+              border-bottom-right-radius: 0;
+            }
+            & > *:last-child {
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+              border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
+              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+            }
+
+            [dir="rtl"] & > *:first-child,
+            &[dir="rtl"] > *:first-child {
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+              border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
+              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+            }
+            [dir="rtl"] & > *:last-child,
+            &[dir="rtl"] > *:last-child {
+              border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
+              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+              border-top-right-radius: 0;
+              border-bottom-right-radius: 0;
+            }
+
+            & > *:first-child:last-child {
+              border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+              border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+            }
+
       `);
-        if (finalParams.direction !== 'vertical') {
-            vars.push(`
-          & > *:last-child:not([dir="rtl"] & > *) {
-            border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
-            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
-          }
-          [dir="rtl"] & > *:last-child,
-          &[dir="rtl"] > *:last-child {
-            border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
-            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
-          }
-        `);
-        }
     }
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
@@ -113,14 +150,9 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-          & > dt,
-          & > li,
-          & > div {
+          & > * {
             @sugar.state.hover {
               background-color: sugar.color(ui, --alpha 0.4);
-            }
-            @sugar.state.focus {
-              background-color: sugar.color(ui, --alpha 0.3);
             }
             @sugar.state.active {
               background-color: sugar.color(ui);
@@ -152,14 +184,27 @@ export default function ({
         vars.push(`
       display: block;
 
-      & > dt,
-      & > li,
-      & > div,
       & > * {
         display: block;
         text-align: inherit;
       }
     `);
+        if (finalParams.direction === 'vertical') {
+            vars.push(`
+          & > *:first-child {
+              border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+              border-bottom-left-radius: 0 !important;
+              border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+              border-bottom-right-radius: 0 !important;
+            }
+            & > *:last-child {
+              border-top-left-radius: 0 !important;
+              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+              border-top-right-radius: 0 !important;
+              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+            }
+        `);
+        }
     }
 
     replaceWith(vars);

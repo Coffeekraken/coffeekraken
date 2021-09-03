@@ -83,9 +83,26 @@ export default function ({
             })
             .join('\n')}
         *
+        * <!-- RTL -->
+        * <div class="s-mb\:50" dir="rtl">
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">RTL</h3>
+            *   <ul class="s-list\:ul s-ui\:accent s-mb\:30">
+            *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+            *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+            *   </ul>
+            *   <ul class="s-list\:ol s-ui\:accent s-mb\:30">
+            *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+            *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+            *   </ul>
+            *   <ul class="s-list\:icon s-ui\:accent s-mb\:30">
+            *     <li><i class="s-icon\:user"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
+            *     <li><i class="s-icon\:heart s-ui\:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
+            *   </ul>
+            * </div>
+        * 
         * <div class="s-mb\:50">
             *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Colors</h3>
-            *   <ul class="s-list s-ui\:accent">
+            *   <ul class="s-list s-scale\:12 s-ui\:accent">
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li class="s-ui\:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li class="s-ui\:error">${__faker.name.title()} ${__faker.name.findName()}</li>

@@ -33,19 +33,16 @@ import __SDocmap from '@coffeekraken/s-docmap';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function docmapMiddleware(settings = {}) {
-  return async function (req, res, next) {
+    return async function (req, res, next) {
+        const docmap = new __SDocmap();
+        const docmapJson = await docmap.read();
 
-    const docmap = new __SDocmap();
-    const docmapJson = await docmap.read();
-    const menu = docmapJson.menu;
+        if (!res.templateData) res.templateData = {};
+        res.templateData.docmap = docmapJson;
 
-    if (!res.templateData) res.templateData = {};
-    res.templateData.docMenu = menu;
-   
+        __SBench.step('request', 'docmapMiddleware');
 
-    __SBench.step('request', 'docmapMiddleware');
-
-    return next();
-  };
+        return next();
+    };
 }
 export default docmapMiddleware;

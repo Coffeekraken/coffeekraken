@@ -7,10 +7,10 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __css from '../css/s-range.css';
 
 /**
- * @name                s-range
+ * @name                SRange
  * @namespace           js
  * @type                Webcomponent
- * @interface           ./interface/SRangeComponentInterface.js        param
+ * @interface           ./interface/SRangeComponentInterface.js
  * @menu                Styleguide / Forms              /styleguide/forms/s-range
  * @install             npm i @coffeekraken/s-range-component
  * @platform            html

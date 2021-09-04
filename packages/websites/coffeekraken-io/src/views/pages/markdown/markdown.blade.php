@@ -13,17 +13,17 @@
                     Coffeekraken
                 </h5>
 
-                @php $menu = get_object_vars($docMenu->tree->documentation); @endphp
+                @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
                 @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
 
-                @if (count(get_object_vars($docMenu->packages)))
+                @if (count(get_object_vars($docmap->menu->packages)))
 
                     <h5 class="s-typo:h5 s-mt:50 s-mb:20">
                         Packages
                     </h5>
 
                     <ul class="s-list:ul">
-                        @foreach ((array)$docMenu->packages as $package)
+                        @foreach ((array)$docmap->menu->packages as $package)
                             <li class="__toggle">
                                 <s-activate href="#{{ \Sugar\string\idCompliant($package->name) }}" id="doc-{{ \Sugar\string\idCompliant($package->name) }}" toggle save-state>
                                     {{ $package->name }}

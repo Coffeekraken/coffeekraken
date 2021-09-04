@@ -23,23 +23,23 @@ import __SDocMap from '@coffeekraken/s-docmap';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default async function docMap(req, res, settings = {}) {
-    return new __SPromise(async ({resolve, reject, pipe}) => {
+    return new __SPromise(async ({ resolve, reject, pipe }) => {
         const docMap = new __SDocMap();
 
         const json = await docMap.read({
-            snapshot: req.query.v
+            snapshot: req.query.v,
         });
-        
+
         const finalJson = {
             ...json,
-            map: {}
+            map: {},
         };
 
-        Object.keys(json.map).forEach(key => {
+        Object.keys(json.map).forEach((key) => {
             const obj = json.map[key];
             if (!obj.platform) return;
             if (!obj.status) return;
-            if (['stable','beta','alpha'].indexOf(obj.status) === -1) return;
+            if (['stable', 'beta', 'alpha'].indexOf(obj.status) === -1) return;
             finalJson.map[key] = obj;
         });
 

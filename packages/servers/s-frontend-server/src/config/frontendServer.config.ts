@@ -130,6 +130,7 @@ export default function (env, config) {
 
         modules: {
             docmapRoutes: `${__dirname()}/../node/modules/docmap/docmap`,
+            styleguideRoutes: `${__dirname()}/../node/modules/styleguide/styleguide`,
         },
 
         routes: {
@@ -167,32 +168,7 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            index: {
-                /**
-                 * @name          title
-                 * @namespace     config.frontendServer.handlers.index
-                 * @type          String
-                 * @default       indexs | [title]
-                 *
-                 * Specify the page title wanted. Accessible tokens:
-                 * - [title]: Name of the index
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'Welcome | [title]',
-                /**
-                 * @name            handler
-                 * @namespace       config.frontendServer.handlers.index
-                 * @type            Function
-                 *
-                 * Specify the handler function that will take care of responding to this "section"
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: `${__dirname()}/../node/handlers/index`,
-            },
+            index: `${__dirname()}/../node/handlers/index`,
 
             /**
              * @name            view
@@ -204,32 +180,7 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            view: {
-                /**
-                 * @name          title
-                 * @namespace     config.frontendServer.handlers.view
-                 * @type          String
-                 * @default       Views | [title]
-                 *
-                 * Specify the page title wanted. Accessible tokens:
-                 * - [title]: Name of the view
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'View | [title]',
-                /**
-                 * @name            handler
-                 * @namespace       config.frontendServer.handlers.view
-                 * @type            Function
-                 *
-                 * Specify the handler function that will take care of responding to this "section"
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: `${__dirname()}/../node/handlers/view`,
-            },
+            view: `${__dirname()}/../node/handlers/view`,
             /**
              * @name            doc
              * @namespace       config.frontendServer.handlers
@@ -240,33 +191,7 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            doc: {
-                /**
-                 * @name          title
-                 * @namespace     config.frontendServer.handlers.doc
-                 * @type          String
-                 * @default       Views | [title]
-                 *
-                 * Specify the page title wanted. Accessible tokens:
-                 * - [title]: Name of the view
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'Doc | [title]',
-                /**
-                 * @name            handler
-                 * @namespace       config.frontendServer.handlers.doc
-                 * @type            Function
-                 * @default         ${__dirname()}/../node/handlers/view
-                 *
-                 * Specify the handler function that will take care of responding to this "section"
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: `${__dirname()}/../node/handlers/doc`,
-            },
+            doc: `${__dirname()}/../node/handlers/doc`,
             /**
              * @name            markdown
              * @namespace       config.frontendServer.handlers
@@ -277,33 +202,7 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            markdown: {
-                /**
-                 * @name          title
-                 * @namespace     config.frontendServer.handlers.markdown
-                 * @type          String
-                 * @default       Views | [title]
-                 *
-                 * Specify the page title wanted. Accessible tokens:
-                 * - [title]: Name of the view
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'Doc | [title]',
-                /**
-                 * @name            handler
-                 * @namespace       config.frontendServer.handlers.markdown
-                 * @type            Function
-                 * @default         ${__dirname()}/../node/handlers/view
-                 *
-                 * Specify the handler function that will take care of responding to this "section"
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: `${__dirname()}/../node/handlers/markdown`,
-            },
+            markdown: `${__dirname()}/../node/handlers/markdown`,
             /**
              * @name            styleguide
              * @namespace       config.frontendServer.handlers
@@ -314,33 +213,7 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            styleguide: {
-                /**
-                 * @name          title
-                 * @namespace     config.frontendServer.handlers.styleguide
-                 * @type          String
-                 * @default       Views | [title]
-                 *
-                 * Specify the page title wanted. Accessible tokens:
-                 * - [title]: Name of the view
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'Styleguide | [title]',
-                /**
-                 * @name            handler
-                 * @namespace       config.frontendServer.handlers.styleguide
-                 * @type            Function
-                 * @default         ${__dirname()}/../node/handlers/view
-                 *
-                 * Specify the handler function that will take care of responding to this "section"
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: `${__dirname()}/../node/handlers/styleguide`,
-            },
+            styleguide: `${__dirname()}/../node/handlers/styleguide`,
             /**
              * @name            docmap
              * @namespace       config.frontendServer.handlers
@@ -351,33 +224,7 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            docmap: {
-                /**
-                 * @name          title
-                 * @namespace     config.frontendServer.handlers.docmap
-                 * @type          String
-                 * @default       Views | [title]
-                 *
-                 * Specify the page title wanted. Accessible tokens:
-                 * - [title]: Name of the view
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'Docmap | [title]',
-                /**
-                 * @name            handler
-                 * @namespace       config.frontendServer.handlers.docmap
-                 * @type            Function
-                 * @default         ${__dirname()}/../node/api/doc
-                 *
-                 * Specify the handler function that will take care of responding to this "section"
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: `${__dirname()}/../node/handlers/docmap`,
-            },
+            docmap: `${__dirname()}/../node/handlers/docmap`,
 
             /**
              * @name            config
@@ -389,33 +236,7 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            config: {
-                /**
-                 * @name          title
-                 * @namespace     config.frontendServer.handlers.config
-                 * @type          String
-                 * @default       Views | [title]
-                 *
-                 * Specify the page title wanted. Accessible tokens:
-                 * - [title]: Name of the view
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'config | [title]',
-                /**
-                 * @name            handler
-                 * @namespace       config.frontendServer.handlers.config
-                 * @type            Function
-                 * @default         ${__dirname()}/../node/api/doc
-                 *
-                 * Specify the handler function that will take care of responding to this "section"
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: `${__dirname()}/../node/handlers/config`,
-            },
+            config: `${__dirname()}/../node/handlers/config`,
         },
     };
 }

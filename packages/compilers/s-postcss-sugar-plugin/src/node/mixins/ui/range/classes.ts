@@ -2,10 +2,24 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
-    static definition = {};
+    static definition = {
+        styles: {
+            type: 'String[]',
+            values: ['solid'],
+            default: ['solid'],
+        },
+        defaultStyle: {
+            type: 'String',
+            values: ['solid'],
+            default: __theme().config('ui.range.defaultStyle'),
+        },
+    };
 }
 
-export interface IPostcssSugarPluginUiRangeClassesParams {}
+export interface IPostcssSugarPluginUiRangeClassesParams {
+    styles: 'solid'[];
+    defaultStyle: 'solid';
+}
 
 export { postcssSugarPluginUiRangeClassesInterface as interface };
 
@@ -19,18 +33,16 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
+        styles: ['solid'],
+        defaultStyle: 'solid',
         ...params,
     };
 
     const vars: string[] = [];
 
-    const defaultStyle = __theme().config('ui.button.defaultStyle') ?? 'default';
-
-    const styles = ['default'];
-
-    styles.forEach((style) => {
+    finalParams.styles.forEach((style) => {
         let cls = `s-range`;
-        if (style !== defaultStyle) {
+        if (style !== finalParams.defaultStyle) {
             cls += `--${style}`;
         }
 

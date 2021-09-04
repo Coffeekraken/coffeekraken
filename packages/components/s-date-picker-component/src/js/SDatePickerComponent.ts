@@ -16,10 +16,10 @@ import __themeCss from '../css/s-date-picker-theme.css';
 import __baseCss from 'pikaday/css/pikaday.css';
 
 /**
- * @name                s-date-picker
+ * @name                SDatePicker
  * @namespace           js
  * @type                Webcomponent
- * @interface           ./interface/SDatePickerComponentInterface.js        param
+ * @interface           ./interface/SDatePickerComponentInterface.js
  * @menu                Styleguide / Forms              /styleguide/forms/s-date-picker
  * @install             npm i @coffeekraken/s-date-picker-component
  * @platform            html

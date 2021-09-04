@@ -7,20 +7,20 @@ class postcssSugarPluginUiRangeInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
-            values: ['default'],
-            default: __theme().config('ui.button.defaultStyle'),
+            values: ['solid'],
+            default: __theme().config('ui.range.defaultStyle'),
         },
         scope: {
             type: 'Array<String>',
-            values: ['bare', 'lnf', 'style'],
-            default: ['bare', 'lnf', 'style'],
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
         },
     };
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-    style: 'default';
-    scope: string[];
+    style: 'solid';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiRangeInterface as interface };
@@ -34,8 +34,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
-        style: __theme().config('ui.range.defaultStyle'),
-        scope: ['bare', 'lnf', 'style'],
+        style: 'solid',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -220,9 +220,9 @@ export default function ({
     }
 
     // style
-    if (finalParams.scope.indexOf('style') !== -1) {
+    if (finalParams.scope.indexOf('lnf') !== -1) {
         switch (finalParams.style) {
-            case 'default':
+            case 'solid':
             default:
                 vars.push(`
                 `);

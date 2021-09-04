@@ -32,6 +32,7 @@ import __set from '@coffeekraken/sugar/shared/object/set';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
 
 import __interfaceFieldProxy from './fieldsProxy/interfaceFieldProxy';
 
@@ -94,7 +95,12 @@ export interface ISDocMapFieldProxyFn {
     (data: any): any;
 }
 
+export interface ISDocMapCustomMenuSettingFn {
+    (menuItem: ISDocmapMenuObjItem): boolean;
+}
+
 export interface ISDocMapSettings {
+    customMenu: Record<string, ISDocMapCustomMenuSettingFn>;
     fieldsProxy: Record<string, ISDocMapFieldProxyFn>;
 }
 
@@ -134,8 +140,7 @@ export interface ISDocmapMenuObj {
     packages: Record<string, Partial<ISDocmapMenuObjItem>>;
     tree: Record<string, Partial<ISDocmapMenuObjItem>>;
     slug: Record<string, Partial<ISDocmapMenuObjItem>>;
-    mixedTree: Record<string, Partial<ISDocmapMenuObjItem>>;
-    mixedSlug: Record<string, Partial<ISDocmapMenuObjItem>>;
+    custom: Record<string, Partial<ISDocmapMenuObjItem>>;
 }
 
 export interface ISDocmapMetasObj {
@@ -232,6 +237,14 @@ class SDocMap extends __SClass implements ISDocMap {
                     },
                     docmap: {
                         fieldsProxy: {},
+                        customMenu: {
+                            styleguide({ key, value, isObject }) {
+                                if (key.split('/').length > 1 && key.match(/^([a-zA-Z0-9-_@\/]+)?\/styleguide\//))
+                                    return true;
+                                if (key === 'styleguide') return true;
+                                return false;
+                            },
+                        },
                     },
                 },
                 settings || {},
@@ -436,8 +449,7 @@ class SDocMap extends __SClass implements ISDocMap {
             packages: {},
             tree: {},
             slug: {},
-            mixedTree: {},
-            mixedSlug: {},
+            custom: {},
         };
         const packageJson = __packageJsonSync();
 
@@ -465,16 +477,23 @@ class SDocMap extends __SClass implements ISDocMap {
             }
         });
 
-        // mixed menus
-        let mixedTree = Object.assign({}, finalMenu.tree ?? {}),
-            mixedSlug = Object.assign({}, finalMenu.slug ?? {});
-        Object.keys(finalMenu.packages).forEach((packageName) => {
-            const packageObj = finalMenu.packages[packageName];
-            mixedTree = __deepMerge(mixedTree, packageObj.tree ?? {});
-            mixedSlug = __deepMerge(mixedSlug, packageObj.slug ?? {});
+        Object.keys(this.docmapSettings.customMenu).forEach((menuName) => {
+            if (!finalMenu.custom[menuName]) finalMenu.custom[menuName] = {};
+            // @ts-ignore
+            finalMenu.custom[menuName].tree = __deepFilter(finalMenu.tree, this.docmapSettings.customMenu[menuName]);
+            // @ts-ignore
+            finalMenu.custom[menuName].slug = __deepFilter(finalMenu.slug, this.docmapSettings.customMenu[menuName]);
+
+            Object.keys(finalMenu.packages).forEach((packageName) => {
+                const packageObj = finalMenu.packages[packageName];
+                // @ts-ignore
+                const packageFilteredTree = __deepFilter(packageObj.tree, this.docmapSettings.customMenu[menuName]);
+                finalMenu.custom[menuName].tree = __deepMerge(finalMenu.custom[menuName].tree, packageFilteredTree);
+                // @ts-ignore
+                const packageFilteredSlug = __deepFilter(packageObj.slug, this.docmapSettings.customMenu[menuName]);
+                finalMenu.custom[menuName].slug = __deepMerge(finalMenu.custom[menuName].slug, packageFilteredSlug);
+            });
         });
-        finalMenu.mixedTree = mixedTree;
-        finalMenu.mixedSlug = mixedSlug;
 
         // @ts-ignore
         return finalMenu;

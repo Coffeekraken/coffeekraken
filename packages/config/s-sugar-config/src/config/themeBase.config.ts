@@ -1445,7 +1445,7 @@ export default function (env, config) {
                 active: true,
                 borderWidth: '10px',
                 borderRadius: '[theme.border.radius.default]',
-                transition: 'box-shadow .2s ease-out',
+                transition: 'all .2s ease-out',
             },
             button: {
                 paddingInline: '[theme.ui.default.paddingInline]',
@@ -1495,7 +1495,7 @@ export default function (env, config) {
                 focusSpread: '[theme.ui.form.focusSpread]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             label: {
                 paddingInline: '[theme.ui.form.paddingInline]',

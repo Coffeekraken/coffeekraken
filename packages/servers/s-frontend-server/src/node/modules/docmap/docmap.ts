@@ -12,6 +12,7 @@ export default async function docmap(express, config) {
             handler: 'markdown',
         };
     });
+
     if (menu.packages) {
         Object.keys(menu.packages).forEach((packageName) => {
             // @ts-ignore

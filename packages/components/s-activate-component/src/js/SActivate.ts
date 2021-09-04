@@ -63,12 +63,13 @@ export default class SActivate extends SLitElement {
 
         // save state
         if (this._component.props.saveState) {
+            // @ts-ignore
             if (!this.id)
                 throw new Error(
                     `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
                 );
             // @ts-ignore
-            this.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
+            this.active = localStorage.getItem(`s-activate-state-${this.saveStateId}`) === this.id;
         }
 
         if (this._component.props.href) {
@@ -122,9 +123,13 @@ export default class SActivate extends SLitElement {
         });
 
         // activate if has the "active" attribute
-        if (this._component.props.active) {
+        if (this.active) {
             this.activate(true);
         }
+    }
+    get saveStateId(): string {
+        // @ts-ignore
+        return this.group ? `group-${this.group}` : this.id;
     }
     isActive() {
         return this.hasAttribute('active');
@@ -139,11 +144,13 @@ export default class SActivate extends SLitElement {
         setTimeout(() => {
             // save state
             if (this._component.props.saveState) {
+                // @ts-ignore
                 if (!this.id)
                     throw new Error(
                         `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
                     );
-                localStorage.setItem(`s-activate-state-${this.id}`, 'true');
+                // @ts-ignore
+                localStorage.setItem(`s-activate-state-${this.saveStateId}`, this.id);
             }
 
             // history

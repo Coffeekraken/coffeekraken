@@ -168,9 +168,8 @@ export default class SFrontendServer extends __SClass {
                     Object.keys(frontendServerConfig.routes).forEach(async (routeSlug) => {
                         const routeObj = frontendServerConfig.routes[routeSlug];
 
-                        const handlerObj = frontendServerConfig.handlers[routeObj.handler];
-
-                        const { default: handlerFn } = await import(handlerObj.handler);
+                        const handlerPath = frontendServerConfig.handlers[routeObj.handler];
+                        const { default: handlerFn } = await import(handlerPath);
                         express.get(routeSlug, (req, res, next) => {
                             if (routeObj.request) {
                                 req = __deepMerge(req, routeObj.request);

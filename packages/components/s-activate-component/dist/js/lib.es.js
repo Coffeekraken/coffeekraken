@@ -172,7 +172,7 @@ class SActivate extends SLitElement {
     if (this._component.props.saveState) {
       if (!this.id)
         throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-      this.active = localStorage.getItem(`s-activate-state-${this.id}`) !== null;
+      this.active = localStorage.getItem(`s-activate-state-${this.saveStateId}`) === this.id;
     }
     if (this._component.props.href) {
       this._hrefSelector = this._component.props.href;
@@ -219,9 +219,12 @@ class SActivate extends SLitElement {
           break;
       }
     });
-    if (this._component.props.active) {
+    if (this.active) {
       this.activate(true);
     }
+  }
+  get saveStateId() {
+    return this.group ? `group-${this.group}` : this.id;
   }
   isActive() {
     return this.hasAttribute("active");
@@ -235,7 +238,7 @@ class SActivate extends SLitElement {
         if (this._component.props.saveState) {
           if (!this.id)
             throw new Error(`<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`);
-          localStorage.setItem(`s-activate-state-${this.id}`, "true");
+          localStorage.setItem(`s-activate-state-${this.saveStateId}`, this.id);
         }
         if (this._component.props.history && this._hrefSelector) {
           document.location.hash = this._hrefSelector;

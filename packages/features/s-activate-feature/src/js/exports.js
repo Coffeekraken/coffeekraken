@@ -1,0 +1,4 @@
+import __SActivateFeature from './SActivateFeature';
+export * from './SActivateFeature';
+export default __SActivateFeature;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxrQkFBa0IsTUFBTSxvQkFBb0IsQ0FBQztBQUNwRCxjQUFjLG9CQUFvQixDQUFDO0FBQ25DLGVBQWUsa0JBQWtCLENBQUMifQ==

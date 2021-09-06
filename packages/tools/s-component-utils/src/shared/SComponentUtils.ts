@@ -71,11 +71,6 @@ export class SComponentUtilsDefaultInterface extends __SInterface {
             default: false,
             physical: true,
         },
-        // ready: {
-        //     type: 'Boolean',
-        //     default: false,
-        //     physical: true,
-        // },
         mountWhen: {
             type: 'String',
             values: ['directly', 'inViewport'],

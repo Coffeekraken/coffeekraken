@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Range component</title>
+    </head>
+    <body>
+        <script type="module">
+            import { register } from './src/js/exports.ts';
+
+            register();
+        </script>
+
+        <style>
+            div {
+                background: red;
+            }
+            div[active] {
+                background: green;
+            }
+        </style>
+
+        <span s-activate href="#element1" toggle save-state id="webCopy1">Activate element1</span>
+
+        <span s-activate href="#element1" id="webCopy2" group="group1">Activate element1 from group1</span>
+        <span s-activate href="#element2" id="webCopy3" group="group1">Activate element2 from group1</span>
+
+        <div id="element1">Hello</div>
+        <div id="element2">World</div>
+    </body>
+</html>

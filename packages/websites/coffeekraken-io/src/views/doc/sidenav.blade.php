@@ -1,11 +1,11 @@
 <nav class="doc-sidenav">
     
-    <s-activate class="doc-sidenav__group s-mb:30" id="doc-intro" toggle save-state>             
+    <div s-activate class="doc-sidenav__group s-mb:30" id="doc-intro" toggle save-state>             
         <h3 class="s-typo:h4">
             <span class="doc-sidenav__group-toggle"></span>
             {{ $title ?? $block->type }}
         </h3>
-    </s-activate>
+    </div>
     <ul class="s-list:ul:icon:accent">
         @if ($block->description)
             <li class="s-font:40">
@@ -117,12 +117,12 @@
         @endphp
         @if (count($methods))
 
-            <s-activate class="doc-sidenav__group s-mb:30 s-mt:50" id="doc-methods" toggle save-state>
+            <div s-activate class="doc-sidenav__group s-mb:30 s-mt:50" id="doc-methods" toggle save-state>
                 <h3 class="s-typo:h3">
                     <span class="doc-sidenav__group-toggle"></span>
                     Methods
                 </h3>
-            </s-activate>
+            </div>
             <ul class="s-list:ul:accent">
                 @foreach ($methods as $block)
                     <li class="s-font:40">
@@ -145,12 +145,12 @@
         @endphp
         @if (count($props))
 
-            <s-activate class="doc-sidenav__group s-mb:30 s-mt:50" id="doc-props" toggle save-state>
+            <div s-activate class="doc-sidenav__group s-mb:30 s-mt:50" id="doc-props" toggle save-state>
                 <h3 class="s-typo:h3">
                     <span class="doc-sidenav__group-toggle"></span>
                     Properties
                 </h3>
-            </s-activate>
+            </div>
             <ul class="s-list:ul:accent">
                 @foreach ($props as $prop)                                
                     <li class="s-font:40">

@@ -104,7 +104,7 @@ body {
         }
 
         li:hover,
-        s-activate[active] li {
+        li[active] {
             background-color: sugar.color(accent);
             color: sugar.color(accent, foreground);
         }

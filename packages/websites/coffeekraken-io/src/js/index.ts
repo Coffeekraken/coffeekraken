@@ -18,6 +18,8 @@ import { webcomponent as __DocNavComponent } from './components/docNav';
 import { webcomponent as __VersionSelector } from './components/VersionSelector';
 import { webcomponent as __CkSettingsWebcomponent } from './components/CkSettings';
 
+import { register as __sActivateFeature } from '@coffeekraken/s-activate-feature';
+
 // generic
 // import "./generic/docShortcut";
 
@@ -43,7 +45,6 @@ __SComponentUtils.setDefaultProps('s-code-example', {
 
 // webcomponents
 __SCodeExampleWebcomponent();
-__SActivateWebcomponent();
 __SConfigExplorerWebcomponent();
 __SSidePanelWebcomponent();
 __SColorPickerWebcomponent();
@@ -53,6 +54,8 @@ __SRangeWebcomponent();
 // features
 import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
 import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
+
+__sActivateFeature();
 
 __smoothScroll({
     scroll: {

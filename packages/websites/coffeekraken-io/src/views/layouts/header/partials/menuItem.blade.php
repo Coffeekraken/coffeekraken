@@ -1,4 +1,4 @@
-<s-activate class="__main-link" href="body" trigger="mouseover,mouseout" active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150">
+<span s-activate class="__main-link" href="body" trigger="mouseover,mouseout" active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150">
     <span>{{ $menuItem->name }}</span>
 
     <div class="__subnav">
@@ -9,11 +9,9 @@
             <ul class="__subnav-chapters">
                 @foreach($menuItem as $item)
                     @if (!$item->slug && $item->name)
-                        <s-activate href="#subnav-{{ \Sugar\string\idCompliant($item->name) }}" {{ ($loop->index == 1) ? 'active="true"' : ''}} id="subnav-item-{{ \Sugar\string\idCompliant($item->name) }}" save-state trigger="click" group="subnav-{{ \Sugar\string\idCompliant($menuItem->name) }}">
-                            <li>
-                                {{ $item->name }}
-                            </li>
-                        </s-activate>
+                        <li s-activate href="#subnav-{{ \Sugar\string\idCompliant($item->name) }}" {{ ($loop->index == 1) ? 'active="true"' : ''}} id="subnav-item-{{ \Sugar\string\idCompliant($item->name) }}" save-state trigger="click" group="subnav-{{ \Sugar\string\idCompliant($menuItem->name) }}">
+                            {{ $item->name }}
+                        </li>
                     @endif
                 @endforeach
             </ul>
@@ -50,4 +48,4 @@
 
         </div>
     </div>
-</s-activate>
+</span>

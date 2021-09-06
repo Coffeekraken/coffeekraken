@@ -72,6 +72,33 @@ export default function (env, config) {
                     },
                 },
             },
+            sFeature: {
+                title: 'HTML feature',
+                description: 'HTML feature based on the SFeature class',
+                templateDir: __path.resolve(`${__dirname()}/../templates/sFeature`),
+                defaultStack: 'dev',
+                stacks: {
+                    dev: {
+                        description: 'Start the development stack',
+                        actions: {
+                            vite: '[config.frontstack.actions.vite]',
+                        },
+                    },
+                    build: {
+                        description: 'Build your final production ready dist package',
+                        actions: {
+                            viteBuild: {
+                                action: '[config.frontstack.actions.viteBuild]',
+                                params: {
+                                    lib: true,
+                                },
+                            },
+                            // docBuild: '[config.frontstack.actions.docBuild]',
+                            // docmapBuild: '[config.frontstack.actions.docmapBuild]',
+                        },
+                    },
+                },
+            },
         },
 
         actions: {

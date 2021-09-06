@@ -25,9 +25,9 @@
                     <ul class="s-list:ul">
                         @foreach ((array)$docmap->menu->packages as $package)
                             <li class="__toggle">
-                                <s-activate href="#{{ \Sugar\string\idCompliant($package->name) }}" id="doc-{{ \Sugar\string\idCompliant($package->name) }}" toggle save-state>
+                                <div s-activate href="#{{ \Sugar\string\idCompliant($package->name) }}" id="doc-{{ \Sugar\string\idCompliant($package->name) }}" toggle save-state>
                                     {{ $package->name }}
-                                </s-activate>
+                                </div>
 
                                 @php $menu = get_object_vars($package->tree); @endphp
                                 @include('pages.markdown.menu', ['menu' => $menu, 'id' => \Sugar\string\idCompliant($package->name)])

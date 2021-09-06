@@ -1,0 +1,4 @@
+import __SFeature from './SFeature';
+export * from './SFeature';
+export default __SFeature;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxVQUFVLE1BQU0sWUFBWSxDQUFDO0FBRXBDLGNBQWMsWUFBWSxDQUFDO0FBRTNCLGVBQWUsVUFBVSxDQUFDIn0=

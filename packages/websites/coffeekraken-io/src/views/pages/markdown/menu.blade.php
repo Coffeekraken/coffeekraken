@@ -13,7 +13,7 @@
                 @if ($item->slug)
                     <a href="{{ $item->slug }}">
                 @else
-                    <s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle save-state>
+                    <span s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle save-state>
                 @endif
                 @if ($item->name)
                     <h5>
@@ -23,7 +23,7 @@
                 @if ($item->slug)
                     </a>
                 @else
-                    </s-activate>
+                    </span>
                 @endif
                 @if (!$item->tree)
                     @include('pages.markdown.menu', [

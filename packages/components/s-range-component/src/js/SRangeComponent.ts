@@ -2,9 +2,10 @@
 
 import { html, css, unsafeCSS } from 'lit';
 import __SRangeComponentInterface from './interface/SRangeComponentInterface';
-import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
+import __SLitComponent, { ISLitElementDefaultProps } from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __css from '../css/s-range.css';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name                SRange
@@ -51,7 +52,7 @@ import __css from '../css/s-range.css';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISRangeComponentProps extends ISComponentUtilsDefaultProps {
+export interface ISRangeComponentProps extends ISLitElementDefaultProps {
     name: string;
     value: string;
     min: number;
@@ -63,7 +64,7 @@ export interface ISRangeComponentProps extends ISComponentUtilsDefaultProps {
 
 export default class SRange extends SLitElement {
     static get properties() {
-        return __SComponentUtils.properties({}, __SRangeComponentInterface);
+        return __SLitComponent.properties({}, __SRangeComponentInterface);
     }
 
     static get styles() {
@@ -74,16 +75,15 @@ export default class SRange extends SLitElement {
         `;
     }
 
-    _component = undefined;
-
     constructor() {
-        super();
-        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            componentUtils: {
-                interface: __SRangeComponentInterface,
-                defaultProps: {},
-            },
-        });
+        super(
+            __deepMerge({
+                sLitElement: {
+                    shadowDom: false,
+                    interface: __SRangeComponentInterface,
+                },
+            }),
+        );
     }
     async firstUpdated() {
         this._$input = this.querySelector('input');
@@ -95,8 +95,8 @@ export default class SRange extends SLitElement {
         });
 
         // get target(s)
-        if (this._component.props.target) {
-            this._$targets = Array.from(document.querySelectorAll(this._component.props.target));
+        if (this.props.target) {
+            this._$targets = Array.from(document.querySelectorAll(this.props.target));
         }
 
         // init
@@ -119,23 +119,11 @@ export default class SRange extends SLitElement {
         this._$tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
         this._$tooltip.innerHTML = val;
     }
-    _dispatchEvent(eventName) {
-        const event = new CustomEvent(eventName, {
-            detail: {
-                dateStr: this._picker.toString(),
-                date: this._picker.getDate(),
-            },
-        });
-        this.dispatchEvent(event);
-    }
-    createRenderRoot() {
-        return this;
-    }
     render() {
         return html`
-            <div class="${this._component.className('', 's-tooltip-container')}">
+            <div class="${this.className('', 's-tooltip-container')}">
                 <input
-                    class="${this._component.className('__input', 's-range')}"
+                    class="${this.className('__input', 's-range')}"
                     type="range"
                     name="${this.name}"
                     value="${this.value}"
@@ -143,9 +131,7 @@ export default class SRange extends SLitElement {
                     max="${this.max}"
                     step="${this.step}"
                 />
-                ${this._component.props.tooltip
-                    ? html` <div class="${this._component.className('__tooltip', 's-tooltip')}"></div> `
-                    : ''}
+                ${this.props.tooltip ? html` <div class="${this.className('__tooltip', 's-tooltip')}"></div> ` : ''}
             </div>
         `;
     }
@@ -164,6 +150,6 @@ export default class SRange extends SLitElement {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export function webcomponent(props: Partial<ISRangeComponentProps> = {}, tagName = 's-range') {
-    __SComponentUtils.setDefaultProps(tagName, props);
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SRange);
 }

@@ -31,7 +31,7 @@ import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorL
  * @todo      tests
  *
  * @example             js
- * import SFeature from '@coffeekraken/s-component-utils';
+ * import SFeature from '@coffeekraken/s-lit-component';
  * const component = new SFeature('my-cool-component');
  * component.className('__something'); // => my-cool-component__something
  * component.className('hello'); // => my-cool-component-hello
@@ -344,7 +344,16 @@ export default class SFeature extends __SClass {
      */
 
     /**
-     * @name
+     * @name            exposeApi
+     * @type            Function
+     *
+     * This method allows you to pass a simple key value object
+     * that tells binding of some methods on the actual dom node.
+     *
+     * @param       {Any}           apiObj          The simple key value pairs api object
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     exposeApi(apiObj: any): void {
         setTimeout(() => {

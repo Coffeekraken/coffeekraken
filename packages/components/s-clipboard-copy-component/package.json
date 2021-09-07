@@ -16,7 +16,7 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-component-utils": "^2.0.0",
+        "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "lit": "^2.0.0-rc.3"
     }

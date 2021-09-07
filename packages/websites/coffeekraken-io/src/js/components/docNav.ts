@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
+import __SComponentUtils, { SLitElement } from '@coffeekraken/s-lit-component';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';

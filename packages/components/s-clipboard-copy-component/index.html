@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue js component</title>
-  </head>
-  <body>
-    <script type="module">
-      import SClipboardCopy, { webcomponent } from './src/js/index.ts';
-      
-      webcomponent();
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue js component</title>
+    </head>
+    <body>
+        <script type="module">
+            import SClipboardCopy, { define } from './src/js/index.ts';
 
-      setTimeout(() => {
-        const $webCopy = document.querySelector('#webCopy');
-        console.log($webCopy);
-        $webCopy.copy('Hello');
-      }, 1000);
+            define();
 
-    </script>
-    <s-clipboard-copy id="webCopy"></s-clipboard-copy>
-
-  </body>
+            setTimeout(() => {
+                const $webCopy = document.querySelector('#webCopy');
+                console.log($webCopy);
+                $webCopy.copy('Hello');
+            }, 1000);
+        </script>
+        <s-clipboard-copy id="webCopy"></s-clipboard-copy>
+    </body>
 </html>

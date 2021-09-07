@@ -13,42 +13,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
+import { define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import { css, html, unsafeCSS } from 'lit';
-import { html as __unsafeHTML } from 'lit/static-html.js';
-import { property, query, queryAssignedNodes } from 'lit/decorators.js';
 import __hljs from 'highlight.js/lib/core';
-import __langJavascript from 'highlight.js/lib/languages/javascript';
-import __langHtml from 'highlight.js/lib/languages/xml';
 import __langBash from 'highlight.js/lib/languages/bash';
-import __langPhp from 'highlight.js/lib/languages/php';
 import __langCss from 'highlight.js/lib/languages/css';
+import __langJavascript from 'highlight.js/lib/languages/javascript';
+import __langPhp from 'highlight.js/lib/languages/php';
+import __langHtml from 'highlight.js/lib/languages/xml';
+import { css, html, unsafeCSS } from 'lit';
+import { property, query, queryAssignedNodes } from 'lit/decorators.js';
 // @ts-ignore
 import __css from '../css/s-code-example.css';
-import { webcomponent as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
 __SClipboardCopy();
-export default class SCodeExample extends SLitElement {
+export default class SCodeExample extends __SLitComponent {
     constructor() {
         var _a;
-        super();
+        super(__deepMerge({
+            sComponentUtils: {
+                interface: __SCodeExampleComponentInterface,
+            },
+        }));
         this._$copy = undefined;
         this._items = [];
         this._activeTabId = undefined;
-        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            componentUtils: {
-                interface: __SCodeExampleComponentInterface,
-                defaultProps: {},
-            },
-        });
-        const languages = Object.assign({ html: __langHtml, javascript: __langJavascript, js: __langJavascript, php: __langPhp, bash: __langBash, shell: __langBash, css: __langCss }, ((_a = this._component.props.languages) !== null && _a !== void 0 ? _a : {}));
+        const languages = Object.assign({ html: __langHtml, javascript: __langJavascript, js: __langJavascript, php: __langPhp, bash: __langBash, shell: __langBash, css: __langCss }, ((_a = this.props.languages) !== null && _a !== void 0 ? _a : {}));
         Object.keys(languages).forEach((lang) => {
             __hljs.registerLanguage(lang, languages[lang]);
         });
     }
     static get properties() {
-        return __SComponentUtils.properties({}, __SCodeExampleComponentInterface);
+        return __SLitComponent.properties({}, __SCodeExampleComponentInterface);
     }
     static get styles() {
         return css `
@@ -83,92 +81,6 @@ export default class SCodeExample extends SLitElement {
             return true;
         });
     }
-    // createRenderRoot() {
-    //     return this;
-    // }
-    render() {
-        var _a, _b, _c, _d;
-        return html `
-            <div
-                class="${(_a = this._component) === null || _a === void 0 ? void 0 : _a.className()}"
-                ?mounted="${
-        // @ts-ignore
-        this.mounted}"
-                ?default-style="${
-        // @ts-ignore
-        this.defaultStyle}"
-                toolbar-position="${
-        // @ts-ignore
-        this.toolbarPosition}"
-            >
-                <div class="templates">
-                    <slot></slot>
-                </div>
-
-                ${this._component
-            ? html `<header class="${this._component.className('__nav')}">
-                          <ol class="${this._component.className('__tabs', 's-tabs')}">
-                              ${((_b = this._items) !== null && _b !== void 0 ? _b : []).map((item) => html `
-                                      <li
-                                          class="${this._component.className('__tab')}"
-                                          id="${item.id}"
-                                          ?active="${this._activeTabId === item.id}"
-                                          @click="${this.setActiveTabByTab}"
-                                      >
-                                          ${item.lang}
-                                      </li>
-                                  `)}
-                          </ol>
-                          ${
-            // @ts-ignore
-            this.toolbarPosition === 'nav'
-                ? html `
-                                        <div class="${this._component.className('__toolbar')}">
-                                            <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                        </div>
-                                    `
-                : ''}
-                      </header>`
-            : ''}
-                ${this._component
-            ? html `
-                          <div class="${this._component.className('__content')}">
-                              ${
-            // @ts-ignore
-            this.toolbarPosition !== 'nav'
-                ? html `
-                                            <div class="${(_c = this._component) === null || _c === void 0 ? void 0 : _c.className('__toolbar')}">
-                                                <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                            </div>
-                                        `
-                : ''}
-                              ${((_d = this._items) !== null && _d !== void 0 ? _d : []).map((item) => {
-                var _a, _b, _c;
-                return html `
-                                      <pre
-                                          class="${this._component.className('__code')}"
-                                          style="line-height:0;"
-                                          id="${(_a = item.id) !== null && _a !== void 0 ? _a : item.lang}"
-                                          ?active="${this._activeTabId === ((_b = item.id) !== null && _b !== void 0 ? _b : item.lang)}"
-                                      >
-                            <code lang="${(_c = item.lang) !== null && _c !== void 0 ? _c : item.id}" class="language-${item.lang} ${item.lang} ${this
-                    ._component.props.defaultStyle
-                    ? 'hljs'
-                    : ''}">
-                                
-                                ${
-                // @ts-ignore
-                __unsafeHTML([item.code])}
-                            </code>
-                        </pre>
-                                  `;
-            })}
-                          </div>
-                      `
-            : ''}
-            </div>
-        `;
-    }
     setActiveTabByTab(e) {
         this.setActiveTab(e.target.id);
     }
@@ -185,18 +97,87 @@ export default class SCodeExample extends SLitElement {
         if ($content.hasAttribute('inited'))
             return;
         $content.setAttribute('inited', 'true');
-        const highlightedCode = __hljs
-            .highlight($content === null || $content === void 0 ? void 0 : $content.innerHTML.replace(/\<\!\-\-\?lit\$.*\$\-\-\>/g, ''), {
-            language: $content.getAttribute('lang'),
-        })
-            .value.trim();
-        $content.innerHTML = highlightedCode;
+        __hljs.highlightElement($content);
     }
     copy() {
         const id = this._activeTabId;
         const item = this._items.filter((i) => i.id === id)[0];
         // @ts-ignore
         this.$copy.copy(item.code);
+    }
+    render() {
+        var _a, _b;
+        return html `
+            <div
+                class="${this.componentUtils.className()}"
+                ?mounted="${
+        // @ts-ignore
+        this.mounted}"
+                ?default-style="${
+        // @ts-ignore
+        this.defaultStyle}"
+                toolbar-position="${
+        // @ts-ignore
+        this.toolbarPosition}"
+            >
+                <div class="templates">
+                    <slot></slot>
+                </div>
+
+                <header class="${this.componentUtils.className('__nav')}">
+                    <ol class="${this.componentUtils.className('__tabs', 's-tabs')}">
+                        ${((_a = this._items) !== null && _a !== void 0 ? _a : []).map((item) => html `
+                                <li
+                                    class="${this.componentUtils.className('__tab')}"
+                                    id="${item.id}"
+                                    ?active="${this._activeTabId === item.id}"
+                                    @click="${this.setActiveTabByTab}"
+                                >
+                                    ${item.lang}
+                                </li>
+                            `)}
+                    </ol>
+                    ${
+        // @ts-ignore
+        this.toolbarPosition === 'nav'
+            ? html `
+                                  <div class="${this.componentUtils.className('__toolbar')}">
+                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  </div>
+                              `
+            : ''}
+                </header>
+                <div class="${this.componentUtils.className('__content')}">
+                    ${
+        // @ts-ignore
+        this.toolbarPosition !== 'nav'
+            ? html `
+                                  <div class="${this.componentUtils.className('__toolbar')}">
+                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  </div>
+                              `
+            : ''}
+                    ${((_b = this._items) !== null && _b !== void 0 ? _b : []).map((item) => {
+            var _a, _b, _c;
+            return html `
+                            <pre
+                                class="${this.componentUtils.className('__code')}"
+                                style="line-height:0;"
+                                id="${(_a = item.id) !== null && _a !== void 0 ? _a : item.lang}"
+                                ?active="${this._activeTabId === ((_b = item.id) !== null && _b !== void 0 ? _b : item.lang)}"
+                            >
+                            <code lang="${(_c = item.lang) !== null && _c !== void 0 ? _c : item.id}" class="language-${item.lang} ${item.lang} ${this.props
+                .defaultStyle
+                ? 'hljs'
+                : ''}">${
+            // @ts-ignore
+            item.code.trim()}</code>
+                        </pre>
+                        `;
+        })}
+                </div>
+            </div>
+        `;
     }
 }
 __decorate([
@@ -223,7 +204,7 @@ __decorate([
     queryAssignedNodes()
 ], SCodeExample.prototype, "$templates", void 0);
 export function webcomponent(props = {}, tagName = 's-code-example') {
-    __SComponentUtils.setDefaultProps(tagName, props);
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SCodeExample);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvZGVFeGFtcGxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvZGVFeGFtcGxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLE9BQU8saUJBQWlCLEVBQUUsRUFBRSxXQUFXLEVBQWdDLE1BQU0saUNBQWlDLENBQUM7QUFDL0csT0FBTyxNQUFNLE1BQU0sc0NBQXNDLENBQUM7QUFDMUQsT0FBTyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUUsU0FBUyxFQUFFLE1BQU0sS0FBSyxDQUFDO0FBQzNDLE9BQU8sRUFBRSxJQUFJLElBQUksWUFBWSxFQUFFLE1BQU0sb0JBQW9CLENBQUM7QUFDMUQsT0FBTyxFQUFFLFFBQVEsRUFBRSxLQUFLLEVBQUUsa0JBQWtCLEVBQUUsTUFBTSxtQkFBbUIsQ0FBQztBQUV4RSxPQUFPLE1BQU0sTUFBTSx1QkFBdUIsQ0FBQztBQUMzQyxPQUFPLGdCQUFnQixNQUFNLHVDQUF1QyxDQUFDO0FBQ3JFLE9BQU8sVUFBVSxNQUFNLGdDQUFnQyxDQUFDO0FBQ3hELE9BQU8sVUFBVSxNQUFNLGlDQUFpQyxDQUFDO0FBQ3pELE9BQU8sU0FBUyxNQUFNLGdDQUFnQyxDQUFDO0FBQ3ZELE9BQU8sU0FBUyxNQUFNLGdDQUFnQyxDQUFDO0FBRXZELGFBQWE7QUFDYixPQUFPLEtBQUssTUFBTSwyQkFBMkIsQ0FBQztBQUM5QyxPQUFPLEVBQUUsWUFBWSxJQUFJLGdCQUFnQixFQUFFLE1BQU0sMENBQTBDLENBQUM7QUFDNUYsT0FBTyxnQ0FBZ0MsTUFBTSw0Q0FBNEMsQ0FBQztBQUUxRixnQkFBZ0IsRUFBRSxDQUFDO0FBVW5CLE1BQU0sQ0FBQyxPQUFPLE9BQU8sWUFBYSxTQUFRLFdBQVc7SUFxQ2pEOztRQUNJLEtBQUssRUFBRSxDQUFDO1FBMUJaLFdBQU0sR0FBRyxTQUFTLENBQUM7UUFHbkIsV0FBTSxHQUFrQixFQUFFLENBQUM7UUFHM0IsaUJBQVksR0FBRyxTQUFTLENBQUM7UUFxQnJC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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvZGVFeGFtcGxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvZGVFeGFtcGxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxNQUFNLElBQUksZ0JBQWdCLEVBQUUsTUFBTSwwQ0FBMEMsQ0FBQztBQUN0RixPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUM1RCxPQUFPLFdBQVcsTUFBTSw2Q0FBNkMsQ0FBQztBQUN0RSxPQUFPLE1BQU0sTUFBTSxzQ0FBc0MsQ0FBQztBQUMxRCxPQUFPLE1BQU0sTUFBTSx1QkFBdUIsQ0FBQztBQUMzQyxPQUFPLFVBQVUsTUFBTSxpQ0FBaUMsQ0FBQztBQUN6RCxPQUFPLFNBQVMsTUFBTSxnQ0FBZ0MsQ0FBQztBQUN2RCxPQUFPLGdCQUFnQixNQUFNLHVDQUF1QyxDQUFDO0FBQ3JFLE9BQU8sU0FBUyxNQUFNLGdDQUFnQyxDQUFDO0FBQ3ZELE9BQU8sVUFBVSxNQUFNLGdDQUFnQyxDQUFDO0FBQ3hELE9BQU8sRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFLFNBQVMsRUFBRSxNQUFNLEtBQUssQ0FBQztBQUMzQyxPQUFPLEVBQUUsUUFBUSxFQUFFLEtBQUssRUFBRSxrQkFBa0IsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQ3hFLGFBQWE7QUFDYixPQUFPLEtBQUssTUFBTSwyQkFBMkIsQ0FBQztBQUM5QyxPQUFPLGdDQUFnQyxNQUFNLDRDQUE0QyxDQUFDO0FBRTFGLGdCQUFnQixFQUFFLENBQUM7QUFVbkIsTUFBTSxDQUFDLE9BQU8sT0FBTyxZQUFhLFNBQVEsZUFBZTtJQW9DckQ7O1FBQ0ksS0FBSyxDQUNELFdBQVcsQ0FBQztZQUNSLGVBQWUsRUFBRTtnQkFDYixTQUFTLEVBQUUsZ0NBQWdDO2FBQzlDO1NBQ0osQ0FBQyxDQUNMLENBQUM7UUFoQ04sV0FBTSxHQUFHLFNBQVMsQ0FBQztRQUduQixXQUFNLEdBQWtCLEVBQUUsQ0FBQztRQUczQixp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

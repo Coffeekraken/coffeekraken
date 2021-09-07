@@ -1,6 +1,6 @@
 import {css, unsafeCSS, html} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
-import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
+import __SLitComponent from "@coffeekraken/s-lit-component";
 import __copy from "clipboard-copy";
 /**
 * @license
@@ -54,6 +54,57 @@ SHighlightJsComponentInterface.definition = {
 function copy(text) {
   return __copy(text);
 }
+function plainObject(object) {
+  if (!object)
+    return false;
+  if (typeof object !== "object")
+    return false;
+  if (object.constructor && object.constructor.name !== "Object")
+    return false;
+  if (Object.prototype.toString.call(object) !== "[object Object]")
+    return false;
+  if (object !== Object(object))
+    return false;
+  return true;
+}
+function __deepMerge(...args) {
+  function merge(firstObj, secondObj) {
+    const newObj = {};
+    if (!firstObj && secondObj)
+      return secondObj;
+    if (!secondObj && firstObj)
+      return firstObj;
+    if (!firstObj && !secondObj)
+      return {};
+    const firstProps = Object.getOwnPropertyNames(firstObj);
+    firstProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(firstObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = firstObj[key];
+      }
+    });
+    const secondProps = Object.getOwnPropertyNames(secondObj);
+    secondProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(secondObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else if (plainObject(newObj[key]) && plainObject(secondObj[key])) {
+        newObj[key] = merge(newObj[key], secondObj[key]);
+      } else {
+        newObj[key] = secondObj[key];
+      }
+    });
+    return newObj;
+  }
+  let currentObj = {};
+  for (let i = 0; i < args.length; i++) {
+    const toMergeObj = args[i];
+    currentObj = merge(currentObj, toMergeObj);
+  }
+  return currentObj;
+}
 var __css = ".s-clipboard-copy {\n    display: inline-block;\n    width: 1em;\n    height: 1em;\n    position: relative;\n    cursor: pointer;\n}\n\n    .s-clipboard-copy:not([mounted]) > * {\n        opacity: 0.001;\n        pointer-events: none;\n    }\n\n    .s-clipboard-copy[state='pending'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='copy'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='success'] {\n        color: hsla(calc(var(--s-theme-color-success-h, 0) + var(--s-theme-color-success-spin ,0)),calc((var(--s-theme-color-success-s, 0) + var(--s-theme-color-success-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-success-l, 0) + var(--s-theme-color-success-lightness-offset, 0)) * 1%),var(--s-theme-color-success-a, 1));\n    }\n\n    .s-clipboard-copy[state='success'] .icon-success {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy[state='error'] {\n        color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0) + var(--s-theme-color-error-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + var(--s-theme-color-error-lightness-offset, 0)) * 1%),var(--s-theme-color-error-a, 1));\n    }\n\n    .s-clipboard-copy[state='error'] .icon-error {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy svg {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -50%);\n        display: block;\n        width: 1em;\n        height: 1em;\n        background-size: contain;\n        opacity: 0;\n        pointer-events: none;\n    }\n";
 var __decorate = function(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -65,16 +116,14 @@ var __decorate = function(decorators, target, key, desc) {
         r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-class SClipboardCopy extends SLitElement {
+class SClipboardCopy extends __SLitComponent {
   constructor() {
-    super();
-    this._state = "pending";
-    this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      componentUtils: {
-        interface: SHighlightJsComponentInterface,
-        defaultProps: {}
+    super(__deepMerge({
+      sLitComponent: {
+        interface: SHighlightJsComponentInterface
       }
-    });
+    }));
+    this._state = "pending";
   }
   static get styles() {
     return css`
@@ -87,17 +136,17 @@ class SClipboardCopy extends SLitElement {
       this._state = "success";
       setTimeout(() => {
         this._state = "pending";
-      }, this._component.props.successTimeout);
+      }, this.props.successTimeout);
     }).catch((e) => {
       this._state = "error";
       setTimeout(() => {
         this._state = "pending";
-      }, this._component.props.errorTimeout);
+      }, this.props.errorTimeout);
     });
   }
   render() {
     return html`
-            <div class="${this._component.className("")}" state="${this._state}">
+            <div class="${this.componentUtils.className("")}" state="${this._state}">
                 <svg
                     ref="svg"
                     class="icon-copy"
@@ -159,9 +208,9 @@ class SClipboardCopy extends SLitElement {
 __decorate([
   property()
 ], SClipboardCopy.prototype, "_state", void 0);
-function webcomponent(props = {}, tagName = "s-clipboard-copy") {
-  __SComponentUtils.setDefaultProps(tagName, props);
+function define(props = {}, tagName = "s-clipboard-copy") {
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SClipboardCopy);
 }
 export default SClipboardCopy;
-export {webcomponent};
+export {define};

@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __Pickr from '@simonwep/pickr';
 import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
 import { css, html, unsafeCSS } from 'lit';
@@ -12,9 +13,9 @@ export interface ISColorPickerComponentProps {
     value: string;
 }
 
-export default class SColorPicker extends SLitElement {
+export default class SColorPicker extends __SLitComponent {
     static get properties() {
-        return __SComponentUtils.properties({}, __SColorPickerComponentInterface);
+        return __SLitComponent.properties({}, __SColorPickerComponentInterface);
     }
 
     static get styles() {
@@ -26,23 +27,21 @@ export default class SColorPicker extends SLitElement {
         `;
     }
 
-    _component = undefined;
-
     constructor() {
-        super();
-        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            componentUtils: {
-                interface: __SColorPickerComponentInterface,
-                defaultProps: {},
-            },
-        });
+        super(
+            __deepMerge({
+                sLitComponent: {
+                    interface: __SColorPickerComponentInterface,
+                },
+            }),
+        );
     }
     firstUpdated() {
         const pickr = __Pickr.create({
             el: this.shadowRoot?.querySelector('.s-color-picker__preview'),
             theme: 'nano', // or 'monolith', or 'nano'
             container: this.shadowRoot?.querySelector('.s-color-picker__picker-wrapper'),
-            default: this.value,
+            default: this.props.value,
             // autoReposition: false,
             comparison: false,
             swatches: [],
@@ -136,25 +135,22 @@ export default class SColorPicker extends SLitElement {
         });
 
         const $app = this.shadowRoot?.querySelector('.pcr-app');
-        $app?.classList.add(this._component.className('__picker'));
+        $app?.classList.add(this.componentUtils.className('__picker'));
 
         const $preview = this.shadowRoot?.querySelector('.pickr');
-        $preview?.classList.add(this._component.className('__preview'));
+        $preview?.classList.add(this.componentUtils.className('__preview'));
     }
-    // createRenderRoot() {
-    //     return this;
-    // }
     render() {
         return html`
-            <div class="${this._component.className('')}">
-                <div class="${this._component.className('__picker-wrapper')}"></div>
-                <div class="${this._component.className('__preview')}"></div>
+            <div class="${this.componentUtils.className('')}">
+                <div class="${this.componentUtils.className('__picker-wrapper')}"></div>
+                <div class="${this.componentUtils.className('__preview')}"></div>
             </div>
         `;
     }
 }
 
-export function webcomponent(props: Partial<ISColorPickerComponentProps> = {}, tagName = 's-color-picker') {
-    __SComponentUtils.setDefaultProps(tagName, props);
+export function define(props: Partial<ISColorPickerComponentProps> = {}, tagName = 's-color-picker') {
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SColorPicker);
 }

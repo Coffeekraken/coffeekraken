@@ -1,21 +1,18 @@
 {
-    "name": "@coffeekraken/s-activate-component",
+    "name": "@coffeekraken/s-lit-component",
     "version": "2.0.0",
     "description": "",
     "type": "module",
     "homepage": "https://coffeekraken.io",
-    "main": "./dist/js/lib.es.js",
+    "main": "./src/js/exports.js",
     "scripts": {
-        "dev": "sugar frontstack dev",
-        "build": "sugar frontstack build",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-component-utils": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "lit": "^2.0.0-rc.3"
+        "@coffeekraken/s-component-utils": "^2.0.0"
     }
 }

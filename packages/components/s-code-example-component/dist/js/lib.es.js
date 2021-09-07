@@ -1,771 +1,63 @@
-import __SComponentUtils, {SComponentUtilsDefaultInterface, SLitElement} from "@coffeekraken/s-component-utils";
-import {css as css$1, unsafeCSS, html as html$2} from "lit";
-import {webcomponent as webcomponent$1} from "@coffeekraken/s-clipboard-copy-component";
+import {define} from "@coffeekraken/s-clipboard-copy-component";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import {css as css$1, unsafeCSS, html} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
+function plainObject(object) {
+  if (!object)
+    return false;
+  if (typeof object !== "object")
+    return false;
+  if (object.constructor && object.constructor.name !== "Object")
+    return false;
+  if (Object.prototype.toString.call(object) !== "[object Object]")
+    return false;
+  if (object !== Object(object))
+    return false;
+  return true;
+}
+function __deepMerge(...args) {
+  function merge(firstObj, secondObj) {
+    const newObj = {};
+    if (!firstObj && secondObj)
+      return secondObj;
+    if (!secondObj && firstObj)
+      return firstObj;
+    if (!firstObj && !secondObj)
+      return {};
+    const firstProps = Object.getOwnPropertyNames(firstObj);
+    firstProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(firstObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = firstObj[key];
+      }
+    });
+    const secondProps = Object.getOwnPropertyNames(secondObj);
+    secondProps.forEach((key) => {
+      const desc = Object.getOwnPropertyDescriptor(secondObj, key);
+      if (desc.set || desc.get) {
+        Object.defineProperty(newObj, key, desc);
+      } else if (plainObject(newObj[key]) && plainObject(secondObj[key])) {
+        newObj[key] = merge(newObj[key], secondObj[key]);
+      } else {
+        newObj[key] = secondObj[key];
+      }
+    });
+    return newObj;
+  }
+  let currentObj = {};
+  for (let i = 0; i < args.length; i++) {
+    const toMergeObj = args[i];
+    currentObj = merge(currentObj, toMergeObj);
+  }
+  return currentObj;
+}
 function wait(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, timeout);
-  });
-}
-/**
-* @license
-* Copyright 2017 Google LLC
-* SPDX-License-Identifier: BSD-3-Clause
-*/
-var _a, _b, _c, _d, _e;
-var _f;
-{
-  console.warn("lit-html is in dev mode. Not recommended for production!");
-}
-const wrap = ((_a = window.ShadyDOM) === null || _a === void 0 ? void 0 : _a.inUse) && ((_b = window.ShadyDOM) === null || _b === void 0 ? void 0 : _b.noPatch) === true ? window.ShadyDOM.wrap : (node) => node;
-const trustedTypes = globalThis.trustedTypes;
-const policy = trustedTypes ? trustedTypes.createPolicy("lit-html", {
-  createHTML: (s) => s
-}) : void 0;
-const identityFunction = (value) => value;
-const noopSanitizer = (_node, _name, _type) => identityFunction;
-const createSanitizer = (node, name, type) => {
-  return sanitizerFactoryInternal();
-};
-const boundAttributeSuffix = "$lit$";
-const marker = `lit$${String(Math.random()).slice(9)}$`;
-const markerMatch = "?" + marker;
-const nodeMarker = `<${markerMatch}>`;
-const d = document;
-const createMarker = (v = "") => d.createComment(v);
-const isPrimitive = (value) => value === null || typeof value != "object" && typeof value != "function";
-const isArray = Array.isArray;
-const isIterable = (value) => {
-  var _a2;
-  return isArray(value) || typeof ((_a2 = value) === null || _a2 === void 0 ? void 0 : _a2[Symbol.iterator]) === "function";
-};
-const SPACE_CHAR = `[ 	
-\f\r]`;
-const ATTR_VALUE_CHAR = `[^ 	
-\f\r"'\`<>=]`;
-const NAME_CHAR = `[^\\s"'>=/]`;
-const textEndRegex = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g;
-const COMMENT_START = 1;
-const TAG_NAME = 2;
-const DYNAMIC_TAG_NAME = 3;
-const commentEndRegex = /-->/g;
-const comment2EndRegex = />/g;
-const tagEndRegex = new RegExp(`>|${SPACE_CHAR}(?:(${NAME_CHAR}+)(${SPACE_CHAR}*=${SPACE_CHAR}*(?:${ATTR_VALUE_CHAR}|("|')|))|$)`, "g");
-const ENTIRE_MATCH = 0;
-const ATTRIBUTE_NAME = 1;
-const SPACES_AND_EQUALS = 2;
-const QUOTE_CHAR = 3;
-const singleQuoteAttrEndRegex = /'/g;
-const doubleQuoteAttrEndRegex = /"/g;
-const rawTextElement = /^(?:script|style|textarea)$/i;
-const HTML_RESULT = 1;
-const SVG_RESULT = 2;
-const ATTRIBUTE_PART = 1;
-const CHILD_PART = 2;
-const PROPERTY_PART = 3;
-const BOOLEAN_ATTRIBUTE_PART = 4;
-const EVENT_PART = 5;
-const ELEMENT_PART = 6;
-const COMMENT_PART = 7;
-const tag = (type) => (strings, ...values) => {
-  if (strings.some((s) => s === void 0)) {
-    console.warn("Some template strings are undefined.\nThis is probably caused by illegal octal escape sequences.");
-  }
-  return {
-    ["_$litType$"]: type,
-    strings,
-    values
-  };
-};
-const html$1 = tag(HTML_RESULT);
-const noChange = Symbol.for("lit-noChange");
-const nothing = Symbol.for("lit-nothing");
-const templateCache = new WeakMap();
-const walker = d.createTreeWalker(d, 129, null, false);
-let sanitizerFactoryInternal = noopSanitizer;
-const getTemplateHtml = (strings, type) => {
-  const l = strings.length - 1;
-  const attrNames = [];
-  let html2 = type === SVG_RESULT ? "<svg>" : "";
-  let rawTextEndRegex;
-  let regex = textEndRegex;
-  for (let i = 0; i < l; i++) {
-    const s = strings[i];
-    let attrNameEndIndex = -1;
-    let attrName;
-    let lastIndex = 0;
-    let match;
-    while (lastIndex < s.length) {
-      regex.lastIndex = lastIndex;
-      match = regex.exec(s);
-      if (match === null) {
-        break;
-      }
-      lastIndex = regex.lastIndex;
-      if (regex === textEndRegex) {
-        if (match[COMMENT_START] === "!--") {
-          regex = commentEndRegex;
-        } else if (match[COMMENT_START] !== void 0) {
-          regex = comment2EndRegex;
-        } else if (match[TAG_NAME] !== void 0) {
-          if (rawTextElement.test(match[TAG_NAME])) {
-            rawTextEndRegex = new RegExp(`</${match[TAG_NAME]}`, "g");
-          }
-          regex = tagEndRegex;
-        } else if (match[DYNAMIC_TAG_NAME] !== void 0) {
-          regex = tagEndRegex;
-        }
-      } else if (regex === tagEndRegex) {
-        if (match[ENTIRE_MATCH] === ">") {
-          regex = rawTextEndRegex !== null && rawTextEndRegex !== void 0 ? rawTextEndRegex : textEndRegex;
-          attrNameEndIndex = -1;
-        } else if (match[ATTRIBUTE_NAME] === void 0) {
-          attrNameEndIndex = -2;
-        } else {
-          attrNameEndIndex = regex.lastIndex - match[SPACES_AND_EQUALS].length;
-          attrName = match[ATTRIBUTE_NAME];
-          regex = match[QUOTE_CHAR] === void 0 ? tagEndRegex : match[QUOTE_CHAR] === '"' ? doubleQuoteAttrEndRegex : singleQuoteAttrEndRegex;
-        }
-      } else if (regex === doubleQuoteAttrEndRegex || regex === singleQuoteAttrEndRegex) {
-        regex = tagEndRegex;
-      } else if (regex === commentEndRegex || regex === comment2EndRegex) {
-        regex = textEndRegex;
-      } else {
-        regex = tagEndRegex;
-        rawTextEndRegex = void 0;
-      }
-    }
-    {
-      console.assert(attrNameEndIndex === -1 || regex === tagEndRegex || regex === singleQuoteAttrEndRegex || regex === doubleQuoteAttrEndRegex, "unexpected parse state B");
-    }
-    const end = regex === tagEndRegex && strings[i + 1].startsWith("/>") ? " " : "";
-    html2 += regex === textEndRegex ? s + nodeMarker : attrNameEndIndex >= 0 ? (attrNames.push(attrName), s.slice(0, attrNameEndIndex) + boundAttributeSuffix + s.slice(attrNameEndIndex)) + marker + end : s + marker + (attrNameEndIndex === -2 ? (attrNames.push(void 0), i) : end);
-  }
-  const htmlResult = html2 + (strings[l] || "<?>") + (type === SVG_RESULT ? "</svg>" : "");
-  return [
-    policy !== void 0 ? policy.createHTML(htmlResult) : htmlResult,
-    attrNames
-  ];
-};
-class Template {
-  constructor({strings, ["_$litType$"]: type}, options) {
-    this.parts = [];
-    let node;
-    let nodeIndex = 0;
-    let attrNameIndex = 0;
-    const partCount = strings.length - 1;
-    const parts = this.parts;
-    const [html2, attrNames] = getTemplateHtml(strings, type);
-    this.el = Template.createElement(html2, options);
-    walker.currentNode = this.el.content;
-    if (type === SVG_RESULT) {
-      const content = this.el.content;
-      const svgElement = content.firstChild;
-      svgElement.remove();
-      content.append(...svgElement.childNodes);
-    }
-    while ((node = walker.nextNode()) !== null && parts.length < partCount) {
-      if (node.nodeType === 1) {
-        if (node.hasAttributes()) {
-          const attrsToRemove = [];
-          for (const name of node.getAttributeNames()) {
-            if (name.endsWith(boundAttributeSuffix) || name.startsWith(marker)) {
-              const realName = attrNames[attrNameIndex++];
-              attrsToRemove.push(name);
-              if (realName !== void 0) {
-                const value = node.getAttribute(realName.toLowerCase() + boundAttributeSuffix);
-                const statics = value.split(marker);
-                const m = /([.?@])?(.*)/.exec(realName);
-                parts.push({
-                  type: ATTRIBUTE_PART,
-                  index: nodeIndex,
-                  name: m[2],
-                  strings: statics,
-                  ctor: m[1] === "." ? PropertyPart : m[1] === "?" ? BooleanAttributePart : m[1] === "@" ? EventPart : AttributePart
-                });
-              } else {
-                parts.push({
-                  type: ELEMENT_PART,
-                  index: nodeIndex
-                });
-              }
-            }
-          }
-          for (const name of attrsToRemove) {
-            node.removeAttribute(name);
-          }
-        }
-        if (rawTextElement.test(node.tagName)) {
-          const strings2 = node.textContent.split(marker);
-          const lastIndex = strings2.length - 1;
-          if (lastIndex > 0) {
-            node.textContent = trustedTypes ? trustedTypes.emptyScript : "";
-            for (let i = 0; i < lastIndex; i++) {
-              node.append(strings2[i], createMarker());
-              walker.nextNode();
-              parts.push({type: CHILD_PART, index: ++nodeIndex});
-            }
-            node.append(strings2[lastIndex], createMarker());
-          }
-        }
-      } else if (node.nodeType === 8) {
-        const data = node.data;
-        if (data === markerMatch) {
-          parts.push({type: CHILD_PART, index: nodeIndex});
-        } else {
-          let i = -1;
-          while ((i = node.data.indexOf(marker, i + 1)) !== -1) {
-            parts.push({type: COMMENT_PART, index: nodeIndex});
-            i += marker.length - 1;
-          }
-        }
-      }
-      nodeIndex++;
-    }
-  }
-  static createElement(html2, _options) {
-    const el = d.createElement("template");
-    el.innerHTML = html2;
-    return el;
-  }
-}
-function resolveDirective(part, value, parent = part, attributeIndex) {
-  var _a2, _b2, _c2;
-  var _d2;
-  if (value === noChange) {
-    return value;
-  }
-  let currentDirective = attributeIndex !== void 0 ? (_a2 = parent.__directives) === null || _a2 === void 0 ? void 0 : _a2[attributeIndex] : parent.__directive;
-  const nextDirectiveConstructor = isPrimitive(value) ? void 0 : value["_$litDirective$"];
-  if ((currentDirective === null || currentDirective === void 0 ? void 0 : currentDirective.constructor) !== nextDirectiveConstructor) {
-    (_b2 = currentDirective === null || currentDirective === void 0 ? void 0 : currentDirective["_$notifyDirectiveConnectionChanged"]) === null || _b2 === void 0 ? void 0 : _b2.call(currentDirective, false);
-    if (nextDirectiveConstructor === void 0) {
-      currentDirective = void 0;
-    } else {
-      currentDirective = new nextDirectiveConstructor(part);
-      currentDirective._$initialize(part, parent, attributeIndex);
-    }
-    if (attributeIndex !== void 0) {
-      ((_c2 = (_d2 = parent).__directives) !== null && _c2 !== void 0 ? _c2 : _d2.__directives = [])[attributeIndex] = currentDirective;
-    } else {
-      parent.__directive = currentDirective;
-    }
-  }
-  if (currentDirective !== void 0) {
-    value = resolveDirective(part, currentDirective._$resolve(part, value.values), currentDirective, attributeIndex);
-  }
-  return value;
-}
-class TemplateInstance {
-  constructor(template, parent) {
-    this._parts = [];
-    this._$disconnectableChildren = void 0;
-    this._$template = template;
-    this._$parent = parent;
-  }
-  get _$isConnected() {
-    return this._$parent._$isConnected;
-  }
-  _clone(options) {
-    var _a2;
-    const {el: {content}, parts} = this._$template;
-    const fragment = ((_a2 = options === null || options === void 0 ? void 0 : options.creationScope) !== null && _a2 !== void 0 ? _a2 : d).importNode(content, true);
-    walker.currentNode = fragment;
-    let node = walker.nextNode();
-    let nodeIndex = 0;
-    let partIndex = 0;
-    let templatePart = parts[0];
-    while (templatePart !== void 0) {
-      if (nodeIndex === templatePart.index) {
-        let part;
-        if (templatePart.type === CHILD_PART) {
-          part = new ChildPart(node, node.nextSibling, this, options);
-        } else if (templatePart.type === ATTRIBUTE_PART) {
-          part = new templatePart.ctor(node, templatePart.name, templatePart.strings, this, options);
-        } else if (templatePart.type === ELEMENT_PART) {
-          part = new ElementPart(node, this, options);
-        }
-        this._parts.push(part);
-        templatePart = parts[++partIndex];
-      }
-      if (nodeIndex !== (templatePart === null || templatePart === void 0 ? void 0 : templatePart.index)) {
-        node = walker.nextNode();
-        nodeIndex++;
-      }
-    }
-    return fragment;
-  }
-  _update(values) {
-    let i = 0;
-    for (const part of this._parts) {
-      if (part !== void 0) {
-        if (part.strings !== void 0) {
-          part._$setValue(values, part, i);
-          i += part.strings.length - 2;
-        } else {
-          part._$setValue(values[i]);
-        }
-      }
-      i++;
-    }
-  }
-}
-class ChildPart {
-  constructor(startNode, endNode, parent, options) {
-    this.type = CHILD_PART;
-    this.__isConnected = true;
-    this._$disconnectableChildren = void 0;
-    this._$startNode = startNode;
-    this._$endNode = endNode;
-    this._$parent = parent;
-    this.options = options;
-    {
-      this._textSanitizer = void 0;
-    }
-  }
-  get _$isConnected() {
-    var _a2, _b2;
-    return (_b2 = (_a2 = this._$parent) === null || _a2 === void 0 ? void 0 : _a2._$isConnected) !== null && _b2 !== void 0 ? _b2 : this.__isConnected;
-  }
-  get parentNode() {
-    return wrap(this._$startNode).parentNode;
-  }
-  get startNode() {
-    return this._$startNode;
-  }
-  get endNode() {
-    return this._$endNode;
-  }
-  _$setValue(value, directiveParent = this) {
-    value = resolveDirective(this, value, directiveParent);
-    if (isPrimitive(value)) {
-      if (value === nothing || value == null || value === "") {
-        if (this._$committedValue !== nothing) {
-          this._$clear();
-        }
-        this._$committedValue = nothing;
-      } else if (value !== this._$committedValue && value !== noChange) {
-        this._commitText(value);
-      }
-    } else if (value["_$litType$"] !== void 0) {
-      this._commitTemplateResult(value);
-    } else if (value.nodeType !== void 0) {
-      this._commitNode(value);
-    } else if (isIterable(value)) {
-      this._commitIterable(value);
-    } else {
-      this._commitText(value);
-    }
-  }
-  _insert(node, ref = this._$endNode) {
-    return wrap(wrap(this._$startNode).parentNode).insertBefore(node, ref);
-  }
-  _commitNode(value) {
-    var _a2;
-    if (this._$committedValue !== value) {
-      this._$clear();
-      if (sanitizerFactoryInternal !== noopSanitizer) {
-        const parentNodeName = (_a2 = this._$startNode.parentNode) === null || _a2 === void 0 ? void 0 : _a2.nodeName;
-        if (parentNodeName === "STYLE" || parentNodeName === "SCRIPT") {
-          this._insert(new Text("/* lit-html will not write TemplateResults to scripts and styles */"));
-          return;
-        }
-      }
-      this._$committedValue = this._insert(value);
-    }
-  }
-  _commitText(value) {
-    const node = wrap(this._$startNode).nextSibling;
-    if (node !== null && node.nodeType === 3 && (this._$endNode === null ? wrap(node).nextSibling === null : node === wrap(this._$endNode).previousSibling)) {
-      {
-        if (this._textSanitizer === void 0) {
-          this._textSanitizer = createSanitizer();
-        }
-        value = this._textSanitizer(value);
-      }
-      node.data = value;
-    } else {
-      {
-        const textNode = document.createTextNode("");
-        this._commitNode(textNode);
-        if (this._textSanitizer === void 0) {
-          this._textSanitizer = createSanitizer();
-        }
-        value = this._textSanitizer(value);
-        textNode.data = value;
-      }
-    }
-    this._$committedValue = value;
-  }
-  _commitTemplateResult(result) {
-    var _a2;
-    const {values, ["_$litType$"]: type} = result;
-    const template = typeof type === "number" ? this._$getTemplate(result) : (type.el === void 0 && (type.el = Template.createElement(type.h, this.options)), type);
-    if (((_a2 = this._$committedValue) === null || _a2 === void 0 ? void 0 : _a2._$template) === template) {
-      this._$committedValue._update(values);
-    } else {
-      const instance = new TemplateInstance(template, this);
-      const fragment = instance._clone(this.options);
-      instance._update(values);
-      this._commitNode(fragment);
-      this._$committedValue = instance;
-    }
-  }
-  _$getTemplate(result) {
-    let template = templateCache.get(result.strings);
-    if (template === void 0) {
-      templateCache.set(result.strings, template = new Template(result));
-    }
-    return template;
-  }
-  _commitIterable(value) {
-    if (!isArray(this._$committedValue)) {
-      this._$committedValue = [];
-      this._$clear();
-    }
-    const itemParts = this._$committedValue;
-    let partIndex = 0;
-    let itemPart;
-    for (const item of value) {
-      if (partIndex === itemParts.length) {
-        itemParts.push(itemPart = new ChildPart(this._insert(createMarker()), this._insert(createMarker()), this, this.options));
-      } else {
-        itemPart = itemParts[partIndex];
-      }
-      itemPart._$setValue(item);
-      partIndex++;
-    }
-    if (partIndex < itemParts.length) {
-      this._$clear(itemPart && wrap(itemPart._$endNode).nextSibling, partIndex);
-      itemParts.length = partIndex;
-    }
-  }
-  _$clear(start = wrap(this._$startNode).nextSibling, from) {
-    var _a2;
-    (_a2 = this._$notifyConnectionChanged) === null || _a2 === void 0 ? void 0 : _a2.call(this, false, true, from);
-    while (start && start !== this._$endNode) {
-      const n = wrap(start).nextSibling;
-      wrap(start).remove();
-      start = n;
-    }
-  }
-  setConnected(isConnected) {
-    var _a2;
-    if (this._$parent === void 0) {
-      this.__isConnected = isConnected;
-      (_a2 = this._$notifyConnectionChanged) === null || _a2 === void 0 ? void 0 : _a2.call(this, isConnected);
-    } else {
-      throw new Error("part.setConnected() may only be called on a RootPart returned from render().");
-    }
-  }
-}
-class AttributePart {
-  constructor(element, name, strings, parent, options) {
-    this.type = ATTRIBUTE_PART;
-    this._$committedValue = nothing;
-    this._$disconnectableChildren = void 0;
-    this.element = element;
-    this.name = name;
-    this._$parent = parent;
-    this.options = options;
-    if (strings.length > 2 || strings[0] !== "" || strings[1] !== "") {
-      this._$committedValue = new Array(strings.length - 1).fill(nothing);
-      this.strings = strings;
-    } else {
-      this._$committedValue = nothing;
-    }
-    {
-      this._sanitizer = void 0;
-    }
-  }
-  get tagName() {
-    return this.element.tagName;
-  }
-  get _$isConnected() {
-    return this._$parent._$isConnected;
-  }
-  _$setValue(value, directiveParent = this, valueIndex, noCommit) {
-    const strings = this.strings;
-    let change = false;
-    if (strings === void 0) {
-      value = resolveDirective(this, value, directiveParent, 0);
-      change = !isPrimitive(value) || value !== this._$committedValue && value !== noChange;
-      if (change) {
-        this._$committedValue = value;
-      }
-    } else {
-      const values = value;
-      value = strings[0];
-      let i, v;
-      for (i = 0; i < strings.length - 1; i++) {
-        v = resolveDirective(this, values[valueIndex + i], directiveParent, i);
-        if (v === noChange) {
-          v = this._$committedValue[i];
-        }
-        change || (change = !isPrimitive(v) || v !== this._$committedValue[i]);
-        if (v === nothing) {
-          value = nothing;
-        } else if (value !== nothing) {
-          value += (v !== null && v !== void 0 ? v : "") + strings[i + 1];
-        }
-        this._$committedValue[i] = v;
-      }
-    }
-    if (change && !noCommit) {
-      this._commitValue(value);
-    }
-  }
-  _commitValue(value) {
-    if (value === nothing) {
-      wrap(this.element).removeAttribute(this.name);
-    } else {
-      {
-        if (this._sanitizer === void 0) {
-          this._sanitizer = sanitizerFactoryInternal(this.element, this.name);
-        }
-        value = this._sanitizer(value !== null && value !== void 0 ? value : "");
-      }
-      wrap(this.element).setAttribute(this.name, value !== null && value !== void 0 ? value : "");
-    }
-  }
-}
-class PropertyPart extends AttributePart {
-  constructor() {
-    super(...arguments);
-    this.type = PROPERTY_PART;
-  }
-  _commitValue(value) {
-    {
-      if (this._sanitizer === void 0) {
-        this._sanitizer = sanitizerFactoryInternal(this.element, this.name);
-      }
-      value = this._sanitizer(value);
-    }
-    this.element[this.name] = value === nothing ? void 0 : value;
-  }
-}
-class BooleanAttributePart extends AttributePart {
-  constructor() {
-    super(...arguments);
-    this.type = BOOLEAN_ATTRIBUTE_PART;
-  }
-  _commitValue(value) {
-    if (value && value !== nothing) {
-      wrap(this.element).setAttribute(this.name, "");
-    } else {
-      wrap(this.element).removeAttribute(this.name);
-    }
-  }
-}
-class EventPart extends AttributePart {
-  constructor() {
-    super(...arguments);
-    this.type = EVENT_PART;
-  }
-  _$setValue(newListener, directiveParent = this) {
-    var _a2;
-    newListener = (_a2 = resolveDirective(this, newListener, directiveParent, 0)) !== null && _a2 !== void 0 ? _a2 : nothing;
-    if (newListener === noChange) {
-      return;
-    }
-    const oldListener = this._$committedValue;
-    const shouldRemoveListener = newListener === nothing && oldListener !== nothing || newListener.capture !== oldListener.capture || newListener.once !== oldListener.once || newListener.passive !== oldListener.passive;
-    const shouldAddListener = newListener !== nothing && (oldListener === nothing || shouldRemoveListener);
-    if (shouldRemoveListener) {
-      this.element.removeEventListener(this.name, this, oldListener);
-    }
-    if (shouldAddListener) {
-      this.element.addEventListener(this.name, this, newListener);
-    }
-    this._$committedValue = newListener;
-  }
-  handleEvent(event) {
-    var _a2, _b2;
-    if (typeof this._$committedValue === "function") {
-      this._$committedValue.call((_b2 = (_a2 = this.options) === null || _a2 === void 0 ? void 0 : _a2.host) !== null && _b2 !== void 0 ? _b2 : this.element, event);
-    } else {
-      this._$committedValue.handleEvent(event);
-    }
-  }
-}
-class ElementPart {
-  constructor(element, parent, options) {
-    this.element = element;
-    this.type = ELEMENT_PART;
-    this._$disconnectableChildren = void 0;
-    this._$parent = parent;
-    this.options = options;
-  }
-  get _$isConnected() {
-    return this._$parent._$isConnected;
-  }
-  _$setValue(value) {
-    resolveDirective(this, value);
-  }
-}
-(_d = (_c = globalThis)["litHtmlPlatformSupport"]) === null || _d === void 0 ? void 0 : _d.call(_c, Template, ChildPart);
-((_e = (_f = globalThis)["litHtmlVersions"]) !== null && _e !== void 0 ? _e : _f["litHtmlVersions"] = []).push("2.0.0-rc.4");
-/**
-* @license
-* Copyright 2020 Google LLC
-* SPDX-License-Identifier: BSD-3-Clause
-*/
-const stringsCache = new Map();
-const withStatic = (coreTag) => (strings, ...values) => {
-  var _a2;
-  const l = values.length;
-  let staticValue;
-  let dynamicValue;
-  const staticStrings = [];
-  const dynamicValues = [];
-  let i = 0;
-  let hasStatics = false;
-  let s;
-  while (i < l) {
-    s = strings[i];
-    while (i < l && (dynamicValue = values[i], staticValue = (_a2 = dynamicValue) === null || _a2 === void 0 ? void 0 : _a2["_$litStatic$"]) !== void 0) {
-      s += staticValue + strings[++i];
-      hasStatics = true;
-    }
-    dynamicValues.push(dynamicValue);
-    staticStrings.push(s);
-    i++;
-  }
-  if (i === l) {
-    staticStrings.push(strings[l]);
-  }
-  if (hasStatics) {
-    const key = staticStrings.join("$$lit$$");
-    strings = stringsCache.get(key);
-    if (strings === void 0) {
-      stringsCache.set(key, strings = staticStrings);
-    }
-    values = dynamicValues;
-  }
-  return coreTag(strings, ...values);
-};
-const html = withStatic(html$1);
-/**
-* @license
-* Copyright 2017 Google LLC
-* SPDX-License-Identifier: BSD-3-Clause
-*/
-const standardProperty = (options, element) => {
-  if (element.kind === "method" && element.descriptor && !("value" in element.descriptor)) {
-    return {
-      ...element,
-      finisher(clazz) {
-        clazz.createProperty(element.key, options);
-      }
-    };
-  } else {
-    return {
-      kind: "field",
-      key: Symbol(),
-      placement: "own",
-      descriptor: {},
-      originalKey: element.key,
-      initializer() {
-        if (typeof element.initializer === "function") {
-          this[element.key] = element.initializer.call(this);
-        }
-      },
-      finisher(clazz) {
-        clazz.createProperty(element.key, options);
-      }
-    };
-  }
-};
-const legacyProperty = (options, proto, name) => {
-  proto.constructor.createProperty(name, options);
-};
-function property(options) {
-  return (protoOrDescriptor, name) => name !== void 0 ? legacyProperty(options, protoOrDescriptor, name) : standardProperty(options, protoOrDescriptor);
-}
-/**
-* @license
-* Copyright 2017 Google LLC
-* SPDX-License-Identifier: BSD-3-Clause
-*/
-const decorateProperty = ({finisher, descriptor}) => (protoOrDescriptor, name) => {
-  var _a2;
-  if (name !== void 0) {
-    const ctor = protoOrDescriptor.constructor;
-    if (descriptor !== void 0) {
-      Object.defineProperty(protoOrDescriptor, name, descriptor(name));
-    }
-    finisher === null || finisher === void 0 ? void 0 : finisher(ctor, name);
-  } else {
-    const key = (_a2 = protoOrDescriptor.originalKey) !== null && _a2 !== void 0 ? _a2 : protoOrDescriptor.key;
-    const info = descriptor != void 0 ? {
-      kind: "method",
-      placement: "prototype",
-      key,
-      descriptor: descriptor(protoOrDescriptor.key)
-    } : {...protoOrDescriptor, key};
-    if (finisher != void 0) {
-      info.finisher = function(ctor) {
-        finisher(ctor, key);
-      };
-    }
-    return info;
-  }
-};
-/**
-* @license
-* Copyright 2017 Google LLC
-* SPDX-License-Identifier: BSD-3-Clause
-*/
-function query(selector, cache) {
-  return decorateProperty({
-    descriptor: (name) => {
-      const descriptor = {
-        get() {
-          var _a2;
-          return (_a2 = this.renderRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(selector);
-        },
-        enumerable: true,
-        configurable: true
-      };
-      if (cache) {
-        const key = typeof name === "symbol" ? Symbol() : `__${name}`;
-        descriptor.get = function() {
-          var _a2;
-          if (this[key] === void 0) {
-            this[key] = (_a2 = this.renderRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(selector);
-          }
-          return this[key];
-        };
-      }
-      return descriptor;
-    }
-  });
-}
-/**
-* @license
-* Copyright 2017 Google LLC
-* SPDX-License-Identifier: BSD-3-Clause
-*/
-const ElementProto = Element.prototype;
-const legacyMatches = ElementProto.msMatchesSelector || ElementProto.webkitMatchesSelector;
-function queryAssignedNodes(slotName = "", flatten = false, selector = "") {
-  return decorateProperty({
-    descriptor: (_name) => ({
-      get() {
-        var _a2, _b2;
-        const slotSelector = `slot${slotName ? `[name=${slotName}]` : ":not([name])"}`;
-        const slot = (_a2 = this.renderRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(slotSelector);
-        let nodes = (_b2 = slot) === null || _b2 === void 0 ? void 0 : _b2.assignedNodes({flatten});
-        if (nodes && selector) {
-          nodes = nodes.filter((node) => node.nodeType === Node.ELEMENT_NODE && (node.matches ? node.matches(selector) : legacyMatches.call(node, selector)));
-        }
-        return nodes;
-      },
-      enumerable: true,
-      configurable: true
-    })
   });
 }
 var deepFreezeEs6 = {exports: {}};
@@ -2127,131 +1419,6 @@ const HLJS = function(hljs) {
 };
 var highlight = HLJS({});
 var core = highlight;
-const IDENT_RE = "[A-Za-z$_][0-9A-Za-z$_]*";
-const KEYWORDS = [
-  "as",
-  "in",
-  "of",
-  "if",
-  "for",
-  "while",
-  "finally",
-  "var",
-  "new",
-  "function",
-  "do",
-  "return",
-  "void",
-  "else",
-  "break",
-  "catch",
-  "instanceof",
-  "with",
-  "throw",
-  "case",
-  "default",
-  "try",
-  "switch",
-  "continue",
-  "typeof",
-  "delete",
-  "let",
-  "yield",
-  "const",
-  "class",
-  "debugger",
-  "async",
-  "await",
-  "static",
-  "import",
-  "from",
-  "export",
-  "extends"
-];
-const LITERALS = [
-  "true",
-  "false",
-  "null",
-  "undefined",
-  "NaN",
-  "Infinity"
-];
-const TYPES = [
-  "Intl",
-  "DataView",
-  "Number",
-  "Math",
-  "Date",
-  "String",
-  "RegExp",
-  "Object",
-  "Function",
-  "Boolean",
-  "Error",
-  "Symbol",
-  "Set",
-  "Map",
-  "WeakSet",
-  "WeakMap",
-  "Proxy",
-  "Reflect",
-  "JSON",
-  "Promise",
-  "Float64Array",
-  "Int16Array",
-  "Int32Array",
-  "Int8Array",
-  "Uint16Array",
-  "Uint32Array",
-  "Float32Array",
-  "Array",
-  "Uint8Array",
-  "Uint8ClampedArray",
-  "ArrayBuffer",
-  "BigInt64Array",
-  "BigUint64Array",
-  "BigInt"
-];
-const ERROR_TYPES = [
-  "EvalError",
-  "InternalError",
-  "RangeError",
-  "ReferenceError",
-  "SyntaxError",
-  "TypeError",
-  "URIError"
-];
-const BUILT_IN_GLOBALS = [
-  "setInterval",
-  "setTimeout",
-  "clearInterval",
-  "clearTimeout",
-  "require",
-  "exports",
-  "eval",
-  "isFinite",
-  "isNaN",
-  "parseFloat",
-  "parseInt",
-  "decodeURI",
-  "decodeURIComponent",
-  "encodeURI",
-  "encodeURIComponent",
-  "escape",
-  "unescape"
-];
-const BUILT_IN_VARIABLES = [
-  "arguments",
-  "this",
-  "super",
-  "console",
-  "window",
-  "document",
-  "localStorage",
-  "module",
-  "global"
-];
-const BUILT_INS = [].concat(BUILT_IN_GLOBALS, TYPES, ERROR_TYPES);
 function source$3(re) {
   if (!re)
     return null;
@@ -2259,675 +1426,8 @@ function source$3(re) {
     return re;
   return re.source;
 }
-function lookahead$2(re) {
-  return concat$3("(?=", re, ")");
-}
 function concat$3(...args) {
   const joined = args.map((x) => source$3(x)).join("");
-  return joined;
-}
-function javascript(hljs) {
-  const hasClosingTag = (match, {after}) => {
-    const tag2 = "</" + match[0].slice(1);
-    const pos = match.input.indexOf(tag2, after);
-    return pos !== -1;
-  };
-  const IDENT_RE$12 = IDENT_RE;
-  const FRAGMENT = {
-    begin: "<>",
-    end: "</>"
-  };
-  const XML_TAG = {
-    begin: /<[A-Za-z0-9\\._:-]+/,
-    end: /\/[A-Za-z0-9\\._:-]+>|\/>/,
-    isTrulyOpeningTag: (match, response) => {
-      const afterMatchIndex = match[0].length + match.index;
-      const nextChar = match.input[afterMatchIndex];
-      if (nextChar === "<") {
-        response.ignoreMatch();
-        return;
-      }
-      if (nextChar === ">") {
-        if (!hasClosingTag(match, {after: afterMatchIndex})) {
-          response.ignoreMatch();
-        }
-      }
-    }
-  };
-  const KEYWORDS$1 = {
-    $pattern: IDENT_RE,
-    keyword: KEYWORDS,
-    literal: LITERALS,
-    built_in: BUILT_INS,
-    "variable.language": BUILT_IN_VARIABLES
-  };
-  const decimalDigits = "[0-9](_?[0-9])*";
-  const frac = `\\.(${decimalDigits})`;
-  const decimalInteger = `0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*`;
-  const NUMBER = {
-    className: "number",
-    variants: [
-      {begin: `(\\b(${decimalInteger})((${frac})|\\.)?|(${frac}))[eE][+-]?(${decimalDigits})\\b`},
-      {begin: `\\b(${decimalInteger})\\b((${frac})\\b|\\.)?|(${frac})\\b`},
-      {begin: `\\b(0|[1-9](_?[0-9])*)n\\b`},
-      {begin: "\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},
-      {begin: "\\b0[bB][0-1](_?[0-1])*n?\\b"},
-      {begin: "\\b0[oO][0-7](_?[0-7])*n?\\b"},
-      {begin: "\\b0[0-7]+n?\\b"}
-    ],
-    relevance: 0
-  };
-  const SUBST = {
-    className: "subst",
-    begin: "\\$\\{",
-    end: "\\}",
-    keywords: KEYWORDS$1,
-    contains: []
-  };
-  const HTML_TEMPLATE = {
-    begin: "html`",
-    end: "",
-    starts: {
-      end: "`",
-      returnEnd: false,
-      contains: [
-        hljs.BACKSLASH_ESCAPE,
-        SUBST
-      ],
-      subLanguage: "xml"
-    }
-  };
-  const CSS_TEMPLATE = {
-    begin: "css`",
-    end: "",
-    starts: {
-      end: "`",
-      returnEnd: false,
-      contains: [
-        hljs.BACKSLASH_ESCAPE,
-        SUBST
-      ],
-      subLanguage: "css"
-    }
-  };
-  const TEMPLATE_STRING = {
-    className: "string",
-    begin: "`",
-    end: "`",
-    contains: [
-      hljs.BACKSLASH_ESCAPE,
-      SUBST
-    ]
-  };
-  const JSDOC_COMMENT = hljs.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
-    relevance: 0,
-    contains: [
-      {
-        begin: "(?=@[A-Za-z]+)",
-        relevance: 0,
-        contains: [
-          {
-            className: "doctag",
-            begin: "@[A-Za-z]+"
-          },
-          {
-            className: "type",
-            begin: "\\{",
-            end: "\\}",
-            excludeEnd: true,
-            excludeBegin: true,
-            relevance: 0
-          },
-          {
-            className: "variable",
-            begin: IDENT_RE$12 + "(?=\\s*(-)|$)",
-            endsParent: true,
-            relevance: 0
-          },
-          {
-            begin: /(?=[^\n])\s/,
-            relevance: 0
-          }
-        ]
-      }
-    ]
-  });
-  const COMMENT2 = {
-    className: "comment",
-    variants: [
-      JSDOC_COMMENT,
-      hljs.C_BLOCK_COMMENT_MODE,
-      hljs.C_LINE_COMMENT_MODE
-    ]
-  };
-  const SUBST_INTERNALS = [
-    hljs.APOS_STRING_MODE,
-    hljs.QUOTE_STRING_MODE,
-    HTML_TEMPLATE,
-    CSS_TEMPLATE,
-    TEMPLATE_STRING,
-    NUMBER,
-    hljs.REGEXP_MODE
-  ];
-  SUBST.contains = SUBST_INTERNALS.concat({
-    begin: /\{/,
-    end: /\}/,
-    keywords: KEYWORDS$1,
-    contains: [
-      "self"
-    ].concat(SUBST_INTERNALS)
-  });
-  const SUBST_AND_COMMENTS = [].concat(COMMENT2, SUBST.contains);
-  const PARAMS_CONTAINS = SUBST_AND_COMMENTS.concat([
-    {
-      begin: /\(/,
-      end: /\)/,
-      keywords: KEYWORDS$1,
-      contains: ["self"].concat(SUBST_AND_COMMENTS)
-    }
-  ]);
-  const PARAMS = {
-    className: "params",
-    begin: /\(/,
-    end: /\)/,
-    excludeBegin: true,
-    excludeEnd: true,
-    keywords: KEYWORDS$1,
-    contains: PARAMS_CONTAINS
-  };
-  const CLASS_OR_EXTENDS = {
-    variants: [
-      {
-        match: [
-          /class/,
-          /\s+/,
-          IDENT_RE$12
-        ],
-        scope: {
-          1: "keyword",
-          3: "title.class"
-        }
-      },
-      {
-        match: [
-          /extends/,
-          /\s+/,
-          concat$3(IDENT_RE$12, "(", concat$3(/\./, IDENT_RE$12), ")*")
-        ],
-        scope: {
-          1: "keyword",
-          3: "title.class.inherited"
-        }
-      }
-    ]
-  };
-  const CLASS_REFERENCE = {
-    relevance: 0,
-    match: /\b[A-Z][a-z]+([A-Z][a-z]+)*/,
-    className: "title.class",
-    keywords: {
-      _: [
-        ...TYPES,
-        ...ERROR_TYPES
-      ]
-    }
-  };
-  const USE_STRICT = {
-    label: "use_strict",
-    className: "meta",
-    relevance: 10,
-    begin: /^\s*['"]use (strict|asm)['"]/
-  };
-  const FUNCTION_DEFINITION = {
-    variants: [
-      {
-        match: [
-          /function/,
-          /\s+/,
-          IDENT_RE$12,
-          /(?=\s*\()/
-        ]
-      },
-      {
-        match: [
-          /function/,
-          /\s*(?=\()/
-        ]
-      }
-    ],
-    className: {
-      1: "keyword",
-      3: "title.function"
-    },
-    label: "func.def",
-    contains: [PARAMS],
-    illegal: /%/
-  };
-  const UPPER_CASE_CONSTANT = {
-    relevance: 0,
-    match: /\b[A-Z][A-Z_0-9]+\b/,
-    className: "variable.constant"
-  };
-  function noneOf(list) {
-    return concat$3("(?!", list.join("|"), ")");
-  }
-  const FUNCTION_CALL = {
-    match: concat$3(/\b/, noneOf([
-      ...BUILT_IN_GLOBALS,
-      "super"
-    ]), IDENT_RE$12, lookahead$2(/\(/)),
-    className: "title.function",
-    relevance: 0
-  };
-  const PROPERTY_ACCESS = {
-    begin: concat$3(/\./, lookahead$2(concat$3(IDENT_RE$12, /(?![0-9A-Za-z$_(])/))),
-    end: IDENT_RE$12,
-    excludeBegin: true,
-    keywords: "prototype",
-    className: "property",
-    relevance: 0
-  };
-  const GETTER_OR_SETTER = {
-    match: [
-      /get|set/,
-      /\s+/,
-      IDENT_RE$12,
-      /(?=\()/
-    ],
-    className: {
-      1: "keyword",
-      3: "title.function"
-    },
-    contains: [
-      {
-        begin: /\(\)/
-      },
-      PARAMS
-    ]
-  };
-  const FUNC_LEAD_IN_RE = "(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|" + hljs.UNDERSCORE_IDENT_RE + ")\\s*=>";
-  const FUNCTION_VARIABLE = {
-    match: [
-      /const|var|let/,
-      /\s+/,
-      IDENT_RE$12,
-      /\s*/,
-      /=\s*/,
-      lookahead$2(FUNC_LEAD_IN_RE)
-    ],
-    className: {
-      1: "keyword",
-      3: "title.function"
-    },
-    contains: [
-      PARAMS
-    ]
-  };
-  return {
-    name: "Javascript",
-    aliases: ["js", "jsx", "mjs", "cjs"],
-    keywords: KEYWORDS$1,
-    exports: {PARAMS_CONTAINS},
-    illegal: /#(?![$_A-z])/,
-    contains: [
-      hljs.SHEBANG({
-        label: "shebang",
-        binary: "node",
-        relevance: 5
-      }),
-      USE_STRICT,
-      hljs.APOS_STRING_MODE,
-      hljs.QUOTE_STRING_MODE,
-      HTML_TEMPLATE,
-      CSS_TEMPLATE,
-      TEMPLATE_STRING,
-      COMMENT2,
-      NUMBER,
-      CLASS_REFERENCE,
-      {
-        className: "attr",
-        begin: IDENT_RE$12 + lookahead$2(":"),
-        relevance: 0
-      },
-      FUNCTION_VARIABLE,
-      {
-        begin: "(" + hljs.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
-        keywords: "return throw case",
-        relevance: 0,
-        contains: [
-          COMMENT2,
-          hljs.REGEXP_MODE,
-          {
-            className: "function",
-            begin: FUNC_LEAD_IN_RE,
-            returnBegin: true,
-            end: "\\s*=>",
-            contains: [
-              {
-                className: "params",
-                variants: [
-                  {
-                    begin: hljs.UNDERSCORE_IDENT_RE,
-                    relevance: 0
-                  },
-                  {
-                    className: null,
-                    begin: /\(\s*\)/,
-                    skip: true
-                  },
-                  {
-                    begin: /\(/,
-                    end: /\)/,
-                    excludeBegin: true,
-                    excludeEnd: true,
-                    keywords: KEYWORDS$1,
-                    contains: PARAMS_CONTAINS
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            begin: /,/,
-            relevance: 0
-          },
-          {
-            match: /\s+/,
-            relevance: 0
-          },
-          {
-            variants: [
-              {begin: FRAGMENT.begin, end: FRAGMENT.end},
-              {
-                begin: XML_TAG.begin,
-                "on:begin": XML_TAG.isTrulyOpeningTag,
-                end: XML_TAG.end
-              }
-            ],
-            subLanguage: "xml",
-            contains: [
-              {
-                begin: XML_TAG.begin,
-                end: XML_TAG.end,
-                skip: true,
-                contains: ["self"]
-              }
-            ]
-          }
-        ]
-      },
-      FUNCTION_DEFINITION,
-      {
-        beginKeywords: "while if switch catch for"
-      },
-      {
-        begin: "\\b(?!function)" + hljs.UNDERSCORE_IDENT_RE + "\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
-        returnBegin: true,
-        label: "func.def",
-        contains: [
-          PARAMS,
-          hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$12, className: "title.function"})
-        ]
-      },
-      {
-        match: /\.\.\./,
-        relevance: 0
-      },
-      PROPERTY_ACCESS,
-      {
-        match: "\\$" + IDENT_RE$12,
-        relevance: 0
-      },
-      {
-        match: [/\bconstructor(?=\s*\()/],
-        className: {1: "title.function"},
-        contains: [PARAMS]
-      },
-      FUNCTION_CALL,
-      UPPER_CASE_CONSTANT,
-      CLASS_OR_EXTENDS,
-      GETTER_OR_SETTER,
-      {
-        match: /\$[(.]/
-      }
-    ]
-  };
-}
-function source$2(re) {
-  if (!re)
-    return null;
-  if (typeof re === "string")
-    return re;
-  return re.source;
-}
-function lookahead$1(re) {
-  return concat$2("(?=", re, ")");
-}
-function optional(re) {
-  return concat$2("(?:", re, ")?");
-}
-function concat$2(...args) {
-  const joined = args.map((x) => source$2(x)).join("");
-  return joined;
-}
-function stripOptionsFromArgs(args) {
-  const opts = args[args.length - 1];
-  if (typeof opts === "object" && opts.constructor === Object) {
-    args.splice(args.length - 1, 1);
-    return opts;
-  } else {
-    return {};
-  }
-}
-function either(...args) {
-  const opts = stripOptionsFromArgs(args);
-  const joined = "(" + (opts.capture ? "" : "?:") + args.map((x) => source$2(x)).join("|") + ")";
-  return joined;
-}
-function xml(hljs) {
-  const TAG_NAME_RE = concat$2(/[A-Z_]/, optional(/[A-Z0-9_.-]*:/), /[A-Z0-9_.-]*/);
-  const XML_IDENT_RE = /[A-Za-z0-9._:-]+/;
-  const XML_ENTITIES = {
-    className: "symbol",
-    begin: /&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/
-  };
-  const XML_META_KEYWORDS = {
-    begin: /\s/,
-    contains: [
-      {
-        className: "keyword",
-        begin: /#?[a-z_][a-z1-9_-]+/,
-        illegal: /\n/
-      }
-    ]
-  };
-  const XML_META_PAR_KEYWORDS = hljs.inherit(XML_META_KEYWORDS, {
-    begin: /\(/,
-    end: /\)/
-  });
-  const APOS_META_STRING_MODE = hljs.inherit(hljs.APOS_STRING_MODE, {
-    className: "string"
-  });
-  const QUOTE_META_STRING_MODE = hljs.inherit(hljs.QUOTE_STRING_MODE, {
-    className: "string"
-  });
-  const TAG_INTERNALS = {
-    endsWithParent: true,
-    illegal: /</,
-    relevance: 0,
-    contains: [
-      {
-        className: "attr",
-        begin: XML_IDENT_RE,
-        relevance: 0
-      },
-      {
-        begin: /=\s*/,
-        relevance: 0,
-        contains: [
-          {
-            className: "string",
-            endsParent: true,
-            variants: [
-              {
-                begin: /"/,
-                end: /"/,
-                contains: [XML_ENTITIES]
-              },
-              {
-                begin: /'/,
-                end: /'/,
-                contains: [XML_ENTITIES]
-              },
-              {
-                begin: /[^\s"'=<>`]+/
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  };
-  return {
-    name: "HTML, XML",
-    aliases: [
-      "html",
-      "xhtml",
-      "rss",
-      "atom",
-      "xjb",
-      "xsd",
-      "xsl",
-      "plist",
-      "wsf",
-      "svg"
-    ],
-    case_insensitive: true,
-    contains: [
-      {
-        className: "meta",
-        begin: /<![a-z]/,
-        end: />/,
-        relevance: 10,
-        contains: [
-          XML_META_KEYWORDS,
-          QUOTE_META_STRING_MODE,
-          APOS_META_STRING_MODE,
-          XML_META_PAR_KEYWORDS,
-          {
-            begin: /\[/,
-            end: /\]/,
-            contains: [
-              {
-                className: "meta",
-                begin: /<![a-z]/,
-                end: />/,
-                contains: [
-                  XML_META_KEYWORDS,
-                  XML_META_PAR_KEYWORDS,
-                  QUOTE_META_STRING_MODE,
-                  APOS_META_STRING_MODE
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      hljs.COMMENT(/<!--/, /-->/, {
-        relevance: 10
-      }),
-      {
-        begin: /<!\[CDATA\[/,
-        end: /\]\]>/,
-        relevance: 10
-      },
-      XML_ENTITIES,
-      {
-        className: "meta",
-        begin: /<\?xml/,
-        end: /\?>/,
-        relevance: 10
-      },
-      {
-        className: "tag",
-        begin: /<style(?=\s|>)/,
-        end: />/,
-        keywords: {
-          name: "style"
-        },
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: /<\/style>/,
-          returnEnd: true,
-          subLanguage: [
-            "css",
-            "xml"
-          ]
-        }
-      },
-      {
-        className: "tag",
-        begin: /<script(?=\s|>)/,
-        end: />/,
-        keywords: {
-          name: "script"
-        },
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: /<\/script>/,
-          returnEnd: true,
-          subLanguage: [
-            "javascript",
-            "handlebars",
-            "xml"
-          ]
-        }
-      },
-      {
-        className: "tag",
-        begin: /<>|<\/>/
-      },
-      {
-        className: "tag",
-        begin: concat$2(/</, lookahead$1(concat$2(TAG_NAME_RE, either(/\/>/, />/, /\s/)))),
-        end: /\/?>/,
-        contains: [
-          {
-            className: "name",
-            begin: TAG_NAME_RE,
-            relevance: 0,
-            starts: TAG_INTERNALS
-          }
-        ]
-      },
-      {
-        className: "tag",
-        begin: concat$2(/<\//, lookahead$1(concat$2(TAG_NAME_RE, />/))),
-        contains: [
-          {
-            className: "name",
-            begin: TAG_NAME_RE,
-            relevance: 0
-          },
-          {
-            begin: />/,
-            relevance: 0,
-            endsParent: true
-          }
-        ]
-      }
-    ]
-  };
-}
-function source$1(re) {
-  if (!re)
-    return null;
-  if (typeof re === "string")
-    return re;
-  return re.source;
-}
-function concat$1(...args) {
-  const joined = args.map((x) => source$1(x)).join("");
   return joined;
 }
 function bash(hljs) {
@@ -2946,7 +1446,7 @@ function bash(hljs) {
   Object.assign(VAR, {
     className: "variable",
     variants: [
-      {begin: concat$1(/\$[\w\d#@][\w\d_]*/, `(?![\\w\\d])(?![$])`)},
+      {begin: concat$3(/\$[\w\d#@][\w\d_]*/, `(?![\\w\\d])(?![$])`)},
       BRACED_VAR
     ]
   });
@@ -3058,162 +1558,6 @@ function bash(hljs) {
       ESCAPED_QUOTE,
       APOS_STRING,
       VAR
-    ]
-  };
-}
-function php(hljs) {
-  const VARIABLE = {
-    className: "variable",
-    begin: `\\$+[a-zA-Z_\x7F-\xFF][a-zA-Z0-9_\x7F-\xFF]*(?![A-Za-z0-9])(?![$])`
-  };
-  const PREPROCESSOR = {
-    className: "meta",
-    variants: [
-      {begin: /<\?php/, relevance: 10},
-      {begin: /<\?[=]?/},
-      {begin: /\?>/}
-    ]
-  };
-  const SUBST = {
-    className: "subst",
-    variants: [
-      {begin: /\$\w+/},
-      {begin: /\{\$/, end: /\}/}
-    ]
-  };
-  const SINGLE_QUOTED = hljs.inherit(hljs.APOS_STRING_MODE, {
-    illegal: null
-  });
-  const DOUBLE_QUOTED = hljs.inherit(hljs.QUOTE_STRING_MODE, {
-    illegal: null,
-    contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
-  });
-  const HEREDOC = hljs.END_SAME_AS_BEGIN({
-    begin: /<<<[ \t]*(\w+)\n/,
-    end: /[ \t]*(\w+)\b/,
-    contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
-  });
-  const STRING = {
-    className: "string",
-    contains: [hljs.BACKSLASH_ESCAPE, PREPROCESSOR],
-    variants: [
-      hljs.inherit(SINGLE_QUOTED, {
-        begin: "b'",
-        end: "'"
-      }),
-      hljs.inherit(DOUBLE_QUOTED, {
-        begin: 'b"',
-        end: '"'
-      }),
-      DOUBLE_QUOTED,
-      SINGLE_QUOTED,
-      HEREDOC
-    ]
-  };
-  const NUMBER = {
-    className: "number",
-    variants: [
-      {begin: `\\b0b[01]+(?:_[01]+)*\\b`},
-      {begin: `\\b0o[0-7]+(?:_[0-7]+)*\\b`},
-      {begin: `\\b0x[\\da-f]+(?:_[\\da-f]+)*\\b`},
-      {begin: `(?:\\b\\d+(?:_\\d+)*(\\.(?:\\d+(?:_\\d+)*))?|\\B\\.\\d+)(?:e[+-]?\\d+)?`}
-    ],
-    relevance: 0
-  };
-  const KEYWORDS2 = {
-    keyword: "__CLASS__ __DIR__ __FILE__ __FUNCTION__ __LINE__ __METHOD__ __NAMESPACE__ __TRAIT__ die echo exit include include_once print require require_once array abstract and as binary bool boolean break callable case catch class clone const continue declare default do double else elseif empty enddeclare endfor endforeach endif endswitch endwhile enum eval extends final finally float for foreach from global goto if implements instanceof insteadof int integer interface isset iterable list match|0 mixed new object or private protected public real return string switch throw trait try unset use var void while xor yield",
-    literal: "false null true",
-    built_in: "Error|0 AppendIterator ArgumentCountError ArithmeticError ArrayIterator ArrayObject AssertionError BadFunctionCallException BadMethodCallException CachingIterator CallbackFilterIterator CompileError Countable DirectoryIterator DivisionByZeroError DomainException EmptyIterator ErrorException Exception FilesystemIterator FilterIterator GlobIterator InfiniteIterator InvalidArgumentException IteratorIterator LengthException LimitIterator LogicException MultipleIterator NoRewindIterator OutOfBoundsException OutOfRangeException OuterIterator OverflowException ParentIterator ParseError RangeException RecursiveArrayIterator RecursiveCachingIterator RecursiveCallbackFilterIterator RecursiveDirectoryIterator RecursiveFilterIterator RecursiveIterator RecursiveIteratorIterator RecursiveRegexIterator RecursiveTreeIterator RegexIterator RuntimeException SeekableIterator SplDoublyLinkedList SplFileInfo SplFileObject SplFixedArray SplHeap SplMaxHeap SplMinHeap SplObjectStorage SplObserver SplObserver SplPriorityQueue SplQueue SplStack SplSubject SplSubject SplTempFileObject TypeError UnderflowException UnexpectedValueException UnhandledMatchError ArrayAccess Closure Generator Iterator IteratorAggregate Serializable Stringable Throwable Traversable WeakReference WeakMap Directory __PHP_Incomplete_Class parent php_user_filter self static stdClass"
-  };
-  return {
-    case_insensitive: true,
-    keywords: KEYWORDS2,
-    contains: [
-      hljs.HASH_COMMENT_MODE,
-      hljs.COMMENT("//", "$", {contains: [PREPROCESSOR]}),
-      hljs.COMMENT("/\\*", "\\*/", {
-        contains: [
-          {
-            className: "doctag",
-            begin: "@[A-Za-z]+"
-          }
-        ]
-      }),
-      hljs.COMMENT("__halt_compiler.+?;", false, {
-        endsWithParent: true,
-        keywords: "__halt_compiler"
-      }),
-      PREPROCESSOR,
-      {
-        className: "keyword",
-        begin: /\$this\b/
-      },
-      VARIABLE,
-      {
-        begin: /(::|->)+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/
-      },
-      {
-        className: "function",
-        relevance: 0,
-        beginKeywords: "fn function",
-        end: /[;{]/,
-        excludeEnd: true,
-        illegal: "[$%\\[]",
-        contains: [
-          {
-            beginKeywords: "use"
-          },
-          hljs.UNDERSCORE_TITLE_MODE,
-          {
-            begin: "=>",
-            endsParent: true
-          },
-          {
-            className: "params",
-            begin: "\\(",
-            end: "\\)",
-            excludeBegin: true,
-            excludeEnd: true,
-            keywords: KEYWORDS2,
-            contains: [
-              "self",
-              VARIABLE,
-              hljs.C_BLOCK_COMMENT_MODE,
-              STRING,
-              NUMBER
-            ]
-          }
-        ]
-      },
-      {
-        className: "class",
-        variants: [
-          {beginKeywords: "enum", illegal: /[($"]/},
-          {beginKeywords: "class interface trait", illegal: /[:($"]/}
-        ],
-        relevance: 0,
-        end: /\{/,
-        excludeEnd: true,
-        contains: [
-          {beginKeywords: "extends implements"},
-          hljs.UNDERSCORE_TITLE_MODE
-        ]
-      },
-      {
-        beginKeywords: "namespace",
-        relevance: 0,
-        end: ";",
-        illegal: /[.']/,
-        contains: [hljs.UNDERSCORE_TITLE_MODE]
-      },
-      {
-        beginKeywords: "use",
-        relevance: 0,
-        end: ";",
-        contains: [hljs.UNDERSCORE_TITLE_MODE]
-      },
-      STRING,
-      NUMBER
     ]
   };
 }
@@ -3643,18 +1987,18 @@ const ATTRIBUTES = [
   "word-wrap",
   "z-index"
 ].reverse();
-function source(re) {
+function source$2(re) {
   if (!re)
     return null;
   if (typeof re === "string")
     return re;
   return re.source;
 }
-function lookahead(re) {
-  return concat("(?=", re, ")");
+function lookahead$2(re) {
+  return concat$2("(?=", re, ")");
 }
-function concat(...args) {
-  const joined = args.map((x) => source(x)).join("");
+function concat$2(...args) {
+  const joined = args.map((x) => source$2(x)).join("");
   return joined;
 }
 function css(hljs) {
@@ -3742,7 +2086,7 @@ function css(hljs) {
         ]
       },
       {
-        begin: lookahead(/@/),
+        begin: lookahead$2(/@/),
         end: "[{;]",
         relevance: 0,
         illegal: /:/,
@@ -3779,34 +2123,1109 @@ function css(hljs) {
     ]
   };
 }
-var __css = ".hljs {\n    display: block;\n    overflow: hidden;\n    padding: var(--s-theme-space-30, 24px);\n    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    line-height: 1.5 !important;\n}\n\n    .hljs,\n    .hljs.hljs-subst {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    }\n\n    .hljs .hljs-selector-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-selector-id {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n        font-weight: bold;\n    }\n\n    .hljs .hljs-selector-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-pseudo {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-addition {\n        background-color: rgba(163, 190, 140, 0.5);\n    }\n\n    .hljs .hljs-deletion {\n        background-color: rgba(191, 97, 106, 0.5);\n    }\n\n    .hljs .hljs-built_in,\n    .hljs .hljs-type {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-function {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-function > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-keyword,\n    .hljs .hljs-literal,\n    .hljs .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-number {\n        color: #B48EAD;\n    }\n\n    .hljs .hljs-regexp {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-title {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-params {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-bullet {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-code {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-emphasis {\n        font-style: italic;\n    }\n\n    .hljs .hljs-formula {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-strong {\n        font-weight: bold;\n    }\n\n    .hljs .hljs-link:hover {\n        text-decoration: underline;\n    }\n\n    .hljs .hljs-quote {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-comment {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-doctag {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-meta,\n    .hljs .hljs-meta-keyword {\n        color: #5E81AC;\n    }\n\n    .hljs .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-30-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-30-lightness-offset, 0)) * 1%),var(--s-theme-color-text-30-a, 1));\n    }\n\n    .hljs .hljs-builtin-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-section {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-tag {\n        color: #5E81AC;\n    }\n\n    .hljs.abnf .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.abnf .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.apache .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.apache .hljs-section {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.arduino .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.aspectj .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.aspectj > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs.bnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.clojure .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.clojure .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.coq .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.cpp .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.css .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.css .hljs-keyword {\n        color: #D08770;\n    }\n\n    .hljs.diff .hljs-meta {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.ebnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.glsl .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.groovy .hljs-meta:not(:first-child) {\n        color: #D08770;\n    }\n\n    .hljs.haxe .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.java .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.ldif .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.lisp .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.lua .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.moonscript .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-section {\n        color: #5E81AC;\n    }\n\n    .hljs.pf .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.processing .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.scss .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.stylus .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.swift .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.vim .hljs-built_in {\n        color: #88C0D0;\n        font-style: italic;\n    }\n\n    .hljs.yaml .hljs-meta {\n        color: #D08770;\n    }\n\n:host {\n    display: block;\n    border-radius: var(--s-theme-ui-code-borderRadius, 6px);\n    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;\n    /* overflow: hidden; */\n\n    /* @sugar.utils.configToCss(ui.code, $only: rhythm-vertical); */\n}\n\n.s-code-example > * {\n        display: none;\n    }\n\n.s-code-example[mounted] > * {\n            display: block;\n        }\n\n.hljs {\n    overflow: visible;\n    white-space: pre-wrap;\n}\n\n.s-code-example__slot {\n    display: none;\n}\n\n.s-code-example__nav {\n    position: relative;\n}\n\n.s-code-example__tabs {\n    display: flex;\n    list-style: none;\n    border-bottom-left-radius: 0 !important;\n    border-bottom-right-radius: 0 !important;\n}\n.s-code-example__tab {\n}\n\n.s-code-example__content {\n    /* overflow: hidden; */\n    position: relative;\n\n    /* [default-style] & {\n        overflow: auto;\n        @sugar.scrollbar (accent);\n    } */\n}\n\n.s-code-example__code {\n    display: none;\n    border-top-left-radius: 0 !important;\n    border-top-right-radius: 0 !important;\n    /* overflow: hidden; */\n    line-height: 0;\n}\n\n.s-code-example__code[active] {\n        display: block;\n    }\n\n.s-code-example__code > code {\n        line-height: 1;\n    }\n\n.s-code-example__toolbar {\n    position: absolute;\n    right: var(--s-theme-space-20, 12px);\n    top: var(--s-theme-space-20, 12px);\n    z-index: 10;\n}\n\n.s-code-example__toolbar > * {\n        font-size: 20px;\n        opacity: 0.5;\n    }\n\n.s-code-example__toolbar > *:hover {\n            opacity: 1;\n        }\n\n[toolbar-position='nav'] .s-code-example__toolbar {\n    right: var(--s-theme-space-20, 12px);\n    top: var(--s-theme-space-20, 12px);\n    /* transform: translate(0, -50%); */\n}\n";
+const IDENT_RE = "[A-Za-z$_][0-9A-Za-z$_]*";
+const KEYWORDS = [
+  "as",
+  "in",
+  "of",
+  "if",
+  "for",
+  "while",
+  "finally",
+  "var",
+  "new",
+  "function",
+  "do",
+  "return",
+  "void",
+  "else",
+  "break",
+  "catch",
+  "instanceof",
+  "with",
+  "throw",
+  "case",
+  "default",
+  "try",
+  "switch",
+  "continue",
+  "typeof",
+  "delete",
+  "let",
+  "yield",
+  "const",
+  "class",
+  "debugger",
+  "async",
+  "await",
+  "static",
+  "import",
+  "from",
+  "export",
+  "extends"
+];
+const LITERALS = [
+  "true",
+  "false",
+  "null",
+  "undefined",
+  "NaN",
+  "Infinity"
+];
+const TYPES = [
+  "Intl",
+  "DataView",
+  "Number",
+  "Math",
+  "Date",
+  "String",
+  "RegExp",
+  "Object",
+  "Function",
+  "Boolean",
+  "Error",
+  "Symbol",
+  "Set",
+  "Map",
+  "WeakSet",
+  "WeakMap",
+  "Proxy",
+  "Reflect",
+  "JSON",
+  "Promise",
+  "Float64Array",
+  "Int16Array",
+  "Int32Array",
+  "Int8Array",
+  "Uint16Array",
+  "Uint32Array",
+  "Float32Array",
+  "Array",
+  "Uint8Array",
+  "Uint8ClampedArray",
+  "ArrayBuffer",
+  "BigInt64Array",
+  "BigUint64Array",
+  "BigInt"
+];
+const ERROR_TYPES = [
+  "EvalError",
+  "InternalError",
+  "RangeError",
+  "ReferenceError",
+  "SyntaxError",
+  "TypeError",
+  "URIError"
+];
+const BUILT_IN_GLOBALS = [
+  "setInterval",
+  "setTimeout",
+  "clearInterval",
+  "clearTimeout",
+  "require",
+  "exports",
+  "eval",
+  "isFinite",
+  "isNaN",
+  "parseFloat",
+  "parseInt",
+  "decodeURI",
+  "decodeURIComponent",
+  "encodeURI",
+  "encodeURIComponent",
+  "escape",
+  "unescape"
+];
+const BUILT_IN_VARIABLES = [
+  "arguments",
+  "this",
+  "super",
+  "console",
+  "window",
+  "document",
+  "localStorage",
+  "module",
+  "global"
+];
+const BUILT_INS = [].concat(BUILT_IN_GLOBALS, TYPES, ERROR_TYPES);
+function source$1(re) {
+  if (!re)
+    return null;
+  if (typeof re === "string")
+    return re;
+  return re.source;
+}
+function lookahead$1(re) {
+  return concat$1("(?=", re, ")");
+}
+function concat$1(...args) {
+  const joined = args.map((x) => source$1(x)).join("");
+  return joined;
+}
+function javascript(hljs) {
+  const hasClosingTag = (match, {after}) => {
+    const tag = "</" + match[0].slice(1);
+    const pos = match.input.indexOf(tag, after);
+    return pos !== -1;
+  };
+  const IDENT_RE$12 = IDENT_RE;
+  const FRAGMENT = {
+    begin: "<>",
+    end: "</>"
+  };
+  const XML_TAG = {
+    begin: /<[A-Za-z0-9\\._:-]+/,
+    end: /\/[A-Za-z0-9\\._:-]+>|\/>/,
+    isTrulyOpeningTag: (match, response) => {
+      const afterMatchIndex = match[0].length + match.index;
+      const nextChar = match.input[afterMatchIndex];
+      if (nextChar === "<") {
+        response.ignoreMatch();
+        return;
+      }
+      if (nextChar === ">") {
+        if (!hasClosingTag(match, {after: afterMatchIndex})) {
+          response.ignoreMatch();
+        }
+      }
+    }
+  };
+  const KEYWORDS$1 = {
+    $pattern: IDENT_RE,
+    keyword: KEYWORDS,
+    literal: LITERALS,
+    built_in: BUILT_INS,
+    "variable.language": BUILT_IN_VARIABLES
+  };
+  const decimalDigits = "[0-9](_?[0-9])*";
+  const frac = `\\.(${decimalDigits})`;
+  const decimalInteger = `0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*`;
+  const NUMBER = {
+    className: "number",
+    variants: [
+      {begin: `(\\b(${decimalInteger})((${frac})|\\.)?|(${frac}))[eE][+-]?(${decimalDigits})\\b`},
+      {begin: `\\b(${decimalInteger})\\b((${frac})\\b|\\.)?|(${frac})\\b`},
+      {begin: `\\b(0|[1-9](_?[0-9])*)n\\b`},
+      {begin: "\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},
+      {begin: "\\b0[bB][0-1](_?[0-1])*n?\\b"},
+      {begin: "\\b0[oO][0-7](_?[0-7])*n?\\b"},
+      {begin: "\\b0[0-7]+n?\\b"}
+    ],
+    relevance: 0
+  };
+  const SUBST = {
+    className: "subst",
+    begin: "\\$\\{",
+    end: "\\}",
+    keywords: KEYWORDS$1,
+    contains: []
+  };
+  const HTML_TEMPLATE = {
+    begin: "html`",
+    end: "",
+    starts: {
+      end: "`",
+      returnEnd: false,
+      contains: [
+        hljs.BACKSLASH_ESCAPE,
+        SUBST
+      ],
+      subLanguage: "xml"
+    }
+  };
+  const CSS_TEMPLATE = {
+    begin: "css`",
+    end: "",
+    starts: {
+      end: "`",
+      returnEnd: false,
+      contains: [
+        hljs.BACKSLASH_ESCAPE,
+        SUBST
+      ],
+      subLanguage: "css"
+    }
+  };
+  const TEMPLATE_STRING = {
+    className: "string",
+    begin: "`",
+    end: "`",
+    contains: [
+      hljs.BACKSLASH_ESCAPE,
+      SUBST
+    ]
+  };
+  const JSDOC_COMMENT = hljs.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
+    relevance: 0,
+    contains: [
+      {
+        begin: "(?=@[A-Za-z]+)",
+        relevance: 0,
+        contains: [
+          {
+            className: "doctag",
+            begin: "@[A-Za-z]+"
+          },
+          {
+            className: "type",
+            begin: "\\{",
+            end: "\\}",
+            excludeEnd: true,
+            excludeBegin: true,
+            relevance: 0
+          },
+          {
+            className: "variable",
+            begin: IDENT_RE$12 + "(?=\\s*(-)|$)",
+            endsParent: true,
+            relevance: 0
+          },
+          {
+            begin: /(?=[^\n])\s/,
+            relevance: 0
+          }
+        ]
+      }
+    ]
+  });
+  const COMMENT2 = {
+    className: "comment",
+    variants: [
+      JSDOC_COMMENT,
+      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.C_LINE_COMMENT_MODE
+    ]
+  };
+  const SUBST_INTERNALS = [
+    hljs.APOS_STRING_MODE,
+    hljs.QUOTE_STRING_MODE,
+    HTML_TEMPLATE,
+    CSS_TEMPLATE,
+    TEMPLATE_STRING,
+    NUMBER,
+    hljs.REGEXP_MODE
+  ];
+  SUBST.contains = SUBST_INTERNALS.concat({
+    begin: /\{/,
+    end: /\}/,
+    keywords: KEYWORDS$1,
+    contains: [
+      "self"
+    ].concat(SUBST_INTERNALS)
+  });
+  const SUBST_AND_COMMENTS = [].concat(COMMENT2, SUBST.contains);
+  const PARAMS_CONTAINS = SUBST_AND_COMMENTS.concat([
+    {
+      begin: /\(/,
+      end: /\)/,
+      keywords: KEYWORDS$1,
+      contains: ["self"].concat(SUBST_AND_COMMENTS)
+    }
+  ]);
+  const PARAMS = {
+    className: "params",
+    begin: /\(/,
+    end: /\)/,
+    excludeBegin: true,
+    excludeEnd: true,
+    keywords: KEYWORDS$1,
+    contains: PARAMS_CONTAINS
+  };
+  const CLASS_OR_EXTENDS = {
+    variants: [
+      {
+        match: [
+          /class/,
+          /\s+/,
+          IDENT_RE$12
+        ],
+        scope: {
+          1: "keyword",
+          3: "title.class"
+        }
+      },
+      {
+        match: [
+          /extends/,
+          /\s+/,
+          concat$1(IDENT_RE$12, "(", concat$1(/\./, IDENT_RE$12), ")*")
+        ],
+        scope: {
+          1: "keyword",
+          3: "title.class.inherited"
+        }
+      }
+    ]
+  };
+  const CLASS_REFERENCE = {
+    relevance: 0,
+    match: /\b[A-Z][a-z]+([A-Z][a-z]+)*/,
+    className: "title.class",
+    keywords: {
+      _: [
+        ...TYPES,
+        ...ERROR_TYPES
+      ]
+    }
+  };
+  const USE_STRICT = {
+    label: "use_strict",
+    className: "meta",
+    relevance: 10,
+    begin: /^\s*['"]use (strict|asm)['"]/
+  };
+  const FUNCTION_DEFINITION = {
+    variants: [
+      {
+        match: [
+          /function/,
+          /\s+/,
+          IDENT_RE$12,
+          /(?=\s*\()/
+        ]
+      },
+      {
+        match: [
+          /function/,
+          /\s*(?=\()/
+        ]
+      }
+    ],
+    className: {
+      1: "keyword",
+      3: "title.function"
+    },
+    label: "func.def",
+    contains: [PARAMS],
+    illegal: /%/
+  };
+  const UPPER_CASE_CONSTANT = {
+    relevance: 0,
+    match: /\b[A-Z][A-Z_0-9]+\b/,
+    className: "variable.constant"
+  };
+  function noneOf(list) {
+    return concat$1("(?!", list.join("|"), ")");
+  }
+  const FUNCTION_CALL = {
+    match: concat$1(/\b/, noneOf([
+      ...BUILT_IN_GLOBALS,
+      "super"
+    ]), IDENT_RE$12, lookahead$1(/\(/)),
+    className: "title.function",
+    relevance: 0
+  };
+  const PROPERTY_ACCESS = {
+    begin: concat$1(/\./, lookahead$1(concat$1(IDENT_RE$12, /(?![0-9A-Za-z$_(])/))),
+    end: IDENT_RE$12,
+    excludeBegin: true,
+    keywords: "prototype",
+    className: "property",
+    relevance: 0
+  };
+  const GETTER_OR_SETTER = {
+    match: [
+      /get|set/,
+      /\s+/,
+      IDENT_RE$12,
+      /(?=\()/
+    ],
+    className: {
+      1: "keyword",
+      3: "title.function"
+    },
+    contains: [
+      {
+        begin: /\(\)/
+      },
+      PARAMS
+    ]
+  };
+  const FUNC_LEAD_IN_RE = "(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|" + hljs.UNDERSCORE_IDENT_RE + ")\\s*=>";
+  const FUNCTION_VARIABLE = {
+    match: [
+      /const|var|let/,
+      /\s+/,
+      IDENT_RE$12,
+      /\s*/,
+      /=\s*/,
+      lookahead$1(FUNC_LEAD_IN_RE)
+    ],
+    className: {
+      1: "keyword",
+      3: "title.function"
+    },
+    contains: [
+      PARAMS
+    ]
+  };
+  return {
+    name: "Javascript",
+    aliases: ["js", "jsx", "mjs", "cjs"],
+    keywords: KEYWORDS$1,
+    exports: {PARAMS_CONTAINS},
+    illegal: /#(?![$_A-z])/,
+    contains: [
+      hljs.SHEBANG({
+        label: "shebang",
+        binary: "node",
+        relevance: 5
+      }),
+      USE_STRICT,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
+      HTML_TEMPLATE,
+      CSS_TEMPLATE,
+      TEMPLATE_STRING,
+      COMMENT2,
+      NUMBER,
+      CLASS_REFERENCE,
+      {
+        className: "attr",
+        begin: IDENT_RE$12 + lookahead$1(":"),
+        relevance: 0
+      },
+      FUNCTION_VARIABLE,
+      {
+        begin: "(" + hljs.RE_STARTERS_RE + "|\\b(case|return|throw)\\b)\\s*",
+        keywords: "return throw case",
+        relevance: 0,
+        contains: [
+          COMMENT2,
+          hljs.REGEXP_MODE,
+          {
+            className: "function",
+            begin: FUNC_LEAD_IN_RE,
+            returnBegin: true,
+            end: "\\s*=>",
+            contains: [
+              {
+                className: "params",
+                variants: [
+                  {
+                    begin: hljs.UNDERSCORE_IDENT_RE,
+                    relevance: 0
+                  },
+                  {
+                    className: null,
+                    begin: /\(\s*\)/,
+                    skip: true
+                  },
+                  {
+                    begin: /\(/,
+                    end: /\)/,
+                    excludeBegin: true,
+                    excludeEnd: true,
+                    keywords: KEYWORDS$1,
+                    contains: PARAMS_CONTAINS
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            begin: /,/,
+            relevance: 0
+          },
+          {
+            match: /\s+/,
+            relevance: 0
+          },
+          {
+            variants: [
+              {begin: FRAGMENT.begin, end: FRAGMENT.end},
+              {
+                begin: XML_TAG.begin,
+                "on:begin": XML_TAG.isTrulyOpeningTag,
+                end: XML_TAG.end
+              }
+            ],
+            subLanguage: "xml",
+            contains: [
+              {
+                begin: XML_TAG.begin,
+                end: XML_TAG.end,
+                skip: true,
+                contains: ["self"]
+              }
+            ]
+          }
+        ]
+      },
+      FUNCTION_DEFINITION,
+      {
+        beginKeywords: "while if switch catch for"
+      },
+      {
+        begin: "\\b(?!function)" + hljs.UNDERSCORE_IDENT_RE + "\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
+        returnBegin: true,
+        label: "func.def",
+        contains: [
+          PARAMS,
+          hljs.inherit(hljs.TITLE_MODE, {begin: IDENT_RE$12, className: "title.function"})
+        ]
+      },
+      {
+        match: /\.\.\./,
+        relevance: 0
+      },
+      PROPERTY_ACCESS,
+      {
+        match: "\\$" + IDENT_RE$12,
+        relevance: 0
+      },
+      {
+        match: [/\bconstructor(?=\s*\()/],
+        className: {1: "title.function"},
+        contains: [PARAMS]
+      },
+      FUNCTION_CALL,
+      UPPER_CASE_CONSTANT,
+      CLASS_OR_EXTENDS,
+      GETTER_OR_SETTER,
+      {
+        match: /\$[(.]/
+      }
+    ]
+  };
+}
+function php(hljs) {
+  const VARIABLE = {
+    className: "variable",
+    begin: `\\$+[a-zA-Z_\x7F-\xFF][a-zA-Z0-9_\x7F-\xFF]*(?![A-Za-z0-9])(?![$])`
+  };
+  const PREPROCESSOR = {
+    className: "meta",
+    variants: [
+      {begin: /<\?php/, relevance: 10},
+      {begin: /<\?[=]?/},
+      {begin: /\?>/}
+    ]
+  };
+  const SUBST = {
+    className: "subst",
+    variants: [
+      {begin: /\$\w+/},
+      {begin: /\{\$/, end: /\}/}
+    ]
+  };
+  const SINGLE_QUOTED = hljs.inherit(hljs.APOS_STRING_MODE, {
+    illegal: null
+  });
+  const DOUBLE_QUOTED = hljs.inherit(hljs.QUOTE_STRING_MODE, {
+    illegal: null,
+    contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
+  });
+  const HEREDOC = hljs.END_SAME_AS_BEGIN({
+    begin: /<<<[ \t]*(\w+)\n/,
+    end: /[ \t]*(\w+)\b/,
+    contains: hljs.QUOTE_STRING_MODE.contains.concat(SUBST)
+  });
+  const STRING = {
+    className: "string",
+    contains: [hljs.BACKSLASH_ESCAPE, PREPROCESSOR],
+    variants: [
+      hljs.inherit(SINGLE_QUOTED, {
+        begin: "b'",
+        end: "'"
+      }),
+      hljs.inherit(DOUBLE_QUOTED, {
+        begin: 'b"',
+        end: '"'
+      }),
+      DOUBLE_QUOTED,
+      SINGLE_QUOTED,
+      HEREDOC
+    ]
+  };
+  const NUMBER = {
+    className: "number",
+    variants: [
+      {begin: `\\b0b[01]+(?:_[01]+)*\\b`},
+      {begin: `\\b0o[0-7]+(?:_[0-7]+)*\\b`},
+      {begin: `\\b0x[\\da-f]+(?:_[\\da-f]+)*\\b`},
+      {begin: `(?:\\b\\d+(?:_\\d+)*(\\.(?:\\d+(?:_\\d+)*))?|\\B\\.\\d+)(?:e[+-]?\\d+)?`}
+    ],
+    relevance: 0
+  };
+  const KEYWORDS2 = {
+    keyword: "__CLASS__ __DIR__ __FILE__ __FUNCTION__ __LINE__ __METHOD__ __NAMESPACE__ __TRAIT__ die echo exit include include_once print require require_once array abstract and as binary bool boolean break callable case catch class clone const continue declare default do double else elseif empty enddeclare endfor endforeach endif endswitch endwhile enum eval extends final finally float for foreach from global goto if implements instanceof insteadof int integer interface isset iterable list match|0 mixed new object or private protected public real return string switch throw trait try unset use var void while xor yield",
+    literal: "false null true",
+    built_in: "Error|0 AppendIterator ArgumentCountError ArithmeticError ArrayIterator ArrayObject AssertionError BadFunctionCallException BadMethodCallException CachingIterator CallbackFilterIterator CompileError Countable DirectoryIterator DivisionByZeroError DomainException EmptyIterator ErrorException Exception FilesystemIterator FilterIterator GlobIterator InfiniteIterator InvalidArgumentException IteratorIterator LengthException LimitIterator LogicException MultipleIterator NoRewindIterator OutOfBoundsException OutOfRangeException OuterIterator OverflowException ParentIterator ParseError RangeException RecursiveArrayIterator RecursiveCachingIterator RecursiveCallbackFilterIterator RecursiveDirectoryIterator RecursiveFilterIterator RecursiveIterator RecursiveIteratorIterator RecursiveRegexIterator RecursiveTreeIterator RegexIterator RuntimeException SeekableIterator SplDoublyLinkedList SplFileInfo SplFileObject SplFixedArray SplHeap SplMaxHeap SplMinHeap SplObjectStorage SplObserver SplObserver SplPriorityQueue SplQueue SplStack SplSubject SplSubject SplTempFileObject TypeError UnderflowException UnexpectedValueException UnhandledMatchError ArrayAccess Closure Generator Iterator IteratorAggregate Serializable Stringable Throwable Traversable WeakReference WeakMap Directory __PHP_Incomplete_Class parent php_user_filter self static stdClass"
+  };
+  return {
+    case_insensitive: true,
+    keywords: KEYWORDS2,
+    contains: [
+      hljs.HASH_COMMENT_MODE,
+      hljs.COMMENT("//", "$", {contains: [PREPROCESSOR]}),
+      hljs.COMMENT("/\\*", "\\*/", {
+        contains: [
+          {
+            className: "doctag",
+            begin: "@[A-Za-z]+"
+          }
+        ]
+      }),
+      hljs.COMMENT("__halt_compiler.+?;", false, {
+        endsWithParent: true,
+        keywords: "__halt_compiler"
+      }),
+      PREPROCESSOR,
+      {
+        className: "keyword",
+        begin: /\$this\b/
+      },
+      VARIABLE,
+      {
+        begin: /(::|->)+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/
+      },
+      {
+        className: "function",
+        relevance: 0,
+        beginKeywords: "fn function",
+        end: /[;{]/,
+        excludeEnd: true,
+        illegal: "[$%\\[]",
+        contains: [
+          {
+            beginKeywords: "use"
+          },
+          hljs.UNDERSCORE_TITLE_MODE,
+          {
+            begin: "=>",
+            endsParent: true
+          },
+          {
+            className: "params",
+            begin: "\\(",
+            end: "\\)",
+            excludeBegin: true,
+            excludeEnd: true,
+            keywords: KEYWORDS2,
+            contains: [
+              "self",
+              VARIABLE,
+              hljs.C_BLOCK_COMMENT_MODE,
+              STRING,
+              NUMBER
+            ]
+          }
+        ]
+      },
+      {
+        className: "class",
+        variants: [
+          {beginKeywords: "enum", illegal: /[($"]/},
+          {beginKeywords: "class interface trait", illegal: /[:($"]/}
+        ],
+        relevance: 0,
+        end: /\{/,
+        excludeEnd: true,
+        contains: [
+          {beginKeywords: "extends implements"},
+          hljs.UNDERSCORE_TITLE_MODE
+        ]
+      },
+      {
+        beginKeywords: "namespace",
+        relevance: 0,
+        end: ";",
+        illegal: /[.']/,
+        contains: [hljs.UNDERSCORE_TITLE_MODE]
+      },
+      {
+        beginKeywords: "use",
+        relevance: 0,
+        end: ";",
+        contains: [hljs.UNDERSCORE_TITLE_MODE]
+      },
+      STRING,
+      NUMBER
+    ]
+  };
+}
+function source(re) {
+  if (!re)
+    return null;
+  if (typeof re === "string")
+    return re;
+  return re.source;
+}
+function lookahead(re) {
+  return concat("(?=", re, ")");
+}
+function optional(re) {
+  return concat("(?:", re, ")?");
+}
+function concat(...args) {
+  const joined = args.map((x) => source(x)).join("");
+  return joined;
+}
+function stripOptionsFromArgs(args) {
+  const opts = args[args.length - 1];
+  if (typeof opts === "object" && opts.constructor === Object) {
+    args.splice(args.length - 1, 1);
+    return opts;
+  } else {
+    return {};
+  }
+}
+function either(...args) {
+  const opts = stripOptionsFromArgs(args);
+  const joined = "(" + (opts.capture ? "" : "?:") + args.map((x) => source(x)).join("|") + ")";
+  return joined;
+}
+function xml(hljs) {
+  const TAG_NAME_RE = concat(/[A-Z_]/, optional(/[A-Z0-9_.-]*:/), /[A-Z0-9_.-]*/);
+  const XML_IDENT_RE = /[A-Za-z0-9._:-]+/;
+  const XML_ENTITIES = {
+    className: "symbol",
+    begin: /&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/
+  };
+  const XML_META_KEYWORDS = {
+    begin: /\s/,
+    contains: [
+      {
+        className: "keyword",
+        begin: /#?[a-z_][a-z1-9_-]+/,
+        illegal: /\n/
+      }
+    ]
+  };
+  const XML_META_PAR_KEYWORDS = hljs.inherit(XML_META_KEYWORDS, {
+    begin: /\(/,
+    end: /\)/
+  });
+  const APOS_META_STRING_MODE = hljs.inherit(hljs.APOS_STRING_MODE, {
+    className: "string"
+  });
+  const QUOTE_META_STRING_MODE = hljs.inherit(hljs.QUOTE_STRING_MODE, {
+    className: "string"
+  });
+  const TAG_INTERNALS = {
+    endsWithParent: true,
+    illegal: /</,
+    relevance: 0,
+    contains: [
+      {
+        className: "attr",
+        begin: XML_IDENT_RE,
+        relevance: 0
+      },
+      {
+        begin: /=\s*/,
+        relevance: 0,
+        contains: [
+          {
+            className: "string",
+            endsParent: true,
+            variants: [
+              {
+                begin: /"/,
+                end: /"/,
+                contains: [XML_ENTITIES]
+              },
+              {
+                begin: /'/,
+                end: /'/,
+                contains: [XML_ENTITIES]
+              },
+              {
+                begin: /[^\s"'=<>`]+/
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  return {
+    name: "HTML, XML",
+    aliases: [
+      "html",
+      "xhtml",
+      "rss",
+      "atom",
+      "xjb",
+      "xsd",
+      "xsl",
+      "plist",
+      "wsf",
+      "svg"
+    ],
+    case_insensitive: true,
+    contains: [
+      {
+        className: "meta",
+        begin: /<![a-z]/,
+        end: />/,
+        relevance: 10,
+        contains: [
+          XML_META_KEYWORDS,
+          QUOTE_META_STRING_MODE,
+          APOS_META_STRING_MODE,
+          XML_META_PAR_KEYWORDS,
+          {
+            begin: /\[/,
+            end: /\]/,
+            contains: [
+              {
+                className: "meta",
+                begin: /<![a-z]/,
+                end: />/,
+                contains: [
+                  XML_META_KEYWORDS,
+                  XML_META_PAR_KEYWORDS,
+                  QUOTE_META_STRING_MODE,
+                  APOS_META_STRING_MODE
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      hljs.COMMENT(/<!--/, /-->/, {
+        relevance: 10
+      }),
+      {
+        begin: /<!\[CDATA\[/,
+        end: /\]\]>/,
+        relevance: 10
+      },
+      XML_ENTITIES,
+      {
+        className: "meta",
+        begin: /<\?xml/,
+        end: /\?>/,
+        relevance: 10
+      },
+      {
+        className: "tag",
+        begin: /<style(?=\s|>)/,
+        end: />/,
+        keywords: {
+          name: "style"
+        },
+        contains: [TAG_INTERNALS],
+        starts: {
+          end: /<\/style>/,
+          returnEnd: true,
+          subLanguage: [
+            "css",
+            "xml"
+          ]
+        }
+      },
+      {
+        className: "tag",
+        begin: /<script(?=\s|>)/,
+        end: />/,
+        keywords: {
+          name: "script"
+        },
+        contains: [TAG_INTERNALS],
+        starts: {
+          end: /<\/script>/,
+          returnEnd: true,
+          subLanguage: [
+            "javascript",
+            "handlebars",
+            "xml"
+          ]
+        }
+      },
+      {
+        className: "tag",
+        begin: /<>|<\/>/
+      },
+      {
+        className: "tag",
+        begin: concat(/</, lookahead(concat(TAG_NAME_RE, either(/\/>/, />/, /\s/)))),
+        end: /\/?>/,
+        contains: [
+          {
+            className: "name",
+            begin: TAG_NAME_RE,
+            relevance: 0,
+            starts: TAG_INTERNALS
+          }
+        ]
+      },
+      {
+        className: "tag",
+        begin: concat(/<\//, lookahead(concat(TAG_NAME_RE, />/))),
+        contains: [
+          {
+            className: "name",
+            begin: TAG_NAME_RE,
+            relevance: 0
+          },
+          {
+            begin: />/,
+            relevance: 0,
+            endsParent: true
+          }
+        ]
+      }
+    ]
+  };
+}
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const standardProperty = (options, element) => {
+  if (element.kind === "method" && element.descriptor && !("value" in element.descriptor)) {
+    return {
+      ...element,
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  } else {
+    return {
+      kind: "field",
+      key: Symbol(),
+      placement: "own",
+      descriptor: {},
+      originalKey: element.key,
+      initializer() {
+        if (typeof element.initializer === "function") {
+          this[element.key] = element.initializer.call(this);
+        }
+      },
+      finisher(clazz) {
+        clazz.createProperty(element.key, options);
+      }
+    };
+  }
+};
+const legacyProperty = (options, proto, name) => {
+  proto.constructor.createProperty(name, options);
+};
+function property(options) {
+  return (protoOrDescriptor, name) => name !== void 0 ? legacyProperty(options, protoOrDescriptor, name) : standardProperty(options, protoOrDescriptor);
+}
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const decorateProperty = ({finisher, descriptor}) => (protoOrDescriptor, name) => {
+  var _a;
+  if (name !== void 0) {
+    const ctor = protoOrDescriptor.constructor;
+    if (descriptor !== void 0) {
+      Object.defineProperty(protoOrDescriptor, name, descriptor(name));
+    }
+    finisher === null || finisher === void 0 ? void 0 : finisher(ctor, name);
+  } else {
+    const key = (_a = protoOrDescriptor.originalKey) !== null && _a !== void 0 ? _a : protoOrDescriptor.key;
+    const info = descriptor != void 0 ? {
+      kind: "method",
+      placement: "prototype",
+      key,
+      descriptor: descriptor(protoOrDescriptor.key)
+    } : {...protoOrDescriptor, key};
+    if (finisher != void 0) {
+      info.finisher = function(ctor) {
+        finisher(ctor, key);
+      };
+    }
+    return info;
+  }
+};
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+function query(selector, cache) {
+  return decorateProperty({
+    descriptor: (name) => {
+      const descriptor = {
+        get() {
+          var _a;
+          return (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(selector);
+        },
+        enumerable: true,
+        configurable: true
+      };
+      if (cache) {
+        const key = typeof name === "symbol" ? Symbol() : `__${name}`;
+        descriptor.get = function() {
+          var _a;
+          if (this[key] === void 0) {
+            this[key] = (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(selector);
+          }
+          return this[key];
+        };
+      }
+      return descriptor;
+    }
+  });
+}
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+const ElementProto = Element.prototype;
+const legacyMatches = ElementProto.msMatchesSelector || ElementProto.webkitMatchesSelector;
+function queryAssignedNodes(slotName = "", flatten = false, selector = "") {
+  return decorateProperty({
+    descriptor: (_name) => ({
+      get() {
+        var _a, _b;
+        const slotSelector = `slot${slotName ? `[name=${slotName}]` : ":not([name])"}`;
+        const slot = (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector(slotSelector);
+        let nodes = (_b = slot) === null || _b === void 0 ? void 0 : _b.assignedNodes({flatten});
+        if (nodes && selector) {
+          nodes = nodes.filter((node) => node.nodeType === Node.ELEMENT_NODE && (node.matches ? node.matches(selector) : legacyMatches.call(node, selector)));
+        }
+        return nodes;
+      },
+      enumerable: true,
+      configurable: true
+    })
+  });
+}
+var __css = ".hljs {\n    display: block;\n    overflow: hidden;\n    padding: var(--s-theme-space-30, 1.5rem);\n    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    line-height: 1.5 !important;\n}\n\n    .hljs,\n    .hljs.hljs-subst {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));\n    }\n\n    .hljs .hljs-selector-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-selector-id {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n        font-weight: bold;\n    }\n\n    .hljs .hljs-selector-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-selector-pseudo {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-addition {\n        background-color: rgba(163, 190, 140, 0.5);\n    }\n\n    .hljs .hljs-deletion {\n        background-color: rgba(191, 97, 106, 0.5);\n    }\n\n    .hljs .hljs-built_in,\n    .hljs .hljs-type {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-class {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-function {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-function > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-keyword,\n    .hljs .hljs-literal,\n    .hljs .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-number {\n        color: #B48EAD;\n    }\n\n    .hljs .hljs-regexp {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-title {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-params {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-bullet {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-code {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-emphasis {\n        font-style: italic;\n    }\n\n    .hljs .hljs-formula {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-strong {\n        font-weight: bold;\n    }\n\n    .hljs .hljs-link:hover {\n        text-decoration: underline;\n    }\n\n    .hljs .hljs-quote {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-comment {\n        color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-30-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-30-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-30-a, 1));\n    }\n\n    .hljs .hljs-doctag {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-meta,\n    .hljs .hljs-meta-keyword {\n        color: #5E81AC;\n    }\n\n    .hljs .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-attr {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-30-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-30-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-30-lightness-offset, 0)) * 1%),var(--s-theme-color-text-30-a, 1));\n    }\n\n    .hljs .hljs-builtin-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-name {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-section {\n        color: #88C0D0;\n    }\n\n    .hljs .hljs-tag {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs .hljs-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-variable {\n        color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0) + var(--s-theme-color-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-text-l, 0) + var(--s-theme-color-text-lightness-offset, 0)) * 1%),var(--s-theme-color-text-a, 1));\n    }\n\n    .hljs .hljs-template-tag {\n        color: #5E81AC;\n    }\n\n    .hljs.abnf .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.abnf .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.apache .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.apache .hljs-section {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.arduino .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.aspectj .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.aspectj > .hljs-title {\n        color: #88C0D0;\n    }\n\n    .hljs.bnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.clojure .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.clojure .hljs-symbol {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.coq .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.cpp .hljs-meta-string {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.css .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.css .hljs-keyword {\n        color: #D08770;\n    }\n\n    .hljs.diff .hljs-meta {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.ebnf .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.glsl .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.groovy .hljs-meta:not(:first-child) {\n        color: #D08770;\n    }\n\n    .hljs.haxe .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.java .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.ldif .hljs-attribute {\n        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0) + var(--s-theme-color-info-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + var(--s-theme-color-info-lightness-offset, 0)) * 1%),var(--s-theme-color-info-a, 1));\n    }\n\n    .hljs.lisp .hljs-name {\n        color: #88C0D0;\n    }\n\n    .hljs.lua .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.moonscript .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-attribute {\n        color: #88C0D0;\n    }\n\n    .hljs.nginx .hljs-section {\n        color: #5E81AC;\n    }\n\n    .hljs.pf .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.processing .hljs-built_in {\n        color: #88C0D0;\n    }\n\n    .hljs.scss .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.stylus .hljs-keyword {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,340)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    }\n\n    .hljs.swift .hljs-meta {\n        color: #D08770;\n    }\n\n    .hljs.vim .hljs-built_in {\n        color: #88C0D0;\n        font-style: italic;\n    }\n\n    .hljs.yaml .hljs-meta {\n        color: #D08770;\n    }\n\n:host {\n    display: block;\n    border-radius: var(--s-theme-ui-code-borderRadius, 6px);\n    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;\n    /* overflow: hidden; */\n\n    /* @sugar.utils.configToCss(ui.code, $only: rhythm-vertical); */\n}\n\n.s-code-example > * {\n        display: none;\n    }\n\n.s-code-example[mounted] > * {\n            display: block;\n        }\n\n.hljs {\n    overflow: visible;\n    white-space: pre-wrap;\n}\n\n.s-code-example__slot {\n    display: none;\n}\n\n.s-code-example__nav {\n    position: relative;\n}\n\n.s-code-example__tabs {\n    display: flex;\n    list-style: none;\n    border-bottom-left-radius: 0 !important;\n    border-bottom-right-radius: 0 !important;\n}\n.s-code-example__tab {\n}\n\n.s-code-example__content {\n    /* overflow: hidden; */\n    position: relative;\n\n    /* [default-style] & {\n        overflow: auto;\n        @sugar.scrollbar (accent);\n    } */\n}\n\n.s-code-example__code {\n    display: none;\n    border-top-left-radius: 0 !important;\n    border-top-right-radius: 0 !important;\n    /* overflow: hidden; */\n    line-height: 0;\n}\n\n.s-code-example__code[active] {\n        display: block;\n    }\n\n.s-code-example__code > code {\n        line-height: 1;\n    }\n\n.s-code-example__toolbar {\n    position: absolute;\n    right: var(--s-theme-space-20, 0.75rem);\n    top: var(--s-theme-space-20, 0.75rem);\n    z-index: 10;\n}\n\n.s-code-example__toolbar > * {\n        font-size: 20px;\n        opacity: 0.5;\n    }\n\n.s-code-example__toolbar > *:hover {\n            opacity: 1;\n        }\n\n[toolbar-position='nav'] .s-code-example__toolbar {\n    right: var(--s-theme-space-20, 0.75rem);\n    top: var(--s-theme-space-20, 0.75rem);\n    /* transform: translate(0, -50%); */\n}\n";
 class SCodeExampleInterface extends __SInterface {
 }
-SCodeExampleInterface.definition = Object.assign(Object.assign({}, SComponentUtilsDefaultInterface.definition), {theme: {
-  type: "String",
-  default: "https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css"
-}, active: {
-  type: "String"
-}, toolbar: {
-  type: "Array<String>",
-  values: ["copy"],
-  default: ["copy"]
-}, toolbarPosition: {
-  type: "String",
-  values: ["content", "nav"],
-  default: "nav"
-}, languages: {
-  type: "Object",
-  default: {}
-}});
+SCodeExampleInterface.definition = {
+  theme: {
+    type: "String",
+    default: "https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css"
+  },
+  active: {
+    type: "String"
+  },
+  toolbar: {
+    type: "Array<String>",
+    values: ["copy"],
+    default: ["copy"]
+  },
+  toolbarPosition: {
+    type: "String",
+    values: ["content", "nav"],
+    default: "nav"
+  },
+  languages: {
+    type: "Object",
+    default: {}
+  }
+};
 var __decorate = function(decorators, target, key, desc) {
-  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d2;
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
     for (var i = decorators.length - 1; i >= 0; i--)
-      if (d2 = decorators[i])
-        r = (c < 3 ? d2(r) : c > 3 ? d2(target, key, r) : d2(target, key)) || r;
+      if (d = decorators[i])
+        r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __awaiter = function(thisArg, _arguments, P, generator) {
@@ -3836,27 +3255,25 @@ var __awaiter = function(thisArg, _arguments, P, generator) {
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-webcomponent$1();
-class SCodeExample extends SLitElement {
+define();
+class SCodeExample extends __SLitComponent {
   constructor() {
-    var _a2;
-    super();
+    var _a;
+    super(__deepMerge({
+      sComponentUtils: {
+        interface: SCodeExampleInterface
+      }
+    }));
     this._$copy = void 0;
     this._items = [];
     this._activeTabId = void 0;
-    this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      componentUtils: {
-        interface: SCodeExampleInterface,
-        defaultProps: {}
-      }
-    });
-    const languages = Object.assign({html: xml, javascript, js: javascript, php, bash, shell: bash, css}, (_a2 = this._component.props.languages) !== null && _a2 !== void 0 ? _a2 : {});
+    const languages = Object.assign({html: xml, javascript, js: javascript, php, bash, shell: bash, css}, (_a = this.props.languages) !== null && _a !== void 0 ? _a : {});
     Object.keys(languages).forEach((lang) => {
       core.registerLanguage(lang, languages[lang]);
     });
   }
   static get properties() {
-    return __SComponentUtils.properties({}, SCodeExampleInterface);
+    return __SLitComponent.properties({}, SCodeExampleInterface);
   }
   static get styles() {
     return css$1`
@@ -3866,14 +3283,14 @@ class SCodeExample extends SLitElement {
   firstUpdated() {
     return __awaiter(this, void 0, void 0, function* () {
       this.$templates.forEach(($template) => {
-        var _a2, _b2, _c2, _d2, _e2;
+        var _a, _b, _c, _d, _e;
         if (!$template.getAttribute)
           return;
         this._items = [
           ...this._items,
           {
-            id: (_c2 = (_b2 = (_a2 = $template.getAttribute("id")) !== null && _a2 !== void 0 ? _a2 : $template.getAttribute("language")) !== null && _b2 !== void 0 ? _b2 : $template.getAttribute("lang")) !== null && _c2 !== void 0 ? _c2 : "html",
-            lang: (_e2 = (_d2 = $template.getAttribute("language")) !== null && _d2 !== void 0 ? _d2 : $template.getAttribute("lang")) !== null && _e2 !== void 0 ? _e2 : "html",
+            id: (_c = (_b = (_a = $template.getAttribute("id")) !== null && _a !== void 0 ? _a : $template.getAttribute("language")) !== null && _b !== void 0 ? _b : $template.getAttribute("lang")) !== null && _c !== void 0 ? _c : "html",
+            lang: (_e = (_d = $template.getAttribute("language")) !== null && _d !== void 0 ? _d : $template.getAttribute("lang")) !== null && _e !== void 0 ? _e : "html",
             code: $template.innerHTML
           }
         ];
@@ -3888,66 +3305,6 @@ class SCodeExample extends SLitElement {
       return true;
     });
   }
-  render() {
-    var _a2, _b2, _c2, _d2;
-    return html$2`
-            <div
-                class="${(_a2 = this._component) === null || _a2 === void 0 ? void 0 : _a2.className()}"
-                ?mounted="${this.mounted}"
-                ?default-style="${this.defaultStyle}"
-                toolbar-position="${this.toolbarPosition}"
-            >
-                <div class="templates">
-                    <slot></slot>
-                </div>
-
-                ${this._component ? html$2`<header class="${this._component.className("__nav")}">
-                          <ol class="${this._component.className("__tabs", "s-tabs")}">
-                              ${((_b2 = this._items) !== null && _b2 !== void 0 ? _b2 : []).map((item) => html$2`
-                                      <li
-                                          class="${this._component.className("__tab")}"
-                                          id="${item.id}"
-                                          ?active="${this._activeTabId === item.id}"
-                                          @click="${this.setActiveTabByTab}"
-                                      >
-                                          ${item.lang}
-                                      </li>
-                                  `)}
-                          </ol>
-                          ${this.toolbarPosition === "nav" ? html$2`
-                                        <div class="${this._component.className("__toolbar")}">
-                                            <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                        </div>
-                                    ` : ""}
-                      </header>` : ""}
-                ${this._component ? html$2`
-                          <div class="${this._component.className("__content")}">
-                              ${this.toolbarPosition !== "nav" ? html$2`
-                                            <div class="${(_c2 = this._component) === null || _c2 === void 0 ? void 0 : _c2.className("__toolbar")}">
-                                                <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                            </div>
-                                        ` : ""}
-                              ${((_d2 = this._items) !== null && _d2 !== void 0 ? _d2 : []).map((item) => {
-      var _a3, _b3, _c3;
-      return html$2`
-                                      <pre
-                                          class="${this._component.className("__code")}"
-                                          style="line-height:0;"
-                                          id="${(_a3 = item.id) !== null && _a3 !== void 0 ? _a3 : item.lang}"
-                                          ?active="${this._activeTabId === ((_b3 = item.id) !== null && _b3 !== void 0 ? _b3 : item.lang)}"
-                                      >
-                            <code lang="${(_c3 = item.lang) !== null && _c3 !== void 0 ? _c3 : item.id}" class="language-${item.lang} ${item.lang} ${this._component.props.defaultStyle ? "hljs" : ""}">
-                                
-                                ${html([item.code])}
-                            </code>
-                        </pre>
-                                  `;
-    })}
-                          </div>
-                      ` : ""}
-            </div>
-        `;
-  }
   setActiveTabByTab(e) {
     this.setActiveTab(e.target.id);
   }
@@ -3959,20 +3316,72 @@ class SCodeExample extends SLitElement {
     });
   }
   initPrismOnTab(id) {
-    var _a2;
-    const $content = (_a2 = this.shadowRoot) === null || _a2 === void 0 ? void 0 : _a2.querySelector(`pre#${id} code`);
+    var _a;
+    const $content = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector(`pre#${id} code`);
     if ($content.hasAttribute("inited"))
       return;
     $content.setAttribute("inited", "true");
-    const highlightedCode = core.highlight($content === null || $content === void 0 ? void 0 : $content.innerHTML.replace(/\<\!\-\-\?lit\$.*\$\-\-\>/g, ""), {
-      language: $content.getAttribute("lang")
-    }).value.trim();
-    $content.innerHTML = highlightedCode;
+    core.highlightElement($content);
   }
   copy() {
     const id = this._activeTabId;
     const item = this._items.filter((i) => i.id === id)[0];
     this.$copy.copy(item.code);
+  }
+  render() {
+    var _a, _b;
+    return html`
+            <div
+                class="${this.componentUtils.className()}"
+                ?mounted="${this.mounted}"
+                ?default-style="${this.defaultStyle}"
+                toolbar-position="${this.toolbarPosition}"
+            >
+                <div class="templates">
+                    <slot></slot>
+                </div>
+
+                <header class="${this.componentUtils.className("__nav")}">
+                    <ol class="${this.componentUtils.className("__tabs", "s-tabs")}">
+                        ${((_a = this._items) !== null && _a !== void 0 ? _a : []).map((item) => html`
+                                <li
+                                    class="${this.componentUtils.className("__tab")}"
+                                    id="${item.id}"
+                                    ?active="${this._activeTabId === item.id}"
+                                    @click="${this.setActiveTabByTab}"
+                                >
+                                    ${item.lang}
+                                </li>
+                            `)}
+                    </ol>
+                    ${this.toolbarPosition === "nav" ? html`
+                                  <div class="${this.componentUtils.className("__toolbar")}">
+                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  </div>
+                              ` : ""}
+                </header>
+                <div class="${this.componentUtils.className("__content")}">
+                    ${this.toolbarPosition !== "nav" ? html`
+                                  <div class="${this.componentUtils.className("__toolbar")}">
+                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  </div>
+                              ` : ""}
+                    ${((_b = this._items) !== null && _b !== void 0 ? _b : []).map((item) => {
+      var _a2, _b2, _c;
+      return html`
+                            <pre
+                                class="${this.componentUtils.className("__code")}"
+                                style="line-height:0;"
+                                id="${(_a2 = item.id) !== null && _a2 !== void 0 ? _a2 : item.lang}"
+                                ?active="${this._activeTabId === ((_b2 = item.id) !== null && _b2 !== void 0 ? _b2 : item.lang)}"
+                            >
+                            <code lang="${(_c = item.lang) !== null && _c !== void 0 ? _c : item.id}" class="language-${item.lang} ${item.lang} ${this.props.defaultStyle ? "hljs" : ""}">${item.code.trim()}</code>
+                        </pre>
+                        `;
+    })}
+                </div>
+            </div>
+        `;
   }
 }
 __decorate([
@@ -3999,7 +3408,7 @@ __decorate([
   queryAssignedNodes()
 ], SCodeExample.prototype, "$templates", void 0);
 function webcomponent(props = {}, tagName = "s-code-example") {
-  __SComponentUtils.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SCodeExample);
 }
 export default SCodeExample;

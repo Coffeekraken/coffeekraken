@@ -1,9 +1,10 @@
 import { html, css, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
 import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface';
-import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 // @ts-ignore
 import __css from '../css/s-clipboard-copy.css';
@@ -13,26 +14,24 @@ export interface ISClipboardCopyComponentProps {
     errorTimeout: number;
 }
 
-export default class SClipboardCopy extends SLitElement {
+export default class SClipboardCopy extends __SLitComponent {
     static get styles() {
         return css`
             ${unsafeCSS(__css)}
         `;
     }
 
-    _component: __SComponentUtils;
-
     @property()
     _state = 'pending';
 
     constructor() {
-        super();
-        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            componentUtils: {
-                interface: __SClipboardCopyComponentInterface,
-                defaultProps: {},
-            },
-        });
+        super(
+            __deepMerge({
+                sLitComponent: {
+                    interface: __SClipboardCopyComponentInterface,
+                },
+            }),
+        );
     }
 
     /**
@@ -54,18 +53,18 @@ export default class SClipboardCopy extends SLitElement {
                 this._state = 'success';
                 setTimeout(() => {
                     this._state = 'pending';
-                }, this._component.props.successTimeout);
+                }, this.props.successTimeout);
             })
             .catch((e) => {
                 this._state = 'error';
                 setTimeout(() => {
                     this._state = 'pending';
-                }, this._component.props.errorTimeout);
+                }, this.props.errorTimeout);
             });
     }
     render() {
         return html`
-            <div class="${this._component.className('')}" state="${this._state}">
+            <div class="${this.componentUtils.className('')}" state="${this._state}">
                 <svg
                     ref="svg"
                     class="icon-copy"
@@ -125,7 +124,8 @@ export default class SClipboardCopy extends SLitElement {
     }
 }
 
-export function webcomponent(props: Partial<ISClipboardCopyComponentProps> = {}, tagName = 's-clipboard-copy') {
-    __SComponentUtils.setDefaultProps(tagName, props);
+export function define(props: Partial<ISClipboardCopyComponentProps> = {}, tagName = 's-clipboard-copy') {
+    __SLitComponent.setDefaultProps(tagName, props);
+    // @ts-ignore
     customElements.define(tagName, SClipboardCopy);
 }

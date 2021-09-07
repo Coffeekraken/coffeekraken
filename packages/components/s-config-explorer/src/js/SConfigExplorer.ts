@@ -1,17 +1,16 @@
-import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
+import __SLitComponent, { ISLitElementDefaultProps } from '@coffeekraken/s-lit-component';
 import { css, html, unsafeCSS } from 'lit';
 import { query, property } from 'lit/decorators.js';
 import __SConfigExplorerComponentInterface from './interface/SConfigExplorerComponentInterface';
 import __SRequest from '@coffeekraken/s-request';
 import __minimatch from 'minimatch';
 
-export interface ISConfigExplorerComponentProps extends ISComponentUtilsDefaultProps {
+export interface ISConfigExplorerComponentProps extends ISLitElementDefaultProps {
     apiUrl: string;
     maxItems: number;
 }
 
-export default class SConfigExplorer extends SLitElement {
-    _component: __SComponentUtils;
+export default class SConfigExplorer extends __SLitComponent {
     _displayedConfig: any[] = [];
 
     @property()
@@ -147,6 +146,6 @@ export function webcomponent(
     tagName = 's-config-explorer',
     settings = {},
 ) {
-    __SComponentUtils.setDefaultProps(tagName, props);
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SConfigExplorer, settings);
 }

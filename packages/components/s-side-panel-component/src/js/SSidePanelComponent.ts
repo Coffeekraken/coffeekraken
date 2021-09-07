@@ -3,7 +3,7 @@
 import { html, css, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
 import __SSidePanelComponentInterface from './interface/SSidePanelComponentInterface';
-import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
+import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-lit-component';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 

@@ -1,9 +1,9 @@
 import {css, unsafeCSS, html as html$2} from "lit";
 import __SInterface from "@coffeekraken/s-interface";
 import __SSugarConfig from "@coffeekraken/s-sugar-config";
-import __SComponentUtils, {SLitElement} from "@coffeekraken/s-component-utils";
 import __pikaday from "pikaday";
 import __moment from "moment";
+import __SLitComponent from "@coffeekraken/s-lit-component";
 /**
 * @license
 * Copyright 2017 Google LLC
@@ -904,8 +904,8 @@ function whenInteract(elm, settings) {
     }
   });
 }
-var __css = "s-date-picker {\n    display: inline-block;\n}\n\n    s-date-picker:not([mounted]) > * {\n        /* display: none; */\n    }\n.s-date-picker {\n    display: flex;\n    width: 100%;\n}\n\n.s-date-picker__input {\n    flex-grow: 1;\n    padding: var(--s-theme-ui-datePicker-padding, 6px 12px);\n}\n.s-date-picker__button {\n    padding: var(--s-theme-ui-datePicker-padding, 6px 12px);\n}\n\ns-date-picker[default-style]:not([rtl]) .s-date-picker__input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n\ns-date-picker[default-style]:not([rtl]) .s-date-picker__button {\n            border-top-left-radius: 0;\n            border-bottom-left-radius: 0;\n        }\n\ns-date-picker[default-style][rtl] .s-date-picker__button {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n            order: 0;\n        }\n\ns-date-picker[default-style][rtl] .s-date-picker__input {\n            border-top-left-radius: 0;\n            border-bottom-left-radius: 0;\n            order: 1;\n        }\n\n.s-date-picker__button svg {\n        height: 1em;\n    }\n\n.s-date-picker__button svg,\n        .s-date-picker__button svg > * {\n            box-shadow: 0px 0px 3px 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + -10) * 1%),var(--s-theme-color-ui-a, 1));\n        }\n";
-var __themeCss = "/**\n * This theme is an example to show how you can create your own.\n */\n\n.pika-lendar {\n    width: auto;\n}\n\n.pika-single.s-pikaday {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-foreground-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-main-foreground-a, 1));\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surface-a, 1));\n    border: 1px solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));box-shadow: var(--s-theme-depth-100, 0);\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-label {\n    background-color: transparent;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    top: -0.5em;\n}\n\n.s-pikaday .pika-prev,\n.s-pikaday .is-rtl .pika-next,\n.s-pikaday .pika-next,\n.s-pikaday .is-rtl .pika-prev {\n    background: none;\n    position: relative;\n    display: inline-block;\n    font-size: 0;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    overflow: visible;\n    background: red;\n    opacity: 1;\n    width: 1em;\n    height: 1em;\n    opacity: 0.7;\n}\n\n.s-pikaday .pika-prev:hover,\n    .s-pikaday .pika-prev:focus,\n    .s-pikaday .is-rtl .pika-next:hover,\n    .s-pikaday .is-rtl .pika-next:focus,\n    .s-pikaday .pika-next:hover,\n    .s-pikaday .pika-next:focus,\n    .s-pikaday .is-rtl .pika-prev:hover,\n    .s-pikaday .is-rtl .pika-prev:focus {\n        opacity: 1;\n    }\n\n.s-pikaday .pika-prev:after, .s-pikaday .is-rtl .pika-next:after, .s-pikaday .pika-next:after, .s-pikaday .is-rtl .pika-prev:after {\n        content: '\u276F';\n        color: inherit;\n        font-size: 1rem;\n        position: absolute;\n        top: 0;\n        left: -2.2em;\n    }\n.s-pikaday .pika-prev:after, .s-pikaday.is-rtl .pika-next:after {\n        transform: rotate(180deg);\n        left: 1em;\n    }\n.s-pikaday.is-rtl .pika-prev:after {\n        transform: rotate(0deg) !important;\n        left: -2em;\n    }\n\n.s-pikaday .pika-table {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-table th * {\n    text-decoration: none;\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n}\n\n.s-pikaday .pika-button {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    padding: var(--s-theme-ui-colorPicker-padding, 6px 12px);\n}\n\n.s-pikaday .pika-week {\n    text-decoration: none;\n}\n\n.s-pikaday .is-today .pika-button {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    outline: none;\n}\n\n.s-pikaday .is-selected .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.5));\n    box-shadow: none !important;\n}\n\n.s-pikaday .is-disabled .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    opacity: 0.3;\n}\n\n.s-pikaday .pika-button:hover {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1)) !important;\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1)) !important;\n}\n";
+var __css = "s-date-picker {\n    display: inline-block;\n}\n.s-date-picker {\n    display: flex;\n    width: 100%;\n}\n\n.s-date-picker__input {\n    flex-grow: 1;\n    padding-inline: calc(var(--s-theme-ui-datePicker-paddingInline, 0.75em) * var(--s-scale, 1));\n    padding-block: calc(var(--s-theme-ui-datePicker-paddingBlock, 0.375em) * var(--s-scale, 1));\n}\n.s-date-picker__button {\n    padding-inline: calc(var(--s-theme-ui-datePicker-paddingInline, 0.75em) * var(--s-scale, 1));\n    padding-block: calc(var(--s-theme-ui-datePicker-paddingBlock, 0.375em) * var(--s-scale, 1));\n}\n\ns-date-picker[default-style]:not([rtl]) .s-date-picker__input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n\ns-date-picker[default-style]:not([rtl]) .s-date-picker__button {\n            border-top-left-radius: 0;\n            border-bottom-left-radius: 0;\n        }\n\ns-date-picker[default-style][rtl] .s-date-picker__button {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n            order: 0;\n        }\n\ns-date-picker[default-style][rtl] .s-date-picker__input {\n            border-top-left-radius: 0;\n            border-bottom-left-radius: 0;\n            order: 1;\n        }\n\n.s-date-picker__button svg {\n        height: 1em;\n    }\n\n.s-date-picker__button svg,\n        .s-date-picker__button svg > * {\n            box-shadow: 0px 0px 3px 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + -10) * 1%),var(--s-theme-color-ui-a, 1));\n        }\n";
+var __themeCss = "/**\n * This theme is an example to show how you can create your own.\n */\n\n.pika-lendar {\n    width: auto;\n}\n\n.pika-single.s-pikaday {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-foreground-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-main-foreground-a, 1));\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surface-a, 1));\n    border: 1px solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));box-shadow: var(--s-theme-depth-100, 0);\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding-inline: calc(var(--s-theme-ui-colorPicker-paddingInline, 0.75em) * var(--s-scale, 1));\n    padding-block: calc(var(--s-theme-ui-colorPicker-paddingBlock, 0.375em) * var(--s-scale, 1));\n}\n\n.s-pikaday .pika-label {\n    background-color: transparent;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    top: -0.5em;\n}\n\n.s-pikaday .pika-prev,\n.s-pikaday .is-rtl .pika-next,\n.s-pikaday .pika-next,\n.s-pikaday .is-rtl .pika-prev {\n    background: none;\n    position: relative;\n    display: inline-block;\n    font-size: 0;\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    overflow: visible;\n    background: red;\n    opacity: 1;\n    width: 1em;\n    height: 1em;\n    opacity: 0.7;\n}\n\n.s-pikaday .pika-prev:hover,\n    .s-pikaday .pika-prev:focus,\n    .s-pikaday .is-rtl .pika-next:hover,\n    .s-pikaday .is-rtl .pika-next:focus,\n    .s-pikaday .pika-next:hover,\n    .s-pikaday .pika-next:focus,\n    .s-pikaday .is-rtl .pika-prev:hover,\n    .s-pikaday .is-rtl .pika-prev:focus {\n        opacity: 1;\n    }\n\n.s-pikaday .pika-prev:after, .s-pikaday .is-rtl .pika-next:after, .s-pikaday .pika-next:after, .s-pikaday .is-rtl .pika-prev:after {\n        content: '\u276F';\n        color: inherit;\n        font-size: 1rem;\n        position: absolute;\n        top: 0;\n        left: -2.2em;\n    }\n.s-pikaday .pika-prev:after, .s-pikaday.is-rtl .pika-next:after {\n        transform: rotate(180deg);\n        left: 1em;\n    }\n.s-pikaday.is-rtl .pika-prev:after {\n        transform: rotate(0deg) !important;\n        left: -2em;\n    }\n\n.s-pikaday .pika-table {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    border-radius: var(--s-theme-ui-colorPicker-borderRadius, 6px);\n    padding-inline: calc(var(--s-theme-ui-colorPicker-paddingInline, 0.75em) * var(--s-scale, 1));\n    padding-block: calc(var(--s-theme-ui-colorPicker-paddingBlock, 0.375em) * var(--s-scale, 1));\n}\n\n.s-pikaday .pika-table th * {\n    text-decoration: none;\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n}\n\n.s-pikaday .pika-button {\n    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    padding-inline: calc(var(--s-theme-ui-colorPicker-paddingInline, 0.75em) * var(--s-scale, 1));\n    padding-block: calc(var(--s-theme-ui-colorPicker-paddingBlock, 0.375em) * var(--s-scale, 1));\n}\n\n.s-pikaday .pika-week {\n    text-decoration: none;\n}\n\n.s-pikaday .is-today .pika-button {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));\n    outline: none;\n}\n\n.s-pikaday .is-selected .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.5));\n    box-shadow: none !important;\n}\n\n.s-pikaday .is-disabled .pika-button {\n    color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-text-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-text-lightness-offset, 0)) * 1%),var(--s-theme-color-main-text-a, 1));\n    opacity: 0.3;\n}\n\n.s-pikaday .pika-button:hover {\n    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1)) !important;\n    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1)) !important;\n}\n";
 var __baseCss = `@charset "UTF-8";
 
 /*!
@@ -1175,19 +1175,19 @@ var __awaiter = function(thisArg, _arguments, P, generator) {
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-class SDatePicker extends SLitElement {
+class SDatePicker extends __SLitComponent {
   constructor() {
-    super();
-    this._component = void 0;
-    this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-      componentUtils: {
-        interface: SDatePickerComponentInterface,
-        defaultProps: {}
+    super({
+      sLitComponent: {
+        shadowDom: false
+      },
+      sComponentUtils: {
+        interface: SDatePickerComponentInterface
       }
     });
   }
   static get properties() {
-    return __SComponentUtils.properties({}, SDatePickerComponentInterface);
+    return __SLitComponent.properties({}, SDatePickerComponentInterface);
   }
   static get styles() {
     return css`
@@ -1202,25 +1202,25 @@ class SDatePicker extends SLitElement {
     return __awaiter(this, void 0, void 0, function* () {
       const $input = yield this._$input;
       let $button;
-      if (this._component.props.button)
+      if (this.props.button)
         $button = yield this._$button;
       yield whenInteract(this);
       const _this = this;
       this._picker = new __pikaday({
         field: $input,
-        format: this._component.props.format,
+        format: this.props.format,
         trigger: $button,
-        firstDay: this._component.props.firstDay,
-        minDate: this.parseDate(this._component.props.minDate),
-        maxDate: this.parseDate(this._component.props.maxDate),
-        disableWeekends: this._component.props.disableWeekends,
-        yearRange: this._component.props.yearRange,
-        isRTL: this._component.props.rtl,
-        i18n: this._component.props.i18n,
-        numberOfMonths: this._component.props.numberOfMonths,
-        events: this._component.props.events,
-        defaultDate: this._component.props.value,
-        theme: this._component.props.defaultStyle ? "s-pikaday" : "",
+        firstDay: this.props.firstDay,
+        minDate: this.parseDate(this.props.minDate),
+        maxDate: this.parseDate(this.props.maxDate),
+        disableWeekends: this.props.disableWeekends,
+        yearRange: this.props.yearRange,
+        isRTL: this.props.rtl,
+        i18n: this.props.i18n,
+        numberOfMonths: this.props.numberOfMonths,
+        events: this.props.events,
+        defaultDate: this.props.value,
+        theme: this.props.defaultStyle ? "s-pikaday" : "",
         toString(date, format) {
           return _this.dateToString(date, format);
         },
@@ -1270,10 +1270,10 @@ class SDatePicker extends SLitElement {
       });
     });
   }
-  parseDate(dateString, format = this._component.props.format) {
+  parseDate(dateString, format = this.props.format) {
     return __moment(dateString, format).toDate();
   }
-  dateToString(date, format = this._component.props.format) {
+  dateToString(date, format = this.props.format) {
     return __moment(date).format(format);
   }
   _dispatchEvent(eventName) {
@@ -1285,14 +1285,11 @@ class SDatePicker extends SLitElement {
     });
     this.dispatchEvent(event);
   }
-  createRenderRoot() {
-    return this;
-  }
   render() {
     return html$2`
-            <div class="${this._component.className("")}">
+            <div class="${this.componentUtils.className("")}">
                 <input
-                    class="${this._component.className("__input", "s-input")}"
+                    class="${this.componentUtils.className("__input", "s-input")}"
                     type="text"
                     name="${this.name}"
                     ?rtl="${this.rtl}"
@@ -1300,7 +1297,7 @@ class SDatePicker extends SLitElement {
                     autocomplete="off"
                 />
                 ${this.button ? html$2`
-                          <button class="${this._component.className("__button", "s-btn")}">
+                          <button class="${this.componentUtils.className("__button", "s-btn")}">
                               ${html([this.calendarIcon])}
                           </button>
                       ` : ""}
@@ -1314,9 +1311,9 @@ __decorate([
 __decorate([
   queryAsync("button")
 ], SDatePicker.prototype, "_$button", void 0);
-function webcomponent(props = {}, tagName = "s-date-picker") {
-  __SComponentUtils.setDefaultProps(tagName, props);
+function define(props = {}, tagName = "s-date-picker") {
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SDatePicker);
 }
 export default SDatePicker;
-export {webcomponent};
+export {define};

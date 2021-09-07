@@ -11,7 +11,7 @@ import __SSidePanel, { webcomponent as __SSidePanelWebcomponent } from '@coffeek
 import { webcomponent as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
 import { webcomponent as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
 import { webcomponent as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
-import __SComponentUtils from '@coffeekraken/s-component-utils';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
 import { webcomponent as __DocNavComponent } from './components/docNav';
@@ -28,15 +28,15 @@ __DocNavComponent();
 __VersionSelector();
 __CkSettingsWebcomponent();
 
-__SComponentUtils.setDefaultProps('*', {
+__SLitComponent.setDefaultProps('*', {
     mountWhen: 'inViewport',
     // mountWhen: 'directly',
     defaultStyle: true,
 });
-// __SComponentUtils.setDefaultProps(['s-side-panel', 'ck-settings'], {
+// __SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
 //   mountWhen: 'direct'
 // });
-__SComponentUtils.setDefaultProps('s-code-example', {
+__SLitComponent.setDefaultProps('s-code-example', {
     toolbarPosition: 'nav',
     defaultStyleClasses: {
         main: 's-tabs',

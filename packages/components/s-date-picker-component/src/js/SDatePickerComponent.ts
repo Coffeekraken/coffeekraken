@@ -4,7 +4,7 @@ import { html, css, unsafeCSS } from 'lit';
 import { html as staticHTML } from 'lit/static-html.js';
 import { queryAsync } from 'lit/decorators.js';
 import __SDatePickerComponentInterface from './interface/SDatePickerComponentInterface';
-import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
+import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __pikaday from 'pikaday';
 import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
@@ -14,6 +14,7 @@ import __moment from 'moment';
 import __css from '../css/s-date-picker.css';
 import __themeCss from '../css/s-date-picker-theme.css';
 import __baseCss from 'pikaday/css/pikaday.css';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 
 /**
  * @name                SDatePicker
@@ -120,7 +121,7 @@ import __baseCss from 'pikaday/css/pikaday.css';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISDatePickerComponentProps extends ISComponentUtilsDefaultProps {
+export interface ISDatePickerComponentProps {
     name: string;
     value: string;
     format: string;
@@ -139,9 +140,9 @@ export interface ISDatePickerComponentProps extends ISComponentUtilsDefaultProps
     calendarIcon: string;
 }
 
-export default class SDatePicker extends SLitElement {
+export default class SDatePicker extends __SLitComponent {
     static get properties() {
-        return __SComponentUtils.properties({}, __SDatePickerComponentInterface);
+        return __SLitComponent.properties({}, __SDatePickerComponentInterface);
     }
 
     static get styles() {
@@ -154,8 +155,6 @@ export default class SDatePicker extends SLitElement {
         `;
     }
 
-    _component = undefined;
-
     @queryAsync('input')
     _$input;
 
@@ -163,38 +162,39 @@ export default class SDatePicker extends SLitElement {
     _$button;
 
     constructor() {
-        super();
-        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            componentUtils: {
+        super({
+            sLitComponent: {
+                shadowDom: false,
+            },
+            sComponentUtils: {
                 interface: __SDatePickerComponentInterface,
-                defaultProps: {},
             },
         });
     }
     async firstUpdated() {
         const $input = await this._$input;
         let $button;
-        if (this._component.props.button) $button = await this._$button;
+        if (this.props.button) $button = await this._$button;
 
         await __whenInteract(this);
 
         const _this = this;
         this._picker = new __pikaday({
             field: $input,
-            format: this._component.props.format,
+            format: this.props.format,
             trigger: $button,
-            firstDay: this._component.props.firstDay,
-            minDate: this.parseDate(this._component.props.minDate),
-            maxDate: this.parseDate(this._component.props.maxDate),
-            disableWeekends: this._component.props.disableWeekends,
-            yearRange: this._component.props.yearRange,
-            // showWeekNumber: this._component.props.showWeekNumber,
-            isRTL: this._component.props.rtl,
-            i18n: this._component.props.i18n,
-            numberOfMonths: this._component.props.numberOfMonths,
-            events: this._component.props.events,
-            defaultDate: this._component.props.value,
-            theme: this._component.props.defaultStyle ? 's-pikaday' : '',
+            firstDay: this.props.firstDay,
+            minDate: this.parseDate(this.props.minDate),
+            maxDate: this.parseDate(this.props.maxDate),
+            disableWeekends: this.props.disableWeekends,
+            yearRange: this.props.yearRange,
+            // showWeekNumber: this.props.showWeekNumber,
+            isRTL: this.props.rtl,
+            i18n: this.props.i18n,
+            numberOfMonths: this.props.numberOfMonths,
+            events: this.props.events,
+            defaultDate: this.props.value,
+            theme: this.props.defaultStyle ? 's-pikaday' : '',
             toString(date, format) {
                 return _this.dateToString(date, format);
             },
@@ -245,10 +245,10 @@ export default class SDatePicker extends SLitElement {
         });
     }
 
-    parseDate(dateString, format = this._component.props.format) {
+    parseDate(dateString, format = this.props.format) {
         return __moment(dateString, format).toDate();
     }
-    dateToString(date, format = this._component.props.format) {
+    dateToString(date, format = this.props.format) {
         return __moment(date).format(format);
     }
 
@@ -261,14 +261,11 @@ export default class SDatePicker extends SLitElement {
         });
         this.dispatchEvent(event);
     }
-    createRenderRoot() {
-        return this;
-    }
     render() {
         return html`
-            <div class="${this._component.className('')}">
+            <div class="${this.componentUtils.className('')}">
                 <input
-                    class="${this._component.className('__input', 's-input')}"
+                    class="${this.componentUtils.className('__input', 's-input')}"
                     type="text"
                     name="${this.name}"
                     ?rtl="${this.rtl}"
@@ -277,7 +274,7 @@ export default class SDatePicker extends SLitElement {
                 />
                 ${this.button
                     ? html`
-                          <button class="${this._component.className('__button', 's-btn')}">
+                          <button class="${this.componentUtils.className('__button', 's-btn')}">
                               ${staticHTML([this.calendarIcon])}
                           </button>
                       `
@@ -299,7 +296,7 @@ export default class SDatePicker extends SLitElement {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export function webcomponent(props: Partial<ISDatePickerComponentProps> = {}, tagName = 's-date-picker') {
-    __SComponentUtils.setDefaultProps(tagName, props);
+export function define(props: Partial<ISDatePickerComponentProps> = {}, tagName = 's-date-picker') {
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDatePicker);
 }

@@ -1,11 +1,6 @@
-import { html, css, unsafeCSS } from 'lit';
-import { property } from 'lit/decorators.js';
-import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
-import __SComponentUtils, { SLitElement } from '@coffeekraken/s-component-utils';
-import __copy from '@coffeekraken/sugar/js/clipboard/copy';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 
 export interface ISActivateFeatureProps {
     href: string;

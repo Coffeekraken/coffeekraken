@@ -1,21 +1,18 @@
 {
-  "name": "@coffeekraken/s-component-utils",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/shared/exports.js",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-class": "^2.0.0",
-    "@coffeekraken/s-interface": "^2.0.0",
-    "@coffeekraken/s-request": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0",
-    "get-css-data": "^2.0.2",
-    "handlebars": "^4.7.7",
-    "lit": "^2.0.0-rc.3",
-    "lit-element": "^2.5.1",
-    "mustache": "^4.2.0"
-  }
+    "name": "@coffeekraken/s-component-utils",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "homepage": "https://coffeekraken.io",
+    "main": "./src/js/exports.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-class": "^2.0.0"
+    }
 }

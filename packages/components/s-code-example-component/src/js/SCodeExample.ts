@@ -1,24 +1,22 @@
-import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-component-utils';
+import { define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import { css, html, unsafeCSS } from 'lit';
-import { html as __unsafeHTML } from 'lit/static-html.js';
-import { property, query, queryAssignedNodes } from 'lit/decorators.js';
-
 import __hljs from 'highlight.js/lib/core';
-import __langJavascript from 'highlight.js/lib/languages/javascript';
-import __langHtml from 'highlight.js/lib/languages/xml';
 import __langBash from 'highlight.js/lib/languages/bash';
-import __langPhp from 'highlight.js/lib/languages/php';
 import __langCss from 'highlight.js/lib/languages/css';
-
+import __langJavascript from 'highlight.js/lib/languages/javascript';
+import __langPhp from 'highlight.js/lib/languages/php';
+import __langHtml from 'highlight.js/lib/languages/xml';
+import { css, html, unsafeCSS } from 'lit';
+import { property, query, queryAssignedNodes } from 'lit/decorators.js';
 // @ts-ignore
 import __css from '../css/s-code-example.css';
-import { webcomponent as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
 
 __SClipboardCopy();
 
-export interface ISCodeExampleComponentProps extends ISComponentUtilsDefaultProps {
+export interface ISCodeExampleComponentProps {
     theme: string;
     active: string;
     toolbar: 'copy'[];
@@ -26,9 +24,9 @@ export interface ISCodeExampleComponentProps extends ISComponentUtilsDefaultProp
     defaultStyleClass: any;
 }
 
-export default class SCodeExample extends SLitElement {
+export default class SCodeExample extends __SLitComponent {
     static get properties() {
-        return __SComponentUtils.properties({}, __SCodeExampleComponentInterface);
+        return __SLitComponent.properties({}, __SCodeExampleComponentInterface);
     }
 
     static get styles() {
@@ -37,7 +35,6 @@ export default class SCodeExample extends SLitElement {
         `;
     }
 
-    _component: __SComponentUtils;
     _$copy = undefined;
 
     @property()
@@ -64,13 +61,13 @@ export default class SCodeExample extends SLitElement {
     $templates;
 
     constructor() {
-        super();
-        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            componentUtils: {
-                interface: __SCodeExampleComponentInterface,
-                defaultProps: {},
-            },
-        });
+        super(
+            __deepMerge({
+                sComponentUtils: {
+                    interface: __SCodeExampleComponentInterface,
+                },
+            }),
+        );
 
         const languages = {
             html: __langHtml,
@@ -80,7 +77,7 @@ export default class SCodeExample extends SLitElement {
             bash: __langBash,
             shell: __langBash,
             css: __langCss,
-            ...(this._component.props.languages ?? {}),
+            ...(this.props.languages ?? {}),
         };
 
         Object.keys(languages).forEach((lang) => {
@@ -116,13 +113,30 @@ export default class SCodeExample extends SLitElement {
         await __wait(500);
         return true;
     }
-    // createRenderRoot() {
-    //     return this;
-    // }
+    setActiveTabByTab(e) {
+        this.setActiveTab(e.target.id);
+    }
+    async setActiveTab(id) {
+        await __wait();
+        this._activeTabId = id;
+        this.initPrismOnTab(id);
+    }
+    initPrismOnTab(id) {
+        const $content = <HTMLElement>this.shadowRoot?.querySelector(`pre#${id} code`);
+        if ($content.hasAttribute('inited')) return;
+        $content.setAttribute('inited', 'true');
+        __hljs.highlightElement($content);
+    }
+    copy() {
+        const id = this._activeTabId;
+        const item = this._items.filter((i) => i.id === id)[0];
+        // @ts-ignore
+        this.$copy.copy(item.code);
+    }
     render() {
         return html`
             <div
-                class="${this._component?.className()}"
+                class="${this.componentUtils.className()}"
                 ?mounted="${
                     // @ts-ignore
                     this.mounted
@@ -140,103 +154,68 @@ export default class SCodeExample extends SLitElement {
                     <slot></slot>
                 </div>
 
-                ${this._component
-                    ? html`<header class="${this._component.className('__nav')}">
-                          <ol class="${this._component.className('__tabs', 's-tabs')}">
-                              ${(this._items ?? []).map(
-                                  (item) => html`
-                                      <li
-                                          class="${this._component.className('__tab')}"
-                                          id="${item.id}"
-                                          ?active="${this._activeTabId === item.id}"
-                                          @click="${this.setActiveTabByTab}"
-                                      >
-                                          ${item.lang}
-                                      </li>
-                                  `,
-                              )}
-                          </ol>
-                          ${
-                              // @ts-ignore
-                              this.toolbarPosition === 'nav'
-                                  ? html`
-                                        <div class="${this._component.className('__toolbar')}">
-                                            <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                        </div>
-                                    `
-                                  : ''
-                          }
-                      </header>`
-                    : ''}
-                ${this._component
-                    ? html`
-                          <div class="${this._component.className('__content')}">
-                              ${
-                                  // @ts-ignore
-                                  this.toolbarPosition !== 'nav'
-                                      ? html`
-                                            <div class="${this._component?.className('__toolbar')}">
-                                                <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
-                                            </div>
-                                        `
-                                      : ''
-                              }
-                              ${(this._items ?? []).map(
-                                  (item) => html`
-                                      <pre
-                                          class="${this._component.className('__code')}"
-                                          style="line-height:0;"
-                                          id="${item.id ?? item.lang}"
-                                          ?active="${this._activeTabId === (item.id ?? item.lang)}"
-                                      >
-                            <code lang="${item.lang ?? item.id}" class="language-${item.lang} ${item.lang} ${this
-                                          ._component.props.defaultStyle
-                                          ? 'hljs'
-                                          : ''}">
-                                
-                                ${
-                                          // @ts-ignore
-                                          __unsafeHTML([item.code])
-                                      }
-                            </code>
+                <header class="${this.componentUtils.className('__nav')}">
+                    <ol class="${this.componentUtils.className('__tabs', 's-tabs')}">
+                        ${(this._items ?? []).map(
+                            (item) => html`
+                                <li
+                                    class="${this.componentUtils.className('__tab')}"
+                                    id="${item.id}"
+                                    ?active="${this._activeTabId === item.id}"
+                                    @click="${this.setActiveTabByTab}"
+                                >
+                                    ${item.lang}
+                                </li>
+                            `,
+                        )}
+                    </ol>
+                    ${
+                        // @ts-ignore
+                        this.toolbarPosition === 'nav'
+                            ? html`
+                                  <div class="${this.componentUtils.className('__toolbar')}">
+                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  </div>
+                              `
+                            : ''
+                    }
+                </header>
+                <div class="${this.componentUtils.className('__content')}">
+                    ${
+                        // @ts-ignore
+                        this.toolbarPosition !== 'nav'
+                            ? html`
+                                  <div class="${this.componentUtils.className('__toolbar')}">
+                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  </div>
+                              `
+                            : ''
+                    }
+                    ${(this._items ?? []).map(
+                        (item) => html`
+                            <pre
+                                class="${this.componentUtils.className('__code')}"
+                                style="line-height:0;"
+                                id="${item.id ?? item.lang}"
+                                ?active="${this._activeTabId === (item.id ?? item.lang)}"
+                            >
+                            <code lang="${item.lang ?? item.id}" class="language-${item.lang} ${item.lang} ${this.props
+                                .defaultStyle
+                                ? 'hljs'
+                                : ''}">${
+                                // @ts-ignore
+                                item.code.trim()
+                            }</code>
                         </pre>
-                                  `,
-                              )}
-                          </div>
-                      `
-                    : ''}
+                        `,
+                    )}
+                </div>
             </div>
         `;
-    }
-    setActiveTabByTab(e) {
-        this.setActiveTab(e.target.id);
-    }
-    async setActiveTab(id) {
-        await __wait();
-        this._activeTabId = id;
-        this.initPrismOnTab(id);
-    }
-    initPrismOnTab(id) {
-        const $content = <HTMLElement>this.shadowRoot?.querySelector(`pre#${id} code`);
-        if ($content.hasAttribute('inited')) return;
-        $content.setAttribute('inited', 'true');
-
-        const highlightedCode = __hljs
-            .highlight($content?.innerHTML.replace(/\<\!\-\-\?lit\$.*\$\-\-\>/g, ''), {
-                language: <string>$content.getAttribute('lang'),
-            })
-            .value.trim();
-        $content.innerHTML = highlightedCode;
-    }
-    copy() {
-        const id = this._activeTabId;
-        const item = this._items.filter((i) => i.id === id)[0];
-        // @ts-ignore
-        this.$copy.copy(item.code);
     }
 }
 
 export function webcomponent(props: Partial<ISCodeExampleComponentProps> = {}, tagName = 's-code-example') {
-    __SComponentUtils.setDefaultProps(tagName, props);
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SCodeExample);
 }

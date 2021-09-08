@@ -2,7 +2,7 @@
 
 import { html, css, unsafeCSS } from 'lit';
 import __SRangeComponentInterface from './interface/SRangeComponentInterface';
-import __SLitComponent, { ISLitElementDefaultProps } from '@coffeekraken/s-lit-component';
+import __SLitComponent, { ISLitComponentDefaultProps } from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __css from '../css/s-range.css';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -52,7 +52,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISRangeComponentProps extends ISLitElementDefaultProps {
+export interface ISRangeComponentProps extends ISLitComponentDefaultProps {
     name: string;
     value: string;
     min: number;
@@ -62,7 +62,7 @@ export interface ISRangeComponentProps extends ISLitElementDefaultProps {
     tooltip: boolean;
 }
 
-export default class SRange extends SLitElement {
+export default class SRange extends __SLitComponent {
     static get properties() {
         return __SLitComponent.properties({}, __SRangeComponentInterface);
     }
@@ -78,8 +78,10 @@ export default class SRange extends SLitElement {
     constructor() {
         super(
             __deepMerge({
-                sLitElement: {
+                sLitComponent: {
                     shadowDom: false,
+                },
+                sComponentUtils: {
                     interface: __SRangeComponentInterface,
                 },
             }),
@@ -121,9 +123,9 @@ export default class SRange extends SLitElement {
     }
     render() {
         return html`
-            <div class="${this.className('', 's-tooltip-container')}">
+            <div class="${this.componentUtils.className('', 's-tooltip-container')}">
                 <input
-                    class="${this.className('__input', 's-range')}"
+                    class="${this.componentUtils.className('__input', 's-range')}"
                     type="range"
                     name="${this.name}"
                     value="${this.value}"
@@ -131,7 +133,9 @@ export default class SRange extends SLitElement {
                     max="${this.max}"
                     step="${this.step}"
                 />
-                ${this.props.tooltip ? html` <div class="${this.className('__tooltip', 's-tooltip')}"></div> ` : ''}
+                ${this.props.tooltip
+                    ? html` <div class="${this.componentUtils.className('__tooltip', 's-tooltip')}"></div> `
+                    : ''}
             </div>
         `;
     }

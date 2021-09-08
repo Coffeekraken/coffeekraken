@@ -21,6 +21,7 @@ import __STheme from '@coffeekraken/s-theme';
 import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import { Server as __nodeIpcStoreServer } from 'node-ipc-store';
+import __SLog from '@coffeekraken/s-log';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -62,6 +63,10 @@ const cliParams = SSugarCliParamsInterface.apply(process.argv.slice(2).join(' ')
 if (cliParams.bench) {
     __SBench.env.activateBench(cliParams.bench === true ? '*' : cliParams.bench);
 }
+
+__SLog.filter({
+    type: [__SLog.LOG, __SLog.INFO, __SLog.WARN, __SLog.ERROR],
+});
 
 class SSugarCli {
     _command: string;
@@ -153,6 +158,10 @@ class SSugarCli {
                 },
             });
             this._stdio = new STerminalStdio('default', this._eventEmitter);
+
+            if (__isChildProcess()) {
+                this._eventEmitter.pipeTo(process);
+            }
 
             // writeLog event
             this._eventEmitter.on('writeLog', (logObj) => {
@@ -401,7 +410,8 @@ class SSugarCli {
                 this._newStep(true);
                 const proPromise = pro(args);
                 this._eventEmitter.pipe(proPromise, {
-                    processor(value) {
+                    processor(value, metas) {
+                        if (metas.event !== 'log') return value;
                         value.decorators = false;
                         return value;
                     },

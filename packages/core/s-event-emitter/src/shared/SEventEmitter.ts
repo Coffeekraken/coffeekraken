@@ -7,6 +7,8 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
+import __SLog from '@coffeekraken/s-log';
+import __isClass from '@coffeekraken/sugar/shared/is/class';
 
 /**
  * @name                  SEventEmitter
@@ -26,6 +28,8 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
+
+export type Instantiable<T = any> = new (...args: any[]) => T;
 
 export interface ISEventEmitterPipeSettingsProcessorFn {
     (value: any, metas: ISEventEmitterMetas): any;
@@ -114,6 +118,7 @@ export interface ISEventEmitterSettings {
     asyncStart: boolean;
     defaults: Record<string, any>;
     forceObject: boolean | string[];
+    castByEvent: Record<string, Function | Instantiable>;
     crossProcess: boolean;
     bind: any;
 }
@@ -284,8 +289,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         value.value = __toString(value.value);
                     }
 
+                    // @todo            check why need this and from where comes from the "metas" property in the value...
+                    if (value.metas?.event) delete value.metas;
+
                     process.send({
-                        value,
+                        value: value,
                         metas: emitMetas,
                     });
                 } else {
@@ -391,8 +399,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         defaultCallTime: {},
                         bufferTimeout: 1000,
                         bufferedEvents: [],
-                        forceObject: ['log', 'warn', 'error'],
+                        forceObject: ['log'],
                         defaults: {},
+                        castByEvent: {
+                            log: __SLog,
+                        },
                         bind: undefined,
                     },
                 },
@@ -528,16 +539,16 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             const isFirstLevel = !metasObj.level;
 
             // check if need to force object
-            if (
-                (this.eventEmitterSettings.forceObject === true ||
-                    (Array.isArray(this.eventEmitterSettings.forceObject) &&
-                        this.eventEmitterSettings.forceObject.indexOf(event) !== -1)) &&
-                !__isPlainObject(value)
-            ) {
-                value = {
-                    value,
-                };
-            }
+            // if (
+            //     (this.eventEmitterSettings.forceObject === true ||
+            //         (Array.isArray(this.eventEmitterSettings.forceObject) &&
+            //             this.eventEmitterSettings.forceObject.indexOf(event) !== -1)) &&
+            //     !__isPlainObject(value)
+            // ) {
+            //     value = {
+            //         value,
+            //     };
+            // }
 
             // defaults
             if (__isPlainObject(value)) {
@@ -547,6 +558,21 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                     if (parts.indexOf(event) === -1 && parts.indexOf('*') === -1) return;
                     value = __deepMerge(value, this.eventEmitterSettings.defaults?.[key]);
                 });
+            }
+
+            const CastClass = this.eventEmitterSettings.castByEvent[event];
+            if (
+                CastClass &&
+                __isClass(CastClass) &&
+                !(value instanceof CastClass) &&
+                !value._sEventEmitterPreprocessed
+            ) {
+                // @ts-ignore
+                value = new CastClass(value);
+                // Object.defineProperty(value, '_sEventEmitterPreprocessed', {
+                //     value: true,
+                //     enumerable: false,
+                // });
             }
 
             if (event === 'ask') {

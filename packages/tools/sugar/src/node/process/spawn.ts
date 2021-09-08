@@ -7,6 +7,7 @@ import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import __onProcessExit from './onProcessExit';
 import __SDuration from '@coffeekraken/s-duration';
 import __isTestEnv from '../../shared/is/testEnv';
+import __SLog from '@coffeekraken/s-log';
 
 /**
  * @name            spawn
@@ -47,150 +48,140 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface ISpawnSettings extends SpawnOptions {
-  pipeEvents: boolean;
-  returnValueOnly: boolean;
-  [key: string]: any;
+    pipeEvents: boolean;
+    returnValueOnly: boolean;
+    [key: string]: any;
 }
 
 export interface ISpawn {
-  (
-    command: string,
-    args?: string[],
-    settings?: Partial<ISpawnSettings>
-  ): ISPromise;
+    (command: string, args?: string[], settings?: Partial<ISpawnSettings>): ISPromise;
 }
 
-export default function spawn(
-  command: string,
-  args?: string[] = [],
-  settings?: Partial<ISpawnSettings>
-): __SPromise {
-  let childProcess;
+export default function spawn(command: string, args?: string[] = [], settings?: Partial<ISpawnSettings>): __SPromise {
+    let childProcess;
 
-  const promise = new __SPromise(async ({ resolve, reject, emit }) => {
-    settings = __deepMerge(
-      {
-        pipeEvents: true,
-        returnValueOnly: false
-      },
-      settings ?? {}
-    );
+    const promise = new __SPromise(async ({ resolve, reject, emit }) => {
+        settings = __deepMerge(
+            {
+                pipeEvents: true,
+                returnValueOnly: false,
+            },
+            settings ?? {},
+        );
 
-    const duration = new __SDuration();
-    let resolveValue: any, rejectValue: any;
+        const duration = new __SDuration();
+        let resolveValue: any, rejectValue: any;
 
-    const stderr = [],
-      stdout = [];
+        const stderr = [],
+            stdout = [];
 
-    childProcess = __spawn(command, [], {
-      shell: true,
-      stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
-      cwd: settings.cwd || process.cwd(),
-      ...settings,
-      env: {
-        ...process.env,
-        ...(settings.env || {}),
-        CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
-          ? process.env.CHILD_PROCESS_LEVEL + 1
-          : 1,
-        NODE_ENV: __isTestEnv() ? 'development' : process.env.NODE_ENV,
-        IS_CHILD_PROCESS: true
-      }
-    });
+        childProcess = __spawn(command, [], {
+            shell: true,
+            stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
+            cwd: settings.cwd || process.cwd(),
+            ...settings,
+            env: {
+                ...process.env,
+                ...(settings.env || {}),
+                CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL ? process.env.CHILD_PROCESS_LEVEL + 1 : 1,
+                NODE_ENV: __isTestEnv() ? 'development' : process.env.NODE_ENV,
+                IS_CHILD_PROCESS: true,
+            },
+        });
 
-    __onProcessExit(() => {
-      childProcess.kill();
-    });
+        __onProcessExit(() => {
+            childProcess.kill();
+        });
 
-    // handle the process.send pattern
-    if (settings.pipeEvents) {
-      childProcess.on('message', (dataObj) => {
-        if (!dataObj.value || !dataObj.metas) return;
-        if (dataObj.metas.event === 'resolve') {
-          resolveValue = dataObj.value;
-          childProcess.kill('SIGINT');
-        } else if (dataObj.metas.event === 'reject') {
-          rejectValue = dataObj.value;
-          childProcess.kill('SIGINT');
-        } else {
-          emit(dataObj.metas.event, dataObj.value, dataObj.metas);
+        // handle the process.send pattern
+        if (settings.pipeEvents) {
+            childProcess.on('message', (dataObj) => {
+                // console.log('MESSAGE', dataObj);
+                if (!dataObj.value || !dataObj.metas) return;
+                if (dataObj.metas.event === 'resolve') {
+                    resolveValue = dataObj.value;
+                    childProcess.kill('SIGINT');
+                } else if (dataObj.metas.event === 'reject') {
+                    rejectValue = dataObj.value;
+                    childProcess.kill('SIGINT');
+                } else {
+                    emit(dataObj.metas.event, dataObj.value, dataObj.metas);
+                }
+            });
         }
-      });
-    }
 
-    // listen for errors etc...
-    if (childProcess.stdout) {
-      childProcess.stdout.on('data', (data) => {
-        if (!data) return;
-        stdout.push(data.toString());
-        emit('log', {
-          value: data.toString()
+        // listen for errors etc...
+        if (childProcess.stdout) {
+            childProcess.stdout.on('data', (data) => {
+                if (!data) return;
+                stdout.push(data.toString());
+                emit('log', {
+                    type: __SLog.CHILD_PROCESS,
+                    value: data.toString(),
+                });
+            });
+        }
+        if (childProcess.stderr) {
+            childProcess.stderr.on('data', (data) => {
+                if (!data) return;
+                stderr.push(data.toString());
+                emit('log', {
+                    type: __SLog.CHILD_PROCESS,
+                    value: data.toString(),
+                });
+            });
+        }
+
+        let isEnded = false;
+        childProcess.on('close', (code, signal) => {
+            if (isEnded) return;
+            isEnded = true;
+
+            // build the result object
+            const resultObj = {
+                code,
+                signal,
+                value: resolveValue || rejectValue || `${stdout.toString()}\n${stderr.toString()}`,
+                stdout,
+                stderr,
+                spawn: true,
+                ...duration.end(),
+            };
+
+            // generic close event
+            emit('close', resultObj);
+
+            // handle resolve and reject
+            if (resolveValue) {
+                emit('close.success', resultObj);
+                if (settings.returnValueOnly) return resolve(resultObj.value);
+                return resolve(resultObj);
+            } else if (rejectValue) {
+                emit('close.error', resultObj);
+                if (settings.returnValueOnly) return reject(resultObj.value);
+                return reject(resultObj);
+            }
+
+            // handle other cases
+            if (stderr.length) {
+                emit('close.error', resultObj);
+                if (settings.returnValueOnly) return reject(resultObj.value);
+                return reject(resultObj);
+            } else if (!code && signal) {
+                emit('close.killed', resultObj);
+                if (settings.returnValueOnly) return resolve(resultObj.value);
+                return resolve(resultObj);
+            } else if (code === 0 && !signal) {
+                emit('close.success', resultObj);
+                if (settings.returnValueOnly) return resolve(resultObj.value);
+                return resolve(resultObj);
+            } else {
+                emit('close.error', resultObj);
+                if (settings.returnValueOnly) return reject(resultObj.value);
+                return reject(resultObj);
+            }
         });
-      });
-    }
-    if (childProcess.stderr) {
-      childProcess.stderr.on('data', (data) => {
-        if (!data) return;
-        stderr.push(data.toString());
-        emit('error', {
-          value: data.toString()
-        });
-      });
-    }
-
-    let isEnded = false;
-    childProcess.on('close', (code, signal) => {
-      if (isEnded) return;
-      isEnded = true;
-
-      // build the result object
-      const resultObj = {
-        code,
-        signal,
-        value:
-          resolveValue ||
-          rejectValue ||
-          `${stdout.toString()}\n${stderr.toString()}`,
-        stdout,
-        stderr,
-        spawn: true,
-        ...duration.end()
-      };
-
-      // generic close event
-      emit('close', resultObj);
-
-      // handle resolve and reject
-      if (resolveValue) {
-        emit('close.success', resultObj);
-        if (settings.returnValueOnly) return resolve(resultObj.value);
-        return resolve(resultObj);
-      } else if (rejectValue) {
-        emit('close.error', resultObj);
-        if (settings.returnValueOnly) return reject(resultObj.value);
-        return reject(resultObj);
-      }
-
-      // handle other cases
-      if (stderr.length) {
-        emit('close.error', resultObj);
-        if (settings.returnValueOnly) return reject(resultObj.value);
-        return reject(resultObj);
-      } else if (!code && signal) {
-        emit('close.killed', resultObj);
-        if (settings.returnValueOnly) return resolve(resultObj.value);
-        return resolve(resultObj);
-      } else if (code === 0 && !signal) {
-        emit('close.success', resultObj);
-        if (settings.returnValueOnly) return resolve(resultObj.value);
-        return resolve(resultObj);
-      } else {
-        emit('close.error', resultObj);
-        if (settings.returnValueOnly) return reject(resultObj.value);
-        return reject(resultObj);
-      }
     });
-  });
 
-  return promise;
+    return promise;
 }

@@ -14,6 +14,7 @@
         "@coffeekraken/s-stdio": "^2.0.0",
         "@coffeekraken/s-glob": "^2.0.0",
         "@coffeekraken/s-file": "^2.0.0",
+        "@coffeekraken/S-log": "^2.0.0",
         "@coffeekraken/s-duration": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0"

@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue js component</title>
-  </head>
-  <body>
-    <script type="module">
-    import __css from './src/css/index.css';
-      import SClipboardCopy, { webcomponent } from './src/js/index.ts';
-      
-      webcomponent();
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue js component</title>
+    </head>
+    <body>
+        <script type="module">
+            import __css from './src/css/index.css';
+            import SClipboardCopy, { define } from './src/js/index.ts';
 
-        setTimeout(() => {
-            document.querySelector('#panel1').active = true;
-        }, 2000);
+            define({
+                defaultStyle: true,
+            });
 
-    </script>
-    <s-side-panel id="panel1" side="right" overlay>
-        <p class="s-typo:p">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis odio magna. Phasellus euismod pellentesque risus vel lobortis. Etiam iaculis arcu sed libero ullamcorper tincidunt. Donec dui massa, efficitur sit amet condimentum eget, pulvinar et lorem. Aenean porta varius placerat. Donec feugiat feugiat lorem nec egestas. Donec venenatis est purus, in pulvinar elit aliquam in. Cras in arcu vitae lectus dignissim hendrerit. Vestibulum sagittis nibh nec ligula tempor, in rhoncus nisi maximus. Suspendisse potenti. Praesent porta leo id mauris facilisis malesuada. Praesent a vehicula leo, sit amet tincidunt magna. Sed ultricies condimentum odio, sit amet gravida lacus interdum ac. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec vel libero sapien.
-        </p>
-    </s-side-panel>
+            setTimeout(() => {
+                document.querySelector('#panel1').active = true;
+            }, 2000);
+        </script>
+        <s-side-panel id="panel1" side="right" overlay>
+            <p class="s-typo:p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis odio magna. Phasellus euismod
+                pellentesque risus vel lobortis. Etiam iaculis arcu sed libero ullamcorper tincidunt. Donec dui massa,
+                efficitur sit amet condimentum eget, pulvinar et lorem. Aenean porta varius placerat. Donec feugiat
+                feugiat lorem nec egestas. Donec venenatis est purus, in pulvinar elit aliquam in. Cras in arcu vitae
+                lectus dignissim hendrerit. Vestibulum sagittis nibh nec ligula tempor, in rhoncus nisi maximus.
+                Suspendisse potenti. Praesent porta leo id mauris facilisis malesuada. Praesent a vehicula leo, sit amet
+                tincidunt magna. Sed ultricies condimentum odio, sit amet gravida lacus interdum ac. Interdum et
+                malesuada fames ac ante ipsum primis in faucibus. Donec vel libero sapien.
+            </p>
+        </s-side-panel>
 
-    <a id="side-opener">Open panel</a>
+        <a id="side-opener">Open panel</a>
 
-    <s-side-panel id="panel2" side="top" triggerer="#side-opener" overlay default-style>
-        <p class="s-typo:p">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis odio magna. Phasellus euismod pellentesque risus vel lobortis. Etiam iaculis arcu sed libero ullamcorper tincidunt. Donec dui massa, efficitur sit amet condimentum eget, pulvinar et lorem. Aenean porta varius placerat. Donec feugiat feugiat lorem nec egestas. Donec venenatis est purus, in pulvinar elit aliquam in. Cras in arcu vitae lectus dignissim hendrerit. Vestibulum sagittis nibh nec ligula tempor, in rhoncus nisi maximus. Suspendisse potenti. Praesent porta leo id mauris facilisis malesuada. Praesent a vehicula leo, sit amet tincidunt magna. Sed ultricies condimentum odio, sit amet gravida lacus interdum ac. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec vel libero sapien.
-        </p>
-    </s-side-panel>
-
-  </body>
+        <s-side-panel id="panel2" side="top" triggerer="#side-opener" overlay default-style>
+            <p class="s-typo:p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis odio magna. Phasellus euismod
+                pellentesque risus vel lobortis. Etiam iaculis arcu sed libero ullamcorper tincidunt. Donec dui massa,
+                efficitur sit amet condimentum eget, pulvinar et lorem. Aenean porta varius placerat. Donec feugiat
+                feugiat lorem nec egestas. Donec venenatis est purus, in pulvinar elit aliquam in. Cras in arcu vitae
+                lectus dignissim hendrerit. Vestibulum sagittis nibh nec ligula tempor, in rhoncus nisi maximus.
+                Suspendisse potenti. Praesent porta leo id mauris facilisis malesuada. Praesent a vehicula leo, sit amet
+                tincidunt magna. Sed ultricies condimentum odio, sit amet gravida lacus interdum ac. Interdum et
+                malesuada fames ac ante ipsum primis in faucibus. Donec vel libero sapien.
+            </p>
+        </s-side-panel>
+    </body>
 </html>

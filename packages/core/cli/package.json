@@ -1,28 +1,29 @@
 {
-  "name": "@coffeekraken/cli",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/node/exports.js",
-  "bin": {
-    "sugar": "./src/cli/sugar.cli.js"
-  },
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-frontstack": "^2.0.0",
-    "@coffeekraken/s-bench": "^2.0.0",
-    "@coffeekraken/s-config": "^2.0.0",
-    "@coffeekraken/s-interface": "^2.0.0",
-    "@coffeekraken/s-sugar-config": "^2.0.0",
-    "@coffeekraken/s-stdio": "^2.0.0",
-    "@coffeekraken/s-event-emitter": "^2.0.0",
-    "@coffeekraken/s-sugar-json": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0",
-    "@coffeekraken/s-env": "^2.0.0",
-    "@coffeekraken/s-process": "^2.0.0",
-    "@coffeekraken/s-promise": "^2.0.0",
-    "enquirer": "^2.3.6"
-  }
+    "name": "@coffeekraken/cli",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/node/exports.js",
+    "bin": {
+        "sugar": "./src/cli/sugar.cli.js"
+    },
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-frontstack": "^2.0.0",
+        "@coffeekraken/s-bench": "^2.0.0",
+        "@coffeekraken/s-config": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-stdio": "^2.0.0",
+        "@coffeekraken/s-log": "^2.0.0",
+        "@coffeekraken/s-event-emitter": "^2.0.0",
+        "@coffeekraken/s-sugar-json": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-env": "^2.0.0",
+        "@coffeekraken/s-process": "^2.0.0",
+        "@coffeekraken/s-promise": "^2.0.0",
+        "enquirer": "^2.3.6"
+    }
 }

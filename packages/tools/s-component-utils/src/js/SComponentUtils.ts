@@ -116,7 +116,8 @@ export default class SComponent extends __SClass {
      */
     static _defaultProps: any = {};
     static setDefaultProps(selector: string | string[], props: any): void {
-        Array.from(selector).forEach((sel) => {
+        selector = Array.isArray(selector) ? selector : [selector];
+        selector.forEach((sel) => {
             this._defaultProps[sel] = {
                 ...(this._defaultProps[sel] ?? {}),
                 ...props,
@@ -313,15 +314,20 @@ export default class SComponent extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    _defaultProps;
     get defaultProps(): any {
-        const defaultProps = __deepMerge(
-            // @ts-ignore
-            this.InterfaceToApply.defaults(),
-            this.sComponentUtilsSettings.defaultProps ?? {},
-            (<any>this.constructor)._defaultProps['*'] ?? {},
-            (<any>this.constructor)._defaultProps[this.name] ?? {},
+        if (this._defaultProps) return Object.assign({}, this._defaultProps);
+        this._defaultProps = Object.assign(
+            {},
+            __deepMerge(
+                // @ts-ignore
+                this.InterfaceToApply.defaults(),
+                this.sComponentUtilsSettings.defaultProps ?? {},
+                (<any>this.constructor)._defaultProps['*'] ?? {},
+                (<any>this.constructor)._defaultProps[this.node.tagName.toLowerCase()] ?? {},
+            ),
         );
-        return defaultProps;
+        return this._defaultProps;
     }
 
     static getFinalInterface(int?: typeof __SInterface): __SInterface {

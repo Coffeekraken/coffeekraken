@@ -1,11 +1,12 @@
-import __SLitComponent, { ISLitElementDefaultProps } from '@coffeekraken/s-lit-component';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 import { css, html, unsafeCSS } from 'lit';
 import { query, property } from 'lit/decorators.js';
 import __SConfigExplorerComponentInterface from './interface/SConfigExplorerComponentInterface';
 import __SRequest from '@coffeekraken/s-request';
 import __minimatch from 'minimatch';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export interface ISConfigExplorerComponentProps extends ISLitElementDefaultProps {
+export interface ISConfigExplorerComponentProps {
     apiUrl: string;
     maxItems: number;
 }
@@ -30,15 +31,16 @@ export default class SConfigExplorer extends __SLitComponent {
     }
 
     constructor() {
-        super();
-        this._component = new __SComponentUtils(this.tagName.toLowerCase(), this, this.attributes, {
-            componentUtils: {
-                // @TODO        check why is an issue here...
-                // @ts-ignore
-                interface: __SConfigExplorerComponentInterface,
-                defaultProps: {},
-            },
-        });
+        super(
+            __deepMerge({
+                sLitComponent: {
+                    shadowDom: false,
+                },
+                sComponentUtils: {
+                    interface: __SConfigExplorerComponentInterface,
+                },
+            }),
+        );
 
         (async () => {
             const request = new __SRequest({});
@@ -65,17 +67,14 @@ export default class SConfigExplorer extends __SLitComponent {
         this._displayedConfig = [];
         this.requestUpdate();
     }
-    createRenderRoot() {
-        return this;
-    }
     render() {
         return html`
-            <div class="${this._component?.className()}">
-                <table class="${this._component?.className('__table', 's-table')}">
+            <div class="${this.componentUtils.className()}">
+                <table class="${this.componentUtils.className('__table', 's-table')}">
                     <tr>
                         <th>
                             <input
-                                class="${this._component?.className('__search', 's-input s-width:100')}"
+                                class="${this.componentUtils.className('__search', 's-input s-width:100')}"
                                 type="text"
                                 name="dotpath"
                                 placeholder="Filter by dotpath"
@@ -141,11 +140,7 @@ export default class SConfigExplorer extends __SLitComponent {
     }
 }
 
-export function webcomponent(
-    props: Partial<ISConfigExplorerComponentProps> = {},
-    tagName = 's-config-explorer',
-    settings = {},
-) {
+export function define(props: Partial<ISConfigExplorerComponentProps> = {}, tagName = 's-config-explorer') {
     __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SConfigExplorer, settings);
+    customElements.define(tagName, SConfigExplorer);
 }

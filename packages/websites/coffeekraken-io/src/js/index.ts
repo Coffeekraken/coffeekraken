@@ -8,15 +8,15 @@ import __SConfigExplorer, {
     webcomponent as __SConfigExplorerWebcomponent,
 } from '@coffeekraken/s-config-explorer-component';
 import __SSidePanel, { webcomponent as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
-import { webcomponent as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
-import { webcomponent as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
-import { webcomponent as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
+import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
+import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
+import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
-import { webcomponent as __DocNavComponent } from './components/docNav';
-import { webcomponent as __VersionSelector } from './components/VersionSelector';
-import { webcomponent as __CkSettingsWebcomponent } from './components/CkSettings';
+import { define as __DocNavComponent } from './components/docNav';
+import { define as __VersionSelector } from './components/VersionSelector';
+import { define as __CkSettingsWebcomponent } from './components/CkSettings';
 
 import { register as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 

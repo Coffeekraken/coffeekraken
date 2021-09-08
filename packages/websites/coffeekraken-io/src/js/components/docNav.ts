@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SComponentUtils, { SLitElement } from '@coffeekraken/s-lit-component';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
@@ -14,7 +14,7 @@ import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
 
 import { loadDocmap, setState, getState } from '../state/state';
 
-export default class DocNav extends SLitElement {
+export default class DocNav extends __SLitComponent {
     maxItems = 10;
 
     @property()
@@ -37,9 +37,11 @@ export default class DocNav extends SLitElement {
     _striptags = __striptags;
 
     constructor() {
-        super();
-
-        console.log('Hello');
+        super({
+            sLitComponent: {
+                shadowDom: false,
+            },
+        });
 
         (async () => {
             const docmapJson = await loadDocmap();
@@ -245,9 +247,6 @@ export default class DocNav extends SLitElement {
         if (!state.docList) return;
         this._saved = state.docList;
     }
-    createRenderRoot() {
-        return this;
-    }
     _renderExampleTimeout;
     _renderExample = false;
     render() {
@@ -435,8 +434,9 @@ export default class DocNav extends SLitElement {
     }
 }
 
-export function webcomponent(tagName = 'doc-nav') {
+export function define(props: any = {}, tagName = 'doc-nav') {
     __SComponentUtils.setDefaultProps({
+        ...props,
         mountWhen: 'directly',
     });
     customElements.define(tagName, DocNav);

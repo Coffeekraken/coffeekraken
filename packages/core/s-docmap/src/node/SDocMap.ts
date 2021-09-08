@@ -1,3 +1,4 @@
+import __SLog from '@coffeekraken/s-log';
 import __SClass from '@coffeekraken/s-class';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SGlob from '@coffeekraken/s-glob';
@@ -334,9 +335,10 @@ class SDocMap extends __SClass implements ISDocMap {
                     } else if (__fs.existsSync(potentialRootPackagePath)) {
                         currentPathDocmapJsonPath = potentialRootPackagePath;
                     } else {
-                        throw new Error(
-                            `<red>[read]</red> Sorry but the references docmap path/package "<yellow>${packageNameOrPath}</yellow>" does not exists`,
-                        );
+                        emit('log', {
+                            type: __SLog.WARN,
+                            value: `<red>[read]</red> Sorry but the references docmap path/package "<yellow>${packageNameOrPath}</yellow>" does not exists`,
+                        });
                     }
 
                     if (!currentPathDocmapJsonPath) return;
@@ -345,9 +347,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     const packageJsonPath = `${extendsRootPath}/package.json`;
                     if (!__fs.existsSync(packageJsonPath)) {
-                        throw new Error(
-                            `<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`,
-                        );
+                        emit('log', {
+                            type: __SLog.WARN,
+                            value: `<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`,
+                        });
                     }
 
                     const currentPackageJson = __readJsonSync(packageJsonPath);

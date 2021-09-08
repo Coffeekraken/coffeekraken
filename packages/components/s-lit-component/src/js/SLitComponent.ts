@@ -162,7 +162,6 @@ export default class SLitComponent extends LitElement {
 
         // set each props on the node
         Object.keys(this.componentUtils.props).forEach((prop) => {
-            // _updateProp(prop, this[prop]);
             this[prop] = this.componentUtils.props[prop];
         });
 

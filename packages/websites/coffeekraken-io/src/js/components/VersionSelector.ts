@@ -2,10 +2,11 @@
 
 import __SRequest from '@coffeekraken/s-request';
 import { html, LitElement, property } from 'lit-element';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { loadDocmap, getCurrentVersion, setState } from '../state/state';
 
-export default class VersionSelector extends LitElement {
+export default class VersionSelector extends __SLitComponent {
     @property()
     _currentVersion;
 
@@ -13,15 +14,16 @@ export default class VersionSelector extends LitElement {
     _versions = [];
 
     constructor() {
-        super();
+        super({
+            sLitComponent: {
+                shadowDom: false,
+            },
+        });
         (async () => {
             const docmapJson = await loadDocmap();
             this._versions = docmapJson.snapshots || [];
             this._currentVersion = await getCurrentVersion();
         })();
-    }
-    createRenderRoot() {
-        return this;
     }
     _change(e) {
         setTimeout(() => {
@@ -52,6 +54,7 @@ export default class VersionSelector extends LitElement {
     }
 }
 
-export function webcomponent(tagName = 'version-selector') {
+export function define(props: any = {}, tagName = 'version-selector') {
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, VersionSelector);
 }

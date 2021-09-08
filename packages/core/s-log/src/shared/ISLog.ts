@@ -30,6 +30,9 @@ export default interface ISLog {
     time: boolean;
     clear: boolean;
     temp: boolean;
-    type: string;
+    timestamp: number;
+    type: 'log' | 'info' | 'warn' | 'error' | 'verbose' | 'child_process';
+    as: string;
     value: any;
+    active: boolean;
 }

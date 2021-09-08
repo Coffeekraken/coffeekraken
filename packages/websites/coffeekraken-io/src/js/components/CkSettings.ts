@@ -2,11 +2,12 @@
 
 import __SRequest from '@coffeekraken/s-request';
 import { html, LitElement, property, query, queryAsync } from 'lit-element';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
 import { loadDocmap, getCurrentVersion, setState, getState } from '../state/state';
 
-export default class CkSettings extends LitElement {
+export default class CkSettings extends __SLitComponent {
     _settings = {
         darkMode: true,
         colors: {
@@ -22,7 +23,11 @@ export default class CkSettings extends LitElement {
     _$accentColorPicker;
 
     constructor() {
-        super();
+        super({
+            sLitComponent: {
+                shadowDom: false,
+            },
+        });
         (async () => {
             this._currentVersion = await getCurrentVersion();
         })();
@@ -69,10 +74,6 @@ export default class CkSettings extends LitElement {
             document.body.classList.remove('s-theme--dark');
         }
         this._saveState();
-    }
-
-    createRenderRoot() {
-        return this;
     }
     render() {
         return html`
@@ -182,6 +183,7 @@ export default class CkSettings extends LitElement {
     }
 }
 
-export function webcomponent(tagName = 'ck-settings') {
+export function define(props: any = {}, tagName = 'ck-settings') {
+    __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, CkSettings);
 }

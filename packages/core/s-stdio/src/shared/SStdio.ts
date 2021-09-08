@@ -10,7 +10,7 @@ import __childProcess from 'child_process';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 
-import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import __SLog, { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -55,6 +55,14 @@ export interface ISStdioLogFn {
 export interface ISStdio extends ISClass {
     sources: ISEventEmitter[];
     log: ISStdioLogFn;
+}
+
+export interface ISStdioTypes {
+    LOG: number;
+    INFO: number;
+    WARN: number;
+    ERROR: number;
+    VERBOSE: number;
 }
 
 /**
@@ -301,18 +309,7 @@ class SStdio extends __SClass implements ISStdio {
                         spaceBetween: 0,
                         spaceAround: 0,
                         globalEvents: true,
-                        events: [
-                            'log',
-                            '*.log',
-                            'warn',
-                            '*.warn',
-                            'error',
-                            '*.error',
-                            'reject',
-                            '*.reject',
-                            // 'resolve',
-                            // '*.resolve'
-                        ],
+                        events: ['log', '*.log', 'warn', '*.warn', 'error', '*.error', 'reject', '*.reject'],
                         mapTypesToEvents: {
                             heading: [],
                             error: ['error', '*.error', 'reject', '*.reject', 'cancel', '*.cancel'],
@@ -426,27 +423,27 @@ class SStdio extends __SClass implements ISStdio {
         });
 
         source.on(
-            (set.events || []).join(','),
+            'log',
             (data, metas) => {
                 if (data === undefined || data === null) return;
-                // handle the type depending on the passed stack
-                const types = Object.keys(set.mapTypesToEvents);
-                for (let i = 0; i < types.length; i++) {
-                    const stacks = set.mapTypesToEvents[types[i]];
-                    const stacksGlob = Array.isArray(stacks) && stacks.length ? `*(${stacks.join('|')})` : stacks;
-                    // @ts-ignore
-                    if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
-                        if (typeof data !== 'object') {
-                            data = {
-                                type: types[i],
-                                value: data,
-                            };
-                        } else if (!data.type) {
-                            data.type = types[i];
-                        }
-                        break;
-                    }
-                }
+                // // handle the type depending on the passed stack
+                // const types = Object.keys(set.mapTypesToEvents);
+                // for (let i = 0; i < types.length; i++) {
+                //     const stacks = set.mapTypesToEvents[types[i]];
+                //     const stacksGlob = Array.isArray(stacks) && stacks.length ? `*(${stacks.join('|')})` : stacks;
+                //     // @ts-ignore
+                //     if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
+                //         if (typeof data !== 'object') {
+                //             data = {
+                //                 type: types[i],
+                //                 value: data,
+                //             };
+                //         } else if (!data.type) {
+                //             data.type = types[i];
+                //         }
+                //         break;
+                //     }
+                // }
 
                 // save metas into logObj
                 data.metas = metas;
@@ -477,10 +474,9 @@ class SStdio extends __SClass implements ISStdio {
     // _isCleared = true;
     log(...logObj: ISLog[]) {
         for (let i = 0; i < logObj.length; i++) {
-            let log = <ISLog>__deepMerge(this.stdioSettings.defaultLogObj, logObj[i]);
+            let log = <ISLog>logObj[i];
 
-            // filter by type
-            if (log.type && this.stdioSettings.types.indexOf(log.type.toLowerCase()) === -1) continue;
+            if (!log.active) continue;
 
             // put in buffer if not displayed
             if (!this.isDisplayed() || this._isClearing) {
@@ -527,11 +523,11 @@ class SStdio extends __SClass implements ISStdio {
 
             // get the correct component to pass to the _log method
             const componentObj = (<any>this).constructor.registeredComponents[this.constructor.name][
-                log.type || 'default'
+                log.as || 'default'
             ];
             if (!componentObj)
                 throw new Error(
-                    `Sorry but the requested "<yellow>${log.type || 'default'}</yellow>" in the "<cyan>${
+                    `Sorry but the requested "<yellow>${log.as || 'default'}</yellow>" in the "<cyan>${
                         this.constructor.name
                     }</cyan>" stdio class does not exists...`,
                 );

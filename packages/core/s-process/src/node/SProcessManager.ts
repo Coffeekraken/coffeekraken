@@ -140,7 +140,8 @@ class SProcessManager extends __SEventEmitter {
         this.pipe(processManagerProcess, {
             // prefixEvent: id,
             exclude: [],
-            processor(data) {
+            processor(data, metas) {
+                if (metas.event !== 'log') return data;
                 data.decorators = true;
                 return data;
             },

@@ -1,3 +1,4 @@
+import __SLog from '@coffeekraken/s-log';
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
 import __SPromise from '@coffeekraken/s-promise';
@@ -99,7 +100,7 @@ export default class SFrontendServer extends __SClass {
                                 `<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${modulePath}</cyan>"`,
                             );
                         }
-                        await module.default(express, frontendServerConfig);
+                        await pipe(module.default(express, frontendServerConfig));
                     }
                 }
 
@@ -198,13 +199,13 @@ export default class SFrontendServer extends __SClass {
                         value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
                     });
                     emit('log', {
-                        type: 'detail',
-                        group: `s-frontend-server-${this.metas.id}`,
+                        type: __SLog.VERBOSE,
+                        // group: `s-frontend-server-${this.metas.id}`,
                         value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
                     });
                     emit('log', {
-                        type: 'detail',
-                        group: `s-frontend-server-${this.metas.id}`,
+                        type: __SLog.VERBOSE,
+                        // group: `s-frontend-server-${this.metas.id}`,
                         value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
                     });
                 });

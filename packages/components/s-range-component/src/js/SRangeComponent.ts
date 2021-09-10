@@ -153,7 +153,7 @@ export default class SRange extends __SLitComponent {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export function webcomponent(props: Partial<ISRangeComponentProps> = {}, tagName = 's-range') {
+export function define(props: Partial<ISRangeComponentProps> = {}, tagName = 's-range') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SRange);
 }

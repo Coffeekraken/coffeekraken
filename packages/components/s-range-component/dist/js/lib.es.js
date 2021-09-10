@@ -187,9 +187,9 @@ class SRange extends __SLitComponent {
         `;
   }
 }
-function webcomponent(props = {}, tagName = "s-range") {
+function define(props = {}, tagName = "s-range") {
   __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SRange);
 }
 export default SRange;
-export {webcomponent};
+export {define};

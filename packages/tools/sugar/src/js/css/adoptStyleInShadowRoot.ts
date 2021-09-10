@@ -52,7 +52,7 @@ export default async function adoptStyleInShadowRoot(
                 return;
             }
 
-            // 2$shadowRoot?.appendChild($link.cloneNode());
+            $shadowRoot?.appendChild($link.cloneNode());
 
             // avoid processing multiple time same stylesheet
             // @ts-ignore

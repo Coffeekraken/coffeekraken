@@ -21,7 +21,7 @@
                 </a>
                 @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->tree->documentation])
                 @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->custom->styleguide->tree->styleguide])
-                <a class="__main-link s-px:50 s-typo:bold" href="/doc/api" title="API">
+                <a class="__main-link s-pr:50 s-typo:bold" href="/doc/api" title="API">
                     <span>API</span>
                 </a>
 
@@ -32,7 +32,7 @@
         
 
     <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
-        <ck-settings></ck-settings> 
+        <ck-settings mount-when="inViewport"></ck-settings> 
     </s-side-panel>
 
 </header>

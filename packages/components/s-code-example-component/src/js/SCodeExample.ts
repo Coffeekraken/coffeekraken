@@ -107,7 +107,9 @@ export default class SCodeExample extends __SLitComponent {
         if (this.active) {
             this.setActiveTab(this.active);
         } else {
-            this.setActiveTab(this._items[0].id);
+            if (this._items[0]) {
+                this.setActiveTab(this._items[0].id);
+            }
         }
 
         await __wait(500);
@@ -215,7 +217,7 @@ export default class SCodeExample extends __SLitComponent {
     }
 }
 
-export function webcomponent(props: Partial<ISCodeExampleComponentProps> = {}, tagName = 's-code-example') {
+export function define(props: Partial<ISCodeExampleComponentProps> = {}, tagName = 's-code-example') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SCodeExample);
 }

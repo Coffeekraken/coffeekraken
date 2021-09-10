@@ -30,13 +30,16 @@ export default class SColorPicker extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                sLitComponent: {
+                sLitComponent: {},
+                sComponentUtils: {
                     interface: __SColorPickerComponentInterface,
                 },
             }),
         );
     }
     firstUpdated() {
+        console.log(this.props);
+
         const pickr = __Pickr.create({
             el: this.shadowRoot?.querySelector('.s-color-picker__preview'),
             theme: 'nano', // or 'monolith', or 'nano'

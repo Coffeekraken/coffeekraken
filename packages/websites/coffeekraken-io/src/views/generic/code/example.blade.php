@@ -1,11 +1,13 @@
 <s-code-example>
     @foreach($examples as $k => $example)
-        <template lang="{{ $example->language }}">
+
+        <template lang="{{ $example->language or $k }}">
 @if ($lines)
-{!! implode(PHP_EOL, array_slice(explode(PHP_EOL, $example->code), 0, $lines)) !!}
-{!! $example->language == 'html' ? '<!-- more example(s) bellow -->' : '// more example(s) bellow' !!}
+{!! implode(PHP_EOL, array_slice(explode(PHP_EOL, $example->code or $example), 0, $lines)) !!}
+{!! ($example->language or $example) == 'html' ? '<!-- more example(s) bellow -->' : '// more example(s) bellow' !!}
+{!! $example->code or $example !!}
 @else
-{!! $example->code !!}
+{!! $example->code or $example !!}
 @endif
         </template>
     @endforeach

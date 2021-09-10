@@ -36,7 +36,7 @@ export class SComponentDefaultInterface extends __SInterface {
         },
         defaultStyle: {
             type: 'Boolean',
-            default: false,
+            default: true,
             physical: true,
         },
     };
@@ -351,7 +351,7 @@ export default class SComponent extends __SClass {
         if (this.constructor._injectedStyles.indexOf(id) !== -1) return;
         // @ts-ignore
         this.constructor._injectedStyles.push(id);
-        __injectStyle(css);
+        __injectStyle(css, id);
     }
 
     /**

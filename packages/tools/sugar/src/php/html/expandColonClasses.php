@@ -103,8 +103,8 @@ function expandColonClasses($html) {
     }
 
     // restore do not touch tags
-    preg_match('/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/s', $html, $restoreTagCode);
-    preg_match('/\[sExpandColonClassesTagTemplate:[0-9]{1,999}\]/s', $html, $restoreTagTemplate);
+    preg_match('/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/ms', $html, $restoreTagCode);
+    preg_match('/\[sExpandColonClassesTagTemplate\:[0-9]{1,999}\]/ms', $html, $restoreTagTemplate);
     foreach($restoreTagCode as $idx => $tag) {
         $html = str_replace($tag, $doNotTouchTagCode[$idx], $html);
     }

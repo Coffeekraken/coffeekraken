@@ -45,8 +45,11 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
           width: 100%;
-          cursor: pointer;
           font-size: sugar.scalable(1rem);
+
+          > * {
+            cursor: pointer;
+          }
     `);
     }
 

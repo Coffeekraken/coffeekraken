@@ -1,7 +1,8 @@
 // @ts-nocheck
 
 import __SRequest from '@coffeekraken/s-request';
-import { html, LitElement, property } from 'lit-element';
+import { html } from 'lit';
+import { property } from 'lit/decorators.js';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { loadDocmap, getCurrentVersion, setState } from '../state/state';

@@ -24,6 +24,7 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
     const cssArray = [
         '@sugar.ui.avatar.classes;',
         '@sugar.ui.button.classes;',
+        '@sugar.ui.checkbox.classes;',
         '@sugar.ui.blockquote.classes;',
         '@sugar.ui.input.classes;',
         '@sugar.ui.label.classes;',
@@ -32,6 +33,7 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
         '@sugar.ui.tabs.classes;',
         '@sugar.ui.badge.classes;',
         '@sugar.ui.navbar.classes;',
+        '@sugar.ui.radio.classes;',
         '@sugar.ui.range.classes;',
         '@sugar.ui.select.classes;',
         '@sugar.ui.switch.classes;',

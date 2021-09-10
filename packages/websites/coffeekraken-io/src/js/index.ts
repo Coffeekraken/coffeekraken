@@ -1,13 +1,10 @@
-import '@coffeekraken/s-inline-svg-component';
-import '@coffeekraken/s-request-component';
-import __SCodeExampleComponent, {
-    webcomponent as __SCodeExampleWebcomponent,
-} from '@coffeekraken/s-code-example-component';
-import __SActivateComponent, { webcomponent as __SActivateWebcomponent } from '@coffeekraken/s-activate-component';
-import __SConfigExplorer, {
-    webcomponent as __SConfigExplorerWebcomponent,
-} from '@coffeekraken/s-config-explorer-component';
-import __SSidePanel, { webcomponent as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
+// import '@coffeekraken/s-inline-svg-component';
+// import '@coffeekraken/s-request-component';
+import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
+// import {
+//     define as __SConfigExplorerWebcomponent,
+// } from '@coffeekraken/s-config-explorer-component';
+import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
@@ -20,9 +17,6 @@ import { define as __CkSettingsWebcomponent } from './components/CkSettings';
 
 import { register as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 
-// generic
-// import "./generic/docShortcut";
-
 // internal components
 __DocNavComponent();
 __VersionSelector();
@@ -30,22 +24,15 @@ __CkSettingsWebcomponent();
 
 __SLitComponent.setDefaultProps('*', {
     mountWhen: 'inViewport',
-    // mountWhen: 'directly',
     defaultStyle: true,
 });
-// __SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
-//   mountWhen: 'direct'
-// });
-__SLitComponent.setDefaultProps('s-code-example', {
-    toolbarPosition: 'nav',
-    defaultStyleClasses: {
-        main: 's-tabs',
-    },
+__SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
+    mountWhen: 'direct',
 });
 
 // webcomponents
 __SCodeExampleWebcomponent();
-__SConfigExplorerWebcomponent();
+// __SConfigExplorerWebcomponent();
 __SSidePanelWebcomponent();
 __SColorPickerWebcomponent();
 __SDatePickerWebcomponent();
@@ -64,12 +51,12 @@ __smoothScroll({
 });
 __linksStateAttributes();
 
-// document.addEventListener('scroll', (e) => {
-//     if (document.body.scrollTop >= 10) {
-//         document.body.classList.add('scrolled');
-//     } else {
-//         document.body.classList.remove('scrolled');
-//     }
-// });
+// // document.addEventListener('scroll', (e) => {
+// //     if (document.body.scrollTop >= 10) {
+// //         document.body.classList.add('scrolled');
+// //     } else {
+// //         document.body.classList.remove('scrolled');
+// //     }
+// // });
 
 __expandPleasantCssClassnamesLive();

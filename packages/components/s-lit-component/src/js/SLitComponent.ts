@@ -135,6 +135,7 @@ export default class SLitComponent extends LitElement {
 
         this._settings = __deepMerge(
             {
+                sComponentUtils: {},
                 sLitComponent: {
                     shadowDom: true,
                     get rootNode() {
@@ -148,7 +149,7 @@ export default class SLitComponent extends LitElement {
         this.componentUtils = new __SComponentUtils(this, this.attributes, {
             sComponentUtils: {
                 ...(this._settings.sComponentUtils ?? {}),
-                style: this.constructor.styles.cssText ?? this._settings.sComponentUtils.style ?? '',
+                style: this.constructor.styles?.cssText ?? this._settings.sComponentUtils?.style ?? '',
             },
         });
         this.props = this.componentUtils.props;
@@ -248,9 +249,11 @@ export default class SLitComponent extends LitElement {
         this._shouldUpdate = true;
         // @ts-ignore
         this.requestUpdate();
+        this.componentUtils.injectStyle(this.constructor.styles?.cssText ?? '', this.tagName);
         await __wait();
-        if (this.componentUtils.props.adoptStyle && this.shadowRoot)
+        if (this.componentUtils.props.adoptStyle && this.shadowRoot) {
             await this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);
+        }
         return true;
     }
 }

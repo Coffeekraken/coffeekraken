@@ -435,7 +435,7 @@ export default class DocNav extends __SLitComponent {
 }
 
 export function define(props: any = {}, tagName = 'doc-nav') {
-    __SComponentUtils.setDefaultProps({
+    __SLitComponent.setDefaultProps({
         ...props,
         mountWhen: 'directly',
     });

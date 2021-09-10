@@ -77,13 +77,15 @@ class SColorPicker extends __SLitComponent {
   }
   constructor() {
     super(__deepMerge({
-      sLitComponent: {
+      sLitComponent: {},
+      sComponentUtils: {
         interface: SColorPickerComponentInterface
       }
     }));
   }
   firstUpdated() {
     var _a, _b, _c, _d;
+    console.log(this.props);
     const pickr = __Pickr.create({
       el: (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector(".s-color-picker__preview"),
       theme: "nano",

@@ -21,7 +21,7 @@ import __themeVar from '../../utils/themeVar';
  */
 
 class postcssSugarPluginPrismThemeInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginPrismThemeParams {}
@@ -29,25 +29,26 @@ export interface IPostcssSugarPluginPrismThemeParams {}
 export { postcssSugarPluginPrismThemeInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginPrismThemeParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginPrismThemeParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginPrismThemeParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginPrismThemeParams = {
+        ...params,
+    };
 
-  const vars: string[] = [
-    `
+    const vars: string[] = [
+        `
 .hljs {
     display: block;
     overflow: hidden;
-    padding: sugar.space(30);
+    padding: sugar.theme(ui.code.paddingBlock) sugar.theme(ui.code.paddingInline);
     background-color: sugar.color(ui, surface);
+    border-radius: sugar.theme(ui.code.borderRadius);
     color: sugar.color(ui, surfaceForeground);
     line-height: 1.5 !important;
 
@@ -342,8 +343,8 @@ export default function ({
         color: #D08770;
     }
 }
-  `
-  ];
+  `,
+    ];
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

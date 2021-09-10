@@ -1,4 +1,5 @@
 // @ts-nocheck
+import __uniqid from '../../shared/string/uniqid';
 
 /**
  * @name            injectStyle
@@ -24,11 +25,12 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function injectStyle(style, node = document.head) {
-  const $tag = document.createElement('style');
-  $tag.type = 'text/css';
-  $tag.innerHTML = style;
-  node.appendChild($tag);
-  return $tag;
+function injectStyle(style: string, id: string = `injected-style-${__uniqid()}`, node = document.head) {
+    const $tag = document.createElement('style');
+    $tag.type = 'text/css';
+    $tag.setAttribute('id', `injected-style-${id.toLowerCase()}`);
+    $tag.innerHTML = style;
+    node.appendChild($tag);
+    return $tag;
 }
 export default injectStyle;

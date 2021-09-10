@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SRequest from '@coffeekraken/s-request';
-import { html, LitElement, property, query, queryAsync } from 'lit-element';
+import { html } from 'lit';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
@@ -15,12 +15,6 @@ export default class CkSettings extends __SLitComponent {
             complementary: undefined,
         },
     };
-
-    @queryAsync('#setting-main-color')
-    _$mainColorPicker;
-
-    @queryAsync('#setting-accent-color')
-    _$accentColorPicker;
 
     constructor() {
         super({
@@ -40,8 +34,8 @@ export default class CkSettings extends __SLitComponent {
             $darkRoot = document.querySelector('.s-theme--dark'),
             $theme = <HTMLElement>($darkRoot ?? $root);
 
-        const $mainColorPicker = await this._$mainColorPicker;
-        const $accentColorPicker = await this._$accentColorPicker;
+        const $mainColorPicker = this.querySelector('#setting-main-color');
+        const $accentColorPicker = this.querySelector('#setting-accent-color');
 
         $mainColorPicker.addEventListener('change', (e) => {
             $theme.style.setProperty('--s-theme-color-main-h', e.detail.hsla.h);

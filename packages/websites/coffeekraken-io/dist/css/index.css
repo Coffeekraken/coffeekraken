@@ -1622,6 +1622,7 @@ body {
 --s-theme-ui-default-borderRadius: 6px;
 --s-theme-ui-default-borderWidth: 1px;
 --s-theme-ui-default-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-default-disabledOpacity: 0.3;
 --s-theme-ui-default-defaultColor: accent;
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
@@ -1631,6 +1632,7 @@ body {
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-form-disabledOpacity: 0.3;
 --s-theme-ui-form-focusOutline: true;
 --s-theme-ui-form-defaultColor: accent;
 --s-theme-ui-form-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
@@ -1639,13 +1641,14 @@ body {
 --s-theme-ui-focusOutline-active: true;
 --s-theme-ui-focusOutline-borderWidth: 10px;
 --s-theme-ui-focusOutline-borderRadius: 6px;
---s-theme-ui-focusOutline-transition: box-shadow .2s ease-out;
+--s-theme-ui-focusOutline-transition: all .2s ease-out;
 --s-theme-ui-button-paddingInline: 1.5em;
 --s-theme-ui-button-paddingBlock: 0.75em;
 --s-theme-ui-button-borderRadius: 6px;
 --s-theme-ui-button-borderWidth: 1px;
 --s-theme-ui-button-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-button-focusOutline: true;
+--s-theme-ui-button-disabledOpacity: 0.3;
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
@@ -1655,6 +1658,7 @@ body {
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-focusOutline: true;
+--s-theme-ui-colorPicker-disabledOpacity: 0.3;
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-datePicker-paddingInline: 0.75em;
@@ -1663,6 +1667,7 @@ body {
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-focusOutline: true;
+--s-theme-ui-datePicker-disabledOpacity: 0.3;
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-paddingInline: 0.75em;
@@ -1671,23 +1676,46 @@ body {
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusOutline: true;
+--s-theme-ui-input-disabledOpacity: 0.3;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-defaultStyle: solid;
+--s-theme-ui-radio-paddingInline: 0.75em;
+--s-theme-ui-radio-paddingBlock: 0.375em;
+--s-theme-ui-radio-borderRadius: 0.5em;
+--s-theme-ui-radio-borderWidth: 1px;
+--s-theme-ui-radio-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-radio-focusOutline: true;
+--s-theme-ui-radio-disabledOpacity: 0.3;
+--s-theme-ui-radio-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-radio-defaultStyle: solid;
+--s-theme-ui-checkbox-paddingInline: 0.75em;
+--s-theme-ui-checkbox-paddingBlock: 0.375em;
+--s-theme-ui-checkbox-borderRadius: 0.2em;
+--s-theme-ui-checkbox-borderWidth: 1px;
+--s-theme-ui-checkbox-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-checkbox-focusOutline: true;
+--s-theme-ui-checkbox-disabledOpacity: 0.3;
+--s-theme-ui-checkbox-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-checkbox-defaultStyle: solid;
 --s-theme-ui-range-paddingInline: 0.75em;
 --s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-range-focusOutline: true;
+--s-theme-ui-range-disabledOpacity: 0.3;
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-range-defaultStyle: default;
+--s-theme-ui-range-defaultStyle: solid;
 --s-theme-ui-label-paddingInline: 0.75em;
 --s-theme-ui-label-paddingBlock: 0.375em;
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-label-disabledOpacity: 0.3;
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-label-defaultStyle: inline;
@@ -1697,6 +1725,7 @@ body {
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-select-focusOutline: true;
+--s-theme-ui-select-disabledOpacity: 0.3;
 --s-theme-ui-select-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-select-defaultStyle: default;
@@ -1704,6 +1733,7 @@ body {
 --s-theme-ui-switch-borderWidth: 1px;
 --s-theme-ui-switch-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-switch-focusOutline: true;
+--s-theme-ui-switch-disabledOpacity: 0.3;
 --s-theme-ui-switch-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-switch-defaultStyle: solid;
@@ -2221,7 +2251,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-btn:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -2346,7 +2376,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-btn--gradient:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -2441,7 +2471,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-btn--outline:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -2538,7 +2568,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-btn--text:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -2559,6 +2589,186 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
 .s-btn--block {
         display: block !important;
       }
+/**
+        * @name          Checkbox
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / Forms        /styleguide/forms/checkbox
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to display nice checkbox in your forms
+        * 
+         * @cssClass     s-checkbox           Apply the solid checkbox style
+        * 
+        * @example        html
+         * <!-- solid style -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-solid-1" value="hello 1" />
+            *     <span>Central Factors Architect Benny Douglas DVM</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <input type="checkbox" class="s-checkbox" name="checkbox-style-solid-2" value="hello 2" />
+            *     <span>Product Assurance Consultant Kathy Crona</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <input type="checkbox" class="s-checkbox" name="checkbox-style-solid-3" value="hello 3" />
+            *     <span>Customer Infrastructure Orchestrator Tyler Kirlin</span>
+            *   </label>
+            * </div>
+            * 
+        * 
+        * <!-- Colors -->
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors</h3>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-color-1" value="hello 1" />
+        *     <span>Forward Branding Producer Esther O'Reilly</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:info s-label">
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-color-2" value="hello 2" />
+        *     <span>Investor Paradigm Planner Nathaniel Bahringer</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:error s-label">
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-color-3" value="hello 3" />
+        *     <span>Investor Mobility Specialist Julius Rutherford</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:warning s-label">
+        *     <input type="checkbox" disabled class="s-checkbox" name="checkbox-style-color-4" value="hello 4" />
+        *     <span>Dynamic Accounts Specialist Dwight Leffler</span>
+        *   </label>
+        * </div>
+        * 
+        * <!-- LTR -->
+        * <div class="s-font:30 s-mb:50" dir="rtl">
+        *   <h3 class="s-color:accent s-font:30 s-mb:30">LTR Support</h3>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
+        *     <span>Central Implementation Associate Rafael Bode</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
+        *     <span>Lead Accountability Liaison Hugo Bernhard</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
+        *     <span>Global Research Administrator Donnie Cummings</span>
+        *   </label>
+        * </div>
+        * 
+        * <!-- Scale -->
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:30">Scale</h3>
+        *   <label class="s-mb:30 s-ui:accent s-label s-scale:07">
+        *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
+        *     <span>Regional Data Coordinator Anthony Grant</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
+        *     <span>Lead Solutions Representative Reginald Ernser</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label s-scale:13">
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
+        *     <span>International Operations Engineer Lorenzo Gutmann</span>
+        *   </label>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+        * @name           s-checkbox
+        * @namespace      sugar.css.ui.checkbox
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">solid</s-color>" checkbox
+        * 
+        * @example        html
+        * <input type="checkbox" class="s-checkbox" value="something" name="mycheckboxItem1" />
+        * <input type="checkbox" class="s-checkbox" value="something" name="mycheckboxItem2" />
+        <input type="checkbox" class="s-checkbox" value="something" name="mycheckboxItem3" />
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+.s-checkbox {clip: rect(0 0 0 0);
+        -webkit-clip-path: inset(50%);
+                clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+
+            font-size: calc(1rem * var(--s-scale, 1));
+        }
+.s-checkbox:disabled + * {
+                -webkit-user-select: none;
+                   -moz-user-select: none;
+                    -ms-user-select: none;
+                        user-select: none;
+                cursor: not-allowed;
+                pointer-events: none;
+                opacity: var(--s-theme-ui-checkbox-disabledOpacity, 0.3) !important;
+            }
+.s-checkbox + *:after {
+                content: "";
+                opacity: 0;
+                display: block;
+                position: absolute;
+                --borderWidth: var(--s-theme-ui-checkbox-borderWidth, 1px);
+                top: calc(var(--borderWidth) + 0.3em);
+                left: 0.3em;
+                width: 0.4em;
+                height: 0.4em;
+                border-radius: 0;
+                background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                transition: var(--s-theme-ui-checkbox-transition, 0);
+            }
+label:hover > .s-checkbox:not(:disabled) + *:after,
+            .s-checkbox:hover:not(:disabled) + *:after {
+                opacity: 0.5;
+            }
+.s-checkbox:checked:not(:disabled) + *:after {
+                opacity: 1 !important;
+            }
+.s-checkbox + * {
+                display: inline-block;
+                cursor: pointer;
+                position: relative;
+                --fs: calc(1rem * var(--s-scale, 1));
+                -webkit-padding-start: calc(var(--fs) * 1.6);
+                        padding-inline-start: calc(var(--fs) * 1.6);
+                font-size: calc(1rem * var(--s-scale, 1));
+            }
+.s-checkbox + *:before {
+                    content: "";  
+                    display: block;
+                    width: 1em;
+                    height: 1em;
+                    position: absolute;
+                    top: var(--s-theme-ui-checkbox-borderWidth, 1px);
+                    left: 0;
+                    opacity: 0.5;
+                    border: var(--s-theme-ui-checkbox-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                    background-color: transparent;
+                    border-radius: var(--s-theme-ui-checkbox-borderRadius, 0.2em);
+                    transition: var(--s-theme-ui-checkbox-transition, 0);
+                    box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
+                }
+.s-checkbox:focus:not(:hover):not(:active):not(:disabled) + *:before {
+                box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
+            }
+[dir="rtl"] .s-checkbox + *:before {
+                    left: auto;
+                    right: 0;
+                }
+[dir="rtl"] .s-checkbox + *:after {
+                    left: auto;
+                    right: 0.3em;
+                }
 /**
         * @name           s-blockquote
         * @namespace      sugar.css.ui.blockquote
@@ -2805,7 +3015,7 @@ font-style: var(--s-theme-font-family-quote-font-style, normal);
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-input:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -2878,27 +3088,27 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
             *   <label class="s-label s-mb:30">
-            *       Darrel Lebsack
+            *       Tamara Stokes
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *       Annie Donnelly Sr.
+            *       Mr. Emanuel Haley
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:accent" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *        Katherine Will
+            *        Jenny Jaskolski
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:complementary" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *        Roberto Kshlerin
+            *        Shirley Morar
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:error" />
             *   </label>
             *   <label dir="rtl" class="s-label s-mb:30">
-            *        Richard Sanford
+            *        Nathan Wyman
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input:solid s-width:50 s-ui:accent" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *        Melvin Prosacco
+            *        Tanya Schamberger
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-scale:15 s-ui:accent" />
             *   </label>
             * </div>
@@ -2926,7 +3136,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-input:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -3001,27 +3211,27 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             *   <h3 class="s-color:accent s-font:30 s-mb:20">inline style</h3>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Future Group Liaison Alexander Rau PhD</span>
+            *     <span>Regional Web Executive Lorene Schmitt</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:info s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Global Quality Designer Doyle White</span>
+            *     <span>Legacy Accounts Producer Eva Huels</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:error s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Legacy Interactions Analyst Ted Strosin</span>
+            *     <span>National Research Technician Pam Daugherty</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
-            *     <span>National Creative Associate Olga Reichert</span>
+            *     <span>Dynamic Data Producer Tracy Jacobi</span>
             *   </label>
             *   <label dir="rtl" class="s-mb:30 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Legacy Division Developer Edmond Gleason (RTL)</span>
+            *     <span>Senior Markets Facilitator Brittany Labadie (RTL)</span>
             *   </label>
             *   <label class="s-mb:30 s-scale:15 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Corporate Web Orchestrator Ella Gutkowski (Scaled)</span>
+            *     <span>Central Security Specialist Mildred Carroll (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -3030,27 +3240,27 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             *   <h3 class="s-color:accent s-font:30 s-mb:20">float style</h3>
             *   <label class="s-mb:30 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Central Interactions Consultant Spencer Lind</span>
+            *     <span>Regional Identity Planner Marlon Mayert</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:info s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Senior Integration Developer Hugo Cummerata</span>
+            *     <span>Lead Research Officer Jamie Quigley</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:error s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Investor Assurance Producer Tyrone Waelchi</span>
+            *     <span>District Usability Facilitator Sara Wiegand</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label:float">
             *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
-            *     <span>Customer Response Agent Percy Hilpert</span>
+            *     <span>Dynamic Identity Architect Bryan Jacobson</span>
             *   </label>
             *   <label dir="rtl" class="s-mb:30 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Investor Division Facilitator Grace Bernhard (RTL)</span>
+            *     <span>Internal Configuration Facilitator Gladys Harvey (RTL)</span>
             *   </label>
             *   <label class="s-mb:30 s-scale:15 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>District Response Orchestrator Vicky Bosco (Scaled)</span>
+            *     <span>Principal Operations Executive Deanna Koelpin (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -3075,8 +3285,12 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
 .s-label {width: 100%;
-          cursor: pointer;
           font-size: calc(1rem * var(--s-scale, 1));
+      }
+.s-label > * {
+            cursor: pointer;
+          }
+.s-label{
     
 
     
@@ -3084,7 +3298,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
                   display: flex;
                   align-items: center;
                   justify-content: space-between;
-      }
+}
 .s-label > input:first-child,
                   .s-label > select:first-child,
                   .s-label > textarea:first-child {
@@ -3119,8 +3333,12 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
 .s-label--float {width: 100%;
-          cursor: pointer;
           font-size: calc(1rem * var(--s-scale, 1));
+      }
+.s-label--float > * {
+            cursor: pointer;
+          }
+.s-label--float{
     
 
     
@@ -3132,7 +3350,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
                   --delta: 0.1em;
                   --top: var(--s-theme-ui-form-paddingBlock, 0.375em);
                   --left: var(--s-theme-ui-form-paddingInline, 0.75em);
-      }
+}
 .s-label--float > *:not(input):not(textarea):not(select) {
                     top: calc(var(--top) + 0.6em + var(--delta));
                     left: 0;
@@ -3307,9 +3525,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">ul style</h3>
             *   <ul class="s-list:ul ">
-            *     <li>Future Quality Representative Kayla Kertzmann</li>
-            *     <li>Central Web Engineer Jodi Windler</li>
-            *     <li>Dynamic Branding Associate Bernadette McDermott</li>
+            *     <li>Dynamic Division Orchestrator Levi Barton</li>
+            *     <li>District Paradigm Analyst Winston Stanton</li>
+            *     <li>Senior Integration Designer Archie Kuhn</li>
             *   </ul>
             * </div>
             * 
@@ -3317,9 +3535,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">ol style</h3>
             *   <ul class="s-list:ol s-ui:accent s-scale:15">
-            *     <li>Internal Assurance Facilitator Sherman Becker</li>
-            *     <li>Lead Infrastructure Architect Eileen Mosciski</li>
-            *     <li>Regional Metrics Representative Clifford Williamson</li>
+            *     <li>International Configuration Specialist Sheila Haag</li>
+            *     <li>Future Intranet Supervisor Alicia Nader</li>
+            *     <li>District Usability Representative Rosa Roberts</li>
             *   </ul>
             * </div>
             * 
@@ -3327,9 +3545,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">icon style</h3>
             *   <ul class="s-list:icon ">
-            *     <li><i class="s-icon:user"></i>Dynamic Usability Facilitator Casey Schuster</li>
-            *     <li><i class="s-icon:heart s-ui:accent"></i>Customer Tactics Associate Gwendolyn Wyman</li>
-            *     <li><i class="s-icon:fire s-ui:error"></i>District Interactions Agent Roosevelt Schmitt DDS</li>
+            *     <li><i class="s-icon:user"></i>Forward Accountability Facilitator Ms. Sara Wiza</li>
+            *     <li><i class="s-icon:heart s-ui:accent"></i>Direct Group Supervisor Brandy Wiegand Jr.</li>
+            *     <li><i class="s-icon:fire s-ui:error"></i>Direct Solutions Consultant Mr. Jacob Hartmann</li>
             *   </ul>
             * </div>
             * 
@@ -3338,25 +3556,25 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * <div class="s-mb:50" dir="rtl">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">RTL</h3>
             *   <ul class="s-list:ul s-ui:accent s-mb:30">
-            *     <li>National Intranet Specialist Alexandra O'Connell</li>
-            *     <li>International Response Manager Carrie Kessler</li>
+            *     <li>Future Applications Agent Katherine Sporer</li>
+            *     <li>Legacy Configuration Liaison Claude Effertz</li>
             *   </ul>
             *   <ul class="s-list:ol s-ui:accent s-mb:30">
-            *     <li>Chief Infrastructure Associate Marvin Bosco</li>
-            *     <li>Internal Accountability Orchestrator Jennifer Robel</li>
+            *     <li>Direct Accounts Facilitator Joanna Padberg</li>
+            *     <li>Forward Configuration Analyst Rebecca Daugherty</li>
             *   </ul>
             *   <ul class="s-list:icon s-ui:accent s-mb:30">
-            *     <li><i class="s-icon:user"></i> Legacy Accountability Architect Boyd Dibbert PhD</li>
-            *     <li><i class="s-icon:heart s-ui:error"></i> National Tactics Director Charlene Hamill Jr.</li>
+            *     <li><i class="s-icon:user"></i> National Configuration Agent Nina Wilkinson</li>
+            *     <li><i class="s-icon:heart s-ui:error"></i> Investor Research Liaison Wilbur Satterfield</li>
             *   </ul>
             * </div>
         * 
         * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">Colors</h3>
             *   <ul class="s-list s-scale:12 s-ui:accent">
-            *     <li>Central Mobility Coordinator Kenny Skiles</li>
-            *     <li class="s-ui:complementary">Corporate Functionality Administrator Freda Jacobs</li>
-            *     <li class="s-ui:error">Direct Response Designer Marguerite Swaniawski</li>
+            *     <li>Global Security Orchestrator Kathy Sipes</li>
+            *     <li class="s-ui:complementary">Central Research Agent Jimmy Ondricka</li>
+            *     <li class="s-ui:error">Direct Program Assistant Alice Hickle</li>
             *   </ul>
             * </div>
         * 
@@ -3593,9 +3811,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             * <div class="s-font:30 s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
             *   <ul class="s-tabs s-ui:accent">
-            *     <li tabindex="0">Gilbert Zulauf</li>
-            *     <li tabindex="0" active>Derrick Ebert</li>
-            *     <li tabindex="0">Claire Becker</li>
+            *     <li tabindex="0">Gina Price</li>
+            *     <li tabindex="0" active>Claire Wisoky</li>
+            *     <li tabindex="0">Homer Kautzer I</li>
             *   </ul>
             * </div>
             * 
@@ -3604,9 +3822,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Grow</h3>
         *   <ul class="s-tabs:grow">
-        *     <li tabindex="0" active>Mattie Leffler</li>
-        *     <li tabindex="0">Gerald Schoen Jr.</li>
-        *     <li tabindex="0">Belinda Roberts</li>
+        *     <li tabindex="0" active>Horace Morissette MD</li>
+        *     <li tabindex="0">Dexter Ward</li>
+        *     <li tabindex="0">Elizabeth Lakin</li>
         *   </ul>
         * </div>
         * 
@@ -3614,9 +3832,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * <div class="s-font:30 s-mb:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">RTL</h3>
         *   <ul class="s-tabs">
-        *     <li class="s-ui:accent" tabindex="0" active>Nina Stoltenberg</li>
-        *     <li class="s-ui:complementary" tabindex="0">Tasha Kris</li>
-        *     <li tabindex="0">Mrs. Ian Spencer</li>
+        *     <li class="s-ui:accent" tabindex="0" active>Rene Pfeffer</li>
+        *     <li class="s-ui:complementary" tabindex="0">Wilson Tromp</li>
+        *     <li tabindex="0">Pearl Watsica</li>
         *   </ul>
         * </div>
         * 
@@ -3624,9 +3842,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Vertical</h3>
         *   <ul class="s-tabs:vertical s-ui:complementary">
-        *     <li tabindex="0" active>Dustin Volkman</li>
-        *     <li tabindex="0">Tomas Wisoky</li>
-        *     <li tabindex="0">Beulah Sipes Jr.</li>
+        *     <li tabindex="0" active>Fredrick Bailey</li>
+        *     <li tabindex="0">Della Hoppe</li>
+        *     <li tabindex="0">Carol Smith</li>
         *   </ul>
         * </div>
         * 
@@ -3634,9 +3852,9 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Scaled</h3>
         *   <ul class="s-tabs:grow s-scale:13 s-ui:accebt">
-        *     <li tabindex="0" active>Camille Runolfsdottir</li>
-        *     <li tabindex="0">Noah Schowalter</li>
-        *     <li tabindex="0">Shelly Gibson</li>
+        *     <li tabindex="0" active>Seth Gorczany</li>
+        *     <li tabindex="0">Ms. Adrian Runolfsson</li>
+        *     <li tabindex="0">Brett Mante</li>
         *   </ul>
         * </div>
         *
@@ -3665,7 +3883,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-tabs > *:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -3753,7 +3971,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-tabs--grow > *:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -3783,7 +4001,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-tabs > *:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -3865,7 +4083,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
             width: 100%; height: 100%;
             box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
             border-radius: var(--s-theme-ui-focusOutline-borderRadius, 6px);
-            transition: var(--s-theme-ui-focusOutline-transition, box-shadow .2s ease-out);
+            transition: var(--s-theme-ui-focusOutline-transition, all .2s ease-out);
         }
 .s-tabs--vertical > *:focus-visible:not(:hover):not(:active):after {
                 box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
@@ -4131,11 +4349,191 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
             flex-grow: 1 !important;
         }
 /**
-        * @name           s-range--default
+        * @name          Radio
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / Forms        /styleguide/forms/radio
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to display nice radio in your forms
+        * 
+         * @cssClass     s-radio           Apply the solid radio style
+        * 
+        * @example        html
+         * <!-- solid style -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 1" />
+            *     <span>Customer Applications Supervisor Emily Kulas</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 2" />
+            *     <span>International Accountability Analyst Jeff Ankunding</span>
+            *   </label>
+            *   <label class="s-mb:30 s-ui:accent s-label">
+            *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 3" />
+            *     <span>Legacy Marketing Administrator Howard Fritsch</span>
+            *   </label>
+            * </div>
+            * 
+        * 
+        * <!-- Colors -->
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors</h3>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 1" checked="checked" />
+        *     <span>Chief Data Producer Alfredo Keebler</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:info s-label">
+        *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 2" />
+        *     <span>Dynamic Web Producer Gregory Nolan</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:error s-label">
+        *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 3" />
+        *     <span>Global Program Coordinator Grant Rice</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:warning s-label">
+        *     <input type="radio" disabled class="s-radio" name="radio-style-color" value="hello 4" />
+        *     <span>Regional Directives Liaison Tyler Fahey</span>
+        *   </label>
+        * </div>
+        * 
+        * <!-- LTR -->
+        * <div class="s-font:30 s-mb:50" dir="rtl">
+        *   <h3 class="s-color:accent s-font:30 s-mb:30">LTR Support</h3>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 1" checked="checked" />
+        *     <span>Lead Applications Facilitator Sergio Witting</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 2" />
+        *     <span>Customer Intranet Officer Salvador Sporer</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 3" />
+        *     <span>Internal Configuration Manager Antonio Konopelski</span>
+        *   </label>
+        * </div>
+        * 
+        * <!-- Scale -->
+        * <div class="s-font:30 s-mb:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb:30">Scale</h3>
+        *   <label class="s-mb:30 s-ui:accent s-label s-scale:07">
+        *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 1" />
+        *     <span>Chief Security Supervisor Norman Bergstrom</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label">
+        *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 2" checked="checked" />
+        *     <span>Dynamic Interactions Technician Donnie Smith</span>
+        *   </label>
+        *   <label class="s-mb:30 s-ui:accent s-label s-scale:13">
+        *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 3" />
+        *     <span>Principal Quality Coordinator Adrian Brakus</span>
+        *   </label>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+        * @name           s-radio
+        * @namespace      sugar.css.ui.radio
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">solid</s-color>" radio
+        * 
+        * @example        html
+        * <input type="radio" class="s-radio" value="something" name="myRadioItem1" />
+        * <input type="radio" class="s-radio" value="something" name="myRadioItem2" />
+        <input type="radio" class="s-radio" value="something" name="myRadioItem3" />
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+.s-radio {clip: rect(0 0 0 0);
+        -webkit-clip-path: inset(50%);
+                clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+
+            font-size: calc(1rem * var(--s-scale, 1));
+        }
+.s-radio:disabled + * {
+                -webkit-user-select: none;
+                   -moz-user-select: none;
+                    -ms-user-select: none;
+                        user-select: none;
+                cursor: not-allowed;
+                pointer-events: none;
+                opacity: var(--s-theme-ui-radio-disabledOpacity, 0.3) !important;
+            }
+.s-radio + *:after {
+                content: "";
+                opacity: 0;
+                display: block;
+                position: absolute;
+                --borderWidth: var(--s-theme-ui-radio-borderWidth, 1px);
+                top: calc(var(--borderWidth) + 0.3em);
+                left: 0.3em;
+                width: 0.4em;
+                height: 0.4em;
+                border-radius: var(--s-theme-ui-radio-borderRadius, 0.5em);
+                background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                transition: var(--s-theme-ui-radio-transition, 0);
+            }
+label:hover > .s-radio:not(:disabled) + *:after,
+            .s-radio:hover:not(:disabled) + *:after {
+                opacity: 0.5;
+            }
+.s-radio:checked:not(:disabled) + *:after {
+                opacity: 1 !important;
+            }
+.s-radio + * {
+                display: inline-block;
+                cursor: pointer;
+                position: relative;
+                --fs: calc(1rem * var(--s-scale, 1));
+                -webkit-padding-start: calc(var(--fs) * 1.6);
+                        padding-inline-start: calc(var(--fs) * 1.6);
+                font-size: calc(1rem * var(--s-scale, 1));
+            }
+.s-radio + *:before {
+                    content: "";  
+                    display: block;
+                    width: 1em;
+                    height: 1em;
+                    position: absolute;
+                    top: var(--s-theme-ui-radio-borderWidth, 1px);
+                    left: 0;
+                    opacity: 0.5;
+                    border: var(--s-theme-ui-radio-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                    background-color: transparent;
+                    border-radius: var(--s-theme-ui-radio-borderRadius, 0.5em);
+                    transition: var(--s-theme-ui-radio-transition, 0);
+                    box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
+                }
+.s-radio:focus:not(:hover):not(:active):not(:disabled) + *:before {
+                box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
+            }
+[dir="rtl"] .s-radio + *:before {
+                    left: auto;
+                    right: 0;
+                }
+[dir="rtl"] .s-radio + *:after {
+                    left: auto;
+                    right: 0.3em;
+                }
+/**
+        * @name           s-range
         * @namespace      sugar.css.ui.range
         * @type           CssClass
         * 
-        * This class represent a(n) "<s-color="accent">default</s-color>" range
+        * This class represent a(n) "<s-color="accent">solid</s-color>" range
         * 
         * @example        html
         * <input type="range" class="s-range" min="0" max="100" step="10" />
@@ -4143,7 +4541,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-.s-range--default {--track-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-ui-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-main-ui-a, 1));
+.s-range {--track-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-ui-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-main-ui-a, 1));
         --thumb-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
 
         --focus-spread: sugar.theme(ui.range.focusSpread);
@@ -4164,25 +4562,25 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
 
         --ie-bottom-track-color: darken($track-color, $contrast);
         }
-.s-range--default:hover::-webkit-slider-runnable-track, .s-range--default:focus::-webkit-slider-runnable-track {
+.s-range:hover::-webkit-slider-runnable-track, .s-range:focus::-webkit-slider-runnable-track {
                     background: var(--track-color);
                 }
-.s-range--default:hover::-ms-fill-lower, .s-range--default:focus::-ms-fill-lower {
+.s-range:hover::-ms-fill-lower, .s-range:focus::-ms-fill-lower {
                     background: var(--track-color);
                 }
-.s-range--default:hover::-ms-fill-upper, .s-range--default:focus::-ms-fill-upper {
+.s-range:hover::-ms-fill-upper, .s-range:focus::-ms-fill-upper {
                     background: var(--track-color);
                 }
-.s-range--default:hover::-webkit-slider-thumb, .s-range--default:focus::-webkit-slider-thumb {
+.s-range:hover::-webkit-slider-thumb, .s-range:focus::-webkit-slider-thumb {
                      box-shadow: 0 0 0 var(--focus-spread) var(--thumb-border-color);
                 }
-.s-range--default:hover::-moz-range-thumb, .s-range--default:focus::-moz-range-thumb {
+.s-range:hover::-moz-range-thumb, .s-range:focus::-moz-range-thumb {
                      box-shadow: 0 0 0 var(--focus-spread) var(--thumb-border-color);
                 }
-.s-range--default:hover::-ms-thumb, .s-range--default:focus::-ms-thumb {
+.s-range:hover::-ms-thumb, .s-range:focus::-ms-thumb {
                      box-shadow: 0 0 0 var(--focus-spread) var(--thumb-border-color);
                 }
-.s-range--default::-webkit-slider-thumb {
+.s-range::-webkit-slider-thumb {
                 
         background: var(--thumb-color);
         border: var(--thumb-border-width) solid var(--thumb-border-color);
@@ -4190,7 +4588,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
         box-shadow: 0 0 0 0 var(--thumb-border-color);
     
             }
-.s-range--default::-moz-range-thumb {
+.s-range::-moz-range-thumb {
                 
         background: var(--thumb-color);
         border: var(--thumb-border-width) solid var(--thumb-border-color);
@@ -4198,7 +4596,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
         box-shadow: 0 0 0 0 var(--thumb-border-color);
     
             }
-.s-range--default::-ms-thumb {
+.s-range::-ms-thumb {
                 
         background: var(--thumb-color);
         border: var(--thumb-border-width) solid var(--thumb-border-color);
@@ -4206,7 +4604,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
         box-shadow: 0 0 0 0 var(--thumb-border-color);
     
             }
-.s-range--default::-webkit-slider-runnable-track {
+.s-range::-webkit-slider-runnable-track {
                 
         -webkit-transition: var(--s-theme-ui-range-transition, 0);
                 
@@ -4216,7 +4614,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: var(--track-radius);
             }
-.s-range--default::-moz-range-track {
+.s-range::-moz-range-track {
                 
         -moz-transition: var(--s-theme-ui-range-transition, 0);
                 
@@ -4226,7 +4624,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: var(--track-radius);
             }
-.s-range--default::-ms-track {
+.s-range::-ms-track {
                 
         -ms-transition: var(--s-theme-ui-range-transition, 0);
                 
@@ -4237,37 +4635,37 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
                 border-width: calc(var(--thumb-height) / 2) 0;
                 color: transparent;
             }
-.s-range--default::-ms-fill-lower {
+.s-range::-ms-fill-lower {
                 background: var(--ie-bottom-track-color);
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
             }
-.s-range--default::-ms-fill-upper {
+.s-range::-ms-fill-upper {
                 background: var(--track-color);
                 border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
             }
-.s-range--default{
+.s-range{
     
 
             margin: calc(var(--thumb-height) / 2) 0;
             -webkit-appearance: none;
             background: transparent;
 }
-.s-range--default::-moz-focus-outer {
+.s-range::-moz-focus-outer {
                 border: 0;
             }
-.s-range--default:focus {
+.s-range:focus {
                 outline: 0;
             }
-.s-range--default::-webkit-slider-runnable-track {
+.s-range::-webkit-slider-runnable-track {
                 
         height: var(--track-height);
         width: 100%;
         cursor: pointer;
     
             }
-.s-range--default::-webkit-slider-thumb {
+.s-range::-webkit-slider-thumb {
                 
         box-sizing: border-box;
         height: var(--thumb-height);
@@ -4277,7 +4675,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
                 -webkit-appearance: none;
                 margin-top: calc( ((var(--track-border-width) * -1 * 2 + var(--track-height)) / 2 - var(--thumb-height) / 2));
             }
-.s-range--default::-moz-range-track {
+.s-range::-moz-range-track {
                 
         height: var(--track-height);
         width: 100%;
@@ -4285,7 +4683,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
     
                 height: calc(var(--track-height) / 2);
             }
-.s-range--default::-moz-range-thumb {
+.s-range::-moz-range-thumb {
                 
         box-sizing: border-box;
         height: var(--thumb-height);
@@ -4293,18 +4691,18 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
         cursor: pointer;
     
             }
-.s-range--default::-ms-track {
+.s-range::-ms-track {
                 
         height: var(--track-height);
         width: 100%;
         cursor: pointer;
     
             }
-.s-range--default::-ms-fill-lower {
+.s-range::-ms-fill-lower {
             }
-.s-range--default::-ms-fill-upper {
+.s-range::-ms-fill-upper {
             }
-.s-range--default::-ms-thumb {
+.s-range::-ms-thumb {
                 
         box-sizing: border-box;
         height: var(--thumb-height);
@@ -4313,12 +4711,12 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foregroun
     
                 margin-top: calc(var(--.track-height) / 4);
             }
-.s-range--default:disabled::-webkit-slider-thumb,
-                .s-range--default:disabled::-moz-range-thumb,
-                .s-range--default:disabled::-ms-thumb,
-                .s-range--default:disabled::-webkit-slider-runnable-track,
-                .s-range--default:disabled::-ms-fill-lower,
-                .s-range--default:disabled::-ms-fill-upper {
+.s-range:disabled::-webkit-slider-thumb,
+                .s-range:disabled::-moz-range-thumb,
+                .s-range:disabled::-ms-thumb,
+                .s-range:disabled::-webkit-slider-runnable-track,
+                .s-range:disabled::-ms-fill-lower,
+                .s-range:disabled::-ms-fill-upper {
                 cursor: not-allowed;
                 }
 /**
@@ -4417,19 +4815,19 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
             * <div class="s-font:30 s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
             *   <label class="s-mb:30 s-label">
-            *     Dynamic Group Supervisor Hazel Gibson
-            *     <input type="checkbox" checked class="s-switch" />
+            *     Future Group Analyst Miss Donald Wunsch
+            *     <input type="checkbox"  class="s-switch" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Future Data Manager Melody Weber
-            *     <input type="checkbox"  class="s-switch s-ui:accent" />
+            *     Global Response Producer Lori Balistreri
+            *     <input type="checkbox" checked class="s-switch s-ui:accent" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     District Mobility Specialist Mrs. Joanna Cartwright
-            *     <input type="checkbox"  class="s-switch s-ui:complementary" />
+            *     Future Usability Producer Alan Davis
+            *     <input type="checkbox" checked class="s-switch s-ui:complementary" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Dynamic Paradigm Liaison Ms. Francis Ritchie
+            *     Product Security Director Catherine Emard
             *     <input type="checkbox"  class="s-switch s-ui:error" />
             *   </label>
             * </div>
@@ -4440,15 +4838,15 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-text-spin
         * <div class="s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Scales</h3>
         *   <label class="s-mb:30 s-label s-scale:05">
-        *     Human Brand Director Lorena Funk
+        *     National Paradigm Coordinator Christine Schroeder Sr.
         *     <input type="checkbox" checked class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mb:30 s-label s-scale:10">
-        *     Dynamic Research Producer Ricky Crist
+        *     Lead Quality Analyst Rachael Muller DVM
         *     <input type="checkbox" checked class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mb:30 s-label s-scale:15">
-        *     Regional Security Associate Joy Barton
+        *     Lead Tactics Strategist Mathew Casper
         *     <input type="checkbox" checked class="s-switch s-ui:accent" />
         *   </label>
         * </div>
@@ -5044,7 +5442,7 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         *   <span class="s-tooltip-container:active">
         *       <a class="s-btn s-mr:20">Hello</a>
         *       <div class="s-tooltip:right s-ui:accent">
-        *           Future Optimization Architect Gene Jaskolski
+        *           Customer Factors Officer Charlene Kilback
         *       </div>
         *   </span>
         * </div>
@@ -5054,25 +5452,25 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip">
-        *           Corporate Integration Facilitator Nichole Torp
+        *           District Marketing Manager Meredith Conn I
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip:right s-ui:accent">
-        *           Product Web Coordinator Geneva Lind
+        *           Forward Communications Facilitator Cary McCullough
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip:bottom s-ui:complementary">
-        *           Central Marketing Coordinator Sadie Smith
+        *           Future Implementation Specialist Ross Goodwin
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip:left s-ui:error">
-        *           Future Research Technician Alexander Hilpert
+        *           Central Branding Engineer Todd McKenzie
         *       </div>
         *   </span>
         * </div>
@@ -5082,25 +5480,25 @@ color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-active-fo
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip s-ui:accent">
-        *           Principal Implementation Consultant Bradford Ernser
+        *           Corporate Marketing Officer Ricardo Krajcik
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip s-ui:complementary">
-        *           Senior Group Planner Jim Lockman I
+        *           Human Communications Consultant Joanne O'Hara DVM
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip s-ui:error">
-        *           Forward Communications Engineer Jimmie Ortiz
+        *           Direct Paradigm Manager Pete Berge
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20">Hover me!</a>
         *       <div class="s-tooltip s-ui:info">
-        *           Customer Usability Agent Chris Champlin
+        *           Dynamic Web Specialist Everett Daniel
         *       </div>
         *   </span>
         * </div>
@@ -43857,10 +44255,10 @@ right: 0;
  * @cssClass      s-font:code       Apply the code font on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mb:30">Forward Operations Executive Steven Pouros</h1>
- * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mb:30">Chief Applications Manager Katie Predovic</h1>
- * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mb:30">National Communications Developer Kirk Blick</h1>
- * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mb:30">Direct Optimization Officer Calvin Fadel</h1>
+        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mb:30">Senior Brand Officer Craig Flatley</h1>
+ * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mb:30">Global Applications Agent Gail Purdy</h1>
+ * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mb:30">Direct Quality Liaison Mae Howe</h1>
+ * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mb:30">National Marketing Agent Rosemary Brekke</h1>
         * 
         * @example        css
         * .my-font-default {
@@ -43978,19 +44376,19 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
  * @cssClass      s-font:default       Apply the default font size on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mb:30">Dynamic Program Specialist Arnold Buckridge</h1>
- * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mb:30">Direct Functionality Agent Kristopher Beatty</h1>
- * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mb:30">Senior Communications Liaison John Reynolds</h1>
- * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mb:30">Legacy Quality Developer Austin Cassin PhD</h1>
- * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mb:30">Internal Operations Agent Irvin McKenzie</h1>
- * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mb:30">Internal Brand Orchestrator Beth Schoen</h1>
- * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mb:30">Forward Metrics Producer Leon Sawayn</h1>
- * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mb:30">Principal Paradigm Strategist Vivian Kassulke</h1>
- * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mb:30">Forward Operations Planner Chester Willms</h1>
- * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mb:30">Customer Branding Producer Ken Roberts V</h1>
- * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mb:30">International Marketing Analyst Gretchen Sanford</h1>
- * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mb:30">Forward Accounts Orchestrator Della Friesen</h1>
- * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mb:30">Senior Data Producer Bethany Bayer</h1>
+        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mb:30">Internal Program Specialist Miss Rafael Auer</h1>
+ * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mb:30">Future Group Technician Sam Hammes</h1>
+ * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mb:30">Principal Directives Architect Miss Sylvia Runolfsdottir</h1>
+ * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mb:30">Global Data Agent Tracey Willms</h1>
+ * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mb:30">Central Configuration Orchestrator Vickie Roob II</h1>
+ * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mb:30">Central Response Orchestrator Toni Quitzon Sr.</h1>
+ * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mb:30">Dynamic Infrastructure Architect Mrs. Rudolph Hagenes</h1>
+ * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mb:30">Chief Configuration Coordinator Clarence Hegmann</h1>
+ * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mb:30">National Division Manager Rosemarie Powlowski</h1>
+ * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mb:30">Dynamic Security Specialist Frances Jacobi</h1>
+ * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mb:30">Legacy Marketing Facilitator Angelo Cruickshank</h1>
+ * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mb:30">Customer Configuration Director Mrs. Saul Nikolaus</h1>
+ * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mb:30">Senior Group Consultant Ms. Rose Kuphal</h1>
         * 
         * @example        css
         * .my-font-0 {
@@ -44220,12 +44618,12 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
         * @example        html
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset size</h3>
         * <div class="s-font:60 s-mb:30">
-        *   Product Mobility Assistant <span class="s-font:reset-size">Tomas Bahringer</span>
+        *   Chief Web Supervisor <span class="s-font:reset-size">Kenneth Bergnaum</span>
         * </div>
         * 
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset family</h3>
         * <div class="s-font:quote s-font:50">
-        *   Direct Directives Assistant <span class="s-font:reset-family">Minnie Murazik DVM</span>
+        *   Lead Accounts Manager <span class="s-font:reset-family">Alfonso Purdy</span>
         * </div>
         * 
         * @since      2.0.0
@@ -53671,6 +54069,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-default-borderRadius: 6px;
 --s-theme-ui-default-borderWidth: 1px;
 --s-theme-ui-default-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-default-disabledOpacity: 0.3;
 --s-theme-ui-default-defaultColor: accent;
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
@@ -53680,6 +54079,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-form-disabledOpacity: 0.3;
 --s-theme-ui-form-focusOutline: true;
 --s-theme-ui-form-defaultColor: accent;
 --s-theme-ui-form-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
@@ -53688,13 +54088,14 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-focusOutline-active: true;
 --s-theme-ui-focusOutline-borderWidth: 10px;
 --s-theme-ui-focusOutline-borderRadius: 6px;
---s-theme-ui-focusOutline-transition: box-shadow .2s ease-out;
+--s-theme-ui-focusOutline-transition: all .2s ease-out;
 --s-theme-ui-button-paddingInline: 1.5em;
 --s-theme-ui-button-paddingBlock: 0.75em;
 --s-theme-ui-button-borderRadius: 6px;
 --s-theme-ui-button-borderWidth: 1px;
 --s-theme-ui-button-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-button-focusOutline: true;
+--s-theme-ui-button-disabledOpacity: 0.3;
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
@@ -53704,6 +54105,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-focusOutline: true;
+--s-theme-ui-colorPicker-disabledOpacity: 0.3;
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-datePicker-paddingInline: 0.75em;
@@ -53712,6 +54114,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-focusOutline: true;
+--s-theme-ui-datePicker-disabledOpacity: 0.3;
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-paddingInline: 0.75em;
@@ -53720,23 +54123,46 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusOutline: true;
+--s-theme-ui-input-disabledOpacity: 0.3;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-defaultStyle: solid;
+--s-theme-ui-radio-paddingInline: 0.75em;
+--s-theme-ui-radio-paddingBlock: 0.375em;
+--s-theme-ui-radio-borderRadius: 0.5em;
+--s-theme-ui-radio-borderWidth: 1px;
+--s-theme-ui-radio-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-radio-focusOutline: true;
+--s-theme-ui-radio-disabledOpacity: 0.3;
+--s-theme-ui-radio-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-radio-defaultStyle: solid;
+--s-theme-ui-checkbox-paddingInline: 0.75em;
+--s-theme-ui-checkbox-paddingBlock: 0.375em;
+--s-theme-ui-checkbox-borderRadius: 0.2em;
+--s-theme-ui-checkbox-borderWidth: 1px;
+--s-theme-ui-checkbox-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-checkbox-focusOutline: true;
+--s-theme-ui-checkbox-disabledOpacity: 0.3;
+--s-theme-ui-checkbox-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-checkbox-defaultStyle: solid;
 --s-theme-ui-range-paddingInline: 0.75em;
 --s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-range-focusOutline: true;
+--s-theme-ui-range-disabledOpacity: 0.3;
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-range-defaultStyle: default;
+--s-theme-ui-range-defaultStyle: solid;
 --s-theme-ui-label-paddingInline: 0.75em;
 --s-theme-ui-label-paddingBlock: 0.375em;
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-label-disabledOpacity: 0.3;
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-label-defaultStyle: inline;
@@ -53746,6 +54172,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-select-focusOutline: true;
+--s-theme-ui-select-disabledOpacity: 0.3;
 --s-theme-ui-select-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-select-defaultStyle: default;
@@ -53753,6 +54180,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-switch-borderWidth: 1px;
 --s-theme-ui-switch-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-switch-focusOutline: true;
+--s-theme-ui-switch-disabledOpacity: 0.3;
 --s-theme-ui-switch-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-switch-defaultStyle: solid;
@@ -56094,6 +56522,7 @@ a:active {
 --s-theme-ui-default-borderRadius: 6px;
 --s-theme-ui-default-borderWidth: 1px;
 --s-theme-ui-default-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-default-disabledOpacity: 0.3;
 --s-theme-ui-default-defaultColor: accent;
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
@@ -56103,6 +56532,7 @@ a:active {
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-form-disabledOpacity: 0.3;
 --s-theme-ui-form-focusOutline: true;
 --s-theme-ui-form-defaultColor: accent;
 --s-theme-ui-form-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
@@ -56111,13 +56541,14 @@ a:active {
 --s-theme-ui-focusOutline-active: true;
 --s-theme-ui-focusOutline-borderWidth: 10px;
 --s-theme-ui-focusOutline-borderRadius: 6px;
---s-theme-ui-focusOutline-transition: box-shadow .2s ease-out;
+--s-theme-ui-focusOutline-transition: all .2s ease-out;
 --s-theme-ui-button-paddingInline: 1.5em;
 --s-theme-ui-button-paddingBlock: 0.75em;
 --s-theme-ui-button-borderRadius: 6px;
 --s-theme-ui-button-borderWidth: 1px;
 --s-theme-ui-button-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-button-focusOutline: true;
+--s-theme-ui-button-disabledOpacity: 0.3;
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
@@ -56127,6 +56558,7 @@ a:active {
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-focusOutline: true;
+--s-theme-ui-colorPicker-disabledOpacity: 0.3;
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-datePicker-paddingInline: 0.75em;
@@ -56135,6 +56567,7 @@ a:active {
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-focusOutline: true;
+--s-theme-ui-datePicker-disabledOpacity: 0.3;
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-paddingInline: 0.75em;
@@ -56143,23 +56576,46 @@ a:active {
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusOutline: true;
+--s-theme-ui-input-disabledOpacity: 0.3;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-defaultStyle: solid;
+--s-theme-ui-radio-paddingInline: 0.75em;
+--s-theme-ui-radio-paddingBlock: 0.375em;
+--s-theme-ui-radio-borderRadius: 0.5em;
+--s-theme-ui-radio-borderWidth: 1px;
+--s-theme-ui-radio-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-radio-focusOutline: true;
+--s-theme-ui-radio-disabledOpacity: 0.3;
+--s-theme-ui-radio-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-radio-defaultStyle: solid;
+--s-theme-ui-checkbox-paddingInline: 0.75em;
+--s-theme-ui-checkbox-paddingBlock: 0.375em;
+--s-theme-ui-checkbox-borderRadius: 0.2em;
+--s-theme-ui-checkbox-borderWidth: 1px;
+--s-theme-ui-checkbox-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-checkbox-focusOutline: true;
+--s-theme-ui-checkbox-disabledOpacity: 0.3;
+--s-theme-ui-checkbox-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-checkbox-defaultStyle: solid;
 --s-theme-ui-range-paddingInline: 0.75em;
 --s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-range-focusOutline: true;
+--s-theme-ui-range-disabledOpacity: 0.3;
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
---s-theme-ui-range-defaultStyle: default;
+--s-theme-ui-range-defaultStyle: solid;
 --s-theme-ui-label-paddingInline: 0.75em;
 --s-theme-ui-label-paddingBlock: 0.375em;
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
+--s-theme-ui-label-disabledOpacity: 0.3;
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-label-defaultStyle: inline;
@@ -56169,6 +56625,7 @@ a:active {
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-select-focusOutline: true;
+--s-theme-ui-select-disabledOpacity: 0.3;
 --s-theme-ui-select-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-select-defaultStyle: default;
@@ -56176,6 +56633,7 @@ a:active {
 --s-theme-ui-switch-borderWidth: 1px;
 --s-theme-ui-switch-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-switch-focusOutline: true;
+--s-theme-ui-switch-disabledOpacity: 0.3;
 --s-theme-ui-switch-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-switch-defaultStyle: solid;

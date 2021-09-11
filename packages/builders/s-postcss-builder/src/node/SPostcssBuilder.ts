@@ -6,6 +6,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SLog from '@coffeekraken/s-log';
 import __csso from 'csso';
 import __path from 'path';
 import __fs from 'fs';
@@ -203,7 +204,8 @@ export default class SPostcssBuilder extends __SBuilder {
                 }
 
                 // build postcss
-                const result = await __postcss(plugins).process(src ?? '', {
+                let result;
+                result = await __postcss(plugins).process(src ?? '', {
                     from,
                 });
                 if (!result.css) {

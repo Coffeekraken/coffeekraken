@@ -33,6 +33,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
+        styles: ['solid', 'gradient', 'outline', 'text'],
+        defaultStyle: 'solid',
         ...params,
     };
 
@@ -63,11 +65,15 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
-            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-ui\:accent"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-ui\:complementary"><span>Click me!</span></a>
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-mb\:20"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-mb\:20 s-ui\:accent"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-mb\:20 s-ui\:complementary"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn\:${style} s-ui\:error"><span>Click me!</span></a>
+            *   <span class="s-btn-group s-mr\:20 s-mb\:20">
+            *       <a tabindex="0" class="s-btn\:${style}"><span>Click me!</span></a>
+            *       <a tabindex="0" class="s-btn\:${style}"><span>+</span></a>
+            *   </span>
             * </div>
             * `;
             })
@@ -75,10 +81,10 @@ export default function ({
         *
         * <!-- scales -->
         * <div class="s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
-        *   <a tabindex="0" class="s-btn s-scale\:07 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale\:1 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale\:13 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Scales</h3>
+        *   <a tabindex="0" class="s-btn s-scale\:07 s-mr\:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale\:1 s-mr\:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale\:13 s-mr\:20"><span>Click me!</span></a>
         * </div>
         * 
         * @since      2.0.0
@@ -124,6 +130,54 @@ export default function ({
     vars.push(`
       .s-btn--block {
         display: block !important;
+      }
+    `);
+
+    vars.push(`/**
+        * @name           s-btn-group
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">group</s-color>" of buttons
+        * 
+        * @example        html
+        * <span class="s-btn-group">
+        *   <a class="s-btn--block">I'm a cool block button</a>
+        *   <a class="s-btn--block">+</a>
+        * </span>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */`);
+    vars.push(`
+      .s-btn-group {
+          display: flex !important;   
+          flex-wrap: nowrap;
+      }
+      .s-btn-group > .s-btn {
+
+        &:first-child:not(:last-child) {
+          border-inline-end: 1px solid sugar.color(ui, --darken 5);
+        }
+
+        &:not(:first-child):not(:last-child),
+        &:not(:first-child):not(:last-child):before,
+        &:not(:first-child):not(:last-child):after {
+            border-radius: 0 !important;
+        }
+        &:first-child:not(:last-child),
+        &:first-child:not(:last-child):before,
+        &:first-child:not(:last-child):after {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+        &:last-child:not(:first-child),
+        &:last-child:not(:first-child):before,
+        &:last-child:not(:first-child):after {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-inline-start: none !important;
+        }
       }
     `);
 

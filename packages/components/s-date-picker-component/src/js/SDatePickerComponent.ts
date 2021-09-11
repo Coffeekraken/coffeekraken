@@ -50,7 +50,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *      Min and max date
  *      <s-date-picker
  *          placeholder="Select a date"
- *          class="s-ui--accent s-width--50"
+ *          class="s-ui\:accent\:deep s-width--50"
  *          min-date="2021-08-10"
  *          max-date="2021-08-20"
  *          name="myDatePicker2"
@@ -62,7 +62,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     Disable weekends
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-ui--complementary s-width--50"
+ *         class="s-ui\:complementary\:deep s-width--50"
  *         name="myDatePicker3"
  *         disable-weekends
  *         default-style
@@ -73,7 +73,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     RTL support
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-ui--accent s-width--50"
+ *         class="s-ui\:accent\:deep s-width--50"
  *         min-date="2021-08-10"
  *         name="myDatePicker1"
  *         rtl
@@ -85,7 +85,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     Display more than 1 month
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-ui--success s-width--50"
+ *         class="s-ui\:success\:deep s-width--50"
  *         name="myDatePicker4"
  *         number-of-months="2"
  *         default-style
@@ -96,7 +96,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     Custom calendar icon
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-ui--error s-width--50"
+ *         class="s-ui\:error\:deep s-width--50"
  *         name="myDatePicker5"
  *         calendar-icon="<?xml version='1.0' encoding='iso-8859-1'?>
  * <*svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 488.901 488.901' style='enable-background:new 0 0 488.901 488.901;' xml:space='preserve'><g><g><g><path fill='currentColor' d='M468.9,56.1h-76.2v-36c0-10.6-9.5-20.1-20.1-20.1s-20.1,8.5-20.1,20.1v36H136.6v-36c0-10.6-9.5-20.1-20.1-20.1

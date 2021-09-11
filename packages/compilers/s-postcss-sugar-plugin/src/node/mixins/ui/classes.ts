@@ -25,6 +25,7 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
         '@sugar.ui.avatar.classes;',
         '@sugar.ui.button.classes;',
         '@sugar.ui.checkbox.classes;',
+        '@sugar.ui.dropdown.classes;',
         '@sugar.ui.blockquote.classes;',
         '@sugar.ui.input.classes;',
         '@sugar.ui.label.classes;',
@@ -49,10 +50,37 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
        * @namespace     sugar.css.ui.label
        * @type          CssClass
        * 
-       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any ui element
+       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any ui element.
+       * This does apply the color only on the item itself and not on his childs...
        * 
        * @example       html
-       * <label class="s-ui\:${colorName}">
+       * <label>
+       *   Hello world
+       *   <input type="text" class="s-input s-ui\:${colorName}" />
+       * </label>
+       * 
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      .s-ui--${colorName}:not(.s-ui--deep) {
+        @sugar.color.remap(ui, ${colorName});
+
+        & > * > * {
+          @sugar.color.remap(ui, main);
+        }
+      }
+    `);
+
+        cssArray.push(`
+      /**
+       * @name        s-ui:deep:${colorName}
+       * @namespace     sugar.css.ui.label
+       * @type          CssClass
+       * 
+       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any ui element with all their childs
+       * 
+       * @example       html
+       * <label class="s-ui\:deep\:${colorName}">
        *   Hello world
        *   <input type="text" class="s-input" />
        * </label>
@@ -60,7 +88,7 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-ui--${colorName} {
+      .s-ui--${colorName}.s-ui--deep {
         @sugar.color.remap(ui, ${colorName});
       }
     `);

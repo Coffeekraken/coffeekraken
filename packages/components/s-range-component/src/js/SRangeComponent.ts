@@ -26,22 +26,22 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @feature         Support for sugar theming system when activate default style
  *
  * @example         html
- * <s-range name="myCoolRange" value="90" class="s-ui:accent s-mb:30"></s-range>
+ * <s-range name="myCoolRange" value="90" class="s-ui:accent:deep s-mb:30"></s-range>
  *
  * <s-range name="myOtherRanfe" class="s-mb:30" tooltip></s-range>
  *
- * <s-range name="myOtherRanfe" class="s-mb:30 s-ui:accent" tooltip></s-range>
+ * <s-range name="myOtherRanfe" class="s-mb:30 s-ui:accent:deep" tooltip></s-range>
  *
- * <s-range name="myRangeWithSteps" value="70" class="s-ui:complementary s-mb:30" step="5"></s-range>
+ * <s-range name="myRangeWithSteps" value="70" class="s-ui:complementary:deep s-mb:30" step="5"></s-range>
  *
  * <div class="s-flex:align-center s-mb:30">
  *  <s-range name="myRangeWithTarget" value="30" target="#my-range-with-target-target"></s-range>
  *  <span class="s-pl:20" id="my-range-with-target-target"></span>
  * </div>
  *
- * <s-range name="myRangeColoredSuccess" value="30" class="s-ui:success s-mb:30"></s-range>
- * <s-range name="myRangeColoredWarning" value="0" class="s-ui:warning s-mb:30"></s-range>
- * <s-range name="myRangeColoredError" value="1" min="0" max="10" class="s-ui:error s-mb:30"></s-range>
+ * <s-range name="myRangeColoredSuccess" value="30" class="s-ui:success:deep s-mb:30"></s-range>
+ * <s-range name="myRangeColoredWarning" value="0" class="s-ui:warning:deep s-mb:30"></s-range>
+ * <s-range name="myRangeColoredError" value="1" min="0" max="10" class="s-ui:error:deep s-mb:30"></s-range>
  *
  * @example         js
  * import { webcomponent as SRangeWebcomponent } from '@coffeekraken/s-range-component';

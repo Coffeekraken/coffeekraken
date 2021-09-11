@@ -1546,7 +1546,7 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'default',
+                defaultStyle: 'solid',
             },
             switch: {
                 borderRadius: '[theme.ui.form.borderRadius]',
@@ -1556,6 +1556,16 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
+                defaultStyle: 'solid',
+            },
+            dropdown: {
+                paddingInline: '[theme.ui.default.paddingBlock]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
+                borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
+                transition: '[theme.ui.default.transition]',
+                focusOutline: '[theme.ui.focusOutline.active]',
+                depth: '[theme.ui.default.depth]',
                 defaultStyle: 'solid',
             },
             list: {

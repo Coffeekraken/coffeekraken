@@ -246,12 +246,19 @@ class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEm
                     await executorFn(api);
                 } catch (e) {
                     if (this.promiseSettings.emitErrorEventOnThrow) {
-                        this.emit('error', e);
+                        this.emit('log', {
+                            type: __SLog.ERROR,
+                            value: e,
+                        });
                     }
                     this.reject(e);
                 }
             })();
         }
+
+        // this.catch((e) => {
+        //     console.log('____e', e);
+        // });
     }
 
     // you can also use Symbol.species in order to

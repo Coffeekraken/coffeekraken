@@ -61,6 +61,7 @@ export default function ({
       display: inline-block;
       cursor: pointer;
       white-space: nowrap;
+      vertical-align: middle;
 
       & > * {
         pointer-events: none;
@@ -79,8 +80,8 @@ export default function ({
                 vars.push(`
                     background: none !important;
                     color: sugar.color(ui, foreground);
-                    border-radius: sugar.theme(ui.button.borderRadius);
                     transition: sugar.theme(ui.button.transition);
+                    border: none !important;
 
                     --borderWidth: sugar.theme(ui.button.borderWidth);
 
@@ -92,9 +93,10 @@ export default function ({
                     &:before {
                       content: '';
                       position: absolute;
-                      top: var(--borderWidth); left: var(--borderWidth);
-                      width: calc(100% - (var(--borderWidth) * 2));
-                      height: calc(100% - (var(--borderWidth) * 2));
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
                       border-radius: sugar.theme(ui.button.borderRadius);
                       @sugar.gradient(sugar.color(ui, gradientStart), sugar.color(ui, gradientEnd), $angle: 90);
                       transition: sugar.theme(ui.button.transition);
@@ -103,9 +105,10 @@ export default function ({
                     &:after {
                       content: '';
                       position: absolute;
-                      top: var(--borderWidth); left: var(--borderWidth);
-                      width: calc(100% - (var(--borderWidth) * 2));
-                      height: calc(100% - (var(--borderWidth) * 2));
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
                       border-radius: sugar.theme(ui.button.borderRadius);
                       @sugar.gradient(sugar.color(ui,gradientEnd), sugar.color(ui, gradientStart), $angle: 90);
                       opacity: 0;

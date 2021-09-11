@@ -17,7 +17,7 @@ postcssSugarPluginUiButtonClassesInterface.definition = {
 };
 export { postcssSugarPluginUiButtonClassesInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
+    const finalParams = Object.assign({ styles: ['solid', 'gradient', 'outline', 'text'], defaultStyle: 'solid' }, params);
     const vars = [];
     vars.push(`
       /**
@@ -42,11 +42,15 @@ export default function ({ params, atRule, replaceWith, }) {
         .map((style) => {
         return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
-            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-ui\:accent"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-ui\:complementary"><span>Click me!</span></a>
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-mb\:20"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-mb\:20 s-ui\:accent"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn\:${style} s-mr\:20 s-mb\:20 s-ui\:complementary"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn\:${style} s-ui\:error"><span>Click me!</span></a>
+            *   <span class="s-btn-group s-mr\:20 s-mb\:20">
+            *       <a tabindex="0" class="s-btn\:${style}"><span>Click me!</span></a>
+            *       <a tabindex="0" class="s-btn\:${style}"><span>+</span></a>
+            *   </span>
             * </div>
             * `;
     })
@@ -54,10 +58,10 @@ export default function ({ params, atRule, replaceWith, }) {
         *
         * <!-- scales -->
         * <div class="s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
-        *   <a tabindex="0" class="s-btn s-scale\:07 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale\:1 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale\:13 s-mr\:20 s-mb\:20"><span>Click me!</span></a>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Scales</h3>
+        *   <a tabindex="0" class="s-btn s-scale\:07 s-mr\:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale\:1 s-mr\:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale\:13 s-mr\:20"><span>Click me!</span></a>
         * </div>
         * 
         * @since      2.0.0
@@ -102,6 +106,53 @@ export default function ({ params, atRule, replaceWith, }) {
         display: block !important;
       }
     `);
+    vars.push(`/**
+        * @name           s-btn-group
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">group</s-color>" of buttons
+        * 
+        * @example        html
+        * <span class="s-btn-group">
+        *   <a class="s-btn--block">I'm a cool block button</a>
+        *   <a class="s-btn--block">+</a>
+        * </span>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */`);
+    vars.push(`
+      .s-btn-group {
+          display: flex !important;   
+          flex-wrap: nowrap;
+      }
+      .s-btn-group > .s-btn {
+
+        &:first-child:not(:last-child) {
+          border-inline-end: 1px solid sugar.color(ui, --darken 5);
+        }
+
+        &:not(:first-child):not(:last-child),
+        &:not(:first-child):not(:last-child):before,
+        &:not(:first-child):not(:last-child):after {
+            border-radius: 0 !important;
+        }
+        &:first-child:not(:last-child),
+        &:first-child:not(:last-child):before,
+        &:first-child:not(:last-child):after {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+        &:last-child:not(:first-child),
+        &:last-child:not(:first-child):before,
+        &:last-child:not(:first-child):after {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-inline-start: none !important;
+        }
+      }
+    `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sT0FBTyxNQUFNLHNCQUFzQixDQUFDO0FBRTNDLE1BQU0sMENBQTJDLFNBQVEsWUFBWTs7QUFDMUQscURBQVUsR0FBRztJQUNoQixNQUFNLEVBQUU7UUFDSixJQUFJLEVBQUUsVUFBVTtRQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7UUFDaEQsT0FBTyxFQUFFLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxTQUFTLEVBQUUsTUFBTSxDQUFDO0tBQ3BEO0lBQ0QsWUFBWSxFQUFFO1FBQ1YsSUFBSSxFQUFFLFFBQVE7UUFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7UUFDaEQsT0FBTyxFQUFFLE1BQUEsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHdCQUF3QixDQUFDLG1DQUFJLE9BQU87S0FDakU7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRW5FLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1VBWUosV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8seUJBQ0gsS0FBSyxLQUFLLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsS0FBSyxLQUFLLEVBQ3hELHdCQUF3QixLQUFLLGVBQWUsQ0FBQztJQUNqRCxDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7VUFHYixXQUFXLENBQUMsTUFBTTtTQUNmLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ1gsT0FBTyxXQUFXLEtBQUs7O2tFQUUyQixLQUFLO2dEQUN2QixLQUFLO2dEQUNMLEtBQUs7Z0RBQ0wsS0FBSztnREFDTCxLQUFLOztlQUV0QyxDQUFDO0lBQ0osQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7OztLQWFsQixDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ2pDLElBQUksR0FBRyxHQUFHLE9BQU8sQ0FBQztRQUNsQixJQUFJLEtBQUssS0FBSyxXQUFXLENBQUMsWUFBWSxFQUFFO1lBQ3BDLEdBQUcsSUFBSSxLQUFLLEtBQUssRUFBRSxDQUFDO1NBQ3ZCO1FBRUQsSUFBSSxDQUFDLElBQUksQ0FBQzs0QkFDVSxHQUFHOzs7O3lEQUkwQixLQUFLOzs7c0JBR3hDLEdBQUcsQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLEdBQUcsQ0FBQyxDQUFDLElBQUksRUFBRTs7OztTQUk1QyxDQUFDLENBQUM7UUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxHQUFHLElBQUksRUFBRSw2QkFBNkIsS0FBSyxJQUFJLEVBQUUsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDckYsQ0FBQyxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7U0FZTCxDQUFDLENBQUM7SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O0tBSVQsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3RCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sT0FBTyxNQUFNLHNCQUFzQixDQUFDO0FBRTNDLE1BQU0sMENBQTJDLFNBQVEsWUFBWTs7QUFDMUQscURBQVUsR0FBRztJQUNoQixNQUFNLEVBQUU7UUFDSixJQUFJLEVBQUUsVUFBVTtRQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7UUFDaEQsT0FBTyxFQUFFLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxTQUFTLEVBQUUsTUFBTSxDQUFDO0tBQ3BEO0lBQ0QsWUFBWSxFQUFFO1FBQ1YsSUFBSSxFQUFFLFFBQVE7UUFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7UUFDaEQsT0FBTyxFQUFFLE1BQUEsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHdCQUF3QixDQUFDLG1DQUFJLE9BQU87S0FDakU7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRW5FLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxTQUFTLEVBQUUsTUFBTSxDQUFDLEVBQ2hELFlBQVksRUFBRSxPQUFPLElBQ2xCLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7OztVQVlKLFdBQVcsQ0FBQyxNQUFNO1NBQ2YsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDWCxPQUFPLHlCQUNILEtBQUssS0FBSyxXQUFXLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLEtBQUssS0FBSyxFQUN4RCx3QkFBd0IsS0FBSyxlQUFlLENBQUM7SUFDakQsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7O1VBR2IsV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sV0FBVyxLQUFLOztrRUFFMkIsS0FBSztnREFDdkIsS0FBSztnREFDTCxLQUFLO2dEQUNMLEtBQUs7Z0RBQ0wsS0FBSzs7b0RBRUQsS0FBSztvREFDTCxLQUFLOzs7ZUFHMUMsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7S0FhbEIsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNqQyxJQUFJLEdBQUcsR0FBRyxPQUFPLENBQUM7UUFDbEIsSUFBSSxLQUFLLEtBQUssV0FBVyxDQUFDLFlBQVksRUFBRTtZQUNwQyxHQUFHLElBQUksS0FBSyxLQUFLLEVBQUUsQ0FBQztTQUN2QjtRQUVELElBQUksQ0FBQyxJQUFJLENBQUM7NEJBQ1UsR0FBRzs7Ozt5REFJMEIsS0FBSzs7O3NCQUd4QyxHQUFHLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxHQUFHLENBQUMsQ0FBQyxJQUFJLEVBQUU7Ozs7U0FJNUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksR0FBRyxJQUFJLEVBQUUsNkJBQTZCLEtBQUssSUFBSSxFQUFFLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBQ3JGLENBQUMsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1NBWUwsQ0FBQyxDQUFDO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7OztTQWVMLENBQUMsQ0FBQztJQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQThCVCxDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

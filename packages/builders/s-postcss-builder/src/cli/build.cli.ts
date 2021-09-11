@@ -9,6 +9,6 @@ export default function build(stringArgs = '') {
                 interface: __SPostcssBuilderBuildParamsInterface,
             },
         });
-        resolve(await pipe(builder.build(stringArgs)));
+        await pipe(builder.build(stringArgs));
     });
 }

@@ -31,7 +31,7 @@ export default class CkSettings extends __SLitComponent {
 
     async firstUpdated() {
         const $root = document.querySelector(':root'),
-            $darkRoot = document.querySelector('.s-theme--dark'),
+            $darkRoot = document.querySelector('.s-theme--coffeekrakenDark'),
             $theme = <HTMLElement>($darkRoot ?? $root);
 
         const $mainColorPicker = this.querySelector('#setting-main-color');
@@ -63,9 +63,9 @@ export default class CkSettings extends __SLitComponent {
     setDarkMode(mode) {
         this._settings.darkMode = mode;
         if (mode) {
-            document.body.classList.add('s-theme--dark');
+            document.body.classList.add('s-theme--coffeekrakenDark');
         } else {
-            document.body.classList.remove('s-theme--dark');
+            document.body.classList.remove('s-theme--coffeekrakenDark');
         }
         this._saveState();
     }

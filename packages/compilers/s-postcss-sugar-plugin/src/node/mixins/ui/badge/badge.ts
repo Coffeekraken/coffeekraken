@@ -64,6 +64,11 @@ export default function ({
             padding-inline: sugar.scalable(sugar.theme(ui.badge.paddingInline));
             padding-block: sugar.scalable(sugar.theme(ui.badge.paddingBlock));
             vertical-align: baseline;
+
+            & > * {
+                @sugar.color.remap(ui, main);
+            }
+
         `);
 
         switch (finalParams.style) {

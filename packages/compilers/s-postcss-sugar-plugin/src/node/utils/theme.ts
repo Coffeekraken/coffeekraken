@@ -15,12 +15,12 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 const themeDefinition = {
-  type: 'String',
-  values: __STheme.themes,
-  default: __STheme.theme
+    type: 'String',
+    values: __STheme.themes,
+    default: __STheme.theme,
 };
 
 export { themeDefinition };
-export default function theme(theme?: string): __STheme {
-  return __STheme.getTheme(theme);
+export default function theme(theme?: string, variant?: string): __STheme {
+    return __STheme.getTheme(theme, variant);
 }

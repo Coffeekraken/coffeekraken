@@ -2,11 +2,6 @@
 
 :host {
     display: block;
-    border-radius: sugar.theme(ui.code.borderRadius);
-    border: sugar.color(ui, border) solid 1px;
-    /* overflow: hidden; */
-
-    /* @sugar.utils.configToCss(ui.code, $only: rhythm-vertical); */
 }
 
 .s-code-example {
@@ -37,27 +32,64 @@
 .s-code-example__tabs {
     display: flex;
     list-style: none;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
 }
 .s-code-example__tab {
 }
 
 .s-code-example__content {
-    /* overflow: hidden; */
     position: relative;
+    --paddingBlock: sugar.theme(ui.code.paddingBlock);
+    overflow: hidden;
 
-    /* [default-style] & {
-        overflow: auto;
-        @sugar.scrollbar (accent);
-    } */
+    .s-code-example[lines] & {
+        max-height: calc(1.5em * var(--max-lines) + (var(--paddingBlock) * 2));
+    }
+    .s-code-example--more & {
+        max-height: 99999px !important;
+    }
+}
+[default-style] .s-code-example__content {
+    transition: sugar.theme(ui.code.transition);
+    border-radius: sugar.theme(ui.code.borderRadius);
+    @sugar.depth (sugar.theme(ui.code.depth));
+}
+
+.s-code-example__more-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+
+    .s-code-example[lines] & {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+[default-style] .s-code-example__more-bar {
+    text-align: center;
+    padding-inline: sugar.theme(ui.default.paddingInline);
+    padding-block: sugar.theme(ui.default.paddingBlock);
+    justify-content: center;
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        @sugar.gradient ($type: linear, $start: sugar.color(ui, surface), $end: sugar.color(ui, --alpha 0), $angle: 0);
+    }
 }
 
 .s-code-example__code {
     display: none;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-    /* overflow: hidden; */
     line-height: 0;
 
     &[active] {

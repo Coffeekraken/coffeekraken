@@ -22,6 +22,11 @@ export interface ISCodeExampleComponentProps {
     toolbar: 'copy'[];
     toolbarPosition: 'content' | 'nav';
     defaultStyleClass: any;
+    lines: number;
+    moreLabel: string;
+    lessLabel: string;
+    moreAction: 'toggle' | string;
+    more: boolean;
 }
 
 export default class SCodeExample extends __SLitComponent {
@@ -113,6 +118,11 @@ export default class SCodeExample extends __SLitComponent {
         }
 
         await __wait(500);
+
+        this.$content = this.shadowRoot?.querySelector('.s-code-example__content');
+        this.$pre = this.shadowRoot?.querySelector('.s-code-example__code');
+        this.$root = this.shadowRoot?.querySelector('.s-code-example');
+
         return true;
     }
     setActiveTabByTab(e) {
@@ -123,11 +133,27 @@ export default class SCodeExample extends __SLitComponent {
         this._activeTabId = id;
         this.initPrismOnTab(id);
     }
+    async setMoreClass() {
+        await __wait(500);
+        if (this.more) {
+            this.$root.classList.add('s-code-example--more');
+        } else {
+            this.$root.classList.remove('s-code-example--more');
+        }
+    }
+    toggleMore() {
+        this.more = !this.more;
+        this.setMoreClass();
+    }
     initPrismOnTab(id) {
         const $content = <HTMLElement>this.shadowRoot?.querySelector(`pre#${id} code`);
-        if ($content.hasAttribute('inited')) return;
+        if ($content.hasAttribute('inited')) {
+            this.setMoreClass();
+            return;
+        }
         $content.setAttribute('inited', 'true');
         __hljs.highlightElement($content);
+        this.setMoreClass();
     }
     copy() {
         const id = this._activeTabId;
@@ -138,7 +164,13 @@ export default class SCodeExample extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.componentUtils.className()}"
+                class="${this.componentUtils.className()} ${
+            this.props.more ? this.componentUtils.className('more') : ''
+        }"
+                ?lines="${
+                    // @ts-ignore
+                    this.lines
+                }"
                 ?mounted="${
                     // @ts-ignore
                     this.mounted
@@ -182,7 +214,10 @@ export default class SCodeExample extends __SLitComponent {
                             : ''
                     }
                 </header>
-                <div class="${this.componentUtils.className('__content')}">
+                <div
+                    class="${this.componentUtils.className('__content')}"
+                    style="--max-lines: ${this.props.lines ?? 99999999};"
+                >
                     ${
                         // @ts-ignore
                         this.toolbarPosition !== 'nav'
@@ -211,6 +246,45 @@ export default class SCodeExample extends __SLitComponent {
                         </pre>
                         `,
                     )}
+                    <div class="${this.componentUtils.className('__more-bar')}">
+                        ${
+                            // @ts-ignore
+                            this.moreAction === 'toggle'
+                                ? html`
+                                      <a
+                                          class="${this.componentUtils.className('__more-button', 's-btn')}"
+                                          @click="${this.toggleMore}"
+                                      >
+                                          ${
+                                              // @ts-ignore
+                                              this.more
+                                                  ? html` ${this.props.lessLabel ?? 'Show less'} `
+                                                  : html` ${this.props.moreLabel ?? 'Show more'} `
+                                          }
+                                      </a>
+                                  `
+                                : html`
+                                      <a
+                                          class="${this.componentUtils.className(
+                                              '__more-button',
+                                              's-btn s-ui--accent',
+                                          )}"
+                                          href="${
+                                              // @ts-ignore
+                                              this.moreAction
+                                          }"
+                                      >
+                                          ${
+                                              // @ts-ignore
+                                              this.more
+                                                  ? html` ${this.props.lessLabel ?? 'Show less'} `
+                                                  : html` ${this.props.moreLabel ?? 'Show more'} `
+                                          }
+                                      </a>
+                                  `
+                        }                        
+                        </a>
+                    </div>
                 </div>
             </div>
         `;

@@ -1,33 +1,36 @@
 #homepage-features {
-  position: relative;
+    position: relative;
 
-   .__bg {
-    display: block;
-    width: 100vw; height: 100%;
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    opacity: 0.2;
-    z-index:-1;
+    .__bg {
+        display: block;
+        width: 100vw;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.2;
+        z-index: -1;
 
-    @sugar.gradient(sugar.color(accent), sugar.color(complementary), $angle: 90deg);
+        @sugar.gradient (sugar.color(accent), sugar.color(complementary), $angle: 90deg);
 
-    &:before {
-      content:'';
-      display: block;
-      width: 100%; height: 100%;
-      position: absolute;
-      top: 0; left: 0;
+        &:before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
 
-      @sugar.gradient(sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
-      
+            @sugar.gradient (sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
+        }
     }
-  }
 
-  .__header {
-   position: relative;
-   
-    /* &:before {
+    .__header {
+        position: relative;
+
+        /* &:before {
         content: '';
         display: block;
         width: 100vw; height: 40%;
@@ -38,113 +41,75 @@
 
         @sugar.gradient(rgba(255,255,255,.03), rgba(255,255,255,0.02), $angle: 180deg);
       } */
-  }
-
-  .__tabs {
-    display: flex;
-    position: relative;
-    top: -33px;
-
-    .__item {
-      text-align: center;
-      flex-grow: 1;
-      padding: sugar.space(20);
-      background-color: sugar.color(surface, --lighten 10);
-      @sugar.transition (fast);
-      cursor: pointer;
-      display: inline;
-
-      &:hover {
-        @sugar.gradient (sugar.color(accent), sugar.color(accent, --darken 10), $angle: 90);
-      }
-      @sugar.state.active {
-        /* transform: scale(1.2); */
-        @sugar.gradient (sugar.color(complementary), sugar.color(complementary, --darken 10), $angle: 90);
-      }
     }
-  }
-  .__contents {
-    position: relative;
-    /* top: -66px; */
 
-    /* & > *:not(.active) {
+    .__tabs {
+        display: flex;
+        position: relative;
+        top: -33px;
+
+        .__item {
+            text-align: center;
+            flex-grow: 1;
+            padding: sugar.space(20);
+            background-color: sugar.color(surface, --lighten 10);
+            @sugar.transition (fast);
+            cursor: pointer;
+            display: inline;
+
+            &:hover {
+                @sugar.gradient (sugar.color(accent), sugar.color(accent, --darken 10), $angle: 90);
+            }
+            @sugar.state.active {
+                /* transform: scale(1.2); */
+                @sugar.gradient (sugar.color(complementary), sugar.color(complementary, --darken 10), $angle: 90);
+            }
+        }
+    }
+    .__contents {
+        position: relative;
+        /* top: -66px; */
+
+        /* & > *:not(.active) {
       display: none;
     } */
-  }
+    }
 
-  .__illustration {
-    position: absolute;
-    width:40%;
-    transform: translate(-15%, -15%);
-  }
+    .__illustration {
+        position: absolute;
+        width: 40%;
+        transform: translate(-15%, -15%);
+    }
 
-  .__recipes-grid {
-    @sugar.layout.grid(
+    .__recipes-grid {
+        @sugar.layout.grid (
       1 2 3 4
       5 6 7 8
     , $gutter: 20, $gutterBetween: true);
-  };
+    }
 
-  .__webcomponents-grid {
-    @sugar.layout.grid(
+    .__webcomponents-grid {
+        @sugar.layout.grid (
       1 2 3 4 5
       6 7 8 9 10
     , $gutter: 20, $gutterBetween: true);
-  };
-
-  #features-development,
-  #features-webcomponents {
-    position: relative;
-
-    img {
-      max-width: 100%;
     }
 
-    /* &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: calc(50% + 300px);
-      width: calc(50vw + 100px);
-      height: 100%;
-      z-index: -1;
-      background: sugar.color(ui, surface);
-      clip-path: polygon(0 0%, 100% 0, 100% 100%, 400px 100%);
-      opacity: sugar.opacity(70);
+    #features-development,
+    #features-webcomponents {
+        position: relative;
 
-      @sugar.theme.when(dark) {
-        display: none;
-      }
-    } */
-  }
-
-  #features-frontend,
-  #features-sugar {
-    position: relative;
-
-    img {
-      max-width: 100%;
+        img {
+            max-width: 100%;
+        }
     }
 
-    /* &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: calc(50% + 100px);
-      width: calc(50vw + 100px);
-      height: 100%;
-      z-index: -1;
-      transform: translateX(calc(-100% - 400px));
-      background: sugar.color(ui, surface);
-      clip-path: polygon(-0 0%, 100% 0, calc(100% - 300px) 100%, 0% 100%);
-      opacity: sugar.opacity(70);
+    #features-frontend,
+    #features-sugar {
+        position: relative;
 
-      @sugar.theme.when(dark) {
-        display: none;
-      }
-    } */
-    
-  }
+        img {
+            max-width: 100%;
+        }
+    }
 }

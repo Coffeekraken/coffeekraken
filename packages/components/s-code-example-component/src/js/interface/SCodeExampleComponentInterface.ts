@@ -23,5 +23,24 @@ export default class SCodeExampleInterface extends __SInterface {
             type: 'Object',
             default: {},
         },
+        lines: {
+            type: 'Number',
+        },
+        moreLabel: {
+            type: 'String',
+            default: 'Show more',
+        },
+        lessLabel: {
+            type: 'String',
+            default: 'Show less',
+        },
+        moreAction: {
+            type: 'String',
+            default: 'toggle',
+        },
+        more: {
+            type: 'Boolean',
+            default: false,
+        },
     };
 }

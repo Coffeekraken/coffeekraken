@@ -62,33 +62,7 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-ui--${colorName}:not(.s-ui--deep) {
-        @sugar.color.remap(ui, ${colorName});
-
-        & > * > * {
-          @sugar.color.remap(ui, main);
-        }
-      }
-    `);
-
-        cssArray.push(`
-      /**
-       * @name        s-ui:deep:${colorName}
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any ui element with all their childs
-       * 
-       * @example       html
-       * <label class="s-ui\:deep\:${colorName}">
-       *   Hello world
-       *   <input type="text" class="s-input" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      .s-ui--${colorName}.s-ui--deep {
+      .s-ui--${colorName} {
         @sugar.color.remap(ui, ${colorName});
       }
     `);

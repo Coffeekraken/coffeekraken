@@ -1,0 +1,14 @@
+{
+    "name": "@coffeekraken/s-coffeekraken-theme",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/node/exports.js",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-theme": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0"
+    }
+}

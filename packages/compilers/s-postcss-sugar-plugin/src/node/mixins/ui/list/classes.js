@@ -42,7 +42,7 @@ export default function ({ params, atRule, replaceWith, }) {
         .map((style) => {
         return ` * <!-- ${style} style -->
             * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
             *   <ul class="s-list\:${style} ${style === 'ol' ? 's-ui:accent s-scale:15' : ''}">
             *     <li>${style === 'icon' ? `<i class="s-icon\:user"></i>` : ''}${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${style === 'icon' ? `<i class="s-icon\:heart s-ui\:accent"></i>` : ''}${__faker.name.title()} ${__faker.name.findName()}</li>
@@ -55,7 +55,7 @@ export default function ({ params, atRule, replaceWith, }) {
         *
         * <!-- RTL -->
         * <div class="s-mb\:50" dir="rtl">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">RTL</h3>
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">RTL</h3>
             *   <ul class="s-list\:ul s-ui\:accent s-mb\:30">
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
@@ -71,7 +71,7 @@ export default function ({ params, atRule, replaceWith, }) {
             * </div>
         * 
         * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Colors</h3>
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Colors</h3>
             *   <ul class="s-list s-scale\:12 s-ui\:accent">
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li class="s-ui\:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>

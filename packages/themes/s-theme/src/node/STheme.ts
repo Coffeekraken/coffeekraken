@@ -165,6 +165,30 @@ export default class STheme extends __SClass {
     name: string;
 
     /**
+     * @name        variant
+     * @type        String
+     *
+     * Store the theme variant that this instance represent
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    variant: string;
+
+    /**
+     * @name            id
+     * @type            String
+     *
+     * Store the computed theme id builded from the theme name and theme variant
+     *
+     * @since   2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get id(): String {
+        return `${this.name}-${this.variant}`;
+    }
+
+    /**
      * @name      theme
      * @type      String
      * @static
@@ -176,6 +200,20 @@ export default class STheme extends __SClass {
      */
     static get theme(): string {
         return __SSugarConfig.get('theme.theme');
+    }
+
+    /**
+     * @name      variant
+     * @type      String
+     * @static
+     *
+     * Store the current variant setted in the config.variant namespace
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static get variant(): string {
+        return __SSugarConfig.get('theme.variant');
     }
 
     /**
@@ -201,29 +239,33 @@ export default class STheme extends __SClass {
      * It will also check if an instance already exists for this theme and return it if so...
      *
      * @param     {String}    theme       The name of theme you want an STheme instance back for
+     * @param       {String}    variant         The theme variant you want an STheme instance back for
      * @return    {STheme}              An instance of the STheme class representing the requested theme
      *
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static _instanciatedThemes: Record<string, STheme> = {};
-    static getTheme(theme?: string): STheme {
+    static getTheme(theme?: string, variant?: string): STheme {
+        theme = theme ?? __SSugarConfig.get('theme.theme');
+        variant = variant ?? __SSugarConfig.get('theme.variant');
+
         theme = <string>(theme ?? __SSugarConfig.get('theme.theme'));
 
-        if (this._instanciatedThemes[theme]) return this._instanciatedThemes[theme];
+        if (this._instanciatedThemes[`${theme}-${variant}`]) return this._instanciatedThemes[`${theme}-${variant}`];
 
         const themes = __SSugarConfig.get('theme.themes');
 
-        if (!themes[theme])
+        if (!themes[`${theme}-${variant}`])
             throw new Error(
                 `<red>[${
                     this.name
-                }]</red> Sorry but the requested theme "<yellow>${theme}</yellow>" does not exists. Here's the available themes: <green>${Object.keys(
+                }]</red> Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists. Here's the available themes: <green>${Object.keys(
                     themes,
                 ).join(',')}</green>`,
             );
-        this._instanciatedThemes[theme] = new STheme(theme);
-        return this._instanciatedThemes[theme];
+        this._instanciatedThemes[`${theme}-${variant}`] = new STheme(theme, variant);
+        return this._instanciatedThemes[`${theme}-${variant}`];
     }
 
     /**
@@ -236,30 +278,11 @@ export default class STheme extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(theme?: string) {
+    constructor(theme?: string, variant?: string) {
         super({});
 
-        if (!theme) {
-            const sugarJsonInstance = new __SSugarJson();
-            const sugarJson = sugarJsonInstance.read();
-            // @ts-ignore
-            if (sugarJson.theme) theme = sugarJson.theme;
-            else theme = (<any>this.constructor).theme;
-        }
-
-        if (theme && Object.keys(this.themes).indexOf(theme) === -1) {
-            throw new Error(
-                `<red>[${
-                    this.constructor.name
-                }]</red> Sorry but the theme "${theme}" you've passed in constructor does not exists... Here's the list of actual available themes: ${Object.keys(
-                    this.themes.themes,
-                ).join(',')}`,
-            );
-        } else if (theme) {
-            this.name = theme;
-        } else {
-            this.name = 'default';
-        }
+        this.name = theme ?? __SSugarConfig.get('theme.theme');
+        this.variant = variant ?? __SSugarConfig.get('theme.variant');
     }
 
     /**
@@ -291,13 +314,13 @@ export default class STheme extends __SClass {
      */
     get _config() {
         // @ts-ignore
-        return __SSugarConfig.get('theme.themes')[this.name];
+        return __SSugarConfig.get('theme.themes')[this.id];
     }
     config(dotPath): any {
         const value = __get(this._config, dotPath);
         if (value === undefined) {
             throw new Error(
-                `<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.name}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`,
+                `<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.id}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`,
             );
         }
         return value;

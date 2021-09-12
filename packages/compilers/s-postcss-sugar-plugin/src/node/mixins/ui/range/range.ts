@@ -44,7 +44,7 @@ export default function ({
         --track-color: sugar.color(main, ui);
         --thumb-color: sugar.color(ui);
 
-        --focus-spread: sugar.theme(ui.range.focusSpread);
+        --focus-spread: sugar.theme(ui.focusOutline.borderWidth);
 
         --thumb-radius: 50%;
         --thumb-height: 1em;

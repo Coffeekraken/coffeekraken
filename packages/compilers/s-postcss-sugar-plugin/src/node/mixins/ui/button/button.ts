@@ -75,6 +75,12 @@ export default function ({
 
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
+        & > * {
+          @sugar.color.remap(ui, main);
+        }
+      `);
+
         switch (finalParams.style) {
             case 'gradient':
                 vars.push(`

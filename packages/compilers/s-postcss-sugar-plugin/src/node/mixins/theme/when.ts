@@ -1,17 +1,24 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __astNodesToString from '../../utils/astNodesToString';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
-  static definition = {
-      theme: {
-          type: 'String',
-          required: true
-      }
-  };
+    static definition = {
+        variant: {
+            type: 'String',
+            required: true,
+            default: __SSugarConfig.get('theme.variant'),
+        },
+        theme: {
+            type: 'String',
+            default: __SSugarConfig.get('theme.theme'),
+        },
+    };
 }
 export { postcssSugarPluginThemeWhenMixinInterface as interface };
 
 export interface postcssSugarPluginThemeWhenMixinParams {
+    variant: string;
     theme: string;
 }
 
@@ -34,7 +41,7 @@ export interface postcssSugarPluginThemeWhenMixinParams {
  *      margin-bottom: 50px;
  *    }
  * }
- * 
+ *
  * @example       html
  * <h1 class="my-cool-element">Hello world</h1>
  * <div class="s-theme\:dark">
@@ -45,22 +52,25 @@ export interface postcssSugarPluginThemeWhenMixinParams {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  postcssApi
+    params,
+    atRule,
+    postcssApi,
 }: {
-  params: Partial<postcssSugarPluginThemeWhenMixinParams>;
-  atRule: any;
-  postcssApi: any;
+    params: Partial<postcssSugarPluginThemeWhenMixinParams>;
+    atRule: any;
+    postcssApi: any;
 }) {
-  const finalParams = <postcssSugarPluginThemeWhenMixinParams>{
-    ...(params ?? {})
-  };
-  const container = new postcssApi.Rule({
-    selectors: [`.s-theme--${finalParams.theme} &`, `&.s-theme--${finalParams.theme}`]
-  });
-  atRule.nodes.forEach(n => {
-    container.append(n.clone());
-  });
-  atRule.replaceWith(container);
+    const finalParams = <postcssSugarPluginThemeWhenMixinParams>{
+        ...(params ?? {}),
+    };
+    const container = new postcssApi.Rule({
+        selectors: [
+            `.s-theme--${finalParams.theme}-${finalParams.variant} &`,
+            `&.s-theme--${finalParams.theme}-${finalParams.variant}`,
+        ],
+    });
+    atRule.nodes.forEach((n) => {
+        container.append(n.clone());
+    });
+    atRule.replaceWith(container);
 }

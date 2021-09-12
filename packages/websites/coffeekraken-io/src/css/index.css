@@ -12,25 +12,10 @@
   @sugar.classes;
 } */
 
-@sugar.theme (dark, true);
-
 body {
     @sugar.theme.when (dark) {
         background-color: sugar.color(main, --darken 30);
     }
-}
-
-/* s-code-example {
-    opacity: 0.1;
-    transition: all 0.2s ease-out;
-
-    &[mounted] {
-        opacity: 1;
-    }
-} */
-
-a:active {
-    color: red;
 }
 
 @sugar.icon.classes (
@@ -67,8 +52,7 @@ a:active {
 
 @sugar.platform.classes;
 
-.s-theme--dark,
-.s-code-example {
+.s-theme--dark {
     @sugar.theme (dark);
 }
 

@@ -4,14 +4,14 @@ import __SInterface from '@coffeekraken/s-interface';
 import __minifyVar from './minifyVar';
 import __micromatch from 'micromatch';
 
-export default function (theme: string): string[] {
+export default function (theme: string, variant?: string): string[] {
     const themesObj = __theme().themes;
     if (!themesObj[theme])
         throw new Error(`Sorry but the requested theme "<yellow>${theme}</yellow>" does not exists...`);
 
     // @ts-ignore
 
-    const themeInstance = __theme(theme);
+    const themeInstance = __theme(theme, variant);
 
     const themesConfig = themeInstance.themesConfig();
 

@@ -81,6 +81,10 @@ export default function ({
                     transform: translateX(-50%);
                     color: sugar.color(ui);
                 }
+
+                & > *:not(i) {
+                    @sugar.color.remap(ui, main);
+                }
             }
 
             [dir="rtl"] & > *,

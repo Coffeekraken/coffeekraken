@@ -78,12 +78,18 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
+            & > * {
+                @sugar.color.remap(ui, main);
+            }
+        `);
+
         switch (finalParams.style) {
             case 'solid':
             default:
                 vars.push(`
-                    background-color: sugar.color(ui, surface);
-                    color: sugar.color(ui, surfaceForeground);
+                    background-color: sugar.color(ui, background);
+                    color: sugar.color(ui, backgroundForeground);
                     padding-inline: sugar.scalable(sugar.theme(ui.dropdown.paddingInline));
                     padding-block: sugar.scalable(sugar.theme(ui.dropdown.paddingBlock));
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(ui, border);

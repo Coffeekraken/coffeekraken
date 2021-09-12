@@ -39,72 +39,72 @@ export default function ({
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
         * @cssClass             s-tooltip-container\:active     Allow to display a tooltip without having the need of the user interaction
         * @cssClass             s-tooltip                       Apply on the element you want as a tooltip
-        * @cssClass             s-tooltip\:top                  Align your tooltip on top
-        * @cssClass             s-tooltip\:right               Align your tooltip at right
-        * @cssClass             s-tooltip\:left               Align your tooltip at left
-        * @cssClass             s-tooltip\:bottom               Align your tooltip at bottom
+        * @cssClass             s-tooltip\:block-start                 Align your tooltip at "top". This is the default         
+        * @cssClass             s-tooltip\:inline-end               Align your tooltip at "right"
+        * @cssClass             s-tooltip\:inline-start               Align your tooltip at "left"
+        * @cssClass             s-tooltip\:block-end               Align your tooltip at "bottom"
         * @cssClass             s-tooltip\:interactive          Allow the user to interact with the tooltip
         * 
         * @example        html
         * <div class="s-font\:30 s-mb\:50">
         *   <span class="s-tooltip-container\:active">
-        *       <a class="s-btn s-mr\:20">Hello</a>
-        *       <div class="s-tooltip\:right s-ui\:accent">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Hello</a>
+        *       <div class="s-tooltip\:inline-end s-ui\:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * </div>
         * 
         * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Positions</h3>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Positions</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Block start (default)</a>
         *       <div class="s-tooltip">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
-        *       <div class="s-tooltip\:right s-ui\:accent">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Inline end</a>
+        *       <div class="s-tooltip\:inline-end s-ui\:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
-        *       <div class="s-tooltip\:bottom s-ui\:complementary">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Block end</a>
+        *       <div class="s-tooltip\:block-end s-ui\:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
-        *       <div class="s-tooltip\:left s-ui\:error">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Inline start</a>
+        *       <div class="s-tooltip\:inline-start s-ui\:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * </div>
         * 
         * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Colors</h3>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Colors (sample)</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Accent</a>
         *       <div class="s-tooltip s-ui\:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Complementary</a>
         *       <div class="s-tooltip s-ui\:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Error</a>
         *       <div class="s-tooltip s-ui\:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Info</a>
         *       <div class="s-tooltip s-ui\:info">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
@@ -112,15 +112,15 @@ export default function ({
         * </div>
         * 
         * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Interactions</h3>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Interactions</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">I'm not interactive</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">I'm not interactive</a>
         *       <div class="s-tooltip">
         *           <a class="s-btn s-ui\:accent">Click me if you can!</a>
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">I'm interactive</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">I'm interactive</a>
         *       <div class="s-tooltip\:interactive">
         *           <a class="s-btn s-ui\:accent">Click me because you can!</a>
         *       </div>
@@ -184,13 +184,6 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     // no need to write a class here cause this is handled in the tooltip.ts file directly...
-    // vars.push(`
-    //     .s-tooltip-container--active {
-    //         & > .s-tooltip {
-    //             opacity: 1;
-    //         }
-    //     }
-    // `);
 
     vars.push(`/**
         * @name           s-tooltip
@@ -240,11 +233,11 @@ export default function ({
 
     // TOP
     vars.push(`/**
-        * @name           s-tooltip--top
+        * @name           s-tooltip
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
-        * This class represent a simple top tooltip
+        * This class represent a simple block start (top) tooltip
         * 
         * @example        html
         * <a class="s-tooltip-container s-btn">
@@ -256,8 +249,8 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--top {
-            @sugar.ui.tooltip($position: top, $scope: 'position');
+        .s-tooltip {
+            @sugar.ui.tooltip($position: block-start, $scope: 'position');
         }
     `);
     // vars.push(`/**
@@ -301,24 +294,24 @@ export default function ({
 
     // RIGHT
     vars.push(`/**
-        * @name           s-tooltip--right
+        * @name           s-tooltip:inline-end
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
-        * This class represent a simple right tooltip
+        * This class represent a simple inline end (right) tooltip
         * 
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:right">Something cool</div>
+        *   <div class="s-tooltip\:inline-end">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--right {
-            @sugar.ui.tooltip($position: right, $scope: 'position');
+        .s-tooltip--inline-end {
+            @sugar.ui.tooltip($position: inline-end, $scope: 'position');
         }
     `);
     // vars.push(`/**
@@ -438,7 +431,7 @@ export default function ({
 
     // left
     vars.push(`/**
-        * @name           s-tooltip--left
+        * @name           s-tooltip:inline-start
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
@@ -447,15 +440,15 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:left">Something cool</div>
+        *   <div class="s-tooltip\:inline-start">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--left {
-            @sugar.ui.tooltip($position: left, $scope: 'position');
+        .s-tooltip--inline-start {
+            @sugar.ui.tooltip($position: inline-start, $scope: 'position');
         }
     `);
     // vars.push(`/**
@@ -575,24 +568,24 @@ export default function ({
 
     // BOTTOM
     vars.push(`/**
-        * @name           s-tooltip--bottom
+        * @name           s-tooltip:block-end
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
-        * This class represent a simple bottom tooltip
+        * This class represent a simple block end (bottom) tooltip
         * 
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip">Something cool</div>
+        *   <div class="s-tooltip\:block-end">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--bottom {
-            @sugar.ui.tooltip($position: bottom, $scope: 'position');
+        .s-tooltip--block-end {
+            @sugar.ui.tooltip($position: block-end, $scope: 'position');
         }
     `);
     // vars.push(`/**

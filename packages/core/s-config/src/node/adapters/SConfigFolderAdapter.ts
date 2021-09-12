@@ -172,8 +172,8 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     __SConfig.registerPrepare(this.configAdapterSettings.name, configKey, importedConfig.prepare);
                 }
 
-                if (importedConfig.proxy && typeof importedConfig.proxy === 'function') {
-                    __SConfig.registerProxy(this.configAdapterSettings.name, configKey, importedConfig.proxy);
+                if (importedConfig.preprocess && typeof importedConfig.preprocess === 'function') {
+                    __SConfig.registerPreprocess(this.configAdapterSettings.name, configKey, importedConfig.preprocess);
                 }
             }
         }

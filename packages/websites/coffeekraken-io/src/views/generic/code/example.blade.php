@@ -1,14 +1,8 @@
-<s-code-example>
+<s-code-example more-action="{{ $moreAction }}" lines="{{ $lines or 9999999 }}">
     @foreach($examples as $k => $example)
 
         <template lang="{{ $example->language or $k }}">
-@if ($lines)
-{!! implode(PHP_EOL, array_slice(explode(PHP_EOL, $example->code or $example), 0, $lines)) !!}
-{!! ($example->language or $example) == 'html' ? '<!-- more example(s) bellow -->' : '// more example(s) bellow' !!}
 {!! $example->code or $example !!}
-@else
-{!! $example->code or $example !!}
-@endif
         </template>
     @endforeach
 </s-code-example>

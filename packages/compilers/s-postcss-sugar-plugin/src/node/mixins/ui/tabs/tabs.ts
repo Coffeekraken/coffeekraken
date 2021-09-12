@@ -98,49 +98,53 @@ export default function ({
           border-radius: sugar.theme(ui.tabs.borderRadius);
           user-select: none;
 
-            & > * {
-              text-align: center;
-              padding-inline: sugar.theme(ui.tabs.paddingInline);
-              padding-block: sugar.theme(ui.tabs.paddingBlock);
-              transition: sugar.theme(ui.tabs.transition);
-              cursor: pointer;
-              display: block;      
-            }
+          & > * > * {
+            @sugar.color.remap(ui, main);
+          }
 
-            & > *:first-child {
-              border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
-              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-            }
-            & > *:last-child {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
-              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
-            }
+          & > * {
+            text-align: center;
+            padding-inline: sugar.theme(ui.tabs.paddingInline);
+            padding-block: sugar.theme(ui.tabs.paddingBlock);
+            transition: sugar.theme(ui.tabs.transition);
+            cursor: pointer;
+            display: block;      
+          }
 
-            [dir="rtl"] & > *:first-child,
-            &[dir="rtl"] > *:first-child {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
-              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
-            }
-            [dir="rtl"] & > *:last-child,
-            &[dir="rtl"] > *:last-child {
-              border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
-              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-            }
+          & > *:first-child {
+            border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
+            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+          & > *:last-child {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
+            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+          }
 
-            & > *:first-child:last-child {
-              border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-              border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
-              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
-            }
+          [dir="rtl"] & > *:first-child,
+          &[dir="rtl"] > *:first-child {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
+            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+          }
+          [dir="rtl"] & > *:last-child,
+          &[dir="rtl"] > *:last-child {
+            border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
+            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+
+          & > *:first-child:last-child {
+            border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+            border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+          }
 
       `);
     }

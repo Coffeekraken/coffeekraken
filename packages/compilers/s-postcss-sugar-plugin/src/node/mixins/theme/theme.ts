@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import { themeDefinition } from '../../utils/theme';
 import __themeToVars from '../../utils/themeToVars';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name           theme
@@ -28,6 +29,10 @@ import __themeToVars from '../../utils/themeToVars';
 class postcssSugarPluginThemeinInterface extends __SInterface {
     static definition = {
         theme: themeDefinition,
+        variant: {
+            type: 'String',
+            default: __SSugarConfig.get('theme.variant'),
+        },
         scope: {
             type: 'Boolean',
             default: false,
@@ -37,6 +42,7 @@ class postcssSugarPluginThemeinInterface extends __SInterface {
 
 export interface IPostcssSugarPluginThemeParams {
     theme: string;
+    variant: string;
     scope: boolean;
 }
 
@@ -52,11 +58,12 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginThemeParams = {
         theme: '',
+        variant: '',
         scope: false,
         ...params,
     };
 
-    const vars = __themeToVars(finalParams.theme);
+    const vars = __themeToVars(finalParams.theme, finalParams.variant);
 
     if (finalParams.scope) {
         vars.unshift(`.s-theme--${finalParams.theme} {`);

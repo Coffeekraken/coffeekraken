@@ -2,11 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
-  static definition = {
-    theme: {
-      type: 'String'
-    }
-  };
+    static definition = {
+        theme: {
+            type: 'String',
+        },
+    };
 }
 export { postcssSugarPluginMediaMixinInterface as interface };
 
@@ -31,23 +31,15 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({
-  params,
-  atRule,
-  replaceWith
-}: {
-  params: any;
-  atRule: any;
-  replaceWith: Function;
-}) {
-  const themeConfig = __SugarConfig.get('theme');
+export default function ({ params, atRule, replaceWith }: { params: any; atRule: any; replaceWith: Function }) {
+    const themeConfig = __SugarConfig.get('theme');
 
-  const cssArray = [
-    '@sugar.reset;',
-    `@sugar.theme(${params.theme ?? themeConfig.theme});`,
-    '@sugar.font.faces;'
-    // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
-  ];
+    const cssArray = [
+        '@sugar.reset;',
+        `@sugar.theme(${params.theme ?? themeConfig.theme});`,
+        '@sugar.font.faces;',
+        // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
+    ];
 
-  replaceWith(cssArray);
+    replaceWith(cssArray);
 }

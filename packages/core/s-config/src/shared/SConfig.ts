@@ -49,7 +49,12 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 export interface ISConfigPrepareFn {
     (currentConfig: any, config: any): any;
 }
-export interface ISConfigProxyFn {
+
+export interface ISConfigPreprocessFn {
+    (currentRawConfig: any, rawConfig: any): any;
+}
+
+export interface ISConfigAfterLoadFn {
     (dotPath: string, originalValue: any, config: any): any;
 }
 
@@ -117,26 +122,6 @@ export default class SConfig {
     _settings = {};
 
     /**
-     * @name        registerProxy
-     * @type        Function
-     * @static
-     *
-     * This method allows you to register a proxy function for some particular config.
-     *
-     * @param     {String}      configId        The configuration id you want to proxy
-     * @param     {String}      scopePath       The dot path of the value you want to proxy
-     * @param     {ISConfigProxyFn}     proxyFn       The proxy function that must return a value and that take as parameters the dot path, the original value of the targeted config and the config object
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static _registeredProxies: any = {};
-    static registerProxy(configId: string, scopePath: string, proxyFn: ISConfigProxyFn) {
-        if (!this._registeredProxies[configId]) this._registeredProxies[configId] = {};
-        this._registeredProxies[configId][scopePath] = proxyFn;
-    }
-
-    /**
      * @name        registerPrepare
      * @type        Function
      * @static
@@ -154,6 +139,26 @@ export default class SConfig {
     static registerPrepare(configId: string, configKey: string, prepareFn: ISConfigPrepareFn) {
         if (!this._registeredPrepares[configId]) this._registeredPrepares[configId] = {};
         this._registeredPrepares[configId][configKey] = prepareFn;
+    }
+
+    /**
+     * @name        registerPreprocess
+     * @type        Function
+     * @static
+     *
+     * This method allows you to register a prepare function that will be fired once the config is ready so you can make updates as needed
+     *
+     * @param     {String}      configId        The configuration id you want to proxy
+     * @param     {String}      configKey       The root config key you want to prepare with that function. This has to be one of the root config property
+     * @param     {ISConfigPreprocessFn}     preprocessFn         The prepare function that MUST return the new current config and that take as parameters the current config object and the whole config object
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static _registeredPreprocesses: any = {};
+    static registerPreprocess(configId: string, configKey: string, preprocessFn: ISConfigPreprocessFn) {
+        if (!this._registeredPreprocesses[configId]) this._registeredPreprocesses[configId] = {};
+        this._registeredPreprocesses[configId][configKey] = preprocessFn;
     }
 
     /**
@@ -414,6 +419,16 @@ export default class SConfig {
             }
         });
 
+        if (this.constructor._registeredPreprocesses[this.id]) {
+            for (let k = 0; k < Object.keys(this.constructor._registeredPreprocesses[this.id]).length; k++) {
+                const configKey = Object.keys(this.constructor._registeredPreprocesses[this.id])[k];
+                config[configKey] = await this.constructor._registeredPreprocesses[this.id][configKey](
+                    config[configKey],
+                    config,
+                );
+            }
+        }
+
         // handle the "extends" global property
         Object.keys(config).forEach((configName) => {
             config[configName] = extendsConfigIfNeeded(config[configName], configName);
@@ -587,16 +602,6 @@ export default class SConfig {
                 }
             }
         }
-
-        // check proxy
-        if (this.constructor._registeredProxies[this.id] && this.constructor._registeredProxies[this.id][path[0]]) {
-            originalValue = this.constructor._registeredProxies[this.id][path[0]](
-                path.join('.'),
-                originalValue,
-                config,
-            );
-        }
-
         return originalValue;
     }
 

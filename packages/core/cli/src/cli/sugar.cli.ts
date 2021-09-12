@@ -64,9 +64,9 @@ if (cliParams.bench) {
     __SBench.env.activateBench(cliParams.bench === true ? '*' : cliParams.bench);
 }
 
-__SLog.filter({
-    type: [__SLog.LOG, __SLog.INFO, __SLog.WARN, __SLog.ERROR],
-});
+// __SLog.filter({
+//     type: [__SLog.LOG, __SLog.INFO, __SLog.WARN, __SLog.ERROR],
+// });
 
 class SSugarCli {
     _command: string;

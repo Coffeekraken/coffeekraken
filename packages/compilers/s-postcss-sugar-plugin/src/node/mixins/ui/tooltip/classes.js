@@ -21,72 +21,72 @@ export default function ({ params, atRule, replaceWith, }) {
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
         * @cssClass             s-tooltip-container\:active     Allow to display a tooltip without having the need of the user interaction
         * @cssClass             s-tooltip                       Apply on the element you want as a tooltip
-        * @cssClass             s-tooltip\:top                  Align your tooltip on top
-        * @cssClass             s-tooltip\:right               Align your tooltip at right
-        * @cssClass             s-tooltip\:left               Align your tooltip at left
-        * @cssClass             s-tooltip\:bottom               Align your tooltip at bottom
+        * @cssClass             s-tooltip\:block-start                 Align your tooltip at "top". This is the default         
+        * @cssClass             s-tooltip\:inline-end               Align your tooltip at "right"
+        * @cssClass             s-tooltip\:inline-start               Align your tooltip at "left"
+        * @cssClass             s-tooltip\:block-end               Align your tooltip at "bottom"
         * @cssClass             s-tooltip\:interactive          Allow the user to interact with the tooltip
         * 
         * @example        html
         * <div class="s-font\:30 s-mb\:50">
         *   <span class="s-tooltip-container\:active">
-        *       <a class="s-btn s-mr\:20">Hello</a>
-        *       <div class="s-tooltip\:right s-ui\:accent">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Hello</a>
+        *       <div class="s-tooltip\:inline-end s-ui\:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * </div>
         * 
         * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Positions</h3>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Positions</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Block start (default)</a>
         *       <div class="s-tooltip">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
-        *       <div class="s-tooltip\:right s-ui\:accent">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Inline end</a>
+        *       <div class="s-tooltip\:inline-end s-ui\:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
-        *       <div class="s-tooltip\:bottom s-ui\:complementary">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Block end</a>
+        *       <div class="s-tooltip\:block-end s-ui\:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
-        *       <div class="s-tooltip\:left s-ui\:error">
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Inline start</a>
+        *       <div class="s-tooltip\:inline-start s-ui\:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * </div>
         * 
         * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Colors</h3>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Colors (sample)</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Accent</a>
         *       <div class="s-tooltip s-ui\:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Complementary</a>
         *       <div class="s-tooltip s-ui\:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Error</a>
         *       <div class="s-tooltip s-ui\:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">Hover me!</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">Info</a>
         *       <div class="s-tooltip s-ui\:info">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
@@ -94,15 +94,15 @@ export default function ({ params, atRule, replaceWith, }) {
         * </div>
         * 
         * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Interactions</h3>
+        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Interactions</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">I'm not interactive</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">I'm not interactive</a>
         *       <div class="s-tooltip">
         *           <a class="s-btn s-ui\:accent">Click me if you can!</a>
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20">I'm interactive</a>
+        *       <a class="s-btn s-mr\:20 s-mb\:20">I'm interactive</a>
         *       <div class="s-tooltip\:interactive">
         *           <a class="s-btn s-ui\:accent">Click me because you can!</a>
         *       </div>
@@ -164,13 +164,6 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     // no need to write a class here cause this is handled in the tooltip.ts file directly...
-    // vars.push(`
-    //     .s-tooltip-container--active {
-    //         & > .s-tooltip {
-    //             opacity: 1;
-    //         }
-    //     }
-    // `);
     vars.push(`/**
         * @name           s-tooltip
         * @namespace      sugar.css.ui.tooltip
@@ -217,11 +210,11 @@ export default function ({ params, atRule, replaceWith, }) {
     `);
     // TOP
     vars.push(`/**
-        * @name           s-tooltip--top
+        * @name           s-tooltip
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
-        * This class represent a simple top tooltip
+        * This class represent a simple block start (top) tooltip
         * 
         * @example        html
         * <a class="s-tooltip-container s-btn">
@@ -233,8 +226,8 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--top {
-            @sugar.ui.tooltip($position: top, $scope: 'position');
+        .s-tooltip {
+            @sugar.ui.tooltip($position: block-start, $scope: 'position');
         }
     `);
     // vars.push(`/**
@@ -277,24 +270,24 @@ export default function ({ params, atRule, replaceWith, }) {
     // `);
     // RIGHT
     vars.push(`/**
-        * @name           s-tooltip--right
+        * @name           s-tooltip:inline-end
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
-        * This class represent a simple right tooltip
+        * This class represent a simple inline end (right) tooltip
         * 
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:right">Something cool</div>
+        *   <div class="s-tooltip\:inline-end">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--right {
-            @sugar.ui.tooltip($position: right, $scope: 'position');
+        .s-tooltip--inline-end {
+            @sugar.ui.tooltip($position: inline-end, $scope: 'position');
         }
     `);
     // vars.push(`/**
@@ -413,7 +406,7 @@ export default function ({ params, atRule, replaceWith, }) {
     // `);
     // left
     vars.push(`/**
-        * @name           s-tooltip--left
+        * @name           s-tooltip:inline-start
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
@@ -422,15 +415,15 @@ export default function ({ params, atRule, replaceWith, }) {
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:left">Something cool</div>
+        *   <div class="s-tooltip\:inline-start">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--left {
-            @sugar.ui.tooltip($position: left, $scope: 'position');
+        .s-tooltip--inline-start {
+            @sugar.ui.tooltip($position: inline-start, $scope: 'position');
         }
     `);
     // vars.push(`/**
@@ -549,24 +542,24 @@ export default function ({ params, atRule, replaceWith, }) {
     // `);
     // BOTTOM
     vars.push(`/**
-        * @name           s-tooltip--bottom
+        * @name           s-tooltip:block-end
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
-        * This class represent a simple bottom tooltip
+        * This class represent a simple block end (bottom) tooltip
         * 
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip">Something cool</div>
+        *   <div class="s-tooltip\:block-end">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`);
     vars.push(`
-        .s-tooltip--bottom {
-            @sugar.ui.tooltip($position: bottom, $scope: 'position');
+        .s-tooltip--block-end {
+            @sugar.ui.tooltip($position: block-end, $scope: 'position');
         }
     `);
     // vars.push(`/**
@@ -609,4 +602,4 @@ export default function ({ params, atRule, replaceWith, }) {
     // `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0sMkNBQTRDLFNBQVEsWUFBWTs7QUFDM0Qsc0RBQVUsR0FBRyxFQUFFLENBQUM7QUFLM0IsT0FBTyxFQUFFLDJDQUEyQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXBFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztzQkF5QlEsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OztzQkFVL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7O3NCQU0vQyxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7c0JBTS9DLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7OztzQkFNL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OztzQkFVL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0sMkNBQTRDLFNBQVEsWUFBWTs7QUFDM0Qsc0RBQVUsR0FBRyxFQUFFLENBQUM7QUFLM0IsT0FBTyxFQUFFLDJDQUEyQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXBFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztzQkF5QlEsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OztzQkFVL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7O3NCQU0vQyxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7c0JBTS9DLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7OztzQkFNL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OztzQkFVL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFB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

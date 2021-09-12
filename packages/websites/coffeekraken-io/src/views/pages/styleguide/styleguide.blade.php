@@ -28,7 +28,7 @@
                             @if ($firstBlock->install)
                                 @include('doc.install', ['block' => $firstBlock])
                             @elseif ($firstBlock->example)
-                                @include('generic.code.example', ['examples' => $firstBlock->example, 'lines' => 1])
+                                @include('generic.code.example', ['examples' => $firstBlock->example, 'lines' => 5, 'moreAction' => '#example-' . \Sugar\string\idCompliant($firstBlock->name)])
                             @endif
 
                         </div>

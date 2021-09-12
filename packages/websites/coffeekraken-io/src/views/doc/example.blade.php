@@ -1,6 +1,6 @@
 @if ($block->example)
 
-    <h4 id="example-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="example-{{ \Sugar\string\idCompliant($block->name) }}" class="s-typo:h4 s-mt:80 s-mb:50">
         <i class="s-icon:example s-color:accent"></i>&nbsp;&nbsp;Example
     </h4>
 

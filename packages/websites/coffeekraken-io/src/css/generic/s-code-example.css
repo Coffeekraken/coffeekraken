@@ -2,8 +2,6 @@ s-code-example {
     display: block;
     position: relative;
     @sugar.theme (dark);
-    @sugar.depth (100);
-    @sugar.border.radius();
 
     /* @sugar.shadow.gradient (0, 10px, 10px, 1, sugar.color(accent), sugar.color(complementary)) {
         width: calc(100% - 40px);

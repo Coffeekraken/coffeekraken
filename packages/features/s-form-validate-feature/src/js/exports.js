@@ -1,0 +1,4 @@
+import __SFormValidateFeature from './SFormValidateFeature';
+export * from './SFormValidateFeature';
+export default __SFormValidateFeature;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxzQkFBc0IsTUFBTSx3QkFBd0IsQ0FBQztBQUM1RCxjQUFjLHdCQUF3QixDQUFDO0FBQ3ZDLGVBQWUsc0JBQXNCLENBQUMifQ==

@@ -10,7 +10,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import { LitElement } from 'lit';
 import __SClass from '@coffeekraken/s-class';
 
 export class SComponentDefaultInterface extends __SInterface {
@@ -49,7 +48,7 @@ export interface ISComponentUtilsSettings {
 }
 
 export interface ISComponentUtilsCtorSettings {
-    sComponent: Partial<ISComponentUtilsSettings>;
+    componentUtils: Partial<ISComponentUtilsSettings>;
 }
 
 export interface ISComponentDefaultProps {
@@ -126,7 +125,7 @@ export default class SComponent extends __SClass {
     }
 
     /**
-     * @name        sComponentUtilsSettings
+     * @name        componentUtilsSettings
      * @type        ISComponentUtilsSettings
      * @get
      *
@@ -135,8 +134,8 @@ export default class SComponent extends __SClass {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    get sComponentUtilsSettings(): ISComponentUtilsSettings {
-        return (<any>this._settings).sComponentUtils;
+    get componentUtilsSettings(): ISComponentUtilsSettings {
+        return (<any>this._settings).componentUtils;
     }
 
     _whenMountPromise;
@@ -156,7 +155,7 @@ export default class SComponent extends __SClass {
         super(
             __deepMerge(
                 {
-                    sComponentUtils: {},
+                    componentUtils: {},
                 },
                 settings,
             ),
@@ -173,13 +172,13 @@ export default class SComponent extends __SClass {
         InterfaceToApply.definition = {
             ...Object.assign({}, SComponentDefaultInterface.definition),
             // @ts-ignore
-            ...(this.sComponentUtilsSettings.interface?.definition ?? {}),
+            ...(this.componentUtilsSettings.interface?.definition ?? {}),
         };
         // @ts-ignore
         this.InterfaceToApply = InterfaceToApply;
 
         // @ts-ignore
-        const styleStr = this.sComponentUtilsSettings.style;
+        const styleStr = this.componentUtilsSettings.style;
         this.injectStyle(styleStr ?? '');
 
         // waiting for mount state
@@ -322,7 +321,7 @@ export default class SComponent extends __SClass {
             __deepMerge(
                 // @ts-ignore
                 this.InterfaceToApply.defaults(),
-                this.sComponentUtilsSettings.defaultProps ?? {},
+                this.componentUtilsSettings.defaultProps ?? {},
                 (<any>this.constructor)._defaultProps['*'] ?? {},
                 (<any>this.constructor)._defaultProps[this.node.tagName.toLowerCase()] ?? {},
             ),

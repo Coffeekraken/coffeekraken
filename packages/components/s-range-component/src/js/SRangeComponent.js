@@ -1,13 +1,35 @@
 // @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+var __awaiter =
+    (this && this.__awaiter) ||
+    function (thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P
+                ? value
+                : new P(function (resolve) {
+                      resolve(value);
+                  });
+        }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator['throw'](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
 import { html, css, unsafeCSS } from 'lit';
 import __SRangeComponentInterface from './interface/SRangeComponentInterface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
@@ -18,21 +40,23 @@ export default class SRange extends __SLitComponent {
         return __SLitComponent.properties({}, __SRangeComponentInterface);
     }
     static get styles() {
-        return css `
+        return css`
             ${unsafeCSS(`
                 ${__css}
             `)}
         `;
     }
     constructor() {
-        super(__deepMerge({
-            sLitComponent: {
-                shadowDom: false,
-            },
-            sComponentUtils: {
-                interface: __SRangeComponentInterface,
-            },
-        }));
+        super(
+            __deepMerge({
+                sLitComponent: {
+                    shadowDom: false,
+                },
+                componentUtils: {
+                    interface: __SRangeComponentInterface,
+                },
+            }),
+        );
     }
     firstUpdated() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -52,16 +76,14 @@ export default class SRange extends __SLitComponent {
         });
     }
     _handleTarget() {
-        if (!this._$targets)
-            return;
+        if (!this._$targets) return;
         this._$targets.forEach(($target) => {
             $target.innerHTML = this._$input.value;
             $target.value = this._$input.value;
         });
     }
     _handleTooltip() {
-        if (!this._$tooltip)
-            return;
+        if (!this._$tooltip) return;
         const val = this._$input.value;
         const min = this._$input.min ? this._$input.min : 0;
         const max = this._$input.max ? this._$input.max : 100;
@@ -70,7 +92,7 @@ export default class SRange extends __SLitComponent {
         this._$tooltip.innerHTML = val;
     }
     render() {
-        return html `
+        return html`
             <div class="${this.componentUtils.className('', 's-tooltip-container')}">
                 <input
                     class="${this.componentUtils.className('__input', 's-range')}"
@@ -82,8 +104,8 @@ export default class SRange extends __SLitComponent {
                     step="${this.step}"
                 />
                 ${this.props.tooltip
-            ? html ` <div class="${this.componentUtils.className('__tooltip', 's-tooltip')}"></div> `
-            : ''}
+                    ? html` <div class="${this.componentUtils.className('__tooltip', 's-tooltip')}"></div> `
+                    : ''}
             </div>
         `;
     }

@@ -5,6 +5,11 @@ class postcssSugarPluginMediaMixinInterface extends __SInterface {
     static definition = {
         theme: {
             type: 'String',
+            default: __SugarConfig.get('theme.theme'),
+        },
+        variant: {
+            type: 'String',
+            default: __SugarConfig.get('theme.variant'),
         },
     };
 }
@@ -32,11 +37,9 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ params, atRule, replaceWith }: { params: any; atRule: any; replaceWith: Function }) {
-    const themeConfig = __SugarConfig.get('theme');
-
     const cssArray = [
         '@sugar.reset;',
-        `@sugar.theme(${params.theme ?? themeConfig.theme});`,
+        `@sugar.theme(${params.variant}, ${params.theme});`,
         '@sugar.font.faces;',
         // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
     ];

@@ -1,0 +1,6 @@
+@sugar.init;
+@sugar.classes;
+
+body {
+    background: sugar.color(main, background);
+}

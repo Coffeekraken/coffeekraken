@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form Validate Feature</title>
+        <link rel="stylesheet" href="./src/css/index.css" />
+    </head>
+    <body>
+        <script type="module">
+            import { register } from './src/js/exports.ts';
+
+            register();
+        </script>
+
+        <form action="/something">
+            <div alphanum s-form-validate>
+                <input class="s-input" type="text" name="input" />
+            </div>
+
+            <label class="s-label" s-form-validate alphanum>
+                <input class="s-input" type="text" name="input" />
+                Hello world
+            </label>
+
+            <label class="s-label" s-form-validate domain>
+                <input class="s-input" type="text" name="input" />
+                Domain
+            </label>
+
+            <label class="s-label" s-form-validate email>
+                <input class="s-input" type="email" name="input" />
+                Email
+            </label>
+        </form>
+    </body>
+</html>

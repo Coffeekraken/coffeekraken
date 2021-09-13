@@ -76,9 +76,7 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-        & > * {
-          @sugar.color.remap(ui, main);
-        }
+        
       `);
 
         switch (finalParams.style) {
@@ -90,6 +88,10 @@ export default function ({
                     border: none !important;
 
                     --borderWidth: sugar.theme(ui.button.borderWidth);
+
+                    & > * {
+                      @sugar.color.remap(ui, main);
+                    }
 
                     & > * {
                       position: relative;
@@ -139,6 +141,10 @@ export default function ({
                 &:hover, &:focus {
                   background-color: sugar.color(ui, --alpha 0.3);
                 }
+
+                & > * {
+                  @sugar.color.remap(ui, main);
+                }
               `);
                 break;
             case 'text':
@@ -151,6 +157,10 @@ export default function ({
                     background-color: sugar.color(ui, --alpha 0);
                     transform: scale(1.1);
                   }
+
+                  & > * {
+                    @sugar.color.remap(ui, main);
+                  }
                 `);
                 break;
             case 'default':
@@ -162,6 +172,10 @@ export default function ({
                   &:hover, &:focus {
                     background-color: sugar.color(ui:hover, 50);
                     color: sugar.color(ui:hover, foreground);
+                  }
+
+                  & > * {
+                    @sugar.color.remap(ui, main);
                   }
         `);
                 break;

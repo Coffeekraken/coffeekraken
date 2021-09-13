@@ -13,35 +13,6 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import { LitElement } from 'lit';
 
-export class SLitComponentDefaultInterface extends __SInterface {
-    static definition = {
-        id: {
-            type: 'String',
-            physical: true,
-        },
-        mounted: {
-            type: 'Boolean',
-            default: false,
-            physical: true,
-        },
-        mountWhen: {
-            type: 'String',
-            values: ['directly', 'inViewport'],
-            default: 'directly',
-        },
-        adoptStyle: {
-            type: 'Boolean',
-            default: true,
-            physical: true,
-        },
-        defaultStyle: {
-            type: 'Boolean',
-            default: false,
-            physical: true,
-        },
-    };
-}
-
 export interface ISLitComponentSettings {
     interface?: typeof __SInterface;
     rootNode?: HTMLElement;
@@ -135,7 +106,7 @@ export default class SLitComponent extends LitElement {
 
         this._settings = __deepMerge(
             {
-                sComponentUtils: {},
+                componentUtils: {},
                 sLitComponent: {
                     shadowDom: true,
                     get rootNode() {
@@ -147,7 +118,7 @@ export default class SLitComponent extends LitElement {
         );
 
         this.componentUtils = new __SComponentUtils(this, this.attributes, {
-            sComponentUtils: {
+            componentUtils: {
                 ...(this._settings.sComponentUtils ?? {}),
                 style: this.constructor.styles?.cssText ?? this._settings.sComponentUtils?.style ?? '',
             },

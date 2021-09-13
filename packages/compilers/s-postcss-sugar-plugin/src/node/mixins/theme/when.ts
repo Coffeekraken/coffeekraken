@@ -6,7 +6,6 @@ class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
     static definition = {
         variant: {
             type: 'String',
-            required: true,
             default: __SSugarConfig.get('theme.variant'),
         },
         theme: {

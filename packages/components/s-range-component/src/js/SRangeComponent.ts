@@ -81,7 +81,7 @@ export default class SRange extends __SLitComponent {
                 sLitComponent: {
                     shadowDom: false,
                 },
-                sComponentUtils: {
+                componentUtils: {
                     interface: __SRangeComponentInterface,
                 },
             }),

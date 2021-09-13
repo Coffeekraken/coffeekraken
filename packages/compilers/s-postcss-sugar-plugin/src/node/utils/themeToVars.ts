@@ -5,13 +5,10 @@ import __minifyVar from './minifyVar';
 import __micromatch from 'micromatch';
 
 export default function (theme: string, variant?: string): string[] {
-    const themesObj = __theme().themes;
-    if (!themesObj[theme])
-        throw new Error(`Sorry but the requested theme "<yellow>${theme}</yellow>" does not exists...`);
-
     // @ts-ignore
-
     const themeInstance = __theme(theme, variant);
+    if (!themeInstance)
+        throw new Error(`Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists...`);
 
     const themesConfig = themeInstance.themesConfig();
 
@@ -45,7 +42,7 @@ export default function (theme: string, variant?: string): string[] {
     });
 
     // others than colors
-    const themeObjWithoutColors = Object.assign({}, themesObj[theme]);
+    const themeObjWithoutColors = Object.assign({}, themeInstance.config('.'));
     delete themeObjWithoutColors.color;
     const flattenedTheme = __flatten(themeObjWithoutColors);
 

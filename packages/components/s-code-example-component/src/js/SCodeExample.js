@@ -1,18 +1,47 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+var __decorate =
+    (this && this.__decorate) ||
+    function (decorators, target, key, desc) {
+        var c = arguments.length,
+            r = c < 3 ? target : desc === null ? (desc = Object.getOwnPropertyDescriptor(target, key)) : desc,
+            d;
+        if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
+            r = Reflect.decorate(decorators, target, key, desc);
+        else
+            for (var i = decorators.length - 1; i >= 0; i--)
+                if ((d = decorators[i])) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+var __awaiter =
+    (this && this.__awaiter) ||
+    function (thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P
+                ? value
+                : new P(function (resolve) {
+                      resolve(value);
+                  });
+        }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator['throw'](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
 import { define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -32,15 +61,28 @@ __SClipboardCopy();
 export default class SCodeExample extends __SLitComponent {
     constructor() {
         var _a;
-        super(__deepMerge({
-            sComponentUtils: {
-                interface: __SCodeExampleComponentInterface,
-            },
-        }));
+        super(
+            __deepMerge({
+                componentUtils: {
+                    interface: __SCodeExampleComponentInterface,
+                },
+            }),
+        );
         this._$copy = undefined;
         this._items = [];
         this._activeTabId = undefined;
-        const languages = Object.assign({ html: __langHtml, javascript: __langJavascript, js: __langJavascript, php: __langPhp, bash: __langBash, shell: __langBash, css: __langCss }, ((_a = this.props.languages) !== null && _a !== void 0 ? _a : {}));
+        const languages = Object.assign(
+            {
+                html: __langHtml,
+                javascript: __langJavascript,
+                js: __langJavascript,
+                php: __langPhp,
+                bash: __langBash,
+                shell: __langBash,
+                css: __langCss,
+            },
+            (_a = this.props.languages) !== null && _a !== void 0 ? _a : {},
+        );
         Object.keys(languages).forEach((lang) => {
             __hljs.registerLanguage(lang, languages[lang]);
         });
@@ -49,7 +91,7 @@ export default class SCodeExample extends __SLitComponent {
         return __SLitComponent.properties({}, __SCodeExampleComponentInterface);
     }
     static get styles() {
-        return css `
+        return css`
             ${unsafeCSS(__css)}
         `;
     }
@@ -58,13 +100,27 @@ export default class SCodeExample extends __SLitComponent {
         return __awaiter(this, void 0, void 0, function* () {
             this.$templates.forEach(($template) => {
                 var _a, _b, _c, _d, _e;
-                if (!$template.getAttribute)
-                    return;
+                if (!$template.getAttribute) return;
                 this._items = [
                     ...this._items,
                     {
-                        id: (_c = (_b = (_a = $template.getAttribute('id')) !== null && _a !== void 0 ? _a : $template.getAttribute('language')) !== null && _b !== void 0 ? _b : $template.getAttribute('lang')) !== null && _c !== void 0 ? _c : 'html',
-                        lang: (_e = (_d = $template.getAttribute('language')) !== null && _d !== void 0 ? _d : $template.getAttribute('lang')) !== null && _e !== void 0 ? _e : 'html',
+                        id:
+                            (_c =
+                                (_b =
+                                    (_a = $template.getAttribute('id')) !== null && _a !== void 0
+                                        ? _a
+                                        : $template.getAttribute('language')) !== null && _b !== void 0
+                                    ? _b
+                                    : $template.getAttribute('lang')) !== null && _c !== void 0
+                                ? _c
+                                : 'html',
+                        lang:
+                            (_e =
+                                (_d = $template.getAttribute('language')) !== null && _d !== void 0
+                                    ? _d
+                                    : $template.getAttribute('lang')) !== null && _e !== void 0
+                                ? _e
+                                : 'html',
                         // @ts-ignore
                         code: $template.innerHTML,
                     },
@@ -74,16 +130,20 @@ export default class SCodeExample extends __SLitComponent {
             // active idx
             if (this.active) {
                 this.setActiveTab(this.active);
-            }
-            else {
+            } else {
                 if (this._items[0]) {
                     this.setActiveTab(this._items[0].id);
                 }
             }
             yield __wait(500);
-            this.$content = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector('.s-code-example__content');
-            this.$pre = (_b = this.shadowRoot) === null || _b === void 0 ? void 0 : _b.querySelector('.s-code-example__code');
-            this.$root = (_c = this.shadowRoot) === null || _c === void 0 ? void 0 : _c.querySelector('.s-code-example');
+            this.$content =
+                (_a = this.shadowRoot) === null || _a === void 0
+                    ? void 0
+                    : _a.querySelector('.s-code-example__content');
+            this.$pre =
+                (_b = this.shadowRoot) === null || _b === void 0 ? void 0 : _b.querySelector('.s-code-example__code');
+            this.$root =
+                (_c = this.shadowRoot) === null || _c === void 0 ? void 0 : _c.querySelector('.s-code-example');
             return true;
         });
     }
@@ -102,8 +162,7 @@ export default class SCodeExample extends __SLitComponent {
             yield __wait(500);
             if (this.more) {
                 this.$root.classList.add('s-code-example--more');
-            }
-            else {
+            } else {
                 this.$root.classList.remove('s-code-example--more');
             }
         });
@@ -131,21 +190,27 @@ export default class SCodeExample extends __SLitComponent {
     }
     render() {
         var _a, _b, _c, _d, _e, _f, _g;
-        return html `
+        return html`
             <div
-                class="${this.componentUtils.className()} ${this.props.more ? this.componentUtils.className('more') : ''}"
+                class="${this.componentUtils.className()} ${
+            this.props.more ? this.componentUtils.className('more') : ''
+        }"
                 ?lines="${
-        // @ts-ignore
-        this.lines}"
+                    // @ts-ignore
+                    this.lines
+                }"
                 ?mounted="${
-        // @ts-ignore
-        this.mounted}"
+                    // @ts-ignore
+                    this.mounted
+                }"
                 ?default-style="${
-        // @ts-ignore
-        this.defaultStyle}"
+                    // @ts-ignore
+                    this.defaultStyle
+                }"
                 toolbar-position="${
-        // @ts-ignore
-        this.toolbarPosition}"
+                    // @ts-ignore
+                    this.toolbarPosition
+                }"
             >
                 <div class="templates">
                     <slot></slot>
@@ -153,7 +218,8 @@ export default class SCodeExample extends __SLitComponent {
 
                 <header class="${this.componentUtils.className('__nav')}">
                     <ol class="${this.componentUtils.className('__tabs', 's-tabs')}">
-                        ${((_a = this._items) !== null && _a !== void 0 ? _a : []).map((item) => html `
+                        ${((_a = this._items) !== null && _a !== void 0 ? _a : []).map(
+                            (item) => html`
                                 <li
                                     class="${this.componentUtils.className('__tab')}"
                                     id="${item.id}"
@@ -162,79 +228,108 @@ export default class SCodeExample extends __SLitComponent {
                                 >
                                     ${item.lang}
                                 </li>
-                            `)}
+                            `,
+                        )}
                     </ol>
                     ${
-        // @ts-ignore
-        this.toolbarPosition === 'nav'
-            ? html `
+                        // @ts-ignore
+                        this.toolbarPosition === 'nav'
+                            ? html`
                                   <div class="${this.componentUtils.className('__toolbar')}">
                                       <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
                                   </div>
                               `
-            : ''}
+                            : ''
+                    }
                 </header>
                 <div
                     class="${this.componentUtils.className('__content')}"
                     style="--max-lines: ${(_b = this.props.lines) !== null && _b !== void 0 ? _b : 99999999};"
                 >
                     ${
-        // @ts-ignore
-        this.toolbarPosition !== 'nav'
-            ? html `
+                        // @ts-ignore
+                        this.toolbarPosition !== 'nav'
+                            ? html`
                                   <div class="${this.componentUtils.className('__toolbar')}">
                                       <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
                                   </div>
                               `
-            : ''}
+                            : ''
+                    }
                     ${((_c = this._items) !== null && _c !== void 0 ? _c : []).map((item) => {
-            var _a, _b, _c;
-            return html `
+                        var _a, _b, _c;
+                        return html`
                             <pre
                                 class="${this.componentUtils.className('__code')}"
                                 style="line-height:0;"
                                 id="${(_a = item.id) !== null && _a !== void 0 ? _a : item.lang}"
-                                ?active="${this._activeTabId === ((_b = item.id) !== null && _b !== void 0 ? _b : item.lang)}"
+                                ?active="${this._activeTabId ===
+                                ((_b = item.id) !== null && _b !== void 0 ? _b : item.lang)}"
                             >
-                            <code lang="${(_c = item.lang) !== null && _c !== void 0 ? _c : item.id}" class="language-${item.lang} ${item.lang} ${this.props
-                .defaultStyle
-                ? 'hljs'
-                : ''}">${
-            // @ts-ignore
-            item.code.trim()}</code>
+                            <code lang="${(_c = item.lang) !== null && _c !== void 0
+                                ? _c
+                                : item.id}" class="language-${item.lang} ${item.lang} ${this.props.defaultStyle
+                                ? 'hljs'
+                                : ''}">${
+                                // @ts-ignore
+                                item.code.trim()
+                            }</code>
                         </pre>
                         `;
-        })}
+                    })}
                     <div class="${this.componentUtils.className('__more-bar')}">
                         ${
-        // @ts-ignore
-        this.moreAction === 'toggle'
-            ? html `
+                            // @ts-ignore
+                            this.moreAction === 'toggle'
+                                ? html`
                                       <a
                                           class="${this.componentUtils.className('__more-button', 's-btn')}"
                                           @click="${this.toggleMore}"
                                       >
                                           ${
-            // @ts-ignore
-            this.more
-                ? html ` ${(_d = this.props.lessLabel) !== null && _d !== void 0 ? _d : 'Show less'} `
-                : html ` ${(_e = this.props.moreLabel) !== null && _e !== void 0 ? _e : 'Show more'} `}
+                                              // @ts-ignore
+                                              this.more
+                                                  ? html`
+                                                        ${(_d = this.props.lessLabel) !== null && _d !== void 0
+                                                            ? _d
+                                                            : 'Show less'}
+                                                    `
+                                                  : html`
+                                                        ${(_e = this.props.moreLabel) !== null && _e !== void 0
+                                                            ? _e
+                                                            : 'Show more'}
+                                                    `
+                                          }
                                       </a>
                                   `
-            : html `
+                                : html`
                                       <a
-                                          class="${this.componentUtils.className('__more-button', 's-btn s-ui--accent')}"
+                                          class="${this.componentUtils.className(
+                                              '__more-button',
+                                              's-btn s-ui--accent',
+                                          )}"
                                           href="${
-            // @ts-ignore
-            this.moreAction}"
+                                              // @ts-ignore
+                                              this.moreAction
+                                          }"
                                       >
                                           ${
-            // @ts-ignore
-            this.more
-                ? html ` ${(_f = this.props.lessLabel) !== null && _f !== void 0 ? _f : 'Show less'} `
-                : html ` ${(_g = this.props.moreLabel) !== null && _g !== void 0 ? _g : 'Show more'} `}
+                                              // @ts-ignore
+                                              this.more
+                                                  ? html`
+                                                        ${(_f = this.props.lessLabel) !== null && _f !== void 0
+                                                            ? _f
+                                                            : 'Show less'}
+                                                    `
+                                                  : html`
+                                                        ${(_g = this.props.moreLabel) !== null && _g !== void 0
+                                                            ? _g
+                                                            : 'Show more'}
+                                                    `
+                                          }
                                       </a>
-                                  `}                        
+                                  `
+                        }                        
                         </a>
                     </div>
                 </div>
@@ -242,29 +337,22 @@ export default class SCodeExample extends __SLitComponent {
         `;
     }
 }
-__decorate([
-    property()
-], SCodeExample.prototype, "_items", void 0);
-__decorate([
-    property()
-], SCodeExample.prototype, "_activeTabId", void 0);
-__decorate([
-    property({
-        type: String,
-    })
-], SCodeExample.prototype, "active", void 0);
-__decorate([
-    property()
-], SCodeExample.prototype, "props", void 0);
-__decorate([
-    query('s-clipboard-copy')
-], SCodeExample.prototype, "$copy", void 0);
-__decorate([
-    query('.templates')
-], SCodeExample.prototype, "$templatesContainer", void 0);
-__decorate([
-    queryAssignedNodes()
-], SCodeExample.prototype, "$templates", void 0);
+__decorate([property()], SCodeExample.prototype, '_items', void 0);
+__decorate([property()], SCodeExample.prototype, '_activeTabId', void 0);
+__decorate(
+    [
+        property({
+            type: String,
+        }),
+    ],
+    SCodeExample.prototype,
+    'active',
+    void 0,
+);
+__decorate([property()], SCodeExample.prototype, 'props', void 0);
+__decorate([query('s-clipboard-copy')], SCodeExample.prototype, '$copy', void 0);
+__decorate([query('.templates')], SCodeExample.prototype, '$templatesContainer', void 0);
+__decorate([queryAssignedNodes()], SCodeExample.prototype, '$templates', void 0);
 export function define(props = {}, tagName = 's-code-example') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SCodeExample);

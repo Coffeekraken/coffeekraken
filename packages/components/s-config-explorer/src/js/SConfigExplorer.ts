@@ -36,7 +36,7 @@ export default class SConfigExplorer extends __SLitComponent {
                 sLitComponent: {
                     shadowDom: false,
                 },
-                sComponentUtils: {
+                componentUtils: {
                     interface: __SConfigExplorerComponentInterface,
                 },
             }),

@@ -56,7 +56,7 @@ export default class SSidePanel extends __SLitComponent {
                 sLitComponent: {
                     shadowDom: false,
                 },
-                sComponentUtils: {
+                componentUtils: {
                     interface: __SSidePanelComponentInterface,
                 },
             }),

@@ -426,9 +426,15 @@ export default class SSugarConfig extends __SClass {
                             for (let i = 0; i < matches.length; i++) {
                                 const match = matches[i];
                                 const valuePath = match.replace('[theme.', '').replace(']', '');
-                                const value = __get(config, `theme.themes.${config.theme.theme}.${valuePath}`);
+
+                                const value = __get(
+                                    config,
+                                    `theme.themes.${config.theme.theme}-${config.theme.variant}.${valuePath}`,
+                                );
                                 // if (value === undefined) {
-                                //   throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" theme config value does not exiats...`);
+                                //     throw new Error(
+                                //         `LL <red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" theme config value does not exiats...`,
+                                //     );
                                 // }
                                 if (string === match) return value;
                                 string = string.replace(match, value);

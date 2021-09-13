@@ -68,7 +68,7 @@ export default class SCodeExample extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                sComponentUtils: {
+                componentUtils: {
                     interface: __SCodeExampleComponentInterface,
                 },
             }),

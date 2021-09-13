@@ -63,9 +63,9 @@ export default class CkSettings extends __SLitComponent {
     setDarkMode(mode) {
         this._settings.darkMode = mode;
         if (mode) {
-            document.body.classList.add('s-theme--coffeekrakenDark');
+            document.body.classList.add('s-theme--coffeekraken-dark');
         } else {
-            document.body.classList.remove('s-theme--coffeekrakenDark');
+            document.body.classList.remove('s-theme--coffeekraken-dark');
         }
         this._saveState();
     }

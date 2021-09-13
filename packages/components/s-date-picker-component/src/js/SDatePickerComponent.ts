@@ -166,7 +166,7 @@ export default class SDatePicker extends __SLitComponent {
             sLitComponent: {
                 shadowDom: false,
             },
-            sComponentUtils: {
+            componentUtils: {
                 interface: __SDatePickerComponentInterface,
             },
         });

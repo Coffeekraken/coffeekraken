@@ -60,6 +60,7 @@ export interface ISSugarJsonFileConfig {
 
 export interface ISSugarJsonFile {
     theme?: string;
+    variant?: string;
     recipe?: string;
     cli?: ISSugarJsonFileCli;
     config?: ISSugarJsonFileConfig;

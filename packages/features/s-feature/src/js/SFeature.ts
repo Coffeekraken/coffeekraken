@@ -12,6 +12,7 @@ import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __cloneClass from '@coffeekraken/sugar/shared/class/utils/cloneClass';
 import __clone from '@coffeekraken/sugar/shared/object/clone';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __SComponentUtils from '@coffeekraken/s-component-utils';
 
 /**
  * @name                SFeature
@@ -54,25 +55,6 @@ export interface ISFeatureDefaultProps {
     mountWhen: 'directly' | 'inViewport';
 }
 
-export class SFeatureDefaultInterface extends __SInterface {
-    static definition = {
-        id: {
-            type: 'String',
-            physical: true,
-        },
-        mounted: {
-            type: 'Boolean',
-            default: false,
-            physical: true,
-        },
-        mountWhen: {
-            type: 'String',
-            values: ['directly', 'inViewport'],
-            default: 'directly',
-        },
-    };
-}
-
 export default class SFeature extends __SClass {
     /**
      * @name            name
@@ -107,7 +89,7 @@ export default class SFeature extends __SClass {
      */
     props: any;
 
-    _InterfaceToApply: __SInterface;
+    componentUtils: __SComponentUtils;
 
     /**
      * @name            setDefaultProps
@@ -125,14 +107,8 @@ export default class SFeature extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static _defaultProps: any = {};
     static setDefaultProps(selector: string | string[], props: any): void {
-        Array.from(selector).forEach((sel) => {
-            this._defaultProps[sel] = {
-                ...(this._defaultProps[sel] ?? {}),
-                ...props,
-            };
-        });
+        __SComponentUtils.setDefaultProps(selector, props);
     }
 
     /**
@@ -185,11 +161,19 @@ export default class SFeature extends __SClass {
         super(
             __deepMerge(
                 {
+                    componentUtils: {},
                     feature: {},
                 },
                 settings,
             ),
         );
+
+        this.componentUtils = new __SComponentUtils(node, node.attributes, {
+            componentUtils: {
+                ...(this._settings.componentUtils ?? {}),
+            },
+        });
+        this.props = this.componentUtils.props;
 
         // name
         this.name = name;
@@ -197,108 +181,53 @@ export default class SFeature extends __SClass {
         // node
         this.node = node;
 
-        let InterfaceToApply = class InlineFeatureInterface extends __SInterface {
-            static definition = {};
-        };
+        // this.props = new Proxy(
+        //     __deepMerge(
+        //         defaultProps,
+        //         InterfaceToApply.apply(passedProps, {
+        //             descriptor: {
+        //                 defaults: false,
+        //             },
+        //         }),
+        //     ),
+        //     {
+        //         // @ts-ignore
+        //         set: (target, prop, value) => {
+        //             // @ts-ignore
+        //             if (this.beforePropChange) {
+        //                 // @ts-ignore
+        //                 const res = this.beforePropChange?.(prop, value);
+        //                 if (res === undefined) return false;
+        //                 value = res;
+        //             }
 
-        // @ts-ignore
-        InterfaceToApply.definition = {
-            ...Object.assign({}, SFeatureDefaultInterface.definition),
-            // @ts-ignore
-            ...(this.featureSettings.interface?.definition ?? {}),
-        };
-        // @ts-ignore
-        this._InterfaceToApply = InterfaceToApply;
+        //             // set the actual value
+        //             target[prop] = value;
 
-        // props
-        const defaultProps = __deepMerge(
-            // @ts-ignore
-            InterfaceToApply.defaults(),
-            this.featureSettings.defaultProps ?? {},
-            (<any>this.constructor)._defaultProps['*'] ?? {},
-            // @ts-ignore
-            (<any>this.constructor)._defaultProps[this.name] ?? {},
-        );
+        //             if (this._InterfaceToApply._definition?.[prop.toString()]?.physical) {
+        //                 const attrName = __dashCase(prop);
+        //                 if (value === false || value === null) {
+        //                     this.node.removeAttribute(attrName);
+        //                 } else {
+        //                     this.node.setAttribute(attrName, value.toString());
+        //                 }
+        //             }
 
-        const props = this.node.attributes;
-        let passedProps = {};
-        if (props.constructor.name === 'NamedNodeMap') {
-            Object.keys(props).forEach((key) => {
-                let value;
-                if (props[key]?.nodeValue !== undefined) {
-                    if (props[key].nodeValue === '') value = true;
-                    else value = props[key].nodeValue;
-                }
-                if (!value) return;
-                passedProps[__camelCase(props[key]?.name ?? key)] = value;
-            });
-        } else {
-            passedProps = props;
-        }
-        this.props = new Proxy(
-            __deepMerge(
-                defaultProps,
-                InterfaceToApply.apply(passedProps, {
-                    descriptor: {
-                        defaults: false,
-                    },
-                }),
-            ),
-            {
-                // @ts-ignore
-                set: (target, prop, value) => {
-                    // @ts-ignore
-                    if (this.beforePropChange) {
-                        // @ts-ignore
-                        const res = this.beforePropChange?.(prop, value);
-                        if (res === undefined) return false;
-                        value = res;
-                    }
+        //             // @ts-ignore
+        //             if (this.afterPropChanged) {
+        //                 // @ts-ignore
+        //                 this.afterPropChanged(prop, value);
+        //             }
 
-                    // set the actual value
-                    target[prop] = value;
-
-                    if (this._InterfaceToApply._definition?.[prop.toString()]?.physical) {
-                        const attrName = __dashCase(prop);
-                        if (value === false || value === null) {
-                            this.node.removeAttribute(attrName);
-                        } else {
-                            this.node.setAttribute(attrName, value.toString());
-                        }
-                    }
-
-                    // @ts-ignore
-                    if (this.afterPropChanged) {
-                        // @ts-ignore
-                        this.afterPropChanged(prop, value);
-                    }
-
-                    return true;
-                },
-            },
-        );
+        //             return true;
+        //         },
+        //     },
+        // );
 
         (async () => {
-            // mount component when needed
-            switch (this.props.mountWhen) {
-                case 'inViewport':
-                    (async () => {
-                        // @ts-ignore
-                        await __whenInViewport(this.node);
-                        // @ts-ignore
-                        await this.mount();
-                    })();
-                    break;
-                case 'direct':
-                case 'directly':
-                default:
-                    // @ts-ignore
-                    await this.mount();
-                    break;
-            }
-
-            // set as mounted
-            this.props.mounted = true;
+            const mountedCallback = await this.componentUtils.whenMountState();
+            await this.mount();
+            mountedCallback();
         })();
     }
 
@@ -342,41 +271,4 @@ export default class SFeature extends __SClass {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-
-    /**
-     * @name            exposeApi
-     * @type            Function
-     *
-     * This method allows you to pass a simple key value object
-     * that tells binding of some methods on the actual dom node.
-     *
-     * @param       {Any}           apiObj          The simple key value pairs api object
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    exposeApi(apiObj: any): void {
-        setTimeout(() => {
-            let $on = this.node;
-            Object.keys(apiObj).forEach((apiFnName) => {
-                const apiFn = apiObj[apiFnName].bind(this);
-                $on[apiFnName] = apiFn;
-            });
-        });
-    }
-
-    /**
-     * @name      isMounted
-     * @type      Function
-     *
-     * This method returns true if the component is mounted, false if not
-     *
-     * @return    {Boolean}       true if is mounted, false if not
-     *
-     * @since   2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    isMounted() {
-        return this.node?.hasAttribute('mounted');
-    }
 }

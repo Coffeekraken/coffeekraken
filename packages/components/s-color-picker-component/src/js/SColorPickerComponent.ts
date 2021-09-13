@@ -31,7 +31,7 @@ export default class SColorPicker extends __SLitComponent {
         super(
             __deepMerge({
                 sLitComponent: {},
-                sComponentUtils: {
+                componentUtils: {
                     interface: __SColorPickerComponentInterface,
                 },
             }),

@@ -6,8 +6,16 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __SInterface from '@coffeekraken/s-interface';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __SDuration from '@coffeekraken/s-duration';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 
 export function preprocess(rawThemeConfig, rawConfig) {
+    // setting theme from sugar.json
+    const sugarJsonInstance = new __SSugarJson();
+    const sugarJson = sugarJsonInstance.current();
+
+    if (sugarJson.theme) rawThemeConfig.theme = sugarJson.theme;
+    if (sugarJson.variant) rawThemeConfig.variant = sugarJson.variant;
+
     // inject each available themes inside the "themes" property
     Object.keys(rawConfig).forEach((configId) => {
         const configObj = rawConfig[configId];

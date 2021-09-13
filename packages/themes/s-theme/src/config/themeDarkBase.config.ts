@@ -93,6 +93,10 @@ export default function (env, config) {
                 border: {
                     alpha: 0.2,
                 },
+                gradientStart: {},
+                gradientEnd: {
+                    darken: 20,
+                },
             },
             ':hover': {
                 '...': '[this.colorStates.default]',

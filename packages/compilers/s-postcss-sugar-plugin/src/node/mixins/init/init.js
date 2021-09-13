@@ -5,6 +5,11 @@ class postcssSugarPluginMediaMixinInterface extends __SInterface {
 postcssSugarPluginMediaMixinInterface.definition = {
     theme: {
         type: 'String',
+        default: __SugarConfig.get('theme.theme'),
+    },
+    variant: {
+        type: 'String',
+        default: __SugarConfig.get('theme.variant'),
     },
 };
 export { postcssSugarPluginMediaMixinInterface as interface };
@@ -30,14 +35,12 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ params, atRule, replaceWith }) {
-    var _a;
-    const themeConfig = __SugarConfig.get('theme');
     const cssArray = [
         '@sugar.reset;',
-        `@sugar.theme(${(_a = params.theme) !== null && _a !== void 0 ? _a : themeConfig.theme});`,
+        `@sugar.theme(${params.variant}, ${params.theme});`,
         '@sugar.font.faces;',
         // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
     ];
     replaceWith(cssArray);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5pdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFFekQsTUFBTSxxQ0FBc0MsU0FBUSxZQUFZOztBQUNyRCxnREFBVSxHQUFHO0lBQ2hCLEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO0tBQ2pCO0NBQ0osQ0FBQztBQUVOLE9BQU8sRUFBRSxxQ0FBcUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUU5RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxXQUFXLEVBQXVEOztJQUN6RyxNQUFNLFdBQVcsR0FBRyxhQUFhLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRS9DLE1BQU0sUUFBUSxHQUFHO1FBQ2IsZUFBZTtRQUNmLGdCQUFnQixNQUFBLE1BQU0sQ0FBQyxLQUFLLG1DQUFJLFdBQVcsQ0FBQyxLQUFLLElBQUk7UUFDckQsb0JBQW9CO1FBQ3BCLHlEQUF5RDtLQUM1RCxDQUFDO0lBRUYsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQzFCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5pdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFFekQsTUFBTSxxQ0FBc0MsU0FBUSxZQUFZOztBQUNyRCxnREFBVSxHQUFHO0lBQ2hCLEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsT0FBTyxFQUFFLGFBQWEsQ0FBQyxHQUFHLENBQUMsYUFBYSxDQUFDO0tBQzVDO0lBQ0QsT0FBTyxFQUFFO1FBQ0wsSUFBSSxFQUFFLFFBQVE7UUFDZCxPQUFPLEVBQUUsYUFBYSxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7S0FDOUM7Q0FDSixDQUFDO0FBRU4sT0FBTyxFQUFFLHFDQUFxQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTlEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLFdBQVcsRUFBdUQ7SUFDekcsTUFBTSxRQUFRLEdBQUc7UUFDYixlQUFlO1FBQ2YsZ0JBQWdCLE1BQU0sQ0FBQyxPQUFPLEtBQUssTUFBTSxDQUFDLEtBQUssSUFBSTtRQUNuRCxvQkFBb0I7UUFDcEIseURBQXlEO0tBQzVELENBQUM7SUFFRixXQUFXLENBQUMsUUFBUSxDQUFDLENBQUM7QUFDMUIsQ0FBQyJ9

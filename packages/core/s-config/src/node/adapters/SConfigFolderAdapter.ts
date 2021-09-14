@@ -168,8 +168,12 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
                 configObj[configKey] = __deepMerge(configObj[configKey], configData);
 
-                if (importedConfig.prepare && typeof importedConfig.prepare === 'function') {
-                    __SConfig.registerPrepare(this.configAdapterSettings.name, configKey, importedConfig.prepare);
+                if (importedConfig.postprocess && typeof importedConfig.postprocess === 'function') {
+                    __SConfig.registerPostprocess(
+                        this.configAdapterSettings.name,
+                        configKey,
+                        importedConfig.postprocess,
+                    );
                 }
 
                 if (importedConfig.preprocess && typeof importedConfig.preprocess === 'function') {

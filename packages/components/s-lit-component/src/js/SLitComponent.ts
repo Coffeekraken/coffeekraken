@@ -21,7 +21,7 @@ export interface ISLitComponentSettings {
 }
 
 export interface ISLitComponentCtorSettings {
-    sLitComponent: Partial<ISLitComponentSettings>;
+    litComponent: Partial<ISLitComponentSettings>;
 }
 
 export interface ISLitComponentDefaultProps {
@@ -78,7 +78,7 @@ export default class SLitComponent extends LitElement {
     }
 
     /**
-     * @name        sLitComponentSettings
+     * @name        litComponentSettings
      * @type        ISLitComponentSettings
      * @get
      *
@@ -87,8 +87,8 @@ export default class SLitComponent extends LitElement {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    get sLitComponentSettings(): ISLitComponentSettings {
-        return (<any>this._settings).sLitComponent;
+    get litComponentSettings(): ISLitComponentSettings {
+        return (<any>this._settings).litComponent;
     }
 
     /**
@@ -107,7 +107,7 @@ export default class SLitComponent extends LitElement {
         this._settings = __deepMerge(
             {
                 componentUtils: {},
-                sLitComponent: {
+                litComponent: {
                     shadowDom: true,
                     get rootNode() {
                         return this.shadowRoot?.querySelector('*:first-child');
@@ -119,14 +119,14 @@ export default class SLitComponent extends LitElement {
 
         this.componentUtils = new __SComponentUtils(this, this.attributes, {
             componentUtils: {
-                ...(this._settings.sComponentUtils ?? {}),
-                style: this.constructor.styles?.cssText ?? this._settings.sComponentUtils?.style ?? '',
+                ...(this._settings.componentUtils ?? {}),
+                style: this.constructor.styles?.cssText ?? this._settings.componentUtils?.style ?? '',
             },
         });
         this.props = this.componentUtils.props;
 
         // shadow handler
-        if (this.sLitComponentSettings.shadowDom === false) {
+        if (this.litComponentSettings.shadowDom === false) {
             this.createRenderRoot = () => {
                 return this;
             };

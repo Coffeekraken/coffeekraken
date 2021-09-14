@@ -38,7 +38,7 @@ export default class DocNav extends __SLitComponent {
 
     constructor() {
         super({
-            sLitComponent: {
+            litComponent: {
                 shadowDom: false,
             },
         });

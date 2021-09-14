@@ -16,7 +16,7 @@ export default class VersionSelector extends __SLitComponent {
 
     constructor() {
         super({
-            sLitComponent: {
+            litComponent: {
                 shadowDom: false,
             },
         });

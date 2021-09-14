@@ -53,7 +53,7 @@ export default class SSidePanel extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                sLitComponent: {
+                litComponent: {
                     shadowDom: false,
                 },
                 componentUtils: {

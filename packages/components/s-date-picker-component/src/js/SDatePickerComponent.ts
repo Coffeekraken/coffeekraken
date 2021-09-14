@@ -163,7 +163,7 @@ export default class SDatePicker extends __SLitComponent {
 
     constructor() {
         super({
-            sLitComponent: {
+            litComponent: {
                 shadowDom: false,
             },
             componentUtils: {
@@ -274,7 +274,7 @@ export default class SDatePicker extends __SLitComponent {
                 />
                 ${this.button
                     ? html`
-                          <button class="${this.componentUtils.className('__button', 's-btn')}">
+                          <button onclick="return false" class="${this.componentUtils.className('__button', 's-btn')}">
                               ${staticHTML([this.calendarIcon])}
                           </button>
                       `

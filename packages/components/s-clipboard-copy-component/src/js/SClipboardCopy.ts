@@ -27,7 +27,7 @@ export default class SClipboardCopy extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                sLitComponent: {
+                litComponent: {
                     interface: __SClipboardCopyComponentInterface,
                 },
             }),

@@ -119,7 +119,7 @@ var __decorate = function(decorators, target, key, desc) {
 class SClipboardCopy extends __SLitComponent {
   constructor() {
     super(__deepMerge({
-      sLitComponent: {
+      litComponent: {
         interface: SHighlightJsComponentInterface
       }
     }));

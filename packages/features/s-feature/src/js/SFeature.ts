@@ -129,7 +129,7 @@ export default class SFeature extends __SClass {
     static registerFeature(name: string, feature: typeof SFeature, defaultProps: any = {}) {
         this.setDefaultProps(name, defaultProps);
         __querySelectorLive(`[${name}]`, ($elm) => {
-            new feature(name, $elm, defaultProps);
+            new feature(name, $elm, __SComponentUtils.getDefaultProps(name));
         });
     }
 
@@ -171,6 +171,7 @@ export default class SFeature extends __SClass {
         this.componentUtils = new __SComponentUtils(node, node.attributes, {
             componentUtils: {
                 ...(this._settings.componentUtils ?? {}),
+                name,
             },
         });
         this.props = this.componentUtils.props;

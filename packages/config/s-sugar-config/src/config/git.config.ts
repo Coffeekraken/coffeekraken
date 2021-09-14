@@ -1,7 +1,7 @@
 import __childProcess from 'child_process';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 
-export function prepare(config) {
+export function postprocess(config) {
     try {
         if (!config.repo?.url) {
             const packageJson = __packageJsonSync();

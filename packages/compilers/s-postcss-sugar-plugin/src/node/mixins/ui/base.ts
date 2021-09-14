@@ -51,6 +51,7 @@ export default function ({
         border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
         transition: sugar.theme(ui.${finalParams.name}.transition);
         @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
+        cursor: auto !important;
 
         &::placeholder {
           color: sugar.color(main, placeholder);

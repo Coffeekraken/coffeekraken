@@ -1,0 +1,59 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-form-validate-feature.js.sFormValidate": {
+                "name": "SFormValidate",
+                "type": "Feature",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/s-form-validate"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This feature allows you to validate your forms by using under the hood the AMAZING joi library.\nFor now, you can validate data types like \"string\", \"number\" or  \"boolean\" with options like \"email\",\n\"date\", \"greater\", \"less\", \"min\", \"max\", and a lot more.",
+                "namespace": "@coffeekraken.s-form-validate-feature.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h3 class=\"s-color\\:accent s-font\\:30 s-mb\\:30\">Simple fields</h3>\n<label class=\"s-label s-mb\\:30\" s-form-validate email>\n   <input type=\"text\" class=\"s-input\" />\n   Email address\n</label>\n<label class=\"s-label s-mb\\:30\" s-form-validate domain>\n   <input type=\"text\" class=\"s-input\" />\n   Domain name\n</label>\n<label class=\"s-label s-mb\\:30\" s-form-validate alphanum>\n   <input type=\"text\" class=\"s-input\" />\n   Alphanumeric\n</label>\n<label class=\"s-label s-mb\\:30\" s-form-validate credit-card>\n   <input type=\"text\" class=\"s-input\" />\n   Credit card\n</label>\n<label class=\"s-label s-mb\\:30\" s-form-validate min=\"3\" max=\"6\">\n   <input type=\"text\" class=\"s-input\" />\n   Min and max\n</label>\n\n<h3 class=\"s-color\\:accent s-font\\:30 s-mb\\:30\">Complexe fields</h3>\n<label class=\"s-label s-mb\\:30\" s-form-validate date>\n   <s-date-picker name=\"my-cool-date\"></s-date-picker>\n   Date\n</label>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFormValidateFeature.ts",
+                "extension": "ts",
+                "relPath": "src/js/SFormValidateFeature.ts",
+                "children": {}
+            }
+        }
+    }
+}

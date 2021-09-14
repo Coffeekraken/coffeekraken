@@ -46,7 +46,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISConfigPrepareFn {
+export interface ISConfigPostprocessFn {
     (currentConfig: any, config: any): any;
 }
 
@@ -122,23 +122,23 @@ export default class SConfig {
     _settings = {};
 
     /**
-     * @name        registerPrepare
+     * @name        registerPostprocess
      * @type        Function
      * @static
      *
-     * This method allows you to register a prepare function that will be fired once the config is ready so you can make updates as needed
+     * This method allows you to register a postprocess function that will be fired once the config is ready so you can make updates as needed
      *
      * @param     {String}      configId        The configuration id you want to proxy
      * @param     {String}      configKey       The root config key you want to prepare with that function. This has to be one of the root config property
-     * @param     {ISConfigPrepareFn}     prepareFn         The prepare function that MUST return the new current config and that take as parameters the current config object and the whole config object
+     * @param     {ISConfigPostprocessFn}     postprocessFn         The post process function that MUST return the new current config and that take as parameters the current config object and the whole config object
      *
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static _registeredPrepares: any = {};
-    static registerPrepare(configId: string, configKey: string, prepareFn: ISConfigPrepareFn) {
-        if (!this._registeredPrepares[configId]) this._registeredPrepares[configId] = {};
-        this._registeredPrepares[configId][configKey] = prepareFn;
+    static _registeredPostprocess: any = {};
+    static registerPostprocess(configId: string, configKey: string, postprocessFn: ISConfigPostprocessFn) {
+        if (!this._registeredPostprocess[configId]) this._registeredPostprocess[configId] = {};
+        this._registeredPostprocess[configId][configKey] = postprocessFn;
     }
 
     /**
@@ -146,11 +146,11 @@ export default class SConfig {
      * @type        Function
      * @static
      *
-     * This method allows you to register a prepare function that will be fired once the config is ready so you can make updates as needed
+     * This method allows you to register a preprocess function that will be fired once the config is ready so you can make updates as needed
      *
      * @param     {String}      configId        The configuration id you want to proxy
-     * @param     {String}      configKey       The root config key you want to prepare with that function. This has to be one of the root config property
-     * @param     {ISConfigPreprocessFn}     preprocessFn         The prepare function that MUST return the new current config and that take as parameters the current config object and the whole config object
+     * @param     {String}      configKey       The root config key you want to preprocess with that function. This has to be one of the root config property
+     * @param     {ISConfigPreprocessFn}     preprocessFn         The preprocess function that MUST return the new current config and that take as parameters the current config object and the whole config object
      *
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -247,10 +247,15 @@ export default class SConfig {
         this._settings.resolvers.unshift({
             match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
             resolve(string, matches, config, path) {
-                return __memoize(() => {
+                return () => {
                     for (let i = 0; i < matches.length; i++) {
                         const match = matches[i];
                         const value = __get(config, match.replace('[config.', '').replace(']', ''));
+
+                        // if (match.includes('config.themeDefaultLight')) {
+                        //     // console.log('MA', match, value);
+                        // }
+
                         if (value === undefined) {
                             throw new Error(
                                 `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`,
@@ -260,7 +265,7 @@ export default class SConfig {
                         string = string.replace(match, value);
                     }
                     return string;
-                });
+                };
             },
         });
 
@@ -268,7 +273,7 @@ export default class SConfig {
         this._settings.resolvers.unshift({
             match: /\[extends.[a-zA-Z0-9.\-_]+\]/gm,
             resolve(string, matches, config, path) {
-                return __memoize(() => {
+                return () => {
                     for (let i = 0; i < matches.length; i++) {
                         const match = matches[i];
                         const ext = __get(config, path.slice(0, 1)[0] + '.extends');
@@ -282,7 +287,7 @@ export default class SConfig {
                         string = string.replace(match, value);
                     }
                     return string;
-                });
+                };
             },
         });
 
@@ -441,8 +446,6 @@ export default class SConfig {
             config = this._resolveInternalReferences(config, config, resolverObj);
         });
 
-        let nestedRests = [];
-
         this._restPaths
             // .sort((first, second) => {
             //     if (first.split('.').length < second.split('.').length) return -1;
@@ -466,10 +469,10 @@ export default class SConfig {
                 __set(config, path, newObj);
             });
 
-        if (this.constructor._registeredPrepares[this.id]) {
-            for (let k = 0; k < Object.keys(this.constructor._registeredPrepares[this.id]).length; k++) {
-                const configKey = Object.keys(this.constructor._registeredPrepares[this.id])[k];
-                config[configKey] = await this.constructor._registeredPrepares[this.id][configKey](
+        if (this.constructor._registeredPostprocess[this.id]) {
+            for (let k = 0; k < Object.keys(this.constructor._registeredPostprocess[this.id]).length; k++) {
+                const configKey = Object.keys(this.constructor._registeredPostprocess[this.id])[k];
+                config[configKey] = await this.constructor._registeredPostprocess[this.id][configKey](
                     config[configKey],
                     config,
                 );

@@ -203,15 +203,8 @@ export default function ({
                   align-items: center;
                   justify-content: space-between;    
 
-                  & > input:first-child,
-                  & > select:first-child,
-                  & > textarea:first-child {
+                  & > *:first-child {
                     order: 2;
-                  }
-
-                  & > input,
-                  & > textarea,
-                  & > select {
                     margin-inline-start: sugar.margin(20);
                   }
 

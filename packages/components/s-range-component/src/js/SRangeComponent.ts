@@ -78,7 +78,7 @@ export default class SRange extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                sLitComponent: {
+                litComponent: {
                     shadowDom: false,
                 },
                 componentUtils: {

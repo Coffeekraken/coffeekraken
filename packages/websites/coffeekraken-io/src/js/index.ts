@@ -16,6 +16,7 @@ import { define as __VersionSelector } from './components/VersionSelector';
 import { define as __CkSettingsWebcomponent } from './components/CkSettings';
 
 import { register as __sActivateFeature } from '@coffeekraken/s-activate-feature';
+import { register as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 
 // internal components
 __DocNavComponent();
@@ -43,6 +44,16 @@ import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
 import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
 
 __sActivateFeature();
+__sFormValidateFeature({
+    customValidations: {
+        coffeekraken: (value, helpers) => {
+            if (value === 'coffeekraken') {
+                return helpers.message('Are you sure? Krakens are dangerous...');
+            }
+            return value;
+        },
+    },
+});
 
 __smoothScroll({
     scroll: {

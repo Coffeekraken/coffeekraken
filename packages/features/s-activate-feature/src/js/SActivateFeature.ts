@@ -19,26 +19,30 @@ export default class SActivateFeature extends __SFeature {
     _$groupElements?: HTMLElement[];
     _unactivateTimeout;
 
-    constructor(name: string, node: HTMLElement, settings) {
+    constructor(name: string, node: HTMLElement, defaultProps: any, settings: any) {
         super(
             name,
             node,
             __deepMerge(
                 {
-                    feature: {
+                    componentUtils: {
                         interface: __SActivateFeatureInterface,
                     },
+                    feature: {},
                 },
                 settings ?? {},
             ),
         );
 
         // expose the api on node
-        this.exposeApi({
-            activate: this.activate,
-            unactivate: this.unactivate,
-            isActive: this.isActive,
-        });
+        this.componentUtils.exposeApi(
+            {
+                activate: this.activate,
+                unactivate: this.unactivate,
+                isActive: this.isActive,
+            },
+            this,
+        );
     }
     mount() {
         // save state

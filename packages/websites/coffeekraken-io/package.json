@@ -26,6 +26,7 @@
         "@coffeekraken/s-range-component": "^2.0.0",
         "@coffeekraken/s-inline-svg-component": "^2.0.0",
         "@coffeekraken/s-request": "^2.0.0",
+        "@coffeekraken/s-form-validate-feature": "^2.0.0",
         "@coffeekraken/s-request-component": "^2.0.0",
         "@coffeekraken/s-color-picker-component": "^2.0.0",
         "@coffeekraken/s-side-panel-component": "^2.0.0",

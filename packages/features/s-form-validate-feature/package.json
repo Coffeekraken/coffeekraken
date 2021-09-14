@@ -16,6 +16,7 @@
         "@coffeekraken/s-feature": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
+        "@sideway/address": "^4.1.2",
         "joi": "^17.4.2"
     }
 }

@@ -8,6 +8,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-side-panel-component",
             "@coffeekraken/sugar"
@@ -282,7 +283,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-solid-1\" value=\"hello 1\" />\n    <span>Dynamic Metrics Producer Frank Nolan</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-2\" value=\"hello 2\" />\n    <span>Direct Solutions Coordinator Rebecca Strosin</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-3\" value=\"hello 3\" />\n    <span>Forward Paradigm Planner Hope Sauer</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-color-1\" value=\"hello 1\" />\n    <span>Lead Accountability Administrator Rosalie Kemmer</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n    <span>Product Mobility Consultant Clayton Friesen</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-3\" value=\"hello 3\" />\n    <span>Future Brand Analyst Jacob Kassulke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"checkbox\" disabled class=\"s-checkbox\" name=\"checkbox-style-color-4\" value=\"hello 4\" />\n    <span>Internal Optimization Architect George Harvey DDS</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Corporate Creative Executive Teresa Kling</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Direct Solutions Designer Miriam Kassulke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>Future Infrastructure Planner Ricky Schaden</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Regional Tactics Planner Theodore Prohaska</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Forward Program Officer Charlotte Larson</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>Corporate Response Producer Reginald Jacobs</span>\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-solid-1\" value=\"hello 1\" />\n    <span>Product Assurance Designer Theresa Lindgren</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-2\" value=\"hello 2\" />\n    <span>Corporate Directives Strategist Inez Mertz</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-3\" value=\"hello 3\" />\n    <span>Dynamic Assurance Administrator Marion Pollich</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-color-1\" value=\"hello 1\" />\n    <span>Customer Web Developer Rosie Swaniawski Sr.</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n    <span>Customer Integration Technician Alonzo Rempel Jr.</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-3\" value=\"hello 3\" />\n    <span>Dynamic Solutions Agent Shelia Ryan</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"checkbox\" disabled class=\"s-checkbox\" name=\"checkbox-style-color-4\" value=\"hello 4\" />\n    <span>Senior Response Designer Joe Doyle</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Legacy Mobility Producer Cornelius Doyle</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Senior Web Technician Preston Trantow</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>Investor Data Consultant Misty Schultz</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Central Markets Planner Gerard Dicki</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Legacy Division Technician Horace Conn</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>Investor Interactions Associate Constance Mayert</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -338,7 +339,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <span class=\"s-dropdown-container\">\n      <a class=\"s-btn\">Click me!</a>\n      <div class=\"s-dropdown\">\n          <p class=\"s-typo:p s-mb:30\">Regional Markets Consultant Vicky Fritsch III</p>\n          <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </span>\n  <span class=\"s-btn-group s-dropdown-container\">\n      <a class=\"s-btn\">Click me!</a>\n      <a class=\"s-btn\">+</a>\n      <div class=\"s-dropdown\">\n          <p class=\"s-typo:p s-mb:30\">Internal Response Orchestrator John Tromp</p>\n          <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </span>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <button class=\"s-btn s-ui:accent s-mb:30\">\n      Click me!\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Global Security Director Jan Connelly</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <span class=\"s-btn-group s-mb:30\">\n      <a class=\"s-btn\">Click me!</a>\n      <button class=\"s-btn s-ui:complementary\">\n          +\n          <div class=\"s-dropdown\">\n              <p class=\"s-typo:p s-mb:30\">Customer Applications Manager Betty Bailey</p>\n              <a class=\"s-btn s-ui:accent\">You find me!</a>\n          </div>\n      </button>\n  </span>\n</div>\n\n<!-- Positions -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Position</h3>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom (default)\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Customer Optimization Analyst Valerie Stokes</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom start\n      <div class=\"s-dropdown:bottom-start\">\n         <p class=\"s-typo:p s-mb:30\">Internal Markets Planner Lindsey Bogisich</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom end\n      <div class=\"s-dropdown:bottom-end\">\n         <p class=\"s-typo:p s-mb:30\">International Configuration Assistant Sheila Heaney</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top\n      <div class=\"s-dropdown:top\">\n         <p class=\"s-typo:p s-mb:30\">Senior Communications Consultant Hector Shanahan</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top start\n      <div class=\"s-dropdown:top-start\">\n         <p class=\"s-typo:p s-mb:30\">National Paradigm Associate Nathaniel Dibbert</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top end\n      <div class=\"s-dropdown:top-end\">\n         <p class=\"s-typo:p s-mb:30\">International Integration Supervisor Jennifer Schowalter</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n</div>\n\n<!-- RTL -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL Support</h3>\n  <button class=\"s-btn s-mb:30\">\n      Click me!\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Customer Paradigm Architect Jesus Barrows</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top start\n      <div class=\"s-dropdown:top-start\">\n         <p class=\"s-typo:p s-mb:30\">District Brand Analyst Sergio Lebsack</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top end\n      <div class=\"s-dropdown:top-end\">\n         <p class=\"s-typo:p s-mb:30\">Global Assurance Coordinator Virginia Ruecker</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -354,12 +355,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown.sDropdown": {
                 "name": "s-dropdown",
                 "type": "CssClass",
-                "description": "This class represent a(n) \"<yellow>solid</yellow>\" dropdown",
+                "description": "This class represent a(n) \"<yellow>bottom (center)</yellow>\" aligned dropdown",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-dropdown-container\">\n    <a class=\"s-btn\">Click me!</a>\n    <div class=\"s-dropdown\">\n        <p class=\"s-typo:p s-mb:30\">Customer Group Associate Dr. Cameron Schumm</p>\n        <a class=\"s-btn s-ui:accent\">You find me!</a>\n    </div>\n</span>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom\">\n      <p class=\"s-typo:p s-mb:30\">Future Program Producer Ms. Tammy Goodwin</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -372,15 +373,99 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown.sDropdownContainer": {
-                "name": "s-dropdown-container",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown.sDropdown:bottomStart": {
+                "name": "s-dropdown:bottom-start",
                 "type": "CssClass",
-                "description": "This class represent a(n) \"<yellow>dropdown container</yellow>\" that allows\nthe dropdown to display only when focus is in it or on a button",
+                "description": "This class represent a(n) \"<yellow>bottom start</yellow>\" aligned dropdown",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-dropdown-container\">\n    <a class=\"s-btn\">Click me!</a>\n    <div class=\"s-dropdown\">\n        <p class=\"s-typo:p s-mb:30\">Future Data Consultant Casey Lebsack</p>\n        <a class=\"s-btn s-ui:accent\">You find me!</a>\n    </div>\n</span>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom-start\">\n      <p class=\"s-typo:p s-mb:30\">Senior Tactics Manager Elisa Stanton</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown.sDropdown:bottomEnd": {
+                "name": "s-dropdown:bottom-end",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<yellow>bottom end</yellow>\" aligned dropdown",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom-end\">\n      <p class=\"s-typo:p s-mb:30\">Central Operations Supervisor Tanya Langosh</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown.sDropdown:top": {
+                "name": "s-dropdown:top",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<yellow>top</yellow>\" aligned dropdown",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top\">\n      <p class=\"s-typo:p s-mb:30\">Product Tactics Designer Malcolm Walker</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown.sDropdown:topStart": {
+                "name": "s-dropdown:top-start",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<yellow>top-start</yellow>\" aligned dropdown",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top-start\">\n      <p class=\"s-typo:p s-mb:30\">Human Paradigm Designer Percy Senger</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown.sDropdown:topEnd": {
+                "name": "s-dropdown:top-end",
+                "type": "CssClass",
+                "description": "This class represent a(n) \"<yellow>top-end</yellow>\" aligned dropdown",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.dropdown",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top-end\">\n      <p class=\"s-typo:p s-mb:30\">Regional Identity Administrator Terrell Fritsch</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -646,7 +731,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-label s-mb:30\">\n      Stephanie Mraz\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n      Mr. Adam Yost\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Vivian Rodriguez\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:complementary\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Sonia Kerluke\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:error\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label s-mb:30\">\n       Forrest Borer\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Kathleen Von\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-scale:15 s-ui:accent\" />\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-label s-mb:30\">\n      Noel Sanford\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n      Domingo Sawayn\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Maria Labadie\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:complementary\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       William Altenwerth\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:error\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label s-mb:30\">\n       Kerry Hermann\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Kara King\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-scale:15 s-ui:accent\" />\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -696,7 +781,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- inline style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">inline style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Customer Web Engineer Angelica Bergstrom</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>National Markets Assistant Roxanne Tromp</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Product Operations Planner Manuel Reilly</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>Principal Group Orchestrator Timothy Cronin</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Dynamic Brand Representative Ms. Ricardo Ratke (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Customer Metrics Orchestrator Ruth Champlin (Scaled)</span>\n  </label>\n</div>\n\n<!-- float style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">float style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>District Paradigm Engineer Olivia Terry</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Corporate Brand Producer Dr. Sheri Gutkowski</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Human Intranet Analyst Kristi O'Hara</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>Central Mobility Manager Trevor Carroll</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Legacy Assurance Producer Juanita Nikolaus (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>National Directives Technician Lee Wilderman (Scaled)</span>\n  </label>\n</div>"
+                        "code": "<!-- inline style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">inline style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Direct Usability Assistant Kelley Fadel</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Legacy Applications Engineer Owen Corwin</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Corporate Directives Producer Geoffrey Considine DDS</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>Dynamic Branding Coordinator Amanda Nader</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Dynamic Branding Strategist June Ritchie III (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Human Directives Architect Mr. Tommie Kertzmann (Scaled)</span>\n  </label>\n</div>\n\n<!-- float style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">float style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Dynamic Identity Orchestrator Casey Conroy</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Dynamic Group Executive Kerry Nader</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Human Division Manager Javier Barton DVM</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>District Implementation Technician Bridget Ortiz</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Investor Creative Consultant Sharon Roberts (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Forward Brand Engineer Kathy Volkman Sr. (Scaled)</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -773,7 +858,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- ul style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ul style</h3>\n  <ul class=\"s-list:ul \">\n    <li>Customer Functionality Planner Tabitha Hahn</li>\n    <li>Human Factors Specialist Edna Emard</li>\n    <li>Global Quality Developer Troy Durgan</li>\n  </ul>\n</div>\n\n<!-- ol style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">ol style</h3>\n  <ul class=\"s-list:ol s-ui:accent s-scale:15\">\n    <li>Forward Program Representative Geneva Orn</li>\n    <li>Customer Implementation Director Rex Gerlach</li>\n    <li>Lead Interactions Architect Angel Wyman</li>\n  </ul>\n</div>\n\n<!-- icon style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">icon style</h3>\n  <ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Regional Branding Administrator Sonya Stroman</li>\n    <li><i class=\"s-icon:heart s-ui:accent\"></i>Product Metrics Facilitator Julia Lindgren PhD</li>\n    <li><i class=\"s-icon:fire s-ui:error\"></i>Global Applications Officer Dora Bernier</li>\n  </ul>\n</div>\n\n\n<!-- RTL -->\n<div class=\"s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">RTL</h3>\n  <ul class=\"s-list:ul s-ui:accent s-mb:30\">\n    <li>Principal Division Supervisor Miss Roosevelt Kunde</li>\n    <li>National Directives Strategist Debbie Conroy</li>\n  </ul>\n  <ul class=\"s-list:ol s-ui:accent s-mb:30\">\n    <li>National Program Technician Marvin Ankunding</li>\n    <li>Forward Directives Orchestrator Dr. Julian Reichel</li>\n  </ul>\n  <ul class=\"s-list:icon s-ui:accent s-mb:30\">\n    <li><i class=\"s-icon:user\"></i> Direct Optimization Administrator June Corwin</li>\n    <li><i class=\"s-icon:heart s-ui:error\"></i> Dynamic Research Producer Floyd Langworth</li>\n  </ul>\n</div>\n\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Colors</h3>\n  <ul class=\"s-list s-scale:12 s-ui:accent\">\n    <li>International Brand Associate Ernesto Schamberger</li>\n    <li class=\"s-ui:complementary\">Corporate Program Developer Gerald Hermann PhD</li>\n    <li class=\"s-ui:error\">Dynamic Security Architect Johnny Rath</li>\n  </ul>\n</div>"
+                        "code": "<!-- ul style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">ul style</h3>\n  <ul class=\"s-list:ul \">\n    <li>Product Program Designer Lewis Hand III</li>\n    <li>National Markets Director Heidi Champlin</li>\n    <li>Investor Markets Specialist Terry Adams</li>\n  </ul>\n</div>\n\n<!-- ol style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">ol style</h3>\n  <ul class=\"s-list:ol s-ui:accent s-scale:15\">\n    <li>Customer Usability Director Karla Cassin</li>\n    <li>Lead Solutions Coordinator Marta Bins III</li>\n    <li>Human Operations Architect Luther Langosh</li>\n  </ul>\n</div>\n\n<!-- icon style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">icon style</h3>\n  <ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Central Integration Manager Kristy Larson</li>\n    <li><i class=\"s-icon:heart s-ui:accent\"></i>Principal Usability Producer Darren Hoeger</li>\n    <li><i class=\"s-icon:fire s-ui:error\"></i>Corporate Division Administrator Eugene Collier</li>\n  </ul>\n</div>\n\n\n<!-- RTL -->\n<div class=\"s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL</h3>\n  <ul class=\"s-list:ul s-ui:accent s-mb:30\">\n    <li>Principal Implementation Facilitator Miss Lynda Rath</li>\n    <li>Regional Paradigm Strategist Vernon Hammes DDS</li>\n  </ul>\n  <ul class=\"s-list:ol s-ui:accent s-mb:30\">\n    <li>Principal Mobility Facilitator Phil Gerlach</li>\n    <li>Central Tactics Designer Ada Miller</li>\n  </ul>\n  <ul class=\"s-list:icon s-ui:accent s-mb:30\">\n    <li><i class=\"s-icon:user\"></i> Direct Paradigm Agent Miss Terri Pfannerstill</li>\n    <li><i class=\"s-icon:heart s-ui:error\"></i> Human Applications Officer Freddie Durgan</li>\n  </ul>\n</div>\n\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <ul class=\"s-list s-scale:12 s-ui:accent\">\n    <li>Regional Optimization Architect Joann Gottlieb I</li>\n    <li class=\"s-ui:complementary\">Legacy Branding Facilitator Dale Hermiston</li>\n    <li class=\"s-ui:error\">Dynamic Accounts Designer Ms. Eduardo Orn</li>\n  </ul>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -913,7 +998,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <ul class=\"s-tabs s-ui:accent\">\n    <li tabindex=\"0\">Edgar Haag</li>\n    <li tabindex=\"0\" active>Bertha Schmidt IV</li>\n    <li tabindex=\"0\">Mr. Tyrone Douglas</li>\n  </ul>\n</div>\n\n\n<!-- grow -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Grow</h3>\n  <ul class=\"s-tabs:grow\">\n    <li tabindex=\"0\" active>Judy Botsford III</li>\n    <li tabindex=\"0\">Kristy MacGyver</li>\n    <li tabindex=\"0\">Chelsea Heathcote</li>\n  </ul>\n</div>\n\n<!-- rtl -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">RTL</h3>\n  <ul class=\"s-tabs\">\n    <li class=\"s-ui:accent\" tabindex=\"0\" active>Taylor Muller</li>\n    <li class=\"s-ui:complementary\" tabindex=\"0\">Rosalie Ritchie</li>\n    <li tabindex=\"0\">Ricky Schoen</li>\n  </ul>\n</div>\n\n<!-- vertical -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Vertical</h3>\n  <ul class=\"s-tabs:vertical s-ui:complementary\">\n    <li tabindex=\"0\" active>Penny Mertz</li>\n    <li tabindex=\"0\">Jeremy Hirthe</li>\n    <li tabindex=\"0\">Marion Wolff</li>\n  </ul>\n</div>\n\n<!-- scaled -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scaled</h3>\n  <ul class=\"s-tabs:grow s-scale:13 s-ui:accebt\">\n    <li tabindex=\"0\" active>Mr. Brandon Witting</li>\n    <li tabindex=\"0\">Sylvia Keebler</li>\n    <li tabindex=\"0\">Dennis Waters DVM</li>\n  </ul>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <ul class=\"s-tabs s-ui:accent\">\n    <li tabindex=\"0\">Sophie Vandervort</li>\n    <li tabindex=\"0\" active>Marie Kuphal</li>\n    <li tabindex=\"0\">Marguerite MacGyver</li>\n  </ul>\n</div>\n\n\n<!-- grow -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Grow</h3>\n  <ul class=\"s-tabs:grow\">\n    <li tabindex=\"0\" active>Ms. Delbert Leannon</li>\n    <li tabindex=\"0\">Mable Johnston</li>\n    <li tabindex=\"0\">Dr. Ellen Russel</li>\n  </ul>\n</div>\n\n<!-- rtl -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">RTL</h3>\n  <ul class=\"s-tabs\">\n    <li class=\"s-ui:accent\" tabindex=\"0\" active>Sonja Rodriguez V</li>\n    <li class=\"s-ui:complementary\" tabindex=\"0\">Dawn Bednar</li>\n    <li tabindex=\"0\">Toni Boyle</li>\n  </ul>\n</div>\n\n<!-- vertical -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Vertical</h3>\n  <ul class=\"s-tabs:vertical s-ui:complementary\">\n    <li tabindex=\"0\" active>Carla Farrell</li>\n    <li tabindex=\"0\">Julia Wolff</li>\n    <li tabindex=\"0\">Winifred Conn</li>\n  </ul>\n</div>\n\n<!-- scaled -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scaled</h3>\n  <ul class=\"s-tabs:grow s-scale:13 s-ui:accebt\">\n    <li tabindex=\"0\" active>Bernadette Bruen Jr.</li>\n    <li tabindex=\"0\">Miss Phyllis Weissnat</li>\n    <li tabindex=\"0\">Blanca Lynch</li>\n  </ul>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1175,7 +1260,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 1\" />\n    <span>Regional Program Supervisor Jason Wyman DVM</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 2\" />\n    <span>Chief Usability Liaison Shelia Hintz</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 3\" />\n    <span>Regional Creative Assistant Julie Von</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked=\"checked\" />\n    <span>Central Group Planner Dr. Yvonne Haag</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 2\" />\n    <span>Global Program Consultant Diane Schaden</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 3\" />\n    <span>Regional Infrastructure Officer Neal Frami</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-style-color\" value=\"hello 4\" />\n    <span>Customer Configuration Specialist Antoinette Beier PhD</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 1\" checked=\"checked\" />\n    <span>Dynamic Web Analyst Lowell Waelchi</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 2\" />\n    <span>District Assurance Analyst Mrs. Kathryn Barrows</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 3\" />\n    <span>Internal Creative Agent Bethany Feest</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 1\" />\n    <span>Legacy Mobility Assistant Geneva Bins</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 2\" checked=\"checked\" />\n    <span>National Configuration Associate Dexter Pacocha</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 3\" />\n    <span>Dynamic Brand Agent Harold Williamson</span>\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 1\" />\n    <span>Future Implementation Producer Carlos Schneider</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 2\" />\n    <span>Human Metrics Engineer Miss Scott Schulist</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 3\" />\n    <span>Principal Markets Specialist Ms. Georgia Frami</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked=\"checked\" />\n    <span>Global Web Specialist Manuel Bins</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 2\" />\n    <span>Product Tactics Orchestrator Alyssa Olson</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 3\" />\n    <span>Investor Assurance Designer Mamie Larkin IV</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-style-color\" value=\"hello 4\" />\n    <span>International Quality Facilitator Blanche Lindgren</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 1\" checked=\"checked\" />\n    <span>Dynamic Accountability Facilitator Sheila Koss</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 2\" />\n    <span>Central Markets Strategist Tony Lynch PhD</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 3\" />\n    <span>Principal Brand Agent Ms. Lynne Runolfsdottir</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 1\" />\n    <span>Lead Identity Associate Nelson Wisozk</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 2\" checked=\"checked\" />\n    <span>Future Markets Specialist Marjorie Gorczany PhD</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 3\" />\n    <span>Legacy Communications Planner Maria Auer</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1252,7 +1337,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Dr. Taylor Pfeffer</option>\n      <option value=\"value2\">Luther Swift</option>\n      <option value=\"value3\">Adam Koss Jr.</option>\n    </select>\n    <span>Principal Response Developer Leland Schoen</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Jimmy Zulauf Sr.</option>\n      <option value=\"value2\">Bert Kuhlman</option>\n      <option value=\"value3\">Moses Dickinson</option>\n    </select>\n    <span>Internal Data Administrator Edgar Rempel</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Maurice Lubowitz</option>\n      <option value=\"value2\">Douglas Hessel</option>\n      <option value=\"value3\">Glenn Mills</option>\n    </select>\n    <span>Future Data Specialist Estelle Kling</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Billie Carter</option>\n      <option value=\"value2\">Ivan Konopelski</option>\n      <option value=\"value3\">Clark Schroeder</option>\n    </select>\n    <span>International Infrastructure Orchestrator Russell Bayer</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:complementary s-label\">\n    <select class=\"s-select\" name=\"select-color-complementary\">\n      <option value=\"value1\">Rick Beier</option>\n      <option value=\"value2\">Tony Grady</option>\n      <option value=\"value3\">Pablo Ortiz</option>\n    </select>\n    <span>Senior Security Officer Rosa Blick</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <select class=\"s-select\" name=\"select-color-error\">\n      <option value=\"value1\">Garrett Feil</option>\n      <option value=\"value2\">Beth Zboncak Sr.</option>\n      <option value=\"value3\">Candace O'Hara</option>\n    </select>\n    <span>Regional Factors Producer Vera Pouros</span>\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    <select class=\"s-select\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Ms. John Treutel</option>\n      <option value=\"value2\">Opal Mueller</option>\n      <option value=\"value3\">Sherri Haley</option>\n    </select>\n    <span>Central Mobility Designer Randal Abshire</span>\n  </label>\n</div>\n\n<!-- RTL -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Karl Schiller</option>\n      <option value=\"value2\">Joan Glover</option>\n      <option value=\"value3\">Bryan Johnson</option>\n    </select>\n    <span>Legacy Integration Executive Kristen MacGyver</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Tiffany Turcotte</option>\n      <option value=\"value2\">Jackie Roob</option>\n      <option value=\"value3\">Gwendolyn Reichel</option>\n    </select>\n    <span>District Implementation Officer Dianne Greenfelder</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Robin MacGyver</option>\n      <option value=\"value2\">Miss Darrel Marquardt</option>\n      <option value=\"value3\">Judith Schaefer</option>\n    </select>\n    <span>Direct Data Consultant Naomi Schmidt</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Mamie Wilkinson</option>\n      <option value=\"value2\">Ramiro Waelchi III</option>\n      <option value=\"value3\">Catherine Treutel</option>\n    </select>\n    <span>Product Web Representative Christy Hammes</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Percy Kautzer</option>\n      <option value=\"value2\">Jo Klein DVM</option>\n      <option value=\"value3\">Willie Torphy</option>\n    </select>\n    <span>Central Paradigm Liaison Janice Hauck</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Erica Kozey</option>\n      <option value=\"value2\">Zachary Kuvalis</option>\n      <option value=\"value3\">Kathleen Daniel</option>\n    </select>\n    <span>Dynamic Marketing Assistant Jeremiah Weissnat</span>\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Miss Johnny Parker</option>\n      <option value=\"value2\">Brent Weissnat</option>\n      <option value=\"value3\">Johnathan Koch</option>\n    </select>\n    <span>International Security Officer Vera Boyle</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Marlon Hodkiewicz</option>\n      <option value=\"value2\">Israel MacGyver</option>\n      <option value=\"value3\">Billy Langosh</option>\n    </select>\n    <span>Human Creative Assistant Miss Misty Cruickshank</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Ramon Konopelski</option>\n      <option value=\"value2\">Terence Pagac</option>\n      <option value=\"value3\">Adrienne Smitham</option>\n    </select>\n    <span>District Group Engineer Garrett Green</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Dr. Connie Boehm</option>\n      <option value=\"value2\">Lamar Mayer III</option>\n      <option value=\"value3\">Santos Herman</option>\n    </select>\n    <span>Human Infrastructure Director Forrest Carter</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:complementary s-label\">\n    <select class=\"s-select\" name=\"select-color-complementary\">\n      <option value=\"value1\">Inez Graham</option>\n      <option value=\"value2\">Connie Donnelly</option>\n      <option value=\"value3\">Marty Wisozk MD</option>\n    </select>\n    <span>Principal Interactions Producer Michelle Kassulke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <select class=\"s-select\" name=\"select-color-error\">\n      <option value=\"value1\">Miss Alfred Fay</option>\n      <option value=\"value2\">Felix Hane</option>\n      <option value=\"value3\">Arthur Swift</option>\n    </select>\n    <span>Senior Quality Executive Vivian Lesch</span>\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    <select class=\"s-select\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Henry Kuphal I</option>\n      <option value=\"value2\">Kristy Ferry</option>\n      <option value=\"value3\">Martin Zieme</option>\n    </select>\n    <span>Investor Data Architect Jorge Skiles</span>\n  </label>\n</div>\n\n<!-- RTL -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Colin Gleason</option>\n      <option value=\"value2\">Guy Klocko</option>\n      <option value=\"value3\">Hazel Wuckert</option>\n    </select>\n    <span>Principal Identity Officer Irving Bode</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Shelia Rodriguez</option>\n      <option value=\"value2\">April Predovic</option>\n      <option value=\"value3\">Tamara Gutkowski</option>\n    </select>\n    <span>Lead Optimization Designer Owen Jerde</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Elsie O'Reilly</option>\n      <option value=\"value2\">Mrs. Chelsea Stehr</option>\n      <option value=\"value3\">Rufus Lesch</option>\n    </select>\n    <span>Lead Usability Manager Edwin Rodriguez</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Carrie Schultz</option>\n      <option value=\"value2\">Dr. Deborah Keebler</option>\n      <option value=\"value3\">Ms. Rodolfo Keeling</option>\n    </select>\n    <span>Human Marketing Assistant Patricia Medhurst</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Conrad Baumbach</option>\n      <option value=\"value2\">Dorothy Murphy</option>\n      <option value=\"value3\">Chelsea Spencer</option>\n    </select>\n    <span>Principal Usability Administrator Gerald Kerluke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Shelley Gleason DVM</option>\n      <option value=\"value2\">Marjorie Stehr</option>\n      <option value=\"value3\">Felix Hodkiewicz</option>\n    </select>\n    <span>Human Program Specialist Miss Brandy Effertz</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1308,7 +1393,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <label class=\"s-mb:30 s-label\">\n    National Integration Architect Florence Davis\n    <input type=\"checkbox\" checked class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Direct Optimization Liaison Alfredo Rodriguez\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Dynamic Mobility Agent Tracey Cremin IV\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:complementary\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Regional Web Officer Santiago Kuvalis\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:error\" />\n  </label>\n</div>\n\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <label class=\"s-mb:30 s-label s-scale:05\">\n    Future Functionality Manager Wade Berge Jr.\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:10\">\n    Investor Factors Assistant Michael Davis\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:15\">\n    Direct Marketing Manager Dianna Farrell Sr.\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <label class=\"s-mb:30 s-label\">\n    District Group Orchestrator Jenna Quitzon\n    <input type=\"checkbox\"  class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Global Group Architect Pauline Feeney\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    District Directives Technician Kathleen Towne\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:complementary\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Lead Markets Architect Erika Goodwin\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:error\" />\n  </label>\n</div>\n\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <label class=\"s-mb:30 s-label s-scale:05\">\n    Human Program Facilitator Floyd Pfeffer\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:10\">\n    International Implementation Specialist Lisa Wisozk\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:15\">\n    Investor Marketing Developer Ross Gaylord\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:accent\" />\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1616,7 +1701,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-font:30 s-mb:50\">\n  <span class=\"s-tooltip-container:active\">\n      <a class=\"s-btn s-mr:20\">Hello</a>\n      <div class=\"s-tooltip:right s-ui:accent\">\n          Principal Branding Coordinator Ron Aufderhar\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Positions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip\">\n          Senior Identity Specialist Kristi Heathcote V\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip:right s-ui:accent\">\n          Dynamic Paradigm Producer Billie Koss\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip:bottom s-ui:complementary\">\n          Chief Solutions Analyst Meghan Kunde\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip:left s-ui:error\">\n          Forward Solutions Executive Jean Torp\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Colors</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:accent\">\n          Human Functionality Engineer Cary Feest\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:complementary\">\n          Dynamic Division Strategist Lowell Mueller\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:error\">\n          Regional Research Agent Dallas Heathcote\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">Hover me!</a>\n      <div class=\"s-tooltip s-ui:info\">\n          District Identity Engineer Maria Stoltenberg\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Interactions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">I'm not interactive</a>\n      <div class=\"s-tooltip\">\n          <a class=\"s-btn s-ui:accent\">Click me if you can!</a>\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20\">I'm interactive</a>\n      <div class=\"s-tooltip:interactive\">\n          <a class=\"s-btn s-ui:accent\">Click me because you can!</a>\n      </div>\n  </span>\n</div>"
+                        "code": "<div class=\"s-font:30 s-mb:50\">\n  <span class=\"s-tooltip-container:active\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Hello</a>\n      <div class=\"s-tooltip:inline-end s-ui:accent\">\n          Central Group Strategist Mrs. Harriet Berge\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Positions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Block start (default)</a>\n      <div class=\"s-tooltip\">\n          Forward Identity Strategist Erik Grimes\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Inline end</a>\n      <div class=\"s-tooltip:inline-end s-ui:accent\">\n          Investor Data Planner Johanna Mraz\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Block end</a>\n      <div class=\"s-tooltip:block-end s-ui:complementary\">\n          Central Operations Administrator Hector Upton\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Inline start</a>\n      <div class=\"s-tooltip:inline-start s-ui:error\">\n          Dynamic Factors Administrator Irene Feil MD\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors (sample)</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Accent</a>\n      <div class=\"s-tooltip s-ui:accent\">\n          Investor Configuration Planner Domingo Stamm\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Complementary</a>\n      <div class=\"s-tooltip s-ui:complementary\">\n          Product Division Orchestrator Shirley Cormier\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Error</a>\n      <div class=\"s-tooltip s-ui:error\">\n          Senior Infrastructure Liaison Rickey Goldner\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Info</a>\n      <div class=\"s-tooltip s-ui:info\">\n          Future Interactions Specialist Darrel Hahn DDS\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Interactions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">I'm not interactive</a>\n      <div class=\"s-tooltip\">\n          <a class=\"s-btn s-ui:accent\">Click me if you can!</a>\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">I'm interactive</a>\n      <div class=\"s-tooltip:interactive\">\n          <a class=\"s-btn s-ui:accent\">Click me because you can!</a>\n      </div>\n  </span>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1674,7 +1759,7 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip": {
                 "name": "s-tooltip",
                 "type": "CssClass",
-                "description": "This class represent a simple tooltip",
+                "description": "This class represent a simple block start (top) tooltip",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
                 "example": [
                     {
@@ -1713,15 +1798,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Top": {
-                "name": "s-tooltip--top",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip:inlineEnd": {
+                "name": "s-tooltip:inline-end",
                 "type": "CssClass",
-                "description": "This class represent a simple top tooltip",
+                "description": "This class represent a simple inline end (right) tooltip",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip\">Something cool</div>\n</a>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:inline-end\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1734,36 +1819,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Right": {
-                "name": "s-tooltip--right",
-                "type": "CssClass",
-                "description": "This class represent a simple right tooltip",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:right\">Something cool</div>\n</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Left": {
-                "name": "s-tooltip--left",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip:inlineStart": {
+                "name": "s-tooltip:inline-start",
                 "type": "CssClass",
                 "description": "This class represent a simple left tooltip",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:left\">Something cool</div>\n</a>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:inline-start\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1776,15 +1840,15 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip-Bottom": {
-                "name": "s-tooltip--bottom",
+            "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip.sTooltip:blockEnd": {
+                "name": "s-tooltip:block-end",
                 "type": "CssClass",
-                "description": "This class represent a simple bottom tooltip",
+                "description": "This class represent a simple block end (bottom) tooltip",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.tooltip",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip\">Something cool</div>\n</a>"
+                        "code": "<a class=\"s-tooltip-container s-btn\">\n  I'm a cool button\n  <div class=\"s-tooltip:block-end\">Something cool</div>\n</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1800,12 +1864,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:main": {
                 "name": "s-ui:main",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-main>main</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:main\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:main\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1821,12 +1885,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:ui": {
                 "name": "s-ui:ui",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-ui>ui</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:ui\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:ui\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1842,12 +1906,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:accent": {
                 "name": "s-ui:accent",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-accent>accent</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:accent\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:accent\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1863,12 +1927,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:complementary": {
                 "name": "s-ui:complementary",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-complementary>complementary</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:complementary\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:complementary\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1884,12 +1948,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:success": {
                 "name": "s-ui:success",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-success>success</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:success\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:success\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1905,12 +1969,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:warning": {
                 "name": "s-ui:warning",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-warning>warning</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:warning\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:warning\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1926,12 +1990,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:error": {
                 "name": "s-ui:error",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-error>error</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:error\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:error\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1947,12 +2011,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:info": {
                 "name": "s-ui:info",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-info>info</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:info\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:info\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1968,12 +2032,12 @@
             "@coffeekraken.coffeekraken-io.sugar.css.ui.label.sUi:extension": {
                 "name": "s-ui:extension",
                 "type": "CssClass",
-                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any ui element",
+                "description": "This class allows you to apply the \"<span class=\"s-color-extension>extension</span>\" color to any ui element.\nThis does apply the color only on the item itself and not on his childs...",
                 "namespace": "@coffeekraken.coffeekraken-io.sugar.css.ui.label",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-ui:extension\">\n  Hello world\n  <input type=\"text\" class=\"s-input\" />\n</label>"
+                        "code": "<label>\n  Hello world\n  <input type=\"text\" class=\"s-input s-ui:extension\" />\n</label>"
                     }
                 ],
                 "since": "2.0.0",
@@ -6598,6 +6662,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.main.placeholder.sColor:mainPlaceholder": {
+                "name": "s-color:main-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.main.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:main-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.placeholder.sBg:mainPlaceholder": {
+                "name": "s-bg:main-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:main-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.main.foreground.sColor:mainForeground": {
                 "name": "s-color:main-foreground",
                 "type": "CssClass",
@@ -6900,138 +7008,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:main-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientStart.sColor:mainGradientStart": {
-                "name": "s-color:main-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"main-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:main-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientStart.sBg:mainGradientStart": {
-                "name": "s-bg:main-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"main-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:main-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientEnd.sColor:mainGradientEnd": {
-                "name": "s-color:main-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"main-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:main-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientEnd.sBg:mainGradientEnd": {
-                "name": "s-bg:main-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"main-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:main-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.main.placeholder.sColor:mainPlaceholder": {
-                "name": "s-color:main-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"main-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.main.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:main-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.placeholder.sBg:mainPlaceholder": {
-                "name": "s-bg:main-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"main-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:main-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -8050,6 +8026,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.ui.placeholder.sColor:uiPlaceholder": {
+                "name": "s-color:ui-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.ui.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:ui-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.placeholder.sBg:uiPlaceholder": {
+                "name": "s-bg:ui-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:ui-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.ui.foreground.sColor:uiForeground": {
                 "name": "s-color:ui-foreground",
                 "type": "CssClass",
@@ -8352,138 +8372,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:ui-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientStart.sColor:uiGradientStart": {
-                "name": "s-color:ui-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"ui-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:ui-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientStart.sBg:uiGradientStart": {
-                "name": "s-bg:ui-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"ui-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:ui-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientEnd.sColor:uiGradientEnd": {
-                "name": "s-color:ui-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"ui-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:ui-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientEnd.sBg:uiGradientEnd": {
-                "name": "s-bg:ui-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"ui-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:ui-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.ui.placeholder.sColor:uiPlaceholder": {
-                "name": "s-color:ui-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"ui-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.ui.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:ui-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.placeholder.sBg:uiPlaceholder": {
-                "name": "s-bg:ui-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"ui-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:ui-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -9502,6 +9390,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.accent.placeholder.sColor:accentPlaceholder": {
+                "name": "s-color:accent-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.accent.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:accent-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.placeholder.sBg:accentPlaceholder": {
+                "name": "s-bg:accent-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:accent-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.accent.foreground.sColor:accentForeground": {
                 "name": "s-color:accent-foreground",
                 "type": "CssClass",
@@ -9804,138 +9736,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:accent-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientStart.sColor:accentGradientStart": {
-                "name": "s-color:accent-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"accent-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:accent-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientStart.sBg:accentGradientStart": {
-                "name": "s-bg:accent-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"accent-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:accent-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientEnd.sColor:accentGradientEnd": {
-                "name": "s-color:accent-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"accent-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:accent-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientEnd.sBg:accentGradientEnd": {
-                "name": "s-bg:accent-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"accent-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:accent-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.accent.placeholder.sColor:accentPlaceholder": {
-                "name": "s-color:accent-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"accent-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.accent.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:accent-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.placeholder.sBg:accentPlaceholder": {
-                "name": "s-bg:accent-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"accent-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:accent-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -10954,6 +10754,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.placeholder.sColor:complementaryPlaceholder": {
+                "name": "s-color:complementary-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:complementary-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.placeholder.sBg:complementaryPlaceholder": {
+                "name": "s-bg:complementary-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:complementary-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.foreground.sColor:complementaryForeground": {
                 "name": "s-color:complementary-foreground",
                 "type": "CssClass",
@@ -11256,138 +11100,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:complementary-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientStart.sColor:complementaryGradientStart": {
-                "name": "s-color:complementary-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"complementary-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:complementary-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientStart.sBg:complementaryGradientStart": {
-                "name": "s-bg:complementary-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"complementary-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:complementary-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientEnd.sColor:complementaryGradientEnd": {
-                "name": "s-color:complementary-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"complementary-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:complementary-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientEnd.sBg:complementaryGradientEnd": {
-                "name": "s-bg:complementary-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"complementary-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:complementary-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.placeholder.sColor:complementaryPlaceholder": {
-                "name": "s-color:complementary-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"complementary-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:complementary-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.placeholder.sBg:complementaryPlaceholder": {
-                "name": "s-bg:complementary-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"complementary-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:complementary-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -12406,6 +12118,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.success.placeholder.sColor:successPlaceholder": {
+                "name": "s-color:success-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.success.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:success-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.placeholder.sBg:successPlaceholder": {
+                "name": "s-bg:success-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:success-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.success.foreground.sColor:successForeground": {
                 "name": "s-color:success-foreground",
                 "type": "CssClass",
@@ -12708,138 +12464,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:success-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientStart.sColor:successGradientStart": {
-                "name": "s-color:success-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"success-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:success-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientStart.sBg:successGradientStart": {
-                "name": "s-bg:success-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"success-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:success-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientEnd.sColor:successGradientEnd": {
-                "name": "s-color:success-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"success-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:success-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientEnd.sBg:successGradientEnd": {
-                "name": "s-bg:success-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"success-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:success-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.success.placeholder.sColor:successPlaceholder": {
-                "name": "s-color:success-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"success-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.success.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:success-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.placeholder.sBg:successPlaceholder": {
-                "name": "s-bg:success-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"success-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:success-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -13858,6 +13482,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.warning.placeholder.sColor:warningPlaceholder": {
+                "name": "s-color:warning-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.warning.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:warning-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.placeholder.sBg:warningPlaceholder": {
+                "name": "s-bg:warning-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:warning-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.warning.foreground.sColor:warningForeground": {
                 "name": "s-color:warning-foreground",
                 "type": "CssClass",
@@ -14160,138 +13828,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:warning-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientStart.sColor:warningGradientStart": {
-                "name": "s-color:warning-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"warning-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:warning-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientStart.sBg:warningGradientStart": {
-                "name": "s-bg:warning-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"warning-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:warning-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientEnd.sColor:warningGradientEnd": {
-                "name": "s-color:warning-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"warning-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:warning-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientEnd.sBg:warningGradientEnd": {
-                "name": "s-bg:warning-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"warning-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:warning-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.warning.placeholder.sColor:warningPlaceholder": {
-                "name": "s-color:warning-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"warning-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.warning.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:warning-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.placeholder.sBg:warningPlaceholder": {
-                "name": "s-bg:warning-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"warning-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:warning-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -15310,6 +14846,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.error.placeholder.sColor:errorPlaceholder": {
+                "name": "s-color:error-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.error.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:error-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.placeholder.sBg:errorPlaceholder": {
+                "name": "s-bg:error-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:error-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.error.foreground.sColor:errorForeground": {
                 "name": "s-color:error-foreground",
                 "type": "CssClass",
@@ -15612,138 +15192,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:error-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientStart.sColor:errorGradientStart": {
-                "name": "s-color:error-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"error-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:error-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientStart.sBg:errorGradientStart": {
-                "name": "s-bg:error-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"error-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:error-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientEnd.sColor:errorGradientEnd": {
-                "name": "s-color:error-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"error-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:error-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientEnd.sBg:errorGradientEnd": {
-                "name": "s-bg:error-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"error-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:error-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.error.placeholder.sColor:errorPlaceholder": {
-                "name": "s-color:error-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"error-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.error.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:error-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.placeholder.sBg:errorPlaceholder": {
-                "name": "s-bg:error-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"error-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:error-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -16762,6 +16210,50 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.info.placeholder.sColor:infoPlaceholder": {
+                "name": "s-color:info-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-placeholder\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.info.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:info-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.placeholder.sBg:infoPlaceholder": {
+                "name": "s-bg:info-placeholder",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-placeholder\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.placeholder",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:info-placeholder\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.info.foreground.sColor:infoForeground": {
                 "name": "s-color:info-foreground",
                 "type": "CssClass",
@@ -17064,138 +16556,6 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:info-border\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientStart.sColor:infoGradientStart": {
-                "name": "s-color:info-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"info-gradientStart\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:info-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientStart.sBg:infoGradientStart": {
-                "name": "s-bg:info-gradientStart",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"info-gradientStart\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientStart",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:info-gradientStart\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientEnd.sColor:infoGradientEnd": {
-                "name": "s-color:info-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"info-gradientEnd\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:info-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientEnd.sBg:infoGradientEnd": {
-                "name": "s-bg:info-gradientEnd",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"info-gradientEnd\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientEnd",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:info-gradientEnd\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.info.placeholder.sColor:infoPlaceholder": {
-                "name": "s-color:info-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"info-placeholder\" color to an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.info.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-color:info-placeholder\">\n    Something cool\n</h1>"
-                    }
-                ],
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.placeholder.sBg:infoPlaceholder": {
-                "name": "s-bg:info-placeholder",
-                "type": "CssClass",
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to apply the \"info-placeholder\" color to the background of an HTMLElement",
-                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.placeholder",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<h1 class=\"s-bg:info-placeholder\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -18552,7 +17912,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">National Identity Planner Lisa O'Conner</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">Principal Paradigm Representative Bill Smith</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Global Optimization Developer Sharon Dickinson</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Principal Program Technician Joyce Herzog</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">National Usability Strategist Shawna Kunde</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">Dynamic Metrics Director Earnest Homenick</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Regional Data Liaison Virgil Kiehn</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Chief Metrics Strategist Janice Schneider</h1>"
                     },
                     {
                         "language": "css",
@@ -18703,7 +18063,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-mb:30\">Global Paradigm Producer Ismael Thiel</h1>\n<span class=\"s-color:accent s-font:30\">5</span><br /><br /><h1 class=\"s-font:5 s-mb:30\">Human Research Administrator Hector Padberg</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-mb:30\">Senior Quality Producer Ms. Lois Oberbrunner</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-mb:30\">Forward Marketing Liaison Constance Stroman</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-mb:30\">Internal Group Producer Daryl Langosh</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-mb:30\">Chief Tactics Representative Nathan Kris</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-mb:30\">Lead Security Facilitator Guadalupe O'Hara</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-mb:30\">Central Division Agent Ellis Wilderman V</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-mb:30\">Lead Research Liaison Randolph Jast</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-mb:30\">Direct Paradigm Administrator Yvonne Runolfsson V</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-mb:30\">Investor Implementation Officer Jasmine Dickens</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-mb:30\">Central Accounts Producer Lorena Kunde</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-mb:30\">Product Quality Analyst Jeannie Hoeger</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-mb:30\">Central Accounts Planner Ms. Dave Macejkovic</h1>\n<span class=\"s-color:accent s-font:30\">5</span><br /><br /><h1 class=\"s-font:5 s-mb:30\">Direct Marketing Representative Janie Barrows</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-mb:30\">Principal Factors Associate Nellie Hessel</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-mb:30\">Regional Identity Supervisor Rita Koss</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-mb:30\">Dynamic Response Specialist Luz Haley V</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-mb:30\">National Integration Designer Crystal Kreiger</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-mb:30\">Human Implementation Director Rolando Weber</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-mb:30\">Corporate Integration Manager Tommy Kohler</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-mb:30\">Forward Data Supervisor Ann Kohler</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-mb:30\">Central Identity Director Kathleen Bednar</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-mb:30\">Legacy Marketing Officer Adrienne Hodkiewicz DDS</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-mb:30\">Human Directives Manager Dr. Lisa Williamson</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-mb:30\">Global Web Assistant Isabel Okuneva</h1>"
                     },
                     {
                         "language": "css",
@@ -19006,7 +18366,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Customer Optimization Administrator <span class=\"s-font:reset-size\">Cory Brakus MD</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Lead Tactics Orchestrator <span class=\"s-font:reset-family\">Robin Marks</span>\n</div>"
+                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Dynamic Applications Administrator <span class=\"s-font:reset-size\">Katherine Jenkins</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Corporate Implementation Director <span class=\"s-font:reset-family\">Erin Keeling</span>\n</div>"
                     }
                 ],
                 "since": "2.0.0",

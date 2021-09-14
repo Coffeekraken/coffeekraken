@@ -2,6 +2,7 @@
 // @TODO            check how to override private static methods
 
 // import __mustache from 'mustache';
+import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __SInterface from '@coffeekraken/s-interface';
 import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/css/adoptStyleInShadowRoot';
 import __injectStyle from '@coffeekraken/sugar/js/css/injectStyle';
@@ -82,6 +83,21 @@ export default class SComponent extends __SClass {
     node: HTMLElement;
 
     /**
+     * @name            name
+     * @type            String
+     *
+     * Get the name of the node or feature that this component utils is
+     * used by. Get from `settings.componentUtils.name` then throught the passed
+     * node using his tagName property
+     *
+     * @since   2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    get name(): string {
+        return this.componentUtilsSettings.name ?? this.node.tagName.toLowerCase();
+    }
+
+    /**
      * @name            state
      * @type            String
      *
@@ -122,6 +138,23 @@ export default class SComponent extends __SClass {
                 ...props,
             };
         });
+    }
+
+    /**
+     * @name            getDefaultProps
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to get back some default props setted for a component/feature, etc...
+     *
+     * @param     {String|String[]}      selector      The selector to use to target elements on which these props will be applied
+     * @return    {Any}                                 Some default props setted or an empty object
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    static getDefaultProps(selector: string): any {
+        return this._defaultProps[selector] ?? {};
     }
 
     /**
@@ -284,11 +317,13 @@ export default class SComponent extends __SClass {
                     else value = props[key].nodeValue;
                 }
                 if (!value) return;
-                passedProps[__camelCase(props[key]?.name ?? key)] = value;
+                passedProps[__camelCase(props[key]?.name ?? key)] = __autoCast(value);
             });
         } else {
+            j;
             passedProps = props;
         }
+
         this._finalProps = __deepMerge(
             this.defaultProps,
             this.InterfaceToApply.apply(passedProps, {
@@ -297,6 +332,30 @@ export default class SComponent extends __SClass {
                 },
             }),
         );
+
+        const _this = this;
+        this._finalProps = new Proxy(this._finalProps, {
+            get(target, prop, receiver) {
+                return target[prop];
+            },
+            set(obj, prop, value) {
+                const propDef = _this.InterfaceToApply.definition[prop];
+                if (propDef?.physical) {
+                    if (value === false || value === undefined || value === null) {
+                        _this.node.removeAttribute(__dashCase(prop));
+                    } else {
+                        _this.node.setAttribute(__dashCase(prop), String(value));
+                    }
+                }
+                obj[prop] = value;
+                return true;
+            },
+        });
+
+        Object.keys(this._finalProps).forEach((prop) => {
+            this._finalProps[prop] = this._finalProps[prop];
+        });
+
         return this._finalProps;
     }
 
@@ -323,9 +382,10 @@ export default class SComponent extends __SClass {
                 this.InterfaceToApply.defaults(),
                 this.componentUtilsSettings.defaultProps ?? {},
                 (<any>this.constructor)._defaultProps['*'] ?? {},
-                (<any>this.constructor)._defaultProps[this.node.tagName.toLowerCase()] ?? {},
+                (<any>this.constructor)._defaultProps[this.name] ?? {},
             ),
         );
+
         return this._defaultProps;
     }
 
@@ -365,11 +425,11 @@ export default class SComponent extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    exposeApi(apiObj: any): void {
+    exposeApi(apiObj: any, ctx: any = this.node): void {
         setTimeout(() => {
             let $on = this.node;
             Object.keys(apiObj).forEach((apiFnName) => {
-                const apiFn = apiObj[apiFnName];
+                const apiFn = apiObj[apiFnName].bind(ctx);
                 $on[apiFnName] = apiFn;
             });
         });

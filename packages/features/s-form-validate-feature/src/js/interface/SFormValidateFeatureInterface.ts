@@ -8,8 +8,12 @@ export default class SFormValidateFeatureInterface extends __SInterface {
         },
         on: {
             type: 'Array<String>',
-            values: ['change', 'submit', 'blur', 'enter'],
-            default: ['blur', 'submit', 'enter'],
+            values: ['change', 'submit', 'enter', 'reset'],
+            default: ['change', 'submit', 'enter', 'reset'],
+        },
+        wrap: {
+            type: 'Boolean',
+            default: true,
         },
         errorClass: {
             type: 'String',
@@ -18,6 +22,14 @@ export default class SFormValidateFeatureInterface extends __SInterface {
         errorMessageClass: {
             type: 'String',
             default: 's-form-validate__error-message',
+        },
+        validClass: {
+            type: 'String',
+            default: 's-form-validate s-form-validate--valid s-ui--success',
+        },
+        customValidations: {
+            type: 'Object',
+            default: {},
         },
         joiOptions: {
             type: 'Object',

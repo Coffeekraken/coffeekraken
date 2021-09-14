@@ -1,9 +1,13 @@
 export default function (env, config) {
     return {
+        easing: {
+            default: 'cubic-bezier(0.700, 0.000, 0.305, 0.995)',
+        },
+
         transition: {
-            slow: 'all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)',
-            default: 'all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)',
-            fast: 'all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)',
+            slow: 'all .6s [theme.easing.default]',
+            default: 'all .3s [theme.easing.default]',
+            fast: 'all .1s [theme.easing.default]',
         },
 
         layout: {

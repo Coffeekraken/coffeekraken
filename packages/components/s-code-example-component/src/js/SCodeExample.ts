@@ -41,6 +41,10 @@ export default class SCodeExample extends __SLitComponent {
     }
 
     _$copy = undefined;
+    _$root;
+    _$pre;
+    _$content;
+    _more;
 
     @property()
     _items: HTMLElement[] = [];
@@ -119,9 +123,9 @@ export default class SCodeExample extends __SLitComponent {
 
         await __wait(500);
 
-        this.$content = this.shadowRoot?.querySelector('.s-code-example__content');
-        this.$pre = this.shadowRoot?.querySelector('.s-code-example__code');
-        this.$root = this.shadowRoot?.querySelector('.s-code-example');
+        this._$content = this.shadowRoot?.querySelector('.s-code-example__content');
+        this._$pre = this.shadowRoot?.querySelector('.s-code-example__code');
+        this._$root = this.shadowRoot?.querySelector('.s-code-example');
 
         return true;
     }
@@ -135,14 +139,14 @@ export default class SCodeExample extends __SLitComponent {
     }
     async setMoreClass() {
         await __wait(500);
-        if (this.more) {
-            this.$root.classList.add('s-code-example--more');
+        if (this._more) {
+            this._$root.classList.add('s-code-example--more');
         } else {
-            this.$root.classList.remove('s-code-example--more');
+            this._$root.classList.remove('s-code-example--more');
         }
     }
     toggleMore() {
-        this.more = !this.more;
+        this._more = !this._more;
         this.setMoreClass();
     }
     initPrismOnTab(id) {
@@ -249,7 +253,7 @@ export default class SCodeExample extends __SLitComponent {
                     <div class="${this.componentUtils.className('__more-bar')}">
                         ${
                             // @ts-ignore
-                            this.moreAction === 'toggle'
+                            this._moreAction === 'toggle'
                                 ? html`
                                       <a
                                           class="${this.componentUtils.className('__more-button', 's-btn')}"
@@ -257,7 +261,7 @@ export default class SCodeExample extends __SLitComponent {
                                       >
                                           ${
                                               // @ts-ignore
-                                              this.more
+                                              this._more
                                                   ? html` ${this.props.lessLabel ?? 'Show less'} `
                                                   : html` ${this.props.moreLabel ?? 'Show more'} `
                                           }
@@ -271,12 +275,12 @@ export default class SCodeExample extends __SLitComponent {
                                           )}"
                                           href="${
                                               // @ts-ignore
-                                              this.moreAction
+                                              this._moreAction
                                           }"
                                       >
                                           ${
                                               // @ts-ignore
-                                              this.more
+                                              this._more
                                                   ? html` ${this.props.lessLabel ?? 'Show less'} `
                                                   : html` ${this.props.moreLabel ?? 'Show more'} `
                                           }

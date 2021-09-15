@@ -21,36 +21,78 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginRatioClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginRatioClassesParams {
-  ratio: number;
+    ratio: number;
 }
 
 export { postcssSugarPluginRatioClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginRatioClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginRatioClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginRatioClassesParams = {
-    ratio: 1,
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginRatioClassesParams = {
+        ratio: 1,
+        ...params,
+    };
 
-  const ratioObj = __theme().config('ratio');
+    const ratioObj = __theme().config('ratio');
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  Object.keys(ratioObj).forEach((ratioName) => {
-    const ratioValue = ratioObj[ratioName];
-    const ratioCss = `/**
+    vars.push(`
+      /**
+        * @name          Clearfix
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/clearfix
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply a clearfix on any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        ${Object.keys(ratioObj)
+            .map((ratioName) => {
+                return ` * @cssClass     s-ratio:${ratioName.replace('/', '-')}
+                }            Apply the ${ratioName} ratio`;
+            })
+            .join('\n')}
+        * 
+        * @example        html
+        ${Object.keys(ratioObj)
+            .map((ratioName) => {
+                return ` * <!-- ${ratioName} ratio -->
+            * <div class="s-mb\:50">
+            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${ratioName} ratio</h3>
+            *   <div class="s-ratio\:${ratioName.replace('/', '-')}">
+            *       <img class="s-fit\:cover" src="https://picsum.photos/500/500" />
+            *   </div>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    Object.keys(ratioObj).forEach((ratioName) => {
+        const ratioValue = ratioObj[ratioName];
+        const ratioCss = `/**
   * @name          s-ratio:${ratioName.replace('/', '-')}
   * @namespace          sugar.css.ratio
   * @type               CssClass
@@ -67,8 +109,8 @@ export default function ({
 .s-ratio--${ratioName.replace('/', '-')} {
     @sugar.ratio(${ratioValue});
 }`;
-    vars.push(ratioCss);
-  });
+        vars.push(ratioCss);
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

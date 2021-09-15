@@ -1,4 +1,8 @@
-<s-code-example more-action="{{ $moreAction }}" lines="{{ $lines or 9999999 }}">
+<s-code-example more-action="{{ $moreAction }}"
+    @if ($lines)
+        lines="{{ $lines }}"
+    @endif
+>
     @foreach($examples as $k => $example)
 
         <template lang="{{ $example->language or $k }}">

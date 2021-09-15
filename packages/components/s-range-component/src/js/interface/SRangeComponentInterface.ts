@@ -5,7 +5,6 @@ export default class SRangeComponentInterface extends __SInterface {
         name: {
             type: 'String',
             description: 'Specify the name to assign to the internal input[type="range"]',
-            required: true,
         },
         value: {
             type: 'String',

@@ -155,13 +155,13 @@ export default function ({
             default:
                 vars.push(`
           & > * {
-            @sugar.state.hover {
-              background-color: sugar.color(ui, --alpha 0.4);
-            }
             @sugar.state.active {
               background-color: sugar.color(ui);
               color: sugar.color(ui, foreground);
-            }          
+            }
+            @sugar.state.hover {
+              background-color: sugar.color(ui, --lighten 5);
+            }       
           }
         `);
                 break;

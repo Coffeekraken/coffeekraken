@@ -9,6 +9,14 @@ s-code-example {
     } */
 }
 
+.s-tabs {
+    margin-bottom: calc(sugar.margin(10) * -1);
+    z-index: 10;
+    position: relative;
+}
+
 .s-code-example__toolbar {
     color: sugar.color(ui, text);
+    position: relative;
+    top: calc(sugar.margin(10) * -1) !important;
 }

@@ -14,10 +14,10 @@
                     ]])
                 </div>
 
-                <a class="s-btn:accent s-mr:20" href="/#get-started" title="Get started!">
+                <a class="s-btn s-ui:accent s-mr:20" href="/#get-started" title="Get started!">
                     Get started!
                 </a>
-                <a class="s-btn:complementary" href="/#join-us" title="Join us!">
+                <a class="s-btn s-ui:complementary" href="/#join-us" title="Join us!">
                     Join us on discord
                 </a>
             </div>

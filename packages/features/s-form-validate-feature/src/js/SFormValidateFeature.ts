@@ -7,7 +7,10 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __wrap from '@coffeekraken/sugar/js/dom/manipulate/wrap';
 import __insertAfter from '@coffeekraken/sugar/js/dom/manipulate/insertAfter';
 
+// @ts-ignore
 import __css from '../css/s-form-validate.css';
+
+import __SComponentUtils from '@coffeekraken/s-component-utils';
 
 /**
  * @name            SFormValidate
@@ -60,7 +63,7 @@ import __css from '../css/s-form-validate.css';
  *    </select>
  *    Select
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate>
+ * <label class="s-label s-mb\:30" s-form-validate min="2" max="2">
  *    <select multiple class="s-select s-width\:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
@@ -71,6 +74,27 @@ import __css from '../css/s-form-validate.css';
  * <label class="s-label s-mb\:30" s-form-validate date>
  *    <s-date-picker name="my-cool-date" placeholder="2021-09-16" class="s-width\:60"></s-date-picker>
  *    Date
+ * </label>
+ * <label class="s-label s-mb\:30" s-form-validate min="25" max="75">
+ *    <s-range class="s-width\:60" min="0" max="100" tooltip></s-range>
+ *    Value between 25 and 75
+ * </label>
+ * <label class="s-label s-mb\:30" s-form-validate min="2" max="2">
+ *      <div class="s-flex s-width\:60">
+ *         <label class="s-label s-mb\:20">
+ *            <input type="checkbox" class="s-checkbox" value="value 1" />
+ *            <span>Item 1</span>
+ *         </label>
+ *         <label class="s-label s-mb\:20">
+ *            <input type="checkbox" class="s-checkbox" value="value 2" />
+ *            <span>Item 1</span>
+ *         </label>
+ *         <label class="s-label s-mb\:20">
+ *            <input type="checkbox" class="s-checkbox" value="value 3" />
+ *            <span>Item 1</span>
+ *         </label>
+ *      </div>
+ *      Choose at least 2 items
  * </label>
  *
  * <h3 class="s-color\:accent s-font\:30 s-mb\:30">Custom validation</h3>
@@ -128,8 +152,8 @@ export default class SFormValidateFeature extends __SFeature {
     private _$field;
 
     // @ts-ignore
-    constructor(name: string, node: HTMLElement, defaultProps: any, settings: any) {
-        Object.keys(defaultProps.customValidations).forEach((validationName) => {
+    constructor(name: string, node: HTMLElement, settings: any) {
+        Object.keys(__SComponentUtils.getDefaultProps(name)?.customValidations).forEach((validationName) => {
             if (__SFormValidateFeatureInterface.definition[validationName]) return;
             __SFormValidateFeatureInterface.definition[validationName] = {
                 type: 'String|Boolean',
@@ -190,7 +214,7 @@ export default class SFormValidateFeature extends __SFeature {
                     this.validate(e);
                 });
             } else {
-                this._$field.addEventListener(on, (e) => {
+                this.node.addEventListener(on, (e) => {
                     this.validate(e);
                 });
             }
@@ -236,8 +260,50 @@ export default class SFormValidateFeature extends __SFeature {
             this._isValidating = false;
         });
 
-        let res = this._schema.validate(
-            (<HTMLInputElement>this._$field).value,
+        let resultObj;
+
+        if (this._$field.type === 'checkbox') {
+            resultObj = this._validateCheckbox();
+        } else if (this._$field.type === 'range') {
+            resultObj = this._validateRange();
+        } else if (this._$field.tagName.toLowerCase() === 'select') {
+            resultObj = this._validateSelect();
+        } else {
+            resultObj = this._schema.validate(
+                (<HTMLInputElement>this._$field).value,
+                __deepMerge(
+                    {
+                        errors: {
+                            label: false,
+                            language: this.props.language,
+                        },
+                    },
+                    this.props.joiOptions,
+                ),
+            );
+        }
+
+        if (event.type === 'reset') {
+            resultObj = {};
+        }
+
+        // apply result
+        this._applyResult(resultObj, event);
+    }
+
+    _validateCheckbox() {
+        const checkboxesValues = Array.from(this.node.querySelectorAll('input[type="checkbox"]:checked')).map(
+            ($item) => (<HTMLInputElement>$item).value,
+        );
+        let schema = __joi.array();
+        if (this.props.min) {
+            schema = schema.min(this.props.min);
+        }
+        if (this.props.max) {
+            schema = schema.max(this.props.max);
+        }
+        return schema.validate(
+            checkboxesValues,
             __deepMerge(
                 {
                     errors: {
@@ -248,66 +314,129 @@ export default class SFormValidateFeature extends __SFeature {
                 this.props.joiOptions,
             ),
         );
+    }
 
-        if (event.type === 'reset') {
-            res = {};
+    _validateRange() {
+        const value = parseFloat(this._$field.value);
+        let schema = __joi.number();
+        if (this.props.min) {
+            schema = schema.min(this.props.min);
+        }
+        if (this.props.max) {
+            schema = schema.max(this.props.max);
+        }
+        return schema.validate(
+            value,
+            __deepMerge(
+                {
+                    errors: {
+                        label: false,
+                        language: this.props.language,
+                    },
+                },
+                this.props.joiOptions,
+            ),
+        );
+    }
+
+    _validateSelect() {
+        // min max
+        const selectedItems = Array.from(this._$field.querySelectorAll('option'))
+            .filter(($item) => (<HTMLOptionElement>$item).selected)
+            .map(($item) => (<HTMLOptionElement>$item).value);
+
+        let schema = __joi.array();
+
+        if (this.props.min) {
+            schema = schema.min(this.props.min);
+        }
+        if (this.props.max) {
+            schema = schema.max(this.props.max);
         }
 
+        return schema.validate(
+            selectedItems,
+            __deepMerge(
+                {
+                    errors: {
+                        label: false,
+                        language: this.props.language,
+                    },
+                },
+                this.props.joiOptions,
+            ),
+        );
+    }
+
+    _applyResult(res, event) {
         // @ts-ignore
-        if (res.error && !this.node._inError) {
-            // set the internal node state as error
-            // @ts-ignore
-            this.node._inError = true;
+        if (res.error) {
             // @ts-ignore
             const marginBottom = getComputedStyle(this.node).marginBottom;
             // wrap item into an error container
-            let $container;
-            if (this.props.wrap) {
+            let $container = (<HTMLElement>this.node.parentNode)?.hasAttribute?.('s-form-validate-error-container')
+                ? this.node.parentNode
+                : undefined;
+
+            if (!$container && this.props.wrap) {
                 $container = document.createElement('div');
+                // @ts-ignore
                 $container.setAttribute('s-form-validate-error-container', 'true');
+                // @ts-ignore
                 $container.classList.remove(...this.props.validClass.split(' '));
+                // @ts-ignore
                 $container.classList.add(...this.props.errorClass.split(' '));
+                // @ts-ignore
                 __wrap(this.node, $container);
-            } else {
-                this.node.classList.remove(...this.props.validClass.split(' '));
+            }
+
+            // add error class on the node itself
+            if (!this.props.wrap) {
                 this.node.classList.add(...this.props.errorClass.split(' '));
             }
+
+            // remove valid class on the node itself
+            this.node.classList.remove(...this.props.validClass.split(' '));
+
             // display error if needed
             if (this.props.displayError) {
-                const $error = document.createElement('p');
-                $error.setAttribute('class', this.props.errorMessageClass);
-                $error.innerHTML = res.error.message;
-                $error.style.marginBottom = marginBottom;
-                if (this.props.wrap) {
-                    $container.appendChild($error);
+                const alreadyExists = !!$container?.querySelector('p[s-form-validate-error-message]');
+
+                const $error = alreadyExists
+                    ? <HTMLElement>$container?.querySelector('p[s-form-validate-error-message]')
+                    : document.createElement('p');
+
+                if (!alreadyExists) {
+                    $error.setAttribute('s-form-validate-error-message', 'true');
+                    $error.setAttribute('class', this.props.errorMessageClass);
+                    $error.innerHTML = res.error.message;
+                    $error.style.marginBottom = marginBottom;
+                    if ($container) {
+                        $container.appendChild($error);
+                    } else {
+                        __insertAfter($error, this.node);
+                    }
                 } else {
-                    __insertAfter($error, this.node);
+                    $error.innerHTML = res.error.message;
                 }
             }
         } else if (!res.error) {
             // reset the field state
-            // @ts-ignore
-            this.node._inError = false;
+            if (event.type !== 'reset') {
+                this.node.classList.add(...this.props.validClass.split(' '));
+            } else {
+                this.node.classList.remove(...this.props.validClass.split(' '));
+            }
+
             // unwrap the field
             if (this.props.wrap) {
-                if (event.type !== 'reset') {
-                    this.node.classList.add(...this.props.validClass.split(' '));
-                } else {
-                    this.node.classList.remove(...this.props.validClass.split(' '));
-                }
-                const $errorContainer = <HTMLElement>this.node.parentNode;
-                if (!$errorContainer.hasAttribute('s-form-validate-error-container')) return;
-                __insertAfter(this.node, $errorContainer);
-                $errorContainer?.remove();
+                const $container = <HTMLElement>this.node.parentNode;
+                if (!$container.hasAttribute('s-form-validate-error-container')) return;
+                __insertAfter(this.node, $container);
+                $container?.remove();
             } else {
-                this.node.classList.remove(...this.props.errorClass.split(' '));
-                if (event.type !== 'reset') {
-                    this.node.classList.add(...this.props.validClass.split(' '));
-                } else {
-                    this.node.classList.remove(...this.props.validClass.split(' '));
-                }
                 const $errorMessage = <HTMLElement>this.node.nextSibling;
-                if ($errorMessage?.getAttribute('class') === this.props.errorMessageClass) {
+                if ($errorMessage?.hasAttribute('s-form-validate-error-message')) {
                     $errorMessage?.remove();
                 }
             }

@@ -19,7 +19,7 @@ export default class SActivateFeature extends __SFeature {
     _$groupElements?: HTMLElement[];
     _unactivateTimeout;
 
-    constructor(name: string, node: HTMLElement, defaultProps: any, settings: any) {
+    constructor(name: string, node: HTMLElement, settings: any) {
         super(
             name,
             node,

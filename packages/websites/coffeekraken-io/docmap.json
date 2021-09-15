@@ -283,7 +283,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-solid-1\" value=\"hello 1\" />\n    <span>Product Assurance Designer Theresa Lindgren</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-2\" value=\"hello 2\" />\n    <span>Corporate Directives Strategist Inez Mertz</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-3\" value=\"hello 3\" />\n    <span>Dynamic Assurance Administrator Marion Pollich</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-color-1\" value=\"hello 1\" />\n    <span>Customer Web Developer Rosie Swaniawski Sr.</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n    <span>Customer Integration Technician Alonzo Rempel Jr.</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-3\" value=\"hello 3\" />\n    <span>Dynamic Solutions Agent Shelia Ryan</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"checkbox\" disabled class=\"s-checkbox\" name=\"checkbox-style-color-4\" value=\"hello 4\" />\n    <span>Senior Response Designer Joe Doyle</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Legacy Mobility Producer Cornelius Doyle</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Senior Web Technician Preston Trantow</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>Investor Data Consultant Misty Schultz</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Central Markets Planner Gerard Dicki</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Legacy Division Technician Horace Conn</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>Investor Interactions Associate Constance Mayert</span>\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-solid-1\" value=\"hello 1\" />\n    <span>Chief Paradigm Agent Edna Ratke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-2\" value=\"hello 2\" />\n    <span>Investor Configuration Associate Jerry Hagenes</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-solid-3\" value=\"hello 3\" />\n    <span>Corporate Web Analyst Roger Cremin</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-color-1\" value=\"hello 1\" />\n    <span>Product Factors Coordinator Fannie Roberts</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n    <span>District Directives Strategist Randal Runolfsson</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-color-3\" value=\"hello 3\" />\n    <span>Corporate Quality Officer Hugo Russel</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"checkbox\" disabled class=\"s-checkbox\" name=\"checkbox-style-color-4\" value=\"hello 4\" />\n    <span>Senior Division Administrator Jay Smith</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Chief Response Supervisor Maggie Stracke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Chief Research Executive Kenny Legros I</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>National Data Developer Daniel Hauck IV</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n    <span>Internal Factors Director Dr. Luis Mitchell</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n    <span>Senior Quality Coordinator Lena Gutmann</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n    <span>Dynamic Response Officer Christie Heaney</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -339,7 +339,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <button class=\"s-btn s-ui:accent s-mb:30\">\n      Click me!\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Global Security Director Jan Connelly</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <span class=\"s-btn-group s-mb:30\">\n      <a class=\"s-btn\">Click me!</a>\n      <button class=\"s-btn s-ui:complementary\">\n          +\n          <div class=\"s-dropdown\">\n              <p class=\"s-typo:p s-mb:30\">Customer Applications Manager Betty Bailey</p>\n              <a class=\"s-btn s-ui:accent\">You find me!</a>\n          </div>\n      </button>\n  </span>\n</div>\n\n<!-- Positions -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Position</h3>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom (default)\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Customer Optimization Analyst Valerie Stokes</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom start\n      <div class=\"s-dropdown:bottom-start\">\n         <p class=\"s-typo:p s-mb:30\">Internal Markets Planner Lindsey Bogisich</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom end\n      <div class=\"s-dropdown:bottom-end\">\n         <p class=\"s-typo:p s-mb:30\">International Configuration Assistant Sheila Heaney</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top\n      <div class=\"s-dropdown:top\">\n         <p class=\"s-typo:p s-mb:30\">Senior Communications Consultant Hector Shanahan</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top start\n      <div class=\"s-dropdown:top-start\">\n         <p class=\"s-typo:p s-mb:30\">National Paradigm Associate Nathaniel Dibbert</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top end\n      <div class=\"s-dropdown:top-end\">\n         <p class=\"s-typo:p s-mb:30\">International Integration Supervisor Jennifer Schowalter</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n</div>\n\n<!-- RTL -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL Support</h3>\n  <button class=\"s-btn s-mb:30\">\n      Click me!\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Customer Paradigm Architect Jesus Barrows</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top start\n      <div class=\"s-dropdown:top-start\">\n         <p class=\"s-typo:p s-mb:30\">District Brand Analyst Sergio Lebsack</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top end\n      <div class=\"s-dropdown:top-end\">\n         <p class=\"s-typo:p s-mb:30\">Global Assurance Coordinator Virginia Ruecker</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <button class=\"s-btn s-ui:accent s-mb:30\">\n      Click me!\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Corporate Intranet Orchestrator Rodolfo Reilly</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <span class=\"s-btn-group s-mb:30\">\n      <a class=\"s-btn\">Click me!</a>\n      <button class=\"s-btn s-ui:complementary\">\n          +\n          <div class=\"s-dropdown\">\n              <p class=\"s-typo:p s-mb:30\">Dynamic Mobility Administrator Camille Mann</p>\n              <a class=\"s-btn s-ui:accent\">You find me!</a>\n          </div>\n      </button>\n  </span>\n</div>\n\n<!-- Positions -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Position</h3>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom (default)\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Senior Response Engineer Tanya McLaughlin</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom start\n      <div class=\"s-dropdown:bottom-start\">\n         <p class=\"s-typo:p s-mb:30\">Investor Brand Supervisor Andy Weber</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Bottom end\n      <div class=\"s-dropdown:bottom-end\">\n         <p class=\"s-typo:p s-mb:30\">Global Mobility Technician Monique McDermott</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top\n      <div class=\"s-dropdown:top\">\n         <p class=\"s-typo:p s-mb:30\">National Optimization Specialist Rosalie Weber II</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top start\n      <div class=\"s-dropdown:top-start\">\n         <p class=\"s-typo:p s-mb:30\">Product Marketing Consultant Mr. Christina Batz</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top end\n      <div class=\"s-dropdown:top-end\">\n         <p class=\"s-typo:p s-mb:30\">Investor Group Analyst Dr. Francis Blick</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n</div>\n\n<!-- RTL -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL Support</h3>\n  <button class=\"s-btn s-mb:30\">\n      Click me!\n      <div class=\"s-dropdown\">\n         <p class=\"s-typo:p s-mb:30\">Direct Integration Administrator Lauren Ratke DDS</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top start\n      <div class=\"s-dropdown:top-start\">\n         <p class=\"s-typo:p s-mb:30\">Lead Marketing Technician Andrea Cruickshank</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n  <button class=\"s-btn s-mb:30 s-mr:20\">\n      Top end\n      <div class=\"s-dropdown:top-end\">\n         <p class=\"s-typo:p s-mb:30\">Chief Identity Associate Dean Hickle</p>\n         <a class=\"s-btn s-ui:accent\">You find me!</a>\n      </div>\n  </button>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -360,7 +360,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom\">\n      <p class=\"s-typo:p s-mb:30\">Future Program Producer Ms. Tammy Goodwin</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom\">\n      <p class=\"s-typo:p s-mb:30\">Chief Configuration Coordinator Pam Dare</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -381,7 +381,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom-start\">\n      <p class=\"s-typo:p s-mb:30\">Senior Tactics Manager Elisa Stanton</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom-start\">\n      <p class=\"s-typo:p s-mb:30\">Product Program Executive Tammy Rutherford</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -402,7 +402,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom-end\">\n      <p class=\"s-typo:p s-mb:30\">Central Operations Supervisor Tanya Langosh</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:bottom-end\">\n      <p class=\"s-typo:p s-mb:30\">District Intranet Designer Eddie Rempel</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -423,7 +423,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top\">\n      <p class=\"s-typo:p s-mb:30\">Product Tactics Designer Malcolm Walker</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top\">\n      <p class=\"s-typo:p s-mb:30\">Regional Tactics Consultant Wilbur Spinka</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -444,7 +444,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top-start\">\n      <p class=\"s-typo:p s-mb:30\">Human Paradigm Designer Percy Senger</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top-start\">\n      <p class=\"s-typo:p s-mb:30\">Chief Group Technician Mrs. Raul Hamill</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -465,7 +465,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top-end\">\n      <p class=\"s-typo:p s-mb:30\">Regional Identity Administrator Terrell Fritsch</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
+                        "code": "<button class=\"s-btn\">\n  Click me!\n  <div class=\"s-dropdown:top-end\">\n      <p class=\"s-typo:p s-mb:30\">Dynamic Applications Coordinator Jamie Torphy</p>\n      <a class=\"s-btn s-ui:accent\">You find me!</a>\n  </div>\n</button>"
                     }
                 ],
                 "since": "2.0.0",
@@ -731,7 +731,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-label s-mb:30\">\n      Noel Sanford\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n      Domingo Sawayn\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Maria Labadie\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:complementary\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       William Altenwerth\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:error\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label s-mb:30\">\n       Kerry Hermann\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Kara King\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-scale:15 s-ui:accent\" />\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-label s-mb:30\">\n      Mr. Floyd Spencer\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n      Mr. Pat Gottlieb\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Lee McCullough\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:complementary\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Melanie Wilderman\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-ui:error\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label s-mb:30\">\n       Ivan O'Reilly\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid s-width:50 s-ui:accent\" />\n  </label>\n  <label class=\"s-label s-mb:30\">\n       Seth Blick\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:50 s-scale:15 s-ui:accent\" />\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -781,7 +781,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- inline style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">inline style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Direct Usability Assistant Kelley Fadel</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Legacy Applications Engineer Owen Corwin</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Corporate Directives Producer Geoffrey Considine DDS</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>Dynamic Branding Coordinator Amanda Nader</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Dynamic Branding Strategist June Ritchie III (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Human Directives Architect Mr. Tommie Kertzmann (Scaled)</span>\n  </label>\n</div>\n\n<!-- float style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">float style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Dynamic Identity Orchestrator Casey Conroy</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Dynamic Group Executive Kerry Nader</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Human Division Manager Javier Barton DVM</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>District Implementation Technician Bridget Ortiz</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Investor Creative Consultant Sharon Roberts (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Forward Brand Engineer Kathy Volkman Sr. (Scaled)</span>\n  </label>\n</div>"
+                        "code": "<!-- inline style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">inline style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Global Operations Assistant Gabriel Huel</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Product Accounts Designer Johanna Cronin DVM</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Legacy Interactions Analyst Opal Murazik</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>Lead Infrastructure Manager Mr. Marie Renner</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>International Group Manager Alberto Ritchie (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Central Tactics Representative Brittany Barton (Scaled)</span>\n  </label>\n</div>\n\n<!-- float style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">float style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Future Factors Developer Damon McCullough</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>International Response Facilitator Jeanne Lubowitz</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Product Metrics Assistant Ronald Emard</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label:float\">\n    <textarea class=\"s-input s-width:50\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n    <span>Future Branding Architect Cedric Ledner</span>\n  </label>\n  <label dir=\"rtl\" class=\"s-mb:30 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>District Research Developer Kim Howell PhD (RTL)</span>\n  </label>\n  <label class=\"s-mb:30 s-scale:15 s-ui:accent s-label:float\">\n    <input type=\"text\" class=\"s-input s-width:50\" placeholder=\"Type something!\" />\n    <span>Senior Quality Administrator Mrs. Wendy Dickinson (Scaled)</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -858,7 +858,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- ul style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">ul style</h3>\n  <ul class=\"s-list:ul \">\n    <li>Product Program Designer Lewis Hand III</li>\n    <li>National Markets Director Heidi Champlin</li>\n    <li>Investor Markets Specialist Terry Adams</li>\n  </ul>\n</div>\n\n<!-- ol style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">ol style</h3>\n  <ul class=\"s-list:ol s-ui:accent s-scale:15\">\n    <li>Customer Usability Director Karla Cassin</li>\n    <li>Lead Solutions Coordinator Marta Bins III</li>\n    <li>Human Operations Architect Luther Langosh</li>\n  </ul>\n</div>\n\n<!-- icon style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">icon style</h3>\n  <ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Central Integration Manager Kristy Larson</li>\n    <li><i class=\"s-icon:heart s-ui:accent\"></i>Principal Usability Producer Darren Hoeger</li>\n    <li><i class=\"s-icon:fire s-ui:error\"></i>Corporate Division Administrator Eugene Collier</li>\n  </ul>\n</div>\n\n\n<!-- RTL -->\n<div class=\"s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL</h3>\n  <ul class=\"s-list:ul s-ui:accent s-mb:30\">\n    <li>Principal Implementation Facilitator Miss Lynda Rath</li>\n    <li>Regional Paradigm Strategist Vernon Hammes DDS</li>\n  </ul>\n  <ul class=\"s-list:ol s-ui:accent s-mb:30\">\n    <li>Principal Mobility Facilitator Phil Gerlach</li>\n    <li>Central Tactics Designer Ada Miller</li>\n  </ul>\n  <ul class=\"s-list:icon s-ui:accent s-mb:30\">\n    <li><i class=\"s-icon:user\"></i> Direct Paradigm Agent Miss Terri Pfannerstill</li>\n    <li><i class=\"s-icon:heart s-ui:error\"></i> Human Applications Officer Freddie Durgan</li>\n  </ul>\n</div>\n\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <ul class=\"s-list s-scale:12 s-ui:accent\">\n    <li>Regional Optimization Architect Joann Gottlieb I</li>\n    <li class=\"s-ui:complementary\">Legacy Branding Facilitator Dale Hermiston</li>\n    <li class=\"s-ui:error\">Dynamic Accounts Designer Ms. Eduardo Orn</li>\n  </ul>\n</div>"
+                        "code": "<!-- ul style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">ul style</h3>\n  <ul class=\"s-list:ul \">\n    <li>National Integration Developer Gregory Mayer</li>\n    <li>District Response Agent Mandy Sanford</li>\n    <li>Direct Directives Engineer Max Zulauf</li>\n  </ul>\n</div>\n\n<!-- ol style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">ol style</h3>\n  <ul class=\"s-list:ol s-ui:accent s-scale:15\">\n    <li>Dynamic Functionality Technician Joy McDermott</li>\n    <li>Principal Accounts Manager Drew Marvin DVM</li>\n    <li>Dynamic Solutions Agent Tiffany Gutmann</li>\n  </ul>\n</div>\n\n<!-- icon style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">icon style</h3>\n  <ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Investor Configuration Manager Whitney Torphy</li>\n    <li><i class=\"s-icon:heart s-ui:accent\"></i>Lead Accounts Officer Phillip Nicolas</li>\n    <li><i class=\"s-icon:fire s-ui:error\"></i>Chief Research Assistant Elbert Homenick</li>\n  </ul>\n</div>\n\n\n<!-- RTL -->\n<div class=\"s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL</h3>\n  <ul class=\"s-list:ul s-ui:accent s-mb:30\">\n    <li>Lead Data Orchestrator Felix Schamberger</li>\n    <li>District Assurance Strategist Eloise Hauck</li>\n  </ul>\n  <ul class=\"s-list:ol s-ui:accent s-mb:30\">\n    <li>Dynamic Accounts Associate Felix Lemke</li>\n    <li>National Intranet Designer Ramiro Roberts</li>\n  </ul>\n  <ul class=\"s-list:icon s-ui:accent s-mb:30\">\n    <li><i class=\"s-icon:user\"></i> District Integration Director Ellis Harber</li>\n    <li><i class=\"s-icon:heart s-ui:error\"></i> Dynamic Group Supervisor Mrs. Opal Krajcik</li>\n  </ul>\n</div>\n\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <ul class=\"s-list s-scale:12 s-ui:accent\">\n    <li>Regional Accounts Supervisor Chris Douglas</li>\n    <li class=\"s-ui:complementary\">Dynamic Web Strategist Dr. Antonio Streich</li>\n    <li class=\"s-ui:error\">Direct Brand Administrator Tara Homenick</li>\n  </ul>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -998,7 +998,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <ul class=\"s-tabs s-ui:accent\">\n    <li tabindex=\"0\">Sophie Vandervort</li>\n    <li tabindex=\"0\" active>Marie Kuphal</li>\n    <li tabindex=\"0\">Marguerite MacGyver</li>\n  </ul>\n</div>\n\n\n<!-- grow -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Grow</h3>\n  <ul class=\"s-tabs:grow\">\n    <li tabindex=\"0\" active>Ms. Delbert Leannon</li>\n    <li tabindex=\"0\">Mable Johnston</li>\n    <li tabindex=\"0\">Dr. Ellen Russel</li>\n  </ul>\n</div>\n\n<!-- rtl -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">RTL</h3>\n  <ul class=\"s-tabs\">\n    <li class=\"s-ui:accent\" tabindex=\"0\" active>Sonja Rodriguez V</li>\n    <li class=\"s-ui:complementary\" tabindex=\"0\">Dawn Bednar</li>\n    <li tabindex=\"0\">Toni Boyle</li>\n  </ul>\n</div>\n\n<!-- vertical -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Vertical</h3>\n  <ul class=\"s-tabs:vertical s-ui:complementary\">\n    <li tabindex=\"0\" active>Carla Farrell</li>\n    <li tabindex=\"0\">Julia Wolff</li>\n    <li tabindex=\"0\">Winifred Conn</li>\n  </ul>\n</div>\n\n<!-- scaled -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scaled</h3>\n  <ul class=\"s-tabs:grow s-scale:13 s-ui:accebt\">\n    <li tabindex=\"0\" active>Bernadette Bruen Jr.</li>\n    <li tabindex=\"0\">Miss Phyllis Weissnat</li>\n    <li tabindex=\"0\">Blanca Lynch</li>\n  </ul>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <ul class=\"s-tabs s-ui:accent\">\n    <li tabindex=\"0\">Tracy Farrell</li>\n    <li tabindex=\"0\" active>Melinda Jenkins</li>\n    <li tabindex=\"0\">Marcia Kulas</li>\n  </ul>\n</div>\n\n\n<!-- grow -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Grow</h3>\n  <ul class=\"s-tabs:grow\">\n    <li tabindex=\"0\" active>Mercedes Larson</li>\n    <li tabindex=\"0\">Arturo Veum</li>\n    <li tabindex=\"0\">Sidney Dooley</li>\n  </ul>\n</div>\n\n<!-- rtl -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">RTL</h3>\n  <ul class=\"s-tabs\">\n    <li class=\"s-ui:accent\" tabindex=\"0\" active>Patsy Gulgowski</li>\n    <li class=\"s-ui:complementary\" tabindex=\"0\">Curtis Smitham</li>\n    <li tabindex=\"0\">Cecil Heaney</li>\n  </ul>\n</div>\n\n<!-- vertical -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Vertical</h3>\n  <ul class=\"s-tabs:vertical s-ui:complementary\">\n    <li tabindex=\"0\" active>Rosalie Schiller PhD</li>\n    <li tabindex=\"0\">Ms. Gregory Huels</li>\n    <li tabindex=\"0\">Scott Carroll</li>\n  </ul>\n</div>\n\n<!-- scaled -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scaled</h3>\n  <ul class=\"s-tabs:grow s-scale:13 s-ui:accebt\">\n    <li tabindex=\"0\" active>Owen Schroeder IV</li>\n    <li tabindex=\"0\">Dr. Larry Lubowitz</li>\n    <li tabindex=\"0\">Kristin Casper</li>\n  </ul>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1260,7 +1260,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 1\" />\n    <span>Future Implementation Producer Carlos Schneider</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 2\" />\n    <span>Human Metrics Engineer Miss Scott Schulist</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 3\" />\n    <span>Principal Markets Specialist Ms. Georgia Frami</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked=\"checked\" />\n    <span>Global Web Specialist Manuel Bins</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 2\" />\n    <span>Product Tactics Orchestrator Alyssa Olson</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 3\" />\n    <span>Investor Assurance Designer Mamie Larkin IV</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-style-color\" value=\"hello 4\" />\n    <span>International Quality Facilitator Blanche Lindgren</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 1\" checked=\"checked\" />\n    <span>Dynamic Accountability Facilitator Sheila Koss</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 2\" />\n    <span>Central Markets Strategist Tony Lynch PhD</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 3\" />\n    <span>Principal Brand Agent Ms. Lynne Runolfsdottir</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 1\" />\n    <span>Lead Identity Associate Nelson Wisozk</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 2\" checked=\"checked\" />\n    <span>Future Markets Specialist Marjorie Gorczany PhD</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 3\" />\n    <span>Legacy Communications Planner Maria Auer</span>\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 1\" />\n    <span>Internal Security Facilitator Ms. Franklin Ritchie</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 2\" />\n    <span>District Assurance Producer Pete Stroman</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-solid\" value=\"hello 3\" />\n    <span>Internal Applications Director Jonathon Effertz</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked=\"checked\" />\n    <span>International Research Consultant Emanuel Hyatt</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:info s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 2\" />\n    <span>Direct Group Consultant Floyd Schiller</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-color\" value=\"hello 3\" />\n    <span>Chief Functionality Supervisor Louise Moen</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:warning s-label\">\n    <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-style-color\" value=\"hello 4\" />\n    <span>Future Group Developer Mrs. Misty Skiles</span>\n  </label>\n</div>\n\n<!-- LTR -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">LTR Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 1\" checked=\"checked\" />\n    <span>Global Operations Developer Jessica Hirthe Jr.</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 2\" />\n    <span>Senior Program Assistant Dr. Gilberto Armstrong</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-ltr\" value=\"hello 3\" />\n    <span>Investor Configuration Strategist Brent Nitzsche</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 1\" />\n    <span>Principal Interactions Engineer Inez Dare</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 2\" checked=\"checked\" />\n    <span>Dynamic Tactics Orchestrator Vernon Harris</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <input type=\"radio\" class=\"s-radio\" name=\"radio-style-scale\" value=\"hello 3\" />\n    <span>Dynamic Markets Facilitator Mr. Pat Feil</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1337,7 +1337,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Miss Johnny Parker</option>\n      <option value=\"value2\">Brent Weissnat</option>\n      <option value=\"value3\">Johnathan Koch</option>\n    </select>\n    <span>International Security Officer Vera Boyle</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Marlon Hodkiewicz</option>\n      <option value=\"value2\">Israel MacGyver</option>\n      <option value=\"value3\">Billy Langosh</option>\n    </select>\n    <span>Human Creative Assistant Miss Misty Cruickshank</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Ramon Konopelski</option>\n      <option value=\"value2\">Terence Pagac</option>\n      <option value=\"value3\">Adrienne Smitham</option>\n    </select>\n    <span>District Group Engineer Garrett Green</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Dr. Connie Boehm</option>\n      <option value=\"value2\">Lamar Mayer III</option>\n      <option value=\"value3\">Santos Herman</option>\n    </select>\n    <span>Human Infrastructure Director Forrest Carter</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:complementary s-label\">\n    <select class=\"s-select\" name=\"select-color-complementary\">\n      <option value=\"value1\">Inez Graham</option>\n      <option value=\"value2\">Connie Donnelly</option>\n      <option value=\"value3\">Marty Wisozk MD</option>\n    </select>\n    <span>Principal Interactions Producer Michelle Kassulke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <select class=\"s-select\" name=\"select-color-error\">\n      <option value=\"value1\">Miss Alfred Fay</option>\n      <option value=\"value2\">Felix Hane</option>\n      <option value=\"value3\">Arthur Swift</option>\n    </select>\n    <span>Senior Quality Executive Vivian Lesch</span>\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    <select class=\"s-select\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Henry Kuphal I</option>\n      <option value=\"value2\">Kristy Ferry</option>\n      <option value=\"value3\">Martin Zieme</option>\n    </select>\n    <span>Investor Data Architect Jorge Skiles</span>\n  </label>\n</div>\n\n<!-- RTL -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Colin Gleason</option>\n      <option value=\"value2\">Guy Klocko</option>\n      <option value=\"value3\">Hazel Wuckert</option>\n    </select>\n    <span>Principal Identity Officer Irving Bode</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Shelia Rodriguez</option>\n      <option value=\"value2\">April Predovic</option>\n      <option value=\"value3\">Tamara Gutkowski</option>\n    </select>\n    <span>Lead Optimization Designer Owen Jerde</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Elsie O'Reilly</option>\n      <option value=\"value2\">Mrs. Chelsea Stehr</option>\n      <option value=\"value3\">Rufus Lesch</option>\n    </select>\n    <span>Lead Usability Manager Edwin Rodriguez</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Carrie Schultz</option>\n      <option value=\"value2\">Dr. Deborah Keebler</option>\n      <option value=\"value3\">Ms. Rodolfo Keeling</option>\n    </select>\n    <span>Human Marketing Assistant Patricia Medhurst</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Conrad Baumbach</option>\n      <option value=\"value2\">Dorothy Murphy</option>\n      <option value=\"value3\">Chelsea Spencer</option>\n    </select>\n    <span>Principal Usability Administrator Gerald Kerluke</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Shelley Gleason DVM</option>\n      <option value=\"value2\">Marjorie Stehr</option>\n      <option value=\"value3\">Felix Hodkiewicz</option>\n    </select>\n    <span>Human Program Specialist Miss Brandy Effertz</span>\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">solid style</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Earnest Bednar</option>\n      <option value=\"value2\">Dr. Leonard Ward</option>\n      <option value=\"value3\">Santos Roob DDS</option>\n    </select>\n    <span>Customer Security Consultant Kristine Tremblay</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Joey Swaniawski</option>\n      <option value=\"value2\">Ivan Dickinson Sr.</option>\n      <option value=\"value3\">Roland Ebert</option>\n    </select>\n    <span>Senior Infrastructure Administrator Bryan Kuvalis I</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-style-solid\">\n      <option value=\"value1\">Lauren Gleason</option>\n      <option value=\"value2\">Marilyn Rolfson</option>\n      <option value=\"value3\">Ira Fahey</option>\n    </select>\n    <span>Central Branding Administrator Mrs. Mildred Jacobi</span>\n  </label>\n</div>\n\n\n<!-- Colors -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Dr. Wilson Labadie</option>\n      <option value=\"value2\">Herman Daniel</option>\n      <option value=\"value3\">Mr. Molly Kozey</option>\n    </select>\n    <span>District Division Strategist Nettie Raynor</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:complementary s-label\">\n    <select class=\"s-select\" name=\"select-color-complementary\">\n      <option value=\"value1\">Lynda Daugherty</option>\n      <option value=\"value2\">Dr. Gilbert Larkin</option>\n      <option value=\"value3\">Kristin Hintz</option>\n    </select>\n    <span>Direct Operations Executive Stacey Wilkinson</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:error s-label\">\n    <select class=\"s-select\" name=\"select-color-error\">\n      <option value=\"value1\">Joanna Turcotte</option>\n      <option value=\"value2\">Dr. Josephine Koepp</option>\n      <option value=\"value3\">Mr. Jack Anderson</option>\n    </select>\n    <span>Legacy Research Administrator Roger Smith</span>\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    <select class=\"s-select\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Mark Bogisich</option>\n      <option value=\"value2\">Sidney Ryan II</option>\n      <option value=\"value3\">Wilson Cronin</option>\n    </select>\n    <span>Customer Group Manager Ramona Powlowski</span>\n  </label>\n</div>\n\n<!-- RTL -->\n<div class=\"s-font:30 s-mb:50\" dir=\"rtl\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">RTL Support</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Elijah Brown</option>\n      <option value=\"value2\">Mrs. Desiree Wyman</option>\n      <option value=\"value3\">Marcus Halvorson</option>\n    </select>\n    <span>Investor Optimization Architect Mrs. Donna Bashirian</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Elias Gleichner</option>\n      <option value=\"value2\">Miss Leigh Weber</option>\n      <option value=\"value3\">Ruth Blanda</option>\n    </select>\n    <span>Regional Mobility Associate Dana Roberts</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">April Lowe</option>\n      <option value=\"value2\">Dennis Prosacco I</option>\n      <option value=\"value3\">Marsha Keebler</option>\n    </select>\n    <span>District Tactics Specialist Laura Koss</span>\n  </label>\n</div>\n\n<!-- Scale -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Scale</h3>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:07\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Tomas Frami</option>\n      <option value=\"value2\">Everett Ward</option>\n      <option value=\"value3\">Dan Stroman</option>\n    </select>\n    <span>Direct Accounts Specialist Cornelius Schaden V</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Kirk Hegmann</option>\n      <option value=\"value2\">Kristy Monahan</option>\n      <option value=\"value3\">Horace Donnelly</option>\n    </select>\n    <span>Customer Directives Analyst Alfonso Cruickshank</span>\n  </label>\n  <label class=\"s-mb:30 s-ui:accent s-label s-scale:13\">\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Holly Adams</option>\n      <option value=\"value2\">Dr. Audrey Hand</option>\n      <option value=\"value3\">Mathew Steuber</option>\n    </select>\n    <span>District Applications Facilitator Angelo Douglas</span>\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1393,7 +1393,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <label class=\"s-mb:30 s-label\">\n    District Group Orchestrator Jenna Quitzon\n    <input type=\"checkbox\"  class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Global Group Architect Pauline Feeney\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    District Directives Technician Kathleen Towne\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:complementary\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Lead Markets Architect Erika Goodwin\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:error\" />\n  </label>\n</div>\n\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <label class=\"s-mb:30 s-label s-scale:05\">\n    Human Program Facilitator Floyd Pfeffer\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:10\">\n    International Implementation Specialist Lisa Wisozk\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:15\">\n    Investor Marketing Developer Ross Gaylord\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:accent\" />\n  </label>\n</div>"
+                        "code": "<!-- solid style -->\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">solid style</h3>\n  <label class=\"s-mb:30 s-label\">\n    Corporate Quality Administrator Colin Toy\n    <input type=\"checkbox\"  class=\"s-switch\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Investor Identity Analyst Ignacio Rice\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Dynamic Research Liaison Mike Schowalter\n    <input type=\"checkbox\"  class=\"s-switch s-ui:complementary\" />\n  </label>\n  <label class=\"s-mb:30 s-label\">\n    Future Optimization Consultant Lori Jenkins\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:error\" />\n  </label>\n</div>\n\n\n\n<!-- scales -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:20\">Scales</h3>\n  <label class=\"s-mb:30 s-label s-scale:05\">\n    Forward Markets Director Dr. Chad Weimann\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:10\">\n    Principal Operations Executive Stephen Zulauf\n    <input type=\"checkbox\" checked class=\"s-switch s-ui:accent\" />\n  </label>\n  <label class=\"s-mb:30 s-label s-scale:15\">\n    Lead Markets Agent Gwen Wintheiser\n    <input type=\"checkbox\"  class=\"s-switch s-ui:accent\" />\n  </label>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1701,7 +1701,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-font:30 s-mb:50\">\n  <span class=\"s-tooltip-container:active\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Hello</a>\n      <div class=\"s-tooltip:inline-end s-ui:accent\">\n          Central Group Strategist Mrs. Harriet Berge\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Positions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Block start (default)</a>\n      <div class=\"s-tooltip\">\n          Forward Identity Strategist Erik Grimes\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Inline end</a>\n      <div class=\"s-tooltip:inline-end s-ui:accent\">\n          Investor Data Planner Johanna Mraz\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Block end</a>\n      <div class=\"s-tooltip:block-end s-ui:complementary\">\n          Central Operations Administrator Hector Upton\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Inline start</a>\n      <div class=\"s-tooltip:inline-start s-ui:error\">\n          Dynamic Factors Administrator Irene Feil MD\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors (sample)</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Accent</a>\n      <div class=\"s-tooltip s-ui:accent\">\n          Investor Configuration Planner Domingo Stamm\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Complementary</a>\n      <div class=\"s-tooltip s-ui:complementary\">\n          Product Division Orchestrator Shirley Cormier\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Error</a>\n      <div class=\"s-tooltip s-ui:error\">\n          Senior Infrastructure Liaison Rickey Goldner\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Info</a>\n      <div class=\"s-tooltip s-ui:info\">\n          Future Interactions Specialist Darrel Hahn DDS\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Interactions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">I'm not interactive</a>\n      <div class=\"s-tooltip\">\n          <a class=\"s-btn s-ui:accent\">Click me if you can!</a>\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">I'm interactive</a>\n      <div class=\"s-tooltip:interactive\">\n          <a class=\"s-btn s-ui:accent\">Click me because you can!</a>\n      </div>\n  </span>\n</div>"
+                        "code": "<div class=\"s-font:30 s-mb:50\">\n  <span class=\"s-tooltip-container:active\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Hello</a>\n      <div class=\"s-tooltip:inline-end s-ui:accent\">\n          Dynamic Branding Specialist Glenn Conroy\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Positions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Block start (default)</a>\n      <div class=\"s-tooltip\">\n          Chief Functionality Director Shannon Klein\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Inline end</a>\n      <div class=\"s-tooltip:inline-end s-ui:accent\">\n          Internal Markets Director Luke Schamberger\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Block end</a>\n      <div class=\"s-tooltip:block-end s-ui:complementary\">\n          Principal Division Officer Marshall O'Reilly II\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Inline start</a>\n      <div class=\"s-tooltip:inline-start s-ui:error\">\n          International Functionality Facilitator Marie Rosenbaum\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Colors (sample)</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Accent</a>\n      <div class=\"s-tooltip s-ui:accent\">\n          Dynamic Quality Agent Mr. Herbert Senger\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Complementary</a>\n      <div class=\"s-tooltip s-ui:complementary\">\n          Customer Division Planner Van Daniel\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Error</a>\n      <div class=\"s-tooltip s-ui:error\">\n          Product Division Planner Jana Schiller\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">Info</a>\n      <div class=\"s-tooltip s-ui:info\">\n          International Branding Coordinator Doug Kovacek\n      </div>\n  </span>\n</div>\n\n<div class=\"s-font:30 s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">Interactions</h3>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">I'm not interactive</a>\n      <div class=\"s-tooltip\">\n          <a class=\"s-btn s-ui:accent\">Click me if you can!</a>\n      </div>\n  </span>\n  <span class=\"s-tooltip-container\">\n      <a class=\"s-btn s-mr:20 s-mb:20\">I'm interactive</a>\n      <div class=\"s-tooltip:interactive\">\n          <a class=\"s-btn s-ui:accent\">Click me because you can!</a>\n      </div>\n  </span>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -5650,6 +5650,153 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.helpers.clearfix": {
+                "name": "Clearfix",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/clearfix"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a clearfix on any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.helpers",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- 1 ratio -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">1 ratio</h3>\n  <div class=\"s-ratio:1\">\n      <img class=\"s-fit:cover\" src=\"https://picsum.photos/500/500\" />\n  </div>\n</div>\n\n<!-- 1-1 ratio -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">1-1 ratio</h3>\n  <div class=\"s-ratio:1-1\">\n      <img class=\"s-fit:cover\" src=\"https://picsum.photos/500/500\" />\n  </div>\n</div>\n\n<!-- 16-9 ratio -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">16-9 ratio</h3>\n  <div class=\"s-ratio:16-9\">\n      <img class=\"s-fit:cover\" src=\"https://picsum.photos/500/500\" />\n  </div>\n</div>\n\n<!-- 2-3 ratio -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">2-3 ratio</h3>\n  <div class=\"s-ratio:2-3\">\n      <img class=\"s-fit:cover\" src=\"https://picsum.photos/500/500\" />\n  </div>\n</div>\n\n<!-- 4-3 ratio -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">4-3 ratio</h3>\n  <div class=\"s-ratio:4-3\">\n      <img class=\"s-fit:cover\" src=\"https://picsum.photos/500/500\" />\n  </div>\n</div>\n\n<!-- 3-4 ratio -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">3-4 ratio</h3>\n  <div class=\"s-ratio:3-4\">\n      <img class=\"s-fit:cover\" src=\"https://picsum.photos/500/500\" />\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.clearfix.sClearfix": {
+                "name": "s-clearfix",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>overflow</yellow>\" clearfix to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.clearfix",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-clearfix\">I'm a cool clearfix element</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.clearfix.sClearfix:facebook": {
+                "name": "s-clearfix:facebook",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>facebook</yellow>\" clearfix to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.clearfix",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-clearfix:facebook\">I'm a cool clearfix element</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.clearfix.sClearfix:micro": {
+                "name": "s-clearfix:micro",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>micro</yellow>\" clearfix to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.clearfix",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-clearfix:micro\">I'm a cool clearfix element</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.clearfix.sClearfix:after": {
+                "name": "s-clearfix:after",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>after</yellow>\" clearfix to any HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.clearfix",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-clearfix:after\">I'm a cool clearfix element</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.main..sColor:main": {
                 "name": "s-color:main",
                 "type": "CssClass",
@@ -7008,6 +7155,94 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:main-border\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientStart.sColor:mainGradientStart": {
+                "name": "s-color:main-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:main-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientStart.sBg:mainGradientStart": {
+                "name": "s-bg:main-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:main-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientEnd.sColor:mainGradientEnd": {
+                "name": "s-color:main-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.main.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:main-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientEnd.sBg:mainGradientEnd": {
+                "name": "s-bg:main-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"main-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.main.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:main-gradientEnd\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -8378,6 +8613,94 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientStart.sColor:uiGradientStart": {
+                "name": "s-color:ui-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:ui-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientStart.sBg:uiGradientStart": {
+                "name": "s-bg:ui-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:ui-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientEnd.sColor:uiGradientEnd": {
+                "name": "s-color:ui-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.ui.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:ui-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientEnd.sBg:uiGradientEnd": {
+                "name": "s-bg:ui-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"ui-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.ui.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:ui-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.accent..sColor:accent": {
                 "name": "s-color:accent",
                 "type": "CssClass",
@@ -9736,6 +10059,94 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:accent-border\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientStart.sColor:accentGradientStart": {
+                "name": "s-color:accent-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:accent-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientStart.sBg:accentGradientStart": {
+                "name": "s-bg:accent-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:accent-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientEnd.sColor:accentGradientEnd": {
+                "name": "s-color:accent-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.accent.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:accent-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientEnd.sBg:accentGradientEnd": {
+                "name": "s-bg:accent-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"accent-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.accent.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:accent-gradientEnd\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -11106,6 +11517,94 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientStart.sColor:complementaryGradientStart": {
+                "name": "s-color:complementary-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:complementary-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientStart.sBg:complementaryGradientStart": {
+                "name": "s-bg:complementary-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:complementary-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientEnd.sColor:complementaryGradientEnd": {
+                "name": "s-color:complementary-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.complementary.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:complementary-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientEnd.sBg:complementaryGradientEnd": {
+                "name": "s-bg:complementary-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"complementary-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.complementary.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:complementary-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.success..sColor:success": {
                 "name": "s-color:success",
                 "type": "CssClass",
@@ -12464,6 +12963,94 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:success-border\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientStart.sColor:successGradientStart": {
+                "name": "s-color:success-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:success-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientStart.sBg:successGradientStart": {
+                "name": "s-bg:success-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:success-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientEnd.sColor:successGradientEnd": {
+                "name": "s-color:success-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.success.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:success-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientEnd.sBg:successGradientEnd": {
+                "name": "s-bg:success-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"success-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.success.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:success-gradientEnd\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -13834,6 +14421,94 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientStart.sColor:warningGradientStart": {
+                "name": "s-color:warning-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:warning-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientStart.sBg:warningGradientStart": {
+                "name": "s-bg:warning-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:warning-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientEnd.sColor:warningGradientEnd": {
+                "name": "s-color:warning-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.warning.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:warning-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientEnd.sBg:warningGradientEnd": {
+                "name": "s-bg:warning-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"warning-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.warning.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:warning-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.error..sColor:error": {
                 "name": "s-color:error",
                 "type": "CssClass",
@@ -15192,6 +15867,94 @@
                     {
                         "language": "html",
                         "code": "<h1 class=\"s-bg:error-border\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientStart.sColor:errorGradientStart": {
+                "name": "s-color:error-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:error-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientStart.sBg:errorGradientStart": {
+                "name": "s-bg:error-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:error-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientEnd.sColor:errorGradientEnd": {
+                "name": "s-color:error-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.error.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:error-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientEnd.sBg:errorGradientEnd": {
+                "name": "s-bg:error-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"error-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.error.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:error-gradientEnd\">\n    Something cool\n</h1>"
                     }
                 ],
                 "filename": "index.css",
@@ -16562,6 +17325,94 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientStart.sColor:infoGradientStart": {
+                "name": "s-color:info-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-gradientStart\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:info-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientStart.sBg:infoGradientStart": {
+                "name": "s-bg:info-gradientStart",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-gradientStart\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientStart",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:info-gradientStart\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientEnd.sColor:infoGradientEnd": {
+                "name": "s-color:info-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-gradientEnd\" color to an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.info.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-color:info-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientEnd.sBg:infoGradientEnd": {
+                "name": "s-bg:info-gradientEnd",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply the \"info-gradientEnd\" color to the background of an HTMLElement",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.color.bg.info.gradientEnd",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"s-bg:info-gradientEnd\">\n    Something cool\n</h1>"
+                    }
+                ],
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.color.extension..sColor:extension": {
                 "name": "s-color:extension",
                 "type": "CssClass",
@@ -17442,6 +18293,153 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.helpers.fit": {
+                "name": "Fit",
+                "type": "Styleguide",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/fit"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a fit size on any HTMLElement.\nOn image and video, uses `object-fit` property, on all others,\nsimply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.helpers",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- fill style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">fill fit size</h3>\n  <div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:fill\" src=\"https://picsum.photos/200/200\" />\n  </div>\n</div>\n\n<!-- cover style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">cover fit size</h3>\n  <div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:cover\" src=\"https://picsum.photos/200/200\" />\n  </div>\n</div>\n\n<!-- contain style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">contain fit size</h3>\n  <div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:contain\" src=\"https://picsum.photos/200/200\" />\n  </div>\n</div>\n\n<!-- none style -->\n<div class=\"s-mb:50\">\n  <h3 class=\"s-color:accent s-font:30 s-mb:30\">none fit size</h3>\n  <div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:none\" src=\"https://picsum.photos/200/200\" />\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.fit.sFit:fill": {
+                "name": "s-fit:fill",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>fill</yellow>\" fit size to any HTMLElement. Work best on images and videos",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.fit",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:fill src=\"https://picsum.photos/200/200\" />\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.fit.sFit:cover": {
+                "name": "s-fit:cover",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>cover</yellow>\" fit size to any HTMLElement. Work best on images and videos",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.fit",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:cover src=\"https://picsum.photos/200/200\" />\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.fit.sFit:contain": {
+                "name": "s-fit:contain",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>contain</yellow>\" fit size to any HTMLElement. Work best on images and videos",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.fit",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:contain src=\"https://picsum.photos/200/200\" />\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.fit.sFit:none": {
+                "name": "s-fit:none",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to apply a \"<yellow>none</yellow>\" fit size to any HTMLElement. Work best on images and videos",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.fit",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:none src=\"https://picsum.photos/200/200\" />\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.align.sAlign:absTop": {
                 "name": "s-align:abs-top",
                 "type": "CssClass",
@@ -17890,6 +18888,90 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
+            "@coffeekraken.coffeekraken-io.sugar.css.mixins.align.sText:start": {
+                "name": "s-text:start",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to align text to the start (left) side, (right) when rtl",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.mixins.align",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-text:start\">Hello world</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.mixins.align.sText:end": {
+                "name": "s-text:end",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to align text to the end (right) side, (left) when rtl",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.mixins.align",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-text:end\">Hello world</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@coffeekraken.coffeekraken-io.sugar.css.mixins.align.sText:justify": {
+                "name": "s-text:justify",
+                "type": "CssClass",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to justify the text",
+                "namespace": "@coffeekraken.coffeekraken-io.sugar.css.mixins.align",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-text:justify\">Hello world</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
             "@coffeekraken.coffeekraken-io.sugar.css.font.fontFamilies": {
                 "name": "Font Families",
                 "type": "CssClass",
@@ -17912,7 +18994,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">National Usability Strategist Shawna Kunde</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">Dynamic Metrics Director Earnest Homenick</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">Regional Data Liaison Virgil Kiehn</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">Chief Metrics Strategist Janice Schneider</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-font:50 s-mb:30\">Internal Communications Analyst Mamie Harvey</h1>\n<span class=\"s-color:accent s-font:30\">title</span><br /><br /><h1 class=\"s-font:title s-font:50 s-mb:30\">Product Implementation Architect Gwen Fritsch</h1>\n<span class=\"s-color:accent s-font:30\">quote</span><br /><br /><h1 class=\"s-font:quote s-font:50 s-mb:30\">National Quality Associate Faith Fahey</h1>\n<span class=\"s-color:accent s-font:30\">code</span><br /><br /><h1 class=\"s-font:code s-font:50 s-mb:30\">International Identity Supervisor Hattie Bosco</h1>"
                     },
                     {
                         "language": "css",
@@ -18063,7 +19145,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-mb:30\">Central Accounts Planner Ms. Dave Macejkovic</h1>\n<span class=\"s-color:accent s-font:30\">5</span><br /><br /><h1 class=\"s-font:5 s-mb:30\">Direct Marketing Representative Janie Barrows</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-mb:30\">Principal Factors Associate Nellie Hessel</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-mb:30\">Regional Identity Supervisor Rita Koss</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-mb:30\">Dynamic Response Specialist Luz Haley V</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-mb:30\">National Integration Designer Crystal Kreiger</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-mb:30\">Human Implementation Director Rolando Weber</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-mb:30\">Corporate Integration Manager Tommy Kohler</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-mb:30\">Forward Data Supervisor Ann Kohler</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-mb:30\">Central Identity Director Kathleen Bednar</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-mb:30\">Legacy Marketing Officer Adrienne Hodkiewicz DDS</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-mb:30\">Human Directives Manager Dr. Lisa Williamson</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-mb:30\">Global Web Assistant Isabel Okuneva</h1>"
+                        "code": "<span class=\"s-color:accent s-font:30\">0</span><br /><br /><h1 class=\"s-font:0 s-mb:30\">Internal Optimization Representative Lynn Walsh Sr.</h1>\n<span class=\"s-color:accent s-font:30\">5</span><br /><br /><h1 class=\"s-font:5 s-mb:30\">Future Creative Engineer Lonnie O'Hara</h1>\n<span class=\"s-color:accent s-font:30\">10</span><br /><br /><h1 class=\"s-font:10 s-mb:30\">Dynamic Program Designer Celia Mitchell</h1>\n<span class=\"s-color:accent s-font:30\">20</span><br /><br /><h1 class=\"s-font:20 s-mb:30\">Regional Identity Developer Sylvester Rempel</h1>\n<span class=\"s-color:accent s-font:30\">30</span><br /><br /><h1 class=\"s-font:30 s-mb:30\">Regional Response Representative Luther Kuhic</h1>\n<span class=\"s-color:accent s-font:30\">40</span><br /><br /><h1 class=\"s-font:40 s-mb:30\">Direct Infrastructure Developer Mr. Rachael Graham</h1>\n<span class=\"s-color:accent s-font:30\">50</span><br /><br /><h1 class=\"s-font:50 s-mb:30\">Product Implementation Supervisor Sherman Upton</h1>\n<span class=\"s-color:accent s-font:30\">60</span><br /><br /><h1 class=\"s-font:60 s-mb:30\">Investor Identity Officer Violet White</h1>\n<span class=\"s-color:accent s-font:30\">70</span><br /><br /><h1 class=\"s-font:70 s-mb:30\">Regional Data Administrator Victor Beer</h1>\n<span class=\"s-color:accent s-font:30\">80</span><br /><br /><h1 class=\"s-font:80 s-mb:30\">Corporate Quality Associate Ronnie Cassin</h1>\n<span class=\"s-color:accent s-font:30\">90</span><br /><br /><h1 class=\"s-font:90 s-mb:30\">Central Factors Director Philip Rau</h1>\n<span class=\"s-color:accent s-font:30\">100</span><br /><br /><h1 class=\"s-font:100 s-mb:30\">Direct Creative Supervisor Lorene Kemmer</h1>\n<span class=\"s-color:accent s-font:30\">default</span><br /><br /><h1 class=\"s-font:default s-mb:30\">Global Intranet Coordinator Dexter Nicolas</h1>"
                     },
                     {
                         "language": "css",
@@ -18366,7 +19448,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Dynamic Applications Administrator <span class=\"s-font:reset-size\">Katherine Jenkins</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Corporate Implementation Director <span class=\"s-font:reset-family\">Erin Keeling</span>\n</div>"
+                        "code": "<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset size</h3>\n<div class=\"s-font:60 s-mb:30\">\n  Human Implementation Representative <span class=\"s-font:reset-size\">Lila Friesen</span>\n</div>\n\n<h3 class=\"s-color:accent s-font:30 s-mb:20\">Reset family</h3>\n<div class=\"s-font:quote s-font:50\">\n  Future Metrics Representative <span class=\"s-font:reset-family\">Edmond Armstrong V</span>\n</div>"
                     }
                 ],
                 "since": "2.0.0",

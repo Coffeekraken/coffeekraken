@@ -6,8 +6,7 @@ class SRangeComponentInterface extends __SInterface {
 SRangeComponentInterface.definition = {
   name: {
     type: "String",
-    description: 'Specify the name to assign to the internal input[type="range"]',
-    required: true
+    description: 'Specify the name to assign to the internal input[type="range"]'
   },
   value: {
     type: "String",

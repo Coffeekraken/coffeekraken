@@ -20,7 +20,7 @@
 
                 <div class="s-grid:12:gutter-between:gutter-50">
 
-                    <div class="s-format:text s-rhythm:vertical">
+                    <div class="s-rhythm:vertical">
 
                         <div class="__preview-metas">
 

@@ -10,6 +10,24 @@ export default function (env, config) {
             fast: 'all .1s [theme.easing.default]',
         },
 
+        helpers: {
+            clearfix: {
+                /**
+                 * @name            default
+                 * @namespace       theme.helpers.clearfix
+                 * @type            String
+                 * @values          'overflow' | 'facebook' | 'float' | 'micro' | 'after'
+                 * @default         overflow
+                 *
+                 * Specify which clearfix method has to be used as the default one
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                default: 'overflow',
+            },
+        },
+
         layout: {
             container: {
                 default: {
@@ -1727,7 +1745,7 @@ export default function (env, config) {
             p: {
                 'font-family': 'default',
                 'font-size': 30,
-                'line-height': 1.2,
+                'line-height': 1.5,
                 'max-width': '55ch',
                 ':rhythmVertical': {
                     'margin-bottom': 30,
@@ -1736,7 +1754,7 @@ export default function (env, config) {
             'p-lead': {
                 'font-family': 'default',
                 'font-size': 50,
-                'line-height': 1.2,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 ':rhythmVertical': {
                     'margin-bottom': 30,

@@ -182,52 +182,11 @@ export default class SFeature extends __SClass {
         // node
         this.node = node;
 
-        // this.props = new Proxy(
-        //     __deepMerge(
-        //         defaultProps,
-        //         InterfaceToApply.apply(passedProps, {
-        //             descriptor: {
-        //                 defaults: false,
-        //             },
-        //         }),
-        //     ),
-        //     {
-        //         // @ts-ignore
-        //         set: (target, prop, value) => {
-        //             // @ts-ignore
-        //             if (this.beforePropChange) {
-        //                 // @ts-ignore
-        //                 const res = this.beforePropChange?.(prop, value);
-        //                 if (res === undefined) return false;
-        //                 value = res;
-        //             }
-
-        //             // set the actual value
-        //             target[prop] = value;
-
-        //             if (this._InterfaceToApply._definition?.[prop.toString()]?.physical) {
-        //                 const attrName = __dashCase(prop);
-        //                 if (value === false || value === null) {
-        //                     this.node.removeAttribute(attrName);
-        //                 } else {
-        //                     this.node.setAttribute(attrName, value.toString());
-        //                 }
-        //             }
-
-        //             // @ts-ignore
-        //             if (this.afterPropChanged) {
-        //                 // @ts-ignore
-        //                 this.afterPropChanged(prop, value);
-        //             }
-
-        //             return true;
-        //         },
-        //     },
-        // );
-
         (async () => {
+            // @ts-ignore
             const mountedCallback = await this.componentUtils.whenMountState();
-            await this.mount();
+            // @ts-ignore
+            await this.mount?.();
             mountedCallback();
         })();
     }

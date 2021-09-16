@@ -22,7 +22,7 @@ import __jsObjectToCssProperties from '../../utils/jsObjectToCssProperties';
  */
 
 class postcssSugarPluginTypoClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginTypoClassesParams {}
@@ -30,31 +30,31 @@ export interface IPostcssSugarPluginTypoClassesParams {}
 export { postcssSugarPluginTypoClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginTypoClassesParams>;
-  atRule: any;
-  replaceWith: Function
+    params: Partial<IPostcssSugarPluginTypoClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginTypoClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginTypoClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  const typosObj = __theme().config('typo');
+    const typosObj = __theme().config('typo');
 
-  Object.keys(typosObj).forEach((typoName) => {
-    const typoObj = typosObj[typoName];
-    const cls = `s-typo:${typoName}`;
+    Object.keys(typosObj).forEach((typoName) => {
+        const typoObj = typosObj[typoName];
+        const cls = `s-typo:${typoName}`;
 
-    const css = __jsObjectToCssProperties(typoObj, {
-      exclude: [':rhythmVertical']
-    });
+        const css = __jsObjectToCssProperties(typoObj, {
+            exclude: [':rhythmVertical'],
+        });
 
-    vars.push(`/**
+        vars.push(`/**
     * @name            ${cls}
     * @namespace        sugar.css.typo
     * @type             CssClass
@@ -64,16 +64,16 @@ export default function ({
     * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any HTMLElement
     * 
     * @example      html
-    * <span class="${cls.replace(':','\:')}">Something cool</span>
+    * <span class="${cls.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${cls.replace(':','--')} {
+   .${cls.replace(':', '--')} {
         ${css}
    }`);
 
-   vars.push(`/**
+        vars.push(`/**
     * @name            s-format:text ${typoName}
     * @namespace        sugar.css.typo
     * @type             CssClass
@@ -95,9 +95,8 @@ export default function ({
      }
    }`);
 
-   if (typoObj[':rhythmVertical']) {
-
-        vars.push(`
+        if (typoObj[':rhythmVertical']) {
+            vars.push(`
 
         /**
           * @name         s-rhythm:vertical ${cls}
@@ -110,45 +109,20 @@ export default function ({
           * 
           * @example      html
           * <div class="s-rhythm\:vertical">
-          *     <span class="${cls.replace(':','\:')}">Something cool</span>
+          *     <span class="${cls.replace(':', ':')}">Something cool</span>
           * </div>
           * 
           * @since    2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-       &.${cls.replace(':','--')}, & .${cls.replace(':','--')} {
+       &.${cls.replace(':', '--')}, & .${cls.replace(':', '--')} {
         @sugar.rhythm.vertical {
           ${__jsObjectToCssProperties(typoObj[':rhythmVertical'])}
         }
       }
       `);
-
-      vars.push(`
-
-        /**
-          * @name         s-rhythm:vertical.s-format:text ${typoName}
-          * @namespace    sugar.css.typo
-          * @type         CssClass
-          * @platform     css
-          * @status       beta
-          * 
-          * This class allows you to activate the space(s) on your "<yellow>${typoName}</yellow>" scopes .s-format:text tags
-          * 
-          * @example      html
-          * <div class="s-rhythm\:vertical s-format\:text">
-          *     <${typoName}>Something cool</${typoName}>
-          * </div>
-          * 
-          * @since    2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-       .s-rhythm--vertical.s-format--text > ${typoName}, ${typoName}.s-rhythm--vertical.s-format--text {
-          ${__jsObjectToCssProperties(typoObj[':rhythmVertical'])}
         }
-      `);
+    });
 
-    }
-  });
-  
-  replaceWith(vars);
+    replaceWith(vars);
 }

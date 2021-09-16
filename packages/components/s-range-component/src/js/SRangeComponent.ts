@@ -25,6 +25,11 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @feature         Can have target(s) that will be automatically filled with the current value
  * @feature         Support for sugar theming system when activate default style
  *
+ * @support         chromium
+ * @support         firefox
+ * @support         safari
+ * @support         edge
+ *
  * @example         html
  * <s-range name="myCoolRange" value="90" class="s-ui:accent:deep s-mb:30"></s-range>
  *

@@ -71,8 +71,7 @@ export default function ({
         * 
         ${fitSizes
             .map((fitSizeName) => {
-                return ` * @cssClass     s-fit:${fitSizeName}
-                }            Apply the ${fitSizeName} fit size`;
+                return ` * @cssClass     s-fit:${fitSizeName}       Apply the ${fitSizeName} fit size`;
             })
             .join('\n')}
         * 
@@ -83,7 +82,7 @@ export default function ({
             * <div class="s-mb\:50">
             *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${fitSizeName} fit size</h3>
             *   <div class="s-ratio\:16-9 s-bg\:ui">
-            *       <img class="s-fit\:${fitSizeName}" src="https://picsum.photos/200/200" />
+            *       <img class="s-fit\:${fitSizeName}" src="https://picsum.photos/1000/1000" />
             *   </div>
             * </div>
             * `;

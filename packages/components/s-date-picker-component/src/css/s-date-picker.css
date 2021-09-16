@@ -14,6 +14,7 @@ s-date-picker {
 .s-date-picker__button {
     padding-inline: sugar.scalable(sugar.theme(ui.datePicker.paddingInline));
     padding-block: sugar.scalable(sugar.theme(ui.datePicker.paddingBlock));
+    cursor: pointer;
 }
 
 s-date-picker[default-style] {

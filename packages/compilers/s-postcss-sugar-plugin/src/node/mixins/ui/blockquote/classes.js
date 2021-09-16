@@ -5,7 +5,7 @@ class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
 }
 postcssSugarPluginUiBlockquoteClassesInterface.definition = {};
 export { postcssSugarPluginUiBlockquoteClassesInterface as interface };
-export default function ({ params, atRule, replaceWith }) {
+export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
     const cls = `s-blockquote`;
@@ -55,32 +55,13 @@ export default function ({ params, atRule, replaceWith }) {
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .s-format--text blockquote {
-            @sugar.color.remap(ui, ${__theme().config('ui.blockquote.defaultColor')});
-            @sugar.ui.blockquote;
-        } 
+        @sugar.format.text {
+          blockquote {
+              @sugar.color.remap(ui, ${__theme().config('ui.blockquote.defaultColor')});
+              @sugar.ui.blockquote;
+          } 
+        }
     `);
-    Object.keys(__theme().baseColors()).forEach((colorName) => {
-        vars.push(`/**
-        * @name           s-blockquote:${colorName}
-        * @namespace      sugar.css.ui.blockquote
-        * @type           CssClass
-        * 
-        * This class represent a simple "<s-color="${colorName}">${colorName}</s-color> blockquote
-        * 
-        * @example        html
-        * <blockquote class="s-blockquote\:${colorName}">
-        *   <p>Hello world</p>
-        * </blockquote>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-        .s-blockquote--${colorName} {
-            @sugar.color.remap(ui, ${colorName});
-        } 
-    `);
-    });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFDM0MsT0FBTyx5QkFBeUIsTUFBTSx3Q0FBd0MsQ0FBQztBQUUvRSxNQUFNLDhDQUErQyxTQUFRLFlBQVk7O0FBQ2hFLHlEQUFVLEdBQUcsRUFDbkIsQ0FBQztBQU1KLE9BQU8sRUFBRSw4Q0FBOEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUV2RSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBRUMsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBR3hCLE1BQU0sR0FBRyxHQUFHLGNBQWMsQ0FBQztJQUUzQixJQUFJLENBQUMsSUFBSSxDQUFDOzRCQUNjLEdBQUc7Ozs7Ozs7OzsrQkFTQSxHQUFHLENBQUMsSUFBSSxFQUFFOzs7Ozs7O1dBTzlCLEdBQUc7Ozs7OztnQkFNRSx5QkFBeUIsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsK0JBQStCLENBQUMsQ0FBQzs7O0tBR3ZGLENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O3FDQW9CdUIsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLDRCQUE0QixDQUFDOzs7S0FHOUUsQ0FBQyxDQUFDO0lBRUgsTUFBTSxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsQ0FBQyxVQUFVLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQzFELElBQUksQ0FBQyxJQUFJLENBQUM7eUNBQzJCLFNBQVM7Ozs7cURBSUcsU0FBUyxLQUFLLFNBQVM7Ozs2Q0FHL0IsU0FBUzs7Ozs7Ozt5QkFPN0IsU0FBUztxQ0FDRyxTQUFTOztLQUV6QyxDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUVwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFDM0MsT0FBTyx5QkFBeUIsTUFBTSx3Q0FBd0MsQ0FBQztBQUUvRSxNQUFNLDhDQUErQyxTQUFRLFlBQVk7O0FBQzlELHlEQUFVLEdBQUcsRUFBRSxDQUFDO0FBSzNCLE9BQU8sRUFBRSw4Q0FBOEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUV2RSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE1BQU0sR0FBRyxHQUFHLGNBQWMsQ0FBQztJQUUzQixJQUFJLENBQUMsSUFBSSxDQUFDOzRCQUNjLEdBQUc7Ozs7Ozs7OzsrQkFTQSxHQUFHLENBQUMsSUFBSSxFQUFFOzs7Ozs7O1dBTzlCLEdBQUc7Ozs7OztnQkFNRSx5QkFBeUIsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsK0JBQStCLENBQUMsQ0FBQzs7O0tBR3ZGLENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozt1Q0FxQnlCLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyw0QkFBNEIsQ0FBQzs7OztLQUloRixDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

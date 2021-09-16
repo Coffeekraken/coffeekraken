@@ -14,7 +14,7 @@
 
     <div id="styleguide">
 
-        <section class="__preview s-py:100 s-bg:main-surface">
+        {{-- <section class="__preview s-py:100 s-bg:main-surface">
 
             <div class="s-container">
 
@@ -51,7 +51,7 @@
 
             </div>
 
-        </section>
+        </section> --}}
 
         <section class="toolbar">
 
@@ -83,25 +83,28 @@
 
         </section>
 
-        <section class="s-container s-py:70">
+        <section class="s-container markdown">
 
-            <section class="s-grid:1222">
+            <div class="s-grid:1222:gutter-between:gutter-50">
 
-                <div>
+                <nav class="__nav s-py:50">
 
-                    @include('doc.sidenav', ['title' => 'Menu', 'block' => $firstBlock, 'docblocks' => null])
+                    <h5 class="s-typo:h5 s-mb:20">
+                        Styleguide
+                    </h5>
 
-                </div>
+                    @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
+                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
+                    
+                </nav>
 
-                <div>
+                <div class="__content s-py:50 s-rhythm:vertical s-format:text">
 
                     @include('pages.styleguide.partials.block', ['block' => $firstBlock, 'isFirst' => true])
-
 
                 </div>
 
             </div>
-
         </section>
 
     </div>

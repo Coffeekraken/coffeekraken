@@ -1,13 +1,11 @@
 import __SInterface from '@coffeekraken/s-interface';
 
-
 class postcssSugarPluginFormatTextlMixinInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 export { postcssSugarPluginFormatTextlMixinInterface as interface };
 
-export interface postcssSugarPluginFormatTextMixinParams {
-}
+export interface postcssSugarPluginFormatTextMixinParams {}
 
 /**
  * @name           text
@@ -28,7 +26,7 @@ export interface postcssSugarPluginFormatTextMixinParams {
  *      margin-bottom: 50px;
  *    }
  * }
- * 
+ *
  * @example       html
  * <h1 class="my-cool-element s-rhythm\:vertical">Hello world</h1>
  * <div class="s-format\:text">
@@ -39,22 +37,25 @@ export interface postcssSugarPluginFormatTextMixinParams {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  postcssApi
+    params,
+    atRule,
+    postcssApi,
 }: {
-  params: Partial<postcssSugarPluginFormatTextMixinParams>;
-  atRule: any;
-  postcssApi: any;
+    params: Partial<postcssSugarPluginFormatTextMixinParams>;
+    atRule: any;
+    postcssApi: any;
 }) {
-  const finalParams = <postcssSugarPluginFormatTextMixinParams>{
-    ...(params ?? {})
-  };
-  const container = new postcssApi.Rule({
-    selectors: [`.s-format--text`]
-  });
-  atRule.nodes.forEach(n => {
-    container.append(n.clone());
-  });
-  atRule.replaceWith(container);
+    const finalParams = <postcssSugarPluginFormatTextMixinParams>{
+        ...(params ?? {}),
+    };
+
+    atRule.nodes?.forEach((node) => {
+        if (!node.selector) return;
+        node.selector = node.selector
+            .split(',')
+            .map((sel) => {
+                return `.s-format--text ${sel}:not(.s-format--none ${sel})`;
+            })
+            .join(',');
+    });
 }

@@ -3,31 +3,27 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginUiBlockquoteClassesParams {
-}
+export interface IPostcssSugarPluginUiBlockquoteClassesParams {}
 
 export { postcssSugarPluginUiBlockquoteClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiBlockquoteClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiBlockquoteClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
+    const finalParams: IPostcssSugarPluginUiBlockquoteClassesParams = {
+        ...params,
+    };
 
-  const finalParams: IPostcssSugarPluginUiBlockquoteClassesParams = {
-    ...params
-  };
-
-  const vars: string[] = [];
-
+    const vars: string[] = [];
 
     const cls = `s-blockquote`;
 
@@ -78,34 +74,13 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .s-format--text blockquote {
-            @sugar.color.remap(ui, ${__theme().config('ui.blockquote.defaultColor')});
-            @sugar.ui.blockquote;
-        } 
+        @sugar.format.text {
+          blockquote {
+              @sugar.color.remap(ui, ${__theme().config('ui.blockquote.defaultColor')});
+              @sugar.ui.blockquote;
+          } 
+        }
     `);
 
-    Object.keys(__theme().baseColors()).forEach((colorName) => {
-    vars.push(`/**
-        * @name           s-blockquote:${colorName}
-        * @namespace      sugar.css.ui.blockquote
-        * @type           CssClass
-        * 
-        * This class represent a simple "<s-color="${colorName}">${colorName}</s-color> blockquote
-        * 
-        * @example        html
-        * <blockquote class="s-blockquote\:${colorName}">
-        *   <p>Hello world</p>
-        * </blockquote>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-        .s-blockquote--${colorName} {
-            @sugar.color.remap(ui, ${colorName});
-        } 
-    `);
-  });
-
-  replaceWith(vars);
-
+    replaceWith(vars);
 }

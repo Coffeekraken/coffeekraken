@@ -33,6 +33,11 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * @feature           All the pikaday features are supported
  * @feature           Full support for sugar theming system for easy integration
  *
+ * @support         chromium
+ * @support         firefox
+ * @support         safari
+ * @support         edge
+ *
  * @example         html
  * <label class="s-label s-mb--30">
  *      Min and max date

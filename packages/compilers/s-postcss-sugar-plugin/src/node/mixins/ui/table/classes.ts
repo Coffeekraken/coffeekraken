@@ -3,31 +3,27 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiTableClassesInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginUiTableClassesParams {
-}
+export interface IPostcssSugarPluginUiTableClassesParams {}
 
 export { postcssSugarPluginUiTableClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiTableClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiTableClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
+    const finalParams: IPostcssSugarPluginUiTableClassesParams = {
+        ...params,
+    };
 
-  const finalParams: IPostcssSugarPluginUiTableClassesParams = {
-    ...params
-  };
-
-  const vars: string[] = [];
-
+    const vars: string[] = [];
 
     const cls = `s-table`;
 
@@ -100,45 +96,13 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .s-format--text table {
-            @sugar.color.remap(ui, ${__theme().config('ui.table.defaultColor')});
-            @sugar.ui.table;
+        @sugar.format.text {
+          table {
+              @sugar.color.remap(ui, ${__theme().config('ui.table.defaultColor')});
+              @sugar.ui.table;
+          }
         } 
     `);
 
-    Object.keys(__theme().baseColors()).forEach((colorName) => {
-    vars.push(`/**
-        * @name           s-table:${colorName}
-        * @namespace      sugar.css.ui.table
-        * @type           CssClass
-        * 
-        * This class represent a simple "<s-color="${colorName}">${colorName}</s-color> table
-        * 
-        * @example        html
-        * <table class="s-table\:${colorName}">
-        *   <tr>
-        *       <th>Hello</th>
-        *       </th>World</th>
-        *   </tr>
-        *   <tr>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *   </tr>
-        *   <tr>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *   </tr>
-        * </table>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-        .s-table--${colorName} {
-            @sugar.color.remap(ui, ${colorName});
-        } 
-    `);
-  });
-
-  replaceWith(vars);
-
+    replaceWith(vars);
 }

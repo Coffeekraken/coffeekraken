@@ -1,8 +1,10 @@
-@sugar.import ('../views/**/*.css');
-@sugar.import ('./generic/**/*.css');
+@sugar.import ('../views/**/ *.css');
+@sugar.import ('./generic/**/ *.css');
 
 @sugar.init;
 @sugar.classes;
+
+@sugar.ui.button.classes;
 
 /* 
 @sugar.media.classes(tablet, tablet) {

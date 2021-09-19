@@ -11,7 +11,10 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
             default: 'solid',
         },
         scope: {
-            type: 'String',
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
             values: ['bare', 'lnf'],
             default: ['bare', 'lnf'],
         },
@@ -28,10 +31,12 @@ export { postcssSugarPluginUiSwitchMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiSwitchMixinParams>;
     atRule: any;
+    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
@@ -39,6 +44,7 @@ export default function ({
         scope: [],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

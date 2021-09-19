@@ -11,7 +11,10 @@ class postcssSugarPluginUiRadioInterface extends __SInterface {
             default: __theme().config('ui.range.defaultStyle'),
         },
         scope: {
-            type: 'Array<String>',
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
             values: ['bare', 'lnf'],
             default: ['bare', 'lnf'],
         },
@@ -27,10 +30,12 @@ export { postcssSugarPluginUiRadioInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiRadioParams>;
     atRule: any;
+    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRadioParams = {
@@ -38,6 +43,7 @@ export default function ({
         scope: ['bare', 'lnf'],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [
         `

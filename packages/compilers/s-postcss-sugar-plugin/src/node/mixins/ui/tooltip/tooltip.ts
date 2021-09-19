@@ -15,7 +15,10 @@ class postcssSugarPluginUiTooltipInterface extends __SInterface {
             default: false,
         },
         scope: {
-            type: 'Array<String>',
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
             values: ['bare', 'lnf', 'position', 'interactive'],
             default: ['bare', 'lnf', 'position', 'interactive'],
         },
@@ -52,10 +55,12 @@ export { postcssSugarPluginUiTooltipInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTooltipParams>;
     atRule: any;
+    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipParams = {
@@ -64,6 +69,7 @@ export default function ({
         scope: ['bare', 'lnf', 'position', 'interactive'],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

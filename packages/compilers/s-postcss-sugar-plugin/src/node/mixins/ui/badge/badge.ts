@@ -18,7 +18,7 @@ class postcssSugarPluginUiBadgeInterface extends __SInterface {
         scope: {
             type: {
                 type: 'Array<String>',
-                splitChars: [','],
+                splitChars: [',', ' '],
             },
             values: ['bare', 'lnf', 'shape'],
             default: ['bare', 'lnf', 'shape'],
@@ -36,10 +36,12 @@ export { postcssSugarPluginUiBadgeInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBadgeParams>;
     atRule: any;
+    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeParams = {
@@ -48,6 +50,7 @@ export default function ({
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

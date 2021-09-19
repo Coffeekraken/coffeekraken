@@ -15,7 +15,10 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
             default: __theme().config('ui.button.focusOutline'),
         },
         scope: {
-            type: 'Array<String>',
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
             values: ['bare', 'lnf'],
             default: ['bare', 'lnf'],
         },
@@ -32,10 +35,14 @@ export { postcssSugarPluginUiButtonInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
+    sharedData,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonParams>;
     atRule: any;
+    applyNoScopes: Function;
+    sharedData: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
@@ -44,6 +51,7 @@ export default function ({
         scope: ['bare', 'lnf'],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

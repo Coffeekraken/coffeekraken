@@ -24,7 +24,10 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
             default: __theme().config('ui.tabs.focusOutline'),
         },
         scope: {
-            type: 'Array<String>',
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
             values: ['bare', 'lnf', 'grow', 'direction'],
             default: ['bare', 'lnf', 'grow', 'direction'],
         },
@@ -44,10 +47,12 @@ export { postcssSugarPluginUiTabInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTabParams>;
     atRule: any;
+    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
@@ -58,6 +63,7 @@ export default function ({
         scope: ['bare', 'lnf', 'grow', 'direction'],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

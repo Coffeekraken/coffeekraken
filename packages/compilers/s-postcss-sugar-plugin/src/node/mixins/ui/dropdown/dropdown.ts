@@ -17,7 +17,10 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
             default: 'bottom',
         },
         scope: {
-            type: 'String',
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
             values: ['bare', 'lnf', 'position'],
             default: ['bare', 'lnf', 'position'],
         },
@@ -35,10 +38,12 @@ export { postcssSugarPluginUiDropdownInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiDropdownParams>;
     atRule: any;
+    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiDropdownParams = {
@@ -47,6 +52,8 @@ export default function ({
         scope: [],
         ...params,
     };
+
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

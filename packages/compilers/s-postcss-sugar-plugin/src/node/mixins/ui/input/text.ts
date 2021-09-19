@@ -16,7 +16,10 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
             default: __theme().config('ui.input.focusOutline'),
         },
         scope: {
-            type: 'String',
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
             values: ['bare', 'lnf'],
             default: ['bare', 'lnf'],
         },

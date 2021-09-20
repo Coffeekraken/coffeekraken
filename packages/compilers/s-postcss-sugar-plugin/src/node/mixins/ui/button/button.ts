@@ -7,7 +7,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
-            values: ['default', 'gradient', 'outline', 'text'],
+            values: ['solid', 'gradient', 'outline', 'text'],
             default: __theme().config('ui.button.defaultStyle'),
         },
         focusOutline: {
@@ -19,16 +19,16 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf'],
-            default: ['bare', 'lnf'],
+            values: ['bare', 'lnf', 'vr'],
+            default: ['bare', 'lnf', 'vr'],
         },
     };
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-    style: 'default' | 'gradient' | 'outline' | 'text';
+    style: 'solid' | 'gradient' | 'outline' | 'text';
     focusOutline: boolean;
-    scope: string[];
+    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
@@ -36,56 +36,59 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     sharedData,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     sharedData: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
         style: __theme().config('ui.button.defaultStyle'),
         focusOutline: true,
-        scope: ['bare', 'lnf'],
+        scope: ['bare', 'lnf', 'vr'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 
-    // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-      @sugar.ui.base(button);
-    `);
-    }
-
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         position: relative;
-      display: inline-block;
-      cursor: pointer;
-      white-space: nowrap;
-      vertical-align: middle;
+        display: inline-block;
+        cursor: pointer;
+        white-space: nowrap;
+        vertical-align: middle;
+        padding-inline: sugar.padding(sugar.theme(ui.button.paddingInline));
+        padding-block: sugar.padding(sugar.theme(ui.button.paddingBlock));
 
-      & > * {
-        pointer-events: none;
-      }
-      & > i,
-      & > .s-icon {
-        font-size: 1em;
-      }
+        & > * {
+          pointer-events: none;
+        }
+        & > i,
+        & > .s-icon {
+          font-size: 1em;
+        }
+
+        @sugar.state.disabled {
+          @sugar.disabled;
+        }
+
     `);
     }
 
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-        
-      `);
+          font-size: sugar.scalable(1rem);
+          border-radius: sugar.theme(ui.button.borderRadius);
+        `);
 
         switch (finalParams.style) {
             case 'gradient':
@@ -93,7 +96,7 @@ export default function ({
                     background: none !important;
                     color: sugar.color(ui, foreground);
                     transition: sugar.theme(ui.button.transition);
-                    border: none !important;
+                    border: sugar.color(ui, border) solid sugar.theme(ui.button.borderWidth);
 
                     --borderWidth: sugar.theme(ui.button.borderWidth);
 
@@ -132,7 +135,7 @@ export default function ({
                     }
 
                     &:hover, &:focus {
-                      color: sugar.color(ui:hover, foreground);
+                      color: sugar.color(ui, foreground);
 
                       &:after {
                         opacity: 1;
@@ -157,13 +160,16 @@ export default function ({
                 break;
             case 'text':
                 vars.push(`
-                  background-color: sugar.color(ui, --alpha 0);
-                  border: none !important;
+                  background: none !important;
+                  border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(ui);
 
                   &:hover, &:focus {
-                    background-color: sugar.color(ui, --alpha 0);
                     transform: scale(1.1);
+                  }
+
+                  @sugar.state.disabled {
+                    transform: scale(1) !important;
                   }
 
                   & > * {
@@ -171,15 +177,16 @@ export default function ({
                   }
                 `);
                 break;
-            case 'default':
+            case 'solid':
             default:
                 vars.push(`
                   background-color: sugar.color(ui);
+                  border: sugar.color(ui, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(ui, foreground);
 
                   &:hover, &:focus {
-                    background-color: sugar.color(ui:hover, 50);
-                    color: sugar.color(ui:hover, foreground);
+                    background-color: sugar.color(ui, 55);
+                    color: sugar.color(ui, foreground);
                   }
 
                   & > * {
@@ -191,9 +198,17 @@ export default function ({
 
         if (finalParams.focusOutline) {
             vars.push(`
-            @sugar.state.focusOutline;
-        `);
+              @sugar.state.focusOutline;
+          `);
         }
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`
+            @sugar.rhythm.vertical {
+                ${jsObjectToCssProperties(__theme().config('ui.button.:rhythmVertical'))}
+            } 
+        `);
     }
 
     replaceWith(vars);

@@ -2,48 +2,86 @@ import __SInterface from '@coffeekraken/s-interface';
 import __themeVar from '../../../utils/themeVar';
 import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
-    static definition = {};
+    static definition = {
+        style: {
+            type: 'String',
+            values: ['solid'],
+            default: __theme().config('ui.blockquote.defaultStyle'),
+        },
+        scope: {
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
+            values: ['bare', 'lnf', 'vr'],
+            default: ['bare', 'lnf', 'vr'],
+        },
+    };
 }
 
-export interface IPostcssSugarPluginUiBlockquoteParams {}
+export interface IPostcssSugarPluginUiBlockquoteParams {
+    style: 'solid';
+    scope: ('bare' | 'lnf' | 'vr')[];
+}
 
 export { postcssSugarPluginUiBlockquoteInterface as interface };
 
 export default function ({
     params,
     atRule,
+    applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBlockquoteParams>;
     atRule: any;
+    applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteParams = {
+        style: 'solid',
+        scope: ['bare', 'lnf', 'vr'],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 
-    vars.push(`
-    display: block;
-    padding-inline: sugar.scalable(sugar.theme(ui.blockquote.paddingInline));
-    padding-block: sugar.scalable(sugar.theme(ui.blockquote.paddingBlock));
-    border-left: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(ui);
-    color: sugar.color(ui, surfaceForeground);
-    background-color: sugar.color(ui, surface);
-    border-radius: sugar.theme(ui.blockquote.borderRadius);
-    @sugar.depth(sugar.theme(ui.blockquote.depth));
+    switch (finalParams.style) {
+        case 'solid':
+        default:
+            if (finalParams.scope.indexOf('bare') !== -1) {
+                vars.push(`
+                        display: block;
+                        padding-inline: sugar.scalable(sugar.theme(ui.blockquote.paddingInline));
+                        padding-block: sugar.scalable(sugar.theme(ui.blockquote.paddingBlock));
+                `);
+            }
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
+                        border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(ui);
+                        color: sugar.color(ui, surfaceForeground);
+                        background-color: sugar.color(ui, surface);
+                        border-radius: sugar.theme(ui.blockquote.borderRadius);
+                        @sugar.depth(sugar.theme(ui.blockquote.depth));
+                        font-size: sugar.scalable(1rem);
 
-    @sugar.font.family(quote);
+                        @sugar.font.family(quote);
+                `);
+            }
+            break;
+    }
 
-    @sugar.rhythm.vertical {
-        ${__jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
-    } 
-
-  `);
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`
+            @sugar.rhythm.vertical {
+                ${jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
+            } 
+        `);
+    }
 
     replaceWith(vars);
 }

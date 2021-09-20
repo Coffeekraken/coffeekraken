@@ -1,30 +1,58 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
 }
-postcssSugarPluginUiBlockquoteInterface.definition = {};
+postcssSugarPluginUiBlockquoteInterface.definition = {
+    style: {
+        type: 'String',
+        values: ['solid'],
+        default: __theme().config('ui.blockquote.defaultStyle'),
+    },
+    scope: {
+        type: {
+            type: 'Array<String>',
+            splitChars: [',', ' '],
+        },
+        values: ['bare', 'lnf', 'vr'],
+        default: ['bare', 'lnf', 'vr'],
+    },
+};
 export { postcssSugarPluginUiBlockquoteInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
+export default function ({ params, atRule, applyNoScopes, jsObjectToCssProperties, replaceWith, }) {
+    const finalParams = Object.assign({ style: 'solid', scope: ['bare', 'lnf', 'vr'] }, params);
+    finalParams.scope = applyNoScopes(finalParams.scope);
     const vars = [];
-    vars.push(`
-    display: block;
-    padding-inline: sugar.scalable(sugar.theme(ui.blockquote.paddingInline));
-    padding-block: sugar.scalable(sugar.theme(ui.blockquote.paddingBlock));
-    border-left: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(ui);
-    color: sugar.color(ui, surfaceForeground);
-    background-color: sugar.color(ui, surface);
-    border-radius: sugar.theme(ui.blockquote.borderRadius);
-    @sugar.depth(sugar.theme(ui.blockquote.depth));
+    switch (finalParams.style) {
+        case 'solid':
+        default:
+            if (finalParams.scope.indexOf('bare') !== -1) {
+                vars.push(`
+                        display: block;
+                        padding-inline: sugar.scalable(sugar.theme(ui.blockquote.paddingInline));
+                        padding-block: sugar.scalable(sugar.theme(ui.blockquote.paddingBlock));
+                `);
+            }
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
+                        border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(ui);
+                        color: sugar.color(ui, surfaceForeground);
+                        background-color: sugar.color(ui, surface);
+                        border-radius: sugar.theme(ui.blockquote.borderRadius);
+                        @sugar.depth(sugar.theme(ui.blockquote.depth));
+                        font-size: sugar.scalable(1rem);
 
-    @sugar.font.family(quote);
-
-    @sugar.rhythm.vertical {
-        ${__jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
-    } 
-
-  `);
+                        @sugar.font.family(quote);
+                `);
+            }
+            break;
+    }
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`
+            @sugar.rhythm.vertical {
+                ${jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
+            } 
+        `);
+    }
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxvY2txdW90ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJsb2NrcXVvdGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFDM0MsT0FBTyx5QkFBeUIsTUFBTSx3Q0FBd0MsQ0FBQztBQUUvRSxNQUFNLHVDQUF3QyxTQUFRLFlBQVk7O0FBQ3ZELGtEQUFVLEdBQUcsRUFBRSxDQUFDO0FBSzNCLE9BQU8sRUFBRSx1Q0FBdUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVoRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7VUFhSix5QkFBeUIsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsK0JBQStCLENBQUMsQ0FBQzs7O0dBR25GLENBQUMsQ0FBQztJQUVELFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxvY2txdW90ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJsb2NrcXVvdGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFFM0MsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZOztBQUN2RCxrREFBVSxHQUFHO0lBQ2hCLEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO1FBQ2pCLE9BQU8sRUFBRSxPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsNEJBQTRCLENBQUM7S0FDMUQ7SUFDRCxLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUU7WUFDRixJQUFJLEVBQUUsZUFBZTtZQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO1NBQ3pCO1FBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLENBQUM7UUFDN0IsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLENBQUM7S0FDakM7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWhFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixhQUFhLEVBQ2IsdUJBQXVCLEVBQ3ZCLFdBQVcsR0FPZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsT0FBTyxFQUNkLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxDQUFDLElBQ3pCLE1BQU0sQ0FDWixDQUFDO0lBQ0YsV0FBVyxDQUFDLEtBQUssR0FBRyxhQUFhLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRXJELE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixRQUFRLFdBQVcsQ0FBQyxLQUFLLEVBQUU7UUFDdkIsS0FBSyxPQUFPLENBQUM7UUFDYjtZQUNJLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7Z0JBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7aUJBSVQsQ0FBQyxDQUFDO2FBQ047WUFDRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO2dCQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7aUJBU1QsQ0FBQyxDQUFDO2FBQ047WUFDRCxNQUFNO0tBQ2I7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3hDLElBQUksQ0FBQyxJQUFJLENBQUM7O2tCQUVBLHVCQUF1QixDQUFDLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQywrQkFBK0IsQ0FBQyxDQUFDOztTQUVuRixDQUFDLENBQUM7S0FDTjtJQUVELFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=

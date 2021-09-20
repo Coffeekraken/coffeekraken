@@ -154,9 +154,8 @@ export default function ({
         }
 
         &:disabled {
-            cursor: not-allowed;
             --thumb-color: transparent;
-            opacity: .3;
+            @sugar.disabled;
         }
 
     `);

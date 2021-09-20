@@ -216,6 +216,7 @@ const plugin = (settings: any = {}) => {
                     replaceWith(nodes) {
                         replaceWith(atRule, nodes);
                     },
+                    jsObjectToCssProperties: __jsObjectToCssProperties,
                     postcssApi,
                     sourcePath,
                     sharedData,

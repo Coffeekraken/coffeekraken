@@ -39,10 +39,12 @@ export interface postcssSugarPluginFormatTextMixinParams {}
 export default function ({
     params,
     atRule,
+    unwrap,
     postcssApi,
 }: {
     params: Partial<postcssSugarPluginFormatTextMixinParams>;
     atRule: any;
+    unwrap: Function;
     postcssApi: any;
 }) {
     const finalParams = <postcssSugarPluginFormatTextMixinParams>{
@@ -50,12 +52,15 @@ export default function ({
     };
 
     atRule.nodes?.forEach((node) => {
-        if (!node.selector) return;
-        node.selector = node.selector
-            .split(',')
-            .map((sel) => {
-                return `.s-format--text ${sel}:not(.s-format--none ${sel})`;
-            })
-            .join(',');
+        if (node.selector && !node.selector.match(/^\.s-format--text/)) {
+            node.selector = node.selector
+                .split(',')
+                .map((sel) => {
+                    return `.s-format--text ${sel}:not(.s-format--none ${sel}), .preview .s-format--text ${sel}`;
+                })
+                .join(',');
+        }
     });
+
+    atRule.replaceWith(atRule.nodes);
 }

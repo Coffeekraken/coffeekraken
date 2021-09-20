@@ -218,7 +218,7 @@ export default function ({
                 &::-webkit-slider-runnable-track,
                 &::-ms-fill-lower,
                 &::-ms-fill-upper {
-                cursor: not-allowed;
+                    @sugar.disabled;
                 }
             }
 

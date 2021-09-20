@@ -60,10 +60,7 @@ export default function ({
             font-size: sugar.scalable(1rem);
 
             &:disabled + * {
-                user-select: none;
-                cursor: not-allowed;
-                pointer-events: none;
-                opacity: sugar.theme(ui.radio.disabledOpacity) !important;
+                @sugar.disabled;
             }
 
             & + *:after {

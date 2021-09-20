@@ -34,6 +34,7 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.text.classes;',
         '@sugar.font.classes;',
         '@sugar.depth.classes;',
+        '@sugar.disabled.classes;',
         '@sugar.flex.classes;',
         '@sugar.ratio.classes;',
         '@sugar.border.classes;',

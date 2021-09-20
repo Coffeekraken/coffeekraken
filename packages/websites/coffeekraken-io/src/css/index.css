@@ -1,10 +1,8 @@
-@sugar.import ('../views/**/ *.css');
-@sugar.import ('./generic/**/ *.css');
+@sugar.import ('../views/**/*.css');
+@sugar.import ('./generic/**/*.css');
 
 @sugar.init;
 @sugar.classes;
-
-@sugar.ui.button.classes;
 
 /* 
 @sugar.media.classes(tablet, tablet) {
@@ -59,7 +57,7 @@ body {
     @sugar.theme (dark);
 }
 
-[class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.__preview-example [class*='s-btn']) {
+[class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview [class*='s-btn']) {
     border-radius: 100px !important;
     border: none !important;
 }

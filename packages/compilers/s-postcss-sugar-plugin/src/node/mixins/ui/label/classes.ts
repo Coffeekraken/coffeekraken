@@ -94,6 +94,10 @@ export default function ({
             *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
             *   </label>
+            *   <label class="s-mb\:30 s-ui\:accent s-label${style === finalParams.defaultStyle ? '' : `\:${style}`}">
+            *     <input type="text" disabled class="s-input s-width\:50" placeholder="Type something!" />
+            *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
+            *   </label>
             * </div>
             * `;
             })

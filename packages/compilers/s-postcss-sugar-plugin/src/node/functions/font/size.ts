@@ -12,7 +12,7 @@ class postcssSugarPluginFontSizeInterface extends __SInterface {
         },
         scalable: {
             type: 'Boolean',
-            default: true,
+            default: __theme().config('scalable.font'),
         },
     };
 }

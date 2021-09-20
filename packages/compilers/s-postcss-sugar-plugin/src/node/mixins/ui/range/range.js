@@ -191,7 +191,7 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                 &::-webkit-slider-runnable-track,
                 &::-ms-fill-lower,
                 &::-ms-fill-upper {
-                cursor: not-allowed;
+                    @sugar.disabled;
                 }
             }
 

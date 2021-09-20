@@ -47,7 +47,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    vars.push(`&:disabled {`);
+    vars.push(`&:disabled, &[disabled] {`);
     vars.push(__astNodesToString(atRule.nodes));
     vars.push(`}`);
 

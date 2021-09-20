@@ -9,17 +9,31 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
             values: ['solid'],
             default: ['solid'],
         },
+        defaultColor: {
+            type: 'String',
+            default: __theme().config('ui.checkbox.defaultColor'),
+        },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
             default: __theme().config('ui.checkbox.defaultStyle'),
+        },
+        scope: {
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
+            values: ['bare', 'lnf', 'vr', 'tf'],
+            default: ['bare', 'lnf', 'vr', 'tf'],
         },
     };
 }
 
 export interface IPostcssSugarPluginUiCheckboxClassesParams {
     styles: 'solid'[];
+    defaultColor: string;
     defaultStyle: 'solid';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiCheckboxClassesInterface as interface };
@@ -27,17 +41,22 @@ export { postcssSugarPluginUiCheckboxClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiCheckboxClassesParams>;
     atRule: any;
+    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxClassesParams = {
         styles: ['solid'],
+        defaultColor: 'ui',
         defaultStyle: 'solid',
+        scope: [],
         ...params,
     };
+    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 
@@ -51,6 +70,14 @@ export default function ({
         * @status       beta
         * 
         * These classes allows you to display nice checkbox in your forms
+        * 
+        * @feature          Support for scaling through the "s-scale:..." class
+        * @feature          Support for colorizing through the "s-ui:..." class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
         * 
         ${finalParams.styles
             .map((style) => {
@@ -171,10 +198,38 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .${cls} {
-            @sugar.ui.checkbox($style: ${style});
+            ${finalParams.defaultColor !== 'ui' ? `@sugar.color.remap(ui, ${finalParams.defaultColor});` : ''}
+            @sugar.ui.checkbox($style: ${style}, $scope: '${finalParams.scope.join(',')}');
         }
         `);
     });
+
+    if (finalParams.scope.indexOf('tf') !== -1) {
+        vars.push(`/**
+            * @name           s-format:text input[type="checkbox"]
+            * @namespace      sugar.css.ui.checkbox
+            * @type           CssClass
+            * 
+            * This class represent a simple input[type="checkbox"] tag in the s-format:text scope
+            * 
+            * @example        html
+            * <div class="s-format:text">
+            *   <input type="checkbox" checked /><span></span>
+            *   <input type="checkbox" checked /><span></span>
+            *   <input type="checkbox" checked /><span></span>
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            @sugar.format.text {
+                input[type="checkbox"] {
+                    ${finalParams.defaultColor !== 'ui' ? `@sugar.color.remap(ui, ${finalParams.defaultColor});` : ''}
+                    @sugar.ui.checkbox($scope: '${finalParams.scope.join(',')}');
+                } 
+            }
+        `);
+    }
 
     replaceWith(vars);
 }

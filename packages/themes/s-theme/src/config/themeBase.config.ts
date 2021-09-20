@@ -26,6 +26,21 @@ export default function (env, config) {
                  */
                 default: 'overflow',
             },
+            disabled: {
+                /**
+                 * @name            opacity
+                 * @namespace       theme.helpers.disabled
+                 * @type            Number
+                 * @default         0.3
+                 *
+                 * Specify the opacity of disabled items applied either using the `@sugar.disabled` mixin, of through
+                 * the `s-disabled` helper class
+                 *
+                 * @cince       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                opacity: 0.3,
+            },
         },
 
         layout: {
@@ -946,14 +961,14 @@ export default function (env, config) {
              * @name            40
              * @namespace       config.theme.themes.default.space
              * @type            String
-             * @default         2.25
+             * @default         2.25rem
              *
              * Specify the <primary>40</s-color> space used for padding and margin
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            40: '2.25',
+            40: '2.25rem',
 
             /**
              * @name            50
@@ -1444,7 +1459,6 @@ export default function (env, config) {
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
-                disabledOpacity: 0.3,
                 defaultColor: 'accent',
                 depth: '[theme.depth.default]',
                 ':rhythmVertical': {
@@ -1457,7 +1471,6 @@ export default function (env, config) {
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
-                disabledOpacity: '[theme.ui.default.disabledOpacity]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 defaultColor: 'accent',
                 depth: '[theme.depth.default]',
@@ -1478,9 +1491,10 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.default.depth]',
                 defaultStyle: 'solid',
+                defaultColor: 'ui',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             colorPicker: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1489,7 +1503,6 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
             },
             datePicker: {
@@ -1499,7 +1512,6 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
             },
             input: {
@@ -1509,7 +1521,6 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
             },
@@ -1520,7 +1531,6 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
             },
@@ -1531,8 +1541,8 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
+                defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
             },
             range: {
@@ -1542,7 +1552,6 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
             },
@@ -1552,7 +1561,6 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'inline',
             },
@@ -1563,7 +1571,6 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
             },
@@ -1572,7 +1579,6 @@ export default function (env, config) {
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.default.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
             },
@@ -1613,7 +1619,6 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
-                disabledOpacity: '[theme.ui.form.disabledOpacity]',
                 depth: '[theme.ui.default.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
@@ -1656,6 +1661,7 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
+                defaultStyle: 'solid',
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             table: {

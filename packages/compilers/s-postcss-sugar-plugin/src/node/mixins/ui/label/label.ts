@@ -31,11 +31,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiLabelParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelParams = {
@@ -59,12 +61,6 @@ export default function ({
     `);
     }
 
-    // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-    `);
-    }
-
     // style
     switch (finalParams.style) {
         case 'float':
@@ -73,6 +69,10 @@ export default function ({
                   display: block;
                   line-height: 1;
                   position: relative;
+
+                  & > *:first-child {
+                    margin-inline-start: 0;
+                  }
 
                   --delta: 0.1em;
                   --top: sugar.theme(ui.form.paddingBlock);
@@ -84,9 +84,9 @@ export default function ({
                     padding-inline: sugar.scalable(sugar.theme(ui.form.paddingInline));
                     position: absolute;
                     z-index: 1;
-                    transition: sugar.theme(ui.label.transition);
                     transform: scale(1);
                     transform-origin: 0 0;
+                    user-select: none;
                   }
 
                   &:focus,
@@ -132,11 +132,7 @@ export default function ({
                     margin: 0;
                     padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.35em + var(--delta));
                     padding-block-end: calc(sugar.theme(ui.form.paddingBlock) + 0.35em + var(--delta));
-                    transition: sugar.theme(ui.label.transition);
-
-                    &::placeholder {
-                      color: sugar.color(ui, --alpha 0);
-                    }
+                    
                   }
 
                   &:focus,
@@ -146,36 +142,21 @@ export default function ({
                     & > select {
                       padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.7em + calc(var(--delta) * 2));
                       padding-block-end: sugar.theme(ui.form.paddingBlock);
-
-                      &::placeholder {
-                        color: sugar.color(ui, placeholder);
-                      }
                     }
                   }
                   & > input:not(:placeholder-shown),
                   & > textarea:not(:placeholder-shown) {
                     padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.7em + calc(var(--delta) * 2));
                     padding-block-end: sugar.theme(ui.form.paddingBlock);
-
-                    &::placeholder {
-                      color: sugar.color(ui, placeholder);
-                    }
                   }
-
                 `);
             }
+
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
+                  
                   & > *:not(input):not(textarea):not(select) {
-                    color: sugar.color(ui, placeholder);
                     transition: sugar.theme(ui.label.transition);
-                  }
-
-                  &:focus,
-                  &:focus-within {
-                    & > *:not(input):not(textarea):not(select) {
-                      color: sugar.color(ui) !important;
-                    }
                   }
 
                   & > input,
@@ -198,6 +179,13 @@ export default function ({
                       }
                     }
                   }
+                  & > input:not(:placeholder-shown),
+                  & > textarea:not(:placeholder-shown) {
+                    &::placeholder {
+                      color: sugar.color(ui, placeholder);
+                    }
+                  }
+
                 `);
             }
             break;
@@ -218,7 +206,7 @@ export default function ({
             }
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-                  color: sugar.color(ui, text);
+                
                 `);
             }
             break;

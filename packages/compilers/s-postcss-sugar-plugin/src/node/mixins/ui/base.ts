@@ -38,8 +38,8 @@ export default function ({
     // bare
     vars.push(`
         display: inline-block;
-        padding-inline: sugar.scalable(sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline)));
-        padding-block: sugar.scalable(sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock)));
+        padding-inline: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline));
+        padding-block: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock));
     `);
 
     // lnf
@@ -63,31 +63,25 @@ export default function ({
         }
 
         @sugar.state.hover {
-          background-color: sugar.color(main:hover, ui);
-          border: sugar.color(ui:hover, border) solid 1px;
-          color: sugar.color(ui:hover, foreground);
+          background-color: sugar.color(main, ui);
+          border: sugar.color(ui, border) solid 1px;
+          color: sugar.color(ui, foreground);
         }
         @sugar.state.focus {
-          background-color: sugar.color(main:focus, ui);
-          border: sugar.color(ui:focus, border) solid 1px;
-          color: sugar.color(ui:focus, foreground);
+          background-color: sugar.color(main, ui);
+          border: sugar.color(ui, border) solid 1px;
+          color: sugar.color(ui, foreground);
         }
         @sugar.state.active {
-          background-color: sugar.color(main:active, ui);
-          border: sugar.color(ui:active, border) solid 1px;
-          color: sugar.color(ui:active, foreground);
+          background-color: sugar.color(main, ui);
+          border: sugar.color(ui, border) solid 1px;
+          color: sugar.color(ui, foreground);
         }
         @sugar.state.disabled {
-            pointer-events:none;
-            opacity: sugar.theme(ui.${finalParams.name}.disabledOpacity);
-            cursor: not-allowed;
-            user-select: none;
+            @sugar.disabled;
 
             label & + * {
-                pointer-events:none;
-                opacity: sugar.theme(ui.${finalParams.name}.disabledOpacity);
-                cursor: not-allowed;
-                user-select: none;
+                @sugar.disabled;
             }
 
         }

@@ -17,8 +17,8 @@ export default function ({ params, atRule, replaceWith, }) {
     // bare
     vars.push(`
         display: inline-block;
-        padding-inline: sugar.scalable(sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline)));
-        padding-block: sugar.scalable(sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock)));
+        padding-inline: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline));
+        padding-block: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock));
     `);
     // lnf
     vars.push(`
@@ -41,35 +41,29 @@ export default function ({ params, atRule, replaceWith, }) {
         }
 
         @sugar.state.hover {
-          background-color: sugar.color(main:hover, ui);
-          border: sugar.color(ui:hover, border) solid 1px;
-          color: sugar.color(ui:hover, foreground);
+          background-color: sugar.color(main, ui);
+          border: sugar.color(ui, border) solid 1px;
+          color: sugar.color(ui, foreground);
         }
         @sugar.state.focus {
-          background-color: sugar.color(main:focus, ui);
-          border: sugar.color(ui:focus, border) solid 1px;
-          color: sugar.color(ui:focus, foreground);
+          background-color: sugar.color(main, ui);
+          border: sugar.color(ui, border) solid 1px;
+          color: sugar.color(ui, foreground);
         }
         @sugar.state.active {
-          background-color: sugar.color(main:active, ui);
-          border: sugar.color(ui:active, border) solid 1px;
-          color: sugar.color(ui:active, foreground);
+          background-color: sugar.color(main, ui);
+          border: sugar.color(ui, border) solid 1px;
+          color: sugar.color(ui, foreground);
         }
         @sugar.state.disabled {
-            pointer-events:none;
-            opacity: sugar.theme(ui.${finalParams.name}.disabledOpacity);
-            cursor: not-allowed;
-            user-select: none;
+            @sugar.disabled;
 
             label & + * {
-                pointer-events:none;
-                opacity: sugar.theme(ui.${finalParams.name}.disabledOpacity);
-                cursor: not-allowed;
-                user-select: none;
+                @sugar.disabled;
             }
 
         }
   `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZOztBQUNqRCw0Q0FBVSxHQUFHO0lBQ2hCLElBQUksRUFBRTtRQUNGLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7S0FDakI7Q0FDSixDQUFDO0FBT04sT0FBTyxFQUFFLGlDQUFpQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTFELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsSUFDTCxNQUFNLENBQ1osQ0FBQztJQUVGLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSTtRQUFFLE9BQU87SUFFOUIsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOztzRUFFd0QsV0FBVyxDQUFDLElBQUk7cUVBQ2pCLFdBQVcsQ0FBQyxJQUFJO0tBQ2hGLENBQUMsQ0FBQztJQUVILE1BQU07SUFDTixJQUFJLENBQUMsSUFBSSxDQUFDOzs7OytEQUlpRCxXQUFXLENBQUMsSUFBSTt3Q0FDdkMsV0FBVyxDQUFDLElBQUk7cUNBQ25CLFdBQVcsQ0FBQyxJQUFJO3VCQUM5QixPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxRQUFRLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O3NDQTZCakMsV0FBVyxDQUFDLElBQUk7Ozs7OzswQ0FNWixXQUFXLENBQUMsSUFBSTs7Ozs7O0dBTXZELENBQUMsQ0FBQztJQUVELFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEMsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZOztBQUNqRCw0Q0FBVSxHQUFHO0lBQ2hCLElBQUksRUFBRTtRQUNGLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7S0FDakI7Q0FDSixDQUFDO0FBT04sT0FBTyxFQUFFLGlDQUFpQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTFELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsSUFDTCxNQUFNLENBQ1osQ0FBQztJQUVGLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSTtRQUFFLE9BQU87SUFFOUIsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzt1REFFeUMsV0FBVyxDQUFDLElBQUk7c0RBQ2pCLFdBQVcsQ0FBQyxJQUFJO0tBQ2pFLENBQUMsQ0FBQztJQUVILE1BQU07SUFDTixJQUFJLENBQUMsSUFBSSxDQUFDOzs7OytEQUlpRCxXQUFXLENBQUMsSUFBSTt3Q0FDdkMsV0FBVyxDQUFDLElBQUk7cUNBQ25CLFdBQVcsQ0FBQyxJQUFJO3VCQUM5QixPQUFPLEVBQUUsQ0FBQyxNQUFNLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxRQUFRLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUNwRSxDQUFDLENBQUM7SUFFRCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

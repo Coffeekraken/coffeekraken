@@ -8,17 +8,31 @@ class postcssSugarPluginUiDropdownClassesInterface extends __SInterface {
             type: 'String[]',
             default: ['solid'],
         },
+        defaultColor: {
+            type: 'String',
+            default: __theme().config('ui.dropdown.defaultColor'),
+        },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
             default: __theme().config('ui.dropdown.defaultStyle'),
+        },
+        scope: {
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
+            values: ['bare', 'lnf', 'vr', 'tf'],
+            default: ['bare', 'lnf', 'vr', 'tf'],
         },
     };
 }
 
 export interface IPostcssSugarPluginUiDropdownClassesParams {
     styles: 'solid'[];
+    defaultColor: string;
     defaultStyle: 'solid';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiDropdownClassesInterface as interface };
@@ -34,7 +48,9 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiDropdownClassesParams = {
         styles: ['solid'],
+        defaultColor: 'ui',
         defaultStyle: 'solid',
+        scope: ['bare', 'lnf', 'tf', 'vr'],
         ...params,
     };
 
@@ -50,11 +66,19 @@ export default function ({
         * @status       beta
         * 
         * These classes allows you to display nice dropdown on buttons or whatever
+        *
+        * @feature          Support for scaling through the "s-scale:..." class
+        * @feature          Support for colorizing through the "s-ui:..." class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
         * 
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-dropdown${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} dropdown style`;
             })
             .join('\n')}
@@ -63,99 +87,166 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font\:30 s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
-            *   <button class="s-btn s-ui\:accent s-mb\:30">
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">${style} style</h3>
+            *   <button class="s-btn s-ui:accent s-mb:30">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <span class="s-btn-group s-mb\:30">
+            *   <button class="s-btn s-ui:complementary s-mb:30">
+            *       I'm disabled
+            *       <div class="s-dropdown" disabled>
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <span class="s-btn-group s-mb:30">
             *       <a class="s-btn">Click me!</a>
-            *       <button class="s-btn s-ui\:complementary">
+            *       <button class="s-btn s-ui:complementary">
             *           +
-            *           <div class="s-dropdown">
-            *               <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *               <a class="s-btn s-ui\:accent">You find me!</a>
+            *           <div class="s-dropdown:bottom-end">
+            *               <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *               <a class="s-btn s-ui:accent">You find me!</a>
             *           </div>
             *       </button>
             *   </span>
             * </div>
             * 
             * <!-- Positions -->
-            * <div class="s-font\:30 s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Position</h3>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">Position</h3>
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Bottom (default)
             *       <div class="s-dropdown">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Bottom start
-            *       <div class="s-dropdown\:bottom-start">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *       <div class="s-dropdown:bottom-start">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Bottom end
-            *       <div class="s-dropdown\:bottom-end">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *       <div class="s-dropdown:bottom-end">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top
-            *       <div class="s-dropdown\:top">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *       <div class="s-dropdown:top">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top start
-            *       <div class="s-dropdown\:top-start">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *       <div class="s-dropdown:top-start">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top end
-            *       <div class="s-dropdown\:top-end">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *       <div class="s-dropdown:top-end">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            * </div>
+            * 
+            * <!-- Colors -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors (non-exhaustive)</h3>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Accent
+            *       <div class="s-dropdown s-ui:accent">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:complementary">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Complementary
+            *       <div class="s-dropdown s-ui:complementary">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Info
+            *       <div class="s-dropdown s-ui:info">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Error
+            *       <div class="s-dropdown s-ui:error">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn">You find me!</a>
             *       </div>
             *   </button>
             * </div>
             * 
             * <!-- RTL -->
-            * <div class="s-font\:30 s-mb\:50" dir="rtl">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">RTL Support</h3>
-            *   <button class="s-btn s-mb\:30">
+            * <div class="s-font:30 s-mb:50" dir="rtl">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">RTL Support</h3>
+            *   <button class="s-btn s-mb:30">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top start
-            *       <div class="s-dropdown\:top-start">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *       <div class="s-dropdown:top-start">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-mb\:30 s-mr\:20">
+            *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top end
-            *       <div class="s-dropdown\:top-end">
-            *          <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui\:accent">You find me!</a>
+            *       <div class="s-dropdown:top-end">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             * </div>
+            * 
+            * <!-- Scales -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">Scales</h3>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Scale 0.7
+            *       <div class="s-dropdown s-scale:07">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       No scale
+            *       <div class="s-dropdown">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Scale 1.3
+            *       <div class="s-dropdown s-scale:13">
+            *          <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            * </div>
+            * 
             * `;
             })
             .join('\n')}
@@ -167,7 +258,7 @@ export default function ({
 
     finalParams.styles.forEach((style) => {
         vars.push(`/**
-        * @name           s-dropdown${finalParams.defaultStyle === style ? '' : `\:${style}`}
+        * @name           s-dropdown${finalParams.defaultStyle === style ? '' : `:${style}`}
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
         * 
@@ -176,9 +267,9 @@ export default function ({
         * @example        html
         * <span class="s-dropdown-container">
         *     <button class="s-btn">Click me!</button>
-        *     <div class="s-dropdown${finalParams.defaultStyle === style ? '' : `\:${style}`}">
-        *         <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *         <a class="s-btn s-ui\:accent">You find me!</a>
+        *     <div class="s-dropdown${finalParams.defaultStyle === style ? '' : `:${style}`}">
+        *         <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *         <a class="s-btn s-ui:accent">You find me!</a>
         *     </div>
         * </span>
         * 
@@ -186,7 +277,8 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown${finalParams.defaultStyle === style ? '' : `--${style}`} {
-            @sugar.ui.dropdown($style: ${style});
+            ${finalParams.defaultColor !== 'ui' ? `@sugar.color.remap(ui, ${finalParams.defaultColor});` : ''}
+            @sugar.ui.dropdown($style: ${style}, $scope: '${finalParams.scope.join(',')}');
         }
         `);
     });
@@ -201,9 +293,9 @@ export default function ({
         * @example        html
         * <button class="s-btn">
         *   Click me!
-        *   <div class="s-dropdown\:bottom">
-        *       <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui\:accent">You find me!</a>
+        *   <div class="s-dropdown:bottom">
+        *       <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -212,7 +304,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown {
-            @sugar.ui.dropdown($position: bottom);
+            @sugar.ui.dropdown($position: bottom, $scope: position);
         }
         `);
 
@@ -226,9 +318,9 @@ export default function ({
         * @example        html
         * <button class="s-btn">
         *   Click me!
-        *   <div class="s-dropdown\:bottom-start">
-        *       <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui\:accent">You find me!</a>
+        *   <div class="s-dropdown:bottom-start">
+        *       <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -237,7 +329,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown--bottom-start {
-            @sugar.ui.dropdown($position: bottom-start);
+            @sugar.ui.dropdown($position: bottom-start, $scope: position);
         }
         `);
 
@@ -251,9 +343,9 @@ export default function ({
         * @example        html
         * <button class="s-btn">
         *   Click me!
-        *   <div class="s-dropdown\:bottom-end">
-        *       <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui\:accent">You find me!</a>
+        *   <div class="s-dropdown:bottom-end">
+        *       <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -262,7 +354,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown--bottom-end {
-            @sugar.ui.dropdown($position: bottom-end);
+            @sugar.ui.dropdown($position: bottom-end, $scope: position);
         }
         `);
 
@@ -276,9 +368,9 @@ export default function ({
         * @example        html
         * <button class="s-btn">
         *   Click me!
-        *   <div class="s-dropdown\:top">
-        *       <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui\:accent">You find me!</a>
+        *   <div class="s-dropdown:top">
+        *       <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -287,7 +379,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown--top {
-            @sugar.ui.dropdown($position: top);
+            @sugar.ui.dropdown($position: top, $scope: position);
         }
         `);
 
@@ -301,9 +393,9 @@ export default function ({
         * @example        html
         * <button class="s-btn">
         *   Click me!
-        *   <div class="s-dropdown\:top-start">
-        *       <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui\:accent">You find me!</a>
+        *   <div class="s-dropdown:top-start">
+        *       <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -312,7 +404,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown--top-start {
-            @sugar.ui.dropdown($position: top-start);
+            @sugar.ui.dropdown($position: top-start, $scope: position);
         }
         `);
 
@@ -326,9 +418,9 @@ export default function ({
         * @example        html
         * <button class="s-btn">
         *   Click me!
-        *   <div class="s-dropdown\:top-end">
-        *       <p class="s-typo\:p s-mb\:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui\:accent">You find me!</a>
+        *   <div class="s-dropdown:top-end">
+        *       <p class="s-typo:p s-mb:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -337,7 +429,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown--top-end {
-            @sugar.ui.dropdown($position: top-end);
+            @sugar.ui.dropdown($position: top-end, $scope: position);
         }
         `);
 

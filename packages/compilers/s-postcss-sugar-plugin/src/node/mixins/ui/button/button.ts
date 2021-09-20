@@ -101,10 +101,6 @@ export default function ({
                     --borderWidth: sugar.theme(ui.button.borderWidth);
 
                     & > * {
-                      @sugar.color.remap(ui, main);
-                    }
-
-                    & > * {
                       position: relative;
                       z-index: 1;
                     }
@@ -152,10 +148,6 @@ export default function ({
                 &:hover, &:focus {
                   background-color: sugar.color(ui, --alpha 0.3);
                 }
-
-                & > * {
-                  @sugar.color.remap(ui, main);
-                }
               `);
                 break;
             case 'text':
@@ -171,10 +163,6 @@ export default function ({
                   @sugar.state.disabled {
                     transform: scale(1) !important;
                   }
-
-                  & > * {
-                    @sugar.color.remap(ui, main);
-                  }
                 `);
                 break;
             case 'solid':
@@ -187,10 +175,6 @@ export default function ({
                   &:hover, &:focus {
                     background-color: sugar.color(ui, 55);
                     color: sugar.color(ui, foreground);
-                  }
-
-                  & > * {
-                    @sugar.color.remap(ui, main);
                   }
         `);
                 break;

@@ -816,6 +816,7 @@ body {
 --s-theme-transition-default: all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-transition-fast: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-helpers-clearfix-default: overflow;
+--s-theme-helpers-disabled-opacity: 0.3;
 --s-theme-layout-container-default-max-width: 1280px;
 --s-theme-layout-container-full-max-width: none;
 --s-theme-layout-layout-1: 1;
@@ -1024,7 +1025,6 @@ body {
 --s-theme-ui-default-borderRadius: 6px;
 --s-theme-ui-default-borderWidth: 1px;
 --s-theme-ui-default-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-default-disabledOpacity: 0.3;
 --s-theme-ui-default-defaultColor: accent;
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
@@ -1034,7 +1034,6 @@ body {
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-form-disabledOpacity: 0.3;
 --s-theme-ui-form-focusOutline: true;
 --s-theme-ui-form-defaultColor: accent;
 --s-theme-ui-form-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
@@ -1050,7 +1049,6 @@ body {
 --s-theme-ui-button-borderWidth: 1px;
 --s-theme-ui-button-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-button-focusOutline: true;
---s-theme-ui-button-disabledOpacity: 0.3;
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
@@ -1062,7 +1060,6 @@ body {
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-focusOutline: true;
---s-theme-ui-colorPicker-disabledOpacity: 0.3;
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-datePicker-paddingInline: 0.75em;
@@ -1071,7 +1068,6 @@ body {
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-focusOutline: true;
---s-theme-ui-datePicker-disabledOpacity: 0.3;
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-paddingInline: 0.75em;
@@ -1080,7 +1076,6 @@ body {
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusOutline: true;
---s-theme-ui-input-disabledOpacity: 0.3;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-defaultStyle: solid;
@@ -1090,7 +1085,6 @@ body {
 --s-theme-ui-radio-borderWidth: 1px;
 --s-theme-ui-radio-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-radio-focusOutline: true;
---s-theme-ui-radio-disabledOpacity: 0.3;
 --s-theme-ui-radio-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-radio-defaultStyle: solid;
@@ -1100,7 +1094,6 @@ body {
 --s-theme-ui-checkbox-borderWidth: 1px;
 --s-theme-ui-checkbox-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-checkbox-focusOutline: true;
---s-theme-ui-checkbox-disabledOpacity: 0.3;
 --s-theme-ui-checkbox-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-checkbox-defaultColor: accent;
@@ -1111,7 +1104,6 @@ body {
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-range-focusOutline: true;
---s-theme-ui-range-disabledOpacity: 0.3;
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-range-defaultStyle: solid;
@@ -1120,7 +1112,6 @@ body {
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-label-disabledOpacity: 0.3;
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-label-defaultStyle: inline;
@@ -1130,7 +1121,6 @@ body {
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-select-focusOutline: true;
---s-theme-ui-select-disabledOpacity: 0.3;
 --s-theme-ui-select-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-select-defaultStyle: solid;
@@ -1138,7 +1128,6 @@ body {
 --s-theme-ui-switch-borderWidth: 1px;
 --s-theme-ui-switch-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-switch-focusOutline: true;
---s-theme-ui-switch-disabledOpacity: 0.3;
 --s-theme-ui-switch-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-switch-defaultStyle: solid;
@@ -1174,7 +1163,6 @@ body {
 --s-theme-ui-terminal-borderRadius: 6px;
 --s-theme-ui-terminal-borderWidth: 1px;
 --s-theme-ui-terminal-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-terminal-disabledOpacity: 0.3;
 --s-theme-ui-terminal-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-terminal-defaultColor: accent;
@@ -1459,6 +1447,9 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
  * @cssClass     s-btn:gradient           Apply the gradient button style
  * @cssClass     s-btn:outline           Apply the outline button style
  * @cssClass     s-btn:text           Apply the text button style
+        * @cssClass            s-format:text button             Apply the button style on button tags inside the s-format:text scope 
+        * @cssClass            s-btn-group s-btn                Apply the button group style on a buttons wrapper
+        * @cssClass            s-rhythm:vertical &              Apply the default vertical rhythm on scoped button(s)
         * 
         * @example        html
          * <!-- solid style -->
@@ -1535,11 +1526,11 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <button>
-        *          Wanda Strosin
+        *          Shelia Senger
         *       </button>
         *       <br />
         *       <button>
-        *           Wilson Quitzon
+        *           Tonya Prosacco
         *       </button>
         *   </div>
         * </div>
@@ -1575,7 +1566,18 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         .s-btn > .s-icon {
           font-size: 1em;
         }
+.s-btn:disabled, .s-btn[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-btn:disabled:hover, .s-btn:disabled:focus, .s-btn:disabled:active, .s-btn[disabled]:hover, .s-btn[disabled]:focus, .s-btn[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-btn{
+
     
 
           font-size: calc(1rem * var(--s-scale, 1));
@@ -1639,7 +1641,18 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         .s-btn--gradient > .s-icon {
           font-size: 1em;
         }
+.s-btn--gradient:disabled, .s-btn--gradient[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-btn--gradient:disabled:hover, .s-btn--gradient:disabled:focus, .s-btn--gradient:disabled:active, .s-btn--gradient[disabled]:hover, .s-btn--gradient[disabled]:focus, .s-btn--gradient[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-btn--gradient{
+
     
 
           font-size: calc(1rem * var(--s-scale, 1));
@@ -1733,7 +1746,18 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         .s-btn--outline > .s-icon {
           font-size: 1em;
         }
+.s-btn--outline:disabled, .s-btn--outline[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-btn--outline:disabled:hover, .s-btn--outline:disabled:focus, .s-btn--outline:disabled:active, .s-btn--outline[disabled]:hover, .s-btn--outline[disabled]:focus, .s-btn--outline[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-btn--outline{
+
     
 
           font-size: calc(1rem * var(--s-scale, 1));
@@ -1795,21 +1819,34 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         .s-btn--text > .s-icon {
           font-size: 1em;
         }
+.s-btn--text:disabled, .s-btn--text[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-btn--text:disabled:hover, .s-btn--text:disabled:focus, .s-btn--text:disabled:active, .s-btn--text[disabled]:hover, .s-btn--text[disabled]:focus, .s-btn--text[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-btn--text{
+
     
 
           font-size: calc(1rem * var(--s-scale, 1));
           border-radius: var(--s-theme-ui-button-borderRadius, 6px);
         
 
-                  background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
+                  background: none !important;
                   border: rgba(0,0,0,0) solid var(--s-theme-ui-button-borderWidth, 1px);
                   color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
 }
 .s-btn--text:hover, .s-btn--text:focus {
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0));
                     transform: scale(1.1);
                   }
+.s-btn--text:disabled, .s-btn--text[disabled] {
+transform: scale(1) !important;
+}
 .s-btn--text > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -1927,7 +1964,18 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         .preview .s-format--text button > .s-icon {
           font-size: 1em;
         }
+.s-format--text button:not(.s-format--none button):disabled, .s-format--text button:not(.s-format--none button)[disabled], .preview .s-format--text button:disabled, .preview .s-format--text button[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-format--text button:not(.s-format--none button):disabled:hover, .s-format--text button:not(.s-format--none button):disabled:focus, .s-format--text button:not(.s-format--none button):disabled:active, .s-format--text button:not(.s-format--none button)[disabled]:hover, .s-format--text button:not(.s-format--none button)[disabled]:focus, .s-format--text button:not(.s-format--none button)[disabled]:active, .preview .s-format--text button:disabled:hover, .preview .s-format--text button:disabled:focus, .preview .s-format--text button:disabled:active, .preview .s-format--text button[disabled]:hover, .preview .s-format--text button[disabled]:focus, .preview .s-format--text button[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-format--text button:not(.s-format--none button), .preview .s-format--text button{
+
     
 
           font-size: calc(1rem * var(--s-scale, 1));
@@ -1989,15 +2037,15 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
             *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-solid-1" value="hello 1" />
-            *     <span>Product Quality Planner Walter Steuber II</span>
+            *     <span>Corporate Marketing Associate Karl Pacocha</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="checkbox" class="s-checkbox" name="checkbox-style-solid-2" value="hello 2" />
-            *     <span>Investor Optimization Liaison James Carter</span>
+            *     <span>Investor Paradigm Associate Tamara Wisozk</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="checkbox" class="s-checkbox" name="checkbox-style-solid-3" value="hello 3" />
-            *     <span>Global Program Administrator Andre Hagenes</span>
+            *     <span>Senior Directives Associate Lloyd Johnston</span>
             *   </label>
             * </div>
             * 
@@ -2007,19 +2055,19 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors</h3>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-color-1" value="hello 1" />
-        *     <span>Direct Tactics Officer Darlene Ratke</span>
+        *     <span>District Tactics Producer Derrick Ferry</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:info s-label">
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-color-2" value="hello 2" />
-        *     <span>Lead Security Producer Albert Rolfson</span>
+        *     <span>National Tactics Orchestrator Brandon Zulauf</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:error s-label">
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-color-3" value="hello 3" />
-        *     <span>National Metrics Developer Carol Hoeger</span>
+        *     <span>Customer Implementation Supervisor Judith Raynor</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:warning s-label">
         *     <input type="checkbox" disabled class="s-checkbox" name="checkbox-style-color-4" value="hello 4" />
-        *     <span>Future Directives Consultant Esther Thiel</span>
+        *     <span>International Interactions Technician Wilbur Wuckert II</span>
         *   </label>
         * </div>
         * 
@@ -2028,15 +2076,15 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         *   <h3 class="s-color:accent s-font:30 s-mb:30">LTR Support</h3>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
-        *     <span>International Data Technician Fred Boyle</span>
+        *     <span>Senior Directives Manager Evelyn Halvorson</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
-        *     <span>Senior Response Executive Ms. Francis Larkin</span>
+        *     <span>Dynamic Web Supervisor Julian Douglas</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
-        *     <span>Internal Research Agent Susie Pacocha</span>
+        *     <span>Chief Usability Orchestrator Pablo Klein</span>
         *   </label>
         * </div>
         * 
@@ -2045,15 +2093,15 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Scale</h3>
         *   <label class="s-mb:30 s-ui:accent s-label s-scale:07">
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
-        *     <span>Global Paradigm Administrator Lyle Mohr</span>
+        *     <span>Central Usability Designer Jeremy Gleichner</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
-        *     <span>Global Program Producer Miss Jay Morar</span>
+        *     <span>Corporate Quality Supervisor Alfonso Funk</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label s-scale:13">
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
-        *     <span>Global Intranet Officer Steve Upton IV</span>
+        *     <span>Global Optimization Assistant Ed Olson</span>
         *   </label>
         * </div>
         * 
@@ -2087,15 +2135,16 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         width: 1px;
                 font-size: calc(1rem * var(--s-scale, 1));
         }
-.s-checkbox:disabled + * {
-                    -webkit-user-select: none;
-                       -moz-user-select: none;
-                        -ms-user-select: none;
-                            user-select: none;
-                    cursor: not-allowed;
-                    pointer-events: none;
-                    opacity: var(--s-theme-ui-checkbox-disabledOpacity, 0.3) !important;
+.s-checkbox:disabled + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
                 }
+.s-checkbox:disabled + *:hover, .s-checkbox:disabled + *:focus, .s-checkbox:disabled + *:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-checkbox + *:after {
                     content: "";
                     opacity: 0;
@@ -2185,15 +2234,16 @@ label:hover > .s-checkbox:not(:disabled) + *:after,
         width: 1px;
                 font-size: calc(1rem * var(--s-scale, 1));
                 }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *, .preview .s-format--text input[type="checkbox"]:disabled + * {
-                    -webkit-user-select: none;
-                       -moz-user-select: none;
-                        -ms-user-select: none;
-                            user-select: none;
-                    cursor: not-allowed;
-                    pointer-events: none;
-                    opacity: var(--s-theme-ui-checkbox-disabledOpacity, 0.3) !important;
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *, .preview .s-format--text input[type="checkbox"]:disabled + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
                 }
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *:hover, .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *:focus, .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *:active, .preview .s-format--text input[type="checkbox"]:disabled + *:hover, .preview .s-format--text input[type="checkbox"]:disabled + *:focus, .preview .s-format--text input[type="checkbox"]:disabled + *:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *:after, .preview .s-format--text input[type="checkbox"] + *:after {
                     content: "";
                     opacity: 0;
@@ -2265,6 +2315,14 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * @status       beta
         * 
         * These classes allows you to display nice dropdown on buttons or whatever
+        *
+        * @feature          Support for scaling through the "s-scale:..." class
+        * @feature          Support for colorizing through the "s-ui:..." class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
         * 
          * @cssClass     s-dropdown           Apply the solid dropdown style
         * 
@@ -2275,7 +2333,14 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-ui:accent s-mb:30">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mb:30">Direct Quality Designer Natalie Gaylord</p>
+            *          <p class="s-typo:p s-mb:30">Forward Paradigm Administrator Gwendolyn Bayer</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-ui:complementary s-mb:30">
+            *       I'm disabled
+            *       <div class="s-dropdown" disabled>
+            *          <p class="s-typo:p s-mb:30">Regional Interactions Agent Bob Braun</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -2283,8 +2348,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *       <a class="s-btn">Click me!</a>
             *       <button class="s-btn s-ui:complementary">
             *           +
-            *           <div class="s-dropdown">
-            *               <p class="s-typo:p s-mb:30">Global Program Designer Jon Weissnat</p>
+            *           <div class="s-dropdown:bottom-end">
+            *               <p class="s-typo:p s-mb:30">Central Infrastructure Planner Shawn Orn</p>
             *               <a class="s-btn s-ui:accent">You find me!</a>
             *           </div>
             *       </button>
@@ -2297,43 +2362,76 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Bottom (default)
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mb:30">Central Tactics Director Elijah Denesik DVM</p>
+            *          <p class="s-typo:p s-mb:30">Corporate Intranet Specialist Rolando Farrell</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Bottom start
             *       <div class="s-dropdown:bottom-start">
-            *          <p class="s-typo:p s-mb:30">Direct Web Designer Moses Kris</p>
+            *          <p class="s-typo:p s-mb:30">Legacy Intranet Assistant Miss Miranda Konopelski</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Bottom end
             *       <div class="s-dropdown:bottom-end">
-            *          <p class="s-typo:p s-mb:30">Central Configuration Officer Ted Veum</p>
+            *          <p class="s-typo:p s-mb:30">Chief Factors Agent Juan Herman</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top
             *       <div class="s-dropdown:top">
-            *          <p class="s-typo:p s-mb:30">Internal Infrastructure Producer Casey Keebler</p>
+            *          <p class="s-typo:p s-mb:30">Senior Interactions Director Carrie Nitzsche</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
-            *          <p class="s-typo:p s-mb:30">Central Accountability Strategist Pam Abshire</p>
+            *          <p class="s-typo:p s-mb:30">Internal Markets Planner Teresa Daniel</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
-            *          <p class="s-typo:p s-mb:30">International Tactics Technician Mrs. Luz Ratke</p>
+            *          <p class="s-typo:p s-mb:30">Central Program Orchestrator Milton Lind</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            * </div>
+            * 
+            * <!-- Colors -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors (non-exhaustive)</h3>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Accent
+            *       <div class="s-dropdown s-ui:accent">
+            *          <p class="s-typo:p s-mb:30">Global Program Consultant Myron McKenzie</p>
+            *          <a class="s-btn s-ui:complementary">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Complementary
+            *       <div class="s-dropdown s-ui:complementary">
+            *          <p class="s-typo:p s-mb:30">Senior Tactics Supervisor Guy Davis</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Info
+            *       <div class="s-dropdown s-ui:info">
+            *          <p class="s-typo:p s-mb:30">Human Division Administrator Manuel Stanton</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Error
+            *       <div class="s-dropdown s-ui:error">
+            *          <p class="s-typo:p s-mb:30">Human Web Consultant Marion Greenholt</p>
+            *          <a class="s-btn">You find me!</a>
             *       </div>
             *   </button>
             * </div>
@@ -2344,25 +2442,52 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mb:30">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mb:30">Legacy Directives Technician Dr. Alton Swaniawski</p>
+            *          <p class="s-typo:p s-mb:30">Corporate Assurance Assistant Patricia Von</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
-            *          <p class="s-typo:p s-mb:30">Global Configuration Developer Dr. Sammy Mueller</p>
+            *          <p class="s-typo:p s-mb:30">Future Response Engineer Jill Satterfield</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mb:30 s-mr:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
-            *          <p class="s-typo:p s-mb:30">Forward Infrastructure Manager Harry Kiehn</p>
+            *          <p class="s-typo:p s-mb:30">Senior Integration Liaison Bernard Wolf</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             * </div>
+            * 
+            * <!-- Scales -->
+            * <div class="s-font:30 s-mb:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb:30">Scales</h3>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Scale 0.7
+            *       <div class="s-dropdown s-scale:07">
+            *          <p class="s-typo:p s-mb:30">Product Accounts Developer Sherman Kuvalis</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       No scale
+            *       <div class="s-dropdown">
+            *          <p class="s-typo:p s-mb:30">Forward Research Orchestrator Annie Robel</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            *   <button class="s-btn s-mb:30 s-mr:20">
+            *       Scale 1.3
+            *       <div class="s-dropdown s-scale:13">
+            *          <p class="s-typo:p s-mb:30">Dynamic Web Liaison Tammy Donnelly</p>
+            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *       </div>
+            *   </button>
+            * </div>
+            * 
             * 
         * 
         * @since      2.0.0
@@ -2379,7 +2504,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <span class="s-dropdown-container">
         *     <button class="s-btn">Click me!</button>
         *     <div class="s-dropdown">
-        *         <p class="s-typo:p s-mb:30">International Division Liaison Darren Sporer</p>
+        *         <p class="s-typo:p s-mb:30">International Configuration Developer Guadalupe Lang</p>
         *         <a class="s-btn s-ui:accent">You find me!</a>
         *     </div>
         * </span>
@@ -2410,6 +2535,19 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
                 opacity: 1;
                 pointer-events: all;
             }
+.s-dropdown:disabled, .s-dropdown[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-dropdown:disabled:hover, .s-dropdown:disabled:focus, .s-dropdown:disabled:active, .s-dropdown[disabled]:hover, .s-dropdown[disabled]:focus, .s-dropdown[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-dropdown:disabled, .s-dropdown[disabled]{
+opacity: 0 !important;
+}
 .s-dropdown > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -2417,8 +2555,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
 .s-dropdown{
         
 
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-background-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-background-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-background-a, 1));
-                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-backgroundForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-backgroundForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-backgroundForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-backgroundForeground-a, 1));
+                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
                     padding-inline: calc(var(--s-theme-ui-dropdown-paddingInline, 0.75em) * var(--s-scale, 1));
                     padding-block: calc(var(--s-theme-ui-dropdown-paddingBlock, 0.75em) * var(--s-scale, 1));
                     border: var(--s-theme-ui-dropdown-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));
@@ -2442,7 +2580,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom">
-        *       <p class="s-typo:p s-mb:30">Regional Solutions Facilitator Claire Lakin</p>
+        *       <p class="s-typo:p s-mb:30">Chief Web Strategist Dixie Nienow DVM</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2474,6 +2612,19 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
                 opacity: 1;
                 pointer-events: all;
             }
+.s-dropdown:disabled, .s-dropdown[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-dropdown:disabled:hover, .s-dropdown:disabled:focus, .s-dropdown:disabled:active, .s-dropdown[disabled]:hover, .s-dropdown[disabled]:focus, .s-dropdown[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-dropdown:disabled, .s-dropdown[disabled]{
+opacity: 0 !important;
+}
 .s-dropdown > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -2481,8 +2632,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
 .s-dropdown{
         
 
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-background-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-background-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-background-a, 1));
-                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-backgroundForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-backgroundForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-backgroundForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-backgroundForeground-a, 1));
+                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
                     padding-inline: calc(var(--s-theme-ui-dropdown-paddingInline, 0.75em) * var(--s-scale, 1));
                     padding-block: calc(var(--s-theme-ui-dropdown-paddingBlock, 0.75em) * var(--s-scale, 1));
                     border: var(--s-theme-ui-dropdown-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));
@@ -2506,7 +2657,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-start">
-        *       <p class="s-typo:p s-mb:30">Product Infrastructure Planner Rachael Heaney</p>
+        *       <p class="s-typo:p s-mb:30">Investor Usability Director Ms. Doyle Bradtke</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2538,6 +2689,19 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
                 opacity: 1;
                 pointer-events: all;
             }
+.s-dropdown--bottom-start:disabled, .s-dropdown--bottom-start[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-dropdown--bottom-start:disabled:hover, .s-dropdown--bottom-start:disabled:focus, .s-dropdown--bottom-start:disabled:active, .s-dropdown--bottom-start[disabled]:hover, .s-dropdown--bottom-start[disabled]:focus, .s-dropdown--bottom-start[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-dropdown--bottom-start:disabled, .s-dropdown--bottom-start[disabled]{
+opacity: 0 !important;
+}
 .s-dropdown--bottom-start > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -2545,8 +2709,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
 .s-dropdown--bottom-start{
         
 
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-background-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-background-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-background-a, 1));
-                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-backgroundForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-backgroundForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-backgroundForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-backgroundForeground-a, 1));
+                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
                     padding-inline: calc(var(--s-theme-ui-dropdown-paddingInline, 0.75em) * var(--s-scale, 1));
                     padding-block: calc(var(--s-theme-ui-dropdown-paddingBlock, 0.75em) * var(--s-scale, 1));
                     border: var(--s-theme-ui-dropdown-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));
@@ -2575,7 +2739,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-end">
-        *       <p class="s-typo:p s-mb:30">Future Metrics Associate Mr. Dorothy Lakin</p>
+        *       <p class="s-typo:p s-mb:30">Legacy Security Agent Marian Dickinson</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2607,6 +2771,19 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
                 opacity: 1;
                 pointer-events: all;
             }
+.s-dropdown--bottom-end:disabled, .s-dropdown--bottom-end[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-dropdown--bottom-end:disabled:hover, .s-dropdown--bottom-end:disabled:focus, .s-dropdown--bottom-end:disabled:active, .s-dropdown--bottom-end[disabled]:hover, .s-dropdown--bottom-end[disabled]:focus, .s-dropdown--bottom-end[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-dropdown--bottom-end:disabled, .s-dropdown--bottom-end[disabled]{
+opacity: 0 !important;
+}
 .s-dropdown--bottom-end > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -2614,8 +2791,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
 .s-dropdown--bottom-end{
         
 
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-background-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-background-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-background-a, 1));
-                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-backgroundForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-backgroundForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-backgroundForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-backgroundForeground-a, 1));
+                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
                     padding-inline: calc(var(--s-theme-ui-dropdown-paddingInline, 0.75em) * var(--s-scale, 1));
                     padding-block: calc(var(--s-theme-ui-dropdown-paddingBlock, 0.75em) * var(--s-scale, 1));
                     border: var(--s-theme-ui-dropdown-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));
@@ -2645,7 +2822,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top">
-        *       <p class="s-typo:p s-mb:30">Senior Metrics Coordinator Gregg Jones</p>
+        *       <p class="s-typo:p s-mb:30">Product Group Supervisor Simon Moen</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2677,6 +2854,19 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
                 opacity: 1;
                 pointer-events: all;
             }
+.s-dropdown--top:disabled, .s-dropdown--top[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-dropdown--top:disabled:hover, .s-dropdown--top:disabled:focus, .s-dropdown--top:disabled:active, .s-dropdown--top[disabled]:hover, .s-dropdown--top[disabled]:focus, .s-dropdown--top[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-dropdown--top:disabled, .s-dropdown--top[disabled]{
+opacity: 0 !important;
+}
 .s-dropdown--top > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -2684,8 +2874,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
 .s-dropdown--top{
         
 
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-background-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-background-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-background-a, 1));
-                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-backgroundForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-backgroundForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-backgroundForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-backgroundForeground-a, 1));
+                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
                     padding-inline: calc(var(--s-theme-ui-dropdown-paddingInline, 0.75em) * var(--s-scale, 1));
                     padding-block: calc(var(--s-theme-ui-dropdown-paddingBlock, 0.75em) * var(--s-scale, 1));
                     border: var(--s-theme-ui-dropdown-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));
@@ -2710,7 +2900,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-start">
-        *       <p class="s-typo:p s-mb:30">Chief Research Orchestrator Christie Crooks</p>
+        *       <p class="s-typo:p s-mb:30">Investor Usability Consultant Jared Beer</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2742,6 +2932,19 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
                 opacity: 1;
                 pointer-events: all;
             }
+.s-dropdown--top-start:disabled, .s-dropdown--top-start[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-dropdown--top-start:disabled:hover, .s-dropdown--top-start:disabled:focus, .s-dropdown--top-start:disabled:active, .s-dropdown--top-start[disabled]:hover, .s-dropdown--top-start[disabled]:focus, .s-dropdown--top-start[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-dropdown--top-start:disabled, .s-dropdown--top-start[disabled]{
+opacity: 0 !important;
+}
 .s-dropdown--top-start > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -2749,8 +2952,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
 .s-dropdown--top-start{
         
 
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-background-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-background-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-background-a, 1));
-                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-backgroundForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-backgroundForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-backgroundForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-backgroundForeground-a, 1));
+                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
                     padding-inline: calc(var(--s-theme-ui-dropdown-paddingInline, 0.75em) * var(--s-scale, 1));
                     padding-block: calc(var(--s-theme-ui-dropdown-paddingBlock, 0.75em) * var(--s-scale, 1));
                     border: var(--s-theme-ui-dropdown-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));
@@ -2780,7 +2983,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-end">
-        *       <p class="s-typo:p s-mb:30">Forward Division Analyst Estelle Stamm</p>
+        *       <p class="s-typo:p s-mb:30">Human Applications Producer Karen McClure</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2812,6 +3015,19 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
                 opacity: 1;
                 pointer-events: all;
             }
+.s-dropdown--top-end:disabled, .s-dropdown--top-end[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+}
+.s-dropdown--top-end:disabled:hover, .s-dropdown--top-end:disabled:focus, .s-dropdown--top-end:disabled:active, .s-dropdown--top-end[disabled]:hover, .s-dropdown--top-end[disabled]:focus, .s-dropdown--top-end[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-dropdown--top-end:disabled, .s-dropdown--top-end[disabled]{
+opacity: 0 !important;
+}
 .s-dropdown--top-end > * {--s-theme-color-ui-h: var(--s-theme-color-main-h);
 --s-theme-color-ui-s: var(--s-theme-color-main-s);
 --s-theme-color-ui-l: var(--s-theme-color-main-l);
@@ -2819,8 +3035,8 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
 .s-dropdown--top-end{
         
 
-                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-background-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-background-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-background-a, 1));
-                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-backgroundForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-backgroundForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-backgroundForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-backgroundForeground-a, 1));
+                    background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surface-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surface-a, 1));
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-surfaceForeground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-surfaceForeground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-surfaceForeground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-surfaceForeground-a, 1));
                     padding-inline: calc(var(--s-theme-ui-dropdown-paddingInline, 0.75em) * var(--s-scale, 1));
                     padding-block: calc(var(--s-theme-ui-dropdown-paddingBlock, 0.75em) * var(--s-scale, 1));
                     border: var(--s-theme-ui-dropdown-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1));
@@ -2870,7 +3086,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             * <div class="s-font:30 s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
             *   <p class="s-blockquote">
-            *       Perspiciatis labore ut non nulla. Accusamus mollitia sed praesentium quo voluptatum dolor. Ut quo perferendis ex omnis nihil illo.
+            *       Quibusdam quo eius nesciunt vitae voluptate ab. Qui commodi magni suscipit. Officia minima doloremque quia. Illum esse est similique dolores ut quia dolorum molestiae neque. Doloremque voluptatibus sit ut vel voluptas deleniti omnis aliquid autem. Velit et id accusantium quis consequuntur omnis aliquam.
             *   </p>
             * </div>
             * 
@@ -2879,13 +3095,13 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors (non-exhaustive)</h3>
         *   <p class="s-blockquote s-mb:30 s-ui:accent">
-        *       Autem debitis ea laborum error asperiores perspiciatis omnis. Ut nam at velit esse excepturi. Accusamus earum nihil pariatur ipsum eum quia reprehenderit perspiciatis. Atque animi assumenda et.
+        *       Repellendus enim perferendis quasi sit. Qui in officiis qui qui ipsam voluptatem praesentium assumenda. Laudantium sit harum.
         *   </p>
         *   <p class="s-blockquote s-mb:30 s-ui:error">
-        *       Pariatur ut reiciendis eligendi. Occaecati animi eveniet in sequi repellendus. Dignissimos sit non at id enim enim vitae nihil aut. Voluptatum vitae officia doloremque tempora laborum. Harum non non laborum.
+        *       Modi error voluptas sit commodi quo quam praesentium magni ipsa. Excepturi mollitia officia dignissimos iusto provident. Natus ut ab est placeat sed laboriosam blanditiis officia nobis.
         *   </p>
         *   <p class="s-blockquote s-mb:30 s-ui:info">
-        *       Nobis doloribus et nesciunt. Sed illum doloremque. Eos ratione quia nobis eos nemo commodi sed. Dolor consequuntur ipsam. Expedita itaque ut quae sit natus. Nostrum tempore voluptatem sint et rerum molestias esse esse rerum.
+        *       Molestiae et aut minus provident amet delectus saepe molestiae modi. Officiis sed tempore. Soluta aperiam temporibus iure.
         *   </p>
         * </div>
         *
@@ -2893,7 +3109,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <div class="s-font:30 s-mb:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mb:30">LTR Support</h3>
         *   <p class="s-blockquote s-mb:30">
-        *       Praesentium nihil totam sint laborum iste. Delectus voluptas earum hic possimus sit enim est voluptatem. Corporis in vel sed optio qui molestiae laboriosam reprehenderit. Nulla voluptas et veniam. Cum ipsam perspiciatis laboriosam impedit debitis qui ab.
+        *       Fuga amet dolor assumenda laborum distinctio quis. Suscipit sint asperiores. Alias quasi quos et nesciunt. Non sit omnis dolorum reiciendis a. Cum eum ab. Ut accusamus optio consequatur officiis.
         *   </p>
         * </div>
         * 
@@ -2901,7 +3117,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Scale</h3>
         *   <p class="s-blockquote s-scale:15 s-mb:30">
-        *       Velit quis unde hic adipisci optio. Ex amet ullam est voluptas aut blanditiis debitis perferendis perferendis. Consequatur et dolorum. Eos consequatur vitae provident vel.
+        *       Molestiae qui recusandae deserunt qui error. Amet et explicabo quam quaerat non omnis molestiae et perspiciatis. Sed rem corporis. Voluptas aut officiis perspiciatis facere et ea aut asperiores sequi.
         *   </p>
         * </div>
         * 
@@ -2910,10 +3126,10 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <blockquote>
-        *          Ut eos beatae dolorem et quas debitis sint autem. Saepe rerum totam perferendis enim ut rem aut. Ipsam iure aut eum velit est ab. Velit quam officia. Quam nam rerum in omnis laborum quae quia temporibus et. Et quidem suscipit quia.
+        *          Porro ab eligendi qui perspiciatis pariatur. Libero qui et. Et quam est ducimus sequi sed autem dignissimos. Recusandae repellat optio dolor vitae dolorum doloremque omnis labore. Facilis sed reprehenderit unde est cumque. Deleniti sapiente culpa accusamus molestias rem neque.
         *       </blockquote>
         *       <blockquote>
-        *           Sit itaque nobis sunt odio quis rerum asperiores vel quia. Eos rerum consequatur illum quis aliquam vel facere. Dolor officia ea. Nam et eius libero perspiciatis ipsa et sit tempore. Aut aliquid accusantium omnis neque et et quidem dolores earum.
+        *           Fugiat omnis nam reiciendis. Unde aspernatur sed similique ab et. Omnis reprehenderit in rerum veritatis quod dolorem iusto deserunt.
         *       </blockquote>
         *   </div>
         * </div>
@@ -3059,24 +3275,26 @@ background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color
 border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;
 color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
 }
-.s-input:disabled {pointer-events:none !important;
+.s-input:disabled, .s-input[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
-    
-opacity: var(--s-theme-ui-input-disabledOpacity, 0.3);
 }
-label .s-input:disabled + * {
-                pointer-events:none;
-                opacity: var(--s-theme-ui-input-disabledOpacity, 0.3);
-                cursor: not-allowed;
-                -webkit-user-select: none;
-                   -moz-user-select: none;
-                    -ms-user-select: none;
-                        user-select: none;
+.s-input:disabled:hover, .s-input:disabled:focus, .s-input:disabled:active, .s-input[disabled]:hover, .s-input[disabled]:focus, .s-input[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+label .s-input:disabled + *, label .s-input[disabled] + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
             }
+label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-input:disabled + *:active, label .s-input[disabled] + *:hover, label .s-input[disabled] + *:focus, label .s-input[disabled] + *:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-input{
   
 
@@ -3099,27 +3317,27 @@ label .s-input:disabled + * {
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
             *   <label class="s-label s-mb:30">
-            *       Bobby O'Reilly
+            *       Leah Ernser Jr.
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *       Gregg Hudson
+            *       Opal Crist
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:accent" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *        Neal Romaguera
+            *        Lola Bruen
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:complementary" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *        Brandon Hettinger
+            *        Amelia Dooley V
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:error" />
             *   </label>
             *   <label dir="rtl" class="s-label s-mb:30">
-            *        Jill Jast
+            *        Mr. Leonard Satterfield
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input:solid s-width:50 s-ui:accent" />
             *   </label>
             *   <label class="s-label s-mb:30">
-            *        Corey Towne
+            *        Elmer Powlowski
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-scale:15 s-ui:accent" />
             *   </label>
             * </div>
@@ -3199,24 +3417,26 @@ background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color
 border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;
 color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
 }
-.s-input:disabled {pointer-events:none !important;
+.s-input:disabled, .s-input[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
-    
-opacity: var(--s-theme-ui-input-disabledOpacity, 0.3);
 }
-label .s-input:disabled + * {
-                pointer-events:none;
-                opacity: var(--s-theme-ui-input-disabledOpacity, 0.3);
-                cursor: not-allowed;
-                -webkit-user-select: none;
-                   -moz-user-select: none;
-                    -ms-user-select: none;
-                        user-select: none;
+.s-input:disabled:hover, .s-input:disabled:focus, .s-input:disabled:active, .s-input[disabled]:hover, .s-input[disabled]:focus, .s-input[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+label .s-input:disabled + *, label .s-input[disabled] + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
             }
+label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-input:disabled + *:active, label .s-input[disabled] + *:hover, label .s-input[disabled] + *:focus, label .s-input[disabled] + *:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-input{
   
 
@@ -3241,31 +3461,31 @@ label .s-input:disabled + * {
             *   <h3 class="s-color:accent s-font:30 s-mb:20">inline style</h3>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Senior Brand Designer Taylor Douglas</span>
+            *     <span>Central Configuration Agent Clifton Champlin MD</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:info s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Direct Identity Director Jamie Ledner</span>
+            *     <span>Forward Security Producer Bridget Walsh</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:error s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Internal Interactions Technician Virgil Wisozk</span>
+            *     <span>Central Solutions Director Gina Ortiz</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
-            *     <span>International Brand Director Earl Cartwright</span>
+            *     <span>Principal Creative Consultant Jane Schuppe</span>
             *   </label>
             *   <label dir="rtl" class="s-mb:30 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Investor Intranet Engineer Loretta Armstrong (RTL)</span>
+            *     <span>International Tactics Officer Luke Ratke (RTL)</span>
             *   </label>
             *   <label class="s-mb:30 s-scale:15 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Forward Usability Designer Oscar Schultz (Scaled)</span>
+            *     <span>Principal Mobility Representative Danny Keeling (Scaled)</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="text" disabled class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Principal Functionality Executive Jacob Sporer (Scaled)</span>
+            *     <span>Lead Applications Engineer Hubert Keebler (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -3274,31 +3494,31 @@ label .s-input:disabled + * {
             *   <h3 class="s-color:accent s-font:30 s-mb:20">float style</h3>
             *   <label class="s-mb:30 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>International Factors Orchestrator Camille Marvin</span>
+            *     <span>Global Directives Manager Priscilla Abshire</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:info s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Investor Factors Engineer Rhonda Shields</span>
+            *     <span>Central Interactions Facilitator Gordon Rowe</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:error s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Lead Response Associate David Dicki</span>
+            *     <span>Senior Infrastructure Consultant Francis Hodkiewicz</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label:float">
             *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
-            *     <span>Customer Usability Officer Henry Ritchie</span>
+            *     <span>Lead Configuration Agent Marian Roberts</span>
             *   </label>
             *   <label dir="rtl" class="s-mb:30 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Customer Optimization Technician Dr. Kristie Gorczany (RTL)</span>
+            *     <span>Legacy Infrastructure Manager Erica Wuckert (RTL)</span>
             *   </label>
             *   <label class="s-mb:30 s-scale:15 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Global Intranet Engineer Roxanne Gaylord (Scaled)</span>
+            *     <span>National Assurance Facilitator Beth Hand (Scaled)</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label:float">
             *     <input type="text" disabled class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Corporate Paradigm Manager Janie Cruickshank III (Scaled)</span>
+            *     <span>Senior Markets Analyst Jay Bayer (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -3534,9 +3754,9 @@ label .s-input:disabled + * {
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">ul style</h3>
             *   <ul class="s-list:ul ">
-            *     <li>Product Applications Officer Inez Satterfield</li>
-            *     <li>District Branding Technician Taylor Little</li>
-            *     <li>Global Accounts Facilitator Lorraine Block</li>
+            *     <li>Corporate Data Assistant Evelyn Franecki</li>
+            *     <li>Regional Assurance Coordinator Janet Ritchie MD</li>
+            *     <li>Human Branding Executive Joseph Padberg</li>
             *   </ul>
             * </div>
             * 
@@ -3544,9 +3764,9 @@ label .s-input:disabled + * {
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">ol style</h3>
             *   <ul class="s-list:ol s-ui:accent s-scale:15">
-            *     <li>Future Configuration Manager Esther Bode</li>
-            *     <li>National Solutions Director Samantha O'Connell</li>
-            *     <li>International Markets Orchestrator Sherry Feeney</li>
+            *     <li>Regional Configuration Producer Dianna Keeling</li>
+            *     <li>Lead Interactions Director Karen Torp</li>
+            *     <li>Central Quality Designer Candice Senger</li>
             *   </ul>
             * </div>
             * 
@@ -3554,9 +3774,9 @@ label .s-input:disabled + * {
             * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">icon style</h3>
             *   <ul class="s-list:icon ">
-            *     <li><i class="s-icon:user"></i>Principal Directives Consultant Trevor Hoeger</li>
-            *     <li><i class="s-icon:heart s-ui:accent"></i>International Tactics Assistant Lynda Murphy</li>
-            *     <li><i class="s-icon:fire s-ui:error"></i>Dynamic Mobility Technician Gabriel Aufderhar</li>
+            *     <li><i class="s-icon:user"></i>Lead Metrics Assistant Guy Schoen II</li>
+            *     <li><i class="s-icon:heart s-ui:accent"></i>Regional Accounts Engineer Fannie Medhurst</li>
+            *     <li><i class="s-icon:fire s-ui:error"></i>Global Markets Specialist Preston Wiegand</li>
             *   </ul>
             * </div>
             * 
@@ -3565,25 +3785,25 @@ label .s-input:disabled + * {
         * <div class="s-mb:50" dir="rtl">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">RTL</h3>
             *   <ul class="s-list:ul s-ui:accent s-mb:30">
-            *     <li>Principal Quality Strategist Meredith Satterfield DVM</li>
-            *     <li>Legacy Operations Coordinator Darrin Rice</li>
+            *     <li>Corporate Marketing Liaison Krista Stoltenberg</li>
+            *     <li>Human Branding Officer Kayla Gutkowski</li>
             *   </ul>
             *   <ul class="s-list:ol s-ui:accent s-mb:30">
-            *     <li>Direct Infrastructure Coordinator Emily Hand</li>
-            *     <li>Global Usability Associate Rickey Herzog</li>
+            *     <li>National Usability Producer Mrs. Luke Konopelski</li>
+            *     <li>Investor Tactics Agent Felipe Quigley</li>
             *   </ul>
             *   <ul class="s-list:icon s-ui:accent s-mb:30">
-            *     <li><i class="s-icon:user"></i> Dynamic Usability Executive Noah Heathcote</li>
-            *     <li><i class="s-icon:heart s-ui:error"></i> Corporate Solutions Coordinator Veronica Bradtke I</li>
+            *     <li><i class="s-icon:user"></i> Product Division Designer Al Mueller</li>
+            *     <li><i class="s-icon:heart s-ui:error"></i> Corporate Assurance Strategist Kenneth Herman</li>
             *   </ul>
             * </div>
         * 
         * <div class="s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors</h3>
             *   <ul class="s-list s-scale:12 s-ui:accent">
-            *     <li>District Metrics Liaison Madeline Schamberger</li>
-            *     <li class="s-ui:complementary">Legacy Intranet Liaison Jeanette Nolan</li>
-            *     <li class="s-ui:error">Dynamic Program Developer Sidney Murray</li>
+            *     <li>Dynamic Group Coordinator Eula Jacobson</li>
+            *     <li class="s-ui:complementary">Human Data Associate Andre Feil</li>
+            *     <li class="s-ui:error">International Assurance Strategist Jenna Wolff</li>
             *   </ul>
             * </div>
         * 
@@ -3836,9 +4056,9 @@ label .s-input:disabled + * {
             * <div class="s-font:30 s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
             *   <ul class="s-tabs s-ui:accent">
-            *     <li tabindex="0">Gertrude Prohaska I</li>
-            *     <li tabindex="0" active>Suzanne Mraz</li>
-            *     <li tabindex="0">Jackie Miller</li>
+            *     <li tabindex="0">Henrietta Zboncak</li>
+            *     <li tabindex="0" active>Marc Strosin</li>
+            *     <li tabindex="0">Shirley Cremin</li>
             *   </ul>
             * </div>
             * 
@@ -3847,9 +4067,9 @@ label .s-input:disabled + * {
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Grow</h3>
         *   <ul class="s-tabs:grow">
-        *     <li tabindex="0" active>Luis Gaylord</li>
-        *     <li tabindex="0">Claire Block</li>
-        *     <li tabindex="0">Elbert Hegmann</li>
+        *     <li tabindex="0" active>Kristine Cummings</li>
+        *     <li tabindex="0">Essie Schimmel</li>
+        *     <li tabindex="0">Greg Rosenbaum Jr.</li>
         *   </ul>
         * </div>
         * 
@@ -3857,9 +4077,9 @@ label .s-input:disabled + * {
         * <div class="s-font:30 s-mb:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">RTL</h3>
         *   <ul class="s-tabs">
-        *     <li class="s-ui:accent" tabindex="0" active>Vickie Morissette</li>
-        *     <li class="s-ui:complementary" tabindex="0">Hope Baumbach Jr.</li>
-        *     <li tabindex="0">Roy Beahan</li>
+        *     <li class="s-ui:accent" tabindex="0" active>Benny Strosin</li>
+        *     <li class="s-ui:complementary" tabindex="0">Lydia Lubowitz</li>
+        *     <li tabindex="0">Dr. Kathryn Kemmer</li>
         *   </ul>
         * </div>
         * 
@@ -3867,9 +4087,9 @@ label .s-input:disabled + * {
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Vertical</h3>
         *   <ul class="s-tabs:vertical s-ui:complementary">
-        *     <li tabindex="0" active>Katherine Keebler DDS</li>
-        *     <li tabindex="0">Susan Turner</li>
-        *     <li tabindex="0">Mrs. Nettie Effertz</li>
+        *     <li tabindex="0" active>Pablo Cruickshank</li>
+        *     <li tabindex="0">Ervin Bayer I</li>
+        *     <li tabindex="0">Elsie Mertz</li>
         *   </ul>
         * </div>
         * 
@@ -3877,9 +4097,9 @@ label .s-input:disabled + * {
         * <div class="s-font:30 s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Scaled</h3>
         *   <ul class="s-tabs:grow s-scale:13 s-ui:accebt">
-        *     <li tabindex="0" active>Mr. Geraldine Crooks</li>
-        *     <li tabindex="0">Juanita Gusikowski</li>
-        *     <li tabindex="0">Vernon Abernathy V</li>
+        *     <li tabindex="0" active>Ronald McCullough</li>
+        *     <li tabindex="0">Allison Wisozk</li>
+        *     <li tabindex="0">Alice Smitham</li>
         *   </ul>
         * </div>
         *
@@ -4413,15 +4633,15 @@ background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-u
             *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 1" />
-            *     <span>Forward Applications Analyst Lisa Farrell</span>
+            *     <span>Human Creative Architect Lula Bechtelar</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 2" />
-            *     <span>Direct Directives Strategist Ollie Rau III</span>
+            *     <span>Central Data Technician Vickie Swaniawski</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 3" />
-            *     <span>Direct Creative Producer Ted Mann</span>
+            *     <span>Principal Mobility Associate Delores Schamberger Jr.</span>
             *   </label>
             * </div>
             * 
@@ -4431,19 +4651,19 @@ background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-u
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors</h3>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 1" checked="checked" />
-        *     <span>Customer Operations Architect Sophie Balistreri</span>
+        *     <span>District Response Coordinator Christie Braun</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:info s-label">
         *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 2" />
-        *     <span>Senior Brand Strategist Mario Simonis</span>
+        *     <span>Central Metrics Planner Winston Graham</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:error s-label">
         *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 3" />
-        *     <span>Product Accounts Assistant Faye Marvin</span>
+        *     <span>Principal Configuration Coordinator Ronnie McGlynn</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:warning s-label">
         *     <input type="radio" disabled class="s-radio" name="radio-style-color" value="hello 4" />
-        *     <span>National Paradigm Supervisor Pam Heller</span>
+        *     <span>Investor Paradigm Planner Margie Boyle</span>
         *   </label>
         * </div>
         * 
@@ -4452,15 +4672,15 @@ background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-u
         *   <h3 class="s-color:accent s-font:30 s-mb:30">LTR Support</h3>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 1" checked="checked" />
-        *     <span>Central Accountability Architect Tina Anderson</span>
+        *     <span>Forward Implementation Administrator Virginia Davis</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 2" />
-        *     <span>Customer Marketing Agent Doyle Steuber</span>
+        *     <span>Forward Research Orchestrator Jesse Mitchell</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 3" />
-        *     <span>Internal Creative Architect Ms. Glen Lang</span>
+        *     <span>Direct Division Specialist Percy Mitchell</span>
         *   </label>
         * </div>
         * 
@@ -4469,15 +4689,15 @@ background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-u
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Scale</h3>
         *   <label class="s-mb:30 s-ui:accent s-label s-scale:07">
         *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 1" />
-        *     <span>Chief Intranet Manager Leah Reichel</span>
+        *     <span>Chief Assurance Developer Todd Thiel</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 2" checked="checked" />
-        *     <span>Future Functionality Officer Clarence Fay</span>
+        *     <span>Customer Configuration Orchestrator Penny Flatley</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label s-scale:13">
         *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 3" />
-        *     <span>Principal Markets Director Joan D'Amore</span>
+        *     <span>Legacy Assurance Producer Beulah Kuhlman</span>
         *   </label>
         * </div>
         * 
@@ -4510,15 +4730,16 @@ background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-u
 
             font-size: calc(1rem * var(--s-scale, 1));
         }
-.s-radio:disabled + * {
-                -webkit-user-select: none;
-                   -moz-user-select: none;
-                    -ms-user-select: none;
-                        user-select: none;
-                cursor: not-allowed;
-                pointer-events: none;
-                opacity: var(--s-theme-ui-radio-disabledOpacity, 0.3) !important;
+.s-radio:disabled + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
             }
+.s-radio:disabled + *:hover, .s-radio:disabled + *:focus, .s-radio:disabled + *:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-radio + *:after {
                 content: "";
                 opacity: 0;
@@ -4763,9 +4984,14 @@ label:hover > .s-radio:not(:disabled) + *:after,
                 .s-range:disabled::-ms-thumb,
                 .s-range:disabled::-webkit-slider-runnable-track,
                 .s-range:disabled::-ms-fill-lower,
-                .s-range:disabled::-ms-fill-upper {
-                cursor: not-allowed;
+                .s-range:disabled::-ms-fill-upper {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+                user-select: none !important;
                 }
+.s-range:disabled::-webkit-slider-thumb:hover, .s-range:disabled::-webkit-slider-thumb:focus, .s-range:disabled::-webkit-slider-thumb:active, .s-range:disabled::-moz-range-thumb:hover, .s-range:disabled::-moz-range-thumb:focus, .s-range:disabled::-moz-range-thumb:active, .s-range:disabled::-ms-thumb:hover, .s-range:disabled::-ms-thumb:focus, .s-range:disabled::-ms-thumb:active, .s-range:disabled::-webkit-slider-runnable-track:hover, .s-range:disabled::-webkit-slider-runnable-track:focus, .s-range:disabled::-webkit-slider-runnable-track:active, .s-range:disabled::-ms-fill-lower:hover, .s-range:disabled::-ms-fill-lower:focus, .s-range:disabled::-ms-fill-lower:active, .s-range:disabled::-ms-fill-upper:hover, .s-range:disabled::-ms-fill-upper:focus, .s-range:disabled::-ms-fill-upper:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 /**
         * @name          Select
         * @namespace          sugar.css.ui
@@ -4784,27 +5010,27 @@ label:hover > .s-radio:not(:disabled) + *:after,
             *   <h3 class="s-color:accent s-font:30 s-mb:30">solid style</h3>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <select class="s-select" name="select-style-solid">
-            *       <option value="value1">Louis Skiles</option>
-            *       <option value="value2">Evelyn Bashirian</option>
-            *       <option value="value3">Pete Moore</option>
+            *       <option value="value1">Shirley VonRueden</option>
+            *       <option value="value2">Enrique Kovacek</option>
+            *       <option value="value3">Dr. Eugene Kassulke</option>
             *     </select>
-            *     <span>Forward Group Designer Elena Treutel</span>
+            *     <span>Future Creative Supervisor Ms. Archie Schultz</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <select class="s-select" name="select-style-solid">
-            *       <option value="value1">Roxanne Shanahan</option>
-            *       <option value="value2">Joan Gislason</option>
-            *       <option value="value3">Antonio Shanahan</option>
+            *       <option value="value1">Cory Conroy</option>
+            *       <option value="value2">Julian Reichert</option>
+            *       <option value="value3">Ismael Erdman</option>
             *     </select>
-            *     <span>Central Creative Executive Roberta Schroeder</span>
+            *     <span>Customer Accounts Planner Lucia Trantow</span>
             *   </label>
             *   <label class="s-mb:30 s-ui:accent s-label">
             *     <select class="s-select" name="select-style-solid">
-            *       <option value="value1">Carl Keeling DVM</option>
-            *       <option value="value2">Miss Latoya Welch</option>
-            *       <option value="value3">Julius Leuschke</option>
+            *       <option value="value1">Lori Halvorson</option>
+            *       <option value="value2">Krista Skiles</option>
+            *       <option value="value3">Teresa Wiegand</option>
             *     </select>
-            *     <span>Dynamic Factors Engineer Terry Sporer</span>
+            *     <span>International Accountability Specialist Armando Hilpert</span>
             *   </label>
             * </div>
             * 
@@ -4814,35 +5040,35 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Colors</h3>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <select class="s-select" name="select-color-accent">
-        *       <option value="value1">Tomas Muller</option>
-        *       <option value="value2">Wendell Walker</option>
-        *       <option value="value3">Jody Schulist</option>
+        *       <option value="value1">Miss Linda Schmidt</option>
+        *       <option value="value2">Nicolas Bashirian</option>
+        *       <option value="value3">Leslie Conn</option>
         *     </select>
-        *     <span>Senior Markets Coordinator Bruce Hegmann</span>
+        *     <span>Regional Optimization Designer Miss Percy Watsica</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:complementary s-label">
         *     <select class="s-select" name="select-color-complementary">
-        *       <option value="value1">Israel Gerlach</option>
-        *       <option value="value2">Darin O'Hara</option>
-        *       <option value="value3">Lee Bauch</option>
+        *       <option value="value1">Louise Labadie</option>
+        *       <option value="value2">Travis Witting</option>
+        *       <option value="value3">Mr. Pete Bosco</option>
         *     </select>
-        *     <span>Dynamic Division Architect Henry Feil</span>
+        *     <span>Legacy Security Architect Jim Corwin</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:error s-label">
         *     <select class="s-select" name="select-color-error">
-        *       <option value="value1">Patsy Wilderman Jr.</option>
-        *       <option value="value2">Dominic Nikolaus</option>
-        *       <option value="value3">Marguerite Shanahan</option>
+        *       <option value="value1">Kellie Aufderhar</option>
+        *       <option value="value2">Pamela Spencer</option>
+        *       <option value="value3">Santos Smitham</option>
         *     </select>
-        *     <span>Legacy Group Designer Cora Beatty</span>
+        *     <span>Investor Solutions Manager Myra Bradtke</span>
         *   </label>
         *   <label class="s-mb:30 s-label">
         *     <select class="s-select" name="select-color-error" disabled>
-        *       <option value="value1">Angel Goodwin</option>
-        *       <option value="value2">Tricia Tremblay</option>
-        *       <option value="value3">Adrienne Roberts PhD</option>
+        *       <option value="value1">Domingo Skiles</option>
+        *       <option value="value2">Darla Trantow</option>
+        *       <option value="value3">Tracey Ferry</option>
         *     </select>
-        *     <span>Global Infrastructure Agent Jill Hand</span>
+        *     <span>Regional Usability Facilitator Lela Dicki</span>
         *   </label>
         * </div>
         * 
@@ -4851,27 +5077,27 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   <h3 class="s-color:accent s-font:30 s-mb:30">RTL Support</h3>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <select class="s-select" name="select-color-accent">
-        *       <option value="value1">Miss Eddie Ziemann</option>
-        *       <option value="value2">Jo McKenzie</option>
-        *       <option value="value3">Dr. Derek Keebler</option>
+        *       <option value="value1">Dr. Jonathon Cummerata</option>
+        *       <option value="value2">Miss Fredrick Wolf</option>
+        *       <option value="value3">Lucia Berge</option>
         *     </select>
-        *     <span>Global Accounts Consultant Lydia Doyle</span>
+        *     <span>Dynamic Accountability Developer Victoria Mayert</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <select class="s-select" name="select-color-accent">
-        *       <option value="value1">Inez Russel PhD</option>
-        *       <option value="value2">Cameron Hickle</option>
-        *       <option value="value3">Shaun Beer</option>
+        *       <option value="value1">Ervin Schamberger</option>
+        *       <option value="value2">Edgar Monahan</option>
+        *       <option value="value3">Claude Schumm</option>
         *     </select>
-        *     <span>International Identity Engineer Jody Hermiston</span>
+        *     <span>Central Accountability Executive Miss Hugh Quigley</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <select class="s-select" name="select-color-accent">
-        *       <option value="value1">Amos Schuster</option>
-        *       <option value="value2">Ms. Marion Sporer</option>
-        *       <option value="value3">Annette Koss</option>
+        *       <option value="value1">Perry Ruecker</option>
+        *       <option value="value2">Preston Harber</option>
+        *       <option value="value3">Christine Lakin</option>
         *     </select>
-        *     <span>Corporate Infrastructure Specialist Melinda Wilderman</span>
+        *     <span>Corporate Identity Officer Jared Hayes</span>
         *   </label>
         * </div>
         * 
@@ -4880,27 +5106,27 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   <h3 class="s-color:accent s-font:30 s-mb:30">Scale</h3>
         *   <label class="s-mb:30 s-ui:accent s-label s-scale:07">
         *     <select class="s-select" name="select-color-accent">
-        *       <option value="value1">Jimmy Dietrich</option>
-        *       <option value="value2">Clint Buckridge</option>
-        *       <option value="value3">Emily Hyatt</option>
+        *       <option value="value1">Anthony Cronin</option>
+        *       <option value="value2">Orville Gleason</option>
+        *       <option value="value3">Neil Volkman</option>
         *     </select>
-        *     <span>Internal Factors Coordinator Marjorie Schmeler</span>
+        *     <span>Global Usability Manager Mr. Ivan Prosacco</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label">
         *     <select class="s-select" name="select-color-accent">
-        *       <option value="value1">Miss Robert Stehr</option>
-        *       <option value="value2">Alfonso Goodwin</option>
-        *       <option value="value3">Willis Heathcote</option>
+        *       <option value="value1">Alexis Ortiz</option>
+        *       <option value="value2">Jennifer Nicolas</option>
+        *       <option value="value3">Bernice Klocko PhD</option>
         *     </select>
-        *     <span>Legacy Branding Engineer Elsa Price</span>
+        *     <span>Forward Group Consultant Eleanor Shields</span>
         *   </label>
         *   <label class="s-mb:30 s-ui:accent s-label s-scale:13">
         *     <select class="s-select" name="select-color-accent">
-        *       <option value="value1">Fred Dach</option>
-        *       <option value="value2">Emmett Wyman</option>
-        *       <option value="value3">Delbert Walsh</option>
+        *       <option value="value1">Winston Halvorson</option>
+        *       <option value="value2">Kristopher Adams</option>
+        *       <option value="value3">Lionel Kassulke</option>
         *     </select>
-        *     <span>Central Web Liaison Stuart Nikolaus</span>
+        *     <span>Dynamic Web Officer Johnathan Kuhn</span>
         *   </label>
         * </div>
         * 
@@ -4973,24 +5199,26 @@ background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color
 border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;
 color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
 }
-.s-select:disabled {pointer-events:none !important;
+.s-select:disabled, .s-select[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
-    
-opacity: var(--s-theme-ui-select-disabledOpacity, 0.3);
 }
-label .s-select:disabled + * {
-                pointer-events:none;
-                opacity: var(--s-theme-ui-select-disabledOpacity, 0.3);
-                cursor: not-allowed;
-                -webkit-user-select: none;
-                   -moz-user-select: none;
-                    -ms-user-select: none;
-                        user-select: none;
+.s-select:disabled:hover, .s-select:disabled:focus, .s-select:disabled:active, .s-select[disabled]:hover, .s-select[disabled]:focus, .s-select[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+label .s-select:disabled + *, label .s-select[disabled] + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
             }
+label .s-select:disabled + *:hover, label .s-select:disabled + *:focus, label .s-select:disabled + *:active, label .s-select[disabled] + *:hover, label .s-select[disabled] + *:focus, label .s-select[disabled] + *:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-select{
                 overflow: hidden;
 }
@@ -5042,20 +5270,20 @@ label .s-select:disabled + * {
             * <div class="s-font:30 s-mb:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
             *   <label class="s-mb:30 s-label">
-            *     Future Metrics Planner Alexander Bayer
-            *     <input type="checkbox"  class="s-switch" />
+            *     Chief Metrics Manager Fernando Lehner
+            *     <input type="checkbox" checked class="s-switch" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Dynamic Paradigm Consultant Emilio Wyman
-            *     <input type="checkbox"  class="s-switch s-ui:accent" />
+            *     Legacy Factors Assistant Ramon Block
+            *     <input type="checkbox" checked class="s-switch s-ui:accent" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Chief Security Director Rebecca Jones DVM
-            *     <input type="checkbox"  class="s-switch s-ui:complementary" />
+            *     Customer Program Orchestrator Mark Larkin IV
+            *     <input type="checkbox" checked class="s-switch s-ui:complementary" />
             *   </label>
             *   <label class="s-mb:30 s-label">
-            *     Product Accountability Developer Wallace Cole
-            *     <input type="checkbox"  class="s-switch s-ui:error" />
+            *     International Usability Engineer Ms. Melanie Jaskolski
+            *     <input type="checkbox" checked class="s-switch s-ui:error" />
             *   </label>
             * </div>
             * 
@@ -5065,15 +5293,15 @@ label .s-select:disabled + * {
         * <div class="s-mb:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Scales</h3>
         *   <label class="s-mb:30 s-label s-scale:05">
-        *     National Creative Analyst Dr. Erick Muller
-        *     <input type="checkbox" checked class="s-switch s-ui:accent" />
+        *     Regional Tactics Analyst Stanley Leannon
+        *     <input type="checkbox"  class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mb:30 s-label s-scale:10">
-        *     Central Interactions Producer Angel Reilly
-        *     <input type="checkbox" checked class="s-switch s-ui:accent" />
+        *     Investor Directives Manager Mrs. Jacqueline Stroman
+        *     <input type="checkbox"  class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mb:30 s-label s-scale:15">
-        *     Human Program Supervisor Bernard Schowalter Jr.
+        *     Internal Factors Supervisor Ryan Wiza
         *     <input type="checkbox"  class="s-switch s-ui:accent" />
         *   </label>
         * </div>
@@ -5196,9 +5424,15 @@ label .s-select:disabled + * {
             );
         }
 .s-switch:disabled {
-            cursor: not-allowed;
-            --thumb-color: transparent;
-            opacity: .3;
+            --thumb-color: transparent;opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
+        }
+.s-switch:disabled:hover, .s-switch:disabled:focus, .s-switch:disabled:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         }
 /**
         * @name           s-table
@@ -5371,24 +5605,26 @@ background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color
 border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid 1px;
 color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-foreground-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-foreground-a, 1));
 }
-.s-terminal:disabled {pointer-events:none !important;
+.s-terminal:disabled, .s-terminal[disabled] {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
-    
-opacity: var(--s-theme-ui-terminal-disabledOpacity, 0.3);
 }
-label .s-terminal:disabled + * {
-                pointer-events:none;
-                opacity: var(--s-theme-ui-terminal-disabledOpacity, 0.3);
-                cursor: not-allowed;
-                -webkit-user-select: none;
-                   -moz-user-select: none;
-                    -ms-user-select: none;
-                        user-select: none;
+.s-terminal:disabled:hover, .s-terminal:disabled:focus, .s-terminal:disabled:active, .s-terminal[disabled]:hover, .s-terminal[disabled]:focus, .s-terminal[disabled]:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+label .s-terminal:disabled + *, label .s-terminal[disabled] + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
             }
+label .s-terminal:disabled + *:hover, label .s-terminal:disabled + *:focus, label .s-terminal:disabled + *:active, label .s-terminal[disabled] + *:hover, label .s-terminal[disabled] + *:focus, label .s-terminal[disabled] + *:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 .s-terminal:before {
           content: '$';
           color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0) + var(--s-theme-color-complementary-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + var(--s-theme-color-complementary-lightness-offset, 0)) * 1%),var(--s-theme-color-complementary-a, 1));
@@ -5420,7 +5656,7 @@ label .s-terminal:disabled + * {
         *   <span class="s-tooltip-container:active">
         *       <a class="s-btn s-mr:20 s-mb:20">Hello</a>
         *       <div class="s-tooltip:inline-end s-ui:accent">
-        *           International Markets Engineer Joel Carroll DDS
+        *           Product Creative Facilitator Miss Tanya Stanton
         *       </div>
         *   </span>
         * </div>
@@ -5430,25 +5666,25 @@ label .s-terminal:disabled + * {
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Block start (default)</a>
         *       <div class="s-tooltip">
-        *           Corporate Configuration Associate George Senger Jr.
+        *           Investor Creative Technician Jody Medhurst
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Inline end</a>
         *       <div class="s-tooltip:inline-end s-ui:accent">
-        *           Internal Usability Specialist Elaine Gleason
+        *           Dynamic Web Facilitator Andy McClure
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Block end</a>
         *       <div class="s-tooltip:block-end s-ui:complementary">
-        *           Customer Branding Orchestrator Bessie Gorczany
+        *           Regional Assurance Officer Stuart Reinger
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Inline start</a>
         *       <div class="s-tooltip:inline-start s-ui:error">
-        *           Principal Division Officer Lonnie Langworth
+        *           Dynamic Marketing Manager Mrs. Carole Nolan
         *       </div>
         *   </span>
         * </div>
@@ -5458,25 +5694,25 @@ label .s-terminal:disabled + * {
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Accent</a>
         *       <div class="s-tooltip s-ui:accent">
-        *           Principal Intranet Officer Gail Murphy
+        *           Product Directives Strategist Brent Considine II
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Complementary</a>
         *       <div class="s-tooltip s-ui:complementary">
-        *           Forward Data Officer Barry Roberts
+        *           Dynamic Marketing Administrator Dewey Ruecker
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Error</a>
         *       <div class="s-tooltip s-ui:error">
-        *           Dynamic Quality Developer Melissa Renner I
+        *           Investor Quality Officer Dorothy Lebsack
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Info</a>
         *       <div class="s-tooltip s-ui:info">
-        *           Future Branding Administrator Lindsey Ruecker
+        *           Senior Usability Technician Irving Dietrich
         *       </div>
         *   </span>
         * </div>
@@ -19125,10 +19361,10 @@ right: 0;
  * @cssClass      s-font:code       Apply the code font on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mb:30">Future Operations Representative Courtney Roberts</h1>
- * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mb:30">Lead Intranet Engineer Grant Hammes</h1>
- * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mb:30">International Program Specialist Loretta Schinner Sr.</h1>
- * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mb:30">National Optimization Developer Melissa Bogan</h1>
+        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mb:30">Product Solutions Orchestrator Jackie Lind</h1>
+ * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mb:30">Dynamic Mobility Technician Darla Franecki</h1>
+ * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mb:30">Global Identity Engineer Adrienne Fay</h1>
+ * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mb:30">Future Implementation Consultant Saul Smith</h1>
         * 
         * @example        css
         * .my-font-default {
@@ -19246,19 +19482,19 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
  * @cssClass      s-font:default       Apply the default font size on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mb:30">Lead Solutions Architect Dan Wisozk</h1>
- * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mb:30">Central Communications Designer Courtney Wiegand</h1>
- * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mb:30">Investor Security Analyst Latoya Nolan DDS</h1>
- * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mb:30">Direct Program Consultant Erika Wiza</h1>
- * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mb:30">Future Intranet Officer Vivian Donnelly</h1>
- * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mb:30">Principal Marketing Specialist Glenda Padberg</h1>
- * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mb:30">Internal Mobility Orchestrator Mrs. Pablo Hand</h1>
- * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mb:30">Regional Assurance Engineer Gwendolyn Jerde</h1>
- * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mb:30">Customer Tactics Administrator Loretta Gleason</h1>
- * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mb:30">Product Assurance Officer Latoya Pacocha</h1>
- * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mb:30">Customer Group Facilitator Gustavo Klein</h1>
- * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mb:30">Dynamic Configuration Strategist Joey Luettgen</h1>
- * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mb:30">Future Solutions Developer Tommy Stracke IV</h1>
+        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mb:30">District Data Executive Tamara Balistreri DDS</h1>
+ * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mb:30">Dynamic Solutions Executive Sue Goldner III</h1>
+ * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mb:30">Dynamic Security Coordinator Andrew Jacobs</h1>
+ * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mb:30">Chief Paradigm Analyst Lynn Kirlin</h1>
+ * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mb:30">Future Interactions Representative Mathew Labadie</h1>
+ * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mb:30">Direct Research Producer Margaret Berge</h1>
+ * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mb:30">Future Metrics Designer Orville Jakubowski</h1>
+ * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mb:30">Chief Accountability Designer Mrs. Diana Ratke</h1>
+ * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mb:30">Direct Interactions Specialist Lee Kuhlman</h1>
+ * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mb:30">Legacy Configuration Designer Carlos Hilpert</h1>
+ * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mb:30">Legacy Division Associate Rafael Hirthe</h1>
+ * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mb:30">Customer Security Executive Homer Hahn</h1>
+ * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mb:30">National Web Technician Johnnie Luettgen</h1>
         * 
         * @example        css
         * .my-font-0 {
@@ -19488,12 +19724,12 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
         * @example        html
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset size</h3>
         * <div class="s-font:60 s-mb:30">
-        *   Investor Infrastructure Associate <span class="s-font:reset-size">Luke Daugherty</span>
+        *   National Solutions Executive <span class="s-font:reset-size">Meredith Gerlach I</span>
         * </div>
         * 
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset family</h3>
         * <div class="s-font:quote s-font:50">
-        *   Chief Paradigm Specialist <span class="s-font:reset-family">Gerard Christiansen</span>
+        *   Chief Data Designer <span class="s-font:reset-family">Anne Spinka</span>
         * </div>
         * 
         * @since      2.0.0
@@ -19739,13 +19975,16 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
             * @since        2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
-.s-disabled {pointer-events:none !important;
+.s-disabled {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
             }
+.s-disabled:hover, .s-disabled:focus, .s-disabled:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
 /**
             * @name          s-flex
             * @namespace          sugar.css.flex
@@ -29068,6 +29307,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-transition-default: all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-transition-fast: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-helpers-clearfix-default: overflow;
+--s-theme-helpers-disabled-opacity: 0.3;
 --s-theme-layout-container-default-max-width: 1280px;
 --s-theme-layout-container-full-max-width: none;
 --s-theme-layout-layout-1: 1;
@@ -29276,7 +29516,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-default-borderRadius: 6px;
 --s-theme-ui-default-borderWidth: 1px;
 --s-theme-ui-default-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-default-disabledOpacity: 0.3;
 --s-theme-ui-default-defaultColor: accent;
 --s-theme-ui-default-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
@@ -29286,7 +29525,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-form-borderRadius: 6px;
 --s-theme-ui-form-borderWidth: 1px;
 --s-theme-ui-form-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-form-disabledOpacity: 0.3;
 --s-theme-ui-form-focusOutline: true;
 --s-theme-ui-form-defaultColor: accent;
 --s-theme-ui-form-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
@@ -29302,7 +29540,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-button-borderWidth: 1px;
 --s-theme-ui-button-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-button-focusOutline: true;
---s-theme-ui-button-disabledOpacity: 0.3;
 --s-theme-ui-button-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-button-defaultStyle: solid;
@@ -29314,7 +29551,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-colorPicker-borderWidth: 1px;
 --s-theme-ui-colorPicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-colorPicker-focusOutline: true;
---s-theme-ui-colorPicker-disabledOpacity: 0.3;
 --s-theme-ui-colorPicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-datePicker-paddingInline: 0.75em;
@@ -29323,7 +29559,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-datePicker-borderWidth: 1px;
 --s-theme-ui-datePicker-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-datePicker-focusOutline: true;
---s-theme-ui-datePicker-disabledOpacity: 0.3;
 --s-theme-ui-datePicker-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-paddingInline: 0.75em;
@@ -29332,7 +29567,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-input-borderWidth: 1px;
 --s-theme-ui-input-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-input-focusOutline: true;
---s-theme-ui-input-disabledOpacity: 0.3;
 --s-theme-ui-input-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-input-defaultStyle: solid;
@@ -29342,7 +29576,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-radio-borderWidth: 1px;
 --s-theme-ui-radio-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-radio-focusOutline: true;
---s-theme-ui-radio-disabledOpacity: 0.3;
 --s-theme-ui-radio-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-radio-defaultStyle: solid;
@@ -29352,7 +29585,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-checkbox-borderWidth: 1px;
 --s-theme-ui-checkbox-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-checkbox-focusOutline: true;
---s-theme-ui-checkbox-disabledOpacity: 0.3;
 --s-theme-ui-checkbox-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-checkbox-defaultColor: accent;
@@ -29363,7 +29595,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-range-borderWidth: 1px;
 --s-theme-ui-range-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-range-focusOutline: true;
---s-theme-ui-range-disabledOpacity: 0.3;
 --s-theme-ui-range-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-range-defaultStyle: solid;
@@ -29372,7 +29603,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-label-borderRadius: 6px;
 --s-theme-ui-label-borderWidth: 1px;
 --s-theme-ui-label-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-label-disabledOpacity: 0.3;
 --s-theme-ui-label-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-label-defaultStyle: inline;
@@ -29382,7 +29612,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-select-borderWidth: 1px;
 --s-theme-ui-select-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-select-focusOutline: true;
---s-theme-ui-select-disabledOpacity: 0.3;
 --s-theme-ui-select-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-select-defaultStyle: solid;
@@ -29390,7 +29619,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-switch-borderWidth: 1px;
 --s-theme-ui-switch-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
 --s-theme-ui-switch-focusOutline: true;
---s-theme-ui-switch-disabledOpacity: 0.3;
 --s-theme-ui-switch-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-switch-defaultStyle: solid;
@@ -29426,7 +29654,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-terminal-borderRadius: 6px;
 --s-theme-ui-terminal-borderWidth: 1px;
 --s-theme-ui-terminal-transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
---s-theme-ui-terminal-disabledOpacity: 0.3;
 --s-theme-ui-terminal-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-terminal-defaultColor: accent;

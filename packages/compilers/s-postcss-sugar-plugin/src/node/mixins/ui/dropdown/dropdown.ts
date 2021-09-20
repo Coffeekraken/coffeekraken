@@ -68,7 +68,7 @@ export default function ({
           cursor: auto;
           z-index: 10;
 
-            opacity: 0;
+           /**  opacity: 0; */
             pointer-events: none;
 
             *:focus + &,
@@ -80,6 +80,11 @@ export default function ({
             &:focus-within {
                 opacity: 1;
                 pointer-events: all;
+            }
+
+            @sugar.state.disabled {
+                @sugar.disabled;
+                opacity: 0 !important;
             }
       `);
     }
@@ -95,8 +100,8 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-                    background-color: sugar.color(ui, background);
-                    color: sugar.color(ui, backgroundForeground);
+                    background-color: sugar.color(ui);
+                    color: sugar.color(ui, foreground);
                     padding-inline: sugar.scalable(sugar.theme(ui.dropdown.paddingInline));
                     padding-block: sugar.scalable(sugar.theme(ui.dropdown.paddingBlock));
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(ui, border);

@@ -1591,6 +1591,7 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.default.depth]',
                 defaultStyle: 'solid',
+                defaultColor: 'ui',
             },
             list: {
                 paddingInline: '[theme.ui.default.paddingInline]',

@@ -50,6 +50,8 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
         styles: ['solid', 'gradient', 'outline', 'text'],
         defaultStyle: 'solid',
+        defaultColor: 'ui',
+        scope: ['bare', 'lnf', 'tf', 'vr'],
         ...params,
     };
 

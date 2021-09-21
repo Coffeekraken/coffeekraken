@@ -46,7 +46,7 @@ export default function ({
         * @cssClass             s-tooltip\:interactive          Allow the user to interact with the tooltip
         * 
         * @example        html
-        * <div class="s-font\:30 s-mb\:50">
+        * <div class="s-font:30 s-mbe:50">
         *   <span class="s-tooltip-container\:active">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Hello</a>
         *       <div class="s-tooltip\:inline-end s-ui\:accent">
@@ -55,8 +55,8 @@ export default function ({
         *   </span>
         * </div>
         * 
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Positions</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Positions</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Block start (default)</a>
         *       <div class="s-tooltip">
@@ -83,8 +83,8 @@ export default function ({
         *   </span>
         * </div>
         * 
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Colors (sample)</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (sample)</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Accent</a>
         *       <div class="s-tooltip s-ui\:accent">
@@ -111,8 +111,8 @@ export default function ({
         *   </span>
         * </div>
         * 
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Interactions</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Interactions</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">I'm not interactive</a>
         *       <div class="s-tooltip">

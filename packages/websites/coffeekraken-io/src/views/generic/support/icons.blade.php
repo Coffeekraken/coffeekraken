@@ -2,7 +2,7 @@
     @foreach($supports as $support)
 
         <span class="s-tooltip-container">
-            <i class="s-icon:support-{{ $support->name }} s-mr:10"></i>
+            <i class="s-icon:support-{{ $support->name }} s-mie:10"></i>
             <div class="s-tooltip s-ui:success">
                 @if ($support->description)
                     {{ $support->description }}

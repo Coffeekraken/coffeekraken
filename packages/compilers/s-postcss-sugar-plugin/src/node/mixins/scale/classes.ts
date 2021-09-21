@@ -59,7 +59,7 @@ export default function ({
   * all the properties that uses the function "sugar.scalable" to set his value.
   * 
   * @example        html
-  * <h1 class="s-font\:40 s-mb\:30">I'm a cool title</h1>
+  * <h1 class="s-font\:40 s-mbe:30">I'm a cool title</h1>
   * <h1 class="s-font\:40 s-scale\:15">I'm a cool scaled title</h1>
   * 
   * since           2.0.0

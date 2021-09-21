@@ -1,11 +1,11 @@
-<section id="features-sugar" class="s-container s-py:100">
+<section id="features-sugar" class="s-container s-pb:100">
     <div class="s-grid:12:gutter-x:gutter-between">
         <div>
-            <h3 class="s-typo:h3 s-mb:30">
+            <h3 class="s-typo:h3 s-mbe:30">
                 Sugar toolkit
                 <br>as good as a... <span class="s-color:accent">Sugar</span>
             </h3>
-            <p class="s-typo:p s-mb:50">
+            <p class="s-typo:p s-mbe:50">
                 We all know as developer that a lot of our precious time is taken by the search of
                 a package that cover our small need like for example a function that merge two objects recursively.<br>
                 You will say:
@@ -30,9 +30,9 @@
             Some example of what <span class="s-color:accent">Sugar</span> has to offer
         </h4>
 
-        <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:112:gutter-x:gutter-between:align-center s-pb:50">
             <div>
-                <div class="s-ml:-50">
+                <div class="s-mis:-50">
                     @include('generic.code.example', ['examples' => [
                         'bash' => '# Get our ip address
     sugar network.ip
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div>
-                <h5 class="s-typo:h5 s-mb:30">
+                <h5 class="s-typo:h5 s-mbe:30">
                     A coherant <span class="s-color:accent">CLI</span> with some cool features
                 </h5>
                 <p class="s-typo:p ">
@@ -57,9 +57,9 @@
             </div>
         </div>
 
-        <div class="s-grid:122:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:122:gutter-x:gutter-between:align-center s-pb:50">
             <div>
-                <h5 class="s-typo:h5 s-mb:30">
+                <h5 class="s-typo:h5 s-mbe:30">
                     querySelector<span class="s-color:accent">Live</span>
                 </h5>
                 <p class="s-typo:p ">
@@ -70,7 +70,7 @@
             </div>
             <div>
 
-                <div class="s-mr:-100">
+                <div class="s-mie:-100">
                     @include('generic.code.example', ['examples' => [
                         'js' => 'import querySelectorLive from \'@@coffeekraken/sugar/js/dom/query/querySelectorLive\';
 querySelectorLive(\'.my-cool-component\', (elm) => {
@@ -81,9 +81,9 @@ querySelectorLive(\'.my-cool-component\', (elm) => {
             </div>
         </div>
 
-        <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:112:gutter-x:gutter-between:align-center s-pb:50">
             <div>
-                <div class="s-ml:-50">
+                <div class="s-mis:-50">
                     @include('generic.code.example', ['examples' => [
                         'js' => 'import base64 from \'@@coffeekraken/sugar/shared/crypt/base64\';
 import md5 from \'@@coffeekraken/sugar/shared/crypt/md5\';
@@ -93,7 +93,7 @@ md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
                 </div>
             </div>
             <div>
-                <h5 class="s-typo:h5 s-mb:30">
+                <h5 class="s-typo:h5 s-mbe:30">
                     md5/<span class="s-color:accent">base64</span>/etc...
                 </h5>
                 <p class="s-typo:p ">
@@ -103,9 +103,9 @@ md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
             </div>
         </div>
 
-        <div class="s-grid:122:gutter-x:gutter-between:align-center s-py:50">
+        <div class="s-grid:122:gutter-x:gutter-between:align-center s-pb:50">
             <div>
-                <h5 class="s-typo:h5 s-mb:30">
+                <h5 class="s-typo:h5 s-mbe:30">
                     is(<span class="s-color:accent">Mobile</span>,<span class="s-color:accent">Color</span>,<span class="s-color:accent">PlainObject</span>, etc...)
                 </h5>
                 <p class="s-typo:p ">
@@ -114,7 +114,7 @@ md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
                 </p>
             </div>
             <div>
-                <div class="s-mr:-50">
+                <div class="s-mie:-50">
                     @include('generic.code.example', ['examples' => [
                         'js' => 'iimport isEmail from \'@@coffeekraken/sugar/shared/is/email\';
 import isColor from \'@@coffeekraken/sugar/shared/is/color\';
@@ -132,7 +132,7 @@ isColor(\'rgba(10,20,30,1)\'); // true'
     </div>
 
     <div class="s-text:center s-pt:50">
-        <p class="s-typo:p-lead s-mx:auto s-mb:30">
+        <p class="s-typo:p-lead s-mi:auto s-mbe:30">
             This is just a sneak peak of what you can leverage in the sugar toolkit.<br>
             Don't be afraid, as usual you can take from it only what you need and <span class="s-color:accent">learn the rest step by step</span>.
         </p>

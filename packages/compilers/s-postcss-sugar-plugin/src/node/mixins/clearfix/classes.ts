@@ -83,11 +83,11 @@ export default function ({
         ${clearfixes
             .map((clearfixName) => {
                 return ` * <!-- ${clearfixName} style -->
-            * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${clearfixName}clearfix</h3>
+            * <div class="s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${clearfixName}clearfix</h3>
             *   <div class="s-clearfix${
-                clearfixName === finalParams.defaultClearfix ? `` : `\:${clearfixName}`
-            } s-bg\:ui">
+                clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`
+            } s-bg:ui">
             *       <img src="https://picsum.photos/200/200" style="float: right" />
             *   </div>
             * </div>
@@ -112,7 +112,7 @@ export default function ({
                 * 
                 * @example        html
                 * <div class="s-clearfix${
-                    clearfixName === finalParams.defaultClearfix ? '' : `\:${clearfixName}`
+                    clearfixName === finalParams.defaultClearfix ? '' : `:${clearfixName}`
                 }">I'm a cool clearfix element</div>
                 * 
                 * @since        2.0.0

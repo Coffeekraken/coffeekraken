@@ -32,30 +32,30 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *
  * @example         html
  * <form action="." method="get">
- * <h3 class="s-color\:accent s-font\:30 s-mb\:30">Simple fields</h3>
- * <label class="s-label s-mb\:30" s-form-validate email>
+ * <h3 class="s-color:accent s-font:30 s-mbe:30">Simple fields</h3>
+ * <label class="s-label s-mbe:30" s-form-validate email>
  *    <input type="text" class="s-input s-width\:60" placeholder="olivier.bossel@coffeekraken.io" />
  *    Email address
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate domain>
+ * <label class="s-label s-mbe:30" s-form-validate domain>
  *    <input type="text" class="s-input s-width\:60" placeholder="coffeekraken.io" />
  *    Domain name
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate alphanum>
+ * <label class="s-label s-mbe:30" s-form-validate alphanum>
  *    <input type="text" class="s-input s-width\:60" placeholder="a-zA-Z0-9" />
  *    Alphanumeric
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate credit-card>
+ * <label class="s-label s-mbe:30" s-form-validate credit-card>
  *    <input type="text" class="s-input s-width\:60" placeholder="340716737808634" />
  *    Credit card
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate min="3" max="6">
+ * <label class="s-label s-mbe:30" s-form-validate min="3" max="6">
  *    <input type="text" class="s-input s-width\:60" placeholder="3 to 6" />
  *    Min and max
  * </label>
  *
- * <h3 class="s-color\:accent s-font\:30 s-mb\:30">Complexe fields</h3>
- * <label class="s-label s-mb\:30" s-form-validate>
+ * <h3 class="s-color:accent s-font:30 s-mbe:30">Complexe fields</h3>
+ * <label class="s-label s-mbe:30" s-form-validate>
  *    <select class="s-select s-width\:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
@@ -63,7 +63,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *    </select>
  *    Select
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate min="2" max="2">
+ * <label class="s-label s-mbe:30" s-form-validate min="2" max="2">
  *    <select multiple class="s-select s-width\:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
@@ -71,15 +71,15 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *    </select>
  *    Multiple select
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate date>
+ * <label class="s-label s-mbe:30" s-form-validate date>
  *    <s-date-picker name="my-cool-date" placeholder="2021-09-16" class="s-width\:60"></s-date-picker>
  *    Date
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate min="25" max="75">
+ * <label class="s-label s-mbe:30" s-form-validate min="25" max="75">
  *    <s-range class="s-width\:60" min="0" max="100" tooltip></s-range>
  *    Value between 25 and 75
  * </label>
- * <label class="s-label s-mb\:30" s-form-validate min="2" max="2">
+ * <label class="s-label s-mbe:30" s-form-validate min="2" max="2">
  *      <div class="s-flex s-width\:60">
  *         <label class="s-label s-mb\:20">
  *            <input type="checkbox" class="s-checkbox" value="value 1" />
@@ -97,8 +97,8 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *      Choose at least 2 items
  * </label>
  *
- * <h3 class="s-color\:accent s-font\:30 s-mb\:30">Custom validation</h3>
- * <label class="s-label s-mb\:30" s-form-validate coffeekraken>
+ * <h3 class="s-color:accent s-font:30 s-mbe:30">Custom validation</h3>
+ * <label class="s-label s-mbe:30" s-form-validate coffeekraken>
  *    <input type="text" class="s-input s-width\:60" placeholder="coffeekraken" />
  *    Try taping "coffeekraken"
  * </label>

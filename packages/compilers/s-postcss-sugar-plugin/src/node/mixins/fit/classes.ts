@@ -79,9 +79,9 @@ export default function ({
         ${fitSizes
             .map((fitSizeName) => {
                 return ` * <!-- ${fitSizeName} style -->
-            * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${fitSizeName} fit size</h3>
-            *   <div class="s-ratio\:16-9 s-bg\:ui">
+            * <div class="s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${fitSizeName} fit size</h3>
+            *   <div class="s-ratio\:16-9 s-bg:ui">
             *       <img class="s-fit\:${fitSizeName}" src="https://picsum.photos/1000/1000" />
             *   </div>
             * </div>
@@ -105,7 +105,7 @@ export default function ({
                 * This class allows you to apply a "<yellow>${fitSizeName}</yellow>" fit size to any HTMLElement. Work best on images and videos
                 * 
                 * @example        html
-                * <div class="s-ratio\:16-9 s-bg\:ui">
+                * <div class="s-ratio\:16-9 s-bg:ui">
                 *       <img class="s-fit\:${fitSizeName} src="https://picsum.photos/200/200" />
                 *   </div>
                 * 

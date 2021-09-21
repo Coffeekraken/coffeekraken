@@ -3,7 +3,7 @@
     <div class="s-grid:12 s-container">
         <div>
 
-            <h2 class="s-typo:h2 s-mb:50">
+            <h2 class="s-typo:h2 s-mbe:50">
                 Built-in<br>recipes
             </h2>
 
@@ -13,7 +13,7 @@
                 </span> is the term used by Coffeekraken to define
                 <span class="s-color:complementary">project template</span>.
             </p>
-            <p class="s-typo:p s-mb:50">
+            <p class="s-typo:p s-mbe:50">
                 <br>
                 You can check bellow the build-in and official Coffeekraken recipes available
                 and ready to use. Each recipe comes with the <span class="s-color:accent">development environment</span>, the <span class="s-color:accent">production testing environment</span>,

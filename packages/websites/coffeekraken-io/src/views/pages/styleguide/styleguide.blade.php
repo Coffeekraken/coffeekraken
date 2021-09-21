@@ -14,7 +14,7 @@
 
     <div id="styleguide">
 
-        {{-- <section class="__preview s-py:100 s-bg:main-surface">
+        {{-- <section class="__preview s-pb:100 s-bg:main-surface">
 
             <div class="s-container">
 
@@ -87,9 +87,9 @@
 
             <div class="s-grid:1222:gutter-between:gutter-50">
 
-                <nav class="__nav s-py:50">
+                <nav class="__nav s-pb:50">
 
-                    <h5 class="s-typo:h5 s-mb:20">
+                    <h5 class="s-typo:h5 s-mbe:20">
                         Styleguide
                     </h5>
 
@@ -98,7 +98,7 @@
                     
                 </nav>
 
-                <div class="__content s-py:50 s-rhythm:vertical s-format:text">
+                <div class="__content s-pb:50 s-rhythm:vertical s-format:text">
 
                     @include('pages.styleguide.partials.block', ['block' => $firstBlock, 'isFirst' => true])
 

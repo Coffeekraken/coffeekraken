@@ -54,7 +54,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-badge${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} badge style`;
             })
             .join('\n')}
@@ -66,8 +66,8 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font\:40 s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
+            * <div class="s-font\:40 s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb\:20">${style} style</h3>
             *   <a class="s-badge\:${style} s-mr\:20">Say hello!</a>
             *   <a class="s-badge\:${style} s-mr\:20 s-ui\:accent">Say hello!</a>
             *   <a class="s-badge\:${style} s-mr\:20 s-ui\:complementary">Say hello!</a>
@@ -78,8 +78,8 @@ export default function ({
             .join('\n')}
         *
         * <!-- shapes -->
-        * <div class="s-font\:40 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Shapes</h3>
+        * <div class="s-font\:40 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Shapes</h3>
         *   <a class="s-badge\:square s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge\:pill s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge\:outline\:square s-mr\:20 s-mb\:20">Say hello!</a>
@@ -87,8 +87,8 @@ export default function ({
         * </div>
         * 
         * <!-- scales -->
-        * <div class="s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
+        * <div class="s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Scales</h3>
         *   <a class="s-badge s-scale\:05 s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge s-scale\:1 s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge s-scale\:12 s-mr\:20 s-mb\:20">Say hello!</a>

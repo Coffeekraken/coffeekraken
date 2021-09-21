@@ -93,34 +93,34 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-mb:50">
-            *   <h3 class="s-color:accent s-font:30 s-mb:30">${style} style</h3>
-            *   <a tabindex="0" class="s-btn:${style} s-mr:20 s-mb:20"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mr:20 s-mb:20 s-ui:accent"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mr:20 s-mb:20 s-ui:complementary"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mr:20 s-mb:20 s-ui:info"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mr:20 s-mb:20 s-ui:error"><span>Click me!</span></a>
-            *   <span class="s-btn-group s-mr:20 s-mb:20">
+            * <div class="s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:accent"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:complementary"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:info"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:error"><span>Click me!</span></a>
+            *   <span class="s-btn-group s-mie:20 s-mbe:20">
             *       <a tabindex="0" class="s-btn:${style}"><span>Click me!</span></a>
             *       <a tabindex="0" class="s-btn:${style}"><span>+</span></a>
             *   </span>
-            *   <a tabindex="0" disabled class="s-btn:${style} s-mr:20 s-mb:20"><span>Click me!</span></a>
+            *   <a tabindex="0" disabled class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
             * </div>
             * `;
             })
             .join('\n')}
         *
         * <!-- scales -->
-        * <div class="s-mb:50">
-        *   <h3 class="s-color:accent s-font:30 s-mb:30">Scales</h3>
-        *   <a tabindex="0" class="s-btn s-scale:07 s-mr:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale:1 s-mr:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale:13 s-mr:20"><span>Click me!</span></a>
+        * <div class="s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scales</h3>
+        *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20"><span>Click me!</span></a>
         * </div>
         * 
         * <!-- Rhythm and text format -->
-        * <div class="s-font:30 s-mb:50">
-        *   <h3 class="s-color:accent s-font:30 s-mb:30">Vertical rhythm and text formatting</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <button>
         *          ${__faker.name.findName()}
@@ -157,7 +157,7 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
      .${cls} {
-        ${finalParams.defaultColor !== 'ui' ? `@sugar.color.remap(ui, ${finalParams.defaultColor});` : ''}
+        @sugar.color.remap(ui, ${finalParams.defaultColor});
         @sugar.ui.button($style: ${style});
      }`);
     });
@@ -252,7 +252,7 @@ export default function ({
         */
             @sugar.format.text {
                 button {
-                    ${finalParams.defaultColor !== 'ui' ? `@sugar.color.remap(ui, ${finalParams.defaultColor});` : ''}
+                    @sugar.color.remap(ui, ${finalParams.defaultColor});
                     @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
                 } 
             }

@@ -4,7 +4,7 @@
 
 @if ($block->see)
 
-    <a href="#related-{{ $block->name }}" title="Related resource(s)" class="s-bg:complementary s-color:complementary-foreground s-display:block s-p:30 s-border:radius s-mb:50">
+    <a href="#related-{{ $block->name }}" title="Related resource(s)" class="s-bg:complementary s-color:complementary-foreground s-display:block s-p:30 s-border:radius s-mbe:50">
         <i class="s-icon:box s-color:accent"></i>&nbsp;&nbsp;This {{ $block->type }} make use of related resource(s).
     <a>
 
@@ -19,21 +19,21 @@
     } 
     @endphp
 
-    <{{ $isFirst ? 'h1' : 'h3'}} id="{{ $block->name }}" class="s-typo:{{ $isFirst ? 'h1' : 'h3 s-mt:100'}} s-mb:30 {{ $isFirst ? 's-color:accent' : '' }}">
+    <{{ $isFirst ? 'h1' : 'h3'}} id="{{ $block->name }}" class="s-typo:{{ $isFirst ? 'h1' : 'h3 s-mbs:100'}} s-mbe:30 {{ $isFirst ? 's-color:accent' : '' }}">
         {!! $titleStr !!}
     </{{ $isFirst ? 'h1' : 'h3'}}>
     
 
-    <p class="s-typo:p s-mb:50">{{ $block->description }}</p>
+    <p class="s-typo:p s-mbe:50">{{ $block->description }}</p>
 @endif
 
 @if ($block->import)
 
-    <h4 id="import-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="import-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:import s-color:accent"></i>&nbsp;&nbsp;Import
     </h4>
 
-    <s-code-example class="s-mb:50" default-style>
+    <s-code-example class="s-mbe:50" default-style>
         <code hidden lang="js">
             {{ $block->import }}
         </code>       
@@ -42,11 +42,11 @@
 
 @if ($block->example)
 
-    <h4 id="example-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="example-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:example s-color:accent"></i>&nbsp;&nbsp;Example
     </h4>
 
-    <s-code-example class="s-mb:50" default-style>
+    <s-code-example class="s-mbe:50" default-style>
         @foreach ($block->example as $example)
             <code hidden lang="{{ $example->language }}">
                 {{  $example->code }}                     
@@ -57,11 +57,11 @@
 
 @if ($block->feature)
 
-    <h4 id="features-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="features-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:box s-color:accent"></i>&nbsp;&nbsp;Features
     </h4>
 
-    <ul class="s-list:ul:accent s-mb:50">
+    <ul class="s-list:ul:accent s-mbe:50">
         @foreach ($block->feature as $feature)
             <li class="s-typo:p">
                 {{ $feature }}
@@ -71,13 +71,13 @@
 @endif
 
 @if ($block->param)
-    <h4 id="parameters-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="parameters-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:list-ul s-color:accent"></i>&nbsp;&nbsp;Parameters
     </h4>
 
     <ol>
     @foreach ($block->param as $param)
-        <li class="s-font:40 s-mb:30">
+        <li class="s-font:40 s-mbe:30">
             <header class="s-flex s-bg:ui-surface">
                 <div class="s-flex-item:grow s-color:accent s-p:20">
                     {{ $param->name }}
@@ -98,7 +98,7 @@
 @endif
 
 @if ($block->return)
-    <h4 id="return-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="return-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:return s-color:accent"></i>&nbsp;&nbsp;Return
     </h4>
 
@@ -117,13 +117,13 @@
 @endif
 
 @if ($block->setting)
-    <h4 id="settings-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="settings-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:setting s-color:accent"></i>&nbsp;&nbsp;Settings
     </h4>
 
     <ol>
     @foreach ($block->setting as $setting)
-        <li class="s-font:40 s-mb:30">
+        <li class="s-font:40 s-mbe:30">
             <header class="s-flex s-bg:ui-surface">
                 <div class="s-flex-item:grow s-color:accent s-p:20">
                     {{ $setting->name }}
@@ -144,13 +144,13 @@
 @endif
 
 @if ($block->props)
-    <h4 id="properties-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="properties-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:list-ul s-color:accent"></i>&nbsp;&nbsp;properties
     </h4>
 
     <ol>
     @foreach ($block->props as $prop)
-        <li class="s-font:40 s-mb:30">
+        <li class="s-font:40 s-mbe:30">
             <header class="s-flex s-bg:ui-surface">
                 <div class="s-flex-item:grow s-color:accent s-p:20">
                     {{ $prop->name }}
@@ -171,11 +171,11 @@
 @endif
 
 @if ($block->todo)
-    <h4 id="todo-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="todo-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:tasks s-color:accent"></i>&nbsp;&nbsp;Todo
     </h4>
 
-    <ul class="s-list:ul:accent s-mb:50">
+    <ul class="s-list:ul:accent s-mbe:50">
         @foreach ($block->todo as $todo)
             @php
                 $todoColor = 'warning';
@@ -200,7 +200,7 @@
 
 @if ($block->see)
 
-    <h4 id="related-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="related-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:box s-color:accent"></i>&nbsp;&nbsp;Related resource(s)
     </h4>
 
@@ -212,8 +212,8 @@
                         <img src="{{ $see->og->ogImage->url }}" />
                     </div>
                     <div class="s-p:50">
-                        <h5 class="s-typo:h3 s-mb:30">{{ $see->og->ogTitle }}</h5>
-                        <p class="s-typo:p s-mb:30">
+                        <h5 class="s-typo:h3 s-mbe:30">{{ $see->og->ogTitle }}</h5>
+                        <p class="s-typo:p s-mbe:30">
                             {{ $see->og->ogDescription}}
                         </p>
                         <a class="s-btn:info" href="{{ $see->og->ogUrl }}" title="{{ $see->og->ogTitle }}" target="_blank">

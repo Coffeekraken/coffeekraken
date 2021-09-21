@@ -55,7 +55,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-switch${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} switch style`;
             })
             .join('\n')}
@@ -64,30 +64,30 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font\:30 s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
-            *   <label class="s-mb\:30 s-label">
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb\:20">${style} style</h3>
+            *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }" />
             *   </label>
-            *   <label class="s-mb\:30 s-label">
+            *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-ui\:accent" />
             *   </label>
-            *   <label class="s-mb\:30 s-label">
+            *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-ui\:complementary" />
             *   </label>
-            *   <label class="s-mb\:30 s-label">
+            *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-ui\:error" />
             *   </label>
             * </div>
@@ -97,17 +97,17 @@ export default function ({
         *
         * 
         * <!-- scales -->
-        * <div class="s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scales</h3>
-        *   <label class="s-mb\:30 s-label s-scale\:05">
+        * <div class="s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Scales</h3>
+        *   <label class="s-mbe:30 s-label s-scale\:05">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-ui\:accent" />
         *   </label>
-        *   <label class="s-mb\:30 s-label s-scale\:10">
+        *   <label class="s-mbe:30 s-label s-scale\:10">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-ui\:accent" />
         *   </label>
-        *   <label class="s-mb\:30 s-label s-scale\:15">
+        *   <label class="s-mbe:30 s-label s-scale\:15">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-ui\:accent" />
         *   </label>

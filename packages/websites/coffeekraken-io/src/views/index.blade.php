@@ -7,7 +7,7 @@
     
     {{-- @include('pages.homepage.quote.quote') --}}
     
-    <div class="s-py:50 s-bg:ui-surface s-opacity:70"></div>
+    <div class="s-pb:50 s-bg:ui-surface s-opacity:70"></div>
     
     @include('pages.homepage.features.features')
     

@@ -7,9 +7,9 @@
 
         <div class="s-grid:1222:gutter-between:gutter-50">
 
-            <nav class="__nav s-py:50">
+            <nav class="__nav s-pb:50">
 
-                <h5 class="s-typo:h5 s-mb:20">
+                <h5 class="s-typo:h5 s-mbe:20">
                     Coffeekraken
                 </h5>
 
@@ -18,7 +18,7 @@
 
                 @if (count(get_object_vars($docmap->menu->packages)))
 
-                    <h5 class="s-typo:h5 s-mt:50 s-mb:20">
+                    <h5 class="s-typo:h5 s-mbs:50 s-mbe:20">
                         Packages
                     </h5>
 
@@ -38,7 +38,7 @@
                 
             </nav>
 
-            <div class="__content s-py:50 s-rhythm:vertical s-format:text">
+            <div class="__content s-pb:50 s-rhythm:vertical s-format:text">
                 {!! $body !!}
             </div>
 

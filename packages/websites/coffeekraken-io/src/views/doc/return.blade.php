@@ -1,5 +1,5 @@
 @if ($block->return)
-    <h4 id="return-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="return-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:return s-color:accent"></i>&nbsp;&nbsp;Return
     </h4>
 

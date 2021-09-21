@@ -1,6 +1,6 @@
 <nav class="doc-sidenav">
     
-    <div s-activate class="doc-sidenav__group s-mb:30" id="doc-intro" toggle save-state>             
+    <div s-activate class="doc-sidenav__group s-mbe:30" id="doc-intro" toggle save-state>             
         <h3 class="s-typo:h4">
             <span class="doc-sidenav__group-toggle"></span>
             {{ $title ?? $block->type }}
@@ -117,7 +117,7 @@
         @endphp
         @if (count($methods))
 
-            <div s-activate class="doc-sidenav__group s-mb:30 s-mt:50" id="doc-methods" toggle save-state>
+            <div s-activate class="doc-sidenav__group s-mbe:30 s-mbs:50" id="doc-methods" toggle save-state>
                 <h3 class="s-typo:h3">
                     <span class="doc-sidenav__group-toggle"></span>
                     Methods
@@ -145,7 +145,7 @@
         @endphp
         @if (count($props))
 
-            <div s-activate class="doc-sidenav__group s-mb:30 s-mt:50" id="doc-props" toggle save-state>
+            <div s-activate class="doc-sidenav__group s-mbe:30 s-mbs:50" id="doc-props" toggle save-state>
                 <h3 class="s-typo:h3">
                     <span class="doc-sidenav__group-toggle"></span>
                     Properties

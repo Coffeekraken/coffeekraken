@@ -55,7 +55,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-radio${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} radio style`;
             })
             .join('\n')}
@@ -64,17 +64,17 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font\:30 s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
-            *   <label class="s-mb\:30 s-ui\:accent s-label">
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <label class="s-mbe:30 s-ui\:accent s-label">
             *     <input type="radio" class="s-radio" name="radio-style-${style}" value="hello 1" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label class="s-mb\:30 s-ui\:accent s-label">
+            *   <label class="s-mbe:30 s-ui\:accent s-label">
             *     <input type="radio" class="s-radio" name="radio-style-${style}" value="hello 2" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label class="s-mb\:30 s-ui\:accent s-label">
+            *   <label class="s-mbe:30 s-ui\:accent s-label">
             *     <input type="radio" class="s-radio" name="radio-style-${style}" value="hello 3" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
@@ -84,55 +84,55 @@ export default function ({
             .join('\n')}
         * 
         * <!-- Colors -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Colors</h3>
-        *   <label class="s-mb\:30 s-ui\:accent s-label">
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors</h3>
+        *   <label class="s-mbe:30 s-ui\:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 1" checked="checked" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
-        *   <label class="s-mb\:30 s-ui\:info s-label">
+        *   <label class="s-mbe:30 s-ui\:info s-label">
         *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 2" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
-        *   <label class="s-mb\:30 s-ui\:error s-label">
+        *   <label class="s-mbe:30 s-ui\:error s-label">
         *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 3" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
-        *   <label class="s-mb\:30 s-ui\:warning s-label">
+        *   <label class="s-mbe:30 s-ui\:warning s-label">
         *     <input type="radio" disabled class="s-radio" name="radio-style-color" value="hello 4" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         * </div>
         * 
         * <!-- LTR -->
-        * <div class="s-font\:30 s-mb\:50" dir="rtl">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">LTR Support</h3>
-        *   <label class="s-mb\:30 s-ui\:accent s-label">
+        * <div class="s-font:30 s-mbe:50" dir="rtl">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">LTR Support</h3>
+        *   <label class="s-mbe:30 s-ui\:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 1" checked="checked" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
-        *   <label class="s-mb\:30 s-ui\:accent s-label">
+        *   <label class="s-mbe:30 s-ui\:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 2" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
-        *   <label class="s-mb\:30 s-ui\:accent s-label">
+        *   <label class="s-mbe:30 s-ui\:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 3" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         * </div>
         * 
         * <!-- Scale -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Scale</h3>
-        *   <label class="s-mb\:30 s-ui\:accent s-label s-scale\:07">
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
+        *   <label class="s-mbe:30 s-ui\:accent s-label s-scale\:07">
         *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 1" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
-        *   <label class="s-mb\:30 s-ui\:accent s-label">
+        *   <label class="s-mbe:30 s-ui\:accent s-label">
         *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 2" checked="checked" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
-        *   <label class="s-mb\:30 s-ui\:accent s-label s-scale\:13">
+        *   <label class="s-mbe:30 s-ui\:accent s-label s-scale\:13">
         *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 3" />
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
@@ -158,13 +158,13 @@ export default function ({
         * 
         * @example        html
         * <input type="radio" class="s-radio${
-            style === finalParams.defaultStyle ? '' : `\:${style}`
+            style === finalParams.defaultStyle ? '' : `:${style}`
         }" value="something" name="myRadioItem1" />
         * <input type="radio" class="s-radio${
-            style === finalParams.defaultStyle ? '' : `\:${style}`
+            style === finalParams.defaultStyle ? '' : `:${style}`
         }" value="something" name="myRadioItem2" />
         <input type="radio" class="s-radio${
-            style === finalParams.defaultStyle ? '' : `\:${style}`
+            style === finalParams.defaultStyle ? '' : `:${style}`
         }" value="something" name="myRadioItem3" />
         * 
         * @since    2.0.0

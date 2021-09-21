@@ -7,10 +7,10 @@
     } 
     @endphp
 
-    <{{ $isFirst ? 'h1' : 'h3'}} id="{{ $block->name }}" class="s-typo:{{ $isFirst ? 'h1' : 'h3'}} s-mb:30 {{ $isFirst ? 's-color:accent' : '' }}">
+    <{{ $isFirst ? 'h1' : 'h3'}} id="{{ $block->name }}" class="s-typo:{{ $isFirst ? 'h1' : 'h3'}} s-mbe:30 {{ $isFirst ? 's-color:accent' : '' }}">
         {!! $titleStr !!}
     </{{ $isFirst ? 'h1' : 'h3'}}>
     
 
-    <p class="s-typo:p s-mb:50">{{ $block->description }}</p>
+    <p class="s-typo:p s-mbe:50">{{ $block->description }}</p>
 @endif

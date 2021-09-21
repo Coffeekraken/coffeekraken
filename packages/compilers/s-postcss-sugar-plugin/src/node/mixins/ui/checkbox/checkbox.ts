@@ -15,15 +15,15 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf'],
-            default: ['bare', 'lnf'],
+            values: ['bare', 'lnf', 'vr'],
+            default: ['bare', 'lnf', 'vr'],
         },
     };
 }
 
 export interface IPostcssSugarPluginUiCheckboxParams {
     style: 'solid';
-    scope: ('bare' | 'lnf')[];
+    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiCheckboxInterface as interface };
@@ -31,16 +31,18 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiCheckboxParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxParams = {
         style: 'solid',
-        scope: ['bare', 'lnf'],
+        scope: ['bare', 'lnf', 'vr'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -56,94 +58,64 @@ export default function ({
             // bare
             if (finalParams.scope.indexOf('bare') !== -1) {
                 vars.push(`
-
-                @sugar.visually.hidden;
+                
+                appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                position: relative;
+                width: 1em;
+                height: 1em;
                 font-size: sugar.scalable(1rem);
 
-                &:disabled + * {
+                &:disabled {
                     @sugar.disabled;
                 }
-
-                & + *:after {
-                    content: "";
-                    opacity: 0;
-                    display: block;
-                    position: absolute;
-                    --borderWidth: sugar.theme(ui.checkbox.borderWidth);
-                    top: calc(var(--borderWidth) + 0.3em);
-                    left: 0.3em;
-                    width: 0.4em;
-                    height: 0.4em;
-                }
-                label:hover > &:not(:disabled) + *:after,
-                &:hover:not(:disabled) + *:after {
-                    opacity: 0.2;
-                }
-                &:checked:not(:disabled) + *:after {
-                    opacity: 1 !important;
-                }
-
-                & + * {
-                    display: inline-block;
-                    cursor: pointer;
-                    position: relative;
-                    --fs: sugar.scalable(1rem);
-                    padding-inline-start: calc(var(--fs) * 1.6);
-                    font-size: sugar.scalable(1rem);
-                    
-                    &:before {
-                        content: "";  
-                        display: block;
-                        width: 1em;
-                        height: 1em;
-                        position: absolute;
-                        top: sugar.theme(ui.checkbox.borderWidth);
-                        left: 0;
-                        opacity: 0.5;
-                    }
-                }
-
-                [dir="rtl"] & {
-                    & + *:before {
-                        left: auto;
-                        right: 0;
-                    }
-                    & + *:after {
-                        left: auto;
-                        right: 0.3em;
-                    }
-                }
-
             `);
             }
 
             // lnf
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-    
-                & + *:after {
-                    border-radius: 0;
-                    background: sugar.color(ui);
+                
                     transition: sugar.theme(ui.checkbox.transition);
-                }
+                    border: sugar.theme(ui.checkbox.borderWidth) solid sugar.color(ui);
+                    border-radius: sugar.theme(ui.checkbox.borderRadius);
+                    background-color: transparent;
+                    transition: sugar.theme(ui.checkbox.transition);
+                    box-shadow: 0 0 0 0 sugar.color(ui, --alpha 0.2);
 
-                & + * {
-                    
-                    &:before {
-                        border: sugar.theme(ui.checkbox.borderWidth) solid sugar.color(ui);
-                        background-color: transparent;
-                        border-radius: sugar.theme(ui.checkbox.borderRadius);
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: 50%; left: 50%;
+                        width: 0.4em; height: 0.4em;
+                        transform: translate(-50%, -50%);
+                        background: sugar.color(ui);
+                        opacity: 0;
                         transition: sugar.theme(ui.checkbox.transition);
-                        box-shadow: 0 0 0 0 sugar.color(ui, --alpha 0.2);
                     }
-                }
+                    label:hover > &:not(:disabled):after,
+                    &:hover:not(:disabled):after {
+                        opacity: 0.2;
+                    }
+                    &:checked:not(:disabled):after {
+                        opacity: 1 !important;
+                    }
 
-                &:focus:not(:hover):not(:active):not(:disabled) + *:before {
-                    box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(ui, --alpha 0.3);
-                }
+                    &:focus:not(:hover):not(:active):not(:disabled) {
+                        box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(ui, --alpha 0.3);
+                    }
  
         `);
             }
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`
+            @sugar.rhythm.vertical {
+                ${jsObjectToCssProperties(__theme().config('ui.checkbox.:rhythmVertical'))}
+            } 
+        `);
     }
 
     replaceWith(vars);

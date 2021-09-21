@@ -1,11 +1,11 @@
 @if ($block->interface)
-    <h4 id="parameters-{{ $block->name }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="parameters-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:list-ul s-color:accent"></i>&nbsp;&nbsp;Interface
     </h4>
 
     <ol>
     @foreach ((array)$block->interface->definition as $key => $param)
-        <li class="s-font:40 s-mb:30">
+        <li class="s-font:40 s-mbe:30">
             <header class="s-flex s-bg:ui-surface">
                 <div class="s-flex-item:grow s-color:accent s-p:20">
                     {{ $key }}

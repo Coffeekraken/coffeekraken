@@ -8,11 +8,16 @@ class postcssSugarPluginUiBaseInterface extends __SInterface {
             type: 'String',
             required: true,
         },
+        scope: {
+            type: 'String',
+            default: ['bare', 'lnf'],
+        },
     };
 }
 
 export interface IPostcssSugarPluginUiBaseParams {
     name: string;
+    scope: string[];
 }
 
 export { postcssSugarPluginUiBaseInterface as interface };
@@ -28,6 +33,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiBaseParams = {
         name: '',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -36,56 +42,57 @@ export default function ({
     const vars: string[] = [];
 
     // bare
-    vars.push(`
-        display: inline-block;
-        padding-inline: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline));
-        padding-block: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock));
-    `);
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
+            display: inline-block;
+            padding-inline: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline));
+            padding-block: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock));
+        `);
+    }
 
     // lnf
-    vars.push(`
-        color: sugar.color(main, surfaceForeground);
-        background-color: sugar.color(main, ui);
-        font-size: sugar.scalable(1rem);
-        border: sugar.color(ui, border) solid sugar.theme(ui.${finalParams.name}.borderWidth);
-        border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
-        transition: sugar.theme(ui.${finalParams.name}.transition);
-        @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
-        cursor: auto !important;
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
+            color: sugar.color(main, surfaceForeground);
+            background-color: sugar.color(main, ui);
+            font-size: sugar.scalable(1rem);
+            border: sugar.color(ui, --alpha 0.1) solid sugar.theme(ui.${finalParams.name}.borderWidth);
+            border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
+            transition: sugar.theme(ui.${finalParams.name}.transition);
+            @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
+            cursor: auto !important;
 
-        &::placeholder {
-          color: sugar.color(main, placeholder);
-        }
-
-        &::selection {
-            color: sugar.color(ui, 100);
-            background-color: sugar.color(ui);
-        }
-
-        @sugar.state.hover {
-          background-color: sugar.color(main, ui);
-          border: sugar.color(ui, border) solid 1px;
-          color: sugar.color(ui, foreground);
-        }
-        @sugar.state.focus {
-          background-color: sugar.color(main, ui);
-          border: sugar.color(ui, border) solid 1px;
-          color: sugar.color(ui, foreground);
-        }
-        @sugar.state.active {
-          background-color: sugar.color(main, ui);
-          border: sugar.color(ui, border) solid 1px;
-          color: sugar.color(ui, foreground);
-        }
-        @sugar.state.disabled {
-            @sugar.disabled;
-
-            label & + * {
-                @sugar.disabled;
+            &::placeholder {
+            color: sugar.color(main, placeholder);
             }
 
-        }
-  `);
+            &::selection {
+                color: sugar.color(ui, 100);
+                background-color: sugar.color(ui);
+            }
+
+            @sugar.state.hover {
+            background-color: sugar.color(main, ui);
+            border: sugar.color(ui, --alpha 0.3) solid 1px;
+            }
+            @sugar.state.focus {
+            background-color: sugar.color(main, ui);
+            border: sugar.color(ui, --alpha 0.6) solid 1px;
+            }
+            @sugar.state.active {
+            background-color: sugar.color(main, ui);
+            border: sugar.color(ui, --alpha 0.6) solid 1px;
+            }
+            @sugar.state.disabled {
+                @sugar.disabled;
+
+                label & + * {
+                    @sugar.disabled;
+                }
+
+            }
+    `);
+    }
 
     replaceWith(vars);
 }

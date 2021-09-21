@@ -24,6 +24,9 @@ export default function (theme: string, variant?: string): string[] {
             vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
             vars.push(`${baseVariable}-s: ${colorObj.value.s};`);
             vars.push(`${baseVariable}-l: ${colorObj.value.l};`);
+            vars.push(`${baseVariable}-origin-h: ${colorObj.value.h};`);
+            vars.push(`${baseVariable}-origin-s: ${colorObj.value.s};`);
+            vars.push(`${baseVariable}-origin-l: ${colorObj.value.l};`);
         } else if (!colorObj.value.color) {
             if (colorObj.value.saturate) {
                 vars.push(`${baseVariable}-saturation-offset: ${colorObj.value.saturate};`);

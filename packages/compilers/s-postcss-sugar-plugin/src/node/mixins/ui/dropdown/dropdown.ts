@@ -68,7 +68,7 @@ export default function ({
           cursor: auto;
           z-index: 10;
 
-           /**  opacity: 0; */
+            opacity: 0;
             pointer-events: none;
 
             *:focus + &,
@@ -91,9 +91,6 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            & > * {
-                @sugar.color.remap(ui, main);
-            }
         `);
 
         switch (finalParams.style) {
@@ -107,6 +104,7 @@ export default function ({
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(ui, border);
                     border-radius: sugar.theme(ui.dropdown.borderRadius);
                     @sugar.depth(sugar.theme(ui.dropdown.depth));
+                    @sugar.transition(fast);
                 `);
 
                 break;

@@ -1,10 +1,10 @@
 @if ($block->example)
 
-    <h4 id="example-{{ \Sugar\string\idCompliant($block->name) }}" class="s-typo:h4 s-mt:80 s-mb:50">
+    <h4 id="example-{{ \Sugar\string\idCompliant($block->name) }}" class="s-typo:h4 s-mbs80 s-mbe:50">
         <i class="s-icon:example s-color:accent"></i>&nbsp;&nbsp;Example
     </h4>
 
-    <s-code-example class="s-mb:50" @if ($lines)
+    <s-code-example class="s-mbe:50" @if ($lines)
         lines="{{ $lines }}"
     @endif>
         @foreach ($block->example as $example)

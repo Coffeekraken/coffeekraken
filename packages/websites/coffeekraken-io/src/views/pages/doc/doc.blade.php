@@ -14,7 +14,7 @@
 
     <div id="doc">
 
-        <header class="__banner s-py:50">
+        <header class="__banner s-pb:50">
 
             <div class="s-container">
                 <div class="s-flex:align-center">
@@ -23,7 +23,7 @@
                             <span class="s-badge:pill:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
                             &nbsp;&nbsp;<span class="s-color:accent s-font:30">Since {{ $firstBlock->since }}</span>
                         </span>
-                        <h1 class="s-typo:h1 s-mb:10 s-mt:20">
+                        <h1 class="s-typo:h1 s-mbe:10 s-m:20">
                             {{ $firstBlock->name }}
                         </h1>
                         <h3 class="s-typo:p s-color:complementary">
@@ -50,7 +50,7 @@
                                     </p>
                                 </a>
                             </div>
-                            <div class="s-flex-item s-pl:10">
+                            <div class="s-flex-item s-pis:10">
                                 <a href="{{ $firstBlock->author->url ? $firstBlock->author->url : $firstBlock->author->email }}" target="_blank">
                                     <span class="s-avatar s-font:100">
                                         <img src="https://www.gravatar.com/avatar/{{ md5($firstBlock->author->email) }}" alt="{{ $firstBlock->author->name }}" />
@@ -60,7 +60,7 @@
                         </div>
                         @if ($firstBlock->contributor)
                             <div class="__contributors">
-                                <h4 class="s-typo:h6 s-color:accent s-mt:30 s-mb:10">
+                                <h4 class="s-typo:h6 s-color:accent s-m:30 s-mbe:10">
                                     {{ count($firstBlock->contributor) }} Contributor{{ count($firstBlock->contributor) > 1 ? 's' : '' }}
                                 </h4>
                                 @foreach ($firstBlock->contributor as $contributor)
@@ -77,7 +77,7 @@
                                 @endforeach
                             </div>
                         @endif
-                        {{-- <a class="s-btn:complementary s-mt:20" href="https://github.com/coffeekraken" target="_blank" title="Contribute to the project">
+                        {{-- <a class="s-btn:complementary s-m:20" href="https://github.com/coffeekraken" target="_blank" title="Contribute to the project">
                             Contribute to the project
                         </a> --}}
 
@@ -115,7 +115,7 @@
 
         </section>
 
-        <section class="s-container s-py:70">
+        <section class="s-container s-pb:70">
 
             <section class="s-grid:1222">
 
@@ -140,7 +140,7 @@
                     @endphp
                     @if (count($methods))
 
-                        <h2 id="properties" class="s-typo:h2 s-my:50 s-color:accent">
+                        <h2 id="properties" class="s-typo:h2 s-mb:50 s-color:accent">
                             Methods
                         </h2>
 
@@ -160,7 +160,7 @@
                     @endphp
                     @if (count($props))
 
-                        <h2 id="properties" class="s-typo:h2 s-my:50 s-color:accent">
+                        <h2 id="properties" class="s-typo:h2 s-mb:50 s-color:accent">
                             Properties
                         </h2>
 

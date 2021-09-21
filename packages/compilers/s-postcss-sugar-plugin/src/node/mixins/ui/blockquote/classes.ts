@@ -86,7 +86,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-blockquote${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} blockquote style`;
             })
             .join('\n')}
@@ -97,8 +97,8 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mb:50">
-            *   <h3 class="s-color:accent s-font:30 s-mb:30">${style} style</h3>
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <p class="s-blockquote${style === finalParams.defaultStyle ? '' : `:${style}`}">
             *       ${__faker.lorem.paragraph()}
             *   </p>
@@ -108,38 +108,38 @@ export default function ({
             .join('\n')}
         *
         * <!-- Colors -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Colors (non-exhaustive)</h3>
-        *   <p class="s-blockquote s-mb:30 s-ui:accent">
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        *   <p class="s-blockquote s-mbe:30 s-ui:accent">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        *   <p class="s-blockquote s-mb:30 s-ui:error">
+        *   <p class="s-blockquote s-mbe:30 s-ui:error">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        *   <p class="s-blockquote s-mb:30 s-ui:info">
+        *   <p class="s-blockquote s-mbe:30 s-ui:info">
         *       ${__faker.lorem.paragraph()}
         *   </p>
         * </div>
         *
         * <!-- LTR -->
-        * <div class="s-font\:30 s-mb\:50" dir="rtl">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">LTR Support</h3>
-        *   <p class="s-blockquote s-mb:30">
+        * <div class="s-font:30 s-mbe:50" dir="rtl">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">LTR Support</h3>
+        *   <p class="s-blockquote s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
         * </div>
         * 
         * <!-- Scale -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Scale</h3>
-        *   <p class="s-blockquote s-scale:15 s-mb:30">
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
+        *   <p class="s-blockquote s-scale:15 s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
         * </div>
         * 
         * <!-- Rhythm and text format -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Vertical rhythm and text formatting</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <blockquote>
         *          ${__faker.lorem.paragraph()}
@@ -175,7 +175,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .${cls} {
-            ${finalParams.defaultColor !== 'ui' ? `@sugar.color.remap(ui, ${finalParams.defaultColor});` : ''}
+            @sugar.color.remap(ui, ${finalParams.defaultColor});
             @sugar.ui.blockquote($scope: '${finalParams.scope.join(',')}');
         } 
     `);
@@ -202,7 +202,7 @@ export default function ({
         */
             @sugar.format.text {
                 blockquote {
-                    ${finalParams.defaultColor !== 'ui' ? `@sugar.color.remap(ui, ${finalParams.defaultColor});` : ''}
+                    @sugar.color.remap(ui, ${finalParams.defaultColor});
                     @sugar.ui.blockquote($scope: '${finalParams.scope.join(',')}');
                 } 
             }

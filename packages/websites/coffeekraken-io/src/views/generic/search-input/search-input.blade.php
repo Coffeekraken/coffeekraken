@@ -29,18 +29,18 @@
         <div class="__bg"></div>
         <div class="s-flex">
             <div style="width:40%" class="s-p:50">
-                <div class="s-font:40 s-mb:30">
+                <div class="s-font:40 s-mbe:30">
                     <span class="s-badge:pill:@{{ status }}">@{{ status }}</span>
                     &nbsp;
                     @{{#each platform}}
                         <i class="s-platform:@{{this.name}} s-font:50"></i>
                     @{{/each}}
                 </div>
-                <h4 class="s-font:title s-font:60 s-color:accent s-mb:10">
+                <h4 class="s-font:title s-font:60 s-color:accent s-mbe:10">
                     @{{name}}
                 </h4>
-                <h5 class="s-color:complementary s-font:40 s-mb:30">@{{namespace}}</h5>
-                <p class="s-typo:p s-mb:30">@{{description}}</p>
+                <h5 class="s-color:complementary s-font:40 s-mbe:30">@{{namespace}}</h5>
+                <p class="s-typo:p s-mbe:30">@{{description}}</p>
                 <a href="/doc/@{{striptags namespace}}.@{{striptags name}}" class="s-btn:accent">
                     Check out more
                 </a>
@@ -60,12 +60,12 @@
     </template>
     <template id="no-item">
         <div class="s-p:100 s-text:center">
-            <i class="s-icon:nothing s-color:accent s-font:100 s-mb:50"></i>
+            <i class="s-icon:nothing s-color:accent s-font:100 s-mbe:50"></i>
             <br />
-            <p class="s-p:lead s-mb:30 s-mx:auto">
+            <p class="s-p:lead s-mbe:30 s-mi:auto">
                 Sorry but their's no items that correspond<br />to your research...
             </p>
-            <p class="s-p s-mb:50 s-mx:auto">
+            <p class="s-p s-mbe:50 s-mi:auto">
                 Don't be afraid to join us and help to enhance the <span class="s-color:accent">Coffeekraken</span> capabilities with some new features you can contribute to develop.
                 <br/>
                 Here's how you can join us and start a new journey!

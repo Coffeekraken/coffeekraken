@@ -1,20 +1,20 @@
-<section id="features-frontend" class="s-container s-py:100">
+<section id="features-frontend" class="s-container s-pb:100">
 
-    <h3 class="s-typo:h3 s-mb:30">Frontend<br><span class="s-color:accent">sugar</span></h3>
-    <p class="s-typo:p s-mb:50">
+    <h3 class="s-typo:h3 s-mbe:30">Frontend<br><span class="s-color:accent">sugar</span></h3>
+    <p class="s-typo:p s-mbe:50">
         The goal of Coffeekraken is to help having a better development experience with
         a production ready quality grade. Here's some areas where we can help you:
     </p>
 
-    <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
+    <div class="s-grid:112:gutter-x:gutter-between:align-center s-pb:50">
         <div>  
 
-            <div class="s-mb:30">
+            <div class="s-mbe:30">
                 @include('generic.code.example', ['examples' => [
                     'html' => '<ul class="s-list\:ul\:icon">
 <li>
 <i class="s-icon\:custom-user"></i>
-Hello <span class="s-color\:accent">world</span>
+Hello <span class="s-color:accent">world</span>
 </li>
 <li>
 <i class="s-icon\:fire"></i>
@@ -30,10 +30,10 @@ Cool don\'t you think?
 
         </div>
         <div>
-            <h4 class="s-typo:h4 s-mb:30">
+            <h4 class="s-typo:h4 s-mbe:30">
                 Templates (<span class="s-color:accent">html</span>, <span class="s-color:accent">BladePhp</span>, <span class="s-color:accent">Twig</span>, <span class="s-color:accent">etc...</span>)
             </h4>
-            <ol class="s-list:ol:accent s-mb:30">
+            <ol class="s-list:ol:accent s-mbe:30">
                 <li class="s-typo:p">
                     Utility classes for quick layout construction
                 </li>
@@ -47,13 +47,13 @@ Cool don\'t you think?
         </div>
     </div>
 
-    <div class="s-grid:122:gutter-x:gutter-between:align-center s-py:50">
+    <div class="s-grid:122:gutter-x:gutter-between:align-center s-pb:50">
         <div>
-            <h4 class="s-typo:h4 s-mb:30">
+            <h4 class="s-typo:h4 s-mbe:30">
                 CSS made<br>
                 <span class="s-color:accent">pleasant</span> again
             </h4>
-            <ol class="s-list:ol:accent s-mb:30">
+            <ol class="s-list:ol:accent s-mbe:30">
                 <li class="s-typo:p">
                     Powerfull and pleasant classnames syntax
                 </li>
@@ -78,7 +78,7 @@ Cool don\'t you think?
             </ol>
         </div>
         <div>
-            <div class="s-mb:30">
+            <div class="s-mbe:30">
                 @include('generic.code.example', ['examples' => [
                     'css' => '/* import some globs */
 @sugar.import(\'../views/**/*.css\');
@@ -96,15 +96,15 @@ fs:src/icons/copy.svg:copy
         </div>    
     </div>
 
-    <div class="s-grid:112:gutter-x:gutter-between:align-center s-py:50">
+    <div class="s-grid:112:gutter-x:gutter-between:align-center s-pb:50">
         <div>  
 
-            <div class="s-mb:30">
+            <div class="s-mbe:30">
                 @include('generic.code.example', ['examples' => [
                     'html' => '<ul class="s-list\:ul\:icon">
 <li>
 <i class="s-icon\:custom-user"></i>
-Hello <span class="s-color\:accent">world</span>
+Hello <span class="s-color:accent">world</span>
 </li>
 <li>
 <i class="s-icon\:fire"></i>
@@ -119,10 +119,10 @@ Cool don\'t you think?
             </div>
         </div>
         <div>
-            <h4 class="s-typo:h4 s-mb:30">
+            <h4 class="s-typo:h4 s-mbe:30">
                 Javascript made<br><span class="s-color:accent">reliable</span>
             </h4>
-            <ol class="s-list:ol:accent s-mb:30">
+            <ol class="s-list:ol:accent s-mbe:30">
                 <li class="s-typo:p">
                     Typescript support built-in
                 </li>
@@ -136,8 +136,8 @@ Cool don\'t you think?
         </div>
     </div>
 
-    <div class="s-text:center s-pt:50 s-ml:-50">
-        <p class="s-typo:p-lead s-mx:auto s-mb:30">
+    <div class="s-text:center s-pt:50 s-mis:-50">
+        <p class="s-typo:p-lead s-mi:auto s-mbe:30">
             Keep in mind that <span class="s-color:accent">all of these features are optional</span>. This mean that
             you can work with the things you like and let the rest aside...
         </p>

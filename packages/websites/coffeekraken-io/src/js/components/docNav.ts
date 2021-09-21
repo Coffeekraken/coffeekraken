@@ -264,7 +264,7 @@ export default class DocNav extends __SLitComponent {
             <div class="s-grid:12222">
                 <nav class="__nav">
                     <form name="doc">
-                        <fieldset class="__nav-search s-mb:30 s-pr:30 s-pt:30">
+                        <fieldset class="__nav-search s-mbe:30 s-pie:30 s-pbs:30">
                             <input
                                 type="text"
                                 class="s-input s-width:100"
@@ -275,12 +275,12 @@ export default class DocNav extends __SLitComponent {
                             />
                         </fieldset>
 
-                        <fieldset class="__nav-platform s-mb:30">
-                            <legend class="s-typo:h6 s-mb:30">Platform</legend>
+                        <fieldset class="__nav-platform s-mbe:30">
+                            <legend class="s-typo:h6 s-mbe:30">Platform</legend>
                             <dl class="s-list s-bg:even">
                                 ${this.availablePlatforms.map(
                                     (platform) => html`
-                                        <dt class="s-flex s-font:40 s-p:20 s-pr:30 s-bg:ui-background">
+                                        <dt class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background">
                                             <label class="s-flex-item:grow" for="platform-${platform}">
                                                 ${platform}
                                             </label>
@@ -300,12 +300,12 @@ export default class DocNav extends __SLitComponent {
                             </dl>
                         </fieldset>
 
-                        <fieldset class="__nav-type s-mb:30">
-                            <legend class="s-typo:h6 s-mb:30">Type</legend>
+                        <fieldset class="__nav-type s-mbe:30">
+                            <legend class="s-typo:h6 s-mbe:30">Type</legend>
                             <dl class="s-list s-bg:even">
                                 ${this.availableTypes.map(
                                     (type) => html`
-                                        <dt class="s-flex s-font:40 s-p:20 s-pr:30 s-bg:ui-background">
+                                        <dt class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background">
                                             <label class="s-flex-item:grow" for="type-${type}"> ${type} </label>
                                             <label for="type-${type}">
                                                 <input
@@ -323,12 +323,12 @@ export default class DocNav extends __SLitComponent {
                             </dl>
                         </fieldset>
 
-                        <fieldset class="__nav-status s-mb:30">
-                            <legend class="s-typo:h6 s-mb:30">Status</legend>
+                        <fieldset class="__nav-status s-mbe:30">
+                            <legend class="s-typo:h6 s-mbe:30">Status</legend>
                             <dl class="s-list s-bg:even">
                                 ${this.availableStatuses.map(
                                     (status) => html`
-                                        <dt class="s-flex s-font:40 s-p:20 s-pr:30 s-bg:ui-background">
+                                        <dt class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background">
                                             <label class="s-flex-item:grow" for="status-${status}"> ${status} </label>
                                             <label for="status-${status}">
                                                 <input
@@ -359,13 +359,13 @@ export default class DocNav extends __SLitComponent {
                                                     ${(<any>item).platform.map(
                                                         (platform) => html`
                                                             <i
-                                                                class="s-platform:${platform.name} s-font:80 s-mb:30 s-mr:10"
+                                                                class="s-platform:${platform.name} s-font:80 s-mbe:30 s-mr:10"
                                                             ></i>
                                                         `,
                                                     )}
                                                 </div>
                                                 <h4
-                                                    class="s-font:title s-font:60 s-color:accent s-mb:10 s-flex-item:grow"
+                                                    class="s-font:title s-font:60 s-color:accent s-mbe:10 s-flex-item:grow"
                                                 >
                                                     <a
                                                         href="/doc/api/${this._striptags(
@@ -391,10 +391,10 @@ export default class DocNav extends __SLitComponent {
                                                 </div>
                                             </div>
                                         </div>
-                                        <h5 class="s-color:complementary s-font:40 s-mb:30">
+                                        <h5 class="s-color:complementary s-font:40 s-mbe:30">
                                             ${(<any>item).namespace}
                                         </h5>
-                                        <p class="s-typo:p s-mb:30">${(<any>item).description}</p>
+                                        <p class="s-typo:p s-mbe:30">${(<any>item).description}</p>
                                     </div>
                                     ${(<any>item).example && (<any>item).example.length
                                         ? html`

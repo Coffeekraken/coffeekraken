@@ -1504,6 +1504,7 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             datePicker: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1513,6 +1514,7 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             input: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1523,6 +1525,7 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             radio: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1544,6 +1547,7 @@ export default function (env, config) {
                 depth: '[theme.ui.form.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             range: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1554,6 +1558,7 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             label: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1563,6 +1568,7 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'inline',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             select: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1572,7 +1578,9 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
+                defaultColor: 'ui',
                 defaultStyle: 'solid',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             switch: {
                 borderRadius: '[theme.ui.form.borderRadius]',
@@ -1683,6 +1691,7 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 defaultStyle: 'solid',
                 depth: 0,
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             loader: {
                 duration: '1s',

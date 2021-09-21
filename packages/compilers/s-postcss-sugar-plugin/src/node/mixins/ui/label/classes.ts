@@ -55,7 +55,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-label${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} label style`;
             })
             .join('\n')}
@@ -64,37 +64,37 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font\:30 s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
-            *   <label class="s-mb\:30 s-ui\:accent s-label${style === finalParams.defaultStyle ? '' : `\:${style}`}">
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb\:20">${style} style</h3>
+            *   <label class="s-mbe:30 s-ui\:accent s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
             *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label class="s-mb\:30 s-ui\:info s-label${style === finalParams.defaultStyle ? '' : `\:${style}`}">
+            *   <label class="s-mbe:30 s-ui\:info s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
             *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label class="s-mb\:30 s-ui\:error s-label${style === finalParams.defaultStyle ? '' : `\:${style}`}">
+            *   <label class="s-mbe:30 s-ui\:error s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
             *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label class="s-mb\:30 s-ui\:accent s-label${style === finalParams.defaultStyle ? '' : `\:${style}`}">
+            *   <label class="s-mbe:30 s-ui\:accent s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
             *     <textarea class="s-input s-width\:50" placeholder="Type something!" rows="3"></textarea>
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label dir="rtl" class="s-mb\:30 s-ui\:accent s-label${
-                style === finalParams.defaultStyle ? '' : `\:${style}`
+            *   <label dir="rtl" class="s-mbe:30 s-ui\:accent s-label${
+                style === finalParams.defaultStyle ? '' : `:${style}`
             }">
             *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()} (RTL)</span>
             *   </label>
-            *   <label class="s-mb\:30 s-scale\:15 s-ui\:accent s-label${
-                style === finalParams.defaultStyle ? '' : `\:${style}`
+            *   <label class="s-mbe:30 s-scale\:15 s-ui\:accent s-label${
+                style === finalParams.defaultStyle ? '' : `:${style}`
             }">
             *     <input type="text" class="s-input s-width\:50" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
             *   </label>
-            *   <label class="s-mb\:30 s-ui\:accent s-label${style === finalParams.defaultStyle ? '' : `\:${style}`}">
+            *   <label class="s-mbe:30 s-ui\:accent s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
             *     <input type="text" disabled class="s-input s-width\:50" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
             *   </label>

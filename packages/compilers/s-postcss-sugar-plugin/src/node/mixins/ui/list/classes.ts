@@ -56,7 +56,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-list${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} list style`;
             })
             .join('\n')}
@@ -65,8 +65,8 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
+            * <div class="s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <ul class="s-list\:${style} ${style === 'ol' ? 's-ui:accent s-scale:15' : ''}">
             *     <li>${
                 style === 'icon' ? `<i class="s-icon\:user"></i>` : ''
@@ -84,24 +84,24 @@ export default function ({
             .join('\n')}
         *
         * <!-- RTL -->
-        * <div class="s-mb\:50" dir="rtl">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">RTL</h3>
-            *   <ul class="s-list\:ul s-ui\:accent s-mb\:30">
+        * <div class="s-mbe:50" dir="rtl">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL</h3>
+            *   <ul class="s-list\:ul s-ui\:accent s-mbe:30">
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
-            *   <ul class="s-list\:ol s-ui\:accent s-mb\:30">
+            *   <ul class="s-list\:ol s-ui\:accent s-mbe:30">
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
-            *   <ul class="s-list\:icon s-ui\:accent s-mb\:30">
+            *   <ul class="s-list\:icon s-ui\:accent s-mbe:30">
             *     <li><i class="s-icon\:user"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li><i class="s-icon\:heart s-ui\:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
             * </div>
         * 
-        * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">Colors</h3>
+        * <div class="s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors</h3>
             *   <ul class="s-list s-scale\:12 s-ui\:accent">
             *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li class="s-ui\:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>

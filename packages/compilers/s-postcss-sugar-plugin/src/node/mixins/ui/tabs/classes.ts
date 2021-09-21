@@ -61,7 +61,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-tabs${
-                    style === finalParams.defaultStyle ? '' : `\:${style}`
+                    style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} tabs style`;
             })
             .join('\n')}
@@ -72,9 +72,9 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font\:30 s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">${style} style</h3>
-            *   <ul class="s-tabs${style === finalParams.defaultStyle ? '' : `\:${style}`} s-ui\:accent">
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mb\:20">${style} style</h3>
+            *   <ul class="s-tabs${style === finalParams.defaultStyle ? '' : `:${style}`} s-ui\:accent">
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -85,8 +85,8 @@ export default function ({
             .join('\n')}
         * 
         * <!-- grow -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Grow</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Grow</h3>
         *   <ul class="s-tabs\:grow">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -95,8 +95,8 @@ export default function ({
         * </div>
         * 
         * <!-- rtl -->
-        * <div class="s-font\:30 s-mb\:50" dir="rtl">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">RTL</h3>
+        * <div class="s-font:30 s-mbe:50" dir="rtl">
+        *   <h3 class="s-color:accent s-font:30 s-mb\:20">RTL</h3>
         *   <ul class="s-tabs">
         *     <li class="s-ui\:accent" tabindex="0" active>${__faker.name.findName()}</li>
         *     <li class="s-ui\:complementary" tabindex="0">${__faker.name.findName()}</li>
@@ -105,8 +105,8 @@ export default function ({
         * </div>
         * 
         * <!-- vertical -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Vertical</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Vertical</h3>
         *   <ul class="s-tabs\:vertical s-ui\:complementary">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -115,8 +115,8 @@ export default function ({
         * </div>
         * 
         * <!-- scaled -->
-        * <div class="s-font\:30 s-mb\:50">
-        *   <h3 class="s-color\:accent s-font\:30 s-mb\:20">Scaled</h3>
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Scaled</h3>
         *   <ul class="s-tabs\:grow s-scale\:13 s-ui\:accebt">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -174,7 +174,7 @@ export default function ({
         * This class represent a "<yellow>${style}</yellow>" tabs
         * 
         * @example        html
-        * <div class="s-tabs${finalParams.defaultStyle === style ? '' : `\:${style}`}">
+        * <div class="s-tabs${finalParams.defaultStyle === style ? '' : `:${style}`}">
         *    <div class="active">An active tab</div>
         *    <div>A tab</div>
         * </div>

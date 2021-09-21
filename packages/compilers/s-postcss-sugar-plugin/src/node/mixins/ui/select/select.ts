@@ -16,8 +16,8 @@ class postcssSugarPluginUiFormSelectInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf'],
-            default: ['bare', 'lnf'],
+            values: ['bare', 'lnf', 'vr', 'tf'],
+            default: ['bare', 'lnf', 'vr', 'tf'],
         },
     };
 }
@@ -33,11 +33,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormSelectParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectParams = {
@@ -51,6 +53,7 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
+            @sugar.ui.base(select, $scope: bare);
           position: relative;
           -webkit-appearance: none;
           appearance: none;
@@ -59,12 +62,12 @@ export default function ({
       `);
     }
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.style) {
-            case 'solid':
-            default:
+    switch (finalParams.style) {
+        case 'solid':
+        default:
+            if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-                @sugar.ui.base(select);
+                @sugar.ui.base(select, $scope: lnf);
                 overflow: hidden;
 
                 &[multiple] option:checked,
@@ -103,7 +106,15 @@ export default function ({
                 `);
 
                 break;
-        }
+            }
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`
+            @sugar.rhythm.vertical {
+                ${jsObjectToCssProperties(__theme().config('ui.select.:rhythmVertical'))}
+            } 
+        `);
     }
 
     replaceWith(vars);

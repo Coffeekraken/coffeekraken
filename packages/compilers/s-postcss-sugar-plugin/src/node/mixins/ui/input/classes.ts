@@ -59,7 +59,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-input${
-                    finalParams.defaultStyle === style ? '' : `\:${style}`
+                    finalParams.defaultStyle === style ? '' : `:${style}`
                 }           Apply the ${style} input style`;
             })
             .join('\n')}
@@ -68,29 +68,29 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-mb\:50">
-            *   <h3 class="s-color\:accent s-font\:30 s-mb\:30">${style} style</h3>
-            *   <label class="s-label s-mb\:30">
+            * <div class="s-mbe:50">
+            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50" />
             *   </label>
-            *   <label class="s-label s-mb\:30">
+            *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:accent" />
             *   </label>
-            *   <label class="s-label s-mb\:30">
+            *   <label class="s-label s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:complementary" />
             *   </label>
-            *   <label class="s-label s-mb\:30">
+            *   <label class="s-label s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-ui\:error" />
             *   </label>
-            *   <label dir="rtl" class="s-label s-mb\:30">
+            *   <label dir="rtl" class="s-label s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${style} s-width\:50 s-ui\:accent" />
             *   </label>
-            *   <label class="s-label s-mb\:30">
+            *   <label class="s-label s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width\:50 s-scale\:15 s-ui\:accent" />
             *   </label>

@@ -3,12 +3,12 @@ import __theme from '../../utils/theme';
 
 /**
  * @name           classes
- * @namespace      node.mixins.margin
+ * @namespace      node.mixins.opacity
  * @type           PostcssMixin
  * @platform      css
  * @status        beta
  *
- * This mixin generate all the margin helper classes like s-m:10, s-mr:40, etc...
+ * This mixin generate all the margin helper classes like s-opacity:10, s-opacity:40, etc...
  *
  * @return        {Css}         The generated css
  *
@@ -20,7 +20,7 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginOpacityClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginOpacityClassesParams {}
@@ -28,26 +28,25 @@ export interface IPostcssSugarPluginOpacityClassesParams {}
 export { postcssSugarPluginOpacityClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginOpacityClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginOpacityClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginOpacityClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginOpacityClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  const opacityObj = __theme().config('opacity');
+    const opacityObj = __theme().config('opacity');
 
-  Object.keys(opacityObj).forEach((opacity) => {
-
-    const opacityCls = `s-opacity:${opacity}`;
-    vars.push(`/**
+    Object.keys(opacityObj).forEach((opacity) => {
+        const opacityCls = `s-opacity:${opacity}`;
+        vars.push(`/**
     * @name            ${opacityCls}
     * @namespace        sugar.css.opacity
     * @type             CssClass
@@ -57,15 +56,15 @@ export default function ({
     * This class allows you to apply the "<yellow>${opacity}</yellow>" opacity style around any HTMLElement
     * 
     * @example      html
-    * <span class="${opacityCls.replace(':','\:')}">Something cool</span>
+    * <span class="${opacityCls.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
-   .${opacityCls.replace(':','--')} {
+   .${opacityCls.replace(':', '--')} {
         opacity: sugar.opacity(${opacity});
    }`);
-  });
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

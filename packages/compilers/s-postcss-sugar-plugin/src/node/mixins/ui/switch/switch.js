@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../../utils/theme';
 class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
 }
 postcssSugarPluginUiSwitchMixinInterface.definition = {
@@ -12,12 +13,12 @@ postcssSugarPluginUiSwitchMixinInterface.definition = {
             type: 'Array<String>',
             splitChars: [',', ' '],
         },
-        values: ['bare', 'lnf'],
-        default: ['bare', 'lnf'],
+        values: ['bare', 'lnf', 'tf', 'vr'],
+        default: ['bare', 'lnf', 'tf', 'vr'],
     },
 };
 export { postcssSugarPluginUiSwitchMixinInterface as interface };
-export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
+export default function ({ params, atRule, applyNoScopes, jsObjectToCssProperties, replaceWith, }) {
     const finalParams = Object.assign({ style: 'solid', scope: [] }, params);
     finalParams.scope = applyNoScopes(finalParams.scope);
     const vars = [];
@@ -39,7 +40,7 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
 
         --isLTR: 1;
 
-        &:dir(rtl) {
+        @sugar.direction.rtl {
             --isLTR: -1;
         }
 
@@ -47,16 +48,13 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
         --thumb-transition-duration: .25s;
         
         padding: var(--track-padding);
-        background: var(--track-color-inactive);
         inline-size: var(--track-size);
         block-size: var(--thumb-size);
-        border-radius: var(--track-size);
-
+        
         appearance: none;
         pointer-events: all;
         cursor: pointer;
         touch-action: pan-y;
-        border: sugar.color(ui, border) solid sugar.theme(ui.switch.borderWidth);
         outline-offset: 5px;
         box-sizing: content-box;
 
@@ -65,14 +63,10 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
         align-items: center;
         grid: [track] 1fr / [track] 1fr;
 
-        transition: sugar.theme(ui.switch.transition);
-
         &:checked {
             &::before {
-                background: var(--thumb-color-active) !important;
             }
             &::after {
-                box-shadow: 0 0 3px sugar.color(ui, --darken 20);
             }
         }
 
@@ -85,12 +79,6 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
-            background: var(--thumb-color-inactive);
-            box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
-            border-radius: 50%;
-            transform: translateX(var(--thumb-position));
-            box-shadow: 0;
-            transition: sugar.theme(ui.switch.transition);
         }
 
         &::after {
@@ -100,22 +88,14 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
-            background: rgba(255,255,25,0);
-            border-radius: 50%;
-            transform: translateX(var(--thumb-position));
-            box-shadow: 0;
-            transition: sugar.theme(ui.switch.transition);
         }
 
         &:not(:disabled):hover::before {
-            --highlight-size: .5rem;
         }
         &:not(:disabled):focus::before {
-            --highlight-size: .25rem;
         }
 
         &:checked {
-            background: var(--track-color-active);
             --thumb-position: calc((var(--track-size) - 100%) * var(--isLTR));
         }
 
@@ -126,26 +106,76 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             );
         }
 
-        &:disabled {
+        @sugar.state.disabled {
             --thumb-color: transparent;
             @sugar.disabled;
         }
 
     `);
     }
-    // if (finalParams.scope.indexOf('lnf') !== -1 && finalParams.scope.indexOf('style') !== -1) {
-    //     switch (finalParams.style) {
-    //         case 'gradient':
-    //             break;
-    //         case 'outline':
-    //             break;
-    //         case 'default':
-    //         default:
-    //             vars.push(`
-    //         `);
-    //             break;
-    //     }
-    // }
+    switch (finalParams.style) {
+        case 'solid':
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
+        
+                    font-size: sugar.scalable(0.8rem);        
+                    background: var(--track-color-inactive);
+                    border-radius: var(--track-size);
+
+                    border: sugar.color(ui, border) solid sugar.theme(ui.switch.borderWidth);
+                    outline-offset: 5px;
+                    
+                    transition: sugar.theme(ui.switch.transition);
+
+                    &:checked {
+                        &::before {
+                            background: var(--thumb-color-active) !important;
+                        }
+                        &::after {
+                            box-shadow: 0 0 3px sugar.color(ui, --darken 20);
+                        }
+                    }
+
+                    &::before {
+                        --highlight-size: 0;
+
+                        background: var(--thumb-color-inactive);
+                        box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
+                        border-radius: 50%;
+                        transform: translateX(var(--thumb-position));
+                        box-shadow: 0;
+                        transition: sugar.theme(ui.switch.transition);
+                    }
+
+                    &::after {
+                        background: rgba(255,255,25,0);
+                        border-radius: 50%;
+                        box-shadow: 0;
+                        transition: sugar.theme(ui.switch.transition);
+                    }
+
+                    &:not(:disabled):hover::before {
+                        --highlight-size: .5rem;
+                    }
+                    &:not(:disabled):focus::before {
+                        --highlight-size: .25rem;
+                    }
+
+                    &:checked {
+                        background: var(--track-color-active);
+                    }
+
+                `);
+            }
+            break;
+    }
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`
+            @sugar.rhythm.vertical {
+                ${jsObjectToCssProperties(__theme().config('ui.switch.:rhythmVertical'))}
+            } 
+        `);
+    }
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3dpdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3dpdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBS3JELE1BQU0sd0NBQXlDLFNBQVEsWUFBWTs7QUFDeEQsbURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sQ0FBQztRQUNqQixPQUFPLEVBQUUsT0FBTztLQUNuQjtJQUNELEtBQUssRUFBRTtRQUNILElBQUksRUFBRTtZQUNGLElBQUksRUFBRSxlQUFlO1lBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7U0FDekI7UUFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO1FBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7S0FDM0I7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLHdDQUF3QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWpFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixhQUFhLEVBQ2IsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxPQUFPLEVBQ2QsS0FBSyxFQUFFLEVBQUUsSUFDTixNQUFNLENBQ1osQ0FBQztJQUNGLFdBQVcsQ0FBQyxLQUFLLEdBQUcsYUFBYSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUVyRCxNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBNEdiLENBQUMsQ0FBQztLQUNGO0lBRUQsOEZBQThGO0lBQzlGLG1DQUFtQztJQUNuQywyQkFBMkI7SUFDM0IscUJBQXFCO0lBQ3JCLDBCQUEwQjtJQUMxQixxQkFBcUI7SUFDckIsMEJBQTBCO0lBQzFCLG1CQUFtQjtJQUNuQiwwQkFBMEI7SUFFMUIsY0FBYztJQUVkLHFCQUFxQjtJQUNyQixRQUFRO0lBQ1IsSUFBSTtJQUVKLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3dpdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3dpdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBR3JELE9BQU8sT0FBTyxNQUFNLHNCQUFzQixDQUFDO0FBRTNDLE1BQU0sd0NBQXlDLFNBQVEsWUFBWTs7QUFDeEQsbURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sQ0FBQztRQUNqQixPQUFPLEVBQUUsT0FBTztLQUNuQjtJQUNELEtBQUssRUFBRTtRQUNILElBQUksRUFBRTtZQUNGLElBQUksRUFBRSxlQUFlO1lBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7U0FDekI7UUFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxJQUFJLENBQUM7UUFDbkMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDO0tBQ3ZDO0NBQ0osQ0FBQztBQVFOLE9BQU8sRUFBRSx3Q0FBd0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVqRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sYUFBYSxFQUNiLHVCQUF1QixFQUN2QixXQUFXLEdBT2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLE9BQU8sRUFDZCxLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBQ0YsV0FBVyxDQUFDLEtBQUssR0FBRyxhQUFhLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRXJELE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixPQUFPO0lBQ1AsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7S0F1RmIsQ0FBQyxDQUFDO0tBQ0Y7SUFFRCxRQUFRLFdBQVcsQ0FBQyxLQUFLLEVBQUU7UUFDdkIsS0FBSyxPQUFPO1lBQ1IsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtnQkFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkFpRFQsQ0FBQyxDQUFDO2FBQ047WUFFRCxNQUFNO0tBQ2I7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3hDLElBQUksQ0FBQyxJQUFJLENBQUM7O2tCQUVBLHVCQUF1QixDQUFDLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQywyQkFBMkIsQ0FBQyxDQUFDOztTQUUvRSxDQUFDLENBQUM7S0FDTjtJQUVELFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=

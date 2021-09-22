@@ -1117,7 +1117,9 @@ body {
 --s-theme-ui-radio-focusOutline: true;
 --s-theme-ui-radio-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-radio-defaultColor: accent;
 --s-theme-ui-radio-defaultStyle: solid;
+--s-theme-ui-radio-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-checkbox-paddingInline: 0.75em;
 --s-theme-ui-checkbox-paddingBlock: 0.375em;
 --s-theme-ui-checkbox-borderRadius: 0.2em;
@@ -1128,6 +1130,7 @@ body {
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-checkbox-defaultColor: accent;
 --s-theme-ui-checkbox-defaultStyle: solid;
+--s-theme-ui-checkbox-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-range-paddingInline: 0.75em;
 --s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
@@ -1164,7 +1167,9 @@ body {
 --s-theme-ui-switch-focusOutline: true;
 --s-theme-ui-switch-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-switch-defaultColor: accent;
 --s-theme-ui-switch-defaultStyle: solid;
+--s-theme-ui-switch-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-dropdown-paddingInline: 0.75em;
 --s-theme-ui-dropdown-paddingBlock: 0.75em;
 --s-theme-ui-dropdown-borderRadius: 6px;
@@ -1183,6 +1188,7 @@ body {
 --s-theme-ui-list-bulletChar: ●;
 --s-theme-ui-list-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-list-defaultColor: accent;
 --s-theme-ui-list-defaultStyle: ul;
 --s-theme-ui-list-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-tabs-paddingInline: 1.5em;
@@ -1562,11 +1568,11 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <button>
-        *          Loretta Rau
+        *          Erik Toy
         *       </button>
         *       <br />
         *       <button>
-        *           Ed Jacobi Jr.
+        *           Ms. Francisco Ritchie
         *       </button>
         *   </div>
         * </div>
@@ -2063,15 +2069,15 @@ transform: scale(1) !important;
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">solid style</h3>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-solid-1" value="hello 1" />
-            *     <span>Dynamic Metrics Developer Mr. Ray Keebler</span>
+            *     Internal Creative Agent Betty Bergstrom
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-solid-2" value="hello 2" />
-            *     <span>Customer Infrastructure Coordinator Eddie Ledner</span>
+            *     Dynamic Markets Associate Dean Johns DDS
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-solid-3" value="hello 3" />
-            *     <span>Dynamic Quality Planner Wendy Gerhold</span>
+            *     Human Implementation Representative Mrs. Jodi Rolfson
             *   </label>
             * </div>
             * 
@@ -2081,19 +2087,19 @@ transform: scale(1) !important;
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-color-1" value="hello 1" />
-        *     <span>Senior Branding Supervisor Joey McKenzie I</span>
+        *     Corporate Research Assistant Mrs. Bernadette Reilly
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-color-2" value="hello 2" />
-        *     <span>Lead Paradigm Assistant Flora Bins</span>
+        *     Senior Brand Strategist Stephanie Romaguera
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:complementary" name="checkbox-style-color-3" value="hello 3" />
-        *     <span>Regional Data Strategist Leon Carroll</span>
+        *     Customer Solutions Administrator Mr. Dennis Rolfson
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" disabled class="s-checkbox s-ui:error" name="checkbox-style-color-4" value="hello 4" />
-        *     <span>Corporate Configuration Facilitator Ellis Dach</span>
+        *     Internal Metrics Administrator Alice Aufderhar
         *   </label>
         * </div>
         * 
@@ -2102,15 +2108,15 @@ transform: scale(1) !important;
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">LTR Support</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox s-ui:accent" name="checkbox-style-ltr-1" value="hello 1" />
-        *     <span>Investor Marketing Associate Jerry Kohler</span>
+        *     District Markets Specialist Wayne Rutherford
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-2" value="hello 2" />
-        *     <span>District Response Consultant Wade Dickens</span>
+        *     National Functionality Supervisor Zachary Kling
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-3" value="hello 3" />
-        *     <span>Legacy Functionality Manager Thomas Collier</span>
+        *     District Configuration Assistant Arlene Windler
         *   </label>
         * </div>
         * 
@@ -2119,15 +2125,15 @@ transform: scale(1) !important;
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <input type="checkbox" checked class="s-checkbox s-ui:accent" name="checkbox-style-ltr-1" value="hello 1" />
-        *     <span>Internal Optimization Consultant Garry Toy V</span>
+        *     Dynamic Accountability Architect Brenda Lakin
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-2" value="hello 2" />
-        *     <span>Internal Tactics Representative Winifred Quitzon</span>
+        *     Principal Security Director Lee Hartmann
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-3" value="hello 3" />
-        *     <span>Internal Branding Liaison Sonia Bruen</span>
+        *     Legacy Accounts Engineer Rufus Larson
         *   </label>
         * </div>
         * 
@@ -2160,90 +2166,60 @@ transform: scale(1) !important;
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-.s-checkbox + * {--s-theme-color-ui-h: var(--s-theme-color-accent-origin-h);
+.s-checkbox {--s-theme-color-ui-h: var(--s-theme-color-accent-origin-h);
 --s-theme-color-ui-s: var(--s-theme-color-accent-origin-s);
---s-theme-color-ui-l: var(--s-theme-color-accent-origin-l);
-        }
-.s-checkbox {clip: rect(0 0 0 0);
-        -webkit-clip-path: inset(50%);
-                clip-path: inset(50%);
-        height: 1px;
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
+--s-theme-color-ui-l: var(--s-theme-color-accent-origin-l);appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                position: relative;
+                width: 1em;
+                height: 1em;
                 font-size: calc(1rem * var(--s-scale, 1));
         }
-.s-checkbox:disabled + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+.s-checkbox:disabled {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
                 }
-.s-checkbox:disabled + *:hover, .s-checkbox:disabled + *:focus, .s-checkbox:disabled + *:active {
+.s-checkbox:disabled:hover, .s-checkbox:disabled:focus, .s-checkbox:disabled:active {
             opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         }
-.s-checkbox + *:after {
-                    content: "";
-                    opacity: 0;
-                    display: block;
-                    position: absolute;
-                    --borderWidth: var(--s-theme-ui-checkbox-borderWidth, 1px);
-                    top: calc(var(--borderWidth) + 0.3em);
-                    left: 0.3em;
-                    width: 0.4em;
-                    height: 0.4em;
-                }
-label:hover > .s-checkbox:not(:disabled) + *:after,
-                .s-checkbox:hover:not(:disabled) + *:after {
-                    opacity: 0.2;
-                }
-.s-checkbox:checked:not(:disabled) + *:after {
-                    opacity: 1 !important;
-                }
-.s-checkbox + * {
-                    display: inline-block;
-                    cursor: pointer;
-                    position: relative;
-                    --fs: calc(1rem * var(--s-scale, 1));
-                    -webkit-padding-start: calc(var(--fs) * 1.6);
-                            padding-inline-start: calc(var(--fs) * 1.6);
-                    font-size: calc(1rem * var(--s-scale, 1));
-                }
-.s-checkbox + *:before {
-                        content: "";  
-                        display: block;
-                        width: 1em;
-                        height: 1em;
-                        position: absolute;
-                        top: var(--s-theme-ui-checkbox-borderWidth, 1px);
-                        left: 0;
-                        opacity: 0.5;
-                    }
-[dir="rtl"] .s-checkbox + *:before {
-                        left: auto;
-                        right: 0;
-                    }
-[dir="rtl"] .s-checkbox + *:after {
-                        left: auto;
-                        right: 0.3em;
-                    }
-.s-checkbox + *:after {
-                    border-radius: 0;
-                    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+.s-checkbox{
+            
+
+                
                     transition: var(--s-theme-ui-checkbox-transition, 0);
-                }
-.s-checkbox + *:before {
-                        border: var(--s-theme-ui-checkbox-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
-                        background-color: transparent;
-                        border-radius: var(--s-theme-ui-checkbox-borderRadius, 0.2em);
+                    border: var(--s-theme-ui-checkbox-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                    border-radius: var(--s-theme-ui-checkbox-borderRadius, 0.2em);
+                    background-color: transparent;
+                    transition: var(--s-theme-ui-checkbox-transition, 0);
+                    box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
+}
+.s-checkbox:after {
+                        content: '';
+                        position: absolute;
+                        top: 50%; left: 50%;
+                        width: 0.4em; height: 0.4em;
+                        transform: translate(-50%, -50%);
+                        background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                        opacity: 0;
                         transition: var(--s-theme-ui-checkbox-transition, 0);
-                        box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
                     }
-.s-checkbox:focus:not(:hover):not(:active):not(:disabled) + *:before {
-                    box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
-                }
+label:hover > .s-checkbox:not(:disabled):after,
+                    .s-checkbox:hover:not(:disabled):after {
+                        opacity: 0.2;
+                    }
+.s-checkbox:checked:not(:disabled):after {
+                        opacity: 1 !important;
+                    }
+.s-checkbox:focus:not(:hover):not(:active):not(:disabled) {
+                        box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
+                    }
+.s-rhythm--vertical > .s-checkbox, .s-checkbox.s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
 /**
             * @name           s-format:text input[type="checkbox"]
             * @namespace      sugar.css.ui.checkbox
@@ -2253,9 +2229,9 @@ label:hover > .s-checkbox:not(:disabled) + *:after,
             * 
             * @example        html
             * <div class="s-format:text">
-            *   <input type="checkbox" checked /><span></span>
-            *   <input type="checkbox" checked /><span></span>
-            *   <input type="checkbox" checked /><span></span>
+            *   <input type="checkbox" checked />
+            *   <input type="checkbox" checked />
+            *   <input type="checkbox" checked />
             * </div>
             * 
             * @since      2.0.0
@@ -2263,88 +2239,60 @@ label:hover > .s-checkbox:not(:disabled) + *:after,
         */
 .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]), .preview .s-format--text input[type="checkbox"] {--s-theme-color-ui-h: var(--s-theme-color-accent-origin-h);
 --s-theme-color-ui-s: var(--s-theme-color-accent-origin-s);
---s-theme-color-ui-l: var(--s-theme-color-accent-origin-l);clip: rect(0 0 0 0);
-        -webkit-clip-path: inset(50%);
-                clip-path: inset(50%);
-        height: 1px;
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
+--s-theme-color-ui-l: var(--s-theme-color-accent-origin-l);appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                position: relative;
+                width: 1em;
+                height: 1em;
                 font-size: calc(1rem * var(--s-scale, 1));
                 }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *, .preview .s-format--text input[type="checkbox"]:disabled + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled, .preview .s-format--text input[type="checkbox"]:disabled {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
                 }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *:hover, .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *:focus, .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled + *:active, .preview .s-format--text input[type="checkbox"]:disabled + *:hover, .preview .s-format--text input[type="checkbox"]:disabled + *:focus, .preview .s-format--text input[type="checkbox"]:disabled + *:active {
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled:hover, .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled:focus, .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):disabled:active, .preview .s-format--text input[type="checkbox"]:disabled:hover, .preview .s-format--text input[type="checkbox"]:disabled:focus, .preview .s-format--text input[type="checkbox"]:disabled:active {
             opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *:after, .preview .s-format--text input[type="checkbox"] + *:after {
-                    content: "";
-                    opacity: 0;
-                    display: block;
-                    position: absolute;
-                    --borderWidth: var(--s-theme-ui-checkbox-borderWidth, 1px);
-                    top: calc(var(--borderWidth) + 0.3em);
-                    left: 0.3em;
-                    width: 0.4em;
-                    height: 0.4em;
-                }
-label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):not(:disabled) + *:after,
-                .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):hover:not(:disabled) + *:after,
-                label:hover > .preview .s-format--text input[type="checkbox"]:not(:disabled) + *:after,
-                .preview .s-format--text input[type="checkbox"]:hover:not(:disabled) + *:after {
-                    opacity: 0.2;
-                }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):checked:not(:disabled) + *:after, .preview .s-format--text input[type="checkbox"]:checked:not(:disabled) + *:after {
-                    opacity: 1 !important;
-                }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *, .preview .s-format--text input[type="checkbox"] + * {
-                    display: inline-block;
-                    cursor: pointer;
-                    position: relative;
-                    --fs: calc(1rem * var(--s-scale, 1));
-                    -webkit-padding-start: calc(var(--fs) * 1.6);
-                            padding-inline-start: calc(var(--fs) * 1.6);
-                    font-size: calc(1rem * var(--s-scale, 1));
-                }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *:before, .preview .s-format--text input[type="checkbox"] + *:before {
-                        content: "";  
-                        display: block;
-                        width: 1em;
-                        height: 1em;
-                        position: absolute;
-                        top: var(--s-theme-ui-checkbox-borderWidth, 1px);
-                        left: 0;
-                        opacity: 0.5;
-                    }
-[dir="rtl"] .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *:before, [dir="rtl"] .preview .s-format--text input[type="checkbox"] + *:before {
-                        left: auto;
-                        right: 0;
-                    }
-[dir="rtl"] .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *:after, [dir="rtl"] .preview .s-format--text input[type="checkbox"] + *:after {
-                        left: auto;
-                        right: 0.3em;
-                    }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *:after, .preview .s-format--text input[type="checkbox"] + *:after {
-                    border-radius: 0;
-                    background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]), .preview .s-format--text input[type="checkbox"]{
+            
+
+                
                     transition: var(--s-theme-ui-checkbox-transition, 0);
-                }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]) + *:before, .preview .s-format--text input[type="checkbox"] + *:before {
-                        border: var(--s-theme-ui-checkbox-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
-                        background-color: transparent;
-                        border-radius: var(--s-theme-ui-checkbox-borderRadius, 0.2em);
+                    border: var(--s-theme-ui-checkbox-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                    border-radius: var(--s-theme-ui-checkbox-borderRadius, 0.2em);
+                    background-color: transparent;
+                    transition: var(--s-theme-ui-checkbox-transition, 0);
+                    box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
+}
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):after, .preview .s-format--text input[type="checkbox"]:after {
+                        content: '';
+                        position: absolute;
+                        top: 50%; left: 50%;
+                        width: 0.4em; height: 0.4em;
+                        transform: translate(-50%, -50%);
+                        background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                        opacity: 0;
                         transition: var(--s-theme-ui-checkbox-transition, 0);
-                        box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
                     }
-.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):focus:not(:hover):not(:active):not(:disabled) + *:before, .preview .s-format--text input[type="checkbox"]:focus:not(:hover):not(:active):not(:disabled) + *:before {
-                    box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
-                }
+label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):not(:disabled):after,
+                    .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):hover:not(:disabled):after,
+                    label:hover > .preview .s-format--text input[type="checkbox"]:not(:disabled):after,
+                    .preview .s-format--text input[type="checkbox"]:hover:not(:disabled):after {
+                        opacity: 0.2;
+                    }
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):checked:not(:disabled):after, .preview .s-format--text input[type="checkbox"]:checked:not(:disabled):after {
+                        opacity: 1 !important;
+                    }
+.s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]):focus:not(:hover):not(:active):not(:disabled), .preview .s-format--text input[type="checkbox"]:focus:not(:hover):not(:active):not(:disabled) {
+                        box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
+                    }
+.s-rhythm--vertical > .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]), .s-format--text input[type="checkbox"]:not(.s-format--none input[type="checkbox"]).s-rhythm--vertical, .s-rhythm--vertical > .preview .s-format--text input[type="checkbox"], .preview .s-format--text input[type="checkbox"].s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
 /**
         * @name          Dropdown
         * @namespace          sugar.css.ui
@@ -2372,14 +2320,14 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-ui:accent s-mbe:30 s-mie:20">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">Product Security Officer Tina Wisoky</p>
+            *          <p class="s-typo:p s-mbe:30">Lead Interactions Developer Jeff Hansen</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-ui:complementary s-mbe:30 s-mie:20">
             *       I'm disabled
             *       <div class="s-dropdown" disabled>
-            *          <p class="s-typo:p s-mbe:30">Product Tactics Consultant Christine Fritsch</p>
+            *          <p class="s-typo:p s-mbe:30">Regional Configuration Orchestrator Harold Parker</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -2388,7 +2336,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *       <button class="s-btn s-ui:complementary">
             *           +
             *           <div class="s-dropdown:bottom-end">
-            *               <p class="s-typo:p s-mbe:30">Dynamic Creative Officer Glen Bartell</p>
+            *               <p class="s-typo:p s-mbe:30">Customer Operations Administrator Ignacio Luettgen</p>
             *               <a class="s-btn s-ui:accent">You find me!</a>
             *           </div>
             *       </button>
@@ -2401,42 +2349,42 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom (default)
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">District Assurance Assistant Miss Roberta Sanford</p>
+            *          <p class="s-typo:p s-mbe:30">Internal Marketing Officer Kirk Zulauf</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom start
             *       <div class="s-dropdown:bottom-start">
-            *          <p class="s-typo:p s-mbe:30">Dynamic Response Supervisor Rose Greenholt</p>
+            *          <p class="s-typo:p s-mbe:30">District Tactics Officer Patty Herzog</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom end
             *       <div class="s-dropdown:bottom-end">
-            *          <p class="s-typo:p s-mbe:30">Regional Communications Specialist Renee Morar</p>
+            *          <p class="s-typo:p s-mbe:30">Human Intranet Associate Willie Towne</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top
             *       <div class="s-dropdown:top">
-            *          <p class="s-typo:p s-mbe:30">Global Research Assistant Neil Beahan DDS</p>
+            *          <p class="s-typo:p s-mbe:30">Future Identity Technician Daniel Denesik</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
-            *          <p class="s-typo:p s-mbe:30">Principal Optimization Analyst Laurie Skiles</p>
+            *          <p class="s-typo:p s-mbe:30">Corporate Accountability Specialist Raul Schmitt</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
-            *          <p class="s-typo:p s-mbe:30">Chief Communications Consultant Ms. Paulette Schuster</p>
+            *          <p class="s-typo:p s-mbe:30">Future Identity Supervisor Cody Mann</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -2448,28 +2396,28 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Accent
             *       <div class="s-dropdown s-ui:accent">
-            *          <p class="s-typo:p s-mbe:30">Customer Markets Producer Brooke Flatley</p>
+            *          <p class="s-typo:p s-mbe:30">Customer Implementation Supervisor Marshall Quigley</p>
             *          <a class="s-btn s-ui:complementary">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Complementary
             *       <div class="s-dropdown s-ui:complementary">
-            *          <p class="s-typo:p s-mbe:30">Senior Applications Supervisor Claude Bergstrom</p>
+            *          <p class="s-typo:p s-mbe:30">Regional Web Developer Margarita Heathcote</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Info
             *       <div class="s-dropdown s-ui:info">
-            *          <p class="s-typo:p s-mbe:30">District Branding Coordinator Daniel Ankunding Sr.</p>
+            *          <p class="s-typo:p s-mbe:30">Human Brand Developer Ora Lebsack</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Error
             *       <div class="s-dropdown s-ui:error">
-            *          <p class="s-typo:p s-mbe:30">Direct Factors Designer Angie Kertzmann</p>
+            *          <p class="s-typo:p s-mbe:30">Legacy Accounts Assistant Ron Huel</p>
             *          <a class="s-btn">You find me!</a>
             *       </div>
             *   </button>
@@ -2481,21 +2429,21 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">Central Branding Representative Maurice Kuphal III</p>
+            *          <p class="s-typo:p s-mbe:30">Principal Assurance Representative Belinda Kub</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
-            *          <p class="s-typo:p s-mbe:30">International Integration Officer Chad VonRueden</p>
+            *          <p class="s-typo:p s-mbe:30">Future Assurance Assistant Connie Stokes</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
-            *          <p class="s-typo:p s-mbe:30">Corporate Division Orchestrator Darin Leffler</p>
+            *          <p class="s-typo:p s-mbe:30">Chief Directives Consultant Ms. Tiffany Schinner</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -2507,21 +2455,21 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Scale 0.7
             *       <div class="s-dropdown s-scale:07">
-            *          <p class="s-typo:p s-mbe:30">Internal Data Agent Ryan Heathcote IV</p>
+            *          <p class="s-typo:p s-mbe:30">Regional Optimization Associate Marsha Schneider</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       No scale
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">Human Accounts Liaison Clint Herman</p>
+            *          <p class="s-typo:p s-mbe:30">Global Configuration Developer Robyn Bradtke</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Scale 1.3
             *       <div class="s-dropdown s-scale:13">
-            *          <p class="s-typo:p s-mbe:30">Regional Mobility Agent Mercedes Hettinger</p>
+            *          <p class="s-typo:p s-mbe:30">Dynamic Research Manager Virgil Keeling</p>
             *          <a class="s-btn s-ui:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -2543,7 +2491,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <span class="s-dropdown-container">
         *     <button class="s-btn">Click me!</button>
         *     <div class="s-dropdown">
-        *         <p class="s-typo:p s-mbe:30">Internal Data Liaison Virginia Connelly</p>
+        *         <p class="s-typo:p s-mbe:30">Forward Communications Architect Bertha Roberts PhD</p>
         *         <a class="s-btn s-ui:accent">You find me!</a>
         *     </div>
         * </span>
@@ -2616,7 +2564,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom">
-        *       <p class="s-typo:p s-mbe:30">National Division Designer Wallace Weber</p>
+        *       <p class="s-typo:p s-mbe:30">Corporate Identity Officer Frank McCullough</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2640,7 +2588,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-start">
-        *       <p class="s-typo:p s-mbe:30">Direct Brand Technician Alan Swaniawski</p>
+        *       <p class="s-typo:p s-mbe:30">Customer Intranet Strategist Dr. Joann Ryan</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2669,7 +2617,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-end">
-        *       <p class="s-typo:p s-mbe:30">Forward Research Director Wilson Hayes</p>
+        *       <p class="s-typo:p s-mbe:30">Corporate Mobility Engineer Pat Jerde</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2699,7 +2647,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top">
-        *       <p class="s-typo:p s-mbe:30">Lead Assurance Developer Nadine Olson</p>
+        *       <p class="s-typo:p s-mbe:30">International Group Assistant Neal Jones IV</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2724,7 +2672,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-start">
-        *       <p class="s-typo:p s-mbe:30">Senior Tactics Liaison Damon Kihn</p>
+        *       <p class="s-typo:p s-mbe:30">Forward Interactions Officer Matt Kulas</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2754,7 +2702,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-end">
-        *       <p class="s-typo:p s-mbe:30">Internal Tactics Director Daniel Skiles</p>
+        *       <p class="s-typo:p s-mbe:30">Central Intranet Executive Jacob Hackett</p>
         *       <a class="s-btn s-ui:accent">You find me!</a>
         *   </div>
         * </button>
@@ -2804,7 +2752,7 @@ opacity: 0 !important;
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">solid style</h3>
             *   <p class="s-blockquote">
-            *       Neque et et quia vel illo ea et doloribus rerum. Delectus voluptatem sint esse a esse harum perferendis. At nemo est labore amet sint et a.
+            *       Cumque delectus qui aut minima. Sint natus aut adipisci quia voluptas aliquid consectetur. Expedita in aperiam possimus officia ut quia. Enim voluptas quo ad mollitia.
             *   </p>
             * </div>
             * 
@@ -2813,13 +2761,13 @@ opacity: 0 !important;
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <p class="s-blockquote s-mbe:30 s-ui:accent">
-        *       Quisquam cumque voluptatibus esse et fugit deleniti ut. Consequuntur laborum cum. Ad hic est sint qui. Eos voluptas adipisci vel soluta mollitia dolorem.
+        *       Debitis in nemo repudiandae explicabo. Ea voluptas tenetur nisi mollitia. Cum iure tempore voluptas ipsum minus soluta id iure quidem.
         *   </p>
         *   <p class="s-blockquote s-mbe:30 s-ui:error">
-        *       Ipsum repellat dolore et voluptatum voluptatum error ut atque. Soluta a minus quos. Libero aut rerum voluptatem ullam rerum adipisci. In veniam sed. Quia veniam et tenetur. Facere asperiores quos veniam recusandae eum quis.
+        *       Ut adipisci eaque ea facere officiis quibusdam cupiditate nisi. Quam quam quia consequatur non sed aliquid non itaque eveniet. Enim corporis consequatur. Nemo sunt unde sit odio neque officiis. Quo qui laborum sit officia aspernatur. Qui voluptates aliquam sit consequatur molestiae possimus aut voluptatem quos.
         *   </p>
         *   <p class="s-blockquote s-mbe:30 s-ui:info">
-        *       Porro aut eius. Voluptatem quia non laboriosam et aspernatur corrupti id. Autem ut laboriosam non est. Temporibus impedit aut.
+        *       Repellendus sit placeat quia repudiandae. Quia est nisi corrupti voluptate quod aut molestiae. Asperiores vero voluptate voluptatem repellendus delectus magnam doloremque. Beatae dolor aut aliquam nisi fugit consequatur aut. Animi optio velit tenetur voluptatem doloribus exercitationem occaecati.
         *   </p>
         * </div>
         *
@@ -2827,7 +2775,7 @@ opacity: 0 !important;
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">LTR Support</h3>
         *   <p class="s-blockquote s-mbe:30">
-        *       Dolorem ut quo dolor voluptatem alias illum blanditiis earum. Laborum ab pariatur aut ut qui eum expedita omnis. Repellat nesciunt et enim aut ut et. Molestiae voluptatem sint qui sed explicabo. Hic rerum corporis ullam adipisci ut doloremque.
+        *       Sapiente nisi dolorem reprehenderit deserunt sed. Quod sed adipisci unde nulla praesentium ea aut. Voluptatem maiores quasi doloremque alias non quae natus ad. Eum tenetur enim et asperiores aut error est. Eligendi incidunt est voluptatem quos et. Asperiores modi cum voluptates harum.
         *   </p>
         * </div>
         * 
@@ -2835,7 +2783,7 @@ opacity: 0 !important;
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
         *   <p class="s-blockquote s-scale:15 s-mbe:30">
-        *       Fugiat autem itaque architecto. Quis a necessitatibus. Quas dignissimos harum consequatur qui ut autem beatae aut autem. Et repellat iusto consequatur nihil voluptate officiis aut. Reiciendis ea beatae beatae eligendi ipsum velit sed. Dolorum ut esse exercitationem nam et et ullam et.
+        *       Quas sequi nobis cumque suscipit et animi. Dolorem omnis non facilis voluptas pariatur magnam est aut ut. Molestiae totam nobis maiores. Accusantium excepturi saepe in reiciendis temporibus quia quod sed ratione.
         *   </p>
         * </div>
         * 
@@ -2844,10 +2792,10 @@ opacity: 0 !important;
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <blockquote>
-        *          Suscipit quae sed soluta molestiae facere. Reprehenderit et repellendus cupiditate assumenda ipsa quod. Aliquid fugit cum. Dolorum ratione excepturi est iusto ipsum enim. Aspernatur non fuga amet consectetur consectetur. Rerum sit voluptatem fugit aut explicabo ullam fugiat.
+        *          Molestiae eum ad pariatur aut pariatur et. Earum veniam neque deserunt. Qui perferendis sunt dolorem temporibus necessitatibus. Magnam rerum quibusdam ad.
         *       </blockquote>
         *       <blockquote>
-        *           Mollitia vitae explicabo perferendis dolorem quaerat. Vel eius quis sunt ea. Qui architecto est. Velit aut et. Reprehenderit laudantium quis fugiat earum debitis voluptate ipsam adipisci suscipit. Est esse corporis est qui.
+        *           Excepturi harum reiciendis est soluta. Ratione dolore minima libero exercitationem molestias in tempora. Ea doloremque et ipsam minima quo aut pariatur quam autem.
         *       </blockquote>
         *   </div>
         * </div>
@@ -3032,27 +2980,27 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">solid style</h3>
             *   <label class="s-label s-mbe:30">
-            *       Ralph Toy
+            *       Louis Mann
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *       Keith Nitzsche
+            *       Peggy Okuneva
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:accent" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *        Freddie Kautzer
+            *        Mrs. Mario Ernser
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:complementary" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *        Russell Thompson I
+            *        Sara Fritsch DVM
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-ui:error" />
             *   </label>
             *   <label dir="rtl" class="s-label s-mbe:30">
-            *        Mercedes Mayer
+            *        John Stanton
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input:solid s-width:50 s-ui:accent" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *        Julio Koelpin
+            *        Christine Glover II
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:50 s-scale:15 s-ui:accent" />
             *   </label>
             * </div>
@@ -3173,31 +3121,31 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             *   <h3 class="s-color:accent s-font:30 s-mb:20">inline style</h3>
             *   <label class="s-mbe:30 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Regional Assurance Coordinator Edmond Walter</span>
+            *     <span>Corporate Data Engineer Lawrence O'Hara</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:info s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Investor Response Developer Erin Hettinger</span>
+            *     <span>Dynamic Group Consultant Krystal Nolan</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:error s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Central Accountability Supervisor Andrew Cummerata</span>
+            *     <span>Legacy Communications Planner Allan Corkery</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:accent s-label">
             *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
-            *     <span>Direct Creative Consultant Kara O'Reilly</span>
+            *     <span>National Intranet Administrator Dr. Eva Marquardt</span>
             *   </label>
             *   <label dir="rtl" class="s-mbe:30 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Direct Intranet Technician Derrick Koepp (RTL)</span>
+            *     <span>Corporate Implementation Orchestrator Iris Haag (RTL)</span>
             *   </label>
             *   <label class="s-mbe:30 s-scale:15 s-ui:accent s-label">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>International Integration Administrator Israel Oberbrunner (Scaled)</span>
+            *     <span>Regional Web Developer Mrs. Myron Leffler (Scaled)</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:accent s-label">
             *     <input type="text" disabled class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Future Identity Producer Ed MacGyver (Scaled)</span>
+            *     <span>Dynamic Marketing Consultant Lorenzo Heathcote (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -3206,31 +3154,31 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             *   <h3 class="s-color:accent s-font:30 s-mb:20">float style</h3>
             *   <label class="s-mbe:30 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Central Research Associate Miguel Davis</span>
+            *     <span>Principal Security Planner Cedric Boyle</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:info s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Senior Directives Designer Rochelle Keebler</span>
+            *     <span>Product Mobility Analyst Lucas Roberts</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:error s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Forward Operations Officer Roy Lebsack</span>
+            *     <span>Forward Applications Developer Brandon Bosco</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:accent s-label:float">
             *     <textarea class="s-input s-width:50" placeholder="Type something!" rows="3"></textarea>
-            *     <span>Global Identity Liaison Willie Shields</span>
+            *     <span>Product Factors Developer Dolores Gleichner</span>
             *   </label>
             *   <label dir="rtl" class="s-mbe:30 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Dynamic Response Architect Norma Rogahn (RTL)</span>
+            *     <span>Principal Integration Designer Mr. Todd Schuppe (RTL)</span>
             *   </label>
             *   <label class="s-mbe:30 s-scale:15 s-ui:accent s-label:float">
             *     <input type="text" class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Chief Accounts Liaison Rosie Shanahan (Scaled)</span>
+            *     <span>Global Quality Executive Judith Von (Scaled)</span>
             *   </label>
             *   <label class="s-mbe:30 s-ui:accent s-label:float">
             *     <input type="text" disabled class="s-input s-width:50" placeholder="Type something!" />
-            *     <span>Chief Applications Executive Teresa Ankunding (Scaled)</span>
+            *     <span>National Solutions Coordinator Harvey Kulas (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -3466,9 +3414,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">ul style</h3>
             *   <ul class="s-list:ul ">
-            *     <li>International Factors Associate Elmer Crooks</li>
-            *     <li>Customer Infrastructure Engineer Robyn Waters PhD</li>
-            *     <li>Lead Interactions Strategist Randolph Weber</li>
+            *     <li>Senior Quality Agent Sidney Schultz</li>
+            *     <li>Direct Accounts Strategist Lynn Weber</li>
+            *     <li>Legacy Metrics Agent Dr. Carlos Lubowitz</li>
             *   </ul>
             * </div>
             * 
@@ -3476,9 +3424,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">ol style</h3>
             *   <ul class="s-list:ol s-ui:accent s-scale:15">
-            *     <li>Lead Solutions Producer Amos Welch</li>
-            *     <li>Investor Solutions Supervisor Maureen Dickens</li>
-            *     <li>Investor Communications Liaison Diane Koss</li>
+            *     <li>Chief Functionality Facilitator Cheryl Brown MD</li>
+            *     <li>Lead Division Supervisor Ms. Mae Huel</li>
+            *     <li>Direct Optimization Engineer Carlton Hilpert</li>
             *   </ul>
             * </div>
             * 
@@ -3486,38 +3434,55 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">icon style</h3>
             *   <ul class="s-list:icon ">
-            *     <li><i class="s-icon:user"></i>Legacy Implementation Associate Troy Lesch</li>
-            *     <li><i class="s-icon:heart s-ui:accent"></i>Chief Research Liaison Tammy Langosh</li>
-            *     <li><i class="s-icon:fire s-ui:error"></i>Principal Intranet Associate Matthew Rogahn</li>
+            *     <li><i class="s-icon:user"></i>District Applications Coordinator Elbert Halvorson</li>
+            *     <li><i class="s-icon:heart s-ui:accent"></i>Customer Division Coordinator Lydia Denesik</li>
+            *     <li><i class="s-icon:fire s-ui:error"></i>Corporate Optimization Coordinator Lorenzo Mraz</li>
             *   </ul>
             * </div>
             * 
         *
         * <!-- RTL -->
         * <div class="s-mbe:50" dir="rtl">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL</h3>
-            *   <ul class="s-list:ul s-ui:accent s-mbe:30">
-            *     <li>Chief Research Architect Dr. Devin Mitchell</li>
-            *     <li>National Accountability Analyst Mrs. Tami West</li>
-            *   </ul>
-            *   <ul class="s-list:ol s-ui:accent s-mbe:30">
-            *     <li>Chief Accounts Agent Lillie Marks</li>
-            *     <li>Internal Program Orchestrator Miss Cora Sawayn</li>
-            *   </ul>
-            *   <ul class="s-list:icon s-ui:accent s-mbe:30">
-            *     <li><i class="s-icon:user"></i> Global Web Officer Bobby Runolfsdottir</li>
-            *     <li><i class="s-icon:heart s-ui:error"></i> Regional Division Assistant Guadalupe O'Reilly</li>
-            *   </ul>
-            * </div>
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL</h3>
+        *   <ul class="s-list:ul s-ui:accent s-mbe:30">
+        *     <li>Dynamic Mobility Analyst Derrick Powlowski</li>
+        *     <li>Dynamic Configuration Orchestrator Phyllis Little</li>
+        *   </ul>
+        *   <ul class="s-list:ol s-ui:accent s-mbe:30">
+        *     <li>Legacy Accountability Coordinator Jim Collins</li>
+        *     <li>Product Applications Analyst Laura Kassulke</li>
+        *   </ul>
+        *   <ul class="s-list:icon s-ui:accent s-mbe:30">
+        *     <li><i class="s-icon:user"></i> National Security Consultant Emma Roob Jr.</li>
+        *     <li><i class="s-icon:heart s-ui:error"></i> Customer Paradigm Producer Wallace Harris</li>
+        *   </ul>
+        * </div>
         * 
         * <div class="s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors</h3>
-            *   <ul class="s-list s-scale:12 s-ui:accent">
-            *     <li>Senior Communications Engineer Darrell Zboncak</li>
-            *     <li class="s-ui:complementary">District Metrics Assistant Orlando Lynch</li>
-            *     <li class="s-ui:error">Customer Branding Strategist Kent Anderson III</li>
-            *   </ul>
-            * </div>
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors</h3>
+        *   <ul class="s-list s-scale:12 s-ui:accent">
+        *     <li>Forward Solutions Developer Eduardo Veum</li>
+        *     <li class="s-ui:complementary">Central Solutions Technician Darla Schultz</li>
+        *     <li class="s-ui:error">Legacy Configuration Producer Jody Harber</li>
+        *   </ul>
+        * </div>
+        * 
+        * <!-- Text format -->
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
+        *   <div class="s-format:text s-rhythm:vertical">
+        *       <ul>
+        *           <li>Estelle Homenick</li>
+        *           <li>Juan Glover</li>
+        *           <li>Sherri Littel PhD</li>
+        *       </ul>
+        *       <ol>
+        *           <li>Jean Kiehn</li>
+        *           <li>Rolando D'Amore</li>
+        *           <li>Debra Wilkinson</li>
+        *       </ol>
+        *   </div>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -3576,6 +3541,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
                             margin-top: 0.25em;
                             font-size: 0.7em;
                         }
+.s-rhythm--vertical > .s-list, .s-list.s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
 /**
         * @name           s-list--ul
         * @namespace      sugar.css.ui.list
@@ -3703,6 +3671,135 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
                             font-size: 0.7em;
                         }
 /**
+            * @name           s-format:text ul
+            * @namespace      sugar.css.ui.list
+            * @type           CssClass
+            * 
+            * This class represent a simple ul tag in the s-format:text scope
+            * 
+            * @feature      Support vertical rhythm
+            * 
+            * @example        html
+            * <div class="s-format:text">
+            *   <ul>
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *   </ul>
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+.s-format--text ul:not(.s-format--none ul), .preview .s-format--text ul {--s-theme-color-ui-h: var(--s-theme-color-accent-origin-h);
+--s-theme-color-ui-s: var(--s-theme-color-accent-origin-s);
+--s-theme-color-ui-l: var(--s-theme-color-accent-origin-l);position: relative;
+        font-size: calc(1rem * var(--s-scale, 1));
+                }
+.s-format--text ul:not(.s-format--none ul) > *, .preview .s-format--text ul > * {
+            display: block !important;
+            -webkit-padding-start: 1em;
+                    padding-inline-start: 1em;
+            margin-bottom: 0.5em;  
+        }
+.s-format--text ul:not(.s-format--none ul) > * > *, .preview .s-format--text ul > * > * {
+                margin-top: 0.5em;
+            }
+.s-rhythm--vertical > .s-format--text ul:not(.s-format--none ul), .s-format--text ul:not(.s-format--none ul).s-rhythm--vertical, .s-rhythm--vertical > .preview .s-format--text ul, .preview .s-format--text ul.s-rhythm--vertical{
+            margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
+.s-format--text ul:not(.s-format--none ul) > *:before, .preview .s-format--text ul > *:before {
+                    display: inline-block;
+                    position: absolute;
+                    left: 0.5em;
+                    transform: translateX(-50%);
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                }
+.s-format--text ul:not(.s-format--none ul) > * > *:not(i), .preview .s-format--text ul > * > *:not(i) {--s-theme-color-ui-h: var(--s-theme-color-main-origin-h);
+--s-theme-color-ui-s: var(--s-theme-color-main-origin-s);
+--s-theme-color-ui-l: var(--s-theme-color-main-origin-l);
+                }
+[dir="rtl"] .s-format--text ul:not(.s-format--none ul) > *:before, .s-format--text ul:not(.s-format--none ul)[dir="rtl"] > *:before, [dir="rtl"] .preview .s-format--text ul > *:before, .preview .s-format--text ul[dir="rtl"] > *:before {
+                    left: auto;
+                    right: 0;
+                    transform: none;
+                }
+.s-format--text ul:not(.s-format--none ul) > *:before, .preview .s-format--text ul > *:before {
+                            content: "●";
+                            margin-top: 0.25em;
+                            font-size: 0.7em;
+                        }
+.s-rhythm--vertical > .s-format--text ul:not(.s-format--none ul), .s-format--text ul:not(.s-format--none ul).s-rhythm--vertical, .s-rhythm--vertical > .preview .s-format--text ul, .preview .s-format--text ul.s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
+/**
+            * @name           s-format:text ol
+            * @namespace      sugar.css.ui.list
+            * @type           CssClass
+            * 
+            * This class represent a simple ol tag in the s-format:text scope
+            * 
+            * @feature      Support vertical rhythm
+            * 
+            * @example        html
+            * <div class="s-format:text">
+            *   <ol>
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *   </ol>
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+.s-format--text ol:not(.s-format--none ol), .preview .s-format--text ol {--s-theme-color-ui-h: var(--s-theme-color-accent-origin-h);
+--s-theme-color-ui-s: var(--s-theme-color-accent-origin-s);
+--s-theme-color-ui-l: var(--s-theme-color-accent-origin-l);position: relative;
+        font-size: calc(1rem * var(--s-scale, 1));
+
+        counter-reset: s-ol-list;
+                }
+.s-format--text ol:not(.s-format--none ol) > *, .preview .s-format--text ol > * {
+            display: block !important;
+            -webkit-padding-start: 1em;
+                    padding-inline-start: 1em;
+            margin-bottom: 0.5em;  
+        }
+.s-format--text ol:not(.s-format--none ol) > * > *, .preview .s-format--text ol > * > * {
+                margin-top: 0.5em;
+            }
+.s-rhythm--vertical > .s-format--text ol:not(.s-format--none ol), .s-format--text ol:not(.s-format--none ol).s-rhythm--vertical, .s-rhythm--vertical > .preview .s-format--text ol, .preview .s-format--text ol.s-rhythm--vertical{
+            margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
+.s-format--text ol:not(.s-format--none ol) > *:before, .preview .s-format--text ol > *:before {
+                    display: inline-block;
+                    position: absolute;
+                    left: 0.5em;
+                    transform: translateX(-50%);
+                    color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                }
+.s-format--text ol:not(.s-format--none ol) > * > *:not(i), .preview .s-format--text ol > * > *:not(i) {--s-theme-color-ui-h: var(--s-theme-color-main-origin-h);
+--s-theme-color-ui-s: var(--s-theme-color-main-origin-s);
+--s-theme-color-ui-l: var(--s-theme-color-main-origin-l);
+                }
+[dir="rtl"] .s-format--text ol:not(.s-format--none ol) > *:before, .s-format--text ol:not(.s-format--none ol)[dir="rtl"] > *:before, [dir="rtl"] .preview .s-format--text ol > *:before, .preview .s-format--text ol[dir="rtl"] > *:before {
+                    left: auto;
+                    right: 0;
+                    transform: none;
+                }
+.s-format--text ol:not(.s-format--none ol) > *, .preview .s-format--text ol > * {
+                        counter-increment: s-ol-list;
+                    }
+.s-format--text ol:not(.s-format--none ol) > *:before, .preview .s-format--text ol > *:before {
+                            content: counter(s-ol-list);
+                            margin-top: 0.25em;
+                            font-size: 0.7em;
+                        }
+.s-rhythm--vertical > .s-format--text ol:not(.s-format--none ol), .s-format--text ol:not(.s-format--none ol).s-rhythm--vertical, .s-rhythm--vertical > .preview .s-format--text ol, .preview .s-format--text ol.s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
+/**
         * @name           s-loader:spinner
         * @namespace      sugar.css.ui.range
         * @type           CssClass
@@ -3768,9 +3865,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
             *   <ul class="s-tabs s-ui:accent">
-            *     <li tabindex="0">Mabel Parker II</li>
-            *     <li tabindex="0" active>Bryant Quigley</li>
-            *     <li tabindex="0">Francisco Veum</li>
+            *     <li tabindex="0">Alison Hessel</li>
+            *     <li tabindex="0" active>Whitney Koepp</li>
+            *     <li tabindex="0">Mr. Melissa Champlin</li>
             *   </ul>
             * </div>
             * 
@@ -3779,9 +3876,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Grow</h3>
         *   <ul class="s-tabs:grow">
-        *     <li tabindex="0" active>Sheila Mills</li>
-        *     <li tabindex="0">Gloria DuBuque</li>
-        *     <li tabindex="0">Timmy Macejkovic</li>
+        *     <li tabindex="0" active>Mr. Moses MacGyver</li>
+        *     <li tabindex="0">Sheldon Altenwerth Sr.</li>
+        *     <li tabindex="0">Gregory Christiansen</li>
         *   </ul>
         * </div>
         * 
@@ -3789,9 +3886,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">RTL</h3>
         *   <ul class="s-tabs">
-        *     <li class="s-ui:accent" tabindex="0" active>Miss Owen Heaney</li>
-        *     <li class="s-ui:complementary" tabindex="0">Dwight Corkery</li>
-        *     <li tabindex="0">Anna Little</li>
+        *     <li class="s-ui:accent" tabindex="0" active>Lamar Mann</li>
+        *     <li class="s-ui:complementary" tabindex="0">Winston Kemmer</li>
+        *     <li tabindex="0">Brendan Bechtelar</li>
         *   </ul>
         * </div>
         * 
@@ -3799,9 +3896,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Vertical</h3>
         *   <ul class="s-tabs:vertical s-ui:complementary">
-        *     <li tabindex="0" active>Jermaine McCullough</li>
-        *     <li tabindex="0">Cornelius Harber</li>
-        *     <li tabindex="0">Lucille Stoltenberg</li>
+        *     <li tabindex="0" active>Mr. Omar Will</li>
+        *     <li tabindex="0">Ian Rath</li>
+        *     <li tabindex="0">Miss Ada Emmerich</li>
         *   </ul>
         * </div>
         * 
@@ -3809,9 +3906,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Scaled</h3>
         *   <ul class="s-tabs:grow s-scale:13 s-ui:accebt">
-        *     <li tabindex="0" active>Crystal Tromp</li>
-        *     <li tabindex="0">Francisco Anderson</li>
-        *     <li tabindex="0">Angelina Reynolds</li>
+        *     <li tabindex="0" active>Rosemary Crona</li>
+        *     <li tabindex="0">Joanne O'Reilly</li>
+        *     <li tabindex="0">Faith Rau</li>
         *   </ul>
         * </div>
         *
@@ -4337,80 +4434,99 @@ background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-u
         * 
         * These classes allows you to display nice radio in your forms
         * 
+        * @feature          Support for scaling through the "s-scale:..." class
+        * @feature          Support for colorizing through the "s-ui:..." class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
          * @cssClass     s-radio           Apply the solid radio style
         * 
         * @example        html
          * <!-- solid style -->
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">solid style</h3>
-            *   <label class="s-mbe:30 s-ui:accent s-label">
-            *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 1" />
-            *     <span>Dynamic Accounts Planner Mr. Corey Kilback</span>
+            *   <label class="s-mbe:30 s-label">
+            *     <input type="radio" checked class="s-radio" name="radio-style-solid" value="hello 1" checked />
+            *     Central Identity Agent Rudolph Littel
             *   </label>
-            *   <label class="s-mbe:30 s-ui:accent s-label">
-            *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 2" />
-            *     <span>Customer Integration Agent Dolores Hegmann</span>
+            *   <label class="s-mbe:30 s-label">
+            *     <input type="radio" class="s-radio s-ui:accent" name="radio-style-solid" value="hello 2" />
+            *     Direct Research Agent Jay Donnelly
             *   </label>
-            *   <label class="s-mbe:30 s-ui:accent s-label">
-            *     <input type="radio" class="s-radio" name="radio-style-solid" value="hello 3" />
-            *     <span>Chief Directives Consultant Bobby Fisher</span>
+            *   <label class="s-mbe:30 s-label">
+            *     <input type="radio" class="s-radio s-ui:accent" name="radio-style-solid" value="hello 3" />
+            *     Internal Accountability Facilitator Amber Hartmann
             *   </label>
             * </div>
             * 
         * 
         * <!-- Colors -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors</h3>
-        *   <label class="s-mbe:30 s-ui:accent s-label">
-        *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 1" checked="checked" />
-        *     <span>Investor Security Consultant Rick Baumbach Sr.</span>
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" checked class="s-radio" name="radio-style-color" value="hello 1" checked />
+        *     Principal Mobility Associate Glen Boehm
         *   </label>
-        *   <label class="s-mbe:30 s-ui:info s-label">
-        *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 2" />
-        *     <span>Direct Applications Manager Julio Bailey</span>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" class="s-radio s-ui:accent" name="radio-style-color" value="hello 2" />
+        *     Chief Configuration Specialist Myra Mante III
         *   </label>
-        *   <label class="s-mbe:30 s-ui:error s-label">
-        *     <input type="radio" class="s-radio" name="radio-style-color" value="hello 3" />
-        *     <span>Central Security Consultant Vanessa Crona</span>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" class="s-radio s-ui:complementary" name="radio-style-color" value="hello 3" />
+        *     National Accounts Designer Francisco Lehner
         *   </label>
-        *   <label class="s-mbe:30 s-ui:warning s-label">
-        *     <input type="radio" disabled class="s-radio" name="radio-style-color" value="hello 4" />
-        *     <span>Chief Quality Developer Joel Sipes</span>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" disabled class="s-radio s-ui:error" name="radio-style-color" value="hello 4" />
+        *     Regional Branding Coordinator Felipe Toy
         *   </label>
         * </div>
         * 
         * <!-- LTR -->
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">LTR Support</h3>
-        *   <label class="s-mbe:30 s-ui:accent s-label">
-        *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 1" checked="checked" />
-        *     <span>Chief Mobility Representative Jason Balistreri</span>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" checked class="s-radio s-ui:accent" name="radio-style-ltr" value="hello 1" checked />
+        *     Product Marketing Facilitator Iris Runte
         *   </label>
-        *   <label class="s-mbe:30 s-ui:accent s-label">
-        *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 2" />
-        *     <span>International Security Executive Bridget Koepp</span>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" class="s-radio s-ui:accent" name="radio-style-ltr" value="hello 2" />
+        *     International Optimization Facilitator Sophia Cole
         *   </label>
-        *   <label class="s-mbe:30 s-ui:accent s-label">
-        *     <input type="radio" class="s-radio" name="radio-style-ltr" value="hello 3" />
-        *     <span>Investor Mobility Planner Emma Orn</span>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" class="s-radio s-ui:accent" name="radio-style-ltr" value="hello 3" />
+        *     Chief Functionality Associate Ms. Melissa Kemmer
         *   </label>
         * </div>
         * 
         * <!-- Scale -->
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
-        *   <label class="s-mbe:30 s-ui:accent s-label s-scale:07">
-        *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 1" />
-        *     <span>Dynamic Mobility Engineer Elena Prohaska</span>
+        *   <label class="s-mbe:30 s-label s-scale:07">
+        *     <input type="radio" checked class="s-radio s-ui:accent" name="radio-style-scale" value="hello 1" checked />
+        *     Principal Communications Orchestrator Dr. Isaac Rowe
         *   </label>
-        *   <label class="s-mbe:30 s-ui:accent s-label">
-        *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 2" checked="checked" />
-        *     <span>Investor Program Orchestrator Roland Schumm</span>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="radio" class="s-radio s-ui:accent" name="radio-style-scale" value="hello 2" />
+        *     Internal Tactics Engineer Pauline Hane
         *   </label>
-        *   <label class="s-mbe:30 s-ui:accent s-label s-scale:13">
-        *     <input type="radio" class="s-radio" name="radio-style-scale" value="hello 3" />
-        *     <span>Customer Infrastructure Executive Bernice Reinger</span>
+        *   <label class="s-mbe:30 s-label s-scale:13">
+        *     <input type="radio" class="s-radio s-ui:accent" name="radio-style-scale" value="hello 3" />
+        *     Investor Mobility Assistant Sylvester Torp
         *   </label>
+        * </div>
+        * 
+        * <!-- Text format -->
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Text format</h3>
+        *   <p class="s-typo:p s-mbe:30">
+        *       Text format mean that all the "input[type="chockbox"" tags inside the "s-format:text" class scope will be styled automatically using the default style and color.
+        *   </p>
+        *   <div class="s-format:text">
+        *     <input type="radio" />
+        *   </div>
         * </div>
         * 
         * @since      2.0.0
@@ -4431,83 +4547,133 @@ background-color: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-u
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-.s-radio {clip: rect(0 0 0 0);
-        -webkit-clip-path: inset(50%);
-                clip-path: inset(50%);
-        height: 1px;
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
-
-            font-size: calc(1rem * var(--s-scale, 1));
+.s-radio {appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                position: relative;
+                width: 1em;
+                height: 1em;
+                font-size: calc(1rem * var(--s-scale, 1));
         }
-.s-radio:disabled + * {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+.s-radio:disabled {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
-            }
-.s-radio:disabled + *:hover, .s-radio:disabled + *:focus, .s-radio:disabled + *:active {
+                }
+.s-radio:disabled:hover, .s-radio:disabled:focus, .s-radio:disabled:active {
             opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         }
-.s-radio + *:after {
-                content: "";
-                opacity: 0;
-                display: block;
-                position: absolute;
-                --borderWidth: var(--s-theme-ui-radio-borderWidth, 1px);
-                top: calc(var(--borderWidth) + 0.3em);
-                left: 0.3em;
-                width: 0.4em;
-                height: 0.4em;
-                border-radius: var(--s-theme-ui-radio-borderRadius, 0.5em);
-                background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
-                transition: var(--s-theme-ui-radio-transition, 0);
-            }
-label:hover > .s-radio:not(:disabled) + *:after,
-            .s-radio:hover:not(:disabled) + *:after {
-                opacity: 0.5;
-            }
-.s-radio:checked:not(:disabled) + *:after {
-                opacity: 1 !important;
-            }
-.s-radio + * {
-                display: inline-block;
-                cursor: pointer;
-                position: relative;
-                --fs: calc(1rem * var(--s-scale, 1));
-                -webkit-padding-start: calc(var(--fs) * 1.6);
-                        padding-inline-start: calc(var(--fs) * 1.6);
-                font-size: calc(1rem * var(--s-scale, 1));
-            }
-.s-radio + *:before {
-                    content: "";  
-                    display: block;
-                    width: 1em;
-                    height: 1em;
-                    position: absolute;
-                    top: var(--s-theme-ui-radio-borderWidth, 1px);
-                    left: 0;
-                    opacity: 0.5;
+.s-radio{
+            
+
+                
+                    transition: var(--s-theme-ui-radio-transition, 0);
                     border: var(--s-theme-ui-radio-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
-                    background-color: transparent;
                     border-radius: var(--s-theme-ui-radio-borderRadius, 0.5em);
+                    background-color: transparent;
                     transition: var(--s-theme-ui-radio-transition, 0);
                     box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
+}
+.s-radio:after {
+                        content: '';
+                        position: absolute;
+                        top: 50%; left: 50%;
+                        width: 0.4em; height: 0.4em;
+                        border-radius: var(--s-theme-ui-radio-borderRadius, 0.5em);
+                        transform: translate(-50%, -50%);
+                        background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                        opacity: 0;
+                        transition: var(--s-theme-ui-radio-transition, 0);
+                    }
+label:hover > .s-radio:not(:disabled):after,
+                    .s-radio:hover:not(:disabled):after {
+                        opacity: 0.2;
+                    }
+.s-radio:checked:not(:disabled):after {
+                        opacity: 1 !important;
+                    }
+.s-radio:focus:not(:hover):not(:active):not(:disabled) {
+                        box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
+                    }
+.s-rhythm--vertical > .s-radio, .s-radio.s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
+/**
+            * @name           s-format:text input[type="radio"]
+            * @namespace      sugar.css.ui.radio
+            * @type           CssClass
+            * 
+            * This class represent a simple input[type="radio"] tag in the s-format:text scope
+            * 
+            * @example        html
+            * <div class="s-format:text">
+            *   <input type="radio" name="my-radio" checked />
+            *   <input type="radio" name="my-radio" />
+            *   <input type="radio" name="my-radio" />
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+.s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]), .preview .s-format--text input[type="radio"] {--s-theme-color-ui-h: var(--s-theme-color-ui-origin-h);
+--s-theme-color-ui-s: var(--s-theme-color-ui-origin-s);
+--s-theme-color-ui-l: var(--s-theme-color-ui-origin-l);appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                position: relative;
+                width: 1em;
+                height: 1em;
+                font-size: calc(1rem * var(--s-scale, 1));
                 }
-.s-radio:focus:not(:hover):not(:active):not(:disabled) + *:before {
-                box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
-            }
-[dir="rtl"] .s-radio + *:before {
-                    left: auto;
-                    right: 0;
+.s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):disabled, .preview .s-format--text input[type="radio"]:disabled {opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        cursor: not-allowed !important;
+        -webkit-user-select: none !important;
+           -moz-user-select: none !important;
+            -ms-user-select: none !important;
+                user-select: none !important;
                 }
-[dir="rtl"] .s-radio + *:after {
-                    left: auto;
-                    right: 0.3em;
-                }
+.s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):disabled:hover, .s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):disabled:focus, .s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):disabled:active, .preview .s-format--text input[type="radio"]:disabled:hover, .preview .s-format--text input[type="radio"]:disabled:focus, .preview .s-format--text input[type="radio"]:disabled:active {
+            opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+        }
+.s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]), .preview .s-format--text input[type="radio"]{
+            
+
+                
+                    transition: var(--s-theme-ui-radio-transition, 0);
+                    border: var(--s-theme-ui-radio-borderWidth, 1px) solid hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                    border-radius: var(--s-theme-ui-radio-borderRadius, 0.5em);
+                    background-color: transparent;
+                    transition: var(--s-theme-ui-radio-transition, 0);
+                    box-shadow: 0 0 0 0 hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.2));
+}
+.s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):after, .preview .s-format--text input[type="radio"]:after {
+                        content: '';
+                        position: absolute;
+                        top: 50%; left: 50%;
+                        width: 0.4em; height: 0.4em;
+                        border-radius: var(--s-theme-ui-radio-borderRadius, 0.5em);
+                        transform: translate(-50%, -50%);
+                        background: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 1));
+                        opacity: 0;
+                        transition: var(--s-theme-ui-radio-transition, 0);
+                    }
+label:hover > .s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):not(:disabled):after,
+                    .s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):hover:not(:disabled):after,
+                    label:hover > .preview .s-format--text input[type="radio"]:not(:disabled):after,
+                    .preview .s-format--text input[type="radio"]:hover:not(:disabled):after {
+                        opacity: 0.2;
+                    }
+.s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):checked:not(:disabled):after, .preview .s-format--text input[type="radio"]:checked:not(:disabled):after {
+                        opacity: 1 !important;
+                    }
+.s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]):focus:not(:hover):not(:active):not(:disabled), .preview .s-format--text input[type="radio"]:focus:not(:hover):not(:active):not(:disabled) {
+                        box-shadow: 0 0 0 var(--s-theme-ui-focusOutline-borderWidth, 10px) hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-a, 0.3));
+                    }
+.s-rhythm--vertical > .s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]), .s-format--text input[type="radio"]:not(.s-format--none input[type="radio"]).s-rhythm--vertical, .s-rhythm--vertical > .preview .s-format--text input[type="radio"], .preview .s-format--text input[type="radio"].s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
 /**
         * @name           s-range
         * @namespace      sugar.css.ui.range
@@ -4714,6 +4880,14 @@ label:hover > .s-radio:not(:disabled) + *:after,
         * 
         * These classes allows you to display nice select in your forms
         * 
+        * @feature          Support for scaling through the "s-scale:..." class
+        * @feature          Support for colorizing through the "s-ui:..." class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
          * @cssClass     s-select           Apply the solid select style
         * 
         * @example        html
@@ -4722,27 +4896,27 @@ label:hover > .s-radio:not(:disabled) + *:after,
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">solid style</h3>
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select s-width:50" name="select-style-solid">
-            *       <option value="value1">Juana Gerlach</option>
-            *       <option value="value2">Adrienne Barton</option>
-            *       <option value="value3">Trevor Howell</option>
+            *       <option value="value1">Patricia Abernathy</option>
+            *       <option value="value2">Arturo Lowe</option>
+            *       <option value="value3">Dr. Clark Bogisich</option>
             *     </select>
-            *     <span>Lead Brand Supervisor Karl Rolfson</span>
+            *     <span>Internal Operations Officer Tyler Crist</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select s-ui:accent s-width:50" name="select-style-solid">
-            *       <option value="value1">Wade Johns</option>
-            *       <option value="value2">Frankie Mueller</option>
-            *       <option value="value3">Norman Roberts</option>
+            *       <option value="value1">Emanuel Bergnaum</option>
+            *       <option value="value2">Cesar Reinger</option>
+            *       <option value="value3">Miss Guy Hagenes</option>
             *     </select>
-            *     <span>Human Metrics Planner Amos Wunsch</span>
+            *     <span>Legacy Mobility Strategist Dr. Lucas Greenfelder</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select s-ui:accent s-width:50" name="select-style-solid">
-            *       <option value="value1">Samuel Towne</option>
-            *       <option value="value2">Teresa Dickens</option>
-            *       <option value="value3">Sammy Maggio</option>
+            *       <option value="value1">Lance Altenwerth</option>
+            *       <option value="value2">Jennifer Goldner</option>
+            *       <option value="value3">Cindy Braun</option>
             *     </select>
-            *     <span>Product Implementation Technician Brandon Schumm</span>
+            *     <span>Direct Marketing Supervisor Sonja Franecki</span>
             *   </label>
             * </div>
             * 
@@ -4752,35 +4926,35 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-width:50" name="select-color-accent">
-        *       <option value="value1">Gregory Littel PhD</option>
-        *       <option value="value2">Jermaine Kuvalis</option>
-        *       <option value="value3">Dolores Kunde</option>
+        *       <option value="value1">Charlotte Johns</option>
+        *       <option value="value2">Mrs. Dan Krajcik</option>
+        *       <option value="value3">Naomi Jenkins</option>
         *     </select>
-        *     <span>Dynamic Data Supervisor Andy Wilderman</span>
+        *     <span>Direct Directives Developer Krista Gutkowski Jr.</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:accent s-width:50" name="select-color-complementary">
-        *       <option value="value1">Julie Lang</option>
-        *       <option value="value2">Margarita Crona</option>
-        *       <option value="value3">Courtney Zieme</option>
+        *       <option value="value1">Ms. Terry Runolfsson</option>
+        *       <option value="value2">Dr. Mae Oberbrunner</option>
+        *       <option value="value3">Mr. Neal Wolf</option>
         *     </select>
-        *     <span>District Assurance Supervisor Joe Bradtke</span>
+        *     <span>Senior Data Specialist Jay McCullough</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:complementary s-width:50" name="select-color-error">
-        *       <option value="value1">Delbert Brown</option>
-        *       <option value="value2">Judith Mueller</option>
-        *       <option value="value3">Wilma Kautzer</option>
+        *       <option value="value1">Amanda Hyatt</option>
+        *       <option value="value2">Earnest Trantow II</option>
+        *       <option value="value3">Dr. Amber O'Keefe</option>
         *     </select>
-        *     <span>Customer Group Developer Jesus Daniel</span>
+        *     <span>Legacy Web Facilitator Shari Veum</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:error s-width:50" name="select-color-error" disabled>
-        *       <option value="value1">Sharon Langworth</option>
-        *       <option value="value2">Donna McCullough</option>
-        *       <option value="value3">Luis Rau</option>
+        *       <option value="value1">Alexandra Harber</option>
+        *       <option value="value2">Rafael Davis III</option>
+        *       <option value="value3">Mr. Kristina Schaden</option>
         *     </select>
-        *     <span>Global Quality Coordinator Frederick O'Reilly</span>
+        *     <span>Lead Creative Liaison Raul Rohan</span>
         *   </label>
         * </div>
         * 
@@ -4789,11 +4963,11 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Multiple</h3>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:accent s-width:50" multiple name="select-color-accent">
-        *       <option value="value1">Deanna Olson</option>
-        *       <option value="value2">Maggie McGlynn DDS</option>
-        *       <option value="value3">Luther Donnelly</option>
+        *       <option value="value1">Sonia Toy</option>
+        *       <option value="value2">Wendy Marquardt</option>
+        *       <option value="value3">Salvador Wunsch</option>
         *     </select>
-        *     <span>Lead Optimization Administrator Virgil Bogisich</span>
+        *     <span>District Solutions Supervisor Rosalie Kohler</span>
         *   </label>
         * </div>
         * 
@@ -4802,27 +4976,27 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL Support</h3>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
-        *       <option value="value1">Blanche Pfannerstill</option>
-        *       <option value="value2">Sergio Walter</option>
-        *       <option value="value3">Lori Windler</option>
+        *       <option value="value1">Josefina Koss</option>
+        *       <option value="value2">Marcia Carroll</option>
+        *       <option value="value3">Madeline Dooley</option>
         *     </select>
-        *     <span>Dynamic Web Administrator Benjamin Bednar V</span>
+        *     <span>Chief Group Associate Al Huel</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
-        *       <option value="value1">Alicia Kerluke</option>
-        *       <option value="value2">Pearl Feeney</option>
-        *       <option value="value3">Wendy Dare</option>
+        *       <option value="value1">Colleen Bauch</option>
+        *       <option value="value2">Vanessa Leannon</option>
+        *       <option value="value3">Wilma Kuvalis</option>
         *     </select>
-        *     <span>District Mobility Executive Alice Bernhard</span>
+        *     <span>Customer Division Coordinator Edmund Larson</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
-        *       <option value="value1">Arthur Oberbrunner</option>
-        *       <option value="value2">Saul Hodkiewicz</option>
-        *       <option value="value3">Sophie Medhurst</option>
+        *       <option value="value1">Toni Prohaska</option>
+        *       <option value="value2">Sandy Douglas</option>
+        *       <option value="value3">Marta Douglas</option>
         *     </select>
-        *     <span>Lead Directives Assistant Madeline Fisher</span>
+        *     <span>Customer Branding Developer Beatrice Cormier</span>
         *   </label>
         * </div>
         * 
@@ -4831,27 +5005,27 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
-        *       <option value="value1">Everett Terry</option>
-        *       <option value="value2">Bruce Stehr</option>
-        *       <option value="value3">Claire Blick</option>
+        *       <option value="value1">Kellie Fay</option>
+        *       <option value="value2">Diane Gerlach</option>
+        *       <option value="value3">Pat Miller</option>
         *     </select>
-        *     <span>Global Implementation Assistant Saul Effertz II</span>
+        *     <span>Dynamic Implementation Developer Kathy Kuhn</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
-        *       <option value="value1">Archie Stehr</option>
-        *       <option value="value2">Walter O'Reilly</option>
-        *       <option value="value3">Jeannette Maggio</option>
+        *       <option value="value1">Adam Collins</option>
+        *       <option value="value2">Annie Mosciski</option>
+        *       <option value="value3">Bryan Quigley</option>
         *     </select>
-        *     <span>District Group Representative Mr. Mathew Becker</span>
+        *     <span>Internal Metrics Assistant Delia Rath</span>
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
-        *       <option value="value1">Mamie Huels</option>
-        *       <option value="value2">Cynthia Ernser</option>
-        *       <option value="value3">Catherine Hackett</option>
+        *       <option value="value1">Miss Joanne Willms</option>
+        *       <option value="value2">Lionel Konopelski</option>
+        *       <option value="value3">Alton Kohler</option>
         *     </select>
-        *     <span>Future Marketing Officer Rebecca Bernier</span>
+        *     <span>National Mobility Analyst Terrence Hackett DDS</span>
         *   </label>
         * </div>
         * 
@@ -4863,9 +5037,9 @@ label:hover > .s-radio:not(:disabled) + *:after,
         *   </p>
         *   <div class="s-format:text">
         *     <select class="s-width:50" name="select-color-accent">
-        *       <option value="value1">Irving Haley</option>
-        *       <option value="value2">Jerald Huel</option>
-        *       <option value="value3">Michelle Koss</option>
+        *       <option value="value1">Phillip Parker</option>
+        *       <option value="value2">Jessie Wolf</option>
+        *       <option value="value3">Kristi Graham</option>
         *     </select>
         *   </div>
         * </div>
@@ -5005,9 +5179,9 @@ label .s-select:disabled + *:hover, label .s-select:disabled + *:focus, label .s
             * @example        html
             * <div class="s-format:text">
             *   <select>
-            *       <option>Clifton Feil</option>
-            *       <option>Toni Haag</option>
-            *       <option>Jon Bashirian</option>
+            *       <option>Norman Medhurst</option>
+            *       <option>Ron Bashirian</option>
+            *       <option>Miss Jeannette Tillman</option>
             *   </select>
             * </div>
             * 
@@ -5125,14 +5299,22 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
                 margin-bottom: var(--s-theme-margin-40, 2.25rem);
 }
 /**
-        * @name          Switches
+        * @name          Switch
         * @namespace          sugar.css.ui
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/switches
+        * @menu           Styleguide / UI        /styleguide/form/switch
         * @platform       css
         * @status       beta
         * 
         * These classes allows you to style checkbox HTMLElement as switches
+        * 
+        * @feature          Support for scaling through the "s-scale:..." class
+        * @feature          Support for colorizing through the "s-ui:..." class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
         * 
          * @cssClass     s-switch           Apply the solid switch style
         * 
@@ -5141,38 +5323,58 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-color:accent s-font:30 s-mb:20">solid style</h3>
             *   <label class="s-mbe:30 s-label">
-            *     Human Identity Officer Casey Lubowitz
+            *     Regional Marketing Technician Ora Wisoky
             *     <input type="checkbox" checked class="s-switch" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     Chief Solutions Administrator Archie Kertzmann
-            *     <input type="checkbox"  class="s-switch s-ui:accent" />
+            *     Customer Accounts Liaison Anita Gibson
+            *     <input type="checkbox" checked class="s-switch s-ui:accent" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     International Accountability Manager Valerie Hoeger
+            *     International Solutions Supervisor Chelsea Nikolaus
             *     <input type="checkbox"  class="s-switch s-ui:complementary" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     Internal Quality Specialist Mamie Wolf PhD
-            *     <input type="checkbox" checked class="s-switch s-ui:error" />
+            *     Forward Tactics Engineer Becky Doyle
+            *     <input type="checkbox"  class="s-switch s-ui:error" />
+            *   </label>
+                <label class="s-mbe:30 s-label">
+            *     Dynamic Operations Producer Pamela Vandervort
+            *     <input type="checkbox" disabled  class="s-switch s-ui:accent" />
             *   </label>
             * </div>
             * 
         *
+        * <!-- RTL -->
+        * <div class="s-mbe:50" dir="rtl">
+        *   <h3 class="s-color:accent s-font:30 s-mb:20">RTL Support</h3>
+        *   <label class="s-mbe:30 s-label">
+        *     Human Optimization Assistant Cedric Hirthe
+        *     <input type="checkbox"  class="s-switch s-ui:accent" />
+        *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     Central Infrastructure Facilitator Traci Smith
+        *     <input type="checkbox"  class="s-switch s-ui:accent" />
+        *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     Central Marketing Supervisor Brett Ortiz
+        *     <input type="checkbox"  class="s-switch s-ui:accent" />
+        *   </label>
+        * </div>
         * 
         * <!-- scales -->
         * <div class="s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mb:20">Scales</h3>
         *   <label class="s-mbe:30 s-label s-scale:05">
-        *     Lead Infrastructure Strategist Robin Kuhic
+        *     Customer Communications Analyst Laurie Goldner
         *     <input type="checkbox"  class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:10">
-        *     Corporate Solutions Strategist Norman Anderson
-        *     <input type="checkbox"  class="s-switch s-ui:accent" />
+        *     Human Identity Analyst Jeremy Jast
+        *     <input type="checkbox" checked class="s-switch s-ui:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:15">
-        *     Lead Mobility Technician Mr. Eleanor Pagac
+        *     Product Communications Assistant Gina Fisher DDS
         *     <input type="checkbox"  class="s-switch s-ui:accent" />
         *   </label>
         * </div>
@@ -5188,15 +5390,17 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
         * This class represent a(n) "<s-color="accent">solid</s-color>" switch
         * 
         * @example        html
-        * <label class="s-switch">
-        *   <input type="checkbox" />
-        *   <div></div>
+        * <label class="s-label">
+        *   <input type="checkbox" class="s-switch" />
+        *   Lynn Runte
         * </label>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-.s-switch {font-size: calc(0.8rem * var(--s-scale, 1));
+.s-switch {--s-theme-color-ui-h: var(--s-theme-color-accent-origin-h);
+--s-theme-color-ui-s: var(--s-theme-color-accent-origin-s);
+--s-theme-color-ui-l: var(--s-theme-color-accent-origin-l);font-size: calc(0.8rem * var(--s-scale, 1));
 
         --thumb-size: 1em;
         --thumb-color-active: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-main-surface-a, 1));
@@ -5210,29 +5414,26 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
 
         --isLTR: 1;
       }
-.s-switch:dir(rtl) {
+[dir="rtl"] .s-switch, .s-switch[dir="rtl"]{
             --isLTR: -1;
-        }
+}
 .s-switch{
 
         --thumb-position: 0%;
         --thumb-transition-duration: .25s;
         
         padding: var(--track-padding);
-        background: var(--track-color-inactive);
         inline-size: var(--track-size);
         block-size: var(--thumb-size);
-        border-radius: var(--track-size);
-
+        
         -webkit-appearance: none;
-
+        
            -moz-appearance: none;
-
+        
                 appearance: none;
         pointer-events: all;
         cursor: pointer;
         touch-action: pan-y;
-        border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-switch-borderWidth, 1px);
         outline-offset: 5px;
         box-sizing: content-box;
 
@@ -5240,14 +5441,10 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
         display: grid;
         align-items: center;
         grid: [track] 1fr / [track] 1fr;
-
-        transition: var(--s-theme-ui-switch-transition, 0);
 }
 .s-switch:checked::before {
-                background: var(--thumb-color-active) !important;
             }
 .s-switch:checked::after {
-                box-shadow: 0 0 3px hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + -20) * 1%),var(--s-theme-color-ui-a, 1));
             }
 .s-switch::before {
             --highlight-size: 0;
@@ -5258,12 +5455,6 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
-            background: var(--thumb-color-inactive);
-            box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
-            border-radius: 50%;
-            transform: translateX(var(--thumb-position));
-            box-shadow: 0;
-            transition: var(--s-theme-ui-switch-transition, 0);
         }
 .s-switch::after {
             content: "";
@@ -5272,20 +5463,12 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
             grid-area: track;
             inline-size: var(--thumb-size);
             block-size: var(--thumb-size);
-            background: rgba(255,255,25,0);
-            border-radius: 50%;
-            transform: translateX(var(--thumb-position));
-            box-shadow: 0;
-            transition: var(--s-theme-ui-switch-transition, 0);
         }
 .s-switch:not(:disabled):hover::before {
-            --highlight-size: .5rem;
         }
 .s-switch:not(:disabled):focus::before {
-            --highlight-size: .25rem;
         }
 .s-switch:checked {
-            background: var(--track-color-active);
             --thumb-position: calc((var(--track-size) - 100%) * var(--isLTR));
         }
 .s-switch:indeterminate {
@@ -5294,17 +5477,65 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
                 * var(--isLTR)
             );
         }
-.s-switch:disabled {
-            --thumb-color: transparent;opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
+.s-switch:disabled, .s-switch[disabled] {
+--thumb-color: transparent;opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         cursor: not-allowed !important;
         -webkit-user-select: none !important;
            -moz-user-select: none !important;
             -ms-user-select: none !important;
                 user-select: none !important;
-        }
-.s-switch:disabled:hover, .s-switch:disabled:focus, .s-switch:disabled:active {
+}
+.s-switch:disabled:hover, .s-switch:disabled:focus, .s-switch:disabled:active, .s-switch[disabled]:hover, .s-switch[disabled]:focus, .s-switch[disabled]:active {
             opacity: var(--s-theme-helpers-disabled-opacity, 0.3) !important;
         }
+.s-switch{
+
+    
+
+        
+                    font-size: calc(0.8rem * var(--s-scale, 1));        
+                    background: var(--track-color-inactive);
+                    border-radius: var(--track-size);
+
+                    border: hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-border-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + var(--s-theme-color-ui-border-lightness-offset, 0)) * 1%),var(--s-theme-color-ui-border-a, 1)) solid var(--s-theme-ui-switch-borderWidth, 1px);
+                    outline-offset: 5px;
+                    
+                    transition: var(--s-theme-ui-switch-transition, 0);
+}
+.s-switch:checked::before {
+                            background: var(--thumb-color-active) !important;
+                        }
+.s-switch:checked::after {
+                            box-shadow: 0 0 3px hsla(calc(var(--s-theme-color-ui-h, 0) + var(--s-theme-color-ui-spin ,0)),calc((var(--s-theme-color-ui-s, 0) + var(--s-theme-color-ui-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-ui-l, 0) + -20) * 1%),var(--s-theme-color-ui-a, 1));
+                        }
+.s-switch::before {
+                        --highlight-size: 0;
+
+                        background: var(--thumb-color-inactive);
+                        box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
+                        border-radius: 50%;
+                        transform: translateX(var(--thumb-position));
+                        box-shadow: 0;
+                        transition: var(--s-theme-ui-switch-transition, 0);
+                    }
+.s-switch::after {
+                        background: rgba(255,255,25,0);
+                        border-radius: 50%;
+                        box-shadow: 0;
+                        transition: var(--s-theme-ui-switch-transition, 0);
+                    }
+.s-switch:not(:disabled):hover::before {
+                        --highlight-size: .5rem;
+                    }
+.s-switch:not(:disabled):focus::before {
+                        --highlight-size: .25rem;
+                    }
+.s-switch:checked {
+                        background: var(--track-color-active);
+                    }
+.s-rhythm--vertical > .s-switch, .s-switch.s-rhythm--vertical{
+                margin-bottom: var(--s-theme-margin-40, 2.25rem);
+}
 /**
         * @name           s-table
         * @namespace      sugar.css.ui.table
@@ -5524,7 +5755,7 @@ label .s-terminal:disabled + *:hover, label .s-terminal:disabled + *:focus, labe
         *   <span class="s-tooltip-container:active">
         *       <a class="s-btn s-mr:20 s-mb:20">Hello</a>
         *       <div class="s-tooltip:inline-end s-ui:accent">
-        *           Customer Marketing Liaison Mr. Christina Pfannerstill
+        *           International Accounts Orchestrator Sharon Hegmann
         *       </div>
         *   </span>
         * </div>
@@ -5534,25 +5765,25 @@ label .s-terminal:disabled + *:hover, label .s-terminal:disabled + *:focus, labe
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Block start (default)</a>
         *       <div class="s-tooltip">
-        *           Principal Branding Architect Darrell Gaylord
+        *           Dynamic Research Planner Erica Connelly
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Inline end</a>
         *       <div class="s-tooltip:inline-end s-ui:accent">
-        *           Direct Markets Executive Rosemarie Cartwright
+        *           Dynamic Marketing Engineer Manuel Wilderman MD
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Block end</a>
         *       <div class="s-tooltip:block-end s-ui:complementary">
-        *           Global Quality Manager Blake Watsica
+        *           Regional Security Producer Dr. Hope Mertz
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Inline start</a>
         *       <div class="s-tooltip:inline-start s-ui:error">
-        *           Lead Implementation Designer Ms. Gilbert Bernier
+        *           Principal Research Executive Stephen Zboncak
         *       </div>
         *   </span>
         * </div>
@@ -5562,25 +5793,25 @@ label .s-terminal:disabled + *:hover, label .s-terminal:disabled + *:focus, labe
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Accent</a>
         *       <div class="s-tooltip s-ui:accent">
-        *           Dynamic Markets Developer Luther Schinner
+        *           Senior Infrastructure Consultant Tommy Waters
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Complementary</a>
         *       <div class="s-tooltip s-ui:complementary">
-        *           Dynamic Program Assistant Valerie Armstrong
+        *           Forward Tactics Strategist Mamie Hodkiewicz
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Error</a>
         *       <div class="s-tooltip s-ui:error">
-        *           Direct Tactics Technician Ken Swift
+        *           Forward Branding Designer Ms. Archie Stoltenberg
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Info</a>
         *       <div class="s-tooltip s-ui:info">
-        *           Internal Security Associate Milton Dickens
+        *           Internal Implementation Analyst Angel Veum
         *       </div>
         *   </span>
         * </div>
@@ -19231,10 +19462,10 @@ right: 0;
  * @cssClass      s-font:code       Apply the code font on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mbe:30">Investor Markets Engineer Ms. Kathy Schultz</h1>
- * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mbe:30">Corporate Identity Designer Mandy Rice</h1>
- * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mbe:30">Principal Operations Specialist Arthur McKenzie</h1>
- * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mbe:30">Human Implementation Supervisor Kelly Hoppe</h1>
+        * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mbe:30">Central Operations Facilitator Leah Howell</h1>
+ * <span class="s-color:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mbe:30">Dynamic Optimization Designer Melinda Dare MD</h1>
+ * <span class="s-color:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mbe:30">Senior Division Director Gwendolyn Pagac</h1>
+ * <span class="s-color:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mbe:30">Dynamic Optimization Architect Micheal Jacobs</h1>
         * 
         * @example        css
         * .my-font-default {
@@ -19352,19 +19583,19 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
  * @cssClass      s-font:default       Apply the default font size on any HTMLElement
         * 
         * @example        html
-        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mbe:30">Forward Tactics Facilitator Tim Abshire</h1>
- * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mbe:30">Global Division Coordinator Robin Wuckert Jr.</h1>
- * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mbe:30">Dynamic Factors Producer Dorothy Conroy</h1>
- * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mbe:30">Corporate Branding Director Kristopher Hessel DDS</h1>
- * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mbe:30">Product Web Officer Everett Wuckert</h1>
- * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mbe:30">International Data Administrator Henrietta Wisoky</h1>
- * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mbe:30">Central Functionality Specialist Isaac Ullrich</h1>
- * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mbe:30">Global Usability Representative Marianne Auer Sr.</h1>
- * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mbe:30">Dynamic Identity Administrator Lucia Hoeger</h1>
- * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mbe:30">Dynamic Optimization Assistant Marvin Bosco DVM</h1>
- * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mbe:30">Customer Web Manager Andres Homenick</h1>
- * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mbe:30">National Intranet Analyst Derek Beatty</h1>
- * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mbe:30">Future Directives Developer Jody Effertz</h1>
+        * <span class="s-color:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mbe:30">Global Mobility Supervisor Ms. Justin Breitenberg</h1>
+ * <span class="s-color:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mbe:30">Product Brand Orchestrator Guadalupe Stanton Jr.</h1>
+ * <span class="s-color:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mbe:30">Senior Identity Director Erika Gorczany</h1>
+ * <span class="s-color:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mbe:30">Product Paradigm Supervisor Marta Dooley Jr.</h1>
+ * <span class="s-color:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mbe:30">Lead Infrastructure Coordinator Wendell Hane</h1>
+ * <span class="s-color:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mbe:30">Dynamic Data Supervisor Ruth Mueller</h1>
+ * <span class="s-color:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mbe:30">Legacy Division Planner Byron Hand</h1>
+ * <span class="s-color:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mbe:30">Central Factors Orchestrator Lisa Marquardt</h1>
+ * <span class="s-color:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mbe:30">Dynamic Web Architect Derrick Bauch</h1>
+ * <span class="s-color:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mbe:30">Direct Marketing Orchestrator Dora Romaguera</h1>
+ * <span class="s-color:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mbe:30">Direct Research Facilitator Becky Watsica</h1>
+ * <span class="s-color:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mbe:30">District Accountability Orchestrator Jesus Lang</h1>
+ * <span class="s-color:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mbe:30">Senior Operations Assistant Dr. Rolando Schuster</h1>
         * 
         * @example        css
         * .my-font-0 {
@@ -19594,12 +19825,12 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
         * @example        html
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset size</h3>
         * <div class="s-font:60 s-mbe:30">
-        *   Human Intranet Architect <span class="s-font:reset-size">Cora Cole MD</span>
+        *   Investor Directives Facilitator <span class="s-font:reset-size">Orville Kozey</span>
         * </div>
         * 
         * <h3 class="s-color:accent s-font:30 s-mb:20">Reset family</h3>
         * <div class="s-font:quote s-font:50">
-        *   Principal Mobility Representative <span class="s-font:reset-family">Ron Wintheiser</span>
+        *   Internal Usability Officer <span class="s-font:reset-family">Rachael Bailey</span>
         * </div>
         * 
         * @since      2.0.0
@@ -22459,26 +22690,26 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * @example        html
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Margin inline</h3>
-        *   <p class="s-bg:accent s-p:20 s-mbe:20">Miss Christopher McClure</p>
-        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Mrs. Lena Gutmann</p>
-        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Micheal Lang</p>
-        *   <p class="s-bg:error s-mie:30 s-p:20">Roman Fisher</p>
+        *   <p class="s-bg:accent s-p:20 s-mbe:20">Wanda Bartoletti</p>
+        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Jessie Schneider</p>
+        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Dr. Esther Hegmann</p>
+        *   <p class="s-bg:error s-mie:30 s-p:20">Courtney Rosenbaum</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL Support</h3>
-        *   <p class="s-bg:accent s-p:20 s-mbe:20">Guadalupe Hand</p>
-        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Eula Mosciski</p>
-        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Mrs. Sheldon Casper</p>
-        *   <p class="s-bg:error s-mie:30 s-p:20">Erin Hammes</p>
+        *   <p class="s-bg:accent s-p:20 s-mbe:20">Marie Emard</p>
+        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Ms. Dave Hagenes</p>
+        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Traci Fadel</p>
+        *   <p class="s-bg:error s-mie:30 s-p:20">Leigh Lindgren</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Margin Block</h3>
-        *   <div class="s-bg:accent s-mbe:40 s-p:20 s-text:center">Ms. Brandon Heaney</div>
-        *   <div class="s-bg:complementary s-mbe:20 s-p:20 s-text:center">Conrad Roob</div>
-        *   <div class="s-bg:ui s-mbe:50 s-p:20 s-text:center">Harry Doyle</div>
-        *   <div class="s-bg:error s-p:20 s-text:center">Gerardo Armstrong</div>
+        *   <div class="s-bg:accent s-mbe:40 s-p:20 s-text:center">Blake Strosin</div>
+        *   <div class="s-bg:complementary s-mbe:20 s-p:20 s-text:center">Verna Altenwerth</div>
+        *   <div class="s-bg:ui s-mbe:50 s-p:20 s-text:center">Dr. Cesar Considine</div>
+        *   <div class="s-bg:error s-p:20 s-text:center">Jack Hane</div>
         * </div>
         * 
         * @since      2.0.0
@@ -26668,26 +26899,26 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * @example        html
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Padding inline</h3>
-        *   <p class="s-bg:accent s-pi:30">Martha McLaughlin</p>
-        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Justin Schaefer</p>
-        *   <p class="s-bg:ui s-pie:30">Matt Bradtke</p>
-        *   <p class="s-bg:error s-pis:20 s-pie:40">Carmen Hand</p>
+        *   <p class="s-bg:accent s-pi:30">Carlton Jones</p>
+        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Billy Larson</p>
+        *   <p class="s-bg:ui s-pie:30">Archie Hartmann</p>
+        *   <p class="s-bg:error s-pis:20 s-pie:40">Cornelius Cassin</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL Support</h3>
-        *   <p class="s-bg:accent s-pi:30">Toni Willms</p>
-        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Sophia Mayert MD</p>
-        *   <p class="s-bg:ui s-pie:30">Kristy Will</p>
-        *   <p class="s-bg:error s-pis:20 s-pie:40">Sandra Abernathy</p>
+        *   <p class="s-bg:accent s-pi:30">Neil Wehner</p>
+        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Bridget Boehm</p>
+        *   <p class="s-bg:ui s-pie:30">Darrell O'Reilly</p>
+        *   <p class="s-bg:error s-pis:20 s-pie:40">Erma Larson DVM</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Padding Block</h3>
-        *   <div class="s-bg:accent s-pbe:40 s-text:center">Jeffery Pfannerstill</div>
-        *   <div class="s-bg:complementary s-pb:30 s-text:center">Frankie Torphy</div>
-        *   <div class="s-bg:ui s-pbs:20 s-pbe:10 s-text:center">Dr. Brandi Heaney</div>
-        *   <div class="s-bg:error s-pbs:20 s-pbe:60 s-text:center">Jamie Pouros</div>
+        *   <div class="s-bg:accent s-pbe:40 s-text:center">Kirk Braun</div>
+        *   <div class="s-bg:complementary s-pb:30 s-text:center">Bruce Ziemann</div>
+        *   <div class="s-bg:ui s-pbs:20 s-pbe:10 s-text:center">Eula Nitzsche</div>
+        *   <div class="s-bg:error s-pbs:20 s-pbe:60 s-text:center">Stanley Lakin</div>
         * </div>
         * 
         * @since      2.0.0
@@ -30163,7 +30394,9 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-radio-focusOutline: true;
 --s-theme-ui-radio-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-radio-defaultColor: accent;
 --s-theme-ui-radio-defaultStyle: solid;
+--s-theme-ui-radio-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-checkbox-paddingInline: 0.75em;
 --s-theme-ui-checkbox-paddingBlock: 0.375em;
 --s-theme-ui-checkbox-borderRadius: 0.2em;
@@ -30174,6 +30407,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
             0 4px 12px rgba(0, 0, 0, 0.1);
 --s-theme-ui-checkbox-defaultColor: accent;
 --s-theme-ui-checkbox-defaultStyle: solid;
+--s-theme-ui-checkbox-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-range-paddingInline: 0.75em;
 --s-theme-ui-range-paddingBlock: 0.375em;
 --s-theme-ui-range-borderRadius: 6px;
@@ -30210,7 +30444,9 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-switch-focusOutline: true;
 --s-theme-ui-switch-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-switch-defaultColor: accent;
 --s-theme-ui-switch-defaultStyle: solid;
+--s-theme-ui-switch-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-dropdown-paddingInline: 0.75em;
 --s-theme-ui-dropdown-paddingBlock: 0.75em;
 --s-theme-ui-dropdown-borderRadius: 6px;
@@ -30229,6 +30465,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 --s-theme-ui-list-bulletChar: ●;
 --s-theme-ui-list-depth: 0 0.5px 1.5px rgba(0, 0, 0, 0.05),
             0 4px 12px rgba(0, 0, 0, 0.1);
+--s-theme-ui-list-defaultColor: accent;
 --s-theme-ui-list-defaultStyle: ul;
 --s-theme-ui-list-rhythmVertical-margin-bottom: 40;
 --s-theme-ui-tabs-paddingInline: 1.5em;

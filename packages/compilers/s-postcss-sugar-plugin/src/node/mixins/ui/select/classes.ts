@@ -70,6 +70,14 @@ export default function ({
         * 
         * These classes allows you to display nice select in your forms
         * 
+        * @feature          Support for scaling through the "s-scale:..." class
+        * @feature          Support for colorizing through the "s-ui:..." class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-select${

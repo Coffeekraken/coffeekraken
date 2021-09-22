@@ -1535,7 +1535,9 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
+                defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             checkbox: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1588,7 +1590,9 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
+                defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
+                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },
             dropdown: {
                 paddingInline: '[theme.ui.default.paddingBlock]',
@@ -1609,6 +1613,7 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 bulletChar: '●',
                 depth: '[theme.ui.default.depth]',
+                defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'ul',
                 ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
             },

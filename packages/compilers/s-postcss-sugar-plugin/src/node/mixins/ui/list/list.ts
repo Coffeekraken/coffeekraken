@@ -16,8 +16,8 @@ class postcssSugarPluginUiListInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf'],
-            default: ['bare', 'lnf'],
+            values: ['bare', 'lnf', 'vr'],
+            default: ['bare', 'lnf', 'vr'],
         },
     };
 }
@@ -33,16 +33,18 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiListParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListParams = {
         style: 'ul',
-        scope: ['bare', 'lnf'],
+        scope: ['bare', 'lnf', 'vr'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -147,6 +149,14 @@ export default function ({
                 `);
                 break;
         }
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`
+            @sugar.rhythm.vertical {
+                ${jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+            } 
+        `);
     }
 
     replaceWith(vars);

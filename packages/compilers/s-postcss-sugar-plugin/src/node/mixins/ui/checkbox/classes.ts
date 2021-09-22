@@ -95,15 +95,15 @@ export default function ({
             *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-${style}-1" value="hello 1" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-${style}-2" value="hello 2" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-${style}-3" value="hello 3" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
             * </div>
             * `;
@@ -115,19 +115,19 @@ export default function ({
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-color-1" value="hello 1" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-color-2" value="hello 2" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:complementary" name="checkbox-style-color-3" value="hello 3" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" disabled class="s-checkbox s-ui:error" name="checkbox-style-color-4" value="hello 4" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * </div>
         * 
@@ -136,15 +136,15 @@ export default function ({
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">LTR Support</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox s-ui:accent" name="checkbox-style-ltr-1" value="hello 1" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-2" value="hello 2" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-3" value="hello 3" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * </div>
         * 
@@ -153,15 +153,15 @@ export default function ({
         *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <input type="checkbox" checked class="s-checkbox s-ui:accent" name="checkbox-style-ltr-1" value="hello 1" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-2" value="hello 2" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     <input type="checkbox" class="s-checkbox s-ui:accent" name="checkbox-style-ltr-3" value="hello 3" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * </div>
         * 
@@ -225,9 +225,9 @@ export default function ({
             * 
             * @example        html
             * <div class="s-format:text">
-            *   <input type="checkbox" checked /><span></span>
-            *   <input type="checkbox" checked /><span></span>
-            *   <input type="checkbox" checked /><span></span>
+            *   <input type="checkbox" checked />
+            *   <input type="checkbox" checked />
+            *   <input type="checkbox" checked />
             * </div>
             * 
             * @since      2.0.0

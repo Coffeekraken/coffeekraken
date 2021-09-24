@@ -2,7 +2,7 @@ export default function (env, config) {
     return {
         extends: 'themeBase',
 
-        colorStates: {
+        colorSchemas: {
             default: {
                 '0': {
                     darken: 50,
@@ -89,7 +89,7 @@ export default function (env, config) {
                 },
             },
             ':hover': {
-                // '...': '[this.colorStates.default]',
+                // '...': '[this.colorSchemas.default]',
                 '0': {
                     darken: 55,
                 },
@@ -178,7 +178,7 @@ export default function (env, config) {
                 },
             },
             ':focus': {
-                '...': '[this.colorStates.default]',
+                '...': '[this.colorSchemas.default]',
                 '0': {
                     darken: 60,
                 },
@@ -252,7 +252,7 @@ export default function (env, config) {
                 },
             },
             ':active': {
-                '...': '[this.colorStates.default]',
+                '...': '[this.colorSchemas.default]',
                 '0': {
                     darken: 60,
                 },

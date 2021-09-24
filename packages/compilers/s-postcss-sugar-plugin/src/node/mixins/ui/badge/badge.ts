@@ -69,7 +69,7 @@ export default function ({
             vertical-align: baseline;
 
             & > * {
-                @sugar.color.remap(ui, main);
+                @sugar.color(main);
             }
 
         `);
@@ -78,7 +78,7 @@ export default function ({
             case 'outline':
                 vars.push(`
                 position: relative;
-                color: sugar.color(ui);
+                color: sugar.color(current);
                 background: none !important;
                 
                 &:after {
@@ -88,16 +88,16 @@ export default function ({
                     left: 0;
                     bottom: 0;
                     right: 0;
-                    border: sugar.color(ui) solid sugar.theme(ui.badge.borderWidth);
+                    border: sugar.color(current) solid sugar.theme(ui.badge.borderWidth);
                     pointer-events: none;
                 }
             `);
             case 'solid':
             default:
                 vars.push(`
-                     color: sugar.color(ui, foreground);
-                     background-color: sugar.color(ui);
-                     text-shadow: 0 0 3px sugar.color(ui, --darken 10);
+                     color: sugar.color(current, foreground);
+                     background-color: sugar.color(current);
+                     text-shadow: 0 0 3px sugar.color(current, --darken 10);
                 `);
                 break;
         }

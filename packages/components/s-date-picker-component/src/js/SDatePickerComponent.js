@@ -92,7 +92,7 @@ export default class SDatePicker extends __SLitComponent {
                 },
             });
             Array.from(this.classList).forEach((cls) => {
-                if (cls.match(/^s-ui/))
+                if (cls.match(/^s-cs/))
                     this._picker.el.classList.add(cls);
             });
             [

@@ -23,7 +23,7 @@
             top: 0;
             left: 0;
 
-            @sugar.gradient (sugar.color(ui, background), rgba(0,0,0,0), $angle: 180deg);
+            @sugar.gradient (sugar.color(current, background), rgba(0,0,0,0), $angle: 180deg);
         }
     }
 

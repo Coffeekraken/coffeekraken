@@ -91,7 +91,7 @@ export default class CkSettings extends __SLitComponent {
                         <label class="s-label s-p:20" for="theme-switcher">
                             Dark mode
                             <input
-                                class="s-switch s-ui:accent"
+                                class="s-switch s-color:accent"
                                 type="checkbox"
                                 id="theme-switcher"
                                 ?checked="${this._settings.darkMode}"
@@ -124,7 +124,7 @@ export default class CkSettings extends __SLitComponent {
                             Spread
                             <s-range
                                 name="hello"
-                                class="s-range s-ui"
+                                class="s-range s-cs"
                                 id="setting-spread"
                                 tooltip
                                 min="0"
@@ -138,7 +138,7 @@ export default class CkSettings extends __SLitComponent {
                             Spread
                             <s-range
                                 name="coco"
-                                class="s-ui:accent"
+                                class="s-color:accent"
                                 id="setting-spread"
                                 tooltip
                                 min="0"
@@ -156,7 +156,7 @@ export default class CkSettings extends __SLitComponent {
                     <li class="s-bg:main-surface">
                         <label class="s-label s-p:20" for="setting-accent-color">
                             Spread
-                            <input type="text" class="s-input s-ui:accent" id="setting-spread" />
+                            <input type="text" class="s-input s-color:accent" id="setting-spread" />
                         </label>
                     </li>
                     <li class="s-bg:main-surface">

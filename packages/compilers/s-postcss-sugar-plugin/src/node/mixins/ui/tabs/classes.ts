@@ -73,8 +73,8 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mb\:20">${style} style</h3>
-            *   <ul class="s-tabs${style === finalParams.defaultStyle ? '' : `:${style}`} s-ui\:accent">
+            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
+            *   <ul class="s-tabs${style === finalParams.defaultStyle ? '' : `:${style}`} s-color:accent">
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -86,7 +86,7 @@ export default function ({
         * 
         * <!-- grow -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Grow</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Grow</h3>
         *   <ul class="s-tabs\:grow">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -96,18 +96,18 @@ export default function ({
         * 
         * <!-- rtl -->
         * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-color:accent s-font:30 s-mb\:20">RTL</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">RTL</h3>
         *   <ul class="s-tabs">
-        *     <li class="s-ui\:accent" tabindex="0" active>${__faker.name.findName()}</li>
-        *     <li class="s-ui\:complementary" tabindex="0">${__faker.name.findName()}</li>
+        *     <li class="s-color:accent" tabindex="0" active>${__faker.name.findName()}</li>
+        *     <li class="s-color:complementary" tabindex="0">${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *   </ul>
         * </div>
         * 
         * <!-- vertical -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Vertical</h3>
-        *   <ul class="s-tabs\:vertical s-ui\:complementary">
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Vertical</h3>
+        *   <ul class="s-tabs\:vertical s-color:complementary">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -116,8 +116,8 @@ export default function ({
         * 
         * <!-- scaled -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Scaled</h3>
-        *   <ul class="s-tabs\:grow s-scale\:13 s-ui\:accebt">
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scaled</h3>
+        *   <ul class="s-tabs\:grow s-scale\:13 s-color:accebt">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>

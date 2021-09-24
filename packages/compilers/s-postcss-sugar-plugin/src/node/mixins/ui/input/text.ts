@@ -74,16 +74,16 @@ export default function ({
         // case 'underline':
         //     if (finalParams.scope.indexOf('lnf') !== -1) {
         //         vars.push(`
-        //             background-color: sugar.color(ui, --alpha 0);
+        //             background-color: sugar.color(current, --alpha 0);
         //             border-top: none !important;
         //             border-left: none !important;
         //             border-right: none !important;
-        //             border-bottom: sugar.color(ui) solid sugar.theme(ui.input.borderWidth) !important;
+        //             border-bottom: sugar.color(current) solid sugar.theme(ui.input.borderWidth) !important;
         //             border-radius: 0;
         //             padding-inline: 0 !important;
 
         //             &:hover, &:focus {
-        //                 background-color: sugar.color(ui, --alpha 0.1);
+        //                 background-color: sugar.color(current, --alpha 0.1);
         //             }
         //         `);
         //     }

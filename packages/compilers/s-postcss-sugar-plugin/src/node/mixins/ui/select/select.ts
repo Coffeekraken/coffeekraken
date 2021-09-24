@@ -75,16 +75,16 @@ export default function ({
                     -moz-appearance: none;
                     -webkit-appearance: none;
                     appearance: none;
-                    background: sugar.color(ui, --alpha 0.5);
-                    color: sugar.color(ui, foreground);
+                    background: sugar.color(current, --alpha 0.5);
+                    color: sugar.color(current, foreground);
                 }
                 &[multiple]:focus option:checked,
                 &[multiple]:focus option[selected] {
                     -moz-appearance: none;
                     -webkit-appearance: none;
                     appearance: none;
-                    background: sugar.color(ui);
-                    color: sugar.color(ui, foreground);
+                    background: sugar.color(current);
+                    color: sugar.color(current, foreground);
                 }
 
                 &:not([multiple]) {
@@ -93,7 +93,7 @@ export default function ({
                     --padding-inline: sugar.theme(ui.select.paddingInline);
 
                     background-repeat: no-repeat;
-                    background-image: linear-gradient(45deg, transparent 50%, sugar.color(ui) 50%), linear-gradient(135deg, sugar.color(ui) 50%, transparent 50%);
+                    background-image: linear-gradient(45deg, transparent 50%, sugar.color(current) 50%), linear-gradient(135deg, sugar.color(current) 50%, transparent 50%);
                     background-position: right calc(sugar.scalable(var(--padding-inline)) + sugar.scalable(5px)) top 50%, right sugar.scalable(var(--padding-inline)) top 50%;
                     background-size: sugar.scalable(5px) sugar.scalable(5px), sugar.scalable(5px) sugar.scalable(5px);
                 

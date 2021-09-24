@@ -57,14 +57,14 @@ export default function ({
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            box-shadow: 0 0 0 0 sugar.color(ui, --alpha 0.2);
+            box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
             border-radius: sugar.theme(ui.focusOutline.borderRadius);
             transition: sugar.theme(ui.focusOutline.transition);
         }
 
         &:focus-visible {
             &:not(:hover):not(:active):after {
-                box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(ui, --alpha 0.3);
+                box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(current, --alpha 0.3);
             }
         }
     `);

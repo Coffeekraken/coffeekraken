@@ -3362,7 +3362,7 @@ class SCodeExample extends __SLitComponent {
                                       <a
                                           class="${this.componentUtils.className(
                                               '__more-button',
-                                              's-btn s-ui--accent',
+                                              's-btn s-color--accent',
                                           )}"
                                           href="${this.moreAction}"
                                       >

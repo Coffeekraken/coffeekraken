@@ -76,7 +76,7 @@ export default function ({
             .map((ratioName) => {
                 return ` * <!-- ${ratioName} ratio -->
             * <div class="s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${ratioName} ratio</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${ratioName} ratio</h3>
             *   <div class="s-ratio\:${ratioName.replace('/', '-')}">
             *       <img class="s-fit\:cover" src="https://picsum.photos/500/500" />
             *   </div>

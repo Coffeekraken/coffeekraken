@@ -19,7 +19,7 @@
             display: block;
             width: 100%;
             height: sugar.space(50);
-            background: sugar.color(ui, --lighten 49);
+            background: sugar.color(current, --lighten 49);
         }
 
         @sugar.theme.when (dark) {
@@ -40,7 +40,7 @@
             width: 30%;
             height: 100%;
             z-index: 0;
-            background: sugar.color(ui, --lighten 49);
+            background: sugar.color(current, --lighten 49);
             clip-path: polygon(0 0%, 100% 0, 100% 100%, 200px 100%);
         }
 
@@ -55,7 +55,7 @@
                 height: 100%;
                 z-index: 0;
                 /* transform: translateX(calc(-100% - 400px)); */
-                background: sugar.color(ui, --lighten 49);
+                background: sugar.color(current, --lighten 49);
                 clip-path: polygon(-0 0%, 100% 0, calc(100% - 200px) 100%, 0% 100%);
             }
         }

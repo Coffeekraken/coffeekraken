@@ -3,11 +3,11 @@
     @php 
     $titleStr = $block->name;
     if ($block->get) {
-        $titleStr = '<span class="s-color:accent">get</span> ' . $titleStr;
+        $titleStr = '<span class="s-tc:accent">get</span> ' . $titleStr;
     } 
     @endphp
 
-    <{{ $isFirst ? 'h1' : 'h3'}} id="{{ $block->name }}" class="s-typo:{{ $isFirst ? 'h1' : 'h3'}} s-mbe:30 {{ $isFirst ? 's-color:accent' : '' }}">
+    <{{ $isFirst ? 'h1' : 'h3'}} id="{{ $block->name }}" class="s-typo:{{ $isFirst ? 'h1' : 'h3'}} s-mbe:30 {{ $isFirst ? 's-tc:accent' : '' }}">
         {!! $titleStr !!}
     </{{ $isFirst ? 'h1' : 'h3'}}>
     

@@ -1,18 +1,18 @@
 /**
  * Import all the css from external folders like "views", etc...
  */
-@sugar.import('../views/**/*.css');
+@sugar.import ('../views/**/*.css');
 
 /**
  * Init sugar. This will import a reset css, generate
- * some utility classes like "s-color:accent, s-mb:30, etc...".
+ * some utility classes like "s-tc:accent, s-mb:30, etc...".
  */
 @sugar.init;
 
 /**
  * Register some icons to use in this particular project
  */
-@sugar.icon.classes(
+@sugar.icon.classes (
   fa:user:user
   fs:src/icons/copy.svg:copy
 );

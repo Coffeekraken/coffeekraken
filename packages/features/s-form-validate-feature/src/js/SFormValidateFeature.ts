@@ -32,7 +32,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *
  * @example         html
  * <form action="." method="get">
- * <h3 class="s-color:accent s-font:30 s-mbe:30">Simple fields</h3>
+ * <h3 class="s-tc:accent s-font:30 s-mbe:30">Simple fields</h3>
  * <label class="s-label s-mbe:30" s-form-validate email>
  *    <input type="text" class="s-input s-width\:60" placeholder="olivier.bossel@coffeekraken.io" />
  *    Email address
@@ -54,7 +54,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *    Min and max
  * </label>
  *
- * <h3 class="s-color:accent s-font:30 s-mbe:30">Complexe fields</h3>
+ * <h3 class="s-tc:accent s-font:30 s-mbe:30">Complexe fields</h3>
  * <label class="s-label s-mbe:30" s-form-validate>
  *    <select class="s-select s-width\:60">
  *        <option value="value 1">This is the first option...</option>
@@ -97,7 +97,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *      Choose at least 2 items
  * </label>
  *
- * <h3 class="s-color:accent s-font:30 s-mbe:30">Custom validation</h3>
+ * <h3 class="s-tc:accent s-font:30 s-mbe:30">Custom validation</h3>
  * <label class="s-label s-mbe:30" s-form-validate coffeekraken>
  *    <input type="text" class="s-input s-width\:60" placeholder="coffeekraken" />
  *    Try taping "coffeekraken"
@@ -105,7 +105,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *
  * <div class="s-text\:end">
  *      <input type="reset" class="s-btn" value="Reset!" />
- *      <input type="submit" class="s-btn s-ui\:complementary s-ml\:20" value="Submit!" />
+ *      <input type="submit" class="s-btn s-color:complementary s-ml\:20" value="Submit!" />
  * </div>
  *
  * </form>

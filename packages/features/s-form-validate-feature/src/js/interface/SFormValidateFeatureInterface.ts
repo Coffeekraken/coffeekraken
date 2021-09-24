@@ -17,7 +17,7 @@ export default class SFormValidateFeatureInterface extends __SInterface {
         },
         errorClass: {
             type: 'String',
-            default: 's-form-validate s-form-validate--error s-ui--error',
+            default: 's-form-validate s-form-validate--error s-color--error',
         },
         errorMessageClass: {
             type: 'String',
@@ -25,7 +25,7 @@ export default class SFormValidateFeatureInterface extends __SInterface {
         },
         validClass: {
             type: 'String',
-            default: 's-form-validate s-form-validate--valid s-ui--success',
+            default: 's-form-validate s-form-validate--valid s-color--success',
         },
         customValidations: {
             type: 'Object',

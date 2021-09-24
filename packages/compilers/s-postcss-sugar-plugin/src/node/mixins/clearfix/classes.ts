@@ -84,7 +84,7 @@ export default function ({
             .map((clearfixName) => {
                 return ` * <!-- ${clearfixName} style -->
             * <div class="s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${clearfixName}clearfix</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${clearfixName}clearfix</h3>
             *   <div class="s-clearfix${
                 clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`
             } s-bg:ui">

@@ -5,12 +5,12 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiListUlInterface extends __SInterface {
-  static definition = {
-      icon: {
-          type: 'Boolean',
-          default: false
-      }
-  };
+    static definition = {
+        icon: {
+            type: 'Boolean',
+            default: false,
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiListUlParams {
@@ -20,27 +20,27 @@ export interface IPostcssSugarPluginUiListUlParams {
 export { postcssSugarPluginUiListUlInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiListUlParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiListUlParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListUlParams = {
-      icon: false,
-      ...params
+        icon: false,
+        ...params,
     };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  let iconSelector = '&:before';
-  if (finalParams.icon) {
-      iconSelector = '& > i:first-child';
-  }
+    let iconSelector = '&:before';
+    if (finalParams.icon) {
+        iconSelector = '& > i:first-child';
+    }
 
-  vars.push(`
+    vars.push(`
       position: relative;
 
       & > li,
@@ -56,27 +56,35 @@ export default function ({
         }
 
         ${iconSelector} {  
-          ${!finalParams.icon ? `
+          ${
+              !finalParams.icon
+                  ? `
               content: '●';
               margin-top: 0.25em;
               font-size: 0.7em;
-          `: `
+          `
+                  : `
               margin-top: 0.25em;
               font-size: 0.8em;
-          `}    
+          `
+          }    
           display: inline-block;
           position: absolute;
           left: 0.5em;
           transform: translateX(-50%);
-          color: sugar.color(ui);
+          color: sugar.color(current);
         }
 
-        ${finalParams.icon ? `
+        ${
+            finalParams.icon
+                ? `
           padding-left: 1.5em;
           &:before {
             content: ' ' !important;
           }
-        `: ''}
+        `
+                : ''
+        }
         
       }
 

@@ -56,7 +56,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .${cls} {
-            @sugar.color.remap(ui, sugar.theme(ui.table.defaultColor));
+            @sugar.color(sugar.theme(ui.table.defaultColor));
             @sugar.ui.table;
         } 
         table {
@@ -98,7 +98,7 @@ export default function ({
       */
         @sugar.format.text {
           table {
-              @sugar.color.remap(ui, ${__theme().config('ui.table.defaultColor')});
+              @sugar.color(${__theme().config('ui.table.defaultColor')});
               @sugar.ui.table;
           }
         } 

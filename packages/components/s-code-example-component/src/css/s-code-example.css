@@ -84,7 +84,7 @@
         width: 100%;
         height: 100%;
 
-        @sugar.gradient ($type: linear, $start: sugar.color(ui, surface), $end: sugar.color(ui, --alpha 0), $angle: 0);
+        @sugar.gradient ($type: linear, $start: sugar.color(current, surface), $end: sugar.color(current, --alpha 0), $angle: 0);
     }
 }
 

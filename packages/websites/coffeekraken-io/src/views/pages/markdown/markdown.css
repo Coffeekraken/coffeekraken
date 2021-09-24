@@ -4,7 +4,7 @@
         top: 100px;
         height: calc(100vh - 100px);
         overflow: auto;
-        border-right: 1px solid sugar.color(ui, border);
+        border-right: 1px solid sugar.color(current, border);
         user-select: none;
         @sugar.scrollbar (accent, 2px);
 

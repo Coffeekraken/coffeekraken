@@ -165,7 +165,7 @@ export default function ({
                     transition: sugar.theme(ui.label.transition);
 
                     &::placeholder {
-                      color: sugar.color(ui, --alpha 0);
+                      color: sugar.color(current, --alpha 0);
                     }
                   }
 
@@ -175,14 +175,14 @@ export default function ({
                     & > textarea,
                     & > select {
                       &::placeholder {
-                        color: sugar.color(ui, placeholder);
+                        color: sugar.color(current, placeholder);
                       }
                     }
                   }
                   & > input:not(:placeholder-shown),
                   & > textarea:not(:placeholder-shown) {
                     &::placeholder {
-                      color: sugar.color(ui, placeholder);
+                      color: sugar.color(current, placeholder);
                     }
                   }
 

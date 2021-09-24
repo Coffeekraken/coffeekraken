@@ -75,7 +75,7 @@ export default function ({
         * @feature          Support for vertical rhythm through the "s-rhythm:vertical" class
         * @feature          Support for text formatting through the "s-format:text" class
         * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-ui:..." class
+        * @feature          Support for colorizing through the "s-color:..." class
         * 
         * @support          chromium
         * @support          firefox
@@ -95,16 +95,16 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
-            *   <ul class="s-list\:${style} ${style === 'ol' ? 's-ui:accent s-scale:15' : ''}">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <ul class="s-list\:${style} ${style === 'ol' ? 's-color:accent s-scale:15' : ''}">
             *     <li>${
                 style === 'icon' ? `<i class="s-icon\:user"></i>` : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
-                style === 'icon' ? `<i class="s-icon\:heart s-ui\:accent"></i>` : ''
+                style === 'icon' ? `<i class="s-icon\:heart s-color:accent"></i>` : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
-                style === 'icon' ? `<i class="s-icon\:fire s-ui\:error"></i>` : ''
+                style === 'icon' ? `<i class="s-icon\:fire s-color:error"></i>` : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
             * </div>
@@ -114,33 +114,33 @@ export default function ({
         *
         * <!-- RTL -->
         * <div class="s-mbe:50" dir="rtl">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL</h3>
-        *   <ul class="s-list\:ul s-ui\:accent s-mbe:30">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL</h3>
+        *   <ul class="s-list\:ul s-color:accent s-mbe:30">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
-        *   <ul class="s-list\:ol s-ui\:accent s-mbe:30">
+        *   <ul class="s-list\:ol s-color:accent s-mbe:30">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
-        *   <ul class="s-list\:icon s-ui\:accent s-mbe:30">
+        *   <ul class="s-list\:icon s-color:accent s-mbe:30">
         *     <li><i class="s-icon\:user"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li><i class="s-icon\:heart s-ui\:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li><i class="s-icon\:heart s-color:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
         * </div>
         * 
         * <div class="s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors</h3>
-        *   <ul class="s-list s-scale\:12 s-ui\:accent">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors</h3>
+        *   <ul class="s-list s-scale\:12 s-color:accent">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li class="s-ui\:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li class="s-ui\:error">${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li class="s-color:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li class="s-color:error">${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
         * </div>
         * 
         * <!-- Text format -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <ul>
         *           <li>${__faker.name.findName()}</li>
@@ -279,7 +279,7 @@ export default function ({
         */
             @sugar.format.text {
                 ul {
-                    @sugar.color.remap(ui, ${finalParams.defaultColor});
+                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(',')}');
                 } 
             }
@@ -307,7 +307,7 @@ export default function ({
         */
             @sugar.format.text {
                 ol {
-                    @sugar.color.remap(ui, ${finalParams.defaultColor});
+                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(',')}');
                 } 
             }

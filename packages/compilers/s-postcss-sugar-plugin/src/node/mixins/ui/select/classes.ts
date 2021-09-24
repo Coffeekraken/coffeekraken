@@ -71,7 +71,7 @@ export default function ({
         * These classes allows you to display nice select in your forms
         * 
         * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-ui:..." class
+        * @feature          Support for colorizing through the "s-color:..." class
         * 
         * @support          chromium
         * @support          firefox
@@ -91,7 +91,7 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select s-width:50" name="select-style-${style}">
             *       <option value="value1">${__faker.name.findName()}</option>
@@ -101,7 +101,7 @@ export default function ({
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     <select class="s-select s-ui:accent s-width:50" name="select-style-${style}">
+            *     <select class="s-select s-color:accent s-width:50" name="select-style-${style}">
             *       <option value="value1">${__faker.name.findName()}</option>
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
@@ -109,7 +109,7 @@ export default function ({
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     <select class="s-select s-ui:accent s-width:50" name="select-style-${style}">
+            *     <select class="s-select s-color:accent s-width:50" name="select-style-${style}">
             *       <option value="value1">${__faker.name.findName()}</option>
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
@@ -123,7 +123,7 @@ export default function ({
         * 
         * <!-- Colors -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-width:50" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -133,7 +133,7 @@ export default function ({
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:accent s-width:50" name="select-color-complementary">
+        *     <select class="s-select s-color:accent s-width:50" name="select-color-complementary">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -141,7 +141,7 @@ export default function ({
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:complementary s-width:50" name="select-color-error">
+        *     <select class="s-select s-color:complementary s-width:50" name="select-color-error">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -149,7 +149,7 @@ export default function ({
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:error s-width:50" name="select-color-error" disabled>
+        *     <select class="s-select s-color:error s-width:50" name="select-color-error" disabled>
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -160,9 +160,9 @@ export default function ({
         * 
         * <!-- Multiple -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Multiple</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Multiple</h3>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:accent s-width:50" multiple name="select-color-accent">
+        *     <select class="s-select s-color:accent s-width:50" multiple name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -173,9 +173,9 @@ export default function ({
         * 
         * <!-- RTL -->
         * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL Support</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
+        *     <select class="s-select s-color:accent s-width:50" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -183,7 +183,7 @@ export default function ({
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
+        *     <select class="s-select s-color:accent s-width:50" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -191,7 +191,7 @@ export default function ({
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
+        *     <select class="s-select s-color:accent s-width:50" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -202,9 +202,9 @@ export default function ({
         * 
         * <!-- Scale -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scale</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
         *   <label class="s-mbe:30 s-label s-scale:07">
-        *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
+        *     <select class="s-select s-color:accent s-width:50" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -212,7 +212,7 @@ export default function ({
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
+        *     <select class="s-select s-color:accent s-width:50" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -220,7 +220,7 @@ export default function ({
         *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
-        *     <select class="s-select s-ui:accent s-width:50" name="select-color-accent">
+        *     <select class="s-select s-color:accent s-width:50" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
@@ -231,7 +231,7 @@ export default function ({
         * 
         * <!-- Text format -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Text format</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
         *   <p class="s-typo:p s-mbe:30">
         *       Text format mean that all the "select" tags inside the "s-format:text" class scope will be styled automatically using the default style and color.
         *   </p>
@@ -273,7 +273,7 @@ export default function ({
       */`);
         vars.push(`
             ${cls} {
-                @sugar.color.remap(ui, ${finalParams.defaultColor});
+                @sugar.color(${finalParams.defaultColor});
                 @sugar.ui.select($style: ${style}, $scope: '${finalParams.scope.join(',')}');
             }`);
     });
@@ -302,7 +302,7 @@ export default function ({
         */
             @sugar.format.text {
                 select {
-                    @sugar.color.remap(ui, ${finalParams.defaultColor});
+                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.select($scope: '${finalParams.scope.join(',')}');
                 } 
             }

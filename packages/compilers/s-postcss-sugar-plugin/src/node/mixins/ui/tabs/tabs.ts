@@ -100,12 +100,12 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          /** background-color: sugar.color(ui, surface); */
+          /** background-color: sugar.color(current, surface); */
           border-radius: sugar.theme(ui.tabs.borderRadius);
           user-select: none;
 
           & > * > * {
-            @sugar.color.remap(ui, main);
+            @sugar.color(main);
           }
 
           & > * {
@@ -162,11 +162,11 @@ export default function ({
                 vars.push(`
           & > * {
             @sugar.state.active {
-              background-color: sugar.color(ui);
-              color: sugar.color(ui, foreground);
+              background-color: sugar.color(current);
+              color: sugar.color(current, foreground);
             }
             @sugar.state.hover {
-              background-color: sugar.color(ui, --lighten 5);
+              background-color: sugar.color(current, --lighten 5);
             }       
           }
         `);
@@ -184,7 +184,7 @@ export default function ({
     //       @sugar.gradient($start: sugar.color(complementary, gradientStart), $end: sugar.color(complementary, gradientEnd), $angle: 90deg, $type: linear);
     //     }
     //     @sugar.state.active {
-    //       @sugar.gradient($start: sugar.color(ui, gradientStart), $end: sugar.color(ui, gradientEnd), $angle: 90deg, $type: linear);
+    //       @sugar.gradient($start: sugar.color(current, gradientStart), $end: sugar.color(current, gradientEnd), $angle: 90deg, $type: linear);
     //     }
     //   }
     // `);

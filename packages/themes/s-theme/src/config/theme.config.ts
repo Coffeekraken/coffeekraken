@@ -31,6 +31,22 @@ export function preprocess(rawThemeConfig, rawConfig) {
     return rawThemeConfig;
 }
 
+export function postprocess(themeConfig, config) {
+    const themes = themeConfig.themes;
+    Object.keys(themes).forEach((themeName) => {
+        const themeObj = themes[themeName];
+        if (!themeObj.color.current) {
+            if (themeObj.defaultColor) {
+                themeObj.color.current = Object.assign({}, themeObj.color[themeObj.defaultColor]);
+            } else {
+                const firstColor = themeObj.color[Object.keys(themeObj.color)[0]];
+                themeObj.color.current = Object.assign({}, firstColor);
+            }
+        }
+    });
+    return themeConfig;
+}
+
 export default function (env, config) {
     return {
         /**

@@ -113,7 +113,7 @@ export default function jsObjectToCssProperties(jsObject: any, settings?: Partia
                 propsStack.push(`@sugar.depth(${value});`);
                 break;
             case 'default-color':
-                propsStack.push(`@sugar.color.remap(ui, ${value});`);
+                propsStack.push(`@sugar.color(${value});`);
                 break;
             case 'rhythm-vertical':
                 propsStack.push(`

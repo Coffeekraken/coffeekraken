@@ -31,14 +31,14 @@ export default function ({ params, atRule, replaceWith, }) {
         * <div class="s-font:30 s-mbe:50">
         *   <span class="s-tooltip-container\:active">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Hello</a>
-        *       <div class="s-tooltip\:inline-end s-ui\:accent">
+        *       <div class="s-tooltip\:inline-end s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Positions</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Positions</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Block start (default)</a>
         *       <div class="s-tooltip">
@@ -47,64 +47,64 @@ export default function ({ params, atRule, replaceWith, }) {
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Inline end</a>
-        *       <div class="s-tooltip\:inline-end s-ui\:accent">
+        *       <div class="s-tooltip\:inline-end s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Block end</a>
-        *       <div class="s-tooltip\:block-end s-ui\:complementary">
+        *       <div class="s-tooltip\:block-end s-color:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Inline start</a>
-        *       <div class="s-tooltip\:inline-start s-ui\:error">
+        *       <div class="s-tooltip\:inline-start s-color:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (sample)</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (sample)</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Accent</a>
-        *       <div class="s-tooltip s-ui\:accent">
+        *       <div class="s-tooltip s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Complementary</a>
-        *       <div class="s-tooltip s-ui\:complementary">
+        *       <div class="s-tooltip s-color:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Error</a>
-        *       <div class="s-tooltip s-ui\:error">
+        *       <div class="s-tooltip s-color:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">Info</a>
-        *       <div class="s-tooltip s-ui\:info">
+        *       <div class="s-tooltip s-color:info">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Interactions</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Interactions</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">I'm not interactive</a>
         *       <div class="s-tooltip">
-        *           <a class="s-btn s-ui\:accent">Click me if you can!</a>
+        *           <a class="s-btn s-color:accent">Click me if you can!</a>
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr\:20 s-mb\:20">I'm interactive</a>
         *       <div class="s-tooltip\:interactive">
-        *           <a class="s-btn s-ui\:accent">Click me because you can!</a>
+        *           <a class="s-btn s-color:accent">Click me because you can!</a>
         *       </div>
         *   </span>
         * </div>

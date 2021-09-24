@@ -12,7 +12,7 @@
 </s-code-example>
 
 <div class="s-until:sibling:mounted">
-    <i class="s-loader:spinner s-ui:accent"></i>
+    <i class="s-loader:spinner s-color:accent"></i>
     &nbsp;
     <p class="s-typo:p s-display:inline-block">Loading code example. Please wait...</p>
 </div>

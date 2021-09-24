@@ -71,7 +71,7 @@ export default function ({
         * @feature          Support for vertical rhythm through the "s-rhythm:vertical" class
         * @feature          Support for text formatting through the "s-format:text" class
         * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-ui:..." class
+        * @feature          Support for colorizing through the "s-color:..." class
         * 
         * @support          chromium
         * @support          firefox
@@ -94,12 +94,12 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:accent"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:complementary"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:info"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-ui:error"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
             *   <span class="s-btn-group s-mie:20 s-mbe:20">
             *       <a tabindex="0" class="s-btn:${style}"><span>Click me!</span></a>
             *       <a tabindex="0" class="s-btn:${style}"><span>+</span></a>
@@ -112,7 +112,7 @@ export default function ({
         *
         * <!-- scales -->
         * <div class="s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scales</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
         *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20"><span>Click me!</span></a>
         *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20"><span>Click me!</span></a>
         *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20"><span>Click me!</span></a>
@@ -120,7 +120,7 @@ export default function ({
         * 
         * <!-- Rhythm and text format -->
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <button>
         *          ${__faker.name.findName()}
@@ -157,7 +157,7 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
      .${cls} {
-        @sugar.color.remap(ui, ${finalParams.defaultColor});
+        @sugar.color(${finalParams.defaultColor});
         @sugar.ui.button($style: ${style});
      }`);
     });
@@ -206,7 +206,7 @@ export default function ({
       .s-btn-group > .s-btn {
 
         &:first-child:not(:last-child) {
-          border-inline-end: 1px solid sugar.color(ui, --darken 5);
+          border-inline-end: 1px solid sugar.color(current, --darken 5);
         }
 
         &:not(:first-child):not(:last-child),
@@ -252,7 +252,7 @@ export default function ({
         */
             @sugar.format.text {
                 button {
-                    @sugar.color.remap(ui, ${finalParams.defaultColor});
+                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
                 } 
             }

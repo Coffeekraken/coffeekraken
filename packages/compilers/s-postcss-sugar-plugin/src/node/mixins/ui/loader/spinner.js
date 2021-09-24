@@ -23,9 +23,9 @@ export default function ({ params, atRule, replaceWith, }) {
     vars.push(`
     display: inline-block;
     text-indent: -9999em;
-    border-top: 0.3em solid sugar.color(ui, --alpha 0.8);
-    border-right: 0.3em solid sugar.color(ui, --alpha 0.8);
-    border-bottom: 0.3em solid sugar.color(ui, --alpha 0.8);
+    border-top: 0.3em solid sugar.color(current, --alpha 0.8);
+    border-right: 0.3em solid sugar.color(current, --alpha 0.8);
+    border-bottom: 0.3em solid sugar.color(current, --alpha 0.8);
     border-left: 0.3em solid rgba(0,0,0,0);
     border-radius: 50%;
     width: 1em;

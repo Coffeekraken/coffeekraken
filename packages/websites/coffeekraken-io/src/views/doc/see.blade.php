@@ -1,7 +1,7 @@
 @if ($block->see)
 
     <h4 id="related-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
-        <i class="s-icon:box s-color:accent"></i>&nbsp;&nbsp;Related resource(s)
+        <i class="s-icon:box s-tc:accent"></i>&nbsp;&nbsp;Related resource(s)
     </h4>
 
     @foreach ($block->see as $see)

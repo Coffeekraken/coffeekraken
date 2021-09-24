@@ -2,25 +2,23 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
 export default function jsObjectToCssProperties(jsObject, settings) {
-    const finalSettings = __deepMerge({
-        exclude: [],
-        only: [],
-    }, settings);
+    const finalSettings = __deepMerge(
+        {
+            exclude: [],
+            only: [],
+        },
+        settings,
+    );
     const propsStack = [];
     Object.keys(jsObject).forEach((prop) => {
-        if (finalSettings.exclude.indexOf(prop) !== -1)
-            return;
-        if (finalSettings.exclude.indexOf(__dashCase(prop)) !== -1)
-            return;
+        if (finalSettings.exclude.indexOf(prop) !== -1) return;
+        if (finalSettings.exclude.indexOf(__dashCase(prop)) !== -1) return;
         const originalProp = prop;
         prop = __dashCase(prop).trim();
-        if (finalSettings.exclude.length && finalSettings.exclude.indexOf(prop) !== -1)
-            return;
-        if (finalSettings.only.length && finalSettings.only.indexOf(prop) === -1)
-            return;
+        if (finalSettings.exclude.length && finalSettings.exclude.indexOf(prop) !== -1) return;
+        if (finalSettings.only.length && finalSettings.only.indexOf(prop) === -1) return;
         const value = jsObject[originalProp];
-        if (!value)
-            return;
+        if (!value) return;
         let color, modifier;
         switch (prop) {
             case 'font-family':
@@ -81,7 +79,7 @@ export default function jsObjectToCssProperties(jsObject, settings) {
                 propsStack.push(`@sugar.depth(${value});`);
                 break;
             case 'default-color':
-                propsStack.push(`@sugar.color.remap(ui, ${value});`);
+                propsStack.push(`@sugar.color(${value});`);
                 break;
             case 'rhythm-vertical':
                 propsStack.push(`
@@ -92,8 +90,7 @@ export default function jsObjectToCssProperties(jsObject, settings) {
                 break;
             default:
                 const props = __knownCssProperties.all;
-                if (props.indexOf(prop) === -1)
-                    return;
+                if (props.indexOf(prop) === -1) return;
                 propsStack.push(`${prop}: ${value};`);
                 break;
         }

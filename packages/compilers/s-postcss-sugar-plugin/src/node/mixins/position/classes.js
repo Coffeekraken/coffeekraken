@@ -50,28 +50,28 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         * @example        html
         * <div class="s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Absolute position</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Absolute position</h3>
         *   <div class="s-position\:relative s-ratio\:16-9">
         *       <img class="s-position\:absolute\:bottom" src="https://picsum.photos/100/100"/>
         *   </div>
         * </div>
         * 
         * <div class="s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Relative position</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Relative position</h3>
         *   <div class="s-position\:relative s-ratio\:16-9">
         *       <img class="s-position\:relative" src="https://picsum.photos/100/100"/>
         *   </div>
         * </div>
         * 
         * <div class="s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Fixed position</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Fixed position</h3>
         *   <div class="s-position\:relative s-ratio\:16-9">
         *       <img class="s-position\:fixed\:right" style="top:25%" src="https://picsum.photos/100/100"/>
         *   </div>
         * </div>
         * 
         * <div class="s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Sticky position</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Sticky position</h3>
         *   <div class="s-position\:relative s-ratio\:16-9">
         *       <img class="s-position\:sticky" style="top:100px" src="https://picsum.photos/100/100"/>
         *   </div>

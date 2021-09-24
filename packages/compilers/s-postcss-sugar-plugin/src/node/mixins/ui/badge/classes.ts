@@ -67,11 +67,11 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-font\:40 s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mb\:20">${style} style</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
             *   <a class="s-badge\:${style} s-mr\:20">Say hello!</a>
-            *   <a class="s-badge\:${style} s-mr\:20 s-ui\:accent">Say hello!</a>
-            *   <a class="s-badge\:${style} s-mr\:20 s-ui\:complementary">Say hello!</a>
-            *   <a class="s-badge\:${style} s-ui\:error">Say hello!</a>
+            *   <a class="s-badge\:${style} s-mr\:20 s-color:accent">Say hello!</a>
+            *   <a class="s-badge\:${style} s-mr\:20 s-color:complementary">Say hello!</a>
+            *   <a class="s-badge\:${style} s-color:error">Say hello!</a>
             * </div>
             * `;
             })
@@ -79,7 +79,7 @@ export default function ({
         *
         * <!-- shapes -->
         * <div class="s-font\:40 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Shapes</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Shapes</h3>
         *   <a class="s-badge\:square s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge\:pill s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge\:outline\:square s-mr\:20 s-mb\:20">Say hello!</a>
@@ -88,7 +88,7 @@ export default function ({
         * 
         * <!-- scales -->
         * <div class="s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mb\:20">Scales</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scales</h3>
         *   <a class="s-badge s-scale\:05 s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge s-scale\:1 s-mr\:20 s-mb\:20">Say hello!</a>
         *   <a class="s-badge s-scale\:12 s-mr\:20 s-mb\:20">Say hello!</a>

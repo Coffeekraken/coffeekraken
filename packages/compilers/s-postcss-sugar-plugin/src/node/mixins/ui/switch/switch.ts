@@ -58,13 +58,13 @@ export default function ({
 
         --thumb-size: 1em;
         --thumb-color-active: sugar.color(main, surface);
-        --thumb-color-inactive: sugar.color(ui);
-        --thumb-color-highlight: sugar.color(ui, --alpha 0.2);
+        --thumb-color-inactive: sugar.color(current);
+        --thumb-color-highlight: sugar.color(current, --alpha 0.2);
 
         --track-size: calc(var(--thumb-size) * 2);
         --track-padding: 0.2em;
-        --track-color-active: sugar.color(ui);
-        --track-color-inactive: sugar.color(ui, --alpha 0.1);
+        --track-color-active: sugar.color(current);
+        --track-color-inactive: sugar.color(current, --alpha 0.1);
 
         --isLTR: 1;
 
@@ -151,7 +151,7 @@ export default function ({
                     background: var(--track-color-inactive);
                     border-radius: var(--track-size);
 
-                    border: sugar.color(ui, border) solid sugar.theme(ui.switch.borderWidth);
+                    border: sugar.color(current, border) solid sugar.theme(ui.switch.borderWidth);
                     outline-offset: 5px;
                     
                     transition: sugar.theme(ui.switch.transition);
@@ -161,7 +161,7 @@ export default function ({
                             background: var(--thumb-color-active) !important;
                         }
                         &::after {
-                            box-shadow: 0 0 3px sugar.color(ui, --darken 20);
+                            box-shadow: 0 0 3px sugar.color(current, --darken 20);
                         }
                     }
 

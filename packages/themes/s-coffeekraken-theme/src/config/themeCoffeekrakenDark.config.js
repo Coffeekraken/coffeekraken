@@ -15,7 +15,7 @@ export default function (env, config) {
              */
             main: {
                 color: '#776D91',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                ui
@@ -30,7 +30,7 @@ export default function (env, config) {
              */
             ui: {
                 color: '#7a738c',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                accent
@@ -45,7 +45,7 @@ export default function (env, config) {
              */
             accent: {
                 color: '#ffbb00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                complementary
@@ -60,7 +60,7 @@ export default function (env, config) {
              */
             complementary: {
                 color: '#5100ff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                success
@@ -75,7 +75,7 @@ export default function (env, config) {
              */
             success: {
                 color: '#91ff00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                warning
@@ -90,7 +90,7 @@ export default function (env, config) {
              */
             warning: {
                 color: '#ffd500',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                error
@@ -105,7 +105,7 @@ export default function (env, config) {
              */
             error: {
                 color: '#ff003b',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                info
@@ -120,7 +120,7 @@ export default function (env, config) {
              */
             info: {
                 color: '#00ffff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                extension
@@ -157,4 +157,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVDb2ZmZWVrcmFrZW5EYXJrLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQ29mZmVla3Jha2VuRGFyay5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsT0FBTyxFQUFFLGVBQWU7UUFDeEIsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHVCQUF1QjthQUNqQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUU7Z0JBQ0EsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx1QkFBdUI7YUFDakM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsdUJBQXVCO2FBQ2pDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILGFBQWEsRUFBRTtnQkFDWCxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHVCQUF1QjthQUNqQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx1QkFBdUI7YUFDakM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsdUJBQXVCO2FBQ2pDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRTtnQkFDSCxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHVCQUF1QjthQUNqQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx1QkFBdUI7YUFDakM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsU0FBUyxFQUFFO2dCQUNQLEtBQUssRUFBRSw0QkFBNEI7Z0JBQ25DLEtBQUssRUFBRSxTQUFTO2dCQUNoQixHQUFHLEVBQUUsU0FBUztnQkFDZCxFQUFFLEVBQUUsU0FBUztnQkFDYixJQUFJLEVBQUUsU0FBUztnQkFDZixHQUFHLEVBQUUsU0FBUztnQkFDZCxJQUFJLEVBQUUsU0FBUztnQkFDZixJQUFJLEVBQUUsU0FBUztnQkFDZixJQUFJLEVBQUUsU0FBUztnQkFDZixHQUFHLEVBQUUsU0FBUztnQkFDZCxJQUFJLEVBQUUsU0FBUztnQkFDZixHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUzthQUNqQjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVDb2ZmZWVrcmFrZW5EYXJrLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQ29mZmVla3Jha2VuRGFyay5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsT0FBTyxFQUFFLGVBQWU7UUFDeEIsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUU7Z0JBQ0EsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILGFBQWEsRUFBRTtnQkFDWCxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRTtnQkFDSCxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsU0FBUyxFQUFFO2dCQUNQLEtBQUssRUFBRSw0QkFBNEI7Z0JBQ25DLEtBQUssRUFBRSxTQUFTO2dCQUNoQixHQUFHLEVBQUUsU0FBUztnQkFDZCxFQUFFLEVBQUUsU0FBUztnQkFDYixJQUFJLEVBQUUsU0FBUztnQkFDZixHQUFHLEVBQUUsU0FBUztnQkFDZCxJQUFJLEVBQUUsU0FBUztnQkFDZixJQUFJLEVBQUUsU0FBUztnQkFDZixJQUFJLEVBQUUsU0FBUztnQkFDZixHQUFHLEVBQUUsU0FBUztnQkFDZCxJQUFJLEVBQUUsU0FBUztnQkFDZixHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUztnQkFDZCxHQUFHLEVBQUUsU0FBUzthQUNqQjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

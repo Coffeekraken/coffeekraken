@@ -1,6 +1,6 @@
 <section id="features-frontend" class="s-container s-pb:100">
 
-    <h3 class="s-typo:h3 s-mbe:30">Frontend<br><span class="s-color:accent">sugar</span></h3>
+    <h3 class="s-typo:h3 s-mbe:30">Frontend<br><span class="s-tc:accent">sugar</span></h3>
     <p class="s-typo:p s-mbe:50">
         The goal of Coffeekraken is to help having a better development experience with
         a production ready quality grade. Here's some areas where we can help you:
@@ -14,7 +14,7 @@
                     'html' => '<ul class="s-list\:ul\:icon">
 <li>
 <i class="s-icon\:custom-user"></i>
-Hello <span class="s-color:accent">world</span>
+Hello <span class="s-tc:accent">world</span>
 </li>
 <li>
 <i class="s-icon\:fire"></i>
@@ -31,7 +31,7 @@ Cool don\'t you think?
         </div>
         <div>
             <h4 class="s-typo:h4 s-mbe:30">
-                Templates (<span class="s-color:accent">html</span>, <span class="s-color:accent">BladePhp</span>, <span class="s-color:accent">Twig</span>, <span class="s-color:accent">etc...</span>)
+                Templates (<span class="s-tc:accent">html</span>, <span class="s-tc:accent">BladePhp</span>, <span class="s-tc:accent">Twig</span>, <span class="s-tc:accent">etc...</span>)
             </h4>
             <ol class="s-list:ol:accent s-mbe:30">
                 <li class="s-typo:p">
@@ -51,7 +51,7 @@ Cool don\'t you think?
         <div>
             <h4 class="s-typo:h4 s-mbe:30">
                 CSS made<br>
-                <span class="s-color:accent">pleasant</span> again
+                <span class="s-tc:accent">pleasant</span> again
             </h4>
             <ol class="s-list:ol:accent s-mbe:30">
                 <li class="s-typo:p">
@@ -61,13 +61,13 @@ Cool don\'t you think?
                     Color management simplified
                 </li>
                 <li class="s-typo:p">
-                    Theme handling like <span class="s-color:complementary">light</span>, <span class="s-color:complementary">dark</span>, etc...
+                    Theme handling like <span class="s-tc:complementary">light</span>, <span class="s-tc:complementary">dark</span>, etc...
                 </li>
                 <li class="s-typo:p">
                     Quick compilation through <a class="s-typo:a" href="https://vitejs.dev/" title="ViteJs" target="_blank">ViteJs</a>
                 </li>   
                 <li class="s-typo:p">
-                    Automatic icons integration from <a class="s-typo:a" href="https://fontawesome.com/" title="Fontawesome" target="_blank">Fontawesome</a>, <span class="s-color:complementary">filesystem</span> and more...
+                    Automatic icons integration from <a class="s-typo:a" href="https://fontawesome.com/" title="Fontawesome" target="_blank">Fontawesome</a>, <span class="s-tc:complementary">filesystem</span> and more...
                 </li>
                 {{-- <li class="s-typo:p">
                     Easy grid layout generation through the <a class="s-typo:a" href="/" title="grid">@sugar.grid</a> PostCSS mixin.
@@ -104,7 +104,7 @@ fs:src/icons/copy.svg:copy
                     'html' => '<ul class="s-list\:ul\:icon">
 <li>
 <i class="s-icon\:custom-user"></i>
-Hello <span class="s-color:accent">world</span>
+Hello <span class="s-tc:accent">world</span>
 </li>
 <li>
 <i class="s-icon\:fire"></i>
@@ -120,7 +120,7 @@ Cool don\'t you think?
         </div>
         <div>
             <h4 class="s-typo:h4 s-mbe:30">
-                Javascript made<br><span class="s-color:accent">reliable</span>
+                Javascript made<br><span class="s-tc:accent">reliable</span>
             </h4>
             <ol class="s-list:ol:accent s-mbe:30">
                 <li class="s-typo:p">
@@ -138,7 +138,7 @@ Cool don\'t you think?
 
     <div class="s-text:center s-pt:50 s-mis:-50">
         <p class="s-typo:p-lead s-mi:auto s-mbe:30">
-            Keep in mind that <span class="s-color:accent">all of these features are optional</span>. This mean that
+            Keep in mind that <span class="s-tc:accent">all of these features are optional</span>. This mean that
             you can work with the things you like and let the rest aside...
         </p>
         <a class="s-btn:complementary" href="/#get-started" title="Get started!">

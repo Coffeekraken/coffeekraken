@@ -50,11 +50,11 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                 vars.push(`
                 
                     transition: sugar.theme(ui.radio.transition);
-                    border: sugar.theme(ui.radio.borderWidth) solid sugar.color(ui);
+                    border: sugar.theme(ui.radio.borderWidth) solid sugar.color(current);
                     border-radius: sugar.theme(ui.radio.borderRadius);
                     background-color: transparent;
                     transition: sugar.theme(ui.radio.transition);
-                    box-shadow: 0 0 0 0 sugar.color(ui, --alpha 0.2);
+                    box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
 
                     &:after {
                         content: '';
@@ -63,7 +63,7 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                         width: 0.4em; height: 0.4em;
                         border-radius: sugar.theme(ui.radio.borderRadius);
                         transform: translate(-50%, -50%);
-                        background: sugar.color(ui);
+                        background: sugar.color(current);
                         opacity: 0;
                         transition: sugar.theme(ui.radio.transition);
                     }
@@ -76,7 +76,7 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                     }
 
                     &:focus:not(:hover):not(:active):not(:disabled) {
-                        box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(ui, --alpha 0.3);
+                        box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(current, --alpha 0.3);
                     }
  
         `);

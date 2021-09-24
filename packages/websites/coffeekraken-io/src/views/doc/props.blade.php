@@ -1,20 +1,20 @@
 @if ($block->props)
     <h4 id="properties-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
-        <i class="s-icon:list-ul s-color:accent"></i>&nbsp;&nbsp;properties
+        <i class="s-icon:list-ul s-tc:accent"></i>&nbsp;&nbsp;properties
     </h4>
 
     <ol>
     @foreach ($block->props as $prop)
         <li class="s-font:40 s-mbe:30">
             <header class="s-flex s-bg:ui-surface">
-                <div class="s-flex-item:grow s-color:accent s-p:20">
+                <div class="s-flex-item:grow s-tc:accent s-p:20">
                     {{ $prop->name }}
                 </div>
                 <div class="s-typo:bold s-p:20">
                     {{ implode(' | ', $prop->type) }}
                 </div>
                 @if ($prop->defaultStr)
-                    <div class="s-color:info s-p:20">
+                    <div class="s-tc:info s-p:20">
                         {{ $prop->defaultStr }}
                     </div>
                 @endif

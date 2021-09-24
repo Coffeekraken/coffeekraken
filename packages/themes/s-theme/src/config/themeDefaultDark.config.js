@@ -1,6 +1,18 @@
 export default function (env, config) {
     return {
         extends: 'themeDarkBase',
+        /**
+         * @name            defaultColor
+         * @namespace        config.theme.themes.themeDefaultDark
+         * @type            String
+         * @default         main
+         *
+         * Specify which color to use by default for elements that make use of the "sugar.color(current)" color.
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        defaultColor: 'main',
         color: {
             /**
              * @name                main
@@ -15,22 +27,7 @@ export default function (env, config) {
              */
             main: {
                 color: '#776D91',
-                '...': '[extends.colorStates]',
-            },
-            /**
-             * @name                ui
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #7a738c
-             *
-             * Specify the <s-color="ui">ui</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            ui: {
-                color: '#7a738c',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                accent
@@ -45,7 +42,7 @@ export default function (env, config) {
              */
             accent: {
                 color: '#ffbb00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                complementary
@@ -60,7 +57,7 @@ export default function (env, config) {
              */
             complementary: {
                 color: '#5100ff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                success
@@ -75,7 +72,7 @@ export default function (env, config) {
              */
             success: {
                 color: '#91ff00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                warning
@@ -90,7 +87,7 @@ export default function (env, config) {
              */
             warning: {
                 color: '#ffd500',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                error
@@ -105,7 +102,7 @@ export default function (env, config) {
              */
             error: {
                 color: '#ff003b',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                info
@@ -120,7 +117,7 @@ export default function (env, config) {
              */
             info: {
                 color: '#00ffff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
             /**
              * @name                extension
@@ -157,4 +154,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVEZWZhdWx0RGFyay5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZURlZmF1bHREYXJrLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLE9BQU87UUFDSCxPQUFPLEVBQUUsZUFBZTtRQUV4QixLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsdUJBQXVCO2FBQ2pDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRTtnQkFDQSxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHVCQUF1QjthQUNqQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUU7Z0JBQ0osS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx1QkFBdUI7YUFDakM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsYUFBYSxFQUFFO2dCQUNYLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsdUJBQXVCO2FBQ2pDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRTtnQkFDTCxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHVCQUF1QjthQUNqQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx1QkFBdUI7YUFDakM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsdUJBQXVCO2FBQ2pDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHVCQUF1QjthQUNqQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxTQUFTLEVBQUU7Z0JBQ1AsS0FBSyxFQUFFLDRCQUE0QjtnQkFDbkMsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEVBQUUsRUFBRSxTQUFTO2dCQUNiLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxTQUFTO2dCQUNkLElBQUksRUFBRSxTQUFTO2dCQUNmLElBQUksRUFBRSxTQUFTO2dCQUNmLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxTQUFTO2dCQUNkLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2FBQ2pCO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVEZWZhdWx0RGFyay5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZURlZmF1bHREYXJrLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLE9BQU87UUFDSCxPQUFPLEVBQUUsZUFBZTtRQUV4Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLE1BQU07UUFFcEIsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUU7Z0JBQ0osS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsYUFBYSxFQUFFO2dCQUNYLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRTtnQkFDTCxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxTQUFTLEVBQUU7Z0JBQ1AsS0FBSyxFQUFFLDRCQUE0QjtnQkFDbkMsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEVBQUUsRUFBRSxTQUFTO2dCQUNiLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxTQUFTO2dCQUNkLElBQUksRUFBRSxTQUFTO2dCQUNmLElBQUksRUFBRSxTQUFTO2dCQUNmLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxTQUFTO2dCQUNkLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2dCQUNkLEdBQUcsRUFBRSxTQUFTO2FBQ2pCO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

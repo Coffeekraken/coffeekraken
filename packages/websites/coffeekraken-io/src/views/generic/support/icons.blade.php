@@ -3,7 +3,7 @@
 
         <span class="s-tooltip-container">
             <i class="s-icon:support-{{ $support->name }} s-mie:10"></i>
-            <div class="s-tooltip s-ui:success">
+            <div class="s-tooltip s-color:success">
                 @if ($support->description)
                     {{ $support->description }}
                 @else

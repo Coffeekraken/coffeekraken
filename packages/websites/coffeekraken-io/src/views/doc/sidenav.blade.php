@@ -155,7 +155,7 @@
                 @foreach ($props as $prop)                                
                     <li class="s-font:40">
                         <a href="#{{ $prop->name }}" title="{{ $prop->name }} property">
-                            {!! $prop->get ? '<span class="s-color:accent">get</span>' : '' !!}{!! $prop->set ? '|<span class="s-color:accent">set</span>' : '' !!} {{ $prop->name }}
+                            {!! $prop->get ? '<span class="s-tc:accent">get</span>' : '' !!}{!! $prop->set ? '|<span class="s-tc:accent">set</span>' : '' !!} {{ $prop->name }}
                         </a>
                     </li>
                 @endforeach

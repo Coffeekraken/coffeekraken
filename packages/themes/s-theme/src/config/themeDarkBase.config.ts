@@ -2,7 +2,7 @@ export default function (env, config) {
     return {
         extends: 'themeBase',
 
-        colorStates: {
+        colorSchemas: {
             default: {
                 '0': {
                     lighten: 50,

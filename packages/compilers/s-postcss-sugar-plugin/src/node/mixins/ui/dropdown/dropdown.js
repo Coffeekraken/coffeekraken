@@ -65,11 +65,11 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             case 'solid':
             default:
                 vars.push(`
-                    background-color: sugar.color(ui);
-                    color: sugar.color(ui, foreground);
+                    background-color: sugar.color(current);
+                    color: sugar.color(current, foreground);
                     padding-inline: sugar.scalable(sugar.theme(ui.dropdown.paddingInline));
                     padding-block: sugar.scalable(sugar.theme(ui.dropdown.paddingBlock));
-                    border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(ui, border);
+                    border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
                     border-radius: sugar.theme(ui.dropdown.borderRadius);
                     @sugar.depth(sugar.theme(ui.dropdown.depth));
                     @sugar.transition(fast);

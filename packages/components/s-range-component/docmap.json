@@ -21,10 +21,7 @@
                 "name": "s-range",
                 "type": "Webcomponent",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/forms/s-range"
                 },
                 "platform": [
@@ -39,7 +36,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<h6>Simple range</h6>\n<s-range name=\"myCoolRange\" class=\"s-ui:accent\"></s-range>\n\n<h6>With a tooltip</h6>\n<s-range name=\"myOtherRanfe\" tooltip></s-range>\n\n<h6>Using steps</h6>\n<s-range name=\"myRangeWithSteps\" class=\"s-ui:complementary\" step=\"5\"></s-range>\n\n<h6>Different colors</h6>\n<s-range name=\"myRangeColoredSuccess\" class=\"s-ui:success\"></s-range>\n<s-range name=\"myRangeColoredWarning\" class=\"s-ui:warning\"></s-range>\n<s-range name=\"myRangeColoredError\" class=\"s-ui:error\"></s-range>"
+                        "code": "<h6>Simple range</h6>\n<s-range name=\"myCoolRange\" class=\"s-color:accent\"></s-range>\n\n<h6>With a tooltip</h6>\n<s-range name=\"myOtherRanfe\" tooltip></s-range>\n\n<h6>Using steps</h6>\n<s-range name=\"myRangeWithSteps\" class=\"s-color:complementary\" step=\"5\"></s-range>\n\n<h6>Different colors</h6>\n<s-range name=\"myRangeColoredSuccess\" class=\"s-color:success\"></s-range>\n<s-range name=\"myRangeColoredWarning\" class=\"s-color:warning\"></s-range>\n<s-range name=\"myRangeColoredError\" class=\"s-color:error\"></s-range>"
                     },
                     {
                         "language": "js",

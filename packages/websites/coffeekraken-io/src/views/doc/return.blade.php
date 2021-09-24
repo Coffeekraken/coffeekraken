@@ -1,6 +1,6 @@
 @if ($block->return)
     <h4 id="return-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
-        <i class="s-icon:return s-color:accent"></i>&nbsp;&nbsp;Return
+        <i class="s-icon:return s-tc:accent"></i>&nbsp;&nbsp;Return
     </h4>
 
     <header class="s-flex s-bg:ui-surface">
@@ -8,7 +8,7 @@
             {{ implode(' | ', $block->return->type) }}
         </div>
         @if ($block->return->defaultStr)
-            <div class="s-color:info s-p:20">
+            <div class="s-tc:info s-p:20">
                 {{ $block->return->defaultStr }}
             </div>
         @endif

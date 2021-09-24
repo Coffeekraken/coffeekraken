@@ -69,7 +69,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         * @example        html
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Padding inline</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Padding inline</h3>
         *   <p class="s-bg:accent s-pi:30">${__faker.name.findName()}</p>
         *   <p class="s-bg:complementary s-pis:20 s-pie:50">${__faker.name.findName()}</p>
         *   <p class="s-bg:ui s-pie:30">${__faker.name.findName()}</p>
@@ -77,7 +77,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL Support</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
         *   <p class="s-bg:accent s-pi:30">${__faker.name.findName()}</p>
         *   <p class="s-bg:complementary s-pis:20 s-pie:50">${__faker.name.findName()}</p>
         *   <p class="s-bg:ui s-pie:30">${__faker.name.findName()}</p>
@@ -85,7 +85,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Padding Block</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Padding Block</h3>
         *   <div class="s-bg:accent s-pbe:40 s-text:center">${__faker.name.findName()}</div>
         *   <div class="s-bg:complementary s-pb:30 s-text:center">${__faker.name.findName()}</div>
         *   <div class="s-bg:ui s-pbs:20 s-pbe:10 s-text:center">${__faker.name.findName()}</div>

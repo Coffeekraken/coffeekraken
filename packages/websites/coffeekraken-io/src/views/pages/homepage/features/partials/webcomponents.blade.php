@@ -4,7 +4,7 @@
         <div>
             <h3 class="s-typo:h3 s-mbe:30">
                 Fully customizable
-                <br /><span class="s-color:complementary">webcomponents</span>
+                <br /><span class="s-tc:complementary">webcomponents</span>
             </h3>
             <p class="s-typo:p s-mbe:30">
                 Some features are clearly missing in our web browsers these days like a searchable/filtrable select input for example.
@@ -50,7 +50,7 @@ Something cool...
             <li>
                 <div class="s-ratio:1-1 s-bg:accent s-border:radius s-depth:50">
                     <a href="/" title="">
-                        <div class="s-text:center s-color:accent-foreground s-align:abs-center">
+                        <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
                             <i class="s-icon:search s-font:100 s-mbe:20"></i>
                             <p class="s-p">Search input</p>
                         </div>

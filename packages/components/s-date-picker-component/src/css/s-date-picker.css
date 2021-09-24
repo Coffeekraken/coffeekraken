@@ -48,7 +48,7 @@ s-date-picker[default-style] {
 
         &,
         & > * {
-            box-shadow: 0px 0px 3px 0 sugar.color(ui, --darken 10);
+            box-shadow: 0px 0px 3px 0 sugar.color(current, --darken 10);
         }
     }
 }

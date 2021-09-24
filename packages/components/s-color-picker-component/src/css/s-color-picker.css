@@ -9,7 +9,7 @@ s-color-picker {
 
 .s-color-picker__picker {
     [default-style] & {
-        background: sugar.color(ui, surface);
+        background: sugar.color(current, surface);
         overflow: hidden;
         @sugar.depth (sugar.theme(ui.colorPicker.depth));
         border-radius: sugar.theme(ui.colorPicker.borderRadius);

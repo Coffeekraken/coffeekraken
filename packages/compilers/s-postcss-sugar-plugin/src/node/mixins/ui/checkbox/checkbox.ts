@@ -78,11 +78,11 @@ export default function ({
                 vars.push(`
                 
                     transition: sugar.theme(ui.checkbox.transition);
-                    border: sugar.theme(ui.checkbox.borderWidth) solid sugar.color(ui);
+                    border: sugar.theme(ui.checkbox.borderWidth) solid sugar.color(current);
                     border-radius: sugar.theme(ui.checkbox.borderRadius);
                     background-color: transparent;
                     transition: sugar.theme(ui.checkbox.transition);
-                    box-shadow: 0 0 0 0 sugar.color(ui, --alpha 0.2);
+                    box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
 
                     &:after {
                         content: '';
@@ -90,7 +90,7 @@ export default function ({
                         top: 50%; left: 50%;
                         width: 0.4em; height: 0.4em;
                         transform: translate(-50%, -50%);
-                        background: sugar.color(ui);
+                        background: sugar.color(current);
                         opacity: 0;
                         transition: sugar.theme(ui.checkbox.transition);
                     }
@@ -103,7 +103,7 @@ export default function ({
                     }
 
                     &:focus:not(:hover):not(:active):not(:disabled) {
-                        box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(ui, --alpha 0.3);
+                        box-shadow: 0 0 0 sugar.theme(ui.focusOutline.borderWidth) sugar.color(current, --alpha 0.3);
                     }
  
         `);

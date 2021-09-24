@@ -3,19 +3,15 @@ import __SInterface from '@coffeekraken/s-interface';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __remapColorVars from '../../utils/remapColorVars';
 
-class postcssSugarPluginColorRemapMixinInterface extends __SInterface {
+class postcssSugarPluginColorMixinInterface extends __SInterface {
     static definition = {
         color: {
             type: 'String',
             required: true,
         },
-        toColor: {
-            type: 'String',
-            required: true,
-        },
     };
 }
-export { postcssSugarPluginColorRemapMixinInterface as interface };
+export { postcssSugarPluginColorMixinInterface as interface };
 
 /**
  * @name           remap
@@ -39,9 +35,8 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface IPostcssSugarPluginColorRemapParams {
+export interface IPostcssSugarPluginColorParams {
     color: string;
-    toColor: string;
 }
 
 export default function ({
@@ -49,22 +44,20 @@ export default function ({
     atRule,
     replaceWith,
 }: {
-    params: Partial<IPostcssSugarPluginColorRemapParams>;
+    params: Partial<IPostcssSugarPluginColorParams>;
     atRule: any;
     replaceWith: Function;
 }) {
-    const finalParams: IPostcssSugarPluginColorRemapParams = {
+    const finalParams: IPostcssSugarPluginColorParams = {
         color: '',
-        toColor: '',
         ...params,
     };
 
-    const cssArray: string[] = [...__remapColorVars(finalParams.color, finalParams.toColor)];
-
-    if (atRule.parent.type === 'root') {
-        cssArray.unshift(':root {');
-        cssArray.push('}');
-    }
+    const cssArray: string[] = [
+        `
+        @sugar.color.remap(current, ${finalParams.color});
+    `,
+    ];
 
     replaceWith(cssArray);
 }

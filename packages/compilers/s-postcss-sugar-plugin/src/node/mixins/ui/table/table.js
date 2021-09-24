@@ -12,16 +12,16 @@ export default function ({ params, atRule, replaceWith, }) {
     width: 100%;
     table-layout: fixed;
     overflow-wrap: break-word;
-    border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(ui, border);
+    border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border);
     border-radius: sugar.theme(ui.table.borderRadius);
     border-collapse: collapse;
     @sugar.depth(sugar.theme(ui.table.depth));
 
     &, th, td {
-        border: sugar.theme(ui.table.borderWidth) solid sugar.color(ui, border)
+        border: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border)
     }
     th {
-        background-color: sugar.color(ui, surface);
+        background-color: sugar.color(current, surface);
         font-weight: bold;
         vertical-align: middle;
     }

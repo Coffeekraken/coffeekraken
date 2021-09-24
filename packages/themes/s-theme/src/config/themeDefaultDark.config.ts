@@ -2,6 +2,19 @@ export default function (env, config) {
     return {
         extends: 'themeDarkBase',
 
+        /**
+         * @name            defaultColor
+         * @namespace        config.theme.themes.themeDefaultDark
+         * @type            String
+         * @default         main
+         *
+         * Specify which color to use by default for elements that make use of the "sugar.color(current)" color.
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        defaultColor: 'main',
+
         color: {
             /**
              * @name                main
@@ -16,23 +29,7 @@ export default function (env, config) {
              */
             main: {
                 color: '#776D91',
-                '...': '[extends.colorStates]',
-            },
-
-            /**
-             * @name                ui
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #7a738c
-             *
-             * Specify the <s-color="ui">ui</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            ui: {
-                color: '#7a738c',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -48,7 +45,7 @@ export default function (env, config) {
              */
             accent: {
                 color: '#ffbb00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -64,7 +61,7 @@ export default function (env, config) {
              */
             complementary: {
                 color: '#5100ff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -80,7 +77,7 @@ export default function (env, config) {
              */
             success: {
                 color: '#91ff00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -96,7 +93,7 @@ export default function (env, config) {
              */
             warning: {
                 color: '#ffd500',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -112,7 +109,7 @@ export default function (env, config) {
              */
             error: {
                 color: '#ff003b',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -128,7 +125,7 @@ export default function (env, config) {
              */
             info: {
                 color: '#00ffff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**

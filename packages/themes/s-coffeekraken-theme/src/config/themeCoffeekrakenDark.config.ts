@@ -15,7 +15,7 @@ export default function (env, config) {
              */
             main: {
                 color: '#776D91',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -31,7 +31,7 @@ export default function (env, config) {
              */
             ui: {
                 color: '#7a738c',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -47,7 +47,7 @@ export default function (env, config) {
              */
             accent: {
                 color: '#ffbb00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -63,7 +63,7 @@ export default function (env, config) {
              */
             complementary: {
                 color: '#5100ff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -79,7 +79,7 @@ export default function (env, config) {
              */
             success: {
                 color: '#91ff00',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -95,7 +95,7 @@ export default function (env, config) {
              */
             warning: {
                 color: '#ffd500',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -111,7 +111,7 @@ export default function (env, config) {
              */
             error: {
                 color: '#ff003b',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**
@@ -127,7 +127,7 @@ export default function (env, config) {
              */
             info: {
                 color: '#00ffff',
-                '...': '[extends.colorStates]',
+                '...': '[extends.colorSchemas]',
             },
 
             /**

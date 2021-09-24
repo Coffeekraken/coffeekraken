@@ -16,7 +16,7 @@ s-code-example {
 }
 
 .s-code-example__toolbar {
-    color: sugar.color(ui, text);
+    color: sugar.color(current, text);
     position: relative;
     top: calc(sugar.margin(10) * -1) !important;
 }

@@ -9,7 +9,7 @@
 .pika-single.s-pikaday {
     color: sugar.color(main, foreground);
     background: sugar.color(main, surface);
-    border: 1px solid sugar.color(ui, border);
+    border: 1px solid sugar.color(current, border);
     @sugar.depth (100);
     border-radius: sugar.theme(ui.colorPicker.borderRadius);
     padding-inline: sugar.scalable(sugar.theme(ui.colorPicker.paddingInline));
@@ -18,7 +18,7 @@
 
 .s-pikaday .pika-label {
     background-color: transparent;
-    color: sugar.color(ui);
+    color: sugar.color(current);
     top: -0.5em;
 }
 
@@ -30,7 +30,7 @@
     position: relative;
     display: inline-block;
     font-size: 0;
-    color: sugar.color(ui);
+    color: sugar.color(current);
     overflow: visible;
     background: red;
     opacity: 1;
@@ -90,13 +90,13 @@
 }
 
 .s-pikaday .is-today .pika-button {
-    color: sugar.color(ui);
+    color: sugar.color(current);
     outline: none;
 }
 
 .s-pikaday .is-selected .pika-button {
     color: sugar.color(main, text);
-    background: sugar.color(ui, --alpha 0.5);
+    background: sugar.color(current, --alpha 0.5);
     box-shadow: none !important;
 }
 
@@ -106,6 +106,6 @@
 }
 
 .s-pikaday .pika-button:hover {
-    color: sugar.color(ui, foreground) !important;
-    background: sugar.color(ui) !important;
+    color: sugar.color(current, foreground) !important;
+    background: sugar.color(current) !important;
 }

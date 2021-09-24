@@ -56,8 +56,8 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
     }
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          background-color: sugar.color(ui);
-          color: sugar.color(ui, foreground);
+          background-color: sugar.color(current);
+          color: sugar.color(current, foreground);
           border-radius: sugar.theme(ui.tooltip.borderRadius);
           transition: sugar.theme(ui.tooltip.transition);
           padding-inline: sugar.scalable(sugar.theme(ui.tooltip.paddingInline));
@@ -65,14 +65,14 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
           @sugar.depth( sugar.theme(ui.tooltip.depth) );
 
         & > * {
-            @sugar.color.remap(ui, main);
+            @sugar.color(main);
         }
 
           &:after {
               content: " ";
               position: absolute;
               border-style: solid;
-              border-color: sugar.color(ui) transparent transparent transparent;
+              border-color: sugar.color(current) transparent transparent transparent;
           }
           &:before {
             content: '';

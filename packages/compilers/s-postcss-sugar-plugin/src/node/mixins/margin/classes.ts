@@ -94,7 +94,7 @@ export default function ({
         * 
         * @example        html
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Margin inline</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Margin inline</h3>
         *   <p class="s-bg:accent s-p:20 s-mbe:20">${__faker.name.findName()}</p>
         *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
         *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
@@ -102,7 +102,7 @@ export default function ({
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL Support</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
         *   <p class="s-bg:accent s-p:20 s-mbe:20">${__faker.name.findName()}</p>
         *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
         *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
@@ -110,7 +110,7 @@ export default function ({
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-color:accent s-font:30 s-mbe:30">Margin Block</h3>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Margin Block</h3>
         *   <div class="s-bg:accent s-mbe:40 s-p:20 s-text:center">${__faker.name.findName()}</div>
         *   <div class="s-bg:complementary s-mbe:20 s-p:20 s-text:center">${__faker.name.findName()}</div>
         *   <div class="s-bg:ui s-mbe:50 s-p:20 s-text:center">${__faker.name.findName()}</div>

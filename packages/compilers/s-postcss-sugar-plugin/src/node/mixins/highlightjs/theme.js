@@ -29,14 +29,14 @@ export default function ({ params, atRule, replaceWith, }) {
     display: block;
     overflow: hidden;
     padding: sugar.theme(ui.code.paddingBlock) sugar.theme(ui.code.paddingInline);
-    background-color: sugar.color(ui, surface);
+    background-color: sugar.color(current, surface);
     border-radius: sugar.theme(ui.code.borderRadius);
-    color: sugar.color(ui, surfaceForeground);
+    color: sugar.color(current, surfaceForeground);
     line-height: 1.5 !important;
 
     &,
     &.hljs-subst {
-        color: sugar.color(ui, surfaceForeground);
+        color: sugar.color(current, surfaceForeground);
     }
 
     .hljs-selector-tag {
@@ -136,11 +136,11 @@ export default function ({ params, atRule, replaceWith, }) {
     }
 
     .hljs-quote {
-        color: sugar.color(ui, 30);
+        color: sugar.color(current, 30);
     }
 
     .hljs-comment {
-        color: sugar.color(ui, 30);
+        color: sugar.color(current, 30);
     }
 
     .hljs-doctag {

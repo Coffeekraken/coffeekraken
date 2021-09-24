@@ -31,22 +31,22 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @support         edge
  *
  * @example         html
- * <s-range name="myCoolRange" value="90" class="s-ui:accent:deep s-mbe:30"></s-range>
+ * <s-range name="myCoolRange" value="90" class="s-color:accent:deep s-mbe:30"></s-range>
  *
  * <s-range name="myOtherRanfe" class="s-mbe:30" tooltip></s-range>
  *
- * <s-range name="myOtherRanfe" class="s-mbe:30 s-ui:accent:deep" tooltip></s-range>
+ * <s-range name="myOtherRanfe" class="s-mbe:30 s-color:accent:deep" tooltip></s-range>
  *
- * <s-range name="myRangeWithSteps" value="70" class="s-ui:complementary:deep s-mbe:30" step="5"></s-range>
+ * <s-range name="myRangeWithSteps" value="70" class="s-color:complementary:deep s-mbe:30" step="5"></s-range>
  *
  * <div class="s-flex:align-center s-mbe:30">
  *  <s-range name="myRangeWithTarget" value="30" target="#my-range-with-target-target"></s-range>
  *  <span class="s-pis:20" id="my-range-with-target-target"></span>
  * </div>
  *
- * <s-range name="myRangeColoredSuccess" value="30" class="s-ui:success:deep s-mbe:30"></s-range>
- * <s-range name="myRangeColoredWarning" value="0" class="s-ui:warning:deep s-mbe:30"></s-range>
- * <s-range name="myRangeColoredError" value="1" min="0" max="10" class="s-ui:error:deep s-mbe:30"></s-range>
+ * <s-range name="myRangeColoredSuccess" value="30" class="s-color:success:deep s-mbe:30"></s-range>
+ * <s-range name="myRangeColoredWarning" value="0" class="s-color:warning:deep s-mbe:30"></s-range>
+ * <s-range name="myRangeColoredError" value="1" min="0" max="10" class="s-color:error:deep s-mbe:30"></s-range>
  *
  * @example         js
  * import { webcomponent as SRangeWebcomponent } from '@coffeekraken/s-range-component';

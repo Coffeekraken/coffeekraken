@@ -24,7 +24,7 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
     const vars = [
         `
         --track-color: sugar.color(main, ui);
-        --thumb-color: sugar.color(ui);
+        --thumb-color: sugar.color(current);
 
         --focus-spread: sugar.theme(ui.focusOutline.borderWidth);
 
@@ -32,12 +32,12 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
         --thumb-height: 1em;
         --thumb-width: 1em;
         --thumb-border-width: sugar.theme(ui.range.borderWidth);
-        --thumb-border-color: sugar.color(ui, border);
+        --thumb-border-color: sugar.color(current, border);
 
         --track-width: 100%;
         --track-height: 0.5em;
         --track-border-width: sugar.theme(ui.range.borderWidth);
-        --track-border-color: sugar.color(ui, border);
+        --track-border-color: sugar.color(current, border);
 
         --track-radius: sugar.theme(ui.range.borderRadius);
         --contrast: 5%;

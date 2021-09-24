@@ -21,12 +21,12 @@
                     <div class="s-flex-item:grow">
                         <span class="s-font:30">
                             <span class="s-badge:pill:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
-                            &nbsp;&nbsp;<span class="s-color:accent s-font:30">Since {{ $firstBlock->since }}</span>
+                            &nbsp;&nbsp;<span class="s-tc:accent s-font:30">Since {{ $firstBlock->since }}</span>
                         </span>
                         <h1 class="s-typo:h1 s-mbe:10 s-m:20">
                             {{ $firstBlock->name }}
                         </h1>
-                        <h3 class="s-typo:p s-color:complementary">
+                        <h3 class="s-typo:p s-tc:complementary">
                             {{ $firstBlock->namespace }}
                         </h3>
                         <br />
@@ -42,7 +42,7 @@
                         <div class="__author s-flex:align-center">
                             <div class="s-flex-item:grow">
                                 <a href="{{ $firstBlock->author->url ? $firstBlock->author->url : $firstBlock->author->email }}" target="_blank">
-                                    <h4 class="s-typo:h5 s-color:accent">
+                                    <h4 class="s-typo:h5 s-tc:accent">
                                         Author
                                     </h4>
                                     <p class="s-font:60">
@@ -60,7 +60,7 @@
                         </div>
                         @if ($firstBlock->contributor)
                             <div class="__contributors">
-                                <h4 class="s-typo:h6 s-color:accent s-m:30 s-mbe:10">
+                                <h4 class="s-typo:h6 s-tc:accent s-m:30 s-mbe:10">
                                     {{ count($firstBlock->contributor) }} Contributor{{ count($firstBlock->contributor) > 1 ? 's' : '' }}
                                 </h4>
                                 @foreach ($firstBlock->contributor as $contributor)
@@ -140,7 +140,7 @@
                     @endphp
                     @if (count($methods))
 
-                        <h2 id="properties" class="s-typo:h2 s-mb:50 s-color:accent">
+                        <h2 id="properties" class="s-typo:h2 s-mb:50 s-tc:accent">
                             Methods
                         </h2>
 
@@ -160,7 +160,7 @@
                     @endphp
                     @if (count($props))
 
-                        <h2 id="properties" class="s-typo:h2 s-mb:50 s-color:accent">
+                        <h2 id="properties" class="s-typo:h2 s-mb:50 s-tc:accent">
                             Properties
                         </h2>
 

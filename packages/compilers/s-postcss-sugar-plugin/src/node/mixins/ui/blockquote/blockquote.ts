@@ -62,9 +62,9 @@ export default function ({
             }
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-                        border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(ui);
-                        color: sugar.color(ui, surfaceForeground);
-                        background-color: sugar.color(ui, surface);
+                        border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
+                        color: sugar.color(current, surfaceForeground);
+                        background-color: sugar.color(current, surface);
                         border-radius: sugar.theme(ui.blockquote.borderRadius);
                         @sugar.depth(sugar.theme(ui.blockquote.depth));
                         font-size: sugar.scalable(1rem);

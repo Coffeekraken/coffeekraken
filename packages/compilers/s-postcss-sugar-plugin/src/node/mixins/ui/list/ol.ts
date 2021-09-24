@@ -5,33 +5,31 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiListOlMixinInterface extends __SInterface {
-  static definition = {
-  };
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginUiListOlMixinParams {
-}
+export interface IPostcssSugarPluginUiListOlMixinParams {}
 
 export { postcssSugarPluginUiListOlMixinInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiListOlMixinParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiListOlMixinParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListOlMixinParams = {
-      ...params
+        ...params,
     };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  const iconSelector = '&:before';
+    const iconSelector = '&:before';
 
-  vars.push(`
+    vars.push(`
       position: relative;
       counter-reset: list-ol; 
 
@@ -49,7 +47,7 @@ export default function ({
           position: absolute;
           left: 0.5em;
           transform: translateX(-50%);
-          color: sugar.color(ui);
+          color: sugar.color(current);
           text-align: right;
           width: 2ch;
         }          

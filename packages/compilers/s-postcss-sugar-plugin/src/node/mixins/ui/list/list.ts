@@ -87,11 +87,11 @@ export default function ({
                     position: absolute;
                     left: 0.5em;
                     transform: translateX(-50%);
-                    color: sugar.color(ui);
+                    color: sugar.color(current);
                 }
 
                 & > *:not(i) {
-                    @sugar.color.remap(ui, main);
+                    @sugar.color(main);
                 }
             }
 

@@ -21,10 +21,7 @@
                 "name": "s-date-picker",
                 "type": "Webcomponent",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/forms/s-date-picker"
                 },
                 "platform": [
@@ -39,7 +36,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-label s-mb--30\">\n     Min and max date\n     <s-date-picker\n         placeholder=\"Select a date\"\n         class=\"s-ui--accent s-width--50\"\n         min-date=\"2021-08-10\"\n         max-date=\"2021-08-20\"\n         name=\"myDatePicker2\"\n         default-style\n     ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    Disable weekends\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-ui--complementary s-width--50\"\n        name=\"myDatePicker3\"\n        disable-weekends\n        default-style\n    ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    RTL support\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-ui--accent s-width--50\"\n        min-date=\"2021-08-10\"\n        name=\"myDatePicker1\"\n        rtl\n        default-style\n    ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    Display more than 1 month\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-ui--success s-width--50\"\n        name=\"myDatePicker4\"\n        number-of-months=\"2\"\n        default-style\n    ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    Custom calendar icon\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-ui--error s-width--50\"\n        name=\"myDatePicker5\"\n        calendar-icon=\"<?xml version='1.0' encoding='iso-8859-1'?>\n<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 488.901 488.901' style='enable-background:new 0 0 488.901 488.901;' xml:space='preserve'><g><g><g><path fill='currentColor' d='M468.9,56.1h-76.2v-36c0-10.6-9.5-20.1-20.1-20.1s-20.1,8.5-20.1,20.1v36H136.6v-36c0-10.6-9.5-20.1-20.1-20.1\n\t\tS96.4,8.5,96.4,20.1v36H20.1C9.5,56.1,0,64.6,0,76.2v392.6c0,10.6,8.5,20.1,20.1,20.1h329.1c5.3,0,9.5-1.1,13.8-5.3l119.6-111.1\n\t\tc4.2-4.2,6.3-9.5,6.3-14.8V76.2C489,65.6,480.5,56.1,468.9,56.1z M40.2,96.3h408.5v241.3H348.2c-10.6,0-20.1,8.5-20.1,20.1v91\n\t\tH40.2V96.3z M417.7,377.8l-48.4,44.6v-44.6H417.7z'/></g><path fill='currentColor' d='M286.3,256.1c8.7-9.8,13.9-22.7,13.9-36.8c0-30.7-25-55.7-55.7-55.7s-55.7,25-55.7,55.7c0,14.1,5.3,27,13.9,36.8\n\tc-13,11.6-21.2,28.4-21.2,47.1c0,34.7,28.3,63,63,63s63-28.3,63-63C307.5,284.5,299.3,267.7,286.3,256.1z M244.5,198.6\n\tc11.4,0,20.7,9.3,20.7,20.7s-9.3,20.7-20.7,20.7s-20.7-9.3-20.7-20.7S233.1,198.6,244.5,198.6z M244.5,331.3\n\tc-15.4,0-28-12.6-28-28s12.6-28,28-28s28,12.6,28,28S259.9,331.3,244.5,331.3z'/></g></g><g></svg>\"\n        default-style\n    ></s-date-picker>\n</label>"
+                        "code": "<label class=\"s-label s-mb--30\">\n     Min and max date\n     <s-date-picker\n         placeholder=\"Select a date\"\n         class=\"s-color--accent s-width--50\"\n         min-date=\"2021-08-10\"\n         max-date=\"2021-08-20\"\n         name=\"myDatePicker2\"\n         default-style\n     ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    Disable weekends\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-color--complementary s-width--50\"\n        name=\"myDatePicker3\"\n        disable-weekends\n        default-style\n    ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    RTL support\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-color--accent s-width--50\"\n        min-date=\"2021-08-10\"\n        name=\"myDatePicker1\"\n        rtl\n        default-style\n    ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    Display more than 1 month\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-color--success s-width--50\"\n        name=\"myDatePicker4\"\n        number-of-months=\"2\"\n        default-style\n    ></s-date-picker>\n</label>\n\n<label class=\"s-label s-mb--30\">\n    Custom calendar icon\n    <s-date-picker\n        placeholder=\"Select a date\"\n        class=\"s-color--error s-width--50\"\n        name=\"myDatePicker5\"\n        calendar-icon=\"<?xml version='1.0' encoding='iso-8859-1'?>\n<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 488.901 488.901' style='enable-background:new 0 0 488.901 488.901;' xml:space='preserve'><g><g><g><path fill='currentColor' d='M468.9,56.1h-76.2v-36c0-10.6-9.5-20.1-20.1-20.1s-20.1,8.5-20.1,20.1v36H136.6v-36c0-10.6-9.5-20.1-20.1-20.1\n\t\tS96.4,8.5,96.4,20.1v36H20.1C9.5,56.1,0,64.6,0,76.2v392.6c0,10.6,8.5,20.1,20.1,20.1h329.1c5.3,0,9.5-1.1,13.8-5.3l119.6-111.1\n\t\tc4.2-4.2,6.3-9.5,6.3-14.8V76.2C489,65.6,480.5,56.1,468.9,56.1z M40.2,96.3h408.5v241.3H348.2c-10.6,0-20.1,8.5-20.1,20.1v91\n\t\tH40.2V96.3z M417.7,377.8l-48.4,44.6v-44.6H417.7z'/></g><path fill='currentColor' d='M286.3,256.1c8.7-9.8,13.9-22.7,13.9-36.8c0-30.7-25-55.7-55.7-55.7s-55.7,25-55.7,55.7c0,14.1,5.3,27,13.9,36.8\n\tc-13,11.6-21.2,28.4-21.2,47.1c0,34.7,28.3,63,63,63s63-28.3,63-63C307.5,284.5,299.3,267.7,286.3,256.1z M244.5,198.6\n\tc11.4,0,20.7,9.3,20.7,20.7s-9.3,20.7-20.7,20.7s-20.7-9.3-20.7-20.7S233.1,198.6,244.5,198.6z M244.5,331.3\n\tc-15.4,0-28-12.6-28-28s12.6-28,28-28s28,12.6,28,28S259.9,331.3,244.5,331.3z'/></g></g><g></svg>\"\n        default-style\n    ></s-date-picker>\n</label>"
                     },
                     {
                         "language": "js",
@@ -85,9 +82,7 @@
                         "yearRange": {
                             "type": {
                                 "type": "Array<Number>",
-                                "splitChars": [
-                                    ","
-                                ]
+                                "splitChars": [","]
                             },
                             "description": "number of years either side (e.g. 10) or array of upper/lower range (e.g. [1900,2015])"
                         },
@@ -125,15 +120,7 @@
                                     "Friday",
                                     "Saturday"
                                 ],
-                                "weekdaysShort": [
-                                    "Sun",
-                                    "Mon",
-                                    "Tue",
-                                    "Wed",
-                                    "Thu",
-                                    "Fri",
-                                    "Sat"
-                                ]
+                                "weekdaysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
                             }
                         },
                         "numberOfMonths": {
@@ -144,9 +131,7 @@
                         "events": {
                             "type": {
                                 "type": "Array<String>",
-                                "splitChars": [
-                                    ","
-                                ]
+                                "splitChars": [","]
                             },
                             "description": "array of dates that you would like to differentiate from regular days (e.g. ['Sat Jun 28 2017', 'Sun Jun 29 2017', 'Tue Jul 01 2017',])",
                             "default": []

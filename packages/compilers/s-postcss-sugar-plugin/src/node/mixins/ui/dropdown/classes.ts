@@ -68,7 +68,7 @@ export default function ({
         * These classes allows you to display nice dropdown on buttons or whatever
         *
         * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-ui:..." class
+        * @feature          Support for colorizing through the "s-color:..." class
         * 
         * @support          chromium
         * @support          firefox
@@ -88,28 +88,28 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">${style} style</h3>
-            *   <button class="s-btn s-ui:accent s-mbe:30 s-mie:20">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <button class="s-btn s-color:accent s-mbe:30 s-mie:20">
             *       Click me!
             *       <div class="s-dropdown">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
-            *   <button class="s-btn s-ui:complementary s-mbe:30 s-mie:20">
+            *   <button class="s-btn s-color:complementary s-mbe:30 s-mie:20">
             *       I'm disabled
             *       <div class="s-dropdown" disabled>
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <span class="s-btn-group s-mbe:30 s-mie:20">
             *       <a class="s-btn">Click me!</a>
-            *       <button class="s-btn s-ui:complementary">
+            *       <button class="s-btn s-color:complementary">
             *           +
             *           <div class="s-dropdown:bottom-end">
             *               <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *               <a class="s-btn s-ui:accent">You find me!</a>
+            *               <a class="s-btn s-color:accent">You find me!</a>
             *           </div>
             *       </button>
             *   </span>
@@ -117,78 +117,78 @@ export default function ({
             * 
             * <!-- Positions -->
             * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">Position</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Position</h3>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom (default)
             *       <div class="s-dropdown">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom start
             *       <div class="s-dropdown:bottom-start">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom end
             *       <div class="s-dropdown:bottom-end">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top
             *       <div class="s-dropdown:top">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             * </div>
             * 
             * <!-- Colors -->
             * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Accent
-            *       <div class="s-dropdown s-ui:accent">
+            *       <div class="s-dropdown s-color:accent">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:complementary">You find me!</a>
+            *          <a class="s-btn s-color:complementary">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Complementary
-            *       <div class="s-dropdown s-ui:complementary">
+            *       <div class="s-dropdown s-color:complementary">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Info
-            *       <div class="s-dropdown s-ui:info">
+            *       <div class="s-dropdown s-color:info">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Error
-            *       <div class="s-dropdown s-ui:error">
+            *       <div class="s-dropdown s-color:error">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
             *          <a class="s-btn">You find me!</a>
             *       </div>
@@ -197,52 +197,52 @@ export default function ({
             * 
             * <!-- RTL -->
             * <div class="s-font:30 s-mbe:50" dir="rtl">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">RTL Support</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
             *   <button class="s-btn s-mbe:30">
             *       Click me!
             *       <div class="s-dropdown">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             * </div>
             * 
             * <!-- Scales -->
             * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-color:accent s-font:30 s-mbe:30">Scales</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Scale 0.7
             *       <div class="s-dropdown s-scale:07">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       No scale
             *       <div class="s-dropdown">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Scale 1.3
             *       <div class="s-dropdown s-scale:13">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-ui:accent">You find me!</a>
+            *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             * </div>
@@ -269,7 +269,7 @@ export default function ({
         *     <button class="s-btn">Click me!</button>
         *     <div class="s-dropdown${finalParams.defaultStyle === style ? '' : `:${style}`}">
         *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *         <a class="s-btn s-ui:accent">You find me!</a>
+        *         <a class="s-btn s-color:accent">You find me!</a>
         *     </div>
         * </span>
         * 
@@ -277,7 +277,7 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .s-dropdown${finalParams.defaultStyle === style ? '' : `--${style}`} {
-            @sugar.color.remap(ui, ${finalParams.defaultColor});
+            @sugar.color(${finalParams.defaultColor});
             @sugar.ui.dropdown($style: ${style}, $scope: '${finalParams.scope.join(',')}');
         }
         `);
@@ -295,7 +295,7 @@ export default function ({
         *   Click me!
         *   <div class="s-dropdown:bottom">
         *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui:accent">You find me!</a>
+        *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -320,7 +320,7 @@ export default function ({
         *   Click me!
         *   <div class="s-dropdown:bottom-start">
         *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui:accent">You find me!</a>
+        *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -345,7 +345,7 @@ export default function ({
         *   Click me!
         *   <div class="s-dropdown:bottom-end">
         *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui:accent">You find me!</a>
+        *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -370,7 +370,7 @@ export default function ({
         *   Click me!
         *   <div class="s-dropdown:top">
         *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui:accent">You find me!</a>
+        *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -395,7 +395,7 @@ export default function ({
         *   Click me!
         *   <div class="s-dropdown:top-start">
         *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui:accent">You find me!</a>
+        *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -420,7 +420,7 @@ export default function ({
         *   Click me!
         *   <div class="s-dropdown:top-end">
         *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-ui:accent">You find me!</a>
+        *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
         *     

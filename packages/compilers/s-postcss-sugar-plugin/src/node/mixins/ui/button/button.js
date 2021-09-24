@@ -61,9 +61,9 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
             case 'gradient':
                 vars.push(`
                     background: none !important;
-                    color: sugar.color(ui, foreground);
+                    color: sugar.color(current, foreground);
                     transition: sugar.theme(ui.button.transition);
-                    border: sugar.color(ui, border) solid sugar.theme(ui.button.borderWidth);
+                    border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
 
                     --borderWidth: sugar.theme(ui.button.borderWidth);
 
@@ -80,7 +80,7 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                       width: 100%;
                       height: 100%;
                       border-radius: sugar.theme(ui.button.borderRadius);
-                      @sugar.gradient(sugar.color(ui, gradientStart), sugar.color(ui, gradientEnd), $angle: 90);
+                      @sugar.gradient(sugar.color(current, gradientStart), sugar.color(current, gradientEnd), $angle: 90);
                       transition: sugar.theme(ui.button.transition);
                     }
 
@@ -92,13 +92,13 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                       width: 100%;
                       height: 100%;
                       border-radius: sugar.theme(ui.button.borderRadius);
-                      @sugar.gradient(sugar.color(ui,gradientEnd), sugar.color(ui, gradientStart), $angle: 90);
+                      @sugar.gradient(sugar.color(current,gradientEnd), sugar.color(current, gradientStart), $angle: 90);
                       opacity: 0;
                       transition: sugar.theme(ui.button.transition);
                     }
 
                     &:hover, &:focus {
-                      color: sugar.color(ui, foreground);
+                      color: sugar.color(current, foreground);
 
                       &:after {
                         opacity: 1;
@@ -108,11 +108,11 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                 break;
             case 'outline':
                 vars.push(`
-                background-color: sugar.color(ui, --alpha 0);
-                border: sugar.color(ui) solid sugar.theme(ui.button.borderWidth);
+                background-color: sugar.color(current, --alpha 0);
+                border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
 
                 &:hover, &:focus {
-                  background-color: sugar.color(ui, --alpha 0.3);
+                  background-color: sugar.color(current, --alpha 0.3);
                 }
               `);
                 break;
@@ -120,7 +120,7 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                 vars.push(`
                   background: none !important;
                   border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(ui);
+                  color: sugar.color(current);
 
                   &:hover, &:focus {
                     transform: scale(1.1);
@@ -134,13 +134,13 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
             case 'solid':
             default:
                 vars.push(`
-                  background-color: sugar.color(ui);
-                  border: sugar.color(ui, border) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(ui, foreground);
+                  background-color: sugar.color(current);
+                  border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
+                  color: sugar.color(current, foreground);
 
                   &:hover, &:focus {
-                    background-color: sugar.color(ui, 55);
-                    color: sugar.color(ui, foreground);
+                    background-color: sugar.color(current, 55);
+                    color: sugar.color(current, foreground);
                   }
         `);
                 break;

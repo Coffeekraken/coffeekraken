@@ -287,7 +287,7 @@ export default class DocNav extends __SLitComponent {
                                             <label for="platform-${platform}">
                                                 <input
                                                     name="platform-${platform}"
-                                                    class="s-switch s-ui:accent"
+                                                    class="s-switch s-color:accent"
                                                     type="checkbox"
                                                     id="platform-${platform}"
                                                     @change="${() => this._togglePlatform(platform)}"
@@ -310,7 +310,7 @@ export default class DocNav extends __SLitComponent {
                                             <label for="type-${type}">
                                                 <input
                                                     name="type-${type}"
-                                                    class="s-switch s-ui:accent"
+                                                    class="s-switch s-color:accent"
                                                     type="checkbox"
                                                     id="type-${type}"
                                                     @change="${() => this._toggleType(type)}"
@@ -334,7 +334,7 @@ export default class DocNav extends __SLitComponent {
                                                 <input
                                                     name="status-${status}"
                                                     type="checkbox"
-                                                    class="s-switch s-ui:accent"
+                                                    class="s-switch s-color:accent"
                                                     id="status-${status}"
                                                     @change="${() => this._toggleStatus(status)}"
                                                     ?checked="${(this._saved.statuses ?? []).indexOf(status) !== -1}"
@@ -365,7 +365,7 @@ export default class DocNav extends __SLitComponent {
                                                     )}
                                                 </div>
                                                 <h4
-                                                    class="s-font:title s-font:60 s-color:accent s-mbe:10 s-flex-item:grow"
+                                                    class="s-font:title s-font:60 s-tc:accent s-mbe:10 s-flex-item:grow"
                                                 >
                                                     <a
                                                         href="/doc/api/${this._striptags(
@@ -380,7 +380,7 @@ export default class DocNav extends __SLitComponent {
                                                 <div class="s-font:40">
                                                     <span class="s-font:30"
                                                         >Since
-                                                        <span class="s-color:complementary"
+                                                        <span class="s-tc:complementary"
                                                             >${(<any>item).since}</span
                                                         ></span
                                                     >
@@ -391,9 +391,7 @@ export default class DocNav extends __SLitComponent {
                                                 </div>
                                             </div>
                                         </div>
-                                        <h5 class="s-color:complementary s-font:40 s-mbe:30">
-                                            ${(<any>item).namespace}
-                                        </h5>
+                                        <h5 class="s-tc:complementary s-font:40 s-mbe:30">${(<any>item).namespace}</h5>
                                         <p class="s-typo:p s-mbe:30">${(<any>item).description}</p>
                                     </div>
                                     ${(<any>item).example && (<any>item).example.length
@@ -412,7 +410,7 @@ export default class DocNav extends __SLitComponent {
                                                                 >
                                                             </s-code-example>
                                                             <div class="s-until:sibling:mounted">
-                                                                <i class="s-loader:spinner s-ui:accent"></i>
+                                                                <i class="s-loader:spinner s-color:accent"></i>
                                                                 &nbsp;
                                                                 <p class="s-typo:p s-display:inline-block">
                                                                     Loading code example. Please wait...

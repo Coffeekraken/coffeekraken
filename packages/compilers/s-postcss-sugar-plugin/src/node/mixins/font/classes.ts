@@ -65,7 +65,7 @@ export default function ({
         * @example        html
         * ${Object.keys(fontsFamiliesObj)
             .map((fontName) => {
-                return `<span class="s-color:accent s-font:30">${fontName}</span><br /><br /><h1 class="s-font\:${fontName} s-font\:50 s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
+                return `<span class="s-tc:accent s-font:30">${fontName}</span><br /><br /><h1 class="s-font\:${fontName} s-font\:50 s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
             })
             .join('\n * ')}
         * 
@@ -127,7 +127,7 @@ export default function ({
         * @example        html
         * ${Object.keys(fontsSizesObj)
             .map((fontSize) => {
-                return `<span class="s-color:accent s-font:30">${fontSize}</span><br /><br /><h1 class="s-font\:${fontSize} s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
+                return `<span class="s-tc:accent s-font:30">${fontSize}</span><br /><br /><h1 class="s-font\:${fontSize} s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
             })
             .join('\n * ')}
         * 
@@ -179,12 +179,12 @@ export default function ({
         * @cssClass           s-font\:reset-family        Reset to the default font
         * 
         * @example        html
-        * <h3 class="s-color:accent s-font:30 s-mb\:20">Reset size</h3>
+        * <h3 class="s-tc:accent s-font:30 s-mb\:20">Reset size</h3>
         * <div class="s-font\:60 s-mbe:30">
         *   ${__faker.name.title()} <span class="s-font\:reset-size">${__faker.name.findName()}</span>
         * </div>
         * 
-        * <h3 class="s-color:accent s-font:30 s-mb\:20">Reset family</h3>
+        * <h3 class="s-tc:accent s-font:30 s-mb\:20">Reset family</h3>
         * <div class="s-font\:quote s-font\:50">
         *   ${__faker.name.title()} <span class="s-font\:reset-family">${__faker.name.findName()}</span>
         * </div>

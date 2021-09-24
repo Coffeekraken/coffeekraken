@@ -43,30 +43,5 @@ export default function ({ params, atRule, replaceWith }: { params: any; atRule:
         '@sugar.ui.tooltip.classes;',
     ];
 
-    Object.keys(__theme().baseColors()).forEach((colorName) => {
-        cssArray.push(`
-      /**
-       * @name        s-ui:${colorName}
-       * @namespace     sugar.css.ui.label
-       * @type          CssClass
-       * 
-       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any ui element.
-       * This does apply the color only on the item itself and not on his childs...
-       * 
-       * @example       html
-       * <label>
-       *   Hello world
-       *   <input type="text" class="s-input s-ui\:${colorName}" />
-       * </label>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      .s-ui--${colorName} {
-        @sugar.color.remap(ui, ${colorName});
-      }
-    `);
-    });
-
     replaceWith(cssArray);
 }

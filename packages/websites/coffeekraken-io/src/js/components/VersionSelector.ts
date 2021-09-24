@@ -42,7 +42,7 @@ export default class VersionSelector extends __SLitComponent {
     }
     render() {
         return html`
-            <label class="s-select s-ui:accent">
+            <label class="s-select s-color:accent">
                 <select @change="${this._change}">
                     ${this._versions.map(
                         (snap) => html`

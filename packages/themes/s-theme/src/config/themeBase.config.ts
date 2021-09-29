@@ -41,6 +41,21 @@ export default function (env, config) {
                  */
                 opacity: 0.3,
             },
+            truncate: {
+                /**
+                 * @name               count
+                 * @namespace           theme.helpers.truncate
+                 * @type                Number
+                 * @default             10
+                 *
+                 * Specify how many s-truncate:{lines} classes you want to generate. By default this count is set to 10
+                 * so you can truncate a container up to 10 lines of texts.
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                count: 10,
+            },
         },
 
         layout: {
@@ -71,6 +86,7 @@ export default function (env, config) {
         ratio: {
             '1': 1,
             '1-1': 1,
+            '21-9': 21 / 9,
             '16-9': 16 / 9,
             '2-3': 2 / 3,
             '4-3': 4 / 3,
@@ -409,7 +425,8 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 code: {
-                    'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
+                    'font-family':
+                        'Menlo, Monaco, Consolas, Courier New, monospace',
                     'font-weight': 'normal',
                     'font-style': 'normal',
                     'font-display': 'auto',

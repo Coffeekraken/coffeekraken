@@ -20,7 +20,7 @@ class postcssSugarPluginOverflowClassesInterface extends __SInterface {
 }
 postcssSugarPluginOverflowClassesInterface.definition = {};
 export { postcssSugarPluginOverflowClassesInterface as interface };
-export default function ({ params, atRule, replaceWith }) {
+export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
     vars.push(`/**
@@ -33,7 +33,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>auto</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -50,7 +50,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>hidden</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow hidden container</div>
     * </div>
     */
@@ -67,7 +67,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>inherit</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow inherit container</div>
     * </div>
     */
@@ -84,7 +84,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>initial</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow initial container</div>
     * </div>
     */
@@ -101,7 +101,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>overlay</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow overlay container</div>
     * </div>
     */
@@ -118,7 +118,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>revert</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow revert container</div>
     * </div>
     */
@@ -135,7 +135,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>scroll</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow scroll container</div>
     * </div>
     */
@@ -152,7 +152,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>visible</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow visible container</div>
     * </div>
     */
@@ -169,7 +169,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>unset</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow unset container</div>
     * </div>
     */
@@ -178,4 +178,4 @@ export default function ({ params, atRule, replaceWith }) {
     }`);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7O0FBQzVELHFEQUFVLEdBQUcsRUFBRSxDQUFDO0FBTXpCLE9BQU8sRUFBRSwwQ0FBMEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVuRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQk4sQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVKLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQlIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVKLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQlIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVOLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7O0FBQzFELHFEQUFVLEdBQUcsRUFBRSxDQUFDO0FBSzNCLE9BQU8sRUFBRSwwQ0FBMEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVuRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQlIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVKLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQlIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVKLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQlIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVKLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=

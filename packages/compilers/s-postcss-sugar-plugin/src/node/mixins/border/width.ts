@@ -16,7 +16,7 @@ import __themeVar from '../../utils/themeVar';
  * @return      {Css}                   The generated css
  *
  * @todo      Add multiple values support like @sugar.border.width(10);
- * 
+ *
  * @example       css
  * .my-element {
  *    @sugar.border.width(10);
@@ -27,35 +27,37 @@ import __themeVar from '../../utils/themeVar';
  */
 
 class postcssSugarPluginBorderwidthMixinInterface extends __SInterface {
-  static definition = {
-    width: {
-      type: 'Number|String',
-      required: true,
-      default: __theme().config('border.width.default')
-    }
-  };
+    static definition = {
+        width: {
+            type: 'Number|String',
+            required: true,
+            default: __theme().config('border.width.default'),
+        },
+    };
 }
 
 export interface IPostcssSugarPluginBorderwidthMixinParams {
-  width: string | number;
+    width: string | number;
 }
 
 export { postcssSugarPluginBorderwidthMixinInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginBorderwidthMixinParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginBorderwidthMixinParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginBorderwidthMixinParams = {
-    width: 0,
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginBorderwidthMixinParams = {
+        width: 0,
+        ...params,
+    };
 
-  const vars: string[] = [`border-width: sugar.border.width(${finalParams.width});`];
-  replaceWith(vars);
+    const vars: string[] = [
+        `border-width: sugar.border.width(${finalParams.width});`,
+    ];
+    replaceWith(vars);
 }

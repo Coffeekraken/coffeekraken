@@ -22,7 +22,7 @@ class postcssSugarPluginPointerClassesInterface extends __SInterface {
 }
 postcssSugarPluginPointerClassesInterface.definition = {};
 export { postcssSugarPluginPointerClassesInterface as interface };
-export default function ({ params, atRule, replaceWith }) {
+export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
     vars.push(`/**
@@ -35,7 +35,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>none</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:none s-bg\:primary">
+    * <div class="s-pointer-events\:none s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -52,7 +52,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>all</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:all s-bg\:primary">
+    * <div class="s-pointer-events\:all s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -69,7 +69,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>auto</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:auto s-bg\:primary">
+    * <div class="s-pointer-events\:auto s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -86,7 +86,7 @@ export default function ({ params, atRule, replaceWith }) {
     * This class allows you to apply a "<yellow>fill</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:fill s-bg\:primary">
+    * <div class="s-pointer-events\:fill s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -95,4 +95,4 @@ export default function ({ params, atRule, replaceWith }) {
     }`);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUVILE1BQU0seUNBQTBDLFNBQVEsWUFBWTs7QUFDM0Qsb0RBQVUsR0FBRyxFQUFFLENBQUM7QUFNekIsT0FBTyxFQUFFLHlDQUF5QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDdkIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBS1o7SUFDQyxNQUFNLFdBQVcscUJBQ1osTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCTixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVKLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQlIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFTixXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUVILE1BQU0seUNBQTBDLFNBQVEsWUFBWTs7QUFDekQsb0RBQVUsR0FBRyxFQUFFLENBQUM7QUFLM0IsT0FBTyxFQUFFLHlDQUF5QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O01BZ0JSLENBQUMsQ0FBQztJQUVKLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7TUFnQlIsQ0FBQyxDQUFDO0lBRUosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztNQWdCUixDQUFDLENBQUM7SUFFSixXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

@@ -11,7 +11,7 @@ import __theme from '../../utils/theme';
  * This mixin generate all the pointer helper classes like ```.s-pointer-events:none```, ```.s-pointer-events:all```, etc...
  *
  * @feature         Support these values (for now): none, all, auto and fill
- * 
+ *
  * @return        {Css}         The generated css
  *
  * @example         postcss
@@ -22,30 +22,29 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginPointerClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginPointerClassesParams {
-}
+export interface IPostcssSugarPluginPointerClassesParams {}
 
 export { postcssSugarPluginPointerClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginPointerClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginPointerClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginPointerClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginPointerClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`/**
+    vars.push(`/**
     * @name          s-pointer-events:none
     * @namespace          sugar.css.pointer
     * @type               CssClass
@@ -55,7 +54,7 @@ export default function ({
     * This class allows you to apply a "<yellow>none</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:none s-bg\:primary">
+    * <div class="s-pointer-events\:none s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -73,7 +72,7 @@ export default function ({
     * This class allows you to apply a "<yellow>all</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:all s-bg\:primary">
+    * <div class="s-pointer-events\:all s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -91,7 +90,7 @@ export default function ({
     * This class allows you to apply a "<yellow>auto</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:auto s-bg\:primary">
+    * <div class="s-pointer-events\:auto s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -109,7 +108,7 @@ export default function ({
     * This class allows you to apply a "<yellow>fill</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:fill s-bg\:primary">
+    * <div class="s-pointer-events\:fill s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -117,5 +116,5 @@ export default function ({
         pointer-events: fill;
     }`);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

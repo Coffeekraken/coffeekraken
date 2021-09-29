@@ -20,30 +20,29 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginOverflowClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginOverflowClassesParams {
-}
+export interface IPostcssSugarPluginOverflowClassesParams {}
 
 export { postcssSugarPluginOverflowClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginOverflowClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginOverflowClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginOverflowClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginOverflowClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`/**
+    vars.push(`/**
     * @name          s-overflow:auto
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -53,7 +52,7 @@ export default function ({
     * This class allows you to apply a "<yellow>auto</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -71,7 +70,7 @@ export default function ({
     * This class allows you to apply a "<yellow>hidden</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow hidden container</div>
     * </div>
     */
@@ -89,7 +88,7 @@ export default function ({
     * This class allows you to apply a "<yellow>inherit</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow inherit container</div>
     * </div>
     */
@@ -107,7 +106,7 @@ export default function ({
     * This class allows you to apply a "<yellow>initial</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow initial container</div>
     * </div>
     */
@@ -125,7 +124,7 @@ export default function ({
     * This class allows you to apply a "<yellow>overlay</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow overlay container</div>
     * </div>
     */
@@ -143,7 +142,7 @@ export default function ({
     * This class allows you to apply a "<yellow>revert</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow revert container</div>
     * </div>
     */
@@ -161,7 +160,7 @@ export default function ({
     * This class allows you to apply a "<yellow>scroll</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow scroll container</div>
     * </div>
     */
@@ -179,7 +178,7 @@ export default function ({
     * This class allows you to apply a "<yellow>visible</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow visible container</div>
     * </div>
     */
@@ -197,7 +196,7 @@ export default function ({
     * This class allows you to apply a "<yellow>unset</yellow>" overflow style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-overflow\:hidden s-bg\:primary">
+    * <div class="s-overflow:hidden s-bg:accent">
     *     <div class="s-center-abs">I'm a cool overflow unset container</div>
     * </div>
     */
@@ -205,5 +204,5 @@ export default function ({
         overflow: unset;
     }`);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

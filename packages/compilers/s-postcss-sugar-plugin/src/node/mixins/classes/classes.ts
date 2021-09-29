@@ -25,6 +25,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
 export default function ({ params, atRule, replaceWith }) {
     const cssArray: string[] = [
         '@sugar.ui.classes;',
+        '@sugar.align.classes;',
         '@sugar.typo.classes;',
         '@sugar.layout.classes;',
         '@sugar.clearfix.classes;',
@@ -48,6 +49,9 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.opacity.classes;',
         '@sugar.scale.classes;',
         '@sugar.padding.classes;',
+        '@sugar.visibility.classes;',
+        '@sugar.visually.classes;',
+        '@sugar.truncate.classes;',
         '@sugar.until.classes;',
         '@sugar.width.classes;',
         '@sugar.components.classes;',

@@ -1,6 +1,7 @@
 import __theme from '../../utils/theme';
 import __SInterface from '@coffeekraken/s-interface';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __faker from 'faker';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
     static definition = {};
@@ -27,26 +28,77 @@ export { postcssSugarPluginClassesMixinInterface as interface };
 export default function ({ params, atRule, replaceWith }) {
     const cssArray: string[] = [];
 
+    cssArray.push(`
+      /**
+        * @name          Colors
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/colors
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to set text and background colors easily to any HTMLElement
+        * 
+        * @support      chromium        
+        * @support      firefox         
+        * @support      safari          
+        * @support      edge           
+        * 
+        ${Object.keys(__theme().baseColors())
+            .map((colorName) => {
+                return ` * @cssClass            s-tc:${colorName}       Apply the ${colorName} text color`;
+            })
+            .join('\n')}
+        ${Object.keys(__theme().baseColors())
+            .map((colorName) => {
+                return ` * @cssClass            s-bg:${colorName}       Apply the ${colorName} background color`;
+            })
+            .join('\n')}
+        *
+        * @example        html
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text color</h3>
+        ${Object.keys(__theme().baseColors())
+            .map((colorName) => {
+                return ` * <div class="s-tc:${colorName} s-mb:20">${colorName}: ${__faker.name.findName()}</div>`;
+            })
+            .join('\n')}
+        * </div>
+        *
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Background color</h3>
+        ${Object.keys(__theme().baseColors())
+            .map((colorName) => {
+                return ` * <div class="s-bg:${colorName} s-p:10 s-mb:20">${colorName}: ${__faker.name.findName()}</div>`;
+            })
+            .join('\n')}
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
     Object.keys(__theme().baseColors()).forEach((colorName) => {
         cssArray.push(`
       /**
-       * @name        s-color:${colorName}
+       * @name        s-tc:${colorName}
        * @namespace     sugar.css.ui.label
        * @type          CssClass
        * 
-       * This class allows you to apply the "<span class="s-color-${colorName}>${colorName}</span>" color to any ui element.
+       * This class allows you to apply the "<span class="s-tc:${colorName}">${colorName}</span>" text color to any ui element.
        * This does apply the color only on the item itself and not on his childs...
        * 
        * @example       html
        * <label>
        *   Hello world
-       *   <input type="text" class="s-input s-color:${colorName}" />
+       *   <input type="text" class="s-input s-tc:${colorName}" />
        * </label>
        * 
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-color--${colorName} {
+      .s-tc--${colorName} {
         @sugar.color(${colorName});
       }
     `);

@@ -20,7 +20,7 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginDepthClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginDepthClassesParams {}
@@ -28,24 +28,62 @@ export interface IPostcssSugarPluginDepthClassesParams {}
 export { postcssSugarPluginDepthClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginDepthClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginDepthClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginDepthClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginDepthClassesParams = {
+        ...params,
+    };
 
-  const depthsObj = __theme().config('depth');
+    const depthsObj = __theme().config('depth');
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  Object.keys(depthsObj).forEach((depthName) => {
-    const depthCss = `/**
+    vars.push(`
+      /**
+        * @name          Depth
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/depth
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply some depth shadows to any HTMLElement.
+        * These depths are defined in the theme configuration under "theme.depth" namespace.
+        * 
+        * @support      chromium        
+        * @support      firefox         
+        * @support      safari          
+        * @support      edge           
+        * 
+        ${Object.keys(depthsObj)
+            .map((depthName) => {
+                return ` * @cssClass          s-depth:${depthName}      Apply the depth ${depthName} to any HTMLElement`;
+            })
+            .join('\n')}
+        *
+        * @example        html
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text color</h3>
+        ${Object.keys(depthsObj)
+            .map((depthName) => {
+                return ` * <div class="s-depth:${depthName} s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30">s-depth:${depthName}</div>`;
+            })
+            .join('\n')}
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    Object.keys(depthsObj).forEach((depthName) => {
+        const depthCss = `/**
   * @name          s-depth:${depthName}
   * @namespace          sugar.css.depth
   * @type               CssClass
@@ -60,8 +98,8 @@ export default function ({
 .s-depth--${depthName} {
     @sugar.depth(${depthName});
 }`;
-    vars.push(depthCss);
-  });
+        vars.push(depthCss);
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

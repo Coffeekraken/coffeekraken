@@ -21,33 +21,32 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginTransitionClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
-export interface IPostcssSugarPluginTransitionClassesParams {
-}
+export interface IPostcssSugarPluginTransitionClassesParams {}
 
 export { postcssSugarPluginTransitionClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginTransitionClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginTransitionClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginTransitionClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginTransitionClassesParams = {
+        ...params,
+    };
 
-  const transitionObj = __theme().config('transition');
+    const transitionObj = __theme().config('transition');
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  Object.keys(transitionObj).forEach((transitionName) => {
-    const transitionCss = `/**
+    Object.keys(transitionObj).forEach((transitionName) => {
+        const transitionCss = `/**
   * @name          s-ratio:${transitionName.replace('/', '-')}
   * @namespace          sugar.css.transition
   * @type               CssClass
@@ -57,15 +56,15 @@ export default function ({
   * This class allows you to apply a "<yellow>${transitionName}</yellow>" transition style to any HTMLElement
   * 
   * @example        html
-  * <div class="s-transition\:${transitionName.replace('/', '-')} s-bg\:primary">
+  * <div class="s-transition\:${transitionName.replace('/', '-')} s-bg:accent">
   *     <div class="s-center-abs">I'm a cool container</div>
   * </div>
   */
 .s-transition--${transitionName.replace('/', '-')} {
     @sugar.transition(${transitionName});
 }`;
-    vars.push(transitionCss);
-  });
+        vars.push(transitionCss);
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

@@ -1,20 +1,15 @@
 module.exports = {
   semi: true,
+  tabWidth: 4,
   trailingComma: 'all',
   singleQuote: true,
-  printWidth: 120,
-  tabWidth: 4,
-  svelteSortOrder: 'options-styles-scripts-markup',
-  svelteStrictMode: true,
-  svelteBracketNewLine: true,
-  svelteAllowShorthand: true,
-  svelteIndentScriptAndStyle: true,
+  endOfLine: 'lf',
   overrides: [
     {
       files: ['*.riot'],
       options: {
-        parser: 'html'
-      }
-    }
-  ]
+        parser: 'html',
+      },
+    },
+  ],
 };

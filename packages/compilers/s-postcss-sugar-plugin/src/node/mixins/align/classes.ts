@@ -19,7 +19,7 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginAlignClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginAlignClassesParams {}
@@ -27,21 +27,78 @@ export interface IPostcssSugarPluginAlignClassesParams {}
 export { postcssSugarPluginAlignClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginAlignClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginAlignClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginAlignClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginAlignClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
+    const aligns = [
+        'abs-left',
+        'abs-right',
+        'abs-top',
+        'abs-top-left',
+        'abs-top-center',
+        'abs-top-right',
+        'abs-center',
+        'abs-center-left',
+        'abs-center-right',
+        'abs-bottom',
+        'abs-bottom-left',
+        'abs-bottom-center',
+        'abs-bottom-right',
+    ];
 
-  vars.push(`
+    vars.push(`
+      /**
+        * @name          Align
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/align
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to align things to left, right, center, etc...  on any HTMLElement
+        * 
+        * @support      chromium        
+        * @support      firefox         
+        * @support      safari          
+        * @support      edge           
+        * 
+        ${aligns.map((align) => {
+            return `* @cssClass             s-align:${align}             Align the item to ${align.replace(
+                '-',
+                ' ',
+            )}`;
+        })}
+        *
+        * @example        html
+        ${aligns
+            .map((align) => {
+                return ` * <!-- align ${align} -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Align to ${align}</h3>
+            *   <div class="s-position:relative s-ratio:16-9 s-bg:main">
+            *       <div class="s-ratio:16-9 s-width:10 s-bg:accent s-align:${align}"></div>
+            *   </div>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
         
     /**
      * @name            s-align:abs-top
@@ -55,7 +112,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio--1-1">
-     *      <div class="s-align\:abs-top">Hello world</div>
+     *      <div class="s-align:abs-top">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -77,7 +134,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio--1-1">
-     *      <div class="s-align\:abs-left">Hello world</div>
+     *      <div class="s-align:abs-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -99,7 +156,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio--1-1">
-     *      <div class="s-align\:abs-right">Hello world</div>
+     *      <div class="s-align:abs-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -121,7 +178,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-bottom">Hello world</div>
+     *      <div class="s-align:abs-bottom">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -143,7 +200,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-center">Hello world</div>
+     *      <div class="s-align:abs-center">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -165,7 +222,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-top-left">Hello world</div>
+     *      <div class="s-align:abs-top-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -187,7 +244,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-top-center">Hello world</div>
+     *      <div class="s-align:abs-top-center">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -209,7 +266,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-top-right">Hello world</div>
+     *      <div class="s-align:abs-top-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -231,7 +288,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-center-left">Hello world</div>
+     *      <div class="s-align:abs-center-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -253,7 +310,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-center-right">Hello world</div>
+     *      <div class="s-align:abs-center-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -275,7 +332,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-bottom-left">Hello world</div>
+     *      <div class="s-align:abs-bottom-left">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -297,7 +354,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-bottom-center">Hello world</div>
+     *      <div class="s-align:abs-bottom-center">Hello world</div>
      * </div>
      * 
      * @since       2.0.0
@@ -319,7 +376,7 @@ export default function ({
      * 
      * @example     html
      * <div class="s-ratio-1-1">
-     *      <div class="s-align\:abs-bottom-right">Hello world</div>
+     *      <div class="s-align:abs-bottom-right">Hello world</div>
      * </div>
      * 
      * @since       2.0.0

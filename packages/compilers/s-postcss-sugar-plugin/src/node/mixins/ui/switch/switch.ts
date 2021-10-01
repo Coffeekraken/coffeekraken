@@ -15,8 +15,8 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'tf', 'vr'],
-            default: ['bare', 'lnf', 'tf', 'vr'],
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
         },
     };
 }
@@ -198,14 +198,6 @@ export default function ({
             }
 
             break;
-    }
-
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`
-            @sugar.rhythm.vertical {
-                ${jsObjectToCssProperties(__theme().config('ui.switch.:rhythmVertical'))}
-            } 
-        `);
     }
 
     replaceWith(vars);

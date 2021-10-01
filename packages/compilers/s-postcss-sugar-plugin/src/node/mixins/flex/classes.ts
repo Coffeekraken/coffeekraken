@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __faker from 'faker';
 
 /**
  * @name           classes
@@ -21,7 +22,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  */
 
 class postcssSugarPluginFlexClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginFlexClassesParams {}
@@ -29,21 +30,119 @@ export interface IPostcssSugarPluginFlexClassesParams {}
 export { postcssSugarPluginFlexClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginFlexClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginFlexClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginFlexClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginFlexClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`/**
+    vars.push(`
+      /**
+        * @name          Flex
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/flex
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply some flex attributes on any HTMLElement and with
+        * that you can create some "layouts" directly in your HTML
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass                 s-flex              Apply a display "flex" on any HTMLElement
+        * @cssClass                 s-flex:row          Apply the flex direction to "row"
+        * @cssClass                 s-flex:row-reverse          Apply the flex direction to "row-reverse"
+        * @cssClass                 s-flex:column          Apply the flex direction to "column"
+        * @cssClass                 s-flex:column-reverse          Apply the flex direction to "column-reverse"
+        * @cssClass                 s-flex:nowrap             Apply the wrap property to "nowrap"
+        * @cssClass                 s-flex:wrap             Apply the wrap property to "wrap"
+        * @cssClass                 s-flex:wrap-reverse             Apply the wrap property to "wrap-reverse"
+        * @cssClass                 s-flex:justify-start             Apply the justify property to "start"
+        * @cssClass                 s-flex:justify-flex-start             Apply the justify property to "flex-start"
+        * @cssClass                 s-flex:justify-end             Apply the justify property to "end"
+        * @cssClass                 s-flex:justify-flex-end             Apply the justify property to "flex-end"
+        * @cssClass                 s-flex:justify-center             Apply the justify property to "center"  
+        * @cssClass                 s-flex:justify-space-between             Apply the justify property to "space-between"
+        * @cssClass                 s-flex:justify-space-around             Apply the justify property to "space-around"
+        * @cssClass                 s-flex:justify-space-evenly             Apply the justify property to "space-evenly"
+        * @cssClass                 s-flex:justify-stretch             Apply the justify property to "stretch"
+        * @cssClass                 s-flex:align-start             Apply the align property to "start"
+        * @cssClass                 s-flex:align-flex-start             Apply the align property to "flex-start"
+        * @cssClass                 s-flex:align-end             Apply the align property to "end"
+        * @cssClass                 s-flex:align-flex-end             Apply the align property to "flex-end"
+        * @cssClass                 s-flex:align-center             Apply the align property to "center"
+        * @cssClass                 s-flex:align-baseline             Apply the align property to "baseline"
+        * @cssClass                 s-flex-item:grow             Apply the flex-grow property to "1"
+        * @cssClass                 s-flex-item:shrink             Apply the flex-shrink property to "1"
+        * @cssClass                 s-flex-item:align-flex-start        Align item to the start
+        * @cssClass                 s-flex-item:align-flex-end        Align item to the end
+        * @cssClass                 s-flex-item:align-center        Align item to the center
+        * @cssClass                 s-flex-item:align-baseline        Align item to the baseline
+        * @cssClass                 s-flex-item:align-stretch        Align item to the stretch
+        * @cssClass                 s-flex-item:order-{0...20}             Apply the order {0...20} to any flex item
+        * @cssClass                 s-flex-item:grow-{0...20}             Apply the grow {0...20} to any flex item
+        * @cssClass                 s-flex-item:shrink-{0...20}             Apply the shrink {0...20} to any flex item
+        * 
+        * @example        html
+        * <!-- Simple grid -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Simple grid</h3>
+        *   <div class="s-flex:row:wrap">
+        *     <div class="s-bg:main s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:info s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * <!-- Grow -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grow</h3>
+        *   <div class="s-flex:row:nowrap">
+        *     <div class="s-bg:main s-p:20 s-flex-item:grow">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * <!-- Order -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Order</h3>
+        *   <div class="s-flex:row:nowrap">
+        *     <div class="s-bg:main s-p:20 s-flex-item:order-3">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * <!-- Align -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Align</h3>
+        *   <div class="s-flex:row:nowrap:align-end">
+        *     <div class="s-bg:main s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`/**
             * @name          s-flex
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -186,7 +285,7 @@ export default function ({
             .s-flex--justify-start {
                 justify-content: start;
             }`);
-    
+
     vars.push(`/**
             * @name          s-flex:justify-flex-start
             * @namespace          sugar.css.flex
@@ -218,7 +317,7 @@ export default function ({
             .s-flex--justify-end {
                 justify-content: end;
             }`);
-    
+
     vars.push(`/**
             * @name          s-flex:justify-flex-end
             * @namespace          sugar.css.flex
@@ -447,7 +546,7 @@ export default function ({
             flex-shrink: 1;
         }`);
 
-    for (let i=1; i<20; i++) {
+    for (let i = 1; i < 20; i++) {
         vars.push(`/**
                 * @name          s-flex-item:order-${i}
                 * @namespace          sugar.css.flex
@@ -467,8 +566,7 @@ export default function ({
                 }`);
     }
 
-
-    for (let i=1; i<20; i++) {
+    for (let i = 1; i < 20; i++) {
         vars.push(`/**
                 * @name          s-flex-item:grow-${i}
                 * @namespace          sugar.css.flex
@@ -486,9 +584,9 @@ export default function ({
                 .s-flex-item--grow-${i} {
                     flex-grow: ${i};
                 }`);
-            }
+    }
 
-    for (let i=1; i<20; i++) {
+    for (let i = 1; i < 20; i++) {
         vars.push(`/**
                 * @name          s-flex-item:shrink-${i}
                 * @namespace          sugar.css.flex
@@ -506,7 +604,7 @@ export default function ({
                 .s-flex-item--shrink-${i} {
                     flex-shrink: ${i};
                 }`);
-            }
+    }
 
     vars.push(`/**
             * @name          s-flex-item:align-flex-start
@@ -598,5 +696,5 @@ export default function ({
                 align-self: stretch;
             }`);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

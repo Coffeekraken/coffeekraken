@@ -23,8 +23,8 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'vr', 'tf'],
-            default: ['bare', 'lnf', 'vr', 'tf'],
+            values: ['bare', 'lnf', 'tf'],
+            default: ['bare', 'lnf', 'tf'],
         },
     };
 }
@@ -33,7 +33,7 @@ export interface IPostcssSugarPluginUiButtonClassesParams {
     styles: ('solid' | 'gradient' | 'outline' | 'text')[];
     defaultStyle: 'solid' | 'gradient' | 'outline' | 'text';
     defaultColor: string;
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'tf')[];
 }
 
 export { postcssSugarPluginUiButtonClassesInterface as interface };
@@ -41,17 +41,19 @@ export { postcssSugarPluginUiButtonClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
     atRule: any;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
         styles: ['solid', 'gradient', 'outline', 'text'],
         defaultStyle: 'solid',
         defaultColor: 'ui',
-        scope: ['bare', 'lnf', 'tf', 'vr'],
+        scope: ['bare', 'lnf', 'tf'],
         ...params,
     };
 
@@ -254,6 +256,9 @@ export default function ({
                 button {
                     @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
+                    ${jsObjectToCssProperties(
+                        __theme().config('ui.button.:rhythmVertical'),
+                    )}
                 } 
             }
         `);

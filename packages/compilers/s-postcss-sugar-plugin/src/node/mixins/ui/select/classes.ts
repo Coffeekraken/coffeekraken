@@ -22,8 +22,8 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'tf', 'vr'],
-            default: ['bare', 'lnf', 'tf', 'vr'],
+            values: ['bare', 'lnf', 'tf'],
+            default: ['bare', 'lnf', 'tf'],
         },
     };
 }
@@ -32,7 +32,7 @@ export interface IPostcssSugarPluginUiFormSelectClassesParams {
     styles: 'solid'[];
     defaultColor: string;
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
+    scope: ('bare' | 'lnf' | 'tf')[];
 }
 
 export { postcssSugarPluginUiFormSelectClassesInterface as interface };
@@ -41,11 +41,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormSelectClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectClassesParams = {
@@ -250,7 +252,8 @@ export default function ({
     `);
 
     finalParams.styles.forEach((style) => {
-        const isDefaultStyle = __theme().config('ui.select.defaultStyle') === style;
+        const isDefaultStyle =
+            __theme().config('ui.select.defaultStyle') === style;
 
         const styleCls = isDefaultStyle ? '' : `.s-select--${style}`;
         const cls = `.s-select${styleCls}`;
@@ -274,7 +277,9 @@ export default function ({
         vars.push(`
             ${cls} {
                 @sugar.color(${finalParams.defaultColor});
-                @sugar.ui.select($style: ${style}, $scope: '${finalParams.scope.join(',')}');
+                @sugar.ui.select($style: ${style}, $scope: '${finalParams.scope.join(
+            ',',
+        )}');
             }`);
     });
 
@@ -286,7 +291,7 @@ export default function ({
             * 
             * This class represent a simple select tag in the s-format:text scope
             * 
-            * @feature      Support vertical rhythm
+            * @feature      Vertical rhythm
             * 
             * @example        html
             * <div class="s-format:text">
@@ -304,6 +309,9 @@ export default function ({
                 select {
                     @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.select($scope: '${finalParams.scope.join(',')}');
+                    ${jsObjectToCssProperties(
+                        __theme().config('ui.select.:rhythmVertical'),
+                    )}
                 } 
             }
         `);

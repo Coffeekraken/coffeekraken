@@ -69,7 +69,9 @@ export default function ({
         * @support      edge            17+
         * 
         ${[...Array(finalParams.count).keys()].map((i) => {
-            return ` * @cssClass        s-truncate:${i + 1}         Truncate the container to ${i + 1} line(s)`;
+            return ` * @cssClass        s-truncate:${
+                i + 1
+            }         Truncate the container to ${i + 1} line(s)`;
         })}
         *
         * @example        html
@@ -77,7 +79,9 @@ export default function ({
             .map((i) => {
                 return ` * <!-- truncate ${i + 1} -->
             * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to ${i + 1} line(s)</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to ${
+                i + 1
+            } line(s)</h3>
             *   <p class="s-typo:p s-truncate:${i + 1}">${__faker.lorem
                     .lines(finalParams.count + 5)
                     .split('\n')
@@ -100,7 +104,9 @@ export default function ({
   * @platform             css
   * @status             beta
   * 
-  * This class allows you to apply a "<yellow>${i + 1}</yellow>" line(s) truncate style to any HTMLElement
+  * This class allows you to apply a "<yellow>${
+      i + 1
+  }</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
   * <p class="s-typo:p s-truncate:${i}">${__faker.lorem

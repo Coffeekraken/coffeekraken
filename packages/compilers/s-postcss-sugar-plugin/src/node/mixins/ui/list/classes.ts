@@ -24,8 +24,8 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'vr', 'tf'],
-            default: ['bare', 'lnf', 'vr', 'tf'],
+            values: ['bare', 'lnf', 'tf'],
+            default: ['bare', 'lnf', 'tf'],
         },
     };
 }
@@ -34,7 +34,7 @@ export interface IPostcssSugarPluginUiListClassesParams {
     styles: ('ul' | 'ol' | 'icon')[];
     defaultColor: string;
     defaultStyle: 'ul' | 'ol' | 'icon';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'tf')[];
 }
 
 export { postcssSugarPluginUiListClassesInterface as interface };
@@ -43,11 +43,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiListClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
@@ -96,15 +98,21 @@ export default function ({
                 return ` * <!-- ${style} style -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
-            *   <ul class="s-list\:${style} ${style === 'ol' ? 's-color:accent s-scale:15' : ''}">
+            *   <ul class="s-list\:${style} ${
+                    style === 'ol' ? 's-color:accent s-scale:15' : ''
+                }">
             *     <li>${
                 style === 'icon' ? `<i class="s-icon\:user"></i>` : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
-                style === 'icon' ? `<i class="s-icon\:heart s-color:accent"></i>` : ''
+                style === 'icon'
+                    ? `<i class="s-icon\:heart s-color:accent"></i>`
+                    : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
-                style === 'icon' ? `<i class="s-icon\:fire s-color:error"></i>` : ''
+                style === 'icon'
+                    ? `<i class="s-icon\:fire s-color:error"></i>`
+                    : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
             * </div>
@@ -165,7 +173,9 @@ export default function ({
         * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
-        * This class represent an "<yellow>${__theme().config('ui.list.defaultStyle')}</yellow>" list
+        * This class represent an "<yellow>${__theme().config(
+            'ui.list.defaultStyle',
+        )}</yellow>" list
         * 
         * @feature       Support vertical rhythm
         * 
@@ -263,7 +273,7 @@ export default function ({
             * 
             * This class represent a simple ul tag in the s-format:text scope
             * 
-            * @feature      Support vertical rhythm
+            * @feature      Vertical rhythm
             * 
             * @example        html
             * <div class="s-format:text">
@@ -280,7 +290,12 @@ export default function ({
             @sugar.format.text {
                 ul {
                     @sugar.color(${finalParams.defaultColor});
-                    @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(',')}');
+                    @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(
+                        ',',
+                    )}');
+                    ${jsObjectToCssProperties(
+                        __theme().config('ui.list.:rhythmVertical'),
+                    )}
                 } 
             }
         `);
@@ -291,7 +306,7 @@ export default function ({
             * 
             * This class represent a simple ol tag in the s-format:text scope
             * 
-            * @feature      Support vertical rhythm
+            * @feature      Vertical rhythm
             * 
             * @example        html
             * <div class="s-format:text">
@@ -308,7 +323,12 @@ export default function ({
             @sugar.format.text {
                 ol {
                     @sugar.color(${finalParams.defaultColor});
-                    @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(',')}');
+                    @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(
+                        ',',
+                    )}');
+                    ${jsObjectToCssProperties(
+                        __theme().config('ui.list.:rhythmVertical'),
+                    )}
                 } 
             }
         `);

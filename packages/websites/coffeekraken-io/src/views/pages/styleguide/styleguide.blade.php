@@ -14,45 +14,6 @@
 
     <div id="styleguide">
 
-        {{-- <section class="__preview s-pb:100 s-bg:main-surface">
-
-            <div class="s-container">
-
-                <div class="s-grid:12:gutter-between:gutter-50">
-
-                    <div class="s-rhythm:vertical">
-
-                        <div class="__preview-metas">
-
-                            @include('doc.description', ['block' => $firstBlock])
-                            @if ($firstBlock->install)
-                                @include('doc.install', ['block' => $firstBlock])
-                            @elseif ($firstBlock->example)
-                                @include('generic.code.example', ['examples' => $firstBlock->example, 'lines' => 5, 'moreAction' => '#example-' . \Sugar\string\idCompliant($firstBlock->name)])
-                            @endif
-
-                        </div>
-
-                    </div>
-
-                    <div>
-                        
-                        <div class="__preview-example">
-                            @foreach ($firstBlock->example as $example)
-                                @if ($example->language == 'html')
-                                    {!! $example->code !!}                     
-                                @endif
-                            @endforeach
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section> --}}
-
         <section class="toolbar">
 
             <div class="s-container">
@@ -63,7 +24,7 @@
                         <span>{{ $firstBlock->name }}</span>
                         &nbsp;&nbsp;
                         <span class="s-font:30">
-                            <span class="s-badge:pill:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
+                            <span class="s-badge:pill s-color:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
                         </span>
                         &nbsp;&nbsp;
                         @if ($firstBlock->platform)

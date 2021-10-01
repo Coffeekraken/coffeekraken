@@ -16,8 +16,8 @@ class postcssSugarPluginUiFormSelectInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'vr', 'tf'],
-            default: ['bare', 'lnf', 'vr', 'tf'],
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
         },
     };
 }
@@ -107,14 +107,6 @@ export default function ({
 
                 break;
             }
-    }
-
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`
-            @sugar.rhythm.vertical {
-                ${jsObjectToCssProperties(__theme().config('ui.select.:rhythmVertical'))}
-            } 
-        `);
     }
 
     replaceWith(vars);

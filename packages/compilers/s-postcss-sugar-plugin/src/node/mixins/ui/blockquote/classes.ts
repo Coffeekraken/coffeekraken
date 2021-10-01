@@ -43,11 +43,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBlockquoteClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteClassesParams = {
@@ -99,7 +101,9 @@ export default function ({
                 return ` * <!-- ${style} style -->
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
-            *   <p class="s-blockquote${style === finalParams.defaultStyle ? '' : `:${style}`}">
+            *   <p class="s-blockquote${
+                style === finalParams.defaultStyle ? '' : `:${style}`
+            }">
             *       ${__faker.lorem.paragraph()}
             *   </p>
             * </div>
@@ -164,8 +168,6 @@ export default function ({
         * 
         * This class represent a simple blockquote
         * 
-        * @feature      Support vertical rhythm
-        * 
         * @example        html
         * <blockquote class="${cls.trim()}">
         *   <p>Hello world</p>
@@ -188,7 +190,7 @@ export default function ({
             * 
             * This class represent a simple blockquote tag in the s-format:text scope
             * 
-            * @feature      Support vertical rhythm
+            * @feature      Vertical rhythm
             * 
             * @example        html
             * <div class="s-format:text">
@@ -203,7 +205,12 @@ export default function ({
             @sugar.format.text {
                 blockquote {
                     @sugar.color(${finalParams.defaultColor});
-                    @sugar.ui.blockquote($scope: '${finalParams.scope.join(',')}');
+                    @sugar.ui.blockquote($scope: '${finalParams.scope.join(
+                        ',',
+                    )}');
+                    ${jsObjectToCssProperties(
+                        __theme().config('ui.blockquote.:rhythmVertical'),
+                    )}
                 } 
             }
         `);

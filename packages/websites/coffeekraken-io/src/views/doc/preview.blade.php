@@ -2,7 +2,7 @@
     <i class="s-icon:preview s-tc:accent"></i>&nbsp;&nbsp;Preview
 </h4>
 
-<div class="s-format:none preview s-mbe:50">
+<div class="s-format:none s-rhythm:none preview s-mbe:50">
     @foreach ($block->example as $example)
         @if ($example->language == 'html')
             {!! $example->code !!}                     

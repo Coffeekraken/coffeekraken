@@ -1,11 +1,10 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 class postcssSugarPluginUiTableClassesInterface extends __SInterface {
 }
 postcssSugarPluginUiTableClassesInterface.definition = {};
 export { postcssSugarPluginUiTableClassesInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
+export default function ({ params, atRule, jsObjectToCssProperties, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
     const cls = `s-table`;
@@ -15,8 +14,6 @@ export default function ({ params, atRule, replaceWith, }) {
         * @type           CssClass
         * 
         * This class represent a simple table
-        * 
-        * @feature      Support vertical rhythm
         * 
         * @example        html
         * <table class="${cls.trim()}">
@@ -41,11 +38,6 @@ export default function ({ params, atRule, replaceWith, }) {
             @sugar.color(sugar.theme(ui.table.defaultColor));
             @sugar.ui.table;
         } 
-        table {
-          @sugar.rhythm.vertical {
-            ${__jsObjectToCssProperties(__theme().config('ui.table.:rhythmVertical'))}
-          }
-        } 
     `);
     vars.push(`/**
         * @name           s-format:text
@@ -54,7 +46,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         * This class represent a simple table tag in the s-format:text scope
         * 
-        * @feature      Support vertical rhythm
+        * @feature      Vertical rhythm
         * 
         * @example        html
         * <div class="s-format\:text">
@@ -81,9 +73,10 @@ export default function ({ params, atRule, replaceWith, }) {
           table {
               @sugar.color(${__theme().config('ui.table.defaultColor')});
               @sugar.ui.table;
+              ${jsObjectToCssProperties(__theme().config('ui.table.:rhythmVertical'))}
           }
         } 
     `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFDM0MsT0FBTyx5QkFBeUIsTUFBTSx3Q0FBd0MsQ0FBQztBQUUvRSxNQUFNLHlDQUEwQyxTQUFRLFlBQVk7O0FBQ3pELG9EQUFVLEdBQUcsRUFBRSxDQUFDO0FBSzNCLE9BQU8sRUFBRSx5Q0FBeUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVsRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE1BQU0sR0FBRyxHQUFHLFNBQVMsQ0FBQztJQUV0QixJQUFJLENBQUMsSUFBSSxDQUFDOzRCQUNjLEdBQUc7Ozs7Ozs7OzswQkFTTCxHQUFHLENBQUMsSUFBSSxFQUFFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7V0FrQnpCLEdBQUc7Ozs7OztjQU1BLHlCQUF5QixDQUFDLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQywwQkFBMEIsQ0FBQyxDQUFDOzs7S0FHaEYsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7NkJBZ0NlLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQzs7OztLQUlqRSxDQUFDLENBQUM7SUFFSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFFM0MsTUFBTSx5Q0FBMEMsU0FBUSxZQUFZOztBQUN6RCxvREFBVSxHQUFHLEVBQUUsQ0FBQztBQUszQixPQUFPLEVBQUUseUNBQXlDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLHVCQUF1QixFQUN2QixXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsTUFBTSxHQUFHLEdBQUcsU0FBUyxDQUFDO0lBRXRCLElBQUksQ0FBQyxJQUFJLENBQUM7NEJBQ2MsR0FBRzs7Ozs7OzswQkFPTCxHQUFHLENBQUMsSUFBSSxFQUFFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7V0FrQnpCLEdBQUc7Ozs7S0FJVCxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs2QkFnQ2UsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHVCQUF1QixDQUFDOztnQkFFdEQsdUJBQXVCLENBQ3JCLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQywwQkFBMEIsQ0FBQyxDQUMvQzs7O0tBR1YsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3RCLENBQUMifQ==

@@ -31,6 +31,7 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.clearfix.classes;',
         '@sugar.color.classes;',
         '@sugar.fit.classes;',
+        '@sugar.format.classes;',
         '@sugar.align.classes;',
         '@sugar.text.classes;',
         '@sugar.font.classes;',

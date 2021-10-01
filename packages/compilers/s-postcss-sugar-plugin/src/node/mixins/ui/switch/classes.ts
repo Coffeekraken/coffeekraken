@@ -23,8 +23,8 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'tf', 'vr'],
-            default: ['bare', 'lnf', 'tf', 'vr'],
+            values: ['bare', 'lnf', 'tf'],
+            default: ['bare', 'lnf', 'tf'],
         },
     };
 }
@@ -33,7 +33,7 @@ export interface IPostcssSugarPluginUiSwitchClassesMixinParams {
     styles: 'solid'[];
     defaultColor: string;
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
+    scope: ('bare' | 'lnf' | 'tf')[];
 }
 
 export { postcssSugarPluginUiSwitchClassesMixinInterface as interface };
@@ -42,11 +42,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiSwitchClassesMixinParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchClassesMixinParams = {
@@ -95,31 +97,41 @@ export default function ({
             *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 }" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-color:accent" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-color:complementary" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-color:error" />
             *   </label>
                 <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" disabled ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${
+            *     <input type="checkbox" disabled ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-color:accent" />
             *   </label>
@@ -133,15 +145,21 @@ export default function ({
         *   <h3 class="s-tc:accent s-font:30 s-mb\:20">RTL Support</h3>
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-color:accent" />
+        *     <input type="checkbox" ${
+            Math.random() > 0.5 ? 'checked' : ''
+        } class="s-switch s-color:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-color:accent" />
+        *     <input type="checkbox" ${
+            Math.random() > 0.5 ? 'checked' : ''
+        } class="s-switch s-color:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-color:accent" />
+        *     <input type="checkbox" ${
+            Math.random() > 0.5 ? 'checked' : ''
+        } class="s-switch s-color:accent" />
         *   </label>
         * </div>
         * 
@@ -150,15 +168,21 @@ export default function ({
         *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scales</h3>
         *   <label class="s-mbe:30 s-label s-scale\:05">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-color:accent" />
+        *     <input type="checkbox" ${
+            Math.random() > 0.5 ? 'checked' : ''
+        } class="s-switch s-color:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:10">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-color:accent" />
+        *     <input type="checkbox" ${
+            Math.random() > 0.5 ? 'checked' : ''
+        } class="s-switch s-color:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:15">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch s-color:accent" />
+        *     <input type="checkbox" ${
+            Math.random() > 0.5 ? 'checked' : ''
+        } class="s-switch s-color:accent" />
         *   </label>
         * </div>
         * 
@@ -180,6 +204,8 @@ export default function ({
         * 
         * This class represent a(n) "<s-color="accent">${style}</s-color>" switch
         * 
+        * @feature      Vertical rhythm
+        * 
         * @example        html
         * <label class="s-label">
         *   <input type="checkbox" class="${cls.replace(/\./gm, ' ').trim()}" />
@@ -191,7 +217,12 @@ export default function ({
       */
       .${cls.replace('\n', '--')} {
         @sugar.color(${finalParams.defaultColor});
-        @sugar.ui.switch($style: ${style}, $scope: '${finalParams.scope.join(',')}');
+        @sugar.ui.switch($style: ${style}, $scope: '${finalParams.scope.join(
+            ',',
+        )}');
+        ${jsObjectToCssProperties(
+            __theme().config('ui.switch.:rhythmVertical'),
+        )}
       }
     `);
     });

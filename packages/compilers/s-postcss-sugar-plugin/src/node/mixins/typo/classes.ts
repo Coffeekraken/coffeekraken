@@ -82,6 +82,8 @@ export default function ({
     * 
     * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any ${typoName} tag in the .s-format:text scope
     * 
+    * @feature          Vertical rhythm
+    * 
     * @example      html
     * <div class="s-format\:text">
     *   <${typoName}>Something cool</${typoName}>
@@ -92,36 +94,13 @@ export default function ({
    @sugar.format.text {
      ${typoName} {
            ${css}
+           ${
+               typoObj[':rhythmVertical']
+                   ? __jsObjectToCssProperties(typoObj[':rhythmVertical'])
+                   : ''
+           }
      }
    }`);
-
-        if (typoObj[':rhythmVertical']) {
-            vars.push(`
-
-        /**
-          * @name         s-rhythm:vertical ${cls}
-          * @namespace    sugar.css.typo
-          * @type         CssClass
-          * @platform     css
-          * @status       beta
-          * 
-          * This class allows you to activate the space(s) on your "<yellow>${cls}</yellow>" HTMLElement
-          * 
-          * @example      html
-          * <div class="s-rhythm\:vertical">
-          *     <span class="${cls.replace(':', ':')}">Something cool</span>
-          * </div>
-          * 
-          * @since    2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-       &.${cls.replace(':', '--')}, & .${cls.replace(':', '--')} {
-        @sugar.rhythm.vertical {
-          ${__jsObjectToCssProperties(typoObj[':rhythmVertical'])}
-        }
-      }
-      `);
-        }
     });
 
     replaceWith(vars);

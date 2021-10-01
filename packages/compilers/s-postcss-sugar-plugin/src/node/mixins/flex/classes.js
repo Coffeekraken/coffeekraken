@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __faker from 'faker';
 /**
  * @name           classes
  * @namespace      node.mixins.flex
@@ -20,9 +21,106 @@ class postcssSugarPluginFlexClassesInterface extends __SInterface {
 }
 postcssSugarPluginFlexClassesInterface.definition = {};
 export { postcssSugarPluginFlexClassesInterface as interface };
-export default function ({ params, atRule, replaceWith }) {
+export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
+    vars.push(`
+      /**
+        * @name          Flex
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/flex
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply some flex attributes on any HTMLElement and with
+        * that you can create some "layouts" directly in your HTML
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass                 s-flex              Apply a display "flex" on any HTMLElement
+        * @cssClass                 s-flex:row          Apply the flex direction to "row"
+        * @cssClass                 s-flex:row-reverse          Apply the flex direction to "row-reverse"
+        * @cssClass                 s-flex:column          Apply the flex direction to "column"
+        * @cssClass                 s-flex:column-reverse          Apply the flex direction to "column-reverse"
+        * @cssClass                 s-flex:nowrap             Apply the wrap property to "nowrap"
+        * @cssClass                 s-flex:wrap             Apply the wrap property to "wrap"
+        * @cssClass                 s-flex:wrap-reverse             Apply the wrap property to "wrap-reverse"
+        * @cssClass                 s-flex:justify-start             Apply the justify property to "start"
+        * @cssClass                 s-flex:justify-flex-start             Apply the justify property to "flex-start"
+        * @cssClass                 s-flex:justify-end             Apply the justify property to "end"
+        * @cssClass                 s-flex:justify-flex-end             Apply the justify property to "flex-end"
+        * @cssClass                 s-flex:justify-center             Apply the justify property to "center"  
+        * @cssClass                 s-flex:justify-space-between             Apply the justify property to "space-between"
+        * @cssClass                 s-flex:justify-space-around             Apply the justify property to "space-around"
+        * @cssClass                 s-flex:justify-space-evenly             Apply the justify property to "space-evenly"
+        * @cssClass                 s-flex:justify-stretch             Apply the justify property to "stretch"
+        * @cssClass                 s-flex:align-start             Apply the align property to "start"
+        * @cssClass                 s-flex:align-flex-start             Apply the align property to "flex-start"
+        * @cssClass                 s-flex:align-end             Apply the align property to "end"
+        * @cssClass                 s-flex:align-flex-end             Apply the align property to "flex-end"
+        * @cssClass                 s-flex:align-center             Apply the align property to "center"
+        * @cssClass                 s-flex:align-baseline             Apply the align property to "baseline"
+        * @cssClass                 s-flex-item:grow             Apply the flex-grow property to "1"
+        * @cssClass                 s-flex-item:shrink             Apply the flex-shrink property to "1"
+        * @cssClass                 s-flex-item:align-flex-start        Align item to the start
+        * @cssClass                 s-flex-item:align-flex-end        Align item to the end
+        * @cssClass                 s-flex-item:align-center        Align item to the center
+        * @cssClass                 s-flex-item:align-baseline        Align item to the baseline
+        * @cssClass                 s-flex-item:align-stretch        Align item to the stretch
+        * @cssClass                 s-flex-item:order-{0...20}             Apply the order {0...20} to any flex item
+        * @cssClass                 s-flex-item:grow-{0...20}             Apply the grow {0...20} to any flex item
+        * @cssClass                 s-flex-item:shrink-{0...20}             Apply the shrink {0...20} to any flex item
+        * 
+        * @example        html
+        * <!-- Simple grid -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Simple grid</h3>
+        *   <div class="s-flex:row:wrap">
+        *     <div class="s-bg:main s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:info s-width:50 s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * <!-- Grow -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grow</h3>
+        *   <div class="s-flex:row:nowrap">
+        *     <div class="s-bg:main s-p:20 s-flex-item:grow">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * <!-- Order -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Order</h3>
+        *   <div class="s-flex:row:nowrap">
+        *     <div class="s-bg:main s-p:20 s-flex-item:order-3">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * <!-- Align -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Align</h3>
+        *   <div class="s-flex:row:nowrap:align-end">
+        *     <div class="s-bg:main s-p:20">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        *   </div>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
     vars.push(`/**
             * @name          s-flex
             * @namespace          sugar.css.flex
@@ -546,4 +644,4 @@ export default function ({ params, atRule, replaceWith }) {
             }`);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFJckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLHNDQUF1QyxTQUFRLFlBQVk7O0FBQ3hELGlEQUFVLEdBQUcsRUFBRSxDQUFDO0FBS3pCLE9BQU8sRUFBRSxzQ0FBc0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUUvRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxFQUtaO0lBQ0MsTUFBTSxXQUFXLHFCQUNaLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0UsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O1VBZ0JKLENBQUMsQ0FBQztJQUVSLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7VUFnQkosQ0FBQyxDQUFDO0lBRVIsS0FBSyxJQUFJLENBQUMsR0FBQyxDQUFDLEVBQUUsQ0FBQyxHQUFDLEVBQUUsRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUNyQixJQUFJLENBQUMsSUFBSSxDQUFDO3FEQUNtQyxDQUFDOzs7Ozs7bUZBTTZCLENBQUM7Ozs7cURBSS9CLENBQUM7OztzQ0FHaEIsQ0FBQzs2QkFDVixDQUFDO2tCQUNaLENBQUMsQ0FBQztLQUNmO0lBR0QsS0FBSyxJQUFJLENBQUMsR0FBQyxDQUFDLEVBQUUsQ0FBQyxHQUFDLEVBQUUsRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUNyQixJQUFJLENBQUMsSUFBSSxDQUFDO29EQUNrQyxDQUFDOzs7Ozs7dUZBTWtDLENBQUM7Ozs7b0RBSXBDLENBQUM7OztxQ0FHaEIsQ0FBQztpQ0FDTCxDQUFDO2tCQUNoQixDQUFDLENBQUM7S0FDUDtJQUVULEtBQUssSUFBSSxDQUFDLEdBQUMsQ0FBQyxFQUFFLENBQUMsR0FBQyxFQUFFLEVBQUUsQ0FBQyxFQUFFLEVBQUU7UUFDckIsSUFBSSxDQUFDLElBQUksQ0FBQztzREFDb0MsQ0FBQzs7Ozs7O3lGQU1rQyxDQUFDOzs7O3NEQUlwQyxDQUFDOzs7dUNBR2hCLENBQUM7bUNBQ0wsQ0FBQztrQkFDbEIsQ0FBQyxDQUFDO0tBQ1A7SUFFVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O2NBZ0JBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Y0FnQkEsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztjQWdCQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O2NBZ0JBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Y0FnQkEsQ0FBQyxDQUFDO0lBRWQsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3BCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFHckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZOztBQUN0RCxpREFBVSxHQUFHLEVBQUUsQ0FBQztBQUszQixPQUFPLEVBQUUsc0NBQXNDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFL0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozt5REF3RDJDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzJEQUNyQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtrRUFDaEIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7eURBQ2hDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7OzsrREFRakIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Z0RBQ3RDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7a0VBUVosT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Z0RBQ3pDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OENBUWhDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO2dEQUNyQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxTQUFTLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLFNBQVMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsU0FBUyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxTQUFTLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoSixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztLQU96RSxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7OztjQWNBLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O2NBY0EsQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Y0FjQSxDQUFDLENBQUM7SUFFWixJ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

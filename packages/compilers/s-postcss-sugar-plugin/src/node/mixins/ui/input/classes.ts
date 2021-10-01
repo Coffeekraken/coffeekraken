@@ -25,10 +25,12 @@ export { postcssSugarPluginUiFormClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormClassesParams>;
     atRule: any;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormClassesParams = {
@@ -120,7 +122,11 @@ export default function ({
         * @example        html
         * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
       */`);
-        vars.push([`${cls} {`, ` @sugar.ui.input.text($style: ${style});`, `}`].join('\n'));
+        vars.push(
+            [`${cls} {`, ` @sugar.ui.input.text($style: ${style});`, `}`].join(
+                '\n',
+            ),
+        );
     });
 
     replaceWith(vars);

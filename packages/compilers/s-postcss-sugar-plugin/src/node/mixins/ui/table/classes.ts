@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiTableClassesInterface extends __SInterface {
     static definition = {};
@@ -13,10 +12,12 @@ export { postcssSugarPluginUiTableClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTableClassesParams>;
     atRule: any;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableClassesParams = {
@@ -33,8 +34,6 @@ export default function ({
         * @type           CssClass
         * 
         * This class represent a simple table
-        * 
-        * @feature      Support vertical rhythm
         * 
         * @example        html
         * <table class="${cls.trim()}">
@@ -59,11 +58,6 @@ export default function ({
             @sugar.color(sugar.theme(ui.table.defaultColor));
             @sugar.ui.table;
         } 
-        table {
-          @sugar.rhythm.vertical {
-            ${__jsObjectToCssProperties(__theme().config('ui.table.:rhythmVertical'))}
-          }
-        } 
     `);
 
     vars.push(`/**
@@ -73,7 +67,7 @@ export default function ({
         * 
         * This class represent a simple table tag in the s-format:text scope
         * 
-        * @feature      Support vertical rhythm
+        * @feature      Vertical rhythm
         * 
         * @example        html
         * <div class="s-format\:text">
@@ -100,6 +94,9 @@ export default function ({
           table {
               @sugar.color(${__theme().config('ui.table.defaultColor')});
               @sugar.ui.table;
+              ${jsObjectToCssProperties(
+                  __theme().config('ui.table.:rhythmVertical'),
+              )}
           }
         } 
     `);

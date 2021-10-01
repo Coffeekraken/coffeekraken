@@ -49,10 +49,6 @@ export default function ({
       padding-block: sugar.scalable(sugar.theme(ui.table.paddingBlock));
     }
 
-    @sugar.rhythm.vertical {
-        ${__jsObjectToCssProperties(__theme().config('ui.table.:rhythmVertical'))}
-    } 
-
   `);
 
     replaceWith(vars);

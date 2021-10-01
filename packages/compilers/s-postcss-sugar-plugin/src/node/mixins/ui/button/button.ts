@@ -19,8 +19,8 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'vr'],
-            default: ['bare', 'lnf', 'vr'],
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
         },
     };
 }
@@ -28,7 +28,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 export interface IPostcssSugarPluginUiButtonParams {
     style: 'solid' | 'gradient' | 'outline' | 'text';
     focusOutline: boolean;
-    scope: ('bare' | 'lnf' | 'vr')[];
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
@@ -50,7 +50,7 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiButtonParams = {
         style: __theme().config('ui.button.defaultStyle'),
         focusOutline: true,
-        scope: ['bare', 'lnf', 'vr'],
+        scope: ['bare', 'lnf'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -185,14 +185,6 @@ export default function ({
               @sugar.state.focusOutline;
           `);
         }
-    }
-
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`
-            @sugar.rhythm.vertical {
-                ${jsObjectToCssProperties(__theme().config('ui.button.:rhythmVertical'))}
-            } 
-        `);
     }
 
     replaceWith(vars);

@@ -82,23 +82,23 @@ export default function ({ params, atRule, replaceWith }) {
     Object.keys(__theme().baseColors()).forEach((colorName) => {
         cssArray.push(`
       /**
-       * @name        s-tc:${colorName}
+       * @name        s-color:${colorName}
        * @namespace     sugar.css.ui.label
        * @type          CssClass
        * 
-       * This class allows you to apply the "<span class="s-tc:${colorName}">${colorName}</span>" text color to any ui element.
+       * This class allows you to apply the "<span class="s-color:${colorName}">${colorName}</span>" text color to any ui element.
        * This does apply the color only on the item itself and not on his childs...
        * 
        * @example       html
        * <label>
        *   Hello world
-       *   <input type="text" class="s-input s-tc:${colorName}" />
+       *   <input type="text" class="s-input s-color:${colorName}" />
        * </label>
        * 
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-tc--${colorName} {
+      .s-color--${colorName} {
         @sugar.color(${colorName});
       }
     `);

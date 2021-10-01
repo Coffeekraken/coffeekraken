@@ -3,66 +3,73 @@ import __theme from '../../utils/theme';
 import __faker from 'faker';
 /**
  * @name           classes
- * @namespace      node.mixins.font
+ * @namespace      node.mixins.format
  * @type           PostcssMixin
  * @platform      css
  * @status        beta
  *
- * This mixin generate font helper classes like s-font:title, s-font:20, etc...
+ * This mixin generate the documentation for the usage of the .s-format:... classes
  *
  * @return        {Css}         The generated css
  *
  * @example         postcss
- * \@sugar.font.classes;
+ * \@sugar.format.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class postcssSugarPluginFontClassesInterface extends __SInterface {
+class postcssSugarPluginFormatClassesInterface extends __SInterface {
 }
-postcssSugarPluginFontClassesInterface.definition = {};
-export { postcssSugarPluginFontClassesInterface as interface };
+postcssSugarPluginFormatClassesInterface.definition = {};
+export { postcssSugarPluginFormatClassesInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
     const fontsFamiliesObj = __theme().config('font.family');
     vars.push(`
       /**
-        * @name          Font Families
+        * @name          Format text
         * @namespace          sugar.css.font
         * @type               CssClass
-        * @menu           Styleguide / Fonts        /styleguide/fonts/families
+        * @menu           Styleguide / Tools        /styleguide/tools/format
         * @platform       css
         * @status       beta
         * 
-        * This class allows you to apply a font to any HTMLElement
+        * This class allows you to apply some formatting to pure HTMLElement that are scoped into.
+        * For example, a simple "ul" tag will be styled as if the "s-list:ul" class would be applied on it
+        * when it is scoped inside the "s-format:text" class.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
-        * 
-        ${Object.keys(fontsFamiliesObj)
-        .map((fontName) => {
-        return `* @cssClass      s-font\:${fontName}       Apply the ${fontName} font on any HTMLElement`;
-    })
-        .join('\n ')}
+        * @cssClass               s-format:text             Apply the text formatting to childs elements like "ul", "ol", "p", "h1", "h2", etc... HTML tags
         * 
         * @example        html
-        * ${Object.keys(fontsFamiliesObj)
-        .map((fontName) => {
-        return `<span class="s-tc:accent s-font:30">${fontName}</span><br /><br /><h1 class="s-font\:${fontName} s-font\:50 s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
-    })
-        .join('\n * ')}
-        * 
-        * @example        css
-        ${Object.keys(fontsFamiliesObj)
-        .map((fontName) => {
-        return `* .my-font-${fontName} {
-        *     \@sugar.font.family(${fontName});  
-        * }`;
-    })
-        .join('\n ')}
+        * <!-- block -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
+        *   <div class="s-format:text">
+        *       <h1>${__faker.name.findName()}</h1>
+        *       <p>${__faker.lorem.sentence()}</p>
+        *       <ul>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *       </ul>
+        *       <blockquote>
+        *           ${__faker.lorem.paragraph()}
+        *       </blockquote>
+        *       <ol>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *       </ol>
+        *       <select>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *       </select>
+        *       <br />
+        *       <button>${__faker.name.findName()}</button>
+        *   </div>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -209,4 +216,4 @@ export default function ({ params, atRule, replaceWith, }) {
 }`);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZOztBQUN0RCxpREFBVSxHQUFHLEVBQUUsQ0FBQztBQUszQixPQUFPLEVBQUUsc0NBQXNDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFL0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixNQUFNLGdCQUFnQixHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUV6RCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O1VBZ0JKLE1BQU0sQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUM7U0FDMUIsR0FBRyxDQUFDLENBQUMsUUFBUSxFQUFFLEVBQUU7UUFDZCxPQUFPLDRCQUE0QixRQUFRLG9CQUFvQixRQUFRLDBCQUEwQixDQUFDO0lBQ3RHLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxLQUFLLENBQUM7OztZQUdaLE1BQU0sQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUM7U0FDNUIsR0FBRyxDQUFDLENBQUMsUUFBUSxFQUFFLEVBQUU7UUFDZCxPQUFPLHVDQUF1QyxRQUFRLHlDQUF5QyxRQUFRLHlCQUF5QixPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLE9BQU8sQ0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFDeEMsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSx3Q0FBeUMsU0FBUSxZQUFZOztBQUN4RCxtREFBVSxHQUFHLEVBQUUsQ0FBQztBQUszQixPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixNQUFNLGdCQUFnQixHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUV6RCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztzQkFvQlEsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7cUJBQ3hCLE9BQU8sQ0FBQyxLQUFLLENBQUMsUUFBUSxFQUFFOzswQkFFbkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7MEJBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzBCQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7O3NCQUczQixPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7OzBCQUdyQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTswQkFDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7MEJBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7OEJBR25C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

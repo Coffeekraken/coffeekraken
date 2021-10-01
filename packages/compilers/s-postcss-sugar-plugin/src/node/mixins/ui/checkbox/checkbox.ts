@@ -15,15 +15,15 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'vr'],
-            default: ['bare', 'lnf', 'vr'],
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
         },
     };
 }
 
 export interface IPostcssSugarPluginUiCheckboxParams {
     style: 'solid';
-    scope: ('bare' | 'lnf' | 'vr')[];
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiCheckboxInterface as interface };
@@ -42,7 +42,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxParams = {
         style: 'solid',
-        scope: ['bare', 'lnf', 'vr'],
+        scope: ['bare', 'lnf'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -108,14 +108,6 @@ export default function ({
  
         `);
             }
-    }
-
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`
-            @sugar.rhythm.vertical {
-                ${jsObjectToCssProperties(__theme().config('ui.checkbox.:rhythmVertical'))}
-            } 
-        `);
     }
 
     replaceWith(vars);

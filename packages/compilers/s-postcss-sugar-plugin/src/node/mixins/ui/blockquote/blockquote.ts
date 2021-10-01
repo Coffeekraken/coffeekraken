@@ -75,13 +75,5 @@ export default function ({
             break;
     }
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`
-            @sugar.rhythm.vertical {
-                ${jsObjectToCssProperties(__theme().config('ui.blockquote.:rhythmVertical'))}
-            } 
-        `);
-    }
-
     replaceWith(vars);
 }

@@ -16,8 +16,8 @@ class postcssSugarPluginUiListInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'vr'],
-            default: ['bare', 'lnf', 'vr'],
+            values: ['bare', 'lnf'],
+            default: ['bare', 'lnf'],
         },
     };
 }
@@ -44,7 +44,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiListParams = {
         style: 'ul',
-        scope: ['bare', 'lnf', 'vr'],
+        scope: ['bare', 'lnf'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -74,7 +74,9 @@ export default function ({
         }
 
         @sugar.rhythm.vertical {
-            ${__jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
+            ${__jsObjectToCssProperties(
+                __theme().config('ui.list.:rhythmVertical'),
+            )}
         } 
         `);
     }
@@ -141,7 +143,9 @@ export default function ({
                 vars.push(`
                     & > * {
                         ${bulletSelector} {
-                            content: "${__theme().config('ui.list.bulletChar')}";
+                            content: "${__theme().config(
+                                'ui.list.bulletChar',
+                            )}";
                             margin-top: 0.25em;
                             font-size: 0.7em;
                         }
@@ -149,14 +153,6 @@ export default function ({
                 `);
                 break;
         }
-    }
-
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`
-            @sugar.rhythm.vertical {
-                ${jsObjectToCssProperties(__theme().config('ui.list.:rhythmVertical'))}
-            } 
-        `);
     }
 
     replaceWith(vars);

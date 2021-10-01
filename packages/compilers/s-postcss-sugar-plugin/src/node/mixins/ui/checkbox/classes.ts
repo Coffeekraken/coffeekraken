@@ -23,8 +23,8 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'vr', 'tf'],
-            default: ['bare', 'lnf', 'vr', 'tf'],
+            values: ['bare', 'lnf', 'tf'],
+            default: ['bare', 'lnf', 'tf'],
         },
     };
 }
@@ -33,7 +33,7 @@ export interface IPostcssSugarPluginUiCheckboxClassesParams {
     styles: 'solid'[];
     defaultColor: string;
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'tf')[];
 }
 
 export { postcssSugarPluginUiCheckboxClassesInterface as interface };
@@ -42,11 +42,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiCheckboxClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxClassesParams = {
@@ -210,7 +212,9 @@ export default function ({
       */
         .${cls} {
             @sugar.color(${finalParams.defaultColor});
-            @sugar.ui.checkbox($style: ${style}, $scope: '${finalParams.scope.join(',')}');
+            @sugar.ui.checkbox($style: ${style}, $scope: '${finalParams.scope.join(
+            ',',
+        )}');
         }
         `);
     });
@@ -222,6 +226,8 @@ export default function ({
             * @type           CssClass
             * 
             * This class represent a simple input[type="checkbox"] tag in the s-format:text scope
+            * 
+            * @feature      Vertical rhythm
             * 
             * @example        html
             * <div class="s-format:text">
@@ -236,7 +242,12 @@ export default function ({
             @sugar.format.text {
                 input[type="checkbox"] {
                     @sugar.color(${finalParams.defaultColor});
-                    @sugar.ui.checkbox($scope: '${finalParams.scope.join(',')}');
+                    @sugar.ui.checkbox($scope: '${finalParams.scope.join(
+                        ',',
+                    )}');
+                    ${jsObjectToCssProperties(
+                        __theme().config('ui.checkbox.:rhythmVertical'),
+                    )}
                 } 
             }
         `);

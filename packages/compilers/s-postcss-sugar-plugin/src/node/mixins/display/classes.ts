@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __faker from 'faker';
 
 /**
  * @name           classes
@@ -21,7 +22,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  */
 
 class postcssSugarPluginDisplayClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginDisplayClassesParams {}
@@ -29,21 +30,126 @@ export interface IPostcssSugarPluginDisplayClassesParams {}
 export { postcssSugarPluginDisplayClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginDisplayClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginDisplayClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginDisplayClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginDisplayClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`
+    vars.push(`
+      /**
+        * @name          Display
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/display
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply the some display like "inline", "inline-block", "block", etc...
+        * on any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass                 s-display:block           Apply the display "block" to any HTMLElement
+        * @cssClass                 s-display:inline-block           Apply the display "inline-block" to any HTMLElement
+        * @cssClass                 s-display:contents           Apply the display "contents" to any HTMLElement
+        * @cssClass                 s-display:flex           Apply the display "flex" to any HTMLElement
+        * @cssClass                 s-display:grid           Apply the display "grid" to any HTMLElement
+        * @cssClass                 s-display:inline-flex           Apply the display "inline-flex" to any HTMLElement
+        * @cssClass                 s-display:inline-grid           Apply the display "inline-grid" to any HTMLElement
+        * @cssClass                 s-display:none           Apply the display "none" to any HTMLElement
+        * 
+        * @example        html
+        * <!-- block -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Block</h3>
+        *   <div class="s-display:block">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * <!-- inline-block -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline block</h3>
+        *   <div class="s-display:inline-block">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * <!-- contents -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Contens</h3>
+        *   <div class="s-display:contents">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * <!-- flex -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Flex</h3>
+        *   <div class="s-display:flex">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * <!-- grid -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grid</h3>
+        *   <div class="s-display:grid">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * <!-- inline-flex -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline flex</h3>
+        *   <div class="s-display:inline-flex">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * <!-- inline-grid -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline grid</h3>
+        *   <div class="s-display:inline-grid">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * <!-- none -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">None</h3>
+        *   <div class="s-display:none">
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *   </div>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
         
       /**
        * @name            s-display:block

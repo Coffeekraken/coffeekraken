@@ -47,7 +47,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to align things to left, right, center, etc...  on any HTMLElement
+        * These classes allows you to align things to \`left\`, \`right\`, \`center\`, etc...  on any HTMLElement
         * 
         * @support      chromium        
         * @support      firefox         
@@ -64,7 +64,7 @@ export default function ({ params, atRule, replaceWith, }) {
         return ` * <!-- align ${align} -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Align to ${align}</h3>
-            *   <div class="s-position:relative s-ratio:16-9 s-bg:main">
+            *   <div class="s-position:relative s-ratio:21-9 s-bg:main">
             *       <div class="s-ratio:16-9 s-width:10 s-bg:accent s-align:${align}"></div>
             *   </div>
             * </div>

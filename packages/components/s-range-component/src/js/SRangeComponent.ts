@@ -2,7 +2,9 @@
 
 import { html, css, unsafeCSS } from 'lit';
 import __SRangeComponentInterface from './interface/SRangeComponentInterface';
-import __SLitComponent, { ISLitComponentDefaultProps } from '@coffeekraken/s-lit-component';
+import __SLitComponent, {
+    ISLitComponentDefaultProps,
+} from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __css from '../css/s-range.css';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -21,8 +23,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * displaying the value automatically in tooltip or inline.
  *
  * @feature         All the built-in input type range features are supported
- * @feature         Can display a tooltip on top of the thumb to help user know what's the current value
- * @feature         Can have target(s) that will be automatically filled with the current value
+ * @feature         Can **display a tooltip** on top of the thumb to help user know what's the current value
+ * @feature         Can have target(s) that will be **automatically filled with the current value**
  * @feature         Support for sugar theming system when activate default style
  *
  * @support         chromium
@@ -103,7 +105,9 @@ export default class SRange extends __SLitComponent {
 
         // get target(s)
         if (this.props.target) {
-            this._$targets = Array.from(document.querySelectorAll(this.props.target));
+            this._$targets = Array.from(
+                document.querySelectorAll(this.props.target),
+            );
         }
 
         // init
@@ -123,14 +127,24 @@ export default class SRange extends __SLitComponent {
         const min = this._$input.min ? this._$input.min : 0;
         const max = this._$input.max ? this._$input.max : 100;
         const newVal = Number(((val - min) * 100) / (max - min));
-        this._$tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+        this._$tooltip.style.left = `calc(${newVal}% + (${
+            8 - newVal * 0.15
+        }px))`;
         this._$tooltip.innerHTML = val;
     }
     render() {
         return html`
-            <div class="${this.componentUtils.className('', 's-tooltip-container')}">
+            <div
+                class="${this.componentUtils.className(
+                    '',
+                    's-tooltip-container',
+                )}"
+            >
                 <input
-                    class="${this.componentUtils.className('__input', 's-range')}"
+                    class="${this.componentUtils.className(
+                        '__input',
+                        's-range',
+                    )}"
                     type="range"
                     name="${this.name}"
                     value="${this.value}"
@@ -139,7 +153,14 @@ export default class SRange extends __SLitComponent {
                     step="${this.step}"
                 />
                 ${this.props.tooltip
-                    ? html` <div class="${this.componentUtils.className('__tooltip', 's-tooltip')}"></div> `
+                    ? html`
+                          <div
+                              class="${this.componentUtils.className(
+                                  '__tooltip',
+                                  's-tooltip',
+                              )}"
+                          ></div>
+                      `
                     : ''}
             </div>
         `;
@@ -158,7 +179,10 @@ export default class SRange extends __SLitComponent {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export function define(props: Partial<ISRangeComponentProps> = {}, tagName = 's-range') {
+export function define(
+    props: Partial<ISRangeComponentProps> = {},
+    tagName = 's-range',
+) {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SRange);
 }

@@ -1,5 +1,5 @@
 <section id="features-development" class="s-container s-pbe:100">
-    <div class="s-grid:122:gutter-x:gutter-between">
+    <div class="s-layout:122:gutter-x:gutter-between">
 
         <div class="s-pb:100">
             <h3 class="s-typo:h3 s-mbe:30">Built-in<br />development<br>stack</h3>
@@ -38,7 +38,7 @@ sugar start
         </div>
     </div>
 
-    <div class="s-grid:112:gutter-x:gutter-between:align-center s-pb:50">
+    <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
 
         <div>
 

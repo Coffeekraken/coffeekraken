@@ -72,12 +72,6 @@ export default function ({
                 margin-top: 0.5em;
             }  
         }
-
-        @sugar.rhythm.vertical {
-            ${__jsObjectToCssProperties(
-                __theme().config('ui.list.:rhythmVertical'),
-            )}
-        } 
         `);
     }
 

@@ -24,8 +24,8 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'tf'],
-            default: ['bare', 'lnf', 'tf'],
+            values: ['bare', 'lnf', 'tf', 'vr'],
+            default: ['bare', 'lnf', 'tf', 'vr'],
         },
     };
 }
@@ -34,7 +34,7 @@ export interface IPostcssSugarPluginUiListClassesParams {
     styles: ('ul' | 'ol' | 'icon')[];
     defaultColor: string;
     defaultStyle: 'ul' | 'ol' | 'icon';
-    scope: ('bare' | 'lnf' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiListClassesInterface as interface };
@@ -74,10 +74,10 @@ export default function ({
         * 
         * These classes allows you to apply list styles to any ul, ol, dl, etc...
         * 
-        * @feature          Support for vertical rhythm through the "s-rhythm:vertical" class
-        * @feature          Support for text formatting through the "s-format:text" class
-        * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-color:..." class
+        * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
+        * @feature          Support for text formatting through the \`s-format:text\` class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
         * 
         * @support          chromium
         * @support          firefox
@@ -273,8 +273,6 @@ export default function ({
             * 
             * This class represent a simple ul tag in the s-format:text scope
             * 
-            * @feature      Vertical rhythm
-            * 
             * @example        html
             * <div class="s-format:text">
             *   <ul>
@@ -293,9 +291,6 @@ export default function ({
                     @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(
                         ',',
                     )}');
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.list.:rhythmVertical'),
-                    )}
                 } 
             }
         `);
@@ -305,8 +300,6 @@ export default function ({
             * @type           CssClass
             * 
             * This class represent a simple ol tag in the s-format:text scope
-            * 
-            * @feature      Vertical rhythm
             * 
             * @example        html
             * <div class="s-format:text">
@@ -326,8 +319,43 @@ export default function ({
                     @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(
                         ',',
                     )}');
+                } 
+            }
+        `);
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`/**
+            * @name           s-rhythm:vertical
+            * @namespace      sugar.css.ui.list
+            * @type           CssClass
+            * 
+            * This class represent some lists in the s-rhythm:vertical scope
+            * 
+            * @feature      Vertical rhythm
+            * 
+            * @example        html
+            * <div class="s-rhythm:vertical">
+            *   <ul class="s-list:ul">
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *   </ul>
+            *   <ol class="s-list:ol">
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *       <li>Hello world</li>
+            *   </ol>
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            @sugar.rhythm.vertical {
+                ul, .s-list--ul,
+                ol, .s-list--ol {
                     ${jsObjectToCssProperties(
-                        __theme().config('ui.list.:rhythmVertical'),
+                        __theme().config('ui.list.rhythmVertical'),
                     )}
                 } 
             }

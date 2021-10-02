@@ -23,8 +23,8 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'tf'],
-            default: ['bare', 'lnf', 'tf'],
+            values: ['bare', 'lnf', 'tf', 'vr'],
+            default: ['bare', 'lnf', 'tf', 'vr'],
         },
     };
 }
@@ -33,7 +33,7 @@ export interface IPostcssSugarPluginUiCheckboxClassesParams {
     styles: 'solid'[];
     defaultColor: string;
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'tf','vr')[];
 }
 
 export { postcssSugarPluginUiCheckboxClassesInterface as interface };
@@ -73,8 +73,8 @@ export default function ({
         * 
         * These classes allows you to display nice checkbox in your forms
         * 
-        * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-color:..." class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
         * 
         * @support          chromium
         * @support          firefox
@@ -171,7 +171,7 @@ export default function ({
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
         *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the "input[type="chockbox"" tags inside the "s-format:text" class scope will be styled automatically using the default style and color.
+        *       Text format mean that all the \`input[type="chockbox"\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
         *   </p>
         *   <div class="s-format:text">
         *     <input type="checkbox" />
@@ -221,13 +221,11 @@ export default function ({
 
     if (finalParams.scope.indexOf('tf') !== -1) {
         vars.push(`/**
-            * @name           s-format:text input[type="checkbox"]
+            * @name           s-format:text
             * @namespace      sugar.css.ui.checkbox
             * @type           CssClass
             * 
             * This class represent a simple input[type="checkbox"] tag in the s-format:text scope
-            * 
-            * @feature      Vertical rhythm
             * 
             * @example        html
             * <div class="s-format:text">
@@ -245,8 +243,35 @@ export default function ({
                     @sugar.ui.checkbox($scope: '${finalParams.scope.join(
                         ',',
                     )}');
+                } 
+            }
+        `);
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`/**
+            * @name           s-rhythm:vertical
+            * @namespace      sugar.css.ui.checkbox
+            * @type           CssClass
+            * 
+            * This class represent some input[type="checkbox"] in the s-rhythm:vertical scope
+            * 
+            * @feature      Vertical rhythm
+            * 
+            * @example        html
+            * <div class="s-rhythm:vertical">
+            *   <input class="s-checkbox" type="checkbox" checked />
+            *   <input class="s-checkbox" type="checkbox" checked />
+            *   <input class="s-checkbox" type="checkbox" checked />
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            @sugar.rhythm.vertical {
+                input[type="checkbox"], .s-checkbox {
                     ${jsObjectToCssProperties(
-                        __theme().config('ui.checkbox.:rhythmVertical'),
+                        __theme().config('ui.checkbox.rhythmVertical'),
                     )}
                 } 
             }

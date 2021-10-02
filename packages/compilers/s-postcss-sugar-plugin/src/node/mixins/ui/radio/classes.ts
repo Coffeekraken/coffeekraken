@@ -38,11 +38,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiRangeClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
@@ -67,8 +69,8 @@ export default function ({
         * 
         * These classes allows you to display nice radio in your forms
         * 
-        * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-color:..." class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
         * 
         * @support          chromium
         * @support          firefox
@@ -165,7 +167,7 @@ export default function ({
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
         *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the "input[type="chockbox"" tags inside the "s-format:text" class scope will be styled automatically using the default style and color.
+        *       Text format mean that all the \`input[type="chockbox"\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
         *   </p>
         *   <div class="s-format:text">
         *     <input type="radio" />
@@ -232,6 +234,36 @@ export default function ({
                 input[type="radio"] {
                     @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.radio($scope: '${finalParams.scope.join(',')}');
+                } 
+            }
+        `);
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`/**
+            * @name           s-rhythm:vertical
+            * @namespace      sugar.css.ui.radio
+            * @type           CssClass
+            * 
+            * This class represent some input[type="radio"] in the s-rhythm:vertical scope
+            * 
+            * @feature      Vertical rhythm
+            * 
+            * @example        html
+            * <div class="s-rhythm:vertical">
+            *   <input class="s-radio" type="radio" name="my-radio" checked />
+            *   <input class="s-radio" type="radio" name="my-radio" />
+            *   <input class="s-radio" type="radio" name="my-radio" />
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            @sugar.rhythm.vertical {
+                input[type="radio"], .s-radio {
+                    ${jsObjectToCssProperties(
+                        __theme().config('ui.radio.rhythmVertical'),
+                    )}
                 } 
             }
         `);

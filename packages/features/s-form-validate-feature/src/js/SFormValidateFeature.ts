@@ -21,9 +21,9 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @platform        ts
  * @status          beta
  *
- * This feature allows you to validate your forms by using under the hood the AMAZING joi library.
- * For now, you can validate data types like "string", "number" or  "boolean" with options like "email",
- * "date", "greater", "less", "min", "max", and a lot more.
+ * This feature allows you to validate your forms by using under the hood the **AMAZING joi library**.
+ * For now, you can validate data types like `string`, `number` or  `boolean` with options like `email`,
+ * `date`, `greater`, `less`, `min`, `max`, and a lot more.
  *
  * @support          chromium
  * @support          firefox
@@ -135,7 +135,8 @@ export default class SFormValidateFeature extends __SFeature {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    private _validationType: 'string' | 'date' | 'number' | 'boolean' = 'string';
+    private _validationType: 'string' | 'date' | 'number' | 'boolean' =
+        'string';
 
     /**
      * @name        _schema
@@ -153,8 +154,11 @@ export default class SFormValidateFeature extends __SFeature {
 
     // @ts-ignore
     constructor(name: string, node: HTMLElement, settings: any) {
-        Object.keys(__SComponentUtils.getDefaultProps(name)?.customValidations).forEach((validationName) => {
-            if (__SFormValidateFeatureInterface.definition[validationName]) return;
+        Object.keys(
+            __SComponentUtils.getDefaultProps(name)?.customValidations,
+        ).forEach((validationName) => {
+            if (__SFormValidateFeatureInterface.definition[validationName])
+                return;
             __SFormValidateFeatureInterface.definition[validationName] = {
                 type: 'String|Boolean',
             };
@@ -228,7 +232,10 @@ export default class SFormValidateFeature extends __SFeature {
             // custom validations
             if (this.props.customValidations[prop]) {
                 isCustom = true;
-                schema = schema.custom(this.props.customValidations[prop], prop);
+                schema = schema.custom(
+                    this.props.customValidations[prop],
+                    prop,
+                );
             } else {
                 const propValue = this.props[prop];
                 if (propValue === true && typeof schema[prop] === 'function') {
@@ -250,7 +257,10 @@ export default class SFormValidateFeature extends __SFeature {
     _isValidating = false;
     validate(event?) {
         // stop form send action
-        if (event?.currentTarget?.tagName.toLowerCase() === 'form' && event.type !== 'reset') {
+        if (
+            event?.currentTarget?.tagName.toLowerCase() === 'form' &&
+            event.type !== 'reset'
+        ) {
             event.preventDefault();
         }
 
@@ -292,9 +302,9 @@ export default class SFormValidateFeature extends __SFeature {
     }
 
     _validateCheckbox() {
-        const checkboxesValues = Array.from(this.node.querySelectorAll('input[type="checkbox"]:checked')).map(
-            ($item) => (<HTMLInputElement>$item).value,
-        );
+        const checkboxesValues = Array.from(
+            this.node.querySelectorAll('input[type="checkbox"]:checked'),
+        ).map(($item) => (<HTMLInputElement>$item).value);
         let schema = __joi.array();
         if (this.props.min) {
             schema = schema.min(this.props.min);
@@ -341,7 +351,9 @@ export default class SFormValidateFeature extends __SFeature {
 
     _validateSelect() {
         // min max
-        const selectedItems = Array.from(this._$field.querySelectorAll('option'))
+        const selectedItems = Array.from(
+            this._$field.querySelectorAll('option'),
+        )
             .filter(($item) => (<HTMLOptionElement>$item).selected)
             .map(($item) => (<HTMLOptionElement>$item).value);
 
@@ -374,16 +386,23 @@ export default class SFormValidateFeature extends __SFeature {
             // @ts-ignore
             const marginBottom = getComputedStyle(this.node).marginBottom;
             // wrap item into an error container
-            let $container = (<HTMLElement>this.node.parentNode)?.hasAttribute?.('s-form-validate-error-container')
+            let $container = (<HTMLElement>(
+                this.node.parentNode
+            ))?.hasAttribute?.('s-form-validate-error-container')
                 ? this.node.parentNode
                 : undefined;
 
             if (!$container && this.props.wrap) {
                 $container = document.createElement('div');
                 // @ts-ignore
-                $container.setAttribute('s-form-validate-error-container', 'true');
+                $container.setAttribute(
+                    's-form-validate-error-container',
+                    'true',
+                );
                 // @ts-ignore
-                $container.classList.remove(...this.props.validClass.split(' '));
+                $container.classList.remove(
+                    ...this.props.validClass.split(' '),
+                );
                 // @ts-ignore
                 $container.classList.add(...this.props.errorClass.split(' '));
                 // @ts-ignore
@@ -400,14 +419,23 @@ export default class SFormValidateFeature extends __SFeature {
 
             // display error if needed
             if (this.props.displayError) {
-                const alreadyExists = !!$container?.querySelector('p[s-form-validate-error-message]');
+                const alreadyExists = !!$container?.querySelector(
+                    'p[s-form-validate-error-message]',
+                );
 
                 const $error = alreadyExists
-                    ? <HTMLElement>$container?.querySelector('p[s-form-validate-error-message]')
+                    ? <HTMLElement>(
+                          $container?.querySelector(
+                              'p[s-form-validate-error-message]',
+                          )
+                      )
                     : document.createElement('p');
 
                 if (!alreadyExists) {
-                    $error.setAttribute('s-form-validate-error-message', 'true');
+                    $error.setAttribute(
+                        's-form-validate-error-message',
+                        'true',
+                    );
                     $error.setAttribute('class', this.props.errorMessageClass);
                     $error.innerHTML = res.error.message;
                     $error.style.marginBottom = marginBottom;
@@ -431,12 +459,15 @@ export default class SFormValidateFeature extends __SFeature {
             // unwrap the field
             if (this.props.wrap) {
                 const $container = <HTMLElement>this.node.parentNode;
-                if (!$container.hasAttribute('s-form-validate-error-container')) return;
+                if (!$container.hasAttribute('s-form-validate-error-container'))
+                    return;
                 __insertAfter(this.node, $container);
                 $container?.remove();
             } else {
                 const $errorMessage = <HTMLElement>this.node.nextSibling;
-                if ($errorMessage?.hasAttribute('s-form-validate-error-message')) {
+                if (
+                    $errorMessage?.hasAttribute('s-form-validate-error-message')
+                ) {
                     $errorMessage?.remove();
                 }
             }
@@ -444,6 +475,9 @@ export default class SFormValidateFeature extends __SFeature {
     }
 }
 
-export function register(props: Partial<ISFormValidateFeatureProps> = {}, name = 's-form-validate') {
+export function register(
+    props: Partial<ISFormValidateFeatureProps> = {},
+    name = 's-form-validate',
+) {
     __SFeature.registerFeature(name, SFormValidateFeature, props);
 }

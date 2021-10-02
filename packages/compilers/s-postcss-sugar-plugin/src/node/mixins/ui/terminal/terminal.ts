@@ -5,7 +5,7 @@ import __theme from '../../../utils/theme';
 import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiTerminalInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginUiTerminalParams {}
@@ -13,32 +13,34 @@ export interface IPostcssSugarPluginUiTerminalParams {}
 export { postcssSugarPluginUiTerminalInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiTerminalParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiTerminalParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiTerminalParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiTerminalParams = {
+        ...params,
+    };
 
-  const vars: string[] = [`@sugar.ui.base(terminal);`];
+    const vars: string[] = [`@sugar.ui.base(terminal);`];
 
-  // bare
-  vars.push(`
+    // bare
+    vars.push(`
       &:before {
           content: '$';
           color: sugar.color(complementary);
       }
 
       @sugar.rhythm.vertical {
-        ${__jsObjectToCssProperties(__theme().config('ui.terminal.:rhythmVertical'))}
+        ${__jsObjectToCssProperties(
+            __theme().config('ui.terminal.rhythmVertical'),
+        )}
     } 
 
     `);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

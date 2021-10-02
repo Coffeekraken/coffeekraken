@@ -1,5 +1,5 @@
 @php
-    $titleStr = 'wefwef';
+    $titleStr = '';
 @endphp
 
 @if ($block->see)
@@ -207,7 +207,7 @@
     @foreach ($block->see as $see)
         <section class="s-bg:ui-surface s-border:radius">
             @if ($see->og)
-                <div class="s-grid:122">
+                <div class="s-layout:122">
                     <div class="s-ratio:1-1 s-bg:accent s-border:radius">
                         <img src="{{ $see->og->ogImage->url }}" />
                     </div>

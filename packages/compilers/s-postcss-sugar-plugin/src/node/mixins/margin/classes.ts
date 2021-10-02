@@ -67,29 +67,29 @@ export default function ({
             .map((spaceName) => {
                 if (spaceName === 'default') return '';
                 return [
-                    `* @cssClass     s-m:${spaceName}        Apply the ${spaceName} space all around`,
-                    `* @cssClass     s-mb:${spaceName}        Apply the ${spaceName} block start and end space`,
-                    `* @cssClass     s-mbs:${spaceName}        Apply the ${spaceName} block start space`,
-                    `* @cssClass     s-mbe:${spaceName}        Apply the ${spaceName} block end space`,
-                    `* @cssClass     s-mi:${spaceName}        Apply the ${spaceName} inline start and end space`,
-                    `* @cssClass     s-mis:${spaceName}        Apply the ${spaceName} inline start space`,
-                    `* @cssClass     s-mie:${spaceName}        Apply the ${spaceName} inline end space`,
-                    `* @cssClass     s-mb:-${spaceName}        Apply the ${spaceName} negative block start and end space`,
-                    `* @cssClass     s-mbs:-${spaceName}        Apply the ${spaceName} negative block start space`,
-                    `* @cssClass     s-mbe:-${spaceName}        Apply the ${spaceName} negative block end space`,
-                    `* @cssClass     s-mi:-${spaceName}        Apply the ${spaceName} negative inline start and end space`,
-                    `* @cssClass     s-mis:-${spaceName}        Apply the ${spaceName} negative inline start space`,
-                    `* @cssClass     s-mie:-${spaceName}        Apply the ${spaceName} negative inline end space`,
+                    `* @cssClass     s-m:${spaceName}        Apply the \`${spaceName}\` space all around`,
+                    `* @cssClass     s-mb:${spaceName}        Apply the \`${spaceName}\` block start and end space`,
+                    `* @cssClass     s-mbs:${spaceName}        Apply the \`${spaceName}\` block start space`,
+                    `* @cssClass     s-mbe:${spaceName}        Apply the \`${spaceName}\` block end space`,
+                    `* @cssClass     s-mi:${spaceName}        Apply the \`${spaceName}\` inline start and end space`,
+                    `* @cssClass     s-mis:${spaceName}        Apply the \`${spaceName}\` inline start space`,
+                    `* @cssClass     s-mie:${spaceName}        Apply the \`${spaceName}\` inline end space`,
+                    `* @cssClass     s-mb:-${spaceName}        Apply the \`${spaceName}\` negative block start and end space`,
+                    `* @cssClass     s-mbs:-${spaceName}        Apply the \`${spaceName}\` negative block start space`,
+                    `* @cssClass     s-mbe:-${spaceName}        Apply the \`${spaceName}\` negative block end space`,
+                    `* @cssClass     s-mi:-${spaceName}        Apply the \`${spaceName}\` negative inline start and end space`,
+                    `* @cssClass     s-mis:-${spaceName}        Apply the \`${spaceName}\` negative inline start space`,
+                    `* @cssClass     s-mie:-${spaceName}        Apply the \`${spaceName}\` negative inline end space`,
                 ].join('\n');
             })
             .join('\n')}
-        * @cssClass                s-m:auto            Apply the auto space all around
-        * @cssClass                s-mb:auto          Apply the auto block start and end space
-        * @cssClass                s-mbs:auto          Apply the auto block start space
-        * @cssClass                s-mbe:auto          Apply the auto block end space
-        * @cssClass                s-mi:auto          Apply the auto inline start and end space
-        * @cssClass                s-mis:auto          Apply the auto inline start space
-        * @cssClass                s-mie:auto          Apply the auto inline end space
+        * @cssClass                s-m:auto            Apply the \`auto\` space all around
+        * @cssClass                s-mb:auto          Apply the \`auto\` block start and end space
+        * @cssClass                s-mbs:auto          Apply the \`auto\` block start space
+        * @cssClass                s-mbe:auto          Apply the \`auto\` block end space
+        * @cssClass                s-mi:auto          Apply the \`auto\` inline start and end space
+        * @cssClass                s-mis:auto          Apply the \`auto\` inline start space
+        * @cssClass                s-mie:auto          Apply the \`auto\` inline end space
         *
         * 
         * @example        html

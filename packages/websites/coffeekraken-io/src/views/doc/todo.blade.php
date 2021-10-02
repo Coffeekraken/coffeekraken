@@ -20,7 +20,7 @@
                     <div class="s-tooltip:nowrap">
                         {{ $todo->priority }} priority
                     </div>
-                </span>&nbsp;&nbsp;{{ $todo->description }}
+                </span>&nbsp;&nbsp;{!! $todo->description !!}
             </li>
         @endforeach
     </ul>

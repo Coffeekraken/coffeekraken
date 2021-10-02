@@ -53,7 +53,7 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to align things to left, right, center, etc...  on any HTMLElement
+        * These classes allows you to align things to \`left\`, \`right\`, \`center\`, etc...  on any HTMLElement
         * 
         * @support      chromium        
         * @support      firefox         

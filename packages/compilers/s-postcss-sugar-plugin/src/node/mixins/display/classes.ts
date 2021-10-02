@@ -53,7 +53,7 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to apply the some display like "inline", "inline-block", "block", etc...
+        * These classes allows you to apply the some display like \`inline\`, \`inline-block\`, \`block\`, etc...
         * on any HTMLElement
         * 
         * @support      chromium
@@ -61,14 +61,14 @@ export default function ({
         * @support      safari
         * @support      edge
         * 
-        * @cssClass                 s-display:block           Apply the display "block" to any HTMLElement
-        * @cssClass                 s-display:inline-block           Apply the display "inline-block" to any HTMLElement
-        * @cssClass                 s-display:contents           Apply the display "contents" to any HTMLElement
-        * @cssClass                 s-display:flex           Apply the display "flex" to any HTMLElement
-        * @cssClass                 s-display:grid           Apply the display "grid" to any HTMLElement
-        * @cssClass                 s-display:inline-flex           Apply the display "inline-flex" to any HTMLElement
-        * @cssClass                 s-display:inline-grid           Apply the display "inline-grid" to any HTMLElement
-        * @cssClass                 s-display:none           Apply the display "none" to any HTMLElement
+        * @cssClass                 s-display:block           Apply the display \`block\` to any HTMLElement
+        * @cssClass                 s-display:inline-block           Apply the display \`inline-block\` to any HTMLElement
+        * @cssClass                 s-display:contents           Apply the display \`contents\` to any HTMLElement
+        * @cssClass                 s-display:flex           Apply the display \`flex\` to any HTMLElement
+        * @cssClass                 s-display:grid           Apply the display \`grid\` to any HTMLElement
+        * @cssClass                 s-display:inline-flex           Apply the display \`inline-flex\` to any HTMLElement
+        * @cssClass                 s-display:inline-grid           Apply the display \`inline-grid\` to any HTMLElement
+        * @cssClass                 s-display:none           Apply the display \`none\` to any HTMLElement
         * 
         * @example        html
         * <!-- block -->

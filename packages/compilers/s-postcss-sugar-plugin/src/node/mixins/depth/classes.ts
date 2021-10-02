@@ -54,7 +54,7 @@ export default function ({
         * @status       beta
         * 
         * These classes allows you to apply some depth shadows to any HTMLElement.
-        * These depths are defined in the theme configuration under "theme.depth" namespace.
+        * These depths are defined in the theme configuration under \`theme.depth\` namespace.
         * 
         * @support      chromium        
         * @support      firefox         

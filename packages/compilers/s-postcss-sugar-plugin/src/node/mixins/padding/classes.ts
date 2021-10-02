@@ -67,19 +67,19 @@ export default function ({
             .map((spaceName) => {
                 if (spaceName === 'default') return '';
                 return [
-                    `* @cssClass     s-p:${spaceName}        Apply the ${spaceName} padding all around`,
-                    `* @cssClass     s-pb:${spaceName}        Apply the ${spaceName} block start and end padding`,
-                    `* @cssClass     s-pbs:${spaceName}        Apply the ${spaceName} block start padding`,
-                    `* @cssClass     s-pbe:${spaceName}        Apply the ${spaceName} block end padding`,
-                    `* @cssClass     s-pi:${spaceName}        Apply the ${spaceName} inline start and end padding`,
-                    `* @cssClass     s-pis:${spaceName}        Apply the ${spaceName} inline start padding`,
-                    `* @cssClass     s-pie:${spaceName}        Apply the ${spaceName} inline end padding`,
-                    `* @cssClass     s-pb:-${spaceName}        Apply the ${spaceName} negative block start and end padding`,
-                    `* @cssClass     s-pbs:-${spaceName}        Apply the ${spaceName} negative block start padding`,
-                    `* @cssClass     s-pbe:-${spaceName}        Apply the ${spaceName} negative block end padding`,
-                    `* @cssClass     s-pi:-${spaceName}        Apply the ${spaceName} negative inline start and end padding`,
-                    `* @cssClass     s-pis:-${spaceName}        Apply the ${spaceName} negative inline start padding`,
-                    `* @cssClass     s-pie:-${spaceName}        Apply the ${spaceName} negative inline end padding`,
+                    `* @cssClass     s-p:${spaceName}        Apply the \`${spaceName}\` padding all around`,
+                    `* @cssClass     s-pb:${spaceName}        Apply the \`${spaceName}\` block start and end padding`,
+                    `* @cssClass     s-pbs:${spaceName}        Apply the \`${spaceName}\` block start padding`,
+                    `* @cssClass     s-pbe:${spaceName}        Apply the \`${spaceName}\` block end padding`,
+                    `* @cssClass     s-pi:${spaceName}        Apply the \`${spaceName}\` inline start and end padding`,
+                    `* @cssClass     s-pis:${spaceName}        Apply the \`${spaceName}\` inline start padding`,
+                    `* @cssClass     s-pie:${spaceName}        Apply the \`${spaceName}\` inline end padding`,
+                    `* @cssClass     s-pb:-${spaceName}        Apply the \`${spaceName}\` negative block start and end padding`,
+                    `* @cssClass     s-pbs:-${spaceName}        Apply the \`${spaceName}\` negative block start padding`,
+                    `* @cssClass     s-pbe:-${spaceName}        Apply the \`${spaceName}\` negative block end padding`,
+                    `* @cssClass     s-pi:-${spaceName}        Apply the \`${spaceName}\` negative inline start and end padding`,
+                    `* @cssClass     s-pis:-${spaceName}        Apply the \`${spaceName}\` negative inline start padding`,
+                    `* @cssClass     s-pie:-${spaceName}        Apply the \`${spaceName}\` negative inline end padding`,
                 ].join('\n');
             })
             .join('\n')}

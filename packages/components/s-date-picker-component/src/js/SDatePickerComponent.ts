@@ -4,7 +4,10 @@ import { html, css, unsafeCSS } from 'lit';
 import { html as staticHTML } from 'lit/static-html.js';
 import { queryAsync } from 'lit/decorators.js';
 import __SDatePickerComponentInterface from './interface/SDatePickerComponentInterface';
-import __SComponentUtils, { SLitElement, ISComponentUtilsDefaultProps } from '@coffeekraken/s-lit-component';
+import __SComponentUtils, {
+    SLitElement,
+    ISComponentUtilsDefaultProps,
+} from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __pikaday from 'pikaday';
 import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
@@ -26,7 +29,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * @platform            html
  * @status              beta
  *
- * This component specify a date picker. It uses under the hood the AMAZING pikaday library with some additional features like
+ * This component specify a date picker. It uses under the hood the **AMAZING pikaday library** with some additional features like
  * sugar theming support as well as some events and more.
  * Almost all the pikaday options are available through properties. Check out the api documentation for more details...
  *
@@ -270,7 +273,10 @@ export default class SDatePicker extends __SLitComponent {
         return html`
             <div class="${this.componentUtils.className('')}">
                 <input
-                    class="${this.componentUtils.className('__input', 's-input')}"
+                    class="${this.componentUtils.className(
+                        '__input',
+                        's-input',
+                    )}"
                     type="text"
                     name="${this.name}"
                     ?rtl="${this.rtl}"
@@ -279,7 +285,13 @@ export default class SDatePicker extends __SLitComponent {
                 />
                 ${this.button
                     ? html`
-                          <button onclick="return false" class="${this.componentUtils.className('__button', 's-btn')}">
+                          <button
+                              onclick="return false"
+                              class="${this.componentUtils.className(
+                                  '__button',
+                                  's-btn',
+                              )}"
+                          >
                               ${staticHTML([this.calendarIcon])}
                           </button>
                       `
@@ -301,7 +313,10 @@ export default class SDatePicker extends __SLitComponent {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export function define(props: Partial<ISDatePickerComponentProps> = {}, tagName = 's-date-picker') {
+export function define(
+    props: Partial<ISDatePickerComponentProps> = {},
+    tagName = 's-date-picker',
+) {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDatePicker);
 }

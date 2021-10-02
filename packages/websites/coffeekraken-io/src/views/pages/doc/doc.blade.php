@@ -117,7 +117,7 @@
 
         <section class="s-container s-pb:70">
 
-            <section class="s-grid:1222">
+            <section class="s-layout:1222">
 
                 <div>
 

@@ -3,7 +3,7 @@
 
     <div class="__subnav">
 
-        <div class="s-container s-grid:1222">
+        <div class="s-container s-layout:1222">
             <ul class="__subnav-chapters">
                 @foreach($menuItem as $item)
                     @if (!$item->slug && $item->name)
@@ -17,7 +17,7 @@
                     @foreach($menuItem as $item)
                     @if (is_object($item))
                         <div class="__subnav-story" id="subnav-{{ \Sugar\string\idCompliant($item->name) }}">
-                            <div class="s-grid:12">
+                            <div class="s-layout:12">
                                 <ul>
                                     @foreach($item as $subItem)
                                         @if ($subItem->slug)

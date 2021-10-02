@@ -32,7 +32,7 @@
             background-image: url('/src/img/discord-illustration-05-bkg.png');
         }
 
-        .s-grid--12 {
+        .s-layout--12 {
             position: relative;
             z-index: 10;
         }

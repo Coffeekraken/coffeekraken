@@ -23,8 +23,8 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
                 type: 'Array<String>',
                 splitChars: [',', ' '],
             },
-            values: ['bare', 'lnf', 'tf'],
-            default: ['bare', 'lnf', 'tf'],
+            values: ['bare', 'lnf', 'tf', 'vr'],
+            default: ['bare', 'lnf', 'tf', 'vr'],
         },
     };
 }
@@ -33,7 +33,7 @@ export interface IPostcssSugarPluginUiButtonClassesParams {
     styles: ('solid' | 'gradient' | 'outline' | 'text')[];
     defaultStyle: 'solid' | 'gradient' | 'outline' | 'text';
     defaultColor: string;
-    scope: ('bare' | 'lnf' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiButtonClassesInterface as interface };
@@ -53,7 +53,7 @@ export default function ({
         styles: ['solid', 'gradient', 'outline', 'text'],
         defaultStyle: 'solid',
         defaultColor: 'ui',
-        scope: ['bare', 'lnf', 'tf'],
+        scope: ['bare', 'lnf', 'tf', 'vr'],
         ...params,
     };
 
@@ -70,10 +70,10 @@ export default function ({
         * 
         * These classes allows you to display any HTMLElement as a button
         * 
-        * @feature          Support for vertical rhythm through the "s-rhythm:vertical" class
-        * @feature          Support for text formatting through the "s-format:text" class
-        * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-color:..." class
+        * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
+        * @feature          Support for text formatting through the \`s-format:text\` class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
         * 
         * @support          chromium
         * @support          firefox
@@ -89,7 +89,7 @@ export default function ({
             .join('\n')}
         * @cssClass            s-format:text button             Apply the button style on button tags inside the s-format:text scope 
         * @cssClass            s-btn-group s-btn                Apply the button group style on a buttons wrapper
-        * @cssClass            s-rhythm:vertical &              Apply the default vertical rhythm on scoped button(s)
+        * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped button(s)
         * 
         * @example        html
         ${finalParams.styles
@@ -240,8 +240,6 @@ export default function ({
             * 
             * This class represent a simple button tag in the s-format:text scope
             * 
-            * @feature      Support vertical rhythm
-            * 
             * @example        html
             * <div class="s-format:text">
             *   <button>
@@ -256,8 +254,41 @@ export default function ({
                 button {
                     @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
+                } 
+            }
+        `);
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`/**
+            * @name           s-rhythm:vertical
+            * @namespace      sugar.css.ui.button
+            * @type           CssClass
+            * 
+            * This class represent some buttons in the s-rhythm:vertical scope
+            * 
+            * @example        html
+            * <div class="s-rhythm:vertical">
+            *   <button class="s-btn">
+            *       Hello world
+            *   </button>
+            *   <br />
+            *   <button class="s-btn">
+            *       Hello world
+            *   </button>
+            *   <br />
+            *   <button class="s-btn">
+            *       Hello world
+            *   </button>
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            @sugar.rhythm.vertical {
+                button, .s-btn {
                     ${jsObjectToCssProperties(
-                        __theme().config('ui.button.:rhythmVertical'),
+                        __theme().config('ui.button.rhythmVertical'),
                     )}
                 } 
             }

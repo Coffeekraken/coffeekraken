@@ -63,7 +63,7 @@ export default function ({
         * 
         ${Object.keys(fontsFamiliesObj)
             .map((fontName) => {
-                return `* @cssClass      s-font\:${fontName}       Apply the ${fontName} font on any HTMLElement`;
+                return `* @cssClass      s-font\:${fontName}       Apply the \`${fontName}\` font on any HTMLElement`;
             })
             .join('\n ')}
         * 
@@ -125,7 +125,7 @@ export default function ({
         * 
         ${Object.keys(fontsSizesObj)
             .map((fontSize) => {
-                return `* @cssClass      s-font\:${fontSize}       Apply the ${fontSize} font size on any HTMLElement`;
+                return `* @cssClass      s-font\:${fontSize}       Apply the \`${fontSize}\` font size on any HTMLElement`;
             })
             .join('\n ')}
         * 
@@ -178,7 +178,7 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to reset fonts like size, family, etc...
+        * These classes allows you to **reset fonts** like \`size\`, \`family\`, etc...
         * 
         * @cssClass           s-font\:reset-size          Reset the size to 1rem
         * @cssClass           s-font\:reset-family        Reset to the default font

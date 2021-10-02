@@ -11,7 +11,7 @@
                     {{ $cls->name }}
                 </div>
             </header>
-            <p class="s-typo:p s-p:20">{{ $cls->description }}</p> 
+            <p class="s-typo:p s-p:20">{!! $cls->description !!}</p> 
         </li>                                   
     @endforeach
     </ol>

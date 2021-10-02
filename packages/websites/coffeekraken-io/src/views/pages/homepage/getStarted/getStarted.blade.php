@@ -1,6 +1,6 @@
 <section id="get-started">
 
-    <div class="s-grid:12 s-container">
+    <div class="s-layout:12 s-container">
         <div>
 
             <h2 class="s-typo:h2 s-mbe:50">

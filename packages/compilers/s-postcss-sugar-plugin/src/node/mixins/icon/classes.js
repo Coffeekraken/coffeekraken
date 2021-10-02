@@ -11,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * The icons parameter define all the icons you want. Each line define a new icon and you can use these
  * different "adapters" to specify your icons:
  *
- * - Line syntax: {adapter}:{iconName}:{iconNameYouWant}
+ * - Line syntax: {adapter}:{name}:{nameYouWant}
  *
  * Available adapters are:
  *
@@ -54,76 +54,171 @@ postcssSugarPluginIconClassesInterface.definition = {
     icons: {
         type: {
             type: 'Array<String>',
-            splitChars: [',', ' ', '\n']
+            splitChars: [',', ' ', '\n'],
         },
         default: [],
-        required: true
-    }
+        required: true,
+    },
 };
 export { postcssSugarPluginIconClassesInterface as interface };
-export default function ({ params, atRule, replaceWith }) {
+export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({ icons: [] }, params);
-    const vars = [];
-    finalParams.icons.forEach(icon => {
+    const icons = finalParams.icons.map((iconStr) => {
         var _a;
-        const protocol = icon.split(':')[0];
-        // fontawesome
-        if (protocol === 'fa' || protocol === 'fab' || protocol === 'far' || protocol === 'fal' || protocol === 'fad') {
-            // const as = icon.split(':')[1] ?? iconName;
-            const splits = icon.split(':');
-            const faIconName = splits[1];
-            const as = (_a = splits[2]) !== null && _a !== void 0 ? _a : faIconName;
-            vars.push(`
-        /**
-         * @name        s-icon:${as}
-          * @namespace      sugar.css.icon
-          * @type           CssClass
-          * @platform       css
-          * @status         beta
-          *
-          * This class allows you to display the "<yellow>${as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
-          *
-          * @example        html
-          * <i class="s-icon\:${as} s-font\:20"></i>
-          * <i class="s-icon\:${as} s-font\:40"></i>
-          * <i class="s-icon\:${as} s-font\:60"></i>
-          * <i class="s-icon\:${as} s-font\:80"></i>
-          * <i class="s-icon\:${as} s-font\:100"></i>
-          */
-          .s-icon--${as} {
-            @sugar.icon.fa(${faIconName}, ${protocol});
-          }
-      `);
+        const protocol = iconStr.split(':')[0];
+        let splits, name, as;
+        switch (protocol) {
+            case 'fa':
+            case 'fab':
+            case 'far':
+            case 'fal':
+            case 'fad':
+                splits = iconStr.split(':');
+                name = splits[1];
+                as = (_a = splits[2]) !== null && _a !== void 0 ? _a : name;
+                return {
+                    str: iconStr,
+                    protocol,
+                    name,
+                    as,
+                };
+                break;
+            case 'fs':
+                splits = iconStr.split(':');
+                const path = splits[1];
+                as = splits[2];
+                return {
+                    str: iconStr,
+                    protocol,
+                    path,
+                    icon: as,
+                    as: as,
+                };
+                break;
         }
-        // filesystem
-        if (protocol === 'fs') {
-            // const as = icon.split(':')[1] ?? iconName;
-            const splits = icon.split(':');
-            const path = splits[1];
-            const as = splits[2];
-            vars.push(`
-        /**
-         * @name        s-icon:${as}
-          * @namespace      sugar.css.icon
-          * @type           CssClass
-          * @platform         css
-          * @status         beta
-          *
-          * This class allows you to display the "<yellow>${as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
-          *
-          * @example        html
-          * <i class="s-icon\:${as} s-font\:20"></i>
-          * <i class="s-icon\:${as} s-font\:40"></i>
-          * <i class="s-icon\:${as} s-font\:60"></i>
-          * <i class="s-icon\:${as} s-font\:80"></i>
-          * <i class="s-icon\:${as} s-font\:100"></i>
-          */
-          .s-icon--${as} {
-            @sugar.icon.fs(${path}, ${as});
-          }
-      `);
+    });
+    const vars = [];
+    vars.push(`
+      /**
+        * @name          Icons
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/icons
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes represent all the icons that you have listed in your project using the \`@sugar.icon.classes\` mixin.
+        * By using this mixin, your icons will be accessible using the same \`s-icon:{name}\` classes
+        * independently of the icon source that can be **Fontawesome** or your **Filesystem**.
+        * These providers are the one that we support for now but others can be added if needed.
+        * 
+        * @feature      Allows you to use multiples sources and **keep the same usage classes**
+        * @feature      Support for **Fontawesome** provider out of the box
+        * @feature      Support for **local filesystem** icons
+        * 
+        * @support      chromium        
+        * @support      firefox         
+        * @support      safari          
+        * @support      edge           
+        * 
+        ${icons
+        .map((iconObj) => {
+        // @ts-ignore
+        return ` * @cssClass      s-icon:${iconObj.as}      Display the \`${iconObj.as}\` icon`;
+    })
+        .join('\n')}
+        * 
+        * @example        html
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Icons (non-exhaustive)</h3>
+        *   <div class="s-grid:5">
+        ${icons
+        .map((iconObj) => {
+        return ` *
+        *   <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+        *     <i class="s-icon:${iconObj.as} s-font:50"></i><br/>
+        *     <p class="s-typo:p s-mbs:20">${iconObj.as}</p>
+        *     <p class="s-typo:p:bold">Source: ${iconObj === null || iconObj === void 0 ? void 0 : iconObj.protocol}</p>
+        *   </div>`;
+    })
+        .join('\n')}
+        *   </div>
+        * </div>
+        * 
+        * @example      css
+        * @sugar.icon.classes(
+        ${icons
+        .map((iconObj) => {
+        // @ts-ignore
+        return ` *    ${iconObj.str}`;
+    })
+        .join('\n')}
+        * );
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+    icons.forEach((iconObj) => {
+        switch (iconObj === null || iconObj === void 0 ? void 0 : iconObj.protocol) {
+            case 'fa':
+            case 'fab':
+            case 'far':
+            case 'fal':
+            case 'fad':
+                vars.push(`
+                /**
+                 * @name        s-icon:${iconObj.as}
+                  * @namespace      sugar.css.icon
+                  * @type           CssClass
+                  * @platform       css
+                  * @status         beta
+                  *
+                  * This class allows you to display the "<yellow>${iconObj.as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+                  *
+                  * @example        html
+                  * <i class="s-icon\:${iconObj.as} s-font\:20"></i>
+                  * <i class="s-icon\:${iconObj.as} s-font\:40"></i>
+                  * <i class="s-icon\:${iconObj.as} s-font\:60"></i>
+                  * <i class="s-icon\:${iconObj.as} s-font\:80"></i>
+                  * <i class="s-icon\:${iconObj.as} s-font\:100"></i>
+                  * 
+                  * @since      2.0.0
+                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                  */
+                  .s-icon--${iconObj.as} {
+                    @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
+                  }
+              `);
+                break;
+            case 'fs':
+                vars.push(`
+                    /**
+                     * @name        s-icon:${iconObj.as}
+                      * @namespace      sugar.css.icon
+                      * @type           CssClass
+                      * @platform         css
+                      * @status         beta
+                      *
+                      * This class allows you to display the "<yellow>${iconObj.as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+                      *
+                      * @example        html
+                      * <i class="s-icon\:${iconObj.as} s-font\:20"></i>
+                      * <i class="s-icon\:${iconObj.as} s-font\:40"></i>
+                      * <i class="s-icon\:${iconObj.as} s-font\:60"></i>
+                      * <i class="s-icon\:${iconObj.as} s-font\:80"></i>
+                      * <i class="s-icon\:${iconObj.as} s-font\:100"></i>
+                      * 
+                      * @since      2.0.0
+                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                      */
+                      .s-icon--${iconObj.as} {
+                        @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
+                      }
+                  `);
+                break;
         }
     });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWdERztBQUVILE1BQU0sc0NBQXVDLFNBQVEsWUFBWTs7QUFDeEQsaURBQVUsR0FBRztJQUNsQixLQUFLLEVBQUU7UUFDTCxJQUFJLEVBQUU7WUFDSixJQUFJLEVBQUUsZUFBZTtZQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUMsR0FBRyxFQUFDLElBQUksQ0FBQztTQUMzQjtRQUNELE9BQU8sRUFBRSxFQUFFO1FBQ1gsUUFBUSxFQUFFLElBQUk7S0FDZjtDQUNGLENBQUM7QUFPSixPQUFPLEVBQUUsc0NBQXNDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFL0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUN2QixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFLWjtJQUNDLE1BQU0sV0FBVyxtQkFDZixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDVixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxFQUFFOztRQUUvQixNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBRXBDLGNBQWM7UUFDZCxJQUFJLFFBQVEsS0FBSyxJQUFJLElBQUksUUFBUSxLQUFLLEtBQUssSUFBSSxRQUFRLEtBQUssS0FBSyxJQUFJLFFBQVEsS0FBSyxLQUFLLElBQUksUUFBUSxLQUFLLEtBQUssRUFBRTtZQUU3Ryw2Q0FBNkM7WUFDN0MsTUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUMvQixNQUFNLFVBQVUsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDN0IsTUFBTSxFQUFFLEdBQUcsTUFBQSxNQUFNLENBQUMsQ0FBQyxDQUFDLG1DQUFJLFVBQVUsQ0FBQztZQUVuQyxJQUFJLENBQUMsSUFBSSxDQUFDOztpQ0FFaUIsRUFBRTs7Ozs7OzREQU15QixFQUFFOzs7Z0NBRzlCLEVBQUU7Z0NBQ0YsRUFBRTtnQ0FDRixFQUFFO2dDQUNGLEVBQUU7Z0NBQ0YsRUFBRTs7cUJBRWIsRUFBRTs2QkFDTSxVQUFVLEtBQUssUUFBUTs7T0FFN0MsQ0FBQyxDQUFDO1NBQ0o7UUFFRCxhQUFhO1FBQ2IsSUFBSSxRQUFRLEtBQUssSUFBSSxFQUFFO1lBRXJCLDZDQUE2QztZQUM3QyxNQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQy9CLE1BQU0sSUFBSSxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUN2QixNQUFNLEVBQUUsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFHckIsSUFBSSxDQUFDLElBQUksQ0FBQzs7aUNBRWlCLEVBQUU7Ozs7Ozs0REFNeUIsRUFBRTs7O2dDQUc5QixFQUFFO2dDQUNGLEVBQUU7Z0NBQ0YsRUFBRTtnQ0FDRixFQUFFO2dDQUNGLEVBQUU7O3FCQUViLEVBQUU7NkJBQ00sSUFBSSxLQUFLLEVBQUU7O09BRWpDLENBQUMsQ0FBQztTQUNKO0lBRUgsQ0FBQyxDQUFDLENBQUM7SUFJSCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWdERztBQUVILE1BQU0sc0NBQXVDLFNBQVEsWUFBWTs7QUFDdEQsaURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUU7WUFDRixJQUFJLEVBQUUsZUFBZTtZQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUksQ0FBQztTQUMvQjtRQUNELE9BQU8sRUFBRSxFQUFFO1FBQ1gsUUFBUSxFQUFFLElBQUk7S0FDakI7Q0FDSixDQUFDO0FBT04sT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLEVBQUUsSUFDTixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sS0FBSyxHQUFHLFdBQVcsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7O1FBQzVDLE1BQU0sUUFBUSxHQUFHLE9BQU8sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDdkMsSUFBSSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsQ0FBQztRQUNyQixRQUFRLFFBQVEsRUFBRTtZQUNkLEtBQUssSUFBSSxDQUFDO1lBQ1YsS0FBSyxLQUFLLENBQUM7WUFDWCxLQUFLLEtBQUssQ0FBQztZQUNYLEtBQUssS0FBSyxDQUFDO1lBQ1gsS0FBSyxLQUFLO2dCQUNOLE1BQU0sR0FBRyxPQUFPLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FB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

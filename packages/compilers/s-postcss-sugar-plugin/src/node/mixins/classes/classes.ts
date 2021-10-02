@@ -44,7 +44,6 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.overflow.classes;',
         '@sugar.position.classes;',
         '@sugar.pointer.classes;',
-        '@sugar.icon.classes;',
         '@sugar.transition.classes;',
         '@sugar.margin.classes;',
         '@sugar.opacity.classes;',

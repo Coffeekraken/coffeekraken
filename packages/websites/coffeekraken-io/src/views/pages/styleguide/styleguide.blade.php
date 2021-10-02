@@ -46,7 +46,7 @@
 
         <section class="s-container markdown">
 
-            <div class="s-grid:1222:gutter-between:gutter-50">
+            <div class="s-layout:1222:gutter-between:gutter-50">
 
                 <nav class="__nav s-pb:50">
 
@@ -59,7 +59,7 @@
                     
                 </nav>
 
-                <div class="__content s-pb:50 s-rhythm:vertical s-format:text">
+                <div class="__content s-pb:50">
 
                     @include('pages.styleguide.partials.block', ['block' => $firstBlock, 'isFirst' => true])
 

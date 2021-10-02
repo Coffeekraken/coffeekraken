@@ -19,7 +19,7 @@
                     </div>
                 @endif
             </header>
-            <p class="s-typo:p s-p:20">{{ $prop->description }}</p> 
+            <p class="s-typo:p s-p:20">{!! $prop->description !!}</p> 
         </li>                                   
     @endforeach
     </ol>

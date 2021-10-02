@@ -9,7 +9,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * @platform      css
  * @status        beta
  *
- * This mixin generate all the layout helper classes like s-grid:12, s-container, etc...
+ * This mixin generate all the layout helper classes like s-layout:12, s-container, etc...
  *
  * @return        {Css}         The generated css
  *
@@ -21,7 +21,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  */
 
 class postcssSugarPluginLayoutClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginLayoutClassesParams {}
@@ -29,28 +29,30 @@ export interface IPostcssSugarPluginLayoutClassesParams {}
 export { postcssSugarPluginLayoutClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginLayoutClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginLayoutClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginLayoutClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginLayoutClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  const layoutConfig = __theme().config('layout');
+    const layoutConfig = __theme().config('layout');
 
-  const containers = layoutConfig.container;
-  Object.keys(containers).forEach(containerName => {
+    const containers = layoutConfig.container;
+    Object.keys(containers).forEach((containerName) => {
+        const cls =
+            containerName === 'default'
+                ? `s-container`
+                : `s-container:${containerName}`;
 
-      const cls = containerName === 'default' ? `s-container` : `s-container:${containerName}`;
-
-      vars.push(`/**
+        vars.push(`/**
       * @name          ${cls}
       * @namespace          sugar.css.layout
       * @type               CssClass
@@ -60,22 +62,54 @@ export default function ({
       * This class allows you to apply the "<yellow>${containerName}</yellow>" container styling to any HTMLElement
       * 
       * @example        html
-      * <div class="${cls.replace(':','\:')}">
+      * <div class="${cls.replace(':', ':')}">
       *     <h1 class="s-h1">Hello world</h1>
       * </div>
       */
-    .${cls.replace(':','--')} {
+    .${cls.replace(':', '--')} {
         @sugar.layout.container(${containerName});
     }`);
-  });
+    });
 
-  const layouts = layoutConfig.layout;
-  Object.keys(layouts).forEach((id) => {
-    const layout = layouts[id];
-    const colsCount = __unique(layout.split(/\n\s/)).length;
-    vars.push(`
+    const grids = layoutConfig.grid;
+    Object.keys(grids).forEach((id) => {
+        const grid = grids[id];
+        vars.push(`
+        /**
+         * @name       s-grid:${id}
+         * @namespace     sugar.css.layout
+         * @type          CssClass
+         * @platform      css
+         * @status      beta
+         * 
+         * This class represent a grid of "<yellow>${id}</yellow> columns"
+         * 
+         * @example     html
+         * <div class="s-container s-grid:${id}">
+         *    ${Array(12)
+             .map((idx) => {
+                 return `<div>I'm the grid item ${idx}</div>`;
+             })
+             .join('\n')}
+        * </div>
+        * 
+        * @since     2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .s-grid--${id} {
+          display: grid;
+          grid-template-columns: repeat(${grid}, minmax(0, 1fr));
+        }
+      `);
+    });
+
+    const layouts = layoutConfig.layout;
+    Object.keys(layouts).forEach((id) => {
+        const layout = layouts[id];
+        const colsCount = __unique(layout.split(/\n\s/)).length;
+        vars.push(`
       /**
-       * @name       s-grid:${id}
+       * @name       s-layout:${id}
        * @namespace     sugar.css.layout
        * @type          CssClass
        * @platform      css
@@ -84,32 +118,31 @@ export default function ({
        * This class represent a layout of "<yellow>${layout}</yellow>"
        * 
        * @example     html
-       * <div class="s-container s-grid\:${id}">
+       * <div class="s-container s-layout:${id}">
        *    ${Array(colsCount)
-         .map((idx) => {
-           return `<div>I'm the area ${idx}</div>`;
-         })
-         .join('\n')}
+           .map((idx) => {
+               return `<div>I'm the area ${idx}</div>`;
+           })
+           .join('\n')}
        * </div>
        * 
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-grid--${id} {
-        @sugar.layout.grid(${layout}, $scope: bare);
+      .s-layout--${id} {
+        @sugar.layout(${layout}, $scope: bare);
       }
     `);
-  });
+    });
 
-  const spaces = __theme().config('space');
+    const spaces = __theme().config('space');
 
-  Object.keys(spaces).forEach(spaceName => {
+    Object.keys(spaces).forEach((spaceName) => {
+        const clsX = `s-layout:gutter-x-${spaceName}`.replace('-default', '');
+        const clsY = `s-layout:gutter-y-${spaceName}`.replace('-default', '');
+        const cls = `s-layout:gutter-${spaceName}`.replace('-default', '');
 
-    const clsX = `s-grid:gutter-x-${spaceName}`.replace('-default','');
-    const clsY = `s-grid:gutter-y-${spaceName}`.replace('-default','');
-    const cls = `s-grid:gutter-${spaceName}`.replace('-default','');
-
-    vars.push(`
+        vars.push(`
       /**
        * @name       ${clsX}
        * @namespace     sugar.css.layout
@@ -117,27 +150,27 @@ export default function ({
        * @platform      css
        * @status        beta
        * 
-       * This class allows you to apply some left and right gutters on your s-grid items
+       * This class allows you to apply some left and right gutters on your s-layout items
        * 
        * @example     html
-       * <div class="s-grid\:123 ${clsX.replace(':', '\:')}">
+       * <div class="s-layout:123 ${clsX.replace(':', ':')}">
        *    ${Array(3)
-         .map((idx) => {
-           return `<div>I'm the area ${idx}</div>`;
-         })
-         .join('\n')}
+           .map((idx) => {
+               return `<div>I'm the area ${idx}</div>`;
+           })
+           .join('\n')}
        * </div>
        * 
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .${clsX.replace(':','--')} > * {
+      .${clsX.replace(':', '--')} > * {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
       }
     `);
 
-    vars.push(`
+        vars.push(`
       /**
        * @name       ${clsY}
        * @namespace     sugar.css.layout
@@ -145,27 +178,27 @@ export default function ({
        * @platform      css
        * @status        beta
        * 
-       * This class allows you to apply some left and right gutters on your s-grid items
+       * This class allows you to apply some left and right gutters on your s-layout items
        * 
        * @example     html
-       * <div class="s-grid\:123 ${clsY.replace(':','\:')}">
+       * <div class="s-layout:123 ${clsY.replace(':', ':')}">
        *    ${Array(3)
-         .map((idx) => {
-           return `<div>I'm the area ${idx}</div>`;
-         })
-         .join('\n')}
+           .map((idx) => {
+               return `<div>I'm the area ${idx}</div>`;
+           })
+           .join('\n')}
        * </div>
        * 
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-        .${clsY.replace(':','--')} > * {
+        .${clsY.replace(':', '--')} > * {
         padding-top: sugar.space(${spaceName});
         padding-bottom: sugar.space(${spaceName});
       }
     `);
 
-    vars.push(`
+        vars.push(`
       /**
        * @name       ${cls}
        * @namespace     sugar.css.layout
@@ -173,49 +206,49 @@ export default function ({
        * @platform      css
        * @status      beta
        * 
-       * This class allows you to apply some left and right gutters on your s-grid items
+       * This class allows you to apply some left and right gutters on your s-layout items
        * 
        * @example     html
-       * <div class="s-grid\:123 ${cls.replace(':','\:')}">
+       * <div class="s-layout:123 ${cls.replace(':', ':')}">
        *    ${Array(3)
-         .map((idx) => {
-           return `<div>I'm the area ${idx}</div>`;
-         })
-         .join('\n')}
+           .map((idx) => {
+               return `<div>I'm the area ${idx}</div>`;
+           })
+           .join('\n')}
        * </div>
        * 
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .${cls.replace(':','--')} > * {
+      .${cls.replace(':', '--')} > * {
         padding: sugar.space(${spaceName});
       }
     `);
-  });
+    });
 
-  vars.push(`
+    vars.push(`
      /**
-       * @name       s-grid:gutter-between
+       * @name       s-layout:gutter-between
        * @namespace     sugar.css.layout
        * @type          CssClass
        * @platform      css
        * @status      beta
        * 
-       * This class allows you to specify that you want only gutters between grid items
+       * This class allows you to specify that you want only gutters between layout items
        * 
        * @example     html
-       * <div class="s-grid\:123 s-grid\:gutter-between">
+       * <div class="s-layout:123 s-layout:gutter-between">
        *    ${Array(3)
-         .map((idx) => {
-           return `<div>I'm the area ${idx}</div>`;
-         })
-         .join('\n')}
+           .map((idx) => {
+               return `<div>I'm the area ${idx}</div>`;
+           })
+           .join('\n')}
        * </div>
        * 
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      .s-grid--gutter-between > * {
+      .s-layout--gutter-between > * {
         &:first-child {
           padding-left: 0 !important;
         }
@@ -225,11 +258,11 @@ export default function ({
       }
   `);
 
-  // align items
-  ['start','end','center','stretch'].forEach(align => {
-    vars.push(`
+    // align items
+    ['start', 'end', 'center', 'stretch'].forEach((align) => {
+        vars.push(`
       /**
-         * @name       s-grid:align-${align}
+         * @name       s-layout:align-${align}
          * @namespace     sugar.css.layout
          * @type          CssClass
          * @platform      css
@@ -238,28 +271,28 @@ export default function ({
          * This allows you to align all the items to "${align}"
          * 
          * @example     html
-         * <div class="s-grid\:123 s-grid\:align-${align}">
+         * <div class="s-layout:123 s-layout:align-${align}">
          *    ${Array(3)
-           .map((idx) => {
-             return `<div>I'm the area ${idx}</div>`;
-          })
-          .join('\n')}
+             .map((idx) => {
+                 return `<div>I'm the area ${idx}</div>`;
+             })
+             .join('\n')}
         * </div>
         * 
         * @since     2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-        .s-grid--align-${align} {
+        .s-layout--align-${align} {
           align-items: ${align};
         }
     `);
-  });
+    });
 
-  // justify items
-  ['start','end','center','stretch'].forEach(justify => {
-    vars.push(`
+    // justify items
+    ['start', 'end', 'center', 'stretch'].forEach((justify) => {
+        vars.push(`
       /**
-         * @name       s-grid:justify-${justify}
+         * @name       s-layout:justify-${justify}
          * @namespace     sugar.css.layout
          * @type          CssClass
          * @platform      css
@@ -268,23 +301,22 @@ export default function ({
          * This allows you to justify all the items to "${justify}"
          * 
          * @example     html
-         * <div class="s-grid\:123 s-grid\:justify-${justify}">
+         * <div class="s-layout:123 s-layout:justify-${justify}">
          *    ${Array(3)
-           .map((idx) => {
-             return `<div>I'm the area ${idx}</div>`;
-          })
-          .join('\n')}
+             .map((idx) => {
+                 return `<div>I'm the area ${idx}</div>`;
+             })
+             .join('\n')}
         * </div>
         * 
         * @since     2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-        .s-grid--justify-${justify} {
+        .s-layout--justify-${justify} {
           justify-items: ${justify};
         }
     `);
-  });
+    });
 
-
-  replaceWith(vars);
+    replaceWith(vars);
 }

@@ -41,6 +41,8 @@ export interface ISDocblockSortFnSetting {
 export interface ISDocblockSettings {
     filepath?: string;
     filterByTag: Record<string, any>;
+    renderMarkdown: boolean;
+    markedOptions: any;
     sortFunction?: ISDocblockSortFnSetting;
 }
 export interface ISDocblockCtorSettings {
@@ -130,11 +132,14 @@ class SDocblock extends __SClass implements ISDocblock {
                             if (bObj.type?.toLowerCase() === 'class') res += 1;
                             if (bObj.constructor) res += 1;
                             if (bObj.private) res += 1;
-                            if (bObj.type?.toLowerCase() === 'function') res += 1;
+                            if (bObj.type?.toLowerCase() === 'function')
+                                res += 1;
                             if (bObj.name?.length > aObj.name?.length) res += 1;
                             return res;
                         },
                         filepath: null,
+                        renderMarkdown: false,
+                        markedOptions: {},
                         to: {
                             // markdown: __markdown
                         },
@@ -254,12 +259,22 @@ class SDocblock extends __SClass implements ISDocblock {
 
                 if (this.docblockSettings.filterByTag) {
                     let isBlockMatchFilter = true;
-                    for (let i = 0; i < Object.keys(this.docblockSettings.filterByTag).length; i++) {
-                        const tagName = Object.keys(this.docblockSettings.filterByTag)[i];
-                        const tagFilter = this.docblockSettings.filterByTag[tagName];
+                    for (
+                        let i = 0;
+                        i <
+                        Object.keys(this.docblockSettings.filterByTag).length;
+                        i++
+                    ) {
+                        const tagName = Object.keys(
+                            this.docblockSettings.filterByTag,
+                        )[i];
+                        const tagFilter =
+                            this.docblockSettings.filterByTag[tagName];
                         const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
                         const tagValue = blockStr.match(tagValueReg);
-                        const tagFilterArray = Array.isArray(tagFilter) ? tagFilter : [tagFilter];
+                        const tagFilterArray = Array.isArray(tagFilter)
+                            ? tagFilter
+                            : [tagFilter];
                         let isMatchOrCondition = false;
                         if (tagValue && tagValue[1]) {
                             const tagValueValue = tagValue[1].trim();
@@ -271,11 +286,17 @@ class SDocblock extends __SClass implements ISDocblock {
                                         break;
                                     }
                                 } else if (tagFilterFilter instanceof RegExp) {
-                                    if (tagValueValue.trim().match(tagFilterFilter)) {
+                                    if (
+                                        tagValueValue
+                                            .trim()
+                                            .match(tagFilterFilter)
+                                    ) {
                                         isMatchOrCondition = true;
                                         break;
                                     }
-                                } else if (typeof tagFilterFilter === 'function') {
+                                } else if (
+                                    typeof tagFilterFilter === 'function'
+                                ) {
                                     if (tagFilterFilter(tagValueValue.trim())) {
                                         isMatchOrCondition = true;
                                         break;
@@ -303,6 +324,8 @@ class SDocblock extends __SClass implements ISDocblock {
                 docblockBlock: {
                     packageJson: this._packageJson,
                     filepath: this.docblockSettings.filepath || '',
+                    renderMarkdown: this.docblockSettings.renderMarkdown,
+                    markedOptions: this.docblockSettings.markedOptions,
                 },
             });
             await docblockBlock.parse();

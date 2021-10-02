@@ -32,47 +32,47 @@ export default function ({ params, atRule, replaceWith, }) {
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to apply some positions like absolute, fixed, etc... on any HTMLElement
+        * These classes allows you to apply some positions like \`absolute\`, \`fixed\`, etc... on any HTMLElement
         * 
         * @support      chromium
         * @support      firefox
         * @support      safari
         * @support      edge
         * 
-        * @cssClass       s-position:absolute       Apply the absolute position
-        * @cssClass       s-position:relative       Apply the relative position
-        * @cssClass       s-position:fixed       Apply the fixed position
-        * @cssClass       s-position:sticky       Apply the sticky position
-        * @cssClass       s-position:top        Apply the top position to 0
-        * @cssClass       s-position:left        Apply the left position to 0
-        * @cssClass       s-position:right        Apply the right position to 0
-        * @cssClass       s-position:bottom        Apply the bottom position to 0
+        * @cssClass       s-position:absolute       Apply the \`absolute\` position
+        * @cssClass       s-position:relative       Apply the \`relative\` position
+        * @cssClass       s-position:fixed       Apply the \`fixed\` position
+        * @cssClass       s-position:sticky       Apply the \`sticky\` position
+        * @cssClass       s-position:top        Apply the \`top\` position to \`0\`
+        * @cssClass       s-position:left        Apply the \`left\` position to \`0\`
+        * @cssClass       s-position:right        Apply the \`right\` position to \`0\`
+        * @cssClass       s-position:bottom        Apply the \`bottom\` position to \`0\`
         * 
         * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Absolute position</h3>
-        *   <div class="s-position\:relative s-ratio\:16-9">
+        *   <div class="s-position\:relative s-ratio\:21-9">
         *       <img class="s-position\:absolute\:bottom" src="https://picsum.photos/100/100"/>
         *   </div>
         * </div>
         * 
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Relative position</h3>
-        *   <div class="s-position\:relative s-ratio\:16-9">
+        *   <div class="s-position\:relative s-ratio\:21-9">
         *       <img class="s-position\:relative" src="https://picsum.photos/100/100"/>
         *   </div>
         * </div>
         * 
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Fixed position</h3>
-        *   <div class="s-position\:relative s-ratio\:16-9">
+        *   <div class="s-position\:relative s-ratio\:21-9">
         *       <img class="s-position\:fixed\:right" style="top:25%" src="https://picsum.photos/100/100"/>
         *   </div>
         * </div>
         * 
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Sticky position</h3>
-        *   <div class="s-position\:relative s-ratio\:16-9">
+        *   <div class="s-position\:relative s-ratio\:21-9">
         *       <img class="s-position\:sticky" style="top:100px" src="https://picsum.photos/100/100"/>
         *   </div>
         * </div>

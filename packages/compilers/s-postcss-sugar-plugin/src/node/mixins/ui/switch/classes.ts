@@ -73,8 +73,8 @@ export default function ({
         * 
         * These classes allows you to style checkbox HTMLElement as switches
         * 
-        * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-color:..." class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
         * 
         * @support          chromium
         * @support          firefox
@@ -220,9 +220,7 @@ export default function ({
         @sugar.ui.switch($style: ${style}, $scope: '${finalParams.scope.join(
             ',',
         )}');
-        ${jsObjectToCssProperties(
-            __theme().config('ui.switch.:rhythmVertical'),
-        )}
+        ${jsObjectToCssProperties(__theme().config('ui.switch.rhythmVertical'))}
       }
     `);
     });

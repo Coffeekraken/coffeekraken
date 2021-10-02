@@ -33,7 +33,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @status       beta
         * 
         * These classes allows you to apply the disabled style on any HTMLElement.
-        * This make sure no pointer events stays active as well as displaying the not-allowed cursor.
+        * This make sure **no pointer events** stays active as well as displaying the **not-allowed cursor**.
         * 
         * @support      chromium
         * @support      firefox

@@ -46,6 +46,11 @@ export default function ({ params, atRule, replaceWith }) {
         * 
         ${Object.keys(__theme().baseColors())
             .map((colorName) => {
+                return ` * @cssClass            s-color:${colorName}       Apply the ${colorName} color for the "current" color`;
+            })
+            .join('\n')}
+        ${Object.keys(__theme().baseColors())
+            .map((colorName) => {
                 return ` * @cssClass            s-tc:${colorName}       Apply the ${colorName} text color`;
             })
             .join('\n')}

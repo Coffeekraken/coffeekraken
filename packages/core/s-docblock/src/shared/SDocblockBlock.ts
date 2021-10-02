@@ -1,7 +1,10 @@
 import __SClass from '@coffeekraken/s-class';
-import __deepMege from '@coffeekraken/sugar/shared/object/deepMerge';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __map from '@coffeekraken/sugar/shared/object/map';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
+import __marked from 'marked';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 
 import __authorTag from './tags/author';
 import __contributorTag from './tags/contributor';
@@ -54,6 +57,8 @@ export interface ISDocblockBlockTagsMap {
 export interface ISDocblockBlockSettings {
     filepath?: string;
     packageJson: any;
+    renderMarkdown: boolean;
+    markedOptions: any;
     tags: ISDocblockBlockTagsMap;
 }
 export interface ISDocblockBlockCtorSettings {
@@ -151,11 +156,13 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      */
     constructor(source, settings = {}) {
         super(
-            __deepMege(
+            __deepMerge(
                 {
                     docblockBlock: {
                         filepath: null,
                         packageJson: null,
+                        renderMarkdown: false,
+                        markedOptions: {},
                         tags: SDocblockBlock.tagsMap,
                     },
                 },
@@ -231,7 +238,10 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 
             function add() {
                 if (currentContent.length) currentObj.content = currentContent;
-                if (docblockObj.hasOwnProperty(currentTag) && !Array.isArray(docblockObj[currentTag])) {
+                if (
+                    docblockObj.hasOwnProperty(currentTag) &&
+                    !Array.isArray(docblockObj[currentTag])
+                ) {
                     const currentValue = docblockObj[currentTag];
                     docblockObj[currentTag] = [currentValue];
                 }
@@ -278,7 +288,10 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                         currentObj.value = true;
                     }
                     previousWasEmptyLine = false;
-                } else if (previousWasEmptyLine && !line.trim().match(/^\*\/$/)) {
+                } else if (
+                    previousWasEmptyLine &&
+                    !line.trim().match(/^\*\/$/)
+                ) {
                     currentTag = 'description';
                     currentContent = [line.replace('*', '')];
                     currentObj = {};
@@ -300,11 +313,43 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                 const prop = Object.keys(docblockObj)[i];
                 const value = docblockObj[prop];
 
-                if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') continue;
+                if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_')
+                    continue;
                 if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
-                    docblockObj[prop] = await this.docblockBlockSettings.tags[prop](value, this.docblockBlockSettings);
+                    docblockObj[prop] = await this.docblockBlockSettings.tags[
+                        prop
+                    ](value, this.docblockBlockSettings);
+
+                    if (this.docblockBlockSettings.renderMarkdown) {
+                        __marked.setOptions(
+                            this.docblockBlockSettings.markedOptions,
+                        );
+
+                        if (typeof docblockObj[prop] === 'string') {
+                            docblockObj[prop] = __marked.parseInline(
+                                docblockObj[prop],
+                            );
+                        } else if (Array.isArray(docblockObj[prop])) {
+                            docblockObj[prop] = docblockObj[prop].map(
+                                (item) => {
+                                    if (typeof item === 'string')
+                                        return __marked.parseInline(item);
+                                    else return item;
+                                },
+                            );
+                        } else if (__isPlainObject(docblockObj[prop])) {
+                            __deepMap(docblockObj[prop], ({ prop, value }) => {
+                                if (typeof value === 'string')
+                                    return __marked.parseInline(value);
+                                return value;
+                            });
+                        }
+                    }
                 } else {
-                    docblockObj[prop] = __simpleValueTag(value, this.docblockBlockSettings);
+                    docblockObj[prop] = __simpleValueTag(
+                        value,
+                        this.docblockBlockSettings,
+                    );
                 }
             }
 

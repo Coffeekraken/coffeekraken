@@ -51,7 +51,9 @@ export default class DocNav extends __SLitComponent {
             this._restoreState();
 
             // query string
-            const queryStringObj = __queryStringToObject(document.location.search);
+            const queryStringObj = __queryStringToObject(
+                document.location.search,
+            );
             if (queryStringObj.search) {
                 this._saved.search = queryStringObj.search;
             }
@@ -76,7 +78,8 @@ export default class DocNav extends __SLitComponent {
             const docmapObj = this._docmap.map[namespace];
             if (!docmapObj.platform) return;
             docmapObj.platform.forEach((platform) => {
-                if (availablePlatforms.indexOf(platform.name) === -1) availablePlatforms.push(platform.name);
+                if (availablePlatforms.indexOf(platform.name) === -1)
+                    availablePlatforms.push(platform.name);
             });
         });
         return availablePlatforms;
@@ -87,7 +90,8 @@ export default class DocNav extends __SLitComponent {
         Object.keys(this._docmap.map).forEach((namespace) => {
             const docmapObj = this._docmap.map[namespace];
             if (!docmapObj.type) return;
-            if (availableTypes.indexOf(docmapObj.type) === -1) availableTypes.push(docmapObj.type);
+            if (availableTypes.indexOf(docmapObj.type) === -1)
+                availableTypes.push(docmapObj.type);
         });
         return availableTypes;
     }
@@ -97,7 +101,8 @@ export default class DocNav extends __SLitComponent {
         Object.keys(this._docmap.map).forEach((namespace) => {
             const docmapObj = this._docmap.map[namespace];
             if (!docmapObj.status) return;
-            if (availableStatus.indexOf(docmapObj.status) === -1) availableStatus.push(docmapObj.status);
+            if (availableStatus.indexOf(docmapObj.status) === -1)
+                availableStatus.push(docmapObj.status);
         });
         return availableStatus;
     }
@@ -119,7 +124,14 @@ export default class DocNav extends __SLitComponent {
 
         if (this._saved.search) {
             let miniSearch = new __miniSearch({
-                fields: ['name', 'namespace', 'description', 'since', 'type', 'status'],
+                fields: [
+                    'name',
+                    'namespace',
+                    'description',
+                    'since',
+                    'type',
+                    'status',
+                ],
                 storeFields: Object.keys(items[0]),
             });
             miniSearch.addAll(items);
@@ -147,7 +159,8 @@ export default class DocNav extends __SLitComponent {
             }
 
             if (this._saved.statuses.length) {
-                if (this._saved.statuses.indexOf(docmapObj.status) === -1) continue;
+                if (this._saved.statuses.indexOf(docmapObj.status) === -1)
+                    continue;
             }
 
             this._displayItemsCount++;
@@ -261,10 +274,12 @@ export default class DocNav extends __SLitComponent {
             });
         }
         const tpl = html`
-            <div class="s-grid:12222">
+            <div class="s-layout:12222">
                 <nav class="__nav">
                     <form name="doc">
-                        <fieldset class="__nav-search s-mbe:30 s-pie:30 s-pbs:30">
+                        <fieldset
+                            class="__nav-search s-mbe:30 s-pie:30 s-pbs:30"
+                        >
                             <input
                                 type="text"
                                 class="s-input s-width:100"
@@ -280,8 +295,13 @@ export default class DocNav extends __SLitComponent {
                             <dl class="s-list s-bg:even">
                                 ${this.availablePlatforms.map(
                                     (platform) => html`
-                                        <dt class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background">
-                                            <label class="s-flex-item:grow" for="platform-${platform}">
+                                        <dt
+                                            class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
+                                        >
+                                            <label
+                                                class="s-flex-item:grow"
+                                                for="platform-${platform}"
+                                            >
                                                 ${platform}
                                             </label>
                                             <label for="platform-${platform}">
@@ -290,8 +310,14 @@ export default class DocNav extends __SLitComponent {
                                                     class="s-switch s-color:accent"
                                                     type="checkbox"
                                                     id="platform-${platform}"
-                                                    @change="${() => this._togglePlatform(platform)}"
-                                                    ?checked="${(this._saved.platforms ?? []).indexOf(platform) !== -1}"
+                                                    @change="${() =>
+                                                        this._togglePlatform(
+                                                            platform,
+                                                        )}"
+                                                    ?checked="${(
+                                                        this._saved.platforms ??
+                                                        []
+                                                    ).indexOf(platform) !== -1}"
                                                 />
                                             </label>
                                         </dt>
@@ -305,16 +331,26 @@ export default class DocNav extends __SLitComponent {
                             <dl class="s-list s-bg:even">
                                 ${this.availableTypes.map(
                                     (type) => html`
-                                        <dt class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background">
-                                            <label class="s-flex-item:grow" for="type-${type}"> ${type} </label>
+                                        <dt
+                                            class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
+                                        >
+                                            <label
+                                                class="s-flex-item:grow"
+                                                for="type-${type}"
+                                            >
+                                                ${type}
+                                            </label>
                                             <label for="type-${type}">
                                                 <input
                                                     name="type-${type}"
                                                     class="s-switch s-color:accent"
                                                     type="checkbox"
                                                     id="type-${type}"
-                                                    @change="${() => this._toggleType(type)}"
-                                                    ?checked="${(this._saved.types ?? []).indexOf(type) !== -1}"
+                                                    @change="${() =>
+                                                        this._toggleType(type)}"
+                                                    ?checked="${(
+                                                        this._saved.types ?? []
+                                                    ).indexOf(type) !== -1}"
                                                 />
                                             </label>
                                         </dt>
@@ -328,16 +364,29 @@ export default class DocNav extends __SLitComponent {
                             <dl class="s-list s-bg:even">
                                 ${this.availableStatuses.map(
                                     (status) => html`
-                                        <dt class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background">
-                                            <label class="s-flex-item:grow" for="status-${status}"> ${status} </label>
+                                        <dt
+                                            class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
+                                        >
+                                            <label
+                                                class="s-flex-item:grow"
+                                                for="status-${status}"
+                                            >
+                                                ${status}
+                                            </label>
                                             <label for="status-${status}">
                                                 <input
                                                     name="status-${status}"
                                                     type="checkbox"
                                                     class="s-switch s-color:accent"
                                                     id="status-${status}"
-                                                    @change="${() => this._toggleStatus(status)}"
-                                                    ?checked="${(this._saved.statuses ?? []).indexOf(status) !== -1}"
+                                                    @change="${() =>
+                                                        this._toggleStatus(
+                                                            status,
+                                                        )}"
+                                                    ?checked="${(
+                                                        this._saved.statuses ??
+                                                        []
+                                                    ).indexOf(status) !== -1}"
                                                 />
                                             </label>
                                         </dt>
@@ -369,8 +418,11 @@ export default class DocNav extends __SLitComponent {
                                                 >
                                                     <a
                                                         href="/doc/api/${this._striptags(
-                                                            (<any>item).namespace,
-                                                        )}.${this._striptags((<any>item).name)}"
+                                                            (<any>item)
+                                                                .namespace,
+                                                        )}.${this._striptags(
+                                                            (<any>item).name,
+                                                        )}"
                                                     >
                                                         ${(<any>item).name}
                                                     </a>
@@ -380,21 +432,34 @@ export default class DocNav extends __SLitComponent {
                                                 <div class="s-font:40">
                                                     <span class="s-font:30"
                                                         >Since
-                                                        <span class="s-tc:complementary"
-                                                            >${(<any>item).since}</span
+                                                        <span
+                                                            class="s-tc:complementary"
+                                                            >${(<any>item)
+                                                                .since}</span
                                                         ></span
                                                     >
                                                     &nbsp;
-                                                    <span class="s-badge:pill:${(<any>item).status}"
-                                                        >${(<any>item).status}</span
+                                                    <span
+                                                        class="s-badge:pill:${(<
+                                                            any
+                                                        >item).status}"
+                                                        >${(<any>item)
+                                                            .status}</span
                                                     >
                                                 </div>
                                             </div>
                                         </div>
-                                        <h5 class="s-tc:complementary s-font:40 s-mbe:30">${(<any>item).namespace}</h5>
-                                        <p class="s-typo:p s-mbe:30">${(<any>item).description}</p>
+                                        <h5
+                                            class="s-tc:complementary s-font:40 s-mbe:30"
+                                        >
+                                            ${(<any>item).namespace}
+                                        </h5>
+                                        <p class="s-typo:p s-mbe:30">
+                                            ${(<any>item).description}
+                                        </p>
                                     </div>
-                                    ${(<any>item).example && (<any>item).example.length
+                                    ${(<any>item).example &&
+                                    (<any>item).example.length
                                         ? html`
                                               <div class="__code">
                                                   ${this._renderExample
@@ -404,16 +469,32 @@ export default class DocNav extends __SLitComponent {
                                                                 style="max-width:100%;"
                                                                 class="s-depth:50 s-flex-item:grow:shrink"
                                                             >
-                                                                <textarea lang="${(<any>item).example[0].language}">
-                                                ${(<any>item).example[0].code}                    
+                                                                <textarea
+                                                                    lang="${(<
+                                                                        any
+                                                                    >item)
+                                                                        .example[0]
+                                                                        .language}"
+                                                                >
+                                                ${(<any>item).example[0]
+                                                                        .code}                    
                                             </textarea
                                                                 >
                                                             </s-code-example>
-                                                            <div class="s-until:sibling:mounted">
-                                                                <i class="s-loader:spinner s-color:accent"></i>
+                                                            <div
+                                                                class="s-until:sibling:mounted"
+                                                            >
+                                                                <i
+                                                                    class="s-loader:spinner s-color:accent"
+                                                                ></i>
                                                                 &nbsp;
-                                                                <p class="s-typo:p s-display:inline-block">
-                                                                    Loading code example. Please wait...
+                                                                <p
+                                                                    class="s-typo:p s-display:inline-block"
+                                                                >
+                                                                    Loading code
+                                                                    example.
+                                                                    Please
+                                                                    wait...
                                                                 </p>
                                                             </div>
                                                         `

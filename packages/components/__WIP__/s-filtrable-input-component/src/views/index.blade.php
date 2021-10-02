@@ -2,7 +2,7 @@
 @section('title', $title)
 
 @section('body')
-  <div class="s-container s-grid-123">
+  <div class="s-container s-layout-123">
     <div>
       <div style="height: 3000px; background: red;"></div>
       <br>

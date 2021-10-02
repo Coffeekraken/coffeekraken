@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
-import __jsObjectToCssProperties from '../../utils/jsObjectToCssProperties';
 
 /**
  * @name           classes
@@ -32,10 +31,12 @@ export { postcssSugarPluginTypoClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginTypoClassesParams>;
     atRule: any;
+    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginTypoClassesParams = {
@@ -50,57 +51,74 @@ export default function ({
         const typoObj = typosObj[typoName];
         const cls = `s-typo:${typoName}`;
 
-        const css = __jsObjectToCssProperties(typoObj, {
-            exclude: [':rhythmVertical'],
+        const css = jsObjectToCssProperties(typoObj, {
+            exclude: ['rhythmVertical'],
         });
 
         vars.push(`/**
-    * @name            ${cls}
-    * @namespace        sugar.css.typo
-    * @type             CssClass
-    * @platform         css
-    * @status           beta
-    * 
-    * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any HTMLElement
-    * 
-    * @example      html
-    * <span class="${cls.replace(':', ':')}">Something cool</span>
-    * 
-    * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    */
-   .${cls.replace(':', '--')} {
-        ${css}
-   }`);
+            * @name            ${cls}
+            * @namespace        sugar.css.typo
+            * @type             CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any HTMLElement
+            * 
+            * @example      html
+            * <span class="${cls.replace(':', ':')}">Something cool</span>
+            * 
+            * @since        2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+        .${cls.replace(':', '--')} {
+                ${css}
+        }`);
 
         vars.push(`/**
-    * @name            s-format:text ${typoName}
-    * @namespace        sugar.css.typo
-    * @type             CssClass
-    * @platform         css
-    * @status           beta
-    * 
-    * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any ${typoName} tag in the .s-format:text scope
-    * 
-    * @feature          Vertical rhythm
-    * 
-    * @example      html
-    * <div class="s-format\:text">
-    *   <${typoName}>Something cool</${typoName}>
-    * 
-    * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    */
-   @sugar.format.text {
-     ${typoName} {
-           ${css}
-           ${
-               typoObj[':rhythmVertical']
-                   ? __jsObjectToCssProperties(typoObj[':rhythmVertical'])
-                   : ''
-           }
-     }
-   }`);
+            * @name            s-format:text ${typoName}
+            * @namespace        sugar.css.typo
+            * @type             CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any ${typoName} tag in the .s-format:text scope
+            * 
+            * @example      html
+            * <div class="s-format\:text">
+            *   <${typoName}>Something cool</${typoName}>
+            * 
+            * @since        2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+        @sugar.format.text {
+            ${typoName} {
+                ${css}
+            }
+        }`);
+
+        vars.push(`/**
+            * @name            s-rhythm:vertical .${typoName}, s-rhythm:vertical ${typoName}
+            * @namespace        sugar.css.typo
+            * @type             CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the "<yellow>${typoName}</yellow>" typography style to any ${typoName} tag in the .s-format:text scope
+            * 
+            * @feature          Vertical rhythm
+            * 
+            * @example      html
+            * <div class="s-format\:text">
+            *   <${typoName}>Something cool</${typoName}>
+            * 
+            * @since        2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+        @sugar.rhythm.vertical {
+            ${typoName}, .${typoName} {
+                ${jsObjectToCssProperties(typoObj.rhythmVertical ?? {})}
+            }
+        }`);
     });
 
     replaceWith(vars);

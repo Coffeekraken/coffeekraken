@@ -67,6 +67,20 @@ export default function (env, config) {
                     'max-width': 'none',
                 },
             },
+            grid: {
+                1: 1,
+                2: 2,
+                3: 3,
+                4: 4,
+                5: 5,
+                6: 6,
+                7: 7,
+                8: 8,
+                9: 9,
+                10: 10,
+                11: 11,
+                12: 12,
+            },
             layout: {
                 '1': '1',
                 '12': '1 2',
@@ -277,53 +291,53 @@ export default function (env, config) {
              * @name          50
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       1.75rem
+             * @default       1.50rem
              *
              * Declare the font size <s-color="accent">50</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            50: '1.75rem',
+            50: '1.50em',
 
             /**
              * @name          60
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       2.25rem
+             * @default       2rem
              *
              * Declare the font size <s-color="accent">60</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            60: '2.25rem',
+            60: '2rem',
 
             /**
              * @name          70
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       3rem
+             * @default       2.5rem
              *
              * Declare the font size <s-color="accent">70</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            70: '3rem',
+            70: '2.5rem',
 
             /**
              * @name          80
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       3.5rem
+             * @default       3rem
              *
              * Declare the font size <s-color="accent">80</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '3.5rem',
+            80: '3rem',
 
             /**
              * @name          90
@@ -342,14 +356,14 @@ export default function (env, config) {
              * @name          100
              * @namespace     config.theme.themes.default.size
              * @type          String
-             * @default       4.5rem
+             * @default       5rem
              *
              * Declare the font size <s-color="accent">100</s-color>
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            100: '4.5rem',
+            100: '5rem',
         },
 
         font: {
@@ -1465,7 +1479,7 @@ export default function (env, config) {
 
         components: {
             's-code-example': {
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
         },
 
@@ -1478,7 +1492,7 @@ export default function (env, config) {
                 transition: '[theme.transition.fast]',
                 defaultColor: 'accent',
                 depth: '[theme.depth.default]',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
@@ -1491,7 +1505,7 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 defaultColor: 'accent',
                 depth: '[theme.depth.default]',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
@@ -1511,7 +1525,8 @@ export default function (env, config) {
                 depth: '[theme.ui.default.depth]',
                 defaultStyle: 'solid',
                 defaultColor: 'ui',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             colorPicker: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1521,7 +1536,7 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             datePicker: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1531,7 +1546,7 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             input: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1542,7 +1557,7 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             radio: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1554,7 +1569,8 @@ export default function (env, config) {
                 depth: '[theme.ui.form.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             checkbox: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1566,7 +1582,8 @@ export default function (env, config) {
                 depth: '[theme.ui.form.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             range: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1577,7 +1594,7 @@ export default function (env, config) {
                 focusOutline: '[theme.ui.focusOutline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             label: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1587,7 +1604,7 @@ export default function (env, config) {
                 transition: '[theme.ui.form.transition]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'inline',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             select: {
                 paddingInline: '[theme.ui.form.paddingInline]',
@@ -1599,7 +1616,8 @@ export default function (env, config) {
                 depth: '[theme.ui.form.depth]',
                 defaultColor: 'ui',
                 defaultStyle: 'solid',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             switch: {
                 borderRadius: '[theme.ui.form.borderRadius]',
@@ -1609,7 +1627,7 @@ export default function (env, config) {
                 depth: '[theme.ui.form.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             dropdown: {
                 paddingInline: '[theme.ui.default.paddingBlock]',
@@ -1632,7 +1650,8 @@ export default function (env, config) {
                 depth: '[theme.ui.default.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'ul',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             tabs: {
                 paddingInline: '[theme.ui.default.paddingInline]',
@@ -1652,7 +1671,7 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             tooltip: {
                 paddingInline: '[theme.ui.default.paddingBlock]',
@@ -1672,7 +1691,7 @@ export default function (env, config) {
             //   lineHeight: 2,
             //   styles: ['default'],
             //   defaultColor: '[theme.ui.default.defaultColor]',
-            //   ':rhythmVertical': '[theme.ui.default.:rhythmVertical]'
+            //   'rhythmVertical': '[theme.ui.default.rhythmVertical]'
             // },
             code: {
                 paddingInline: '[theme.padding.50]',
@@ -1682,7 +1701,7 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 depth: '[theme.ui.default.depth]',
                 styles: ['default:default'],
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             blockquote: {
                 paddingInline: '[theme.ui.default.paddingInline]',
@@ -1693,7 +1712,8 @@ export default function (env, config) {
                 depth: '[theme.ui.default.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             table: {
                 paddingInline: '[theme.ui.default.paddingInline]',
@@ -1703,7 +1723,9 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 depth: 0,
                 defaultColor: '[theme.ui.default.defaultColor]',
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                defaultStyle: 'solid',
+                formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             badge: {
                 paddingInline: '.65em',
@@ -1713,7 +1735,7 @@ export default function (env, config) {
                 transition: '[theme.ui.default.transition]',
                 defaultStyle: 'solid',
                 depth: 0,
-                ':rhythmVertical': '[theme.ui.default.:rhythmVertical]',
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             loader: {
                 duration: '1s',
@@ -1731,7 +1753,7 @@ export default function (env, config) {
                 'font-size': 90,
                 'line-height': 1,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
@@ -1740,7 +1762,7 @@ export default function (env, config) {
                 'font-size': 80,
                 'line-height': 1,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 30,
                 },
             },
@@ -1749,7 +1771,7 @@ export default function (env, config) {
                 'font-size': 70,
                 'line-height': 1,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 30,
                 },
             },
@@ -1758,7 +1780,7 @@ export default function (env, config) {
                 'font-size': 60,
                 'line-height': 1,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 30,
                 },
             },
@@ -1767,7 +1789,7 @@ export default function (env, config) {
                 'font-size': 50,
                 'line-height': 1,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 20,
                 },
             },
@@ -1776,7 +1798,7 @@ export default function (env, config) {
                 'font-size': 40,
                 'line-height': 1,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 20,
                 },
             },
@@ -1785,23 +1807,23 @@ export default function (env, config) {
                 'font-size': 30,
                 'line-height': 1.5,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 30,
                 },
             },
             'p-lead': {
                 'font-family': 'default',
                 'font-size': 50,
-                'line-height': 1.3,
+                'line-height': 1.5,
                 'max-width': '55ch',
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 30,
                 },
             },
             hr: {
                 color: '[theme.color.main.color]',
                 opacity: 0.2,
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 30,
                 },
             },
@@ -1812,7 +1834,7 @@ export default function (env, config) {
                 'line-height': 1.5,
                 paddingInline: 20,
                 paddingBlock: 20,
-                ':rhythmVertical': {
+                rhythmVertical: {
                     'margin-bottom': 30,
                 },
             },

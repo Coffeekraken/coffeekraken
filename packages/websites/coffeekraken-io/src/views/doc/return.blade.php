@@ -13,6 +13,6 @@
             </div>
         @endif
     </header>
-    <p class="s-typo:p s-p:20">{{ $block->return->description }}</p> 
+    <p class="s-typo:p s-p:20">{!! $block->return->description !!}</p> 
 
 @endif

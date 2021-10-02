@@ -48,23 +48,23 @@ export default function ({
     const finalParams = <postcssSugarPluginRhythmVerticalMixinParams>{
         ...(params ?? {}),
     };
-    const container = new postcssApi.Rule({
-        selectors: [`.s-rhythm--vertical`],
-    });
+    // const container = new postcssApi.Rule({
+    //     selectors: [`.s-rhythm--vertical`],
+    // });
 
     atRule.nodes?.forEach((node) => {
         if (!node.selector) return;
         node.selector = node.selector
             .split(',')
             .map((sel) => {
-                return `${sel}:not(.s-rhythm--none &)`;
+                return `.s-rhythm--vertical > ${sel}`;
             })
             .join(',');
     });
-    // atRule.replaceWith(atRule.nodes);
+    atRule.replaceWith(atRule.nodes);
 
-    atRule.nodes.forEach((n) => {
-        container.append(n.clone());
-    });
-    atRule.replaceWith(container);
+    // atRule.nodes.forEach((n) => {
+    //     container.append(n.clone());
+    // });
+    // atRule.replaceWith(container);
 }

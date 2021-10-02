@@ -61,7 +61,7 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to truncate texts to a number of lines on any HTMLElement
+        * These classes allows you to **truncate texts to a number of lines** on any HTMLElement
         * 
         * @support      chromium        14+
         * @support      firefox         68+    

@@ -111,13 +111,5 @@ export default function ({
             }
     }
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`
-            @sugar.rhythm.vertical {
-                ${jsObjectToCssProperties(__theme().config('ui.radio.:rhythmVertical'))}
-            } 
-        `);
-    }
-
     replaceWith(vars);
 }

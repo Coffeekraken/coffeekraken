@@ -74,11 +74,11 @@ export default function ({
         * 
         * These classes allows you to display nice blockquote with simple class.
         * 
-        * @feature          Support for vertical rhythm through the "s-rhythm:vertical" class
-        * @feature          Support for text formatting through the "s-format:text" class
+        * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
+        * @feature          Support for text formatting through the \`s-format:text\` class
         * @feature          Full RTL support
-        * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-color:..." class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
         * 
         * @support          chromium
         * @support          firefox
@@ -190,8 +190,6 @@ export default function ({
             * 
             * This class represent a simple blockquote tag in the s-format:text scope
             * 
-            * @feature      Vertical rhythm
-            * 
             * @example        html
             * <div class="s-format:text">
             *   <blockquote>
@@ -208,8 +206,41 @@ export default function ({
                     @sugar.ui.blockquote($scope: '${finalParams.scope.join(
                         ',',
                     )}');
+                } 
+            }
+        `);
+    }
+
+    if (finalParams.scope.indexOf('vr') !== -1) {
+        vars.push(`/**
+            * @name           s-rhythm:vertical
+            * @namespace      sugar.css.ui.blockquote
+            * @type           CssClass
+            * 
+            * This class represent some blockquotes in the s-rhythm:vertical scope
+            * 
+            * @feature      Vertical rhythm
+            * 
+            * @example        html
+            * <div class="s-rhythm:vertical">
+            *   <blockquote class="s-blockquote">
+            *       <p>Hello world</p>
+            *   </blockquote>
+            *   <blockquote class="s-blockquote">
+            *       <p>Hello world</p>
+            *   </blockquote>
+            *   <blockquote class="s-blockquote">
+            *       <p>Hello world</p>
+            *   </blockquote>
+            * </div>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            @sugar.rhythm.vertical {
+                blockquote, .s-blockquote {
                     ${jsObjectToCssProperties(
-                        __theme().config('ui.blockquote.:rhythmVertical'),
+                        __theme().config('ui.blockquote.rhythmVertical'),
                     )}
                 } 
             }

@@ -34,7 +34,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @status       beta
         * 
         * These classes allows you to apply some flex attributes on any HTMLElement and with
-        * that you can create some "layouts" directly in your HTML
+        * that you can **create some layouts directly in your HTML**.
         * 
         * @support      chromium
         * @support      firefox

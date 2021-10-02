@@ -1,5 +1,5 @@
 <section id="features-webcomponents" class="s-container s-pb:100">
-    <div class="s-grid:122:gutter-x:gutter-between">
+    <div class="s-layout:122:gutter-x:gutter-between">
 
         <div>
             <h3 class="s-typo:h3 s-mbe:30">

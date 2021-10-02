@@ -67,8 +67,8 @@ export default function ({
         * 
         * These classes allows you to display nice dropdown on buttons or whatever
         *
-        * @feature          Support for scaling through the "s-scale:..." class
-        * @feature          Support for colorizing through the "s-color:..." class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
         * 
         * @support          chromium
         * @support          firefox
@@ -258,7 +258,9 @@ export default function ({
 
     finalParams.styles.forEach((style) => {
         vars.push(`/**
-        * @name           s-dropdown${finalParams.defaultStyle === style ? '' : `:${style}`}
+        * @name           s-dropdown${
+            finalParams.defaultStyle === style ? '' : `:${style}`
+        }
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
         * 
@@ -267,7 +269,9 @@ export default function ({
         * @example        html
         * <span class="s-dropdown-container">
         *     <button class="s-btn">Click me!</button>
-        *     <div class="s-dropdown${finalParams.defaultStyle === style ? '' : `:${style}`}">
+        *     <div class="s-dropdown${
+            finalParams.defaultStyle === style ? '' : `:${style}`
+        }">
         *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *         <a class="s-btn s-color:accent">You find me!</a>
         *     </div>
@@ -278,7 +282,9 @@ export default function ({
       */
         .s-dropdown${finalParams.defaultStyle === style ? '' : `--${style}`} {
             @sugar.color(${finalParams.defaultColor});
-            @sugar.ui.dropdown($style: ${style}, $scope: '${finalParams.scope.join(',')}');
+            @sugar.ui.dropdown($style: ${style}, $scope: '${finalParams.scope.join(
+            ',',
+        )}');
         }
         `);
     });

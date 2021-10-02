@@ -43,7 +43,20 @@ export default function ({
 
     const vars: string[] = [];
 
-    const fontsFamiliesObj = __theme().config('font.family');
+    const typoFormatElements = Object.keys(__theme().config('typo')).map(
+        (typo) => {
+            return `${typo}`;
+        },
+    );
+
+    const uiFormatElements = Object.keys(__theme().config('ui'))
+        .filter((ui) => {
+            const uiObj = __theme().config('ui')[ui];
+            return uiObj.formatText === true;
+        })
+        .map((ui) => {
+            return `${ui}`;
+        });
 
     vars.push(`
       /**
@@ -55,16 +68,30 @@ export default function ({
         * @status       beta
         * 
         * This class allows you to apply some formatting to pure HTMLElement that are scoped into.
-        * For example, a simple "ul" tag will be styled as if the "s-list:ul" class would be applied on it
-        * when it is scoped inside the "s-format:text" class.
+        * For example, a simple \`ul\` tag will be styled as if the \`s-list:ul\` class would be applied on it
+        * when it is scoped inside the \`s-format:text\` class.
+        * This feature has to be implemented using the \`@sugar.format.text\` mixin on the elements you
+        * want to support the text formatting.
         * 
-        * @cssClass               s-format:text             Apply the text formatting to childs elements like "ul", "ol", "p", "h1", "h2", etc... HTML tags
+        ${typoFormatElements.map((typo) => {
+            return ` * @feature         \`${typo}\` typo supported`;
+        })}
+        ${uiFormatElements.map((typo) => {
+            return ` * @feature         \`${typo}\` UI supported`;
+        })}
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass               s-format:text             Apply the text formatting to childs elements like \`ul\`, \`ol\`, \`p\`, \`h1\`, \`h2\`, etc... HTML tags
         * 
         * @example        html
         * <!-- block -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
-        *   <div class="s-format:text">
+        *   <div class="s-format:text s-rhythm:vertical">
         *       <h1>${__faker.name.findName()}</h1>
         *       <p>${__faker.lorem.sentence()}</p>
         *       <ul>
@@ -75,6 +102,20 @@ export default function ({
         *       <blockquote>
         *           ${__faker.lorem.paragraph()}
         *       </blockquote>
+        *       <table>
+        *           <tr>
+        *               <th>Hello</th>
+        *               <th>World</th>
+        *           </tr>
+        *           <tr>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *           </tr>
+        *           <tr>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *           </tr>
+        *       </table>
         *       <ol>
         *           <li>${__faker.name.findName()}</li>
         *           <li>${__faker.name.findName()}</li>
@@ -95,146 +136,94 @@ export default function ({
         */
     `);
 
-    Object.keys(fontsFamiliesObj).forEach((fontName) => {
-        vars.push(`
-        /**
-        * @name          s-font:${fontName}
-        * @namespace          sugar.css.font
-        * @type               CssClass
-        * @platform       css
-        * @status       beta
-        * 
-        * This class allows you to apply the font "<yellow>${fontName}</yellow>" to any HTMLElement
-        * 
-        * @example        html
-        * <h1 class="s-font\:${fontName}">Hello world</h1>
-        * 
-        * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-.s-font--${fontName} {
-    @sugar.font.family(${fontName});
-}`);
-    });
+    const typoRhythmElements = Object.keys(__theme().config('typo'))
+        .filter((typo) => {
+            const typoObj = __theme().config('typo')[typo];
+            return typoObj.rhythmVertical !== undefined;
+        })
+        .map((typo) => {
+            return `${typo}`;
+        });
 
-    // Font sizes
-    const fontsSizesObj = __theme().config('font.size');
+    const uiRhythmElements = Object.keys(__theme().config('ui'))
+        .filter((ui) => {
+            const uiObj = __theme().config('ui')[ui];
+            return uiObj.rhythmVertical !== undefined;
+        })
+        .map((ui) => {
+            return `${ui}`;
+        });
+
     vars.push(`
       /**
-        * @name          Font Sizes
+        * @name          Rhythm vertical
         * @namespace          sugar.css.font
         * @type               CssClass
-        * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
+        * @menu           Styleguide / Tools        /styleguide/tools/format
         * @platform       css
         * @status       beta
         * 
-        * This class allows you to apply a font size to any HTMLElement
+        * This class allows you to apply some margins to make space between direct childs.
+        * This feature has to be implemented using the \`@sugar.rhythm.vertical\` mixin on the elements you
+        * want to support the rhythm vertical.
         * 
-        ${Object.keys(fontsSizesObj)
-            .map((fontSize) => {
-                return `* @cssClass      s-font\:${fontSize}       Apply the ${fontSize} font size on any HTMLElement`;
-            })
-            .join('\n ')}
+        ${typoRhythmElements.map((typo) => {
+            return ` * @feature         \`${typo}\` typo supported`;
+        })}
+        ${uiRhythmElements.map((typo) => {
+            return ` * @feature         \`${typo}\` UI supported`;
+        })}
         * 
-        * @example        html
-        * ${Object.keys(fontsSizesObj)
-            .map((fontSize) => {
-                return `<span class="s-tc:accent s-font:30">${fontSize}</span><br /><br /><h1 class="s-font\:${fontSize} s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
-            })
-            .join('\n * ')}
-        * 
-        * @example        css
-        ${Object.keys(fontsSizesObj)
-            .map((fontSize) => {
-                return `* .my-font-${fontSize} {
-        *     \@sugar.font.size(${fontSize});  
-        * }`;
-            })
-            .join('\n ')}
-        * 
-        * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-    `);
-    Object.keys(fontsSizesObj).forEach((sizeName) => {
-        if (sizeName === 'default') return;
-        vars.push(`/**
-  * @name          s-font:${sizeName}
-  * @namespace          sugar.css.mixins.font
-  * @type               CssClass
-  * @platform         css
-  * @status           beta
-  * 
-  * This class allows you to apply the font size "<yellow>${sizeName}</yellow>" to any HTMLElement
-  * 
-  * @example        html
-  * <h1 class="s-font\:${sizeName}">Hello world</h1>
-  */
-.s-font--${sizeName} {
-    @sugar.font.size(${sizeName});
-}`);
-    });
-
-    // reset
-    vars.push(`
-      /**
-        * @name          Font Resets
-        * @namespace          sugar.css.font
-        * @type               CssClass
-        * @menu           Styleguide / Fonts        /styleguide/fonts/resets
-        * @platform       css
-        * @status       beta
-        * 
-        * These classes allows you to reset fonts like size, family, etc...
-        * 
-        * @cssClass           s-font\:reset-size          Reset the size to 1rem
-        * @cssClass           s-font\:reset-family        Reset to the default font
+        * @cssClass               s-rhythm:vertical             Apply the rhythm vertical to direct childs elements like \`ul\`, \`ol\`, \`p\`, \`h1\`, \`h2\`, etc... HTML tags
         * 
         * @example        html
-        * <h3 class="s-tc:accent s-font:30 s-mb\:20">Reset size</h3>
-        * <div class="s-font\:60 s-mbe:30">
-        *   ${__faker.name.title()} <span class="s-font\:reset-size">${__faker.name.findName()}</span>
-        * </div>
-        * 
-        * <h3 class="s-tc:accent s-font:30 s-mb\:20">Reset family</h3>
-        * <div class="s-font\:quote s-font\:50">
-        *   ${__faker.name.title()} <span class="s-font\:reset-family">${__faker.name.findName()}</span>
+        * <!-- block -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Rhythm vertical</h3>
+        *   <div class="s-format:text s-rhythm:vertical">
+        *       <h1>${__faker.name.findName()}</h1>
+        *       <p>${__faker.lorem.sentence()}</p>
+        *       <ul>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *       </ul>
+        *       <blockquote>
+        *           ${__faker.lorem.paragraph()}
+        *       </blockquote>
+        *       <table>
+        *           <tr>
+        *               <th>Hello</th>
+        *               <th>World</th>
+        *           </tr>
+        *           <tr>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *           </tr>
+        *           <tr>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *               <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+        *           </tr>
+        *       </table>
+        *       <ol>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *       </ol>
+        *       <select>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *       </select>
+        *       <br />
+        *       <button>${__faker.name.findName()}</button>
+        *   </div>
         * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`/**
-  * @name          s-font:reset-size
-  * @namespace          sugar.css.mixins.font
-  * @type               CssClass
-  * @platform         css
-  * @status           beta
-  * 
-  * This class allows you to reset the font size to 1rem on any HTMLElement
-  * 
-  * @example        html
-  * <h1 class="s-font\:reset-size">Hello world</h1>
-  */
-.s-font--reset-size {
-  font-size: sugar.scalable(1rem);
-}`);
-    vars.push(`/**
-  * @name          s-font:reset-family
-  * @namespace          sugar.css.mixins.font
-  * @type               CssClass
-  * @platform         css
-  * @status           beta
-  * 
-  * This class allows you to reset the font family to default on any HTMLElement
-  * 
-  * @example        html
-  * <h1 class="s-font\:reset-family">Hello world</h1>
-  */
-.s-font--reset-family {
-  @sugar.font.family(default);
-}`);
 
     replaceWith(vars);
 }

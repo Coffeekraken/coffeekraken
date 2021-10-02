@@ -6,7 +6,7 @@
         a production ready quality grade. Here's some areas where we can help you:
     </p>
 
-    <div class="s-grid:112:gutter-x:gutter-between:align-center s-pb:50">
+    <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
         <div>  
 
             <div class="s-mbe:30">
@@ -47,7 +47,7 @@ Cool don\'t you think?
         </div>
     </div>
 
-    <div class="s-grid:122:gutter-x:gutter-between:align-center s-pb:50">
+    <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
         <div>
             <h4 class="s-typo:h4 s-mbe:30">
                 CSS made<br>
@@ -96,7 +96,7 @@ fs:src/icons/copy.svg:copy
         </div>    
     </div>
 
-    <div class="s-grid:112:gutter-x:gutter-between:align-center s-pb:50">
+    <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
         <div>  
 
             <div class="s-mbe:30">

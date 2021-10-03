@@ -23,20 +23,21 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function see(data, blockSettings) {
-  if (!Array.isArray(data)) data = [data];
+    if (!Array.isArray(data)) data = [data];
 
-  const res = [];
+    const res = [];
 
-  data.forEach((see) => {
-    if (!see.value) return;
-    const parts = see.value.split(/\s{2,20000}/).map((l) => l.trim());
-    const url = parts[0],
-      description = parts[1] ?? '';
-      res.push({
-          url,
-          description
-      });
-  });
-  return res;
+    data.forEach((see) => {
+        if (!see.value) return;
+        const parts = see.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const url = parts[0],
+            description = new String(parts[1] ?? '');
+        description.render = true;
+        res.push({
+            url,
+            description,
+        });
+    });
+    return res;
 }
 export default see;

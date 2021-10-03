@@ -36,10 +36,12 @@ function support(data, blockSettings): IPlatform[] {
         if (!support.value) return;
 
         const parts = support.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const description = new String(parts[1] ?? '');
+        description.render = true;
 
         res.push({
             name: parts[0],
-            description: parts[1] ?? '',
+            description,
         });
     });
     return res;

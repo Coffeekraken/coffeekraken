@@ -23,6 +23,7 @@ import __menuTag from './tags/menu';
 import __cssClass from './tags/cssClass';
 import __interfaceTag from './tags/interface';
 import __supportTag from './tags/support';
+import __caniuseTag from './tags/caniuse';
 
 /**
  * @name          SDocblockBlock
@@ -309,6 +310,10 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 
             add();
 
+            if (this.docblockBlockSettings.renderMarkdown) {
+                __marked.setOptions(this.docblockBlockSettings.markedOptions);
+            }
+
             for (let i = 0; i < Object.keys(docblockObj).length; i++) {
                 const prop = Object.keys(docblockObj)[i];
                 const value = docblockObj[prop];
@@ -319,37 +324,44 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                     docblockObj[prop] = await this.docblockBlockSettings.tags[
                         prop
                     ](value, this.docblockBlockSettings);
-
-                    if (this.docblockBlockSettings.renderMarkdown) {
-                        __marked.setOptions(
-                            this.docblockBlockSettings.markedOptions,
-                        );
-
-                        if (typeof docblockObj[prop] === 'string') {
-                            docblockObj[prop] = __marked.parseInline(
-                                docblockObj[prop],
-                            );
-                        } else if (Array.isArray(docblockObj[prop])) {
-                            docblockObj[prop] = docblockObj[prop].map(
-                                (item) => {
-                                    if (typeof item === 'string')
-                                        return __marked.parseInline(item);
-                                    else return item;
-                                },
-                            );
-                        } else if (__isPlainObject(docblockObj[prop])) {
-                            __deepMap(docblockObj[prop], ({ prop, value }) => {
-                                if (typeof value === 'string')
-                                    return __marked.parseInline(value);
-                                return value;
-                            });
-                        }
-                    }
                 } else {
                     docblockObj[prop] = __simpleValueTag(
                         value,
                         this.docblockBlockSettings,
                     );
+                }
+
+                if (this.docblockBlockSettings.renderMarkdown) {
+                    if (
+                        docblockObj[prop] instanceof String &&
+                        (<any>docblockObj[prop]).render === true
+                    ) {
+                        // console.log('AAAAAAA', docblockObj[prop].toString());
+                        docblockObj[prop] = __marked.parseInline(
+                            docblockObj[prop].toString(),
+                        );
+                    } else if (Array.isArray(docblockObj[prop])) {
+                        docblockObj[prop] = docblockObj[prop].map((item) => {
+                            if (
+                                item instanceof String &&
+                                (<any>item).render === true
+                            ) {
+                                // console.log('render', item.toString());
+                                return __marked.parseInline(item.toString());
+                            } else return item;
+                        });
+                    } else if (__isPlainObject(value)) {
+                        __deepMap(docblockObj[prop], ({ prop, value: v }) => {
+                            if (
+                                v instanceof String &&
+                                (<any>v).render === true
+                            ) {
+                                // console.log('VVV', v.toString());
+                                return __marked.parseInline(v.toString());
+                            }
+                            return v;
+                        });
+                    }
                 }
             }
 
@@ -432,6 +444,7 @@ SDocblockBlock.registerTag('install', __simpleValueTag);
 SDocblockBlock.registerTag('feature', __simpleRepeatableValue);
 SDocblockBlock.registerTag('description', __descriptionTag);
 SDocblockBlock.registerTag('desc', __descriptionTag);
+SDocblockBlock.registerTag('caniuse', __caniuseTag);
 // SDocblockBlock.registerTag('yields', __yieldsTag);
 // SDocblockBlock.registerTag('typedef', __typedefTag);
 // SDocblockBlock.registerTag('throws', __throwsTag);

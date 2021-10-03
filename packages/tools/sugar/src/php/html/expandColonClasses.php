@@ -34,12 +34,12 @@ function get_tag( $tag, $xml ) {
 function expandColonClasses($html) {
 
     // grab do not touch tags
-    preg_match('/<code[^>]*>(.*?)<\/code>/s', $html, $doNotTouchTagCode);
-    foreach($doNotTouchTagCode as $idx => $tag) {
+    preg_match_all('/<code[^>]*>(.*?)<\/code>/s', $html, $doNotTouchTagCode);
+    foreach($doNotTouchTagCode[0] as $idx => $tag) {
         $html = str_replace($tag, '[sExpandColonClassesTagCode:'.$idx.']', $html);
     }
-    preg_match('/<template[^>]*>(.*?)<\/template>/s', $html, $doNotTouchTagTemplate);
-    foreach($doNotTouchTagTemplate as $idx => $tag) {
+    preg_match_all('/<template[^>]*>(.*?)<\/template>/s', $html, $doNotTouchTagTemplate);
+    foreach($doNotTouchTagTemplate[0] as $idx => $tag) {
         $html = str_replace($tag, '[sExpandColonClassesTagTemplate:'.$idx.']', $html);
     }
 
@@ -103,13 +103,14 @@ function expandColonClasses($html) {
     }
 
     // restore do not touch tags
-    preg_match('/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/ms', $html, $restoreTagCode);
-    preg_match('/\[sExpandColonClassesTagTemplate\:[0-9]{1,999}\]/ms', $html, $restoreTagTemplate);
-    foreach($restoreTagCode as $idx => $tag) {
-        $html = str_replace($tag, $doNotTouchTagCode[$idx], $html);
+    preg_match_all('/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/ms', $html, $restoreTagCode);
+    preg_match_all('/\[sExpandColonClassesTagTemplate\:[0-9]{1,999}\]/ms', $html, $restoreTagTemplate);
+
+    foreach($restoreTagCode[0] as $idx => $tag) {
+        $html = str_replace($tag, $doNotTouchTagCode[0][$idx], $html);
     }
-    foreach($restoreTagTemplate as $idx => $tag) {
-        $html = str_replace($tag, $doNotTouchTagTemplate[$idx], $html);
+    foreach($restoreTagTemplate[0] as $idx => $tag) {
+        $html = str_replace($tag, $doNotTouchTagTemplate[0][$idx], $html);
     }
 
     return $html;

@@ -23,29 +23,29 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  */
 
 export interface ITodo {
-  priority: 'low' | 'normal' | 'high';
-  description: string;
+    priority: 'low' | 'normal' | 'high';
+    description: string;
 }
 
 function todo(data, blockSettings): ITodo[] {
-  if (!Array.isArray(data)) data = [data];
+    if (!Array.isArray(data)) data = [data];
 
-  const res = [];
+    const res = [];
 
-  data.forEach((todo) => {
+    data.forEach((todo) => {
+        if (!todo.value) return;
 
+        const parts = todo.value.split(/\s{2,20000}/).map((l) => l.trim());
 
-    if (!todo.value) return;
-            
-    const parts = todo.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const priority = parts[1] ?? 'normal',
+            description = new String(parts[0] ?? '');
+        description.render = true;
 
-    const priority = parts[1] ?? 'normal', description = parts[0] ?? '';
-
-    res.push({
-      priority,
-      description
+        res.push({
+            priority,
+            description,
+        });
     });
-  });
-  return res;
+    return res;
 }
 export default todo;

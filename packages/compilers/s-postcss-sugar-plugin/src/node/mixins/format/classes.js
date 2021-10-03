@@ -41,7 +41,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @name          Format text
         * @namespace          sugar.css.font
         * @type               CssClass
-        * @menu           Styleguide / Tools        /styleguide/tools/format
+        * @menu           Styleguide / Tools        /styleguide/tools/format-text
         * @platform       css
         * @status       beta
         * 
@@ -134,7 +134,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @name          Rhythm vertical
         * @namespace          sugar.css.font
         * @type               CssClass
-        * @menu           Styleguide / Tools        /styleguide/tools/format
+        * @menu           Styleguide / Tools        /styleguide/tools/rhythm-vertical
         * @platform       css
         * @status       beta
         * 

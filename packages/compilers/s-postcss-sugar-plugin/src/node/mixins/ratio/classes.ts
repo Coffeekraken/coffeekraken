@@ -50,14 +50,17 @@ export default function ({
 
     vars.push(`
       /**
-        * @name          Clearfix
+        * @name          Ratio
         * @namespace          sugar.css.helpers
         * @type               Styleguide
-        * @menu           Styleguide / Helpers        /styleguide/helpers/clearfix
+        * @menu           Styleguide / Helpers        /styleguide/helpers/ratio
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to apply a clearfix on any HTMLElement
+        * These classes allows you to apply some ratio to any HTMLElement.
+        * **These classes make use of the \`aspect-ratio\` css property**
+        * 
+        * @caniuse      aspect-ratio            https://caniuse.com/mdn-css_properties_aspect-ratio
         * 
         * @support      chromium
         * @support      firefox

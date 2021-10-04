@@ -939,7 +939,6 @@ img {
 --s-theme-layout-layout-12345: 1 2 3 4 5;
 --s-theme-layout-layout-123456: 1 2 3 4 5 6;
 --s-theme-ratio-1: 1;
---s-theme-ratio-1-1: 1;
 --s-theme-ratio-21-9: 2.3333333333333335;
 --s-theme-ratio-16-9: 1.7777777777777777;
 --s-theme-ratio-2-3: 0.6666666666666666;
@@ -1151,6 +1150,8 @@ img {
 --s-theme-ui-focusOutline-borderWidth: 10px;
 --s-theme-ui-focusOutline-borderRadius: 6px;
 --s-theme-ui-focusOutline-transition: all .2s ease-out;
+--s-theme-ui-scrollbar-size: 2px;
+--s-theme-ui-scrollbar-defaultColor: accent;
 --s-theme-ui-button-paddingInline: 1.5em;
 --s-theme-ui-button-paddingBlock: 0.75em;
 --s-theme-ui-button-borderRadius: 6px;
@@ -1744,11 +1745,11 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <button>
-        *          Shelley Gerlach I
+        *          Lynne Mayert
         *       </button>
         *       <br />
         *       <button>
-        *           Cesar Mraz
+        *           Angela Quigley II
         *       </button>
         *   </div>
         * </div>
@@ -2736,15 +2737,15 @@ transform: scale(1) !important;
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">solid style</h3>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-solid-1" value="hello 1" />
-            *     Human Security Liaison James O'Reilly
+            *     Future Functionality Executive Brenda Kuhn
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-solid-2" value="hello 2" />
-            *     Regional Intranet Associate Christina Kuhn
+            *     Central Configuration Orchestrator Rosalie Mueller
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-solid-3" value="hello 3" />
-            *     Dynamic Factors Executive Sheri King
+            *     Principal Paradigm Designer Lana Breitenberg
             *   </label>
             * </div>
             * 
@@ -2754,19 +2755,19 @@ transform: scale(1) !important;
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-color-1" value="hello 1" />
-        *     Central Web Coordinator Rebecca Nikolaus
+        *     Chief Markets Representative Adrian Kohler
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-color-2" value="hello 2" />
-        *     Human Paradigm Liaison Geraldine Heller
+        *     Dynamic Integration Consultant Dr. Amelia Heathcote
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-color:complementary" name="checkbox-style-color-3" value="hello 3" />
-        *     Principal Creative Orchestrator Kristin Rosenbaum
+        *     Corporate Optimization Designer Oliver Ward IV
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" disabled class="s-checkbox s-color:error" name="checkbox-style-color-4" value="hello 4" />
-        *     Human Web Orchestrator Manuel Pfannerstill
+        *     International Quality Analyst Dr. Lula Hermann
         *   </label>
         * </div>
         * 
@@ -2775,15 +2776,15 @@ transform: scale(1) !important;
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">LTR Support</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox s-color:accent" name="checkbox-style-ltr-1" value="hello 1" />
-        *     Direct Applications Consultant Brooke White PhD
+        *     Internal Security Analyst Ernestine Howell
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-2" value="hello 2" />
-        *     Lead Response Director Miss Gina Schuppe
+        *     Dynamic Implementation Planner Mike Kiehn
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-3" value="hello 3" />
-        *     Future Implementation Assistant Lynne Bradtke
+        *     Direct Identity Facilitator Timothy White
         *   </label>
         * </div>
         * 
@@ -2792,15 +2793,15 @@ transform: scale(1) !important;
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <input type="checkbox" checked class="s-checkbox s-color:accent" name="checkbox-style-ltr-1" value="hello 1" />
-        *     International Integration Designer Austin Lesch
+        *     Global Optimization Director Joel Kertzmann
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-2" value="hello 2" />
-        *     Future Configuration Director Ben Jaskolski
+        *     Corporate Solutions Manager Tonya Kemmer
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-3" value="hello 3" />
-        *     Senior Communications Supervisor Gerald Pacocha
+        *     Corporate Data Officer Miss Franklin Hilll
         *   </label>
         * </div>
         * 
@@ -3195,14 +3196,14 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-color:accent s-mbe:30 s-mie:20">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">Central Integration Agent Christopher Stoltenberg</p>
+            *          <p class="s-typo:p s-mbe:30">Dynamic Integration Assistant Jerry Metz</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-color:complementary s-mbe:30 s-mie:20">
             *       I'm disabled
             *       <div class="s-dropdown" disabled>
-            *          <p class="s-typo:p s-mbe:30">Central Security Agent Myra Bogan</p>
+            *          <p class="s-typo:p s-mbe:30">Central Group Executive Fernando Brakus</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -3211,7 +3212,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *       <button class="s-btn s-color:complementary">
             *           +
             *           <div class="s-dropdown:bottom-end">
-            *               <p class="s-typo:p s-mbe:30">Dynamic Metrics Supervisor Shelley Mante DDS</p>
+            *               <p class="s-typo:p s-mbe:30">Direct Assurance Planner Jacquelyn Lang</p>
             *               <a class="s-btn s-color:accent">You find me!</a>
             *           </div>
             *       </button>
@@ -3224,42 +3225,42 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom (default)
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">International Directives Consultant Judith Rath MD</p>
+            *          <p class="s-typo:p s-mbe:30">Internal Response Agent Alma Williamson</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom start
             *       <div class="s-dropdown:bottom-start">
-            *          <p class="s-typo:p s-mbe:30">District Tactics Strategist Abraham Hansen</p>
+            *          <p class="s-typo:p s-mbe:30">Senior Accounts Consultant Genevieve Sawayn V</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Bottom end
             *       <div class="s-dropdown:bottom-end">
-            *          <p class="s-typo:p s-mbe:30">Human Configuration Designer Jeff Carroll</p>
+            *          <p class="s-typo:p s-mbe:30">Global Tactics Analyst Miss Ramon Frami</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top
             *       <div class="s-dropdown:top">
-            *          <p class="s-typo:p s-mbe:30">Dynamic Creative Designer Jaime Stanton III</p>
+            *          <p class="s-typo:p s-mbe:30">Central Web Officer Valerie Green</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
-            *          <p class="s-typo:p s-mbe:30">Central Group Developer Irma Dach</p>
+            *          <p class="s-typo:p s-mbe:30">Investor Operations Consultant Edwin Swaniawski</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
-            *          <p class="s-typo:p s-mbe:30">District Branding Coordinator Miss Vernon Cartwright</p>
+            *          <p class="s-typo:p s-mbe:30">Investor Marketing Architect Kevin Runte</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -3271,28 +3272,28 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Accent
             *       <div class="s-dropdown s-color:accent">
-            *          <p class="s-typo:p s-mbe:30">Human Mobility Associate Bridget Johns</p>
+            *          <p class="s-typo:p s-mbe:30">Corporate Creative Orchestrator Rene Maggio</p>
             *          <a class="s-btn s-color:complementary">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Complementary
             *       <div class="s-dropdown s-color:complementary">
-            *          <p class="s-typo:p s-mbe:30">Dynamic Response Manager Wilma Zboncak</p>
+            *          <p class="s-typo:p s-mbe:30">National Integration Director Marcella Monahan</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Info
             *       <div class="s-dropdown s-color:info">
-            *          <p class="s-typo:p s-mbe:30">Legacy Quality Manager Rodney Mraz I</p>
+            *          <p class="s-typo:p s-mbe:30">Dynamic Quality Architect Dr. Barbara Hettinger</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Error
             *       <div class="s-dropdown s-color:error">
-            *          <p class="s-typo:p s-mbe:30">Investor Metrics Executive Shannon Hoppe</p>
+            *          <p class="s-typo:p s-mbe:30">Direct Tactics Strategist Robert Kub</p>
             *          <a class="s-btn">You find me!</a>
             *       </div>
             *   </button>
@@ -3304,21 +3305,21 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30">
             *       Click me!
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">Dynamic Applications Officer Guy King</p>
+            *          <p class="s-typo:p s-mbe:30">National Functionality Agent Ashley Heathcote I</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top start
             *       <div class="s-dropdown:top-start">
-            *          <p class="s-typo:p s-mbe:30">Dynamic Intranet Specialist Ms. Byron Bogan</p>
+            *          <p class="s-typo:p s-mbe:30">International Security Facilitator Mrs. Cesar Funk</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Top end
             *       <div class="s-dropdown:top-end">
-            *          <p class="s-typo:p s-mbe:30">Dynamic Metrics Orchestrator Marcus White DDS</p>
+            *          <p class="s-typo:p s-mbe:30">Chief Tactics Representative Gail Fay</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -3330,21 +3331,21 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Scale 0.7
             *       <div class="s-dropdown s-scale:07">
-            *          <p class="s-typo:p s-mbe:30">Human Paradigm Supervisor Jim Nienow</p>
+            *          <p class="s-typo:p s-mbe:30">Dynamic Division Assistant Dana Parisian</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       No scale
             *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">Customer Solutions Specialist Muriel Huel DDS</p>
+            *          <p class="s-typo:p s-mbe:30">Human Accounts Liaison Helen Morissette</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
             *   <button class="s-btn s-mbe:30 s-mie:20">
             *       Scale 1.3
             *       <div class="s-dropdown s-scale:13">
-            *          <p class="s-typo:p s-mbe:30">International Response Developer Floyd Bauch</p>
+            *          <p class="s-typo:p s-mbe:30">Senior Markets Coordinator Tommy Lesch</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             *   </button>
@@ -3366,7 +3367,7 @@ label:hover > .s-format--text input[type="checkbox"]:not(.s-format--none input[t
         * <span class="s-dropdown-container">
         *     <button class="s-btn">Click me!</button>
         *     <div class="s-dropdown">
-        *         <p class="s-typo:p s-mbe:30">Central Quality Assistant Derek Veum</p>
+        *         <p class="s-typo:p s-mbe:30">Chief Branding Strategist Lynette Marvin</p>
         *         <a class="s-btn s-color:accent">You find me!</a>
         *     </div>
         * </span>
@@ -3522,7 +3523,7 @@ opacity: 0 !important;
 }
 .s-dropdown{box-shadow: var(--s-theme-ui-dropdown-depth, 0);
 }
-.s-dropdown{transition: var(--s-theme-transition-fast, all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995));
+.s-dropdown{transition: var(--s-theme-transition-fast, all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)) !important;
 }
 /**
         * @name           s-dropdown
@@ -3535,7 +3536,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom">
-        *       <p class="s-typo:p s-mbe:30">National Data Facilitator Stanley Koepp</p>
+        *       <p class="s-typo:p s-mbe:30">Chief Data Architect Mercedes Deckow</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -3559,7 +3560,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-start">
-        *       <p class="s-typo:p s-mbe:30">Investor Configuration Coordinator Roosevelt McClure</p>
+        *       <p class="s-typo:p s-mbe:30">International Accountability Associate Anita Raynor</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -3588,7 +3589,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-end">
-        *       <p class="s-typo:p s-mbe:30">Internal Division Consultant Bertha Metz</p>
+        *       <p class="s-typo:p s-mbe:30">Regional Assurance Representative Miguel Swaniawski</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -3618,7 +3619,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top">
-        *       <p class="s-typo:p s-mbe:30">Regional Infrastructure Designer Maxine Murazik</p>
+        *       <p class="s-typo:p s-mbe:30">Central Program Facilitator Jamie Fay PhD</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -3643,7 +3644,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-start">
-        *       <p class="s-typo:p s-mbe:30">National Solutions Engineer Mr. Dianna Swaniawski</p>
+        *       <p class="s-typo:p s-mbe:30">Chief Assurance Liaison Ken Ruecker</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -3673,7 +3674,7 @@ opacity: 0 !important;
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-end">
-        *       <p class="s-typo:p s-mbe:30">Direct Marketing Director Jacob Macejkovic</p>
+        *       <p class="s-typo:p s-mbe:30">Human Accountability Developer Todd Lueilwitz</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -3723,7 +3724,7 @@ opacity: 0 !important;
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">solid style</h3>
             *   <p class="s-blockquote">
-            *       Et rem molestiae quo dolorem aperiam laboriosam sapiente maiores. Est qui fugiat nam mollitia. Quibusdam quia est laudantium.
+            *       Mollitia voluptates amet voluptatem incidunt exercitationem omnis. Modi culpa voluptatum tenetur cupiditate quis labore. Tempora ullam ab eos blanditiis corrupti et. Adipisci perspiciatis laborum voluptas. Deleniti aliquid explicabo velit omnis omnis maxime perferendis. Est ut sed ut sapiente.
             *   </p>
             * </div>
             * 
@@ -3732,13 +3733,13 @@ opacity: 0 !important;
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <p class="s-blockquote s-mbe:30 s-color:accent">
-        *       Est quas delectus praesentium quisquam architecto. Dolorum ducimus et alias non. Delectus debitis labore vel quisquam molestias. Tempore quibusdam et.
+        *       Eum dolore harum ducimus. Perferendis quisquam est hic laboriosam. Inventore vero ut nisi eum molestiae sint alias tenetur sapiente. Ut ducimus aut. Officiis quisquam aut quae cum officia natus.
         *   </p>
         *   <p class="s-blockquote s-mbe:30 s-color:error">
-        *       Officiis enim exercitationem sed laboriosam aut iure sint veritatis. Fugit consequatur nostrum consequuntur quos. Modi consequatur dolores facere.
+        *       Dolorem illum aut modi. Ea praesentium autem aliquam harum. Perferendis ea rerum corporis cumque.
         *   </p>
         *   <p class="s-blockquote s-mbe:30 s-color:info">
-        *       Ut sed voluptatem. Aut cupiditate qui maiores non. Ea nam odit quo voluptate temporibus et soluta suscipit. Unde vero dolor explicabo voluptate maxime.
+        *       Ullam laborum molestias consectetur nobis odio in non soluta. Maxime similique non sit dolor vel perspiciatis aut reiciendis. Eius ut perspiciatis eligendi necessitatibus et officiis consequuntur laudantium cumque. Sunt molestias vel molestiae sed. Et eius tempore aut voluptatem ut ut exercitationem rem.
         *   </p>
         * </div>
         *
@@ -3746,7 +3747,7 @@ opacity: 0 !important;
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">LTR Support</h3>
         *   <p class="s-blockquote s-mbe:30">
-        *       Velit vero natus. Corporis quisquam beatae inventore ducimus expedita. Molestiae ut soluta quaerat illo repellat. Et nesciunt cumque nam pariatur aut rerum. Non quis corrupti. Dicta sint expedita dolorum.
+        *       Quisquam earum facere. Consectetur totam necessitatibus. Excepturi dicta in accusamus ratione deleniti enim est sunt fugiat.
         *   </p>
         * </div>
         * 
@@ -3754,7 +3755,7 @@ opacity: 0 !important;
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
         *   <p class="s-blockquote s-scale:15 s-mbe:30">
-        *       Delectus at cumque voluptatem. Pariatur eos corrupti aut magnam sit qui sit. Assumenda blanditiis minima tempora id dignissimos optio.
+        *       Consequatur blanditiis eligendi et et est. Facere in amet eum iusto maiores magnam quo. Repellendus est quia corrupti. Ipsam officia dolores.
         *   </p>
         * </div>
         * 
@@ -3763,10 +3764,10 @@ opacity: 0 !important;
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <blockquote>
-        *          Doloribus voluptas est animi maiores provident velit et atque velit. Ut repellendus enim quia consequuntur non est est. Et praesentium ut at similique eveniet. Id ipsam veritatis consequatur quia quasi cum blanditiis alias ratione. Minus voluptas vel. Sit sit labore mollitia iure animi non et eum et.
+        *          Laudantium pariatur omnis est tenetur sit quae sapiente ut. Non ut saepe rerum quia alias et est. Accusamus quos est aut a. Omnis quo magni velit omnis voluptate.
         *       </blockquote>
         *       <blockquote>
-        *           Eveniet sed ratione. Rerum eveniet sit omnis qui eveniet corporis ut. Nihil molestiae aut assumenda.
+        *           Repellat voluptatem nesciunt sunt veritatis non tempora possimus est sed. Placeat sapiente vero animi earum vitae iste. Consequatur ut dolor consectetur voluptas consequuntur error ducimus. Minus iure quasi et maiores vitae cupiditate at voluptatem vero. Dignissimos magnam et alias consequatur.
         *       </blockquote>
         *   </div>
         * </div>
@@ -4161,27 +4162,27 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">solid style</h3>
             *   <label class="s-label s-mbe:30">
-            *       Eva Jones
+            *       Monique Gislason II
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:40" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *       Miss Henrietta Padberg
+            *       Marian Casper
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:40 s-color:accent" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *        Christopher Dicki
+            *        Mr. Luther Bergnaum
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:40 s-color:complementary" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *        Clay Stiedemann
+            *        Ashley Gulgowski
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:40 s-color:error" />
             *   </label>
             *   <label dir="rtl" class="s-label s-mbe:30">
-            *        Seth Goldner
+            *        Curtis Rogahn
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input:solid s-width:40 s-color:accent" />
             *   </label>
             *   <label class="s-label s-mbe:30">
-            *        Edna Hane
+            *        Toni Yundt Sr.
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:40 s-scale:15 s-color:accent" />
             *   </label>
             * </div>
@@ -4302,31 +4303,31 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             *   <h3 class="s-tc:accent s-font:30 s-mb:20">inline style</h3>
             *   <label class="s-mbe:30 s-color:accent s-label">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Central Data Director Russell Schimmel</span>
+            *     <span>Legacy Paradigm Liaison Johnnie Brakus Sr.</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:info s-label">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Principal Applications Analyst Laurence Emard</span>
+            *     <span>Global Branding Supervisor Saul Kertzmann</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:error s-label">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Global Functionality Designer Rodolfo Langosh</span>
+            *     <span>Future Implementation Technician Derek Metz</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:accent s-label">
             *     <textarea class="s-input s-width:40" placeholder="Type something!" rows="3"></textarea>
-            *     <span>Human Directives Planner Boyd Dickinson</span>
+            *     <span>District Communications Architect Julian Veum</span>
             *   </label>
             *   <label dir="rtl" class="s-mbe:30 s-color:accent s-label">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Internal Factors Representative Rosa Lindgren I (RTL)</span>
+            *     <span>Senior Operations Designer Dolores Koss (RTL)</span>
             *   </label>
             *   <label class="s-mbe:30 s-scale:15 s-color:accent s-label">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Product Intranet Strategist Verna Goldner (Scaled)</span>
+            *     <span>Global Optimization Specialist Marie Weissnat (Scaled)</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:accent s-label">
             *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Future Web Supervisor Loretta Fritsch (Scaled)</span>
+            *     <span>Chief Markets Supervisor Joann Lebsack (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -4335,31 +4336,31 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             *   <h3 class="s-tc:accent s-font:30 s-mb:20">float style</h3>
             *   <label class="s-mbe:30 s-color:accent s-label:float">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Dynamic Data Technician Brooke Bailey</span>
+            *     <span>Principal Usability Coordinator Brandi Schamberger</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:info s-label:float">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>District Response Supervisor Mr. Elias Reynolds</span>
+            *     <span>Regional Tactics Executive Irving Ankunding</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:error s-label:float">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Lead Brand Engineer Gene Macejkovic Jr.</span>
+            *     <span>Investor Communications Director Johanna Gulgowski</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:accent s-label:float">
             *     <textarea class="s-input s-width:40" placeholder="Type something!" rows="3"></textarea>
-            *     <span>Corporate Accounts Associate Laverne Gulgowski</span>
+            *     <span>District Usability Administrator Rochelle Franecki</span>
             *   </label>
             *   <label dir="rtl" class="s-mbe:30 s-color:accent s-label:float">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Corporate Brand Consultant Teresa Botsford (RTL)</span>
+            *     <span>Internal Integration Specialist Manuel Torphy PhD (RTL)</span>
             *   </label>
             *   <label class="s-mbe:30 s-scale:15 s-color:accent s-label:float">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>Investor Operations Facilitator Joshua Kreiger (Scaled)</span>
+            *     <span>Forward Directives Analyst Damon Littel (Scaled)</span>
             *   </label>
             *   <label class="s-mbe:30 s-color:accent s-label:float">
             *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>International Markets Executive Rita Schumm (Scaled)</span>
+            *     <span>Direct Accountability Administrator Ms. Mark O'Conner (Scaled)</span>
             *   </label>
             * </div>
             * 
@@ -4605,9 +4606,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">ul style</h3>
             *   <ul class="s-list:ul ">
-            *     <li>Central Quality Officer Joanna Jacobs</li>
-            *     <li>Human Markets Developer Neal Hayes</li>
-            *     <li>Senior Division Associate Cheryl Buckridge</li>
+            *     <li>Product Directives Technician Bonnie Altenwerth</li>
+            *     <li>Lead Integration Facilitator Melody Rogahn</li>
+            *     <li>Future Program Administrator Jerome Kutch</li>
             *   </ul>
             * </div>
             * 
@@ -4615,9 +4616,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">ol style</h3>
             *   <ul class="s-list:ol s-color:accent s-scale:15">
-            *     <li>Regional Applications Specialist Tracy Block</li>
-            *     <li>Investor Creative Executive Lawrence Barton</li>
-            *     <li>Regional Infrastructure Coordinator Silvia Jerde</li>
+            *     <li>Product Web Liaison Miss Eloise Rutherford</li>
+            *     <li>Regional Web Consultant Glenda Corkery</li>
+            *     <li>Lead Operations Consultant Ms. Joanna Murphy</li>
             *   </ul>
             * </div>
             * 
@@ -4625,9 +4626,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">icon style</h3>
             *   <ul class="s-list:icon ">
-            *     <li><i class="s-icon:user"></i>District Assurance Designer Antoinette Swift</li>
-            *     <li><i class="s-icon:heart s-color:accent"></i>Internal Operations Facilitator Jill Luettgen</li>
-            *     <li><i class="s-icon:fire s-color:error"></i>Direct Research Facilitator Ms. Natalie Labadie</li>
+            *     <li><i class="s-icon:user"></i>Direct Implementation Specialist Mr. Terrance D'Amore</li>
+            *     <li><i class="s-icon:heart s-color:accent"></i>International Identity Representative Viola Grant</li>
+            *     <li><i class="s-icon:fire s-color:error"></i>Dynamic Integration Architect Gary Bednar</li>
             *   </ul>
             * </div>
             * 
@@ -4636,25 +4637,25 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-mbe:50" dir="rtl">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL</h3>
         *   <ul class="s-list:ul s-color:accent s-mbe:30">
-        *     <li>Senior Mobility Developer Charles Rosenbaum V</li>
-        *     <li>Principal Operations Representative Johnathan Walker</li>
+        *     <li>Lead Program Consultant Robyn Keeling</li>
+        *     <li>International Security Developer Kari Volkman</li>
         *   </ul>
         *   <ul class="s-list:ol s-color:accent s-mbe:30">
-        *     <li>Legacy Operations Designer Merle Barton</li>
-        *     <li>Regional Directives Administrator Dr. Franklin Douglas</li>
+        *     <li>District Security Executive Arthur Hayes</li>
+        *     <li>Dynamic Markets Administrator Stephanie Franecki</li>
         *   </ul>
         *   <ul class="s-list:icon s-color:accent s-mbe:30">
-        *     <li><i class="s-icon:user"></i> Internal Mobility Executive Caroline Leuschke</li>
-        *     <li><i class="s-icon:heart s-color:error"></i> Legacy Mobility Administrator Angelo Harber</li>
+        *     <li><i class="s-icon:user"></i> Regional Accounts Coordinator Mrs. Nick Purdy</li>
+        *     <li><i class="s-icon:heart s-color:error"></i> Internal Web Engineer Tracey Larson</li>
         *   </ul>
         * </div>
         * 
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors</h3>
         *   <ul class="s-list s-scale:12 s-color:accent">
-        *     <li>Regional Applications Designer Regina Crooks</li>
-        *     <li class="s-color:complementary">Product Integration Engineer Amelia Cremin III</li>
-        *     <li class="s-color:error">Dynamic Applications Executive Wallace Hills</li>
+        *     <li>National Quality Analyst Noah Wiza</li>
+        *     <li class="s-color:complementary">Global Operations Manager Lorraine Abbott</li>
+        *     <li class="s-color:error">District Directives Assistant Darrin Rosenbaum</li>
         *   </ul>
         * </div>
         * 
@@ -4663,14 +4664,14 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <ul>
-        *           <li>Tommie Tromp</li>
-        *           <li>Darlene Gulgowski Jr.</li>
-        *           <li>Meredith Schulist</li>
+        *           <li>Glen Effertz</li>
+        *           <li>Terry Nader</li>
+        *           <li>Ana MacGyver</li>
         *       </ul>
         *       <ol>
-        *           <li>Sharon Ondricka</li>
-        *           <li>Carmen Kutch</li>
-        *           <li>Shelley Stark</li>
+        *           <li>Pete Herzog</li>
+        *           <li>Omar Rolfson DVM</li>
+        *           <li>Dr. Tricia Cartwright</li>
         *       </ol>
         *   </div>
         * </div>
@@ -5832,9 +5833,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mb:20">solid style</h3>
             *   <ul class="s-tabs s-color:accent">
-            *     <li tabindex="0">Vincent Bosco</li>
-            *     <li tabindex="0" active>Ronald Champlin</li>
-            *     <li tabindex="0">Elizabeth Mraz</li>
+            *     <li tabindex="0">Simon Walsh</li>
+            *     <li tabindex="0" active>Shannon Rohan</li>
+            *     <li tabindex="0">Tami Rowe</li>
             *   </ul>
             * </div>
             * 
@@ -5843,9 +5844,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mb:20">Grow</h3>
         *   <ul class="s-tabs:grow">
-        *     <li tabindex="0" active>Velma Kessler</li>
-        *     <li tabindex="0">Taylor Cummerata</li>
-        *     <li tabindex="0">Leigh Moore</li>
+        *     <li tabindex="0" active>Nichole Bogisich</li>
+        *     <li tabindex="0">Rodney Mohr</li>
+        *     <li tabindex="0">Carl Ernser</li>
         *   </ul>
         * </div>
         * 
@@ -5853,9 +5854,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-tc:accent s-font:30 s-mb:20">RTL</h3>
         *   <ul class="s-tabs">
-        *     <li class="s-color:accent" tabindex="0" active>Leticia Schiller Jr.</li>
-        *     <li class="s-color:complementary" tabindex="0">Mr. Ora Luettgen</li>
-        *     <li tabindex="0">Ms. Winifred Schiller</li>
+        *     <li class="s-color:accent" tabindex="0" active>Yolanda Keeling</li>
+        *     <li class="s-color:complementary" tabindex="0">Frances O'Connell Jr.</li>
+        *     <li tabindex="0">Javier Doyle</li>
         *   </ul>
         * </div>
         * 
@@ -5863,9 +5864,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mb:20">Vertical</h3>
         *   <ul class="s-tabs:vertical s-color:complementary">
-        *     <li tabindex="0" active>Patti Yost</li>
-        *     <li tabindex="0">Edwin Howe</li>
-        *     <li tabindex="0">Mr. Iris Jacobson</li>
+        *     <li tabindex="0" active>Lucy Zieme</li>
+        *     <li tabindex="0">Jim Schultz I</li>
+        *     <li tabindex="0">Marguerite Kshlerin DVM</li>
         *   </ul>
         * </div>
         * 
@@ -5873,9 +5874,9 @@ label .s-input:disabled + *:hover, label .s-input:disabled + *:focus, label .s-i
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mb:20">Scaled</h3>
         *   <ul class="s-tabs:grow s-scale:13 s-color:accebt">
-        *     <li tabindex="0" active>Ronnie Beatty</li>
-        *     <li tabindex="0">Miss Wesley Welch</li>
-        *     <li tabindex="0">Alexandra Harris</li>
+        *     <li tabindex="0" active>Nettie Hilpert</li>
+        *     <li tabindex="0">Casey Simonis</li>
+        *     <li tabindex="0">Ben Bechtelar</li>
         *   </ul>
         * </div>
         *
@@ -6801,15 +6802,15 @@ background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-co
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">solid style</h3>
             *   <label class="s-mbe:30 s-label">
             *     <input type="radio" checked class="s-radio" name="radio-style-solid" value="hello 1" checked />
-            *     Principal Tactics Architect Elizabeth Friesen
+            *     District Applications Technician Francis Turcotte
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="radio" class="s-radio s-color:accent" name="radio-style-solid" value="hello 2" />
-            *     Forward Assurance Specialist Kenneth Williamson
+            *     Senior Interactions Coordinator Dustin Hudson
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <input type="radio" class="s-radio s-color:accent" name="radio-style-solid" value="hello 3" />
-            *     Customer Operations Orchestrator Ervin Crist
+            *     Lead Accountability Assistant Mrs. Daryl Auer
             *   </label>
             * </div>
             * 
@@ -6819,19 +6820,19 @@ background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-co
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" checked class="s-radio" name="radio-style-color" value="hello 1" checked />
-        *     Customer Solutions Analyst Tommy Haley III
+        *     Forward Group Engineer Miss Bessie Tromp
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-color" value="hello 2" />
-        *     International Quality Officer Pauline Pagac
+        *     National Metrics Agent Debbie Windler
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" class="s-radio s-color:complementary" name="radio-style-color" value="hello 3" />
-        *     Regional Intranet Technician Brandy Krajcik
+        *     Global Infrastructure Designer Marvin Sawayn
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" disabled class="s-radio s-color:error" name="radio-style-color" value="hello 4" />
-        *     Corporate Accountability Facilitator Otis Lehner
+        *     Lead Metrics Producer Carol Lang
         *   </label>
         * </div>
         * 
@@ -6840,15 +6841,15 @@ background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-co
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">LTR Support</h3>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-ltr" value="hello 1" checked />
-        *     International Functionality Orchestrator Abraham Blick
+        *     Lead Security Technician Julia Leannon
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-ltr" value="hello 2" />
-        *     Forward Communications Agent Constance Lemke
+        *     National Group Designer Guadalupe Schamberger
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-ltr" value="hello 3" />
-        *     Central Tactics Representative Carrie Mitchell
+        *     Chief Optimization Coordinator Darryl Torphy
         *   </label>
         * </div>
         * 
@@ -6857,15 +6858,15 @@ background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-co
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-scale" value="hello 1" checked />
-        *     Corporate Usability Designer Loretta Klein
+        *     Future Intranet Coordinator Lillian Hilll
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 2" />
-        *     Legacy Markets Specialist Miranda Haag
+        *     District Optimization Liaison Katherine West III
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
-        *     Human Applications Associate Evan Gerlach
+        *     Principal Metrics Producer Orville Dicki Jr.
         *   </label>
         * </div>
         * 
@@ -7359,27 +7360,27 @@ label:hover > .s-format--text input[type="radio"]:not(.s-format--none input[type
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">solid style</h3>
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select s-width:40" name="select-style-solid">
-            *       <option value="value1">Robert King</option>
-            *       <option value="value2">Alfred Wilderman</option>
-            *       <option value="value3">Oliver Stanton DVM</option>
+            *       <option value="value1">Ollie Von</option>
+            *       <option value="value2">Sandra Brown DVM</option>
+            *       <option value="value3">Timmy Dooley II</option>
             *     </select>
-            *     <span>Lead Operations Officer Nicole Crooks</span>
+            *     <span>Dynamic Web Manager Charlie Corkery</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select s-color:accent s-width:40" name="select-style-solid">
-            *       <option value="value1">Wilfred Kulas</option>
-            *       <option value="value2">Sergio O'Reilly</option>
-            *       <option value="value3">Wallace Reichel</option>
+            *       <option value="value1">Woodrow MacGyver</option>
+            *       <option value="value2">Mr. Salvatore Willms</option>
+            *       <option value="value3">Emily Cruickshank</option>
             *     </select>
-            *     <span>National Brand Facilitator Kelley Crooks V</span>
+            *     <span>Product Markets Analyst Norma Reilly MD</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select s-color:accent s-width:40" name="select-style-solid">
-            *       <option value="value1">Rudolph Koepp</option>
-            *       <option value="value2">Angel Hirthe</option>
-            *       <option value="value3">Forrest O'Hara</option>
+            *       <option value="value1">Pete Towne</option>
+            *       <option value="value2">Miguel Runolfsdottir</option>
+            *       <option value="value3">Joe Ankunding</option>
             *     </select>
-            *     <span>District Mobility Officer Janet Cassin</span>
+            *     <span>Dynamic Implementation Liaison Sean Zboncak</span>
             *   </label>
             * </div>
             * 
@@ -7389,35 +7390,35 @@ label:hover > .s-format--text input[type="radio"]:not(.s-format--none input[type
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-width:40" name="select-color-accent">
-        *       <option value="value1">Nathaniel Littel</option>
-        *       <option value="value2">Henry Grant</option>
-        *       <option value="value3">Bob Rogahn IV</option>
+        *       <option value="value1">Cheryl Aufderhar Sr.</option>
+        *       <option value="value2">Stewart Miller</option>
+        *       <option value="value3">Beverly Greenholt</option>
         *     </select>
-        *     <span>District Research Designer Alfonso Wyman</span>
+        *     <span>Dynamic Branding Associate Shane Rosenbaum</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-complementary">
-        *       <option value="value1">Peter Schowalter</option>
-        *       <option value="value2">Joey Russel</option>
-        *       <option value="value3">Megan Marvin</option>
+        *       <option value="value1">Flora Sawayn</option>
+        *       <option value="value2">Rosemarie Kreiger</option>
+        *       <option value="value3">Jasmine Smitham</option>
         *     </select>
-        *     <span>Senior Tactics Associate Alma Schinner</span>
+        *     <span>Product Directives Assistant Pamela Torphy</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:complementary s-width:40" name="select-color-error">
-        *       <option value="value1">Dr. Caleb Hettinger</option>
-        *       <option value="value2">Ashley Feest</option>
-        *       <option value="value3">Kristine Flatley</option>
+        *       <option value="value1">Ms. Ada Hane</option>
+        *       <option value="value2">Wilson Durgan</option>
+        *       <option value="value3">Lamar Dietrich</option>
         *     </select>
-        *     <span>Senior Paradigm Administrator Kurt Will</span>
+        *     <span>District Division Facilitator Faye D'Amore</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:error s-width:40" name="select-color-error" disabled>
-        *       <option value="value1">Meredith Beer</option>
-        *       <option value="value2">Alexandra Feest</option>
-        *       <option value="value3">Sue Treutel</option>
+        *       <option value="value1">Della Harber</option>
+        *       <option value="value2">Miss Wade Von</option>
+        *       <option value="value3">Ramona Pfannerstill</option>
         *     </select>
-        *     <span>Customer Program Designer Myra Bartoletti</span>
+        *     <span>National Applications Specialist Marcus Friesen</span>
         *   </label>
         * </div>
         * 
@@ -7426,11 +7427,11 @@ label:hover > .s-format--text input[type="radio"]:not(.s-format--none input[type
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Multiple</h3>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:accent s-width:40" multiple name="select-color-accent">
-        *       <option value="value1">Milton Streich</option>
-        *       <option value="value2">Christopher Pfeffer</option>
-        *       <option value="value3">Mathew Sauer</option>
+        *       <option value="value1">Paula Little</option>
+        *       <option value="value2">Celia Torp</option>
+        *       <option value="value3">Margie Gusikowski</option>
         *     </select>
-        *     <span>Internal Creative Specialist Myrtle Murazik</span>
+        *     <span>International Accountability Technician Virginia Waters</span>
         *   </label>
         * </div>
         * 
@@ -7439,27 +7440,27 @@ label:hover > .s-format--text input[type="radio"]:not(.s-format--none input[type
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Tommie Kuphal</option>
-        *       <option value="value2">Julian Mertz</option>
-        *       <option value="value3">Sharon Okuneva</option>
+        *       <option value="value1">Elaine Connelly</option>
+        *       <option value="value2">Tricia Reichel</option>
+        *       <option value="value3">Lela Schmeler</option>
         *     </select>
-        *     <span>Investor Branding Analyst Adrienne Ullrich</span>
+        *     <span>Corporate Implementation Manager Ray Sporer</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Steven Williamson II</option>
-        *       <option value="value2">Nora Larkin</option>
-        *       <option value="value3">Teresa Johns</option>
+        *       <option value="value1">Holly Parisian</option>
+        *       <option value="value2">Julian Hodkiewicz</option>
+        *       <option value="value3">Inez Wiegand</option>
         *     </select>
-        *     <span>Lead Functionality Executive Shane Boehm</span>
+        *     <span>Product Division Architect Morris Jacobson</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Otis Schumm</option>
-        *       <option value="value2">Ronnie Daniel</option>
-        *       <option value="value3">Wanda Jones</option>
+        *       <option value="value1">Randolph Fadel</option>
+        *       <option value="value2">Brandy Bartoletti</option>
+        *       <option value="value3">Deborah Greenfelder</option>
         *     </select>
-        *     <span>Chief Research Orchestrator Olga Robel</span>
+        *     <span>Product Functionality Producer Elsa Barton</span>
         *   </label>
         * </div>
         * 
@@ -7468,27 +7469,27 @@ label:hover > .s-format--text input[type="radio"]:not(.s-format--none input[type
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Darlene Treutel</option>
-        *       <option value="value2">Amy Lueilwitz</option>
-        *       <option value="value3">Angel Thiel</option>
+        *       <option value="value1">Lewis Kilback V</option>
+        *       <option value="value2">Hope Schoen Sr.</option>
+        *       <option value="value3">Jimmie Green</option>
         *     </select>
-        *     <span>Product Marketing Administrator Scott Walker</span>
+        *     <span>Lead Web Producer Alberta Morissette</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Penny Hackett</option>
-        *       <option value="value2">Dr. Christy O'Kon</option>
-        *       <option value="value3">James Hodkiewicz</option>
+        *       <option value="value1">Donna Jaskolski</option>
+        *       <option value="value2">Bradley Kertzmann</option>
+        *       <option value="value3">Megan Spencer II</option>
         *     </select>
-        *     <span>Direct Markets Director Sophia Goodwin</span>
+        *     <span>Regional Web Agent Harvey Marks</span>
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Herman Pfeffer</option>
-        *       <option value="value2">Louise Kerluke</option>
-        *       <option value="value3">Jack Runolfsdottir Sr.</option>
+        *       <option value="value1">Brett Hackett I</option>
+        *       <option value="value2">Jody Batz</option>
+        *       <option value="value3">Julius Kulas</option>
         *     </select>
-        *     <span>Dynamic Usability Supervisor Melanie Schaefer</span>
+        *     <span>Internal Tactics Producer Dominic Corkery</span>
         *   </label>
         * </div>
         * 
@@ -7500,9 +7501,9 @@ label:hover > .s-format--text input[type="radio"]:not(.s-format--none input[type
         *   </p>
         *   <div class="s-format:text">
         *     <select class="s-width:40" name="select-color-accent">
-        *       <option value="value1">Dr. Frankie Kuhlman</option>
-        *       <option value="value2">Ted Greenfelder</option>
-        *       <option value="value3">Lindsey Lebsack</option>
+        *       <option value="value1">Elijah Nader</option>
+        *       <option value="value2">Ollie Murazik II</option>
+        *       <option value="value3">Bryan Larson</option>
         *     </select>
         *   </div>
         * </div>
@@ -7733,9 +7734,9 @@ label .s-select:disabled + *:hover, label .s-select:disabled + *:focus, label .s
             * @example        html
             * <div class="s-format:text">
             *   <select>
-            *       <option>Robin Kilback</option>
-            *       <option>Andre Olson</option>
-            *       <option>Lorraine Schiller</option>
+            *       <option>Melody Schmeler</option>
+            *       <option>Otis Donnelly</option>
+            *       <option>Candice Kulas</option>
             *   </select>
             * </div>
             * 
@@ -7957,19 +7958,19 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
             * @example        html
             * <div class="s-rhythm:vertical">
             *   <select class="s-select">
-            *       <option>Jill Brakus</option>
-            *       <option>Tiffany Grant</option>
-            *       <option>Felipe Russel</option>
+            *       <option>Susan Mraz Jr.</option>
+            *       <option>Laurence Weimann</option>
+            *       <option>Robert Pfannerstill</option>
             *   </select>
             *   <select class="s-select">
-            *       <option>Christy Kautzer</option>
-            *       <option>Shawn Dietrich</option>
-            *       <option>Craig Torp</option>
+            *       <option>Opal Johnston</option>
+            *       <option>Noel McLaughlin</option>
+            *       <option>Roger Nitzsche</option>
             *   </select>
             *   <select class="s-select">
-            *       <option>Gladys Cartwright</option>
-            *       <option>Mr. Jamie Rodriguez</option>
-            *       <option>Ms. Bobbie Wisoky</option>
+            *       <option>Dr. Jay Rosenbaum</option>
+            *       <option>Gertrude Reilly Sr.</option>
+            *       <option>Rene Reichel</option>
             *   </select>
             * </div>
             * 
@@ -8004,23 +8005,23 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mb:20">solid style</h3>
             *   <label class="s-mbe:30 s-label">
-            *     Senior Integration Consultant Doyle Becker PhD
+            *     Direct Usability Agent Darlene Mante
             *     <input type="checkbox" checked class="s-switch" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     Human Applications Analyst Mark Schmidt
+            *     Customer Identity Supervisor Candace VonRueden
             *     <input type="checkbox" checked class="s-switch s-color:accent" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     Dynamic Implementation Representative Mr. Theodore Rohan
+            *     Forward Intranet Analyst Carole Ratke
             *     <input type="checkbox" checked class="s-switch s-color:complementary" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     Central Response Planner Edgar Barton
+            *     Forward Solutions Agent Traci Cole
             *     <input type="checkbox"  class="s-switch s-color:error" />
             *   </label>
                 <label class="s-mbe:30 s-label">
-            *     Senior Mobility Engineer Claudia Altenwerth
+            *     Chief Web Coordinator Domingo Nitzsche
             *     <input type="checkbox" disabled  class="s-switch s-color:accent" />
             *   </label>
             * </div>
@@ -8030,16 +8031,16 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
         * <div class="s-mbe:50" dir="rtl">
         *   <h3 class="s-tc:accent s-font:30 s-mb:20">RTL Support</h3>
         *   <label class="s-mbe:30 s-label">
-        *     Dynamic Brand Specialist Eula Corwin
+        *     Corporate Markets Coordinator Jake Terry
+        *     <input type="checkbox"  class="s-switch s-color:accent" />
+        *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     Central Branding Representative Teresa Green
         *     <input type="checkbox" checked class="s-switch s-color:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     Central Configuration Planner Darrell Toy
-        *     <input type="checkbox"  class="s-switch s-color:accent" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     Legacy Directives Specialist Kevin Jast
-        *     <input type="checkbox"  class="s-switch s-color:accent" />
+        *     Internal Markets Assistant Elvira Heaney
+        *     <input type="checkbox" checked class="s-switch s-color:accent" />
         *   </label>
         * </div>
         * 
@@ -8047,16 +8048,16 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mb:20">Scales</h3>
         *   <label class="s-mbe:30 s-label s-scale:05">
-        *     Dynamic Infrastructure Producer Marjorie Durgan V
+        *     Direct Assurance Assistant Ms. Casey Halvorson
         *     <input type="checkbox" checked class="s-switch s-color:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:10">
-        *     Dynamic Security Administrator Alan Durgan Sr.
+        *     Regional Group Manager Clarence Mertz
         *     <input type="checkbox"  class="s-switch s-color:accent" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:15">
-        *     Forward Branding Assistant Diana Parker
-        *     <input type="checkbox" checked class="s-switch s-color:accent" />
+        *     Central Research Technician Adrienne Batz
+        *     <input type="checkbox"  class="s-switch s-color:accent" />
         *   </label>
         * </div>
         * 
@@ -8075,7 +8076,7 @@ label .s-format--text select:not(.s-format--none select):disabled + *:hover, lab
         * @example        html
         * <label class="s-label">
         *   <input type="checkbox" class="s-switch" />
-        *   Pamela Kulas
+        *   Jana Upton
         * </label>
         * 
         * @since    2.0.0
@@ -8760,7 +8761,7 @@ label .s-terminal:disabled + *:hover, label .s-terminal:disabled + *:focus, labe
         *   <span class="s-tooltip-container:active">
         *       <a class="s-btn s-mr:20 s-mb:20">Hello</a>
         *       <div class="s-tooltip:inline-end s-color:accent">
-        *           Chief Interactions Facilitator Mrs. Roger Ortiz
+        *           Principal Security Analyst Misty Hirthe
         *       </div>
         *   </span>
         * </div>
@@ -8770,25 +8771,25 @@ label .s-terminal:disabled + *:hover, label .s-terminal:disabled + *:focus, labe
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Block start (default)</a>
         *       <div class="s-tooltip">
-        *           Future Intranet Developer Salvatore Welch
+        *           Human Metrics Producer Maurice Schmitt
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Inline end</a>
         *       <div class="s-tooltip:inline-end s-color:accent">
-        *           Product Operations Coordinator Antoinette Pollich
+        *           National Assurance Manager Doyle Welch
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Block end</a>
         *       <div class="s-tooltip:block-end s-color:complementary">
-        *           Direct Marketing Agent Johnnie Franecki II
+        *           Dynamic Paradigm Architect Mrs. Rogelio Goodwin
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Inline start</a>
         *       <div class="s-tooltip:inline-start s-color:error">
-        *           Product Solutions Associate Verna Heaney
+        *           Customer Markets Planner Tracey Effertz
         *       </div>
         *   </span>
         * </div>
@@ -8798,25 +8799,25 @@ label .s-terminal:disabled + *:hover, label .s-terminal:disabled + *:focus, labe
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Accent</a>
         *       <div class="s-tooltip s-color:accent">
-        *           Human Web Analyst Jimmy Gleason
+        *           Chief Security Supervisor Lee Schaefer
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Complementary</a>
         *       <div class="s-tooltip s-color:complementary">
-        *           Chief Paradigm Executive Curtis McKenzie MD
+        *           Lead Creative Designer Dana Wehner
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Error</a>
         *       <div class="s-tooltip s-color:error">
-        *           Dynamic Quality Analyst Krystal Prohaska
+        *           Global Directives Administrator Douglas Veum
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mr:20 s-mb:20">Info</a>
         *       <div class="s-tooltip s-color:info">
-        *           Central Markets Engineer Silvia Ondricka
+        *           Global Program Administrator Tammy Bode
         *       </div>
         *   </span>
         * </div>
@@ -13291,30 +13292,30 @@ max-width: none;
         * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text color</h3>
-         * <div class="s-tc:main s-mb:20">main: Cameron Spinka Sr.</div>
- * <div class="s-tc:ui s-mb:20">ui: Jacquelyn Grant</div>
- * <div class="s-tc:accent s-mb:20">accent: Dewey Jacobson</div>
- * <div class="s-tc:complementary s-mb:20">complementary: Nettie Kohler</div>
- * <div class="s-tc:success s-mb:20">success: Dr. Krystal Raynor</div>
- * <div class="s-tc:warning s-mb:20">warning: Luther Nitzsche</div>
- * <div class="s-tc:error s-mb:20">error: Jenny Schaden</div>
- * <div class="s-tc:info s-mb:20">info: Alberta Bruen IV</div>
- * <div class="s-tc:extension s-mb:20">extension: Marilyn VonRueden</div>
- * <div class="s-tc:current s-mb:20">current: Mrs. Eva Turner</div>
+         * <div class="s-tc:main s-mb:20">main: Megan Hackett</div>
+ * <div class="s-tc:ui s-mb:20">ui: Carroll Marvin Sr.</div>
+ * <div class="s-tc:accent s-mb:20">accent: Jeffery Weissnat DVM</div>
+ * <div class="s-tc:complementary s-mb:20">complementary: Marco Shanahan</div>
+ * <div class="s-tc:success s-mb:20">success: Mrs. Clifton Davis</div>
+ * <div class="s-tc:warning s-mb:20">warning: Madeline Torphy PhD</div>
+ * <div class="s-tc:error s-mb:20">error: Ernesto Padberg</div>
+ * <div class="s-tc:info s-mb:20">info: Wade Schmeler</div>
+ * <div class="s-tc:extension s-mb:20">extension: Kyle Langosh</div>
+ * <div class="s-tc:current s-mb:20">current: Cary Koch</div>
         * </div>
         *
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Background color</h3>
-         * <div class="s-bg:main s-p:10 s-mb:20">main: Marcella Hermiston</div>
- * <div class="s-bg:ui s-p:10 s-mb:20">ui: Mr. June Harvey</div>
- * <div class="s-bg:accent s-p:10 s-mb:20">accent: Todd Simonis</div>
- * <div class="s-bg:complementary s-p:10 s-mb:20">complementary: Tracey Rippin</div>
- * <div class="s-bg:success s-p:10 s-mb:20">success: Rex Howell</div>
- * <div class="s-bg:warning s-p:10 s-mb:20">warning: Gail Kunde</div>
- * <div class="s-bg:error s-p:10 s-mb:20">error: Debra Jacobi Jr.</div>
- * <div class="s-bg:info s-p:10 s-mb:20">info: Shelly Bogisich</div>
- * <div class="s-bg:extension s-p:10 s-mb:20">extension: Lucas Cormier</div>
- * <div class="s-bg:current s-p:10 s-mb:20">current: Rosa Hermann</div>
+         * <div class="s-bg:main s-p:10 s-mb:20">main: Santos Greenholt III</div>
+ * <div class="s-bg:ui s-p:10 s-mb:20">ui: Alyssa Steuber</div>
+ * <div class="s-bg:accent s-p:10 s-mb:20">accent: Yvonne Prohaska</div>
+ * <div class="s-bg:complementary s-p:10 s-mb:20">complementary: Maggie Padberg</div>
+ * <div class="s-bg:success s-p:10 s-mb:20">success: Charlotte Weber</div>
+ * <div class="s-bg:warning s-p:10 s-mb:20">warning: Opal Fay</div>
+ * <div class="s-bg:error s-p:10 s-mb:20">error: Pearl Casper</div>
+ * <div class="s-bg:info s-p:10 s-mb:20">info: Miss Brent Jaskolski</div>
+ * <div class="s-bg:extension s-p:10 s-mb:20">extension: Nicholas Ziemann</div>
+ * <div class="s-bg:current s-p:10 s-mb:20">current: Opal Roberts</div>
         * </div>
         * 
         * @since      2.0.0
@@ -25442,15 +25443,15 @@ max-width: none;
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
         *   <div class="s-format:text s-rhythm:vertical">
-        *       <h1>Lawrence Abernathy</h1>
-        *       <p>Velit nihil et est quo consequatur laboriosam.</p>
+        *       <h1>Norman Bode</h1>
+        *       <p>Repellat impedit velit.</p>
         *       <ul>
-        *           <li>Allan McKenzie</li>
-        *           <li>Anthony Doyle</li>
-        *           <li>Edith Mraz</li>
+        *           <li>Fred Fay</li>
+        *           <li>Tyler Langworth</li>
+        *           <li>Rudy Goldner</li>
         *       </ul>
         *       <blockquote>
-        *           Perspiciatis modi porro omnis est distinctio. Corporis eum sequi necessitatibus facilis et. Sit itaque delectus quae tenetur a velit placeat ut et. Aut et enim dolor asperiores ut quidem dolorem iure praesentium.
+        *           Repudiandae perspiciatis ex molestias dolorem sequi et minus. Qui quod ut. Odio itaque consequatur. Qui sed repellat.
         *       </blockquote>
         *       <table>
         *           <tr>
@@ -25467,17 +25468,17 @@ max-width: none;
         *           </tr>
         *       </table>
         *       <ol>
-        *           <li>Mrs. Lamar Turner</li>
-        *           <li>Carrie Dooley</li>
-        *           <li>Cody Ankunding</li>
+        *           <li>Willis Daniel</li>
+        *           <li>Patricia Hintz</li>
+        *           <li>Guadalupe Bednar</li>
         *       </ol>
         *       <select>
-        *           <option>Gwen Conroy</option>
-        *           <option>Nina Crist</option>
-        *           <option>Perry Deckow</option>
+        *           <option>Jessica Kuhlman</option>
+        *           <option>Laurence Towne</option>
+        *           <option>Mabel Davis</option>
         *       </select>
         *       <br />
-        *       <button>Leticia Ebert</button>
+        *       <button>Tami West</button>
         *   </div>
         * </div>
         * 
@@ -25506,15 +25507,15 @@ max-width: none;
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Rhythm vertical</h3>
         *   <div class="s-format:text s-rhythm:vertical">
-        *       <h1>Jaime Walsh</h1>
-        *       <p>Quia voluptatem est at error esse ut autem illum.</p>
+        *       <h1>Garrett Windler</h1>
+        *       <p>Ad et sit non.</p>
         *       <ul>
-        *           <li>Hazel Parisian</li>
-        *           <li>Rudy Luettgen</li>
-        *           <li>Wilson Anderson</li>
+        *           <li>Debra Shanahan</li>
+        *           <li>Brittany Miller</li>
+        *           <li>Lionel Bailey Jr.</li>
         *       </ul>
         *       <blockquote>
-        *           Aut consequuntur ut dolorum. Et atque qui quo id totam repellendus voluptatem fugit voluptate. Dicta deserunt dolor et et vel. Qui deleniti pariatur ipsam quod voluptate aliquam. Animi sit porro in quia et.
+        *           Esse autem officiis praesentium quas eligendi laborum ut. Facilis id sit necessitatibus non quam mollitia. Dolores dolor quia qui qui rerum officiis.
         *       </blockquote>
         *       <table>
         *           <tr>
@@ -25531,17 +25532,17 @@ max-width: none;
         *           </tr>
         *       </table>
         *       <ol>
-        *           <li>Frances Rosenbaum</li>
-        *           <li>Minnie Stanton I</li>
-        *           <li>Kerry Morissette</li>
+        *           <li>Ella Nikolaus</li>
+        *           <li>Sherry Lehner</li>
+        *           <li>May Mann</li>
         *       </ol>
         *       <select>
-        *           <option>Mamie Graham</option>
-        *           <option>Amber Wilderman IV</option>
-        *           <option>Grady Hilll</option>
+        *           <option>Leslie Dicki</option>
+        *           <option>Mrs. Lorena Okuneva</option>
+        *           <option>Duane Quigley DDS</option>
         *       </select>
         *       <br />
-        *       <button>Howard Maggio III</button>
+        *       <button>Belinda Upton</button>
         *   </div>
         * </div>
         * 
@@ -25975,8 +25976,88 @@ bottom: 0;
 right: 0;
     }
 /**
+        * @name          Text
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/scale
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows to apply some text styling like `text-align: left`, `text-align: right`, `text-decoration: underline`, etc...
+        * directly inside your HTML.
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass             s-text:left             Align the text to the left
+        * @cssClass             s-text:right             Align the text to the right
+        * @cssClass             s-text:center             Align the text to the center
+        * @cssClass             s-text:start             Align the text to the start (rtl aware)
+        * @cssClass             s-text:end             Align the text to the end (rtl aware)
+        * @cssClass             s-text:justify             Align the text to the justify
+        * @cssClass             s-text:overline             Apply the overline text decoration
+        * @cssClass             s-text:line-through             Apply the line-through text decoration
+        * @cssClass             s-text:underline             Apply the underline text decoration
+        * @cssClass             s-text:lowercase             Apply the lowercase text transform
+        * @cssClass             s-text:uppercase             Apply the uppercase text transform
+        * @cssClass             s-text:capitalize             Apply the capitalize text transform
+        * 
+        * @example        html
+        * <!-- align -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Aligns</h3>
+        *   <div class="s-text:left s-bg:main s-p:20 s-mbe:20">
+        *       (left) Jody Mertz Jr.
+        *   </div>
+        *   <div class="s-text:right s-bg:main s-p:20 s-mbe:20">
+        *       (right) Kim Bernier
+        *   </div>
+        *   <div class="s-text:center s-bg:main s-p:20 s-mbe:20">
+        *       (center) Vickie Botsford
+        *   </div>
+        *   <div class="s-text:start s-bg:main s-p:20 s-mbe:20">
+        *       (start) Gina Aufderhar
+        *   </div>
+        *   <div class="s-text:end s-bg:main s-p:20 s-mbe:20">
+        *       (end) Esther Lemke
+        *   </div>
+        * </div>
+        * 
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Decorations</h3>
+        *   <div class="s-text:overline s-bg:main s-p:20 s-mbe:20">
+        *       (overline) Mr. Maryann Schultz
+        *   </div>
+        *   <div class="s-text:underline s-bg:main s-p:20 s-mbe:20">
+        *       (underline) Shari Ward
+        *   </div>
+        *   <div class="s-text:line-through s-bg:main s-p:20 s-mbe:20">
+        *       (line-through) Darrell Rodriguez
+        *   </div>
+        * </div>
+        * 
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Transforms</h3>
+        *   <div class="s-text:lowercase s-bg:main s-p:20 s-mbe:20">
+        *       (lowercase) Lorena Balistreri
+        *   </div>
+        *   <div class="s-text:uppercase s-bg:main s-p:20 s-mbe:20">
+        *       (uppercase) Alfredo Huel
+        *   </div>
+        *   <div class="s-text:capitalize s-bg:main s-p:20 s-mbe:20">
+        *       (capitalize) Vickie Friesen
+        *   </div>
+        * </div>
+        * 
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
          * @name            s-text:left
-         * @namespace       sugar.css.mixins.align
+         * @namespace       sugar.css.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -25994,7 +26075,7 @@ right: 0;
         }
 /**
          * @name            s-text:right
-         * @namespace       sugar.css.mixins.align
+         * @namespace       sugar.css.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -26012,7 +26093,7 @@ right: 0;
         }
 /**
          * @name            s-text:center
-         * @namespace       sugar.css.mixins.align
+         * @namespace       sugar.css.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -26030,7 +26111,7 @@ right: 0;
         }
 /**
          * @name            s-text:start
-         * @namespace       sugar.css.mixins.align
+         * @namespace       sugar.css.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -26048,7 +26129,7 @@ right: 0;
         }
 /**
          * @name            s-text:end
-         * @namespace       sugar.css.mixins.align
+         * @namespace       sugar.css.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -26066,7 +26147,7 @@ right: 0;
         }
 /**
          * @name            s-text:justify
-         * @namespace       sugar.css.mixins.align
+         * @namespace       sugar.css.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -26083,7 +26164,115 @@ right: 0;
             text-align: justify;
         }
 /**
-        * @name          Font Families
+         * @name            s-text:overline
+         * @namespace       sugar.css.mixins.text
+         * @type            CssClass
+         * @platform      css
+         * @status        beta
+         * 
+         * This class allows you to overline the text
+         * 
+         * @example     html
+         * <div class="s-text:overline">Hello world</div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+.s-text--overline {
+            text-decoration: overline;
+        }
+/**
+         * @name            s-text:underline
+         * @namespace       sugar.css.mixins.text
+         * @type            CssClass
+         * @platform      css
+         * @status        beta
+         * 
+         * This class allows you to underline the text
+         * 
+         * @example     html
+         * <div class="s-text:underline">Hello world</div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+.s-text--underline {
+            text-decoration: underline;
+        }
+/**
+         * @name            s-text:line-through
+         * @namespace       sugar.css.mixins.text
+         * @type            CssClass
+         * @platform      css
+         * @status        beta
+         * 
+         * This class allows you to line-through the text
+         * 
+         * @example     html
+         * <div class="s-text:line-through">Hello world</div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+.s-text--line-through {
+            text-decoration: line-through;
+        }
+/**
+         * @name            s-text:lowercase
+         * @namespace       sugar.css.mixins.text
+         * @type            CssClass
+         * @platform      css
+         * @status        beta
+         * 
+         * This class allows you to lowercase the text
+         * 
+         * @example     html
+         * <div class="s-text:lowercase">Hello world</div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+.s-text--lowercase {
+            text-transform: lowercase;
+        }
+/**
+         * @name            s-text:uppercase
+         * @namespace       sugar.css.mixins.text
+         * @type            CssClass
+         * @platform      css
+         * @status        beta
+         * 
+         * This class allows you to uppercase the text
+         * 
+         * @example     html
+         * <div class="s-text:uppercase">Hello world</div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+.s-text--uppercase {
+            text-transform: uppercase;
+        }
+/**
+         * @name            s-text:capitalize
+         * @namespace       sugar.css.mixins.text
+         * @type            CssClass
+         * @platform      css
+         * @status        beta
+         * 
+         * This class allows you to capitalize the text
+         * 
+         * @example     html
+         * <div class="s-text:capitalize">Hello world</div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+.s-text--capitalize {
+            text-transform: capitalize;
+        }
+/**
+        * @name          Families
         * @namespace          sugar.css.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/families
@@ -26101,26 +26290,313 @@ right: 0;
  * @cssClass      s-font:title       Apply the `title` font on any HTMLElement
  * @cssClass      s-font:quote       Apply the `quote` font on any HTMLElement
  * @cssClass      s-font:code       Apply the `code` font on any HTMLElement
+        *    
+        * @example        html
+         * <div class="s-mbe:50">
+                        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">default</h3>
+                        *   <p class="s-font:default s-font:60">Dignissimos ut atque nihil.</p>
+                        * </div>
+ * <div class="s-mbe:50">
+                        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">title</h3>
+                        *   <p class="s-font:title s-font:60">Harum quos quod dolorem.</p>
+                        * </div>
+ * <div class="s-mbe:50">
+                        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">quote</h3>
+                        *   <p class="s-font:quote s-font:60">Sunt aut possimus.</p>
+                        * </div>
+ * <div class="s-mbe:50">
+                        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">code</h3>
+                        *   <p class="s-font:code s-font:60">Ea non adipisci magnam.</p>
+                        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+        * @name          Sizes
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font size to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+         * @cssClass            s-font:0          Apply the `0` size
+ * @cssClass            s-font:5          Apply the `5` size
+ * @cssClass            s-font:10          Apply the `10` size
+ * @cssClass            s-font:20          Apply the `20` size
+ * @cssClass            s-font:30          Apply the `30` size
+ * @cssClass            s-font:40          Apply the `40` size
+ * @cssClass            s-font:50          Apply the `50` size
+ * @cssClass            s-font:60          Apply the `60` size
+ * @cssClass            s-font:70          Apply the `70` size
+ * @cssClass            s-font:80          Apply the `80` size
+ * @cssClass            s-font:90          Apply the `90` size
+ * @cssClass            s-font:100          Apply the `100` size
+ * @cssClass            s-font:default          Apply the `default` size
+        * 
+        *    
+        * @example        html
+         * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">0</h3>
+            *   <p class="s-font:0">Expedita autem eum illo velit velit voluptatem vel et.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">5</h3>
+            *   <p class="s-font:5">Ad et natus aut sint.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">10</h3>
+            *   <p class="s-font:10">Repellendus voluptas et eum sed voluptas laboriosam numquam et.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">20</h3>
+            *   <p class="s-font:20">Natus aut deserunt totam quos aperiam velit ut soluta nam.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">30</h3>
+            *   <p class="s-font:30">Sed at incidunt.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">40</h3>
+            *   <p class="s-font:40">Ex molestiae et dolorum eos totam quae sed deleniti maxime.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">50</h3>
+            *   <p class="s-font:50">Id nesciunt aut voluptate voluptatem accusantium nobis.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">60</h3>
+            *   <p class="s-font:60">Praesentium sed consequatur voluptatem voluptatibus ut.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">70</h3>
+            *   <p class="s-font:70">Ea recusandae aut consequatur.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">80</h3>
+            *   <p class="s-font:80">Nihil tenetur ut quibusdam inventore eaque hic maiores.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">90</h3>
+            *   <p class="s-font:90">At molestiae magnam amet et rerum reiciendis.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">100</h3>
+            *   <p class="s-font:100">Quidem eius sit quisquam accusamus voluptatem.</p>
+            * </div>
+ * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">default</h3>
+            *   <p class="s-font:default">Voluptatem et deserunt ex quod quos.</p>
+            * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+        * @name          Styles
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/styles
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font style to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass         s-font:italic                   Apply the `italic` font-style value
+        * @cssClass         s-font:oblique                   Apply the `oblique` font-style value
+        *    
+        * @example        html
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Italic</h3>
+        *   <p class="s-font:italic s-mbe:20">Beatae quam sapiente eos.</p>
+        * </div>
+        * 
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Oblique</h3>
+        *   <p class="s-font:oblique s-mbe:20">Sapiente quasi nobis natus consequatur voluptate est.</p>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+        * @name          Weights
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/weights
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font weight to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass         s-font:bold                     Apply the `bold` font-weight value
+        * @cssClass         s-font:bolder                     Apply the `bolder` font-weight value
+        * @cssClass         s-font:lighter                     Apply the `lighter` font-weight value
+        * @cssClass         s-font:weight-100                     Apply the `100` font-weight value
+        * @cssClass         s-font:weight-200                     Apply the `200` font-weight value
+        * @cssClass         s-font:weight-300                     Apply the `300` font-weight value
+        * @cssClass         s-font:weight-400                     Apply the `400` font-weight value
+        * @cssClass         s-font:weight-500                     Apply the `500` font-weight value
+        * @cssClass         s-font:weight-600                     Apply the `600` font-weight value
+        * @cssClass         s-font:weight-700                     Apply the `700` font-weight value
+        * @cssClass         s-font:weight-800                     Apply the `800` font-weight value
+        * @cssClass         s-font:weight-900                     Apply the `900` font-weight value
+        * 
+        *    
+        * @example        html
+         * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">bold</h3>
+                    *   <p class="s-font:bold:50">Odio pariatur architecto voluptatem aliquam velit fugit.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">bolder</h3>
+                    *   <p class="s-font:bolder:50">Autem sunt dignissimos deserunt.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">lighter</h3>
+                    *   <p class="s-font:lighter:50">Iusto veritatis nulla consequatur doloremque culpa consequuntur ullam.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-100</h3>
+                    *   <p class="s-font:weight-100:50">Omnis excepturi est culpa nobis dolore quam.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-200</h3>
+                    *   <p class="s-font:weight-200:50">Nemo nam nulla porro eos vitae aut recusandae vel.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-300</h3>
+                    *   <p class="s-font:weight-300:50">Est quibusdam aut consequatur consequatur velit tempore dolorem.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-400</h3>
+                    *   <p class="s-font:weight-400:50">Est ut totam deserunt consequuntur.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-500</h3>
+                    *   <p class="s-font:weight-500:50">Voluptatum occaecati accusantium non aspernatur unde vero saepe molestiae velit.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-600</h3>
+                    *   <p class="s-font:weight-600:50">Eos ex tenetur et praesentium.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-700</h3>
+                    *   <p class="s-font:weight-700:50">Rerum unde explicabo ipsam sapiente expedita culpa enim.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-800</h3>
+                    *   <p class="s-font:weight-800:50">Minus iure molestiae porro neque facere molestias.</p>
+                    * </div>
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-900</h3>
+                    *   <p class="s-font:weight-900:50">Et autem et vitae sunt ducimus in qui culpa ullam.</p>
+                    * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+        * @name          Stretches
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/stretches
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font stretch to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass         s-font:ultra-condensed              Apply the `ultra-condensed` font-stretch value
+        * @cssClass         s-font:extra-condensed              Apply the `extra-condensed` font-stretch value
+        * @cssClass         s-font:condensed              Apply the `condensed` font-stretch value
+        * @cssClass         s-font:semi-condensed              Apply the `semi-condensed` font-stretch value
+        * @cssClass         s-font:semi-expanded              Apply the `semi-expanded` font-stretch value
+        * @cssClass         s-font:expanded              Apply the `expanded` font-stretch value
+        * @cssClass         s-font:extra-expanded              Apply the `extra-expanded` font-stretch value
+        * @cssClass         s-font:ultra-expanded              Apply the `ultra-expanded` font-stretch value
+        *    
+        * @example        html
+         * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">ultra-condensed</h3>
+                    *   <p class="s-font:ultra-condensed:50">Et at cupiditate rem.</p>
+                    * </div> 
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">extra-condensed</h3>
+                    *   <p class="s-font:extra-condensed:50">Neque odit quia explicabo molestiae qui impedit.</p>
+                    * </div> 
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">condensed</h3>
+                    *   <p class="s-font:condensed:50">Quia earum nam atque dolores ratione.</p>
+                    * </div> 
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">semi-condensed</h3>
+                    *   <p class="s-font:semi-condensed:50">Et quasi ratione.</p>
+                    * </div> 
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">semi-expanded</h3>
+                    *   <p class="s-font:semi-expanded:50">Dolorem mollitia a cupiditate.</p>
+                    * </div> 
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">expanded</h3>
+                    *   <p class="s-font:expanded:50">Molestias rerum omnis recusandae quaerat neque amet iure ea.</p>
+                    * </div> 
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">extra-expanded</h3>
+                    *   <p class="s-font:extra-expanded:50">Ratione rerum dicta consectetur.</p>
+                    * </div> 
+ * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">ultra-expanded</h3>
+                    *   <p class="s-font:ultra-expanded:50">Reiciendis non ipsam.</p>
+                    * </div> 
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+        * @name          Resets
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/resets
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to **reset fonts** like `size`, `family`, etc...
+        * 
+        * @cssClass           s-font:reset-size          Reset the size to 1rem
+        * @cssClass           s-font:reset-family        Reset to the default font
         * 
         * @example        html
-        * <span class="s-tc:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-font:50 s-mbe:30">Customer Integration Supervisor Melvin Schmeler</h1>
- * <span class="s-tc:accent s-font:30">title</span><br /><br /><h1 class="s-font:title s-font:50 s-mbe:30">Investor Implementation Liaison James Schmidt</h1>
- * <span class="s-tc:accent s-font:30">quote</span><br /><br /><h1 class="s-font:quote s-font:50 s-mbe:30">Internal Creative Representative Clayton Jerde</h1>
- * <span class="s-tc:accent s-font:30">code</span><br /><br /><h1 class="s-font:code s-font:50 s-mbe:30">Direct Directives Architect Mrs. Sylvester Connelly</h1>
+        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset size</h3>
+        * <div class="s-font:60 s-mbe:30">
+        *   International Factors Planner <span class="s-font:reset-size">Eleanor O'Reilly</span>
+        * </div>
         * 
-        * @example        css
-        * .my-font-default {
-        *     @sugar.font.family(default);  
-        * }
- * .my-font-title {
-        *     @sugar.font.family(title);  
-        * }
- * .my-font-quote {
-        *     @sugar.font.family(quote);  
-        * }
- * .my-font-code {
-        *     @sugar.font.family(code);  
-        * }
+        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset family</h3>
+        * <div class="s-font:quote s-font:50">
+        *   Central Functionality Assistant <span class="s-font:reset-family">Ramon Padberg</span>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -26199,89 +26675,6 @@ font-style: var(--s-theme-font-family-quote-font-style, normal);
 font-weight: var(--s-theme-font-family-code-font-weight, normal);
 font-style: var(--s-theme-font-family-code-font-style, normal);
 }
-/**
-        * @name          Font Sizes
-        * @namespace          sugar.css.font
-        * @type               CssClass
-        * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
-        * @platform       css
-        * @status       beta
-        * 
-        * This class allows you to apply a font size to any HTMLElement
-        * 
-        * @cssClass      s-font:0       Apply the `0` font size on any HTMLElement
- * @cssClass      s-font:5       Apply the `5` font size on any HTMLElement
- * @cssClass      s-font:10       Apply the `10` font size on any HTMLElement
- * @cssClass      s-font:20       Apply the `20` font size on any HTMLElement
- * @cssClass      s-font:30       Apply the `30` font size on any HTMLElement
- * @cssClass      s-font:40       Apply the `40` font size on any HTMLElement
- * @cssClass      s-font:50       Apply the `50` font size on any HTMLElement
- * @cssClass      s-font:60       Apply the `60` font size on any HTMLElement
- * @cssClass      s-font:70       Apply the `70` font size on any HTMLElement
- * @cssClass      s-font:80       Apply the `80` font size on any HTMLElement
- * @cssClass      s-font:90       Apply the `90` font size on any HTMLElement
- * @cssClass      s-font:100       Apply the `100` font size on any HTMLElement
- * @cssClass      s-font:default       Apply the `default` font size on any HTMLElement
-        * 
-        * @example        html
-        * <span class="s-tc:accent s-font:30">0</span><br /><br /><h1 class="s-font:0 s-mbe:30">Principal Accounts Associate Tricia Marvin</h1>
- * <span class="s-tc:accent s-font:30">5</span><br /><br /><h1 class="s-font:5 s-mbe:30">National Solutions Associate Wilbur Crona</h1>
- * <span class="s-tc:accent s-font:30">10</span><br /><br /><h1 class="s-font:10 s-mbe:30">Dynamic Security Consultant Lena Breitenberg</h1>
- * <span class="s-tc:accent s-font:30">20</span><br /><br /><h1 class="s-font:20 s-mbe:30">Regional Assurance Orchestrator Ismael Nikolaus</h1>
- * <span class="s-tc:accent s-font:30">30</span><br /><br /><h1 class="s-font:30 s-mbe:30">Dynamic Directives Facilitator Natasha Shields</h1>
- * <span class="s-tc:accent s-font:30">40</span><br /><br /><h1 class="s-font:40 s-mbe:30">Product Applications Officer Miss Winston Wehner</h1>
- * <span class="s-tc:accent s-font:30">50</span><br /><br /><h1 class="s-font:50 s-mbe:30">Internal Accountability Designer Jonathan Prohaska</h1>
- * <span class="s-tc:accent s-font:30">60</span><br /><br /><h1 class="s-font:60 s-mbe:30">Internal Security Specialist Ms. Dorothy Bergnaum</h1>
- * <span class="s-tc:accent s-font:30">70</span><br /><br /><h1 class="s-font:70 s-mbe:30">Central Research Planner Meredith Denesik</h1>
- * <span class="s-tc:accent s-font:30">80</span><br /><br /><h1 class="s-font:80 s-mbe:30">Product Response Analyst Dana Goyette</h1>
- * <span class="s-tc:accent s-font:30">90</span><br /><br /><h1 class="s-font:90 s-mbe:30">Regional Assurance Agent Alexandra Hills</h1>
- * <span class="s-tc:accent s-font:30">100</span><br /><br /><h1 class="s-font:100 s-mbe:30">Legacy Branding Representative Gail Reichert</h1>
- * <span class="s-tc:accent s-font:30">default</span><br /><br /><h1 class="s-font:default s-mbe:30">Dynamic Paradigm Orchestrator Mr. Abel Dicki</h1>
-        * 
-        * @example        css
-        * .my-font-0 {
-        *     @sugar.font.size(0);  
-        * }
- * .my-font-5 {
-        *     @sugar.font.size(5);  
-        * }
- * .my-font-10 {
-        *     @sugar.font.size(10);  
-        * }
- * .my-font-20 {
-        *     @sugar.font.size(20);  
-        * }
- * .my-font-30 {
-        *     @sugar.font.size(30);  
-        * }
- * .my-font-40 {
-        *     @sugar.font.size(40);  
-        * }
- * .my-font-50 {
-        *     @sugar.font.size(50);  
-        * }
- * .my-font-60 {
-        *     @sugar.font.size(60);  
-        * }
- * .my-font-70 {
-        *     @sugar.font.size(70);  
-        * }
- * .my-font-80 {
-        *     @sugar.font.size(80);  
-        * }
- * .my-font-90 {
-        *     @sugar.font.size(90);  
-        * }
- * .my-font-100 {
-        *     @sugar.font.size(100);  
-        * }
- * .my-font-default {
-        *     @sugar.font.size(default);  
-        * }
-        * 
-        * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
 /**
   * @name          s-font:0
   * @namespace          sugar.css.mixins.font
@@ -26451,33 +26844,6 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
 .s-font--100 {font-size: calc(var(--s-theme-font-size-100, 5rem) * var(--s-scale, 1));
 }
 /**
-        * @name          Font Resets
-        * @namespace          sugar.css.font
-        * @type               CssClass
-        * @menu           Styleguide / Fonts        /styleguide/fonts/resets
-        * @platform       css
-        * @status       beta
-        * 
-        * These classes allows you to **reset fonts** like `size`, `family`, etc...
-        * 
-        * @cssClass           s-font:reset-size          Reset the size to 1rem
-        * @cssClass           s-font:reset-family        Reset to the default font
-        * 
-        * @example        html
-        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset size</h3>
-        * <div class="s-font:60 s-mbe:30">
-        *   Investor Web Planner <span class="s-font:reset-size">Natalie McClure</span>
-        * </div>
-        * 
-        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset family</h3>
-        * <div class="s-font:quote s-font:50">
-        *   Human Optimization Manager <span class="s-font:reset-family">Joseph Konopelski</span>
-        * </div>
-        * 
-        * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-/**
   * @name          s-font:reset-size
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -26488,6 +26854,9 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
   * 
   * @example        html
   * <h1 class="s-font:reset-size">Hello world</h1>
+  * 
+  * @since      2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
 .s-font--reset-size {
   font-size: calc(1rem * var(--s-scale, 1));
@@ -26503,10 +26872,409 @@ font-style: var(--s-theme-font-family-code-font-style, normal);
   * 
   * @example        html
   * <h1 class="s-font:reset-family">Hello world</h1>
+  * 
+  * @since      2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
 .s-font--reset-family {font-family: var(--s-theme-font-family-default-font-family, "Titillium Web");
 font-weight: var(--s-theme-font-family-default-font-weight, 400);
 }
+/**
+            * @name          s-font:ultra-condensed
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: ultra-condensed` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:ultra-condensed">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--ultra-condensed {
+                font-stretch: ultra-condensed;
+            }
+/**
+            * @name          s-font:extra-condensed
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: extra-condensed` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:extra-condensed">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--extra-condensed {
+                font-stretch: extra-condensed;
+            }
+/**
+            * @name          s-font:condensed
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: condensed` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:condensed">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--condensed {
+                font-stretch: condensed;
+            }
+/**
+            * @name          s-font:semi-condensed
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: semi-condensed` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:semi-condensed">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--semi-condensed {
+                font-stretch: semi-condensed;
+            }
+/**
+            * @name          s-font:semi-expanded
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: semi-expanded` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:semi-expanded">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--semi-expanded {
+                font-stretch: semi-expanded;
+            }
+/**
+            * @name          s-font:expanded
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: expanded` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:expanded">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--expanded {
+                font-stretch: expanded;
+            }
+/**
+            * @name          s-font:extra-expanded
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: extra-expanded` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:extra-expanded">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--extra-expanded {
+                font-stretch: extra-expanded;
+            }
+/**
+            * @name          s-font:ultra-expanded
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-stretch: ultra-expanded` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:ultra-expanded">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--ultra-expanded {
+                font-stretch: ultra-expanded;
+            }
+/**
+            * @name          s-font:italic
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-style: italic` css value on any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:italic">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--italic {
+                font-style: italic;
+            }
+/**
+            * @name          s-font:oblique
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-style: oblique` css value on any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:oblique">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--oblique {
+                font-style: oblique;
+            }
+/**
+            * @name          s-font:bold
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: bold` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:bold">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--bold {
+                font-weight: bold;
+            }
+/**
+            * @name          s-font:bolder
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: bolder` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:bolder">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--bolder {
+                font-weight: bolder;
+            }
+/**
+            * @name          s-font:lighter
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: lighter` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:lighter">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--lighter {
+                font-weight: lighter;
+            }
+/**
+            * @name          s-font:weight-100
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 100` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:100">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-100 {
+                font-weight: 100;
+            }
+/**
+            * @name          s-font:weight-200
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 200` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:200">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-200 {
+                font-weight: 200;
+            }
+/**
+            * @name          s-font:weight-300
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 300` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:300">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-300 {
+                font-weight: 300;
+            }
+/**
+            * @name          s-font:weight-400
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 400` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:400">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-400 {
+                font-weight: 400;
+            }
+/**
+            * @name          s-font:weight-500
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 500` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:500">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-500 {
+                font-weight: 500;
+            }
+/**
+            * @name          s-font:weight-600
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 600` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:600">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-600 {
+                font-weight: 600;
+            }
+/**
+            * @name          s-font:weight-700
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 700` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:700">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-700 {
+                font-weight: 700;
+            }
+/**
+            * @name          s-font:weight-800
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 800` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:800">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-800 {
+                font-weight: 800;
+            }
+/**
+            * @name          s-font:weight-900
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the `font-weight: 900` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:900">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-font--weight-900 {
+                font-weight: 900;
+            }
 /**
         * @name          Depth
         * @namespace          sugar.css.helpers
@@ -26831,10 +27599,10 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Simple grid</h3>
         *   <div class="s-flex:row:wrap">
-        *     <div class="s-bg:main s-width:50 s-p:20">Viola Bruen</div>
-        *     <div class="s-bg:accent s-width:50 s-p:20">Flora Schimmel</div>
-        *     <div class="s-bg:complementary s-width:50 s-p:20">Mrs. Krista Hirthe</div>
-        *     <div class="s-bg:info s-width:50 s-p:20">Shawn Effertz IV</div>
+        *     <div class="s-bg:main s-width:50 s-p:20">Bobbie Treutel</div>
+        *     <div class="s-bg:accent s-width:50 s-p:20">Lee Hahn</div>
+        *     <div class="s-bg:complementary s-width:50 s-p:20">Miss Caleb Koepp</div>
+        *     <div class="s-bg:info s-width:50 s-p:20">Terrance King</div>
         *   </div>
         * </div>
         * 
@@ -26842,9 +27610,9 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grow</h3>
         *   <div class="s-flex:row:nowrap">
-        *     <div class="s-bg:main s-p:20 s-flex-item:grow">Ann Rath</div>
-        *     <div class="s-bg:accent s-p:20">Ms. Marcus Casper</div>
-        *     <div class="s-bg:complementary s-p:20">Eunice Gaylord IV</div>
+        *     <div class="s-bg:main s-p:20 s-flex-item:grow">Dominick Willms</div>
+        *     <div class="s-bg:accent s-p:20">Krista Windler MD</div>
+        *     <div class="s-bg:complementary s-p:20">Lindsay Prosacco</div>
         *   </div>
         * </div>
         * 
@@ -26852,9 +27620,9 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Order</h3>
         *   <div class="s-flex:row:nowrap">
-        *     <div class="s-bg:main s-p:20 s-flex-item:order-3">Candice Purdy</div>
-        *     <div class="s-bg:accent s-p:20">Gertrude Marvin</div>
-        *     <div class="s-bg:complementary s-p:20">Salvatore Jacobi</div>
+        *     <div class="s-bg:main s-p:20 s-flex-item:order-3">Robyn Reynolds</div>
+        *     <div class="s-bg:accent s-p:20">Frank Ondricka</div>
+        *     <div class="s-bg:complementary s-p:20">Dustin Harvey</div>
         *   </div>
         * </div>
         * 
@@ -26862,9 +27630,9 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Align</h3>
         *   <div class="s-flex:row:nowrap:align-end">
-        *     <div class="s-bg:main s-p:20">Tracy Kilback</div>
-        *     <div class="s-bg:accent s-p:20">Marian Romaguera<br />Mrs. Santos Koelpin<br />Mamie Conroy<br />Benjamin Ondricka<br />Jeremiah Conroy</div>
-        *     <div class="s-bg:complementary s-p:20">Lindsey Larkin</div>
+        *     <div class="s-bg:main s-p:20">Randolph Shanahan</div>
+        *     <div class="s-bg:accent s-p:20">Ernesto McDermott<br />Anthony Hills<br />Josh Rath<br />Angel Rowe II<br />Diana Schamberger</div>
+        *     <div class="s-bg:complementary s-p:20">Anne Feil</div>
         *   </div>
         * </div>
         * 
@@ -28315,9 +29083,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * These classes allows you to apply some ratio to any HTMLElement.
         * **These classes make use of the `aspect-ratio` css property**
         * 
-        * @caniuse      aspect-ratio border-radius
-        * @caniuse      color
-        * 
         * @support      chromium
         * @support      firefox
         * @support      safari
@@ -28325,8 +29090,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * 
          * @cssClass     s-ratio:1
                 }            Apply the 1 ratio
- * @cssClass     s-ratio:1-1
-                }            Apply the 1-1 ratio
  * @cssClass     s-ratio:21-9
                 }            Apply the 21-9 ratio
  * @cssClass     s-ratio:16-9
@@ -28342,15 +29105,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
          * <!-- 1 ratio -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">1 ratio</h3>
-            *   <div class="s-ratio:1">
-            *       <img class="s-fit:cover" src="https://picsum.photos/500/500" />
-            *   </div>
-            * </div>
-            * 
- * <!-- 1-1 ratio -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">1-1 ratio</h3>
-            *   <div class="s-ratio:1-1">
+            *   <div class="s-ratio:1 s-width:40">
             *       <img class="s-fit:cover" src="https://picsum.photos/500/500" />
             *   </div>
             * </div>
@@ -28358,7 +29113,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
  * <!-- 21-9 ratio -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">21-9 ratio</h3>
-            *   <div class="s-ratio:21-9">
+            *   <div class="s-ratio:21-9 s-width:40">
             *       <img class="s-fit:cover" src="https://picsum.photos/500/500" />
             *   </div>
             * </div>
@@ -28366,7 +29121,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
  * <!-- 16-9 ratio -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">16-9 ratio</h3>
-            *   <div class="s-ratio:16-9">
+            *   <div class="s-ratio:16-9 s-width:40">
             *       <img class="s-fit:cover" src="https://picsum.photos/500/500" />
             *   </div>
             * </div>
@@ -28374,7 +29129,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
  * <!-- 2-3 ratio -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">2-3 ratio</h3>
-            *   <div class="s-ratio:2-3">
+            *   <div class="s-ratio:2-3 s-width:40">
             *       <img class="s-fit:cover" src="https://picsum.photos/500/500" />
             *   </div>
             * </div>
@@ -28382,7 +29137,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
  * <!-- 4-3 ratio -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">4-3 ratio</h3>
-            *   <div class="s-ratio:4-3">
+            *   <div class="s-ratio:4-3 s-width:40">
             *       <img class="s-fit:cover" src="https://picsum.photos/500/500" />
             *   </div>
             * </div>
@@ -28390,7 +29145,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
  * <!-- 3-4 ratio -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">3-4 ratio</h3>
-            *   <div class="s-ratio:3-4">
+            *   <div class="s-ratio:3-4 s-width:40">
             *       <img class="s-fit:cover" src="https://picsum.photos/500/500" />
             *   </div>
             * </div>
@@ -28414,22 +29169,6 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * </div>
   */
 .s-ratio--1 {aspect-ratio: 1;
-}
-/**
-  * @name          s-ratio:1-1
-  * @namespace          sugar.css.ratio
-  * @type               CssClass
-  * @platform             css
-  * @status             beta
-  * 
-  * This class allows you to apply a "<yellow>1-1</yellow>" ratio style to any HTMLElement
-  * 
-  * @example        html
-  * <div class="s-ratio:1-1 s-bg:accent">
-  *     <div class="s-center-abs">I'm a cool ratio container</div>
-  * </div>
-  */
-.s-ratio--1-1 {aspect-ratio: 1;
 }
 /**
   * @name          s-ratio:21-9
@@ -29045,72 +29784,72 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Block</h3>
         *   <div class="s-display:block">
-        *     <p class="s-typo:p">Lorene Brown</p>
-        *     <p class="s-typo:p">Samantha Homenick</p>
-        *     <p class="s-typo:p">Noel Hermann</p>
+        *     <p class="s-typo:p">Samantha Dach</p>
+        *     <p class="s-typo:p">Katie Lebsack</p>
+        *     <p class="s-typo:p">Rodolfo Wolf II</p>
         *   </div>
         * </div>
         * <!-- inline-block -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline block</h3>
         *   <div class="s-display:inline-block">
-        *     <p class="s-typo:p">Israel Murphy</p>
-        *     <p class="s-typo:p">Rolando Kassulke DDS</p>
-        *     <p class="s-typo:p">Clayton Abernathy DVM</p>
+        *     <p class="s-typo:p">Angelina Wunsch</p>
+        *     <p class="s-typo:p">Hattie Little</p>
+        *     <p class="s-typo:p">Mrs. Delia Nicolas</p>
         *   </div>
         * </div>
         * <!-- contents -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Contens</h3>
         *   <div class="s-display:contents">
-        *     <p class="s-typo:p">Helen Swaniawski</p>
-        *     <p class="s-typo:p">Eddie Bernhard</p>
-        *     <p class="s-typo:p">Alejandro Gibson</p>
+        *     <p class="s-typo:p">Mark Stamm</p>
+        *     <p class="s-typo:p">Byron Kunze</p>
+        *     <p class="s-typo:p">Rufus Stroman</p>
         *   </div>
         * </div>
         * <!-- flex -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Flex</h3>
         *   <div class="s-display:flex">
-        *     <p class="s-typo:p">Angela Wolff</p>
-        *     <p class="s-typo:p">Carol Hickle</p>
-        *     <p class="s-typo:p">Chester Cummerata</p>
+        *     <p class="s-typo:p">Samantha Hyatt</p>
+        *     <p class="s-typo:p">Derrick Hammes</p>
+        *     <p class="s-typo:p">Nathan Bauch</p>
         *   </div>
         * </div>
         * <!-- grid -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grid</h3>
         *   <div class="s-display:grid">
-        *     <p class="s-typo:p">Mrs. Antoinette King</p>
-        *     <p class="s-typo:p">Tyler Morar DDS</p>
-        *     <p class="s-typo:p">Andy Von</p>
+        *     <p class="s-typo:p">Mabel Satterfield</p>
+        *     <p class="s-typo:p">Willis Veum</p>
+        *     <p class="s-typo:p">Ada Klein</p>
         *   </div>
         * </div>
         * <!-- inline-flex -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline flex</h3>
         *   <div class="s-display:inline-flex">
-        *     <p class="s-typo:p">Madeline Kreiger</p>
-        *     <p class="s-typo:p">Alma Rowe</p>
-        *     <p class="s-typo:p">Francis Tillman</p>
+        *     <p class="s-typo:p">Sheri Padberg</p>
+        *     <p class="s-typo:p">Randall Weimann</p>
+        *     <p class="s-typo:p">Sheldon Bins</p>
         *   </div>
         * </div>
         * <!-- inline-grid -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline grid</h3>
         *   <div class="s-display:inline-grid">
-        *     <p class="s-typo:p">Kelvin Schuppe</p>
-        *     <p class="s-typo:p">Harold Beatty</p>
-        *     <p class="s-typo:p">Mr. Ruth Rohan</p>
+        *     <p class="s-typo:p">Mrs. Frances Weissnat</p>
+        *     <p class="s-typo:p">Marcia Kozey</p>
+        *     <p class="s-typo:p">Doyle O'Reilly PhD</p>
         *   </div>
         * </div>
         * <!-- none -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">None</h3>
         *   <div class="s-display:none">
-        *     <p class="s-typo:p">Michelle Nader</p>
-        *     <p class="s-typo:p">Miss Johnnie Lindgren</p>
-        *     <p class="s-typo:p">Max Connelly</p>
+        *     <p class="s-typo:p">Patsy Block</p>
+        *     <p class="s-typo:p">Delores Feest</p>
+        *     <p class="s-typo:p">Georgia Hudson</p>
         *   </div>
         * </div>
         * 
@@ -29715,6 +30454,65 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         pointer-events: fill;
     }
 /**
+        * @name          Transitions
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/transitions
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows to apply some transitions on any HTMLElement.
+        * These transitions are defined in the `theme.transition` theme settings.
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+         * @cssClass             s-transition:slow            Apply the `slow` transition, * @cssClass             s-transition            Apply the `default` transition, * @cssClass             s-transition:fast            Apply the `fast` transition
+        * 
+        * @example        html
+        
+                * <!-- slow -->
+                * <div class="s-mbe:50">
+                *   <h3 class="s-tc:accent s-font:30 s-mbe:30">slow</h3>
+                *   <div class="s-bg:main s-border:radius-30" id="s-transition-f7664394-e32c-4732-b479-78b9138df8ee">
+                *      <div class="s-transition:slow s-ratio:1 s-bg:accent s-border:radius-30"></div>
+                *   <style>
+                *       #s-transition-f7664394-e32c-4732-b479-78b9138df8ee > div { position: relative; left: 0; width: 100px; }
+                *       #s-transition-f7664394-e32c-4732-b479-78b9138df8ee:hover > div { left: calc(100% - 100px); )  }
+                *   </style>
+                *   </div>
+                * </div>
+
+                * <!-- default -->
+                * <div class="s-mbe:50">
+                *   <h3 class="s-tc:accent s-font:30 s-mbe:30">default</h3>
+                *   <div class="s-bg:main s-border:radius-30" id="s-transition-ccab2edb-5526-4001-85ca-35aafb7381f1">
+                *      <div class="s-transition s-ratio:1 s-bg:accent s-border:radius-30"></div>
+                *   <style>
+                *       #s-transition-ccab2edb-5526-4001-85ca-35aafb7381f1 > div { position: relative; left: 0; width: 100px; }
+                *       #s-transition-ccab2edb-5526-4001-85ca-35aafb7381f1:hover > div { left: calc(100% - 100px); )  }
+                *   </style>
+                *   </div>
+                * </div>
+
+                * <!-- fast -->
+                * <div class="s-mbe:50">
+                *   <h3 class="s-tc:accent s-font:30 s-mbe:30">fast</h3>
+                *   <div class="s-bg:main s-border:radius-30" id="s-transition-f9c77e8c-c965-4a8c-a83c-54db2e7a3fd9">
+                *      <div class="s-transition:fast s-ratio:1 s-bg:accent s-border:radius-30"></div>
+                *   <style>
+                *       #s-transition-f9c77e8c-c965-4a8c-a83c-54db2e7a3fd9 > div { position: relative; left: 0; width: 100px; }
+                *       #s-transition-f9c77e8c-c965-4a8c-a83c-54db2e7a3fd9:hover > div { left: calc(100% - 100px); )  }
+                *   </style>
+                *   </div>
+                * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
   * @name          s-ratio:slow
   * @namespace          sugar.css.transition
   * @type               CssClass
@@ -29728,7 +30526,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   *     <div class="s-center-abs">I'm a cool container</div>
   * </div>
   */
-.s-transition--slow {transition: var(--s-theme-transition-slow, all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995));
+.s-transition--slow {transition: var(--s-theme-transition-slow, all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)) !important;
 }
 /**
   * @name          s-ratio:default
@@ -29744,7 +30542,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   *     <div class="s-center-abs">I'm a cool container</div>
   * </div>
   */
-.s-transition--default {transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));
+.s-transition {transition: var(--s-theme-transition-default, all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995));
 }
 /**
   * @name          s-ratio:fast
@@ -29760,7 +30558,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   *     <div class="s-center-abs">I'm a cool container</div>
   * </div>
   */
-.s-transition--fast {transition: var(--s-theme-transition-fast, all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995));
+.s-transition--fast {transition: var(--s-theme-transition-fast, all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)) !important;
 }
 /**
         * @name          Margin
@@ -29935,26 +30733,26 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * @example        html
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Margin inline</h3>
-        *   <p class="s-bg:accent s-p:20 s-mbe:20">Jessica Schaden</p>
-        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Elena Nader</p>
-        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Jeanne Senger</p>
-        *   <p class="s-bg:error s-mie:30 s-p:20">Mr. Melba Hahn</p>
+        *   <p class="s-bg:accent s-p:20 s-mbe:20">Eva Denesik</p>
+        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Vivian Purdy</p>
+        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Mrs. Josefina Grady</p>
+        *   <p class="s-bg:error s-mie:30 s-p:20">Miss Delbert Ortiz</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
-        *   <p class="s-bg:accent s-p:20 s-mbe:20">Dorothy Bednar</p>
-        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Mr. Emily Ziemann</p>
-        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Mrs. Janet Heller</p>
-        *   <p class="s-bg:error s-mie:30 s-p:20">Hope Towne</p>
+        *   <p class="s-bg:accent s-p:20 s-mbe:20">Eva Raynor</p>
+        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">Opal Skiles</p>
+        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">Ann Orn</p>
+        *   <p class="s-bg:error s-mie:30 s-p:20">Jo Wisozk</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Margin Block</h3>
-        *   <div class="s-bg:accent s-mbe:40 s-p:20 s-text:center">Brooke Larson</div>
-        *   <div class="s-bg:complementary s-mbe:20 s-p:20 s-text:center">Mandy McLaughlin</div>
-        *   <div class="s-bg:ui s-mbe:50 s-p:20 s-text:center">Saul Willms</div>
-        *   <div class="s-bg:error s-p:20 s-text:center">Everett Witting</div>
+        *   <div class="s-bg:accent s-mbe:40 s-p:20 s-text:center">Ginger Fay</div>
+        *   <div class="s-bg:complementary s-mbe:20 s-p:20 s-text:center">Boyd Beatty</div>
+        *   <div class="s-bg:ui s-mbe:50 s-p:20 s-text:center">Stewart Towne</div>
+        *   <div class="s-bg:error s-p:20 s-text:center">Roy Baumbach</div>
         * </div>
         * 
         * @since      2.0.0
@@ -33559,6 +34357,231 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         opacity: var(--s-theme-opacity-100, 1);
    }
 /**
+        * @name          Scale
+        * @namespace          sugar.css.tools
+        * @type               Styleguide
+        * @menu           Styleguide / Tools        /styleguide/tools/scale
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows to apply a scale to any supported UI elements.
+        * This scale does not use the transform property but increase actual values like `padding`,
+        * `margin`, etc... In fact, all the properties setted with the `sugar.scallable` function.
+        * It's usually a good practice to set the `font-size` of your UI element to `sugar.scalable(1rem)`
+        * and then to set inner values using `em` unit.
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+         * @cssClass     s-scale:10
+                }            Apply the 10 scale
+ * @cssClass     s-scale:11
+                }            Apply the 11 scale
+ * @cssClass     s-scale:12
+                }            Apply the 12 scale
+ * @cssClass     s-scale:13
+                }            Apply the 13 scale
+ * @cssClass     s-scale:14
+                }            Apply the 14 scale
+ * @cssClass     s-scale:15
+                }            Apply the 15 scale
+ * @cssClass     s-scale:16
+                }            Apply the 16 scale
+ * @cssClass     s-scale:17
+                }            Apply the 17 scale
+ * @cssClass     s-scale:18
+                }            Apply the 18 scale
+ * @cssClass     s-scale:19
+                }            Apply the 19 scale
+ * @cssClass     s-scale:20
+                }            Apply the 20 scale
+ * @cssClass     s-scale:01
+                }            Apply the 01 scale
+ * @cssClass     s-scale:02
+                }            Apply the 02 scale
+ * @cssClass     s-scale:03
+                }            Apply the 03 scale
+ * @cssClass     s-scale:04
+                }            Apply the 04 scale
+ * @cssClass     s-scale:05
+                }            Apply the 05 scale
+ * @cssClass     s-scale:06
+                }            Apply the 06 scale
+ * @cssClass     s-scale:07
+                }            Apply the 07 scale
+ * @cssClass     s-scale:08
+                }            Apply the 08 scale
+ * @cssClass     s-scale:09
+                }            Apply the 09 scale
+        * 
+        * @example        html
+         * <!-- 10 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">10 ratio</h3>
+            *   <div class="s-scale:10">
+            *       <a class="s-btn">Jerome Daugherty</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 11 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">11 ratio</h3>
+            *   <div class="s-scale:11">
+            *       <a class="s-btn">Emanuel Bode</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 12 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">12 ratio</h3>
+            *   <div class="s-scale:12">
+            *       <a class="s-btn">Irene Bernhard III</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 13 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">13 ratio</h3>
+            *   <div class="s-scale:13">
+            *       <a class="s-btn">Kathryn Auer</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 14 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">14 ratio</h3>
+            *   <div class="s-scale:14">
+            *       <a class="s-btn">Lamar Moen</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 15 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">15 ratio</h3>
+            *   <div class="s-scale:15">
+            *       <a class="s-btn">Ronald Dickens</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 16 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">16 ratio</h3>
+            *   <div class="s-scale:16">
+            *       <a class="s-btn">Ms. Manuel Romaguera</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 17 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">17 ratio</h3>
+            *   <div class="s-scale:17">
+            *       <a class="s-btn">Emilio Stamm</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 18 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">18 ratio</h3>
+            *   <div class="s-scale:18">
+            *       <a class="s-btn">Miss Charlene Mosciski</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 19 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">19 ratio</h3>
+            *   <div class="s-scale:19">
+            *       <a class="s-btn">Mr. Dale Schuppe</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 20 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">20 ratio</h3>
+            *   <div class="s-scale:20">
+            *       <a class="s-btn">Maggie Homenick</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 01 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">01 ratio</h3>
+            *   <div class="s-scale:01">
+            *       <a class="s-btn">Susan Hermann</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 02 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">02 ratio</h3>
+            *   <div class="s-scale:02">
+            *       <a class="s-btn">Dale West</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 03 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">03 ratio</h3>
+            *   <div class="s-scale:03">
+            *       <a class="s-btn">Sammy Reilly</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 04 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">04 ratio</h3>
+            *   <div class="s-scale:04">
+            *       <a class="s-btn">Ellen O'Hara DDS</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 05 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">05 ratio</h3>
+            *   <div class="s-scale:05">
+            *       <a class="s-btn">Edward Bergstrom</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 06 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">06 ratio</h3>
+            *   <div class="s-scale:06">
+            *       <a class="s-btn">Garrett Schaefer</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 07 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">07 ratio</h3>
+            *   <div class="s-scale:07">
+            *       <a class="s-btn">Alejandro Effertz MD</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 08 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">08 ratio</h3>
+            *   <div class="s-scale:08">
+            *       <a class="s-btn">Terrence King</a>
+            *   </div>
+            * </div>
+            * 
+ * <!-- 09 scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">09 ratio</h3>
+            *   <div class="s-scale:09">
+            *       <a class="s-btn">Ms. Santiago Lubowitz</a>
+            *   </div>
+            * </div>
+            * 
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
   * @name          s-scale:10
   * @namespace          sugar.css.scale
   * @type               CssClass
@@ -34144,26 +35167,26 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
         * @example        html
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Padding inline</h3>
-        *   <p class="s-bg:accent s-pi:30">Katherine Gulgowski</p>
-        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Martha Harvey</p>
-        *   <p class="s-bg:ui s-pie:30">April Schneider</p>
-        *   <p class="s-bg:error s-pis:20 s-pie:40">Melody Trantow</p>
+        *   <p class="s-bg:accent s-pi:30">Eileen Hoeger</p>
+        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Anne Gleichner</p>
+        *   <p class="s-bg:ui s-pie:30">Conrad Schneider</p>
+        *   <p class="s-bg:error s-pis:20 s-pie:40">Tanya Hoppe</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50" dir="rtl">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
-        *   <p class="s-bg:accent s-pi:30">Edgar Runte</p>
-        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Dr. Paul Gorczany</p>
-        *   <p class="s-bg:ui s-pie:30">Cora Cormier</p>
-        *   <p class="s-bg:error s-pis:20 s-pie:40">Ricky Heller V</p>
+        *   <p class="s-bg:accent s-pi:30">Jenny Fay</p>
+        *   <p class="s-bg:complementary s-pis:20 s-pie:50">Irvin Bartell</p>
+        *   <p class="s-bg:ui s-pie:30">Norman Kautzer</p>
+        *   <p class="s-bg:error s-pis:20 s-pie:40">Jeremy Ernser</p>
         * </div>
         * 
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Padding Block</h3>
-        *   <div class="s-bg:accent s-pbe:40 s-text:center">Gayle Ebert</div>
-        *   <div class="s-bg:complementary s-pb:30 s-text:center">Dr. Ignacio Boyer</div>
-        *   <div class="s-bg:ui s-pbs:20 s-pbe:10 s-text:center">Lynda Williamson</div>
-        *   <div class="s-bg:error s-pbs:20 s-pbe:60 s-text:center">Dr. Stuart Von</div>
+        *   <div class="s-bg:accent s-pbe:40 s-text:center">Jody Wuckert</div>
+        *   <div class="s-bg:complementary s-pb:30 s-text:center">Nettie Howe</div>
+        *   <div class="s-bg:ui s-pbs:20 s-pbe:10 s-text:center">Freddie Kulas</div>
+        *   <div class="s-bg:error s-pbs:20 s-pbe:60 s-text:center">Mr. Nick Corwin</div>
         * </div>
         * 
         * @since      2.0.0
@@ -35943,61 +36966,61 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
          * <!-- truncate 1 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 1 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:1">Eaque temporibus dolore sed eos eligendi non.<br />Qui debitis quia occaecati et sunt pariatur aut sed deserunt.<br />Dolores quod suscipit harum quo cupiditate et incidunt incidunt.<br />Tempora aspernatur et vel quisquam nihil.<br />Nemo voluptatum assumenda.<br />Rerum laudantium pariatur consequatur voluptatem autem.<br />Accusantium qui ab reprehenderit eveniet magni.<br />Quo quas fugiat rerum.<br />Modi eius facere deserunt animi.<br />Unde nisi dolores soluta sit.<br />Animi laboriosam natus dicta.<br />Voluptas necessitatibus et eum.<br />Dolor occaecati recusandae asperiores rem sit assumenda.<br />Asperiores ut quisquam consequuntur.<br />Nostrum aut qui natus cumque doloremque dolorem deleniti debitis quas.</p>
+            *   <p class="s-typo:p s-truncate:1">Fugit in illo sed corrupti aliquid in voluptatibus nihil perspiciatis.<br />Minima consequatur id repellat rerum doloremque vel porro et reiciendis.<br />Quia iusto atque labore non doloremque velit impedit quis animi.<br />Iure cum deserunt ut.<br />In sint est sint.<br />Repellat voluptatum fugit qui minima maiores dolorem.<br />Fuga totam quo et nihil consequuntur veniam quia corrupti expedita.<br />Pariatur architecto commodi.<br />Vel saepe possimus autem sed ipsum sint.<br />Quia nesciunt est est in aut sed voluptate odit.<br />Sint iure consequuntur incidunt voluptatem explicabo consequatur maiores quibusdam ea.<br />Eum culpa sed.<br />Velit esse corporis illum consequatur temporibus voluptatem.<br />Pariatur dolor minus dolores.<br />Ipsa et asperiores quis sed reiciendis blanditiis ea optio numquam.</p>
             * </div>
             * 
  * <!-- truncate 2 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 2 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:2">Dolore fugit voluptatem id facilis.<br />Sed magnam quibusdam qui.<br />Et placeat impedit quaerat.<br />Sit architecto excepturi rerum consequatur omnis.<br />Eos et soluta.<br />Ut id ea.<br />Ullam rem quas consequatur hic.<br />Ab nesciunt distinctio facilis.<br />Aspernatur unde ut.<br />Et praesentium repellendus quae ducimus voluptas qui quibusdam rerum totam.<br />Voluptas alias in.<br />Nemo et occaecati dolores non.<br />Ipsum voluptatibus velit quia error asperiores.<br />Quia eius molestias pariatur quo at enim velit aliquid.<br />Sit accusamus mollitia id animi dolorem tempore ducimus magnam fuga.</p>
+            *   <p class="s-typo:p s-truncate:2">Nihil placeat eum autem.<br />Id nihil error.<br />Officiis expedita ab nisi eveniet magni.<br />Autem ipsa recusandae sint.<br />Expedita sint ut voluptates veritatis quaerat.<br />Laboriosam aspernatur corporis sed.<br />Ullam culpa pariatur adipisci iure magnam harum aut temporibus officiis.<br />Ea harum ullam soluta.<br />Molestiae consequatur et.<br />Dolores deserunt a laborum.<br />Eos at a optio dolor.<br />Vitae labore itaque ut quo aut.<br />Quos vel facilis ipsum sit.<br />Quidem facilis itaque iusto architecto natus rem iste.<br />Sed eos explicabo voluptatum doloribus velit quis.</p>
             * </div>
             * 
  * <!-- truncate 3 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 3 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:3">Non qui vel sed dicta doloribus quas.<br />Quaerat praesentium explicabo commodi ducimus omnis nihil.<br />Ut accusamus est beatae qui.<br />Voluptatem ex blanditiis.<br />Accusantium laboriosam est eaque quis.<br />Alias tempore sequi ad ut numquam culpa.<br />Magnam voluptatem facilis itaque eos rem sequi et expedita.<br />Non itaque vel quas unde.<br />Eveniet ut eveniet blanditiis autem nostrum porro.<br />Omnis modi eligendi nostrum dicta eum modi quae qui aperiam.<br />Sed quas consectetur dolorum natus dolores.<br />Temporibus voluptas et nam.<br />Dolores similique aperiam dignissimos doloribus.<br />Quo et magnam.<br />Nihil dolor excepturi rerum quasi qui repellat quaerat.</p>
+            *   <p class="s-typo:p s-truncate:3">Pariatur provident hic aliquid dignissimos aut eos fuga.<br />Eius omnis ea illum deleniti qui libero consectetur.<br />Tenetur qui quasi consequatur impedit tempora non et.<br />Modi natus reiciendis est id blanditiis.<br />Impedit consequatur architecto.<br />Reprehenderit sint exercitationem doloribus qui fuga rerum.<br />Accusamus assumenda in.<br />Nemo nam eos ex.<br />Qui velit praesentium.<br />Distinctio unde a quia corporis eum nisi.<br />Libero odio repudiandae adipisci unde earum earum repudiandae.<br />Delectus et sit atque molestiae dolorum incidunt incidunt officia et.<br />Sed provident eligendi qui.<br />Eligendi at velit fuga sunt.<br />Quia ea expedita qui occaecati ut amet facere officiis cupiditate.</p>
             * </div>
             * 
  * <!-- truncate 4 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 4 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:4">Placeat eos accusamus molestiae voluptatem.<br />Eius deserunt vel occaecati quis et est.<br />Deleniti et vel ea fuga animi sit sunt sapiente temporibus.<br />Esse natus quibusdam maxime magni omnis.<br />Maxime veritatis velit eum ut quisquam aut qui ipsa veritatis.<br />Est voluptate voluptatem unde quam.<br />Nostrum unde minima sint dolorem et maiores et.<br />Placeat animi provident voluptatibus ut quia ut ea.<br />Illum totam aut et.<br />Tempore ut voluptas.<br />Distinctio laborum aut.<br />Voluptas hic sint error minus occaecati aut libero quia.<br />Ea nemo vel corrupti rerum accusantium qui esse repellat pariatur.<br />Consectetur aut autem sed autem quibusdam esse est ea fugiat.<br />Sint officia debitis nemo optio optio amet ut commodi rerum.</p>
+            *   <p class="s-typo:p s-truncate:4">Et et soluta fuga porro.<br />Voluptas vel rem vitae impedit adipisci ex.<br />Cupiditate placeat at.<br />Sed exercitationem quis provident facere placeat aut.<br />Cum reprehenderit quibusdam repellat.<br />Ea tempore eos tempore.<br />Quisquam voluptas autem voluptatem.<br />Voluptatem et enim quia quo.<br />Cumque autem quidem.<br />Voluptate qui reiciendis reiciendis nostrum illum consequatur sed.<br />Perferendis quo fugit culpa ut non ea.<br />Quia aut quo qui et explicabo perferendis.<br />Enim laborum fuga possimus illo.<br />Iure illo consequatur non ipsam debitis voluptatem corrupti sint.<br />Vitae voluptas totam.</p>
             * </div>
             * 
  * <!-- truncate 5 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 5 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:5">Quis omnis ipsum architecto odit enim neque nemo.<br />Est perferendis in quia inventore velit ut optio atque earum.<br />Ipsum nemo commodi sequi explicabo aut possimus voluptatum.<br />Velit molestiae dolorem nostrum.<br />Et et et itaque adipisci sunt et accusantium.<br />Error repellendus ad vel officiis pariatur.<br />Voluptate odio dolorem error.<br />Tempora assumenda non est.<br />Minus fuga alias est saepe.<br />In odio et quo dolor porro similique vel.<br />Ut praesentium soluta odit.<br />Repellendus quisquam adipisci quis voluptatibus saepe hic.<br />Id velit natus eum doloremque.<br />Modi est dolore nihil velit fuga repellendus eaque voluptates.<br />Aut possimus excepturi deleniti quis asperiores provident possimus autem.</p>
+            *   <p class="s-typo:p s-truncate:5">Iure quia consequatur harum.<br />Sint similique possimus.<br />Quia pariatur tenetur quod ipsam at quam perspiciatis et.<br />Et facilis omnis veniam.<br />At incidunt quis saepe eum libero.<br />Qui rerum totam veritatis et maxime ducimus numquam.<br />Rerum at temporibus molestiae odio voluptatum ut eum dolores.<br />Aut sit nihil fugit in atque corporis.<br />Placeat dolores minima facere a voluptatem.<br />Eaque tempora recusandae sunt non pariatur.<br />Numquam et et.<br />Eaque placeat atque similique aut quis itaque quos velit iusto.<br />Qui nobis quibusdam sit at esse et qui consequatur illo.<br />Provident aut provident voluptas autem quo velit est sed aut.<br />Et vel sint perferendis est et.</p>
             * </div>
             * 
  * <!-- truncate 6 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 6 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:6">Autem a nisi in porro illo voluptas.<br />Molestiae occaecati molestiae quo unde esse nihil.<br />Ea quis est odio ullam sit.<br />Doloremque culpa et molestiae eum.<br />Esse voluptatibus sit repellendus temporibus.<br />Aut id nisi.<br />Omnis accusantium ut voluptas alias labore adipisci omnis ut.<br />Eius iure itaque adipisci minima labore consequatur.<br />Laborum reprehenderit in necessitatibus.<br />Ut quia modi.<br />Labore sunt voluptates vero aut.<br />Corporis omnis tempore totam possimus molestias ratione quis est eveniet.<br />Velit velit et voluptas dolor exercitationem et consequatur.<br />Alias harum possimus dicta.<br />Dolor quod quia et.</p>
+            *   <p class="s-typo:p s-truncate:6">Eius amet iure cum.<br />Officiis neque quis omnis asperiores et quam vel.<br />Omnis soluta aperiam maxime minus ut in velit.<br />Enim quidem est quia.<br />Dolores pariatur distinctio maxime natus.<br />Exercitationem nihil nihil autem quisquam.<br />Officiis qui mollitia nihil nulla incidunt ullam.<br />Quas iusto nobis minima nihil dignissimos autem distinctio eveniet.<br />Et ratione dolorem adipisci et deserunt pariatur harum incidunt et.<br />Tempore dolore deserunt molestiae et libero.<br />Repellat soluta nihil sed.<br />Consequatur eius omnis quae quia.<br />At assumenda minima reprehenderit non quis non.<br />Laborum et iusto fuga voluptatem pariatur voluptatem ut.<br />In fugit quo atque voluptate dolor.</p>
             * </div>
             * 
  * <!-- truncate 7 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 7 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:7">Dolore laudantium eum nihil quia neque consequatur consequatur quae.<br />Aut nihil aliquam non fugiat.<br />Laudantium non repellat animi architecto rerum quam.<br />Optio explicabo accusantium cum libero distinctio odio.<br />Voluptatem qui dolor dolores repellat dolorem quod quod et.<br />Eos animi qui doloribus quae rerum adipisci alias ut repellendus.<br />Voluptas quia maxime ad aut voluptas.<br />Deleniti eos incidunt aliquid quasi suscipit sequi aperiam odio aut.<br />Eligendi ipsam porro natus voluptatem at est quibusdam.<br />Quis et culpa expedita distinctio odio.<br />Vel dignissimos aut deserunt veniam qui quas.<br />Iure adipisci cupiditate est sunt animi est eum.<br />Debitis repellat libero maxime.<br />Nam asperiores sapiente.<br />At quo reiciendis architecto quasi voluptatem non fugiat.</p>
+            *   <p class="s-typo:p s-truncate:7">Vitae distinctio ea unde sint repellat est sit.<br />Consectetur est odit.<br />Animi ab labore temporibus vero excepturi rerum numquam esse.<br />Doloribus ratione eius et rerum qui molestiae aperiam expedita molestiae.<br />Commodi assumenda nobis quisquam sed itaque nobis.<br />Tempore sunt quos rem.<br />Sit modi ex dolorum omnis voluptatem cumque qui.<br />Consequatur minus culpa veniam expedita voluptatem.<br />Sunt ut harum cum.<br />Qui et sed reprehenderit odit quo deleniti omnis sit.<br />Nihil corporis illum.<br />Sed rerum non occaecati enim tempora rem.<br />Quam est occaecati consequuntur eos facere dolorem.<br />Omnis officiis beatae aspernatur laboriosam nihil commodi.<br />Adipisci id aut sequi cum et consequuntur.</p>
             * </div>
             * 
  * <!-- truncate 8 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 8 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:8">Dolor quod est sed quasi.<br />Est facere libero consequatur tenetur in ex.<br />Ex nostrum ad et.<br />Qui soluta illo est voluptas.<br />Fugiat alias quo consequatur ab a.<br />Rerum delectus nemo esse maxime reprehenderit dolores aut aut quam.<br />Cumque ratione accusamus iure.<br />At quia est non accusamus voluptas laudantium cupiditate voluptatem dolorem.<br />Porro et est et quisquam sit alias enim ab enim.<br />Praesentium dolore et et temporibus voluptatibus minus iste.<br />Aut recusandae similique ut excepturi ut veritatis eos et.<br />Porro voluptatem commodi ex.<br />Commodi quod perferendis et autem occaecati.<br />Voluptatem ducimus placeat est dolor excepturi voluptas ea omnis.<br />Illo doloribus rerum qui voluptatem nostrum voluptatem excepturi non.</p>
+            *   <p class="s-typo:p s-truncate:8">Vero deleniti aut quisquam commodi iusto aut itaque.<br />A recusandae architecto aut eligendi.<br />Iste eligendi sit consequatur dolores sed odio magni ea.<br />Perspiciatis recusandae facere quia enim error corrupti et corporis eius.<br />Consequuntur ut voluptatem laudantium quo soluta quod et est non.<br />Rerum illo voluptates sint dolores officia officiis omnis.<br />Velit possimus nihil est labore at doloribus accusantium.<br />Et maiores eveniet soluta.<br />Nam alias rerum et nihil quam nihil voluptatibus.<br />Est porro in quo repellat.<br />Asperiores excepturi aliquid numquam.<br />Esse eos molestias aut aperiam cupiditate qui alias.<br />Aliquid natus omnis totam dolor adipisci.<br />Rerum enim minus vel cumque aliquid dignissimos et.<br />Eum eius quo suscipit esse pariatur ratione illum.</p>
             * </div>
             * 
  * <!-- truncate 9 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 9 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:9">Facere est quo cum debitis doloribus quasi.<br />Voluptatibus dolore natus voluptas itaque repudiandae sed.<br />Qui explicabo id earum earum nobis.<br />Nulla accusantium omnis quae ea explicabo voluptatem.<br />Quasi voluptatem tenetur minus quasi est ab.<br />Earum id tenetur qui minima ipsam.<br />Dignissimos itaque non quisquam asperiores velit suscipit temporibus.<br />Ab voluptate consequatur vel aut consequuntur qui.<br />Quae dolores nesciunt consectetur optio ipsa modi sed.<br />Ipsam ab quasi qui nesciunt dolor quasi.<br />Aut cumque sint consequuntur ipsam.<br />Eos ex sit et sunt sit laborum quis eos est.<br />Cum fugit dignissimos ipsum velit.<br />Consequuntur officiis nam quis.<br />Non nesciunt ea autem ducimus aut quo provident sit illo.</p>
+            *   <p class="s-typo:p s-truncate:9">Omnis architecto cum quidem ab doloremque quam non ducimus qui.<br />Nisi et et ea beatae et ut et temporibus.<br />Cupiditate sint ullam qui ab velit.<br />Enim omnis aliquam quod qui quo.<br />Nesciunt deleniti nihil.<br />Aut sapiente sit aut nemo ut.<br />Quos consequatur magni vero iste.<br />Beatae animi illo tenetur voluptates similique numquam.<br />Ullam velit occaecati sed minima natus quasi aliquid.<br />Velit ipsum dolore repudiandae minus quaerat.<br />Voluptatem exercitationem voluptatem.<br />Vero laudantium similique non similique.<br />Placeat veritatis recusandae provident.<br />Id totam atque sed non eligendi et magni.<br />Quo eum ea qui itaque voluptatum saepe.</p>
             * </div>
             * 
  * <!-- truncate 10 -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to 10 line(s)</h3>
-            *   <p class="s-typo:p s-truncate:10">Deleniti voluptas earum.<br />Dolor nemo ducimus ea eum voluptas dolores exercitationem hic.<br />Error dolores corporis et id.<br />Expedita voluptate nam.<br />Voluptatem beatae quo a.<br />Molestiae facere ut voluptas est.<br />Minima alias quibusdam alias dolore.<br />Sit inventore quisquam repellendus facere.<br />Corrupti eligendi dolorem.<br />Sint cupiditate doloribus iste in incidunt rerum beatae quam.<br />Neque laborum eum excepturi facere voluptatem placeat non.<br />Sapiente iste ullam incidunt porro cum.<br />Pariatur quia laudantium quis in quo aut sit at.<br />Nostrum repellendus laborum aliquam sapiente odit suscipit quas veniam.<br />Doloribus occaecati occaecati.</p>
+            *   <p class="s-typo:p s-truncate:10">Dolorem tenetur nostrum earum cupiditate autem nobis vero incidunt.<br />Molestiae ipsam itaque nisi veniam totam.<br />Eos labore ullam et.<br />Officia debitis beatae et delectus aliquid quia ullam dignissimos iure.<br />Voluptatem sit in ut omnis voluptatem laboriosam quas nesciunt.<br />Dicta distinctio sint reiciendis quidem fugiat.<br />Libero aspernatur beatae numquam eaque voluptatem quae dolores nemo.<br />Facere est debitis assumenda.<br />Enim illo qui.<br />Blanditiis repellendus doloribus et.<br />Est cupiditate vero eligendi dolores iusto sunt vel ad delectus.<br />Et facere debitis voluptatem.<br />Suscipit dolores sit quo dolor sint in dolorem.<br />Aliquid eius ex.<br />Illum non reiciendis tempore velit quibusdam illo voluptas autem doloribus.</p>
             * </div>
             * 
         * 
@@ -36014,7 +37037,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>1</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:0">Dolore qui cum tempore iste quas ratione nihil ipsa doloribus.<br />Et magnam atque sit.<br />Officiis nemo aliquam vero magni unde itaque.<br />Quam distinctio ipsam sed voluptate earum.<br />Recusandae molestias blanditiis officia iste voluptate.<br />Sequi eaque vel quia dolorem assumenda voluptatem blanditiis.<br />Consequatur et expedita repellat provident.<br />Vero laudantium est dolorem rerum quia illo.<br />Labore id quos.<br />Voluptatem debitis id.<br />Omnis libero et quaerat itaque.<br />Ut ab at repellat libero facilis non voluptatum provident.<br />Amet aut impedit eum eum minus dolorem nemo.<br />A at nobis dolores dolorem eos.<br />Maiores vero reprehenderit rerum sint sit rerum dolores quidem.</p>
+  * <p class="s-typo:p s-truncate:0">Praesentium qui qui.<br />Ut et enim quas doloribus sunt eligendi.<br />Ut ut optio.<br />Esse id numquam officiis explicabo sed.<br />Dolorem non exercitationem hic dolorum rem perspiciatis voluptatem dolores sint.<br />Asperiores ratione quisquam ut vel ipsa reprehenderit ut earum.<br />Commodi odio ipsum.<br />Pariatur expedita optio nihil est nesciunt rerum facilis aut et.<br />Atque incidunt sit sequi laborum inventore.<br />Voluptatum corrupti et doloribus nihil.<br />Ea recusandae assumenda aut aut laboriosam.<br />Laborum est sed suscipit praesentium illo beatae ut explicabo rem.<br />Ut officiis explicabo nulla est neque rerum ratione voluptatem.<br />Voluptatibus omnis perspiciatis debitis voluptatibus quis molestiae distinctio.<br />Suscipit impedit quia ducimus iure voluptatem ea impedit eum voluptatem.</p>
   */
 .s-truncate--1 {display: block;
         display: -webkit-box;
@@ -36033,7 +37056,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>2</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:1">Ullam nam aliquid.<br />Earum aut qui est accusantium alias dolorem aperiam reprehenderit.<br />Perferendis et odit quae et sequi eum odio rerum.<br />Aut temporibus consequatur.<br />Omnis nobis omnis voluptatum ea et beatae quia exercitationem.<br />Autem omnis saepe ut.<br />Et quis sit ut tenetur blanditiis illo sit vitae.<br />Iusto molestiae voluptatibus cum.<br />In est recusandae quod minima.<br />Officiis et explicabo eaque ut id aut ut dolorem.<br />Dolores hic quia eos facere nihil aliquam.<br />Sit qui tempore impedit corrupti ea eum.<br />Accusamus non qui.<br />Praesentium officia at in quos.<br />Reiciendis beatae molestias officia minima fugit quia ex sequi eos.</p>
+  * <p class="s-typo:p s-truncate:1">Quis tempora fugit sit.<br />Eum illo velit non.<br />Eaque eaque qui non quos.<br />Occaecati dolor eos debitis natus voluptates ut magni aliquid.<br />Cum odio quis eum omnis non voluptas dignissimos hic.<br />Doloremque iure esse alias corporis et temporibus.<br />Minima provident aspernatur et asperiores eum.<br />Maxime tempore non velit aut corrupti est.<br />Similique repudiandae ut porro labore laborum aut consequuntur.<br />Cupiditate est quibusdam.<br />Modi aperiam facere.<br />Sit deserunt pariatur nisi aut est aut odit aspernatur veritatis.<br />Architecto sapiente aut qui voluptatem omnis vero mollitia.<br />Quo molestias fuga nam aut voluptatem expedita est.<br />Corrupti vel quasi dolorum quaerat.</p>
   */
 .s-truncate--2 {display: block;
         display: -webkit-box;
@@ -36052,7 +37075,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>3</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:2">Adipisci quia provident quidem temporibus tenetur qui laudantium.<br />Consequatur eum eius et ut labore aut ut neque.<br />Et velit eveniet odit molestias natus qui sunt.<br />Aspernatur provident aliquid.<br />Ipsa veniam aut inventore accusantium cumque.<br />Quia voluptate saepe corporis labore atque dolor nisi facilis.<br />Dolor sit dolorum.<br />Illum aliquam sit aut iste et nisi.<br />Laborum ducimus cum.<br />Incidunt et harum reiciendis quibusdam sapiente quos.<br />Blanditiis voluptatum saepe sed.<br />Tenetur qui earum quas nesciunt debitis.<br />Sunt animi maiores consequuntur.<br />Voluptatum non consequatur quia animi illo sint molestiae ut pariatur.<br />Placeat autem et saepe.</p>
+  * <p class="s-typo:p s-truncate:2">Impedit aut minima autem voluptatum.<br />Doloribus labore porro reprehenderit aut ea quidem.<br />Optio et sint sit sit eaque sunt ut.<br />Aut molestias accusamus id aperiam aliquam praesentium.<br />In exercitationem ut consectetur et itaque ipsa magni pariatur.<br />Quia cum quos sunt.<br />Velit rerum sequi provident aut et nam.<br />Unde dolor accusantium quaerat corrupti minus est et fugit.<br />Quaerat eum delectus qui laudantium quia.<br />Consequatur rerum enim reprehenderit totam unde quo.<br />Est quo ipsa autem doloremque.<br />Dicta cumque natus labore autem.<br />Asperiores omnis assumenda facere omnis saepe.<br />In et nobis recusandae modi beatae mollitia ut voluptatibus non.<br />Voluptates delectus molestiae sapiente nihil velit voluptatem sit cupiditate commodi.</p>
   */
 .s-truncate--3 {display: block;
         display: -webkit-box;
@@ -36071,7 +37094,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>4</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:3">Itaque qui minus et doloribus aut sit exercitationem ullam.<br />Temporibus sit fugiat eius voluptatum.<br />Suscipit praesentium odit necessitatibus facere doloribus aliquid sunt aspernatur aut.<br />Culpa et molestias accusamus voluptatem id.<br />Veniam et aut voluptates aut pariatur id dolores sequi.<br />Qui corporis quasi.<br />Dolores sed est.<br />Commodi qui enim reiciendis ad minus eaque sint.<br />Aut est numquam.<br />Sit assumenda est molestias maxime perspiciatis aut praesentium repellendus.<br />Dolores aperiam ut doloremque dolore qui nobis.<br />Cumque est vero soluta velit sunt nam iusto eos.<br />Dolores praesentium rerum blanditiis quis tempora ipsam.<br />Et eligendi nihil esse sunt sint sint dolore.<br />Veritatis inventore sed tempora ea mollitia.</p>
+  * <p class="s-typo:p s-truncate:3">Dolorem dolore eligendi.<br />Molestias facilis non laudantium error.<br />Magnam veniam mollitia dolor id in.<br />Unde perferendis modi consequatur sint neque laborum eos dolores.<br />Sint quaerat quae enim aliquid alias quidem ut.<br />Ipsa repellat voluptates error ipsam explicabo est sequi.<br />Et ratione eligendi eligendi sint.<br />Eum nobis debitis.<br />Ipsa voluptates accusantium atque non qui omnis.<br />Ipsum eaque et mollitia placeat rerum vel ut.<br />Eligendi qui et molestiae et id sequi.<br />Accusamus sunt laborum error mollitia adipisci labore deserunt ad harum.<br />Rem occaecati omnis distinctio perferendis expedita commodi recusandae est.<br />Sunt quia unde quas error voluptatem quisquam quod.<br />Numquam rerum ducimus omnis asperiores.</p>
   */
 .s-truncate--4 {display: block;
         display: -webkit-box;
@@ -36090,7 +37113,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>5</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:4">At voluptate eos in est necessitatibus.<br />Aliquid libero cumque quia quis culpa dolores porro accusantium.<br />Fugiat id quidem.<br />In doloremque aut.<br />Eum sint sapiente.<br />Veniam sapiente alias magni magni nobis veniam velit nihil inventore.<br />Ipsa dolorum quia quam.<br />Voluptatum earum molestias quibusdam officia odio assumenda saepe eum temporibus.<br />Eligendi voluptas voluptates debitis similique repudiandae.<br />Dignissimos ut quia laborum placeat et.<br />Tempore autem deserunt cumque natus.<br />Eaque dolore qui earum eligendi atque recusandae amet et beatae.<br />Et cupiditate accusamus consectetur laboriosam.<br />Ut eos laborum consequatur ipsum voluptas voluptas maxime.<br />Dolorum veniam occaecati sunt qui et qui aut.</p>
+  * <p class="s-typo:p s-truncate:4">Aut explicabo doloremque inventore soluta libero.<br />Necessitatibus et ipsum sunt.<br />Quia inventore qui ad officia.<br />Dicta et quis numquam et vitae.<br />Quia ipsa et exercitationem hic quibusdam dolorem.<br />Sit consequatur dolore culpa nisi vero error eius fugit dicta.<br />Sed dignissimos aliquid dolor.<br />Distinctio excepturi atque vel possimus velit.<br />Ea ut sint amet dolor deserunt modi.<br />Illo accusamus nam est temporibus eos.<br />Dolorem quis reprehenderit autem voluptas at ut delectus.<br />Iure nostrum sint occaecati.<br />Vero tenetur eum at dolorem animi expedita eius omnis.<br />Molestiae unde beatae in est labore beatae enim.<br />Fugit sint ducimus veritatis magni doloremque libero aut ducimus.</p>
   */
 .s-truncate--5 {display: block;
         display: -webkit-box;
@@ -36109,7 +37132,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>6</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:5">Omnis ipsam sapiente iste illum dignissimos quo odit non doloremque.<br />Et ea quasi repudiandae natus.<br />Sed molestiae ad et iusto ut maiores a facere reprehenderit.<br />Blanditiis velit dolorem aliquam dolorem aut consequatur aut.<br />Rerum velit mollitia magni nemo omnis numquam maxime beatae.<br />Eum ut earum enim ea modi provident numquam quidem nobis.<br />Tempora similique provident est.<br />Velit nemo esse voluptatem porro.<br />Ut odit repellat aut libero eum sed quidem.<br />Quia quia maiores quibusdam voluptatem rem.<br />Consequuntur explicabo minus alias id sint.<br />Et eos tenetur corrupti dolore iste id ipsa autem similique.<br />Molestias pariatur dolorem optio assumenda numquam dolor natus.<br />Quia velit rerum magni voluptatibus voluptatum autem.<br />Sed hic odit rerum repellendus laborum.</p>
+  * <p class="s-typo:p s-truncate:5">Ipsum rem tempora quo.<br />Et illo et molestias.<br />Omnis quia in qui quis asperiores amet ut.<br />Laboriosam esse laboriosam magnam architecto quia omnis nobis.<br />Natus nobis rerum culpa corrupti ex temporibus.<br />Eaque odit placeat ut cum veniam quod.<br />Et quae expedita ut.<br />Quo modi hic eaque dolores cupiditate fugiat quia.<br />Nesciunt qui quasi deserunt hic facere dolores et itaque.<br />Debitis consectetur minus quia sequi labore aut non saepe.<br />Distinctio exercitationem similique deserunt quas.<br />Nihil enim quia illo ipsa aut quis.<br />Temporibus omnis et quia repellat.<br />Inventore aliquid voluptatum velit.<br />Saepe ratione voluptatem tempore odio velit itaque qui.</p>
   */
 .s-truncate--6 {display: block;
         display: -webkit-box;
@@ -36128,7 +37151,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>7</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:6">Ducimus voluptatem eum aspernatur molestiae corporis provident sunt nesciunt inventore.<br />Ut eaque aperiam eaque.<br />Fugit ut deleniti et ducimus ullam ut vel voluptates dolorum.<br />Excepturi delectus quis voluptatem.<br />Modi accusantium officia similique aut corporis ipsum.<br />Omnis aut perferendis voluptatem est.<br />Nobis voluptas eaque velit et expedita quia est est.<br />Eum id sed temporibus tenetur error sit sed.<br />Delectus hic eligendi error ut dolore voluptatibus error hic voluptas.<br />Non et vel rerum nemo et incidunt et.<br />Sint eligendi neque debitis qui.<br />Corrupti consectetur eum placeat.<br />Cum perferendis nihil quia.<br />Est sequi vel.<br />Quod esse rerum eos recusandae ipsum ratione debitis asperiores.</p>
+  * <p class="s-typo:p s-truncate:6">Repellat omnis quo quia soluta.<br />Dolor est veniam voluptas consequatur commodi.<br />Ducimus aut placeat inventore et voluptas aut molestiae.<br />Quia repellat molestiae qui.<br />Qui quos earum sint non est.<br />Vitae nulla quod voluptatibus eligendi iure et voluptatem eum enim.<br />Quis fugiat doloribus ipsum tempora vero.<br />Beatae sit delectus possimus id quo temporibus sapiente non est.<br />Ut cupiditate velit reiciendis repellendus quam id minima atque.<br />Soluta non iusto ipsam.<br />Dolorem voluptatem praesentium earum laboriosam soluta numquam nisi quo.<br />Quasi temporibus quidem.<br />Qui aut qui neque natus nobis est.<br />Natus aut quia voluptatem quas perspiciatis ratione sit ut dolorem.<br />Placeat laborum molestiae et libero tenetur.</p>
   */
 .s-truncate--7 {display: block;
         display: -webkit-box;
@@ -36147,7 +37170,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>8</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:7">Quis beatae eveniet ut doloribus voluptatem laborum.<br />Pariatur perspiciatis ut.<br />Iste sed unde ad reprehenderit placeat voluptatem.<br />Ex aut iste odio necessitatibus dolore facilis et commodi.<br />Error ullam dolores labore.<br />Sed accusantium ea fugiat expedita est sint.<br />In magnam necessitatibus laboriosam maiores doloribus explicabo debitis.<br />Et saepe ab.<br />Debitis sunt rerum temporibus eius aut id ipsa in vero.<br />Debitis in saepe est mollitia aut doloremque omnis earum.<br />Officiis est quia animi maiores impedit accusamus voluptatum magni dolorum.<br />Quod veniam occaecati.<br />Culpa voluptas deserunt temporibus maiores repellendus voluptatum.<br />Animi est pariatur ut sequi.<br />Sit eos libero aut quibusdam et quia qui.</p>
+  * <p class="s-typo:p s-truncate:7">A quasi quidem.<br />Consequuntur non rerum repudiandae aliquid neque perferendis dolores magnam molestiae.<br />Ut et doloremque ipsa vel unde autem officia totam.<br />Non non et fugit harum est eum sapiente aut voluptas.<br />Reiciendis suscipit magni iure quo aut a et.<br />Quis quae omnis odio nesciunt veritatis nisi error quo ut.<br />Aliquid odio maxime.<br />Laborum voluptas ad aut et illum cupiditate quia recusandae voluptatem.<br />Animi minus et qui occaecati aperiam incidunt alias.<br />Fugiat quis labore.<br />Quidem reiciendis reiciendis placeat.<br />Ea quibusdam veritatis.<br />Quo quidem nobis sit quam.<br />Qui dignissimos repudiandae eos sit explicabo quod.<br />Odit a accusantium ex qui.</p>
   */
 .s-truncate--8 {display: block;
         display: -webkit-box;
@@ -36166,7 +37189,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>9</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:8">Itaque voluptas illum molestiae assumenda quisquam.<br />Voluptas non ut iure velit consequatur.<br />Sunt voluptatem quis a.<br />Quia rerum eos qui.<br />Nemo et dolorem ea blanditiis cum tenetur.<br />Laudantium tempora quia nostrum ducimus ducimus quo facilis occaecati qui.<br />Nam quasi est eligendi natus voluptatem qui.<br />Voluptatum illo qui dolorem fugit.<br />Ut in sed.<br />Voluptatem sit doloribus excepturi distinctio ut et facere accusamus dicta.<br />Nisi pariatur inventore.<br />Culpa voluptatum ea est possimus quibusdam voluptatem.<br />Velit ex eligendi.<br />Quia blanditiis quo.<br />Aut aliquid perferendis architecto aut sunt id.</p>
+  * <p class="s-typo:p s-truncate:8">Quos rem quo.<br />Eum repudiandae veniam sed.<br />Omnis harum reiciendis ab non non exercitationem et.<br />Neque voluptatem deleniti alias impedit.<br />Corporis provident quod nam explicabo occaecati eaque corrupti.<br />Odio et dignissimos inventore in.<br />Corrupti quam laborum tempore cum earum dolorem nobis inventore ut.<br />Magni iusto voluptatem consequatur molestiae.<br />Vel provident ipsam rerum commodi natus molestiae itaque et.<br />Est qui eius aliquid minus.<br />Qui dolorem sit placeat quisquam amet quae.<br />Et quisquam doloribus enim et consequuntur.<br />Et iure suscipit illo omnis.<br />Numquam ea quia in accusamus velit.<br />Ab natus illum rerum voluptatem voluptatem.</p>
   */
 .s-truncate--9 {display: block;
         display: -webkit-box;
@@ -36185,7 +37208,7 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
   * This class allows you to apply a "<yellow>10</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:9">Dolores eveniet aut debitis.<br />Accusantium corporis neque possimus consectetur sit ea assumenda quia accusamus.<br />Id error quis eius sit autem quas et.<br />Consequatur et vel modi quaerat.<br />Et deleniti est.<br />Repellendus excepturi blanditiis enim doloremque quaerat sunt officia accusamus eveniet.<br />Eligendi fugiat perferendis quod.<br />Officia perspiciatis odio et.<br />Maxime nulla dolor nostrum quia.<br />Et velit est accusamus ratione sit laboriosam voluptatem unde.<br />Officia sed recusandae consequuntur.<br />Excepturi aut voluptas aut aspernatur officiis adipisci.<br />Dolor blanditiis aliquam.<br />Laudantium est dolorum aliquam vel nulla inventore voluptatibus quis.<br />Praesentium dolorem quasi ut.</p>
+  * <p class="s-typo:p s-truncate:9">Explicabo repudiandae iusto autem mollitia.<br />In amet officiis culpa consectetur ab quam.<br />Libero fugit corporis molestiae placeat voluptatum sint.<br />Aut molestias provident qui.<br />Illum quidem recusandae iste veritatis omnis labore maxime voluptate.<br />Unde temporibus iusto qui quidem incidunt earum ut id nemo.<br />Ut maiores rerum expedita neque et.<br />Corporis incidunt eos sint ea expedita magni autem eaque.<br />Impedit qui ipsum.<br />Iste et dolor pariatur hic impedit officia.<br />Voluptas nam earum rerum ratione dignissimos voluptatibus architecto dolores.<br />Officia facilis dolores sunt.<br />Corrupti beatae aut in qui quos tempore consequuntur praesentium cumque.<br />Ipsam dolorum laudantium ipsum minima excepturi aut iusto.<br />Ea consequatur deserunt et eum accusantium quo quibusdam occaecati distinctio.</p>
   */
 .s-truncate--10 {display: block;
         display: -webkit-box;
@@ -36272,6 +37295,77 @@ font-weight: var(--s-theme-font-family-default-font-weight, 400);
 *[mounted] + .s-until.s-until--sibling.s-until--mounted:not(.s-until--hide) {
             display: none;
         }
+/**
+        * @name          Scrollbar
+        * @namespace          sugar.css.tools
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/scrollbar
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows to apply a custom scrollbar that follows your theme settings.
+        * It is based on the `theme.ui.scrollbar` settings.
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass     s-scrollbar         Apply the custom scrollbar
+        * 
+        * @example        html
+        * <!-- scrollbar vertical -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30"><Vertical</h3>
+        *   <div class="s-scrollbar" style="height:50px; overflow: auto;">
+        *       Jorge Brown<br>,Kristy Wilkinson<br>,Marvin Beier<br>,Rodney Wisoky<br>,Miguel Schoen V<br>,Daryl Ziemann<br>,Denise Pagac<br>,Stacey Bins<br>,Violet Reichel<br>,Jared Kuphal<br>,Frank Monahan<br>,Drew Abernathy<br>,Desiree Ullrich<br>,Mona Schoen<br>,Darrin Spinka II<br>,Gretchen Purdy<br>,Daisy Schuppe<br>,Betsy Witting<br>,Mr. Lance Sporer<br>,Michelle Blick<br>
+        *   </div>
+        * </div>
+        * 
+        * <!-- scrollbar orizontal -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30"><Horizontal</h3>
+        *   <div class="s-scrollbar" style="white-space:nowrap; height: 30px; overflow: auto;">
+        *       Repellendus dolores facilis rerum deserunt eum molestiae similique a omnis. Cupiditate voluptatibus quaerat. Ut rerum voluptates. Doloribus quaerat voluptas unde dolore.
+ Ipsum eveniet voluptatem distinctio commodi consequuntur nemo voluptas voluptatibus quaerat. Cupiditate et iusto quis. Dicta provident natus eos qui veritatis sit. Perferendis qui excepturi delectus distinctio nam natus et non. Beatae doloribus quis voluptates. In asperiores repellendus veniam aperiam veritatis nam voluptas in dolorum.
+ Non aut rerum doloremque totam pariatur molestiae fugit officiis et. Harum id numquam possimus ut sequi. Aperiam dolorem et harum et explicabo porro veniam. Quasi suscipit molestias delectus id ratione suscipit dignissimos quae. Animi tenetur assumenda praesentium libero. Velit at exercitationem non dolorem.
+        *   </div>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+/**
+            * @name          s-scrollbar
+            * @namespace          sugar.css.scrollbar
+            * @type               CssClass
+            * @platform             css
+            * @status             beta
+            * 
+            * This class allows to apply the custom scrollbar on any HTMLElement.
+            * This scrollbar is defined in the `theme.ui.scrollbar` settings.
+            * 
+            * @example        html
+            * <div class="s-scrollbar" style="height:50px">
+            *    Placeat praesentium quos ut voluptatem eaque asperiores. Numquam ipsum earum recusandae aliquid sint est. Et quis est vero. Et saepe et autem impedit odit deserunt quod suscipit. Velit ut sit magni maiores similique et esse rerum. Cum quae dolor.
+ Culpa minima natus assumenda quos ipsa aut distinctio quas. Labore voluptatem voluptate ipsam iure iste sed non minus. Fugiat voluptatem nostrum dignissimos tempora excepturi blanditiis est nemo quam.
+ Autem vero mollitia repudiandae hic enim eum assumenda culpa. Ad facere fugiat quo. Veritatis explicabo ut placeat dolorum necessitatibus quaerat. Placeat non ab voluptatem fugit nostrum dolorum. Facere non consequatur non. Nihil voluptatem quibusdam.
+            * </div>
+            * 
+            * since           2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+.s-scrollbar::-webkit-scrollbar {
+          width: 2px;
+          height: 2px;
+      }
+.s-scrollbar::-webkit-scrollbar-track {
+          background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + -30) * 1%),1);
+          background: rgba(0,0,0,0);
+      }
+.s-scrollbar::-webkit-scrollbar-thumb {
+          background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-a, 1));
+      }
 /**
     * @name            s-width:viewport
     * @namespace        sugar.css.width
@@ -38167,7 +39261,6 @@ s-code-example {
 --s-theme-layout-layout-12345: 1 2 3 4 5;
 --s-theme-layout-layout-123456: 1 2 3 4 5 6;
 --s-theme-ratio-1: 1;
---s-theme-ratio-1-1: 1;
 --s-theme-ratio-21-9: 2.3333333333333335;
 --s-theme-ratio-16-9: 1.7777777777777777;
 --s-theme-ratio-2-3: 0.6666666666666666;
@@ -38379,6 +39472,8 @@ s-code-example {
 --s-theme-ui-focusOutline-borderWidth: 10px;
 --s-theme-ui-focusOutline-borderRadius: 6px;
 --s-theme-ui-focusOutline-transition: all .2s ease-out;
+--s-theme-ui-scrollbar-size: 2px;
+--s-theme-ui-scrollbar-defaultColor: accent;
 --s-theme-ui-button-paddingInline: 1.5em;
 --s-theme-ui-button-paddingBlock: 0.75em;
 --s-theme-ui-button-borderRadius: 6px;

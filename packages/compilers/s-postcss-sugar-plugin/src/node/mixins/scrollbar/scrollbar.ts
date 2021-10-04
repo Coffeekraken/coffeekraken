@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
 
 /**
  * @name           scrollbar
@@ -23,20 +24,20 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginScrollbarInterface extends __SInterface {
     static definition = {
-        color: {
-            type: 'String',
-            default: 'accent',
-        },
         size: {
             type: 'String',
-            default: '5px',
+            default: __theme().config('ui.scrollbar.size'),
+        },
+        color: {
+            type: 'String',
+            default: __theme().config('ui.scrollbar.defaultColor'),
         },
     };
 }
 
 export interface IPostcssSugarPluginScrollbarParams {
-    color: string;
     size: string;
+    color: string;
 }
 
 export { postcssSugarPluginScrollbarInterface as interface };
@@ -50,8 +51,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginScrollbarParams = {
-        color: 'accent',
         size: '5px',
+        color: 'accent',
         ...params,
     };
 

@@ -54,6 +54,7 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.visually.classes;',
         '@sugar.truncate.classes;',
         '@sugar.until.classes;',
+        '@sugar.scrollbar.classes;',
         '@sugar.width.classes;',
         '@sugar.components.classes;',
     ];

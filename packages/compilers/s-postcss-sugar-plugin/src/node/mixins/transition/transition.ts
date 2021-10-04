@@ -21,13 +21,13 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginTransitionMixinInterface extends __SInterface {
-  static definition = {
-      name: {
-          type: 'String',
-          required: true,
-          default: 'default'
-      }
-  };
+    static definition = {
+        name: {
+            type: 'String',
+            required: true,
+            default: 'default',
+        },
+    };
 }
 export { postcssSugarPluginTransitionMixinInterface as interface };
 
@@ -49,7 +49,7 @@ export interface postcssSugarPluginTransitionMixinParams {
  * .my-cool-element {
  *    \@sugar.transition(fast);
  * }
- * 
+ *
  * @example       html
  * <h1 class="my-cool-element">Hello world</h1>
  *
@@ -57,20 +57,22 @@ export interface postcssSugarPluginTransitionMixinParams {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<postcssSugarPluginTransitionMixinParams>;
-  atRule: any;
-  replaceWith: Function
+    params: Partial<postcssSugarPluginTransitionMixinParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams = <postcssSugarPluginTransitionMixinParams>{
-    ...(params ?? {})
-  };
-  const vars: string[] = [
-      `transition: sugar.transition(${finalParams.name});`
-  ];
+    const finalParams = <postcssSugarPluginTransitionMixinParams>{
+        ...(params ?? {}),
+    };
+    const vars: string[] = [
+        `transition: sugar.transition(${finalParams.name}) ${
+            finalParams.name !== 'default' ? '!important' : ''
+        };`,
+    ];
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
+import __faker from 'faker';
 
 /**
  * @name           classes
@@ -45,6 +46,52 @@ export default function ({
 
     const vars: string[] = [];
 
+    vars.push(`
+      /**
+        * @name          Scale
+        * @namespace          sugar.css.tools
+        * @type               Styleguide
+        * @menu           Styleguide / Tools        /styleguide/tools/scale
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows to apply a scale to any supported UI elements.
+        * This scale does not use the transform property but increase actual values like \`padding\`,
+        * \`margin\`, etc... In fact, all the properties setted with the \`sugar.scallable\` function.
+        * It's usually a good practice to set the \`font-size\` of your UI element to \`sugar.scalable(1rem)\`
+        * and then to set inner values using \`em\` unit.
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        ${Object.keys(scaleObj)
+            .map((scaleName) => {
+                return ` * @cssClass     s-scale:${scaleName.replace('/', '-')}
+                }            Apply the ${scaleName} scale`;
+            })
+            .join('\n')}
+        * 
+        * @example        html
+        ${Object.keys(scaleObj)
+            .map((scaleName) => {
+                return ` * <!-- ${scaleName} scale -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${scaleName} ratio</h3>
+            *   <div class="s-scale:${scaleName}">
+            *       <a class="s-btn">${__faker.name.findName()}</a>
+            *   </div>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
     Object.keys(scaleObj).forEach((scaleName) => {
         const scaleValue = scaleObj[scaleName];
         const scaleCss = `/**
@@ -59,8 +106,8 @@ export default function ({
   * all the properties that uses the function "sugar.scalable" to set his value.
   * 
   * @example        html
-  * <h1 class="s-font\:40 s-mbe:30">I'm a cool title</h1>
-  * <h1 class="s-font\:40 s-scale\:15">I'm a cool scaled title</h1>
+  * <h1 class="s-font:40 s-mbe:30">I'm a cool title</h1>
+  * <h1 class="s-font:40 s-scale:15">I'm a cool scaled title</h1>
   * 
   * since           2.0.0
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
 /**
  * @name           scrollbar
  * @namespace      mixins.scrollbar
@@ -22,18 +23,18 @@ import __SInterface from '@coffeekraken/s-interface';
 class postcssSugarPluginScrollbarInterface extends __SInterface {
 }
 postcssSugarPluginScrollbarInterface.definition = {
-    color: {
-        type: 'String',
-        default: 'accent',
-    },
     size: {
         type: 'String',
-        default: '5px',
+        default: __theme().config('ui.scrollbar.size'),
+    },
+    color: {
+        type: 'String',
+        default: __theme().config('ui.scrollbar.defaultColor'),
     },
 };
 export { postcssSugarPluginScrollbarInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ color: 'accent', size: '5px' }, params);
+    const finalParams = Object.assign({ size: '5px', color: 'accent' }, params);
     const vars = [];
     // lnf
     vars.push(`
@@ -51,4 +52,4 @@ export default function ({ params, atRule, replaceWith, }) {
   `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsYmFyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2Nyb2xsYmFyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBRUgsTUFBTSxvQ0FBcUMsU0FBUSxZQUFZOztBQUNwRCwrQ0FBVSxHQUFHO0lBQ2hCLEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsT0FBTyxFQUFFLFFBQVE7S0FDcEI7SUFDRCxJQUFJLEVBQUU7UUFDRixJQUFJLEVBQUUsUUFBUTtRQUNkLE9BQU8sRUFBRSxLQUFLO0tBQ2pCO0NBQ0osQ0FBQztBQVFOLE9BQU8sRUFBRSxvQ0FBb0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUM3RCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxRQUFRLEVBQ2YsSUFBSSxFQUFFLEtBQUssSUFDUixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixNQUFNO0lBQ04sSUFBSSxDQUFDLElBQUksQ0FBQzs7bUJBRUssV0FBVyxDQUFDLElBQUk7b0JBQ2YsV0FBVyxDQUFDLElBQUk7OzswQ0FHTSxXQUFXLENBQUMsS0FBSzs7OzswQ0FJakIsV0FBVyxDQUFDLEtBQUs7O0dBRXhELENBQUMsQ0FBQztJQUVELFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsYmFyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2Nyb2xsYmFyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sT0FBTyxNQUFNLG1CQUFtQixDQUFDO0FBRXhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBRUgsTUFBTSxvQ0FBcUMsU0FBUSxZQUFZOztBQUNwRCwrQ0FBVSxHQUFHO0lBQ2hCLElBQUksRUFBRTtRQUNGLElBQUksRUFBRSxRQUFRO1FBQ2QsT0FBTyxFQUFFLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQztLQUNqRDtJQUNELEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsT0FBTyxFQUFFLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQywyQkFBMkIsQ0FBQztLQUN6RDtDQUNKLENBQUM7QUFRTixPQUFPLEVBQUUsb0NBQW9DLElBQUksU0FBUyxFQUFFLENBQUM7QUFDN0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixJQUFJLEVBQUUsS0FBSyxFQUNYLEtBQUssRUFBRSxRQUFRLElBQ1osTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsTUFBTTtJQUNOLElBQUksQ0FBQyxJQUFJLENBQUM7O21CQUVLLFdBQVcsQ0FBQyxJQUFJO29CQUNmLFdBQVcsQ0FBQyxJQUFJOzs7MENBR00sV0FBVyxDQUFDLEtBQUs7Ozs7MENBSWpCLFdBQVcsQ0FBQyxLQUFLOztHQUV4RCxDQUFDLENBQUM7SUFFRCxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDdEIsQ0FBQyJ9

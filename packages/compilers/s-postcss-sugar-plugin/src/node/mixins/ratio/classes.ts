@@ -60,8 +60,6 @@ export default function ({
         * These classes allows you to apply some ratio to any HTMLElement.
         * **These classes make use of the \`aspect-ratio\` css property**
         * 
-        * @caniuse      aspect-ratio            https://caniuse.com/mdn-css_properties_aspect-ratio
-        * 
         * @support      chromium
         * @support      firefox
         * @support      safari
@@ -80,7 +78,7 @@ export default function ({
                 return ` * <!-- ${ratioName} ratio -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${ratioName} ratio</h3>
-            *   <div class="s-ratio\:${ratioName.replace('/', '-')}">
+            *   <div class="s-ratio\:${ratioName.replace('/', '-')} s-width:40">
             *       <img class="s-fit\:cover" src="https://picsum.photos/500/500" />
             *   </div>
             * </div>

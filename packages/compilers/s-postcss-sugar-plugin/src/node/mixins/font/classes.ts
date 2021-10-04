@@ -43,11 +43,36 @@ export default function ({
 
     const vars: string[] = [];
 
-    const fontsFamiliesObj = __theme().config('font.family');
+    const fontsFamiliesObj = __theme().config('font.family'),
+        fontSizesObj = __theme().config('font.size'),
+        fontStretchProps = [
+            'ultra-condensed',
+            'extra-condensed',
+            'condensed',
+            'semi-condensed',
+            'semi-expanded',
+            'expanded',
+            'extra-expanded',
+            'ultra-expanded',
+        ],
+        fontWeightProps = [
+            'bold',
+            'bolder',
+            'lighter',
+            'weight-100',
+            'weight-200',
+            'weight-300',
+            'weight-400',
+            'weight-500',
+            'weight-600',
+            'weight-700',
+            'weight-800',
+            'weight-900',
+        ];
 
     vars.push(`
       /**
-        * @name          Font Families
+        * @name          Families
         * @namespace          sugar.css.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/families
@@ -63,25 +88,207 @@ export default function ({
         * 
         ${Object.keys(fontsFamiliesObj)
             .map((fontName) => {
-                return `* @cssClass      s-font\:${fontName}       Apply the \`${fontName}\` font on any HTMLElement`;
+                return `* @cssClass      s-font:${fontName}       Apply the \`${fontName}\` font on any HTMLElement`;
             })
             .join('\n ')}
+        *    
+        * @example        html
+        ${Object.keys(fontsFamiliesObj)
+            .map((family) => {
+                return ` * <div class="s-mbe:50">
+                        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${family}</h3>
+                        *   <p class="s-font:${family} s-font:60">${__faker.lorem.sentence()}</p>
+                        * </div>`;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
+      /**
+        * @name          Sizes
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font size to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        ${Object.keys(fontSizesObj)
+            .map((sizeName) => {
+                return ` * @cssClass            s-font:${sizeName}          Apply the \`${sizeName}\` size`;
+            })
+            .join('\n')}
+        * 
+        *    
+        * @example        html
+        ${Object.keys(fontSizesObj)
+            .map((size) => {
+                return ` * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${size}</h3>
+            *   <p class="s-font:${size}">${__faker.lorem.sentence()}</p>
+            * </div>`;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
+      /**
+        * @name          Styles
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/styles
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font style to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass         s-font:italic                   Apply the \`italic\` font-style value
+        * @cssClass         s-font:oblique                   Apply the \`oblique\` font-style value
+        *    
+        * @example        html
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Italic</h3>
+        *   <p class="s-font:italic s-mbe:20">${__faker.lorem.sentence()}</p>
+        * </div>
+        * 
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Oblique</h3>
+        *   <p class="s-font:oblique s-mbe:20">${__faker.lorem.sentence()}</p>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
+      /**
+        * @name          Weights
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/weights
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font weight to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass         s-font:bold                     Apply the \`bold\` font-weight value
+        * @cssClass         s-font:bolder                     Apply the \`bolder\` font-weight value
+        * @cssClass         s-font:lighter                     Apply the \`lighter\` font-weight value
+        * @cssClass         s-font:weight-100                     Apply the \`100\` font-weight value
+        * @cssClass         s-font:weight-200                     Apply the \`200\` font-weight value
+        * @cssClass         s-font:weight-300                     Apply the \`300\` font-weight value
+        * @cssClass         s-font:weight-400                     Apply the \`400\` font-weight value
+        * @cssClass         s-font:weight-500                     Apply the \`500\` font-weight value
+        * @cssClass         s-font:weight-600                     Apply the \`600\` font-weight value
+        * @cssClass         s-font:weight-700                     Apply the \`700\` font-weight value
+        * @cssClass         s-font:weight-800                     Apply the \`800\` font-weight value
+        * @cssClass         s-font:weight-900                     Apply the \`900\` font-weight value
+        * 
+        *    
+        * @example        html
+        ${fontWeightProps
+            .map((weight) => {
+                return ` * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${weight}</h3>
+                    *   <p class="s-font:${weight}:50">${__faker.lorem.sentence()}</p>
+                    * </div>`;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
+      /**
+        * @name          Stretches
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/stretches
+        * @platform       css
+        * @status       beta
+        * 
+        * This class allows you to apply a font stretch to any HTMLElement
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass         s-font:ultra-condensed              Apply the \`ultra-condensed\` font-stretch value
+        * @cssClass         s-font:extra-condensed              Apply the \`extra-condensed\` font-stretch value
+        * @cssClass         s-font:condensed              Apply the \`condensed\` font-stretch value
+        * @cssClass         s-font:semi-condensed              Apply the \`semi-condensed\` font-stretch value
+        * @cssClass         s-font:semi-expanded              Apply the \`semi-expanded\` font-stretch value
+        * @cssClass         s-font:expanded              Apply the \`expanded\` font-stretch value
+        * @cssClass         s-font:extra-expanded              Apply the \`extra-expanded\` font-stretch value
+        * @cssClass         s-font:ultra-expanded              Apply the \`ultra-expanded\` font-stretch value
+        *    
+        * @example        html
+        ${fontStretchProps
+            .map((stretch) => {
+                return ` * <div class="s-mbe:50">
+                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${stretch}</h3>
+                    *   <p class="s-font:${stretch}:50">${__faker.lorem.sentence()}</p>
+                    * </div> `;
+            })
+            .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
+      /**
+        * @name          Resets
+        * @namespace          sugar.css.font
+        * @type               CssClass
+        * @menu           Styleguide / Fonts        /styleguide/fonts/resets
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to **reset fonts** like \`size\`, \`family\`, etc...
+        * 
+        * @cssClass           s-font:reset-size          Reset the size to 1rem
+        * @cssClass           s-font:reset-family        Reset to the default font
         * 
         * @example        html
-        * ${Object.keys(fontsFamiliesObj)
-            .map((fontName) => {
-                return `<span class="s-tc:accent s-font:30">${fontName}</span><br /><br /><h1 class="s-font\:${fontName} s-font\:50 s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
-            })
-            .join('\n * ')}
+        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset size</h3>
+        * <div class="s-font:60 s-mbe:30">
+        *   ${__faker.name.title()} <span class="s-font:reset-size">${__faker.name.findName()}</span>
+        * </div>
         * 
-        * @example        css
-        ${Object.keys(fontsFamiliesObj)
-            .map((fontName) => {
-                return `* .my-font-${fontName} {
-        *     \@sugar.font.family(${fontName});  
-        * }`;
-            })
-            .join('\n ')}
+        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset family</h3>
+        * <div class="s-font:quote s-font:50">
+        *   ${__faker.name.title()} <span class="s-font:reset-family">${__faker.name.findName()}</span>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -100,7 +307,7 @@ export default function ({
         * This class allows you to apply the font "<yellow>${fontName}</yellow>" to any HTMLElement
         * 
         * @example        html
-        * <h1 class="s-font\:${fontName}">Hello world</h1>
+        * <h1 class="s-font:${fontName}">Hello world</h1>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -110,46 +317,7 @@ export default function ({
 }`);
     });
 
-    // Font sizes
-    const fontsSizesObj = __theme().config('font.size');
-    vars.push(`
-      /**
-        * @name          Font Sizes
-        * @namespace          sugar.css.font
-        * @type               CssClass
-        * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
-        * @platform       css
-        * @status       beta
-        * 
-        * This class allows you to apply a font size to any HTMLElement
-        * 
-        ${Object.keys(fontsSizesObj)
-            .map((fontSize) => {
-                return `* @cssClass      s-font\:${fontSize}       Apply the \`${fontSize}\` font size on any HTMLElement`;
-            })
-            .join('\n ')}
-        * 
-        * @example        html
-        * ${Object.keys(fontsSizesObj)
-            .map((fontSize) => {
-                return `<span class="s-tc:accent s-font:30">${fontSize}</span><br /><br /><h1 class="s-font\:${fontSize} s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</h1>`;
-            })
-            .join('\n * ')}
-        * 
-        * @example        css
-        ${Object.keys(fontsSizesObj)
-            .map((fontSize) => {
-                return `* .my-font-${fontSize} {
-        *     \@sugar.font.size(${fontSize});  
-        * }`;
-            })
-            .join('\n ')}
-        * 
-        * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-    `);
-    Object.keys(fontsSizesObj).forEach((sizeName) => {
+    Object.keys(fontSizesObj).forEach((sizeName) => {
         if (sizeName === 'default') return;
         vars.push(`/**
   * @name          s-font:${sizeName}
@@ -161,7 +329,7 @@ export default function ({
   * This class allows you to apply the font size "<yellow>${sizeName}</yellow>" to any HTMLElement
   * 
   * @example        html
-  * <h1 class="s-font\:${sizeName}">Hello world</h1>
+  * <h1 class="s-font:${sizeName}">Hello world</h1>
   */
 .s-font--${sizeName} {
     @sugar.font.size(${sizeName});
@@ -169,35 +337,6 @@ export default function ({
     });
 
     // reset
-    vars.push(`
-      /**
-        * @name          Font Resets
-        * @namespace          sugar.css.font
-        * @type               CssClass
-        * @menu           Styleguide / Fonts        /styleguide/fonts/resets
-        * @platform       css
-        * @status       beta
-        * 
-        * These classes allows you to **reset fonts** like \`size\`, \`family\`, etc...
-        * 
-        * @cssClass           s-font\:reset-size          Reset the size to 1rem
-        * @cssClass           s-font\:reset-family        Reset to the default font
-        * 
-        * @example        html
-        * <h3 class="s-tc:accent s-font:30 s-mb\:20">Reset size</h3>
-        * <div class="s-font\:60 s-mbe:30">
-        *   ${__faker.name.title()} <span class="s-font\:reset-size">${__faker.name.findName()}</span>
-        * </div>
-        * 
-        * <h3 class="s-tc:accent s-font:30 s-mb\:20">Reset family</h3>
-        * <div class="s-font\:quote s-font\:50">
-        *   ${__faker.name.title()} <span class="s-font\:reset-family">${__faker.name.findName()}</span>
-        * </div>
-        * 
-        * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */
-    `);
     vars.push(`/**
   * @name          s-font:reset-size
   * @namespace          sugar.css.mixins.font
@@ -208,7 +347,10 @@ export default function ({
   * This class allows you to reset the font size to 1rem on any HTMLElement
   * 
   * @example        html
-  * <h1 class="s-font\:reset-size">Hello world</h1>
+  * <h1 class="s-font:reset-size">Hello world</h1>
+  * 
+  * @since      2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
 .s-font--reset-size {
   font-size: sugar.scalable(1rem);
@@ -223,11 +365,100 @@ export default function ({
   * This class allows you to reset the font family to default on any HTMLElement
   * 
   * @example        html
-  * <h1 class="s-font\:reset-family">Hello world</h1>
+  * <h1 class="s-font:reset-family">Hello world</h1>
+  * 
+  * @since      2.0.0
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
 .s-font--reset-family {
   @sugar.font.family(default);
 }`);
+
+    fontStretchProps.forEach((value) => {
+        vars.push(`/**
+            * @name          s-font:${value}
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the \`font-stretch: ${value}\` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:${value}">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .s-font--${value} {
+                font-stretch: ${value};
+            }`);
+    });
+
+    vars.push(`/**
+            * @name          s-font:italic
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the \`font-style: italic\` css value on any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:italic">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .s-font--italic {
+                font-style: italic;
+            }`);
+
+    vars.push(`/**
+            * @name          s-font:oblique
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the \`font-style: oblique\` css value on any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:oblique">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .s-font--oblique {
+                font-style: oblique;
+            }`);
+
+    fontWeightProps.forEach((value) => {
+        vars.push(`/**
+            * @name          s-font:${value}
+            * @namespace          sugar.css.mixins.font
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply the \`font-weight: ${value.replace(
+                'weight-',
+                '',
+            )}\` value to any HTMLElement
+            * 
+            * @example        html
+            * <h1 class="s-font:${value.replace(
+                'weight-',
+                '',
+            )}">Hello world</h1>
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .s-font--${value} {
+                font-weight: ${value.replace('weight-', '')};
+            }`);
+    });
 
     replaceWith(vars);
 }

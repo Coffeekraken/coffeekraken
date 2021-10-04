@@ -24,7 +24,6 @@
             width: 100%;
 
             @sugar.border.radius;
-            @sugar.scrollbar (accent, 2px);
         }
         .s-filtrable-input__list-item {
             /* @sugar.depth(20); */
@@ -46,7 +45,12 @@
                 height: 100%;
                 z-index: -1;
                 background: sugar.color(current, surface);
-                clip-path: polygon(0 0%, 100% 0, calc(100% - 100px) 100%, 0 100%);
+                clip-path: polygon(
+                    0 0%,
+                    100% 0,
+                    calc(100% - 100px) 100%,
+                    0 100%
+                );
             }
 
             &:nth-child(odd) {
@@ -61,7 +65,12 @@
                     z-index: -1;
                     background: sugar.color(current, surface);
                     transform: scaleX(-1);
-                    clip-path: polygon(0 0%, 100% 0, calc(100% - 100px) 100%, 0 100%);
+                    clip-path: polygon(
+                        0 0%,
+                        100% 0,
+                        calc(100% - 100px) 100%,
+                        0 100%
+                    );
                 }
             }
 

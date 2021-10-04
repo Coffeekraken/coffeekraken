@@ -128,7 +128,11 @@ body {
             top: calc(sugar.padding(50) * -1);
             width: 400px;
             height: calc(100% + sugar.padding(50) * 2);
-            background: linear-gradient(95deg, sugar.color(main, 85), sugar.color(main, --alpha 0));
+            background: linear-gradient(
+                95deg,
+                sugar.color(main, 85),
+                sugar.color(main, --alpha 0)
+            );
         }
     }
 
@@ -151,7 +155,11 @@ body {
         }
 
         .__icon {
-            --subnav-stories-icon-fill: linear-gradient(45deg, sugar.color(accent), sugar.color(complementary));
+            --subnav-stories-icon-fill: linear-gradient(
+                45deg,
+                sugar.color(accent),
+                sugar.color(complementary)
+            );
 
             svg {
                 fill: url(#header-shape-gradient) #fff;
@@ -206,7 +214,7 @@ body {
     width: 33vw;
     max-width: 500px;
     overflow-y: scroll;
-    @sugar.scrollbar (accent, 2px);
+    @sugar.scrollbar();
     @sugar.depth (100);
 
     .s-label > *:last-child {

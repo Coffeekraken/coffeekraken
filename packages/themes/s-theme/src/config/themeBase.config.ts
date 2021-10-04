@@ -99,7 +99,6 @@ export default function (env, config) {
 
         ratio: {
             '1': 1,
-            '1-1': 1,
             '21-9': 21 / 9,
             '16-9': 16 / 9,
             '2-3': 2 / 3,
@@ -1514,6 +1513,10 @@ export default function (env, config) {
                 borderWidth: '10px',
                 borderRadius: '[theme.border.radius.default]',
                 transition: 'all .2s ease-out',
+            },
+            scrollbar: {
+                size: '2px',
+                defaultColor: '[theme.ui.default.defaultColor]',
             },
             button: {
                 paddingInline: '[theme.ui.default.paddingInline]',

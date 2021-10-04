@@ -6,7 +6,7 @@
         overflow: auto;
         border-right: 1px solid sugar.color(current, border);
         user-select: none;
-        @sugar.scrollbar (accent, 2px);
+        @sugar.scrollbar();
 
         .s-list--ul .s-list--ul {
             max-height: 0;

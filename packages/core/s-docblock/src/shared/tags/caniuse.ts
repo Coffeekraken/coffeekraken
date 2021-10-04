@@ -1,6 +1,6 @@
 // @ts-nocheck
 import __caniuse from 'caniuse-api';
-import __downloadGithubDirectory from 'github-download-directory';
+import __downloadGithubDirectory from '@coffeekraken/sugar/node/github/downloadRepository';
 import __cacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __fs from 'fs';
 
@@ -22,21 +22,26 @@ import __fs from 'fs';
  * @since       2.0.0
  * @contributor 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function caniuse(data, blockSettings) {
+async function caniuse(data, blockSettings) {
     data = Array.from(data);
+
+    throw new Error(
+        'Sorry but the caniuse docblock tag is not supported for now...',
+    );
 
     const properties: any[] = [];
 
     for (let j = 0; j < data.length; j++) {
         const d = data[j];
         const props = d.value.split(/(,|\s)/).filter((l) => l.trim() !== '');
-
-        if (!__fs.existsSync(`${__cacheDir()}/mdn/css`)) {
-            console.log('download');
-            __downloadGithubDirectory
-                .download('mdn', 'browser-compat-data')
-                .then(console.log, console.error);
-        }
+        const dest = `${__cacheDir()}/mdn/browser-compat-data`;
+        // if (!__fs.existsSync(dest)) {
+        console.log('download');
+        await __downloadGithubDirectory('mdn/browser-compat-data', {
+            dest,
+            unzip: true,
+        });
+        // }
 
         // for (let i = 0; i < props.length; i++) {
         //     const prop = props[i];

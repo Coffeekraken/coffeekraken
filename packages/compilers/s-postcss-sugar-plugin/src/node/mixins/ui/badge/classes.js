@@ -36,41 +36,41 @@ export default function ({ params, atRule, replaceWith, }) {
     })
         .join('\n')}
         * 
-        * @cssClass         s-badge\:square       Display your badge with squared corners
-        * @cssClass         s-badge\:pill         Display your badge with rounded corners
+        * @cssClass         s-badge:square       Display your badge with squared corners
+        * @cssClass         s-badge:pill         Display your badge with rounded corners
         * 
         * @example        html
         ${finalParams.styles
         .map((style) => {
         return ` * <!-- ${style} style -->
-            * <div class="s-font\:40 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
-            *   <a class="s-badge\:${style} s-mr\:20">Say hello!</a>
-            *   <a class="s-badge\:${style} s-mr\:20 s-color:accent">Say hello!</a>
-            *   <a class="s-badge\:${style} s-mr\:20 s-color:complementary">Say hello!</a>
-            *   <a class="s-badge\:${style} s-color:error">Say hello!</a>
+            * <div class="s-font:40 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:20">${style} style</h3>
+            *   <a class="s-badge:${style} s-mie:20">Say hello!</a>
+            *   <a class="s-badge:${style} s-mie:20 s-color:accent">Say hello!</a>
+            *   <a class="s-badge:${style} s-mie:20 s-color:complementary">Say hello!</a>
+            *   <a class="s-badge:${style} s-color:error">Say hello!</a>
             * </div>
             * `;
     })
         .join('\n')}
         *
         * <!-- shapes -->
-        * <div class="s-font\:40 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Shapes</h3>
-        *   <a class="s-badge\:square s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge\:pill s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge\:outline\:square s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge\:outline\:pill s-mr\:20 s-mb\:20">Say hello!</a>
+        * <div class="s-font:40 s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:20">Shapes</h3>
+        *   <a class="s-badge:square s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge:pill s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge:outline:square s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge:outline:pill s-mie:20 s-mbe:20">Say hello!</a>
         * </div>
         * 
         * <!-- scales -->
         * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scales</h3>
-        *   <a class="s-badge s-scale\:05 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:1 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:12 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:15 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:20 s-mb\:20">Say hello!</a>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:20">Scales</h3>
+        *   <a class="s-badge s-scale:05 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:1 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:12 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:15 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:20 s-mbe:20">Say hello!</a>
         * </div>
         * 
         * @since      2.0.0
@@ -104,7 +104,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * This class represent a(n) "<s-color="accent">outline</s-color>" badge
         * 
         * @example        html
-        * <a class="s-badge\:${style}">I'm a cool ${style} badge</a>
+        * <a class="s-badge:${style}">I'm a cool ${style} badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -125,7 +125,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         * 
         * @example        html
-        * <a class="s-badge\:square">I'm a cool badge</a>
+        * <a class="s-badge:square">I'm a cool badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -143,7 +143,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * This class represent a(n) "<s-color="accent">pill</s-color>" badge
         * 
         * @example        html
-        * <a class="s-badge\:pill">I'm a cool badge</a>
+        * <a class="s-badge:pill">I'm a cool badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -155,4 +155,4 @@ export default function ({ params, atRule, replaceWith, }) {
     `);
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sT0FBTyxNQUFNLHNCQUFzQixDQUFDO0FBRTNDLE1BQU0seUNBQTBDLFNBQVEsWUFBWTs7QUFDekQsb0RBQVUsR0FBRztJQUNoQixNQUFNLEVBQUU7UUFDSixJQUFJLEVBQUUsVUFBVTtRQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxDQUFDO1FBQzVCLE9BQU8sRUFBRSxDQUFDLE9BQU8sRUFBRSxTQUFTLENBQUM7S0FDaEM7SUFDRCxZQUFZLEVBQUU7UUFDVixJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxTQUFTLENBQUM7UUFDNUIsT0FBTyxFQUFFLE1BQUEsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHVCQUF1QixDQUFDLG1DQUFJLE9BQU87S0FDaEU7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLHlDQUF5QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQyxFQUM1QixZQUFZLEVBQUUsT0FBTyxJQUNsQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7OztVQVdKLFdBQVcsQ0FBQyxNQUFNO1NBQ2YsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDWCxPQUFPLDJCQUNILEtBQUssS0FBSyxXQUFXLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksS0FBSyxFQUN2RCx3QkFBd0IsS0FBSyxjQUFjLENBQUM7SUFDaEQsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O1VBTWIsV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sV0FBVyxLQUFLOzs2REFFc0IsS0FBSztxQ0FDN0IsS0FBSztxQ0FDTCxLQUFLO3FDQUNMLEtBQUs7cUNBQ0wsS0FBSzs7ZUFFM0IsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQXdCbEIsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1NBWUwsQ0FBQyxDQUFDO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDakMsSUFBSSxDQUFDLElBQUksQ0FBQztvQ0FDa0IsS0FBSzs7Ozs7OzsrQkFPVixLQUFLLGdCQUFnQixLQUFLOzs7O1NBSWhELENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxJQUFJLENBQUM7a0JBQ0EsS0FBSyxLQUFLLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsS0FBSyxLQUFLLEVBQUU7c0NBQ2xDLEtBQUs7O0tBRXRDLENBQUMsQ0FBQztJQUNILENBQUMsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7U0FjTCxDQUFDLENBQUM7SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O0tBSVQsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1NBWUwsQ0FBQyxDQUFDO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sT0FBTyxNQUFNLHNCQUFzQixDQUFDO0FBRTNDLE1BQU0seUNBQTBDLFNBQVEsWUFBWTs7QUFDekQsb0RBQVUsR0FBRztJQUNoQixNQUFNLEVBQUU7UUFDSixJQUFJLEVBQUUsVUFBVTtRQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxDQUFDO1FBQzVCLE9BQU8sRUFBRSxDQUFDLE9BQU8sRUFBRSxTQUFTLENBQUM7S0FDaEM7SUFDRCxZQUFZLEVBQUU7UUFDVixJQUFJLEVBQUUsUUFBUTtRQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxTQUFTLENBQUM7UUFDNUIsT0FBTyxFQUFFLE1BQUEsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLHVCQUF1QixDQUFDLG1DQUFJLE9BQU87S0FDaEU7Q0FDSixDQUFDO0FBUU4sT0FBTyxFQUFFLHlDQUF5QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQyxFQUM1QixZQUFZLEVBQUUsT0FBTyxJQUNsQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7OztVQVdKLFdBQVcsQ0FBQyxNQUFNO1NBQ2YsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDWCxPQUFPLDJCQUNILEtBQUssS0FBSyxXQUFXLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksS0FBSyxFQUN2RCx3QkFBd0IsS0FBSyxjQUFjLENBQUM7SUFDaEQsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O1VBTWIsV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sV0FBVyxLQUFLOzs2REFFc0IsS0FBSztvQ0FDOUIsS0FBSztvQ0FDTCxLQUFLO29DQUNMLEtBQUs7b0NBQ0wsS0FBSzs7ZUFFMUIsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQXdCbEIsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1NBWUwsQ0FBQyxDQUFDO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDakMsSUFBSSxDQUFDLElBQUksQ0FBQztvQ0FDa0IsS0FBSzs7Ozs7Ozs4QkFPWCxLQUFLLGdCQUFnQixLQUFLOzs7O1NBSS9DLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxJQUFJLENBQUM7a0JBQ0EsS0FBSyxLQUFLLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsS0FBSyxLQUFLLEVBQUU7c0NBQ2xDLEtBQUs7O0tBRXRDLENBQUMsQ0FBQztJQUNILENBQUMsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7U0FjTCxDQUFDLENBQUM7SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O0tBSVQsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1NBWUwsQ0FBQyxDQUFDO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=

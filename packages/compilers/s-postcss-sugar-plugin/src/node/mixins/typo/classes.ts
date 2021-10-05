@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
+import __faker from 'faker';
 
 /**
  * @name           classes
@@ -46,6 +47,50 @@ export default function ({
     const vars: string[] = [];
 
     const typosObj = __theme().config('typo');
+
+    vars.push(`
+      /**
+        * @name          Typography
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/typography
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply basic typo styles like \`sub\`, \`strong\`, etc... on any HTMLElement
+        * These styles are defined in the \`theme.typo\` theme settings.
+        * 
+        * @support      chromium        14+
+        * @support      firefox         68+    
+        * @support      safari          5+
+        * @support      edge            17+
+        * 
+        ${Object.keys(typosObj)
+            .map((typoName) => {
+                return ` * @cssClass            s-typo:${typoName}          Apply the \`${typoName}\` style`;
+            })
+            .join('\n')}
+        * @cssClass             s-format:text           Format automatically child tags like \`strong\` to the \`s-typo:string\` style
+        * @cssClass             s-rhythm:vertical           Apply the vertical rhythm to all direct child tags
+        *
+        * @example        html
+         ${Object.keys(typosObj)
+             .map((typoName) => {
+                 return ` * <!-- ${typoName} -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${typoName}</h3>
+            *   <${typoName} class="s-typo:${typoName}">
+            *       ${__faker.name.findName()}
+            *   </${typoName}>
+            * </div>
+            * `;
+             })
+             .join('\n')}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
 
     Object.keys(typosObj).forEach((typoName) => {
         const typoObj = typosObj[typoName];

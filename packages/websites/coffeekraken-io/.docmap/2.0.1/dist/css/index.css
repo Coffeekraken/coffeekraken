@@ -1594,7 +1594,7 @@
 */
 /**
 *
-* @name            s-typo:p-lead
+* @name            s-typo:lead
 * @namespace        sugar.css.typo
 * @type             CssClass
 * @platform         css
@@ -1603,7 +1603,7 @@
 * This class allows you to apply the "<yellow>p-lead</yellow>" typography style to any HTMLElement
 *
 * @example      html
-* <span class="s-typo:p-lead">Something cool</span>
+* <span class="s-typo:lead">Something cool</span>
 *
 * @since        2.0.0
 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1611,17 +1611,17 @@
 */
 /**
 *
-* @name         s-rhythm:vertical s-typo:p-lead
+* @name         s-rhythm:vertical s-typo:lead
 * @namespace    sugar.css.typo
 * @type         CssClass
 * @platform     css
 * @status       beta
 *
-* This class allows you to activate the space(s) on your "<yellow>s-typo:p-lead</yellow>" HTMLElement
+* This class allows you to activate the space(s) on your "<yellow>s-typo:lead</yellow>" HTMLElement
 *
 * @example      html
 * <div class="s-rhythm:vertical">
-*     <span class="s-typo:p-lead">Something cool</span>
+*     <span class="s-typo:lead">Something cool</span>
 * </div>
 *
 * @since    2.0.0

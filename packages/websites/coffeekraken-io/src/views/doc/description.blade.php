@@ -12,5 +12,5 @@
     </{{ $isFirst ? 'h1' : 'h3'}}>
     
 
-    <p class="s-typo:p-lead s-mbe:50">{!! $block->description !!}</p>
+    <p class="s-typo:lead s-mbe:50">{!! $block->description !!}</p>
 @endif

@@ -37,19 +37,19 @@ export default function ({
         * These classes allows you display nice tooltips on any HTMLElement
         * 
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
-        * @cssClass             s-tooltip-container\:active     Allow to display a tooltip without having the need of the user interaction
+        * @cssClass             s-tooltip-container:active     Allow to display a tooltip without having the need of the user interaction
         * @cssClass             s-tooltip                       Apply on the element you want as a tooltip
-        * @cssClass             s-tooltip\:block-start                 Align your tooltip at "top". This is the default         
-        * @cssClass             s-tooltip\:inline-end               Align your tooltip at "right"
-        * @cssClass             s-tooltip\:inline-start               Align your tooltip at "left"
-        * @cssClass             s-tooltip\:block-end               Align your tooltip at "bottom"
-        * @cssClass             s-tooltip\:interactive          Allow the user to interact with the tooltip
+        * @cssClass             s-tooltip:block-start                 Align your tooltip at "top". This is the default         
+        * @cssClass             s-tooltip:inline-end               Align your tooltip at "right"
+        * @cssClass             s-tooltip:inline-start               Align your tooltip at "left"
+        * @cssClass             s-tooltip:block-end               Align your tooltip at "bottom"
+        * @cssClass             s-tooltip:interactive          Allow the user to interact with the tooltip
         * 
         * @example        html
         * <div class="s-font:30 s-mbe:50">
-        *   <span class="s-tooltip-container\:active">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Hello</a>
-        *       <div class="s-tooltip\:inline-end s-color:accent">
+        *   <span class="s-tooltip-container:active">
+        *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
+        *       <div class="s-tooltip:inline-end s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
@@ -58,26 +58,26 @@ export default function ({
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Positions</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Block start (default)</a>
-        *       <div class="s-tooltip">
+        *       <a class="s-btn s-mie:20 s-mbe:20">Block start (default)</a>
+        *       <div class="s-tooltip s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Inline end</a>
-        *       <div class="s-tooltip\:inline-end s-color:accent">
+        *       <a class="s-btn s-mie:20 s-mbe:20">Inline end</a>
+        *       <div class="s-tooltip:inline-end s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Block end</a>
-        *       <div class="s-tooltip\:block-end s-color:complementary">
+        *       <a class="s-btn s-mie:20 s-mbe:20">Block end</a>
+        *       <div class="s-tooltip:block-end s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Inline start</a>
-        *       <div class="s-tooltip\:inline-start s-color:error">
+        *       <a class="s-btn s-mie:20 s-mbe:20">Inline start</a>
+        *       <div class="s-tooltip:inline-start s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
@@ -86,25 +86,25 @@ export default function ({
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (sample)</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Accent</a>
+        *       <a class="s-btn s-mie:20 s-mbe:20">Accent</a>
         *       <div class="s-tooltip s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Complementary</a>
+        *       <a class="s-btn s-mie:20 s-mbe:20">Complementary</a>
         *       <div class="s-tooltip s-color:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Error</a>
+        *       <a class="s-btn s-mie:20 s-mbe:20">Error</a>
         *       <div class="s-tooltip s-color:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">Info</a>
+        *       <a class="s-btn s-mie:20 s-mbe:20">Info</a>
         *       <div class="s-tooltip s-color:info">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
@@ -114,14 +114,14 @@ export default function ({
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Interactions</h3>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">I'm not interactive</a>
+        *       <a class="s-btn s-mie:20 s-mbe:20">I'm not interactive</a>
         *       <div class="s-tooltip">
         *           <a class="s-btn s-color:accent">Click me if you can!</a>
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mr\:20 s-mb\:20">I'm interactive</a>
-        *       <div class="s-tooltip\:interactive">
+        *       <a class="s-btn s-mie:20 s-mbe:20">I'm interactive</a>
+        *       <div class="s-tooltip:interactive">
         *           <a class="s-btn s-color:accent">Click me because you can!</a>
         *       </div>
         *   </span>
@@ -175,7 +175,7 @@ export default function ({
         * This class allows you to display a tooltip inside a tooltip container without needing hover by the user
         * 
         * @example        html
-        * <div class="s-tooltip-container\:active">
+        * <div class="s-tooltip-container:active">
         *   <img src="..." />
         *   <div class="s-tooltip">Something cool</div>
         * </div>
@@ -219,7 +219,7 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:interactive">Something cool</div>
+        *   <div class="s-tooltip:interactive">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
@@ -303,7 +303,7 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:inline-end">Something cool</div>
+        *   <div class="s-tooltip:inline-end">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
@@ -323,7 +323,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:right-center-top">Something cool</div>
+    //     * <div class="s-tooltip:right-center-top">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -361,7 +361,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:right-top-top">Something cool</div>
+    //     * <div class="s-tooltip:right-top-top">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -380,7 +380,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:right-bottom-top">Something cool</div>
+    //     * <div class="s-tooltip:right-bottom-top">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -418,7 +418,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:right-bottom-bottom">Something cool</div>
+    //     * <div class="s-tooltip:right-bottom-bottom">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -440,7 +440,7 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:inline-start">Something cool</div>
+        *   <div class="s-tooltip:inline-start">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
@@ -460,7 +460,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:left-center-top">Something cool</div>
+    //     * <div class="s-tooltip:left-center-top">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -498,7 +498,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:left-top-top">Something cool</div>
+    //     * <div class="s-tooltip:left-top-top">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -517,7 +517,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:left-bottom-top">Something cool</div>
+    //     * <div class="s-tooltip:left-bottom-top">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -536,7 +536,7 @@ export default function ({
     //     *
     //     * @example        html
     //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip\:left-bottom-bottom">Something cool</div>
+    //     * <div class="s-tooltip:left-bottom-bottom">Something cool</div>
     //     *
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -577,7 +577,7 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip\:block-end">Something cool</div>
+        *   <div class="s-tooltip:block-end">Something cool</div>
         * </a>
         * 
         * @since    2.0.0

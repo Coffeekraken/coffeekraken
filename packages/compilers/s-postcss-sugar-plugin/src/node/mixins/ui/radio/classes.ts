@@ -167,7 +167,7 @@ export default function ({
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
         *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`input[type="chockbox"\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
+        *       Text format mean that all the \`input[type="radio"\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
         *   </p>
         *   <div class="s-format:text">
         *     <input type="radio" />

@@ -92,6 +92,8 @@ export default function (env, config) {
                 '1112': '1 1 1 2',
                 '12222': '1 2 2 2 2',
                 '11112': '1 1 1 1 2',
+                '122222': '1 2 2 2 2 2',
+                '111112': '1 1 1 1 1 2',
                 '12345': '1 2 3 4 5',
                 '123456': '1 2 3 4 5 6',
             },
@@ -773,6 +775,19 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 90: '24px',
+
+                /**
+                 * @name              100
+                 * @namespace         config.theme.themes.border.width
+                 * @type              Number
+                 * @default           30px
+                 *
+                 * Specify the <s-color="accent">90</s-color> border width
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                100: '30px',
             },
 
             radius: {
@@ -780,144 +795,157 @@ export default function (env, config) {
                  * @name              default
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           6px
+                 * @default           10px
                  *
                  * Specify the <s-color="accent">0</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                default: '6px',
+                default: '10px',
 
                 /**
                  * @name              0
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           0px
+                 * @default           0
                  *
                  * Specify the <s-color="accent">0</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                0: '0px',
+                0: '0',
 
                 /**
                  * @name              10
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           2px
+                 * @default           4px
                  *
                  * Specify the <s-color="accent">10</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                10: '2px',
+                10: '4px',
 
                 /**
                  * @name              20
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           4px
+                 * @default           8px
                  *
                  * Specify the <s-color="accent">20</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                20: '4px',
+                20: '8px',
 
                 /**
                  * @name              30
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           6px
+                 * @default           12px
                  *
                  * Specify the <s-color="accent">30</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                30: '6px',
+                30: '12px',
 
                 /**
                  * @name              40
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           8px
+                 * @default           16px
                  *
                  * Specify the <s-color="accent">40</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                40: '8px',
+                40: '16px',
 
                 /**
                  * @name              50
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           10px
+                 * @default           20px
                  *
                  * Specify the <s-color="accent">50</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                50: '10px',
+                50: '20px',
 
                 /**
                  * @name              60
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           12px
+                 * @default           26px
                  *
                  * Specify the <s-color="accent">60</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                60: '12px',
+                60: '26px',
 
                 /**
                  * @name              70
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           14px
+                 * @default           32px
                  *
                  * Specify the <s-color="accent">70</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                70: '14px',
+                70: '32px',
 
                 /**
                  * @name              80
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           16px
+                 * @default           40px
                  *
                  * Specify the <s-color="accent">80</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                80: '16px',
+                80: '40px',
 
                 /**
                  * @name              90
                  * @namespace         config.theme.themes.default.border.radius
                  * @type              Number
-                 * @default           18px
+                 * @default           50px
                  *
                  * Specify the <s-color="accent">90</s-color> border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                90: '18px',
+                90: '50px',
+
+                /**
+                 * @name              100
+                 * @namespace         config.theme.themes.default.border.radius
+                 * @type              Number
+                 * @default           60px
+                 *
+                 * Specify the <s-color="accent">90</s-color> border radius
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                100: '60px',
             },
         },
 
@@ -1489,7 +1517,7 @@ export default function (env, config) {
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
-                defaultColor: 'accent',
+                defaultColor: 'main',
                 depth: '[theme.depth.default]',
                 rhythmVertical: {
                     'margin-bottom': 40,
@@ -1501,14 +1529,14 @@ export default function (env, config) {
                 borderRadius: '[theme.border.radius.default]',
                 borderWidth: '[theme.border.width.default]',
                 transition: '[theme.transition.fast]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 defaultColor: 'accent',
                 depth: '[theme.depth.default]',
                 rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
-            focusOutline: {
+            outline: {
                 active: true,
                 borderWidth: '10px',
                 borderRadius: '[theme.border.radius.default]',
@@ -1524,11 +1552,20 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.default.depth]',
                 defaultStyle: 'solid',
-                defaultColor: 'ui',
+                defaultColor: '[theme.ui.default.defaultColor]',
                 formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            },
+            avatar: {
+                borderWidth: '2px',
+                borderRadius: '[theme.ui.default.borderRadius]',
+                transition: '[theme.ui.default.transition]',
+                depth: '[theme.ui.default.depth]',
+                defaultColor: '[theme.ui.default.defaultColor]',
+                defaultStyle: 'solid',
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             colorPicker: {
@@ -1537,7 +1574,7 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
@@ -1547,7 +1584,7 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
@@ -1557,7 +1594,7 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
@@ -1568,7 +1605,7 @@ export default function (env, config) {
                 borderRadius: '0.5em',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
@@ -1581,7 +1618,7 @@ export default function (env, config) {
                 borderRadius: '0.2em',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
@@ -1594,7 +1631,7 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultStyle: 'solid',
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
@@ -1615,9 +1652,9 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.form.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
-                defaultColor: 'ui',
+                defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
                 formatText: true,
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
@@ -1626,7 +1663,7 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.form.borderRadius]',
                 borderWidth: '[theme.ui.form.borderWidth]',
                 transition: '[theme.ui.default.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.form.depth]',
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'solid',
@@ -1638,10 +1675,10 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: '[theme.ui.default.depth]',
                 defaultStyle: 'solid',
-                defaultColor: 'ui',
+                defaultColor: '[theme.ui.default.defaultColor]',
             },
             list: {
                 paddingInline: '[theme.ui.default.paddingInline]',
@@ -1662,7 +1699,7 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.default.borderRadius]',
                 borderWidth: '[theme.ui.default.borderWidth]',
                 transition: '[theme.ui.default.transition]',
-                focusOutline: '[theme.ui.focusOutline.active]',
+                outline: '[theme.ui.outline.active]',
                 depth: 0,
                 defaultStyle: 'solid',
             },
@@ -1814,7 +1851,7 @@ export default function (env, config) {
                     'margin-bottom': 30,
                 },
             },
-            'p-lead': {
+            lead: {
                 'font-family': 'default',
                 'font-size': 50,
                 'line-height': 1.5,

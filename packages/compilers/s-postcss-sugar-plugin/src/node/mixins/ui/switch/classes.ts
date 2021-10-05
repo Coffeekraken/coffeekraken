@@ -67,7 +67,7 @@ export default function ({
         * @name          Switch
         * @namespace          sugar.css.ui
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/form/switch
+        * @menu           Styleguide / Forms        /styleguide/form/switch
         * @platform       css
         * @status       beta
         * 

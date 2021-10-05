@@ -47,6 +47,11 @@ export default function ({
     td, th {
         padding-inline: sugar.scalable(sugar.theme(ui.table.paddingInline));
       padding-block: sugar.scalable(sugar.theme(ui.table.paddingBlock));
+
+        @sugar.direction.rtl {
+            text-align: right;
+        }
+
     }
 
   `);

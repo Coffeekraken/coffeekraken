@@ -46,11 +46,11 @@
 
         <section class="s-container markdown">
 
-            <div class="s-layout:1222:gutter-between:gutter-50">
+            <div class="s-layout:122222:gutter-between:gutter-50">
 
                 <nav class="__nav s-pb:50">
 
-                    <h5 class="s-typo:h5 s-mbe:20">
+                    <h5 class="s-typo:h5 s-mbe:30">
                         Styleguide
                     </h5>
 

@@ -1,8 +1,8 @@
 export default {
-  id: 'description',
-  template: `
+    id: 'description',
+    template: `
     {{#if description}}
-<p class="{{ classname 'p-lead' }}">{{description}}</p>
+<p class="{{ classname 's-typo:lead' }}">{{description}}</p>
 {{/if}}   
-    `
+    `,
 };

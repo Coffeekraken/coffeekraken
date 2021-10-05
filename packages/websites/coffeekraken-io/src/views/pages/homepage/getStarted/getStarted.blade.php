@@ -7,7 +7,7 @@
                 Built-in<br>recipes
             </h2>
 
-            <p class="s-typo:p-lead s-mb-30">
+            <p class="s-typo:lead s-mb-30">
                 <span class="s-tc:accent">
                     Recipe
                 </span> is the term used by Coffeekraken to define

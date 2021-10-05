@@ -61,7 +61,7 @@ Something cool...
         </ul>
 
         <div class="s-text:center">
-            <p class="s-typo:p-lead s-mi:auto s-mbe:30">
+            <p class="s-typo:lead s-mi:auto s-mbe:30">
                 There are just some of our webcomponents listed.<br>
                 A lot of other components are and will be available throught time. Keep updated by joining us.
             </p>

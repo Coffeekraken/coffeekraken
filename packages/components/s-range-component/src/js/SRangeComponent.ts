@@ -10,7 +10,7 @@ import __css from '../css/s-range.css';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
- * @name                SRange
+ * @name                Range
  * @namespace           js
  * @type                Webcomponent
  * @interface           ./interface/SRangeComponentInterface.js

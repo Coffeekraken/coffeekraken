@@ -73,7 +73,7 @@ sugar init --recipe riotComponent'
             <h4 class="s-typo:h4 s-mbe:30">
                 Built-in <span class="s-tc:accent">recipes</span>
             </h4>
-            <p class="s-typo:p-lead s-mbe:30">
+            <p class="s-typo:lead s-mbe:30">
                 <span class="s-tc:accent">Recipe</span> is the term used by Coffeekraken to define <span class="s-tc:accent">project template</span>.
             </p>
             <p class="s-typo:p">

@@ -123,6 +123,9 @@ export default function ({
         * <!-- Rhythm and text format -->
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
+        *   <p class="s-typo:p s-mbe:30">
+        *       Text format mean that all the \`button\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
+        *   </p>
         *   <div class="s-format:text s-rhythm:vertical">
         *       <button>
         *          ${__faker.name.findName()}

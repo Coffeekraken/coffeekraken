@@ -1856,8 +1856,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.typo.s-typo:p-lead": {
-                "name": "s-typo:p-lead",
+            "@coffeekraken.coffeekraken.io.sugar.css.typo.s-typo:lead": {
+                "name": "s-typo:lead",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -1871,7 +1871,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<span class=\"s-typo:p-lead\">Something cool</span>"
+                        "code": "<span class=\"s-typo:lead\">Something cool</span>"
                     }
                 ],
                 "since": "2.0.0",
@@ -1884,8 +1884,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.typo.s-rhythm:vertical s-typo:p-lead": {
-                "name": "s-rhythm:vertical s-typo:p-lead",
+            "@coffeekraken.coffeekraken.io.sugar.css.typo.s-rhythm:vertical s-typo:lead": {
+                "name": "s-rhythm:vertical s-typo:lead",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -1893,13 +1893,13 @@
                         "description": ""
                     }
                 ],
-                "description": "This class allows you to activate the space(s) on your \"<yellow>s-typo:p-lead</yellow>\" HTMLElement",
+                "description": "This class allows you to activate the space(s) on your \"<yellow>s-typo:lead</yellow>\" HTMLElement",
                 "namespace": "@coffeekraken.coffeekraken.io.sugar.css.typo",
                 "status": "beta",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:p-lead\">Something cool</span>\n</div>"
+                        "code": "<div class=\"s-rhythm:vertical\">\n    <span class=\"s-typo:lead\">Something cool</span>\n</div>"
                     }
                 ],
                 "since": "2.0.0",

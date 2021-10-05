@@ -26,7 +26,7 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
         --track-color: sugar.color(main, ui);
         --thumb-color: sugar.color(current);
 
-        --focus-spread: sugar.theme(ui.focusOutline.borderWidth);
+        --focus-spread: sugar.theme(ui.outline.borderWidth);
 
         --thumb-radius: 50%;
         --thumb-height: 1em;

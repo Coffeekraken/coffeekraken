@@ -20,7 +20,7 @@ import __baseCss from 'pikaday/css/pikaday.css';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
 /**
- * @name                SDatePicker
+ * @name                Date Picker
  * @namespace           js
  * @type                Webcomponent
  * @interface           ./interface/SDatePickerComponentInterface.js

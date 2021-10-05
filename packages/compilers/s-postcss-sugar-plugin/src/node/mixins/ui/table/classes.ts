@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../../utils/theme';
+import __faker from 'faker';
 
 class postcssSugarPluginUiTableClassesInterface extends __SInterface {
     static definition = {
@@ -56,6 +57,158 @@ export default function ({
     };
 
     const vars: string[] = [];
+
+    vars.push(`
+      /**
+        * @name          Table
+        * @namespace          sugar.css.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/table
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to display nice tables with ease.
+        * 
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
+        * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        ${finalParams.styles
+            .map((style) => {
+                return ` * @cssClass     s-table${
+                    style === finalParams.defaultStyle ? '' : `:${style}`
+                }           Apply the ${style} table style`;
+            })
+            .join('\n')}
+        * 
+        * @example        html
+        ${finalParams.styles
+            .map((style) => {
+                return ` * <!-- ${style} style -->
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
+            *   <table class="s-table${
+                style === finalParams.defaultStyle ? '' : `:${style}`
+            } s-mbe:30">
+            *       <tr>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *       </tr>
+            *       <tr>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *       </tr>
+            *       <tr>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *       </tr>
+            *   </table>
+            *   <table class="s-table${
+                style === finalParams.defaultStyle ? '' : `:${style}`
+            } s-color:accent s-mbe:30">
+            *       <tr>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *       </tr>
+            *       <tr>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *       </tr>
+            *       <tr>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *       </tr>
+            *   </table>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        *
+        * <!-- RTL -->
+        * <div class="s-mbe:50" dir="rtl">
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">RTL Support</h3>
+        *   <table class="s-table">
+        *       <tr>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *   </table>
+        * </div>
+        * 
+        * <!-- scales -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scales</h3>
+        *   <table class="s-table s-scale:15">
+        *       <tr>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *   </table>
+        * </div>
+        * 
+        * <!-- Text format -->
+        * <div class="s-font:30 s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
+        *   <p class="s-typo:p s-mbe:30">
+        *       Text format mean that all the \`table\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
+        *   </p>
+        *   <div class="s-format:text">
+        *       <table>
+        *       <tr>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *   </table>
+        *   </div>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
 
     finalParams.styles.forEach((style) => {
         const isDefaultStyle =

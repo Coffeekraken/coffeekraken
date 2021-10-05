@@ -59,41 +59,41 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @cssClass         s-badge\:square       Display your badge with squared corners
-        * @cssClass         s-badge\:pill         Display your badge with rounded corners
+        * @cssClass         s-badge:square       Display your badge with squared corners
+        * @cssClass         s-badge:pill         Display your badge with rounded corners
         * 
         * @example        html
         ${finalParams.styles
             .map((style) => {
                 return ` * <!-- ${style} style -->
-            * <div class="s-font\:40 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
-            *   <a class="s-badge\:${style} s-mr\:20">Say hello!</a>
-            *   <a class="s-badge\:${style} s-mr\:20 s-color:accent">Say hello!</a>
-            *   <a class="s-badge\:${style} s-mr\:20 s-color:complementary">Say hello!</a>
-            *   <a class="s-badge\:${style} s-color:error">Say hello!</a>
+            * <div class="s-font:40 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:20">${style} style</h3>
+            *   <a class="s-badge:${style} s-mie:20">Say hello!</a>
+            *   <a class="s-badge:${style} s-mie:20 s-color:accent">Say hello!</a>
+            *   <a class="s-badge:${style} s-mie:20 s-color:complementary">Say hello!</a>
+            *   <a class="s-badge:${style} s-color:error">Say hello!</a>
             * </div>
             * `;
             })
             .join('\n')}
         *
         * <!-- shapes -->
-        * <div class="s-font\:40 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Shapes</h3>
-        *   <a class="s-badge\:square s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge\:pill s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge\:outline\:square s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge\:outline\:pill s-mr\:20 s-mb\:20">Say hello!</a>
+        * <div class="s-font:40 s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:20">Shapes</h3>
+        *   <a class="s-badge:square s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge:pill s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge:outline:square s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge:outline:pill s-mie:20 s-mbe:20">Say hello!</a>
         * </div>
         * 
         * <!-- scales -->
         * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scales</h3>
-        *   <a class="s-badge s-scale\:05 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:1 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:12 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:15 s-mr\:20 s-mb\:20">Say hello!</a>
-        *   <a class="s-badge s-scale\:20 s-mb\:20">Say hello!</a>
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:20">Scales</h3>
+        *   <a class="s-badge s-scale:05 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:1 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:12 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:15 s-mie:20 s-mbe:20">Say hello!</a>
+        *   <a class="s-badge s-scale:20 s-mbe:20">Say hello!</a>
         * </div>
         * 
         * @since      2.0.0
@@ -129,7 +129,7 @@ export default function ({
         * This class represent a(n) "<s-color="accent">outline</s-color>" badge
         * 
         * @example        html
-        * <a class="s-badge\:${style}">I'm a cool ${style} badge</a>
+        * <a class="s-badge:${style}">I'm a cool ${style} badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -151,7 +151,7 @@ export default function ({
         * 
         * 
         * @example        html
-        * <a class="s-badge\:square">I'm a cool badge</a>
+        * <a class="s-badge:square">I'm a cool badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -170,7 +170,7 @@ export default function ({
         * This class represent a(n) "<s-color="accent">pill</s-color>" badge
         * 
         * @example        html
-        * <a class="s-badge\:pill">I'm a cool badge</a>
+        * <a class="s-badge:pill">I'm a cool badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

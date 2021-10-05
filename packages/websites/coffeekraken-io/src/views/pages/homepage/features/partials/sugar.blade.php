@@ -132,7 +132,7 @@ isColor(\'rgba(10,20,30,1)\'); // true'
     </div>
 
     <div class="s-text:center s-pt:50">
-        <p class="s-typo:p-lead s-mi:auto s-mbe:30">
+        <p class="s-typo:lead s-mi:auto s-mbe:30">
             This is just a sneak peak of what you can leverage in the sugar toolkit.<br>
             Don't be afraid, as usual you can take from it only what you need and <span class="s-tc:accent">learn the rest step by step</span>.
         </p>

@@ -19,9 +19,9 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
             values: ['vertical', 'horizontal'],
             default: 'horizontal',
         },
-        focusOutline: {
+        outline: {
             type: 'Boolean',
-            default: __theme().config('ui.tabs.focusOutline'),
+            default: __theme().config('ui.tabs.outline'),
         },
         scope: {
             type: {
@@ -38,7 +38,7 @@ export interface IPostcssSugarPluginUiTabParams {
     grow: boolean;
     style: 'solid';
     direction: 'horizontal' | 'vertical';
-    focusOutline: boolean;
+    outline: boolean;
     scope: string[];
 }
 
@@ -59,7 +59,7 @@ export default function ({
         style: __theme().config('ui.tabs.defaultStyle'),
         grow: false,
         direction: 'horizontal',
-        focusOutline: true,
+        outline: true,
         scope: ['bare', 'lnf', 'grow', 'direction'],
         ...params,
     };
@@ -67,10 +67,10 @@ export default function ({
 
     const vars: string[] = [];
 
-    if (finalParams.focusOutline) {
+    if (finalParams.outline) {
         vars.push(`
         & > * {
-          @sugar.state.focusOutline;
+          @sugar.outline;
         }
       `);
     }
@@ -190,7 +190,10 @@ export default function ({
     // `);
     // }
 
-    if (finalParams.direction === 'vertical' && finalParams.scope.indexOf('direction') !== -1) {
+    if (
+        finalParams.direction === 'vertical' &&
+        finalParams.scope.indexOf('direction') !== -1
+    ) {
         vars.push(`
       display: block;
 

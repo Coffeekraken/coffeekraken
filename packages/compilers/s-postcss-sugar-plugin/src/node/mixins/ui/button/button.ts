@@ -10,9 +10,9 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
             values: ['solid', 'gradient', 'outline', 'text'],
             default: __theme().config('ui.button.defaultStyle'),
         },
-        focusOutline: {
+        outline: {
             type: 'Boolean',
-            default: __theme().config('ui.button.focusOutline'),
+            default: __theme().config('ui.button.outline'),
         },
         scope: {
             type: {
@@ -27,7 +27,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiButtonParams {
     style: 'solid' | 'gradient' | 'outline' | 'text';
-    focusOutline: boolean;
+    outline: boolean;
     scope: ('bare' | 'lnf')[];
 }
 
@@ -49,7 +49,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
         style: __theme().config('ui.button.defaultStyle'),
-        focusOutline: true,
+        outline: true,
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -180,9 +180,9 @@ export default function ({
                 break;
         }
 
-        if (finalParams.focusOutline) {
+        if (finalParams.outline) {
             vars.push(`
-              @sugar.state.focusOutline;
+              @sugar.outline;
           `);
         }
     }

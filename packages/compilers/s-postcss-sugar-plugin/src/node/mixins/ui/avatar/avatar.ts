@@ -4,61 +4,114 @@ import __isInScope from '../../../utils/isInScope';
 import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiAvatarInterface extends __SInterface {
-  static definition = {
-    shape: {
-      type: 'String',
-      values: ['default', 'square'],
-      default: 'square'
-    }
-  };
+    static definition = {
+        shape: {
+            type: 'String',
+            values: ['default', 'square', 'rounded'],
+            default: 'default',
+        },
+        style: {
+            type: 'String',
+            value: ['solid'],
+            default: 'solid',
+        },
+        scope: {
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
+            values: ['bare', 'lnf', 'shape', 'interactive'],
+            default: ['bare', 'lnf', 'shape'],
+        },
+    };
 }
 
 export interface IPostcssSugarPluginUiBadgeParams {
-    shape: 'default' | 'square';
+    shape: 'default' | 'square' | 'rounded';
+    style: 'solid';
+    scope: ('bare' | 'lnf' | 'shape' | 'interactive')[];
 }
 
 export { postcssSugarPluginUiAvatarInterface as interface };
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiBadgeParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiBadgeParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiBadgeParams = {
-      shape: 'square',
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiBadgeParams = {
+        shape: 'square',
+        style: 'solid',
+        scope: ['bare', 'lnf', 'shape'],
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  // @todo          find a way to use sugar.space for paddings
-  vars.push(`
-        position: relative;
-        display: inline-block;
-        overflow: hidden;
-        width: 1em;
-        height: 1em;
+    // bare
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            width: 1em;
+            height: 1em;
+        `);
+    }
 
-        img {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            max-width: 100%;
+    // lnf
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        switch (finalParams.style) {
+            case 'solid':
+                vars.push(`
+                    border-width: sugar.theme(ui.avatar.borderWidth);
+                    border-color: sugar.color(current);
+                    border-style: solid;
+                    @sugar.depth(sugar.theme(ui.avatar.depth));
+                `);
+                break;
         }
+    }
 
-        ${finalParams.shape ?
-            finalParams.shape === 'default' ? `
-                border-radius: 99999999px;
-            ` : finalParams.shape === 'square' ? `
-                border-radius: 0;
-            ` : ''
-        : ''}
-  `);
+    // interactive
+    if (finalParams.scope.indexOf('interactive') !== -1) {
+        vars.push(`
+            cursor: pointer;
+        `);
 
-  replaceWith(vars);
+        switch (finalParams.style) {
+            case 'solid':
+                vars.push(`
+                    @sugar.outline($on: hover, $where: element);
+                `);
+                break;
+        }
+    }
+
+    // shape
+    if (finalParams.scope.indexOf('shape') !== -1) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                `);
+                break;
+            case 'rounded':
+                vars.push(`
+                    border-radius: sugar.theme(ui.avatar.borderRadius);
+                    `);
+                break;
+            case 'default':
+            default:
+                vars.push(`
+                    border-radius: 0.5em;
+                `);
+                break;
+        }
+    }
+
+    replaceWith(vars);
 }

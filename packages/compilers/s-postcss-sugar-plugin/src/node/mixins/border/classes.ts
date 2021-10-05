@@ -16,7 +16,7 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
  * @platform      css
  * @status        beta
  *
- * This mixin generate the borders helpers like s-border:radius-20, etc...
+ * This mixin generate the borders helpers like s-radius:20, etc...
  *
  * @return      {Css}                   The generated css
  *
@@ -46,14 +46,14 @@ export default function ({
 
     vars.push(`
       /**
-        * @name          Border
+        * @name          Radius
         * @namespace          sugar.css.helpers
         * @type               Styleguide
-        * @menu           Styleguide / Helpers        /styleguide/helpers/border
+        * @menu           Styleguide / Helpers        /styleguide/helpers/radius
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to align things to \`left\`, \`right\`, \`center\`, etc...  on any HTMLElement
+        * These classes allows you to apply border radius on any HTMLElement
         * 
         * @support      chromium        
         * @support      firefox         
@@ -63,13 +63,7 @@ export default function ({
         ${Object.keys(radiusesObj)
             .map((radiusName) => {
                 if (radiusName === 'default') return '';
-                return ` * @cssClass      s-border:radius-${radiusName}      Apply the border radius ${radiusName} to any HTMLElement`;
-            })
-            .join('\n')}
-        ${Object.keys(widthsObj)
-            .map((widthName) => {
-                if (widthName === 'default') return '';
-                return ` * @cssClass      s-border:width-${widthName}      Apply the border width ${widthName} to any HTMLElement`;
+                return ` * @cssClass      s-radius:${radiusName}      Apply the border radius ${radiusName} to any HTMLElement`;
             })
             .join('\n')}
         *
@@ -80,7 +74,7 @@ export default function ({
             .map((radiusName) => {
                 if (radiusName === 'default') return '';
                 return `
-              *   <div class="s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-${radiusName}">
+              *   <div class="s-display:inline-block s-width:20 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:${radiusName}">
               *     ${radiusName}
               *   </div> 
             `;
@@ -88,13 +82,42 @@ export default function ({
             .join('\n')}
         * </div>
         * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `);
+
+    vars.push(`
+      /**
+        * @name          Border width
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/border-width
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply some border width to any HTMLElement
+        * 
+        * @support      chromium        
+        * @support      firefox         
+        * @support      safari          
+        * @support      edge           
+        * 
+        ${Object.keys(widthsObj)
+            .map((widthName) => {
+                if (widthName === 'default') return '';
+                return ` * @cssClass      s-bwidth:${widthName}      Apply the border width ${widthName} to any HTMLElement`;
+            })
+            .join('\n')}
+        *
+        * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Width</h3>
         ${Object.keys(widthsObj)
             .map((widthName) => {
                 if (widthName === 'default') return '';
                 return `
-              *   <div style="border-color: var(--s-theme-color-accent);" class="s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:width-${widthName}">
+              *   <div style="border-color: var(--s-theme-color-accent);" class="s-display:inline-block s-width:20 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:${widthName}">
               *     ${widthName}
               *   </div> 
             `;
@@ -108,8 +131,8 @@ export default function ({
     `);
 
     Object.keys(radiusesObj).forEach((radiusName) => {
-        const cls = `s-border--radius-${radiusName}`.replace('-default', '');
-        const clsName = `s-border:radius-${radiusName}`.replace('-default', '');
+        const cls = `s-radius--${radiusName}`.replace('--default', '');
+        const clsName = `s-radius:${radiusName}`.replace(':default', '');
         const radiusCss = `/**
   * @name               ${clsName}
   * @namespace          sugar.css.border
@@ -131,10 +154,10 @@ export default function ({
     });
 
     Object.keys(widthsObj).forEach((widthName) => {
-        const cls = `s-border--width-${widthName}`.replace('-default', '');
-        const clsName = `s-border:width-${widthName}`.replace('-default', '');
+        const cls = `s-bwidth:${widthName}`.replace(':default', '');
+        const clsName = `s-bwidth--${widthName}`.replace('--default', '');
         const radiusCss = `/**
-  * @name               ${clsName}
+  * @name               ${cls}
   * @namespace          sugar.css.border
   * @type               CssClass
   * @platform         css
@@ -143,11 +166,11 @@ export default function ({
   * This class allows you to apply a "<yellow>${widthName}</yellow>" border width style to any HTMLElement
   * 
   * @example        html
-  * <div class="${clsName}">
+  * <div class="${cls}">
   *     Hello world
   * </div>
   */
-.${cls} {
+.${clsName} {
     @sugar.border.width(${widthName});
 }`;
         vars.push(radiusCss);

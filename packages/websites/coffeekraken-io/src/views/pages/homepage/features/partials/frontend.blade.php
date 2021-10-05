@@ -137,7 +137,7 @@ Cool don\'t you think?
     </div>
 
     <div class="s-text:center s-pt:50 s-mis:-50">
-        <p class="s-typo:p-lead s-mi:auto s-mbe:30">
+        <p class="s-typo:lead s-mi:auto s-mbe:30">
             Keep in mind that <span class="s-tc:accent">all of these features are optional</span>. This mean that
             you can work with the things you like and let the rest aside...
         </p>

@@ -133,7 +133,7 @@
                 },
                 "paragraph-lead": {
                     "name": "Paragraph lead",
-                    "class": "s-typo:p-lead",
+                    "class": "s-typo:lead",
                     "type": "block"
                 },
                 "paragraph": {
@@ -260,7 +260,7 @@
                     "name": "Image(s)",
                     "type": "file[]",
                     "file": {
-                        "extensions": ["jpg","jpeg","png","webp"]
+                        "extensions": ["jpg", "jpeg", "png", "webp"]
                     },
                     "required": true
                 },

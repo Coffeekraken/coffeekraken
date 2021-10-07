@@ -2,12 +2,25 @@ export default function (env, config) {
     return {
         extends: 'themeLightBase',
 
+        /**
+         * @name            defaultColor
+         * @namespace        config.theme.themes.themeDefaultLight
+         * @type            String
+         * @default         main
+         *
+         * Specify which color to use by default for elements that make use of the "sugar.color(current)" color.
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        defaultColor: 'main',
+
         color: {
             /**
              * @name                main
              * @namespace           config.theme.themes.default.color
              * @type                Color
-             * @default             #776d91
+             * @default             #776D91
              *
              * Specify the <s-color="main">main</s-color> color value.
              *
@@ -15,7 +28,7 @@ export default function (env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             main: {
-                color: '#787987',
+                color: '#776D91',
                 '...': '[extends.colorSchemas]',
             },
 

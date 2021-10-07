@@ -63,8 +63,6 @@ export default function ({
         ...params,
     };
 
-    console.log(finalParams);
-
     const vars = __themeToVars(finalParams.theme, finalParams.variant);
 
     if (finalParams.scope) {

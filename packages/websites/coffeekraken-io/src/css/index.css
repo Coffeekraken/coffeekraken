@@ -57,7 +57,8 @@ body {
     @sugar.theme (dark);
 }
 
-[class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview [class*='s-btn']) {
+[class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
+        [class*='s-btn']) {
     border-radius: 100px !important;
     border: none !important;
 }

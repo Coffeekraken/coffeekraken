@@ -8,7 +8,9 @@ export default function (theme: string, variant?: string): string[] {
     // @ts-ignore
     const themeInstance = __theme(theme, variant);
     if (!themeInstance)
-        throw new Error(`Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists...`);
+        throw new Error(
+            `Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists...`,
+        );
 
     const themesConfig = themeInstance.themesConfig();
 
@@ -18,7 +20,11 @@ export default function (theme: string, variant?: string): string[] {
     themeInstance.loopOnColors((colorObj) => {
         const baseVariable = colorObj.value.variable;
 
-        if (!__micromatch(`color.${colorObj.name}`, themesConfig.cssVariables).length) return;
+        if (
+            !__micromatch(`color.${colorObj.name}`, themesConfig.cssVariables)
+                .length
+        )
+            return;
 
         if (!colorObj.state && !colorObj.variant && colorObj.value.color) {
             vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
@@ -31,14 +37,26 @@ export default function (theme: string, variant?: string): string[] {
             vars.push(`${baseVariable}-origin-a: ${colorObj.value.a};`);
         } else if (!colorObj.value.color) {
             if (colorObj.value.saturate) {
-                vars.push(`${baseVariable}-saturation-offset: ${colorObj.value.saturate};`);
+                vars.push(
+                    `${baseVariable}-saturation-offset: ${colorObj.value.saturate};`,
+                );
             } else if (colorObj.value.desaturate) {
-                vars.push(`${baseVariable}-saturation-offset: ${colorObj.value.desaturate * -1};`);
+                vars.push(
+                    `${baseVariable}-saturation-offset: ${
+                        colorObj.value.desaturate * -1
+                    };`,
+                );
             }
             if (colorObj.value.lighten) {
-                vars.push(`${baseVariable}-lightness-offset: ${colorObj.value.lighten};`);
+                vars.push(
+                    `${baseVariable}-lightness-offset: ${colorObj.value.lighten};`,
+                );
             } else if (colorObj.value.darken) {
-                vars.push(`${baseVariable}-lightness-offset: ${colorObj.value.darken * -1};`);
+                vars.push(
+                    `${baseVariable}-lightness-offset: ${
+                        colorObj.value.darken * -1
+                    };`,
+                );
             }
             if (colorObj.value.alpha >= 0 && colorObj.value.alpha <= 1) {
                 vars.push(`${baseVariable}-a: ${colorObj.value.alpha};`);
@@ -55,7 +73,11 @@ export default function (theme: string, variant?: string): string[] {
         if (!__micromatch(key, themesConfig.cssVariables).length) return;
 
         const value = flattenedTheme[key];
-        const varKey = key.replace(/\./gm, '-').replace(/:/gm, '-').replace(/\?/gm, '').replace(/--/gm, '-');
+        const varKey = key
+            .replace(/\./gm, '-')
+            .replace(/:/gm, '-')
+            .replace(/\?/gm, '')
+            .replace(/--/gm, '-');
 
         let variable = `--s-theme-${varKey}`;
 

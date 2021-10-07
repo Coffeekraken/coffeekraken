@@ -23,7 +23,9 @@ export function preprocess(rawThemeConfig, rawConfig) {
             Object.keys(configObj.variants).forEach((variantName) => {
                 const themeId = `${configObj.themeName}-${variantName}`;
                 if (!rawThemeConfig.themes[themeId]) {
-                    rawThemeConfig.themes[themeId] = `[config.${configId}.variants.${variantName}]`;
+                    rawThemeConfig.themes[
+                        themeId
+                    ] = `[config.${configId}.variants.${variantName}]`;
                 }
             });
         }
@@ -37,9 +39,13 @@ export function postprocess(themeConfig, config) {
         const themeObj = themes[themeName];
         if (!themeObj.color.current) {
             if (themeObj.defaultColor) {
-                themeObj.color.current = Object.assign({}, themeObj.color[themeObj.defaultColor]);
+                themeObj.color.current = Object.assign(
+                    {},
+                    themeObj.color[themeObj.defaultColor],
+                );
             } else {
-                const firstColor = themeObj.color[Object.keys(themeObj.color)[0]];
+                const firstColor =
+                    themeObj.color[Object.keys(themeObj.color)[0]];
                 themeObj.color.current = Object.assign({}, firstColor);
             }
         }

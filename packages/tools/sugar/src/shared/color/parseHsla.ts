@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 /**
- * @name                    parseHsl
+ * @name                    parseHsla
  * @namespace            js.color
  * @type                    Function
  * @platform          js
@@ -11,7 +11,7 @@
  *
  * Parse HSL
  *
- * @param 	      {string}	        hslString			      The hsl string (hsl(h,s,l)) to parse
+ * @param 	      {string}	        hslaString			      The hsl string (hsl(h,s,l)) to parse
  * @return 	        {object} 					                  	The hsl object representation
  *
  * @todo      interface
@@ -25,17 +25,20 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function parseHsl(hslString) {
-  hslString = hslString.toLowerCase();
-  const string = hslString
-    .replace('hsl(', '')
-    .replace(')', '')
-    .replace(/\s/g, '');
-  const array = string.split(',');
-  return {
-    h: parseFloat(array[0]),
-    s: parseFloat(array[1]),
-    l: parseFloat(array[2])
-  };
+function parseHsl(hslaString) {
+    hslaString = hslaString.toLowerCase();
+    const string = hslaString
+        .replace('hsla(', '')
+        .replace('hsl(', '')
+        .replace(')', '')
+        .replace(/\s/g, '');
+    const array = string.split(',');
+
+    return {
+        h: parseFloat(array[0]),
+        s: parseFloat(array[1]),
+        l: parseFloat(array[2]),
+        a: array[3] ? parseFloat(array[3]) : 1,
+    };
 }
 export default parseHsl;

@@ -66,29 +66,33 @@ export default function (env, config) {
                     lighten: 50,
                 },
                 text: {
-                    darken: 46,
+                    darken: 15,
+                    desaturate: 20,
                 },
                 placeholder: {
-                    darken: 50,
+                    darken: 45,
                     alpha: 0.4,
                 },
                 foreground: {
-                    darken: 50,
+                    darken: 45,
                 },
                 background: {
-                    darken: 30,
-                },
-                backgroundForeground: {
-                    darken: 50,
-                },
-                surface: {
-                    lighten: 25,
-                },
-                surfaceForeground: {
-                    darken: 50,
+                    darken: 40,
                 },
                 ui: {
-                    lighten: 15,
+                    lighten: 50,
+                },
+                uiForeground: {
+                    darken: 25,
+                },
+                backgroundForeground: {
+                    darken: 45,
+                },
+                surface: {
+                    lighten: 49,
+                },
+                surfaceForeground: {
+                    darken: 45,
                 },
                 border: {
                     alpha: 0.2,

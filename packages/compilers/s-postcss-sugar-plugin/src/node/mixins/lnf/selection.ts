@@ -1,15 +1,15 @@
 import __SInterface from '@coffeekraken/s-interface';
 
-class postcssSugarPluginLiikAndFeelBaseInterface extends __SInterface {
+class postcssSugarPluginLiikAndFeelSelectionInterface extends __SInterface {
     static definition = {};
 }
 
-export interface IPostcssSugarPluginLookAndFeelBaseParams {}
+export interface IPostcssSugarPluginLookAndFeelSelectionParams {}
 
-export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
+export { postcssSugarPluginLiikAndFeelSelectionInterface as interface };
 
 /**
- * @name          base
+ * @name          selection
  * @namespace     node.mixin.lnf
  * @type          PostcssMixin
  * @platform      css
@@ -17,14 +17,13 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  *
  * This mixin apply some base look and feel depending on the current theme like:
  *
- * - Page background using the <s-color="accent">background</s-color> theme color
- * - Text color using the <s-color="accent">default</s-color> theme color
+ * - Selection background and text color
  *
  * @param       {String}        layout      The layout to generate
  * @return      {Css}                   The corresponding grid css
  *
  * @example       css
- * \@sugar.lnf.base;
+ * \@sugar.lnf.selection;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -34,20 +33,19 @@ export default function ({
     atRule,
     replaceWith,
 }: {
-    params: IPostcssSugarPluginLookAndFeelBaseParams;
+    params: IPostcssSugarPluginLookAndFeelSelectionParams;
     atRule: any;
     replaceWith: Function;
 }) {
-    const finalParams: IPostcssSugarPluginLookAndFeelBaseParams = {
+    const finalParams: IPostcssSugarPluginLookAndFeelSelectionParams = {
         ...params,
     };
 
     const vars: string[] = [];
 
     const css = `
-        color: sugar.color(main, text);
-        @sugar.font.family(default);
-        @sugar.font.size(default);
+        color: sugar.color(accent, 100);
+        background-color: sugar.color(accent);
   `;
 
     vars.push(css);

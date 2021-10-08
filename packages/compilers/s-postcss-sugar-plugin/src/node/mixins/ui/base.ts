@@ -53,10 +53,12 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            color: sugar.color(main, surfaceForeground);
+            color: sugar.color(main, uiForeground);
             background-color: sugar.color(main, ui);
             font-size: sugar.scalable(1rem);
-            border: sugar.color(current, --alpha 0.1) solid sugar.theme(ui.${finalParams.name}.borderWidth);
+            border: sugar.color(current, --alpha 0.1) solid sugar.theme(ui.${
+                finalParams.name
+            }.borderWidth);
             border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
             transition: sugar.theme(ui.${finalParams.name}.transition);
             @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
@@ -72,16 +74,13 @@ export default function ({
             }
 
             @sugar.state.hover {
-            background-color: sugar.color(main, ui);
-            border: sugar.color(current, --alpha 0.3) solid 1px;
+                border: sugar.color(current, --alpha 0.3) solid 1px;
             }
             @sugar.state.focus {
-            background-color: sugar.color(main, ui);
-            border: sugar.color(current, --alpha 0.6) solid 1px;
+                border: sugar.color(current, --alpha 0.6) solid 1px;
             }
             @sugar.state.active {
-            background-color: sugar.color(main, ui);
-            border: sugar.color(current, --alpha 0.6) solid 1px;
+                border: sugar.color(current, --alpha 0.6) solid 1px;
             }
             @sugar.state.disabled {
                 @sugar.disabled;

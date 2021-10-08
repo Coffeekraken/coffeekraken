@@ -1,5 +1,5 @@
 .toolbar {
-    background: sugar.color(main, 85);
+    background: sugar.color(main, surface);
     position: sticky;
     top: 100px;
     z-index: 10;

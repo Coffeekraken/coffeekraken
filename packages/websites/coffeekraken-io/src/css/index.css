@@ -13,7 +13,7 @@
 } */
 
 body {
-    @sugar.theme.when (dark) {
+    @sugar.theme.when (coffeekraken-dark) {
         background-color: sugar.color(main, --darken 30);
     }
 }
@@ -53,7 +53,7 @@ body {
 
 @sugar.platform.classes;
 
-.s-theme--dark {
+.s-theme--coffeekraken-dark {
     @sugar.theme (dark);
 }
 

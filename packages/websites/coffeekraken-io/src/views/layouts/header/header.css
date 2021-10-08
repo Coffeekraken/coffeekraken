@@ -11,7 +11,7 @@ body {
     height: 100px;
     display: flex;
     align-items: center;
-    background: sugar.color(main, 100);
+    background: sugar.color(main, surface);
     transition: padding ease-in-out 0.2s;
     @sugar.depth (10);
 

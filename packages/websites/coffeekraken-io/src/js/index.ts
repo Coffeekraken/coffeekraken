@@ -1,3 +1,6 @@
+// @ts-ignore
+const viewsRelated = import.meta.globEager('../views/**/*.ts');
+
 // import '@coffeekraken/s-inline-svg-component';
 // import '@coffeekraken/s-request-component';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
@@ -48,7 +51,9 @@ __sFormValidateFeature({
     customValidations: {
         coffeekraken: (value, helpers) => {
             if (value === 'coffeekraken') {
-                return helpers.message('Are you sure? Krakens are dangerous...');
+                return helpers.message(
+                    'Are you sure? Krakens are dangerous...',
+                );
             }
             return value;
         },
@@ -62,12 +67,12 @@ __smoothScroll({
 });
 __linksStateAttributes();
 
-// // document.addEventListener('scroll', (e) => {
-// //     if (document.body.scrollTop >= 10) {
-// //         document.body.classList.add('scrolled');
-// //     } else {
-// //         document.body.classList.remove('scrolled');
-// //     }
-// // });
+document.addEventListener('scroll', (e) => {
+    if (window.scrollY >= 10) {
+        document.body.classList.add('scrolled');
+    } else {
+        document.body.classList.remove('scrolled');
+    }
+});
 
 __expandPleasantCssClassnamesLive();

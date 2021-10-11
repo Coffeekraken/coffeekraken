@@ -20,7 +20,7 @@ export default function (env, config) {
              * @name                main
              * @namespace           config.theme.themes.default.color
              * @type                Color
-             * @default             #776D91
+             * @default             hsla(198,10,50,1)
              *
              * Specify the <s-color="main">main</s-color> color value.
              *
@@ -28,7 +28,7 @@ export default function (env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             main: {
-                color: '#776D91',
+                color: 'hsla(198,10,50,1)',
                 '...': '[extends.colorSchemas]',
             },
 

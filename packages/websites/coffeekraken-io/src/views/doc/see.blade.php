@@ -8,7 +8,7 @@
         <section class="s-bg:ui-surface s-border:radius">
             @if ($see->og)
                 <div class="s-layout:122">
-                    <div class="s-ratio:1-1 s-bg:accent s-border:radius">
+                    <div class="s-ratio:1 s-bg:accent s-border:radius">
                         <img src="{{ $see->og->ogImage->url }}" />
                     </div>
                     <div class="s-p:50">
@@ -16,7 +16,7 @@
                         <p class="s-typo:p s-mbe:30">
                             {!! $see->og->ogDescription !!}
                         </p>
-                        <a class="s-btn:info" href="{{ $see->og->ogUrl }}" title="{{ $see->og->ogTitle }}" target="_blank">
+                        <a class="s-btn s-color:info" href="{{ $see->og->ogUrl }}" title="{{ $see->og->ogTitle }}" target="_blank">
                             Check that out!
                         </a>
                     </div>

@@ -70,7 +70,8 @@ export default class SFrontendServer extends __SClass {
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     start(params: Partial<ISFrontendServerParams> | string): Promise<any> {
-        const finalParams: ISFrontendServerParams = __SFrontendServerInterface.apply(params);
+        const finalParams: ISFrontendServerParams =
+            __SFrontendServerInterface.apply(params);
 
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
@@ -81,16 +82,31 @@ export default class SFrontendServer extends __SClass {
                     express.use(__compression());
                 }
 
-                const logLevelInt = ['silent', 'error', 'warn', 'debug', 'info', 'verbose', 'silly'].indexOf(
-                    finalParams.logLevel,
-                );
+                const logLevelInt = [
+                    'silent',
+                    'error',
+                    'warn',
+                    'debug',
+                    'info',
+                    'verbose',
+                    'silly',
+                ].indexOf(finalParams.logLevel);
 
-                const frontendServerConfig = __SugarConfig.get('frontendServer');
+                const frontendServerConfig =
+                    __SugarConfig.get('frontendServer');
 
                 if (frontendServerConfig.modules) {
-                    for (let i = 0; i < Object.keys(frontendServerConfig.modules).length; i++) {
-                        const moduleId = Object.keys(frontendServerConfig.modules)[i];
-                        const modulePath = __path.resolve(frontendServerConfig.modules[moduleId]);
+                    for (
+                        let i = 0;
+                        i < Object.keys(frontendServerConfig.modules).length;
+                        i++
+                    ) {
+                        const moduleId = Object.keys(
+                            frontendServerConfig.modules,
+                        )[i];
+                        const modulePath = __path.resolve(
+                            frontendServerConfig.modules[moduleId],
+                        );
                         let module;
                         try {
                             module = await import(modulePath);
@@ -100,54 +116,76 @@ export default class SFrontendServer extends __SClass {
                                 `<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${modulePath}</cyan>"`,
                             );
                         }
-                        await pipe(module.default(express, frontendServerConfig));
+                        await pipe(
+                            module.default(express, frontendServerConfig),
+                        );
                     }
                 }
 
                 if (frontendServerConfig.staticDirs) {
-                    Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
-                        const fsPath = frontendServerConfig.staticDirs[dir];
-                        emit('log', {
-                            value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
-                                process.cwd(),
-                                fsPath,
-                            )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
-                        });
-                        express.use(dir, __express.static(fsPath));
-                    });
+                    Object.keys(frontendServerConfig.staticDirs).forEach(
+                        (dir) => {
+                            const fsPath = frontendServerConfig.staticDirs[dir];
+                            emit('log', {
+                                value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
+                                    process.cwd(),
+                                    fsPath,
+                                )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
+                            });
+                            express.use(dir, __express.static(fsPath));
+                        },
+                    );
                 }
 
                 if (frontendServerConfig.proxy) {
-                    Object.keys(frontendServerConfig.proxy).forEach((proxyId) => {
-                        const proxyObj = frontendServerConfig.proxy[proxyId];
-                        // @ts-ignore
-                        express.use(
-                            createProxyMiddleware(proxyObj.route, {
-                                logLevel: 'silent',
-                                ...(proxyObj.settings ?? {}),
-                            }),
-                        );
-                    });
+                    Object.keys(frontendServerConfig.proxy).forEach(
+                        (proxyId) => {
+                            const proxyObj =
+                                frontendServerConfig.proxy[proxyId];
+                            // @ts-ignore
+                            express.use(
+                                createProxyMiddleware(proxyObj.route, {
+                                    logLevel: 'silent',
+                                    ...(proxyObj.settings ?? {}),
+                                }),
+                            );
+                        },
+                    );
                 }
 
                 if (frontendServerConfig.middlewares) {
-                    for (let i = 0; i < Object.keys(frontendServerConfig.middlewares).length; i++) {
-                        const middlewareName = Object.keys(frontendServerConfig.middlewares)[i];
-                        const middlewareObj = frontendServerConfig.middlewares[middlewareName];
+                    for (
+                        let i = 0;
+                        i <
+                        Object.keys(frontendServerConfig.middlewares).length;
+                        i++
+                    ) {
+                        const middlewareName = Object.keys(
+                            frontendServerConfig.middlewares,
+                        )[i];
+                        const middlewareObj =
+                            frontendServerConfig.middlewares[middlewareName];
 
-                        if (!middlewareObj.path || __fs.existsSync(middlewareObj.path)) {
+                        if (
+                            !middlewareObj.path ||
+                            __fs.existsSync(middlewareObj.path)
+                        ) {
                             throw new Error(
                                 `<red>[${this.constructor.name}.start]</red> Sorry but the middleware named "<yellow>${middlewareName}</yellow>" seems to not exists or is missconfigured...`,
                             );
                         }
 
-                        const { default: middlewareWrapperFn } = await import(middlewareObj.path); // eslint-disable-line
-                        const middleware = middlewareWrapperFn(middlewareObj.settings ?? {});
+                        const { default: middlewareWrapperFn } = await import(
+                            middlewareObj.path
+                        ); // eslint-disable-line
+                        const middleware = middlewareWrapperFn(
+                            middlewareObj.settings ?? {},
+                        );
 
                         // register the middleware inside the sails configuration
                         // @ts-ignore
                         express.use((req, res, next) => {
-                            return pipe(middleware(res, res, next));
+                            return pipe(middleware(req, res, next));
                         });
                     }
                 }
@@ -166,19 +204,25 @@ export default class SFrontendServer extends __SClass {
 
                 // routes registration
                 if (frontendServerConfig.routes) {
-                    Object.keys(frontendServerConfig.routes).forEach(async (routeSlug) => {
-                        const routeObj = frontendServerConfig.routes[routeSlug];
+                    Object.keys(frontendServerConfig.routes).forEach(
+                        async (routeSlug) => {
+                            const routeObj =
+                                frontendServerConfig.routes[routeSlug];
 
-                        const handlerPath = frontendServerConfig.handlers[routeObj.handler];
-                        const { default: handlerFn } = await import(handlerPath);
-                        express.get(routeSlug, (req, res, next) => {
-                            if (routeObj.request) {
-                                req = __deepMerge(req, routeObj.request);
-                            }
+                            const handlerPath =
+                                frontendServerConfig.handlers[routeObj.handler];
+                            const { default: handlerFn } = await import(
+                                handlerPath
+                            );
+                            express.get(routeSlug, (req, res, next) => {
+                                if (routeObj.request) {
+                                    req = __deepMerge(req, routeObj.request);
+                                }
 
-                            return pipe(handlerFn(req, res, next));
-                        });
-                    });
+                                return pipe(handlerFn(req, res, next));
+                            });
+                        },
+                    );
                 }
 
                 if (!(await __isPortFree(frontendServerConfig.port))) {

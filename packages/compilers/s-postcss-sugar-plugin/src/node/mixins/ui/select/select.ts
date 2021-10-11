@@ -76,15 +76,15 @@ export default function ({
                     -webkit-appearance: none;
                     appearance: none;
                     background: sugar.color(current, --alpha 0.5);
-                    color: sugar.color(current, foreground);
+                    color: sugar.color(current, uiForeground);
                 }
                 &[multiple]:focus option:checked,
                 &[multiple]:focus option[selected] {
                     -moz-appearance: none;
                     -webkit-appearance: none;
                     appearance: none;
-                    background: sugar.color(current);
-                    color: sugar.color(current, foreground);
+                    background: sugar.color(current, ui);
+                    color: sugar.color(current, uiForeground);
                 }
 
                 &:not([multiple]) {

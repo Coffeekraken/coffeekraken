@@ -18,10 +18,10 @@
                     <br />
                     We are a community and this is what makes the strengh of this project.
                 </p>
-                <a class="s-btn:error:block s-mbe:20 s-depth:50" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                <a class="s-btn s-color:error s-display:block s-mbe:20 s-depth:50" href="https://olivierbossel.com" title="Share the love" target="_blank">
                     Declare my issue on Github
                 </a>
-                <a class="s-btn:complementary:block" href="https://olivierbossel.com" title="Share the love" target="_blank">
+                <a class="s-btn s-color:complementary s-display:block" href="https://olivierbossel.com" title="Share the love" target="_blank">
                     Talk about it on Discord
                 </a>
             </div>

@@ -88,7 +88,10 @@ export default function (env, config) {
                     lighten: 50,
                 },
                 ui: {
-                    darken: 15,
+                    darken: 20,
+                },
+                uiForeground: {
+                    lighten: 50,
                 },
                 border: {
                     alpha: 0.2,

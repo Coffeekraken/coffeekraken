@@ -41,7 +41,7 @@
                 </h4>
                 <h5 class="s-tc:complementary s-font:40 s-mbe:30">@{{namespace}}</h5>
                 <p class="s-typo:p s-mbe:30">@{{description}}</p>
-                <a href="/doc/@{{striptags namespace}}.@{{striptags name}}" class="s-btn:accent">
+                <a href="/doc/@{{striptags namespace}}.@{{striptags name}}" class="s-btn s-color:accent">
                     Check out more
                 </a>
             </div>
@@ -70,11 +70,11 @@
                 <br/>
                 Here's how you can join us and start a new journey!
             </p>
-            <a class="s-btn:info" href="/" title="Join us on Discord!" target="_blank">
+            <a class="s-btn s-color:info" href="/" title="Join us on Discord!" target="_blank">
                 Join us on Discord!
             </a>
             &nbsp;&nbsp;
-            <a class="s-btn:accent" href="/" title="Join us on Github!" target="_blank">
+            <a class="s-btn s-color:accent" href="/" title="Join us on Github!" target="_blank">
                 Join us on Github!
             </a>
         </div>

@@ -62,6 +62,9 @@ export default function ({
     const finalParams = <postcssSugarPluginThemeWhenMixinParams>{
         ...(params ?? {}),
     };
+
+    console.log(finalParams);
+
     const container = new postcssApi.Rule({
         selectors: [
             `.s-theme--${finalParams.theme}-${finalParams.variant} &`,

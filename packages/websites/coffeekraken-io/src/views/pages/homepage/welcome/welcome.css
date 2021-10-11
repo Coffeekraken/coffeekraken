@@ -1,23 +1,120 @@
 #homepage-welcome {
     /* height: 70vh;
   min-height: 600px; */
+    height: 100vh;
+    text-align: center;
     position: relative;
     z-index: 10;
-    background-color: sugar.color(main, background);
-    background-position: 0 0;
+    overflow: hidden;
+    /* background-position: 0 0;
     background-size: cover;
     animation: subnav-bkg 240s linear;
     animation-fill-mode: both;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite; */
+
+    margin-top: -80px;
+    display: flex;
+    align-items: center;
 
     @sugar.theme.when (dark) {
-        background-image: url('/src/img/discord-illustration-05-bkg.png');
+        /* background: sugar.color(main, surface) !important; */
     }
 
-    .__illustration {
+    .__background {
         position: absolute;
-        @sugar.align.abs (center);
-        transform: translate(-50%, -60%) scale(1.5);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90%;
+        background-size: cover;
+        background-position: 50% 50%;
+        opacity: 1;
+        background: linear-gradient(
+            10deg,
+            sugar.color(main, --alpha 0.1),
+            sugar.color(main, --alpha 0) 40%
+        );
+    }
+
+    .__bg-01,
+    .__bg-02 {
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: wrap;
+        user-select: none;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    @keyframes bg-appear {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    .__bg-01 {
+        background: url('/src/img/bg-coffee-01.jpg');
+        clip-path: url(#welcome-clip-path-01);
+        opacity: 0;
+        animation: bg-appear 0.5s ease-out 1s forwards;
+        pointer-events: none;
+        /* mix-blend-mode: overlay; */
+    }
+    .__bg-02 {
+        background: url('/src/img/landscape-03.jpg');
+        clip-path: url(#welcome-clip-path-02);
+        opacity: 0;
+        animation: bg-appear 0.5s ease-out 1s forwards;
+        pointer-events: none;
+        /* mix-blend-mode: overlay; */
+    }
+    .__code {
+        width: 100%;
+        height: 90%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+    .__code {
+        color: white;
+        opacity: 0.2;
+        @sugar.font.family (code);
+        mix-blend-mode: overlay;
+        pointer-events: none;
+
+        @sugar.theme.when (dark) {
+            color: sugar.color(main, surface);
+        }
+    }
+
+    .__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: sugar.padding(50);
+    }
+
+    .__logo {
+        height: 70px;
+        margin: 0 auto sugar.margin(50) auto;
+
+        svg {
+            width: 100%;
+            height: 80px;
+        }
+        svg .main {
+            fill: sugar.color(main, text);
+        }
+        svg .accent {
+            fill: sugar.color(accent);
+        }
     }
 
     .__content {

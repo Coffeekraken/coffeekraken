@@ -15,7 +15,7 @@
                 Don't be afraid by Kraken Pop, to start using our built-in development stack, you just need to enter 3 simple commands that you
                 are more than probably already familiarised with...
             </p>
-            <a class="s-btn:accent" href="/#get-started" title="Get started!">
+            <a class="s-btn s-color:accent" href="/#get-started" title="Get started!">
                 Get started!
             </a>
         </div>
@@ -56,7 +56,7 @@ sugar init --recipe riotComponent'
             <ul class="__recipes-grid">
                 @foreach (['accent','accent','accent','accent'] as $i)
                 <li>
-                    <div class="s-ratio:1-1 s-bg:accent s-border:radius s-depth:50">
+                    <div class="s-ratio:1 s-bg:accent s-radius s-depth:50 s-position:relative">
                         <a href="/" title="">
                             <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
                                 <i class="s-icon:search s-font:100 s-mbe:20"></i>

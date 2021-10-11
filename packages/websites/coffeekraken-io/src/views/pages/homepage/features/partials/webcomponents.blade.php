@@ -1,4 +1,7 @@
 <section id="features-webcomponents" class="s-container s-pb:100">
+
+    <div class="section-top-background"></div>
+
     <div class="s-layout:122:gutter-x:gutter-between">
 
         <div>
@@ -11,7 +14,7 @@
                 In order to help with that, Coffeekraken provide some fully customisable and framework agnostic webcomponents that you can
                 simply import and use in less than a minute...
             </p>
-            <a class="s-btn:complementary" href="/#get-started" title="Get started!">
+            <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
                 Get started!
             </a>
         </div>
@@ -48,7 +51,7 @@ Something cool...
         <ul class="__webcomponents-grid s-mbe:50">
             @foreach (['complementary','accent','complementary','accent','complementary','accent','complementary','accent','complementary','accent'] as $i)
             <li>
-                <div class="s-ratio:1-1 s-bg:accent s-border:radius s-depth:50">
+                <div class="s-ratio:1 s-bg:accent s-radius s-depth:50 s-position:relative">
                     <a href="/" title="">
                         <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
                             <i class="s-icon:search s-font:100 s-mbe:20"></i>
@@ -65,7 +68,7 @@ Something cool...
                 There are just some of our webcomponents listed.<br>
                 A lot of other components are and will be available throught time. Keep updated by joining us.
             </p>
-            <a class="s-btn:complementary" href="/#get-started" title="Get started!">
+            <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
                 Check out more of our webcomponents!
             </a>
         </div>

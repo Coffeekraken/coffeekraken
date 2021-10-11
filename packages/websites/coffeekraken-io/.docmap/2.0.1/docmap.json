@@ -28944,8 +28944,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.ratio.s-ratio:1-1": {
-                "name": "s-ratio:1-1",
+            "@coffeekraken.coffeekraken.io.sugar.css.ratio.s-ratio:1": {
+                "name": "s-ratio:1",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -28959,7 +28959,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-ratio:1-1 s-bg:primary\">\n    <div class=\"s-center-abs\">I'm a cool ratio container</div>\n</div>"
+                        "code": "<div class=\"s-ratio:1 s-bg:primary\">\n    <div class=\"s-center-abs\">I'm a cool ratio container</div>\n</div>"
                     }
                 ],
                 "filename": "index.css",
@@ -29054,8 +29054,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-0": {
-                "name": "s-border:radius-0",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:0": {
+                "name": "s-radius:0",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29069,15 +29069,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-0 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:0 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-10": {
-                "name": "s-border:radius-10",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:10": {
+                "name": "s-radius:10",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29091,15 +29091,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-10 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:10 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-20": {
-                "name": "s-border:radius-20",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:20": {
+                "name": "s-radius:20",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29113,15 +29113,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-20 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:20 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-30": {
-                "name": "s-border:radius-30",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:30": {
+                "name": "s-radius:30",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29135,15 +29135,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-30 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:30 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-40": {
-                "name": "s-border:radius-40",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:40": {
+                "name": "s-radius:40",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29157,15 +29157,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-40 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:40 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-50": {
-                "name": "s-border:radius-50",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:50": {
+                "name": "s-radius:50",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29179,15 +29179,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-50 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:50 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-60": {
-                "name": "s-border:radius-60",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:60": {
+                "name": "s-radius:60",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29201,15 +29201,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-60 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:60 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-70": {
-                "name": "s-border:radius-70",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:70": {
+                "name": "s-radius:70",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29223,15 +29223,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-70 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:70 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-80": {
-                "name": "s-border:radius-80",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:80": {
+                "name": "s-radius:80",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29245,15 +29245,15 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-80 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:80 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@coffeekraken.coffeekraken.io.sugar.css.border.s-border:radius-90": {
-                "name": "s-border:radius-90",
+            "@coffeekraken.coffeekraken.io.sugar.css.border.s-radius:90": {
+                "name": "s-radius:90",
                 "type": "CssClass",
                 "platform": [
                     {
@@ -29267,7 +29267,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-border:radius-90 s-color--complementary\">\n    Hello world\n</div>"
+                        "code": "<div class=\"s-radius:90 s-color--complementary\">\n    Hello world\n</div>"
                     }
                 ],
                 "filename": "index.css",

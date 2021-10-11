@@ -1,5 +1,7 @@
 <section id="features-frontend" class="s-container s-pb:100">
 
+    <div class="section-top-background"></div>
+
     <h3 class="s-typo:h3 s-mbe:30">Frontend<br><span class="s-tc:accent">sugar</span></h3>
     <p class="s-typo:p s-mbe:50">
         The goal of Coffeekraken is to help having a better development experience with
@@ -141,7 +143,7 @@ Cool don\'t you think?
             Keep in mind that <span class="s-tc:accent">all of these features are optional</span>. This mean that
             you can work with the things you like and let the rest aside...
         </p>
-        <a class="s-btn:complementary" href="/#get-started" title="Get started!">
+        <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
             Get started!
         </a>
     </div>

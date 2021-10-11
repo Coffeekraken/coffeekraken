@@ -110,6 +110,10 @@ export default function (env, config) {
                 path: `${__dirname()}/../node/middleware/benchMiddleware`,
                 settings: {},
             },
+            request: {
+                path: `${__dirname()}/../node/middleware/requestMiddleware`,
+                settings: {},
+            },
             frontspec: {
                 path: `${__dirname()}/../node/middleware/frontspecMiddleware`,
                 settings: {},

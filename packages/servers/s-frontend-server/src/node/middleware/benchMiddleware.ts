@@ -30,24 +30,21 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function benchEndMiddleware(settings = {}) {
-  return function (req, res, next) {
-    return new __SPromise(({resolve, reject, pipe}) => {
+    return function (req, res, next) {
+        return new __SPromise(({ resolve, reject, pipe }) => {
+            // console.log('___ST');
+            __SBench.start('request');
 
-      // console.log('___ST');
-      __SBench.start('request');
+            function afterResponse() {
+                __SBench.end('request');
+            }
 
-      function afterResponse() {
-        __SBench.end('request');
-      }
+            res.on('finish', afterResponse);
 
-      res.on('finish', afterResponse);
-
-      setTimeout(() => {
-        next();
-      }, 100);
-
-    });
-
-  };
+            setTimeout(() => {
+                next();
+            }, 100);
+        });
+    };
 }
 export default benchEndMiddleware;

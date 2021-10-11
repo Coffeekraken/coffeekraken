@@ -3,10 +3,12 @@
 
 @section('body')
 
+    <div id="{{ $request->path != '/' ? \Sugar\string\idCompliant($request->path) : 'homepage' }}">
+
     <script>
         const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
         if (state.darkMode) {
-            document.body.classList.add('s-theme--coffeekraken-dark');
+            document.body.classList.add('s-theme--default-dark');
         }
     </script>
 
@@ -15,5 +17,7 @@
     @yield('content')
 
     @include('layouts.footer.footer')
+
+    </div>
 
 @endsection

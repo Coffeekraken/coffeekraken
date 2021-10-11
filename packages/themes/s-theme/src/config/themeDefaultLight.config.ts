@@ -28,7 +28,7 @@ export default function (env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             main: {
-                color: 'hsla(198,50,50,1)',
+                color: 'hsla(198,10,50,1)',
                 '...': '[extends.colorSchemas]',
             },
 

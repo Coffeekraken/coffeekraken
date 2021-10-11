@@ -74,8 +74,8 @@ export default function ({
                 * <!-- ${width} -->
                 * <div class="s-mbe:50">
                 *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${width} width</h3>
-                *   <div class="s-bg:main s-border:radius-30">
-                *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bg:accent s-p:30 s-border:radius-30">s-width:${width}</div>
+                *   <div class="s-bg:main s-radius:30">
+                *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bg:accent s-p:30 s-radius:30">s-width:${width}</div>
                 *   </div>
                 * </div>`;
             })

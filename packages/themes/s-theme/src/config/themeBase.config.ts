@@ -1818,7 +1818,7 @@ export default function (env, config) {
             h4: {
                 'font-family': 'title',
                 'font-size': 60,
-                'line-height': 1,
+                'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 30,
@@ -1827,7 +1827,7 @@ export default function (env, config) {
             h5: {
                 'font-family': 'title',
                 'font-size': 50,
-                'line-height': 1,
+                'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 20,
@@ -1836,7 +1836,7 @@ export default function (env, config) {
             h6: {
                 'font-family': 'title',
                 'font-size': 40,
-                'line-height': 1,
+                'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 20,
@@ -1854,7 +1854,7 @@ export default function (env, config) {
             lead: {
                 'font-family': 'default',
                 'font-size': 50,
-                'line-height': 1.5,
+                'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 30,

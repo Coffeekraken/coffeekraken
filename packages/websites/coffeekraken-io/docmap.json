@@ -62,10 +62,7 @@
                 "name": "Global reset",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Resets"
-                    ],
+                    "tree": ["Styleguide", "Resets"],
                     "slug": "/styleguide/resets/global"
                 },
                 "platform": [
@@ -97,10 +94,7 @@
                 "name": "Destyle reset",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Resets"
-                    ],
+                    "tree": ["Styleguide", "Resets"],
                     "slug": "/styleguide/resets/destyle"
                 },
                 "platform": [
@@ -132,10 +126,7 @@
                 "name": "Sugar reset",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Resets"
-                    ],
+                    "tree": ["Styleguide", "Resets"],
                     "slug": "/styleguide/resets/sugar"
                 },
                 "platform": [
@@ -167,10 +158,7 @@
                 "name": "Avatar",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/avatar"
                 },
                 "platform": [
@@ -286,10 +274,7 @@
                 "name": "Buttons",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/buttons"
                 },
                 "platform": [
@@ -489,10 +474,7 @@
                 "name": "Checkbox",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/forms/checkbox"
                 },
                 "platform": [
@@ -587,10 +569,7 @@
                 "name": "Dropdown",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/dropdown"
                 },
                 "platform": [
@@ -748,10 +727,7 @@
                 "name": "Blockquote",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/blockquote"
                 },
                 "platform": [
@@ -846,10 +822,7 @@
                 "name": "Text Input",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/forms/text-input"
                 },
                 "platform": [
@@ -896,10 +869,7 @@
                 "name": "Labels",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/forms/labels"
                 },
                 "platform": [
@@ -973,10 +943,7 @@
                 "name": "Lists",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/lists"
                 },
                 "platform": [
@@ -1176,10 +1143,7 @@
                 "name": "Tabs",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/tabs"
                 },
                 "platform": [
@@ -1256,10 +1220,7 @@
                 "name": "Badges",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/badges"
                 },
                 "platform": [
@@ -1438,10 +1399,7 @@
                 "name": "Radio",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/forms/radio"
                 },
                 "platform": [
@@ -1557,10 +1515,7 @@
                 "name": "Select",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/forms/select"
                 },
                 "platform": [
@@ -1655,10 +1610,7 @@
                 "name": "Switch",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
+                    "tree": ["Styleguide", "Forms"],
                     "slug": "/styleguide/form/switch"
                 },
                 "platform": [
@@ -1711,10 +1663,7 @@
                 "name": "Table",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/table"
                 },
                 "platform": [
@@ -1830,10 +1779,7 @@
                 "name": "Tooltips",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/tooltips"
                 },
                 "platform": [
@@ -2012,10 +1958,7 @@
                 "name": "Align",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/align"
                 },
                 "platform": [
@@ -2411,10 +2354,7 @@
                 "name": "Typography",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/typography"
                 },
                 "platform": [
@@ -6522,10 +6462,7 @@
                 "name": "Clearfix",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/clearfix"
                 },
                 "platform": [
@@ -6669,10 +6606,7 @@
                 "name": "Colors",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/colors"
                 },
                 "platform": [
@@ -20862,10 +20796,7 @@
                 "name": "Fit Sizes",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/fit-sizes"
                 },
                 "platform": [
@@ -21009,10 +20940,7 @@
                 "name": "Format text",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Tools"
-                    ],
+                    "tree": ["Styleguide", "Tools"],
                     "slug": "/styleguide/tools/format-text"
                 },
                 "platform": [
@@ -21044,10 +20972,7 @@
                 "name": "Rhythm vertical",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Tools"
-                    ],
+                    "tree": ["Styleguide", "Tools"],
                     "slug": "/styleguide/tools/rhythm-vertical"
                 },
                 "platform": [
@@ -21079,10 +21004,7 @@
                 "name": "Text",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/scale"
                 },
                 "platform": [
@@ -21450,10 +21372,7 @@
                 "name": "Families",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Fonts"
-                    ],
+                    "tree": ["Styleguide", "Fonts"],
                     "slug": "/styleguide/fonts/families"
                 },
                 "platform": [
@@ -21485,10 +21404,7 @@
                 "name": "Sizes",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Fonts"
-                    ],
+                    "tree": ["Styleguide", "Fonts"],
                     "slug": "/styleguide/fonts/sizes"
                 },
                 "platform": [
@@ -21520,10 +21436,7 @@
                 "name": "Styles",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Fonts"
-                    ],
+                    "tree": ["Styleguide", "Fonts"],
                     "slug": "/styleguide/fonts/styles"
                 },
                 "platform": [
@@ -21555,10 +21468,7 @@
                 "name": "Weights",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Fonts"
-                    ],
+                    "tree": ["Styleguide", "Fonts"],
                     "slug": "/styleguide/fonts/weights"
                 },
                 "platform": [
@@ -21590,10 +21500,7 @@
                 "name": "Stretches",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Fonts"
-                    ],
+                    "tree": ["Styleguide", "Fonts"],
                     "slug": "/styleguide/fonts/stretches"
                 },
                 "platform": [
@@ -21625,10 +21532,7 @@
                 "name": "Resets",
                 "type": "CssClass",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Fonts"
-                    ],
+                    "tree": ["Styleguide", "Fonts"],
                     "slug": "/styleguide/fonts/resets"
                 },
                 "platform": [
@@ -22708,10 +22612,7 @@
                 "name": "Depth",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/depth"
                 },
                 "platform": [
@@ -22726,7 +22627,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Text color</h3>\n<div class=\"s-depth:0 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:0</div>\n<div class=\"s-depth:10 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:10</div>\n<div class=\"s-depth:20 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:20</div>\n<div class=\"s-depth:30 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:30</div>\n<div class=\"s-depth:40 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:40</div>\n<div class=\"s-depth:50 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:50</div>\n<div class=\"s-depth:60 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:60</div>\n<div class=\"s-depth:70 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:70</div>\n<div class=\"s-depth:80 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:80</div>\n<div class=\"s-depth:90 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:90</div>\n<div class=\"s-depth:100 s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:100</div>\n<div class=\"s-depth:default s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30\">s-depth:default</div>\n</div>"
+                        "code": "<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Text color</h3>\n<div class=\"s-depth:0 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:0</div>\n<div class=\"s-depth:10 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:10</div>\n<div class=\"s-depth:20 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:20</div>\n<div class=\"s-depth:30 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:30</div>\n<div class=\"s-depth:40 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:40</div>\n<div class=\"s-depth:50 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:50</div>\n<div class=\"s-depth:60 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:60</div>\n<div class=\"s-depth:70 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:70</div>\n<div class=\"s-depth:80 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:80</div>\n<div class=\"s-depth:90 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:90</div>\n<div class=\"s-depth:100 s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:100</div>\n<div class=\"s-depth:default s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30\">s-depth:default</div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -23007,10 +22908,7 @@
                 "name": "Disabled",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/disabled"
                 },
                 "platform": [
@@ -23070,10 +22968,7 @@
                 "name": "Flex",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/flex"
                 },
                 "platform": [
@@ -25019,10 +24914,7 @@
                 "name": "Ratio",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/ratio"
                 },
                 "platform": [
@@ -25186,10 +25078,7 @@
                 "name": "Radius",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/radius"
                 },
                 "platform": [
@@ -25204,7 +25093,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Radius</h3>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-0\">\n    0\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-10\">\n    10\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-20\">\n    20\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-30\">\n    30\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-40\">\n    40\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-50\">\n    50\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-60\">\n    60\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-70\">\n    70\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-80\">\n    80\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-border:radius-90\">\n    90\n  </div>\n</div>"
+                        "code": "<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Radius</h3>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:0\">\n    0\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:10\">\n    10\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:20\">\n    20\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:30\">\n    30\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:40\">\n    40\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:50\">\n    50\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:60\">\n    60\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:70\">\n    70\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:80\">\n    80\n  </div>\n  <div class=\"s-display:inline-block s-width:10 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:90\">\n    90\n  </div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -25221,10 +25110,7 @@
                 "name": "Border width",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/border-width"
                 },
                 "platform": [
@@ -25239,7 +25125,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Width</h3>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:0\">\n    0\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:10\">\n    10\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:20\">\n    20\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:30\">\n    30\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:40\">\n    40\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:50\">\n    50\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:60\">\n    60\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:70\">\n    70\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:80\">\n    80\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1-1 s-bwidth:90\">\n    90\n  </div>\n</div>"
+                        "code": "<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Width</h3>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:0\">\n    0\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:10\">\n    10\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:20\">\n    20\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:30\">\n    30\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:40\">\n    40\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:50\">\n    50\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:60\">\n    60\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:70\">\n    70\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:80\">\n    80\n  </div>\n  <div style=\"border-color: var(--s-theme-color-accent);\" class=\"s-display:inline-block s-width:10 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:90\">\n    90\n  </div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -25740,10 +25626,7 @@
                 "name": "Display",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/display"
                 },
                 "platform": [
@@ -26197,10 +26080,7 @@
                 "name": "Positions",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/positions"
                 },
                 "platform": [
@@ -26544,10 +26424,7 @@
                 "name": "Transitions",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/transitions"
                 },
                 "platform": [
@@ -26562,7 +26439,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- slow -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">slow</h3>\n  <div class=\"s-bg:main s-border:radius-30\" id=\"s-transition-a8ee251b-e9f7-475a-a519-92dd091b5f2e\">\n     <div class=\"s-transition:slow s-ratio:1 s-bg:accent s-border:radius-30\"></div>\n  <style>\n      #s-transition-a8ee251b-e9f7-475a-a519-92dd091b5f2e > div { position: relative; left: 0; width: 100px; }\n      #s-transition-a8ee251b-e9f7-475a-a519-92dd091b5f2e:hover > div { left: calc(100% - 100px); )  }\n  </style>\n  </div>\n</div>\n<!-- default -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">default</h3>\n  <div class=\"s-bg:main s-border:radius-30\" id=\"s-transition-1d36edeb-f9f3-476b-b813-e4ac3d0e9d61\">\n     <div class=\"s-transition s-ratio:1 s-bg:accent s-border:radius-30\"></div>\n  <style>\n      #s-transition-1d36edeb-f9f3-476b-b813-e4ac3d0e9d61 > div { position: relative; left: 0; width: 100px; }\n      #s-transition-1d36edeb-f9f3-476b-b813-e4ac3d0e9d61:hover > div { left: calc(100% - 100px); )  }\n  </style>\n  </div>\n</div>\n<!-- fast -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">fast</h3>\n  <div class=\"s-bg:main s-border:radius-30\" id=\"s-transition-f5ad9538-82bf-4a0d-8f94-cde3a6368605\">\n     <div class=\"s-transition:fast s-ratio:1 s-bg:accent s-border:radius-30\"></div>\n  <style>\n      #s-transition-f5ad9538-82bf-4a0d-8f94-cde3a6368605 > div { position: relative; left: 0; width: 100px; }\n      #s-transition-f5ad9538-82bf-4a0d-8f94-cde3a6368605:hover > div { left: calc(100% - 100px); )  }\n  </style>\n  </div>\n</div>"
+                        "code": "<!-- slow -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">slow</h3>\n  <div class=\"s-bg:main s-radius:30\" id=\"s-transition-a8ee251b-e9f7-475a-a519-92dd091b5f2e\">\n     <div class=\"s-transition:slow s-ratio:1 s-bg:accent s-radius:30\"></div>\n  <style>\n      #s-transition-a8ee251b-e9f7-475a-a519-92dd091b5f2e > div { position: relative; left: 0; width: 100px; }\n      #s-transition-a8ee251b-e9f7-475a-a519-92dd091b5f2e:hover > div { left: calc(100% - 100px); )  }\n  </style>\n  </div>\n</div>\n<!-- default -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">default</h3>\n  <div class=\"s-bg:main s-radius:30\" id=\"s-transition-1d36edeb-f9f3-476b-b813-e4ac3d0e9d61\">\n     <div class=\"s-transition s-ratio:1 s-bg:accent s-radius:30\"></div>\n  <style>\n      #s-transition-1d36edeb-f9f3-476b-b813-e4ac3d0e9d61 > div { position: relative; left: 0; width: 100px; }\n      #s-transition-1d36edeb-f9f3-476b-b813-e4ac3d0e9d61:hover > div { left: calc(100% - 100px); )  }\n  </style>\n  </div>\n</div>\n<!-- fast -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">fast</h3>\n  <div class=\"s-bg:main s-radius:30\" id=\"s-transition-f5ad9538-82bf-4a0d-8f94-cde3a6368605\">\n     <div class=\"s-transition:fast s-ratio:1 s-bg:accent s-radius:30\"></div>\n  <style>\n      #s-transition-f5ad9538-82bf-4a0d-8f94-cde3a6368605 > div { position: relative; left: 0; width: 100px; }\n      #s-transition-f5ad9538-82bf-4a0d-8f94-cde3a6368605:hover > div { left: calc(100% - 100px); )  }\n  </style>\n  </div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -26645,10 +26522,7 @@
                 "name": "Margin",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/margin"
                 },
                 "platform": [
@@ -30348,10 +30222,7 @@
                 "name": "Scale",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Tools"
-                    ],
+                    "tree": ["Styleguide", "Tools"],
                     "slug": "/styleguide/tools/scale"
                 },
                 "platform": [
@@ -30923,10 +30794,7 @@
                 "name": "Padding",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/padding"
                 },
                 "platform": [
@@ -33310,10 +33178,7 @@
                 "name": "Visibility",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/visibility"
                 },
                 "platform": [
@@ -33411,10 +33276,7 @@
                 "name": "Visually",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/visually"
                 },
                 "platform": [
@@ -33468,10 +33330,7 @@
                 "name": "Truncate",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/truncate"
                 },
                 "platform": [
@@ -33835,10 +33694,7 @@
                 "name": "Scrollbar",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/scrollbar"
                 },
                 "platform": [
@@ -33897,10 +33753,7 @@
                 "name": "Widths",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Helpers"
-                    ],
+                    "tree": ["Styleguide", "Helpers"],
                     "slug": "/styleguide/helpers/widths"
                 },
                 "platform": [
@@ -33915,7 +33768,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- 0 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">0 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:0</div>\n  </div>\n</div>\n<!-- 10 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">10 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:10</div>\n  </div>\n</div>\n<!-- 20 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">20 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:20</div>\n  </div>\n</div>\n<!-- 30 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">30 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:30</div>\n  </div>\n</div>\n<!-- 40 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">40 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:40</div>\n  </div>\n</div>\n<!-- 50 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">50 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:50</div>\n  </div>\n</div>\n<!-- 60 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">60 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:60</div>\n  </div>\n</div>\n<!-- 70 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">70 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:70</div>\n  </div>\n</div>\n<!-- 80 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">80 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:80</div>\n  </div>\n</div>\n<!-- 90 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">90 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:90</div>\n  </div>\n</div>\n<!-- 100 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">100 width</h3>\n  <div class=\"s-bg:main s-border:radius-30\">\n     <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bg:accent s-p:30 s-border:radius-30\">s-width:100</div>\n  </div>\n</div>"
+                        "code": "<!-- 0 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">0 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:0</div>\n  </div>\n</div>\n<!-- 10 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">10 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:10</div>\n  </div>\n</div>\n<!-- 20 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">20 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:20</div>\n  </div>\n</div>\n<!-- 30 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">30 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:30</div>\n  </div>\n</div>\n<!-- 40 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">40 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:40</div>\n  </div>\n</div>\n<!-- 50 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">50 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:50</div>\n  </div>\n</div>\n<!-- 60 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">60 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:60</div>\n  </div>\n</div>\n<!-- 70 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">70 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:70</div>\n  </div>\n</div>\n<!-- 80 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">80 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:80</div>\n  </div>\n</div>\n<!-- 90 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">90 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:90</div>\n  </div>\n</div>\n<!-- 100 -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">100 width</h3>\n  <div class=\"s-bg:main s-radius:30\">\n     <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bg:accent s-p:30 s-radius:30\">s-width:100</div>\n  </div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -34268,10 +34121,7 @@
                 "name": "Icons",
                 "type": "Styleguide",
                 "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
+                    "tree": ["Styleguide", "UI"],
                     "slug": "/styleguide/ui/icons"
                 },
                 "platform": [
@@ -35172,10 +35022,7 @@
                 "name": "First project",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Get Started"
-                    ],
+                    "tree": ["Documentation", "Get Started"],
                     "slug": "/doc/get-started/first-project"
                 },
                 "platform": [
@@ -35201,10 +35048,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
+                    "tree": ["Documentation", "Configuration"],
                     "slug": "/doc/config/overview"
                 },
                 "platform": [
@@ -35230,10 +35074,7 @@
                 "name": "Built-in configs",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
+                    "tree": ["Documentation", "Configuration"],
                     "slug": "/doc/config/built-in"
                 },
                 "platform": [
@@ -35259,10 +35100,7 @@
                 "name": "Override configs",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
+                    "tree": ["Documentation", "Configuration"],
                     "slug": "/doc/config/override"
                 },
                 "platform": [
@@ -35288,10 +35126,7 @@
                 "name": "Register new config files",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
+                    "tree": ["Documentation", "Configuration"],
                     "slug": "/doc/config/register"
                 },
                 "platform": [
@@ -35317,10 +35152,7 @@
                 "name": "Configuration explorer",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
+                    "tree": ["Documentation", "Configuration"],
                     "slug": "/doc/config/explorer"
                 },
                 "platform": [
@@ -35346,10 +35178,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Configuration"
-                    ],
+                    "tree": ["Documentation", "Configuration"],
                     "slug": "/doc/config/more"
                 },
                 "platform": [
@@ -35375,10 +35204,7 @@
                 "name": "What are recipes?",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Recipes"
-                    ],
+                    "tree": ["Documentation", "Recipes"],
                     "slug": "/doc/recipes/what-are-recipes"
                 },
                 "platform": [
@@ -35404,10 +35230,7 @@
                 "name": "Create your recipe",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Recipes"
-                    ],
+                    "tree": ["Documentation", "Recipes"],
                     "slug": "/doc/recipes/create-your-recipe"
                 },
                 "platform": [
@@ -35433,10 +35256,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Recipes"
-                    ],
+                    "tree": ["Documentation", "Recipes"],
                     "slug": "/doc/recipes/more"
                 },
                 "platform": [
@@ -35462,11 +35282,7 @@
                 "name": "Default",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Recipes",
-                        "Built-in"
-                    ],
+                    "tree": ["Documentation", "Recipes", "Built-in"],
                     "slug": "/doc/recipes/built-in/default"
                 },
                 "platform": [
@@ -35492,11 +35308,7 @@
                 "name": "Lit Element",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Recipes",
-                        "Built-in"
-                    ],
+                    "tree": ["Documentation", "Recipes", "Built-in"],
                     "slug": "/doc/recipes/built-in/litElement"
                 },
                 "platform": [
@@ -35522,10 +35334,7 @@
                 "name": "Languages",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/languages"
                 },
                 "platform": [
@@ -35551,10 +35360,7 @@
                 "name": "Pleasant syntax",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/pleasant-syntax"
                 },
                 "platform": [
@@ -35580,10 +35386,7 @@
                 "name": "Classes",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/classes"
                 },
                 "platform": [
@@ -35609,10 +35412,7 @@
                 "name": "Mixins",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/mixins"
                 },
                 "platform": [
@@ -35638,10 +35438,7 @@
                 "name": "Theming",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/theming"
                 },
                 "platform": [
@@ -35667,10 +35464,7 @@
                 "name": "Colors",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/colors"
                 },
                 "platform": [
@@ -35696,10 +35490,7 @@
                 "name": "Typography",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/typography"
                 },
                 "platform": [
@@ -35725,10 +35516,7 @@
                 "name": "UI",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/ui"
                 },
                 "platform": [
@@ -35754,10 +35542,7 @@
                 "name": "Icons",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/icons"
                 },
                 "platform": [
@@ -35783,10 +35568,7 @@
                 "name": "Layout",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/layout"
                 },
                 "platform": [
@@ -35812,10 +35594,7 @@
                 "name": "Responsive",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/responsive"
                 },
                 "platform": [
@@ -35841,10 +35620,7 @@
                 "name": "Scopes",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/scopes"
                 },
                 "platform": [
@@ -35870,10 +35646,7 @@
                 "name": "Build",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/build"
                 },
                 "platform": [
@@ -35899,10 +35672,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CSS"
-                    ],
+                    "tree": ["Documentation", "CSS"],
                     "slug": "/doc/css/more"
                 },
                 "platform": [
@@ -35928,10 +35698,7 @@
                 "name": "Supported languages",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "JS - Node"
-                    ],
+                    "tree": ["Documentation", "JS - Node"],
                     "slug": "/doc/js/supported-languages"
                 },
                 "platform": [
@@ -35957,10 +35724,7 @@
                 "name": "Sugar toolkit",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "JS - Node"
-                    ],
+                    "tree": ["Documentation", "JS - Node"],
                     "slug": "/doc/js/sugar"
                 },
                 "platform": [
@@ -35986,10 +35750,7 @@
                 "name": "Packages",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "JS - Node"
-                    ],
+                    "tree": ["Documentation", "JS - Node"],
                     "slug": "/doc/js/packages"
                 },
                 "platform": [
@@ -36015,10 +35776,7 @@
                 "name": "Build",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "JS - Node"
-                    ],
+                    "tree": ["Documentation", "JS - Node"],
                     "slug": "/doc/js/build"
                 },
                 "platform": [
@@ -36044,10 +35802,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "JS - Node"
-                    ],
+                    "tree": ["Documentation", "JS - Node"],
                     "slug": "/doc/js/more"
                 },
                 "platform": [
@@ -36073,10 +35828,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Components"
-                    ],
+                    "tree": ["Documentation", "Components"],
                     "slug": "/doc/components/overview"
                 },
                 "platform": [
@@ -36102,10 +35854,7 @@
                 "name": "Fully customizable",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Components"
-                    ],
+                    "tree": ["Documentation", "Components"],
                     "slug": "/doc/components/customizable"
                 },
                 "platform": [
@@ -36131,10 +35880,7 @@
                 "name": "Official components",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Components"
-                    ],
+                    "tree": ["Documentation", "Components"],
                     "slug": "/doc/components/official"
                 },
                 "platform": [
@@ -36160,10 +35906,7 @@
                 "name": "Create your own",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Components"
-                    ],
+                    "tree": ["Documentation", "Components"],
                     "slug": "/doc/components/create-your-own"
                 },
                 "platform": [
@@ -36189,10 +35932,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Components"
-                    ],
+                    "tree": ["Documentation", "Components"],
                     "slug": "/doc/components/more"
                 },
                 "platform": [
@@ -36218,10 +35958,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Images"
-                    ],
+                    "tree": ["Documentation", "Images"],
                     "slug": "/doc/images/overview"
                 },
                 "platform": [
@@ -36247,10 +35984,7 @@
                 "name": "Supported formats",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Images"
-                    ],
+                    "tree": ["Documentation", "Images"],
                     "slug": "/doc/images/formats"
                 },
                 "platform": [
@@ -36276,10 +36010,7 @@
                 "name": "Build",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Images"
-                    ],
+                    "tree": ["Documentation", "Images"],
                     "slug": "/doc/images/build"
                 },
                 "platform": [
@@ -36305,10 +36036,7 @@
                 "name": "Configuration",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Views"
-                    ],
+                    "tree": ["Documentation", "Views"],
                     "slug": "/doc/views/configuration"
                 },
                 "platform": [
@@ -36334,10 +36062,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Images"
-                    ],
+                    "tree": ["Documentation", "Images"],
                     "slug": "/doc/images/more"
                 },
                 "platform": [
@@ -36363,10 +36088,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Views"
-                    ],
+                    "tree": ["Documentation", "Views"],
                     "slug": "/doc/views/overview"
                 },
                 "platform": [
@@ -36392,10 +36114,7 @@
                 "name": "Supported languages",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Views"
-                    ],
+                    "tree": ["Documentation", "Views"],
                     "slug": "/doc/views/languages"
                 },
                 "platform": [
@@ -36421,10 +36140,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Views"
-                    ],
+                    "tree": ["Documentation", "Views"],
                     "slug": "/doc/views/more"
                 },
                 "platform": [
@@ -36450,10 +36166,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Servers"
-                    ],
+                    "tree": ["Documentation", "Servers"],
                     "slug": "/doc/servers/overview"
                 },
                 "platform": [
@@ -36479,10 +36192,7 @@
                 "name": "Handlers",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Servers"
-                    ],
+                    "tree": ["Documentation", "Servers"],
                     "slug": "/doc/servers/handlers"
                 },
                 "platform": [
@@ -36508,10 +36218,7 @@
                 "name": "Middlewares",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Servers"
-                    ],
+                    "tree": ["Documentation", "Servers"],
                     "slug": "/doc/servers/middlewares"
                 },
                 "platform": [
@@ -36537,10 +36244,7 @@
                 "name": "Routes",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Servers"
-                    ],
+                    "tree": ["Documentation", "Servers"],
                     "slug": "/doc/servers/routes"
                 },
                 "platform": [
@@ -36566,10 +36270,7 @@
                 "name": "Modules",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Servers"
-                    ],
+                    "tree": ["Documentation", "Servers"],
                     "slug": "/doc/servers/modules"
                 },
                 "platform": [
@@ -36595,10 +36296,7 @@
                 "name": "Configuration",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Servers"
-                    ],
+                    "tree": ["Documentation", "Servers"],
                     "slug": "/doc/servers/configuration"
                 },
                 "platform": [
@@ -36624,10 +36322,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Servers"
-                    ],
+                    "tree": ["Documentation", "Servers"],
                     "slug": "/doc/servers/more"
                 },
                 "platform": [
@@ -36653,10 +36348,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Docmap"
-                    ],
+                    "tree": ["Documentation", "Docmap"],
                     "slug": "/doc/docmap/overview"
                 },
                 "platform": [
@@ -36682,10 +36374,7 @@
                 "name": "Writing documentation",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Docmap"
-                    ],
+                    "tree": ["Documentation", "Docmap"],
                     "slug": "/doc/docmap/writing-documentation"
                 },
                 "platform": [
@@ -36711,10 +36400,7 @@
                 "name": "Build",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Docmap"
-                    ],
+                    "tree": ["Documentation", "Docmap"],
                     "slug": "/doc/docmap/build"
                 },
                 "platform": [
@@ -36740,10 +36426,7 @@
                 "name": "Configuration",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Docmap"
-                    ],
+                    "tree": ["Documentation", "Docmap"],
                     "slug": "/doc/docmap/configuration"
                 },
                 "platform": [
@@ -36769,10 +36452,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Docmap"
-                    ],
+                    "tree": ["Documentation", "Docmap"],
                     "slug": "/doc/docmap/more"
                 },
                 "platform": [
@@ -36798,10 +36478,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/overview"
                 },
                 "platform": [
@@ -36827,10 +36504,7 @@
                 "name": "Layouts",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/layouts"
                 },
                 "platform": [
@@ -36856,10 +36530,7 @@
                 "name": "Sections",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/sections"
                 },
                 "platform": [
@@ -36885,10 +36556,7 @@
                 "name": "Partials",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/partials"
                 },
                 "platform": [
@@ -36914,10 +36582,7 @@
                 "name": "Extends views",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/extends"
                 },
                 "platform": [
@@ -36943,10 +36608,7 @@
                 "name": "Build",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/build"
                 },
                 "platform": [
@@ -36972,10 +36634,7 @@
                 "name": "Configuration",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/configuration"
                 },
                 "platform": [
@@ -37001,10 +36660,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "Markdown"
-                    ],
+                    "tree": ["Documentation", "Markdown"],
                     "slug": "/doc/markdown/more"
                 },
                 "platform": [
@@ -37030,10 +36686,7 @@
                 "name": "Overview",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CLI"
-                    ],
+                    "tree": ["Documentation", "CLI"],
                     "slug": "/doc/cli/overview"
                 },
                 "platform": [
@@ -37059,10 +36712,7 @@
                 "name": "Built-in commands",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CLI"
-                    ],
+                    "tree": ["Documentation", "CLI"],
                     "slug": "/doc/cli/built-in-commands"
                 },
                 "platform": [
@@ -37088,10 +36738,7 @@
                 "name": "Extend the CLI",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CLI"
-                    ],
+                    "tree": ["Documentation", "CLI"],
                     "slug": "/doc/cli/extends"
                 },
                 "platform": [
@@ -37117,10 +36764,7 @@
                 "name": "Configuration",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CLI"
-                    ],
+                    "tree": ["Documentation", "CLI"],
                     "slug": "/doc/cli/configuration"
                 },
                 "platform": [
@@ -37146,10 +36790,7 @@
                 "name": "More...",
                 "type": "Markdown",
                 "menu": {
-                    "tree": [
-                        "Documentation",
-                        "CLI"
-                    ],
+                    "tree": ["Documentation", "CLI"],
                     "slug": "/doc/cli/more"
                 },
                 "platform": [

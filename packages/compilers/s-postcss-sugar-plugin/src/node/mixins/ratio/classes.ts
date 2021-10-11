@@ -8,7 +8,7 @@ import __theme from '../../utils/theme';
  * @platform      css
  * @status        beta
  *
- * This mixin generate all the ratio helper classes like s-ratio:16-9, s-ratio:1-1, etc.
+ * This mixin generate all the ratio helper classes like s-ratio:16-9, s-ratio:1, etc.
  * The generated ratios are specified in the config.theme.ratio configuration stack
  *
  * @return        {Css}         The generated css

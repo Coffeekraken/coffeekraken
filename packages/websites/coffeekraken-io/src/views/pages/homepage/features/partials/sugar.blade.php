@@ -1,4 +1,7 @@
 <section id="features-sugar" class="s-container s-pb:100">
+
+    <div class="section-top-background"></div>
+
     <div class="s-layout:12:gutter-x:gutter-between">
         <div>
             <h3 class="s-typo:h3 s-mbe:30">
@@ -16,7 +19,7 @@
                 As all of our tools, Sugar is just a toolkit and you can use it if that suits your needs, or totally forget about
                 it and import your own tools.
             </p>
-            <a class="s-btn:accent" href="/#get-started" title="Get started!">
+            <a class="s-btn s-color:accent" href="/#get-started" title="Get started!">
                 Discover that Sugar has to offer
             </a>
         </div>
@@ -125,7 +128,7 @@ isColor(\'rgba(10,20,30,1)\'); // true'
             </div>
         </div>
 
-        {{-- <a class="s-btn:complementary" href="/#get-started" title="Get started!">
+        {{-- <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
             Check out more of our webcomponents
         </a> --}}
 
@@ -136,7 +139,7 @@ isColor(\'rgba(10,20,30,1)\'); // true'
             This is just a sneak peak of what you can leverage in the sugar toolkit.<br>
             Don't be afraid, as usual you can take from it only what you need and <span class="s-tc:accent">learn the rest step by step</span>.
         </p>
-        <a class="s-btn:complementary" href="/#get-started" title="Get started!">
+        <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
             Discover all of what sugar has to offer!
         </a>
     </div>

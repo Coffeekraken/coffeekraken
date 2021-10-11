@@ -104,10 +104,23 @@
         }
     }
 
+    .section-top-background {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100vw;
+        height: 100vh;
+        transform: translateX(-50%);
+        background: linear-gradient(
+            5deg,
+            sugar.color(main, --alpha 0),
+            sugar.color(main, --alpha 0.1)
+        );
+    }
+
     #features-frontend,
     #features-sugar {
         position: relative;
-
         img {
             max-width: 100%;
         }

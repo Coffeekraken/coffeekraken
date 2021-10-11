@@ -72,7 +72,7 @@ export default function ({
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text color</h3>
         ${Object.keys(depthsObj)
             .map((depthName) => {
-                return ` * <div class="s-depth:${depthName} s-bg:main s-mbe:50 s-text:center s-border:radius-30 s-p:30">s-depth:${depthName}</div>`;
+                return ` * <div class="s-depth:${depthName} s-bg:main s-mbe:50 s-text:center s-radius:30 s-p:30">s-depth:${depthName}</div>`;
             })
             .join('\n')}
         * </div>

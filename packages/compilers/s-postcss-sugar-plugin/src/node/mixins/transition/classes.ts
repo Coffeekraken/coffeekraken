@@ -78,10 +78,10 @@ export default function ({
                 * <!-- ${transition} -->
                 * <div class="s-mbe:50">
                 *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${transition}</h3>
-                *   <div class="s-bg:main s-border:radius-30" id="${id}">
+                *   <div class="s-bg:main s-radius:30" id="${id}">
                 *      <div class="s-transition${
                     transition === 'default' ? '' : `:${transition}`
-                } s-ratio:1 s-bg:accent s-border:radius-30"></div>
+                } s-ratio:1 s-bg:accent s-radius:30"></div>
                 *   <style>
                 *       #${id} > div { position: relative; left: 0; width: 100px; }
                 *       #${id}:hover > div { left: calc(100% - 100px); )  }

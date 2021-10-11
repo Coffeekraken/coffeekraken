@@ -21052,7 +21052,7 @@
 */
 /**
 *
-* @name          s-ratio:1-1
+* @name          s-ratio:1
 * @namespace          sugar.css.ratio
 * @type               CssClass
 * @platform             css
@@ -21061,7 +21061,7 @@
 * This class allows you to apply a "<yellow>1-1</yellow>" ratio style to any HTMLElement
 *
 * @example        html
-* <div class="s-ratio:1-1 s-bg:primary">
+* <div class="s-ratio:1 s-bg:primary">
 *     <div class="s-center-abs">I'm a cool ratio container</div>
 * </div>
 
@@ -21132,7 +21132,7 @@
 */
 /**
 *
-* @name               s-border:radius-0
+* @name               s-radius:0
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21141,14 +21141,14 @@
 * This class allows you to apply a "<yellow>0</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-0 s-color--complementary">
+* <div class="s-radius:0 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-10
+* @name               s-radius:10
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21157,14 +21157,14 @@
 * This class allows you to apply a "<yellow>10</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-10 s-color--complementary">
+* <div class="s-radius:10 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-20
+* @name               s-radius:20
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21173,14 +21173,14 @@
 * This class allows you to apply a "<yellow>20</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-20 s-color--complementary">
+* <div class="s-radius:20 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-30
+* @name               s-radius:30
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21189,14 +21189,14 @@
 * This class allows you to apply a "<yellow>30</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-30 s-color--complementary">
+* <div class="s-radius:30 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-40
+* @name               s-radius:40
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21205,14 +21205,14 @@
 * This class allows you to apply a "<yellow>40</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-40 s-color--complementary">
+* <div class="s-radius:40 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-50
+* @name               s-radius:50
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21221,14 +21221,14 @@
 * This class allows you to apply a "<yellow>50</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-50 s-color--complementary">
+* <div class="s-radius:50 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-60
+* @name               s-radius:60
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21237,14 +21237,14 @@
 * This class allows you to apply a "<yellow>60</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-60 s-color--complementary">
+* <div class="s-radius:60 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-70
+* @name               s-radius:70
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21253,14 +21253,14 @@
 * This class allows you to apply a "<yellow>70</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-70 s-color--complementary">
+* <div class="s-radius:70 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-80
+* @name               s-radius:80
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21269,14 +21269,14 @@
 * This class allows you to apply a "<yellow>80</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-80 s-color--complementary">
+* <div class="s-radius:80 s-color--complementary">
 *     Hello world
 * </div>
 
 */
 /**
 *
-* @name               s-border:radius-90
+* @name               s-radius:90
 * @namespace          sugar.css.border
 * @type               CssClass
 * @platform         css
@@ -21285,7 +21285,7 @@
 * This class allows you to apply a "<yellow>90</yellow>" border radius style to any HTMLElement
 *
 * @example        html
-* <div class="s-border:radius-90 s-color--complementary">
+* <div class="s-radius:90 s-color--complementary">
 *     Hello world
 * </div>
 

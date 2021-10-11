@@ -74,7 +74,7 @@ export default function (env, config) {
                     alpha: 0.4,
                 },
                 foreground: {
-                    darken: 45,
+                    lighten: 45,
                 },
                 background: {
                     darken: 40,

@@ -76,14 +76,14 @@ export default function (env, config) {
                 foreground: {
                     lighten: 45,
                 },
-                background: {
-                    darken: 40,
-                },
                 ui: {
                     lighten: 50,
                 },
                 uiForeground: {
                     darken: 25,
+                },
+                background: {
+                    lighten: 50,
                 },
                 backgroundForeground: {
                     darken: 45,

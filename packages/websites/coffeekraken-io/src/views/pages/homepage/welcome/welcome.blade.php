@@ -7,12 +7,12 @@
     </div>
     <div class="__gooey">
         <div class="__bg-01">
-            <div class="__content s-theme--coffeekraken-dark">
+            <div class="__content s-theme--default-dark s-remap-complementary-accent">
                 @include('pages.homepage.welcome.partials.content')
             </div>
         </div>
         <div class="__bg-02">
-            <div class="__content s-theme--coffeekraken-dark">
+            <div class="__content s-theme--default-dark s-remap-accent-complementary">
                 @include('pages.homepage.welcome.partials.content')
             </div>
         </div>

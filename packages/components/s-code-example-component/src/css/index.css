@@ -1,2 +1,2 @@
-@sugar.init($theme: dark);
+@sugar.init;
 @sugar.classes;

@@ -20,6 +20,13 @@
         /* background: sugar.color(main, surface) !important; */
     }
 
+    .s-remap-complementary-accent {
+        @sugar.color.remap (complementary, accent);
+    }
+    .s-remap-accent-complementary {
+        @sugar.color.remap (accent, complementary);
+    }
+
     .__background {
         position: absolute;
         top: 0;
@@ -59,6 +66,7 @@
     }
     .__bg-01 {
         background: url('/src/img/bg-coffee-01.jpg');
+        background: sugar.color(complementary);
         clip-path: url(#welcome-clip-path-01);
         opacity: 0;
         animation: bg-appear 0.5s ease-out 1s forwards;
@@ -66,7 +74,8 @@
         /* mix-blend-mode: overlay; */
     }
     .__bg-02 {
-        background: url('/src/img/landscape-03.jpg');
+        /* background: url('/src/img/landscape-03.jpg'); */
+        background: sugar.color(accent);
         clip-path: url(#welcome-clip-path-02);
         opacity: 0;
         animation: bg-appear 0.5s ease-out 1s forwards;

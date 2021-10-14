@@ -3,7 +3,7 @@
 namespace Sugar\is;
 
 /**
- * @name            Sugar\is\url
+ * @name            url
  * @namespace            php.is
  * @type            Function
  * @platform         php

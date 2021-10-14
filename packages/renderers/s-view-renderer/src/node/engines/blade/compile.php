@@ -28,4 +28,4 @@ $viewName = str_replace('.blade.php', '', $params->viewDotPath);
 $blade = new BladeOne($params->rootDirs, $params->cacheDir, BladeOne::MODE_DEBUG);
 $res = $blade->run($viewName, (array) $data);
 
-print \Sugar\html\expandColonClasses($res);
+print \Sugar\html\expandPleasantCssClassnames($res);

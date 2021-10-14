@@ -28,7 +28,7 @@ export { postcssSugarPluginColorMixinInterface as interface };
  *
  * @example         postcss
  * .my-section {
- *      @sugar.color.remap(warning, primary);
+ *      @sugar.color(primary);
  * }
  *
  * @since       2.0.0

@@ -11,16 +11,18 @@
     <body>
         <script type="module">
             import __css from './src/css/index.css';
-            import SCodeExample, { webcomponent } from './src/js/index.ts';
-            webcomponent();
+            import SCodeExample, { define } from './src/js/index.ts';
+            define();
         </script>
 
         <s-code-example toolbar-position="nav" default-style>
             <template lang="js">
-                import __SClass from '@coffeekraken/s-class'; import __deepMerge from
-                '@coffeekraken/sugar/shared/object/deepMerge'; import __SInterface from '@coffeekraken/s-interface';
-                import __mustache from 'mustache'; import __stylesheetToString from
-                '@coffeekraken/sugar/js/css/stylesheetToString'; export default SSVelteComponent;
+                import __SClass from '@coffeekraken/s-class'; import __deepMerge
+                from '@coffeekraken/sugar/shared/object/deepMerge'; import
+                __SInterface from '@coffeekraken/s-interface'; import __mustache
+                from 'mustache'; import __stylesheetToString from
+                '@coffeekraken/sugar/js/css/stylesheetToString'; export default
+                SSVelteComponent;
             </template>
             <template lang="html">
                 <h1>Something cool</h1>

@@ -13,31 +13,29 @@ import __postcss from 'postcss';
  * This mixin allows you to automatically generate the requested media query as well
  * as updating all the direct child classnames so you will have classes that applies
  * only for these media queries.
- * 
+ *
  * Take this as an example:
- * 
+ *
  * ```css
- * .my-cool-element {
- *    color: red;
- * }
- * \@sugar.media.classes(max-width: 1200px, myQuery) {
+ * \@sugar.media.classes {
  *    .my-cool-element {
  *      color: green;
  *    }
  * }
  * ```
- * 
+ *
  * This wil generate these two classes:
  * - .my-cool-element: Always available
- * - .my-cool-element___myQuery: Available only in the myQuery media query context
+ * - .my-cool-element___mobile: Available only in the mobile media query context
+ * - etc...
  *
  * Note that you can use the @sugar.media mixin parameters syntax here in the first argument.
- * 
+ *
  * @param         {String}      query
  * @return        {Css}         The generated css
  *
- * @example         postcss
- * \@sugar.media.classes(tablet, myQuery) {
+ * @example         css
+ * \@sugar.media.classes {
  *    // any classes you want to "duplicate" and generate
  *    // only for this media context...
  * }
@@ -47,80 +45,77 @@ import __postcss from 'postcss';
  */
 
 class postcssSugarPluginMediaClassesMixinInterface extends __SInterface {
-  static definition = {
-      query: {
-          type: 'String',
-          required: true
-      },
-      name: {
-          type: 'String',
-          required: true
-      }
-  };
+    static definition = {
+        query: {
+            type: 'String',
+        },
+        mediasOnly: {
+            type: 'Boolean',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginMediaMixinClassesParams {
     query: string;
-    name: string;
+    mediasOnly: boolean;
 }
 
 export { postcssSugarPluginMediaClassesMixinInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  postcssApi,
-  replaceWith
+    params,
+    atRule,
+    postcssApi,
+    registerPostProcessor,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginMediaMixinClassesParams>;
-  atRule: any;
-  postcssApi: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginMediaMixinClassesParams>;
+    atRule: any;
+    postcssApi: any;
+    registerPostProcessor: Function;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginMediaMixinClassesParams = {
-    query: '',
-    name: '',
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginMediaMixinClassesParams = {
+        query: '',
+        mediasOnly: false,
+        ...params,
+    };
 
-  atRule.nodes.forEach(node => {
-    if (!node.selector) return;
-    const selectorParts = node.selector.split(' ');
-    selectorParts[0] = `${selectorParts[0]}@${finalParams.name}`;
-    node.selectors[0] = selectorParts[0];
-    node.selector = selectorParts.join(' ');
-  });
+    const mediaConfig = __theme().config('media');
 
-  const mediaRule = new postcssApi.AtRule({
-      name: 'sugar.media',
-      params: `(${finalParams.query})`
-  });
+    const medias = finalParams.query
+        ? finalParams.query.split(' ').map((l) => l.trim())
+        : Object.keys(mediaConfig.queries);
 
-//   console.log('NO', atRule);
+    const mediasRules = {};
+    medias.forEach((media) => {
+        mediasRules[media] = new postcssApi.AtRule({
+            name: 'sugar.media',
+            params: `(${media})`,
+        });
+    });
 
-  // @ts-ignore
-  atRule.nodes.forEach(node => {
-    //   node.parent = AST.nodes[0];
-    mediaRule.append(node);
-  });
+    atRule.nodes?.forEach((node) => {
+        if (!node.selector) return;
 
-//   console.log(AST.nodes);
+        medias.forEach((media) => {
+            const mediaNode = node.clone();
+            const selectorParts = mediaNode.selector.split(' ');
+            selectorParts[0] = `${selectorParts[0]}___${media}`;
+            mediaNode.selectors[0] = selectorParts[0];
+            mediaNode.selector = selectorParts.join(' ');
+            mediasRules[media].append(mediaNode);
+        });
+    });
+    for (let i = Object.keys(mediasRules).length - 1; i >= 0; i--) {
+        atRule.after(mediasRules[Object.keys(mediasRules)[i]]);
+    }
 
-//   console.log(mediaRule.nodes);
-
-    atRule.replaceWith(mediaRule);
-
-    mediaRule.before(new postcssApi.Comment({
-        text: `@sugar-media-classes-${finalParams.name}`
-    }));
-
-//   console.log(atRule.nodes);
-
-//   const vars: string[] = [`
-//     @sugar.media(${finalParams.query}) {
-
-//     }
-//   `];
-
-//   replaceWith(vars);
+    registerPostProcessor(() => {
+        if (finalParams.mediasOnly) {
+            atRule.remove();
+        } else {
+            atRule.replaceWith(atRule.nodes);
+        }
+    });
 }

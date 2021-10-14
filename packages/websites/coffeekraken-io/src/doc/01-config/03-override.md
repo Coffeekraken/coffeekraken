@@ -16,7 +16,7 @@
 
 # Overriding existing configuration
 
-To override some configs in your project, the process is simple and straight forward.
+**To override some configs in your project, the process is simple and straight forward.**
 
 To illustrate this, we will take as example of overriding the javascript sources path directory. Note that the same process applies for any other configs as well...
 
@@ -26,9 +26,11 @@ To illustrate this, we will take as example of overriding the javascript sources
 -   Fill it like so
 
 {{#> s-code-example lang='js'}}
-export default {
+export default (env, config) => {
+return {
 src: {
 jsDir: "your new absolute directory path"
+}
 }
 }
 {{/s-code-example}}
@@ -39,9 +41,11 @@ jsDir: "your new absolute directory path"
 -   Fill it like so
 
 {{#> s-code-example lang='js'}}
-export default {
+export default (env, config) => {
+return {
 src: {
 jsDir: "your new absolute directory path"
+}
 }
 }
 {{/s-code-example}}

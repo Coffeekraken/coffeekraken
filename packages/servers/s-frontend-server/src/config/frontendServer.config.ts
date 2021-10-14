@@ -135,6 +135,7 @@ export default function (env, config) {
         modules: {
             docmapRoutes: `${__dirname()}/../node/modules/docmap/docmap`,
             styleguideRoutes: `${__dirname()}/../node/modules/styleguide/styleguide`,
+            apiRoutes: `${__dirname()}/../node/modules/api/api`,
         },
 
         routes: {

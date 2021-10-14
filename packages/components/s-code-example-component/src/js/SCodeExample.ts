@@ -10,9 +10,15 @@ import __langPhp from 'highlight.js/lib/languages/php';
 import __langHtml from 'highlight.js/lib/languages/xml';
 import { css, html, unsafeCSS } from 'lit';
 import { property, query, queryAssignedNodes } from 'lit/decorators.js';
+import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities';
 // @ts-ignore
 import __css from '../css/s-code-example.css';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
+
+import __prettier from 'prettier/esm/standalone.mjs';
+import __prettierJs from 'prettier/esm/parser-babel.mjs';
+import __prettierHtml from 'prettier/esm/parser-html.mjs';
+import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 
 __SClipboardCopy();
 
@@ -96,6 +102,28 @@ export default class SCodeExample extends __SLitComponent {
     async firstUpdated() {
         this.$templates.forEach(($template: HTMLElement) => {
             if (!$template.getAttribute) return;
+
+            let parser = 'babel';
+            switch (
+                $template.getAttribute('id') ??
+                $template.getAttribute('language') ??
+                $template.getAttribute('lang')
+            ) {
+                case 'html':
+                case 'xml':
+                    parser = 'html';
+                    break;
+                case 'css':
+                case 'postcss':
+                    parser = 'postcss';
+                    break;
+            }
+
+            let rawCode = __decodeHtmlEntities($template.innerHTML);
+            const formatedCode = __prettier.format(rawCode, {
+                parser,
+                plugins: [__prettierCss, __prettierHtml, __prettierJs],
+            });
             this._items = [
                 ...this._items,
                 {
@@ -104,9 +132,12 @@ export default class SCodeExample extends __SLitComponent {
                         $template.getAttribute('language') ??
                         $template.getAttribute('lang') ??
                         'html',
-                    lang: $template.getAttribute('language') ?? $template.getAttribute('lang') ?? 'html',
+                    lang:
+                        $template.getAttribute('language') ??
+                        $template.getAttribute('lang') ??
+                        'html',
                     // @ts-ignore
-                    code: $template.innerHTML,
+                    code: formatedCode,
                 },
             ];
             $template.remove();
@@ -123,7 +154,9 @@ export default class SCodeExample extends __SLitComponent {
 
         await __wait(500);
 
-        this._$content = this.shadowRoot?.querySelector('.s-code-example__content');
+        this._$content = this.shadowRoot?.querySelector(
+            '.s-code-example__content',
+        );
         this._$pre = this.shadowRoot?.querySelector('.s-code-example__code');
         this._$root = this.shadowRoot?.querySelector('.s-code-example');
 
@@ -150,7 +183,9 @@ export default class SCodeExample extends __SLitComponent {
         this.setMoreClass();
     }
     initPrismOnTab(id) {
-        const $content = <HTMLElement>this.shadowRoot?.querySelector(`pre#${id} code`);
+        const $content = <HTMLElement>(
+            this.shadowRoot?.querySelector(`pre#${id} code`)
+        );
         if ($content.hasAttribute('inited')) {
             this.setMoreClass();
             return;
@@ -193,11 +228,16 @@ export default class SCodeExample extends __SLitComponent {
                 </div>
 
                 <header class="${this.componentUtils.className('__nav')}">
-                    <ol class="${this.componentUtils.className('__tabs', 's-tabs')}">
+                    <ol class="${this.componentUtils.className(
+                        '__tabs',
+                        's-tabs',
+                    )}">
                         ${(this._items ?? []).map(
                             (item) => html`
                                 <li
-                                    class="${this.componentUtils.className('__tab')}"
+                                    class="${this.componentUtils.className(
+                                        '__tab',
+                                    )}"
                                     id="${item.id}"
                                     ?active="${this._activeTabId === item.id}"
                                     @click="${this.setActiveTabByTab}"
@@ -211,8 +251,14 @@ export default class SCodeExample extends __SLitComponent {
                         // @ts-ignore
                         this.toolbarPosition === 'nav'
                             ? html`
-                                  <div class="${this.componentUtils.className('__toolbar')}">
-                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  <div
+                                      class="${this.componentUtils.className(
+                                          '__toolbar',
+                                      )}"
+                                  >
+                                      <s-clipboard-copy
+                                          @click="${this.copy}"
+                                      ></s-clipboard-copy>
                                   </div>
                               `
                             : ''
@@ -226,8 +272,14 @@ export default class SCodeExample extends __SLitComponent {
                         // @ts-ignore
                         this.toolbarPosition !== 'nav'
                             ? html`
-                                  <div class="${this.componentUtils.className('__toolbar')}">
-                                      <s-clipboard-copy @click="${this.copy}"></s-clipboard-copy>
+                                  <div
+                                      class="${this.componentUtils.className(
+                                          '__toolbar',
+                                      )}"
+                                  >
+                                      <s-clipboard-copy
+                                          @click="${this.copy}"
+                                      ></s-clipboard-copy>
                                   </div>
                               `
                             : ''
@@ -235,13 +287,17 @@ export default class SCodeExample extends __SLitComponent {
                     ${(this._items ?? []).map(
                         (item) => html`
                             <pre
-                                class="${this.componentUtils.className('__code')}"
+                                class="${this.componentUtils.className(
+                                    '__code',
+                                )}"
                                 style="line-height:0;"
                                 id="${item.id ?? item.lang}"
-                                ?active="${this._activeTabId === (item.id ?? item.lang)}"
+                                ?active="${this._activeTabId ===
+                                (item.id ?? item.lang)}"
                             >
-                            <code lang="${item.lang ?? item.id}" class="language-${item.lang} ${item.lang} ${this.props
-                                .defaultStyle
+                            <code lang="${item.lang ??
+                            item.id}" class="language-${item.lang} ${item.lang} ${this
+                                .props.defaultStyle
                                 ? 'hljs'
                                 : ''}">${
                                 // @ts-ignore
@@ -256,14 +312,25 @@ export default class SCodeExample extends __SLitComponent {
                             this._moreAction === 'toggle'
                                 ? html`
                                       <a
-                                          class="${this.componentUtils.className('__more-button', 's-btn')}"
+                                          class="${this.componentUtils.className(
+                                              '__more-button',
+                                              's-btn',
+                                          )}"
                                           @click="${this.toggleMore}"
                                       >
                                           ${
                                               // @ts-ignore
                                               this._more
-                                                  ? html` ${this.props.lessLabel ?? 'Show less'} `
-                                                  : html` ${this.props.moreLabel ?? 'Show more'} `
+                                                  ? html`
+                                                        ${this.props
+                                                            .lessLabel ??
+                                                        'Show less'}
+                                                    `
+                                                  : html`
+                                                        ${this.props
+                                                            .moreLabel ??
+                                                        'Show more'}
+                                                    `
                                           }
                                       </a>
                                   `
@@ -281,8 +348,16 @@ export default class SCodeExample extends __SLitComponent {
                                           ${
                                               // @ts-ignore
                                               this._more
-                                                  ? html` ${this.props.lessLabel ?? 'Show less'} `
-                                                  : html` ${this.props.moreLabel ?? 'Show more'} `
+                                                  ? html`
+                                                        ${this.props
+                                                            .lessLabel ??
+                                                        'Show less'}
+                                                    `
+                                                  : html`
+                                                        ${this.props
+                                                            .moreLabel ??
+                                                        'Show more'}
+                                                    `
                                           }
                                       </a>
                                   `
@@ -295,7 +370,10 @@ export default class SCodeExample extends __SLitComponent {
     }
 }
 
-export function define(props: Partial<ISCodeExampleComponentProps> = {}, tagName = 's-code-example') {
+export function define(
+    props: Partial<ISCodeExampleComponentProps> = {},
+    tagName = 's-code-example',
+) {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SCodeExample);
 }

@@ -2,7 +2,16 @@ import __SInterface from '@coffeekraken/s-interface';
 import __theme from '../../utils/theme';
 
 class postcssSugarPluginComponentsClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {
+        scope: {
+            type: {
+                type: 'Array<String>',
+                splitChars: [',', ' '],
+            },
+            values: ['bare', 'lnf', 'vr', 'tf'],
+            default: ['bare', 'lnf', 'vr', 'tf'],
+        },
+    };
 }
 export { postcssSugarPluginComponentsClassesInterface as interface };
 
@@ -21,25 +30,48 @@ export { postcssSugarPluginComponentsClassesInterface as interface };
  * @author         Olivier Bospsel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    jsObjectToCssProperties,
+    replaceWith,
 }: {
-  params: any;
-  atRule: any;
-  replaceWith: Function;
+    params: any;
+    atRule: any;
+    jsObjectToCssProperties: Function;
+    replaceWith: Function;
 }) {
-  const cssArray: string[] = [];
+    const finalParams: any = {
+        scope: ['bare', 'lnf', 'vr', 'tf'],
+        ...params,
+    };
 
-  const componentsObj = __theme().config('components');
+    const cssArray: string[] = [];
 
-    Object.keys(componentsObj).forEach(selector => {
-        cssArray.push(`
-            ${selector} {
-                @sugar.utils.configToCss(components.${selector});
-            }
+    const componentsObj = __theme().config('components');
+
+    Object.keys(componentsObj).forEach((selector) => {
+        if (finalParams.scope.indexOf('bare') !== -1) {
+            cssArray.push(`
+          ${selector} {
+            ${jsObjectToCssProperties(componentsObj[selector], {
+                exclude: ['rhythmVertical'],
+            })}
+          }
         `);
+        }
+
+        if (finalParams.scope.indexOf('vr') !== -1) {
+            cssArray.push(`
+          @sugar.rhythm.vertical {
+            ${selector} {
+              ${jsObjectToCssProperties(
+                  componentsObj[selector].rhythmVertical ?? {},
+              )}
+            }
+          }
+        `);
+        }
     });
 
-  replaceWith(cssArray);
+    replaceWith(cssArray);
 }

@@ -3,7 +3,7 @@
 namespace Sugar\html;
 
 /**
- * @name        Sugar\html\expandColonClasses
+ * @name        expandPleasantCssClassnames
  * @namespace            php.html
  * @type        Function
  * @platform        php
@@ -16,7 +16,7 @@ namespace Sugar\html;
  * @return      {String}                       The processed html
  * 
  * @example      php
- * Sugar\html\expandColonClasses('...html');
+ * Sugar\html\expandPleasantCssClassnames('...html');
  * 
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -31,7 +31,7 @@ function get_tag( $tag, $xml ) {
   return $matches;
 }
 
-function expandColonClasses($html) {
+function expandPleasantCssClassnames($html) {
 
     // grab do not touch tags
     preg_match_all('/<code[^>]*>(.*?)<\/code>/s', $html, $doNotTouchTagCode);

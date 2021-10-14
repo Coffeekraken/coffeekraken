@@ -3,7 +3,7 @@ import __expandPleasantCssClassname from '../../shared/html/expandPleasantCssCla
 
 /**
  * @name            expandPleasantCssClassnamesLive
- * @namespace       ks.html
+ * @namespace       js.html
  * @type            Function
  * @platform        js
  * @platform        ts
@@ -26,7 +26,9 @@ export interface IExpandPleasantCssClassnamesLiveSettings {
     rootNode: any;
 }
 
-export default function expandPleasantCssClassnamesLive(settings?: Partial<IExpandPleasantCssClassnamesLiveSettings>) {
+export default function expandPleasantCssClassnamesLive(
+    settings?: Partial<IExpandPleasantCssClassnamesLiveSettings>,
+) {
     settings = {
         rootNode: document,
         ...settings,

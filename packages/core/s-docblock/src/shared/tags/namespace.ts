@@ -1,4 +1,5 @@
 // @ts-nocheck
+import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 
 /**
  * @name              namespace
@@ -19,21 +20,24 @@
  * @namespace 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function namespace(data, blockSettings) {
- 
-  if (
-    data &&
-    data.value &&
-    typeof data.value === 'string' &&
-    data.value.trim() === ''
-  ) {
-    return true;
-  }
+    if (
+        data &&
+        data.value &&
+        typeof data.value === 'string' &&
+        data.value.trim() === ''
+    ) {
+        return true;
+    }
 
-  let namespace = data.value;
-  if (blockSettings.packageJson) {
-    namespace = `${blockSettings.packageJson.name.replace('/','.')}.${namespace.replace(/\s{1,9999999}/gm,'-')}`;
-  }
-  return namespace.replace(/\s{1,999999}/gm, '-');
-  
+    let namespace = data.value;
+    if (blockSettings.packageJson) {
+        namespace = __namespaceCompliant(
+            `${blockSettings.packageJson.name.replace(
+                '/',
+                '.',
+            )}.${namespace.replace(/\s{1,9999999}/gm, '-')}`,
+        );
+    }
+    return __namespaceCompliant(namespace.replace(/\s{1,999999}/gm, '-'));
 }
 export default namespace;

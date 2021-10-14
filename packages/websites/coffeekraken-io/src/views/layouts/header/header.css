@@ -49,21 +49,26 @@ body {
         & > *:first-child:before {
             content: '';
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + 5px);
             left: 50%;
             width: 20px;
             height: 20px;
-            transform: translate(-50%, 0);
+            transform: translate(-50%, 0) scale(0);
             background: sugar.color(accent);
             border-radius: 9999px;
             @sugar.depth (50);
             z-index: 100;
+            transition: sugar.transition(fast);
         }
 
         &:hover,
         &:focus-within {
             & > *:first-child {
                 color: sugar.color(accent);
+
+                &:before {
+                    transform: translate(-50%, 0) scale(1);
+                }
             }
         }
     }
@@ -101,12 +106,12 @@ body {
         animation-iteration-count: infinite; */
         overflow: hidden;
         border-radius: sugar.border.radius(30);
-
+        /* 
         background: url('/src/img/landscape-01.jpg');
         background-size: cover;
-        background-position: 50% 50%;
+        background-position: 50% 50%; */
 
-        @sugar.depth (50);
+        @sugar.depth (10);
 
         @sugar.theme.when (dark) {
             /* background-color: sugar.color(main, 85); */
@@ -133,8 +138,12 @@ body {
     }
 
     .__subnav-footer {
-        background: sugar.color(main, --darken 33);
+        background: sugar.color(main, --lighten 43);
         padding: sugar.padding(30);
+
+        @sugar.theme.when (dark) {
+            background: sugar.color(main, --darken 33);
+        }
     }
 
     .__subnav-chapters {
@@ -145,8 +154,8 @@ body {
         position: relative;
 
         background: linear-gradient(
-            90deg,
-            sugar.color(main, --alpha 0.1),
+            -90deg,
+            sugar.color(main, --alpha 0.03),
             sugar.color(main, --alpha 0)
         );
 
@@ -160,13 +169,13 @@ body {
             z-index: 10;
         }
 
+        li:hover {
+            background-color: sugar.color(accent, --alpha 0.5);
+        }
         li:hover,
         li[active] {
             background-color: sugar.color(accent);
             color: sugar.color(accent, foreground);
-        }
-        li:hover {
-            background-color: sugar.color(accent, --alpha 0.5);
         }
 
         li {
@@ -230,6 +239,10 @@ body {
             }
         }
     }
+    .__subnav-doc .__subnav-story li {
+        width: 50%;
+    }
+
     .__subnav-story {
         display: none;
         position: relative;
@@ -247,7 +260,7 @@ body {
     max-width: 500px;
     overflow-y: scroll;
     @sugar.scrollbar();
-    @sugar.depth (100);
+    @sugar.depth (10);
 
     .s-label > *:last-child {
         max-width: 50%;

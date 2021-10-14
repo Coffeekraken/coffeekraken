@@ -1,7 +1,7 @@
 <span s-activate class="__main-link s-display:inline-block" href="body" trigger="mouseover,mouseout" active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150">
     <span>{{ $menuItem->name }}</span>
 
-    <div class="__subnav">
+    <div class="__subnav {{ $class }}">
 
         <div class="s-container s-layout:1222">
             <ul class="__subnav-chapters">

@@ -19,8 +19,8 @@
                 <a class="s-typo:bold __main-link" href="/#features" title="Features">
                     <span>Features</span>
                 </a>
-                @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->tree->documentation])
-                @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->custom->styleguide->tree->styleguide])
+                @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->tree->documentation, 'class' => '__subnav-doc'])
+                @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
                 <a class="__main-link s-pr:50 s-typo:bold" href="/doc/api" title="API">
                     <span>API</span>
                 </a>

@@ -7,11 +7,11 @@ strong {
     color: sugar.color(accent);
 }
 
-code {
+/* code {
     background: sugar.color(accent, --alpha 0.3);
     padding-inline: sugar.padding(10);
 
     @sugar.theme.when (dark) {
         color: white;
     }
-}
+} */

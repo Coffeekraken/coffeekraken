@@ -1,4 +1,4 @@
-<ul class="s-list:ul" id="{{ $id }}">
+<ul class="s-list:ul folder-nav" id="{{ $id }}">
 
     {{-- <pre>@php var_dump($id) @endphp</pre> --}}
 

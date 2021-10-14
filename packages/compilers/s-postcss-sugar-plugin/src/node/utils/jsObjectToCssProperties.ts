@@ -9,7 +9,20 @@ import __knownCssProperties from 'known-css-properties';
  * @status              beta
  *
  * This function allows you to pass a javascript object that contain css properties
- * and it will returns the processed css string
+ * and it will returns the processed css string. Some properties can accept internal theme configuration
+ * settings like `font-size`, `color`, etc...:
+ *
+ * - `font-family`
+ * - `font-size`
+ * - `color`
+ * - `background-color`
+ * - `border-radius`: And all border-radius properties like `border-top-left-radius`, etc...
+ * - `border-width`
+ * - `transition`
+ * - `margin`: And all the margins properties like `margin-inline`, etc...
+ * - `padding`: And all the paddings properties like `padding-block`, etc...
+ * - `depth`: Special property that will apply nice shadows depending on your theme configuration
+ * - `default-color`: Apply the default color using `@sugar.color` mixin
  *
  * @param           {Object}        jsObject        An object to convert to css string
  * @return          {String}                            The processed css string

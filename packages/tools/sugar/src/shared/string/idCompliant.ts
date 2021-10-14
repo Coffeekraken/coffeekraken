@@ -28,7 +28,10 @@ export interface IIdCompliantSettings {
     exclude: string[];
 }
 
-export default function idCompliant(str: string, settings?: IIdCompliantSettings): string {
+export default function idCompliant(
+    str: string,
+    settings?: IIdCompliantSettings,
+): string {
     settings = {
         exclude: [],
         ...(settings ?? {}),
@@ -41,16 +44,30 @@ export default function idCompliant(str: string, settings?: IIdCompliantSettings
     // replace characters like /, etc...
     const dict = {
         '/': '-',
-        '\\': '-',
         '@': '',
-        '(': '-',
-        ')': '-',
         '.': '-',
         ',': '-',
+        '\\': '-',
+        '(': '-',
+        ')': '-',
+        '{': '-',
+        '}': '-',
+        '=': '-',
+        '?': '-',
+        '!': '-',
+        '&': '-',
+        '%': '-',
+        '*': '-',
+        '"': '-',
+        "'": '-',
+        '`': '-',
+        '+': '-',
+        '°': '-',
+        $: '-',
+        '<': '-',
+        '>': '-',
         ':': '-',
         '#': '-',
-        '!': '-',
-        '?': '-',
     };
 
     settings.exclude.forEach((char) => {
@@ -58,12 +75,15 @@ export default function idCompliant(str: string, settings?: IIdCompliantSettings
     });
 
     Object.keys(dict).forEach((char) => {
-        str = str.replace(char, dict[char]);
+        str = str.split(char).join(dict[char]);
     });
     // first and last characters + multiple ---
+    str = str.replace(/\.{2,999}/gm, '.');
     str = str.replace(/^-{1,999}/gm, '');
     str = str.replace(/-{1,999}$/gm, '');
     str = str.replace(/-{2,999}/gm, '-');
+    str = str.replace(/[^a-zA-Z0-9]{1,999}$/, '');
+    str = str.replace(/^[^a-zA-Z0-9]{1,999}/, '');
     // lowercase
     str = str.toLowerCase();
 

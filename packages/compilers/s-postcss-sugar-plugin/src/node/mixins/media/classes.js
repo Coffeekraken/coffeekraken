@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __theme from '../../utils/theme';
 /**
  * @name           classes
  * @namespace      node.mixins.media
@@ -13,10 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * Take this as an example:
  *
  * ```css
- * .my-cool-element {
- *    color: red;
- * }
- * \@sugar.media.classes(max-width: 1200px, myQuery) {
+ * \@sugar.media.classes {
  *    .my-cool-element {
  *      color: green;
  *    }
@@ -25,15 +23,16 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This wil generate these two classes:
  * - .my-cool-element: Always available
- * - .my-cool-element___myQuery: Available only in the myQuery media query context
+ * - .my-cool-element___mobile: Available only in the mobile media query context
+ * - etc...
  *
  * Note that you can use the @sugar.media mixin parameters syntax here in the first argument.
  *
  * @param         {String}      query
  * @return        {Css}         The generated css
  *
- * @example         postcss
- * \@sugar.media.classes(tablet, myQuery) {
+ * @example         css
+ * \@sugar.media.classes {
  *    // any classes you want to "duplicate" and generate
  *    // only for this media context...
  * }
@@ -46,45 +45,48 @@ class postcssSugarPluginMediaClassesMixinInterface extends __SInterface {
 postcssSugarPluginMediaClassesMixinInterface.definition = {
     query: {
         type: 'String',
-        required: true
     },
-    name: {
-        type: 'String',
-        required: true
-    }
+    mediasOnly: {
+        type: 'Boolean',
+    },
 };
 export { postcssSugarPluginMediaClassesMixinInterface as interface };
-export default function ({ params, atRule, postcssApi, replaceWith }) {
-    const finalParams = Object.assign({ query: '', name: '' }, params);
-    atRule.nodes.forEach(node => {
+export default function ({ params, atRule, postcssApi, registerPostProcessor, replaceWith, }) {
+    var _a;
+    const finalParams = Object.assign({ query: '', mediasOnly: false }, params);
+    const mediaConfig = __theme().config('media');
+    const medias = finalParams.query
+        ? finalParams.query.split(' ').map((l) => l.trim())
+        : Object.keys(mediaConfig.queries);
+    const mediasRules = {};
+    medias.forEach((media) => {
+        mediasRules[media] = new postcssApi.AtRule({
+            name: 'sugar.media',
+            params: `(${media})`,
+        });
+    });
+    (_a = atRule.nodes) === null || _a === void 0 ? void 0 : _a.forEach((node) => {
         if (!node.selector)
             return;
-        const selectorParts = node.selector.split(' ');
-        selectorParts[0] = `${selectorParts[0]}@${finalParams.name}`;
-        node.selectors[0] = selectorParts[0];
-        node.selector = selectorParts.join(' ');
+        medias.forEach((media) => {
+            const mediaNode = node.clone();
+            const selectorParts = mediaNode.selector.split(' ');
+            selectorParts[0] = `${selectorParts[0]}___${media}`;
+            mediaNode.selectors[0] = selectorParts[0];
+            mediaNode.selector = selectorParts.join(' ');
+            mediasRules[media].append(mediaNode);
+        });
     });
-    const mediaRule = new postcssApi.AtRule({
-        name: 'sugar.media',
-        params: `(${finalParams.query})`
+    for (let i = Object.keys(mediasRules).length - 1; i >= 0; i--) {
+        atRule.after(mediasRules[Object.keys(mediasRules)[i]]);
+    }
+    registerPostProcessor(() => {
+        if (finalParams.mediasOnly) {
+            atRule.remove();
+        }
+        else {
+            atRule.replaceWith(atRule.nodes);
+        }
     });
-    //   console.log('NO', atRule);
-    // @ts-ignore
-    atRule.nodes.forEach(node => {
-        //   node.parent = AST.nodes[0];
-        mediaRule.append(node);
-    });
-    //   console.log(AST.nodes);
-    //   console.log(mediaRule.nodes);
-    atRule.replaceWith(mediaRule);
-    mediaRule.before(new postcssApi.Comment({
-        text: `@sugar-media-classes-${finalParams.name}`
-    }));
-    //   console.log(atRule.nodes);
-    //   const vars: string[] = [`
-    //     @sugar.media(${finalParams.query}) {
-    //     }
-    //   `];
-    //   replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFLckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUNHO0FBRUgsTUFBTSw0Q0FBNkMsU0FBUSxZQUFZOztBQUM5RCx1REFBVSxHQUFHO0lBQ2hCLEtBQUssRUFBRTtRQUNILElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7S0FDakI7SUFDRCxJQUFJLEVBQUU7UUFDRixJQUFJLEVBQUUsUUFBUTtRQUNkLFFBQVEsRUFBRSxJQUFJO0tBQ2pCO0NBQ0osQ0FBQztBQVFKLE9BQU8sRUFBRSw0Q0FBNEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVyRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3ZCLE1BQU0sRUFDTixNQUFNLEVBQ04sVUFBVSxFQUNWLFdBQVcsRUFNWjtJQUNDLE1BQU0sV0FBVyxtQkFDZixLQUFLLEVBQUUsRUFBRSxFQUNULElBQUksRUFBRSxFQUFFLElBQ0wsTUFBTSxDQUNWLENBQUM7SUFFRixNQUFNLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsRUFBRTtRQUMxQixJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVE7WUFBRSxPQUFPO1FBQzNCLE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQy9DLGFBQWEsQ0FBQyxDQUFDLENBQUMsR0FBRyxHQUFHLGFBQWEsQ0FBQyxDQUFDLENBQUMsSUFBSSxXQUFXLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDN0QsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsR0FBRyxhQUFhLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDckMsSUFBSSxDQUFDLFFBQVEsR0FBRyxhQUFhLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQzFDLENBQUMsQ0FBQyxDQUFDO0lBRUgsTUFBTSxTQUFTLEdBQUcsSUFBSSxVQUFVLENBQUMsTUFBTSxDQUFDO1FBQ3BDLElBQUksRUFBRSxhQUFhO1FBQ25CLE1BQU0sRUFBRSxJQUFJLFdBQVcsQ0FBQyxLQUFLLEdBQUc7S0FDbkMsQ0FBQyxDQUFDO0lBRUwsK0JBQStCO0lBRTdCLGFBQWE7SUFDYixNQUFNLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsRUFBRTtRQUMxQixnQ0FBZ0M7UUFDaEMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUN6QixDQUFDLENBQUMsQ0FBQztJQUVMLDRCQUE0QjtJQUU1QixrQ0FBa0M7SUFFOUIsTUFBTSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsQ0FBQztJQUU5QixTQUFTLENBQUMsTUFBTSxDQUFDLElBQUksVUFBVSxDQUFDLE9BQU8sQ0FBQztRQUNwQyxJQUFJLEVBQUUsd0JBQXdCLFdBQVcsQ0FBQyxJQUFJLEVBQUU7S0FDbkQsQ0FBQyxDQUFDLENBQUM7SUFFUiwrQkFBK0I7SUFFL0IsOEJBQThCO0lBQzlCLDJDQUEyQztJQUUzQyxRQUFRO0lBQ1IsUUFBUTtJQUVSLHVCQUF1QjtBQUN2QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFJeEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVDRztBQUVILE1BQU0sNENBQTZDLFNBQVEsWUFBWTs7QUFDNUQsdURBQVUsR0FBRztJQUNoQixLQUFLLEVBQUU7UUFDSCxJQUFJLEVBQUUsUUFBUTtLQUNqQjtJQUNELFVBQVUsRUFBRTtRQUNSLElBQUksRUFBRSxTQUFTO0tBQ2xCO0NBQ0osQ0FBQztBQVFOLE9BQU8sRUFBRSw0Q0FBNEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVyRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sVUFBVSxFQUNWLHFCQUFxQixFQUNyQixXQUFXLEdBT2Q7O0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxFQUFFLEVBQ1QsVUFBVSxFQUFFLEtBQUssSUFDZCxNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sV0FBVyxHQUFHLE9BQU8sRUFBRSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUU5QyxNQUFNLE1BQU0sR0FBRyxXQUFXLENBQUMsS0FBSztRQUM1QixDQUFDLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDbkQsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRXZDLE1BQU0sV0FBVyxHQUFHLEVBQUUsQ0FBQztJQUN2QixNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDckIsV0FBVyxDQUFDLEtBQUssQ0FBQyxHQUFHLElBQUksVUFBVSxDQUFDLE1BQU0sQ0FBQztZQUN2QyxJQUFJLEVBQUUsYUFBYTtZQUNuQixNQUFNLEVBQUUsSUFBSSxLQUFLLEdBQUc7U0FDdkIsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFDLENBQUM7SUFFSCxNQUFBLE1BQU0sQ0FBQyxLQUFLLDBDQUFFLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQzNCLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUTtZQUFFLE9BQU87UUFFM0IsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1lBQ3JCLE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxLQUFLLEVBQUUsQ0FBQztZQUMvQixNQUFNLGFBQWEsR0FBRyxTQUFTLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUNwRCxhQUFhLENBQUMsQ0FBQyxDQUFDLEdBQUcsR0FBRyxhQUFhLENBQUMsQ0FBQyxDQUFDLE1BQU0sS0FBSyxFQUFFLENBQUM7WUFDcEQsU0FBUyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsR0FBRyxhQUFhLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDMUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxhQUFhLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQzdDLFdBQVcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxNQUFNLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDekMsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztJQUNILEtBQUssSUFBSSxDQUFDLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxNQUFNLEdBQUcsQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUU7UUFDM0QsTUFBTSxDQUFDLEtBQUssQ0FBQyxXQUFXLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7S0FDMUQ7SUFFRCxxQkFBcUIsQ0FBQyxHQUFHLEVBQUU7UUFDdkIsSUFBSSxXQUFXLENBQUMsVUFBVSxFQUFFO1lBQ3hCLE1BQU0sQ0FBQyxNQUFNLEVBQUUsQ0FBQztTQUNuQjthQUFNO1lBQ0gsTUFBTSxDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDcEM7SUFDTCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUMifQ==

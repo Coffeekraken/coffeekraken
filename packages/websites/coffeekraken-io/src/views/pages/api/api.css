@@ -1,0 +1,8 @@
+#api {
+    .toolbar {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+    }
+}

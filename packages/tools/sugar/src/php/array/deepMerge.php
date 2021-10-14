@@ -3,7 +3,7 @@
 namespace Sugar\ar;
 
 /**
- * @name            Sugar\array\deepMerge
+ * @name            deepMerge
  * @namespace            php.array
  * @type            Function
  * @platform        php

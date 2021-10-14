@@ -1,5 +1,5 @@
 .markdown {
-    .__nav {
+    .folder-nav {
         position: sticky;
         top: 100px;
         height: calc(100vh - 100px);
@@ -7,40 +7,5 @@
         border-right: 1px solid sugar.color(current, border);
         user-select: none;
         @sugar.scrollbar();
-
-        .s-list--ul .s-list--ul {
-            max-height: 0;
-            opacity: 0;
-            transition: all 0.2s ease-out;
-            margin-top: 0;
-            margin-bottom: 0;
-            pointer-events: none;
-
-            &[active] {
-                max-height: 999px;
-                opacity: 1;
-                margin-top: sugar.margin(10);
-                margin-bottom: sugar.margin(10);
-                pointer-events: all;
-            }
-        }
-
-        s-activate[active] > h5 {
-            font-weight: bold;
-        }
-
-        .__slug:before {
-            content: '-';
-        }
-        .__toggle:before {
-            content: '│';
-            font-weight: bold;
-            color: sugar.color(accent);
-        }
-    }
-
-    a[actual] {
-        color: sugar.color(accent);
-        font-weight: bold;
     }
 }

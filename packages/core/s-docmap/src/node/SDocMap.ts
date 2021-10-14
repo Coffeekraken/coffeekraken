@@ -34,6 +34,7 @@ import __get from '@coffeekraken/sugar/shared/object/get';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
+import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 
 import __interfaceFieldProxy from './fieldsProxy/interfaceFieldProxy';
 
@@ -110,7 +111,7 @@ export interface ISDocMapCtorSettings {
 }
 
 export interface ISDocMapEntry {
-    absPath?: string;
+    path?: string;
     name?: string;
     namespace?: string;
     filename?: string;
@@ -177,7 +178,10 @@ class SDocMap extends __SClass implements ISDocMap {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerFieldProxy(field: string, processor: ISDocMapFieldProxyFn): any {
+    static registerFieldProxy(
+        field: string,
+        processor: ISDocMapFieldProxyFn,
+    ): any {
         this._registeredFieldsProxy[field] = processor;
     }
 
@@ -240,7 +244,12 @@ class SDocMap extends __SClass implements ISDocMap {
                         fieldsProxy: {},
                         customMenu: {
                             styleguide({ key, value, isObject }) {
-                                if (key.split('/').length > 1 && key.match(/^([a-zA-Z0-9-_@\/]+)?\/styleguide\//))
+                                if (
+                                    key.split('/').length > 1 &&
+                                    key.match(
+                                        /^([a-zA-Z0-9-_@\/]+)?\/styleguide\//,
+                                    )
+                                )
                                     return true;
                                 if (key === 'styleguide') return true;
                                 return false;
@@ -281,12 +290,19 @@ class SDocMap extends __SClass implements ISDocMap {
         return new __SPromise(
             async ({ resolve, pipe, emit }) => {
                 const finalParams = <ISDocMapReadParams>(
-                    __deepMerge(__SDocMapReadParamsInterface.defaults(), params ?? {})
+                    __deepMerge(
+                        __SDocMapReadParamsInterface.defaults(),
+                        params ?? {},
+                    )
                 );
 
                 // snapshot param handling
                 if (finalParams.snapshot) {
-                    finalParams.input = __path.resolve(finalParams.snapshotDir, finalParams.snapshot, 'docmap.json');
+                    finalParams.input = __path.resolve(
+                        finalParams.snapshotDir,
+                        finalParams.snapshot,
+                        'docmap.json',
+                    );
                 }
 
                 let docmapRootPath = __folderPath(finalParams.input);
@@ -311,7 +327,8 @@ class SDocMap extends __SClass implements ISDocMap {
                 };
 
                 const loadJson = async (packageNameOrPath, currentPath) => {
-                    if (extendedPackages.indexOf(packageNameOrPath) !== -1) return;
+                    if (extendedPackages.indexOf(packageNameOrPath) !== -1)
+                        return;
                     extendedPackages.push(packageNameOrPath);
 
                     let currentPathDocmapJsonPath,
@@ -330,7 +347,9 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     if (__fs.existsSync(potentialPackagePath)) {
                         currentPathDocmapJsonPath = potentialPackagePath;
-                    } else if (__fs.existsSync(`${packageNameOrPath}/docmap.json`)) {
+                    } else if (
+                        __fs.existsSync(`${packageNameOrPath}/docmap.json`)
+                    ) {
                         currentPathDocmapJsonPath = `${packageNameOrPath}/docmap.json`;
                     } else if (__fs.existsSync(potentialRootPackagePath)) {
                         currentPathDocmapJsonPath = potentialRootPackagePath;
@@ -343,7 +362,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     if (!currentPathDocmapJsonPath) return;
 
-                    const extendsRootPath = currentPathDocmapJsonPath.replace('/docmap.json', '');
+                    const extendsRootPath = currentPathDocmapJsonPath.replace(
+                        '/docmap.json',
+                        '',
+                    );
 
                     const packageJsonPath = `${extendsRootPath}/package.json`;
                     if (!__fs.existsSync(packageJsonPath)) {
@@ -354,20 +376,29 @@ class SDocMap extends __SClass implements ISDocMap {
                     }
 
                     const currentPackageJson = __readJsonSync(packageJsonPath);
-                    const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
+                    const docmapJson = __readJsonSync(
+                        currentPathDocmapJsonPath,
+                    );
 
                     Object.keys(docmapJson.map).forEach((namespace) => {
                         if (docmapJson.map[namespace]) {
-                            docmapJson.map[namespace].package = currentPackageJson.name;
+                            docmapJson.map[namespace].package =
+                                currentPackageJson.name;
                         }
                     });
-                    Object.keys(docmapJson.generated?.map ?? []).forEach((namespace) => {
-                        if (docmapJson.generated.map[namespace]) {
-                            docmapJson.generated.map[namespace].package = currentPackageJson.name;
-                        }
-                    });
+                    Object.keys(docmapJson.generated?.map ?? []).forEach(
+                        (namespace) => {
+                            if (docmapJson.generated.map[namespace]) {
+                                docmapJson.generated.map[namespace].package =
+                                    currentPackageJson.name;
+                            }
+                        },
+                    );
 
-                    docmapJson.extends = [...(docmapJson.extends ?? []), ...(docmapJson.generated?.extends ?? [])];
+                    docmapJson.extends = [
+                        ...(docmapJson.extends ?? []),
+                        ...(docmapJson.generated?.extends ?? []),
+                    ];
                     docmapJson.map = {
                         ...(docmapJson.map ?? {}),
                         ...(docmapJson.generated?.map ?? {}),
@@ -380,7 +411,11 @@ class SDocMap extends __SClass implements ISDocMap {
                         await loadJson(extendsPackageName, extendsRootPath);
                     }
 
-                    for (let i = 0; i < Object.keys(docmapJson.map).length; i++) {
+                    for (
+                        let i = 0;
+                        i < Object.keys(docmapJson.map).length;
+                        i++
+                    ) {
                         const namespace = Object.keys(docmapJson.map)[i];
                         const obj = docmapJson.map[namespace];
                         obj.path = __path.resolve(extendsRootPath, obj.relPath);
@@ -399,7 +434,9 @@ class SDocMap extends __SClass implements ISDocMap {
 
                 // loading available snapshots
                 if (__fs.existsSync(finalParams.snapshotDir)) {
-                    const availableSnapshots = __fs.readdirSync(finalParams.snapshotDir);
+                    const availableSnapshots = __fs.readdirSync(
+                        finalParams.snapshotDir,
+                    );
                     finalDocmapJson.snapshots = availableSnapshots;
                 } else {
                     finalDocmapJson.snapshots = [];
@@ -433,7 +470,9 @@ class SDocMap extends __SClass implements ISDocMap {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _extractMenu(docmapJson: Partial<ISDocMapObj> = this._docmapJson): ISDocmapMenuObj {
+    _extractMenu(
+        docmapJson: Partial<ISDocMapObj> = this._docmapJson,
+    ): ISDocmapMenuObj {
         const docmapJsonMenuByPackage = {};
 
         // split menus by packages
@@ -457,7 +496,9 @@ class SDocMap extends __SClass implements ISDocMap {
         const packageJson = __packageJsonSync();
 
         Object.keys(docmapJsonMenuByPackage).forEach((packageName) => {
-            const menuObj = this._extractMenuFromDocmapJsonStack(docmapJsonMenuByPackage[packageName]);
+            const menuObj = this._extractMenuFromDocmapJsonStack(
+                docmapJsonMenuByPackage[packageName],
+            );
 
             if (packageName === packageJson.name) {
                 finalMenu = {
@@ -467,7 +508,8 @@ class SDocMap extends __SClass implements ISDocMap {
             } else {
                 const scopedSlugMenu = {};
                 Object.keys(menuObj.slug).forEach((slug) => {
-                    scopedSlugMenu[`/${packageName}${slug}`] = menuObj.slug[slug];
+                    scopedSlugMenu[`/${packageName}${slug}`] =
+                        menuObj.slug[slug];
                 });
                 finalMenu.packages[packageName] = {
                     name: packageJson.name,
@@ -483,18 +525,36 @@ class SDocMap extends __SClass implements ISDocMap {
         Object.keys(this.docmapSettings.customMenu).forEach((menuName) => {
             if (!finalMenu.custom[menuName]) finalMenu.custom[menuName] = {};
             // @ts-ignore
-            finalMenu.custom[menuName].tree = __deepFilter(finalMenu.tree, this.docmapSettings.customMenu[menuName]);
+            finalMenu.custom[menuName].tree = __deepFilter(
+                finalMenu.tree,
+                this.docmapSettings.customMenu[menuName],
+            );
             // @ts-ignore
-            finalMenu.custom[menuName].slug = __deepFilter(finalMenu.slug, this.docmapSettings.customMenu[menuName]);
+            finalMenu.custom[menuName].slug = __deepFilter(
+                finalMenu.slug,
+                this.docmapSettings.customMenu[menuName],
+            );
 
             Object.keys(finalMenu.packages).forEach((packageName) => {
                 const packageObj = finalMenu.packages[packageName];
                 // @ts-ignore
-                const packageFilteredTree = __deepFilter(packageObj.tree, this.docmapSettings.customMenu[menuName]);
-                finalMenu.custom[menuName].tree = __deepMerge(finalMenu.custom[menuName].tree, packageFilteredTree);
+                const packageFilteredTree = __deepFilter(
+                    packageObj.tree,
+                    this.docmapSettings.customMenu[menuName],
+                );
+                finalMenu.custom[menuName].tree = __deepMerge(
+                    finalMenu.custom[menuName].tree,
+                    packageFilteredTree,
+                );
                 // @ts-ignore
-                const packageFilteredSlug = __deepFilter(packageObj.slug, this.docmapSettings.customMenu[menuName]);
-                finalMenu.custom[menuName].slug = __deepMerge(finalMenu.custom[menuName].slug, packageFilteredSlug);
+                const packageFilteredSlug = __deepFilter(
+                    packageObj.slug,
+                    this.docmapSettings.customMenu[menuName],
+                );
+                finalMenu.custom[menuName].slug = __deepMerge(
+                    finalMenu.custom[menuName].slug,
+                    packageFilteredSlug,
+                );
             });
         });
 
@@ -567,7 +627,9 @@ class SDocMap extends __SClass implements ISDocMap {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     build(params: Partial<ISDocMapBuildParams>): Promise<any> {
-        const finalParams = <ISDocMapBuildParams>__deepMerge(__SDocMapBuildParamsInterface.defaults(), params);
+        const finalParams = <ISDocMapBuildParams>(
+            __deepMerge(__SDocMapBuildParamsInterface.defaults(), params)
+        );
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 emit('notification', {
@@ -588,7 +650,9 @@ class SDocMap extends __SClass implements ISDocMap {
 
                 // check if a file already exists
                 if (__fs.existsSync(`${packageRoot}/docmap.json`)) {
-                    const currentDocmapJson = __readJsonSync(`${packageRoot}/docmap.json`);
+                    const currentDocmapJson = __readJsonSync(
+                        `${packageRoot}/docmap.json`,
+                    );
                     docmapJson = currentDocmapJson;
                     docmapJson.generated = {
                         extends: [],
@@ -604,9 +668,13 @@ class SDocMap extends __SClass implements ISDocMap {
                         value: `<yellow>[build]</yellow> Building extends array from existing docmap compliant packages`,
                     });
 
-                    const globs: string[] = [`${packageRoot}/node_modules/**{0,2}/docmap.json`];
+                    const globs: string[] = [
+                        `${packageRoot}/node_modules/**{0,2}/docmap.json`,
+                    ];
                     if (packageRoot !== packageMonoRoot) {
-                        globs.push(`${packageMonoRoot}/node_modules/**{0,2}/docmap.json`);
+                        globs.push(
+                            `${packageMonoRoot}/node_modules/**{0,2}/docmap.json`,
+                        );
                     }
 
                     const currentDocmapFiles = __SGlob.resolve(globs, {
@@ -620,13 +688,18 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     const extendsArray: string[] = [];
                     currentDocmapFiles.forEach((file) => {
-                        const currentPackageJson = __readJsonSync(`${file.dirPath}/package.json`);
-                        if (currentPackageJson.name === packageJson.name) return;
+                        const currentPackageJson = __readJsonSync(
+                            `${file.dirPath}/package.json`,
+                        );
+                        if (currentPackageJson.name === packageJson.name)
+                            return;
                         extendsArray.push(currentPackageJson.name);
                     });
 
                     // @ts-ignore
-                    docmapJson.generated.extends = extendsArray.filter((name) => name !== packageJson.name);
+                    docmapJson.generated.extends = extendsArray.filter(
+                        (name) => name !== packageJson.name,
+                    );
                 }
 
                 emit('log', {
@@ -679,14 +752,18 @@ class SDocMap extends __SClass implements ISDocMap {
                         ) {
                             const filterReg =
                                 // @ts-ignore
-                                finalParams.filters[Object.keys(finalParams.filters)[k]];
+                                finalParams.filters[
+                                    Object.keys(finalParams.filters)[k]
+                                ];
                             // @ts-ignore
-                            const value = docblock[Object.keys(finalParams.filters)[k]];
+                            const value =
+                                docblock[Object.keys(finalParams.filters)[k]];
                             if (value === undefined) continue;
                             if (value.match(filterReg)) break;
                         }
 
-                        if (docblock.name && docblock.name.slice(0, 1) === '_') continue;
+                        if (docblock.name && docblock.name.slice(0, 1) === '_')
+                            continue;
                         if (docblock.private) continue;
 
                         // const path = __path.relative(outputDir, filepath);
@@ -698,10 +775,16 @@ class SDocMap extends __SClass implements ISDocMap {
                             const field = finalParams.fields[l];
                             if (docblock[field] === undefined) continue;
                             if (field === 'namespace')
-                                docblock[field] = `${packageJson.name.replace('/', '.')}.${docblock[field]}`;
+                                docblock[field] = `${packageJson.name.replace(
+                                    '/',
+                                    '.',
+                                )}.${docblock[field]}`;
                             // props proxy
                             if (this.docmapSettings.fieldsProxy[field]) {
-                                docblockEntryObj[field] = await this.docmapSettings.fieldsProxy[field](docblock[field]);
+                                docblockEntryObj[field] =
+                                    await this.docmapSettings.fieldsProxy[
+                                        field
+                                    ](docblock[field]);
                             } else {
                                 docblockEntryObj[field] = docblock[field];
                             }
@@ -712,11 +795,21 @@ class SDocMap extends __SClass implements ISDocMap {
                                 ...docblockEntryObj,
                                 filename,
                                 extension: filename.split('.').slice(1)[0],
-                                relPath: __path.relative(__packageRootDir(), (<__SFile>file).path),
+                                relPath: __path.relative(
+                                    __packageRootDir(),
+                                    (<__SFile>file).path,
+                                ),
                             };
-                            this._entries[`${docblock.namespace}.${__camelCase(docblock.name)}`] = docblockObj;
+                            this._entries[
+                                __namespaceCompliant(
+                                    `${docblock.namespace}.${__camelCase(
+                                        docblock.name,
+                                    )}`,
+                                )
+                            ] = docblockObj;
                         } else if (docblock.name) {
-                            children[__camelCase(docblock.name)] = docblockEntryObj;
+                            children[__camelCase(docblock.name)] =
+                                docblockEntryObj;
                         }
                     }
                     docblockObj.children = children;
@@ -743,7 +836,10 @@ class SDocMap extends __SClass implements ISDocMap {
                             '',
                         )}</cyan>"`,
                     });
-                    __fs.writeFileSync(finalParams.outPath, JSON.stringify(docmapJson, null, 4));
+                    __fs.writeFileSync(
+                        finalParams.outPath,
+                        JSON.stringify(docmapJson, null, 4),
+                    );
                 }
 
                 resolve(docmapJson);
@@ -770,11 +866,16 @@ class SDocMap extends __SClass implements ISDocMap {
      * @since   2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    installSnapshot(params: Partial<ISDocmapInstallSnapshotsParams>): Promise<any> {
+    installSnapshot(
+        params: Partial<ISDocmapInstallSnapshotsParams>,
+    ): Promise<any> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const finalParams = <ISDocmapInstallSnapshotsParams>(
-                    __deepMerge(__SDocmapInstallSnapshotParamsInterface.defaults(), params ?? {})
+                    __deepMerge(
+                        __SDocmapInstallSnapshotParamsInterface.defaults(),
+                        params ?? {},
+                    )
                 );
 
                 const duration = new __SDuration();
@@ -801,43 +902,75 @@ class SDocMap extends __SClass implements ISDocMap {
                     });
 
                     const packageJson = __packageJsonSync();
-                    const packageMonoRootPath = __packageRoot(process.cwd(), true);
+                    const packageMonoRootPath = __packageRoot(
+                        process.cwd(),
+                        true,
+                    );
 
                     // symlink repos from monorepo
                     const removedDependencies = {},
                         removedDevDependencies = {};
                     if (packageMonoRootPath !== __packageRoot()) {
-                        const packageJsonFiles = __SGlob.resolve(`${packageMonoRootPath}/**/package.json`);
+                        const packageJsonFiles = __SGlob.resolve(
+                            `${packageMonoRootPath}/**/package.json`,
+                        );
 
                         packageJsonFiles.forEach((file) => {
                             if (file.dirPath === packageMonoRootPath) return;
                             if (
-                                !packageJson.dependencies?.[file.content.name] &&
-                                !packageJson.devDependencies?.[file.content.name]
+                                !packageJson.dependencies?.[
+                                    file.content.name
+                                ] &&
+                                !packageJson.devDependencies?.[
+                                    file.content.name
+                                ]
                             )
                                 return;
 
                             if (packageJson.dependencies?.[file.content.name]) {
-                                removedDependencies[file.content.name] = packageJson.dependencies[file.content.name];
-                                delete packageJson.dependencies[file.content.name];
+                                removedDependencies[file.content.name] =
+                                    packageJson.dependencies[file.content.name];
+                                delete packageJson.dependencies[
+                                    file.content.name
+                                ];
                             }
-                            if (packageJson.devDependencies?.[file.content.name]) {
+                            if (
+                                packageJson.devDependencies?.[file.content.name]
+                            ) {
                                 removedDevDependencies[file.content.name] =
-                                    packageJson.devDependencies[file.content.name];
-                                delete packageJson.devDependencies[file.content.name];
+                                    packageJson.devDependencies[
+                                        file.content.name
+                                    ];
+                                delete packageJson.devDependencies[
+                                    file.content.name
+                                ];
                             }
 
                             const packageFolderPath = __folderPath(file.path);
                             const destinationFolderPath = `${folderPath}/node_modules/${file.content.name}`;
-                            __ensureDirSync(destinationFolderPath.split('/').slice(0, -1).join('/'));
+                            __ensureDirSync(
+                                destinationFolderPath
+                                    .split('/')
+                                    .slice(0, -1)
+                                    .join('/'),
+                            );
                             try {
                                 __fs.unlinkSync(destinationFolderPath);
                             } catch (e) {}
-                            __fs.symlinkSync(packageFolderPath, destinationFolderPath);
+                            __fs.symlinkSync(
+                                packageFolderPath,
+                                destinationFolderPath,
+                            );
                         });
                     }
-                    if (Object.keys(removedDependencies).length || Object.keys(removedDevDependencies).length) {
-                        __writeJsonSync(`${folderPath}/package.json`, packageJson);
+                    if (
+                        Object.keys(removedDependencies).length ||
+                        Object.keys(removedDevDependencies).length
+                    ) {
+                        __writeJsonSync(
+                            `${folderPath}/package.json`,
+                            packageJson,
+                        );
                     }
 
                     // installing dependencies
@@ -852,7 +985,10 @@ class SDocMap extends __SClass implements ISDocMap {
                     );
 
                     // restoring package.json
-                    if (Object.keys(removedDependencies).length || Object.keys(removedDevDependencies).length) {
+                    if (
+                        Object.keys(removedDependencies).length ||
+                        Object.keys(removedDevDependencies).length
+                    ) {
                         packageJson.dependencies = {
                             ...packageJson.dependencies,
                             ...removedDependencies,
@@ -861,7 +997,10 @@ class SDocMap extends __SClass implements ISDocMap {
                             ...packageJson.devDependencies,
                             ...removedDevDependencies,
                         };
-                        __writeJsonSync(`${folderPath}/package.json`, packageJson);
+                        __writeJsonSync(
+                            `${folderPath}/package.json`,
+                            packageJson,
+                        );
                     }
 
                     emit('log', {
@@ -904,7 +1043,10 @@ class SDocMap extends __SClass implements ISDocMap {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const finalParams = <ISDocMapSnapshotParams>(
-                    __deepMerge(__SDocmapSnapshotParamsInterface.defaults(), params)
+                    __deepMerge(
+                        __SDocmapSnapshotParamsInterface.defaults(),
+                        params,
+                    )
                 );
 
                 const duration = new __SDuration();
@@ -925,19 +1067,36 @@ class SDocMap extends __SClass implements ISDocMap {
                 }
 
                 const packageJson = __packageJsonSync();
-                const docmapJson = __readJsonSync(`${__packageRootDir()}/docmap.json`);
+                const docmapJson = __readJsonSync(
+                    `${__packageRootDir()}/docmap.json`,
+                );
 
                 // write the docmap
-                const outDir = __path.resolve(finalParams.outDir, packageJson.version);
+                const outDir = __path.resolve(
+                    finalParams.outDir,
+                    packageJson.version,
+                );
                 __removeSync(outDir);
                 __ensureDirSync(outDir);
 
                 // copy package.json file
-                __copySync(`${__packageRootDir()}/package.json`, `${outDir}/package.json`);
-                __copySync(`${__packageRootDir()}/docmap.json`, `${outDir}/docmap.json`);
+                __copySync(
+                    `${__packageRootDir()}/package.json`,
+                    `${outDir}/package.json`,
+                );
+                __copySync(
+                    `${__packageRootDir()}/docmap.json`,
+                    `${outDir}/docmap.json`,
+                );
                 try {
-                    __copySync(`${__packageRootDir()}/package-lock.json`, `${outDir}/package-lock.json`);
-                    __copySync(`${__packageRootDir()}/yarn.lock`, `${outDir}/yarn.lock`);
+                    __copySync(
+                        `${__packageRootDir()}/package-lock.json`,
+                        `${outDir}/package-lock.json`,
+                    );
+                    __copySync(
+                        `${__packageRootDir()}/yarn.lock`,
+                        `${outDir}/yarn.lock`,
+                    );
                 } catch (e) {}
 
                 const fullMap = {
@@ -947,14 +1106,20 @@ class SDocMap extends __SClass implements ISDocMap {
 
                 Object.keys(fullMap).forEach((namespace) => {
                     const docmapObj = fullMap[namespace];
-                    const path = __path.resolve(__packageRootDir(), docmapObj.relPath);
+                    const path = __path.resolve(
+                        __packageRootDir(),
+                        docmapObj.relPath,
+                    );
                     let content = __fs.readFileSync(path, 'utf8').toString();
                     if (docmapObj.type === 'markdown') {
                     } else {
                         const docblock = new __SDocblock(content);
                         content = docblock.toString();
                     }
-                    __writeFileSync(__path.resolve(outDir, docmapObj.relPath), content);
+                    __writeFileSync(
+                        __path.resolve(outDir, docmapObj.relPath),
+                        content,
+                    );
                 });
 
                 emit('log', {

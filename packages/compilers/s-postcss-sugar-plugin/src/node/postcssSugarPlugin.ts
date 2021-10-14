@@ -73,7 +73,10 @@ const plugin = (settings: any = {}) => {
                 .map((n) => (typeof n === 'string' ? n.trim() : n))
                 .forEach((n) => {
                     if (typeof n === 'string') {
-                        finalNodes = [...finalNodes, ...(__postcss.parse(n).nodes ?? [])];
+                        finalNodes = [
+                            ...finalNodes,
+                            ...(__postcss.parse(n).nodes ?? []),
+                        ];
                     } else {
                         finalNodes.push(n);
                     }
@@ -91,7 +94,8 @@ const plugin = (settings: any = {}) => {
         noScopes: [],
     };
     const mixinsStack = {},
-        functionsStack = {};
+        functionsStack = {},
+        postProcessorsRegisteredFn: Function[] = [];
 
     async function _load() {
         // list all mixins
@@ -100,8 +104,12 @@ const plugin = (settings: any = {}) => {
         });
         for (let i = 0; i < mixinsPaths.length; i++) {
             const path = mixinsPaths[i];
-            const { default: mixin, interface: int } = await import(`./${path}`);
-            mixinsStack[`${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`] = {
+            const { default: mixin, interface: int } = await import(
+                `./${path}`
+            );
+            mixinsStack[
+                `${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`
+            ] = {
                 mixin,
                 interface: int,
             };
@@ -114,7 +122,9 @@ const plugin = (settings: any = {}) => {
         for (let i = 0; i < functionsPaths.length; i++) {
             const path = functionsPaths[i];
             const { default: fn, interface: int } = await import(`./${path}`);
-            functionsStack[`${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`] = {
+            functionsStack[
+                `${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`
+            ] = {
                 fn,
                 interface: int,
             };
@@ -134,10 +144,10 @@ const plugin = (settings: any = {}) => {
         },
 
         async OnceExit(root) {
-            // console.log('EX');
-            // if (postProcessorsExecuted) return;
-            // postProcessorsExecuted = true;
-            // console.log('IT');
+            for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
+                const fn = postProcessorsRegisteredFn[i];
+                await fn();
+            }
 
             const postProcessorsPaths = __glob.sync('**/*.js', {
                 cwd: `${__dirname()}/postProcessors`,
@@ -145,32 +155,14 @@ const plugin = (settings: any = {}) => {
 
             for (let i = 0; i < postProcessorsPaths.length; i++) {
                 const path = postProcessorsPaths[i];
-                const { default: processorFn } = await import(`${__dirname()}/postProcessors/${path}`);
+                const { default: processorFn } = await import(
+                    `${__dirname()}/postProcessors/${path}`
+                );
                 processorFn({
                     root,
                     sharedData,
                 });
             }
-
-            root.walkComments((comment) => {
-                if (!comment.text.match(/^@sugar-media-classes-[a-zA-Z0-9-_]+/)) return;
-                const mediaName = comment.text.replace('@sugar-media-classes-', '').trim();
-                const mediaRule = comment.next();
-                if (!mediaRule) return;
-                mediaRule.walkRules((rule) => {
-                    if (rule.parent !== mediaRule) return;
-                    if (!rule.selector) return;
-                    if (!rule.selector.match(/^\./)) return;
-
-                    const selectorParts = rule.selector.split(/[\s:#.]/).filter((l) => l !== '');
-                    if (!selectorParts.length) return;
-                    const clsSelector = `.${selectorParts[0]}`;
-
-                    const newSelector = rule.selector.split(clsSelector).join(`${clsSelector}___${mediaName}`);
-                    rule.selector = newSelector;
-                });
-                comment.remove();
-            });
 
             if (__SBench.env.isBenchActive('postcssSugarPlugin')) {
                 console.log(__SBench.end('postcssSugarPlugin').toString());
@@ -179,10 +171,6 @@ const plugin = (settings: any = {}) => {
         AtRule(atRule, postcssApi) {
             if (atRule.name.match(/^sugar\./)) {
                 let mixinId = atRule.name.replace(/^sugar\./, '');
-
-                // if (atRule.name === 'sugar.scope.no') {
-                //     console.log('NOffff', atRule);
-                // }
 
                 if (!mixinsStack[mixinId]) {
                     mixinId = `${mixinId}.${mixinId.split('.').slice(-1)[0]}`;
@@ -196,7 +184,9 @@ const plugin = (settings: any = {}) => {
 
                 const root = __getRoot(atRule);
                 const sourcePath =
-                    typeof root.source.input.file === 'string' ? __path.dirname(root.source.input.file) : __dirname();
+                    typeof root.source.input.file === 'string'
+                        ? __path.dirname(root.source.input.file)
+                        : __dirname();
 
                 const mixinFn = mixinsStack[mixinId].mixin;
                 const mixinInterface = mixinsStack[mixinId].interface;
@@ -220,6 +210,9 @@ const plugin = (settings: any = {}) => {
                     postcssApi,
                     sourcePath,
                     sharedData,
+                    registerPostProcessor(fn: Function) {
+                        postProcessorsRegisteredFn.push(fn);
+                    },
                     postcss: __postcss,
                     settings,
                 });
@@ -259,15 +252,26 @@ const plugin = (settings: any = {}) => {
             if (!calls || !calls.length) return;
             calls.forEach((sugarStatement) => {
                 // FIX. sugarStatement comes with none corresponding count of "(" and ")"
-                const openingParenthesisCount = (sugarStatement.match(/\(/g) || []).length;
-                const closingParenthesisCount = (sugarStatement.match(/\)/g) || []).length;
+                const openingParenthesisCount = (
+                    sugarStatement.match(/\(/g) || []
+                ).length;
+                const closingParenthesisCount = (
+                    sugarStatement.match(/\)/g) || []
+                ).length;
 
                 if (openingParenthesisCount > closingParenthesisCount) {
-                    sugarStatement += ')'.repeat(openingParenthesisCount - closingParenthesisCount);
+                    sugarStatement += ')'.repeat(
+                        openingParenthesisCount - closingParenthesisCount,
+                    );
                 }
 
-                const functionName = sugarStatement.match(/sugar\.([a-zA-Z0-9\.]+)/)[1];
-                const paramsStatement = sugarStatement.replace(/sugar\.[a-zA-Z0-9\.]+/, '');
+                const functionName = sugarStatement.match(
+                    /sugar\.([a-zA-Z0-9\.]+)/,
+                )[1];
+                const paramsStatement = sugarStatement.replace(
+                    /sugar\.[a-zA-Z0-9\.]+/,
+                    '',
+                );
 
                 let fnId = functionName;
                 if (!functionsStack[fnId]) {

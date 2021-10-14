@@ -28,59 +28,64 @@ import { page404 } from '@coffeekraken/s-view-renderer';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function markdown(req, res, settings = {}) {
+    return new __SPromise(async ({ resolve, reject, pipe, pipeError }) => {
+        const docmap = new __SDocMap();
+        const docmapJson = await docmap.read();
+        const menu = docmapJson.menu;
 
-  return new __SPromise(async ({ resolve, reject, pipe, pipeError }) => {
+        let html;
 
-    const docmap = new __SDocMap();
-    const docmapJson = await docmap.read();
-    const menu = docmapJson.menu;
+        let slugObj = menu.slug[req.url];
+        if (!slugObj) {
+            Object.keys(menu.packages ?? {}).forEach((packageName) => {
+                if (slugObj) return;
+                const packageObj = menu.packages[packageName];
+                slugObj = packageObj.slug[req.url];
+            });
+        }
 
-    let html;
+        if (slugObj) {
+            const markdownStr = __fs
+                .readFileSync(slugObj.docmap.path, 'utf8')
+                .toString();
 
-    let slugObj = menu.slug[req.url];
-    if (!slugObj) {
-      Object.keys(menu.packages ?? {}).forEach(packageName => {
-        if (slugObj) return;
-        const packageObj = menu.packages[packageName];
-        slugObj = packageObj.slug[req.url];
-      });
-    }
+            const builder = new __SMarkdownBuilder();
+            const res = await pipeError(
+                builder.build({
+                    inRaw: markdownStr,
+                    target: 'html',
+                    save: false,
+                }),
+            );
+            if (res instanceof Error) {
+                throw res;
+            }
 
-    if (slugObj) {
-        const markdownStr = __fs.readFileSync(slugObj.docmap.path, 'utf8').toString();
+            html = res[0].code;
+        }
 
-        const builder = new __SMarkdownBuilder();
-        const res = await pipeError(builder.build({
-          inRaw: markdownStr,
-          target: 'html' ,
-          save: false
-        }));
+        if (!html) {
+            const error = await page404({
+                ...(res.templateData || {}),
+                title: `Markdown "${req.url}" not found`,
+                body: `The markdown "${req.url}" you requested does not exists...`,
+            });
+            res.type('text/html');
+            res.status(404);
+            res.send(error.value);
+            return reject(error.value);
+        }
 
-        html = res[0].code;  
-    }
+        const viewInstance = new __SViewRenderer('pages.markdown.markdown');
 
-    if (!html) {
-        const error = await page404({
-            ...(res.templateData || {}),
-            title: `Markdown "${req.url}" not found`,
-            body: `The markdown "${req.url}" you requested does not exists...`
+        const result = await viewInstance.render({
+            ...(res.templateData ?? {}),
+            body: html,
         });
+
+        res.status(200);
         res.type('text/html');
-        res.status(404);
-        res.send(error.value);
-        return reject(error.value);
-    }
-
-    const viewInstance = new __SViewRenderer('pages.markdown.markdown');
-
-    const result = await viewInstance.render({
-        ...(res.templateData ?? {}),
-        body: html
+        res.send(result.value);
+        resolve(result.value);
     });
-
-    res.status(200);
-    res.type('text/html');
-    res.send(result.value);
-    resolve(result.value);
-  });
 }

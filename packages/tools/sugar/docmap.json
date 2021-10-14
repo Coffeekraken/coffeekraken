@@ -1,7 +1,17 @@
 {
     "map": {},
     "generated": {
-        "extends": ["@coffeekraken/coffeekraken-io"],
+        "extends": [
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-side-panel-component"
+        ],
         "map": {
             "@coffeekraken.sugar.node.index": {
                 "name": "index",
@@ -112,6 +122,38 @@
                 "filename": "copy.ts",
                 "extension": "ts",
                 "relPath": "src/js/clipboard/copy.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.css.adoptStyleInShadowRoot": {
+                "name": "adoptStyleInShadowRoot",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to make a shadowRoot element adopt his host context styles",
+                "namespace": "@coffeekraken.sugar.js.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/css/adoptStyleInShadowRoot';\nconst myShadowRoot = $myElement.shadowRoot;\nawait __adoptStyleInShadowRoot(myShadowRoot);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "adoptStyleInShadowRoot.ts",
+                "extension": "ts",
+                "relPath": "src/js/css/adoptStyleInShadowRoot.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.css.injectStyle": {
@@ -404,9 +446,15 @@
                     },
                     {
                         "language": "html",
-                        "code": "<!-- page url: /something -->"
+                        "code": "<!-- page url: /something -->\n<a href=\"/something\" actual>Hello</a>\n<a href=\"/something/cool\" actual-child>World</a>"
                     }
                 ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
                 "filename": "linksStateAttributes.ts",
                 "extension": "ts",
                 "relPath": "src/js/feature/linksStateAttributes.ts",
@@ -914,7 +962,7 @@
                 "relPath": "src/js/html/decodeHtmlEntities.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.ks.html.expandPleasantCssClassnamesLive": {
+            "@coffeekraken.sugar.js.html.expandPleasantCssClassnamesLive": {
                 "name": "expandPleasantCssClassnamesLive",
                 "type": "Function",
                 "platform": [
@@ -927,8 +975,8 @@
                         "description": ""
                     }
                 ],
-                "description": "This function allows you to convert \"colon\" classnames like \"s-something:cool @desktop something\"\nto comprehensive classnames for css like \"s-something s-something--cool something___desktop\", etc...\nThis function do this live when detecting a new node in the page, etc...",
-                "namespace": "@coffeekraken.sugar.ks.html",
+                "description": "This function allows you to convert \"colon\" classnames like \"s-something:cool @desktop something\"\nto comprehensive classnames for css like \"s-something s-something--cool something___desktop\", etc...\nThis function do this live when detecting a new node in the page, etc...\nThis function does not transform content of \"template\" and \"code\" tags.",
+                "namespace": "@coffeekraken.sugar.js.html",
                 "status": "beta",
                 "example": [
                     {
@@ -1544,7 +1592,7 @@
                         "name": "this._activeMedia",
                         "type": "String",
                         "description": "Store the active media name",
-                        "static": true,
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -1556,7 +1604,7 @@
                         "name": "startListener",
                         "type": "Function",
                         "description": "Add the global listener based on the \"init-body-media-queries\" scss mixin",
-                        "static": true,
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -1603,7 +1651,7 @@
                         "name": "template",
                         "type": "Function",
                         "description": "This static variable store a function that has as parameter the state object\nof your component and the lit-html ```html``` function that you can use in your template.\nThis function MUST return a template string representing your component HTML depending on the state\nobject at this point.",
-                        "static": true,
+                        "static": "true",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
@@ -1690,7 +1738,7 @@
                         "name": "observedAttributes",
                         "type": "Function",
                         "description": "This medhod simply return the list of props that will be\nobserved by the customElements under the hood system.",
-                        "static": true,
+                        "static": "true",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
@@ -1701,7 +1749,7 @@
                         "name": "componentName",
                         "type": "String",
                         "description": "Store the name of the component in camelcase",
-                        "static": true,
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -1713,7 +1761,7 @@
                         "name": "getComponentMetas",
                         "type": "Function",
                         "description": "This static method return the component metas information like:\n- name: The camelcase component name\n- dashName: The component name in dash case\n- class: The component class\n- extends: The HTML class that the component extends\n- settings: An object of settings",
-                        "static": true,
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -1725,7 +1773,7 @@
                         "name": "define",
                         "type": "Function",
                         "description": "This method allows you to define your component as a webcomponent recognized by the browser",
-                        "static": true,
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -2103,33 +2151,6 @@
                 "filename": "require.ts",
                 "extension": "ts",
                 "relPath": "src/node/esm/require.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.node.event.globalEventEmitter": {
-                "name": "globalEventEmitter",
-                "type": "SEventEmitter",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    }
-                ],
-                "description": "This global SEventEmitter is the one you can use to emit and listen to global events.\nThis can be usefull for communication between parts of your application but be aware that\nthis pattern is not something to use to much cause it can create some confusion in your\ncode...",
-                "namespace": "@coffeekraken.sugar.node.event",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "globalEventEmitter.ts",
-                "extension": "ts",
-                "relPath": "src/node/event/globalEventEmitter.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.checkPathWithMultipleExtensions": {
@@ -3280,6 +3301,35 @@
                 "relPath": "src/node/fs/writeTmpFileSync.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.github.downloadRepository": {
+                "name": "downloadRepository",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to download a github repository\nand unzip it where you want to store it",
+                "namespace": "@coffeekraken.sugar.node.github",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __downloadRepository from '@coffeekraken/sugar/node/github/downloadRepository';\nawait __downloadRepository('Coffeekraken/coffeekraken', {\n   dest: 'something/cool/coffeekraken.zip',\n   unzip: true\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "downloadRepository.ts",
+                "extension": "ts",
+                "relPath": "src/node/github/downloadRepository.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.glob.matchGlob": {
                 "name": "matchGlob",
                 "type": "Function",
@@ -4023,6 +4073,38 @@
                 "filename": "json.ts",
                 "extension": "ts",
                 "relPath": "src/node/package/json.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.package.jsonSync": {
+                "name": "jsonSync",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function return you the package.json of the current working package into object format",
+                "namespace": "@coffeekraken.sugar.node.package",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import json from '@coffeekraken/sugar/node/package/json';\njson();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "jsonSync.ts",
+                "extension": "ts",
+                "relPath": "src/node/package/jsonSync.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.package.namespace": {
@@ -5102,6 +5184,39 @@
                 "relPath": "src/node/path/sugarDir.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.path.systemTmpDir": {
+                "name": "systemTmpDir",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Return the system temp directory path",
+                "namespace": "@coffeekraken.sugar.node.path",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import systemTmpDir from '@coffeekraken/node/fs/systemTmpDir';\nsystemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "systemTmpDir.ts",
+                "extension": "ts",
+                "relPath": "src/node/path/systemTmpDir.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.php.execPhp": {
                 "name": "execPhp",
                 "type": "Function",
@@ -5160,6 +5275,39 @@
                 "filename": "exitCleanup.ts",
                 "extension": "ts",
                 "relPath": "src/node/process/exitCleanup.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.process.kill": {
+                "name": "kill",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to kill a process by id or by port.\nThis is just a proxy to the awesome fkill package",
+                "namespace": "@coffeekraken.sugar.node.process",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import kill from '@coffeekraken/sugar/node/process/kill';\nawait kill(':8888'); // port\nawait kill(8765); // id"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "kill.ts",
+                "extension": "ts",
+                "relPath": "src/node/process/kill.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.process.onProcessExit222": {
@@ -5260,8 +5408,37 @@
                 "relPath": "src/node/token/replaceTokens.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.array.sugar\\array\\deepMerge": {
-                "name": "Sugar\\array\\deepMerge",
+            "@coffeekraken.sugar.node.zip.unzip": {
+                "name": "unzip",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to unzip quickly a zip file\nto a particular destination.\nNote that the zip filename will be used as folder name",
+                "namespace": "@coffeekraken.sugar.node.zip",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __unzip from '@coffeekraken/sugar/node/zip/unzip';\nawait __unzip('my/cool/file.zip');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "unzip.ts",
+                "extension": "ts",
+                "relPath": "src/node/zip/unzip.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.array.deepMerge": {
+                "name": "deepMerge",
                 "type": "Function",
                 "platform": [
                     {
@@ -5289,8 +5466,8 @@
                 "relPath": "src/php/array/deepMerge.php",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.html.sugar\\html\\expandColonClasses": {
-                "name": "Sugar\\html\\expandColonClasses",
+            "@coffeekraken.sugar.php.html.expandPleasantCssClassnames": {
+                "name": "expandPleasantCssClassnames",
                 "type": "Function",
                 "platform": [
                     {
@@ -5304,7 +5481,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "Sugar\\html\\expandColonClasses('...html');"
+                        "code": "Sugar\\html\\expandPleasantCssClassnames('...html');"
                     }
                 ],
                 "since": "2.0.0",
@@ -5313,13 +5490,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "expandColonClasses.php",
+                "filename": "expandPleasantCssClassnames.php",
                 "extension": "php",
-                "relPath": "src/php/html/expandColonClasses.php",
+                "relPath": "src/php/html/expandPleasantCssClassnames.php",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.is.sugar\\is\\absolutePath": {
-                "name": "Sugar\\is\\absolutePath",
+            "@coffeekraken.sugar.php.is.absolutePath": {
+                "name": "absolutePath",
                 "type": "Function",
                 "platform": [
                     {
@@ -5347,8 +5524,8 @@
                 "relPath": "src/php/is/absolutePath.php",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.is.sugar\\is\\url": {
-                "name": "Sugar\\is\\url",
+            "@coffeekraken.sugar.php.is.url": {
+                "name": "url",
                 "type": "Function",
                 "platform": [
                     {
@@ -5405,6 +5582,64 @@
                 "relPath": "src/php/network/ipAddress.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.string.generateRandomString": {
+                "name": "generateRandomString",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to generate a random string using the characters and the wanted length\nspecified in the params",
+                "namespace": "@coffeekraken.sugar.php.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "Sugar\\string\\generateRandomString(10); // => ak93mdkaod"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "generateRandomString.php",
+                "extension": "php",
+                "relPath": "src/php/string/generateRandomString.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.string.idCompliant": {
+                "name": "idCompliant",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a string and return a version of it that you can safely use\nin html id for example. It replace spaces with '-' as well as all the special characters\nwith their simple version like \"à\" will be replaces by \"a\"",
+                "namespace": "@coffeekraken.sugar.php.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "Sugar\\string\\idCompliant('Hello world'); // => hello-world"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "idCompliant.php",
+                "extension": "php",
+                "relPath": "src/php/string/idCompliant.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.string.replaceTokens": {
                 "name": "replaceTokens",
                 "type": "Function",
@@ -5432,6 +5667,35 @@
                 "filename": "replaceTokens.php",
                 "extension": "php",
                 "relPath": "src/php/string/replaceTokens.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.string.simplifySpecialChars": {
+                "name": "simplifySpecialChars",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a string and replace all the special chars like \"é\", \"à\", etc...\nwith their simple version like \"a\", \"e\", etc...",
+                "namespace": "@coffeekraken.sugar.php.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "Sugar\\string\\simplifySpecialChars('Hellô world'); // => Hello world"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "simplifySpecialChars.php",
+                "extension": "php",
+                "relPath": "src/php/string/simplifySpecialChars.php",
                 "children": {}
             },
             "@coffeekraken.sugar.scss.core.mixin.setup": {
@@ -6009,7 +6273,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import hsl2rgba from '@coffeekraken/sugar/js/color/hsl2rgba';\nhsl2rgba(10,20,30);"
+                        "code": "import hsl2rgba from '@coffeekraken/sugar/js/color/hsl2rgba';\nhsla2rgba(10,20,30);"
                     }
                 ],
                 "since": "2.0.0",
@@ -6018,50 +6282,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "hsl2rgba.ts",
+                "filename": "hsla2rgba.ts",
                 "extension": "ts",
-                "relPath": "src/shared/color/hsl2rgba.ts",
+                "relPath": "src/shared/color/hsla2rgba.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.color.hsv2rgba": {
-                "name": "hsv2rgba",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "HSV to RGBA",
-                "namespace": "@coffeekraken.sugar.js.color",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import hsv2rgba from '@coffeekraken/sugar/js/color/hsv2rgba';\nhsv2rgba(10,20,30);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "hsv2rgba.ts",
-                "extension": "ts",
-                "relPath": "src/shared/color/hsv2rgba.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.color.parseHsl": {
-                "name": "parseHsl",
+            "@coffeekraken.sugar.js.color.parseHsla": {
+                "name": "parseHsla",
                 "type": "Function",
                 "platform": [
                     {
@@ -6092,46 +6319,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "parseHsl.ts",
+                "filename": "parseHsla.ts",
                 "extension": "ts",
-                "relPath": "src/shared/color/parseHsl.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.color.parseHsv": {
-                "name": "parseHsv",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "Parse HSV",
-                "namespace": "@coffeekraken.sugar.js.color",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import parseHsv from '@coffeekraken/sugar/js/color/parseHsv';\nparseHsv('hsv(10,10,10)');"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "parseHsv.ts",
-                "extension": "ts",
-                "relPath": "src/shared/color/parseHsv.ts",
+                "relPath": "src/shared/color/parseHsla.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.parseRgba": {
@@ -6208,8 +6398,8 @@
                 "relPath": "src/shared/color/rgba2hex.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.color.rgba2hsl": {
-                "name": "rgba2hsl",
+            "@coffeekraken.sugar.js.color.rgba2hsla": {
+                "name": "rgba2hsla",
                 "type": "Function",
                 "platform": [
                     {
@@ -6231,7 +6421,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import rgba2hsl from '@coffeekraken/sugar/js/color/rgba2hsl';\nrgba2hsl(10,20,50,10);"
+                        "code": "import rgba2hsla from '@coffeekraken/sugar/js/color/rgba2hsla';\nrgba2hsla(10,20,50,10);"
                     }
                 ],
                 "since": "2.0.0",
@@ -6240,559 +6430,10 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "rgba2hsl.ts",
+                "filename": "rgba2hsla.ts",
                 "extension": "ts",
-                "relPath": "src/shared/color/rgba2hsl.ts",
+                "relPath": "src/shared/color/rgba2hsla.ts",
                 "children": {}
-            },
-            "@coffeekraken.sugar.js.color.rgba2hsv": {
-                "name": "rgba2hsv",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "RGBA to HSV",
-                "namespace": "@coffeekraken.sugar.js.color",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import rgba2hsv from '@coffeekraken/sugar/js/color/rgba2hsv';\nrgba2hsv(10,20,50,10);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "rgba2hsv.ts",
-                "extension": "ts",
-                "relPath": "src/shared/color/rgba2hsv.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.color.sColor": {
-                "name": "SColor",
-                "type": "Class",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- opacity\n- darken\n- lighten\n- desaturate\n- saturate\n- spin (change hue)\n- transparentize\n- alpha\n- grayscale\n- Conversions\n- rgba\n- hsl\n- hsv\n- hex\n- Print out formats\n- toRgbaString\n- toHslString\n- toHsvString\n- toHexString\n- toString(format = null)",
-                "namespace": "@coffeekraken.sugar.js.color",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SColor from '@coffeekraken/sugar/js/classes/SColor'\nlet myColor = new SColor(#ff0000);\n// get a lighter color\nlet ligtherColor = myColor.lighten(20);\n// print the color to rgba\nconsole.log(lighterColor.toRgbaString());"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SColor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/color/SColor.ts",
-                "children": {
-                    "colors": {
-                        "name": "colors",
-                        "type": "Object",
-                        "description": "Static color names map",
-                        "static": true,
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "getColor": {
-                        "name": "getColor",
-                        "type": "Function",
-                        "description": "This method take as parameter the passed color to the constructor and has to return the\nactual real color like color from the static colors listed in the SColor class or maybe\nfrom the Sugar configured colors"
-                    },
-                    "toHex": {
-                        "name": "toHex",
-                        "type": "Function",
-                        "description": "To hex",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toHex();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toHsl": {
-                        "name": "toHsl",
-                        "type": "Function",
-                        "description": "To hsl",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toHsl();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toHsv": {
-                        "name": "toHsv",
-                        "type": "Function",
-                        "description": "To hsv",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toHsv();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toRgba": {
-                        "name": "toRgba",
-                        "type": "Function",
-                        "description": "To rgba",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toRgba();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "r": {
-                        "name": "r",
-                        "type": "Number",
-                        "description": "Get/set the red value",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.r;\nmyColor.r = 128;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "g": {
-                        "name": "g",
-                        "type": "Number",
-                        "description": "Get/set the green value",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.g;\nmyColor.g = 20;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "b": {
-                        "name": "b",
-                        "type": "Number",
-                        "description": "Get/set the blue value",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.b;\nmyColor.b = 30;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "a": {
-                        "name": "a",
-                        "type": "Number",
-                        "description": "Get/set the alpha value",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.a;\nmyColor.a = 20;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "l": {
-                        "name": "l",
-                        "type": "Number",
-                        "description": "The luminence value",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.l;\nmyColor.l = 10;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "s": {
-                        "name": "s",
-                        "type": "Number",
-                        "description": "The saturation value",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.s;\nmyColor.s = 20;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "v": {
-                        "name": "v",
-                        "type": "Number",
-                        "description": "The value of the HSV format",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.v;\nmyColor.v = 20;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "h": {
-                        "name": "h",
-                        "type": "Number",
-                        "description": "Get/set the hue",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.h;\nmyColor.h = 30;"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "reset": {
-                        "name": "reset",
-                        "type": "Function",
-                        "description": "Reset to the original color",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.reset();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "desaturate": {
-                        "name": "desaturate",
-                        "type": "Function",
-                        "description": "Desaturate",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.desaturate(20);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "saturate": {
-                        "name": "saturate",
-                        "type": "Function",
-                        "description": "Saturate",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.saturate(20);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "grayscale": {
-                        "name": "grayscale",
-                        "type": "Function",
-                        "description": "Return a new SColor instance of the color to grayscale",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.grayscale();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "spin": {
-                        "name": "spin",
-                        "type": "Function",
-                        "description": "Spin the hue on the passed value (max 360)",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.spin(230);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "transparentize": {
-                        "name": "transparentize",
-                        "type": "Function",
-                        "description": "Transparentize",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.transparenize(30);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "alpha": {
-                        "name": "alpha",
-                        "type": "Function",
-                        "description": "Set the alpha",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.alpha(10);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "opacity": {
-                        "name": "opacity",
-                        "type": "Function",
-                        "description": "Set the opacity (alias for alpha)",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.opacity(20);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "opacify": {
-                        "name": "opacify",
-                        "type": "Function",
-                        "description": "Opacify",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.opacify(18);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "darken": {
-                        "name": "darken",
-                        "type": "Function",
-                        "description": "Darken",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.darken(20);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "lighten": {
-                        "name": "lighten",
-                        "type": "Function",
-                        "description": "Lighten",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.lighten(20);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toHexString": {
-                        "name": "toHexString",
-                        "type": "Function",
-                        "description": "To hex string",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toHexString();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toRgbaString": {
-                        "name": "toRgbaString",
-                        "type": "Function",
-                        "description": "To rgba string",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toRgbaString();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toHslString": {
-                        "name": "toHslString",
-                        "type": "Function",
-                        "description": "To hsl string",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toHslString();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toHsvString": {
-                        "name": "toHsvString",
-                        "type": "Function",
-                        "description": "To hsv string",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toHsvString();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toString": {
-                        "name": "toString",
-                        "type": "Function",
-                        "description": "To string",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.toString();"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    }
-                }
             },
             "@coffeekraken.sugar.js.console.parseHtml": {
                 "name": "parseHtml",
@@ -7871,7 +7512,7 @@
                         "name": "parseCode",
                         "type": "Function",
                         "description": "This function simply parse the passed code and return an array of all the\nfounded es6 imports",
-                        "static": true,
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -8022,6 +7663,43 @@
                 "filename": "getArgsNames.ts",
                 "extension": "ts",
                 "relPath": "src/shared/function/getArgsNames.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.function.memoize": {
+                "name": "memoize",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This function can be used to memorize a function call result in order to save memory.\nThis is just a \"proxy\" of the \"memoizee\" package.",
+                "namespace": "@coffeekraken.sugar.shared.function",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import memoize from '@coffeekraken/sugar/shared/function/memoize';\nconst fn = memoize(function(text) => {\n   return `Hello ${text}`;\n});\nconst result = fn('world'); // first execution. no cache\nconst result1 = fn('plop'); // first execution with this argument, no cache\nconst result2 = fn('world'); // taken from cache"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "memoize.ts",
+                "extension": "ts",
+                "relPath": "src/shared/function/memoize.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.function.setRecursiveTimeout": {
@@ -9726,6 +9404,43 @@
                 "relPath": "src/shared/iterable/map.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.shared.json.sanitizeJsonString": {
+                "name": "sanitizeJsonString",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This function simple take a json string and ensure that it will be valid\nto pass through ```JSON.parse``` function for example.\nIf your string is really messy, if may not work. It take care for things like double quotes in double quotes, etc...",
+                "namespace": "@coffeekraken.sugar.shared.json",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonString';\n__sanitizeJsonString('{\"something\": \"\"cool\"\"}'); // => '{\"something\":\"\\\"cool\\\"\"}'"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "sanitizeJsonString.ts",
+                "extension": "ts",
+                "relPath": "src/shared/json/sanitizeJsonString.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.json.stringify": {
                 "name": "stringify",
                 "type": "Function",
@@ -9874,6 +9589,43 @@
                 "relPath": "src/shared/number/pad.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.shared.object.applyScope": {
+                "name": "applyScope",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to apply a certain scope on the passed object.\nA scope can be for example the environment your object lives in like \"production\",\n\"development\", etc...\nIt can be literally all you want as soon as your object follow the property syntax to define\nscoped values described in the example bellow.",
+                "namespace": "@coffeekraken.sugar.shared.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import applyScope from '@coffeekraken/sugar/shared/object/applyScope';\nconst myObject = {\n     myValue: 'Hello',\n     '@dev': {\n         myValue: 'World'\n     },\n     'something@prod': {\n         plop: 'yop'\n     }\n};\n\n// apply the \"env\" scope with the value of \"dev\"\napplyScope(myObject, ['dev']);\n// {\n//   myValue: 'World'\n// }\n\n// apply two scopes\napplyScope(myObject, ['prod']);\n// {\n//   myValue: 'Hello',\n//   something: {\n//       plop: 'yop'\n//   }\n// }\n\n// apply a scope with multiple values\napplyScope(myObject, ['dev','prod']);\n// {\n//   myValue: 'World',\n//   something: {\n//       plop: 'yop'\n//   }\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "applyScope.ts",
+                "extension": "ts",
+                "relPath": "src/shared/object/applyScope.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.object.clone": {
                 "name": "clone",
                 "type": "Function",
@@ -10020,6 +9772,43 @@
                 "filename": "deepAssign.ts",
                 "extension": "ts",
                 "relPath": "src/shared/object/deepAssign.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.object.deepFilter": {
+                "name": "deepFilter",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Allow to filter an object using a function and this through all of the object structure. It works the same as the filter method on the Array object type.\nThe passed filter function will have as parameter each object properties and must return true or false depending if you want the\npassed property in the filtered object",
+                "namespace": "@coffeekraken.sugar.js.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import deepFilter from '@coffeekraken/sugar/js/object/deepFilter';\ndeepFilter({\n   coco: 'hello',\n   plop: true,\n   sub: {\n     property: 'world'\n   }\n}, ({key, item}) => typeof item === 'string');\n// { coco: 'hello' }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "deepFilter.ts",
+                "extension": "ts",
+                "relPath": "src/shared/object/deepFilter.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.deepize": {
@@ -11069,6 +10858,43 @@
                 "relPath": "src/shared/string/crop.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.string.dashCase": {
+                "name": "dashCase",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "dashCase a string",
+                "namespace": "@coffeekraken.sugar.js.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import dashCase from '@coffeekraken/sugar/js/string/dashCase';\ndashCase('hello world'); // => hello-world"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "dashCase.ts",
+                "extension": "ts",
+                "relPath": "src/shared/string/dashCase.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.string.dedupe": {
                 "name": "dedupe",
                 "type": "Function",
@@ -11141,6 +10967,43 @@
                 "filename": "extractSame.ts",
                 "extension": "ts",
                 "relPath": "src/shared/string/extractSame.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.string.idCompliant": {
+                "name": "idCompliant",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a string and return a version of it that you can safely use\nin html id for example. It replace spaces with '-' as well as all the special characters\nwith their simple version like \"à\" will be replaces by \"a\"",
+                "namespace": "@coffeekraken.sugar.shared.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "import __idCompliant from '@coffeekraken/sugar/shared/string/idCompliant';\n__idCompliant('Hello world'); // => hello-world"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "idCompliant.ts",
+                "extension": "ts",
+                "relPath": "src/shared/string/idCompliant.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.includes": {
@@ -11252,6 +11115,43 @@
                 "filename": "ltrim.ts",
                 "extension": "ts",
                 "relPath": "src/shared/string/ltrim.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.string.namespaceCompliant": {
+                "name": "namespaceCompliant",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a string and return a version of it that you can safely use\nas a namespace with just dots and non special characters.",
+                "namespace": "@coffeekraken.sugar.shared.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';\n__namespaceCompliant('Hello world'); // => hello-world"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "namespaceCompliant.ts",
+                "extension": "ts",
+                "relPath": "src/shared/string/namespaceCompliant.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.paramCase": {
@@ -11473,6 +11373,43 @@
                 "filename": "simplify.ts",
                 "extension": "ts",
                 "relPath": "src/shared/string/simplify.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.string.simplifySpecialChars": {
+                "name": "simplifySpecialChars",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a string and replace all the special chars like \"é\", \"à\", etc...\nwith their simple version like \"a\", \"e\", etc...",
+                "namespace": "@coffeekraken.sugar.shared.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "Sugar\\string\\simplifySpecialChars('Hellô world'); // => Hello world"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "simplifySpecialChars.ts",
+                "extension": "ts",
+                "relPath": "src/shared/string/simplifySpecialChars.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.splitEvery": {
@@ -11806,6 +11743,43 @@
                 "filename": "upperFirst.ts",
                 "extension": "ts",
                 "relPath": "src/shared/string/upperFirst.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.string.urlCompliant": {
+                "name": "urlCompliant",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a string and return a version of it that you can safely use\nin url for example. It replace spaces with '-' as well as all the special characters\nwith their simple version like \"à\" will be replaces by \"a\"",
+                "namespace": "@coffeekraken.sugar.shared.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "import __urlCompliant from '@coffeekraken/sugar/shared/string/urlCompliant';\n__urlCompliant('Hello world'); // => hello-world"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "urlCompliant.ts",
+                "extension": "ts",
+                "relPath": "src/shared/string/urlCompliant.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.sugar.sanitizeSugarJson": {
@@ -12681,6 +12655,38 @@
                 "filename": "whenAttribute.ts",
                 "extension": "ts",
                 "relPath": "src/js/dom/detect/whenAttribute.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.detect.whenInteract": {
+                "name": "whenInteract",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "Wait that an interaction is made with the passed element like \"focus\", \"focusIn\", \"mouseover\", etc...",
+                "namespace": "@coffeekraken.sugar.js.dom.detect",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract'\nawait whenInteract(myCoolElement, {\n focus: true,\n touch: false,\n mouse: true\n});"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "whenInteract.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/detect/whenInteract.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenInViewport": {
@@ -15308,7 +15314,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/color/class/_color.scss"
             },
-            "@coffeekraken.sugar.scss.colo.class.#{$cls}": {
+            "@coffeekraken.sugar.scss.colo.class.-cls": {
                 "name": "#{$cls}",
                 "type": "Classname",
                 "description": "Specify the color to **#{$name}**",
@@ -15329,7 +15335,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/color/class/_color.scss"
             },
-            "@coffeekraken.sugar.scss.color.class.#{$cls}": {
+            "@coffeekraken.sugar.scss.color.class.-cls": {
                 "name": "#{$cls}",
                 "type": "class",
                 "description": "Specify the background color to **#{$name}--#{$mod-name}**",
@@ -15593,6 +15599,24 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
+                "filename": "_docblock-colors.scss",
+                "extension": "scss",
+                "relPath": "src/scss/color/mixin/_docblock-colors.scss"
+            },
+            "@coffeekraken.sugar.namespace.-name": {
+                "name": "#{$name}",
+                "type": "color",
+                "description": "This is the ```#{$name}``` registered color",
+                "namespace": "@coffeekraken.sugar.namespace",
+                "filename": "_docblock-colors.scss",
+                "extension": "scss",
+                "relPath": "src/scss/color/mixin/_docblock-colors.scss"
+            },
+            "@coffeekraken.sugar.namespace.-name-modName": {
+                "name": "#{$name}--#{$mod-name}",
+                "type": "color",
+                "description": "This is the ```#{$name}--${$mod-name}``` registered color",
+                "namespace": "@coffeekraken.sugar.namespace",
                 "filename": "_docblock-colors.scss",
                 "extension": "scss",
                 "relPath": "src/scss/color/mixin/_docblock-colors.scss",
@@ -15964,7 +15988,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/filter/class/_filter.scss"
             },
-            "@coffeekraken.sugar.scss.filter.class.#{sel(fi-#{$name})}": {
+            "@coffeekraken.sugar.scss.filter.class.-sel-fi-name": {
                 "name": "#{sel(fi-#{$name})}",
                 "type": "Classname",
                 "description": "Apply the filter **#{$name}**",
@@ -16065,7 +16089,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/font/class/_font.scss"
             },
-            "@coffeekraken.sugar.scss.font.class.#{sel(f-#{$name})}": {
+            "@coffeekraken.sugar.scss.font.class.-sel-f-name": {
                 "name": "#{sel(f-#{$name})}",
                 "type": "Classname",
                 "description": "Apply the font size **#{$name}** (**#{$size}**)",
@@ -16150,7 +16174,8 @@
                 "relPath": "src/scss/font/mixin/_font-face.scss",
                 "children": {
                     "#{$fontFamily}": {
-                        "name": "#{$font-family}"
+                        "name": "#{$font-family}",
+                        "styleguide": "Fonts / Faces"
                     }
                 }
             },
@@ -16213,7 +16238,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_block.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(blockCenter)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-blockCenter": {
                 "name": "#{sel(block-center)}",
                 "type": "class",
                 "description": "Set the element to as ```display:block``` and center it",
@@ -16251,7 +16276,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_border.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{$cls}": {
+            "@coffeekraken.sugar.scss.helper.class.-cls": {
                 "name": "#{$cls}",
                 "type": "class",
                 "description": "Remove the y (top and bottom) borders",
@@ -16289,7 +16314,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clear.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearLeft)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearLeft": {
                 "name": "#{sel(clear-left)}",
                 "type": "class",
                 "description": "Clear the left float on the element",
@@ -16310,7 +16335,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clear.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearRight)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearRight": {
                 "name": "#{sel(clear-right)}",
                 "type": "class",
                 "description": "Clear the right float on the element",
@@ -16331,7 +16356,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clear.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clear)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clear": {
                 "name": "#{sel(clear)}",
                 "type": "class",
                 "description": "Clear both float on the element",
@@ -16369,7 +16394,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clearfix.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearfix)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearfix": {
                 "name": "#{sel(clearfix)}",
                 "type": "class",
                 "description": "Apply the micro clearfix on the element",
@@ -16390,7 +16415,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clearfix.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearfixFloat)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearfixFloat": {
                 "name": "#{sel(clearfix-float)}",
                 "type": "class",
                 "description": "Apply the float clearfix on the element",
@@ -16411,7 +16436,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clearfix.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearfixMicro)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearfixMicro": {
                 "name": "#{sel(clearfix-micro)}",
                 "type": "class",
                 "description": "Apply the micro clearfix on the element",
@@ -16432,7 +16457,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clearfix.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearfixOverflow)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearfixOverflow": {
                 "name": "#{sel(clearfix-overflow)}",
                 "type": "class",
                 "description": "Apply the overflow clearfix on the element",
@@ -16453,7 +16478,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_clearfix.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearfixFacebook)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearfixFacebook": {
                 "name": "#{sel(clearfix-facebook)}",
                 "type": "class",
                 "description": "Apply the facebook clearfix on the element",
@@ -16491,7 +16516,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(block)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-block": {
                 "name": "#{sel(block)}",
                 "type": "class",
                 "description": "Display the element as ```block```",
@@ -16512,7 +16537,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(inline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-inline": {
                 "name": "#{sel(inline)}",
                 "type": "class",
                 "description": "Display the element as ```inline```",
@@ -16533,7 +16558,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(inlineBlock)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-inlineBlock": {
                 "name": "#{sel(inline-block)}",
                 "type": "class",
                 "description": "Display the element as ```inline-block```",
@@ -16554,7 +16579,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(show)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-show": {
                 "name": "#{sel(show)}",
                 "type": "class",
                 "description": "Display the element as ```block```",
@@ -16575,7 +16600,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(showInline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-showInline": {
                 "name": "#{sel(show-inline)}",
                 "type": "class",
                 "description": "Display the element as ```inline-block```",
@@ -16596,7 +16621,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(hidden)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-hidden": {
                 "name": "#{sel(hidden)}",
                 "type": "class",
                 "description": "Hide the element by setting the display to ```none```",
@@ -16617,7 +16642,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(hide)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-hide": {
                 "name": "#{sel(hide)}",
                 "type": "class",
                 "description": "Hide the element by setting the display to ```none```",
@@ -16638,7 +16663,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(visible)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-visible": {
                 "name": "#{sel(visible)}",
                 "type": "class",
                 "description": "Display the element by setting the visibility to ```visible```",
@@ -16659,7 +16684,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(invisible)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-invisible": {
                 "name": "#{sel(invisible)}",
                 "type": "class",
                 "description": "Display the element by setting the visibility to ```hidden```",
@@ -16680,7 +16705,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_display.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(visuallyHidden)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-visuallyHidden": {
                 "name": "#{sel(visually-hidden)}",
                 "type": "class",
                 "description": "Hide the element from display but not for SEO.\nThis class use some tricks to make the element dissapear without using some ```display:none;```, etc...",
@@ -16718,7 +16743,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flex)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flex": {
                 "name": "#{sel(flex)}",
                 "type": "class",
                 "description": "Apply the display flex styling to the element",
@@ -16739,7 +16764,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexInline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexInline": {
                 "name": "#{sel(flex-inline)}",
                 "type": "class",
                 "description": "Apply the display flex-inline styling to the element",
@@ -16760,7 +16785,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexJustifyStart)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexJustifyStart": {
                 "name": "#{sel(flex-justify-start)}",
                 "type": "class",
                 "description": "Apply the property ```justify-content``` to **start**",
@@ -16781,7 +16806,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexJustifyEnd)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexJustifyEnd": {
                 "name": "#{sel(flex-justify-end)}",
                 "type": "class",
                 "description": "Apply the property ```justify-content``` to **end**",
@@ -16802,7 +16827,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexJustifyCenter)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexJustifyCenter": {
                 "name": "#{sel(flex-justify-center)}",
                 "type": "class",
                 "description": "Apply the property ```justify-content``` to **center**",
@@ -16823,7 +16848,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexJustifyBetween)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexJustifyBetween": {
                 "name": "#{sel(flex-justify-between)}",
                 "type": "class",
                 "description": "Apply the property ```justify-content``` to **space-between**",
@@ -16844,7 +16869,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexJustifyAround)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexJustifyAround": {
                 "name": "#{sel(flex-justify-around)}",
                 "type": "class",
                 "description": "Apply the property ```justify-content``` to **space-around**",
@@ -16865,7 +16890,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignStart)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignStart": {
                 "name": "#{sel(flex-align-start)}",
                 "type": "class",
                 "description": "Apply the property ```align-items``` to **flex-start**",
@@ -16886,7 +16911,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignEnd)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignEnd": {
                 "name": "#{sel(flex-align-end)}",
                 "type": "class",
                 "description": "Apply the property ```align-items``` to **flex-end**",
@@ -16907,7 +16932,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignCenter)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignCenter": {
                 "name": "#{sel(flex-align-center)}",
                 "type": "class",
                 "description": "Apply the property ```align-items``` to **center**",
@@ -16928,7 +16953,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignBaseline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignBaseline": {
                 "name": "#{sel(flex-align-baseline)}",
                 "type": "class",
                 "description": "Apply the property ```align-items``` to **baseline**",
@@ -16949,7 +16974,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignStretch)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignStretch": {
                 "name": "#{sel(flex-align-stretch)}",
                 "type": "class",
                 "description": "Apply the property ```align-items``` to **stretch**",
@@ -16970,7 +16995,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignSelfStart)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignSelfStart": {
                 "name": "#{sel(flex-align-self-start)}",
                 "type": "class",
                 "description": "Apply the property ```align-self``` to **flex-start**",
@@ -16991,7 +17016,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignSelfEnd)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignSelfEnd": {
                 "name": "#{sel(flex-align-self-end)}",
                 "type": "class",
                 "description": "Apply the property ```align-self``` to **flex-end**",
@@ -17012,7 +17037,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignSelfCenter)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignSelfCenter": {
                 "name": "#{sel(flex-align-self-center)}",
                 "type": "class",
                 "description": "Apply the property ```align-self``` to **flex-center**",
@@ -17033,7 +17058,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignSelfBaseline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignSelfBaseline": {
                 "name": "#{sel(flex-align-self-baseline)}",
                 "type": "class",
                 "description": "Apply the property ```align-self``` to **flex-baseline**",
@@ -17054,7 +17079,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexAlignSelfStretch)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexAlignSelfStretch": {
                 "name": "#{sel(flex-align-self-stretch)}",
                 "type": "class",
                 "description": "Apply the property ```align-self``` to **flex-stretch**",
@@ -17075,7 +17100,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexNowrap)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexNowrap": {
                 "name": "#{sel(flex-nowrap)}",
                 "type": "class",
                 "description": "Apply the ```flex-wrap``` property to **nowrap**",
@@ -17096,7 +17121,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexWrap)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexWrap": {
                 "name": "#{sel(flex-wrap)}",
                 "type": "class",
                 "description": "Apply the ```flex-wrap``` property to **wrap**",
@@ -17117,7 +17142,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexWrapReverse)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexWrapReverse": {
                 "name": "#{sel(flex-wrap-reverse)}",
                 "type": "class",
                 "description": "Apply the ```flex-wrap``` property to **wrap-reverse**",
@@ -17138,7 +17163,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_flex.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(flexOrder-#{i})}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-flexOrder-i": {
                 "name": "#{sel(flex-order-#{i})}",
                 "type": "class",
                 "description": "Set the order on a specific flex item.\nYou will have <primary>#{$ordersCount}</primary> available. This can be\nchanged by updating the *config.scss.helpers.flex.order-count** configuration.",
@@ -17176,7 +17201,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_link.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(linkStretched": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-linkStretched": {
                 "name": "#{sel(link-stretched",
                 "type": "class",
                 "description": "Make a link become the size of it's parent (absolute, relative)\nbut only using the :after pseudo class so visually it will stay the same...",
@@ -17214,7 +17239,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_margin.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{$cname}": {
+            "@coffeekraken.sugar.scss.core.class.-cname": {
                 "name": "#{$cname}",
                 "type": "Classname",
                 "description": "Set the **top and bottom** padding to the **#{$name}**",
@@ -17235,7 +17260,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noMar)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noMar": {
                 "name": "#{sel(no-mar)}",
                 "type": "class",
                 "description": "Reset all margins",
@@ -17256,7 +17281,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_margin.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noMarT)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noMarT": {
                 "name": "#{sel(no-mar-t)}",
                 "type": "class",
                 "description": "Reset **top** margin",
@@ -17277,7 +17302,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_margin.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noMarR)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noMarR": {
                 "name": "#{sel(no-mar-r)}",
                 "type": "class",
                 "description": "Reset **right** margin",
@@ -17298,7 +17323,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_margin.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noMarB)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noMarB": {
                 "name": "#{sel(no-mar-b)}",
                 "type": "class",
                 "description": "Reset **bottom** margin",
@@ -17319,7 +17344,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_margin.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noMarL)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noMarL": {
                 "name": "#{sel(no-mar-l)}",
                 "type": "class",
                 "description": "Reset **left** margin",
@@ -17340,7 +17365,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_margin.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noMarX)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noMarX": {
                 "name": "#{sel(no-mar-x)}",
                 "type": "class",
                 "description": "Reset **left** and **right** margins",
@@ -17361,7 +17386,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_margin.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noMarY)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noMarY": {
                 "name": "#{sel(no-mar-y)}",
                 "type": "class",
                 "description": "Reset **top** and **bottom** margins",
@@ -17399,7 +17424,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_media-object.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(mediaObject)} #{sel(mediaObject-Center)} #{sel(mediaObject_content)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-mediaObject-sel-mediaObject-Center- -sel-mediaObject_content": {
                 "name": "#{sel(media-object)} #{sel(media-object--center)} #{sel(media-object__content)}",
                 "type": "class",
                 "description": "Famous media object class",
@@ -17437,7 +17462,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_overflow.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(overflowHidden)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-overflowHidden": {
                 "name": "#{sel(overflow-hidden)}",
                 "type": "Classname",
                 "description": "Set the overflow to hidden",
@@ -17458,7 +17483,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_overflow.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(overflowAuto)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-overflowAuto": {
                 "name": "#{sel(overflow-auto)}",
                 "type": "Classname",
                 "description": "Set the overflow to auto",
@@ -17496,7 +17521,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noPad)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noPad": {
                 "name": "#{sel(no-pad)}",
                 "type": "Classname",
                 "description": "Reset **all** paddings",
@@ -17517,7 +17542,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noPadT)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noPadT": {
                 "name": "#{sel(no-pad-t)}",
                 "type": "Classname",
                 "description": "Reset **top** padding",
@@ -17538,7 +17563,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noPadR)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noPadR": {
                 "name": "#{sel(no-pad-r)}",
                 "type": "Classname",
                 "description": "Reset **right** padding",
@@ -17559,7 +17584,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noPadB)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noPadB": {
                 "name": "#{sel(no-pad-b)}",
                 "type": "class",
                 "description": "Reset **bottom** padding",
@@ -17580,7 +17605,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noPadL)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noPadL": {
                 "name": "#{sel(no-pad-l)}",
                 "type": "class",
                 "description": "Reset **left** padding",
@@ -17601,7 +17626,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noPadX)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noPadX": {
                 "name": "#{sel(no-pad-x)}",
                 "type": "class",
                 "description": "Reset **left** and **right** paddings",
@@ -17622,7 +17647,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_padding.scss"
             },
-            "@coffeekraken.sugar.scss.core.class.#{sel(noPadY)}": {
+            "@coffeekraken.sugar.scss.core.class.-sel-noPadY": {
                 "name": "#{sel(no-pad-y)}",
                 "type": "class",
                 "description": "Reset **top** and **bottom** paddings",
@@ -17660,7 +17685,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_pointer.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(pointerEventsNone)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-pointerEventsNone": {
                 "name": "#{sel(pointer-events-none)}",
                 "type": "Classname",
                 "description": "Disable any pointer events",
@@ -17681,7 +17706,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_pointer.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(pointerEventsAll)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-pointerEventsAll": {
                 "name": "#{sel(pointer-events-all)}",
                 "type": "Classname",
                 "description": "Enable any pointer events",
@@ -17719,7 +17744,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_position.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(relative)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-relative": {
                 "name": "#{sel(relative)}",
                 "type": "Classname",
                 "description": "Set an element position as ```relative```",
@@ -17740,7 +17765,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_position.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absolute)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absolute": {
                 "name": "#{sel(absolute)}",
                 "type": "Classname",
                 "description": "Set an element position as ```absolute```",
@@ -17761,7 +17786,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_position.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(fixed)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-fixed": {
                 "name": "#{sel(fixed)}",
                 "type": "Classname",
                 "description": "Set an element position as ```fixed```",
@@ -17782,7 +17807,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_position.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(fixedTop)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-fixedTop": {
                 "name": "#{sel(fixed-top)}",
                 "type": "Classname",
                 "description": "Set an element position as ```fixed``` top",
@@ -17803,7 +17828,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_position.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(fixedBottom)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-fixedBottom": {
                 "name": "#{sel(fixed-bottom)}",
                 "type": "Classname",
                 "description": "Set an element position as ```fixed``` bottom",
@@ -17824,7 +17849,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_position.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(sticky)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-sticky": {
                 "name": "#{sel(sticky)}",
                 "type": "Classname",
                 "description": "Set an element position as ```sticky```",
@@ -17845,7 +17870,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_position.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(stickyTop)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-stickyTop": {
                 "name": "#{sel(sticky-top)}",
                 "type": "Classname",
                 "description": "Set an element position as ```sticky``` top",
@@ -17883,7 +17908,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_pull.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(pullLeft)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-pullLeft": {
                 "name": "#{sel(pull-left)}",
                 "type": "Classname",
                 "description": "Allows you to pull an element to the left side",
@@ -17904,7 +17929,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_pull.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(pullRight)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-pullRight": {
                 "name": "#{sel(pull-right)}",
                 "type": "Classname",
                 "description": "Allows you to pull an element to the right side",
@@ -17925,7 +17950,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_pull.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(pullNone)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-pullNone": {
                 "name": "#{sel(pull-none)}",
                 "type": "Classname",
                 "description": "Reset the pull (float) styling on the element",
@@ -17963,7 +17988,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_ratio.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{$cname}": {
+            "@coffeekraken.sugar.scss.helper.class.-cname": {
                 "name": "#{$cname}",
                 "type": "Classname",
                 "description": "Set the **ratio** to the **#{$name}**",
@@ -18001,7 +18026,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_screen-reader.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(screenReaderOnly)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-screenReaderOnly": {
                 "name": "#{sel(screen-reader-only)}",
                 "type": "Classname",
                 "description": "Display the element only on screen readers",
@@ -18039,7 +18064,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absCover)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absCover": {
                 "name": "#{sel(abs-cover)}",
                 "type": "Classname",
                 "description": "Set a size that will cover the entire parent surface by positionning it in absolute",
@@ -18060,7 +18085,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absCover-Top)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absCover-Top": {
                 "name": "#{sel(abs-cover--top)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-cover\" content to the top",
@@ -18081,7 +18106,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absCover-Middle)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absCover-Middle": {
                 "name": "#{sel(abs-cover--middle)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-cover\" content to the middle",
@@ -18102,7 +18127,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absCover-Bottom)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absCover-Bottom": {
                 "name": "#{sel(abs-cover--bottom)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-cover\" content to the bottom",
@@ -18123,7 +18148,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absCover-Left)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absCover-Left": {
                 "name": "#{sel(abs-cover--left)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-cover\" content to the left",
@@ -18144,7 +18169,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absCover-Center)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absCover-Center": {
                 "name": "#{sel(abs-cover--center)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-cover\" content to the center",
@@ -18165,7 +18190,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absCover-Right)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absCover-Right": {
                 "name": "#{sel(abs-cover--right)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-cover\" content to the right",
@@ -18186,7 +18211,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absContain)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absContain": {
                 "name": "#{sel(abs-contain)}",
                 "type": "Classname",
                 "description": "Set a size that will contain the entire parent surface by positionning it in absolute",
@@ -18207,7 +18232,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absContain-Top)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absContain-Top": {
                 "name": "#{sel(abs-contain--top)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-contain\" content to the top",
@@ -18228,7 +18253,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absContain-Middle)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absContain-Middle": {
                 "name": "#{sel(abs-contain--middle)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-contain\" content to the middle",
@@ -18249,7 +18274,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absContain-Bottom)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absContain-Bottom": {
                 "name": "#{sel(abs-contain--bottom)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-contain\" content to the bottom",
@@ -18270,7 +18295,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absContain-Left)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absContain-Left": {
                 "name": "#{sel(abs-contain--left)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-contain\" content to the left",
@@ -18291,7 +18316,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absContain-Center)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absContain-Center": {
                 "name": "#{sel(abs-contain--center)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-contain\" content to the center",
@@ -18312,7 +18337,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absContain-Right)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absContain-Right": {
                 "name": "#{sel(abs-contain--right)}",
                 "type": "Classname",
                 "description": "This will align an \"abs-contain\" content to the right",
@@ -18333,7 +18358,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_size.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(absFit)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-absFit": {
                 "name": "#{sel(abs-fit)}",
                 "type": "Classname",
                 "description": "Set a size that will fit the entire parent surface by positionning it in absolute",
@@ -18371,7 +18396,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(t-#{$size})}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-t-size": {
                 "name": "#{sel(t-#{$size})}",
                 "type": "class",
                 "description": "Set the size **#{$size}** relative to the root element",
@@ -18392,7 +18417,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(t-#{$size}Rel)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-t-size-Rel": {
                 "name": "#{sel(t-#{$size}-rel)}",
                 "type": "Classname",
                 "description": "Set the size **#{$size}** relative to my parent",
@@ -18413,7 +18438,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tHidden)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tHidden": {
                 "name": "#{sel(t-hidden)}",
                 "type": "Classname",
                 "description": "Hide the text",
@@ -18434,7 +18459,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tTruncate)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tTruncate": {
                 "name": "#{sel(t-truncate)}",
                 "type": "Classname",
                 "description": "Truncate the text",
@@ -18455,7 +18480,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tLeft)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tLeft": {
                 "name": "#{sel(t-left)}",
                 "type": "Classname",
                 "description": "Align the text to the left",
@@ -18476,7 +18501,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tRight)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tRight": {
                 "name": "#{sel(t-right)}",
                 "type": "Classname",
                 "description": "Align the text to the right",
@@ -18497,7 +18522,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tCenter)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tCenter": {
                 "name": "#{sel(t-center)}",
                 "type": "Classname",
                 "description": "Align the text to the center",
@@ -18518,7 +18543,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tJustify)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tJustify": {
                 "name": "#{sel(t-justify)}",
                 "type": "Classname",
                 "description": "Make the text justified",
@@ -18539,7 +18564,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tLowercase)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tLowercase": {
                 "name": "#{sel(t-lowercase)}",
                 "type": "Classname",
                 "description": "Transform the text to lowercase",
@@ -18560,7 +18585,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tUppercase)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tUppercase": {
                 "name": "#{sel(t-uppercase)}",
                 "type": "Classname",
                 "description": "Transform the text to uppercase",
@@ -18581,7 +18606,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tCapitalize)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tCapitalize": {
                 "name": "#{sel(t-capitalize)}",
                 "type": "Classname",
                 "description": "Capizalize the words",
@@ -18602,7 +18627,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tBold)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tBold": {
                 "name": "#{sel(t-bold)}",
                 "type": "Classname",
                 "description": "Make the text bold",
@@ -18623,7 +18648,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tBolder)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tBolder": {
                 "name": "#{sel(t-bolder)}",
                 "type": "Classname",
                 "description": "Make the text bolder",
@@ -18644,7 +18669,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tNormal)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tNormal": {
                 "name": "#{sel(t-normal)}",
                 "type": "Classname",
                 "description": "Make the text normal",
@@ -18665,7 +18690,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tLight)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tLight": {
                 "name": "#{sel(t-light)}",
                 "type": "Classname",
                 "description": "Make the text light",
@@ -18686,7 +18711,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tLighter)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tLighter": {
                 "name": "#{sel(t-lighter)}",
                 "type": "Classname",
                 "description": "Make the text lighter",
@@ -18707,7 +18732,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tItalic)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tItalic": {
                 "name": "#{sel(t-italic)}",
                 "type": "Classname",
                 "description": "Make the text italic",
@@ -18728,7 +18753,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(t-#{$name})}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-t-name": {
                 "name": "#{sel(t-#{$name})}",
                 "type": "Classname",
                 "description": "Apply the font \"#{$name}\"",
@@ -18749,7 +18774,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tReset)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tReset": {
                 "name": "#{sel(t-reset)}",
                 "type": "Classname",
                 "description": "Reset the text (font-weight, family, color, etc...)",
@@ -18770,7 +18795,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tDecorationNone)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tDecorationNone": {
                 "name": "#{sel(t-decoration-none)}",
                 "type": "Classname",
                 "description": "Remove the text decoration",
@@ -18791,7 +18816,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tUnderline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tUnderline": {
                 "name": "#{sel(t-underline)}",
                 "type": "Classname",
                 "description": "Apply the decoration underline",
@@ -18812,7 +18837,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tLineThrough)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tLineThrough": {
                 "name": "#{sel(t-line-through)}",
                 "type": "Classname",
                 "description": "Apply the decoration line-through",
@@ -18833,7 +18858,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_text.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(tOverline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-tOverline": {
                 "name": "#{sel(t-overline)}",
                 "type": "Classname",
                 "description": "Apply the decoration overline",
@@ -18871,7 +18896,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_transmation.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(noTransition)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-noTransition": {
                 "name": "#{sel(no-transition)}",
                 "type": "Classname",
                 "description": "Disable the transitions **only on the element**",
@@ -18892,7 +18917,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_transmation.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearTransition)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearTransition": {
                 "name": "#{sel(clear-transition)}",
                 "type": "Classname",
                 "description": "Disable the transitions **on the element and all his children**",
@@ -18913,7 +18938,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_transmation.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(noAnimation)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-noAnimation": {
                 "name": "#{sel(no-animation)}",
                 "type": "Classname",
                 "description": "Disable the animations **only on the element**",
@@ -18934,7 +18959,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_transmation.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearAnimation)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearAnimation": {
                 "name": "#{sel(clear-animation)}",
                 "type": "Classname",
                 "description": "Disable the transitions **on the element and all his children**",
@@ -18955,7 +18980,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_transmation.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(noTransmation)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-noTransmation": {
                 "name": "#{sel(no-transmation)}",
                 "type": "Classname",
                 "description": "Disable the animations and transitions **only on the element**",
@@ -18976,7 +19001,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_transmation.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(clearTransmation)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-clearTransmation": {
                 "name": "#{sel(clear-transmation)}",
                 "type": "Classname",
                 "description": "Disable the animations and transitions **on the element and all his children**",
@@ -19014,7 +19039,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_user-select.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(userSelectNone)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-userSelectNone": {
                 "name": "#{sel(user-select-none)}",
                 "type": "Classname",
                 "description": "Disable the selection for this element",
@@ -19035,7 +19060,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_user-select.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(userSelectAll)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-userSelectAll": {
                 "name": "#{sel(user-select-all)}",
                 "type": "Classname",
                 "description": "Enable the selection for this element",
@@ -19056,7 +19081,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_user-select.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(userSelectText)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-userSelectText": {
                 "name": "#{sel(user-select-text)}",
                 "type": "Classname",
                 "description": "The text can be selected only",
@@ -19094,7 +19119,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_vertical-align.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class..#{sel(alignTop)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-alignTop": {
                 "name": ".#{sel(align-top)}",
                 "type": "Classname",
                 "description": "Align vertically top",
@@ -19115,7 +19140,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_vertical-align.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class..#{sel(alignBottom)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-alignBottom": {
                 "name": ".#{sel(align-bottom)}",
                 "type": "Classname",
                 "description": "Align vertically bottom",
@@ -19136,7 +19161,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_vertical-align.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class..#{sel(alignMiddle)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-alignMiddle": {
                 "name": ".#{sel(align-middle)}",
                 "type": "Classname",
                 "description": "Align vertically middle",
@@ -19157,7 +19182,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_vertical-align.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class..#{sel(alignBaseline)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-alignBaseline": {
                 "name": ".#{sel(align-baseline)}",
                 "type": "Classname",
                 "description": "Align vertically baseline",
@@ -19178,7 +19203,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_vertical-align.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(alignTextTop)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-alignTextTop": {
                 "name": "#{sel(align-text-top)}",
                 "type": "Classname",
                 "description": "Align vertically text-top",
@@ -19199,7 +19224,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/helper/class/_vertical-align.scss"
             },
-            "@coffeekraken.sugar.scss.helper.class.#{sel(alignTextBottom)}": {
+            "@coffeekraken.sugar.scss.helper.class.-sel-alignTextBottom": {
                 "name": "#{sel(align-text-bottom)}",
                 "type": "Classname",
                 "description": "Align vertically text-bottom",
@@ -20135,7 +20160,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/transition/class/_transition.scss"
             },
-            "@coffeekraken.sugar.scss.transition.class.#{sel(tr-#{$name})}": {
+            "@coffeekraken.sugar.scss.transition.class.-sel-tr-name": {
                 "name": "#{sel(tr-#{$name})}",
                 "type": "Classname",
                 "description": "Apply the transition **#{$name}**",
@@ -21240,7 +21265,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/component/button/class/_button.scss"
             },
-            "@coffeekraken.sugar.scss.component.button..#{sel($name)}, .#{sel(#{tfClass()})}Button": {
+            "@coffeekraken.sugar.scss.component.button.-sel-name-.-sel-tfClass-Button": {
                 "name": ".#{sel($name)}, .#{sel(#{tf-class()})} button",
                 "type": "Classname",
                 "description": "This class can be applied on any ```#{$name}``` component",
@@ -21249,6 +21274,48 @@
                     {
                         "language": "html",
                         "code": "<a class=\"#{sel($name)}\">I am a cool button</a>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "_button.scss",
+                "extension": "scss",
+                "relPath": "src/scss/component/button/class/_button.scss"
+            },
+            "@coffeekraken.sugar.scss.component.button.-size.-sel-name-size-.-sel-tfClass-Button.-sel-size": {
+                "name": ".#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} button.#{sel($size)}",
+                "type": "Classname",
+                "description": "This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```",
+                "namespace": "@coffeekraken.sugar.scss.component.button.-size",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"#{sel($name)} #{sel(#{$name}--#{$size})}\">I am a cool #{$size} button</a>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "_button.scss",
+                "extension": "scss",
+                "relPath": "src/scss/component/button/class/_button.scss"
+            },
+            "@coffeekraken.sugar.scss.component.button.-color.-sel-name-color-.-sel-tfClass-Button.-sel-color": {
+                "name": ".#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} button.#{sel($color)}",
+                "type": "Classname",
+                "description": "This class can be applied on any ```#{$name}``` component to specify his color to ```#{$color}```",
+                "namespace": "@coffeekraken.sugar.scss.component.button.-color",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<a class=\"#{sel($name)} #{sel(#{$name}--#{$color})}\">I am a cool #{$color} button</a>"
                     }
                 ],
                 "since": "2.0.0",
@@ -21278,7 +21345,7 @@
                 "relPath": "src/scss/component/button/mixin/_button.scss",
                 "children": {}
             },
-            "@coffeekraken.sugar.scss.core.class.icons.#{sel(icon-#{$name})}": {
+            "@coffeekraken.sugar.scss.core.class.icons.-sel-icon-name": {
                 "name": "#{sel(icon-#{$name})}",
                 "type": "class",
                 "description": "```.icon-#{$name}``` icon class",
@@ -21381,7 +21448,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/component/ol/class/_ol.scss"
             },
-            "@coffeekraken.sugar.scss.component..#{sel(#{$name}--#{$size})}": {
+            "@coffeekraken.sugar.scss.component.-sel-name-size": {
                 "name": ".#{sel(#{$name}--#{$size})}",
                 "type": "Classname",
                 "description": "This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```",
@@ -21402,7 +21469,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/component/ol/class/_ol.scss"
             },
-            "@coffeekraken.sugar.scss.component..#{sel(#{$name}--#{$color})}": {
+            "@coffeekraken.sugar.scss.component.-sel-name-color": {
                 "name": ".#{sel(#{$name}--#{$color})}",
                 "type": "Classname",
                 "description": "This class can be applied on any ```#{$name}``` component to specify his size to ```#{$color}```",
@@ -21461,7 +21528,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/component/paragraph/class/_paragraph.scss"
             },
-            "@coffeekraken.sugar.scss.component..#{sel(#{$name}--#{$n})}, .#{sel(#{tfClass()})} #{sel('p.#{$n}',Null)}": {
+            "@coffeekraken.sugar.scss.component.-sel-name-n-.-sel-tfClass- -sel-p.-n-Null": {
                 "name": ".#{sel(#{$name}--#{$n})}, .#{sel(#{tf-class()})} #{sel('p.#{$n}', null)}",
                 "type": "Classname",
                 "description": "This class can be applied on any ```#{$name}``` component to specify his style",
@@ -21499,7 +21566,7 @@
                 "relPath": "src/scss/component/paragraph/mixin/_paragraph.scss",
                 "children": {}
             },
-            "@coffeekraken.sugar.scss.shadow.class.#{sel(shadow)}": {
+            "@coffeekraken.sugar.scss.shadow.class.-sel-shadow": {
                 "name": "#{sel(shadow)}",
                 "type": "class",
                 "description": "Apply the default shadow to the element",
@@ -21520,7 +21587,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/component/shadow/class/_shadow.scss"
             },
-            "@coffeekraken.sugar.scss.shadow.class.#{sel(shadow-Small)}": {
+            "@coffeekraken.sugar.scss.shadow.class.-sel-shadow-Small": {
                 "name": "#{sel(shadow--small)}",
                 "type": "class",
                 "description": "Apply the small shadow to the element",
@@ -21541,7 +21608,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/component/shadow/class/_shadow.scss"
             },
-            "@coffeekraken.sugar.scss.shadow.class.#{sel(shadow-Big)}": {
+            "@coffeekraken.sugar.scss.shadow.class.-sel-shadow-Big": {
                 "name": "#{sel(shadow--big)}",
                 "type": "class",
                 "description": "Apply the big shadow to the element",
@@ -21584,7 +21651,7 @@
                 "extension": "scss",
                 "relPath": "src/scss/component/title/class/_title.scss"
             },
-            "@coffeekraken.sugar.scss.component.title..#{sel(#{$name}#{$i})}, .#{sel(#{tfClass()})}H#{$i}": {
+            "@coffeekraken.sugar.scss.component.title.-sel-name-i-.-sel-tfClass-H-i": {
                 "name": ".#{sel(#{$name}#{$i})}, .#{sel(#{tf-class()})} h#{$i}",
                 "type": "Classname",
                 "description": "This class can be applied on any ```#{$name}``` component to specify his size to ```#{$i}```",
@@ -21631,6 +21698,48 @@
                     {
                         "language": "html",
                         "code": "<ul class=\"#{sel(ul)}\">\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n</ul>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "_ul.scss",
+                "extension": "scss",
+                "relPath": "src/scss/component/ul/class/_ul.scss"
+            },
+            "@coffeekraken.sugar.scss.component.ul.size.-size.-sel-name-size": {
+                "name": ".#{sel(#{$name}--#{$size})}",
+                "type": "Classname",
+                "description": "This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```",
+                "namespace": "@coffeekraken.sugar.scss.component.ul.size.-size",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<ol class=\"#{sel(#{$name}--#{$size})}\">\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n</ol>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "_ul.scss",
+                "extension": "scss",
+                "relPath": "src/scss/component/ul/class/_ul.scss"
+            },
+            "@coffeekraken.sugar.scss.component.ul.color.-color.-sel-name-color": {
+                "name": ".#{sel(#{$name}--#{$color})}",
+                "type": "Classname",
+                "description": "This class can be applied on any ```#{$name}``` component to specify his size to ```#{$color}```",
+                "namespace": "@coffeekraken.sugar.scss.component.ul.color.-color",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<ul class=\"#{sel(#{$name})} #{sel(#{$name}--#{$color})}\">\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n  <li>I'm a cool unordered list item</li>\n</ul>"
                     }
                 ],
                 "since": "2.0.0",
@@ -23179,57 +23288,6 @@
                 "filename": "_str-url-ext.scss",
                 "extension": "scss",
                 "relPath": "src/scss/core/string/function/_str-url-ext.scss",
-                "children": {}
-            },
-            "@coffeekraken.sugar.doc.getStarted": {
-                "name": "Get started",
-                "type": "Markdown",
-                "menu": {
-                    "tree": ["Documentation"],
-                    "slug": "/doc/get-started"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.sugar.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "getStarted.md",
-                "extension": "md",
-                "relPath": "dist/doc/getStarted.md",
-                "children": {}
-            },
-            "@coffeekraken.sugar.doc.rEADME": {
-                "name": "README",
-                "type": "Markdown",
-                "menu": {
-                    "tree": ["Documentation"],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.sugar.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "README",
-                "relPath": "dist/README",
                 "children": {}
             }
         }

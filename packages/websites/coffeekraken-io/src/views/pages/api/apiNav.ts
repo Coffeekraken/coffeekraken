@@ -44,6 +44,10 @@ export default class ApiNav extends __SLitComponent {
         this.requestUpdate();
     }
 
+    _isAcive(namespace) {
+        return this._menuStates[namespace]?.opened;
+    }
+
     _toggle(namespace) {
         if (!this._menuStates[namespace]) {
             this._menuStates[namespace] = {
@@ -69,13 +73,15 @@ export default class ApiNav extends __SLitComponent {
 
             if (itemObj.name && itemObj.namespace) {
                 return html`
-                    <li class="__slug">
+                    <li>
+                        <i class="s-icon:file-code"></i>
                         <a href="/api/${itemNamespace}">${itemObj.name}</a>
                     </li>
                 `;
             } else {
                 return html`
-                    <li class="__toggle">
+                    <li class="${this._isAcive(itemNamespace) ? 'active' : ''}">
+                        <i class="s-icon:folder"></i>
                         <span
                             @click=${() => {
                                 this._toggle(itemNamespace);
@@ -97,7 +103,7 @@ export default class ApiNav extends __SLitComponent {
         });
 
         return html`
-            <ul class="${!currentNamespace ? 'folder-nav' : ''}">
+            <ul class="${!currentNamespace ? 's-fs-tree' : ''}">
                 ${items}
             </ul>
         `;

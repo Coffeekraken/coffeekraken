@@ -60,13 +60,14 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
+        font-size: sugar.scalable(1rem);
         position: relative;
         display: inline-block;
         cursor: pointer;
         white-space: nowrap;
         vertical-align: middle;
-        padding-inline: sugar.padding(sugar.theme(ui.button.paddingInline));
-        padding-block: sugar.padding(sugar.theme(ui.button.paddingBlock));
+        padding-inline: sugar.theme(ui.button.paddingInline);
+        padding-block: sugar.theme(ui.button.paddingBlock);
 
         & > * {
           pointer-events: none;
@@ -182,7 +183,9 @@ export default function ({
 
         if (finalParams.outline) {
             vars.push(`
-              @sugar.outline;
+              &:focus:not(:hover) {
+                @sugar.outline;
+              }
           `);
         }
     }

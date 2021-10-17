@@ -13,8 +13,8 @@ s-color-picker {
         overflow: hidden;
         @sugar.depth (sugar.theme(ui.colorPicker.depth));
         border-radius: sugar.theme(ui.colorPicker.borderRadius);
-        padding-inline: sugar.scalable(sugar.theme(ui.colorPicker.paddingInline));
-        padding-block: sugar.scalable(sugar.theme(ui.colorPicker.paddingBlock));
+        padding-inline: sugar.theme(ui.colorPicker.paddingInline);
+        padding-block: sugar.theme(ui.colorPicker.paddingBlock);
     }
 }
 

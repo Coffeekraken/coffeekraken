@@ -39,6 +39,13 @@ body {
   fab:vuejs:vuejs
   fa:tasks:tasks
   fa:hammer:todo
+  fa:folder
+  fa:folder-open
+  fa:file-pdf
+  fa:file-image
+  fa:file-code
+  fa:file-archive
+  fa:file
   fs:src/icons/read-direction.svg:support-rtl
   fs:src/icons/edge.svg:support-edge
   fs:src/icons/chrome.svg:support-chromium

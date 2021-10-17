@@ -50,29 +50,37 @@ export default function ({
 
     const vars: string[] = [];
 
-    switch (finalParams.style) {
-        case 'solid':
-        default:
-            if (finalParams.scope.indexOf('bare') !== -1) {
-                vars.push(`
-                        display: block;
-                        padding-inline: sugar.scalable(sugar.theme(ui.blockquote.paddingInline));
-                        padding-block: sugar.scalable(sugar.theme(ui.blockquote.paddingBlock));
-                `);
-            }
-            if (finalParams.scope.indexOf('lnf') !== -1) {
-                vars.push(`
-                        border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
-                        color: sugar.color(current, surfaceForeground);
-                        background-color: sugar.color(current, surface);
-                        border-radius: sugar.theme(ui.blockquote.borderRadius);
-                        @sugar.depth(sugar.theme(ui.blockquote.depth));
-                        font-size: sugar.scalable(1rem);
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
+            font-size: sugar.scalable(1rem);
+        `);
+    }
 
-                        @sugar.font.family(quote);
-                `);
-            }
-            break;
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        switch (finalParams.style) {
+            case 'solid':
+            default:
+                if (finalParams.scope.indexOf('bare') !== -1) {
+                    vars.push(`
+                            display: block;
+                            padding-inline: sugar.theme(ui.blockquote.paddingInline);
+                            padding-block: sugar.theme(ui.blockquote.paddingBlock);
+                    `);
+                }
+                if (finalParams.scope.indexOf('lnf') !== -1) {
+                    vars.push(`
+                            border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
+                            color: sugar.color(current, surfaceForeground);
+                            background-color: sugar.color(current, surface);
+                            border-radius: sugar.theme(ui.blockquote.borderRadius);
+                            @sugar.depth(sugar.theme(ui.blockquote.depth));
+                            font-size: sugar.scalable(1rem);
+
+                            @sugar.font.family(quote);
+                    `);
+                }
+                break;
+        }
     }
 
     replaceWith(vars);

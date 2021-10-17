@@ -29,6 +29,7 @@ export default function ({
 
     vars.push(`
     width: 100%;
+    font-size: sugar.scalable(1rem);
     table-layout: fixed;
     overflow-wrap: break-word;
     border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border);
@@ -45,8 +46,8 @@ export default function ({
         vertical-align: middle;
     }
     td, th {
-        padding-inline: sugar.scalable(sugar.theme(ui.table.paddingInline));
-      padding-block: sugar.scalable(sugar.theme(ui.table.paddingBlock));
+        padding-inline: sugar.theme(ui.table.paddingInline);
+      padding-block: sugar.theme(ui.table.paddingBlock);
 
         @sugar.direction.rtl {
             text-align: right;

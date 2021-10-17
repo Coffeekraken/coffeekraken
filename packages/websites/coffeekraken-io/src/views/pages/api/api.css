@@ -1,4 +1,6 @@
 #api {
+    --s-fs-tree-inline-space-ratio: 1;
+
     .toolbar {
         position: fixed;
         bottom: 0;

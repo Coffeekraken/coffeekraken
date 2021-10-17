@@ -75,6 +75,7 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
+        font-size: sugar.scalable(1rem);
           position: absolute;
           z-index: 500;
           display: block;
@@ -111,8 +112,8 @@ export default function ({
           color: sugar.color(current, foreground);
           border-radius: sugar.theme(ui.tooltip.borderRadius);
           transition: sugar.theme(ui.tooltip.transition);
-          padding-inline: sugar.scalable(sugar.theme(ui.tooltip.paddingInline));
-          padding-block: sugar.scalable(sugar.theme(ui.tooltip.paddingBlock));
+          padding-inline: sugar.theme(ui.tooltip.paddingInline);
+          padding-block: sugar.theme(ui.tooltip.paddingBlock);
           @sugar.depth( sugar.theme(ui.tooltip.depth) );
 
         & > * {

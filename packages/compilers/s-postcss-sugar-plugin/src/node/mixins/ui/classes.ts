@@ -20,12 +20,21 @@ export { postcssSugarPluginUiClassesInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bospsel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, replaceWith }: { params: any; atRule: any; replaceWith: Function }) {
+export default function ({
+    params,
+    atRule,
+    replaceWith,
+}: {
+    params: any;
+    atRule: any;
+    replaceWith: Function;
+}) {
     const cssArray = [
         '@sugar.ui.avatar.classes;',
         '@sugar.ui.button.classes;',
         '@sugar.ui.checkbox.classes;',
         '@sugar.ui.dropdown.classes;',
+        '@sugar.ui.fsTree.classes;',
         '@sugar.ui.blockquote.classes;',
         '@sugar.ui.input.classes;',
         '@sugar.ui.label.classes;',

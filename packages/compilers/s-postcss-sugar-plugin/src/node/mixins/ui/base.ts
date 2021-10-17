@@ -44,9 +44,10 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
+            font-size: sugar.scalable(1rem);
             display: inline-block;
-            padding-inline: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingInline));
-            padding-block: sugar.padding(sugar.theme(ui.${finalParams.name}.paddingBlock));
+            padding-inline: sugar.theme(ui.${finalParams.name}.paddingInline);
+            padding-block: sugar.theme(ui.${finalParams.name}.paddingBlock);
         `);
     }
 

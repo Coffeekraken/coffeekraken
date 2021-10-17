@@ -23,10 +23,14 @@ export interface IPostcssSugarPluginFontSizeParams {
     scalable: boolean;
 }
 
-export default function ({ params }: { params: Partial<IPostcssSugarPluginFontSizeParams> }) {
+export default function ({
+    params,
+}: {
+    params: Partial<IPostcssSugarPluginFontSizeParams>;
+}) {
     const finalParams: IPostcssSugarPluginFontSizeParams = {
         name: '',
-        scalable: true,
+        scalable: false,
         ...params,
     };
 
@@ -37,6 +41,5 @@ export default function ({ params }: { params: Partial<IPostcssSugarPluginFontSi
         return name;
     }
 
-    if (finalParams.scalable) return `sugar.scalable(sugar.theme(font.size.${name}))`;
-    return `sugar.theme(font.size.${name})`;
+    return `sugar.theme(font.size.${name}, ${finalParams.scalable})`;
 }

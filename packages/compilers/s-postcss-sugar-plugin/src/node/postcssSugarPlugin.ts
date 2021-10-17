@@ -206,6 +206,14 @@ const plugin = (settings: any = {}) => {
                     replaceWith(nodes) {
                         replaceWith(atRule, nodes);
                     },
+                    atRootStart(css) {
+                        const root = __getRoot(atRule);
+                        root.prepend(css);
+                    },
+                    atRootEnd(css) {
+                        const root = __getRoot(atRule);
+                        root.append(css);
+                    },
                     jsObjectToCssProperties: __jsObjectToCssProperties,
                     postcssApi,
                     sourcePath,

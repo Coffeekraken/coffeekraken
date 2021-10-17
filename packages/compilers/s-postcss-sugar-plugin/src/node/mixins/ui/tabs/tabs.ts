@@ -77,10 +77,10 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
+        font-size: sugar.scalable(1rem);
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
-        font-size: sugar.scalable(1rem);
     `);
     }
 

@@ -13,7 +13,14 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
         },
         position: {
             type: 'String',
-            values: ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end'],
+            values: [
+                'top',
+                'top-start',
+                'top-end',
+                'bottom',
+                'bottom-start',
+                'bottom-end',
+            ],
             default: 'bottom',
         },
         scope: {
@@ -29,7 +36,13 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiDropdownParams {
     style: 'solid';
-    position: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end';
+    position:
+        | 'top'
+        | 'top-start'
+        | 'top-end'
+        | 'bottom'
+        | 'bottom-start'
+        | 'bottom-end';
     scope: string[];
 }
 
@@ -59,6 +72,7 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
+            font-size: sugar.scalable(1rem);
           position: absolute;
           -webkit-appearance: none;
           appearance: none;
@@ -99,8 +113,8 @@ export default function ({
                 vars.push(`
                     background-color: sugar.color(current);
                     color: sugar.color(current, foreground);
-                    padding-inline: sugar.scalable(sugar.theme(ui.dropdown.paddingInline));
-                    padding-block: sugar.scalable(sugar.theme(ui.dropdown.paddingBlock));
+                    padding-inline: sugar.theme(ui.dropdown.paddingInline);
+                    padding-block: sugar.theme(ui.dropdown.paddingBlock);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
                     border-radius: sugar.theme(ui.dropdown.borderRadius);
                     @sugar.depth(sugar.theme(ui.dropdown.depth));

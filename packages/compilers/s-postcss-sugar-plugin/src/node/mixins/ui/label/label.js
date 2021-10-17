@@ -53,7 +53,7 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                   & > *:not(input):not(textarea):not(select) {
                     top: calc(var(--top) + 0.6em + var(--delta));
                     left: 0;
-                    padding-inline: sugar.scalable(sugar.theme(ui.form.paddingInline));
+                    padding-inline: sugar.theme(ui.form.paddingInline);
                     position: absolute;
                     z-index: 1;
                     transform: scale(1);
@@ -102,8 +102,8 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                   & > select {
                     width: 100%;
                     margin: 0;
-                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.35em + var(--delta));
-                    padding-block-end: calc(sugar.theme(ui.form.paddingBlock) + 0.35em + var(--delta));
+                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.35em + var(--delta));
+                    padding-block-end: calc(sugar.theme(ui.form.paddingBlock, true) + 0.35em + var(--delta));
                     
                   }
 
@@ -112,14 +112,14 @@ export default function ({ params, atRule, applyNoScopes, jsObjectToCssPropertie
                     & > input,
                     & > textarea,
                     & > select {
-                      padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.7em + calc(var(--delta) * 2));
-                      padding-block-end: sugar.theme(ui.form.paddingBlock);
+                      padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
+                      padding-block-end: sugar.theme(ui.form.paddingBlock, true);
                     }
                   }
                   & > input:not(:placeholder-shown),
                   & > textarea:not(:placeholder-shown) {
-                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock) + 0.7em + calc(var(--delta) * 2));
-                    padding-block-end: sugar.theme(ui.form.paddingBlock);
+                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
+                    padding-block-end: sugar.theme(ui.form.paddingBlock, true);
                   }
                 `);
             }

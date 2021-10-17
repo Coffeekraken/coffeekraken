@@ -44,6 +44,7 @@ export default function ({
     const vars: string[] = [
         `
 .hljs {
+    font-size: sugar.scalable(1rem);
     display: block;
     overflow: hidden;
     padding: sugar.theme(ui.code.paddingBlock) sugar.theme(ui.code.paddingInline);

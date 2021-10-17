@@ -4,10 +4,16 @@ export default function (env, config) {
             default: 'cubic-bezier(0.700, 0.000, 0.305, 0.995)',
         },
 
+        timing: {
+            slow: '.6s',
+            default: '.3s',
+            fast: '.1s',
+        },
+
         transition: {
-            slow: 'all .6s [theme.easing.default]',
-            default: 'all .3s [theme.easing.default]',
-            fast: 'all .1s [theme.easing.default]',
+            slow: 'all [theme.timing.slow] [theme.easing.default]',
+            default: 'all [theme.timing.default] [theme.easing.default]',
+            fast: 'all [theme.timing.fast] [theme.easing.default]',
         },
 
         helpers: {
@@ -1725,6 +1731,18 @@ export default function (env, config) {
                 defaultColor: '[theme.ui.default.defaultColor]',
                 defaultStyle: 'ul',
                 formatText: true,
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            },
+            fsTree: {
+                paddingInline: '[theme.ui.default.paddingInline]',
+                paddingBlock: '[theme.ui.default.paddingBlock]',
+                borderRadius: '[theme.ui.default.borderRadius]',
+                borderWidth: '[theme.ui.default.borderWidth]',
+                transition: '[theme.ui.default.transition]',
+                bulletChar: '●',
+                depth: '[theme.ui.default.depth]',
+                defaultColor: '[theme.ui.default.defaultColor]',
+                defaultStyle: 'solid',
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             tabs: {

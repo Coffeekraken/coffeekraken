@@ -23,7 +23,11 @@ export interface IPostcssSugarPluginMarginFunctionParams {
     scalable: boolean;
 }
 
-export default function ({ params }: { params: Partial<IPostcssSugarPluginMarginFunctionParams> }) {
+export default function ({
+    params,
+}: {
+    params: Partial<IPostcssSugarPluginMarginFunctionParams>;
+}) {
     const finalParams: IPostcssSugarPluginMarginFunctionParams = {
         margin: '',
         scalable: false,
@@ -32,13 +36,10 @@ export default function ({ params }: { params: Partial<IPostcssSugarPluginMargin
 
     const margin = finalParams.margin;
     let margins = margin.split(' ').map((s) => {
-        if (s === `${parseInt(s)}`) return `sugar.theme(margin.${s})`;
+        if (s === `${parseInt(s)}`)
+            return `sugar.theme(margin.${s}, ${finalParams.scalable})`;
         return s;
     });
-
-    if (finalParams.scalable) {
-        margins = margins.map((p) => `sugar.scalable(${p})`);
-    }
 
     return margins.join(' ');
 }

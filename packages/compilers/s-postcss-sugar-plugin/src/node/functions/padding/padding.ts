@@ -23,7 +23,11 @@ export interface IPostcssSugarPluginPaddingFunctionParams {
     scalable: boolean;
 }
 
-export default function ({ params }: { params: Partial<IPostcssSugarPluginPaddingFunctionParams> }) {
+export default function ({
+    params,
+}: {
+    params: Partial<IPostcssSugarPluginPaddingFunctionParams>;
+}) {
     const finalParams: IPostcssSugarPluginPaddingFunctionParams = {
         padding: '',
         scalable: true,
@@ -32,13 +36,10 @@ export default function ({ params }: { params: Partial<IPostcssSugarPluginPaddin
 
     const padding = finalParams.padding;
     let paddings = padding.split(' ').map((s) => {
-        if (s === `${parseInt(s)}`) return `sugar.theme(padding.${s})`;
+        if (s === `${parseInt(s)}`)
+            return `sugar.theme(padding.${s}, ${finalParams.scalable})`;
         return s;
     });
-
-    if (finalParams.scalable) {
-        paddings = paddings.map((p) => `sugar.scalable(${p})`);
-    }
 
     return paddings.join(' ');
 }
